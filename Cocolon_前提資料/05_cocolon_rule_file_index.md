@@ -15,6 +15,8 @@ last_structural_audit_source:
 purpose: "見落とすと構造誤読や contract 破壊を起こしやすい rule / policy / guard / test を索引化する"
 ---
 
+> **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
+
 # 1. 先に結論
 
 **rule / policy / contract を持つ変更は、画面や API の見た目より先に rule file を読む。**

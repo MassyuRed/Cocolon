@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 24.63175478798803,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "gpu_started": false
+}

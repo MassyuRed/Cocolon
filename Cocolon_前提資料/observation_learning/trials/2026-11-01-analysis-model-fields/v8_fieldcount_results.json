@@ -1,0 +1,145 @@
+{
+  "schema_version": "analysis_v8_fieldcount_results.v1",
+  "status": "FAILED_PARTIAL_ZERO_RETURNED_RAW",
+  "api_commit": "100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4",
+  "private_profile": "SELECTED_MATERIAL_V8",
+  "inherited_profile": "SELECTED_MATERIAL_V7",
+  "system_change": "ACTUAL_FIELD_ORDINALS_AND_COUNT_TAIL_ONLY",
+  "user_message_identical": true,
+  "source_guard_and_field_refs_identical": true,
+  "distinct_profile_ref_messages_hash_state": true,
+  "legacy_v4_v6_v7_bytes_preserved": true,
+  "cross_profile_response_state_reuse": false,
+  "constructor_whitelist_expanded": false,
+  "default_v4_changed": false,
+  "planner_whitelist_expanded": false,
+  "batch_envelope_whitelist_expanded": false,
+  "jupyter": {
+    "passed": 384,
+    "skipped": 19,
+    "skip_reason": "POSTGRES_WASM_NOT_CONFIGURED",
+    "seconds": 87.39
+  },
+  "ci": {
+    "run": 42105775747,
+    "job": 127520073726,
+    "conclusion": "SUCCESS",
+    "generation_passed": 2349,
+    "generation_existing_skipped": 1,
+    "generation_subtests": 12048,
+    "generation_seconds": 309.59,
+    "owner_passed": 1,
+    "owner_seconds": 23.05,
+    "cumulative_passed": 302,
+    "cumulative_warnings": 1,
+    "cumulative_subtests": 2,
+    "cumulative_seconds": 127.08,
+    "isolated_sql_records": 201,
+    "isolated_sql_monthly": 15
+  },
+  "initial_cpu_failure": {
+    "status": "WRONG_PRIOR_DIRECTORY",
+    "model_loads": 0,
+    "new_generation": 0,
+    "training": 0
+  },
+  "preparation": {
+    "status": "PREPARED_CPU_ONLY",
+    "seconds": 7.905241100117564,
+    "model_loads": 0,
+    "new_generation": 0,
+    "training": 0,
+    "context_tokens": 8192,
+    "reserved_output_tokens": 2048,
+    "max_body_bytes": 65536,
+    "cases": [
+      {
+        "id": "FC01",
+        "expected_fields": 7,
+        "prompt_tokens": 4375,
+        "total_reserved_tokens": 6423,
+        "request_body_bytes": 20284,
+        "prompt_tokens_sha256": "6d752518055ac76ac7608af598d2a0007735d4f4d21703168ebcaf3f6d3a6cee",
+        "request_body_sha256": "c0730b3b10eec708483721a2feab672178b475860a0876a8836fae5dbcf01cec",
+        "system_tail_sha256": "45b7faf57f8881b53b5e9130160a633be97111ae697e67db4008707d0c176e95"
+      },
+      {
+        "id": "FC03",
+        "expected_fields": 6,
+        "prompt_tokens": 4274,
+        "total_reserved_tokens": 6322,
+        "request_body_bytes": 19885,
+        "prompt_tokens_sha256": "5a4af4ab21e07980e22e807df44e14e7548c9a1f33811c13b437d6db3e140f35",
+        "request_body_sha256": "b5663a1751637efe7cc5faa60ee2ec9d57f4305a0d7999741a4c7a7de026508a",
+        "system_tail_sha256": "343d282b8ec31b319bb8c879b9d6ea4d5cd257d65c21eed1c9b58e810414281b"
+      }
+    ]
+  },
+  "actual_execution": {
+    "status": "FAILED_PARTIAL_NO_RETRY",
+    "model_loads": 1,
+    "model_calls_started": 1,
+    "returned_raws": 0,
+    "new_generation": 0,
+    "stop_count": 0,
+    "training": 0,
+    "seconds": 34.60794290713966,
+    "child_exit": -14,
+    "termination": "SIGALRM",
+    "per_case_timer_seconds": 23,
+    "actual_model_retry": 0,
+    "FC01": "STARTED_NO_RAW",
+    "FC03": "NOT_EXECUTED",
+    "strict_rejections": 0,
+    "strict_interpretation_reached": false,
+    "observed_map_calls": 0
+  },
+  "quality_evaluation": "NOT_EVALUABLE_NO_RETURNED_RAW",
+  "field_improvement_evaluation": "NOT_EVALUABLE",
+  "semantic_evaluation": "NOT_EVALUABLE",
+  "strict_admission_evaluation": "NOT_REACHED",
+  "adapter_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "adapter_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "adapter_unchanged": true,
+  "source_unchanged": true,
+  "cached_v7_before_unchanged": true,
+  "cached_v7_raws": 2,
+  "cached_v7_raws_counted_as_v8": false,
+  "reference_fallback_warnings": {
+    "bindings": 4,
+    "cause_of_termination_established": false
+  },
+  "optional_kernel": {
+    "status": "OFFICIAL_CANDIDATE_RESEARCH_PREPARATION_ONLY",
+    "installed": false,
+    "speed_improvement_measured": false
+  },
+  "subsequent_negative_wish": {
+    "api_checkpoint": "5c9606",
+    "status": "CODE_CHECKPOINT_TESTING",
+    "result_included": false
+  },
+  "trial_archive": {
+    "bytes": 35593,
+    "sha256": "c3bb20aeb7a49bc23007f3cd8fe1cbe8c83a434edb5617f70b48d84e4ecbe4c4",
+    "members": 15,
+    "manifest_verified": 14,
+    "crc_verified": true
+  },
+  "private_archive": {
+    "version": 6,
+    "saved": true,
+    "bytes": 31354573,
+    "sha256": "b29b669a0fc181bcf27bfa6fb5e6e6ba57ee9ae09aabd136d7afb31e53d5cc2f"
+  },
+  "api_calls": 0,
+  "database_access": 0,
+  "saved_maps": 0,
+  "production_writes": 0,
+  "builds": 0,
+  "deployments": 0,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "general_quality_claim": false,
+  "structure_map_delta": "PRESENT_PRIVATE_PROFILE_REF_STATE_VARIANT_ONLY"
+}

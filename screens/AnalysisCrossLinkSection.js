@@ -8,7 +8,7 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 /**
  * AnalysisCrossLinkSection
  * --------------------
- * Analysis（こころ天気レポート）→ Piece / わたしマップへの交差リンク用UI。
+ * Analysis（こころグラフレポート）→ Piece / わたしマップへの交差リンク用UI。
  *
  * v0.1（Step 4）:
  * ・週報 / 月報の末尾に「わたしマップの深掘り候補」を提示
@@ -64,7 +64,7 @@ function topic(id, title, blurb, suggestedQuestion) {
 }
 
 /**
- * こころ天気（週/月）→ わたしマップの「深掘り候補トピック」を生成
+ * こころグラフ（週/月）→ わたしマップの「深掘り候補トピック」を生成
  * ※ 初期は静的ルールベースでOK（動的/生成AIは後回し）
  */
 export function buildSelfStructureTopics({ reportType = "weekly", metrics }) {
@@ -307,7 +307,7 @@ export default function AnalysisCrossLinkSection({
       <View style={styles.header}>
         <Text style={styles.title}>【わたしマップの深掘り候補】</Text>
         <Text style={styles.sub}>
-          {label}のこころ天気から、わたしマップやピースで触れると良さそうな論点
+          {label}のこころグラフから、わたしマップやピースで触れると良さそうな論点
         </Text>
       </View>
 
@@ -325,16 +325,16 @@ export default function AnalysisCrossLinkSection({
               activeOpacity={0.85}
             >
               <View style={{ flex: 1, paddingRight: 10 }}>
-                <Text style={styles.rowTitle} numberOfLines={2}>
+                <Text style={styles.rowTitle}>
                   {idx + 1}. {t.title}
                 </Text>
                 {t.blurb ? (
-                  <Text style={styles.rowSub} numberOfLines={2}>
+                  <Text style={styles.rowSub}>
                     {t.blurb}
                   </Text>
                 ) : null}
                 {t.suggestedQuestion ? (
-                  <Text style={styles.rowHint} numberOfLines={2}>
+                  <Text style={styles.rowHint}>
                     例）{t.suggestedQuestion}
                   </Text>
                 ) : null}
@@ -353,7 +353,7 @@ export default function AnalysisCrossLinkSection({
         <Ionicons
           name="person-circle-outline"
           size={18}
-          color={ui?.text?.primary ?? colors.TEXT_ON_LIGHT}
+          color={colors.ON_SURFACE_TONAL}
           style={{ marginRight: 6 }}
         />
         <Text style={styles.openText}>ピースで深掘りする</Text>
@@ -369,10 +369,10 @@ function createStyles(COLORS, ui) {
     marginHorizontal: 12,
     marginBottom: 14,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#FFFFFF",
-    padding: 12,
+    borderColor: COLORS.CARD_BORDER,
+    borderRadius: 24,
+    backgroundColor: COLORS.FIELD_BG,
+    padding: 20,
   },
   header: { marginBottom: 8 },
   title: {
@@ -390,7 +390,7 @@ function createStyles(COLORS, ui) {
     alignItems: "center",
     paddingVertical: 10,
     borderTopWidth: 1,
-    borderTopColor: "#F3F4F6",
+    borderTopColor: COLORS.CARD_BORDER,
   },
   rowTitle: { fontSize: 13, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
   rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE, lineHeight: 18 },
@@ -401,12 +401,14 @@ function createStyles(COLORS, ui) {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    minHeight: 52,
+    borderRadius: 24,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
+    borderColor: COLORS.CARD_BORDER,
+    backgroundColor: COLORS.SURFACE_TONAL,
   },
-  openText: { fontSize: 13, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "800" },
-  }, ui));
+  openText: { color: COLORS.ON_SURFACE_TONAL, flexShrink: 1, textAlign: "center" },
+  }, ui, { title: "sectionTitle", sub: "description", empty: "body", rowTitle: "sectionTitle", rowSub: "body", rowHint: "description", openText: "button" }));
 }

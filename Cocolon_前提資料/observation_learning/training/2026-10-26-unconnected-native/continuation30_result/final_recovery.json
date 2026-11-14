@@ -1,0 +1,54 @@
+{
+  "status": "FINAL_ARCHIVE_VERIFIED_OUTSIDE_POD",
+  "file_name": "cocolon_continuation30_recovery_20261027.tar.gz",
+  "archive_bytes": 3955270,
+  "archive_sha256": "75fa00ca490e07bf963cc849db02506fb3e8f9e80a274f537c138b944249c78c",
+  "payloads": 84,
+  "members": 85,
+  "all_member_hashes_equal": true,
+  "finite_f32_tensors": 32,
+  "early_final_weights_equal": true,
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "afac6be0e91b370268a0ea7f78193d0cba2a38e7b7aeeea7465e666f94d48552",
+    "adapter_model.safetensors": "dd1188e8d715cf2d7bb1479c5c2158a0ecc98a9355d80f3d94510736bddc317b"
+  },
+  "base_weights_included": false,
+  "optimizer_rng_included": false,
+  "strict_optimizer_resume": false,
+  "original_gpu_archive": {
+    "status": "ALL15_RAW_ARCHIVE_PRESERVED",
+    "file": "/workspace/cocolon_continuation30_raw15_20261027.tar.gz",
+    "bytes": 3499332,
+    "sha256": "7f11b4e09c0f8bfcf27e1ded308bebbc90b06631669b88cce84d5eb4f4803514",
+    "payloads": 31,
+    "adapter_sha256": {
+      "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "adapter_config.json": "afac6be0e91b370268a0ea7f78193d0cba2a38e7b7aeeea7465e666f94d48552",
+      "adapter_model.safetensors": "dd1188e8d715cf2d7bb1479c5c2158a0ecc98a9355d80f3d94510736bddc317b"
+    },
+    "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+    "processing_seconds": 1578.9513461459428,
+    "process_cost_usd": 0.12280732692246223,
+    "model_calls_completed": 15,
+    "eos_count": 12
+  },
+  "original_cpu_archive": {
+    "status": "CPU_ALL15_FINAL_PRESERVED",
+    "file": "/workspace/cocolon_continuation30_cpu_final_20261027.tar.gz",
+    "bytes": 439670,
+    "sha256": "80d2cb7af182a205e3f7526dcb998201cdf603d74e0fe3e8a66a9082dd383833",
+    "payloads": 45,
+    "meaning_adopted": 11,
+    "body_available": 9,
+    "cold_file": 11,
+    "cold_failures": 0,
+    "cpu_seconds": 101.20154420891777,
+    "new_model_calls": 0,
+    "sql_operations": 0
+  },
+  "library_file_id": "libfile_ce620ca836208191a9a9649daca3a90f",
+  "library_version": 1,
+  "library_write_status": "succeeded"
+}

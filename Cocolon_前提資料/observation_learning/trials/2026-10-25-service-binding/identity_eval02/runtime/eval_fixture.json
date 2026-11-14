@@ -1,0 +1,16 @@
+{
+  "evaluation_id": "CHAIR_SERVICE_IDENTITY_HOLDOUT_02",
+  "scope": "Known chair language with one service identity excluded from training; not unseen language, general observation quality or product acceptance.",
+  "identity": {
+    "user_id": "7487877c-4ef6-47ea-a456-16108d9df8ab",
+    "input_id": "308176fc-2f30-4692-9d5f-bc2208c1d37d",
+    "created_at": "2026-10-25T06:49:23+00:00"
+  },
+  "input": {
+    "memo": "全部一人で直せたことが、うれしかった。",
+    "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+  },
+  "correction": {
+    "answer_text": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+  }
+}

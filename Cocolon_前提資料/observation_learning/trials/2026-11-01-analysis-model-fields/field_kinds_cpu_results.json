@@ -1,0 +1,4138 @@
+{
+  "status": "CPU_SYNTHETIC_ONLY_NOT_MODEL_OR_PRODUCT_ACCEPTANCE",
+  "new_profile_tests": 34,
+  "legacy_tests": 785,
+  "unique_passed": 819,
+  "failed": 0,
+  "skipped": 0,
+  "runs": [
+    {
+      "report": "field-kinds-cpu-results.xml",
+      "sha256": "b33b9b2eee42040d15900d32b55c2692020eaf90492c0fa351d05a73e73aa865",
+      "executed_tests": 665
+    },
+    {
+      "report": "field-kinds-cpu-final-results.xml",
+      "sha256": "b4870e0f86bfbcafe898de7c32b6fad6b4d1152ad3ff7911c8ed3115965af411",
+      "executed_tests": 182
+    },
+    {
+      "report": "field-kinds-jobs-results.xml",
+      "sha256": "7702d256ccfa148d36fd909f4653523505086b716e1ed85447efa665ca81270d",
+      "executed_tests": 6
+    }
+  ],
+  "initial_new34_superseded_by_final_new34": true,
+  "duplicate_only_repeat_not_added": 4,
+  "initial_collection_error": "additional legacy run from parent cwd could not import ai; 0 executed; corrected cwd to API root without product/test changes",
+  "warning": "existing Pydantic root_validator deprecation",
+  "model_generations": 0,
+  "training": 0,
+  "production_deployment": 0,
+  "tests": [
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_source_reaches_normal_graph_as_unresolved_candidate",
+      "seconds": 0.078
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[missing]",
+      "seconds": 0.051
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[duplicate]",
+      "seconds": 0.075
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[extra]",
+      "seconds": 0.062
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[quote]",
+      "seconds": 0.054
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[partial]",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[bool]",
+      "seconds": 0.06
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[owner_set]",
+      "seconds": 0.056
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[request]",
+      "seconds": 0.048
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[unknown_key]",
+      "seconds": 0.055
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_invalid_model_packet_is_rejected[kind]",
+      "seconds": 0.068
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_bound_candidate_rejects_changed_source[guard]",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_bound_candidate_rejects_changed_source[version]",
+      "seconds": 0.048
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_bound_candidate_rejects_changed_source[owner]",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_supplement_and_correction_explicitly_unsupported[\\u300c\\u79c1\\u306f\\u4ed5\\u4e8b\\u3092\\u7d9a\\u3051\\u305f\\u3044\\u300d\\u3092\\u64a4\\u56de\\u3057\\u307e\\u3059\\u3002]",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_supplement_and_correction_explicitly_unsupported[\\u300c\\u79c1\\u306f\\u4ed5\\u4e8b\\u3092\\u7d9a\\u3051\\u305f\\u3044\\u300d\\u3092\\u300c\\u4eca\\u306f\\u7d9a\\u3051\\u305f\\u304f\\u306a\\u3044\\u300d\\u306b\\u8a02\\u6b63\\u3057\\u307e\\u3059\\u3002]",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_supplement_and_correction_explicitly_unsupported[\\u4eca\\u65e5\\u306f\\u4f11\\u3093\\u3060\\u3002]",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_comparison_and_safety_not_bypassed",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_all_unresolved_is_unavailable_without_fallback",
+      "seconds": 0.048
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_one_wholly_unresolved_record_does_not_make_invalid_saved_gaps",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_incomplete_generation_is_rejected_even_with_valid_json[None]",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_incomplete_generation_is_rejected_even_with_valid_json[length]",
+      "seconds": 0.036
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_incomplete_generation_is_rejected_even_with_valid_json[timeout]",
+      "seconds": 0.03
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_incomplete_generation_is_rejected_even_with_valid_json[error]",
+      "seconds": 0.044
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_incomplete_generation_is_rejected_even_with_valid_json[unknown]",
+      "seconds": 0.061
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[owner]",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[set]",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[version]",
+      "seconds": 0.068
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[text]",
+      "seconds": 0.062
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[kind]",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[evidence]",
+      "seconds": 0.081
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_quote_projection_rechecks_artifact_binding[polarity]",
+      "seconds": 0.089
+    },
+    {
+      "class": "ai.tests.test_analysis_model_fields",
+      "name": "test_real_sql_commit_read_same_text_graph_and_identity",
+      "seconds": 2.93
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeMapTests",
+      "name": "test_all_201_records_include_the_oldest_on_free_and_match_other_plans",
+      "seconds": 7.934
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeMapTests",
+      "name": "test_edited_original_remains_usable_and_old_bound_answers_are_not_reused",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeMapTests",
+      "name": "test_foreign_thread_is_an_error_not_a_silent_exclusion",
+      "seconds": 0.0
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeMapTests",
+      "name": "test_one_unhandled_record_is_disclosed_and_does_not_erase_old_structures",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeMapTests",
+      "name": "test_safety_source_does_not_become_an_ordinary_map_fact",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeReadTests",
+      "name": "test_month_is_forwarded_for_direct_detail_and_evidence",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative.CumulativeReadTests",
+      "name": "test_reused_current_map_attempts_this_month_capture_without_running_author",
+      "seconds": 2.389
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative",
+      "name": "test_real_q3_saved_answers_cross_trimmed_sql_source_and_cumulative_lifecycle",
+      "seconds": 12.919
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_independent_answers_keep_every_source_and_visible_claim[texts0]",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_independent_answers_keep_every_source_and_visible_claim[texts1]",
+      "seconds": 0.035
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_unresolved_opposition_or_ambiguous_correction_never_becomes_current_map[texts0]",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_unresolved_opposition_or_ambiguous_correction_never_becomes_current_map[texts1]",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_unresolved_opposition_or_ambiguous_correction_never_becomes_current_map[texts2]",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_correction_then_independent_answer_preserves_updated_original_and_all_roots",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_later_answer_cannot_contradict_the_replacement_claim",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_later_replacement_cannot_contradict_an_earlier_answer",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_replacements_of_different_original_clauses_cannot_silently_conflict",
+      "seconds": 0.026
+    },
+    {
+      "class": "ai.tests.test_analysis_multiple_answers",
+      "name": "test_repeated_source_identity_and_above_three_answers_remain_invalid",
+      "seconds": 0.0
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_hand_authored_fixture_retains_original_p1_identity",
+      "seconds": 0.028
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_all_meaning_groups_scopes_annotations_unknown_and_selections_reach_both_projections",
+      "seconds": 0.065
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[owner_as_actor]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[wish_as_completed]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[nonask_affirmed]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[past_as_present]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[comparison_as_improvement]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[additive_dropped]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[wish_content_dropped]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[wrong_argument]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[degree_dropped]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[rareru_as_independent_action]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[nagara_as_cause]",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[relation_endpoint]",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[relation_marker]",
+      "seconds": 0.012
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[route_order]",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[unknown_as_person_unknown]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[unknown_target]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[unknown_resolution]",
+      "seconds": 0.054
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[unknown_missing_checked_field]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[unknown_checked_field_digest]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[burden_buy_target]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[burden_current_time]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[burden_degree]",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[selection_missing]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[selection_strength]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[selection_textualized]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[selection_alias]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[group_scope_truncated]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[missing_unit]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[renamed_duplicate_unit]",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[missing_relation]",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[extra_conflict]",
+      "seconds": 0.026
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[extra_update]",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[extra_field]",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[unused_evidence]",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[bool_evidence_index]",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_located_quotes_do_not_admit_changed_or_incomplete_meaning[wrong_quote]",
+      "seconds": 0.007
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[owner]",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[period_start]",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[period_end]",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[member_version]",
+      "seconds": 0.003
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[member_owner]",
+      "seconds": 0.003
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[record_state]",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[missing_member]",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[source_text]",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[source_selection]",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[comparison]",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[mode]",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[tier]",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[profile]",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[receipt_request]",
+      "seconds": 0.007
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_request_receipt_and_full_sources_are_rebound[receipt_candidate]",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_unreviewed_answer_cannot_be_silently_dropped_from_new_profile",
+      "seconds": 0.007
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_provider_failure_cannot_become_adoption[timeout]",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_provider_failure_cannot_become_adoption[length]",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_provider_failure_cannot_become_adoption[error]",
+      "seconds": 0.018
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_provider_failure_cannot_become_adoption[unexpected]",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_new_fresh_route_never_calls_legacy_parser_or_safe_projection",
+      "seconds": 0.087
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_meaning_snapshot_is_deeply_detached_from_payload_and_prepared_views",
+      "seconds": 0.122
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_reviewed_constructions_are_not_authorized_by_fixture_record_ids_or_hashes",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[polarity]",
+      "seconds": 0.029
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[polarity_and_binding]",
+      "seconds": 0.046
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[unknown_origin]",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[annotation_target]",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[bool_admission_version]",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[bool_adapter_version]",
+      "seconds": 0.042
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[extra_key]",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[binding_actor]",
+      "seconds": 0.033
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[binding_scalar]",
+      "seconds": 0.033
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_saved_snapshot_cannot_self_certify_changed_meaning[binding_carrier]",
+      "seconds": 0.033
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_snapshot_frozen_shell_cannot_hold_mutable_lists[unit_bindings]",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_snapshot_frozen_shell_cannot_hold_mutable_lists[period]",
+      "seconds": 0.012
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[node_polarity]",
+      "seconds": 0.055
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[node_kind]",
+      "seconds": 0.057
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[node_label]",
+      "seconds": 0.052
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[duplicate_node]",
+      "seconds": 0.049
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[missing_dependent]",
+      "seconds": 0.065
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[relation_cause]",
+      "seconds": 0.081
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[relation_target]",
+      "seconds": 0.14
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[unknown_origin]",
+      "seconds": 0.086
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[annotation_target]",
+      "seconds": 0.062
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[selection_strength]",
+      "seconds": 0.612
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[group_text]",
+      "seconds": 0.075
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[route_edge]",
+      "seconds": 0.503
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_private_graph_cannot_change_adopted_meaning[bool_scalar]",
+      "seconds": 0.627
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[text_polarity]",
+      "seconds": 2.593
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[text_missing_record]",
+      "seconds": 0.202
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[text_add_selected_feeling]",
+      "seconds": 0.422
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[text_unknown]",
+      "seconds": 0.575
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[visual_missing_node]",
+      "seconds": 0.178
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[visual_scope_cause]",
+      "seconds": 0.142
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[visual_unknown_origin]",
+      "seconds": 0.16
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[visual_annotation_target]",
+      "seconds": 0.595
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[trace_target]",
+      "seconds": 0.342
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[trace_bool_range]",
+      "seconds": 0.707
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[selection_visible]",
+      "seconds": 1.229
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[missing_selection_trace]",
+      "seconds": 1.063
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[retained_selection_missing]",
+      "seconds": 0.561
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_rehashed_completed_artifact_cannot_change_one_surface_or_coverage[extra_key]",
+      "seconds": 0.232
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_meaning_graph_and_complete_roundtrips",
+      "seconds": 0.458
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_actual_author_failure_after_meaning_save_resumes_same_file",
+      "seconds": 0.195
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_completed_private_reload_does_not_fetch_adopt_compile_or_author",
+      "seconds": 0.254
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[extra_key]",
+      "seconds": 0.124
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[schema]",
+      "seconds": 0.133
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[no_snapshot]",
+      "seconds": 0.145
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[no_graph]",
+      "seconds": 0.145
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[owner]",
+      "seconds": 0.121
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[request]",
+      "seconds": 0.139
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[tier]",
+      "seconds": 0.142
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[period]",
+      "seconds": 0.129
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_semantic_snapshot",
+      "name": "test_private_state_rejects_unknown_shape_and_foreign_binding[member]",
+      "seconds": 0.126
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_absent_anxiety_keeps_negation_source_and_explicit_order",
+      "seconds": 0.395
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_absent_anxiety_keeps_updates_gaps_and_period_distinctions",
+      "seconds": 0.159
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_answer_consumes_connector_and_keeps_answer_evidence",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_correction_and_withdrawal_apply_to_whole_episode",
+      "seconds": 0.073
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_pair_does_not_merge_distinct_episodes",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_pair_preserves_complete_evidence_and_order",
+      "seconds": 0.036
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_requires_shared_relation_and_exact_ranges",
+      "seconds": 0.037
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_topic_comma_does_not_skip_unread_scope",
+      "seconds": 0.065
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_topic_comma_keeps_past_feeling_scope",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_topic_comma_keeps_updates_and_semantic_comparison",
+      "seconds": 0.1
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_action_change_topic_comma_keeps_whole_episode_and_raw_evidence",
+      "seconds": 0.083
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_actual_action_survives_beside_cognition_without_inferred_order",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_answer_can_add_multiple_complete_claims_without_inventing_order",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_answer_restatement_is_one_claim_and_never_self_cooccurrence",
+      "seconds": 0.045
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_anxiety_absence_conflicts_preserve_each_written_modifier",
+      "seconds": 1.388
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_application_mode_is_not_enabled",
+      "seconds": 0.0
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_genitive_wish_keeps_target_updates_and_comparison",
+      "seconds": 0.122
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_genitive_wish_keeps_unproved_forms_and_scope_unresolved",
+      "seconds": 0.202
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_nominal_cannot_be_removed_or_swapped_in_safe_projection",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_nominals_cannot_hide_unparsed_time_or_question_heads",
+      "seconds": 0.065
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_nominals_keep_correction_withdrawal_and_comparison",
+      "seconds": 0.088
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_nominals_keep_whole_arguments_and_exact_source",
+      "seconds": 0.078
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_nominals_leave_unproved_inflection_actor_and_scope_unknown",
+      "seconds": 0.054
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_attributive_nominals_preserve_cognition_order_and_result_scope",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_bad_attributive_wish_keeps_target_updates_and_comparison",
+      "seconds": 0.123
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_bad_scene_keeps_updates_comparison_order_and_modifier_scope",
+      "seconds": 0.115
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_annotation_aggregates_only_its_target_and_preserves_unread_scope",
+      "seconds": 0.03
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_annotation_does_not_infer_absent_or_qualified_contrast",
+      "seconds": 0.138
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_annotation_requires_the_shared_relation_and_finite_witness",
+      "seconds": 0.155
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_safe_surface_rejects_broken_target_evidence_or_replay",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_spelling_does_not_promote_food_or_qualified_feelings",
+      "seconds": 0.131
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_spelling_keeps_target_meaning_and_exact_source_updates",
+      "seconds": 0.155
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_supplement_revision_and_withdrawal_follow_exact_source",
+      "seconds": 0.173
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_topic_comma_does_not_promote_unproved_or_nonpresent_feelings",
+      "seconds": 0.09
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_topic_comma_keeps_exact_updates_comparison_and_safe_replay",
+      "seconds": 0.126
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_burden_topic_comma_preserves_full_original_and_annotation",
+      "seconds": 0.57
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_action_possibility_preserves_order_updates_and_comparison",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_action_possibility_preserves_unresolved_scope_boundaries",
+      "seconds": 0.189
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_action_possibility_retains_only_independent_claims",
+      "seconds": 0.315
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_decision_does_not_close_real_reporting_or_retracted_feelings",
+      "seconds": 0.079
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_decision_prefix_preserves_feelings_and_later_decisions",
+      "seconds": 0.051
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_feeling_possibility_cannot_replace_observed_feeling_witness",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_feeling_possibility_changes_unknown_scope_not_observed_route",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_feeling_possibility_does_not_bridge_or_remove_proved_order",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_feeling_possibility_preserves_full_answer_and_correction_coverage",
+      "seconds": 0.06
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_feeling_possibility_preserves_only_independent_observed_claims",
+      "seconds": 0.183
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_closed_feeling_possibility_requires_a_whole_independent_sentence",
+      "seconds": 0.153
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_content_is_possible_not_a_performed_action",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_grammar_alone_cannot_replace_shared_semantic_witness",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_grouping_preserves_content_polarity_tense_and_host",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_replacement_and_withdrawal_do_not_keep_old_scope",
+      "seconds": 0.045
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_time_recovery_does_not_admit_unparsed_or_open_uncertainty",
+      "seconds": 0.079
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_topic_comma_keeps_possible_content_and_whole_source",
+      "seconds": 0.029
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_topic_comma_keeps_unproved_scopes_pending",
+      "seconds": 0.052
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_cognitive_topic_comma_keeps_updates_and_semantic_comparison",
+      "seconds": 0.063
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_comma_speech_closure_requires_whole_known_speaker_and_host",
+      "seconds": 0.207
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_comma_speech_host_keeps_independent_action_without_bridging_unknown",
+      "seconds": 0.165
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_complete_omitted_past_actions_preserve_previously_rejected_nouns",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_change_keeps_explicit_outgoing_order_and_source",
+      "seconds": 0.112
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_incoming_order_does_not_bridge_unread_or_separate_sources",
+      "seconds": 0.095
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_incoming_order_keeps_updates_and_period_meaning",
+      "seconds": 0.103
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_keeps_incoming_and_outgoing_order_with_complete_source",
+      "seconds": 0.167
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_outgoing_order_does_not_bridge_unread_or_separate_sources",
+      "seconds": 0.046
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_outgoing_order_preserves_updates_and_period_meaning",
+      "seconds": 0.082
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_compound_to_compound_order_keeps_occurrences_and_te_proof",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_correction_and_withdrawal_remove_only_the_opposed_original_claim",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_correction_cannot_reassign_reported_speaker_or_question_to_self",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_correction_requires_unique_whole_parent_clause",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_absent_anxiety_keeps_negation_in_updates_and_comparison",
+      "seconds": 0.596
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_absent_anxiety_keeps_tense_and_unproved_relations_separate",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_absent_anxiety_requires_current_witness_and_safe_replay",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_degrees_keep_meaning_in_updates_and_comparison",
+      "seconds": 0.626
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_degrees_keep_unproved_scope_pending",
+      "seconds": 1.062
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_degrees_keep_written_source_and_time",
+      "seconds": 0.254
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_degrees_require_current_witness_and_safe_replay",
+      "seconds": 0.087
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_does_not_invent_past_order_or_merge_tenses",
+      "seconds": 0.078
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_keeps_written_time_and_source",
+      "seconds": 0.222
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_current_anxiety_requires_current_witness_and_safe_replay",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_negative_action_feeling_keeps_gap_reporting_and_update_boundaries",
+      "seconds": 0.068
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_negative_action_keeps_complete_nominals_separate_from_day_suffixes",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_negative_action_keeps_independent_polite_feeling_and_day_owner",
+      "seconds": 0.311
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_negative_decision_feeling_keeps_unknown_report_and_update_boundaries",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_negative_decision_keeps_preparation_day_and_independent_feeling",
+      "seconds": 0.468
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_negative_decision_preserves_complete_nominal_arguments",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_past_feelings_keep_complete_source_and_written_day",
+      "seconds": 0.409
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_past_feelings_keep_day_identity_and_explicit_updates",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_past_feelings_keep_day_local_and_require_matching_witness",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_past_feelings_keep_unknown_scope_and_reported_hosts_pending",
+      "seconds": 0.111
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_polite_feelings_keep_updates_and_complete_source_host",
+      "seconds": 0.216
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_writing_keeps_gaps_reports_and_feeling_updates",
+      "seconds": 0.075
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_dated_writing_keeps_own_day_and_independent_feeling",
+      "seconds": 0.276
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_day_qualified_correction_and_withdrawal_keep_exact_target",
+      "seconds": 0.051
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_day_words_alone_never_create_order_or_inherit_to_next_claim",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_decision_followed_by_feeling_keeps_both_polarities",
+      "seconds": 0.098
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_derived_body_or_question_fields_are_rejected",
+      "seconds": 0.001
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_difficult_nominals_keep_past_role_scene_and_exact_source",
+      "seconds": 0.104
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_difficult_nominals_keep_updates_order_comparison_and_boundaries",
+      "seconds": 0.111
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_distinct_answer_objects_and_modalities_are_not_merged",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_emotion_in_action_field_is_not_performed_action",
+      "seconds": 0.003
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_emphatic_negative_anxiety_keeps_ambiguous_and_reported_scope_pending",
+      "seconds": 0.2
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_emphatic_negative_anxiety_keeps_finite_scope_source_and_time",
+      "seconds": 0.367
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_emphatic_negative_anxiety_keeps_updates_grouping_and_order",
+      "seconds": 0.124
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_emphatic_negative_anxiety_requires_negation_witness_and_safe_replay",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_empty_period_does_not_invent_route",
+      "seconds": 0.001
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_event_topic_comma_keeps_order_and_period_comparison_semantics",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_event_topic_comma_keeps_subject_scope_and_shared_witness_boundaries",
+      "seconds": 0.08
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_event_topic_comma_preserves_finite_meaning_and_original_evidence",
+      "seconds": 0.069
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_event_topic_comma_supplements_and_corrections_keep_independent_evidence",
+      "seconds": 0.114
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_anxiety_keeps_unproved_scope_pending",
+      "seconds": 0.363
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_anxiety_preserves_opposition_updates_comparison_and_order",
+      "seconds": 0.303
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_anxiety_preserves_polarity_particle_tense_and_source",
+      "seconds": 0.212
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_anxiety_requires_witness_and_safe_replay",
+      "seconds": 0.075
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_degree_anxiety_keeps_unproved_scope_pending",
+      "seconds": 0.437
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_degree_anxiety_keeps_updates_grouping_and_comparison",
+      "seconds": 0.15
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_degree_anxiety_postfix_grouping_and_correction_keep_source_order",
+      "seconds": 0.543
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_degree_anxiety_preserves_degree_particle_time_and_source",
+      "seconds": 2.832
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_degree_anxiety_requires_witness_and_safe_replay",
+      "seconds": 0.048
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_negative_anxiety_keeps_updates_grouping_and_order",
+      "seconds": 0.126
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_negative_modifiers_keep_grouping_corrections_and_order",
+      "seconds": 0.792
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existential_negative_modifiers_require_exact_scope_and_witness",
+      "seconds": 0.206
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_existing_emlis_invalid_request_dispatch_is_preserved",
+      "seconds": 0.0
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_past_presence_is_a_scene_with_exact_whole_clause_evidence",
+      "seconds": 0.199
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_past_responsibility_preserves_role_polarity_and_exact_evidence",
+      "seconds": 0.05
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_self_spellings_does_not_infer_collective_other_or_unsupported_subjects",
+      "seconds": 0.125
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_self_spellings_keeps_supplement_updates_order_and_meaning_differences",
+      "seconds": 0.219
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_self_spellings_preserves_explicit_self_claims_and_original_evidence",
+      "seconds": 0.761
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_sequence_reaches_safe_text_and_graph_with_exact_evidence",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_temporal_nominal_modifiers_and_objects_keep_their_meaning",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_explicit_wish_burden_is_a_targeted_annotation_with_whole_evidence",
+      "seconds": 0.172
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_familiarity_lexeme_closure_keeps_focus_and_nested_host_distinct",
+      "seconds": 0.079
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_familiarity_speaker_keeps_unclosed_and_nested_reports_unresolved",
+      "seconds": 0.182
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_conflicts_do_not_infer_a_shared_scope_or_total_absence",
+      "seconds": 0.469
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_conflicts_preserve_updates_aggregation_and_period_meaning",
+      "seconds": 0.147
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_nominal_keeps_unfinished_fact_and_exact_evidence",
+      "seconds": 0.104
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_nominal_unfinished_keeps_updates_and_period_differences",
+      "seconds": 0.099
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_noun_writing_keeps_action_and_separate_feeling",
+      "seconds": 0.126
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_noun_writing_keeps_gaps_fields_and_report_scope",
+      "seconds": 0.046
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_spelling_does_not_hide_opposed_ordinary_supplements",
+      "seconds": 0.111
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_spelling_explicit_correction_preserves_written_claim_and_evidence",
+      "seconds": 0.129
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_spelling_keeps_compatible_supplements_and_distinct_meanings",
+      "seconds": 0.057
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_topic_comma_keeps_unsupported_scope_pending",
+      "seconds": 0.062
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_topic_comma_keeps_updates_and_semantic_comparison",
+      "seconds": 0.08
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_topic_comma_preserves_whole_source_and_experienced_state",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_word_changes_preserve_unread_scope_and_safe_reparse",
+      "seconds": 0.049
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_word_changes_preserve_updates_and_period_meaning",
+      "seconds": 0.08
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_feeling_word_changes_still_require_shared_episode_witness",
+      "seconds": 0.026
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_formal_negative_wishes_keep_tense_full_source_and_plain_equivalence",
+      "seconds": 0.255
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_formal_negative_wishes_keep_updates_and_do_not_become_nonactions",
+      "seconds": 0.165
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_forward_negative_speech_keeps_attribution_across_fields",
+      "seconds": 1.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_forward_present_speech_keeps_attribution_across_fields",
+      "seconds": 0.376
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_forward_speech_preserves_prior_evidence_and_updates",
+      "seconds": 0.957
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_genitive_wish_contrast_keeps_unproved_owners_and_hosts_unresolved",
+      "seconds": 0.116
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_genitive_wish_contrast_keeps_updates_aggregation_and_comparison",
+      "seconds": 0.104
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_good_responsibility_keeps_nominal_modifier_and_complete_role_evidence",
+      "seconds": 0.077
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_good_responsibility_keeps_updates_order_comparison_and_unread_boundaries",
+      "seconds": 0.109
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_good_scene_keeps_updates_comparison_order_and_modifier_scope",
+      "seconds": 0.104
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_interrogative_guard_keeps_written_ordinary_nominals",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_interrogative_nominals_do_not_become_completed_actions_or_wishes",
+      "seconds": 0.12
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_interrogative_nominals_do_not_supply_update_targets_or_period_claims",
+      "seconds": 0.063
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_invalid_duplicate_supplement_is_not_skipped",
+      "seconds": 0.0
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_compounds_cannot_be_shortened_or_swapped_in_safe_projection",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_compounds_do_not_hide_unproved_clauses_or_suffix_scope",
+      "seconds": 0.184
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_compounds_keep_correction_withdrawal_and_comparison",
+      "seconds": 0.081
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_compounds_keep_whole_arguments_and_exact_source",
+      "seconds": 0.023
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_compounds_preserve_cognition_day_and_result_scope",
+      "seconds": 0.012
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_genitive_wish_keeps_updates_aggregation_and_comparison",
+      "seconds": 0.162
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_omitted_writing_keeps_attribution_scope_and_updates",
+      "seconds": 0.096
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_omitted_writing_keeps_unknown_actor_and_independent_feeling",
+      "seconds": 0.135
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_owned_writing_keeps_scope_gaps_and_updates",
+      "seconds": 0.091
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_kana_owned_writing_keeps_source_action_and_independent_feeling",
+      "seconds": 0.14
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_keyword_action_responsibility_does_not_promote_unread_or_reported_scope",
+      "seconds": 0.047
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_keyword_action_responsibility_keeps_order_updates_and_comparison",
+      "seconds": 0.086
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_keyword_action_responsibility_preserves_role_and_whole_source",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_keyword_action_responsibility_requires_consistent_shared_witness",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_late_past_scene_keeps_evidence_and_does_not_depend_on_sentence_position",
+      "seconds": 0.112
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_late_past_scene_preserves_order_updates_and_opposed_claims",
+      "seconds": 0.102
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_late_past_scene_still_requires_complete_explicit_shared_witness",
+      "seconds": 0.093
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_local_sequence_in_ordinary_answer_keeps_answer_provenance",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_member_identity_is_immutable_and_returned_preview_cannot_change_it",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_missing_predecessor_explains_its_own_unknown_without_erasing_pair_or_source",
+      "seconds": 0.067
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_missing_stage_display_groups_correction_gaps_without_changing_meaning",
+      "seconds": 0.042
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_missing_stage_display_keeps_single_scope_other_reasons_and_target_order",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_missing_stage_display_lists_cross_record_scopes_without_joint_absence_claim",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_mixed_script_nominals_do_not_erase_unread_grammar_or_actor",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_mixed_script_nominals_keep_arguments_operators_and_exact_source",
+      "seconds": 0.03
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_mixed_script_nominals_keep_cognitive_and_order_scopes",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_mixed_script_nominals_keep_unparsed_time_out_of_every_argument",
+      "seconds": 0.049
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_mixed_script_nominals_keep_update_lineage_and_comparison_meaning",
+      "seconds": 0.077
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_compound_feeling_keeps_updates_unknowns_and_comparison",
+      "seconds": 0.096
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_compound_feeling_preserves_both_endpoints_and_order",
+      "seconds": 0.781
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_feeling_survives_delimited_independent_transition",
+      "seconds": 1.489
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_feeling_transition_does_not_admit_unbounded_hosts_or_answers",
+      "seconds": 0.047
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_feeling_transition_keeps_updates_and_period_meaning",
+      "seconds": 0.056
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_past_feelings_do_not_admit_open_hosts_or_unproved_compounds",
+      "seconds": 0.355
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_past_feelings_keep_updates_comparison_and_unknown_gaps",
+      "seconds": 0.079
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_past_feelings_preserve_negation_source_and_order",
+      "seconds": 0.47
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_speech_verbs_do_not_prove_an_opaque_host_is_closed",
+      "seconds": 0.38
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_negative_speech_verbs_keep_quoted_content_out_of_self_map",
+      "seconds": 4.52
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_nominal_changes_with_feeling_words_keep_whole_meaning_and_evidence",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_negative_action_does_not_supply_reported_or_other_person_feelings",
+      "seconds": 0.044
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_negative_action_feeling_preserves_unknown_and_update_boundaries",
+      "seconds": 0.043
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_negative_decision_does_not_merge_unknown_actor_with_self",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_negative_decision_feeling_keeps_reports_gaps_and_updates",
+      "seconds": 0.076
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_negative_decision_keeps_actor_unknown_and_independent_feeling",
+      "seconds": 0.495
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_owned_writing_keeps_reports_gaps_and_updates",
+      "seconds": 0.11
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_owned_writing_keeps_unknown_actor_and_independent_feeling",
+      "seconds": 0.26
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_writing_keeps_reports_gaps_updates_and_separate_actors",
+      "seconds": 0.117
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_omitted_writing_keeps_unknown_actor_and_independent_feeling",
+      "seconds": 0.543
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_only_distinct_days_in_one_answer_can_disambiguate_opposition",
+      "seconds": 0.053
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_open_dream_and_heard_read_scope_do_not_become_observed_claims",
+      "seconds": 0.119
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_open_dream_scope_cannot_be_adopted_by_supplement_or_correction",
+      "seconds": 0.043
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_open_dream_scope_keeps_independent_record_and_unresolved_source",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_open_report_scope_does_not_become_first_person_action",
+      "seconds": 0.012
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_opposed_claims_aggregate_witnesses_without_duplicate_badges",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_opposed_claims_are_not_inferred_across_occasions_fields_or_meanings",
+      "seconds": 0.053
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_opposed_feeling_originals_keep_both_claims_and_exact_evidence",
+      "seconds": 0.095
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_opposed_original_claims_keep_both_targets_and_exact_evidence",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_ordinary_answer_adds_own_wish_to_same_record_and_safe_text",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_ordinary_answer_cannot_silently_choose_opposite_claim",
+      "seconds": 0.029
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_ordinary_answer_must_not_drop_uninterpreted_or_corrective_text",
+      "seconds": 0.049
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_ordinary_cognitive_answer_retains_provenance_and_alternatives",
+      "seconds": 0.026
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_other_person_quote_condition_question_and_future_are_not_actions",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_owner_deleted_version_and_duplicate_conflict_are_rejected",
+      "seconds": 0.001
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_owner_projection_reconstructs_whole_meaning_without_raw_body",
+      "seconds": 0.012
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_partial_anxiety_supplements_retain_both_written_claims",
+      "seconds": 1.122
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_partial_negative_anxiety_keeps_finite_scope_source_and_time",
+      "seconds": 0.271
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_partial_negative_anxiety_keeps_unproved_scope_pending",
+      "seconds": 0.301
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_partial_negative_anxiety_preserves_updates_distinctions_and_order",
+      "seconds": 0.135
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_partial_negative_anxiety_requires_witness_and_rejects_scope_rewrite",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_particle_negative_anxiety_keeps_finite_scope_source_and_time",
+      "seconds": 0.261
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_particle_negative_anxiety_keeps_unproved_scope_pending",
+      "seconds": 0.312
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_particle_negative_anxiety_preserves_updates_meaning_and_order",
+      "seconds": 0.154
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_particle_negative_anxiety_requires_witness_and_rejects_scope_rewrite",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_anxiety_keeps_asserted_feeling_source_and_order",
+      "seconds": 0.083
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_anxiety_keeps_gaps_updates_and_period_meaning",
+      "seconds": 0.08
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_anxiety_keeps_unsupported_and_reported_hosts_pending",
+      "seconds": 1.026
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_anxiety_requires_matching_negation_and_negative_affect_witness",
+      "seconds": 1.125
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_decision_keeps_corrections_withdrawals_supplements_and_comparison",
+      "seconds": 0.054
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_decision_keeps_object_negation_time_and_exact_source",
+      "seconds": 0.095
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_decision_keeps_subject_forms_fields_and_nominal_relations",
+      "seconds": 0.028
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_decision_leaves_unproved_actors_hosts_and_aspects_unresolved",
+      "seconds": 0.14
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_decision_preserves_explicit_route_and_late_negative",
+      "seconds": 0.029
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_actor_scope_survives_correction_aggregation_and_comparison",
+      "seconds": 0.128
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_after_action_keeps_experience_and_exact_source",
+      "seconds": 0.154
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_does_not_erase_unread_scope_or_inherit_other_subject",
+      "seconds": 0.067
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_outgoing_order_does_not_bridge_or_infer_experience",
+      "seconds": 0.083
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_outgoing_order_keeps_updates_and_period_meaning",
+      "seconds": 0.079
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_outgoing_order_preserves_experience_and_source",
+      "seconds": 0.195
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_requires_shared_pair_and_matching_modality",
+      "seconds": 0.042
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_spelling_alone_is_not_a_period_change",
+      "seconds": 0.043
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_spelling_keeps_meaning_differences_and_episode_evidence",
+      "seconds": 0.05
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_split_attribution_keeps_unread_host_and_independent_action",
+      "seconds": 1.344
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_split_attribution_preserves_complete_claims_and_period_meaning",
+      "seconds": 0.113
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_feeling_supplement_revision_withdrawal_and_episode_identity",
+      "seconds": 0.07
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_presence_does_not_erase_unread_scope_or_infer_a_role",
+      "seconds": 0.074
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_past_presence_requires_matching_full_shared_event_witness",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_comparison_detects_written_semantics_without_rating_the_person",
+      "seconds": 0.047
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_comparison_has_inline_identity_and_evidence_without_public_locators",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_comparison_ignores_ids_inflection_order_and_dependent_proof_form",
+      "seconds": 0.033
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_comparison_rejects_other_owner_nested_or_unavailable_previous_source",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_comparison_requires_equal_adjacent_nonoverlapping_windows",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_comparison_uses_corrected_previous_sources_and_rejects_broken_binding",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_is_half_open_and_timezone_aware",
+      "seconds": 0.001
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_time_nominal_heads_preserve_existing_year_and_issue_objects",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_period_time_scope_preserves_updates_comparison_and_order_barrier",
+      "seconds": 0.076
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_change_does_not_promote_unproven_scope_or_tampered_meaning",
+      "seconds": 0.063
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_change_keeps_nominal_meaning_order_and_original_evidence",
+      "seconds": 0.039
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_change_preserves_updates_and_semantic_period_comparison",
+      "seconds": 0.074
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_compound_feeling_keeps_exact_episode_and_outgoing_order",
+      "seconds": 0.585
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_compound_feeling_keeps_open_hosts_pending",
+      "seconds": 0.05
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_compound_feeling_keeps_updates_and_period_equivalence",
+      "seconds": 0.22
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_decrease_increase_return_keep_complete_meaning_and_evidence",
+      "seconds": 0.036
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_decrease_increase_return_keep_unproven_scope_unavailable",
+      "seconds": 0.053
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_decrease_increase_return_preserve_updates_and_comparison",
+      "seconds": 0.097
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_feeling_after_decision_preserves_reporting_and_updates",
+      "seconds": 0.181
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_feeling_after_negative_decision_keeps_source_and_order",
+      "seconds": 0.098
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_feeling_after_omitted_negative_action_keeps_route_and_source",
+      "seconds": 0.103
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_feeling_possibility_keeps_open_and_unparsed_scopes_pending",
+      "seconds": 0.315
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_feeling_possibility_preserves_independent_claim_and_evidence",
+      "seconds": 0.297
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_feeling_possibility_preserves_order_updates_and_period_scope",
+      "seconds": 0.123
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_negative_past_events_keep_kind_time_and_exact_source",
+      "seconds": 0.115
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_negative_past_events_keep_supplement_correction_and_withdrawal",
+      "seconds": 0.137
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_negative_past_events_preserve_unresolved_scopes",
+      "seconds": 0.085
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_feelings_keep_answer_sources_and_period_meaning",
+      "seconds": 0.182
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_feelings_keep_unread_scope_pending",
+      "seconds": 0.287
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_feelings_preserve_single_and_following_order",
+      "seconds": 0.213
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_nonaction_does_not_admit_unresolved_hosts",
+      "seconds": 0.033
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_nonaction_preserves_complete_source_and_plain_meaning",
+      "seconds": 0.294
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_nonaction_preserves_updates_order_and_conflicts",
+      "seconds": 0.077
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_wishes_do_not_admit_unparsed_or_reported_scope",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_wishes_keep_full_meaning_evidence_and_plain_equivalence",
+      "seconds": 0.266
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_polite_past_wishes_keep_revision_withdrawal_and_semantic_differences",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_positive_and_negative_scene_stay_distinct_and_safe_surface_replays_them",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_day_answers_corrections_and_withdrawals_keep_source",
+      "seconds": 0.052
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_day_comparison_uses_meaning_not_word_order",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_day_does_not_erase_unsupported_temporal_scopes",
+      "seconds": 0.039
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_day_does_not_promote_nominal_suffixes_or_finer_times",
+      "seconds": 0.15
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_day_keeps_nominal_modifiers_and_does_not_invent_operators",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_day_preserves_arguments_operators_and_complete_evidence",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_event_days_do_not_erase_report_dream_or_sentence_tail",
+      "seconds": 0.052
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_event_days_do_not_promote_unresolved_day_or_nominal_scope",
+      "seconds": 0.047
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_event_days_keep_comparison_and_do_not_inherit_time_or_order",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_event_days_keep_kind_polarity_and_full_source",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_post_topic_event_days_keep_supplement_revision_and_withdrawal_evidence",
+      "seconds": 0.093
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_postposed_attribution_does_not_consume_independent_to_sentences",
+      "seconds": 0.532
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_postposed_attribution_preserves_independent_claims_and_source",
+      "seconds": 0.193
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_postposed_speech_verbs_keep_reported_content_out_of_self_map",
+      "seconds": 2.345
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_postposed_speech_verbs_keep_update_and_period_evidence_boundaries",
+      "seconds": 0.128
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_postposed_speech_verbs_require_closed_known_scope",
+      "seconds": 0.459
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_event_answers_corrections_and_withdrawals_keep_answer_evidence",
+      "seconds": 0.069
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_event_days_do_not_invent_order_or_cross_source_identity",
+      "seconds": 0.023
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_event_period_comparison_uses_meaning_and_written_day",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_events_do_not_erase_unread_operators_or_reported_speakers",
+      "seconds": 0.13
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_events_still_require_shared_event_witness",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_feeling_keeps_actor_finite_and_reporting_boundaries",
+      "seconds": 0.082
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_feeling_period_comparison_keeps_written_order",
+      "seconds": 0.039
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_feeling_updates_do_not_restore_removed_order",
+      "seconds": 0.056
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_polite_compounds_keep_unknown_and_source_boundaries",
+      "seconds": 0.24
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_polite_compounds_preserve_complete_order_and_evidence",
+      "seconds": 0.809
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_polite_compounds_preserve_updates_and_comparison",
+      "seconds": 1.211
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prefixed_scene_and_role_keep_finite_polarity_and_complete_source",
+      "seconds": 0.061
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prepared_decision_corrections_and_period_comparison_preserve_aspect",
+      "seconds": 0.094
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prepared_decision_does_not_admit_unproved_actors_other_aspects_or_hosts",
+      "seconds": 0.24
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prepared_decision_preserves_route_without_inventing_cause_or_missing_links",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_prepared_decision_retains_aspect_negation_time_and_original_evidence",
+      "seconds": 0.105
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_present_speech_does_not_close_nested_or_opaque_reports",
+      "seconds": 0.457
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_present_speech_keeps_quoted_content_out_of_self_map",
+      "seconds": 2.673
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_aggregation_keeps_targets_burden_and_unknown_separate",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_burden_contrast_keeps_both_annotations_and_exact_source",
+      "seconds": 0.163
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_burden_keeps_unsupported_hosts_and_partial_updates_unresolved",
+      "seconds": 0.091
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_burden_preserves_updates_aggregation_comparison_and_safe_projection",
+      "seconds": 0.113
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_burden_requires_complete_shared_pair",
+      "seconds": 0.08
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_does_not_infer_other_forms_speakers_or_unread_hosts",
+      "seconds": 0.105
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_requires_shared_wish_witness",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_safe_projection_rejects_wrong_target_or_evidence",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_supplement_correction_and_withdrawal_preserve_lineage",
+      "seconds": 0.081
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_topic_comma_does_not_erase_unread_scope_or_forge_meaning",
+      "seconds": 0.049
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_topic_comma_keeps_updates_aggregation_and_period_meaning",
+      "seconds": 0.067
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_topic_comma_keeps_wish_object_and_exact_source",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_protective_wish_preserves_explicit_object_and_full_source",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_qualified_negative_speech_does_not_assert_embedded_content",
+      "seconds": 0.102
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_qualified_postposed_report_preserves_independent_evidence",
+      "seconds": 9.17
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_qualified_postposed_speakers_do_not_become_self_facts",
+      "seconds": 1.037
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relational_writing_keeps_independent_feeling_and_source",
+      "seconds": 0.552
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relational_writing_keeps_independent_unfinished_state",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relational_writing_keeps_report_gap_and_update_boundaries",
+      "seconds": 0.084
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relational_writing_place_keeps_independent_feeling_and_source",
+      "seconds": 0.287
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relational_writing_place_preserves_reports_gaps_and_updates",
+      "seconds": 0.088
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relative_day_aggregation_stays_with_its_own_source",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relative_day_does_not_overwrite_negation_wish_or_tense",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relative_day_in_answer_keeps_its_separate_statement_source",
+      "seconds": 0.012
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_relative_days_reach_safe_text_and_graph_with_complete_evidence",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_repeated_actions_keep_sequence_occurrences_without_self_edges_or_cycles",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_repeated_original_and_answer_claims_require_independent_records",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_repeated_period_gaps_display_once_without_losing_records_or_burden",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_replacement_does_not_inherit_old_negation_or_wish",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_replacement_preserves_negation_and_exact_supplement_ranges",
+      "seconds": 0.018
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_responsibility_does_not_infer_identity_or_drop_unread_scope",
+      "seconds": 0.083
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_responsibility_requires_matching_shared_event_not_keyword_action",
+      "seconds": 0.026
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_result_day_nominal_boundaries_keep_explicit_nominals_and_existing_day_parsers",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_result_day_prefixes_stay_unresolved_without_erasing_other_complete_clauses",
+      "seconds": 0.088
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_result_unparsed_day_keeps_updates_and_period_comparison_conservative",
+      "seconds": 0.117
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_role_joins_observed_stages_without_inventing_order_or_task_completion",
+      "seconds": 0.028
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_role_supplement_revision_withdrawal_and_restatement_keep_identity",
+      "seconds": 0.077
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_safe_surface_cannot_drop_modifiers_or_accept_altered_parts",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_scene_action_order_requires_written_connective",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_scene_never_treats_mechanically_split_span_as_a_complete_sentence",
+      "seconds": 0.033
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_scene_role_action_route_keeps_written_order_and_occurrences",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_scene_supplement_restatement_revision_and_withdrawal_keep_source_identity",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_owned_writing_keeps_independent_feeling_and_source",
+      "seconds": 0.293
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_owned_writing_preserves_reports_gaps_and_updates",
+      "seconds": 0.074
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_past_action_host_check_preserves_closed_actions_and_unknown_sentences",
+      "seconds": 0.052
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_past_action_postposed_host_cannot_close_an_unrelated_report",
+      "seconds": 0.154
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_past_action_report_scope_keeps_prior_and_independent_evidence",
+      "seconds": 0.103
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_past_actions_do_not_become_reported_speakers_actions",
+      "seconds": 0.764
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_topic_comma_answers_corrections_and_withdrawals_keep_answer_evidence",
+      "seconds": 0.063
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_topic_comma_does_not_relax_safe_proposition_revalidation",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_topic_comma_does_not_skip_unparsed_scope_or_subject_boundaries",
+      "seconds": 0.057
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_topic_comma_is_not_a_period_change_or_new_meaning",
+      "seconds": 0.038
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_topic_comma_keeps_meaning_and_complete_original_evidence",
+      "seconds": 0.088
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_self_topic_comma_preserves_proved_order_change_and_burden",
+      "seconds": 0.043
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_separated_day_corrections_and_comparison_keep_day_and_negation",
+      "seconds": 0.05
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_separated_day_does_not_admit_calendar_suffixes_finer_times_or_reported_actors",
+      "seconds": 0.346
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_separated_day_keeps_bun_nominals_and_full_source",
+      "seconds": 0.084
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_separated_day_keeps_route_and_does_not_inherit_day_or_bridge_unknown",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_sequence_does_not_admit_other_speaker_quote_question_or_condition",
+      "seconds": 0.018
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_sequence_resolves_only_its_pair_and_orphan_connective_keeps_gap",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_sequence_retains_negation_and_does_not_promote_wish_to_action",
+      "seconds": 0.018
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_sequenced_writing_keeps_following_feeling_and_exact_order",
+      "seconds": 0.044
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_sequenced_writing_preserves_gaps_reports_and_feeling_updates",
+      "seconds": 0.074
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_single_record_and_duplicate_do_not_make_trend",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_slight_anxiety_keeps_degree_in_updates_comparison_and_safe_replay",
+      "seconds": 0.1
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_slight_anxiety_keeps_unproved_degree_scope_pending",
+      "seconds": 0.111
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_split_sentence_does_not_erase_uncertainty_or_negation_host",
+      "seconds": 0.078
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_split_sentence_keeps_separate_statement_and_its_exact_evidence",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_split_sentence_stays_unresolved_in_updates_and_period_comparison",
+      "seconds": 0.023
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_stacked_speaker_closure_does_not_swallow_unread_or_nested_scope",
+      "seconds": 0.103
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_stacked_speaker_keeps_record_updates_and_period_evidence_separate",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_stacked_speaker_modifiers_keep_quotes_and_independent_actions_distinct",
+      "seconds": 0.383
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_stacked_speakers_keep_forward_current_and_negative_attribution_unresolved",
+      "seconds": 0.224
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_feeling_after_explicit_sequence_keeps_route_and_source",
+      "seconds": 0.325
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_feeling_sequence_does_not_fill_unwritten_links",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_feeling_sequence_keeps_full_route_and_occurrences",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_self_past_feeling_keeps_split_dependent_host_pending",
+      "seconds": 1.093
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_self_past_feeling_keeps_unknown_and_source_boundaries",
+      "seconds": 0.084
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_self_past_feeling_keeps_updates_comparison_and_safe_replay",
+      "seconds": 0.076
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_self_past_feeling_preserves_source_and_explicit_order",
+      "seconds": 0.478
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_standalone_self_past_feeling_requires_complete_shared_witness",
+      "seconds": 0.076
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_supplement_binds_to_parent_and_cannot_count_as_an_occasion",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_surface_keeps_all_arguments_and_finite_operators",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_te_after_answer_revision_and_withdrawal_keep_whole_source",
+      "seconds": 0.088
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_te_after_past_change_preserves_all_nine_inflections_and_source",
+      "seconds": 0.048
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_te_and_past_after_keep_distinct_episodes_without_cross_links",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_te_ending_never_asserts_a_standalone_or_unread_action",
+      "seconds": 0.064
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_te_feeling_result_requires_own_order_context_for_safe_display",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_te_surface_requires_its_own_whole_order_context",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_today_current_feelings_keep_identity_updates_and_unproved_order",
+      "seconds": 0.086
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_today_current_feelings_keep_unproved_days_and_report_hosts_pending",
+      "seconds": 0.237
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_today_current_feelings_keep_written_day_tense_polarity_and_degree",
+      "seconds": 0.214
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_today_current_feelings_require_present_witness_and_safe_replay",
+      "seconds": 0.047
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_two_records_generate_matching_text_and_unordered_graph",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unattributed_decision_corrections_and_comparison_preserve_scope",
+      "seconds": 0.105
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unattributed_decision_does_not_merge_actors_occurrences_or_infer_conflict",
+      "seconds": 0.07
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unattributed_decision_keeps_only_explicit_order_and_written_day",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unattributed_decision_preserves_subject_uncertainty_modifiers_and_source",
+      "seconds": 0.153
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unattributed_decision_rejects_other_aspects_actors_and_open_hosts",
+      "seconds": 0.22
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unattributed_decision_safe_replay_rejects_inferred_actor_and_erased_modifiers",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_nominal_yesterday_keeps_updates_evidence_and_comparison",
+      "seconds": 0.094
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_nominal_yesterday_survives_completed_self_writing",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_nominal_yesterday_writing_preserves_updates_and_comparison",
+      "seconds": 0.069
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_and_action_do_not_imply_order_or_cause",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_answer_keeps_answer_source_and_record_count",
+      "seconds": 0.018
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_correction_and_withdrawal_keep_exact_scope",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_equivalence_preserves_particle_and_predicate",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_never_shortens_unsupported_scope",
+      "seconds": 0.045
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_reaches_text_and_graph_without_inventing_actor",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_result_requires_shared_full_clause_witness",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unfinished_state_survives_writing_with_medium_or_location",
+      "seconds": 0.083
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unicode_whitespace_exact_evidence",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_uninterpreted_record_remains_visible_as_missing_scope",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unknown_gap_display_preserves_reason_and_endpoint_order",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unknown_gap_display_retains_other_targets_and_unread_material",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unmarked_order_and_distinct_fields_or_sources_cannot_create_sequence",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_cognitive_time_keeps_order_updates_and_period_meaning",
+      "seconds": 0.086
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_cognitive_time_preserves_independent_original_claims",
+      "seconds": 0.106
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_original_adds_only_unknown_change_to_period_comparison",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_original_cannot_bridge_order_or_invent_repetition",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_original_keeps_readable_clauses_fields_and_records",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_original_keeps_typed_burden_and_rejects_raw_surface_tampering",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_supplement_or_correction_still_blocks_the_whole_update",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_time_nominal_cannot_be_reintroduced_into_safe_surface",
+      "seconds": 0.003
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_time_prefixes_do_not_become_scene_role_or_action_nouns",
+      "seconds": 0.356
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_time_scope_keeps_readable_nodes_source_and_unknown",
+      "seconds": 0.173
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unparsed_time_supplements_and_updates_do_not_resolve_by_guessing",
+      "seconds": 0.037
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unproved_cognitive_scopes_are_not_safe_surface_content",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unread_clause_cannot_be_skipped_by_sequence",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unread_uncertainty_still_blocks_other_claims_in_same_field",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unsupported_action_change_never_leaves_a_factual_action_fragment",
+      "seconds": 0.072
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_unsupported_day_scopes_cannot_be_silently_shortened",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_whole_wishes_scenes_roles_keep_postposed_attribution_unresolved",
+      "seconds": 0.188
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_wish_remains_thought_not_performed_action",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_withdrawal_or_replacement_does_not_restore_original_sequence",
+      "seconds": 0.054
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_withdrawal_removes_only_parent_occurrence_and_recomputes_cooccurrence",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_writing_medium_keeps_unfinished_updates_and_period_meaning",
+      "seconds": 0.063
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_written_anxiety_degrees_keep_literal_meaning_in_updates_and_comparison",
+      "seconds": 0.455
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_written_anxiety_degrees_keep_source_and_order",
+      "seconds": 0.389
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_written_anxiety_degrees_keep_unproved_hosts_pending",
+      "seconds": 0.541
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_v1d_vertical.AnalysisVerticalTests",
+      "name": "test_wrong_projection_owner_is_rejected_and_diagnostics_are_body_free",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_kinds_only_reaches_existing_graph_and_preserves_source_scope",
+      "seconds": 0.162
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[missing]",
+      "seconds": 0.089
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[duplicate]",
+      "seconds": 0.091
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[extra]",
+      "seconds": 0.1
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[reverse]",
+      "seconds": 0.097
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[bool]",
+      "seconds": 0.092
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[float]",
+      "seconds": 0.089
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[string]",
+      "seconds": 0.094
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[zero]",
+      "seconds": 0.095
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[unknown_kind]",
+      "seconds": 0.095
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[extra_key]",
+      "seconds": 0.091
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[v1_keys]",
+      "seconds": 0.1
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_raw_shape_and_order_fail_closed[extra_root]",
+      "seconds": 0.098
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_duplicate_keys_nonfinite_and_wrappers_are_not_repaired[duplicate_root]",
+      "seconds": 0.098
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_duplicate_keys_nonfinite_and_wrappers_are_not_repaired[duplicate_row]",
+      "seconds": 0.096
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_duplicate_keys_nonfinite_and_wrappers_are_not_repaired[{\"fields\":NaN}]",
+      "seconds": 0.097
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_duplicate_keys_nonfinite_and_wrappers_are_not_repaired[```json\\n{}\\n```]",
+      "seconds": 0.091
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_finish_failure_precedes_complete_json[None]",
+      "seconds": 0.063
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_finish_failure_precedes_complete_json[length]",
+      "seconds": 0.068
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_finish_failure_precedes_complete_json[timeout]",
+      "seconds": 0.068
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_finish_failure_precedes_complete_json[error]",
+      "seconds": 0.065
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_finish_failure_precedes_complete_json[unknown]",
+      "seconds": 0.07
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_response_is_bound_to_the_actual_call_context[whole_response]",
+      "seconds": 0.11
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_response_is_bound_to_the_actual_call_context[raw_only]",
+      "seconds": 0.118
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_response_is_bound_to_the_actual_call_context[messages_hash]",
+      "seconds": 0.116
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_response_is_bound_to_the_actual_call_context[request_ref]",
+      "seconds": 0.105
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_response_is_bound_to_the_actual_call_context[no_response]",
+      "seconds": 0.101
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_source_changes_cannot_rebind_a_prior_response[guard]",
+      "seconds": 0.064
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_source_changes_cannot_rebind_a_prior_response[version]",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_source_changes_cannot_rebind_a_prior_response[owner]",
+      "seconds": 0.051
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_v1_default_and_its_model_request_are_unchanged",
+      "seconds": 0.115
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_all_unresolved_and_a_wholly_unresolved_record",
+      "seconds": 0.14
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_safety_supplement_correction_and_comparison_are_not_bypassed",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_analysis_model_field_kinds",
+      "name": "test_synthetic_call_real_sql_commit_and_non_generating_read",
+      "seconds": 2.628
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_absent_anxiety_keeps_saved_negation_and_order",
+      "seconds": 0.064
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_action_change_order_survives_commit_and_read_without_regeneration",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_attributive_arguments_survive_save_and_read_without_regeneration",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_burden_annotation_survives_save_and_read_without_regeneration",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_burden_spelling_comparison_survives_save_read_without_regeneration",
+      "seconds": 0.055
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_burden_topic_comma_survives_save_read_without_regeneration",
+      "seconds": 0.055
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_closed_possibility_in_incomplete_updates_never_commits",
+      "seconds": 0.177
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_closed_possibility_survives_save_read_as_unknown_scope",
+      "seconds": 0.251
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_comparison_failure_logs_detail_but_keeps_generic_outcome",
+      "seconds": 0.087
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_comparison_flag_defaults_off_and_requires_exact_development_value",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_comparison_requires_matching_saved_text",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_comparison_save_read_preserves_both_private_artifacts_and_public_identity",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_comparison_storage_errors_never_fall_back_to_single_period",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_compound_incoming_order_survives_commit_and_read_without_regeneration",
+      "seconds": 0.093
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_compound_outgoing_order_survives_commit_and_read_without_regeneration",
+      "seconds": 0.106
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_conflict_never_falls_back",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_corrected_and_withdrawn_stage_gaps_survive_saved_read_without_regeneration",
+      "seconds": 0.086
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_corrupt_private_and_mismatched_text_are_rejected",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_current_anxiety_keeps_saved_writing_time_without_regeneration",
+      "seconds": 0.587
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_dated_negative_action_polite_feeling_survives_saved_read",
+      "seconds": 0.188
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_dated_negative_decision_polite_feeling_survives_saved_read",
+      "seconds": 0.144
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_dated_polite_feeling_order_survives_save_and_read",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_dated_writing_feeling_survives_saved_read",
+      "seconds": 0.071
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_emphatic_negative_anxiety_survives_save_and_read",
+      "seconds": 0.108
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_empty_current_does_not_hide_invalid_snapshot_or_period",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_empty_current_period_skips_engine_and_storage",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_empty_previous_is_dependency_but_unreadable_previous_is_not_first_use",
+      "seconds": 0.044
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_existential_anxiety_survives_save_and_read",
+      "seconds": 0.155
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_existential_degree_anxiety_survives_save_and_read",
+      "seconds": 0.858
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_explicit_feeling_spelling_correction_survives_save_and_read",
+      "seconds": 0.183
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_explicit_self_spellings_survive_save_read_and_spelling_comparison",
+      "seconds": 0.261
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_feeling_noun_writing_survives_saved_read",
+      "seconds": 0.059
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_feeling_spelling_comparison_survives_save_read_without_regeneration",
+      "seconds": 0.05
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_feeling_word_changes_survive_save_and_read_without_regeneration",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_formal_negative_wishes_survive_save_and_read_without_regeneration",
+      "seconds": 0.023
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_free_history_and_plus_deep_never_return_body",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_generate_commits_and_rereads_exact_identity",
+      "seconds": 0.025
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_generation_failure_log_rejects_unclassified_values",
+      "seconds": 0.007
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_generation_failure_logs_previous_reason_once",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_insufficient_current_input_keeps_diagnostic_without_saving",
+      "seconds": 0.087
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_insufficient_regeneration_does_not_fall_back_to_saved_report",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_kana_compound_arguments_survive_save_and_read_without_regeneration",
+      "seconds": 0.018
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_kana_omitted_writing_feeling_survives_saved_read",
+      "seconds": 0.056
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_kana_owned_writing_feeling_survives_saved_read",
+      "seconds": 0.049
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_late_scene_is_saved_and_read_with_the_same_text_and_graph",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_lost_ack_not_retried_or_returned_as_saved",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_missing_predecessor_explanation_survives_save_and_read",
+      "seconds": 0.043
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_mixed_script_arguments_survive_save_and_read_without_regeneration",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_monthly_exclusive_end_and_no_view_time_regeneration",
+      "seconds": 0.009
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_negative_feeling_before_transition_survives_save_and_read",
+      "seconds": 0.08
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_old_feeling_snapshot_is_read_without_adding_conflicts",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_omitted_actor_action_and_order_survive_saved_read",
+      "seconds": 0.09
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_omitted_negative_action_polite_feeling_survives_saved_read",
+      "seconds": 0.119
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_omitted_negative_decision_polite_feeling_survives_saved_read",
+      "seconds": 0.077
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_omitted_owned_writing_feeling_survives_saved_read",
+      "seconds": 0.06
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_omitted_writing_feeling_survives_saved_read",
+      "seconds": 0.057
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_open_attribution_keeps_independent_content_after_save_and_read",
+      "seconds": 0.494
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_opposed_claims_survive_save_read_with_private_evidence_only",
+      "seconds": 0.105
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_opposed_feeling_spellings_in_supplements_never_commit",
+      "seconds": 0.132
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_partial_anxiety_supplements_survive_save_without_regeneration",
+      "seconds": 0.108
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_partial_map_with_unparsed_original_is_saved_and_read_without_regeneration",
+      "seconds": 0.576
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_partial_negative_anxiety_survives_save_and_read",
+      "seconds": 0.069
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_particle_negative_anxiety_survives_save_and_read",
+      "seconds": 0.073
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_past_anxiety_and_absent_relief_keep_saved_order",
+      "seconds": 0.035
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_past_decision_route_survives_save_and_read",
+      "seconds": 0.138
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_past_feeling_outgoing_order_survives_save_and_read",
+      "seconds": 0.09
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_past_feeling_survives_commit_and_read_without_regeneration",
+      "seconds": 0.141
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_polite_decrease_increase_return_survive_save_and_read",
+      "seconds": 0.132
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_polite_feeling_after_negative_decision_survives_saved_read",
+      "seconds": 0.122
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_polite_negative_past_events_survive_save_read_without_regeneration",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_polite_past_nonaction_survives_save_read_without_regeneration",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_polite_past_wishes_survive_save_and_read_without_regeneration",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_prefixed_feeling_route_survives_save_and_read",
+      "seconds": 0.129
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_prefixed_polite_compounds_survive_commit_and_read_without_regeneration",
+      "seconds": 0.626
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_previous_outside_retention_keeps_current_single_period_available",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_previous_saved_duplicate_gaps_keep_their_original_text_and_identity",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_previous_saved_predecessor_label_keeps_original_text_without_regeneration",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_protective_burden_survives_save_read_without_regeneration",
+      "seconds": 0.338
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_protective_intention_survives_save_read_with_private_evidence_separate",
+      "seconds": 0.057
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_read_never_generates_and_preserves_wire",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_read_only_retains_old_valid_saved_map",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_relational_writing_feeling_survives_saved_read",
+      "seconds": 0.074
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_relational_writing_place_feeling_survives_saved_read",
+      "seconds": 0.071
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_repeated_period_saves_compact_gaps_and_keeps_all_private_sources",
+      "seconds": 0.029
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_burden_rejects_invalid_shape_target_label_and_text",
+      "seconds": 0.023
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_cognition_keeps_uncertainty_without_private_content",
+      "seconds": 0.053
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_comparison_rejects_private_unknown_duplicate_and_inconsistent_fields",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_conflict_rejects_invalid_targets_shape_and_text",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_event_topic_commas_keep_scene_role_and_text_without_regeneration",
+      "seconds": 0.013
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_past_feeling_keeps_legacy_actor_label_without_reinterpretation",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_protective_rejects_other_target_and_false_outcome",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_relative_day_remains_statement_bound_when_read",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_saved_scene_role_action_chain_is_read_without_reinterpretation",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_scene_and_role_polarity_and_action_order_survive_save_and_read",
+      "seconds": 0.372
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_self_owned_writing_feeling_survives_saved_read",
+      "seconds": 0.066
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_separated_day_nominal_route_survives_save_and_read",
+      "seconds": 0.086
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_sequence_occurrences_survive_save_and_read_without_reinterpretation",
+      "seconds": 0.027
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_sequenced_writing_feeling_survives_saved_read",
+      "seconds": 0.043
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_split_feeling_attribution_preserves_only_grounded_saved_content",
+      "seconds": 0.044
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_split_sentence_preserves_only_complete_statement_after_save_read",
+      "seconds": 0.031
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_standalone_self_feeling_survives_save_and_read_without_regeneration",
+      "seconds": 0.412
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_status_selects_same_tier_default_mode",
+      "seconds": 0.008
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_successful_generation_emits_no_failure_log",
+      "seconds": 0.054
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_te_after_change_survives_commit_and_read_without_regeneration",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_unattributed_decision_route_survives_save_and_read",
+      "seconds": 0.06
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_unfinished_result_survives_commit_and_read_without_regeneration",
+      "seconds": 0.332
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_unproved_postposed_or_past_action_attribution_never_commits",
+      "seconds": 0.596
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_storage.SavedAnalysisTests",
+      "name": "test_written_anxiety_degrees_keep_saved_degree_and_order",
+      "seconds": 0.105
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_answer_binding_and_multiple_answers_fail_closed",
+      "seconds": 0.03
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_auth_failure_never_reads_a_period",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_comparison_preview_loads_and_rechecks_both_authenticated_periods",
+      "seconds": 0.023
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_comparison_preview_rejects_changed_previous_source_and_access",
+      "seconds": 0.125
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_comparison_preview_requires_complete_bounds_and_previous_access",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_generation_rechecks_cohort_record_answer_metadata_and_tier",
+      "seconds": 0.234
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_invalid_future_or_unretained_interval_is_not_silently_clipped",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_missing_record_wrong_owner_or_wrong_identity_are_rejected",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_old_answer_cannot_survive_parent_edit",
+      "seconds": 0.006
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_period_limit_incomplete_count_and_duplicate_ids_are_rejected",
+      "seconds": 0.003
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_plan_and_requested_mode_are_enforced_before_read",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_question_payload_must_bind_to_the_saved_question_row",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_saved_answer_updates_meaning_without_question_or_generated_body",
+      "seconds": 0.044
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_saved_records_generate_matching_safe_map_and_text",
+      "seconds": 0.022
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_saved_timestamp_and_exact_raw_commitment_are_preserved",
+      "seconds": 0.004
+    },
+    {
+      "class": "ai.tests.test_analysis_saved_period.SavedPeriodTests",
+      "name": "test_unsupported_semantics_do_not_fall_back_to_old_report",
+      "seconds": 0.014
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_different_nominal_relations_do_not_merge_or_disappear_in_comparison",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_following_attribution_or_retraction_is_not_lost_at_punctuation",
+      "seconds": 0.073
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_multiple_records_keep_shared_content_and_nondirectional_cooccurrence",
+      "seconds": 0.01
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_negative_past_and_explicit_day_keep_their_scope",
+      "seconds": 0.011
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_omitted_actor_correction_withdrawal_and_projection_keep_uncertainty",
+      "seconds": 0.052
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_omitted_actor_does_not_discard_a_split_written_topic",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_omitted_actor_occurrences_do_not_merge_or_assert_same_person_conflict",
+      "seconds": 0.035
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_omitted_actor_past_actions_keep_object_polarity_and_source",
+      "seconds": 0.15
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_omitted_actor_requires_closed_past_object_and_unreported_source",
+      "seconds": 0.185
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_omitted_actor_route_keeps_written_order_day_and_unknown_gaps",
+      "seconds": 0.032
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_period_preserves_each_written_sequence_without_cross_record_links",
+      "seconds": 0.016
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_quotations_reports_and_dreams_keep_attribution_boundary",
+      "seconds": 0.024
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_supplement_correction_and_withdrawal_preserve_remaining_period_content",
+      "seconds": 0.046
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_unread_scopes_do_not_become_actions_or_bridge_a_sequence",
+      "seconds": 0.04
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationTests",
+      "name": "test_written_nominal_relation_survives_with_original_evidence",
+      "seconds": 0.021
+    },
+    {
+      "class": "ai.tests.test_cmee_analysis_nominal_relations.NominalRelationStorageTests",
+      "name": "test_period_map_is_saved_and_reread_without_generation",
+      "seconds": 0.034
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_all_plans_use_the_same_current_map_and_free_monthly_is_available",
+      "seconds": 0.104
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_default_off_does_not_access_cumulative_store",
+      "seconds": 0.015
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_missing_or_invalid_auth_cannot_touch_source_or_evidence",
+      "seconds": 0.017
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_monthly_existing_capture_is_not_regenerated_after_current_becomes_uninterpretable",
+      "seconds": 0.045
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_no_saved_map_empty_sources_and_unparsed_sources_are_distinct",
+      "seconds": 0.074
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_real_generation_status_and_saved_same_text_graph_and_authenticated_owner",
+      "seconds": 0.041
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_storage_failure_and_generation_failure_do_not_become_empty_or_legacy",
+      "seconds": 0.019
+    },
+    {
+      "class": "ai.tests.test_analysis_observed_api.AnalysisApiTests",
+      "name": "test_unsupported_source_overrides_are_denied_and_legacy_is_not_merged",
+      "seconds": 0.02
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative_jobs.CumulativeJobTests",
+      "name": "test_existing_latest_refresher_uses_cumulative_and_never_logs_body",
+      "seconds": 0.005
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative_jobs.CumulativeJobTests",
+      "name": "test_input_queue_failure_fallback_uses_same_cumulative_owner",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative_jobs.CumulativeJobTests",
+      "name": "test_monthly_cron_includes_free_and_skips_old_table_notification_candidates",
+      "seconds": 0.003
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative_jobs.CumulativeJobTests",
+      "name": "test_monthly_dry_run_never_generates_or_captures",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative_jobs.CumulativeJobTests",
+      "name": "test_queued_old_standard_and_deep_do_not_restart_old_chain",
+      "seconds": 0.002
+    },
+    {
+      "class": "ai.tests.test_analysis_cumulative_jobs.CumulativeJobTests",
+      "name": "test_shared_monthly_refresher_exposes_saved_identity_not_a_backfill",
+      "seconds": 0.002
+    }
+  ],
+  "shared_owner_identity": {
+    "passed": 1,
+    "failed": 0,
+    "deselected": 194,
+    "note": "same PYTHONPATH as existing CI; initial omitted ai path caused collection error/0 executed, then corrected environment only",
+    "report_sha256": "9fb189c6cded32103fefda87b31f1c91426f4e075a3b0ab6b7058ce85b7aa7c5"
+  },
+  "total_distinct_including_owner": 820,
+  "api_commit": "f7a1389679f15dbb9f24c40c0c5ac0058423c106"
+}

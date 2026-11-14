@@ -1,0 +1,70 @@
+{
+  "status": "COMPLETE_RESEARCH_ONLY_NOT_NORMAL_ADOPTED",
+  "updates": 78,
+  "new_generations": 36,
+  "measurements": 140,
+  "model_loads": 3,
+  "seconds": 539.4723644570913,
+  "adapter_sha256": "a5eafe344189ede6a4a664396d43af651e5482c0d3c720d6b329a1b44d01bd41",
+  "config_sha256": "9bc9f1f3f2979d49911dae1b028cc2fb064e8e000baebcb84b84a3f50448b5cf",
+  "old_adapter_pairs_unchanged": true,
+  "all34_after_strict_returned": true,
+  "teacher_reproduction": {
+    "AT4": {
+      "matching": 4,
+      "total": 4
+    },
+    "UQ2": {
+      "matching": 2,
+      "total": 2
+    },
+    "MX2": {
+      "matching": 2,
+      "total": 2
+    },
+    "OA2": {
+      "matching": 2,
+      "total": 2
+    },
+    "SC6": {
+      "matching": 6,
+      "total": 6
+    },
+    "RC2": {
+      "matching": 2,
+      "total": 2
+    }
+  },
+  "replayed_candidates": 64,
+  "rejected_saved_responses": 4,
+  "saved_reader_generate_compiler_author_forbidden": true,
+  "improved": [
+    "SQ03_continuing_modifier_and_content_target",
+    "MD02_other_actor_negation_no_spurious_nominal_target"
+  ],
+  "restored_to_89ba": [
+    "OD01",
+    "MD01"
+  ],
+  "remaining": [
+    "HQ04_written_reason",
+    "MD01_modifier_scope",
+    "typed_meaning_adoption_and_actor_resolution",
+    "person_grounded_role_decision_choice",
+    "cross_record_recurrence_change",
+    "normal_observed_graph_connection"
+  ],
+  "next_initial_selection": "EXPLICIT_A5EAFE_9BC_FOR_RESEARCH_MATERIAL_CONTEXT_COMPARISON_ONLY",
+  "normal_adoption": false,
+  "product_credit": 0,
+  "all_source_manifest_members_match": true,
+  "weight_tensors": 112,
+  "weight_parameters": 3833856,
+  "weight_original_bytes_sha_matched": true,
+  "private_archive": {
+    "library_file_id": "libfile_d2746636f0a0819195c24541806470b3",
+    "bytes": 14889674,
+    "members": 299,
+    "sha256": "3918c413a712020bc2aadf091c6f6fac5ae86af214a2fa77f8cb0a568f312183"
+  }
+}

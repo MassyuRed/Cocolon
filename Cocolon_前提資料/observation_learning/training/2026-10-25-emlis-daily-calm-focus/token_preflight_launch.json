@@ -1,0 +1,19 @@
+{
+  "source_commit": "2adf549cf0da26487840833263a166b1b19eb832",
+  "cmd": [
+    "python",
+    "-B",
+    "/workspace/cocolon_4b_daily_calm_focus_pack_20261025/run_daily_calm_focus.py",
+    "--parent-pack",
+    "/workspace/cocolon_4b_daily_calm_pack_20261025",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--tokenize-only",
+    "--report",
+    "/workspace/cocolon_4b_daily_calm_focus_pack_20261025/token_mask_preflight.json"
+  ],
+  "exit_code": 0,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "gpu_calls": 0
+}

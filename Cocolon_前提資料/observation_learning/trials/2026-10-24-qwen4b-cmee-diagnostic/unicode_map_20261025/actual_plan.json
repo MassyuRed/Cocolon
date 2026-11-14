@@ -1,0 +1,32 @@
+{
+  "schema": "cocolon.emlis_4b_unicode_inference_check.v1",
+  "status": "AUTHORIZED_ONCE_CURRENT_MASH_CONTINUATION",
+  "inference_authorized": true,
+  "training_authorized": false,
+  "adapter_directory": "/workspace/cocolon_4b_continued_fit32_20261025/results/20261025-034400-79baf136/adapter",
+  "adapter_sha256": "ce644a5ba57dfcb9c8df047000cf45ba9ab32c1d09321d8a8da0f5a73fd6b0f4",
+  "dataset_manifest_sha256": "727fde1474c86c497e79ee3e6c8110dc8194b546f63fa8f238842701d848d69b",
+  "api_commit": "a3e82f0e2156f9142ca37878425eb0a4b6046761",
+  "pod_id": "y0eb0w0qn6nks0",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "input_tokens": [
+    1995,
+    5018
+  ],
+  "context_tokens": 8192,
+  "max_new_tokens": 2048,
+  "max_seconds": 900,
+  "seed": 20261024,
+  "greedy": true,
+  "gpu_hourly_usd": 0.26,
+  "process_time_allocation_usd": 0.065,
+  "pod_billing_hard_cap": false,
+  "automatic_pod_stop": false,
+  "retry": false,
+  "notes": "Same saved adapter, changed model-visible Unicode map and existing contract instructions; known FIT2 only, not unseen evaluation. No new teacher, optimizer/update, DB/Render/deploy, Pod lifecycle or dependency install. Monthly added budget remains JPY10000; Pod remains running per Mash."
+}

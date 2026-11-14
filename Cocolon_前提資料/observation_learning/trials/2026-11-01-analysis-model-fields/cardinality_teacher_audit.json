@@ -1,0 +1,50 @@
+{
+  "schema_version": "analysis_cardinality_teacher_coverage.v1",
+  "status": "COMPLETE_CPU_ONLY",
+  "model_calls": 0,
+  "model_loads": 0,
+  "new_training": 0,
+  "teacher_pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
+  "source_runner_sha256": "732d7602a2396b8d05b43d3e4caa6310cd08a9e02f32e46da942ff844e89e20c",
+  "source_plan_sha256": "1500481dda8c2f83f80c8c1f01becb7a1b5319bc33d973168795a1274ba4867c",
+  "output_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "output_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "teacher_pool": 86,
+  "target_wish_rows": [
+    "AT04",
+    "AT12",
+    "AT19",
+    "AT29",
+    "BT08"
+  ],
+  "wish_target_node_kind": "ATTENTION_OR_THOUGHT",
+  "target_positive_present_or_future_wish_rows": 5,
+  "target_past_wish_rows": 0,
+  "target_negative_wish_rows": 0,
+  "wish_field_ordinals": [
+    1
+  ],
+  "final_update_count": 18,
+  "final_update_wish_rows": 0,
+  "final_update_root_counts": {
+    "ACTION_OR_NONACTION": 12,
+    "ROLE": 14,
+    "IMMEDIATE_RESULT_OR_AFTERMATH": 2,
+    "WRITTEN_UNKNOWN": 6,
+    "ATTENTION_OR_THOUGHT": 0
+  },
+  "teacher_v4_rows": 86,
+  "teacher_v7_rows": 0,
+  "v4_system_sha256": "c0a36d5c7f5029b857135ac7c5ea00d75259fa97e03a3ef429f48e10c229d5aa",
+  "diagnostic_v7_system_sha256": "a2edc79a47389ae55db35a3bf6c3c8bbee2ec280040afc5bf220bc2303e4b412",
+  "v7_exact_v4_prefix": false,
+  "prompt_illustrative_past_wish_present_in_both": true,
+  "exact_evaluation_body_matches_in_pool": 0,
+  "interpretation": [
+    "Correct wish distinction exists in pooled assistant targets but is not rehearsed in final18 update stage.",
+    "Inherited9dc training is not established as missing; no causal model-internal conclusion.",
+    "System illustrative teaching is distinct from assistant target training.",
+    "v7 modifies actor/possessor instruction and appends ownership/responsibility examples; not just a v4 suffix."
+  ],
+  "next": "Independent CPU-only fact-versus-wish contrasts preserving existing5wish rows, then define one bounded training comparison; do not use B20/N raw or evaluation as teachers."
+}

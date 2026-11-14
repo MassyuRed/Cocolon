@@ -1,0 +1,16 @@
+{
+  "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+  "checks": {
+    "run_cache_prefix_shop.py": "a2fbfa8ee94e4f8fb86f110e368ec966cddf92450ca63df7abb87eb36ac31c06",
+    "plan.json": "32c1e85cf3c5eb0b18c499b3a5d072d1e8a16a84556b6063ce77ce4c789a392c",
+    "prefix_points.json": "9b1cd288cbbc9662c5495aad1f3b86d5b068ea610f13292a42632efa1469b77f"
+  },
+  "approval": {
+    "user_text": "「4B学習＋CMEE接続」を続けて。",
+    "received_date_utc": "2026-10-30",
+    "proposal_commit": "f5120ba03522b4f01e8f8ddde418bb126367d080",
+    "scope": "Immediately following the concrete one-SHOP same-prefix comparison proposal; one execution, max180 seconds, GPU processing prorated max USD0.014; preparation/recovery/holding etc extra. No training/free generation/new CMEE/retry.",
+    "interpretation_owner": "root Karen"
+  },
+  "no_model_execution": true
+}

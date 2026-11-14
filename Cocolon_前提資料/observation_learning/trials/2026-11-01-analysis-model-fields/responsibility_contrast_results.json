@@ -1,0 +1,526 @@
+{
+  "schema_version": "cocolon.analysis.responsibility_contrast.public_results.v1",
+  "date": "2026-11-05",
+  "scope": "Two independently synthetic inputs paired v4/v6 on identical snapshots; limited comparison of explicit responsibility ROLE and decision ACTION; no general quality or normal model adoption claim",
+  "provenance": "Karen independently synthetic inputs distinct from instructional fiction; no private user records or training targets; raw/request/messages remain in private evidence",
+  "api_commit": "8efd07e6ce76bfdb594a2d2a3b521e87b9889596",
+  "runner_commit": "cf3be847f98a9310e36172f3bafcf3e157f71938",
+  "status": "COMPLETE_LIMITED_COMPARISON",
+  "profiles": [
+    "selected_material.v4",
+    "selected_material.v6"
+  ],
+  "normal_adoption": false,
+  "deployed": false,
+  "model": {
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "pins": {
+      "accelerate": "1.15.0",
+      "peft": "0.21.2",
+      "safetensors": "0.8.0",
+      "transformers": "5.19.0"
+    },
+    "max_context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "max_seconds": 600,
+    "per_call_seconds": 45,
+    "initial_unchanged": true
+  },
+  "execution": {
+    "independent_inputs": 2,
+    "conditions": 4,
+    "new_generation": 4,
+    "stop_responses": 4,
+    "model_loads": 1,
+    "new_training": 0,
+    "seconds": 37.100583927705884,
+    "saved": 2,
+    "unsupported": 1,
+    "rejected": 1,
+    "v4_saved": 0,
+    "v4_inputs": 2,
+    "v6_saved": 2,
+    "v6_inputs": 2,
+    "v6_unparsed_records": 0
+  },
+  "prepare": {
+    "seconds": 5.1895546820014715,
+    "new_generation": 0,
+    "model_loads": 0,
+    "token_budgets": [
+      {
+        "id": "CP01_v4",
+        "input_tokens": 2694,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      },
+      {
+        "id": "CP01_v6",
+        "input_tokens": 3242,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      },
+      {
+        "id": "CP02_v4",
+        "input_tokens": 2692,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      },
+      {
+        "id": "CP02_v6",
+        "input_tokens": 3240,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      }
+    ],
+    "all_below_budget": true
+  },
+  "replay": {
+    "new_generation": 0,
+    "model_loads": 0,
+    "seconds": 0.3793268660083413,
+    "same_requests_and_responses_all4": true,
+    "same_text_coverage_status_errors_all4": true,
+    "projection_equal_except_fresh_artifact_uuid_all4": true,
+    "within_each_saved_artifact_current_monthly_readonly_exact_id_text_meta": true
+  },
+  "verification": {
+    "jupyter": {
+      "passed": 269,
+      "skipped": 12,
+      "warnings": 1,
+      "seconds": 25.16,
+      "sql": "NOT_EXECUTED_POSTGRESQL_WASM_UNCONFIGURED",
+      "runtime": {
+        "packages": {
+          "accelerate": "1.15.0",
+          "fastapi": "0.162.0",
+          "peft": "0.21.2",
+          "pydantic": "2.14.1",
+          "safetensors": "0.8.0",
+          "torch": "2.8.0+cu128",
+          "transformers": "5.19.0"
+        },
+        "python": "3.12.3"
+      }
+    },
+    "ci": {
+      "run_id": 42011295256,
+      "job_id": 127190714884,
+      "status": "ALL_STEPS_SUCCESS",
+      "api_commit": "8efd07e6ce76bfdb594a2d2a3b521e87b9889596",
+      "generation_storage": {
+        "passed": 2240,
+        "skipped": 1,
+        "subtests": 12048,
+        "seconds": 269.48
+      },
+      "shared_owner": {
+        "passed": 1,
+        "deselected": 194,
+        "seconds": 18.38
+      },
+      "cumulative_api_q3_jobs": {
+        "passed": 92,
+        "warnings": 1,
+        "subtests": 2,
+        "seconds": 39.99
+      },
+      "cumulative_sql": {
+        "status": "PASSED",
+        "source_records": 201,
+        "monthly_references": 15,
+        "scope": [
+          "owner",
+          "rank",
+          "immutability",
+          "deletion"
+        ]
+      },
+      "runtime": {
+        "python": "3.12.16",
+        "fastapi": "0.142.2",
+        "pydantic": "2.13.5"
+      }
+    },
+    "source_scope": {
+      "changed_api_files": [
+        "ai/services/ai_inference/analysis_cumulative_service.py",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+        "ai/tests/test_analysis_model_role_decision.py"
+      ],
+      "old_v4_messages_unchanged": true,
+      "normal_ensure_default": "selected_material.v4",
+      "v6_private_state": "cocolon.cmee.analysis_model_units_quoted_parents_state.material.v6",
+      "source_compiler_author_unchanged": true
+    }
+  },
+  "cases": [
+    {
+      "id": "CP01_v4",
+      "pair_id": "CP01",
+      "prompt_version": "selected_material.v4",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_original": {
+        "memo": "私は会場の準備を担当しました。その後、私は手順を決めました。",
+        "memo_action": "",
+        "selected_categories": [
+          "仕事"
+        ],
+        "selected_emotions": [
+          "平穏"
+        ],
+        "emotion_details": [
+          {
+            "strength": "medium",
+            "type": "平穏"
+          }
+        ],
+        "recorded_at": "2026-11-01T01:00:00"
+      },
+      "expected_nonempty_fields": 1,
+      "returned_field_count": 1,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION",
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2,
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ],
+            [
+              "EXPLICIT_ACTOR",
+              "RELATIVE_TIME"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "status": "UNSUPPORTED",
+      "source_calls": 1,
+      "error": null,
+      "content_text": null,
+      "meta": null,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "reading": {
+        "observed_issue": "responsibility root ACTION_OR_NONACTION; decision also contains RELATIVE_TIME qualifier; do not attribute unsupported result to one defect alone",
+        "strict_kind_not_relabelled": true
+      }
+    },
+    {
+      "id": "CP01_v6",
+      "pair_id": "CP01",
+      "prompt_version": "selected_material.v6",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_original": {
+        "memo": "私は会場の準備を担当しました。その後、私は手順を決めました。",
+        "memo_action": "",
+        "selected_categories": [
+          "仕事"
+        ],
+        "selected_emotions": [
+          "平穏"
+        ],
+        "emotion_details": [
+          {
+            "strength": "medium",
+            "type": "平穏"
+          }
+        ],
+        "recorded_at": "2026-11-01T01:00:00"
+      },
+      "expected_nonempty_fields": 1,
+      "returned_field_count": 1,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2,
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ],
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "status": "SAVED",
+      "source_calls": 1,
+      "error": null,
+      "content_text": "役割：選択カテゴリ：仕事\n会場の準備を担当した（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\nその後：手順を決める（実行済み）（1件の記録）\n記録内の順序：選択カテゴリ：仕事\n会場の準備を担当した（記録された担当） → 選択カテゴリ：仕事\nその後：手順を決める（実行済み）。原因を示す線ではありません。\n未確定（選択カテゴリ：仕事\n会場の準備を担当した（記録された担当））：確定していない項目：場面、考え・注意、結果・余韻。",
+      "meta": {
+        "accessibility_linear_order": [
+          "n1",
+          "n2"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [
+          {
+            "edge_kind": "OBSERVED_ORDER",
+            "edge_ref": "e1",
+            "from_ref": "n1",
+            "to_ref": "n2",
+            "visible_label": "記録内に書かれた順序"
+          }
+        ],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n会場の準備を担当した（記録された担当）"
+          },
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n2",
+            "visible_label": "選択カテゴリ：仕事\nその後：手順を決める（実行済み）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:31:42.576331+00:00",
+        "projection_of": "artifact:89e5f232522341f2a68375b58b3cc3cc@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "reading": {}
+    },
+    {
+      "id": "CP02_v4",
+      "pair_id": "CP02",
+      "prompt_version": "selected_material.v4",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_original": {
+        "memo": "僕は連絡を担当しなかった。僕は日程を決めなかった。",
+        "memo_action": "",
+        "selected_categories": [
+          "生活"
+        ],
+        "selected_emotions": [
+          "平穏"
+        ],
+        "emotion_details": [
+          {
+            "strength": "medium",
+            "type": "平穏"
+          }
+        ],
+        "recorded_at": "2026-11-01T01:00:00"
+      },
+      "expected_nonempty_fields": 1,
+      "returned_field_count": 1,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION",
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2,
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ],
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "status": "REJECTED",
+      "source_calls": 1,
+      "error": {
+        "detail": "analysis_saved_source_unavailable",
+        "status_code": 422
+      },
+      "content_text": null,
+      "meta": null,
+      "coverage": null,
+      "reading": {
+        "observed_issue": "responsibility root ACTION_OR_NONACTION; decision NEGATION quote is absent from its source unit and is rejected before saved map adoption",
+        "invalid_negation_quote": "しなかった",
+        "decision_source": "僕は日程を決めなかった",
+        "strict_source_rejection_retained": true
+      }
+    },
+    {
+      "id": "CP02_v6",
+      "pair_id": "CP02",
+      "prompt_version": "selected_material.v6",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_original": {
+        "memo": "僕は連絡を担当しなかった。僕は日程を決めなかった。",
+        "memo_action": "",
+        "selected_categories": [
+          "生活"
+        ],
+        "selected_emotions": [
+          "平穏"
+        ],
+        "emotion_details": [
+          {
+            "strength": "medium",
+            "type": "平穏"
+          }
+        ],
+        "recorded_at": "2026-11-01T01:00:00"
+      },
+      "expected_nonempty_fields": 1,
+      "returned_field_count": 1,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2,
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ],
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "status": "SAVED",
+      "source_calls": 1,
+      "error": null,
+      "content_text": "役割：選択カテゴリ：生活\n連絡を担当しなかった（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n日程を決める（行わなかった）（1件の記録）\n未確定（選択カテゴリ：生活\n連絡を担当しなかった（記録された担当））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：生活\n連絡を担当しなかった（記録された担当） ／ 選択カテゴリ：生活\n日程を決める（行わなかった））：段階同士のつながりは、この記録からは確定していません。",
+      "meta": {
+        "accessibility_linear_order": [
+          "n1",
+          "n2"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：生活\n連絡を担当しなかった（記録された担当）"
+          },
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n2",
+            "visible_label": "選択カテゴリ：生活\n日程を決める（行わなかった）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:31:42.576331+00:00",
+        "projection_of": "artifact:bec9f77a301b45889dd3f3375ce18bd0@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1",
+              "n2"
+            ],
+            "gap_ref": "g4",
+            "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "reading": {}
+    }
+  ],
+  "limits": [
+    "Two local synthetic comparisons do not establish general role/node-kind quality or personal criteria understanding",
+    "v6 remains opt-in and unadopted for normal service",
+    "Original strict quote, field cardinality, actor, negation, kind and finite witnesses retained; no relabelling or finite rescue of v4 outputs",
+    "CP01 written order is not a causal claim; CP02 has no order edge",
+    "Responsibility is not completion of assigned work; decision is not execution or fulfilment of its object",
+    "No supplemental ROLE/responsibility/decision admission extension; no source/compiler/author grammar expansion",
+    "General criteria, implicit role, motives, cross-record meaning, HTTP transport, IF/Saved, device and deployment remain unresolved"
+  ],
+  "private_evidence": {
+    "pod_bundle_bytes": 452421,
+    "pod_bundle_sha256": "13784ec43fe674c64158aa6a3daeec0373af6fc4ae9ed5898afb219f99b2ce01",
+    "inner_files_verified": 18,
+    "reference": "https://chatgpt.com/library?file_id=libfile_f5d9b44d3f8c8191a9ed77f9ef55ebad&account_id=personal",
+    "durable_bundle_bytes": 505188,
+    "durable_bundle_sha256": "af3e5a3e808a806ab7a7bc97422f739010368485c37065b694e24e5b818aeecb",
+    "durable_bundle_contents": "original Pod bundle, final decoded CI log and exact three source blob SHAs"
+  }
+}

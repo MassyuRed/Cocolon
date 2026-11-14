@@ -1,0 +1,7 @@
+{
+  "pid": 185665,
+  "source_commit": "0b0f99d9d2473082826d5b005ced65e169b84fc9",
+  "log": "/workspace/cocolon_localized30_cpu_v2_20261027.log",
+  "started_unix": 1793087540.3274977,
+  "reason": "CPU empty-mask arithmetic and final source verification; no real model execution"
+}

@@ -1,0 +1,275 @@
+{
+  "status": "CLOSED_FAILED_NOT_ADOPTED_NO_RETRY",
+  "date_jst": "2026-10-30",
+  "source_commit": "5a333d68ed136483ae910a040a7fce4308ff3f13",
+  "proposal_sha256": "51573dba7e31054f7b97258295293d120e34b7e57719284187b31b6fc61e4d4d",
+  "approval_sha256": "5ea2d94273417b12d6eb02f6fef02e86a7d02976c16ececbf50346208188883f",
+  "processing_seconds": 928.9340299230535,
+  "process_cost_usd": 0.07225042454957083,
+  "prior_hourly_usd": 0.28,
+  "current_rate_requeried": false,
+  "preparation_recovery_holding_storage_network_tax_extra": true,
+  "outer_seconds": 930.2798354179831,
+  "exit_code": 1,
+  "max_seconds": 2700,
+  "max_process_usd": 0.21,
+  "retry": false,
+  "model_loads": 2,
+  "training_forwards": 38,
+  "optimizer_steps": 38,
+  "teacher_evaluation_forwards": 57,
+  "measurements": 3,
+  "measurement_rows_each": 19,
+  "free_generations": 8,
+  "eos_completed": 7,
+  "length_capped": 1,
+  "new_cmee_calls": 0,
+  "new_pair_meaning": 0,
+  "new_pair_body": 0,
+  "new_pair_saved_cold": 0,
+  "new_pair_total": 2,
+  "old9": "NOT_RUN_NEW_PAIR_FAILED",
+  "new_cases": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "stages": 3,
+      "reason": "stage3_strict_json_extra_data",
+      "eos": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "stages": 5,
+      "reason": "stage5_length512_no_eos_and_nonprose_invalid_json",
+      "eos": false
+    }
+  ],
+  "nll": [
+    {
+      "phase": "before_updates",
+      "updates": 0,
+      "rows": 19,
+      "weighted_all": 0.023075371382822476,
+      "weighted_new10": 0.09682479306221779,
+      "weighted_old9": 0.0010858868564065723,
+      "new_rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.022342879325151443
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.023360617458820343
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.012640080414712429
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.021489497274160385
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.0038787927478551865
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.009513058699667454
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.0643913745880127
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.06072299927473068
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.5766382217407227
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.7578535079956055
+        }
+      ]
+    },
+    {
+      "phase": "after19_updates",
+      "updates": 19,
+      "rows": 19,
+      "weighted_all": 0.020423936415274808,
+      "weighted_new10": 0.08609454790516115,
+      "weighted_old9": 0.0008432690376405824,
+      "new_rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.03513539582490921
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.013523264788091183
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.007926972582936287
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.01738789491355419
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.0011452015023678541
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.031879205256700516
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.03757905960083008
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.04398727789521217
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.508039116859436
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.6925073266029358
+        }
+      ]
+    },
+    {
+      "phase": "after38_saved_reload",
+      "updates": 38,
+      "rows": 19,
+      "weighted_all": 0.01377653917164203,
+      "weighted_new10": 0.05601604195714131,
+      "weighted_old9": 0.0011822045754598294,
+      "new_rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.011979983188211918
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.009299810975790024
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.0029623324517160654
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.009248998947441578
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.011821628548204899
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.006177783943712711
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.024618100374937057
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.023816373199224472
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.3382960259914398
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.4822186529636383
+        }
+      ]
+    }
+  ],
+  "tensors": {
+    "count": 112,
+    "parameters": 3833856,
+    "dtype": "F32",
+    "all_finite": true,
+    "changed": 112,
+    "initial_sha256": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab",
+    "final_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a"
+  },
+  "all_266_frozen_and_initial_unchanged": true,
+  "archive": {
+    "members": 56,
+    "bytes": 14631408,
+    "sha256": "3916e2e72b1ea8e1bd4261932362ffd4f37838a292c3a42aebf224297589302a",
+    "all_crc_bytes_sha_verified": true
+  },
+  "weights": {
+    "library_file_id": "libfile_e2b0cd55d6c08191ba3a9ab1d6da4386",
+    "url": "https://chatgpt.com/library?file_id=libfile_e2b0cd55d6c08191ba3a9ab1d6da4386&account_id=personal",
+    "file": "/workspace/scratch/04ec9089fbc2/cocolon-fit38-weights-20261030.zip",
+    "bytes": 14201522,
+    "sha256": "06c25a9918ade9a14bb06bb03b4b5e37dbd32a119ebd49bbba8b0d8c5ccb2535",
+    "xattrs_applied": true,
+    "full_base_weights_included": false,
+    "optimizer_rng_resume_state_included": false
+  },
+  "root_content_read": {
+    "all_actual_raws_read": 8,
+    "all_teacher_comparisons": 8,
+    "quote_literals_grounded": 35,
+    "prompt_chain_all_actual_only": true,
+    "exact_gold_prefix_calls": [
+      "BOOK1",
+      "BOOK2",
+      "BOOK3",
+      "SHOP1",
+      "SHOP2"
+    ],
+    "note": "Codex Work root content review only; no formal Pro/Ultra/human Product Read authority."
+  },
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "formal_acceptance": "0/3",
+  "management_percent": 54.5,
+  "gpu": "NVIDIA RTX A5000; post recovery 1MiB/0%, kept running",
+  "runpod_management_stop_restart_delete_operations": 0
+}

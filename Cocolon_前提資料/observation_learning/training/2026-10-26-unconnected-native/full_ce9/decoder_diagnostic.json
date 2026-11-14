@@ -1,0 +1,12 @@
+{
+  "status": "UNCHANGED_STRICT_DECODER_FIRST_ERROR_ONLY",
+  "api": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "cases": {
+    "BOOK": "undefined_named_reference",
+    "SHOP": "duplicate_or_invalid_quote_name"
+  },
+  "raw_repairs": false,
+  "meaning_admission_rerun": false,
+  "model_calls": 0,
+  "sql_operations": 0
+}

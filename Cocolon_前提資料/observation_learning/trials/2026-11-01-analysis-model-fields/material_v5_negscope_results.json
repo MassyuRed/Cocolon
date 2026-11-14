@@ -1,0 +1,48 @@
+{
+  "status": "CANDIDATE_REJECTED_NO_NORMAL_ADOPTION",
+  "trial": "material_v5_negscope_trial.py",
+  "plan_section": 136,
+  "result_section": 137,
+  "profile": "selected_material.v5",
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "api_overlay_only": true,
+  "api_branch_commit": false,
+  "new_generations": 30,
+  "reused_before": 30,
+  "model_loads": 1,
+  "training_updates": 0,
+  "new_weights": 0,
+  "seconds": 282.99132153764367,
+  "cpu_seconds": 11.40643251966685,
+  "tests_passed": 134,
+  "before_candidate": 26,
+  "after_candidate": 29,
+  "before_typed": 18,
+  "after_typed": 18,
+  "new_typed": [
+    "X03"
+  ],
+  "lost_typed": [
+    "PV01"
+  ],
+  "semantic_regressions": [
+    "HQ04",
+    "AT24"
+  ],
+  "common_typed_graph_visible_equal": 17,
+  "exact_responses": 60,
+  "saved_candidate_replays": 55,
+  "saved_typed_replays": 36,
+  "original_members": 338,
+  "original_manifest_members": 337,
+  "evidence_url": "https://chatgpt.com/library?file_id=libfile_8b3e4293fa78819195fae244ffcb0caf&account_id=personal",
+  "evidence_bytes": 801917,
+  "evidence_sha256": "337a73c343e015343507a7e156e334aca85909873d3771e3bc613e5c8bde2a7e",
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "gpu": "2 MiB, 0 %",
+  "compute_apps": "",
+  "rental": "maintained",
+  "structure_map_delta": "NONE",
+  "product_credit": 0
+}

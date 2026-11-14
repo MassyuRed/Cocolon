@@ -1,0 +1,230 @@
+{
+  "cases": [
+    {
+      "name": "repeated",
+      "projection": {
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "wire_kind": "watashi.map.v2",
+        "projection_of": "artifact:synthetic-repeated@1",
+        "artifact_version": 1,
+        "period_label": "2026-10-01T00:00:00+00:00 ～ 2026-10-03T00:00:00+00:00",
+        "period_comparison": {
+          "state": "NO_PREVIOUS",
+          "reason_codes": [],
+          "safe_change_kinds": []
+        },
+        "nodes": [
+          {
+            "node_ref": "n1",
+            "node_kind": "ACTION_OR_NONACTION",
+            "visible_label": "考えをノートに書く（実行済み）",
+            "evidence_badge_count": 2
+          },
+          {
+            "node_ref": "n2",
+            "node_kind": "ATTENTION_OR_THOUGHT",
+            "visible_label": "仕事を続けることへの希望",
+            "evidence_badge_count": 2
+          }
+        ],
+        "edges": [
+          {
+            "edge_ref": "e1",
+            "edge_kind": "REPEATED_COOCCURRENCE",
+            "visible_label": "複数の記録で一緒に現れた内容",
+            "endpoint_refs": [
+              "n1",
+              "n2"
+            ]
+          }
+        ],
+        "annotation_badges": [],
+        "unknown_gaps": [
+          {
+            "gap_ref": "g1",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "場面は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g2",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "役割は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g3",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "結果・余韻は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g4",
+            "between_node_refs": [
+              "n1",
+              "n2"
+            ],
+            "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g5",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "場面は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g6",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "役割は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g7",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "結果・余韻は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g8",
+            "between_node_refs": [
+              "n1",
+              "n2"
+            ],
+            "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+          }
+        ],
+        "conflict_badges": [],
+        "accessibility_linear_order": [
+          "n1",
+          "n2"
+        ]
+      },
+      "text_projection": {
+        "projection_of": "artifact:synthetic-repeated@1",
+        "text": "行動・非行動：考えをノートに書く（実行済み）（2件の記録）\n考え・注意：仕事を続けることへの希望（2件の記録）\n複数の記録で一緒に現れた内容：考えをノートに書く（実行済み） ／ 仕事を続けることへの希望。順序や原因は確定していません。\n未確定（考えをノートに書く（実行済み））：場面は、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み））：役割は、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み））：結果・余韻は、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み） ／ 仕事を続けることへの希望）：段階同士のつながりは、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み））：場面は、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み））：役割は、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み））：結果・余韻は、この記録からは確定していません。\n未確定（考えをノートに書く（実行済み） ／ 仕事を続けることへの希望）：段階同士のつながりは、この記録からは確定していません。",
+        "accessibility_linear_order": [
+          "n1",
+          "n2"
+        ]
+      }
+    },
+    {
+      "name": "corrected",
+      "projection": {
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "wire_kind": "watashi.map.v2",
+        "projection_of": "artifact:synthetic-corrected@1",
+        "artifact_version": 1,
+        "period_label": "2026-10-01T00:00:00+00:00 ～ 2026-10-03T00:00:00+00:00",
+        "period_comparison": {
+          "state": "NO_PREVIOUS",
+          "reason_codes": [],
+          "safe_change_kinds": []
+        },
+        "nodes": [
+          {
+            "node_ref": "n1",
+            "node_kind": "ATTENTION_OR_THOUGHT",
+            "visible_label": "仕事を続けることへの希望",
+            "evidence_badge_count": 2
+          },
+          {
+            "node_ref": "n2",
+            "node_kind": "ACTION_OR_NONACTION",
+            "visible_label": "考えをノートに書く（行わなかった）",
+            "evidence_badge_count": 1
+          },
+          {
+            "node_ref": "n3",
+            "node_kind": "ACTION_OR_NONACTION",
+            "visible_label": "考えをノートに書く（実行済み）",
+            "evidence_badge_count": 1
+          }
+        ],
+        "edges": [],
+        "annotation_badges": [],
+        "unknown_gaps": [
+          {
+            "gap_ref": "g1",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "場面は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g2",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "役割は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g3",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "結果・余韻は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g4",
+            "between_node_refs": [
+              "n1",
+              "n2"
+            ],
+            "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g5",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "場面は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g6",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "役割は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g7",
+            "between_node_refs": [
+              "n1"
+            ],
+            "visible_label": "結果・余韻は、この記録からは確定していません。"
+          },
+          {
+            "gap_ref": "g8",
+            "between_node_refs": [
+              "n1",
+              "n3"
+            ],
+            "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+          }
+        ],
+        "conflict_badges": [],
+        "accessibility_linear_order": [
+          "n1",
+          "n2",
+          "n3"
+        ]
+      },
+      "text_projection": {
+        "projection_of": "artifact:synthetic-corrected@1",
+        "text": "考え・注意：仕事を続けることへの希望（2件の記録）\n行動・非行動：考えをノートに書く（行わなかった）（1件の記録）\n行動・非行動：考えをノートに書く（実行済み）（1件の記録）\n未確定（仕事を続けることへの希望）：場面は、この記録からは確定していません。\n未確定（仕事を続けることへの希望）：役割は、この記録からは確定していません。\n未確定（仕事を続けることへの希望）：結果・余韻は、この記録からは確定していません。\n未確定（仕事を続けることへの希望 ／ 考えをノートに書く（行わなかった））：段階同士のつながりは、この記録からは確定していません。\n未確定（仕事を続けることへの希望）：場面は、この記録からは確定していません。\n未確定（仕事を続けることへの希望）：役割は、この記録からは確定していません。\n未確定（仕事を続けることへの希望）：結果・余韻は、この記録からは確定していません。\n未確定（仕事を続けることへの希望 ／ 考えをノートに書く（実行済み））：段階同士のつながりは、この記録からは確定していません。",
+        "accessibility_linear_order": [
+          "n1",
+          "n2",
+          "n3"
+        ]
+      }
+    }
+  ]
+}

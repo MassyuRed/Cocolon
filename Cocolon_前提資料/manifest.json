@@ -1,5 +1,9 @@
 {
-  "revision_date": "2026-08-10",
+  "revision_date": "2026-10-22",
+  "whole_product_current_state": "00_cocolon_current_product_and_state.md",
+  "whole_product_current_state_scope": "ALL_COCOLON_FUNCTIONS_DECISIONS_IMPLEMENTATION_DEPLOYMENT_DEVICE_ACCEPTANCE_AND_REMAINING_WORK",
+  "current_read_order": "AGENTS.md -> work_attitude_rules_for_karen/00_read_first.txt -> whole_product_current_state FULL FRESH ORIGINAL -> applicable detailed owners and actuals",
+  "canonical_current_authority_scope": "CYCLE001_ONLY",
   "source_repositories": [
     "Cocolon",
     "mashos-api"
@@ -15,7 +19,7 @@
     "Cocolon_postwrite": "resolve_from_github_revision_containing_the_2026_08_02_full_premise_audit_checkpoint",
     "mashos-api": "MassyuRed/mashos-api:main@45bf98f9034261d3adb3e808d6d759f2334e2d25",
     "verified_at": "2026-08-10 JST",
-    "current_authority": "08_cycle001_current_state.md for current navigation + current derivative exact3 for product/design/route + 07_latest_snapshot_diff.md for milestone evidence only + 11 CURRENT_NORMATIVE_CONTRACT for GitHub reflection + 13 CURRENT_NORMATIVE_CONTRACT for Work test-runner runtime + 14 CURRENT continuous durable recording and emergency handoff"
+    "current_authority": "Whole product: 00_cocolon_current_product_and_state.md (fresh original, mandatory full read); Cycle001 navigation only: 08_cycle001_current_state.md; detailed product/design owners and actuals retain their scopes; 07 is milestone history. Historical pinned heads below are not current heads."
   },
   "phase4_current_owner_map": {
     "status": "PHASE4_PREPARED_NOT_PUBLISHED",
@@ -44,7 +48,8 @@
     "structural_docs": "only_on_structure_owner_contract_read_order_or_naming_boundary_change",
     "full_audit": "phase_rc_release_gate_milestones",
     "zip_delivery": "only_when_github_reflection_fails; changed_and_new_files_only",
-    "continuous_durable_checkpoint": "during_work_after_material_artifact_review_authority_execution_or_next_action_change; do_not_wait_for_user_or_planned_session_end"
+    "continuous_durable_checkpoint": "during_work_after_material_artifact_review_authority_execution_or_next_action_change; do_not_wait_for_user_or_planned_session_end",
+    "whole_product_current_state": "Each work unit: check relevant delta; replace changed function/decision/state/remaining work/evidence in same change unit; no delta: one line with reason in existing work record; do not append daily current history."
   },
   "last_full_audit_source_policy": {
     "Cocolon": "MassyuRed/Cocolon:main@c5bab4ca174f95c5e689e33e0a00e1f35cfc44e3",
@@ -1526,6 +1531,10 @@
     {
       "path": "00_karen_read_first.md",
       "purpose": "華恋用READ FIRST。08のcurrent navigation、current roadmap / alignment / Closure Route、11の唯一のGitHub反映契約、単独writerのactual environment、current NLS authority stopを最初に確認する。"
+    },
+    {
+      "path": "00_cocolon_current_product_and_state.md",
+      "purpose": "全作業で毎回全文読む全機能・全状態の現在地。関連差分を作業と同じ変更単位で置換更新。08はCycle001専用、07は履歴。"
     },
     {
       "path": "01A_cocolon_overall_structure_app_foundation_home.md",

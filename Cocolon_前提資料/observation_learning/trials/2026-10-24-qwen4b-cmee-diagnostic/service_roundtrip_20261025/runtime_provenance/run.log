@@ -1,0 +1,10 @@
+{"status": "FAILED_NO_RETRY", "model_calls_started": 0, "model_calls_completed": 0, "service_saved_roundtrip": false, "seconds": 0.03718073572963476}
+ARCHIVE_SHA256 cb6b4e4968bf6e6069b63aa3b4043b29f0934a9f3bb3f4fd25dfa8f6056b7528
+Traceback (most recent call last):
+  File "/workspace/cocolon_4b_service_runtime_20261025/run_service_roundtrip.py", line 464, in <module>
+    main(parser.parse_args())
+  File "/workspace/cocolon_4b_service_runtime_20261025/run_service_roundtrip.py", line 394, in main
+    load_api(api_root, args.api_commit)
+  File "/workspace/cocolon_4b_unicode_fit32_20261025/verify_cmee.py", line 48, in load_api
+    raise ValueError("cmee_api_source_not_clean_at_fixed_commit")
+ValueError: cmee_api_source_not_clean_at_fixed_commit

@@ -1,0 +1,143 @@
+"""Approved one-pass native15 trial; --check is CPU-only, --execute is once."""
+import argparse, gc, hashlib, importlib.metadata, importlib.util, json, math, os
+from pathlib import Path
+import random, shutil, signal, sys, time, traceback
+from unittest.mock import patch
+sys.dont_write_bytecode=True
+LEGACY=Path('/workspace/cocolon_4b_service_binding_legacy_reference_20261025')
+JOINT=Path('/workspace/cocolon_4b_quote_joint_pack_20261026')
+API=Path('/workspace/cocolon_sixrow_api_20261026')
+INITIAL=Path('/workspace/cocolon_4b_quote_joint_fit12_20261026/adapter')
+OUTPUT=Path('/workspace/cocolon_native15_run_20261026')
+HELPER_SHA='2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d'
+JOINT_SHA='c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128'
+PROPOSAL_SHA='e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9'
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def require(v,s):
+ if not v:raise ValueError(s)
+def dump(p,v):
+ p=Path(p);tmp=p.with_suffix(p.suffix+'.tmp');tmp.write_text(json.dumps(v,ensure_ascii=False,indent=2,allow_nan=False)+'\n');tmp.replace(p)
+def prepare(pack):
+ require(os.environ.get('HF_HUB_OFFLINE')==os.environ.get('TRANSFORMERS_OFFLINE')=='1','offline_required')
+ plan=json.loads((pack/'gpu15.plan.json').read_text());proposal=json.loads((pack/'gpu15.proposed.json').read_text())
+ require(sha(pack/'gpu15.proposed.json')==PROPOSAL_SHA,'proposal_changed')
+ require({k:v for k,v in plan.items() if k in proposal}=={**proposal,'status':'AUTHORIZED_ONCE','gpu_run_authorized':True,'implementation_required':False},'approved_scope_changed')
+ require(plan.get('approval_basis')=='Mash explicit approval of 5ba8c370 native15-gpu-proposal: 進めていいよ。','approval_missing')
+ require(sha(__file__)==plan['runner_sha256'],'runner_changed')
+ for n,s in proposal['payloads'].items():
+  p=pack/n;require(p.is_file() and not p.is_symlink() and p.stat().st_size==s['bytes'] and sha(p)==s['sha256'],'payload_changed:'+n)
+ require(sha(LEGACY/'run_pilot.py')==HELPER_SHA and sha(JOINT/'run_quote_joint_fit.py')==JOINT_SHA,'immutable_helper_changed')
+ for path,expected in json.loads((pack/'api_blobs.json').read_text()).items():
+  b=(API/path).read_bytes();require(hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()==expected,'api_blob_changed:'+path)
+ sys.path.insert(0,str(LEGACY));import run_pilot as r
+ versions={n:importlib.metadata.version(n) for n in r.PINS};require(versions==r.PINS,'dependency_changed')
+ spec=importlib.util.spec_from_file_location('native15_archive_owner',JOINT/'run_quote_joint_fit.py');joint=importlib.util.module_from_spec(spec);spec.loader.exec_module(joint)
+ require(r.adapter_hashes(INITIAL)==plan['initial_adapter_sha256'],'initial_adapter_changed')
+ rows=r.read_jsonl(pack/'train_messages.jsonl');cases=r.read_jsonl(pack/'eval_inputs.jsonl');require(len(rows)==len(cases)==15,'row_count')
+ require([x['id'] for x in rows]==plan['training_order']==[x['case_id'] for x in cases],'row_order')
+ from transformers import AutoTokenizer
+ tok=AutoTokenizer.from_pretrained(r.MODEL,revision=r.REVISION,local_files_only=True,trust_remote_code=False)
+ encoded=[];stats=[]
+ for row,case in zip(rows,cases,strict=True):
+  require([m['role'] for m in row['messages']]==['system','user','assistant'],'training_roles')
+  require(case['messages']==row['messages'][:-1],'evaluation_teacher_leak')
+  e,prefix=r.encode_training(tok,row['messages'],context=8192);cap=plan['generation_caps'][row['id']]
+  require(cap==case['max_new_tokens'] and prefix+cap<=8192 and len(e['input_ids'])-prefix<=cap,'token_scope')
+  require(tok.eos_token_id in e['labels'][prefix:] and all(x==-100 for x in e['labels'][:prefix]) and e['labels'][prefix:]==e['input_ids'][prefix:],'assistant_eos_loss')
+  encoded.append(e);stats.append(dict(id=row['id'],prompt_tokens=prefix,assistant_eos_tokens=len(e['input_ids'])-prefix,full_tokens=len(e['input_ids']),generation_cap=cap))
+ pre=json.loads((pack/'cpu_preparation.json').read_text())
+ require([{k:c[k] for k in stats[0]} for c in pre['cases']]==stats,'cpu_preparation_changed')
+ return plan,r,joint,tok,rows,cases,encoded,dict(status='CPU_RUNNER_READY_MODEL_NOT_LOADED',rows=stats,dependency_versions=versions,runner_sha256=sha(__file__),proposal_sha256=PROPOSAL_SHA)
+def execute(pack,source_commit):
+ require(len(source_commit)==40 and all(c in '0123456789abcdef' for c in source_commit),'source_commit_required')
+ OUTPUT.mkdir(exist_ok=False)
+ started=time.monotonic();deadline=started+2700
+ report=dict(status='STARTED_ONCE',source_commit=source_commit,stage='prepare',started_unix=time.time(),optimizer_steps_completed=0,model_calls_started=0,model_calls_completed=0,base_model_loads_started=0,product_accepted=False,automatic_progression=False,retry=False,service_sql_calls=0,strict_optimizer_resume=False,calls=[])
+ def checkpoint():
+  report['seconds']=time.monotonic()-started;dump(OUTPUT/'run.json',report)
+ def timeout(*_):raise TimeoutError('native15_global_deadline_no_retry')
+ signal.signal(signal.SIGALRM,timeout);signal.signal(signal.SIGTERM,timeout);signal.setitimer(signal.ITIMER_REAL,2700)
+ model=None;trainable=None;r=None;joint=None;optimizer=None
+ checkpoint()
+ try:
+  plan,r,joint,tok,rows,cases,encoded,check=prepare(pack)
+  report['plan']=plan;report['cpu_runner_check']=check
+  for n in ['gpu15.plan.json','gpu15.proposed.json','train_messages.jsonl','eval_inputs.jsonl','cpu_preparation.json','api_blobs.json']:
+   shutil.copyfile(pack/n,OUTPUT/n)
+  shutil.copyfile(__file__,OUTPUT/'run_native15.py')
+  import torch
+  from peft import PeftModel
+  from transformers import StoppingCriteria,StoppingCriteriaList
+  require(torch.cuda.device_count()==1,'one_gpu_required');report['gpu']=r.gpu_profile(torch,{'minimum_free_gib':14});require('A4500' in report['gpu']['name'],'existing_a4500_only')
+  config=json.loads((INITIAL/'adapter_config.json').read_text())
+  require(config.get('base_model_name_or_path')==r.MODEL and set(config.get('target_modules',[]))==r.EXPECTED_TARGETS and config.get('r')==8 and config.get('lora_alpha')==16 and config.get('lora_dropout')==0 and config.get('bias')=='none','adapter_config_changed')
+  torch.cuda.reset_peak_memory_stats();report.update(stage='loading_initial',base_model_loads_started=1);checkpoint()
+  model=PeftModel.from_pretrained(r.load_base(),INITIAL,is_trainable=True,local_files_only=True)
+  trainable=[(n,p) for n,p in model.named_parameters() if p.requires_grad]
+  require(len(trainable)==32 and all('lora_' in n and '.self_attn.' in n and str(p.dtype)=='torch.float32' and torch.isfinite(p).all().item() for n,p in trainable),'trainable_scope')
+  def evaluate_one(case,phase):
+   nonlocal model
+   require(time.monotonic()<deadline-5,'global_deadline_before_call')
+   call_deadline=min(deadline,time.monotonic()+180);triggered=False;original=model.generate
+   class Bounded(StoppingCriteria):
+    def __call__(self,*a,**k):
+     nonlocal triggered
+     triggered=time.monotonic()>=call_deadline;return triggered
+   def generate(*a,**kw):
+    kw['stopping_criteria']=StoppingCriteriaList([*list(kw.get('stopping_criteria') or []),Bounded()]);return original(*a,**kw)
+   report['stage']=phase;report['model_calls_started']+=1;checkpoint()
+   name=f"{phase}_{case['case_id']}.jsonl";path=OUTPUT/name
+   with patch.object(model,'generate',generate):
+    r.evaluate(model,tok,[case],path,{'context_tokens':8192,'max_new_tokens':plan['generation_caps'][case['case_id']]},adapter_revision=report.get('adapter_sha256',plan['initial_adapter_sha256'])['adapter_model.safetensors'])
+   raw=r.read_jsonl(path);require(len(raw)==1,'raw_count')
+   report['model_calls_completed']+=1;report['calls'].append(dict(phase=phase,case_id=case['case_id'],path=name,eos_reached=raw[0]['eos_reached'],timeout_triggered=triggered,raw_sha256=sha(path)))
+   checkpoint();require(not triggered and time.monotonic()<call_deadline,'per_call_or_global_deadline_no_retry')
+  byid={c['case_id']:c for c in cases}
+  for cid in plan['before_ids']:evaluate_one(byid[cid],'before')
+  # evaluate() changes eval/use_cache; return explicitly to the approved loss.
+  random.seed(plan['seed']);torch.manual_seed(plan['seed']);torch.cuda.manual_seed_all(plan['seed'])
+  model.config.use_cache=False;model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant':False});model.enable_input_require_grads();model.train()
+  optimizer=torch.optim.AdamW([p for n,p in trainable],lr=5e-5,weight_decay=0.)
+  report['stage']='training';checkpoint()
+  with (OUTPUT/'training.jsonl').open('x') as stream:
+   for i,item in enumerate(encoded):
+    require(time.monotonic()<deadline,'global_deadline_before_update')
+    ids=torch.tensor([item['input_ids']],dtype=torch.long,device='cuda:0');labels=torch.tensor([item['labels']],dtype=torch.long,device='cuda:0')
+    optimizer.zero_grad(set_to_none=True);loss=r.teacher_loss(model,input_ids=ids,attention_mask=torch.ones_like(ids),labels=labels,encoded=item)
+    require(torch.isfinite(loss).item(),'nonfinite_loss');loss.backward()
+    norm=float(torch.nn.utils.clip_grad_norm_([p for n,p in trainable],1.,error_if_nonfinite=True).cpu());require(math.isfinite(norm) and norm>0,'invalid_gradient')
+    optimizer.step();report['optimizer_steps_completed']=i+1
+    stream.write(json.dumps(dict(step=i+1,id=rows[i]['id'],loss=float(loss.detach().cpu()),gradient_norm=norm))+'\n');stream.flush();checkpoint();del ids,labels,loss
+  optimizer.zero_grad(set_to_none=True);optimizer=None
+  require(all(torch.isfinite(p).all().item() for n,p in trainable),'nonfinite_final_weights')
+  model.save_pretrained(OUTPUT/'adapter',safe_serialization=True);report.update(stage='saved_before_reload',adapter_sha256=r.adapter_hashes(OUTPUT/'adapter'));checkpoint();joint.archive(OUTPUT,r)
+  trainable=None;model=None;gc.collect();torch.cuda.empty_cache()
+  report.update(stage='loading_saved_inference_only',base_model_loads_started=2);checkpoint()
+  model,tensors=r.load_saved_adapter(OUTPUT/'adapter',report['adapter_sha256']);dump(OUTPUT/'reloaded_tensors.json',tensors)
+  for cid in plan['after_ids']:evaluate_one(byid[cid],'after')
+  report.update(status='RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW',stage='raw_complete',peak_allocated_bytes=torch.cuda.max_memory_allocated(),peak_reserved_bytes=torch.cuda.max_memory_reserved())
+ except BaseException as exc:
+  report.update(status='STOPPED_NO_RETRY',error_type=type(exc).__name__,reason=str(exc),traceback=traceback.format_exc())
+ finally:
+  signal.setitimer(signal.ITIMER_REAL,0)
+  report['processing_seconds']=time.monotonic()-started
+  # No further model call/update here. Preserve partial adapter on a failed run.
+  if model is not None and report['optimizer_steps_completed']>0 and 'adapter_sha256' not in report:
+   try:model.save_pretrained(OUTPUT/'partial_adapter',safe_serialization=True);report['partial_adapter_saved']=True
+   except BaseException as exc:report['partial_save_error']=str(exc)
+  try:
+   require(r is not None,'helper_unavailable');report['initial_adapter_unchanged']=r.adapter_hashes(INITIAL)==report['plan']['initial_adapter_sha256']
+   report['saved_adapter_unchanged_after_generation']=r.adapter_hashes(OUTPUT/'adapter')==report['adapter_sha256'] if 'adapter_sha256' in report else None
+   report['fixed_sources_unchanged']=sha(__file__)==report['plan']['runner_sha256'] and sha(LEGACY/'run_pilot.py')==HELPER_SHA and sha(JOINT/'run_quote_joint_fit.py')==JOINT_SHA and all(sha(pack/n)==s['sha256'] for n,s in report['plan']['payloads'].items())
+   if not report['initial_adapter_unchanged'] or not report['fixed_sources_unchanged'] or report['saved_adapter_unchanged_after_generation'] is False:report['status']='STOPPED_IDENTITY_MISMATCH_NO_RETRY'
+  except BaseException as exc:report['final_identity_error']=str(exc);report['status']='STOPPED_IDENTITY_UNVERIFIED_NO_RETRY'
+  report['process_cost_usd']=report['processing_seconds']*.26/3600;checkpoint()
+  if joint is not None:
+   try:joint.archive(OUTPUT,r)
+   except BaseException as exc:report['archive_error']=str(exc);checkpoint()
+ print(json.dumps({k:report.get(k) for k in ('status','optimizer_steps_completed','model_calls_started','model_calls_completed','processing_seconds','process_cost_usd')},ensure_ascii=False),flush=True)
+if __name__=='__main__':
+ p=argparse.ArgumentParser();p.add_argument('--pack',type=Path,required=True);p.add_argument('--execute',action='store_true');p.add_argument('--source-commit');a=p.parse_args()
+ if a.execute:execute(a.pack.resolve(),a.source_commit or '')
+ else:
+  require(os.environ.get('CUDA_VISIBLE_DEVICES')=='','cpu_check_only');*_,check=prepare(a.pack.resolve());dump(a.pack/'gpu_runner_cpu_check.json',check);print(check['status'],flush=True)

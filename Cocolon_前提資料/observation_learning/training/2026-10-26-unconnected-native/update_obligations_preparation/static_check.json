@@ -1,0 +1,90 @@
+{
+  "status": "STATIC_CANDIDATE_ONLY_JUPYTER_AUTH_BLOCKED",
+  "source_api_ref": "64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4",
+  "source_sha256": "31512acc35b374ca3ab5924b55cc120404d1208d98375f40a801240e2cb6852c",
+  "candidate_sha256": "a3d32c33529e9165c18efa42b2c3f3f6dd33b42bb3f4ecaef9e9cd9ccce46218",
+  "verification": "stdlib AST compile and isolated original spec-function comparison using saved input role/link metadata in explicit role_order/written_link_order; no product package import",
+  "preparation_correction": "Initial local preview used JSON-sorted dictionary iteration; corrected to explicit role_order/written_link_order before publication. Candidate source unchanged; Jupyter/model effects zero.",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "candidate_branch": "unchanged_legacy_or_daily"
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "changed_output_spec_keys": []
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "changed_output_spec_keys": [
+        "updates"
+      ]
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "changed_output_spec_keys": []
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "changed_output_spec_keys": [
+        "updates"
+      ]
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "changed_output_spec_keys": []
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "changed_output_spec_keys": []
+    }
+  ],
+  "changed_cases": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "material_prior_shape_axes_prose_reference_changes": 0,
+  "legacy_numeric_v3_spec_changes": 0,
+  "tokenizer_check": "NOT_RUN",
+  "actual_build_model_messages_check": "NOT_RUN",
+  "teacher_or_model_weight_change": 0,
+  "model_load_forward_training_generation": 0,
+  "jupyter_child_process": 0,
+  "pytest": 0,
+  "api_product_source_change": 0,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "structure_map_delta": "NONE"
+}

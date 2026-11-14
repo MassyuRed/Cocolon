@@ -1,0 +1,312 @@
+{
+  "archive_bytes": 3401608,
+  "archive_sha256": "50dbc67cfd2ccc7f33c83969715194e8b83c02c0fb87f4748a37013808b1f75c",
+  "member_count": 6,
+  "manifest_count": 5,
+  "optimizer_steps": 13,
+  "generation_calls_at_archive": 0,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "9a70592b2ebfc03653fdcfdeb5054016f617e9c74c6499821881f4cca6672042",
+    "adapter_model.safetensors": "c39bbc27936d98ad45b0b42b43c476cad0c34f19e9f960f1a74f51eb05a564e5"
+  },
+  "all_32_tensors_finite": true,
+  "tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    }
+  ],
+  "scope": "EARLY_SAVED_WEIGHTS_BEFORE_INFERENCE_NOT_PRODUCT_ACCEPTED",
+  "base_weights_included": false,
+  "archive_name": "cocolon_bridge13_early_weights_20261026.tar.gz",
+  "durable_archive": {
+    "library_file_id": "libfile_df4bdce010dc81919f34e21766a1828f",
+    "file_id": "file_00000000ffb0820688e7ccf1bb5cf7e5",
+    "version": 0
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "source_commit": "105c08d231c3fb993f565197b200a5db8ff6c05e",
+  "launcher_pid": 391073,
+  "started_unix": 1793338113.7543156,
+  "frozen_preflight": 215,
+  "approval_sha256": "7bb865b90f024a0f8a6ad8082646471e8a56c9ebadc92f5b74c33d9bae5263bc",
+  "retry": false
+}

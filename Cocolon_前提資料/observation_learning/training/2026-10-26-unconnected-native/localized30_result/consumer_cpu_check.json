@@ -1,0 +1,29 @@
+{
+  "status": "CPU_CONSUMER_INPUT15_COLD3_SYNTHETIC_TEACHER_ONLY",
+  "seconds": 34.190337334992364,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "full_outcome_equal": true,
+      "synthetic_teacher_not_model_output": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "full_outcome_equal": true,
+      "synthetic_teacher_not_model_output": true
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "full_outcome_equal": true,
+      "synthetic_teacher_not_model_output": true
+    }
+  ],
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0,
+  "consumer_sha256": "888b637bb15c76a01abcfc3a11ac7b0fad6cfe243086ebcf2ef6bc916305ea08",
+  "source_cpu_sha256": "66642e828981054835ae8f791bb7a0555ab9d50208c534af450422fdbdb61031"
+}

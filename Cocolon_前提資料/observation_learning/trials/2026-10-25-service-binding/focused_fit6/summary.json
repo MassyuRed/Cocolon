@@ -1,0 +1,21 @@
+{
+  "scope": "KNOWN_TRAINING_INPUT_FIXED_PRIOR_NOT_DYNAMIC",
+  "model_calls_after": 6,
+  "before_reused_from_fit12_after": true,
+  "new_before_generations": 0,
+  "same_input_before_meaning_body": 5,
+  "same_input_after_meaning_body": 6,
+  "case_count": 6,
+  "only_raw_change": "03-CORRECTION evidence.end five values corrected; other5raw identical",
+  "surface_text_unchanged": true,
+  "selected_evidence_nll_before": 0.0008993288419184164,
+  "selected_evidence_nll_after": 0.0002038279761922381,
+  "metric_is_not_whole_assistant_nll": true,
+  "seconds": 727.0668264655396,
+  "process_rate_usd_per_hour": 0.26,
+  "process_rate_proportion_usd": 0.05251038191140008,
+  "gpu_holding_preparation_recovery_tax_excluded": true,
+  "weights_library_file_id": "libfile_c6e35b0a5e248191a37419243e1c3493",
+  "product_accepted": false,
+  "actual_service_result_owner": "separate identity_eval02"
+}

@@ -1,0 +1,605 @@
+{
+  "today": {
+    "version": "kokoro.weather.live.v1",
+    "period": "today",
+    "start_date": "2026-11-08",
+    "end_date": "2026-11-08",
+    "observed_through": "2026-11-08T21:40:00+09:00",
+    "read_at": "2026-11-08T21:40:00+09:00",
+    "history_start": "2026-11-08T00:00:00+09:00",
+    "partial_history": false,
+    "previous_anchor": "2026-11-07",
+    "next_anchor": null,
+    "summary": {
+      "status": "ok",
+      "input_count": 6,
+      "emotion_weights": {
+        "joy": 4,
+        "sadness": 0,
+        "anxiety": 5,
+        "anger": 1,
+        "calm": 7
+      },
+      "emotion_share_pct": {
+        "joy": 24,
+        "sadness": 0,
+        "anxiety": 29,
+        "anger": 6,
+        "calm": 41
+      },
+      "description": "平穏の割合が多く記録されています。",
+      "recorded_days": 1
+    },
+    "items": [
+      {
+        "status": "ok",
+        "input_count": 6,
+        "emotion_weights": {
+          "joy": 4,
+          "sadness": 0,
+          "anxiety": 5,
+          "anger": 1,
+          "calm": 7
+        },
+        "emotion_share_pct": {
+          "joy": 24,
+          "sadness": 0,
+          "anxiety": 29,
+          "anger": 6,
+          "calm": 41
+        },
+        "description": "平穏の割合が多く記録されています。",
+        "date": "2026-11-08",
+        "partial_history": false
+      }
+    ],
+    "time_buckets": [
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "key": "late_night",
+        "label": "深夜",
+        "hours": "0:00–6:00",
+        "records": []
+      },
+      {
+        "status": "ok",
+        "input_count": 2,
+        "emotion_weights": {
+          "joy": 2,
+          "sadness": 0,
+          "anxiety": 3,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 40,
+          "sadness": 0,
+          "anxiety": 60,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "不安の割合が多く記録されています。",
+        "key": "morning",
+        "label": "朝",
+        "hours": "6:00–12:00",
+        "records": [
+          {
+            "created_at": "2026-11-08T08:10:00+09:00",
+            "emotions": [
+              {
+                "key": "joy",
+                "weight": 2
+              },
+              {
+                "key": "anxiety",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "created_at": "2026-11-08T09:45:00+09:00",
+            "emotions": [
+              {
+                "key": "anxiety",
+                "weight": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "input_count": 2,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 2,
+          "anger": 1,
+          "calm": 2
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 40,
+          "anger": 20,
+          "calm": 40
+        },
+        "description": "不安・平穏の割合が多く記録されています。",
+        "key": "daytime",
+        "label": "昼",
+        "hours": "12:00–18:00",
+        "records": [
+          {
+            "created_at": "2026-11-08T12:30:00+09:00",
+            "emotions": [
+              {
+                "key": "anxiety",
+                "weight": 2
+              },
+              {
+                "key": "anger",
+                "weight": 1
+              }
+            ]
+          },
+          {
+            "created_at": "2026-11-08T15:20:00+09:00",
+            "emotions": [
+              {
+                "key": "calm",
+                "weight": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "status": "ok",
+        "input_count": 2,
+        "emotion_weights": {
+          "joy": 2,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 5
+        },
+        "emotion_share_pct": {
+          "joy": 29,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 71
+        },
+        "description": "平穏の割合が多く記録されています。",
+        "key": "night",
+        "label": "夜",
+        "hours": "18:00–24:00",
+        "records": [
+          {
+            "created_at": "2026-11-08T18:40:00+09:00",
+            "emotions": [
+              {
+                "key": "joy",
+                "weight": 2
+              },
+              {
+                "key": "calm",
+                "weight": 3
+              }
+            ]
+          },
+          {
+            "created_at": "2026-11-08T21:10:00+09:00",
+            "emotions": [
+              {
+                "key": "calm",
+                "weight": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "week": {
+    "version": "kokoro.weather.live.v1",
+    "period": "week",
+    "start_date": "2026-11-02",
+    "end_date": "2026-11-08",
+    "observed_through": "2026-11-08T21:40:00+09:00",
+    "read_at": "2026-11-08T21:40:00+09:00",
+    "history_start": "2026-11-02T00:00:00+09:00",
+    "partial_history": false,
+    "previous_anchor": "2026-10-26",
+    "next_anchor": null,
+    "summary": {
+      "status": "ok",
+      "input_count": 6,
+      "emotion_weights": {
+        "joy": 4,
+        "sadness": 0,
+        "anxiety": 5,
+        "anger": 1,
+        "calm": 7
+      },
+      "emotion_share_pct": {
+        "joy": 24,
+        "sadness": 0,
+        "anxiety": 29,
+        "anger": 6,
+        "calm": 41
+      },
+      "description": "平穏の割合が多く記録されています。",
+      "recorded_days": 1
+    },
+    "items": [
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-02",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-03",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-04",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-05",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-06",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-07",
+        "partial_history": false
+      },
+      {
+        "status": "ok",
+        "input_count": 6,
+        "emotion_weights": {
+          "joy": 4,
+          "sadness": 0,
+          "anxiety": 5,
+          "anger": 1,
+          "calm": 7
+        },
+        "emotion_share_pct": {
+          "joy": 24,
+          "sadness": 0,
+          "anxiety": 29,
+          "anger": 6,
+          "calm": 41
+        },
+        "description": "平穏の割合が多く記録されています。",
+        "date": "2026-11-08",
+        "partial_history": false
+      }
+    ],
+    "time_buckets": []
+  },
+  "month": {
+    "version": "kokoro.weather.live.v1",
+    "period": "month",
+    "start_date": "2026-11-01",
+    "end_date": "2026-11-08",
+    "observed_through": "2026-11-08T21:40:00+09:00",
+    "read_at": "2026-11-08T21:40:00+09:00",
+    "history_start": "2026-11-01T00:00:00+09:00",
+    "partial_history": false,
+    "previous_anchor": "2026-10-01",
+    "next_anchor": null,
+    "summary": {
+      "status": "ok",
+      "input_count": 6,
+      "emotion_weights": {
+        "joy": 4,
+        "sadness": 0,
+        "anxiety": 5,
+        "anger": 1,
+        "calm": 7
+      },
+      "emotion_share_pct": {
+        "joy": 24,
+        "sadness": 0,
+        "anxiety": 29,
+        "anger": 6,
+        "calm": 41
+      },
+      "description": "平穏の割合が多く記録されています。",
+      "recorded_days": 1
+    },
+    "items": [
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-01",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-02",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-03",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-04",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-05",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-06",
+        "partial_history": false
+      },
+      {
+        "status": "no_observation",
+        "input_count": 0,
+        "emotion_weights": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "emotion_share_pct": {
+          "joy": 0,
+          "sadness": 0,
+          "anxiety": 0,
+          "anger": 0,
+          "calm": 0
+        },
+        "description": "この期間の感情の記録はありません。",
+        "date": "2026-11-07",
+        "partial_history": false
+      },
+      {
+        "status": "ok",
+        "input_count": 6,
+        "emotion_weights": {
+          "joy": 4,
+          "sadness": 0,
+          "anxiety": 5,
+          "anger": 1,
+          "calm": 7
+        },
+        "emotion_share_pct": {
+          "joy": 24,
+          "sadness": 0,
+          "anxiety": 29,
+          "anger": 6,
+          "calm": 41
+        },
+        "description": "平穏の割合が多く記録されています。",
+        "date": "2026-11-08",
+        "partial_history": false
+      }
+    ],
+    "time_buckets": []
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "status": "CPU_JOINTFOCUS9_READY_NO_MODEL_EXECUTION",
+  "seconds": 6.672460324014537,
+  "optimizer_steps": 9,
+  "changed_prompts": [],
+  "all15_prompt_teacher_bytes_unchanged": true,
+  "prior_353_same_api_verified": true,
+  "prior_pytest_summary_sha256": "a13a63f05753dc74f887efad81fb8562ac8808da6527bd7d9f502877af807b86",
+  "prior353_rerun": false,
+  "inherited_112_f32_finite": true,
+  "schedule_counts_verified": true,
+  "source_manifest_sha256": "1573e92124f26971468404092ca13fcba68289c34b21237a73ecb1f6ef3439f4",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "full_tokens": 3081,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4310
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "full_tokens": 6055,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 6387
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1746,
+      "target_tokens": 1331,
+      "full_tokens": 3077,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4306
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3842,
+      "target_tokens": 2231,
+      "full_tokens": 6073,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 6402
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1743,
+      "target_tokens": 1321,
+      "full_tokens": 3064,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4303
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3825,
+      "target_tokens": 2237,
+      "full_tokens": 6062,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 6385
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "full_tokens": 3363,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4338
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1773,
+      "target_tokens": 1559,
+      "full_tokens": 3332,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4333
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1777,
+      "target_tokens": 1598,
+      "full_tokens": 3375,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4337
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "prompt_tokens": 2204,
+      "target_tokens": 1038,
+      "full_tokens": 3242,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5916
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4387,
+      "target_tokens": 2913,
+      "full_tokens": 7300,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 8099,
+      "focus": {
+        "prefix_tokens": 4387,
+        "target_tokens": 2913,
+        "ground_tokens": 2149,
+        "prose_tokens": 78,
+        "overlap_tokens": 0,
+        "prose_section_tokens": {
+          "observation": 20,
+          "reception": 34,
+          "update_note": 21
+        },
+        "eos_positions": [
+          2911
+        ],
+        "full_ids_exact": true,
+        "prompt_selected": 0,
+        "all_labels_contiguous": true,
+        "minimum_target_weight": 1.631730265216902e-05
+      }
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "prompt_tokens": 2239,
+      "target_tokens": 1082,
+      "full_tokens": 3321,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5951
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4539,
+      "target_tokens": 3238,
+      "full_tokens": 7777,
+      "max_new_tokens": 3584,
+      "prompt_plus_cap": 8123,
+      "focus": {
+        "prefix_tokens": 4539,
+        "target_tokens": 3238,
+        "ground_tokens": 2398,
+        "prose_tokens": 119,
+        "overlap_tokens": 0,
+        "prose_section_tokens": {
+          "observation": 42,
+          "reception": 39,
+          "update_note": 35
+        },
+        "eos_positions": [
+          3236
+        ],
+        "full_ids_exact": true,
+        "prompt_selected": 0,
+        "all_labels_contiguous": true,
+        "minimum_target_weight": 1.4679415471618995e-05
+      }
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "prompt_tokens": 2090,
+      "target_tokens": 961,
+      "full_tokens": 3051,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5802
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "prompt_tokens": 2132,
+      "target_tokens": 896,
+      "full_tokens": 3028,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5844
+    }
+  ],
+  "loss_checks": {
+    "loss_and_reference_gradient_identical": true,
+    "analytic_gradient_identical": true,
+    "positive_all_target_mass": true,
+    "group_mass_sum": 1.0,
+    "invalid_groups_rejected": 5,
+    "nonfinite_rejected": true
+  },
+  "mixture": {
+    "full_adaptive": 0.5,
+    "ground": 0.25,
+    "prose": 0.25
+  },
+  "old3_original_ce": true,
+  "payload_sha256": {
+    "adaptive_loss.py": "c1f0efeefbce5df39ae72055d7d8dd3183fb4356d563f86805fee37d6442a34b",
+    "run_jointfocus9.py": "a21a14efd0b521880cb8082b3b300f328a8ee236f0a9231d7e088c912575faea",
+    "prepare_jointfocus9.py": "62719d52a9fcfbf6d9ca189d5158523bd43a46a5cc90f3511d46ea2f89bab825",
+    "consume_named9.py": "e502315b2e656fec9718c2a3a3aa8b687cc7254c1baea6e6836c061b27e9142a",
+    "train_messages.jsonl": "fd481f5b7b607876f965968526022a4a657538cb8f25b1affdac279bb1179ab7",
+    "eval_inputs.json": "0cce7b0601ad579e480f81ccafe211c3596b3b841ff97e45b851dde6bc2b2028",
+    "target_groups.json": "0f07f060c03ea3b2286d62864f69c7bad4c886d371f834981fe94a7684bdb7e4"
+  },
+  "series_tokens": 57730,
+  "series_length_squared_sum": 398780542,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "cuda_initialized": false,
+  "product_credit": 0,
+  "automatic_progression": false
+}

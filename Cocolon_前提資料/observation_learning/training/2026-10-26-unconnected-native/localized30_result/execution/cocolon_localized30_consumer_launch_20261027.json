@@ -1,0 +1,20 @@
+{
+  "pid": 203548,
+  "command": [
+    "python",
+    "-B",
+    "/workspace/cocolon_localized30_pack_20261027/consume_localized30.py",
+    "--run",
+    "/workspace/cocolon_localized30_run_20261027",
+    "--out",
+    "/workspace/cocolon_localized30_diagnosis_20261027",
+    "--api",
+    "/workspace/cocolon_localized30_api_20261027",
+    "--expected-source-commit",
+    "d54ea1db19ab8fb3c3a57fc07b5a20566f245591"
+  ],
+  "started_unix": 1793090781.9309616,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0
+}

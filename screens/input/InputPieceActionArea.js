@@ -1,0 +1,725 @@
+/** PCE-8 B10 detached React Native host for the existing request controller.
+ * Connected from InputScreen. The existing resolved `context` mode is
+ * retained. `savedInput` mode explicitly reads the saved ID, then waits for a
+ * separate preview action; it requires the existing live runtime predicate.
+ * The host only reads body-free request/session identity. No raw input/Emlis
+ * body, runtime flag activation, quota default or export. Initial save delegates
+ * to the existing controller only with a separately supplied, synchronous,
+ * side-effect-free `isSaveAdmitted(preview, displayToken)` predicate. The current
+ * InputScreen supplies the explicit iOS renderer predicate; native_checked
+ * alone is not admission and the live mounted fit remains independently checked.
+ * A fresh opaque save key is created only on the explicit initial-save press;
+ * retries remain owned by the controller's immutable request/key.
+ */
+import React from 'react';
+import { AppRuntimeContext } from '../../AppRuntimeContext';
+import { Alert, AppState, Platform, View, Text } from 'react-native';
+import Button from '../../components/CocolonButton';
+import { createPieceCreateController } from '../../features/piece/PieceCreateController';
+import { PieceApiError, preparePiecePreviewRequest, requestPieceSourceRef } from '../../features/piece/pieceApi';
+import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel';
+import PiecePreviewModal from '../../components/piece/PiecePreviewModal';
+
+const element = React.createElement;
+function pieceActionKey(prefix) {
+  // Use the existing random-values polyfill, without a predictable fallback.
+  const bytes = new Uint8Array(16);
+  globalThis.crypto.getRandomValues(bytes);
+  return prefix + Array.from(bytes, value => value.toString(16).padStart(2, '0')).join('');
+}
+function contextStamp(value) {
+  if (value?.enabled !== true) return 'disabled';
+  try {
+    const snapshot = preparePiecePreviewRequest(value.request, value);
+    const ordered = v => Array.isArray(v) ? v.map(ordered) : v && typeof v === 'object'
+      ? Object.fromEntries(Object.keys(v).sort().map(k => [k, ordered(v[k])])) : v;
+    return JSON.stringify(ordered(snapshot));
+  } catch { return 'invalid'; }
+}
+
+// This is a body-free host binding, not a new wire DTO or an eligibility
+// decision. Do not retain arbitrary parent props, an input body or a token.
+function savedInputStamp(props) {
+  const value = props.savedInput;
+  const selectedAnswer = value && Object.prototype.hasOwnProperty.call(value, 'supplementalAnswerIdentity');
+  if (Object.prototype.hasOwnProperty.call(props, 'context') || !value ||
+      typeof value !== 'object' || Array.isArray(value) ||
+      Object.keys(value).length !== (selectedAnswer ? 4 : 3) ||
+      !['savedInputId', 'expectedUserId', 'idempotencyKey'].every(key =>
+        Object.prototype.hasOwnProperty.call(value, key))) return null;
+  const { savedInputId, expectedUserId, idempotencyKey } = value;
+  if (typeof savedInputId !== 'string' ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
+      savedInputId === '00000000-0000-0000-0000-000000000000' ||
+      typeof expectedUserId !== 'string' || !expectedUserId.trim() ||
+      /[\uD800-\uDFFF]/u.test(expectedUserId) ||
+      typeof idempotencyKey !== 'string' ||
+      !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) return null;
+  if (selectedAnswer && (typeof value.supplementalAnswerIdentity !== 'string' ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.supplementalAnswerIdentity) ||
+      value.supplementalAnswerIdentity === '00000000-0000-0000-0000-000000000000')) return null;
+  return JSON.stringify([savedInputId, expectedUserId, idempotencyKey,
+    ...(selectedAnswer ? [value.supplementalAnswerIdentity] : [])]);
+}
+
+export default class InputPieceActionArea extends React.Component {
+  static contextType = AppRuntimeContext;
+
+  constructor(props) {
+    super(props);
+    this.state = { revision: 0, open: false, modalRetained: false, modalEpoch: 0 };
+    this.pendingSavedNavigation = null;
+    this.mounted = false;
+    this.controller = null;
+    this.boundStamp = null;
+    this.boundRuntime = null;
+    this.boundSaveEnabled = null;
+    this.boundSavedInputStamp = null;
+    this.contextSyncToken = null;
+    this.savedMode = false;
+    this.saveDispatching = false;
+    this.saveFitHandle = null;
+    this.sourceAttempt = null;
+    this.sourcePhase = 'idle';
+    this.sourceCode = null;
+    this.sourceFailureToken = null;
+    this.sourceIdempotencyKey = null;
+    this.foreground = false;
+    this.expiryTimer = null;
+    this.unsubscribe = null;
+    this.appSubscription = null;
+    this.start = this.start.bind(this);
+    this.retry = this.retry.bind(this);
+    this.restartExpired = this.restartExpired.bind(this);
+    this.changeVisual = this.changeVisual.bind(this);
+    this.changeFormat = this.changeFormat.bind(this);
+    this.returnToFormat = this.returnToFormat.bind(this);
+    this.cancelPreview = this.cancelPreview.bind(this);
+    this.close = this.close.bind(this);
+    this.changed = this.changed.bind(this);
+    this.resolveSavedInput = this.resolveSavedInput.bind(this);
+    this.refreshSavedInput = this.refreshSavedInput.bind(this);
+    this.createFromSavedInput = this.createFromSavedInput.bind(this);
+    this.receiveSaveFit = this.receiveSaveFit.bind(this);
+    this.previewDismissed = this.previewDismissed.bind(this);
+  }
+
+  componentDidMount() {
+    // Create anew on every mount, including development StrictMode remounts.
+    this.mounted = true;
+    this.abandonPreviewPresentation();
+    this.saveFitHandle = null;
+    this.foreground = AppState.currentState === 'active';
+    this.boundStamp = null;
+    this.boundRuntime = null;
+    this.boundSaveEnabled = null;
+    this.boundSavedInputStamp = null;
+    this.clearSource();
+    this.controller = createPieceCreateController({
+      isSaveAdmitted: (preview, token) => this.isSaveAdmitted(preview, token),
+      getSaveRecovery: () => this.props.saveRecovery,
+      getRuntimePublication: () => this.boundRuntime,
+      onFeatureDisabled: () => {
+      // Props may have changed before componentDidUpdate; an old response must
+      // not close or refresh the next account/source's runtime presentation.
+      if (!this.isCurrent()) return;
+      this.abandonPreviewPresentation();
+      this.setState({ open: false });
+      // Existing runtime refresh clears cached Piece flags synchronously. No
+      // new resolver, event bus, auth payload, preview retry or legacy fallback.
+      try { return Promise.resolve(this.context?.refreshAppRuntime?.()).catch(() => {}); }
+      catch { return undefined; }
+    } });
+    this.unsubscribe = this.controller.subscribe(this.changed);
+    this.appSubscription = AppState.addEventListener('change', next => {
+      if (!this.mounted) return;
+      this.foreground = next === 'active';
+      if (!this.foreground) {
+        this.abandonPreviewPresentation();
+        if (this.savedMode) this.clearSource();
+        if (!this.syncSavedOperation(false)) {
+          if (this.savedMode) this.controller.setContext({ enabled: false });
+          else this.controller.close();
+        }
+        this.setState({ open: false });
+      } else {
+        const controller = this.controller;
+        if (this.isCurrent() && !this.syncSavedOperation(true)) this.restoreSaveRecovery();
+        if (this.mounted && this.controller === controller) controller.refresh();
+      }
+    });
+    this.syncContext();
+    this.setState({ open: false });
+  }
+
+  componentDidUpdate() {
+    if (this.pendingSavedNavigation && !this.savedNavigationCurrent(this.pendingSavedNavigation))
+      this.pendingSavedNavigation = null;
+    this.syncContext();
+  }
+
+  componentWillUnmount() {
+    this.pendingSavedNavigation = null;
+    this.mounted = false;
+    this.saveFitHandle = null;
+    this.clearSource();
+    clearTimeout(this.expiryTimer);
+    this.expiryTimer = null;
+    this.unsubscribe?.();
+    this.appSubscription?.remove();
+    this.controller?.dispose();
+    this.controller = null;
+    this.boundStamp = null;
+    this.boundRuntime = null;
+    this.boundSaveEnabled = null;
+    this.boundSavedInputStamp = null;
+  }
+
+  savedEnabled() {
+    try {
+      return this.props.active !== false && this.context?.runtime != null &&
+        this.context?.isFeatureEnabled?.('piece_v2_preview_enabled', false) === true;
+    } catch { return false; }
+  }
+
+  saveEnabled() {
+    try {
+      if (Object.prototype.hasOwnProperty.call(this.props, 'savedInput')) {
+        return this.savedEnabled() &&
+          this.context?.isFeatureEnabled?.('piece_v2_save_enabled', false) === true;
+      }
+      return this.props.context?.enabled === true && this.props.context?.saveEnabled === true;
+    } catch { return false; }
+  }
+
+  syncSavedOperation(enabled, runtimeRefresh = false) {
+    const controller = this.controller, stamp = this.boundStamp, runtime = this.boundRuntime;
+    const sourceStamp = this.boundSavedInputStamp, savedMode = this.savedMode, syncToken = this.contextSyncToken;
+    const stillBound = () => this.mounted && this.controller === controller &&
+      this.boundStamp === stamp && this.boundRuntime === runtime && this.boundSavedInputStamp === sourceStamp &&
+      this.savedMode === savedMode && this.contextSyncToken === syncToken &&
+      (savedMode ? savedInputStamp(this.props) === sourceStamp && this.context?.runtime === runtime
+        : contextStamp(this.props.context) === stamp);
+    let retained = controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled(), runtimeRefresh,
+      preserveSelectedFormat: savedMode });
+    // A synchronous subscriber may have already established another context.
+    // Treat it as handled, so this caller cannot close or enable that context.
+    if (!stillBound()) return true;
+    if (!retained) {
+      retained = controller.setCancellationEnabled(enabled);
+      if (!stillBound()) return true;
+    }
+    const view = retained ? controller.getView() : null;
+    if (retained && this.savedMode && enabled === true &&
+        (view.phase === 'idle' || view.phase === 'unavailable' && !view.retryKind && !view.previewRestartToken)) {
+      // The same host already holds the selected format's immutable source
+      // request. Its explicit replay checks source eligibility at the server;
+      // do not first replace it with a new source GET/default-format request.
+      this.sourcePhase = 'ready';
+    }
+    return retained;
+  }
+
+  clearSource() {
+    this.pendingSavedNavigation = null;
+    const previous = this.sourceAttempt;
+    this.contextSyncToken = Object.freeze({});
+    this.sourceAttempt = null;
+    this.sourcePhase = 'idle';
+    this.sourceCode = null;
+    this.sourceFailureToken = null;
+    // Fence identity before aborting: transport cancellation is not authority.
+    previous?.abort.abort();
+  }
+
+  syncContext() {
+    if (!this.mounted || !this.controller) return;
+    const savedMode = Object.prototype.hasOwnProperty.call(this.props, 'savedInput');
+    const sourceStamp = savedMode ? savedInputStamp(this.props) : null;
+    const stamp = savedMode
+      ? this.savedEnabled() && sourceStamp !== null ? 'saved:' + sourceStamp : 'saved-disabled'
+      : contextStamp(this.props.context);
+    const runtime = savedMode ? this.context?.runtime : null;
+    const runtimeRefresh = runtime !== this.boundRuntime;
+    const saveEnabled = this.saveEnabled();
+    if (stamp === this.boundStamp && runtime === this.boundRuntime && savedMode === this.savedMode &&
+        sourceStamp === this.boundSavedInputStamp) {
+      if (saveEnabled === this.boundSaveEnabled) return;
+      this.abandonPreviewPresentation(true);
+      // A save-only flag update must not discard a valid source read or preview.
+      // A new runtime publication still takes the normal suspension path below.
+      this.contextSyncToken = Object.freeze({});
+      this.boundSaveEnabled = saveEnabled;
+      if (savedMode) this.controller.setSaveAvailability({
+        enabled: this.savedEnabled() && this.foreground, saveEnabled, preservePreview: true,
+      });
+      else if (!this.syncSavedOperation(this.props.context?.enabled === true && this.foreground)) {
+        this.controller.setContext(this.props.context);
+      }
+      this.changed();
+      return;
+    }
+    this.abandonPreviewPresentation();
+    // While the same account/runtime remains current, close only the local
+    // preview so the existing controller can reject a changed request with the
+    // same key. Disabling here would erase that request/key binding.
+    const previous = this.savedMode && this.boundStamp?.startsWith('saved:')
+      ? JSON.parse(this.boundStamp.slice(6)) : null;
+    const next = sourceStamp !== null ? JSON.parse(sourceStamp) : null;
+    const retainBinding = savedMode && this.savedMode && this.savedEnabled() &&
+      runtime === this.boundRuntime && previous && next && previous[1] === next[1];
+    const sameSavedSelection = savedMode && this.savedMode && sourceStamp !== null &&
+      sourceStamp === this.boundSavedInputStamp;
+    if (!sameSavedSelection) this.sourceIdempotencyKey = null;
+    this.contextSyncToken = Object.freeze({});
+    this.clearSource();
+    this.savedMode = savedMode;
+    this.boundStamp = stamp;
+    this.boundRuntime = runtime;
+    this.boundSaveEnabled = saveEnabled;
+    this.boundSavedInputStamp = sourceStamp;
+    // The render boundary hides old data before this lifecycle runs. A source
+    // read does not occur on mount, context change, refresh or re-enable.
+    // Runtime refresh hides all Piece actions, but a same-selection terminal
+    // save/cancellation needs no fresh source/author. Retain its body-free identity
+    // until flags return, then require an explicit retry and fresh Auth.
+    // A different saved ID, account or original key uses the normal clear.
+    if (sameSavedSelection && this.syncSavedOperation(this.savedEnabled() && this.foreground, runtimeRefresh)) {
+      // No source fetch, preview revival or automatic save/cancellation retry.
+      // Only a new runtime publication can reopen a server-disabled save.
+      // AppState and same-runtime flag changes cannot supply that signal.
+    } else if (this.restoreSaveRecovery()) {
+      // A different navigation key for this saved input can recover the same save.
+    } else if (retainBinding && this.controller.getView().phase !== 'hidden' &&
+        !['cancel', 'save'].includes(this.controller.getView().retryKind)) this.controller.close({ resetSelectedFormat: !sameSavedSelection });
+    // A hidden operation may retain a save/cancel intent. A different selection
+    // must clear it, even when getView intentionally conceals its retryKind.
+    else this.controller.setContext(savedMode ? { enabled: false } : this.props.context);
+    this.setState({ open: false });
+  }
+
+  isCurrent() {
+    if (!this.mounted || !this.foreground || !this.controller) return false;
+    const savedMode = Object.prototype.hasOwnProperty.call(this.props, 'savedInput');
+    if (savedMode !== this.savedMode) return false;
+    if (this.boundSaveEnabled !== this.saveEnabled()) return false;
+    if (!savedMode) return this.props.context?.enabled === true &&
+      this.boundStamp === contextStamp(this.props.context);
+    const stamp = savedInputStamp(this.props);
+    return stamp !== null && this.savedEnabled() &&
+      this.boundRuntime === this.context?.runtime && this.boundStamp === 'saved:' + stamp;
+  }
+
+  restoreSaveRecovery() {
+    if (!this.props.saveRecovery || !this.savedMode || !this.isCurrent()) return false;
+    const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundSavedInputStamp);
+    return this.controller.restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey,
+      saveEnabled: this.saveEnabled() });
+  }
+
+  async resolveSavedInput() {
+    if (!this.savedMode || !this.isCurrent() || this.sourceAttempt ||
+        !(this.sourcePhase === 'idle' || this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE')) return;
+    if (this.restoreSaveRecovery()) return;
+    const view = this.controller.getView();
+    if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
+    // Capture the exact saved ID, owner and future POST key before any await.
+    const [savedInputId, expectedUserId, originalKey, supplementalAnswerIdentity] = JSON.parse(this.boundStamp.slice(6));
+    const idempotencyKey = this.sourceIdempotencyKey || originalKey;
+    let abort;
+    try { abort = new AbortController(); }
+    catch {
+      this.sourcePhase = 'unavailable';
+      this.sourceCode = 'PIECE_TEMPORARILY_UNAVAILABLE';
+      this.changed();
+      return;
+    }
+    const attempt = { abort, contextSyncToken: this.contextSyncToken };
+    this.sourceAttempt = attempt;
+    this.sourcePhase = 'loading';
+    this.sourceCode = null;
+    this.changed();
+    if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
+    try {
+      const source_ref = await requestPieceSourceRef(savedInputId, { expectedUserId, signal: abort.signal,
+        ...(supplementalAnswerIdentity === undefined ? {} : { supplementalAnswerIdentity }) });
+      if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
+      const prepared = preparePiecePreviewRequest({ source_ref, requested_format: null,
+        visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },
+      { expectedUserId, idempotencyKey });
+      this.sourceAttempt = null;
+      this.sourcePhase = 'ready';
+      this.sourceCode = null;
+      this.controller.setContext({ ...prepared, enabled: true, saveEnabled: this.saveEnabled() });
+      // An equivalent retained controller context deliberately emits nothing.
+      // The source-read phase still changed and must publish its own UI update.
+      this.changed();
+      // Deliberately do not start(). GET and preview remain separate actions.
+      return attempt;
+    } catch (error) {
+      if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
+      this.sourceAttempt = null;
+      this.sourcePhase = 'unavailable';
+      this.sourceCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
+      this.sourceFailureToken = this.sourceCode === 'PIECE_CONFLICT' ? attempt : null;
+      this.changed();
+      if (this.sourceCode === 'PIECE_FEATURE_DISABLED' && this.isCurrent()) {
+        this.setState({ open: false });
+        try { await this.context?.refreshAppRuntime?.(); }
+        catch { /* A failed refresh cannot authorize a source retry. */ }
+      }
+    }
+  }
+
+  async refreshSavedInput(token) {
+    const current = () => {
+      if (!this.savedMode || !this.isCurrent() || this.sourceAttempt || !token) return false;
+      const view = this.controller.getView();
+      if (['cancel', 'save'].includes(view.retryKind)) return false;
+      return view.sourceRefreshToken === token || this.sourcePhase === 'unavailable' &&
+        this.sourceFailureToken === token;
+    };
+    if (!current()) return;
+    const stamp = this.boundStamp, runtime = this.boundRuntime;
+    let key;
+    try { key = pieceActionKey('piece-preview-'); }
+    catch {
+      try { Alert.alert('Pieceの作成', '確認の準備ができませんでした。もう一度お試しください。'); } catch {}
+      return;
+    }
+    if (!current()) return;
+    // A definitive POST/source rejection permits an explicit new source read.
+    // An unknown POST, PATCH, save or cancellation never reaches this action.
+    // Drop the obsolete binding before reading; a different source_ref must
+    // never be submitted under the original preview's idempotency key.
+    this.abandonPreviewPresentation();
+    this.controller.setContext({ enabled: false });
+    if (!this.isCurrent() || this.boundStamp !== stamp || this.boundRuntime !== runtime) return;
+    this.clearSource();
+    this.sourceIdempotencyKey = key;
+    this.setState({ open: false });
+    await this.resolveSavedInput();
+  }
+
+  // The response's explicit create choice owns this GET -> preview sequence.
+  // Ordinary mounts, runtime/focus returns and source reads never call it.
+  async createFromSavedInput() {
+    if (!this.savedMode || !this.isCurrent()) return;
+    const controller = this.controller, stamp = this.boundStamp, runtime = this.boundRuntime;
+    if (this.sourcePhase !== 'ready') {
+      const completed = await this.resolveSavedInput();
+      // A discarded/rejected GET cannot adopt a newer explicit source read.
+      // A close/reset after successful receipt also invalidates this chain.
+      if (!completed || completed.contextSyncToken !== this.contextSyncToken) return;
+    }
+    if (!this.isCurrent() || this.controller !== controller || this.boundStamp !== stamp || this.boundRuntime !== runtime ||
+        this.sourcePhase !== 'ready') return;
+    this.start();
+  }
+
+  changed() {
+    if (!this.mounted) return;
+    clearTimeout(this.expiryTimer);
+    this.expiryTimer = null;
+    if (this.isCurrent()) {
+      const display = readPiecePreviewDisplay(this.controller.getView());
+      // These are the existing render branches that omit the native Modal.
+      // Release its presentation identity from the controller/source callback,
+      // so a later explicit saved-open never waits for an abandoned ACK.
+      if (display.phase === 'hidden' || this.savedMode && this.sourcePhase !== 'ready' &&
+          !display.previewRestartToken && !['cancel', 'save'].includes(display.retryKind))
+        this.abandonPreviewPresentation();
+      if (display.expiresAtMs !== null) {
+        const delay = Math.min(2147483647, Math.max(0, display.expiresAtMs - Date.now()));
+        this.expiryTimer = setTimeout(() => {
+          this.expiryTimer = null;
+          if (this.mounted && this.foreground) this.controller?.refresh();
+        }, delay);
+      }
+    } else this.abandonPreviewPresentation();
+    // Do not store a body-bearing view in React state or event callbacks.
+    this.setState(previous => ({ revision: previous.revision + 1 }));
+  }
+
+  abandonPreviewPresentation(keepOpen = false) {
+    this.pendingSavedNavigation = null;
+    if (!this.state.open && !this.state.modalRetained) return;
+    // These existing context/background boundaries unmount the native Modal.
+    // Its old ACK cannot release a later outside-button action. A save-only
+    // publication may preserve an open preview as a new presentation.
+    this.setState(previous => ({ open: keepOpen && previous.open,
+      modalRetained: keepOpen && previous.open && Platform?.OS === 'ios',
+      modalEpoch: previous.modalEpoch + 1 }));
+  }
+
+  openPreview() {
+    this.pendingSavedNavigation = null;
+    this.setState(previous => ({ open: true, modalRetained: Platform?.OS === 'ios',
+      modalEpoch: previous.open ? previous.modalEpoch : previous.modalEpoch + 1 }));
+  }
+
+  start() {
+    if (!this.isCurrent() || this.restoreSaveRecovery() || (this.savedMode && this.sourcePhase !== 'ready') ||
+        this.controller.getView().phase !== 'idle') return;
+    this.openPreview();
+    void this.controller.start();
+  }
+
+  retry() {
+    if (!this.isCurrent()) return;
+    const display = readPiecePreviewDisplay(this.controller.getView());
+    if (!this.state.open && !['cancel', 'save'].includes(display.retryKind)) return;
+    if (display.canRetry) {
+      this.openPreview();
+      void this.controller.retry();
+    }
+  }
+
+  restartExpired(token) {
+    if (!this.isCurrent() || !token ||
+        this.controller.getView().previewRestartToken !== token) return;
+    let key;
+    try { key = pieceActionKey('piece-preview-'); }
+    catch {
+      try { Alert.alert('Pieceの作成', '作成の準備ができませんでした。もう一度お試しください。'); } catch {}
+      return;
+    }
+    if (!this.isCurrent() || this.controller.getView().previewRestartToken !== token) return;
+    // A retained expired request already has the saved source reference.
+    // The explicit POST reauthenticates and checks that reference again.
+    if (this.savedMode) this.sourcePhase = 'ready';
+    this.openPreview();
+    void this.controller.restartExpired(token, key);
+  }
+
+  changeVisual(selection, identity, visualToken) {
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.changeVisual(selection, identity, visualToken);
+  }
+
+  changeFormat(format, identity, displayToken) {
+    if (!this.isCurrent() || !this.state.open || !displayToken ||
+        this.controller.getView().visualToken !== displayToken) return;
+    let key;
+    try { key = pieceActionKey('piece-format-'); }
+    catch {
+      try { Alert.alert('文章の形式', '変更の準備ができませんでした。もう一度お試しください。'); } catch {}
+      return;
+    }
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.changeFormat(format, identity, displayToken, key);
+  }
+
+  returnToFormat(token) {
+    if (this.isCurrent() && this.state.open) this.controller.returnToFormat(token);
+  }
+
+  cancelPreview(identity, displayToken) {
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.cancelPreview(identity, displayToken);
+  }
+
+  receiveSaveFit(next, previous) {
+    if (!this.mounted) return;
+    if (next !== null) {
+      if (!this.isCurrent() || !this.state.open || typeof next?.isCurrent !== 'function') return;
+      const display = readPiecePreviewDisplay(this.controller.getView());
+      try { if (next.isCurrent(display.preview, display.visualToken) !== true) return; }
+      catch { return; }
+    } else if (this.saveFitHandle !== previous) return;
+    if (this.saveFitHandle === next) return;
+    this.saveFitHandle = next;
+    this.changed();
+  }
+
+  // The predicate belongs to the future admitted renderer owner. Neither this
+  // host nor the display reader turns a flag/quota/native_checked into admission.
+  // Recheck the live selection and exact candidate on both sides of the call.
+  isSaveAdmitted(preview, displayToken) {
+    const provider = this.props.isSaveAdmitted, handle = this.saveFitHandle;
+    if (typeof provider !== 'function' || typeof handle?.isCurrent !== 'function' || !preview || !displayToken) return false;
+    const current = () => {
+      if (!this.isCurrent() || !this.state.open || !this.saveEnabled() ||
+          this.savedMode && this.sourcePhase !== 'ready') return false;
+      const display = readPiecePreviewDisplay(this.controller.getView());
+      return display.phase === 'received' && display.hashVerified === true &&
+        display.visualToken === displayToken && display.preview != null &&
+        ['preview_id', 'preview_revision', 'piece_text_hash', 'content_payload_hash',
+          'visual_recipe_hash', 'renderer_version', 'expires_at'].every(key => display.preview[key] === preview[key]);
+    };
+    try {
+      return current() && handle.isCurrent(preview, displayToken) === true && provider(preview, displayToken) === true &&
+        this.props.isSaveAdmitted === provider && this.saveFitHandle === handle &&
+        handle.isCurrent(preview, displayToken) === true && current();
+    } catch { return false; }
+  }
+
+  savePreview(identity, displayToken, provider, handle) {
+    if (this.saveDispatching || !this.isCurrent() || !this.state.open ||
+        provider !== this.props.isSaveAdmitted || handle !== this.saveFitHandle) return;
+    this.saveDispatching = true;
+    try {
+      const display = readPiecePreviewDisplay(this.controller.getView()), preview = display.preview;
+      if (!identity || !preview || display.visualToken !== displayToken ||
+          identity.preview_id !== preview.preview_id || identity.preview_revision !== preview.preview_revision ||
+          identity.visual_recipe_hash !== preview.visual_recipe_hash || !this.isSaveAdmitted(preview, displayToken)) return;
+      let key;
+      try { key = pieceActionKey('piece-save-'); }
+      catch {
+        if (this.isCurrent() && this.state.open && this.controller.getView().visualToken === displayToken) {
+          try { Alert.alert('Pieceの保存', '保存の準備ができませんでした。もう一度お試しください。'); } catch {}
+        }
+        return;
+      }
+      // Entropy/admission implementations must not move this press onto a new
+      // selection. The controller independently rechecks admission immediately
+      // before retaining the body-free request and issuing the private save.
+      if (provider !== this.props.isSaveAdmitted || handle !== this.saveFitHandle || !this.isSaveAdmitted(preview, displayToken)) return;
+      void this.controller.savePreview(identity, displayToken, key);
+    } finally { this.saveDispatching = false; }
+  }
+
+  canOpenSavedPiece() {
+    try {
+      return this.context?.runtime != null &&
+        this.context?.isFeatureEnabled?.('piece_v2_owner_read_enabled', false) === true &&
+        typeof this.props.navigation?.getParent?.()?.navigate === 'function';
+    } catch { return false; }
+  }
+
+  savedNavigationCurrent(pending) {
+    return !!pending && this.isCurrent() && this.canOpenSavedPiece() &&
+      this.controller === pending.controller && this.boundStamp === pending.stamp &&
+      this.boundRuntime === pending.runtime && this.boundSavedInputStamp === pending.sourceStamp &&
+      this.context?.runtime === pending.runtimePublication && this.contextSyncToken === pending.syncToken &&
+      this.props.navigation === pending.navigation && this.controller.getView().phase === 'saved' &&
+      this.controller.getView().savedReceipt === pending.receipt;
+  }
+
+  navigateSavedPiece(pending) {
+    if (!this.savedNavigationCurrent(pending)) return;
+    try { this.props.navigation.getParent().navigate('Piece', {
+      screen: 'PieceOwnerHistory', params: { savedPiece: pending.target }, initial: false,
+    }); } catch { /* The saved receipt remains available for an explicit open. */ }
+  }
+
+  previewDismissed(epoch) {
+    if (!this.mounted || this.state.open || !this.state.modalRetained || this.state.modalEpoch !== epoch) return;
+    const pending = this.pendingSavedNavigation;
+    this.pendingSavedNavigation = null;
+    this.setState({ modalRetained: false });
+    if (pending?.epoch === epoch) this.navigateSavedPiece(pending);
+  }
+
+  openSavedPiece(receipt) {
+    if (this.pendingSavedNavigation || !this.isCurrent() || !this.canOpenSavedPiece()) return;
+    const controller = this.controller, view = controller.getView();
+    if (view.phase !== 'saved' || !receipt || view.savedReceipt !== receipt) return;
+    const expectedUserId = this.savedMode
+      ? JSON.parse(this.boundSavedInputStamp)[1] : this.props.context.expectedUserId;
+    // The full-screen iOS modal must finish dismissing before the owner's
+    // screen mounts. Keep only this body-free handoff; no drawing is retained.
+    const pending = { controller, receipt, stamp: this.boundStamp, runtime: this.boundRuntime,
+      sourceStamp: this.boundSavedInputStamp, runtimePublication: this.context?.runtime,
+      navigation: this.props.navigation, epoch: this.state.modalEpoch,
+      target: Object.freeze({ pieceId: receipt.piece_id, expectedUserId }) };
+    const waitForDismiss = Platform?.OS === 'ios' && this.state.modalRetained === true;
+    this.close();
+    pending.syncToken = this.contextSyncToken;
+    if (!this.savedNavigationCurrent(pending)) return;
+    if (waitForDismiss) this.pendingSavedNavigation = pending;
+    else this.navigateSavedPiece(pending);
+  }
+
+  close() {
+    this.pendingSavedNavigation = null;
+    if (!this.mounted) return;
+    this.contextSyncToken = Object.freeze({});
+    const stamp = this.boundStamp, runtime = this.boundRuntime;
+    const rejected = this.savedMode ? this.controller?.getView() : null;
+    if (this.sourceAttempt) this.clearSource();
+    this.controller?.close();
+    if (rejected?.sourceRefreshToken && this.isCurrent() && this.boundStamp === stamp && this.boundRuntime === runtime) {
+      const closed = this.controller?.getView();
+      // Closing a definitive rejection must not turn the stale request back
+      // into an ordinary create button using its obsolete source/choices/key.
+      if (closed?.sourceRefreshToken) {
+        this.sourcePhase = 'unavailable';
+        this.sourceCode = closed.sourceRefreshCode;
+        this.sourceFailureToken = closed.sourceRefreshToken;
+      }
+    }
+    this.setState({ open: false });
+  }
+
+  render() {
+    // A changed account/source/key/selection is concealed in this render,
+    // not one effect later. There is no render-time mutation or HTTP call.
+    if (!this.isCurrent()) return null;
+    const { colors = {}, ui } = this.props;
+    const bodyStyle = { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT };
+    const statusStyle = { gap: 12, padding: 20, borderRadius: 24, borderWidth: 1,
+      borderColor: colors.CARD_BORDER, backgroundColor: colors.PANEL_BG };
+    const modalEpoch = this.state.modalEpoch;
+    const view = this.controller.getView();
+    const checked = readPiecePreviewDisplay(view);
+    const provider = this.props.isSaveAdmitted, handle = this.saveFitHandle;
+    const canSave = this.isSaveAdmitted(checked.preview, checked.visualToken);
+    // Only this host projection can expose initial-save controls. The shared
+    // display reader and native card retain their independent canSave:false.
+    const display = canSave ? Object.freeze({ ...checked, canSave: true }) : checked;
+    if (!this.isCurrent() || view.visualToken !== this.controller.getView().visualToken) return null;
+    const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider, handle) : null;
+    const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
+      ? () => this.openSavedPiece(view.savedReceipt) : null;
+    const saveRetryLabel = display.saveQuotaRejected === true ? '保存枠を確認して再試行' : '同じ保存要求で結果を確認';
+    if (this.savedMode && this.sourcePhase !== 'ready' && !display.previewRestartToken &&
+        !['cancel', 'save'].includes(display.retryKind)) {
+      const unavailable = this.sourcePhase === 'unavailable';
+      const canRead = this.sourcePhase === 'idle' ||
+        (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
+      const refreshToken = unavailable ? this.sourceFailureToken : null;
+      return element(View, { testID: 'piece-saved-input-source-area', style: statusStyle },
+        this.sourcePhase === 'loading' ? element(Text, { style: bodyStyle, accessibilityLiveRegion: 'polite' },
+          this.props.creationMode ? 'ピースを準備しています。' : '保存入力を確認しています。') : null,
+        unavailable ? element(Text, { style: bodyStyle, accessibilityRole: 'alert' }, new PieceApiError(this.sourceCode).message) : null,
+        canRead ? element(Button, { title: this.props.creationMode ? 'ピースを作成' : '保存入力を確認',
+          onPress: this.props.creationMode ? this.createFromSavedInput : this.resolveSavedInput,
+          accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'Pieceに使う保存入力を確認' }) : null,
+        refreshToken ? element(Button, { title: '保存入力を確認し直す', accessibilityLabel: '保存入力を確認し直す',
+          onPress: () => this.refreshSavedInput(refreshToken) }) : null,
+      );
+    }
+    if (display.phase === 'hidden') return null;
+    return element(View, { testID: 'piece-input-action-area', style: this.state.open ? undefined : statusStyle },
+      display.phase === 'idle' ? element(Button, {
+        title: this.props.creationMode ? 'ピースを作成' : 'この入力をPieceにする', onPress: this.start,
+        accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'この入力をPieceにする',
+      }) : null,
+      ['unavailable', 'cancelled', 'saved'].includes(display.phase) && !this.state.open
+        ? element(Text, { style: bodyStyle, accessibilityRole: display.phase === 'saved' ? undefined : 'alert',
+          accessibilityLiveRegion: 'polite' }, display.message) : null,
+      !this.state.open && display.canRetry && ['cancel', 'save'].includes(display.retryKind) ? element(Button, {
+        title: display.retryKind === 'save' ? saveRetryLabel : '同じ候補の取消を再試行', onPress: this.retry,
+        accessibilityLabel: display.retryKind === 'save' ? saveRetryLabel : '同じ候補の取消を再試行',
+      }) : null,
+      !this.state.open && display.previewRestartToken ? element(Button, {
+        title: '同じ記録から作り直す', accessibilityLabel: '同じ記録から作り直す',
+        onPress: () => this.restartExpired(display.previewRestartToken),
+      }) : null,
+      !this.state.open && this.savedMode && display.sourceRefreshToken ? element(Button, {
+        title: '保存入力を確認し直す', accessibilityLabel: '保存入力を確認し直す',
+        onPress: () => this.refreshSavedInput(display.sourceRefreshToken),
+      }) : null,
+      !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
+        accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
+      element(PiecePreviewModal, { key: this.state.modalEpoch, visible: this.state.open,
+        retainDismiss: this.state.modalRetained, onDismiss: () => this.previewDismissed(modalEpoch),
+        display, onClose: this.close, onOpenSaved,
+        onRetry: this.retry, onRefreshSource: this.savedMode ? this.refreshSavedInput : null,
+        onRestartExpired: this.restartExpired, onVisualChange: this.changeVisual, onFormatChange: this.changeFormat, onReturnToFormat: this.returnToFormat, onCancel: this.cancelPreview, onSave,
+        onSaveFitChange: this.receiveSaveFit }),
+    );
+  }
+}
+

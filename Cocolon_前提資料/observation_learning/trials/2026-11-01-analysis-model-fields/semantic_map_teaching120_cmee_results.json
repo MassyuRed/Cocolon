@@ -1,0 +1,22 @@
+[
+  {
+    "id": "T01_manual10",
+    "result": "CORE_FORMAT_PASS_NOT_MEANING_ACCEPTANCE"
+  },
+  {
+    "id": "H01_research",
+    "result": "CORE_FORMAT_PASS_NOT_MEANING_ACCEPTANCE"
+  },
+  {
+    "id": "H02_mug",
+    "result": "CORE_FORMAT_PASS_NOT_MEANING_ACCEPTANCE"
+  },
+  {
+    "id": "H03_boundary",
+    "result": "analysis_semantic_evidence_unbound"
+  },
+  {
+    "id": "H04_garden",
+    "result": "analysis_semantic_evidence_unbound"
+  }
+]

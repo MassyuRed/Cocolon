@@ -1,0 +1,8 @@
+{
+  "frozen_inputs_and_initial_weights_unchanged": true,
+  "checked_files": 182,
+  "new_weight_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+  "gpu_after_process": "NVIDIA RTX A5000, 1 MiB, 0 %",
+  "gpu_stop_restart_delete": false,
+  "retry": false
+}

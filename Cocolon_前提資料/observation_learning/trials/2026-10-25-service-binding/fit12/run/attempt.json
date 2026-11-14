@@ -1,0 +1,7 @@
+{
+  "source_commit": "cce9616599ba1e008f04241e71e182a5a481d78d",
+  "retry": false,
+  "started_unix": 1792914558.678847,
+  "optimizer_steps_max": 12,
+  "fit_generation_calls_max": 6
+}

@@ -1,0 +1,105 @@
+{
+  "status": "CPU_ONLY_NO_NEW_MODEL_RECEIVER_OR_GPU",
+  "files": [
+    {
+      "path": "superseded_v1/FT-BOOK-AFTER-ANSWER.roundtrip.json",
+      "bytes": 11161,
+      "sha256": "da05e98b491ad168fa2a8eb67a341b25b3c77ff37492b98395e343e577e6c049"
+    },
+    {
+      "path": "superseded_v1/FT-BOOK-AFTER-ANSWER.rows.json",
+      "bytes": 8139,
+      "sha256": "932366a14af6ddcac519323289566c092b3ce84b17f8907d023c7b14191f325f"
+    },
+    {
+      "path": "superseded_v1/FT-SHOP-AFTER-ANSWER.roundtrip.json",
+      "bytes": 12660,
+      "sha256": "0df673392ceabeea5592166a3928f644c21d204cada5b9f18de9ef0e96af3ff3"
+    },
+    {
+      "path": "superseded_v1/FT-SHOP-AFTER-ANSWER.rows.json",
+      "bytes": 9443,
+      "sha256": "fa905a171d3f560357351fb5672119064c30248143b5476648b56e18526a2ab4"
+    },
+    {
+      "path": "superseded_v1/cpu.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "superseded_v1/cpu.log",
+      "bytes": 2113,
+      "sha256": "2e5a17fe1c7088a5513f136485b73785a9910d7a16bd49c67b802b6cdc7f74f7"
+    },
+    {
+      "path": "superseded_v1/cpu_check.json",
+      "bytes": 1050028,
+      "sha256": "ee00a6a0dc461fc2ec515b55945f30ba90eb8cf1c1e6dd95c647090807b39f49"
+    },
+    {
+      "path": "superseded_v1/eval_inputs.json",
+      "bytes": 130539,
+      "sha256": "92e6eb9d7e17306edaa6d488603d1d2676bce3124c25c71ea259202b3165b00a"
+    },
+    {
+      "path": "superseded_v1/prepare_fixed_rows.py",
+      "bytes": 15946,
+      "sha256": "312e0bfd3fd0fa75c5f1882c0e3b1b022101eda34108d75062a88c437982e7d1"
+    },
+    {
+      "path": "superseded_v1/train_messages.jsonl",
+      "bytes": 269101,
+      "sha256": "75b9988f5a96d94971b658d22477475138ff1d5cf39e6446cbbcb6d9c2b14830"
+    },
+    {
+      "path": "final_v2/FT-BOOK-AFTER-ANSWER.roundtrip.json",
+      "bytes": 11161,
+      "sha256": "da05e98b491ad168fa2a8eb67a341b25b3c77ff37492b98395e343e577e6c049"
+    },
+    {
+      "path": "final_v2/FT-BOOK-AFTER-ANSWER.rows.json",
+      "bytes": 8139,
+      "sha256": "932366a14af6ddcac519323289566c092b3ce84b17f8907d023c7b14191f325f"
+    },
+    {
+      "path": "final_v2/FT-SHOP-AFTER-ANSWER.roundtrip.json",
+      "bytes": 12660,
+      "sha256": "0df673392ceabeea5592166a3928f644c21d204cada5b9f18de9ef0e96af3ff3"
+    },
+    {
+      "path": "final_v2/FT-SHOP-AFTER-ANSWER.rows.json",
+      "bytes": 9443,
+      "sha256": "fa905a171d3f560357351fb5672119064c30248143b5476648b56e18526a2ab4"
+    },
+    {
+      "path": "final_v2/cpu.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "final_v2/cpu.log",
+      "bytes": 2113,
+      "sha256": "7aad60d9ff83e8b6cffb0d2298c7e1da55bc12e5461304dfcb2f7c7992361fb4"
+    },
+    {
+      "path": "final_v2/cpu_check.json",
+      "bytes": 1055159,
+      "sha256": "92d5b80f72bdb861560591c38e4545cd931c1d07c64c7224d00fb909b8b73267"
+    },
+    {
+      "path": "final_v2/eval_inputs.json",
+      "bytes": 131263,
+      "sha256": "93dec013426950d1b79b96c595b7021348acca86a4891de8f9c244b1a8c083f3"
+    },
+    {
+      "path": "final_v2/prepare_fixed_rows_v2.py",
+      "bytes": 16723,
+      "sha256": "df650fd82663ac1c72954cc640ace9c53de71a3e9fd46155279670253de7dde3"
+    },
+    {
+      "path": "final_v2/train_messages.jsonl",
+      "bytes": 269825,
+      "sha256": "d6bf692885d542af10d6956a0c958c770cda97d06960384c31e0364f741c9948"
+    }
+  ]
+}

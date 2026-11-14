@@ -1,0 +1,13 @@
+{"step": 1, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.002008243463933468, "adaptive": false, "target_tokens": 1331, "gradient_norm": 0.06938008964061737}
+{"step": 2, "id": "FT-BOOK-AFTER-ANSWER", "loss": 1.68851900100708, "adaptive": true, "target_tokens": 2913, "gradient_norm": 8.04122543334961}
+{"step": 3, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.0013884942745789886, "adaptive": false, "target_tokens": 1585, "gradient_norm": 0.08806199580430984}
+{"step": 4, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.002183970296755433, "adaptive": false, "target_tokens": 2228, "gradient_norm": 0.16558058559894562}
+{"step": 5, "id": "FT-SHOP-AFTER-ANSWER", "loss": 1.7323633432388306, "adaptive": true, "target_tokens": 3238, "gradient_norm": 9.312337875366211}
+{"step": 6, "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0015353142516687512, "adaptive": false, "target_tokens": 1331, "gradient_norm": 0.04717019200325012}
+{"step": 7, "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.0014989187475293875, "adaptive": false, "target_tokens": 1559, "gradient_norm": 0.0660594254732132}
+{"step": 8, "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.002332944655790925, "adaptive": false, "target_tokens": 2231, "gradient_norm": 0.2695135176181793}
+{"step": 9, "id": "FT-BOOK-AFTER-ANSWER", "loss": 1.5572385787963867, "adaptive": true, "target_tokens": 2913, "gradient_norm": 6.920120716094971}
+{"step": 10, "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.001588541897945106, "adaptive": false, "target_tokens": 1321, "gradient_norm": 0.05145592987537384}
+{"step": 11, "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.001386246527545154, "adaptive": false, "target_tokens": 1598, "gradient_norm": 0.06233867630362511}
+{"step": 12, "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.001755835022777319, "adaptive": false, "target_tokens": 2237, "gradient_norm": 0.08963348716497421}
+{"step": 13, "id": "FT-SHOP-AFTER-ANSWER", "loss": 1.6159528493881226, "adaptive": true, "target_tokens": 3238, "gradient_norm": 7.676973819732666}

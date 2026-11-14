@@ -1,0 +1,822 @@
+{
+  "status": "ORDINARY_7701_V3_SAVED_AND_MAP_DISPLAY_CONFIRMED_NOT_QUALITY_ACCEPTED",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+  "effective_updates": 120,
+  "optimizer_rng_exact_resume": false,
+  "nonthinking120": {
+    "real_calls": 5,
+    "complete": 5,
+    "cmee_format_pass": 3,
+    "meaning_accepted": 0
+  },
+  "thinking_unbounded": {
+    "real_calls": 1,
+    "seconds": 210.044,
+    "finish": "length",
+    "final_answer_present": false
+  },
+  "thinking_budget512": {
+    "real_calls": 3,
+    "complete": 3,
+    "cmee_format_pass": 1,
+    "limited_meaning_candidate": [
+      "H04_garden"
+    ],
+    "ordinary_quality_accepted": false
+  },
+  "material_remaining": [
+    "source-faithful meanings without invented facts or wish/actual reversals",
+    "entire-history processing beyond the current single-call token/body budgets",
+    "human device full-prose and node/edge-detail appearance review; semantic quality and generation latency"
+  ],
+  "production_model_environment_changed": true,
+  "gpu_reasoning_text_exported": false,
+  "api_core_commit": "1cd4ada6c076cd72f3710a8412f7dabce855e09c",
+  "api_live_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+  "render_deploy": "dep-dbnrusbl550s7381luu0",
+  "testflight": {
+    "build": 7701,
+    "run": 42360257959,
+    "commit": "27cc48b43acbccf052334ec555b3f4ebc292f311",
+    "upload": "success",
+    "availability": "7701_USER_DEVICE_USE_CONFIRMED_BY_USER_AND_NORMAL_REQUEST_LOGS"
+  },
+  "retained_weights_archive": {
+    "file_name": "Cocolon_Analysis_Semantic_Map_Training_20261107.zip",
+    "version": 1,
+    "sha256": "a7081da470d85364497f924199b0e416031db98d21e9aa0f08a914864392478a",
+    "bytes": 42734454,
+    "members": 7,
+    "effective_updates": [
+      24,
+      80,
+      120
+    ],
+    "weights_and_config_verified": true,
+    "optimizer_rng_included": false,
+    "source_and_real_results_commit": "44f306246d015cca77e348ef712f6258ca35d5ff"
+  },
+  "device_review_activation": {
+    "priority": "device graph/prose/detail review before completing all model-quality changes",
+    "rn_build_ready": 7701,
+    "new_build_required_for_v3": false,
+    "gpu_service": "RUNNING",
+    "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+    "local_health_http": 200,
+    "bridge_authenticated_empty_payload_upstream_http": 400,
+    "bridge_set_cookie": false,
+    "real_generation_verified": true,
+    "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
+    "production_env_changed": true,
+    "deploy_started": true,
+    "next_action": "Obtain approval for registering existing API FCM_PUSH_ENABLED/FCM_SERVICE_ACCOUNT_FILE and firebase_service_account.json on existing mashos-astor-worker, deploying exact API59934faf to API/worker, and one integrated RN build from e2d7a7a app source through existing internal TestFlight distribution. Notification target tests and API final CI passed; unrelated inherited Piece V4 native19 failures match predecessor names/order. Current live remains09a3f714. Do not send fake update notifications or require all semantic repairs first.",
+    "deploy_live": true,
+    "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
+    "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
+    "initial_device_http_statuses": [
+      422,
+      422
+    ],
+    "new_v3_saved": true,
+    "nullable_metadata_fix_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
+    "nullable_metadata_fix_tests": 37,
+    "private_safe_code_location_diagnostic": true,
+    "model_response_received_by_cmee": true,
+    "post_metadata_retry_http": 422,
+    "post_metadata_retry_seconds": 126.21,
+    "post_metadata_retry_rejection": "CMEE JSON parsing",
+    "json_fence_fix_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
+    "json_fence_fix_tests": 44,
+    "json_fence_payload_unchanged": true,
+    "latest_device_http": 200,
+    "latest_device_seconds": 150.751,
+    "synthetic_provider_probe": "Unicode/EOS fixed full T01: HTTP200/175.505s/stop/4486Japanese chars; unchanged CMEE admitted watashi.map.v3",
+    "provider_restart": {
+      "old_pid": 17275,
+      "signal": "TERM",
+      "port_released": true,
+      "same_saved_weights": true,
+      "jupyter_or_pod_restarted": false,
+      "local_health_http": 200,
+      "cpu_threads": 1
+    },
+    "real_generation_scope": "Normal authenticated 7701 ensure reached new CMEE v3 DB save and same-current DB reread; user confirms map display",
+    "latest_device_reason": "New v3 saved successfully; generated-result node evidence returned HTTP200",
+    "post_fence_evidence_rejection": {
+      "at_utc": "2026-11-07T12:02:20Z",
+      "http": 422,
+      "seconds": 89.336,
+      "stage": "_semantic_map_evidence:2334"
+    },
+    "constrained_timeout": {
+      "at_utc": "2026-11-07T12:33:38Z",
+      "http": 503,
+      "seconds": 215.681
+    },
+    "gpu_generation_source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+    "generation_constraint_tests": {
+      "passed": 75,
+      "failed": 0,
+      "skipped": 0
+    },
+    "unicode_failure": {
+      "synthetic_bounded_tokens": 128,
+      "seconds": 8.884,
+      "premature_parser_completion_after_japanese": true,
+      "repeated_im_end_count": 107,
+      "tokenizer_eos_id": 248046,
+      "independent_fixed_source_reproduced": true
+    },
+    "unicode_fix": {
+      "parser_alphabet_config_before_context": true,
+      "generation_and_finish_eos_same_tokenizer": true,
+      "source_and_evidence_unchanged": true
+    },
+    "synthetic_runtime_validation": {
+      "source": "T01_manual10",
+      "synthetic_only": true,
+      "seconds": 175.505,
+      "http": 200,
+      "finish": "stop",
+      "characters": 4486,
+      "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+      "cmee_admitted": true,
+      "nodes": 10,
+      "edges": 3,
+      "prose_characters": 1964,
+      "meaning_quality_accepted": false,
+      "device_saved": false
+    },
+    "device_refresh_instructions_issued": true,
+    "device_validation_20261108": {
+      "observed_at_jst": "2026-11-08T07:38:42+09:00",
+      "request_path": "/self-structure/latest?ensure=true",
+      "force": false,
+      "app_build": 7701,
+      "http": 200,
+      "response_seconds": 150.751,
+      "application_wall_seconds": 150.7485,
+      "database_calls": 4,
+      "database_seconds": 2.2216,
+      "database_errors": 0,
+      "wire_kind": "watashi.map.v3",
+      "private_schema": "analysis.semantic-private-evidence.v1",
+      "nodes": 3,
+      "edges": 2,
+      "prose_characters": 1271,
+      "coverage": {
+        "source_count": 87,
+        "processed_count": 35,
+        "mapped_count": 33,
+        "unparsed_count": 2,
+        "excluded_count": 52,
+        "exclusion_reasons": {
+          "analysis_semantic_text_empty": 52
+        },
+        "stale_supplement_count": 0
+      },
+      "current_database_non_generating_reread_same_saved_artifact": true,
+      "node_evidence_read": {
+        "observed_at_jst": "2026-11-08T07:39:13+09:00",
+        "node": "n2",
+        "http": 200,
+        "seconds": 0.753
+      },
+      "map_display_user_confirmed": true,
+      "full_prose_appearance_user_confirmed": true,
+      "node_edge_detail_appearance_user_confirmed": false,
+      "meaning_quality_accepted": false,
+      "model_and_cmee_individual_latency_measured": false,
+      "new_generation_requested_this_session": false,
+      "production_settings_changed_this_session": false,
+      "new_build_this_session": false,
+      "db_mutation_this_session": false,
+      "private_bodies_exported": false,
+      "node_detail_appearance_user_confirmed": true,
+      "edge_detail_appearance_user_confirmed": false,
+      "device_evidence": "User-supplied six screenshots: overview, graph and three node detail dialogs; screenshots not copied to public repository"
+    },
+    "ui_context_display_20261108": {
+      "request": "hide category/emotion context listing in node details",
+      "source_path": "components/selfStructure/SemanticWatashiMap.js",
+      "implemented": true,
+      "existing_tests_passed": 7,
+      "one_time_android_ios_node_dialogs_checked": 14,
+      "analysis_context_preserved": true,
+      "device_build_7701_has_change": false,
+      "build_status": "await next integrated build",
+      "source_commit": "ec49d9812f7939ae0b93fcbd6ffb57489aae999c"
+    },
+    "token_filter_optimization_20261108": {
+      "kind": "synthetic_cpu_and_gpu",
+      "ordered_result_and_rejection_equivalence_cases": 400,
+      "vocabulary_size": 248046,
+      "repetitions": 31,
+      "timings": {
+        "free_before_median_ms": 13.0738,
+        "free_after_median_ms": 6.4254,
+        "quote_before_median_ms": 5.833,
+        "quote_after_median_ms": 5.7783
+      },
+      "actual_gpu_latency_measured": true,
+      "private_source_or_output_included": false,
+      "model_weights_or_input_budgets_changed": false,
+      "source_base_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
+      "changed_path": "ai/tools/serve_emlis_natural_reply.py",
+      "source_postimage_sha256": "4c16bb4d459b657e13d2a28579caf0d787401f31500d4d3a77f0b6a90c940251",
+      "pinned_lmfe_commit": "817f944fcc8851917c40300a47f62d1defc3ffc3",
+      "tests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0,
+        "deselected": 1,
+        "seconds": 6.68,
+        "warning": "existing Pydantic root_validator deprecation",
+        "selection": "semantic generation schema + probe HTTP + semantic map + semantic integration, excluding actual isolated SQL dependency case"
+      },
+      "initial_environment_error": {
+        "missing_existing_sparse_dictionary": true,
+        "corrected_by_same_ref_materialization": true,
+        "source_changes_to_fix_environment": 0
+      },
+      "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+      "actual_gpu_result": {
+        "stage": "complete",
+        "synthetic_only": true,
+        "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+        "kernel_versions": {},
+        "provider_pid": 20854,
+        "seconds": 171.34955875994638,
+        "http": 200,
+        "finish": "stop",
+        "characters": 4486,
+        "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+        "cmee_admitted": true,
+        "nodes": 10,
+        "edges": 3,
+        "prose_characters": 1964,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 10,
+          "processed_count": 10,
+          "profile": "cumulative.v1",
+          "source_count": 10,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "health_http": 200,
+        "model_weights_changed": false,
+        "request_messages_changed": false,
+        "context_or_output_budgets_changed": false,
+        "meaning_quality_accepted": false
+      },
+      "baseline_seconds": 175.505,
+      "baseline_raw_identical": true,
+      "single_run_only": true,
+      "authenticated_device_remeasurement": false
+    },
+    "fast_kernel_probe_20261108": {
+      "actual_gpu": true,
+      "synthetic_only": true,
+      "model_loaded": false,
+      "kernel_versions": {
+        "fla-core": "0.5.0",
+        "causal-conv1d": "1.7.0",
+        "einops": "0.8.1"
+      },
+      "existing_versions_preserved": {
+        "torch": "2.8.0+cu128",
+        "triton": "3.4.0",
+        "transformers": "5.19.0"
+      },
+      "probe_log": [
+        {
+          "stage": "start",
+          "synthetic_only": true,
+          "model_loaded": false,
+          "torch": "2.8.0+cu128",
+          "rtol": 0.05,
+          "atol": 0.03
+        },
+        {
+          "stage": "warmup",
+          "case": "recurrent",
+          "implementation": "fla.ops.gated_delta_rule.fused_recurrent"
+        },
+        {
+          "case": "recurrent",
+          "numerical": [
+            {
+              "max_abs": 0,
+              "relative_rms": 0
+            },
+            {
+              "max_abs": 7.450580596923828e-09,
+              "relative_rms": 8.850033331143291e-08
+            }
+          ],
+          "cold_seconds": 0.9357296118978411,
+          "reference_ms": 0.4423669306561351,
+          "optimized_ms": 0.17843907698988914
+        },
+        {
+          "stage": "warmup",
+          "case": "chunk",
+          "implementation": "fla.ops.gated_delta_rule.chunk"
+        },
+        {
+          "case": "chunk",
+          "numerical": [
+            {
+              "max_abs": 3.0517578125e-05,
+              "relative_rms": 0.0044445075115622425
+            },
+            {
+              "max_abs": 0.0003203675150871277,
+              "relative_rms": 0.0031576935565782232
+            }
+          ],
+          "cold_seconds": 37.67397761205211,
+          "reference_ms": 0.9686190169304609,
+          "optimized_ms": 0.8807143894955516
+        },
+        {
+          "stage": "warmup",
+          "case": "conv_prefill",
+          "implementation": "causal_conv1d.causal_conv1d_interface"
+        },
+        {
+          "case": "conv_prefill",
+          "numerical": [
+            {
+              "max_abs": 0.0009765625,
+              "relative_rms": 0.002847876698270907
+            }
+          ],
+          "cold_seconds": 0.005290705012157559,
+          "reference_ms": 0.07245445158332586,
+          "optimized_ms": 0.0639845384284854
+        },
+        {
+          "stage": "warmup",
+          "case": "conv_update",
+          "implementation": "causal_conv1d.causal_conv1d_interface"
+        },
+        {
+          "case": "conv_update",
+          "numerical": [
+            {
+              "max_abs": 0.00048828125,
+              "relative_rms": 0.0022980064588701663
+            },
+            {
+              "max_abs": 0,
+              "relative_rms": 0
+            }
+          ],
+          "cold_seconds": 0.0017733678687363863,
+          "reference_ms": 0.12480397708714008,
+          "optimized_ms": 0.0581544591113925
+        },
+        {
+          "stage": "complete",
+          "cases": 4,
+          "numerical_pass": true,
+          "exact_token_equivalence": false
+        }
+      ],
+      "unadopted_candidate": {
+        "fla-core": "0.6.0",
+        "reason": "Triton3.4 missing triton.experimental.gluon.language.extra; current server unchanged during failed isolated probe"
+      },
+      "causal_wheel_sha256": "a1fcd5d022b67ddfc9e1c291f890004c1c081a03d66b532f6eebe31219168e0e",
+      "fla_core_wheel_sha256": "5c826ff32daf6b629658e3e4f6125d87cf8c32eea937e3be9ba85f51951d809a",
+      "model_runtime_candidate_tested_later": true,
+      "model_runtime_candidate_adopted": false,
+      "model_runtime_result": {
+        "stage": "complete",
+        "synthetic_only": true,
+        "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+        "kernel_versions": {
+          "fla-core": "0.5.0",
+          "causal-conv1d": "1.7.0",
+          "einops": "0.8.1"
+        },
+        "provider_pid": 20117,
+        "seconds": 185.88516809605062,
+        "http": 200,
+        "finish": "stop",
+        "characters": 4270,
+        "raw_sha256": "cc704a051250459091f4d1d551615e6d04c2b78eb13edf6a3bd138a744ead9ef",
+        "cmee_admitted": true,
+        "nodes": 9,
+        "edges": 5,
+        "prose_characters": 1812,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 9,
+          "processed_count": 10,
+          "profile": "cumulative.v1",
+          "source_count": 10,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "health_http": 200,
+        "model_weights_changed": false,
+        "request_messages_changed": false,
+        "context_or_output_budgets_changed": false,
+        "meaning_quality_accepted": false
+      },
+      "final_provider": {
+        "pid": 20854,
+        "health_http": 200,
+        "fast_target_active": false,
+        "original_torch_math": true,
+        "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+        "existing_key_weights_budgets_unchanged": true
+      },
+      "model_loaded_scope": "initial synthetic-tensor kernel probe only; later model runtime comparison is recorded separately"
+    },
+    "latency_scope_20261108": {
+      "new_synthetic_model_generations": 2,
+      "new_device_generations_requested": 0,
+      "training": 0,
+      "new_pod_rental": 0,
+      "render_deploy": 0,
+      "render_settings_changed": false,
+      "db_mutation": false,
+      "build_started": false,
+      "kernel_target_installation_isolated": true,
+      "model_venv_dependency_pins_unchanged": true,
+      "quality_acceptance_unchanged": true
+    },
+    "background_refresh_20261108": {
+      "status": "DEPLOYED_BACKGROUND_UPDATE_AND_DEVICE_SAVED_READ_VERIFIED",
+      "user_requested_behavior": "Begin analysis after saving input and display the saved map when opening the screen",
+      "generation_duration_reduced_by_this_change": false,
+      "prior_synthetic_generation_seconds": 171.34955875994638,
+      "input_save_path": {
+        "owner": "api_emotion_submit._post_submit_background_async",
+        "reserve_before_notification_and_ingest": true,
+        "current_guard_metadata_check": true,
+        "existing_job_type": "myprofile_latest_refresh_v1",
+        "debounce_seconds_default": 20,
+        "same_owner_job_coalescing": true,
+        "running_updates_mark_dirty_with_microsecond_updated_at": true,
+        "queued_retry_budget_preserved": true,
+        "terminal_new_request_attempts_reset": true,
+        "generation_in_worker_not_submit_response": true,
+        "reservation_failure_does_not_fail_saved_input": true
+      },
+      "api": {
+        "latest_background_opt_in": true,
+        "background_default": false,
+        "old_7701_synchronous_default_preserved": true,
+        "background_saved_read_only": true,
+        "guard_invalid_old_map_hidden": true,
+        "existing_status_read_enqueues_or_generates": false,
+        "refresh_status_values": [
+          "queued",
+          "running",
+          "failed",
+          null
+        ],
+        "queue_error_preserves_authorized_saved_map": true,
+        "source_guard_read_failure_still_rejected": true
+      },
+      "rn": {
+        "latest_background_opt_in": true,
+        "read_timeout_ms": 15000,
+        "poll_interval_ms": 3000,
+        "poll_only_while_queued_or_running": true,
+        "poll_only_focused_and_app_active": true,
+        "version_or_visibility_change_reads_without_generation": true,
+        "owner_change_invalidates_old_requests": true,
+        "build_started": true,
+        "device_verified": false,
+        "local_tests_passed": 25,
+        "source_commit": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
+        "integrated_build": {
+          "github_run_id": 42430220604,
+          "run_number": 78,
+          "run_attempt": 1,
+          "source_commit": "861082d0e22f695d3aeee06f76924bcd6fcbe1c0",
+          "app_source_matches": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
+          "expected_build_number": 7801,
+          "status": "completed",
+          "upload_verified": true,
+          "apple_processing_verified": false,
+          "existing_internal_group_testing_verified": false,
+          "apple_console_inspection": "User aborted read-only inspection; no further Apple actions",
+          "conclusion": "success",
+          "all_steps_success": 19,
+          "upload_completed_at_utc": "2026-11-08T00:45:56Z",
+          "job_completed_at_utc": "2026-11-08T00:46:03Z",
+          "new_dispatch_or_rerun_after_initial": 0,
+          "build_number_source": "Pinned workflow expression: run78*100+attempt1",
+          "build_number_log_verified": false,
+          "build_number_apple_verified": false,
+          "job_log_read_limit": "Dedicated log tool transport closed; alternate fetch job/logs endpoint unsupported; no further retries",
+          "device_request_build_number_verified": "7801"
+        },
+        "device_background_read_verified": true,
+        "observed_device_build": "7801 request user-agent"
+      },
+      "boundaries": {
+        "source_and_quote_admission_preserved": true,
+        "owner_and_deleted_source_guard_preserved": true,
+        "monthly_historical_artifacts_preserved": true,
+        "new_render_services": 0,
+        "new_queue_or_tables": 0,
+        "new_schema_migrations": 0,
+        "new_model_or_training": 0,
+        "private_source_or_output_exported": false
+      },
+      "validation": {
+        "api_local_validation_passed": true,
+        "api_integrated": {
+          "passed": 308,
+          "skipped": 20,
+          "deselected": 1,
+          "subtests_passed": 4,
+          "seconds": 51.36,
+          "warnings": 1,
+          "sql_scope": "actual_isolated_SQL deselected; external PostgreSQL environment cases skipped",
+          "skip_scope": {
+            "existing_pg": 19,
+            "environment_sql": 1
+          }
+        },
+        "separate_overlapping_executions": {
+          "new_cases_passed": 18,
+          "new_cases_include_api": 2,
+          "post_submit_passed": 12,
+          "queue_passed": 9,
+          "queue_subtests_passed": 4
+        },
+        "overlapping_test_sets_summed": false,
+        "production_background_execution_verified": true,
+        "ci": {
+          "run_id": 42427888976,
+          "source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+          "status": "completed",
+          "conclusion": "success",
+          "last_observed_step": 17,
+          "all_steps_success": 17,
+          "job_finished_at_utc": "2026-11-08T00:15:24Z"
+        }
+      },
+      "runtime_checkpoint": {
+        "api_live_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+        "api_new_source_deployed": true,
+        "worker_live_commit_prefix": "09a3f714",
+        "worker_analysis_five_settings_inherited": true,
+        "worker_new_source_deployed": true,
+        "render_google_reauthentication_completed": true,
+        "render_configuration_and_deploy_result": "LIVE_BOTH_EXACT_APPROVED_COMMIT",
+        "api_queue_enabled": true,
+        "worker_existing_environment_key_count": 4,
+        "render_environment_saves_this_unit": 1,
+        "render_deploys_this_unit": 2,
+        "new_gpu_generations_this_unit": 0,
+        "db_dml_or_ddl_this_unit": 0,
+        "new_builds_this_unit": 1,
+        "approval_received": true,
+        "approval_scope": "Register dedicated analysis key and connection settings on existing mashos-astor-worker; deploy tested API and worker revision only after CI passes",
+        "worker_analysis_five_settings_registered": true,
+        "worker_settings_saved_without_deploy": true,
+        "worker_environment_key_count_after_save": 9,
+        "secret_value_readback_skipped": "Clipboard copy rejected by automatic review as unnecessary; verify key presence and runtime connection without extracting values",
+        "worker_running_process_has_new_settings": true,
+        "settings_verification": "New worker runtime confirmed all five settings present and expected semantic mode/model selected; authenticated empty payload returned400 without generation; no secret value extraction",
+        "clipboard_secret_recopy_review": "Rejected as unnecessary; stopped without alternate extraction",
+        "api_deploy": "dep-dbnrusbl550s7381luu0",
+        "api_live_at_utc": "2026-11-08T00:18:16.270779Z",
+        "worker_deploy": "dep-dbnruoou01pc73dj04c0",
+        "worker_live_at_utc": "2026-11-08T00:17:31.083451Z",
+        "auto_deploy_api": false,
+        "auto_deploy_worker": false,
+        "worker_refresh_job_consumed_type_present": true,
+        "worker_startup_at_utc": "2026-11-08T00:17:43.204572449Z",
+        "app_error_logs_in_fetched_deploy_window": {
+          "api": 0,
+          "worker": 0
+        }
+      },
+      "structure_map_delta": "PRESENT_EXISTING_SAVE_QUEUE_WORKER_READ_CONNECTION",
+      "old_7701_server_precompute_benefit_after_deploy": true,
+      "new_background_display_poll_requires_rn_build": true,
+      "api_source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+      "api_source_remote_readback_files": 9,
+      "predeploy_readonly_aggregate": {
+        "body_or_identity_exported": false,
+        "job_type": "myprofile_latest_refresh_v1",
+        "job_total": 944,
+        "job_done": 944,
+        "job_queued": 0,
+        "job_running": 0,
+        "job_failed": 0,
+        "max_attempts": 481,
+        "latest_finished_at_utc": "2026-11-07T06:14:36Z",
+        "max_attempts_scope": "Legacy predeployment history, not the new retry-budget behavior",
+        "cumulative_artifacts": [
+          {
+            "wire_kind": "watashi.map.v2",
+            "count": 1,
+            "latest_generated_at_utc": "2026-11-07T06:14:11.591862Z"
+          },
+          {
+            "wire_kind": "watashi.map.v3",
+            "count": 1,
+            "latest_generated_at_utc": "2026-11-07T22:38:42.206545Z"
+          }
+        ],
+        "synthetic_person_record_or_verification_job_added": false,
+        "user_jwt_or_impersonation_generated": false
+      },
+      "runtime_verification": {
+        "probe": "worker_analysis_connection_and_api_auth",
+        "generation_requested": false,
+        "user_authentication_impersonated": false,
+        "database_write_requested": false,
+        "runtime_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+        "analysis_settings_present": true,
+        "semantic_mode_active": true,
+        "expected_model_selected": true,
+        "authenticated_empty_payload_http": 400,
+        "provider_set_cookie": false,
+        "api_health_http": 200,
+        "unauthenticated_http": {
+          "/self-structure/latest?ensure=true&background=true": 401,
+          "/self-structure/latest?ensure=false&background=true": 401,
+          "/self-structure/latest/status": 401
+        },
+        "queue_database_http": 200,
+        "stage": "verified"
+      },
+      "verification_environment_corrections": {
+        "local_direct_http": "DNS lookup failed before connection; verified from running worker instead",
+        "public_openapi": "404 with existing openapi_url=None; initial probe KeyError corrected without product change",
+        "secret_clipboard_readback": "Rejected by auto-review as unnecessary; stopped; presence and authenticated runtime connection verified without extracting values"
+      },
+      "database_readback": {
+        "refresh_jobs": {
+          "done": 944,
+          "queued": 0,
+          "running": 0,
+          "failed": 0,
+          "max_historical_attempts": 481,
+          "latest_finished_at": "2026-11-07T06:14:36Z",
+          "before_after_unchanged": true
+        },
+        "artifacts": {
+          "v2": 1,
+          "v3": 1,
+          "v2_latest_generated_at": "2026-11-07T06:14:11.591862Z",
+          "v3_latest_generated_at": "2026-11-07T22:38:42.206545Z",
+          "before_after_unchanged": true
+        },
+        "guarded_metadata_read": {
+          "stored_owner_groups": 1,
+          "currently_visible_owner_groups": 1,
+          "generation_requested": false
+        },
+        "artificial_jobs_enqueued": 0,
+        "new_actual_input_background_generation_observed": true,
+        "after_testflight_upload_job_aggregate": {
+          "done": 944,
+          "queued": 0,
+          "running": 0,
+          "failed": 0,
+          "latest_updated_at": "2026-11-07T06:14:36Z",
+          "latest_finished_at": "2026-11-07T06:14:36Z",
+          "changed_since_predeployment": false,
+          "body_or_identity_exported": false
+        }
+      },
+      "new_input_runtime_observation": {
+        "trigger": "emotion_submit",
+        "status": "done",
+        "attempts": 2,
+        "requested_to_job_done_seconds": 399.668905,
+        "final_attempt_seconds": 133.868022,
+        "worker_result_status": "ok",
+        "new_generated_at_present": true,
+        "device_build": "7801",
+        "post_completion_saved_read_http": 200,
+        "post_completion_saved_read_ms": 466,
+        "device_display_report_received": true,
+        "gray_context_hidden_device_verified": false,
+        "source_content_or_identifiers_published": false
+      }
+    },
+    "completion_notifications_20261108": {
+      "status": "API_CI_AND_RN_TARGETS_PASSED_AWAITING_PRODUCTION_APPROVAL",
+      "text": "わたしマップが更新されました",
+      "event_type": "watashi_map_updated",
+      "new_artifact_only": true,
+      "in_app": "existing MainTabs status/banner and guarded foreground FCM hint",
+      "push": "existing send_fcm_push_v1 queue and push_enabled/token resolution",
+      "recipient_and_current_artifact_guard": true,
+      "atomic_reservation_only_if_absent": true,
+      "external_delivery_exactly_once_guaranteed": false,
+      "push_reservation_best_effort": true,
+      "push_priority": 60,
+      "new_tables": 0,
+      "new_dependencies": 0,
+      "new_render_services": 0,
+      "production_push_sent": false,
+      "worker_fcm_configuration_present": false,
+      "api_existing_fcm_configuration_and_secret_file_present": true,
+      "credential_values_read_or_copied": false,
+      "production_deployed": false,
+      "api_source_commit": "59934faf4aaf7052a7a139b8679ae9c244b1fb7c",
+      "api_ci": {
+        "run_id": 42434201873,
+        "job_id": 128589421043,
+        "source_commit": "59934faf4aaf7052a7a139b8679ae9c244b1fb7c",
+        "status": "completed",
+        "conclusion": "success",
+        "all_steps_success": 17,
+        "job_completed_at_utc": "2026-11-08T01:41:01Z",
+        "isolated_monthly_and_source_deletion_sql_passed": true
+      },
+      "legacy_client_screen_fallback": "Analysis",
+      "api_local": {
+        "passed": 375,
+        "skipped": 21,
+        "deselected": 1,
+        "subtests_passed": 21,
+        "seconds": 91.82,
+        "warnings": 1,
+        "skip_scope": "Q2_PGLITE_MODULE absent: cumulative_model_source19, semantic_integration1, model_fields1",
+        "deselected_scope": "real Q3 saved answers SQL1",
+        "final_compatibility_target_passed": 25,
+        "final_compatibility_subtests_passed": 21,
+        "overlapping_sets_summed": false
+      },
+      "rn_local": {
+        "notification_tests_passed": 70,
+        "new_notification_cases": 10,
+        "selected_startup_owner_tests_passed": 2,
+        "broader_attempt": {
+          "total": 118,
+          "passed": 107,
+          "environment_failed": 11,
+          "failure_scope": "Missing sparse checkout features or existing Metro dependency; no new install"
+        },
+        "native_foreground_configuration_change": false,
+        "guard_hidden_same_version_return_does_not_notify": true,
+        "initial_empty_to_new_map_notifies": true,
+        "background_late_response_does_not_consume_version": true,
+        "cold_warm_owner_boundary_checked": true,
+        "poll_push_same_version_deduplicated": true
+      },
+      "independent_review_passed": true,
+      "production_effects_pending_approval": [
+        "Register existing API FCM settings and firebase_service_account.json on existing worker",
+        "Deploy CI-passed notification revision to API and worker",
+        "Build integrated RN notification revision once"
+      ],
+      "rn_source_commit": "e2d7a7a15d42a098c8df24544f032ffe095d7f09",
+      "rn_ci": {
+        "phase6": {
+          "run_id": 42434396397,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "piece": {
+          "run_id": 42434396442,
+          "status": "completed",
+          "conclusion": "failure",
+          "successful_jobs": 5,
+          "failed_jobs": 1,
+          "rn_contract_job_success": true,
+          "failed_job_id": 128590034681,
+          "failure_scope": "Existing V4 native iOS checks: total20/pass1/fail19",
+          "comparison_baseline_run_id": 42428022739,
+          "comparison_baseline_source": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
+          "comparison_baseline_job_id": 128570429086,
+          "failed_names_and_order_identical": true,
+          "native_recipe_checker_dependency_changes": 0
+        }
+      },
+      "existing_generic_push_queue_readonly_aggregate": {
+        "done": 179,
+        "failed": 23,
+        "queued": 0,
+        "running": 0,
+        "old_failed_requeued": false,
+        "done_status_is_not_delivery_receipt": true
+      },
+      "rn_testflight_build_started": false,
+      "api_source_remote_unique_files_verified": 5,
+      "rn_source_test_and_status_files_verified": 11,
+      "approval_received": false,
+      "approval_reason": "Existing Rule18 section11.3 excludes new credential sharing to a worker and production deployment from standing delegation; ask once for the concrete tested revision and integrated TestFlight distribution scope"
+    }
+  }
+}

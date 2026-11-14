@@ -1,0 +1,104 @@
+{
+  "kind": "CLOSED_NOT_ADOPTED_COMPOSITION24",
+  "code_plan_commit": "7b23d7eb6dec9a6df3d256e3a9232cd4e81b999c",
+  "source_runner_sha256": "d64b9b96c29e4b9e72b680512658659d938adac8c3daa64bd88e7a982581a2e3",
+  "private_teachers_sha256": "6f92b1e106cedfb9d5cd3d380d79477b95567aba970b0c62cdd70cdc66767a2e",
+  "archive": {
+    "bytes": 15322522,
+    "sha256": "03ff7a7ab1a76274ba16d9d55b856e7801466995bdca30339fbb48eb815d133f",
+    "members": 429,
+    "manifest_members": 428
+  },
+  "library_file_id": "libfile_ee3f634f70648191a3f0a80fada599ee",
+  "cpu": {
+    "status": "CPU_PASSED_NO_MODEL",
+    "seconds": 15.166502663865685,
+    "runner_sha256": "d64b9b96c29e4b9e72b680512658659d938adac8c3daa64bd88e7a982581a2e3",
+    "input_sha256": "6f92b1e106cedfb9d5cd3d380d79477b95567aba970b0c62cdd70cdc66767a2e",
+    "teachers": 24,
+    "original90_unchanged": true,
+    "original16_encoded_unchanged": true,
+    "existing4_targets_bytes_unchanged": true,
+    "new_independent_teaching": 4,
+    "held4_not_trained": true,
+    "before_responses": 34,
+    "before_candidates": 34,
+    "before_typed": 19,
+    "model_loads": 0,
+    "model_forwards": 0,
+    "planned_updates": 24,
+    "planned_measurements": 48,
+    "planned_new_generations": 38,
+    "max_seconds": 900,
+    "normal_adoption": false
+  },
+  "run": {
+    "status": "COMPLETE_PENDING_FULL_REVIEW_NOT_ADOPTED",
+    "stages": [
+      {
+        "phase": "train",
+        "exit": 0
+      },
+      {
+        "phase": "after",
+        "exit": 0
+      }
+    ],
+    "normal_adoption": false,
+    "elapsed_since_run_start": 761.6658024787903,
+    "initial_unchanged": true
+  },
+  "after_generations": 38,
+  "all_finish_stop": true,
+  "candidate_old34_before": 34,
+  "candidate_old34_after": 34,
+  "new_cp_candidate": 3,
+  "new_cp_total": 4,
+  "total_after_candidates": 37,
+  "total_after_sources": 38,
+  "after_typed": 19,
+  "old19_graph_text_diagram_preserved": true,
+  "old_RU02_AT4_teacher_matches_preserved": true,
+  "newCP_teacher_json_matches": 0,
+  "newCP_before_free_generation": false,
+  "held_QF4_training_use": false,
+  "QF_semantic_repairs": 0,
+  "raw_comparison_sources": 34,
+  "raw_same": 29,
+  "raw_changed_ids": [
+    "R08",
+    "SC01",
+    "OA01",
+    "X05",
+    "QF02"
+  ],
+  "semantic_findings": {
+    "QF": "reason qualifier gaps and thought-action misbinding unchanged; QF02 legal unknown quote width change",
+    "CP01_CP02": "reason typed as TE_CONTEXT, marker omitted",
+    "CP03": "independent execution misbound to thought content",
+    "CP04": "non-source contiguous quote with added SELF prefix rejected",
+    "SC01": "independent ACTION NEGATION quote shortened; original polarity remains",
+    "R08_X05_OA01": "optional child or actor particle changes, not new semantic regressions"
+  },
+  "saved_replay": {
+    "responses": 72,
+    "candidate": 71,
+    "typed": 38
+  },
+  "weights_sha256": "27e969186c63b5ca1d1f8368473d416df50291161073775fe867c20f81f70714",
+  "config_sha256": "ba2a4575b6590f8e17c1b620ecbb66cde1bd488c8ecf1a128501e256c3a43d9d",
+  "teacher_mean_nll_before": 0.02528468560209755,
+  "teacher_mean_nll_after": 0.014458336622737988,
+  "gpu": "2 MiB, 0 %",
+  "compute_apps": "",
+  "processing_reference_usd": 0.061356411866346994,
+  "preparation_retrieval_holding_tax_separate": true,
+  "actual_total_billing_measured": false,
+  "no_retry": true,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_credit": 0,
+  "primary": "BLOCKER_NARROWED",
+  "structure_map_delta": "NONE",
+  "normal_product_source_or_deployment_changed": false
+}

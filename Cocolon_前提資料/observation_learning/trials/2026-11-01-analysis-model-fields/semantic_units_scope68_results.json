@@ -1,0 +1,342 @@
+{
+  "status": "COMPLETE_NOT_ADOPTED_MEANING_REVIEWED",
+  "date_jst": "2026-11-03",
+  "frozen_code_commit": "d3e4bd401136643ca6c9421f8164edb0ac8c4750",
+  "api_product_source_pin": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "historical_test_exception_commit": "cddf185594b5eeffcf72a92dcc2a2c5a44ff8b4c",
+  "historical_source_files_matched": 2134,
+  "run_report_status_preserved": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+  "process_seconds": 593.8666467710864,
+  "supervisor_seconds": 595.2674911059439,
+  "exit_code": 0,
+  "updates": 74,
+  "measurement_forwards": 136,
+  "new_generations": 40,
+  "reused_before": 24,
+  "model_loads": 3,
+  "trainable_tensors": 112,
+  "trainable_parameters": 3833856,
+  "initial_weights_sha256": "89badc47bc21bf315e4475267c007b9ee51c0b013a4d7d3161333f02fd30f580",
+  "initial_unchanged": true,
+  "saved_weights_sha256": "6964729368197687bd59d8829fa69dfdcb9c1050c74f6bfb17381bcc3a0d736b",
+  "saved_config_sha256": "7b3dbd575db394c7bc3b76e66608e536599a82fb21a5ad83101086394225cd88",
+  "saved_nontraining_reload": "MATCHED_112_TENSORS",
+  "gpu_compute_apps_after": "",
+  "saved_replay": {
+    "total": 64,
+    "matched_candidates": 56,
+    "rejected_responses": 8,
+    "new_generations": 0,
+    "model_loads": 0,
+    "updates": 0
+  },
+  "raw_unchanged": 20,
+  "raw_changed": 12,
+  "structural_before": 28,
+  "structural_after": 28,
+  "structural_denominator": 32,
+  "structural_counts_are_not_meaning_success": true,
+  "old_teacher_exact_retention": {
+    "AT4": [
+      4,
+      4
+    ],
+    "UQ2": [
+      2,
+      2
+    ],
+    "MX2": [
+      1,
+      2
+    ],
+    "OA2": [
+      1,
+      2
+    ]
+  },
+  "SC6_exact_teacher_match": [
+    3,
+    6
+  ],
+  "observations": [
+    {
+      "ids": [
+        "SC01",
+        "SC02"
+      ],
+      "change": "UNCHANGED_ALREADY_CORRECT"
+    },
+    {
+      "ids": [
+        "SC03",
+        "SD01",
+        "HQ03",
+        "CQ04"
+      ],
+      "change": "LOCAL_MEANING_IMPROVEMENT",
+      "limits": "SC03 rehearsal;SD01 nearby synthetic transfer;HQ03/CQ04 known development"
+    },
+    {
+      "ids": [
+        "SC04",
+        "SC05",
+        "SC06",
+        "SD02"
+      ],
+      "change": "STRICT_REJECTION_NONLITERAL_UNKNOWN_CONTENT",
+      "detail": "Present/future source child rewritten to past. Action-side gains do not make complete candidates valid."
+    },
+    {
+      "ids": [
+        "SQ03"
+      ],
+      "change": "REGRESSION_MODIFIER_OMITTED"
+    },
+    {
+      "ids": [
+        "MD02"
+      ],
+      "change": "PARTIAL_ACTOR_RECOVERY_NEGATION_MISSING_EXTRA_VERBSTEM_TARGET"
+    },
+    {
+      "ids": [
+        "MX02",
+        "OA02"
+      ],
+      "change": "REGRESSION_EXTRA_VERBSTEM_CONTENT_TARGET"
+    },
+    {
+      "ids": [
+        "HQ04"
+      ],
+      "change": "UNCHANGED_REASON_STILL_TE_CONTEXT"
+    }
+  ],
+  "normal_adoption": false,
+  "model_initial_adoption": false,
+  "full_route_quality_proven": false,
+  "all_unparsed": true,
+  "actor_unresolved": true,
+  "route_count": 0,
+  "product_credit": 0,
+  "formal_acceptance": "UNCHANGED_0_OF_3",
+  "structure_map_delta": "NONE_ISOLATED_RESEARCH_ONLY",
+  "production_api_db_rn_render_supabase_deployment_effect": 0,
+  "pod_management_effect": 0,
+  "independent_review": "SAME_ENVIRONMENT_READ_ONLY_AGENT_NOT_PRO_ULTRA_OR_HUMAN_ACCEPTANCE",
+  "gpu_hourly_usd_observed": 0.58,
+  "gpu_process_allocated_usd": 0.09567851531311947,
+  "cost_excludes": "preparation,download,transfer,holding,storage,tax",
+  "recovery": {
+    "original_run_members_matched": 265,
+    "extra_text_members_matched": 342,
+    "repacked_members": 348,
+    "byte_identical_safetensors": true,
+    "original_zip_container_recovered": false,
+    "repacked_container": true,
+    "new_model_calls": 0
+  },
+  "private_artifact": {
+    "library_file_id": "libfile_0fc1d54f28c881919cdc594b6eba8bfe",
+    "filename": "cocolon-analysis-scope68-result-20261103.zip",
+    "bytes": 15068340,
+    "sha256": "7a5578009b84e51f52bec3ef1b91502e33216d9cfaf8fe65ff29e133add56eda"
+  },
+  "next_cpu_only": "Compare existing teacher/source vs failed raw for unknown child tense changes,extra verbstem targets and modifier loss without rewriting output,weakening receiver,resetting prior outcomes or inventing new Mash teaching;then fix one next candidate before new GPU.",
+  "next_gpu_selected": false,
+  "automatic_progression": false,
+  "checks": [
+    {
+      "id": "AF01",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "NV04",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "REHEARSAL_AT17",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT19",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT21",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT29",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "CQ03",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "CQ04",
+      "unchanged": false,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "SQ01",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "SQ03",
+      "unchanged": false,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "PQ01",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "PQ02",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "UQ01",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "UQ02",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "HQ03",
+      "unchanged": false,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "HQ04",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "MX01",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "MX02",
+      "unchanged": false,
+      "before_teacher_equal": true,
+      "after_teacher_equal": false
+    },
+    {
+      "id": "MD01",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "MD02",
+      "unchanged": false,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "OA01",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "OA02",
+      "unchanged": false,
+      "before_teacher_equal": true,
+      "after_teacher_equal": false
+    },
+    {
+      "id": "OD01",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "OD02",
+      "unchanged": true,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "SC01",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "SC02",
+      "unchanged": true,
+      "before_teacher_equal": true,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "SC03",
+      "unchanged": false,
+      "before_teacher_equal": false,
+      "after_teacher_equal": true
+    },
+    {
+      "id": "SC04",
+      "unchanged": false,
+      "before_teacher_equal": false,
+      "after_teacher_equal": false
+    },
+    {
+      "id": "SC05",
+      "unchanged": false,
+      "before_teacher_equal": true,
+      "after_teacher_equal": false
+    },
+    {
+      "id": "SC06",
+      "unchanged": false,
+      "before_teacher_equal": false,
+      "after_teacher_equal": false
+    },
+    {
+      "id": "SD01",
+      "unchanged": false,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    },
+    {
+      "id": "SD02",
+      "unchanged": false,
+      "before_teacher_equal": null,
+      "after_teacher_equal": null
+    }
+  ]
+}

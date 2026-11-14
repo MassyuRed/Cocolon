@@ -1,0 +1,375 @@
+{
+  "actual_execution": {
+    "after_stops": 14,
+    "all_stages_exit_zero": true,
+    "db_calls": 0,
+    "gpu_cleanup_verified": true,
+    "gpu_compute_apps_after": "",
+    "gpu_memory_utilization_after": "2 MiB, 0 %",
+    "inner_seconds": 747.8081569029018,
+    "model_loads": 2,
+    "next_training_initial_adoption": false,
+    "nll_forwards": 20,
+    "normal_adoption": false,
+    "outer_exit_code": 0,
+    "outer_seconds": 750.5726890042424,
+    "retry": false,
+    "shared_limit_seconds": 900,
+    "updates": 23
+  },
+  "actual_teacher_composition": {
+    "all_rebound_under_v10": true,
+    "causality_limit": "Historical fact_wish23 API/profile and evaluation set differ. Existing analogous correct targets are present; no single cause or general absence-of-teachers conclusion follows.",
+    "common_retention_count": 10,
+    "composition_is_not_previous18_plus5": true,
+    "count": 23,
+    "distinct_multifield_gold_present": [
+      "N01",
+      "N08",
+      "AT29",
+      "F07"
+    ],
+    "evaluation_ids_used_for_updates_or_nll": [],
+    "existing_wish_count": 5,
+    "fact_wish_count": 8,
+    "maximum_fields_per_teacher": 2,
+    "maximum_records_per_teacher": 1,
+    "new_teacher_count": 0,
+    "positive_past_wish_gold_present": [
+      "F03",
+      "F08"
+    ],
+    "source_roles": [
+      "ORIGINAL_INPUT"
+    ]
+  },
+  "aggregate_known14_after": {
+    "all_source_records": 21,
+    "generated_requests": 10,
+    "mapped_records": 12,
+    "nodes": 20,
+    "processed_records_in_generated_maps": 12,
+    "records_in_whole_rejected_requests": 9,
+    "rejected_requests": 4,
+    "requests": 14,
+    "unparsed_records_in_generated_maps": 0
+  },
+  "aggregate_known14_before": {
+    "all_source_records": 21,
+    "generated_requests": 12,
+    "mapped_records": 16,
+    "nodes": 26,
+    "processed_records_in_generated_maps": 17,
+    "records_in_whole_rejected_requests": 4,
+    "rejected_requests": 2,
+    "requests": 14,
+    "unparsed_records_in_generated_maps": 1
+  },
+  "api_commit": "c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9",
+  "case_summary": [
+    {
+      "after_raw_sha256": "22ae3c7683510041bb7374cd7177769c2b71cb553f2f90b5bfb114a5f1d3452e",
+      "after_status": "REJECTED",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": "VALID_JSON_GRAMMAR_DUPLICATE_FIELD_AND_UNITS_KEYS",
+      "generated_graph_and_counts_exact": false,
+      "id": "HC01",
+      "raw_exact": false
+    },
+    {
+      "after_raw_sha256": "dd4871f5bf329c199726bc8b348faf3ab8e4a99f6d7d6cbd7aa46467a8442460",
+      "after_status": "REJECTED",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": "VALID_JSON_GRAMMAR_DUPLICATE_FIELD_AND_UNITS_KEYS",
+      "generated_graph_and_counts_exact": false,
+      "id": "HC02",
+      "raw_exact": false
+    },
+    {
+      "after_raw_sha256": "dd4871f5bf329c199726bc8b348faf3ab8e4a99f6d7d6cbd7aa46467a8442460",
+      "after_status": "REJECTED",
+      "before_status": "REJECTED",
+      "failure_classification": "VALID_JSON_GRAMMAR_DUPLICATE_FIELD_AND_UNITS_KEYS",
+      "generated_graph_and_counts_exact": false,
+      "id": "HC03",
+      "raw_exact": true
+    },
+    {
+      "after_raw_sha256": "9e3a6f3ec957669ee09b93d501a2ffbdf2877a725f5044cff30453402c685ae5",
+      "after_status": "GENERATED_PRIVATE_ONLY",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": null,
+      "generated_graph_and_counts_exact": true,
+      "id": "HC04",
+      "raw_exact": true
+    },
+    {
+      "after_raw_sha256": "24409ef70f2408d9a075b4ce21b9a993e7f83840de25bfadd0008a1b3a811895",
+      "after_status": "GENERATED_PRIVATE_ONLY",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": null,
+      "generated_graph_and_counts_exact": true,
+      "id": "HC05",
+      "raw_exact": true
+    },
+    {
+      "after_raw_sha256": "dfdfa03b88d0b015b518be9238f2fa8830bfbd4d65f728e9ab3ff516b9d3d73f",
+      "after_status": "GENERATED_PRIVATE_ONLY",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": null,
+      "generated_graph_and_counts_exact": true,
+      "id": "HC06",
+      "raw_exact": false
+    },
+    {
+      "after_raw_sha256": "eab9dd9e1a80b8090e6bcc5ab5dfcdeb51944a683676679ac67d78e34aa21695",
+      "after_status": "GENERATED_PRIVATE_ONLY",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": null,
+      "generated_graph_and_counts_exact": true,
+      "id": "HC07",
+      "raw_exact": false
+    },
+    {
+      "after_raw_sha256": "99bfa7a815df2ebfda0830513c278ec76c9bdad822ea9db6515780d32ae6e538",
+      "after_status": "GENERATED_PRIVATE_ONLY",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": null,
+      "generated_graph_and_counts_exact": true,
+      "id": "HC08",
+      "raw_exact": false
+    },
+    {
+      "after_raw_sha256": "21d997a9436377be0b2fa633f674b4a9f72653aaf35b09ae6c4253adc75f76a0",
+      "after_status": "GENERATED_PRIVATE_ONLY",
+      "before_status": "GENERATED_PRIVATE_ONLY",
+      "failure_classification": null,
+      "generated_graph_and_counts_exact": true,
+      "id": "HC09",
+      "raw_exact": true
+    },
+    {
+      "after_raw_sha256": "4e97875304de62aea218613f555d46ec5c90d08f7a545e450466a6a5eac34d27",
+      "after_status": "REJECTED",
+      "before_status": "REJECTED",
+      "failure_classification": "VALID_JSON_GRAMMAR_DUPLICATE_FIELD_AND_UNITS_KEYS",
+      "generated_graph_and_counts_exact": false,
+      "id": "HC10",
+      "raw_exact": true
+    }
+  ],
+  "evidence_scope": {
+    "candidate_tensor_integrity_checked_on_recovered_bytes": true,
+    "crc_and_all_recovered_member_hashes_exact": true,
+    "external_entries_runtime_receipt_only": 30,
+    "independent_live_tensor_equality_replay_performed": false,
+    "initial_a2e_binary_locally_present": false,
+    "live_external_input_entries_rechecked": 71,
+    "local_identical_external_input_entries": 41,
+    "read_only_review_metadata": {
+      "control4": {
+        "bytes": 14624,
+        "sha256": "0e585e35aadff6e158a7c22020f5728cfe9d03024eadd9afc960bc5728436edc"
+      },
+      "hc_quality": {
+        "bytes": 85401,
+        "sha256": "544e892cab870eecfc9807ea314e372570b2c744f380a704c46415ee88e22176"
+      },
+      "technical": {
+        "bytes": 71719,
+        "sha256": "640e94be6f7e512b0eaadcd205a7c7cd220f5d5d7227fd4885ffdbd94d383415"
+      }
+    },
+    "recovered_run_archive_bytes": 14784642,
+    "recovered_run_archive_members": 68,
+    "recovered_run_archive_sha256": "c986a6e29a39dff45b92b0cc3de2ff6ae55cc1d7c84850d7eb0df048db60cf56",
+    "review_did_not_reload_model_or_tokenizer": true
+  },
+  "hc_after": {
+    "all_source_records": 17,
+    "generated_requests": 6,
+    "mapped_records": 8,
+    "nodes": 14,
+    "processed_records_in_generated_maps": 8,
+    "records_in_whole_rejected_requests": 9,
+    "rejected_requests": 4,
+    "requests": 10,
+    "unparsed_records_in_generated_maps": 0
+  },
+  "hc_before": {
+    "all_source_records": 17,
+    "generated_requests": 8,
+    "mapped_records": 12,
+    "nodes": 20,
+    "processed_records_in_generated_maps": 13,
+    "records_in_whole_rejected_requests": 4,
+    "rejected_requests": 2,
+    "requests": 10,
+    "unparsed_records_in_generated_maps": 1
+  },
+  "known_control_scope": {
+    "actual_request_profile": "selected_material.v10",
+    "all_raw_response_and_candidate_storage_exact": true,
+    "blind": false,
+    "count": 4,
+    "general_role_accuracy_proven": false,
+    "graph_text_projection_exact_except_artifact_uuid": true,
+    "omitted_actors_remain_unspecified": [
+      "AE05",
+      "OP02_v7"
+    ],
+    "only_explicit_order_control": "AP07_v7"
+  },
+  "limits": [
+    "Known HC and control14 are not blind population accuracy.",
+    "No raw correction, strict reader relaxation, new teacher, normal adoption, DB/Render change, merge or deployment.",
+    "Initial a2e and thirty external-file preservation claims are live receipts, distinct from local recovered-byte CPU checks.",
+    "No product improvement credit follows NLL, tensor integrity or run completion.",
+    "Analysis self criteria, implicit role/choice, inter-record route, normal model adoption, IF/Saved, live DB and user device work remain unfinished."
+  ],
+  "next_work": {
+    "cpu_field_wire_diagnosis": "LOCAL_AND_JUPYTER_COMPLETE_ORIGINALS_PRESERVED",
+    "new_gpu_plan_selected": false,
+    "new_teacher_plan_selected": false,
+    "original_preservation": true,
+    "repeat_same23_trial": false
+  },
+  "nll": {
+    "after_mean": 0.04357644593110308,
+    "before_mean": 0.1377860303138732,
+    "fixed_training_diagnostic_ids": [
+      "AT04",
+      "AT12",
+      "AT19",
+      "AT29",
+      "BT08",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "T01"
+    ],
+    "forwards_after": 10,
+    "forwards_before": 10,
+    "meaning": "Training-target likelihood decreases while known output quality regresses; not model-quality improvement, independent evaluation, or full23 retention."
+  },
+  "private_bundle_at_checkpoint": {
+    "bytes": 15869307,
+    "contents_note": "All version5 payloads retained; HC quality review and final local/Jupyter wire report, exact source and log added. New run originals and candidate weights preserved; candidate remains not adopted.",
+    "library_url": "https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "members": 170,
+    "sha256": "892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5",
+    "version": 6
+  },
+  "profile": "selected_material.v10",
+  "quality_outcome": {
+    "all_four_rejections": "Valid JSON grammar with duplicate field/units keys in a single object; strict reader rejection retained.",
+    "continued_rejection_raw_bytes_actually_same": true,
+    "continued_rejections": [
+      "HC03",
+      "HC10"
+    ],
+    "evaluation_to_teacher_conversions": 0,
+    "hc01_additional_failures": [
+      "Positive past-wish field omitted.",
+      "A later field identifier is missing.",
+      "Clauses belonging to a different source field are mixed into one declared field.",
+      "A positive past performed action is mislabeled as ATTENTION_OR_THOUGHT."
+    ],
+    "hc01_delimiter_repair_is_insufficient": true,
+    "raw_repairs": 0,
+    "regressed_cases": [
+      "HC01",
+      "HC02"
+    ],
+    "rejection_equality_not_semantic_success": true,
+    "retained_hc_cases": [
+      "HC04",
+      "HC05",
+      "HC06",
+      "HC07",
+      "HC08",
+      "HC09"
+    ],
+    "retained_known_controls": [
+      "AE05",
+      "AP07_v7",
+      "AP08_v7",
+      "OP02_v7"
+    ],
+    "success_graph_counts_exact": true,
+    "success_text_projection_exact_except_artifact_uuid": true,
+    "unparsed_count_caveat": "Generated-map unparsed1→0 follows HC01 whole-response rejection. Whole-request rejected source records4→9; this is not more complete reading."
+  },
+  "schema_version": "analysis_existing23_v10_trial_results.v1",
+  "source": {
+    "bytes": 42741,
+    "github_checkpoint": "3cd40f596804dcc613b606b992de82cebeb339b1",
+    "path": "trial_existing23_v10.py",
+    "sha256": "b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a"
+  },
+  "status": "COMPLETE_REVIEWED_REGRESSION_NOT_ADOPTED",
+  "structure_map_delta": "NONE",
+  "unchanged_prior_product_checkpoint": {
+    "api_commit": "c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9",
+    "ci_conclusion": "success",
+    "ci_run": 42217456387,
+    "prior32reader_success_not_reassigned_to_this_trained_candidate": true,
+    "weekly_section": 236
+  },
+  "weights": {
+    "decision": "NOT_ADOPTED",
+    "initial_a2e_retained": true,
+    "initial_preservation_basis": "Source-pinned live run checked initial SHA before/after; initial binary absent from local recovery, not a fresh local tensor comparison.",
+    "new_candidate_bytes": 15351792,
+    "new_candidate_config_sha256": "76f7ade74327cee1f54ae4c9e52bc5656fa0ada7d154b362855ae293beda5690",
+    "new_candidate_finite_f32_cpu_integrity_checked": true,
+    "new_candidate_module_pairs": 56,
+    "new_candidate_parameters": 3833856,
+    "new_candidate_tensors": 112,
+    "new_candidate_weights_sha256": "b8d096217369bb7b1d262bea0da22a8d6b0a4bbe7ebaf06394e4de2e640a78c5",
+    "no_exact_initial_vs_new_tensor_delta_claim": true,
+    "selected_initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "selected_initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59"
+  },
+  "wire_cpu_diagnostic": {
+    "additional_model_calls": 0,
+    "additional_training_updates": 0,
+    "admission": false,
+    "after_responses": 14,
+    "before_responses": 14,
+    "coordinate_scope": "Decoded field coordinates only, not CMEE source-envelope evidence.",
+    "db_calls": 0,
+    "declared_field_preceding_association": "Diagnostic only, not an admission rule.",
+    "detected_hc01_missing_fields": [
+      3,
+      4
+    ],
+    "detected_hc01_quotes_declared_field2_matching_only_field4": 3,
+    "duplicate_key_responses": 6,
+    "duplicates_after": 4,
+    "duplicates_before": 2,
+    "input_files_bytes_unchanged": 44,
+    "jupyter_exit": 0,
+    "jupyter_report_sha256": "70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088",
+    "local_and_jupyter_report_exact": true,
+    "local_report_bytes": 153512,
+    "local_report_sha256": "70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088",
+    "nonduplicate_key_responses": 22,
+    "raw_repairs": 0,
+    "recovered_report_exact_local_bytes": true,
+    "recovery_status": "COMPLETE_LIBRARY_VERSION6",
+    "recovery_zip_bytes": 20482,
+    "recovery_zip_members": 4,
+    "recovery_zip_sha256": "51bff91c0e54bc833af254b839a8cd5b4ed4253a1321768ead00e6f5abcf9dc1",
+    "root_input_files_hash_verified": 44,
+    "saved_response_count": 28,
+    "self_checks_passed": 11,
+    "source_bytes": 18442,
+    "source_commit": "352b44a55cfb1490a32f4ca1a00e8f420fcabe11",
+    "source_path": "audit_analysis_wire_fields.py",
+    "source_sha256": "f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84",
+    "status": "LOCAL_AND_JUPYTER_COMPLETE_EXIT_ZERO"
+  },
+  "work_date": "2026-11-06"
+}

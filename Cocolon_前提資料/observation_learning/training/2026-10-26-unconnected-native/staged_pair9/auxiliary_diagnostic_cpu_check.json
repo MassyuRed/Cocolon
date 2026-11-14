@@ -1,0 +1,38 @@
+{
+  "status": "CPU_STATIC_READY_NO_MODEL",
+  "frozen_auxiliary_rows": 4,
+  "bound_files": 13,
+  "optimizer_steps": 0,
+  "pretrained_model_loads": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "adapter_sha256": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4",
+  "reused_tensor_evidence": "predecessor112F32/3833856parameters; identical adapter bytes",
+  "prompt_tokens": {
+    "AUX-A-FT-BOOK-AFTER-ANSWER": 3633,
+    "AUX-B-FT-BOOK-AFTER-ANSWER": 5207,
+    "AUX-A-FT-SHOP-AFTER-ANSWER": 3785,
+    "AUX-B-FT-SHOP-AFTER-ANSWER": 5533
+  },
+  "max_new_tokens": {
+    "AUX-A-FT-BOOK-AFTER-ANSWER": 2816,
+    "AUX-B-FT-BOOK-AFTER-ANSWER": 1024,
+    "AUX-A-FT-SHOP-AFTER-ANSWER": 2816,
+    "AUX-B-FT-SHOP-AFTER-ANSWER": 1024
+  },
+  "gpu_run_authorized": false,
+  "runner_sha256": "19f870c07115dbb8e7a11118a3060f76e618304a44f2d2660e745ad514e08dd3",
+  "plan_sha256": "648a95b50135999e734229e836cf057fdf33d94a1b60f0c7a2603c9a50daa69d",
+  "execute_disabled_refusal_verified": true,
+  "no_training_calls_in_ast": true,
+  "import_loaded_no_torch": true,
+  "literal_comparison_type_and_leaf_smoke": true,
+  "preparation_time_scope": "max900seconds separate setup; CPU static did not download/install",
+  "support_files": [
+    "run_pilot.py",
+    "run_native15_expanded30.py",
+    "run_expanded15_recovery.py"
+  ],
+  "new_output_directory_absent": true,
+  "cleanup": "clear bound original_generate and generate before model/gc/empty_cache; capture peak and post-release allocated"
+}

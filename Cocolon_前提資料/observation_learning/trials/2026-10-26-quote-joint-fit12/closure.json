@@ -1,0 +1,323 @@
+{
+  "schema": "cocolon.4b_quote_joint_fit12_closure.v1",
+  "status": "CLOSED_FIT9_AND_CONDITIONAL2_COMPLETE_DO_NOT_RELAUNCH",
+  "date": "2026-10-26 JST",
+  "training_source_commit": "fe3f0f9a01968bd283b73d22d91d77f516c661ae",
+  "conditional_source_commit": "6e6ae549a03988142324958d672a0b130fb09c40",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "initial_adapter_sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+  "adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "adapter_selection": "VERIFIED_BOUNDED_FIT9_AND_DAILY2_OFFLINE_CANDIDATE_NOT_PRODUCT_ADOPTED",
+  "optimizer_steps_completed": 12,
+  "training_forward_backward_pairs": 18,
+  "fit_generation_calls": 9,
+  "meaning_count": 9,
+  "body_count": 9,
+  "parsed_teacher_equal_count": 9,
+  "raw_surface_teacher_equal_count": 9,
+  "all9_gate": true,
+  "chair_initial_questions": 3,
+  "chair_correction_updates_each": 3,
+  "daily_final_cases": 3,
+  "conditional_service_model_calls": 2,
+  "conditional_source_calls": 2,
+  "conditional_sql_rpc_calls": 30,
+  "conditional_saved_reread_cases": 2,
+  "conditional_meaning_interruption_resume_cases": 1,
+  "forbidden_source_calls": 0,
+  "forbidden_generation_calls": 0,
+  "eval_plan_created": true,
+  "raw_repair": false,
+  "reader_relaxation": false,
+  "additional_training_updates": 0,
+  "model_retry": false,
+  "automatic_progression": false,
+  "product_accepted": false,
+  "product_credit": 0,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "formal_product_acceptance": "0/3",
+  "management_percent": 54.5,
+  "training_fit_seconds": 1075.2497129719704,
+  "conditional_service_seconds": 186.2474336028099,
+  "cpu_consumer_seconds": 10.57120893150568,
+  "timed_training_and_service_seconds": 1261.4971465747803,
+  "processing_seconds_including_cpu_consumer": 1272.068355506286,
+  "model_process_allocation_usd": 0.09110812725262303,
+  "processing_allocation_with_cpu_consumer_usd": 0.09187160345323177,
+  "cost_scope": "recorded USD0.26/hour allocation; preparation, recovery, between-stage review/holding, storage and taxes separate; not a total bill",
+  "nll": {
+    "before_chair_mean": 0.000944048292391623,
+    "after_chair_mean": 0.0010249761689919978,
+    "before_surface_mean": 0.13861471911271414,
+    "after_surface_mean": 0.007173921912908554,
+    "before_daily_full_mean": 0.0031278958388914666,
+    "after_daily_full_mean": 0.001227573297607402
+  },
+  "cases": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "stage": "INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "body_state": "PRE_QUESTION",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 1375,
+      "question": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "stage": "CORRECTION",
+      "meaning": true,
+      "body": true,
+      "updates": 3,
+      "body_state": "REFINED",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 2331,
+      "question": false
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "stage": "INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "body_state": "PRE_QUESTION",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 1375,
+      "question": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "stage": "CORRECTION",
+      "meaning": true,
+      "body": true,
+      "updates": 3,
+      "body_state": "REFINED",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 2334,
+      "question": false
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "stage": "INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "body_state": "PRE_QUESTION",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 1365,
+      "question": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "stage": "CORRECTION",
+      "meaning": true,
+      "body": true,
+      "updates": 3,
+      "body_state": "REFINED",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 2340,
+      "question": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "stage": "INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "body_state": "FINAL",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 1586,
+      "question": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "stage": "INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "body_state": "FINAL",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 1560,
+      "question": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "stage": "INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "body_state": "FINAL",
+      "teacher_equal": true,
+      "eos": true,
+      "parse_error": null,
+      "completion_tokens": 1599,
+      "question": false
+    }
+  ],
+  "service_cases": [
+    {
+      "case": 1,
+      "original": {
+        "id": "12260b53-42ce-421e-bb5f-399b78f8d603",
+        "created_at": "2026-10-25T11:13:24.871248",
+        "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+        "memo_action": "帰ってから、うどんを作って食べた。"
+      },
+      "state": "COMPLETED",
+      "body_state": "FINAL",
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "saved_text": "見えたこと：\n帰ってから、うどんを作って食べたのですね。\n\nEmlisから：\nあったかいものを食べて、少し落ち着けてよかったです。",
+      "saved_rereads_identical": true,
+      "reads_forbid_generation": true,
+      "meaning_interruption_resume": false,
+      "eos_reached": true,
+      "parse_error": null,
+      "prompt_tokens": 1736,
+      "completion_tokens": 1599
+    },
+    {
+      "case": 2,
+      "original": {
+        "id": "475866f3-134b-42c5-b28b-194e6999b2f1",
+        "created_at": "2026-10-25T11:13:24.871403",
+        "memo": "温かいものを食べたら、少し落ち着いた。",
+        "memo_action": "帰ってから、雑炊を作って食べた。"
+      },
+      "state": "COMPLETED",
+      "body_state": "FINAL",
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、雑炊を作って食べたのですね。",
+        "reception": "温かいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "saved_text": "見えたこと：\n帰ってから、雑炊を作って食べたのですね。\n\nEmlisから：\n温かいものを食べて、少し落ち着けてよかったです。",
+      "saved_rereads_identical": true,
+      "reads_forbid_generation": true,
+      "meaning_interruption_resume": true,
+      "eos_reached": true,
+      "parse_error": null,
+      "prompt_tokens": 1742,
+      "completion_tokens": 1617
+    }
+  ],
+  "source_and_initial_weights_unchanged": true,
+  "service_adapter_unchanged": true,
+  "new_observation_session_needed_for_this_residual": false,
+  "independent_training_language_stories": 2,
+  "piece_analysis_complete_teachers": 0,
+  "root_all9_and_service2_read": true,
+  "independent_context_read": "FIT9 and service2 checked; not formal Pro/Ultra/human acceptance",
+  "raw_sha256": "a22f50b8d6d12e891dab5c972127b932fc878019c9c8cf1a08cb2b2a8dcb646c",
+  "raw_bytes": 211319,
+  "consumer_sha256": "145027595ee37255c065e994791d085dbec6caeb51153d90bad35f1d6817268f",
+  "consumer_bytes": 1703898,
+  "library_file_id": "libfile_8485cd7181e481918b470bfb44735bf5",
+  "library_version": 1,
+  "recovery": {
+    "recovery_archive_bytes": 3678533,
+    "recovery_archive_sha256": "25516b0918621bad67ae3b0363a06c5a555eb626df708c36e909e334438c67dc",
+    "outer_manifest_files": 7,
+    "service_archive_bytes": 41802,
+    "service_archive_sha256": "92c5ec31e204c09e0a42a914c85077a5455aa5b7a9a19e9937709d5d24cee46a",
+    "verified_service_files": 21,
+    "training_archive_unchanged": true,
+    "consumer_unchanged": true,
+    "service_summary": {
+      "status": "DAILY2_REAL_MODEL_ISOLATED_SQL_SAVED_REREADS_COMPLETE_NOT_PRODUCT_ACCEPTED",
+      "seconds": 186.2474336028099,
+      "model_calls_started": 2,
+      "model_calls_completed": 2,
+      "source_calls": 2,
+      "sql_rpc_calls": 30,
+      "saved_reread_cases": [
+        "HOLDOUT-DAILY-FOCUS12-01",
+        "HOLDOUT-DAILY-FOCUS12-02"
+      ],
+      "meaning_interruption_resume_cases": [
+        "HOLDOUT-DAILY-FOCUS12-02"
+      ],
+      "forbidden_source_calls": 0,
+      "forbidden_generation_calls": 0,
+      "training_updates": 0,
+      "adapter_unchanged": true
+    }
+  },
+  "gpu_lifecycle_operations": 0,
+  "render_supabase_production_changes": 0,
+  "limitations": "Finite two-story teacher FIT and two fixed-family daily initial service identities only. Chair correction uses frozen prior in FIT. New adapter dynamic chair correction, general Japanese, three-core quality, quantization/local inference, actual device and production acceptance remain unproven.",
+  "next_action": "Do not restart this closed trial or resume local-mask microtrials. Preserve the verified candidate and evaluate observation quality beyond this finite teacher family using existing materials when next scope is authorized. No new paid trial or production activation is automatic.",
+  "prelaunch_failures": 0,
+  "early_archive_verification_note": "One screen-transcribed expected SHA was wrong; corrected against original/received bytes, all19 manifest files and32 tensors passed; no redownload or training relaunch."
+}

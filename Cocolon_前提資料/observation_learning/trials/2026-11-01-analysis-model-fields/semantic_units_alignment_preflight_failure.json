@@ -1,0 +1,10 @@
+{
+  "status": "DIAGNOSTIC_PREFLIGHT_FAILURE_RECORDED",
+  "forwards": 0,
+  "new_generations": 0,
+  "training_updates": 0,
+  "process_seconds": 8.95490031898953,
+  "error": "'Qwen3_5Config' object has no attribute 'use_cache'",
+  "scope": "Metadata read after model load, before first diagnostic forward; original result/source/log preserved; corrected optional config lookup in new output directory",
+  "original_runner_git_blob": "dcb7601d7db5706d3f86964f771ec3d3c070c998"
+}

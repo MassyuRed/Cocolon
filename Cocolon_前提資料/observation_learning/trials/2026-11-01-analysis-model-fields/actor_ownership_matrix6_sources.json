@@ -1,0 +1,13 @@
+{
+  "provenance": "KAREN_INDEPENDENT_SYNTHETIC_NOT_MODEL_RAW_NOT_MASH_DEMONSTRATION",
+  "status": "CPU_ONLY_NOT_TRAINED",
+  "purpose": "Separate omitted actor from explicit SELF and OTHER while holding a new possessive target and verb constant across affirmative and negative forms.",
+  "examples": [
+    {"id": "OM01", "text": "僕の資料を印刷した。", "actor": null, "target": "僕の資料", "negative": null, "actor_condition": "OMITTED"},
+    {"id": "OM02", "text": "僕の資料を印刷しなかった。", "actor": null, "target": "僕の資料", "negative": "なかった", "actor_condition": "OMITTED"},
+    {"id": "OM03", "text": "僕は僕の資料を印刷した。", "actor": "僕は", "target": "僕の資料", "negative": null, "actor_condition": "EXPLICIT_SELF"},
+    {"id": "OM04", "text": "僕は僕の資料を印刷しなかった。", "actor": "僕は", "target": "僕の資料", "negative": "なかった", "actor_condition": "EXPLICIT_SELF"},
+    {"id": "OM05", "text": "兄は僕の資料を印刷した。", "actor": "兄", "target": "僕の資料", "negative": null, "actor_condition": "EXPLICIT_OTHER"},
+    {"id": "OM06", "text": "兄は僕の資料を印刷しなかった。", "actor": "兄", "target": "僕の資料", "negative": "なかった", "actor_condition": "EXPLICIT_OTHER"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "pytest": "8.4.1",
+  "pydantic": "2.11.7",
+  "httpx": "0.28.1",
+  "torch": "2.8.0+cu128",
+  "transformers": "5.19.0",
+  "peft": "0.21.2",
+  "accelerate": "1.15.0",
+  "safetensors": "0.8.0"
+}

@@ -1,0 +1,94 @@
+{
+  "run/plan.json": {
+    "bytes": 4168,
+    "sha256": "db17a6cc62db5a1089c9c734658128321fe8d3730a8183da108ed1765cb5f92f"
+  },
+  "run/dataset_manifest.json": {
+    "bytes": 5031,
+    "sha256": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107"
+  },
+  "run/cpu_connection_results.json": {
+    "bytes": 80480,
+    "sha256": "5f5aeaf572aa366c684dde777c59fe78eaef85dd28820a7ff1e8dd745fffab83"
+  },
+  "run/cpu_tokenization_results.json": {
+    "bytes": 3278,
+    "sha256": "5cc2ff0cb41402e6a75c36f6e84344605a4d7afdc306f1e7ed8c0d7f68e0aaed"
+  },
+  "run/generate_candidates.py": {
+    "bytes": 29442,
+    "sha256": "44fd35eff71b59756c315f9bd958515cae91c7a5784c478b3c6523974bec9a6b"
+  },
+  "run/sft_examples.jsonl": {
+    "bytes": 246024,
+    "sha256": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7"
+  },
+  "run/train_messages.jsonl": {
+    "bytes": 116574,
+    "sha256": "fa340592b8b208bca91ce83a3623dcc6b7f96e02b2ccdf9cca0c00e7cf0fcf50"
+  },
+  "run/training_identities.json": {
+    "bytes": 1107,
+    "sha256": "7aaab80b17a387b0b297e51f0edaa56e95931fa9597f3803fe8d2546fee7b9b5"
+  },
+  "run/runner_source.py": {
+    "bytes": 18366,
+    "sha256": "964a4703570cb7b0a6e72338d7e8ecad914086bb7b2219f81d0868ca281f54df"
+  },
+  "run/legacy_run_pilot.py": {
+    "bytes": 28950,
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+  },
+  "run/SOURCE_COMMIT": {
+    "bytes": 41,
+    "sha256": "1c0bd184f396d0ec3dd2a44135ce449758a6f24a13dfa447899b42b97647dae9"
+  },
+  "run/attempt.json": {
+    "bytes": 183,
+    "sha256": "c5fecce40ae0724d5d692c59d854b6cc12009dfc9a765f43f8d520a229cbbe16"
+  },
+  "run/run.json": {
+    "bytes": 22376,
+    "sha256": "d25e5a05a2f76ea9e6ef91eb1e2efe60fbb8e976a8ecbc50dcef1497d0f60acd"
+  },
+  "run/before_nll.jsonl": {
+    "bytes": 557,
+    "sha256": "54700577f4e0f7560098c2b41268c6f8202b862eb9b30326b4fdb9f1ae297a91"
+  },
+  "run/training.jsonl": {
+    "bytes": 1590,
+    "sha256": "628d32ae401ba5478d09ac9faa97f3ca3d7cebc27bbe6044a1c295489122db1e"
+  },
+  "run/after_nll.jsonl": {
+    "bytes": 558,
+    "sha256": "7a908e36c4e9147e1e4c05265a05a6682d9176bd0fd3b083bc8a8cbebb5d6ec6"
+  },
+  "run/after_fit.jsonl": {
+    "bytes": 147702,
+    "sha256": "a7e6ac9e7b696fcd253c2b6865b708a377ab7d70ca749fcbe4056008b10a7158"
+  },
+  "run/adapter/README.md": {
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  "run/adapter/adapter_config.json": {
+    "bytes": 1940,
+    "sha256": "5bec6c1cb1a8a8181634fe49e24fd03937437711475b22d53fa0acf97c078ede"
+  },
+  "run/full_checkpoint_file_manifest.json": {
+    "bytes": 2647,
+    "sha256": "5e3d9c8248920f1c841bc5e719105340e20f3d828a669c0a73d46d79df7af789"
+  },
+  "runtime/launch.json": {
+    "bytes": 641,
+    "sha256": "9fb273a5dafbd2b409b208caad5acb46a631a6c3cc2055aae76757ee5384d4e5"
+  },
+  "runtime/preflight_validation.json": {
+    "bytes": 484,
+    "sha256": "d7eb218736a741e83182381f829c50f9043d8b0ff103f20d59bdd4eb1476333c"
+  },
+  "runtime/fit12.log": {
+    "bytes": 3527,
+    "sha256": "4dd00f7866b906b04f706eebd82836892cdc21d8c3a8e90c0b9159a434d0d5f2"
+  }
+}

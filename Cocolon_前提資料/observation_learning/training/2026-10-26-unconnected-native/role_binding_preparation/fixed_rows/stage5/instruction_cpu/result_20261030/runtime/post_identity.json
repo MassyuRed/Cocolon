@@ -1,0 +1,31 @@
+{
+  "all_frozen_and_saved_weights_unchanged": true,
+  "checked_files": 196,
+  "saved_weight_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+  "gpu_after_process": "NVIDIA RTX A5000, 1 MiB, 0 %",
+  "gpu_stop_restart_delete": false,
+  "training_updates": 0,
+  "saved_weight_full_archive": "libfile_cc6b41f4f62c81919cbaec65e51ef379",
+  "weights_not_duplicated": [
+    {
+      "path": "/workspace/cocolon_auxiliary4_20261029/archive/run/adapter/adapter_model.safetensors",
+      "sha256": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4"
+    },
+    {
+      "path": "/workspace/cocolon_auxiliary_fit8_run_20261029/adapter/adapter_model.safetensors",
+      "sha256": "afaa2c2e2f7263792d5cf9930bb2fac0bf44bdccd04ff2ffa8049a2cfd2f12d2"
+    },
+    {
+      "path": "/workspace/cocolon_joint_role18_run_20261029/adapter/adapter_model.safetensors",
+      "sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19"
+    },
+    {
+      "path": "/workspace/cocolon_rehearsal13_run_20261029/adapter/adapter_model.safetensors",
+      "sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+    },
+    {
+      "path": "/workspace/cocolon_stage5_run_20261030/adapter/adapter_model.safetensors",
+      "sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818"
+    }
+  ]
+}

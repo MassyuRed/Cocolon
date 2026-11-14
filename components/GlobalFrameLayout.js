@@ -4,9 +4,10 @@ import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { useTheme } from "../theme/ThemeContext";
 
-export const FRAME_BORDER_WIDTH = 2;
+// 囲み装飾は外し、safe areaと既存layout契約は維持する。
+export const FRAME_BORDER_WIDTH = 0;
 
-export default function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
+export default function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null, headerRightSlot = null }) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const androidExtraTop =
@@ -26,10 +27,12 @@ export default function GlobalFrameLayout({ children, frameEnabled, headerBottom
         >
           <View
             style={{
+              flexDirection: "row",
               alignItems: "center",
-              justifyContent: "center",
-              paddingVertical: 6,
-              paddingHorizontal: 12,
+              justifyContent: "space-between",
+              paddingTop: 8,
+              paddingBottom: 4,
+              paddingHorizontal: 20,
               borderBottomColor: colors.BORDER_GOLD,
               borderBottomWidth: FRAME_BORDER_WIDTH,
             }}
@@ -44,17 +47,7 @@ export default function GlobalFrameLayout({ children, frameEnabled, headerBottom
             >
               Emlis
             </Text>
-            <Text
-              style={{
-                fontFamily: "CormorantGaramond-Regular",
-                marginTop: 4,
-                fontSize: 11,
-                letterSpacing: 0.8,
-                color: colors.BRAND_GOLD,
-              }}
-            >
-              ～Emotion Limbic Internal Structure～
-            </Text>
+            {headerRightSlot}
           </View>
         </SafeAreaView>
       ) : null}
@@ -80,3 +73,4 @@ export default function GlobalFrameLayout({ children, frameEnabled, headerBottom
     </View>
   );
 }
+

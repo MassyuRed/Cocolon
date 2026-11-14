@@ -1,0 +1,639 @@
+{
+  "status": "CPU_IMPLEMENTED56_EQUAL_FIELDS_TEXT_DIAGRAM_COVERAGE_AND_NEW_FILE_REPLAY",
+  "source_plan_sha256": "8f111c2d437c507084fa0f4136bf148ce1e4812249d4ea3674f1618754b8aa43",
+  "derived_targets_sha256": "edf252e4e6276fa3aeb5ba57bbc3c5a2f5e06d8da587a3a100dfc56b2f0dd663",
+  "new_pytest_scope": {
+    "passed": 47,
+    "meaning_acceptance": false
+  },
+  "final_unique_targeted_pytest": {
+    "passed": 283,
+    "skipped": 3,
+    "skip_reason": "PostgreSQL WASM dependency is not configured",
+    "prior91_is_subset_not_added": true,
+    "old860_not_rerun": true
+  },
+  "old_saved_payload_replays": [
+    {
+      "group": "gpu-quote-original",
+      "count": 5,
+      "status": "EXACT_OLD_MESSAGES_REF_AND_SAVED_ID_COVERAGE_MATCH_NO_GENERATION_COMPILE_AUTHOR"
+    },
+    {
+      "group": "gpu-contrast40-original",
+      "count": 14,
+      "status": "EXACT_OLD_MESSAGES_REF_AND_SAVED_ID_COVERAGE_MATCH_NO_GENERATION_COMPILE_AUTHOR"
+    },
+    {
+      "group": "gpu-canonical40-original",
+      "count": 18,
+      "status": "EXACT_OLD_MESSAGES_REF_AND_SAVED_ID_COVERAGE_MATCH_NO_GENERATION_COMPILE_AUTHOR"
+    },
+    {
+      "group": "gpu-binding48-original",
+      "count": 25,
+      "status": "EXACT_OLD_MESSAGES_REF_AND_SAVED_ID_COVERAGE_MATCH_NO_GENERATION_COMPILE_AUTHOR"
+    },
+    {
+      "group": "gpu-scope56-original",
+      "count": 25,
+      "status": "EXACT_OLD_MESSAGES_REF_AND_SAVED_ID_COVERAGE_MATCH_NO_GENERATION_COMPILE_AUTHOR"
+    }
+  ],
+  "new_synthetic_targets": [
+    {
+      "id": "AT01",
+      "old_target_sha256": "978c8c0100ab1974cc144ed3961fb40a5fd9d9cb134e13e0ae4f70b7ae582a0d",
+      "new_target_sha256": "e6bd30179df71402dcae6be3b0b4cefa9a41d963eee0cfdd03aaf5a3537b38b6",
+      "old_request_ref": "analysis-model-units-request:a9fa65b8bf738e33846f3201a1dffcf7ad2576e40f3f3d2f8cb901e1c0d01105",
+      "new_request_ref": "analysis-quoted-parent-units-request:66a564cfcdce99293591fe09da6ec6fd6e0dd6e0d630dbcacd9fc2a179913ba5",
+      "new_candidate_id": "analysis-unit-candidate:00a756562a322c9c675ad6c735d19c63158e200ae3005d2a8fa95e3f5e033b59",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT02",
+      "old_target_sha256": "46f3a89ded7960e8cde5a8cb5fe8a2f0e4cee24b7b571203522a2786c1bc5972",
+      "new_target_sha256": "4566f29094f7c42150686d4b3cbb640f7abc55ff6268f70d6e413bf7861201c0",
+      "old_request_ref": "analysis-model-units-request:89d0e111cf83abe67d0418d163b3cb00e2f9945746640e4dc7e8eb506acb553c",
+      "new_request_ref": "analysis-quoted-parent-units-request:e6e773e855ccab71b2e9d9d267948da1c20eec5aa45a49e670fa33318daafb7b",
+      "new_candidate_id": "analysis-unit-candidate:e9723a09d102a2b7b313c0e9ae413b812111c923120d175ec24cb8eca38f49e0",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT03",
+      "old_target_sha256": "7ee13ca51cd48ac833562182368d8229a09fdab7b68a0b5f20cbe9e959103a1a",
+      "new_target_sha256": "53a3463624e7d75f9baf907ef183bb67a3279113b0f9bb85c905f121e1057421",
+      "old_request_ref": "analysis-model-units-request:aa60b8b82e13b085b2ac16df2e273b60a449bee9009e74d34d6b19064f70546e",
+      "new_request_ref": "analysis-quoted-parent-units-request:6fb611f4295b581714b932ef5103a0e573c092e7b9dfebac7995c3bfe09930da",
+      "new_candidate_id": "analysis-unit-candidate:3114de9fa5a5257b569dfb2ab254698318c169ca81f0c830b758bc547eddec9b",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT04",
+      "old_target_sha256": "5ba5632ebd7dc537a499f0763e338cff0a5149c12127a85cd096ec83723934ff",
+      "new_target_sha256": "4ba91fc5bbff077df3ba0f835237a08935cec68fd3b8a550282445f32f4906fa",
+      "old_request_ref": "analysis-model-units-request:9e41ee9d2cda0a4e87a5fd75c86fec8852dd3c1fb24ab9f770763581721f789d",
+      "new_request_ref": "analysis-quoted-parent-units-request:108a32447f0f9a7c1c5f8b6b892dd3c11feedd28f4e1b72c8fb698646ee0d724",
+      "new_candidate_id": "analysis-unit-candidate:3c27c2cb0b76a74c78972fa700c96cb2486377cfd7458053c5cf6f1b3383e2a8",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT05",
+      "old_target_sha256": "90fa3bb5615396c90ad678515d3a8d028cfb2ed03bd519eaaf60675802c92316",
+      "new_target_sha256": "50579c183897cca097b41906a98a0b53f2e4653e379a74cd6ebd379f63446ec0",
+      "old_request_ref": "analysis-model-units-request:0c6db2e789802318dc2d94fc3af4995c2c682b0e5b944054a9f097fdc3c96aa2",
+      "new_request_ref": "analysis-quoted-parent-units-request:f6224c396ecc6a709d41ba71737b55eba89ebc0d0c56c6c4100f9b915e149e6d",
+      "new_candidate_id": "analysis-unit-candidate:5aa667f6c9cc7af61ca5cdc380a46c16556743439bb748c44d727a8ec7e1b467",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT06",
+      "old_target_sha256": "1ffae390757329fbf104a240fdab3012a873283ebcc09ad22ec0cdf395a3f392",
+      "new_target_sha256": "c930f480a141d9394312abcefe75c0dbbb91f0547abe6df668db3149c6a9c858",
+      "old_request_ref": "analysis-model-units-request:87d8ae93ae5dfe883caa384401408665189c845ec675aa7b929abd147ca43f78",
+      "new_request_ref": "analysis-quoted-parent-units-request:b11cc45ed7963b10c8c071959f1e9b31ef9b497a695689fce1ba0eb48ced58b7",
+      "new_candidate_id": "analysis-unit-candidate:9425485e74f21fcbde4e108a2a5db0f36a0f4c9b9902a1241de5ca244c61aa84",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT07",
+      "old_target_sha256": "2d1b75dfb3c09f9e3da33816229db15ca3d3bd6916d9e5ce6bbc6910b09ad89a",
+      "new_target_sha256": "8b0330acb9a2be7cffe1415dae30cf107f067e79140ec3ca11f52b9bb4b5f443",
+      "old_request_ref": "analysis-model-units-request:de45c2460d863e5efdd95db9e2e7d1313be2f7cbcff3d404356d976f5cc8d737",
+      "new_request_ref": "analysis-quoted-parent-units-request:fd63d2b4df81f0e6dbba8723d0a715aa6f5f04711a8e443baf9a9a31ef0a2505",
+      "new_candidate_id": "analysis-unit-candidate:595b6462390daed9ddb60fc602092af9cf4e9e18b1072a87e8ff191fdd6cfbed",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT08",
+      "old_target_sha256": "29a1f79a1b697f7ce04e56a86a686962e7be173337b662e7734f373f6358fd19",
+      "new_target_sha256": "f0771a5dd199bd77ad6915410b8d0c70e3f849c4f370e4e26744c8c4b0a66bfa",
+      "old_request_ref": "analysis-model-units-request:e413c55c05ba66ca2e06b9bbd30b66533b8d16d5ad27606c8d77c722eb6f29e6",
+      "new_request_ref": "analysis-quoted-parent-units-request:ce71918f11a4aac39c76855f406470067ac5425d67ee3afb8f578e3494517e54",
+      "new_candidate_id": "analysis-unit-candidate:8de95ef1581d78ad31451cc6d494c22bbe46a2449c82186d4b7b4b6df343ef33",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT09",
+      "old_target_sha256": "45e9543b0c9a0ac6f66ffe329e073be2e4c06c634fbab9c2e48a1d7cc383e1c8",
+      "new_target_sha256": "6a1f0d4e402a089d5072417c91dacb99fd79807e660574c30b18771b6ef7f31c",
+      "old_request_ref": "analysis-model-units-request:438f3418aa7b83dbd57632894ecda63be79cea54ef78f4f306c71a07e210c0a4",
+      "new_request_ref": "analysis-quoted-parent-units-request:9a5bd369bfee71776421db06b88953061da7f7b895152179f93f8076247fd0b2",
+      "new_candidate_id": "analysis-unit-candidate:552f96e174bd7751d8c782c4ee0224bf99b570f099d61a2c7d07392738237f2f",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT10",
+      "old_target_sha256": "4985f9651cc4ae3756aac965116eb399b1c1c962ba7b758a0d008c2d05ad29a2",
+      "new_target_sha256": "b69ad1b95231dda721e410b10df70b1bb95c4c8d9f91a93fc4b5c57a715627b3",
+      "old_request_ref": "analysis-model-units-request:673d3a10bbb0dcce2cfea506fcb3e362e45770119992e7631380a6b686e8df0d",
+      "new_request_ref": "analysis-quoted-parent-units-request:4da2891906df5660803198ccb77a31d749afd8812e6f5678ef928686a76e6d0f",
+      "new_candidate_id": "analysis-unit-candidate:850233b9126d892f4d27e66990da630c1496ad50328dbcf6056c3da5d97f29c0",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT11",
+      "old_target_sha256": "75b3819e71f00a9d35041fc71d567f16ec24d06b4542da83850552d086f936bb",
+      "new_target_sha256": "4a615ae96a089fec6560694845c4d263bb9a0203a95a4bebe2b272bb45ddd157",
+      "old_request_ref": "analysis-model-units-request:811042acd848e026848699377fcfbd13b298248a7a4cfd82bcff60dab38e49c9",
+      "new_request_ref": "analysis-quoted-parent-units-request:2f2e10285fb797f1761b28ab3da0bdfbb135c4cab057bafd634e414cd0ab2f21",
+      "new_candidate_id": "analysis-unit-candidate:ee8b07a1facca9153be7c324144f5f152900c6b7cfe487f13f5d62a7a8a70356",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT12",
+      "old_target_sha256": "3f42482a6c49cc74e4ad8edd1fe63a51010bd1e1b0722b680f2dff82809a5f97",
+      "new_target_sha256": "759ed08d47d53921784729e144825e1a9bc5d8e694508542c80044164e5a48d6",
+      "old_request_ref": "analysis-model-units-request:2161972c88b0b58e0c700fa26faf3b44fe27bd8beae9016613c192542d8c569b",
+      "new_request_ref": "analysis-quoted-parent-units-request:940620ed29968f83393b4f8c06edba434b0c3fa269e35769de56f07331dfba6a",
+      "new_candidate_id": "analysis-unit-candidate:6d919df7fef22e40d00e3b6bdd672edcd1ec7c6c4f059730988866b752d4a4ef",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT13",
+      "old_target_sha256": "131aff548b293072f47694c3cfbd485a560c99f7fe3422de6bcaf671284b06b1",
+      "new_target_sha256": "c114e7fa8321a20857416f5582df3d5e50d98bc4329f7d256f86b31b546314bd",
+      "old_request_ref": "analysis-model-units-request:21ff4595744ea23eee41cb40519f118a3bf4b2c58157dc4618496d10c9d42653",
+      "new_request_ref": "analysis-quoted-parent-units-request:65d0c34e2b948202f7330d6f8a3d697be52e9b953a5be6948d2ec6d560dbf36c",
+      "new_candidate_id": "analysis-unit-candidate:2256facd0d5719c866b806fa74d580e9ff5813e1a563514ddc6e5438683f6667",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT14",
+      "old_target_sha256": "45036932617c8adbe682d860690e569cca8f206ae8d127524c20fd9b40f0da43",
+      "new_target_sha256": "b724f946bdd3e268960d728faf3fa1b3a5884a44ebb677c2d49ef2da81492ac7",
+      "old_request_ref": "analysis-model-units-request:7140f709f8c2c576df5a422c4608ad07565cde57e24b786cdfec866e004639d2",
+      "new_request_ref": "analysis-quoted-parent-units-request:79d30a566548b3f9271fe30c1b501daf1f904ee962de95b0a938182ca72b7415",
+      "new_candidate_id": "analysis-unit-candidate:77063c47661b71cfe24014558112ff1138f84b37ffcf6472719d39548feb2b3d",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT15",
+      "old_target_sha256": "966bf51c8522ac432e41b2436c6e39259ef40d943c5a623258c349ba540f98e4",
+      "new_target_sha256": "a311fe7754f3935d3ef54af23ee9334c5952ae6a5e206ed78185ae140dacfafd",
+      "old_request_ref": "analysis-model-units-request:9edeeeb7738c4bd1f1cfcd5b82726e1648caa9bade774377cf4db58ad67c1956",
+      "new_request_ref": "analysis-quoted-parent-units-request:78a25abd9dc4781774db59ec41640a5e41944f7e91161a3a6261d14c2a3efc7c",
+      "new_candidate_id": "analysis-unit-candidate:40bcb2f61ca33ca79c066d0ac10a9ca34613804f3961ba6b5e8ebb84b8d26af6",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT16",
+      "old_target_sha256": "d747b188bbd80cbebea02439ab80089b766c5d22cf7fb6fdc3eee34e3b54f583",
+      "new_target_sha256": "cea8ea2c9486f8579798d5b38bc3f55874551c37d30bb9937b2884ffae55de92",
+      "old_request_ref": "analysis-model-units-request:f848daf9bb076b1b8e57ef16a11b85380412145ed3ad7abfff7e80a2b842ee24",
+      "new_request_ref": "analysis-quoted-parent-units-request:1bb767e266be409eed767ff040d9a87be5411f8945bdcb4bad4876bade316aa8",
+      "new_candidate_id": "analysis-unit-candidate:5087e2fd55d97bb27e236b8bba311bf4ae54b871347392c20e67dcc26df75ad2",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT17",
+      "old_target_sha256": "0054f4a347b1f49fc6546825aafad82a68d944b3ad991534af4477602113796d",
+      "new_target_sha256": "fa6def75e6fa415c9c198b399e6422184ce1672bf7464ce3289ad99a8548de62",
+      "old_request_ref": "analysis-model-units-request:ca905b34b0c97d1f1a64ae27e9d48a9a37870dde92d2138ea7f79e656ce2fa45",
+      "new_request_ref": "analysis-quoted-parent-units-request:619d9f316dc5b20f9d6c5815f215fa8c497d2235e684b7b77d4469d06a5c75b1",
+      "new_candidate_id": "analysis-unit-candidate:019a64850a0e19818d402146c2a7834351367bd730db98012a72fe57c2f226b9",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT18",
+      "old_target_sha256": "6833ad929ea5308a1b181ab19b944beb9a2d50a970a060697562ea3da060b1bc",
+      "new_target_sha256": "cf61af823e12751b1394a760c638e5d4a8f500be143411dbe7a41ced0c48155d",
+      "old_request_ref": "analysis-model-units-request:ab61c780cb39ad4b9bb7c951e172885b78e6ba3016bb73accd353d9ad08038c6",
+      "new_request_ref": "analysis-quoted-parent-units-request:2c976fff8d4012bc776f7a393eb0e1191d2e3d2a04bba613cc57e641cb76a420",
+      "new_candidate_id": "analysis-unit-candidate:0774f0ff46e3a63fb07b62c29321c50fe9248f41d0d32430e748709e9e85b6a5",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT19",
+      "old_target_sha256": "dfa58b8ebf0eaf153f6c88f997b1170ee2ccf503063759e6c804a1799b73e06a",
+      "new_target_sha256": "c2345f59344ff667156326d2ff4989d9cf8fd0aec9397c86307f38c5581fdb67",
+      "old_request_ref": "analysis-model-units-request:a34dc4ce4dad44c5e7d41aa82ab3b1e419b4a95004cd8b1d06fb3c683ddb950b",
+      "new_request_ref": "analysis-quoted-parent-units-request:8501d9b020c17e652372539426582dafdab0d235638500f6ccc971381d8f3eb7",
+      "new_candidate_id": "analysis-unit-candidate:662a5801b023bbca6a24fe22ae9513b60562b9b71e30fce3d0df5d435a99b42e",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT20",
+      "old_target_sha256": "1726c34147f4f00a89d19583a7e976026efa0feee9b69442b780e84856add984",
+      "new_target_sha256": "76066dabbb91ad7202797c889dd0c7940496bc0b278ac329b8385f63684f16ee",
+      "old_request_ref": "analysis-model-units-request:f45c4f3d2f99dbe54d8d2e096ad73e3e88fc84487c989094784e152470309aa0",
+      "new_request_ref": "analysis-quoted-parent-units-request:d8cfdd8ff72aa97e28dc21169be941cef73e03e26be32a9d6a5ea30849202106",
+      "new_candidate_id": "analysis-unit-candidate:3df77bb4af127e47108cab81ba0e51f49dda6cbf243ab9db9146fb38239be53c",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT21",
+      "old_target_sha256": "37a3f1cd1c26156499916d59552f32e772d758979baa0b76b5727ee7c345f55a",
+      "new_target_sha256": "21e273b33798d7c6cae13c0ec488400e91556a8adb0ddac15471638218ea6642",
+      "old_request_ref": "analysis-model-units-request:4db75981386056c9504039a0d00dec5eb500cfc62030ce11e46f6e0a95319c8e",
+      "new_request_ref": "analysis-quoted-parent-units-request:f1151754e6ef51e2c5eeda8a4a79234dc0ff8b2aacc4f123bb8629e8f37d0963",
+      "new_candidate_id": "analysis-unit-candidate:055add68d54d12dcca6f83fb16b7f4757f978d9eb5502565b3a4e6b2f9fc6d93",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT22",
+      "old_target_sha256": "cd435a0dec64237588f126c52d0e47a7c732b647b8bf9adbc6f5aac454446789",
+      "new_target_sha256": "095920d5b9e3633b74ebdec2e0d96f211d0bbacac3c032246a9b82fd0ccfdb6a",
+      "old_request_ref": "analysis-model-units-request:062812c20075d58a397960227b33afd9a2706b79158f293399a66c79f90d05a6",
+      "new_request_ref": "analysis-quoted-parent-units-request:acc0670ad682a676a533b61fb365b51928ebf74fc93394f0bc60489417913613",
+      "new_candidate_id": "analysis-unit-candidate:f3af3af5ed11f337bea45066c25184f7431ff5329aa23e90f4bb39f7b6099d1a",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT23",
+      "old_target_sha256": "1573f37a879d29dde77527010995fe615c8e89e784146c6484038bfd08fa4bd5",
+      "new_target_sha256": "c41c629a7573906368fe05928a986805ca3772bfc3141206cda78f38c71f9ec7",
+      "old_request_ref": "analysis-model-units-request:d75973796e52d4b68fd8c11f312ffe0c7706a45f7bd496cb77fbd9ea3f605f14",
+      "new_request_ref": "analysis-quoted-parent-units-request:08d5ea6976a44a38f8736efd5988f541c0d77006d26f615d3c1dc85a8d722c9d",
+      "new_candidate_id": "analysis-unit-candidate:0d92cb07228aa9ff94af708384803d3f31e35d4dd5aed02b2af28c03417e5d63",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT24",
+      "old_target_sha256": "865556af2d6c865648d729cdfe767f8877da54eeb5452e42e75790983109de65",
+      "new_target_sha256": "37454e18def9eec1402fe8cb595813b75ad9740977bc047b39b34ae1fd237690",
+      "old_request_ref": "analysis-model-units-request:4fbe6d19880f95ccec37cb5a9c3516702d3caac9568c32e04af1a6cb6525b7bc",
+      "new_request_ref": "analysis-quoted-parent-units-request:2559a3a842ef8d19298cb33bd4b18a53e0805ef0904db50cede2bd73330cad4f",
+      "new_candidate_id": "analysis-unit-candidate:ce2a2136736750ca607742af02ebff1b090831ffba0fac5488974c1f153d3405",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT25",
+      "old_target_sha256": "2f70498b04e8a6a3fab58ce36d6631f2662ec802afbad1172ac4845a167b469c",
+      "new_target_sha256": "2534c48b4f91b608d1e5ce7f5a9ed769cd6499b2ab0e0218667c8bcc8a079b38",
+      "old_request_ref": "analysis-model-units-request:b4d2bddbf8296c8209fe009b4e2b8cba08e81f7071ac21441e2d478672edacf5",
+      "new_request_ref": "analysis-quoted-parent-units-request:08cd2e5a5ac918e727f736564a0d61f88d30b749654eddc8a3808873fa01b0ef",
+      "new_candidate_id": "analysis-unit-candidate:45368f484941c5e054b457118cd759718fe81fa0c0a7428ef9503acae1c0326c",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT26",
+      "old_target_sha256": "9966b55bd0cf4a889a463872759a82e0d332005de440fd429163da9aecc1c8d3",
+      "new_target_sha256": "0e39e04a992e4180c14ac5b3e1bac507f317bd1f70b4d174d02b8bb22f79f292",
+      "old_request_ref": "analysis-model-units-request:bf4bf751e0d0bae7d1687e6764802f24b8d00e9fe0d7f41974d279a7e0513bda",
+      "new_request_ref": "analysis-quoted-parent-units-request:e31bf56055ad6afd176bb9a4968ad5c4e51d0a04b41f46aa98d4838ac30cae1a",
+      "new_candidate_id": "analysis-unit-candidate:8446f033eb43e915758cf323d69050ca14c82f66e2e1cc2b98aca5bb653e4f5f",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT27",
+      "old_target_sha256": "68a0459cc14f083ec9812401fd71271d600186ee28ae0f318cee9eecec03582c",
+      "new_target_sha256": "58c30dc0407da65fb7afb2d84a1d06ab0e99c82ef722979d16ea53e19e0b8c0f",
+      "old_request_ref": "analysis-model-units-request:c567c0d0f8161dcd7a16bf30e1a6db052ddca2d7cb196a51298c80658d805d5f",
+      "new_request_ref": "analysis-quoted-parent-units-request:f7c270dec99c4524db29e7fa44902c23195b871d4cb7647566e404b0ebe1dc69",
+      "new_candidate_id": "analysis-unit-candidate:57a0a1cb0ecb611de925b2193fd741d5955be0a54ba504faea84ce43ae8d640d",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT28",
+      "old_target_sha256": "f61578d01271e8997732ea1b6f330e2842fc742d04f8102159d080b5dca42474",
+      "new_target_sha256": "c6e2a7f15334a079786731d5859fd5c6d05335537c2d81cb7ef0648198a00c4d",
+      "old_request_ref": "analysis-model-units-request:1150b8d583cb47c36bdaa5d7c9f4da528738fe80713c8127ce853888ac16c1ab",
+      "new_request_ref": "analysis-quoted-parent-units-request:000d388e77c357e9f26a9f31f27890f838c523ea0140107b0d99760f93ce25ed",
+      "new_candidate_id": "analysis-unit-candidate:a89f75c36a338dce93eddb4e0728f9822de17e9a41d231ad3ed63ff485ebf5c5",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT29",
+      "old_target_sha256": "5e2e3ee35a3df776ce9b79bb8732bef2275f88c405fc0e408dc7d5cf22cd1df9",
+      "new_target_sha256": "110d89b5d7f47a3748e5e59905f30403cb7b2c1ccd9884ec142898f267c9b3c1",
+      "old_request_ref": "analysis-model-units-request:b24a373fb8ada284538a7cc2dbfee0d05171c8613e9b51bb1c071c18e1590da6",
+      "new_request_ref": "analysis-quoted-parent-units-request:76b2078bfbf0c29f77ce391459b386738290394d3e3c8d2adfc3006aa8686d5f",
+      "new_candidate_id": "analysis-unit-candidate:27151292db5edfff9e0ad455a9dddca09064f528c2663bf6044f3875d5451d84",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT30",
+      "old_target_sha256": "e9e0ed86de03599032084fa98034d0cddb98806f2e5e2369702e2b2d59bba01f",
+      "new_target_sha256": "6fc470f5becbee43cdd0254809c197e7c020fbe5294776e5a36cbb8cc34cdf41",
+      "old_request_ref": "analysis-model-units-request:ad94cf4acbc369bb7262330b0e8f13d8453dc430ac66e69232e4eec4375c166a",
+      "new_request_ref": "analysis-quoted-parent-units-request:c8181076f620908b70080a7f2edcb8768f7d2d5c3e7cbd1f3ea34284da59a020",
+      "new_candidate_id": "analysis-unit-candidate:2fc1475ada3680fabcde2afe63d2e4a6961fad117b31a49436dc833abfb6beff",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT31",
+      "old_target_sha256": "dfb4759b6bfbe0cb5689709dedb805eaa659f319821e4eaecedca37a5223ef69",
+      "new_target_sha256": "b39b8b53cc463114d2e0bbe968660e77eca4095cf995b882b9dd143c24075a0e",
+      "old_request_ref": "analysis-model-units-request:5520d55d348797069e625ad80bf414d0e54729788f6e6f8e323c8694ea895b4b",
+      "new_request_ref": "analysis-quoted-parent-units-request:52f8cd8bb0fee639cb66679af9fe6d6699c2d19772dc46a363706f12d884599c",
+      "new_candidate_id": "analysis-unit-candidate:00c934f1ba023720d72fa1daa39a42b03544d078b99c6838dc52b322a3e6689e",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "AT32",
+      "old_target_sha256": "a90250e72a4afacfb74650f50a496a35e1ce69cd240152559302b11b595a21e6",
+      "new_target_sha256": "270730cdf779ffaa154c65fd869ebcbe96538efddd83aa2e8665551e2a404a65",
+      "old_request_ref": "analysis-model-units-request:f4b6924d25ab2f69494fe28d6e41b3af4923195f3d9b957832447426a986bee2",
+      "new_request_ref": "analysis-quoted-parent-units-request:518c76e2d738ed847b29cfa20db093a4a3538deb4e7edf651e2a6d11b718103b",
+      "new_candidate_id": "analysis-unit-candidate:49a93f07698ce02777cc4398af8bb994be64a44a92e6aca48abce34bb47e8d73",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT01",
+      "old_target_sha256": "a2ae9cfe82fc221fbcb7362aadc05c28f65385b7cf1226c96ec26f84f39b9e32",
+      "new_target_sha256": "36e25573d9296c5ee6c2d82a66231fe37f42585ca68f0700549bb05c94f8bd16",
+      "old_request_ref": "analysis-model-units-request:01435cc0d5c06c96be76a48f579201a768d838fe541337accd722a265b778280",
+      "new_request_ref": "analysis-quoted-parent-units-request:bbf247cbe84cf2fe1e6ef5e0ae78a69bb5d5ca2510ba9fcdfbc4e944e194272a",
+      "new_candidate_id": "analysis-unit-candidate:096543d907b6583f334103331106c7fca0953f794d37a3edfe59091731c1e7a8",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT02",
+      "old_target_sha256": "3865f999ee82dd70e1b20f87252902cd372f975209b628c8e95ccd98252de581",
+      "new_target_sha256": "52db5d571eeedbd24bf9ef6ecf7b385f2738da76a73ff8c2c9ec6567939b4669",
+      "old_request_ref": "analysis-model-units-request:72ed22976779c8540c838829f4fc42acc5a60bf0118630ca96f64430534d721c",
+      "new_request_ref": "analysis-quoted-parent-units-request:c823e4fbca6b1b6b227e2c1f8c8eb46a36eb1921db2567d03cfed921ad70eec3",
+      "new_candidate_id": "analysis-unit-candidate:f1528fd26eb722b8d8620d59b9068249dbcff26aee1b60ed12e2ef945ff4edea",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT03",
+      "old_target_sha256": "8bf2f7e46e86965c03c66f88f09c53a0c7076a970be32e54bf7ea1b9a2fb43d3",
+      "new_target_sha256": "7b82d80faa6e5079216607268483496e2c7269768478b2b34ff8f695bc817ae0",
+      "old_request_ref": "analysis-model-units-request:4b120faa6f76a467c8667cb3772a36e39e3ecd730f06ed1e9bf13dd2fd754ea3",
+      "new_request_ref": "analysis-quoted-parent-units-request:a23da0b27a09c2b7c54b27ea5c875453a30d2fde62d18c1f7466ce6090a284fd",
+      "new_candidate_id": "analysis-unit-candidate:c3341ae847e4f314c4df6d5d94562a6c134aa28cd31fe60e1ec1a6d5b8a3d734",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT04",
+      "old_target_sha256": "fe7cfd70445fe0573607adac497798d3f804b82835375c6151bef6e39f7c9d46",
+      "new_target_sha256": "16727a4c871967d8c30564843390251fd2c8b2924781993bcf892114175c5ff6",
+      "old_request_ref": "analysis-model-units-request:ffd3505a67625638335527ac567e126300b92a0101e1b55eac5b11702861f715",
+      "new_request_ref": "analysis-quoted-parent-units-request:da5cbbbb11acc70347da2d8a3a0c3cf8002ebc377d1cd13375d88d480a38da28",
+      "new_candidate_id": "analysis-unit-candidate:0a9bed9cc97aa1b901cc2adf44c52e82a49fd4efb29928fa88ba5e199890dde1",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT05",
+      "old_target_sha256": "25c3478810ccc897f0b1cea5af6d2125c0266203a4903cb1826871b63e23355b",
+      "new_target_sha256": "bf516e7f3a80a93b9f59c1c646b07e5988940d7bd85d6cc047165278892b81af",
+      "old_request_ref": "analysis-model-units-request:34f6c521124f3cd7dbb8376eb3f8195e9b4dfbc1f3d666abed5a949a60aef062",
+      "new_request_ref": "analysis-quoted-parent-units-request:b9bf2fb900d22440277040d83e16420d8040a25c3ff8cf3a6e8292d5eb9dd6de",
+      "new_candidate_id": "analysis-unit-candidate:c19cffe92c3492d99c3d7bc5df02559e66debb5db260ccfa731198045bac9e3e",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT06",
+      "old_target_sha256": "4a800f4ead1db07f71a4f856cf30190e00328707b913c2f12c22b108e7976d21",
+      "new_target_sha256": "6e3879ea48a75f8c027c41bb6c2d33dd9f1fac0b8ad10d6e4f61635ad54dd865",
+      "old_request_ref": "analysis-model-units-request:942795a0c645369621c2f3e695a98a3a655bc617e7f269270bdb166f2f43938d",
+      "new_request_ref": "analysis-quoted-parent-units-request:6f99ae7c69bc2405a96d214988a833c7c8467bcbbf4656f10eba8863fc58c65c",
+      "new_candidate_id": "analysis-unit-candidate:98d6db9adf191b996434dfd2f1784e9061aa7b60cf590e765152395c9525b944",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT07",
+      "old_target_sha256": "27ff9ccfc19b9bca0a9c80fec6cdba24ad1c9be99fa87da544c28da22625adf7",
+      "new_target_sha256": "f78adbe86e8517144af8d88482bb3d40dba6bf7a47d5188a95625f5c9a1ab364",
+      "old_request_ref": "analysis-model-units-request:be08fe147858387e5298eee4f515968adc5f492c7829f26ceec8b9cc7e9df420",
+      "new_request_ref": "analysis-quoted-parent-units-request:7f5e9a963b8310ebdab8deefc4cce720e1dae3682a19e9b336fd91b5ca1b76e7",
+      "new_candidate_id": "analysis-unit-candidate:b23615351e762e0a4a52327e2634cb857228c76d77fbe0caf201f39346142714",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "BT08",
+      "old_target_sha256": "370dd260525f37d835591c35112117fad9fc20f2072e1539a24e38ea7b1c5a17",
+      "new_target_sha256": "95cd308fb956a317bbf1359b3121e1338db18438abb93c277c58797520c0010e",
+      "old_request_ref": "analysis-model-units-request:e4a1da0d744da25b5f9d14571e72a9611949c9a1ca5d55d5099082853db4578d",
+      "new_request_ref": "analysis-quoted-parent-units-request:1d9ecae886f47d930126e838df18b4d069f82ba95a669317ca166e1a37aa416d",
+      "new_candidate_id": "analysis-unit-candidate:b2ce0868f083914af6012ea1930b96f4b884024f3e6a0993a754977aeeb03ae2",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT01",
+      "old_target_sha256": "2b3020bb966ccb66dacbc3c4444b9566a58a9cda726fa0bc4ea0c549ef65e623",
+      "new_target_sha256": "345fc2f8e16af04b393429d6abbedd4528f96f5443cab62b2782804ed718c55f",
+      "old_request_ref": "analysis-model-units-request:4cd87293121dc7359bee0ee65b19d5c526de3157f94c92c22803259080219fed",
+      "new_request_ref": "analysis-quoted-parent-units-request:1d96f0ce880350e472fceb2c3b61de6e0eea76e429960389a6d4d3ecfaac238a",
+      "new_candidate_id": "analysis-unit-candidate:7503cc73367539c248a48405af8f7e2222c368b6433c2d73e64eb23b898a9410",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT02",
+      "old_target_sha256": "0c073b4bfc7b88efe661e87b57fae1a31dada61d774e0f8a3542bec8c0a37b66",
+      "new_target_sha256": "ef19205b8c645dcb18b7be6bb21aa0c1ee1349fa2aa5687de4903136f1819197",
+      "old_request_ref": "analysis-model-units-request:45d41dd5a7d7e0db8850fc031ed1969cdd5a2bde5ab2527810d23d224d29804f",
+      "new_request_ref": "analysis-quoted-parent-units-request:4c25ba2b38b8d395dc42cb836eea121d15d9d6e052ea5d2409c7f56ca586bc53",
+      "new_candidate_id": "analysis-unit-candidate:69b24a6ec5770037cbdc885c6214f15da388cb41994be12e46ab52e317f81090",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT03",
+      "old_target_sha256": "0f6263fa35c1affbd25754f9a8f1aa2d0df1f4a277f9fa37cba2a8fb75ab6e8c",
+      "new_target_sha256": "e07147d3cb4f592096521951919d70d87d8206d7258654a7f2d1d35fd6ceaab4",
+      "old_request_ref": "analysis-model-units-request:e89eac2d772b4d517d13899c7526020c0486c537a9ce81a1de9881a6e56072af",
+      "new_request_ref": "analysis-quoted-parent-units-request:e68866f1ee53cd946741a1c61715d954ce34fddd9c62f53fd2df49484fe0d574",
+      "new_candidate_id": "analysis-unit-candidate:4644443fc9832cf516b5feec8fbfa3d5a0d57d3a3cbbb741b8bba25d044b9755",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT04",
+      "old_target_sha256": "c6f0f6667b812f4a91bd34ca638ce44ba87a2225e456629f2683f328b56fa217",
+      "new_target_sha256": "aa2ae2fec1adcae100dbd1d4de693874e67c9896a7ee7249b1438168468a48d4",
+      "old_request_ref": "analysis-model-units-request:d52ec105a545b2e21eac4cd5413796d0d2ddb3744407eb9bcd4e44aad5355c87",
+      "new_request_ref": "analysis-quoted-parent-units-request:19646416113471181bec89e4bfdcccf1005bc40ca5833f314038a128925b3eb5",
+      "new_candidate_id": "analysis-unit-candidate:327c8acbc407936be2d851f17b2b106b1e9135e690ebd149c9c50f886aa41e5e",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT05",
+      "old_target_sha256": "25440aa3fda8ecab1ebc7d252e55610e2a4da9ee9c1adf2e4a7cbf048f3a412c",
+      "new_target_sha256": "fe53660b22de1880787428dd3688bfe1858d3b6f03340a2c32faf41364dfdd54",
+      "old_request_ref": "analysis-model-units-request:38f1792267398bdbef04490d95bc37e7482d49820c622a682aaf0da81efedf47",
+      "new_request_ref": "analysis-quoted-parent-units-request:a6ef4d935ebbefd1a4cf1b7082bea48449977bee42606267230e989b17f3cce2",
+      "new_candidate_id": "analysis-unit-candidate:17a02f7ff1197c61645bd2f60423d70aca6c129f08404f824430ba0aa6bc596a",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT06",
+      "old_target_sha256": "7fb721b0cd326acd690c68befbc638f72ade56fb0d894d4d89f42b61ff07b7d4",
+      "new_target_sha256": "7f864241301432194d6edcdb0ccbadad53ccd8d5256edb119c0aca85d08cd8e1",
+      "old_request_ref": "analysis-model-units-request:8961cd4cef900c611c1d5181aa8ce6950964766848de5324d944afca433ab1b4",
+      "new_request_ref": "analysis-quoted-parent-units-request:bd53c32e5e5aaea80e2ee90659d1c7369f31483d37842c65491cfd6138647779",
+      "new_candidate_id": "analysis-unit-candidate:08820d14f0f45ba0b6b0d196d80b709e0e276c921a0d2450dc79c185bc17ab78",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT07",
+      "old_target_sha256": "bbfc1368f25a74b2298f8c1b8d64045c8f759c92cb6956dc865d0de748cc5c9c",
+      "new_target_sha256": "c76735719305f32fb319950d91954341389718d7027fbca5b2ec358352bb8874",
+      "old_request_ref": "analysis-model-units-request:c583461d46a8e547a45506af4105658f6ea70cc1d4009268511d580c8a42bd34",
+      "new_request_ref": "analysis-quoted-parent-units-request:a196c81ad5ec2c53b9266b8be207199eb122a0388beb1e836d4a0d114c2c19dc",
+      "new_candidate_id": "analysis-unit-candidate:868c930d2b311746182f33783a700c3605620b63b3bc1fd518810ae98db993dc",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "NT08",
+      "old_target_sha256": "b624d091e46cca2dea2ae96e09146ae231c5e3ebfd107b1251b9a12c31b77668",
+      "new_target_sha256": "2a24a41f05ea769e7d962cc7c1e2affb36d1ee4a587d7abf73b0fa4b6c61487d",
+      "old_request_ref": "analysis-model-units-request:52a888912f65c29dd0d61e346434555a76ce8a68815b217eaaefeaa5b11cde53",
+      "new_request_ref": "analysis-quoted-parent-units-request:988b3828622f01ffb39f699db233a7b6947cf1a3b6cf769d4d74ad97f566df67",
+      "new_candidate_id": "analysis-unit-candidate:caa011fca9cfbf04ea3ac615919621213397c57c78089b7f21a64e98f278b0bf",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST01",
+      "old_target_sha256": "773e2561b309c1de21aa41965971ca2d5085e1e3f06625ef50ded750b6aec9d4",
+      "new_target_sha256": "d9c21fc658946fe0932c7cf8a7682a5960dfaf07be1e07ee7148b86f9ee91b8d",
+      "old_request_ref": "analysis-model-units-request:aae6943c20c66664a5fda816392f36da3eafa5053f871b2f5e9cd4636a7462c0",
+      "new_request_ref": "analysis-quoted-parent-units-request:12c5afe3828cbbfe762596007965b58595a9de9f2d51ecd5b3b747c354ec7a5e",
+      "new_candidate_id": "analysis-unit-candidate:bbd9ae6ed21efdf70716d025fe7a5f0d194f6129337cf54623a9f36694f41a17",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST02",
+      "old_target_sha256": "26612000e177e09f9d12a2216eb9e88d6e681b5236a520edffae79b1d0cd255e",
+      "new_target_sha256": "0c1c1436467f97fab7062b2b9a4bed21de0ebe1b9b3e8e8b848997abdbcc9e7b",
+      "old_request_ref": "analysis-model-units-request:5dd1a44a5948b750f04f3d264dfc2bf63a23488bf4deb287fc0453116077fe9c",
+      "new_request_ref": "analysis-quoted-parent-units-request:124cdecc5b081fa1c83f5caf0da1c678efe455355089ecf3fc1b1b7cff1d50b8",
+      "new_candidate_id": "analysis-unit-candidate:6f6e43ac193efdbd735aa42db16a5641a9212eb825ee57b8bd1361975f5ce7cd",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST03",
+      "old_target_sha256": "779e3108d24d804764733b812cb788e836645f7db479780e38e9c9d63e165c0e",
+      "new_target_sha256": "585e447353456c50d20dffd9af9042f35644ae2a622ab05581ff39d8eeb47add",
+      "old_request_ref": "analysis-model-units-request:80c8a59912116bbf6b393b254bdb6da1d535e2acd7101687418a913b7beaea4e",
+      "new_request_ref": "analysis-quoted-parent-units-request:7843644a612d867c2d4fa79f83c56425e77af3cdf5f63473f52e3c7a79b91f16",
+      "new_candidate_id": "analysis-unit-candidate:3da59f10120c8bea94264bca1284442a3291368cf72c92ee26ae40f5e7f05ac1",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST04",
+      "old_target_sha256": "6326ee2f4e4e0d1709f41ea8669fd437345c863d1b13a0d97fba72c1ba2347ae",
+      "new_target_sha256": "b0318ac8c8b03aed6c2ff8b0f4639ccf88b83e1fd7e465fc295f6e42c074b552",
+      "old_request_ref": "analysis-model-units-request:356df94bb4b7f765e563514101ebf074ffa96030c276bc9ac79384998ae888c8",
+      "new_request_ref": "analysis-quoted-parent-units-request:a76e11343c40ea0e199b2028fa8d25e870b2b3ce6f6c604c9c248392501b787c",
+      "new_candidate_id": "analysis-unit-candidate:2d36b7e20dd606b420b2d619331de5d88bf4de40a369947aa1d6942fee52d39d",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST05",
+      "old_target_sha256": "465e24f969e5095c6e3ce028899a5d6816d8fa8c7d8a33355cf9f0b1eb5179ac",
+      "new_target_sha256": "1b06160d3b816fa196ed00c5104df0d7d3bab5c577001310acb6598569a7ee82",
+      "old_request_ref": "analysis-model-units-request:11dee5d02ff65e0ce17a3f4ca66f1dbb3254bb528a25e84fbd9820bd1571eea8",
+      "new_request_ref": "analysis-quoted-parent-units-request:e5189e63e8cc13b17e496d5775da254718fb63701f414639d59874c19b9d80ac",
+      "new_candidate_id": "analysis-unit-candidate:88247b6d5e35fdae773cf80d8253cb3cb7b397781da70eee26da7bb3a719a7f3",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST06",
+      "old_target_sha256": "95502d6d085d265ffbc2ab2524a4bc1e3afe8a3a9bd2f53a3423ff9ff3e4d8e3",
+      "new_target_sha256": "cc52a51524de5d402a2224b2fae6bc5462a9dee338468f61099f934ff3a08a98",
+      "old_request_ref": "analysis-model-units-request:a34f95aac002c705c11869862394a28fa9b87309f5df3388cb0b36e4f670691c",
+      "new_request_ref": "analysis-quoted-parent-units-request:2dac7d170c8ee4b17a365e3c8b5a063bef265b69d4416fc6463f4b56250c5dcb",
+      "new_candidate_id": "analysis-unit-candidate:2294c55757f503e3e37d481b23b06c702584ef18199aafee026f7e00335ce825",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST07",
+      "old_target_sha256": "7b885c8fc8131deb2d511569834960af0fde905d1d33b0fde394dd7f53d5c3a1",
+      "new_target_sha256": "d3b535ba6134152bd6d95ad5f48db0a81a0c094e15aceca720da92bffc14e3c5",
+      "old_request_ref": "analysis-model-units-request:a17027d39e1e6d3338c59c1accacf291c9294391cd2052f2b06b268c5453aa2c",
+      "new_request_ref": "analysis-quoted-parent-units-request:7e2d3e8a34ab6fdf7ee85503e6eda048d09063cdc66e5350b1a75f0aa59e2570",
+      "new_candidate_id": "analysis-unit-candidate:616a91d09acd364dc8555b0345a15dc7b5d78755eec390dac9f5ea85d27946df",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    },
+    {
+      "id": "ST08",
+      "old_target_sha256": "eff09772fa08ad8ed2230a7a325573e48e62a93149bc896c6ff757a963bb4ecc",
+      "new_target_sha256": "7917b1f82ba19edb632fdce46542cfc1c9c7c0282a0ce47757ee1eadb49d9424",
+      "old_request_ref": "analysis-model-units-request:b08a6bca5ee9cf20d160d639c33aec90103e40e9baf5c57796a3f5b0a3b9c3a8",
+      "new_request_ref": "analysis-quoted-parent-units-request:c2a960699e1bca91ff41bd3d3a5088536ec561ba142365455433c3d5f375798b",
+      "new_candidate_id": "analysis-unit-candidate:8aa5e902fe980fcb9ad04cd55ba16fe6ebb4c29d5db82fc3a7221a7fbeca444f",
+      "fields_text_diagram_and_coverage": "EXACTLY_EQUAL_TO_ORIGINAL_SYNTHETIC_TEACHER",
+      "new_saved_raw_and_non_generation_replay": "MATCHED"
+    }
+  ],
+  "new_gpu_calls": 0,
+  "new_training_updates": 0,
+  "normal_adoption": false,
+  "separate_process_synthetic_example_replay": {
+    "file": "semantic_units_quoted_parent_cpu_example.json",
+    "sha256": "7df8bc1030838e13361c241a90554f379c2bf58d779235f836f79e0f146e9d41",
+    "candidate_id": "analysis-unit-candidate:ef93ffcacf6228ece20bb799cc1aa84b3a6ede55f5cddf660b6ae7311bbe84de",
+    "status": "MATCHED_SAME_FILE_BYTES_ID_COVERAGE_NO_GENERATE_COMPILE_AUTHOR"
+  },
+  "api_commit": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "old_saved_payloads_count_files_not_distinct_topics_or_ids": true,
+  "pytest_runs": [
+    {
+      "files": [
+        "test_analysis_model_quoted_parent_units.py",
+        "test_analysis_model_units.py",
+        "test_analysis_model_fields.py",
+        "test_analysis_model_field_kinds.py",
+        "test_analysis_cumulative.py",
+        "test_analysis_cumulative_jobs.py"
+      ],
+      "passed": 171,
+      "skipped": 3,
+      "seconds": 31.75
+    },
+    {
+      "files": [
+        "test_cmee_analysis_semantic_snapshot.py"
+      ],
+      "passed": 112,
+      "skipped": 0,
+      "seconds": 10.47
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "approved_source_commit": "a283af4d85e3940cbd56f6ecaf52231e8852f720",
+  "plan_sha256": "e055e37a382b19ac5b3723f5b60587fb4a2e7fb2852ec45650e5facf9f1687b9",
+  "runner_sha256": "7473ab634fbbbb8d3f1adb1b32df2368a32c61945ae80ace74321fa1d126f1ec",
+  "mash_approval_verbatim": "進めていいよ。",
+  "approved_scope": "追加学習なし・保存重みで2箇所×2条件＝計4回の計算比較。最大10分・前回単価で処理按分約$0.047（準備・回収・保持等別）、再試行なし。",
+  "recorded_at_jst": "2026-10-30T17:07:57.570661+09:00",
+  "limits": {
+    "model_loads": 1,
+    "model_forwards": 4,
+    "updates": 0,
+    "generations": 0,
+    "new_cmee_calls": 0,
+    "process_seconds": 600
+  },
+  "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+  "retry": false,
+  "automatic_progression": false
+}

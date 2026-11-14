@@ -1,0 +1,75 @@
+{
+  "schema_version": "cocolon.analysis.semantic_map.v1",
+  "wire_kind": "watashi.map.v3",
+  "projection_of": "artifact:6960f9d6a4ce4f2db96918d66216e2c6@1",
+  "artifact_version": 1,
+  "period_label": "これまでの記録",
+  "overview": {
+    "summary": "花では自分が好きになる色を残したいという望みが、会議では自分の見方を聞いてほしかったという希望と表れています。",
+    "title": "花の望みと会議での参加の望み"
+  },
+  "nodes": [
+    {
+      "context": [
+        "趣味：喜び・強"
+      ],
+      "evidence_badge_count": 1,
+      "explanation": "本人は花に自分が好きだと思える色を残したいと記し、好きな色を押し花にしています。見せるかは未定です。",
+      "node_kind": "TARGET_MEANING",
+      "node_ref": "n1",
+      "perspective": "SELF",
+      "summary": "花には本人が好きな色を残したいという望みが表れています。",
+      "title": "自分が好きだと思える色を残したい",
+      "unknowns": []
+    },
+    {
+      "context": [
+        "仕事：怒り・中"
+      ],
+      "evidence_badge_count": 1,
+      "explanation": "本人は方針を決める前に自分の見方も聞いてほしかったと記しています。その場で自分の見方を伝えなかったことと、方針が先に決まったことは区別できます。",
+      "node_kind": "TARGET_MEANING",
+      "node_ref": "n2",
+      "perspective": "SELF",
+      "summary": "会議では自分の見方を聞いてほしかったと述べています。",
+      "title": "自分の見方も聞いてほしかった",
+      "unknowns": []
+    },
+    {
+      "context": [
+        "価値観：自己理解"
+      ],
+      "evidence_badge_count": 1,
+      "explanation": "選択に置くものについて、周りの選び方だけでなく本人にとって大切なことも入れたいと述べています。",
+      "node_kind": "SELF_POSITION",
+      "node_ref": "n3",
+      "perspective": "SELF",
+      "summary": "選択へ入れたい本人の基準を記しています。",
+      "title": "選択へ入れたい本人の基準",
+      "unknowns": []
+    }
+  ],
+  "edges": [
+    {
+      "edge_ref": "e1",
+      "explanation": "花で自分が好きだと思える色を残したいという望みが、選択へ本人の大切なことも入れたいという望みと、似た意味を持っています。",
+      "from_ref": "n1",
+      "label": "自分の基準を残したい",
+      "relation_kind": "SHARED_MEANING",
+      "to_ref": "n3"
+    },
+    {
+      "edge_ref": "e2",
+      "explanation": "本人が花で望む残し方と、会議で望む参加の形が、別の場面での受け取りです。どちらが原因でどちらが成立したかは記録にありません。",
+      "from_ref": "n1",
+      "label": "望む参加の形",
+      "relation_kind": "CONTEXT_CONTRAST",
+      "to_ref": "n2"
+    }
+  ],
+  "accessibility_linear_order": [
+    "n1",
+    "n2",
+    "n3"
+  ]
+}

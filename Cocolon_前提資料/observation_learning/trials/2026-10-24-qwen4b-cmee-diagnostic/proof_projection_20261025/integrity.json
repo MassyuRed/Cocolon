@@ -1,0 +1,41 @@
+{
+  "bundle_sha256": "d393104fe9bc142582de01bb75c50b0732c791e373892cdf71e22e631410de6f",
+  "files": {
+    "raw.jsonl": {
+      "source_sha256": "11c3a4768fcc408cf5289e47179d399388bb2d72e093eab7ce970e9041403fee",
+      "received_text_sha256": "11c3a4768fcc408cf5289e47179d399388bb2d72e093eab7ce970e9041403fee",
+      "matches_source_bytes": true
+    },
+    "inference_report.json": {
+      "source_sha256": "3999c1715576f9b7498a4d3875278e7a2b5333fd0dedac82af1814f99cbd8bf7",
+      "received_text_sha256": "3999c1715576f9b7498a4d3875278e7a2b5333fd0dedac82af1814f99cbd8bf7",
+      "matches_source_bytes": true
+    },
+    "diagnostic.py": {
+      "source_sha256": "8db8d486215f5f8ee768900963ef45bca8c2ff1aab51b7b3648931b7d6fe1c8b",
+      "received_text_sha256": "8db8d486215f5f8ee768900963ef45bca8c2ff1aab51b7b3648931b7d6fe1c8b",
+      "matches_source_bytes": true
+    },
+    "execution_plan.json": {
+      "source_sha256": "a3f8814570958307d98a2e986912c59bd86585da0bfab7f3ebbe37f52f781637",
+      "received_text_sha256": "a3f8814570958307d98a2e986912c59bd86585da0bfab7f3ebbe37f52f781637",
+      "matches_source_bytes": true
+    },
+    "preflight_path_failure.json": {
+      "source_sha256": "cef33472dde26e57a58ac857687b4427232608ddf35736f131e7c97ad6c455a7",
+      "received_text_sha256": "cef33472dde26e57a58ac857687b4427232608ddf35736f131e7c97ad6c455a7",
+      "matches_source_bytes": true
+    },
+    "preflight_directory_failure.json": {
+      "source_sha256": "17e9972f91824da184772b4d02e3870bdcff721afb8c3b41955c46579bfd9f36",
+      "received_text_sha256": "17e9972f91824da184772b4d02e3870bdcff721afb8c3b41955c46579bfd9f36",
+      "matches_source_bytes": true
+    },
+    "inference.log": {
+      "source_sha256": "257b58b2985dc8d317148b7936ff48326d345899ce06770004866fd771c77285",
+      "received_text_sha256": "394148aaf1741f68deb273438b7dd72d7c4882be59073f64f823462aaa159c8c",
+      "matches_source_bytes": false
+    }
+  },
+  "log_note": "inference.log read_text normalized CR progress output; raw/report/script/plan/failure JSON are byte-exact. Log retained as normalized text, not original bytes."
+}

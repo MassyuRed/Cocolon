@@ -1,0 +1,169 @@
+{
+  "status": "CPU_ROLE18_READY_NO_MODEL",
+  "optimizer_steps": 18,
+  "training_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-no_contact",
+    "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-statement_concession",
+    "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-returned_concession",
+    "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-BOOK-AFTER-ANSWER-no_contact",
+    "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-BOOK-AFTER-ANSWER-continuing_concern",
+    "LOCAL-END_UPDATES_AND_PROSE-FT-BOOK-AFTER-ANSWER-final",
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-perceived_realization",
+    "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-answer_joy",
+    "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-felt_distance",
+    "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-perceived_realization",
+    "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-felt_distance",
+    "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-answer_sadness",
+    "LOCAL-END_UPDATES_AND_PROSE-FT-SHOP-AFTER-ANSWER-final",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-DAILY-CALM-01-INITIAL"
+  ],
+  "original19_and_eval_unchanged": true,
+  "local13_only_appended": true,
+  "initial_adapter_sha256": "afaa2c2e2f7263792d5cf9930bb2fac0bf44bdccd04ff2ffa8049a2cfd2f12d2",
+  "model_calls_planned": 11,
+  "pretrained_model_loads": 0,
+  "model_forwards": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "current_api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "current_cmee_manifest_sha256": "419fe80988ef3738f6ac070e512cb9bd098074c6a29918b004a0a238318ad696",
+  "evaluation_messages_exact": 11,
+  "gold11_meaning_and_body": 11,
+  "tokenizer_records": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "total_tokens": 3081,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-no_contact",
+      "prompt_tokens": 2486,
+      "target_tokens": 283,
+      "total_tokens": 2769,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-statement_concession",
+      "prompt_tokens": 2467,
+      "target_tokens": 199,
+      "total_tokens": 2666,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-returned_concession",
+      "prompt_tokens": 2468,
+      "target_tokens": 200,
+      "total_tokens": 2668,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-BOOK-AFTER-ANSWER-no_contact",
+      "prompt_tokens": 4621,
+      "target_tokens": 77,
+      "total_tokens": 4698,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-BOOK-AFTER-ANSWER-continuing_concern",
+      "prompt_tokens": 4623,
+      "target_tokens": 75,
+      "total_tokens": 4698,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-END_UPDATES_AND_PROSE-FT-BOOK-AFTER-ANSWER-final",
+      "prompt_tokens": 5136,
+      "target_tokens": 297,
+      "total_tokens": 5433,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4387,
+      "target_tokens": 2913,
+      "total_tokens": 7300,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "total_tokens": 6055,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-perceived_realization",
+      "prompt_tokens": 2597,
+      "target_tokens": 345,
+      "total_tokens": 2942,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-answer_joy",
+      "prompt_tokens": 2594,
+      "target_tokens": 287,
+      "total_tokens": 2881,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-felt_distance",
+      "prompt_tokens": 2593,
+      "target_tokens": 313,
+      "total_tokens": 2906,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-perceived_realization",
+      "prompt_tokens": 4947,
+      "target_tokens": 63,
+      "total_tokens": 5010,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-felt_distance",
+      "prompt_tokens": 4945,
+      "target_tokens": 59,
+      "total_tokens": 5004,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-answer_sadness",
+      "prompt_tokens": 4947,
+      "target_tokens": 72,
+      "total_tokens": 5019,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "LOCAL-END_UPDATES_AND_PROSE-FT-SHOP-AFTER-ANSWER-final",
+      "prompt_tokens": 5497,
+      "target_tokens": 370,
+      "total_tokens": 5867,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4539,
+      "target_tokens": 3238,
+      "total_tokens": 7777,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "total_tokens": 3363,
+      "all_target_and_eos_supervised": true
+    }
+  ],
+  "series_tokens": 80137,
+  "cuda_initialized": false,
+  "seconds": 14.05745174200274,
+  "complete_cpu_check_sha256": "118faa4004e779d83c9c7eedf954c2bb31b1db293fbb4ecbe15f9ef025aef35a",
+  "complete_cpu_check_bytes": 1837871
+}

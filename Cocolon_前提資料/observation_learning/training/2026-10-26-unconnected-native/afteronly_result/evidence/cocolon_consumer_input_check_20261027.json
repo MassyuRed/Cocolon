@@ -1,0 +1,6 @@
+{
+  "returncode": 0,
+  "stdout": "{\"status\": \"CPU_NATIVE15_INPUT_BINDING_VERIFIED_NO_ADOPTION\", \"cases\": 15, \"api_commit\": \"6b043880504912481a6b10d93c9128ec4995b70b\", \"model_calls\": 0, \"training_updates\": 0, \"cmee_adoptions\": 0, \"cold_processes\": 0, \"sql_operations\": 0, \"dynamic_prior\": false}\n",
+  "stderr": "",
+  "new_model_calls": 0
+}

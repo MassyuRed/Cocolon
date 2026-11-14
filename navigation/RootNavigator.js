@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import React, { useEffect, useLayoutEffect } from "react";
+import { View } from "react-native";
 
 import { useAuth } from "../AuthContext";
 import AuthScreen from "../AuthScreen";
@@ -8,13 +8,19 @@ import { useTutorial } from "../TutorialContext";
 import { startIapPurchaseObserver, stopIapPurchaseObserver } from "../lib/iap/iapService";
 import { startPushTokenSync, syncPushTokenOnce } from "../lib/pushToken";
 import { captureClientError } from "../lib/monitoring";
-import { tryOpenRouteIfPending } from "./navigationRef";
+import { setNotificationNavigationOwner, tryOpenRouteIfPending } from "./navigationRef";
+import AppStartupLoadingView from "../runtime/AppStartupLoadingView";
 import MainTabs from "./MainTabs";
 
 export default function RootNavigator() {
-  const { session, initializing, recoveryMode } = useAuth();
+  const { session, initializing, recoveryMode, authOwnerGeneration } = useAuth();
   const { subscriptionBootstrapLoaded } = useSubscription();
   const { tutorialResetToken } = useTutorial();
+
+  useLayoutEffect(() => {
+    setNotificationNavigationOwner(session?.user?.id, !initializing && !recoveryMode);
+    return () => setNotificationNavigationOwner(null, false);
+  }, [initializing, recoveryMode, session?.user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     if (!session || recoveryMode || !subscriptionBootstrapLoaded) {
@@ -61,14 +67,10 @@ export default function RootNavigator() {
   }, [!!session, recoveryMode]);
 
   if (initializing) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <AppStartupLoadingView />;
   }
 
   if (recoveryMode) return <AuthScreen />;
   if (!session) return <AuthScreen />;
-  return <MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />;
+  return <MainTabs key={`main-tabs-${session.user.id}-${tutorialResetToken || 0}`} />;
 }

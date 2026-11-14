@@ -1,0 +1,14 @@
+{
+  "archive_sha256": "6c7f103a3866daa1f0b7c84c2db16d65fff44a9cc700fd39c278da8babd535c9",
+  "archive_bytes": 6966423,
+  "manifest_files": 19,
+  "all_size_hashes_verified": true,
+  "adapter_equals_early_verified_32_finite": true,
+  "adapter_sha256": "f1e88e3e43fdd8c200969dfffbcf0551791b392e435826b26c0a247b7582c81a",
+  "raw_sha256": "e0b13ce620d1a67300bd971c88877416617226df5420e281973f13590e62a6fd",
+  "raw_bytes": 221322,
+  "source_commit": "6cea88162cc552668ace9d7de516281d99c942aa",
+  "optimizer_updates": 6,
+  "new_generations": 9,
+  "seconds": 939.7154791597277
+}

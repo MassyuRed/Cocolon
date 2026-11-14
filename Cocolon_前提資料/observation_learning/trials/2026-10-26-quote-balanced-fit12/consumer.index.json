@@ -1,0 +1,138 @@
+{
+  "encoding": "utf-8",
+  "join": "concatenate bytes in listed order with no separator",
+  "source_bytes": 1587688,
+  "source_sha256": "1aa2c82952f853aef6932f6947090c9fe90dd40cf4a353a5ac8b1387d519de1c",
+  "parts": [
+    {
+      "path": "consumer.part-01.txt",
+      "bytes": 63216,
+      "sha256": "824652262d1b9f594a53fb21393dc992b652a99f99bb90c4b4b0d8015d722348"
+    },
+    {
+      "path": "consumer.part-02.txt",
+      "bytes": 63402,
+      "sha256": "2fa2a027c27ebeb7ee64dac38af21e7bfb600ce4464494744145554cd4e57877"
+    },
+    {
+      "path": "consumer.part-03.txt",
+      "bytes": 61850,
+      "sha256": "683eeeff8b40c3ddefd4d582d5cb7532f1151d96156d55ce8b9505a13bcae842"
+    },
+    {
+      "path": "consumer.part-04.txt",
+      "bytes": 65540,
+      "sha256": "3487dc02caa9f361b36e868820e131b726242b3dc8d7c11cd1603879d02eb989"
+    },
+    {
+      "path": "consumer.part-05.txt",
+      "bytes": 63606,
+      "sha256": "667aa24dc5fec4ea698a6f2883496e437e30dbff0e112e33cbdd80e3649d66ec"
+    },
+    {
+      "path": "consumer.part-06.txt",
+      "bytes": 65040,
+      "sha256": "e941c6aa548a61897897f8eb77386cc7654129181868c002c98a0addefd70cd8"
+    },
+    {
+      "path": "consumer.part-07.txt",
+      "bytes": 62906,
+      "sha256": "6dbf6b35d0e5eac5d45d1507340001476f6ddea999ef1db344c214907881c607"
+    },
+    {
+      "path": "consumer.part-08.txt",
+      "bytes": 64114,
+      "sha256": "9359ba91a196ef0cea8af1d8b0714ed7e313db62f8f532f0e0dd986e8a42d16f"
+    },
+    {
+      "path": "consumer.part-09.txt",
+      "bytes": 63532,
+      "sha256": "f6c4afb1b48e25629bce8ba2d952ac1694f6146849694724ba58b657f591044f"
+    },
+    {
+      "path": "consumer.part-10.txt",
+      "bytes": 62632,
+      "sha256": "4b6ce50f62282823607e3a0bc687e0e66eb6c57cb336595493045a23a35603aa"
+    },
+    {
+      "path": "consumer.part-11.txt",
+      "bytes": 65754,
+      "sha256": "3b251fd8bb72f2cec6bdec2ec58110e1d1940c54e4ed29c1d3c754862a793502"
+    },
+    {
+      "path": "consumer.part-12.txt",
+      "bytes": 63088,
+      "sha256": "91c0fc6bafa3693fa2f134f634bfccf51557344fa329cb2da7f2f6b1949b7c4a"
+    },
+    {
+      "path": "consumer.part-13.txt",
+      "bytes": 65362,
+      "sha256": "1c4d26a985545f50e47c33a8fa5b21e88a47d2cc42430d25e503784f9fedd0bf"
+    },
+    {
+      "path": "consumer.part-14.txt",
+      "bytes": 63258,
+      "sha256": "c74c18bd6a83658f6bd6b10f12a06e8f1a37b863f38fce004659100416fc4688"
+    },
+    {
+      "path": "consumer.part-15.txt",
+      "bytes": 63554,
+      "sha256": "ebfface0244075ef3a63c87bd8a7af5d3a6e08d07c9dca5f7f2c1151bd4d5d1f"
+    },
+    {
+      "path": "consumer.part-16.txt",
+      "bytes": 61550,
+      "sha256": "09484fa26b81ed0de3f3d614feab68ce02de9495df9f352ed1f9d9fa452334a7"
+    },
+    {
+      "path": "consumer.part-17.txt",
+      "bytes": 65840,
+      "sha256": "3714a80ffe51d602aaaa3912059465d3c0991c1825cd932bf0e6d76ae311a383"
+    },
+    {
+      "path": "consumer.part-18.txt",
+      "bytes": 63306,
+      "sha256": "c9764a806f61ae0fd4bf02563a3c75a8670aaed1778895c1303707507da90264"
+    },
+    {
+      "path": "consumer.part-19.txt",
+      "bytes": 65146,
+      "sha256": "2b16d9416a2a05eb4069c176863d50d560cafdd1065ec66e3c917ab3a6296e50"
+    },
+    {
+      "path": "consumer.part-20.txt",
+      "bytes": 62546,
+      "sha256": "73fa4c5bc11ef94dd786e8c87846b54a17e53ce67ab21348a25ba3af9f6846d7"
+    },
+    {
+      "path": "consumer.part-21.txt",
+      "bytes": 61824,
+      "sha256": "63d884b289982c3b8db7e0316cadbb0fae71d21c7776facb12a72d6aa870cbb7"
+    },
+    {
+      "path": "consumer.part-22.txt",
+      "bytes": 62258,
+      "sha256": "112c2aec40500d6a8a5a85a503d00d99552eb4c79186403899133cc6779f4ddc"
+    },
+    {
+      "path": "consumer.part-23.txt",
+      "bytes": 62086,
+      "sha256": "60e480cde6f82c55ae537207f2d1cd663502f629e35330a76938bbd243eaf3e9"
+    },
+    {
+      "path": "consumer.part-24.txt",
+      "bytes": 62924,
+      "sha256": "4a01ec4d36ecf15ad8647da3c1d7ddda8148cde1dad6c117283287c4a1f13481"
+    },
+    {
+      "path": "consumer.part-25.txt",
+      "bytes": 62256,
+      "sha256": "81be4ce0af9b62ff6ef1a1aa5789cc12ef3d83191a802a670f81ff0532265774"
+    },
+    {
+      "path": "consumer.part-26.txt",
+      "bytes": 1098,
+      "sha256": "0c1d73d7e656e7db5ad7c89f9915b5e2b476bdf45760820e60a9abff33566dd3"
+    }
+  ]
+}

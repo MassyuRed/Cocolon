@@ -1,0 +1,93 @@
+{
+  "schema_version": "cocolon.analysis.role_transfer4.reviewed.v1",
+  "status": "COMPLETE_REVIEWED_NOT_ADOPTED",
+  "scope": "FOUR_NEW_SYNTHETIC_NEAR_TRANSFER_NOT_BLIND_GENERAL_OR_MASH_TEACHING",
+  "api_commit": "dc05dc358d1c44ce47fd844f6041d74f1f74fe6a",
+  "code_commit": "9a7a6657ed1ee0cc7f59a22d4b679d69158ae007",
+  "prompt_version": "semantic_boundaries.v2",
+  "training_updates": 0,
+  "new_calls": 8,
+  "model_loads": 2,
+  "process_seconds": 39.49686685716733,
+  "parent_seconds": 56.54439187515527,
+  "process_cost_usd_at_0_58_per_hour": 0.006363384104765848,
+  "cost_excludes": "preparation collection holding recovery",
+  "cpu": {
+    "prepare_exit": 0,
+    "prior_source_comparison": {
+      "teachers": 74,
+      "evaluation": 46,
+      "nonempty_fields": 133,
+      "nonempty_field_exact_matches": 0,
+      "memo_action_pair_exact_matches": 0,
+      "empty_fields_excluded": "Existing typed scope requires one nonempty field; blank action is plumbing, not novelty"
+    },
+    "strict_reference_count": 4,
+    "typed_reference_returned": 2,
+    "typed_reference_rejected": 2,
+    "saved_readers_no_engine_both_compilers_both_authors": true,
+    "prompt_eos_context_checked": true
+  },
+  "generation": {
+    "all_finished_stop": true,
+    "run_exit": 0,
+    "source_reference_json_equal_before": 0,
+    "source_reference_json_equal_after": 3,
+    "reference_equality_is_not_semantic_acceptance": true
+  },
+  "role": {
+    "intended_self_role_count": 2,
+    "before_returned": 1,
+    "after_returned": 2,
+    "scope_controls": 2,
+    "before_scope_rejected": 2,
+    "after_scope_rejected": 2,
+    "after_self_actor": "SELF",
+    "after_self_temporal_scope": "past",
+    "after_self_modality": "fact",
+    "after_self_polarities": [
+      "positive",
+      "negative"
+    ],
+    "self_graph_node_count": 1,
+    "self_graph_edge_count": 0,
+    "self_graph_unknown_gap_count": 4,
+    "text_diagram_projection_matched": true
+  },
+  "saved_reader": {
+    "candidate_returned_and_replayed": 8,
+    "role_returned_and_replayed": 3,
+    "role_rejected_without_artifact": 5,
+    "engine_both_compilers_both_authors_forbidden_inside_saved_reader": true,
+    "model_generations_during_saved_reader": 0,
+    "candidate_mapped_count_per_call": 0
+  },
+  "meaning_review": {
+    "all_sources_and_eight_raw_read": true,
+    "all_three_adopted_role_artifacts_read": true,
+    "positive_copula_modifier_removed": true,
+    "negative_role_meaning_preserved": true,
+    "uncertain_raw_byte_identical": true,
+    "other_actor_preserved_without_self_adoption": true
+  },
+  "originals": {
+    "bytes": 104824,
+    "members": 62,
+    "sha256": "265f623e44d64c32ce101a7072d1e269c7089a1b46114d4082750298f8e1798f",
+    "all_member_crc_and_manifest_bytes_sha256_verified": true
+  },
+  "prior_six_adapter_pairs_unchanged": true,
+  "aligned_candidate_unchanged": true,
+  "compute_empty": true,
+  "normal_adoption": false,
+  "next_training_initial_selected": false,
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "limitations": [
+    "Four synthetic close-transfer sources, not blind general evaluation or Mash-authored teaching",
+    "Single-record single-nonempty-field explicit past role only; candidate coverage is unparsed for this role-only scope",
+    "Uncertainty remains WRITTEN_UNKNOWN rather than the source reference ROLE, and typed role scope rejects it",
+    "CONTENT_TARGET loss MD01/OD01, NV04 relation/duplicate, PQ02/HQ04, R06/R07 remain from aligned74",
+    "Personal criteria judgment choice, multi-field supplements comparison, cross-record recurrence/change and normal cumulative graph integration unfinished"
+  ]
+}

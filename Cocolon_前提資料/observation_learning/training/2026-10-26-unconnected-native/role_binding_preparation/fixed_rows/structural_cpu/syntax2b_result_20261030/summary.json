@@ -1,0 +1,153 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "date_jst": "2026-10-30",
+  "approval": {
+    "by": "Mash",
+    "statement": "「4B学習＋CMEE接続」を続けて。",
+    "date_jst": "2026-10-30",
+    "proposal_commit": "92a83d975ebb5ae6081e111cf6f8a2da892aacfa",
+    "proposal_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/added_tokens_proposal.md",
+    "scope": "追加token12個のbyte対応だけの新source修正とCPU全条件検証→全成立時だけ保存11446641非学習1load/0更新/BOOK・SHOP各1生成→既存CMEE・成立snapshot別process保存再読。GPU最大600秒/$0.047按分、準備/回収/保持等別、一回・retryなし",
+    "interpretation": "直前のexact案・費用・停止条件を提示した質問への継続指示として、この一回を承認。旧CPU失敗の承認再利用ではない。"
+  },
+  "cpu_source_commit": "d87fd8ecf1a20cba9152827a92387550b4b18328",
+  "gpu_authorized_source_commit": "8842ef2bb88d01a5ff946d1e01455941f23e225f",
+  "cpu": {
+    "status": "CPU_SYNTAX2_PASSED_NO_MODEL",
+    "build_seconds": 4.123060749028809,
+    "inner_seconds": 23.59404082398396,
+    "outer_seconds": 24.63175478798803,
+    "added_token_count": 12,
+    "added_token_byte_pair_cases": 6144,
+    "projected_mask_seconds_at_caps": [
+      6.164200003369497,
+      5.951641382563652
+    ],
+    "report_sha256": "3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563"
+  },
+  "gpu": {
+    "model_loads_completed": 1,
+    "model_calls_completed": 2,
+    "optimizer_steps_completed": 0,
+    "training_forwards_completed": 0,
+    "processing_seconds": 332.7894602069864,
+    "process_cost_usd": 0.025883624682765612,
+    "frozen_inputs_unchanged": true,
+    "adapter_unchanged": true,
+    "peak_allocated_bytes": 10374924288,
+    "peak_reserved_bytes": 11494490112
+  },
+  "gpu_outer": {
+    "exit_code": 0,
+    "outer_elapsed_seconds": 334.0341237670509,
+    "retry": false
+  },
+  "calls": [
+    {
+      "phase": "before",
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "path": "before_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "3a3297af05b9f5986d54fca5a8068aa77c09b00cdbb8cc6bf9aa6636531a34c5",
+      "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+      "eos_reached": false,
+      "output_tokens": 3712,
+      "seconds": 163.01751714001875,
+      "timeout_triggered": false,
+      "complete_syntax_root": false,
+      "mask_calls": 3712,
+      "mask_total_seconds": 6.972995107877068,
+      "mask_max_seconds": 0.015690427972003818
+    },
+    {
+      "phase": "before",
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "path": "before_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "bb976fdea2ec3fd1c204d76d08b1bed329b78eda15c2a6a398c576528e4d90e0",
+      "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+      "eos_reached": false,
+      "output_tokens": 3584,
+      "seconds": 156.69740515295416,
+      "timeout_triggered": false,
+      "complete_syntax_root": false,
+      "mask_calls": 3584,
+      "mask_total_seconds": 6.6735686210449785,
+      "mask_max_seconds": 0.07541460706852376
+    }
+  ],
+  "cmee": {
+    "full2": {
+      "meaning": 0,
+      "body": 0
+    },
+    "seconds": 1.6872474909760058,
+    "outer_seconds": 1.7758131419541314,
+    "cases": [
+      {
+        "case_id": "FT-BOOK-AFTER-ANSWER",
+        "receipt_status": "TOKEN_LIMIT",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "receipt_replay_identical": true,
+        "meaning_adopted": false,
+        "body_available": false,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+      },
+      {
+        "case_id": "FT-SHOP-AFTER-ANSWER",
+        "receipt_status": "TOKEN_LIMIT",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "receipt_replay_identical": true,
+        "meaning_adopted": false,
+        "body_available": false,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+      }
+    ],
+    "adopted_snapshot_count": 0,
+    "cold_target_count": 0,
+    "cold_success_count": 0,
+    "new_model_calls": 0,
+    "sql_operations": 0
+  },
+  "review": {
+    "root_read_both_raw_full_texts": true,
+    "raw_char_counts": [
+      11186,
+      8757
+    ],
+    "formed_bodies": 0,
+    "static_observations_owner": "content_review.md",
+    "actual_receipt_reason_preserved": true
+  },
+  "archive": {
+    "bytes": 57520,
+    "sha256": "189ef7485c92f83d974210b6b9742dad3e5025301ff26bea78c2b555386f2043",
+    "members": 20,
+    "payloads": 19
+  },
+  "new_weights": 0,
+  "old9_regenerated": 0,
+  "old9_historical_fit": "9/9; not a new result",
+  "weights_adoption_status": "NOT_ADOPTED",
+  "retry": false,
+  "new_paid_run_proposed": false,
+  "gpu_kept_running": true,
+  "gpu_management_operations": 0,
+  "excluded_costs": [
+    "preparation",
+    "parent-external CMEE CPU",
+    "recovery",
+    "holding",
+    "storage",
+    "network",
+    "tax"
+  ],
+  "rate_basis": "Previously observed same-Pod rate; no live management query",
+  "primary": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "management_percent": 54.5,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "structure_map_delta": "NONE: offline source/test and artifacts only; ordinary source/receiver/API/DB/RN unchanged"
+}

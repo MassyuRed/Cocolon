@@ -1,0 +1,975 @@
+{
+  "schema": "cocolon.cmee.cm01_t1_contract_examples.v1",
+  "status": "PROPOSED_NOT_APPROVED_NOT_IMPLEMENTED_NOT_TRAINABLE",
+  "source_heads": {
+    "Cocolon": "98f3b46c7cd35df667c080e7fb7c85c57f6d588e",
+    "mashos_api": "666b28517ef04aba170ebffe3c86980fea4c11bd"
+  },
+  "source_files": [
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl",
+      "sha256": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen4b-9b-comparison/selection_results.json",
+      "sha256": "4f8aba44aca3612c66494ec5a77e92be2018d10a181fe1809c8994730e4f1386"
+    }
+  ],
+  "model": {
+    "name": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "gpu_preference_gb": [
+      16,
+      24
+    ],
+    "new_model_calls": 0,
+    "new_training_updates": 0
+  },
+  "actual_cpu_diagnostic": {
+    "interpreter": "Python 3.12.14",
+    "production_code_changed": false,
+    "formal_test_suite": false,
+    "old_nine_format_only": [
+      {
+        "teacher_id": "FT-UDON-INITIAL",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-BOOK-INITIAL",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-BOOK-AFTER-ANSWER",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-CHAIR-INITIAL",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-CHAIR-AFTER-CORRECTION",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-SHOP-INITIAL",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-SHOP-AFTER-ANSWER",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-REPOT-INITIAL",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "teacher_id": "FT-KNIT-INITIAL",
+        "result": "candidate_shape_invalid"
+      }
+    ],
+    "saved_4b_six_format_only": [
+      {
+        "case_id": "E02-0",
+        "raw_sha256": "b93fadfc2488f4d5c2f6f854ee97e9a33ae628c222bace5f38283b1d83f02ac6",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "case_id": "E02-B",
+        "raw_sha256": "be7fcc3dc66c21e25d781e23f6632cdcb89ce49446d2349457dab372836b587f",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "case_id": "P01-N",
+        "raw_sha256": "c5030034054ae20a803ab0f9ee0abf671cb9e685c878a437b583e0bc47578653",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "case_id": "A02-P1",
+        "raw_sha256": "0121f2630cbd017407b760004ac7294bfdd1689ee5f31feefab526b1b6f1b395",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "case_id": "FT-CHAIR-AFTER-CORRECTION",
+        "raw_sha256": "633a030beac12ef0b17c89c8a65dcf8ab5c8b62c2567957b4a699e0fa06990e7",
+        "result": "candidate_shape_invalid"
+      },
+      {
+        "case_id": "FT-SHOP-AFTER-ANSWER",
+        "raw_sha256": "8db0d1349c9c4666e43b35d75545464af9994bb2e756c781476169e5b5757cff",
+        "result": "candidate_shape_invalid"
+      }
+    ],
+    "native_initial_receipt": {
+      "status": "INVALID_FORMAT",
+      "adoption_state": "NOT_ADOPTED"
+    },
+    "simple_wrap": {
+      "status": "CANDIDATE_UNREVIEWED",
+      "adoption_state": "NOT_ADOPTED",
+      "semantic": {
+        "decision": "REJECT",
+        "reason": "semantic_shape_invalid"
+      }
+    },
+    "model_calls": 0,
+    "database_calls": 0
+  },
+  "examples": [
+    {
+      "example_id": "CM01-CHAIR-INITIAL",
+      "origin_teacher_id": "FT-CHAIR-INITIAL",
+      "origin_teacher_status": "TEACHER_DRAFT_NOT_TRAINED_NOT_PRODUCT_ACCEPTED",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D00",
+          "start_scalar": 610,
+          "end_scalar_exclusive": 733,
+          "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |"
+        }
+      ],
+      "contract_example_only": true,
+      "native_thread_admitted": false,
+      "current_schema_adoptable": false,
+      "trainable": false,
+      "source_text_fields": {
+        "FT-CHAIR-O": {
+          "memo": "全部一人で直せたことが、うれしかった。",
+          "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+        }
+      },
+      "input_control": {
+        "tier": "free",
+        "question_budget_remaining": 1,
+        "actual_pending_question": null,
+        "pending_requirement": null
+      },
+      "proposed_model_output": {
+        "candidate": {
+          "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+          "core": "emlis",
+          "claims": [
+            {
+              "claim_id": "repair",
+              "kind": "EVENT",
+              "text": "ぐらついていた椅子を修理して",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "ぐらついていた椅子を修理して",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "repair"
+                ],
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                0
+              ]
+            },
+            {
+              "claim_id": "usable_again",
+              "kind": "ACTION_RESULT",
+              "text": "また座れるようになった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "また座れるようになった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "usable_again"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "claim_id": "joy",
+              "kind": "STATE",
+              "text": "うれしかった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "うれしかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "joy"
+                ],
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                2
+              ]
+            },
+            {
+              "claim_id": "solo_appraisal_object",
+              "kind": "USER_APPRAISAL_OBJECT",
+              "text": "全部一人で直せたこと",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "全部一人で直せたこと",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "solo_appraisal_object"
+                ],
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                3
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "relation_id": "repair_and_result",
+              "type": "SOURCE_WRITTEN_TE_LINK",
+              "from_claim_id": "repair",
+              "to_claim_id": "usable_again",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "repair_and_result"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                4
+              ]
+            },
+            {
+              "relation_id": "joy_ground",
+              "type": "USER_STATED_JOY_GROUND",
+              "from_claim_id": "solo_appraisal_object",
+              "to_claim_id": "joy",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "joy_ground"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                5
+              ]
+            }
+          ],
+          "unknowns": [
+            {
+              "unknown_id": "personal_significance",
+              "kind": "NOT_STATED",
+              "target_claim_refs": [
+                "solo_appraisal_object",
+                "joy"
+              ],
+              "description": "一人で直せたことをなぜうれしく感じたかの詳しい本人説明は、この初回入力にはない。",
+              "evidence_indexes": [
+                3,
+                2
+              ]
+            }
+          ],
+          "conflicts": [],
+          "updates": [],
+          "surface_proposal": {
+            "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+            "reception": "一人で直せたことが、うれしかったのですね。やり終えたことを喜ぶ気持ちが伝わりました。",
+            "update_note": null,
+            "bindings": [
+              {
+                "section": "observation",
+                "claim_refs": [
+                  "repair",
+                  "usable_again"
+                ],
+                "relation_refs": [
+                  "repair_and_result"
+                ]
+              },
+              {
+                "section": "reception",
+                "claim_refs": [
+                  "solo_appraisal_object",
+                  "joy"
+                ],
+                "relation_refs": [
+                  "joy_ground"
+                ]
+              }
+            ]
+          },
+          "question_proposal": {
+            "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+            "target_unknown_ref": "personal_significance",
+            "focus": "PERSONAL_JOY_SIGNIFICANCE",
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy"
+            ]
+          }
+        },
+        "evidence": [
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 14,
+            "quote": "ぐらついていた椅子を修理して"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo_action",
+            "start": 15,
+            "end": 26,
+            "quote": "また座れるようになった"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo",
+            "start": 12,
+            "end": 18,
+            "quote": "うれしかった"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 10,
+            "quote": "全部一人で直せたこと"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo_action",
+            "start": 12,
+            "end": 15,
+            "quote": "して、"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 18,
+            "quote": "全部一人で直せたことが、うれしかった"
+          }
+        ]
+      },
+      "surface_text_status": "INHERITED_LEGACY_KAREN_DRAFT_FOR_CONTRACT_EXPLANATION_ONLY",
+      "limitations": [
+        "Not model output, not adopted meaning, not an executable train target, not product accepted.",
+        "The corrected example preserves the original 92-character teacher answer including two actual line feeds; no newline normalization is performed.",
+        "The text-to-answer_text_private field projection does not manufacture a native answer or a pending question.",
+        "Symbolic prior references must be replaced from a genuinely adopted snapshot at runtime; never train or send a fabricated snapshot reference.",
+        "Claim/source positions and bindings do not prove semantic fidelity of freely generated Japanese."
+      ]
+    },
+    {
+      "example_id": "CM01-CHAIR-CORRECTED",
+      "origin_teacher_id": "FT-CHAIR-AFTER-CORRECTION",
+      "origin_teacher_status": "TEACHER_DRAFT_NOT_TRAINED_NOT_PRODUCT_ACCEPTED",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D00",
+          "start_scalar": 610,
+          "end_scalar_exclusive": 733,
+          "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D01",
+          "start_scalar": 768,
+          "end_scalar_exclusive": 798,
+          "quote": "問い。\n・「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D02",
+          "start_scalar": 845,
+          "end_scalar_exclusive": 937,
+          "quote": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+        }
+      ],
+      "contract_example_only": true,
+      "native_thread_admitted": false,
+      "current_schema_adoptable": false,
+      "trainable": false,
+      "source_text_fields": {
+        "FT-CHAIR-O": {
+          "memo": "全部一人で直せたことが、うれしかった。",
+          "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+        },
+        "FT-CHAIR-O-A1": {
+          "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+        }
+      },
+      "input_control": {
+        "tier": "free",
+        "question_budget_remaining": 0,
+        "actual_pending_question": null,
+        "pending_requirement": "CMEE must issue a genuine question before this answer can be admitted"
+      },
+      "proposed_model_output": {
+        "candidate": {
+          "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+          "core": "emlis",
+          "claims": [
+            {
+              "claim_id": "repair",
+              "kind": "EVENT",
+              "text": "ぐらついていた椅子を修理して",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "ぐらついていた椅子を修理して",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "repair"
+                ],
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                0
+              ]
+            },
+            {
+              "claim_id": "usable_again",
+              "kind": "ACTION_RESULT",
+              "text": "また座れるようになった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "また座れるようになった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "usable_again"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "claim_id": "joy",
+              "kind": "STATE",
+              "text": "うれしかった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "うれしかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "joy"
+                ],
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                2
+              ]
+            },
+            {
+              "claim_id": "friend_guidance",
+              "kind": "EVENT",
+              "text": "友人に手順を教えてもらって",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "友人に手順を教えてもらって",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "friend_guidance"
+                ],
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O-A1",
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                7
+              ]
+            },
+            {
+              "claim_id": "joint_repair",
+              "kind": "EVENT",
+              "text": "一緒に直しました",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "一緒に直しました",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "joint_repair"
+                ],
+                "evidence_indexes": [
+                  8
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  8
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O-A1",
+                "evidence_indexes": [
+                  8
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                8
+              ]
+            },
+            {
+              "claim_id": "reuse_appraisal_object",
+              "kind": "USER_APPRAISAL_OBJECT",
+              "text": "捨てずにまた使えるようになったからです",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "捨てずにまた使えるようになったからです",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "reuse_appraisal_object"
+                ],
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "FT-CHAIR-O-A1",
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                9
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "relation_id": "repair_and_result",
+              "type": "SOURCE_WRITTEN_TE_LINK",
+              "from_claim_id": "repair",
+              "to_claim_id": "usable_again",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "repair_and_result"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                4
+              ]
+            },
+            {
+              "relation_id": "joy_ground_revised",
+              "type": "USER_STATED_JOY_GROUND",
+              "from_claim_id": "reuse_appraisal_object",
+              "to_claim_id": "joy",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "joy_ground_revised"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                11
+              ]
+            }
+          ],
+          "unknowns": [],
+          "conflicts": [],
+          "updates": [
+            {
+              "operation": "REVISE",
+              "target_kind": "CLAIM",
+              "target_ref": "solo_appraisal_object",
+              "replacement_refs": [
+                "friend_guidance",
+                "joint_repair"
+              ],
+              "evidence_indexes": [
+                6,
+                7,
+                8
+              ],
+              "prior_snapshot_ref": "$actual_prior_snapshot_ref"
+            },
+            {
+              "operation": "REVISE",
+              "target_kind": "RELATION",
+              "target_ref": "joy_ground",
+              "replacement_refs": [
+                "joy_ground_revised"
+              ],
+              "evidence_indexes": [
+                10,
+                11
+              ],
+              "prior_snapshot_ref": "$actual_prior_snapshot_ref"
+            },
+            {
+              "operation": "INVALIDATE_GAP",
+              "target_kind": "UNKNOWN",
+              "target_ref": "personal_significance",
+              "replacement_refs": [],
+              "evidence_indexes": [
+                6,
+                11
+              ],
+              "prior_snapshot_ref": "$actual_prior_snapshot_ref"
+            }
+          ],
+          "surface_proposal": {
+            "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+            "reception": "うれしかったのは、捨てずにまた使えるようになったことだったのですね。またその椅子に座れるようになって、よかったですね。",
+            "update_note": "本人が「全部一人で」を共同修理へ、喜びの理由を独力から再使用へ訂正しました。修理したこと・再使用できる結果・喜びの選択は残ります。",
+            "bindings": [
+              {
+                "section": "observation",
+                "claim_refs": [
+                  "friend_guidance",
+                  "joint_repair"
+                ],
+                "relation_refs": []
+              },
+              {
+                "section": "reception",
+                "claim_refs": [
+                  "usable_again",
+                  "reuse_appraisal_object",
+                  "joy"
+                ],
+                "relation_refs": [
+                  "joy_ground_revised"
+                ]
+              },
+              {
+                "section": "update_note",
+                "claim_refs": [
+                  "friend_guidance",
+                  "joint_repair",
+                  "reuse_appraisal_object"
+                ],
+                "relation_refs": [
+                  "joy_ground_revised"
+                ],
+                "update_refs": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ]
+          },
+          "question_proposal": null
+        },
+        "evidence": [
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 14,
+            "quote": "ぐらついていた椅子を修理して"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo_action",
+            "start": 15,
+            "end": 26,
+            "quote": "また座れるようになった"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo",
+            "start": 12,
+            "end": 18,
+            "quote": "うれしかった"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 10,
+            "quote": "全部一人で直せたこと"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo_action",
+            "start": 12,
+            "end": 15,
+            "quote": "して、"
+          },
+          {
+            "source_id": "FT-CHAIR-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 18,
+            "quote": "全部一人で直せたことが、うれしかった"
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "field_path": "answer_text_private",
+            "start": 0,
+            "end": 21,
+            "quote": "さっき「全部一人で」と書いたのは訂正します"
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "field_path": "answer_text_private",
+            "start": 25,
+            "end": 38,
+            "quote": "友人に手順を教えてもらって"
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "field_path": "answer_text_private",
+            "start": 39,
+            "end": 47,
+            "quote": "一緒に直しました"
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "field_path": "answer_text_private",
+            "start": 72,
+            "end": 91,
+            "quote": "捨てずにまた使えるようになったからです"
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "field_path": "answer_text_private",
+            "start": 59,
+            "end": 71,
+            "quote": "一人でできたからではなく"
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "field_path": "answer_text_private",
+            "start": 50,
+            "end": 91,
+            "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです"
+          }
+        ]
+      },
+      "surface_text_status": "INHERITED_LEGACY_KAREN_DRAFT_FOR_CONTRACT_EXPLANATION_ONLY",
+      "limitations": [
+        "Not model output, not adopted meaning, not an executable train target, not product accepted.",
+        "The corrected example preserves the original 92-character teacher answer including two actual line feeds; no newline normalization is performed.",
+        "The text-to-answer_text_private field projection does not manufacture a native answer or a pending question.",
+        "Symbolic prior references must be replaced from a genuinely adopted snapshot at runtime; never train or send a fabricated snapshot reference.",
+        "Claim/source positions and bindings do not prove semantic fidelity of freely generated Japanese."
+      ]
+    }
+  ]
+}

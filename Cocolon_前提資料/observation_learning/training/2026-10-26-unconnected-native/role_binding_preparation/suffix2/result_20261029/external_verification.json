@@ -1,0 +1,14 @@
+{
+  "archive_bytes": 46811766,
+  "archive_sha256": "3e49b3c8125a65d4d6bbb9108b0aa48f81557d43421574da28feee5a4c546101",
+  "payloads": 348,
+  "all_crc_hash_size_verified": true,
+  "source_identical": true,
+  "baseline11_hashes_verified": true,
+  "initial_and_new_tensors": 112,
+  "parameters": 3833856,
+  "all_f32_finite": true,
+  "changed_tensors": 112,
+  "cold_full_outcomes_identical": 4,
+  "raw11_eos": true
+}

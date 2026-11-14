@@ -1,0 +1,23 @@
+{
+  "pid": 528644,
+  "cmd": [
+    "/usr/local/bin/python",
+    "-B",
+    "-u",
+    "/workspace/cocolon_4b_daily_calm_pack_20261025/run_daily_calm_fit.py",
+    "--directory",
+    "/workspace/cocolon_4b_daily_calm_pack_20261025",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--initial-adapter",
+    "/workspace/cocolon_4b_evidence_end_fit6_20261025/adapter",
+    "--source-commit",
+    "e06d6b4c04271b5442c6655e7115af4aabd983a1"
+  ],
+  "started_unix": 1792922740.6150587,
+  "max_updates": 18,
+  "max_fit_generations": 9,
+  "process_deadline_seconds": 1800,
+  "gpu_stop_restart_delete_operations": 0,
+  "retry": false
+}

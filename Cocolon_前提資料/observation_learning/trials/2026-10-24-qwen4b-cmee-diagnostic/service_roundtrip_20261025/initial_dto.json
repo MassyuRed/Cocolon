@@ -1,0 +1,58 @@
+{
+  "schema_version": "cocolon.emlis_thread.application.v1",
+  "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+  "revision": 5,
+  "state": "AWAITING_ANSWER",
+  "original": {
+    "id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+    "created_at": "2026-10-25T07:05:38.547",
+    "memo": "全部一人で直せたことが、うれしかった。",
+    "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+  },
+  "timeline": [
+    {
+      "event_id": "b481bebe-8ee6-42f0-b8da-a6e961350447",
+      "kind": "OBSERVATION",
+      "recorded_at": "2026-10-25T07:06:55.654+00:00",
+      "round_index": 0,
+      "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "stage": "INITIAL",
+      "is_current": true
+    },
+    {
+      "event_id": "f8ed2f5a-2e91-463a-a97e-7d4bb6ac0e25",
+      "kind": "QUESTION",
+      "recorded_at": "2026-10-25T07:06:55.655+00:00",
+      "round_index": 1,
+      "question_id": "emlis-question-08ca286a19799de5f336f6fd1bd5ecff168852ac7b2ddddba41db08620456bc4",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    }
+  ],
+  "can_write": true,
+  "pending_question": {
+    "event_id": "f8ed2f5a-2e91-463a-a97e-7d4bb6ac0e25",
+    "kind": "QUESTION",
+    "recorded_at": "2026-10-25T07:06:55.655+00:00",
+    "round_index": 1,
+    "question_id": "emlis-question-08ca286a19799de5f336f6fd1bd5ecff168852ac7b2ddddba41db08620456bc4",
+    "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+  },
+  "current_observation": {
+    "event_id": "b481bebe-8ee6-42f0-b8da-a6e961350447",
+    "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+  },
+  "body_state": "PRE_QUESTION",
+  "answer_saved": false,
+  "answer_assessment": "NOT_APPLICABLE",
+  "meaning_updated": false,
+  "failure_code": null,
+  "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+  "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+  "requested_attempt_id": null,
+  "can_retry": false,
+  "can_continue": false,
+  "issued_count": 1,
+  "question_limit": 1,
+  "started_question_limit": 1,
+  "processing_deadline_at": null
+}

@@ -1,0 +1,12 @@
+{
+  "status": "CPU_FOCUS29_READY_GPU_NOT_EXECUTED",
+  "frozen_files_unchanged": 298,
+  "initial_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+  "gpu": "NVIDIA RTX A5000, 1 MiB, 0 %",
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "retry": false
+}

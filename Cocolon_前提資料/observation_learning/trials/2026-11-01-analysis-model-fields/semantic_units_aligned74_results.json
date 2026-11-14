@@ -1,0 +1,583 @@
+{
+  "status": "COMPLETE_FULL_RAW_READ_NOT_ADOPTED",
+  "api_commit": "dc05dc358d1c44ce47fd844f6041d74f1f74fe6a",
+  "code_commit": "016633758fb2c6060f8aa5a1c6305c3996670fdf",
+  "collection_commit": "80c32193a9a95853b1cb205e6565ef690345117a",
+  "prompt_version": "semantic_boundaries.v2",
+  "teachers": 74,
+  "updates": 86,
+  "measurements": 148,
+  "new_generations": 46,
+  "reused_before": 46,
+  "model_loads": 2,
+  "process_seconds": 631.1162573979236,
+  "parent_seconds": 632.4751855041832,
+  "exit": 0,
+  "old_source_target_order_unchanged": true,
+  "initial_weights_sha256": "73ee8d05a2e9be611df8654f4a583c87b3d27f266bedfe700f25f2d5325eae96",
+  "new_weights_sha256": "d25da0a00dc575b3035b26be1f6d5d52ee3f0291c746d87fead7bfd12146c648",
+  "new_config_sha256": "4a46d90dfe81c1c99eaf6abcff01aeede7dadfaa9d9abaafb866ff2da01137dd",
+  "saved_weight_reload_112": true,
+  "prior_six_pairs_unchanged": true,
+  "gpu_empty_at_exit": true,
+  "all_stop": true,
+  "role_before": 2,
+  "role_after": 4,
+  "role_total": 4,
+  "teacher_role_before": 2,
+  "teacher_role_after": 4,
+  "teacher_role_total": 4,
+  "scope_controls_rejected": 4,
+  "all46_raw_same": 31,
+  "old34_raw_same": 26,
+  "teacher_reproduction_before": 16,
+  "teacher_reproduction_after": 22,
+  "teacher_reproduction_total": 22,
+  "teacher_reproduction": [
+    {
+      "probe_id": "REHEARSAL_AT17",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "REHEARSAL_AT19",
+      "before": false,
+      "after": true
+    },
+    {
+      "probe_id": "REHEARSAL_AT21",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "REHEARSAL_AT29",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "UQ01",
+      "before": false,
+      "after": true
+    },
+    {
+      "probe_id": "UQ02",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "MX01",
+      "before": false,
+      "after": true
+    },
+    {
+      "probe_id": "MX02",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "OA01",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "OA02",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "SC01",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "SC02",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "SC03",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "SC04",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "SC05",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "SC06",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "RC01",
+      "before": false,
+      "after": true
+    },
+    {
+      "probe_id": "RC02",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "T01",
+      "before": false,
+      "after": true
+    },
+    {
+      "probe_id": "T02",
+      "before": true,
+      "after": true
+    },
+    {
+      "probe_id": "T03",
+      "before": false,
+      "after": true
+    },
+    {
+      "probe_id": "T04",
+      "before": true,
+      "after": true
+    }
+  ],
+  "before_nll": 0.004825882812076235,
+  "after_nll": 0.0006542003128915157,
+  "replay_responses": 92,
+  "candidate_restored": 85,
+  "candidate_rejected": 7,
+  "role_restored": 12,
+  "role_rejected": 12,
+  "raw_repaired": false,
+  "receiver_relaxed": false,
+  "normal_adoption": false,
+  "next_training_initial_selected": false,
+  "product_credit": 0,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "structure_map_delta": "NONE_EXISTING_PRIVATE_PROFILE_TRAINING_COMPARISON",
+  "source_archive_sha256": "27b96a705aec6bfcf2aea1425119162e1294b6a945e4120268c624c39b766abf",
+  "source_archive_bytes": 15456427,
+  "source_archive_members": 480,
+  "hourly_usd_observed": 0.58,
+  "process_cost_usd": 0.10167984146966547,
+  "cases": [
+    {
+      "probe_id": "AF01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "NV04",
+      "raw_unchanged": true,
+      "admission": "REJECTED",
+      "reason": "analysis_quoted_parent_units_parent_ambiguous_or_missing",
+      "role_admission": null,
+      "role_reason": null,
+      "review": "結果重複/不明親の誤対応が不変、拒否。"
+    },
+    {
+      "probe_id": "REHEARSAL_AT17",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "REHEARSAL_AT19",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "独立した未決定を独立thoughtへ復帰。"
+    },
+    {
+      "probe_id": "REHEARSAL_AT21",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "REHEARSAL_AT29",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "CQ03",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "CQ04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SQ01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SQ03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "qualifier順だけの変更、継続/否定/対象を保持。"
+    },
+    {
+      "probe_id": "PQ01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "PQ02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "非時間表現のmodifier混入が残る。"
+    },
+    {
+      "probe_id": "UQ01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "余分な不明表現modifierを解消、旧教師へ復帰。"
+    },
+    {
+      "probe_id": "UQ02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "HQ03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "本人主体qualifierを回復、余分なmodifierを除去。"
+    },
+    {
+      "probe_id": "HQ04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "明記理由をTE_CONTEXTへ割り当てる未達が不変。"
+    },
+    {
+      "probe_id": "MX01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "本人主体qualifierを回復、余分なmodifierを除去。"
+    },
+    {
+      "probe_id": "MX02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "MD01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "不明親一意性/誤modifierは改善したが内容対象unitを失った。全文action引用内の対象語は残る。"
+    },
+    {
+      "probe_id": "MD02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "OA01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "OA02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "OD01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "余分なmodifierは解消したが既存内容対象unitが脱落。全文action引用内の対象語は残る。"
+    },
+    {
+      "probe_id": "OD02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SC01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SC02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SC03",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SC04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SC05",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SC06",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SD01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "SD02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "RC01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "継続/否定と本来の内容対象を回復。"
+    },
+    {
+      "probe_id": "RC02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": null,
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "R01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "肯定過去copulaの誤modifierを解消しtyped ROLEへ到達。"
+    },
+    {
+      "probe_id": "R02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "R03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "肯定過去copulaの誤modifierを解消しtyped ROLEへ到達。"
+    },
+    {
+      "probe_id": "R04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "R05",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "REJECTED",
+      "role_reason": "analysis_written_role_scope_unsupported",
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "R06",
+      "raw_unchanged": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid",
+      "role_admission": "REJECTED",
+      "role_reason": "analysis_model_units_carrier_invalid",
+      "review": "epistemic表記は変わるが不正scope_roleが残り候補拒否。"
+    },
+    {
+      "probe_id": "R07",
+      "raw_unchanged": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_quote_ambiguous_or_missing",
+      "role_admission": "REJECTED",
+      "role_reason": "analysis_model_units_quote_ambiguous_or_missing",
+      "review": "非役割誤分類が残り、原文外の否定qualifierが新生して候補拒否。"
+    },
+    {
+      "probe_id": "R08",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "REJECTED",
+      "role_reason": "analysis_written_role_scope_unsupported",
+      "review": "役割copula修飾を除去し後続行動の対象を分離。複文のtyped scope拒否を保持。"
+    },
+    {
+      "probe_id": "T01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "肯定過去copulaの誤modifierを除去、教師再現/typed ROLEへ復帰。"
+    },
+    {
+      "probe_id": "T02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    },
+    {
+      "probe_id": "T03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "肯定過去copulaの誤modifierを除去、教師再現/typed ROLEへ復帰。"
+    },
+    {
+      "probe_id": "T04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "reason": null,
+      "role_admission": "RETURNED",
+      "role_reason": null,
+      "review": "原文と前後全文を確認。同一出力の局所保持を継承、一般品質へ換算しない。"
+    }
+  ]
+}

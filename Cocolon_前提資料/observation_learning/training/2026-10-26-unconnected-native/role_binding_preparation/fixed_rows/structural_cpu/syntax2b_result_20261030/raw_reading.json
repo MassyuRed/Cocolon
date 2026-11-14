@@ -1,0 +1,127 @@
+{
+  "status": "READ_ONLY_COMPLETE_MEMBERS_AND_PREFIX_STATE_NOT_ADMISSION",
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "raw_sha256": "3a3297af05b9f5986d54fca5a8068aa77c09b00cdbb8cc6bf9aa6636531a34c5",
+      "raw_chars": 11186,
+      "root_closed": false,
+      "complete_root_members": 4,
+      "first_c_member_length": 1,
+      "first_c_all_rows_ten": true,
+      "teacher_claim_count": 10,
+      "complete_c_members": 4,
+      "c_closed": false,
+      "completed_c_member_types": [
+        "list",
+        "list",
+        "str",
+        "list"
+      ],
+      "first_c_member_end_char": 1000,
+      "last_state": {
+        "mode": "",
+        "aux": 0,
+        "stack": [
+          "=]",
+          "=]",
+          "prose",
+          "=,",
+          "l:update",
+          "=,",
+          "l:j",
+          "=,",
+          "s",
+          "=,",
+          "after:relation",
+          "=]",
+          "s",
+          "=,",
+          "s",
+          "=,",
+          "l:s",
+          "=,",
+          "s",
+          "=,",
+          "l:j",
+          "=,",
+          "s",
+          "=,",
+          "s"
+        ]
+      },
+      "declared_aliases": [
+        "s0",
+        "s1"
+      ],
+      "p0_declared": false,
+      "p0_text_reference_count": 0,
+      "book_foreign_marker_count": 0,
+      "shop_repeated_sentence_count": 0,
+      "restored_or_repaired": false,
+      "completed_relation_rows": 22,
+      "distinct_completed_relation_rows": 5,
+      "largest_identical_relation_row_repetitions": 18,
+      "c_core_value": "@s0",
+      "c_question_value": [
+        "q_reassurance_received"
+      ]
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "raw_sha256": "bb976fdea2ec3fd1c204d76d08b1bed329b78eda15c2a6a398c576528e4d90e0",
+      "raw_chars": 8757,
+      "root_closed": false,
+      "complete_root_members": 4,
+      "first_c_member_length": 12,
+      "first_c_all_rows_ten": true,
+      "teacher_claim_count": 11,
+      "complete_c_members": 1,
+      "c_closed": false,
+      "completed_c_member_types": [
+        "list"
+      ],
+      "first_c_member_end_char": 3984,
+      "last_state": {
+        "mode": "string",
+        "aux": 0,
+        "stack": [
+          "=]",
+          "=]",
+          "prose",
+          "=,",
+          "l:update",
+          "=,",
+          "l:j",
+          "=,",
+          "s",
+          "=,",
+          "l:relation",
+          "=,",
+          "j",
+          "=,",
+          "s",
+          "=,",
+          "after:j",
+          "after:j"
+        ]
+      },
+      "declared_aliases": [
+        "s0",
+        "s1"
+      ],
+      "p0_declared": false,
+      "p0_text_reference_count": 9,
+      "book_foreign_marker_count": 1,
+      "shop_repeated_sentence_count": 41,
+      "restored_or_repaired": false,
+      "completed_conflicts_items": 14,
+      "spec_has_awareness_marker": false,
+      "spec_has_book_prose_phrase": true
+    }
+  ],
+  "raw_full_texts_read_by_root": 2,
+  "formed_bodies": 0,
+  "new_model_calls": 0,
+  "repairs": 0
+}

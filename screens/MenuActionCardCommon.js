@@ -27,9 +27,9 @@ export function MenuActionCard({
   style,
   buttonStyle,
   compact = false,
-  titleNumberOfLines = 2,
+  titleNumberOfLines,
 }) {
-  const { styles } = useMenuActionCardStyles();
+  const { styles, colors } = useMenuActionCardStyles();
 
   return (
     <View style={[styles.card, compact ? styles.cardCompact : null, style]}>
@@ -59,7 +59,7 @@ export function MenuActionCard({
       >
         <View style={styles.buttonRow}>
           {buttonIconName ? (
-            <Ionicons name={buttonIconName} size={21} color="#FFFFFF" style={styles.buttonIcon} />
+            <Ionicons name={buttonIconName} size={21} color={colors.ACCENT_TEXT} style={styles.buttonIcon} />
           ) : null}
           <Text style={[styles.buttonText, compact ? styles.buttonTextCompact : null]}>
             {buttonLabel || `${title}を開く`}
@@ -77,18 +77,15 @@ function createStyles(colors, ui) {
     applyTypographyTokens(
       {
         card: {
-          borderRadius: 26,
+          borderRadius: ui.radius.card,
           borderWidth: 1,
           borderColor: colors.CARD_BORDER,
           backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 22,
+          paddingHorizontal: 20,
           paddingTop: 18,
           paddingBottom: 20,
           shadowColor: "#000",
-          shadowOpacity: 0.08,
-          shadowRadius: 10,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 3,
+          ...ui.shadow.float,
         },
         cardCompact: {
           borderRadius: 24,
@@ -138,14 +135,11 @@ function createStyles(colors, ui) {
         },
         button: {
           marginTop: 18,
-          borderRadius: 999,
-          paddingVertical: 16,
+          borderRadius: ui.radius.button,
+          paddingVertical: 14,
           paddingHorizontal: 18,
           shadowColor: "#000",
-          shadowOpacity: 0.16,
-          shadowRadius: 10,
-          shadowOffset: { width: 0, height: 6 },
-          elevation: 6,
+          ...ui.shadow.float,
         },
         buttonCompact: {
           marginTop: 16,
@@ -160,10 +154,12 @@ function createStyles(colors, ui) {
           marginRight: 10,
         },
         buttonText: {
+          flexShrink: 1,
+          textAlign: "center",
           fontSize: 16,
           lineHeight: 22,
           fontWeight: "800",
-          color: "#FFFFFF",
+          color: colors.ACCENT_TEXT,
           letterSpacing: 0.2,
         },
         buttonTextCompact: {
@@ -171,7 +167,12 @@ function createStyles(colors, ui) {
           lineHeight: 21,
         },
       },
-      ui
+      ui,
+      {
+        title: "sectionTitle", titleCompact: "sectionTitle",
+        description: "description", descriptionCompact: "description",
+        metaText: "meta", buttonText: "button", buttonTextCompact: "button",
+      }
     )
   );
 }

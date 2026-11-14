@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 43170,
+  "archive_sha256": "61d6108bb30edfb8aecdd6cb82e81d0686edf956954f738834f6fe159db95126",
+  "members": 8,
+  "manifest_all_bytes_hash_crc": true,
+  "executed_source_sha256": "f1e6aff9387fe1b31fb7f46927acb317b261b2579357e5df1f288b582d453c28",
+  "source_transfer_delta": "exactly one final LF added by terminal paste; executed bytes preserved",
+  "first_local_verification": "asserted source exact match before identifying final LF; no extraction then",
+  "independent_rejoin_2_of_2": true,
+  "all_stage_original_material_and_reference_spec_exact": true,
+  "independent_tokenizer_rerun": false,
+  "negative_scope": "missing stage, extra duplicate stage, swap first two differently sized stages only; not general semantic validation"
+}

@@ -1,0 +1,150 @@
+{
+  "status": "CPU_FEASIBILITY_ONLY_METHOD_NOT_APPROVED",
+  "seconds": 4.656087083974853,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "teacher_chars": 6772,
+      "teacher_sha256": "8ed156667ec5390adf0a9da758c9a7d5336ad7c2278128887769fe4d064b5241",
+      "exact_rejoined_bytes": true,
+      "counts": {
+        "quotes": 17,
+        "claims": 10,
+        "relations": 7,
+        "updates": 7
+      },
+      "original_prompt_tokens": 4295,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "versions_aliases_quotes",
+          "prompt_tokens": 4461,
+          "target_with_eos_tokens": 492,
+          "proposed_generation_cap": 640,
+          "cap_total": 5101
+        },
+        {
+          "stage": 2,
+          "name": "claims_conflicts_core",
+          "prompt_tokens": 4962,
+          "target_with_eos_tokens": 899,
+          "proposed_generation_cap": 1152,
+          "cap_total": 6114
+        },
+        {
+          "stage": 3,
+          "name": "relations_schema_unknowns",
+          "prompt_tokens": 5864,
+          "target_with_eos_tokens": 283,
+          "proposed_generation_cap": 512,
+          "cap_total": 6376
+        },
+        {
+          "stage": 4,
+          "name": "updates",
+          "prompt_tokens": 6140,
+          "target_with_eos_tokens": 267,
+          "proposed_generation_cap": 512,
+          "cap_total": 6652
+        },
+        {
+          "stage": 5,
+          "name": "question_prose",
+          "prompt_tokens": 6418,
+          "target_with_eos_tokens": 220,
+          "proposed_generation_cap": 384,
+          "cap_total": 6802
+        }
+      ],
+      "negative_shape_checks": {
+        "missing": "REJECTED",
+        "duplicate_extra": "REJECTED",
+        "swapped": "REJECTED"
+      },
+      "teacher_cmee": "SAME_TEACHER_BYTES_AS_PRIOR_VERIFIED_TEACHER; NO_NEW_RECEIVER_CALL"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "teacher_chars": 7392,
+      "teacher_sha256": "bb28d66c7b43b7805ef2633c922315ff58a5817774ae25e3ac9329a873e6b3ef",
+      "exact_rejoined_bytes": true,
+      "counts": {
+        "quotes": 18,
+        "claims": 11,
+        "relations": 6,
+        "updates": 8
+      },
+      "original_prompt_tokens": 4447,
+      "stages": [
+        {
+          "stage": 1,
+          "name": "versions_aliases_quotes",
+          "prompt_tokens": 4613,
+          "target_with_eos_tokens": 523,
+          "proposed_generation_cap": 768,
+          "cap_total": 5381
+        },
+        {
+          "stage": 2,
+          "name": "claims_conflicts_core",
+          "prompt_tokens": 5145,
+          "target_with_eos_tokens": 1094,
+          "proposed_generation_cap": 1280,
+          "cap_total": 6425
+        },
+        {
+          "stage": 3,
+          "name": "relations_schema_unknowns",
+          "prompt_tokens": 6242,
+          "target_with_eos_tokens": 236,
+          "proposed_generation_cap": 384,
+          "cap_total": 6626
+        },
+        {
+          "stage": 4,
+          "name": "updates",
+          "prompt_tokens": 6471,
+          "target_with_eos_tokens": 291,
+          "proposed_generation_cap": 512,
+          "cap_total": 6983
+        },
+        {
+          "stage": 5,
+          "name": "question_prose",
+          "prompt_tokens": 6773,
+          "target_with_eos_tokens": 293,
+          "proposed_generation_cap": 512,
+          "cap_total": 7285
+        }
+      ],
+      "negative_shape_checks": {
+        "missing": "REJECTED",
+        "duplicate_extra": "REJECTED",
+        "swapped": "REJECTED"
+      },
+      "teacher_cmee": "SAME_TEACHER_BYTES_AS_PRIOR_VERIFIED_TEACHER; NO_NEW_RECEIVER_CALL"
+    }
+  ],
+  "source_sha256": "f1e6aff9387fe1b31fb7f46927acb317b261b2579357e5df1f288b582d453c28",
+  "original_files_unchanged": {
+    "/workspace/cocolon_rehearsal13_cpu_20261029/train_messages11.jsonl": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+    "/workspace/cocolon_continuation17_pack_20261030/plan.json": "fb2e992773cdbd691e225eb8070937b204db229c2b6d28c30d7f2f3c4d511068",
+    "/workspace/cocolon_continuation17_run_20261030/adapter/adapter_model.safetensors": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+    "/workspace/cocolon_rehearsal13_run_20261029/adapter/adapter_model.safetensors": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+  },
+  "pretrained_model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "stages_generated_by_model": 0,
+  "normal_runtime_changed": false,
+  "automatic_progression": false,
+  "partial_semantic_adoption": false,
+  "limitations": [
+    "gold previous stages used only to construct training examples and measure context; no inference proof",
+    "a final assembly needs separate explicit multi-call provenance integration; old single-raw receipt must not be reused",
+    "earlier semantic errors cannot be locally retried or silently repaired",
+    "no claim that stage5 improves 4B quality; previous A/B generation also failed"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "run/run.json": {
+    "bytes": 4600,
+    "sha256": "cfa2dfe7c79b895f22ef213c31957d53821dec16bfa82cc9b7374a0b33365751"
+  },
+  "run/initial_loaded_tensors.json": {
+    "bytes": 26053,
+    "sha256": "8db843456c150b019c7ce9f7db269f6ccfeb9954cb476338d6e0a6d52d8a46a5"
+  },
+  "run/training.jsonl": {
+    "bytes": 2053,
+    "sha256": "43f90fb0429a5abb506f0111e342bb7d8d814b12c980369630df0c44dec5c90b"
+  },
+  "run/reloaded_tensors.json": {
+    "bytes": 26062,
+    "sha256": "cf9995a66b5b09e99e16aae04d1a5413fd6d0ac7a366115d47cac8581206c01a"
+  },
+  "run/after_FT-BOOK-AFTER-ANSWER.jsonl": {
+    "bytes": 43191,
+    "sha256": "3adda91ee562932094d025f02711f562432949bb38e18af267c0325cdb006851"
+  },
+  "run/after_FT-SHOP-AFTER-ANSWER.jsonl": {
+    "bytes": 42725,
+    "sha256": "0fcbb78bb6994abc235f5d6c727f2e4abcb9c0ca3c50869f74646b337cb17ec5"
+  },
+  "run/post_run_cpu.json": {
+    "bytes": 241,
+    "sha256": "ae8c9af661e070b92818623e28120f2d181bf27ba62adf1b3ea55bb6296ecf20"
+  },
+  "run/adapter/README.md": {
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  "run/adapter/adapter_config.json": {
+    "bytes": 1674,
+    "sha256": "4e1e3768bddd69f1e9641dc6e098284398e8cc87a8dba7cdc06aa6824ed9a46a"
+  },
+  "run/cmee/diagnosis.json": {
+    "bytes": 46871,
+    "sha256": "28f07f3e695dd33728f117a328026feb31f752f6bb078d1b1a7f2481091142fb"
+  },
+  "runtime/adaptive_loss.py": {
+    "bytes": 1402,
+    "sha256": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141"
+  },
+  "runtime/consume_aligned13.py": {
+    "bytes": 7118,
+    "sha256": "a51b097aca6d58fa1f1373410d7db0765c627083e1db7ad00239adb705a77d98"
+  },
+  "runtime/prepare_aligned13.py": {
+    "bytes": 6998,
+    "sha256": "ddd56f9a5724dc2020834d6b66e53255809d4b288e90b9a8bf47e07fd20e8deb"
+  },
+  "runtime/train_messages.jsonl": {
+    "bytes": 351278,
+    "sha256": "a80f08e96576251071f4c2e318e28ddc2160682dcbaab1701dd0e82b17153b34"
+  },
+  "runtime/eval_inputs.json": {
+    "bytes": 173280,
+    "sha256": "05d2e02f042b478dec28605d28f6dd9ae93c132aeb7a715f95a83bb4458d1774"
+  },
+  "runtime/run_aligned13.py": {
+    "bytes": 12561,
+    "sha256": "96b2b9187d6897a52f600796dcb67740ee74d8aba6c76aefb4cddae50c949503"
+  },
+  "runtime/aligned13.plan.json": {
+    "bytes": 2574,
+    "sha256": "61254ba1eb5b40cf020e5296e42c898532d230035c94f8ee6d93d2b51d29bba3"
+  },
+  "runtime/consumer_cpu_launch.json": {
+    "bytes": 396,
+    "sha256": "d0025b32a7ceed50f3ced792611cadfd59bde3a606361776c13a8a9a0df56b0e"
+  },
+  "runtime/actual_cpu_check.json": {
+    "bytes": 8929,
+    "sha256": "d3734933db85aa34bf608ae791a6ce3734812fdf237e4fb028336b5334f073d4"
+  },
+  "runtime/pending_execution_check.json": {
+    "bytes": 1108,
+    "sha256": "abb0fa18216197c6b1d64d455079429bdc07d466a5d8efc6a5228c2336688ea5"
+  },
+  "runtime/history_cpu_v1/actual_cpu_check.json": {
+    "bytes": 8927,
+    "sha256": "92e5b6b6ae4f473b8433db35da951a5ecc1fe486f04cb6a974fb8ccb25fe8cd1"
+  },
+  "runtime/history_cpu_v1/consumer_cpu_launch.json": {
+    "bytes": 396,
+    "sha256": "6b377df2c5b7641d3c03f3a0bf7332603883f8bd94a0b28c1223e243c2494326"
+  },
+  "runtime/history_cpu_v1/run_aligned13.py": {
+    "bytes": 12451,
+    "sha256": "8cb4a8a8ff55202d79021d8909e80a81e123d7b444f7b95a62d3663fe062c8b9"
+  },
+  "runtime/history_cpu_v1/aligned13.plan.json": {
+    "bytes": 1909,
+    "sha256": "2dd7227ec60011d000ede9db6d3fa3ae28d63e3f8376b6efc61ba3996e8e4fd2"
+  },
+  "runtime/history_cpu_v1/cocolon_aligned13_cpu.log": {
+    "bytes": 963,
+    "sha256": "fae28438cb65914b83e74e44e806b79a9e887bf77a38d2b6cd97a3a7d7454670"
+  },
+  "runtime/history_cpu_v1/cocolon_aligned13_cpu.exit": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "runtime/consumer_cpu_smoke/diagnosis.json": {
+    "bytes": 40290,
+    "sha256": "e841a41fb64f3e36fef609b317fd4c883569838d3779119af29692e067c9b1e8"
+  },
+  "runtime/history_cpu_v1/consumer_cpu_smoke/diagnosis.json": {
+    "bytes": 40290,
+    "sha256": "3ff118f04cc48476f9973c74a8355a0e4c39023dbb9cd33c96488d0720c7e803"
+  },
+  "logs/cocolon_aligned13.log": {
+    "bytes": 4515,
+    "sha256": "b6ce23b2c91b859c30ff13626a6ce81a1bb1eee9e5afbd85d41bbcab4985051b"
+  },
+  "logs/cocolon_aligned13.exit": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "logs/cocolon_aligned13_cmee.log": {
+    "bytes": 329,
+    "sha256": "bd82bc7f5ca88f943dbed787c5658deed5cdc9f2b296d0af125d32e693f80585"
+  },
+  "logs/cocolon_aligned13_cmee.exit": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "initial_adapter_hashes_after.json": {
+    "bytes": 278,
+    "sha256": "ec0c67a5871d36649a86825f2ef28b0741ffcb59bca3f56dc7904a5bc2c20244"
+  },
+  "weights_external_references.json": {
+    "bytes": 157,
+    "sha256": "6afed156c8cb0cefd27a502bc2034c20d67bee0a6d5af62dbdd6d58811c52ace"
+  }
+}

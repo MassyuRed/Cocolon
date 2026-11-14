@@ -9,6 +9,7 @@ import { makeUiTokens } from "../ui/uiTokens";
  * - チップ/行/カード/ピルなど「押せるUI」向けの共通押下モーション
  * - press motion: scale(ui.motion.pressScale) for ui.motion.pressDurationMs（上品設定）
  * - 見た目（padding/背景/影など）は caller の `style` に任せる（上書きしない）
+ * - 外側の幅・配置・余白は `containerStyle` でタップ領域と揃える
  */
 export default function CocolonPressable({
   children,
@@ -16,8 +17,12 @@ export default function CocolonPressable({
   onLongPress,
   disabled = false,
   style,
+  containerStyle,
   accessibilityLabel,
   accessibilityRole = "button",
+  accessibilityState,
+  accessibilityHint,
+  accessibilityValue,
   testID,
   hitSlop,
 }) {
@@ -86,8 +91,12 @@ export default function CocolonPressable({
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       disabled={isDisabled}
+      style={containerStyle}
       accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ ...accessibilityState, disabled: isDisabled }}
+      accessibilityHint={accessibilityHint}
+      accessibilityValue={accessibilityValue}
       testID={testID}
       hitSlop={hitSlop}
     >

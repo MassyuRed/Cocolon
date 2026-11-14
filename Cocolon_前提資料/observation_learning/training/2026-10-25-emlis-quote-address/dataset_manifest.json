@@ -1,0 +1,34 @@
+{
+  "schema": "cocolon.quote_address_training_candidates.v1",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "training_rows": 9,
+  "daily_rows": 3,
+  "chair_rows": 6,
+  "independent_language_families": 2,
+  "evaluation_rows": 0,
+  "files": {
+    "sft_examples.jsonl": {
+      "sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5",
+      "bytes": 307770
+    },
+    "train_messages.jsonl": {
+      "sha256": "1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022f",
+      "bytes": 157443
+    },
+    "cpu_connection_results.json": {
+      "sha256": "e7aa365785cfc2b8313a5aec0383c6cf017e4e8bb64a239a07ca34455a70df6a",
+      "bytes": 2700
+    }
+  },
+  "api_source_hashes": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "cf7c4c92f2591a0a624b9fbb6044c5a71926aab1e7ca87efb4560aeb0ec1ba2a",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "ea63db1f10a51b30ca42e441d6b52824d2ae8eb2845e2ae6bfbe8c7642d7cc5c",
+    "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "2a2e1a5632777a692d333db0ad0ec2984205417f987b59b7b9069afe19cb871d",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py": "3b8b25cd5fd3a90af71b0a077db594b06c87948e372fdc12746236f8e6dd9708"
+  },
+  "old_chair_hashes": {
+    "sft_examples.jsonl": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7",
+    "train_messages.jsonl": "fa340592b8b208bca91ce83a3623dcc6b7f96e02b2ccdf9cca0c00e7cf0fcf50",
+    "dataset_manifest.json": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107"
+  }
+}

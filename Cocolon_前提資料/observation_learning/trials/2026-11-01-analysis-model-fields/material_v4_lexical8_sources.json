@@ -1,0 +1,77 @@
+{
+  "description": "Four independent finite-verb pairs; polarity is the sole within-pair change. Role polarity and field order cross between pairs. No X03 wording or generated failure is used.",
+  "examples": [
+    {
+      "id": "L01",
+      "memo": "私の役割は確認係だった。",
+      "memo_action": "私は項目を調べた。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私の役割は確認係だった\",\"scope_role\":null}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私は項目を調べた\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は項目を調べた\",\"qualifiers\":[],\"quote\":\"項目\",\"scope_role\":\"CONTENT_TARGET\"}]}]}"
+    },
+    {
+      "id": "L02",
+      "memo": "私の役割は確認係だった。",
+      "memo_action": "私は項目を調べなかった。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私の役割は確認係だった\",\"scope_role\":null}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"なかった\"}],\"quote\":\"私は項目を調べなかった\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は項目を調べなかった\",\"qualifiers\":[],\"quote\":\"項目\",\"scope_role\":\"CONTENT_TARGET\"}]}]}"
+    },
+    {
+      "id": "L03",
+      "memo": "私の役割は確認係ではなかった。",
+      "memo_action": "私は手順を試した。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"ではなかった\"}],\"quote\":\"私の役割は確認係ではなかった\",\"scope_role\":null}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私は手順を試した\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は手順を試した\",\"qualifiers\":[],\"quote\":\"手順\",\"scope_role\":\"CONTENT_TARGET\"}]}]}"
+    },
+    {
+      "id": "L04",
+      "memo": "私の役割は確認係ではなかった。",
+      "memo_action": "私は手順を試さなかった。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"ではなかった\"}],\"quote\":\"私の役割は確認係ではなかった\",\"scope_role\":null}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"なかった\"}],\"quote\":\"私は手順を試さなかった\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は手順を試さなかった\",\"qualifiers\":[],\"quote\":\"手順\",\"scope_role\":\"CONTENT_TARGET\"}]}]}"
+    },
+    {
+      "id": "L05",
+      "memo": "私は画面を見た。",
+      "memo_action": "私の役割は確認係だった。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私は画面を見た\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は画面を見た\",\"qualifiers\":[],\"quote\":\"画面\",\"scope_role\":\"CONTENT_TARGET\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私の役割は確認係だった\",\"scope_role\":null}]}]}"
+    },
+    {
+      "id": "L06",
+      "memo": "私は画面を見なかった。",
+      "memo_action": "私の役割は確認係だった。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"なかった\"}],\"quote\":\"私は画面を見なかった\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は画面を見なかった\",\"qualifiers\":[],\"quote\":\"画面\",\"scope_role\":\"CONTENT_TARGET\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私の役割は確認係だった\",\"scope_role\":null}]}]}"
+    },
+    {
+      "id": "L07",
+      "memo": "私は要点を残した。",
+      "memo_action": "私の役割は確認係ではなかった。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"}],\"quote\":\"私は要点を残した\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は要点を残した\",\"qualifiers\":[],\"quote\":\"要点\",\"scope_role\":\"CONTENT_TARGET\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"ではなかった\"}],\"quote\":\"私の役割は確認係ではなかった\",\"scope_role\":null}]}]}"
+    },
+    {
+      "id": "L08",
+      "memo": "私は要点を残さなかった。",
+      "memo_action": "私の役割は確認係ではなかった。",
+      "category": "仕事",
+      "training_use": true,
+      "source_author": "Karen synthetic independent teaching",
+      "assistant_target": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"なかった\"}],\"quote\":\"私は要点を残さなかった\",\"scope_role\":null},{\"node_kind\":null,\"parent_quote\":\"私は要点を残さなかった\",\"qualifiers\":[],\"quote\":\"要点\",\"scope_role\":\"CONTENT_TARGET\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ROLE\",\"parent_quote\":null,\"qualifiers\":[{\"kind\":\"EXPLICIT_ACTOR\",\"quote\":\"私\"},{\"kind\":\"NEGATION\",\"quote\":\"ではなかった\"}],\"quote\":\"私の役割は確認係ではなかった\",\"scope_role\":null}]}]}"
+    }
+  ]
+}

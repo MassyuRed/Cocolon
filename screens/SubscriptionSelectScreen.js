@@ -4,7 +4,6 @@ import {
   Alert,
   Linking,
   Platform,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -12,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { useTheme } from "../theme/ThemeContext";
@@ -118,7 +118,7 @@ function buildIapErrorMessage(err) {
     return "お申し込みをキャンセルしました。";
   }
   if (/E_PRODUCT_NOT_FETCHED/i.test(code)) {
-    return "App Store から対象サブスク商品を取得できませんでした。Bundle ID / Product ID / App Store Connect の状態をご確認ください。";
+    return "ストアからプラン情報を取得できませんでした。時間をおいて、もう一度お試しください。";
   }
   if (/E_ANDROID_SUBSCRIPTION_CHANGE_FALLBACK/i.test(code)) {
     return "現在のPlusプランからPremiumプランへの変更は、Google Play のサブスクリプション管理からお手続きください。";
@@ -262,8 +262,8 @@ function PlanCard({
   return (
     <View style={[styles.planCard, isCurrent && styles.planCardCurrent]}>
       <View style={styles.planHeaderRow}>
-        <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ minWidth: 0 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
             <Text style={styles.planTitle}>{title}</Text>
             {recommended ? (
               <View style={styles.recommendBadge}>
@@ -290,7 +290,7 @@ function PlanCard({
             <Ionicons
               name="checkmark-circle"
               size={16}
-              color={colors.TITLE_GOLD}
+              color={colors.ON_SURFACE_TONAL}
             />
             <Text style={styles.currentBadgeText}>現在</Text>
           </View>
@@ -323,18 +323,20 @@ function PlanCard({
             onPress={onPress}
             activeOpacity={0.85}
             disabled={disabled}
+            accessibilityRole="button"
+            accessibilityState={{ disabled, busy: !!ctaLoading, selected: !!isCurrent }}
           >
             {ctaLoading && !isCurrent ? (
               <ActivityIndicator
                 size="small"
-                color={colors.FIELD_BG}
+                color={disabled ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                 style={{ marginRight: 8 }}
               />
             ) : (
               <Ionicons
                 name="card-outline"
                 size={18}
-                color={disabled ? colors.TEXT_SUBTLE : colors.FIELD_BG}
+                color={disabled ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                 style={{ marginRight: 6 }}
               />
             )}
@@ -358,7 +360,7 @@ function PlanCard({
   );
 }
 
-export default function SubscriptionSelectScreen({ navigation }) {
+export default function SubscriptionSelectScreen({ navigation, renderSettings }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -470,8 +472,8 @@ export default function SubscriptionSelectScreen({ navigation }) {
   }, []);
 
   const currentLabel = SUB_TIER_LABEL[tier] || "Freeプラン";
-  const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額300円";
-  const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額980円";
+  const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額680円";
+  const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額1480円";
   const expiresAtLabel = formatExpiresAtLabel(expiresAt);
 
   const plusPurchaseSku = getPurchaseSku("plus", Platform.OS);
@@ -524,16 +526,14 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const onRestorePurchases = useCallback(async () => {
     if (actionBusy) return;
 
-    const { data: sessionData } = await supabase.auth.getSession();
-    const accessToken = sessionData?.session?.access_token ?? null;
-    if (!accessToken) {
-      Alert.alert("ログインが必要です", "購入内容の復元にはログインが必要です。");
-      return;
-    }
-
     setRestoreLoading(true);
-
     try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token ?? null;
+      if (!accessToken) {
+        Alert.alert("ログインが必要です", "購入内容の復元にはログインが必要です。");
+        return;
+      }
       const purchases = await restoreAvailablePurchases();
 
       if (!Array.isArray(purchases) || purchases.length === 0) {
@@ -564,7 +564,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
         return;
       }
 
-      await syncPurchaseToSubscriptionTier(targetPurchase);
+      await syncPurchaseToSubscriptionTier(targetPurchase, { expectedUserId: sessionData?.session?.user?.id });
       await refreshScreenState({ force: true });
 
       Alert.alert("復元が完了しました", "ご購入内容を復元しました。");
@@ -647,7 +647,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
         updateRes,
         purchaseInitiated,
         listenerCompletionPending,
-      } = await requestSubscriptionForPlan("plus");
+      } = await requestSubscriptionForPlan("plus", { expectedUserId: sessionData?.session?.user?.id });
 
       if (!p && purchaseInitiated) {
         Alert.alert(
@@ -767,7 +767,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
         listenerCompletionPending,
       } = await requestSubscriptionForPlan(
         "premium",
-        Platform.OS === "android" && tier === "plus" ? { fromPlan: "plus" } : {}
+        { expectedUserId: sessionData?.session?.user?.id, ...(Platform.OS === "android" && tier === "plus" ? { fromPlan: "plus" } : {}) }
       );
 
       const actionLabel = tier === "plus" ? "プラン変更" : "お申し込み";
@@ -820,8 +820,19 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const plusFeatures = asStringArray(plusPlan?.features, []);
   const premiumFeatures = asStringArray(premiumPlan?.features, []);
 
+  if (typeof renderSettings === "function") {
+    return renderSettings({
+      loading, tier, currentLabel,
+      currentPriceLabel: loading ? "" : tier === "plus" ? plusPriceLabel : tier === "premium" ? premiumPriceLabel : "無料",
+      actionBusy, restoreLoading,
+      restoreEnabled: policy?.restore_enabled !== false,
+      manageEnabled: !loading && tier !== "free" && policy?.manage_enabled !== false,
+      onRestorePurchases, onOpenManageSubscription, openExternalPage, links,
+    });
+  }
+
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -834,12 +845,13 @@ export default function SubscriptionSelectScreen({ navigation }) {
           <View style={styles.header}>
             <CocolonBackButton
               navigation={navigation}
-              fallbackRouteName="Home"
+              fallbackRouteName="Input"
               style={styles.backButton}
             />
             <Text style={styles.headerTitle}>サブスクリプション</Text>
             <TouchableOpacity
               onPress={() => refreshScreenState({ force: true }).catch(() => null)}
+              accessibilityRole="button" accessibilityLabel="加入状況と販売情報を更新する"
               style={styles.refreshBtn}
               activeOpacity={0.75}
             >
@@ -850,7 +862,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
           <View style={styles.card}>
             <Text style={styles.sectionLabel}>現在のプラン</Text>
             {loading ? (
-              <ActivityIndicator />
+              <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="現在のプランを確認中" />
             ) : (
               <View style={styles.currentRow}>
                 <Text style={styles.currentPlan}>{currentLabel}</Text>
@@ -895,7 +907,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
                   !effectiveSalesEnabled
                 }
                 ctaLoading={purchaseBusyPlan === "plus"}
-                ctaTextOverride={!effectiveSalesEnabled ? "受付停止中" : asStringOrNull(plusPlan?.cta_label)}
+                ctaTextOverride={!effectiveSalesEnabled ? "受付停止中" : plusPlan?.purchasable === false ? "現在お申し込みできません" : asStringOrNull(plusPlan?.cta_label)}
                 styles={styles}
                 colors={colors}
               />
@@ -918,7 +930,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
                   !effectiveSalesEnabled
                 }
                 ctaLoading={purchaseBusyPlan === "premium"}
-                ctaTextOverride={!effectiveSalesEnabled ? "受付停止中" : asStringOrNull(premiumPlan?.cta_label) || "このプランを選ぶ"}
+                ctaTextOverride={!effectiveSalesEnabled ? "受付停止中" : premiumPlan?.purchasable === false ? "現在お申し込みできません" : asStringOrNull(premiumPlan?.cta_label)}
                 styles={styles}
                 colors={colors}
               />
@@ -941,19 +953,24 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={[styles.linkButton, styles.linkButtonFirst]}
+                accessibilityRole="button" accessibilityLabel="購入内容を復元"
+                accessibilityState={{ disabled: actionBusy || policy?.restore_enabled === false, busy: restoreLoading }}
                 onPress={onRestorePurchases}
                 disabled={actionBusy || policy?.restore_enabled === false}
                 activeOpacity={0.75}
               >
-                <Text style={styles.linkButtonText}>
+                <Text style={[styles.linkButtonText, (actionBusy || policy?.restore_enabled === false) && { color: colors.TEXT_SUBTLE }]}>
                   {restoreLoading ? "購入内容を確認しています…" : "購入内容を復元"}
                 </Text>
                 <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
               </TouchableOpacity>
 
+              {policy?.restore_enabled === false ? <Text style={styles.planNote}>現在、アプリ内での購入内容の復元は利用できません。</Text> : null}
+
               {tier !== "free" && policy?.manage_enabled !== false ? (
                 <TouchableOpacity
                   style={styles.linkButton}
+                  accessibilityRole="button" accessibilityLabel="サブスクリプションを管理" accessibilityHint="ストアの管理画面を開きます"
                   onPress={onOpenManageSubscription}
                   activeOpacity={0.75}
                 >
@@ -966,6 +983,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={styles.linkButton}
+                accessibilityRole="link" accessibilityLabel="利用規約" accessibilityHint="外部ページを開きます"
                 onPress={() => openExternalPage(links?.terms_url, "利用規約")}
                 activeOpacity={0.75}
               >
@@ -975,6 +993,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
               <TouchableOpacity
                 style={styles.linkButton}
+                accessibilityRole="link" accessibilityLabel="プライバシーポリシー" accessibilityHint="外部ページを開きます"
                 onPress={() => openExternalPage(links?.privacy_url, "プライバシーポリシー")}
                 activeOpacity={0.75}
               >
@@ -985,7 +1004,8 @@ export default function SubscriptionSelectScreen({ navigation }) {
               {links?.support_url ? (
                 <TouchableOpacity
                   style={styles.linkButton}
-                  onPress={() => openExternalPage(links?.support_url, "サポート")}
+                  accessibilityRole="link" accessibilityLabel="サポート" accessibilityHint="外部ページを開きます"
+                onPress={() => openExternalPage(links?.support_url, "サポート")}
                   activeOpacity={0.75}
                 >
                   <Text style={styles.linkButtonText}>サポート</Text>
@@ -1007,229 +1027,239 @@ function createStyles(COLORS, ui) {
   const spacing = ui?.spacing || {};
 
   return StyleSheet.create(applyTypographyTokens({
-    safeArea: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    safeArea: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     container: {
       flex: 1,
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
       paddingTop: 16,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
     },
 
     header: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'center',
       justifyContent: "space-between",
       marginBottom: 16,
+      gap: 8,
     },
-    backButton: { padding: 4 },
+    backButton: {
+      padding: 4,
+      minWidth: 44,
+      minHeight: 44,
+    },
     headerTitle: {
-      fontSize: font.title ?? 20,
-      fontWeight: "800",
       color: COLORS.TITLE_GOLD,
+      flex: 1,
+      minWidth: 0,
+      textAlign: 'center',
     },
-    refreshBtn: { padding: 6 },
+    refreshBtn: {
+      padding: 0,
+      minWidth: 44,
+      minHeight: 44,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
 
     card: {
-      paddingVertical: 20,
+      paddingVertical: 0,
     },
 
     sectionLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: spacing.sm ?? 8,
-      fontWeight: "800",
+      marginBottom: 12,
     },
 
-    currentRow: { marginBottom: 8 },
+    currentRow: {
+      marginBottom: 12,
+      gap: 6,
+    },
     currentPlan: {
-      fontSize: 16,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_ON_LIGHT,
     },
     currentPlanSub: {
-      marginTop: spacing.xs ?? 4,
-      fontSize: font.sectionLabel ?? 12,
+      marginTop: 4,
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     currentPlanMeta: {
       marginTop: 4,
-      fontSize: font.description ?? 11,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
     },
 
     sectionDivider: {
       height: 1,
       backgroundColor: COLORS.CARD_BORDER,
-      marginTop: 18,
-      marginBottom: 14,
+      marginTop: 20,
+      marginBottom: 20,
     },
 
     planCard: {
       marginTop: 12,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      borderRadius: 18,
+      borderRadius: 24,
       backgroundColor: COLORS.FIELD_BG,
-      padding: 14,
+      padding: 20,
     },
     planCardCurrent: {
-      borderColor: COLORS.TITLE_GOLD,
-      borderWidth: 1.5,
+      borderColor: COLORS.ON_SURFACE_TONAL,
+      borderWidth: 1,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
-    planHeaderRow: { flexDirection: "row", alignItems: "flex-start" },
+    planHeaderRow: {
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      gap: 12,
+    },
     planTitle: {
-      fontSize: font.button ?? 15,
-      fontWeight: "900",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginRight: spacing.sm ?? 8,
+      marginRight: 0,
+      flexShrink: 1,
+      minWidth: 0,
     },
     planPrice: {
-      marginTop: 2,
-      fontSize: 13,
-      fontWeight: "800",
+      marginTop: 8,
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     planSubtitle: {
-      marginTop: 2,
-      fontSize: 11,
+      marginTop: 6,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
     },
     planSubtitleHighlighted: {
       color: COLORS.TITLE_GOLD,
-      fontSize: font.button ?? 15,
-      fontWeight: "900",
     },
     recommendBadge: {
-      paddingHorizontal: 8,
-      paddingVertical: 4,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
       borderRadius: radius.pill ?? 999,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      backgroundColor: COLORS.SURFACE_TONAL,
       borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      borderColor: COLORS.CARD_BORDER,
+      maxWidth: '100%',
     },
     recommendBadgeText: {
-      fontSize: font.description ?? 10,
-      fontWeight: "900",
-      color: COLORS.ACCENT_TEXT ?? COLORS.FIELD_BG,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     currentBadge: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 10,
-      paddingVertical: 6,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
       borderRadius: radius.pill ?? 999,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: "#00000000",
+      borderColor: COLORS.ON_SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      alignSelf: 'flex-start',
+      maxWidth: '100%',
     },
     currentBadgeText: {
       marginLeft: 4,
-      fontSize: 11,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
     },
 
     planFeature: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      lineHeight: 18,
-      marginBottom: 2,
+      marginBottom: 8,
     },
     planNote: {
-      fontSize: 11,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
-      marginBottom: 2,
+      marginBottom: 6,
     },
     planNoteError: {
-      marginTop: 6,
-      fontSize: 11,
-      color: COLORS.ERROR || "#B00020",
-      lineHeight: 16,
+      marginTop: 12,
+      color: COLORS.ON_SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      padding: 12,
+      borderRadius: 16,
     },
 
     planCta: {
-      marginTop: 12,
-      alignSelf: "flex-start",
+      marginTop: 16,
+      alignSelf: 'stretch',
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 14,
-      paddingVertical: 10,
-      borderRadius: radius.pill ?? 999,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderRadius: 24,
       backgroundColor: COLORS.GOLD_BUTTON,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
+      minHeight: 52,
+      justifyContent: "center",
     },
     planCtaDisabled: {
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.FIELD_BG,
       borderColor: COLORS.CARD_BORDER,
     },
     planCtaText: {
-      fontSize: 13,
-      fontWeight: "900",
-      color: text.accentOnButton ?? COLORS.FIELD_BG,
+      flexShrink: 1,
+      color: text.accentOnButton ?? COLORS.ACCENT_TEXT,
+      textAlign: 'center',
+    },
+    planCtaTextDisabled: {
+      color: COLORS.TEXT_SUBTLE,
     },
 
     noticeBox: {
-      marginTop: 18,
-      padding: 12,
-      borderRadius: 16,
+      marginTop: 20,
+      padding: 20,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.FIELD_BG,
     },
     noticeTitle: {
-      fontSize: 12,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
+      marginBottom: 12,
     },
     noticeItem: {
-      fontSize: 11,
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      lineHeight: 18,
-      marginBottom: 4,
+      marginBottom: 10,
     },
     noticeFootnote: {
-      marginTop: 4,
-      fontSize: 11,
+      marginTop: 6,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
     },
 
     noteBox: {
-      marginTop: 18,
-      padding: 12,
-      borderRadius: 16,
+      marginTop: 20,
+      padding: 20,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.FIELD_BG,
     },
     noteTitle: {
-      fontSize: 12,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
+      marginBottom: 12,
     },
 
     linkButton: {
-      minHeight: 44,
-      paddingVertical: 12,
+      minHeight: 48,
+      paddingVertical: 14,
       borderTopWidth: 1,
       borderTopColor: COLORS.CARD_BORDER,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      gap: 12,
     },
     linkButtonFirst: {
       borderTopWidth: 0,
     },
     linkButtonText: {
-      fontSize: 13,
-      fontWeight: "800",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
     },
-  }, ui));
+  }, ui, {"headerTitle":"screenTitle","sectionLabel":"sectionTitle","currentPlan":"sectionTitle","currentPlanSub":"description","currentPlanMeta":"description","planTitle":"sectionTitle","planPrice":"body","planSubtitle":"description","planSubtitleHighlighted":"description","recommendBadgeText":"meta","currentBadgeText":"meta","planFeature":"body","planNote":"description","planNoteError":"description","planCtaText":"button","noticeTitle":"sectionTitle","noticeItem":"body","noticeFootnote":"description","noteTitle":"sectionTitle","linkButtonText":"button"}));
 }
+

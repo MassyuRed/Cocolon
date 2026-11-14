@@ -1,0 +1,29 @@
+{
+  "recovery_archive_bytes": 3678533,
+  "recovery_archive_sha256": "25516b0918621bad67ae3b0363a06c5a555eb626df708c36e909e334438c67dc",
+  "outer_manifest_files": 7,
+  "service_archive_bytes": 41802,
+  "service_archive_sha256": "92c5ec31e204c09e0a42a914c85077a5455aa5b7a9a19e9937709d5d24cee46a",
+  "verified_service_files": 21,
+  "training_archive_unchanged": true,
+  "consumer_unchanged": true,
+  "service_summary": {
+    "status": "DAILY2_REAL_MODEL_ISOLATED_SQL_SAVED_REREADS_COMPLETE_NOT_PRODUCT_ACCEPTED",
+    "seconds": 186.2474336028099,
+    "model_calls_started": 2,
+    "model_calls_completed": 2,
+    "source_calls": 2,
+    "sql_rpc_calls": 30,
+    "saved_reread_cases": [
+      "HOLDOUT-DAILY-FOCUS12-01",
+      "HOLDOUT-DAILY-FOCUS12-02"
+    ],
+    "meaning_interruption_resume_cases": [
+      "HOLDOUT-DAILY-FOCUS12-02"
+    ],
+    "forbidden_source_calls": 0,
+    "forbidden_generation_calls": 0,
+    "training_updates": 0,
+    "adapter_unchanged": true
+  }
+}

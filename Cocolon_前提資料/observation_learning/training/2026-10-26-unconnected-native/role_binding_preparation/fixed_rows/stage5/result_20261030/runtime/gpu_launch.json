@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "2690s",
+    "python3.12",
+    "-B",
+    "/workspace/cocolon_stage5_pack_20261030/run_stage5_once.py",
+    "--execute",
+    "--source-commit",
+    "fa2bdfa76c357e4931bca3bfa30510a5d7c993e4"
+  ],
+  "started_unix": 1793323976.5492089,
+  "max_gpu_process_seconds": 2700,
+  "max_process_usd": 0.21,
+  "retry": false
+}

@@ -1,15 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import CocolonButton from "./components/CocolonButton";
 import { useAuth } from "./AuthContext"; // 置いた場所によってパス調整してね
 import { useTheme } from "./theme/ThemeContext";
 import { makeUiTokens } from "./ui/uiTokens";
@@ -227,11 +228,12 @@ export default function AuthScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.safe}>
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
+        <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <View style={styles.card}>
           <Text style={styles.title}>Emlis</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
@@ -243,23 +245,31 @@ export default function AuthScreen() {
                 メールのリンクから起動した場合、ここで新しいパスワードを設定できます。
               </Text>
 
-              <TextInput
-                style={styles.input}
-                placeholder="新しいパスワード（6文字以上）"
-                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                secureTextEntry
-                value={newPassword}
-                onChangeText={setNewPassword}
-              />
+              <View>
+                <Text style={styles.fieldLabel}>新しいパスワード（6文字以上）</Text>
+                <TextInput
+                  accessibilityLabel="新しいパスワード（6文字以上）"
+                  style={styles.input}
+                  placeholder="新しいパスワード（6文字以上）"
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                  secureTextEntry
+                  value={newPassword}
+                  onChangeText={setNewPassword}
+                />
+              </View>
 
-              <TextInput
-                style={styles.input}
-                placeholder="新しいパスワード（確認）"
-                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                secureTextEntry
-                value={newPassword2}
-                onChangeText={setNewPassword2}
-              />
+              <View>
+                <Text style={styles.fieldLabel}>新しいパスワード（確認）</Text>
+                <TextInput
+                  accessibilityLabel="新しいパスワード（確認）"
+                  style={styles.input}
+                  placeholder="新しいパスワード（確認）"
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                  secureTextEntry
+                  value={newPassword2}
+                  onChangeText={setNewPassword2}
+                />
+              </View>
 
               {newPassword && newPassword2 && newPassword !== newPassword2 ? (
                 <Text style={styles.error}>パスワードが一致しません</Text>
@@ -274,18 +284,13 @@ export default function AuthScreen() {
                 </TouchableOpacity>
               ) : null}
 
-              <TouchableOpacity
-                style={[styles.button, disabled && styles.buttonDisabled]}
+              <CocolonButton
+                style={styles.button}
                 onPress={handleSubmit}
                 disabled={disabled}
-                activeOpacity={0.9}
-              >
-                {authLoading ? (
-                  <ActivityIndicator color="#fff" />
-                ) : (
-                  <Text style={styles.buttonText}>{primaryButtonLabel}</Text>
-                )}
-              </TouchableOpacity>
+                loading={authLoading}
+                title={primaryButtonLabel}
+              />
 
               <TouchableOpacity onPress={cancelReset} style={styles.switchMode}>
                 <Text style={styles.switchText}>キャンセルしてログインに戻る</Text>
@@ -294,39 +299,51 @@ export default function AuthScreen() {
           ) : (
             <>
               {/* ============ email（signin/signup/forgot） ============ */}
-              <TextInput
-                style={styles.input}
-                placeholder="メールアドレス"
-                placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                value={email}
-                onChangeText={setEmail}
-              />
+              <View>
+                <Text style={styles.fieldLabel}>メールアドレス</Text>
+                <TextInput
+                  accessibilityLabel="メールアドレス"
+                  style={styles.input}
+                  placeholder="メールアドレス"
+                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  value={email}
+                  onChangeText={setEmail}
+                />
+              </View>
 
               {/* ============ password（signin/signup のみ） ============ */}
               {(mode === "signin" || mode === "signup") && (
-                <TextInput
-                  style={styles.input}
-                  placeholder="パスワード"
-                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                  secureTextEntry
-                  value={password}
-                  onChangeText={setPassword}
-                />
+                <View>
+                  <Text style={styles.fieldLabel}>パスワード</Text>
+                  <TextInput
+                    accessibilityLabel="パスワード"
+                    style={styles.input}
+                    placeholder="パスワード"
+                    placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                    secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
+                  />
+                </View>
               )}
 
               {/* パスワード（確認）（サインアップ時のみ） */}
               {mode === "signup" && (
-                <TextInput
-                  style={styles.input}
-                  placeholder="パスワード（確認）"
-                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                  secureTextEntry
-                  value={password2}
-                  onChangeText={setPassword2}
-                />
+                <View>
+                  <Text style={styles.fieldLabel}>パスワード（確認）</Text>
+                  <TextInput
+                    accessibilityLabel="パスワード（確認）"
+                    style={styles.input}
+                    placeholder="パスワード（確認）"
+                    placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                    secureTextEntry
+                    value={password2}
+                    onChangeText={setPassword2}
+                  />
+                </View>
               )}
 
               {mode === "signup" && password && password2 && password !== password2 ? (
@@ -335,14 +352,18 @@ export default function AuthScreen() {
 
               {/* 表示名（サインアップ時のみ） */}
               {mode === "signup" && (
-                <TextInput
-                  style={styles.input}
-                  placeholder="ユーザー名"
-                  placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
-                  value={displayName}
-                  onChangeText={setDisplayName}
-                  maxLength={DISPLAY_NAME_MAX_LENGTH}
-                />
+                <View>
+                  <Text style={styles.fieldLabel}>ユーザー名</Text>
+                  <TextInput
+                    accessibilityLabel="ユーザー名"
+                    style={styles.input}
+                    placeholder="ユーザー名"
+                    placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
+                    value={displayName}
+                    onChangeText={setDisplayName}
+                    maxLength={DISPLAY_NAME_MAX_LENGTH}
+                  />
+                </View>
               )}
 
               {mode === "signup" ? (
@@ -367,18 +388,13 @@ export default function AuthScreen() {
                 </TouchableOpacity>
               ) : null}
 
-              <TouchableOpacity
-                style={[styles.button, disabled && styles.buttonDisabled]}
+              <CocolonButton
+                style={styles.button}
                 onPress={handleSubmit}
                 disabled={disabled}
-                activeOpacity={0.9}
-              >
-                {authLoading ? (
-                  <ActivityIndicator color="#fff" />
-                ) : (
-                  <Text style={styles.buttonText}>{primaryButtonLabel}</Text>
-                )}
-              </TouchableOpacity>
+                loading={authLoading}
+                title={primaryButtonLabel}
+              />
 
               {/* ============ 下部リンク群 ============ */}
               {mode === "forgot" ? (
@@ -402,113 +418,45 @@ export default function AuthScreen() {
             </>
           )}
         </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 function createStyles(COLORS, ui) {
-  const text = ui?.text || {};
   return StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#EEF2FF" },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 24,
-  },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 24,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 6 },
-    elevation: 3,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "800",
-    textAlign: "center",
-    marginBottom: 4,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
-  subtitle: {
-    fontSize: 14,
-    textAlign: "center",
-    marginBottom: 16,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
-  helpText: {
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    fontSize: 12,
-    marginBottom: 10,
-    lineHeight: 18,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    marginBottom: 10,
-    fontSize: 14,
-    backgroundColor: "#F9FAFB",
-  },
-  forgotWrap: {
-    alignItems: "flex-end",
-    marginTop: -2,
-    marginBottom: 8,
-  },
-  forgotText: {
-    fontSize: 12,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    textDecorationLine: "underline",
-  },
-  button: {
-    marginTop: 8,
-    backgroundColor: "#4F46E5",
-    borderRadius: 999,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  buttonDisabled: {
-    opacity: 0.5,
-  },
-  buttonText: {
-    color: COLORS.ACCENT_TEXT ?? "#FFFFFF",
-    fontWeight: "700",
-    fontSize: 16,
-  },
-  error: {
-    color: "#B91C1C",
-    marginTop: 4,
-    marginBottom: 2,
-    fontSize: 12,
-  },
-  info: {
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    marginBottom: 4,
-    fontSize: 12,
-  },
-  noteText: {
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    marginTop: -2,
-    marginBottom: 8,
-    fontSize: 12,
-  },
-  bottomLinks: {
-    marginTop: 10,
-  },
-  switchMode: {
-    marginTop: 16,
-    alignItems: "center",
-  },
-  switchText: {
-    fontSize: 12,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    textDecorationLine: "underline",
-  },
+    safe: { flex: 1, backgroundColor: COLORS.BG_SILVER },
+    container: { flex: 1 },
+    scroll: { flex: 1 },
+    scrollContent: { flexGrow: 1, justifyContent: "center", padding: 20 },
+    card: {
+      width: "100%", maxWidth: ui.layout.maxButtonWidth, alignSelf: "center",
+      backgroundColor: COLORS.FIELD_BG, borderColor: COLORS.CARD_BORDER,
+      borderWidth: 1, borderRadius: ui.radius.card, padding: 20,
+      ...ui.shadow.float,
+    },
+    title: {
+      fontFamily: "CormorantGaramond-Bold", fontSize: 38, textAlign: "center",
+      marginBottom: 8, color: COLORS.BRAND_GOLD,
+    },
+    subtitle: { ...ui.typography.screenTitle, textAlign: "center", marginBottom: 24, color: COLORS.TEXT_ON_LIGHT },
+    helpText: { ...ui.typography.description, marginBottom: 16, color: COLORS.TEXT_SUBTLE },
+    fieldLabel: { ...ui.typography.description, color: COLORS.TEXT_ON_LIGHT, marginBottom: 6 },
+    input: {
+      ...ui.typography.input, color: COLORS.TEXT_ON_LIGHT,
+      borderWidth: 1, borderColor: COLORS.CARD_BORDER, borderRadius: ui.radius.lg,
+      paddingHorizontal: 16, paddingVertical: 12, marginBottom: 16, minHeight: 52,
+      backgroundColor: COLORS.FIELD_BG,
+    },
+    forgotWrap: { minHeight: 44, justifyContent: "center", alignItems: "flex-end", marginBottom: 8 },
+    forgotText: { ...ui.typography.description, color: COLORS.TITLE_GOLD, textDecorationLine: "underline" },
+    button: { marginTop: 12 },
+    error: { ...ui.typography.description, color: COLORS.ERROR, backgroundColor: COLORS.ERROR_BG, padding: 12, borderRadius: 12, marginBottom: 12 },
+    info: { ...ui.typography.description, color: COLORS.ON_SURFACE_TONAL, backgroundColor: COLORS.SURFACE_TONAL, padding: 12, borderRadius: 12, marginBottom: 12 },
+    noteText: { ...ui.typography.description, color: COLORS.TEXT_SUBTLE, marginBottom: 12 },
+    bottomLinks: { marginTop: 8 },
+    switchMode: { minHeight: 44, marginTop: 12, alignItems: "center", justifyContent: "center" },
+    switchText: { ...ui.typography.description, color: COLORS.TITLE_GOLD, textAlign: "center", textDecorationLine: "underline" },
   });
 }

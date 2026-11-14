@@ -1,0 +1,18 @@
+{
+  "status": "CPU_FIXED_ROWS_INTEGRATION_PASSED",
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "old9_full_outcome_and_receipt_unchanged": true,
+  "old9_success_ids": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "seconds": 35.844613251974806
+}

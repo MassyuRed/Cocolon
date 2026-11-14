@@ -1,0 +1,84 @@
+{
+  "kind": "ANALYSIS_COMPOSITION_COMPLETE_UNIT24_BODY_FREE_RESULT",
+  "status": "COMPLETED_NOT_ADOPTED",
+  "final": true,
+  "code_ref": "eef3e82fbae497d3e1313a8a312144bad246a3a4",
+  "runner_sha256": "38e6d3727260c3101e9a8099d6025c26cc7fb4b763aa604b01f075a99310e0b2",
+  "cpu": {
+    "status": "CPU_PASSED_NO_MODEL",
+    "seconds": 15.962918070144951,
+    "model_loads": 0,
+    "model_forwards": 0,
+    "selected_union_tokens": {
+      "RU02": 21,
+      "CP01": 51,
+      "CP02": 52,
+      "CP03": 105,
+      "CP04": 102
+    }
+  },
+  "observed_training": {
+    "status": "COMPLETE_NOT_ADOPTED",
+    "updates": 24,
+    "measurement_forwards": 48
+  },
+  "planned_new_generations": 38,
+  "held_QF4_not_trained": true,
+  "normal_adoption": false,
+  "next_initial_auto_adoption": false,
+  "product_credit": 0,
+  "do_not_restart_root": true,
+  "source_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "normal_owner_http_db_rn_deployment_changes": false,
+  "primary_outcome": "BLOCKER_NARROWED",
+  "elapsed_seconds": 721.4658994674683,
+  "initial_unchanged": true,
+  "updates": 24,
+  "measurement_forwards": 48,
+  "new_generations": 38,
+  "finish_stop": 38,
+  "model_loads": 2,
+  "old19_graph_text_diagram_retained": true,
+  "retained_teacher_json_matches": 5,
+  "cp4_teacher_json_matches": 0,
+  "raw_same_of_initial34": 30,
+  "raw_changed_of_initial34": 4,
+  "raw_same_of_previous38": 30,
+  "raw_changed_of_previous38": 8,
+  "candidates_before34": 34,
+  "candidates_after38": 37,
+  "typed_after": 19,
+  "saved_response_checks": 72,
+  "saved_candidate_replays": 71,
+  "saved_typed_replays": 38,
+  "limited_improvements": [
+    "QF01 reason-marker/past-time/negation annotation restoration, near held check only",
+    "CP03 independently represented execution, known teaching source"
+  ],
+  "rejection_and_regressions": [
+    "CP02 duplicate quote parent ambiguity, entire candidate rejected",
+    "CP04 quoted speech content promoted to independent action and speech envelope inverted as ATTRIBUTIVE_CONTENT",
+    "QF03 overbroad action quotation and improper modifiers; not clean transfer"
+  ],
+  "remaining": [
+    "CP01 reason classification",
+    "QF02 reason marker",
+    "SC01 and MD02 independent action NEG quote range",
+    "normal 4B connection and person-relative role/judgment/choice reading",
+    "supplemental typed and cross-record relations",
+    "IF/Saved"
+  ],
+  "weights_sha256": "a6b5b5cc836f64f4caee26d47117a12d05cd6b23c141d1f86589c71196eeafca",
+  "config_sha256": "1836ca62ca5dba2f4f8613ec72b4e48723e81d001bb047a71d6391994c772b1e",
+  "archive": {
+    "library_file_id": "libfile_0a8a2ae3cb24819195b142abe6b60714",
+    "bytes": 15329218,
+    "sha256": "76f4c3e89d990ebc4edb3fd7d8441a850e7bf2bc89f9c79b8fc3f9264e8701b4",
+    "members": 430,
+    "manifest_members": 429
+  },
+  "processing_reference_usd": 0.05811808634599049,
+  "gpu_at_collection": "2 MiB, 0 %",
+  "compute_apps_at_collection": "",
+  "next": "CPU saved-generation prefix analysis of CP02 duplicate parent and CP04 speech/content inversion, existing input/loss/meaning owners only; no new run fixed"
+}

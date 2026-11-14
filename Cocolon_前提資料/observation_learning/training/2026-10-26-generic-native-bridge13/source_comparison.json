@@ -1,0 +1,71 @@
+{
+  "schema": "cocolon.generic_native_source_comparison.v1",
+  "source_commit": "6ed2f7b67f24acc9c5c8ace5cddeb677ff493a56",
+  "comparison": [
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "same_original_fields": [
+        "memo",
+        "memo_action",
+        "category",
+        "emotions",
+        "emotion_details"
+      ],
+      "same_surface_fields": [
+        "observation",
+        "reception"
+      ],
+      "generic_user_chars": 904,
+      "native_user_chars": 5960,
+      "generic_target_chars": 225,
+      "native_target_chars": 4877,
+      "system_equal": false,
+      "user_envelope_equal": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "same_original_fields": [
+        "memo",
+        "memo_action",
+        "category",
+        "emotions",
+        "emotion_details"
+      ],
+      "same_surface_fields": [
+        "observation",
+        "reception"
+      ],
+      "generic_user_chars": 904,
+      "native_user_chars": 5960,
+      "generic_target_chars": 225,
+      "native_target_chars": 4877,
+      "system_equal": false,
+      "user_envelope_equal": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "same_original_fields": [
+        "memo",
+        "memo_action",
+        "category",
+        "emotions",
+        "emotion_details"
+      ],
+      "same_surface_fields": [
+        "observation",
+        "reception"
+      ],
+      "generic_user_chars": 904,
+      "native_user_chars": 5960,
+      "generic_target_chars": 225,
+      "native_target_chars": 4877,
+      "system_equal": false,
+      "user_envelope_equal": false
+    }
+  ],
+  "hypothesis": "Training/evaluation interface mismatch is a candidate cause, not a proven sole cause.",
+  "new_teacher_text": false,
+  "mash_completed_response": false,
+  "product_accepted": false,
+  "new_observation_session_required_for_this_defect": false
+}

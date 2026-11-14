@@ -1,0 +1,238 @@
+{
+  "date": "2026-11-05",
+  "api_before": "5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a",
+  "api_after": "95019062fa7a7cbda4166e9209020a48d593fa44",
+  "runner_commit": "11349815f0b1b86e8e8dc3fab6b5dd2c462352d7",
+  "provenance": "Karen independently synthetic snapshots; mock isolated RPC persistence; actual saved 4B responses remain private",
+  "new_training": 0,
+  "new_generations": 2,
+  "model_loads": 1,
+  "regeneration": 0,
+  "live_seconds": 32.71419088635594,
+  "before_seconds": 0.1672194916754961,
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "accelerate": "1.15.0",
+    "peft": "0.21.2",
+    "safetensors": "0.8.0",
+    "transformers": "5.19.0"
+  },
+  "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "weights_unchanged": true,
+  "source_trees_clean": true,
+  "normal_4b_enabled": false,
+  "deployed": false,
+  "product_acceptance": "NOT_ASSESSED",
+  "cases": [
+    {
+      "id": "MR01",
+      "inputs": [
+        {
+          "memo": "僕の役割は受付係だった。",
+          "memo_action": "僕は費用を記録した。",
+          "category": [
+            "仕事"
+          ]
+        },
+        {
+          "memo": "僕の役割は受付係ではなかった。",
+          "memo_action": "",
+          "category": [
+            "生活"
+          ]
+        }
+      ],
+      "before": {
+        "status": "REJECTED",
+        "source_calls": 0
+      },
+      "after": {
+        "status": "SAVED",
+        "source_calls": 1,
+        "finish_reason": "stop",
+        "text": "役割：選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n費用を記録する（実行済み）（1件の記録）\n役割：選択カテゴリ：生活\n僕の役割は受付係ではなかった（記録された役割）（1件の記録）\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割） ／ 選択カテゴリ：仕事\n費用を記録する（実行済み））：段階同士のつながりは、この記録からは確定していません。\n未確定（選択カテゴリ：生活\n僕の役割は受付係ではなかった（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。",
+        "diagram": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n費用を記録する（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n3",
+              "visible_label": "選択カテゴリ：生活\n僕の役割は受付係ではなかった（記録された役割）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T09:00:27.811919+00:00",
+          "projection_of": "artifact:4a0295b1a4ec449db2696f04332865ef@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            },
+            {
+              "between_node_refs": [
+                "n3"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "saved_current_month_readonly_equal": true
+      }
+    },
+    {
+      "id": "MR02",
+      "inputs": [
+        {
+          "memo": "私は会合の進行を担当した。その後、私は分担を決めた。",
+          "memo_action": "",
+          "category": [
+            "仕事"
+          ]
+        },
+        {
+          "memo": "",
+          "memo_action": "僕は費用を記録しなかった。",
+          "category": [
+            "生活"
+          ]
+        },
+        {
+          "memo": "今日は何となく落ち着かなかった。",
+          "memo_action": "",
+          "category": [
+            "仕事"
+          ]
+        }
+      ],
+      "before": {
+        "status": "REJECTED",
+        "source_calls": 0
+      },
+      "after": {
+        "status": "REJECTED",
+        "source_calls": 1,
+        "finish_reason": "stop",
+        "error": {
+          "detail": "analysis_saved_source_unavailable",
+          "status_code": 422
+        },
+        "expected_fields": 3,
+        "returned_fields": 2,
+        "reading": "Third field omitted, so full packet rejected before semantic adoption. Responsibility is also proposed as ACTION_OR_NONACTION. No missing field fabricated or finite-output fallback used."
+      }
+    }
+  ],
+  "jupyter": {
+    "passed": 292,
+    "skipped": 9,
+    "seconds": 31.4,
+    "skip": "SQL/WASM dependency not configured; covered separately by pinned CI if successful",
+    "final_binding": {
+      "passed": 7,
+      "deselected": 42,
+      "seconds": 3.04
+    }
+  },
+  "limitations": [
+    "Explicit source injection only; normal HTTP/cron does not call the model.",
+    "All qualified original records are retained. Model supplements/comparison remain unqualified.",
+    "Existing finite action/responsibility equivalence is shared. Private written-role nodes stay per record.",
+    "No cross-record ordering/causes/repeated cooccurrence or general personal criteria analysis is added.",
+    "MR02 is rejected; 1/2 saved is not general quality or five-record success."
+  ],
+  "api_final": "22de881a92e2ebf1c1866ebd02abda4018c61f27",
+  "api_final_runtime_blobs_unchanged": true,
+  "ci_initial": {
+    "run_id": 41998532659,
+    "job_id": 127147650640,
+    "status": "failure",
+    "passed": 2225,
+    "failed": 1,
+    "skipped": 1,
+    "subtests": 12048,
+    "seconds": 390.35,
+    "failure": "Old multi_record test prepared a fresh valid two-record response but expected the retired single-record-scope rejection."
+  },
+  "ci_final": {
+    "run_id": 41999746016,
+    "job_id": 127151672309,
+    "status": "success",
+    "all_steps_success": true,
+    "head": "22de881a92e2ebf1c1866ebd02abda4018c61f27",
+    "generation": {
+      "passed": 2226,
+      "skipped": 1,
+      "subtests": 12048,
+      "seconds": 510.8,
+      "skip": "old model-fields SQL WASM unconfigured in generation stage"
+    },
+    "shared_owner": {
+      "passed": 1,
+      "deselected": 194,
+      "seconds": 30.64
+    },
+    "cumulative": {
+      "passed": 65,
+      "warnings": 1,
+      "subtests": 2,
+      "seconds": 62.38
+    },
+    "sql": {
+      "status": "passed",
+      "sourceRecords": 201,
+      "monthlyReferences": 15,
+      "scope": "cumulative SQL/owner/rank/immutability/deletion"
+    }
+  }
+}

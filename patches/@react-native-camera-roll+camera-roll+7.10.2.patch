@@ -1,0 +1,30 @@
+diff --git a/node_modules/@react-native-camera-roll/camera-roll/ios/RNCCameraRoll.mm b/node_modules/@react-native-camera-roll/camera-roll/ios/RNCCameraRoll.mm
+index d63f1a7..5c59c6f 100644
+--- a/node_modules/@react-native-camera-roll/camera-roll/ios/RNCCameraRoll.mm
++++ b/node_modules/@react-native-camera-roll/camera-roll/ios/RNCCameraRoll.mm
+@@ -154,6 +154,13 @@ RCT_EXPORT_METHOD(saveToCameraRoll:(NSURLRequest *)request
+                   resolve:(RCTPromiseResolveBlock)resolve
+                   reject:(RCTPromiseRejectBlock)reject)
+ {
++  BOOL cocolonAddOnly = [RCTConvert BOOL:options[@"cocolonAddOnly"]];
++  if (cocolonAddOnly && (![options[@"type"] isEqualToString:@"photo"] ||
++      ![options[@"album"] isEqualToString:@""] || !request.URL.isFileURL ||
++      ![[request.URL.pathExtension lowercaseString] isEqualToString:@"png"])) {
++    reject(kErrorUnableToSave, nil, nil);
++    return;
++  }
+   // We load images and videos differently.
+   // Images have many custom loaders which can load images from ALAssetsLibrary URLs, PHPhotoLibrary
+   // URLs, `data:` URIs, etc. Video URLs are passed directly through for now; it may be nice to support
+@@ -209,6 +216,11 @@ RCT_EXPORT_METHOD(saveToCameraRoll:(NSURLRequest *)request
+       }
+     } completionHandler:^(BOOL success, NSError *error) {
+       if (success) {
++        // Piece needs write completion only. Add-only access must not fetch assets.
++        if (cocolonAddOnly) {
++          resolve(@{@"saved": @YES});
++          return;
++        }
+         PHFetchOptions *options = [PHFetchOptions new];
+         options.includeHiddenAssets = YES;
+         options.includeAllBurstAssets = YES;

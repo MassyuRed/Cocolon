@@ -1,0 +1,1 @@
+{"pid": 95992, "started_unix": 1793242509.0431337, "source_commit": "f6f1bb485dc73c11e6669062301893440502d248", "parent_timeout_seconds": 890, "kill_grace_seconds": 10, "retry": false, "training_updates": 0, "max_calls": 4, "gold_assisted": true}

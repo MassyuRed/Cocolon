@@ -33,8 +33,8 @@ export function buildStandardUpgradeCardCopy() {
   return {
     badge: null,
     headline: null,
-    lead: "こころ天気を、もっと深く読めます",
-    bodyStrong: "加入すると、こころ天気（日/週/月）の本文や観測理由まで、今よりていねいに振り返れます。",
+    lead: "こころグラフを、もっと深く読めます",
+    bodyStrong: "加入すると、こころグラフ（日/週/月）の本文や観測理由まで、今よりていねいに振り返れます。",
     note: "今は基本図と短め表示を表示しています。",
     ctaLabel: "プランを見る",
   };

@@ -21,6 +21,8 @@ export default function NexusTabBar({
           <CocolonPressable
             style={styles.tabItem}
             onPress={() => setActiveTab(tab.key)}
+            accessibilityRole="tab"
+            accessibilityState={{ selected: isActive }}
           >
             <View
               style={[

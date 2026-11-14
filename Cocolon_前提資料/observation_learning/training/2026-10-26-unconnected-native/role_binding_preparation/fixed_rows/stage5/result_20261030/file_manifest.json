@@ -1,0 +1,287 @@
+{
+  "schema": "cocolon.stage5.github_file_map.v1",
+  "payload_files": 46,
+  "total_paths_including_this_manifest": 47,
+  "files": [
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/README.md",
+      "bytes": 4086,
+      "sha256": "72e359c838a1d57ccd70e3e8ae06c2075191967d4dfb1e2d28f10b22b32b8105",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/archive_manifest.json",
+      "bytes": 47406,
+      "sha256": "1de5b7aec489b47b4148273066e2e5ae1fc31a6e6ccbbfa6dc48312571f01199",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/content_review.md",
+      "bytes": 3556,
+      "sha256": "95b3a3a9850a74c87a0d152d5bc7f005c4207febf08e2ad6be424fd17b60611f",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/cpu_verification.json",
+      "bytes": 6663,
+      "sha256": "748f1736c245b8b0fdf14985f0b9744664c9cc2cba819b4410a37eacae81e695",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/preservation_receipt.json",
+      "bytes": 658,
+      "sha256": "a461d4801e8a89a2fb893c60e9560acc490ac0437f5715ebfa58a42d92436579",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/proof.jpg",
+      "bytes": 239501,
+      "sha256": "2efd34443bc260975c57a6bf81130445f4362a72ce1e6515e03deeafc70d9cef",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/FT-BOOK-AFTER-ANSWER_stages.json",
+      "bytes": 29808,
+      "sha256": "d99c50ed30fc95ac5f78a82eadb707f02a48342181b01e34e6eb45f194f509c2",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/FT-SHOP-AFTER-ANSWER_stages.json",
+      "bytes": 90365,
+      "sha256": "8a007875105fd41491bfcd015ee48e3ea6e66cd5aab1299d75bc5ed14f87392e",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/adapter/README.md",
+      "bytes": 299,
+      "sha256": "5ab8799c3d993d976b33782f39c326634a278e11f70304899d01368060871bd2",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/adapter/adapter_config.json",
+      "bytes": 1674,
+      "sha256": "0404605c3736fd54d6f75d2dacf3254a10e6982f005a2765642ab230dceac1c9",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/cmee/diagnosis.json",
+      "bytes": 728,
+      "sha256": "cd7613dd7d36d1129781875ae5e33f3feeaa69f1b1850c64a7608a5302ef567f",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/initial_loaded_tensors.json",
+      "bytes": 26030,
+      "sha256": "8022d25204cf994b831c41e2154033adccfbc6b409c021cde9854961ad9b2459",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/reloaded_tensors.json",
+      "bytes": 26033,
+      "sha256": "0b78ca6242771c68a99f9309be2f3189e0941d06ac89ce2a44efc158b420c1de",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/run.json",
+      "bytes": 9373,
+      "sha256": "a75b68eb3d31eac003df869ba6b5e742b6d17390574811555b44e9101da888a4",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 4938,
+      "sha256": "a5b7cc15356cc219489c79514d46899b529f2f20cebe264a1afba214a4b36c57",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/stage1_FT-BOOK-AFTER-ANSWER.jsonl.messages.json",
+      "bytes": 19382,
+      "sha256": "b6556c8efb725c9a9cc215ae18db5c36ba2302055fb48c045f08ed29ea6de3d1",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 8058,
+      "sha256": "6f1060573003d34907c733669c3bc205b832c48197c719d5de9970ff0cf96899",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/stage1_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+      "bytes": 19978,
+      "sha256": "4ad86796a06e3d29cb8cc831cd5cdacc45db16e3a21b81fe33e6159b304d7b7b",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/stage2_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 18434,
+      "sha256": "0f7b8dc5770e2ee5f48e2322018a5637254f67edf0d163bb0fad99ac3ee3c6fe",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/stage2_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+      "bytes": 22182,
+      "sha256": "ff3dbbffc7da26c9095dad224c62d101eac982c122aeaaa17db1fe709309df80",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/run/training.jsonl",
+      "bytes": 3546,
+      "sha256": "da411be4248b2e2b7528686902a7e5dcbfb5efe3701c0f8b0ba894bb27c167c0",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/consume_stage5.py",
+      "bytes": 9946,
+      "sha256": "92bf81c1ca52a72480753010efc911fc132c74f4208a533853feb70fc5650713",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/cpu.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/cpu.log",
+      "bytes": 1862,
+      "sha256": "7cc28238c9e70694c9a0bdb77cc0125070f87ef50e4ee98d83e82ec4dc246a71",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/execute_once.lock",
+      "bytes": 45,
+      "sha256": "57266f1dbfaabf0f42cf4cdfc35e09ac283f9d5b0bfb35aedd07d4a305370ea9",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/export_result.py",
+      "bytes": 2829,
+      "sha256": "bdcbae86978c78e3a455513e01760bf73b62520c6af78ba6adb7b85bf03b2c47",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/gpu.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/gpu.log",
+      "bytes": 4470,
+      "sha256": "b16c7a00abcf443378a458c67e0bece2a0cd765a4c8a224a1af345b65eb5af84",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/gpu_elapsed.json",
+      "bytes": 53,
+      "sha256": "e95b64df9c6f4f4b6d69f8b4ca97f7c7ee1afac54ba304d1665c4c26c67febb5",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/gpu_launch.json",
+      "bytes": 395,
+      "sha256": "d70b466998172fb553f968aceb33280750d7d2ecae105c72a0273959bb0a4502",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/launch_once.py",
+      "bytes": 859,
+      "sha256": "5b5e16eb550039278ce2015e6f712f28bb89985607ebf31375fe7908765aacb2",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/launcher.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/plan.json",
+      "bytes": 5227,
+      "sha256": "f011403c424ae2e7f107d9ab7b57b538ff9951bd3ca2a31393bd83243d34f03d",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/post_identity.json",
+      "bytes": 282,
+      "sha256": "a312dc47238673d25e0e398cc431657608cec1621adcdb7eb6b998ed26cf4f2b",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/prepare_stage5.py",
+      "bytes": 9819,
+      "sha256": "d4dbf5af9bc5cc4cbcaa92691bab539dfb4fdf763a01a814ea1a0fdc3cdd43d7",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/runtime/run_stage5_once.py",
+      "bytes": 17510,
+      "sha256": "59311ef5f8caefa8aba26b1eee357fb69d32ca75ffd8aab63c4b1d857709eb83",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/summary.json",
+      "bytes": 2454,
+      "sha256": "18a4f2c08bceb18900bba9332e52f3672c751c85d2274a85ddd9288fd0207bc8",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/verification.json",
+      "bytes": 1320,
+      "sha256": "49194b7abd57985a7ae14c9c226cac9d96f3a11995d59f0fe47457e88d3f3875",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/verify_recovery.py",
+      "bytes": 4464,
+      "sha256": "517a375aa5f06e31573725073382f4ccbe62c6a34b6142d7add7996d4e841e25",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/00_cocolon_current_product_and_state.md",
+      "bytes": 59065,
+      "sha256": "4939732f0e3816f4ec3c98fbc0196db8010f61c1eb79ea6f59637225d9405d18",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/README.md",
+      "bytes": 50983,
+      "sha256": "23c83d21aa5604220348de981505d6e076526148bc2175039a14d7fa420cec5a",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261024.md",
+      "bytes": 739667,
+      "sha256": "c3a292684e087f906f3b1a5c24d4d3670215f1a5e2b16c351794fe91c1976177",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md",
+      "bytes": 574804,
+      "sha256": "9222d395096f16a8bc68a0b6f1f980ba4bf21352e93a26ff94047fd38bfa775d",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/implementation_20261030/plan.json",
+      "bytes": 5812,
+      "sha256": "80d0c6b7631b71db20d3943ca4ba0de3f4ed87f90773cfdc9e8ca8ec82f8d7a8",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/implementation_20261030/README.md",
+      "bytes": 2557,
+      "sha256": "e50a473241ab4cc638a2380d4238b380813c6d1dcd6975bb5c824090fc23343a",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/README.md",
+      "bytes": 11258,
+      "sha256": "909c9a63e1b93dc4b9e7dc3506b37d3b5b39b169a5e3d4d61b89376ea75842fb",
+      "owner": "root Karen; purpose mapped by result README / 01A weekly122"
+    }
+  ],
+  "manifest_self": {
+    "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/file_manifest.json",
+    "owner": "This index; self hash intentionally external to this file"
+  }
+}

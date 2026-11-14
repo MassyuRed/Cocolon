@@ -1,0 +1,43 @@
+{
+  "source_commit": "6ed2f7b67f24acc9c5c8ace5cddeb677ff493a56",
+  "files": {
+    "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl": {
+      "sha256": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+      "bytes": 44875
+    },
+    "Cocolon_前提資料/observation_learning/training/2026-10-25-emlis-quote-address/sft_examples.jsonl": {
+      "sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5",
+      "bytes": 307770
+    },
+    "Cocolon_前提資料/observation_learning/training/2026-10-25-emlis-quote-address/train_messages.jsonl": {
+      "sha256": "1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022f",
+      "bytes": 157443
+    },
+    "Cocolon_前提資料/observation_learning/training/2026-10-25-emlis-quote-address/run_quote_joint_fit.py": {
+      "sha256": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128",
+      "bytes": 28123
+    },
+    "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/run_pilot.py": {
+      "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+      "bytes": 28950
+    }
+  },
+  "training_rows": 10,
+  "native_rows_unchanged": 9,
+  "generic_rows": 1,
+  "independent_training_language_stories": 2,
+  "source_refs": [
+    {
+      "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-002/01_dialogue.md",
+      "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+      "blob_sha": "7c432eb03550569abe434d4f41560345098a7024",
+      "dialogue_id": "D04",
+      "start_scalar": 2357,
+      "end_scalar_exclusive": 2506,
+      "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 平穏（中）・喜び（弱） |\n| 思考内容（考えていること） | あったかいもの食べたら、ちょっと落ち着いた。 |\n| 行動内容（実際に起こった出来事） | 帰ってから、うどんを作って食べた。 |\n| カテゴリー | 生活 |"
+    }
+  ],
+  "no_new_teacher_text": true,
+  "eval_rows_in_training": 0,
+  "original_files_modified": false
+}

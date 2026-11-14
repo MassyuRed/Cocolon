@@ -56,6 +56,10 @@ export function AuthProvider({ children }) {
 
   // profiles の ensure（メール確認フローでも必ず1行作る）
   const ensuredProfileUserIdRef = useRef(null);
+  const authOwnerUserIdRef = useRef(null);
+  const authOwnerGenerationRef = useRef(0);
+  const profileRequestAbortRef = useRef(null);
+  const [authOwnerGeneration, setAuthOwnerGeneration] = useState(0);
 
 
   const clearAuthError = () => setAuthError("");
@@ -63,21 +67,39 @@ export function AuthProvider({ children }) {
   // 初期セッション取得 & 以降の変化を監視
   useEffect(() => {
     let mounted = true;
+    let authStateChanged = false;
 
     (async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (!mounted) return;
-      if (error) {
-        console.warn("getSession error:", error);
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (!mounted || authStateChanged) return;
+        if (error) throw error;
+        authOwnerUserIdRef.current = data?.session?.user?.id || null;
+        setSession(data?.session ?? null);
+      } catch (error) {
+        if (!mounted || authStateChanged) return;
+        setAuthError("ログイン情報を取得できませんでした。もう一度ログインしてください。");
+      } finally {
+        if (mounted) setInitializing(false);
       }
-      setSession(data?.session ?? null);
-      setInitializing(false);
     })();
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, newSession) => {
+      if (!mounted) return;
+      authStateChanged = true;
+      const nextUserId = newSession?.user?.id || null;
+      if (authOwnerUserIdRef.current !== nextUserId) {
+        authOwnerUserIdRef.current = nextUserId;
+        profileRequestAbortRef.current?.abort();
+        profileRequestAbortRef.current = null;
+        ensuredProfileUserIdRef.current = null;
+        authOwnerGenerationRef.current += 1;
+        setAuthOwnerGeneration(authOwnerGenerationRef.current);
+      }
       setSession(newSession ?? null);
+      setInitializing(false);
       if (event === "SIGNED_OUT") {
         setRecoveryMode(false);
       }
@@ -85,6 +107,8 @@ export function AuthProvider({ children }) {
 
     return () => {
       mounted = false;
+      profileRequestAbortRef.current?.abort();
+      profileRequestAbortRef.current = null;
       subscription.unsubscribe();
     };
   }, []);
@@ -98,6 +122,8 @@ export function AuthProvider({ children }) {
     }
     if (ensuredProfileUserIdRef.current === userId) return;
     ensuredProfileUserIdRef.current = userId;
+    const controller = new AbortController();
+    profileRequestAbortRef.current = controller;
 
     const displayName = coerceStoredDisplayName(
       session?.user?.user_metadata?.display_name ||
@@ -110,14 +136,20 @@ export function AuthProvider({ children }) {
         await ensureAccountProfile({
           displayName,
           pushPlatform: Platform?.OS || null,
+          expectedUserId: userId,
+          signal: controller.signal,
         });
       } catch (e) {
         console.warn("profiles ensure exception:", e);
       }
     })();
 
-    return undefined;
-  }, [session?.user?.id]);
+    return () => {
+      controller.abort();
+      if (profileRequestAbortRef.current === controller) profileRequestAbortRef.current = null;
+      if (ensuredProfileUserIdRef.current === userId) ensuredProfileUserIdRef.current = null;
+    };
+  }, [session?.user?.id, authOwnerGeneration]);
 
 
   // Deep Link（Auth callback: signup / magiclink / recovery）を拾う
@@ -249,6 +281,7 @@ export function AuthProvider({ children }) {
           displayName: nextDisplayName,
           pushPlatform: Platform?.OS || null,
           accessToken: signupSession?.access_token || null,
+          expectedUserId: user.id,
         });
       } catch (profileError) {
         console.error("account/profile/me ensure error:", profileError);
@@ -296,22 +329,27 @@ export function AuthProvider({ children }) {
   };
 
   const signOut = async (options = {}) => {
-    const { skipPushTokenClear = false, rethrow = false } = options || {};
+    const { skipPushTokenClear = false, rethrow = false, expectedUserId = null } = options || {};
 
+    if (expectedUserId && authOwnerUserIdRef.current !== expectedUserId) return;
+    const startingOwnerGeneration = authOwnerGenerationRef.current;
     setAuthError("");
     setAuthLoading(true);
     try {
-      const currentUserId = session?.user?.id;
+      const currentUserId = expectedUserId || session?.user?.id;
       if (currentUserId && !skipPushTokenClear) {
         try {
           await clearAccountProfilePushToken({
             pushPlatform: Platform?.OS || null,
+            expectedUserId: currentUserId,
           });
         } catch (clearErr) {
           console.warn("profiles push_token clear exception:", clearErr);
         }
       }
 
+      if (authOwnerGenerationRef.current !== startingOwnerGeneration ||
+          (currentUserId && authOwnerUserIdRef.current !== currentUserId)) return;
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       setRecoveryMode(false);
@@ -414,6 +452,7 @@ export function AuthProvider({ children }) {
   const value = useMemo(
     () => ({
       session,
+      authOwnerGeneration,
       user: session?.user ?? null,
       initializing,
       authLoading,
@@ -433,6 +472,7 @@ export function AuthProvider({ children }) {
     }),
     [
       session,
+      authOwnerGeneration,
       initializing,
       authLoading,
       authError,

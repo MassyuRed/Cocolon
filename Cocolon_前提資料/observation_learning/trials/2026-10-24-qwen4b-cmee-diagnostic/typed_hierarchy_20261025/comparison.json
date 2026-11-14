@@ -1,0 +1,96 @@
+{
+  "scope": "REAL_4B_FIXED_INPUTS_NOT_PRODUCT_ACCEPTANCE",
+  "source_commit": "0d509c0903e0ee62c248857059087024e14dc7f5",
+  "api_commit": "0037ae59eddab00f4956a7e4c2506db2af8ccc35",
+  "training_updates": 0,
+  "adapter_files_unchanged": true,
+  "model_calls": 2,
+  "adopted": 0,
+  "body_available": 0,
+  "cases": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "finish_reason": "stop",
+      "input_tokens": 3071,
+      "output_tokens": 1875,
+      "raw_utf8_sha256": "9355075408c73b9d627deafc46c0aae51ab95cfae0ffa8d08992dc1d7ec37d56",
+      "messages_match": true,
+      "identity_matches": true,
+      "status": "CANDIDATE_NOT_ELIGIBLE",
+      "adoption": "NOT_ADOPTED",
+      "reason_code": "INVALID_EVIDENCE",
+      "evidence_checks": [
+        {
+          "source_id": "src-7554a750377f05e1e107e620",
+          "field_path": "memo",
+          "start": 406,
+          "end": 460,
+          "field_length": null,
+          "exact_scalar_match": false
+        },
+        {
+          "source_id": "src-7554a750377f05e1e107e620",
+          "field_path": "memo_action",
+          "start": 489,
+          "end": 567,
+          "field_length": null,
+          "exact_scalar_match": false
+        },
+        {
+          "source_id": "src-7554a750377f05e1e107e620",
+          "field_path": "emotion_details.0.type",
+          "start": 606,
+          "end": 612,
+          "field_length": null,
+          "exact_scalar_match": false
+        },
+        {
+          "source_id": "src-7554a750377f05e1e107e620",
+          "field_path": "emotions.0",
+          "start": 636,
+          "end": 642,
+          "field_length": null,
+          "exact_scalar_match": false
+        }
+      ],
+      "candidate_keys": [
+        "claims",
+        "question_proposal",
+        "relations",
+        "schema_version",
+        "surface_proposal",
+        "unknowns"
+      ],
+      "claim_count": 4,
+      "relation_count": 2,
+      "unknown_count": 2,
+      "update_count": 0,
+      "observation_type": "str",
+      "reception_type": "str",
+      "body": null,
+      "question": null
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "finish_reason": "length",
+      "input_tokens": 6091,
+      "output_tokens": 2048,
+      "raw_utf8_sha256": "2b515024f49260714421c5f8632a6e40ed3b82d785b202893b9d94d629955956",
+      "messages_match": true,
+      "identity_matches": true,
+      "status": "CANDIDATE_NOT_ELIGIBLE",
+      "adoption": "NOT_ADOPTED",
+      "reason_code": "TOKEN_LIMIT",
+      "evidence_checks": [],
+      "candidate_keys": [],
+      "claim_count": 0,
+      "relation_count": 0,
+      "unknown_count": 0,
+      "update_count": 0,
+      "observation_type": "NoneType",
+      "reception_type": "NoneType",
+      "body": null,
+      "question": null
+    }
+  ]
+}

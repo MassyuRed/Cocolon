@@ -1,0 +1,301 @@
+{
+  "schema": "cocolon_4b_9b_received_review.v1",
+  "date_jst": "2026-10-24",
+  "source_result": {
+    "filename": "selection_results.json",
+    "bytes": 290022,
+    "sha256": "4f8aba44aca3612c66494ec5a77e92be2018d10a181fe1809c8994730e4f1386",
+    "execution_source_commit": "a01fe0ca34455eed983139ac42f2c4a3d03c88a3"
+  },
+  "checks": {
+    "fixed_source_commit_matches": true,
+    "runner_hash_matches_remote_verified_source": true,
+    "case_hash_matches_remote_verified_source": true,
+    "all_six_cases_match": true,
+    "both_six_case_orders_match": true,
+    "same_input_token_ids_both_models": true,
+    "token_counts_match_id_lengths": true,
+    "same_runtime_conditions": true,
+    "twelve_json_objects_parse_and_equal_saved_parsed": true,
+    "no_reported_output_truncation": true,
+    "all_reported_eos_reached": true,
+    "context_and_output_caps_preserved": true,
+    "base_models_no_training_no_integration": true,
+    "wrapper_exit_zero_no_error": true
+  },
+  "metrics": {
+    "4b": {
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "rows": [
+        {
+          "case_id": "E02-0",
+          "input_tokens": 515,
+          "output_tokens": 115,
+          "seconds": 5.504745181999169,
+          "output_tokens_per_second": 20.891066924597446
+        },
+        {
+          "case_id": "E02-B",
+          "input_tokens": 590,
+          "output_tokens": 142,
+          "seconds": 5.534228880016599,
+          "output_tokens_per_second": 25.658497882648845
+        },
+        {
+          "case_id": "P01-N",
+          "input_tokens": 537,
+          "output_tokens": 153,
+          "seconds": 5.936176340968814,
+          "output_tokens_per_second": 25.77416694043655
+        },
+        {
+          "case_id": "A02-P1",
+          "input_tokens": 827,
+          "output_tokens": 2062,
+          "seconds": 78.22861144400667,
+          "output_tokens_per_second": 26.358642470292445
+        },
+        {
+          "case_id": "FT-CHAIR-AFTER-CORRECTION",
+          "input_tokens": 582,
+          "output_tokens": 166,
+          "seconds": 6.400090116017964,
+          "output_tokens_per_second": 25.937134788858664
+        },
+        {
+          "case_id": "FT-SHOP-AFTER-ANSWER",
+          "input_tokens": 637,
+          "output_tokens": 204,
+          "seconds": 7.861155077989679,
+          "output_tokens_per_second": 25.95038489587571
+        }
+      ],
+      "total_input_tokens": 3688,
+      "total_output_tokens": 2842,
+      "total_generation_seconds": 109.4650070409989,
+      "excluding_analysis_output_tokens": 780,
+      "excluding_analysis_generation_seconds": 31.236395596992224,
+      "peak_allocated_gib": 8.736615180969238,
+      "peak_reserved_gib": 8.7890625,
+      "model_load_seconds_may_include_download": 9.74269937799545,
+      "model_wall_seconds": 119.22624063491821
+    },
+    "9b": {
+      "model": "Qwen/Qwen3.5-9B",
+      "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "rows": [
+        {
+          "case_id": "E02-0",
+          "input_tokens": 515,
+          "output_tokens": 173,
+          "seconds": 8.328232265019324,
+          "output_tokens_per_second": 20.77271556493971
+        },
+        {
+          "case_id": "E02-B",
+          "input_tokens": 590,
+          "output_tokens": 169,
+          "seconds": 6.696279565047007,
+          "output_tokens_per_second": 25.237894917371726
+        },
+        {
+          "case_id": "P01-N",
+          "input_tokens": 537,
+          "output_tokens": 242,
+          "seconds": 9.537632247025613,
+          "output_tokens_per_second": 25.373173732450173
+        },
+        {
+          "case_id": "A02-P1",
+          "input_tokens": 827,
+          "output_tokens": 901,
+          "seconds": 35.49304228404071,
+          "output_tokens_per_second": 25.385256997401168
+        },
+        {
+          "case_id": "FT-CHAIR-AFTER-CORRECTION",
+          "input_tokens": 582,
+          "output_tokens": 225,
+          "seconds": 8.813572921033483,
+          "output_tokens_per_second": 25.528806763831305
+        },
+        {
+          "case_id": "FT-SHOP-AFTER-ANSWER",
+          "input_tokens": 637,
+          "output_tokens": 249,
+          "seconds": 9.780286813038401,
+          "output_tokens_per_second": 25.4593760653369
+        }
+      ],
+      "total_input_tokens": 3688,
+      "total_output_tokens": 1959,
+      "total_generation_seconds": 78.64904609520454,
+      "excluding_analysis_output_tokens": 1058,
+      "excluding_analysis_generation_seconds": 43.15600381116383,
+      "peak_allocated_gib": 17.814071655273438,
+      "peak_reserved_gib": 17.87890625,
+      "model_load_seconds_may_include_download": 14.029305994976312,
+      "model_wall_seconds": 92.69456434249878
+    }
+  },
+  "wrapper_elapsed_seconds_not_total_pod_billing": 250.47822976112366,
+  "product_accepted": false,
+  "formal_product_read_performed": false,
+  "production_serving_cost_measured": false,
+  "pod_stop_independently_confirmed": false,
+  "case_reviews": [
+    {
+      "case_id": "E02-0",
+      "four_b": {
+        "meaning": "JOY_REASON_UNKNOWN_PRESERVED",
+        "issues": [
+          "reception is a detached report rather than a direct human reception"
+        ],
+        "evidence": "喜びの源泉は未特定"
+      },
+      "nine_b": {
+        "meaning": "UNSUPPORTED_REASON_AND_TRAIT_ADDED",
+        "issues": [
+          "adds leadership/control, respect and achievement despite unknown reason"
+        ],
+        "evidence": "自分が主導権を握りつつも相手の話を尊重する姿勢"
+      }
+    },
+    {
+      "case_id": "E02-B",
+      "four_b": {
+        "meaning": "SUPPLEMENTAL_JOY_REASON_REFLECTED",
+        "issues": [
+          "reception reports clarification rather than receiving the person"
+        ],
+        "evidence": "私が思いつかなかったやり方を知れたこと"
+      },
+      "nine_b": {
+        "meaning": "NEGATED_REASON_REIFIED_AND_RESOLVED_UNKNOWN_REVIVED",
+        "issues": [
+          "adds that refraining from interruption happened",
+          "leaves the already explained joy target ambiguous"
+        ],
+        "evidence": "自分が口を挟まずに済んだ"
+      }
+    },
+    {
+      "case_id": "P01-N",
+      "four_b": {
+        "meaning": "MAIN_MEMO_REPLAYED_ACTION_CONTEXT_OMITTED",
+        "issues": [
+          "canonical is original memo verbatim and omits fixing a colleague's presentation",
+          "grounded_points invents extra work and tardiness"
+        ],
+        "evidence": "自分の仕事が増え遅刻した"
+      },
+      "nine_b": {
+        "meaning": "MAIN_MEMO_REPLAYED_ACTION_CONTEXT_OMITTED",
+        "issues": [
+          "same canonical_text as4b and original memo; no independent Piece composition",
+          "source references more faithful than4b"
+        ],
+        "evidence": "canonical_text is byte-identical to original memo"
+      }
+    },
+    {
+      "case_id": "A02-P1",
+      "four_b": {
+        "meaning": "SOME_INTENT_UNKNOWN_RETAINED_UNSUPPORTED_COMPLETION",
+        "issues": [
+          "invents contact duty completion",
+          "unknowns empty though usability not asked is preserved only in a thought node",
+          "narrative is chiefly task description"
+        ],
+        "evidence": "node_006: 連絡係の業務完了"
+      },
+      "nine_b": {
+        "meaning": "CROSS_RECORD_RESULT_EDGE_AND_OMISSIONS",
+        "issues": [
+          "N02 (contact duty) -> N05 (all tools returned) result edge crosses separate records",
+          "omits wish to retain unanswered people, shorter wait, usability unknown and purchased result"
+        ],
+        "evidence": {
+          "from": "N02",
+          "to": "N05",
+          "relation": "結果",
+          "evidence": "A02-4"
+        }
+      }
+    },
+    {
+      "case_id": "FT-CHAIR-AFTER-CORRECTION",
+      "four_b": {
+        "meaning": "ACTOR_AND_JOY_REASON_CORRECTION_PRESERVED",
+        "issues": [
+          "audit tone; calls original erroneous instead of direct reception"
+        ],
+        "evidence": "喜びの理由は「捨てずにまた使えるようになったこと」"
+      },
+      "nine_b": {
+        "meaning": "CORRECTION_REFLECTED_WITH_UNSUPPORTED_EMOTION_REASON",
+        "issues": [
+          "adds prior self-efficacy, current relief, and repair-success reason"
+        ],
+        "evidence": "自己効力感に基づく喜び／再利用による安堵"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "four_b": {
+        "meaning": "DISTANCE_DIRECTION_REVERSED",
+        "issues": [
+          "rewrites felt distance from shared past as two people's closeness",
+          "conflicts with its own update_note"
+        ],
+        "evidence": "二人の距離が縮まった"
+      },
+      "nine_b": {
+        "meaning": "CAUSE_AND_UNATTAINED_DREAM_COMPARISON_ADDED",
+        "issues": [
+          "makes absence of planning/promise a cause",
+          "adds falling behind in own dream and loss"
+        ],
+        "evidence": "自分が追いついていないという喪失感"
+      }
+    }
+  ],
+  "reviewers": {
+    "primary": "Karen, all six source inputs and twelve generated bodies",
+    "read_only_auxiliary": "compare_received_quality; compare_received_metrics; not human Product Read"
+  },
+  "recommendation": {
+    "priority_candidate": "Qwen3.5-4B for further offline preparation",
+    "adoption": false,
+    "nine_b_quality_advantage_demonstrated": false,
+    "additional_training_started": false,
+    "training_1_4_16_epoch_proposal": "ON_HOLD",
+    "next": "Prepare one bounded4B teaching/instruction change using existing Emlis teachers and explicitly identify absent Piece/Analysis examples. No paid execution automatically."
+  },
+  "teacher_coverage": {
+    "source": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl",
+    "sha256": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+    "total": 9,
+    "emlis_free": 9,
+    "initial": 6,
+    "after_answer": 3,
+    "topic_families": 6,
+    "piece": 0,
+    "analysis": 0,
+    "shop_direction_and_no_promise_already_taught": true,
+    "direct_human_reception_already_present": true,
+    "teacher_unchanged": true,
+    "teacher_quality_finally_approved": false,
+    "new_base_failure_does_not_prove_teacher_absent_or_unlearnable": true
+  },
+  "limits": [
+    "six known development snapshots; one output per model/case",
+    "no adapter/training in this comparison",
+    "same A40; no small-GPU fit or concurrency benchmark",
+    "PyTorch memory is not whole-GPU production capacity",
+    "load may include weight download; not serverless cold-start measurement",
+    "wrapper time is not total Pod billing",
+    "no proof of profit at680/1480, formal Product Read, adoption, generalization or learning limits"
+  ]
+}

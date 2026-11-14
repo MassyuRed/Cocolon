@@ -1,0 +1,245 @@
+{
+  "status": "KNOWN_REASON_AND_NEGATION_QUALIFIERS_REPAIRED_RESEARCH_ONLY",
+  "date_jst": "2026-11-05",
+  "plan_commit": "8899a27bf7b59097696037f527998463568506f4",
+  "weekly_section": 178,
+  "trial_readme_section": 142,
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "profile": "selected_material.v5",
+  "runner_sha256": "06b31fc677e247812ef0326325c0e3c797f06192089099b321269ba162eb8cea",
+  "parent_archive_id": "libfile_70c4e57dc7b881919451c025885fcdc5",
+  "explicit_research_initial_reselection": "0587/a36e, not normal or automatic adoption",
+  "updates": 16,
+  "measurement_forwards": 32,
+  "model_loads": 2,
+  "diagnostic_forwards": 0,
+  "new_generations": 30,
+  "reused_before_responses": 30,
+  "seconds": 510.4121730327606,
+  "stage_exits": [
+    {
+      "phase": "train",
+      "exit": 0
+    },
+    {
+      "phase": "after",
+      "exit": 0
+    }
+  ],
+  "cpu": {
+    "status": "CPU_PASSED_NO_MODEL",
+    "seconds": 13.6886749798432,
+    "runner_sha256": "06b31fc677e247812ef0326325c0e3c797f06192089099b321269ba162eb8cea",
+    "teachers_unchanged": 16,
+    "selected_rows": 1,
+    "selected_spans": 2,
+    "selected_union_tokens": 21,
+    "target_character_spans": [
+      [
+        237,
+        275
+      ],
+      [
+        426,
+        461
+      ]
+    ],
+    "already_matching_teacher_ids": [
+      "AT04",
+      "AT11",
+      "AT17",
+      "AT24"
+    ],
+    "before_responses": 30,
+    "before_candidates": 30,
+    "before_typed": 19,
+    "model_loads": 0,
+    "model_forwards": 0,
+    "max_seconds": 900,
+    "normal_adoption": false
+  },
+  "selected_spans": {
+    "RU02": {
+      "ce_indices": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "first_character_divergence": 237,
+      "parts": [
+        {
+          "scope_role": "WRITTEN_REASON",
+          "qualifier_kind": "REASON_MARKER",
+          "target_char_start": 237,
+          "target_char_end": 275,
+          "ce_indices": [
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73
+          ],
+          "boundary_overlap_positions": [
+            2846
+          ]
+        },
+        {
+          "scope_role": "ATTRIBUTIVE_CONTENT",
+          "qualifier_kind": "NEGATION",
+          "target_char_start": 426,
+          "target_char_end": 461,
+          "ce_indices": [
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128
+          ],
+          "boundary_overlap_positions": [
+            2902
+          ]
+        }
+      ]
+    }
+  },
+  "span_measurements": [
+    {
+      "phase": "before",
+      "losses": {
+        "RU02": {
+          "union_mean": 0.13416190445423126,
+          "parts": [
+            {
+              "kind": "REASON_MARKER",
+              "mean_ce": 0.25567397475242615,
+              "tokens": 11
+            },
+            {
+              "kind": "NEGATION",
+              "mean_ce": 0.0004986271378584206,
+              "tokens": 10
+            }
+          ]
+        }
+      }
+    },
+    {
+      "phase": "after",
+      "losses": {
+        "RU02": {
+          "union_mean": 0.005269693210721016,
+          "parts": [
+            {
+              "kind": "REASON_MARKER",
+              "mean_ce": 0.00989067554473877,
+              "tokens": 11
+            },
+            {
+              "kind": "NEGATION",
+              "mean_ce": 0.00018661264039110392,
+              "tokens": 10
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "teacher_nll_before": 0.0015147032102049707,
+  "teacher_nll_after": 0.0003635536224919633,
+  "raw_same": 28,
+  "raw_changed_ids": [
+    "OA01",
+    "YREASON01"
+  ],
+  "semantic_repairs": [
+    "YREASON01=RU02_REASON_MARKER_AND_ATTRIBUTIVE_NEGATION"
+  ],
+  "teacher_json_matching": {
+    "RU02": true,
+    "AT04": true,
+    "AT11": true,
+    "AT17": true,
+    "AT24": true
+  },
+  "other_change": "OA01 explicit actor quote excludes topic particle; same source actor and semantics.",
+  "before_candidate": 30,
+  "after_candidate": 30,
+  "before_typed": 19,
+  "after_typed": 19,
+  "prior_graph_and_visible_preserved": 19,
+  "new_typed": [],
+  "lost_typed": [],
+  "new_semantic_regressions_in_30": [],
+  "known_teacher_replay_not_general_quality": true,
+  "saved_replay": {
+    "responses": 60,
+    "candidate": 60,
+    "typed": 38,
+    "generation_compiler_author_forbidden": true,
+    "projection_sidecar_matches": true
+  },
+  "first_cpu_metadata_error": {
+    "status": "DURATION_INVALID_PRESERVED",
+    "cause": "Elapsed-time start shadowed by rendered character offset",
+    "first_runner_sha256": "972456853afffd0d7498a7627f63502006a3f58105249fcbac64583e38414ef5",
+    "model_loads": 0,
+    "model_forwards": 0,
+    "repair": "Rename character-offset variables only and prepare once afresh",
+    "first_and_final_spans_identical": true,
+    "originals_in_archive": "first_cpu/ and first_cpu.log"
+  },
+  "initial_weights_unchanged": true,
+  "new_weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
+  "new_config_sha256": "933c124413a8486d79a5da3c151321cf8d0e1622165b6241ddde38939933721c",
+  "archive": {
+    "library_file_id": "libfile_52b7b011dd948191be9aaf39947e97a8",
+    "file_name": "Cocolon_Analysis_v5_qualifier2_20261105.zip",
+    "bytes": 15718068,
+    "sha256": "558d0229d14a264cf6c6409d987f0b06d97efcb46d08b774cae31a5a237e49fc",
+    "members": 576,
+    "manifest_members": 575,
+    "crc_all_bytes_sha_verified": true,
+    "parent_dependencies_retrieved_separately": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_code_change": false,
+  "deployment": false,
+  "db_write": false,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "gpu_end": "2 MiB, 0 %",
+  "compute_apps": "",
+  "pod_rental_maintained": true,
+  "next_work": "Compare four new untrained near-transfer texts on 0587 and new7ba4 without learning. Preserve normal typed/ensure limitations; mixed-source semantic proof, attribution, residual context display and saved-reader connection remain unfinished."
+}

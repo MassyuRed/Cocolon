@@ -1,0 +1,32 @@
+{
+  "kind": "CPU_TRAINING_PROJECTIONS_NOT_MODEL_QUALITY",
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "original_teacher_sha256": "13db26e7927d54ead34daa302ebc2932687cd1cc653d9f3414687d7470829827",
+      "reconstructed_teacher_bytes_exact": true,
+      "decoded_native_candidate_evidence_exact": true,
+      "all_original_subtrees_disjoint_complete": true,
+      "all_original_prose_binds_and_updates_exact": true,
+      "reused_original_teacher_semantic_body_and_cold": true,
+      "reused_evidence_sha256": "a5190bc352da6e887b344738b2982fc5ad48f0f076322e6437358a47a1257be9"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "original_teacher_sha256": "5377068ff786356b8e79e8b79508842305cb952bdde5f374e03d994d343e8d4a",
+      "reconstructed_teacher_bytes_exact": true,
+      "decoded_native_candidate_evidence_exact": true,
+      "all_original_subtrees_disjoint_complete": true,
+      "all_original_prose_binds_and_updates_exact": true,
+      "reused_original_teacher_semantic_body_and_cold": true,
+      "reused_evidence_sha256": "a5190bc352da6e887b344738b2982fc5ad48f0f076322e6437358a47a1257be9"
+    }
+  ],
+  "auxiliary_gold_conditioning": "B receives fixed A only; no final updates/prose are inputs. Final full evaluation gets neither auxiliary task nor gold A.",
+  "original_353_tests_reused": true,
+  "new_semantic_admissions": 0,
+  "new_cold_reads": 0,
+  "model_loads": 0,
+  "generations": 0,
+  "sql_operations": 0
+}

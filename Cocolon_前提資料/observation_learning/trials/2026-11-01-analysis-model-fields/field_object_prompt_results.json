@@ -1,0 +1,121 @@
+{
+  "schema_version": "analysis_field_object_prompt_results.v1",
+  "work_date": "2026-11-06",
+  "status": "COMPLETE_LOCAL_RECOVERY_RESEARCH_ONLY_NOT_ADOPTED",
+  "api_commit": "ff36d037fba5149e40a060eb37934ef414f46d22",
+  "runner_commit": "79c157877f8c5272ed1c65e77ac04a4690b26033",
+  "profile": "selected_material.v11",
+  "comparator": "Exact original before14 on fixed a2e with selected_material.v10; reconsumed on current API before inference.",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "source_records": 21,
+  "input_fields": 28,
+  "max_input_tokens": 4649,
+  "model_loads": 1,
+  "new_generation": 14,
+  "training_updates": 0,
+  "new_teachers": 0,
+  "evaluation_to_teacher_conversions": 0,
+  "generation_retries": 0,
+  "seconds": 155.3132125204429,
+  "before": {
+    "requests": 14,
+    "generated": 12,
+    "mapped": 16,
+    "nodes": 26,
+    "unparsed_in_generated": 1
+  },
+  "after": {
+    "requests": 14,
+    "generated": 13,
+    "mapped": 18,
+    "nodes": 30,
+    "unparsed_in_generated": 1
+  },
+  "partial_generated_requests": [
+    "HC01"
+  ],
+  "recovered_requests": [
+    "HC03"
+  ],
+  "rejected_requests": [
+    "HC10"
+  ],
+  "retained_raw_graph_text_count_requests": [
+    "HC01",
+    "HC02",
+    "HC04",
+    "HC05",
+    "HC06",
+    "HC07",
+    "HC08",
+    "HC09",
+    "AE05",
+    "AP07_v7",
+    "AP08_v7",
+    "OP02_v7"
+  ],
+  "changed_raw_requests": [
+    "HC03",
+    "HC10"
+  ],
+  "local_recovery": "HC03 now has two separate field objects; category-distinct records retain fact/wish independently with four nodes, each record count one, and no inferred edge.",
+  "unresolved": {
+    "HC01": "Positive past-wish has an invalid WRITTEN_MODIFIER; same raw and one whole record remains unparsed.",
+    "HC10": "Three separate objects now contain a duplicate field key each. Strict rejection remains; changed raw is not a semantic recovery."
+  },
+  "source_evidence_checked": 34,
+  "saved_candidate_non_generation_reload": 13,
+  "response_replays": 14,
+  "replay_scope": "Candidate saved-state reload and same-raw graph/text reconstruction; not current/monthly RPC or live DB persistence.",
+  "failed_launch": {
+    "cause": "Missing required existing optional-target PYTHONPATH",
+    "seconds": 0.0184405529871583,
+    "model_loads_started": 0,
+    "model_loads": 0,
+    "new_generation": 0,
+    "retained": true,
+    "separate_success_root": true
+  },
+  "validation": {
+    "local_passed": 644,
+    "local_skipped": 20,
+    "local_subtests": 11,
+    "skip_reason": "SQL runtime not configured",
+    "ci_run": 42234794559,
+    "ci_conclusion": "success",
+    "ci_generation_passed": 2578,
+    "ci_generation_skipped": 1,
+    "ci_generation_subtests": 12059,
+    "ci_shared_owner_passed": 1,
+    "ci_cumulative_passed": 302,
+    "ci_cumulative_subtests": 2,
+    "ci_sql_source_records": 201,
+    "ci_sql_month_references": 15
+  },
+  "gpu": {
+    "immediate_file": "2 MiB, 54 %",
+    "later_fresh_ui_check": "2 MiB, 0 %; compute apps empty",
+    "later_check_record": "analysis-field-object-v11-20261106.png"
+  },
+  "private_bundle": {
+    "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-f14ecc77797481919a089435d6c47d10_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "bytes": 737195,
+    "members": 60,
+    "sha256": "c3efbffedb1da7f50019d2498cf4f26e3319c003eeecb5d23e8d936816d9796d",
+    "jupyter_original_sha256": "aeb829d1747af7dbf4d56435e3e1aee66ccef7a7620761e59f2642d7121cab90"
+  },
+  "normal_adoption": false,
+  "deployed": false,
+  "db_writes": 0,
+  "structure_map_delta": "NONE",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "human_product_acceptance": false,
+  "limits": [
+    "Known fixtures and retention controls, not blind population accuracy.",
+    "13 generated requests include one partial request; there is one whole-request rejection.",
+    "No raw repairs, strict-reader relaxation, relabeling, new training or automatic model adoption.",
+    "Implicit roles, personal criteria, judgment/choice, inter-record meaning, IF/Saved and real-device quality remain unfinished."
+  ],
+  "next_work": "Repair duplicate-key generation for the three-field original/supplement configuration while preserving source fields and strict admission; do not repeat the rejected existing23 training."
+}

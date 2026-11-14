@@ -1,0 +1,173 @@
+{
+  "status": "CPU_SOURCE_GUIDANCE_VERIFIED_NOT_MODEL_IMPROVEMENT",
+  "seconds": 4.787097355932929,
+  "source_sha256": {
+    "prompt_source_index.py": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96",
+    "check_source_index.py": "ee58201b44c6a1fa1486d0c32de7f703c97f0db7f14611b45ad420703eac09ae"
+  },
+  "frozen_files_unchanged": 200,
+  "checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "old_prompt_tokens": 4316,
+      "new_prompt_tokens": 4668,
+      "target_tokens": 492,
+      "prompt_plus_cap": 5308,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "old_prompt_tokens": 4844,
+      "new_prompt_tokens": 4844,
+      "target_tokens": 899,
+      "prompt_plus_cap": 5996,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "old_prompt_tokens": 5686,
+      "new_prompt_tokens": 5686,
+      "target_tokens": 283,
+      "prompt_plus_cap": 6198,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "old_prompt_tokens": 5951,
+      "new_prompt_tokens": 5951,
+      "target_tokens": 267,
+      "prompt_plus_cap": 6463,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "old_prompt_tokens": 6250,
+      "new_prompt_tokens": 6250,
+      "target_tokens": 220,
+      "prompt_plus_cap": 6634,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "old_prompt_tokens": 4468,
+      "new_prompt_tokens": 4825,
+      "target_tokens": 523,
+      "prompt_plus_cap": 5593,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "old_prompt_tokens": 5027,
+      "new_prompt_tokens": 5027,
+      "target_tokens": 1094,
+      "prompt_plus_cap": 6307,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "old_prompt_tokens": 6064,
+      "new_prompt_tokens": 6064,
+      "target_tokens": 236,
+      "prompt_plus_cap": 6448,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "old_prompt_tokens": 6282,
+      "new_prompt_tokens": 6282,
+      "target_tokens": 291,
+      "prompt_plus_cap": 6794,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "old_prompt_tokens": 6605,
+      "new_prompt_tokens": 6605,
+      "target_tokens": 293,
+      "prompt_plus_cap": 7117,
+      "target_eos_unchanged": true,
+      "material_semantics_unchanged": true
+    }
+  ],
+  "teachers": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "exact_reassembly": true,
+      "old_prompt_substitution_rejected": true,
+      "teacher_sha256": "8ed156667ec5390adf0a9da758c9a7d5336ad7c2278128887769fe4d064b5241"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "exact_reassembly": true,
+      "old_prompt_substitution_rejected": true,
+      "teacher_sha256": "bb28d66c7b43b7805ef2633c922315ff58a5817774ae25e3ac9329a873e6b3ef"
+    }
+  ],
+  "negative": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "kind": "duplicate_source",
+      "rejected": "source_identity_not_unique"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "kind": "snapshot_source_collision",
+      "rejected": "prior_snapshot_identity_invalid"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "kind": "field_value_not_string",
+      "rejected": "source_text_fields_invalid"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "kind": "duplicate_source",
+      "rejected": "source_identity_not_unique"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "kind": "snapshot_source_collision",
+      "rejected": "prior_snapshot_identity_invalid"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "kind": "field_value_not_string",
+      "rejected": "source_text_fields_invalid"
+    }
+  ],
+  "old9_encoding_unchanged": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "max_prompt_plus_cap": 7117,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "cuda_initialized": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "limitations": [
+    "CPU teacher reassembly is not free generation or new CMEE evidence.",
+    "Only stage1 metadata guidance changed; stages2-5 are byte-identical for the same previous candidates.",
+    "Earlier SHOP stage1 bound identities correctly, so latest failure is not proof of a learned-weight incapacity.",
+    "Frozen receiver, teacher, token caps and acceptance remain unchanged. New paid run requires separate bounded approval."
+  ]
+}

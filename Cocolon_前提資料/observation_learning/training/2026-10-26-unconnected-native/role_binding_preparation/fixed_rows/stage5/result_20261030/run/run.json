@@ -1,0 +1,215 @@
+{
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "source_commit": "fa2bdfa76c357e4931bca3bfa30510a5d7c993e4",
+  "plan": {
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "initial_adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+    "initial_adapter_path": "/workspace/cocolon_rehearsal13_run_20261029/adapter",
+    "evaluation_order": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "baseline_success_case_ids": [
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "context_tokens": 8192,
+    "per_generation_seconds": 180,
+    "parent_timeout_seconds": 2690,
+    "parent_kill_after_seconds": 10,
+    "prior_hourly_usd": 0.28,
+    "current_rate_requeried": false,
+    "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
+    "learning_rate": 5e-05,
+    "weight_decay": 0,
+    "gradient_clip": 1,
+    "seed": 20261024,
+    "recovery": "Preserve partial/final adapter, training log, raw/token IDs/metadata, all inputs/source, loaded/reloaded tensor tables and CMEE saved/cold evidence; export, CRC/bytes/hash verify outside Pod.",
+    "retry": false,
+    "new_gpu_rental": false,
+    "gpu_stop_restart_delete": false,
+    "new_dependencies": false,
+    "receiver_semantics_public_api_db_rn_render_supabase_merge_deploy": false,
+    "product_credit": 0,
+    "candidate_ready": false,
+    "automatic_progression": false,
+    "schema": "cocolon.stage5.v1",
+    "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+    "predecessor_commit": "249a92952457e88c960a028a3e0b44fe2bb5858d",
+    "original_train_sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+    "original_eval_sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
+    "max_updates": 19,
+    "max_model_loads": 2,
+    "max_generations": 19,
+    "max_gpu_process_seconds": 2700,
+    "max_process_usd": 0.21,
+    "stage_caps": {
+      "FT-BOOK-AFTER-ANSWER": [
+        640,
+        1152,
+        512,
+        512,
+        384
+      ],
+      "FT-SHOP-AFTER-ANSWER": [
+        768,
+        1280,
+        384,
+        512,
+        512
+      ]
+    },
+    "update_order": [
+      "FT-BOOK-AFTER-ANSWER/stage1",
+      "FT-SHOP-AFTER-ANSWER/stage1",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage2",
+      "FT-SHOP-AFTER-ANSWER/stage2",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage3",
+      "FT-SHOP-AFTER-ANSWER/stage3",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage4",
+      "FT-SHOP-AFTER-ANSWER/stage4",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "FT-BOOK-AFTER-ANSWER/stage5",
+      "FT-SHOP-AFTER-ANSWER/stage5",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "source_sha256": {
+      "consume_stage5.py": "92bf81c1ca52a72480753010efc911fc132c74f4208a533853feb70fc5650713",
+      "prepare_stage5.py": "d4dbf5af9bc5cc4cbcaa92691bab539dfb4fdf763a01a814ea1a0fdc3cdd43d7",
+      "run_stage5_once.py": "59311ef5f8caefa8aba26b1eee357fb69d32ca75ffd8aab63c4b1d857709eb83"
+    },
+    "approval": {
+      "owner": "Mash",
+      "proposal_commit": "249a92952457e88c960a028a3e0b44fe2bb5858d",
+      "received_date_jst": "2026-10-30",
+      "user_response": "進めていいよ。",
+      "scope": "One stage5 implementation/execution: CPU first; original pair lossless five-stage teachers10 + unchanged old9 each1 =19 updates from saved114466; save/nontraining reload; BOOK/SHOP at most5 calls each from own actual previous stages, assemble all13 paths mechanically with derived provider; existing CMEE/cold; old9 only if pair2/2; max45min/$0.21 GPU processing, preparation/recovery/holding etc extra."
+    },
+    "loss": "complete assistant plus EOS CE, exact original teachers split without omission; training-only gold previous; no token weighting",
+    "cmee": "Existing receipt/receiver/semantic snapshot/cold; raw and metadata exact plus external five-stage chain verification. No public API/schema change.",
+    "success": "Pair meaning/body/cold2/2, then actual old9 meaning/body/cold9/9; root full content review; no formal product credit.",
+    "stop": "One GPU run, no retry or raw repair. Invalid/unfinished stage stops that case; other independent case can proceed. Old9 skipped unless pair complete. Context/deadline/identity failure stops run.",
+    "scope": "Offline experiment only; minimal ordered field names match existing thirteen paths. No source/truth edits, admission relaxation, fallback, merge or deployment.",
+    "hypothesis": "Five smaller model outputs may remove full-packet completion failure; not established improvement or cost reduction.",
+    "cmee_cpu_included_in_process_deadline_and_cost": true
+  },
+  "started_unix": 1793323977.0445585,
+  "model_loads_started": 2,
+  "model_loads_completed": 2,
+  "training_forwards_started": 19,
+  "training_forwards_completed": 19,
+  "optimizer_steps_started": 19,
+  "optimizer_steps_completed": 19,
+  "model_calls_started": 3,
+  "model_calls_completed": 3,
+  "calls": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "path": "stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "a5b7cc15356cc219489c79514d46899b529f2f20cebe264a1afba214a4b36c57",
+      "messages_sha256": "3e9f83d98e94603b1b156b1cf68725603a4efc485a0c3d01c23a79cd09016dd3",
+      "adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+      "output_tokens": 640,
+      "eos_reached": false,
+      "seconds": 29.012366565992124,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "path": "stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "6f1060573003d34907c733669c3bc205b832c48197c719d5de9970ff0cf96899",
+      "messages_sha256": "76d2389c2d033517e77bbcffc3c1e7969142b389d497bcfd86aab61714973db3",
+      "adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+      "output_tokens": 498,
+      "eos_reached": true,
+      "seconds": 22.85683940409217,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "path": "stage2_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "0f7b8dc5770e2ee5f48e2322018a5637254f67edf0d163bb0fad99ac3ee3c6fe",
+      "messages_sha256": "697329fc91878b3892fca46d3ded8496bdbe36b56e53c96fce74374e740370ff",
+      "adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+      "output_tokens": 1276,
+      "eos_reached": true,
+      "seconds": 58.5481347120367,
+      "timeout_triggered": false
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stages_completed": 1,
+      "stage_failure": {
+        "stage": 1,
+        "reason": "stage_not_finished",
+        "finish_reason": "length"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stages_completed": 2,
+      "stage_failure": {
+        "stage": 2,
+        "reason": "stage_arity",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    }
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "elapsed_seconds": 453.66746679798234,
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "changed_tensors": 112,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "0404605c3736fd54d6f75d2dacf3254a10e6982f005a2765642ab230dceac1c9",
+    "adapter_model.safetensors": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818"
+  },
+  "error_type": "ValueError",
+  "reason": "new_pair_failed_skip_old9_no_retry",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/cocolon_stage5_pack_20261030/run_stage5_once.py\", line 223, in execute\n    stage.need(len(diagnosis['cases']) == 2 and all(c['meaning_adopted'] and c['body_available'] and\n  File \"/workspace/cocolon_stage5_pack_20261030/consume_stage5.py\", line 24, in need\n    raise ValueError(reason)\nValueError: new_pair_failed_skip_old9_no_retry\n",
+  "peak_allocated_bytes": 16867556864,
+  "peak_reserved_bytes": 24293408768,
+  "post_release_allocated_bytes": 17039360,
+  "frozen_inputs_and_initial_weights_unchanged": true,
+  "processing_seconds": 453.66746413800865,
+  "process_cost_usd": 0.035285247210734005
+}

@@ -1,0 +1,18 @@
+{
+  "training_checkpoint.tar.gz": {
+    "bytes": 3494749,
+    "sha256": "b91e02051c1d44288879db5c8c062b0ad9a477e8fa0ce52bf164cf6dfd90cf5a"
+  },
+  "consumer.json": {
+    "bytes": 1605267,
+    "sha256": "75afe7c3997247ead2e76ec7c05b7f4d8b63726c80fcf738f049ffec394a660b"
+  },
+  "launch.json": {
+    "bytes": 597,
+    "sha256": "fdfc917b60a09deb8d58fe27c8a8824517e8407274771df5bd27442f1c80555c"
+  },
+  "all9_gate.json": {
+    "bytes": 2821,
+    "sha256": "470f5cb0260c2b7b066492ec32b019ebdba831c854f4d1c2f117af7c17512fb9"
+  }
+}

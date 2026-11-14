@@ -1,0 +1,69 @@
+{
+  "status": "STATIC_INTEGRITY_RECEIPT_FOR_COMPLETED_48_SOURCE_BOUND_CPU_PREPARATION",
+  "plan_sha256": "ace9b8f8683aa55d50977bd4387bee819f6536c50da210ccf1810c9a0ca216d2",
+  "runner_sha256": "13daa18f6f13b041b55568af50bff43b7a66d8a3b4176c081bac068d993daba7",
+  "original40_rows_fully_equal": true,
+  "original40_canonical_list_sha256": "8ea07f334bc45338e7eec2666166119b9a4ad320e3276a845aa9e1860c872204",
+  "new8_prepared_candidate_ids": {
+    "NT01": "analysis-unit-candidate:c13739e52428ccd3668334110e17834cc8ad6cc5621ab1f0afd4b33fea068fd0",
+    "NT02": "analysis-unit-candidate:af5f9f14e4c8fcaa815c69bcf35db00478b3b22944832cddc2966c2169f4f896",
+    "NT03": "analysis-unit-candidate:6ee193bb88a93e3413a41932d0c3e0b2bb943465afe4dd3287c6045a3c001371",
+    "NT04": "analysis-unit-candidate:38d48ad9aa77555137c2de681b1f62278b12575f82a314c949b28bf271450c21",
+    "NT05": "analysis-unit-candidate:1a7de9f034b0d73ba22849cee3809bb1343440299409f0e98846363a2655fd6d",
+    "NT06": "analysis-unit-candidate:4b9b3a8457448b8377683ad61873db2b8166770347b9e0e0b0ba503b3694b7d4",
+    "NT07": "analysis-unit-candidate:889eb0a6a075cc3117cbd5d055e1e53702b5b388065b4e500b76050f68b5d07e",
+    "NT08": "analysis-unit-candidate:2cd5968f4a70a6204f68a9f9af42bccc011ea2073defd7078e9306278ddcda09"
+  },
+  "positions": [
+    {
+      "id": "NT01",
+      "root_unit_positions": [
+        1,
+        3,
+        5
+      ],
+      "unknown_root_unit_position": 5,
+      "unknown_root_ordinal": 3
+    },
+    {
+      "id": "NT02",
+      "root_unit_positions": [
+        1,
+        2,
+        4
+      ],
+      "unknown_root_unit_position": 4,
+      "unknown_root_ordinal": 3
+    },
+    {
+      "id": "NT03",
+      "root_unit_positions": [
+        1,
+        3,
+        5
+      ],
+      "unknown_root_unit_position": 5,
+      "unknown_root_ordinal": 3
+    },
+    {
+      "id": "NT04",
+      "root_unit_positions": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "unknown_root_unit_position": 7,
+      "unknown_root_ordinal": 4
+    }
+  ],
+  "new_DQ4_field_overlap_with_teachers": 0,
+  "reused_before_raw_count": 16,
+  "updates": {
+    "total": 64,
+    "original40_each": 1,
+    "new8_each": 3
+  },
+  "gpu_execution_not_asserted_by_this_receipt": true,
+  "not_additional_pytest_run": true
+}

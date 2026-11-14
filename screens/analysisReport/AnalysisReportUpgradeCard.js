@@ -51,8 +51,10 @@ export default function AnalysisReportUpgradeCard({
 
       {!tierLoading ? (
         <TouchableOpacity
-          style={[styles.paywallBtn, themed.paywallBtn]}
+          style={[styles.paywallBtn, themed.paywallBtn, disableActions && { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER }]}
           disabled={disableActions}
+          accessibilityRole="button"
+          accessibilityState={{ disabled: !!disableActions }}
           onPress={() => {
             if (disableActions) return;
             if (typeof onOpenSubscription === "function") {
@@ -70,14 +72,14 @@ export default function AnalysisReportUpgradeCard({
           }}
           activeOpacity={disableActions ? 1 : 0.85}
         >
-          <Text style={[styles.paywallBtnText, themed.paywallBtnText]}>
+          <Text style={[styles.paywallBtnText, themed.paywallBtnText, disableActions && { color: colors.TEXT_SUBTLE }]}>
             {cardCopy.ctaLabel}
           </Text>
           <Ionicons
             name="chevron-forward"
             size={18}
             color={
-              isDark
+              disableActions ? colors.TEXT_SUBTLE : isDark
                 ? colors.ACCENT_TEXT || colors.TEXT_ON_LIGHT
                 : ui?.text?.accentOnButton ?? colors.ACCENT_TEXT
             }

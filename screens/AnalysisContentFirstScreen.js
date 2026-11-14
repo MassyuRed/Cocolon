@@ -7,7 +7,7 @@ import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import AnalysisReportViewerScreen from "./AnalysisReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
-import KokoroWeatherCurrentCard from "./analysisReport/KokoroWeatherCurrentCard";
+import KokoroWeatherTimeline from "./analysisReport/KokoroWeatherTimeline";
 import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 import {
   AnalysisMenuScroll,
@@ -16,14 +16,14 @@ import {
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 const ANALYSIS_TABS = [
-  { key: "emotion", label: "こころ天気" },
+  { key: "emotion", label: "こころグラフ" },
   { key: "self", label: "わたしマップ" },
 ];
 
 const EMOTION_REPORT_TABS = [
-  { key: "daily", label: "こころ天気（日）" },
-  { key: "weekly", label: "こころ天気（週）" },
-  { key: "monthly", label: "こころ天気（月）" },
+  { key: "daily", label: "こころグラフ（日）" },
+  { key: "weekly", label: "こころグラフ（週）" },
+  { key: "monthly", label: "こころグラフ（月）" },
 ];
 
 function safeParseTutorialContentJson(raw) {
@@ -45,98 +45,151 @@ function createLocalStyles(colors, ui) {
     applyTypographyTokens(
       {
         tabBar: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottomWidth: 1,
-          borderBottomColor: colors.CARD_BORDER,
-          marginBottom: 14,
-        },
+      flexDirection: "row",
+      alignItems: "stretch",
+      justifyContent: "space-between",
+      gap: 8,
+      marginBottom: 16,
+    },
+        periodRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+      gap: 8,
+      marginBottom: 12,
+    },
         secondaryTabBar: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottomWidth: 1,
-          borderBottomColor: colors.CARD_BORDER,
-          marginBottom: 12,
-        },
+      flexDirection: "row",
+      alignItems: "stretch",
+      backgroundColor: colors.FIELD_BG,
+      borderRadius: 22,
+      padding: 3,
+      maxWidth: "100%",
+      flexShrink: 1,
+    },
         tabItemWrap: {
-          flex: 1,
-        },
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         tabItem: {
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: 10,
-          paddingHorizontal: 4,
-        },
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 44,
+      width: "100%",
+    },
         tabLabelWrap: {
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 9,
-          borderBottomWidth: 2,
-          borderBottomColor: "transparent",
-        },
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      minHeight: 44,
+      paddingVertical: 10,
+      paddingHorizontal: 10,
+      borderRadius: 24,
+      backgroundColor: colors.SURFACE_TONAL,
+      minWidth: 0,
+    },
         tabLabelWrapActive: {
-          borderBottomColor: colors.TITLE_GOLD,
-        },
+      backgroundColor: colors.GOLD_BUTTON,
+    },
+        periodTabItemWrap: {
+      minWidth: 44,
+      flexShrink: 0,
+    },
+        periodTabItem: {
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 44,
+      minWidth: 44,
+      paddingHorizontal: 2,
+      paddingVertical: 2,
+    },
+        periodTabLabelWrap: {
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 40,
+      minWidth: 40,
+      paddingVertical: 8,
+      paddingHorizontal: 10,
+      borderRadius: 20,
+      maxWidth: "100%",
+    },
+        periodTabLabelWrapActive: {
+      backgroundColor: colors.GOLD_BUTTON,
+    },
+        tabIcon: {
+      marginRight: 6,
+      flexShrink: 0,
+    },
         tabLabelRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      minWidth: 0,
+    },
+        periodTabLabelRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 0,
+    },
         tabLabelText: {
-          fontSize: 13,
-          fontWeight: "800",
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      color: colors.ON_SURFACE_TONAL,
+      flexShrink: 1,
+      minWidth: 0,
+      textAlign: "center",
+    },
         tabLabelTextActive: {
-          color: colors.TITLE_GOLD,
-        },
+      color: colors.ACCENT_TEXT,
+    },
         tabBadge: {
-          marginLeft: 6,
-          alignSelf: "center",
-        },
+      marginLeft: 6,
+      alignSelf: "center",
+      flexShrink: 0,
+    },
         updateLabel: {
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-          marginBottom: 10,
-        },
+      color: text.description ?? colors.TEXT_SUBTLE,
+      flexShrink: 1,
+      minWidth: 0,
+    },
+        selfUpdateLabel: {
+      marginBottom: 10,
+    },
         emptyCard: {
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          borderRadius: 16,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 16,
-          paddingVertical: 16,
-          marginBottom: 10,
-        },
+      borderRadius: 24,
+      backgroundColor: colors.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginBottom: 10,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
         emptyTitle: {
-          fontSize: 14,
-          fontWeight: "800",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+    },
         emptyText: {
-          marginTop: 6,
-          fontSize: 13,
-          lineHeight: 20,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 6,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
         connectionCard: {
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          borderRadius: 16,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 14,
-          marginBottom: 14,
-        },
+      borderWidth: 1,
+      borderColor: colors.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: colors.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginBottom: 14,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
         connectionTitle: {
-          fontSize: 14,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          marginBottom: 10,
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      marginBottom: 10,
+    },
         connectionRow: {
           borderTopWidth: 1,
           borderTopColor: colors.CARD_BORDER,
@@ -149,40 +202,42 @@ function createLocalStyles(colors, ui) {
           marginTop: 0,
         },
         connectionRowTitle: {
-          fontSize: 13,
-          fontWeight: "900",
-          color: colors.TITLE_GOLD,
-        },
+      color: colors.TITLE_GOLD,
+    },
         connectionRowText: {
-          marginTop: 4,
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 4,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
         loadingWrap: {
           paddingVertical: 24,
           alignItems: "center",
           justifyContent: "center",
         },
         historyInlineLink: {
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "flex-start",
-          paddingVertical: 6,
-          marginTop: 4,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      alignSelf: "stretch",
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      borderRadius: 18,
+      backgroundColor: colors.FIELD_BG,
+      marginTop: 4,
+      minHeight: 44,
+      maxWidth: "100%",
+    },
         historyInlineText: {
-          fontSize: 13,
-          fontWeight: "700",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          marginRight: 4,
-        },
+      color: colors.TITLE_GOLD,
+      marginRight: 4,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         historyInlineBadge: {
-          marginRight: 6,
-          alignSelf: "center",
-        },
+      marginRight: 6,
+      alignSelf: "center",
+      flexShrink: 0,
+    },
       },
-      ui
+      ui, {"tabLabelText":"button","updateLabel":"meta","emptyTitle":"sectionTitle","emptyText":"description","connectionTitle":"sectionTitle","connectionRowTitle":"button","connectionRowText":"description","historyInlineText":"button"}
     )
   );
 }
@@ -194,7 +249,6 @@ export default function AnalysisContentFirstScreen({
   tutorialRefs,
   emotionUpdateLabel,
   selfStructureUpdateLabel,
-  currentWeather = null,
   unreadEmotion = false,
   unreadSelfStructure = false,
   unreadDaily = false,
@@ -259,19 +313,7 @@ export default function AnalysisContentFirstScreen({
   );
   const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
   const currentEmotionHistoryLabel =
-    EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころ天気（日）";
-
-  const handleOpenPreviousKokoroWeather = () => {
-    if (typeof onOpenCurrentWeatherPrevious === "function") {
-      onOpenCurrentWeatherPrevious();
-      return;
-    }
-    setActiveAnalysisTab("emotion");
-    setActiveEmotionReportType("daily");
-    if (!isKokoroWeatherReportRecord(effectiveLatestReports?.daily)) {
-      onOpenDailyHistory?.();
-    }
-  };
+    EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころグラフ（日）";
 
   const handleOpenCurrentEmotionHistory = () => {
     if (activeEmotionReportType === "weekly") {
@@ -285,27 +327,32 @@ export default function AnalysisContentFirstScreen({
     onOpenDailyHistory?.();
   };
 
-  const renderTab = ({ tabKey, label, active, badgeVisible, onPress, targetRef = null }) => {
+  const renderTab = ({ tabKey, label, displayLabel = label, icon, active, badgeVisible, onPress, targetRef = null, period = false }) => {
     const content = (
       <CocolonPressable
-        style={localStyles.tabItem}
+        style={period ? localStyles.periodTabItem : localStyles.tabItem}
         onPress={isTutorialMode ? undefined : onPress}
         disabled={isTutorialMode}
+        accessibilityLabel={label}
+        accessibilityState={{ selected: active }}
       >
         <View
           style={[
-            localStyles.tabLabelWrap,
-            active && localStyles.tabLabelWrapActive,
+            period ? localStyles.periodTabLabelWrap : localStyles.tabLabelWrap,
+            active && (period ? localStyles.periodTabLabelWrapActive : localStyles.tabLabelWrapActive),
           ]}
         >
-          <View style={localStyles.tabLabelRow}>
+          <View style={period ? localStyles.periodTabLabelRow : localStyles.tabLabelRow}>
+            {icon ? (
+              <Ionicons name={icon} size={17} color={active ? colors.ACCENT_TEXT : colors.ON_SURFACE_TONAL} style={localStyles.tabIcon} />
+            ) : null}
             <Text
               style={[
                 localStyles.tabLabelText,
                 active && localStyles.tabLabelTextActive,
               ]}
             >
-              {label}
+              {displayLabel}
             </Text>
             {badgeVisible ? (
               <ScreenUnreadBadge
@@ -326,7 +373,7 @@ export default function AnalysisContentFirstScreen({
       );
     }
 
-    return <View key={tabKey} style={localStyles.tabItemWrap}>{content}</View>;
+    return <View key={tabKey} style={period ? localStyles.periodTabItemWrap : localStyles.tabItemWrap}>{content}</View>;
   };
 
   return (
@@ -351,20 +398,12 @@ export default function AnalysisContentFirstScreen({
         </View>
       </View>
 
-      {!isTutorialMode && currentWeather ? (
-        <KokoroWeatherCurrentCard
-          currentWeather={currentWeather}
-          colors={colors}
-          ui={ui}
-          onOpenPrevious={handleOpenPreviousKokoroWeather}
-        />
-      ) : null}
-
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>
           renderTab({
             tabKey: tab.key,
             label: tab.label,
+            icon: tab.key === "emotion" ? "bar-chart-outline" : "git-network-outline",
             active: activeAnalysisTab === tab.key,
             badgeVisible: tab.key === "emotion" ? unreadEmotion : unreadSelfStructure,
             onPress: () => setActiveAnalysisTab(tab.key),
@@ -375,22 +414,34 @@ export default function AnalysisContentFirstScreen({
 
       {activeAnalysisTab === "emotion" ? (
         <>
-          <View style={localStyles.secondaryTabBar}>
-            {EMOTION_REPORT_TABS.map((tab) =>
-              renderTab({
-                tabKey: tab.key,
-                label: tab.label,
-                active: activeEmotionReportType === tab.key,
-                badgeVisible:
-                  (tab.key === "daily" && unreadDaily) ||
-                  (tab.key === "weekly" && unreadWeekly) ||
-                  (tab.key === "monthly" && unreadMonthly),
-                onPress: () => setActiveEmotionReportType(tab.key),
-              })
-            )}
+          {!isTutorialMode ? (
+            <KokoroWeatherTimeline
+              colors={colors}
+              ui={ui}
+              period={{ daily: "today", weekly: "week", monthly: "month" }[activeEmotionReportType]}
+              onPeriodChange={(period) => setActiveEmotionReportType({ today: "daily", week: "weekly", month: "monthly" }[period])}
+            />
+          ) : (
+          <>
+          <View style={localStyles.periodRow}>
+            <View style={localStyles.secondaryTabBar}>
+              {EMOTION_REPORT_TABS.map((tab) =>
+                renderTab({
+                  tabKey: tab.key,
+                  label: tab.label,
+                  displayLabel: { daily: "日", weekly: "週", monthly: "月" }[tab.key],
+                  period: true,
+                  active: activeEmotionReportType === tab.key,
+                  badgeVisible:
+                    (tab.key === "daily" && unreadDaily) ||
+                    (tab.key === "weekly" && unreadWeekly) ||
+                    (tab.key === "monthly" && unreadMonthly),
+                  onPress: () => setActiveEmotionReportType(tab.key),
+                })
+              )}
+            </View>
+            <Text style={localStyles.updateLabel}>{emotionUpdateLabel}</Text>
           </View>
-
-          <Text style={localStyles.updateLabel}>{emotionUpdateLabel}</Text>
 
           <View ref={tutorialRefs?.reportRef} collapsable={false}>
             {effectiveHomeSummariesLoading && !currentEmotionReport ? (
@@ -416,6 +467,9 @@ export default function AnalysisContentFirstScreen({
             )}
           </View>
 
+          </>
+          )}
+
           {!isTutorialMode ? (
           <CocolonPressable
             style={localStyles.historyInlineLink}
@@ -439,7 +493,7 @@ export default function AnalysisContentFirstScreen({
         </>
       ) : (
         <>
-          <Text style={localStyles.updateLabel}>{selfStructureUpdateLabel}</Text>
+          <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
 
           <View ref={tutorialRefs?.selfReportRef} collapsable={false}>
             {isTutorialMode ? (
@@ -454,11 +508,12 @@ export default function AnalysisContentFirstScreen({
                 </View>
                 {tutorialWatashiMapContentJson ? (
                   <WatashiMapRenderer
+                    showPlanNotice={false}
                     contentJson={tutorialWatashiMapContentJson}
                     contentText={tutorialWatashiMapReport?.content_text || tutorialWatashiMapReport?.contentText || ""}
                     reportMode={tutorialWatashiMapReport?.report_mode || tutorialWatashiMapReport?.reportMode || "light"}
                     viewerTier={tutorialWatashiMapReport?.viewer_tier || tutorialWatashiMapReport?.viewerTier || "free"}
-                    periodLabel={tutorialWatashiMapReport?.period_label || tutorialWatashiMapReport?.periodLabel || "直近28日"}
+                    periodLabel={tutorialWatashiMapReport?.period_label || tutorialWatashiMapReport?.periodLabel || "練習用の表示例"}
                     colors={colors}
                     isDark={isDark}
                     onUpgradePress={onOpenSubscription}
@@ -502,3 +557,4 @@ export default function AnalysisContentFirstScreen({
     </AnalysisMenuScroll>
   );
 }
+

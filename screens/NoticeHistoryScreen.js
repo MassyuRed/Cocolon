@@ -4,15 +4,17 @@ import {
   Alert,
   FlatList,
   Platform,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -64,6 +66,8 @@ function formatNoticeDateTimeLabel(value) {
 }
 
 export default function NoticeHistoryScreen({ navigation, route }) {
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -72,12 +76,15 @@ export default function NoticeHistoryScreen({ navigation, route }) {
 
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadError, setLoadError] = useState(null);
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   const [nextOffset, setNextOffset] = useState(null);
   const [expandedId, setExpandedId] = useState(null);
   const [unreadCount, setUnreadCount] = useState(0);
   const handledOpenKeyRef = useRef("");
+  const loadSequenceRef = useRef(0);
+  useEffect(() => { setLoadingMore(false); }, [ownerRequest]);
 
   const requestedOpenId = String(route?.params?.open_notice_id || "").trim();
   const requestedOpenAt = String(route?.params?.open_notice_at || "").trim();
@@ -97,13 +104,18 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   }, []);
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++loadSequenceRef.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === loadSequenceRef.current;
+    setLoadError(null);
     if (append) setLoadingMore(true);
     else setLoading(true);
     try {
       const json = await getNoticesHistory({
         limit: HISTORY_PAGE_LIMIT,
         offset,
-      });
+      }, ownerRequest.options);
+      if (!isFresh()) return;
       const rows = Array.isArray(json?.items) ? json.items : [];
       setItems((prev) => mergeRows(prev, rows, append));
       setHasMore(Boolean(json?.has_more));
@@ -116,19 +128,15 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       );
       setUnreadCount(Math.max(0, Number(json?.unread_count) || 0));
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("NoticeHistoryScreen: load failed", e);
-      if (!append) {
-        setItems([]);
-        Alert.alert("お知らせ", "履歴の取得に失敗しました。");
-      }
-      setHasMore(false);
-      setNextOffset(null);
-      setUnreadCount(0);
+      setLoadError(append ? "more" : "initial");
     } finally {
+      if (!isFresh()) return;
       if (append) setLoadingMore(false);
       else setLoading(false);
     }
-  }, [mergeRows]);
+  }, [mergeRows, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
     load({ append: false, offset: 0 });
@@ -168,6 +176,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   }, []);
 
   const markReadForIds = useCallback(async (noticeIds) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const ids = (noticeIds || []).map((value) => String(value || "").trim()).filter(Boolean);
     if (!ids.length) return;
 
@@ -181,18 +190,19 @@ export default function NoticeHistoryScreen({ navigation, route }) {
 
     const fallbackUnreadCount = Math.max(0, unreadCount - targetUnreadIds.length);
     const readAt = new Date().toISOString();
-    markReadLocally(targetUnreadIds, readAt);
-    setUnreadCount(fallbackUnreadCount);
-
     try {
-      const res = await markNoticesRead({ notice_ids: targetUnreadIds });
+      const res = await markNoticesRead({ notice_ids: targetUnreadIds }, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
+      markReadLocally(targetUnreadIds, readAt);
+      setUnreadCount(fallbackUnreadCount);
       if (typeof res?.unread_count === "number") {
         setUnreadCount(Math.max(0, Number(res.unread_count) || 0));
       }
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("NoticeHistoryScreen: mark read failed", e);
     }
-  }, [items, markReadLocally, unreadCount]);
+  }, [items, markReadLocally, unreadCount, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
     if (!requestedOpenId || !requestedOpenKey) return;
@@ -208,6 +218,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   }, [items, markReadForIds, requestedOpenId, requestedOpenKey]);
 
   const handleToggleItem = useCallback((item) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const noticeId = String(item?.notice_id || "").trim();
     if (!noticeId) return;
     setExpandedId((prev) => {
@@ -217,9 +228,10 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       }
       return next;
     });
-  }, [markReadForIds]);
+  }, [markReadForIds, ownerRequest, isOwnerCurrent]);
 
   const openInternalRoute = useCallback((routeName, params = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return false;
     const safeRouteName = String(routeName || "").trim();
     if (!safeRouteName) return false;
     try {
@@ -236,21 +248,23 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       // noop
     }
     return false;
-  }, [navigation]);
+  }, [navigation, ownerRequest, isOwnerCurrent]);
 
   const handlePressAction = useCallback(async (item, action) => {
-    if (!action) return;
+    if (!action || !isOwnerCurrent(ownerRequest)) return;
 
     if (!item?.is_read && item?.notice_id) {
       await markReadForIds([String(item.notice_id)]);
     }
 
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       await openNoticeAction(action, { openInternalRoute });
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
     }
-  }, [markReadForIds, openInternalRoute]);
+  }, [markReadForIds, openInternalRoute, ownerRequest, isOwnerCurrent]);
 
   const loadMore = useCallback(async () => {
     if (loading || loadingMore || !hasMore || nextOffset == null) return;
@@ -268,11 +282,12 @@ export default function NoticeHistoryScreen({ navigation, route }) {
         <CocolonPressable
           style={styles.itemHeader}
           onPress={() => handleToggleItem(item)}
-          accessibilityLabel="お知らせ詳細を開く"
+          accessibilityLabel={expanded ? "お知らせ詳細を閉じる" : "お知らせ詳細を開く"}
+          accessibilityState={{ expanded }}
         >
           <View style={styles.itemHeaderLeft}>
             <Text style={styles.itemDay}>{formatNoticeDateLabel(item?.published_at)}</Text>
-            <Text style={styles.itemTitle} numberOfLines={2}>
+            <Text style={styles.itemTitle}>
               {item?.title || "お知らせ"}
             </Text>
           </View>
@@ -368,12 +383,20 @@ export default function NoticeHistoryScreen({ navigation, route }) {
         </View>
       );
     }
+    if (loadError === "initial") {
+      return (
+        <View style={styles.emptyCard}>
+          <Text style={styles.emptyText} accessibilityRole="alert">お知らせを読み込めませんでした。</Text>
+          <CocolonButton variant="secondary" onPress={() => load({ offset: 0 })}>もう一度読み込む</CocolonButton>
+        </View>
+      );
+    }
     return (
       <View style={styles.emptyCard}>
         <Text style={styles.emptyText}>まだ表示できるお知らせはありません。</Text>
       </View>
     );
-  }, [colors.TEXT_SUBTLE, loading, styles]);
+  }, [colors.TEXT_SUBTLE, load, loadError, loading, styles]);
 
   const footer = useMemo(() => {
     if (loadingMore) {
@@ -383,22 +406,34 @@ export default function NoticeHistoryScreen({ navigation, route }) {
         </View>
       );
     }
+    if (loadError === "initial" && items.length > 0) {
+      return (
+        <View style={styles.emptyCard}>
+          <Text style={styles.emptyText} accessibilityRole="alert">更新できませんでした。前回の内容を表示しています。</Text>
+          <CocolonButton variant="secondary" onPress={() => load({ offset: 0 })}>もう一度読み込む</CocolonButton>
+        </View>
+      );
+    }
     if (hasMore) {
       return (
+        <View>
+          {loadError === "more" ? <Text style={styles.helpText} accessibilityRole="alert">続きを読み込めませんでした。</Text> : null}
         <CocolonPressable
+          containerStyle={styles.loadMoreContainer}
           style={styles.loadMoreBtn}
           onPress={loadMore}
-          accessibilityLabel="さらにお知らせを読み込む"
+          accessibilityLabel={loadError === "more" ? "続きをもう一度読み込む" : "さらにお知らせを読み込む"}
         >
-          <Text style={styles.loadMoreText}>さらに表示</Text>
+          <Text style={styles.loadMoreText}>{loadError === "more" ? "続きをもう一度読み込む" : "さらに表示"}</Text>
         </CocolonPressable>
+        </View>
       );
     }
     return <View style={{ height: 4 }} />;
-  }, [colors.TEXT_SUBTLE, hasMore, loadMore, loadingMore, styles]);
+  }, [colors.TEXT_SUBTLE, hasMore, items.length, load, loadError, loadMore, loadingMore, styles]);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -424,38 +459,50 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
     },
     container: {
       flex: 1,
-      paddingHorizontal: 20,
-      paddingTop: 16,
+      paddingHorizontal: 0,
+      paddingTop: 0,
     },
     listContent: {
       paddingBottom: 24,
       flexGrow: 1,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
+      paddingHorizontal: 20,
+      paddingTop: 16,
     },
     header: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       marginBottom: 16,
+      gap: 12,
+      minWidth: 0,
     },
     backButton: {
       padding: 4,
+      width: 44,
+      minWidth: 44,
+      minHeight: 44,
+      flexShrink: 0,
     },
     headerTitle: {
-      fontSize: 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_ON_LIGHT,
+      flex: 1,
+      flexShrink: 1,
+      minWidth: 0,
+      textAlign: "center",
     },
     headerSpacer: {
-      width: 22,
+      width: 44,
+      flexShrink: 0,
     },
     helpText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
       marginBottom: 12,
     },
     unreadSummaryRow: {
@@ -463,12 +510,11 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
       marginBottom: 12,
       gap: 8,
+      flexWrap: "wrap",
     },
     unreadSummaryText: {
-      fontSize: 12,
-      lineHeight: 18,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     loadingWrap: {
       alignItems: "center",
@@ -477,24 +523,22 @@ function createStyles(COLORS, ui) {
     },
     loadingText: {
       marginTop: 8,
-      fontSize: 13,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
     emptyCard: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 18,
+      backgroundColor: COLORS.PANEL_BG,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 14,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     emptyText: {
-      fontSize: 13,
       color: COLORS.TEXT_ON_LIGHT,
     },
     itemCard: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 18,
+      backgroundColor: COLORS.PANEL_BG,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       marginBottom: 12,
@@ -502,96 +546,97 @@ function createStyles(COLORS, ui) {
     },
     itemHeader: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       justifyContent: "space-between",
-      paddingHorizontal: 14,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      minHeight: 44,
+      gap: 12,
     },
     itemHeaderLeft: {
       flex: 1,
-      paddingRight: 12,
+      paddingRight: 0,
+      minWidth: 0,
     },
     itemHeaderRight: {
       alignItems: "flex-end",
       justifyContent: "center",
+      flexShrink: 0,
     },
     itemUnreadBadge: {
       marginBottom: 8,
       alignSelf: "flex-end",
     },
     itemDay: {
-      fontSize: 11,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_SUBTLE,
       marginBottom: 4,
     },
     itemTitle: {
-      fontSize: 14,
-      lineHeight: 20,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     itemBody: {
-      paddingHorizontal: 14,
-      paddingBottom: 14,
+      paddingHorizontal: 20,
+      paddingBottom: 20,
       borderTopWidth: 1,
       borderTopColor: COLORS.CARD_BORDER,
     },
     bodyText: {
       marginTop: 12,
-      fontSize: 14,
-      lineHeight: 22,
       color: COLORS.TEXT_ON_LIGHT,
     },
     bodyLinkText: {
       color: COLORS.TITLE_GOLD,
       textDecorationLine: "underline",
-      fontWeight: "700",
     },
     metaBlock: {
       marginTop: 12,
     },
     metaText: {
-      fontSize: 11,
-      lineHeight: 17,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
       marginBottom: 4,
     },
     categoryChip: {
       marginTop: 10,
       alignSelf: "flex-start",
-      borderRadius: 999,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 12,
       paddingVertical: 6,
+      maxWidth: "100%",
     },
     categoryChipText: {
-      fontSize: 11,
-      lineHeight: 15,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.ON_SURFACE_TONAL,
       textTransform: "capitalize",
+      flexShrink: 1,
     },
     ctaButtonWrap: {
       marginTop: 12,
     },
-    loadMoreBtn: {
+    loadMoreContainer: {
       marginTop: 6,
-      borderRadius: 16,
+      width: "100%",
+      maxWidth: 520,
+      alignSelf: "center",
+    },
+    loadMoreBtn: {
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
+      backgroundColor: COLORS.SURFACE_TONAL,
       alignItems: "center",
       justifyContent: "center",
-      paddingHorizontal: 14,
+      paddingHorizontal: 20,
       paddingVertical: 12,
+      minHeight: 44,
     },
     loadMoreText: {
-      fontSize: 13,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.ON_SURFACE_TONAL,
+      textAlign: "center",
+      flexShrink: 1,
     },
-  }, ui));
+  }, ui, {"headerTitle":"screenTitle","helpText":"description","unreadSummaryText":"description","loadingText":"description","emptyText":"body","itemDay":"meta","itemTitle":"sectionTitle","bodyText":"body","bodyLinkText":"body","metaText":"meta","categoryChipText":"description","loadMoreText":"button"}));
 }

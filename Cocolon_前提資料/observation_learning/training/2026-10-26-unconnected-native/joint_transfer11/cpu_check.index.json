@@ -1,0 +1,84 @@
+{
+  "schema": "cocolon.lossless_utf8_parts.v1",
+  "original_name": "cpu_check.json",
+  "bytes": 1835003,
+  "sha256": "c51eed5701afa8a8dad95594eb151ad4889649eb515e71473d2f2792761f4e69",
+  "reconstruct": "Concatenate UTF-8 bytes of parts in listed order; no separators or newline additions.",
+  "parts": [
+    {
+      "path": "cpu_check.part-000.txt",
+      "bytes": 131114,
+      "sha256": "980d7717eca4820af694ca8a8887aa655b8e090afbfe148e16e858f80587882e"
+    },
+    {
+      "path": "cpu_check.part-001.txt",
+      "bytes": 128164,
+      "sha256": "370531be5ce4d7196da25aa129e5e7c159e6c395a76e003ecbe95a239781dd0e"
+    },
+    {
+      "path": "cpu_check.part-002.txt",
+      "bytes": 133786,
+      "sha256": "d894ed5624dbabed82f1901e59d85fa4545504521c13cb25a0aa90ea0976b977"
+    },
+    {
+      "path": "cpu_check.part-003.txt",
+      "bytes": 129034,
+      "sha256": "89abaffa992e1d8e638dae4b0fef2de4d8f77e3b25a652bbd2e2edaebfaf9d61"
+    },
+    {
+      "path": "cpu_check.part-004.txt",
+      "bytes": 134614,
+      "sha256": "33445f5d0d98cc21bcde7df5bcbf981730437d9c83bee2b98479f2d365888043"
+    },
+    {
+      "path": "cpu_check.part-005.txt",
+      "bytes": 129610,
+      "sha256": "bfbc0a249e808c966ee7591e2fd6db0ca86dfc22329a67132a43789221316fba"
+    },
+    {
+      "path": "cpu_check.part-006.txt",
+      "bytes": 128710,
+      "sha256": "7e7ddffcd500568563cb23820dd473a39b8e08dc73afd847930f9d64e57ffa19"
+    },
+    {
+      "path": "cpu_check.part-007.txt",
+      "bytes": 129192,
+      "sha256": "457b842253aa5011024409df4390ad1196422a35a07bf744ff3f8a9815330e14"
+    },
+    {
+      "path": "cpu_check.part-008.txt",
+      "bytes": 129456,
+      "sha256": "b5bb72a4b0176d20ce9198c6f2dda05a4491f3390898b6b8e0371e730894ba94"
+    },
+    {
+      "path": "cpu_check.part-009.txt",
+      "bytes": 129362,
+      "sha256": "8267a86d1f35d2db33bbb5e5bf92c0e016edfcfe54fb4a283a6e5537651a1800"
+    },
+    {
+      "path": "cpu_check.part-010.txt",
+      "bytes": 129136,
+      "sha256": "9c005e9b66fea372bfaa22fb79be0c4dbe306cb36c27214de43b822a14ddf8d6"
+    },
+    {
+      "path": "cpu_check.part-011.txt",
+      "bytes": 129244,
+      "sha256": "f65fe59833be222e51d07c911961879925cc6db78601a914541dde7403370c1f"
+    },
+    {
+      "path": "cpu_check.part-012.txt",
+      "bytes": 125180,
+      "sha256": "8a8f2927aa79d1c6a37f425f8c58790a04d3d4eb9a433a8fe820aaddeae6f645"
+    },
+    {
+      "path": "cpu_check.part-013.txt",
+      "bytes": 125632,
+      "sha256": "563f53499e2ddb5336a7aab436a0f9ec129e11cdd7b9a3772c9cb2e9f087874a"
+    },
+    {
+      "path": "cpu_check.part-014.txt",
+      "bytes": 22769,
+      "sha256": "04e46f0753deac835350c4d67a049c4353bdc5b48f5852669099eece7ff16d88"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "status": "SAVED_AND_IDENTITY_APPLIED",
+  "name": "cocolon-prior-rows2-originals-20261029.zip",
+  "bytes": 2829165,
+  "sha256": "b69f7cb0b9c6e47a120491d4068aeebb0c6bf58ebd52f5bc1049884cd9d34015",
+  "member_count": 202,
+  "payload_count": 201,
+  "library_file_id": "libfile_bcb2caa7fdb481918c4a590df598d5e5",
+  "file_id": "file_000000007ba88206bc77f3b5b06d27c7",
+  "version": 0,
+  "identity_xattrs_applied": true,
+  "new_weights_created": false,
+  "unchanged_weights_archive": {
+    "library_file_id": "libfile_9623b67a65588191926a1bb0a0ea5797",
+    "name": "cocolon-rehearsal13-weights-originals-20261029.zip",
+    "bytes": 60053438,
+    "sha256": "71741059ee92e627ea4183186b554d04ffc245ae857c6fd1bf1654217b6498d9"
+  },
+  "note": "Current archive has raw/token IDs/CMEE/source/CPU/frozen nonweight originals. Four unchanged full adapter files remain in the prior complete weights archive, referenced by exact byte counts/SHA256. No base/optimizer/RNG checkpoint claim."
+}

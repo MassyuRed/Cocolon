@@ -1,18 +1,22 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
 import {
   ActivityIndicator,
   Modal,
   Pressable,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { ACCOUNT_WIRE } from "../../lib/compat/legacyWireContracts";
 
 function VisibilitySettingRow({
   styles,
+  colors,
   title,
   description,
   isPublic,
@@ -36,39 +40,44 @@ function VisibilitySettingRow({
         <TouchableOpacity
           style={[
             styles.visibilityChoiceBtn,
+            disabled && { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER },
             publicActive && styles.visibilityChoiceBtnActive,
           ]}
           onPress={onPressPublic}
           activeOpacity={0.85}
           disabled={disabled || publicActive}
+          accessibilityRole="button" accessibilityLabel={`${title}：公開`} accessibilityState={{ selected: publicActive, disabled: disabled || publicActive }}
         >
           <Text
             style={[
               styles.visibilityChoiceText,
+              disabled && { color: colors.TEXT_SUBTLE },
               publicActive && styles.visibilityChoiceTextActive,
             ]}
           >
-            公開
+            {publicActive ? "✓ " : ""}公開
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[
             styles.visibilityChoiceBtn,
+            disabled && { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER },
             privateActive && styles.visibilityChoiceBtnActive,
-            { marginLeft: 8 },
           ]}
           onPress={onPressPrivate}
           activeOpacity={0.85}
           disabled={disabled || privateActive}
+          accessibilityRole="button" accessibilityLabel={`${title}：非公開`} accessibilityState={{ selected: privateActive, disabled: disabled || privateActive }}
         >
           <Text
             style={[
               styles.visibilityChoiceText,
+              disabled && { color: colors.TEXT_SUBTLE },
               privateActive && styles.visibilityChoiceTextActive,
             ]}
           >
-            非公開
+            {privateActive ? "✓ " : ""}非公開
           </Text>
         </TouchableOpacity>
       </View>
@@ -92,19 +101,25 @@ export default function AccountVisibilitySection({
       transparent
       animationType="fade"
       onRequestClose={closeAccountSettings}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
+      <SafeAreaProvider style={{ flex: 1 }}>
       <Pressable
         style={styles.modalBackdrop}
         onPress={closeAccountSettings}
       />
 
-      <View style={styles.settingsModalCard}>
+      <SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }} pointerEvents="box-none">
+      <View style={{ flex: 1, justifyContent: 'center', padding: 20 }} pointerEvents="box-none">
+      <View style={styles.settingsModalCard} accessibilityViewIsModal>
+      <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ paddingBottom: 4 }}>
         <View style={styles.settingsModalHeader}>
           <TouchableOpacity
             style={styles.nameModalCloseBtn}
             onPress={closeAccountSettings}
             disabled={visibilitySaving}
             activeOpacity={0.8}
+            accessibilityRole="button" accessibilityLabel="アカウントの設定を閉じる"
           >
             <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
           </TouchableOpacity>
@@ -123,12 +138,13 @@ export default function AccountVisibilitySection({
         </View>
 
         {visibilityLoading ? (
-          <ActivityIndicator style={{ marginTop: 14 }} />
+          <ActivityIndicator color={colors.TITLE_GOLD} style={{ marginTop: 14 }} accessibilityLabel="公開設定を読込中" />
         ) : (
           <View style={{ marginTop: 10 }}>
             <VisibilitySettingRow
               styles={styles}
-              title="ピースの公開設定"
+              colors={colors}
+              title="アカウントの公開設定"
               description="非公開にすると、フォロー時に承認が必要になります。おすすめにも表示されなくなります"
               isPublic={!accountVisibility.is_private_account}
               onPressPublic={() =>
@@ -145,21 +161,11 @@ export default function AccountVisibilitySection({
               }
               disabled={visibilitySaving}
             />
-            <VisibilitySettingRow
-              styles={styles}
-              title="ランキング表示設定"
-              isPublic={!!accountVisibility.is_ranking_visible}
-              onPressPublic={() =>
-                patchAccountVisibilityMe({ is_ranking_visible: true })
-              }
-              onPressPrivate={() =>
-                patchAccountVisibilityMe({ is_ranking_visible: false })
-              }
-              disabled={visibilitySaving}
-            />
+
 
             <VisibilitySettingRow
               styles={styles}
+              colors={colors}
               title="ユーザーID表示設定"
               isPublic={!!accountVisibility.is_share_code_public}
               onPressPublic={() =>
@@ -172,7 +178,7 @@ export default function AccountVisibilitySection({
             />
           </View>
         )}
-      </View>
+      </ScrollView></View></View></SafeAreaView></SafeAreaProvider>
     </Modal>
   );
 }

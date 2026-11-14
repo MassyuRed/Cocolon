@@ -1,0 +1,186 @@
+{
+  "status": "CPU_TRANSFER11_READY_NO_MODEL",
+  "optimizer_steps": 11,
+  "training_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "AUX-A-FT-BOOK-AFTER-ANSWER",
+    "AUX-B-FT-BOOK-AFTER-ANSWER",
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "AUX-A-FT-SHOP-AFTER-ANSWER",
+    "AUX-B-FT-SHOP-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "original19_and_eval_unchanged": true,
+  "initial_adapter_sha256": "afaa2c2e2f7263792d5cf9930bb2fac0bf44bdccd04ff2ffa8049a2cfd2f12d2",
+  "model_calls_planned": 11,
+  "pretrained_model_loads": 0,
+  "model_forwards": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "current_api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "current_cmee_manifest_sha256": "419fe80988ef3738f6ac070e512cb9bd098074c6a29918b004a0a238318ad696",
+  "evaluation_messages_exact": 11,
+  "gold11_meaning_and_body": 11,
+  "tokenizer_records": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "total_tokens": 3081,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "AUX-A-FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 3633,
+      "target_tokens": 2312,
+      "total_tokens": 5945,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "AUX-B-FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 5207,
+      "target_tokens": 607,
+      "total_tokens": 5814,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4387,
+      "target_tokens": 2913,
+      "total_tokens": 7300,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "total_tokens": 6055,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "AUX-A-FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 3785,
+      "target_tokens": 2527,
+      "total_tokens": 6312,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "AUX-B-FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 5533,
+      "target_tokens": 717,
+      "total_tokens": 6250,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4539,
+      "target_tokens": 3238,
+      "total_tokens": 7777,
+      "all_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "total_tokens": 3363,
+      "all_target_and_eos_supervised": true
+    }
+  ],
+  "series_tokens": 66974,
+  "cuda_initialized": false,
+  "seconds": 14.661742234020494,
+  "teacher_controls": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "format": "cocolon.cmee.named_reference_candidate.v1",
+      "prompt_tokens": 4387,
+      "max_new_tokens": 3712,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "format": "cocolon.cmee.named_reference_candidate.v1",
+      "prompt_tokens": 4539,
+      "max_new_tokens": 3584,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 1750,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 3827,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 1746,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 3842,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 1743,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 3825,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 1778,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 1773,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "prompt_tokens": 1777,
+      "max_new_tokens": 2560,
+      "meaning_adopted": true,
+      "body_available": true
+    }
+  ]
+}

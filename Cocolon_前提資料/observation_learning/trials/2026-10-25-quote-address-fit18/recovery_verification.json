@@ -1,0 +1,20 @@
+{
+  "schema": "cocolon.quote18_completed_recovery.v1",
+  "archive_bytes": 6963640,
+  "archive_sha256": "b053dbcffa494c609aca33b1d4c4aaccb9274b31670211cc44435f3359d99065",
+  "archive_members": 19,
+  "verified_manifest_targets": 18,
+  "all_member_bytes_and_sha256_verified": true,
+  "adapter_sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+  "matches_previously_recovered_weights": true,
+  "finite_f32_tensors": 32,
+  "source_commit": "1a34c9688228628adfaab8021db572dc2b0aceb0",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "raw_sha256": "21787a79c2ecf5e1a60b47e5b9590bb18423d263ae88dc927e2b256b8eb5bb5d",
+  "consumer_bytes": 1604374,
+  "consumer_sha256": "a0852d1ac15819dbafd239728b459b6e477ea25e982f9184901041801b0b5713",
+  "consumer_reconstruction_verified": true,
+  "local_verification_note": "Initial screen hash transcription expectation was incorrect; assert stopped before extraction. Pod displayed hash was rechecked in two 32-character halves and only the expectation was corrected. Downloaded bytes unchanged.",
+  "gpu_stop_restart_delete_operations": 0,
+  "product_accepted": false
+}

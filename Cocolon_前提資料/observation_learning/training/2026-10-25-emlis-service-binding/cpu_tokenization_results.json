@@ -1,0 +1,94 @@
+{
+  "schema": "cocolon.emlis_service_binding_tokenization.v1",
+  "rows": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 2076,
+      "full_training_tokens": 3450,
+      "assistant_including_eos_tokens": 1374,
+      "generation_budget": 2048,
+      "context_limit": 8192,
+      "truncation": false,
+      "eos_and_prefix_verified_by_existing_encode_training": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 5030,
+      "full_training_tokens": 7360,
+      "assistant_including_eos_tokens": 2330,
+      "generation_budget": 2048,
+      "context_limit": 8192,
+      "truncation": false,
+      "eos_and_prefix_verified_by_existing_encode_training": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 2072,
+      "full_training_tokens": 3446,
+      "assistant_including_eos_tokens": 1374,
+      "generation_budget": 2048,
+      "context_limit": 8192,
+      "truncation": false,
+      "eos_and_prefix_verified_by_existing_encode_training": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 5045,
+      "full_training_tokens": 7378,
+      "assistant_including_eos_tokens": 2333,
+      "generation_budget": 2048,
+      "context_limit": 8192,
+      "truncation": false,
+      "eos_and_prefix_verified_by_existing_encode_training": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 2069,
+      "full_training_tokens": 3433,
+      "assistant_including_eos_tokens": 1364,
+      "generation_budget": 2048,
+      "context_limit": 8192,
+      "truncation": false,
+      "eos_and_prefix_verified_by_existing_encode_training": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 5028,
+      "full_training_tokens": 7367,
+      "assistant_including_eos_tokens": 2339,
+      "generation_budget": 2048,
+      "context_limit": 8192,
+      "truncation": false,
+      "eos_and_prefix_verified_by_existing_encode_training": true
+    }
+  ],
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "real_tokenizer": true,
+  "weights_loaded": false,
+  "gpu_used": false,
+  "post_check": {
+    "schema": "cocolon.emlis_service_binding_postcheck.v1",
+    "new_service_or_teacher_generations": 0,
+    "old_teacher_semantic_and_text_fingerprints": {
+      "INITIAL": "af8a36604315776d68c242266f58fb8f272eef54bec24299445145ebb9cc4fb3",
+      "CORRECTION": "52e895f750d3f3d8eefde920fc757cf36851efcf158ebe54de9974cf7730f708"
+    },
+    "old_teacher_semantic_and_text_match_count": 6,
+    "observed_legacy_generation_budget": 2048,
+    "observed_legacy2048_exceeded": [
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+    ],
+    "legacy2048_all_completions_fit": false,
+    "proposed_generation_budget": 2560,
+    "proposed_max_prompt_tokens": 5632,
+    "proposed2560_fits": true,
+    "context_limit": 8192,
+    "targets_truncated_or_shortened": false,
+    "training_performed": false,
+    "actual_inference_budget_changed_by_this_cpu_check": false,
+    "note": "Original measured generation_budget=2048 rows remain unchanged; 2560 is a separate plan feasibility check."
+  }
+}

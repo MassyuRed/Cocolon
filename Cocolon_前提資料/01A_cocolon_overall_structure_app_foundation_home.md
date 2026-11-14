@@ -1,3 +1,74 @@
+> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
+
+> **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
+
+> **11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。 [範囲・検証・残件§9.40](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)。
+
+> **11/12・三中核の実4B比較7件と保存抜け修復：** Mashの具体的承認後、既存Podで7件を一回・98.351秒、全HTTP200/stop。学習・再試行・提供再起動0、PID73476／health200を前後維持。撤回後の既発行問いが本文へ再出力・保存される実抜けをAPI `4183126d00c2ed4238c526cf17f6b28cdbb18dc6`で修復し、同rawの2保存維持／1拒否・非生成再読と関連103件成功を確認。Piece旧新は原2欄の完全コピー・編集改善0、CMEE2拒否。Analysis旧新の図／本文とartifact再読は成立し、新v2の場面引用を保持するが、反復・誤字・関係説明等の品質は未達。Piece／Analysisのexact SQL保存は未実施、通常採用／live反映／端末・全補助経路は未完。 [実原本・前後比較・保存範囲](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-actual7-20261112>)。
+
+> **11/12・AR-02の問い設定を入力から保存後の応答へ接続：** RN `e6aabd332970b3cf159d5e8a495ecb67aed92f5f`、API `dc6dfad00cccc4345d00508c7851a06e288ddadf`。入力画面に「Emlisからの問いを受け取る」を追加し、初回ON・同じ端末の本人別に前回選択を保持。選択を既存の入力保存時に固定し、新規natural／finite Q3ともOFFでは問いを出さず本文を返す。中断後の開始・保存済みthreadの再読でも選択を保持。新旧RN93件、新API21件を含む63件の隔離検証が成功。通常反映はmigration→API→RNの順で、現時点のlive DB／Render配置／新build・本人端末確認は0。二入力訂正・実4B品質と全補助経路は未完。 [保存・互換・確認範囲](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-question-receiving-20261112>)。
+
+> **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの問い／回答更新、Pieceの内容選択、明示Analysisのsource意味責務・図／本文を既存ownerへ接続。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
+
+> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+
+`STRUCTURE_MAP_DELTA_PRESENT`：既存EmlisThreadModal/SemanticWatashiMapのdismiss ACK資産をPieceの既存2ownerへ適用し、研究36335452で実native6frame成功を確認した同じ製品2/単体2fileを今回の通常Draft変更単位へ採用する。native harnessは通常側へ採用せず、配置/配布は未実施。研究2dddc0a3の`tests/fixtures/piece-ar04-configured3-host.json`（Free録画051/007の明示wire投影）とnative harness接続は先行検証として継承する。
+
+| 既存path | 今回の責務差分・採用範囲 |
+|---|---|
+| `screens/input/InputPieceActionArea.js` | 本文なしのpending receipt/owner遷移identity、presentation epoch、ACK後再確認・失効/再開を所有 |
+| `components/piece/PiecePreviewModal.js` | 閉じた同じiOS Modalを内容なしで保持し、native onDismissをhostへ返す。認可/保存/native fitを所有しない |
+| `tests/piece-v2-preview-display.test.js`、`tests/piece-v2-initial-save-host.test.js` | ACK・旧ACK・owner/source/runtime変更・取消し後の再openを既存経路で確認 |
+| `tests/native/piece-rn-canvas-entry.js`、`tests/native/piece-rn-canvas-ios.m` | 研究36335452だけ。手動ACKなしで閉要求→ACK後遷移→saved mountの順序/boolを新同1methodで実証。通常側への採用なし |
+
+公開API/DB/route/native型・renderer・8秒は不変、新controllerなし。全6研究pathと採用4pathの対応、固定source SHA、研究CI成功と新normal head CI非実行の区別は上記trialへ戻る。
+
+> **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
+
+> 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
+
+> **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
+
+> 11/1最新はweekly第9回§39。6801の応答UIをMashが確認。Piece preview422と時計への重なりを受領し、既存modalの安全領域/案内文を修復。候補/配布/本人確認を区別する。
+
+> 2026-11-01後続差分：関連資料・本人補足/訂正・Analysis複数補足・候補SHA指定と実DB適用。配置/配布/実機・累積月次は未完。末尾[差分](#related-material-20261101)とweekly§33。
+
+> 2026-11-01最新差分：共通3欠陥・Piece export許可/再照合・iOS URL復帰・Android AAB手順。source実装/局所検証まで、配置・実機は未確認。末尾の[差分](#release-structure-20261101)と第9回weekly§32を参照。
+
+> 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
+> 2026-10-19最新差分：u354。本人の不明を「今は／現在は嬉しくない」へ訂正した後の本文停止を、既存意味・全plan・selectedを変えずに修復。対象技術検証188件・保存DTO16件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。
+
+> 2026-10-19最新差分：u353（10/18明示承認）。初回の元経験・本人説明・独立不明を、実回答／訂正・撤回／旧再開／保存再表示と一体で修復。新private3型・logical90。限定単位の技術検証まで完了、PRODUCT_NOT_CLEAR・正式Product Read0/3・candidate_ready=false・automatic_progression=falseは維持。詳細は[u353実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
+> 2026-10-18最新診断：u352。初回に既述の「期待されているように感じて、重かった」が返答から欠落することを、初回7件と実pending回答4件で比較。初回説明を元経験とともに保持する一体案を具体化し、Rule18 §11.3 LEVEL3の意味・選択差分は判断待ち・未実装。否定訂正は具体的対象の照応化と独立readerの不整合まで切り分け、修復候補を記録。今回production／test／fixture変更0、文書6fileのみ。詳細は[u352診断・判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)。
+
+> 2026-10-18最新：u350。Mash承認済みの「安堵・寂しさ＋別経験」を不明なし／ありの両方で初回・既受理一更新・旧保存互換・再表示へ保持する限定契約。private logical83→87、既存production10owner・新production0、STRUCTURE_MAP_DELTA_PRESENT。構造差分は末尾、実本文・検証結果・残件は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)を参照。PRODUCT_NOT_CLEARを維持。
+
+> 2026-10-18最新：u348。Mash承認済みの「安堵・寂しさ＋別経験＋現在の不明」を初回・既受理1更新・旧互換・保存再表示まで実装。初回3対象／2責務、更新後4対象／3責務。private V2二型追加、STRUCTURE_MAP_DELTA_PRESENT。実測・残件は末尾と[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)を参照。
+
+> 2026-10-18最新：u347。混在初回の原文反復を既承認内で修復。独立不明へのReceptionは初回〜1更新・保存を一体とする限定案まで具体化し、意味保持契約の判断待ち・未実装。末尾と[u347監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u347_InitialReliefLayout_and_UnknownDecision_20261018.md)を参照。
+
+> 最新EmlisAI file追跡：末尾u342。既存production3fileの逆順関係修復と旧checkpoint互換。STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡：末尾u341。既存production1fileの程度参照修復。STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡：末尾u340。既存3production ownerの別時点contrast表示修復。STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡：末尾u336。既存8production file内の実Observation共同保持。STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡：末尾u335。source認識・旧modeの既存3owner、STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡：末尾u334。既存9owner、私有保持contract2＋decision版。STRUCTURE_MAP_DELTA_PRESENT。
+
+> 最新EmlisAI file追跡：末尾u333。既存3owner、test／fixture追加。STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡：末尾u332。STRUCTURE_MAP_DELTA_PRESENT（承認済み内部内容契約）。
+
+> 最新EmlisAI file追跡は末尾u331（2026-10-18）。具体的対比の参照と独立関係読解。STRUCTURE_MAP_DELTA_NONE。
+
+> 最新EmlisAI file追跡は末尾u330（2026-10-18）。既存OP／thread_engine内のscalar不明と別欄行動の受け取り修復。STRUCTURE_MAP_DELTA_NONE。
+
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
 revision_date: "2026-06-05"
@@ -6,6 +77,8 @@ revision_date: "2026-06-05"
 # 01A. アプリ基盤とHome系
 
 この章では App root / provider / Home screen / notice / today-question / reflection preview / frontend Home API boundary / backend Home API / home_gateway / startup / EmlisAI immediate reply をまとめて扱う。
+
+> 最新EmlisAI file追跡は末尾u329（2026-10-18）。既存observation_plan内の行動誤分類・派生関係修復と追加検査・凍結fixtureを記録する。STRUCTURE_MAP_DELTA_NONE。
 
 ## A1. App root / provider / build boundary
 
@@ -2279,9 +2352,9 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/navigation/InputStackNavigator.js` | Input stack route定義。route名は変更しない |
 | `Cocolon/navigation/AnalysisStackNavigator.js` | Analysis stack route定義。AnalysisからPiece deep dive導線を維持する |
 | `Cocolon/navigation/PieceStackNavigator.js` | Piece stack route定義。PieceLibrary / EmotionLog / TutorialFlow route名を維持する |
-| `Cocolon/navigation/RankingStackNavigator.js` | Ranking stack route定義 |
+| `Cocolon/navigation/RankingStackNavigator.js` | historicalな非接続source。§43候補でMainTabsからimport/routeを撤去 |
 | `Cocolon/navigation/SettingsStackNavigator.js` | Settings stack route定義 |
-| `Cocolon/navigation/MainTabs.js` | tab bar / unread badge / startup warmup / self-structure bannerを扱う |
+| `Cocolon/navigation/MainTabs.js` | 4 tab / unread badge / startup warmup / self-structure banner。§43候補はprovider/Home/draft初期準備まで子をmountしたまま全面loading、初回完了後はrefreshで戻さない |
 | `Cocolon/navigation/RootNavigator.js` | auth gate、IAP observer、push token sync、root runtimeを扱う |
 | `Cocolon/runtime/AppRuntimeBootstrapGate.js` | `/app/bootstrap` refreshとbootstrap失敗監視を扱う |
 | `Cocolon/runtime/AppRuntimeBlockingScreen.js` | minimum version block / maintenance表示境界 |
@@ -2297,6 +2370,8 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/screens/input/inputLayoutModel.js` | memo input height / keyboard-aware layout helper |
 | `Cocolon/screens/input/inputNoticeModel.js` | welcome notice popup判定 |
 | `Cocolon/screens/input/useInputDraftPersistence.js` | 下書き保存・復元・破棄・blur/background保存 |
+| `Cocolon/screens/input/useEmlisQuestionPreference.js` | 本人別の問い受取設定、非同期読込／保存・切替世代と送信時の確定値 |
+| `Cocolon/lib/emlisQuestionPreferenceStorage.js` | 本人別AsyncStorageのload/save/clear。同本人の処理だけを直列化し、削除時も先行保存後に消す |
 | `Cocolon/screens/input/useInputFeedbackModal.js` | Emlis返答modal開閉とtutorial後Analysis遷移 |
 | `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | memo/memoActionの高さ・keyboard inset・focus scroll |
 | `Cocolon/screens/input/InputEmotionSection.js` | 感情選択UI section |
@@ -2344,6 +2419,8 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/screens/input/inputLayoutModel.js` | memo input height / keyboard layout helper |
 | `Cocolon/screens/input/inputNoticeModel.js` | welcome notice判定 |
 | `Cocolon/screens/input/useInputDraftPersistence.js` | 下書き保存・復元・破棄・blur/background保存 |
+| `Cocolon/screens/input/useEmlisQuestionPreference.js` | 本人別の問い受取設定、非同期読込／保存・切替世代と送信時の確定値 |
+| `Cocolon/lib/emlisQuestionPreferenceStorage.js` | 本人別AsyncStorageのload/save/clear。同本人の処理だけを直列化し、削除時も先行保存後に消す |
 | `Cocolon/screens/input/useInputFeedbackModal.js` | Emlis返答modalとtutorial後Analysis遷移 |
 | `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | keyboard inset / memo height / focus scroll |
 | `Cocolon/screens/input/InputEmotionSection.js` | 感情選択UI |
@@ -2953,3 +3030,4153 @@ P0-P1 Step 0〜10後のHome / Input immediate replyでは、EmlisAIの表示可�
 | Product surface validation | `emlis_ai_product_surface_validation.py` | rn_visibleとproduct_surface_validを分け、runtime/display/state/two_stageはstrict維持。 |
 | Display contract | `tests/test_emlis_ai_display_contract.py` | Red A/B1/B2を現行contractへ更新し、safe recoveryとbody leak禁止を両立する。 |
 | RN contract | `Cocolon/tests/rn-screen-contracts.test.js` | RNはsource lineageで分岐せず、`passed + commentText` の既存契約だけを守る。 |
+
+## 2026-09-11 Q2差分 — 元入力に所属するEmlis一往復
+
+保存済み `emotions.id` → Q2 thread service → ANSWER/MEANING_UPDATE/OBSERVATIONの別commit → 専用認証API → Input/HistoryのEmlisThreadModal。元入力保存と国家fanoutの後に分岐し、補足回答で国家入力件数・通知・Astor queue・Piece/Analysis materialを増やさない。元入力/account削除はFK cascade、閲覧は既存retentionに従う。旧I5と共用Piece返信modalはdevelopment OFF時の境界を保持。
+
+新設/変更全fileと直接変更しない影響ownerの役割表は [current_structure/01_emlis_ai_current_structure.md](current_structure/01_emlis_ai_current_structure.md) の2026-09-11 Q2節へ集約する。稼働DB適用・端末確認・本番接続は未成立。旧snapshot件数や旧全file inventoryを今回の全体再生成・新headのfresh証明として扱わない。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→本人回答で観測を深める」体験を担当する。回答・続行・フレーム操作は元入力に所属し、国家の入力件数・課金event・通知・Astor queueを増やさない。原入力の保存と既存fanoutは`emotion_submit_service`、履歴の閲覧期限は既存`publish_governance`が所有する。Piece／Analysisの入力許可、TodayQuestionの回答schema、旧I5 public wireを拡張しない。共有CMEE→既存Human Reception作者→Sentence Surface→独立逆検証の順を継承し、外部生成AIや別本文rendererは追加しない。
+
+Q3の全変更ownerと本文確認した影響先は[current structure / EmlisAIの末尾Q3節](current_structure/01_emlis_ai_current_structure.md)を参照。通常入力・履歴の専用modalから本人続行とフレーム編集を行い、sourceの所有者・現在権限をserverで確認する。共通基盤の認証、親入力削除、課金権限、履歴保持、旧I5経路との接点を保持する。
+
+Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
+
+実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。
+
+
+## 2026-09-11 Q4差分 — 元入力の所有者と単一観測経路
+
+/app/bootstrap → AppRuntimeContext → Input/Historyのthread readerを接続。serverのlegacy/development/active/read_onlyで生成経路を一つ選び、旧clientへは保存済みcurrent本文だけを旧comment_textへ返す。停止中も本人の回答・意味訂正・履歴を保持する。RootNavigatorはuser IDでprivate tabを再作成し、InputScreenの送信/preview/publish/cancelは開始ownerと認証tokenのsessionを照合する。late responseは旧画面へ反映しない。
+
+元emotions保存 → 国家fanout → Emlis観測の順と、件数・花・通知・Astor・Piece/Analysis/TodayQuestionの責務は保持する。回答・続行・frameは新規感情入力ではない。変更fileと本文確認した影響先の正確な役割表は[current_structure/01 のQ4節](current_structure/01_emlis_ai_current_structure.md)。Q4のAPI/RN実装とローカル検証を、稼働DB・端末・課金・商品合格・公開へ換算しない。
+
+## 2026-10-14 u253 — Emlis承認済み限定変更の地図差分
+
+Mashが「記録した限定変更で実装を進めてよろしいですか」に「進めていいよ」と明示承認したため、`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014` は APPROVED_FOR_BOUNDED_IMPLEMENTATION。u252／weekly §5.6.2のNOT_APPROVEDは承認前の履歴であり、同じ実装を再承認待ちへ戻さない。承認は商品合格、配置、公開境界変更の承認ではない。
+
+既存の ObservationPlan → thread projection → input-specific meaning → Stage1内容投影 → 唯一のHuman Reception作者 → Sentence Surface／独立inverse → 保存済み本文read の配置を維持し、明示評価と独立行動を保持する内部contractを限定更新した。STRUCTURE_MAP_DELTA_PRESENT。新production file／service／公開routeは0。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の限定責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 原入力の明示評価と対象のsource-owned関係、既存主体／行為statusによる非実行等の除外、独立行動の保持。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | 許可された対象付き評価＋本人実行行動だけcomponent契約へ入り、canonical Planとの照合を行う。 |
+| `cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | 同一対象の競合を保ち、独立組を全requiredの一つのwhole readingへ集約する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 私有versioned appraisal、全bundle所有、bundle-local difference witnessと独立検証。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 選択済み対象と評価をtyped Reception内容へ投影し、現行manifestを更新する。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 同じ選択済みconfigurationと候補からReception内容を再導出して照合する。 |
+| `emlis_ai_grounded_human_reception.py` | typed評価の対象・肯否・時点・程度を唯一の作者で文章化する。経験の受け取り内容は未完成。 |
+| `emlis_ai_grounded_sentence_surface.py` | 元評価関係を回答時点の評価へ変換せずObservationへ残す。 |
+| `emlis_ai_grounded_observation_gate.py` | 対象・主体・肯否・時点・程度を本文から読み、sourceと選択済み内容へ独立照合する。 |
+
+検査配置：新規`ai/tests/test_cmee_emlis_result_appraisal.py`、既存`ai/tests/test_cmee_v1a_i1sx_contracts.py`、現行snapshot`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史的IM03 proofは変更しない。保存／DTO／RN表示のownerは既存`emlis_thread_service.py`・`emlis_thread_store.py`・`screens/input/useEmlisThread.js`・`screens/input/EmlisThreadModal.js`のままでsource変更なし。
+
+状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。
+
+設計の規範は8/28文書末尾と詳細02、詳細地図はcurrent_structure/01・04、検証と残件は06／API handoff u253。原入力保存・国家fanout・件数・花・通知・Astor・Piece／Analysis／TodayQuestionの責務は不変。
+
+
+### u254 — 評価撤回と旧意味再開の責務差分（2026-10-14 JST）
+
+u253の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。新production file/実行service/作者は追加しない。
+
+| 既存file | 今回の責務差分 |
+|---|---|
+| `cocolon_meaning_experience_engine/emlis_answer_update.py` | 唯一の原文全文に属するappraisal両端の撤回。旧checkpoint又は真正な旧質問に合致する既知旧Planの厳密再導出。 |
+| `emlis_ai_grounded_observation_plan.py`・`cocolon_meaning_experience_engine/emlis_question.py` | private keywordでpre-appraisal投影を再導出。通常生成は現行投影。 |
+| `cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q2のappraisal/旧Planも既存thread realizerへPrepared Planを渡す。NO_MATERIAL_UPDATEも同じ意味を保持。 |
+| `emlis_ai_grounded_sentence_surface.py`・`emlis_ai_grounded_observation_gate.py` | 評価撤回後の対象を過去factとして表示し、独立inverseも現在感覚化・評価復活を拒否。 |
+| `emlis_thread_service.py` | 本文生成と同じcheckpoint_refでeffective_plan_refを再導出し保存。 |
+
+検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`と現行identity snapshot、新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_checkpoint_v1.json`（未変更c458で実生成した合成checkpoint/question）に配置。保存store/SQL/公開DTO/API/RN/依存の契約は不変。Q2/Q3の旧pending再試行、旧完成本文の再read、旧Q2真正質問への新規回答、撤回後の保存/RN表示を確認。全過去版・Premium全履歴互換の保証ではない。
+
+最終限定検査84PASS、共有4fileは196PASS/3FAILで旧3失敗をbaseline再現。詳細は06/API handoff u254。**PRODUCT_NOT_CLEAR**：経験の受け取り本文、評価の肯否訂正、対象だけ撤回した評価の残存は未完了。source保持と再開の修正を最初の一体単位の完成へ換算しない。
+
+
+### u255 — 評価訂正と単独対象撤回の意味・本文責務（2026-10-14 JST）
+
+`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014`の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。既存の意味更新→共有作者→独立本文検証→保存readの配置は同じ。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の差分 |
+|---|---|
+| `cocolon_meaning_experience_engine/emlis_answer_update.py` | 評価の置換sourceから肯否・時点・程度・継続を再導出。保存u254のPARTIAL checkpointは旧訂正parserの完全再導出と一致で再開する。 |
+| `emlis_ai_grounded_observation_plan.py` | 訂正評価のABOUT所有と、対象撤回後に独立して残る評価を区別する。原文有限述語と意味codesを照合する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択済みLIMITED material受容内で訂正評価の対象と時点を文章化。対象撤回後に新しい対象を補わない。 |
+| `emlis_ai_grounded_sentence_surface.py`・`emlis_ai_grounded_observation_gate.py` | 評価・時点を本文に残し、sourceから独立に再照合する。肯否復活・対象乗換え・回答時点への付替えを拒否する。 |
+
+検査配置は既存`ai/tests/test_cmee_emlis_result_appraisal.py`と現行shared owner identity、新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_correction_checkpoint_v1.json`（未変更8d635579の旧PARTIAL実生成2件）。production新file/service/外部AI、公開API/DTO/DB/SQL/RN、依存の変更はない。旧pre-appraisal互換・単一作者・Route A・他中核と国家の責務を保つ。
+
+評価関連107PASS、Q2/Q3 application54PASS、現行identity1PASS。Q1の3失敗とQ3既存撤回関連14失敗は開始headでも再現し、全回帰合格とはしない。保存3本文のRN表示・履歴展開・再openも確認したがnative実機ではない。詳細は正本06／API handoff u255。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 単独評価の肯否訂正と対象撤回は今回改善。経験の受け取り内容形成、複数評価の初回停止と撤回group、明示「今は」を含む訂正時点、same100・本人実機・正式Product Readは残る。今回の本文保持と互換を最初の一体単位の完成へ換算しない。
+
+
+### u256 — 複数評価の本文・残存評価の合成（2026-10-14 JST）
+
+同じ`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014`内、STRUCTURE_MAP_DELTA_PRESENT。既存API ownerだけを更新：`emlis_ai_grounded_observation_plan.py`は独立した評価pairと残余dutyを3 Move内で保持、`emlis_ai_grounded_sentence_surface.py`は各対象/時点を持つ並列文、`emlis_ai_grounded_human_reception.py`はLIMITEDの有限評価・同値2評価の共有文、`emlis_ai_grounded_observation_gate.py`は全文と両sourceの独立検証、`cocolon_meaning_experience_engine/emlis_answer_update.py`は同回答内の対象撤回と評価訂正を合成する。旧辞書・作者配置、公開API/DB/SQL/RN、意味contract、依存は不変。新production fileなし。検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（131 PASS）と現行shared identity snapshot。保存4ケースは実service＋隔離SQL、RN hook/modalの再openまで確認（native実機ではない）。Q2/Q3 application54 PASS。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 1 received＋2評価の初回停止、片方/両対象撤回、同回答内訂正/撤回を修正。経験の内容形成、明示「今は」の訂正時点と保存互換、2 received＋2評価の初回停止、same100・実機・正式Product Readは残る。正本06／API handoff u256に実測・範囲・次の作業を記録した。0/3・candidate_ready=false・automatic_progression=falseを維持。
+
+### u257 — 評価訂正の回答時点・旧意味再開（2026-10-14 JST）
+
+同じ限定承認内、STRUCTURE_MAP_DELTA_PRESENT。既存API5ownerの責務を更新：`cocolon_meaning_experience_engine/emlis_answer_update.py`は新しい引用評価の「今は」を今回回答sourceへ結び、時点指定のない再訂正は先の回答anchorを保持する。対象撤回後の評価時点も保持し、保存済みu256 PARTIALは既知の旧解析で全checkpointを厳密再導出する。`emlis_ai_grounded_observation_plan.py`はsource/時点codeの整合と表示用時点、`emlis_ai_grounded_sentence_surface.py`と`emlis_ai_grounded_human_reception.py`は対象付き/撤回後/複数評価の時点表現、`emlis_ai_grounded_observation_gate.py`は作者から独立した時点照合を担う。新production file/service、公開API/DTO/DB/SQL/RN、意味schema、依存は不変。
+
+検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（152 PASS）、現行shared owner identity snapshot（実検査1 PASS）、未変更458a1fccから実生成した新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_answer_time_checkpoint_v1.json`（旧PARTIAL2件）。Q2/Q3 application54 PASS、実service＋隔離SQL保存4本文のRN hook/modal表示・履歴・再open一致。native実機ではない。既存共有17失敗は未修正・未再実行。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 元入力と回答の評価時点を分けたが、経験の内容形成は未達。次の主課題は§9.2/9.4の受け取り内容であり、時点修正完了を初回単位の完成にしない。2 received＋2評価の初回capability gap、same100・本人実機・正式Product Readも残る。詳細は正本06／API handoff u257。0/3・candidate_ready=false・automatic_progression=falseを維持。
+
+
+### u258 — 明示「その時は」の再訂正と旧保存互換（2026-10-14 JST）
+
+同じ限定承認内で先行u257（API11720b6／資料39a4714）を保持し、`cocolon_meaning_experience_engine/emlis_answer_update.py`の責務だけを追加修正した。先行回答の「今は」評価を新たな「その時は」で再訂正した場合、元入力envelopeへ戻し、旧回答anchorを残さない。対象撤回後も当時の評価だけを保持する。u257のsource検証・共通作者helper・独立readerは不変。先行u257で同訂正をPARTIAL保存した場合はprivateな旧解析modeで完全checkpointを再導出し、旧意味のまま再開する。
+
+新fixture `ai/tests/fixtures/cmee_emlis_pre_appraisal_original_time_checkpoint_v1.json`は未変更11720b6の2round実checkpoint・本文2件。既存評価testへ新解釈2件＋旧互換2件を追加し156 PASS、既存Q2/Q3 application54 PASS、現行shared identity1 PASS。新しい保存2本文の実service＋隔離PGliteとRN hook/modal再open、旧PARTIALの本文保存503→retryを確認（native実機ではない）。新production file・意味schema・公開API/DB/SQL/RN・依存・他中核の変更なし。STRUCTURE_MAP_DELTA_PRESENT。詳細・反映版は設計06／API handoff u258。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 次の主課題は先行u257のとおり§9.2/9.4の経験の受け取り内容形成。追加の組合せ検査を完成の代用にしない。2 received＋2評価の初回停止・既存共有17失敗・same100・本人実機・正式Product Readは別の残件として維持。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠は不変。
+
+
+### u260 — 確認済みの満足／納得をNORMALの本文へ反映（2026-10-14 JST）
+
+Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STRUCTURE_MAP_DELTA_PRESENT。既存API `ai/services/ai_inference/` 内の責務差分は次の4file。
+
+| 既存owner | 今回の責務差分 |
+|---|---|
+| `cocolon_meaning_experience_engine/contracts.py` | 既存の評価内容から充足／本人内の理解と肯否の四区分を導出するproperty。永続化fieldやschemaを追加しない。 |
+| `emlis_ai_grounded_human_reception.py` | NORMALの対象を本人内の充足／理解とともに文章化。否定評価も同じ対象へ限定し、程度付き納得は元の評価語を保持する。LIMITED作者は不変。 |
+| `emlis_ai_grounded_observation_gate.py` | 実節から対象・本人内の状態・肯否・時点・程度・継続を作者なしで照合。whole inverseの既存plan-only replayは保持する。 |
+| `emlis_ai_grounded_sentence_surface.py` | 上記の受容述語を既存receive markerとして認識。内容の作者・受理権限は追加しない。 |
+
+検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行shared owner identity fixture。新production file/service、公開API/DTO/DB/SQL/RN、意味checkpoint schema、依存、他中核は不変。技術検証の詳細は06／API handoff u260。166評価検査・54 application検査、合成7保存本文とRN hook/modal再openを確認した（native実機ではない）。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 今回は評価語を本人内の状態へ展開したNORMAL限定候補であり、四区分propertyだけでevent内容やReadingConsequenceを新たに解釈したとはしない。肯定の経験化・否定の併記には定義展開／関係反復が残る。§9.2/9.4の主観差分の完成ではない。目的・未完了の明示入力を活かせない例、同memo receivedで別行動へ焦点が移る例、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置を維持。
+
+### u262 — 未成立fact・対象・満足の三点を保持する責務（2026-10-15 JST）
+
+Mashは2026-10-15 06:17 JSTにu261限定提案を承認した。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。STRUCTURE_MAP_DELTA_PRESENT。既存API `ai/services/ai_inference/` 内の責務を次のように接続する。
+
+| 既存owner | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 有限な未成立fact・実行済み対象・肯定無程度の満足を原文の三範囲から認識し、ABOUT_TARGETと明示CONTRASTを保持。結果を表す「を…にした／できた」を他者主語と取り違えず、三点を一つのReception dutyへ渡す。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | 評価と明示接続した未成立fact exact1だけをcomponentへ含め、他の独立requiredは本人の実行行動へ限定する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 対比側に包まれた評価の既存role qualifier（種別・程度・時点・依存）を保持。transportとsource admissionを分離し、raw/direct再構成で失われるmarkerへ運搬条件を依存させない。schema／registryとexact2評価内容型は不変。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 両評価端点の明示appraisal qualifierをentry条件とし、既存received/reasonを先取りしない。選択済み三点・二関係・qualifierを通常`EmlisAppraisalContent`のexact3/protected0へ投影。ReadingConsequenceへReception文言を加えない。 |
+| `emlis_ai_grounded_human_reception.py` | sourceと選択済み三bindingを照合し、未成立の点と評価対象を区別した充足として唯一の作者が文章化する。各時点を保持し、未成立を本人の不能・知識不足へ変えない。 |
+| `emlis_ai_grounded_observation_gate.py` | 作者から独立して三命題・対象・肯否・時点・対比を読む。whole inverseのplan-only replayは保持し、片側欠落・対象交換・未成立の誤同時化を受理しない。 |
+| `emlis_ai_grounded_sentence_surface.py` | 同じ三点に対する既存Observation構文とReception markerを扱う。独立した作者や受理権限は追加しない。 |
+
+検査配置は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（最終187 PASS、既存166＋新21）と`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`（現行identity1 PASS）。Q2/Q3 application54 PASS、合成4本文の実service＋隔離PGlite保存とNoAuthor restart GET/start・RN hook/modal履歴/再open一致を確認した。旧checkpoint2件は完全一致で旧意味・旧停止を保持し、既存historical fixture4組10rowは不変。新しいfresh prepareだけが新三点本文を作る。途中のapplication20 FAILとqualifier投影不一致は06／API handoff u262に記録した。新production file・公開API/DTO/DB/SQL/RN・意味schema・製品依存・Piece/Analysis変更なし。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 0/3・candidate_ready=false・automatic_progression=false・未配置を維持し、構造成立を§9.2/9.4の商品完成へ換算しない。
+
+
+### u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+| 既存API owner（`ai/services/ai_inference/` 配下） | u264の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 同一文の理由・対象・満足を原文三範囲として認識し、理由→満足と対象→満足を証明。一つのReception dutyへ渡し、理由なしの旧投影も維持する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 私有SATISFACTION_REASONと該当direction row1.1、原因／結果role qualifierの運搬。ABOUT専用の例外を理由へ適用しない。 |
+| `cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | source/carried両境界で三端点・二関係・SELF・単一軸・同一証拠を検証し、理由row1.1をconfigurationへ保持する。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | sourceで証明済みの理由関係のみprivate scopeへ投影し、理由を独立requiredの行動と取り違えない。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 選択された二関係と三bindingからMATERIAL_WEIGHT／RECEIVE_AS_MATERIALの内容を導出する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択binding／focalとsourceを照合し、満足の拠り所と対象を一つの受け取りへ文章化する。 |
+| `emlis_ai_grounded_observation_gate.py` | 作者を呼ばず本文の三役割・時点・選択binding・focalを読む。欠落、交換、否定、発明した因果を拒否する。 |
+| `emlis_ai_grounded_sentence_surface.py` | 既存本文inverseに今回の受容述語を保持する。新作者や新受理権限は持たない。 |
+| `cocolon_meaning_experience_engine/emlis_question.py` | 旧意味復元時だけ理由分解を無効にした原planを渡す。 |
+| `cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint／既発行質問を理由追加前の意味で厳密再検証し、その他の従来評価を維持する。 |
+| `cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1でも理由追加前の準備済みplanを使い、旧checkpointを現行意味で再生成しない。 |
+
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+最終の既存評価file **236 PASS（既存187＋新49）** とQ2/Q3 application **54 PASS**、計 **290 PASS・109.87秒・既存依存warning2**。現行shared-owner identity **1 PASS・22.98秒**。language `5226a02541b35153ffb5be8c70a8611545d483381f27a19898938be3310541b2`、runtime `9360829fb81c0b5615152b9b1b6f9274209545eba4ee0e8a12de396d65b352b5`。理由削除／差替え・独立行動非混入・対象外21例・三役割／時点／binding／focalの改変拒否・旧完全checkpoint6件を確認。実sourceのSOURCE_STATED_CAUSE候補と通常direct endpoint supportから既存final relation validatorもPASS。合成4本文を実service＋隔離PGliteへ保存し、event payload一致・NoAuthor restart GET/startのDTO完全一致、実RN hook/modalで履歴展開とclose/reopenの本文/event一致を各4件確認した。git diff --check成功。runtimeは既存Python3.12.14/PGlite0.5.8/React18.3.1を使用。外部AI呼出・新有料service・製品依存追加0。これらは本人実機／正式Product Readではない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+
+### u265 — 同一欄の本人received文に続く評価の読み落としを修正（2026-10-15 JST）
+
+| 既存API owner（ai/services/ai_inference/） | u265の責務差分 |
+|---|---|
+| emlis_ai_grounded_observation_plan.py | received文法をraw-text helperへ抽出して共有。前文全体が単一received exact2、理由/未成立contextなしの評価に限り、受け手のSELF継続を許可。giver内の別主体やSELF giverを追加判定し、広い旧giver文法だけで本人扱いしない。旧意味復元時だけ新entryを無効化。 |
+| cocolon_meaning_experience_engine/emlis_question.py | 新entryを無効化した原planを既存の厳密復元へ渡す。 |
+| cocolon_meaning_experience_engine/emlis_answer_update.py | current→新entry無効→理由追加も無効→pre-appraisalの順で完全checkpointを照合。新しい意味へ旧IDを貼らない。 |
+| cocolon_meaning_experience_engine/emlis_thread_engine.py | Q1の旧checkpointも旧prepared planから本文化し、現行sourceへの再解釈を避ける。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新file/engine/author/checker/registry/service、内部意味schema・公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisの変更0。検査は既存test_cmee_emlis_result_appraisal.pyと現行shared-owner identity fixtureへ追加／更新し、歴史fixture/IM03 proofは変更しない。
+
+意味・保存・実本文はcurrent01/04と06／API handoff u265。
+
+
+### u266 — 理由付き満足とreceived経験が別欄にある初回本文の停止を修正（2026-10-15 JST）
+
+| 既存API owner（ai/services/ai_inference/） | u266の責務差分 |
+|---|---|
+| emlis_ai_grounded_human_reception.py | validate_selected_subjective_reception_inputで既存LIMITEDのATTENTION/ATTEND_TO、全体binding、focalなしと、分割されたcontributionが理由・対象・満足の三端点を過不足なく所有することを確認。_source_owned_relational_focus_sentenceで本人の理由・対象・時点を限定的に受け取る。NORMALと未成立contextの条件は維持。 |
+| emlis_ai_grounded_observation_gate.py | _read_relational_focus_discourseでLIMITEDの選択所有と三役割・時点・肯否を作者から独立して再照合。NORMALのexact3/focal検査も維持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py（repo相対） | 両欄配置・過去/現在・理由差替え、独立reader、誤った役割/時点/理由、contribution借用/欠落/過剰を拒否する19検査を追加。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json（repo相対） | 実sourceから現行shared-owner identityを再計算。歴史fixture/IM03 proofは不変。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
+
+実本文・検証・既存撤回残件は06／API handoff u266、進行はweekly§5.6.16。
+
+
+### u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+| 既存owner（API repo相対） | u267の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | _prepare_answerで既存source_owned_result_appraisal_reasonの証明を使い、原文全文の3owner撤回を許可。全span所有集合と候補一意を維持。prepare_emlis_meaningで旧checkpoint完全再導出modeを追加し、_prepare_emlis_meaning_from_planで各Q3 prefixへ引き渡す。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 両欄・理由差替え・評価時点、部分/他文引用、単独owner撤回、旧全checkpointと質問改変、実保存/NoAuthor再読を確認。重複理由文の既存認識残件も固定し、一括撤回へ拡張しない。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の責務変更。新file/helper/engine/author/checker/registry/serviceは追加0。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は変更0。検査は既存test_cmee_emlis_result_appraisal.pyへ24件と未変更26d8ccc7で実取得した旧完全checkpoint4件を追加し、歴史fixture/IM03 proof・現行shared-owner identity fixtureは不変。
+
+実本文・互換・検証・重複原文の残件は06／API handoff u267、進行はweekly§5.6.17。
+
+
+### u268 — 重複原文の全文撤回を誤確定しない（2026-10-15 JST）
+
+| 既存owner（API repo相対） | u268の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | _prepare_answerで直接一致＋証明済み全文groupを合わせた一意性を判定。prepare_emlis_meaningで明示旧checkpoint用precedenceを再導出し、_prepare_emlis_meaning_from_planから各prefixへ渡す。全文所有証明・置換処理・意味投影は不変。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 両欄配置×単独撤回／独立訂正併記の4ケースで未解決・原文保持・独立訂正を検証。未変更66613bc5から取得した旧完全checkpoint8件を本文状態まで比較。既存保存検査は維持。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の変更。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は不変。新file/helper/engine/author/checker/registry/service追加0。歴史fixture/IM03 proof・現行shared-owner identity fixtureは変更しない。
+
+重複原文は両表現を合わせて一意にできない限り未解決とする。source配置そのものは変えない。互換・検証の限定範囲と初回本文の残件は06／API handoff u268、進行はweekly§5.6.18。
+
+
+### u269 — 隣接する同一理由文の初回本文を回復（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 5fileと既存test／現行identity fixtureを変更。新file・engine・author・checker・service・registryは追加0。既存sentence surface内に私有の意味等価証明helperを1つ追加。意味schema・公開API/DTO/DB/SQL/RN・製品依存・独立reader・品質gateは変更0。歴史fixture/IM03 proofは不変。
+
+| 既存owner（API repo相対） | u269の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 先頭の同一理由文2出現のSELFを個別scalarで証明。選択済み評価の同一span理由／対象supportを修復。旧source再導出flagを既存final projection鎖へ渡す。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | _repeated_reason_appraisal_relationsが二組の完全な意味／出典同値を証明し、既存merge/renderで6owner/4relationのbindingを保持したまま既存文法を一度描画。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | original_meaning_planで旧重複source形の内部再導出指定を受け渡す。質問の公開契約は不変。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 旧source形と旧訂正modeを組み合わせて完全checkpointを再導出。古いcanonical質問にも同じ旧形を適用。新規回答の候補一意性は保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py | 復元した旧source形の初回本文はprepared planを使う。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 初回の両欄／Q1/Q3／理由／評価時点、6owner/4relation、非同一・他者scope、独立reader、旧checkpoint12件、実保存／NoAuthor再開を追加。旧重複source期待を6ownerへ更新。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有source ownerの正規計算値だけを再採録。歴史receiptを変更しない。 |
+
+全体のRN→API→service/store→read→RN経路は維持。分析・Piece・国家・TodayQuestionの責務は不変。01B/01Cのcore間経路追加はない。詳細はAPI handoff u269／06／weekly§5.6.19。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u270 — 2 received＋2評価のsource保持漏れを修復（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production3file・既存test・現行identity fixtureと新規の合成旧checkpoint fixture1fileを変更。新helper/engine/author/checker/service/registry、公開API/DTO/DB/SQL/RN、製品依存の追加・変更は0。
+
+| API repo相対path | u270の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 既存final projection内でplain評価exact2とreceivedの全owner閉包を証明してretentionを修復。直接生成の既定は従来のまま。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | threadのoriginal_meaning_planから昇格を明示有効化し、旧投影指定を渡す。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 限定旧retention planを完全checkpointとして再導出。既存の旧世代fallbackも旧retentionを維持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 両欄・対象・肯否・時点、全8owner、逆読解、余分な材料、Q1上限残差、旧checkpoint、実保存／NoAuthor再開を検証。 |
+| ai/tests/fixtures/cmee_emlis_plain_appraisal_retention_u268.json | 新規。未変更u268から実取得した合成旧checkpoint12例と旧本文状態。個人実入力ではない。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerの正規identityを再採録。歴史receiptは不変。 |
+
+RN→API→service/store→保存read→RNの経路と、分析・Piece・国家・TodayQuestionの責務は不変。01B/01Cの経路追加なし。本文・実測・限界はAPI handoff／06 u270、優先順はweekly§5.6.20。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u271 — 重複理由文の各出現と別のreceived経験を初回Receptionへ保持（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 6file、既存testと現行identity fixtureを更新し、旧u269の合成checkpoint fixtureを1file追加。新しいengine・author・checker subsystem・service・registryは作らない。内部意味schemaの形、公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisは変更しない。歴史fixture／IM03 proofは保持。
+
+| 既存owner（mashos-api相対） | u271の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | sourceに完全一致二文の証明属性。source_owned_duplicate_reason_appraisalsで別々の閉じた三owner群を検証し、既存duty／retained-group選択へ接続。resolverがある段階では実原文と別scalar位置も再確認。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | _duplicate_reason_pairで既存二Move一文への適格性を判定。各exact3とcontributionを検証後に等価な有限文を一度描画し、両expression／Moveの可視bindingを保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 既存pair readerで双方のLIMITED三役割を実本文から独立に照合。Observationは二文全体と全六核／四関係を照合。作者replay自体は既存full inverse内に残り、独立readerと混同しない。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | original_meaning_planでu269の属性なしsourceを再導出する内部指定を伝搬。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 完全u269 checkpointを先に再導出し、既存u268以前の互換鎖を保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py | 旧u269 sourceの初回本文もprepared planから描画。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新三Move期待・両欄の初回／境界／改変拒否／保存再試行／歴史互換。 |
+| ai/tests/fixtures/cmee_emlis_u269_duplicate_source_checkpoints.json | 未変更u269から採録した合成12件。現行挙動への期待ではなく旧保存結果の互換証拠。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行正規計算値を更新。歴史proofや商品判定は変更しない。 |
+
+適用境界は、原文同一fieldの完全一致二文・独立した第三の受け取りがある三Move・full／standard／LIMITED。重複二文だけの入力、両field各二文の十二核、別の理由、近似文、他者／引用、否定・程度付き満足・納得、PREMIUM複数round全般の完成は含まない。u269の認識文法は広げず、今回の証明属性は選択上の限定条件である。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+実本文・検証と残件はAPI handoff／06 u271。01B/Cの隣接責務は不変。
+
+
+### u272 — 訂正後のQ3本文停止を既存の意味・上限を保って修復（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production2file／3関数、既存test1file、現行identity fixture1fileを更新。新規製品file・helper・engine・author・checker・service・registryは0。
+
+| mashos-api相対path | u272の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | build_grounded_reception_opportunitiesで訂正評価のretained group順をsource順へ統一。_build_reception_depth_policy_and_movesで証明済み理由二組の役割と既存配置順を整合。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | _observation_surface_atomsで限定訂正経路のsource連結成分をarc identityへ接続。文法roleと経験identityを区別し、同一arc分割検出を保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 訂正後の実本文・両欄／理由／時点変種・独立逆読解・同一arc分割拒否・保存と再読を検証。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerの正規identityを再採録。旧checkpointと歴史proofは変更しない。 |
+
+u269〜271に記録した対象Q3の上限診断を訂正する。今回の再現では必要Observation contributionは6、既存capは8で、投影・生成・独立逆読解を通過していた。停止原因は、独立したsource groupを同じgeneric grammar role由来のsemantic arcと扱う最終検査での誤認、訂正後の重複理由二組に同じ受容predicate familyを割り当てる不整合、欄を入れ替えた訂正評価でinventoryとselectorのretained group順が異なる不整合の三点。過去の停止事実は保持するが、そのQ3原因記述を現在の判断に再利用しない。Q1の既存上限残件は別である。
+
+RN→API→service/store→保存read→RNの既存経路、01B/Cの隣接責務は不変。u253/u264/u271の既存意味と§9.4の多対一可視unitを接続する整合修正。source認識・意味schema・checkpoint生成／旧再導出・NORMAL資格・Move数・Observation contribution上限・作者・独立reader・最終gateは変更しない。公開API/DTO/DB/SQL/RN・製品依存も不変。
+
+実本文・検証・残件はAPI handoff／06 u272、優先順はweekly§5.6.22。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemは追加せず、既存ownerの可視unit実現と独立読解責務を更新する。
+
+| 既存owner（mashos-api相対） | u273の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 閉じた理由・対象・評価を一文で実現。出現別bindingと旧plan表現を保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 可視一文全体とsourceの三役割・全関係を作者非依存で照合。証明した関係だけに共有評価の構文を認める。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 既存反復期待の更新、te/deを含む三役割・意味改変拒否、保存再読と既存訂正停止の履歴境界。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行正規identityだけを再計算。歴史proofは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実本文、検証分母、残件と次ownerを保存。 |
+
+本人が明示した一つの理由と評価対象が同じ肯定・程度なしの満足へつながる場合、二関係を別文にして評価を二度出すObservationを一文へまとめた。sourceで証明済みの完全一致二出現も、六核・四関係・出現別根拠を保持して一文を共有する。原文同一性の証明がない近似文・別欄の別経験を統合しない。
+
+意味選択・source認識・checkpoint・旧再導出・Reception・各上限は変更しない。旧二出現planに同一性証明がない場合、または旧撤回後に同じ原文二出現の片方だけ残る場合は従来の表現を保持する。歴史checkpoint fixture／IM03 proofは変更しない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisへの変更なし。
+
+実本文・検証分母・既存訂正停止はAPI handoff／06 u273。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u274 — 単独理由付き評価と別経験の訂正後本文を保存・再表示へ戻す（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemは追加せず、既存ownerのsource成分識別責務を更新する。
+
+| 既存owner（mashos-api相対） | u274の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 既存plan/resolverをObservation行へ伝搬し、原文一出現・未解釈境界なしの単独理由評価へ既存source成分identityを適用。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 訂正後保存6条件をREFINEDへ更新、別成分／不当分割拒否／独立逆読解を8条件追加。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行正規identityだけを再計算。歴史proofは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実本文、適格条件、保存・表示検証、残件と次ownerを保存。 |
+
+既存_observation_surface_atomsへ既存plan/resolverを渡し、source_owned_result_appraisal_reasonが一組で、元の同欄・同文出現が一回、answer_interpretation_unresolved境界がない場合に、既存u272のsource成分identityを適用する。受理済み回答・thread source契約・既存関係型の条件も保つ。撤回後の一組だけを原文一出現と誤認せず、未解釈撤回の旧checkpointも新分岐から除外する。重複理由／訂正評価の既存u272分岐は変更しない。
+
+同じsource成分を二行へ不当に分割した場合は引き続きrequired_arc_fragmented_without_reasonで拒否する。正当化atomの追加、gate緩和、意味選択・source認識・checkpoint schema・旧fixture／IM03 proof・本文作者・独立reader・Reception・各上限の変更はない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisも変更しない。
+
+実本文・検証分母はAPI handoff／06 u274。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemなし。既存責務の変更は次のとおり。
+
+| mashos-api相対path | 今回の変更 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 理由付き満足のLIMITEDに選択済みATTENTIONを実現。旧二出現の片方だけ残る本文は保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 新有限文を作者非依存で逆読解。旧互換の分岐も原文出現から判断し、失敗時のnominal救済を拒否。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 既存attention markerへ新しい注意述語の文末を接続。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 語尾3形・過去現在・欄交換、改変拒否を拡張。既存の当該文面期待を更新。歴史checkpointは不変。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerのidentityのみ再計算。 |
+
+RN→API→service/store→保存read→RN経路、01B/Cの隣接責務、公開API/DTO/DB/SQL/RN・製品依存・外部AI禁止は不変。
+
+作者と独立readerは同欄・同文の原文出現を各自確認し、一出現または既存の完全二組証明がある場合に新表現を使う。旧u267で二出現の片方だけ残るcheckpointは旧本文を維持する。旧fixtureを変更しない。readerは三役割、時点、本人の理由をsourceと照合し、原文改変・理由の唯一化・成長の捏造・旧確認文への逆戻りを拒否する。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u276 — 満足の対象だけを撤回した後の理由・評価を有限文へ戻す（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemなし。既存ownerの責務差分：
+
+| mashos-api相対path | 変更 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 既存選択は変えず、対象撤回後の残存理由／満足二役割を本文向けに識別。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 二binding／focalの所有を確認し、残存理由・評価時点・注意を有限文へ実現。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 作者非依存に二役割・本人・肯否・時点・方向を逆読解。新有限文失敗のnominal救済を拒否。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 既存attention markerへ「つながりに目を向けています」の文末を接続。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 撤回後の本文、三理由・時点・欄、独立readerと意味改変、focus／focalの境界を18検査で追加。旧検査・歴史fixtureは不変。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerのidentityだけを再計算。 |
+
+RN→API→service/store→保存read→RNの経路と01B/Cの隣接責務、公開API/DTO/DB/SQL/RN、製品依存・外部AI禁止は不変。
+
+source_owned_relational_focusはplanありの本文経路だけで、同一sourceに残る理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在を確認する。planなしの選択／reference-mode導出は不変。既存作者と独立readerはLIMITEDのATTENTION/ATTEND_TO、RELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS、二bindingと理由関係focalを照合する。理由削除・別理由・他者・否定・時点変更・因果逆転・唯一化・撤回対象の復活を拒否し、有限文reader失敗をnominal fallbackで救済しない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u277 — 満足対象の撤回後も別received経験をReceptionへ残す（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemなし。既存ownerの責務差分：
+
+| mashos-api相対path | 変更 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 対象撤回後のsource証明を再利用し、理由／満足と一つの別received組を既存2 Moveへ保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | source dutyとMove別contributionの所有を照合し、既存material attentionで残存理由の有限文を実現。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 同じ限定scopeをsourceから再導出し、作者非依存に実本文の理由・満足・時点・所有を読む。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 既存撤回検査を二経験へ更新し、旧二received分岐12条件と追加action境界2条件を追加。意味改変拒否を維持。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityを再計算。歴史checkpoint fixtureは不変。 |
+
+RN→API→service/store→保存read→RN、01B/C隣接責務、公開API/DTO/DB/SQL/RNと製品依存は不変。sentence surfaceの追加編集はない。
+
+u276の同一source内の理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在という証明を既存plan owner内のhelperへ抽出した。これに加え、回答由来nucleusなし・残りが一つのreceived組という条件で_thread_retained_reaction_groupsから二つのdutyを返す。選択は既存LIMITED ATTENTION/ATTEND_TOの全source MATERIAL_WEIGHT/RECEIVE_AS_MATERIALを保ち、Moveごとのcontributionを理由／満足と別経験へ分離する。validatorと作者非依存readerはexact2 Move、required、reception_act順、sourceから再導出したduty tuple一致、理由側のselected contribution exact2、focalなしを確認する。従来のRELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS分岐も維持する。schema・source認識文法・NORMAL資格・各上限を拡張せず、既承認の選択内の欠落を直した。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u278 — 評価の訂正・撤回後も残存理由の状態と元の時点を保つ（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemなし。既存ownerの責務差分：
+
+| mashos-api相対path | 変更 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 訂正・撤回で未接続になったoriginal理由のfact/stateと過去／現在を単独Observationへ実現。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 既存独立readerで未接続・source・型・時点を本文から照合。現在感覚化や否定評価への新因果を拒否。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 実生成24条件と作者禁止の独立本文reader8条件を追加。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityを再計算。歴史checkpoint fixtureは不変。 |
+
+RN→API→service/store→保存read→RN、01B/C隣接責務、公開API/DTO/DB/SQL/RNと製品依存は不変。source/plan/選択/Reception ownerは今回編集していない。
+
+既存sentence surfaceのthread用単独Observationで、original memo/memo_action・required/explicit・本人・肯定fact/state・過去現在・appraisal_explicit_reason／reasoned_result_appraisal・relationなしを限定して実現する。既存gateの_body_inverse_intervening_eventsは、source spanと欄、全体で未接続の理由、型・時点・本人・極性を照合し、本文の状態文と引用内容を作者非依存に読む。source認識、checkpoint、plan、selected reception、Reception作者、schema、NORMAL資格、各上限は変更しない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+
+## u279 — 否定訂正後も別received経験を受け取りに残す（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存選択owner内の責務補修、新規production file／subsystemなし。
+
+| mashos-api相対path | 今回の変更 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 否定訂正後の評価と別receivedを、所有が閉じた既存2 Moveへ保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 実本文・独立reader・source所有の回帰16検査を追加。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityのみ再計算。歴史fixture不変。 |
+
+RN→API→service/store→保存read→RNと01B/Cの隣接責務は不変。
+
+適用は、source-ownedな評価関係exact1、回答核exact1（本人・否定・無程度の満足・original_occasion・過去／現在）、同一原文の理由／対象exact2、孤立した肯定fact/stateの理由、残余required textがoriginal received exact1の場合。理由と対象の原文range・field/span・所有、関係閉包を確認する。理由はObservationだけへ残し、否定評価へ因果を付け直さない。追加action・複数received・理由なし評価・明示的な回答時点への訂正・別回答併記をこの修正へ含めない。source認識、意味checkpoint、schema、NORMAL資格、各上限、作者／独立reader、公開API/DTO/DB/RNと製品依存は不変。
+
+## u281 — 明示評価とreceived経験の組別接続（2026-10-15）
+
+STRUCTURE_MAP_DELTA_PRESENT。本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+| mashos-api相対path | u281の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | versioned exact7 opportunity、selected bundle所有・identity・relation/basis検証、旧exact3分岐保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 明示評価1＋received1のsource限定資格、組別opportunity、Moveからclaim/traceへの一意接続。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | 組別post-selection、同act別opportunityの保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | NORMAL投影の組別所有、作者前のsource Move照合、旧envelope検証、新private型のmanifest登録。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | NORMAL理由の主観mode/operatorと全selected contributionを検証。文面作者の新設なし。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新選択内容・本文の対応、改ざん拒否と対象外境界、旧保存回帰。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identity再計算。歴史fixtureは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実結果、本文、再現範囲と残件。 |
+
+RN→API→service/store→保存read→RNの隣接責務と01B/Cは不変。新production file／subsystemなし。詳細設計は8/28末尾u281、実検証は正本06／API handoff末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+## u282 — received本文作者と独立reader（2026-10-15）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存作者／readerの受け取り内容と局所文法を更新。新file／subsystem／型なし。
+
+| mashos-api相対path | u282の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 既存received作者へselected decisionを渡し、組別noncollapseを本人経験の受け取りとして表す。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 新文から対比・両端・肯否・時点と選択内容の所有を作者非依存で読む。旧文法を保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 対照入力、本文／選択改ざん、独立再読、対象外境界を追加。既存NORMAL本文期待を更新。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityのみ更新。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実本文・検証・途中失敗・残件を記録。 |
+
+u281で選択済みの、本人の明示評価exact1組＋本人received対比exact1組のうち、NORMAL / ATTENTION / ATTEND_TO / RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSを持つreceived成分だけを扱う。selected contribution exact1、basis exact2（RELATION_LEFT／RELATION_RIGHT）、source-owned単一contrast、追加回答なし、裸の過去形感情形容詞、full finite文を条件にする。理由0/1と当時の満足を否定へ訂正する既存範囲を維持する。
+
+RN→API→service/store→保存read→RNの隣接責務、01B/C、公開契約は不変。8/28意味設計・正本06・API handoff末尾u282を参照。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+## u284 — 同一対象と二段対比のsource・意味・本文接続（2026-10-16）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file／subsystemなし。新規は合成旧checkpoint fixture。
+
+| mashos-api相対path | u284の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 一意な対象参照、原文range、二段対比、役割と失格条件。既存sourceへの版別分岐。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | 新group／content契約、厳密な型dispatch、source qualifierと独立所有検証。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py | 4/5役割の一つの意味構造、閉じた関係所有、観測ペアに束縛した反事実。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 第一Moveの評価根拠を保持し、wholeの共同読みと2 Moveを接続。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | Move別根拠所有、理由付き評価の重複facet除外、独立命題投影。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | 選択済みgroupを4役割contentと所有順へ結ぶ。新型manifest登録。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | 旧source認識への明示分岐。旧質問の再導出を保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 旧checkpointの全体再導出、更新時のgroup証明／外側関係の失効。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py | 旧source planに束縛した本文経路の識別。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 原文の内外対比を平坦化せず、同時性を足さない初回Observation。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 評価対象の違いを2 Moveで受け取り、選択所有・IRを照合。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 作者を呼ばず実本文とsource／selected内容の全役割・対象・時点・否定を検査。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新適格／不適格、訂正失効、本文改変拒否、旧保存再導出。700条件。 |
+| ai/tests/fixtures/cmee_emlis_pre_shared_target_checkpoint_v1.json | 新規。変更前de95074から取得した合成旧完全checkpoint8件。新実装で再生成しない。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerの再導出。歴史fixtureを更新しない。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実結果、再現条件、実本文、残件のAPI側記録。 |
+
+RN→API→service/store→保存read→RNの隣接責務と01B/Cは不変。公開契約・製品依存は変更しない。設計は8/28 u284、versionは05、実検証は06／API handoff、最新順序はweekly §5.6.34。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・未配置。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
+
+
+## u285 — 訂正後に残るreceived対比へ同時性を加えない（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存本文owner内の補修。新production file／型／subsystemなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py | 原文共同読みの失効後、未改変のreceived関係・両端を確認し、既存作者へ対比IDを渡す。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 対象対比だけを時間中立に実現。既定の旧経路と初回nested作者を保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 新完全文法を既存の端点／source照合へ接続し、旧文法の互換を保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 追加19検査。実本文16条件、独立reader、元関係／node変化の除外。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityのみ更新。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 現在入口と結果・残件・再現範囲。 |
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
+
+検証は06／API handoff u285、最新順序はweekly§5.6.35。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file／永続型／subsystemなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 原初共有対象と唯一の理由なし満足否定訂正を再証明し、未改変の2経験の選択証明をresponseへ渡す。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 非保存の2group引数を既存opportunity／depthへ通し、同family代表の脱落を対象限定で防ぐ。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 追加14検査。両欄・反応2・本文保持／改変拒否・所有改変／対象外訂正／PARTIAL非適用。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行identity更新。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 現在入口・実結果・検証限界・残件。 |
+
+emlis_answer_update._active_planで成立する一時的な選択証明を、既存response→human_reception_plan→opportunitiesとdepthへ引数で渡す。source認識・核／関係・checkpoint・schema・NORMAL資格・Projection・作者／reader文法・公開API/DTO/DB/RN・依存・各上限は不変。原初共同groupと外側対比は失効したまま、更新後はLIMITEDを保持する。一般の理由なし訂正を一括で拡張しない。
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u286、順序はweekly§5.6.36。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u287 — 直前文を検証した共有対象評価参照で二重説明を削減（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file／永続型／subsystemなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 実際の直前評価文が検証済みの場合だけ「その満足」を使い、二重説明を削減する。未成立なら完全表現を維持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 既存preceding_contextを共有対象readerへ渡し、同一group・2 Move順序・前文全文のsource-owned読みを証明。旧明示文法も保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 追加9検査。両欄／時点／理由／反応・誤参照／前文改変拒否・完全表現保持。旧明示4役割検査も継続。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 編集完了時の現行identity。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 現在入口・実本文・検証結果／限界・残件。 |
+
+既存human_reception作者へ参照可否を渡し、observation_gateの既存preceding_contextを共有対象readerまで接続した。source認識、核／関係、checkpoint、意味schema、NORMAL資格、Projection、2 Moveの選択、公開API/DTO/DB/RN、依存と各上限は変更しない。訂正で初回共同読みが失効する条件とu285/u286の残存経験保持も維持する。
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u287、再開順序はweekly§5.6.37。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u289 — 承認済みの理由・対象・本人の充足を一つの内容型から本文へ接続（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production fileなし。既存private主観内容契約へ独立したversion armを追加した。旧base／evaluated-experience-v1のfield不変。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | 新reasoned-experience-appraisal-v1。3 binding／2 relation、kind・polarity・理由／評価時点の専用検証とexact-type分岐。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | admitted initial threadだけへ新内容を投影。旧非thread／回答後は旧base。論理契約manifest 73→74。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | 元のphase_A.admitted_sourceから期待内容を再構成するための引渡し。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 選択内容とsourceの一致を確認し、明示理由に根差した対象についての本人の充足を一文へ実現。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 3役割／2関係と別時点のsource照合、専用有限文法。旧文法とu287前文参照の証明を維持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新規7検査、対象となる初回期待内容／本文の更新。歴史fixture・対象外assertion不変。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行owner identityだけを再計算。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 承認・実装境界、実本文20種類、検証と限界・次の残件。 |
+
+Mashは2026-10-16 09:21:56 JST、u288の「明示された理由・対象・本人の充足を、一つの受け取り内容として保持する限定案」とRule18 §11.3の個別承認対象である旨を引用し、「うん、進めていいよ。」と明示承認した。新private内容契約の限定追加をこの承認で実装した。満足の意味／明示理由認識の既承認は取り直していない。u288の未承認表記は提案時の履歴であり、現行状態は本節を優先する。
+
+source認識・意味候補の採用資格・質問／Move／文数上限、公開API/DTO/DB/RN契約、依存は変更なし。新production file／engine／checker／serviceなし。稼働DB操作・deploy・mergeは0。
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u289、進行はweekly§5.6.39。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存6 production ownerへ更新後LIMITEDのprivate局所資格／内容対応を追加。新production file・engine・checker・serviceなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | versioned private Eligibility／Content、current aggregateへの結合と局所seal、旧型と別の内容検証。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 別欄・完全更新exact1・received未変更を原source／accepted更新から再証明し、source candidate／contribution IDも再導出。現在のMoveへ局所内容を結ぶ。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | post-selectionでreceived二端点・一対比の局所経験命題を導出。全体aggregateの既存義務は保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | 局所内容を現在のaggregate claim／trace／preimage／sealへ結んで専用sealを生成。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 識別hashを除く既存decision内容fieldを保持した別decision型で局所内容を受け、source資格を再検証して既存exact2経験文法へ渡す。裸形経験文法の対象外となる敬体／SELF topicは従来fallbackを保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 局所資格と実本文の本人・役割・肯否・時点・対比を作者なしで照合。旧完全本文も保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新規37検査。先行33（対象12／reader6／改変2／対象外12／legacy等1）＋fallback4。既存2関数の本文期待4条件／inverse変異2条件を新経験句へ更新。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行shared-owner identityを実sourceから再導出。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 承認・実本文・検証結果と限界・次の残件。 |
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+予定ownerのemlis_thread_surface.pyは変更不要。全体LIMITED・旧aggregate・意味checkpoint・核／関係・Observation・Move数を保持。RN→API→service/store→保存read→RNと01B/C、公開契約・DB・依存・他中核は不変。新source markerやglobal plan加工は行わない。詳細は05／8/28意味設計／06／API handoff u294、再開順はweekly§5.6.44。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
+
+
+## u299 — received先行の未成立事項付き満足と旧source互換（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。単一の本人received先行証明を既承認の未成立事項付き満足へ接続する。新production file・service・engine・依存なし。fresh sourceの認識は変わるが、意味schema／資格／内容型は追加しない。
+
+| 実file（mashos-api） | 現在の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | exact1未成立contextへ既存SELF received先行証明を接続。private旧指定をtyped projectionへ伝搬し、直接final builderの既定は旧認識を維持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | original_meaning_planでfresh threadの新認識を明示。旧source世代は未成立継続も旧指定に固定。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 完全旧checkpoint／実発行旧質問を既存の全体再導出検証で復元する独立指定。既存互換鎖と別欄の能力を保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 既存attention markerへ有限終端「対比に目を向けています」を接続。単独Moveでも受容文と認識し、既存source-owned全文readerを必須のまま保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 逆順同欄12・旧checkpoint11・旧質問3・所有境界・fresh Q1と直接builderの比較を既存回帰へ追加。訂正後の単独ATTENTION6件と意味改変拒否も追加。旧除外期待1件は現在の正例へ移動。 |
+| ai/tests/fixtures/cmee_emlis_pre_unfinished_received_context_v1.json | 新規の合成互換fixture。変更前u298の完全checkpoint・本文・状態・理由・実質問／回答を固定。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行sourceから共有owner identityを再導出。既存歴史fixtureは変更しない。 |
+
+原planを受け取る既存projector・thread_surface・本文作者・source-owned有限readerは変更なし。RN→API→service/store→保存read→RN、Piece/Analysisと01B/Cの責務は不変。全体01／current01/04、実装検証06／API handoff u299、再開weekly§5.6.49を参照。PRODUCT_NOT_CLEAR・正式0/3・未配置／未マージ。
+
+
+## u301 — 初回二経験の意味選択owner（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production fileはなく、既存3 ownerの責務差分。
+
+| mashos-api相対path | u301の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 既存の成分資格へ初回未成立三点＋received二点を限定接続。Preparedのlegacy/checkpoint、source／Move所有を検査。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | admitted sourceから初回三点＋二点、五点三辺二Moveと原文範囲を独立に再確認。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py | 既存scope_keyへ未成立appraisal成分のsource由来の意味領域を保持し、独立projection検査でも再導出。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 既存検査を対象36生成、二成分所有、作者禁止reader、改変・対象外・legacy境界へ更新。収集件数958→980。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行shared-owner identityだけを実sourceから更新。歴史fixtureは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 承認、三ownerとなった理由、実本文、検証結果／限界と次工程。 |
+
+
+資格／closureの二ownerだけでは二つの反応がgeneric scopeで衝突したため、既存source projectionの意味領域保持も必要になった。新source文法・作者分岐・schema／型／registry／上限は追加しない。意味境界は8/28設計u301／05、全18本文比較と29保存DTO・失敗履歴は06／API handoff u301、次はweekly§5.6.51。全体01・current01/04へ同期し、RN→API→service/store→保存read→RN、01B/C・Piece/Analysis・依存の責務は不変。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## u305 — received先行の理由三点認識と限定旧source復元owner（2026-10-17 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存SELF received先行証明を、同一文に閉じた承認済み理由・対象・満足の三点へ接続する。新production fileはなく、既存3 ownerの責務差分である。
+
+| mashos-api相対path | u305の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 単一の本人received先行文によるSELF継続を既存理由三点へ接続。private `legacy_received_reason_context` 指定をtyped projectionへ伝搬し、直接final builderの既定は旧認識（true）を維持する。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | fresh threadでは新認識（旧指定false）を明示。旧source世代の再導出では旧指定trueを選び、旧Q1で使うsource認識を保持する。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 完全旧checkpointの限定旧source再導出を追加し、他欄の現行認識能力を保持する。旧IDへ新意味を貼らず、既存の全体一致検証を通す。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 理由付きの同欄received先行、SELF／三点所有、旧source復元と質問／保存境界を既存回帰へ追加する。 |
+| ai/tests/fixtures/cmee_emlis_pre_reason_received_context_v1.json | 未変更API `5f710c21c065db373ede844106670f7fb41b365d` から取得した合成互換証拠。有効13 rowと、質問未発行で回答を作成できなかった1 attemptを分離して保持する。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行sourceの共有owner identityを再導出する。歴史fixtureは変更しない。 |
+
+旧checkpoint保存済みの再試行は完全旧解釈、完成済み保存本文は非再生成とする。旧質問と現行質問が全体一致し回答checkpointが未保存の場合は旧版を識別できないため、現行source全体を再検証して新checkpointを作る既存動作を維持する。
+
+意味schema・Move資格・NORMAL資格・作者／reader・公開API／DB／RN・依存とRN→API→service/store→保存read→RNの責務は不変。全体01／current01/04、実本文と検証は06／API handoff u305、次作業はweekly§5.6.55を参照。次は訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を意味選択から照合する。PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・未配置／未マージを維持する。
+
+
+## u307 — 未変更理由三点の更新後局所内容（2026-10-17 JST）
+
+u306限定案はMash承認済み。STRUCTURE_MAP_DELTA_PRESENT。新fileなし。既存6 ownerの責務を次のとおり追加する。
+
+| mashos-api相対path | 更新後の責務 |
+| --- | --- |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | 理由三点用private Eligibility／Content、全体aggregateとの厳密結合とseal。旧初回型／received型は維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 元source／単一received反応訂正から資格を再導出。private aggregate projectorとpublic carrier接続を分離し、全selectedを再導出照合 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | 選択済み三binding／source qualifier／候補・contribution／二方向関係から局所内容を導出 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | 旧LIMITED投影・claim／traceへの結合、private内容封印、論理契約二型追加（74→76） |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 別selected carrierのsource再検証と、未変更の理由・対象・本人内の充足を既存経験文法へ接続 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 新局所型の有限reader分岐、三点・時点・実本文を独立逆検証 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 6配置／二時点・他理由対象・程度・資格除外・改変／再封印拒否・作者禁止readerの回帰 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerのidentityのみ再導出。歴史fixture不変 |
+
+既存emlis_answer_updateの義務証明は読取再利用・未変更。公開API／DB／RN、各上限、01B/C・Piece/Analysis責務、新依存は不変。実本文・保存40 DTO・互換・検証は06／API handoff u307、意味契約は05／8/28設計u307、次作業はweekly§5.6.57。PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・未配置。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+| 既存path（mashos-api） | 今回の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | `_retained_reasoned_add_duties`で限定ADDを実sourceから証明。旧REVISE資格と併存させ、既存局所content／carrierへ接続。全source／selected再導出を維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | Eligibilityの説明docstringのみ訂正後から限定別更新へ整合。型／field／validatorは不変 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | ADD48、独立時点／程度、原意味不変、除外、再封印／source改変拒否、作者禁止finite reader |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行runtime owner identityのみ再導出。language identityと歴史fixtureは不変 |
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+## u317 — 丁寧形received先行の同一欄で後続評価を保持（2026-10-17 JST）
+
+同じmemo／memo_actionの先頭にある単一SELF received経験のnegative過去丁寧反応を伝聞導入へ誤分類するsource認識を修復。既存本人受け手証明と実source「かったです」を条件に後続評価を保持する。共有report helper、作者／reader・意味資格／内容型・公開API／DB／RNは不変。currentの核辺・checkpoint・選択／Observationは修復に伴い変化する。
+
+`_legacy_received_report_context` により旧sourceを完全再導出し、保存checkpoint／canonical questionと完全一致した場合だけ復元する。旧IDへcurrent意味を付け替えず、direct builderと以前のsourceモードを維持する。既存3owner内、production file／依存追加なし。STRUCTURE_MAP_DELTA_PRESENT。01B/CとPiece/Analysisの責務差分なし。
+
+| 既存path（mashos-api） | 今回の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 後続評価のreport拒否を既存SELF received証明の後へ配置。negative過去丁寧反応の誤拒否だけを閉じ、旧sourceモードを導出経路へ通す |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | current source導出へフラグを渡し、以前のsourceモードは旧report拒否を維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | u316の完全な旧sourceを再導出し、旧checkpoint／canonical questionの完全照合時だけ復元 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 原文slice／所有／時点・更新・非対象・旧checkpoint14・保存非再生成を検証。受容保持10例は未解消 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityを再導出。歴史fixture不変 |
+
+主回帰1,584 pass、104比較36変更68同一、service52case／RN78 DTO、旧checkpoint14を確認。実本文・互換・失敗を含む検証は06／API handoff u317、最新再開順はweekly §5.6.67。次は同一欄の評価訂正／撤回後の受容保持10例を既存条件と比較する。現在形／名詞形／肯定反応、本文自然さ・周辺既存失敗も未解消。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+## u318追跡 — source作用域とLIMITED参照（2026-10-17）
+
+製品構造は `STRUCTURE_MAP_DELTA_NONE`。既存grounded planの有限認知・contrast原文照合と選択後Reception binder内部を修復した。新production file/owner/経路はない。
+
+| 追加ファイル | 責務 |
+|---|---|
+| mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py | 推量の制約誤認、明示SELFの未確定認知と報告／他者topic拒否、LIMITED basis必須coverage、短いcontrastと一意marker原文証明を検証 |
+
+実装・未加工全文・保存検証・未完了は [u318監査](audits/emlis_ai/Cocolon_EmlisAI_u318_SourceScope_and_LimitedBinding_20261017.md)。原03の作用域、汎用受容、旧失敗checkpoint等を残し、商品完了へ読み替えない。
+
+## u319追跡 — 既存source・本文検査・checkpoint責務（2026-10-17）
+
+`STRUCTURE_MAP_DELTA_NONE`。新production owner/公開経路はない。grounded observation planは有限経験/外側感情と内側推量、実contrast markerを証明。sentence surfaceは時点を加えない既存対比形、observation gateは両端原文と選択済みappraisalの独立文法、emlis_question/answer_updateは旧source checkpointの完全再導出を担当する。
+
+既存 `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` に、主体/推量/時制、NORMAL/LIMITED本文、44本文変異、旧checkpoint全payload・意味digest、既存nominal受容保持を追加。145件。現行identity fixtureのみ更新し、歴史的proofは変更しない。
+
+最新実装・本文・検証は [u319監査](audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md)。元10例9→10、固定100は71で全record一致。次は入力固有受容と他の主体/時点誤認、E05/E06。PRODUCT_NOT_CLEAR・初回一体単位未完了・未配置。
+
+### u320 file追跡 — 内側時間主題と旧u319 checkpoint（2026-10-17）
+
+既存source plan／question original plan入口／answer updateの旧意味再導出を修復。製品owner・契約・公開経路の追加はなくSTRUCTURE_MAP_DELTA_NONE。既存`ai/tests/test_cmee_emlis_source_scope_regressions.py`が時間主題・動詞活用／人topic境界・作者禁止reader・旧意味復元を確認する。新規`mashos-api/ai/tests/fixtures/cmee_emlis_u319_temporal_topic_checkpoint_v1.json`はd780c315から取得した4件の完全checkpoint／意味hash／public結果を保持し、旧意味への正確な再導出を検査するfixtureである。現行identity fixtureだけ再導出、歴史fixtureは不変。実測・本文と残件はu320監査と正本06 u320を参照。
+
+
+### u324 file追跡 — 現在感情と本人の理由不明・旧u323 checkpoint（2026-10-18）
+
+- `mashos-api/ai/tests/fixtures/cmee_emlis_u323_feeling_reason_checkpoint_v1.json`：新規。API `a1925d5d761b397aee9f939fc42a1d9305c4a19f` から修正前に取得した4件。原memo、完全checkpoint、public結果、元の核／関係SHA-256を保持。旧UNAVAILABLE2件／LIMITED2件。旧IDへ新しい意味を付け替えない互換検証に使用する。
+- `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` と `test_cmee_emlis_q3_thread.py`：既存fileの回帰・保存再表示を拡張。
+- 製品変更は既存Plan／HR／surface／Gate／emlis_question／emlis_answer_updateの6owner内。新しい意味型・公開経路・保存schemaは追加しない。STRUCTURE_MAP_DELTA_NONE。
+- 結果・未加工本文・限定範囲：[u324監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u324_FeelingReasonSelfScope_20261018.md)。
+
+
+### u325 file追跡 — 選択済み不明対象の受け取り（2026-10-18）
+
+- `mashos-api/ai/tests/fixtures/cmee_emlis_u324_unknown_object_checkpoint_v1.json`：新規。修正前API `0f78a0e25dd74a40aaedb28327658799ee1aa43b` の10件、完全checkpoint・核辺hash・選択内容hash・公開本文・question decisionを凍結。意味不変と参照方式のidentity更新を区別する。
+- 既存Plan／HR／Gate／emlis_answer_update／emlis_thread_source内の修復。ThreadEvidenceSpanResolverは既存qualified evidenceの全fieldを読むread-only methodを追加。意味型・公開API・保存schema・経路は不変、STRUCTURE_MAP_DELTA_NONE。
+- 検査は既存 `test_cmee_emlis_source_scope_regressions.py` に追加。[u325監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u325_UnknownObjectReception_20261018.md)に全文・残件・検証限界を記録。
+
+
+### u326 file追跡 — 単独不明対象の受け取り（2026-10-18）
+
+`STRUCTURE_MAP_DELTA_NONE`。単独memoの現在SELF・negative・uncertainを対象とする既存3製品owner内の修復であり、新製品file・公開経路・意味型・保存契約は追加しない。01B／01C、Piece／Analysisの責務差分はない。
+
+| path（mashos-api） | 今回の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 単独不明の全文source・一核一span・現在SELF・関係なしを証明し、既存選択Moveの参照方式だけを明示へ変更。二核resolverの既定動作は維持 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 一核専用の内部文法とslot／profileを照合し、既存UNFINISHED_OPENNESS／LEAVE_UNFINISHEDの内容を本人・対象・程度・否定付き有限文へ実現 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 本人表現を原文へ逆復元し、対象節全体を作者非依存で照合。単独処理はsource証明済みの一核だけに限定 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | 既存fileへ49件追加。凍結意味・本人／対象／程度／否定・source対象外・空白・IR偽装を確認 |
+| `ai/tests/fixtures/cmee_emlis_u325_single_unknown_checkpoint_v1.json` | 新規。修正前API `8df8bdb1d0076fe6c7895b7c423aa144182af4e6` の合成10件を凍結し、完全checkpoint・核辺・選択内容の同一性と、Reception差分／Observation・問いの保持を比較 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 既存の現行共有owner identityを実sourceから再導出。歴史fixtureは変更しない |
+
+source_scope最終341 passed。実SQL／RPC serviceとAPI client／hook／Modal native stubは同じ6 DTOで保存本文・close/reopenを確認。別集合のQ3対照48 passed／既知3 failed、application54 passed、現行identity1 passedを含め、計444 passed／既知3 failed。全件成功ではない。最終source identityとGitHub反映commitは [u326監査](audits/emlis_ai/Cocolon_EmlisAI_u326_SingleUnknownObjectReception_20261018.md) を参照する。独立行動併記時の選択欠落は未修正。商品NOT_CLEAR・正式0/3・未配置を維持する。
+
+
+### u327 file追跡 — 不明対象と別欄の独立行動を保持（2026-10-18）
+
+`STRUCTURE_MAP_DELTA_NONE`。既存6製品owner内で、原source証明・既存選択・本文・旧意味再導出を接続する修復。新しい製品file／schema／公開経路はなく、01B／01C・Piece／Analysisの責務差分もない。
+
+| path（mashos-api） | 今回の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | whole SELF current wh不明と別欄の独立実行済み行動を証明し、既存3属性と二責務選択へ接続。optional bounded cross-field wish／attempt誤関係だけを除去 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 選択済みMATERIAL_WEIGHT／RECEIVE_AS_MATERIALのまま不明対象を有限文へ保持。u326の一核限定UNFINISHED文法は維持 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 本人・対象・程度・否定と実本文を作者非依存で照合し、片方欠落や別内容への変更を拒否 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行thread原意味準備へ今回修復を接続し、旧source再導出と分離 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧u326 checkpointを完全な旧意味の再導出とidentity一致で復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1公開経路で準備済みplanを本文生成へ維持。Q3と同じ原意味を使用 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | 既存fileへ94件追加。20入力×2公開経路、旧checkpoint20、本文改変18、対象外16 |
+| `ai/tests/fixtures/cmee_emlis_u326_unknown_action_checkpoint_v1.json` | 新規。API `56fcaaec23a516de70fcc86f8f0caca94b86bc50` の合成20件を凍結し、旧意味・旧本文の保持と現行生成差分を比較 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 既存の現行source identityを再導出。凍結済み歴史fixtureは不変 |
+
+source_scope435 passed、Q3対照54 passed／既知3 failed。別集合のapplication54 passed・identity1 passedを含め、計544 passed／既知3 failed、skip 0。実SQL／RPC serviceと実DTOを渡すAPI client／hook／Modal native stub各6件の全文・close/reopenを確認。全件成功や商品品質合格とはしない。最終結果・未加工20全文・意味世代の境界は [u327監査](audits/emlis_ai/Cocolon_EmlisAI_u327_IndependentUnknownActionReception_20261018.md) を参照する。
+
+
+### u328 file追跡 — 同欄の本人不明と証明済み行動の本文停止修復（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。製品4fileは既存のobservation_plan／human_reception／observation_gate／emlis_thread_engine。source証明・二責務選択・有限本文／独立reader・Q1接続を修復し、元のmemo欄と全sourceを保持する。新製品owner、契約、経路はない。01B／01C、Piece／Analysisに責務差分なし。
+
+既存 `ai/tests/test_cmee_emlis_source_scope_regressions.py` に61件を追加。新規 `ai/tests/fixtures/cmee_emlis_u327_same_field_unknown_action_checkpoint_v1.json` は修正前API d2cdc5d…の合成16例のcheckpoint／核辺／選択／本文・問いを凍結。既存 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` は現行sourceから再導出。歴史fixtureは不変。
+
+source_scope496、Q3対照54＋既知3失敗、application54、identity1。合計605成功／既知3失敗、skip0。実service/PGlite7ケース、現行API client／hook／Modal native stub7ケースで保存・GET・元入力・履歴・再表示を確認。本人実機ではない。8本文停止を修復したが、机の8例は誤認・未提供を含め不変。深い受容・問い・商品品質は未完。
+
+詳細・未加工16例・実装境界：[Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md)。
+
+
+### u329 file追跡 — 同欄の行動誤分類と派生関係修復（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。既存 `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` 一つのowner内で、原文の二完全文と単一目的語＋既存過去述語を証明し、value/eventの誤分類をaction/fact/pastへ修復。誤派生関係はID・端点・根拠を保持してoptional uncertaintyへ戻す。作者・reader・Q1/Q3はu328接続を継承し、新製品owner・schema・API/DB/RN変更なし。01B/01Cと他中核は構造差分なし。
+
+既存 `ai/tests/test_cmee_emlis_source_scope_regressions.py` へ112検査を追加。旧拒否2例はlegacy planと明示し、17例の現行拒否は維持。新規 `ai/tests/fixtures/cmee_emlis_u328_same_field_action_checkpoint_v1.json` はAPI f58e6ba…の合成24例を凍結。既存 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` は現行identity再導出。既存歴史fixtureは未変更。
+
+source_scope608、Q3対照54＋既知3失敗、application54、identity1。計717成功／既知3失敗、skip0。実service/PGlite7件と同じDTOのAPI client/hook/Modal7件で保存・再表示を確認。24例の本文・行動意味を修復したが、反復・定型・深さ・問いは未完。
+
+詳細・未加工24例・検証境界：[Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md)。
+
+
+### u330 file追跡 — scalar不明と別欄行動の受け取り欠落（2026-10-18）
+
+既存 `emlis_ai_grounded_observation_plan.py` の完全source証明・optional関係処理と、`cocolon_meaning_experience_engine/emlis_thread_engine.py` のQ1準備済み意味接続を修復。HR／Gateのwh専用表面は維持し、対象なし不明へ対象・理由を補わない。新しいarchitecture ownerはなくSTRUCTURE_MAP_DELTA_NONE。
+
+`test_cmee_emlis_source_scope_regressions.py`へ90検査追加、新規 `fixtures/cmee_emlis_u329_scalar_action_checkpoint_v1.json`に変更前合成20例、現行 `fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`を再導出。歴史fixture・既存assertionは未変更。本文8修復・12完全record一致、旧20checkpoint・保存6／RN6確認。既存handoff・正本06・07・weeklyへ同期。
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md)。
+
+
+### u331 file追跡 — 明示対比の2対象を保持（2026-10-18）
+
+既存OPで原文fieldと2span・required関係を証明してreferenceを明示化、HRで有限節を名詞化、Gateで両端と対比構造を本文から独立読解、thread_engineでQ1も準備済みplanへ接続。新規architecture ownerはなくSTRUCTURE_MAP_DELTA_NONE。新規test `ai/tests/test_cmee_emlis_contrast_reference.py` と変更前20例 `ai/tests/fixtures/cmee_emlis_u330_contrast_reference_v1.json` を追加。現行shared-owner identityを再導出。既存handoff／06／07／weeklyに結果、監査に全本文と新主観選択の未採用案を記載。意味型・選択契約・公開API／DB／RNは不変。
+
+詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
+
+
+### u332 file追跡 — source根拠付き二反応
+
+既存製品8ownerに内部内容契約を追加。RN→API→service/store→保存read→RNは不変。新production file0。01B／01C、Piece／Analysis、公開API／DBの責務差分なし。
+
+| mashos-api exact path | u332の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 二source役割・全field帰属・joint資格／origin・限定訂正grammar |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 選択済み二facetと訂正内容の有限本文 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | source役割と二facetの独立読解、旧generic救済の禁止 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 内部新content、閉じた検証、source qualifier搬送、LIMITED導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | NORMAL導出、manifest77・current identity |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | current意味と旧source modeの版分離 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint全体復元、訂正／撤回と残存責務 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1のcurrent／legacy準備済み意味経路 |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 新規82検査：source、本文、作者禁止変異、更新、旧意味互換 |
+| `ai/tests/fixtures/cmee_emlis_u331_relief_cognition_v1.json` | 新規：変更前u331合成20入力の記録 |
+| `ai/tests/test_cmee_emlis_result_appraisal.py` | 現行manifest件数76→77のみ |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行18payload／9ownerを再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 最新契約・実装・検証・残件引継ぎ |
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。
+
+## u333 — 明示SELF継続修復のfile地図（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。production owner・意味型・公開経路の追加なし。
+
+| 実path | 変更責務 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 局所SELF継続証明・旧source mode。既存作者／readerは変更なし |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／全旧source modeの明示伝播 |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧u332 checkpoint完全復元の優先経路 |
+| `mashos-api/ai/tests/test_cmee_emlis_self_continuation.py` | 新規95検査。source・Q1/Q3・NORMAL/LIMITEDの独立変異・5更新・8SQL保存・帰属 |
+| `mashos-api/ai/tests/fixtures/cmee_emlis_u332_self_continuation_v1.json` | 凍結u332実engineで取得した26例のcheckpoint／plan／selected・停止／本文・問い |
+| `mashos-api/ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行source ASTからlanguage/runtime identityを再導出。歴史fixtureは不変 |
+| `mashos-api/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 修復・限界・具体的な次の承認案の所在 |
+
+詳細：[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。独立不明の保持契約試作は撤回済みで、上表の採用差分に含めない。
+
+## u334 — 二反応と独立不明のfile地図
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file0。01B／01C、Piece／Analysis、公開API／DB責務の差分なし。
+
+| mashos-api exact path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 全field・全spanの3対象証明、独立不明の版付き資格、二move、旧mode |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 新RetainedReliefCognitionEligibilityV1／ContentV1、全体claimとlocal既存contentの閉じた検証・seal |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py` | 既存候補から局所二basisの承認済みcontentを導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 一claim／trace／projectionを検証してlocal contentを封印、manifest79 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 全寄与を二moveへ分配、現行初回資格、全source／aggregate再導出でcarrier全体を照合 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 新decision版を私有入力として検証、既存unknown／二反応作者へ接続 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | local二反応＋独立不明の独立読解、facet欠落のgeneric救済を禁止 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | currentと全歴史source modeを分離・伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u333 checkpoint完全復元。既存Premium focus再構成でも証明済み二moveを維持 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | 新86検査、本文・source反例・作者禁止変異・再seal攻撃・旧18復元・manifest・3tier保存 |
+| `ai/tests/fixtures/cmee_emlis_u333_relief_unknown_v1.json` | u333実engineから取得した合成18例の完全checkpoint／plan・selected hash／本文・問い・停止 |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 同じ二facetの検査helperを明示した新sidecarにも対応、現行manifest件数79 |
+| `ai/tests/test_cmee_emlis_result_appraisal.py` | 現行manifest件数77→79のみ |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行9ownerのASTからidentityを再導出。歴史証拠は変更しない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 承認・実装・実本文・互換・残件の引継ぎ |
+
+詳細：[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)。
+
+## u335 — 独立不明source修復のfile地図
+
+新production file0。既存3owner。01B／01C、Piece／Analysis、公開API／DB責務の差分なし。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api exact path | 差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 全三対象を再証明した場合だけreflexive核とlexical conflict辺を補正。旧source modeを保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行と全歴史source modeの伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u334 checkpoint完全復元をu333以前より先に試行 |
+| `ai/tests/test_cmee_emlis_relief_unknown_source.py` | 現行40・旧40完全record、Q1/Q3・作者禁止本文変異・偽provenance境界 |
+| `ai/tests/fixtures/cmee_emlis_u334_relief_unknown_source_v1.json` | 凍結u334実engineの合成40例、checkpoint／plan・selected hash／本文・問い・停止 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | u334対照2例を旧checkpoint指定で検証。同じ期待値・全assertionを維持 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終source ASTからcurrent identityを再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | source修復・互換・保存・未解決と短文化限定案への引継ぎ |
+
+詳細：[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)。
+
+## u336 — 実Observation共同保持のfile地図
+
+新production file0、既存8file。01B／01C、Piece／Analysis、API／DB責務の差分なし。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api exact path | u336の差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存pairの照応候補資格版、既存reference policyのANAPHORIC化、歴史source mode |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行と全歴史flagの伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u335完全復元を先に試行、pair失効時に照応資格も消去 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | u335復元時は既存u334三対象carrier資格を維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py` | 既存行ownerで実Observationを先行生成、同じ文を作者へ渡す |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 既存唯一作者／replay／検証へ実Observationを渡し、適格時のみ短形 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | live selected pair→実Observation exact／一意証明→二facet短参照の独立読取 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 既存行生成の先行呼出し、最終bytes一致、実本文由来の検証、傾聴終止の検出 |
+| `ai/tests/test_cmee_emlis_relief_anaphora.py` | 現行40、旧u33540、自然変種・二作者禁止変異・契約改変・全文fallback |
+| `ai/tests/fixtures/cmee_emlis_u335_relief_anaphora_v1.json` | 凍結0717bd4dの全40record |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 承認済み共同保持と実本文変異へ期待を移す |
+| `ai/tests/test_cmee_emlis_self_continuation.py` | SELF原文は実Observation、本文全体で主体／scope変異を拒否 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | 共同保持、独立不明、歴史controlの明示復元 |
+| `ai/tests/test_cmee_emlis_relief_unknown_source.py` | u334 historical control保持と現行共同保持変異 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | pairのみ共同保持へ変更、古いno-op変異を実際の短形変異へ置換 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終sourceからcurrent identity再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 承認範囲・実本文・検査・残件・PR反映への引継ぎ |
+
+詳細：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
+
+
+## u337 — 残存安堵の本人の人称修復のfile地図
+
+新production file0、既存production6file。01B／01C、Piece／Analysis、公開API／DB責務の差分なし。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api exact path | u337の差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 元の適格pairで明示SELF安堵へ表現資格版を付ける。新意味型なし |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行と全歴史source modeへ旧表現flagを伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u336の旧checkpoint全体を先に再導出して復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 表現だけのlegacy flagで旧u336独立不明carrierを失効させない |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 原文の明示SELFを再証明し、単独残存安堵の先頭人称だけ「あなた」に変換 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 共通appraisalの選択basis・live核・全原文から独立に人称を検証。汎用fallbackによる迂回禁止 |
+| `ai/tests/test_cmee_emlis_relief_self_recipient.py` | 現行初回40／更新21、旧61完全復元、二作者禁止変異、偽根拠、資格対照、SQL保存再表示 |
+| `ai/tests/fixtures/cmee_emlis_u336_self_recipient_v1.json` | 無変更u336 commit 703991eの実engineから取得した合成61完全record |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終source ASTからcurrent identityを再導出。過去の凍結fixture不変更 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 実装・検証・残件の再開先 |
+
+詳細：[Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md)。
+
+
+## u339 — 過去SELF不明の限定修復のfile地図
+
+STRUCTURE_MAP_DELTA_NONE。既存production9file、新production file0。01B／01C・Piece／Analysis・公開API／DBの責務差分なし。新test1・凍結fixture1と既存test4／current identityを以下に記録する。
+
+| mashos-api exact path | u339の差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 完全memo・一意の後置SELF・過去陰性wh節を再証明しsource_past_self_unknown:v1を付す。単独または完全pair末尾のみ |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 新資格・同一sourceに限るpast unknown binding。UNFINISHEDと既存enumを維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 初回限定・完全source・唯一のUNKNOWN境界とspanを再証明。既存三対象保持を限定拡張 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 新source modeと全歴史modeを分離。問いの範囲追加なし |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint全体の一致から旧意味・旧本文／停止を復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 新資格付き初回はQ1入口もprepared planへ接続 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | その時の認識として完全原文を示すObservation |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 過去の具体対象・程度・肯否を保持しSELFだけ聞き手の人称へ変換 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者を呼ばない原文復元、selected内容／past軸の照合、専用reader失敗時のfallback拒否 |
+| `ai/tests/test_cmee_emlis_past_unknown.py` | 新14／不変30、旧44完全復元、本文・選択・境界改変、SQL保存を検証 |
+| `ai/tests/fixtures/cmee_emlis_u337_past_unknown_v1.json` | 無変更c26ece4から実行取得した合成44record。歴史原本 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | 単独過去1行の旧admission境界をu337凍結checkpointへ固定。現在の適格性は新testで確認 |
+| `ai/tests/test_cmee_emlis_relief_anaphora.py` | 過去3歴史対照だけ旧checkpointを明示。既存assertion維持 |
+| `ai/tests/test_cmee_emlis_relief_self_recipient.py` | 過去3初回歴史対照だけ旧checkpointを明示。更新の現在対照維持 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | 当時除外していた過去1行を歴史checkpointへ固定。既存assertion維持 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終sourceからcurrent identityを再導出。歴史fixtureは書き換えない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回の承認・結果・残件・再開先 |
+
+詳細：[Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md)。
+
+
+## u340 — 別時点contrastの表示修復
+
+STRUCTURE_MAP_DELTA_NONE。新production owner／公開経路なし。01B／01Cの責務追加なし。Analysisの既存OP依存は維持し、既存builderは変更しない。
+
+| mashos-api exact path | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存u331二対象のsource証明を再利用し、原文prefixと既存past／presentが一致するrequired contrastのみ表示義務に指定。認識・選択・builder不変 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 適格な単一対比行を完全原文2対象＋既存「一方で」文法で表示 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 同じ対象の最終本文を作者なしで読む。原文両端・順序・一文全体を照合し同時性／因果／追加主張を拒否 |
+| `ai/tests/test_cmee_emlis_separate_time_contrast.py` | 新72検査。12原本比較・Q1／Q3・checkpoint・作者禁止変異・資格偽装・同endpoint余剰辺・SQL保存 |
+| `ai/tests/fixtures/cmee_emlis_u339_separate_time_contrast_v1.json` | 無変更d28e7bcから実行取得した12合成record。旧意味・旧本文の変更しない比較資料 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終sourceからcurrent identityのみ再導出。歴史identityは変更しない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回結果と資格外残件の再開位置 |
+
+詳細：[u340監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u340_SeparateTimeContrast_20261018.md)。
+
+
+## u341 — 「とても」をtopicの「も」と誤判定する参照を修復（2026-10-18）
+
+ユーザーの残件作業・中断後再開の指示に基づき、全体設計01、全file地図01A、current_structure、canonical 06、最新weeklyとAPI handoffを確認した。u340反映済みHEADはAPI `741463920723bae5ac81d5052a779ca838778cfe`、Cocolon `5134acb7200ed635fe688332acc4410eb87e48ee`。既存設計内の参照実現修復として、Rule18の通常修復範囲で進めた。新しい意味資格・主観契約の拡張へ承認を流用していない。
+
+既存OPの二対象contrast証明が「とても」の「も」をtopicとして除外していた。既存有限述語の直前にある一つの「とても」だけを検査用コピーから除き、他のtopic・主体・条件・引用・敬体の制限を維持した。原文は削らない。無変更u340から凍結した22入力の意味checkpoint・核・辺・selected.decisions・問い・reasonは不変。8入力はreference_modeだけを具体参照へ変え、派生参照と本文を修復した。plan全体／selected全containerが不変という主張はしない。対照14入力はplan・selectedまたは同じ停止・全artifactまで不変である。
+
+8入力のReceptionは両方の原文を「こと」で受け取り、程度・肯否・時点を保持する。うち明示past/presentの6入力はu340の既存「一方で」表示へ自然に接続し、誤った「同時」を除去した。時点未指定の2入力は参照だけを修復し、Observationの旧「同時」は残る。不変の他者・引用・敬体等の旧誤読も品質合格には数えない。同じ旧意味checkpointでの修復本文とQ1/Q3の本文一致を確認した。
+
+検証は重複除外 **228 passed／2 failed／skip0**（新54、関連173成功・2失敗、current identity1成功）。2失敗はu340 `degree` の旧plan完全一致要求（今回reference_mode修復との差）とu331 `distinct_times` の旧「同時」本文一致要求（u340から既知）。旧fixture／assertionは改変・xfail・skipしていない。前回の `explicit_self` 旧停止期待は今回の選定集合に含まず、解消済みとは扱わない。全suite GREEN・製品完成ではない。
+
+実service＋隔離PGlite SQL/RPC12ケース（2原文×3tier×現行／合成旧完成）で、生成禁止engineによるGET／startの全DTO一致を確認。同じ12DTOを現行API client／hook／Modalへ通し、GETのみでclose/reopen各2回、全DTO・本文・original・timeline・質問／回答欄なしを確認した。旧完成は旧helper結果を生成時だけ局所再現し、開始原本の実本文と完全一致させた合成検査。本番旧DB・中断retry・本人実機の証明ではない。HTTP／Auth／nativeはstubである。
+
+STRUCTURE_MAP_DELTA_NONE。既存production1file内の参照証明だけを変更。new production0、公開wire／DB／RN／依存／Safety／releaseは不変。新test1・開始原本fixture1・current owner identityを追跡した。Analysisは同じOP builderから核辺等を読むがreference_mode／human_reception_planを参照しないことをsource読取で確認した。Analysis全suiteの実行済みとはしない。作者とreaderはsource資格helperを共有し、reader変異20では作者呼出なしに最終本文の程度位置・時点・主体・肯否・両端・追加主張を検査した。
+
+逆順「今日は疲れている。でも、昨日は友達と話せて嬉しかった。」は未提供のまま。明示contrastに加えてconflict observerが後半positive→前半limitの近接由来 `attempt_and_block` をrequiredで生成し、`RECEPTION_BINDING_CONFLICT_STOP`となる。参照helperの2辺拒否は正当であり緩めない。次は、完全二文・本人・既存有限述語・明示contrastを証明し、同じ両端を逆向きに結ぶ `conflict.eN` 単独／arcなし／endpoint span一致の誤派生辺だけを既存非required `uncertain_connection`へ戻す案を検討する。これは未実装。核辺とcheckpoint identityが変わるため、旧checkpoint後の復元は旧意味・旧未提供状態を保持し、新意味を旧IDへ付け替えない互換設計が必要である。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。rootが実本文を読み、同Work補助がsourceを読取確認したが、正式な別model Pro／Ultra審査・正式Product Readとは数えない。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。E04の受け止めの深さ、E05問い、E06〜E09、逆順・他者・時点未指定・敬体等は残る。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PRで継続、merge／配置なし。
+
+実本文・全path・検証境界：[u341監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md)。
+
+### u341変更file地図
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存production owner。既存有限述語直前1個の程度語だけをtopic検査用コピーで区別 |
+| mashos-api | `ai/tests/test_cmee_emlis_contrast_degree.py` | 新規。22比較／本文変異20／SQL保存12 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u340_contrast_degree_v1.json` | 新規。無変更u340の22入力・意味／参照／実本文凍結 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行owner identityのみ更新。歴史証跡は保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 再開先・修復範囲・結果・未解消を追記 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 設計／構造／週次の今回差分追記 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 設計／構造／週次の今回差分追記 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 設計／構造／週次の今回差分追記 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 設計／構造／週次の今回差分追記 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 設計／構造／週次の今回差分追記 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md` | 新規。着手記録・実本文・検証・残件 |
+
+
+## u342 — 今日→昨日の完全対比に加わる誤関係と本文停止を修復（2026-10-18）
+
+Mashの残件継続指示に基づき、全体設計01・全file地図01A・current_structure・正本06・最新weekly・API handoffと作業規則、恒久incident全文を確認した。開始HEADはAPI `d663ce22836fd32604788605001d71e8561f7ba2`、Cocolon `1c3dcac03420bd8f37e0d6a0a325a1bb7cf9ce25`。u341で特定した逆順停止に対する、既存設計内のsource誤派生修復である。Rule18 LEVEL_2 standing delegation／current依頼の範囲で、rootが実装・検証・反映し、同Work補助はread-only調査を担当した。正式な別モデルPro／Ultra審査とは数えない。
+
+完全原fieldで本人二文・既存有限述語・明示対比を証明し、原文prefixと既存semantic timeがpresent→pastで一致する場合に限定した。同じ両端の逆向き `attempt_and_block` が単一 `conflict.eN`／meaning arc空／endpoint span完全一致である場合だけ、既存 `uncertain_connection`／bounded_structural_inference／shouldへ戻す。元のcontrast、全核、誤辺を含むID・両端・根拠・certaintyは保持する。実markerの位置・原文切片・対比性も確認する。参照helperから完全二文のsource証明を既存OP内へ抽出し、選択と独立して使用した。u341の参照資格は拡張しない。
+
+開始原本の合成22入力を凍結し、7入力で新しい意味checkpointと本文が成立した。対象は、通常／ひらがな／程度両端／程度過去側／「今日も・昨日も」／句読点違い／過去否定。現行のQ1/Q3本文が一致し、新checkpointで再開しても同じ本文となる。15対照はcheckpoint・plan・Q3 selectedまたは同じ停止・全artifact・問い・reasonが不変。全22入力の核は不変で、対象7入力の関係差分は逆向き誤辺のtype／grounding／retentionだけである。新しい主観内容・選択契約・質問資格を足していない。
+
+今回の修復は意味関係を変えるため、u341の参照だけの修復と異なり、旧IDへ新しい意味を付けない。既存3ownerにlegacy modeを接続し、旧ID指定時にu341の全核辺を再導出して既存checkpoint照合を通す。22入力×Q1/Q3の44復元で、各経路の旧checkpoint・plan・全artifact・問い・reasonを保持した。Q3 selected全体または同じ投影停止も比較した。Q1 selected全体のu341 hashは凍結しておらず、Q3のsource refを含むhashと同一とは主張しない。さらに旧u337の44recordと旧u334の40recordの復元検査が通った。新flag単独で過去の別修復まで無効化せず、より古いsource modeからは今回修復も無効化する。新schemaは不要、Q1 engine／serviceの変更も不要だった。
+
+最終検証は **374 passed／5 failed／skip0**（新119成功、関連255成功・5失敗。current identity1は関連集合に含む）。5失敗はu341の旧不変対照 `reverse`／`reverse_degree`、u340の旧意味・plan比較 `degree`／`reverse`、u331の旧「同時」表示比較 `distinct_times`。歴史fixture・旧assertionは変更・xfail・skipしていない。新119は原本比較22、旧復元44、作者を禁止した本文変異20、source関係変異16、foreign checkpoint拒否1、SQL保存・再開16である。最初の新規検査で検出した対象誤仮定3件とQ1/Q3 selected hash混同4件は、新規test側の仮定を修正した。開始原本fixtureは変更せず、途中実行を成功数へ加算しない。全suite GREEN・製品完成ではない。
+
+実service＋隔離PGlite SQL/RPC16ケース：2原文×3tier×現行完成／旧未提供の12と、2原文×旧checkpoint保存前／後の確定中断4。現行完成と旧未提供は生成禁止engineによるGET／startで全DTO一致。確定中断は既存CancelledError経路を使い、checkpoint前はretryで現行意味を初めて作り、checkpoint後はprepareを呼ばず旧meaning event／payloadと旧未提供を保持した。意味eventは各1件、operationも維持する。旧未提供はRESPONSE_FAILED／body_not_validated／can_retry=falseであり、成功表示へ変えない。lost ACKや失効attempt、本番旧DBを検証したとはしない。
+
+同じ16DTOを現行API client→hook→Modalへ渡し、GETのみでclose/reopen各2回、全DTO・本文または未提供表示・original・timeline・質問／回答欄なしを確認。HTTP／Auth／nativeはstubであり、本人実機・本番配置ではない。全7現行本文をrootが読み、時点・程度・肯否・原文順を維持し、因果や「同時」を足していないことを確認した。定型的な「小さくせずに受け止めています」は残り、E04の深さや正式Product Read完了に換算しない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3file、新production0、新test1・原本fixture1・current identity。OP direct builderの新legacy引数の既定はTrueで、Analysis等の直接呼出しは従来経路を保持し、現行Emlis original_meaning_planだけFalseを明示する。Analysis全suiteは未実行。公開API／DB／RN／Safety／依存／releaseは不変。
+
+残件：`past_then`「今は疲れている。ただ、その時は友達と話せて嬉しかった。」は後半がcurrent_inputで、ただもother_explicitに残り、今回の時点資格を満たさない。`now`「今は疲れている。しかし、昨日は友達と話せて嬉しかった。」は「しかし」が後半spanへ入り、明示contrastがなくattempt_and_block＋shift_from_toのまま停止する。他者・明示SELF・条件・敬体・時点未指定等の対照は従来の誤読／停止を含み、不変を品質合格と扱わない。次の読取位置は、これら未証明例の時間・接続詞のsource帰属と、既存契約内で修復できる共通原因である。語順一般への対応完了とは報告しない。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。E04深さ／E05問い／E06〜E09は未完。10/20方式判断・10/31管理線・12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PR継続、merge／配置なし。
+
+実本文・全path・検証境界：[u342監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md)。
+
+### u342変更file地図
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存二文証明の抽出、逆向き誤辺だけの修復、direct builder旧mode |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／旧source modeから修復条件を伝播 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpointの全意味再導出と既存照合 |
+| mashos-api | `ai/tests/test_cmee_emlis_reverse_contrast.py` | 新規。原本比較、旧復元、独立本文読解、source変異、SQL保存／中断再開 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u341_reverse_contrast_v1.json` | 新規。無変更u341から凍結した22入力・Q1/Q3旧記録 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行owner identityのみ更新、歴史証跡は保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 再開範囲・実績・互換境界・残件を追記 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 今回の設計・構造・週次差分 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回の設計・構造・週次差分 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 今回の設計・構造・週次差分 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回の設計・構造・週次差分 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回の設計・構造・週次差分 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md` | 新規。着手・実本文・検証・残件 |
+
+
+## u343差分 — source時点・接続詞修復（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。既存4production file内で修復し、公開wire／DB／RNの変更なし。本文・旧checkpoint全体・保存再開まで確認。[u343監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md)に全16fileの地図と検証境界を記載する。
+
+## u343変更file地図（16file）
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 時点・接続詞の原field証明、既存fragment参照、限定関係修復、direct旧mode |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 独立typed fragment読取と生の二対象照合 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／歴史source modeの伝播 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u342全旧意味を再導出してcheckpoint照合 |
+| mashos-api | `ai/tests/test_cmee_emlis_time_contrast_source.py` | 新規。現行・旧復元・独立本文・SQL保存／中断 |
+| mashos-api | `ai/tests/test_cmee_emlis_time_contrast_proof.py` | 新規。原文・provenance・時点・fragment変異 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u342_past_then_v1.json` | 新規。無変更u342の36record・両route |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u342_inline_contrast_v1.json` | 新規。無変更u342の18record・両route |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行owner証跡のみ更新 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 短い結果と正本への再開参照 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md` | 今回差分・参照／本監査 |
+
+
+## u344差分 — 二反応の到達と更新保持（2026-10-18）
+
+[u344監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md)に実本文・互換・保存の検証境界。公開wire／DB／RN不変、私有保持型2追加・logical81。
+
+## u344変更file地図（24file）
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存pair証明に限定した表記認識、正規化済み関係の参照、撤回後の残存感情の共通選択 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／全歴史source modeへの表記互換の伝播 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 不変pairと既受理1更新の出自証明、2責務保持、版付きcheckpointと旧完全復元 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 既存LIMITED集約を保った局所二反応、元入力／回答／plan／selectedの完全再証明 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 更新専用eligibility/contentの私有2型。既存二反応内容と全体claimの結合検証 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 同じ二反応内容の封印と私有2型manifest、logical79→81 |
+| mashos-api | `ai/tests/test_cmee_emlis_loneliness_orthography.py` | 新規。現行30例×Q1/Q3、旧復元、作者禁止読解、原文資格変異 |
+| mashos-api | `ai/tests/test_cmee_emlis_loneliness_delivery.py` | 新規。pair自体の5訂正／撤回、隔離SQLの保存／再開7例 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_update_retention.py` | 新規。17実質問例×Q1/Q3、初回不変・1回答保持・旧復元・独立読解／出自変異 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_update_delivery.py` | 新規。隔離SQLの回答保存・旧完成／未提供・確定中断再開9例 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_cognition.py` | 現在manifest件数のみ81へ同期。歴史fixture・本文期待は保持 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_unknown.py` | 現在manifest件数のみ81へ同期。unknown保持資格・既存本文期待は保持 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u343_loneliness_orthography_v1.json` | 新規。無変更u343の30入力×Q1/Q3の全record |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u343_relief_update_v1.json` | 新規。無変更u343の17入力×Q1/Q3×初回／回答後の68全record |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行ownerから再導出したidentity。scope・歴史proof保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 検証済み範囲・未完・次の実本文確認位置 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md` | 今回差分・参照／本監査 |
+
+
+## u345 — 別経験への1回答後も、完全な観測と短い二反応を両立（2026-10-18）
+
+u344に残った原文反復を、既承認のu336共同保持とu331/u332更新責務の範囲で修復した。未変更の安堵・寂しさpairと独立した別経験を既存行構成ownerで別行へ分け、pairの完全な原文をObservationへ残す。実Observationの完全一行・一意照応を要求するreaderは変更しない。意味checkpoint・全plan・selected・問い・decisionは不変で、新しい内容選択や反応は追加しない。
+
+開始原本21入力の比較で、10入力×Q1/Q3の1回答後Receptionを短縮。初回42結果は不変。別の寂しさもある曖昧例は全文参照を保持。「かもしれなかった」はQ3で実問いを出せず、改善成功に数えない。対象集合の最終結果は重複除外323 passed／0 failed／skip 0（新規108、既存関連215）。全suite成功を意味しない。保存23DTOの現行API client→hook→Modalでclose/reopen各2回も確認。HTTP／Auth／nativeはstubで、実機・本番DBではない。
+
+旧u343 checkpointは旧意味・全出力／停止を保持。u344と同じ意味checkpointから未完成本文を生成する場合は今回の行構成を使うが、既に完成・保存した本文は再生成せずそのまま返す。STRUCTURE_MAP_DELTA_NONE、既存production1file・新production0、logical81不変。公開wire／DB／RN／Safety／依存の変更なし。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回の長い混在Reception、extra_unknownの回答後のpair欠落、否定訂正、一般入力・任意多段、E04深さ／E05問い／E06〜E09・本人実機は残る。次は未変更の不明と二反応が追加回答後に同居するextra_unknownの責務脱落を原文・実問い・選択から診断し、既承認保持の修復と新しい内容判断を区別する。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は維持。既存Draft PR3／PR30で継続、merge／配置なし。
+
+全13file、未加工本文、検証・互換境界は[u345監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u345_ReliefObservationLayout_20261018.md)。
+
+### u345変更file地図
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 既存の行構成owner。保持pairと独立した別経験を別行にし、既存source-component arcを使用 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_layout.py` | 新規。無変更u344比較、全意味・問い保持、独立本文読解、同一経験の分割拒否、旧保存準備の原本一致 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_layout_delivery.py` | 新規。現行／u344完成本文の保存、生成なし再表示、保存済み意味からの中断再試行7件 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u344_relief_layout_v1.json` | 新規。開始原本fc3bc928の21入力×Q1/Q3×初回／1回答の83結果と実問いなし1件 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現在owner identityのみ再導出。歴史fixture・scopeは保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回結果・保存境界・残件・次の再開先 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 設計全体の最新差分と監査への入口 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回13fileの全変更地図。01B/Cの既存担当範囲は変更なし |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 今回のスナップショット差分 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | EmlisAI現状・保持範囲・未完 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 実装順序・検証・進捗の正本追記 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 最新週次への実績・残件追記 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u345_ReliefObservationLayout_20261018.md` | 新規。本監査、判断根拠・実本文・検証境界・全変更file |
+
+
+## u346 — 独立不明が同居しても、別経験の1更新後に既存二反応を保持（2026-10-18）
+
+u345残件extra_unknownを修復した。初回から選ばれている安堵・寂しさpairを、別経験への受理済み1回答／訂正／event撤回後も維持する。末尾の独立current SELF wh-unknown1核は、原文・核・関係・Observationで不変のまま残し、既存2 moves／3選択対象を保つ。不明への第三Receptionは追加していない。
+
+開始原本18入力×Q1/Q3の初回36結果は完全不変。9入力×2経路の現行更新でpairを回復し、残りの実更新は旧結果を保持。旧u345の全保存checkpointは全意味・選択・本文／停止へ復元する。別event撤回には後段のexact3構成guardも修復。旧本文未提供だったQ3の3入力は、本文成功後の既存停止理由へ到達するためdecision_reasonのみfree_round_completeからno_bound_personal_meaning_targetへ変わる。質問本体は追加しない。
+
+対象集合の最終結果は重複除外187 passed／0 failed／skip 0（新規101、関連86）。保存8DTOを現行API client→hook→Modalでclose/reopen各2回確認した。HTTP／Auth／nativeはstub。全suite／実機／本番DBの成功を意味しない。
+
+STRUCTURE_MAP_DELTA_NONE、既存production2file・新production0、logical81不変。新契約型／新unknown grammar／新AFFECTやSTANCEは追加せず、u334の初回exact3資格は不変。元の承認u331/u332の更新時保持を修復するRule18 LEVEL_2。公開wire／DB／RN／Safety／外部AI／依存／費用は変更しない。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。次は、初回から残るextra_unknownの独立不明へのReception欠落を、更新後の不明を応答対象へ加える場合の4対象／3 movesの責務と既承認u334 exact3境界に照らして整理する。今回の保持修復と混同せず、原文・実問い・未加工本文を起点とする。初回の長い混在Reception、pair否定訂正、一般入力・任意多段、E04〜E09、本人実機は未完。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PR3／PR30で継続、merge／配置なし。
+
+全16file・未加工本文・失敗修正と互換境界は[u346監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u346_UnknownAlongsidePairRetention_20261018.md)。
+
+### u346全変更file
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 既存answer owner。末尾の独立current SELF wh-unknownを全原文で証明し、別経験の探索からだけ除外。unknownを不変保持して元pairを回復 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存撤回後の構成guard。source再導出済みpair＋残存感情に、関係のないcurrent SELF unknown1核が併存できるよう整合 |
+| mashos-api | `ai/tests/test_cmee_emlis_unknown_pair_retention.py` | 新規。初回・旧保存の完全一致、現行の有限保持、source/active境界12改変、作者なし本文読解9改変 |
+| mashos-api | `ai/tests/test_cmee_emlis_unknown_pair_delivery.py` | 新規。現行／旧保存6件と保存意味からの現行／旧中断再開2件、生成なしGET/start一致 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u345_unknown_pair_retention_v1.json` | 新規。無変更u345で18入力×Q1/Q3の初回36、回答後31、実問いなし5を凍結 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_update_retention.py` | extra_unknownを現行保持集合へ追加。旧u343凍結本文・意味は変更せず旧再導出も検証 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_layout.py` | extra_unknownのu344行構成比較は当時の保存checkpointで固定。現行比較は新u345原本suiteで担当 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | current owner identityのみ再導出。過去proofは保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 修復範囲・新旧保存・残件・次の開始点を記録 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 全体設計の現行差分 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 全16変更fileの地図。01B/Cの担当は不変 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 現行snapshot差分 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | EmlisAI構造・有限な保持範囲・未完 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 実装順・検証・進捗の正本 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 最新週次の実績と次の残件 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u346_UnknownAlongsidePairRetention_20261018.md` | 新規。本監査、変更理由・未加工本文・検証・全file地図 |
+
+## u347 — 混在初回の原文反復修復と、独立不明への受容の具体案（2026-10-18）
+
+u336の既承認共同保持に基づき、回答前の安堵・寂しさpairと独立した別経験を既存行構成ownerで別行にする。完全な原文をObservationに保ち、既存readerの一意条件を満たす場合のみReceptionを短縮。意味checkpoint・全plan・全selected・問い／decisionは不変。初回7入力×Q1/Q3で改善し、基本例は90→43文字。別の寂しさがある曖昧例では全文Receptionを維持する。
+
+最終対象65 passed／0 failed／skip0（新core53＋既存identity1＋SQL11、重複除外）。初回15入力×2と更新3入力×2を凍結u346原本と比較し、意味と質問を保持。11変異の独立本文検査、同一経験分割拒否、旧完成保存、実在する問いからの1更新、意味保存前後の中断再開を確認した。同じ11DTOの現行API client→hook→Modalで各2回の再表示を確認。HTTP／Auth／nativeはstubで、全suite・本人実機・本番DBの成功ではない。初回検査中の新test期待の訂正と失敗履歴は監査へ記録した。
+
+同一意味checkpointからの未完成初回本文には現行の行構成を使うが、完成済みu346本文は再生成せず維持する。STRUCTURE_MAP_DELTA_NONE、既存production1・新production0、logical81不変。新test2・凍結fixture1・監査1を追加。全13fileの地図を監査に記載。公開API・DB・RN・Safety・依存・外部AI・費用は変更しない。
+
+独立不明は引き続きObservationだけで、混在初回と1回答後のReceptionに欠ける。次の具体案は「既存pair→独立received一経験→末尾current SELF wh不明一つ」の初回選択から、既受理ADD／REVISE／event WITHDRAW一更新、本文、旧互換、保存再表示までを一体とする。初回3応答対象／2 moves、更新後4応答対象／3 movesであり、u334の追加素材なしexact3／u346の2 movesを越える。この内容選択／保持変更はRule18 §11.3の個別判断を要するため未実装。新しい問い・任意多段・過去／原因／複数／第三者不明への拡張を含めない。初回の受領経験Reception自体と過去不明混在の既存時点誤読も未解決である。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持。既存Draft PR3／PR30継続、merge／配置なし。
+
+実本文・全file・検証境界・承認対象：[u347監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u347_InitialReliefLayout_and_UnknownDecision_20261018.md)。
+
+
+## u348 — 承認済みの混在現在不明を初回・一更新・保存再表示へ保持（2026-10-18）
+
+Mashがu347の限定案を本会話で「進めていいよ」と承認したため、作業規則18 §11.3の意味保持契約変更として実装した。対象は既存本人の安堵・不確かな予想と現在の寂しさのpair、独立した既存received一経験、末尾の独立current SELF wh不明一つ、の完全原文と順序を証明できる場合。初回はpair＋不明の3応答対象／2責務とし、別received経験自体の初回Receptionは追加しない。既存の問いへのADD／反応REVISE／event WITHDRAW一更新後はpair＋回答／残存反応＋不明の4対象／3責務を保持する。
+
+新原source witnessと更新版で意味checkpointを区別する。初回は既存V1局所内容、更新後は既存保持familyのEligibilityV2／ContentV2（schema2.0）を使い、旧V1のexact3を緩めない。全体LIMITED・一claim、pair局所2 basis／2 qualifier、独立不明の固有寄与を全source・受理更新・全plan・全selectedの再導出で検査する。原pair／不明の訂正・撤回、未解釈、意味変更なし、複数回答は新資格外で、旧材料を復活させない。作者と独立readerは既存unknown grammarを使い、原因・解決・他人意図を補わない。
+
+最終対象集合は **313 passed／0 failed／skip 0**（新core214＋source28＋reflexive16＋SQL18＋既存u343旧checkpoint34＋現行manifest／owner identity3、重複除外）。全suite成功ではない。初回28入力×Q1/Q3では9入力×2で不明へのReceptionを保持し、残り19入力×2は全record不変。別経験への対象6更新×2で4対象／3責務を保持し、訂正・撤回等の対照は新資格を失効する。意味非更新のQ1は既存保存再使用へ接続する。旧u347の84 recordと追加のreflexive初回2 record、計86旧結果を元の意味・選択・本文／停止で復元した。
+
+比較原本u347の旧checkpoint全意味・全plan・全selected・本文／停止を保持する。完成済みu346/u347本文は保存DTOのまま非再生成。u346とu347の未完成本文世代を同じ意味checkpointで区別できるとはしない。意味保存前／後の確定中断・再試行を分けた。実service＋隔離PGlite18ケースと同じ18DTOの現行API client→hook→Modalを確認し、各2回のclose/reopenで本文・履歴・元記録・質問を保持した。HTTP／Auth／nativeはstub、本人実機・本番DB・配置の検査ではない。
+
+「自分でも」の既存SELF wh表現が感情／自己評価へ誤分類される場合は、u335と同じkind／predicate二fieldだけの補正を混在sourceへ接続した。新mixedの完全原文資格が成立した場合だけ採用し、属性・主体・時点・関係・原文を補正して資格を作らない。新legacy flagで補正も停止し、旧版の本文未提供を保持する。NO_MATERIAL_UPDATEでは更新用V2を付けず、保存済み初回本文を既存UNCHANGED経路で再使用する。旧Q1の新mixedだけに同じreuse outcomeを接続し、意味を変えない回答で例外や不明欠落を起こさない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10file、新production0、private logical81→83。公開API／DTO／DB／RN／Safety／依存／外部AI／費用は変更しない。05の版・field正本、8/28意味設計、01／01AとEmlis／CMEE現在地を同期した。01B/C・Piece/Analysisに責務差分はない。歴史fixtureは保持し、現行owner identityとmanifest件数だけを同期する。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。今回の限定欠落修復と、初回一体単位全体の完成を区別する。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。次に残るのは別received経験の初回Reception自体、定型性・深い理解、一般入力・任意多段、過去不明混在の既存時点誤読、E04〜E09・本人実機。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持し、今回再評価したとは扱わない。Draft PR3／PR30継続、merge／配置なし。
+
+全変更file・実本文・失敗履歴・検証境界は[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)。
+
+### u348 実owner対応
+
+| 既存path（mashos-api） | 責務差分 |
+| --- | --- |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | V2資格／局所内容と4対象・3責務の閉じた検証・seal。旧V1維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 原不明の不変証明・3責務・新checkpoint版・u347復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 既存原source plan導出の再利用と新legacy選択 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | V2内容dispatchとprivate logical83の登録 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 新mixedの意味非更新Q1を既存保存本文再使用へ接続 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 初回3／更新4対象のpartition・carry・全source再導出・旧版尊重 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 独立unknownの既存文法を初回／更新source証明へ結ぶ |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者から独立したunknown意味・本文検査 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 完全混在source資格・既存reflexive2field補正・初回不明責務 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 2／3責務でも完全Observationと一意な短いpair表現を保持 |
+
+## u350 — 二つの経験と任意の現在不明を一体で保持する承認済み限定契約（2026-10-18）
+
+Mashがu349の限定案に「進めていいよ」と回答したため、作業規則18 §11.3の個別承認として実装する範囲を更新した。u348の「別received経験自体の初回Receptionは追加しない」は当時の境界であり、この承認範囲では初回から選ぶ。対象は既存SELFの安堵・不確かな予想と現在の寂しさのpair、その後の独立した既存received一経験、任意の末尾current SELF wh不明一つ。全原文・全span・順序・主体・時点・肯否・独立性が証明できる構成だけである。
+
+| 操作 | 有効な応答対象数（不明なし／あり） | 二つの経験の責務 |
+| --- | --- | --- |
+| `INITIAL` | 4／5 | pair二反応とreceivedの出来事・元反応 |
+| `ADD` | 5／6 | 上記に回答を加え、元経験と回答の各時点を保持 |
+| `REVISE` | 4／5 | 元反応を失効し、出来事と受理済み訂正反応を保持 |
+| `WITHDRAW_EVENT` | 3／4 | 出来事と依存関係を失効し、残存する元反応を保持 |
+| `WITHDRAW_REACTION` | 3／4 | 元反応と依存関係を失効し、出来事の事実だけを保持 |
+
+責務は常にpair＋receivedの2 Move、不明がある場合だけ独立不明を加えて3 Moveとする。一般の最大3 Move・Reception最大3文を維持し、肯定ADDを4番目のMoveへ分離しない。receivedは`attention`、独立不明は`felt_response`として区別する。反応撤回後は残る事実だけを受け取り、感情・評価・個人的意味を補わない。出来事撤回後も撤回済み出来事を復活させない。
+
+全体はLIMITED・一claimのまま、同じaggregateを分担するpair／receivedの局所contentと任意不明を保持する。新しいprivate資格2型・局所content2型を既存ownerへ追加し、logical countは83→87。pairとreceivedは新`SelectedRetainedReliefReceivedDecisionV1`でcarryし、不明は既存selected decisionを使う。このHR carrierはlogical4型とは別である。field・有限値・seal・identityの正本は`designs/cmee/v1/05_json_schema_and_versioning.md`末尾u350。
+
+完全source資格が成立した原安堵核に`source_relief_received_retention:v1`を付け、意味checkpointを旧選択と区別する。markerだけでは資格を与えず、原入力と受理一更新を再受理し、envelope・qualified span・全plan・全aggregate・全selectedを比較する。pair／不明自身の更新、未解釈、複数回答、history／frameは新保持資格外。`NO_MATERIAL_UPDATE`は新しい更新contentを作らず、既存`UNCHANGED`経路で保存本文を再使用する。
+
+旧u348は`_legacy_relief_received_retention=True`の原source再構築から旧checkpoint identityと旧質問を照合し、u348の混在不明保持を残す。Prepared全体へ新legacy flagを追加して旧保持まで失効させない。旧u347以前の復元経路も維持し、完成済み本文は保存DTOのまま返す。新しい選択を旧checkpointへ付け替えない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更で、新production file・独立補助subsystemは追加しない。公開API／DTO／DB／RN／Safety／依存／外部AI／配置への責務差分はない。01B/C・Piece/Analysisの地図は変更しない。保存・再試行・再表示は既存serviceからAPI client→hook→Modalへの経路を確認対象とし、この構造記録だけを検証成功や本人実機確認とは扱わない。
+
+実本文、独立旧比較原本、逆検査、保存・再表示の実行結果と限界は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)・正本06・API handoffに集約する。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。一般入力・任意多段・定型性と深い理解・E04〜E09・本人実機をこの限定契約だけで完了としない。
+
+### u350 実owner対応
+
+| 既存path（mashos-api） | 今回の責務差分 |
+| --- | --- |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 初回／一更新資格・pair／received局所内容の4型。有限操作ごとの有効対象、同じclaimの非重複寄与、全bindingとsealを検査 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 既受理一更新と原sourceを照合。ADDの元反応保持、訂正／両側撤回の残存責務、新資格失効、u348旧checkpoint復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 原sourceの新witness版と旧版を切り替え、旧質問の再受理へ同じ版を渡す。新質問・回答文法は追加しない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | pair／receivedの局所contentを共通aggregateと因果traceへ結びseal。private logical87へ4型を登録 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 新資格の不明なしQ1も意味非更新時は既存保存本文再使用へ接続 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 原source／受理更新資格、全claimの責務partition、両contentの一体carry、envelopeから全plan・全selectedの再導出 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 新selected carrier、初回receivedと追加回答の有限本文、反応撤回後のsource-owned事実受け取り、独立不明 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者から独立した全source検査と有限本文読解。3端点の時点・ABOUT、残存事実、各責務の欠落／撤回復活を検査 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 完全原文資格・witness、2経験＋任意不明の選択、received attentionとunknown felt_response、既存source再受理 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 2／3責務の完全Observationと一意なpair照応を共同保持 |
+
+### u350 検証fileの地図
+
+| path（mashos-api） | 役割 |
+| --- | --- |
+| `ai/tests/test_cmee_emlis_relief_received.py` | 新構成の初回／一更新、責務失効、旧checkpointとの全record比較 |
+| `ai/tests/test_cmee_emlis_relief_received_source.py` | 完全source・seal・全selectedと独立readerの変異検査 |
+| `ai/tests/test_cmee_emlis_relief_received_delivery.py` | 既存serviceと隔離SQLの保存・完成済み本文非再生成・中断再試行、同じUI確認用DTOの取得 |
+| `ai/tests/fixtures/cmee_emlis_u349_relief_received_v1.json` | production変更前u349先端（productionはu348と同じ）の独立比較原本。現行出力から旧期待値を作らない |
+
+現行manifest／owner identityを照合する既存検証の同期箇所、全変更path、実行件数と結果はu350監査を正本とする。上表はfile責務の地図であり、未実行検査を成功扱いする記録ではない。
+
+
+## u351 — 本人不明の明示現在訂正（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。構造上の経路・公開契約・型は不変。既存回答更新owner内部で、SELF uncertaintyの既受理「今は／現在は」訂正を回答時点へ束縛し、旧checkpointの旧時点解釈を厳密再導出する。01B/C・Piece/Analysisの責務は変更しない。
+
+| path（mashos-api） | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 現在時点と引用内source範囲の修復、旧版の完全再導出 |
+| `ai/tests/test_cmee_emlis_unknown_revision_time.py` | 新65検査。旧28record、非対象20、現在時点・極性、独立逆検査と助詞保持 |
+| `ai/tests/test_cmee_emlis_unknown_revision_delivery.py` | 新旧完成本文の実SQL保存、非再生成GET/start、同一UI確認用DTO |
+| `ai/tests/fixtures/cmee_emlis_u350_unknown_revision_time_v1.json` | 独立未変更u350から採取した28record |
+| `ai/tests/test_cmee_emlis_relief_received.py` | 現行unknown_revise二例の意図した本文差分のみ同期。歴史比較は不変 |
+
+記録ownerは本01A・正本06・latest07・最新weekly・API handoff・[u351監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u351_UnknownRevisionTime_20261018.md)。全11変更path、原文と未加工本文、最終77検査と8保存DTOの再表示、失敗修復と検証境界は監査を参照。否定本文・初回の受け取り方保持・一般入力・深い理解・E04〜E09・本人実機は未完。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-18 u352 — 初回本人説明の診断・一体案の文書地図
+
+STRUCTURE_MAP_DELTA_NONE。初回sourceに既述の本人知覚／過去感情が本文から落ちることを実診断し、意味・選択の限定差分を判断案として具体化した。実装・型・公開wire・DB・RNの変更はまだない。private logical87を維持し、01／01B/C／current map／正本05を実装済みとして変更しない。今回の全変更は次の6fileだけ。
+
+| repository | path | 責務 |
+| --- | --- | --- |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 現在地と次の一体単位 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md` | 初回7・実pending4・否定診断、実本文と未実装案、承認差分・完了／停止 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 本file地図 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 実装順序・次判断 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 最新週報への継続差分 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 最新差分 |
+
+詳細は[u352診断・判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)。production／test／fixture変更0。初回説明の新内容・選択はRule18 §11.3 LEVEL3で判断待ち。既存否定訂正のgeneric参照／独立読解の整合修復はLEVEL2候補として分けて記録し、未修復。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。
+
+
+## 2026-10-19 u353 — 承認済み初回本人説明を保存再表示まで保持
+
+Mashの「進めていいよ」により、u352固定案（Cocolon `80dc32c48d9fcfa821f6da0fae822b2ce4d0cb55`）を実装。新規初回のR＋Mに、前置P0/1・末尾独立U0/1を認め、元出来事・元反応・本人知覚＋有限過去感情を元memoの三roleとして保持する。初回を回答核・回答ABOUTへ変換せず、received→任意P→任意Uの最大3責務とする。完全な原文・主体・時点・肯否・全span順序を確認した場合だけ選択し、初回END・既述説明の非再質問を維持する。
+
+Observationも修復し、本人説明と不明を原文順だけで「一つの流れ」にせず、過去の説明を「今は」の状態へ移さない。元received contrastから同時性を加えない。Receptionは原文の知覚を残し、他者の意図を事実化しない。新局所内容は既存LIMITED一aggregateを置き換えず、全3+2P+U対象とdisjointな2+P+U contributionを保持する。独立readerは作者を呼ばず、実本文の三role・原文・主体・時点・知覚・独立不明を照合する。
+
+実pending一回答の明示時点語がない過去Mは、回答envelope・全scalar範囲・既存PERCEIVED文法・受理核の再導出が一致する場合に限り混在保持する。新しい回答文法は追加しない。混在3moveでcheckpoint生成と本文の資格入口がずれていた箇所も揃え、新Mを既存retention版へ結び付けた。旧u352 IDは旧source／plan／selected／本文または停止の全体を復元し、新意味を旧IDへ貼り替えない。完全引用訂正・撤回と実Q3の次質問での後続訂正を確認し、END後の架空回答は作っていない。
+
+技術検証：分割実行・重複除外で対象140件通過（旧全比較50を含むcore90、source31、SQL15、既存manifest3、現行owner identity1）。独立した未変更u352原本50件と、checkpoint・original plan・accepted核・更新plan・関係・selected・本文・質問・停止が一致。保存済み完成DTOは再生成せず、未完成は保存checkpointの再利用／意味前再開を分けて検証した。同一の保存DTO 15件を実apiClient→API→hook→Modalで閉じて再表示2回まで確認。HTTP/Auth/nativeはstub、本人実機ではない。pytestは専用`--noconftest`の対象検証で、全suite成功とは呼ばない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private logical3型で87→90。公開API／DTO／DB migration／RN製品code／Safety仕様／依存は変更していない。Work補助担当は読取レビュー、編集・実行・統合・GitHub反映は主担当。別modelの正式二重評価やProduct Read成功へ転用しない。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回一体単位の限定技術修復を閉じるが、E04〜E09・深い理解・一般入力・否定unknown訂正の別generic整合・本人実機は残件。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18公開目標は再評価していない。Draft PR3／PR30継続、merge／deployなし。詳細・実本文・全変更地図は[u353監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
+
+### u353 全変更file地図
+
+| repository | path | 責務 |
+| --- | --- | --- |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 承認済み初回三roleの既存owner内修復 |
+| mashos-api | `ai/tests/test_cmee_emlis_initial_personal_meaning.py` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/test_cmee_emlis_initial_personal_meaning_source.py` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/test_cmee_emlis_initial_personal_meaning_delivery.py` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u352_initial_personal_meaning_v1.json` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/test_cmee_emlis_mixed_unknown.py` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_cognition.py` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_unknown.py` | 境界・旧互換・保存／現行identity検証 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 現在地と次残件 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 実装・契約・全体構造・現在地の同期 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 実装・契約・全体構造・現在地の同期 |
+
+
+## 2026-10-19 u354 — 現在の否定感情への訂正後の本文停止を修復
+
+最新weekly E05/E06/E08とu352実測に基づくLEVEL_2の既存整合修復。実pendingへの「不明ではなく、今は／現在は嬉しくない」という明示引用訂正後、古い短縮参照が残り、generic MATERIAL_WEIGHTの二経験を独立readerが読めずに本文UNAVAILABLEとなっていた。既存effective-reference ownerで、現在否定回答とは別の元pairを完全sourceの明示参照として実現し、readerは同一aggregateの全3対象・2contributionと二basis／qualifier／元contrastを照合する。意味選択・受理核・全plan・reference_mode・selectedを変えず、失効した専用pair資格を復活させない。
+
+最終対象188 passed（意味・本文・u350互換125、独立u352旧全比較50、実SQL12、現行owner identity1）、fail/skip0。未変更u353から採った28 recordは全意味identityが一致し、うち現在否定4 recordだけ本文を復旧、残り24は本文／停止も一致。Q3の2 recordはUNAVAILABLE時の代替END理由から通常ENDの`no_bound_personal_meaning_target`へ変わる。問いなし・自動進行なしは不変。旧u350全28 recordと旧u352全50 recordは本文／停止まで一致。旧保存完成DTO・確定旧停止DTOは非再生成、意味保存後の中断では保存済みMEANING_UPDATEを追加・置換せず、原文の再導出・checkpoint照合を経て現行本文へ再開する。意味保存前の中断では、保存済み回答から意味の作成を再開する。同一の16保存DTOを現行apiClient→API→hook→Modalで各2回close/reopen確認。HTTP/Auth/nativeはstub、本人実機・本番・全suiteの成功ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3owner内、公開API／DTO／DB／RN／Safety／依存／新private型・意味版は変更0、logical90を維持。全変更pathと未加工本文は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。主担当が編集・実行・GitHub反映、補助担当はR9.7に従う読取レビューのみ。正式別model二重審査やProduct Readへ換算しない。限定TECHNICAL_CREDITであり、PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。本文の長い反復、元receivedを同時性として示す表現、深い理解・一般入力・任意多段・本人実機は残件。次はE05/E06/E08の実本文品質と方式判断へ戻る。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18目標は今回再評価しない。Draft PR3／PR30継続、merge／deployなし。
+
+
+### u354 全変更file地図（17 path）
+
+| repository | path | 責務 |
+| --- | --- | --- |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 既存effective-reference・IR・表現検証・参照解決を完全sourceに整合 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 全3対象generic appraisalの独立読解と元二経験の保持検査 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py` | 既存expression authorityへ同一plan/resolver参照を渡す |
+| mashos-api | `ai/tests/test_cmee_emlis_negative_revision_surface.py` | 旧全意味identityと本文改変・aggregate改変拒否60件 |
+| mashos-api | `ai/tests/test_cmee_emlis_negative_revision_delivery.py` | 新保存・旧確定失敗・意味前後中断再開8件 |
+| mashos-api | `ai/tests/test_cmee_emlis_unknown_revision_time.py` | 現行否定本文の期待だけを更新、旧fixtureは維持 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u353_negative_revision_v1.json` | 独立未変更u353から採取した28比較record |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行source ownerのidentity同期、歴史的proofは変更なし |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 現在地・今回の閉じた残件・次の実本文品質課題 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 全体設計の最新参照。構造差分なし |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 全変更file地図と新test/fixtureの責務 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | Emlis既存route内修復の最新参照 |
+| Cocolon | `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 意味・selected不変／logical90の境界 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 既存修復の検証実績と旧保存／未完成再開の区別 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | E05/E06/E08残件の限定更新 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | milestone差分 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md` | 開始根拠・実測・限界・全差分 |
+
+
+## 2026-10-19 u355 — 混在入力のreceivedに同時性を補わない
+
+u354実本文の残件をLEVEL_2で修復。安堵・寂しさのpair＋received一組（任意の不明）の完全原sourceを既存ownerで証明し、原relation・両核が現行にも同一で残る場合だけ対象にする。初回と別対象への訂正後に、Rを「異なる向きのまま同時にあります」から、元の「のに／けど」等を保つ既存の経験文へ変更。独立readerは完全な主体・程度・肯否・時点・接続詞と一文の範囲を照合する。意味・checkpoint・全plan・selected・Reception・問い／ENDは変えず、撤回したRは復活させない。anti-template検査は維持。
+
+対象321件の最終結果passed、未解消fail／skip0。未変更u354の60recordで全意味・選択・Reception・本文のその他fieldが一致し、Observation一文と本文由来IDだけ24recordで変わる。残り36は本文／停止も同一。旧u350未完成checkpointは旧時点解釈を保持して現行表面へ進むため、この一文だけ変わり得る。完成済み旧DTO・確定旧失敗は非再生成。実SQL14件で初回・実pendingへのADD／現在否定REVISE・旧保存・意味前後中断再開を通し、同じ18DTOを現行apiClient→API→hook→Modalで各2回close/reopenした。HTTP/Auth/nativeはstub、実端末・本番・全suiteの成功ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意味版／依存／API／DTO／DB／RN／Safety変更0、logical90を維持。正式別model評価ではなく主担当実行と補助読取レビュー。限定TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。長い原文反復、深い受容、一般入力、PARTIAL、説明Mを含む別sourceの更新、任意多段・本人実機は残る。範囲外の元reaction訂正では「その時は今は嬉しい」等の時点衝突が比較本文に残り、次の具体的な診断対象とする。次はE05/E06/E08の実本文品質と既存方式判断へ戻る。10/20方式判断・10/31管理線・12/18公開目標、Piece/Analysis主枠53.25％は再評価しない。Draft PR3／30、merge・deployなし。詳細・全変更file・本文は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
+
+### u355 全変更file地図（20 path）
+
+| repository | path | 責務 |
+| --- | --- | --- |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py` | 完全原sourceと現行の原核・関係から中立表示対象を指定 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 指定済みmixed Rに原接続詞の既存経験文を再利用 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 既存経験文のsource読解と一文の完全消費、anti-templateは不変 |
+| mashos-api | `ai/tests/test_cmee_emlis_mixed_received_surface.py` | u354全意味比較、原接続詞・主体・程度・時点・余剰文の独立読解 |
+| mashos-api | `ai/tests/test_cmee_emlis_mixed_received_delivery.py` | 初回／ADD保存と旧完成DTO非再生成 |
+| mashos-api | `ai/tests/test_cmee_emlis_unknown_revision_time.py` | 旧全artifact比較で意図した一文と本文IDだけを分離 |
+| mashos-api | `ai/tests/test_cmee_emlis_negative_revision_surface.py` | u353全比較の初回／更新の限定表面差へ追従 |
+| mashos-api | `ai/tests/test_cmee_emlis_negative_revision_delivery.py` | 現在否定と中断再開の新経験文を確認 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_received.py` | 自然変種の原接続詞を保つ初回期待を確認 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u354_mixed_received_surface_v1.json` | 変更前u354の60record比較原本 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行ownerのidentity同期、歴史的proofは維持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回の限定修復・境界・次の本文品質残件 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 全体設計の最新参照。構造差分なし |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 全変更fileの地図と責務 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | Emlis現行routeの限定修復 |
+| Cocolon | `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 意味・selected不変、logical90の継承 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 意味・旧保存・未完成再開の検証境界 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | E05/E06/E08の限定更新と残件 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | milestone差分 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md` | 開始根拠・実本文・全差分・残件 |
+
+
+### 2026-10-22 Piece P-W1：InputScreenから既存renderer eligibilityを供給
+
+STRUCTURE_MAP_DELTA_PRESENT。`screens/InputScreen.js` は `features/piece/pieceRenderer.js` のside-effect-free `isPieceBitmapSaveAdmitted` を既存 `screens/input/InputPieceActionArea.js` へ渡す。既存saved-input入口/Auth/runtime/背景化・本人変更の破棄責務は維持する。hostはpredicate単独で保存せず、同preview/tokenと同mount fit、owner/flag/quotaを保存直前に再確認する。HTTP/鍵生成/保存は既存明示操作とcontrollerだけが担当し、新しいhost/controllerは作らない。
+
+同版saved再表示とbitmap lifecycleは01Bの既存Piece ownerを参照する。source準備のlocal964 PASS、CIはPENDING、API/DB/env/deploy/本人データ操作0。詳細は入口§110／map§65.55／weekly§5.6.35。
+
+## 2026-10-23 — CMEE P1追加file地図
+
+| exact path（repositoryからの相対path） | 責務・接続 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py` | `PreparedRequest`／`CandidateReceipt`、Emlis材料、core wrappers、source位置照合のみの未採用受取。Engine/serviceから未接続 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | Piece元7fieldのsource-only投影、Analysisの既存freeze再利用。意味compiler／本文生成を呼ばない |
+| mashos-api `ai/tests/test_cmee_preparation.py` | stdlib unittestの合成材料・凍結・owner／版／期間／補足・候補失敗・根拠の限定検証 |
+| Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/run_current_four.py` | 既存C0 defaultを維持、明示`--prepare-only`で4場面×5状態の固定stub。C0再生成しない |
+| 同directory `preparation_results.json` | 全材料・20未採用receipt・fixture／既存84＋新2 source blob。架空fixtureのみ |
+
+同directoryの`semantic_mapping_inspection.json`はP2の4手作業設計例、実P1受取、26native型field／9関数所在のinspection。実意味admissionを行うmoduleではない。P2仕様は既存design01〜05末尾、再開はweekly/P2。P2のruntime構造差分0。
+
+P1仕様は既存design01／05、検証境界はtrial README、進行は最新weeklyの20261023-cmee-model-preparation、現在地は00、CMEE map04と観測／比較READMEを同じ変更単位で同期。新しい引継ぎ／管理systemは作らない。STRUCTURE_MAP_DELTA_PRESENTはoffline境界追加、通常三中核・公開契約・保存・稼働は差分なし。
+
+## 2026-10-23 — 限定Emlis snapshotの全変更file地図
+
+prefix `ai/services/ai_inference/`はmashos-api。新規production1／既存production4、新test1。その他既存作者・shared contracts／single-input三guard・SQL migrationは変更0。
+
+| exact path | 責務・接続 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py`（新） | closed候補採否、canonical snapshot、native核/関係/plan、実pending更新、snapshot由来question。新private dataclass3と例外1 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | 新規offline Emlisだけkeyword-only semantic_inputをdispatch |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 新profile prepare/updated planをsnapshot ownerへ渡し、旧経路は維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 保存snapshotのplan/作者/問いを同じ起点で利用 |
+| `ai/services/ai_inference/emlis_thread_service.py` | 明示offline DI、private候補段階/非採用保存、新旧checkpoint dispatch、保存再開、通常service mutation拒否 |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py` | pure意味/実pending/改変拒否＋隔離SQL/中断再開、adapter2補修後35対象 |
+| `ai/tests/fixtures/cmee_emlis_semantic_adapter_v1.json`（新） | 未変更e5ca453で補修前に実採取した合成3系列の旧snapshot/全outcome。保存1の非再解釈を検証 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 実source・境界・残件を既存handoffへ追記 |
+| Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/semantic_snapshot_results.json`（新） | 4合成実本文、P2 E02-0未対応の一実検査、source blob・最終対象試験結果。新runnerではない |
+
+Cocolonの既存文書差分は00、01、本01A、current map01/04、design01/02/05/06、latest weekly、trial README、観測README、比較README。型の唯一ownerはdesign05、構造は本表/CMEE map、実行/失敗はtrial、進行はweeklyへ分離する。P1二moduleと全旧test/fixture、P2inspectionは不変。
+
+
+## 2026-10-23 — 本人不明・二行動の全変更file地図
+
+API既存production10／既存test1／新fixture1／既存handoff1。新production module0。旧節の「作者/共有型変更0」は旧実装単位だけの履歴で、今回へ転用しない。既存scope readerも同じtyped TE束縛を消費するため変更。
+
+| exact path | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 新profile専用四binding、qualifier carrier、消費trace、UNKNOWN exact照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py` | 閉鎖admission、4family生成、版dispatch/hash/lineage、typed resolver、保護target更新HOLD |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | 既存private scope readerでTEの実edge/marker/原格groupを照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 同span二核の明示graph対応、scope-only TE、typed carrier |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py` | 同snapshot resolverと四familyのvisible trace、既存独立検査 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 有限source groupと過去/従属te検証、閉鎖native TE kind |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 既存Observation作者内の有限二行動/対象付き曖昧さ |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 唯一HR作者内の有限groupと短い照応 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者非呼出しのObservation/照応/格/対象/時点/二行動inverse |
+| `ai/services/ai_inference/emlis_thread_service.py` | 新旧private profile/checkpoint dispatch、明示offline DIのみ |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py` | 既存35維持＋新35、actual Q3 pending/SQL再開/変異拒否 |
+| `ai/tests/fixtures/cmee_emlis_semantic_targeted_unknown_action_v2.json`（新） | 元P2のoriginal/packetを保持。モデル出力ではない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 現在地/残件/再開導線 |
+
+Cocolon側は現在地00、全体01、本01A、current01/04、design01/02/05/06、最新weeklyと入口README、観測/比較README、既存trial README/JSONを同期。新rule/runner/checkerは作らない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-23 — CMEE P4 Piece意味snapshotの全変更file
+
+STRUCTURE_MAP_DELTA_PRESENT。API新production1／既存production4／新test1／新fixture1。公開API/DTO/DB/RN/通常B8/renderer/依存は変更0。
+
+| exact path（mashos-api root） | 責務 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py（新） | 明示P4 input、P1再束縛、閉鎖採否、private10型、snapshot／段階serialize/reload、本文失敗の意味保持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py | 明示offline Piece semantic_inputだけdispatch、他core／旧Piece維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py | 新snapshotのsource／意味検証、旧有限再導出維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py | 既存compiler／唯一作者にprivate plan/artifact arm。5文と原接続詞を保持 |
+| ai/services/ai_inference/piece_v2_content_policy.py | shape限界を共用し、旧payload版を流用しない。作者非呼出しの全可視範囲／trace／選択検査 |
+| ai/tests/test_cmee_piece_semantic_snapshot.py（新） | 新意味／選択／厳密型／改変／作者非呼出し／中断とprivate再読／旧B8拒否 |
+| ai/tests/fixtures/cmee_piece_semantic_snapshot_v1.json（新） | 元P2 P01 packetとP1元7fieldを保持した合成標本。モデル出力ではない |
+
+Cocolonの変更ownerは全機能00／全体01／本01A／current Piece02・CMEE04／design01・03・05・06／最新weekly／trial READMEと新piece_semantic_snapshot_results.json。新結果JSONは実本文／状態／同一再読／型field／検証とsource blobを持ち、既存C0/P1/P2/Emlis結果を上書きしない。新管理system／runner／checkerなし。
+
+
+## 2026-10-23 — P5内部準備の資料所在（runtime追加なし）
+
+`Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/analysis_semantic_admission_proposal.json`（新）は、Analysis P5の原3記録／手作業18保持単位／原文11group／8scope／unknown／注記／4選択と、P1位置のみの受取・55raw座標proof・source blob・未実装の限界を所有する。モデル出力・採用snapshot・実graphではない。設計の正本はdesigns/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal、型・保存案は05#cmee-p5-analysis-schema-proposal、共有導線は01、実inspectionはtrial README§12／最新weekly O。
+
+今回API file・runtime owner・呼出し接続・公開schemaの実変更0。全体設計／current mapsの責務はP4 actualから不変で、STRUCTURE_MAP_DELTA_NONE。提案内の新Analysis module名を実在fileとして登録しない。P4の7fileとactual型は前節のまま保持する。
+
+
+## 2026-10-23 — 承認済みP5 Analysisの全変更fileと接続
+
+STRUCTURE_MAP_DELTA_PRESENT。API 666b28517ef04aba170ebffe3c86980fea4c11bd。新profile専用private型6／例外2で、旧共有logical registryは不変。
+
+| exact API path | 実責務 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py（新） | 明示offline・原3記録・Plus・補足0・比較なしの採否、P1/source/receipt再束縛、原文に基づく有限意味照合、immutable snapshot、3段階private状態の保存／再読／再開 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py | exact Analysis request＋明示semantic_inputだけ新armへdispatch。旧経路維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py | 新private graph型とcompiler／独立validator。16node・scope・注記・unknown・選択・原文groupを保持。旧parser／graphを維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py | 既存唯一realizer内の新private文章／図artifactとauthor-free保存読取。旧safe projection／反復共起本文へ新scopeを流さない |
+| ai/tests/test_cmee_analysis_semantic_snapshot.py（新） | 新112case。各層の意味・再hash変異、同一投影、3段階保存、実作者例外、完成再読の禁止呼出し、旧経路分離 |
+| ai/tests/fixtures/cmee_analysis_semantic_snapshot_v1.json（新） | 承認案の原3記録／全packet。37,620 bytes、手作業合成標本、モデル出力ではない |
+
+Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state／文章／図／31trace／段階別serialized hash／同一再読／6型fields／全source blob／検証・途中失敗・限界を所有する。旧proposal JSON・P1/P2/C0／過去結果は上書きしない。既存全機能00／全体01／本01A／current Analysis03・CMEE04／design01・04・05・06／weekly／trial READMEを同時同期する。新runner／checker／管理systemなし。
+
+
+## 2026-10-23 — Runpod 9B M1実出力の資料所在（製品runtime差分なし）
+
+| exact path（Cocolon root） | 所有する内容 |
+|---|---|
+| Cocolon_前提資料/observation_learning/trials/2026-10-23-qwen9b-m1/qwen9b_m1_results.json（新） | MashがRunpodで取得した固定4request／未加工応答本文／parsed output／環境／tokens／要求時間。受領53,178 bytesを保持。M1未接続proxyで、P6意味snapshot・追加学習ではない |
+| Cocolon_前提資料/observation_learning/trials/2026-10-23-qwen9b-m1/README.md（新） | 入力原本照合、技術取得4/4と本文診断の分離、全4場面の具体的な補完・欠落、GPU課金／停止未確認、次のP6境界 |
+
+全機能00・小型再選定／比較入口・latest weekly Rへ結果導線を同期。既存C0/P1〜P5実装・期待・出力とAPI sourceは変更0。STRUCTURE_MAP_DELTA_NONE（資料所在のみ。runtime owner／型／接続／公開契約の実変更なし）。
+
+## 2026-10-23 — 追加学習用教材の所在（runtime構造差分なし）
+
+新規4fileは `Cocolon_前提資料/observation_learning/training/2026-10-23-pilot-prep/` に配置。
+
+| file | 実責務 |
+|---|---|
+| README.md | 16部分課題の由来、可視範囲、採らなかった補完、確認結果・不足・次作業。追加学習や完成応答の合格ではない |
+| sft_candidates.jsonl | messagesと出典。Mash原文問い9／華恋編集3／華恋架空補充4を区別し、本人sourceの未来回答を混ぜない |
+| teaching_reference.jsonl | Mash教示5件の逐語参照。一般原則・自己点検・仮定の読み分けを区別し、SFT本文へ混ぜない |
+| split_manifest.json | 学習候補の題材と、既存20場面の既知派生／開発確認／未使用評価候補の区分。元fixture・guideを変更しない |
+
+全機能00・観測教材入口・モデル比較入口・latest weekly Sへ同期。元観測記録／実演／M1 raw・API source・CMEE P1〜P5は不変。STRUCTURE_MAP_DELTA_NONE（教材資料の所在のみ。runtime owner／型／接続／公開契約変更0）、実学習・GPU起動・課金0。
+
+## 2026-10-23 — 第5回観測会の資料所在（runtime構造差分なし）
+
+新規 `observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md` は短い架空感情入力D00と今後の実発言だけを、同 `02_learning_notes.md` は初回に見せない本人役の事前設定・未設定・実回答後の出典対応を所有する。両pathのrootは `Cocolon_前提資料/`。初回に見えない心理を当てる試験にせず、実問答・読み直しは未実演。既存教材16件へ未追加。入口・全機能00・latest weekly Tへ同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）。GPU・推論・学習0。
+
+## 2026-10-24 — 第6回の本人訂正教材の所在（runtime構造差分なし）
+
+新規 `Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md` は椅子修理の初回D00と今後の実問答、同 `02_learning_notes.md` は本人役の事前実情・明示訂正案と可視順序を所有する。初回→本人の訂正→実際の観測更新を記録するための題材で、訂正や完成応答はまだ未提示・未取得。第5回ノートには原文／華恋編集を分けた受け取り候補1件を整理し、元の16候補へ未追加。入口・全機能00・weekly Uへ同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）、GPU／追加モデル推論／学習0。
+
+## 2026-10-24 — 教材18候補と第7回二記録の所在（runtime構造差分なし）
+
+| exact path（Cocolon root） | 今回の責務・差分 |
+|---|---|
+| Cocolon_前提資料/observation_learning/training/2026-10-23-pilot-prep/sft_candidates.jsonl | 当初16行を維持し、第5回の華恋編集受け取り・第6回Mashの訂正後観測を2行追加。計18。出典・可視順・由来を保持 |
+| 同folderのREADME.md・split_manifest.json | 18件の由来、追加source原本、教材family、評価分離と分担を同期。教示参照・既存評価割当は不変 |
+| 第5回02_learning_notes.md／第6回01_dialogue.md・02_learning_notes.md | 候補への追加整形の現在地だけ同期。元の提示・実発言・事前設定は不変 |
+| Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-002/01_dialogue.md（新） | 同じ人の読書会への参加／不参加に関する二記録の初回提示と、今後の実発言 |
+| Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-002/02_learning_notes.md（新） | 初回前に固定した本人役の設定、可視範囲、問いへの回答範囲、未設定と分担 |
+
+教材入口・全機能00・latest weekly Vへ同期。第7回targetはまだなく、18候補を全三中核の完成教材や学習改善へ昇格しない。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）。GPU・推論・学習・課金0。
+
+## 2026-10-24 — Emlis Free教師案・比較入力pack（runtime構造差分なし）
+
+新規folderは `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/`。
+
+| file | 所有する内容 |
+|---|---|
+| README.md | 既存Free仕様への対応、今回の教師案・比較条件・未確認・次の具体作業 |
+| sft_examples.jsonl | 華恋編集7＋架空補充2の完成応答案9件。出典・可視順・由来・制限 |
+| train_messages.jsonl | 同9件のmessagesのみ。元18候補と連結しない |
+| eval_inputs.jsonl | 学習に使わない6題材。モデルへはmessagesだけ |
+| eval_review.jsonl | 別保存の意味・自然さの確認点。モデルpromptへ渡さない |
+| experiment.json | 範囲・件数・固定model・方法案・実行未準備の残件・比較と打切りの考え方 |
+
+全機能00・教材入口・原18候補のREADME・latest weekly Wへ同期。原18候補・教示5参照・原対話・旧20評価fixtureは不変。既存比較用のEmlis6欄への教材投影で、公開API／DTO／実CMEEの新型・採用・保存ではない。STRUCTURE_MAP_DELTA_NONE（教材所在のみ）。GPU・モデル実行・学習・課金0。
+
+## 2026-10-24 — Free小規模学習のRunpod実行script（製品runtime差分なし）
+
+以下2fileを `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/` へ追加する。
+
+| file | 実責務 |
+|---|---|
+| runpod.sh | 固定commitの教材・runner取得、既存Torch／CUDAを維持する別venv、既存HF cache再利用、prepare／run入口、runの3600秒＋30秒制限。Pod自動Stopはしない |
+| run_pilot.py | 4dataset hash・Free範囲・固定config／index・token／lossのpreflight、固定text q/v16moduleへの9step LoRA、同6入力の前後rawとadapter／比較JSON保存。prepareは重みを読まない |
+
+同folder README.md／experiment.jsonは実装設定・未確認・手順を更新。全体現在地00・教材入口・latest weekly Xへ同期。ローカル構文・データ／loss検査とvenv参照は確認、Runpod実tokenizer・import・GPU完走は未検証。今回の4datasetは不変。STRUCTURE_MAP_DELTA_NONE（offline実験scriptのみ。製品runtime owner／型／接続／公開契約の変更なし）。GPU・モデル実行・学習・課金0。
+
+## 2026-10-24 — Free実験runnerのtoken返却型修正（製品runtime差分なし）
+
+folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/` のrun_pilot.pyは、全4呼出しをchat_token_idsへ統一し、Transformers 5.19.0のBatchEncoding既定へ依存せずflat token IDsを受け取る。prefix・最終assistant限定loss・無切捨てを維持。新test_tokenization.pyは実固定tokenizerで旧型不整合を再現し、9教材のmask／終端と6評価のcontextをCPU検査する。実3検査成功、詳細はexperiment.json／README・latest weekly Y。Runpodの修正版prepare・GPU学習は未実施。全体00・教材入口も同期。4dataset・runpod.shは不変。STRUCTURE_MAP_DELTA_NONE（offline実験scriptと回帰testのみ。製品のowner／型／接続／契約変更なし）。
+
+## 2026-10-24 — Free LoRA完了結果の所在（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen9b-free-lora/`。
+
+| file | 所有する内容 |
+|---|---|
+| pilot_results.json | Mash受領latest_results.jsonをbyteそのまま保存。固定入力・前後12raw／tokenIDs・9step log・環境／source／adapter保存hash。adapter本体は含まない |
+| README.md | 原本照合、A40試験完了と商品品質の区別、全6場面の前後本文診断、JSON指示／検査の不整合、未受領adapter・Pod Stop／費用の未確認 |
+
+training側README／experiment・全体00・教材入口・最新weekly Zを同期。試験は9stepまで完了したが十分な品質改善・正式Product Read／採用・P6統合は未成立。4dataset・runner・製品コードは不変。STRUCTURE_MAP_DELTA_NONE（offline試験の受領資料のみ。製品owner／型／接続／公開契約変更なし）。
+
+## 2026-10-24 — 保存adapterの9教師適合診断（製品runtime差分なし）
+
+新 `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/diagnose_learning.py` は初回原結果／adapter3file／runner／教材hashを照合し、同じ9教師についてbaseと非学習adapterのNLL18forward・回答18件を比較する。生成入力は教師を除く元prompt、既存evaluateを共用。既存cache限定・学習なし・元adapter不変、結果は作業先latest_diagnosis.jsonと固有diagnostics folder。ローカル構文・入力／hash／NLL式・実tokenizer枠を確認、GPU実診断は未実施。全体00・教材入口・Free README／experiment・初回結果README・weekly AAへ同期。原4datasetと製品sourceは変更0。STRUCTURE_MAP_DELTA_NONE（offline一回診断のみ。製品owner／型／接続／契約変更なし）。
+
+
+### 2026-10-24補記：重み未回収時の一回の再作成・診断・退避
+
+対象folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/`。追加recreate_pilot.shは元d53 bootstrap／runner・4教材を変更せず1回だけ別runを作り、先行退避→明示した新runへの診断→再退避をまとめる。追加export_checkpoint.pyはadapter3file・結果・条件・教材／code／logをallowlistでarchive化し、manifestのSHA／bytesとarchive全fileの読戻しを確認する。venv／cache／基盤重みは含めない。既存diagnose_learning.pyへ別run用reference-resultを追加し、引数なしの初回hash限定・非学習測定を維持する。
+
+開始marker／内部排他的markerは重複学習を拒否。内側foreground timerを外側run30分process groupに保つ。学習直後に先行archive、診断後／失敗EXITに再退避するが、手元ダウンロード・checksum確認とPod手動StopはMashの操作。prepare／全課金は時間制限外。原9教師／6評価・runner／bootstrap・初回rawは不変、新runを元重みの復元・同一重み再現としない。CPUのhash選択／archive／失敗・重複拒否／両段階の短縮timeoutを確認、実GPUは未検証、再作成未開始。全体00・入口README・Free README／experiment・初回trial README・最新weekly ACを同期。STRUCTURE_MAP_DELTA_NONE（offline試験scriptのみ、製品のowner／型／接続／契約変更なし）。
+
+
+### 2026-10-24補記：別runの診断完了結果と重み受領
+
+追加folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen9b-free-lora/recreated-run/`。
+
+| file | 所有する内容 |
+|---|---|
+| pilot_results.json | 別runの受領latest_results(1).jsonをbyteそのまま保存。9stepと学習外6+6raw、固定条件、保存adapter hash |
+| diagnosis_results.json | 同じ別runの教師9件NLL18forward・生成18件、base／保存adapter再loadとtensor検査。archive内latest_diagnosis.jsonのbyte原本 |
+| verification.json | archive／33file／単独JSON・source8blob・受領重み32tensor／診断normの照合、NLL再計算、未確認と全9教師の内部本文所見 |
+| README.md | 初回と別runの区別、実行／退避完了と観測品質未合格、全9教師と学習外6件の所見、次の限定比較候補 |
+
+新wrapper／診断のGPU完走はMash受領結果で確認し、重み本体は受領archiveに確保。NLLは全9件低下したが、教えた事例にも根拠外の返信・約束・喜びの理由の追加が残る。正式Product Read・商品採用・P6統合は未成立。全体00・観測入口・Free README／manifest・初回trial README・latest weekly ADを同期。初回raw／4dataset・runner／bootstrap・製品codeは不変。STRUCTURE_MAP_DELTA_NONE（受領資料pathの追加のみ、製品owner／型／接続／公開契約変更なし）。
+
+
+## 2026-10-24 — 680／1,480円に向けた4B・9B一回比較（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/model_selection/2026-10-24-9b-4b-comparison/`。
+
+| file | 所有する内容 |
+|---|---|
+| README.md | 固定6入力×2modelの実行と持出し、品質比較・費用枠・未測定の境界 |
+| runpod.sh | 固定commit取得・既存Torch／CUDAを維持した別venv・cache再利用、全処理30分制限・outer側の途中結果回収、重複拒否。Podは手動Stop |
+| compare.py | 6入力hash・実tokenizer／8192枠・cache空き検査、4B→9Bの別processで最大12生成、回答ごとのraw／time／VRAM保存。追加学習なし |
+| cases.jsonl | 元M1の三中核4入力と教師completionを除いた訂正後2入力。同じJSON-only指示、Analysis3072／他1024 |
+| budget.py／budget_scenarios.json | 680／1480の仮定付き許容原価16条件。Freeを同じGPU予算内へ含める |
+| test_compare.py | 失敗／完了・重複・固定入力・強制KILL時の6+2回収・予算算術のCPU6検査 |
+
+全体00・観測入口・選定入口／費用資料・Free experiment・latest weekly AGを同期。実固定tokenizerは両modelの全6件で成功、CPU6検査成功。新GPU実行は0、1／4／16周案は保留。原9教師・受領raw／重み・製品sourceは不変。STRUCTURE_MAP_DELTA_NONE（offline選定用pathのみ、製品owner／型／接続／公開契約変更なし）。
+
+
+## 2026-10-24 — 4B／9B比較の受領原本と診断（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen4b-9b-comparison/`。
+
+| file | 所有する内容 |
+|---|---|
+| selection_results.json | Mash受領latest_selection.jsonのbyte原本。固定6入力・4B／9B全12rawとtoken IDs・時間／VRAM・環境／source・完走記録 |
+| review.json | 原本／runner／cases照合、時間・token／PyTorch memory再計算、全6caseの内部意味所見・教師coverage・推奨／未測定 |
+| README.md | 全12本文の比較、4B候補保持と両方未合格、既存9教師の範囲・次の判断 |
+
+全体00・観測入口・選定入口／費用資料・Free experiment・実行pack入口・latest weekly AHを同期。実行script／教材／受領済み重みと商品sourceは不変。今回の華恋は受領CPU解析のみで新GPU・推論・学習0。STRUCTURE_MAP_DELTA_NONE（offline結果の所在のみ、商品owner／型／接続／公開契約変更なし）。
+
+
+## 2026-10-24 — 本番提供案を固定した原価試算（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/model_selection/2026-10-24-production-economics/`。
+
+| file | 責務 |
+|---|---|
+| README.md | 基準提供案・利用量・月費用・成否・損益分岐と未測定性能の境界 |
+| inputs.json | 4B/Flex24/min0/max4/同時数1、全三中核の旧OPS、人数／単価／性能仮定と公式原典 |
+| cost_model.py | 無料利用を含む入力・出力・起動／待機時間、常時必要台数、月費用と損益分岐の標準Python計算 |
+| results.json | 基準50有料／950無料、人数・使用量・手数料・他GPU・未測定性能の感度。実測請求ではない |
+| test_cost_model.py | 元OPS・無料分・固定費非二重加算・同GPU同額・起動ゼロ・容量／損益分岐と未実証の6検査 |
+
+全体00・観測入口・選定入口／費用正本・Free experiment・latest weekly AJへ同期。基準試算95,094円/月は手取り計画27,262円を上回り不成立。原出力・旧教師・runner・商品source・runtime／型／接続／契約は不変。STRUCTURE_MAP_DELTA_NONE（offline費用試算の所在のみ）。新GPU・有料推論・学習・配備0。
+
+
+### 2026-10-24 — 売上ゼロの少人数試用を検討（製品runtime差分なし）
+
+上記production-economics folderに`zero_revenue_pilot.md`を追加。支払者0／Plus相当5人14日の候補、仮の稼働費、試用準備の未見積り、未承認2万円の打切り配分と検証できる価値を所有する。Supabase orgの現planはFreeとread-only確認し、共通11,000円を現契約費へ昇格しない。既存50有料／950無料のcalculator／resultsは変更せず、全体00・同folder README・weekly AKへ差分同期。試用・課金・価格quota／権限変更・モデル接続・通常配備は未実行。STRUCTURE_MAP_DELTA_NONE（検討資料の所在のみ）。
+
+
+### 2026-10-24 — 4B CM-01/T1の具体契約例（runtime構造差分なし）
+
+| exact path（Cocolon rootから） | 所在・役割 |
+|---|---|
+| `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/contract_examples.json`（新） | 未承認・未実装・非学習のchair初回／訂正後契約例。元teacher/source参照、根拠scalar、旧9教師＋保存4B6rawの形式診断、単純wrapの実意味拒否。実model出力・adopted snapshot・native pendingではない |
+
+新folderの現存fileはこのJSONのみで、4B runner／bootstrap／診断／export／学習commandは未作成。共有設計01／Emlis02／schema05の具体責務案、全機能00／CMEE map04／観測入口／最新weekly§12へ差分同期。全体設計01のruntime責務差分は0で、再更新しない。API／production/test／旧教材・重みの変更なし。STRUCTURE_MAP_DELTA_NONE（資料所在と将来案のみ）。
+
+
+## 2026-10-24 — 承認済み4B候補のactual全変更file地図
+
+API commit02c0b943のexact14file。prefix A/=`mashos-api/ai/services/ai_inference/`、T/=`mashos-api/ai/tests/`。通常API/DTO/DB/RN・旧logical registry・旧v1/v2 fixtureは不変。STRUCTURE_MAP_DELTA_PRESENTはprivate offline profileとmodel注入境界のみ。
+
+| exact path | actual責務 |
+|---|---|
+| A/cocolon_meaning_experience_engine/emlis_semantic_admission.py | 新ModelCheckpoint/PreparedMeaning、source文法/原格/時点/理由/更新、snapshot・prior・再開、旧版分離 |
+| A/cocolon_meaning_experience_engine/emlis_question.py | 新喜び焦点の実ASK/END、source由来prompt/target/ID、実pending照合 |
+| A/cocolon_meaning_experience_engine/emlis_thread_contracts.py | 新private artifact subclass、旧artifact不変 |
+| A/cocolon_meaning_experience_engine/emlis_thread_engine.py | 新意味→現最終作者/独立reader/実問いを既存dispatch内で結ぶ |
+| A/cocolon_meaning_experience_engine/emlis_thread_surface.py | 新profile文面の最終化、旧finite作者へfallbackしない |
+| A/emlis_ai_grounded_observation_gate.py | 新profileのauthor-free句読取、誤意味/未知文/質問混入/反復を拒否 |
+| A/emlis_thread_service.py | 新profileの候補/意味/本文の段階保存・再開、通常policy併用拒否、完成非生成 |
+| A/cocolon_meaning_experience_engine/model_candidate_source.py（新） | source原文/metadata全保持のモデル投影（10/25は証明用3keyをnative側だけへ保持）と検証済みprior、固定4B/adapter identity、async generator/limits/raw receipt。実endpoint/DB/retryなし |
+| A/cocolon_meaning_experience_engine/preparation.py | optional adapter_revision。None時の旧receipt bytes維持 |
+| T/test_cmee_emlis_model_meaning.py（新） | source scope/意味軸/prior/訂正/gap/再開33検査 |
+| T/test_cmee_emlis_model_proposal.py（新） | 独立本文/実問い/訂正/隔離SQL/中断/完成非生成25検査 |
+| T/test_cmee_model_candidate_source.py（新） | 注入/identity/長さ/timeout/cancel/原raw保持15検査 |
+| T/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | current runtime identity同期。language identity/歴史的proofは不変 |
+| mashos-api/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | actual到達・失敗/修復・限定検証・再開の既存owner |
+
+Cocolon新pack F/=`Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/`。旧contract_examples.jsonは変更しない。新fileの所在は以下。
+
+| exact path（F/から） | actual責務 |
+|---|---|
+| run_pilot.py / runpod.sh | 固定4B・可変N×1epoch、JSON-only/mask/EOS、16/24GB受口、固定取得/有料条件未確定時拒否 |
+| diagnose_learning.py / export_checkpoint.py | 同baseへの非学習reload・adapter hash、先退避/最終退避・archive全文読戻し |
+| verify_cmee.py | 実saved raw/metadataを固定native2caseのP1→意味→本文へ接続。実モデルの動的一往復ではない |
+| dataset_manifest.json / execution_plan.json | 固定API02c0b943、dataset/hash、未対応7、2step/16生成/4NLLの診断量、8k/2048と未確定の有料条件 |
+| sft_examples.jsonl / train_messages.jsonl | chair初回/訂正後2行、source/実問い/実prior/同messages。品質goldではない |
+| eval_inputs.jsonl / eval_review.jsonl | 旧EFREE6の学習外・既読proxy。新profile範囲外で意味成功へ加算しない |
+| cpu_connection_results.json | 合成候補のactual source/packet/snapshot/本文/実問い |
+| cpu_raw_consumer_results.json | 同target rawの固定consumer結合要約。実モデルrawではない |
+| cpu_tokenization_results.json | 固定4B実tokenizer/indexのCPU結果。重み/GPU未使用 |
+| test_training_pack.py / README.md / .gitignore | 学習用8検査、使用範囲と未実証、生成run/重みをsourceへ混ぜない設定 |
+
+全機能00・全体01・本01A・Emlis/CMEE map・shared01/Emlis02/schema05/実装順06・観測入口・latest weekly実装節を同じ変更単位で同期。engine.py/answer_update.pyは既存dispatchで足り変更不要だった。backend対象220＋pack8、subtests/反復/本文採取を加算しない。実モデル/重み/学習/通常有効化・DB/Render/merge/deploy/商品受入れ0。
+
+
+### 2026-10-24 — 4B学習のtail-loss修復と一回案（商品runtime構造差分なし）
+
+上記F/の既存5fileを更新。run_pilot.pyは全context/教師集合を保持してNLL/学習のlogitsを教師先頭の前位置からに限定（L-P+1、labels[:,P-1:]）。test_training_pack.pyは独立数値loss/勾配・実呼出し/不正targetの3件追加で計11成功。execution_plan.jsonはGPU単価上限$0.30/h・Pod最大2時間/process5400秒・計画$1の未承認一回案を保持し、実単価null/認可・mount確認falseを維持。cpu_tokenization_results.jsonは実tokenizer/indexの今回再測定、README.mdは具体案/公式費用/手動停止/未実証と動的一往復の残差を所有する。
+
+同じ変更単位で全機能00と最新weekly§14を更新。exact8path、正式dataset/旧教師/評価/API sourceと型/商品経路は不変。STRUCTURE_MAP_DELTA_NONE。GPU/重み/学習/有料推論/DB/Render/通常有効化0。実GPUメモリや品質改善へCPU数値を換算しない。全体設計01・current maps・schemaの構造差分は0で、無関係な再更新をしない。
+
+
+### 2026-10-24 — 実4B一回診断の結果所在（商品runtime構造差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/` の5fileを追加。
+
+| file | 責務 |
+|---|---|
+| README.md | 承認一回の実結果、品質未合格、回収/Pod削除、次の最小修復候補 |
+| run_summary.json | 固定source/model/adapter、2update/前後16生成/4NLL、実GPU memory、回収hash/保存identity、停止/削除時刻と費用概算 |
+| before_cmee.json / after_cmee.json | 実rawを置換せずP1→意味/本文へ消費した実採否。FIT前後0/2、EFREE6は各段階で範囲外 |
+| quality_review.json | 原入力/訂正sourceと全16surfaceの実所在、前後の局所改善/悪化、商品未達、未実装の次候補 |
+
+同じ差分単位で全機能00・pack README・観測入口・本01A・最新weekly §15.3を更新。構造/公開API/意味schema/採用条件/製品code/旧教師/型/通常DB/Render/RNは不変で、全体設計01・current maps・schema05の再更新はしない。STRUCTURE_MAP_DELTA_NONE（実行結果と所在のみ）。新規Pod1/学習試行1、追加試行0、最終重み回収後に当該Pod停止/削除確認。限定TECHNICAL_CREDIT、商品0/正式0/3/全体54.50％据置。
+
+
+### 2026-10-25 — 継続学習32updateの所在（商品構造差分なし）
+
+F/continued_fit32/continue_fit.py と plan.jsonは、保存済みadapterから新optimizerで既存2target×16周/32updateを一回実行する有限な診断。旧runner/計画は不変。before実raw再利用、保存/非学習reload/after2生成/退避を担当する。採用条件/公開API/DB/RN/三core責務は不変、STRUCTURE_MAP_DELTA_NONE。投影修復実結果はtrials/2026-10-24-qwen4b-cmee-diagnostic/proof_projection_20261025/、実行/採否/次作業は最新weekly§29/30へ戻る。
+
+32更新の完了原本：trials/2026-10-24-qwen4b-cmee-diagnostic/continued_fit32_20261025/。run/continued_fit_plan/continuation_source/training/before_nll/after_nll/before/after/cmee_result/comparison/checkpoint_manifest/integrityのJSON・JSONLとREADMEが実条件/32更新/全raw/採否/回収を所有する。商品source境界差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-10-25 — 全文字座標の非学習2FIT確認（商品構造差分なし）
+
+F/unicode_check/diagnostic.pyとplan.jsonが、保存32更新adapterの非学習2生成・固定hash/入力token/900秒・raw/report/archive回収を所有する。model_candidate_source.pyはmodel-visible sourceへ全文のfield_unicode_spansを機械追加し、既存kind/ref/訂正根拠/本文sectionの説明を具体化。native prepare/admission/reader/教師本文/公開API/DB/RNは不変。STRUCTURE_MAP_DELTA_NONE。source/対象検証/実行scopeと結果は最新weekly§31が所有する。旧32update計画は再開しない。
+
+
+全文字座標の非学習実結果はtrials/2026-10-24-qwen4b-cmee-diagnostic/unicode_map_20261025/が所有。raw/inference_report/actual_plan/diagnostic/preflight/execution_plan/unicode_attempt/unicode_file_manifest/dataset_manifest/integrity/cmee_result/comparison/README/result.jpgを保持する。続くF/unicode_fit32/continue_fit.py/plan.jsonは、新入力を学ぶ32update一回の初期重み/新schema/1995・5018token pinを所有し、旧学習planを再開しない。商品構造/契約差分なし、実結果と次作業はweekly§31へ戻る。
+
+
+新入力32更新の実原本はtrials/2026-10-24-qwen4b-cmee-diagnostic/unicode_fit32_20261025/。run/continued_fit_plan/continuation_source/training/before/after/before_nll/after_nll/checkpoint_manifest/integrity/cmee_result/comparison/README/result.jpgが実行・採否・回収を所有。続くF/reception_check/diagnostic.py/plan.jsonは結果への受け取り説明一節を変え、同保存a8baf0…で非学習2FITだけを確認する。意味/本文owner・出力schema/readerは不変、STRUCTURE_MAP_DELTA_NONE。進行と現在結果はweekly§31へ戻る。
+
+
+reception_checkの実原本はtrials/2026-10-24-qwen4b-cmee-diagnostic/reception_instruction_20261025/。raw/inference_report/actual_plan/diagnostic/preflight/execution_plan/reception_attempt/reception_file_manifest/dataset_manifest/integrity/cmee_result/comparison/README/result.jpgに加え、restored_prompt_replay.jsonは旧実rawの新生成なし互換確認、next_local_difference.jsonはCPU文字列比較を所有する。候補promptは退行で不採用、model_candidate_sourceは学習時a3e82 exact bytesへ復元（API7a4dc32、全tree同一）。商品構造/採用条件差分なし。現在の残件と次の局所診断はweekly§31が所有する。
+
+
+### 2026-10-25 — 局所token診断と受け取りloss4更新の実原本（§32時点の履歴）
+
+F/branch_check/diagnostic.py/plan.jsonは固定a8baf0・元messagesで3forwardだけを行う非学習診断（完了済み）。F/reception_fit4/continue_fit.py/plan.jsonは全文input/teacher/EOSを保持してreceptionだけを学ぶ4update一回候補（完了・不採用）。旧planの再利用なし。
+
+trial/branch_check_20261025のresult/READMEは分岐token/rank/p/全token NLL/限界を所有する。trial/reception_fit4_20261025のrun/actual_plan/前後raw/前後reception_nll/前後cmee/comparison/file_manifest/integrity/consumer_provenance/SOURCE_COMMIT/READMEは実4step・2生成・不採用・回収・次作業を所有する。重みbinaryは回収archive libfile_cbe77bb15ad081918e252f6427c8a8c8、GitHubには原raw/結果とhashを置く。固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。 次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。
+
+STRUCTURE_MAP_DELTA_NONE（有限診断/学習candidateと結果の所在のみ）。CMEE製品source/API/DB/RN/意味型/採用reader/教師は不変。全体設計01・01B/01C・Piece/Analysis mapは構造差分がなく更新不要。全体現在地とlatest weekly§32へ進行を戻す。
+
+
+### 2026-10-25 — LRだけの受け取り4更新と実モデルoffline一往復（現在）
+
+Fは observation_learning/training/2026-10-24-emlis-4b-training/、trialは observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/ を指す。
+
+| path | 責務 |
+|---|---|
+| F/branch_check/compare_fit4.py | 不採用e3743dと元a8の固定prefixを同座標で比較。1forward/生成0/学習0。gap0.75→0.375、順位不変 |
+| trial/branch_compare_fit4_20261025/result.json・README.md | 1forwardの全実出力/固定hash/時間/限界、過去結果への比較 |
+| F/reception_fit4_lr5/continue_fit.py・plan.json | 元a8からLRだけ5e-5へ変更した4stepと非学習reload/新生成2/退避。planは完了・再実行不可 |
+| trial/reception_fit4_lr5_20261025/ | README、run、actual_plan、before/after JSONL、before/after_reception_nll、before/after_cmee、actual_prior_chain、comparison、file_manifest、integrity、consumer_provenance、SOURCE_COMMIT。knownFIT2/2・CPU actual prior replay・回収を所有 |
+| F/roundtrip_check/run_roundtrip.py | 実モデル初回→既存CMEE→実問いとactual initial snapshot→既存本人訂正→実モデル再生成→既存CMEEの逐次2call。更新0/teacher送信なし、900秒以内の一回で完了 |
+| trial/model_roundtrip_20261025/ | README/run/attempt、initial/correctionのmessages・raw・cmee、file_manifest/integrity、SOURCE_COMMIT。実2call/意味本文2/2/問い1/訂正3更新/ENDと回収を所有 |
+
+保存e3743dの同prefix1forwardで誤枝と教師のgapは0.75→0.375へ縮小したが順位は不変。元a8baf0から学習率だけ5e-5へ変えた同2教師/reception loss4updateを完走し、既存実CMEEで意味2/2・本文1/2→2/2。新9b845eced…を既知FIT/offline用候補に選び、旧a8baf0/e3743dは保持した。さらに保存重みを非学習reloadし、実モデル初回→実CMEE問い→本人の既存訂正→実モデル再生成の同一process一往復を新規2callで確認（意味/本文2/2、訂正3更新、問い1・最終None/END、172.492秒）。一往復ではraw置換/teacher送信/重み変更0。重みbinaryはarchive libfile_0ce9c648e89c8191acf7aabfa5a56b01に保管し、GitHubにはhash/source/raw/結果を置く。既知の架空chair2段階だけのoffline技術確認で、通常service/Auth/SQL/HTTP/RN/本人端末/保存再読、一般入力、三中核の商品品質は未確認。次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。
+
+STRUCTURE_MAP_DELTA_NONE。全体設計01・01B/01C・Piece/Analysis mapは商品owner/型/接続に差分がなく更新不要。最新weekly§33/全機能00が進行owner、current01/04は限定確認と通常未接続の区別を同期。商品0/正式0/3/54.50％、GPU停止なし。
+
+
+## 2026-10-25 — 実4B既存rawのEngine cold file再開、通常service期限の切り分け
+
+| path | 責務 |
+|---|---|
+| F/persistence_check/check_saved_roundtrip.py | 既存実raw2件→実意味snapshot/native requestのfile保存→別processでRESUME_ADOPTEDの全outcome一致。provider新取得を禁止。120秒/child30秒、一回実行済み |
+| trial/service_persistence_20261025/ | README/provenance、attempt/result、initial/correctionのsaved_input・cold_outcome。Engineのみの2/2同一、訂正3更新・ENDを保持。通常service/SQL未実行 |
+
+F/trial prefixは上表と同じ。現sourceのservice30秒と実model初回57.425/訂正95.995秒が不整合。次は共有設計01のoffline MODEL_PROFILE限定期限案の判断後、service自身のUUID/request/actual priorから新規model2callと保存再読へ進む。旧raw ID置換による成功流用は行わない。API/SQL/DTO/RN/meaning/readerの変更0、STRUCTURE_MAP_DELTA_NONE。最新はweekly§34/全機能00。
+
+
+## 2026-10-25 — 承認済みoffline model期限と実サービス保存のfile地図
+
+| path | 責務 |
+|---|---|
+| API ai/services/ai_inference/emlis_thread_service.py | 既存ownerへprivate model専用31..180秒設定/source最大150秒、通常30秒維持、timeout HOLDのfresh revision照合を追加。95d00b |
+| API ai/tests/test_cmee_emlis_model_proposal.py | constructor/実thread限定/timeout/cancel/receipt再利用/実SQL一往復と中断を検証。既存3file計114成功 |
+| F/service_roundtrip_check/run_service_roundtrip.py | 実service UUID/request/actual priorで新model最大2call、isolated SQL、意味保存後中断/明示再開/非生成再読を試す900秒one-shot。実訂正不採用のため後半未到達 |
+| trial/service_roundtrip_20261025/ | 承認plan/CPU結果、実request/messages/raw/prior/receipt/DTO/snapshot/run/manifest/integrity/画像、runtime起動前失敗記録、入力差分と訂正不良の診断。通常app/商品受入れと分離 |
+
+F/trial prefixは先行表と同じ。初回の実service保存・非生成再読は成立、訂正はINVALID_FORMATで意味更新せずANSWERだけ保存。原raw無補修/重み不変。STRUCTURE_MAP_DELTA_PRESENTは既存serviceのprivate時間設定と取得中断処理。SQL/DTO/RN/他core source責務は不変。現在はweekly§35/全機能00。
+
+
+## 2026-10-25 — 日常食事familyのscope診断と未採用案の所在
+
+`observation_learning/training/2026-10-25-emlis-daily-calm/` のREADME.md、source_mapping_candidate.json、current_profile_diagnostic.json、probe_current_profile.pyは、既存FT-UDONの5claim/4関係の未採用対応案と、現修理専用profileの実UNSUPPORTED診断だけを所有する。製品code/型/意味/reader/保存経路は変更0、STRUCTURE_MAP_DELTA_NONE。実装候補3owner＋新test/fixtureと有限18更新/保存再読の範囲・判断境界は同READMEと共有設計01#cmee-daily-calm-family-proposal、最新進行はweekly§37/全機能00。新model/学習/GPU操作0、旧§36 credit/重み/教材/raw/終了planは維持。
+
+
+## 2026-10-25 — 承認済みdaily食事・少し落ち着いたの全変更path
+
+APIbd356566：`ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py`（有限source/意味/保存内部版2）、同`model_candidate_source.py`（dailyだけ指示切替）、`ai/services/ai_inference/emlis_ai_grounded_observation_gate.py`（独立本文読取）、`ai/tests/test_cmee_emlis_model_daily_calm.py`、`ai/tests/fixtures/cmee_emlis_model_daily_calm_v1.json`（未変更95d00b実行capture＋出典付きdaily）。旧chairの全snapshot/outcome/messages同一を含む174成功、schema/DTO/DB/RN不変。
+
+新daily packのgenerate_candidates.pyは3service identityの合成candidate/実SQL保存を担当、sft_examples/train_messages/dataset_manifest/cpu_connection_resultsは凍結9行/2familyとSQL30RPCの原本。run_daily_calm_fit.py/plan.jsonは76309b86から18更新/FIT9の一回、consume_fit_raw.pyは既存native request/固定priorで無補修rawを消費する。旧chair6原sft bytes不変。tokenizer確認/新model学習は未実行。新packREADMEとweekly§38へ進行を戻す。STRUCTURE_MAP_DELTA_PRESENTは新private採用範囲のみ、商品0/正式0/3/54.50％。
+
+
+### 2026-10-25 §38最終結果 — 18更新完了、daily採用未達で終了
+
+18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。
+
+
+## 2026-10-25 — 日常重点12更新候補の所在（製品構造差分なし）
+
+`observation_learning/training/2026-10-25-emlis-daily-calm-focus/` のrun_daily_calm_focus.pyは同じ凍結9teacherと旧helperを読み、daily38valueの疎lossとchair全文rehearsalを新12更新へまとめる未実行候補。plan.jsonはGPU許可false、READMEは新scope/費用/停止/承認境界、cpu_focus_ranges.jsonは文字区間だけの当時の結果。token_mask_preflight.jsonは実tokenizerの910/894/918対象と完全coverage、token_preflight_launch.json/logは新model/CUDA0の実行記録、export_manifest.jsonはPod外回収3fileのsize/hashを所有する。旧teacher/input/prompt/意味採用/reader/元18planは変更しない。製品path追加0、STRUCTURE_MAP_DELTA_NONE。全体00/最新weekly§39/新packへ戻る。新GPU学習・別ID保存再読は承認前・未実施、商品credit0。
+
+
+## 2026-10-25 — focus12終了結果と未使用holdoutのfile地図
+
+`observation_learning/training/2026-10-25-emlis-daily-calm-focus/` の既存plan/runnerは承認scopeの12更新/FIT9を一度実行済み。weights_verification.jsonは回収18member/32tensorの検証、run_daily_calm_holdout.py/eval_fixture.jsonは新focus完了/FIT全9成功を起動前に照合する2初回用source/架空入力。今回は条件未成立でeval_plan未作成・実行0。教材や採用ownerへの責務追加なし。
+
+`observation_learning/trials/2026-10-25-daily-calm-focus12/` はREADME/closure/comparison、承認plan/run、原raw9/training/前後scope別NLL、runtime launch/log、export manifest/weights検査、consumer index＋20partsを所有する。consumer原本はbyte連結で完全復元しhash一致済み。凍結teacher/source/tokenizer重複原本は各固定commit/packへ戻る。意味7/9・本文6/9、chair6/6・daily意味1/3/本文0/3、実service保存再読0。STRUCTURE_MAP_DELTA_NONE（製品API/意味/reader/保存責務不変）。最新weekly§40/全体00/trialへ進行を戻す。第三の自動試行0、GPU稼働維持・停止0、商品credit0。
+
+
+## 2026-10-25 — 引用選択/位置計算を分ける未承認候補のfile地図
+
+`observation_learning/training/2026-10-25-emlis-quote-address/` のREADMEは共有設計01の未承認案へ戻る入口、train_messages.proposed.jsonlは旧chair6行bytes不変＋新quote形式の日常3行、cpu_feasibility.jsonは原9件78引用の一意性/可逆性、plan.proposed.jsonはGPU/実装許可falseの有限18更新/FIT9/条件付き2保存再読案を所有する。原teacher/原raw/旧planの所有を移さない。既存API preparation/model_candidate_sourceの新形式分岐が候補であり、今回製品source/reader/公開API/DB/RN変更0、新GPU試行0。STRUCTURE_MAP_DELTA_NONE。全体00/最新weekly§41/共有設計01のquote-address案へ進行を戻す。商品0/正式0/3/54.50％は不変。
+
+## 2026-10-25 — 承認後quote接続実装と実行file地図
+
+API4002b457のpreparation.py/model_candidate_source.pyは新quote wireの一意位置compile/原raw保持/明示format選択を所有し、新test_cmee_quote_candidate.pyがstrict拒否/再導出/SQL中断再開を所有。Cocolon quote-address packのsft_examples.jsonl/train_messages.jsonlは実行9教師、dataset_manifest.jsonはsource/data hash、cpu_connection_results.json/cpu_validation.jsonは合成接続/限定197の実証範囲、plan.jsonは承認済み一回18更新/FIT9、run_quote_address_fit.pyは既存全文loss/reload/FIT手順、consume_quote_fit_raw.pyは無補修raw/明示形式/既存意味本文の採否を所有する。proposed版は履歴で実行しない。実tokenizer/GPU試行前、STRUCTURE_MAP_DELTA_PRESENT、公開API/DB/RN/reader変更0。全体00/current01/04/共有01/schema05/最新weekly§42を同期。
+
+## 2026-10-25 — quote18の完了証拠fileと後段未実施
+
+quote-address packのcpu_tokenization_results.jsonは実9行、weights_verification.jsonは保存直後Pod外16member/32F32有限、runtime_checkpoint.jsonは18更新/FIT9完了・意味9/本文6・条件付き後段call0の終了owner。run_quote_address_holdout.py/eval_fixture.jsonは未使用、eval_plan未作成。
+
+observation_learning/trials/2026-10-25-quote-address-fit18/ はREADME.md（終了原本）、closure.json（gate/残差/境界）、run.json（実18更新/9生成/非学習reload/全順序）、after_fit.jsonl（無補修9原raw）、training.jsonl（18loss）、before_nll.jsonl/after_nll.jsonl（全文NLL）、file_manifest.json（Pod全18対象hash）、recovery_verification.json（完了archiveのPod外照合）、consumer.index.json＋consumer.part-*.txt（1,604,374bytesの無損失実consumer）を所有する。index順UTF8連結して元SHAを照合する。旧raw/旧plan/旧重みは移管/修正しない。
+
+今回の終了記録はSTRUCTURE_MAP_DELTA_NONE。privateモデルwire/compile責務の実装PRESENTは上記とcurrent01/04/共有01/schema05に反映済み。全体00/最新weekly§42は意味9/9・本文6/9・後段0へ同期。商品0/正式0/3/54.50％、新重み昇格0、GPU稼働保持/STOP・再起動・削除0。
+
+
+## 2026-10-25 — quote受け取りCPU診断と新6更新案のfile所在
+
+既存observation_learning/training/2026-10-25-emlis-quote-address/へdiagnose_reception.py（Jupyterで実行したCPU cache tokenizer診断）、reception_cpu_result.json（全9raw/parsed・daily3の各11token/両端/causal mask・原sourcehash不変）、reception_fit6.proposed.json（未承認flags=false/新6更新/FIT9/成功時2保存再読）を追加。READMEのquote-reception-cpu-and-fit6-proposal節が実測、最初のCPU準備失敗、変更候補path、費用/停止/承認境界を所有する。製品責務追加0、旧18plan/teacher/raw/重み/reader不変。全体00§8はFIT途中表示を意味9/本文6/終了後段0へ補正。最新weekly§44へ進行を戻す。新学習/モデル生成0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+## 2026-10-25 — 承認済み受け取り6更新の実装file
+
+既存quote-address packにrun_quote_reception_fit.py（daily3の各11tokenだけを2回学ぶ一回、全文context保持/直接causal loss/保存非学習reload/FIT9）、reception_fit6.plan.json（Mash承認scopeと固定hash）、reception_fit6_cpu_validation.json（stdlib6条件成功）を追加。元proposed/18plan/teacher/helper/raw/readerを上書きしない。実tokenizer確認/GPU実行前。全9成功時だけ別後段へ進む。構造差分なし、商品0、最新weekly§45/packへ戻る。
+
+
+## 2026-10-25 — 受け取り6更新の完了file地図
+
+observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closureは意味7・本文6/9、daily3通過とchair3退行、新不採用/後段0/停止境界を所有する。run/training/after_fit/前後reception NLLは実6更新/9生成/原出力、file_manifest/recovery/weights_verificationはPod外全19/早期16対象・32tensor照合、consumer.index＋24partsは全実consumer1,505,922bytesの無損失原本。conditional_holdout_runner_draft_NOT_ACTIVATED.py/conditional_holdout_cpu_preparation.jsonは実model後段へ進まなかった準備履歴。既存quote packのreception_fit6_runtime_checkpoint.jsonはCLOSEDへ更新し、原plan/teacher/source/旧raw/重みを保持する。意味/本文7/6、条件付き別ID2は0、新f1e88e3e不採用。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、最新weekly§45/全体00を参照。
+
+
+## 2026-10-25 — 新balanced12案のCPU準備file
+
+既存observation_learning/training/2026-10-25-emlis-quote-address/へrun_quote_balanced_fit.py（chair全文6各1＋daily受け取り3各2、固定12/保存reload/FIT9）、balanced_fit12.plan.json（未承認/実行false）、balanced_fit12_tokenization.json（Jupyter実tokenizer全9/全文EOSと疎11対象/モデル0）、balanced_fit12_cpu_validation.json（CPU10条件）、run_quote_balanced_holdout.py（全9成功後だけ2実service保存/中断再開/非生成再読、evalplan未作成）を追加。READMEのquote-balanced-fit12-proposalが目的・固定順・範囲・上限45分/$0.195処理按分・停止・承認境界の詳細owner。旧18/6plan/teacher/helper/raw/重み/reader不変。製品構造・契約変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/最新weekly§46へ現在地を戻す。商品0/正式0/3/54.50％。
+
+
+10/26 JST 新balanced12の実行承認：同packへbalanced_fit12.proposed.json（承認前原本）とbalanced_fit12_runtime_checkpoint.json（承認/進行/終了のactual状態）を追加し、balanced_fit12.plan.jsonをMash明示承認の一回scopeへ更新。runner/teacher/reader/予算不変。構造差分なし、旧18/6を再開しない。
+
+
+10/26 JST balanced12実行中のfile：observation_learning/trials/2026-10-26-quote-balanced-fit12/README.mdは12更新/保存reloadとFIT9途中の読取点、weights_verification.jsonは早期archive18対象hash/32F32有限/永続保管IDを所有。quote packのbalanced_fit12_runtime_checkpoint.jsonはRUNNING_FIT9_DO_NOT_RELAUNCH。全9採否/後段0は未確定のまま、商品0/STRUCTURE_MAP_DELTA_NONE。
+
+
+10/26 JST balanced12完了file：同trialのREADME/closure.jsonは意味本文8/9・chair保持/daily01 JSON区切り不正/後段0/未採用を所有。run/training/after_fit/前後chair全文NLL・reception NLLは実12更新/9生成/原raw、file_manifest/recovery_verification/weights_verificationは全22対象と早期18対象/32F32有限のPod外照合、consumer.index＋consumer.part-*.txtは既存consumer一回の全原本をUTF8順連結で復元する。quote packのruntime checkpointはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。全9未達で後段evalplanなし、実model/SQL2件0。新2009b43cは保存・未採用、追加試行0、商品0/正式0/3/54.50％/STRUCTURE_MAP_DELTA_NONE。
+
+
+10/26 JST boundary12 CPU準備file：quote-address packのrun_quote_boundary_fit.pyは旧138b/9教師/固定12を保持しdaily受け取り11＋直前区切りID2129の1tokenへ限定。新plan false/未承認、新holdoutは全9条件後のみ実service2、eval plan未作成。boundary_fit12_tokenization.jsonは実cache全9/無切捨て/CPU0model、diagnosisは前回唯一の区切り差、runtime_checkpointは正確な再開pathを所有。旧balanced12は8/9/閉鎖/未採用/後段0のまま。詳細は最新weekly§47/pack新12案。STRUCTURE_MAP_DELTA_NONE（学習runner内部だけ、製品責務/型/reader/公開API/DB/RN不変）、商品0。
+
+
+10/26 JST boundary12完了file：trial/2026-10-26-quote-boundary-fit12/README/closure/run/after_fit/training/NLLは実12更新/9生成/意味9・本文8/全9JSON-EOS正常・daily02未完文/後段0/新041f未採用を所有。file_manifest/recovery_verification/weights_verificationは完了21対象＋早期18対象/32F32有限/保管version1を保持。consumer.index＋28partsは既存consumer一回の全原本を順連結で復元。quote pack runtimeはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。旧run/teacher/reader/API/SQL不変、製品責務/型/公開API/DB/RN差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+10/26 JST surface12 CPU準備file：既存quote-address packのrun_quote_surface_fit.pyは旧138b/9教師/固定12/chair全文を保持し、daily観測9＋受け取り11＋接続5を連続25tokenで学ぶ新候補。surface_fit12.plan.jsonはfalse/未承認、surface_fit12_tokenization.jsonはJupyter実cache全9/無切捨て/新model0、surface_fit12_cpu_validation.jsonは11条件とCPUキー修正の確認、surface_fit12_diagnosis.jsonは前回唯一の未完文と改善仮説。run_quote_surface_holdout.pyは新結果の全9条件後だけ実service2/隔離SQL/中断再開/非生成再読、evalplan未作成。旧boundary12は閉鎖/意味9・本文8/9/後段0/新041f未採用のまま。詳細は最新weekly§48/pack具体案。STRUCTURE_MAP_DELTA_NONE（有限学習runner内部だけ、製品責務/型/reader/公開API/DB/RN不変）、商品0。
+
+
+10/26 JST surface12完了file：trial/2026-10-26-quote-surface-fit12/README/closure/run/after_fit/training/NLLは実12更新/9生成/意味本文8/9・全9本文候補教師一致・daily02引用[0,5)と既存role[0,3)の不一致・後段0/新e1db未採用を所有する。file_manifest/recovery_verification/weights_verificationは完了21/早期18対象・32F32有限・同一保管identity version1を保持。consumer.index＋27partsは既存consumer一回の全1,605,267bytesを順連結で復元。pack runtimeはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。旧138b/teacher/helper/API/reader不変、製品責務/型/保存/公開契約差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+10/26 JST joint12 CPU候補file：既存quote-address packのrun_quote_joint_fit.pyはdaily全文JSON/EOS平均CE＋完成surface25平均CEを各0.5で同時学習し、chair全文／原9教師／既存CMEEを保持する新一回案。joint_fit12.plan.jsonはPROPOSED/false、tokenization.jsonはJupyter実9行／全9全文EOS／daily25、check_quote_joint_cpu.pyとcpu_validation.jsonは有限14条件・合成CPU勾配一致を所有する。run_quote_joint_holdout.pyは新joint12全9成功時だけ既存2実service／隔離SQL／中断再開／非生成再読を許し、旧surface12結果を受け付けない。新evalplan未作成、4B読込/更新/生成/SQL0。最大45分/$0.195処理按分（保持等別）の新有料一回は未承認。詳細は最新weekly§49／pack具体案。旧surface12閉鎖／新e1db未採用を保持。製品責務/型/保存/公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0。
+
+
+10/26 JST joint12完了file：trial/2026-10-26-quote-joint-fit12のREADME/closure/run/after_fit/training/NLLは12更新・意味本文9/9・全parsed教師一致と前回引用範囲/未完文の同時解消を所有。consumer.index＋29partsは全1,703,898bytes、service/21原本＋manifestはmodel2/source2/隔離SQL RPC30/保存再読2/2・中断再開1/1・再読時生成0を保持。early/training/recovery_verificationは早期19/完了23/後段21/最終7対象・32F32有限・同一保管identity version1を所有する。packのjoint_fit12_runtime_checkpoint.jsonはCLOSED_FIT9_AND_CONDITIONAL2_COMPLETE_DO_NOT_RELAUNCH、eval_planは全9成功後だけactivateした原本。新45779は有限検証の保存候補、本番/商品未採用。製品責務/型/保存/公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。詳細は最新weekly§49最終結果。
+
+
+### 2026-10-26：有限成功後の接続制約診断／原汎用2題評価（一回実行済み）
+
+既存`observation_learning/trials/`に`2026-10-26-generalization-probe2/`を追加。READMEはactual診断／判断／新2生成案と開始記録、diagnose_general_boundary_cpu.py／general_boundary_cpu_result.jsonはAPI4002bの既存9対応・別2題拒否／誤ったchair指示のCPU原本を所有する。run_generalization_eval2.py／generalization_eval2_cases.jsonl／generalization_eval2.plan.jsonは保存45779の非学習・原汎用messages無変更・max2call／600秒／$0.043334（保持等別）一回案、generalization_eval2_cpu_preflight.jsonは実tokenizer487／505・切捨て0・モデル0の確認原本。原proposedはfalseを保全、承認済み一回は実行・閉鎖。製品source／意味admission／reader／公開契約／DB／RN不変。新profileや題材別regexは実装しない。STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§50／上記READMEへ戻る。
+
+10/26実行後：同trialのrun/は実入力token／case1・case2 raw／loaded tensor／run／file manifestを、generalization_eval2_launch.json／generalization_eval2_launch.logとrecovery_manifest.jsonは単一起動・原本復元を、content_diagnosis.jsonは入力保持・説明調の受け取り・E03の未記載心理説明を記録する。model2call・各EOS・19.5秒・非学習／重み不変、CMEE採用0／品質未達で閉鎖。既存split_manifest.jsonでE01/E03を評価使用済み、A03同familyを独立未使用から外す。新しい製品責務／型／接続は追加していない。
+
+
+### 2026-10-26：共通指示だけの非学習旧新4call比較準備
+
+observation_learning/training/2026-10-26-common-instruction-pair4/のREADME/common_instruction.txtは旧新比較の判断・既存教示との対応と共通指示、run_instruction_pair4.py／instruction_pair4_cases.jsonl／instruction_pair4.plan.jsonは45779非学習・既知2入力×旧新・最大4call/600秒/$0.043334（保持等別）の一回候補を所有する。instruction_pair4_cpu_preflight.json／cpu_launch.json／cpu_recovery_manifest.jsonはJupyter実tokens428/444/668/684・切捨て0・model0・原本復元を保持する。旧教材・評価・API/admission/reader/question/service/DB/RNは不変、新teacher・新意味profileなし。STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§51／当READMEへ戻る。
+
+
+10/26旧新4call実行後：同packのrun/はactual入力token／旧新case1〜4 raw／loaded32tensor／run／file manifestを、instruction_pair4_launch.json／instruction_pair4_launch.log／recovery_manifest.jsonは単一起動・原本復元を所有する。content_diagnosis.jsonは本人向け口調／E05意向保持の局所改善とUDONの食べ物取り違え・身体状態補完を区別し、新指示不採用・閉鎖を記録。4call/全EOS/33.76秒/非学習/45779不変、CMEE採用0。原教材・旧教師・API/reader/型/保存/公開契約の構造差分なし。STRUCTURE_MAP_DELTA_NONE、商品0。
+
+
+### 2026-10-26：generic/nativeのinterface差を埋める一候補・CPU準備完了
+
+observation_learning/training/2026-10-26-generic-native-bridge13/のREADME／source_comparison.json／source_manifest.json／generic_teacher_provenance.jsonは、既存同一原入力・同一観測/受け取りtargetのinterface差と出所を保持する。bridge_train_messages.jsonlはnative9無変更＋generic1、bridge_eval_inputs.jsonlはnative9＋genericUDON/E05（E05非学習）。run_bridge13.py／bridge13.plan.jsonはgeneric4＋native9の13更新・保存非学習reload・最大11生成/1800秒/$0.13（保持等別）の新候補、planはPROPOSED/false。bridge13_cpu_preflight.json／cpu_launch.json／cpu_recovery_manifest.json／cpu_recovery_verification.jsonはJupyter実tokenizer10/11・max5045/2339/7378・無切捨て・daily旧25token・モデル0・11member回収照合・6拒否を所有。旧教材／重み45779／API／reader／製品型・保存・公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§52／当READMEへ戻る。新GPUは別判断前・未実行。
+
+
+10/26 bridge13完了file：同packのrun/run.json・training.jsonl・case1〜11_raw.jsonl・after_native_fit.jsonl・reloaded_tensors.json・file_manifest.jsonは13更新／11生成／全EOS・意味本文8/9・旧新重み不変を所有する。run/consumer.index.json＋consumer_parts24fileは既存consumer一回の全1,500,491bytesを無損失復元。runtime/launch・log・consumer_launch・guardは単一起動を、content_diagnosis.jsonは全11本文・前後比較・CHAIR03訂正の根拠3行欠落/終点2誤り/配列外8を、early_weights_verification/recovery_manifest/recovery_verificationは32F32有限と完了38memberの照合・保全先を所有する。runtime_checkpointはCLOSED_NATIVE_RETENTION_AND_GENERIC_QUALITY_NOT_MET_DO_NOT_RELAUNCH。新c39bbc27保全・不採用、旧45779維持。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。currentは全体00／最新weekly§52最終／当READMEへ戻る。
+
+
+### 2026-10-26：既存教師interfaceのCPU再検討（製品構造差分なし）
+
+`observation_learning/training/2026-10-26-interface-review/`：READMEは出所・範囲・次の直接作業、audit_interfaces.pyは既存quote compiler／admission／Engineへ旧／quote教師9を渡すCPU probe、native_quote_messages.jsonlはcandidateと根拠順を不変にした別教材候補。daily3は旧messages完全同一。three_stage_alignment.jsonはgeneric UDON／chair初回／訂正後の対応とFree9出所を保持。cpu_review.jsonは意味本文9/9・全78根拠復元・不正3拒否、cpu_launch.logはPID688267一回の終了値、helper_postcheck.jsonは旧補助source、recovery_manifest.json／recovery_verification.jsonは27,224bytes／6memberの回収照合を所有する。モデル生成・追加学習・SQL・製品source変更0、旧45779保持。STRUCTURE_MAP_DELTA_NONE。教師9/9をモデル実績や商品品質へ換算しない。currentは全体00／最新weekly§53／当READMEへ戻る。
+
+
+### 2026-10-26：旧Free未接続6行のsource scope照合と4題材一括案（未実装）
+
+`observation_learning/training/2026-10-26-unconnected-native/`のREADME／audit_unconnected.py／source_scope_review.json／proposed_surface_targets.jsonが今回の全原本。Jupyter直接CPU2.195328秒で旧Free9の原入力fieldを保持してscope照合し、BOOK2/SHOP2/REPOT/KNITの6行が現2系統のsource範囲外と確定。AFTERも原入力だけの確認で、実pending/回答/意味/本文成功へ数えない。提案は既存API private4ownerのsource-derived版3、4題材の意味・問い・説明追加・自然本文・保存再読を一括対応するもの。未承認・未実装、API4002b/旧45779/旧1・2/通常API/DB/RN不変。旧教師は変えず、別本文候補ではSHOP本人知覚・REPOT時系列非補完・KNITの関係不明を保持する。現構造差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。最新進行ownerは全体00とweekly§54。
+
+
+## 2026-10-26 — 承認済み6教材版3の全変更file地図
+
+既存production4owner内の採用範囲・問い焦点・説明ADDを拡張、STRUCTURE_MAP_DELTA_PRESENT。新production owner/dataclass/通常API/DTO/DB/RN/依存0。以下は今回の全変更path。原本・実本文・検証/失敗/除外境界は当training READMEのactual節。
+
+| repository/path | 今回の責任 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 実pending/2焦点 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py` | 意味/source/説明更新/版3 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py` | 段階別OUTPUT_SPEC/role順 |
+| mashos-api `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 独立source本文逆検査 |
+| mashos-api `ai/tests/fixtures/cmee_emlis_sixrow_v3.json` | 独立手製fixture/CPU/SQL検証 |
+| mashos-api `ai/tests/test_cmee_emlis_sixrow.py` | 独立手製fixture/CPU/SQL検証 |
+| mashos-api `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 同一実装単位の引継ぎ差分 |
+| Cocolon `Cocolon_前提資料/00_cocolon_current_product_and_state.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/01_cocolon_overall_structure.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/observation_learning/README.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/README.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/capture_sixrow_legacy.py` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/compare_sixrow_legacy.py` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/cpu_native_review.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/cpu_verification.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/legacy_compatibility.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native6.jsonl` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/pytest_final.log` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/review_native6.py` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/source_manifest.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261024.md` | 現在地/設計/地図/進行差分 |
+
+旧native9・旧Free9・失敗raw・独立未知評価・撤回読書会は不変。01B/01C/三core共通入口/Piece/Analysisは対象責務差分0。394は新112＋既存282で重複合算なし、HTTP2対象外。新4B処理0、商品0。
+
+
+## 2026-10-26 — 15教材CPU配分と次の新GPU一回案
+
+STRUCTURE_MAP_DELTA_NONE。製品owner/型/契約/公開API/DB/RNの変更0。旧quote9＋新native6を原bytes不変で束ねる一回限りの教材準備で、別の常設subsystemを作らない。原本は既存unconnected-native owner。
+
+| path（Cocolon_前提資料/ 以下） | 責任 |
+|---|---|
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/prepare_native15.py` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/failed_prepare_native15_v1.py` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/api_blobs.json` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/train_messages.jsonl` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/eval_inputs.jsonl` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/cpu_preparation.json` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15.proposed.json` | 新GPU実装/実行前の未承認案 |
+
+既存training README/全体00/観測入口/weekly§57を同期。実CPU15.142914秒/teacher15はmodel15成功ではない。新4B処理0、商品0/正式0/3/54.50％。01/01B/01C/current mapsは製品構造差分がないため更新不要。
+
+
+### 2026-10-26 native15承認済み実行コード所在
+
+既存native15_preparation/配下へrun_native15.py（単一実行owner、2700秒/最大21生成の一回runner）とgpu15.plan.json（5ba8c370本案へのMash承認状態）を追加。gpu15.proposed.jsonと既存payloadは不変。製品接続/型/意味/reader/API/DB/RN差分0、STRUCTURE_MAP_DELTA_NONE。CPU起動確認済み、GPU実行前。
+
+
+### 2026-10-26 native15一回実行の失敗原本・全追加file地図
+
+承認済み179acbd2を直接Jupyterで一回実行したが、beforeのBOOK回答後180秒で全体停止。生成2/更新0/新重み0/after0、意味/本文0。実行前checkpointは履歴。製品責務/型/配置/採用条件/API/DB/RN不変でSTRUCTURE_MAP_DELTA_NONE。以下は既存training ownerの実行結果だけで、製品owner追加ではない。
+
+| 追加path（`observation_learning/training/2026-10-26-unconnected-native/native15_result/` 配下） | 役割 |
+|---|---|
+| `run.json` | source179acbd2・2700秒/180秒条件・実2call/0更新・停止理由/旧重み不変/処理額 |
+| `before_FT-BOOK-INITIAL.jsonl` | 実生成raw/1261token/EOS/metadata。引用不正による不採用原本 |
+| `before_FT-BOOK-AFTER-ANSWER.jsonl` | 実生成raw/3625token/length/180秒打切り/非EOS/反復未完成JSON |
+| `gpu_file_manifest.json` | 元GPU archiveの全10member SHA/bytes。参照payloadは隣接native15_preparation/原本と同一 |
+| `launch.json` | 一回起動PID693855・source/開始時刻・retry=false |
+| `gpu.log` | 実load/既存reference kernel fallback警告/終了summary。依存変更0 |
+| `consume_native15.py` | 保存rawの実finish_reason・同source/prior/入力を使う一回限りCPU診断。追加model/SQL0 |
+| `diagnosis.json` | 実receipt INVALID_EVIDENCE/TOKEN_LIMIT、意味/本文0/2、before欠測4/after欠測15 |
+| `diagnosis.log` | CPU9.210402秒・実採否出力 |
+| `recovery.json` | 元archive全10member/最終全6member・内包bytes/consumer照合・永続保全と未作成物 |
+
+training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結果は今回未作成で、fileを発明しない。実結果と次の直接課題は既存README#native15-gpu-result、全体00/観測入口/weekly§57へ同期。01/01B/01C/CMEE current mapsは製品構造差分がないため更新不要。商品0/正式0/3/54.50％、追加GPU run/merge/deploy0、保持指示継続。
+
+
+### 2026-10-27 — native15学習先行の後継候補とGPUレンタル引継ぎ
+
+- `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/run_native15_afteronly.py`：before0→同15更新/別保存reload/after15、2700秒/180秒。旧runner/plan/教師/CMEE判定は不変。実GPU/Pod/費用の束縛前は実行拒否。
+- `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15_afteronly.plan.json`：PREPARED_ENVIRONMENT_UNBOUND、GPU名/Pod/費用未確認。Mashの続行指示受領と、環境未確保を分離。
+- `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/cpu_candidate_validation.json`：local CPU55成功、実tokenizer再実行/モデル処理/GPU0。正式商品受入れではない。
+- 関連owner：同README#native15-afteronly-prepared、全体00/観測入口、weekly§58。Runpod比較後A5000 24GB/表示$0.28hを選択したがDeployを自動承認審査が拒否、本人引継ぎ待ち。新Pod/新重み/after rawは未作成。STRUCTURE_MAP_DELTA_NONE、製品code/API/DB/RN/Render/Supabase/本人DB/merge/deploy0、商品0/正式0/3/54.50％据置。
+
+引継ぎ時の在庫差分：その後の引継ぎ準備でA4500 20GBの空きが戻ったため、同じ公式image/50GB container/追加volumeなし・表示$0.26/hへ選択を戻した。引継ぎ画面名はcocolon-4b-native15-a4500-20261027。レンタルは確定しておらず、在庫/料金は本人確定時に再確認する。
+
+### 2026-10-27 — A5000後継一回の最終結果とfile地図
+
+`Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/afteronly_result/` が今回の結果owner。新before0/15更新/after15を一回完了、意味/本文3/15（daily同family3identity）・cold-file3/3、新6は0/6、旧chair6も不成立。新adapter278fdc26は不採用、重みはarchive version1へ保全。製品責務・型・接続・通常有効化は不変、STRUCTURE_MAP_DELTA_NONE。API/DB/RN/Render/Supabase/merge/deploy0、商品0/正式0/3/54.50％。
+
+| 相対file/group | 所有する内容 |
+|---|---|
+| README.md / result_summary.json | 最終RUN_CLOSED_REJECTED_CANDIDATE、全15採否表、品質残件と次の直接課題 |
+| run.json / training.jsonl / reloaded_tensors.json | 15更新・保存非学習reload・after15、1190.52秒、identity/32finite tensor原本 |
+| after_*.jsonl（15file） | 実finish_reason/usage/token/raw/parse状態を持つ無補修の全出力 |
+| diagnosis/diagnosis.json | 固定APIによる全15receipt/意味/本文採否・実body/cold照合 |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各3file） | 採用daily3件のsnapshot・完成file・別process RESUME_ADOPTED一致。SQL/service成功ではない |
+| evidence/*（8file） | launch/実環境/API固定/tokenizer15/input15/CPUとGPU/consumer log原本 |
+| reading_reviews/*（3file） | 旧9/BOOK2/残り新4の入力・教師・実raw根拠付き読解。正式Pro/Ultra/human受入れではない |
+| recovery_manifest.json / final_recovery.json | 最終archive全50payload hash/bytes・32F32有限・Library version1保全。base4B全重みは非同梱 |
+| early_run.json / early_recovery.json | 204.712517秒/15更新/生成0の早期保存履歴。最終原本へ補修しない |
+
+runner/plan/実tokenizerCPU候補とconsumer sourceは同native15_preparationの既存owner。最終archive内runには凍結教材/plan/sourceも同梱して照合し、GitHub上で同じ教材を増殖させない。再開はREADME#native15-afteronly-a5000-result/weekly§59の最終判断から行い、旧outputの--execute二重起動は禁止。GPU稼働保持は継続料金を伴う。
+
+
+### 2026-10-27 — native15混在30更新候補の追加file地図（GPU未実行）
+
+`observation_learning/training/2026-10-26-unconnected-native/interleaved30_preparation/` が次の限定候補owner。旧frozen15payloadはnative15_preparationの既存原本をbytes不変で参照し、重複保存しない。製品責務・型・採用条件・API/DB/RN/Render/Supabaseは不変、STRUCTURE_MAP_DELTA_NONE。旧numeric-chair成功を現quote-chairの実測beforeへ換算しない。新30更新は個別判断前、今回model処理0。
+
+| file | 責任 |
+|---|---|
+| run_native15_interleaved30.py | 旧45779から同15行を混在2pass/30更新、別保存reload/after15。pending executeはmkdir前拒否 |
+| gpu30_interleaved.plan.json | 固定30index・before0/after15・2700秒/180秒/$0.21按分、承認pending |
+| consume_interleaved30.py | 実30logとscope照合、無補修after15のCMEE採否・採用snapshotのみcold-file再読。SQL/serviceでない |
+| source_bindings.json | 既存payload/helper前提と新consumerのhash。元データは既存ownerへ戻る |
+| training_diagnosis.json / teacher_audit.json | 旧成功実archiveと現在quote15の形式/学習条件差、教師15静的構造・新6の原文/意味/実入力照合 |
+| verify_interleaved30_cpu.py / cpu_scope_validation.json | scope/拒否/30順序/log対応・旧生成/保存reload不変・入力/priorのlocal75確認。モデル処理0 |
+| actual_cpu_check.json | 固定Jupyter実tokenizer15/EOS/max7935・consumer入力15一致。GPU/モデル/採否0 |
+| independent_review.json | 初回source指摘と最終修正確認を区別したread-only2agent補助。正式Pro/Ultra/human受入れでない |
+
+current00/観測入口/同training README#native15-interleaved30-proposal/weekly§60へ同期。source/code準備を商品進捗へ加算しない。前回afteronly_resultのraw/採否/重みは不変、同outputを再起動しない。
+
+
+### 2026-10-27 — interleaved30一回の最終結果とfile地図
+
+既存 `observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/` が結果owner。30更新/after15・EOS/JSON15、意味11/本文9・cold snapshot11/11、新6本文0のため新1d218763は通常不採用。製品責務/型/採用条件/API/DB/RN/Render/Supabase不変、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％。
+
+| file/group | 責任 |
+|---|---|
+| README.md / result_summary.json / runtime_checkpoint.json | 最終RUN_CLOSED_REJECTED_CANDIDATE、件数/本文残件/次の直接課題。再起動禁止 |
+| run.json / training.jsonl / reloaded_tensors.json | 実30更新/固定30index/各行2回、別保存非学習reload、15call/identity/処理額。epochs=1は旧metadata残り |
+| after_*.jsonl（15file） | 実raw/metadata/usage/token/EOSを持つ無補修の全出力 |
+| diagnosis/diagnosis.json | 全15receipt/意味/本文採否、実body/問い、採用snapshot cold-file |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各11file） | 採用11 snapshotの別process一致。うち2は本文なしoutcome、SQL/service成功でない |
+| evidence/*（7file） | 実launch/GPU/consumer log、固定環境/CPU/API原本。consumer sourceは既存interleaved30_preparation |
+| reading_reviews/old9.json / new6.json | 原文/教師/前回同quote raw/今回rawの根拠付き読解、正式human受入れでない |
+| recovery_manifest.json / final_recovery.json | 最終archive全74payload/hash/bytes、32F32有限、早期最終一致とLibrary version1保全 |
+| early_run.json / early_recovery.json | 399.591608秒/30更新/生成0の保存履歴として不変保持 |
+
+凍結train/eval/準備payloadと承認済みrunner/plan/consumerは既存native15_preparation/interleaved30_preparationへ戻る。最終archiveには実行時コピーも同梱し照合、GitHub上で同じ教材を複製しない。元4B全重み/optimizer/RNG非同梱。全体00/観測入口/同README#native15-interleaved30-result/weekly§61へ同期。GPU保持は継続料金を伴う。
+
+
+### 2026-10-27 — balanced30の損失配分候補と実CPU地図
+
+新候補ownerは `observation_learning/training/2026-10-26-unconnected-native/balanced30_preparation/`。同15教材/初期45779/混在30順序/API6b043880/採用reader不変で、学習lossだけをfull .5 + S/F/U群平均 .5へ変更。実tokenizer15/区間16/FP32・BF16合成CEと勾配照合完了、新学習/生成0、個別判断前。STRUCTURE_MAP_DELTA_NONE（製品責務・型・通常接続に差分なし）。
+
+| file | 責任 |
+|---|---|
+| README.md / gpu30_balanced.plan.json | 一回の範囲・予算・承認pending、旧閉鎖承認非継承 |
+| run_native15_balanced30.py | 旧30順序/保存別reload/after15/期限を保持、single-forward加重CE |
+| candidate_focus_loss.py | 不変assistant JSONのS/F/U区間をtokenへ照合、prompt除外/EOS full-only |
+| test_candidate_focus_loss.py / verify_balanced30_cpu.py | 16区間検査・実tokenizer15・小logits値/勾配・effect前拒否 |
+| actual_cpu_check.json | Jupyter実CPU原本、15件係数配分・max7935、実4B処理0 |
+| consume_balanced30.py | 新runner/loss/module照合、既存無補修CMEE/cold-file。採用条件不変 |
+| independent_review.json / source_bindings.json | 原典/候補/hash照合と独立読解。正式Pro/Ultra/human合格でない |
+
+旧frozen payloadは既存native15_preparation、初期重み/helperは既存正本へ戻る。旧interleaved30原本は不変。新一回は未起動、全体00/観測入口/最新weekly§62と同単位同期、商品0/正式0/3/54.50％据置。
+
+
+### 2026-10-27 — balanced30一回完了の結果file地図
+
+`observation_learning/training/2026-10-26-unconnected-native/balanced30_result/`が最終owner。30更新/保存別reload/15call、意味7/本文6・新6本文0で新228edccfは通常不採用。前回11/9から低下。STRUCTURE_MAP_DELTA_NONE（製品責務・型・API/DB/RN/reader不変）、商品0/正式0/3/54.50％。
+
+| file/group | 責任 |
+|---|---|
+| README.md / result_summary.json / runtime_checkpoint.json | 最終RUN_CLOSED_REJECTED_CANDIDATE・比較/残件/非再起動 |
+| run.json / training.jsonl / reloaded_tensors.json | 一回の30順序/有限log・保存/別reload・全15call/上限内と不変確認 |
+| after_*.jsonl（15file） | EOS13/JSON11を含む全無補修raw・token/usage/重み束縛 |
+| diagnosis/diagnosis.json | 固定CMEEの全採否/実本文/問い・意味7/本文6 |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各7file） | 採用7snapshotの別process一致。REPOT1は本文なし |
+| evidence/*（6file） | 実launch/モデルlog/consumer launch・log/入力照合/既存実CPU原本 |
+| reading_reviews/old9.json / new6.json | 全原文/教師/rawの読解と最終consumer overlay。正式human受入れでない |
+| early_run.json / early_recovery.json | 399.491650秒/30更新/生成0の不変早期保存履歴 |
+| recovery_manifest.json / final_recovery.json | 全65payload/hash・32F32有限・早期最終一致・Library version1保全 |
+
+凍結教材・承認runner/module/consumerは既存preparation owner、実行source7e3f6bca/API6b043880。全体00/観測入口/同training README/weekly§63を同単位同期。base4B全重み/optimizer/RNGはarchive非同梱。GPU稼働保持は継続料金を伴う。
+
+
+### 2026-10-27 — 成立済み重みからの低LR継続30候補、実CPU確認のfile地図
+
+`observation_learning/training/2026-10-26-unconnected-native/continuation30_preparation/` が次の候補owner。同15/同30順序の1d218763継続・全文CE/LR1e-5へ限定。製品責務/型/wire/採用reader/API/DB/RN/通常接続は不変、STRUCTURE_MAP_DELTA_NONE。新GPU一回は判断前、今回の実4B処理0、商品0/正式0/3/54.50％。
+
+| file | 責任 |
+|---|---|
+| README.md | 原本に基づく選定理由/代替案・固定一回・予算・未承認境界・CPU結果 |
+| run_native15_continuation30.py | 新初期1d/hash/LR1e-5を実使用し、不変全文teacher_loss/保存reload/15call/期限を保持 |
+| gpu30_continuation.plan.json | 新一回の同30order/初期3hash/2700秒/180秒/$0.21上限、authorization false |
+| consume_continuation30.py | 新初期/LR/loss/runner/実30log束縛、既存無補修CMEEとcold-file |
+| actual_cpu_check.json | 実tokenizer15/入力prior15/32F32/不変/承認前拒否・配置コピー不足の解消履歴 |
+
+旧frozen教材/実行payload/helperは既存native15_preparationと固定正本へ戻り、重複保存しない。旧閉鎖plan/承認/重み/結果は不変。初期1dの同quote15と最新228edccfの同15との比較は、次の実結果整理で全件読解する。今回source/CPU準備を品質改善へ換算しない。最新00/観測入口/training README/weekly§64へ同単位同期、Jupyter直接・GPU稼働保持。
+
+
+### 2026-10-27 — continuation30一回完了の最終結果file地図
+
+`observation_learning/training/2026-10-26-unconnected-native/continuation30_result/` が最終owner。30更新/保存別reload/15call、意味11/本文9・新6本文0で新dd1188e8通常不採用。初期1dの11/9から進まず、前228の7/6から旧9復旧のみ。STRUCTURE_MAP_DELTA_NONE（製品責務/型/wire/採用条件/API/DB/RN不変）、商品0/正式0/3/54.50％。
+
+| file/group | 責任 |
+|---|---|
+| README.md / result_summary.json / runtime_checkpoint.json | RUN_CLOSED_REJECTED_CANDIDATE、比較/件数/品質残件/非再起動 |
+| run.json / training.jsonl / reloaded_tensors.json | 実30順序/2pass/有限log・保存reload・15call/identity/1578.951秒/$0.122807 |
+| after_*.jsonl（15file） | EOS/JSON12と3lengthを含む全無補修raw・token/usage/重み束縛 |
+| diagnosis/diagnosis.json | 固定CMEEの全15採否/実本文/問い・意味11/本文9 |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各11file） | 採用11snapshotの別process一致。本文なしSHOP/REPOT2も含む |
+| evidence/*（7file） | 一回GPU/consumer launch・実log・既存CPU確認・早期/全15回収identity |
+| reading_reviews/old9.json / new6.json | 全原文/教師/初期1d/前228/今回rawと最終consumerを分離した読解。正式human受入れでない |
+| early_run.json / early_recovery.json | 399.670965秒/30更新/生成0・version0の不変早期保存履歴 |
+| recovery_manifest.json / final_recovery.json | 最終全84payload/hash・32F32有限・早期最終一致・version1保全 |
+
+凍結教材/実行payloadは既存native15_preparation、runner/plan/consumerはcontinuation30_preparation、不変helper/APIは固定正本へ戻る。GitHub上で教材/codeを重複保存しない。最終archiveは元4B全重み/optimizer/RNG非同梱。全体00/観測入口/training README/weekly§66へ同単位同期。GPU稼働保持は継続料金を伴う。
+
+
+### 2026-10-27 — ordered30閉鎖・expanded30停止と評価再開結果のfile地図
+
+同training rootは `observation_learning/training/2026-10-26-unconnected-native/`。全体00/最新weekly§69〜72/各READMEを現在地とし、旧閉鎖runを再起動しない。製品責務/意味型/wire/採用reader/API/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。
+
+| path group | 責任・状態 |
+|---|---|
+| ordered30_preparation/README・runner・consumer・plan・verify・actual_cpu_check | 値を変えずJSON生成順だけ変更した一回の準備/承認履歴。実行は終了・再利用不可 |
+| ordered30_result/README・result_summary・run/training/reloaded_tensors・after_*.jsonl15 | 30更新/15生成、EOS13/strictJSON8/意味3/本文3へ退行し483d74b7不採用、§69 |
+| ordered30_result/diagnosis/summary・cases15・saved/completed/cold各3 | 元完全diagnosisの値不変分割、無補修採否/本文3と別process再読3一致。完全原本はarchiveに保持 |
+| ordered30_result/reading_reviews・execution・early_run/early_recovery・final_manifest/final_recovery | 全15読解、実launch/log、早期/最終の区別、全61payload＋manifest/32F32/Library version2保全 |
+| expanded30_preparation/run_native15_expanded30.py・gpu30_expanded.plan.json | 同8層LoRA16→56module/112F32。旧1d32保持＋新40Bzero初期化/完全state読込・30更新/保存非学習reload/15callの準備/承認原本。一回は30更新/保存後の照合停止で閉鎖、生成0 |
+| expanded30_preparation/consume_expanded30.py | 拡張初期値/実log/sourceを束縛する同CMEE無補修採否/cold-file。通常service/SQLの成功とは分ける |
+| expanded30_preparation/verify_expanded30_cpu.py・actual_cpu_check*.json・warmstart_report.json | Jupyter CPU6.591629秒＋小勾配finite追補3.424515秒。実tokenizer15/入力prior15/切捨て0・旧32一致/112F32/新40Bzero・未承認execute拒否、実4B処理0 |
+| expanded30_preparation/README・preparation_recovery.json | 準備時の具体案/固定条件/旧案との差、非学習初期値・全13payload＋manifest保全。最終停止結果へ案内、再利用不可 |
+| expanded30_result/README・result_summary・run/training・adapter/initial_expanded_adapter config・external_verification | source bd5d/PID127012の30更新/保存後停止、406.636986秒/$0.031627、生成0で品質未測定。全112F32/30順序を照合 |
+| expanded30_result/execution・final_manifest/final_recovery | 実launch/log/trace、全55payload＋manifest/保存109c＋双方初期値＋CPU再開原本のversion0保全。after/cold原本は不存在 |
+| expanded15_recovery_preparation/run_expanded15_recovery.py・gpu15_recovery.plan.json・consume_expanded15_recovery.py | 元30更新と新0更新評価の分離束縛。保存109cの非学習reload→同15だけの準備/承認原本。一回完了・再利用不可 |
+| expanded15_recovery_preparation/verify_recovery_cpu.py・actual_cpu_check.json・README・preparation_recovery.json | meta実構造で28suffix→56、tiny実PEFT保存/reload112一致、誤変更5拒否/入力prior15/pending output前拒否。準備CPU6.428339秒、当時は実4B未検証。実非学習reload/15件の最終結果は下段へ。初回失敗/tiny/launch/log原本は準備回収metadataとarchiveへ |
+| expanded15_recovery_result/README・result_summary・runtime_checkpoint・run/reloaded_tensors・training_origin | source d014/PID142245の追加更新0/実112tensor一致reload/15生成、意味11/本文9/新6本文0で109c通常不採用。元bd5d/30更新STOPを分離保持 |
+| expanded15_recovery_result/after_*.jsonl15・case_comparison・reading_reviews | 全無補修raw/EOS・strict12、基準1d/dd/orderedとの全15比較、原入力/教師/全本文・全更新の読解。正式受入れではない |
+| expanded15_recovery_result/diagnosis/summary・cases15・original_identity・saved/completed/cold各11 | 元完全診断の値不変分割と無補修CMEE採否、別process11再読一致。本文なしSHOP/REPOT2を含む |
+| expanded15_recovery_result/execution・early/preview*_run・external_verification・transfer_manifest・final_manifest/final_recovery | GPU/consumer実launch/log、早期metadataと最終の区別、全86payload＋manifest/112F32・元109c一致/Library version0保全 |
+
+元15教師/評価/priorと不変helperは既存ownerを使用し、学習対象だけを変える。expanded30は実学習用load1/30更新/保存後停止・生成/採否0で品質未測定。評価再開は別承認後に実4B非学習reload/15生成/固定CMEE採否/coldまで完了、追加更新0・初期1dから品質改善なしで閉鎖。CPU準備だけを実4B成功へ換算したのではない。商品0/正式0/3/54.50％。全体00/観測入口/同training README/weekly§72へ同単位同期、GPU稼働保持。
+
+
+### 2026-10-27 — 保存109cの語単位診断候補のfile地図
+
+同training rootの `token_diagnostic_preparation/` と `token_diagnostic_result/`。現在地は全機能00/観測入口/最新weekly§74、前回の不採用/閉鎖§72を維持。
+
+| path | 責任・状態 |
+|---|---|
+| run_token_diagnostic.py・token_diagnostic.plan.json | 同109c/同15各1teacher-forced forward・更新0/生成0・no-grad・900秒/$0.07上限の承認実行原本。source53984cdfで15完了、一回閉鎖/再利用不可 |
+| source_bindings.json・candidate_focus_loss.py | 既存recovery/15raw/教材の固定identityと、既存JSON span parserのbytes不変copy。reader/教師/意味の変更なし |
+| verify_token_diagnostic_cpu.py・actual_cpu_check.json | Jupyter CPU4.935141秒、実tokenizer15/offsetと全chat一致、shift/CE/順位/同点/EOS、不正4拒否、未承認拒否。4B読込/forward/更新/生成0 |
+| README.md | 原因仮説・既存6rawの最初の内容分岐・具体予算/停止条件・承認境界。正解prefix付き診断を通常評価へ換算しない |
+
+製品owner/三core責務/意味型/wire/API/採用reader/DB/RN/通常appは不変、STRUCTURE_MAP_DELTA_NONE。旧9は内容一致/終端差、新6は問い2/claim3/本文1から分岐。新観測会不要、GPU稼働保持、正式商品0/3/54.50％。
+
+| result path group（同training root） | 責任・状態 |
+|---|---|
+| token_diagnostic_result/README・result_summary | 15forward/28.469614秒/$0.002214、旧9全一致/新6不一致203、本文3欄115/380。ID contractと本文/全更新不足の分離、次案と測定限界 |
+| token_diagnostic_result/run・reloaded_tensors・execution/launch・gpu.log | source53984cdf/PID171619、112F32完全一致/no-grad/学習0/生成0・実launch/log。再実行不可 |
+| token_diagnostic_result/diagnostic_evidence_20261027.zip・manifest・external_verification | 全15完全token report/source5/CPU/凍結入力4/既存raw15/実runとreload/launch/log、44payload＋manifest45member。1032831bytes/SHAd2b94c69、全member外側照合。重みは既保存109c参照 |
+
+今回の実測は正解prefix付き既知教材診断で通常生成成功/採用/商品品質へ加算しない。通常11/9・新6本文0、商品0/正式0/3/54.50％は不変。次は既存unknown_id制約の出力明示を優先、readerは変えず、局所学習の追加実行へ自動進行しない。STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-10-27 — ID条件の出力明示とlocalized30準備
+
+APIa4b91b4は既存model_candidate_source.pyのquote分岐にunknown_id ASCII64/非衝突/参照を示すspec1項目だけ追加、既存test_cmee_quote_candidate.pyとtest_cmee_emlis_sixrow.pyに回帰確認を追補。責務・wire・意味型・reader・既定legacy prompt・通常app接続は不変、STRUCTURE_MAP_DELTA_NONE。
+
+| 同training rootのlocalized30_preparation/ | 責任・状態 |
+|---|---|
+| README・localized30.plan.json・run_localized30.py | 同109c/112F32→同15/30更新→保存非学習reload→15自由生成の承認・実行原本。最大2700秒/$0.21の一回は終了・再利用不可。plan/sourceは凍結保持、最終結果はlocalized30_result/ |
+| local_token_loss.py・fixed_token_mask.json | 旧109c診断の既知198位置だけを重点化し、ID別名5を外す。新prefixで相対位置を保持、旧9は既存CE。未知一般化・効果保証なし |
+| prepare_localized30.py・api_changes.json・dependency_bindings.json | 既存ID条件明示だけの新prompt/固定教師/実tokenizer/診断mask/外部依存のCPU束縛。旧原本は上書きしない |
+| actual_cpu_check・pending_execution_check・consumer_cpu_check | CPU14.888497秒/15教師保持/7980/8131・ID21条件・mask/勾配/shift、pending拒否。consumer34.190337秒/入力15/合成教師cold3、実4B処理0 |
+| consume_localized30.py | 新入力identityを束縛し、既存CMEE readerへ無補修rawを渡す。既存cold workerを使用。通常service/SQL/動的priorではない |
+| train_messages.jsonl・eval_inputs.jsonl | 凍結15の教師全文不変、モデル入力だけID条件1項目追加の別版。評価にassistant教師を渡さない |
+| preparation_evidence ZIP・manifest・recovery_verification | 全29payload＋manifest30member/325368bytes/SHA757770c7…64869e、初回CPU丸め差停止と修正後原本を区別して保全。重みは既存109c参照 |
+
+この準備節は実行前の履歴。最新現在地は全体00/観測入口/training/localized30_result/README・weekly§76。商品0/正式0/3/54.50％、GPU稼働保持。
+
+### 2026-10-27 — localized30実行結果の全file地図
+
+`observation_learning/training/2026-10-26-unconnected-native/localized30_result/`が今回の結果owner。30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。製品責務/意味型/wire/採用reader/通常接続は不変、STRUCTURE_MAP_DELTA_NONE。
+
+| file群 | 責務 |
+|---|---|
+| `README.md・result_summary.json` | 一回閉鎖・実測・採否・本文所見と次の作業境界 |
+| `run.json・training.jsonl・localized30.plan.json・initial_loaded_tensors.json・reloaded_tensors.json` | 実30更新/2読込/112F32照合・当時の承認計画。RAW_COMPLETE statusは原本不変 |
+| `after_*.jsonl（15file）・case_comparison.json` | 無補修全raw/usage/adapter identityと旧109c/凍結教師比較 |
+| `run_localized30.py・consume_localized30.py・prepare_localized30.py・local_token_loss.py・fixed_token_mask.json・train_messages.jsonl・eval_inputs.jsonl` | 実行時凍結source/重点198位置/同15入力・教師。追加実行指示ではない |
+| `actual_cpu_check.json・api_changes.json・consumer_cpu_check.json・cpu_launch*.json・dependency_bindings.json・pending_execution_check.json・preparation_manifest.json` | 前段CPU/source/input同一性。準備ZIPは既存preparation owner |
+| `diagnosis/summary.json・diagnosis/cases/*.json（15）` | 固定CMEEの完全診断をmetadata+caseへ値不変で分割。全値再組立て一致 |
+| `diagnosis/*_saved.json・*_saved_completed.json・*_cold.json（各11）` | 採用snapshotの保存・完成と別process全outcome再読。本文なし2件を含む |
+| `adapter/README.md・adapter_config.json・archive_identity.json・runtime_archive_manifest.json・external_verification.json・verify_recovery_external.py` | 新9372重みと原本ZIPの保存先/CRC・hash/112有限照合。safetensors本体は重み入り原本へ |
+| `execution/*（7）` | 最初の事前型拒否と修正後実GPU一回、CPU consumerの全起動/log原本 |
+| `reading_reviews/root.json・body_review.json・identity_review.json` | 全15本文/問い/全更新とidentityのroot・read-only補助所見。正式商品受入れではない |
+| `repo_payload_manifest.json` | 今回GitHubへ反映する全pathとbytes/Git blob/SHA256の固定予定集合（manifest自身を除く） |
+
+凍結教師/評価/実行sourceは既存preparation ownerへ戻る。新result側は実測と原本回収を所有し、同じ教材を新教師として数えない。重み入り原本は全82payload＋manifest/83member、15171902bytes、SHA256 `d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20`をPod外でCRC/size/hash照合し保存。新adapter SHA256 `937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd`。全体00/観測入口/training/weekly§76を同単位同期。商品0/正式0/3/54.50％、GPU稼働保持。
+
+
+
+### 2026-10-27 — 動的重点配分30更新案・CPU確認のfile地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/adaptive30_preparation/`。
+
+| path/family | 責任 |
+|---|---|
+| `adaptive_loss.py` | 新6の全文target/EOSへ現在forwardの誤差に応じたdetached重み1〜16。旧9は既存helper直呼び。生成補修・readerではない |
+| `prepare_adaptive30.py`・`actual_cpu_check.json` | 既存source/教師/全target/旧診断からの配分とcausal shift/勾配のCPU確認。実4B処理0 |
+| `run_adaptive30.py`・`adaptive30.plan.json`・`pending_execution_check.json` | 承認source5c2fe64eから一回実行済み。30更新/保存/非学習112一致reload/15生成。pending拒否は起案時CPU履歴。実結果は下のresult owner |
+| `consume_adaptive30.py`・`consumer_cpu_check.json`・`*_consumer_smoke.json` | 同CMEE/既存cold worker、15prompt一致/前回保存済み3snapshot別process再読。新モデル成功ではない |
+| `train_messages.jsonl`・`eval_inputs.jsonl` | localized30の同15をbytes不変で複写。新教材・正解変更なし |
+| `cpu_launch.json`・`consumer_cpu_launch.json`・`execution/`・`runtime_archive_manifest.json`・`archive_identity.json`・`README.md` | 固定source0107e020のCPU原本/起案時の一回案/回収照合。承認済み実行後の結果はresultへ |
+
+CPU4.995651秒/consumer27.004796秒、17payload＋manifestの全hash照合済み。前回11/9・新6本文0は不変。STRUCTURE_MAP_DELTA_NONE（app/API/DB/RN/readerの責任変更なし）、商品0/正式0/3/54.50％、GPU保持、最新weekly§77。
+
+
+### 2026-10-27 — adaptive30一回実行結果のfile地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/`。商品sourceの新責務はなくSTRUCTURE_MAP_DELTA_NONE、実行結果/原本保全のownerを追加する。
+
+| path/family | 責任 |
+|---|---|
+| `README.md・summary.json` | 一回の閉鎖・新d431a07c不採用・全15採否/費用/残件。原本runのpending表示と最終結果を区別 |
+| `run.json・adaptive30.plan.json・training.jsonl・initial_loaded_tensors.json・reloaded_tensors.json` | 承認5c2fe64e、実30更新/同15各2回・保存と112F32/3,833,856parameter非学習reloadの原本 |
+| `after_*.jsonl（15）` | 各一回の自由生成原本。EOS15・strict14。repair/retryなし |
+| `diagnosis/summary.json・diagnosis/cases/*.json（15）` | 固定CMEEの全診断をmetadata+caseへ値不変で分割、再組立て一致 |
+| `diagnosis/*_saved.json・*_saved_completed.json・*_cold.json（各11）` | 採用snapshotと別process全outcome再読原本。本文なし2件を含む |
+| `adapter/README.md・adapter_config.json・archive_identity.json・runtime_archive_manifest.json・external_verification.json・verify_archive.py` | 新重み/全実行原本76payload＋manifestの保存先、CRC/全hash/112有限・cold全値検証。safetensors本体は保存ZIPへ |
+| `execution/*（4）` | 実GPU/consumer各一回のlaunch/log原本 |
+| `reading_reviews/root.json・book_shop.json・repot_knit.json` | root全15・read-only補助の実本文/問い/全更新/teacher比較。正式人手/Pro/Ultra商品受入れではない |
+| `repo_payload_manifest.json` | 今回の変更pathとbytes/SHA256/Git blobの反映予定集合（自身を除く） |
+| `proof/jupyter_completed.jpg・identity.json` | 結果commit80130fafe7ddの92path読戻し後にJupyterで表示した完了画面。表示bytes同一、後続画面証跡としてZIP外へ保存 |
+
+学習source5・教師/入力・起案時CPU原本は固定承認5c2fe64eのpreparation ownerと保存ZIPへ戻る。同じ教師を新教材として加算しない。重み入りZIPは14,841,180bytes、SHA256 `39ac2ff058fe65a961b70f8477c2561306ca2daa1029a1bf3bb33f620c0df342`。新adapterは `d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684`。意味11/本文9/新6本文0は前回同値・不採用、cold11/11一致。全体00/観測入口/training/CMEE地図/weekly§78を同単位同期。商品0/正式0/3/54.50％、GPU保持。
+
+
+### 2026-10-27 — quote prior入力修復・2件非学習診断準備のfile地図
+
+API64c6cb1aは既存model_candidate_source.pyのquote branchだけでpriorコピーのstart/endを除去。既存test_cmee_quote_candidate.pyへ保存prior/意味/旧numeric/初回不変の回帰確認1件を追加（pytest未導入で実行未実施）。責務追加・新型・新wire・reader変更なし、STRUCTURE_MAP_DELTA_NONE。
+
+Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/prior_quote_preparation/`。
+
+| path/family | 責任 |
+|---|---|
+| `README.md・actual_cpu_check.json・check_cpu.py` | 最小修復と実15件直接assert、教師token/保存prior/意味/引用と入力差60項目の確認。モデル効果は未測定 |
+| `model_candidate_source.py・test_cmee_quote_candidate.py` | API64c6cb1aの2fileと同一bytesの固定copy。reader/元API copyを変更しない |
+| `eval_inputs.json・probe2.plan.json・run_probe2.py・pending_execution_check.json` | 改修後15入力とそのうちBOOK/SHOP回答後のみ2件の未承認一回案。学習0/保存d431/3712cap/最大10分/$0.047処理按分、未承認executeはoutput/model前拒否 |
+| `consume_probe2.py` | 実rawが得られた後だけ、未変更CMEE・既存cold workerで2件採否/本文/全更新を読む手順。現時点実行0 |
+| `cpu_launch*.json・execution*.log・check_cpu_failed_v1.py・check_cpu_failed_v2.py・check_cpu_pytest_unavailable_v3.py・check_cpu_v4_history.py・actual_cpu_check_v4_history.json・pytest.log` | 最初のhelper参照誤り2回・pytest未導入停止・修正過程と最終直接CPU成功の原本。GPU retryではない |
+| `runtime_archive_manifest.json・archive_identity.json` | 全25payload＋manifest/26member・60852bytesのCRC/bytes/hash照合。新重みは含まない |
+| `proof/jupyter_cpu_completed.jpg・identity.json` | f8fa5224の34path読戻し後のJupyter表示と未承認2件案の画面証跡。ZIP外の後続記録、表示bytes同一 |
+
+初回10quote入力/旧numeric15/教師全target不変。回答後5入力だけ座標を除去。次の2件実モデルは未承認・未実行で、旧9の新prompt退行なし/新初回4件の改善/全15合格を証明しない。商品0/正式0/3/54.50％、GPU保持、weekly§79。
+
+
+### 2026-10-27 — prior座標除去probe2の実結果file地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/prior_quote_probe2_result/`。商品責務/型/wire/reader差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+| path/family | 責任 |
+|---|---|
+| `README.md・summary.json` | 一回閉鎖・形式改善/意味本文0/2・費用・非昇格・未評価範囲 |
+| `run/run.json・run/loaded_tensors.json・run/after_*.jsonl（2）` | 保存d431の非学習112F32読込と実2raw/EOS/usage原本。学習/新重み保存0 |
+| `source/probe2.plan.json・run_probe2.py・consume_probe2.py・model_candidate_source.py・actual_cpu_check.json・eval_inputs.json` | 承認2ab02db3と実行source/input。入力64c6cb1a・reader a4b91b4を分離。承認planは消費済みで凍結 |
+| `diagnosis/diagnosis.json` | 実quote receiptとCMEE採否。両未採用のためcold snapshot0、本文readerへ未到達 |
+| `execution/*（4）` | GPU/CPU各一回の起動と全log原本 |
+| `runtime_originals.zip・runtime_archive_manifest.json・archive_identity.json・external_verification.json` | 15payload＋manifest/16member、56444bytesをCRC/全hash照合。ZIPとmemberを同一bytes保存、重みなし |
+| `reading_reviews/root.json・book.json・shop.json` | root/補助の全本文・問い・全7/8更新・原情報/教師/同重み前回比較。実拒否理由と静的所見を分離 |
+| `proof/jupyter_completed.jpg・identity.json` | 結果commit71a300acの31path読戻し後のJupyter完了画面。表示bytes同一、実行ZIP外の後続証跡 |
+
+重みSHA d431a07cは不変で元保存先はadaptive30_result。今回selected2のみで全15/旧9/新初回4の新評価にしない。商品0/正式0/3/54.50％、GPU稼働保持。全体00/観測入口/training/CMEE地図/weekly§80を同期。
+
+
+### 2026-10-28 — 回答後更新指示候補の実CPU準備（承認前履歴）
+
+family：`observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/`。以下は承認前の`CPU_READY_GPU_AWAITING_MASH_APPROVAL`時点の準備履歴。承認後の一回は終了しており、現在の結果ownerは後段の`update_obligations_probe2_result/`。§82の認証前停止も履歴として保持する。
+
+| path/family | 責任 |
+|---|---|
+| `README.md` | 前回の更新不足と今回の修正仮説、実CPU結果、新しい学習0/2生成案、費用/未承認/保護範囲。モデル品質の成功ではない |
+| `model_candidate_source.py・input_preview.json・static_check.json` | API64c6cb1aの別copy。quote V3回答後だけrole別ADD＋末尾GAP解消を明示。正解quote/ID/index/bodyは追加せず、製品sourceは不変。static結果は起案時の履歴 |
+| `check_cpu.py・actual_cpu_check.json・eval_inputs.json` | 実build_model_messages/固定tokenizerで全15比較。回答後2指示だけ差分、残13/旧numeric15/保存prior/教師target IDs不変、3712cap込みBOOK7947/SHOP8113で8192内。実CPU6.450227秒、model処理0 |
+| `check_adapter_cpu.py・adapter_cpu_check.json・adapter_recovery.json` | 保存d431/112F32/3,833,856parameter/56module・全有限と元hashをCPU照合。5.672745秒、meta構築1、pretrained model読込/forward0。保存済み重みの通常採用ではない |
+| `probe2.plan.json・run_update_probe2.py` | 未承認の新一回。保存d431非学習load1・BOOK/SHOP回答後各1生成、学習0/max2call・3712cap/context8192・最大600秒/$0.047処理按分。pending executeをoutput/model前拒否。前回消費済みplanを呼び直さない |
+| `consume_update_probe2.py・consumer_cpu_smoke/diagnosis.json・pending_execution_check.json` | 既存reader/API64c6cb1aへraw無補修で渡す。CPU1.710610秒で旧2rawを再生して意味/本文0/2を再現、未承認executeのoutput/model前拒否を記録済み。新raw採否/全本文/全7・8更新と、採用snapshotがある場合だけcold-file確認を行う。新GPU評価は未実施 |
+| `restore_payload.json・cpu_runtime_originals.zip・cpu_runtime_archive_manifest.json・adapter_cpu_runtime_originals.zip・adapter_cpu_archive_manifest.json・final_cpu_runtime_originals.zip・final_cpu_archive_manifest.json・logs/*` | 固定source/依存/tokenizer/保存重みの復元とCPU実行原本。最終回収/外部照合の詳細は同family READMEの確定記録へ戻る |
+
+開始時workspaceは空。今回A5000/24564MiB・使用1MiB、Python3.12.3/Torch2.8.0+cu128、固定4依存を確認し、既存source/公開tokenizer/保存d431を復元した。固定revisionのbase7file取得成功・exit0、pretrained model読込/forward/学習/生成0、pytest/SQL0。新一回の単価$0.28/h、準備/CPU/回収/保持/保存/通信/税等は処理600秒/$0.047と別。実行許可は未受領、旧run/planは消費済みのまま。
+
+前回意味/本文0/2・d431通常不採用と商品0/正式0/3/54.50％を保持。新観測会は現不具合の解消には不要。Stop/restart/delete/管理console/API0、通常API/DB/RN/Render/Supabase/配置不変。全体00/観測入口/学習owner/weekly§83へ同期。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常経路不変）、candidate_ready=false/automatic_progression=false。
+
+
+### 2026-10-28 — 更新義務指示probe2の実結果file地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/update_obligations_probe2_result/`。承認済み非学習一回は終了・案不採用、準備owner/§83は履歴。商品責務/型/wire/reader/通常経路は不変でSTRUCTURE_MAP_DELTA_NONE。
+
+| path/family | 責任 |
+|---|---|
+| `README.md` | 一回の最終結果、意味/本文0/2、本文・根拠・全更新の読解と不採用理由、未評価範囲 |
+| `receipt.json` | 一回のCONSUMED_COMPLETE_NOT_ADOPTED / BLOCKER_NARROWED終了記録。実費用・0/2・変更0の境界・次の限定課題をbody-freeで保持 |
+| `approval.json・probe2.plan.json` | Mashの今回の明示承認「進めていいよ。」と学習0/load1/BOOK・SHOP回答後各1・最大600秒/$0.047処理按分の実行範囲。AUTHORIZED_ONCE_BOUNDは消費済み証拠で、再実行用ではない |
+| `run/run.json・run/loaded_tensors.json・run/after_*.jsonl（2）` | 固定source8065009、保存d431の非学習112F32読込1/2自由生成/EOS2/実usage原本。学習/新重み保存0、原本のpending表示は凍結保存 |
+| `run/cmee/diagnosis.json` | 未変更API64c6cb1aのquote受領・実意味採否と本文不成立。BOOKはCANDIDATE_UNREVIEWEDからUNSUPPORTED/model_evidence_out_of_scope、SHOPはINVALID_FORMATからREJECT/semantic_receipt_not_validated。採用snapshot0/cold対象なし |
+| `runtime/*・logs/*・adapter_hashes_after.json` | 実行時の承認済みplan/runner/consumer/CPU確認/入力/固定source manifest、GPU/CPU各一回のlog/exit、保存d431不変の実測。原本は無補修 |
+| `runtime_originals.zip・archive_manifest.json` | 実行原本18payload＋manifest/19member、58,899bytes。Pod外CRC/全bytes/hash/source一致を照合。SHA256 c7c0d1578599c7ae693258eddb979b26787abbb01657aeb895b016dcac0a015d。base/追加重み本体は新ZIPへ重複同梱しない |
+
+処理291.557701534秒/$0.022676710按分、同CMEEのCPU1.874746511秒、準備/CPU/回収/保持/保存/通信/税等は別。BOOKは13引用位置の受領と6ADD＋GAPの7件列挙が成立しても、根拠範囲外で意味不採用、別途relation添付欠落/GAPの非空replacementも残る。SHOPは重複JSON keyでINVALID_FORMAT、文字列上の8件も必要7claimのADD＋GAPではない。件数増加を有効更新/本文成功へ換算しない。新観測会は現不具合に不要。前回0/2・d431通常不採用を保持し、同じ有料反復を自動追加しない。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPU稼働保持、Stop/restart/delete/管理API0。全体00/観測入口/学習owner/weekly§84へ同期。
+
+
+## 2026-10-28 差分 — aligned13一回結果と原本地図
+
+製品の責務・型・wire・reader・公開API/DB/RN接続は変更なし（STRUCTURE_MAP_DELTA_NONE）。最新の結果ownerを以下へ同期する。既存current_structureの過去§80は当時の記録で、今回状態は全機能00/weekly§85/本結果ownerを読む。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/ 以下） | 責務 |
+|---|---|
+| aligned13_preparation/* | 固定source ba9d910fの入力一致/d431継続13更新、実行plan/CPU/source。既存一回は終了、再利用不可 |
+| aligned13_result/README.md・result_summary.json | 一回終了/新c7ba不採用、13更新/save/no-grad reload/2生成、意味・本文0/2、次の一手 |
+| aligned13_result/run/*・logs/* | 無補修run/112loadとreload/13行学習log/2raw/未変更CMEE・0採用/adapter設定と実行log/exit |
+| aligned13_result/reading_review.md | 原source/教師と実raw/本文の全件読解。静的所見を実CMEE拒否と分離 |
+| aligned13_result/runtime_originals.zip・external_verification.json | 全34payload＋manifest/35member、116,134bytes。元bytes/CRC/hashと重み込み一式112F32有限性をPod外照合。追加重み一式はlibfile_398ae281441c81918138d6bf43d3ae36 version0へ保全 |
+
+**現在の直接作業（10/28：新継続指示のnamed9一回を終了、意味/本文0/2・新重み不採用）：** sourcebc8d3c47/APIa8be7a9b、保存284f別コピーからLR5e-5/named2各3＋旧3各1の9更新、別保存9ba8dccb/112F32・3,833,856parameter完全一致no-grad reload、BOOK/SHOP各1生成を537.575494秒/$0.041811処理按分で完了（準備/CPU/回収/保持/保存/通信/税等別）。BOOKは3712token/EOSなしでTOKEN_LIMIT、SHOPは3014token/EOSあり/通常JSON閉鎖だがINVALID_FORMAT、両REJECT/semantic_receipt_not_validated、意味/本人本文0/2・採用snapshot0/cold対象なし。SHOPの11claim/6relation/3本文欄と反復解消は限定された完結性の前進だが、v入れ子・旧新表記/数値参照/引用帰属不正、全8更新中1だけ、本人知覚を事実化する本文が残る。BOOKは元意味消失/role誤割当/update_note反復/全7更新と本文未到達。全raw/source/prior/教師/本文を全文照合、補修0。元284f/d431/source不変、新9ba8通常不採用。実原本108328bytes/24payload＋manifest、重み込み14374039bytes/28payload＋manifestを全CRC/hash/shape/112F32有限性照合し、Library libfile_52309bdfc88881918095f167afe8f12d version0へ保全。今回CPU6.691308秒/model0、347/旧15完全一致/合成cold2は前回証拠再利用で再実施ではない。原本named_reference9_result/README・weekly§88。この新一回も消費済み、retry/上限延長/reader緩和/次run自動開始なし。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。通常app/API/DB/RN/Render/Supabase/配置変更0、GPU稼働保持/Stop等0、新観測会は現不具合に不要。
+
+
+## 2026-10-28 — 未承認の名前付き参照候補packの地図
+
+製品source/wire責務は未変更、STRUCTURE_MAP_DELTA_NONE。新private wireの採用ではなく、CPU候補と具体判断資料だけを追加。latestは全機能00/weekly§86へ戻る。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/ 以下） | 責務 |
+|---|---|
+| named_reference_preparation/README.md・named13.plan.json | 新形式の差分/変更path/検証/条件付き一回13更新・2生成の未承認scope。実行許可false |
+| named_reference_preparation/named_reference_candidate.py・check_named_reference_candidate.py | 未接続strict可逆投影とCPU検査の実code。production receiverではない |
+| named_reference_preparation/wire_spec.json・candidate_targets.json | key/名前/identity表の形式案、全15投影確認と回答後2候補messages。canonical教師は不変 |
+| named_reference_preparation/cpu_result.json・source_hashes.json | CPU15/15可逆・従来結果一致/14不正拒否/欠GAP不補完/実token数・不変source |
+| named_reference_preparation/cpu_runtime_originals.zip・external_verification.json | 失敗v1/v2/最終v3・log/exit/GPU状態を含む入れ子原本。全member CRC/hash/sizeとcode bytesをPod外照合 |
+
+
+## 2026-10-28 — 承認後named形式接続と実行packの地図
+
+STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparationの明示format受領/実raw保持、model_candidate_sourceの明示offline教示、emlis_semantic_admissionのsource由来BOOK/SHOP回答後guard、named_reference_wire.pyのstrict名前参照→既存native。型追加0、旧意味/本文/quote一意位置reader・通常API/DB/RN接続は不変。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/ 以下） | 責務 |
+|---|---|
+| execution/README.md・named13.plan.json・api_source_manifest.json | Mash具体承認、CPU成功後の一回13更新/after2とAPI commit/source・時間/費用/STOPの固定 |
+| execution/run_named13.py・prepare_named13.py・consume_named13.py | 有限学習/save/no-grad reload、旧15完全比較/new2実受領とcold、実raw無修正の新receiver採否 |
+| execution/adaptive_loss.py・teacher_projection.py・run_cpu_tests.py | 既存loss/未採用教師投影・SQLを除いた限定CPU検証。canonical教師不変 |
+| execution/actual_cpu_check.json・pytest_summary.json・pytest_results.xml | 最終347成功/SQL12対象外、旧15完全一致/新2全意味・本文・更新/cold・実token数 |
+| execution/cpu_originals.zip・external_verification.json | 全32payload＋manifest/33member、459970bytes、旧版baseline/new train/eval/全CPU実原本と失敗前code/logを保全、全CRC/hash/source5一致 |
+
+
+## 2026-10-28 — named13一回終了の原本地図
+
+実行/回収自体はSTRUCTURE_MAP_DELTA_NONE。直前APIa8be7a9bの承認接続責務は保持、新284f1df7は通常不採用。前のGPU実行前packは閉鎖履歴、latestは全機能00/weekly§87/以下結果owner。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/ 以下） | 責務 |
+|---|---|
+| named_reference_result/README.md・result_summary.json | 13更新/save/112 no-grad reload/2生成の一回終了、両TOKEN_LIMIT/意味・本文0/2、新重み不採用/消費済み境界 |
+| named_reference_result/reading_review.md | 原source/prior/教師と無補修raw2を全文比較。実REJECTと静的な構造/参照/全更新/本人本文の不成立を区別 |
+| named_reference_result/run/*・cmee/diagnosis.json | 実run/13学習行/112load-reload/原raw2・明示named receiver採否、採用snapshot0/cold対象なし |
+| named_reference_result/runtime_originals.zip・external_verification.json・weight_verification.json | 133322bytes/32payload+manifest、全member照合と112F32有限性、追加重み込み14781111bytesはLibrary libfile_14be2da0d6588191b85c397de5baad0a v0へ保全 |
+
+
+## 2026-10-28 — named9新継続の実行資料地図
+
+既存学習root `observation_learning/training/2026-10-26-unconnected-native/` 内の追加資料。製品責務/意味型/wire/reader/通常経路不変のためSTRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+| path | 責任 |
+|---|---|
+| named_reference9_preparation/README.md・named9.plan.json | 新指示による284f別コピー/LR5e-5/9更新/保存再読込/2生成・600秒/$0.047上限、一回限定 |
+| named_reference9_preparation/run_named9.py・prepare_named9.py・consume_named9.py・adaptive_loss.py | 既存同API/教師/reader、CPU全15不変照合、固定9・112F32再読込と実raw採否。元284f/d431保存 |
+| named_reference9_preparation/actual_cpu_check.json・api_source_manifest.json・cpu_originals.zip・external_verification.json | CPU6.691308秒/model0、前回347/coldは再利用、10payload原本の全hash照合 |
+
+この新一回は実行・回収まで終了。前回named_reference_resultと今回named_reference9_preparationの固定点は履歴を維持し承認枠を再利用しない。最新weekly§88を参照。
+
+| 追加された結果path（同じ学習root内） | 責任 |
+|---|---|
+| named_reference9_result/README.md・result_summary.json・reading_review.md | 9更新/save/112 no-grad reload/2生成の閉鎖、SHOP完結と不採用を区別、全raw/本文読解 |
+| named_reference9_result/run/*・cmee/diagnosis.json | 実9学習行・112load/reload・原raw2・TOKEN_LIMIT/INVALID_FORMAT→REJECT、採用snapshot0 |
+| named_reference9_result/runtime_originals.zip・external_verification.json・weight_verification.json・export_named9.py・verify_archives.py | 108328bytes/24payload原本、Pod外全hash/112F32同形状/有限性、追加重み14374039bytesはLibrary libfile_52309bdfc88881918095f167afe8f12d v0 |
+
+
+## 2026-10-28 — named prior表記修復と一回実学習の全ファイル地図
+
+既存 `observation_learning/training/2026-10-26-unconnected-native/named_prior_projection9/`。STRUCTURE_MAP_DELTA_NONE（既存モデル向けcopyの内部表記だけ、責務/型/wire/receiver/通常接続不変）。APIc4e1ccb2はmodel_candidate_source.pyの可逆prior投影/role metadataと同family test2条件だけを変更。CPU349成功と実raw0/2を分ける。最新は全機能00/weekly§89。
+
+| path | 責務 |
+|---|---|
+| README.md・namedprior9.plan.json・result_summary.json | 既存600秒/$0.047の新一回と最終閉鎖/新b8bc不採用/次run自動開始なし |
+| run_namedprior9.py・launch_once.py・prepare_namedprior9.py・run_cpu_tests.py・adaptive_loss.py・consume_named9.py | 固定9/保存112F32非学習reload/after2、全15の入力/教師不変範囲、既存DB遮断CPU・厳格raw受領。prepareの実行原本は凍結し再開しない |
+| actual_cpu_check.json・api_source_manifest.json・pytest_*・cpu_originals.zip | 実CPU349成功/SQL12対象外、prior往復2/2、他13/全教師不変、元112有限。初回収集error等も原本ZIP内へ保全 |
+| run/*・cmee/diagnosis.json・reading_review.md | 実9学習行/112load-reload/無補修raw2、実TOKEN_LIMIT/INVALID_FORMATと全本文/意味の静的読解 |
+| weight_verification.json・external_verification.json・export_namedprior9.py | Pod外全hash/CRC/112F32同形状/有限性、重み込み16,176,277bytes/150payload+manifestはLibrary libfile_51752dcc98948191bc630d38f7002589 v0 |
+
+
+## 2026-10-28 — named出力型・参照提示修復の全ファイル地図
+
+既存学習owner配下の新 `named_output_contract9/`。API1739a6bfの既存model_candidate_source.pyと同family testだけ、owner責務/型/wire/receiver/通常経路は不変。STRUCTURE_MAP_DELTA_NONE。CPU351成功と実raw意味/本文0/2を分離し、最新は全機能00/weekly§90。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・namedoutput9.plan.json・result_summary.json | 新継続指示の一回/600秒・$0.047/最終閉鎖/新41c9不採用/次run自動開始なし |
+| prepare_namedoutput9.py・run_cpu_tests.py・actual_cpu_check.json・pytest_summary.json・pytest_results.xml・pytest.log・api_source_manifest.json・cpu_originals.zip | 実CPU351成功/SQL12対象外、prior往復/任意ID/全15教師・他13入力不変。失敗前code/logを含む原本202368bytes/34payload+manifest |
+| run_namedoutput9.py・launch_once.py・adaptive_loss.py・consume_named9.py・collect_once.py | 固定9更新/別保存112F32非学習reload/after2/厳格raw受領と既存保存cold経路、今回採用0でcold対象なし。全て閉鎖実行原本、再起動しない |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 全raw/実9学習行/112load-reload/長さ優先拒否と全source・prior・教師・本人本文の読解 |
+| weight_verification.json・external_verification.json・export_namedoutput9.py・verify_export_once.py | 全hash/CRC/112F32形状/有限性と最終原本16,221,481bytes/150payload+manifest。追加重みはLibrary libfile_5ac1f51ca9c48191ab8056be66debf7f v0 |
+
+
+
+## 2026-10-28 — 更新先行一回の全ファイル地図
+
+既存学習owner配下の `observation_learning/training/2026-10-26-unconnected-native/updates_first9/`。API7b9ee073の既存model_candidate_source.pyと同family test2pathだけ、owner責務/型/wire/reader/通常経路不変。STRUCTURE_MAP_DELTA_NONE。CPU353成功と実raw意味/本文0/2を分離し、最新は全機能00/weekly§91。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・updatesfirst9.plan.json・result_summary.json | 今回新継続指示の600秒/$0.047一回/最終閉鎖/新3e72不採用、次run自動開始なし |
+| prepare_updatesfirst9.py・run_cpu_tests.py・actual_cpu_check.json・pytest_summary.json・api_source_manifest.json | 既存named shapeと派生2教師のc.prose後続/同意味・他13/原15不変、CPU353・SQL12対象外。初版EOS仮定の失敗code/logを含むCPU原本129934bytes/24payload+manifestは下記全原本ZIP内 |
+| run_updatesfirst9.py・adaptive_loss.py・consume_named9.py・launch_once.json | 固定9更新/別保存112F32 no-grad reload/after2、実rawの厳格受領と採用時cold経路。今回採用0でcold対象なし。全て閉鎖実行原本で再開しない |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 実9学習/112load-reload/無補修raw2、BOOK根拠重複拒否・SHOP長さ優先拒否、全source/prior/教師/本文の読解 |
+| export_updatesfirst9.py・weight_verification.json・external_verification.json | Pod外全CRC/hash/size/112F32有限性・同形状照合。全原本/追加重み16,175,646bytes/149payload+manifest、Library libfile_f0ac589476288191b7a8ca3e001392a5 v0 |
+
+
+## 2026-10-28 — 共同loss一回の全ファイル地図
+
+既存学習owner配下 `observation_learning/training/2026-10-26-unconnected-native/joint_focus9/`。API7b9ee073/全15prompt・教師bytes不変、学習lossのみ変更。app/API/DB/RN/reader責務・型・経路の変更なし、STRUCTURE_MAP_DELTA_NONE。新一回は閉鎖・消費済み、最新は全機能00/weekly§92。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・jointfocus9.plan.json・runtime_authorized_plan.json・result_summary.json | 準備時/実行時の原条件と最終閉鎖、新2952通常不採用。raw pending/承認済みplanを最終状態へ書換えずresult_summaryで閉鎖 |
+| adaptive_loss.py・prepare_jointfocus9.py・actual_cpu_check.json・target_groups.json・api_source_manifest.json・cpu_external_verification.json | 全文adaptive50％/引用参照25％/本人本文終端25％、実token対応とFP32勾配/不正値拒否。新CPU6.672460秒/model0、既存353証拠再利用。CPU原本100818bytes/16payload+manifestは下記全原本ZIP内 |
+| run_jointfocus9.py・consume_named9.py・launch.json | 原284f固定9更新/112F32別保存no-grad reload/after2、無補修実rawを同厳格receiver/CMEEへ接続。採用snapshot時だけcold経路、今回は対象なし |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 実9学習/112load-reload/raw2、両EOSでもroot未閉鎖の実拒否、全source/prior/教師/意味/本人本文の静的読解 |
+| export_jointfocus9.py・weight_verification.json・external_verification.json・source_verification.json | 実source11path固定、Pod外全CRC/hash/size/112F32有限性と同形状照合。全原本/追加重み16,145,834bytes/146payload+manifest、Library libfile_739efcbd074c81919e9d0ca8befb34c5 v0 |
+
+
+## 2026-10-28 — 元の全文CE対照一回の全ファイル地図
+
+既存学習owner配下 `observation_learning/training/2026-10-26-unconnected-native/full_ce9/`。API7b9ee073/全15prompt・teacher bytes/284f/9順を保持、新2のlossだけ元helperへ戻す。app/API/DB/RN/reader責務・型・経路変更なし、STRUCTURE_MAP_DELTA_NONE。新一回は閉鎖、最新は全機能00/weekly§93。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・fullce9.plan.json・runtime_authorized_plan.json・result_summary.json | 準備時/実行時原条件と最終閉鎖、新0ec6不採用。raw pending/承認済みplanを書換えずresult_summaryで閉鎖 |
+| prepare_fullce9.py・actual_cpu_check.json・api_source_manifest.json・cpu_external_verification.json | 元helper全文assistant/EOS通常CE、同15bytes/label窓/1call委譲/EOS/9順。新CPU7.427914秒/model0、既存353証拠再利用。CPU原本87397bytes/14payload+manifestは全原本ZIP内 |
+| run_fullce9.py・consume_named9.py・launch.json | 原284fから9更新/112F32別保存no-grad reload/after2、無補修rawを既存receiver/CMEEへ接続。採用時だけcold経路、今回は対象なし |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・decoder_diagnostic.json・reading_review.md | 実9学習/112load-reload/raw2・両JSON完結でもnamed未定義/重複参照で実拒否。別strict decoder先頭エラーと全source/prior/teacher/本人本文の静的読解を実採否と分離 |
+| export_fullce9.py・weight_verification.json・external_verification.json・source_verification.json | source9path固定、Pod外全CRC/hash/size/112F32有限/同形状/CPU同一。全原本・追加重み16,124,090bytes/144payload+manifest、Library libfile_3d862dab25388191b86861366902a9ec v0 |
+
+
+## 2026-10-28 — 元d431開始値の全文CE9対照・全ファイル地図
+
+既存学習owner配下 `observation_learning/training/2026-10-26-unconnected-native/reset_full_ce9/`。全15入力/教師・API7b9・元全文assistant/EOS CE・9順を固定し、開始値だけ元d431へ戻した一回は終了。STRUCTURE_MAP_DELTA_NONE（商品責務・意味型・wire・reader・通常接続不変）。最新は全機能00/weekly§94。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・result_summary.json・reading_review.md | 一回閉鎖/新1aef不採用、実採否と全raw/教師/本人文の静的読解、次のCPU候補未準備 |
+| run_reset9.py・prepare_reset9.py・consume_named9.py・export_reset9.py・launch_once.py | 元d431固定9更新/別保存112F32 no-grad reload/after2、同厳格receiver/CMEE受領、原本回収。実source5の全文/byte読戻し済み |
+| actual_cpu_check.json・prepared_plan.json・runtime_authorized_plan.json・api_source_manifest.json・cpu_external_verification.json | 同15bytes/token列/同9順/LoRA設定同意味/112key-shape-F32、CPU6.749秒/model0。353同API証拠再利用、SQL12対象外。失敗前source/logを含むCPU原本81036bytes/15payload+manifestは追加重みarchive内 |
+| run/*・cmee/diagnosis.json・launch.json・launch_failed_before_model.py・launch_failed_before_model.log | 実9学習行/112load-reload/raw2、BOOK INVALID_FORMAT/SHOP TOKEN_LIMIT→両REJECT、snapshot0でcold対象なし。GPU前launcher構文失敗と実試行一回を区別 |
+| weight_verification.json・external_verification.json・source_verification.json | Pod外全CRC/hash/size/source5/API/112F32有限・同形状/earlyBOOK一致。原本・追加重み16,114,991bytes/149payload+manifestはLibrary libfile_b74941080fec8191b174c5583e26683f v0、旧d431/284fを保持 |
+
+
+## 2026-10-28 q/u参照名短縮対照のfile地図差分 — weekly§95
+
+既存CMEE/named wire/APIの責務・構造変更はない（STRUCTURE_MAP_DELTA_NONE）。新実験folder `observation_learning/training/2026-10-26-unconnected-native/compact_reference9/` は、元15教材を置換せず2教師のq/u名だけを無損失短縮する一回の対照原本。学習9/保存/no-grad reload/生成2は完了、意味/本文0/2・新3a43不採用、商品状態は据置。
+
+| file | 実責務 |
+|---|---|
+| compact_teacher.py | q.id/ev・update$id/urだけの可逆短縮。native ID/意味/本文は不変 |
+| prepare_compact9.py | 15入力/他13教材不変、派生2教師の実CMEE・別PID cold照合 |
+| run_compact9.py | 原284f開始・同全文assistant＋EOS CE9・保存/reload・自由生成2 |
+| consume_named9.py | 実raw無補修のreceiver/意味採否/本人本文/条件付きcold |
+| launch_once.py | tracked sourceと一回lock/parent timeout |
+| export_compact9.py | CPUによる重み・API・実行原本回収 |
+| actual_cpu_check.json / prepared_plan.json / runtime_authorized_plan.json | CPU実測と準備・実行時条件 |
+| run.json / training.jsonl / after_*.jsonl / cmee_diagnosis.json | 実学習・全raw・実採否 |
+| cpu_equivalence_summary.json / static_raw_diagnosis.json | 教師同値と静的所見。実model成功を自己発行しない |
+| external_verification.json / cpu_external_verification.json | Pod外原本・112F32照合 |
+| README.md / result_summary.json / reading_review.md | 最終状態、全raw/教師/本人文読解、次のCPU候補 |
+
+全原本/adapterはLibrary libfile_8c15de9185888191a1356804725b85ba v0に保全。GPU保持、SQL/本番/Render/Supabase/merge/deploy変更0。全体現在地・観測目的・Windows/Mac未選定・正式0/3/54.50％を維持する。
+
+
+## 2026-10-28 二段階補助A/B→元全文のfile地図差分 — weekly§96
+
+新folder `observation_learning/training/2026-10-26-unconnected-native/staged_pair9/`。原15教師/evalとCMEE/wire/API責務は不変（STRUCTURE_MAP_DELTA_NONE）。補助4行の実系列を約19〜20％短くし、原284fから9更新/保存/no-grad reload/2自由生成を終了。SHOP原欄18/18へ回復も意味/本人本文0/2、新2dfd不採用、商品状態据置。Bの入力だけは長く、gold Aから全文への転移成功とはしない。
+
+| file | 実責務 |
+|---|---|
+| prepare_staged_pair9.py | A/B4行の射影・全原本不変・2再結合exact・実token/全labels/既存CMEE証拠再利用 |
+| run_staged_pair9.py | 元3anchor/4補助/元全文2の9通常CE更新・保存・no-grad reload・元入力2生成 |
+| consume_named9.py | 無補修の実receiver/意味/本人本文・条件付きcold |
+| launch_once.py / export_staged_pair9.py | 確定source5のAST/一回lock/parent timeout、CPU重み/原本回収 |
+| auxiliary_train_messages.jsonl | 実際の補助4教材。原15行は不変で別保持 |
+| actual_cpu_check.json / projection_proof.json / cpu_external_verification.json | CPU6.918秒・19行/全target/EOS・再構成/入力保持・Pod外照合 |
+| prepared_plan.json / runtime_authorized_plan.json / run.json / training.jsonl | 準備/実行条件、実9更新/112変更/再読込/2生成・一回閉鎖 |
+| after_*.jsonl / cmee_diagnosis.json / static_raw_diagnosis.json | 全raw・実意味/本文0/2・静的欠陥（実拒否と分離） |
+| external_verification.json / result_summary.json / reading_review.md / README.md | 全原本/112F32照合、最終閉鎖、両件全文読解、次の非学習診断候補 |
+
+原本16,150,601bytes/152payload+manifest、Library libfile_cf473b4d4d708191821345dd2db43674 v0。追加model call/次run自動開始なし、GPU保持、SQL/本番/Render/Supabase/merge/deploy変更0。
+
+
+## 2026-10-29 保存2dfdの補助4入力非学習診断 — weekly§97
+
+既存staged_pair9内の追加5file: run_auxiliary_diagnostic.py（保存重み1load/固定4call、学習0・raw/教師差）、setup_auxiliary_diagnostic.py（新Podに既存固定依存/baseだけ復元、model0）、prepared_auxiliary_diagnostic.json（無効準備原本）、auxiliary_diagnostic_cpu_check.json（13file/拒否/AST実CPU）、runtime_authorized_auxiliary_diagnostic.json（今回続行指示の新単位・新Pod・上限）。旧実験21file/原15/eval/CMEE責務は不変、STRUCTURE_MAP_DELTA_NONE。新Pod vgkm402msgroiu/A5000、別準備900秒/処理600秒・学習0/生成4上限。旧2dfd不採用・意味/本文0/2を維持し、部分課題の成功を採用へ加算しない。
+
+
+### 10/29 補助診断の実結果file地図
+
+同staged_pair9/auxiliary4_result_20261029へ、run.json、reloaded_tensors.json、AUX-A/B-FT-BOOK/SHOP-AFTER-ANSWER.jsonl（全raw4）、setup_report/runtime_cpu_check/runtime_cpu.log、diagnostic_launch/diagnostic.log、archive_manifest、external_verification、result_summary、reading_reviewを追加。元run/plan/教材は不変。非学習1load/4call・319.729秒/$0.0248678・EOS2/strict1/教師literal0、短課題自体の役割/更新混同を実測。Bはgold A条件付き、CMEE採用へ加算しない。全20payload原本Library libfile_aea840e0b0f081918da545233ddc2fbe v0。STRUCTURE_MAP_DELTA_NONE、GPU保持/追加model0、旧全文意味/本文0/2を維持。
+
+
+## 2026-10-29 補助4教師×2周の8更新 — weekly§98
+
+新observation_learning/training/2026-10-26-unconnected-native/auxiliary_fit8/: run_fit8.py（8更新/別保存/no-grad reload/6生成）、prepare_fit8.py（実token/labelsと現CMEE教師2/保存raw2対照）、consume_fit8.py（真の6callcounterから全文2だけ未変更CMEEへ）、fit8.plan.json（無効準備原本）、static_cpu_check.json、cmee_restore_payload.json（130原本のSHA不変/復元metadata17補正）、README。既存教材/評価/CMEE責務不変、STRUCTURE_MAP_DELTA_NONE。原2dfd保持、旧9回帰未検証、通常有効化なし。
+
+
+auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_authorized_plan.jsonを追加。CPU12.855981秒/model0・8順48,642token・正解教師意味/本文2/2・保存raw同API再判定0/2。source a6198b6から今回8更新/6生成の一回を開始、旧planは不変。STRUCTURE_MAP_DELTA_NONE。
+
+
+### §98 終了保存物 — auxiliary_fit8/result_20261029
+
+| ファイル | 所有する実結果 |
+|---|---|
+| `run.json・training.jsonl` | 8更新/2load/6生成、入力不変、新afaa2c2e、755.144773秒/$0.058733482処理按分。runはraw完了pendingの原記録として凍結 |
+| `initial_loaded_tensors.json・reloaded_tensors.json` | 112F32/3,833,856parameterの学習時・非学習再読込記録 |
+| `after_AUX-*.jsonl` 4件 | EOS4/strict3/literal0、正解A条件付きBと部分課題であり採用判定外 |
+| `after_FT-*.jsonl` 2件・`cmee/diagnosis.json` | BOOK3712/noEOS/TOKEN_LIMIT、SHOP3367/EOS/INVALID_FORMAT、現API7b9の意味/本人本文0/2・snapshot0/cold対象なし |
+| `gpu_launch.json・gpu.log・cmee.log・cmee.exit` | 実起動条件・GPU/CPU実行log、追加生成/再試行0 |
+| `external_manifest.json・external_verification.json` | 重み込み原本18,305,028bytes/323payload＋manifestの全CRC/hash/size、112F32有限/形状/全112変化・6rawhash/token・途中raw不変。Library libfile_4df0fff22010819189901162df474e4f v0 |
+| `reading_review.md・result_summary.json` | 全6rawの意味/時点/役割/全更新/本人本文を照合し閉鎖を所有。新重み不採用、旧9回帰未検証、次候補と新観測会不要の判断 |
+
+元15/eval/補助教師/指示/reader/旧重み不変。新しい商品責務・公開型・DB/RN/Render/Supabase変更なし、STRUCTURE_MAP_DELTA_NONE。次は補助と元全文の学習接続設計を見直す候補で、追加周回/上限延長/次run自動開始0。全体00/観測入口/weekly§98へ戻る。
+
+
+## 2026-10-29 weekly§99 — joint_transfer11
+
+新folder observation_learning/training/2026-10-26-unconnected-native/joint_transfer11 は、run_transfer11.py（afaa開始の補助/全文/旧anchor11更新・別保存/非学習reload/全文2＋旧9の11生成）、prepare_transfer11.py（全labels/EOS/原11promptと正解11のCPU対照）、consume_transfer11.py（全文named/旧9quoteの原形式を選び無補修受領・既存Engine・採用済だけ別process cold）、transfer11.plan.json（無効準備原本）、static_cpu_check.json（入力/実行無効の静的検査）、README.md（今回scope/費用/開始重み/旧9before欠測）を所有する。新商品責務/route/wire/reader/DB/RN変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§99へ戻る。
+
+
+§99実CPU記録：joint_transfer11/cpu_check_summary.jsonがCPU14.661742秒/66,974token/教師意味・本文11/11/11prompt同一の索引。完全原本1,835,003bytesはcpu_check.index.json＋15partを順連結してSHA検証。runtime_authorized_plan.json、cpu_preparation.log/.exit、failed_cpu_v1.log/.exitは成功CPU/初回引数失敗/今回条件の別原本。source815692fcから11更新/11生成一回を開始、旧planは無効のまま。STRUCTURE_MAP_DELTA_NONE。
+
+
+### §99 終了原本 — joint_transfer11/result_20261029
+
+| ファイル | 所有する結果 |
+|---|---|
+| `run.json・training.jsonl` | 11更新/2load/11生成、新4ee58bf9、1288.511954秒/$0.100217596按分、初期afaa/全入力不変。run pending statusは原記録として凍結 |
+| `initial_loaded_tensors.json・reloaded_tensors.json` | 112F32/3,833,856parameterの学習開始・非学習reload記録 |
+| `after_FT-*.jsonl` 2件 | BOOK3712/noEOS/TOKEN_LIMIT、SHOP3129/EOS/受領後意味拒否、意味/本文0/2 |
+| `after_TRAIN-*.jsonl` 9件 | 旧9after-only、意味/本文8/9、8件parsed教師/本文同値。CHAIR01訂正は更新根拠1配列差でHOLD、before比は欠測 |
+| `cmee_summary.json` | 全11の実受領/採否・本文・cold8集計、完全原本archive内cmee/diagnosis.jsonのbytes/SHA/保存ID。full診断とsaved/cold8は重み込みarchiveへ保持 |
+| `gpu_launch.json・gpu.log・cmee.log・cmee.exit` | 一回起動条件、GPU/CPU log、再試行0 |
+| `external_manifest.json・external_verification.json` | 全346payloadのbytes/hash、112F32有限性・形状・全112変化/11raw/caps/先行全文raw不変/cold8完全同値、18,638,125bytesの原本保全 |
+| `reading_review.md・result_summary.json` | root/補助の意味/全更新/本人本文と教師比較、閉鎖/新重み不採用/次候補。Library libfile_271c5c6110c881919c7901938e853995 v0 |
+
+CPU失敗と実成功/無効準備plan/今回runtime条件は同folder直下の既存ownerへ保持。通常route/型/wire/reader/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§99へ戻る。
+
+
+## 2026-10-29 weekly§100 — role_binding_preparation
+
+既存training/2026-10-26-unconnected-native/role_binding_preparation内のprepare_role_bindings.pyは、staged_pair9原4行をhash固定で読み、role/引用6・附属ADD5・終端GAP/本文2の13補助targetを機械投影するstdlib-only owner。generated/auxiliary_train_messages.jsonlは220748bytes/13行、generated/structural_check.jsonはtarget/source/prior/nested ev/終端再構成の構造照合を所有し、tokenizer/context/mask/EOS・GPU・新CMEE採否を未実施とする。README.mdが前回不採用との区別、限定18更新候補の未固定状態、接続後の実token確認順、Jupyter origin自動承認拒否と再開条件を所有する。v1 spec衝突はreviewで修正し最終13行だけ保存。通常商品route/型/API/wire/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。全機能00/観測入口/最新weekly§100を同時同期。
+
+
+## 2026-10-29 weekly§101 — role18限定実行owner
+
+role_binding_preparation/runtime18/run_role18.pyは13局所＋3anchor＋全文2の18更新/別保存112F32/非学習reload/固定11生成。prepare_role18.pyは32行/18系列と元11prompt/教師のCPU対照、consume_role18.pyは18更新11call・原形式raw・既存Engine/成立時coldを所有する。role18.plan.jsonは無効準備原本、runtime_authorized_plan.jsonは今回CPU原本hashと2700秒/$0.21の条件。cpu_summary.jsonとcpu_check.index.json＋11partが実CPU14.057秒/80137token/最大7777/教師11/11の完全結果を所有。商品source/wire/reader/型/API/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。source6c1cb777を保存・readback後に一回だけ起動し、18更新/2load/11生成/実CMEEまで完了・閉鎖。旧run再開0。最終ownerは次表。
+
+
+### weekly§101 終了原本 — role_binding_preparation/runtime18/result_20261029
+
+| ファイル | 所有する結果 |
+|---|---|
+| `run.json・training.jsonl・execution_summary.json` | 18更新/2load/11生成、保存f493/112F32全変化、処理1240.614916秒/$0.096492271按分。runのpending statusは実行時原記録として凍結 |
+| `initial_loaded_tensors.json・reloaded_tensors.json` | 112F32/3,833,856parameterの初期afaa・非学習reload照合 |
+| `after_FT-*.jsonl` 2件 | BOOK2770/EOS・SHOP3391/EOS、両方JSON不正、意味/本人本文0/2。原rawの修復なし |
+| `after_TRAIN-*.jsonl` 9件 | after-only意味/本文7/9。CHAIR02訂正HOLD/更新coverage、CHAIR03訂正UNSUPPORTED/引用scope。before欠測 |
+| `cmee_summary.json` | 原形式固定11の既存CMEE採否・全outcome cold7同一。完全diagnosis849023bytes/SHA/保存ID、archive内saved/cold7参照 |
+| `gpu_launch.json・gpu.log・cmee.log・cmee.exit・export_role18_final.py` | 単一起動条件・実log・完了・原本出力source。次retryなし |
+| `external_manifest.json・external_verification.json` | 全346payloadのbytes/hash、347member、112F32有限/形状/全112変化、初期afaa不変/全11raw/cold7、47,007,311bytes最終ZIPのPod外照合 |
+| `reading_review.md・result_summary.json` | 全raw意味/引用/更新/本人本文と教師・実artifact比較、閉鎖/新f493不採用/次の整理。Library libfile_e089337060248191a52ee06aad6fc75a v0 |
+
+完全weights/initial/source/CPU/CMEE saved/coldは上記最終archiveへ保全。base/tokenizer本体とoptimizer/RNG厳密resume stateなし。早期保全jsonは生成1件時点の履歴。通常route/型/wire/reader/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§101を同時同期。
+
+
+## 2026-10-29 weekly§102 — role_binding_preparation/boundary_probe4
+
+probe4.pyが既存role18/helperの非学習読込とCMEE read_rawを継承し、元全文teacherの実token prefix2境界×2題でsuffix4回だけ診断する。prepared_cpu.jsonが全4入力token列/与えたprefix/期待suffix・原hash/capを、cpu.log/cpu.exitが実CPU4.611861秒を所有。README.mdが条件付き診断の目的・上限900秒/$0.07・採用禁止・終了を所有。sourcef6f1bb48の一回は0update/1load/4call・条件付き意味/本文0/4で完了。通常商品source/wire/reader/API/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。前回role18原本は不変。
+
+
+終了原本は同boundary_probe4/result_20261029へ保存。run.json/loaded_tensors.json/FT-*.json4件が実1load/4suffix/EOS2・JSON1、conditional_cmee.jsonが条件付き採否0/4、execution_summary.json/gpu_launch.json/gpu.log/cmee.log・exit/once・execute_once.lockが実行条件と120.668072秒/$0.009385294476按分を所有。reading_review.md/result_summary.jsonが全更新・本文・typed bindの読取、閉鎖と次2更新候補（未実行）を所有。external_manifest.jsonはZIP18payload/86686bytesの元bytes目録、archive_payload_locations.jsonは親の既存4file＋result配下への保存対応、external_verification.jsonは全CRC/hash/112F32/4raw/prefix照合を所有。新重み0、条件付き結果は全文成功へ換算しない。STRUCTURE_MAP_DELTA_NONE。
+
+
+
+## 2026-10-29 weekly§103 — role_binding_preparation/suffix2
+
+run_suffix2.pyは元全文2本のtoken列を保持しupdates境界〜EOSだけCEを置く2更新、f493起点/別保存112F32/非学習reload/無補助全文2＋旧9を担当。consume_suffix2.pyは既存CMEE read_raw/型/検査と成立snapshotの別process冷再読を継承。cpu_check.jsonは実token/mask/causal window/元11prompt・before・起点・CMEEの照合原本。cpu.log/exitは引数誤り履歴、cpu_recovered.logは成功。README.mdは実装順と一回条件1800秒/$0.14を所有。準備時点ではGPU未実行、実行後の記録は下段の終了ownerへ。通常商品構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§103 終了owner
+
+suffix2/result_20261029のrun/training/loaded/reloaded/after11は2更新/2load/11EOSを、cmee_diagnosisとsaved/cold4は全文0/2・旧9 4/9・全outcome同値を所有。execution_summaryは処理991.976650秒/$0.077153739458、external_manifest/verificationは348payload/112F32/11beforeを所有。reading_review/result_summaryは新45a1不採用/閉鎖と同種調整停止、Library保存IDを所有。carrier_comparison_cpuは追加GPUなしの完全可逆形式比較・全値復元/教師2同値/2.85・2.94％削減だけで不採用を所有。通常商品route/API/型/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+| 追加ファイル | 担当・配置 |
+|---|---|
+| `suffix2/export_suffix2.py` | 全原本/新・起点adapter/凍結入力/CMEE sourceを別ZIPへ回収するsource |
+| `result_20261029/gpu_launch.json・gpu.log・execute_once.lock` | 単一起動条件・実GPU log・一回lock原本 |
+| `result_20261029/cmee.log・cmee.exit・cmee.once` | 既存CMEE全11受領と冷再読の一回実行履歴 |
+| `carrier_comparison_cpu/compare_carrier_cpu.py・comparison.json・cpu.log` | 可逆encoder/decoder比較source・全値/教師結果/token・CPU実行log |
+| `carrier_comparison_cpu/FT-BOOK-AFTER-ANSWER.carrier.json・FT-SHOP-AFTER-ANSWER.carrier.json` | 全2教師の比較専用carrier |
+| `carrier_comparison_cpu/FT-BOOK-AFTER-ANSWER.roundtrip.json・FT-SHOP-AFTER-ANSWER.roundtrip.json・README.md` | byte完全復元した元2教師・比較の不採用と次仕様未固定 |
+
+external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元pathを示す。GitHubのresult folderへの再配置と同名とは限らない。新旧adapter等のbinaryは同ZIP/保存IDがownerであり、GitHub text原本と合わせて読む。
+
+
+## 2026-10-29 weekly§104 — role_binding_preparation/fixed_rows
+
+| ファイル | owner |
+|---|---|
+| `README.md・fixed_rows5.plan.json` | CPU実比較の範囲、原19中11subset、旧9不変、元全値/教師結果同値、次の新形式受領＋条件付き最大5更新/13生成の未承認提案 |
+| `final_v2/prepare_fixed_rows_v2.py` | 固定列encode/decodeとsyntax説明置換、prior/a/q/ur条件保持、実chat/EOS/元cap/context8192、既存CMEE教師対照、5変異/題のCPU比較source。model/receiver実行なし |
+| `final_v2/train_messages.jsonl・eval_inputs.json` | 全文2だけ新rowsへ派生し旧9は同一の比較用11件。元19/evalは不変 |
+| `final_v2/FT-BOOK-AFTER-ANSWER.rows.json・FT-SHOP-AFTER-ANSWER.rows.json` | 全意味値/ID/引用/更新/bind/本文を明示する2教師の比較専用配列 |
+| `final_v2/FT-BOOK-AFTER-ANSWER.roundtrip.json・FT-SHOP-AFTER-ANSWER.roundtrip.json` | 元named形式へbyte/order完全復元した2教師 |
+| `final_v2/cpu.log・cpu.exit・cpu_check_summary.json` | 実13.009848秒、26.26/25.14％output短縮、入力込み約12％、教師2/2同値・旧9不変。完全reportのZIP/member/bytes/SHA索引 |
+| `superseded_v1/*` | 上記と同じ役割の初回10file。ただしsource名prepare_fixed_rows.py。prior説明欠落でsuperseded、初回計数を最新promptへ使わない |
+| `manifest.json・external_verification.json` | 20payload/292780bytes ZIPの元member目録と全CRC/size/hash/sourceのPod外照合、Library保存ID |
+
+完全cpu_check.jsonのencoded/token/mask/全教師outcomeは上記ZIPで保持し、GitHub summaryと合わせて読む。新受領format/API実装は提案段階、現在の通常route/型/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。既存ModelCandidateSourceは新rows未対応。全体00/観測入口/weekly§104へ戻る。
+
+
+## 2026-10-29 weekly§105 — 明示fixed rows受領のowner差分
+
+| file / family | 責任 |
+|---|---|
+| API `.../cocolon_meaning_experience_engine/fixed_rows_reference_wire.py`（新） | 固定列/型からnamed keyだけを復元、元の値・明示名・null・引用・更新・bind・本人本文を補わず既存named decoderへ渡す。private materialのBOOK/SHOP回答後だけを選ぶ |
+| API 同`preparation.py`（変更） | 明示newformatのみ受領、元rows raw/format/finish/identity/usageを保持。旧receipt省略時bytes・既存fallbackなしを維持 |
+| API 同`emlis_semantic_admission.py`（変更） | actual offline/free/回答・source由来family/stageを再確認し、同raw receipt再導出と既存意味/本文/保存再読を使う |
+| API `ai/tests/test_cmee_fixed_rows_reference_wire.py`（新） | standard unittest5（形/型/名前/strict JSON/非補完/限定/finish/receipt）、subtestを加算しない |
+| fixed_rows `execution/run_fixed_rows5.py・consume_fixed_rows5.py・runtime_authorized_plan.json・current_api_source_manifest.json` | 承認済みbefore2→未達時だけ5更新/save/no-grad reload/after11、CPU/actualraw/meaning/body/cold/replay/旧7個別維持の限定実行・identity。通常アプリ入口を有効化しない |
+
+新formatの受領構造だけの差分。API c920f81a・source c6ef6555、CPU教師2/旧9全outcome一致、実GPUはBOOK/SHOP0/2・旧9=6/9、椅子01訂正を失い新重み不採用で終了、全13rawと成立6本文/cold/replay確認・原本回収済み。後続API7acff074は現identity fixture同期だけ。01B/C・国家event/保存・公開API/DB/RN/Render/Supabaseの責務差分0。STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％。
+
+
+### weekly§106 — 固定列prompt表記の限定修正と非学習2生成案
+
+`fixed_rows/prompt_shape2/prepare_shape2.py`はroot/subjectの指示表示2点だけを派生copyで揃え、元material/prior/教師・旧9不変、実token/context/全assistant+EOS/CMEE教師coldをCPU照合する。`train_messages2.jsonl・eval_inputs2.json・cpu_summary.json・external_verification.json`はその2件と完全CPU ZIPの索引。`run_shape2.py・plan.json・README.md`の元f493非学習1load/0更新/2生成・最大600秒/$0.047案はMash承認後に一回終了。result_20261029のrun/raw2/loaded/cmee_diagnosis/launch/source/log/summary/external_verification/export sourceが327.665962秒/$0.025485130397・両TOKEN_LIMIT/意味本文0/2・全原本205member回収を所有。current planはCLOSED_NOT_ADOPTED_NO_RETRY、元重み不変/新重み0。新受領module/型/公開API/DB/RN/通常routeの追加なし、STRUCTURE_MAP_DELTA_NONE。前回§105の不採用と旧7→6を保持。
+
+
+### weekly§108 — 修正済shape2と旧9全件の13更新候補
+
+`fixed_rows/rehearsal13/prepare_rehearsal13.py`は既存shape2の全文2各2回＋凍結旧9各1回の13順序と全11token/mask/EOS/contextをCPUで確認する。`train_messages11.jsonl・eval_inputs11.json・prepared_cpu.json.gz・cpu_summary.json`は同一bytesの11教材、全encoded/labels/176frozen、29.907477秒/モデル0の原本。`teacher_cmee/`は既存receiverの2saved/2coldで前回全result一致。`archive_manifest.json・external_verification.json・rehearsal13-cpu.log/exit`は全12member回収の照合。`run_rehearsal13.py・plan.json・README.md`の元f493→13更新/別保存/no-grad reload/11生成の一回はMash承認後に終了。新2=0/2・旧9=9/9、旧7ID全維持、cold9/replay11一致。19分4.04秒/$0.088980660655按分（準備等別）、新11446641不採用、current plan=CLOSED_NOT_ADOPTED_NO_RETRY。前回0/2は履歴のまま。通常receiver/型/三core/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§109 — rehearsal13の実結果・全原本保全
+
+`rehearsal13/result_20261029/file_manifest.json`が全path/bytes/SHAの完全索引、同`README.md`が責務地図。`summary.json・content_review.md`は不採用閉鎖/費用/全11raw・成立9本人本文の読了、`runtime_authorized_plan.json・runtime_run_rehearsal13.py・gpu_launch.json・launch_command.txt・execute_once.lock・launch_checkpoint.json`は実行時承認/単一起動/PID訂正を所有。`run.json・training.jsonl・after_*.jsonl（11）・initial_loaded_tensors.json・reloaded_tensors.json・adapter_config.json・adapter_README.md`は未修復生成/13更新/2load/新adapter identityと112F32の表。`cmee_originals.zip・cmee_originals_manifest.json・cmee_summary.json`は完全diagnosis/9saved/9cold原本19memberと実分類/本人本文索引。`rehearsal13-gpu.log/exit・rehearsal13-cmee.log/exit`は元ログ。`export_rehearsal13.py・archive_manifest.json・verify_recovered.py・external_verification.json・preservation_receipt.json`は248member全原本/新旧重み回収・照合・保管receipt。重みは完全保管ZIP、公開GitHubへ追加しない。通常構造/受領契約/意味型/三core/API/DB/RN差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§110 — prior_rows2のCPU表示比較と非学習2生成案
+
+`fixed_rows/prior_rows2/prepare_prior_rows2.py`はモデル向けpriorコピーの既存a/q/claim/軸/relationだけを既存列順へ可逆投影し、欠落field補完0・元user全bytes復元・全11教師/旧9token/labels/contextを確認する。`train_messages11.jsonl・eval_inputs11.json・cpu_summary.json・cpu_full.json.gz`は派生入力と実4.674842秒/モデル0・既存教師2全outcome同一保持の原本。`cpu.log・cpu.exit・archive_manifest.json・external_verification.json`は8member回収照合。`run_prior_rows2.py・plan.json・guard_verification.json・README.md`は保存11446641非学習1load/0更新/2生成の一回条件と提案時の未承認拒否。Mash承認後の実行は§111で終了、current planはCLOSED_NOT_ADOPTED_NO_RETRY。旧9=9/9は履歴で今回再生成0。通常receiver/意味型/三core/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§111 — prior_rows2承認済み2生成の実結果・原本保全
+
+`prior_rows2/result_20261029/file_manifest.json`が全path/bytes/SHAの完全索引、同`README.md`が責務地図。`summary.json・content_review.md`は326.241693秒/$0.025374353895按分・意味/本文0/2・両raw全文読了と不採用閉鎖を所有。`run.json・before_FT-*.jsonl（2）・loaded_tensors.json・cmee_diagnosis.json`は未修復raw/token IDs/finish/identity/112F32・両TOKEN_LIMIT実receipt/replay2一致/snapshot0の原本。`runtime_authorized_plan.json・runtime_run_prior_rows2.py・gpu_launch.json・launch_command.txt・execute_once.lock・launch_checkpoint.json`は承認実行source943ee425/単一起動PID232075・開始前構文エラー0副作用の区別。`prior-rows2-gpu.log/exit・prior-rows2-cmee.log/exit・prior-rows2-launch.log`は原ログ。`export_prior_rows2.py・archive_manifest.json・verify_recovered.py・external_verification.json・preservation_receipt.json`は202member全原本の回収/照合/保存identityと旧完全重みarchiveへの参照。新重み0、旧9再生成0、通常receiver/意味型/三core/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§112 — 保存rawのCPU構造照合と新方式の未承認提案
+
+fixed_rows/structural_cpuのcompare_saved.pyは保存raw4原本の一回限りCPU読取比較で、receiver/repair/grammar実装ではない。result.jsonは実0.011652405秒・早期c階層不正/未宣言参照/反復/spec由来句の計数、verification.jsonはGitHub全4hash/全case値一致と一回回収、jupyter_proof.jpgはCPU完了とGPU保持、README.mdは責務/結果/判断限界を所有する。syntax2_proposal.mdは既存型・列数だけの生成時制約の具体案で、syntax2.py/run_syntax2.pyは未承認・未作成、モデル0。前回0/2不採用閉鎖は不変。通常source/受領/型/三core/API/DB/RNの構造差分0、STRUCTURE_MAP_DELTA_NONE。
+
+### weekly§113 — 構文制約CPU実装・追加token対応不足で停止、GPU未実行
+
+fixed_rows/structural_cpuのsyntax2.pyは既存型/列だけのbyte parser・token mask・CPU一式、run_syntax2.pyはCPU成功report/hashを前提にした非学習1load/0更新/2生成runner。e22f1101で実装したが、実CPUはTokenMask内の非special追加token12個のbyte未対応でexit1。後段CPUとGPU/CMEEは未実行。両sourceは失敗時のまま保存し、plan.jsonがCLOSED_CPU_FAILED_GPU_NOT_STARTED_NO_RETRYを所有する。syntax2_proposal.mdはMashが承認した元提案の履歴、added_tokens_proposal.mdは追加token対応だけの新しい一回の未承認案で、syntax2b実装は存在しない。
+
+cpu_stop_20261030/README.mdは実結果・全file責務・限界、failure.jsonは停止metadata/12ID/source・入力・adapter hash/副作用0、cpu.log/exitは未修復trace、runtime_plan.jsonは実行時承認原本、archive_manifest.json/originals.zipは7member/6payload完全原本、verification.jsonは全CRC/bytes/SHA/source2/入力2/adapter3の照合範囲、proof.jpgはJupyter停止/GPU保持を所有する。新raw/receipt/snapshot/coldは0件で、新しい4Bの0/2へ換算しない。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+### weekly§114 — 追加token対応CPU全通過・構文支援2生成は両capで不採用閉鎖
+
+structural_cpu/syntax2b.pyは旧syntax2を変更せず非special追加token12個のByteLevel byte対応と6144前後連結・JSON境界検査だけを追加。run_syntax2b.pyは旧runnerの新root/plan/source参照を同期、plan2b.jsonはCPU成功report hashとMash継続指示、現在CLOSED_NOT_ADOPTED_NO_RETRYを所有する。CPU24.631755秒で全条件通過後、8842ef2bを同Jupyterで非学習1load/0更新/2生成、332.789460秒/$0.025883624683按分。両TOKEN_LIMIT/意味本文0/2、snapshot0。
+
+syntax2b_result_20261030/README.mdが全file責務、summary.json/content_review.mdが全2raw読了と閉鎖、run/raw2/loaded_tensors/cmee_diagnosisが未修復実結果、runtime_cpu_plan/runtime_authorized_planとcpu/gpu/cmee launch・elapsed・log・exitが実承認/単一起動/上限/原時間を所有。raw_reading.jsonは完全memberだけの列/field/反復計数、post_identity.json/verification.jsonは入力2/adapter3と回収同一性、cpu_originals_manifest/cpu_originals.zipとarchive_manifest/originals.zipはCPU9memberと全20memberの完全原本、proof.jpgは実Jupyter結果を所有する。途中Jupyter checkpointは最終runの根拠にしない。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、同じ有料反復・新helper・次GPU案なし。
+
+
+### weekly§115 — 実学習と派生推論の保存入力・encodingのCPU照合
+
+structural_cpu/alignment_cpu/read_alignment.pyはrehearsal13の実学習教材・保存encodingとprior_rows2の派生入力、syntax2bの既存rawだけを読む一回限りのCPU診断。source27557501をJupyterで一回実行、内0.081736963秒/外0.128684958秒/exit0、model load/forward/更新/生成/新CMEE0。alignment.jsonは全5input前後hash/5 owner path群/全11の予定順序/新2の教師・保存labels+EOS/旧9全row同一/未修復rawの完結member計数を所有。execution.jsonとcpu.log/exitは実行identity/時間/再試行なしの原本、evidence.jsonは原4payloadのexact UTF-8保全、verification.jsonは全payload/source/画面bytesとSHAの回収照合、proof.jpgは実Jupyter表示、README.mdは結果・全file責務・判断限界を所有する。
+
+教師や予定更新の欠落は今回範囲で見つからないが、因果的修正箇所は未確定。5群の意図した表記差や形式混在を原因/無害と断定せず、次の有料試行を選ぶ根拠へ転用しない。前回0/2と不採用閉鎖/旧9履歴FIT9/9は不変。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。ADMINISTRATIVE_ONLY、商品0/正式0/3/54.50％。
+
+
+### weekly§116 — CPU数値比較と17更新案、GPU未実行
+
+fixed_rows/continuation17/README.mdが新2の相対適合不足仮説・未承認17更新の範囲と全file責務を所有。run_continuation17.pyはrehearsal13の限定派生で、保存11446641から17更新→保存/非学習reload→新2の意味/本文/cold成功時だけ旧9の最大11生成を行う未承認runner。既存consume_fixed_rows5.read_raw/save_coldをそのまま使い、旧9全9/9を保護。prepare_cpu.pyは元11messages/encoding/17順序/112CPU tensor/sourceだけを照合、同JupyterのCPU一回は内1.698078459秒/外2.110028306秒/exit0。plan.jsonはCPU成功hashを結んだPROPOSED_NOT_APPROVED、GPU未実行。cpu_summary.json・cpu_execution.json・cpu.log/exitが一回CPU原本、kernel_cpu.jsonはCPU fallback合成6条件のみの比較結果、manifest.json/originals.zip/verification.jsonは全12member/11payloadの回収照合、proof.jpgは実画面。旧run/承認/0/2は不変、実モデル改善・cache正常性は未確認。通常source/receiver/意味型/三core/API/DB/RN責務変更0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§117 — continuation17承認済み17更新の実結果・原本保全
+
+fixed_rows/continuation17/result_20261030/README.mdが今回の全file責務、file_manifest.jsonがGitHub全path/bytes/SHA/owner、archive_manifest.jsonが完全ZIP全207payloadの元path/bytes/SHAを所有する。summary.json/content_review.mdは17更新/保存/非学習reload/新2生成の成立、両TOKEN_LIMIT・意味本文0/2・旧9NOT_RUN・一回不採用閉鎖と全raw読了の判断を所有。run/run.json・training.jsonl・after_FT-*.jsonl（2）・initial_loaded_tensors.json・reloaded_tensors.json・adapter/README.md・adapter_config.jsonは未修復出力/tokenIDs/17順序/2load/112F32/新7fcca3ceを所有。run/cmee/diagnosis.jsonは実receipt/replay/拒否判定、saved/cold/本人本文fileは0である。
+
+runtime/plan.json/runtime_cpu_plan.jsonは実承認原本/準備時未承認原本を区別、runtime/run_continuation17.py/prepare_cpu.pyは実行source、gpu_launch.json/execute_once.lockは単一起動、runtime/gpu.log・runtime/gpu.exit・runtime/gpu_elapsed.json・runtime/launcher.logは原log・exit1・外時間を所有。runtime/cpu.log・runtime/cpu.exit・runtime/cpu_execution.jsonは準備履歴、export_result.pyは終了後回収、verify_recovery.py/verification.json/post_identity.json/preservation_receipt.json/proof.jpgは208member回収/CRC・bytes・SHA/112F32/初期不変/保存ID/実画面を所有。重み本体は完全ZIP libfile_9514b319e18881918ed8a8b963a4fa51、初期11446641は既存完全ZIP保持。処理667.297750292秒/$0.051900936134按分（準備等別）、GPU稼働保持。通常source/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabaseの構造差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§118 — 実loss/source・新raw prefixのCPU照合と未承認SHOP計測案
+
+fixed_rows/structural_cpu/forward_prefix_cpu/README.mdが全file責務と判断限界・未承認一回案を所有する。prefix_points.jsonは成功7.903秒・逐語283/292と型列520/473・全4prefix hash/元raw identity、cpu_command.sh/execution.jsonは実CPUsourceと準備2停止/通知timeoutの区別、cpu_originals.zipはinstalled model/loss/generation実装を含む全8member、deferred_stop_originals.zipは通常上限停止の実class/identity2member、verification.jsonは全CRC/bytes/SHA/保存encodingからのPod外再導出を所有する。run_cache_prefix_shop.py/plan.jsonは新7fcca・SHOP保存raw474tokenの固定再生と同一prefix292/473のcache有無比較、最大1load/476forward/180秒/$0.014按分の未承認案。approval_guard.logはCodex hostでの未承認exit1、proof.jpgはCPU完了/GPU保持/未実行表示を所有する。実GPUprobe・追加学習・自由生成・新CMEE0、通常構造/型/receiver/API/DB/RN責務不変、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、前回新2の0/2・旧9NOT_RUNは保持。
+
+
+### weekly§119 — SHOP同一prefix二経路一回完了・数値保全
+
+fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結果/判断限界/全file責務、run/run.json・points.json・loaded_tensors.jsonが全476forward/固定474token/1load/二比較/非学習112tensorを所有する。runtimeのplan/source/prefix/prepared/lock/launch_wrapper/launch/gpu.log/exit/elapsed/post_identityは実承認a79f2525・一回起動・timeout・全identity不変を所有。archive_manifest.jsonは完全ZIP18member/17payloadの元path/bytes/SHA、verification.jsonはPod外root/補助独立検算とstale stage/転記assertの区別、preservation_receipt.jsonは完全1884361bytesの保存ID libfile_01631bb06ca88191aab25f201113af5a、proof.jpgはJupyter完了画面を所有。全4vector本体は完全ZIP内のcached_logits.safetensors/uncached_logits.safetensors（各keys292/473、各248320F32）で、モデル重みではない。親plan.jsonはCLOSED_DIAGNOSTIC_COMPLETE_NO_ADOPTION_NO_RETRY、当初案は親READMEの履歴として保持。292/473両argmax6333/15050一致、処理34.980309516秒/$0.002720690740按分（準備等別）、学習/自由生成/新CMEE0。新2意味本文0/2・旧9NOT_RUN/重み不変、通常source/receiver/型/三core/API/DB/RN責務変更0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+### weekly§120 — 5区間CPU実現性と未承認の一回案
+
+`fixed_rows/stage5/study.py`は元2完成教師の13位置を5区間へ分け、全bytes再結合/10学習例/保存tokenizer長を確認する一回限りCPU source。新model runnerではない。`report.json・stage_train10.jsonl・original_teachers2.json`がCPU4.656秒/最大context7285/元値/前段を保持、`stage5-cpu.log・stage5-cpu.exit・execution.json`は実行/準備失敗の区別、`manifest.json・originals.zip・verification.json・proof.jpg`は8member/43170bytesの原本/独立照合/実画面を所有する。`README.md`は入力総量約6.5倍の限界と、新offline5区間方式の実装/CPU→19更新→保存reload→実段階生成→既存CMEE/cold/条件付き旧9、最大45分/$0.21按分の未承認一回案を所有。新raw/provenance受口/実GPUは未実装・未実行。通常責務/受口/型/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。新2意味本文0/2/旧9NOT_RUN/商品0/正式0/3/54.50％は不変。
+
+
+### weekly§121 — 5区間承認済み実装の全file地図
+
+`fixed_rows/stage5/implementation_20261030/README.md`が承認と全file責務、`plan.json`が19順序/予算/identity、`consume_stage5.py`が5段13位置/来歴、`prepare_stage5.py`がCPU gate、`run_stage5_once.py`が一回学習・保存reload・実段階生成・既存CMEE/cold/条件付き旧9を所有。実行前source固定で効果未確認。通常受口/API/DB/RN責務不変、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§122 — 5区間一回実結果・全file地図
+
+`fixed_rows/stage5/result_20261030/README.md`が全file群の責務、`file_manifest.json`がGitHub今回path/bytes/SHA/owner、`archive_manifest.json`が完全ZIP229member内228payloadの元path/bytes/SHAを所有する。`summary.json/content_review.md`は19更新/2load/112F32/3call・全raw読了・BOOK S1 length/SHOP S2 root1の実停止・新2意味本文0/2/旧9NOT_RUNを所有。`run`のrun/training/3stage raw/messages/2case stage records/cmee diagnosis/112load-reload表/adapter configは未修復原本。`runtime`の実source3/承認plan/launch_once/lock/launch/gpu.log/exit/elapsed/CPUlog/exit/post_identity/export_resultは一回起動/親2690+kill10/182不変/費用/回収を所有。`cpu_verification.json`はCPU31.464秒/教師2/来歴8拒否/旧9保存raw比較、full encoding/train19/2教師saved-coldは完全ZIP内。`verification.json/verify_recovery.py/preservation_receipt.json/proof.jpg`は全229member検算/112F32/保存ID/実画面。初期11446641と新9b1901ab重みは完全ZIP libfile_cc6b41f4f62c81919cbaec65e51ef379に保持し、歴史3adapterは別既存完全保存参照。`implementation_20261030/plan.json`はclosure付き閉鎖、実承認時planはruntime不変原本。処理453.667秒/$0.035285247211按分（準備等別）、GPU保持。通常受口/型/API/DB/RN/接続責務変更なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。
+
+
+### weekly§123 — 5区間指示整合のCPU原本と未承認の非学習案
+
+`fixed_rows/stage5/instruction_cpu/README.md`が全file責務/判断限界と次の一回案、`prompt_stage_only.py`が区間唯一のactive構文/元意味条件と新actual chainの結合、`check_once.py`がCPU10target/EOS/13位置/長さ/旧9encoding/旧prompt代入拒否を所有する。`report.json/initial_report.json`と`cpu_final.log/exit・cpu_initial.log/exit`は2CPU成功4.965198732/4.692029303秒を区別。`originals.zip/archive_manifest.json`は初版/最終source/全prompt/元教師/元構文/保存raw/比較元encodingの29member/342660bytes、`verification.json`はPod外のCRC/bytes/SHAと元値独立照合、`proposal.json`は保存9b1901ab非学習1load/更新0/新2最大10call→既存CMEE-cold→2/2時旧9/最大19call/30分$0.14按分の未承認scope、`file_manifest.json/proof.jpg`は今回全path/owner/hashとJupyter画面を所有する。有限GPUrunnerは未実装・新GPU未実行。旧19更新/0/2/旧9NOT_RUNは閉鎖保持。通常受口/型/三core/API/DB/RN/接続責務変更なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§124 — 承認済み非学習一回runnerの全file地図
+
+`stage5/instruction_cpu/execution_20261030/run_inference_once.py`が保存9b1901ab非学習1load/学習0/新2actual段階生成→既存CMEE-cold→条件付き旧9/各180秒/全1800秒/最大19call/pre-post不変を所有。`prompt_stage_only.py`はCPU確認済み5796284d同一bytesの区間指示と新実messages連鎖、`plan.json`は今回のMash明示承認・source2SHA・固定重み/元11順序・最大30分$0.14（準備等別）、`README.md`は実装状態と責務を所有する。実装固定時点GPU未開始、実行を継続する。通常責務/受口/意味型/API/DB/RN差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§125 — 指示整合の非学習一回結果・原本地図
+
+`stage5/instruction_cpu/result_20261030/README.md`が全file責務、`summary.json/content_review.md`が同9b非学習1load/学習0/2call/両S1不成立/0/2/旧9NOT_RUN・全raw読解/before比較/不採用閉鎖を所有。`run/run.json・loaded_tensors.json・extra_frozen.json・stage1_*.jsonl・*.messages.json・*_stages.json・cmee/diagnosis.json`は実record/全token/入力/112F32/拒否前停止を保持。`runtime`の実source2/承認plan/launch_once/lock/launch/log/exit/elapsed/post_identity/exportは単一起動/親1790+kill10/40.392秒$0.003141634910按分/196不変/GPU保持を所有。`archive_manifest.json/verification.json/preservation_receipt.json/file_manifest.json/proof.jpg`は212member/2833615bytes原本の地図/Pod外全CRC・bytes・SHA/全pathと保存ID libfile_047c1d24bbc08191b2715926ae682455/実画面を所有。191fileはbytes同梱、5weightは別既存保存参照/current9b不変。`execution_20261030/plan.json`はclosure付き閉鎖、runtime planは承認時原本。通常受口/型/API/DB/RN/接続責務不変、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。
+
+### weekly§126 — source identity / 原欄guideの有限CPU原本と次の非学習案
+
+`stage5/source_index_cpu/README.md`が判断/実装順/全file責務、`prompt_source_index.py`がS1だけの元source ID/field key/prior snapshot guideと同5段actual chain、`check_source_index.py`がCPU10target/EOS/2再結合/旧9/200不変確認、`run_source_index_once.py/proposal.json`が未承認の非学習1load/0更新/新2→既存CMEE-cold→全成功時旧9/最大19call・30分$0.14按分（準備等別）を所有する。`result/report.json/source_guides.json/candidate_train10.jsonl/frozen_sha256.json`は実CPU4.787秒/全10messages/全target/元対応一覧/200不変file、`execution.json/cpu.log/cpu.exit`は一回起動/親5.317秒/exit0、`recovery_manifest.json/verification.json`は全9原本のPod外bytes/SHA一致とroot全10独立比較を保持。alias3/quote17・18の元教師は正しい。S1入力+352/+357token、S2〜5不変、最大7117/8192。新model/学習/生成/新CMEE0で自由生成改善未確認。前回0/2・旧9NOT_RUN/閉鎖承認保持、次一回未承認。通常source/receiver/型/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+### weekly§127 — source一覧付き同重み非学習一回の全file地図
+
+`stage5/source_index_cpu/result_20261030/README.md`が全file責務、`summary.json/content_review.md`が一回実2call/両S1最外JSON未完結/0/2/旧9NOT_RUNと全raw所見、`run`のrun/raw2/messages2/stage records2/loaded112/extra_frozen/cmee diagnosisは未修復原本。`runtime`の実source2/承認plan/lock/launch/log/exit/elapsed/post_identityは非学習1load/学習0/親1790+kill10/47.4057秒$0.00368711按分/207不変/GPU保持、launch_command/export_commandは実ターミナル原文写し。`archive_manifest/recovery/verification`は20member/70276bytes原本/全19payloadCRC・bytes・SHA/source/実chainを所有。全memberをGitHubへ展開保存、重みは今回不変で既存完全保全を参照。`execution_20261030/plan.json`はclosure付き閉鎖、runtime planは承認時不変、proposalは承認前履歴。source_index_cpu入口を現在結果へ同期。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、追加観測会は現2題不要、automatic_progression=false。
+
+
+### weekly§128 — 現行入力19更新案・CPU原本の全file地図
+
+`stage5/aligned19/README.md`が現10入力未学習差の判断/限界と全file責務、`proposal.json`が9b非採用初期値限定/19更新/45分$0.21按分（準備等別）の新未承認案、`prompt_source_index.py`が直前と同じ現builder、`prepare_aligned19.py`が全10教師/EOS/mask不変・旧9行/token不変・実S1一致・2教師13path再結合・112有限F32/215不変のCPUencoding、`run_aligned19_once.py`がexactproposal SHAを結ぶ新approved_planなしのmodel loadを禁止し、承認後の19更新/保存非学習再読/新2actual chain→既存CMEE-cold→全成功時旧9を所有。`result_20261030/cpu`のprepared_cpu.json.gz/train19.jsonl/cpu_summary.json/post_identity.json、`runtime`のsource3/proposal/README/CPUlog/execution、archive_manifest/verificationが全12member原本・6.14996秒/親6.95669秒/exit0・全hash/bytesと回収を所有。proposalとruntime copyは変更せず未承認のまま。新学習/生成/新CMEE0、重み9b不変、GPU保持。閉鎖承認再利用0、観測会は現2題不要。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。
+
+
+### weekly§129 — 現行入力19更新一回の全原本・不採用閉鎖
+
+`stage5/aligned19/README.md`が現在結果、`approved_plan.json`が今回の消費済み閉鎖、`launch_aligned19_once.py`がexclusive一回起動/direct親2690秒＋kill10秒、`export_aligned19.py`が終了後全原本/新重み回収とbest-effort GPU telemetry/partial保持を所有。`execution_20261030/README.md`は全58file地図、summary/content_review/verification/weight_verificationは19更新/2load/実7生成/全本文所見/全bytes・chain/112有限F32を保持する。runは7raw-token/7messages/2case records/SHOP派生1/initial-reload112table/19step log/CMEE diagnosis/新adapter metadataと重み参照、runtimeは実承認原本/旧CPU記録/実GPU launch-log-exit-elapsed/lock/postidentity/source/command写し、inputsは不変encoded19/全19messages/事前CPU記録、sourceは不変元train11/eval11/frozen stage consumer。
+
+元51memberの全CRC/bytes/SHAをPod外照合し、大きな新adapter binary1を追加重みarchive（libfile_7bc6a0675d708191a4d84f276b3870f3、14200265bytes/SHAbf80ac06）へ完全保存、その他元50memberはGitHubへ原bytes展開。元4B全重みは含まない。実7bb865b9承認planはruntimeへ不変保存し、上位だけ閉鎖版。BOOK S2全claim11cell/要求10、SHOP5段後INVALID_FORMAT（静的subject型不一致に加え後段根拠/bind/本文不成立）。新2意味/本文0/2、saved/cold0、旧9NOT_RUN。処理491.356814秒/$0.0382166411按分（準備等別）/親492.691616秒/exit1、新b5e112有限F32/112変更保全、元9b/215frozen不変・GPU保持。再試行/補修/次run/初期値採用へ自動進行0。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。
+
+
+### weekly§130 — 同19行×2周の38更新案・最終適合測定の全file地図
+
+`stage5/fit38/README.md`が未測定の最終fit/実前段差の判断と未承認一回scope。`proposal.json`は保存b5eを隔離初期値にのみ使う同19×2=38更新・3NLLセット57forward/2load/19生成/最大45分$0.21按分（準備等別）のexact未承認案。`prepare_fit38.py`はstdlibで元encoded19/messages/教師/EOS/mask不変・全ID2回/38順・19loss窓/実installedsource/b5e/266不変を確認。`run_fit38_once.py`は新exact承認なしのmodel loadを止め、既存measure_nllの開始/19更新後/38保存非学習reload後測定と38更新/新2actual chain→既存受信-cold→条件付き旧9を所有。現`prompt_source_index.py`不変、`launch_fit38_once.py`はfresh/exclusive/direct親2690+kill10、`export_fit38.py`は全原本/部分・完成重み回収/best-effort GPU read/partial ZIP保持。
+
+`result_20261030/README.md`が全20file地図、cpuは新prepared60c17f32/元train19 57292ff2/CPU summary/postidentity/実installed model・loss source、runtimeは実source5/proposal/説明/CPU execution-log/実command3、archive_manifest/verificationは15元member/198735bytes/SHAf5dd08d6の全CRC/bytes/SHAとPod外19→38継承照合を保持する。実CPU0.371018秒/親0.465878秒/exit0・torch未import・model/forward/学習/生成/新CMEE0。38更新/57NLLは予定のみ、追加学習は未実行。前§129不採用閉鎖・b5e保全/GPU保持を継続、NLLを商品合否にしない。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。
+
+### weekly§131 — fit38一回実結果・全8raw/3測定/新重みの全file地図
+
+`stage5/fit38/approved_plan.json`は今回のMash明示承認を消費済み・不採用閉鎖として保持し、同packの再利用を止める。実行時SHA5ea2d942は`execution_20261030/runtime/approved_plan.json`へ原bytes保存。`proposal.json`/全source5/CPU既存resultは不変。`fit38/README.md`が現結果の入口、`execution_20261030/README.md`が全64fileの責務地図。
+
+元56memberのbinary1は追加重みZIPへ完全保存し、他55memberはGitHubへ原bytes展開。`run`はBOOK3/SHOP5の8raw-tokenと8messages/2stage records、38step log、0/19/38のNLL各19行、initial/reloaded112tensor表、実run/counter、CMEE0call diagnosis、新adapter metadata/weights参照。`runtime`は元source5/実承認/proposal/旧CPU説明・log/一回launch/lock/exit/elapsed/postidentity。`inputs`は不変prepared60c17f32/train19 57292ff2/CPUsummary/installedsource/事前identity。`source`は元11教師/11評価/frozen consumer。追加summary/content_review/chain_and_teacher_read/verification/weights_archive_verification/実command写しがroot全文読取・静的chain/教師比較・CRC/bytes/SHA・112有限F32照合を保持する。
+
+同19×2=38更新/57教師評価forward/2load/8生成完了、処理928.934029923秒/$0.07225042455按分（準備等別）/exit1。両S1の17/18引用/BOOK S2は教師一致するが、BOOK S3 JSON Extra dataとSHOP S5 length512/本文なしで意味/本人本文0/2・saved/cold0、新CMEE0、旧9NOT_RUN。全56member/14631408bytes/SHA3916e2e7、追加重み4member/14201522bytes/SHA06c25a99（libfile_e2b0cd55d6c08191ba3a9ab1d6da4386）保全。新ad8bは112有限F32/全112変更、266frozen/b5e不変・GPU保持。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false、再試行/自動次run/初期値採用0。
+
+
+## 2026-10-30 fit38初分岐CPU照合と非学習branch4案のfile地図
+
+fit38の全実rawと教師/encodedをCPU照合し、BOOK S3 token264、SHOP S2 token555の初分岐を確定。実GPUは新規未実行、前回不採用閉鎖を維持する。[branch4全7file](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)はCPU原本・実helper窓・未承認の4forward案/runner/上限付きlauncher。全fileの責務は同READMEへ記載。通常app/CMEE受信/型/API/DB/RN接続の構造差分はなくSTRUCTURE_MAP_DELTA_NONE。最新状態は全体00/観測入口/weekly§132。新有料一回は個別判断前、商品credit0。
+
+## 2026-10-30 branch4非学習4forward完了・全実原本の地図
+
+Mash承認のbranch4を保存ad8b/非学習1load/計4forwardで一回完了し、両題・両経路で過去誤tokenが単独1位と確認。更新/生成/新CMEE0、275原本/重み不変。実原本14＋所見/summary/verification/manifest/receipt/入口の[全20file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/execution_20261030/README.md)を追加。上位承認は消費済み閉鎖、runtime実承認/sourceは不変。通常受口/型/三core/API/DB/RNの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§133と一致、商品credit0。
+
+## 2026-10-30 focus29 CPU準備と未承認29更新案の全file地図
+
+`stage5/focus29/README.md` が局所教師不適合・未承認配分29更新・費用/停止・全7sourceの入口。[具体案・全地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/README.md)。`proposal.json` は保存ad8b隔離初期値/新10×2旧9×1/2load/19NLL/19生成/45分$0.21按分（準備等別）/再試行なしのexact案。`prepare_focus29.py` はstdlibで既存encoded19/messages/教師/元終端/mask・予定29順/19窓/298固定/ad8b不変を確認。`run_focus29_once.py` は個別承認後だけ29更新→保存非学習再読/19NLL→実前段新2/既存CMEE・保存再読→全成功時だけ旧9を所有。`prompt_source_index.py` は既存と同一bytes。`launch_focus29_once.py` はexclusive一回lock・親2690+kill10、`export_focus29.py` は部分/完成重みと全原本回収。
+
+`result_20261030/README.md` はCPU全17file地図。元ZIP14memberを原bytes展開し、cpuのprepared gzip/train19/installedsource/summary、runtimeの実source5/proposal/CPU log・親execution/postidentity、archive_manifestに加え、recovery_receipt/verification/入口を保持。CPU0.413831秒、torch未import、モデル/forward/更新/生成/新CMEE全0、19行不変・298固定・CRC/全bytes/SHAを確認。新GPUは未承認/未実行、approved_planなし。前回不採用閉鎖/意味本文0/2/旧9未実行・商品0を維持。全体00/観測入口/weekly§134と一致、通常受口/型/三core/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。
+
+## 2026-10-30 focus29承認・一回起動と確認中断
+
+`stage5/focus29/approved_plan.json` はMash明示承認の起動済み消費済み表示。実行時原本は923518fdの同path/SHA7b502e9bに保持。`interrupted_execution_20261030.json` は最後のSTARTED_ONCE/9更新観測とブラウザ自動承認レビュー容量拒否、最終状態/回収未確認、同じrunの状態確認・回収だけの再開先を保持。既存runner/launcher/exporter/source5/proposal/CPU結果は不変。README/全体00/観測入口/weekly§135と一致。通常app/CMEE受信/意味型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。新起動/再試行/Stop/restart/delete0。9更新を完了や商品creditに換算しない。
+
+## 2026-10-30 focus29一回完了・全原本/追加重みの地図
+
+[focus29実結果の全66file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/execution_20261030/README.md)。上位approved_planは消費済み不採用閉鎖、実行時原本は923518fd/SHA7b502e9bをruntimeへ原bytes保持。interrupted_execution_20261030.jsonは途中読取拒否の履歴と、Mash明示再接続/終了確認/回収許可による同run解消を保持する。既存source5/proposal/CPU結果は不変。
+
+execution_20261030の元55memberはbinary追加重み1をLibraryの4member完全archiveへ、他54をGitHubへ原bytes展開。runは29step、保存再読19NLL、全10raw/token/messages・2stage records、実run/counter、新CMEE0のdiagnosis、初期/再読112tensor表、adapter config/model card/完全保存先。runtimeは実source5/proposal/承認/CPU原log、一回lock/launch/exit/elapsed/GPU log・postidentity。inputsは実prepared gzip/train19/CPUsummary/installed model-loss source。sourceは元11教師/11評価/frozen consumer。追加summary/content_review/nll_comparison/chain_and_teacher_read/literal_source_checks/adapter_weights_verification/verification/recovery_receipt・actions/verification実source/入口がroot全件読取・独立補助一致・CRC/全bytes/SHA/112有限F32と保存を保持する。
+
+29更新/2load/19NLL/10生成・全EOS完了、処理786.372730217秒/$0.06116232346按分（準備等別）。両S5 prose_type、意味/本人本文0/2・saved/cold0・新CMEE0、旧9NOT_RUN。不採用・再試行/自動次run/新ed298856自動採用0。298frozen/ad8b不変・GPU保持。全体00/観測入口/weekly§136と一致、通常受口/型/三core/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
+
+
+## 2026-10-31 本人宛通常応答・保存再読のfile地図
+
+追加：API `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py`、`emlis_thread_factory.py`、`ai/tools/serve_emlis_natural_reply.py`、`ai/tests/test_emlis_natural_reply_application.py`、`test_emlis_natural_reply_probe_http.py`、`ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md`。既存変更：API `emlis_thread_service.py`/`emlis_ai_reply_service.py`/`api_emlis_thread.py`/`emlis_ai_safety_triage.py`、RN `screens/InputScreen.js`/`screens/input/useEmlisThread.js`/`EmlisThreadModal.js`/`screens/AnalysisHistoryScreen.js`と既存RN test。
+
+通常submitは入力保存後の初回taskを保持、返事本文は既存OBSERVATION/DTO、再表示はGETのみ。新private profileと未生成の分析材料を区別。SQL/公開DTO/依存/料金変更なし。構造と制限はEmlis/CMEE map同日節、詳細02同日節とweekly§16。実4B・配置・配布・実機は未確認で、既存Piece private factoryを維持。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="release-structure-20261101"></a>
+## 2026-11-01 リリース機構差分
+
+既存ownerを維持し、共通3欠陥とPiece画像持出し・配布を修正。全体現在地と第9回weekly§32を現在の完了/未完のownerとする。
+
+| path | 責務/差分 |
+|---|---|
+| `SubscriptionContext.js` | owner世代でcache/pending/有料判定/全購読表示値を分離。auth callback後にrefresh |
+| `lib/iap/iapService.js` | finish両失敗の伝播、同一購入のpending実結果共有と同期再入の抑止 |
+| `features/piece/pieceApi.js` | 既存owner transportにexport専用GETを追加 |
+| `features/piece/pieceExport.js` | 準備/OS直前のexport許可と保存artifact identity再確認 |
+| `screens/PieceOwnerHistoryScreen.js` | 持出し画像を回収できないことの案内 |
+| `ios/tempCocolon/AppDelegate.mm`, `Info.plist` | RCTLinkingManager転送とcocolon scheme。11/1に写真library Usage/Add両目的文を宣言し、6601のApple90683拒否を修正 |
+| `android/app/build.gradle` | releaseVersionCode明示指定。既存署名維持 |
+| `.github/workflows/ios-build.yml` | 署名Archive→実app Info.plistの写真Usage/Add両key非空確認→IPA→Upload。Upload成功とApple processing成功を区別 |
+| `.github/workflows/android-release.yml`（新規） | 選択refから既存release署名AABを生成しartifact保存。手動起動のみ |
+| `tests/subscription-owner-race.test.js`（新規） | 初回owner発見/切替/旧成功失敗/logout/有料判定の実provider検査 |
+| `tests/iap-restore-purchases.test.js`, `tests/piece-v2-export.test.js`, `tests/piece-v2-owner-history.test.js` | 既存実moduleのIAP/native/transport合成検査を拡張 |
+| `guide/guidesJa.js`, `guide/termsJa.js`, `tutorial/tutorialScenarioData.js`, `SUBSCRIPTION_RELEASE_PHASE4.md` | 本人宛返答/非公開Piece保存/外部出力、trial非必須の現契約へ説明同期 |
+| API `api_public_profile.py` | visibility HTTP失敗で502 |
+| API `api_piece_v2.py`, `piece_v2_runtime_control.py`, `api_contract_registry.py` | 独立export strict pair＋owner-read依存のsaved artifact GET。共有composition維持 |
+| API `ai/tests/test_public_profile_visibility.py`（新規） | ASGIで失敗時公開抑止と正常既定/非公開方針を検査 |
+| API `ai/docs/RELEASE_MECHANISMS_20261101.md`（新規） | source実装/検証/配置・実機の未完境界 |
+
+三coreの意味型・学習重み・料金/権利/課金schema変更なし。新API配置・新RNビルド・実Auth/DB/deviceは未実行。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="related-material-20261101"></a>
+## 2026-11-01 後続 — 関連資料・補足/訂正・候補読込
+
+API7bbb4661の製品実装、744336c0の実DB適用記録。`emlis_thread_store.py`/`emlis_thread_service.py`/`natural_reply.py` は新private `emlis_thread_related_context` で全閲覧権利内の関連候補を選択し、保存後は同guard IDを再読。旧Q3保存profile/RPCを維持し、失効natural本文はtimelineでも抑止。新規migration `supabase/migrations/20261101010000_emlis_natural_related_context.sql` をSupabaseへ適用済み。service_role専用、anon/authenticated実行不可。
+
+`astor_material_snapshots.py` と `cores/analysis/source_adapter.py` は既存Q3最大3回答を保持、`cores/analysis/intent_compiler.py` は先行補足/置換文との矛盾、二重訂正を確認。新規 `ai/tests/test_analysis_multiple_answers.py` と拡張natural/Q3/tool検査。`ai/tools/serve_emlis_natural_reply.py` はweights/config SHA対指定で選択候補をロード前後確認、旧fit38既定と非学習/112tensor/時間・要求上限を維持。サーバー側更新にRN buildを要求しない。
+
+Emlis/Analysis current mapsとweekly§33を同期。その後の実4B HTTPS1回成功/API配置、6601のApple90683拒否と写真目的文修復はweekly§36。後続weekly§37で6701のApple処理/内部配布/本人起動とEmlis初回の実Auth→固定4B→実DB保存→本人同本文再読を確認。累積・月次当時snapshotとPiece本人実機は未完成。今回のRN製品sourceは5f91caceのまま、後続のtutorial契約ラベル同期と文書更新。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="response-piece-entry-20261101"></a>
+## 2026-11-01 — 応答popupからPiece作成へ
+
+Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応答」/「応答内容」、説明/履歴展開/保存状況buttonなし、操作は「ピースの作成」「閉じる」へ。問い/回答/訂正は廃止せず必要状態に保持。閉じるは元画面のまま。Pieceは新しい通常作成画面へ、表示中の保存入力ID/本人/opaque keyだけを渡し、既存のpreview/明示保存を使う。Emlis生成本文は本人sourceにしない。
+
+| owner | 今回の責務 |
+|---|---|
+| screens/input/EmlisThreadModal.js | 入力/履歴共用の指定表示、通常2操作、保存ID/本人/keyだけの明示Piece作成要求、native dismiss後の引継ぎ |
+| screens/PieceCreateScreen.js（新規）/navigation/PieceStackNavigator.js | PieceCreate route、本人/focus/runtimeと一回要求の管理。flag更新中は同keyの保存/取消回復hostを維持 |
+| screens/input/InputPieceActionArea.js | 既存saved-input/renderer/controllerを再利用し、明示要求だけsource GET→previewへ。通常mount/復帰では作らない |
+| screens/InputScreen.js / screens/AnalysisHistoryScreen.js / screens/AnalysisScreen.js | 両入口から現在の保存IDとnavigationを渡す。閉じるだけなら元画面を保持 |
+| API piece_v2_source_adapter.py | natural FINALのreceiptと成功finishを照合し、意味checkpointを捏造せず元入力だけPieceへ渡す |
+| API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
+
+
+API1296eaeaを指定配置済み（dep-dbjafelg1s2s73f6mah0/02:46:53 UTC Live）。実DBへnatural補正migrationを適用し、3RPCのservice_role限定・保存値read_only・health/bootstrap200を確認。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。RNef9f7bfc/6801はArchive/IPA/Upload成功、Apple処理通過・暗号化情報保存後、既存内部グループでテスト中。Mashは6801の応答UIを確認済み。Pieceはsource-ref200後preview422・時計と見出しの重なりを受領。既存PiecePreviewModal内のProvider/SafeAreaView全4edgeと案内文を修復し、局所231 PASS。新配布/本人座標確認と生成未完成はweekly§39で区別する。旧V4 metrics19失敗は未解消、全CI成功とはしない。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。
+
+
+11/1後続§39：STRUCTURE_MAP_DELTA_NONE。変更ownerは既存components/piece/PiecePreviewModal.jsと既存test2。Modal専用Providerを設け、header/scroll/footerを同じ安全領域内に保つ。新route/renderer/意味/API/DB/依存の変更なし。一般入力へのPiece生成は有限作者の対応不足を残し、表示修復を生成完成へ数えない。
+
+
+<a id="piece-first-image-save-completion-20261101"></a>
+## 2026-11-01 — 保存した感情選択からの画像化・保存一巡
+
+Mashの「完成まで進めて」に基づく変更。詳細は最新weekly第9回§40。保存原本の選択済み感情が特定の本文文型を要求されていた拒否原因を再現し、通常の本人選択そのものを意味根拠へ接続する。GPU/別作者/原文画像fallbackは使わない。
+
+| 既存owner | 今回の責務 |
+|---|---|
+| API cocolon_meaning_experience_engine/piece_source.py | private PieceSelectionEvidenceを追加。保存JSONのrecord hash・field/index・raw値を本文spanと分離。emotionsとemotion_detailsを同一感情nodeへまとめ、本文で既に同等表現済みなら旧node/ID/本文を維持 |
+| API cocolon_meaning_experience_engine/piece_v1c.py | 既存planにSOURCE_RECORDED_FEELING、唯一作者に記録時の本人感情/選択強度を追加。元memo/actionの全命題/順序は保持。感情はshort_essayの根拠になり、意思を創作してdeclarationにはしない |
+| API piece_v2_content_policy.py | 保存snapshotからの再導出とauthor-free本文検査で全選択/全原文を照合。選択の削除/重複/別感情/強度変更/恒常化/原因・意思追加を拒否 |
+| RN components/piece/PieceVisualCard.js | 明示piece.rn_bitmap_renderer.ios.v1だけ完成採用proofを同artifactへ保持。構築/初回最終採用は元8秒。完成後の閲覧/保存fitは元source expires_atと全identityで判定し、600秒以内に読んで保存できる。prototypeの8秒、saved画像保持、期限外完了拒否は維持 |
+
+公開API/7field source-ref/DB schema/保存枠/owner/receipt/CAS/依存/native描画は不変。新fileなし、STRUCTURE_MAP_DELTA_PRESENT（private選択根拠と既存renderer保持）。本文の曖昧な感情言及や句点なし等の一般文法対応、4B接続、Android/商品受入れの完了へ拡張しない。
+
+局所検証：API6file557 PASS、自然profileの生成→実PGlite preview/visual-change/private保存/同内容再読と元source失効の7 PASS、RN renderer/保存host/exportの251 PASS。反復実行は加算しない。本人対象記録もprivate CPUで生成し本文実読済み、公開testは架空記録。実Auth/実OS/iPhoneの画像保存一巡は配布後に本人確認する。旧native V4 19失敗は未解消。稼働/配布結果はweekly§40へ記録する。
+
+
+<a id="piece-user-text-only-20261101"></a>
+## 2026-11-01 — 画像本文はユーザーが書いた文章だけ
+
+Mashは7001で画像生成・一覧表示・スマホ写真フォルダへの保存成功を確認した。今回、感情選択から「記録時には〜」等の文章を付加しないよう明示し、新規ビルド不要と指定した。以後の新規作成は、ユーザー本文を必要に応じて整形した文章だけを画像へ載せる。本人が元から本文に書いた感情・否定・時点は保持する。
+
+API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し、可視graph/owner/planの命題にはしない。原recordへの束縛と変更検知を維持する。piece_v1c.pyの唯一作者は元memo/actionだけを整形し、metadataからの追加節を廃止。piece_v2_content_policy.pyの独立検査は余分な節/段落を拒否する。短い完成文もpaddingなしで扱うためshort_essay下限は非空（1..420正規化字/最大6文、1..3段落）。非表示選択だけで名詞断片を完成文へ昇格しない。quote/declarationの制約、既存安全/owner/source/枠/receiptは保持する。
+
+既存保存済みrecord/本文/hash/端末画像を移行・書換しない。RN製品source/公開wire/DB schema/依存変更0、7001を継続し署名build追加0。STRUCTURE_MAP_DELTA_PRESENT（private選択contextと可視本文の分離）。最新の検証・API配置結果はweekly第9回§41へ記録する。Share送信/Android/一般日本語品質/全機能受入れを本人の今回確認へ含めない。
+
+
+## 2026-11-01 §43 — 起動待ち・画面整理・Emlisブランド（配布前候補）
+
+| owner | 今回の変更 |
+|---|---|
+| runtime/AppStartupLoadingView.js（新規）, AppRuntimeBootstrapGate.js, RootNavigator.js | 共通の起動loading表示。認証・runtimeの初回待ちを同じ見た目で継続 |
+| MainTabs.js, InputStackNavigator.js, InputScreen.js, useHomeState.js | provider初回通信/Home初回settled/draft準備を待ち、Modalはreadyまで表示だけ抑制。失敗はHome再読込、owner/request世代を分離。Home全体行動撤去 |
+| AuthContext.js, SubscriptionContext.js | 初回session取得のrejectでも読込が終了し既存ログイン/権限なしfallbackへ進む |
+| navigationConstants.js, MainTabs.js, TutorialFlowScreen.js, PieceLibraryScreen.js, account/AccountVisibilitySection.js | Rankingの通常tab/導線/表示設定/説明を撤去。元DB/APIやPiece全体感情集計は維持 |
+| guidesJa.js, termsJa.js, tutorialScenarioData.js | 設定以外の案内を現UI/本人Piece一覧/画像準備/Photosへ同期。日週月こころ天気の案内は維持 |
+| pieceLayout.js, pieceRenderer.js, PieceVisualCard.js, pieceExport.js, pieceApi.js, PiecePreviewModal.js, PieceTextMetrics.mm | 旧ios.v1=Cocolon、新ios.v2=Emlis。compiled native capability header、保存版を保持。完成bitmap8秒後保持とprivate native token/export経路は二版共通 |
+| tests/app-startup.test.js（新規）と既存Piece/subscription/screen tests | 遅い初期通信、owner切替、失敗とretry、mount/draft保持、v1/v2の測定/保持/保存/出力互換 |
+
+分析の画面・履歴・未読・通知・tutorialと課金表示catalogは、Mashの削除取消を受けfresh sourceへ戻した。構造差分は起動/Ranking/brandのみ。署名build/配布は後続。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+## 2026-11-01 Analysis model field probe — 全変更file地図
+
+新production fileは0。API既存5owner：`ai/services/ai_inference/analysis_cumulative_service.py`（明示prepare/model_inputと実graph coverage）、`cocolon_meaning_experience_engine/engine.py`（明示private型dispatch）、同`cores/analysis/semantic_admission.py`（完全source要求/受信/Safety/全field/finish拒否）、同`intent_compiler.py`（ObservedQuotedField/任意quoted node）、同`observed_route_realizer.py`（artifact owner/集合/member/版/全文根拠照合から本人限定分類候補表示）。旧有限/P5/default経路は維持。
+
+新test：API `ai/tests/test_analysis_model_fields.py`（束縛/変異/補足訂正比較Safety/未解析/実SQL保存非生成再読）。新資料：`Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/{README.md,probe_requests.json}`（未実行GPU案と完全架空要求2件）。詳細設計01/04/05/06、current maps03/04、全機能00、最新weeklyを同期。対象785PASS、実4B/通常有効化/DB/RN変更0、商品品質未成立。STRUCTURE_MAP_DELTA_PRESENT。
+
+## 2026-11-02 — Analysisの番号・分類だけの明示offline接続
+
+前回の位置/長ID転記による実raw受理0/4を受け、CPU側に新private `analysis_model_field_kinds.v1` を接続。モデルは入力順1..Nの番号とnode_kindだけ、元原文/位置/根拠は既存sourceから再導出する。実call前のrequest/messages hashと返却raw/finish/hashをtrusted callerが保存し、別request/版/guardやraw差替えを新受口で拒否する。署名/自己認証ではない。v1 raw修復/自動fallbackなし。
+
+API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` の既存製品3owner：`ai/services/ai_inference/analysis_cumulative_service.py`（明示prepare/build）、`cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、同`cores/analysis/semantic_admission.py`（新private input/response型2・strict reader・既存graph構築共有）。既存intent_compiler/唯一realizer/storage ownerを維持。全unparsed/関係0/AS_WRITTEN_UNRESOLVED/分類候補表示、通常ensure/旧finite/P5/公開API/DB/RNは不変。
+
+新file地図：API `ai/tests/test_analysis_model_field_kinds.py`（call/元source束縛・strict番号/JSON・旧互換・実隔離SQL保存再読）。Cocolonの既存trial配下に `field_kinds_probe_requests.json`（新形式の既見架空AF01/02）、`field_kinds_probe.py`（未実行の新4call/600秒one-shot）、`field_kinds_cpu_example.json`（合成graph/文章/coverage）、`field_kinds_cpu_results.json`（重複除外のCPU実結果）を追加。新production owner/別作者/公開wire/DB/RN/依存定義0。
+
+最終819PASS（新34＋旧785）、共有owner identity別1PASS、FAIL/SKIP0。合成candidate→既存graph→隔離SQL commit→同図/文章/IDの生成禁止current/monthly再読・元source削除purgeを確認。実4B改善/意味品質/商品合格ではない。次GPUは新4生成/追加学習0/最大600秒の具体案まで、今回実行0。詳細はAnalysis04#analysis-model-field-kinds-v1、trial README#field-kinds-cpu-20261102、weekly§48。STRUCTURE_MAP_DELTA_PRESENT（新明示private wire/inputと既存graph責務の接続）、限定TECHNICAL_CREDIT/商品0/正式0/3/54.50％据置。
+
+
+## 2026-11-02 — 親quoteをsource内部位置へ束縛する明示private契約
+
+API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
+
+変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。
+
+
+## 11/3 — Analysis本人材料v3の変更file地図
+
+API既存analysis_cumulative_service.pyは_saved_memberを共用するrequest組立てを分離し、新selected_material.v3をprepare/build/save/reloadへ束縛する。既存cores/analysis/semantic_admission.pyは同版だけordinary補足を独立fieldへ追加、material文脈とsemantic v3指示を併用、新state版/typed-role補足拒否を扱う。新test_analysis_model_material_v3.pyは本人/親/回答/引用/旧版/保存境界を検査。trial/material_v3_context_probe.pyは新10生成の一回比較・原本保全用で商品ownerではない。通常ensure/HTTP/DB/RN/唯一作者/共有型/依存は未変更。
+
+
+## 11/3 — ROLE＋ACTION二欄の意味接続file地図
+
+API既存analysis_cumulative_service.py: with_action明示prepare/build/save/reloadの状態分離。cores/analysis/semantic_admission.py: 二欄source受理と新state/保存node復元。intent_compiler.py: 現ROLE proof/既存有限ACTIONの全文/候補/原文範囲から2node/4gapを構築・再検証。observed_route_realizer.py: 同じ作者で新saltのみ分離。新test_analysis_model_role_action.py: 肯否/欄交換/主体/時点/根拠/旧v1/保存非生成再読。trial/role_action4_probe.py: 実4B4call比較と原本保存用。新graph/作者/公開route/SQL/RN/依存0。
+
+
+11/3上記ROLE＋ACTIONの最終sourceはAPIc9b990e0。5file checkpoint後にcompiler/test2fileで根拠範囲IDを補修。実4生成/2typed graph/文章図/保存をtrial role_action4_results.jsonへ記録。初回7suite761passed/2skipped、補修後の関連2suite151passedとの合算なし。通常route/SQL/RN/新graph型/作者追加0。
+
+
+11/3のmaterial.v4 file地図：API既存semantic_admission.pyの人物引用/出力schema対照と新版state、analysis_cumulative_service.pyの同一request再束縛、既存test_analysis_model_material_v3.py/role_action.pyの互換/根拠/保存検証。trial/material_v4_pair12_probe.pyは既存9dcの一回比較用。新graph/作者/公開route/SQL/RN/依存0。STRUCTURE_MAP_DELTA_PRESENTは明示private版のみ。
+
+
+11/3最終API ded0586：上記4fileに加えintent_compiler.pyの既存suru否定operatorだけを修正、role_action既存testを拡張。trial/material_v4_pair12_replay.pyは保存12responseの生成なし再採用と元bytes保持を検証、material_v4_pair12_results.jsonは数値/採否の索引。新graph/作者/公開wire/SQL/RNなし。初回352pass/3skip、補修後199passは合算しない。
+
+
+11/3 trial/material_v4_aligned78_trial.pyは、既存78原文/正解/106順を保ったv4入力のCPU整合・固定before8/既存before6再読・106更新/156NLL・保存reload/after14・同文章図保存再読/partial原本保全を扱う研究runner。API/型/通常owner追加変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3 trial/material_v4_aligned78_results.jsonは完了106更新/22生成と新224ab不採用・全原本参照・次再開点の索引へ更新。runner/source/商品ownerは追加変更せず、API ded0586不変、STRUCTURE_MAP_DELTA_NONE。最新はweekly§121。
+
+
+11/3 trial/material_v4_pair8_sources.jsonは独立16source（教示8/非学習近接8）と18更新順、material_v4_pair8_trial.pyは旧78保全のCPU86/18更新/172NLL/同14before再利用/after22/保存再読/原本保全を所有する研究helper。新商品owner/型/作者/通常route追加なし、STRUCTURE_MAP_DELTA_NONE。weekly§122。
+
+
+11/3 trial/material_v4_pair8_results.jsonは完了18更新/22生成・同6typed3→5・局所研究候補a2e・未達source/全原本参照の索引へ更新。実装/通常owner/型/作者変更なし、API ded0586不変、STRUCTURE_MAP_DELTA_NONE。weekly§123。
+
+
+### 11/3 — 分析の二欄対象引用の小比較
+
+trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/明示target、material_v4_target4_trial.pyは元86不変のCPU90検証・旧22原本保全・同新Pod before22/16更新/after26/保存非生成再読・原本回収用。商品owner/型/作者/通常接続は増やさない、STRUCTURE_MAP_DELTA_NONE。実行条件とcurrentはweekly§124/trialを参照。
+
+
+11/3・target4比較の最終結果はtrial/material_v4_target4_results.json（本文なし採否/原本/再開索引）とweekly§125へ。同22typed14→13、共通成功13のgraph/表示同一、新d3dは不採用。完了16更新/48生成を再実行しない。新商品owner/型/作者/通常接続0、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・source mask比較のfile地図：trial/material_v4_source_mask.py（既存Analysis wireのcompact schema/同field逐語substringだけの試験grammar）、material_v4_source_mask_trial.py（既存syntax2b/固定API loaderの明示offline注入・90target CPU・同22比較・既存保存再読・原本回収）。既存syntax2bはfixed_rows/structural_cpu/syntax2b.pyを不変再利用。商品owner/型/作者/通常接続追加0、STRUCTURE_MAP_DELTA_NONE。採否と再開点はweekly§126/trialへ。
+
+11/3・source mask runnerの終了接続補正：tokenizer EOSではなく実loader/model EOSへmaskを束縛。旧partial rootを保全し新eos2 root/600秒へ分離、商品source/契約は不変。実装不備・合算回数/費用はweekly§126へ。
+
+
+11/3・source mask最終結果はtrial/material_v4_source_mask_results.jsonとweekly§127へ。修正版22stop/学習0、candidate20→21/typed14→14、全14graph/表示不変、X03は原文内でも行動節の誤targetで拒否継続。初回EOS不備/全原本も保存、通常不採用。完了root再実行禁止、商品owner/接続差分0、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・beam2比較のfile地図：trial/material_v4_beam2_trial.pyは既存loaderのnum_beamsだけを変える一回比較・CPU22束縛/保存非生成再読・原本保全、beam2_cache_check.pyは同試行のhybrid state交換だけのCPU小検証。新商品owner/型/作者/通常接続/依存0、STRUCTURE_MAP_DELTA_NONE。採否と再開点はweekly§128/trialへ。
+
+
+**11/3・§129 枝数2比較結果：** 同重み/同22入力のnum_beamsだけ1→2を完了（新22stop/1load/学習0）。候補20→20・文章図14→14、旧14保存bytes/全graph/文章図一致、X03対象範囲/MD02他者否定は未解消。理由の連体接続1例のみ局所改善で、beam2通常不採用。結果/原本/次の意味修正点は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-beam2-result-20261103)とweekly§129、本文なし索引material_v4_beam2_results.json。既存2pyのowner/配置は§128のまま、新ownerや製品経路の変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・target UL比較のfile地図：trial/material_v4_target_ul_trial.pyは既存C4の誤拡張負例/実token分岐・局所目的関数・既存保存reader・発話4保持を含む一回比較の研究runner。新商品owner/型/作者/通常接続/依存0、STRUCTURE_MAP_DELTA_NONE。条件と採否はweekly§130/trialへ。
+
+
+11/3・局所ULはweekly§131で更新前停止/不採用、元161fileをlossless保存。trial/material_v4_target_ul_results.jsonは本文なし採否/原本索引。次trial/material_v4_lexical8_sources.jsonは独立4動詞×肯否8の教示、material_v4_lexical8_trial.pyは同CPU/新before8・既存平均CE16更新/after38/保存再読・原本保全を扱う研究runner。新商品owner/型/作者/通常接続/依存0、STRUCTURE_MAP_DELTA_NONE。条件と採否はweekly§132/trialへ。
+
+
+11/3・lexical8最終結果はtrial/material_v4_lexical8_results.jsonとweekly§133へ。新8は元a2eでtyped全到達のため学習/afterなし停止。対象子4明示/4省略、全8のgraph/可視内容は正target投影と同一。今回品質修正なし、§131と合わせ完了runの自動再実行なし。新商品owner/型/作者/通常接続0、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・trial/material_v4_morph4_trial.pyは独立4原文の作る活用/前欄肯否比較と実生成prefix診断を行う一回の研究runner。旧helper946101d4の意味採用・保存reader・16更新を再利用し、新商品owner/型/通常接続を作らない。条件/再開点はweekly§134、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・morph4の最終結果と局所NEG指示probeはweekly§135へ。trial/material_v4_negquote_probe.pyは変更messagesを独自probe identityへ保存し、旧v4consumerへ採用しない比較専用。material_v4_morph4_results.jsonは本文なし結果/差分原本の索引。独立4typed到達で学習なし、追加指示は対照退行で不採用、新商品owner/型/通常接続0、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-material-v5-negscope-files-20261103"></a>
+## 11/3・分析研究のファイル差分と現在地（§136–137）
+
+指示と独立否定ACTIONの説明例2箇所を一貫させた研究v5をJupyterで一回比較。X03の文章図到達と、PV01 JSON破損/HQ04理由退行を全件読解で分け、候補は不採用。typed18→18、共通17のgraph/全文/図同一、新30stop/1load/学習0。全338原本memberと60応答を照合・保存。商品APIへのoverlay反映・配置は0で、STRUCTURE_MAP_DELTA_NONE。
+
+| 追加ファイル | 責務/接続 |
+| --- | --- |
+| observation_learning/trials/2026-11-01-analysis-model-fields/material_v5_negscope_trial.py | 旧API ded0586＋分離overlayのCPU準備→一回30生成→既存consumer/唯一作者→保存非生成再読/比較。通常ownerへ接続しない |
+| 同/material_v5_negscope_results.json | 本文を持たない実績/原本保存/不採用の索引 |
+
+API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用した実装とは扱わない。[結果/全原本/再開条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-negscope-result-20261103)。次は肯定ACTIONの出力安定性と明示理由/発話境界を元原文と既存材料/ownerへ戻して確認し、追加GPUは未固定。本人基準/補足typed/記録間の再出現・変化/通常累積/IF・Savedは未完、分析観測会も継続対象。
+
+
+<a id="analysis-material-v5-aligned16-draft-files-20261103"></a>
+## 11/3・分析研究草案のファイル地図（§138）
+
+同trial内へ material_v5_aligned16_trial.py（未compile/未CPU検証の実行草案）と material_v5_aligned16_plan.json（元90source SHA・選択16・6引用差分・実行上限・実績0・再開条件）を追加。元90原本/既存helper/意味gate/唯一作者を継承し、通常ownerへ接続しない。操作環境切断によりGPUは未開始。[source確認/停止点/再開順](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-aligned16-resume-20261103)。STRUCTURE_MAP_DELTA_NONE、商品API/DB/RN/配置変更0。§137の既存原本保全と不採用を維持し、再接続後は新草案のCPUprepareから進める。
+
+<a id="piece-format-language-export-files-20261104"></a>
+## 11/4 — Piece作成・本文・書き出しのファイル差分（§141〜150）
+
+| 追加ファイル | 責務と接続 |
+|---|---|
+| mashos-api `ai/tests/test_cmee_piece_finite_request_reuse.py` | 11/9 AR-04。明示本人の過去依頼をKEEPへ通す肯否・能受動・6本人表記・欄・留保・mode／tier境界、正規化後の人称拒否、独立改変拒否、隔離SQL保存元読取を検証。相談・伝達の有限境界も検証。新保存一巡testと既存Piece近傍6suiteを含み3351 PASS。 |
+| mashos-api `ai/tests/test_cmee_piece_request_saved_pipeline.py` | 新規。実source adapter／CMEE／既存review→preview RPC→save RPC→owner detailを原本migrationの隔離PGliteで検証。初回後に作者／compiler／Engine／reviewを禁止し、同key再送と保存行／詳細の本文・recipe等12field、保存消費各1を照合。3plan×3動詞の9case。既存Q2_PGLITE_MODULE（PGlite0.5.8）を必須として実行する。Auth／先行Emlis provider／PostgREST envelopeは合成で、実機・native描画の検証ではない。 |
+| Cocolon `features/piece/pieceExportPngProfile.js` | `pieceExport.js` が対応iOSで呼ぶPNGメタデータ検査。寸法と明示sRGBを照合する。 |
+| Cocolon `tests/piece-v2-export-png-profile.test.js` | 正常、異なる寸法・色設定、切り詰めを検証する。 |
+| mashos-api `ai/services/ai_inference/piece_v2_export_receipt_service.py` | 本人専用の書き出し記録POSTから、本文を含まない要求を検証し、記録のRPCへ渡す。 |
+| mashos-api `supabase/migrations/20261104002458_piece_v2_export_receipt.sql` | 既存の記録テーブルにハッシュ2欄とservice-role専用RPCを追加し、本人・保存版と同じキーの再送を照合する。 |
+| mashos-api `ai/tests/piece_v2/test_b13b_piece_v2_export_receipt.py`、`ai/tests/helpers/piece_export_receipt_postgres.cjs` | 隔離DBで書き出し記録の権限、版の不一致、応答消失後の再送を検証する。 |
+
+| 最新の既存ファイル責務（§148〜174） | 責務と接続 |
+|---|---|
+| mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 保存原入力の既知有限動詞を共用し、明示終端の非過去だけを追加読取。既存の完成動作文では「を」の前後にSPACE／TAB／全角SPACEがあっても、既知の動詞と有限活用を照合用viewで読める。「何 を／なに を」の同じ空白は既存の疑問cueを隠さず拒否する。原文の空白・否定・句読点・欄と根拠はそのまま保持し、改行・NBSP・未知動詞・疑問・未完の文は新たに許可しない。対象・条件・伝聞と疑問cueの境界を検査し、原文・肯否・時制は変更しない。既存FOCUSの終端を単一の句点／感嘆符で認識する。焦点構文の「のは＋省略可読点」後の水平空白をobject外のseparatorとして読む。新gap armは別読点を越えず、旧no-gap parseを保持する。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 11/9 AR-04：`_finite_self_person_action_account`で既存CMEE `natural_reply_meaning`の有限節・活用・格・人役読取を再利用し、Piece既存ガードと全文／明示SELF／頼む・相談する・伝えるの肯否過去／相手・対象を確認。曖昧な伝えるの「に」受動は既存拒否を維持。原文KEEPの資格だけを返し、新しい命題・作者は作らない。 有限自己表現と空述語拒否の文法照合に単一感嘆符を同期。既存direct・focal・評価とそれらのscopeの終端にも単一感嘆符を対応し、原文nodeとscalar／UTF8証拠座標を保持。 既存`_calendar_time_adverb_span`は明示本人topic後の水平空白だけ照合開始位置を進め、既存の繰返し／数値期間の「これから」spanを原文上で返す。単一感嘆符はtopicの照合だけUnicode scalar同幅の句点viewを使う。原文の記号・時点・根拠、既存KEEP作者と指示語／期間文法の範囲は変更しない。既存`_EVALUATIVE_FINITE`は「が」前後の水平空白を対象・有限述語captureの外の区切りとして読み、対象内部空白、肯否・過去・modalとscalar／UTF8根拠を保持する。焦点構文の主体「が」は変更しない。既存`_direct_transitive_expression`は「を」前後のSPACE／TAB／全角SPACEを対象・述語captureの外の区切りとして読み、同じ対象への後続名詞参照を保持する。原文・内部空白・scalar／UTF8座標は不変、構造化作者の既存区切り整形とKEEP原文保持を区別する。同一本人scopeの前節では、本文先頭に完全な「どうしても／どうやっても」があり、直後が非ひらがなか末尾の場合、その語内の「も」だけを参加者照合から除く。後続のは／が／も・読点・依存／伝聞と既存の疑問・空本文／bare述語の拒否は保ち、原文・scope型・本人評価／焦点の根拠座標を維持する。「は」や省略可能な読点の後にSPACE／TAB／全角SPACEがある同じ既存構文も、副詞の照合viewだけで水平空白を除いて読む。原文・根拠座標と副詞のない従来枝は変更しない。新armの疑問判定は既存の有限留保と共用し、一般の副詞・助詞解析へ広げない。既存の有限留保の疑問判定はsource側の同じ定義をV1cと共用し、従来の非疑問境界を保つ。既存scope内の自己topicは`_scoped_self_topic`、topic内の既存operator字面＋直後読点とwish末尾は`_qualified_self_topic`で、Unicode scalar同幅の単一終端viewへ接続する。原語・元記号・座標を変えず、typed scope・新しい条件命題は作らない。topicの最終operator読点後にも既存の空述語拒否集合を適用する。既存role bindingは名前labelの完全な役割付き値（inlineの名前付き所有者を含む）にも同じidentity拒否を適用し、名前を役割へ置換した意味破損を防ぐ。が／もlabelは直後の有限copula、をlabelは直後の「に＋有限のする／願望／否定・過去」を単一終端まで確認して同じidentity拒否へつなぎ、recipientの通常参照と旧は判定を保つ。名前自体の話題は水平空白・氏名・有限命名でも拒否し、集合／親族語の漢字14表記も既存非identity拒否へ同期する。通常名の部分一致と、名付けを会話topicにする参照は拒否しない。本人評価の焦点対象前の水平gapも同じseparatorとして分離し、原文・評価／参照／scopeのscalar／UTF8座標を保つ。明示感情文の一人称・既存degree／labelのprivate matcherを共用し、metadataは旧現在肯定1形・句点、本文保持は丁寧8形・単一終端を区別する。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 11/9 AR-04：保存原入力のcomplete-account判定で上記finite依頼を既存actionsへ接続。旧KEEP／作者／独立保持検査・段落と留保・宣言不適格を保ち、依頼の既成立5に加えて相談・伝達の新8本文を確認。 明示自己表現と完成動作・留保、既存肯定plain-suruを既存KEEP作者へ渡す。自己理解でも同じ有限文法を使い、新しい関係や宣言適格を作らない。留保の丁寧否定・過去形と「迷っている」の活用漏れは、この保持経路だけで修復し、新しい問いcueも局所検査する。保存済み有効modeのliteral fallbackでは、「まだ＋単一読点（、／，／,）＋任意の水平空白＋決めて＋いません／いませんでした／いない／いなかった＋単一終端」に限り、既存の有限留保として原文を保持する。globalな不確定cue・作者・意味型・形式は変更せず、「読む日は」等の対象挿入や自由な前後節は新たに受理しない。既存編集後に構造化文の元終端記号を復元し、literal自己表現のKEEP／宣言不適格は優先保持する。 既存scope内の自己topicと継続文も同じ終端照合を使う。曖昧なliteral感嘆符は原文の全順序を保持し、願望への追加分類や本人topic省略をしない。既存SOURCE_FIRST_PERSON_TOPICでも既知の直接構文が成立する時だけ同じobject／predicate境界で実現し、作者と独立検査の水平gap不一致を修復する。先行dutyが原文KEEPの場合は後続scopeの明示本人topicを残し、作者と独立検査の不一致を解消する。一般literalの本文・dutyは変更しない。既存の原文KEEPでも、両節の明示一人称が同じで、既存の有限留保末尾・既存operatorと直後読点・完成した自己表現を照合できる場合だけ、同じ短文エッセイの形式制約へ接続する。原文・意味型・duty・願望／比喩の未分類は保ち、新しいsource受理は足さない。異なる本人表記・無読点・未知活用や未証明の境界は今回の制約に含めない。保存済み有効mode内の完成文判定へ明示感情8丁寧形を接続し、自己理解でも既存KEEP・宣言falseで原文保持する。 既存本人topic内のoperator字面＋直後読点とwish末尾を単一終端viewで読み、同じdutyの作者・形式検査へ接続し、quote／declarationを辞退する。単純literal感嘆符のKEEPと原文・証拠を維持し、新しいtyped scope・条件命題・語彙・意味型を作らない。語内「なら＋読点」も旧句点topicと同じ表面上の境界になる限界は§163へ戻る。 本人評価・焦点構文の対象内にも、有限な留保表現・漢字動作名の「する」・明示の「が／は／も＋ある／ない」と既存の条件／理由／譲歩operator＋直後の読点がある場合は、同じ短文エッセイだけの形式制約を適用する。型付きscopeを追加せず、書かれた条件と本文・根拠を保持する。名詞・地名内部の「なら／ので」、読点なし・読点前の空白、未証明の語尾は新しい判定に含めない。既存の本人評価・直接wish・焦点構文では、検証済み対象全体が「分から／わから＋ない／なかった」「迷って＋いる／いた」「まだ決め＋ていない／ていなかった」と「こと／もの／時間」に完全一致する場合、その対象内の語を本人の判断に付く留保と誤認しない。対象を保持したまま既存の宣言形式を選べる。自由な前後文脈・読点・条件・たぶん／おそらくと、評価やwish自身の否定・過去・留保は従来どおり制限し、一般の名詞句・「とき」へ広げない。 |
+| mashos-api `ai/services/ai_inference/piece_v2_safety_review.py`・`ai/tests/piece_v2/test_b08_piece_intent_scope.py` | 生成側と共通のpureな形式制約判定をauthor-free形式検査へ接続し、正しいshort_essay offerと余分なquote／declarationを検査する。review中の作者呼出しを禁止し、typed target内の留保や曖昧な副詞から新しい宣言を作らない。 |
+| mashos-api `ai/services/ai_inference/piece_v2_content_policy.py` | 既存author-free検査で構造化文の元終端記号を要求し、句点・感嘆符の差替えを拒否。 既存scope内の自己topicと、topic内のoperator字面＋直後読点・wish末尾も同じUnicode scalar幅の単一終端viewで照合する。単純literal感嘆符は原文全体の一致を要求し、既存KEEPを保持する。語順・主体・時点・否定・scope・段落の既存照合を維持。 |
+| mashos-api `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py` | 既存adapterで時制・肯否・主体・句読点・欄／段落・留保の保持と、新経路の対象／条件／報告／疑問の拒否境界を検査。焦点／評価と直接wishの対象前gap、二欄・参照座標、対象内部space、余分なseparator／行越えの拒否とartifact改変拒否も実Engine・独立検査で確認する。自己理解の明示感情文は肯否／時制／強度・欄／段落／重複を保持し、現在選択への誤binding・無modeや未完／他主体等の新受理がないことも検査する。 |
+| mashos-api `ai/tests/piece_v2/test_b05a_piece_self_insight_mode.py` | 保存済み有効modeの有限自己表現・留保・topicと単一終端を検査する。原文KEEPの同一本人・有限留保境界では本文／根拠を保持して短文エッセイだけを許し、異なる本人表記・未知活用等の旧境界と作者／Engine禁止の形式検査を保つ。既存評価／焦点の先頭非疑問副詞と、競合参加者・問い・空述語の拒否境界も照合する。 |
+| mashos-api `ai/tests/piece_v2/test_b08_piece_script_role_binding.py` | 名前labelの完全な役割付き値とinline所有者、が／もの有限copula・をの有限assignmentと正常recipient／topic境界、identity operatorの水平間隔と氏名、有限命名、集合／親族語の漢字表記の誤抽象化拒否を実Engineで検査する。通常名と名詞topicの正常参照、原文・UTF8根拠・candidateの一致を保持する。 |
+| mashos-api `ai/services/ai_inference/api_piece_v2.py`・`ai/tests/piece_v2/test_b05_preview_visual_mutation.py`・`ai/tests/piece_v2/test_b06_piece_v2_save_api.py` | 作成・画像設定変更・保存のservice全体へ既存のrequest-local停止判定を適用。保存元確認の失敗と機能停止が重なっても停止通知を保持し、取消伝播・認証入口・送信済みwriteの非再送を維持する。 |
+| mashos-api `ai/services/ai_inference/piece_v2_source_ref_http.py`・`ai/tests/piece_v2/test_b05_source_ref_http_candidate.py` | source-ref GETのadapter awaitを既存request-local停止判定で囲み、途中停止と読取失敗が重なっても停止codeでRNのruntime再確認へつなぐ。認証優先・閉じた7field・取消伝播・新規明示GETでの再開を維持し、RN変更や自動再送はしない。 |
+| mashos-api `ai/tests/piece_v2/test_b08_piece_linked_direct_continuity.py` | KEEP先行の参照付きscopeでは明示一人称を保持し、既存の構造化先行文の省略と意味・座標・独立reviewを維持する。 |
+| Cocolon `features/piece/PieceCreateController.js`・`screens/input/InputPieceActionArea.js` | 明示選択形式の処理中／結果不明・受信確定済みPOSTを同じsaved-inputホストの一時休止で本文なしに保持。復帰後は同じ要求・キーを明示確認し、元の自動形式POSTへ戻さない。前候補へ戻れない元POSTの確定source競合・形式不適格・画像設定不許可は、既存GET再確認へ進める。新しいキー・既定設定のPOSTは別の明示操作とし、PATCH自身の拒否・結果不明・保存／取消の元要求保持を維持する。元POSTの確定source・形式・画像設定拒否は、閉じた後も本文なしで保持し、同じ本人・保存入力・元キーの画面移動・稼働設定更新・アプリ休止では新しい操作tokenへ更新する。別本人・入力・元キーと画面破棄では破棄し、同期通知中に選ばれた新しい入力の状態を外側の復帰処理で上書きしない。復帰通知中に画面が破棄された場合も旧controllerを再利用しない。作成目的の保存入力GETは、その取得自身の成功と既存context世代に連続操作を束縛する。中断・拒否された旧取得や、成功返却後に閉じた／切り替えた旧作成処理が、新しいGETだけの再確認結果をPOSTへ進めない。通常の作成操作と、再確認GET後の別の明示作成は維持する。 save flag変更時のsetContextは各境界を確定してからabortし、同期observerの新しいowner／source／停止状態を古いcontextで上書きしない。同一contextのみ保存要求とkeyを保持して明示再開する。 |
+| Cocolon `features/piece/PieceOwnerHistoryController.js`・`screens/PieceOwnerHistoryScreen.js`・`features/piece/pieceExport.js`・`features/piece/pieceApi.js` | 履歴継続の200応答の本文受信失敗も本人・中断の再確認後に確認済み一覧とcursor保持へ接続する。不正JSON・既知HTTP拒否・本人切替では旧一覧を戻さない。 画像準備とOSへ渡す直前のexport GET・書き出し記録POSTが確定停止を返す場合は、その停止情報を一時画像の削除失敗でも保持し、画像操作を止めて既存の稼働設定再確認へつなぐ。同じ設定のまま準備を繰り返さず、再許可後も自動再送しない。停止処理の同期abortで本人・対象・無効化・画面破棄が選ばれた場合、旧通知や新しい本人への設定再読を戻さない。背景化後の遅い停止も処理中のまま残さず、OS開始後の完了・結果不明は維持する。検証済みのPiece専用non-base64 file URIの共有は、最終の本人・保存版・canvas照合から同じ同期処理内で既存`NativeModules.RNShare.open`を開始する。固定RNShare wrapper内のAndroid base64判定待ちを挟まず、待機中に失効した画像の遅延共有を防ぐ。両OSの既存option・返値整形、OS開始後の結果不明と一時コピー寿命は保持する。 共有のnative結果不明を一時停止の有無によらず案内。export準備で版等が異なる場合は同じPieceの明示詳細GETへ進み、準備の自動開始・自動本文置換をしない。失敗済み／通信中の詳細GETは一時停止と稼働設定読込みで本文なしのID・確定案内だけ保持し、fresh tokenで明示再読。abort前に全状態を更新し、同期本人切替後に旧IDを戻さない。visibility応答不明も同IDの明示GETへつなぎ、PATCH再送・未確認の成功案内をしない。 |
+| mashos-api `ai/tests/piece_v2/test_b08_piece_personal_evaluation.py`、Cocolon `tests/piece-v2-export.test.js` | 有限な対象名詞句と外側の留保・条件を区別し、本文と証拠位置を保持する。評価／焦点の対象内に保持した有限な条件もshort_essayへ制約し、名詞・地名内のcueと未証明の境界は従来どおり保持する。export GET／receipt停止・cleanup失敗の組合せをOS未開始で確認し、OS効果の結果へ広げない。 |
+| Cocolon `tests/piece-v2-saved-input-host.test.js` | 保存入力GET自身の成功と明示作成の連続操作を検査。古いJSON読取り、中断・拒否後のGETだけ再確認、成功返却後の閉じる／同値context往復が、新しいsource／keyを自動POSTへ進めないことを確認する。 |
+| Cocolon `tests/piece-v2-state-models.test.js` | 保存中の同期abortがowner／source／disable／invalid／conflict／disposeへ再入しても最新contextを保つこと、同一contextのexact保存要求／keyと旧ACK破棄を検査する。 |
+| Cocolon `tests/piece-v2-preview-display.test.js`・`tests/piece-v2-owner-history.test.js` | 選択形式POSTの一時休止、owner／入力／元キー変更、遅延応答と確定拒否、source競合、同じ詳細の再読・旧操作の失効を検査。前候補なしの確定POST422から明示GET・別操作の既定POSTへ戻ること、PATCH回収・GET422拒否を維持することも検査する。閉じた確定POST拒否の同一入力休止と、本人・入力・キー変更、同期通知中の入力切替でも古い要求を再送しないことを検査する。失敗／通信中の詳細GETと公開変更ACK後の一時停止・稼働設定読込み、本文なし保持・権限喪失・同期abortの本人切替も既存harnessで検査。 |
+
+STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存scopeの本人照合と疑問判定の共用、保存入力GET後の明示作成の束縛を修復した。実結果と検証範囲は[週次レビュー§167](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-object-particle-pause-20261104)へ。
+
+作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。
+
+
+## 2026-11-07 — 全残件再点検：入力・Emlis材料と本人の操作寿命
+
+入力の全9場面／5感情各3強度／自己理解排他／二欄／空欄・通知・draft契約は02A末尾に記載。原recordを固定した後も、入力票・自然応答材料・分析・表示・試験へ適用する。
+
+- `screens/input/EmlisThreadModal.js`：fallback原記録を「考えたこと・感じたこと」「出来事・行動」と区別。原文は変更しない。
+- `natural_reply.py`：元材料と有料履歴から落ちていた `category` 配列を保持。既存promptへ二欄／9場面／各強度／自己理解／記録日時の意味を明記。モデル品質合格・新任意問い接続ではない。
+- `emlis_ai_context_service.py`／`emlis_ai_world_model_service.py`：旧details空配列の通常感情fallback。最強感情が同率なら代表と変化を確定しない。現在naturalの通常callerではなく、これだけで通常返答改善とは説明しない。
+- `lib/apiClient.js`：認証待機中に中止されたrequestをfetch直前でも拒否。同じownerが戻る場合とAbortControllerなしも対象。
+- `AuthContext.js`／`lib/api/account/profileApi.js`／`lib/pushToken.js`／`TutorialContext.js`：開始owner・auth世代・Abortにより古いprofile／push／tutorial操作を別本人へ送らず、遅い初期sessionとlogoutで新sessionを壊さない。
+- `hooks/useOwnerRequestScope.js`：画面の開始owner・auth世代・foreground寿命を既存 `expectedUserId`／`signal` へ結ぶ小さい共通hook。新たな認証手段ではない。MainTabs／FollowList／Nexus／Notice等の遅延callback・応答を同じ本人へ束縛し、一覧選択の世代も別に照合する。
+- `guide/guidesJa.js`／`guide/termsJa.js`：入力9場面・各強度・二欄と通知／通常表示filterを実仕様へ同期。法的規約の意味・公開設定を新設しない。
+
+新規遅延回帰は `tests/api-client-cancellation.test.js`、`account-profile-owner-race.test.js`、`tutorial-owner-race.test.js`、`private-history-owner-race.test.js` 等。具体的な合否と変更pathは第10回§15。source候補とLive／build／本人確認は分ける。
+
+修正版11件の実値は第10回§15.7と `tests/fixtures/cocolon-input-contract-samples-20261107.json`。実screen照合12追加で入力suite78成功、API側同一byte票と13検査で正規化・insert・元7field・累積compilerを確認。全件理解・実機成功とは区別する。
+
+
+## 2026-11-07 — 全残件再点検の最終追加修復・反映記録への接続
+
+入力・本人寿命の追加修復は固定RN56e65b1aから一回の署名buildへまとめ、実1.0（7601）の既存内部グループTestingまで確認した。後続e330は資料／CI／隔離test lockだけでアプリsource差分0。実screenとAPIで同一byteの11入力票を検証し、全9場面・各強度・二欄・排他・通知の契約を省略しない。端末での全修復受入れや一般分析品質とは区別する。
+
+この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
+
+
+<a id="auxiliary-asset-reuse-finite-focus-cognition-files-20261108"></a>
+## 2026-11-08 — 補助経路活用AR-01：有限役割・認識補助のfile差分
+
+既存の[本人宛通常応答・保存再読](#2026-10-31-本人宛通常応答保存再読のfile地図)へ接続する候補source差分。API **e14d4fec18394e5257508f3e92100f9cc1bf536e** の8pathで、旧semantic inventory／body inverseの役割・認識範囲と独立比較の責務を現在のnaturalへ適合する。旧parserをそのまま呼び戻さず、本人の既定補完・未来達成写像・固定本文を継承しない。
+
+| 既存／新path（mashos-api） | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py` | 明記格と有限な焦点構文を役割へ読み、比較用witnessと研究生成用の焦点／認識witnessを分離。原文座標・未判定・全文coverage=falseを保持 |
+| 新`ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_cognition.py` | 認識行為・記載された認識時点・埋込み内容・認識前の記載を別の元source範囲として保持。省略認識者・発生事実・他source訂正の判断をしない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 元原文・SYSTEMを保持した明示研究opt-inの補助受口。通常use_meaning_support=False、件数／bytes内に入らない補助だけ省く |
+| `ai/tests/test_emlis_natural_reply_meaning_reuse.py` | 有限焦点の役割・原文座標・比較境界と未対応を確認 |
+| 新`ai/tests/test_emlis_natural_reply_cognition.py` | 認識／内容の範囲分離、時点・順序・未対応構文の境界を確認 |
+| `ai/tests/test_emlis_natural_reply_meaning_budget.py` | 研究補助の範囲・上限・原文非切詰めと通常不変を確認 |
+| `ai/tests/test_emlis_natural_reply_application.py` | 既存service／隔離PGlite保存・非生成再読・公開DTOとの分離を確認 |
+| `.github/workflows/analysis-observed-content.yml` | 既存検証工程へ新cognition suiteを接続。新しい実行controllerや品質Gateは追加しない |
+
+既存emlis_thread_service.py／store／providerが本人材料の資格、1回の受領、private artifact保存とGET非生成再読を担当する配置は維持する。これらをe14の新規変更fileへ数えず、今回DB・RN・通常作者・endpoint・依存・提供構成を追加していない。
+
+237局所PASS（meaning111／cognition47／budget21／application58、隔離PGlite）と、同commitのActions42480572923／42480572924 successを確認。baseline16＋構造補助16の架空32実生成は49.554327秒・全HTTP200／stop、学習／新load／retry0・同PID／元source・Analysis重み不変・health200。人物・時点・話し方の残差で構造補助は通常不採用。追加の原文表記補助6構成は私的prototypeで完了し、全HTTP200／stop・9.090525秒。同6sourceの3版18本文を独立照合し、役割反転と本人役割の誤継承の局所修復を確認した。一方、記録者混入・原文外因果・本人宛の語り口や感情と未記載時点の結合が残り通常不採用。短く正しい一度の言換えをそれだけで失敗にしない。補助表現と専用SYSTEMの同時変更で、単独要因の効果とは断定しない。e14 sourceへこのprototypeは反映していない。 CPU／CI・stop数を一般意味品質や全資産回収完了へ換算しない。
+
+実32本文の隔離SQLでは全32 FINAL保存・同／別service GET一致、GET provider／reader／engine再実行0、private report非公開・analysis NOT_GENERATED。baseline16は通常False、candidate16だけ研究contextの実helper Trueでcaptured messages／material一致を確認した。capture originalのuser_idを通常SQL projectionが省くため全32のsource参照は異なり、両参照をprivate保持・再計算する。私的prototype6はSQL未実施。実DB0、保存成功を意味合格にしない。保存32reportは範囲内非衝突4／未判定28／衝突0、52節のparsed5／checked4／未照合48、全文coverage全32 false。認識helperはsource補助で、自由文の認識一般比較済みとはしない。
+
+感情選択そのものは元sourceに存在し、未明示感情とする誤判定を引き継がない。次は人物参照、原文外因果、未記載の期間／時点への感情結合と本人宛の語り口を修復し、役割方向と正しい短文を保持する。
+
+STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取・認識helper・研究補助選択）。Render通常API497f7008へe14は未配置、通常naturalは補助なしを維持し、今回Render／実DB／RN／build変更0。現在の結果と未確認は[最新weekly§23](weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-finite-focus-cognition-20261108)、[Emlis構造](current_structure/01_emlis_ai_current_structure.md)、[CMEE構造](current_structure/04_cmee_current_structure.md)、[既存AR-01 trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)へ戻る。旧設計・全地図を再生成する作業へ置換しない。
+
+
+<a id="piece-refined-separated-files-20261109"></a>
+## 2026-11-09 — AR-04 refinedの別sourceから通常サーバー保存まで
+
+APIca4140ab。既存5private型／private保存v1と唯一作者を継承し、既存七項目DTOとDB schemaのままstageを接続。STRUCTURE_MAP_DELTA_PRESENT。下表は今回のexact13変更pathと既存責務。live反映／RN／画像／端末は未成立。
+
+| path（mashos-api） | 責務・境界 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 明示exact回答のsource-ref取得＋fresh再検証、private bindingを検証した既存canonical lineage投影。原入力／補足を分離 |
+| `ai/services/ai_inference/piece_v2_source_ref_http.py` | 既設transportでexact1回答identity queryを明示選択。queryなしoriginal維持、本文／owner／stage／重複／未知query拒否 |
+| `ai/services/ai_inference/piece_v2_preview_service.py` | stage別取得／再認可／投影、既存生成・発行・再起動再読・visual変更。保存再読で作者を呼ばない |
+| `ai/services/ai_inference/piece_v2_safety_review.py` | 2source別scan、既存meaning／planとauthor-free保持検査、short_essayのみ。新作者なし |
+| `ai/services/ai_inference/piece_v2_save_service.py` | 保存前の選択source／current canonical lineage照合。既存保存済み同key再送は非生成・同消費 |
+| `supabase/migrations/20261109024943_piece_refined_source_fence.sql` | 既存issue／visual／save3関数だけsource fence適合。実ANSWER frame hash、current ADD lineageとfinish。ACL／RLS／schema／quota不変、未live適用 |
+| `ai/services/ai_inference/api_contract_registry.py` | 既設source-ref同contractのquery説明を同期 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | exact query／七項目応答／再認可の説明、登録変更なし |
+| `ai/tests/piece_v2/test_b05c_refined_source_ref_projection.py` | exact7参照、別commitment、opt-in／競合／canonical DB投影 |
+| `ai/tests/piece_v2/test_b05_refined_preview_services.py` | 合成保存controlでservice／Safety／HTTP、本文差替え・再hash等拒否 |
+| `ai/tests/piece_v2/test_b05_refined_preview_saved_pipeline.py` | 実有限Q2＋隔離SQLから既存作者／review／preview／visual／save／owner再読。合成Auth、native画像なし |
+| `ai/tests/piece_v2/test_b05_refined_source_fence_sql.py` | real ADDの3RPC、19変異×3、frame byte、既存original／natural、権限保持。native並行lock検証ではない |
+| `.github/workflows/analysis-observed-content.yml` | 既存PGlite工程へ新4suiteを追加。新workflow／controllerなし |
+
+変更しない既存owner：CMEE `piece_refined.py`（2partition意味／計画／唯一作者とprivate非生成再読）、`piece_v1c.py`／`piece_source.py`（原入力意味・本文作者）、`piece_v2_generation.py`（canonical B8照合）、`piece_v2_store.py`（既存RPCと保存契約）、owner service（同じ保存本文／recipe再読）。今回の本文意味能力追加は0で、前回の実ADD2本文を通常保存へ接続した。[全結果・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。
+
+### 2026-11-09続行 — RN本人補足選択のexact7変更path
+
+RN[4a103688](https://github.com/MassyuRed/Cocolon/commit/4a1036880c51983d3088b3132f6ad4b6f48abc1e)、親26c4453e。上記APIca4140abの13pathは不変。新production file／controller／型／DB schema／本文作者なし、STRUCTURE_MAP_DELTA_PRESENT。
+
+| path（Cocolon） | 責務・境界 |
+|---|---|
+| `screens/input/EmlisThreadModal.js` | 第一本人回答を別blockで表示し明示CTA。DTOのcurrent観測／解決状態を照合、exact回答IDだけを捕捉。本人／source／runtime／背景化／dismiss境界 |
+| `features/piece/pieceApi.js` | 既存七項目refined要求、選択ID queryと同じ回答／stageの応答だけを受理。queryなしoriginalは維持 |
+| `screens/input/InputPieceActionArea.js` | 既存savedInputに任意の回答ID1項目。stamp／GET／再確認／再作成へ同じ選択を保持、旧保存結果確認は元要求を優先 |
+| `tests/emlis-piece-refined-choice.test.js` | 新45件。表示／選択／不適格hint／古い操作／本人・背景・遅延dismiss、既存original入口 |
+| `tests/piece-v2-source-ref.test.js` | 選択GET／exact七項目／不正ID・応答・認証前後と既存POSTの検査 |
+| `tests/piece-v2-saved-input-host.test.js` | GET→POST、同選択retry／再確認／再作成、旧応答失効と以前の結果不明saveの同要求確認 |
+| `.github/workflows/piece-rn-contracts.yml` | 既存React工程へ新suiteとmodal変更pathを追加。新workflow／Gateなし |
+
+`PieceCreateScreen.js`／`PieceCreateController.js`／`useEmlisThread.js`／Input・履歴の呼出し元／MainTabsのsaveRecoveryは既存ownerを再利用し変更しない。全UIのrefreshや画面遷移に回答本文を保存しない。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。[結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。
+
+<a id="piece-model-candidate-connection-20261109"></a>
+## 2026-11-09 — Piece 4B候補接続の変更file地図
+
+API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。既存保存source→候補→CMEE→B8／Safety→preview／saveへ接続する。通常保存／rendererの第二作者は作らない。詳細と限定は[observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md](./observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)、実装正本は補助経路活用設計§7.1。
+
+| API path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | 完全原入力と別回答のmodel材料／block partition、旧prepare ID保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py` | PieceModelInputV1／prepare／receive／厳密再bind／既存Engine dispatch |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 旧作者との一致を課さず、検査済み候補bytesで既存Artifactを確定 |
+| `ai/services/ai_inference/piece_model_source.py` | 専用prompt、共有4B HTTPS単発、設定変更／期限／size／finish検査 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存有限readerとS7を適合し全block意味保持、実名／参照／scope義務保持 |
+| `ai/services/ai_inference/piece_v2_generation.py` | B8 model_candidate接続とsource／plan／receipt／artifact再bind |
+| `ai/services/ai_inference/piece_v2_safety_review.py` | model本文のauthor-free再検査とshortessay単独互換 |
+| `ai/services/ai_inference/piece_v2_preview_service.py` | 初回取得／同要求一時lease共有／caller別再検証、保存済再読0取得 |
+| `ai/services/ai_inference/api_piece_v2.py` | 取得待ち中のfeature／ttl／renderer／palette変更をRPC前に拒否 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | private selectorと期限差、公開wire不変 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存CIへmodel／変異／並行／隔離保存testsを追加 |
+| `ai/tests/test_piece_model_source.py` | HTTP／設定／size／cancel／finish／normal-refined材料 |
+| `ai/tests/test_piece_model_candidate_independent.py` | 独立42変異・正対照、主体／格／否定／留保／実名／partition |
+| `ai/tests/test_piece_model_finite_scope.py` | 有限scope12、SELF／感情／receipt差替え／fallback拒否 |
+| `ai/tests/piece_v2/test_b05_piece_model_concurrency.py` | 同key共有／cancel／runtime変更／ACK待機16 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | normal3plan＋実Q2 A/Cのmodel receipt→隔離保存／再読。11/13 test-only追加：normal資格sourceのcheckpointとApplication材料を保持した同source保存 |
+| `ai/tests/piece_v2/test_b05_piece_qualified_checkpoint.py` | 11/13 test-only追加：資格成立済みADD sourceをDB終了・復元後も同ID／七項目／履歴／prepared／messagesのまま既存保存へ。実GPU／実Auth／nativeの証明はしない |
+| `ai/tests/helpers/emlis_q2_postgres.cjs`／`ai/tests/test_emlis_q2_application.py` | 11/13 test-only差分：既存隔離DBの明示checkpoint dump/load、復元時の再seedなし、通常の新規初期化は維持 |
+| `ai/tests/test_cmee_piece_request_saved_pipeline.py`／`ai/tests/piece_v2/test_b05_refined_preview_saved_pipeline.py` | 11/13 test-only差分：既存normal／Q2 ADD helperのprepare／finish分離。source_refと原本・時刻を取得前に固定し、同DBから再開 |
+| `ai/tests/piece_v2/db/test_b05_reviewed_preview_issuance.py` | 単独shortessay Safety互換と旧3format／意味変異control |
+
+RNの変更は`features/piece/pieceApi.js`のpreview POST期限のみ250000ms、`tests/piece-v2-source-ref.test.js`でPOSTとGETの期限範囲を確認。既存source GET／PATCH／再読、explicit補足選択、owner変更／cancel・未確定保存回復は継承。DB migration新規0、公開DTO新field0、renderer新規0、依存追加0。設計差分3正本は`b2d33ace`で先に反映。商品00・Piece／CMEE map・weekly§40・trialを今回同単位で更新。STRUCTURE_MAP_DELTA_PRESENT。
+
+実測追記：製品95e1b5d6後のAPI41fc2987はnative test fakeの2種を新しいprivate call shapeへ適合しただけで、意味／SQL期待は維持。追加fileは`ai/tests/piece_v2/db/test_b10_preview_application_native.py`（明示_model_input=None受口）、累計API18path。再CI42564013293全成功、新model129 PASS。実4B2件とRN同19native失敗は[trial](./observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-actual-fictional-20261109)へ。native入力とjob bodyは4a103688から不変、画像品質受入れは未完。
+
+<a id="piece-model-evaluation-reuse-20261109"></a>
+## 2026-11-09 — AR-04 本人評価の既存読取をPieceモデル本文へ接続するfile地図
+
+API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`、親`41fc29870c42feef8c992159fff90558f86d67e4`。D03／D07／D21の独立読取・意味保持責務を、Pieceの既存readerから再利用。STRUCTURE_MAP_DELTA_PRESENT。新しい作者・controller・public DTO・DB schemaは追加しない。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存`_personal_evaluation_shapes`をmodel本文の自己評価同値へ接続。視点・対象・程度・肯否・時点／留保、全文spanとscopeを照合 |
+| `ai/tests/test_piece_model_evaluation_reuse.py` | 正常常体／丁寧体と明示SELF倒置、主体／対象／程度／肯否／時点／留保・条件理由追加・部分読取・欄境界等164件 |
+| `ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py` | 既存service／reviewと隔離SQLで合成本文2例×3planの保存・非生成再読6件 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model試験stepへ上記2fileを追加。新job／workflowなし |
+
+既存`cocolon_meaning_experience_engine/piece_source.py`／source・admission・作者・provider・SQL・RNは今回不変。対象7file299 PASSと実4B12callの範囲、親でも再現する旧評価19失敗、再bind保存の限定は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-reuse-20261109)へ。旧native V4の19失敗とは別集合で、今回はnative／署名build／配布を行っていない。
+
+<a id="piece-model-field-slots-20261109"></a>
+## 2026-11-09 — AR-04 欄名付き候補・既存焦点読取のfile地図
+
+API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`の7path、続行`cfd3d60d476a1e6f7fbff16b86897f9614504cd3`の3path、重複除外9path。既存の明示candidate_format→canonical投影、原文scalar・source role、FOCUS読取をPieceのmodel armへ適合する。作者／公開wire／DB／RNを増やさない。STRUCTURE_MAP_DELTA_PRESENT。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | 既存partition→固定slot名・exact literal／source role。source資格の代行やsource変更をしない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py` | 明示piece.field_slots.v1受領・slot完全性・raw保持・canonical投影・format付き再受領一致。旧None互換 |
+| `ai/services/ai_inference/piece_model_source.py` | 全sourceを保持した送信viewと欄名付き出力要求。単発取得、期限／size／cancelとselector境界は保持 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存_FOCUS全文をmodel本文読取へ再利用。既知自己焦点の原表面保持、名前／参照／scopeのS7保持 |
+| `ai/tests/test_piece_model_source.py` | 合成HTTPのprivate wireを新formatへ適合、source／raw／単発・metadataの検査を保持 |
+| `ai/tests/test_piece_model_field_slots.py` | 新66例。slot過不足・重複・値入替／結合・format改竄・Unicode／CRLF・旧互換、FOCUS正24／refined1／変異8 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | 合成応答のwireだけ欄名付きへ。既存SQL保存／非生成再読の意味・期待を維持 |
+| `ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py` | 旧焦点原表面を強制変換せず通常3planで保存・再読する合成3例 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model stepへ新slot testを追加。新workflow／jobなし |
+
+対象8file368 PASS、実16callの内訳、不採用literal案、旧1→新6の限定、通常15組の合成再bind保存、新refinedの通常SQL未検証、旧offline checkpointとの区別は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。全Piece／一般意味品質・本番・画像・本人端末の合格ではない。
+
+### 2026-11-09 AR-04 本人補足のTHEN接続（API5c042ed5）
+
+既存ownerの改修で、原入力のsource資格／SQL／公開API／RNの追加はない。8pathの差分は次のとおり。
+
+| Path | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` | 既存_THEN／_FEELINGで完全SELF補足の相対時点を原文保持。認定prefix範囲だけを導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 認定済みsupplemental時点prefix内だけ参照例外、既存KEEPへ接続 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 完成本文のTHEN全文を独立比較、時点脱落／NOW化等を拒否 |
+| `ai/tests/test_cmee_piece_supplemental_then_feeling.py` | 新25件、原文／evidence・native／model・時点変異・資格拡大なし |
+| `ai/tests/piece_v2/test_b05_refined_preview_saved_pipeline.py` | 既存正規Q2／保存helperの原文・tier引数化、既存期待を維持 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | 新INVITEのPAST／NOW×3plan通常SQL回帰、provider実数counter |
+| `ai/tests/test_piece_model_field_slots.py` | 旧NEW_REFINEDをtyped Engine限定fixtureと名称／説明訂正 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存model検証へ新THEN testを追加 |
+
+編集plan併記案のschema／prompt／service／新testは実比較で本文差0のため通常採用せず撤回。実結果・資格訂正・残件は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-eligible-refined-4b-20261109)。
+
+### 2026-11-09 AR-04 生成制約のPiece接続（APIa08c003c）
+
+既存共有serverのdecoder能力をPiece専用private要求へ接続。新service／selector／公開DTO／DB列／RN pathはない。6path。
+
+| Path | 今回の差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 既存LMFEのexact欄＋補足先行mask。自然Emlis／Analysisは旧呼出し・応答を維持 |
+| `ai/services/ai_inference/piece_model_source.py` | private candidate_format要求と実適用markerの一致を必須化、旧server無視を拒否 |
+| `ai/tests/test_piece_model_server_constraints.py` | 新37件。実pinned parser／HTTP／serving closure／順序とEOS、onegenerate・budget互換 |
+| `ai/tests/test_piece_model_source.py` | request marker・欠落／別型／別値／旧server拒否、raw無修補・単発維持 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | 合成固定responseのみ新markerを明示、旧録画へ自動付与しない |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存pinned GPU parser依存をCPU検証へ導入し新testを実行、Render依存不変 |
+
+最終GPU提供source SHA256 5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3。実比較・保存再読・限界は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。
+
+<a id="piece-prose-learning-20261109"></a>
+## 2026-11-09 — AR-04 一般文章整形・Piece専用adapterのfile地図
+
+API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。既存ownerのPiece明示profileに閉じる差分。STRUCTURE_MAP_DELTA_PRESENT。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 明示optionalの独立Piece adapterをPiece profileだけへ適用し、natural base／Analysis defaultを保持。実adapter revisionを返し、利用後復元・復元失敗時停止を実装。 |
+| `ai/tools/training/train_piece_model_adapter.py` | 既存assistant-only CEを再利用するfresh config-only LoRA。架空24行、最大48update／480秒、全targetとEOS・保存非学習reloadを固定。 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存wish・名詞参照・copula・有限未決定の表現差をmodel本文の独立読取へ再利用。同じ実rawの全量照合を保ち、未知の評価対象「は」は拒否。 |
+| `ai/tests/test_piece_model_server_constraints.py` | Piece専用adapter適用／default復元・自然Emlis／Analysis不変、設定不正と復元失敗時停止を既存serving検証へ追加。 |
+| `ai/tests/test_piece_model_adapter_training.py` | 固定24行・scope／上限・assistant-only CE／終端・fresh初期値と保存reloadの限定学習契約を確認。 |
+| `ai/tests/test_piece_model_prose_register.py` | wish・copula・同じprefixの未決定文の同値と変異拒否、source／scope／視点／原文の保護を確認。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path triggerとmodel検証stepへtraining／register testを追加。新workflow／job・Render依存の追加なし。 |
+
+既存共有servingへ明示optionalのPiece専用adapterを追加する候補で、`piece.field_slots.v1` profileだけに使用する。自然Emlisはbase、Analysisは既存default adapterを維持し、Piece利用後は元adapterへ戻す。復元失敗時は提供を止め、別adapterでAnalysisを返さない。新`ai/tools/training/train_piece_model_adapter.py`は既存assistant-only CE処理を再利用し、固定24行、最大48update／480秒、既存構造configだけからfresh LoRAを作る。旧Analysis学習済tensorの初期値転用や重み結合はしない。 既存のwish／名詞参照、copula、同じ原prefixの有限未決定表現の読取をmodel armへ限定再利用し、追加生成なしで学習後の同6rawを旧2採用→新5採用へ接続した。主体・相手・欄・scope・否定・時点・程度・留保を保ち、未決定prefixの変更や追加を許可しない。 元の独立CMEE／S7とnative経路の拒否条件を保持し、既存未対応の評価対象「は」を「が」へ読み替えて採用しない。保存済みの同一実rawを修補・再生成せず、旧新readerの採否差と隔離保存を別記する。
+
+新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF、Render配置・RN変更／build・実DB反映は行っていない。source資格・二欄・原入力／補足・raw受領・CMEE/S7・保存後非生成の境界を保持する。CPU採用、学習loss、実生成、隔離保存、通常提供、同版native画像／本人端末、正式商品受入れを分ける。
+
+[実測・未採用・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。
+
+<a id="piece-narrator-evaluation-20261109"></a>
+## 2026-11-09 — AR-04 本人一人称・評価対象のfile地図
+
+API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。親API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`からexact5path。STRUCTURE_MAP_DELTA_PRESENT。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 意味上のSELFと書かれた一人称を別比較し、同欄の本人継続へ省略を束縛。既存FOCUSの原語順・終端copula組とnativeの隣接自己評価の省略を全文の独立読取へ再利用。 |
+| `ai/tests/test_piece_model_narrator_voice.py` | 6本人表記とその置換・先頭省略・別欄／別人借用、感情／評価／焦点／有限動作における語り口保持と変異拒否を確認。 |
+| `ai/tests/test_piece_model_prose_register.py` | 同じ実rawの既知焦点語順・copula／registerと隣接自己評価の省略、scope・参照・視点・肯否等の保持／拒否を追加確認。 |
+| `ai/tests/test_piece_model_evaluation_reuse.py` | test名と同作者隣接評価省略の1期待をnative由来の正期待へ整合。先頭・にとって・別field・OTHER・異self・肯否等の拒否は維持。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model検証へnarrator testを追加。新workflow／job・依存・通常生成SYSTEMの変更なし。 |
+
+変更は既存private model reader・その一人称検証・既存workflowを起点とする。`piece_model_source.SYSTEM_MESSAGE`の追加2指示は比較で不採用となったため完全撤回し、元ad417と同じSYSTEMを維持する。private model readerは意味上のactor=SELFを維持したまま、各欄に書かれた一人称を別の比較要素として保持する。同一欄の既に成立した本人継続でだけ、その直前の本人表記を省略読取へ用い、別欄からの本人表記借用・raw補修はしない。評価対象「は」の受理文法は拡張しない。公開型・DB・source資格・原入力／補足・S7／native経路の既存保護境界は変えない。 既存FOCUS文法が認定する原語順と終端copula組、およびnativeで成立済みの明記した同本人の隣接自己評価の主語省略を、model private読取へ限定接続した。native既定の意味保持契約は不変である。参照先・全scope・本人視点・元一人称・評価base／程度／肯否／時点／留保を独立照合し、先頭省略・にとって脱落・別field・OTHER・異なる本人表記・肯否変更等は拒否する。既存evaluation-reuse testの同作者省略を常時拒否する1期待だけを、このnative由来の正期待へ整合させた。同じ新22rawは16→20採用、旧22rawは最終readerでも16採用。未知の語義や意味欠落を許可する差分ではない。
+
+本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。
+
+[実測・限定・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
+
+
+<a id="piece-source-authoring-constraints-20261109"></a>
+## AR-04 原文由来の生成条件 — 5pathの地図差分
+
+**11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。
+
+| Repository/path | 現責務 |
+|---|---|
+| API `ai/services/ai_inference/piece_model_source.py` | 再導出一致したsource requestから既存評価／公開役割を欄別投影し、設定済み4Bへ渡す |
+| API `ai/services/ai_inference/piece_v2_preview_service.py` | trusted requestと準備を直接／共有初回取得へ渡す。保存後再読は取得前return |
+| API `ai/tests/test_piece_model_authoring_constraints.py`（新規） | 元／補足・欄・位置・改変・曖昧性の条件投影 |
+| API `ai/tests/test_piece_model_authoring_application.py`（新規） | 設定provider・既定OFF・custom callback・同key共有・3plan SQL保存再読 |
+| API `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存model検査へ新2testを追加 |
+
+公開DTO／DB／RNの追加pathなし。新test2pathを上記地図へ追加し、全repositoryの全blob意味監査は主張しない。関連15file756 PASS、STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="piece-role-learning-coordination-20261109"></a>
+## 2026-11-09 AR-04 明記役割学習・本人の過去2動作・同版文字bitmap
+
+**11/9・AR-04最新：** API `858b6b499948856acad3ab2835e6a2a92683d146`。原文の評価・留保を生成条件へ渡す前段674bを継承し、新作架空24行をfresh Piece LoRAで一回48更新。旧重みaffbとの同22材料比較で、氏名残存8例が明記役割へ置換され、限定CMEE採用は14→21。残る自然な過去2動作の連用接続を、旧body inverseの本人継続責務と既存finite readerを利用して独立照合できるようにし、同じrawのまま22採用へ到達した。隔離SQLは旧42保存／24拒否→新66保存／0拒否、保存後0再生成。関連16file846 PASS、Piece／Analysis CI成功。同版本文の透明文字bitmapは新4／既存44ともPASS、旧V4同19失敗は継続。新c496重みは通常未採用、selector OFF、GPU元提供へ復元済み。本番・本人端末・全面画像の確認、広い材料とrefined、AR-01反転・他ARは未完了。
+
+API既存 `ai/services/ai_inference/piece_v2_content_policy.py` のmodel完成本文armを限定改修、新 `ai/tests/test_piece_model_coordinated_actions.py`（90反例）と既存 `.github/workflows/piece-b2b-isolated-postgres.yml` を更新。source側／共有reader／公開型／DB／作者の追加なし。原文のframe・公開役割から4Bへの生成条件はparent674bの `piece_model_source.py`／`piece_v2_preview_service.py` と新2testを継承する。
+
+RNは検証用4path：`tests/native/piece-ar04-adopted-native.json`（新規、実隔離保存版と同一）、`tests/native/piece-text-metrics-ios.mm`、`tests/piece-v2-renderer.test.js`、`.github/workflows/piece-rn-contracts.yml`。製品renderer変更なし。preview／保存／exportの入力と3hash・Emlis文字・paletteはJS180 PASS、固定3行の透明文字bitmapは新4／既存44 PASS。旧V4の19失敗を保ち、RN CI全体GREENではない。全面Card／RN実wrap／本人端末の確認ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。現在の読解範囲・実モデル／隔離SQLの区別・失敗履歴・通常未採用・次は既存trialの `piece-role-learning-coordination-20261109` 節とweekly§48を参照。新c496候補の同22材料・66保存の完了runを繰り返さず、より広い未学習材料と適格refinedの意味保持・単独伝達、全面Card／RN実描画と同版保存画像、通常統合・本人端末へ進める。新重みや通常selectorを自動採用しない。AR-01の役割反転とAR-02／03／05／06／07／08の新規活用は継続残件。
+
+
+<a id="piece-mixed-source-scope-learning-full-card-20261109"></a>
+## 2026-11-09 AR-04 混在本文・欄／補足と全面Card
+
+**11/9・AR-04最新：** API `651f1f38`。原文KEEPの文と別欄の既知有限動作の語尾編集を、全partの既存S7を保ったまま併用できるよう修復。追加16材料の同rawは各版9→11例保存可能、旧新とも33保存／15拒否。次に独立新12＋旧役割12の24教材でfresh一回48更新し、c496基準18材料は13→新e924の14採用、隔離SQLは旧39保存／15拒否→新42保存／12拒否、保存後0再生成。新3例の一人称／役割化を修復した一方、過去・否定・留保対象の3rawは拒否を維持し、新重みは通常未採用・selector OFF。既存採用1例の全面Card／保存PNG／view-shotは1080×1350で全byte同一・目視確認。旧V4別試験は失敗継続。元GPU提供PID35902へ復元、healthと前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+API既存 `piece_v2_content_policy.py::validate_source_meaning_preservation` 内のmodel専用KEEP比較へ既存finite keyを限定再利用、新 `ai/tests/test_piece_model_mixed_keep_register.py`（45）、既存model workflowへ追加。S7全part・source／plan／fieldを保持し通常nativeのliteral契約は変更しない。既存refined SQL helperへexpected_safety_state既定ready／明示adjustedと、3planの名前役割化保存検査を追加。新作者・公開型・DB・provider追加なし。
+
+RN検証3path：`tests/native/piece-rn-canvas-fixtures.cjs`／`tests/native/piece-rn-canvas-ios.m`／`tests/piece-v2-renderer.test.js`。前回の実保存 `piece-ar04-adopted-native.json` を同版全面Card・保存PNG・view-shotへ追加し、v1/Cocolonの旧期待を維持して新v2/Emlisを検査。製品RN不変。
+
+STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。 詳細はweekly§49と既存trialの同anchor。
+
+<a id="piece-finite-action-source-conditions-20261109"></a>
+## 2026-11-09 AR-04 全文有限動作の生成条件 — 全file地図差分
+
+**11/9・AR-04最新：** API `39e31584`。既存の有限節／活用／格読取を、全文が既知動作であるsource partの生成条件へ接続。異なる一人称が続く二動作の第二否定を修復し、固定e924の同18材料は14→15採用。最終隔離SQL108は旧42保存／12拒否、新45保存／9拒否、保存後0再生成。途中の受動時点・別欄評価の退行を避け、受動欄／混在partは元条件を維持する。評価の過去時点・未決定対象の2rawと、模型作りのsource資格外は残る。新学習0・重み不変・通常未採用／selector OFF。GPU元提供PID36489へ復元、healthとEmlis／Analysis前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+`piece_model_source._source_action_constraint`は、既存`piece_source._finite_self_person_action_account`の全文資格と`natural_reply_meaning._clauses/_FORMS/_arguments`の一意な完全節読取を再利用する。各source partの全sentenceが既知の明示SELF・頼む／相談する／伝えるの事実過去として成立した場合だけ、欄別`control.authoring_constraints.field_slots.<key>.required_actions`へ本人表記、原文活用形／述語、肯否、時点、事実性、voice、相対日、格と相手／対象、scalar範囲を渡す。受動文を含むfieldでは全動作条件を追加せず、同partの別fieldは独立させる。評価・感情・opaque文・未決定を含む混在partは従前の送信内容を保持し、既存の名前・評価条件も失わない。原requestからのPreparedRequest再導出一致、原入力7fieldと本人補足の分離、SYSTEM、条件なし既定送信bytes、独立採否／S7、保存後非生成再読、公開DTO／DB、selector既定OFFは維持する。期待正文、生成後修補、新しい受理文法、別作者は追加しない。
+
+| Repository/path | 今回の現責務 |
+|---|---|
+| API `ai/services/ai_inference/piece_model_source.py` | 原request／PreparedRequest一致と全source partの完全有限動作被覆を確認し、受動fieldを除く欄へ動作条件を投影。混在partの旧送信内容を維持 |
+| API `ai/tests/test_piece_model_authoring_constraints.py` | 六一人称・動作ごとの肯否、完全節／欄境界、受動field抑止、混在partで旧条件保持、source改変拒否を確認 |
+
+開始版651f1f38に対する最終製品差分は上記既存2pathだけ。途中の`piece_v2_content_policy.py` helper抽出は撤回し同版へ復元、採否検査・公開型・DB・RN・新作者は不変。最終17file940 PASS／47.98秒・既存warning1。最終Piece CI42635458286はcompleted／success（2026-11-09T14:35:18Z）、model17file940 PASS／35.39秒・既存warning1。Analysisは最終headの変更pathでは起動対象外。STRUCTURE_MAP_DELTA_PRESENT。新規fileの追加や全repository意味監査ではない。
+
+最終の同18材料・108隔離SQLと、累計53 HTTP／最終追加0 HTTPの由来、途中不採用・残差は[実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-finite-action-source-conditions-20261109)とweekly§50へ戻る。
+
+今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。
+
+
+<a id="piece-activity-source-natural-narrator-20261110"></a>
+## 2026-11-10 AR-04 — 活動名sourceと候補文体の変更file地図
+
+API `625b4704027abd52749222196b990edd3d4373e4`＋`c70671a85a985c75a04f7c0ee35519e5ae4547d9`。既存5pathだけで、新entrypoint／型／DB／RN／provider・共有contractはない。
+
+| API既存path | 今回の責務・差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | `_personal_evaluation_shapes`の既存bare本人評価targetへ限定活動名を追加。全target・意味frame・原文／根拠を保持し行動へ昇格しない。 |
+| `ai/services/ai_inference/piece_model_source.py` | 既存SYSTEM末尾へ実比較した自然な本人語りの共通一文。未採用候補の指示だけを継承し、本文修補・新作者を作らない。 |
+| `ai/tests/piece_v2/test_b08_piece_bare_finite_evaluation.py` | 活動名・構文・本人6表記・曖昧／未知／有限節／対象境界の新37例。旧短文の失敗期待を変更しない。 |
+| `ai/tests/test_piece_model_evaluation_reuse.py` | 活動名評価4例の同意味受領と対象／本人／肯否／時点／程度／留保の変異拒否。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 上記既存source評価testのpathを追跡し、新37例を既存model17工程へ追加。従来対象の削減なし。 |
+
+既存`piece_source._personal_evaluation_shapes`のbare自己評価（`は`／`にとって`）だけへ、既存`_SIMPLE_NOUN`で全文照合できる漢字／カタカナstem＋「作り」の活動名を限定追加。stem中の何／誰、空stem、助詞・有限節・参照・内部空白・引用・曖昧なが焦点は新armへ入れない。対象名詞句全体・本人表記・評価base／程度／肯否／時点／留保・原文／根拠座標を保持し、「模型を作った」等の実行済み行動には変換しない。共有の名詞文法・公開型／DB・独立CMEE／S7・原入力と本人補足・保存後非生成の責務は維持する。
+
+STRUCTURE_MAP_DELTA_PRESENTはsource target資格の限定拡張による。役割判断／保存／意味検査Gateの新設ではなく、CMEE共有mapの責務／契約は不変。現normal送信25例は実比較と完全一致、FRESH03の新source生成条件付きUSERは実4B未確認。最終model17fileは1000 PASS／87.28秒・既存warning1、新活動名37 PASS／2.70秒。合計1037はこの二つの非重複集合だけで、旧2file再確認309 PASS／1 FAILを加算しない。既存`test_short_bare_input_is_not_padded_to_satisfy_a_format`は、短い「僕は絵が好き。」を拒否する旧期待に対し本文を生成して失敗する。開始c9の同source関数へ戻した実testも同じ失敗で、期待変更・skip／xfailは行わず既存残件へ記録した。最終API c70671a8のPiece CI42721103246は全39step success（model1000 PASS／57.25秒、活動名37 PASS／2.28秒）。source625b470のAnalysis CI42720193625は全19step success。最終promptのみのpathはAnalysis起動対象外であり、最終API同headのAnalysis成功とは呼ばない。
+
+[実結果・通常不採用と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110)。
+
+
+<a id="piece-current-wire-register-native-20261110"></a>
+## 2026-11-10 AR-04 — 現行wire保存結果と既存native検証のfile地図
+
+API fce72bcc＋4da69cdeとRN4424976bは以下の検証9pathのみ。製品source／生成prompt／source文法／API／DB／描画責務を変更せず、STRUCTURE_MAP_DELTA_NONE。現行FRESH03実4B→CMEE→隔離SQL3と文末案26のSQL78を確認したが、文末案は全raw不変で不採用。
+
+| Repository/path | 今回の差分・保持境界 |
+|---|---|
+| API `ai/tests/piece_v2/test_b08_piece_bare_finite_evaluation.py` | 旧24文字下限を前提にした短文拒否期待1件を、決定済みsource-scaled1..420・水増しなしの実本文／format／原source保持へ整合。製品source変更なし。 |
+| API `ai/tests/piece_v2/test_b08_piece_personal_evaluation.py` | 近傍の短い好みの拒否期待を、原文／短文保持・非declarationの既決仕様へ整合。 |
+| API `ai/tests/piece_v2/test_b08_piece_past_transitive_expression.py` | 短い過去表現の下限期待だけを整合。別の過去参照SELF表記／modal採否2期待は失敗を保持し変更しない。 |
+| API `ai/tests/piece_v2/test_b08_piece_finite_nominal_argument.py` | 短い好みの下限期待を整合し、nominal対象の原文保持を確認。 |
+| API `.github/workflows/piece-b2b-isolated-postgres.yml` | 元の活動名対象と旧短文1期待へ、近傍3期待を追加。既存集合を削減せず、現行選択41を実行。 |
+| RN `tests/native/piece-rn-canvas-current-wire.json` | 現行FRESH03実rawから隔離保存されたfree preview／detailの同版本文・recipe・hashをnative入力へ接続。合成由来を明記。 |
+| RN `tests/native/piece-rn-canvas-fixtures.cjs` | 旧AR-04 fixtureと全legacy入力を維持し、新記録のpreview／saved／export caseを追加。test時計の期限と既存合成HTTP envelopeだけを投影。 |
+| RN `tests/native/piece-rn-canvas-ios.m` | 既存native hostへ同作品の期待本文行を追加。製品rendererは変更しない。 |
+| RN `tests/piece-v2-renderer.test.js` | 旧新fixtureの同版本文／recipe／hashとpreview・saved・export入力を検証。JS doubleと実pixelを区別。 |
+
+前段local API1142 PASS（活動名37を含む）、現行選択41 PASSと全4file384 PASS／既存2 FAILは別集合。2失敗は修正前fceでも再現する過去参照のSELF表記／modal採否で変更しない。RN1428 PASS（renderer183を含む）。fce版API CI42725970549は全39工程success、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI42726292049の現行FRESH03同版PNG4はbyte／RGBA一致。canvas全体は旧WholeCanvasの失敗継続、ios-sourceはsimctl障害cancelled。通常重み未採用／selector OFF・一般品質・本人端末・正式0/3は未完了。 [実結果と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。
+
+
+<a id="piece-register-coverage-learning-result-20261110"></a>
+## 2026-11-10 AR-04 一回48更新比較 — 既存owner再利用の全file地図差分
+
+今回の製品source／共有contract／入口・責務の追加変更は0、STRUCTURE_MAP_DELTA_NONE。API4da69cde／RN4424976bは前回の版を保持し、既存4B作者を改修する候補教材・重み・実比較をprivate原本へ保存する。
+
+| 既存path／owner | 今回の実利用・保持した境界 |
+|---|---|
+| API `ai/tools/training/train_piece_model_adapter.py` | 既存exact24行・fresh config・assistant-only loss・seed／LR／scopeを不変再利用し、一回48更新。原22行を保持し独立2行を置換。元5b1重みの途中resumeではない。 |
+| API `piece_model_source.py`／既存4B serving | 現行SYSTEM／USERと同request bodyを固定した旧新比較。追加SYSTEM指示・生成後修補・旧作者fallback・通常selector変更なし。 |
+| 既存CMEE `piece_semantic_admission`／`piece_v2_content_policy.py` | raw無修正で原source／PreparedRequestを照合し、全34で32→33採用。受動否定の未解決1例は前後とも拒否。受理文法を変更しない。 |
+| 既存preview／save／owner service・PGlite検証 | 新42応答×3planの126試行、117保存／9拒否。旧26応答の78は再資格化だけで再実行0。本文／recipe等とquotaを保持、保存後0生成。 |
+
+文末混在3・受動表現1を局所修復し、単文style変化1を品質改善へ数えない。新c634通常未採用／selector OFF・新重みnative画像／本人端末は未実施。新pytest／CI0、旧5b1画像・前回のAPI／RN CIとは別の候補比較である。 [実分母・由来・残差と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
+
+
+<a id="piece-negative-passive-order-result-20261110"></a>
+## 2026-11-10 AR-04 文順だけの候補比較 — 既存ownerと部分実結果
+
+製品source／共有contract／入口・責務の追加変更0、STRUCTURE_MAP_DELTA_NONE。前回API4da69cde／RN4424976bとownerを継承する。既存 `train_piece_model_adapter.py` のfresh24行／48更新を、ROLEFIT10のsource／target文順だけの介入へ再利用。`piece_model_source.py` は現行messages／推論SYSTEMを不変、既存CMEEの意味照合とpreview／save／owner serviceを、取得37候補と新123隔離SQLへ接続した。新shared checker・作者fallback・raw修補・意味条件の緩和はない。
+
+全実験は残時間条件で失敗、候補37／38・B2 after欠測。paired37のCMEE36→35、A2過去消失の退行1・H03未修復・改善0で新8044不採用。新SQL114保存／9拒否、旧102は再資格化だけで再実行0、保存後0生成。c634研究基準保持・通常selector OFF、新重み同版画像／本人端末は未確認。既存責務を増やした地図差分ではなく、同ownerの有限候補失敗記録である。 [実分母・根拠・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
+
+
+<a id="piece-passive-role-conditions-result-20261110"></a>
+## 2026-11-10 AR-04 source由来の受動役割条件 — 既存3pathの地図差分
+
+API1ce24b8cの全変更は次の3path。STRUCTURE_MAP_DELTA_PRESENTは既存private生成条件の適用境界を変えた意味で、新owner／service／public DTO／DB／RN／保存契約追加0。
+
+| path | 今回の責務差分・保持 |
+|---|---|
+| API `ai/services/ai_inference/piece_model_source.py` | 既存source資格／PreparedRequest再導出から、全量有限被覆が成立する受動fieldの各動作へsource_literalとsemantic_roles（subject／agent／counterpart）を投影。NEG／PAST／voice／相手対象／本人表記・source/field/spanを保持。active-only／非有限混在のwire・SYSTEM／独立CMEE／source文法は不変。 |
+| API `ai/tests/test_piece_model_authoring_constraints.py` | 六一人称・能受動／肯否・両順序・field内範囲／改行・別欄／本人補足・曖昧／混在拒否の境界を検証。source文法を広げず旧wireを保持。 |
+| API `ai/tests/test_piece_model_authoring_application.py` | 設定済みsourceから実transport用messagesを検証し、正しい受動過去だけを独立CMEEへ通し、能動反転・非過去・肯定変化を拒否する。 |
+
+同c634の46材料は44→46採用、H03／B2だけ意味修復・他44raw同一、新SQL162全保存・保存後0生成。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。c634通常未採用／selector OFF・live0、一般品質／同版画像／本人端末未確認。 [実分母・根拠・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
+
+## 2026-11-10 AR-04 c634同版画像のnative検証地図
+
+**11/10・AR-04最新：** API1ce24b8cの受動役割条件とc634の46件採用・新SQL162保存を継承。RN54113b85の実React Native／iOS simulatorで、修復2件・混在1件・refined1件の4作品について、preview／saved／export Card／view-shotの各4枚・計16PNGが作品ごとにbyte／RGBA一致。文字・否定・段落・Emlisロゴの欠けを目視で認めなかった。初回FRESH15 preview欠測はtest fixtureのFreeテーマ一覧不足を修復、初回既存15枚も最終とbyte一致。canvasは3method成功／旧WholeCanvas1失敗、ios-sourceのV4 19失敗を保持し、全CI成功とはしない。c634通常未採用／selector OFF・live0、一般品質・通常統合／本人端末・正式0/3は未完了。
+
+- `tests/native/piece-rn-canvas-passive-role.json`: 記録済みc634の架空4作品、通常3とrefined1の選択済みpreview／保存detailを束縛する。隔離SQL原本hashを保持。
+- `tests/native/piece-rn-canvas-fixtures.cjs`: 上記4作品を既存admitted／export fixtureへ接続する。後続54113b85はFRESH15のFree許可paletteだけを完全宣言。
+- `tests/native/piece-rn-canvas-ios.m`: 既存実RN hostの比較で上記fixtureを検証する。
+- `tests/piece-v2-renderer.test.js`: preview／保存版の同一本文・recipeと、不完全paletteの拒否を検証する。
+
+累積は上記4path、製品source／renderer・公開契約・DB・作者・保存責務追加0、STRUCTURE_MAP_DELTA_NONE。[native結果・失敗と範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。
+
+
+<a id="piece-general-prose-register-20261110"></a>
+## 11/10 AR-04全file地図差分 — 既存S7内の完全対象／本人文の文体照合
+
+| API既存path | 今回の責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | model専用比較でsource資格済みのliteral本人文と未決定対象全量をanchor保持し、既知敬体差だけ照合。scope整合検査と終端を保持。native既定不変 |
+| `ai/tests/test_piece_model_prose_register.py` | 本人6表記／肯否・対象／時点／留保・scope偽装・終端の36検査を追加 |
+
+API209b4a27、累積入口／owner／公開DTO／保存型／DB／RN／workflow追加0、STRUCTURE_MAP_DELTA_NONE。**11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。
+
+[原本・全結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。
+
+
+<a id="piece-literal-reason-register-20261110"></a>
+## 11/10 AR-04全file地図差分 — 資格済み理由KEEPの文体照合
+
+| API既存path | 差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存model専用KEEPで、完全理由／対象と同本人をanchor保持し既知copulaだけ照合 |
+| `ai/tests/test_piece_model_prose_register.py` | 原本の通常感情条件・6本人表記・終端・別語彙と意味改変拒否47検査 |
+
+固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。
+
+STRUCTURE_MAP_DELTA_NONE。既存比較内の修復でowner／入口／公開・保存contract変更0。詳細は[結果正本](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110)。
+
+
+<a id="piece-focal-order-preparation-20261110"></a>
+## 11/10 AR-04候補file地図 — 元の焦点語順を生成条件へ
+
+| API候補path | 候補責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_model_source.py` | 既存source資格済み無scope焦点文の完全原文／本人・述語・対象と範囲を、同欄の既存private条件へ投影 |
+| `ai/tests/test_piece_model_authoring_constraints.py` | 本人6表記・既知predicate、元の述語／演算子・氏名と欄・補足／scope分離の33検査 |
+
+焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。
+
+STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY、owner／公開／保存追加0。通常作業正本へは未反映。[詳細](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
+
+
+<a id="piece-focal-order-actual-20261110"></a>
+## 11/10 AR-04 file地図差分 — 焦点条件候補を不採用
+
+承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。
+
+候補の2path（`piece_model_source.py`／`test_piece_model_authoring_constraints.py`）は別branch1baa7977で保存した検討結果。通常API正本0c6ad819へ反映しないため、通常構造の差分は0（STRUCTURE_MAP_DELTA_NONE_FOR_NORMAL）。既存owner／private境界／公開DTO／保存型／DB／RNと全file地図は維持。[実結果と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
+
+
+<a id="piece-focal-target-teachers-20261110"></a>
+## 11/10 AR-04 — 教材target3の比較準備、通常file地図は不変
+
+c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。
+
+通常API0c6、既存の`ai/tools/training/train_piece_model_adapter.py`の24行/48更新recipeと、`piece_model_source.py`の通常入力、CMEE／S7 consumer、既存保存／描画を再利用する。候補はprivate教材・一回実行packetだけで通常file追加／変更0。1baa別branchの2pathは不採用の履歴を維持し、STRUCTURE_MAP_DELTA_NONE。[原24監査と次の比較](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-teachers-20261110)。
+
+
+<a id="piece-focal-target-learning-result-20261110"></a>
+## 11/10 AR-04 — 元trainer／consumerを再利用、通常file地図不変
+
+希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。
+
+既存`ai/tools/training/train_piece_model_adapter.py`のfresh24／48、`piece_model_source.py`の通常wire、CMEE／S7・通常／refined保存再読を再利用。新f6daeはprivate研究artifactで、通常owner／入口／API／保存型／DB／RNの追加・変更0、STRUCTURE_MAP_DELTA_NONE。1baa別branchは引き続き不採用。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-learning-result-20261110)。
+
+
+<a id="piece-modified-preference-reader-20261110"></a>
+## 11/10 AR-04 — 修飾付き好み対象を既存readerへ限定接続
+
+API4f343deで、既存の名詞句readerを本人の「は」好み評価へ限定再利用し、修飾付き対象「一人の食事」「静かな朝食」を全体のまま接続。元8sourceの資格は5→7、引用1は拒否維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。新2の独立CPU作文は3plan計6保存・再読、保存済みf6dae16応答は別に48保存・再読。新2の実4B応答は未取得。通常モデル／selector OFF・本番未反映を維持。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source資格とmodel専用S7の接続範囲を変更。`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py`の`_modified_preference_nominal`は既存`emlis_ai_grounded_observation_plan._WISH_OBJECT_NOMINAL_SOURCE`を再利用し、字面を限定した「静かな」を加え、完全targetを既存`personal_evaluations`へ渡す。`ai/services/ai_inference/piece_v2_content_policy.py`の既存`same_evaluation`／S7内で、明示時間文脈付きの本人「は」好み評価だけを内側の既存typed keyで比較する。新owner／公開DTO／DB・保存schema／API入口／RN追加0。共用`_SIMPLE_NOUN`、他のfocal／価値／動作構文、native既定比較、旧作者fallbackは変更しない。
+
+最終20file1367 PASS／FAIL・skip0、既存warning1。新規81件はsource36＋model45、修正した旧短文期待1件を含むfocused82 PASS。API4f343deのPiece／Analysis CIはattempt1で全成功。Piece run42784359892／job129721787981は全39step成功（model17file1174 PASS、境界選択78 PASS／420 deselected）。Analysis run42784359662／job129721783644は全19step成功。対象head一致、追加実行／rerun0。 [実確認と残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-modified-preference-reader-20261110)。
+
+次は引用GENERAL07について、旧引用境界readerと既存人物／評価意味型を照合し、友人の発言・本人の経験と気持ちを分離して原文全体を保持する最小接続を進める。今回資格化したGENERAL01／08の実4B本文と、広い本人文章の意味保持・自然な語りは未確認。前回f6daeは研究候補のまま保持し、完了した48更新／24HTTP比較を再実行しない。引用一般・新f6daeで旧53全件の生成回帰・一般品質・同版画像／通常統合／本人端末は未完。今回の69行再照合は異なる保存済みcohortの照合で、新f6daeによる69生成ではない。1baa条件追加は不採用、通常モデル採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-single-quote-context-reader-20261110"></a>
+## 11/10 AR-04 — 一組の引用を既存literal経路へ接続
+
+APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL07の引用・発言者・くれた・否定条件・可能形・過去感情を既存KEEPで全量保持し、元8sourceの資格7→8。引用内の既存scanner認識名は話者をまたぐ役割誤継承を防ぐため拒否、引用外の既存公開役割は維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。直近残件3の独立CPU作文を3plan計9保存・再読。新3の実4B応答は未取得。f6dae研究候補／通常selector OFF・本番未反映を維持。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source受理境界の変更。`ai/services/ai_inference/piece_v2_generation.py::_sentences`から、既存`emlis_ai_grounded_sentence_surface._body_primary_quote_spans`を再利用する。一組の非empty「」と既存stopで完結する引用外lineだけを通し、内部stop文字`。！？!?`・CR/LF、空／不整合／複数／多重・別quote種は未対応。`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py::_role_bindings`では、既存name scanと引用spanの重なりを確認し、引用内の人名をglobal aliasへ渡さない。既存plan／KEEP作者／S7 literal比較・Safety・保存consumerを変更せず利用。新意味型／公開DTO／保存schema／DB／API入口／RN／作者／checker追加0。
+
+最終関連31file5176 PASS／FAIL・skip0、既存warning1。新quote52件と既存境界等を含む補正focused125 PASS。APId7442335のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42799640908／job129773578374は全39step成功（model主要1226 PASS、境界選択78 PASS／420 deselected）。Analysis run42799640715／job129773579066は全19step成功。追加実行／rerun0。 [全結果と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-single-quote-context-reader-20261110)。
+
+次はsource資格化したGENERAL01／07／08の新しい実4B応答を確認し、完全対象・本人表記・時点／肯否・引用と外側の発言者／感情・自然な本文・同版保存を照合する。同3の原7項目・prepared identity・現行builderの送信messagesはprivateに準備済みだが未送信。CPU作文の採用を実モデル改善と呼ばない。引用一般の言い換え、引用内の名前・複数／多重・内部stop／CR/LF、広い一般文章、新f6daeで旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み48更新／24HTTP比較を再実行せず、1baa条件追加も不採用。通常採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-model3-inference-result-20261110"></a>
+## 11/10 AR-04 — 実4B新3と時間scope内の同本人継続
+
+API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存のモデル本文比較境界だけの変更。`ai/services/ai_inference/piece_v2_content_policy.py::validate_source_meaning_preservation` のSOURCE_EXPLICIT_TIME_CONTEXT分岐で、PERSONAL_PREFERENCEかつconstruction=はの既存絞込みを保ち、計算済みsame_authorによるoptional_prefixを既存same_evaluationへ渡す。新しい語り手推論やsource受理armを作らず、原time外側の全文anchor・全対象・肯否／時点／程度／留保・にとってを維持。商品source1path、`ai/tests/test_piece_model_temporal_self_omission.py` 新規29件、`ai/tests/test_piece_model_prose_register.py` の旧省略negativeをpositiveへ整合、`.github/workflows/piece-b2b-isolated-postgres.yml` の既存実行step／path filterへ新testを追加。新意味型／公開DTO／保存schema／DB／API入口／RN／作者／checkerなし。
+
+関連32file5205 PASS、FAIL／skip0、既存warning1。新しい本人継続境界29件を含む。API2ec79ad0のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42809225286／job129806123954は全39step成功（model主要1255 PASS、境界選択78 PASS／420 deselected）。Analysis run42809225253／job129806123443は全19step成功。追加実行／rerun0。 [全結果と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
+
+次は広い文章での反復・理由／引用などの残件を、既存資産を再利用して進める。今回の新3の実4B・同版保存は完了したため未取得へ戻さない。新3に旧c634のbaselineはなく、f6daeの改善率／学習効果や一般品質の合格に換算しない。引用一般の言換え・複数／多重・内部stop／CR/LF・引用内認識名、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み今回9HTTP／前回48更新は再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quote-internal-stops-20261110"></a>
+## 11/10 AR-04 — 引用対応文分割をsource／S7へ再利用
+
+API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source受理とS7の文境界だけを拡張。`ai/services/ai_inference/piece_v2_generation.py::_sentences`と`ai/services/ai_inference/piece_v2_content_policy.py::validate_source_meaning_preservation`が、既存`emlis_ai_grounded_sentence_surface._body_sentence_spans`を呼ぶ。引用内stopを外側文の境界にせず、元の全文slice・引用者／外側の感情・欄／段落・scalar／UTF-8根拠を維持し、S7は全block被覆・node数・literal KEEP照合を続ける。既存helper／Emlis本体・名前binding・意味型・公開DTO／保存schema／DB／API入口／RN／SYSTEM・通常selectorは変更しない。一組の非empty「」・引用外完全文に限定し、420字とraw stop上限6、引用内CR/LF・複数／多重・別quote種・認識名の拒否を保つ。Unicode空白U+00A0／U+2002／U+2003は候補側もcursorからspan終端までを保持し、正規化で消さない。
+
+最終関連32file5263 PASS、FAIL／error／skip0、既存warning1。固定CPU4例は親2ecで全拒否→全採用、3plan計12保存／非生成再読・原入力／Emlis不変。凍結実4B69行と直近5応答の採否／本文／messagesを追加生成0で維持。最終focused393、別source／空白2file2421は同検証の重複を含むため加算しない。初回の旧拒否期待3失敗のlog／XMLを保持。独立reviewで見つかったUnicode空白退行と、補正testのblock期待・環境不足の経過も記録し、最終検証で成功を確認。新規実4B応答／学習／GPU操作／本番変更0。
+
+API5816f2d0の[Piece CI42813970927](https://github.com/MassyuRed/mashos-api/actions/runs/42813970927)と[Analysis CI42813971055](https://github.com/MassyuRed/mashos-api/actions/runs/42813971055)は、対象head一致・attempt1で全工程success。Piece job129822209000／39step、Analysis job129822209316／19stepを確認。追加run／rerun0。通常配置を行うworkflowではない。
+
+次は、今回資格化した引用内stopを持つ新4例の実4B本文と、引用を含む理由・希望の自然な実現を確認する。新4＋保持1のcurrent builder送信材料はprivateに準備済みだが、未送信・実行runner未準備。今回の固定CPU本文を実4B品質改善へ換算しない。一組引用の字面保持は確認したが、引用一般の言換え・複数／多重・引用内CR/LF・引用内認識名、理由一般の型付き意味理解、広い一般文章、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。前回の新3実4B／15保存と9HTTP・48更新は完了済みとして継承し、再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+全ファイル地図差分：既存generation／content_policyのsource→KEEP→完成本文照合の文境界が対象。`ai/tests/test_piece_model_prose_register.py`、`ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py`、`ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py`、`ai/tests/piece_v2/test_b08_piece_sentence_spacing.py`が対応検証。新module／route・保存owner・rendererの追加なし。
+
+
+<a id="piece-quote-context-conditions-20261110"></a>
+## 11/10 AR-04 — 引用の字面保持を生成側へ渡す候補
+
+APIa67fb6f2で、既存KEEPの引用範囲を欄別4B生成条件へ投影する候補を反映。引用内の全字面・句読点／強調と同欄の引用外本人表記を保持する条件を渡す。SYSTEM・既定messages・source資格・S7は不変。関連32file5287 PASS、保存済み実5の4採用／1拒否と既存69行の採否／本文／messagesを維持。新4B効果は未確認、13,723byteの比較packetは未送信・未実行。f6dae研究候補・通常selector OFF・本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY：既存`ai/services/ai_inference/piece_model_source.py::_authoring_constraints`が、資格済みsource planの`KEEP_COMPLETE_SOURCE_CONTEXT` dutyと既存`emlis_ai_grounded_sentence_surface._body_primary_quote_spans`を再利用する。part別planに対応する元引用のかぎ括弧込みliteralとfield内scalar範囲を、明示opt-in時だけ既存欄条件の`literal_quotes`へ投影。引用のある欄だけに`quote_context_instruction`を付け、引用内文字／記号数と同欄のliteral内の引用外一人称表記を保つ。原文／PreparedRequest／ID／SYSTEMは不変、別欄／段落／原入力と補足を混ぜない。新しいreader・意味型・作者・checker・公開DTO／保存schema・DB・API入口・RN・rendererは追加せず、S7や不正rawの修補は行わない。
+
+変更は商品1pathと既存test2path（`ai/tests/test_piece_model_authoring_constraints.py`、`ai/tests/test_piece_model_authoring_application.py`）だけ。関連32file5287 PASS、FAIL／error／skip0、既存warning1。新24件は引用のexact字面／field座標、非引用／既定OFF不変、段落とrefinedのpart別plan、公開役割、資格外引用の拒否、configured MockTransportへの1取得伝達、句点化・強調削減・本人省略・話者／感情変異の拒否を確認する。初回focused137 PASSは最終回帰と重複するため加算しない。保存済み実5rawの採否と本文は4採用／1拒否を維持し、元の69照合行も採否／本文／messagesを0生成で維持。新5送信候補は原7項目・prepared ID／JSON・SYSTEM／field_slotsを維持し、引用条件だけが追加される。今回の新しい実モデル本文・同版画像／端末検証・live DBは0。
+
+APIa67fb6f2の[Piece CI42826604954](https://github.com/MassyuRed/mashos-api/actions/runs/42826604954)は対象head一致・attempt1で全工程success。job129865467629／39stepを確認。追加run／rerun0。今回の変更pathでAnalysis workflowの新runはなく、Analysis・通常配置の新成功は主張しない。
+
+次は変更した欄別条件で、既取得5入力（問題QUOTE-RUN1＋保持4）を同じf6daeで一回・学習0で比較する。前回の同5rawを旧条件baselineとして再利用し、旧条件の追加生成は0。新packet13,723byte／2member、SHA256 `f5a7989570d95dc2b3d9dcacf65f6bc1978eeab7be80fef383dbe62a7a240cde`。5候補＋通常／Analysis前後control4の最大9HTTP、Piece1load、再試行0、復元込み600秒／復元予約120秒。既存Pod f1lle4xwq3wjlnへ新packet送信と、元提供を同じ状態へ戻すための起動環境全体（認証情報を含み得る）の同Pod内一時読取・再利用は今回の具体確認後に行う。前回の消費済み一回承認へ遡及させず、今回は送信／新生成／停止／起動環境読取0。引用だけ直っても本人省略が残れば採用へ格上げせず、同じS7・全本文読取・3plan保存再読で判定する。広い引用／理由の型付き読取・一般品質・同版画像／通常統合／本人端末と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quote-context-actual-result-20261110"></a>
+## 11/10 AR-04 — 引用欄条件の実比較・5採用と15保存
+
+承認済みの引用条件比較を同f6daeで一回・学習0で実行。前回失敗したQUOTE-RUNは引用の強調と引用外の本人表記を両方保持し、不採用→採用へ回復。保持4のraw／全responseは完全一致、全5採用・3plan計15保存／非生成再読。9HTTP・102.873秒で元提供のargs／env／cwdを復元し、healthと通常／Analysisの前後response完全一致。APIa67fb6f2／f6dae研究候補・通常selector OFF、本番未反映。
+
+13,723byte／SHA256 `f5a7989570d95dc2b3d9dcacf65f6bc1978eeab7be80fef383dbe62a7a240cde`の新packet送信と、起動環境全体の同Pod内一時読取・再利用についてMashが具体承認した後、既存Runpod f1lle4xwq3wjlnへ送信。元と異なる5入力を増やさず、既取得同5source・同SYSTEM・同重み／revision・同生成設定で、既存USERの引用欄条件だけを変更した。旧5rawをbaselineとして再利用し、旧条件の新生成0。候補5＋通常／Analysis前後control4の実9HTTP、Piece1load、追加学習／新weights／retry0。全600秒／復元予約120秒の枠内で102.872737秒、停止前の最大入力1849token＋生成予約2048は8192以内。元起動引数・全environment・cwd・credentials・既存source／adapter／weightsを保持し、前後controlの全response bytes一致と独立health200を確認。環境値を意図的に表示／直列化せず、原本は既知2API鍵のscanを通過。今回の一回承認は消費済みで、恒久許可／他payload／再実行へ拡張しない。
+
+| 実比較 | 結果 | 確認した範囲 |
+|---|---|---|
+| QUOTE-RUN | 旧不採用→新採用 | 引用内の二重感嘆符と、引用外の明示本人表記をともに原文どおり保持 |
+| QUOTE-STOP／QUESTION | 保持・採用 | 旧raw／全responseと完全一致。引用内stop・発言者・外側本人の経験と過去感情を維持 |
+| QUOTE-PARAGRAPH | 保持・採用 | 旧raw／全responseと完全一致。引用段落と本人感情段落を別slotで維持 |
+| GENERAL07 | 保持・採用 | 旧request材料は引用条件追加以外exact、旧raw／全response／revision／usageは完全一致 |
+
+rootと独立担当が全5原文・旧新10本文を全読。引用の話者・言ってくれた方向、外側の否定条件／可能形・経験と過去感情・段落を保持し、意味追加や役割反転を認めなかった。既存S7を緩めず、全rawを無修補で判定して5/5採用。全5はsource段落の字面維持であり、新しい一般文章編集品質の合格にはしない。引用と本人表記の条件を同時追加した一回比較なので各条件の単独効果は未分離。新入力への一般化・学習能力・複数回の安定性・速度改善は未証明。
+
+無修補の新5rawを既存consumerへ厳密再bindした隔離SQLはFree／Plus／Premium計15/15保存・同／新serviceで非生成再読。保存後生成0、原入力／Emlis不変、旧作者fallback禁止を確認。GPU側元ID／日時と別の同内容synthetic ID／日時を使う隔離検証であり、live Supabase／実Auth／実端末／native画像の確認ではない。STRUCTURE_MAP_DELTA_NONE（既存a67fb6f2の生成条件の実比較のみ）。今回の商品source／source文法／S7／DB／RN／renderer／通常selector差分0。新pytest／CI実行0、前回a67fb6f2の5287 PASSとPiece CI42826604954／39step全成功を継承。凍結69は前回照合済みとして継承し、今回新規生成／再照合とはしない。
+
+次は引用を含む理由・希望の読取を、既存意味型・引用境界・欄別条件から必要最小で進める。今回の対象5の実4B取得・強調／本人表記回復・同版保存15は完了として引き継ぐ。引用一般の言換え／複数・多重／引用内CRLF／認識名、理由一般の型付き読取、広い一般文章・新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、AR-01と他ARは未完。今回9HTTPと完了済み48更新を再実行せず、新しいfitやGPU比較を自動選定しない。通常モデル採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quoted-outer-scope-reader-20261110"></a>
+## 11/10 AR-04 — 引用外の理由・本人表記だけを既存scopeへ束縛
+
+APIc34b820bで、引用内の接続詞・一人称を外側の理由／希望へ誤束縛する読取を修復。引用外の既存scope境界だけを原文上へ束縛し、既存scoped dutyの前提内引用にも生成条件を渡す。固定CPU新2は1件の資格拒否を回復し、1件の誤った引用内scopeを外側へ訂正、3plan計6保存／非生成再読。新46を含む39file5729 PASS／既存3 FAIL、親a67でも同3失敗。前回実5と既存69行の採否／本文／messagesは不変。新2の実4Bは未取得、13,703byte比較packet未送信。f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存`cocolon_meaning_experience_engine/piece_source.py`の`_scoped_expression_match`は、引用がなければ旧`_SCOPED_EXPRESSION.fullmatch`をそのまま返す。引用時は既存`_body_primary_quote_spans`と既存`_SCOPE_RELATIONS`から引用外の接続詞位置を選び、元patternの前提長だけをその位置へ制約して原文上でfullmatchし、一意な外側境界へ束縛する。元の非empty前提を保つためposition>0を必須とし、各group・scalar／UTF-8根拠を元文字列のまま保持。引用外のSELF言及だけを既存同本人検査へ渡す。`piece_v1c.py`と`piece_v2_content_policy.py`の既存読取・S7再導出も同ownerへ揃える。`piece_model_source.py`は既存`literal_quotes`を、資格済みscoped dutyの前提範囲内にある引用へだけ追加投影。引用者の一人称・理由・希望を外側本人へ昇格しない。新意味型／公開DTO／DB／保存schema／作者／checker・通常selectorは追加しない。
+
+固定CPU新2の比較では、引用内に本人表記があるため旧資格拒否された例は新資格成立→同じ原文本文で既存CMEE採用。引用内外に理由がある例は旧scopeが引用内部で切れていたものを、外側の発言全体＋接続詞と外側の本人の希望へ訂正し、全文を保持して採用。明示原入力7項目の保存consumerを通した新2×3planの6保存・同／新serviceの非生成再読、原入力／Emlis不変・quota各1を確認。ここでの本文は独立固定CPU材料で、実4Bの品質改善とは呼ばない。原文／PreparedRequest・欄／段落／元と補足・話者と引用literal・否定／希望／時点の既存境界、quote／declarationへの切出し禁止を保つ。
+
+最終39file5732件は5729 PASS／3 FAIL、error／skip0、既存warning1。新46件は全成功し、引用内外の接続詞／SELF、focal／評価、scope根拠、別欄／refined、空前提拒否、変異拒否と6保存を含む。追加で広く確認した旧scope2fileでは、無引用の時点付きfocal・本人concession付きfocal・理由付き本人価値の3つの旧negative期待が失敗。a67 exact overlayの同2fileも100 PASS／同じ3 FAILで、失敗IDが全一致した。今回この既存3件の期待値や無引用契約を変更せず、5729 PASSだけで全GREENとはしない。初回新test45 PASSと最終46、親100 PASSは重複・別条件のため加算しない。独立reviewで見つかった空前提受理の候補不具合はposition>0で修正し、新negativeを含む最終回帰で確認。前回実4B5行と既存69照合行の採否／全文／messagesを追加生成0で維持した。
+
+APIc34b820bの[Piece CI42835666538](https://github.com/MassyuRed/mashos-api/actions/runs/42835666538)と[Analysis CI42835666566](https://github.com/MassyuRed/mashos-api/actions/runs/42835666566)は対象head一致・attempt1で全工程success。Piece job129897056145／39step、Analysis job129897056096／19stepを確認。追加run／rerun0。両CI成功を、別に広げたlocal39fileの既存3失敗の解消とは呼ばない。通常配置を行うworkflowではない。
+
+次は新2（SCOPE-QUOTE-SELF／REASON）＋保持3（QUOTE-RUN／PARAGRAPH／GENERAL07）の実4B本文と、同じ5のCMEE採否・3plan保存再読を一回・学習0で確認する。原7項目・prepared ID／JSON・現builder送信messagesを固定。保持3は前回case objectと全messagesがexactで、新2に旧モデル生成baselineはない。13,703byte／2memberの架空入力と既存runner流用ZIP、SHA256 `78a97b3546c754be3b54fa7ad813859c4056ce1e67122eb4ba9d40e6a9d83ac1`は未送信／未実行。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体確認後に行い、消費済み前回承認を再利用しない。前回の5採用／15保存／102.873秒復元は完了として継承。一般理由／引用・非transitive希望の文体差／広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新GPU／追加学習／通常採用／Render／live DB／RN／buildの自動実行0。
+
+全ファイル地図差分：既存`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py`／`piece_v1c.py`、`ai/services/ai_inference/piece_v2_content_policy.py`／`piece_model_source.py`の責務内修復。新規`ai/tests/test_piece_quoted_scope_binding.py`がsource根拠・モデル本文比較・欄／補足・既存保存consumerの検証ownerで、既存`.github/workflows/piece-b2b-isolated-postgres.yml`の同じPiece model検証stepとpath filterへ追加。新しいAPI入口／DTO／DB／RN／renderer／作者はない。
+
+<a id="piece-quoted-outer-scope-actual-20261111"></a>
+## 11/11 AR-04 — 引用外scopeの実4B本文・保存再読
+
+APIc34b820bの引用外scope修復を、明示承認された新2＋保持3の実4Bで一回確認。5/5採用、3plan計15保存・非生成再読、保持3の全request／raw／response完全一致。9HTTP・学習／retry0、101.508秒で元提供のargs／env／cwdを復元し、通常／Analysis前後response一致・health200。新2に旧モデル生成baselineはなく、原文保持の確認を一般作文品質の改善率へ換算しない。既存3失敗・同版画像／通常統合／本人端末は残件。f6dae研究候補・通常selector OFF、本番未反映。
+
+新2は引用内の話者・理由と外側の本人希望を全量保持。華恋と独立担当が全5本文を読み、意味の追加／退行は見られないが、全slot原文保持のため一般作文品質の改善とはしない。新2の旧model比較はなく、保持3は既露出。今回商品source／test／CI変更0、STRUCTURE_MAP_DELTA_NONE。c34読取修復の責務差分と既存3失敗は前節の履歴を維持する。
+
+次は引用・理由の一般読取、非transitive希望の文体差と広い一般文章を、既存source／意味型／欄別生成条件と保存済み実本文から進める。今回の新2実4B・保持3照合・15保存再読は完了として継承し、この9HTTPを再実行しない。新2の旧model baseline、広い一般品質、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01と他ARは未完。新しいGPU実行・追加学習・通常採用・selector有効化・Render／live DB／RN／buildを今回の承認から自動実行しない。
+
+詳細：[実原本・15保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-actual-20261111)。
+
+<a id="piece-scoped-self-register-20261111"></a>
+## 11/11 AR-04 — 理由付き本人希望の文体比較を既存S7へ接続
+
+APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順・全字面を保つ文体比較を修復。固定CPU新3の同じ常体候補は0→3採用、原文対照3・意味変異33拒否を維持し、3plan計9保存／非生成再読。原7項目・prepared／messages・source意味／根拠／planは前後一致、前回の実5本文も0生成で維持。新80成功、関連39fileの重複除外5812件は5809 PASS／既存3 FAIL。両CI成功。新3の実4Bは未取得、13,619byte比較packetは未送信。f6dae研究候補・通常selector OFF、本番未反映。
+
+既存piece_v2_content_policy.pyのmodel専用S7で、原文の全外側prefixと明示本人を維持した内側全文を、既存same_literal_self_registerへ接続。元prefixの区切り・空白も正規化しない。source資格／型／作者／生成条件／SYSTEM／公開・保存契約／DB／RN／通常selectorは不変。STRUCTURE_MAP_DELTA_NONE。固定CPU3と隔離保存9は実4B品質改善・本人受入れではなく、前回実5／15保存の完了と区別する。
+
+次はSCOPED-REGISTER-RAIN／NEGATIVE／QUOTEDの新3と、前回SCOPE-QUOTE-REASON／QUOTE-RUNの保持2を、保存f6daeで一回・追加学習0の実4B比較へ通す。各source7項目・prepared ID／JSON・現builder messagesを固定し、保持2は前回全requestとexact、新3には旧model生成baselineがない。凍結13,619byte／2member、SHA256 `63f90d0a3512a17355aa2a145f04a7cb5decc04fe0924e241031efe94a608693`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packetの送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、現在は新送信／新GPU実行／新環境読取0。前回の実5／15保存／101.508秒復元は完了として継承する。
+
+詳細：[文体比較・実証範囲・残差](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-20261111)。
+
+<a id="piece-scoped-self-register-actual-20261111"></a>
+## 11/11 AR-04 — 理由付き本人希望の実4B採用回復・保存と復元
+
+承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。
+
+新3は末尾「です」の除去だけの実本文で、理由・本人・否定希望・引用を保持。保持2は前回全request／raw／responseと一致した。source意味／根拠／plan／prepared／messagesは旧c34と現a4で一致し、同じrawだけの読取差を確認。新3の旧model生成baselineや一般作文改善率はない。今回はsource／test／CI変更0、STRUCTURE_MAP_DELTA_NONE。既存3失敗・同版画像／通常統合／実機等は残る。
+
+次は、既資格のliteral扱い「休みたい／読みたい」が原順のまま止まる残差を、既存source／scope／本人全文の保持とnative／canonical互換を維持して最小修復する。理由付き好みの文体差、前置canonical側の文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.028秒復元は完了として継承し、この9HTTPを再実行しない。今回の具体一回承認は消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildを自動実行しない。
+
+詳細：[実原本・15保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-actual-20261111)。
+
+
+<a id="piece-literal-scoped-register-20261111"></a>
+## 11/11 AR-04 — literal本人文章の原順・文体比較と次の一回準備
+
+API48bb559aで、既資格literal本人文章「休みたい／読みたい」の原順・全文保持を既存model文体比較へ接続。固定CPU新3は同じ候補0→3採用、意味変異26拒否、前回実5の採否／本文／意味／plan／prepared／messages不変、3plan計9保存・非生成再読。専用548成功、関連39fileは5910 PASS／既存3 FAIL。独立CPU404例では退行0・意味変異33拒否、native／canonical不変。新3実4Bは未取得、13,684byte比較packetは未送信・今回の具体承認待ち。f6dae研究候補・通常selector OFF、本番未反映。
+
+次は、この新3（REST-REASON／READ-CONDITION／READ-QUOTED）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6daeで一回・追加学習0の実4B比較へ通す。固定13,684byte／2member、SHA256 `2ed594826530120ff502019b2f3a4e49b39ea894546e9dbc1baffb00fd51d82d`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、新送信／新GPU実行／新環境読取0。PID62196は前回復元時の履歴値で、現在の再確認値ではない。前回の実5／15保存／96.028秒復元は完了として継承し、旧runnerを再実行しない。
+
+詳細：[literal原順比較・実証範囲・残差](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-20261111)。
+
+
+<a id="piece-literal-scoped-register-preflight-failed-20261111"></a>
+## 11/11 AR-04 — 一回事前確認の失敗と既存Python指定の修正案
+
+承認済み13,684byte・新3＋保持2のrunnerを一回起動したが、親launcherが稼働用venvではなくsystem Pythonを使ったため、transformers import前の事前確認でModuleNotFoundError、0.088435秒で失敗終了。モデルHTTP／Piece load／学習／提供停止／復元操作は0。元PID62196・args／env／cwd一致、runner health正常と独立health200を確認。新3本文・今回のCMEE採否／保存は未取得。既存稼働Pythonでtransformers／torchの所在を確認し、同じpacketを変えず起動指定だけ直す一回案を準備。再実行は未承認・未実行。API48bb559a・通常selector OFF・本番未反映。
+
+次は、同じ新3＋保持2・同じ13,684byte packet（SHA256 `2ed594826530120ff502019b2f3a4e49b39ea894546e9dbc1baffb00fd51d82d`）を、既存稼働用 `/workspace/cocolon_venv/bin/python`で起動する一回修正案の具体承認後に進める。新root `/workspace/ar04-literal-scoped-register-pythonfix-20261111`を使い、今回の失敗root／原本は変更しない。新しいlauncherだけを送って同Pod上の既存packetを再利用し、runner／wire／原入力／prepared／messages／SYSTEM／生成条件は変更しない。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、追加学習／新weights／retry0、復元込み600秒設定・復元予約120秒。認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用も次の一回承認へ含め、今回の承認を再利用しない。
+
+詳細：[事前確認失敗・起動修正案](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-preflight-failed-20261111)。
+
+
+<a id="piece-literal-scoped-register-actual-20261111"></a>
+## 11/11 AR-04 — 稼働用Pythonでの実4B比較・15保存と復元
+
+別の具体承認後、既存稼働Pythonから同じ新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawの採用は旧a4の2→現48の5（literal原順の新3だけ0→3回復、保持2の全request／raw／response不変）。意味／plan／prepared／messagesは前後一致、全5×3planの15保存・非生成再読成功。9HTTP・97.008秒で元提供へ復元、args／env／cwd・通常／Analysis前後全response一致、独立health200。先行のsystem Python失敗は閉じた原本として保持。API48bb559a・f6dae研究候補・通常selector OFF、本番未反映。
+
+次は、既存の理由付き好み／評価文の原順・文体差の残差へ戻り、source資格・外側scope・本人全文とnative／canonical互換を維持して原因を確認する。前置canonicalの文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARも未完。今回の新3実4B・保持2照合・15保存・97.008秒復元は完了とし、このrunnerを再実行しない。今回の一回承認も消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+詳細：[実4B本文・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-actual-20261111)。
+
+
+<a id="piece-scoped-evaluation-register-prepared-20261111"></a>
+## 11/11 AR-04 — 理由・条件・譲歩付き評価の文体比較
+
+API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体比較を既存S7へ接続。固定CPU新3の同じ常体候補は0→3採用、意味変異41拒否・前回実5本文を追加生成0で保持し、3plan計9保存／非生成再読。source資格／意味／根拠／plan／prepared／messages・native既存比較は維持。新66成功、関連39file5979件は5976 PASS／既存3 FAIL、Piece CI成功・Analysis CI実行中。新3実4Bは未取得。13,983byte比較packet＋2,505byte launcherを稼働用Python指定で準備したが、未送信／未実行。f6dae研究候補・通常selector OFF、本番未反映。
+
+次は新3（PREFERENCE-REASON／VALUE-CONDITION／PREFERENCE-QUOTED-CONCESSION）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す。合計16,488byte（packet13,983＋launcher2,505）、packet SHA256 `52ccec341c8aa437a30a4e4afca826559c9c0d6004a50152367d592f9f7f7fb6`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet／launcher送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は、この新3の具体承認後に行う。前回承認は完了済みで再利用せず、新送信／GPU実行／環境読取0。前回実5／15保存／97.008秒復元は完了として継承する。前置canonical／元focal語順の文体差、引用／理由一般、広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+詳細：[修復・検証・未実行範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-prepared-20261111)。
+
+
+<a id="piece-scoped-evaluation-register-actual-20261111"></a>
+## 11/11 AR-04 — 評価文体の実4B採用回復・15保存と復元
+
+具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。
+
+次は本人前置canonical側の文体差を、保存済み本文と既存source／scope／比較条件から切り分け、原順での今回回復を退行させず進める。評価の元focal語順、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.967秒復元は完了とし、このrunnerを再実行しない。今回の一回承認は消費済み。新しいfit／GPU比較／通常採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+詳細：[実本文・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。
+
+
+## 11/11 AR-04 — 本人前置語順の文体比較を既存S7へ接続
+
+APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。
+
+全ファイル地図差分：既存`ai/services/ai_inference/piece_v2_content_policy.py`のmodel専用比較内12行、既存`ai/tests/test_piece_model_prose_register.py`と`ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py`を更新。新module／owner／型／API／保存／RN／rendererなし。STRUCTURE_MAP_DELTA_NONE。
+
+本人前置＋文体差の比較修復・固定CPU3件と9保存は完了。次は同じ条件の新規実4B本文での確認と、元focal語順・引用／理由一般などの残差を既存の比較と保存経路で進める。今回、新たなGPU packetの送信・起動・提供停止・起動環境読取・学習・通常採用は行っていない。以前の一回実行は完了済みで再実行しない。広い文章、新f6daeによる旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗、AR-01と他ARは未完。 [同一材料・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。
+
+
+
+<a id="piece-evaluation-focal-register-20261111"></a>
+## 11/11 AR-04 — 評価の元焦点語順を保持
+
+API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／常体比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messages・native全結果と前回実4B5件は維持。新71全成功、関連39fileは6192成功／既存同3失敗。独立27例で退行0。新GPU生成・学習0、f6dae研究候補・通常selector OFF・本番未反映。
+
+次は未実行の本人前置3＋評価焦点3と保持2の計8材料を、一回の実4B比較へまとめて通す。送信候補17,151byte（packet14,702＋launcher2,449）・最大12HTTP・Piece1load・学習／retry0、復元枠を含む600秒の期限設定／復元予約120秒。既存Podへの新packet送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は今回の具体承認後に限る。旧実行の一回承認は完了済みで再利用しない。
+
+API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
+
+全ファイル地図差分：既存`piece_v2_content_policy.py`のsame_evaluation内12行、`ai/tests/test_piece_model_prose_register.py`と`ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py`を更新。新owner／型／入口なし。STRUCTURE_MAP_DELTA_NONE。
+
+[原因・同一候補・保存・未実行範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。
+
+
+<a id="piece-combined-register-actual-20261111"></a>
+## 11/11 AR-04 — 実8応答・24保存と提供復元
+
+API8329a828の本人前置3＋元評価焦点3＋保持2を、具体承認後に保存f6daeで一回・学習0の実4B確認。同じ8rawの旧eb9→現8329採用は6→8、元焦点2だけ回復、保持2の全request／raw／response不変。全8×3planの24保存・非生成再読。12HTTP・103.914秒で元提供args／env／cwdを復元し、通常／Analysis前後response一致・独立health200。Piece／Analysis両CI成功。本人前置3の実rawは前提先行で、その本人前置形自体は未実証。f6dae研究候補・通常selector OFF、本番未反映。
+
+次は一般文章の自然さ・反復・引用／理由等の残差を、元教材・保存済み実本文と既存source／生成条件から切り分ける。今回の8実応答・24保存・103.914秒復元は完了し、この12HTTPと過去の完了済みrunを再実行しない。今回の一回承認は消費済み。新fit／GPU比較を自動選定せず、通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。 [実原本・意味比較・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-combined-register-actual-20261111)。
+
+
+<a id="piece-breadth53-inference-prepared-20261111"></a>
+## 11/11 AR-04 — 旧53照合行の現f6dae比較を準備
+
+旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。
+
+次は旧53照合行の未取得41要求＋既存f6dae保持確認2を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す案。packet／launcher合計31,961byte、候補最大43＋通常／Analysis前後control4＝最大47HTTP、復元枠込み600秒設定／復元予約120秒。既存Podへの新送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新しい43要求案の具体承認後に限る。480秒のwork期限で途中結果を保持して復元へ戻るため、全43完了を保証しない。前回の一回承認は消費済みで、完了済み8応答の12HTTPを再実行しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+全ファイル地図／商品ownerの追加変更なし（STRUCTURE_MAP_DELTA_NONE）。今回の商品source／test／新CI要求0。準備を広い文章品質・正式受入れへ加点しない。 [原本・重複除去・具体packet・次の評価](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
+
+
+<a id="piece-breadth53-current4b-actual-20261111"></a>
+## 11/11 AR-04 — 旧53実生成回帰・51採用と153保存
+
+具体承認後、保存f6daeで未取得41要求＋保持2を一回・学習0で実4B確認。43候補／47HTTP・265.692秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立healthz200／PID一致。既存10を戻した全51要求（旧53照合行）は51採用・3plan計153保存／非生成再読。保持2は前回全応答と同一。原source／prepared／messages・raw不変。全51本文のroot／独立読取で明確な新意味変異は見られず、一人称反復等の文章上の残差は保持。旧53回帰の未取得は0。f6dae研究候補・通常selector OFF・AR-04未完。
+
+次は今回未被覆の理由／譲歩付き完了動作・引用・長い文章の読取と文章化を、元教材・保存済み実本文と既存のfinite動作／source scopeから切り分ける。理由／譲歩付き完了動作は全文KEEPに留まるCPU例があるが、このfamilyの現f6dae実失敗は未確認で、追加学習を選ぶ根拠にはしない。今回の旧53全生成回帰・実43候補・153保存・265.692秒提供復元は完了として継承し、完了runを再実行しない。今回の具体一回承認は消費済み。新GPU／fit／SYSTEM周回・通常採用／selector有効化／Render／live DB／RN／buildを自動実行しない。 本人前置形そのものの実raw、理由／引用と完了動作の一般読取、広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。
+
+全ファイル地図／商品ownerの追加変更なし（STRUCTURE_MAP_DELTA_NONE）。商品source／test／新CI要求0。広い文章品質・正式受入れへの加点なし。 [実原本・意味比較・保存と限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-current4b-actual-20261111)。
+
+
+<a id="piece-scoped-finite-action-20261111"></a>
+## 11/11 AR-04 — 理由／譲歩付き完了動作を接続（実行前の記録・後続実測で更新済み）
+
+API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。
+
+API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864はattempt1・success。追加run／rerun要求0。
+
+次は、この新6（理由／譲歩付き能動事実過去）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B確認へ通す。合計17,929byte（packet15,480＋launcher2,449）、8候補＋通常／Analysis前後control4の最大12 chat HTTP、Piece1load・retry／新weights0、復元枠込み600秒の期限設定／復元予約120秒。新packet／launcher送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新材料の具体承認後に限る。64834は前回復元時のPIDで現在のfresh確認値ではない。前回の43候補／47HTTP・265.692秒復元・51要求153保存は完了で、消費済み一回承認を再利用しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。 受動、引用／名前／外側SELF／複数operatorを含む完了動作、条件・日時の新接続、本人前置形の実raw、長い文章と広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source資格・scope／model比較・欄別生成条件を拡張。新公開型／route／DB／作者／controllerなし。 [原因・同一候補・保存・実model未実施範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
+
+ファイル地図差分：既存`piece_source.py::_scoped_finite_self_person_action/_expression_scopes`、`piece_v1c.py::compile_piece_artifact_plan`、`piece_v2_content_policy.py`のS7 KEEP model比較、`piece_model_source.py::_authoring_constraints`を更新。新`ai/tests/test_piece_model_scoped_action.py`と既存`.github/workflows/piece-b2b-isolated-postgres.yml`のpath/run2行を追加。原source／PreparedRequestと公開API・DBの所有者は維持する。
+
+
+<a id="piece-scoped-finite-action-actual-20261111"></a>
+## 11/11 AR-04 — 完了動作の実8・復元と残る前提変異（指示修正前の実測記録）
+
+API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。
+
+既存API400912d8のPiece CI42958167751／Analysis CI42958167864は両方attempt1・successの完了結果を継承。今回API source変更0・CI追加run／rerun0。
+
+次は、ACTION-REASON-CONSULTで外側の継続状態が過去事象へ変わった実rawを起点に、既存source_scope生成条件が前提全量の保持を4Bへ伝える接続を点検し、既存ownerの因果箇所だけを修正する。source全文や期待値を出力へ寄せず、S7の不採用を緩めず、新しい作者・別経路・Gateを増やさない。今回の17,929byte送信・全環境同Pod一時読取／復元再利用・一回承認は完了して消費済み。自動GPU再試行／追加学習／新weights／通常採用／selector有効化／Render／live DB／RN／build／配布0。次のGPU比較は未準備・未承認で、自動反復しない。 新familyの全6成立、広い文章編集品質、本人前置形、長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公開型／route／DB／作者／controllerの変更なし。API400912d8の既存ファイル地図と責務境界を継承し、実測現在地・残件だけを更新。限定TECHNICAL_CREDIT、human acceptance追加0。 [実8の詳細と残る前提変異](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
+
+
+<a id="piece-scope-prefix-instruction-20261111"></a>
+## 11/11 AR-04 — 外側前提と内側過去を分ける生成指示（実行前の記録・比較完了）
+
+API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。
+
+API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。
+
+次は、同じ入力の失敗1例＋同系保持5例＋引用保持2例を、生成指示だけ修正したAPI74dff9a7のmessagesで、保存f6dae・既存稼働用Pythonへ一回通す。新しい架空入力0、原7項目／prepared／SYSTEM／生成設定は同一、引用2の全messagesも同一。合計18,068byte（packet15,631＋launcher2,437）、最大8候補＋通常／Analysis前後4の12HTTP、Piece1load、追加学習／新weights／retry0。復元枠込み600秒／予約120秒。送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用はこの新一回の具体承認後に限る。PID65745は前回復元時の履歴でfresh確認値ではなく、元identity不一致なら停止前に中断。前回の17,929byte・12HTTP・106.495秒の一回承認は完了・消費済みで再利用しない。通常採用／selector有効化／Render／live DB／RN／build／配布の自動実行0。
+
+外側前提の時制・継続相の実改善、全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：既存build_piece_model_messagesの指示文だけと、既存変異test1例の追加。source owner／scope投影／S7／公開型／route／DB／作者／controllerの責務・ファイル地図は継承。限定TECHNICAL_CREDIT、商品品質delta未測定・human acceptance追加0。 [原因・変更範囲と次の一回](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
+
+
+<a id="piece-scope-prefix-actual-20261111"></a>
+## 11/11 AR-04 — 指示明確化の実比較は改善なし・実24教材を回収（直前の実測・回収記録）
+
+API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。
+
+API74dff9a7のPiece CI42963237980（39step、attempt1・success）を完了として継承。今回source/test変更0・新CI／dispatch／rerun0。Analysis400912d8の過去successを74dの実行へ読み替えない。
+
+次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。 この1例の時制・相変異、今回family全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回は実行・読取・private教材回収・状態更新だけでsource／test／公開型／route／DB／作者／controllerに変更なし。primary BLOCKER_NARROWED、可視品質改善0・human acceptance追加0。 [実測・教材範囲と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。
+
+
+<a id="piece-scope-teacher-complement-20261111"></a>
+## 11/11 AR-04 — 独立12件の教材補完案・既存24件保持（補完案確認の完了記録）
+
+評価8と分離した架空の対照教材12件（6対）を補完案として作成。外側の進行形／過去形だけを変え、内側の本人・相手・対象・肯否・過去動作を固定。既存24行を変更せず36行案へ結合。新12件は現source/S7のCPU確認で受理、外側表現・肯否・相手を変えた36候補は拒否。旧24件は再実行していない。評価原文・評価出力との完全一致0。モデル／GPU／SQL／追加学習0、学習要否は未決定。直前の実4Bは同系5/6＋引用2採用のまま、前提の進行形を過去形へ変えた1失敗が残る。通常selector OFF・AR-04未完。
+
+API74dff9a7は変更なし。既存Piece CI42963237980（39step、attempt1・success）を継承し、今回source/test変更・新CI・dispatch・rerun0。
+
+次は、独立12＋保持24の36行補完案を前提に、既存作者で未解消の前提変異へ対処する実モデル試験が必要か、必要なら比較対象・保持評価・上限を具体化する。教材とS7の整合確認を実4Bの改善や追加学習の必要性へ読み替えない。評価8は教師から除外し、同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。前回18,068byte送信・全環境同Pod一時読取／復元再利用の一回は完了・消費済み。新GPU／fit／新weights／再試行の実行準備・承認はなく自動実行0。通常採用／Render／live DB／RN／build／配布0。
+
+NO_STRUCTURE_MAP_DELTA：今回の教材補完案とCPU確認は既存source／意味／準備／受領／S7を再利用し、新公開型・route・DB・作者・controller・Gateを追加していない。商品上の可視改善は未測定・human acceptance追加0、AR-04の未完を維持する。 [教材補完案・確認範囲と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-teacher-complement-20261111)。
+
+
+<a id="piece-scope-complement-fit-prepared-20261111"></a>
+## 11/11 AR-04 — 独立補完36件・72更新の比較を準備（実行前の記録・一回完了）
+
+独立12＋保持24の36件で、新しい候補を元baseから72更新（各2回）だけ学習し、未解消1を含む既存8＋独立保持8の計16件を比較する一回を準備。旧f6dae実測16はcurrent messages／生成設定一致を照合し再利用、最大20HTTP。送信55,014byte、fit最大360秒・候補用105秒先取り・復元120秒を含む全体600秒。API9b1b7bb8の既存trainerを36明示時だけ最大72へ限定拡張し、既定24/48を保持。CPU28成功・既存CI42969704329成功。Pod送信・環境読取・GPU・fitは未実行、新学習を含む実行承認待ち。通常selector OFF・AR-04未完。
+
+API9b1b7bb861a8efa359c780895b3d2ed5d8b802dbのsource/test計2pathはremote全文・blob・変更path・head一致を確認。CPU trainer28成功（既存warning1）、既存Piece CI42969704329／job130355058089・attempt1・全39step success。追加dispatch/rerun0。
+
+次は準備済みの36件/72更新・候補16/最大20HTTP・55,014byte・復元枠込み600秒の一回について、新しい学習と起動環境全体の同Pod内一時読取／復元再利用をMashに確認する。過去の推論一回承認は追加学習なしで完了・消費済みのため、新fitへ流用しない。承認後も元PID/args/env/cwd/source/weightsとcached tokenizerの全36教材・評価16件を停止前確認し、不一致／期限不足は実行を進めず、完了した72更新だけを評価する。新重みの通常採用、selector有効化、Render、live DB、RN、build、配布へ自動進行しない。
+
+NO_STRUCTURE_MAP_DELTA：既存training ownerの限定引数拡張であり、新しい公開型・route・DB・作者・controller・Gateは追加しない。意味読取・準備・生成・受領・S7・保存の担当は不変。学習比較が準備できた段階で、モデル改善・商品品質credit・human acceptance追加は0。 [準備・比較範囲と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-prepared-20261111)。
+
+
+<a id="piece-scope-complement-fit-actual-20261111"></a>
+## 11/11 AR-04 — fresh36/72候補の前提変異1件回復・実16と48保存
+
+承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。
+
+API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
+
+次は保存済み新a1df候補について、旧65固有要求のうち今回とcurrent messagesが一致する16を除いた未確認49要求を既存wireから比較対象として具体化し、広い本文・欄混合・refinedの退行を先に確認する。今回完了した36/72学習・16生成を繰り返さず、追加fitへ自動進行しない。承認済み55,014byte送信・全環境同Pod内一時読取/復元再利用の一回は完了・消費済み。新GPU試行・通常採用・selector有効化・Render・live DB・RN・build・配布は未承認/未実行として区別する。
+
+NO_STRUCTURE_MAP_DELTA：今回source/test/公開型/route/DB/作者/controller/Gateに変更なし。primary TECHNICAL_CREDIT、検証候補で1件の可視意味保持改善を確認、正式商品credit/human acceptance追加0。 [実16・48保存・復元と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
+
+
+<a id="piece-a1df-remaining49-prepared-20261111"></a>
+## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（実行前の記録・一回完了）
+
+保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。
+
+前回の16/65実確認と48保存は完了として継承。今回49の新モデル出力・保存・一般品質は未確認。完了済みの学習・16生成を再実行しない。承認後は保存a1dfによる未確認49だけを一回比較し、無修補受領・全本文の原文対照・採用artifactの既存隔離保存／非生成再読へ進める。通常採用・selector・Render・live DB・RN・build・配布は未実行。
+
+NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。今回の旧raw照合・実行準備を新候補品質改善やAR-04完了へ数えない。 [49要求の準備・比較範囲と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
+
+
+<a id="piece-a1df-remaining49-actual-20261111"></a>
+## 11/11 AR-04 — 残49実比較・過去好み1件退行、通常採用は保留
+
+保存a1dfの残49要求を一回・学習0で実生成。53HTTPは全200/stop、復元込み274.959660秒・retry0。現CMEE/S7は48採用/1拒否、144隔離保存・非生成再読/3保存前拒否。47rawは旧f6daeと同一、B53-009は本人再掲のみ、B53-051は「農作業が好きだった」→「好きだ」の時制退行で不採用。前回16と合わせた65要求は64採用/1拒否、62raw同一/3変化。前回の前提回復1件は維持したが別の過去形を失い、通常採用へ進めない。元提供PID68559・引数/環境/作業場所・source/Analysis/旧重み保持、通常/Analysis前後全response一致、独立health200/PID一致。通常selector OFF・AR-04未完。
+
+今回の候補49/全53HTTPは完了し、前回16と合わせて既存65固有要求を実確認済み。051の原文/旧新rawに明示された過去→現在の変更を、source資格外やreaderだけの不具合へ読み替えず、通常採用は保留する。CPU照合で051の過去はsource/wireともPASTと確認し、故障を送信後の文章化へ限定。既存36に直接の肯定過去好み教師はないが、原因や追加学習の必要性とは断定しない。次は評価051を教師へ移さず、独立した時制/肯否/欄配置の対照を具体化し、前回回復も保つ最小修正へ戻す。追加fit/GPU/retry、source/raw修補、S7緩和、通常採用/selector、Render、live DB、RN/build/配布は自動実行しない。
+
+NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。実行と保存は成立したが、候補の全品質改善・AR-04完了・商品受入れは未成立。 [実49・時制退行・144保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-actual-20261111)。
+
+
+<a id="piece-v4-inverse-clip-support-20261112"></a>
+## 11/12 AR-04 — 小数寸法のclip支持・逆写像配置の隔離比較
+
+研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。
+
+研究4pathの候補実装と観測保存をGitHubへ保持した。通常作業側の製品.mm581／pin／公開型・route・DB・作者・renderer責務は変更0（STRUCTURE_MAP_DELTA_NONE）。既存ファイル地図の責務は継承する。候補の詳細・初回記録欠落と保存修復・数値は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)を参照。
+
+
+## 2026-11-12 — 三中核への補助能力移管のファイル差分
+
+API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。既存owner内の差分であり、新しい通常作者・共有運用systemは追加しない。
+
+| repository path | 現在の役割／差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_thread_service.py` | 既存QUESTION/ANSWER/checkpointをnaturalへ接続、purpose別の単一取得、保存と非生成再読 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 問い前／回答後の作者目的、既存typed anchorからactive/inactive本人意味を投影 |
+| `ai/services/ai_inference/piece_model_source.py` | 現Piece planの内容選択・required/context/関係を既存configured取得へ投影 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存完全source読取から意味責務と根拠文脈、有限な完成物逆照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 明示source_duties.v2の準備・同版binding。既定v1保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 同じ図／本文、private meaning reviewの保持 |
+| `ai/services/ai_inference/analysis_semantic_map.py`、`analysis_model_source.py`、`analysis_cumulative_service.py` | 明示profileを既存provider/Engine/保存へ渡す。普通のv1は変更しない |
+| `supabase/migrations/20261112080628_emlis_natural_bound_questions.sql` | 現RPCの追加migration。新policyだけ全plan3問、旧policy/limitとnatural履歴/frame条件を保持。live未適用 |
+| `ai/tests/test_emlis_natural_question_application.py`、`test_emlis_natural_reply_response_purpose.py`、`test_piece_model_content_selection.py`、`test_analysis_semantic_source_duties.py` | 新source/purpose/claim/context・同版保存再読の検証。provider/Authは合成を含む |
+| `ai/tests/test_emlis_q3_application.py` | 既存隔離SQL helperへ新migrationを追加 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml`、`analysis-observed-content.yml` | 既存CIへ新検証を追加。新しい実行Gateは作らない |
+
+実4B入力3packetと一回7要求scriptは未実行原本。uploadは自動承認審査で拒否され、GPU生成0・本番変更0。全sourceの意味読了や全仕様完成をこの差分表から主張しない。詳細は上記の詳細設計§9.2。
+
+
+## 2026-11-13 差分 — 通常応答の二入力本人訂正
+
+STRUCTURE_MAP_DELTA_PRESENT。既存RN screens/input/EmlisThreadModal.js、useEmlisThread.js、lib/api/emlisThreadApi.jsに、完了naturalの二入力→対象版束縛→保存・読み直しを追加した。本人／表示版変更・closeで旧form失効、結果不明の同key照合を維持。tests/emlis-thread.test.jsへ実Reactの4件を追加。全specの正式リリース前latest-onlyを適用し、旧client向けの新分岐は追加しない。
+
+API既存 api_emlis_thread.py、emlis_thread_service.py、api_contract_registry.py、CMEE emlis_thread_contracts.py／emlis_thread_source.py／emlis_thread_history.py／natural_reply.py／natural_reply_meaning.pyの責務を更新した。新しい製品fileはない。新しいai/tests/test_emlis_interpretation_correction.py、既存test_emlis_q3_application.py、既存CI2本は保存・source・履歴・再送の検証を担当する。新migrationは01Cの同日差分を参照。
+
+提供範囲・実装・検証・残件の正本は[補助経路§9.28](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。新料金・追加AI問い・live配置・端末確認は0。Premium本人frame／Analysis／Pieceの訂正伝播は後続残件。
+
+
+## 2026-11-13 差分 — 訂正説明の別source意味読取り
+
+STRUCTURE_MAP_DELTA_PRESENT／API0985877f。既存3製品fileの責務差分であり、新製品file／公開型／route／DB／RNは追加しない。
+
+| repository path | 現在の責務差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py` | 単一訂正説明の独立読取り、source ID／親／記録時点とscalar／UTF-8範囲。複数／未確定・未読文脈を昇格せず、旧原入力とAI対象を根拠へ戻さない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 研究時の訂正role投影と5800byte内の全原文保持。通常hint接続は実失敗で撤回。訂正cognitionは生成投影しない |
+| `ai/services/ai_inference/emlis_thread_service.py` | 訂正時も既存private完成本文比較へ到達。UNASSESSED／partialを公開成功にせず、receipt再開・非生成再読を維持 |
+| `ai/tests/test_emlis_interpretation_correction.py`、`test_emlis_natural_reply_meaning_reuse.py`、`test_emlis_natural_reply_meaning_budget.py` | 説明だけを根拠化、全文座標、複数訂正／後続未読、通常hint OFFとprivate保存・公開分離の検証 |
+
+新8実応答の通常候補も意味未達で不採用。5保存は隔離実績、製品品質合格・live反映／端末成功ではない。[最新実装と再開点§9.30](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-meaning-reader-20261113)。01CはAPI／DB契約不変のため差分なし。
+
+
+## 2026-11-13 差分 — AI訂正対象の生成message出所分離候補
+
+STRUCTURE_MAP_DELTA_PRESENT／API3b727b3f。既存2製品file内の明示研究候補、通常OFF・未配置。新製品file/公開DTO/route/DB/RN追加0。
+
+| path | 既存責務内の差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | build_natural_reply_messagesが保存material/prefixを保持し、旧AI対象全文だけlocator付きassistant文脈へ投影。曖昧/複数/過去を含む全本人説明を保持。通常factory出力は従来同一 |
+| `ai/tools/serve_emlis_natural_reply.py` | 明示CLI+natural認証時のみ、本人側/AI側の完全な参照一致を持つ3message受付候補。既定OFF、Analysis/Piece/任意AI履歴へ拡大しない |
+
+既存tests2fileで関連187＋server20成功。新実4Bは0、旧rawの隔離3保存/再読は新品質実績ではない。[現在の具体比較・境界§9.31](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-prepared-20261113)。§9.31で最大10分/候補3＋元提供前後4/復元一回を準備し、後続§9.32で完了。この具体一回は§9.32で実行済み・消費済み、通常不採用。86.144974秒/候補3＋対照4/元提供復元と前後全response一致/3隔離保存再読を確認したが、役割反転・格崩れが残る。今回はsource/test/責務地図変更0、STRUCTURE_MAP_DELTA_NONE。直接generatorの取得で、新3message HTTP実GPU成功・意味合格・live/本人端末成功ではない。
+
+
+## 2026-11-13 — 本人訂正の独立16教材・32更新比較を準備
+
+**11/13・本人訂正の独立教材8＋既存保持8、32更新の研究案を準備：** 実3の出所分離不採用を継承し、既存44／履歴16教材に直接のAI応答訂正形式が0件だった範囲を確認。別場面の訂正8教師と元44の保持8を組み、未学習新4・既知実3・訓練露出済保持8・既知履歴2の17比較を固定した。現行の通常2message／原入力・別訂正sourceを保持し、12件の合成隔離保存・非生成再読、凍結checkpointから新4件の受領再開をCPU確認。モデル品質の証明ではない。送信準備207,620byte、新規31生成＋前後4対照、学習32更新、停止・復元・後対照込み600秒の一回案。未送信・未実行・今回分の学習承認待ち。通常OFF、同じhint/出所表示の反復なし。 [詳細設計§9.33](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-independent16-fit32-prepared-20261113)。
+
+STRUCTURE_MAP_DELTA_NONE：private教材／既存trainerの一回適応／CPU確認だけ。製品ownerのpath・source/controlの役割、公開型／route／DB／RNは不変。旧実3の不採用を維持し、新実品質・通常採用・Premium frame/Analysis/Piece伝播・本人端末は未完。
+
+
+## 2026-11-13 — 16教材32更新・17比較完了、品質未達で通常不採用
+
+**11/13・16教材32更新と17比較を一回完了、品質未達で通常不採用：** 承認207,620byteを既存Podで実行し、新規31応答＋前後4対照、全stop、再試行0。復元・対照終了237.196491秒／ZIP close237.885058秒、元提供PID83325→84398へ元args/env/cwdで復元、通常／Analysisの前後全response一致・独立health200。112tensor保存／fresh reload一致と原本・重み回収を確認。先生→妹の格崩れ・本人一人称の貼返しが残り、通常保持T06には未記載の支配状態を付加したため新10b563候補を採用しない。旧3＋新4の同source隔離保存・新service非生成再読は7成功、独立比較7UNASSESSED。通常OFFを維持する。 [詳細設計§9.34](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-independent16-fit32-actual-20261113)。
+
+STRUCTURE_MAP_DELTA_NONE：実行・原本／新候補重み回収・実本文review・同source隔離保存と状態更新だけ。全17実結果、原本34件、新規生成35件、保存7件の範囲を区別する。前回187＋20／CI成功は継承、追加dispatch/rerun0。公開DTO／route／DB／RN／製品sourceの変更0、意味合格・通常採用・全補助経路完了へ換算しない。
+
+<a id="piece-natural-single-answer-connection-20261113"></a>
+## 2026-11-13 — naturalの実一回答をPieceへ渡す既存接続の修復
+
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [実装 f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)。既存RN選択関数とAPIを整合した。RNファイル変更0。map上の連携はscreens/input/EmlisThreadModal.js→piece_v2_source_adapter→既存refined Piece。
+
+前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
+
+STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。API f7b44e0eのPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)とAnalysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)は、ともにattempt1で全工程成功。手動dispatch/rerun0、実DB未適用。
+
+
+<a id="emlis-natural-owned-premium-frames-20261113"></a>
+## 2026-11-13 — naturalのPremium仮の理解と本人操作を接続
+
+**11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 既存RN screens/input/EmlisThreadModal.js:FrameEditor／useEmlisThread.updateFrameと、API emlis_thread_service.pyの新private helperを接続。RN source変更0。
+
+API d8f6d137のPiece CI [43404500570](https://github.com/MassyuRed/mashos-api/actions/runs/43404500570)とAnalysis CI [43404500574](https://github.com/MassyuRed/mashos-api/actions/runs/43404500574)は、ともにattempt1で全工程成功。手動dispatch/rerun0、live DB/Render/RN build・配布・GPU/学習は0。 Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/route・SQL・RN source・prompt・モデルを変更しない。二欄訂正からframeへの意味伝播、Piece／Analysisへの訂正伝播、複数回答Piece、一般応答/編集品質、live／本人端末・正式受入れは未完。新10b563候補不採用と通常model selector OFFを維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。実装と責務・原本・途中環境失敗・検証限界は[詳細設計§9.36](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)を正本とする。
+
+
+<a id="emlis-frame-feedback-target-context-prepared-20261113"></a>
+## 2026-11-13 — 本人判断と対象frameのprivate結合を修復（準備時点の履歴・一回完了）
+
+> 本節は実行前の準備時点の履歴です。「未送信／未実行／承認待ち」および実生成0の記載は当時の状態を示します。Mashの具体承認後の一回は完了し、実結果・同源泉保存・不採用・残差は[§9.38](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)へ更新しました。
+
+**11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 実装はAPI 96c2085a。API 96c2085aのPiece CI [43411618714](https://github.com/MassyuRed/mashos-api/actions/runs/43411618714)とAnalysis CI [43411618653](https://github.com/MassyuRed/mashos-api/actions/runs/43411618653)は、ともにattempt1で全工程成功。追加dispatch/rerun0。
+
+83,777byte/3file、旧2＋新3と前後4model確認＋health2GET、300秒・一回・学習/再試行/再起動0の実比較を準備。未送信/未実行、今回分の承認待ち。SYSTEMの文章・モデル・作者・公開DTO/API・DB/SQL・RN・料金/問い数/quotaは変更しない。対象contextは本人sourceや有効frameではない。一般応答品質、反復修正時の対象復元、二欄訂正→frame/他core伝播、live/本人端末・正式受入れは未完。通常model selector OFF、新10b563不採用を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと既存workflow2本の責務/限界/原本を[詳細設計§9.37](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)へ集約する。
+
+
+<a id="emlis-frame-feedback-target-context-actual-20261113"></a>
+## 2026-11-13 — frame本人判断の実5比較・同源泉3保存、自然本文は不採用
+
+承認済み83,777byte／3fileを既存Podで一回実行した。旧2＋新3の研究5、通常／Analysis前後4対照の計9model POSTは全HTTP200／stop、独立health前後2GETも200。実行98.005834247秒、archive close98.032634725秒で300秒以内に完了した。PID84398／starttime212772776は不変、通常／Analysisの前後生responseは各全byte一致。学習／再試行／提供停止／再起動／重みload／設定変更0で、この一回の承認は完了消費済みである。
+
+新3は本人判断を優先した本文の達成0/3、FAIL3/3として品質改善候補を不採用とした。拒否Aは「褒められた→重かった」、拒否Bは「誘われた→怖かった」という拒否済みmappingを断定し、修正Aは本人の「結果だけで判断されたことが気になった。」を反映せず旧mappingを再使用した。元の過去ANSWERは実在し、問題は感情の捏造ではなく、後の本人status／修正文を優先しない無留保の再使用である。旧拒否／旧修正の2rawは全文同一の現原入力復唱で、旧修正も本人文を反映していない。旧拒否の単純復唱を対象識別成功へ数えない。
+
+同じ新3checkpointに実receiptを保存し、新service GETで同本文の非生成再読3/3を確認した。再取得／model call0、原入力／ANSWER／feedback／先行event不変。拒否A/Bは指定frameのみを除いた各2frame、修正Aは本人修正文を含む3frameを保持した。保存本文への処置は既存providerと同じ外側空白stripだけで、実response.modelも保持し、語句・意味の修補はしていない。隔離PGlite／架空sourceの実HTTP本文保存であり、live DB／実Auth／Render／RN／本人端末ではない。
+
+対象情報は作者材料へ届くが、本人status／修正文を優先した自然本文にならない、という残差がある。今回5rawは「今は嬉しい」を保持し、明確な極性反転・時点逆転・内部label／ID／診断露出は認めなかった。この範囲を一般品質へ広げず、前記録と当回同文記録の識別不足、新3が当回の悲しさ／寂しさを過去mappingへ置換したように読める限界を残す。新Aの変化の受取りも具体訂正の受領を示すものではない。唯一原因は確定せず、追加hint／SYSTEM／fit比較へ進まない。
+
+STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否記録だけで、製品source／test／公開DTO/API／DB/SQL／RN／モデル／通常selectorの変更0。通常selector OFF、新10b563不採用を維持し、一般応答品質・反復修正時の対象復元・二欄訂正からframe／他coreへの意味伝播・live／本人端末・正式受入れは未完である。
+
+詳細・private原本・採否と保存の範囲は[補助設計§9.38](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)を正本とする。
+
+
+<a id="piece-natural-answer-active-source-files-20261114"></a>
+## 2026-11-14 — 自然一回答の訂正・撤回とPiece保存境界のファイル差分
+
+API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)の変更は既存production11・test3・workflow2・migration1の全17path。全pathと個別責務は[01Bの今回差分](01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)に列挙する。本mapはアプリ基盤と保存側の接点を示す。
+
+| 既存owner／path | 今回の接続 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 現共有ownerと保存済みcheckpointをexact照合し、真正自然Q3の一回答REVISE／WITHDRAWを既存Pieceへ渡す |
+| `ai/services/ai_inference/piece_v2_preview_service.py`／`piece_v2_save_service.py`／`piece_v2_store.py` | 既存のpreview・visual・save RPCのexpected source state JSONへ有効更新のcheckpointを渡す。公開route／top-level RPC引数は追加しない |
+| `supabase/migrations/20261114051948_piece_natural_answer_active_source.sql` | locked sourceのcheckpoint完全一致を既存3関数で確認し、active更新から偽ADDへのすり替えも拒否する |
+| 既存Piece／Analysis workflow2本とtest3本 | 既存CI内でsource→作者→SQL保存→新service再読と変異拒否を検査。別のcontroller／checker系列を作らない |
+
+migrationは稼働履歴actual `20261114054136`として適用済み。API／workerとも75e526d1でLive、healthz／bootstrap／新worker通信200を再確認した。旧ADD・第2／3回答の独立ADDと既存source_ref七項目／lineage、本人／quota／再送、RN／rendererは保持する。新private意味class exact1と既存private範囲fieldを追加した内部source接続であり、公開DTO・table・RN sourceの追加変更はない。新Piece実4B3件・同実本文の保存／画像は送付前停止で未完。STRUCTURE_MAP_DELTA_PRESENT。完了範囲・実配置・停止と証跡の限界は[補助設計§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を参照する。
+
+<a id="shared-meaning-map-if-file-map-20261114"></a>
+## 2026-11-14 — 共有有効意味・マップ訂正・IF／Savedのファイル地図
+
+本節は§9.62時点のAPI da9460b・RN source8382ef5の53path地図。後続のIF内部差分7pathは次節に統合し、現API／結果はc7968c6・補助設計§9.64を優先する。過去の日付付き候補・未実装表は当時の履歴として保持する。
+
+| 責任 | 現ownerと接続 |
+|---|---|
+| 本人の有効意味 | `natural_reply.py`／`emlis_thread_service.py`。原文・回答・明示訂正／撤回からactive材料を作り、OBSと原根拠付き分析材料を同じ保存境界へ渡す。AI本文を本人sourceへ戻さない |
+| Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
+| マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
+| IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF専用namespaceで完全引用・空配列を保持。要求数と同数の異なる本人案がある場合だけ、全anchor＋該当本人案＋UNKNOWNのobject tupleと接続先を生成時に束縛。本人案不足／重複は従来汎用経路を維持。CPU採否・ordinary／Pieceは不変。実3候補の同raw保存再読と残差は§9.64 |
+| RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
+
+API cb6301ed→da9460bの変更全53path（再実装や全旧資産のimport件数ではない）：
+
+| リポジトリ内path | 責任 |
+|---|---|
+| `.github/workflows/analysis-observed-content.yml` | 既存CIへの対象検証登録 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存CIへの対象検証登録 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | API／引継ぎ案内 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | API／引継ぎ案内 |
+| `ai/services/ai_inference/analysis_cumulative_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_if_model_source.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_if_route_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_if_route_store.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_map_correction_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/api_analysis_if_routes.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/api_contract_registry.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/api_self_structure.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/app.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_contracts.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/map_interpretation_correction.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/emlis_thread_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/piece_model_source.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/piece_v2_generation.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/tests/analysis_if_route_sql.cjs` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/analysis_map_correction_sql.cjs` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | 架空入力・固定検証材料（実品質の合格証ではない） |
+| `ai/tests/fixtures/piece_cmee_realization_recorded.json` | 架空入力・固定検証材料（実品質の合格証ではない） |
+| `ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/piece_v2/test_b05_shared_meaning_piece_pipeline.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_emlis_material_handoff.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_if_api.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_if_routes.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_if_service.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_map_correction_application.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_map_correction_handoff.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_map_correction_sql.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_emlis_active_meaning_application.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_emlis_analysis_material.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_piece_cmee_realization.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_piece_model_server_constraints.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tools/cmee_current_4b_packet.py` | 架空材料の準備／実受口・raw受領 |
+| `ai/tools/serve_emlis_natural_reply.py` | 架空材料の準備／実受口・raw受領 |
+| `supabase/migrations/20261114120000_analysis_if_route_artifacts.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114123000_analysis_emlis_material_handoff.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114124000_piece_shared_analysis_material_fence.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114132000_analysis_map_interpretation_corrections.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114133000_analysis_map_correction_handoff.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+
+RN関連pathは `components/selfStructure/{CumulativeWatashiMapView,MapInterpretationCorrectionDialog,mapCorrectionContract,AnalysisIfRouteDialog,ifRouteContract}.js`、`lib/api/{analysisMapCorrectionApi,analysisIfRouteApi}.js`、`tests/{analysis-map-correction,analysis-if-route}.test.js`。build・配布は未実施。アカウント／購読／公開接点等の既存責任は01Cを維持する。
+
+## 2026-11-14 — IF原文引用・本人案分離・保存再読の差分
+
+
+| 既存path（mashos-api） | 今回の変更責務 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | IF専用namespace内で完全JSON文字列と空参照配列を生成時に保持。IFだけfield順を固定し、ordinary／Pieceのparserを保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 本人案を別候補・anchor先頭／UNKNOWN末尾へ渡す生成指示。旧／新canonicalのrequest_refとmessages hash双方を再導出し、未確認の指示を拒否 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | receiptに対応した旧／新preparedを導出してIF ownerへ渡す。rawを変更しない |
+| `ai/services/ai_inference/analysis_if_route_service.py` | 受領済みrawと凍結materialの同版照合。旧RESERVED／RECEIVEDを新指示へ貼り替えず再開 |
+| `ai/tests/test_analysis_if_service.py` | 旧予約／受領の再開、model0の再読、旧新hash混在・未知指示の拒否 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 完全escape文字列・空参照・IFのみfield順、ordinary schema／parser不変 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | IF新準備材料。派生map／route参照も再生成した新fixtureであり、旧preparedと同byteとはしない。他5caseは完全一致 |
+
+新file・公開API／DB／RN契約・作者・保存ownerの追加0。da9460b→edcd2c9→f1a7d32の変更はこの既存7pathに限る。既存IF／Saved・現在mapとの寿命分離を保持。実1／2候補の保存・再読／Saved、3候補拒否と通常配置は補助設計§9.63。内部生成・再開責務の限定修正でSTRUCTURE_MAP_DELTA_NONE。
+
+## 2026-11-14 — 本人提示3案の生成・同版保存再読（§9.64）
+
+通常API／worker c7968c6。f1a7d32からの変更は下記の既存5pathだけ。新owner／公開API／DB／RN契約・製品依存の追加なし。既存7pathと53pathの地図を継承し、Engine／service／storeの所有責任は変更しない。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api既存path | 今回の責任内差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 本人案がそろう場合の全anchor・本人案・UNKNOWNと仮想接続。IF内だけでprefixItemsのobject tupleを扱い、通常parserを変更しない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 未知と既知手順・別案の分離指示。旧4版＋新版の既知canonicalを同じrequest_ref／messages hashで再導出 |
+| `ai/tests/test_analysis_if_service.py` | 旧4版の予約／受領からの同raw再開、混在hash拒否 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 1／2anchorのtuple、欠落／余分／順序・端点・別案束縛、空白／clone、部分案／重複案の汎用経路維持 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | 新指示のIF preparedを再生成。他5case全dict不変。IF原文は保持、派生artifact／route refは更新 |
+
+実3候補を含む1set＋明示Saved1件の隔離SQL保存・別process再読・既存RN受口は成立。標準RNは本人案配列を送らないため、その自動3案の実生成品質へ換算しない。一般品質と条件表示の残差は補助設計§9.64。
+
+
+## 2026-11-14 — 標準IF3／本人条件の生成slot保持（§9.65・実4B前）
+
+**11/14最新：標準RN入力の自動3案で、元anchor・UNKNOWN・接続・本人条件を生成時に保持する修正をAPI候補d3daee549a848675cb200b3aa3360be38e94bf8fへ反映。** 関連168件成功、旧actual採否と保存bytesを保持。架空3案の合成保存・別process再読・Saved／RN受口は事前検証だけ。27,761bytes・2fileの既存Pod送付は具体的開示承認不足として自動審査で送信前拒否、実生成／Pod変更／本候補の通常反映0。通常API／workerはc7968c6 Liveを継続。本単位・補助全体未完、配布／実機保留を維持。
+
+既存製品2owner（serve_emlis_natural_reply::_if_output_schema／_if_json_schema_parser、if_route_realizer::prepare_if_model_request）と既存test2／fixture1の計5path。全path・責務は[補助設計§9.65](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-conditions-prepared-20261114)。新owner／依存／公開API／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。

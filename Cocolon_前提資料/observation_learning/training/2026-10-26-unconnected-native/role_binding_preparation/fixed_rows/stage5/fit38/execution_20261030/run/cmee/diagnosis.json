@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "stage_failure": {
+        "stage": 3,
+        "reason": "Extra data: line 1 column 1128 (char 1127)",
+        "finish_reason": "stop"
+      },
+      "new_cmee_calls": 0
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "stage_failure": {
+        "stage": 5,
+        "reason": "stage_not_finished",
+        "finish_reason": "length"
+      },
+      "new_cmee_calls": 0
+    }
+  ],
+  "provenance": [],
+  "product_credit": 0,
+  "automatic_progression": false
+}

@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/d996edb21873/forward18/run_cache_prefix_shop.py", line 281, in <module>
+    raise SystemExit(execute(args.source_commit))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/d996edb21873/forward18/run_cache_prefix_shop.py", line 53, in execute
+    need(plan['status'] == 'MASH_EXPLICITLY_APPROVED_ONCE', 'new_paid_prefix_comparison_approval_required')
+  File "/workspace/scratch/d996edb21873/forward18/run_cache_prefix_shop.py", line 36, in need
+    raise ValueError(message)
+ValueError: new_paid_prefix_comparison_approval_required

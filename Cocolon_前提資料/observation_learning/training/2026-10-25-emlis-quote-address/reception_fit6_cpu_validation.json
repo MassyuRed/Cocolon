@@ -1,0 +1,17 @@
+{
+  "case_count": 6,
+  "cases": [
+    "authorized fixed plan",
+    "unauthorized rejection",
+    "6step order only daily x2",
+    "full context and eleven labels only",
+    "crossing token boundary rejection",
+    "causal predecessor labels/logits call"
+  ],
+  "model_calls": 0,
+  "optimizer_updates": 0,
+  "plan_sha256": "c9c6e1b8d1b86d45b361ff0fe378f73739f80b9a78baa27c6da435e2063d489f",
+  "real_tokenizer_recheck": "required in Jupyter before model load",
+  "runner_sha256": "c509f657ce32304f0baf43dd009e72690a88b3111dce183cb91521f950cad2e3",
+  "status": "STDLIB_PLAN_ORDER_MASK_AND_CAUSAL_CALL_VALIDATED"
+}

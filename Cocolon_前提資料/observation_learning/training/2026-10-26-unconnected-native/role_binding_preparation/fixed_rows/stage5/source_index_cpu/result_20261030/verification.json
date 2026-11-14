@@ -1,0 +1,50 @@
+{
+  "status": "ALL_ORIGINAL_BYTES_AND_CURRENT_CHAIN_VERIFIED",
+  "archive_members": 20,
+  "payload_files": 19,
+  "crc_bytes_sha_all_match": true,
+  "source_commit": "2e3a607199b79d8cf0bde92bece8abf3a3630e99",
+  "source_hashes_match_plan": true,
+  "loaded112_f32_finite": true,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "output_tokens": 311,
+      "input_tokens": 4668,
+      "eos": true,
+      "aliases": 3,
+      "complete_quote_rows": 10,
+      "actual_source_and_field_quotes_match": true,
+      "raw_root_incomplete": true,
+      "actual_failure": "Expecting ',' delimiter: line 2 column 1 (char 834)",
+      "actual_messages_match_candidate_cpu": true,
+      "raw_repair_performed": false,
+      "cmee_invoked": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "output_tokens": 427,
+      "input_tokens": 4825,
+      "eos": true,
+      "aliases": 3,
+      "complete_quote_rows": 14,
+      "actual_source_and_field_quotes_match": true,
+      "raw_root_incomplete": true,
+      "actual_failure": "Expecting ',' delimiter: line 2 column 1 (char 1128)",
+      "actual_messages_match_candidate_cpu": true,
+      "raw_repair_performed": false,
+      "cmee_invoked": false
+    }
+  ],
+  "new_meaning_body": "0/2",
+  "new_cmee_saved_cold": 0,
+  "old9": "NOT_RUN",
+  "gpu_reexecution": false,
+  "model_loads": 1,
+  "updates": 0,
+  "calls": 2,
+  "processing_seconds": 47.40570553496946,
+  "process_cost_usd": 0.0036871104304976245,
+  "product_credit": 0,
+  "automatic_progression": false
+}

@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import CocolonBackButton from "../components/CocolonBackButton";
 
 import { apiGet, apiPost } from "../lib/apiClient";
@@ -36,7 +36,7 @@ import {
   buildDaysFromRows,
   extractStandardTimeBuckets,
   extractStructuralReport,
-  getTopEmotionPairs,
+  normalizeEmotionMap,
   normalizeControlPatterns,
   normalizeDeepRecoveryRows,
   normalizeDeepTransitionEdges,
@@ -50,7 +50,7 @@ import { PieRingChart } from "./analysisReport/AnalysisReportCharts";
 import AnalysisReportUpgradeCard from "./analysisReport/AnalysisReportUpgradeCard";
 import KokoroWeatherForecastStrip from "./analysisReport/KokoroWeatherForecastStrip";
 import KokoroWeatherDetailModal from "./analysisReport/KokoroWeatherDetailModal";
-import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
+import { formatKokoroGraphText, formatKokoroGraphTitle, isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 
 /**
  * AnalysisReportViewerScreen
@@ -71,6 +71,7 @@ export default function AnalysisReportViewerScreen({
   hideHeader = false,
   disableActions = false,
   onMarkedRead,
+  markReadOnOpen = true,
 }) {
   // 🎨 theme
   const { themeName, colors } = useTheme();
@@ -78,7 +79,7 @@ export default function AnalysisReportViewerScreen({
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
-  const screenBg = isDark ? colors.BG_SILVER : "#FFFFFF";
+  const screenBg = colors.BG_SILVER;
   // Subscription tier (fail-closed: unknown => free)
   const [subscriptionTier, setSubscriptionTier] = useState("free");
   const [tierLoading, setTierLoading] = useState(true);
@@ -107,7 +108,7 @@ export default function AnalysisReportViewerScreen({
     (async () => {
       try {
         const reportId = report?.id;
-        if (!reportId || cancelled || !isKokoroWeatherDisplayTarget) return;
+        if (!reportId || cancelled || !isKokoroWeatherDisplayTarget || !markReadOnOpen || disableActions) return;
 
         await apiPost("/report-reads/mark", {
           report_id: String(reportId),
@@ -127,65 +128,12 @@ export default function AnalysisReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, [isKokoroWeatherDisplayTarget, onMarkedRead, report?.id]);
+  }, [isKokoroWeatherDisplayTarget, onMarkedRead, report?.id, markReadOnOpen, disableActions]);
 
 
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
+  const themed = {};
 
-      header: {
-        backgroundColor: colors.BG_SILVER,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      backText: { color: colors.TEXT_ON_LIGHT },
-      headerTitle: { color: colors.TEXT_ON_LIGHT },
-
-      pdfText: { color: colors.TEXT_ON_LIGHT },
-      range: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      // ScrollView の余白部分まで黒くする（内容が短いと白が見えるのを防止）
-      body: { backgroundColor: colors.BG_SILVER, flexGrow: 1 },
-
-      p: { color: colors.TEXT_ON_LIGHT },
-      empty: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      // chart
-      chartCard: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      chartTitle: { color: colors.TEXT_ON_LIGHT },
-      legendText: { color: colors.TEXT_ON_LIGHT },
-      chartArea: {
-        backgroundColor: colors.FIELD_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      // paywall CTA
-      paywallBtn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      paywallBtnText: { color: colors.ACCENT_TEXT },
-      paywallLead: { color: colors.TEXT_ON_LIGHT },
-      paywallBodyStrong: { color: colors.TEXT_ON_LIGHT },
-      paywallNote: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      paywallTrialBadge: {
-        backgroundColor: colors.FIELD_BG || colors.PANEL_BG || colors.BG_SILVER,
-        borderColor: colors.BORDER_GOLD,
-      },
-      paywallTrialBadgeText: { color: colors.TITLE_GOLD || colors.TEXT_ON_LIGHT },
-      paywallTrialHeadline: { color: colors.TITLE_GOLD || colors.TEXT_ON_LIGHT },
-      gridLabel: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      gridDivider: { backgroundColor: colors.CARD_BORDER },
-      colLabel: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      errorText: { color: "#FCA5A5" },
-      emptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
-
-  const title = report?.title || "Report";
+  const title = formatKokoroGraphTitle(report?.title);
   const reportType = report?.report_type || "";
 
   const contentText = report?.content_text || "";
@@ -274,10 +222,10 @@ export default function AnalysisReportViewerScreen({
 
     if (canViewDeepText) {
       const parts = [stdText, deepText].filter((part) => typeof part === "string" && part.trim());
-      return parts.length > 0 ? parts.join("\n\n") : legacy;
+      return formatKokoroGraphText(parts.length > 0 ? parts.join("\n\n") : legacy);
     }
-    if (canViewStandardText) return stdText || legacy;
-    return legacy;
+    if (canViewStandardText) return formatKokoroGraphText(stdText || legacy);
+    return formatKokoroGraphText(legacy);
   }, [canViewDeepText, canViewStandardText, contentJson, contentText, standardReport, deepReport]);
 
   // ===== Monthly chart data (stored in content_json.metrics.weeks) =====
@@ -596,10 +544,10 @@ const deepPatternSectionTitle = useMemo(() => {
   const unavailableContent = (
     <View style={[styles.unavailableCard, themed.chartCard]}>
       <Text style={[styles.unavailableTitle, themed.chartTitle]}>
-        このこころ天気は現在の表示対象外です
+        このこころグラフは現在の表示対象外です
       </Text>
       <Text style={[styles.unavailableText, themed.empty]}>
-        こころ天気として成立していない旧レポートは表示しません。
+        こころグラフとして成立していない旧レポートは表示しません。
       </Text>
       {!disableActions && typeof onBack === "function" ? (
         <TouchableOpacity
@@ -656,7 +604,8 @@ const deepPatternSectionTitle = useMemo(() => {
               </Text>
             ) : null}
 
-            <View style={[styles.chartArea, themed.chartArea]}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+<View style={[styles.chartArea, themed.chartArea, { minWidth: Math.max(360, weeklyDays.length * 44 + 60) }]}>
               {/* グリッド線 */}
               <View style={styles.grid}>
                 {[0, 25, 50, 75, 100].map((g) => (
@@ -703,7 +652,7 @@ const deepPatternSectionTitle = useMemo(() => {
                   <View style={{ padding: 16 }}>
                     <Text
                       style={[
-                        { fontSize: ui?.font?.sectionLabel ?? 14, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
+                        { ...ui.typography.description, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
                         isDark && themed.emptyText,
                       ]}
                     >
@@ -713,6 +662,7 @@ const deepPatternSectionTitle = useMemo(() => {
                 ) : null}
               </View>
             </View>
+</ScrollView>
           </View>
         ) : null}
 
@@ -735,7 +685,8 @@ const deepPatternSectionTitle = useMemo(() => {
               ))}
             </View>
 
-            <View style={[styles.chartArea, themed.chartArea]}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+<View style={[styles.chartArea, themed.chartArea, { minWidth: Math.max(360, monthlyWeeks.length * 64 + 60) }]}>
               {/* グリッド線 */}
               <View style={styles.grid}>
                 {[0, 25, 50, 75, 100].map((g) => (
@@ -780,6 +731,7 @@ const deepPatternSectionTitle = useMemo(() => {
                 })}
               </View>
             </View>
+</ScrollView>
           </View>
         ) : null}
 
@@ -801,7 +753,8 @@ const deepPatternSectionTitle = useMemo(() => {
             <View style={styles.timeBucketGrid}>
               {standardTimeBuckets.map((bucketRow) => {
                 const dominantEmotion = EMOTIONS.find((emotion) => emotion.key === bucketRow?.dominantKey);
-                const topPairs = getTopEmotionPairs(bucketRow?.sharePct, 2);
+                const sharePct = normalizeEmotionMap(bucketRow?.sharePct);
+                const allEmotionPairs = EMOTIONS.map(emotion => ({ key: emotion.key, label: emotion.label, pct: coerceNum(sharePct[emotion.key]) }));
 
                 return (
                   <View
@@ -809,8 +762,8 @@ const deepPatternSectionTitle = useMemo(() => {
                     style={[
                       styles.timeBucketCard,
                       {
-                        backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
-                        borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                        backgroundColor: colors.FIELD_BG,
+                        borderColor: colors.CARD_BORDER,
                       },
                     ]}
                   >
@@ -826,7 +779,7 @@ const deepPatternSectionTitle = useMemo(() => {
                     <View style={styles.timeBucketChartWrap}>
                       <PieRingChart
                         shares={bucketRow?.sharePct}
-                        trackColor={isDark ? colors.CARD_BORDER : "#E5E7EB"}
+                        trackColor={colors.CARD_BORDER}
                       />
                       <View style={styles.timeBucketCenter}>
                         <Text style={[styles.timeBucketCenterMain, themed.chartTitle]}>
@@ -839,8 +792,8 @@ const deepPatternSectionTitle = useMemo(() => {
                     </View>
 
                     <View style={styles.timeBucketSummary}>
-                      {topPairs.length > 0 ? (
-                        topPairs.map((pair) => (
+                      {allEmotionPairs.some(pair => pair.pct > 0) ? (
+                        allEmotionPairs.map((pair) => (
                           <Text
                             key={`${bucketRow?.bucket || bucketRow?.label}-${pair.key}`}
                             style={[styles.timeBucketSummaryText, themed.legendText]}
@@ -875,8 +828,8 @@ const deepPatternSectionTitle = useMemo(() => {
                   style={[
                     styles.memoThemeCard,
                     {
-                      backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
-                      borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                      backgroundColor: colors.FIELD_BG,
+                      borderColor: colors.CARD_BORDER,
                     },
                   ]}
                 >
@@ -919,13 +872,13 @@ const deepPatternSectionTitle = useMemo(() => {
                       <Text style={[styles.deepRowTitle, themed.chartTitle]}>{edge.routeLabel}</Text>
                       <Text style={[styles.deepRowMeta, themed.gridLabel]}>{coerceNum(edge.count)}回</Text>
                     </View>
-                    <View style={[styles.deepBarTrack, { backgroundColor: isDark ? colors.CARD_BORDER : "#E5E7EB" }]}>
+                    <View style={[styles.deepBarTrack, { backgroundColor: colors.CARD_BORDER }]}>
                       <View
                         style={[
                           styles.deepBarFill,
                           {
                             width: `${ratio}%`,
-                            backgroundColor: isDark ? colors.TEXT_ON_LIGHT : "#111827",
+                            backgroundColor: colors.TITLE_GOLD,
                           },
                         ]}
                       />
@@ -955,13 +908,13 @@ const deepPatternSectionTitle = useMemo(() => {
                       <Text style={[styles.deepRowTitle, themed.chartTitle]}>{row.routeLabel}</Text>
                       <Text style={[styles.deepRowMeta, themed.gridLabel]}>平均 {formatMinutesJa(row.meanMinutes)}</Text>
                     </View>
-                    <View style={[styles.deepBarTrack, { backgroundColor: isDark ? colors.CARD_BORDER : "#E5E7EB" }]}>
+                    <View style={[styles.deepBarTrack, { backgroundColor: colors.CARD_BORDER }]}>
                       <View
                         style={[
                           styles.deepBarFill,
                           {
                             width: `${ratio}%`,
-                            backgroundColor: isDark ? colors.BORDER_GOLD || colors.TEXT_ON_LIGHT : "#F59E0B",
+                            backgroundColor: colors.TITLE_GOLD,
                           },
                         ]}
                       />
@@ -991,8 +944,8 @@ const deepPatternSectionTitle = useMemo(() => {
                       style={[
                         styles.patternCard,
                         {
-                          backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
-                          borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                          backgroundColor: colors.FIELD_BG,
+                          borderColor: colors.CARD_BORDER,
                         },
                       ]}
                     >
@@ -1026,8 +979,8 @@ const deepPatternSectionTitle = useMemo(() => {
                     style={[
                       styles.patternCard,
                       {
-                        backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
-                        borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                        backgroundColor: colors.FIELD_BG,
+                        borderColor: colors.CARD_BORDER,
                       },
                     ]}
                   >
@@ -1067,8 +1020,8 @@ const deepPatternSectionTitle = useMemo(() => {
               style={[
                 styles.patternCard,
                 {
-                  backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
-                  borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+                  backgroundColor: colors.FIELD_BG,
+                  borderColor: colors.CARD_BORDER,
                 },
               ]}
             >
@@ -1120,8 +1073,8 @@ const deepPatternSectionTitle = useMemo(() => {
           style={[
             styles.patternCard,
             {
-              backgroundColor: isDark ? colors.FIELD_BG : "#FFFFFF",
-              borderColor: isDark ? colors.CARD_BORDER : "#E5E7EB",
+              backgroundColor: colors.FIELD_BG,
+              borderColor: colors.CARD_BORDER,
             },
           ]}
         >
@@ -1187,11 +1140,11 @@ const deepPatternSectionTitle = useMemo(() => {
   if (embedded) {
     return (
       <View style={{ backgroundColor: screenBg }}>
-        <View style={styles.embeddedHeader}>
+        {!hideHeader ? <View style={styles.embeddedHeader}>
           <Text style={[styles.embeddedTitle, themed.headerTitle]}>{title}</Text>
           {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
-        </View>
-        <View style={[styles.body, themed.body]}>{bodyContent}</View>
+        </View> : !!range ? <Text style={[styles.range, { paddingHorizontal: 0 }]}>{range}</Text> : null}
+        <View style={[styles.body, themed.body, { paddingHorizontal: 0, paddingVertical: 0 }]}>{bodyContent}</View>
         <KokoroWeatherDetailModal
           visible={!!selectedKokoroWeatherItem}
           item={selectedKokoroWeatherItem}
@@ -1203,7 +1156,7 @@ const deepPatternSectionTitle = useMemo(() => {
   }
 
   return (
-    <SafeAreaView
+    <SafeAreaView edges={["left", "right"]}
       style={[styles.container, themed.container, { backgroundColor: screenBg }]}
     >
       {/* Header */}
@@ -1211,7 +1164,7 @@ const deepPatternSectionTitle = useMemo(() => {
         <View style={[styles.header, themed.header]}>
           <CocolonBackButton onPress={onBack} style={styles.backBtn} />
 
-          <Text style={[styles.headerTitle, themed.headerTitle]} numberOfLines={1}>
+          <Text style={[styles.headerTitle, themed.headerTitle]}>
             {title}
           </Text>
           {/*
@@ -1231,10 +1184,10 @@ const deepPatternSectionTitle = useMemo(() => {
               <Text style={[styles.pdfText, themed.pdfText]}>PDF</Text>
             </TouchableOpacity>
           ) : (
-            <View style={{ width: 70 }} />
+            <View style={{ width: 44 }} />
           )}
           */}
-          <View style={{ width: 70 }} />
+          <View style={{ width: 44 }} />
         </View>
       ) : null}
 
@@ -1260,180 +1213,227 @@ function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   unavailableCard: {
-    marginTop: 16,
-    padding: 18,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
+      marginTop: 16,
+      padding: 20,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+    },
   unavailableTitle: {
-    fontSize: 15,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    marginBottom: 8,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
   unavailableText: {
-    fontSize: 13,
-    lineHeight: 20,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   unavailableButton: {
-    marginTop: 14,
-    alignSelf: "flex-start",
-    paddingHorizontal: 14,
-    paddingVertical: 9,
-    borderRadius: 999,
-    backgroundColor: COLORS.BORDER_GOLD,
-  },
+      marginTop: 14,
+      alignSelf: "flex-start",
+      paddingHorizontal: 20,
+      paddingVertical: 14,
+      borderRadius: 24,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 52,
+      alignItems: 'center',
+      justifyContent: 'center',
+      maxWidth: '100%',
+    },
   unavailableButtonText: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: COLORS.ACCENT_TEXT,
-  },
-  container: { flex: 1, backgroundColor: "#fff" },
+      color: COLORS.ACCENT_TEXT,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
+  container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
 
   header: {
-    paddingTop: 10,
-    paddingHorizontal: 12,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  backBtn: { flexDirection: "row", alignItems: "center", width: 70 },
-  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
+      paddingTop: 12,
+      paddingHorizontal: 20,
+      paddingBottom: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      flexDirection: "row",
+      alignItems: 'flex-start',
+      justifyContent: "space-between",
+      backgroundColor: COLORS.BG_SILVER,
+    },
+  backBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: 44,
+      minHeight: 44,
+      flexShrink: 0,
+    },
+  backText: {
+      marginLeft: 2,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
   headerTitle: {
-    flex: 1,
-    marginHorizontal: 10,
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    textAlign: "center",
-  },
+      flex: 1,
+      marginHorizontal: 10,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+      minWidth: 0,
+      flexShrink: 1,
+    },
   embeddedHeader: {
-    paddingHorizontal: 2,
-    paddingTop: 4,
-    paddingBottom: 6,
-  },
+      paddingHorizontal: 20,
+      paddingTop: 4,
+      paddingBottom: 12,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+    },
   embeddedTitle: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+    },
 
   pdfBtn: {
-    width: 70,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-  pdfText: { marginLeft: 4, fontSize: 12, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
+      width: 70,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      minHeight: 44,
+    },
+  pdfText: {
+      marginLeft: 4,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
 
   range: {
-    paddingHorizontal: 12,
-    paddingTop: 8,
-    paddingBottom: 2,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    fontSize: 12,
-  },
+      paddingHorizontal: 20,
+      paddingTop: 8,
+      paddingBottom: 12,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+    },
 
-  body: { paddingHorizontal: 14, paddingVertical: 12, paddingBottom: 24 },
+  body: {
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      paddingBottom: 32,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+      backgroundColor: COLORS.BG_SILVER,
+    },
 
   // text
-  p: { fontSize: 14, lineHeight: 20, color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  empty: { padding: 16, color: text.description ?? COLORS.TEXT_SUBTLE },
+  p: {
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
+  empty: {
+      padding: 20,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
 
   // paywall CTA
   paywallBtn: {
-    marginTop: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
+      marginTop: 12,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 52,
+      paddingHorizontal: 20,
+      columnGap: 8,
+    },
   paywallBtnText: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    marginRight: 2,
-  },
+      color: COLORS.ACCENT_TEXT,
+      marginRight: 0,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
   paywallLead: {
-    fontSize: 18,
-    lineHeight: 25,
-    fontWeight: "900",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
   paywallBodyStrong: {
-    marginTop: 10,
-    fontSize: 14,
-    lineHeight: 21,
-    fontWeight: "700",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      marginTop: 8,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
   paywallNote: {
-    marginTop: 8,
-    fontSize: 13,
-    lineHeight: 19,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      marginTop: 8,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   paywallTrialBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#F59E0B",
-    backgroundColor: "#FEF3C7",
-    marginBottom: 8,
-  },
+      alignSelf: "flex-start",
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      marginBottom: 8,
+      maxWidth: '100%',
+    },
   paywallTrialBadgeText: {
-    fontSize: 11,
-    fontWeight: "800",
-    color: "#92400E",
-  },
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+    },
   paywallTrialHeadline: {
-    fontSize: 24,
-    lineHeight: 31,
-    fontWeight: "900",
-    color: "#B45309",
-  },
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
 
   // chart
   chartCard: {
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#FAFAFA",
-    padding: 12,
-    marginBottom: 14,
-  },
-  chartTitle: { fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 8 },
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.PANEL_BG,
+      padding: 20,
+      marginBottom: 16,
+    },
+  chartTitle: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
+    },
 
-  legendRow: { flexDirection: "row", flexWrap: "wrap", marginBottom: 6 },
+  legendRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      marginBottom: 12,
+      rowGap: 4,
+      columnGap: 12,
+    },
   legendItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginRight: 12,
-    marginBottom: 6,
-  },
-  legendDot: { width: 10, height: 10, borderRadius: 5, marginRight: 6 },
-  legendText: { color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 12 },
+      flexDirection: "row",
+      alignItems: "center",
+      marginRight: 0,
+      marginBottom: 0,
+      maxWidth: '100%',
+    },
+  legendDot: {
+      width: 10,
+      height: 10,
+      borderRadius: 5,
+      marginRight: 6,
+      flexShrink: 0,
+    },
+  legendText: {
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+    },
 
   chartArea: {
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 8,
-    paddingVertical: 6,
-    paddingHorizontal: 6,
-    backgroundColor: "#fff",
-  },
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 16,
+      paddingVertical: 12,
+      paddingHorizontal: 8,
+      backgroundColor: COLORS.FIELD_BG,
+    },
 
   grid: {
     position: "absolute",
@@ -1444,34 +1444,51 @@ function createStyles(COLORS, ui) {
     justifyContent: "space-between",
   },
   gridLine: { flexDirection: "row", alignItems: "center" },
-  gridLabel: { width: 26, fontSize: 10, color: text.subtle ?? COLORS.TEXT_SUBTLE },
-  gridDivider: { flex: 1, height: 1, backgroundColor: "#F3F4F6" },
+  gridLabel: {
+      width: 36,
+      color: text.subtle ?? COLORS.TEXT_SUBTLE,
+    },
+  gridDivider: {
+      flex: 1,
+      height: 1,
+      backgroundColor: COLORS.CARD_BORDER,
+    },
 
-  chartError: { marginTop: 4, marginBottom: 6, fontSize: 12, color: "#B91C1C" },
+  chartError: {
+      marginTop: 4,
+      marginBottom: 6,
+      color: COLORS.ERROR,
+    },
 
   // weekly columns
   columnsWeekly: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    paddingLeft: 26,
-    paddingRight: 4,
-    minHeight: 140,
-  },
+      flexDirection: "row",
+      alignItems: "flex-end",
+      paddingLeft: 36,
+      paddingRight: 4,
+      minHeight: 140,
+    },
   colWrapWeekly: { width: 38, alignItems: "center", marginHorizontal: 2 },
   colStackWeekly: { width: 22, justifyContent: "flex-end", alignItems: "stretch" },
-  colLabelWeekly: { marginTop: 4, fontSize: 10, color: text.description ?? COLORS.TEXT_SUBTLE },
+  colLabelWeekly: {
+      marginTop: 4,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
 
   // monthly columns
   columnsMonthly: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    paddingLeft: 26,
-    paddingRight: 4,
-    minHeight: 160,
-  },
+      flexDirection: "row",
+      alignItems: "flex-end",
+      paddingLeft: 36,
+      paddingRight: 4,
+      minHeight: 160,
+    },
   colWrapMonthly: { width: 56, alignItems: "center", marginHorizontal: 4 },
   colStackMonthly: { width: 28, justifyContent: "flex-end", alignItems: "stretch" },
-  colLabelMonthly: { marginTop: 6, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
+  colLabelMonthly: {
+      marginTop: 6,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
 
   colSeg: {
     width: "100%",
@@ -1481,86 +1498,93 @@ function createStyles(COLORS, ui) {
   },
 
   timeBucketGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    marginTop: 4,
-  },
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: 'flex-start',
+      marginTop: 4,
+      columnGap: 12,
+      rowGap: 12,
+    },
   timeBucketCard: {
-    width: "48.5%",
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
+      borderWidth: 1,
+      borderRadius: 16,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      marginBottom: 0,
+      flexBasis: 220,
+      flexGrow: 1,
+      flexShrink: 1,
+      minWidth: 0,
+      maxWidth: '100%',
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
+    },
   timeBucketHeader: {
     marginBottom: 8,
   },
   timeBucketTitle: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
   timeBucketMeta: {
-    marginTop: 2,
-    fontSize: 11,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      marginTop: 2,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   timeBucketChartWrap: {
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 4,
   },
   timeBucketCenter: {
-    position: "absolute",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+      position: 'relative',
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 8,
+      maxWidth: '100%',
+    },
   timeBucketCenterMain: {
-    fontSize: 12,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      textAlign: 'center',
+    },
   timeBucketCenterSub: {
-    marginTop: 1,
-    fontSize: 10,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      marginTop: 1,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      textAlign: 'center',
+    },
   timeBucketSummary: {
-    marginTop: 8,
-    minHeight: 34,
-    justifyContent: "center",
-  },
+      marginTop: 8,
+      justifyContent: "center",
+    },
   timeBucketSummaryText: {
-    fontSize: 11,
-    lineHeight: 16,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
 
   deepList: {
     marginTop: 4,
   },
   deepRow: {
-    marginBottom: 12,
-  },
+      marginBottom: 16,
+    },
   deepRowHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 6,
-  },
+      flexDirection: "row",
+      alignItems: 'flex-start',
+      justifyContent: "space-between",
+      marginBottom: 6,
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 4,
+    },
   deepRowTitle: {
-    flex: 1,
-    fontSize: 13,
-    fontWeight: "700",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    marginRight: 8,
-  },
+      flex: 1,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginRight: 0,
+      minWidth: 0,
+      flexShrink: 1,
+    },
   deepRowMeta: {
-    fontSize: 11,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      maxWidth: '100%',
+      flexShrink: 1,
+    },
   deepBarTrack: {
     width: "100%",
     height: 8,
@@ -1572,47 +1596,41 @@ function createStyles(COLORS, ui) {
     borderRadius: 999,
   },
   deepRowSub: {
-    marginTop: 6,
-    fontSize: 11,
-    lineHeight: 16,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      marginTop: 6,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   patternCard: {
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
+      borderWidth: 1,
+      borderRadius: 16,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      marginBottom: 12,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
+    },
   patternTitle: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    marginBottom: 4,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 4,
+    },
   patternDesc: {
-    fontSize: 12,
-    lineHeight: 18,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
   patternMeta: {
-    marginTop: 4,
-    fontSize: 11,
-    lineHeight: 16,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      marginTop: 4,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   memoThemeCard: {
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
+      borderWidth: 1,
+      borderRadius: 16,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      marginBottom: 12,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
+    },
   memoThemeTitle: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
   memoThemeChipRow: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -1620,28 +1638,24 @@ function createStyles(COLORS, ui) {
     marginBottom: 4,
   },
   memoThemeChip: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 999,
-    backgroundColor: "#F3F4F6",
-    marginRight: 6,
-    marginBottom: 6,
-  },
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 16,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      marginRight: 6,
+      marginBottom: 6,
+      maxWidth: '100%',
+    },
   memoThemeChipText: {
-    fontSize: 11,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    fontWeight: "600",
-  },
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+    },
   memoThemeMeaning: {
-    fontSize: 12,
-    lineHeight: 18,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
   memoThemeMeta: {
-    marginTop: 4,
-    fontSize: 11,
-    lineHeight: 16,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
-  }, ui));
+      marginTop: 4,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+  }, ui, {"unavailableTitle":"sectionTitle","unavailableText":"description","unavailableButtonText":"button","backText":"button","headerTitle":"screenTitle","embeddedTitle":"sectionTitle","pdfText":"button","range":"meta","p":"body","empty":"description","paywallBtnText":"button","paywallLead":"sectionTitle","paywallBodyStrong":"body","paywallNote":"description","paywallTrialBadgeText":"meta","paywallTrialHeadline":"sectionTitle","chartTitle":"sectionTitle","legendText":"meta","gridLabel":"meta","chartError":"description","colLabelWeekly":"meta","colLabelMonthly":"meta","timeBucketTitle":"button","timeBucketMeta":"meta","timeBucketCenterMain":"button","timeBucketCenterSub":"meta","timeBucketSummaryText":"description","deepRowTitle":"button","deepRowMeta":"meta","deepRowSub":"description","patternTitle":"button","patternDesc":"body","patternMeta":"description","memoThemeTitle":"button","memoThemeChipText":"description","memoThemeMeaning":"body","memoThemeMeta":"description"}));
 }

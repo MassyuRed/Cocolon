@@ -1,3 +1,7 @@
+> **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
+
+> **11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。 [範囲・検証・残件§9.40](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)。
+
 ---
 title: "01C_Cocolon_全体構造資料_Account_Subscription_Backend支援系"
 revision_date: "2026-08-02"
@@ -83,7 +87,7 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: テーマ／通知の単独・embedded表示とowner付き保存。
 - 直接関係ファイル:
   - `Cocolon/AuthContext.js` — import
   - `Cocolon/components/CocolonPressable.js` — import
@@ -96,6 +100,7 @@ revision_date: "2026-08-02"
   - `mashos-api/ai/services/ai_inference/api_account_lifecycle.py` — endpoint /account/profile/me
   - `mashos-api/ai/services/ai_inference/api_friends.py` — endpoint /emotion-notifications/settings
 - このファイルを直接参照するファイル:
+  - `Cocolon/screens/SettingsScreen.js` — 既存controller共有
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
@@ -116,7 +121,7 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: tutorial／logout／二段deleteの単独・embedded表示。
 - 直接関係ファイル:
   - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/AuthContext.js` — import
@@ -127,6 +132,7 @@ revision_date: "2026-08-02"
   - `Cocolon/screens/MyWebMenuCommon.js` — import
   - `mashos-api/ai/services/ai_inference/api_account_lifecycle.py` — endpoint /account/delete
 - このファイルを直接参照するファイル:
+  - `Cocolon/screens/SettingsScreen.js` — 既存controller共有
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
@@ -145,16 +151,20 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: 既存アプリ設定・その他と契約renderSettingsを集約する設定home。
 - 直接関係ファイル:
-  - `Cocolon/screens/MyModelMenuCommon.js` — import
-  - `Cocolon/screens/MyWebMenuCommon.js` — import
+  - `Cocolon/screens/AnalysisMenuCommon.js` — import
+  - `Cocolon/screens/SettingsAppSettingsScreen.js` — embedded
+  - `Cocolon/screens/SettingsOtherScreen.js` — embedded
+  - `Cocolon/screens/SubscriptionSelectScreen.js` — renderSettings
 - このファイルを直接参照するファイル:
-  - `Cocolon/App.js` — import
+  - `Cocolon/navigation/SettingsStackNavigator.js` — import
 - 修正時に必ず同時確認するファイル:
-  - `Cocolon/App.js`
-  - `Cocolon/screens/MyModelMenuCommon.js`
-  - `Cocolon/screens/MyWebMenuCommon.js`
+  - `Cocolon/navigation/SettingsStackNavigator.js`
+  - `Cocolon/screens/AnalysisMenuCommon.js`
+  - `Cocolon/screens/SettingsAppSettingsScreen.js`
+  - `Cocolon/screens/SettingsOtherScreen.js`
+  - `Cocolon/screens/SubscriptionSelectScreen.js`
 - 修正対象になりうる変更:
   - account screen, ProfileCreate, settings, subscription UI
 
@@ -162,7 +172,7 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: 契約画面と設定homeが同じ実plan／復元・管理handlerを共有。
 - 直接関係ファイル:
   - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/SubscriptionContext.js` — import
@@ -175,6 +185,7 @@ revision_date: "2026-08-02"
   - `Cocolon/ui/applyTypographyTokens.js` — import
   - `Cocolon/ui/uiTokens.js` — import
 - このファイルを直接参照するファイル:
+  - `Cocolon/screens/SettingsScreen.js` — 既存controller共有
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
@@ -4740,3 +4751,80 @@ entitlement、public route、DB schema、RN ownerではありません。
 `mashos-api/ai/services/ai_inference/app.py` / `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`からRecovery familyへのimportはなく、Recovery artifactを
 Cycle001 accepted、production connected、public response追加と読みません。current technical
 checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上の非接続境界だけを保持します。
+
+
+## 2026-11-07 — Account／購読／共通操作の全残件再点検
+
+- Account profile／visibility／follow hooks、SettingsOther削除確認、SettingsAppSettings通知関連の連続更新は開始owner／auth世代と既存expectedUserId・signalを渡す。古いAlert／awaitの続きで新本人の設定・削除へ進まない。profile APIを正本とし、遅れた冗長auth.updateUserの表示名書込を除去する（新規登録metadataは維持）。
+- `iapService.js`／`useAccountSubscription.js`／`SubscriptionSelectScreen.js`：購入・復元とproviderの遅い返答を本人へ束縛。旧ownerの結果で新ownerのPOST／取引finishを行わず、完了cacheもowner別。
+- API `subscription_projection.py`：検証済み購入に本人hintがある場合、認証本人と不一致なら既存409 conflictでclaim／entitlement書込前に停止。hint無しの旧購入は既存claim本人照合を維持する。
+- `subscription_live_console_check.py`：両tier商品の不足を診断readyへ反映。Androidは実購入productと各tierの実購入base plan自身がACTIVEかを検査し、認識だけの旧plan不在／INACTIVEは許容。他productのACTIVEで代替しない。販売設定は変えない。
+- RN `iapRuntimeCatalog.js`／API `subscription_bootstrap_store.py` の月30／無制限の文言は「生成回数」ではなく既存quotaの「保存できる数」へ修復。価格・SKU・権利・上限値は維持。
+- API `api_follow_graph.py`：非公開profile照合の例外を公開扱いに落とさず、既存エラーとして書込前に停止する。
+
+新規回帰：`account-settings-owner-race.test.js`、`iap-owner-race.test.js`、`private-history-owner-race.test.js`、API `test_subscription_purchase_owner_hint.py`、`test_subscription_live_console_readiness.py`、`test_follow_private_visibility_failure.py`。隔離合成検証と実ストア購入／本人削除／通知／配布を区別する。現在の合否・反映先は第10回§15へ。
+
+
+## 2026-11-07 — 全残件再点検の最終追加修復・反映記録への接続
+
+本人切替／auth世代・遅延操作・購入開始／復元・private履歴・通知等の修復をRN56e65b1aへまとめ、7601の内部Testingまで確認した。API側の購入hint／Console診断・profile失敗時の扱いは5993以後の候補へ保持。価格／SKU／実販売設定は変更していない。旧Piece公開の2原子関数は実DBへ適用し、既存4table／RLS／service権限と関数定義・ACLを照合した。新table・V2公開の有効化・データ一括移行0。
+
+この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
+
+11/8設定差分：GlobalFrameLayout.headerRightSlotをMainTabsがSettings入口時だけ渡し、既存Accountへ進む。元HTML previewは保持。
+
+
+## 2026-11-13 差分 — 通常応答の本人訂正と履歴RPC
+
+- supabase/migrations/20261113041739_emlis_interpretation_correction_history.sql（CLI作成）：既存emlis_thread_related_context(uuid,uuid,jsonb)を同identityで置換。本人説明を関連検索へ加え、指定stage=INTERPRETATION_CORRECTIONのOPERATIONだけを履歴へ返す。security invoker／空search_path／service_role限定ACL、本人・保持期間・plan・guardを維持。新table・commit RPC変更なし。稼働DB未適用。
+- ai/tests/test_emlis_interpretation_correction.py（新規）：合成providerと実隔離SQLで、保存／非生成再読・対象版・NEEDS_DETAIL・ACK不明・C1/C2再送・既存plan履歴権利・DTO公開境界を確認。既存Q3 SQL fixtureが新migrationも読み込む。
+- 当回訂正は全プラン、継続利用は既存履歴／本人frame権利。新料金・input quota・QUESTION追加なし。API／RN・CMEEの既存ownerは01Aと各current mapへ反映。
+
+STRUCTURE_MAP_DELTA_PRESENT。実装・適用順migration→API→RN、未接続のPremium本人frame／Analysis／Piece・実4B品質・live／端末は[補助経路§9.28](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)を参照。
+
+<a id="piece-natural-single-answer-connection-20261113"></a>
+## 2026-11-13 — naturalの実一回答をPieceへ渡す既存接続の修復
+
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [実装 f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)。新migrationは20261113085044_piece_natural_refined_source_fence.sql。既存preview issue/save/visualの3関数を置換し、ACL/RLS/署名/table/権利/quotaは保持。SQLの鎖検査とAPIの意味再導出を区別する。workflow2本へ同suite/pathsを追加した。
+
+前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
+
+STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。API f7b44e0eのPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)とAnalysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)は、ともにattempt1で全工程成功。手動dispatch/rerun0、実DB未適用。
+
+
+<a id="emlis-natural-owned-premium-frames-20261113"></a>
+## 2026-11-13 — naturalのPremium仮の理解と本人操作を接続
+
+**11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 backendはemlis_thread_service.pyの同一OBS保存と既存frame_feedback SQLを使用。新migration/API/列/権利なし。新testと既存workflow2本を追加接続。
+
+API d8f6d137のPiece CI [43404500570](https://github.com/MassyuRed/mashos-api/actions/runs/43404500570)とAnalysis CI [43404500574](https://github.com/MassyuRed/mashos-api/actions/runs/43404500574)は、ともにattempt1で全工程成功。手動dispatch/rerun0、live DB/Render/RN build・配布・GPU/学習は0。 Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/route・SQL・RN source・prompt・モデルを変更しない。二欄訂正からframeへの意味伝播、Piece／Analysisへの訂正伝播、複数回答Piece、一般応答/編集品質、live／本人端末・正式受入れは未完。新10b563候補不採用と通常model selector OFFを維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。実装と責務・原本・途中環境失敗・検証限界は[詳細設計§9.36](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)を正本とする。
+
+
+<a id="emlis-frame-feedback-target-context-prepared-20261113"></a>
+## 2026-11-13 — 本人判断と対象frameのprivate結合を修復（準備時点の履歴・一回完了）
+
+> 本節は実行前の準備時点の履歴です。「未送信／未実行／承認待ち」および実生成0の記載は当時の状態を示します。Mashの具体承認後の一回は完了し、実結果・同源泉保存・不採用・残差は[§9.38](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)へ更新しました。
+
+**11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 実装はAPI 96c2085a。API 96c2085aのPiece CI [43411618714](https://github.com/MassyuRed/mashos-api/actions/runs/43411618714)とAnalysis CI [43411618653](https://github.com/MassyuRed/mashos-api/actions/runs/43411618653)は、ともにattempt1で全工程成功。追加dispatch/rerun0。
+
+83,777byte/3file、旧2＋新3と前後4model確認＋health2GET、300秒・一回・学習/再試行/再起動0の実比較を準備。未送信/未実行、今回分の承認待ち。SYSTEMの文章・モデル・作者・公開DTO/API・DB/SQL・RN・料金/問い数/quotaは変更しない。対象contextは本人sourceや有効frameではない。一般応答品質、反復修正時の対象復元、二欄訂正→frame/他core伝播、live/本人端末・正式受入れは未完。通常model selector OFF、新10b563不採用を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと既存workflow2本の責務/限界/原本を[詳細設計§9.37](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)へ集約する。
+
+
+<a id="emlis-frame-feedback-target-context-actual-20261113"></a>
+## 2026-11-13 — frame本人判断の実5比較・同源泉3保存、自然本文は不採用
+
+承認済み83,777byte／3fileを既存Podで一回実行した。旧2＋新3の研究5、通常／Analysis前後4対照の計9model POSTは全HTTP200／stop、独立health前後2GETも200。実行98.005834247秒、archive close98.032634725秒で300秒以内に完了した。PID84398／starttime212772776は不変、通常／Analysisの前後生responseは各全byte一致。学習／再試行／提供停止／再起動／重みload／設定変更0で、この一回の承認は完了消費済みである。
+
+新3は本人判断を優先した本文の達成0/3、FAIL3/3として品質改善候補を不採用とした。拒否Aは「褒められた→重かった」、拒否Bは「誘われた→怖かった」という拒否済みmappingを断定し、修正Aは本人の「結果だけで判断されたことが気になった。」を反映せず旧mappingを再使用した。元の過去ANSWERは実在し、問題は感情の捏造ではなく、後の本人status／修正文を優先しない無留保の再使用である。旧拒否／旧修正の2rawは全文同一の現原入力復唱で、旧修正も本人文を反映していない。旧拒否の単純復唱を対象識別成功へ数えない。
+
+同じ新3checkpointに実receiptを保存し、新service GETで同本文の非生成再読3/3を確認した。再取得／model call0、原入力／ANSWER／feedback／先行event不変。拒否A/Bは指定frameのみを除いた各2frame、修正Aは本人修正文を含む3frameを保持した。保存本文への処置は既存providerと同じ外側空白stripだけで、実response.modelも保持し、語句・意味の修補はしていない。隔離PGlite／架空sourceの実HTTP本文保存であり、live DB／実Auth／Render／RN／本人端末ではない。
+
+対象情報は作者材料へ届くが、本人status／修正文を優先した自然本文にならない、という残差がある。今回5rawは「今は嬉しい」を保持し、明確な極性反転・時点逆転・内部label／ID／診断露出は認めなかった。この範囲を一般品質へ広げず、前記録と当回同文記録の識別不足、新3が当回の悲しさ／寂しさを過去mappingへ置換したように読める限界を残す。新Aの変化の受取りも具体訂正の受領を示すものではない。唯一原因は確定せず、追加hint／SYSTEM／fit比較へ進まない。
+
+STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否記録だけで、製品source／test／公開DTO/API／DB/SQL／RN／モデル／通常selectorの変更0。通常selector OFF、新10b563不採用を維持し、一般応答品質・反復修正時の対象復元・二欄訂正からframe／他coreへの意味伝播・live／本人端末・正式受入れは未完である。
+
+詳細・private原本・採否と保存の範囲は[補助設計§9.38](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)を正本とする。

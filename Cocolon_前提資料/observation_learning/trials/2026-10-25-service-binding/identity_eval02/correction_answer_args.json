@@ -1,0 +1,7 @@
+{
+  "question_id": "emlis-question-21a48b1efc2af69c667c1a81fe4df6abab688c474c9df59c9881eadd21ec135f",
+  "expected_revision": 5,
+  "idempotency_key": "known-chair-correction-1",
+  "answer_text": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+  "authored_at": "2026-10-25T08:49:03.013049+00:00"
+}

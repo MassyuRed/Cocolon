@@ -1,0 +1,21 @@
+{
+  "archive_bytes": 74055,
+  "archive_sha256": "5d660c49f64e1d3524b2e14bf56300df20ed8b7c450c9f591742b13a00c727ac",
+  "all14_member_bytes_and_sha256_exact": true,
+  "run_report_copy_exact": true,
+  "runtime_approval_and_proposal_source_hashes_exact": true,
+  "teacher_full_nll_exact_previous_fit38": true,
+  "all4_argmax_historical_bad_token": true,
+  "all4_top_logit_ties": 1,
+  "frozen_files_unchanged": 275,
+  "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+  "source_files_unchanged": true,
+  "parent_exit": 0,
+  "parent_seconds": 16.025832931976765,
+  "runner_seconds": 14.90352953702677,
+  "archive_first_text_export_note": "First text export normalized CR in process.log; exact UTF-8 byte decoding corrected collection only, with no model retry",
+  "root_read_all_measurements_and_log": true,
+  "independent_read_only_review": "MATCHED; no file/GPU/external writes by helper",
+  "retry": false,
+  "product_credit": 0
+}

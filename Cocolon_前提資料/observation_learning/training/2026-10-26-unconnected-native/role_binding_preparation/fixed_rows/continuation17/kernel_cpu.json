@@ -1,0 +1,75 @@
+{
+  "status": "CPU_KERNEL_COMPARISON_COMPLETE",
+  "transformers": "5.19.0",
+  "torch": "2.8.0+cu128",
+  "source_file": "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py",
+  "source_sha256": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+  "seed_base": 20261030,
+  "shape": "B1,T=prefill+3,H2,K128,V128",
+  "rows": [
+    {
+      "dtype": "torch.float32",
+      "prefill": 31,
+      "decode_steps": 3,
+      "max_output_abs_error": 7.450580596923828e-09,
+      "relative_output_l2": 2.4963887312878796e-07,
+      "max_state_abs_error": 1.4901161193847656e-07,
+      "finite": true
+    },
+    {
+      "dtype": "torch.float32",
+      "prefill": 64,
+      "decode_steps": 3,
+      "max_output_abs_error": 2.2351741790771484e-08,
+      "relative_output_l2": 2.309501780928258e-07,
+      "max_state_abs_error": 1.1920928955078125e-07,
+      "finite": true
+    },
+    {
+      "dtype": "torch.float32",
+      "prefill": 129,
+      "decode_steps": 3,
+      "max_output_abs_error": 1.1175870895385742e-08,
+      "relative_output_l2": 2.55738655141613e-07,
+      "max_state_abs_error": 1.1920928955078125e-07,
+      "finite": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "prefill": 31,
+      "decode_steps": 3,
+      "max_output_abs_error": 0.0,
+      "relative_output_l2": 0.0,
+      "max_state_abs_error": 1.7881393432617188e-07,
+      "finite": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "prefill": 64,
+      "decode_steps": 3,
+      "max_output_abs_error": 0.0,
+      "relative_output_l2": 0.0,
+      "max_state_abs_error": 1.1920928955078125e-07,
+      "finite": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "prefill": 129,
+      "decode_steps": 3,
+      "max_output_abs_error": 0.0,
+      "relative_output_l2": 0.0,
+      "max_state_abs_error": 1.1920928955078125e-07,
+      "finite": true
+    }
+  ],
+  "seconds": 3.481980063021183,
+  "pretrained_model_loads": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "cuda_initialized": false,
+  "limitations": [
+    "CPU fallback kernels only; not full model or convolution/cache object parity",
+    "synthetic values; does not explain actual BOOK/SHOP outputs",
+    "no adoption, no repair, no permission for paid run"
+  ]
+}

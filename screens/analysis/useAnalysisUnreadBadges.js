@@ -2,6 +2,8 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useUnread } from "../../UnreadContext";
+import { useAuth } from "../../AuthContext";
+import { useOwnerRequestScope } from "../../hooks/useOwnerRequestScope";
 import { apiGet, apiPost } from "../../lib/apiClient";
 import { supabase } from "../../lib/supabase";
 import { ANALYSIS_WIRE, SELF_STRUCTURE_WIRE } from "../../lib/compat/legacyWireContracts";
@@ -17,6 +19,10 @@ export function useAnalysisUnreadBadges({
   onRefreshTabUnread,
 }) {
   const { getFeatureUnread } = useUnread();
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope, isCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
+  const [readState, setReadState] = useState(null);
+  const reportReadRevision = readState?.scope === scope ? readState.revision : 0;
   const unreadRefreshSeqRef = useRef(0);
 
   const [unreadByType, setUnreadByType] = useState({
@@ -204,18 +210,22 @@ export function useAnalysisUnreadBadges({
 
   const markReportRead = useCallback(async (report) => {
     const reportId = report?.id ? String(report.id) : null;
-    if (!reportId) return;
+    if (!reportId || !isCurrent(scope)) return false;
 
     try {
-      await apiPost("/report-reads/mark", {
+      const result = await apiPost("/report-reads/mark", {
         report_id: reportId,
         report_table: ANALYSIS_WIRE.reportFamily.table,
         report_scope: ANALYSIS_WIRE.reportFamily.scope,
-      });
+      }, scope.options);
+      if (!isCurrent(scope) || result?.marked !== true || String(result?.report_id) !== reportId) return false;
+      setReadState(previous => ({ scope, revision: previous?.scope === scope ? previous.revision + 1 : 1 }));
+      return true;
     } catch (e) {
       console.warn("AnalysisScreen: failed to mark report read", e);
+      return false;
     }
-  }, []);
+  }, [scope, isCurrent]);
 
   const emotionAnalysisUnread = unreadResolved
     ? !!(unreadByType.daily || unreadByType.weekly || unreadByType.monthly)
@@ -244,5 +254,6 @@ export function useAnalysisUnreadBadges({
     refreshUnreadBadges,
     markSelfStructureLatestSeen,
     markReportRead,
+    reportReadRevision,
   };
 }

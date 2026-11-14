@@ -1,0 +1,53 @@
+{
+  "cpu_archive_bytes": 31713,
+  "cpu_archive_sha256": "118a44284fefdc6d2a31612984ab391c45d78fb559c08957a072db250f4619d3",
+  "members": 8,
+  "payloads": 7,
+  "all_crc_member_bytes_sha_identical": true,
+  "prefix_report_bytes": 3475,
+  "prefix_report_sha256": "9b1cd288cbbc9662c5495aad1f3b86d5b068ea610f13292a42632efa1469b77f",
+  "root_independent_saved_encoding_checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "first_divergence_identical": true,
+      "all_two_prefix_ids_lengths_hashes_identical": true,
+      "first_invalid_whole_token_boundary_identical": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "first_divergence_identical": true,
+      "all_two_prefix_ids_lengths_hashes_identical": true,
+      "first_invalid_whole_token_boundary_identical": true
+    }
+  ],
+  "syntax_source_exact_original_sha256": "28e78eb120f07aef0806ddb1159e8257fb83e4972515eed63ec48b33cf205dc5",
+  "runner_compile": true,
+  "runner_approval_guard": {
+    "source_sha256": "a2fbfa8ee94e4f8fb86f110e368ec966cddf92450ca63df7abb87eb36ac31c06",
+    "environment": "Codex host; not Pod",
+    "exit_code": 1,
+    "reason": "new_paid_prefix_comparison_approval_required",
+    "pretrained_model_loads": 0,
+    "forwards": 0,
+    "output_directory_created": false,
+    "log_sha256": "e062ae9890ab49d8b244e87f151c0a46628e4eb86e732b16ee106bdaa65cc133"
+  },
+  "gpu_probe_state": "NOT_EXECUTED",
+  "quality_improvement": "NOT_MEASURED",
+  "additional_gpu_processing": 0,
+  "preparation_holding_recovery_costs": "separate",
+  "independent_source_review": "a2fbfa8e final variant read-only review; no concrete blocking flaw; actual runtime unexecuted; paid necessity reservation retained",
+  "proof_bytes": 135797,
+  "proof_sha256": "af22ef9cca2c983fefd581f73b4d56b8b735316b1695ce86bfa9caeec50ecbf7",
+  "deferred_stop_source": {
+    "file": "/usr/local/lib/python3.12/dist-packages/transformers/generation/utils.py",
+    "file_sha256": "905a7e7e67c49a4df9a623f6ca7a962306003b42ea7f86ce2674cc1acaba7538",
+    "class_sha256": "0485899bd4636bed62cfe9f34566f8813ca62fc68f8141b3d623e75d1a5725da",
+    "source_bytes": 4590,
+    "scope": "source read only; no model/forward/train/generation/CMEE",
+    "archive_bytes": 2148,
+    "archive_sha256": "cfd23971b1f1f63467cb60c441dfb8efdc38a3af2f47466ede2e397fcfc7eb8b",
+    "crc_and_source_identity_identical": true,
+    "root_observed_cap_condition": "local stopping = stop_reported or (max_length is not None and length >= max_length); return stopping"
+  }
+}

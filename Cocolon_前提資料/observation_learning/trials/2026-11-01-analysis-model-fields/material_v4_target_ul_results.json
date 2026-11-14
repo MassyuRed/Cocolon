@@ -1,0 +1,47 @@
+{
+  "experiment": "material_v4_target_ul_20261103",
+  "decision": "PLANNED_PREUPDATE_STOP_NOT_ADOPTED",
+  "execution_status": "FAILED_NO_RETRY_NOT_ADOPTED",
+  "stop_reason": "C4_negative_branch_already_negligible_no_training",
+  "plan_commit": "7623f006d7efa9ae260d166297df05f52e81b152",
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "new_stop_responses": 4,
+  "model_loads": 2,
+  "training_updates": 0,
+  "measurement_forwards": 16,
+  "after_generations": 0,
+  "seconds": 77.3423188989982,
+  "p_negative": [
+    1.2135131224541573e-12,
+    1.5581818604490372e-12,
+    1.1513468130275317e-11,
+    3.894958661154746e-11
+  ],
+  "p_positive": [
+    0.9999984502792358,
+    0.9999985694885254,
+    0.9999963045120239,
+    0.9999970197677612
+  ],
+  "initial_unchanged": true,
+  "new_weights": false,
+  "manifest_members_verified": 161,
+  "lossless_bundle": {
+    "library_file_id": "libfile_f3e9e62b13108191b0c103cddd22234a",
+    "bytes": 15079887,
+    "sha256": "5c5dc7ef7b3b313495ac022688b78b8a3785d8524f51009bcc1b4e802b98cbd2"
+  },
+  "processing_cost_usd_at_previous_029_per_hour": 0.006230353466863743,
+  "actual_total_bill_measured": false,
+  "final_gpu": {
+    "memory_mib": 2,
+    "utilization_percent": 0,
+    "compute_apps": 0,
+    "rental_maintained": true
+  },
+  "normal_adoption": false,
+  "production_changes": 0,
+  "structure_map_delta": "NONE",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0
+}

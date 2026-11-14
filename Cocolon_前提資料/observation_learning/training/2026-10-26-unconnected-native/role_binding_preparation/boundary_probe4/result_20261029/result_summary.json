@@ -1,0 +1,90 @@
+{
+  "status": "CLOSED_DIAGNOSTIC_ONLY_NOT_ADOPTED",
+  "source_commit": "f6f1bb485dc73c11e6669062301893440502d248",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "a08f36c4b7f29abc7d85564e876ff7b90ce7fe6aa641ffe1b25fb56c908809db",
+    "adapter_model.safetensors": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19"
+  },
+  "training_updates": 0,
+  "model_loads": 1,
+  "model_calls": 4,
+  "processing_seconds": 120.66807183402125,
+  "process_cost_usd": 0.009385294475979432,
+  "cmee_cpu_seconds": 1.8458052210044116,
+  "eos": 2,
+  "strict_json": 1,
+  "conditional_meaning": 0,
+  "conditional_body": 0,
+  "gold_assisted": true,
+  "eligible_for_full_generation_credit": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "frozen_inputs_and_adapter_unchanged": true,
+  "retry": false,
+  "cases": [
+    {
+      "probe_id": "FT-BOOK-AFTER-ANSWER--GOLD_MEANING",
+      "meaning": false,
+      "body": false,
+      "decision": "HOLD",
+      "reason": "model_v3_explanation_updates_not_bound"
+    },
+    {
+      "probe_id": "FT-BOOK-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES",
+      "meaning": false,
+      "body": false,
+      "decision": "REJECT",
+      "reason": "semantic_receipt_not_validated"
+    },
+    {
+      "probe_id": "FT-SHOP-AFTER-ANSWER--GOLD_MEANING",
+      "meaning": false,
+      "body": false,
+      "decision": "REJECT",
+      "reason": "semantic_receipt_not_validated"
+    },
+    {
+      "probe_id": "FT-SHOP-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES",
+      "meaning": false,
+      "body": false,
+      "decision": "REJECT",
+      "reason": "semantic_receipt_not_validated"
+    }
+  ],
+  "primary_outcome": "BLOCKER_NARROWED",
+  "normal_activation": false,
+  "adapter_adopted": false,
+  "new_weights_created": 0,
+  "formal_product_read_passed": 0,
+  "formal_product_read_total": 3,
+  "management_completion_percent": 54.5,
+  "candidate_ready": false,
+  "existing_full2_meaning": 0,
+  "existing_full2_body": 0,
+  "existing_old9_after_only_meaning": 7,
+  "existing_old9_after_only_body": 7,
+  "full_generation_measurement_in_this_probe": false,
+  "archive": {
+    "archive_bytes": 86686,
+    "archive_sha256": "60738af20a88356d73325f42504ed2c0bab0a0c668341443c5be6160960fde76",
+    "payloads": 18,
+    "all_crc_hash_size_verified": true,
+    "cpu_source_identical": true,
+    "all4_prefix_continuation_unchanged": true,
+    "all4_raw_token_cap_hash_adapter_verified": true,
+    "adapter_unchanged": true,
+    "loaded_tensors": 112,
+    "loaded_parameter_count": 3833856,
+    "loaded_all_f32_finite": true
+  },
+  "weights_library_file_id": "libfile_e089337060248191a52ee06aad6fc75a",
+  "weights_library_version": 0,
+  "next_candidate": "元全文2本のprompt/assistant列を保持し、updates開始以降〜EOSだけをloss対象とする2更新候補。CPU・起点・評価・費用は未固定、未実行。",
+  "reading_review": "reading_review.md",
+  "raw_run_status_preserved": true,
+  "gpu_lifecycle_operations": 0,
+  "production_changes": 0,
+  "structure_map_delta": "NONE",
+  "rate_basis": "prior same-Pod USD0.28/h display; current rate not re-queried; CPU/preparation/recovery/holding/storage/network/taxes extra"
+}

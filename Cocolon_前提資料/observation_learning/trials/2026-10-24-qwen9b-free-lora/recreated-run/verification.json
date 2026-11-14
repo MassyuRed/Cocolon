@@ -1,0 +1,197 @@
+{
+  "schema": "cocolon_recreated_pilot_receipt_review.v1",
+  "reviewed_at": "2026-10-24 JST",
+  "archive": {
+    "name": "cocolon_recreated_checkpoint.tar.gz",
+    "bytes": 4217463,
+    "sha256": "6a7b4fe0dbcc29cfcb858d9dd68f6fd5a65e1ebc5e8911bc63c2920f39a89b3d",
+    "sidecar_match": true,
+    "regular_unique_members": 34,
+    "manifest_files_verified": 33,
+    "all_file_hashes_and_sizes_match": true
+  },
+  "result": {
+    "bytes": 48751,
+    "sha256": "24e4f0dc7e9e2ed03115bf0dd960849fd96ce6432c850f2adad03b01c49620b5",
+    "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
+    "training_steps": 9,
+    "before": 6,
+    "after": 6,
+    "seconds": 73.80006289482117
+  },
+  "diagnosis": {
+    "bytes": 83973,
+    "sha256": "907ebb138e34cb7f958fa0249e3449cfcf6b75a15c33e4aaa0b6c49f35f17edf",
+    "status": "DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED",
+    "teacher_count": 9,
+    "teacher_tokens": 1089,
+    "teacher_completions_excluded_from_generation": true,
+    "before_weighted_nll": 1.8150625453288671,
+    "after_weighted_nll": 1.657143720034835,
+    "reduction_percent": 8.70046190421605,
+    "nll_pairs": [
+      {
+        "id": "FT-UDON-INITIAL",
+        "tokens": 67,
+        "before": 1.0017378330230713,
+        "after": 0.7905309200286865
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "tokens": 106,
+        "before": 1.7706255912780762,
+        "after": 1.6316614151000977
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "tokens": 158,
+        "before": 2.031500816345215,
+        "after": 1.9413193464279175
+      },
+      {
+        "id": "FT-CHAIR-INITIAL",
+        "tokens": 113,
+        "before": 1.73739492893219,
+        "after": 1.5157406330108643
+      },
+      {
+        "id": "FT-CHAIR-AFTER-CORRECTION",
+        "tokens": 141,
+        "before": 1.5763933658599854,
+        "after": 1.3963851928710938
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "tokens": 130,
+        "before": 2.036282777786255,
+        "after": 1.89751136302948
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "tokens": 172,
+        "before": 2.404301166534424,
+        "after": 2.2409636974334717
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "tokens": 86,
+        "before": 1.3348088264465332,
+        "after": 1.1654740571975708
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "tokens": 116,
+        "before": 1.630827784538269,
+        "after": 1.4780807495117188
+      }
+    ],
+    "all_nine_nll_decreased": true,
+    "generation_changed": 8,
+    "json_parsed_before": 0,
+    "json_parsed_after": 0,
+    "seconds": 105.6572482585907,
+    "adapter_files_unchanged": true
+  },
+  "adapter": {
+    "files_received": true,
+    "sha256": {
+      "README.md": "b24b74667d1eb9c991047b4507c329613ae38707f4450446a94217081af69e96",
+      "adapter_model.safetensors": "159b2c3f87ff189ab18c84dfd5ed56e95a39846f068dca2f8236958ed8f7986e",
+      "adapter_config.json": "e726a3406e7704e7eaa58a12be952754deedd2ba4dce88b45eff1f5a22b85c3c"
+    },
+    "bytes": 4461168,
+    "tensor_count": 32,
+    "trainable_parameter_count_in_pilot": 1114112,
+    "tensor_values_finite": true,
+    "all_tensors_nonzero": true,
+    "reported_loaded_norms_match_received_weights": true,
+    "runpod_reload_verified_from_received_output": true,
+    "independent_local_gpu_reload_performed": false
+  },
+  "source": {
+    "recipe_commit": "d53f9ef0a906624acaeb519f8c4c6eb153e60e51",
+    "recreation_commit": "182d1a1ea41ebb53c46f541711f88df3b3c3bd15",
+    "runner_sha256": "c0491131cb6fcccadcb94e25d618acd95bcff9b6eeb875403b2d9723ccc613e4",
+    "data_sha256": {
+      "sft_examples.jsonl": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+      "train_messages.jsonl": "533d4d32156a5cbf52512b63aa00d49e58963e725aa4b508b9c532c79700df71",
+      "eval_inputs.jsonl": "300f353c9322c66cdfb2a0ad06e955aeb8176f1aa15fa6185fc3ef99b3559a0b",
+      "eval_review.jsonl": "3bd7ddcc6c6bbd8a778ba3ff849be96437e823df60bd652f83b85d9c1cd56282"
+    },
+    "github_blob_matches": [
+      "run_pilot.py",
+      "diagnose_learning.py",
+      "export_checkpoint.py",
+      "recreate_pilot.sh",
+      "sft_examples.jsonl",
+      "train_messages.jsonl",
+      "eval_inputs.jsonl",
+      "eval_review.jsonl"
+    ]
+  },
+  "original_weights_recovered": false,
+  "recreation_is_separate_run": true,
+  "original_result_unchanged": true,
+  "repeat_eval_raw_equal_to_initial": {
+    "before": 6,
+    "after": 2
+  },
+  "pod_stop_confirmed": false,
+  "total_cost_verified": false,
+  "new_gpu_execution_by_karen": false,
+  "product_quality_accepted": false,
+  "semantic_review": {
+    "reviewer": "Karen internal full-text review; not Mash Product Read",
+    "overall": "TEACHER_NLL_DECREASED_BUT_OBSERVATION_BEHAVIOR_NOT_ESTABLISHED",
+    "cases": [
+      {
+        "id": "FT-UDON-INITIAL",
+        "judgment": "PARTIAL_CHANGE_WITH_UNGROUNDED_COMPLETION",
+        "note": "不要な他要因の不明は消えたが、身体的な安らぎの補完と説明調の受け取りが残る。"
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "judgment": "UNRESOLVED_OR_WORSE",
+        "note": "本人の気がかりを尋ねず、友人の気遣いか本物の許しかという真意の二択へ逸れる。"
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "judgment": "PARTIAL_RETENTION_WITH_DISTORTION",
+        "note": "連絡しなかった本人説明は保持するが、updateは連絡の遅れへ縮め、表情・トーン・今後の感情へ不明を広げる。"
+      },
+      {
+        "id": "FT-CHAIR-INITIAL",
+        "judgment": "NO_ESTABLISHED_TEACHER_BEHAVIOR",
+        "note": "独力の喜びは保持するが、また使える結果が落ちる。教師の問いは出ないが、指示上は任意なので問いなしだけを命令違反としない。"
+      },
+      {
+        "id": "FT-CHAIR-AFTER-CORRECTION",
+        "judgment": "UNGROUNDED_JOY_REASON_AFTER_CORRECTION",
+        "note": "独力の訂正は保持するが、本人が理由とした再使用に加えて協働・達成感を喜びの原因へ追加。"
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "judgment": "HALLUCINATED_EVENT_PERSISTS",
+        "note": "入力にない返信が来ない出来事を前後とも追加。学習後は意図的無視などへ拡張。"
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "judgment": "EXPLICIT_NEGATION_NOT_RETAINED",
+        "note": "具体的な約束なしという説明に対し未来の約束を立て、参加できない、招待忘れ／排除まで補完。"
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "judgment": "LOCAL_GAIN",
+        "note": "未記載の不安解消が消え、説明を聞いて理解し安心した本人情報へ近づく。"
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "judgment": "UNCHANGED_BASELINE_ALREADY_RETAINS_UNKNOWN",
+        "note": "前後完全一致。面倒さと寂しさの関係が不明なことを保持し問いを強制しない。学習による新獲得ではない。"
+      }
+    ],
+    "held_out_eval": "E06乾燥完了補完解消・E05現在の参加意欲明瞭化はあるが、E01承認断定／根拠外二択、E02因果逆転、E03未記載の交流／温かみが残る。E04主要訂正は前から成立し、afterでは残した写真の明示が落ちる。十分な全体改善なし。",
+    "format_issue": "JSON-only instruction absent in unchanged task prompt; no JSON decoding constraint. Parse0/9 before and after is not proof of violating an explicit JSON-only order.",
+    "next": "Before adding teachers, prepare a bounded comparison varying only training amount on the same nine. Undertraining is a hypothesis, not established cause; existing-case fit and held-out response quality must both be inspected. No additional GPU execution started or scheduled by this receipt review."
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "schema": "cocolon.emlis_service_identity_eval1_evidence_diagnosis.v1",
+  "scope": "SAME_STORY_UNTRAINED_IDENTITY_READ_ONLY_DIAGNOSIS_NOT_GENERAL_LANGUAGE",
+  "request_full_reconstruction_matches_export": true,
+  "prior_matches_actual_initial_snapshot": true,
+  "expected_target_origin": "existing natural_packet helper from unchanged actual service request and actual adopted initial snapshot; comparison only, never submitted as a model output",
+  "input_hashes": {
+    "correction_request.json": "df05c86bea4a842b13990b6d49883ca47b7b4633799b4925c80d8608ecb9a5fd",
+    "correction_prior.json": "c560eea88c6fc4c16a667cf8f555f314077a7ede23b02a6edda09791920723c7",
+    "correction_messages.json": "b15f566d3747c870a695a9f3dc56b5c63d081152dcf51e77d2a074fdfaea735c",
+    "correction_raw.jsonl": "280bc43dbb8d78da512b513198b1c017da76406517c3e740979e6dfb12a61667",
+    "correction_receipt.json": "4b4db286aaa5a7d93a2437619f54f3f5248d96605cdf558d4619370fba324242"
+  },
+  "frozen_sft_examples_sha256": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7",
+  "expected_comparison_packet_sha256": "7685d5a11e7d8f59c1848e7d455fe84da49b638634d50d5fc9b78af562a1d3cc",
+  "finish_reason": "stop",
+  "eos_reached": true,
+  "output_tokens": 2227,
+  "generation_budget": 2560,
+  "json_parse_success": true,
+  "receipt_status": "INVALID_EVIDENCE",
+  "actual_body_state": "ANSWER_UNREFLECTED",
+  "meaning_updated": false,
+  "current_observation": null,
+  "actual_evidence_count": 10,
+  "expected_evidence_count": 12,
+  "invalid_quote_coordinate_count": 2,
+  "invalid_quote_coordinates": [
+    {
+      "evidence_index": 6,
+      "source_id": "ab88659a-d002-4aa7-aff0-505946032616",
+      "field_path": "answer_text_private",
+      "quote": "友人に手順を教えてもらって",
+      "actual_start": 28,
+      "actual_end": 77,
+      "expected_start": 25,
+      "expected_end": 38,
+      "actual_source_slice": "手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにま"
+    },
+    {
+      "evidence_index": 7,
+      "source_id": "ab88659a-d002-4aa7-aff0-505946032616",
+      "field_path": "answer_text_private",
+      "quote": "一緒に直しました",
+      "actual_start": 39,
+      "actual_end": 88,
+      "expected_start": 39,
+      "expected_end": 47,
+      "actual_source_slice": "一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったか"
+    }
+  ],
+  "missing_expected_evidence": [
+    {
+      "source_id": "ab88659a-d002-4aa7-aff0-505946032616",
+      "field_path": "answer_text_private",
+      "start": 0,
+      "end": 21,
+      "quote": "さっき「全部一人で」と書いたのは訂正します"
+    },
+    {
+      "source_id": "ab88659a-d002-4aa7-aff0-505946032616",
+      "field_path": "answer_text_private",
+      "start": 59,
+      "end": 71,
+      "quote": "一人でできたからではなく"
+    },
+    {
+      "source_id": "ab88659a-d002-4aa7-aff0-505946032616",
+      "field_path": "answer_text_private",
+      "start": 50,
+      "end": 91,
+      "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです"
+    }
+  ],
+  "extra_evidence": [
+    {
+      "end": 91,
+      "field_path": "answer_text_private",
+      "quote": "一人でできたからではなく、捨てずにまた使えるようになったからです",
+      "source_id": "ab88659a-d002-4aa7-aff0-505946032616",
+      "start": 59
+    }
+  ],
+  "out_of_range_evidence_index_count": 19,
+  "out_of_range_evidence_indexes": [
+    {
+      "path": "candidate/claims/3/about_time/evidence_indexes/0",
+      "actual_index": 22,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/3/evidence_indexes/0",
+      "actual_index": 22,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/3/modality/evidence_indexes/0",
+      "actual_index": 22,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/3/polarity/evidence_indexes/0",
+      "actual_index": 22,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/4/about_time/evidence_indexes/0",
+      "actual_index": 23,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/4/evidence_indexes/0",
+      "actual_index": 23,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/4/modality/evidence_indexes/0",
+      "actual_index": 23,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/4/polarity/evidence_indexes/0",
+      "actual_index": 23,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/5/about_time/evidence_indexes/0",
+      "actual_index": 24,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/5/evidence_indexes/0",
+      "actual_index": 24,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/5/modality/evidence_indexes/0",
+      "actual_index": 24,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/claims/5/polarity/evidence_indexes/0",
+      "actual_index": 24,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/relations/1/evidence_indexes/0",
+      "actual_index": 26,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/updates/0/evidence_indexes/0",
+      "actual_index": 21,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/updates/0/evidence_indexes/1",
+      "actual_index": 19,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/updates/0/evidence_indexes/2",
+      "actual_index": 20,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/updates/1/evidence_indexes/0",
+      "actual_index": 25,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/updates/1/evidence_indexes/1",
+      "actual_index": 26,
+      "valid_min": 0,
+      "valid_max": 9
+    },
+    {
+      "path": "candidate/updates/2/evidence_indexes/0",
+      "actual_index": 24,
+      "valid_min": 0,
+      "valid_max": 9
+    }
+  ],
+  "candidate_matches_expected_except_evidence_indexes": true,
+  "json_difference_count": 32,
+  "json_differences": [
+    {
+      "path": "/candidate/claims/3/about_time/evidence_indexes/0",
+      "expected": 7,
+      "actual": 22
+    },
+    {
+      "path": "/candidate/claims/3/evidence_indexes/0",
+      "expected": 7,
+      "actual": 22
+    },
+    {
+      "path": "/candidate/claims/3/modality/evidence_indexes/0",
+      "expected": 7,
+      "actual": 22
+    },
+    {
+      "path": "/candidate/claims/3/polarity/evidence_indexes/0",
+      "expected": 7,
+      "actual": 22
+    },
+    {
+      "path": "/candidate/claims/4/about_time/evidence_indexes/0",
+      "expected": 8,
+      "actual": 23
+    },
+    {
+      "path": "/candidate/claims/4/evidence_indexes/0",
+      "expected": 8,
+      "actual": 23
+    },
+    {
+      "path": "/candidate/claims/4/modality/evidence_indexes/0",
+      "expected": 8,
+      "actual": 23
+    },
+    {
+      "path": "/candidate/claims/4/polarity/evidence_indexes/0",
+      "expected": 8,
+      "actual": 23
+    },
+    {
+      "path": "/candidate/claims/5/about_time/evidence_indexes/0",
+      "expected": 9,
+      "actual": 24
+    },
+    {
+      "path": "/candidate/claims/5/evidence_indexes/0",
+      "expected": 9,
+      "actual": 24
+    },
+    {
+      "path": "/candidate/claims/5/modality/evidence_indexes/0",
+      "expected": 9,
+      "actual": 24
+    },
+    {
+      "path": "/candidate/claims/5/polarity/evidence_indexes/0",
+      "expected": 9,
+      "actual": 24
+    },
+    {
+      "path": "/candidate/relations/1/evidence_indexes/0",
+      "expected": 11,
+      "actual": 26
+    },
+    {
+      "path": "/candidate/updates/0/evidence_indexes/0",
+      "expected": 6,
+      "actual": 21
+    },
+    {
+      "path": "/candidate/updates/0/evidence_indexes/1",
+      "expected": 7,
+      "actual": 19
+    },
+    {
+      "path": "/candidate/updates/0/evidence_indexes/2",
+      "expected": 8,
+      "actual": 20
+    },
+    {
+      "path": "/candidate/updates/1/evidence_indexes/0",
+      "expected": 10,
+      "actual": 25
+    },
+    {
+      "path": "/candidate/updates/1/evidence_indexes/1",
+      "expected": 11,
+      "actual": 26
+    },
+    {
+      "path": "/candidate/updates/2/evidence_indexes/length",
+      "expected": 2,
+      "actual": 1
+    },
+    {
+      "path": "/candidate/updates/2/evidence_indexes/0",
+      "expected": 6,
+      "actual": 24
+    },
+    {
+      "path": "/evidence/length",
+      "expected": 12,
+      "actual": 10
+    },
+    {
+      "path": "/evidence/6/end",
+      "expected": 21,
+      "actual": 77
+    },
+    {
+      "path": "/evidence/6/quote",
+      "expected": "さっき「全部一人で」と書いたのは訂正します",
+      "actual": "友人に手順を教えてもらって"
+    },
+    {
+      "path": "/evidence/6/start",
+      "expected": 0,
+      "actual": 28
+    },
+    {
+      "path": "/evidence/7/end",
+      "expected": 38,
+      "actual": 88
+    },
+    {
+      "path": "/evidence/7/quote",
+      "expected": "友人に手順を教えてもらって",
+      "actual": "一緒に直しました"
+    },
+    {
+      "path": "/evidence/7/start",
+      "expected": 25,
+      "actual": 39
+    },
+    {
+      "path": "/evidence/8/end",
+      "expected": 47,
+      "actual": 91
+    },
+    {
+      "path": "/evidence/8/quote",
+      "expected": "一緒に直しました",
+      "actual": "捨てずにまた使えるようになったからです"
+    },
+    {
+      "path": "/evidence/8/start",
+      "expected": 39,
+      "actual": 72
+    },
+    {
+      "path": "/evidence/9/quote",
+      "expected": "捨てずにまた使えるようになったからです",
+      "actual": "一人でできたからではなく、捨てずにまた使えるようになったからです"
+    },
+    {
+      "path": "/evidence/9/start",
+      "expected": 72,
+      "actual": 59
+    }
+  ],
+  "diagnosis": "Not end-only. Evidence collection omits correction declaration, isolated old-reason negation, and full revised joy-ground; adds one combined negation/reuse quote. Two quoted spans have wrong coordinates, and 19 candidate evidence indexes point outside the 10-row array. Source UUIDs are correct.",
+  "limit": "Candidate wording and typed fields excluding evidence indexes match the teacher; evidence invalidity prevents meaning/body adoption. Underlying model cause and a reliable fix are not established.",
+  "coordinate_only_fix_sufficient": false,
+  "raw_repaired_or_adopted": false,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "frozen_pack_modified": false,
+  "raw_source_unchanged": true,
+  "product_accepted": false,
+  "automatic_progression": false
+}

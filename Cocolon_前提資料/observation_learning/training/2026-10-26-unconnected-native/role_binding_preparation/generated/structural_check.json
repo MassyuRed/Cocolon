@@ -1,0 +1,124 @@
+{
+  "status": "STRUCTURAL_PROJECTIONS_READY_NOT_TOKENIZER_OR_GPU_READY",
+  "source_sha256": "3c80fa6c1c9b47df8efc84aa9f899af4ffb6ef436c0403fdb1bb0646f88f1654",
+  "derived_sha256": "4aec0be06138ec94b52534148219372cfc608de93b2ba0b13cbabf24e814707f",
+  "rows": 13,
+  "role_tasks": 6,
+  "attached_add_tasks": 5,
+  "terminal_tasks": 2,
+  "new_observations": 0,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "merged_teacher_sha256": "13db26e7927d54ead34daa302ebc2932687cd1cc653d9f3414687d7470829827",
+      "original_ab_teacher_sha256": [
+        "e303a92e0f52c9dcee8abca01ae7a20d6800539ec2c45633baf937735cccc845",
+        "90ffefdc23ee0ee65a5b05b8f622989c24b91abd873a6df0f49dc1784a6ceb7f"
+      ],
+      "teacher_adds": 6,
+      "teacher_final_gaps": 1,
+      "all_source_fields_prior_exact": true,
+      "nested_ev_complete": true,
+      "selected_target_subtrees_exact": true,
+      "tail_updates_and_body_reconstruct_exact": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "merged_teacher_sha256": "5377068ff786356b8e79e8b79508842305cb952bdde5f374e03d994d343e8d4a",
+      "original_ab_teacher_sha256": [
+        "9bb3c0d909eaa6263dbdb8c9a3a3628c347603e736b31e78b11ebefa0551fc71",
+        "45e5b56d0408466ce039ac1330e8e63328cc70d243f10bd63748b5039b6afa2d"
+      ],
+      "teacher_adds": 7,
+      "teacher_final_gaps": 1,
+      "all_source_fields_prior_exact": true,
+      "nested_ev_complete": true,
+      "selected_target_subtrees_exact": true,
+      "tail_updates_and_body_reconstruct_exact": true
+    }
+  ],
+  "targets": [
+    {
+      "id": "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-no_contact",
+      "assistant_chars": 768,
+      "assistant_sha256": "d72db1dc0b42b4a9207546459e8941355e81c2f345f1a1a54c808dce24f0868a"
+    },
+    {
+      "id": "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-statement_concession",
+      "assistant_chars": 529,
+      "assistant_sha256": "9ea88fdb3497731aaa2e36aefe19bad2cabbb6aa76d29d22f71c814b324e600e"
+    },
+    {
+      "id": "LOCAL-ROLE_TO_EVIDENCE-FT-BOOK-AFTER-ANSWER-returned_concession",
+      "assistant_chars": 527,
+      "assistant_sha256": "6cc1afafc057c4cc86d21c5ff3062f5199df4aa4f544906f06bb42c104b716d1"
+    },
+    {
+      "id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-BOOK-AFTER-ANSWER-no_contact",
+      "assistant_chars": 293,
+      "assistant_sha256": "59a15ed3b99e8b694114b5ed6ab648b81d0f0341678e73c6b142f1ecb78a25b9"
+    },
+    {
+      "id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-BOOK-AFTER-ANSWER-continuing_concern",
+      "assistant_chars": 284,
+      "assistant_sha256": "4da8974d26ef5f5e86289683b5b4381fe33ea5ef67d03dbbaf7aa627b5a30c49"
+    },
+    {
+      "id": "LOCAL-END_UPDATES_AND_PROSE-FT-BOOK-AFTER-ANSWER-final",
+      "assistant_chars": 1077,
+      "assistant_sha256": "82369fb2b37cada2732ceea9a2b487e8b0ed8851e18f0e588457fba9e75f5b1d"
+    },
+    {
+      "id": "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-perceived_realization",
+      "assistant_chars": 926,
+      "assistant_sha256": "d92715f808517c75d87d0e5cc1c4bace477184fa39db44c1be58f8f111ecb306"
+    },
+    {
+      "id": "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-answer_joy",
+      "assistant_chars": 759,
+      "assistant_sha256": "b84b2698b1d6fe1ef886b572647f006e6bfa16281d742e17cee059682264de7a"
+    },
+    {
+      "id": "LOCAL-ROLE_TO_EVIDENCE-FT-SHOP-AFTER-ANSWER-felt_distance",
+      "assistant_chars": 842,
+      "assistant_sha256": "9dd1ea66ea437df7203f4dd3529741cce8b51123b2ddcc8be89a325d65b2fd06"
+    },
+    {
+      "id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-perceived_realization",
+      "assistant_chars": 242,
+      "assistant_sha256": "bb1da49f906c92974dfbbf887b436bbf3ae8b870579ba704a7128bbc48b9cc93"
+    },
+    {
+      "id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-felt_distance",
+      "assistant_chars": 215,
+      "assistant_sha256": "c20bf5ebddc0ded6ca8c53e529ede447c4824a54c0c061f2a8fc6aa4909b03d9"
+    },
+    {
+      "id": "LOCAL-CLAIM_TO_ATTACHED_ADD-FT-SHOP-AFTER-ANSWER-answer_sadness",
+      "assistant_chars": 268,
+      "assistant_sha256": "66f41f23484baf90e9830694da067a61b3c602e3f8d3f205aad8f457788c1ab4"
+    },
+    {
+      "id": "LOCAL-END_UPDATES_AND_PROSE-FT-SHOP-AFTER-ANSWER-final",
+      "assistant_chars": 1284,
+      "assistant_sha256": "8c0a720ce5e7fa52e3eddaa5adf035b32c86c7be7414ba635f7579101b7616df"
+    }
+  ],
+  "tokenizer_checks": "NOT_RUN",
+  "context_and_mask_checks": "NOT_RUN",
+  "model_loads": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "cmee_admissions": 0,
+  "sql_operations": 0,
+  "gpu_run_authorized": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "verification": {
+    "ast_parse": "PASS",
+    "all_13_targets_and_conditions": "PASS",
+    "no_full_spec_scope_conflict": "PASS",
+    "negative_nested_ev_and_double_gap": 2,
+    "model_tokenizer_effects": 0
+  }
+}

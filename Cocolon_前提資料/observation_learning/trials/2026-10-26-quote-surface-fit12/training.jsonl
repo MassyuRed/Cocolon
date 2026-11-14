@@ -1,0 +1,12 @@
+{"step": 1, "target_visit": 1, "loss_scope": "COMPLETE_OBSERVATION_RECEPTION_WINDOW", "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.13761046528816223, "gradient_norm": 2.670628547668457}
+{"step": 2, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.001681914203800261, "gradient_norm": 2.3734192848205566}
+{"step": 3, "target_visit": 1, "loss_scope": "COMPLETE_OBSERVATION_RECEPTION_WINDOW", "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.07993367314338684, "gradient_norm": 2.023216485977173}
+{"step": 4, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.001111016608774662, "gradient_norm": 0.17992892861366272}
+{"step": 5, "target_visit": 1, "loss_scope": "COMPLETE_OBSERVATION_RECEPTION_WINDOW", "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.04486333951354027, "gradient_norm": 1.1670156717300415}
+{"step": 6, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0011996536049991846, "gradient_norm": 0.07785337418317795}
+{"step": 7, "target_visit": 2, "loss_scope": "COMPLETE_OBSERVATION_RECEPTION_WINDOW", "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.023619012907147408, "gradient_norm": 0.9624453783035278}
+{"step": 8, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.001318110735155642, "gradient_norm": 0.7311206459999084}
+{"step": 9, "target_visit": 2, "loss_scope": "COMPLETE_OBSERVATION_RECEPTION_WINDOW", "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.01479179598391056, "gradient_norm": 0.3986537456512451}
+{"step": 10, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.0016880150651559234, "gradient_norm": 0.6213094592094421}
+{"step": 11, "target_visit": 2, "loss_scope": "COMPLETE_OBSERVATION_RECEPTION_WINDOW", "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.008987819775938988, "gradient_norm": 0.26000142097473145}
+{"step": 12, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.0010243018623441458, "gradient_norm": 0.1895880550146103}

@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonPressable from "../components/CocolonPressable";
@@ -18,6 +18,7 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useUnread } from "../UnreadContext";
 import { apiFetch, apiPost } from "../lib/apiClient";
 import { CONNECT_WIRE, EMOTION_NOTIFICATION_WIRE, FOLLOW_WIRE, buildFollowListPath, buildFollowRequestsPath, buildFollowStatsPath, readEmotionNotificationOwnerId, readRelatedConnectCode } from "../lib/compat/legacyWireContracts";
@@ -151,7 +152,8 @@ export default function FollowListScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
-  const { user } = useAuth();
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { getFeatureUnread, setUnread } = useUnread();
 
   const viewedUserId =
@@ -174,6 +176,24 @@ export default function FollowListScreen({ navigation, route }) {
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
+  const selectionRef = useRef(null);
+  if (!selectionRef.current || selectionRef.current.owner !== ownerRequest ||
+      selectionRef.current.target !== viewedUserId || selectionRef.current.tab !== tab) {
+    selectionRef.current = { owner: ownerRequest, target: viewedUserId, tab };
+  }
+  const selection = selectionRef.current;
+  const listRequestSeq = useRef(0);
+  const notificationRequestSeq = useRef(0);
+  const countRequestSeq = useRef(0);
+  const countScopeRef = useRef(null);
+  if (!countScopeRef.current || countScopeRef.current.owner !== ownerRequest || countScopeRef.current.target !== viewedUserId) {
+    countScopeRef.current = { owner: ownerRequest, target: viewedUserId };
+  }
+  const countScope = countScopeRef.current;
+  useEffect(() => {
+    setRequestActionLoadingId(null);
+    setEmotionNotifBusyId(null);
+  }, [ownerRequest]);
   const requestsUnread = isSelfList && !!getFeatureUnread("EmotionLog", "requests");
 
   const visibleTabs = useMemo(
@@ -208,14 +228,14 @@ export default function FollowListScreen({ navigation, route }) {
   }, [isSelfList, tab]);
 
   useEffect(() => {
-    if (!isSelfList || tab !== TAB_REQUESTS) return;
+    if (!isSelfList || tab !== TAB_REQUESTS || !isOwnerCurrent(ownerRequest)) return;
 
     let cancelled = false;
 
     (async () => {
       try {
-        await apiPost(FOLLOW_WIRE.routes.requestsRead, {});
-        if (!cancelled) {
+        await apiPost(FOLLOW_WIRE.routes.requestsRead, {}, ownerRequest.options);
+        if (!cancelled && isOwnerCurrent(ownerRequest)) {
           setUnread("EmotionLog", "requests", false);
         }
       } catch (e) {
@@ -226,10 +246,13 @@ export default function FollowListScreen({ navigation, route }) {
     return () => {
       cancelled = true;
     };
-  }, [isSelfList, setUnread, tab]);
+  }, [isSelfList, setUnread, tab, ownerRequest, isOwnerCurrent]);
 
   const refreshCounts = useCallback(async () => {
-    if (!viewedUserId) return;
+    if (!viewedUserId || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++countRequestSeq.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && countScopeRef.current === countScope &&
+      countRequestSeq.current === sequence;
 
     setCountLoading(true);
     try {
@@ -238,6 +261,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isFresh()) return;
       } catch {
         accessToken = null;
       }
@@ -245,6 +269,7 @@ export default function FollowListScreen({ navigation, route }) {
       const res = await apiFetch(
         buildFollowStatsPath(viewedUserId),
         {
+          ...ownerRequest.options,
           method: "GET",
           headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
         }
@@ -255,6 +280,7 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (!isFresh()) return;
       const followingCnt = Number(json?.following_count);
       const followerCnt = Number(json?.follower_count);
 
@@ -270,7 +296,8 @@ export default function FollowListScreen({ navigation, route }) {
           const rres = await apiFetch(
             buildFollowRequestsPath("incoming", { limit: 300 }),
             {
-              method: "GET",
+              ...ownerRequest.options,
+          method: "GET",
               headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
             }
           );
@@ -279,9 +306,9 @@ export default function FollowListScreen({ navigation, route }) {
             const rjson = await rres.json().catch(() => ({}));
             const reqs = Array.isArray(rjson?.requests) ? rjson.requests : [];
             const total = Number(rjson?.total_items);
-            setRequestCount(Number.isFinite(total) ? total : reqs.length);
+            if (isFresh()) setRequestCount(Number.isFinite(total) ? total : reqs.length);
           } else {
-            setRequestCount(0);
+            if (isFresh()) setRequestCount(0);
           }
         } catch {
           // no-op
@@ -291,7 +318,8 @@ export default function FollowListScreen({ navigation, route }) {
           const ores = await apiFetch(
             buildFollowRequestsPath("outgoing", { limit: 300 }),
             {
-              method: "GET",
+              ...ownerRequest.options,
+          method: "GET",
               headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
             }
           );
@@ -300,26 +328,29 @@ export default function FollowListScreen({ navigation, route }) {
             const ojson = await ores.json().catch(() => ({}));
             const oreqs = Array.isArray(ojson?.requests) ? ojson.requests : [];
             const ototal = Number(ojson?.total_items);
-            setRequestedCount(Number.isFinite(ototal) ? ototal : oreqs.length);
+            if (isFresh()) setRequestedCount(Number.isFinite(ototal) ? ototal : oreqs.length);
           } else {
-            setRequestedCount(0);
+            if (isFresh()) setRequestedCount(0);
           }
         } catch {
-          setRequestedCount(0);
+          if (isFresh()) setRequestedCount(0);
         }
       } else {
-        setRequestCount(0);
-        setRequestedCount(0);
+        if (isFresh()) setRequestCount(0);
+        if (isFresh()) setRequestedCount(0);
       }
     } catch (e) {
       // no-op（一覧取得でエラー表示するため）
     } finally {
-      setCountLoading(false);
+      if (isFresh()) setCountLoading(false);
     }
-  }, [viewedUserId, user, isSelfList]);
+  }, [viewedUserId, user, isSelfList, ownerRequest, isOwnerCurrent, countScope]);
 
   const loadList = useCallback(async () => {
-    if (!viewedUserId) return;
+    if (!viewedUserId || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++listRequestSeq.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && selectionRef.current === selection &&
+      listRequestSeq.current === sequence;
 
     setLoading(true);
     setErrorText("");
@@ -330,10 +361,12 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
 
+      if (!isFresh()) return;
       // 「承認待ち」タブは自分の一覧のみ表示する（他ユーザーの申請は見られない）
       if ((tab === TAB_REQUESTS || tab === TAB_REQUESTED) && !isSelfList) {
         setRows([]);
@@ -356,7 +389,8 @@ export default function FollowListScreen({ navigation, route }) {
         const ores = await apiFetch(
           buildFollowRequestsPath("outgoing", { limit: 300 }),
           {
-            method: "GET",
+            ...ownerRequest.options,
+          method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
           }
         );
@@ -373,6 +407,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const ojson = await ores.json().catch(() => ({}));
+        if (!isFresh()) return;
         const reqs = Array.isArray(ojson?.requests) ? ojson.requests : [];
         const total = Number(ojson?.total_items);
         setRequestedCount(Number.isFinite(total) ? total : reqs.length);
@@ -405,7 +440,8 @@ export default function FollowListScreen({ navigation, route }) {
           : buildFollowListPath({ targetUserId: viewedUserId, tab });
 
       const res = await apiFetch(url, {
-        method: "GET",
+        ...ownerRequest.options,
+          method: "GET",
         headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
       });
 
@@ -421,6 +457,7 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (!isFresh()) return;
 
       if (tab === TAB_REQUESTS) {
         const reqs = Array.isArray(json?.requests) ? json.requests : [];
@@ -449,24 +486,29 @@ export default function FollowListScreen({ navigation, route }) {
         setRows(list);
       }
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("FollowListScreen loadList error:", e);
       setRows([]);
       setErrorText(String(e?.message || e));
     } finally {
-      setLoading(false);
+      if (isFresh()) setLoading(false);
     }
-  }, [tab, viewedUserId, user, isSelfList]);
+  }, [tab, viewedUserId, user, isSelfList, ownerRequest, isOwnerCurrent, selection]);
 
   useEffect(() => {
     refreshCounts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [viewedUserId]);
+  }, [viewedUserId, ownerRequest]);
 
   useEffect(() => {
     loadList();
   }, [loadList]);
 
   const loadEmotionNotificationSettings = useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++notificationRequestSeq.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && selectionRef.current === selection &&
+      notificationRequestSeq.current === sequence;
     if (!user || !isSelfList || tab !== TAB_FOLLOWING) {
       setEmotionNotifMap({});
       setEmotionNotifLoading(false);
@@ -479,6 +521,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -488,7 +531,8 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const res = await apiFetch(EMOTION_NOTIFICATION_SETTINGS_ENDPOINT, {
-        method: "GET",
+        ...ownerRequest.options,
+          method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -506,14 +550,16 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (!isFresh()) return;
       setEmotionNotifMap(extractEmotionNotificationMap(json));
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("FollowListScreen loadEmotionNotificationSettings error:", e);
       setEmotionNotifMap({});
     } finally {
-      setEmotionNotifLoading(false);
+      if (isFresh()) setEmotionNotifLoading(false);
     }
-  }, [user, isSelfList, tab]);
+  }, [user, isSelfList, tab, ownerRequest, isOwnerCurrent, selection]);
 
   useEffect(() => {
     loadEmotionNotificationSettings();
@@ -530,7 +576,7 @@ export default function FollowListScreen({ navigation, route }) {
     if (!targetId) return;
 
     // 自分のフォロー/フォロワー一覧のみ解除できる（他ユーザーの一覧は閲覧のみ）
-    if (!user || !isSelfList) return;
+    if (!user || !isSelfList || !isOwnerCurrent(ownerRequest)) return;
 
     try {
       setErrorText("");
@@ -541,6 +587,7 @@ export default function FollowListScreen({ navigation, route }) {
         try {
           const { data: sessionData } = await supabase.auth.getSession();
           accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
         } catch {
           accessToken = null;
         }
@@ -550,6 +597,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const res = await apiFetch(FOLLOW_WIRE.routes.delete, {
+          ...ownerRequest.options,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -575,6 +623,7 @@ export default function FollowListScreen({ navigation, route }) {
         try {
           const { data: sessionData } = await supabase.auth.getSession();
           accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
         } catch {
           accessToken = null;
         }
@@ -584,6 +633,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const res = await apiFetch(FOLLOW_WIRE.routes.removeFollower, {
+          ...ownerRequest.options,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -604,11 +654,13 @@ export default function FollowListScreen({ navigation, route }) {
         }
       }
 
+      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
       setRows((prev) =>
         prev.filter((r) => String(r?.id || "") !== String(targetId))
       );
       refreshCounts();
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("removeFollowLink error:", e);
       setErrorText(String(e?.message || e));
     }
@@ -619,7 +671,7 @@ export default function FollowListScreen({ navigation, route }) {
     if (!reqId) return;
 
     // 自分の承認待ち一覧のみ操作できる
-    if (!user || !isSelfList) return;
+    if (!user || !isSelfList || !isOwnerCurrent(ownerRequest)) return;
 
     if (requestActionLoadingId) return;
 
@@ -632,6 +684,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -646,7 +699,8 @@ export default function FollowListScreen({ navigation, route }) {
           : FOLLOW_WIRE.routes.rejectRequest;
 
       const res = await apiFetch(endpoint, {
-        method: "POST",
+        ...ownerRequest.options,
+          method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -665,6 +719,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
 
+      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
       // 一覧から除去
       setRows((prev) =>
         prev.filter((r) => String(r?._follow_request_id || "") !== String(reqId))
@@ -677,10 +732,11 @@ export default function FollowListScreen({ navigation, route }) {
 
       refreshCounts();
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("actOnFollowRequest error:", e);
       setErrorText(String(e?.message || e));
     } finally {
-      setRequestActionLoadingId(null);
+      if (isOwnerCurrent(ownerRequest)) setRequestActionLoadingId(null);
     }
   };
 
@@ -691,7 +747,7 @@ export default function FollowListScreen({ navigation, route }) {
     if (!tgt) return;
 
     // 自分の「申請中」一覧のみ操作できる
-    if (!user || !isSelfList) return;
+    if (!user || !isSelfList || !isOwnerCurrent(ownerRequest)) return;
 
     if (requestActionLoadingId) return;
 
@@ -704,6 +760,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -713,7 +770,8 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const res = await apiFetch(FOLLOW_WIRE.routes.cancelRequest, {
-        method: "POST",
+        ...ownerRequest.options,
+          method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -732,6 +790,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
 
+      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
       // 一覧から除去
       setRows((prev) => prev.filter((r) => String(r?.id || "") !== String(tgt)));
       setRequestedCount((prev) => {
@@ -742,17 +801,18 @@ export default function FollowListScreen({ navigation, route }) {
 
       refreshCounts();
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("cancelOutgoingFollowRequest error:", e);
       setErrorText(String(e?.message || e));
     } finally {
-      setRequestActionLoadingId(null);
+      if (isOwnerCurrent(ownerRequest)) setRequestActionLoadingId(null);
     }
   };
 
   const toggleEmotionNotification = async (targetUserId) => {
     const ownerUserId = String(targetUserId || "").trim();
     if (!ownerUserId) return;
-    if (!user || !isSelfList || tab !== TAB_FOLLOWING) return;
+    if (!user || !isSelfList || tab !== TAB_FOLLOWING || !isOwnerCurrent(ownerRequest)) return;
     if (emotionNotifBusyId) return;
 
     const currentEnabled = emotionNotifMap?.[ownerUserId] !== false;
@@ -768,6 +828,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -779,6 +840,7 @@ export default function FollowListScreen({ navigation, route }) {
       const res = await apiFetch(
         `${EMOTION_NOTIFICATION_SETTINGS_ENDPOINT}/${encodeURIComponent(ownerUserId)}`,
         {
+          ...ownerRequest.options,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -799,11 +861,12 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("toggleEmotionNotification error:", e);
       setEmotionNotifMap((prev) => ({ ...(prev || {}), [ownerUserId]: currentEnabled }));
       setErrorText(String(e?.message || e));
     } finally {
-      setEmotionNotifBusyId(null);
+      if (isOwnerCurrent(ownerRequest)) setEmotionNotifBusyId(null);
     }
   };
 
@@ -817,15 +880,18 @@ export default function FollowListScreen({ navigation, route }) {
     const isEmotionNotificationBusy =
       String(emotionNotifBusyId || "") === String(item?.id || "");
 
+    const requestDisabled = !item?._follow_request_id || !!requestActionLoadingId;
+    const outgoingDisabled = !item?.id || !!requestActionLoadingId;
+    const notificationDisabled = !item?.id || emotionNotifLoading || isEmotionNotificationBusy;
+    const requestForeground = requestDisabled ? colors.TEXT_SUBTLE : colors.ON_SURFACE_TONAL;
+    const rejectForeground = requestDisabled ? colors.TEXT_SUBTLE : colors.ERROR;
+    const outgoingForeground = outgoingDisabled ? colors.TEXT_SUBTLE : colors.ERROR;
+    const notificationForeground = notificationDisabled ? colors.TEXT_SUBTLE : isEmotionNotificationEnabled ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT;
     return (
-      <TouchableOpacity
-        style={styles.row}
-        activeOpacity={0.75}
-        onPress={() => openProfile(item?.id)}
-      >
-        <View style={{ flex: 1, paddingRight: 10 }}>
+      <View style={styles.row}>
+        <TouchableOpacity style={{ alignSelf: 'stretch', minWidth: 0, minHeight: 44, justifyContent: 'center' }} activeOpacity={0.75} onPress={() => openProfile(item?.id)} accessibilityRole="button" accessibilityLabel={`${name}${item?.is_private_account ? "（非公開アカウント）" : ""}のアカウントを開く`}>
           <View style={styles.nameRow}>
-            <Text style={[styles.rowName, { flexShrink: 1 }]} numberOfLines={1}>
+            <Text style={[styles.rowName, { flexShrink: 1 }]}>
               {name}
             </Text>
             {item?.is_private_account ? (
@@ -837,25 +903,26 @@ export default function FollowListScreen({ navigation, route }) {
             ) : null}
           </View>
           {(tab === TAB_REQUESTS || tab === TAB_REQUESTED) && item?._request_created_at ? (
-            <Text style={styles.rowSub} numberOfLines={1}>
+            <Text style={styles.rowSub}>
               申請: {String(item?._request_created_at || "").slice(0, 10)}
             </Text>
           ) : null}
           {isSelfList && tab === TAB_FOLLOWING && !isSelf ? (
-            <Text style={styles.rowSub} numberOfLines={1}>
+            <Text style={styles.rowSub}>
               感情通知: {isEmotionNotificationEnabled ? "ON" : "OFF"}
             </Text>
           ) : null}
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.rowRight}>
+        <View style={[styles.rowRight, !isSelfList && { marginTop: 0 }]}>
           {isSelf ? (
             <Text style={styles.selfTag}>あなた</Text>
           ) : tab === TAB_REQUESTS && isSelfList ? (
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
               <TouchableOpacity
-                style={[styles.qnaBtn, !!requestActionLoadingId && { opacity: 0.5 }]}
+                style={[styles.qnaBtn, requestDisabled && { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER }]}
                 activeOpacity={0.8}
+                accessibilityRole="button" accessibilityLabel={`${name}：承認`} accessibilityState={{ disabled: requestDisabled, busy: !!requestActionLoadingId && String(requestActionLoadingId) === String(item?._follow_request_id || "") }}
                 onPress={() =>
                   actOnFollowRequest(item?._follow_request_id, "approve")
                 }
@@ -865,27 +932,27 @@ export default function FollowListScreen({ navigation, route }) {
                 String(item?._follow_request_id || "") ? (
                   <ActivityIndicator
                     size="small"
-                    color={colors.TEXT_ON_LIGHT}
+                    color={requestForeground}
                     style={{ marginRight: 6 }}
                   />
                 ) : (
                   <Ionicons
                     name="checkmark"
                     size={16}
-                    color={colors.TEXT_ON_LIGHT}
+                    color={requestForeground}
                     style={{ marginRight: 6 }}
                   />
                 )}
-                <Text style={styles.qnaBtnText}>承認</Text>
+                <Text style={[styles.qnaBtnText, { color: requestForeground }]}>承認</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={[
                   styles.qnaBtn,
-                  { marginLeft: 8 },
-                  !!requestActionLoadingId && { opacity: 0.5 },
+                  { backgroundColor: requestDisabled ? colors.FIELD_BG : colors.ERROR_BG, borderColor: requestDisabled ? colors.CARD_BORDER : colors.ERROR },
                 ]}
                 activeOpacity={0.8}
+                accessibilityRole="button" accessibilityLabel={`${name}：拒否`} accessibilityState={{ disabled: requestDisabled, busy: !!requestActionLoadingId && String(requestActionLoadingId) === String(item?._follow_request_id || "") }}
                 onPress={() =>
                   actOnFollowRequest(item?._follow_request_id, "reject")
                 }
@@ -895,24 +962,25 @@ export default function FollowListScreen({ navigation, route }) {
                 String(item?._follow_request_id || "") ? (
                   <ActivityIndicator
                     size="small"
-                    color={colors.TEXT_ON_LIGHT}
+                    color={rejectForeground}
                     style={{ marginRight: 6 }}
                   />
                 ) : (
                   <Ionicons
                     name="close"
                     size={16}
-                    color={colors.TEXT_ON_LIGHT}
+                    color={rejectForeground}
                     style={{ marginRight: 6 }}
                   />
                 )}
-                <Text style={styles.qnaBtnText}>拒否</Text>
+                <Text style={[styles.qnaBtnText, { color: rejectForeground }]}>拒否</Text>
               </TouchableOpacity>
             </View>
           ) : tab === TAB_REQUESTED && isSelfList ? (
             <TouchableOpacity
-              style={[styles.qnaBtn, !!requestActionLoadingId && { opacity: 0.5 }]}
+              style={[styles.qnaBtn, { backgroundColor: outgoingDisabled ? colors.FIELD_BG : colors.ERROR_BG, borderColor: outgoingDisabled ? colors.CARD_BORDER : colors.ERROR }]}
               activeOpacity={0.8}
+                accessibilityRole="button" accessibilityLabel={`${name}：取消`} accessibilityState={{ disabled: outgoingDisabled, busy: !!requestActionLoadingId && String(requestActionLoadingId) === String(item?._follow_request_id || "") }}
               onPress={() =>
                 cancelOutgoingFollowRequest(
                   item?._request_target_user_id || item?.id,
@@ -925,18 +993,18 @@ export default function FollowListScreen({ navigation, route }) {
               String(item?._follow_request_id || "") ? (
                 <ActivityIndicator
                   size="small"
-                  color={colors.TEXT_ON_LIGHT}
+                  color={outgoingForeground}
                   style={{ marginRight: 6 }}
                 />
               ) : (
                 <Ionicons
                   name="close"
                   size={16}
-                  color={colors.TEXT_ON_LIGHT}
+                  color={outgoingForeground}
                   style={{ marginRight: 6 }}
                 />
               )}
-              <Text style={styles.qnaBtnText}>取消</Text>
+              <Text style={[styles.qnaBtnText, { color: outgoingForeground }]}>取消</Text>
             </TouchableOpacity>
           ) : isSelfList && tab === TAB_FOLLOWING ? (
             <View style={styles.rowRightGroup}>
@@ -944,19 +1012,21 @@ export default function FollowListScreen({ navigation, route }) {
                 <TouchableOpacity
                   style={[
                     styles.iconPill,
+                    { backgroundColor: notificationDisabled ? colors.FIELD_BG : isEmotionNotificationEnabled ? colors.SURFACE_TONAL : colors.PANEL_BG },
                     (emotionNotifLoading || isEmotionNotificationBusy) && styles.iconPillDisabled,
                   ]}
                   activeOpacity={0.8}
+                  accessibilityRole="switch" accessibilityState={{ checked: isEmotionNotificationEnabled, disabled: notificationDisabled, busy: isEmotionNotificationBusy }}
                   onPress={() => toggleEmotionNotification(item?.id)}
                   disabled={!item?.id || emotionNotifLoading || isEmotionNotificationBusy}
                   accessibilityLabel={
                     isEmotionNotificationEnabled
-                      ? "感情通知をオフにする"
-                      : "感情通知をオンにする"
+                      ? `${name}からの感情通知をオフにする`
+                      : `${name}からの感情通知をオンにする`
                   }
                 >
                   {isEmotionNotificationBusy ? (
-                    <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+                    <ActivityIndicator size="small" color={notificationForeground} />
                   ) : (
                     <Ionicons
                       name={
@@ -965,43 +1035,45 @@ export default function FollowListScreen({ navigation, route }) {
                           : "notifications-off-outline"
                       }
                       size={18}
-                      color={colors.TEXT_ON_LIGHT}
+                      color={notificationForeground}
                     />
                   )}
                 </TouchableOpacity>
               ) : null}
 
               <TouchableOpacity
-                style={[styles.qnaBtn, canToggleEmotionNotification && { marginLeft: 8 }]}
+                style={[styles.qnaBtn, { backgroundColor: colors.ERROR_BG, borderColor: colors.ERROR }]}
                 activeOpacity={0.8}
+                accessibilityRole="button" accessibilityLabel={`${name}：フォロー関係を削除`}
                 onPress={() => removeFollowLink(item?.id)}
               >
                 <Ionicons
                   name="trash-outline"
                   size={16}
-                  color={colors.TEXT_ON_LIGHT}
+                  color={colors.ERROR}
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.qnaBtnText}>削除</Text>
+                <Text style={[styles.qnaBtnText, { color: colors.ERROR }]}>削除</Text>
               </TouchableOpacity>
             </View>
           ) : isSelfList ? (
             <TouchableOpacity
-              style={styles.qnaBtn}
+              style={[styles.qnaBtn, { backgroundColor: colors.ERROR_BG, borderColor: colors.ERROR }]}
               activeOpacity={0.8}
+                accessibilityRole="button" accessibilityLabel={`${name}：フォロー関係を削除`}
               onPress={() => removeFollowLink(item?.id)}
             >
               <Ionicons
                 name="trash-outline"
                 size={16}
-                color={colors.TEXT_ON_LIGHT}
+                color={colors.ERROR}
                 style={{ marginRight: 6 }}
               />
-              <Text style={styles.qnaBtnText}>削除</Text>
+              <Text style={[styles.qnaBtnText, { color: colors.ERROR }]}>削除</Text>
             </TouchableOpacity>
           ) : null}
         </View>
-      </TouchableOpacity>
+      </View>
     );
   };
 
@@ -1015,7 +1087,7 @@ export default function FollowListScreen({ navigation, route }) {
       : "承認待ちの申請はありません。";
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -1024,6 +1096,7 @@ export default function FollowListScreen({ navigation, route }) {
       {/* ヘッダー */}
       <View style={styles.header}>
         <TouchableOpacity
+          accessibilityRole="button" accessibilityLabel="前の画面に戻る"
           onPress={() => navigation?.goBack?.()}
           style={styles.backButton}
           activeOpacity={0.7}
@@ -1031,13 +1104,14 @@ export default function FollowListScreen({ navigation, route }) {
           <Ionicons name="chevron-back" size={22} color={colors.TITLE_GOLD} />
         </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>フォローリスト</Text>
+
 
         <TouchableOpacity
           onPress={() => {
             refreshCounts();
             loadList();
           }}
+          accessibilityRole="button" accessibilityLabel="フォローリストを更新する"
           style={styles.refreshButton}
           activeOpacity={0.7}
         >
@@ -1045,7 +1119,9 @@ export default function FollowListScreen({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-      {/* タブ */}
+      {/* リスト */}
+      <FlatList
+          ListHeaderComponent={<View><Text style={styles.headerTitle}>フォローリスト</Text>      {/* タブ */}
       <View style={styles.tabBar}>
         {visibleTabs.map((tabItem) => {
           const isActive = tab === tabItem.key;
@@ -1061,6 +1137,7 @@ export default function FollowListScreen({ navigation, route }) {
                 style={styles.tabItem}
                 onPress={() => setTab(tabItem.key)}
                 accessibilityLabel={accessibilityLabel}
+                accessibilityRole="tab" accessibilityState={{ selected: isActive }}
               >
                 <View
                   style={[
@@ -1069,6 +1146,7 @@ export default function FollowListScreen({ navigation, route }) {
                   ]}
                 >
                   <View style={styles.tabLabelRow}>
+                    {isActive ? <Ionicons name="checkmark" size={16} color={colors.ON_SURFACE_TONAL} style={{ marginRight: 6 }} /> : null}
                     <Text
                       style={[
                         styles.tabLabelText,
@@ -1092,30 +1170,23 @@ export default function FollowListScreen({ navigation, route }) {
       {errorText ? (
         <View style={styles.errorBox}>
           <Text style={styles.errorText}>
-            読み込みに失敗しました: {errorText}
+            処理を完了できませんでした: {errorText}
           </Text>
         </View>
       ) : null}
 
-      {/* リスト */}
-      {loading ? (
-        <View style={styles.loadingWrap}>
-          <ActivityIndicator />
-        </View>
-      ) : (
-        <FlatList
-          data={rows}
+</View>}
+          data={loading ? [] : rows}
           keyExtractor={(item) => String(item?.id)}
           renderItem={renderItem}
           contentContainerStyle={[
             styles.listContent,
-            rows.length === 0 && { flex: 1, justifyContent: "center" },
+
           ]}
           ListEmptyComponent={
-            <Text style={styles.emptyText}>{emptyText}</Text>
+            loading ? <View style={styles.loadingWrap}><ActivityIndicator color={colors.ON_SURFACE_TONAL} accessibilityLabel="フォローリストを読込中" /></View> : errorText ? null : <Text style={styles.emptyText}>{emptyText}</Text>
           }
         />
-      )}
     </SafeAreaView>
   );
 }
@@ -1125,7 +1196,7 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
     },
 
     header: {
@@ -1133,178 +1204,210 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
       justifyContent: "space-between",
       paddingHorizontal: 20,
-      paddingTop: 16,
-      paddingBottom: 10,
+      paddingTop: 8,
+      paddingBottom: 8,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
     backButton: {
-      padding: 4,
-      width: 34,
+      padding: 10,
+      width: 44,
+      minHeight: 44,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 22,
     },
     refreshButton: {
-      padding: 6,
-      width: 34,
-      alignItems: "flex-end",
+      padding: 10,
+      width: 44,
+      alignItems: "center",
+      minHeight: 44,
+      justifyContent: "center",
+      borderRadius: 22,
     },
     headerTitle: {
-      fontSize: 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
+      marginBottom: 16,
     },
 
     tabBar: {
       flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
-      marginHorizontal: 20,
-      marginBottom: 14,
+      alignItems: "stretch",
+      justifyContent: "flex-start",
+      borderBottomWidth: 0,
+      marginHorizontal: -4,
+      marginBottom: 16,
+      flexWrap: "wrap",
     },
     tabItemWrap: {
-      flex: 1,
+      width: "50%",
+      padding: 4,
+      minWidth: 0,
     },
     tabItem: {
-      alignItems: "center",
+      alignItems: "stretch",
       justifyContent: "center",
-      paddingTop: 10,
-      paddingHorizontal: 2,
+      paddingTop: 0,
+      paddingHorizontal: 0,
+      minHeight: 48,
     },
     tabLabelWrap: {
       alignItems: "center",
       justifyContent: "center",
-      paddingBottom: 9,
-      borderBottomWidth: 2,
-      borderBottomColor: "transparent",
+      paddingBottom: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      minHeight: 48,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: ui?.radius?.button ?? 24,
+      backgroundColor: COLORS.FIELD_BG,
     },
     tabLabelRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      flexWrap: "wrap",
+      minWidth: 0,
     },
     tabLabelWrapActive: {
-      borderBottomColor: COLORS.TITLE_GOLD,
+      borderBottomColor: COLORS.ON_SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     tabLabelText: {
-      fontSize: 13,
-      fontWeight: "800",
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      textAlign: "center",
     },
     tabLabelTextActive: {
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     tabUnreadBadge: {
       marginLeft: 6,
       alignSelf: "center",
+      flexShrink: 0,
     },
 
     errorBox: {
-      marginHorizontal: 20,
-      marginBottom: 10,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      borderRadius: 12,
+      marginHorizontal: 0,
+      marginBottom: 16,
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+      borderRadius: 16,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.ERROR,
+      backgroundColor: COLORS.ERROR_BG,
     },
     errorText: {
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      lineHeight: 16,
+      color: COLORS.ERROR,
     },
 
     listContent: {
       paddingHorizontal: 20,
-      paddingBottom: 20,
+      paddingBottom: 32,
+      flexGrow: 1,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
 
     row: {
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      borderRadius: 14,
+      flexDirection: "column",
+      alignItems: "stretch",
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      borderRadius: ui?.radius?.card ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      marginBottom: 10,
+      marginBottom: 12,
     },
     nameRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
+      minWidth: 0,
     },
     rowName: {
-      fontSize: 14,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
     },
     rowSub: {
-      marginTop: 2,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.75,
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     rowRight: {
-      alignItems: "flex-end",
+      alignItems: "flex-start",
       justifyContent: "center",
+      alignSelf: "stretch",
+      marginTop: 12,
+      minWidth: 0,
     },
     rowRightGroup: {
       flexDirection: "row",
       alignItems: "center",
+      flexWrap: "wrap",
+      gap: 8,
     },
     iconPill: {
-      width: 36,
-      height: 36,
+      width: 44,
+      height: 44,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
     },
     iconPillDisabled: {
-      opacity: 0.5,
+      backgroundColor: COLORS.FIELD_BG,
     },
 
     qnaBtn: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 10,
-      paddingVertical: 8,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      borderColor: COLORS.SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      minHeight: 44,
+      justifyContent: "center",
+      maxWidth: "100%",
     },
     qnaBtnText: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+      textAlign: "center",
     },
 
     selfTag: {
-      fontSize: 11,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.ON_SURFACE_TONAL,
       paddingHorizontal: 10,
       paddingVertical: 6,
       borderRadius: 999,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      borderColor: COLORS.SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
 
     loadingWrap: {
-      flex: 1,
       alignItems: "center",
       justifyContent: "center",
+      paddingVertical: 32,
     },
     emptyText: {
       textAlign: "center",
-      fontSize: 13,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
+      color: COLORS.TEXT_SUBTLE,
+      paddingVertical: 32,
     },
-  }, ui));
+  }, ui, {"headerTitle":"screenTitle","tabLabelText":"button","errorText":"description","rowName":"body","rowSub":"description","qnaBtnText":"button","selfTag":"meta","emptyText":"description"}));
 }

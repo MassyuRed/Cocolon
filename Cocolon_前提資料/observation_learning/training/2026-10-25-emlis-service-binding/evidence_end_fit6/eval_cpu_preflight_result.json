@@ -1,0 +1,15 @@
+{
+  "scope": "CPU metadata-only preflight; fake adapter hash exists in memory only, no adapter loaded",
+  "status": "PASS",
+  "eval_identity": "CHAIR_SERVICE_IDENTITY_HOLDOUT_02",
+  "old_eval_identity": "CHAIR_SERVICE_IDENTITY_HOLDOUT_01",
+  "previous_eval_uuid_overlap": false,
+  "previous_eval_timestamp_overlap": false,
+  "training_uuid_overlap": false,
+  "training_timestamp_overlap": false,
+  "unfilled_plan_rejected": true,
+  "model_calls": 0,
+  "database_operations": 0,
+  "gpu_operations": 0,
+  "product_accepted": false
+}

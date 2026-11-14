@@ -1,0 +1,17 @@
+{
+  "source_commit": "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8",
+  "timeout_pid": 397186,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "2690s",
+    "/usr/bin/python3.12",
+    "/workspace/cocolon_focus29_pack_20261030/run_focus29_once.py",
+    "--execute",
+    "--source-commit",
+    "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8"
+  ],
+  "approval_sha256": "7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260c",
+  "retry": false
+}

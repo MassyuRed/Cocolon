@@ -1,0 +1,30 @@
+{
+  "name": "runtime_originals.zip",
+  "original_name": "cocolon_prior_quote_probe2_runtime_originals_20261027.zip",
+  "bytes": 56444,
+  "sha256": "147d2b426019c43026326cdb648f2612d1da333bebb9598112632daa4f8cd812",
+  "payloads": 15,
+  "members": 16,
+  "all_crc_bytes_hash_verified": true,
+  "weights_included": false,
+  "saved_adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+  "saved_adapter_unchanged": true,
+  "workers": [
+    {
+      "pid": 246433,
+      "state": "EXITED"
+    },
+    {
+      "pid": 246735,
+      "state": "EXITED"
+    }
+  ],
+  "gpu_kept_running": true,
+  "gpu_lifecycle_operations": 0,
+  "nvidia_smi_after_exit": {
+    "name": "NVIDIA RTX A5000",
+    "used_mib": 1,
+    "total_mib": 24564
+  },
+  "post_runtime_reviews_and_docs_in_archive": false
+}

@@ -4,26 +4,29 @@ import {
   Alert,
   FlatList,
   RefreshControl,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
-import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { apiJson, apiFetch } from "../lib/apiClient";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
+import { useAuth } from "../AuthContext";
+import { useEmlisThread } from "./input/useEmlisThread";
+import EmlisThreadModal from "./input/EmlisThreadModal";
+import { useAppRuntime } from "../AppRuntimeContext";
+import { supportsPieceBitmapCreation } from "../features/piece/pieceRenderer";
 
-const API_BASE = "https://mashos-api.onrender.com";
-const EMOTION_SECRET_URL = `${API_BASE}/emotion/secret`;
-const EMOTION_HISTORY_SEARCH_URL = `${API_BASE}/emotion/history/search`;
+const EMOTION_SECRET_URL = "/emotion/secret";
+const EMOTION_HISTORY_SEARCH_URL = "/emotion/history/search";
 
 // Phase2: no infinite scroll yet (Phase3). Keep this modest.
 const PAGE_LIMIT = 50;
@@ -195,7 +198,10 @@ function renderHighlightedText(text, rx, highlightStyle) {
     .filter(Boolean);
 }
 
-export default function AnalysisHistoryScreen({ onBack }) {
+export default function AnalysisHistoryScreen({ onBack, navigation }) {
+  const { session } = useAuth();
+  const { isFeatureEnabled } = useAppRuntime();
+  const emlisThread = useEmlisThread({ userId: session?.user?.id || "" });
   const [query, setQuery] = useState(""); // 入力中（未実行でも変わる）
   const [executedQuery, setExecutedQuery] = useState(""); // 最後に実行した検索語
   const [secretFilter, setSecretFilter] = useState("all"); // all | public | secret
@@ -224,71 +230,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
     [subscriptionTier]
   );
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
-      header: {
-        backgroundColor: colors.BG_SILVER,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      backText: { color: colors.TEXT_ON_LIGHT },
-      searchBar: {
-        backgroundColor: colors.FIELD_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      searchInput: { color: colors.TEXT_ON_LIGHT },
-      orderBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      orderBtnOn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      orderText: { color: colors.TEXT_ON_LIGHT },
-
-      filterBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      filterBtnOn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      filterText: { color: colors.TEXT_ON_LIGHT },
-
-      row: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      date: { color: colors.TEXT_ON_LIGHT },
-      emotions: { color: colors.TEXT_ON_LIGHT },
-      memo: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      memoLabel: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      categoryValue: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      secretBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      secretBtnOn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      secretText: { color: colors.TEXT_ON_LIGHT },
-      deleteBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      noticeText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-      conditionBar: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      conditionText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
+  // Every theme now uses the same semantic style bindings.
+  const themed = {};
 
 
   // -------------------------
@@ -303,8 +246,9 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
   const highlightStyle = useMemo(
     () => ({
-      fontWeight: "800",
-      color: isDark ? colors.BORDER_GOLD : "#6366F1",
+      fontWeight: "600",
+      color: colors.ON_SURFACE_TONAL,
+      backgroundColor: colors.SURFACE_TONAL,
     }),
     [isDark, colors]
   );
@@ -333,7 +277,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
     // Always show secret mode in the condition bar (structural)
     parts.push(
       secretFilter === "public"
-        ? "公開のみ"
+        ? "通常のみ"
         : secretFilter === "secret"
         ? "Secretのみ"
         : "すべて"
@@ -592,6 +536,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
         method: "DELETE",
       });
       setRows((prev) => prev.filter((r) => r.id !== row.id));
+      emlisThread.reset();
     } catch (e) {
       setErrorMsg(String(e?.message || e));
     } finally {
@@ -643,27 +588,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
     }
   }, [hasMore, loading, refreshing, loadingMore, load, offset]);
 
-  return (
-    <SafeAreaView style={[styles.container, themed.container]}>
-      {/* ヘッダー（上段：戻る＋検索、右にソート） */}
-      <View style={[styles.header, themed.header]}>
-        <View style={styles.headerRow}>
-          {onBack ? (
-            <CocolonBackButton
-              onPress={onBack}
-              style={[styles.backBtn, { width: 64 }]}
-            />
-          ) : (
-            <View style={{ width: 64 }} />
-          )}
-
-          <Text style={[styles.headerTitle, { color: colors.TITLE_GOLD }]}>
-            感情入力履歴
-          </Text>
-
-          <View style={{ width: 64 }} />
-        </View>
-
+  const listHeader = (
+    <View style={styles.controls}>
         <View style={styles.searchRow}>
           <View
             style={[
@@ -679,6 +605,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
               style={styles.searchIcon}
             />
             <TextInput
+              accessibilityLabel="履歴の検索キーワード"
               style={[styles.searchInput, themed.searchInput]}
               placeholder="履歴を検索（メモ/行動メモ・感情・カテゴリ・日付・強/中/弱）"
               placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
@@ -692,7 +619,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
             {!!query ? (
               <TouchableOpacity
                 onPress={handleClear}
-                style={{ paddingHorizontal: 4, paddingVertical: 2 }}
+                accessibilityRole="button" accessibilityLabel="検索条件をクリアする"
+                style={styles.iconButton}
                 disabled={loading || refreshing}
               >
                 <Ionicons
@@ -705,7 +633,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
             <TouchableOpacity
               onPress={handleSearch}
-              style={{ paddingHorizontal: 4, paddingVertical: 2 }}
+              accessibilityRole="button" accessibilityLabel="履歴を検索する"
+              style={styles.iconButton}
               disabled={loading || refreshing}
             >
               <Ionicons
@@ -721,14 +650,15 @@ export default function AnalysisHistoryScreen({ onBack }) {
         <View style={styles.filterRow}>
           <TouchableOpacity
             onPress={() => applySecretFilter("all")}
+            accessibilityRole="button" accessibilityState={{ selected: secretFilter === "all", disabled: loading }}
             style={[
               styles.filterBtn,
               themed.filterBtn,
               { backgroundColor: colors.PANEL_BG, borderColor: colors.CARD_BORDER },
               secretFilter === "all" && [styles.filterBtnOn, themed.filterBtnOn],
               secretFilter === "all" && {
-                backgroundColor: colors.BORDER_GOLD,
-                borderColor: colors.BORDER_GOLD,
+                backgroundColor: colors.SURFACE_TONAL,
+                borderColor: colors.ON_SURFACE_TONAL,
               },
             ]}
             disabled={loading}
@@ -739,8 +669,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
                 themed.filterText,
                 { color: colors.TEXT_ON_LIGHT },
                 secretFilter === "all" && {
-                  color: colors.ACCENT_TEXT,
-                  fontWeight: "700",
+                  color: colors.ON_SURFACE_TONAL,
+                  fontWeight: "600",
                 },
               ]}
             >
@@ -750,14 +680,15 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
           <TouchableOpacity
             onPress={() => applySecretFilter("public")}
+            accessibilityRole="button" accessibilityState={{ selected: secretFilter === "public", disabled: loading }}
             style={[
               styles.filterBtn,
               themed.filterBtn,
               { backgroundColor: colors.PANEL_BG, borderColor: colors.CARD_BORDER },
               secretFilter === "public" && [styles.filterBtnOn, themed.filterBtnOn],
               secretFilter === "public" && {
-                backgroundColor: colors.BORDER_GOLD,
-                borderColor: colors.BORDER_GOLD,
+                backgroundColor: colors.SURFACE_TONAL,
+                borderColor: colors.ON_SURFACE_TONAL,
               },
             ]}
             disabled={loading}
@@ -768,25 +699,26 @@ export default function AnalysisHistoryScreen({ onBack }) {
                 themed.filterText,
                 { color: colors.TEXT_ON_LIGHT },
                 secretFilter === "public" && {
-                  color: colors.ACCENT_TEXT,
-                  fontWeight: "700",
+                  color: colors.ON_SURFACE_TONAL,
+                  fontWeight: "600",
                 },
               ]}
             >
-              公開のみ
+              通常のみ
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => applySecretFilter("secret")}
+            accessibilityRole="button" accessibilityState={{ selected: secretFilter === "secret", disabled: loading }}
             style={[
               styles.filterBtn,
               themed.filterBtn,
               { backgroundColor: colors.PANEL_BG, borderColor: colors.CARD_BORDER },
               secretFilter === "secret" && [styles.filterBtnOn, themed.filterBtnOn],
               secretFilter === "secret" && {
-                backgroundColor: colors.BORDER_GOLD,
-                borderColor: colors.BORDER_GOLD,
+                backgroundColor: colors.SURFACE_TONAL,
+                borderColor: colors.ON_SURFACE_TONAL,
               },
             ]}
             disabled={loading}
@@ -797,8 +729,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
                 themed.filterText,
                 { color: colors.TEXT_ON_LIGHT },
                 secretFilter === "secret" && {
-                  color: colors.ACCENT_TEXT,
-                  fontWeight: "700",
+                  color: colors.ON_SURFACE_TONAL,
+                  fontWeight: "600",
                 },
               ]}
             >
@@ -811,14 +743,15 @@ export default function AnalysisHistoryScreen({ onBack }) {
         <View style={styles.orderRow}>
           <TouchableOpacity
             onPress={() => applyOrder("desc")}
+            accessibilityRole="button" accessibilityState={{ selected: order === "desc", disabled: loading }}
             style={[
               styles.orderBtn,
               themed.orderBtn,
               { backgroundColor: colors.PANEL_BG, borderColor: colors.CARD_BORDER },
               order === "desc" && [styles.orderBtnOn, themed.orderBtnOn],
               order === "desc" && {
-                backgroundColor: colors.BORDER_GOLD,
-                borderColor: colors.BORDER_GOLD,
+                backgroundColor: colors.SURFACE_TONAL,
+                borderColor: colors.ON_SURFACE_TONAL,
               },
             ]}
             disabled={loading}
@@ -829,8 +762,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
                 themed.orderText,
                 { color: colors.TEXT_ON_LIGHT },
                 order === "desc" && {
-                  color: colors.ACCENT_TEXT,
-                  fontWeight: "700",
+                  color: colors.ON_SURFACE_TONAL,
+                  fontWeight: "600",
                 },
               ]}
             >
@@ -840,14 +773,15 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
           <TouchableOpacity
             onPress={() => applyOrder("asc")}
+            accessibilityRole="button" accessibilityState={{ selected: order === "asc", disabled: loading }}
             style={[
               styles.orderBtn,
               themed.orderBtn,
               { backgroundColor: colors.PANEL_BG, borderColor: colors.CARD_BORDER },
               order === "asc" && [styles.orderBtnOn, themed.orderBtnOn],
               order === "asc" && {
-                backgroundColor: colors.BORDER_GOLD,
-                borderColor: colors.BORDER_GOLD,
+                backgroundColor: colors.SURFACE_TONAL,
+                borderColor: colors.ON_SURFACE_TONAL,
               },
             ]}
             disabled={loading}
@@ -858,8 +792,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
                 themed.orderText,
                 { color: colors.TEXT_ON_LIGHT },
                 order === "asc" && {
-                  color: colors.ACCENT_TEXT,
-                  fontWeight: "700",
+                  color: colors.ON_SURFACE_TONAL,
+                  fontWeight: "600",
                 },
               ]}
             >
@@ -879,8 +813,6 @@ export default function AnalysisHistoryScreen({ onBack }) {
             />
             <Text
               style={[styles.conditionText, themed.conditionText]}
-              numberOfLines={1}
-              ellipsizeMode="tail"
             >
               {conditionSummary}
             </Text>
@@ -903,20 +835,39 @@ export default function AnalysisHistoryScreen({ onBack }) {
             下にスクロールして続きを読み込み
           </Text>
         ) : null}
+      {errorMsg ? <Text accessibilityLiveRegion="polite" style={styles.error}>取得エラー: {errorMsg}</Text> : null}
+    </View>
+  );
+
+  return (
+    <SafeAreaView edges={["left", "right"]} style={[styles.container, themed.container]}>
+      <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation}
+        userId={session?.user?.id || ""} pieceEnabled={isFeatureEnabled("piece_v2_preview_enabled", false) === true && supportsPieceBitmapCreation()} />
+      {/* ヘッダー（上段：戻る＋検索、右にソート） */}
+      <View style={[styles.header, themed.header]}>
+        <View style={styles.headerRow}>
+          {onBack ? (
+            <CocolonBackButton
+              onPress={onBack}
+              style={[styles.backBtn, { width: 64 }]}
+            />
+          ) : (
+            <View style={{ width: 64 }} />
+          )}
+
+          <Text style={[styles.headerTitle, { color: colors.TITLE_GOLD }]}>
+            感情入力履歴
+          </Text>
+
+          <View style={{ width: 64 }} />
+        </View>
+
       </View>
 
       {/* リスト */}
-      {errorMsg ? <Text style={styles.error}>取得エラー: {errorMsg}</Text> : null}
-
-      {loading && rows.length === 0 ? (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-          <ActivityIndicator
-            size="small"
-            color={isDark ? colors.TEXT_ON_LIGHT : undefined}
-          />
-        </View>
-      ) : (
-        <FlatList
+      <FlatList
+          keyboardShouldPersistTaps="handled"
+          ListHeaderComponent={listHeader}
           data={rows}
           keyExtractor={(item) => String(item.id)}
           refreshControl={
@@ -1006,6 +957,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
                   <TouchableOpacity
                     onPress={() => confirmDelete(item)}
+                    accessibilityRole="button" accessibilityLabel="この記録を削除する"
+                    accessibilityState={{ disabled: updatingId === item.id || deletingId === item.id, busy: deletingId === item.id }}
                     style={[styles.deleteBtn, themed.deleteBtn]}
                     activeOpacity={0.85}
                     disabled={updatingId === item.id || deletingId === item.id}
@@ -1013,14 +966,14 @@ export default function AnalysisHistoryScreen({ onBack }) {
                     {deletingId === item.id ? (
                       <ActivityIndicator
                         size="small"
-                        color={isDark ? colors.TEXT_ON_LIGHT : "#B91C1C"}
+                        color={colors.ERROR}
                       />
                     ) : (
                       <View style={styles.secretBtnInner}>
                         <Ionicons
                           name="trash-outline"
                           size={16}
-                          color={"#B91C1C"}
+                          color={colors.ERROR}
                           style={{ marginRight: 4 }}
                         />
                         <Text style={styles.deleteText}>削除</Text>
@@ -1072,10 +1025,14 @@ export default function AnalysisHistoryScreen({ onBack }) {
                   </Text>
                 </View>
               )}
+              {emlisThread.enabled && <TouchableOpacity onPress={() => emlisThread.open(item.id, { showNotCreated: true })}
+                accessibilityRole="button" accessibilityLabel="この記録のEmlisからの応答を開く" style={styles.replyButton}>
+                <Text style={styles.replyText}>Emlisからの応答を開く</Text>
+              </TouchableOpacity>}
             </View>
           )}
           ListEmptyComponent={
-            !errorMsg ? (
+            loading ? <ActivityIndicator accessibilityLabel="履歴を読み込み中" style={{ padding: 24 }} color={colors.TITLE_GOLD} /> : !errorMsg ? (
               <Text
                 style={[
                   { padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
@@ -1086,188 +1043,57 @@ export default function AnalysisHistoryScreen({ onBack }) {
               </Text>
             ) : null
           }
-          contentContainerStyle={{ paddingVertical: 8, paddingBottom: 18 }}
+          contentContainerStyle={styles.listContent}
         />
-      )}
     </SafeAreaView>
   );
 }
 
 function createStyles(COLORS, ui) {
-  const text = ui?.text || {};
-  return StyleSheet.create(applyTypographyTokens({
-  container: { flex: 1, backgroundColor: "#fff" },
-  header: {
-    paddingTop: 8,
-    paddingHorizontal: 12,
-    paddingBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    backgroundColor: "#fff",
-  },
-  headerRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 6,
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: "center",
-    fontSize: 20,
-    fontWeight: "800",
-  },
-  searchRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  backBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 4,
-    paddingRight: 10,
-  },
-  backText: {
-    marginLeft: 2,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    fontSize: 13,
-    fontWeight: "600",
-  },
-  searchBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    paddingHorizontal: 6,
-    paddingVertical: 6,
-    flex: 1,
-    marginLeft: 8,
-    marginRight: 0,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 15,
-    paddingHorizontal: 6,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
-  searchIcon: { marginHorizontal: 6 },
-
-  filterRow: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: 2,
-  },
-  filterBtn: {
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    marginLeft: 8,
-    backgroundColor: "#F3F4F6",
-  },
-  filterBtnOn: { backgroundColor: "#6366F1", borderColor: "#6366F1" },
-  filterText: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  filterTextOn: { color: "#fff", fontWeight: "700" },
-
-  orderRow: { flexDirection: "row", justifyContent: "flex-end", marginTop: 6 },
-  orderBtn: {
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    marginLeft: 8,
-    backgroundColor: "#F3F4F6",
-  },
-  orderBtnOn: { backgroundColor: "#6366F1", borderColor: "#6366F1" },
-  orderText: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  orderTextOn: { color: "#fff", fontWeight: "700" },
-
-  noticeText: { marginTop: 6, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-
-  conditionBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 6,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
-  conditionText: { flex: 1, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  historyRetentionText: {
-    marginTop: 8,
-    fontSize: 12,
-    fontWeight: "600",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
-
-  error: { padding: 12, color: "#B91C1C" },
-  rowTop: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 4,
-  },
-  rowActions: { flexDirection: "row", alignItems: "center" },
-  secretBtnSpacer: { marginRight: 8 },
-  deleteBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
-  deleteText: {
-    fontSize: 12,
-    color: "#B91C1C",
-    fontWeight: "700",
-  },
-  secretBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
-  secretBtnOn: {
-    backgroundColor: "#111827",
-    borderColor: "#111827",
-  },
-  secretBtnInner: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  secretText: {
-    fontSize: 12,
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-    fontWeight: "700",
-  },
-  secretTextOn: {
-    color: "#FFFFFF",
-  },
-  row: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderColor: "#eee",
-  },
-  date: { fontWeight: "700", marginBottom: 4, color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  emotions: { color: text.description ?? COLORS.TEXT_SUBTLE },
-  memoBlock: { marginTop: 6 },
-  memoLabel: { fontSize: 11, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
-  memo: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4, fontStyle: "italic" },
-  categoryValue: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4 },
-  }, ui));
+  return StyleSheet.create({
+    container: { flex: 1, backgroundColor: COLORS.BG_SILVER },
+    header: { paddingTop: 8, paddingHorizontal: 20, paddingBottom: 12 },
+    headerRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+    headerTitle: { ...ui.typography.screenTitle, flex: 1, textAlign: "center", color: COLORS.TEXT_ON_LIGHT },
+    backBtn: { minWidth: 44, minHeight: 44 },
+    controls: { paddingBottom: 16 },
+    listContent: { paddingHorizontal: 20, paddingBottom: 24, width: "100%", maxWidth: 680, alignSelf: "center" },
+    searchRow: { flexDirection: "row", alignItems: "center" },
+    searchBar: { flexDirection: "row", alignItems: "center", backgroundColor: COLORS.FIELD_BG, borderRadius: 16, borderWidth: 1, borderColor: COLORS.CARD_BORDER, paddingHorizontal: 8, minHeight: 52, flex: 1 },
+    searchInput: { ...ui.typography.input, flex: 1, paddingHorizontal: 6, paddingVertical: 12, color: COLORS.TEXT_ON_LIGHT },
+    searchIcon: { marginHorizontal: 4 },
+    iconButton: { minWidth: 44, minHeight: 44, alignItems: "center", justifyContent: "center" },
+    filterRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 12, gap: 8 },
+    filterBtn: { minHeight: 44, justifyContent: "center", paddingHorizontal: 14, paddingVertical: 10, borderRadius: 24, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG },
+    filterBtnOn: { backgroundColor: COLORS.SURFACE_TONAL, borderColor: COLORS.ON_SURFACE_TONAL },
+    filterText: { ...ui.typography.description, color: COLORS.TEXT_ON_LIGHT },
+    orderRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 8, gap: 8 },
+    orderBtn: { minHeight: 44, justifyContent: "center", paddingHorizontal: 14, paddingVertical: 10, borderRadius: 24, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG },
+    orderBtnOn: { backgroundColor: COLORS.SURFACE_TONAL, borderColor: COLORS.ON_SURFACE_TONAL },
+    orderText: { ...ui.typography.description, color: COLORS.TEXT_ON_LIGHT },
+    noticeText: { ...ui.typography.meta, marginTop: 8, color: COLORS.TEXT_SUBTLE },
+    conditionBar: { flexDirection: "row", alignItems: "flex-start", marginTop: 12, padding: 12, borderRadius: 16, backgroundColor: COLORS.SURFACE_TONAL },
+    conditionText: { ...ui.typography.description, flex: 1, color: COLORS.ON_SURFACE_TONAL },
+    historyRetentionText: { ...ui.typography.meta, marginTop: 12, color: COLORS.TEXT_SUBTLE },
+    error: { ...ui.typography.description, marginTop: 12, padding: 12, borderRadius: 16, color: COLORS.ERROR, backgroundColor: COLORS.ERROR_BG },
+    row: { padding: 20, marginBottom: 12, borderRadius: 24, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG },
+    rowTop: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 12 },
+    rowActions: { flexDirection: "row", alignItems: "center" },
+    date: { ...ui.typography.meta, color: COLORS.TEXT_SUBTLE },
+    emotions: { ...ui.typography.description, color: COLORS.TEXT_ON_LIGHT },
+    memoBlock: { marginTop: 16 },
+    memoLabel: { ...ui.typography.description, fontWeight: "600", color: COLORS.TEXT_SUBTLE },
+    memo: { ...ui.typography.body, marginTop: 6, color: COLORS.TEXT_ON_LIGHT, fontStyle: "normal" },
+    categoryValue: { ...ui.typography.description, marginTop: 6, color: COLORS.TEXT_SUBTLE },
+    replyButton: { minHeight: 44, justifyContent: "center", marginTop: 16 },
+    replyText: { ...ui.typography.button, color: COLORS.TITLE_GOLD },
+    deleteBtn: { flexDirection: "row", alignItems: "center", minHeight: 44, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 24, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG },
+    deleteText: { ...ui.typography.description, fontWeight: "600", color: COLORS.ERROR },
+    secretBtnSpacer: { marginRight: 8 },
+    secretBtn: { minHeight: 44, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 24, borderWidth: 1, borderColor: COLORS.CARD_BORDER, backgroundColor: COLORS.FIELD_BG },
+    secretBtnOn: { backgroundColor: COLORS.GOLD_BUTTON, borderColor: COLORS.GOLD_BUTTON_BORDER },
+    secretBtnInner: { flexDirection: "row", alignItems: "center" },
+    secretText: { ...ui.typography.description, color: COLORS.TEXT_ON_LIGHT },
+    secretTextOn: { color: COLORS.ACCENT_TEXT },
+  });
 }

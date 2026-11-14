@@ -22,11 +22,20 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, apiGet, API_BASE_URL } from "../lib/apiClient";
 import { SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
+import WatashiMapV2Renderer from "../components/selfStructure/WatashiMapV2Renderer";
+import { classifyWatashiMapVersion, parseWatashiMapContent, readWatashiMapV2Projection } from "../components/selfStructure/watashiMapV2Contract";
+import { canViewWatashiMapMode, getWatashiMapDetailLockLabel } from "../components/selfStructure/watashiMapAccessPolicy";
 import {
   hasWatashiMapRenderableContent,
   normalizeWatashiMapPayload,
 } from "../components/selfStructure/watashiMapFormatters";
 import CocolonBackButton from "../components/CocolonBackButton";
+import CumulativeWatashiMapView from '../components/selfStructure/CumulativeWatashiMapView';
+
+export default function SelfStructureReportGenerateScreen(props) {
+  return <CumulativeWatashiMapView onBack={props.onBack} onLatestSeenVersion={props.onLatestSeenVersion}
+    embedded={props.embedded} hideHeader={props.hideHeader} />;
+}
 
 // わたしマップ（Self Structure latest）: latest viewer
 const API_BASE = API_BASE_URL;
@@ -87,16 +96,7 @@ function defaultModeForTier(tier, allowedModes) {
 }
 
 function safeParseJson(raw) {
-  if (!raw) return null;
-  if (typeof raw === "object") return raw;
-  if (typeof raw === "string") {
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  }
-  return null;
+  return parseWatashiMapContent(raw);
 }
 
 function escapeHtml(s) {
@@ -223,7 +223,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "今のわたしマップ", showTitle = true }) {
+export function LegacySelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "今のわたしマップ", showTitle = true }) {
   const { themeName, colors } = useTheme();
   const {
     tier: ctxSubscriptionTier,
@@ -303,47 +303,26 @@ export default function SelfStructureReportGenerateScreen({ onBack, initialRepor
 
 const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [emptyMsg, setEmptyMsg] = useState("");
   const [reportText, setReportText] = useState("");
   const [meta, setMeta] = useState(null);
 
 
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
-
-      headerRow: { backgroundColor: colors.BG_SILVER },
-      headerTitle: { color: colors.TEXT_ON_LIGHT },
-
-      smallBtn: {
-        borderColor: colors.CARD_BORDER,
-        backgroundColor: colors.PANEL_BG,
-      },
-      smallBtnText: { color: colors.TEXT_ON_LIGHT },
-
-      title: { color: colors.TEXT_ON_LIGHT },
-
-      errorText: { color: "#FCA5A5" },
-
-      bodyCard: {
-        borderColor: colors.CARD_BORDER,
-        backgroundColor: colors.PANEL_BG,
-      },
-      sectionLabel: { color: colors.TEXT_ON_LIGHT },
-      p: { color: colors.TEXT_ON_LIGHT },
-      empty: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
+  const themed = {};
 
   const reportTitle = titleOverride || "今のわたしマップ";
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
+  const mapVersion = useMemo(() => classifyWatashiMapVersion(contentJson), [contentJson]);
+  const isLegacyMap = mapVersion === 'LEGACY';
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(meta?.report_mode || contentJson?.report_mode || reportMode);
   }, [meta?.report_mode, contentJson?.report_mode, reportMode]);
+  const canViewVersionedMap = !tierLoading && canViewWatashiMapMode(subscriptionTier,
+    meta?.report_mode || contentJson?.report_mode || reportMode);
   const hasWatashiMapVisual = useMemo(() => {
-    return hasWatashiMapRenderableContent(contentJson);
-  }, [contentJson]);
+    return isLegacyMap && hasWatashiMapRenderableContent(contentJson);
+  }, [contentJson, isLegacyMap]);
   const watashiMapPayload = useMemo(() => {
     if (!hasWatashiMapVisual) return null;
     return normalizeWatashiMapPayload(contentJson, {
@@ -378,6 +357,7 @@ const run = useCallback(async ({ force = false } = {}) => {
   safeSet(() => {
     setLoading(true);
     setErrorMsg("");
+    setEmptyMsg("");
     setReportText("");
     setMeta(null);
   });
@@ -454,13 +434,39 @@ const run = useCallback(async ({ force = false } = {}) => {
     }
 
     const json = await res.json();
+    // Insufficient material is a declared waiting state, not a failed read
+    // or an analysis artifact. Never infer it from an error or missing DTO.
+    if (json?.reason === "insufficient_input") {
+      if (json?.status !== "ok" || json?.refreshed !== false
+        || json?.skip_reason !== "analysis_insufficient_input"
+        || json?.has_visible_content !== false || json?.meta !== null
+        || json?.content_text !== null || json?.title !== null
+        || json?.generated_at !== null || json?.latest_generated_at !== null) {
+        throw new Error("分析結果の形式を確認できませんでした。");
+      }
+      safeSet(() => setEmptyMsg("入力情報が少ないため、まだ分析を表示できません。"));
+      return; // No artifact exists to render, export, or mark as seen.
+    }
+    // A successful read can have no eligible saved map. This does not
+    // establish insufficient input (read-only mode also returns this shape).
+    if (json?.status === "ok" && json?.reason === "no_visible_content"
+      && json?.has_visible_content === false
+      && json?.skip_reason === "analysis_saved_map_unavailable"
+      && json?.meta === null
+      && (json?.content_text === null || json?.content_text === "")) {
+      safeSet(() => setEmptyMsg("現在表示できるわたしマップはありません。"));
+      return; // No artifact was displayed, so do not mark a version as seen.
+    }
     const serverMeta = safeParseJson(json?.meta);
-    const hasVisualContract = !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
-    const text = sanitizeSelfStructureReportText(
+    const legacyResponse = classifyWatashiMapVersion(serverMeta) === 'LEGACY';
+    const versionedResponseDisplayable = !!readWatashiMapV2Projection(serverMeta)
+      && canViewWatashiMapMode(tier, json?.report_mode || effectiveMode);
+    const hasVisualContract = !legacyResponse || !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
+    const text = legacyResponse ? sanitizeSelfStructureReportText(
       String(json?.content_text || "").trim()
-    );
+    ) : '';
     if (!text && !hasVisualContract) {
-      throw new Error("わたしマップにできる観測がまだ少なめでした。");
+      throw new Error("分析結果の形式を確認できませんでした。");
     }
 
     // ★ ここで画面がもう無い（戻った）なら、以降の setState を行わない
@@ -481,10 +487,15 @@ const run = useCallback(async ({ force = false } = {}) => {
       });
     });
 
-    if (typeof onLatestSeenVersion === "function") {
+    if ((legacyResponse || versionedResponseDisplayable) && typeof onLatestSeenVersion === "function") {
       try {
-        const latestStatusJson = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
-        const latestVersionKey = String(latestStatusJson?.version_key || "").trim();
+        // Mark the artifact actually displayed; a later status may name a
+        // different saved version generated concurrently on another device.
+        const latestStatusJson = legacyResponse
+          ? await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus) : null;
+        const latestVersionKey = String(legacyResponse
+          ? latestStatusJson?.version_key || ""
+          : readWatashiMapV2Projection(serverMeta)?.projection_of || "").trim();
         if (latestVersionKey) {
           await onLatestSeenVersion(latestVersionKey);
         }
@@ -585,7 +596,7 @@ const run = useCallback(async ({ force = false } = {}) => {
                 ? colors.TEXT_SUBTLE
                 : ui?.text?.description ?? colors.TEXT_SUBTLE
               : active
-              ? "#FFFFFF"
+              ? colors.ON_SURFACE_TONAL
               : isDark
               ? colors.TEXT_ON_LIGHT
               : ui?.text?.primary ?? colors.TEXT_ON_LIGHT;
@@ -593,13 +604,14 @@ const run = useCallback(async ({ force = false } = {}) => {
             return (
               <TouchableOpacity
                 key={m}
+                accessibilityRole="button" accessibilityState={{ selected: active }}
                 style={[
                   styles.modeBtn,
                   isDark && themed.smallBtn,
                   active && styles.modeBtnActive,
                   active && {
-                    backgroundColor: colors.GOLD_BUTTON || "#D4AF37",
-                    borderColor: colors.GOLD_BUTTON_BORDER || "#C9A227",
+                    backgroundColor: colors.SURFACE_TONAL,
+                    borderColor: colors.ON_SURFACE_TONAL,
                   },
                   !allowed && styles.modeBtnDisabled,
                 ]}
@@ -670,8 +682,19 @@ const run = useCallback(async ({ force = false } = {}) => {
         </Text>
       )}
 
-      {!loading && !errorMsg && (
+      {!loading && !errorMsg && !!emptyMsg && (
+        <Text style={[styles.empty, themed.empty]}>{emptyMsg}</Text>
+      )}
+
+      {!loading && !errorMsg && !emptyMsg && (
         <>
+          {!isLegacyMap && canViewVersionedMap ? (
+            <WatashiMapV2Renderer contentJson={contentJson} colors={colors} isDark={isDark} />
+          ) : null}
+          {!isLegacyMap && !canViewVersionedMap ? (
+            <Text style={[styles.empty, themed.empty]}>{tierLoading ? 'プラン情報を確認しています…'
+              : getWatashiMapDetailLockLabel(subscriptionTier, fetchedReportMode)}</Text>
+          ) : null}
           {hasWatashiMapVisual ? (
             <WatashiMapRenderer
               contentJson={contentJson}
@@ -684,7 +707,7 @@ const run = useCallback(async ({ force = false } = {}) => {
             />
           ) : null}
 
-          {((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
+          {isLegacyMap && ((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
             <View style={[styles.bodyCard, themed.bodyCard]}>
               {hasWatashiMapVisual && reportText ? (
                 <Text style={[styles.sectionLabel, themed.sectionLabel]}>詳しい自己分析レポート</Text>
@@ -707,7 +730,7 @@ const run = useCallback(async ({ force = false } = {}) => {
   );
 
   if (embedded) {
-    return <View style={[styles.container, themed.container]}>{bodyContent}</View>;
+    return <View style={[styles.container, themed.container, { flex: 0, paddingHorizontal: 0, maxWidth: 640 }]}>{bodyContent}</View>;
   }
 
   return (
@@ -751,121 +774,163 @@ const run = useCallback(async ({ force = false } = {}) => {
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
+      paddingHorizontal: 20,
+    },
 
   headerRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 12,
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: 0,
+      paddingTop: 12,
+      paddingBottom: 16,
+      flexWrap: 'wrap',
+      gap: 12,
+    },
   backBtn: {
-    width: 70,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingVertical: 4,
-  },
+      width: 70,
+      alignItems: "flex-start",
+      justifyContent: "center",
+      paddingVertical: 0,
+      minWidth: 44,
+      minHeight: 44,
+    },
 
-  headerRight: { flexDirection: "row", alignItems: "center" },
+  headerRight: {
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: 'wrap',
+      gap: 8,
+    },
   smallBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 10,
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
+    },
   smallBtnText: {
-    marginLeft: 6,
-    fontSize: 12,
-    fontWeight: "700",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      marginLeft: 6,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
 
   headerTitle: {
-    fontSize: 26,
-    lineHeight: 32,
-    fontWeight: "800",
-    letterSpacing: 0.6,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    textAlign: "center",
-    marginBottom: 10,
-    paddingHorizontal: 16,
-  },
+      letterSpacing: 0,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+      marginBottom: 16,
+      paddingHorizontal: 0,
+    },
 
   // 🧭 mode selector
   modeCard: {
-    display: "none",
-    marginHorizontal: 12,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#FFFFFF",
-    padding: 12,
-  },
+      display: "none",
+      marginHorizontal: 0,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      padding: 20,
+    },
   modeHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 10,
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 10,
+      flexWrap: 'wrap',
+      gap: 8,
+    },
   modeTitle: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
-  modeTierText: { fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, fontWeight: "700" },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
+  modeTierText: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   modeButtonsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: 'flex-start',
+      flexWrap: 'wrap',
+      gap: 8,
+    },
   modeBtn: {
-    flex: 1,
-    marginHorizontal: 4,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 9,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
+      marginHorizontal: 0,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      flexShrink: 1,
+      minHeight: 44,
+    },
   modeBtnActive: {
-    backgroundColor: "#D4AF37",
-    borderColor: "#C9A227",
-  },
-  modeBtnDisabled: { opacity: 0.45 },
-  modeBtnText: { fontSize: 12, fontWeight: "900", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  modeBtnTextActive: { color: "#FFFFFF" },
-  modeBtnTextDisabled: { color: text.subtle ?? COLORS.TEXT_SUBTLE },
-  modeHint: { marginTop: 8, fontSize: 11, lineHeight: 16, color: text.description ?? COLORS.TEXT_SUBTLE },
-  modeErrorText: { marginTop: 6, fontSize: 11, lineHeight: 16, color: "#B91C1C" },
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
+    },
+  modeBtnDisabled: {
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
+    },
+  modeBtnText: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
+  modeBtnTextActive: {
+      color: COLORS.ON_SURFACE_TONAL,
+    },
+  modeBtnTextDisabled: {
+      color: COLORS.TEXT_SUBTLE,
+    },
+  modeHint: {
+      marginTop: 12,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+  modeErrorText: {
+      marginTop: 8,
+      color: COLORS.ERROR,
+    },
 
-  errorText: { paddingHorizontal: 16, paddingBottom: 8, color: "#B91C1C" },
+  errorText: {
+      paddingHorizontal: 0,
+      paddingBottom: 12,
+      color: COLORS.ERROR,
+    },
 
   bodyCard: {
-    marginHorizontal: 12,
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#FFFFFF",
-    padding: 12,
-  },
+      marginHorizontal: 0,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      padding: 20,
+    },
   sectionLabel: {
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    fontSize: 12,
-    fontWeight: "800",
-    marginBottom: 8,
-  },
-  p: { color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 14, lineHeight: 20, marginBottom: 4 },
-  empty: { padding: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  }, ui));
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
+    },
+  p: {
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
+  empty: {
+      padding: 16,
+      color: COLORS.TEXT_SUBTLE,
+    },
+  }, ui, {"smallBtnText":"button","headerTitle":"screenTitle","modeTitle":"sectionTitle","modeTierText":"meta","modeBtnText":"button","modeHint":"description","modeErrorText":"description","errorText":"description","sectionLabel":"sectionTitle","p":"body","empty":"description"}));
 }

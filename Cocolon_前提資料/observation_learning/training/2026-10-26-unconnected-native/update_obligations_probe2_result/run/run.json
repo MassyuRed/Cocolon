@@ -1,0 +1,75 @@
+{
+  "status": "RAW_COMPLETE_PENDING_UNCHANGED_CMEE_AND_BODY_REVIEW",
+  "source_commit": "8065009526cd6a1ddd42155ab050dbe0666d43ca",
+  "plan": {
+    "schema": "cocolon.update_obligations_probe2_once.v1",
+    "adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+    "pod_id": "94a06hhxu51uy4",
+    "expected_gpu_name": "NVIDIA RTX A5000",
+    "output_directory": "/workspace/cocolon_update_obligations_probe2_run_20261028",
+    "training_updates": 0,
+    "max_model_calls": 2,
+    "case_ids": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER"
+    ],
+    "max_seconds": 600,
+    "per_generation_seconds": 180,
+    "gpu_hourly_usd": 0.28,
+    "max_process_usd": 0.047,
+    "context_tokens": 8192,
+    "retry": false,
+    "gpu_lifecycle_operations": 0,
+    "production_sql_operations": 0,
+    "automatic_progression": false,
+    "product_credit": 0,
+    "status": "AUTHORIZED_ONCE_BOUND",
+    "gpu_run_authorized": true,
+    "approval_basis": "2026-10-28 JST Mash explicitly approved the proposed single no-training BOOK/SHOP after-answer 2-call probe, max 600 seconds and USD 0.047 process allocation; preparation/recovery/holding excluded: 進めていいよ。",
+    "runner_sha256": "6f59a66434d2e5329cc43ae45bbe1ad117dfea15872b8714c5dddf2087553b9c",
+    "cpu_check_sha256": "b39e28591521fc864757b0e922690f4ef8dc3cc71208fffe46f9b225c46395db",
+    "eval_inputs_sha256": "a2ea0d4f1b2144f563c22a6b3936a9271e73c05c01167324f77906bd3508fe5d",
+    "api_candidate_commit": "64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4",
+    "candidate_source_sha256": "a3d32c33529e9165c18efa42b2c3f3f6dd33b42bb3f4ecaef9e9cd9ccce46218",
+    "adapter_cpu_check_sha256": "0a9e4e06e4dcff1408f979f2fcd5c89c85c3938d4c941bb2f98fcee114d72962",
+    "adapter_cpu_source_sha256": "e5ad2054c5d8b4abc5e1487c370e7eba355dbd432e1e0d086ea0d445c2063953",
+    "consumer_sha256": "50f062ad3c6a3de8182c950b1d36a61605ae92bc1f6f261e21dae3c7353efb78"
+  },
+  "training_updates": 0,
+  "model_loads_started": 1,
+  "model_loads_completed": 1,
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "calls": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "path": "after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "e83420c437a1f78fdc76705fc1cac3803d633dab61a9fd0f2d8681951a38a32f",
+      "eos_reached": true,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "path": "after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "9b5ccd73794f1416412a0f0f1c77e6d677e390d9007f89cb568f9c7f684f06ca",
+      "eos_reached": true,
+      "timeout_triggered": false
+    }
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "gpu_lifecycle_operations": 0,
+  "elapsed_seconds": 291.5577067299746,
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "saved_adapter_unchanged": true,
+  "processing_seconds": 291.55770153400954,
+  "process_cost_usd": 0.022676710119311858
+}
