@@ -64,8 +64,10 @@
 | `cocolon.cmee.analysis_if_route_payload.v1alpha1` | private primary payload | V1-E future |
 | `cocolon.cmee.analysis_if_scenario_candidate_set.v1alpha1` | private primary payload | V1-E future |
 | `cocolon.cmee.analysis_saved_route_intent_payload.v1alpha1` | private primary payload | V1-E future |
-| `cocolon.cmee.analysis_if_safe_projection.v1alpha1` | audience-authorized product projection | V1-E future |
-| `cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1` | owner-authorized product projection | V1-E future |
+| `cocolon.cmee.analysis_if_safe_projection.v1alpha1` | audience-authorized product projection | 11/14実装・通常DB／API反映済み。実1／2候補の採用・隔離保存再読、3候補拒否／本人未確認は補助設計§9.63へ |
+| `cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1` | owner-authorized product projection | 11/14実装・通常DB／API反映済み。実1／2候補からの明示Saved2件を隔離保存再読。本人未確認は補助設計§9.63へ |
+
+11/14現在、上記IF／Savedのprivate payload3ID・HypotheticalScenarioGraph等の個別IDは設計候補のままで、現runtimeで同IDを発行しているとはしない。対応する仮説graph・候補set・選択意向・必要確認の責務は既存IF ownerで実装済み。private保存は`analysis.if-storage.v1`＋generation artifact bundle、model受口は`cocolon.analysis.if-candidates.model.v1`を使用する。実装の有無と個別schema IDの発行を区別する。
 
 `v1alpha1`は「契約なし」を意味しない。discriminator、privacy、identity、required fieldsはstrictに守り、互換性のない変更は新schema IDへ進める。
 
@@ -3427,3 +3429,7 @@ Safetyは原入力と補足のfieldを別scanし、2partitionの既存meaning／
 表示中の第一本人ANSWERを「この回答を含めてピースを作成」で選び、既存body-free savedInputの3項目へ選択時だけsupplementalAnswerIdentityを追加する。これはnavigation／host bindingであり新しい公開source_ref schemaではない。serverの七項目参照／record／payload／recipeの版は不変。本文・質問文・Emlis返事をrouteやhoststampへ入れない。未回答の既存入口とqueryなしGETは維持し、回答済みoriginal-onlyを成功fallbackにしない。
 
 DTOのCOMPLETED／REFINED／RESOLVED等は選択候補のhint。ADDとcurrent資格の最終検証はserver GET／preview／saveが行う。clientは選択したexact回答queryと同じrefined応答だけを受理。再試行・明示再確認・期限切れ再作成も同じID、旧保存結果不明は元preview／savekeyの確認を優先する。意味型・唯一作者・保存schema・RLS／quota変更0。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。実Q2保存材料2例のReact／合成HTTP比較で本文／payloadは保存物と一致、recipeは初回preview一致。変更後配色／native画像・新保存・本人実機は今回未検証。[全結果](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。
+
+### 2026-11-14 — IF受領済み材料の指示版
+
+IFの新準備材料は本人案の分離・anchor先頭／UNKNOWN末尾を示す指示を使う。旧予約／受領rawには旧canonical指示を保持し、既存request_refとmessages SHA双方に一致する旧／新の一方だけを再導出して再開する。未知の指示や旧新hash混在は拒否。storage／safe projection／policy IDの追加変更はなく、本文・graph・rawを新指示へ貼り替えない。

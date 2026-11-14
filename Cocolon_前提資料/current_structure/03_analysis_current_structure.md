@@ -1,4 +1,4 @@
-> **11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。 [実結果・通常反映・残件§9.62](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#shared-meaning-map-if-normal-rollout-20261114)。
+> **11/14最新：実4Bの1・2候補を無修補で採用し、隔離DB保存・別プロセス再読・明示Savedと既存RN受口まで接続。** API／worker `f1a7d323efb070da746482b9ab428043cdd5cea9` がLive。原根拠の完全引用・本人案の分離・旧予約／受領rawの非生成再開を保持する。実3候補はUNKNOWN分類と既知の順序の読みが未達で拒否・保存0。1／2候補の限定接続単位は完了、AR-07／補助全体・一般品質・配布／本人実機は未完。 [実結果・範囲・次§9.63](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。
 
 > **11/12・三中核の実4B比較7件と保存抜け修復：** Mashの具体的承認後、既存Podで7件を一回・98.351秒、全HTTP200/stop。学習・再試行・提供再起動0、PID73476／health200を前後維持。撤回後の既発行問いが本文へ再出力・保存される実抜けをAPI `4183126d00c2ed4238c526cf17f6b28cdbb18dc6`で修復し、同rawの2保存維持／1拒否・非生成再読と関連103件成功を確認。Piece旧新は原2欄の完全コピー・編集改善0、CMEE2拒否。Analysis旧新の図／本文とartifact再読は成立し、新v2の場面引用を保持するが、反復・誤字・関係説明等の品質は未達。Piece／Analysisのexact SQL保存は未実施、通常採用／live反映／端末・全補助経路は未完。 [実原本・前後比較・保存範囲](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-actual7-20261112>)。
 
@@ -350,13 +350,13 @@ observed routeをbaseとし、ユーザーが選んだbranch intent／constraint
 | self structure | Watashi Map、role_switches、routes、crossroads、unknown_areas | evidence-bound ObservedSelfStructureMap |
 | route semantics | presentation-oriented fixed four-step／generic fallbackを含む | claim／edgeごとのexact evidence refs、partial route |
 | protective／burden | formal typed visible ownerは未実装 | direct observationとinterpretive hypothesisを型分離 |
-| IF route | owner pathなし、runtime exact0 | HypotheticalScenarioGraph + IfRouteSimulation |
-| saved intent | owner pathなし | SavedRouteIntentをobserved／simulatedと別identityで保存 |
+| IF route | `if_route_realizer.py`／`analysis_if_route_service.py`／store／model sourceとHTTP／RN／SQLを実装し通常DB／API反映済み | 1／2候補の実採用・隔離保存再読は§9.63、3候補・本人利用は未完 |
+| saved intent | IF ownerが明示選択・任意noteから別identityへ保存し、API／RN／SQLで非生成再読・削除 | 実1／2候補からの明示Saved2件を隔離保存再読、本人利用は未完（§9.63） |
 | visual | current Watashi Map cards | observed／IF／unknownを見分けられるgraph + accessible text |
 
 上表のCurrent actualは稼働経路を示す。Draftのoffline observed実装は§4.5に分離する。
 
-Current frontend／backendにIF route authorityはない。future designをcurrent runtimeへ数えない。
+IF／Savedは11/14に既存設計に沿って実装・通常DB／APIへ反映した。設計・ソース・稼働・実候補採用・本人端末を区別し、最新結果は補助設計§9.62以降へ戻る。
 
 ## 3. Current product flows
 
@@ -894,7 +894,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。許可された集計で今回期間の不在を確認し、空snapshotを422にしていたAPIをu127で補正。修正版APIの配置とu122画面修正を含む6401のTestFlight送信はu128で成功。新版の端末導入・正常空表示の実機確認が残る。実生成は本人の通常入力後に別途確認する。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続まで実装し、SQL適用済み。development手順はMash報告、本人生成/期間比較の実機成功は未成立。
-4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
+4. IF／Savedは通常API／worker f1a7d32へ反映。実1／2候補と明示Saved各2件の隔離DB保存・別プロセス再読・既存RN受口は一致。3候補のUNKNOWN分類・既知の順序保持、一般品質と本人利用は未完（補助設計§9.63）。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
 
@@ -1635,7 +1635,11 @@ GitHub sourceの確認範囲はCocolon `90735e2ff448e8815796cb5112f318ef10198aa3
 | Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
 | マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
 | IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
-| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文と空配列の一部は固定LMFEの限界があり、独立したCPU意味検査を保持。候補を含む実応答2件は拒否で保存しない |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文・空配列はIF専用namespaceで生成時に保持。独立CPU意味検査を残し、実1／2候補の隔離保存再読と3候補拒否を確認（§9.63） |
 | RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
 
-自然応答の本人原根拠はOBSと同時保存される。全文coverage=false、解釈UNASSESSEDと未対応部分を保持する。IF／SavedはPremium・適格現在map・SELF_ONLYに束縛し、観測map／AI仮説／本人の明示意向を別artifactにする。隔離実SQL・合成providerの保存再読は成功、実4Bは必要確認1／anchor拒否2・候補保存0。詳細・配置・再開先は補助設計§9.62。
+自然応答の本人原根拠はOBSと同時保存される。全文coverage=false、解釈UNASSESSEDと未対応部分を保持する。IF／SavedはPremium・適格現在map・SELF_ONLYに束縛し、観測map／AI仮説／本人の明示意向を別artifactにする。隔離実SQL・合成providerの保存再読は成功、§9.62時点は実4Bの必要確認1／anchor拒否2・候補保存0だった。後続§9.63で実1／2候補と明示Saved各2件の隔離保存再読が成立し、3候補は拒否。最新の詳細・配置・再開先は§9.63。
+
+## 2026-11-14 — 実IF1／2候補・Savedを同じrawから保存再読
+
+既存IF ownerの採否・原文・raw hashを保ったまま、実1／2候補setと明示選択のSaved各2件を隔離DBへ保存し、別プロセスとproduction reader DTO、既存RN受口で本文／図／identity／原rawの一致を確認。元mapは不変、3候補はUNKNOWN分類不足で拒否・保存0。旧予約／受領は旧canonicalのまま再開し、旧新hash混在を拒否する。通常API／worker f1a7d32、詳細は補助設計§9.63。正式本人受入れ・一般品質・配布／実機は未完。

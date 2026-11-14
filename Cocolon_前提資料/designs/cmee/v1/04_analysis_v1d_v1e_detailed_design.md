@@ -1,4 +1,6 @@
-> **2026-11-12・Mashとの設計合意（未実装）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
+> **11/14現在：IF／Savedは通常DB／APIへ実装・配置済み。実1／2候補setと明示Saved各2件の隔離保存・別プロセス再読・既存RN受口を確認。3候補はUNKNOWN分類・既知の順序の読取りが未達で拒否。** 最新の実結果・配置・未完は[補助設計§9.63](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。以下の日付付き結果と初版metadataは当時の状態として扱う。
+
+> **2026-11-12・設計合意の履歴（11/14の実装・通常反映は補助設計§9.62）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
 
 > **11/7・分析の最新（第9回§243）：原入力の唯一memoにある単一の過去拒否を既存行動／非行動へ接続。断った／断らなかった、明記対象のは／を、主体UNSPECIFIED・過去・元カテゴリを保持し、対象名詞の日付を拒否日へ変換しない。保存済み19応答のJupyter同raw旧新比較で1件だけ未対応→1nodeへ回復、他18のgraph・件数・文章図と全19の入力／raw／候補保存内容は同一。前後各19の非生成候補再読、関連630 PASS＋133subtests、最終CI全工程success。モデル生成／load／学習／実DB0。通常未採用・本番未配置、一般の役割／判断基準／記録間読解と対象子5減少は残件。** [実結果・範囲・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-original-refusal-20261107)。STRUCTURE_MAP_DELTA_PRESENT（既存compiler内の限定拡張）。
 
@@ -15,7 +17,7 @@
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u118 content correctionは未配置
-- IF-route runtime state: `NOT_IMPLEMENTED`
+- IF-route runtime state: `IMPLEMENTED_NORMAL_DB_API_20261114`; runtime／API／SQLは通常反映済み。RNはsource統合・既存受口検証済みで、配布／本人利用は未確認。実1／2候補の隔離保存再読・Savedと3候補拒否、配布／本人利用の未確認は補助設計§9.63を参照
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
 - DB effect: dedicated table 1 / migration 20261003204421 applied

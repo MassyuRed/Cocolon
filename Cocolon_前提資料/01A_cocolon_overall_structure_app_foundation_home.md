@@ -1,4 +1,4 @@
-> **11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。 [実結果・通常反映・残件§9.62](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#shared-meaning-map-if-normal-rollout-20261114)。
+> **11/14最新：実4Bの1・2候補を無修補で採用し、隔離DB保存・別プロセス再読・明示Savedと既存RN受口まで接続。** API／worker `f1a7d323efb070da746482b9ab428043cdd5cea9` がLive。原根拠の完全引用・本人案の分離・旧予約／受領rawの非生成再開を保持する。実3候補はUNKNOWN分類と既知の順序の読みが未達で拒否・保存0。1／2候補の限定接続単位は完了、AR-07／補助全体・一般品質・配布／本人実機は未完。 [実結果・範囲・次§9.63](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -7074,7 +7074,7 @@ migrationは稼働履歴actual `20261114054136`として適用済み。API／wor
 <a id="shared-meaning-map-if-file-map-20261114"></a>
 ## 2026-11-14 — 共有有効意味・マップ訂正・IF／Savedのファイル地図
 
-通常DB／APIはda9460b、RN sourceは8382ef5。既存全体地図へ次の差分を統合する。過去の日付付き候補・未実装表は当時の履歴で、現在は本節と補助設計§9.62を優先する。
+本節は§9.62時点のAPI da9460b・RN source8382ef5の53path地図。後続のIF内部差分7pathは次節に統合し、現API／結果はf1a7d32・補助設計§9.63を優先する。過去の日付付き候補・未実装表は当時の履歴として保持する。
 
 | 責任 | 現ownerと接続 |
 |---|---|
@@ -7082,7 +7082,7 @@ migrationは稼働履歴actual `20261114054136`として適用済み。API／wor
 | Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
 | マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
 | IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
-| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文と空配列の一部は固定LMFEの限界があり、独立したCPU意味検査を保持。候補を含む実応答2件は拒否で保存しない |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文・空配列はIF専用namespaceで生成時に保持。独立CPU意味検査を残し、実1／2候補の隔離保存再読と3候補拒否を確認（§9.63） |
 | RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
 
 API cb6301ed→da9460bの変更全53path（再実装や全旧資産のimport件数ではない）：
@@ -7144,3 +7144,18 @@ API cb6301ed→da9460bの変更全53path（再実装や全旧資産のimport件�
 | `supabase/migrations/20261114133000_analysis_map_correction_handoff.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
 
 RN関連pathは `components/selfStructure/{CumulativeWatashiMapView,MapInterpretationCorrectionDialog,mapCorrectionContract,AnalysisIfRouteDialog,ifRouteContract}.js`、`lib/api/{analysisMapCorrectionApi,analysisIfRouteApi}.js`、`tests/{analysis-map-correction,analysis-if-route}.test.js`。build・配布は未実施。アカウント／購読／公開接点等の既存責任は01Cを維持する。
+
+## 2026-11-14 — IF原文引用・本人案分離・保存再読の差分
+
+
+| 既存path（mashos-api） | 今回の変更責務 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | IF専用namespace内で完全JSON文字列と空参照配列を生成時に保持。IFだけfield順を固定し、ordinary／Pieceのparserを保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 本人案を別候補・anchor先頭／UNKNOWN末尾へ渡す生成指示。旧／新canonicalのrequest_refとmessages hash双方を再導出し、未確認の指示を拒否 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | receiptに対応した旧／新preparedを導出してIF ownerへ渡す。rawを変更しない |
+| `ai/services/ai_inference/analysis_if_route_service.py` | 受領済みrawと凍結materialの同版照合。旧RESERVED／RECEIVEDを新指示へ貼り替えず再開 |
+| `ai/tests/test_analysis_if_service.py` | 旧予約／受領の再開、model0の再読、旧新hash混在・未知指示の拒否 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 完全escape文字列・空参照・IFのみfield順、ordinary schema／parser不変 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | IF新準備材料。派生map／route参照も再生成した新fixtureであり、旧preparedと同byteとはしない。他5caseは完全一致 |
+
+新file・公開API／DB／RN契約・作者・保存ownerの追加0。da9460b→edcd2c9→f1a7d32の変更はこの既存7pathに限る。既存IF／Saved・現在mapとの寿命分離を保持。実1／2候補の保存・再読／Saved、3候補拒否と通常配置は補助設計§9.63。内部生成・再開責務の限定修正でSTRUCTURE_MAP_DELTA_NONE。

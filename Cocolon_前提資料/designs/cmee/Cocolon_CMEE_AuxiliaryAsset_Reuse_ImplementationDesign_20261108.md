@@ -1,4 +1,4 @@
-> **11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。 [実結果・通常反映・残件§9.62](#shared-meaning-map-if-normal-rollout-20261114)。
+> **11/14最新：実4Bの1・2候補を無修補で採用し、隔離DB保存・別プロセス再読・明示Savedと既存RN受口まで接続。** API／worker `f1a7d323efb070da746482b9ab428043cdd5cea9` がLive。原根拠の完全引用・本人案の分離・旧予約／受領rawの非生成再開を保持する。実3候補はUNKNOWN分類と既知の順序の読みが未達で拒否・保存0。1／2候補の限定接続単位は完了、AR-07／補助全体・一般品質・配布／本人実機は未完。 [実結果・範囲・次§9.63](#if-exact-quotes-saved-reuse-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.62 closes shared active meaning, grounded natural Analysis material and current-map correction normal DB/API rollout at da9460b. IF/Saved runtime is deployed, but actual IF is QUESTION_PENDING1 / anchor REJECTED2 / stored0. Continue IF original-anchor/session-field distinction to accepted unchanged raw and save/reread; retain general prose/history/long-source residuals from9.54. Do not replay closed migrations/deploys or restart build/TestFlight/device gates. Weights/research selectors unchanged."
+current_next: "Section9.63 closes actual1/2-candidate unchanged-raw isolated SQL save/re-read, explicit Saved and normal APIf1a7d32 rollout. Actual3 was received/stop but rejected for missing UNKNOWN origins and misreading stated sequence; repair actual3 meaning/classification without rewriting raw or weakening admission. Retain9.54 whole-core prose/history/long-source residuals and deferred build/TestFlight/device. Do not repeat closed migrations or accepted1/2 generation."
 runtime_effect_of_this_document: 0
 ---
 
@@ -449,8 +449,8 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.61の通常反映を継承し、§9.62で共有有効意味・分析材料依存を通常反映。一般本文品質・model通常採用・本人一巡は未完 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | 本人原根拠材料をnatural OBSと同時保存し三中核へ接続（§9.62）。成立意味GENERATED／未対応NOT_GENERATED・UNASSESSED。長履歴分割・跨ぐ関係・全量意味品質は未完 |
-| AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | IF／SavedのAPI／RN／SQLと通常DB／APIを反映（§9.62）。実4Bは必要確認1／anchor不整合拒否2・実候補保存0。実候補の意味採用・同raw保存再読は未完 |
-| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61を継承し、§9.62の5migrationとAPI／worker da9460b・4B IF受口を通常反映。build／TestFlight／本人実機は保留、一般品質・補助全体完了は未認定 |
+| AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | IF／SavedのAPI／RN／SQLを通常反映。§9.63で実1／2候補setと明示Saved各2件の隔離保存・別プロセス再読・既存RN受口が成立。実3候補はUNKNOWN分類・既知の順序の保持が未達で拒否。一般品質・本人利用・AR-07全体は未完 |
+| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61を継承し、§9.62の5migrationを継承し、§9.63でAPI／worker f1a7d32・4B IF受口を通常反映。build／TestFlight／本人実機は保留、一般品質・補助全体完了は未認定 |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -1760,9 +1760,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/14・§9.62の通常反映後）
+### 11.2 現在の進行欄（11/14・§9.63の実保存／通常反映後）
 
-全体主枠は§9.54／第11回§5。共有有効意味・natural原根拠材料・マップ本人訂正の通常DB／API反映単位は完了。API／worker da9460b、RN source8382ef5。IF／Savedのruntime実装とDB／API反映は成立したが、実4B候補の意味採用・同raw保存再読は未完。build／TestFlight／本人実機はMash指示で後回し。
+全体主枠は§9.54／第11回§5。共有有効意味・natural原根拠材料・マップ本人訂正の通常DB／API反映単位は完了。API／worker f1a7d32、RN source8382ef5。実1／2候補と明示Saved各2件の隔離DB保存・別プロセス再読・既存RN受口まで成立。3候補のUNKNOWN分類・既知の順序の保持と一般品質は未完。build／TestFlight／本人実機はMash指示で後回し。
 
 | 単位 | 成立した接続と通常適用 | 残る必要工事 |
 |---|---|---|
@@ -1772,16 +1772,16 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-04 | 本人原入力・最新適格回答／訂正の意味を既存Piece作者・保存検査へ接続し、分析材料の版・資格も再照合 | 一般文章化・反復・単独伝達、model selector通常採用と本人一巡 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
 | AR-06 | natural原入力・適格回答／訂正の原根拠材料をOBSと同時保存。成立意味GENERATED、未対応／未解決NOT_GENERATED・UNASSESSED | full_source_semantic_coverage=false。長履歴の分割・跨ぐ関係、一般的な全量意味理解は未完。月次当時版を保持 |
-| AR-07 | Premiumの現在map＋本人意向／制約、必要確認、1〜3候補、明示Saved、再読削除・受領復帰をAPI／RN／SQLへ実装し通常反映 | 実4B3応答は必要確認1／anchor不整合拒否2・候補保存0。実候補採用→同raw保存再読・本人利用は未完 |
-| AR-08 | §9.55／61を継承。対象5migration、通常API／worker da9460bと4B IF受口を反映。通常対照全文一致 | build／TestFlight／本人実機は明示保留。成立能力の通常化を進め、補助全体完成と混同しない |
+| AR-07 | Premiumの現在map＋本人意向／制約、必要確認、1〜3候補、明示Saved、再読削除・受領復帰をAPI／RN／SQLへ実装し通常反映 | §9.63で実1／2候補setと明示Saved各2件を隔離保存再読。3候補はUNKNOWN分類等が未達で拒否。3候補・一般品質・本人利用は未完 |
+| AR-08 | §9.55／61を継承。対象5migration、通常API／worker f1a7d32と4B IF受口を反映。通常対照全文一致 | build／TestFlight／本人実機は明示保留。成立能力の通常化を進め、補助全体完成と混同しない |
 
-実原本・検証・配置・不成立は§9.62。研究モデル通常採用・正式受入れ・補助全体完了は認定しない。
+実原本・検証・配置・不成立の最新は§9.63（§9.62を継承）。研究モデル通常採用・正式受入れ・補助全体完了は認定しない。
 
 ## 12. 今後の指示と再開方法
 
-**11/14・現在の再開先：§9.54の四作業を維持し、§9.62で実測したIFの原map anchorと本人セッション意向／制約の混同を解消し、実候補の意味採用・同raw保存再読へ進める。** 共有有効意味・マップ訂正の通常DB／API反映単位は閉じた。一般意味／文章品質、履歴・長い蓄積・跨ぐ関係の必要工事も残る。明示入力の修正前／修正後2応答（各2scenario）はいずれもanchor不整合で保存0。出力後の本文・origin差替えや検査緩和で成功へしない。固定LMFEのJSON escape／空配列の限界を保持したまま、実出力に効く方法を既存ownerへ接続する。
+**11/14・現在の再開先：§9.54の四作業を維持し、§9.63で拒否した3候補の実生成を修復する。** 元の代替案に書かれた読む順序を未提示とする誤読と、unknown文章をSIMULATED_EXTENSIONへ置く分類を直し、正しい本文・図から同raw保存再読・明示Savedへ進める。UNKNOWN型だけの差替えや検査緩和で成功へしない。
 
-API／workerのLiveとDB照合は完了済みで、無変更再適用は不要。RN source8382ef5と内部8001を区別し、build／TestFlight／本人実機はMash指示どおり後回し。配布待ちを他作業の開始条件へ戻さない。実行済みの原prepared・raw・receiptと不採用理由を再利用し、既完の旧GPU／SQL／nativeを無根拠に繰り返さない。
+完全引用・本人案の分離と、実1／2候補set／明示Saved各2件の隔離DB保存・別プロセス再読・既存RN受口・通常API／worker f1a7d32反映は成立した単位として閉じる。受領済みの成功rawを再生成せず保持する。一般意味／文章品質、過去／今回・本人判断の使い分け、長履歴分割・跨ぐ関係も引き続き必要。build／TestFlight／本人実機はMash指示で後回しとし、他の補助作業を止める条件にしない。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -3626,3 +3626,69 @@ RN8382ef5の主要source1453件＋UI操作331件は成功。全workflowはiOS so
 **共有有効意味・原根拠材料・現在map本人訂正のソース接続と通常DB／API反映単位は完了。IF／Savedのruntime実装・通常配置も完了したが、実候補の意味採用・同raw保存再読を含む単位は未完。** 次は元mapのAI観測anchorと本人セッション材料の混同を実生成で解消し、候補本文・図を原材料と照合した上で保存・再読・明示Savedへ通す。原出力の差替えや意味検査の緩和を成功手段にしない。
 
 §9.54の四作業と全体完了目標を維持する。一般意味／文章化、過去／今回・本人判断の使い分け、長履歴分割・跨ぐ関係、通常採用版・研究重み／selector、統合RNの本人利用は残件。11/21判定・12/6候補、61.625％の管理評価は変更しない。配布／実機保留を他作業の停止条件へ戻さない。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="if-exact-quotes-saved-reuse-20261114"></a>
+## 9.63 2026-11-14 — 完全引用と本人案の分離を実1／2候補の同raw保存・再読・Savedへ接続
+
+### 今回閉じた範囲と残差
+
+**現4BのIF完全引用と本人案の分離を修復し、実1／2候補setと各setからの明示Savedの隔離DB保存・別プロセス再読・既存RN受口、修正版の通常API／worker反映までを完了した。** これは実際の4B生成原本を使った限定接続単位であり、合成モデル応答の成功だけではない。3候補は不明情報のorigin分類と既知の順序の読取りが未達で拒否・保存0。実認証の本人端末・稼働本人データの保存一巡、一般品質、AR-07／補助全体は未完。
+
+全体主枠§9.54／第11回議事録§5、三中核の現owner、アプリ全体地図と全ファイル地図を継承した。今回の差分は既存IFの生成制約・指示・受領照合の内部で、schema／policy／公開API／DB／RN契約や重みを変更しない。既存のEmlis／Piece／Analysis作者と保存境界を維持。新しい承認条件・発売条件・実行管理systemは追加しない。
+
+### 修復した原因と実装
+
+1. 固定LMFE0.11.3の改行等を含むenumと`maxItems=0`の制約を、**IF専用のprivate module namespace**で修復。JSONにescapeされた完全引用を元の一つのenumとして消費し、空配列を空のまま生成する。通常Emlis／Analysis／Pieceが使うupstream global moduleは変更しない。従来のescaped全文だけfree textへ広げる例外は削除した。
+2. IFだけfield順を固定し、観測anchorを先頭、不明をUNKNOWNとして末尾にする。本人が出した各代替案を別scenarioへ分ける指示を追加。CPUの独立採否・原文一致・origin検査は緩めない。
+3. 新指示の導入で旧RESERVED／RECEIVEDが詰まらないよう、旧／新の**既知のcanonical指示だけ**からrequest_refとmessages SHAの両方を再導出する。Engineと保存前照合を同じ導出へ接続。旧preparedは旧指示のまま、受領済みrawは生成0で再開し、旧新hashの混在・未知指示・raw改変は拒否する。保存済み本文を新指示へ貼り替えない。
+
+API `edcd2c9c3dcade362b300f40bbcc8d77b8e8b028` → 最終 `f1a7d323efb070da746482b9ab428043cdd5cea9`。da9460bからの差分は7既存pathで、全remote bytesとchanged pathsを照合。owner対応は01Aの同日追記、IF／Savedの責任はcurrent03／04へ反映した。保存形式や公開契約の構造変更なし：STRUCTURE_MAP_DELTA_NONE。
+
+### 現4Bの生成原本と採否
+
+モデルは既存natural base-851bf6e／Analysis semantic-120u。Pod `f1lle4xwq3wjln`、同じ重み・adapter・起動引数・cwd・環境・専用鍵を維持。2鍵は同Pod内の既存認証と復元だけに使い、値・環境全体を保存・転載しない。新Pod・追加学習・重み変更・研究selector変更0。
+
+架空の元記録2件、午後合計30分・追加費用なしという本人制約、読む／要点を書く順序の異なる本人案1／2／3件を用意。**DB native guardは実生成前に作成**し、準備済みrequestと送信messages全byteを照合した。後から生成に都合のよいguardや原文へ差し替えていない。
+
+| 実行 | 受領と採否 | 保存の扱い |
+|---|---|---|
+| 初回・旧明示材料を同じpreparedで再確認 | 完全引用修復後はGENERATED。ただし本人案2件の分離を十分示さず、この原本を最終保存成果へ換算しない | 最終SQL成果に不使用 |
+| 初回・新本人案1／2件 | 原raw受領、anchor欠落で拒否。全体495.075秒の境界で最後の3件要求を取りこぼし、元提供へ復元 | 拒否保存0。最後の要求はACK不明のまま |
+| 最終・本人案1件 | stop、42.975秒、1513 response bytes。production transport→EngineでGENERATED | 1scenario set＋明示Saved1件を保存・再読 |
+| 最終・本人案2件 | stop、96.565秒、3160 response bytes。別scenario2件としてGENERATED | 1scenario set＋明示Saved1件を保存・再読 |
+| 最終・本人案3件 | stop、210.248秒、6470 response bytes。不明文を全てSIMULATED_EXTENSIONへ置きUNKNOWN nodeが欠落。また原案で示した読む順序を未提示とする文がある。`analysis_if_model_packet_invalid`で拒否 | 0。raw修補・型差替え・本文差替えなし |
+
+初回は8POST提出／7原本回収、最終は5POST／5回収（IF3＋通常対照2）。今回計13提出／12原本回収／1ACK不明。全件完了とは数えない。最終batchは402.917秒、追加学習・自動再試行0。初回にチャット上で受領数・時間を目視誤読したため、JSON原記録に照合して訂正済み。
+
+最終の通常Emlis／通常Analysisのresponse全文は、初回変更前の2対照と各byte一致。最終PID108787、提供source SHA256 `a1547b496993cafb8f381aa397ac9ea82166c4d1dafc0c7e785ef57e284c98a5`。最終sourceを提供中であり、初回timeout時の旧版復元と区別する。新しいIFの成功を通常日本語品質の全般合格へ換算しない。
+
+### 保存・再読・アプリ受口
+
+実生成後は追加モデル呼出し0。captured responseをproduction transportとEngineへそのまま渡し、receiptのrequest_ref／messages SHA／raw SHAを照合した。隔離PGliteの既存追跡SQLへ、productionのreserve→start→receive→commit→read／replayを通した。
+
+- 実1／2候補の**2scenario sets**を元raw・本文・図・identityの同版のまま保存した。
+- 各setから架空本人の明示選択を別のSavedRouteIntentとして**2件**保存。選択を実行・達成・人格へ昇格させず、元mapは不変。
+- PGliteを終了して別processから開き直し、4artifactの同版一致を確認。productionのfrom_storage／safe reader DTOを通し、既存RN `checkedIfApplicationResult`も4件を同じobjectのまま受理した。
+- 3候補の拒否を保存成功へ換算せず、稼働Supabaseへの架空ユーザー挿入・削除0。これは隔離DBの実SQL保存であり、本人端末や本番本人データの生成保存を実行した証拠ではない。
+
+### 検証と通常適用
+
+関連115件PASS（packet／IF owner／service／API／ordinary semantic schema）。旧予約は同じlegacy wireを1回だけ呼び、旧受領済みはmodel0で同rawへ復帰すること、混在hash拒否、改行・空配列・通常parser不変を確認。別のPiece受口回帰56件PASS。製品依存の追加変更はない。最新GitHub CIと原本archiveの確定情報は下記の反映記録を正本とする。
+
+| 対象 | 最終版／deploy | 結果 |
+|---|---|---|
+| 通常API | f1a7d32／`dep-dbs55dafngtc73boees0` | 2026-11-14 12:24:38.579975 UTC／21:24:38 JST Live |
+| 裏更新worker | f1a7d32／`dep-dbs55dl6e07s738rsm2g` | 2026-11-14 12:24:03.712265 UTC／21:24:03 JST Live |
+
+linked branch／autoDeploy／環境設定は変更せず、既存manualの指定commit配置を継承。通常health／bootstrap200、IF一覧／Saved一覧の未認証readは401かつprivate,no-store。live生成・保存要求は送らない。DBは§9.62の適用済み5migrationを継承し、本単位で追加DDL0。RN source8382ef5、build／TestFlight／本人実機保留は維持。
+
+最新f1a7d32のGitHub CIは **Analysis run43593816041／job132443978246、Piece run43593816030／job132443978255の両方で全step成功**。旧版の時間枠取消履歴とは区別し、既存workflowの制限延長や無変更再実行はしていない。
+
+実原本・旧新prepared・DB guard／base・production採否・実SQL保存／別process再読・アプリDTO・再現script・最終CI／配置情報は、非公開 `Cocolon_CMEE_IF_ExactQuotes_SaveReuse_20261114.zip` **175,406bytes／SHA256 `01d990110fac9c1f6ff803e9065935099c74afa2fe5991b8530a541b1582eaef`** の同一成果物version1へ永続保存し、ZIP CRC検査済み。初回と最終のrawを両方残し、失敗原本・ACK不明を消していない。鍵・環境全体・DB cache・実ユーザー本文・モデル重みは含まない。GitHubへは原本本文を転載せず、この参照と限定判定を残す。
+
+### 次に残す同じ仕事
+
+1／2候補の完全引用・本人案分離・同raw隔離保存再読・Savedと通常API反映の限定単位は閉じる。次は、受領済み3候補に露出した**既知の順序を未提示にする誤読**と**不明内容のorigin分類**を実生成側で直す。UNKNOWN型を後付けしただけで本文誤読を成功扱いしない。閉じた1／2候補の再生成や同じmigration適用を繰り返さない。
+
+§9.54の一般意味／文章品質、過去／今回・本人判断の使い分け、長履歴分割と跨ぐ関係も残る。11/21判定・12/6候補、61.625％の管理評価は据置き。研究重み通常採用、正式受入れ、AR-07／補助全体の完了は認定しない。
