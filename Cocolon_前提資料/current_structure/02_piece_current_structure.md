@@ -4426,4 +4426,6 @@ codeのprefixは`ai/services/ai_inference/`、CMEE側はその下の`cocolon_mea
 
 通常作者と保存再読の隔離検証を、新実4B・同版native画像・本人一巡と分ける。GPU生成／学習／再試行0、研究selector／重み未採用。今回の採用commit・最終回帰・migration／通常反映・残差は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
+**追加CI観測（source b2ac790）：** [既存RN CI43634012760](https://github.com/MassyuRed/Cocolon/actions/runs/43634012760)のRN契約は1,790件成功。一方、iOS V4 native検査は20件中1成功／19失敗でworkflow全体はfailureとなった。今回の通常DB／API能力の検証と区別し、このheadの画像合格は未認定・原因未解決とする。過去commitの限定画像成功記録は維持する。native source変更0・再実行0、build／TestFlight／本人実機保留。失敗直接根拠・artifact・変更path比較は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
+
 STRUCTURE_MAP_DELTA_PRESENT：共有Emlis有効意味から既存Pieceのsource／plan／SQL保存境界への受渡し拡張。新作者・新source保存基盤・公開wire・RN rendererを追加しない。build／TestFlight／本人実機保留を継承。

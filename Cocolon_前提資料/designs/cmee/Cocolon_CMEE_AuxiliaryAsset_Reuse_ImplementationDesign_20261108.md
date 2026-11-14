@@ -22,7 +22,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.68: genuine full-prefix Emlis updates feed only active original clauses, surviving prior replacements and the selected latest answer to Piece. Preserve separate source envelopes and all-prefix SQL checks; IF confirmed Saved marker belongs to the same set/scenario. Final source/test/normal rollout evidence is in9.68. Continue remaining general quality and auxiliary work under weekly5; build/device deferred; no new GPU/training/retry in this unit."
+current_next: "Section9.68: genuine full-prefix Emlis updates feed only active original clauses, surviving prior replacements and the selected latest answer to Piece. Preserve separate source envelopes and all-prefix SQL checks; IF confirmed Saved marker belongs to the same set/scenario. Normal DB/API closure and final CI evidence are in9.68. Continue remaining general meaning/editorial quality, unsupported updates and auxiliary work under weekly5; build/device deferred; no new GPU/training/retry in this unit."
 runtime_effect_of_this_document: 0
 ---
 
@@ -3954,8 +3954,8 @@ UNKNOWNは将来の未観測結果であり、前回の「本人が成果を書�
 既存 `.github/workflows/piece-b2b-isolated-postgres.yml` に、`test_b05_effective_round_source_contract.py` と `test_b05_effective_round_sql_fence.py` を既存検証集合として登録する。前工程で同じ既存suiteが10分job枠の途中で取消となったため、job全体の枠だけ10→20分へ変更し、途中までの実行を全成功へ数えず最後まで確認する。これはCI実行枠であり、製品生成・モデル／GPU・一回承認・retry・通常の待機時間上限を変更するものではない。検査内容・採否を緩めず、新しいchecker／workflow familyは追加しない。新commitのCI終状態は最終検証欄に記録する。
 
 - 今回のAPI採用commit：`fc333bff8a76775d6fe14ed299ea769d22d35c9d`
-- 最終検証と範囲：関連Python集合2,952 PASS（205＋2,653＋通常保存76＋新source／SQL18、重複再実行を除く）、RN24 PASS、前工程の実raw由来DTOを使うRN表示1 PASS。追加の3source材料は既存serving schemaへCPUで受理。新GPU／学習0。初回Piece CI43631803822は全25pytest invocationの合算5,387 PASS／1 FAILで、既存保存負例の初回Emlis startがRESPONSE_FAILEDとなり、当該負例の変更操作前に停止。原因情報が出ておらず断定しない。同じstep34第一集合33fileの隔離一回は2,465 PASS。診断だけをtest commit a0a5b420f14004e8143611cbd5674e5b8f6943f0へ追加し、同時刻source／as_ofの不適格境界も確認した。fixture作成時刻の前提修復と最終CI確認は進行中で、この確認単位はまだ閉じない。最終結果は本欄を差分更新する。
-- 必要migration／通常API・worker反映と確認：migration piece_natural_effective_round_sourcesを稼働履歴20261114192124へ一回適用（CLI原本20261114190006）。3既存RPCだけ全prefix expectationへ接続し、4関数の署名／ACL／SECURITY DEFINER／search_pathを前後一致確認、旧5引数preview本文は不変。API dep-dbsbbac9v7es73c7urtgは2026-11-14 19:26:47 UTC、worker dep-dbsbc10ae00c73d3supgは19:27:48 UTCに同じfc333でLive。health／bootstrap200、IF／Saved未認証401＋private,no-store、Piece本人履歴未認証401＋既存no-store。新worker起動とqueue GET200、failed171据置き、限定時間内の新error0を確認。実job成功・実ユーザー保存一巡の確認ではない。
+- 最終検証と範囲：最終test head e5784520f640d119b8d0e285e8d2f03cd46032c8で、Piece CI43637154662は全41工程・5,513 PASS、Analysis CI43637154763は全19工程・4,865 PASS＋12,995 subtests PASS。両runともattempt1、FAIL／SKIP／ERROR0、head・終状態・job logを照合済み。各pytest invocationの重複を含む数をunique件数や商品完成率へ加算しない。CI同版PGlite0.5.8の最終localは14file307＋33file2,466＋B8選択78＋直接9の計2,860 PASS。先行0.3.14の結果は補助として分離。Cocolon b2ac790のRN操作契約jobは1,790 PASSだが、同workflowのiOS V4 nativeは1 PASS／19 FAILで全体failure、画像合格未認定・原因未解決。native source変更／再実行0、配布／本人実機保留を維持。
+- 必要migration／通常API・worker反映と確認：migration piece_natural_effective_round_sourcesを稼働履歴20261114192124へ一回適用（CLI原本20261114190006）。3既存RPCだけ全prefix expectationへ接続し、4関数の署名／ACL／SECURITY DEFINER／search_pathを前後一致確認、旧5引数preview本文は不変。API dep-dbsbbac9v7es73c7urtgは2026-11-14 19:26:47 UTC、worker dep-dbsbc10ae00c73d3supgは19:27:48 UTCに同じfc333でLive。health／bootstrap200、IF／Saved未認証401＋private,no-store、Piece本人履歴未認証401＋既存no-store。新worker起動とqueue GET200、failed171据置き、限定時間内の新error0を確認。実job成功・実ユーザー保存一巡の確認ではない。締めのread-only確認でも指定2deployのfc333／Live維持と、5GET各1回の200／200／401／401／401・既存cache契約一致を確認した。
 
 model source OFFの既存作者による通常経路と、model用の分離source投影を区別する。後者の材料確認／合成provider保存成功を、実4B本文品質改善へ数えない。今回のGPU生成・学習・再試行0。新しい提供key、別provider、新renderer、新しい意味管理serviceを追加しない。
 
@@ -3964,6 +3964,14 @@ model source OFFの既存作者による通常経路と、model用の分離sourc
 既存RN `components/selfStructure/AnalysisIfRouteDialog.js` は、Saved API応答の`source_scenario_set_ref`／`selected_scenario_ref`が送信した選択と一致した場合だけ、同じ候補カードへ「保存した関心の方向」を表示する。別set／scenarioの成功応答や、結果不明の保存から印を作らない。複数候補の明示保存は共存し、同setの再GET後も確認済み印を保持、削除成功／404で該当印を除く。本人・表示contextの失効時は旧応答を再利用しない。印は同じ表示状態で保存成功を確認したものに限り、別の起動・端末で以前に保存した履歴へ推測で付けない。
 
 Savedは実行・達成・人格へ昇格しない。元観測map／IF候補／保存意向の別identity、任意メモ、非生成再読／削除は既存contractを継承する。RN検証は上記最終結果へ含めるが、build／TestFlight／本人端末確認には換算しない。標準自動3案の実4B1set・同raw保存再読・7f51通常反映は§9.67の成立資産として保持する。
+
+### 最終採用と検査準備の整合
+
+通常DB／API反映までのこの限定単位を完了。製品採用はfc333、RN sourceはb2ac790。診断／検査データの追加a0a5→ef2→e578は既存13testfileだけで、製品5module／新SQLのbytesはfc333から不変である。新しい製品配置・GPU生成を、この検査差分のために繰り返していない。
+
+初回CIの失敗は隠さず記録した。ef2Analysisの4件はAnalysisSourceError／as_of_not_after_sourceの拒否クラスを確認し、他の過去失敗を同原因へ統合していない。共通の保存済み架空入力を分析より前へ置く前提を13file・24source site（INSERT10＋callerSELECT14）で整合し、old親1分前＜後続5秒前、明示future／equality／retention／固定source／actual submit、判定・実時計・deadline・retry／skipを保持。既存Piece2helperの1時間前も維持。共通診断は本文を含めず、正常時の追加DBread0、元DTO・例外・keyword signatureを保つ。独立reviewと143test-module依存追跡で対象クラスの残存・修正必須なしを確認した。途中headの失敗と成功は最終headに合算しない。
+
+検証原本・失敗履歴・source hash・通常反映・最終CIは、[Cocolon_CMEE_Piece_EffectiveRounds_NormalDB_API_20261115.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-b10509fdc35c8191a7584e458fd46c7a_2f7470f963808191aaebf050935e72de&account_id=personal)へ保管。実ユーザー本文・鍵・起動環境・重み・ブラウザ画像は含めない。
 
 ### 残る範囲
 
