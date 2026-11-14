@@ -3283,3 +3283,50 @@ STRUCTURE_MAP_DELTA_PRESENT（deployment state only）：owner path・公開API�
 ### ビルド保留後の接続確認（改修なし）
 
 累積SQLがnaturalのprofile／policyを省略することから、華恋は第2・第3回答が正しく扱われないと初期推測したが、実SQLを通した2／3回答×Free／Plus／Premiumの6条件では、現SQLと完全threadの採用回答数・source prefix・保存材料・source集合・envelope・根拠が全件一致した。過去回答の資格は現在の問い送達上限と別に保持されるため、回答脱落という見立ては撤回した。独立確認もFreeの3回答受理を確認した。この投影差を修復対象にせず、新migration・製品code変更・追加配置は0。本人の具体的訂正／撤回の有効意味をPiece／Analysisへ通す未接続とは分ける。
+
+
+<a id="analysis-person-correction-source-handoff-20261114"></a>
+## 9.56 2026-11-14 — 本人訂正sourceの分析への欠落を修復し、通常保存・再読へ接続
+
+§9.54作業1・4のうち、本人訂正が分析へ届く前に消える接続を一作業単位として扱った。§9.55のDB／API完了済み単位を再実施せず、build・TestFlight・実機保留を継承した。
+
+### 修正前と、今回閉じる範囲
+
+Emlisが訂正1件を受理しても、`_analysis_saved_member`はanswersだけを投影し、訂正前後のAnalysisSavedRecordが完全一致した。さらに実累積SQLはQUESTION／ANSWERしか返さず、訂正イベント自体がsource guardからも落ちていた。単にthread revisionやprofileを直す問題ではない。
+
+API [f73b034f](https://github.com/MassyuRed/mashos-api/commit/f73b034f2b39e3b4900a4c61460fd7b4ff47a2df)は次を同じ変更単位で修復した。
+
+- 累積source snapshotと根拠RPCが、本人訂正OPERATIONと同threadの正確な対象OBSを返す。対象外のAI応答は追加取得しない。訂正なしのsnapshot／guardは旧版と同一。
+- AnalysisSavedRecordに既存InterpretationCorrectionSourceの独立tupleを保持。原入力版へ再導出照合し、event／owner／対象OBS／引用の一意性・前後順を検査。本人説明だけをUSER_INTERPRETATION_CORRECTION envelopeへ入れ、AI本文を証拠にしない。対象controlもsource identityへ結ぶ。
+- 本人説明が原入力の本人節を完全引用して明示訂正／撤回した場合だけ、既存_active_sourcesの位置・本人・全節の証明を再利用する。無関係な元の記録・時点・感情は保持する。AIへの不一致だけから原入力を反転・失効させない。
+- 一般的な説明や対象不明は未解決として当該記録をpending除外し、未訂正版を現在mapへ再利用しない。別の記録は処理を続け、既存coverageへ理由を返す。現在のmodel source経路は適用済み更新も既存のpending境界を維持し、未検証の4B理解へ昇格しない。
+- 根拠の既存「本人補足」表示には、そのnodeの証拠に対応する本人説明だけを返す。AI引用は返さない。現mapのguardは変わり、既存月次artifactは当時版の本文・根拠を保つ。
+
+### 現ファイル地図
+
+| owner | 今回の責任 |
+|---|---|
+| `astor_material_snapshots.py` | 保存threadの訂正・対象の照合と独立source移管 |
+| `cores/analysis/source_adapter.py` | 元入力版・source役割・説明だけの証拠envelope |
+| `cores/analysis/intent_compiler.py` | 本人の明示全節更新だけ既存証明へ接続 |
+| `cores/analysis/semantic_admission.py` | 意味未解決の記録を黙って未訂正版へ戻さない |
+| `analysis_cumulative_service.py` | 累積処理のpending理由、nodeに一致する本人説明の根拠表示 |
+| `supabase/migrations/20261114032520_analysis_interpretation_correction_sources.sql` | 既存累積snapshot／根拠の2関数を差替え、ACL／invoker／月次保存は保持 |
+| `ai/tests/test_analysis_interpretation_correction_sources.py` | 新14条件、実隔離SQLの保存・再読・月次・根拠・source失効 |
+| `.github/workflows/analysis-observed-content.yml` | 既存Analysis CIのSQL対象へ新検証を追加 |
+
+上5codeのprefixは`ai/services/ai_inference/`、coresは`cocolon_meaning_experience_engine/cores/analysis/`。新しいproduction owner／型／checker／controller／table／公開route／DTO／RN sourceは追加しない。既存dataclassへ訂正tupleを追加した内部source契約の拡張である。STRUCTURE_MAP_DELTA_PRESENT（既存のEmlis→Analysis source接点）。
+
+### 検証・通常反映
+
+対象284件＋15subtests成功、既存Pydantic deprecation warning1。新14件はこの284内で、月次再読追加後の14再実行も成功したが重複加算しない。最初の新SQL試験はtestがnodeの公開keyをidと誤記し保存後に停止した。実際のnode_refへ修正し、保存・根拠と月次再読まで確認した。元の製品条件を緩めていない。
+
+合成provider・authと隔離PGlite（PostgreSQL）で、Emlis訂正保存→累積source→既存compiler→artifact保存→同版非生成再読／根拠説明→原入力編集後も当時月次本文・private根拠不変を確認した。別owner、対象不在／重複／同引用複数／順序逆転、訂正ID不一致、別原入力／編集前sourceの移植は拒否。一般説明はpending、正常な別記録は残る。訂正なしのSQL結果／guard同一も確認した。新しい実4B・モデル品質・本人端末の成功ではない。
+
+稼働DBへ追跡migration1件を適用、履歴26→27件。snapshot関数2486文字／SHA256 15415ecb30af9af1df34a6959ef3d14b766c73c59e7b4f22605629e27f22f0ce、evidence関数2089文字／SHA256 7fea023552ede3070db2313a312a9cd30cb00f3ae67b7514a743700926f77a35は追跡SQLと一致。両方invoker、postgres／service_roleだけの既存ACLを保持し、本人データを書換えない。API指定版f73b034fの配置dep-dbrtcnm7bikc73f1oml0は12:34:07.027716 JSTにLive、worker同版の配置dep-dbrtdnrrjlhs73chgrj0は12:35:50.562185 JSTにLive。workerは旧497f7008から同版へ揃え、通常の分析裏更新にも修正を反映した。healthz／app/bootstrapはHTTP200、worker startedと通常poll200を確認。12:34:07〜12:37:33 JSTの取得範囲で両serviceのerror log0。環境変数・plan・instance・model設定は変更0。GitHub上の全8変更blob全文はlocalと一致した。Analysis既存CI [run43552052678](https://github.com/MassyuRed/mashos-api/actions/runs/43552052678)はattempt1・全step success。新14件を既存SQL scopeへ追加した。後続eab9b2efは当該testとmigrationのCI起動path2行だけを追加（[skip ci]）、production5file／test／SQL bytesは配置f73b034fと同一で、新しいCI成功へ数えない。
+
+### 未完と次の主線
+
+本人の一般的な説明を対象と意味へ結び付けること、複数の更新の有効版と無関係部分を保つこと、Pieceの訂正／撤回source利用、naturalの根拠付きAnalysis材料生成（NOT_GENERATED解消）は引き続き未完。本修復は比較reportやraw source容器をGENERATEDへ変えず、naturalのanalysis_stateはNOT_GENERATEDを維持する。AR-02／06全体や補助全体の完了ではない。
+
+次は§9.54作業1・2の本人更新→有効意味→下流作者の接続を継続する。今回のpending除外を一般訂正理解の完成へ置換せず、完了した欠落修復と通常化を再周回しない。Piece研究selector／重み未採用、追加GPU・学習・RN変更・build／配布0、本人実機保留を維持する。

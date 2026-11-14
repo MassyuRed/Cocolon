@@ -764,3 +764,8 @@ Mashは、補助経路活用をせめて終えたい、他に高優先の作業�
 PR30 e9d56cc7の統合RNをbuild・TestFlightへuploadする既存workflowの起動は、外部配布の明示承認不足を理由に自動承認審査でdispatch送信前拒否となった。新run／build／配布0、最新8001。その後Mashは配布用アプリbuild・TestFlight送信・実機確認を後回しにするよう明示した。DB／API反映単位は完了として閉じ、統合RN配布・同版本人一巡は別の未確認項目として保持する。配布承認・実機確認を待たず、補助設計§9.54の本人更新から返答・作品・分析への接続を続ける。新しい承認chainやGPU再比較へ置き換えない。
 
 新製品source・モデル生成・学習・研究selector有効化0。DB／API反映を、RN配布・本人一巡・本文品質向上・補助全体完了へ加算しない。会議終了、補助全体への集中、公開日未定・12/6候補・全体61.625％を維持する。
+
+
+## 11. 報告会後 — 本人訂正が分析材料から欠落する接続の修復
+
+**11/14・本人訂正が分析材料から消える接続を修復。** API `f73b034f`。累積SQLのQUESTION／ANSWER限定とPythonの回答だけの投影を修正し、本人説明を専用source、AI引用を対象controlとして分離。原入力中の一節を完全引用した、本人の明示的な訂正／撤回だけ既存の意味更新へ通し、通常4B経路では適用済み更新もpendingを維持する。一般説明はpendingとして当該記録の未訂正版利用を防ぐ。他の記録は継続。保存・根拠再読・月次当時版・編集後の不変性を含む対象284件成功（新14、重複再実行は加算しない）。新migration1件は稼働適用済み、2関数の本文hash／ACL一致、履歴27件。API／裏更新とも同版Live、healthz／bootstrap200・起動log確認。新4B／学習・RN変更・build／TestFlight0。一般訂正の意味理解・Piece反映・naturalの根拠付きanalysis材料生成・AR-06全体は未完。 詳細・現8ファイル地図・検証・完了範囲は[補助設計§9.56](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-person-correction-source-handoff-20261114)。DB／APIの前回完了を再計上せず、今回のsource欠落修復を限定TECHNICAL_CREDITとして記録する。一般訂正理解・Piece反映・AR-06全体と補助全体は未完。日程・61.625％の管理評価は再採点していない。
