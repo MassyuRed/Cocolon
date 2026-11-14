@@ -1,4 +1,4 @@
-> **11/15画像側の継続：既存V4 19失敗の研究修復を通常sourceへ採用し、現行native検査を確認中。** clip参照のextent／CTM／原点を分離する研究3646の同一sourceと、小数24対照を通常検査へ回収。全画像の合格・本人利用を先取りしない。二入力訂正→PieceのDB／API反映済み状態は保持、API／DB変更0・配布保留。 [範囲と結果§9.70](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-v4-normal-adoption-20261115)。
+> **11/15画像側：既存V4 19失敗を解消し、通常RN sourceへ反映。統合描画検査は実行中。** 研究3646のclip参照extent／CTM／原点修復を通常7568f6f0へ回収。現行V4 20/20・小数24/24・既存native／bitmap各群・RN1841件が成功。全画像／本人利用の合格へ広げず、API／DB・配布保留は維持。 [原本と最終範囲§9.70](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-v4-normal-adoption-20261115)。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)。
 

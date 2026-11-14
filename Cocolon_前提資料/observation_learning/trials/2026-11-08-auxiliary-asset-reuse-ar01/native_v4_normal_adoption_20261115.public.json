@@ -1,0 +1,5345 @@
+{
+  "schema": "piece.native_v4_normal_adoption.v1",
+  "date_jst": "2026-11-15",
+  "repository": "MassyuRed/Cocolon",
+  "source_commit": "7568f6f03c50b0daf0aa578ad8ef7a518c2fff19",
+  "source_sha256": "8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b",
+  "origin_candidate": "3646a2858bf4571a856509372480a01a446fdc52",
+  "run_id": 43651916715,
+  "attempt": 1,
+  "native_job": 132622052718,
+  "source_scope": "native V4 comparison adoption; existing bitmap rendering route unchanged",
+  "summary_lines": [
+    "LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0",
+    "V9_NATIVE_CHECKS=46 PASS=46 FAIL=0 SKIP=0 EXPECTED=46",
+    "AR04_BITMAP_CHECKS=4 PASS=4 FAIL=0 SKIP=0",
+    "V4_NATIVE_CHECKS=20 PASS=20 FAIL=0 SKIP=0 EXPECTED=20",
+    "NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0",
+    "BITMAP_NATIVE_CHECKS=44 PASS=44 FAIL=0 SKIP=0",
+    "FRACTIONAL_V4_CHECKS=24 PASS=24 FAIL=0 SKIP=0 EXPECTED=24 NONALIGNED=3 CLIPPED_DIFFERENT=2",
+    "FRACTIONAL_V4_RECORD_SHA256 be16c0a1c474b6067a05ce4f4baff4f52f73b77bde34cb798264842837b3acec",
+    "FRACTIONAL_V4_PERSISTED_CHECKS=24 PASS=24 FAIL=0 SKIP=0 EXPECTED=24 NONALIGNED=3 CLIPPED_DIFFERENT=2"
+  ],
+  "v4_passes": [
+    "PASS output_v4_closed20_union_direct_v2_unchanged",
+    "PASS output_v4_native_scale2",
+    "PASS output_v4_native_scale3",
+    "PASS output_v4_positive_fractional_phase",
+    "PASS output_v4_negative_fractional_phase",
+    "PASS output_v4_one_use",
+    "PASS output_v4_branding_opacity08",
+    "PASS output_v4_controlled_native_clip_trap",
+    "PASS output_v4_nil_contents",
+    "PASS output_v4_dirty_display",
+    "PASS output_v4_dirty_layout",
+    "PASS output_v4_scale_mismatch",
+    "PASS output_v4_contents_snapshot_changed",
+    "PASS output_v4_version_tokens_isolated",
+    "PASS output_v4_unsupported_paint",
+    "PASS output_v4_resource_integer_bound",
+    "PASS output_v4_allocation_fault",
+    "PASS output_v4_extent_edge_fault",
+    "PASS output_v4_empty_alpha",
+    "PASS output_v4_expired_deadline"
+  ],
+  "fractional_passes": [
+    "FRACTIONAL_PASS body_height_low_local",
+    "FRACTIONAL_PASS body_height_low_placed",
+    "FRACTIONAL_PASS body_height_low_one_use",
+    "FRACTIONAL_PASS body_height_low_snapshot_stable_mask",
+    "FRACTIONAL_PASS body_height_low_allocation_fault",
+    "FRACTIONAL_PASS body_height_low_extent_edge_fault",
+    "FRACTIONAL_PASS body_height_low_during_expanded_clip",
+    "FRACTIONAL_PASS body_height_low_during_expanded_bounds",
+    "FRACTIONAL_PASS body_height_high_local",
+    "FRACTIONAL_PASS body_height_high_placed",
+    "FRACTIONAL_PASS body_height_high_one_use",
+    "FRACTIONAL_PASS body_height_high_snapshot_stable_mask",
+    "FRACTIONAL_PASS body_height_high_allocation_fault",
+    "FRACTIONAL_PASS body_height_high_extent_edge_fault",
+    "FRACTIONAL_PASS body_height_high_during_expanded_clip",
+    "FRACTIONAL_PASS body_height_high_during_expanded_bounds",
+    "FRACTIONAL_PASS branding_height_high_local",
+    "FRACTIONAL_PASS branding_height_high_placed",
+    "FRACTIONAL_PASS branding_height_high_one_use",
+    "FRACTIONAL_PASS branding_height_high_snapshot_stable_mask",
+    "FRACTIONAL_PASS branding_height_high_allocation_fault",
+    "FRACTIONAL_PASS branding_height_high_extent_edge_fault",
+    "FRACTIONAL_PASS branding_height_high_during_expanded_clip",
+    "FRACTIONAL_PASS branding_height_high_during_expanded_bounds"
+  ],
+  "fractional_geometry": [
+    {
+      "bounds": [
+        0,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "bounds_q_edges": [
+        0,
+        -225.99998474121094,
+        2664,
+        0
+      ],
+      "case": "body_height_low",
+      "clip_q_edges": [
+        0,
+        -225.99998474121094,
+        2664,
+        0
+      ],
+      "clipped_support_differs": false,
+      "contrasts": [
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            }
+          ],
+          "contrast": "local",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -2,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    96
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "placed",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -2,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    96
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "placed"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 86,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "one_use",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 59,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "snapshot_stable_mask",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 2,
+              "fault_before": 2,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 63,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 3,
+              "fault_before": 2,
+              "fault_reached_this_call": 1,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "allocation_fault",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 3,
+              "fault_before": 3,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 18,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 3,
+              "fault_reached_this_call": 1,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "extent_edge_fault",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 73,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 1,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "during_expanded_clip",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    -5.086263020833333e-06,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.00000508626302,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    225.99998474121094
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.9999847412109
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    0,
+                    888,
+                    75.33332824707031
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 73,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 1,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "during_expanded_bounds",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "bounds_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "case": "body_height_low",
+            "clip_q_edges": [
+              0,
+              -225.99998474121094,
+              2664,
+              0
+            ],
+            "clipped_support_differs": false,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              0,
+              888,
+              75.33332824707031
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              -5.086263016096382e-06,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              225.99998474121094
+            ],
+            "requested_height": 75.33332824707031
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        }
+      ],
+      "coverage_ready": true,
+      "font_size": 48,
+      "geometry_ready": true,
+      "intersection_clip": [
+        0,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "nonaligned_bounds": true,
+      "observed_clip": [
+        0,
+        -5.086263016096382e-06,
+        888,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "requested_height": 75.33332824707031
+    },
+    {
+      "bounds": [
+        0,
+        0,
+        888,
+        75.33334350585938
+      ],
+      "bounds_q_edges": [
+        0,
+        -226.00003051757812,
+        2664,
+        0
+      ],
+      "case": "body_height_high",
+      "clip_q_edges": [
+        0,
+        -226,
+        2664,
+        0
+      ],
+      "clipped_support_differs": true,
+      "contrasts": [
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            }
+          ],
+          "contrast": "local",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -2,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    96
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "placed",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -2,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    96
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "placed"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 86,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "one_use",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 59,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "snapshot_stable_mask",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 4,
+              "fault_before": 4,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 63,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 5,
+              "fault_before": 4,
+              "fault_reached_this_call": 1,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "allocation_fault",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 5,
+              "fault_before": 5,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 18,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 5,
+              "fault_reached_this_call": 1,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "extent_edge_fault",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 73,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 1,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "during_expanded_clip",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    1.0172526041666666e-05,
+                    888,
+                    75.33333333333333
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -97,
+                    -98,
+                    986,
+                    271
+                  ],
+                  "native_extent": [
+                    -96,
+                    -96.3333231608073,
+                    363,
+                    267.3333333333333
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    226.00003051757812
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    288,
+                    513.0000305175781
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    99,
+                    126,
+                    167,
+                    37
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    1.0172526046403618e-05,
+                    888,
+                    75.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 73,
+                "font_size": 48,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 1,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "during_expanded_bounds",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              75.33334350585938
+            ],
+            "bounds_q_edges": [
+              0,
+              -226.00003051757812,
+              2664,
+              0
+            ],
+            "case": "body_height_high",
+            "clip_q_edges": [
+              0,
+              -226,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 48,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              1.0172526046403618e-05,
+              888,
+              75.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              226.00003051757812
+            ],
+            "requested_height": 75.33334350585938
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        }
+      ],
+      "coverage_ready": true,
+      "font_size": 48,
+      "geometry_ready": true,
+      "intersection_clip": [
+        0,
+        1.0172526046403618e-05,
+        888,
+        75.33333333333333
+      ],
+      "nonaligned_bounds": true,
+      "observed_clip": [
+        0,
+        1.0172526046403618e-05,
+        888,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        226.00003051757812
+      ],
+      "requested_height": 75.33334350585938
+    },
+    {
+      "bounds": [
+        0,
+        0,
+        888,
+        40.3333740234375
+      ],
+      "bounds_q_edges": [
+        0,
+        -121.0001220703125,
+        2664,
+        0
+      ],
+      "case": "branding_height_high",
+      "clip_q_edges": [
+        0,
+        -120.99999999999999,
+        2664,
+        0
+      ],
+      "clipped_support_differs": true,
+      "contrasts": [
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            }
+          ],
+          "contrast": "local",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    38,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    96
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "placed",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    38,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    96
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "placed"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 86,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "one_use",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 59,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 2,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "placed"
+            }
+          ],
+          "contrast": "snapshot_stable_mask",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 6,
+              "fault_before": 6,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 63,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 7,
+              "fault_before": 6,
+              "fault_reached_this_call": 1,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "allocation_fault",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 7,
+              "fault_before": 7,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 18,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 8,
+              "fault_before": 7,
+              "fault_reached_this_call": 1,
+              "mutation_reached": 0,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "extent_edge_fault",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 8,
+              "fault_before": 8,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 73,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 8,
+              "fault_before": 8,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 1,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "during_expanded_clip",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        },
+        {
+          "calls": [
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 0,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {
+                  "actual_alpha_u8": 0,
+                  "actual_cells": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "available": true,
+                  "cell_x": 0,
+                  "cell_y": 0,
+                  "clipped_reference_extent": [
+                    0,
+                    4.0690104166666664e-05,
+                    888,
+                    40.333333333333336
+                  ],
+                  "clipped_reference_paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "columns": 0,
+                  "first_mismatch_present": false,
+                  "logical_extent": [
+                    -57,
+                    -58,
+                    946,
+                    156
+                  ],
+                  "native_extent": [
+                    -56,
+                    -56.333292643229164,
+                    213,
+                    152.33333333333334
+                  ],
+                  "natural_contents_are_flipped": true,
+                  "natural_contents_scale": 3,
+                  "natural_geometry_flipped": false,
+                  "natural_opacity": 1,
+                  "observed_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    0,
+                    121.0001220703125
+                  ],
+                  "paint_ctm": [
+                    3,
+                    0,
+                    0,
+                    -3,
+                    168,
+                    288.0001220703125
+                  ],
+                  "phase": [
+                    0,
+                    0
+                  ],
+                  "reference_cells": [
+                    58,
+                    70,
+                    99,
+                    23
+                  ],
+                  "reference_contents_are_flipped": true,
+                  "reference_contents_scale": 3,
+                  "reference_geometry_flipped": false,
+                  "reference_image_should_interpolate": true,
+                  "reference_occupied": false,
+                  "reference_opacity": 1,
+                  "rows": 0,
+                  "source_clip": [
+                    0,
+                    4.069010417140362e-05,
+                    888,
+                    40.33333333333333
+                  ]
+                },
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 8,
+              "fault_before": 8,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 0,
+              "reject_code": null,
+              "result_count": 20,
+              "stage": "local"
+            },
+            {
+              "diagnostic": {
+                "enabled": true,
+                "first_failure_stage": 73,
+                "font_size": 28,
+                "main_thread": true,
+                "output_grid_comparison": {},
+                "raster_plan_failure": {
+                  "columns": 0,
+                  "failure_mask": 0,
+                  "input_height": 0,
+                  "input_width": 0,
+                  "rows": 0,
+                  "scale": 0
+                },
+                "request_stage": 1,
+                "tag": 1
+              },
+              "diagnostic_identity_match": true,
+              "fault_after": 8,
+              "fault_before": 8,
+              "fault_reached_this_call": 0,
+              "mutation_reached": 1,
+              "reject_code": "PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",
+              "result_count": 0,
+              "stage": "local"
+            }
+          ],
+          "contrast": "during_expanded_bounds",
+          "exception": null,
+          "geometry": {
+            "bounds": [
+              0,
+              0,
+              888,
+              40.3333740234375
+            ],
+            "bounds_q_edges": [
+              0,
+              -121.0001220703125,
+              2664,
+              0
+            ],
+            "case": "branding_height_high",
+            "clip_q_edges": [
+              0,
+              -120.99999999999999,
+              2664,
+              0
+            ],
+            "clipped_support_differs": true,
+            "font_size": 28,
+            "geometry_ready": true,
+            "intersection_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "nonaligned_bounds": true,
+            "observed_clip": [
+              0,
+              4.069010417140362e-05,
+              888,
+              40.33333333333333
+            ],
+            "observed_ctm": [
+              3,
+              0,
+              0,
+              -3,
+              0,
+              121.0001220703125
+            ],
+            "requested_height": 40.3333740234375
+          },
+          "local_conditions_pass": true,
+          "pass": true
+        }
+      ],
+      "coverage_ready": true,
+      "font_size": 28,
+      "geometry_ready": true,
+      "intersection_clip": [
+        0,
+        4.069010417140362e-05,
+        888,
+        40.33333333333333
+      ],
+      "nonaligned_bounds": true,
+      "observed_clip": [
+        0,
+        4.069010417140362e-05,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        121.0001220703125
+      ],
+      "requested_height": 40.3333740234375
+    }
+  ],
+  "fixed_bitmap": {
+    "png_sha256": {
+      "preview.png": "2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d",
+      "saved.png": "2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d"
+    },
+    "preview_saved_png_equal": true,
+    "result": {
+      "checks": 4,
+      "content_payload_hash": "ccf4a9a673cc66f6614995620a8ee9c549e47624f71556085b631ac2a359bb0c",
+      "failures": 0,
+      "piece_text_hash": "8013d0e7a91e863252b0d154623a53049d0a01d7c568df10790859727fab1388",
+      "preview_saved_rgba_and_png_equal": true,
+      "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+      "scope": "Same adopted transparent bitmap glyph layer with explicit fixed test rows. This does not run RN/B9 row selection, themed background, save RPC or owner device.",
+      "source_case_id": "TARGET_VIEWPOINT",
+      "tier": "free",
+      "variant": "candidate",
+      "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+    }
+  },
+  "fail_lines": [],
+  "js_contract_tests": {
+    "job_id": 132622052967,
+    "groups": [
+      1499,
+      342
+    ],
+    "fail": 0,
+    "skip": 0
+  },
+  "local_js": {
+    "tests": 356,
+    "fail": 0,
+    "skip": 0
+  },
+  "not_claimed": [
+    "WholeCanvas complete",
+    "all images or all inputs",
+    "physical device",
+    "new build distribution",
+    "product acceptance",
+    "new AI language quality"
+  ],
+  "api_database_changes": 0,
+  "artifact": {
+    "id": 14136008671,
+    "size_bytes": 84912,
+    "sha256": "0f7f3f2a2d9a58026f50f45990f760e1a5e37514bab7266b791a90d384cd4fc3",
+    "crc_verified": true,
+    "members": {
+      "fractional-reference.json": {
+        "bytes": 62402,
+        "sha256": "be16c0a1c474b6067a05ce4f4baff4f52f73b77bde34cb798264842837b3acec"
+      },
+      "preview.png": {
+        "bytes": 64517,
+        "sha256": "2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d"
+      },
+      "result.json": {
+        "bytes": 679,
+        "sha256": "0f8d5e19e74583b75b62ff4c052eaf091d7e309fae4c5642ab99e295c8ba0b0a"
+      },
+      "saved.png": {
+        "bytes": 64517,
+        "sha256": "2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d"
+      }
+    },
+    "image_dimensions": [
+      1080,
+      1350
+    ],
+    "local_member_readback": true
+  }
+}

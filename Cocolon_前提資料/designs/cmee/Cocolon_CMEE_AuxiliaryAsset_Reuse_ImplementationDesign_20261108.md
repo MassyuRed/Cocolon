@@ -4055,4 +4055,25 @@ STRUCTURE_MAP_DELTA_PRESENT：correctedのsource role／stage、private lineage�
 
 ### 現行版の検証
 
-通常sourceの採用と検査pin／同call投影はlocal照合済み。shell構文、workflow内Python compile、104marker／late_clip_stability73・原source逆投影を確認。remote native／RN検査は未完で、成功前に限定単位を完了扱いしない。STRUCTURE_MAP_DELTA_NONE：既存比較関数内の計算修復だけで、owner／route／wire／保存形式／renderer選択の責任は変わらない。
+通常source採用commitは[7568f6f0](https://github.com/MassyuRed/Cocolon/commit/7568f6f03c50b0daf0aa578ad8ef7a518c2fff19)、親305255f7。初回変更7pathのremote全文・changed paths・treeをlocal内容と照合した。研究の4pathを丸ごと戻さず、現行RN契約・後続fixture・通常trigger／全jobを保持。独立reviewでは旧native本文を新group／最終return hookから逆投影すると原HEADと全byte一致、製品source／新native testは研究3646と全byte一致を確認した。
+
+[通常CI43651916715](https://github.com/MassyuRed/Cocolon/actions/runs/43651916715)はpush／attempt1／head7568f6f0で実行。iOS source job132622052718はcompile・実TextKit／CoreText・観測保存検査を含む全工程success。
+
+| 検査 | 現行版の実結果 |
+|---|---|
+| 既存V4 | 20 PASS／FAIL0。先行の1 PASS／19 FAILから回復し、旧20名前・期待を維持 |
+| 既存profile195 | 195 unique PASS＝native129（legacy97＋v5_32）＋v9_46＋V4_20。重複分母を再加算しない |
+| 別bitmap／AR04固定層 | 44 PASS／4 PASS。固定preview／savedのPNGとRGBAが一致、PNG SHA256=2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d |
+| 小数座標 | 24 unique PASS、3形状すべて非整列、2形状でclip支持とboundsの差を実観測。48callの正常／負対照とfault到達をJSONから照合。保存JSON SHA256=be16c0a1c474b6067a05ce4f4baff4f52f73b77bde34cb798264842837b3acecで先行実証と同一 |
+| RN契約 | job132622052967は1499＋342＝1841 PASS、FAIL／SKIP／cancel0。local renderer／wrap／export356 PASSとは重複するので合算しない |
+| Android source／export | 各compile job success。新Android通常作成・実機・OS保存の成功ではない |
+
+shell構文・workflow内Python compile、104marker／late_clip_stability73・原source逆投影はlocal成功。完全な24対照の同call数値・V4全20名・固定bitmap結果は[既存trial内の実行原本](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_v4_normal_adoption_20261115.public.json)へ保存する。artifact14136008671（84,912bytes／SHA256=0f7f3f2a2d9a58026f50f45990f760e1a5e37514bab7266b791a90d384cd4fc3）を回収し、ZIP CRC・4member・完全24対照JSON・preview／saved全byteをlocalでも照合。1080×1350の透明glyph層の本文3行とEmlisロゴを目視した。背景付きCardの品質確認ではない。機械結果とsource採用のTECHNICAL_CREDITであり、実4Bの自然文品質・一般入力・商品受入れを進めた結果ではない。
+
+### 統合検査と残差
+
+INTEGRATION_RESULT_PENDING
+
+通常API／workerは前回e5a1dc68の指定2deployがLiveのままと読取確認。稼働DBのpiece_natural_effective_round_sources／piece_interpretation_correction_source履歴は20261114192124／20261114215806を維持。今回API／DBの再配置・migration0。既存比較関数のsource／検査pinを通常RN正本へ反映する単位で、保留中の署名・TestFlight／本人実機を実行していない。
+
+STRUCTURE_MAP_DELTA_NONE：既存比較関数内の計算修復だけで、owner／route／wire／保存形式／renderer選択の責任は変わらない。Piece mapには未採用→通常source採用という状態差と原本への参照だけを更新する。Cocolonの一般自由文・複数訂正／回答併存、Emlis本人判断／時点、Piece編集品質、Analysis記録間関係・長履歴、本人利用・補助全体は未完。次の主線は§5の有効な本人更新と完成物への利用であり、旧prototypeの追加診断・待機／上限緩和へ進行を置き換えない。
