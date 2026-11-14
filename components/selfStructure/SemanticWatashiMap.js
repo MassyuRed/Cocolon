@@ -5,7 +5,7 @@ import Svg, { Path } from 'react-native-svg';
 import { buildSemanticMapLayout, readSemanticMapProjection } from './semanticMapContract';
 import { MODAL_ORIENTATIONS } from '../../ui/uiTokens';
 
-export default function SemanticWatashiMap({ contentJson, colors, isDark = false, onOpenEvidence }) {
+export default function SemanticWatashiMap({ contentJson, colors, isDark = false, onOpenEvidence, onExploreIf, onCorrectMap }) {
   const projection = useMemo(() => readSemanticMapProjection(contentJson), [contentJson]);
   const [width, setWidth] = useState(340);
   const [selection, setSelection] = useState(null);
@@ -13,9 +13,12 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
   const pendingEvidence = useRef(null);
   const currentProjection = useRef(projection?.projection_of);
   const evidenceCallback = useRef(onOpenEvidence);
+  const ifCallback = useRef(onExploreIf), correctionCallback = useRef(onCorrectMap);
   const mounted = useRef(true);
   currentProjection.current = projection?.projection_of;
   evidenceCallback.current = onOpenEvidence;
+  ifCallback.current = onExploreIf;
+  correctionCallback.current = onCorrectMap;
   const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
   const layout = useMemo(() => projection ? buildSemanticMapLayout(projection, width) : null, [projection, width]);
   useEffect(() => { pendingEvidence.current = null; setSelection(null); setLinear(false); }, [projection?.projection_of]);
@@ -39,7 +42,9 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
     const pending = pendingEvidence.current;
     pendingEvidence.current = null;
     if (mounted.current && pending && pending.projectionOf === currentProjection.current) {
-      evidenceCallback.current?.(pending.nodeRef);
+      if (pending.action === 'if') ifCallback.current?.(pending.targetRef);
+      else if (pending.action === 'correction') correctionCallback.current?.(pending.kind, pending.targetRef);
+      else evidenceCallback.current?.(pending.nodeRef);
     }
   };
   const openEvidence = ref => {
@@ -50,6 +55,15 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
     setSelection(null);
     // Android has no onDismiss contract, so preserve its direct handoff.
     if (Platform?.OS !== 'ios') evidenceCallback.current?.(ref);
+  };
+  const openParentAction = (action, kind, ref) => {
+    pendingEvidence.current = Platform?.OS === 'ios'
+      ? { projectionOf: projection.projection_of, action, kind, targetRef: ref } : null;
+    setSelection(null);
+    if (Platform?.OS !== 'ios') {
+      if (action === 'if') ifCallback.current?.(ref);
+      else correctionCallback.current?.(kind, ref);
+    }
   };
   return <View testID="watashi-map-v3" style={styles.root}>
     <View style={styles.intro}>
@@ -138,6 +152,15 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
             {selection?.kind === 'edge' && chosen && onOpenEvidence ? [chosen.from_ref, chosen.to_ref].map(ref =>
               <TouchableOpacity key={ref} accessibilityRole="button" style={styles.evidenceButton}
                 onPress={() => openEvidence(ref)}><Text style={styles.evidenceText}>{nodeName(ref)}の根拠を見る</Text></TouchableOpacity>) : null}
+            {chosen && ['node', 'edge'].includes(selection?.kind) && onExploreIf ? <TouchableOpacity
+              testID="semantic-if-open" accessibilityRole="button" style={styles.evidenceButton}
+              onPress={() => openParentAction('if', selection.kind, selection.ref)}>
+              <Text style={styles.evidenceText}>この分岐を考える</Text>
+            </TouchableOpacity> : null}
+            {chosen && onCorrectMap ? <TouchableOpacity testID="semantic-correction-open" accessibilityRole="button"
+              style={styles.evidenceButton} onPress={() => openParentAction('correction', selection.kind, selection.ref)}>
+              <Text style={styles.evidenceText}>この読み取りを訂正する</Text>
+            </TouchableOpacity> : null}
           </ScrollView>
         </View>
       </SafeAreaView></SafeAreaProvider>

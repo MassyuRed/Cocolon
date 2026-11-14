@@ -56,6 +56,8 @@ name: Piece RN preview and owner contracts
       - screens/account/**
       - tests/*owner-race.test.js
       - tests/analysis-semantic-map.test.js
+      - tests/analysis-if-route.test.js
+      - lib/api/analysisIfRouteApi.js
       - tests/fixtures/analysis-semantic-map-v3-synthetic.json
       - tests/api-client-cancellation.test.js
       - tests/social-owner-request-race.test.js
@@ -138,6 +140,7 @@ jobs:
           tests/analysis-report-history.test.js
           tests/piece-v2-resonance-owner-binding.test.js
           tests/analysis-semantic-map.test.js
+          tests/analysis-if-route.test.js
 
   piece-android-source:
     if: github.repository == 'MassyuRed/Cocolon'

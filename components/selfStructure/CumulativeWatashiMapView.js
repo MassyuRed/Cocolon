@@ -9,6 +9,8 @@ import { apiGet, apiPost } from '../../lib/apiClient';
 import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath, buildSelfStructureEvidencePath } from '../../lib/compat/legacyWireContracts';
 import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
 import WatashiMapV2Renderer from './WatashiMapV2Renderer';
+import SemanticWatashiMap from './SemanticWatashiMap';
+import AnalysisIfRouteDialog from './AnalysisIfRouteDialog';
 import { checkedMapRow, checkedCurrentResult } from './cumulativeMapContract';
 import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
 import CocolonButton from '../CocolonButton';
@@ -49,6 +51,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const [evidence, setEvidence] = useState(null);
   const [compare, setCompare] = useState(false);
   const [about, setAbout] = useState(false);
+  const [ifDialog, setIfDialog] = useState(null);
   const stateRef = useRef(state);
   stateRef.current = state;
   const compareRef = useRef(compare);
@@ -115,7 +118,14 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     setCompare(false);
     setAbout(false);
     setEvidence(null);
+    setIfDialog(null);
   }, [key]);
+
+  useEffect(() => {
+    const version = state.row?.content_json?.watashiMap?.projection_of;
+    setIfDialog(previous => previous?.visible && previous.mode === 'create' && previous.baseMapRef !== version
+      ? { ...previous, visible: false } : previous);
+  }, [state.row?.content_json?.watashiMap?.projection_of]);
 
   useEffect(() => {
     setEvidence(null);
@@ -200,8 +210,18 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   </View> : null;
 
   const renderMap = row => <View>
-    <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
-      onOpenEvidence={node => showEvidence(row, node)} />
+    {row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3'
+      ? <SemanticWatashiMap key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
+          onOpenEvidence={node => showEvidence(row, node)}
+          onExploreIf={!reportId && tier === 'premium' ? branchRef => {
+            const map = row.content_json.watashiMap;
+            if (currentKey.current !== key || stateRef.current.row?.content_json?.watashiMap?.projection_of !== map.projection_of) return;
+            const target = map.nodes.find(node => node.node_ref === branchRef) || map.edges.find(edge => edge.edge_ref === branchRef);
+            if (target) setIfDialog({ key, visible: true, mode: 'create', baseMapRef: map.projection_of,
+              branchPointId: branchRef, branchLabel: target.title || target.label });
+          } : undefined} />
+      : <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
+          onOpenEvidence={node => showEvidence(row, node)} />}
     {about ? <View style={{ marginTop: 16 }}>
       <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
       {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
@@ -250,6 +270,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       {visible && !state.loading && !pendingRefresh(state.refreshStatus) ? <CocolonButton variant="secondary"
         onPress={() => load(compare, !reportId && (!!state.row || state.refreshStatus === 'failed'))}
         title={!reportId && (state.row || state.refreshStatus === 'failed') ? '分析を更新' : '再取得'} /> : null}
+      {!!owner && !planLoading && !reportId && tier === 'premium' ? <CocolonButton variant="secondary"
+        testID="analysis-if-saved-open" title="保存した関心の方向" onPress={() => setIfDialog({ key, visible: true, mode: 'saved' })} /> : null}
     </Body>
     <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider><SafeAreaView edges={['top', 'bottom', 'left', 'right']} style={styles.overlay}><View style={styles.dialog}>
@@ -269,6 +291,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         <CocolonButton variant="secondary" onPress={closeEvidence} title="閉じる" />
       </View></SafeAreaView></SafeAreaProvider>
     </Modal>
+    <AnalysisIfRouteDialog visible={!!ifDialog?.visible && ifDialog.key === key && !planLoading && focused && appActive
+        && (ifDialog.mode === 'saved' || ifDialog.baseMapRef === state.row?.content_json?.watashiMap?.projection_of)}
+      onClose={() => setIfDialog(previous => previous ? { ...previous, visible: false } : null)}
+      ownerId={owner} tier={tier} baseMapRef={ifDialog?.baseMapRef} branchPointId={ifDialog?.branchPointId}
+      branchLabel={ifDialog?.branchLabel} mode={ifDialog?.mode} colors={colors} themeName={themeName} />
   </Container>;
 }
 
