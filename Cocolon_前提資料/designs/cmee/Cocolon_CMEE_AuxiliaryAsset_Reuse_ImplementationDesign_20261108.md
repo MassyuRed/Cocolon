@@ -1,3 +1,5 @@
+> **11/14・週次計画改訂：補助経路活用の全体完了を当面の最優先主枠へ。** [§9.54](#auxiliary-completion-focus-20261114)と[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を現在の実施順・再開先とする。本人更新を三中核へ通す、意味／内容選択を実商品へ働かせる、蓄積・本人訂正・IF／Savedを接続する作業に集約し、各能力の通常適用AR-08まで同じ単位で閉じる。必要未実装・未接続・商品未適用を残したまま終了にしない。旧局所の次手は履歴で、効果0のPiece省略hint比較を全体の再開先へ戻さない。全体完了の新実績はなく、公開日未定・12/6提出可能候補は維持。
+
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
 > **11/14・62,086byteの3file送付後、華恋の起動コマンド引数誤りで比較処理前に停止。** 必須ACK前の区切りを抜かし、main内の引数解析で終了。新model／HTTP／提供停止0、元提供PID95100／start217338131を維持、実行ROOT未作成。3fileの全byte／SHAは承認時と一致。追加実行はせず、区切りだけ直したargvを純粋parserで確認した。作業規則R10.3により修正後の新一回は明示承認待ち。新2本文は未取得・比較／保存／画像は未完、通常selector OFF。 [詳細§9.52](#piece-topic-editorial2-cli-stopped-20261114)。
@@ -10,11 +12,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-14 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_RECORDED344A2_REGISTER_FIXED_SAVED_NATIVE6_EDITORIAL_UNPROVEN
+status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Recorded344a paragraph/two-field false refusals fixed, same raw saved/reread and native6/actual PNG verified; editorial repetition and normal SQL/API/RN physical-device roundtrip remain unfinished, selector OFF"
+current_next: "Apply the four completion work units in section 9.54 and weekly section 5: align existing normal mechanisms, connect valid user updates across three cores, improve actual outputs, finish accumulation and IF/Saved, and close normal adoption per capability"
 runtime_effect_of_this_document: 0
 ---
 
@@ -455,6 +457,8 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
 ### 9.1 2026-11-12 — 局所修正の直列進行から、既存能力群の移管と三中核での利用へ変更
+
+**11/14追補：本節の方針を具体的な完了範囲・四作業・現在再開先へ落とした現行計画は§9.54と第11回§5。以下の11/12時点の実施順を、最新の局所試行だけへ狭めて再開しない。**
 
 Mashの「これまでと同じ禁止」「進め方を決めろ」を受け、AR-04の一つの不採用文から次の不採用文へ進む順序を、補助経路の活用全体の進行軸から外す。直前のoperator比較修復は有効な部分成果として保持するが、全体依頼の区切りにしない。本節は実施順と作業単位の変更であり、実装完了・通常採用・商品受入れを増やす記録ではない。
 
@@ -1755,75 +1759,31 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
-### 11.2 現在の進行欄
+<a id="112-現在の進行欄"></a>
+### 11.2 現在の進行欄（11/14・全体完了主枠への改訂後）
 
-現在の構築は[§9.28](#emlis-post-reply-correction-20261113)、前回実9応答は[§9.29](#emlis-post-reply-correction-actual4b-20261113)、最新の限定意味接続・実8応答と再開位置は[§9.30](#emlis-correction-meaning-reader-20261113)。実7件の履歴は[§9.4](#auxiliary-crosscore-actual7-20261112)。以下の個別試行は履歴として継承し、今回の三中核移管を単一のAR-04局所修復へ戻さない。
+**現在の作業・再開先は§9.54と第11回§5。** ここは商品実績と必要残差を区別する現在欄。確認headはCocolon a770355c／API99dbdaab、製品sourceは前回と同一で、今回新しいlive・DB・端末照会や実生成はしていない。
 
-**11/12・読取拒否修復前の実生成履歴（修復後は先頭更新とAR-04欄）：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実測と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
+| 単位 | 最新までに成立したもの | 全体完了へ残る必要な工事 |
+|---|---|---|
+| AR-01 | 原文・役割・時点の既存能力と独立比較を現naturalへ限定回収。正常保存・再読の既存経路、局所修復あり | 材料が正しくても完成文で反転・付加等が残る。6境界／短文・省略・二欄・既成功・別題材を含む現責務群の実返答改善と通常採用 |
+| AR-02 | 最大3問・問い設定・skip／終了、二入力訂正のUI／API／保存、frame対象束縛・失効をコード接続。誤質問保存抜けの拒否修復 | 一般的な問い判断、回答／訂正／撤回後の意味・自然な応答、後半候補の通常適用・本人一巡。拒否増加だけでは閉じない |
+| AR-03 | 適格履歴の再導出・送達予算の修復、本人判断対象の同thread／別記録束縛・失効 | 実4Bで過去／今回・本人修正／不使用を正しく利用する内容と採用版。旧新実比較の不採用は§9.38／42等に保持 |
+| AR-04 | 一人称・受動役割・欄分離・評価・引用等の限定改善、最新ADD1〜3の候補、実raw保存再読・同版native画像。一部枠修正は通常source採用 | 一般文章化・単独伝達、具体訂正／撤回source、形式とmodel範囲、最新通常本人一巡。最後の§9.53は旧新2本文同一で反復改善0、通常model選択OFF |
+| AR-05 | 実4B→CMEE→実保存→7701本人表示、7801先行更新を継承。source duties v2の実装・限定比較／再読 | 本人基準・条件差・記録間関係の意味品質、通常v1／候補v2の採否と適用、項目／線の二入力訂正を次の現在mapへ通す工事 |
+| AR-06 | 原入力・適格最大3ANSWER、累積／月次保存と権利等の既存機構は継承 | 新natural本人原根拠の意味材料は未成立、NOT_GENERATED。有効訂正／撤回の下流伝播、現semantic長履歴と必要分割・跨ぐ関係・月次当時性を接続 |
+| AR-07 | IF／Savedの既存詳細設計・schemaあり | 仮想生成・必要確認・1〜3候補・API／RN／保存意向・再読削除がruntime未実装。適格現在mapから独立着手し、開始1例から必要仕様まで閉じる |
+| AR-08 | 既存の本人経路・iOS8001までの内部配布と、一部通常source採用は継承 | 後半の機構・採用能力のmigration／API／RNを対応させ、通常の本人利用・同版図／画像・保存再読・復帰・実費を閉じる。全ARの全品質完成待ちにしない |
 
-**11/12・先行する通常画像実証の履歴：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。
-
-**11/11・36件/72更新時点の履歴：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
-
-**11/10の履歴：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [今回の限定と根拠](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
-
-以下の過去比較は履歴。現在の再開先は§12と下表のAR-04再開記録を参照する。
-
-直前の受動役割条件比較（履歴）は学習0・同じc634の1loadで旧新source条件だけを変えた一回。全量資格済み受動fieldへsource_literalと既存MeaningWitnessのsubject／agent／counterpartを同source/spanで投影し、H03／B2の受動否定を修復、全46のCMEE44→46・他44raw一致。新SQL162全保存、旧114は再資格化のみ・再実行0。実HTTP58、全工程317.279043秒、元提供44511へ復元・health／前後control一致。初回tokenizer型の技術中断はHTTP0・元停止0で別保存し、旧8044の失敗／B2欠測を補完しない。c634通常未採用。同版画像は通常3＋refined1の4作品だけ確認し、通常統合／本人端末は未確認。[今回実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
-
-**前回の実行前計画の履歴（§56で実行済み）：** 文末指示の26raw不変と原教師24行の限定被覆を根拠に、ROLEFIT09／10だけを新しい僕／ぼくの受動・能動混在2教材へ置換する一回のfresh24行比較を選ぶ。保持22行のsource／messages／target、既存trainer・scope・seed20261109・LR1e−4・48更新を維持し、学習上限300秒／復元込み全体600秒、HTTP上限46（新基準8＋新候補34＋control4）。旧26は既使用対照、新8は教師と別に固定する。原因や2教材の有効性は未証明で、SYSTEM周回・raw補修・checker追加・通常採用へ変換しない。既存GPUだけを使い、新規レンタル／予算拡大なし。実結果と未実行は[同試行](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-20261110)へ分離する。
-
-**11/10・一般文初回比較の履歴：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。
-
-**前回の履歴（活動名／読点比較）：** `piece_model_source.SYSTEM_MESSAGE`末尾へ「一人称の表記と意味は保ち、助詞と読点を自然な本人の語りに整え、主語直後の不要な読点や原文にない強調を加えないでください。」の共通一文を追加。期待正文・assistant例・raw修補・追加学習はない。固定5b1／config・旧26USERを凍結した一回の実比較で、新26＋前後control4の30 HTTPは全200／stop。runner全工程183.370781秒、元提供PID40494→同args／env／cwd／keysの41313へ復元、health200・Emlis／Analysis前後response bytes一致、Analysis／旧e924／新5b1の重み・GPU serving source／凍結wireは不変。送信待ちの長時間失敗はrunner全工程183.370781秒に含めず、通常原価・総請求は未測定。
-
-前回の旧USER固定診断で残ったFRESH03の不一致は、今回、現行builderの全SYSTEM／USERを送る実4B一回で確認した。新しい文末統一指示は別比較で26rawが全一致となり不採用。現行生成条件の確認と、direct HTTP・合成Auth／等価合成IDへ再bindした隔離SQLの限界は[今回実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)へ分離する。selector OFF／5b1通常重み未採用を維持する。
-
-前回の活動名資格拡張の構造差分は`STRUCTURE_MAP_DELTA_PRESENT`。今回の実応答確認・test整合は`STRUCTURE_MAP_DELTA_NONE`。既存`piece_source._personal_evaluation_shapes`のbare自己評価（`は`／`にとって`）だけへ、既存`_SIMPLE_NOUN`で全文照合できる漢字／カタカナstem＋「作り」の活動名を限定追加。stem中の何／誰、空stem、助詞・有限節・参照・内部空白・引用・曖昧なが焦点は新armへ入れない。対象名詞句全体・本人表記・評価base／程度／肯否／時点／留保・原文／根拠座標を保持し、「模型を作った」等の実行済み行動には変換しない。共有の名詞文法・公開型／DB・独立CMEE／S7・原入力と本人補足・保存後非生成の責務は維持する。 Piece map／全ファイル地図01Aへ既存ownerの受理境界差分を反映する。
-
-以下の日付付き経過は各時点の履歴。現在のAR-04結論は直上と下表へ置換する。
-
-**11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。 関連15file756 PASS、既存warning1、FAIL／SKIP0。
-
-
-2026-11-09現在：API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。 評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。 次は本人視点・評価述語と名前抽象化の残差を既存の意味保持／商品経路で改善し、広い材料・同版画像／通常統合を確認する。同じ教材の追加周回や候補の通常採用へ自動進行しない。 [全結果・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
-
-
-2026-11-09 Piece4B接続：§7.1具体設計を先行反映後、API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`でmodel候補→既存CMEE／B8／Safety／通常保存を接続した。RN preview POST期限を250秒へ修正。通常3planと実Q2 A/Cの隔離保存・0再生成再読を確認。初期short_essay／既存有限source資格、default OFF、一般文章・live反映／端末未完了を維持する。[実測・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)。
-
-
-| 項目 | 2026-11-10 AR-01残件を継承、AR-04修飾付き好み対象を既存readerへ接続 |
-|---|---|
-| 回収と改修 | 旧finite `_clauses/_FORMS/_participant`で正過去依頼のrequester／asked_personを別slot化。同一eventと対象状態を結合。旧content_selectionから意味不変・別ref-planの表示選択責務を回収し、NOT_RECORDED=context_onlyは現natural向け研究policyとして区別 |
-| 意味と限定 | 4sourceの7状態・4event・受け手束縛3。省略はUNSTATED、単一event・全節被覆。複数依頼／未読節／曖昧関係節／未対応target／既知slot矛盾はHOLD。旧status snapshotは不変、role再開で全意味を原文から再導出 |
-| nativeの資格 | provider CMEE_NATIVE_FINITE_WRITTEN_STATE、model/revision/usage null、stopはadapter標識。モデルraw／意味採用／独立一般意味判定ではない。同4snapshotを2phaseで使用 |
-| 実生成 | role4本文7.037912秒＋priority4本文7.434972秒、計8／累積時計14.472886秒、上限8／240秒内。全HTTP200／stop。前回native4実本文を基準再利用、新基準生成0 |
-| 実本文と採否 | NIは受け手未記載→依頼者未記載の反転が両版で継続。TRANSFER06は役割反転＋未記載→未決定、両版の本文byte同一。KARAは意味保持・priority版は反復増。SELFは未決定保持、priority版は一人称的感情再述で語り手留意。通常不採用 |
-| 表示選択の境界 | 全原文／状態／roleを保持し、参照と優先度のみ別plan。context_onlyでも推測禁止、foreground全件再掲義務なし。plan＋SYSTEMを同時変更し単独因果は未分離。対象への言及自体でなく実際の反転を失敗理由とする |
-| 検証と読解 | 最終491 PASS／22.24秒・既存warning1。元8通常messages/ref不変・旧4status snapshot不変・priority falseのrole4messages不変。各93source、実tokenizer最大1247／1212input・切詰めなし。root／独立担当が4source・旧4／新8本文等を全文確認 |
-| 保存再読 | 新8実本文が全FINAL保存・同／新service GET一致。既存外側空白除去以外の本文修補／実DB要求／再生成0。GET provider／reader／Engine／prepare／意味採用・受領0、USER source／thread/events不変 |
-| SQL投影と限定 | 同rawを既存SQL投影へ再受領・role意味再導出。新8payloadは2一致／target_refだけ異なる6を別保全し、その変更後payloadで実生成済みとはしない。pure/private role snapshotを通常meaning checkpoint永続化へ換算しない。reader8は一般意味未判定・全文coverage=false |
-| 提供・保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。role最初の梱包漏れは生成0のCPU事前検査で検出・依存補完し失敗logも保全。private同artifact準備v0→結果v1、総請求額未測定 |
-| 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
-| 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
-| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
-| AR-04回収・改修 | 研究2ddのtest6pathへFree原録画051/007の実host接続を追加。784で新groupの実export copyを厳格参照、e6ecで既計算saved一致fieldとcollector filenameを修正。製品581/pin/8秒・旧7groupの生成bytes不変。 |
-| AR-04実本文 | 保存344aの2run和集合73/73・旧比72raw同一/051時制回復1を継承。今回Free原録画051/007のsource/PreparedRequest/messages/raw/本文を再利用し、wire投影とnative host接続を実行中。新model/GPU/SQL0。 |
-| AR-04検証・再読 | 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 |
-| AR-04反映・残件 | 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 |
-| AR-04現在のrefined | 007のQ2資格/原入力補足分離・recorded wrapper/S7/Free保存再読を継承。前回静的6/transition4は3段落/Emlis/配色/canonical8/3hash/PNGを保持。今回新refined生成/SQL/通常capture許可変更0。 |
-| AR-04現在の4B本文読取 | 前回73本文読取・configured録画3の無修補再生を継承。今回のnative support候補比較でmodel生成/学習は0。一般文章品質・任意natural補足・正式受入れを追加で成立させたとはしない。 |
-| AR-04再開記録 | 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 |
-
-以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
+各行の実原本・採否・詳細は§9.2〜53と既存trial／weeklyへ戻る。[改訂前の進行欄](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#112-現在の進行欄)は履歴として保持し、古い局所の次手を現在の全体再開先にしない。新たな補助全体完了・通常採用・正式受入れを認定したものではない。
 
 ## 12. 今後の指示と再開方法
 
-**11/13・現在の再開点：** §9.30／API0985877fで訂正説明の別source意味読取りとprivate完成本文比較を接続した。新8応答は同source対6＋通常候補2、5隔離保存・非生成再読が成立したが役割反転／引用創作／時点追加が残り、生成hintの通常接続は撤回した。通常の作者材料追加はOFF。旧9実本文の一般修復も未達。次は既存source意味責務／完成文逆読取り／作者の語尾・複文・引用対応へ戻し、同じhint追加比較や追加学習を周回しない。Premium frame／Analysis／ASTOR／Piece伝播・通常配置／本人端末と全補助経路は未完。完了済みの旧GPU／9native画面は繰り返さない。
+**11/14・現在の再開先：§9.54と第11回§5の四作業。** 最初に、実装済みの問い設定・二入力訂正・frame対象・最新ADD作品化の対応版差を確認し、採用可能な能力を通常へ運ぶ。これと並行して本人の有効更新を返答・履歴・作品・分析へ通す工事と、実生成の共通原因修復、全蓄積・IF／Savedを進める。AR-08は各単位の内部で閉じる。
 
-**11/12・当時の再開点（履歴）：** §9.4の実4B7件を一回完了し、実測された撤回後の質問保存抜けをAPI4183126dで修復した。同じGPU要求・旧73・344a固定3件・native検証を再実行しない。次は新旧本文比較で残ったEmlisの受け止め／回答後応答、Pieceの編集・氏名抽象化、Analysisの言葉と記録間関係の生成品質を現作者へ戻し、AR-02の二入力訂正・AR-03の意味ある履歴と既存依存を進める。候補の通常採用、Piece／Analysisの適格sourceでのSQL保存、live配置・本人端末は未完。今回の一回承認を追加生成・学習・再試行へ流用しない。
+直近の実結果は§9.53（新2rawは旧2と全文同一、反復改善0、保存再読成立）。旧§9.30の訂正reader、Pieceの省略hint、個別不採用文の次手は、それぞれの原本・必要残差として使うが、全体をその局所作業へ戻す再開指示にはしない。完了済みの旧GPU・SQL・native結果を無根拠に繰り返さない。
 
-**11/12・先行する通常画像実証の履歴：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承し、旧6methodは今回未実行。
+[改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
@@ -3230,3 +3190,49 @@ rootと独立read-onlyで原七項目・完全原文・両旧新全文を照合�
 今回の限定比較・復元と同源泉保存再読は完了し、新しい一回の許可は消費済み。追加生成・学習・同じ入力へのhint／SYSTEM比較へ戻らず、同じ画像・保存診断も再周回しない。次に解消する商品未完は、反復を残したままの一般的な作品編集である。今回の候補提示差分だけでは実本文の編集改善が出なかったことを踏まえ、既存文章化／意味照合の責務に沿って共通原因を扱う。新規GPUやfitの許可を自動生成しない。
 
 限定TECHNICAL_CREDIT、本文品質向上・正式human Product Read／商品受入れ・AR-04／全補助経路の完了は追加0。API99dbdaabの既知1,488件・Piece／Analysis両CI初回成功を保持するが、今回の新test／新CIへ加算しない。製品source／test／公開型／API／DB／RN／SYSTEM／重み／selector追加変更0、STRUCTURE_MAP_DELTA_NONE。通常selector OFF、Render配置・live DB適用・build／配布0を維持する。
+
+<a id="auxiliary-completion-focus-20261114"></a>
+## 9.54 2026-11-14 — 活用全体の完了へ主枠を集中し、現在の作業単位と再開先を改訂
+
+Mashは、補助経路活用をせめて終わらせたいと述べ、当面の集中案、三中核／Cocolon全体での作業、全仕様・現状・残件の再確認と11/14〜11/21のタスク反映を依頼した。華恋は集中案を支持し、[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を現行計画へ置換した。公開日未定・12/6提出可能候補は維持する。本節は実施順・完了範囲・再開先の改訂であり、新しい製品実装・通常採用・商品合格の記録ではない。
+
+### 全体を閉じる範囲
+
+§0／2／8.6／9／11.1と既存D／S／原8層の必要能力を維持する。全旧fileのimport、全日本語の誤り0、全アプリの完成を要求せず、初版の短い選抜へ縮めもしない。必要な回収対象を処置し、採用能力が該当三中核へ実装・接続され、商品結果・保存再読・通常適用へ働いたところまで閉じる。
+
+旧方式の効果0・誤拒否・費用等を理由にその方式を非採用にできても、必要な商品責務が欠ける場合は残件として別の既存能力・現ownerの改修へ引き継ぐ。必要能力の未実装・未接続・商品未適用を残したまま全体完了にしない。開発比較用能力は実比較・選択・原因修復に使用し、通常の追加callを無条件に増やさない。
+
+### 現在の四つの作業と、直後に扱う接点
+
+| 作業 | AR・現ownerの接点 | 閉じる商品結果 |
+|---|---|---|
+| **1 本人更新の有効意味を三中核へ通す** | AR-02／03／06、Piece補足・分析訂正。現thread source／answer_update／history、natural service／store、Piece source adapter、Analysis source adapter／admission | 問い・ADD／REVISE／WITHDRAW・二入力訂正・frame判断から、返事／履歴・作品・現在mapが同じ対象・原根拠・有効版を使用。編集・削除・権利変更の失効と再読まで |
+| **2 意味・内容選択・完成物読取りを実生成改善へ使う** | AR-01／04／05。現natural／Piece author・policy／Analysis source duties・admission・compiler／唯一realizer | 共通原因に対応する入力群、既成功・別題材で、役割・否定・時点・条件・不明を保つ実返答、単独で伝わる本文、根拠と一致する図／説明へ改善 |
+| **3 全蓄積・当時版・本人訂正・IF／Saved** | AR-05／06／07。現累積service／material planner、月次・現在map lifecycle、IF／Savedの既存設計とschema | 全sourceと必要分割・跨ぐ関係、月次当時性、項目／線訂正、本人の分岐と意向／制約からの1〜3仮想候補・明示Savedの生成／保存／再読／削除 |
+| **4 成立した能力を各単位で通常適用** | AR-08を作業1〜3に内包。必要migration→API指定版→統合RN、既存保存・表示・renderer・runtime owner | その能力が通常の本人経路で実際に使われ、同版の返事／作品／図・画像と保存再読が一致。必要な本人／権利・中断復帰・call／待機・費用を確認 |
+
+**全体の直後の再開先は、作業1・4の実装済み機構の通常差分と、作業1・2の有効意味→作者→下流への接続。** bound questions／question preference／interpretation correction history／frame target contextと、Piece最新ADD・依存失効のDB／API／RN差を確認し、採用できる機構から通常へ出す。研究hint・重み・selectorの未採用を一括ONにしない。
+
+並行して、取得済みの訂正／履歴／frame、Piece344a段落・二欄と最後の効果0本文、Analysis v1／source duties v2から、同じ意味責務が失われる位置へ戻る。受領済みrawを取り直すこと、同じ主語省略hintを追加して実2件を再比較すること、次の一文を探すことを、全体の標準再開先にしない。
+
+### 一例から始め、元仕様の必要範囲まで閉じる
+
+原入力の二欄、9カテゴリの選択集合、5感情・各強さ・同時感情、排他的な自己理解、本人／他者・時点・条件・引用等を現入力契約として保つ。全組合せの新しい固定件数Gateは作らず、必要能力と共通原因に対応する既存失敗・正常短文／省略・既成功・別題材で確認する。
+
+AR-06はnaturalのNOT_GENERATEDを比較reportで埋めず、本人原根拠へ戻る材料をthread／OBSと同じ保存境界で成立させる。AR-07は適格現在mapから独立着手し、候補1件を開始点として、必要確認・1／2／3候補・観測／仮想／選択意向の分離等の元仕様まで扱う。一例の保存成功だけでAR全体完了へしない。
+
+### 局所失敗からの戻し先
+
+source／本人／版の不整合はsource ownerへ、意味読取り・内容選択の欠落は現意味ownerへ、材料が正しく完成物で変わる場合は作者／計画実現へ、正しいrawの誤拒否は取得済みrawでreaderへ、保存／描画／通常差はその実接点へ戻す。同じ原因が作用する他consumerも同じ変更単位で確認する。無関係な全core再監査や、新checker／controllerへ拡大しない。
+
+方法の効果0・退行は原本と理由を保ちその方法を閉じる。必要責務を残したまま非採用欄へ逃がさず、原因に対応する深い改修も選ぶ。成立した別能力の通常適用は継続する。局所比較完了を、活用全体の区切りや毎回の続行指示待ちにしない。
+
+### Cocolon全体との優先関係と11/21判定
+
+採用能力に必要な通常反映・同版画像／図・本人／権利・復帰・費用は主枠内。新Piece退会削除・管理認証の具体的担保不足は限定確認し、実欠落時に必要修復。実際の提供停止・保存／本人境界の欠陥・予算逸脱は先行対処する。現時点で主枠を止める観測済みの緊急案件があるとは確認していない。
+
+実Store購入等の全体確認、Android全域・新bridgeの独立実装、追加テーマ、全画面仕上げ、新公開／交流の全面接続、申請資料全域は候補仕上げ枠へ再配置する。採用能力が現OS・公開／tier契約を守る確認は残し、他機能の廃止・公開後確定や、補助終了条件の全アプリ拡張にはしない。
+
+11/21は活用全体完了を第一目標とした判定点とする。必要未実装・未接続・未適用があれば継続中と明記し、閉じた商品差、残る必要能力と現owner、通常化までの接点、12/6候補への残工程・影響を示す。今週の全体完了保証や12/6の自動延長は置かない。
+
+今回の商品source・公開contract・DB・稼働・GPU・重み・配布・費用契約の変更は0。AR実績は§9.53までを継承し、今回の計画反映を品質改善・正式受入れへ加点しない。STRUCTURE_MAP_DELTA_NONE。
