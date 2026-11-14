@@ -1,3 +1,5 @@
+> **11/15最新：標準RNと同じ本人案なし入力で、実4Bの自動3案を採用し、同rawの隔離SQL保存・別process再読・Saved・既存RN受口から通常API／worker反映まで完了。** 追加一回は188.483632秒、3POST全受領、通常2対照全文一致、学習／再試行0。3案の具体的な手順がそれぞれSIMULATED_EXTENSIONに入り、全anchorと30分／追加費用なしを保持。API／workerは7f51a64e6cb58668ad5d418480b7de4499bfe6faでLive。標準自動3案の限定接続単位を閉じる。一般品質・正式本人受入れ・AR-07／補助全体は未完、build／TestFlight／本人実機保留を維持。 [実原本・保存・配置§9.67](#if-standard-proposal-three-normal-rollout-20261115)。
+
 > **11/15最新：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。 [実結果・原因・新準備§9.66](#if-standard-three-actual-proposal-fix-20261115)。
 
 > **11/14最新：通常入力の自動3案・条件保持の修復をGitHubへ反映、実4B送付は審査で停止。** 候補d3daee5／関連168件成功。実生成・通常反映は未実施、稼働はc7968c6を維持。 [実施範囲・具体送付・再開§9.65](#if-standard-three-conditions-prepared-20261114)。
@@ -20,7 +22,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.66: authorized standardIF3 once completed and product rejected for identical intent-copy graphs. Source fix7f51a64 excludes BRANCH_INTENT and passes171; new28480B2file once packet prepared, not uploaded/executed. Resolve explicit additional-once approval, then actual quality and accepted same-raw save/re-read/Saved/normal rollout. LiveAPI/worker c7968; Pod d3IF functions. Build/device deferred."
+current_next: "Section9.67: standard no-person-options actual IF3 accepted; same-raw isolated SQL save/re-read/Saved/RN validated; normal API and worker7f51 Live. This bounded automatic3 integration unit closed. Continue general quality and remaining auxiliary work under weekly5; build/device deferred, no further GPU execution authorized by consumed once."
 runtime_effect_of_this_document: 0
 ---
 
@@ -3867,3 +3869,57 @@ API候補 **7f51a64e6cb58668ad5d418480b7de4499bfe6fa** へ反映し、全5remote
 旧preparedを全member保持した同一非公開成果物 [Cocolon_CMEE_IF_StandardThree_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-097030f8a6b08191873a7c3b42532f8b_2f7470f963808191aaebf050935e72de&account_id=personal) **version1／208,808bytes／SHA `012aaf86f0c7001b9a3f2bcb0125b8c5f176ca858f0d9d049470d20d0c4216e6`** に、実原本・否採用判定・171検証・新2file／通常prepared／再現手順を保存。actual_20261115とproposal_fix_preparedを分け、合成事前検証を実生成へ混ぜない。鍵・env全体・DB page・実ユーザー本文・重み0。
 
 限定TECHNICAL_CREDITは条件保持の実証と意向コピー経路のsource修復だけ。自動3案の完成・正式商品受入れ・通常反映・補助全体を認定しない。11/21判定・12/6候補・61.625％管理評価、build／TestFlight／本人実機保留は据置き。
+
+
+<a id="if-standard-proposal-three-normal-rollout-20261115"></a>
+## 9.67 2026-11-15 — 標準入力の自動3案を同raw保存・再読・通常反映まで完了
+
+### 承認と実行範囲
+
+Mashが§9.66の新28,480bytes・2fileの送付、同PodでIF2関数差替え、自動3案＋対照2応答、最大600秒・追加一回・学習／再試行なし、既存2鍵の同Pod内認証／復元だけの使用を明示承認した。送付前後の2file全byte／SHA、元PID111162／sourcef51c73df…、新dir不存在を照合して一回だけ起動。承認済み以外のmodel生成・学習・再試行・新Pod・重み変更0。
+
+| 実受領 | 結果 |
+|---|---|
+| IF-STANDARD-PROPOSAL-THREE | HTTP200／stop、131.220893255秒、6,028bytes／SHA `07891f5a3aae686e39089b6939ffbef257a01e08a07fa225c6074d231d779a15` |
+| 通常Emlis対照 | HTTP200／stop、1.424203538秒、251bytes、直前完走原本と全byte一致 |
+| 通常Analysis対照 | HTTP200／stop、35.889784782秒、2,007bytes、直前完走原本と全byte一致 |
+| 実行全体 | 188.483631987秒、3POST提出／3受領、前後health・起動待ち確認通過。baseline再生成0 |
+
+公開固定7f51 source270e9ea…から_if_output_schema／_if_json_schema_parserだけを差替え。PID111162→111294、提供source SHA `ad3d301d2d1abd9226703dc72e3734eb8da79d8e0cf084d4b0666e97298370be`。同args／cwd／環境／2鍵／重み／adapterを保った。この版を通常提供中で、元のIF関数へ復元したとは記載しない。回収ZIP13,286bytes／SHA `9d896bc52eb6b26fa9c8658d887dcf5f45dbb54b8f7703b080c1eead0349687f`、CRC・全member・送信wire・全応答SHA・対照一致を照合した。JSONのみ回収し、鍵／env／args／serverログを外部へ出していない。
+
+### 全3案の意味読解と限定採用
+
+本人案配列なしの標準入力を使用。前節の同一graph問題に対し、今回はchoice本文自体が次のように異なる。全choiceはSIMULATED_EXTENSION、元anchorと本人条件は全文一致。本人の実行・選択済み・成功・人格・おすすめ順位の断定は見つからなかった。
+
+| 案 | choiceの具体手順 | 未観測として残したもの |
+|---|---|---|
+| 1 | 読む前の確認→読みながらメモ→読後のまとめ | 得られる情報・理解度の変化 |
+| 2 | 先に目的／疑問をノートへ書く→資料を読む | 読む時の焦点・得られる答え |
+| 3 | 図表を先に見る→文章を読む | 理解・メモの変化、図表自体の存在と比重 |
+
+UNKNOWNは将来の未観測結果であり、前回の「本人が成果を書いていない」への転換を解消した。案3の図表は観測事実にせず、存在不明をunmodelled_factorsへ明示した仮の経路として限定採用する。rootと独立read-onlyの両者が全raw・原材料・全graphを読み、この架空1setは採用可能と判断。意向文の前置き反復、案1／2の部分重複、硬い表現、分単位の配分なし、図表の適用条件を見出しにif表示していない点は残差として記録。一般品質・本人が実用できたことへ拡大しない。
+
+### 原本を変えず保存・別process再読・既存RN受口
+
+受領rawを無修補でproduction SelfHostedAnalysisIfModelSourceへ返し、prepared送信wire全値一致、Engine GENERATED／analysis_if_model_set_generatedを確認。そのartifactを既存RPCのreserve→start→receive→set_commitへ渡し、**候補set1（3案）と明示Saved1を隔離PGliteへ保存**。別Node processで既存artifacts_readから両行・全storage値が一致し、同operation replayは同id、元observed mapとprivate evidenceは不変。Saved選択は検証用架空の明示入力であり、Mashの本人選択と記載しない。
+
+再読したSQL行からproduction _safe_rowを通し、既存RN checkedIfApplicationResultがscenario_set／saved_intent両DTOを受理。再現／保存／再読でmodel追加call0、実Supabaseへの架空owner／本文書込0。これは既存の通常SQL／API保存実装を使った隔離証拠であり、本人JWTの通常live保存、本人画面、native画像、buildの実証ではない。IFにPiece画像経路を追加しない。
+
+### 通常API／workerへの固定commit反映
+
+既存workspace／2service・元Livec7968・自動配置OFFをfresh確認。MCPのdeploy操作はcommit指定を持たないため、既存DashboardのDeploy a specific commitから検証済み7f51を選択し、両新deploy IDと同commit LiveをMCPと画面の両方で確認した。branch main／autoDeploy noは据置き。
+
+| 通常配置 | 固定commit | deploy／終状態 |
+|---|---|---|
+| mashos-api | `7f51a64e6cb58668ad5d418480b7de4499bfe6fa` | `dep-dbsakomk1f9s738on9a0` Live、2026-11-14T18:38:47.602024Z |
+| mashos-astor-worker | 同上 | `dep-dbsalcbbc2fs73b2bnt0` Live、2026-11-14T18:39:31.617780Z |
+
+反映後healthz／app bootstrapはHTTP200、未認証IF／Saved GETは401・private,no-store。worker新instanceの起動・DBキューpolling・queue statsを確認。ready0／running0／stale0、既存failed171は先行状態と同数で、今回再実行・消去していない。観測窓の新errorログ0。今回の新実job処理成功・過去失敗解消とは報告しない。従来のsubscription URL未設定warningは残る。
+
+### CI・証拠・閉じる範囲
+
+関連171PASS／既存warning2を継承。新7f51のAnalysis CI43625900326はattempt1 **success**を終状態確認。Piece43625900352はstep31の307PASSを含め32まで成功後、step33の89％でcancelled、step34未実行。10分job枠と10分16秒の経過は整合するが、取消理由は断定しない。CI再実行0。同step33を既存環境で同順一回実行し、31file **2424PASS／warning1／241.61秒**、B8選択5file **78PASS／420deselected／1.11秒**。source前後SHA一致。native PostgreSQLを要するstep34は環境未提供のため未実行で、全CI成功へ換算しない。
+
+同一非公開成果物 [Cocolon_CMEE_IF_StandardThree_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-097030f8a6b08191873a7c3b42532f8b_2f7470f963808191aaebf050935e72de&account_id=personal) **version2／325,904bytes／SHA `56d1a8c18f165f71ad7b56d6aef27992812eecda81592931c6a7fea53c1c3a54`** へ、旧68memberを全byte保持し、今回原本・独立読解・SQL再読・RN・配置・CIを追記保存。旧負例／合成preparedと今回actualを分けた。鍵／env／DB page／実ユーザー本文／重み／browser screenshotを含めない。
+
+**本人案なし標準自動3案の限定接続・同raw保存再読・通常反映の作業単位は完了。** 既存公開API／DB／RN／owner配置は変更せず、前節5pathのsource採用でSTRUCTURE_MAP_DELTA_NONE。三中核の通常材料・認証・保存の境界を保持。AR-07の一般品質・正式本人受入れと、他AR／補助全体は未完。次は週次§5に沿う残件を進め、この1setを全体完成に数えない。管理評価61.625％・11/21判定・12/6候補を据置き、build／TestFlight／本人実機保留を再承認条件にしない。今回承認の追加一回は消費済み。
