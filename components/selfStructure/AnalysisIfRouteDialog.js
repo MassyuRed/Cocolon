@@ -124,7 +124,7 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
     } finally { controllers.current.delete(controller); if (inFlight.current === token) inFlight.current = null; }
   };
 
-  if (!visible || !ownerId || tier !== 'premium') return null;
+  if (!visible || !ownerId || tier !== 'premium' || state.scope !== scope) return null;
   const show = state.scope === scope ? state : { panel: mode === 'saved' ? 'saved_intent' : 'form' };
   const recovery = show.recovery || (pendingOperation ? { context: pendingOperation[0], method: pendingOperation[1].method } : null);
   const formLocked = busy || !!recovery;

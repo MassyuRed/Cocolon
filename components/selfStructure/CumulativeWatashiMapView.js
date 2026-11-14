@@ -11,6 +11,8 @@ import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
 import WatashiMapV2Renderer from './WatashiMapV2Renderer';
 import SemanticWatashiMap from './SemanticWatashiMap';
 import AnalysisIfRouteDialog from './AnalysisIfRouteDialog';
+import MapInterpretationCorrectionDialog from './MapInterpretationCorrectionDialog';
+import { checkedMapCorrectionEvidenceItems, mapCorrectionEvidence } from './mapCorrectionContract';
 import { checkedMapRow, checkedCurrentResult } from './cumulativeMapContract';
 import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
 import CocolonButton from '../CocolonButton';
@@ -52,6 +54,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const [compare, setCompare] = useState(false);
   const [about, setAbout] = useState(false);
   const [ifDialog, setIfDialog] = useState(null);
+  const [mapCorrection, setMapCorrection] = useState(null);
+  const [correctionNotice, setCorrectionNotice] = useState(null);
   const stateRef = useRef(state);
   stateRef.current = state;
   const compareRef = useRef(compare);
@@ -119,11 +123,15 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     setAbout(false);
     setEvidence(null);
     setIfDialog(null);
+    setMapCorrection(null);
+    setCorrectionNotice(null);
   }, [key]);
 
   useEffect(() => {
     const version = state.row?.content_json?.watashiMap?.projection_of;
     setIfDialog(previous => previous?.visible && previous.mode === 'create' && previous.baseMapRef !== version
+      ? { ...previous, visible: false } : previous);
+    setMapCorrection(previous => previous?.visible && previous.projection?.projection_of !== version
       ? { ...previous, visible: false } : previous);
   }, [state.row?.content_json?.watashiMap?.projection_of]);
 
@@ -190,7 +198,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     setEvidence({ key, loading: true });
     try {
       const data = await apiGet(buildSelfStructureEvidencePath(row.id, nodeRef, row.snapshot_month), { expectedUserId: owner });
-      if (currentKey.current === key && evidenceRequest.current === seq) setEvidence({ key, items: data?.items || [] });
+      const items = checkedMapCorrectionEvidenceItems(data?.items || []);
+      if (currentKey.current === key && evidenceRequest.current === seq) setEvidence({ key, items });
     } catch {
       if (currentKey.current === key && evidenceRequest.current === seq) setEvidence({ key, error: true });
     }
@@ -219,6 +228,12 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             const target = map.nodes.find(node => node.node_ref === branchRef) || map.edges.find(edge => edge.edge_ref === branchRef);
             if (target) setIfDialog({ key, visible: true, mode: 'create', baseMapRef: map.projection_of,
               branchPointId: branchRef, branchLabel: target.title || target.label });
+          } : undefined}
+          onCorrectMap={!reportId ? (kind, targetRef) => {
+            const map = row.content_json.watashiMap;
+            if (currentKey.current !== key || stateRef.current.row?.content_json?.watashiMap?.projection_of !== map.projection_of) return;
+            setCorrectionNotice(null);
+            setMapCorrection({ key, visible: true, projection: map, kind, targetRef });
           } : undefined} />
       : <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
           onOpenEvidence={node => showEvidence(row, node)} />}
@@ -251,6 +266,9 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         更新結果を取得できませんでした。再取得で確認できます。
       </Text> : null}
       {visible && state.error ? <Text style={styles.error} accessibilityRole="alert">{state.error}</Text> : null}
+      {correctionNotice?.key === key ? <Text style={[styles.bodyText, { color: ink }]} accessibilityLiveRegion="polite">
+        {correctionNotice.text}
+      </Text> : null}
       {visible && state.empty && !pendingRefresh(state.refreshStatus) ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
       {visible && state.row ? <>
         {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
@@ -280,6 +298,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
           {evidence?.loading ? <ActivityIndicator color={colors.TITLE_GOLD} /> : null}
           {evidence?.error ? <Text style={styles.error}>記録を取得できませんでした。</Text> : null}
           {evidence?.items?.map(item => <View key={item.id} style={styles.notice}>
+            {item.evidence_scope === 'MAP_CORRECTION_CONTEXT' ? <Text style={styles.label}>訂正対象の分析で参照した記録</Text> : null}
             <Text style={[styles.meta, { color: ink }]}>{dateLabel(item.created_at)}</Text>
             {item.version_state !== 'CURRENT' ? <Text style={[styles.bodyText, { color: ink }]}>この記録は分析後に編集されています。以下は現在の内容です。</Text> : null}
             {item.memo ? <><Text style={styles.label}>思考内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo}</Text></> : null}
@@ -287,6 +306,14 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             {item.answers?.length ? <Text style={styles.label}>本人補足</Text> : null}
             {item.answers?.map((answer, index) => <Text key={index} style={[styles.record, { color: ink }]}>補足：{answer}</Text>)}
           </View>)}
+          {mapCorrectionEvidence(evidence?.items).length ? <View style={styles.notice}>
+            <Text style={styles.label}>本人によるマップ訂正</Text>
+            {mapCorrectionEvidence(evidence?.items).map(correction => <View key={correction.correction_id} style={{ gap: 8 }}>
+              <Text style={[styles.meta, { color: ink }]}>{dateLabel(correction.recorded_at)}</Text>
+              {correction.version_state !== 'CURRENT' ? <Text style={[styles.bodyText, { color: ink }]}>訂正の対象となる記録やマップの状態が変わっています。以下は当時保存した本人の説明です。</Text> : null}
+              <Text style={[styles.record, { color: ink }]}>{correction.text}</Text>
+            </View>)}
+          </View> : null}
         </ScrollView>
         <CocolonButton variant="secondary" onPress={closeEvidence} title="閉じる" />
       </View></SafeAreaView></SafeAreaProvider>
@@ -296,6 +323,21 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       onClose={() => setIfDialog(previous => previous ? { ...previous, visible: false } : null)}
       ownerId={owner} tier={tier} baseMapRef={ifDialog?.baseMapRef} branchPointId={ifDialog?.branchPointId}
       branchLabel={ifDialog?.branchLabel} mode={ifDialog?.mode} colors={colors} themeName={themeName} />
+    <MapInterpretationCorrectionDialog
+      visible={!!mapCorrection?.visible && mapCorrection.key === key && !planLoading && focused && appActive
+        && mapCorrection.projection?.projection_of === state.row?.content_json?.watashiMap?.projection_of}
+      onClose={() => setMapCorrection(previous => previous ? { ...previous, visible: false } : null)}
+      onSaved={result => {
+        if (currentKey.current !== key) return;
+        setCorrectionNotice({ key, text: result.source_state === 'STALE'
+          ? '訂正を保存しました。当時の読み取りへの説明として保持されています。'
+          : result.refresh_status === 'failed'
+            ? '訂正を保存しました。分析の更新結果は、再取得して確認してください。'
+            : '訂正を保存しました。分析の更新が完了してから、読み直した結果を確認できます。' });
+        load(compareRef.current, false, true);
+      }}
+      ownerId={owner} projection={mapCorrection?.projection} kind={mapCorrection?.kind}
+      targetRef={mapCorrection?.targetRef} colors={colors} themeName={themeName} />
   </Container>;
 }
 
