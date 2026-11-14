@@ -456,7 +456,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | 本人原根拠材料をnatural OBSと同時保存し三中核へ接続（§9.62）。成立意味GENERATED／未対応NOT_GENERATED・UNASSESSED。長履歴分割・跨ぐ関係・全量意味品質は未完 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61／62／67／68を継承。§9.69の二入力訂正sourceに必要な既存SQL拡張とAPI／worker e5a1dc6が双方Live。RN明示選択はsource反映、native19失敗・build／配布／本人実機保留を維持。稼働監視を実job成功・一般品質・補助全体完了へ換算しない |
+| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61／62／67／68を継承。§9.69の二入力訂正sourceに必要な既存SQL拡張とAPI／worker e5a1dc6が双方Live。RN明示選択はsource反映。§9.70でV4 19失敗を修復・通常source採用し20/20＋小数24/24成功。WholeCanvas資源拒否と新たなretained-card Aの候補探索拒否は未完、build／配布／本人実機保留を維持。稼働監視を実job成功・一般品質・補助全体完了へ換算しない |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -4072,7 +4072,15 @@ shell構文・workflow内Python compile、104marker／late_clip_stability73・�
 
 ### 統合検査と残差
 
-INTEGRATION_RESULT_PENDING
+同runは全job終端、**5job success／RN canvas1job failureでworkflow全体はfailure**。canvas job132622052982は6 XCTest中4成功／2失敗、root assertion32件＝retained-card transition23＋WholeCanvas9。成功4methodは通常bitmap group・明示renderer group・保存export group・記録済みmodel73 groupで、全group件数を商品入力の固有数へ合計しない。
+
+- WholeCanvasは元13報告のうち`quote_unicode`だけが未成立。旗絵文字を含む第2行・font80・local V4のraster planが3481×1285＝4,473,085px、4Mi上限超過（mask256／stage15）で拒否。隣接行・brandingのV4は成立。今回のinverse-clip比較不一致ではない。通常.mm581時の広い占有不一致を継承したままとは記録せず、今回の残差をこの資源拒否へ分ける。
+- **新たに観測した失敗：** `visual_transition_retained_card_regression_A`が222.224msで`native_candidates_unavailable`。font48／44の候補探索6callが64〜98msで拒否され、plan0・selected0・bitmapなし。8秒timeoutやV4の占有比較失敗に分類しない。同じgroupのparent-loading A／Bとretained Bはnative_checkedで、それぞれ約1232／570／479ms。Aが不成立なのでA→Bの失効・置換・遅延callback検査の成功は認定しない。前回成功を今回へ流用せず、根本原因・変更との因果は未確定とする。
+- candidate探索native ownerと通常bitmap作者は親から全bytes不変。変更したV4比較へ到達する前の拒否であることまでは絞れたが、不変sourceだけを理由に既存障害・環境問題・無害へ断定しない。新しい診断機構、描画強制・検査skip、期限／資源緩和、同run再実行は追加していない。
+
+canvas artifact14136619921（75,438,962bytes／SHA256=d29571874ed601a2f7fa050f21b0b52927c7169ec1e51e6af47c89d69feaecdd）を回収しZIP CRCと全6組の実JSONを確認。32assertionのmethod／元source行／冒頭式、各caseのphase／reason／時間、候補拒否6callとevidence JSON hashを上記実行原本へ保存した。実ユーザー本文・鍵・snapshot token・raw内部URLは転載しない。
+
+**既存V4 19失敗の修復・元20対照と小数24対照の現行版成功・通常RN source採用の限定単位は完了。** 全画面画像／visual transitionの合格は未完。通常DB／API反映済みの§9.69を取り消さず、この画像source修復を一般的な訂正理解・追加4B品質の完成へ換算しない。
 
 通常API／workerは前回e5a1dc68の指定2deployがLiveのままと読取確認。稼働DBのpiece_natural_effective_round_sources／piece_interpretation_correction_source履歴は20261114192124／20261114215806を維持。今回API／DBの再配置・migration0。既存比較関数のsource／検査pinを通常RN正本へ反映する単位で、保留中の署名・TestFlight／本人実機を実行していない。
 

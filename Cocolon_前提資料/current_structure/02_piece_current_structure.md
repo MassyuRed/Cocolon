@@ -4344,7 +4344,7 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。実行と保存は成立したが、候補の全品質改善・AR-04完了・商品受入れは未成立。 [実49・時制退行・144保存と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-actual-20261111)。
 
 
-> **11/15の採用状態：** 下段11/12は隔離比較当時の履歴。現在は研究3646と同一のclip参照修復を通常`PieceTextMetrics.mm`と既存runnerへ採用し、通常7568f6f0で元V4 20/20・小数24/24・既存native／bitmap群の成功を確認。RN統合描画の最終結果は実行中。通常bitmapのprofile選択・作者・保存契約は変更0、WholeCanvas残差は別に保持する。 [現行の結果と境界§9.70](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-v4-normal-adoption-20261115)。
+> **11/15の採用状態：** 下段11/12は隔離比較当時の履歴。現在は研究3646と同一のclip参照修復を通常`PieceTextMetrics.mm`と既存runnerへ採用し、通常7568f6f0で元V4 20/20・小数24/24・既存native／bitmap群の成功を確認。統合canvasはWholeCanvasの4Mi上限と新たなretained-card Aの候補探索拒否で2method失敗、画像全体は未完。通常bitmapのprofile選択・作者・保存契約は変更0、WholeCanvas残差は別に保持する。 [現行の結果と境界§9.70](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-v4-normal-adoption-20261115)。
 
 <a id="piece-v4-inverse-clip-support-20261112"></a>
 ## 11/12 AR-04 — 小数寸法のclip支持・逆写像配置の隔離比較

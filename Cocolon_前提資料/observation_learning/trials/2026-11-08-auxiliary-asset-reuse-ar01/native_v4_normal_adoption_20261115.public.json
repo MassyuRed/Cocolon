@@ -5341,5 +5341,1003 @@
       1350
     ],
     "local_member_readback": true
+  },
+  "integration": {
+    "run_conclusion": "failure",
+    "jobs_successful": 5,
+    "jobs_failed": 1,
+    "canvas_job": 132622052982,
+    "tests_count": 6,
+    "tests_failed_count": 2,
+    "assertions": [
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1366,
+        "assertion": "((report[@\"phase\"]) equal to (@\"native_checked\")) failed: (\"unavailable\") is not equal to (\"native_checked\") - {"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1366,
+        "assertion": "((report[@\"body_preserved\"]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1370,
+        "assertion": "((report[@\"native_canvas_valid\"]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1370,
+        "assertion": "((report[@\"bitmap_all_cells_equal\"]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1370,
+        "assertion": "((report[@\"capture_error\"]) equal to (@NO)) failed: (\"1\") is not equal to (\"0\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1371,
+        "assertion": "((bitmap[@\"version\"]) equal to (@\"piece.native_bitmap_canvas.v1\")) failed: (\"(null)\") is not equal to (\"piece.native_bitmap_canvas.v1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1371,
+        "assertion": "((bitmap[@\"checked\"]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1372,
+        "assertion": "((report[@\"native_texts\"]) equal to (texts)) failed: (\"(null)\") is not equal to (\"("
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1373,
+        "assertion": "((t[@\"fit_current\"]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1373,
+        "assertion": "((report[@\"save_fit_current\"]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1389,
+        "assertion": "((t[@\"native_bitmap\"][@\"image_present\"]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1389,
+        "assertion": "((t[@\"native_bitmap\"][@\"native_identity_current\"]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1390,
+        "assertion": "(([filename isKindOfClass:NSString.class]) is true) failed"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1376,
+        "assertion": "((t[key]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\") - bitmap_token_changed"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1376,
+        "assertion": "((t[key]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\") - old_fit_revoked"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1377,
+        "assertion": "((t[@\"native_bitmap\"][key]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\") - observed_A"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1377,
+        "assertion": "((t[@\"native_bitmap\"][key]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\") - old_image_cleared"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1377,
+        "assertion": "((t[@\"native_bitmap\"][key]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\") - old_host_detached"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1377,
+        "assertion": "((t[@\"native_bitmap\"][key]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\") - old_identity_rejected"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1377,
+        "assertion": "((t[@\"native_bitmap\"][key]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\") - new_native_identity_current"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1377,
+        "assertion": "((t[@\"native_bitmap\"][key]) equal to (@YES)) failed: (\"(null)\") is not equal to (\"1\") - new_host_differs"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1386,
+        "assertion": "((t[@\"controlled_old_callback_injected\"]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative]",
+        "line": 1386,
+        "assertion": "((t[@\"controlled_old_callback_ignored\"]) equal to (@YES)) failed: (\"0\") is not equal to (\"1\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1504,
+        "assertion": "((report[@\"phase\"]) equal to (@\"native_checked\")) failed: (\"unavailable\") is not equal to (\"native_checked\") - {"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1506,
+        "assertion": "(([report[@\"native_canvas_valid\"] boolValue]) is true) failed - {"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1507,
+        "assertion": "(([report[@\"capture_error\"] boolValue]) is false) failed"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1512,
+        "assertion": "((report[@\"save_fit_current\"]) equal to (@(preview))) failed: (\"0\") is not equal to (\"1\") - quote_unicode"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1514,
+        "assertion": "((report[@\"save_fit_handle_keys\"]) equal to (preview ? @[@\"isCurrent\"] : @[])) failed: (\"("
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1200,
+        "assertion": "((all.count) equal to (rows.count+([report[@\"branding\"]boolValue]?1:0))) failed: (\"0\") is not equal to (\"4\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1221,
+        "assertion": "((contexts.count) greater than (0u)) failed: (\"0\") is not greater than (\"0\")"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1230,
+        "assertion": "((report[@\"png\"]) != nil) failed"
+      },
+      {
+        "method": "-[PieceRNCanvasTests testWholeCanvasWithRealReactNative]",
+        "line": 1519,
+        "assertion": "((report[@\"png\"]) != nil) failed"
+      }
+    ],
+    "group_case_summary": {
+      "visual-transition-results": [
+        {
+          "case": "visual_transition_parent_loading_remount_A",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 1231.6189999999478,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "visual_transition_parent_loading_remount_B",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 569.6622499998193,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "visual_transition_retained_card_regression_A",
+          "phase": "unavailable",
+          "reason": "native_candidates_unavailable",
+          "elapsed_ms": 222.2235830000136,
+          "png_present": false,
+          "capture_error": true
+        },
+        {
+          "case": "visual_transition_retained_card_regression_B",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 478.92004100000486,
+          "png_present": true,
+          "capture_error": 0
+        }
+      ],
+      "results": [
+        {
+          "case": "essay_paragraphs",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 982.2196669999976,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "quote_unicode",
+          "phase": "unavailable",
+          "reason": "native_measurement_unavailable",
+          "elapsed_ms": 400.79262500000186,
+          "png_present": false,
+          "capture_error": true
+        },
+        {
+          "case": "declaration_no_brand",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 1001.7815839999821,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "essay_max420",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 7433.719958000118,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "saved_essay_canvas",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 407.43687499989755,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "suffix_latin_ligature",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 373.20470799994655,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "suffix_arabic",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 451.3499999998603,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "suffix_max420_a",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 4513.796750000212,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "suffix_spaces_raw",
+          "phase": "measurement_checked",
+          "reason": null,
+          "elapsed_ms": 195.57224999996834,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "suffix_hebrew_raw",
+          "phase": "measurement_checked",
+          "reason": null,
+          "elapsed_ms": 162.20891700009815,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "suffix_mixed_bidi_raw",
+          "phase": "measurement_checked",
+          "reason": null,
+          "elapsed_ms": 163.97724999999627,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "containment_native_clip_trap",
+          "phase": "measurement_checked",
+          "reason": null,
+          "elapsed_ms": 131.98341599991545,
+          "png_present": true,
+          "capture_error": null
+        },
+        {
+          "case": "containment_branding_opacity08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 369.61216600006446,
+          "png_present": true,
+          "capture_error": null
+        }
+      ],
+      "bitmap-results": [
+        {
+          "case": "bitmap_essay_paragraphs",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 914.251707999967,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_quote_unicode",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 407.7129170000553,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_declaration_no_brand",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 417.5248749998864,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_essay_max420",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 5962.5796670001,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_suffix_latin_ligature",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 248.15791699988768,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_suffix_arabic",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 275.50091599998996,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_suffix_max420_a",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 3570.3570419999305,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_containment_branding_opacity08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 333.8929580000695,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_suffix_spaces_raw",
+          "phase": "bitmap_checked",
+          "reason": null,
+          "elapsed_ms": 55.96625000005588,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_suffix_hebrew_raw",
+          "phase": "bitmap_checked",
+          "reason": null,
+          "elapsed_ms": 44.40170800010674,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_suffix_mixed_bidi_raw",
+          "phase": "bitmap_checked",
+          "reason": null,
+          "elapsed_ms": 51.869332999922335,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "bitmap_host_crop_trap",
+          "phase": "unavailable",
+          "reason": "native_bitmap_invalidated",
+          "elapsed_ms": 537.2794170000125,
+          "png_present": false,
+          "capture_error": true
+        }
+      ],
+      "admitted-results": [
+        {
+          "case": "admitted_preview_essay_paragraphs",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 2425.312957999995,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_essay_paragraphs",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 1130.7427080001216,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_quote_unicode",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 581.7557079999242,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_quote_unicode",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 368.3973340000957,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_declaration_no_brand",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 510.90804199990816,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_declaration_no_brand",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 372.85941699985415,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_essay_max420",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 6190.169292000122,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_essay_max420",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 6169.9217499999795,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_suffix_latin_ligature",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 336.99841700005345,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_suffix_latin_ligature",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 224.5908749999944,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_suffix_arabic",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 233.2218329999596,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_suffix_arabic",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 233.39549999986775,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_suffix_max420_a",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 3511.9202499999665,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_suffix_max420_a",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 3240.0791660000104,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_containment_branding_opacity08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 276.0675000001211,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_containment_branding_opacity08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 230.70408300007693,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_ar04_recorded_viewpoint",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 423.55066700000316,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_ar04_recorded_viewpoint",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 304.236167000141,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_ar04_current_wire_activity",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 367.6516670000274,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_ar04_current_wire_activity",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 295.99620799999684,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_ar04_passive_register_held03",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 393.6136670000851,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_ar04_passive_register_held03",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 374.81508299987763,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_ar04_passive_order_held_b2",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 409.35670900018886,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_ar04_passive_order_held_b2",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 313.28733299998567,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_ar04_passive_passive_held08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 352.70625000004657,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_ar04_passive_passive_held08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 306.23287499998696,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_preview_ar04_passive_fresh15",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 369.55995800020173,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_saved_ar04_passive_fresh15",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 315.56258300016634,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "admitted_host_crop_trap",
+          "phase": "unavailable",
+          "reason": "native_bitmap_invalidated",
+          "elapsed_ms": 558.6482090000063,
+          "png_present": false,
+          "capture_error": true
+        }
+      ],
+      "export-results": [
+        {
+          "case": "export_saved_essay_paragraphs",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 1134.8904999999795,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_quote_unicode",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 374.1258749999106,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_declaration_no_brand",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 418.8546249999199,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_essay_max420",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 5399.802708999952,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_suffix_latin_ligature",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 190.9592499998398,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_suffix_arabic",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 203.88375000003725,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_suffix_max420_a",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 3388.552125000162,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_containment_branding_opacity08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 268.7102500000037,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_ar04_recorded_viewpoint",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 391.308083999902,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_ar04_current_wire_activity",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 390.55366700002924,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_ar04_passive_register_held03",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 381.6646249999758,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_ar04_passive_order_held_b2",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 276.38575000013225,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_ar04_passive_passive_held08",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 364.32220899988897,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_saved_ar04_passive_fresh15",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 383.81266700010747,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "export_reject_clear",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 510.5912500000559,
+          "png_present": false,
+          "capture_error": null
+        },
+        {
+          "case": "export_reject_removed",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 460.02170799998567,
+          "png_present": false,
+          "capture_error": null
+        },
+        {
+          "case": "export_reject_token",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 569.2257499999832,
+          "png_present": false,
+          "capture_error": null
+        },
+        {
+          "case": "export_reject_binding",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 443.82045799982734,
+          "png_present": false,
+          "capture_error": null
+        },
+        {
+          "case": "export_reject_multiple",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 462.1612080000341,
+          "png_present": false,
+          "capture_error": null
+        },
+        {
+          "case": "export_reject_during",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 463.4959590001963,
+          "png_present": false,
+          "capture_error": null
+        }
+      ],
+      "model73-results": [
+        {
+          "case": "model73_preview_ar04_344a_past_preference",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 429.61825000005774,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "model73_saved_ar04_344a_past_preference",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 401.4676249998156,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "model73_export_ar04_344a_past_preference",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 307.8298749998212,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "model73_preview_ar04_344a_refined_three_blocks",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 386.13683299999684,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "model73_saved_ar04_344a_refined_three_blocks",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 334.66674999985844,
+          "png_present": true,
+          "capture_error": 0
+        },
+        {
+          "case": "model73_export_ar04_344a_refined_three_blocks",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 302.71883400017396,
+          "png_present": true,
+          "capture_error": 0
+        }
+      ]
+    },
+    "retained_card_A": {
+      "reason": "native_candidates_unavailable",
+      "elapsed_ms": 222.2235830000136,
+      "trace_states": [
+        {
+          "state": "planning:0",
+          "elapsed_ms": 41.87779200007208
+        },
+        {
+          "state": "unavailable:0",
+          "elapsed_ms": 174.59312500013039
+        }
+      ],
+      "candidates": [
+        {
+          "status": "rejected",
+          "utf16_length": 15,
+          "font_size": 48,
+          "elapsed_ms": 64.33645799988881,
+          "method": "measureExplorationCandidates",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "utf16_length": 15,
+          "font_size": 48,
+          "elapsed_ms": 95.45766699989326,
+          "method": "measureExplorationCandidates",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "utf16_length": 9,
+          "font_size": 48,
+          "elapsed_ms": 95.81095799989998,
+          "method": "measureExplorationCandidates",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "utf16_length": 15,
+          "font_size": 44,
+          "elapsed_ms": 92.6860830001533,
+          "method": "measureExplorationCandidates",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "utf16_length": 15,
+          "font_size": 44,
+          "elapsed_ms": 93.17216699989513,
+          "method": "measureExplorationCandidates",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "utf16_length": 9,
+          "font_size": 44,
+          "elapsed_ms": 97.99420800013468,
+          "method": "measureExplorationCandidates",
+          "content_width": null
+        }
+      ],
+      "adapters": [
+        {
+          "status": "rejected",
+          "font_size": 48,
+          "elapsed_ms": 64.80420800019056,
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "font_size": 48,
+          "elapsed_ms": 95.73066699993797,
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "font_size": 48,
+          "elapsed_ms": 96.23795800004154,
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "font_size": 44,
+          "elapsed_ms": 93.01845799991861,
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "font_size": 44,
+          "elapsed_ms": 93.36504100007005,
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "content_width": null
+        },
+        {
+          "status": "rejected",
+          "font_size": 44,
+          "elapsed_ms": 98.21629199991003,
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "content_width": null
+        }
+      ],
+      "plan_count": 0,
+      "selected_count": 0,
+      "bitmap_present": false
+    },
+    "retained_card_B": {
+      "phase": "native_checked",
+      "reason": null,
+      "elapsed_ms": 478.92004100000486
+    },
+    "whole_quote_boundary": {
+      "case": "quote_unicode",
+      "font_size": 80,
+      "stage": "local",
+      "first_failure_stage": 15,
+      "raster_columns": 3481,
+      "raster_rows": 1285,
+      "area": 4473085,
+      "limit": 4194304,
+      "failure_mask": 256
+    },
+    "attribution": "V4 inverse comparison fixed; transition candidate rejection precedes V4/bitmap; actual cause and change attribution unproven",
+    "artifact": {
+      "id": 14136619921,
+      "size_bytes": 75438962,
+      "sha256": "d29571874ed601a2f7fa050f21b0b52927c7169ec1e51e6af47c89d69feaecdd",
+      "crc_verified": true
+    },
+    "evidence_json_sha256": {
+      "model73-results.json": "6045b7be14917679fbdde9f9915b1c2ae73d7b1c516d3b46627e0a7fe30024cf",
+      "export-results.json": "3b0df4c369992a0749e4519fbfe7ae448b9c03a0e9e925c9d4171e7d733a25b6",
+      "visual-transition-results.json": "485a9b58208c312e4acd2eaa54185e7d385f49a3fd4feea036ac53baf0b5ecec",
+      "admitted-results.json": "eb78b256dd03af9ab01eb8dc9edaf35069459012452237b7c1742be0fd3b34d1",
+      "bitmap-results.json": "213139265f7c57fc565d88c7b1eed6c5ace1326aeb36d234349984183135cbfc",
+      "results.json": "9cc6f228be3b6a020c73a09956f9f0df860920e4bc136a8375026ad756b846a6"
+    }
   }
 }
