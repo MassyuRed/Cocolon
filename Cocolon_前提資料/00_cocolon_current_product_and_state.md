@@ -1,3 +1,5 @@
+> **11/14・第11回報告会はMashの明示で終了。** [終了記録・継続指示§9](weekly_reviews/Cocolon_Weekly_Review_20261114.md#meeting-closed-and-continuation-20261114)。当面は§5の補助経路活用全体完了を主枠として引き継ぐ。再開時は最新議事録と補助設計§9.54／§11.2／§12から、三中核・Cocolon全体を踏まえ、通常適用まで含む未完単位を選ぶ。短い継続指示でも解決し、必要な前提・作業規則確認と資料差分更新を毎回Mashへ列挙させない。公開日未定・12/6候補・61.625％と商品未完状態は維持。新しい製品実行・全体完了の認定はない。
+
 > **11/14・補助経路活用の全体完了を当面の最優先主枠へ改訂：** Mashの集中案・全体で作業する指示を受け、[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を四作業へ置換。本人更新を三中核へ通す、意味／内容選択を実商品へ働かせる、蓄積・マップ訂正・IF／Savedを接続し、各能力の通常適用AR-08まで同じ単位で閉じる。[補助設計§9.54](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-completion-focus-20261114)と現在再開欄も更新し、旧局所比較の次手へ戻さない。必要能力の未実装・未接続・商品未適用を残して全体完了にせず、全日本語・全アプリ完成へ条件も拡大しない。最小共通枠と独立した候補仕上げを分ける。11/21は全体完了目標の判定点、保証は置かず、未完と12/6への影響を示す。公開日未定・12/6提出可能候補・61.625％評価は維持。
 
 > **11/14・公開日は未定、12/6までに提出可能候補。** 12/18公開前提はMashが撤回、旧逆算線は失効。日程の当面採用後、対象週の主枠は補助活用全体完了へ再配置した（第11回§5・7・8.5）。11/21の補助実成果・未完判定を基に、補助残工事と候補仕上げの配分を具体化し、12/6に候補の実物・確認結果・資料を揃える。実申請・承認・公開の日ではなく、対象OS・既決機能の自動削減や期限の自動延長はない。
@@ -142,7 +144,7 @@
 
 更新日：2026-11-14 JST（最新差分：対象週を補助経路活用全体の完了へ集中する計画へ改訂。本人更新・実商品改善・蓄積／IF／Savedと能力別通常適用を主枠とし、補助設計の現在再開先も更新。公開日未定・12/6候補は維持、実績・完成度の加点なし）。全Cocolon作業の必読原本。
 
-> **最新報告会：[第11回・2026-11-14、対象週11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)は開催中。** 最新は§5の補助活用全体完了集中計画と§8.5のMashの指摘・華恋の意見。本人source・更新・意味責務を三中核へ通し、各能力の通常反映まで閉じる。§1／1.9の実績、§4の全残件、§6の同尺度61.63％、公開日未定・12/6候補を継承する。旧W1〜15と初回日程案は履歴にし、局所修復へ戻る設計の再開欄を更新した。[第10回](weekly_reviews/Cocolon_Weekly_Review_20261107.md)の実結果・本人確認・公開後改善方針は保持。
+> **最新報告会：[第11回・2026-11-14、対象週11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)はMashの明示で終了。** §5の補助活用全体完了集中計画、§8.5の全体で捉える指摘と意見、補助設計の現在再開先を引き継ぐ。§9に終了・短い継続指示を記録。§1／1.9の実績、§4の全残件、§6の61.63％、公開日未定・12/6候補は維持。旧局所比較を全体の次手へ戻さず、通常適用まで同じ単位で閉じる。
 
 > **前回の方針・既決仕様：[第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
 
@@ -351,7 +353,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | [第11回・11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)、開催中。最新§5は補助活用全体完了へ主枠を集約、§8.5にMashの集中案・局所修正へ戻る指摘と華恋の見解を記録。補助設計§9.54／現在再開欄も同期。§1／1.9実績・§4全残件・§6同尺度61.625％・公開日未定／12/6候補は維持。旧計画は履歴、商品完了・会議終了・新実環境効果はない。実結果は各weekly・trialとAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る |
+| 最新判断・配置記録 | [第11回・11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)は終了。§9にMashの終了明示・継続指示、§5に補助全体完了主枠の計画、§8.5に指摘と意見を記録。補助設計§9.54／現在再開欄を次作業へ引き継ぐ。実績・全残件・同尺度61.625％・公開日未定／12/6候補は維持。会議終了を商品完成や実環境操作済みへ変換しない。実結果は各weekly・trialとAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
