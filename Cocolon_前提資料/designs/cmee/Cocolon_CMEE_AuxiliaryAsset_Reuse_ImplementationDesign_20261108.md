@@ -1787,7 +1787,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/15・現在の再開先：第11回§5の四作業を維持し、§9.75の実測が示すnode参照と未遂／完了の誤りを現semantic ownerで修復する。** §9.72の実回答とその後の本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3と条件表示、§9.68の有効source／Saved印は成立済みとして繰り返さない。現在API／workerは24bc228d Live、長履歴候補f5d8967は未配置。
+**11/15・現在の再開先：第11回§5の四作業を維持し、§9.84の具体的な主体・対象・時点・完了状態を先に読む修正版の実本文を確認する。** §9.72の実回答とその後の本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3と条件表示、§9.68の有効source／Saved印は成立済みとして繰り返さない。現在API／workerは24bc228d Live、長履歴候補f5d8967は未配置。
 
 §9.75の最新実測・残件を優先する。§9.73の元98fileと補足ZIPは送付済みで再送しない。依存解消後に承認された追加一回は、第一LEAFの210.305秒timeout・本文未受領で終了し許可を消費した。無修補raw・前後2GET・提供stageは同trialに保存済み。新候補bdf39198359f7e205b263657442f80215f6b0725の短文引用選択と期限層／段階数予算は非生成検証済みだが、Podへ送付せず通常配置もしない。次は完成応答を得るための送付差分と実行上限を具体化し、実workerのstaleとsource取得／保存を含む期限を照合する。旧8分一回許可を再利用せず、別の明示承認前に新モデル要求を行わない。原入力と図・全文・両端根拠を照合できる完成rawが得られてから、同版保存再読と採用可能な通常API／worker反映へ進める。一般品質・AR-07／補助全体未完、build／本人実機保留を維持する。
 
@@ -4545,3 +4545,24 @@ fla-core0.6.0はGPU可視時にGluon.extraを要求し、既存Triton3.4.0では
 実GPUは同provider envでNVIDIA RTX 4000 Ada Generation／SM8.9／20991901696byteと確認した。先行のA5000／SM8.6を前提にした検査条件は誤りであり、通常機種・費用・性能をその記憶から推定しない。失敗compat proofを保持し、新Ada proofは実名とSM8.9へ厳密に束縛して確認した。4関数が実FLA／causalへdispatchし、GDN output／state4比較とconv output／update／state3比較の計7件が有限・基準内。元baseline sourceと隔離deps treeは前後同一、重みロード0・モデル要求0。1752tokenのkernel warm2回は9.293350780848414秒と0.001780638936907053秒、全検査77.10029265098274秒。これは単独kernelの時間であり、アプリ生成速度の改善実測とは区別する。成功proof原本kernel_proof_actual_20261115/warm-ada-proof.json SHA25628908c29ee066397bcc1a3326eefe41453ce159c11a90eec06f691932fc7675e。
 
 次のsemantic_reader_adapter_base_once_20261115.pyはSHA25648df0a65a00233e9a55fc4d04e145799f05c57b9ae1c6a4c6099b6751d4022a6／23120bytes。学習へ混ぜない新規架空2記録／4欄、同messages722924e9／8567byte／実1752tokenを、現120u adapterと同base851bf6eのadapter無効化で各1POSTだけ比較する。base model IDはcocolon-qwen3.5-4b-analysis-base-851bf6e-candidateと明示し、candidate内のanalysis_base profileだけを追加する。両条件は同grammar／4096出力／32768context／90秒上限、nativeもglobal2要求上限。元natural／Pieceの2048／8192と現adapterの通常挙動は維持する。driver220秒、準備取得300秒、元提供復元込み420秒、学習／retry／SQL保存0。元提供117766のargv／env／cwdは同Pod内RAMから復元する。比較結果がよくても全12履歴の成立証明や通常採用とはしない。
+
+
+<a id="analysis-concrete-reading-adapter-base-20261115"></a>
+## 9.84 11/15 — 同じ架空2記録のadapter比較と、具体的な出来事から読む指示への修正
+
+§9.83の準備済み48df0a65スクリプトを一回実行した。原本とproofのSHA、遠隔一回root不存在、元提供PID117766とhealth200をfreshに確認した。既存端末にread-only確認の入力不成立があり、新端末へ接続した。誤入力は比較スクリプトの起動前で、生成・提供変更は0。その後、固定した同一2記録／4欄・messages722924e9／1752入力token、同一grammarと4096出力予約・32768context・90秒上限でadapter120uとbase851bf6eを各1POSTだけ比較した。
+
+| 条件 | 実結果と採否 |
+|---|---|
+| adapter120u | HTTP200／stop・536scalar・22.098984秒。CMEEで生成受領できたが、overviewの「参加者へ送った未完了」と後日送信済みが矛盾する。会場からの返信を本人も読んだ翌日記録があるのに、返信が来たか未定とする。不採用。二階という引用自体は保持し、階数反転を誤りとして報告しない |
+| base851bf6e・adapter無効 | HTTP200／length・2274scalar・90.905477秒。5nodeとedge途中でJSON未閉。本人の「関わっていない」を「関与の拒否」、案内作成を「主導権を握る」へ強めた。不採用。既知の送信や参加者返信が残る部分だけで全意味成功へ換算しない |
+
+取得driver113.089644秒・停止復元込み156.822579秒。元source／argv／environment／cwdを同Pod内で復元し、health200・元提供PID120452。新しいmodel要求2、学習0・retry0・SQL保存0。実原本6file＋独立原文照合review.jsonは既存trialのreader_adapter_base_actual_20261115へ保存する。回収ZIP SHA256 f8b8704b63263a4a2b83234f4c5aaaf9e18caca98d49286dbda6e4594f57b19a。
+
+API候補4ef9d081a09abb6c755b5ef9b52518e0a39af67aは、既存semantic_admissionの共有説明とLEAF／MERGE説明を、誰が・対象・時点・行動の状態→事実と条件→その範囲の読み、という順へ改訂した。診断の正解内容は指示へ埋め込まない。確認前と確認後を区別し、表示文を本人と実際の出来事の記述へ向ける。厳密なJSON形式以降・enum・原文引用・source guard・条件付き本人訂正／撤回・辞書・compiler・native decoder・公開v3・SQL・RNは変更0。
+
+同sourceで履歴core／planner／serviceは65成功・旧LEAF hash2不一致。指示を変えたため、古い「LEAF不変」test名を現在指示への束縛検査へ変更し、新hash2profileを固定。同rawに旧hashを付けた場合のanalysis_semantic_response_unbound拒否を追加して2件成功した。assertion削除や旧12受領の黙示再利用ではない。新しい指示では旧12LEAFを再束縛できないため、限定実本文が改善した場合も全12を新規取得する。新候補CI／実本文の成功は未主張。
+
+次は同じ既存Pod・同adapter120u・互換隔離kernelを保ち、修正版による固定2記録と別の照明2記録を各1POSTで確認する。baseの再実行・学習はしない。改善未確認の全12再試行はしない。適切な全体mapの同版SQL一回保存・別service非生成再読・通常decoder／API／worker反映まで本単位は未完。通常API／worker24bc228d・DB20261115011424、月次当時版・build／TestFlight／本人実機保留を維持する。
+
+STRUCTURE_MAP_DELTA_NONE：既存意味作者の生成指示のみを変更し、source／権利・writer・API／DB／RN・新serviceを追加しない。補助全体の完成・商品受入れへ加点しない。
