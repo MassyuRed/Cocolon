@@ -77,20 +77,24 @@ export function selectedPieceCorrection(dto) {
   const corrections = dto.timeline.filter(event => event?.kind === 'CORRECTION');
   const observations = dto.timeline.filter(event => event?.kind === 'OBSERVATION');
   const current = observations.filter(event => event.is_current === true);
-  if (corrections.length !== 1 || observations.length !== 2 || current.length !== 1 ||
+  if (corrections.length < 1 || observations.length !== corrections.length + 1 || current.length !== 1 ||
       dto.timeline.some(event => ['QUESTION', 'ANSWER'].includes(event?.kind)) ||
       current[0].event_id !== dto.current_observation.event_id || current[0].stage !== 'CORRECTED' ||
       current[0].round_index !== 0) return null;
-  const correction = corrections[0];
-  const target = observations.find(event => event.event_id === correction.target_event_id);
-  if (!savedIdentity(correction.event_id) || correction.assessment !== 'UNASSESSED' ||
-      typeof correction.text !== 'string' || !correction.text.trim() ||
-      typeof correction.target_text !== 'string' || !correction.target_text.trim() ||
-      !savedIdentity(correction.target_event_id) || !target || target === current[0] ||
-      target.stage !== 'INITIAL' || target.round_index !== 0 ||
-      dto.timeline.indexOf(target) >= dto.timeline.indexOf(correction) ||
-      dto.timeline.indexOf(correction) >= dto.timeline.indexOf(current[0])) return null;
-  return correction;
+  if (observations[0].stage !== 'INITIAL' || observations[0].round_index !== 0 ||
+      new Set([...corrections, ...observations].map(event => event.event_id)).size !== corrections.length + observations.length) return null;
+  for (let i = 0; i < corrections.length; i += 1) {
+    const correction = corrections[i], target = observations[i], result = observations[i + 1];
+    if (!savedIdentity(correction.event_id) || correction.round_index !== 0 || correction.assessment !== 'UNASSESSED' ||
+        typeof correction.text !== 'string' || !correction.text.trim() ||
+        typeof correction.target_text !== 'string' || !correction.target_text.trim() ||
+        !savedIdentity(correction.target_event_id) || correction.target_event_id !== target.event_id ||
+        result.stage !== 'CORRECTED' || target.round_index !== 0 || result.round_index !== 0 ||
+        dto.timeline.indexOf(target) >= dto.timeline.indexOf(correction) ||
+        dto.timeline.indexOf(correction) >= dto.timeline.indexOf(result)) return null;
+  }
+  if (observations[observations.length - 1] !== current[0]) return null;
+  return corrections[corrections.length - 1];
 }
 
 function originalPieceSource(dto) {
@@ -342,8 +346,9 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
         </View>}
         {correction && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
           <Text style={[s.label, textStyle]}>ピースに含めるあなたの説明</Text>
-          <Text selectable style={[s.body, textStyle]}>{correction.text}</Text>
-          <Text style={[s.description, textStyle]}>元の記録と、この説明を使います。</Text>
+          {dto.timeline.filter(event => event.kind === 'CORRECTION').map(event =>
+            <Text key={event.event_id} selectable style={[s.body, textStyle]}>{event.text}</Text>)}
+          <Text style={[s.description, textStyle]}>{dto.timeline.filter(event => event.kind === 'CORRECTION').length === 1 ? '元の記録と、この説明を使います。' : '元の記録と、ここに表示した説明を使います。'}</Text>
         </View>}
         <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>{correction ? '説明を含めてピースを作成' : supplementalAnswer ? "この回答を含めてピースを作成" : "ピースの作成"}</CocolonButton>
         <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisからの応答を閉じる">閉じる</CocolonButton>

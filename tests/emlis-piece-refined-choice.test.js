@@ -101,7 +101,7 @@ async function mount(t, { dto = refined(), os = 'ios', props = {}, threadState =
 
 const { selectedPieceSupplementalAnswer } = loadModal();
 const { selectedPieceCorrection } = loadModal();
-test('only the first saved explanation with its current corrected observation is a visible Piece choice', () => {
+test('a complete first explanation with its current corrected observation is a visible Piece choice', () => {
   const dto = corrected();
   assert.equal(selectedPieceCorrection(dto), dto.timeline[1]);
   assert.equal(selectedPieceSupplementalAnswer(dto), null);
@@ -290,4 +290,33 @@ test('backgrounding, reopening, or unmounting discards the pending selected sour
   const dismiss = unmounted.root.root.findByType('Modal').props.onDismiss;
   await act(async () => unmounted.button().props.onPress()); await unmounted.unmount();
   await act(async () => dismiss()); assert.equal(unmounted.routes.length, 0);
+});
+
+
+function correctedHistory() {
+  const d = corrected(), final = '40000000-0000-4000-8000-000000000009';
+  d.revision += 2;
+  d.timeline[2].is_current = false;
+  d.timeline.push({event_id:OTHER_ANSWER,kind:'CORRECTION',round_index:0,assessment:'UNASSESSED',
+    text:'「私は資料を調べた」は取り消します。',target_event_id:OBSERVATION,target_text:'説明後のEmlisの返事'},
+    {event_id:final,kind:'OBSERVATION',round_index:0,stage:'CORRECTED',is_current:true,text:'二回目の訂正後の返事です。'});
+  d.current_observation = {event_id:final,text:'二回目の訂正後の返事です。'};
+  return d;
+}
+test('multiple explanations are selected only with the complete chronological current observation chain',()=>{
+  const d=correctedHistory();
+  assert.equal(selectedPieceCorrection(d),d.timeline[3]);
+  for(const mutate of [x=>{x.timeline[3].target_event_id=INITIAL_OBSERVATION;},
+    x=>{x.timeline[1].assessment='NEEDS_DETAIL';},x=>{[x.timeline[1],x.timeline[3]]=[x.timeline[3],x.timeline[1]];},
+    x=>{x.timeline[1].round_index=1;},x=>{x.timeline.splice(2,1);},x=>{x.timeline[0].is_current=true;}]){
+    const invalid=correctedHistory();mutate(invalid);assert.equal(selectedPieceCorrection(invalid),null);
+  }
+});
+test('all actual explanations are shown and creation remains bound to the final displayed OBS',async t=>{
+  const d=correctedHistory(),h=await mount(t,{dto:d});
+  const texts=h.root.root.findAllByType('Text').map(x=>x.props.children);
+  assert.ok(texts.includes(d.timeline[1].text));assert.ok(texts.includes(d.timeline[3].text));
+  await act(async()=>h.button(CREATE_CORRECTED).props.onPress());await h.dismiss();
+  assert.equal(h.routes.length,1);
+  assert.equal(h.routes[0][1].params.savedInput.expectedObservationIdentity,d.current_observation.event_id);
 });
