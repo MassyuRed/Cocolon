@@ -1,4 +1,4 @@
-> **11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
+> **11/15最新：基礎4B・小分割候補の実本文は不採用。根拠を先に選ぶ生成へ修正。** 基礎4Bは第一LEAFが212.47秒でlength、他者理解の創作と分類別反復があり採用しない。学習差分付き139f8a88の3／3／3／3は4件stopだが独立話題欠落・対象／実行状態の変異が残り、MERGEは49,485byteで送信前拒否。元提供PID114967へ復元済み。新候補0df12bb1はhistoryだけ根拠→意味の順序、実提示・引用可能recordの参照保持（24以内）を既存decoderへ接続。LEAF目標24,576・不可分cohort49,152・最大6LEAF、MERGEだけ98,304byteとし、native実token＋4096≤32768・全体840秒・一回保存を維持。関連300件成功は意味成功へ換算しない。同じ架空12記録の新一回を準備。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／TestFlight／実機保留。詳細§9.79。
 
 > **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
@@ -2325,3 +2325,10 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 **11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
 
 原文／引用候補・cohort・全量guard・公開v3・一回SQL保存・月次・RN・唯一realizerは維持。API変更は既存native decoder、生成制約test、Piece制約test内の環境独立化だけ。実原本・CPU継続確認・学習差分なし比較の同一条件と次工程は補助設計§9.78を正とする。
+
+
+### 11/15 実本文の欠落・統合容量を踏まえた根拠先行修正（補助設計§9.79）
+
+**11/15最新：基礎4B・小分割候補の実本文は不採用。根拠を先に選ぶ生成へ修正。** 基礎4Bは第一LEAFが212.47秒でlength、他者理解の創作と分類別反復があり採用しない。学習差分付き139f8a88の3／3／3／3は4件stopだが独立話題欠落・対象／実行状態の変異が残り、MERGEは49,485byteで送信前拒否。元提供PID114967へ復元済み。新候補0df12bb1はhistoryだけ根拠→意味の順序、実提示・引用可能recordの参照保持（24以内）を既存decoderへ接続。LEAF目標24,576・不可分cohort49,152・最大6LEAF、MERGEだけ98,304byteとし、native実token＋4096≤32768・全体840秒・一回保存を維持。関連300件成功は意味成功へ換算しない。同じ架空12記録の新一回を準備。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／TestFlight／実機保留。詳細§9.79。
+
+既存source owner・native decoder・planner／生成制約testsの差分。新API／DB型や新controllerは追加しない。実rawと停止復元、参照保持と意味理解の区別、通常反映の残件は補助設計§9.79を正とする。

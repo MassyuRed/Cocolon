@@ -1,4 +1,4 @@
-> **11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
+> **11/15最新：基礎4B・小分割候補の実本文は不採用。根拠を先に選ぶ生成へ修正。** 基礎4Bは第一LEAFが212.47秒でlength、他者理解の創作と分類別反復があり採用しない。学習差分付き139f8a88の3／3／3／3は4件stopだが独立話題欠落・対象／実行状態の変異が残り、MERGEは49,485byteで送信前拒否。元提供PID114967へ復元済み。新候補0df12bb1はhistoryだけ根拠→意味の順序、実提示・引用可能recordの参照保持（24以内）を既存decoderへ接続。LEAF目標24,576・不可分cohort49,152・最大6LEAF、MERGEだけ98,304byteとし、native実token＋4096≤32768・全体840秒・一回保存を維持。関連300件成功は意味成功へ換算しない。同じ架空12記録の新一回を準備。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／TestFlight／実機保留。詳細§9.79。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -4400,3 +4400,36 @@ API `26fda5792b03e69deab3f69fd32b73df4439be64` の既存Analysis隔離parser内�
 [固定一回launcher](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_base_unicode_once_20261115.py)は11923byte、SHA256 `ebeea8cb15dde6e84d1c5b60aa0337ae810c119c589a0bccb16c89c843fc2824`。別root `semantic-history-base-unicode-20261115-once`、最大3応答＋前後2GET、停止復元込み900秒、一回・学習／再試行なし。既存98file／補足依存は再送せず、固定source4fileを取得する。元args／env／cwdは同Pod内メモリで保持しfinallyで元の学習差分適用提供へ復元する。この比較だけで通常設定や重み採用を変えない。
 
 新raw全段階を全原文・本文・根拠・条件差へ照合し、成立した同版だけを一回SQL保存・非生成再読・通常API／worker／提供schemaへ反映する。通常API／worker24bc228d・DB20261115011424を維持。stale1800設定・配置・新migration・RN変更・build／TestFlightは未実施。STRUCTURE_MAP_DELTA_NONE、本単位／補助全体は未完。
+
+
+
+<a id="analysis-semantic-history-source-first-20261115"></a>
+## 9.79 11/15 — 実4Bの独立話題欠落と統合容量を修正し、根拠を先に選ぶ同じ履歴統合へ（通常未採用）
+
+**11/15最新：基礎4B・小分割候補の実本文は不採用。根拠を先に選ぶ生成へ修正。** 基礎4Bは第一LEAFが212.47秒でlength、他者理解の創作と分類別反復があり採用しない。学習差分付き139f8a88の3／3／3／3は4件stopだが独立話題欠落・対象／実行状態の変異が残り、MERGEは49,485byteで送信前拒否。元提供PID114967へ復元済み。新候補0df12bb1はhistoryだけ根拠→意味の順序、実提示・引用可能recordの参照保持（24以内）を既存decoderへ接続。LEAF目標24,576・不可分cohort49,152・最大6LEAF、MERGEだけ98,304byteとし、native実token＋4096≤32768・全体840秒・一回保存を維持。関連300件成功は意味成功へ換算しない。同じ架空12記録の新一回を準備。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／TestFlight／実機保留。詳細§9.79。
+
+### 先行する実結果と採否
+
+- §9.78の基礎4B比較は終了。API26fda579、同じ12記録・8／4、第一LEAFのみHTTP200／length、212.47秒。完成node6＋7件目途中、R1／R2だけを扱い、各話題を4分類へ複製した。他者が本人の基準を尊重・理解したと補い、未確認を未決定、主張が弱くなったように感じたことを実際に弱めたことへ変更しており不採用。第二LEAF・MERGE・保存0、全体253.95秒で元adapter提供PID114625へ復元。baseへの通常切替は行わない。
+- 引用Unicode修復の同tokenizer CPU原本は、base_unicode_actual_20261115/unicode-cpu-verification.jsonに保持。実停止260tokenに続く引用・JSON終端・EOSが許され、復号quoteが元「鞄」に一致。追加model0／9.228秒であり、新しい実生成成功ではない。
+- API139f8a88はLEAFのpacking目標だけを24,576byte、最大6へ変更。原文・両欄・全本人回答・訂正cohortは分離せず、単独cohortは従来の49,152byteまで保持する。同じ12記録は3／3／3／3、全24fieldを一度ずつ受け取った。
+- 実4LEAFは全てHTTP200／stop、受領は開始から27.68／144.25／171.86／208.37秒。LEAF1はR1だけ、LEAF3はR7だけを項目化。LEAF2は材料の収集方法と新品材料との差を別対象へ変え、体調を未伝達のままとした。LEAF4は改修の未決を拒否へ強め、R12の買い物と友人への返事を指す「その二つ」をR10改修判断へ混入した。全文Product Readにより意味不採用。全recordへ送信したこと、stopや根拠数を全意味保持へ換算しない。
+- 139版のMERGEを保存wireとrawからCPUで再導出。messages49,485byte／wire body49,648byteで、旧49,152byteを333byte超過。message SHA256は357e3303af9d18cefc30283649a0b791002d7a05f1e69a72c4cd9fdded28386a。原文断片15,662byte、leaf packet11,758byte、未代表record[2,3,8,9,11]。MERGE POST0、実行本体218.78秒、停止復元込み260.06秒で元提供PID114967。終了後の停止要求は新たな生成や再試行を起こしていない。
+
+### 既存ownerへの直接修正
+
+API0df12bb15a937108ca01b72a09382f418c1f2a0e：
+
+1. 既存semantic decoderのhistory段階だけ、nodeのevidenceを表示文より先に生成する。引用→その実field→意味とし、先に書いた別recordの説明へ後から無関係な根拠を添えないようにする。公開v3／model.v2のキー・唯一realizerは変更しない。
+2. 実際に提示され、schemaに引用候補が残ったfield.recordだけから参照対象を導出する。対象24記録以内では、未参照recordが残る間はnodesを閉じず、新nodeの最初の根拠を未参照recordへ束縛する。追加根拠は元全候補、全対象参照後の追加nodeも許し、一記録一項目へ固定しない。record=Noneの本人訂正を全cohort参照へ数えず、未提示manifestも既読扱いしない。24超の既存部分coverageは新拒否へ変えない。引用参照の確保は全文意味理解の証明ではない。
+3. historyの図／詳細文字予算と、node_kind四種を埋める帳票ではない指示を維持。MERGEにも真になる「実際に提示された元fieldの本文と条件」を読む表現へ整合する。
+4. MERGEのmessage-byte上限だけ98,304へ広げ、原文断片・仮読み・manifestを送る。親49,152、LEAF目標24,576、不可分cohortの旧上限、request262,144は維持する。byteはtoken換算ではない。nativeはtruncation=Falseで実token数を測り、入力＋出力予約4096≤32768を生成前に検査する。新MERGEのtoken適合・210秒完走・意味品質は実施後に判定する。
+5. 全体840秒、HTTP220／要求225秒、部分保存0・失敗時の以前map保持・guard・月次当時版・プラン権利を維持。worker stale設定／通常提供はまだ変更していない。
+
+### 検証・原本・再開点
+
+関連8suite291件PASS、nativeの実TokenEnforcerで参照保持とEOSまで80件PASS（291の部分集合）、planner9件PASS。合計300の異なるcaseで、実意味採用・通常配置ではない。139のAnalysis CIは古い最大3／packing callback前提のplanner3失敗を確認し、その既存testを更新した。新commitのCI成功は未主張。
+
+原本は同trial配下base_unicode_actual_20261115／compact_leaf_actual_20261115へ保存する。compactのmerge-capacity-diagnostic.jsonはCPU再導出だけで、新model／SQL0。実source・wire・rawは変更しない。
+
+再開はsemantic_history_source_first_once_20261115.py。同じ既存Pod・同じ架空12記録、現adapter／model名を維持し、4LEAF＋MERGE最大5応答・pipeline840秒・停止復元込み960秒以内の別一回。学習・追加GPU契約・自動再試行0。受領全本文を原入力へ照合し、適切な最終mapができた場合だけ同じrawを隔離SQLへ一回保存・非生成再読し、通常API／workerと提供decoderへ反映する。配布・本人実機は別保留で、他の補助作業の開始条件にはしない。

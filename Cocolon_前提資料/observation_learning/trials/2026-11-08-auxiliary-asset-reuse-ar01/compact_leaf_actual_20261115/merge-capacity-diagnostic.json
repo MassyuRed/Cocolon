@@ -1,0 +1,20 @@
+{
+  "api_commit": "139f8a8817b8ba9c26ac36433357151d02272c9c",
+  "state": "CPU_ACTUAL_WIRE_CAPACITY_REDERIVED",
+  "message_bytes": 49485,
+  "wire_body_bytes": 49648,
+  "message_sha256": "357e3303af9d18cefc30283649a0b791002d7a05f1e69a72c4cd9fdded28386a",
+  "current_instruction_message_bytes": 49787,
+  "current_instruction_added_bytes": 302,
+  "fragment_bytes": 15662,
+  "leaf_packet_bytes": 11758,
+  "unrepresented_records": [
+    2,
+    3,
+    8,
+    9,
+    11
+  ],
+  "new_model_calls": 0,
+  "native_token_admission": false
+}
