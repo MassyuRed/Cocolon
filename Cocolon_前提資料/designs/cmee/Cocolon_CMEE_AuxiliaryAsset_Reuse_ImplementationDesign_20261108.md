@@ -1,4 +1,4 @@
-> **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速な参照処理を確認し、適合版の隔離高速部品は実GPUで4関数選択・7数値比較を完了。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
+> **11/16最新：承認済みA3は2応答ともHTTP200／stop・CMEE GENERATED、意味不一致のためB3は未実行。** 新4file319749byteを照合・送付し、driver230.3128秒・復元込み282.1817秒で元提供PID130379／health200へ復元した。読書会の送信完了と照明の購入は一部回復したが、既知の返信／非関与の未知化と、後日確認済みの事項へ古い未決定状態を混在させる誤りが原raw・図／本文に残った。独立原文照合でも不採用。B3用fileは送付済みだが起動0、学習／retry／SQL保存／通常反映0。通常API／worker24bc228d・DB20261115011424、配布保留を維持する。A3の一回は消費済みでB3枠を別試行へ転用しない。本単位／補助全体は未完。 詳細[§9.88](#worked-map-lesson-a3-outcome-20261116)。STRUCTURE_MAP_DELTA_NONE：既存経路の実結果で、source／writer／公開contractの追加なし。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -17,14 +17,14 @@
 ---
 doc_id: cocolon.cmee.auxiliary_asset_reuse.implementation_design.20261108
 title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修・商品接続 詳細設計"
-revision_date: "2026-11-15 JST"
+revision_date: "2026-11-16 JST"
 decision_owner: Mash
 implementation_owner: Karen
 status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.83 finite held-out adapter/base comparison prepared: identical2record/4field messages722924e9, input1752, each1POST, modelIDs explicit, same4096output/32768context/90seconds. Isolated FLA0.4.1/einops0.8.2/causal1.7.0 on measured RTX4000Ada SM89 passed4dispatch/7parity, proof28908c29, baseline/deps unchanged. Run only2boundedposts then restore originalprovider117766 argv/env/cwd; no adoption or SQL. Source-only v2 actual longfinal remained rejected;167PASS/both CI success. No unchanged full12 retry. Normal24bc228d/DB20261115011424;build/device deferred."
+current_next: "Section9.88: A3 consumed and meaning rejected; B3 condition not satisfied and not executed. Original provider restored PID130379/health200. Repair temporal known/unknown integration in existing author; no A3 replay or B3 reassignment. Same-raw SQL save/reread and normal rollout remain unfinished. Normal24bc228d/DB20261115011424;build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1768,9 +1768,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/15・§9.72通常反映後、§9.73長履歴候補）
+### 11.2 現在の進行欄（11/16・A3実意味不採用、B3条件不成立）
 
-全体主枠は§9.54／第11回§5。§9.72の回答・本人訂正→Piece・通常DB／API反映は完了済み。現在の未完単位は§9.87の正例修正版A3の実意味確認から、適切な場合だけ新全12・同raw実保存再読・通常反映へつなぐ作業。承認済みA2は2stop／2GENERATEDと両recordの根拠参照を確認したが、原文との意味不一致で両本文を不採用とし、条件付きB2は未送付・未実行。driver180.8253秒・復元込み234.5074秒でPID128408／health200へ復元。A2の一回は消費済み、SQL保存／通常反映0。修正API f1ffa8aの2CIとCocolon6f681dbの5CIは成功、CPU287件PASSを保持する。source-only診断と既存9教師の出自を確認し、既存作者の正の完成例は実装・関連138件検証済み、新4file319749byteのA3／条件付きB3は未送付・未実行。通常API／worker24bc228d・DB20261115011424と配布保留を維持し、機械成功を意味・商品受入れへ換算しない。
+全体主枠は§9.54／第11回§5。§9.72の回答・本人訂正→Piece・通常DB／API反映は完了済み。現在の未完単位は長履歴の実意味改善から同raw実保存再読・通常反映までである。§9.88の承認済みA3は新4file319749byteを送付し、2stop／2GENERATEDまで成立したが、原rawに既知／未知と前後時点の意味不一致が残り不採用。driver230.3128秒・復元込み282.1817秒で元提供PID130379／health200へ復元。B3fileは送付済みだが意味条件不成立のため起動0、SQL保存／通常反映0。A3の一回は消費済みで再実行・B3枠の転用をしない。次は今回の実誤文と原文から、既存作者の後続確認と初期不明の統合を修復・検証する。追加学習・新方式・新GPU試行は未準備／未実施。通常API／worker24bc228d・DB20261115011424、配布保留と先行の成立済み能力を維持し、機械成功を商品受入れへ換算しない。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1783,13 +1783,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | §9.72の24bc228d API／worker双方Live・migration適用・対応RN sourceとCI成功を継承。§9.73候補は通常未反映 | 起動・queue poll・未認証HTTPを本人生成保存や実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
-現在の実本文・原文照合と次工程は§9.87、A1と旧準備は§9.86以前、長履歴の一回保存境界は§9.73、先行Pieceの通常反映は§9.72、標準自動IF3は§9.67へ戻る。A2の承認一回は2POST／2stop本文受領で消費済み、学習・retry・B2・SQL保存・通常配置0。実本文不採用、全12・同版保存再読・通常反映未完を保持し、正式受入れ・補助全体完了は認定しない。
+現在の実本文・原文照合と次工程は§9.88、A2と旧準備は§9.87以前、長履歴の一回保存境界は§9.73、先行Pieceの通常反映は§9.72、標準自動IF3は§9.67へ戻る。A3の承認一回は2POST／2stop本文受領で消費済み、学習・retry・B3起動・SQL保存・通常配置0。実本文不採用、全12・同版保存再読・通常反映未完を保持し、正式受入れ・補助全体完了は認定しない。
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：第11回§5の四作業を維持し、§9.87の正例修正版の実意味を有限A3で確認し、適切な場合だけB3から同raw保存再読・通常反映へ進む。** A2は2stop／2GENERATEDだが意味不一致で不採用、B2は条件不成立で未送付・未実行。元提供PID128408／health200へ復元、通常API／worker24bc228d・DB20261115011424は今回変更0。A2の一回と§9.72等の成立済み単位を繰り返さない。
+**11/16・現在の再開先：第11回§5の四作業を維持し、§9.88のA3実誤文と原文から、既存作者の後続事実・初期不明・時点対応を修復・検証する。** A3は2stop／2GENERATEDだが意味不一致で不採用。全4fileは送付済み、条件付きB3は起動していない。元提供PID130379／health200へ復元、通常API／worker24bc228d・DB20261115011424は変更0。消費済みA3と§9.72等の成立済み単位を繰り返さず、未実行B3を別試行へ転用しない。
 
-A2の実原本・独立review・source-only診断・既存120u教材の出自は§9.87、消費済みA2／未実行B2の具体scopeとprecheckpoint／helperは§9.86へ戻る。次候補は既存作者instructionの正の完成例を実装・CPU確認した新4file319749byteの未実行案で、neutral indexやnative／parser／receiver・公開contract・元source事実を変更しない。失敗原因を教材や語順へ断定しない。既存13原本の新messagesへの再束縛、取得後のSQL guard／as_of差替えを行わず、実原文と全出力が適切な最終rawだけを同源泉へ一回保存し、別processで非生成再読して通常native／API／workerへ反映する。workerの1800設定候補は品質・保存成立後に扱い、全job保証を捏造しない。一般品質・本単位／補助全体は未完、build／TestFlight／本人実機保留を維持する。
+A3の実原本・独立review・未達と改善点は§9.88、既存作者の正例修正と取得前の新SQL計画は§9.87、precheckpoint／helperは§9.86へ戻る。正例と注意文は既に時点・状態・確認済みをunknownへ戻さないことを示すため、同じ注意文の追加だけを解決へ換算しない。モデル内部や教材を原因と断定せず、追加学習・新しいGPU試行は未準備／未実施として扱う。適切な実出力が成立するまで、同raw実保存再読・通常反映を完了にしない。旧rawの新messagesへの再束縛、取得後のSQL guard／as_of差替えは行わない。worker1800調整は品質・保存成立後に扱い、全job保証を捏造しない。一般品質・本単位／補助全体は未完、build／TestFlight／本人実機保留を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -4771,3 +4771,24 @@ A3は同じ架空2条件・最大2応答／復元込み420秒を一回。A2 actu
 意味が適切な新13応答から同じ最終rawを一回SQL保存し、別processで非生成再読して、既存native／API／workerの版・context・期限を合わせて通常反映を閉じる。通常版24bc228d／DB20261115011424・worker stale900は現状のまま、既存1800調整は品質・保存成立後の候補で全job保証ではない。新codeの公開保存や合成再読を通常反映・本人受入れへ換算しない。本単位／補助全体・一般品質・全12実意味／同raw実保存／通常反映は未完、build／TestFlight／本人実機保留。
 
 STRUCTURE_MAP_DELTA_NONE：既存作者に正の完成例を示す修復だけで、新reader／controller／source owner／公開型／route／DB型は追加していない。元source・意味admission・唯一realizer／保存・月次境界を保持する。
+
+
+<a id="worked-map-lesson-a3-outcome-20261116"></a>
+## 9.88 11/16 — 正例修正版A3の実結果、既知／未知と時点統合の未達
+
+Mashの今回の明示承認に従い、確定4file319749byteを同Podへ送付し、全byte数とSHAを照合してA3を一回だけ実行した。既存120uのweights／config、schema29fe72a2／parser661fdf31と互換隔離kernelを維持した。新指示の実入力tokenは読書会2386／照明3885、原文・二欄・guardは変更しない。両方HTTP200／stop・CMEE GENERATED、source／mapped／processed各2・unparsed0。受領は累計99.509434秒／230.005807秒、driver230.312784秒・停止復元込み282.181677秒である。元argv／env／cwdでPID130379へ復元し、復元後health200を確認した。学習／retry0、鍵・全環境の外部保存0。
+
+| 条件 | 原文と全可視出力の照合結果 |
+|---|---|
+| 読書会 | summary／overviewの後日送信完了は回復した。一方n2・edge n1→n2・overviewは、本人が翌日に会場返信の写しを読み部屋と時刻を確認した事実を、返信未着／不明へ戻す。n2 unknownsは明示された本人の問い合わせ非関与も不明へ戻す。n1末尾は初日の未送信と後日の送信完了の時点が整合しない。意味不採用 |
+| 照明 | n4は後日購入・設置後確認を認め、A2の習慣化・排他的な一般化は今回見当たらない。しかしn3は初日に線を眺めると決めた行動を未決定へ変える。n3／overview／関係線は型調査・予備金額確認を依然今後の未完として置き、後日の確認済み・店頭確認・購入との時点を統合できない。購入が完全欠落したとは記録しない。意味不採用 |
+
+独立担当者と華恋が、原文全欄・model raw・全node／edge／overview／unknowns・projection／textを照合し、A3_MEANING_REJECTED_B3_CONDITION_NOT_SATISFIEDとした。細部省略だけを不合格理由にせず、改善した点と残る意味変異を分ける。誤りは受領rawに既にあり、表示変換だけの不具合ではない。モデル内部やadapter／baseのどちらが原因かは、この実行から断定しない。生成順・被覆制約・正例の機械成立を意味品質へ換算しない。
+
+原actualは130017byte／SHA256 e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb。元13fileのZIPは81045byte／SHA256 9d968f1acbcc59f72fab4e5fbf2bcd74081371db80535df4cc790e7864d97a77。ZIP CRCとactual／executionの遠隔元byte一致を確認した。全原文・raw・preflight・driver・native・logは既存private引継ぎCocolon_CMEE_ConcreteReading_20261115.zipのverification/worked_map_lesson_actual_20261116/へ保持し、公開trialにはexecutionとbody-free独立reviewを置く。原rawとmessagesは無修補で、SQL源泉・凍結時刻・旧結果・旧計画を上書きしない。
+
+B3用launcherと入力は今回の4file送付に含まれるが、意味条件不成立のためB3起動／新規12LEAF／MERGE0、B3root不存在を復元後に確認した。A3の一回は消費済みで、未実行B3枠を別Aや再試行へ流用しない。SQL保存・同raw実再読・native通常採用・Render設定変更／配備0。通常API／worker双方24bc228d・Live／autoDeployOFFとSupabaseの最新migration20261115011424をfreshに確認した。worker1800調整は未適用、selector・重みとbuild／TestFlight／本人実機保留を維持する。
+
+次は、既存作者が同一対象の後続事実と初期不明を混在させる箇所を、今回の原文と実誤文の対から修復・検証する。現instructionと植物正例には時点・行動状態・確認済みをunknownへ戻さない説明が既にあるため、同趣旨の禁止文を足すだけで改善と扱わない。新方式・追加学習・新しいGPU試行は未準備／未実施で、今回の未使用B3を許可として使わない。安全装置や記録機構の追加を本筋へ挟まない。
+
+primary outcomeはBLOCKER_NARROWED。完結2応答と原raw段階の意味不整合・復元は実測できたが、実保存再読・通常反映が成立していないため、本作業単位も補助経路全体も閉じていない。STRUCTURE_MAP_DELTA_NONE：既存能力の実結果のみで、新owner／controller／API／DB型を追加しない。
