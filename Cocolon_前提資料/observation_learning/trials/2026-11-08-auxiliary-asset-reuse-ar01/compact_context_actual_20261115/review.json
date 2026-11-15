@@ -1,0 +1,85 @@
+{
+  "state": "REJECTED_BEFORE_MERGE",
+  "api_commit": "8c74936135c352222118217e3a0d8588932013f0",
+  "all_fictional": true,
+  "input_sha256": "baa0c1d1ed2a9970576ec85b0f5cae390f9d71f33dc0044b41ab684242087472",
+  "received_responses": 9,
+  "admitted_leaf_count": 8,
+  "final_merge_calls": 0,
+  "saves": 0,
+  "finish_reasons": [
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop"
+  ],
+  "response_sha256": [
+    "00bbd9e4d1ced4b6f3b7c355c64f0cef69aaa0a289e113960965f214e87e3447",
+    "6a79d363167bb9b1a156b39aafd01981b631a76a6f0294168a118c81b5a44ca2",
+    "21696fed730acd7bdb72e42d497f68b520cfeae7406c79a560ec63175827704c",
+    "c406908de95a6c98a74a2405f15581e5b749bda045cdda6e72b12fc30c81e471",
+    "9112144a5bca7bc43a298f0eca12e1ae5921f941a679eb9e67713830884d6694",
+    "db3ab08fefe97068579a8e1b4166c0c59f22d047e9c7ff737c6fcd6760abfd11",
+    "7e6fb3e8430f1acdd40022c3d373f1da5fb70591581d06a631305c66d9452325",
+    "0743a8a2d7b671ab28bf99461484d08b4dfb880a280fcdd3f862f79f1028b783",
+    "78bb7bf34d033d50c742b237f50456d1238f61920dec9d98a4881bbf560ff015"
+  ],
+  "original_provider_restored": true,
+  "restored_pid": 116049,
+  "technical_rejection": {
+    "record": 9,
+    "receiver_code": "analysis_semantic_map_invalid",
+    "json_error": "UNTERMINATED_EXPLANATION_STRING",
+    "quoted_character": "JSON Unicode escape succeeds; generated free text ends after raw 鞄 and spaces",
+    "unicode_cause": "RECEIVED_PREFIX_WITH_SYNTHETIC_TOKEN_SEGMENTATION_CPU_REPRODUCED",
+    "actual_generated_token_ids": "NOT_CAPTURED",
+    "fixed_candidate": "11200b2011fc787ffe015a4463df447b9366574f"
+  },
+  "provisional_meaning_read": [
+    {
+      "record": 1,
+      "issue": "本人が受け手の行き先を知りたい→受け手の気持ち、反対しない条件→反対する条件"
+    },
+    {
+      "record": 2,
+      "issue": "初期の返事保留だけを読み、希望確認後の以前の店の予約を示さない"
+    },
+    {
+      "record": 3,
+      "issue": "作家の展示→友人の展示、本人内部の家の用事まで伝えたとする"
+    },
+    {
+      "record": 4,
+      "issue": "使い続けてよいか確認したかった→確認したくありません"
+    },
+    {
+      "record": 5,
+      "issue": "明確な主体反転は見つからず、体重的さ・变更等の誤語あり"
+    },
+    {
+      "record": 6,
+      "issue": "同じ採用版で両立した材料説明と見やすさ修正を別案へ分ける"
+    },
+    {
+      "record": 7,
+      "issue": "利用者への通知→担当者宛、背景を別版で説明したことを追加"
+    },
+    {
+      "record": 8,
+      "issue": "学習を開始しない本人→既に始めた友人へ移す"
+    },
+    {
+      "record": 9,
+      "issue": "受領部分には明確な意味反転を見つけず、未閉全文は未評価"
+    }
+  ],
+  "meaning_assessment": "LEAF provisional only; no final result exists to evaluate",
+  "training": 0,
+  "retry": 0,
+  "normal_api_worker": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+}

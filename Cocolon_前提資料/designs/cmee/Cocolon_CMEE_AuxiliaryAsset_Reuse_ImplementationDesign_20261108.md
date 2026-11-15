@@ -1,4 +1,4 @@
-> **11/15最新：個別仮読みは8件で全体840秒へ到達。不採用を保ち、中間出力と統合文脈を修正。** 18ec8b47は8LEAFがstop、9件目は結果不明で504、MERGE／保存0。元提供PID115633へ復元し、停止復元込み880.54秒。受領本文には主体・対象・確認前後の反転が残る。新8c749361はLEAFだけ短い仮読み・空edges・必要な引用へ絞り、必須訂正の全文／容量は保持。MERGEは実message98,304byte内で全有効parent fieldを優先し、超過時は従来の一連続断片と省略記録を使う。全文提示も意味理解済みとはしない。import時のLMFE既定値に依存したtestも修正し、関連343件成功。新同12記録の実生成は準備段階。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.80。
+> **11/15最新：短い仮読みで9応答を受領、説明文のUnicode制約で停止。修正版の実生成へ継続。** 8c749361は8LEAF受入後、9件目がstopでも説明文のJSON未閉で拒否され、360.31秒で終了。MERGE／保存0、元提供PID116049へ復元し404.73秒。受信prefix＋合成token分割でLMFE自由文shortcutの空stack／早期EOSをCPU再現した。新11200b20はAnalysis／IFの未対応Unicode tokenを全stateで除外し、JSON escapeで原文・自由文を保持。Pieceの既存filterは維持。文字制約128件・Analysis／IF連携84件成功、Piece通し／新CIは確認中。中間の主体・意向反転は未解消として最終本文を原入力照合する。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／本人実機保留。詳細§9.81。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.73: approved dependency supplement uploaded and one extra attempt consumed; first LEAF timed out at210.305s with no response body. Same-window provider logged complete_length. No retry or rollout. Candidate bdf39198359f7e205b263657442f80215f6b0725 adds unique sentence quote choices and layered/call-count-derived deadlines; 308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）. Preserve failed raw and old98files, inspect the candidate and remaining completion/worker-lease conditions before another explicitly approved bounded acquisition. Normal API/worker remain24bc228d; build/device deferred."
+current_next: "Section9.81: compact-context attempt ended at9th response with unterminated Unicode prose, no merge/save; original provider restored PID116049. Candidate11200b20 closes unsupported Unicode tokens for Analysis/IF; native128 and integration84 PASS; full Piece and exact-head CI pending. Continue same fictional12 through final source read, same-version SQL save/reread, and normal decoder/API/worker rollout. Normal24bc228d and DB20261115011424 unchanged; build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -4481,3 +4481,17 @@ coreの98,304byte実境界はSYSTEM制御文paddingで確認し、本人source�
 原本はindividual_cohort_actual_20261115のsource／wire／raw／logs／execution.json。first2は先回収prefixと全wire/body一致、残3〜8も全文読了した。同じ12記録は既使用評価で、未知入力へ戻さない。
 
 次はsemantic_history_compact_context_once_20261115.pyによる別一回。既存Pod、同じ架空12記録・現adapter、12LEAF＋MERGE最大13要求＋前後2GET、pipeline840秒・復元込み960秒、学習／新GPU契約／自動retry0。閉じた旧実行は再起動しない。全本文と最終mapを原入力へ照合し、適切な最終結果の同版SQL一回保存・現在版と同IDの非生成再読・通常API／worker／decoder反映まで進める。build／TestFlight／本人実機は別保留で、他の補助作業の開始条件にはしない。
+
+
+<a id="analysis-semantic-free-unicode-20261115"></a>
+## 9.81 11/15 — 仮読みの全体時間を短縮し、自由文のUnicode早期終了を修正（通常未採用）
+
+同じ既使用の架空12記録・24欄・17,314文字を8c749361で一回取得した。9応答はすべてHTTP200／stopだが、8LEAF受入後、9件目のexplanationが生の「鞄」と空白で終わりJSON未閉となった。analysis_semantic_map_invalid、360.310829554秒でNOT_GENERATED。10〜12／MERGE／SQL保存0。元source／argv／env／cwdを同Pod内で保持しPID116049へ復元、health200、停止復元込み404.726044001秒。旧18ecの840秒終了とは原因を分ける。first3のwire/bodyは先回収prefixと全一致。実9本文を原文照合し、主体・条件極性・時点・意向の反転をreview.jsonへ残した。LEAFの参照数／受信stopを最終の意味成功へ数えない。
+
+原因再現は受信raw9の534文字prefixと元messages、合成の分割UTF-8／複合tokenを使うCPU検査。LMFEのfree-text shortcutがparser alphabet外文字を含むtokenを通し、空stack／早期EOSへ至る。同じ位置のJSON Unicode escapeは完全閉鎖し、json.loads後の文字も一致する。実生成token IDsは未記録のため、その列の同定とは報告しない。
+
+新API候補11200b2011fc787ffe015a4463df447b9366574fは、Analysis／IFの全stateでU+FFFDを含むtokenとparser alphabet外文字を含むtokenを除外する。既存blank制限は自由文だけ、Pieceの従来filterは保持する。Analysis／IFのexact enumはalphabet外文字と真のU+FFFD原文をJSON escapeで保持し、原入力／引用内容を置換しない。reader、意味prompt、model／adapter、通常DTO、上限、SQL、RNを変更しない。native128件成功（追加6）、Analysis／IF／semantic連携84件成功。Pieceの同38file通しと新head CIは確認中。
+
+§9.80の「import時のLMFE既定値捕捉」という説明は訂正する。公式817f944のConfigは環境変数を毎回読む。CI8cのPieceは2698成功／2fixture assertion失敗、Analysisは成功。実constructorが解決するConfig factoryを明示制御し、古いpackage参照が併存する条件の2caseを追加、局所59成功／同38file collection下4対象成功。全CI実行順の根本原因を確定したとの報告はしない。
+
+原本はcompact_context_actual_20261115のsource／wire／raw／logs／execution／review。次はsemantic_history_free_unicode_once_20261115.pyの別一回で、同じ既存Pod・同じ12記録と現adapterを使用する。12LEAF＋MERGE最大13POST、前後2GET、pipeline840秒・復元込み960秒、学習／新契約／自動retry0。閉じた旧試行は再起動せず、同一新native版による全体取得を確認する。最終本文を原入力へ照合し、適切な結果の同版SQL一回保存・currentと同IDの非生成再読・通常decoder／API／worker反映まで未完として追跡する。

@@ -1,4 +1,4 @@
-> **11/15最新：個別仮読みは8件で全体840秒へ到達。不採用を保ち、中間出力と統合文脈を修正。** 18ec8b47は8LEAFがstop、9件目は結果不明で504、MERGE／保存0。元提供PID115633へ復元し、停止復元込み880.54秒。受領本文には主体・対象・確認前後の反転が残る。新8c749361はLEAFだけ短い仮読み・空edges・必要な引用へ絞り、必須訂正の全文／容量は保持。MERGEは実message98,304byte内で全有効parent fieldを優先し、超過時は従来の一連続断片と省略記録を使う。全文提示も意味理解済みとはしない。import時のLMFE既定値に依存したtestも修正し、関連343件成功。新同12記録の実生成は準備段階。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.80。
+> **11/15最新：短い仮読みで9応答を受領、説明文のUnicode制約で停止。修正版の実生成へ継続。** 8c749361は8LEAF受入後、9件目がstopでも説明文のJSON未閉で拒否され、360.31秒で終了。MERGE／保存0、元提供PID116049へ復元し404.73秒。受信prefix＋合成token分割でLMFE自由文shortcutの空stack／早期EOSをCPU再現した。新11200b20はAnalysis／IFの未対応Unicode tokenを全stateで除外し、JSON escapeで原文・自由文を保持。Pieceの既存filterは維持。文字制約128件・Analysis／IF連携84件成功、Piece通し／新CIは確認中。中間の主体・意向反転は未解消として最終本文を原入力照合する。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／本人実機保留。詳細§9.81。
 
 > **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
@@ -2342,3 +2342,6 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 ### 11/15 中間仮読みの出力量と統合本文の保持（補助設計§9.80）
 
 **11/15最新：個別仮読みは8件で全体840秒へ到達。不採用を保ち、中間出力と統合文脈を修正。** 18ec8b47は8LEAFがstop、9件目は結果不明で504、MERGE／保存0。元提供PID115633へ復元し、停止復元込み880.54秒。受領本文には主体・対象・確認前後の反転が残る。新8c749361はLEAFだけ短い仮読み・空edges・必要な引用へ絞り、必須訂正の全文／容量は保持。MERGEは実message98,304byte内で全有効parent fieldを優先し、超過時は従来の一連続断片と省略記録を使う。全文提示も意味理解済みとはしない。import時のLMFE既定値に依存したtestも修正し、関連343件成功。新同12記録の実生成は準備段階。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.80。
+
+
+> **11/15最新：短い仮読みで9応答を受領、説明文のUnicode制約で停止。修正版の実生成へ継続。** 8c749361は8LEAF受入後、9件目がstopでも説明文のJSON未閉で拒否され、360.31秒で終了。MERGE／保存0、元提供PID116049へ復元し404.73秒。受信prefix＋合成token分割でLMFE自由文shortcutの空stack／早期EOSをCPU再現した。新11200b20はAnalysis／IFの未対応Unicode tokenを全stateで除外し、JSON escapeで原文・自由文を保持。Pieceの既存filterは維持。文字制約128件・Analysis／IF連携84件成功、Piece通し／新CIは確認中。中間の主体・意向反転は未解消として最終本文を原入力照合する。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／本人実機保留。詳細§9.81。
