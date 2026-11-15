@@ -1,0 +1,6 @@
+Processing ./semantic-kernel-preparation-20261115/compat-wheels/fla_core-0.4.1-py3-none-any.whl (from -r /workspace/semantic-kernel-preparation-20261115/requirements-kernels-compat.txt (line 1))
+Processing ./semantic-kernel-preparation-20261115/causal_conv1d-1.7.0+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl (from -r /workspace/semantic-kernel-preparation-20261115/requirements-kernels-compat.txt (line 3))
+Collecting einops==0.8.2 (from -r /workspace/semantic-kernel-preparation-20261115/requirements-kernels-compat.txt (line 2))
+  Using cached einops-0.8.2-py3-none-any.whl (65 kB)
+Installing collected packages: fla-core, einops, causal-conv1d
+Successfully installed causal-conv1d-1.7.0 einops-0.8.2 fla-core-0.4.1

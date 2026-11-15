@@ -1,4 +1,4 @@
-> **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速なPyTorch代替処理も確認し、高速部品を候補専用に隔離準備中。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
+> **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速な参照処理を確認し、適合版の隔離高速部品は実GPUで4関数選択・7数値比較を完了。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.83: source-only v2 boundary fixed and167PASS/both CI success, but actual final200/length and semantic mismatches rejected. Raw4834chars preserved, driver258.179745/restore334.644275, original PID117766 restored, saved0. Resolve actor binding, negation scope and later confirmation through finite same-message newfictional2-record adapter/base diagnostic, after isolated kernel import/parity proof. No unchanged full12 retry. Normal24bc228d/DB20261115011424 unchanged, oldmaps unchanged, build/device deferred."
+current_next: "Section9.83 finite held-out adapter/base comparison prepared: identical2record/4field messages722924e9, input1752, each1POST, modelIDs explicit, same4096output/32768context/90seconds. Isolated FLA0.4.1/einops0.8.2/causal1.7.0 on measured RTX4000Ada SM89 passed4dispatch/7parity, proof28908c29, baseline/deps unchanged. Run only2boundedposts then restore originalprovider117766 argv/env/cwd; no adoption or SQL. Source-only v2 actual longfinal remained rejected;167PASS/both CI success. No unchanged full12 retry. Normal24bc228d/DB20261115011424;build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -4537,3 +4537,11 @@ LEAF v1 messagesはbyte同一で、既存12receiptを変更せず再検証した
 原文との独立照合ではn3が記録1の同僚のうなずきを記録2の家族の反応へ混同、n10は『終わるまで残ることに予定を変えない』を『終わるまで残る予定を変えない』へ反転、n2は後続の窓口確認を消失、n7は今回読了と次回未読を不明瞭化、n11は実際の片づけを未決定へ戻している。AI LEAF文の混入経路を外しても、作者自身の主体・否定・時点の意味保持は未成立であり、時間枠の解消だけでは採用しない。全candidateを通常へ配置して『境界修復だけ通常完了』と数えることもせず、未採用の長履歴経路は通常未反映のままとする。
 
 実providerはPython3.12.3／Torch2.8.0+cu128／Transformers5.19.0／Triton3.4.0。GatedDeltaNetとcausal_conv1dが最適化部品未導入のため低速参照処理へ切り替わるlogも確認した。既存環境を更新せず、fla-core0.6.0／einops0.8.2の固定wheelを別targetへhash必須・no-depsで導入する候補準備に着手した。導入を意味品質改善の証拠にはしない。実import選択と数値の有限性・参照計算との誤差を検査した後、学習に使わない新規架空2記録を同messagesで、同4B base851bf6eとadapter120u各1回の有限比較へ進める。別model IDと実adapter状態を明記し、通常の自動fallbackや新weights採用にはしない。改善を確認した場合だけ全12原文へ戻す。通常反映・同版保存再読は未完である。
+
+### §9.83 有限比較の実行前記録 — 実GPUに合う隔離kernelを検証済み
+
+fla-core0.6.0はGPU可視時にGluon.extraを要求し、既存Triton3.4.0ではImportErrorとなることを実再現した。CPU非表示時のimport成功だけでは適合と判定しない。旧targetと失敗proofを保持し、既存Torch／Triton／Transformersを変更せず、新target semantic-kernel-deps-compat-20261115へfla-core0.4.1／einops0.8.2／causal-conv1d1.7.0をhash必須・no-depsで導入した。causal wheelはTorch2.8／CUDA12／ABI True／CPython3.12／x86_64に適合する公式原本a1fcd5d0、再downloadせず同原本を再利用した。
+
+実GPUは同provider envでNVIDIA RTX 4000 Ada Generation／SM8.9／20991901696byteと確認した。先行のA5000／SM8.6を前提にした検査条件は誤りであり、通常機種・費用・性能をその記憶から推定しない。失敗compat proofを保持し、新Ada proofは実名とSM8.9へ厳密に束縛して確認した。4関数が実FLA／causalへdispatchし、GDN output／state4比較とconv output／update／state3比較の計7件が有限・基準内。元baseline sourceと隔離deps treeは前後同一、重みロード0・モデル要求0。1752tokenのkernel warm2回は9.293350780848414秒と0.001780638936907053秒、全検査77.10029265098274秒。これは単独kernelの時間であり、アプリ生成速度の改善実測とは区別する。成功proof原本kernel_proof_actual_20261115/warm-ada-proof.json SHA25628908c29ee066397bcc1a3326eefe41453ce159c11a90eec06f691932fc7675e。
+
+次のsemantic_reader_adapter_base_once_20261115.pyはSHA25648df0a65a00233e9a55fc4d04e145799f05c57b9ae1c6a4c6099b6751d4022a6／23120bytes。学習へ混ぜない新規架空2記録／4欄、同messages722924e9／8567byte／実1752tokenを、現120u adapterと同base851bf6eのadapter無効化で各1POSTだけ比較する。base model IDはcocolon-qwen3.5-4b-analysis-base-851bf6e-candidateと明示し、candidate内のanalysis_base profileだけを追加する。両条件は同grammar／4096出力／32768context／90秒上限、nativeもglobal2要求上限。元natural／Pieceの2048／8192と現adapterの通常挙動は維持する。driver220秒、準備取得300秒、元提供復元込み420秒、学習／retry／SQL保存0。元提供117766のargv／env／cwdは同Pod内RAMから復元する。比較結果がよくても全12履歴の成立証明や通常採用とはしない。
