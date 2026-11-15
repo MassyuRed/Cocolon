@@ -41,6 +41,11 @@ const savedIdentity = value => typeof value === "string"
 // This is a visible choice, not proof of the private ADD checkpoint. The source
 // request must still revalidate this exact saved answer on the server.
 export function selectedPieceSupplementalAnswer(dto) {
+  if (dto?.correction_saved === true) {
+    if (!selectedPieceCorrection(dto) || dto.issued_count < 1) return null;
+    const answers = dto.timeline.filter(event => event.kind === 'ANSWER');
+    return answers[answers.length - 1];
+  }
   if (dto?.correction_saved || !savedIdentity(dto?.original?.id) || dto.state !== "COMPLETED" || dto.body_state !== "REFINED"
       || dto.answer_saved !== true || dto.answer_assessment !== "RESOLVED" || dto.meaning_updated !== true
       || !savedIdentity(dto.current_observation?.event_id) || !Number.isInteger(dto.issued_count)
@@ -71,25 +76,44 @@ export function selectedPieceSupplementalAnswer(dto) {
 export function selectedPieceCorrection(dto) {
   if (!savedIdentity(dto?.original?.id) || dto.state !== 'COMPLETED' || dto.body_state !== 'FINAL' ||
       dto.correction_saved !== true || dto.correction_assessment !== 'UNASSESSED' ||
-      dto.answer_saved !== false || dto.issued_count !== 0 || dto.pending_question || dto.can_continue ||
-      dto.can_retry || dto.failure_code || !savedIdentity(dto.current_observation?.event_id) ||
-      !Array.isArray(dto.timeline)) return null;
+      !Number.isInteger(dto.issued_count) || dto.issued_count < 0 || dto.issued_count > 3 ||
+      dto.pending_question || dto.can_continue || dto.can_retry || dto.failure_code ||
+      !savedIdentity(dto.current_observation?.event_id) || !Array.isArray(dto.timeline)) return null;
+  const rounds = dto.issued_count;
+  if (rounds === 0 ? dto.answer_saved !== false :
+      dto.answer_saved !== true || dto.answer_assessment !== 'RESOLVED' || dto.meaning_updated !== false) return null;
   const corrections = dto.timeline.filter(event => event?.kind === 'CORRECTION');
   const observations = dto.timeline.filter(event => event?.kind === 'OBSERVATION');
+  const answers = dto.timeline.filter(event => event?.kind === 'ANSWER');
+  const questions = dto.timeline.filter(event => event?.kind === 'QUESTION');
   const current = observations.filter(event => event.is_current === true);
-  if (corrections.length < 1 || observations.length !== corrections.length + 1 || current.length !== 1 ||
-      dto.timeline.some(event => ['QUESTION', 'ANSWER'].includes(event?.kind)) ||
+  if (corrections.length < 1 || answers.length !== rounds || questions.length !== rounds ||
+      observations.length !== rounds + corrections.length + 1 || current.length !== 1 ||
       current[0].event_id !== dto.current_observation.event_id || current[0].stage !== 'CORRECTED' ||
-      current[0].round_index !== 0) return null;
+      current[0].round_index !== rounds) return null;
   if (observations[0].stage !== 'INITIAL' || observations[0].round_index !== 0 ||
-      new Set([...corrections, ...observations].map(event => event.event_id)).size !== corrections.length + observations.length) return null;
+      !observations.every(event => savedIdentity(event.event_id)) ||
+      new Set([...corrections, ...observations, ...answers, ...questions].map(event => event.event_id)).size !==
+        corrections.length + observations.length + answers.length + questions.length) return null;
+  for (let i = 0; i < rounds; i += 1) {
+    const question = questions[i], answer = answers[i], before = observations[i], result = observations[i + 1];
+    if (!savedIdentity(question.event_id) || !savedIdentity(answer.event_id) ||
+        question.round_index !== i + 1 || answer.round_index !== i + 1 ||
+        typeof question.question_id !== 'string' || !question.question_id || answer.question_id !== question.question_id ||
+        typeof answer.text !== 'string' || !answer.text.trim() ||
+        result.stage !== 'REFINED' || result.round_index !== i + 1 ||
+        dto.timeline.indexOf(before) >= dto.timeline.indexOf(question) ||
+        dto.timeline.indexOf(question) >= dto.timeline.indexOf(answer) ||
+        dto.timeline.indexOf(answer) >= dto.timeline.indexOf(result)) return null;
+  }
+  if (new Set(questions.map(event => event.question_id)).size !== rounds) return null;
   for (let i = 0; i < corrections.length; i += 1) {
-    const correction = corrections[i], target = observations[i], result = observations[i + 1];
-    if (!savedIdentity(correction.event_id) || correction.round_index !== 0 || correction.assessment !== 'UNASSESSED' ||
+    const correction = corrections[i], target = observations[rounds + i], result = observations[rounds + i + 1];
+    if (!savedIdentity(correction.event_id) || correction.round_index !== rounds || correction.assessment !== 'UNASSESSED' ||
         typeof correction.text !== 'string' || !correction.text.trim() ||
         typeof correction.target_text !== 'string' || !correction.target_text.trim() ||
         !savedIdentity(correction.target_event_id) || correction.target_event_id !== target.event_id ||
-        result.stage !== 'CORRECTED' || target.round_index !== 0 || result.round_index !== 0 ||
+        result.stage !== 'CORRECTED' || target.round_index !== rounds || result.round_index !== rounds ||
         dto.timeline.indexOf(target) >= dto.timeline.indexOf(correction) ||
         dto.timeline.indexOf(correction) >= dto.timeline.indexOf(result)) return null;
   }
@@ -342,15 +366,15 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
         {supplementalAnswer && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
           <Text style={[s.label, textStyle]}>{`ピースに含めるあなたの回答 · ${supplementalAnswer.round_index}問目`}</Text>
           <Text selectable style={[s.body, textStyle]}>{supplementalAnswer.text}</Text>
-          <Text style={[s.description, textStyle]}>元の記録と、この回答を使います。</Text>
+          <Text style={[s.description, textStyle]}>{correction ? "元の記録と、この回答と説明を使います。" : "元の記録と、この回答を使います。"}</Text>
         </View>}
         {correction && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
           <Text style={[s.label, textStyle]}>ピースに含めるあなたの説明</Text>
           {dto.timeline.filter(event => event.kind === 'CORRECTION').map(event =>
             <Text key={event.event_id} selectable style={[s.body, textStyle]}>{event.text}</Text>)}
-          <Text style={[s.description, textStyle]}>{dto.timeline.filter(event => event.kind === 'CORRECTION').length === 1 ? '元の記録と、この説明を使います。' : '元の記録と、ここに表示した説明を使います。'}</Text>
+          <Text style={[s.description, textStyle]}>{supplementalAnswer ? '元の記録と、表示した回答・説明を使います。' : dto.timeline.filter(event => event.kind === 'CORRECTION').length === 1 ? '元の記録と、この説明を使います。' : '元の記録と、ここに表示した説明を使います。'}</Text>
         </View>}
-        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>{correction ? '説明を含めてピースを作成' : supplementalAnswer ? "この回答を含めてピースを作成" : "ピースの作成"}</CocolonButton>
+        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>{correction && supplementalAnswer ? '回答と説明を含めてピースを作成' : correction ? '説明を含めてピースを作成' : supplementalAnswer ? "この回答を含めてピースを作成" : "ピースの作成"}</CocolonButton>
         <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisからの応答を閉じる">閉じる</CocolonButton>
         </ScrollView>
       </View>

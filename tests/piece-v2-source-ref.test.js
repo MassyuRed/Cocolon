@@ -291,7 +291,6 @@ for (const selection of [
   { expectedObservationIdentity: OBSERVATION, expectedStage: 'normal_observation' },
   { expectedObservationIdentity: OBSERVATION, expectedStage: 'pre_question_observation' },
   { expectedObservationIdentity: OBSERVATION, expectedStage: 'refined_observation' },
-  { ...correctedSelection(), supplementalAnswerIdentity: ANSWER },
 ]) test('an incomplete, incoherent or mixed corrected selection is rejected before IO', async () => {
   const a = load();
   await assert.rejects(a.requestPieceSourceRef(INPUT, opts(selection)), closed('PIECE_REQUEST_INVALID'));
@@ -367,4 +366,41 @@ for (const value of [
     visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },
   opts({ idempotencyKey: 'invalid-corrected-preview' })), closed('PIECE_SOURCE_NOT_ELIGIBLE'));
   assert.equal(a.calls.length, 0); assert.equal(a.sessions.length, 0);
+});
+
+const answeredCorrectedReference = (answer = ANSWER, observation = OBSERVATION) => ({
+  ...correctedReference(observation), question_need_decision_identity: 'real-question-event',
+  supplemental_answer_identity: answer,
+});
+const answeredCorrectedSelection = () => ({ ...correctedSelection(), supplementalAnswerIdentity: ANSWER });
+test('a corrected answer co-selection sends only its answer query and retains both explicit identities', async () => {
+  const a = load({ send: async () => ({ status: 200, json: async () => answeredCorrectedReference() }) });
+  const ref = await a.requestPieceSourceRef(INPUT, opts(answeredCorrectedSelection()));
+  assert.equal(a.calls[0][0], `/emotion/piece/source-ref/${INPUT}?supplemental_answer_identity=${ANSWER}`);
+  assert.equal(a.calls[0][1].body, undefined);
+  assert.deepEqual(clone(ref), answeredCorrectedReference());
+  assert.equal(Object.keys(ref).length, 7);
+  const preview = previewFixture(), b = load({ send: async () => ({ status: 200, json: async () => preview }) });
+  await b.requestPiecePreview({ source_ref: ref, requested_format: null,
+    visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } }, opts({ idempotencyKey: 'answer-corrected-preview' }));
+  assert.deepEqual(JSON.parse(b.calls[0][1].body).source_ref, answeredCorrectedReference());
+});
+for (const returned of [answeredCorrectedReference(OTHER_ANSWER), answeredCorrectedReference(ANSWER, OTHER_OBSERVATION),
+  refinedReference(), correctedReference(), { ...answeredCorrectedReference(), question_need_decision_identity: null },
+  { ...answeredCorrectedReference(), private_explanation: 'PRIVATE' }]) {
+  test('co-selection never accepts a different answer/OBS, missing pair or unsolicited private source', async () => {
+    const a = load({ send: async () => ({ status: 200, json: async () => returned }) });
+    await assert.rejects(a.requestPieceSourceRef(INPUT, opts(answeredCorrectedSelection())), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(a.calls.length, 1);
+  });
+}
+test('Auth-time caller mutation cannot switch either captured co-selected identity', async () => {
+  const options = opts(answeredCorrectedSelection());
+  const a = load({ session: async (_owner, n) => {
+    if (n === 1) { options.supplementalAnswerIdentity = OTHER_ANSWER; options.expectedObservationIdentity = OTHER_OBSERVATION; }
+    return 'synthetic';
+  }, send: async () => ({ status: 200, json: async () => answeredCorrectedReference() }) });
+  const ref = await a.requestPieceSourceRef(INPUT, options);
+  assert.equal(ref.supplemental_answer_identity, ANSWER); assert.equal(ref.emlis_observation_result_identity, OBSERVATION);
+  assert.match(a.calls[0][0], new RegExp(ANSWER + '$'));
 });

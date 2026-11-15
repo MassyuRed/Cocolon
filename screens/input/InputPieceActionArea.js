@@ -46,8 +46,7 @@ function savedInputStamp(props) {
     Object.prototype.hasOwnProperty.call(value, 'expectedStage'));
   if (Object.prototype.hasOwnProperty.call(props, 'context') || !value ||
       typeof value !== 'object' || Array.isArray(value) ||
-      (selectedAnswer && selectedObservation) ||
-      Object.keys(value).length !== (selectedObservation ? 5 : selectedAnswer ? 4 : 3) ||
+      Object.keys(value).length !== (3 + (selectedAnswer ? 1 : 0) + (selectedObservation ? 2 : 0)) ||
       !['savedInputId', 'expectedUserId', 'idempotencyKey'].every(key =>
         Object.prototype.hasOwnProperty.call(value, key))) return null;
   const { savedInputId, expectedUserId, idempotencyKey } = value;
@@ -68,7 +67,7 @@ function savedInputStamp(props) {
       value.expectedObservationIdentity === '00000000-0000-0000-0000-000000000000' ||
       value.expectedStage !== 'corrected_observation')) return null;
   return JSON.stringify([savedInputId, expectedUserId, idempotencyKey,
-    ...(selectedObservation ? [null, value.expectedObservationIdentity, value.expectedStage]
+    ...(selectedObservation ? [selectedAnswer ? value.supplementalAnswerIdentity : null, value.expectedObservationIdentity, value.expectedStage]
       : selectedAnswer ? [value.supplementalAnswerIdentity] : [])]);
 }
 
@@ -322,9 +321,9 @@ export default class InputPieceActionArea extends React.Component {
 
   restoreSaveRecovery() {
     if (!this.props.saveRecovery || !this.savedMode || !this.isCurrent()) return false;
-    const [savedInputId, expectedUserId, idempotencyKey, , expectedObservationIdentity, expectedStage] = JSON.parse(this.boundSavedInputStamp);
+    const [savedInputId, expectedUserId, idempotencyKey, supplementalAnswerIdentity, expectedObservationIdentity, expectedStage] = JSON.parse(this.boundSavedInputStamp);
     return this.controller.restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey,
-      ...(expectedStage === undefined ? {} : { expectedObservationIdentity, expectedStage }),
+      ...(expectedStage === undefined ? {} : { expectedObservationIdentity, expectedStage, supplementalAnswerIdentity }),
       saveEnabled: this.saveEnabled() });
   }
 

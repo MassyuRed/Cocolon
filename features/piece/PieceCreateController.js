@@ -619,7 +619,8 @@ export function createPieceCreateController(configuration = {}) {
           savedInputId: captured.request.source_ref.source_input_id,
           idempotencyKey: contextOperation.idempotencyKey, saveEnabled,
           expectedStage: captured.request.source_ref.emlis_observation_stage,
-          expectedObservationIdentity: captured.request.source_ref.emlis_observation_result_identity });
+          expectedObservationIdentity: captured.request.source_ref.emlis_observation_result_identity,
+          supplementalAnswerIdentity: captured.request.source_ref.supplemental_answer_identity });
         if (!restored) {
           boundaryCode = 'PIECE_CONFLICT';
           clearAttempt();
@@ -634,7 +635,7 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   function restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey, saveEnabled: allowSave,
-      expectedStage, expectedObservationIdentity }) {
+      expectedStage, expectedObservationIdentity, supplementalAnswerIdentity }) {
     if (disposed || saveIntent || cancelIntent) return false;
     const store = configuration.getSaveRecovery?.();
     const entry = store?.find(expectedUserId, savedInputId);
@@ -643,7 +644,8 @@ export function createPieceCreateController(configuration = {}) {
     const source = captured.request.source_ref;
     if ((expectedStage === 'corrected_observation' || source.emlis_observation_stage === 'corrected_observation') &&
         (source.emlis_observation_stage !== expectedStage ||
-          source.emlis_observation_result_identity !== expectedObservationIdentity)) return false;
+          source.emlis_observation_result_identity !== expectedObservationIdentity ||
+          source.supplemental_answer_identity !== (supplementalAnswerIdentity ?? null))) return false;
     const binding = preparePiecePreviewRequest(captured.request, { expectedUserId, idempotencyKey });
     enabled = false;
     contextOperation = null;

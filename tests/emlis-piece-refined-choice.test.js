@@ -320,3 +320,57 @@ test('all actual explanations are shown and creation remains bound to the final 
   assert.equal(h.routes.length,1);
   assert.equal(h.routes[0][1].params.savedInput.expectedObservationIdentity,d.current_observation.event_id);
 });
+
+const CREATE_ANSWER_CORRECTED = '回答と説明を含めてピースを作成';
+function answeredCorrected(rounds = 1, corrections = 1) {
+  const id = n => `70000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
+  const d = corrected(), timeline = [{ event_id: id(1), kind: 'OBSERVATION', stage: 'INITIAL', round_index: 0,
+    is_current: false, text: '初回の返事です。' }];
+  for (let i = 1; i <= rounds; i++) timeline.push(
+    { event_id: id(10 + i), kind: 'QUESTION', question_id: `issued-${i}`, round_index: i, text: `質問${i}` },
+    { event_id: id(20 + i), kind: 'ANSWER', question_id: `issued-${i}`, round_index: i, text: `私は回答${i}を伝えた。` },
+    { event_id: id(30 + i), kind: 'OBSERVATION', stage: 'REFINED', round_index: i, is_current: false, text: `回答後${i}の返事です。` });
+  for (let i = 1; i <= corrections; i++) {
+    const target = timeline[timeline.length - 1];
+    timeline.push({ event_id: id(40 + i), kind: 'CORRECTION', round_index: rounds, assessment: 'UNASSESSED',
+      text: `本人説明${i}。`, target_text: target.text, target_event_id: target.event_id },
+    { event_id: id(50 + i), kind: 'OBSERVATION', stage: 'CORRECTED', round_index: rounds,
+      is_current: i === corrections, text: `訂正後${i}の返事です。` });
+  }
+  return { ...d, issued_count: rounds, answer_saved: true, answer_assessment: 'RESOLVED', meaning_updated: false,
+    timeline, current_observation: { event_id: timeline[timeline.length - 1].event_id, text: timeline[timeline.length - 1].text } };
+}
+for (const rounds of [1, 2, 3]) for (const corrections of [1, 2]) {
+  test(`corrected choice co-selects the latest real answer and current OBS (${rounds}/${corrections})`, async t => {
+    const d = answeredCorrected(rounds, corrections), h = await mount(t, { dto: d });
+    const answer = d.timeline.filter(e => e.kind === 'ANSWER').at(-1);
+    assert.equal(selectedPieceSupplementalAnswer(d), answer);
+    assert.equal(selectedPieceCorrection(d), d.timeline.filter(e => e.kind === 'CORRECTION').at(-1));
+    const texts = h.root.root.findAllByType('Text').map(e => e.props.children);
+    assert.ok(texts.includes(answer.text));
+    for (const c of d.timeline.filter(e => e.kind === 'CORRECTION')) assert.ok(texts.includes(c.text));
+    for (const a of d.timeline.filter(e => e.kind === 'ANSWER').slice(0, -1)) assert.ok(!texts.includes(a.text));
+    assert.equal(h.button(CREATE_ANSWER_CORRECTED).props.disabled, false);
+    await act(async () => h.button(CREATE_ANSWER_CORRECTED).props.onPress()); await h.dismiss();
+    const target = h.routes[0][1].params.savedInput;
+    assert.equal(target.supplementalAnswerIdentity, answer.event_id);
+    assert.equal(target.expectedObservationIdentity, d.current_observation.event_id);
+    assert.equal(target.expectedStage, 'corrected_observation');
+    assert.equal(Object.keys(target).length, 6);
+    assert.doesNotMatch(JSON.stringify(target), /本人説明|回答後|訂正後|issued-/);
+  });
+}
+for (const mutate of [
+  d => { d.answer_saved = false; }, d => { d.answer_saved = 1; },
+  d => { d.meaning_updated = true; }, d => { delete d.meaning_updated; },
+  d => { d.answer_assessment = 'UNRESOLVED'; }, d => { d.issued_count = 4; },
+  d => { d.timeline[1].question_id = 'different'; }, d => { d.timeline[2].round_index = 2; },
+  d => { d.timeline[3].stage = 'CORRECTED'; }, d => { d.timeline[4].target_event_id = d.timeline[0].event_id; },
+  d => { d.timeline[4].round_index = 0; }, d => { d.timeline[5].round_index = 0; },
+  d => { [d.timeline[2], d.timeline[3]] = [d.timeline[3], d.timeline[2]]; },
+  d => { d.timeline.splice(1, 1); }, d => { d.timeline[0].is_current = true; },
+]) test('an incomplete answer/correction chain cannot offer either partial source choice', () => {
+  const d = answeredCorrected(); mutate(d);
+  assert.equal(selectedPieceCorrection(d), null, mutate.toString());
+  assert.equal(selectedPieceSupplementalAnswer(d), null, mutate.toString());
+});

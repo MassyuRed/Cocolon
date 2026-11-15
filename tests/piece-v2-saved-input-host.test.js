@@ -65,14 +65,14 @@ function stackRecovery() {
 
 const CORRECTED_OBSERVATION = '60000000-0000-4000-8000-000000000006';
 const OTHER_CORRECTED_OBSERVATION = '60000000-0000-4000-8000-000000000007';
-function correctedRef(observation = CORRECTED_OBSERVATION) {
-  return { ...ref(), emlis_observation_stage: 'corrected_observation',
+function correctedRef(observation = CORRECTED_OBSERVATION, answer = null) {
+  return { ...ref(INPUT, false, answer), emlis_observation_stage: 'corrected_observation',
     emlis_observation_result_identity: observation };
 }
-function correctedFixture({ observation = CORRECTED_OBSERVATION, send, ...options } = {}) {
+function correctedFixture({ observation = CORRECTED_OBSERVATION, selectedAnswer, send, ...options } = {}) {
   let u;
-  u = fixture({ ...options, send: send || (async (_url, sent) =>
-    packet(sent.method === 'GET' ? correctedRef(observation) : u.expected)) });
+  u = fixture({ ...options, selectedAnswer, send: send || (async (_url, sent) =>
+    packet(sent.method === 'GET' ? correctedRef(observation, selectedAnswer ?? null) : u.expected)) });
   u.host.props.savedInput = { ...u.host.props.savedInput, expectedObservationIdentity: observation,
     expectedStage: 'corrected_observation' };
   return u;
@@ -100,7 +100,7 @@ test('incomplete or expanded corrected navigation never reads a source or falls 
     s => { delete s.expectedStage; }, s => { delete s.expectedObservationIdentity; },
     s => { s.expectedStage = 'normal_observation'; }, s => { s.expectedObservationIdentity = 'latest'; },
     s => { s.expectedObservationIdentity = '00000000-0000-0000-0000-000000000000'; },
-    s => { s.supplementalAnswerIdentity = ANSWER; }, s => { s.correction_id = 'PRIVATE'; },
+    s => { s.supplementalAnswerIdentity = null; }, s => { s.correction_id = 'PRIVATE'; },
     s => { s.explanation = 'PRIVATE'; },
   ]) {
     const u = correctedFixture(); mutate(u.host.props.savedInput);
@@ -1029,4 +1029,62 @@ test('expired selected preview restarts with the same source and a new key witho
   assert.notEqual(u.calls[1][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
   assert.equal(JSON.parse(u.calls[2][1].body).source_ref.supplemental_answer_identity, ANSWER);
   u.host.componentWillUnmount();
+});
+
+// The existing six-field navigation carries only body-free chosen identities.
+test('answer and corrected OBS remain co-selected from host source GET through preview', async () => {
+  const u = correctedFixture({ selectedAnswer: ANSWER }); u.mount();
+  await resolver(u); assert.equal(u.host.sourcePhase, 'ready');
+  assert.equal(u.calls[0][0], `/emotion/piece/source-ref/${INPUT}?supplemental_answer_identity=${ANSWER}`);
+  u.host.start(); await tick();
+  assert.equal(u.calls.length, 2);
+  const source = JSON.parse(u.calls[1][1].body).source_ref;
+  assert.equal(source.supplemental_answer_identity, ANSWER);
+  assert.equal(source.emlis_observation_result_identity, CORRECTED_OBSERVATION);
+  assert.ok(u.body()); u.host.componentWillUnmount();
+});
+test('answer A-B-A under the same corrected OBS invalidates an in-flight source read', async () => {
+  const seed = fixture(), pending = seed.deferred();
+  const u = correctedFixture({ selectedAnswer: ANSWER, send: async () => pending.promise });
+  u.mount(); const loading = resolver(u); await tick();
+  const a = { ...u.host.props.savedInput };
+  u.host.props.savedInput = { ...a, supplementalAnswerIdentity: OTHER_ANSWER }; u.host.componentDidUpdate();
+  u.host.props.savedInput = a; u.host.componentDidUpdate();
+  pending.resolve(packet(correctedRef(CORRECTED_OBSERVATION, ANSWER))); await loading;
+  u.host.start(); await tick();
+  assert.equal(u.calls.length, 1); assert.equal(u.host.sourcePhase, 'idle'); assert.equal(u.body(), undefined);
+  u.host.componentWillUnmount();
+});
+for (const nextAnswer of [ANSWER, OTHER_ANSWER, null]) test(`corrected save recovery retains the exact selected answer (${nextAnswer})`, async () => {
+  const seed = fixture(), recovery = stackRecovery(); let saves = 0;
+  let source = correctedRef(CORRECTED_OBSERVATION, ANSWER);
+  const send = async (url, options) => {
+    if (options.method === 'GET') return packet(source);
+    if (!url.endsWith('/save')) return packet(seed.expected);
+    if (++saves > 1) return packet(seed.saveReceipt({ idempotency_replayed: true }));
+    return packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503);
+  };
+  const first = correctedFixture({ selectedAnswer: ANSWER, send, admitSave: true, saveEnabled: true });
+  first.host.props = { ...first.host.props, saveRecovery: recovery };
+  first.mount(); await resolver(first); first.host.start(); await tick(); await first.startSave();
+  const entry = recovery.find(OWNER, INPUT); assert.ok(entry);
+  first.host.componentWillUnmount();
+  source = correctedRef(CORRECTED_OBSERVATION, nextAnswer);
+  const second = correctedFixture({ ...(nextAnswer === null ? {} : { selectedAnswer: nextAnswer }), send, admitSave: true, saveEnabled: true });
+  second.host.props = { ...second.host.props, saveRecovery: recovery,
+    savedInput: { ...second.host.props.savedInput, idempotencyKey: 'fresh-co-selected-navigation' } };
+  second.mount(); await resolver(second); second.host.start(); await tick();
+  if (nextAnswer === ANSWER) {
+    assert.equal(second.calls.length, 0);
+    second.host.retry(); await tick();
+    assert.equal(second.calls.length, 1); assert.equal(second.calls[0][0], '/emotion/piece/save');
+    assert.equal(second.calls[0][1].body, first.calls[2][1].body);
+    assert.equal(second.host.controller.getView().phase, 'saved');
+  } else {
+    assert.equal(second.calls.length, 2); await second.startSave(); await tick();
+    assert.equal(second.calls.length, 2, 'a different answer cannot replay the retained save');
+    assert.equal(second.body(), undefined); assert.equal(second.host.controller.getView().phase, 'unavailable');
+    assert.equal(recovery.find(OWNER, INPUT), entry);
+  }
+  second.host.componentWillUnmount();
 });

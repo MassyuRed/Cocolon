@@ -109,7 +109,8 @@ function requestBody(value) {
   const refinedSource = source.emlis_observation_stage === 'refined_observation' &&
     text(source.question_need_decision_identity) && pieceUuid(source.supplemental_answer_identity);
   const correctedSource = source.emlis_observation_stage === 'corrected_observation' &&
-    source.question_need_decision_identity === null && source.supplemental_answer_identity === null &&
+    (source.question_need_decision_identity === null && source.supplemental_answer_identity === null ||
+      text(source.question_need_decision_identity) && pieceUuid(source.supplemental_answer_identity)) &&
     pieceUuid(source.emlis_observation_result_identity);
   if (source.source_input_version !== 'emlis.current_input_bundle.v1' ||
       !(originalSource || refinedSource || correctedSource)) reject('PIECE_SOURCE_NOT_ELIGIBLE');
@@ -283,8 +284,7 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
     // Bind the displayed corrected observation inside RN, before Auth/HTTP.
     // These expectations never become GET query or request body fields.
     if ((selectedObservation || selectedStage) && (!sourceRead || !selectedObservation || !selectedStage ||
-        !pieceUuid(expectedObservationIdentity) || expectedStage !== 'corrected_observation' ||
-        Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity'))) reject('PIECE_REQUEST_INVALID');
+        !pieceUuid(expectedObservationIdentity) || expectedStage !== 'corrected_observation')) reject('PIECE_REQUEST_INVALID');
     const selectedAnswer = sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity')
       ? options.supplementalAnswerIdentity : null;
     if (sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity') &&
@@ -336,7 +336,8 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
       catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
       const ref = request.source_ref;
       if (ref.source_input_id !== savedInputId || (selectedObservation
-        ? ref.emlis_observation_stage !== expectedStage || ref.emlis_observation_result_identity !== expectedObservationIdentity
+        ? ref.emlis_observation_stage !== expectedStage || ref.emlis_observation_result_identity !== expectedObservationIdentity ||
+          ref.supplemental_answer_identity !== selectedAnswer
         : selectedAnswer === null
           ? ref.supplemental_answer_identity !== null || !['normal_observation', 'pre_question_observation'].includes(ref.emlis_observation_stage)
           : ref.emlis_observation_stage !== 'refined_observation' || ref.supplemental_answer_identity !== selectedAnswer)) {
