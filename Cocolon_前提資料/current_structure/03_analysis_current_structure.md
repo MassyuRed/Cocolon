@@ -1,3 +1,5 @@
+> **11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
+
 > **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)。
@@ -1683,3 +1685,10 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 **11/15最新：長履歴候補5cf37079の第一LEAFは211.30秒でlength受領、不採用。引用→原文欄の順序へ直接修正。** 実12記録の8／4分割で1POSTのみ、5740文字の未完JSON。記録番号とfield番号の取り違え、24件の異なる根拠への膨張、旧照明の使用停止の逆転・別記録混入を確認した。第二LEAF／MERGE・保存／再読・通常反映0、元提供PID113387へ復元（停止復元込み252.01秒）。新候補ccdd0a6cは引用を先に選び同じ原文欄へ束縛、生成根拠最大4・node連番・生成済み端点を保持し関連267件PASS。新実4Bは別一回を準備中。通常API／worker24bc228d・DB20261115011424を維持し、本単位／補助全体未完、build／TestFlight／本人実機保留。詳細と原本は補助設計§9.76。
 
 既存semantic作者・隔離decoder内だけの修復。source／rights・cohort・全量guard・公開v3・SQL保存owner・月次・唯一realizer・RNは不変。新規恒久subsystemや移行は追加しません。API変更は既存semantic_admission、native提供、生成制約test、4B packet testと既存fixture（API ccdd0a6c）。実raw・scope・途中失敗・次の直接一回は設計§9.76を正とします。
+
+
+### 11/15 長履歴の第一LEAF完結と順序初期化修復（補助設計§9.77）
+
+**11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
+
+既存source／rights・cohort・全量guard・公開map・SQL一回保存・月次・RNと唯一realizerは維持。API変更は既存semantic_admission、native提供、Piece制約testと既存4B fixture。原本と検証失敗を含む結果・次の直接一回は設計§9.77を正とする。

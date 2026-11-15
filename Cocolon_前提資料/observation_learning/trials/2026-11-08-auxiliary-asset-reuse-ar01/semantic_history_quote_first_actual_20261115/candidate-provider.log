@@ -1,0 +1,45 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   6%|▌         | 40/723 [00:00<00:01, 354.99it/s]
+Loading weights:  11%|█         | 76/723 [00:00<00:01, 323.65it/s]
+Loading weights:  15%|█▌        | 109/723 [00:00<00:02, 291.66it/s]
+Loading weights:  19%|█▉        | 139/723 [00:00<00:01, 294.12it/s]
+Loading weights:  24%|██▎       | 170/723 [00:00<00:01, 296.71it/s]
+Loading weights:  28%|██▊       | 200/723 [00:00<00:01, 287.49it/s]
+Loading weights:  32%|███▏      | 229/723 [00:00<00:01, 287.54it/s]
+Loading weights:  36%|███▌      | 258/723 [00:00<00:01, 276.22it/s]
+Loading weights:  40%|████      | 291/723 [00:00<00:01, 291.89it/s]
+Loading weights:  44%|████▍     | 321/723 [00:01<00:01, 291.01it/s]
+Loading weights:  49%|████▉     | 355/723 [00:01<00:01, 303.21it/s]
+Loading weights:  53%|█████▎    | 386/723 [00:01<00:01, 291.28it/s]
+Loading weights:  58%|█████▊    | 416/723 [00:01<00:01, 289.48it/s]
+Loading weights:  75%|███████▍  | 540/723 [00:01<00:00, 562.42it/s]
+Loading weights:  99%|█████████▉| 716/723 [00:01<00:00, 898.89it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 443.77it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=admitted monotonic=2289832.542
+analysis_generation_stage=tokenize monotonic=2289832.542
+analysis_generation_stage=constraint monotonic=2289832.613
+analysis_generation_stage=decode monotonic=2289832.622
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_0 monotonic=2289836.059
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2289836.071
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_128 monotonic=2289850.249
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_245464 monotonic=2289850.268
+analysis_generation_stage=prefix_enter_256 monotonic=2289862.562
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_3 monotonic=2289862.568
+analysis_generation_stage=complete_stop monotonic=2289863.332
+analysis_generation_stage=special_count_1 monotonic=2289863.335
+analysis_generation_stage=admitted monotonic=2289865.358
+analysis_generation_stage=tokenize monotonic=2289865.359
+analysis_generation_stage=constraint monotonic=2289865.382
+analysis_generation_stage=decode monotonic=2289865.388
+analysis_generation_stage=prefix_enter_0 monotonic=2289866.959
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2289867.081
+analysis_generation_stage=prefix_enter_128 monotonic=2289881.159
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_245464 monotonic=2289881.18
+analysis_generation_stage=failed_ValueError monotonic=2289893.318
