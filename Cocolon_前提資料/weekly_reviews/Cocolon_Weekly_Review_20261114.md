@@ -1,4 +1,4 @@
-> **11/15最新：同版12LEAFを受入完了。全文統合のbyte／起動context設定を実測に合わせて修正。** 11200b20は12LEAFが200／stop・受入完了491.31秒、MERGEは既定16,384tokenで生成前503。元提供PID116491へ復元、停止復元込み560.24秒、保存0。全24欄の統合候補は110,242byte・入力24,545＋出力4,096＝28,641tokenで既存32,768上限内。新8ae18c75はMERGEのbyte枠のみ131,072へ整合し、nativeは同bytes・起動引数で32,768を使用する限定確認を準備。前12をexact再admitして統合1POSTだけ生成、学習0。公式LMFE pinで文字制約／Analysis・IF連携212件とPiece58件成功、関連64件の境界確認成功。旧QAと公式pinのconfig保持の実装差も訂正。最終原入力照合・同版保存再読・通常反映は未完。通常API／worker24bc228d・DB20261115011424、配布保留。詳細§9.82。
+> **11/15最新：LEAFのAI説明を最終生成から外すMERGE v2候補。** 前8ae18c75の全24欄統合はHTTP200で4380字を受領したが、10項目完成・11項目目途中のlength終了、consumer503・保存0。driver256.733秒、復元込み301.928秒で元提供PID117095へ戻した。LEAF文の再使用による宛先逆転・既知返信の未知化と、compilerのAIunknown自動継承を確認。API dca20231は本人原文24欄全文、完全一致引用索引41件、12受領hashで再統合し、LEAF自然文・unknownを最終作者へ渡さない。元raw等とunknown候補はprivate未検証で保持し、公開nodeへ自動追加しない。LEAF v1 messagesはbyte同一、12receipt再検証済み、新messages88558bytes・省略0。関連167 PASS、CI進行中。次は新MERGE一回だけ、全体480秒上限。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
 
 # 第11回 Cocolon週末報告会 — 2026-11-14（終了）
 
@@ -995,3 +995,6 @@ worker既定900秒はstarted_at基準で、source取得／最終保存を含む�
 
 
 > **11/15最新：同版12LEAFを受入完了。全文統合のbyte／起動context設定を実測に合わせて修正。** 11200b20は12LEAFが200／stop・受入完了491.31秒、MERGEは既定16,384tokenで生成前503。元提供PID116491へ復元、停止復元込み560.24秒、保存0。全24欄の統合候補は110,242byte・入力24,545＋出力4,096＝28,641tokenで既存32,768上限内。新8ae18c75はMERGEのbyte枠のみ131,072へ整合し、nativeは同bytes・起動引数で32,768を使用する限定確認を準備。前12をexact再admitして統合1POSTだけ生成、学習0。公式LMFE pinで文字制約／Analysis・IF連携212件とPiece58件成功、関連64件の境界確認成功。旧QAと公式pinのconfig保持の実装差も訂正。最終原入力照合・同版保存再読・通常反映は未完。通常API／worker24bc228d・DB20261115011424、配布保留。詳細§9.82。
+
+
+> **11/15最新：LEAFのAI説明を最終生成から外すMERGE v2候補。** 前8ae18c75の全24欄統合はHTTP200で4380字を受領したが、10項目完成・11項目目途中のlength終了、consumer503・保存0。driver256.733秒、復元込み301.928秒で元提供PID117095へ戻した。LEAF文の再使用による宛先逆転・既知返信の未知化と、compilerのAIunknown自動継承を確認。API dca20231は本人原文24欄全文、完全一致引用索引41件、12受領hashで再統合し、LEAF自然文・unknownを最終作者へ渡さない。元raw等とunknown候補はprivate未検証で保持し、公開nodeへ自動追加しない。LEAF v1 messagesはbyte同一、12receipt再検証済み、新messages88558bytes・省略0。関連167 PASS、CI進行中。次は新MERGE一回だけ、全体480秒上限。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。

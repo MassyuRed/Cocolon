@@ -1,0 +1,1 @@
+{"fallback": {"fits32768": true, "input_tokens": 19208, "message_bytes": 80209, "with_output4096": 23304}, "full": {"fits32768": true, "input_tokens": 24545, "message_bytes": 110242, "with_output4096": 28641}, "native_boot_context_verified": 16384, "native_cli_context_supported": 32768, "new_model_calls": 0, "state": "CPU_CAPACITY_ONLY"}

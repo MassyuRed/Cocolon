@@ -1,4 +1,4 @@
-> **11/15最新：同版12LEAFを受入完了。全文統合のbyte／起動context設定を実測に合わせて修正。** 11200b20は12LEAFが200／stop・受入完了491.31秒、MERGEは既定16,384tokenで生成前503。元提供PID116491へ復元、停止復元込み560.24秒、保存0。全24欄の統合候補は110,242byte・入力24,545＋出力4,096＝28,641tokenで既存32,768上限内。新8ae18c75はMERGEのbyte枠のみ131,072へ整合し、nativeは同bytes・起動引数で32,768を使用する限定確認を準備。前12をexact再admitして統合1POSTだけ生成、学習0。公式LMFE pinで文字制約／Analysis・IF連携212件とPiece58件成功、関連64件の境界確認成功。旧QAと公式pinのconfig保持の実装差も訂正。最終原入力照合・同版保存再読・通常反映は未完。通常API／worker24bc228d・DB20261115011424、配布保留。詳細§9.82。
+> **11/15最新：LEAFのAI説明を最終生成から外すMERGE v2候補。** 前8ae18c75の全24欄統合はHTTP200で4380字を受領したが、10項目完成・11項目目途中のlength終了、consumer503・保存0。driver256.733秒、復元込み301.928秒で元提供PID117095へ戻した。LEAF文の再使用による宛先逆転・既知返信の未知化と、compilerのAIunknown自動継承を確認。API dca20231は本人原文24欄全文、完全一致引用索引41件、12受領hashで再統合し、LEAF自然文・unknownを最終作者へ渡さない。元raw等とunknown候補はprivate未検証で保持し、公開nodeへ自動追加しない。LEAF v1 messagesはbyte同一、12receipt再検証済み、新messages88558bytes・省略0。関連167 PASS、CI進行中。次は新MERGE一回だけ、全体480秒上限。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.82: all12 exact leaves admitted; merge rejected at native default16384 before generation, provider restored PID116491. Full24fields are110242bytes and24545+4096tokens, within existing32768. Candidate8ae18c75 aligns merge byte envelope131072; preserve exact12 receipts and native bytes, acquire only1 full-source merge with context32768, then source read, same-version SQL save/reread and normal rollout. New CI pending. Normal24bc228d/DB20261115011424 unchanged; build/device deferred."
+current_next: "Section9.83: source-only MERGE v2 dca20231; prior full merge actual200/length and raw preserved, original PID117095 restored. Reuse exact12 LEAF receipts, pass original24fullfields +41source quotes +12hash receipts, no AI leaf prose/unknown; candidates remain private unassessed, no public auto-inheritance. CPU167PASS, payload88558bytes/omitted0; acquire only1 new merge after cached-tokenizer proof, driver320/acquisition390/overall480seconds. Source review, same-version SQL save/reread and normal rollout remain. CI pending. Normal24bc228d/DB20261115011424; oldmaps unchanged, build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -4205,7 +4205,7 @@ STRUCTURE_MAP_DELTA_PRESENT：全体現在地・01A／01B・Piece／CMEE地図�
 
 既存Engine／admission／compiler／唯一realizerを通す。最終MERGEは子のAI仮解釈だけでなく、実提示する原field断片、カテゴリ／感情／強度／日時、全field manifest・未提示範囲・unknownから記録間関係を読み直す。子の図を単に連結せず、AI文を本人sourceへ昇格しない。最終引用とcompilerが追加するsupport根拠の両方を、親sourceと実提示範囲へ再束縛する。本人map訂正説明は最終図でも独立した全文根拠にする。
 
-LEAFの未知は最終rawを修補せず、同じenvelope／field／scalarからcompiled nodeへ安定順で継承する。完全一致だけ重複除去し、4件超を切り捨てない。未知解消・全文理解を認定せず、由来と省略範囲を既存private `meaning_review.history_synthesis`へ保持する。
+**後続§9.83のMERGE v2で改訂。** LEAFのAI自然文とunknownは、元raw・packet・coverage・hashとともにprivate未検証候補として保持し、最終作者の材料や公開nodeへ自動継承しない。本人原文の不明・留保と本人訂正説明の義務は維持する。最終unknownは実提示原文から生成して既存採否を通し、全文理解・未知解消を認定しない。
 
 通常ensureから既存`analysis_cumulative_commit`へ最終artifactだけを一回保存する。途中失敗・容量超過・取消しで部分mapを保存せず、前のcurrentと月次当時版を保つ。公開`watashi.map.v3`・既存SQL／RN／rendererを用い、新table・migration・公開型・model selector・重み変更0。
 
@@ -4509,3 +4509,21 @@ MERGEは13番HTTP503、取得本体516.389秒、nativeはtokenize直後のcontex
 検証環境の訂正：公式LMFE817f944のTokenEnforcerはreplace(parser.config,alphabet=...)で既存設定を保持する。旧QA0.11.3の新Configへresetする挙動とは異なる。§9.80／81のimport時既定値捕捉・stale-moduleをCI原因とする説明は根拠とせず、fixtureの仮説patch／2caseを撤去した。通常Piece／AnalysisはTrue→True、Analysis復旧guardだけ明示的False注入で検査する。公式pin使用でnative／Analysis・IF連携212成功、Piece58成功。先行旧QA全38fileは2701成功／旧Gitblob不足1失敗、その1件は7f51原本取得後成功。11200 CIは4fixture失敗／2698成功、Analysis成功確認は別管理。新ff5a2fbbはtestだけ修復し、その後8aeでbyte枠を整合。新head CIは確認中であり、旧QAの全成功を公式pinの全CI成功へ読み替えない。
 
 次のsemantic_history_merge_context_once_20261115.pyは、受入済み同native／同4Bの12exact wire/bodyを再admitし、新full MERGE1POSTだけを生成する。source2fileだけ新8ae／hash固定へ更新、前native全bytes583a10e8は保持、candidateargvに--context-tokens32768だけを加える。新driver300秒・停止復元込み420秒、学習／新契約／自動retry0。旧516.389＋新取得枠300は840秒未満だが、fresh13件一括完走とは区別する。全24field／omitted0／messages hashと実token証跡SHAをPOST前に固定する。適切な最終結果の原入力照合→同版SQL一回保存→currentと同IDの非生成再読→通常decoder／API／worker反映までは未完。build／TestFlight／本人実機は別保留。
+
+
+<a id="analysis-semantic-source-only-merge-20261115"></a>
+## 9.83 11/15 — LEAFの仮読みを最終生成から外し、原文から統合する候補
+
+前候補8ae18c75の全24欄を提示したMERGEはHTTP200で本文を受領したが、finish_reason=lengthで終了した。無修補rawは4380字、10項目完成・11項目目途中でJSON未閉、consumerは503、保存0である。driver256.73263280540004秒、停止復元込み301.9282689928077秒で元提供PID117095へ復元した。「503でrawなし」という初読は誤りとして訂正し、受領済み原本を保持する。全結果はmerge_context_actual_20261115/semantic-history.actual.result.json.gzへ無変更JSONをgzipで収録し、原本SHA256は4d11d2bd88dc53bf540ed24ed609bd1fec19f341459a9a2b2399f1835b70b382。response-13.txtは受領途中本文そのままである。
+
+本文では、LEAF7の説明を再使用して利用者向け情報の宛先を担当者へ逆転し、LEAF12の説明を再使用して既知の「了解」返信を未知へ戻していた。別記録のAI文も混入した。またcompilerは、原根拠の範囲が重なるだけでLEAFのAIunknownを最終nodeへ自動追加していた。privateの未検証表示だけでは、公開本文への混入を防げていなかった。
+
+API候補dca20231ad1791c07a5011d6905340c78d4de0b3は既存semantic owner内でMERGEをsemantic_map.history_synthesis.v2へ変更する。最終作者には本人原文24欄全文と既存source/controlを維持し、LEAF由来の情報は平坦化した完全一致引用索引41件（field／quote／scalar_rangeのみ）と、12受領のrequest／messages／response hashだけを渡す。LEAFのoverview・項目説明・分類・unknownは提示しない。引用位置の一致を意味確認済みとは扱わず、原文から主体・対象・時点・条件・留保と記録間の関係を読み直す。LEAF v1 messagesの同一性を保つ共通instructionの旧キーへの言及は残るが、MERGE v2の材料に旧キーとAI自然文は存在しない。
+
+元LEAFのraw・packet・coverage・hashは、束縛されたreceiptからprivate meaning_review.history_synthesis.leaf_candidatesへ再導出して保持する。scoped_unknownsもprivate未検証候補とし、inherited_unknowns=[]、unknown_handling=PRIVATE_ONLY_UNASSESSEDとする。最終nodeのunknownへ自動追加せず、最終作者自身が原根拠から返して既存採否を通した内容を使う。本人sourceに明記された不明・留保、source duties、本人訂正説明全文の根拠使用義務は維持する。保存済み当時版の自動書換えは行わず、新生成／次のsource更新から新境界を使用する。公開DTO／endpoint／SQL migration／RN変更はない。
+
+LEAF v1 messagesはbyte同一で、既存12receiptを変更せず再検証した。新MERGEは88558bytes、24欄、引用索引41件、receipt12件、省略範囲0、messages SHA256は878eb91858f3b95c30185e3f6aa7e858ad023a453b3687380838e2b71ee21610、stage refはanalysis-semantic-stage:fed68c054d69b79d59bcead7082d25222ea94fbc5fa97014d503368110c124c0。このCPU preflightの新モデル要求は0。原入力はmemo17314＋memo_action1039＝合計18353 Unicode scalar／54771 UTF-8 byteである。全原文の提示と全文の意味理解成立は区別する。
+
+非生成検証はcore／service58件（84.73秒）と既存consumer109件（17.72秒）の計167 PASS。必要な検査は公式LMFE pinを使用した。CIは記録時点で進行中。Piece workflowは先行8aeで2701件＋78件成功後に最終stepが20分上限で取消しとなったため、job上限を35分へ変更した。検査の削除・選択縮小はない。
+
+次のsemantic_history_source_merge_once_20261115.py（SHA256 b6f047d08538333a14593056a89c51f3c59e35e81aad64e83cd773b821beadb6／26063bytes）は、同じ12receiptを使う新MERGE一回だけを取得する。新coreとintentのみ固定hashで取得し、native全bytes583a10e8・transport131072byte枠・同model／adapter／bridgeを維持する。停止前にcached tokenizerで実input＋4096≤32768を確認する。driver320秒、準備・候補取得390秒、取得・復元を含む全体480秒。旧516.389秒と新取得枠320秒は840秒内だが、fresh13件一括完走とは区別する。学習0、再試行0、元argv／env／cwdは同Pod内RAMから復元する。完成rawの意味照合・同版SQL保存再読・通常反映は未成立。通常API／worker24bc228d、DB20261115011424、build／TestFlight／本人実機は保留する。

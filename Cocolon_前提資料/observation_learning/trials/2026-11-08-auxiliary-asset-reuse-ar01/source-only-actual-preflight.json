@@ -1,0 +1,14 @@
+{
+  "state": "ACTUAL_TWELVE_RECEIPTS_REVALIDATED",
+  "new_model_calls": 0,
+  "api_commit": "dca20231ad1791c07a5011d6905340c78d4de0b3",
+  "request_ref": "analysis-semantic-stage:fed68c054d69b79d59bcead7082d25222ea94fbc5fa97014d503368110c124c0",
+  "messages_sha256": "878eb91858f3b95c30185e3f6aa7e858ad023a453b3687380838e2b71ee21610",
+  "message_bytes": 88558,
+  "fields": 24,
+  "receipts": 12,
+  "quote_index_entries": 41,
+  "omitted_ranges": 0,
+  "leaf_prose_in_payload": false,
+  "seconds": 16.873295
+}
