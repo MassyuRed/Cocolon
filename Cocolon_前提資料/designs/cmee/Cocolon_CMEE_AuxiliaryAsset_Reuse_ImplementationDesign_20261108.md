@@ -1,4 +1,4 @@
-> **11/15最新：3記録の引用参照後も家族／友人の意味混同を確認し、不採用。個別仮読みへ進む。** 0df12bb1の第一LEAFは66.11秒／stop、3記録の引用を保持したが、家族の新店を友人へ移し、本人の夜の用事を友人の夕食用事へ変更。既存CMEEは逆向き同種edgeの重複で拒否し、保存0・元提供PID115233へ復元（108.62秒）。新18ec8b47は既存nativeへCMEEと同じedge重複制約を接続。LEAFのpacking目標16,384byte／最大16とし、今回12記録は自然に各1仮読み＋同じMERGEの最大13応答になる。不可分cohort49,152・MERGE98,304・request262,144・native実token＋4096≤32768・全体840秒・一回保存は維持。関連315件成功は意味成功ではない。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.79追記。
+> **11/15最新：個別仮読みは8件で全体840秒へ到達。不採用を保ち、中間出力と統合文脈を修正。** 18ec8b47は8LEAFがstop、9件目は結果不明で504、MERGE／保存0。元提供PID115633へ復元し、停止復元込み880.54秒。受領本文には主体・対象・確認前後の反転が残る。新8c749361はLEAFだけ短い仮読み・空edges・必要な引用へ絞り、必須訂正の全文／容量は保持。MERGEは実message98,304byte内で全有効parent fieldを優先し、超過時は従来の一連続断片と省略記録を使う。全文提示も意味理解済みとはしない。import時のLMFE既定値に依存したtestも修正し、関連343件成功。新同12記録の実生成は準備段階。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.80。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -4448,3 +4448,36 @@ API0df12bb15a937108ca01b72a09382f418c1f2a0e：
 個別読取・SQL履歴・planner63件、native／Piece／三中核隣接252件の異なる計315件成功。native95件は252の内数。新sourceのCI・実13応答・意味採用・SQL保存・通常配置はまだ未主張。
 
 **現在の再開先：semantic_history_individual_cohort_once_20261115.py。** 同じ架空12record、同じ現adapter、12LEAF＋MERGE最大13応答・前後2GET、pipeline840秒・停止復元込み960秒、学習／新GPU契約／自動再試行0の新一回。旧閉じたtrialは再実行しない。全受領rawを原入力と読み、最終mapが適切な場合だけ隔離SQL同版保存・再読と通常API／worker／decoder反映へ進む。build／TestFlight／本人実機は保留。
+
+
+
+<a id="analysis-semantic-history-compact-context-20261115"></a>
+## 9.80 11/15 — 全体期限の実測から仮読みを簡潔化し、統合で全有効本文を優先（通常未採用）
+
+**11/15最新：個別仮読みは8件で全体840秒へ到達。不採用を保ち、中間出力と統合文脈を修正。** 18ec8b47は8LEAFがstop、9件目は結果不明で504、MERGE／保存0。元提供PID115633へ復元し、停止復元込み880.54秒。受領本文には主体・対象・確認前後の反転が残る。新8c749361はLEAFだけ短い仮読み・空edges・必要な引用へ絞り、必須訂正の全文／容量は保持。MERGEは実message98,304byte内で全有効parent fieldを優先し、超過時は従来の一連続断片と省略記録を使う。全文提示も意味理解済みとはしない。import時のLMFE既定値に依存したtestも修正し、関連343件成功。新同12記録の実生成は準備段階。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.80。
+
+### 個別仮読みの実結果
+
+同じ架空12記録、学習差分付き18ec8b47、12LEAF＋MERGE最大13要求で実行。8LEAFをHTTP200／stopで受領したが、9件目の応答確定前に共通840秒へ到達した。受領の累積秒は138.203／158.710／230.199／285.750／397.765／570.115／709.449／834.240。各node数は6／1／2／2／5／7／7／5で、最終統合前の図と関係線を詳述していた。9件目はFAILED_OR_ACK_UNKNOWN、結果は504・840.092298秒。MERGE未実行、保存／再読／通常反映0。元引数・環境・作業場所を同Pod内で保持して元提供PID115633へ復元し、全体880.539783秒で終了した。
+
+受領8本文を全文Product Read。R1は現在情報が資料へ反映されていないと後段の追記・送信を反転。R3は作家の展示を友人の展示、本人の用事を別人へ移した。R4は自由資金の少なさを修理代の少なさへ変更。R5は追加一箱なら動ける判断を動けなさへ反転し、未伝達状態も後へ延長。R6は伝えたい部分が入っているという根拠自体を未知化。R7は内容がそろっていないことを担当者がそろえないへ変えた。R8は本人の不案内を友人へ移した。中国語・英語の混入や同内容反復もあり、stop・引用一致を意味成功へ数えない。R2は初期選定の限定読解に明確な反転を見つけていないが、後段の予約・点検待ち・未実施は未表現。中間はAI仮解釈で本人事実ではなく、最終mapの採否は未到達。
+
+### 最小修正と不変条件
+
+候補API8c74936135c352222118217e3a0d8588932013f0。
+
+- LEAFだけを、後段へ主体・対象・記載時間順・条件・留保を引き継ぐ簡潔な仮読みへ変更。中間のedges=[]、通常は最大2node、根拠2件／node、短い図文・詳細とし、完成図を各記録で作り直す時間を減らす。最終MERGEの図／関係線と公開model.v2／watashi.map.v3は維持する。
+- node容量は引用可能record数と全文必須の本人マップ訂正数から最低枠も確保し、8訂正などを固定2nodeへ押し込めない。本人訂正の全文引用は短縮しない。その他は実在・一意の160文字以内の既存文候補があるfieldだけその候補へ絞り、ないfieldは旧合法候補を保持する。元field・本人回答・訂正は一文字も削らない。
+- MERGEは同じqualified parentの全有効fieldを、[0,len(text)]／complete=True／UNASSESSEDとしてまずstage化する。最終messages全体をUTF8 JSONで測り、98,304byte以内なら完全な有効本文を提示する。超過時だけ従来の引用±160文字の一連続断片へ戻し、省略範囲を保持する。撤回済み本文・未適格回答・AI対象文は復元しない。再導出で同じstageになることを検証する。
+- 全提示でもfull_source_semantic_coverage=False。byte合格も実token合格ではなく、nativeのtruncation=False・入力token＋4096≤32768を別に保持する。親49,152・LEAF目標16,384・不可分cohort49,152・最大16LEAF・request262,144、全体840秒、失敗時の部分保存0・以前map／月次保持を維持。
+- 新controller・endpoint・tokenizer依存・writer・生成後修補・weight変更・学習は追加していない。通常／Emlis／Piece／IFの既存ownerを分けたまま、既存semantic ownerとdecoderの必要箇所だけを変える。
+
+### 検証、原本、次の一回
+
+関連9suite343件成功（skip0、既存Pydantic警告1）。LMFE_STRICT_JSON_FIELD_ORDER=trueという他suiteのimport既定値も含めて確認した。先行18ecのAnalysis CIは成功、Piece CIは2698PASS／2FAILで、CPUテストがimport時の既定値をFalseと仮定していた。既存testの実constructor reset条件を明示し、receiverのJSONキー順非依存検査も明示した修正である。production Piece設定を変えたものではない。新commit CI・意味品質はまだ成功としない。
+
+coreの98,304byte実境界はSYSTEM制御文paddingで確認し、本人sourceを巨大化するfixtureは残していない。nativeには短候補なし・全文訂正・複数record／recordNone・参照保持・edge重複・Unicode／EOSの検証を含む。機械検査は原入力と実表示文の全文照合の代わりにしない。
+
+原本はindividual_cohort_actual_20261115のsource／wire／raw／logs／execution.json。first2は先回収prefixと全wire/body一致、残3〜8も全文読了した。同じ12記録は既使用評価で、未知入力へ戻さない。
+
+次はsemantic_history_compact_context_once_20261115.pyによる別一回。既存Pod、同じ架空12記録・現adapter、12LEAF＋MERGE最大13要求＋前後2GET、pipeline840秒・復元込み960秒、学習／新GPU契約／自動retry0。閉じた旧実行は再起動しない。全本文と最終mapを原入力へ照合し、適切な最終結果の同版SQL一回保存・現在版と同IDの非生成再読・通常API／worker／decoder反映まで進める。build／TestFlight／本人実機は別保留で、他の補助作業の開始条件にはしない。
