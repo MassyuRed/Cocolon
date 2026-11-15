@@ -1,0 +1,101 @@
+{
+  "state": "OFFLINE_PREPARED_NOT_EXECUTED",
+  "files": [
+    {
+      "name": "semantic_reader_base_control_once.py",
+      "bytes": 35139,
+      "sha256": "f40a84cccdcd87bf65b6b2f4b221dca58ccf3bd13b2302dee6ff47d2e98fbb41"
+    },
+    {
+      "name": "full12_sql_base_control_once.py",
+      "bytes": 33442,
+      "sha256": "2bae9cc96640a97a3add2a7374a488586af04606f51489d5dda980a2675409ae"
+    }
+  ],
+  "A4": {
+    "native_sha256": "bde22936f19b26daae9401a0feae1dd6742f592a0326bc1b927f482c59d8e9e5",
+    "driver_sha256": "4ac84abde19881389525ba309e41a34505cddac949c3de5d01b425f46823c961",
+    "max_calls": 2,
+    "native_seconds": 210,
+    "http_seconds": 220,
+    "typed_seconds": 225,
+    "driver_seconds": 385,
+    "acquisition_seconds": 420,
+    "restore_seconds": 540,
+    "predecessor": "A3",
+    "expected_restored_pid": 130379
+  },
+  "B4": {
+    "native_sha256": "a643f280311f4abe23e10678d14904bd841025ac00301c918a99cce037b6a687",
+    "driver_sha256": "ba2a2dbb2fad0447c72288cfdbb5b350b9b3e203fe2af886c45dc4228bdaee69",
+    "max_calls": 13,
+    "leaves": 12,
+    "merge": 1,
+    "service_seconds": 840,
+    "driver_seconds": 850,
+    "acquisition_seconds": 900,
+    "restore_seconds": 1020,
+    "conditional_on": "A4 independent meaning adequate"
+  },
+  "source_core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "model": "cocolon-qwen3.5-4b-analysis-base-851bf6e-candidate",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "training": 0,
+  "retry": 0,
+  "new_dependencies": 0,
+  "new_weights": 0,
+  "pod_operations": 0,
+  "model_calls": 0,
+  "current_normal_unchanged": true,
+  "same_sql_input_checkpoint_guard_asof_plan": true,
+  "total_bytes": 68581,
+  "independent_technical_review": {
+    "state": "NO_BLOCKING_FINDINGS",
+    "A4_A3_exact_predecessor_checked": true,
+    "only_intended_SHA_replacements": true,
+    "natural_Piece_branch_AST_preserved": true,
+    "base_alias_requires_Analysis_auth": true,
+    "same_4096_32768_semantic_constraints": true,
+    "B4_pid_only_from_A4_restored_pid": true,
+    "meaning_review_outside_code": true,
+    "native_hashes_independently_reproduced": true,
+    "limits": [
+      "Shared385 seconds does not guarantee two210-second responses.",
+      "Finite global request count also includes other authenticated requests to the temporary service."
+    ]
+  },
+  "teacher_source_audit": {
+    "source_plan": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_teaching9_plan.json",
+    "source_plan_sha256": "f969cd2b2b8020a21cb4a848371a15b9c89d475464b392d1043bec5fe8063474",
+    "all9_originals_and_targets_read": true,
+    "all_recorded_at_same": "2026-11-07T07:29:12",
+    "cross_record_same_target_unknown_to_later_confirmed_example_present": false,
+    "A3_wrong_known_to_unknown_example_taught_as_correct_found": false,
+    "T09_same_field_past_and_current_distinguished": true,
+    "failure_causality_established": false,
+    "source": "Existing ROOT_AUTHORED_SYNTHETIC teachers, not Mash teachers or accepted model quality."
+  },
+  "comparison_scope": {
+    "A3_frozen_comparator_actual_sha256": "e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb",
+    "A4_new_model_calls": 2,
+    "source_messages_schema_parser_native_limits_same": true,
+    "only_inference_change": "existing same4B base with Analysis LoRA temporarily disabled, explicit base alias",
+    "outer_budget_difference": "Shared total driver265->385/acquisition300->420/restore420->540; native210/http220/typed225 unchanged",
+    "no_new_prompt_or_source_relabeling": true,
+    "no_prepared_response_replay": true
+  },
+  "same_source_save_route": {
+    "pre_root": "preparation/full12_sql_worked_lesson_preacquisition_20261116",
+    "plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+    "model_alias_is_not_in_plan_messages": true,
+    "source_7hashes_unchanged": true,
+    "helper_model_field_dynamic_and_wire_body_bound": true,
+    "execute_only_after_B4_independent_meaning_adequate": true,
+    "normal_rollout_still_requires_accepted_native_base_profile_alignment": true
+  },
+  "verification_first_attempt": {
+    "state": "OFFLINE_CHECK_FAILED_BEFORE_HTTP",
+    "cause": "Verification script used incorrect checkpoint literal; replaced by authoritative pre_acquisition.receipt checkpoint hash comparison. Payload unchanged, no model/tokenizer/Pod/SQL calls."
+  },
+  "binding_review_sha256": "c3a6d4a35730fe28c42e144794c523a4ff76ff3bb20411ad20c882ea45184515"
+}

@@ -1,0 +1,1 @@
+A4/B4準備のみ。新規送付候補はlauncher2file68581byte、core/schema/parser/SQLinputは同Pod既存byteを再利用し再送しない。A3同一messagesでAnalysis追加学習だけを既存contextにより一時disable、明示base aliasを使う。A4最大2応答・復元540秒一回。原文意味が適切な場合だけB4新規12LEAF+MERGE最大13応答・復元1020秒一回。A3/B3の許可を転用せず、具体的明示承認前に新Pod操作をしない。学習/retry/新依存/新重み0。全実出力/同rawSQL保存再読/通常反映は未実施。source7hashと取得前plan75daa8・SQLguard/as_ofは不変。比較は旧A3rawを基準として読むだけで新receiptへ再束縛しない。
