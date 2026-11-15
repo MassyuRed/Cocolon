@@ -1,0 +1,28 @@
+{
+  "state": "INVALID_FOR_QUALITY_COMPARISON",
+  "all_fictional": true,
+  "http_posts": 2,
+  "received_model_bodies": 0,
+  "first_http_state": "FAILED_OR_ACK_UNKNOWN",
+  "first_elapsed_seconds": 60.10707597481087,
+  "second_http_status": 429,
+  "second_body": {
+    "error": "busy"
+  },
+  "cause": "The diagnostic captured_source function hid the exact SelfHostedSemanticAnalysisModelSource type; _model_response selected the legacy60-second timeout instead of semantic225-second timeout.",
+  "evidence": {
+    "diagnostic_source": "semantic_reader_positive_once.py:f530d4f3921fa8c6a9a4de8d5a3d0f023e3736d476560e4005de429ca10ce022",
+    "wrapper": "artifact, coverage = await service._semantic_history_map(captured_source, parent)",
+    "type_check": "type(source) in {SelfHostedSemanticAnalysisModelSource, _ApplicationSemanticAnalysisSource}",
+    "legacy_timeout": 60.0,
+    "semantic_timeout": 225.0
+  },
+  "meaning_claim": "No raw model response was received, so no conclusion about revised-prompt meaning quality is made.",
+  "elapsed_seconds": 111.51931884419173,
+  "original_provider_restored": true,
+  "restored_pid": 120737,
+  "sql_saves": 0,
+  "training": 0,
+  "retry": 0,
+  "next": "Pass the real source instance directly, retain raw HTTP acquisition recording, stop on unknown transport result, and verify finite content demand in the existing native author."
+}

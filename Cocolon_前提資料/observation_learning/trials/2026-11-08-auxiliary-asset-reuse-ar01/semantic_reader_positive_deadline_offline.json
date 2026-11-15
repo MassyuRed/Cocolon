@@ -1,0 +1,19 @@
+{
+  "state": "PREPARED_NOT_EXECUTED",
+  "script_sha256": "1e69a1a5a3ed41fcb7bb86c3185235ecd7c854f8149674505f24da8da73e6b3e",
+  "script_bytes": 28643,
+  "core_sha256": "398736519a1a560e4d2498f2131fb9b0432ba190e3343d6499dbaa2a1c838a69",
+  "core_bytes": 191699,
+  "native_function_file_sha256": "75eb0aa9dcfdcd864f4ec23ea10005cb614f76cad3a494b28df03824536fdf05",
+  "native_function_file_bytes": 5633,
+  "native_original_function_sha256": "b302242ac4e9ea9eef413c5bb2bc29db525280a5006921b55bbde8b4362bdac0",
+  "native_patched_sha256": "529ba68cde5a19a0e1222937c661f7259809cde629a2f7117c30bdf5a847bd9e",
+  "direct_semantic_source": true,
+  "stop_before_next_post_on_unknown": true,
+  "expected_original_pid": 120737,
+  "max_posts": 2,
+  "native_request_seconds": 90,
+  "outer_restore_seconds": 420,
+  "training": 0,
+  "retry": 0
+}
