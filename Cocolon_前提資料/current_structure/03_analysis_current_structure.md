@@ -1,3 +1,5 @@
+> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)。
 
 > **11/15先行比較の履歴（修復後の実結果は§9.67）：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。 [詳細§9.66](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-actual-proposal-fix-20261115)。
@@ -1662,3 +1664,8 @@ GitHub sourceの確認範囲はCocolon `90735e2ff448e8815796cb5112f318ef10198aa3
 この印は本人が保存した関心であり、実行済み・達成・性格を示さない。元観測map・IF候補・Savedの別identityと本人source境界、保存・再読・削除API／DB wireを変更しない。標準自動3案の実4B限定1setと通常7f51反映は前節§9.67、今回のRN最終検証・採用版／配置・未確認は[§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。新GPU／学習0、build／TestFlight／本人端末保留。
 
 STRUCTURE_MAP_DELTA_PRESENT：既存IF dialogの確認済みSaved表示状態の接続。新しい分析意味owner・公開型・table・rendererは追加しない。
+
+
+## 2026-11-15 — 現semantic長履歴のLEAF／MERGE候補
+
+API f5d8967は既存累積service・model source・semantic adapterからEngineへLEAF／MERGEを渡し、既存admission／compiler／唯一realizerへ接続する。完全親sourceと原記録／本人更新cohort、実提示原根拠、未知、全量guardを保ち、最終artifactだけを既存SQLへ一回保存する。旧quoted-only plannerの通常化とは区別する。公開v3／既存RN／月次を保持、新migrationなし。実4Bと通常反映は未実施、通常API／worker24bc228d。実装・検証・送付拒否と次工程は[補助設計§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)、全11pathは01A同日地図。STRUCTURE_MAP_DELTA_PRESENT、実モデル品質・本単位／補助全体は未完。

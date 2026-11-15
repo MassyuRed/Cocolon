@@ -1,3 +1,5 @@
+> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+
 > **11/14現在：IF／Savedは通常DB／APIへ実装・配置済み。本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読を確認。** 標準RN自動3案・条件表示・一般品質・配布／本人利用は未確認。最新は[補助設計§9.64](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。日付付き過去結果は当時の状態。
 
 > **2026-11-12・設計合意の履歴（11/14の実装・通常反映は補助設計§9.62）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
@@ -2105,3 +2107,8 @@ Mashとの対話で、根拠と対象範囲が分かる仮説は保持し、本�
 既存の「根拠の記録を見る」は参照、「分析を更新」は更新であり、今回の本人訂正入口ではない。原入力に束縛した適格な本人補足のREVISE／WITHDRAW、型上のUSER_CORRECTED等も、マップ項目・関係線への訂正を受け付けて保存し次回分析へ渡すUI・APIが完成している根拠にはしない。
 
 本節は設計方針の記録であり、商品コード・DB・API・画面・生成処理の変更ではない。訂正の保存構造、対象の版への束縛、説明不足の確認方式、将来分析への具体的な反映方式、質問数・画面構成は未具体化。現機能と未接続範囲は[current structureの同日記録](../../../current_structure/03_analysis_current_structure.md#analysis-interpretation-correction-20261112)へ分ける。今回の対話を実装完了・本人端末での動作確認・一般分析品質の合格へ換算しない。STRUCTURE_MAP_DELTA_NONE（方針・残件の記録のみ）。
+
+
+## 2026-11-15 — 現semantic長履歴のLEAF／MERGE候補
+
+API f5d8967は既存累積service・model source・semantic adapterからEngineへLEAF／MERGEを渡し、既存admission／compiler／唯一realizerへ接続する。完全親sourceと原記録／本人更新cohort、実提示原根拠、未知、全量guardを保ち、最終artifactだけを既存SQLへ一回保存する。旧quoted-only plannerの通常化とは区別する。公開v3／既存RN／月次を保持、新migrationなし。実4Bと通常反映は未実施、通常API／worker24bc228d。実装・検証・送付拒否と次工程は[補助設計§9.73](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)、全11pathは01A同日地図。STRUCTURE_MAP_DELTA_PRESENT、実モデル品質・本単位／補助全体は未完。

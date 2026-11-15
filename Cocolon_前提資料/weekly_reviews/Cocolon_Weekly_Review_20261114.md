@@ -1,3 +1,5 @@
+> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+
 # 第11回 Cocolon週末報告会 — 2026-11-14（終了）
 
 記録日：2026年11月14日（日本時間）  
@@ -6,7 +8,7 @@
 記録担当：華恋  
 会議状態：**終了。11/14、Mashが報告会終了を明示。公開日未定・12/6までに提出可能候補、対象週は補助経路活用全体の完了へ集中する§5と、対応する補助設計の現在再開先を以後の前提として引き継ぐ。今後の短い継続指示と終了記録は§9。補助全体・商品完成・新しい実環境操作の実行を認定したものではない。**
 
-> **報告会後の最新到達点：§26。複数本人訂正のPiece作成・保存再読と通常DB／API反映を完了。以下は先行§25。V4既存19失敗を修復・通常source採用。統合画像全体は未完。以下は先行§23の記録。** 先行本人更新を後続Pieceの有効sourceへ通し、IFカードに確認済み保存意向を表示（§23）。§22の標準自動3案は限定接続単位として完了済み。 標準自動3案の限定単位を同raw保存・通常7f51反映まで完了（§22）。以下は先行§19の到達履歴。 本人提示の実3候補set1＋Saved1を同raw隔離保存・別process再読・既存RN受口へ接続し、API／worker c7968c6を通常反映。先行1／2を含め各候補数1set／Saved1件が成立。標準RN自動3案・条件表示・一般品質・本人利用・補助全体は未完。主枠§5、管理評価61.625％、11/21判定・12/6候補、build／TestFlight／本人実機保留は維持。
+> **報告会後の最新記録は§28。長履歴候補の実4B・通常反映は未完。§27の回答＋本人訂正→Piece・通常DB／API反映完了を継承します。** 主枠§5、管理評価61.625％、11/21判定・12/6候補、build／TestFlight／本人実機保留を維持します。
 
 [前回・第10回議事録](Cocolon_Weekly_Review_20261107.md)の決定・実行履歴・未達を継承する。今回の11/14〜11/21は記録を進める対象週であり、未来の作業を実績へ数えない。
 
@@ -922,3 +924,12 @@ IFの条件／負荷／未知表示は既存実装。今回追加する印は同
 3plan×1〜3回答×訂正／撤回の18作品と、原節ANSWER更新×proper更新4構成で、画像設定変更・保存・別service非生成再読、本文／payload／保存recipe／hash一致、quota各1・元source／Emlis不変を確認した。合成Auth／provider・隔離SQLであり、新実4B／native画像／本人利用の成功ではない。新application29、SQL7（内部で81履歴改変＋無回答への偽mixed3拒否）、既存／core197、RN Piece1511と関連React172が成功。重複の対象266・freshfixture1を加算しない。
 
 通常DBへhosted migration20261115011424を適用し、3writerの許可した3差分だけを逆投影すると適用前MD5へ一致、権限・署名・RLS／column・旧preview primitiveを保持した。API source24bc228d／RN70527711をGitHubへ反映。API／workerは同じ指定版でLive、Piece／AnalysisとRNのCI成功、health／bootstrap200・private4経路401／no-store・新worker poll200を確認し、通常DB／API反映と対応RN sourceの限定単位を完了。最終結果・公開原本・限定範囲は[補助設計§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ集約する。配布／本人実機保留、selector OFF・新GPU／学習0、画像2残差・一般品質／本人利用／補助全体未完を維持する。
+
+
+## 28. 報告会後 — 長履歴の分割読取りと記録間統合候補を復元（11/15）
+
+§5.4〜5.6を継続し、中断前の現semantic長履歴候補f5d8967をGitHubの全11pathへ照合した。原記録・本人回答／訂正をcohortのまま分割し、完全親sourceとglobal field番号を保ってLEAF→最終MERGEを既存Engine／compiler／唯一realizerへ通す。最終結果だけ一回保存し、途中失敗・取消しでは既存current／月次を保つ。
+
+記録済み新57case・関連376・既存RN38は合成provider／隔離SQL等の結果で、新実行・実4B品質へ数え直さない。固定f5d8967のPiece43668190569はSUCCESS（27invocation延べ5749 PASS、FAIL／SKIP0、420 deselected）。Analysis43668190490は実行中で成功未確認。初回ZIP送付は具体承認不足として自動承認審査に拒否され、転送・生成0。全内容fileのhashが同じ98file・1,520,025byteのarchiveを確定し、driver・架空input・manifestを同じtrialへ保存した。具体承認後、既存Podで最大3応答（2LEAF＋MERGE）・前後2GETを一回、取消しを含め最大8分、学習／再試行／再起動／新レンタルなしで確認する。
+
+詳細とSHA・根拠／未知・保存境界は[補助設計§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。通常API／workerは§27の24bc228d Live、今回migration／配置0。実4Bの意味品質・同raw保存再読・通常反映、本単位／補助全体は未完。配布／本人実機保留、既存画像2残差・一般品質残件、管理評価・期限を維持する。

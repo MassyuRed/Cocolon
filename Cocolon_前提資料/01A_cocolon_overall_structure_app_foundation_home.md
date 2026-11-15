@@ -1,3 +1,5 @@
+> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+
 > **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
@@ -7245,3 +7247,24 @@ APIの変更10pathとRN2pathは各source commitで全文・treeを照合。完�
 | `tests/emlis-piece-refined-choice.test.js`／`piece-v2-source-ref.test.js`／`piece-v2-saved-input-host.test.js` | 回答1〜3／複数説明の表示・明示選択、両IDの取得／ABA失効・結果不明save復元。既存Piece CIを使用 |
 
 API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 新service・作者・renderer・公開route／key・table／columnを追加する構造ではない。完了範囲・検証・通常反映の根拠は[補助設計§9.72](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ戻る。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+## 2026-11-15 — 現semantic長履歴LEAF／MERGE候補の全変更地図
+
+API f5d8967の変更11pathを復元manifestと全文一致で照合。新しい製品file・migration・RN／renderer変更はない。
+
+| path（mashos-api内） | 役割 |
+|---|---|
+| `ai/services/ai_inference/analysis_cumulative_service.py` | 全親sourceのcohort分割・段階実行・既存一回commit |
+| `ai/services/ai_inference/analysis_model_source.py` | 同じmodel transport・容量・全体期限 |
+| `ai/services/ai_inference/analysis_semantic_map.py` | 現Engineへのstage adapter |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | 明示stage dispatch |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 親／LEAF／MERGEと実提示原根拠の拘束 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 段階の意味・最終図・未知とsupport根拠 |
+| `ai/tests/test_analysis_semantic_history_core.py` | 新core26case |
+| `ai/tests/test_analysis_semantic_history_planner.py` | 不可分cohortと分割9case |
+| `ai/tests/test_analysis_semantic_history_service.py` | 保存／月次／中断等の新SQL application22case |
+| `.github/workflows/analysis-observed-content.yml` | 既存CIへの3test追加 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 候補と未実行・通常未反映の引継ぎ |
+
+この資料側では既存trial `semantic_history_prepared_20261115/`のdriver・架空input・manifest3fileを保存。通常API／worker24bc228dを維持し、実4B0・採用未完。詳細は[補助設計§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。STRUCTURE_MAP_DELTA_PRESENT。

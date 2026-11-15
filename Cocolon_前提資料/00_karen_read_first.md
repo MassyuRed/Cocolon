@@ -1483,6 +1483,8 @@ coverage:
   grounded_human_reception_full_01_02_regeneration: false
 ---
 
+> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+
 > **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
 # 恒久必読 — EmlisAI商品中核の後回しとCMEE Product Read失敗
 
