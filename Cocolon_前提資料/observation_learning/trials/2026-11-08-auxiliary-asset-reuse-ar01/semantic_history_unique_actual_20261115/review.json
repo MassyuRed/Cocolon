@@ -1,0 +1,35 @@
+{
+  "candidate": "1fb55b49dff0ae9382adcf6d79edea06ea95c8c7",
+  "native_finished": true,
+  "finish_reason": "stop",
+  "generated_nodes": [
+    "n1"
+  ],
+  "edges": 6,
+  "missing_node_ids": [
+    "n14",
+    "n2",
+    "n4",
+    "n5",
+    "n6",
+    "n7",
+    "n8"
+  ],
+  "evidence_pairs": 2,
+  "unique_evidence_pairs": 2,
+  "meaning_review": "NOT_ADOPTED",
+  "meaning_error": {
+    "field": 1,
+    "source": "以前聞いた内容だけを今の状態として言い切りかけていた",
+    "generated": "担当者に確かめず以前の内容を言い切った場面",
+    "kind": "ATTEMPT_PROMOTED_TO_COMPLETED_ASSERTION"
+  },
+  "saved_artifacts": 0,
+  "normal_rollout": 0,
+  "original_provider_restored": true,
+  "local_related_tests": {
+    "passed": 176,
+    "failed": 0,
+    "skipped": 0
+  }
+}

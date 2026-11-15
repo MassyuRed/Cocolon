@@ -1787,9 +1787,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/15・現在の再開先：第11回§5の四作業を維持し、§9.73の現semantic長履歴候補を続ける。** §9.72の実回答とその後の本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3と条件表示、§9.68の有効source／Saved印は成立済みとして繰り返さない。現在API／workerは24bc228d Live、長履歴候補f5d8967は未配置。
+**11/15・現在の再開先：第11回§5の四作業を維持し、§9.75の実測が示すnode参照と未遂／完了の誤りを現semantic ownerで修復する。** §9.72の実回答とその後の本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3と条件表示、§9.68の有効source／Saved印は成立済みとして繰り返さない。現在API／workerは24bc228d Live、長履歴候補f5d8967は未配置。
 
-§9.74の最新実測・修正候補を優先する。§9.73の元98fileと補足ZIPは送付済みで再送しない。依存解消後に承認された追加一回は、第一LEAFの210.305秒timeout・本文未受領で終了し許可を消費した。無修補raw・前後2GET・提供stageは同trialに保存済み。新候補bdf39198359f7e205b263657442f80215f6b0725の短文引用選択と期限層／段階数予算は非生成検証済みだが、Podへ送付せず通常配置もしない。次は完成応答を得るための送付差分と実行上限を具体化し、実workerのstaleとsource取得／保存を含む期限を照合する。旧8分一回許可を再利用せず、別の明示承認前に新モデル要求を行わない。原入力と図・全文・両端根拠を照合できる完成rawが得られてから、同版保存再読と採用可能な通常API／worker反映へ進める。一般品質・AR-07／補助全体未完、build／本人実機保留を維持する。
+§9.75の最新実測・残件を優先する。§9.73の元98fileと補足ZIPは送付済みで再送しない。依存解消後に承認された追加一回は、第一LEAFの210.305秒timeout・本文未受領で終了し許可を消費した。無修補raw・前後2GET・提供stageは同trialに保存済み。新候補bdf39198359f7e205b263657442f80215f6b0725の短文引用選択と期限層／段階数予算は非生成検証済みだが、Podへ送付せず通常配置もしない。次は完成応答を得るための送付差分と実行上限を具体化し、実workerのstaleとsource取得／保存を含む期限を照合する。旧8分一回許可を再利用せず、別の明示承認前に新モデル要求を行わない。原入力と図・全文・両端根拠を照合できる完成rawが得られてから、同版保存再読と採用可能な通常API／worker反映へ進める。一般品質・AR-07／補助全体未完、build／本人実機保留を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -4288,8 +4288,38 @@ STRUCTURE_MAP_DELTA_PRESENT：現semanticの生成段階と根拠束縛を既存
 
 API候補1fb55b49dff0ae9382adcf6d79edea06ea95c8c7は既存serve_emlis_natural_reply.py内のsemantic_json_parserだけへ、同node内で既に選んだ(field,quote)を次のenumから除くparserを接続。別fieldの同じ文、同fieldの別文、別nodeでの再利用は保持し、原source全文・欄番号・24根拠上限・finish=stop要件・既存CMEE／保存判定は不変。項目の意味→根拠の順と、field→quoteの順を既存固定順設定で確定する。IFとPieceとupstream packageへ波及しないよう、既存IFと同じnamespace隔離方式を用いる。uniqueItemsだけでは固定LMFE0.11.3に強制されないことを実parserで再現した。
 
-新しい根拠選択10case（文字／実TokenEnforcerの重複・異なる欄／文・別node・候補枯渇・分岐・namespace隔離）を追加。既存Unicode testは同じ日本語premature-end回帰を現在のtitle先行順で検査。Pieceの既存隔離testは、旧Analysis設定false固定から独立config不変へ更新した。初回175PASS／1旧期待値FAILと、更新後93PASSを区別する。最終同版の関連176件は実行中として、後続結果を同節へ置換する。bdf391のAnalysis43674876139／Piece43674876107は両方SUCCESSをfresh確認したが、新候補のCIへ流用しない。
+新しい根拠選択10case（文字／実TokenEnforcerの重複・異なる欄／文・別node・候補枯渇・分岐・namespace隔離）を追加。既存Unicode testは同じ日本語premature-end回帰を現在のtitle先行順で検査。Pieceの既存隔離testは、旧Analysis設定false固定から独立config不変へ更新した。初回175PASS／1旧期待値FAILと、更新後93PASSを区別する。最終同版の関連176件は75.26秒で全PASS、FAIL／SKIP0、既存Pydantic warning1。初回の環境PATH未設定collection error、PGlite未設定skip、修正前の旧期待値FAILを、この最終完走と混同しない。bdf391のAnalysis43674876139／Piece43674876107は両方SUCCESSをfresh確認したが、新候補のCIへ流用しない。
 
 通常workerは1instance、start=astor_worker.py、autoDeploy OFF、最新24bc228dの起動logでstale_after=900秒。semantic840秒の外にsource取得・保存・通知がある。現在単一workerは処理中に自分のjobを再取得しないが、通常反映時は既存設定ASTOR_WORKER_STALE_RUNNING_SECONDS=1800へ合わせる案とする。任意の全履歴を1800秒以内に処理できる保証ではない。DB最新migration20261115011424は維持、新migration不要。
 
 次はこの修正候補を同じ12記録で一回検証し、完成したLEAF／MERGE rawを原入力・全文・両端根拠へ照合する。成功した同rawだけを既存SQLで一回保存・非生成再読し、採用可能な通常API／workerと提供schemaを同版へ揃える。途中失敗は部分保存0、旧提供へ復元し、未完を完了へ変換しない。今回bdf391の一回は終了し、新候補の実測へ流用しない。STRUCTURE_MAP_DELTA_NONE：今回の直接修正は既存decoder内の根拠選択で、商品route／source／artifact／公開型／保存ownerは変更しない。
+
+
+<a id="analysis-semantic-history-unique-evidence-actual-20261115"></a>
+## 9.75 2026-11-15 — 根拠反復は解消、完成JSONのnode参照と事実変異で通常不採用
+
+### 新候補の一回と元提供復元
+
+§9.74とは別の候補1fb55b49を、固定source・旧96file／driver／架空input・12記録8／4分割・親request_refを照合して別rootで一回実行。起動直前のUI runtime resetは未実行応答であり、実launchは一回（PID113009）。native候補PID113012、sourceSHA 6a6ec9419ccc6270f4dc6a0cb3f5e76047e10e029ce60c9edc06eb22edb60488。既存提供の原source、重み、引数、同Pod内メモリの起動環境とcwdは保持し、学習・依存install・再試行0。
+
+第一LEAFだけ実1POST。92.583224秒でHTTP200・finish_reason=stopのJSONを受領し、driver全体94.322696秒。原本の根拠は2個／2種類、同node内重複0。bdf391の94個／16種類・210秒lengthから、反復の除去とJSON終端到達を実確認した。入力と最大4096token・210秒native上限・既存CMEE採否は同じで、期限延長や生成後本文修補による成功ではない。ただし語順も同時変更した比較なので、短縮を根拠重複対策だけの単独効果へ断定しない。
+
+CMEEでAnalysisSemanticMapError(analysis_semantic_map_invalid)となり、2番目LEAF／MERGE、artifact／保存・再読・通常反映は0。停止復元込み135.690145秒、元提供を同じargs／env／cwdでPID113054へ復元し、health200を確認した。元の二つのrunを再起動・再試行せず、成功へ書換えない。driverのprovider_restarts=0はdriver内countで、外側launcherは候補起動と元提供復元を行っている。実影響はexecution.jsonを正とする。
+
+### 受領全文と原入力の照合結果
+
+原入力12記録の全memo・memo_actionを確認した。全件架空、thread=null／events=[]であり、回答・本人訂正を含む実4B実証には数えない。引用の2文は原field1へ正確に一致する。一方、生成nodeはn1だけなのに、6edgeが存在しないn2／n4／n5／n6／n7／n8／n14を参照した。fieldや記録番号から未生成nodeを想定した出力であり、既存拒否は正しい。edgeを削除・番号置換して採用しない。
+
+さらにn1 explanationは、原文「以前聞いた内容だけを今の状態として言い切りかけていた」を「担当者に確かめず以前の内容を言い切った場面」へ変えた。未遂を完了した発言へ昇格した事実変異で、node参照だけを直して通常採用してはならない。記録間比較・条件差・意味品質の完成は成立していない。第一LEAF8記録に対してnode1件という実出力を、全8件／全12件の読解成功へ数えない。
+
+### 保存した原本・検証と現在地
+
+[実原本・実行／復元・読取記録](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_unique_actual_20261115/)へexecution.json、semantic-history.actual.result.json、candidate-provider.log、driver.log、restored-provider.log、review.jsonを保存。受領rawは無修補。localの同raw replayは追加model0で同じCMEE拒否を再現し、保存へ抜ける修正はしない。
+
+APIの直接修正は既存3path（serve_emlis_natural_reply.py、test_analysis_semantic_generation_schema.py、test_piece_model_server_constraints.py）。最終関連176件は全PASS・FAIL／SKIP0、75.26秒。新根拠重複10caseを含む、通常履歴SQL保存・再読、native parser、Piece制約、IF serviceの検証である。新候補CI43677592608／43677592610は最終確認時in_progressで、SUCCESSとは記録しない。bdf391の両SUCCESSは先行版の履歴として維持する。
+
+通常API／workerは24bc228d Live・autoDeploy OFF、worker1instance／stale900秒、DB最新20261115011424のまま。提案したstale1800設定、候補の通常配置、新migration・RN変更・build・TestFlightは今回0。既存研究重み／selectorの採用状態も変えない。未完作業単位は閉じていない。
+
+次の直接修正は、生成済みのnode IDだけをedge候補へ束縛し、node ID重複と1node時の空edgesを扱うこと、同時に未遂／完了の原文条件を完成文へ保つこと。旧bodyのedge削除・意味補修で代用しない。全段階の新rawを原入力・本文・両端根拠へ照合し、成立した同版だけを既存一回SQL保存・非生成再読・通常API／worker／提供schemaへ反映する。新sourceの機械検証だけを商品採用や補助全体完了へ換算しない。追加学習が必要とは今回だけでは確定しない。
+
+STRUCTURE_MAP_DELTA_NONE：既存semantic decoder内の制約修復であり、商品route・source／rights・公開型・保存owner・月次・唯一realizerは不変。build／TestFlight／本人実機の保留と、補助全体未完を維持。

@@ -1669,3 +1669,10 @@ STRUCTURE_MAP_DELTA_PRESENT：既存IF dialogの確認済みSaved表示状態の
 ## 2026-11-15 — 現semantic長履歴のLEAF／MERGE候補
 
 API f5d8967は既存累積service・model source・semantic adapterからEngineへLEAF／MERGEを渡し、既存admission／compiler／唯一realizerへ接続する。完全親sourceと原記録／本人更新cohort、実提示原根拠、未知、全量guardを保ち、最終artifactだけを既存SQLへ一回保存する。旧quoted-only plannerの通常化とは区別する。公開v3／既存RN／月次を保持、新migrationなし。旧f5dの承認追加一回は1POST・0受領で終了。後続bdf3919の追加実4B・Pod送付と通常反映は未実施、通常API／worker24bc228d。実装・実行原本・修正候補と次工程は[補助設計§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)、全11pathは01A同日地図。STRUCTURE_MAP_DELTA_PRESENT、実モデル品質・本単位／補助全体は未完。
+
+
+## 2026-11-15 根拠反復の生成内修復と、長履歴の現在の未完
+
+補助設計§9.74／9.75を最新とする。API候補1fb55b49の既存3pathはai/tools/serve_emlis_natural_reply.py（semantic_json_parser→isolated _semantic_unique_json_schema_parser）、ai/tests/test_analysis_semantic_generation_schema.py、ai/tests/test_piece_model_server_constraints.py。既存Analysis／Piece／IF namespaceを分離し、生成中の同node根拠ペア重複を除く。商品の全source、公開wire、保存経路は同じで、STRUCTURE_MAP_DELTA_NONE。
+
+実一回は第一LEAF92.58秒stop・根拠2個／2種類へ進んだが、実node1件に対する存在しないnodeへの6edgeと、未遂→完了の変異があり不採用。関連176件PASSと実意味品質を分ける。最終artifact／保存再読／通常反映0、通常API／worker24bc228d・DB20261115011424を維持。次は生成済みnode参照と原文の未遂／完了を保つ修復、全段階実原本の照合と通常反映まで。資料内の旧「候補未実行」は当時の記録で、最新実結果へ戻って確認する。
