@@ -1,4 +1,4 @@
-> **11/15最新：短い仮読みで9応答を受領、説明文のUnicode制約で停止。修正版の実生成へ継続。** 8c749361は8LEAF受入後、9件目がstopでも説明文のJSON未閉で拒否され、360.31秒で終了。MERGE／保存0、元提供PID116049へ復元し404.73秒。受信prefix＋合成token分割でLMFE自由文shortcutの空stack／早期EOSをCPU再現した。新11200b20はAnalysis／IFの未対応Unicode tokenを全stateで除外し、JSON escapeで原文・自由文を保持。Pieceの既存filterは維持。文字制約128件・Analysis／IF連携84件成功、Piece通し／新CIは確認中。中間の主体・意向反転は未解消として最終本文を原入力照合する。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／本人実機保留。詳細§9.81。
+> **11/15最新：同版12LEAFを受入完了。全文統合のbyte／起動context設定を実測に合わせて修正。** 11200b20は12LEAFが200／stop・受入完了491.31秒、MERGEは既定16,384tokenで生成前503。元提供PID116491へ復元、停止復元込み560.24秒、保存0。全24欄の統合候補は110,242byte・入力24,545＋出力4,096＝28,641tokenで既存32,768上限内。新8ae18c75はMERGEのbyte枠のみ131,072へ整合し、nativeは同bytes・起動引数で32,768を使用する限定確認を準備。前12をexact再admitして統合1POSTだけ生成、学習0。公式LMFE pinで文字制約／Analysis・IF連携212件とPiece58件成功、関連64件の境界確認成功。旧QAと公式pinのconfig保持の実装差も訂正。最終原入力照合・同版保存再読・通常反映は未完。通常API／worker24bc228d・DB20261115011424、配布保留。詳細§9.82。
 
 # 第11回 Cocolon週末報告会 — 2026-11-14（終了）
 
@@ -992,3 +992,6 @@ worker既定900秒はstarted_at基準で、source取得／最終保存を含む�
 
 
 > **11/15最新：短い仮読みで9応答を受領、説明文のUnicode制約で停止。修正版の実生成へ継続。** 8c749361は8LEAF受入後、9件目がstopでも説明文のJSON未閉で拒否され、360.31秒で終了。MERGE／保存0、元提供PID116049へ復元し404.73秒。受信prefix＋合成token分割でLMFE自由文shortcutの空stack／早期EOSをCPU再現した。新11200b20はAnalysis／IFの未対応Unicode tokenを全stateで除外し、JSON escapeで原文・自由文を保持。Pieceの既存filterは維持。文字制約128件・Analysis／IF連携84件成功、Piece通し／新CIは確認中。中間の主体・意向反転は未解消として最終本文を原入力照合する。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／本人実機保留。詳細§9.81。
+
+
+> **11/15最新：同版12LEAFを受入完了。全文統合のbyte／起動context設定を実測に合わせて修正。** 11200b20は12LEAFが200／stop・受入完了491.31秒、MERGEは既定16,384tokenで生成前503。元提供PID116491へ復元、停止復元込み560.24秒、保存0。全24欄の統合候補は110,242byte・入力24,545＋出力4,096＝28,641tokenで既存32,768上限内。新8ae18c75はMERGEのbyte枠のみ131,072へ整合し、nativeは同bytes・起動引数で32,768を使用する限定確認を準備。前12をexact再admitして統合1POSTだけ生成、学習0。公式LMFE pinで文字制約／Analysis・IF連携212件とPiece58件成功、関連64件の境界確認成功。旧QAと公式pinのconfig保持の実装差も訂正。最終原入力照合・同版保存再読・通常反映は未完。通常API／worker24bc228d・DB20261115011424、配布保留。詳細§9.82。

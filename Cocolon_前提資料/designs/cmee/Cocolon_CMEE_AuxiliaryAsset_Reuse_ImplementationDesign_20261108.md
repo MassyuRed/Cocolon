@@ -1,4 +1,4 @@
-> **11/15最新：短い仮読みで9応答を受領、説明文のUnicode制約で停止。修正版の実生成へ継続。** 8c749361は8LEAF受入後、9件目がstopでも説明文のJSON未閉で拒否され、360.31秒で終了。MERGE／保存0、元提供PID116049へ復元し404.73秒。受信prefix＋合成token分割でLMFE自由文shortcutの空stack／早期EOSをCPU再現した。新11200b20はAnalysis／IFの未対応Unicode tokenを全stateで除外し、JSON escapeで原文・自由文を保持。Pieceの既存filterは維持。文字制約128件・Analysis／IF連携84件成功、Piece通し／新CIは確認中。中間の主体・意向反転は未解消として最終本文を原入力照合する。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／本人実機保留。詳細§9.81。
+> **11/15最新：同版12LEAFを受入完了。全文統合のbyte／起動context設定を実測に合わせて修正。** 11200b20は12LEAFが200／stop・受入完了491.31秒、MERGEは既定16,384tokenで生成前503。元提供PID116491へ復元、停止復元込み560.24秒、保存0。全24欄の統合候補は110,242byte・入力24,545＋出力4,096＝28,641tokenで既存32,768上限内。新8ae18c75はMERGEのbyte枠のみ131,072へ整合し、nativeは同bytes・起動引数で32,768を使用する限定確認を準備。前12をexact再admitして統合1POSTだけ生成、学習0。公式LMFE pinで文字制約／Analysis・IF連携212件とPiece58件成功、関連64件の境界確認成功。旧QAと公式pinのconfig保持の実装差も訂正。最終原入力照合・同版保存再読・通常反映は未完。通常API／worker24bc228d・DB20261115011424、配布保留。詳細§9.82。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.81: compact-context attempt ended at9th response with unterminated Unicode prose, no merge/save; original provider restored PID116049. Candidate11200b20 closes unsupported Unicode tokens for Analysis/IF; native128 and integration84 PASS; full Piece and exact-head CI pending. Continue same fictional12 through final source read, same-version SQL save/reread, and normal decoder/API/worker rollout. Normal24bc228d and DB20261115011424 unchanged; build/device deferred."
+current_next: "Section9.82: all12 exact leaves admitted; merge rejected at native default16384 before generation, provider restored PID116491. Full24fields are110242bytes and24545+4096tokens, within existing32768. Candidate8ae18c75 aligns merge byte envelope131072; preserve exact12 receipts and native bytes, acquire only1 full-source merge with context32768, then source read, same-version SQL save/reread and normal rollout. New CI pending. Normal24bc228d/DB20261115011424 unchanged; build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -4495,3 +4495,17 @@ coreの98,304byte実境界はSYSTEM制御文paddingで確認し、本人source�
 §9.80の「import時のLMFE既定値捕捉」という説明は訂正する。公式817f944のConfigは環境変数を毎回読む。CI8cのPieceは2698成功／2fixture assertion失敗、Analysisは成功。実constructorが解決するConfig factoryを明示制御し、古いpackage参照が併存する条件の2caseを追加、局所59成功／同38file collection下4対象成功。全CI実行順の根本原因を確定したとの報告はしない。
 
 原本はcompact_context_actual_20261115のsource／wire／raw／logs／execution／review。次はsemantic_history_free_unicode_once_20261115.pyの別一回で、同じ既存Pod・同じ12記録と現adapterを使用する。12LEAF＋MERGE最大13POST、前後2GET、pipeline840秒・復元込み960秒、学習／新契約／自動retry0。閉じた旧試行は再起動せず、同一新native版による全体取得を確認する。最終本文を原入力へ照合し、適切な結果の同版SQL一回保存・currentと同IDの非生成再読・通常decoder／API／worker反映まで未完として追跡する。
+
+
+<a id="analysis-semantic-full-merge-context-20261115"></a>
+## 9.82 11/15 — 同版12LEAF受入と全24欄の実容量を確認し、全文MERGEだけ継続（通常未反映）
+
+11200b20／native583a10e8で同じ架空12記録の12LEAFを491.31秒で全受入した。原本文はmemo17,314scalar＋memo_action1,039scalar、計18,353scalar／54,771UTF8byte。従来の17,314はmemo欄だけの数であり二欄合計ではない。raw1〜8は前8cと全byte同一、9はJSON完結し鞄の引用も復号後原文一致。全12本文を原入力へ照合し、主体・意向・条件・既知返信の誤読はreview.jsonへ記録した。これを最終の意味成功には数えない。
+
+MERGEは13番HTTP503、取得本体516.389秒、nativeはtokenize直後のcontext検査で拒否し最終生成0／SQL保存0。元source・argv・env・cwdのままPID116491へ復元、health200、停止復元込み560.238893秒。起動argvに--context-tokensがなく、実sourceのanalysis_service既定16,384が適用されていた。既存CLI上限32,768は変更しない。自然返答／Pieceのbase profileは8,192のまま。
+
+追加model0のCPU検査で、実fallbackは80,209byte／input19,208、12memo field中全文1・未提示9,620scalarを確認。全量候補は24/24fieldが原文と完全一致、omitted0、110,242byte／input24,545。出力4,096を予約して28,641token、32,768内に収まる。全文提示もfull_source_semantic_coverage=False／UNASSESSEDを保持する。全量messages hashは1941a809ef1b00d1d95b31aaa4146869c85ca26f5465f8af0c4d056bf6ee2c4d。新API8ae18c752aee50c4a968857a5c89e80e2d2915efは既存core／transportのMERGE byte枠を98,304→131,072へ揃えた。parent49,152・LEAF16,384目標・16LEAF上限・request262,144・native実token検査／切詰め禁止・output4,096・各要求220/225秒・製品pipeline840秒・失敗時保存0は維持。関連64件は63成功＋旧上限fixtureを新境界へ直した1成功、coreは131,072byteちょうど／1byte超の既存検査を実行した。
+
+検証環境の訂正：公式LMFE817f944のTokenEnforcerはreplace(parser.config,alphabet=...)で既存設定を保持する。旧QA0.11.3の新Configへresetする挙動とは異なる。§9.80／81のimport時既定値捕捉・stale-moduleをCI原因とする説明は根拠とせず、fixtureの仮説patch／2caseを撤去した。通常Piece／AnalysisはTrue→True、Analysis復旧guardだけ明示的False注入で検査する。公式pin使用でnative／Analysis・IF連携212成功、Piece58成功。先行旧QA全38fileは2701成功／旧Gitblob不足1失敗、その1件は7f51原本取得後成功。11200 CIは4fixture失敗／2698成功、Analysis成功確認は別管理。新ff5a2fbbはtestだけ修復し、その後8aeでbyte枠を整合。新head CIは確認中であり、旧QAの全成功を公式pinの全CI成功へ読み替えない。
+
+次のsemantic_history_merge_context_once_20261115.pyは、受入済み同native／同4Bの12exact wire/bodyを再admitし、新full MERGE1POSTだけを生成する。source2fileだけ新8ae／hash固定へ更新、前native全bytes583a10e8は保持、candidateargvに--context-tokens32768だけを加える。新driver300秒・停止復元込み420秒、学習／新契約／自動retry0。旧516.389＋新取得枠300は840秒未満だが、fresh13件一括完走とは区別する。全24field／omitted0／messages hashと実token証跡SHAをPOST前に固定する。適切な最終結果の原入力照合→同版SQL一回保存→currentと同IDの非生成再読→通常decoder／API／worker反映までは未完。build／TestFlight／本人実機は別保留。

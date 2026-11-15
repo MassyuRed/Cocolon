@@ -1,0 +1,58 @@
+{
+  "state": "TWELVE_LEAVES_ADMITTED_MERGE_REJECTED_AT_CONTEXT_CHECK",
+  "all_fictional": true,
+  "api_commit": "11200b2011fc787ffe015a4463df447b9366574f",
+  "input_sha256": "baa0c1d1ed2a9970576ec85b0f5cae390f9d71f33dc0044b41ab684242087472",
+  "candidate_source_sha256": "583a10e8bc25d0bf50e35e53dcfd9407963dc9575e6faac1199c5e5ab30c0c8a",
+  "source": {
+    "memo_scalars": 17314,
+    "memo_action_scalars": 1039,
+    "total_scalars": 18353,
+    "total_utf8_bytes": 54771
+  },
+  "received_http_requests": 13,
+  "leaf_http200_stop": 12,
+  "merge_http_status": 503,
+  "merge_generation_started": false,
+  "sql_saves": 0,
+  "elapsed_seconds": 516.3891860330477,
+  "restored_pid": 116491,
+  "restore_elapsed_seconds": 560.2388934418559,
+  "original_provider_restored": true,
+  "native_boot_context": 16384,
+  "fallback": {
+    "message_bytes": 80209,
+    "input_tokens": 19208,
+    "total_with_output": 23304,
+    "fields": 12,
+    "complete_fields": 1
+  },
+  "full_candidate_cpu": {
+    "message_bytes": 110242,
+    "input_tokens": 24545,
+    "total_with_output": 28641,
+    "fields": 24,
+    "complete_fields": 24,
+    "omitted_ranges": 0,
+    "messages_sha256": "1941a809ef1b00d1d95b31aaa4146869c85ca26f5465f8af0c4d056bf6ee2c4d",
+    "new_model_calls": 0
+  },
+  "raw_first8_equal_previous": true,
+  "quoted_rare_character_exact_after_json_decode": true,
+  "provisional_meaning_issues": {
+    "1": "反対しない条件→反対する条件",
+    "3": "作家の展示→友人の展示、内的理由を開示したとする",
+    "4": "確かめたかった→確認したくない",
+    "5": "空いた午後≠全面参加の約束",
+    "6": "同じ採用案の両立を別案対立へ",
+    "7": "利用者宛→担当者宛、冒頭のお知らせ文の省略",
+    "8": "学習未開始の本人→開始済み友人へ主体移動",
+    "10": "家族のすぐ買える発言→本人のすぐ注文したい希望",
+    "11": "他者の読みに理解≠本人も同じ読みを採用",
+    "12": "既知の了解返信→反応未確認"
+  },
+  "meaning_assessment": "No final map exists; judge the forthcoming full-source merge independently",
+  "next_api_candidate": "8ae18c752aee50c4a968857a5c89e80e2d2915ef",
+  "training": 0,
+  "retry": 0
+}

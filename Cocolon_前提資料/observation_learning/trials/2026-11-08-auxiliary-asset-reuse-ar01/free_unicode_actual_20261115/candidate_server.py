@@ -1,0 +1,1128 @@
+"""Private inference server for the existing local Qwen3.5-4B cache.
+
+The default remains the bounded personal connection probe.  The explicit
+--analysis-service mode serves the ordinary Analysis route until stopped,
+with its own output/context/time budgets. No training, downloads, provider
+fallback, or automatic request retry occur in either mode.
+"""
+from __future__ import annotations
+
+import argparse
+from contextlib import contextmanager, nullcontext
+import hashlib
+import hmac
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from importlib.metadata import version
+import json
+import logging
+import os
+from pathlib import Path
+import re
+import signal
+import threading
+import time
+
+MODEL = "Qwen/Qwen3.5-4B"
+REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+FIT38_WEIGHTS = "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a"
+FIT38_CONFIG = "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145"
+PINS = {"transformers": "5.19.0", "peft": "0.21.2", "accelerate": "1.15.0", "safetensors": "0.8.0"}
+SEMANTIC_FORMAT_SOURCE = '817f944fcc8851917c40300a47f62d1defc3ffc3'
+PIECE_CANDIDATE_FORMAT = 'piece.field_slots.v1'
+
+
+class SourcePrivateConstraintLog(logging.Filter):
+    """Upstream error paths must never print decoded prompts or prefixes."""
+    def filter(self, record):
+        if 'lmformatenforcer' in Path(record.pathname).parts:
+            record.msg = 'analysis_generation_constraint_internal_error'
+            record.args = ()
+            record.exc_info = record.exc_text = record.stack_info = None
+        return True
+
+
+def generation_stage(stage):
+    print('analysis_generation_stage=' + stage + ' monotonic=' + str(round(time.monotonic(), 3)), flush=True)
+
+
+def semantic_free_text_tokens(prefix, batch, sent, blocked, invalid_json_tokens=frozenset()):
+    """Exclude raw-control/blank loops only from generated prose, not quotes."""
+    allowed = prefix(batch, sent)
+    # Source quote candidates contain no raw controls. JSON layout can be
+    # compact. Empty decoder entries otherwise enter LMFE's root trie and are
+    # allowed at every state without advancing the parser.
+    state = prefix.token_enforcer.prefix_states[tuple(sent.tolist())].parser
+    key = state.shortcut_key()
+    excluded = invalid_json_tokens
+    if isinstance(key, tuple) and key[0] == 'json_freetext':
+        excluded = invalid_json_tokens | blocked
+    allowed = [token for token in allowed if token not in excluded]
+    if not allowed:
+        raise ValueError('semantic_free_text_tokens_unavailable')
+    return allowed
+
+
+IF_CANDIDATE_SCHEMA='cocolon.analysis.if-candidates.model.v1'
+
+def _if_output_schema(material):
+    """Constrain only the versioned IF protocol; the IF owner admits meaning."""
+    if (set(material) != {'model_schema', 'base_map_kind', 'branch_point_ref', 'anchors',
+            'fields', 'requested_candidate_count', 'constraints_confirmed'}
+            or material['model_schema'] != IF_CANDIDATE_SCHEMA
+            or material['base_map_kind'] != 'DERIVED_AI_MAP_ANCHOR'
+            or type(material['branch_point_ref']) is not str or not material['branch_point_ref']
+            or type(material['requested_candidate_count']) is not int
+            or not 1 <= material['requested_candidate_count'] <= 3
+            or type(material['constraints_confirmed']) is not bool
+            or type(material['anchors']) is not list or not material['anchors']
+            or type(material['fields']) is not list or not material['fields']):
+        raise ValueError('if_material_invalid')
+    anchors = []
+    for anchor in material['anchors']:
+        if (type(anchor) is not dict or set(anchor) != {'node_ref', 'visible_label'}
+                or any(type(anchor[k]) is not str or not anchor[k] for k in anchor)):
+            raise ValueError('if_material_invalid')
+        anchors.append(anchor['node_ref'])
+    if len(set(anchors)) != len(anchors):
+        raise ValueError('if_material_invalid')
+    fields = []
+    for index, field in enumerate(material['fields'], 1):
+        if (type(field) is not dict or set(field) != {'field', 'source_role', 'purpose', 'text'}
+                or type(field['field']) is not int or field['field'] != index
+                or field['source_role'] != 'SIMULATION_SESSION_MATERIAL'
+                or field['purpose'] not in {'BRANCH_INTENT', 'CONSTRAINT', 'PERSON_ALTERNATIVE'}
+                or (field['purpose'] == 'BRANCH_INTENT') != (index == 1)
+                or type(field['text']) is not str or not field['text'].strip()):
+            raise ValueError('if_material_invalid')
+        fields.append(index)
+
+    def text(maximum=1000):
+        return dict(type='string', minLength=1, maxLength=maximum)
+
+    def obj(properties):
+        return dict(type='object', properties=properties, required=list(properties), additionalProperties=False)
+
+    def array(items, minimum=0, maximum=None):
+        result = dict(type='array', items=items, minItems=minimum)
+        if maximum is not None:
+            result['maxItems'] = maximum
+        return result
+
+    refs = array(dict(type='integer', enum=fields), maximum=len(fields))
+    def quoted(value):
+        return dict(type='string', enum=[value])
+
+    def node_variant(origin, body, anchor, sources, reasons):
+        return obj(dict(node_id=text(100), step_kind=text(100),
+            origin=dict(type='string', enum=[origin]), text=body,
+            anchor_ref=anchor, source_refs=sources, unknown_reasons=reasons))
+
+    empty = array(dict(type='integer', enum=fields), maximum=0)
+    variants = [node_variant('OBSERVED_ANCHOR', quoted(anchor['visible_label']),
+        dict(type='string', enum=[anchor['node_ref']]), empty, array(text(200)))
+        for anchor in material['anchors']]
+    alternatives = [field for field in material['fields'] if field['purpose'] == 'PERSON_ALTERNATIVE']
+    if (len(alternatives) != material['requested_candidate_count']
+            or len({field['text'] for field in alternatives}) != material['requested_candidate_count']):
+        alternatives = []
+    choice_fields = alternatives or [field for field in material['fields']
+        if field['purpose'] == 'PERSON_ALTERNATIVE']
+    variants += [node_variant('USER_CHOICE', quoted(field['text']), dict(type='null'),
+        array(dict(type='integer', enum=[field['field']]), 1, 1), array(text(200)))
+        for field in choice_fields]
+    if not alternatives:
+        variants.append(node_variant('SIMULATED_EXTENSION', text(), dict(type='null'), refs, array(text(200), maximum=0)))
+    variants.append(node_variant('UNKNOWN', text(), dict(type='null'), empty, array(text(200), 1)))
+    node = dict(oneOf=variants)
+    edge = obj({'edge_id': text(100), 'from': text(100), 'to': text(100),
+        'condition_refs': array(text(100), maximum=12)})
+    condition = obj(dict(condition_id=text(100), text=text(), source_refs=refs))
+    label = dict(type='string', enum=[field['text'] for field in alternatives]) if alternatives else text()
+    scenario = obj(dict(scenario_id=text(100), label=label, nodes=array(node, 1, 24),
+        edges=array(edge, 1, 48), required_conditions=array(condition, maximum=12),
+        frictions=array(text(), maximum=12), unmodelled_factors=array(text(), 1, 12)))
+    # Keep authored conditions visible in every candidate. Additional uncertain
+    # requirements remain model-authored UNKNOWN/frictions/factors, never a
+    # silently omitted or reworded person constraint.
+    constraints = [field for field in material['fields'] if field['purpose'] == 'CONSTRAINT']
+    def object_tuple(items):
+        return dict(type='array', prefixItems=items, items=False,
+            minItems=len(items), maxItems=len(items))
+    if constraints:
+        scenario['properties']['required_conditions'] = object_tuple([
+            obj(dict(condition_id=quoted('constraint_' + str(i)), text=quoted(field['text']),
+                source_refs=array(dict(type='integer', enum=[field['field']]), 1, 1)))
+            for i, field in enumerate(constraints, 1)])
+
+    def fixed_node(node_id, kind, origin, body, anchor, sources, reasons):
+        value = node_variant(origin, body, anchor, sources, reasons)
+        value['properties'].update(node_id=quoted(node_id), step_kind=quoted(kind))
+        return value
+
+    anchor_nodes = [fixed_node('anchor_' + str(i), 'BASE_MAP_ANCHOR',
+        'OBSERVED_ANCHOR', quoted(anchor['visible_label']), quoted(anchor['node_ref']),
+        empty, array(text(200), maximum=0))
+        for i, anchor in enumerate(material['anchors'], 1)]
+    def fixed_edge(edge_id, start, end):
+        return obj({'edge_id': quoted(edge_id), 'from': quoted(start), 'to': quoted(end),
+            'condition_refs': array(text(100), maximum=12)})
+
+    edges = [fixed_edge('anchor_' + str(i) + '_to_choice', 'anchor_' + str(i), 'choice')
+        for i in range(1, len(anchor_nodes) + 1)]
+    edges.append(fixed_edge('choice_to_unknown', 'choice', 'unknown'))
+    unknown = fixed_node('unknown', 'UNKNOWN_AFTERMATH', 'UNKNOWN', text(),
+        dict(type='null'), empty, array(text(200), 1))
+    if alternatives:
+        # Complete person-authored options retain their exact source slots.
+        scenarios = []
+        for field in alternatives:
+            choice = fixed_node('choice', 'POSSIBLE_CHOICE', 'USER_CHOICE',
+                quoted(field['text']), dict(type='null'),
+                array(dict(type='integer', enum=[field['field']]), 1, 1), array(text(200), maximum=0))
+            properties = dict(scenario['properties'], label=quoted(field['text']),
+                nodes=object_tuple(anchor_nodes + [choice, unknown]), edges=object_tuple(edges))
+            scenarios.append(obj(properties))
+        scenario = dict(oneOf=scenarios)
+    else:
+        # Standard RN supplies an intent, not a completed list of choices.
+        # Proposal content remains generated. Intent is not a person option. A partial option can still
+        # be quoted as USER_CHOICE; constraints cannot become that choice.
+        choices = [fixed_node('choice', 'POSSIBLE_CHOICE', 'USER_CHOICE',
+            quoted(field['text']), dict(type='null'),
+            array(dict(type='integer', enum=[field['field']]), 1, 1), array(text(200), maximum=0))
+            for field in choice_fields]
+        choices.append(fixed_node('choice', 'POSSIBLE_CHOICE', 'SIMULATED_EXTENSION',
+            text(), dict(type='null'), refs, array(text(200), maximum=0)))
+        scenario['properties'].update(nodes=object_tuple(anchor_nodes + [dict(oneOf=choices), unknown]),
+            edges=object_tuple(edges))
+    clarification = obj(dict(reason_code=dict(type='string', enum=[
+        'BRANCH_INTENT_UNCLEAR', 'CONSTRAINT_UNCLEAR', 'ALTERNATIVES_UNCLEAR']), prompt=text(300)))
+    return obj(dict(schema_version=dict(type='string', enum=[IF_CANDIDATE_SCHEMA]),
+        scenarios=array(scenario, maximum=material['requested_candidate_count']),
+        clarification=dict(anyOf=[dict(type='null'), clarification])))
+
+
+
+def generation_failure(exc):
+    """Locate a serving failure without logging source, prefixes or messages."""
+    generation_stage('failed_' + type(exc).__name__)
+    trace = exc.__traceback__
+    while trace is not None:
+        generation_stage('failure_location_' + trace.tb_frame.f_code.co_name + '_' + str(trace.tb_lineno))
+        trace = trace.tb_next
+
+
+def _semantic_sentence_quotes(original):
+    """Additional unique sentences; never rewrite or replace the full source.
+
+    Keep paired Japanese quotations intact. Ambiguous quotation boundaries or
+    JSON enum escape characters yield no new sentence spanning that boundary.
+    ASCII periods are deliberately not sentence boundaries (URLs/decimals).
+    """
+    pairs = {'「': '」', '『': '』'}
+    stack, candidates, start = [], [], 0
+    terminal = '。！？!?'
+    for index, char in enumerate(original):
+        if char in pairs:
+            stack.append(pairs[char])
+        elif char in pairs.values():
+            if not stack or stack.pop() != char:
+                return []
+        elif not stack and (char in terminal or char in '\r\n'):
+            if char in terminal and index + 1 < len(original) and original[index + 1] in terminal:
+                continue
+            candidates.append(original[start:index + 1].strip())
+            start = index + 1
+    if stack:
+        return []
+    candidates.append(original[start:].strip())
+    return [span for span in candidates if span and len(span) <= 4000
+        and original.count(span) == 1 and not re.search(r'["\\\x00-\x1f]', span)]
+
+
+def semantic_output_schema(messages):
+    """Constrain protocol and source quotes; meanings remain model-generated."""
+    if (type(messages) is not list or len(messages) != 2
+            or messages[1].get('role') != 'user'):
+        raise ValueError('semantic_material_invalid')
+    material = json.loads(messages[1]['content'])
+    if type(material) is dict and material.get('model_schema') == IF_CANDIDATE_SCHEMA:
+        return _if_output_schema(material)
+    fields = material.get('fields')
+    if type(fields) is not list or not fields:
+        raise ValueError('semantic_fields_invalid')
+    stage = material.get('history_stage', {}).get('kind')
+    history, leaf = stage in {'LEAF', 'MERGE'}, stage == 'LEAF'
+    pairs, seen = [], set()
+    quoted_records, correction_fields = set(), 0
+    for field in fields:
+        number, original = field.get('field'), field.get('text')
+        if type(number) is not int or number < 1 or number in seen or type(original) is not str:
+            raise ValueError('semantic_field_invalid')
+        seen.add(number)
+        # Long fields stay complete in messages. Offer real, unique spans
+        # within the existing quote budget rather than changing any source.
+        # Upstream enum parsing does not round-trip every JSON escape. Select
+        # literal spans between those characters, without altering material.
+        fragments = re.findall(r'[^"\\\x00-\x1f]+', original)
+        spans = [fragment[start:start + 4000].strip() for fragment in fragments
+            for start in range(0, len(fragment), 2000)]
+        # A map correction requires its complete explanation at admission.
+        # Other fields can quote a unique sentence inside a long paragraph.
+        if field.get('source_role') != 'USER_ANALYSIS_MAP_CORRECTION':
+            sentences = _semantic_sentence_quotes(original)
+            short = [span for span in sentences if len(span) <= 160] if leaf else []
+            # Only the private leaf reading is compact. Its complete input is
+            # unchanged, and fields without a short sentence keep old options.
+            spans = short if short else spans + sentences
+        spans = list(dict.fromkeys(span for span in spans if span and original.count(span) == 1
+            and not re.search(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', span)))
+        if spans:
+            pairs.append(dict(type='object', properties=dict(quote=dict(type='string', enum=spans),
+                field=dict(type='integer', enum=[number])), required=['quote', 'field'], additionalProperties=False))
+            if type(field.get('record')) is int and field['record'] > 0:
+                quoted_records.add(field['record'])
+            if field.get('source_role') == 'USER_ANALYSIS_MAP_CORRECTION':
+                correction_fields += 1
+    if not pairs:
+        raise ValueError('semantic_quotes_unavailable')
+    def text(maximum):
+        return dict(type='string', minLength=1, maxLength=maximum)
+    def obj(properties):
+        return dict(type='object', properties=properties, required=list(properties), additionalProperties=False)
+    # Keep enough slots for every original-record anchor and every mandatory
+    # whole correction, with two roots per leaf node. This is not final layout.
+    node_limit = (min(24, max(2, len(quoted_records),
+        (len(quoted_records) + correction_fields + 1) // 2)) if leaf else 24)
+    title_limit = 36 if leaf else 60 if history else 80
+    node_ids = ['n' + str(i) for i in range(1, 25)]
+    node = obj(dict(node_id=dict(type='string', enum=node_ids),
+        node_kind=dict(type='string', enum=['SELF_POSITION', 'TARGET_MEANING', 'CHOICE_OUTPUT', 'STATE_CONTEXT']),
+        title=text(title_limit), summary=text(100 if leaf else 160 if history else 400),
+        explanation=text(240 if leaf else 420 if history else 3000),
+        perspective=dict(type='string', enum=['SELF', 'OBSERVED_INTERACTION']),
+        unknowns=dict(type='array', items=text(160 if leaf else 240 if history else 500), maxItems=4),
+        evidence=dict(type='array', items=dict(oneOf=pairs), minItems=1, maxItems=2 if leaf else 4)))
+    if history:
+        # Select a real source before interpreting it. Receiver keys and the
+        # full source text stay unchanged; this is private decoding order.
+        properties = node['properties']
+        node = obj(dict(evidence=properties['evidence'], **{
+            key: value for key, value in properties.items() if key != 'evidence'}))
+    edge = obj({'from': dict(type='string', enum=node_ids), 'to': dict(type='string', enum=node_ids),
+        'relation_kind': dict(type='string', enum=['SELF_OUTSIDE_GAP', 'CRITERION_EXPRESSION', 'CONTEXT_CONTRAST', 'SHARED_MEANING']),
+        'label': text(60 if history else 80), 'explanation': text(360 if history else 1800)})
+    return obj(dict(schema_version=dict(type='string', enum=['cocolon.analysis.semantic_map.model.v2']),
+        overview=obj(dict(title=text(title_limit), summary=text(160 if leaf else 480 if history else 2000))),
+        nodes=dict(type='array', items=node, minItems=1, maxItems=node_limit),
+        edges=dict(type='array', items=edge, maxItems=0 if leaf else 48)))
+
+
+def _if_json_schema_parser(schema, config):
+    """Keep exact JSON-escaped source quotes inside the existing IF grammar.
+
+    The pinned upstream parser compares decoded enum strings to raw JSON
+    characters. Isolate its namespace so this correction cannot change the
+    ordinary Analysis or Piece parsers. No generated text is rewritten.
+    """
+    import importlib.util
+    from lmformatenforcer import jsonschemaparser as upstream
+    from lmformatenforcer.characterlevelparser import StringParser, UnionParser
+
+    spec = importlib.util.spec_from_file_location('lmformatenforcer._cocolon_if_jsonschema', upstream.__file__)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    alphabet = frozenset(config.alphabet)
+
+    def enum_literal(value):
+        raw = json.dumps(value, ensure_ascii=False)
+        return ''.join(char if char != '\ufffd' and (ord(char) < 128 or char in alphabet)
+            else json.dumps(char, ensure_ascii=True)[1:-1] for char in raw)
+
+    class ExactJsonEnum(module.StringParsingState):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.exact = (UnionParser([StringParser(enum_literal(value))
+                for value in self.allowed_strings]) if self.allowed_strings
+                and self.require_opening_quote and self.require_closing_quote else None)
+            self.raw_prefix = ''
+
+        def _clone(self):
+            result = type(self)(self.root, self.allowed_strings, self.require_opening_quote,
+                self.require_closing_quote, self.min_length, self.max_length, self.pattern, self.regex_parser)
+            for key in ('parsed_string', 'seen_opening_quote', 'seen_closing_quote', 'exact', 'raw_prefix'):
+                setattr(result, key, getattr(self, key))
+            return result
+
+        def add_character(self, char):
+            if self.exact is None:
+                return super().add_character(char)
+            if (not self.seen_opening_quote or self.seen_closing_quote) and char in module.WHITESPACE_CHARACTERS:
+                return self
+            result = self._clone()
+            result.exact = self.exact.add_character(char)
+            result.raw_prefix += char
+            result.seen_opening_quote = True
+            result.seen_closing_quote = result.exact.can_end()
+            result.parsed_string = json.loads(result.raw_prefix) if result.seen_closing_quote else result.raw_prefix[1:]
+            return result
+
+        def get_allowed_characters(self):
+            if self.exact is None:
+                return super().get_allowed_characters()
+            if self.seen_closing_quote:
+                return module.WHITESPACE_CHARACTERS
+            return self.exact.get_allowed_characters() + (module.WHITESPACE_CHARACTERS if not self.seen_opening_quote else '')
+
+    def is_object_slot(item):
+        return item.type == 'object' or bool(item.oneOf) and all(
+            part.type == 'object' for part in item.oneOf)
+
+    class EmptyAwareList(module.ListParsingState):
+        def add_character(self, char):
+            if isinstance(self.list_member_type, list):
+                # Only IF's fixed prefixItems object tuples use this path;
+                # nested values keep upstream behavior.
+                if not self.list_member_type or any(not is_object_slot(item) for item in self.list_member_type):
+                    raise ValueError('if_object_tuple_invalid')
+                result = module.PrimitiveParsingState.add_character(self, char)
+                if char == '[':
+                    result.seen_list_opener = True
+                    result.root.context.active_parser.object_stack.append(
+                        module.get_parser(result.root, result.list_member_type[0]))
+                elif char == ',' and not result.seen_list_closer:
+                    result.num_items_seen += 1
+                    result.root.context.active_parser.object_stack.append(
+                        module.get_parser(result.root, result.list_member_type[result.num_items_seen]))
+                elif char == ']':
+                    result.seen_list_closer = True
+                return result
+            if char == '[' and self.max_items == 0 and not self.seen_list_opener:
+                # Upstream otherwise pushes an item parser even for maxItems=0.
+                result = self._clone()
+                result.parsed_string += char
+                result.seen_list_opener = True
+                return result
+            return super().add_character(char)
+
+    module.StringParsingState = ExactJsonEnum
+    module.ListParsingState = EmptyAwareList
+    generic_get_parser = module.get_parser
+    def if_get_parser(root, value):
+        prefix = value.extras.get('prefixItems') if value.type == 'array' else None
+        if prefix is not None:
+            if (type(prefix) is not list or not prefix
+                    or value.minItems != len(prefix) or value.maxItems != len(prefix)):
+                raise ValueError('if_object_tuple_invalid')
+            members = [module.JsonSchemaObject(**item) for item in prefix]
+            if any(not is_object_slot(item) for item in members):
+                raise ValueError('if_object_tuple_invalid')
+            return EmptyAwareList(root, members, len(members), len(members))
+        return generic_get_parser(root, value)
+    module.get_parser = if_get_parser
+    return module.JsonSchemaParser(schema, config=config)
+
+
+def _semantic_unique_json_schema_parser(schema, config, *, record_fields=None):
+    """Bind graph references and unique source/quote pairs while decoding.
+
+    The pinned parser does not enforce JSON Schema uniqueItems. Use an isolated
+    namespace, as for IF, so evidence selection stays immutable across decoder
+    branches and cannot change ordinary Piece/IF or the installed library.
+    """
+    import importlib.util
+    from copy import deepcopy
+    from lmformatenforcer import jsonschemaparser as upstream
+    spec = importlib.util.spec_from_file_location(
+        'lmformatenforcer._cocolon_semantic_unique_jsonschema', upstream.__file__)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    from copy import copy
+    from lmformatenforcer.characterlevelparser import StringParser, UnionParser
+    alphabet = frozenset(config.alphabet)
+    record_fields = dict(record_fields or {})
+    required_records = frozenset(record_fields.values())
+
+    def enum_literal(value):
+        raw = json.dumps(value, ensure_ascii=False)
+        return ''.join(char if char != '\ufffd' and (ord(char) < 128 or char in alphabet)
+            else json.dumps(char, ensure_ascii=True)[1:-1] for char in raw)
+
+    class ExactJsonEnum(module.StringParsingState):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.exact = (UnionParser([StringParser(enum_literal(value))
+                for value in self.allowed_strings]) if self.allowed_strings
+                and self.require_opening_quote and self.require_closing_quote else None)
+            self.raw_prefix = ''
+
+        def _clone(self):
+            # Enum branches and string states are immutable across transitions.
+            return copy(self)
+
+        def add_character(self, char):
+            if self.exact is None:
+                return super().add_character(char)
+            if (not self.seen_opening_quote or self.seen_closing_quote) and char in module.WHITESPACE_CHARACTERS:
+                return self
+            result = self._clone()
+            result.exact = self.exact.add_character(char)
+            result.raw_prefix += char
+            result.seen_opening_quote = True
+            result.seen_closing_quote = result.exact.can_end()
+            result.parsed_string = json.loads(result.raw_prefix) if result.seen_closing_quote else result.raw_prefix[1:]
+            return result
+
+        def get_allowed_characters(self):
+            if self.exact is None:
+                return super().get_allowed_characters()
+            if self.seen_closing_quote:
+                return module.WHITESPACE_CHARACTERS
+            return self.exact.get_allowed_characters() + (module.WHITESPACE_CHARACTERS if not self.seen_opening_quote else '')
+
+    module.StringParsingState = ExactJsonEnum
+
+    def evidence_pair(value):
+        props = value.properties or {}
+        return (value.type == 'object' and set(props) == {'field', 'quote'}
+            and props['field'].type == 'integer' and len(props['field'].enum or []) == 1
+            and props['quote'].type == 'string' and bool(props['quote'].enum))
+
+    def node_type(value):
+        props = value.properties or {}
+        return value.type == 'object' and 'node_id' in props and 'evidence' in props
+
+    def graph_type(value):
+        props = value.properties or {}
+        return value.type == 'object' and 'nodes' in props and 'edges' in props
+
+    def edge_type(value):
+        props = value.properties or {}
+        return value.type == 'object' and set(props) == {
+            'from', 'to', 'relation_kind', 'label', 'explanation'}
+
+    def graph_state(active):
+        for index, value in enumerate(active.object_stack):
+            if isinstance(value, EvidenceObject) and graph_type(value.schema_object):
+                return index, value
+        raise ValueError('semantic_graph_unbound')
+
+    def edge_key(start, end, kind):
+        return min(start, end), max(start, end), kind
+
+    def remaining_edges(graph, *, start=None, end=None):
+        kinds = schema['properties']['edges']['items']['properties']['relation_kind']['enum']
+        for left in graph.generated_node_ids:
+            if start is not None and left != start:
+                continue
+            for right in graph.generated_node_ids:
+                if left == right or end is not None and right != end:
+                    continue
+                for kind in kinds:
+                    if edge_key(left, right, kind) not in graph.generated_edge_keys:
+                        yield left, right, kind
+
+    class UniqueEvidenceList(module.ListParsingState):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            parts = self.list_member_type.oneOf
+            self.is_evidence = bool(parts) and all(evidence_pair(p) for p in parts)
+            self.is_nodes = node_type(self.list_member_type)
+            self.is_edges = edge_type(self.list_member_type)
+            self.used_pairs = frozenset()
+
+        def _clone(self):
+            result = super()._clone()
+            result.used_pairs = self.used_pairs
+            return result
+
+        def remaining_type(self):
+            remaining = []
+            for part in self.list_member_type.oneOf:
+                field = part.properties['field'].enum[0]
+                quotes = [q for q in part.properties['quote'].enum if (field, q) not in self.used_pairs]
+                if quotes:
+                    part = deepcopy(part)
+                    part.properties['quote'].enum = quotes
+                    remaining.append(part)
+            result = deepcopy(self.list_member_type)
+            result.oneOf = remaining
+            return result if remaining else None
+
+        def get_allowed_control_characters(self):
+            chars = super().get_allowed_control_characters()
+            if self.is_evidence and not any((part.properties['field'].enum[0], q) not in self.used_pairs
+                    for part in self.list_member_type.oneOf for q in part.properties['quote'].enum):
+                chars = chars.replace(',', '')
+            if self.is_nodes:
+                _, graph = graph_state(self.root.context.active_parser)
+                if required_records - graph.covered_records:
+                    chars = chars.replace(']', '')
+                if not any(value not in graph.generated_node_ids
+                        for value in self.list_member_type.properties['node_id'].enum):
+                    chars = chars.replace(',', '')
+            if self.is_edges:
+                _, graph = graph_state(self.root.context.active_parser)
+                if not any(remaining_edges(graph)):
+                    chars = chars.replace(',', '')
+            return chars
+
+        def add_character(self, char):
+            if char == '[' and self.max_items == 0 and not self.seen_list_opener:
+                # Upstream otherwise pushes an item parser for an empty array.
+                result = self._clone()
+                result.parsed_string += char
+                result.seen_list_opener = True
+                return result
+            result = super().add_character(char)
+            if self.is_evidence and required_records and char == '[' and not self.seen_list_opener:
+                active = result.root.context.active_parser
+                _, graph = graph_state(active)
+                remaining_records = required_records - graph.covered_records
+                if remaining_records:
+                    value = deepcopy(self.list_member_type)
+                    value.oneOf = [part for part in value.oneOf
+                        if record_fields.get(part.properties['field'].enum[0]) in remaining_records]
+                    active.object_stack[-1] = module.get_parser(result.root, value)
+            if self.is_evidence and char == ',' and not result.seen_list_closer:
+                remaining = result.remaining_type()
+                if remaining is None:
+                    raise ValueError('semantic_evidence_options_exhausted')
+                result.root.context.active_parser.object_stack[-1] = module.get_parser(result.root, remaining)
+            return result
+
+    class EvidenceObject(module.ObjectParsingState):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.generated_node_ids = ()
+            self.generated_edge_keys = frozenset()
+            self.covered_records = frozenset()
+            self.selected_node_id = self.selected_from = None
+            self.selected_to = self.selected_relation_kind = None
+            self.selected_quote = None
+
+        def clone(self):
+            result = super().clone()
+            result.generated_node_ids = self.generated_node_ids
+            result.generated_edge_keys = self.generated_edge_keys
+            result.covered_records = self.covered_records
+            result.selected_node_id = self.selected_node_id
+            result.selected_from = self.selected_from
+            result.selected_to = self.selected_to
+            result.selected_relation_kind = self.selected_relation_kind
+            result.selected_quote = self.selected_quote
+            return result
+
+        def add_character(self, char):
+            prior_key = self.current_key
+            result = super().add_character(char)
+            active = result.root.context.active_parser
+            if char in ',}' and self.current_stage in (
+                    module.ObjectParsingStage.PARSING_VALUE,
+                    module.ObjectParsingStage.PARSING_SEPARATOR_OR_END):
+                if node_type(result.schema_object) and prior_key == 'node_id':
+                    result.selected_node_id = active.last_parsed_string
+                if edge_type(result.schema_object) and prior_key == 'from':
+                    result.selected_from = active.last_parsed_string
+                if edge_type(result.schema_object) and prior_key == 'to':
+                    result.selected_to = active.last_parsed_string
+                if edge_type(result.schema_object) and prior_key == 'relation_kind':
+                    result.selected_relation_kind = active.last_parsed_string
+                if evidence_pair(result.schema_object) and prior_key == 'quote':
+                    result.selected_quote = active.last_parsed_string
+            if char == ':' and result.current_stage == module.ObjectParsingStage.PARSING_VALUE:
+                key = result.current_key
+                value = None
+                if node_type(result.schema_object) and key == 'node_id':
+                    _, graph = graph_state(active)
+                    value = deepcopy(result.schema_object.properties[key])
+                    next_id = 'n' + str(len(graph.generated_node_ids) + 1)
+                    value.enum = [next_id] if next_id in value.enum else []
+                    if not value.enum:
+                        raise ValueError('semantic_node_ids_exhausted')
+                elif graph_type(result.schema_object) and key == 'edges':
+                    value = deepcopy(result.schema_object.properties[key])
+                    ids = list(result.generated_node_ids)
+                    if len(ids) < 2:
+                        value.minItems = value.maxItems = 0
+                    else:
+                        value.items.properties['from'].enum = ids
+                        value.items.properties['to'].enum = ids
+                elif edge_type(result.schema_object) and key in {'from', 'to', 'relation_kind'}:
+                    _, graph = graph_state(active)
+                    value = deepcopy(result.schema_object.properties[key])
+                    options = tuple(remaining_edges(graph,
+                        start=result.selected_from if key != 'from' else None,
+                        end=result.selected_to if key == 'relation_kind' else None))
+                    position = {'from': 0, 'to': 1, 'relation_kind': 2}[key]
+                    available = {option[position] for option in options}
+                    value.enum = [item for item in value.enum if item in available]
+                    if not value.enum:
+                        raise ValueError('semantic_edge_options_exhausted')
+                if value is not None:
+                    active.object_stack[-1] = module.get_parser(result.root, value)
+            if char == '}' and result.can_end() and node_type(result.schema_object):
+                index, graph = graph_state(active)
+                graph = graph.clone()
+                if result.selected_node_id is None or result.selected_node_id in graph.generated_node_ids:
+                    raise ValueError('semantic_node_id_unbound')
+                graph.generated_node_ids += (result.selected_node_id,)
+                active.object_stack[index] = graph
+            if char == '}' and result.can_end() and edge_type(result.schema_object):
+                index, graph = graph_state(active)
+                if any(value is None for value in (result.selected_from,
+                        result.selected_to, result.selected_relation_kind)):
+                    raise ValueError('semantic_edge_unbound')
+                key = edge_key(result.selected_from, result.selected_to, result.selected_relation_kind)
+                if key in graph.generated_edge_keys:
+                    raise ValueError('semantic_edge_duplicate')
+                graph = graph.clone()
+                graph.generated_edge_keys = graph.generated_edge_keys | {key}
+                active.object_stack[index] = graph
+            if char == '}' and result.can_end() and evidence_pair(result.schema_object):
+                if result.selected_quote is None:
+                    raise ValueError('semantic_evidence_quote_unbound')
+                pair = (result.schema_object.properties['field'].enum[0], result.selected_quote)
+                record = record_fields.get(pair[0])
+                if record is not None:
+                    index, graph = graph_state(active)
+                    graph = graph.clone()
+                    graph.covered_records = graph.covered_records | {record}
+                    active.object_stack[index] = graph
+                for index in range(len(active.object_stack) - 1, -1, -1):
+                    parent = active.object_stack[index]
+                    if isinstance(parent, UniqueEvidenceList) and parent.is_evidence:
+                        parent = parent._clone()
+                        parent.used_pairs = parent.used_pairs | {pair}
+                        active.object_stack[index] = parent
+                        break
+                else:
+                    raise ValueError('semantic_evidence_array_unbound')
+            return result
+
+    module.ListParsingState = UniqueEvidenceList
+    module.ObjectParsingState = EvidenceObject
+    return module.JsonSchemaParser(schema, config=config)
+
+
+def semantic_json_parser(messages, alphabet):
+    from lmformatenforcer import CharacterLevelParserConfig, JsonSchemaParser
+    # LMFE snapshots alphabet_without_quotes while constructing its context.
+    # Updating parser.config later leaves that initial snapshot unchanged.
+    schema = semantic_output_schema(messages)
+    config = CharacterLevelParserConfig(alphabet=alphabet)
+    if schema['properties']['schema_version'].get('enum') == [IF_CANDIDATE_SCHEMA]:
+        config.force_json_field_order = True
+        return _if_json_schema_parser(schema, config)
+    # History selects a real source before its meaning. Ordinary maps keep
+    # their decoding order; record IDs never substitute for field IDs.
+    config.force_json_field_order = True
+    material = json.loads(messages[1]['content'])
+    quoted_fields = {part['properties']['field']['enum'][0] for part in
+        schema['properties']['nodes']['items']['properties']['evidence']['items']['oneOf']}
+    records = ({field['field']: field['record'] for field in material['fields']
+        if field['field'] in quoted_fields and type(field.get('record')) is int and field['record'] > 0}
+        if material.get('history_stage', {}).get('kind') in {'LEAF', 'MERGE'} else {})
+    # Native output has at most 24 meaning nodes. Larger histories retain the
+    # existing explicitly partial coverage rather than becoming a new refusal.
+    if len(set(records.values())) > 24:
+        records = {}
+    return _semantic_unique_json_schema_parser(schema, config, record_fields=records)
+
+
+
+def piece_output_schema(messages):
+    """Constrain named transport slots, without constraining their meaning."""
+    if (type(messages) is not list or len(messages) != 2
+            or any(type(message) is not dict for message in messages)
+            or [message.get('role') for message in messages] != ['system', 'user']
+            or type(messages[1].get('content')) is not str):
+        raise ValueError('piece_material_invalid')
+    material = json.loads(messages[1]['content'])
+    if (type(material) is not dict or material.get('core') != 'piece'
+            or material.get('task') != 'PIECE_MODEL_BODY'
+            or type(material.get('control')) is not dict):
+        raise ValueError('piece_material_invalid')
+    slots = material['control'].get('field_slots')
+    if (type(slots) is not dict or not 1 <= len(slots) <= 3
+            or any(not re.fullmatch(r'(?:memo|memo_action|answer_text_private)_[0-2]', key)
+                   or type(value) is not dict for key, value in slots.items())
+            or {int(key.rsplit('_', 1)[1]) for key in slots} != set(range(len(slots)))):
+        raise ValueError('piece_slots_invalid')
+    # This is private decoding order only. The receiver still projects back to
+    # the frozen partition order. Decode the separate answer before originals;
+    # this does not certify source separation inside either generated value.
+    ordered_keys = sorted(slots, key=lambda key: (
+        not key.startswith('answer_text_private_'), int(key.rsplit('_', 1)[1])))
+    properties = {key: dict(type='string', minLength=1) for key in ordered_keys}
+    fields = dict(type='object', properties=properties, required=list(properties), additionalProperties=False)
+    return dict(type='object', properties=dict(field_blocks=fields), required=['field_blocks'],
+                additionalProperties=False)
+
+
+def piece_json_parser(messages, alphabet):
+    from lmformatenforcer import CharacterLevelParserConfig, JsonSchemaParser
+    return JsonSchemaParser(piece_output_schema(messages),
+        config=CharacterLevelParserConfig(alphabet=alphabet, force_json_field_order=True))
+
+
+def make_handler(generate, *, api_key, model_name, deadline, max_requests,
+                 max_new_tokens=2048, request_seconds=23, max_request_bytes=65536,
+                 natural_reply=None, natural_queue_seconds=210):
+    lock = threading.Lock()
+    served = 0
+
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self, *args):
+            pass  # Never log request headers, source, or generated text.
+
+        def reply(self, status, body):
+            encoded = json.dumps(body, ensure_ascii=False).encode()
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", str(len(encoded)))
+            self.end_headers()
+            try:
+                self.wfile.write(encoded)
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+
+        def do_GET(self):
+            if self.path != "/healthz":
+                return self.reply(404, {"error": "not_found"})
+            return self.reply(200 if time.monotonic() < deadline else 503,
+                              {"status": "ok" if time.monotonic() < deadline else "stopping"})
+
+        def do_POST(self):
+            nonlocal served
+            authorization = self.headers.get("Authorization", "")
+            natural = bool(natural_reply and hmac.compare_digest(authorization, "Bearer " + natural_reply["api_key"]))
+            if not natural and not hmac.compare_digest(authorization, "Bearer " + api_key):
+                return self.reply(401, {"error": "unauthorized"})
+            selected_model = natural_reply["model_name"] if natural else model_name
+            selected_tokens = 2048 if natural else max_new_tokens
+            selected_seconds = 23 if natural else request_seconds
+            selected_bytes = 65536 if natural else max_request_bytes
+            if self.path != "/v1/chat/completions":
+                return self.reply(404, {"error": "not_found"})
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= selected_bytes or self.headers.get("Transfer-Encoding"):
+                    raise ValueError
+                self.connection.settimeout(5)
+                request = json.loads(self.rfile.read(length))
+                messages = request["messages"]
+                if (request.get("model") != selected_model or request.get("stream") is not False
+                        or type(request.get("max_tokens")) is not int
+                        or request["max_tokens"] != selected_tokens or request.get("temperature") != 0
+                        or request.get("chat_template_kwargs") != {"enable_thinking": False}
+                        or not isinstance(messages, list) or len(messages) != 2
+                        or [m["role"] for m in messages] != ["system", "user"]
+                        or any(not isinstance(m["content"], str) or not m["content"] for m in messages)):
+                    raise ValueError
+                piece = 'candidate_format' in request
+                if piece:
+                    if not natural or request['candidate_format'] != PIECE_CANDIDATE_FORMAT:
+                        raise ValueError
+                    piece_output_schema(messages)
+            except Exception:
+                return self.reply(400, {"error": "request_invalid"})
+            admitted = lock.acquire(timeout=natural_queue_seconds) if natural else lock.acquire(blocking=False)
+            if not admitted:
+                return self.reply(429, {"error": "busy"})
+            try:
+                if (max_requests and served >= max_requests) or time.monotonic() >= deadline:
+                    return self.reply(429, {"error": "probe_limit"})
+                served += 1
+                if not max_requests:
+                    generation_stage('admitted')
+                end = min(deadline, time.monotonic() + selected_seconds)
+                text, finish = (generate(messages, end, profile="piece" if piece else "natural")
+                                if natural else generate(messages, end))
+                if finish not in {"stop", "length"} or not isinstance(text, str):
+                    raise ValueError
+                status, body = 200, {"model": selected_model, "choices": [{
+                    "index": 0, "finish_reason": finish,
+                    "message": {"role": "assistant", "content": text}}]}
+                if piece:
+                    body['candidate_format'] = PIECE_CANDIDATE_FORMAT
+            except Exception as exc:
+                if not max_requests:
+                    generation_failure(exc)
+                status, body = 503, {"error": "generation_unavailable"}
+            finally:
+                lock.release()
+            return self.reply(status, body)
+    return Handler
+
+
+def adapter_identity(adapter, weights_sha256=None, config_sha256=None):
+    """Verify an explicitly selected saved candidate; never select a new one."""
+    if weights_sha256 is None and config_sha256 is None:
+        weights_sha256, config_sha256 = FIT38_WEIGHTS, FIT38_CONFIG
+    elif (not adapter or not isinstance(weights_sha256, str) or not isinstance(config_sha256, str)
+          or not re.fullmatch(r'[0-9a-f]{64}', weights_sha256)
+          or not re.fullmatch(r'[0-9a-f]{64}', config_sha256)):
+        raise ValueError('adapter_identity_configuration_invalid')
+    if not adapter:
+        return None
+    path = Path(adapter)
+    for name, digest in (("adapter_model.safetensors", weights_sha256), ("adapter_config.json", config_sha256)):
+        if hashlib.sha256((path / name).read_bytes()).hexdigest() != digest:
+            raise ValueError('saved_adapter_identity_changed')
+    return weights_sha256, config_sha256
+
+
+@contextmanager
+def base_inference_context(model):
+    try:
+        with model.disable_adapter():
+            yield
+    finally:
+        # PEFT re-enabling its adapter can also re-enable LoRA gradients.
+        # Restore the serving invariant on both successful and failed forwards.
+        model.eval()
+        model.requires_grad_(False)
+
+
+def load_generator(adapter, process_stop, *, weights_sha256=None, config_sha256=None,
+                   max_new_tokens=2048, context_tokens=8192, semantic_json=False):
+    if (type(max_new_tokens) is not int or type(context_tokens) is not int
+            or not 1 <= max_new_tokens < context_tokens <= 32768):
+        raise ValueError("model_token_budget_invalid")
+    if os.environ.get("HF_HUB_OFFLINE") != "1" or os.environ.get("TRANSFORMERS_OFFLINE") != "1":
+        raise ValueError("offline_cache_required")
+    if {name: version(name) for name in PINS} != PINS:
+        raise ValueError("model_dependency_changed")
+    selected_identity = adapter_identity(adapter, weights_sha256, config_sha256)
+    import torch
+    from transformers import AutoTokenizer, Qwen3_5ForConditionalGeneration, StoppingCriteria, StoppingCriteriaList
+    if not torch.cuda.is_available() or torch.cuda.device_count() != 1:
+        raise ValueError("single_cuda_device_required")
+    tokenizer = AutoTokenizer.from_pretrained(MODEL, revision=REVISION,
+        local_files_only=True, trust_remote_code=False)
+    model = Qwen3_5ForConditionalGeneration.from_pretrained(MODEL, revision=REVISION,
+        dtype=torch.bfloat16, device_map={"": 0}, attn_implementation="sdpa",
+        local_files_only=True, trust_remote_code=False)
+    if adapter:
+        path = Path(adapter)
+        from peft import PeftConfig, PeftModel, get_peft_model_state_dict
+        from peft.tuners.tuners_utils import check_target_module_exists
+        from safetensors.torch import load_file
+        config = PeftConfig.from_pretrained(path, local_files_only=True)
+        if sum(bool(check_target_module_exists(config, name)) for name, _ in model.named_modules()) != 56:
+            raise ValueError("fit38_target_scope_changed")
+        expected = load_file(path / "adapter_model.safetensors")
+        model = PeftModel.from_pretrained(model, path, is_trainable=False, local_files_only=True)
+        actual = get_peft_model_state_dict(model)
+        if (set(actual) != set(expected) or len(actual) != 112
+                or sum(t.numel() for t in actual.values()) != 3833856
+                or any(not torch.equal(actual[k].detach().cpu(), expected[k]) for k in expected)):
+            raise ValueError("fit38_loaded_weights_changed")
+    model.eval()
+    model.requires_grad_(False)
+    if model.training or any(p.requires_grad for p in model.parameters()):
+        raise ValueError("nontraining_model_required")
+    if selected_identity:
+        adapter_identity(adapter, *selected_identity)
+    tokenizer_data = None
+    blocked_free_text = set()
+    invalid_json_tokens = set()
+    unsupported_unicode_tokens = set()
+    if semantic_json:
+        private_log_filter = SourcePrivateConstraintLog()
+        logging.getLogger().addFilter(private_log_filter)
+        for handler in logging.getLogger().handlers:
+            handler.addFilter(private_log_filter)
+        from lmformatenforcer.integrations.transformers import build_token_enforcer_tokenizer_data
+        distribution = __import__('importlib.metadata', fromlist=['distribution']).distribution('lm-format-enforcer')
+        origin = json.loads(distribution.read_text('direct_url.json') or '{}')
+        if origin.get('vcs_info', {}).get('commit_id') != SEMANTIC_FORMAT_SOURCE:
+            raise ValueError('semantic_format_source_changed')
+        tokenizer_data = build_token_enforcer_tokenizer_data(tokenizer,
+            vocab_size=min(len(tokenizer), model.get_output_embeddings().weight.shape[0]))
+        blocked_free_text = {token for token, decoded, _ in tokenizer_data.regular_tokens
+            if not decoded.strip() or any(ord(char) < 32 for char in decoded)}
+        invalid_json_tokens = {token for token, decoded, _ in tokenizer_data.regular_tokens
+            if not decoded or any(ord(char) < 32 for char in decoded)}
+        # LMFE's prose shortcut can admit partial UTF-8 or interior characters
+        # outside its parser alphabet. Its incremental decoder cannot roll back
+        # a replacement character when later bytes complete it. Keep these
+        # token spellings out of Analysis/IF; JSON Unicode escapes retain the
+        # same decoded text, including exact source quotes.
+        tokenizer_alphabet = frozenset(tokenizer_data.tokenizer_alphabet)
+        unsupported_unicode_tokens = {token for token, decoded, _ in tokenizer_data.regular_tokens
+            if '\ufffd' in decoded or any(char not in tokenizer_alphabet for char in decoded)}
+
+    class Deadline(StoppingCriteria):
+        def __init__(self, end):
+            self.end, self.expired = end, False
+
+        def __call__(self, input_ids, scores, **kwargs):
+            self.expired = process_stop.is_set() or time.monotonic() >= self.end
+            return self.expired
+
+    def generate(messages, end, *, profile=None):
+        if profile not in (None, "natural", "piece"):
+            raise ValueError("generation_profile_invalid")
+        if profile == "piece" and (not semantic_json or tokenizer_data is None):
+            raise ValueError("piece_constraint_unavailable")
+        use_semantic_json = semantic_json and profile != "natural"
+        base_profile = profile in ("natural", "piece")
+        output_budget = 2048 if base_profile else max_new_tokens
+        context_budget = 8192 if base_profile else context_tokens
+        # Preserve the base identity previously connected for natural replies.
+        # The analysis adapter stays loaded; its state is restored on context exit.
+        adapter_context = base_inference_context(model) if base_profile and adapter else nullcontext()
+        if use_semantic_json:
+            generation_stage('tokenize')
+        encoded = tokenizer.apply_chat_template(messages, enable_thinking=False,
+            add_generation_prompt=True, tokenize=True, return_dict=True,
+            return_tensors="pt", truncation=False)
+        count = encoded["input_ids"].shape[-1]
+        if count + output_budget > context_budget or time.monotonic() >= end:
+            raise ValueError("context_or_deadline_exceeded")
+        encoded = {k: v.to(model.device) for k, v in encoded.items()}
+        stopping = Deadline(end)
+        format_options = {}
+        if use_semantic_json:
+            generation_stage('constraint')
+            from lmformatenforcer.integrations.transformers import build_transformers_prefix_allowed_tokens_fn
+            allowed_prefix = build_transformers_prefix_allowed_tokens_fn(
+                tokenizer_data, (piece_json_parser if profile == "piece" else semantic_json_parser)(
+                    messages, tokenizer_data.tokenizer_alphabet))
+            if profile != 'piece':
+                # The pinned integration replaces parser.config. Restore the
+                # Analysis/IF order before the first token is explored.
+                allowed_prefix.token_enforcer.root_parser.config.force_json_field_order = True
+            profile_invalid_json_tokens = (invalid_json_tokens if profile == 'piece' else
+                invalid_json_tokens | unsupported_unicode_tokens)
+            previous_allowed = None
+            def private_prefix(batch, sent):
+                nonlocal previous_allowed
+                progress = len(sent) - count
+                measured = progress % 128 == 0
+                if measured:
+                    generation_stage('prefix_enter_' + str(progress))
+                if progress and int(sent[-1]) in profile_invalid_json_tokens:
+                    raise ValueError('semantic_nontext_token_generated')
+                if progress and previous_allowed is not None and int(sent[-1]) not in previous_allowed:
+                    generation_stage('prefix_constraint_violation')
+                    raise ValueError('semantic_prefix_constraint_violation')
+                allowed = semantic_free_text_tokens(allowed_prefix, batch, sent,
+                    set() if profile == "piece" else blocked_free_text, profile_invalid_json_tokens)
+                previous_allowed = allowed
+                if measured:
+                    parser = allowed_prefix.token_enforcer.prefix_states[tuple(sent.tolist())].parser
+                    key = parser.shortcut_key()
+                    mode = 'free' if isinstance(key, tuple) and key[0] == 'json_freetext' else 'other'
+                    generation_stage('prefix_exit_' + str(progress) + '_' + type(parser).__name__
+                        + '_' + mode + '_allowed_' + str(len(allowed)))
+                return allowed
+            format_options['prefix_allowed_tokens_fn'] = private_prefix
+            format_options['eos_token_id'] = tokenizer_data.eos_token_id
+            generation_stage('decode')
+        with adapter_context, torch.inference_mode():
+            result = model.generate(**encoded, max_new_tokens=output_budget, do_sample=False,
+                num_beams=1, use_cache=True, stopping_criteria=StoppingCriteriaList([stopping]), **format_options)
+        tokens = result[0, count:]
+        eos = tokenizer_data.eos_token_id if use_semantic_json else model.generation_config.eos_token_id
+        eos = eos if isinstance(eos, list) else [eos]
+        finish = "stop" if len(tokens) and int(tokens[-1]) in eos and not stopping.expired else "length"
+        if use_semantic_json:
+            generation_stage('complete_' + finish)
+            special = set(tokenizer.all_special_ids) | {token for token, value in tokenizer.added_tokens_decoder.items() if value.special}
+            generation_stage('special_count_' + str(sum(int(token) in special for token in tokens)))
+        return tokenizer.decode(tokens, skip_special_tokens=True, clean_up_tokenization_spaces=False), finish
+    return generate
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--adapter")
+    parser.add_argument("--adapter-weights-sha256")
+    parser.add_argument("--adapter-config-sha256")
+    parser.add_argument("--model-name", required=True)
+    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--max-requests", type=int)
+    parser.add_argument("--seconds", type=int)
+    parser.add_argument("--analysis-service", action="store_true",
+                        help="Serve ordinary Analysis until SIGTERM/SIGINT; no probe-count expiry.")
+    parser.add_argument('--natural-reply-model', help='Also serve the existing base natural-reply profile with its separate API key.')
+    parser.add_argument('--semantic-json', action='store_true', help='Constrain Analysis JSON/source-quote pairs and explicit Piece field slots during generation.')
+    parser.add_argument("--max-new-tokens", type=int)
+    parser.add_argument("--context-tokens", type=int)
+    parser.add_argument("--request-seconds", type=int)
+    args = parser.parse_args()
+    if args.natural_reply_model and not args.analysis_service:
+        parser.error('shared natural reply requires explicit analysis service mode')
+    natural_reply = None
+    if args.natural_reply_model:
+        natural_key = os.environ.get("EMLIS_NATURAL_REPLY_API_KEY", "")
+        if len(natural_key) < 24 or natural_key == os.environ.get("COCOLON_ANALYSIS_MODEL_API_KEY", ""):
+            parser.error('shared natural reply requires its separate existing private key')
+        natural_reply = {"api_key": natural_key, "model_name": args.natural_reply_model}
+    if args.semantic_json and not args.analysis_service:
+        parser.error('semantic JSON generation requires explicit analysis service mode')
+    if args.analysis_service:
+        if args.max_requests is not None or args.seconds is not None:
+            parser.error("analysis service and bounded probe lifetime are separate modes")
+        max_new_tokens = 4096 if args.max_new_tokens is None else args.max_new_tokens
+        context_tokens = 16384 if args.context_tokens is None else args.context_tokens
+        request_seconds = 210 if args.request_seconds is None else args.request_seconds
+        if (not 1 <= max_new_tokens <= 8192 or not max_new_tokens < context_tokens <= 32768
+                or not 1 <= request_seconds <= 210):
+            parser.error("analysis service limits invalid")
+        if args.adapter and (args.adapter_weights_sha256 is None or args.adapter_config_sha256 is None):
+            parser.error("analysis service requires explicit identity for any selected adapter")
+    else:
+        if (args.max_requests is None or args.seconds is None
+                or not 1 <= args.max_requests <= 18 or not 1 <= args.seconds <= 1800):
+            parser.error("bounded probe limits required")
+        if any(value is not None for value in (args.max_new_tokens, args.context_tokens, args.request_seconds)):
+            parser.error("custom inference budgets require explicit analysis service mode")
+        max_new_tokens, context_tokens, request_seconds = 2048, 8192, 23
+    if args.adapter_weights_sha256 is not None or args.adapter_config_sha256 is not None:
+        if (not args.adapter or not re.fullmatch(r'[0-9a-f]{64}', args.adapter_weights_sha256 or '')
+                or not re.fullmatch(r'[0-9a-f]{64}', args.adapter_config_sha256 or '')):
+            parser.error('an adapter and both SHA256 values are required together')
+    key = (os.environ.get("COCOLON_ANALYSIS_MODEL_API_KEY", "") if args.analysis_service
+           else os.environ.get("EMLIS_NATURAL_REPLY_API_KEY", ""))
+    if len(key) < 24:
+        parser.error("a private API key of at least 24 characters is required")
+    stop = threading.Event()
+    deadline = float("inf") if args.analysis_service else time.monotonic() + args.seconds
+    # Hard process bound also covers model loading and a blocked GPU forward.
+    # No model or adapter is ever being written when this process terminates.
+    if not args.analysis_service:
+        signal.signal(signal.SIGALRM, signal.SIG_DFL)
+        signal.setitimer(signal.ITIMER_REAL, args.seconds)
+    signal.signal(signal.SIGTERM, lambda *_: stop.set())
+    signal.signal(signal.SIGINT, lambda *_: stop.set())
+    identity_options = (dict(weights_sha256=args.adapter_weights_sha256,
+                             config_sha256=args.adapter_config_sha256)
+                        if args.adapter_weights_sha256 is not None else {})
+    runtime_options = (dict(max_new_tokens=max_new_tokens, context_tokens=context_tokens)
+                       if args.analysis_service else {})
+    if args.semantic_json:
+        runtime_options['semantic_json'] = True
+    generator = load_generator(args.adapter, stop, **identity_options, **runtime_options)
+    server = ThreadingHTTPServer(("0.0.0.0", args.port), make_handler(generator,
+        api_key=key, model_name=args.model_name, deadline=deadline,
+        max_requests=0 if args.analysis_service else args.max_requests,
+        max_new_tokens=max_new_tokens, request_seconds=request_seconds,
+        max_request_bytes=262144 if args.analysis_service else 65536,
+        natural_reply=natural_reply))
+    server.timeout = 1
+    try:
+        while not stop.is_set() and time.monotonic() < deadline:
+            server.handle_request()
+    finally:
+        stop.set()
+        server.server_close()
+
+
+if __name__ == "__main__":
+    main()
