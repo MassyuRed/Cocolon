@@ -1,0 +1,55 @@
+{
+  "state": "PREPARED_NOT_SENT_NOT_EXECUTED",
+  "files": [
+    {
+      "name": "semantic_admission.source_first.py",
+      "bytes": 192194,
+      "sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd"
+    },
+    {
+      "name": "semantic_output_schema.source_first.py",
+      "bytes": 5405,
+      "sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e"
+    },
+    {
+      "name": "semantic_reader_source_first_once.py",
+      "bytes": 29170,
+      "sha256": "50f3d5769359ea13211a54e37d2d4a04b59a9159d95ba7fd5743cf91c83f4193"
+    }
+  ],
+  "total_bytes": 226769,
+  "native_base_sha256": "583a10e8bc25d0bf50e35e53dcfd9407963dc9575e6faac1199c5e5ab30c0c8a",
+  "native_predecessor_function_sha256": "b302242ac4e9ea9eef413c5bb2bc29db525280a5006921b55bbde8b4362bdac0",
+  "native_patched_sha256": "ccb2b253cfcd2face6d175985012c4a92e5a3e3847580b39bc507116765e804a",
+  "direct_semantic_source": true,
+  "stop_before_next_post_on_unknown": true,
+  "prior_actual_result_sha256": "c908122a1a4ec1c26c0ee1ee7bba89c88fd68a70bb3452470cbd7e0a4c4b8ef3",
+  "conditions": [
+    {
+      "name": "book_club_two_day",
+      "messages_sha256": "b2dd7ab9e6d92a1bbb06753d35c34559b500d88e3e09ccccf1bfb929178c0dd5",
+      "message_bytes": 9269,
+      "field_count": 4,
+      "prepared_ref": "analysis-semantic-request:30212c194cf0f7208e44c3343ef49e540226fdba35f3053e017b96bf77217bac"
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "messages_sha256": "1454ec7993c8b9e9b361e45fbf7d775a0466ed383d9120f0e6ec9ecd6c2e6165",
+      "message_bytes": 17262,
+      "field_count": 4,
+      "prepared_ref": "analysis-semantic-request:0d9d92b6d0483d2912ee04a1fdd4ec6566406756f1c18ca08b85978b0224d598"
+    }
+  ],
+  "actual_token_check": "Required remotely with cached exact tokenizer before original provider stops. No local token estimate is substituted.",
+  "expected_original_pid": 126071,
+  "max_posts": 2,
+  "native_request_seconds": 90,
+  "driver_seconds": 220,
+  "acquisition_seconds": 300,
+  "outer_restore_seconds": 420,
+  "training": 0,
+  "retry": 0,
+  "new_model_calls": 0,
+  "sql_saves": 0,
+  "normal_rollout": 0
+}

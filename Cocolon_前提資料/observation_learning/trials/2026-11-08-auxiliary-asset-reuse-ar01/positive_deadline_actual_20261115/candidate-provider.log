@@ -1,0 +1,27 @@
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:16,  9.44it/s]Loading weights:   6%|▌         | 41/723 [00:00<00:03, 225.59it/s]Loading weights:  10%|█         | 75/723 [00:00<00:02, 267.91it/s]Loading weights:  15%|█▍        | 107/723 [00:00<00:02, 287.43it/s]Loading weights:  20%|█▉        | 142/723 [00:00<00:01, 303.52it/s]Loading weights:  24%|██▍       | 173/723 [00:00<00:01, 289.04it/s]Loading weights:  28%|██▊       | 204/723 [00:00<00:01, 293.65it/s]Loading weights:  33%|███▎      | 238/723 [00:00<00:01, 307.25it/s]Loading weights:  37%|███▋      | 269/723 [00:00<00:01, 300.50it/s]Loading weights:  41%|████▏     | 300/723 [00:01<00:01, 303.21it/s]Loading weights:  46%|████▌     | 331/723 [00:01<00:01, 298.32it/s]Loading weights:  50%|█████     | 363/723 [00:01<00:01, 301.53it/s]Loading weights:  55%|█████▌    | 398/723 [00:01<00:01, 307.72it/s]Loading weights:  59%|█████▉    | 429/723 [00:01<00:00, 307.88it/s]Loading weights:  88%|████████▊ | 638/723 [00:01<00:00, 826.71it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 446.00it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=tokenize monotonic=2323442.824
+analysis_generation_stage=constraint monotonic=2323442.877
+analysis_generation_stage=decode monotonic=2323442.881
+analysis_generation_stage=prefix_enter_0 monotonic=2323453.579
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2323453.585
+analysis_generation_stage=prefix_enter_128 monotonic=2323466.605
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_244501 monotonic=2323466.623
+analysis_generation_stage=prefix_enter_256 monotonic=2323477.071
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_free_allowed_244501 monotonic=2323477.091
+analysis_generation_stage=prefix_enter_384 monotonic=2323487.753
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_other_allowed_1 monotonic=2323487.758
+analysis_generation_stage=complete_stop monotonic=2323492.667
+analysis_generation_stage=special_count_1 monotonic=2323492.672
+analysis_generation_stage=tokenize monotonic=2323492.947
+analysis_generation_stage=constraint monotonic=2323492.968
+analysis_generation_stage=decode monotonic=2323492.975
+analysis_generation_stage=prefix_enter_0 monotonic=2323502.764
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2323503.018
+analysis_generation_stage=prefix_enter_128 monotonic=2323515.753
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_244501 monotonic=2323515.771
+analysis_generation_stage=prefix_enter_256 monotonic=2323526.079
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_21 monotonic=2323526.092
+analysis_generation_stage=complete_stop monotonic=2323526.426
+analysis_generation_stage=special_count_1 monotonic=2323526.429

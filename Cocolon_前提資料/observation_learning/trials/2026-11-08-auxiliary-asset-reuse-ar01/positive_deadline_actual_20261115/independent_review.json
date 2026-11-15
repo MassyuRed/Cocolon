@@ -1,0 +1,118 @@
+{
+  "state": "NOT_ADOPTED",
+  "review_kind": "INDEPENDENT_SOURCE_TO_ACTUAL_RAW_AND_PROJECTION_REVIEW",
+  "all_fictional": true,
+  "actual_result_file_sha256": "c908122a1a4ec1c26c0ee1ee7bba89c88fd68a70bb3452470cbd7e0a4c4b8ef3",
+  "source_files": {
+    "original_fixed_two_input.json": "bb642569f2a1920735426905a6c1b5b9168af981770c4362d59a12dc6cf2ae0c",
+    "source_full_twelve_input.json": "5f362414c7aaba8249862f53892d62951329874474cc8c56a27a3f58a6c3b91c"
+  },
+  "source_core_sha256": "398736519a1a560e4d2498f2131fb9b0432ba190e3343d6499dbaa2a1c838a69",
+  "new_model_calls": 2,
+  "training": 0,
+  "retry": 0,
+  "structural_observations": [
+    {
+      "name": "book_club_two_day",
+      "finish_reason": "stop",
+      "raw_sha256": "1e79ac896e9c5237678a97ac1fa1bfef4e61b8eb11bb8691c8d3c140db9f7c7c",
+      "raw_scalars": 1038,
+      "state": "RECEIVED",
+      "status_code": 200
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "finish_reason": "stop",
+      "raw_sha256": "25a2b5e165dc10c5c053c5369e36a3af73902235bf13d30ef48df95d1b6a947b",
+      "raw_scalars": 608,
+      "state": "RECEIVED",
+      "status_code": 200
+    }
+  ],
+  "quality_verdict": "Book-club overview contradicts completed later sending. Lighting node is source-supported but omits the later purchase/use transition targeted by this comparison. Structural completion is not semantic completion.",
+  "conditions": [
+    {
+      "name": "book_club_two_day",
+      "state": "REJECTED_MEANING_CONTRADICTION",
+      "errors": [
+        {
+          "kind": "KNOWN_COMPLETION_CHANGED_TO_NONEXECUTION",
+          "location": "overview.summary",
+          "model_quote": "本人は案内を作成し修正していますが、参加者へ送るかは未実行で、共同担当者の椅子の確認も未確認です。",
+          "source_record": 2,
+          "source_field": "memo",
+          "source_quote": "案内を直して参加者へ送り、一人から「了解」と返信を受け取った。",
+          "basis": "The overview says sending remains unperformed. Both second-record fields explicitly confirm sending. The same output node n2 acknowledges later sending, so its own visible parts conflict."
+        },
+        {
+          "kind": "OUTPUT_STRUCTURE_USED_AS_RELATION_EXPLANATION",
+          "location": "edges[0].explanation",
+          "model_quote": "参加者へ送る案内の具体的な内容が記録されていますが、その送ったかは別の項目で表されています。",
+          "basis": "This explains that content is split between output items, rather than the source-grounded relationship between confirmation, revision and sending. It is a weak product relation, not a newly invented source fact."
+        }
+      ],
+      "supported_parts": [
+        {
+          "location": "nodes[0].summary",
+          "quote": "本人は写真の二階の部屋名を書きかけて消し、後で一階の予約情報で案内を修正しています。",
+          "basis": "The upstairs photo and later downstairs reservation are correctly kept separate."
+        },
+        {
+          "location": "nodes[1].explanation",
+          "quote": "当日は下書きを保存しただけで送っていないと述べ、翌日には参加者へ送り了解を受け取っています。",
+          "basis": "This preserves the before/after sending facts correctly."
+        },
+        {
+          "location": "overview.summary",
+          "quote": "共同担当者の椅子の確認も未確認",
+          "basis": "The source says the user has not heard whether the chair inquiry was sent."
+        }
+      ],
+      "comparison_limit": "The prior known-reply-to-unknown wording is absent, but the new overview introduces an explicit sending-state contradiction. No overall improvement or acceptance is awarded."
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "state": "INSUFFICIENT_FOR_TARGETED_TRANSITION_REVIEW",
+      "errors": [],
+      "material_omissions": [
+        {
+          "kind": "PURCHASE_AND_USE_TRANSITION_NOT_EXPRESSED_IN_NODES",
+          "source_original_record": 9,
+          "source_field": "memo_action",
+          "source_quote": "予備のお金と設置条件を確認して照明を購入した。帰宅後に取り付けと配線を調整し、三十分ほど下書きを描いた。",
+          "basis": "The sole node describes deciding and checking purchase conditions. It does not express that the later purchase, installation, cable adjustment and use actually occurred."
+        },
+        {
+          "kind": "OLD_LAMP_STOPPED_AND_EARLIER_NONPURCHASE_NOT_EXPRESSED",
+          "source_original_record": 4,
+          "source_field": "memo_action",
+          "source_quote": "家計と机の寸法を確認し、ちらつく照明の使用を止めた。店で候補品の光を試したが購入せず、昼間は窓際で下書きを描いた。",
+          "basis": "The node does not represent the earlier completed stopping action or distinguish it from later buying and using another lamp."
+        }
+      ],
+      "supported_parts": [
+        {
+          "location": "nodes[0].summary",
+          "quote": "棚に当たらないことと、紙の端へ光が届くことを、必要な条件として書いています。",
+          "basis": "These are explicit later-record conditions and relate to the earlier recorded drawing difficulties."
+        },
+        {
+          "location": "overview.summary",
+          "quote": "実物で確かめた情報と、使った後の感想を、別の情報として残しています。",
+          "basis": "This broad statement is supported by the later record. It is not itself a contradiction."
+        }
+      ],
+      "comparison_limit": "No outright source contradiction identified in this lighting output. The omission is material to the requested earlier/later state-reading diagnostic; it does not establish that every possible map must enumerate all source facts."
+    }
+  ],
+  "scope_limits": [
+    "Both responses stop and are structurally GENERATED; this does not decide meaning quality.",
+    "Ordinary generation in this probe is capped at two nodes and one edge. This narrowed envelope cannot justify normal rollout or general preservation of independent meanings.",
+    "Both snapshots have diagnostic-derived rather than measured SQL guards; their raw cannot be rebound to a new SQL guard after acquisition.",
+    "No all-12 synthesis, same-raw SQL save, reread or normal rollout was completed by this comparison.",
+    "No product acceptance awarded."
+  ],
+  "adopted": false,
+  "saved_actual_output": 0,
+  "normal_rollout": 0
+}

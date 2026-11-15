@@ -1,0 +1,56 @@
+{
+  "state": "PREPARED_NOT_SENT_NOT_EXECUTED_AWAITING_ADDITIONAL_ONE_TIME_APPROVAL",
+  "previous_approved_execution": "/workspace/semantic-reader-positive-deadline-20261115-once",
+  "previous_scope_consumed": true,
+  "previous_result": "2responses stop/GENERATED; A contradiction, B transition omission; NOT_ADOPTED; restored134.688812s/PID126071",
+  "destination": "Existing Runpod f1lle4xwq3wjln Jupyter /workspace/semantic-kernel-preparation-20261115",
+  "files": [
+    {
+      "name": "semantic_admission.source_first.py",
+      "bytes": 192194,
+      "sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd"
+    },
+    {
+      "name": "semantic_output_schema.source_first.py",
+      "bytes": 5405,
+      "sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e"
+    },
+    {
+      "name": "semantic_reader_source_first_once.py",
+      "bytes": 29170,
+      "sha256": "50f3d5769359ea13211a54e37d2d4a04b59a9159d95ba7fd5743cf91c83f4193"
+    }
+  ],
+  "total_bytes": 226769,
+  "new_root": "/workspace/semantic-reader-source-first-20261115-once",
+  "expected_original_provider_pid": 126071,
+  "candidate_api_local_commit": "834a9cf3f67d510d0dcc39231fade3bb6dced1d2",
+  "candidate_api_published": true,
+  "core_sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+  "native_function_file_sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e",
+  "native_patched_sha256": "ccb2b253cfcd2face6d175985012c4a92e5a3e3847580b39bc507116765e804a",
+  "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+  "conditions": [
+    "Same exact fictional book-club2 records",
+    "Exact existing fictional full12 members[3] and[8] lighting records"
+  ],
+  "max_posts": 2,
+  "driver_seconds": 220,
+  "acquisition_seconds": 300,
+  "restore_inclusive_seconds": 420,
+  "training": 0,
+  "retry": 0,
+  "sql_saves_in_probe": 0,
+  "normal_deploy_in_probe": 0,
+  "new_dependencies": 0,
+  "new_pod": 0,
+  "credentials": "Existing authentication only within same Pod. Original environment held only in same-Pod RAM for exact original provider restoration. No key values/environment are included in transmitted payload or retrieved originals.",
+  "normal_api_worker_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "normal_db_latest_migration": "20261115011424",
+  "after_reviewed_probe": "Only if reading improves, all12 must be newly acquired with current messages. No stale receipt rebinding. Then same SQL-derived source guard/raw save once, separate-process non-generating reread, native/API/worker alignment and normal rollout.",
+  "changes": "Restore full ordinary capacities/quote options. All semantic profiles: select original evidence before node interpretation; nodes/edges before overview. Generic transition and overview consistency instructions; aligned JSON exemplar. No case-specific answers.",
+  "candidate_api_published_commit": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+  "candidate_api_tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+  "candidate_implementation_local_commit": "bf45b93f2a670648457199646d30bd88946c9984",
+  "candidate_implementation_published_commit": "ef329983723a15cb87d893242b83216b826c4749"
+}

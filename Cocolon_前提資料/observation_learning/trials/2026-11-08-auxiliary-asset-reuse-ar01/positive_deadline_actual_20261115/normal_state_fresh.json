@@ -1,0 +1,62 @@
+{
+  "schema": "cocolon.normal_state.read_only_verification.v1",
+  "verified_at_utc": "2026-11-15T14:57:36.142558+00:00",
+  "scope": "Service/deploy metadata and migration names only. No user records, secret values, schema changes, restart or deploy.",
+  "workspace": {
+    "id": "tea-d4pp61idbo4c73bf4hkg",
+    "name": "まっしゅ's workspace",
+    "resolution": "Existing canonical EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md workspace, matching fresh workspace listing; no context switch."
+  },
+  "expected_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "render": [
+    {
+      "name": "mashos-api",
+      "service_id": "srv-d4ppfpm3jp1c73952bj0",
+      "type": "web_service",
+      "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "deploy_id": "dep-dbsgn8t6e07s739qfk50",
+      "deploy_status": "live",
+      "finished_at": "2026-11-15T01:34:04.956553Z",
+      "branch": "main",
+      "auto_deploy": "no",
+      "auto_deploy_trigger": "off",
+      "suspended": "not_suspended",
+      "maintenance_mode": false,
+      "url": "https://mashos-api.onrender.com"
+    },
+    {
+      "name": "mashos-astor-worker",
+      "service_id": "srv-d6copljh46gs73cmeic0",
+      "type": "background_worker",
+      "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "deploy_id": "dep-dbsgnet6e07s739qg5a0",
+      "deploy_status": "live",
+      "finished_at": "2026-11-15T01:33:28.94317Z",
+      "branch": "main",
+      "auto_deploy": "no",
+      "auto_deploy_trigger": "off",
+      "suspended": "not_suspended"
+    }
+  ],
+  "supabase": {
+    "project_id": "oeahmpmigszggnkyiivq",
+    "name": "cocolon-project",
+    "status": "ACTIVE_HEALTHY",
+    "migration_count": 38,
+    "latest_migration": {
+      "version": "20261115011424",
+      "name": "piece_answer_and_interpretation_corrections"
+    }
+  },
+  "drift_detected": false,
+  "external_mutations": 0,
+  "limits": [
+    "Live deploy status is metadata; no authenticated model request or user workflow was executed.",
+    "Worker poll log unavailable (Render503); no current workload completion or worker poll200 claim."
+  ],
+  "worker_poll_log": {
+    "state": "UNAVAILABLE",
+    "error": "Render log retrieval returned503: failed to query loki; log retrieval currently unavailable.",
+    "automatic_retries": 0
+  }
+}

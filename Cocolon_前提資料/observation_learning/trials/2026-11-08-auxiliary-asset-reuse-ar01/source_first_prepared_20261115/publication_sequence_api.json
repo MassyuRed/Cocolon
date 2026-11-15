@@ -1,0 +1,83 @@
+{
+  "observed_at_utc": "2026-11-15T15:08:12.848Z",
+  "repository": "MassyuRed/mashos-api",
+  "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+  "local_commit": "bf45b93f2a670648457199646d30bd88946c9984",
+  "remote_commit": "ef329983723a15cb87d893242b83216b826c4749",
+  "parent": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+  "tree": "95cd46d94f3128321a4ebab0787ab2bde9676eb1",
+  "remote_commit_url": "https://github.com/MassyuRed/mashos-api/commit/ef329983723a15cb87d893242b83216b826c4749",
+  "lease": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+  "force": false,
+  "changed_blob_checks": [
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+      "local_blob": "f0cc18379c3dd280c319cc97fbdcbd68c1bfb703",
+      "remote_blob": "f0cc18379c3dd280c319cc97fbdcbd68c1bfb703",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_generation_schema.py",
+      "local_blob": "af88d4a17d8a99eae594c6b6d323d30ad835ca67",
+      "remote_blob": "af88d4a17d8a99eae594c6b6d323d30ad835ca67",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_history_core.py",
+      "local_blob": "20bb8c06d63f82ec971d0148d0775269e9f56dbf",
+      "remote_blob": "20bb8c06d63f82ec971d0148d0775269e9f56dbf",
+      "match": true
+    },
+    {
+      "path": "ai/tools/serve_emlis_natural_reply.py",
+      "local_blob": "5a6d53a3160a19d8813189f853dee42f7c8aa7af",
+      "remote_blob": "5a6d53a3160a19d8813189f853dee42f7c8aa7af",
+      "match": true
+    }
+  ],
+  "ci_runs": [
+    {
+      "id": 43728149971,
+      "name": "Analysis observed content",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "ef329983723a15cb87d893242b83216b826c4749",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149971",
+      "run_attempt": 1
+    },
+    {
+      "id": 43728149911,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "ef329983723a15cb87d893242b83216b826c4749",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149911",
+      "run_attempt": 1
+    }
+  ],
+  "previous_revision_ci": {
+    "head": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+    "ci_runs": [
+      {
+        "id": 43726607525,
+        "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43726607525",
+        "run_attempt": 1
+      },
+      {
+        "id": 43726607448,
+        "name": "Analysis observed content",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43726607448",
+        "run_attempt": 1
+      }
+    ]
+  },
+  "no_workflow_rerun": true,
+  "no_deployment": true
+}

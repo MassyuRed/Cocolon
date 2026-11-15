@@ -1,0 +1,332 @@
+{
+  "observed_at_utc": "2026-11-15T15:09:34.000Z",
+  "user_approval_scope": "Previously prepared implementation, premise documents and fictional verification originals; public publication explicitly approved. No production deployment, no workflow rerun.",
+  "transport": "GitHub connector; exact blob/tree payloads, ordered parents preserved; metadata generated new commit SHAs. Shell push failed before mutation due absent credentials.",
+  "commits": [
+    {
+      "repo": "MassyuRed/mashos-api",
+      "ri": 0,
+      "local": "3ee95c9c8eab865cc0c74279eff0ff344e553e60",
+      "remote": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+      "parent": "4ef9d081a09abb6c755b5ef9b52518e0a39af67a",
+      "tree": "920f55ab8fe6678aecfa65b40d4583a11ccc2c90"
+    },
+    {
+      "repo": "MassyuRed/Cocolon",
+      "ri": 1,
+      "local": "6ec86fc388273021eef9ba309687d92ab3af1a13",
+      "remote": "ca45eeb831bd9b121c69114d493eb2355c45d7f9",
+      "parent": "6aa0ce99510a2ded91fe5b02f6cd401e7ec0cf6c",
+      "tree": "11a8bf9197ec6c405c79a4c230df1e2ac04aaf8e"
+    },
+    {
+      "repo": "MassyuRed/Cocolon",
+      "ri": 1,
+      "local": "cfb5bb8a464816c4f1e63c245f0b019417a2348b",
+      "remote": "720bce102b065025ba7f150717363f28a32d739f",
+      "parent": "ca45eeb831bd9b121c69114d493eb2355c45d7f9",
+      "tree": "bc61cd068720fe08586ab3fcc6401fc23639dc20"
+    }
+  ],
+  "branches": [
+    {
+      "repository": "MassyuRed/mashos-api",
+      "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+      "remote_head": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+      "tree": "920f55ab8fe6678aecfa65b40d4583a11ccc2c90",
+      "url": "https://github.com/MassyuRed/mashos-api/commit/1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+      "tree_truncated": false,
+      "changed_blob_checks": [
+        {
+          "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+          "expected_local_blob": "868a0ec9ffa531634605a857682ab226c9d6c2f6",
+          "observed_remote_blob": "868a0ec9ffa531634605a857682ab226c9d6c2f6",
+          "match": true
+        },
+        {
+          "path": "ai/tests/test_analysis_semantic_generation_schema.py",
+          "expected_local_blob": "6efd583fa193512d5badd36ddec9388ed7d433d2",
+          "observed_remote_blob": "6efd583fa193512d5badd36ddec9388ed7d433d2",
+          "match": true
+        },
+        {
+          "path": "ai/tests/test_analysis_semantic_history_core.py",
+          "expected_local_blob": "1cb622dacbcebd0981df66d3be457751cbdc40ae",
+          "observed_remote_blob": "1cb622dacbcebd0981df66d3be457751cbdc40ae",
+          "match": true
+        },
+        {
+          "path": "ai/tools/serve_emlis_natural_reply.py",
+          "expected_local_blob": "9b5b8145a7867907cc93c9f252edcc3621cbd597",
+          "observed_remote_blob": "9b5b8145a7867907cc93c9f252edcc3621cbd597",
+          "match": true
+        }
+      ],
+      "ci_runs": [
+        {
+          "id": 43726607525,
+          "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+          "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43726607525",
+          "run_attempt": 1
+        },
+        {
+          "id": 43726607448,
+          "name": "Analysis observed content",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+          "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43726607448",
+          "run_attempt": 1
+        }
+      ],
+      "ci_failure_summary": {
+        "run_id": 43726607448,
+        "job_id": 132849802020,
+        "step": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+        "failure_lines": [
+          "FAILED ai/tests/test_cmee_current_4b_packet.py::test_frozen_fictional_packet_is_bound_to_current_builders - assert ['{\"chat_temp...perature\":0}'] == ['{\"chat_temp...perature\":0}']",
+          "FAILED ai/tests/test_cmee_current_4b_packet.py::test_if_dispatch_leaves_legacy_map_schema_exact_bytes_and_unmarked_fields_unchanged - assert 2272 == 2275",
+          "2 failed, 1522 passed, 1 warning, 21 subtests passed in 527.19s (0:08:47)"
+        ]
+      }
+    },
+    {
+      "repository": "MassyuRed/Cocolon",
+      "branch": "agent/three-core-cmee-current-structure-20260815",
+      "remote_head": "720bce102b065025ba7f150717363f28a32d739f",
+      "tree": "bc61cd068720fe08586ab3fcc6401fc23639dc20",
+      "url": "https://github.com/MassyuRed/Cocolon/commit/720bce102b065025ba7f150717363f28a32d739f",
+      "tree_truncated": false,
+      "changed_blob_checks": [
+        {
+          "path": "Cocolon_前提資料/00_cocolon_current_product_and_state.md",
+          "expected_local_blob": "d9cdd62c74ac9279fe29e142bbd258cc0c6d83a5",
+          "observed_remote_blob": "d9cdd62c74ac9279fe29e142bbd258cc0c6d83a5",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md",
+          "expected_local_blob": "afa35921121f19dc83551f97a9228a947a8819a0",
+          "observed_remote_blob": "afa35921121f19dc83551f97a9228a947a8819a0",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/driver.log",
+          "expected_local_blob": "a295c74bdb3096cb7a5376bb14c7daaa5af2c3a1",
+          "observed_remote_blob": "a295c74bdb3096cb7a5376bb14c7daaa5af2c3a1",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/execution.json",
+          "expected_local_blob": "f7d4e3e29b2b4dd4732103c3bdd7164db79dcafb",
+          "observed_remote_blob": "f7d4e3e29b2b4dd4732103c3bdd7164db79dcafb",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/review.json",
+          "expected_local_blob": "5ce945ce85e1c2c66b964836d1d448d6a4265bd8",
+          "observed_remote_blob": "5ce945ce85e1c2c66b964836d1d448d6a4265bd8",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/semantic-reader-diagnostic.actual.result.json",
+          "expected_local_blob": "a8afee5f494340fa22a389fd5b1ad7387e077895",
+          "observed_remote_blob": "a8afee5f494340fa22a389fd5b1ad7387e077895",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/semantic-reader-diagnostic.capacity.json",
+          "expected_local_blob": "eedf8175590039246f94fbb6c9b49f45f589f047",
+          "observed_remote_blob": "eedf8175590039246f94fbb6c9b49f45f589f047",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/semantic-reader-diagnostic.input.json",
+          "expected_local_blob": "d59cfcf6b2635799f4fcbea47796585b65911a08",
+          "observed_remote_blob": "d59cfcf6b2635799f4fcbea47796585b65911a08",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/reader_adapter_base_actual_20261115/semantic-reader-diagnostic.messages.json",
+          "expected_local_blob": "cd800291121a978f540f0b6b7946691e479aa8e0",
+          "observed_remote_blob": "cd800291121a978f540f0b6b7946691e479aa8e0",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261114.md",
+          "expected_local_blob": "3b7645f75f73dbfbabc6e6717564e6186497fa50",
+          "observed_remote_blob": "3b7645f75f73dbfbabc6e6717564e6186497fa50",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/concrete-reading-final-tests.log",
+          "expected_local_blob": "88dd2aa7ef0a45b2ab1311cbae102d2150a51b9f",
+          "observed_remote_blob": "88dd2aa7ef0a45b2ab1311cbae102d2150a51b9f",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/next_action_scope.json",
+          "expected_local_blob": "30767be3b300b46187e945c530e1848497c184b8",
+          "observed_remote_blob": "30767be3b300b46187e945c530e1848497c184b8",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/driver.log",
+          "expected_local_blob": "e16237fab56d076e1c69b06568b30f5e52142e30",
+          "observed_remote_blob": "e16237fab56d076e1c69b06568b30f5e52142e30",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/execution.json",
+          "expected_local_blob": "3402cd5dc1a4002544bc720c874ef923f466c828",
+          "observed_remote_blob": "3402cd5dc1a4002544bc720c874ef923f466c828",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/original_fixed_two_input.json",
+          "expected_local_blob": "d59cfcf6b2635799f4fcbea47796585b65911a08",
+          "observed_remote_blob": "d59cfcf6b2635799f4fcbea47796585b65911a08",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/positive-reading.actual.result.json",
+          "expected_local_blob": "40461d60679979ac72c590e46fc67ff8b8f808cc",
+          "observed_remote_blob": "40461d60679979ac72c590e46fc67ff8b8f808cc",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/positive-reading.preflight.json",
+          "expected_local_blob": "73d01a4bec83569c2ee1bea9378485ed4d5075f3",
+          "observed_remote_blob": "73d01a4bec83569c2ee1bea9378485ed4d5075f3",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/preflight.log",
+          "expected_local_blob": "7af613e3f859bc8cd13d60844bf99f7e92e205f7",
+          "observed_remote_blob": "7af613e3f859bc8cd13d60844bf99f7e92e205f7",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/review.json",
+          "expected_local_blob": "09c65002d18f41af3d0e9119f8ad731531e8c97a",
+          "observed_remote_blob": "09c65002d18f41af3d0e9119f8ad731531e8c97a",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/semantic_reader_positive_once.py",
+          "expected_local_blob": "f03b89b3fc7305bcbc2839daae747d37049f72e2",
+          "observed_remote_blob": "f03b89b3fc7305bcbc2839daae747d37049f72e2",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/positive_reading_invalid_20261115/source_full_twelve_input.json",
+          "expected_local_blob": "88b67e05b051145ead6e9569608c9839a8cfcb50",
+          "observed_remote_blob": "88b67e05b051145ead6e9569608c9839a8cfcb50",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_reader_positive_deadline_offline.json",
+          "expected_local_blob": "ccafc4bd1c5846cc5679bcb93a64a99be7fdbb39",
+          "observed_remote_blob": "ccafc4bd1c5846cc5679bcb93a64a99be7fdbb39",
+          "match": true
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_reader_positive_deadline_once_20261115.py",
+          "expected_local_blob": "169631c14f9cf5029b399a17062d9ade92bd173a",
+          "observed_remote_blob": "169631c14f9cf5029b399a17062d9ade92bd173a",
+          "match": true
+        }
+      ],
+      "ci_runs": [
+        {
+          "id": 43726625794,
+          "name": "phase6-contract-guards",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "720bce102b065025ba7f150717363f28a32d739f",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43726625794",
+          "run_attempt": 1
+        },
+        {
+          "id": 43726625750,
+          "name": "Verify read-only workflow policy @ 720bce102b065025ba7f150717363f28a32d739f",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "720bce102b065025ba7f150717363f28a32d739f",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43726625750",
+          "run_attempt": 1
+        },
+        {
+          "id": 43726625878,
+          "name": "Verify terminal Step 7 candidate @ 720bce102b065025ba7f150717363f28a32d739f",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "720bce102b065025ba7f150717363f28a32d739f",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43726625878",
+          "run_attempt": 1
+        },
+        {
+          "id": 43726625746,
+          "name": "Verify pytest at exact Draft head @ 720bce102b065025ba7f150717363f28a32d739f",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "720bce102b065025ba7f150717363f28a32d739f",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43726625746",
+          "run_attempt": 1
+        },
+        {
+          "id": 43726610052,
+          "name": "phase6-contract-guards",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "720bce102b065025ba7f150717363f28a32d739f",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43726610052",
+          "run_attempt": 1
+        }
+      ]
+    }
+  ],
+  "fetched_remote_refs": [
+    {
+      "repo": "/workspace/scratch/8262f97b141c/api",
+      "ref": "refs/remotes/origin/approved-published-api-20261115",
+      "expected": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+      "exit": 0,
+      "head_before": "3ee95c9c8eab865cc0c74279eff0ff344e553e60",
+      "head_after": "3ee95c9c8eab865cc0c74279eff0ff344e553e60",
+      "tracked_status_unchanged": true,
+      "fetch_output": "From https://github.com/MassyuRed/mashos-api\n * [new ref]         1c9f6f73511dac0f220db1f65297c5d748d7a3fe -> origin/approved-published-api-20261115",
+      "observed": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+      "tree": "920f55ab8fe6678aecfa65b40d4583a11ccc2c90"
+    },
+    {
+      "repo": "/workspace/scratch/8262f97b141c/cocolon",
+      "ref": "refs/remotes/origin/approved-published-cocolon-20261115",
+      "expected": "720bce102b065025ba7f150717363f28a32d739f",
+      "exit": 0,
+      "head_before": "cfb5bb8a464816c4f1e63c245f0b019417a2348b",
+      "head_after": "cfb5bb8a464816c4f1e63c245f0b019417a2348b",
+      "tracked_status_unchanged": true,
+      "fetch_output": "From https://github.com/MassyuRed/Cocolon\n * [new ref]           720bce102b065025ba7f150717363f28a32d739f -> origin/approved-published-cocolon-20261115",
+      "observed": "720bce102b065025ba7f150717363f28a32d739f",
+      "tree": "bc61cd068720fe08586ab3fcc6401fc23639dc20"
+    }
+  ],
+  "local_vs_fetched_tree_verification": [
+    {
+      "repo": "/workspace/scratch/8262f97b141c/api",
+      "local_commit": "3ee95c9c8eab865cc0c74279eff0ff344e553e60",
+      "fetched_remote_commit": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+      "whole_tree_diff_empty": true
+    },
+    {
+      "repo": "/workspace/scratch/8262f97b141c/cocolon",
+      "local_commit": "cfb5bb8a464816c4f1e63c245f0b019417a2348b",
+      "fetched_remote_commit": "720bce102b065025ba7f150717363f28a32d739f",
+      "whole_tree_diff_empty": true
+    }
+  ]
+}
