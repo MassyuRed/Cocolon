@@ -1,4 +1,4 @@
-> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+> **11/15最新：承認済み98ファイルは既存Podへ送付済み。FastAPI不足で生成前に起動停止。** 送付1,520,025byte／全98file不変、driver起動1回・4B要求0・health0・学習／再起動／通常配置0。私がPod依存を事前確認しなかった起動不備であり、実モデルの拒否・意味品質失敗とはしない。API f5d8967の保存を維持。Piece CI成功、Analysis CIは25分で取消しだが変更範囲は成功し、未完の最終20file群だけlocal408 PASS／738subtestsで補完。通常API／worker24bc228d。隔離client依存13種・408file／3,203,073byteを準備して無site-packages環境でimportと8／4分割を確認したが未送信。再実行・通常採用・本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
 
 > **11/15最新：実1〜3回答と、その後の二入力本人訂正を同じPieceへ保持し、通常DB／API反映を完了。** 最新回答と現在の訂正OBSを明示選択し、有効原節・本人置換だけを既存作者／独立S7へ渡す。3plan×3round×訂正／撤回18作品と原節ANSWER更新4構成で保存・非生成再読、quota各1・元source／Emlis不変を確認。API24bc228d・RN70527711を反映し、通常DB migration20261115011424適用済み。API／workerは同じ24bc228dでLive、Piece／AnalysisとRNのCI成功を確認。未選択ADDの自動連結・不明な意味の推定採用は行わず、一般自由文／置換節再訂正・編集品質・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF・新GPU／学習0、画像2残差は維持。 [範囲・検証・最終反映§9.72](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
@@ -268,7 +268,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|
-| 現semanticの長履歴 | §9.73／API f5d8967に、完全親source・原記録と回答／本人訂正cohort・global field番号を保つ2〜3LEAFと最終MERGE、一回保存を接続した候補。小材料は従来一回生成 | 記録済み新57case・関連376・RN38は合成provider／隔離SQL等。実4B0、具体承認後の同Pod最大3応答が未実施、通常API／workerは24bc228dから未変更。一般的な全量意味品質・通常採用・本人利用は未完 |
+| 現semanticの長履歴 | §9.73／API f5d8967に、完全親source・原記録と回答／本人訂正cohort・global field番号を保つ2〜3LEAFと最終MERGE、一回保存を接続した候補。小材料は従来一回生成 | 記録済み新57case・関連376・RN38は合成provider／隔離SQL等。98file送付済み・FastAPI不足の起動停止で実4B0。隔離client依存補足と追加一回は未承認／未実施、通常API／worker24bc228dから未変更。一般的な全量意味品質・通常採用・本人利用は未完 |
 | こころグラフ（旧こころ天気） | JST今日／月曜始まり週／暦月の原入力直接集計。今日の円＋4時間帯、週／月の日別100%棒と内訳。改名・天気印撤去、履歴metadata取得と既読競合修復を実装し、497f7008／RN6fdea583・8001へ反映した最終記録あり | 7901表示はMashが概ね指示どおりと報告。8001の改名・履歴既読、新入力／削除の実集計、通知到着／tapは本人確認が残る。欠測・未来・既存閲覧範囲、秘密入力／自己理解だけの記録の除外と旧保存reportを保持。今回live再照会はしていない |
 | 従来わたしマップ | 役割スイッチ／ルート／分かれ道／未観測領域を表示。旧builder・保存・latest／history／detail・renderer経路あり | 固定4step・汎用結果文を含む旧経路。完成目標の根拠付き観測グラフと同一視しない。V2へのglobal cutover未完了 |
 | V2観測ルート | 期間内の原入力と適格補足から五種node、明示順序・無方向共起、訂正・撤回を限定対応。source adapter／compiler／realizer、immutable保存、既存API分岐、RN表示あり | 一般日本語・全段階の理解は未完成。V1-D基盤とu102〜118は指定開発配置済み。最新内容修正をAPI744336c0で配置。一般入力の内容品質・保存identity独立照合・商品受入れは残る。最新の累積/月次機構と7201確認は§44/45 |

@@ -495,15 +495,15 @@
   "zip_bytes": 1520025,
   "zip_sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
   "runtime_source_files": 96,
-  "upload_performed": false,
+  "upload_performed": true,
   "gpu_requests": 0,
   "normal_api_deployed": false,
   "bytes": 1520025,
   "sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
   "backend_commit": "f5d8967eb804a6930378b390e6e6e9485e4d01e4",
-  "state": "PREPARED_NOT_SENT",
+  "state": "UPLOADED_BOOTSTRAP_FAILED_BEFORE_GENERATION",
   "max_model_calls": 3,
-  "health_gets": 2,
+  "health_gets": 0,
   "maximum_minutes_including_provider_cancellation": 8,
   "training": 0,
   "retry": 0,
@@ -544,8 +544,33 @@
     },
     "analysis": {
       "run_id": 43668190490,
-      "state": "in_progress",
-      "job_id": 132672165283
+      "state": "cancelled_at_25_minutes",
+      "job_id": 132672165283,
+      "changed_scope_step13": "success:1513passed+21subtests",
+      "monthly_sql_step14": "success:201records/15monthlyRefs",
+      "final_step15": "cancelled_partway;no_partial_credit",
+      "completed_invocation_passes": 4514,
+      "completed_subtests": 12257,
+      "deselected": 194,
+      "assertion_failure_summary": false,
+      "local_final_group": {
+        "passed": 408,
+        "subtests": 738,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 40.08,
+        "pytest_asyncio": "1.5.0 vs CI1.2.0",
+        "no_install": true,
+        "external_calls": 0
+      }
     }
-  }
+  },
+  "pod_uploaded_bytes": 1520025,
+  "pod_uploaded_sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
+  "user_approved": true,
+  "process_launches": 1,
+  "model_attempt_marker_created": false,
+  "bootstrap_error": "ModuleNotFoundError: No module named fastapi",
+  "launch_pid": 111894,
+  "restart_count": 0
 }

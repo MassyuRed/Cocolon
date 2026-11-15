@@ -1,4 +1,4 @@
-> **11/15最新：長履歴の分割読取り・記録間統合を現semanticへ接続した候補を復元・GitHub照合。実4Bと通常反映は未完。** API `f5d8967eb804a6930378b390e6e6e9485e4d01e4`の完全親sourceを保つLEAF／MERGE・原記録と本人更新cohort・最終一回保存を確認した。記録済み新57case・関連376・RN38は合成provider／隔離SQL等の結果で、今回の再実行や実モデル品質へ換算しない。前回のPod送付は自動承認審査で拒否され、内容を確定した98file・1,520,025byteも未送信。通常API／workerは先行§9.72の24bc228d Liveを保持し、migration・生成・配置0。本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](#analysis-semantic-history-candidate-20261115)。
+> **11/15最新：承認済み98ファイルは既存Podへ送付済み。FastAPI不足で生成前に起動停止。** 送付1,520,025byte／全98file不変、driver起動1回・4B要求0・health0・学習／再起動／通常配置0。私がPod依存を事前確認しなかった起動不備であり、実モデルの拒否・意味品質失敗とはしない。API f5d8967の保存を維持。Piece CI成功、Analysis CIは25分で取消しだが変更範囲は成功し、未完の最終20file群だけlocal408 PASS／738subtestsで補完。通常API／worker24bc228d。隔離client依存13種・408file／3,203,073byteを準備して無site-packages環境でimportと8／4分割を確認したが未送信。再実行・通常採用・本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](#analysis-semantic-history-candidate-20261115)。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.73: semantic full-history LEAF/MERGE candidate f5d8967; actual4B and normal rollout incomplete. After explicit approval for the disclosed98-file1520025-byte packet, run the bounded same-Pod verification, then same-raw save/read/RN and adopted normal rollout. Section9.72 Piece24bc228d normal rollout remains complete; build/device deferred."
+current_next: "Section9.73: approved98-file packet uploaded; one driver launch failed before model/health requests because FastAPI absent. Keep exact98file bytes. Isolated13-package408-file3203073-byte client dependency supplement is locally verified and not uploaded; explicit approval is needed before an additional one-time execution under the no-retry condition. No training/server restart/deploy. Live24bc228d remains."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1770,7 +1770,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 <a id="112-現在の進行欄"></a>
 ### 11.2 現在の進行欄（11/15・§9.72通常反映後、§9.73長履歴候補）
 
-全体主枠は§9.54／第11回§5。§9.72の実1〜3回答とその後の本人訂正→Piece・保存再読・通常DB／API反映は完了済み。通常API／workerは24bc228d双方Live、migration20261115011424は適用済みで再適用しない。RN70527711のsourceを統合し、build／TestFlight／本人実機は保留。次の未完単位は§9.73の現semantic長履歴候補で、実4B・通常反映は0。過去のe5a1dc6／初回訂正限定／native19失敗を現在の状態へ戻さず、§9.69〜72の履歴・後続確認と区別する。
+全体主枠は§9.54／第11回§5。§9.72の実1〜3回答とその後の本人訂正→Piece・保存再読・通常DB／API反映は完了済み。通常API／workerは24bc228d双方Live、migration20261115011424は適用済みで再適用しない。RN70527711のsourceを統合し、build／TestFlight／本人実機は保留。次の未完単位は§9.73の現semantic長履歴候補。98fileは承認済み送付を終えたがFastAPI不足で起動停止し、実4B・通常反映は0。隔離client依存を準備済み、追加実行は未承認・未実施。過去のe5a1dc6／初回訂正限定／native19失敗を現在の状態へ戻さず、§9.69〜72の履歴・後続確認と区別する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1789,7 +1789,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 **11/15・現在の再開先：第11回§5の四作業を維持し、§9.73の現semantic長履歴候補を続ける。** §9.72の実回答とその後の本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3と条件表示、§9.68の有効source／Saved印は成立済みとして繰り返さない。現在API／workerは24bc228d Live、長履歴候補f5d8967は未配置。
 
-具体的送付承認後、§9.73の架空12記録・2LEAF＋MERGEを既存Podへ最大3応答・前後2GET・一回・最大8分で通す。取得した同rawで原記録・図と本文・両端根拠を照合し、同source／guardの保存再読・既存RNと、採用できる能力の通常反映へ進める。学習／再試行／再起動／新レンタルなし。一般意味・編集品質・未対応複合更新／長履歴関係・一般IFと本人利用、AR-07／補助全体は未完。build／TestFlight／本人実機保留は別能力の停止条件にしない。
+§9.73の98fileは送付済みなので再送しない。生成前に停止した依存不足に対し、既存の検証済みFastAPI0.116.1／HTTPX0.28.1と固定依存をclient専用folderへ隔離配置する補足を準備した。追加送付は13種・408file／3,203,073byteの一ZIPのみで、既存提供環境へinstall・重み変更・再起動を行わない。再試行なしの承認条件を維持し、依存補足と追加一回の明示承認前には再実行しない。承認後は無変更98fileの同driverで最大3応答＋前後2GET・一回・最大8分を確認し、同raw保存再読と採用可能な通常反映へ進める。一般品質・AR-07／補助全体未完、build／本人実機保留を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -4215,18 +4215,20 @@ LEAFの未知は最終rawを修補せず、同じenvelope／field／scalarから
 
 中断前の新57固有case（core26・planner9・実SQL application22）、関連376、既存RN38の成功記録とsource一致を照合した。201記録／402欄の3LEAF・跨ぐ根拠・全量guard・部分保存拒否・同時要求共有・取消しを飲む遅延provider・本人訂正cohort・当月固定・非生成再読は合成provider／隔離SQL等の検証である。201記録は合成容量判定を注入しており、実4B容量・意味品質の成功ではない。今回の新再実行へ数え直さない。
 
-固定版f5d8967のPiece CI43668190569はSUCCESS。27pytest invocationの延べ5749 PASS、FAIL／SKIP0、選択420 deselectedを確認した。重複suiteを固有case数へ換算しない。Analysis CI43668190490は実行中で、終状態確認前に成功としない。
+固定版f5d8967のPiece CI43668190569はSUCCESS。27pytest invocationの延べ5749 PASS、FAIL／SKIP0、選択420 deselected。Analysis CI43668190490は25分境界でCANCELLED。変更を含むstep13は1513 PASS＋21subtests、月次SQLのstep14は201記録／15月次参照等でSUCCESS。確定済みgroupの延べ4514 PASS＋12257subtests、194 deselectedを保持し、step15の途中52％を成功へ加算しない。未完の最終20file群だけを無変更f5d8967でlocal実行し408 PASS／738subtests、FAIL／SKIP0、40.08秒、既存deprecation2件。既存runtime／pluginのみで追加install・外部DB／model要求0。pytest_asyncioはlocal1.5.0、CI1.2.0との差を記録する。元GitHub runを成功へ変更せず、重複suiteを固有case数へ換算しない。
 
-### 未送信の具体的実行内容
+### 承認済み送付と、生成前の起動停止
 
 架空12記録（memo合計17314字）のSQL sourceから親66329bytesを8記録／4記録の2LEAF（46087／26182bytes）へ分けた入力を準備した。初回7,074,085byte ZIPの既存Pod送付は「具体的送付内容と送信先への明示承認不足」として自動承認審査に拒否され、転送・生成0。依存96file＋driver／架空inputの98fileに縮小した旧ZIPも未送信である。
 
-今回、同じ98file全bytesを照合し、再現可能な日時・圧縮でarchiveを作り直した。**今回の送付対象は98file・1,520,025byte、SHA256 `394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6`**。旧1,534,208byte／SHA b65352e0f67b35b274fbff8661a669391fe005af74aed8d2abd0327f1b5457acとはarchive containerのbytesが異なるが、全98内容fileのSHAは同一である。source96fileはAPI f5d8967の同path／bytesと一致する。
+今回、同じ98file全bytesを照合し、再現可能な日時・圧縮でarchiveを作り直した。**承認を受けて今回送付した内容は98file・1,520,025byte、SHA256 `394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6`**。旧1,534,208byte／SHA b65352e0f67b35b274fbff8661a669391fe005af74aed8d2abd0327f1b5457acとはarchive containerのbytesが異なるが、全98内容fileのSHAは同一である。source96fileはAPI f5d8967の同path／bytesと一致する。
 
 架空input・一回driver・全98fileのhashと実行範囲は[同じtrialの実行内容](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_prepared_20261115/manifest.json)へ保存する。driverとinputも同directoryから再取得できる。秘密値・本人実データは含めない。
 
-具体承認後、既存Pod `f1lle4xwq3wjln`へこの98fileだけを送り、2LEAF＋MERGEの最大3応答と前後health2GETを一回取得する。caller pipeline215秒、取消し後の提供側既存210秒上限を含め最大8分。学習・再試行・再起動・新GPUレンタルなし。既存分析鍵一本は同Pod内認証だけに用いる。拒否された送付を別経路へ貼り替えて実行しない。
+Mashの今回明示承認を受け、既存Pod `f1lle4xwq3wjln`へ98file ZIPを一度送付した。Pod上でも1,520,025byte／SHA394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6を確認し、専用folderへ展開した。既存cocolon_venvでdriverを一回起動（PID111894）したが、`analysis_cumulative_service`のimport時に`ModuleNotFoundError: No module named fastapi`で停止した。RESULT／試行消費marker作成・鍵読取・health・4B要求のいずれにも到達せず、model要求0／health0。起動Python・標準PythonにFastAPIがないことを確認した。私がPod側の依存を事前確認しなかった実行不備であり、4Bの拒否や意味品質の実測へ分類しない。元launch.logは同trialのstartup.logへ保存する。再試行なしの承認条件を守り、再起動・再実行・依存install・新GPU／学習・通常配置を行わず停止した。
 
 取得後は同rawを生成前のSQL source／guardに束縛し、原記録と図・全文・両端根拠を照合して、保存・非生成再読・既存RN受口へ通す。採用できる内容だけ通常API／workerへ反映する。現在の通常API／workerは24bc228d Liveのまま。今回の生成・migration・配置0。
+
+補足候補として、既存の固定検証環境からFastAPI0.116.1／HTTPX0.28.1と依存を回収したclient専用bundleを準備。13distribution・408file、3,203,073byte、SHA256 d85f85b2044f3107a91d9eee37e5d632b8e114244d2382eccf297821f578bd0e。CPython3.12／Linuxx86_64用で、標準site-packagesを無効にしたlocal環境で全実ownerのimport・同親sourceの8／4分割に成功、外部要求0。元98fileの変更・再送は不要。全version／file SHAは同trialのruntime-deps-manifest.json、補足archiveはChatGPT保存file `libfile_fde3_f-a334b9bd6cb48191817c52be178125d9_2f7470f963808191aaebf050935e72de`。未送信であり、Pod client専用folderへの隔離展開と追加一回の実行は明示承認前に行わない。既存提供のPython／依存／重み／設定を変更しない。
 
 STRUCTURE_MAP_DELTA_PRESENT：現semanticの生成段階と根拠束縛を既存ownerへ接続した候補。全11変更pathは01A同日地図。新しいauthority family・別作者・保存基盤は追加しない。実4B品質・通常採用・本単位／補助全体は未完。build／TestFlight／本人実機保留、既存の管理評価と期限を維持する。

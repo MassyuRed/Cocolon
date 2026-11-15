@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/semantic-history-20261115-once/semantic_history_actual_once.py", line 18, in <module>
+    import analysis_cumulative_service as service
+  File "/workspace/semantic-history-20261115-once/ai/services/ai_inference/analysis_cumulative_service.py", line 22, in <module>
+    from fastapi import HTTPException
+ModuleNotFoundError: No module named 'fastapi'
