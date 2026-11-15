@@ -1,4 +1,4 @@
-> **11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
+> **11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
 
 > **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
@@ -2318,3 +2318,10 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 **11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
 
 既存source／rights・cohort・全量guard・公開map・SQL一回保存・月次・RNと唯一realizerは維持。API変更は既存semantic_admission、native提供、Piece制約testと既存4B fixture。原本と検証失敗を含む結果・次の直接一回は設計§9.77を正とする。
+
+
+### 11/15 引用Unicode境界の実停止修復・同じ4B基礎側比較（補助設計§9.78）
+
+**11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
+
+原文／引用候補・cohort・全量guard・公開v3・一回SQL保存・月次・RN・唯一realizerは維持。API変更は既存native decoder、生成制約test、Piece制約test内の環境独立化だけ。実原本・CPU継続確認・学習差分なし比較の同一条件と次工程は補助設計§9.78を正とする。

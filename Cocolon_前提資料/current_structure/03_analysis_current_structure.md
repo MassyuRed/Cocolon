@@ -1,3 +1,5 @@
+> **11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
+
 > **11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
 
 > **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
@@ -1692,3 +1694,10 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 **11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
 
 既存source／rights・cohort・全量guard・公開map・SQL一回保存・月次・RNと唯一realizerは維持。API変更は既存semantic_admission、native提供、Piece制約testと既存4B fixture。原本と検証失敗を含む結果・次の直接一回は設計§9.77を正とする。
+
+
+### 11/15 引用Unicode境界の実停止修復・同じ4B基礎側比較（補助設計§9.78）
+
+**11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
+
+原文／引用候補・cohort・全量guard・公開v3・一回SQL保存・月次・RN・唯一realizerは維持。API変更は既存native decoder、生成制約test、Piece制約test内の環境独立化だけ。実原本・CPU継続確認・学習差分なし比較の同一条件と次工程は補助設計§9.78を正とする。

@@ -1,4 +1,4 @@
-> **11/15最新：引用先行版は第一LEAFを31.12秒で完結し第二段階へ到達。ただし本文不採用・第二段階503。** ccdd0a6cの1nodeは元案／送信版／別保存の対象を混同し、残り7記録の独立した話題が項目化されない。2POST後NOT_GENERATED、MERGE・保存／再読・通常反映0。元提供PID113612へ復元（全体102.07秒）。LMFE初期化で項目順指定が解除される別の不具合を確定し、新候補a8abcc5aで初期化後に復元、全LEAF話題と対象／版保持を生成指示へ接続。第二段階例外の原因は未確定。通常API／worker24bc228d・DB20261115011424維持、本単位／補助全体未完。詳細・新一回は補助設計§9.77。
+> **11/15最新：第二LEAF停止の原因は引用中の「鞄」のtoken分割。原引用を変えずJSON表記で修復。** 候補26fda579は、直接出せない文字だけをUnicode escapeで生成し、元のUnicodeへ復号して既存CMEEで照合する。実停止前260tokenを同じQwen tokenizerで再生し、その後の引用・JSON終端・EOSまで通過、引用完全一致／追加model0を確認。関連152件成功。先行a8の1node／8記録と現在未確認→確認済みの変異は不採用のまま。同じ12記録を、既存4Bの学習差分なし・別model名で比較中。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.78。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -4370,3 +4370,33 @@ n1会議の根拠field1は対応するが、n2家族の食事はfield2（R1の�
 [無修補の実原本6file](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_quote_first_actual_20261115/)を保存。[新一回launcher](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_order_complete_once_20261115.py)は10601byte、SHA256 78bea5f98145ff14c2566ba9cbefc939bd1f401743a5cfcf11fdbd779487d70c。新root semantic-history-order-complete-20261115-once、最大3応答＋前後2GET、停止復元込み900秒、一回・学習／再試行なし。同Pod内の既存96source・driver・input・依存を固定照合し再送せず、最新4sourceと新launcherだけを固定commitから取得する。元提供の独自handler／IF等は一括置換せず、既存decoder3関数＋失敗位置記録関数、prefix初期化後と既存catch呼出の最小箇所だけ変更する。
 
 次は新rawの両LEAF→MERGEを全原入力・全本文・根拠／関係へ照合し、成立した同版だけを一回SQL保存・非生成再読・通常API／worker／提供schemaへ反映する。通常24bc228d・worker stale900・DB20261115011424、新migration／RN／build／TestFlight0。STRUCTURE_MAP_DELTA_NONE、本単位／補助全体は未完。新実出力を得る前に意味品質の改善や採用を確定しない。
+
+
+<a id="analysis-semantic-history-unicode-base-comparison-20261115"></a>
+## 9.78 11/15 — 実停止prefixからUnicode境界を修復し、同じ4Bの基礎側で全12記録を比較（通常未採用）
+
+§9.77のa8abcc5aは実launch113904／候補113909。第一LEAFは39.39秒でstop受領し、第二LEAFで503となり、driver71.992828秒・停止復元込み112.540339秒、元提供PID113946へ復元した。第一rawは依然R1の1nodeだけで、8記録全体の保持成功ではない。summaryの「その場で確認した答えへ言い直した」は、現在の確認が取れていないと訂正し、休憩後に連絡して昼過ぎに答えを受けた原文と異なる。「窓口未定」も現在未確認から強めている。explanationは言い切りかけた段階を保持し、先行の未遂→完了は再現しない。引用3本はfield1へ完全一致するが、意味は不採用、MERGE・保存／再読・通常反映0。
+
+### 第二段階の実停止状態と原因
+
+新しい一回の `semantic-history-second-prefix-20261115-once` では、同じ第二LEAF4記録だけを一回取得し、失敗直前の生成prefixを保存した。全件架空の固定messages SHA256 `9565f4463952e98faef223e841f15ad7ea934e621ae67ed8a28933db841c305f` に一致した要求だけで採取を許可し、一般の本文・認証情報をlogへ出さない。実launch114079／候補114083、停止復元込み72.451034秒で元提供PID114109へ復元。再試行・学習・依存install0。
+
+実prefixは599文字・260tokenで、field17の引用「必要な条件をノートの一ページにまとめて」の直後に停止した。次の原文文字は「鞄」。実Qwen tokenizerは「鞄」を97271／226へ分割し、それぞれ単独では置換文字になる。tokenizer_alphabetにも「鞄」がなく、literal enumを続けるtoken候補が0になっていた。正しいfield17〜24の最短引用を使った先行CPU8件では、この文字を通っていなかった。sourceや推論上の不明を原因として扱わない。
+
+[同a8実原本6file](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_order_complete_actual_20261115/)と[単独第二LEAF実原本7file](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_second_prefix_actual_20261115/)を無修補保存した。後者には固定架空入力だけのfailed-generated-prefix.jsonを含む。失敗を閉じるJSONや新本文へ修補しない。
+
+### 原引用・全材料を保持する直接修正
+
+API `26fda5792b03e69deab3f69fd32b73df4439be64` の既存Analysis隔離parser内で、tokenizerが直接出せないUnicode文字だけをJSON escapeへする。例は「鞄」→JSON上の `\u9784`、復号後は元の「鞄」で完全一致する。非BMP文字は正しいsurrogate pairへする。元field全文・引用候補文字列・source guard・同一根拠pair・CMEE採否を変えず、引用の削除、代替字、原文の短縮、生成後の修補は行わない。既存IF用のexact JSON enum方式をAnalysisの同じ隔離namespace内へ適用し、Piece／IF／ライブラリ本体は変更しない。
+
+同じ実Qwen tokenizer・固定sourceで、保存した全260tokenを新parserへ再生した。旧停止位置の継続候補は0→2となり、Unicode escapeから残りの原引用・field17・JSON終端・EOSまで通った。復号後の引用は「必要な条件をノートの一ページにまとめて鞄へ入れた。」に完全一致。9.228秒、追加model取得0。これは同じ失敗点の技術修復であり、生成本文や一般意味品質の合格ではない。verification.jsonの原本は次の一回に同版で添付する。
+
+関連3suiteは152 PASS／FAIL・SKIP0、11.83秒。BMP／非BMP、実TokenEnforcer・原field束縛・重複・分岐・元namespace不変、既存PieceとIFを含む。先行a8のAnalysis CI43682465720はSUCCESS、Piece43682465712は2698 PASS／2 FAIL。後者は他suiteの環境値で順序初期値がTrueとなり、テストがFalseを仮定していた不備である。テストのsynthetic_generatorだけで観測したFalseの初期条件を明示し、製品設定を変えず独立再現させた。新候補のCIは別の結果として確認する。
+
+### 既存4Bの基礎側を同じ条件で比較する
+
+学習差分適用版は、明示した全話題保持の指示後もR1の1nodeへ縮んだ。Emlis／Pieceが既に使っている同じQwen/Qwen3.5-4B・revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a` の基礎側で、同じ全12架空記録・8／4分割・全field・decoder・4096token／210秒上限・CMEE採否を比較する。別名 `cocolon-qwen3.5-4b-analysis-base-851bf6e` をmodel要求と応答に明示する。既存のadapter任意起動経路を使い、一時候補のAnalysis adapter3組6引数だけを外し、追加学習・新model download・新rental・新selectorを作らない。元引数にPiece adapterがないことも確認した。自然文側のmodel名・既存認証は保持する。
+
+[固定一回launcher](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_base_unicode_once_20261115.py)は11923byte、SHA256 `ebeea8cb15dde6e84d1c5b60aa0337ae810c119c589a0bccb16c89c843fc2824`。別root `semantic-history-base-unicode-20261115-once`、最大3応答＋前後2GET、停止復元込み900秒、一回・学習／再試行なし。既存98file／補足依存は再送せず、固定source4fileを取得する。元args／env／cwdは同Pod内メモリで保持しfinallyで元の学習差分適用提供へ復元する。この比較だけで通常設定や重み採用を変えない。
+
+新raw全段階を全原文・本文・根拠・条件差へ照合し、成立した同版だけを一回SQL保存・非生成再読・通常API／worker／提供schemaへ反映する。通常API／worker24bc228d・DB20261115011424を維持。stale1800設定・配置・新migration・RN変更・build／TestFlightは未実施。STRUCTURE_MAP_DELTA_NONE、本単位／補助全体は未完。
