@@ -1,0 +1,28 @@
+{
+  "api_commit": "a8abcc5a3dd26ddfd0774e7bc649f7144976ec18",
+  "all_fictional": true,
+  "state": "NOT_GENERATED",
+  "calls": [
+    {
+      "status": 200,
+      "seconds": 39.389351131394506
+    },
+    {
+      "status": 503,
+      "seconds": 71.98503146832809
+    }
+  ],
+  "findings": [
+    "summary changes current unconfirmed contact into confirmed answer during meeting",
+    "summary strengthens blank/uncertain contact into currently undecided",
+    "explanation preserves attempted assertion; old attempted-to-completed mutation not reproduced",
+    "one R1 node; seven independent records absent"
+  ],
+  "meaning_admitted": false,
+  "merge_calls": 0,
+  "saved_artifacts": 0,
+  "normal_rollout": 0,
+  "original_provider_restored": true,
+  "restored_pid": 113946,
+  "total_seconds": 112.54033902706578
+}

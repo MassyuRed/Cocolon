@@ -1,0 +1,56 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   6%|▌         | 41/723 [00:00<00:01, 376.68it/s]
+Loading weights:  11%|█         | 79/723 [00:00<00:02, 317.60it/s]
+Loading weights:  15%|█▌        | 112/723 [00:00<00:01, 307.70it/s]
+Loading weights:  20%|█▉        | 143/723 [00:00<00:01, 295.84it/s]
+Loading weights:  24%|██▍       | 173/723 [00:00<00:01, 278.53it/s]
+Loading weights:  28%|██▊       | 204/723 [00:00<00:01, 280.35it/s]
+Loading weights:  33%|███▎      | 239/723 [00:00<00:01, 292.29it/s]
+Loading weights:  38%|███▊      | 273/723 [00:00<00:01, 303.71it/s]
+Loading weights:  42%|████▏     | 304/723 [00:01<00:01, 298.08it/s]
+Loading weights:  46%|████▌     | 334/723 [00:01<00:01, 290.88it/s]
+Loading weights:  50%|█████     | 364/723 [00:01<00:01, 286.75it/s]
+Loading weights:  55%|█████▌    | 399/723 [00:01<00:01, 301.21it/s]
+Loading weights:  60%|█████▉    | 432/723 [00:01<00:00, 308.97it/s]
+Loading weights:  84%|████████▍ | 609/723 [00:01<00:00, 729.11it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 447.83it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=admitted monotonic=2290995.071
+analysis_generation_stage=tokenize monotonic=2290995.071
+analysis_generation_stage=constraint monotonic=2290995.143
+analysis_generation_stage=decode monotonic=2290995.153
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_0 monotonic=2290998.632
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2290998.642
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_128 monotonic=2291012.669
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_245422 monotonic=2291012.688
+analysis_generation_stage=prefix_enter_256 monotonic=2291028.008
+analysis_generation_stage=prefix_exit_256_UnionParser_other_allowed_311 monotonic=2291028.055
+analysis_generation_stage=complete_stop monotonic=2291034.11
+analysis_generation_stage=special_count_1 monotonic=2291034.114
+analysis_generation_stage=admitted monotonic=2291036.196
+analysis_generation_stage=tokenize monotonic=2291036.196
+analysis_generation_stage=constraint monotonic=2291036.228
+analysis_generation_stage=decode monotonic=2291036.235
+analysis_generation_stage=prefix_enter_0 monotonic=2291037.862
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2291037.977
+analysis_generation_stage=prefix_enter_128 monotonic=2291051.744
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_5 monotonic=2291051.754
+analysis_generation_stage=prefix_enter_256 monotonic=2291066.532
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_2 monotonic=2291066.538
+analysis_generation_stage=failed_ValueError monotonic=2291066.769
+analysis_generation_stage=failure_location_do_POST_696 monotonic=2291066.769
+analysis_generation_stage=failure_location_generate_870 monotonic=2291066.77
+analysis_generation_stage=failure_location_generate_2242 monotonic=2291066.77
+analysis_generation_stage=failure_location_decorate_context_120 monotonic=2291066.77
+analysis_generation_stage=failure_location_generate_2982 monotonic=2291066.77
+analysis_generation_stage=failure_location__sample_3225 monotonic=2291066.77
+analysis_generation_stage=failure_location___call___96 monotonic=2291066.77
+analysis_generation_stage=failure_location___call___1561 monotonic=2291066.77
+analysis_generation_stage=failure_location_private_prefix_856 monotonic=2291066.77
+analysis_generation_stage=failure_location_semantic_free_text_tokens_61 monotonic=2291066.77
