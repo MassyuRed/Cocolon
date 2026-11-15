@@ -1,4 +1,4 @@
-> **11/15最新：承認済み98ファイルは既存Podへ送付済み。FastAPI不足で生成前に起動停止。** 送付1,520,025byte／全98file不変、driver起動1回・4B要求0・health0・学習／再起動／通常配置0。私がPod依存を事前確認しなかった起動不備であり、実モデルの拒否・意味品質失敗とはしない。API f5d8967の保存を維持。Piece CI成功、Analysis CIは25分で取消しだが変更範囲は成功し、未完の最終20file群だけlocal408 PASS／738subtestsで補完。通常API／worker24bc228d。隔離client依存13種・408file／3,203,073byteを準備して無site-packages環境でimportと8／4分割を確認したが未送信。再実行・通常採用・本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+> **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
 
 > **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
@@ -7267,4 +7267,21 @@ API f5d8967の変更11pathを復元manifestと全文一致で照合。新しい�
 | `.github/workflows/analysis-observed-content.yml` | 既存CIへの3test追加 |
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 候補と未実行・通常未反映の引継ぎ |
 
-この資料側では既存trial `semantic_history_prepared_20261115/`のdriver・架空input・manifest3fileを保存。通常API／worker24bc228dを維持し、実4B0・採用未完。詳細は[補助設計§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。STRUCTURE_MAP_DELTA_PRESENT。
+この資料側では既存trial `semantic_history_prepared_20261115/`のdriver・架空input・manifestと実行原本・非生成検証logを保存。通常API／worker24bc228dを維持する。旧f5dの追加一回は1POST・0受領で終了、後続bdf3919の実4B・Pod送付と通常反映は未実施、採用未完。詳細は[補助設計§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。STRUCTURE_MAP_DELTA_PRESENT。
+
++
++### 同11/15・長履歴の取得失敗後に保存した6path修正候補
++
++API `bdf39198359f7e205b263657442f80215f6b0725`。送付済みf5dの原98fileと稼働提供は不変。新file・新ownerは追加せず、既存pathの以下だけを変更した。元11pathの能力接続は上記に保持し、新候補を実行済み版へ混同しない。
++
++| 既存path（mashos-api） | 後続候補の差分 |
++|---|---|
++| `ai/services/ai_inference/analysis_cumulative_service.py` | 分割準備を含む絶対期限、一要求225秒・actual call数に応じた総上限840秒、準備超過時の次POST禁止 |
++| `ai/services/ai_inference/analysis_model_source.py` | HTTP220秒／一要求225秒／全体840秒を区別、同sourceとlength拒否は維持 |
++| `ai/tools/serve_emlis_natural_reply.py` | 旧引用候補を保持して一意な文候補を追加、map本人訂正の全文要件は維持 |
++| `ai/tests/test_analysis_semantic_generation_schema.py` | 実parser・短文／旧候補保持・field対応・引用／escape・同sourceでのCMEE照合 |
++| `ai/tests/test_analysis_semantic_history_service.py` | 複数段階の総時間・分割準備を含む期限・準備超過時の生成0／保存0 |
++| `ai/tests/test_analysis_semantic_integration.py` | bridgeより長い受領期限と外側の一要求監視を照合 |
++
++関連11fileの非生成308 PASS（新13件、FAIL／SKIP0）。新候補のAnalysis43674876139／Piece43674876107は記録時点in_progressで成功未確定。候補のPod送付・実4B・通常反映0、実モデル品質・worker全job期限整合は未実証。STRUCTURE_MAP_DELTA_PRESENT。
++

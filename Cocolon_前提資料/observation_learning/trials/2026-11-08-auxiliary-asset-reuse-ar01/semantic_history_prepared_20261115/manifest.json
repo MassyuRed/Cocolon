@@ -496,14 +496,14 @@
   "zip_sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
   "runtime_source_files": 96,
   "upload_performed": true,
-  "gpu_requests": 0,
+  "gpu_requests": 1,
   "normal_api_deployed": false,
   "bytes": 1520025,
   "sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
   "backend_commit": "f5d8967eb804a6930378b390e6e6e9485e4d01e4",
-  "state": "UPLOADED_BOOTSTRAP_FAILED_BEFORE_GENERATION",
+  "state": "EXTRA_ATTEMPT_CONSUMED_FAILED_OR_ACK_UNKNOWN",
   "max_model_calls": 3,
-  "health_gets": 0,
+  "health_gets": 2,
   "maximum_minutes_including_provider_cancellation": 8,
   "training": 0,
   "retry": 0,
@@ -512,7 +512,7 @@
   "credential_scope": "one named Analysis key; same existing pod authentication only",
   "target_pod": "f1lle4xwq3wjln",
   "prior_archive_sha256": "b65352e0f67b35b274fbff8661a669391fe005af74aed8d2abd0327f1b5457ac",
-  "archive_note": "Same98 file bytes re-archived deterministically; old archive container not retained. No external upload or model request.",
+  "archive_note": "Original98 file bytes retained and not resent; dependency supplement added under separate explicit approval.",
   "file_count": 98,
   "archive_layout": {
     "date_time": [
@@ -568,9 +568,142 @@
   "pod_uploaded_bytes": 1520025,
   "pod_uploaded_sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
   "user_approved": true,
-  "process_launches": 1,
-  "model_attempt_marker_created": false,
+  "process_launches": 2,
+  "model_attempt_marker_created": true,
   "bootstrap_error": "ModuleNotFoundError: No module named fastapi",
   "launch_pid": 111894,
-  "restart_count": 0
+  "restart_count": 0,
+  "current_client_launch_pid": 112311,
+  "responses_received": 0,
+  "generated_artifacts": 0,
+  "raw_driver_state": "NOT_GENERATED",
+  "raw_driver_state_meaning": "No artifact, not zero inference",
+  "supplement": {
+    "user_approved": true,
+    "uploaded": true,
+    "bytes": 3203073,
+    "sha256": "d85f85b2044f3107a91d9eee37e5d632b8e114244d2382eccf297821f578bd0e",
+    "distributions": 13,
+    "file_count": 408,
+    "install_into_existing_environment": false
+  },
+  "extra_attempt": {
+    "user_approved": true,
+    "consumed": true,
+    "max_model_calls": 3,
+    "max_seconds": 480,
+    "posts_sent": 1,
+    "received": 0,
+    "status": 504,
+    "state": "FAILED_OR_ACK_UNKNOWN",
+    "elapsed_seconds": 211.29745450010523,
+    "first_acquisition_elapsed_seconds": 210.30546553386375,
+    "leaf_record_counts": [
+      8,
+      4
+    ],
+    "leaf2_and_merge_sent": false,
+    "same_window_provider_finish": "complete_length",
+    "model_quality": "UNASSESSED",
+    "partial_map_saved": false
+  },
+  "corrective_candidate": {
+    "commit": "bdf39198359f7e205b263657442f80215f6b0725",
+    "pod_upload": false,
+    "normal_deployment": false,
+    "model_requests": 0,
+    "original98_modified": false,
+    "semantic_http_seconds": 220,
+    "semantic_request_seconds": 225,
+    "pipeline_seconds_by_call_count": {
+      "1": 225,
+      "3": 675,
+      "4": 840
+    },
+    "pipeline_clock_includes_planning": true,
+    "worker_stale_end_to_end_verified": false,
+    "old_quote_options_preserved": 96,
+    "unique_sentence_options_added": 560,
+    "runtime_preflight": "53passed/16skipped/1dependency-import failure; superseded by final focused run",
+    "final_tests": {
+      "passed": 308,
+      "new": 13,
+      "files": 11,
+      "failed": 0,
+      "skipped": 0,
+      "focused": 71,
+      "related": 140,
+      "shared_server": 97,
+      "warning": "one existing deprecation repeated across3invocations",
+      "installs": 0,
+      "external_model_or_db_calls": 0
+    },
+    "changed_paths": [
+      "ai/services/ai_inference/analysis_cumulative_service.py",
+      "ai/services/ai_inference/analysis_model_source.py",
+      "ai/tests/test_analysis_semantic_generation_schema.py",
+      "ai/tests/test_analysis_semantic_history_service.py",
+      "ai/tests/test_analysis_semantic_integration.py",
+      "ai/tools/serve_emlis_natural_reply.py"
+    ],
+    "ci": {
+      "analysis": {
+        "run_id": 43674876139,
+        "state": "in_progress_at_observation"
+      },
+      "piece": {
+        "run_id": 43674876107,
+        "state": "in_progress_at_observation"
+      },
+      "old_commit_ci_not_recredited": true,
+      "manual_reruns": 0
+    }
+  },
+  "execution_artifacts": [
+    {
+      "path": "semantic-history.actual.result.json",
+      "bytes": 47064,
+      "sha256": "20a83a39802076218c02d1cf1cc4ced73e44be921091622da828901b6b2326f9"
+    },
+    {
+      "path": "launch-with-client-deps.log",
+      "bytes": 351,
+      "sha256": "de194ff368401f4af3ec20d03bdb55c8bb9cd6b3e716718f62913ba546f666a8"
+    },
+    {
+      "path": "runtime-observed.json",
+      "bytes": 604,
+      "sha256": "21b4180116ceaa819c564a559e2fdc1428081b2b3fe12b15b3cbcdfda4393cc3"
+    },
+    {
+      "path": "provider-deadline-observed.json",
+      "bytes": 6246,
+      "sha256": "9c059ddae4641c5b172e063f12c3a30b38cea6da5d9ecded09eefc01a2e86356"
+    },
+    {
+      "path": "semantic-history-corrective-pytest.log",
+      "bytes": 786,
+      "sha256": "038dcd40b6c08fb59c4217d6e1005cfe22b7f1df2d4468f71fc360aeee5a8ff9"
+    },
+    {
+      "path": "semantic-history-corrective-related.log",
+      "bytes": 857,
+      "sha256": "f6fe44e547798569fdb58ae143224506808f589e1d555ea9b986cbaee6c60b74"
+    },
+    {
+      "path": "semantic-history-corrective-shared-server.log",
+      "bytes": 855,
+      "sha256": "2ccf39c5ef41cdf38172bdf5e5cd73cbf00a9d9e7c801458776daa99c23bb020"
+    },
+    {
+      "path": "semantic-history-corrective-summary.json",
+      "bytes": 819,
+      "sha256": "1c1e28c54cb1128a5ef4cc3540931d0b1e2421109b2750325cc29ef21d2ffffe"
+    },
+    {
+      "path": "semantic-history-corrective-runtime-preflight.log",
+      "bytes": 2113,
+      "sha256": "cf9321318da82f59ad6b6c9e9d7ea7f88066a2f9c91098a2ef83f0ef7ab4a512"
+    }
+  ]
 }

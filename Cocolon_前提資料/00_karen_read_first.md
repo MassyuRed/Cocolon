@@ -1483,7 +1483,7 @@ coverage:
   grounded_human_reception_full_01_02_regeneration: false
 ---
 
-> **11/15最新：承認済み98ファイルは既存Podへ送付済み。FastAPI不足で生成前に起動停止。** 送付1,520,025byte／全98file不変、driver起動1回・4B要求0・health0・学習／再起動／通常配置0。私がPod依存を事前確認しなかった起動不備であり、実モデルの拒否・意味品質失敗とはしない。API f5d8967の保存を維持。Piece CI成功、Analysis CIは25分で取消しだが変更範囲は成功し、未完の最終20file群だけlocal408 PASS／738subtestsで補完。通常API／worker24bc228d。隔離client依存13種・408file／3,203,073byteを準備して無site-packages環境でimportと8／4分割を確認したが未送信。再実行・通常採用・本単位／補助全体は未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+> **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
 
 > **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
 # 恒久必読 — EmlisAI商品中核の後回しとCMEE Product Read失敗

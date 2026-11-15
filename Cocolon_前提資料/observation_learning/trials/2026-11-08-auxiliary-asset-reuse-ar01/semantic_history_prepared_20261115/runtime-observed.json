@@ -1,0 +1,22 @@
+{
+  "provider_pid": 111294,
+  "provider_source_sha256": "ad3d301d2d1abd9226703dc72e3734eb8da79d8e0cf084d4b0666e97298370be",
+  "core_specs": [
+    "upstream.__file__"
+  ],
+  "provider_restart_performed": false,
+  "result_state": "NOT_GENERATED",
+  "requests_sent": 1,
+  "responses_received": 0,
+  "health_before": {
+    "elapsed_seconds": 0.1915488699451089,
+    "status": "ok",
+    "status_code": 200
+  },
+  "health_after": {
+    "elapsed_seconds": 211.29745271988213,
+    "status": "ok",
+    "status_code": 200
+  },
+  "result_sha256": "20a83a39802076218c02d1cf1cc4ced73e44be921091622da828901b6b2326f9"
+}

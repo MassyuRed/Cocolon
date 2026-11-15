@@ -1,0 +1,36 @@
+....ssssssss..s.sssss....ss........................F..................   [100%]
+=================================== FAILURES ===================================
+_ test_semantic_transport_can_receive_the_bridge_response_before_its_watchdog __
+
+    def test_semantic_transport_can_receive_the_bridge_response_before_its_watchdog():
+>       from ai.tools.analysis_jupyter_bridge import AnalysisBridge
+
+ai/tests/test_analysis_semantic_integration.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    """Model-key-only Analysis route on an existing Jupyter HTTP port.
+    
+    Load through ServerApp.extra_services. This handler deliberately does not use
+    Jupyter's identity provider: a model key must never issue a Jupyter login cookie.
+    All other Jupyter routes keep their original authentication and XSRF settings.
+    """
+    from __future__ import annotations
+    
+    import asyncio
+    import hmac
+    import json
+    from pathlib import Path
+    
+>   from tornado.httpclient import AsyncHTTPClient, HTTPRequest
+E   ModuleNotFoundError: No module named 'tornado'
+
+ai/tools/analysis_jupyter_bridge.py:14: ModuleNotFoundError
+=============================== warnings summary ===============================
+ai/services/ai_inference/api_emotion_submit.py:919
+  /workspace/scratch/5be2f3c58d61/mashos-api/ai/services/ai_inference/api_emotion_submit.py:919: PydanticDeprecatedSince20: Pydantic V1 style `@root_validator` validators are deprecated. You should migrate to Pydantic V2 style `@model_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @root_validator(pre=True)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ai/tests/test_analysis_semantic_integration.py::test_semantic_transport_can_receive_the_bridge_response_before_its_watchdog
+1 failed, 53 passed, 16 skipped, 1 warning in 69.03s (0:01:09)
