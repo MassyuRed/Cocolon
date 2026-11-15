@@ -1,4 +1,4 @@
-> **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+> **11/15最新：短文引用候補bdf391の実一回を回収し、未完了の主因を根拠反復へ絞った。** 第一LEAFは211.23秒でHTTP200本文を受領したがfinish=length。途中の根拠94個は16種類で、同一項目内の同じ欄・引用の反復が出力を消費していた。最終artifact／保存／通常反映0。元提供を同じ引数・環境・作業先へ復元しhealth200、停止復元込み251.93秒。API／worker24bc228d Live、DB最新20261115011424をfresh確認。生成内で既出の根拠ペアだけを除く候補1fb55b49dff0ae9382adcf6d79edea06ea95c8c7を保存し、元資料・公開型・保存判定・重みを保持。候補の意味品質・通常反映、本単位／補助全体は未完。build／TestFlight／本人実機保留。
 
 # 第11回 Cocolon週末報告会 — 2026-11-14（終了）
 

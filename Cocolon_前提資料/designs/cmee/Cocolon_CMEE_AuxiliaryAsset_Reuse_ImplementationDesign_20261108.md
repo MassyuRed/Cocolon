@@ -1789,7 +1789,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 **11/15・現在の再開先：第11回§5の四作業を維持し、§9.73の現semantic長履歴候補を続ける。** §9.72の実回答とその後の本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3と条件表示、§9.68の有効source／Saved印は成立済みとして繰り返さない。現在API／workerは24bc228d Live、長履歴候補f5d8967は未配置。
 
-§9.73の元98fileと補足ZIPは送付済みで再送しない。依存解消後に承認された追加一回は、第一LEAFの210.305秒timeout・本文未受領で終了し許可を消費した。無修補raw・前後2GET・提供stageは同trialに保存済み。新候補bdf39198359f7e205b263657442f80215f6b0725の短文引用選択と期限層／段階数予算は非生成検証済みだが、Podへ送付せず通常配置もしない。次は完成応答を得るための送付差分と実行上限を具体化し、実workerのstaleとsource取得／保存を含む期限を照合する。旧8分一回許可を再利用せず、別の明示承認前に新モデル要求を行わない。原入力と図・全文・両端根拠を照合できる完成rawが得られてから、同版保存再読と採用可能な通常API／worker反映へ進める。一般品質・AR-07／補助全体未完、build／本人実機保留を維持する。
+§9.74の最新実測・修正候補を優先する。§9.73の元98fileと補足ZIPは送付済みで再送しない。依存解消後に承認された追加一回は、第一LEAFの210.305秒timeout・本文未受領で終了し許可を消費した。無修補raw・前後2GET・提供stageは同trialに保存済み。新候補bdf39198359f7e205b263657442f80215f6b0725の短文引用選択と期限層／段階数予算は非生成検証済みだが、Podへ送付せず通常配置もしない。次は完成応答を得るための送付差分と実行上限を具体化し、実workerのstaleとsource取得／保存を含む期限を照合する。旧8分一回許可を再利用せず、別の明示承認前に新モデル要求を行わない。原入力と図・全文・両端根拠を照合できる完成rawが得られてから、同版保存再読と採用可能な通常API／worker反映へ進める。一般品質・AR-07／補助全体未完、build／本人実機保留を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -4269,3 +4269,27 @@ workerの既定staleは900秒、started_at基準でありheartbeatはない。84
 新6pathの候補はGitHub保存だけで、元98file／Pod driver・稼働提供・通常API／workerは変更しない。新実4Bは未取得、同raw保存再読・通常反映・本単位／補助全体未完を維持する。次は候補の実行条件と全体上限を具体化してから、別の明示許可による一回で完成応答を確認する。旧許可を再利用しない。
 
 STRUCTURE_MAP_DELTA_PRESENT：現semanticの生成段階と根拠束縛を既存ownerへ接続した候補。全11変更pathは01A同日地図。新しいauthority family・別作者・保存基盤は追加しない。実4B品質・通常採用・本単位／補助全体は未完。build／TestFlight／本人実機保留、既存の管理評価と期限を維持する。
+
+
+<a id="analysis-semantic-history-evidence-repeat-20261115"></a>
+## 9.74 2026-11-15 — 受領した実4Bの根拠反復を特定し、生成内で同一ペアを除く
+
+現指示「通常反映まで含めて未完の作業単位を閉じる」に従い、§9.73から継続。whole-product、最新weekly§5、01系地図・三中核current mapとactualを照合した。build／TestFlight／本人実機は保留し、成立した能力の通常API／worker反映までを対象にする。記憶・tree censusを全履歴本文の理解済みとは扱わない。
+
+### bdf391の新しい一回と観測
+
+前の許可・markerは再利用せず、GitHub保存したone-shot（17e7d7d）で新rootへ一回実行。元98fileのうち96sourceの全bytes、driver／架空inputのhash、12記録・8／4分割・親request_refを停止前に照合した。固定bdf391の2client ownerと提供側semantic_output_schema／短文helperだけを使い、提供のその他関数・args／同Pod内env／cwd・重みを保持。鍵や起動環境値はPod外へ送らない。最大3model POST、driver前後2GET、起動前／起動後／復元時の有限health polling、780秒後に復元時間を残す監視、実行上限900秒。変更前98file／依存の再送・install・学習・新Pod0。
+
+第一LEAFのみ実1POST、HTTP200の生response14428byteを211.2255秒で受領。finish_reason=lengthであり、既存transportはHTTPException503として拒否。2番目LEAF／MERGE0、artifact／保存再読／通常反映0。driver211.2351秒、停止復元込み251.9304秒。元sourceSHA ad3d301d…は不変、元args／env／cwdでPID112828へ復元、health200。これは前後のモデル本文全byte同一の検証ではない。
+
+実raw6350字を全読した。根拠の完成object94個は16種類に留まり、最初の3nodeは各24根拠へ反復充填していた。短文候補は実際に選ばれたが、同一根拠の再選択で出力量が膨らんだ。受信期限不足だけの問題ではなく、待機を延ばすだけでは品質を改善しない。4番目nodeの途中で終わり、全graph・意味品質は未達。rawを削除・重複除去して完成artifactへ修補しない。生原本・stage・復元logは同trialのsemantic_history_bdf391_actual_20261115へ保存する。
+
+### 必要な直接修正
+
+API候補1fb55b49dff0ae9382adcf6d79edea06ea95c8c7は既存serve_emlis_natural_reply.py内のsemantic_json_parserだけへ、同node内で既に選んだ(field,quote)を次のenumから除くparserを接続。別fieldの同じ文、同fieldの別文、別nodeでの再利用は保持し、原source全文・欄番号・24根拠上限・finish=stop要件・既存CMEE／保存判定は不変。項目の意味→根拠の順と、field→quoteの順を既存固定順設定で確定する。IFとPieceとupstream packageへ波及しないよう、既存IFと同じnamespace隔離方式を用いる。uniqueItemsだけでは固定LMFE0.11.3に強制されないことを実parserで再現した。
+
+新しい根拠選択10case（文字／実TokenEnforcerの重複・異なる欄／文・別node・候補枯渇・分岐・namespace隔離）を追加。既存Unicode testは同じ日本語premature-end回帰を現在のtitle先行順で検査。Pieceの既存隔離testは、旧Analysis設定false固定から独立config不変へ更新した。初回175PASS／1旧期待値FAILと、更新後93PASSを区別する。最終同版の関連176件は実行中として、後続結果を同節へ置換する。bdf391のAnalysis43674876139／Piece43674876107は両方SUCCESSをfresh確認したが、新候補のCIへ流用しない。
+
+通常workerは1instance、start=astor_worker.py、autoDeploy OFF、最新24bc228dの起動logでstale_after=900秒。semantic840秒の外にsource取得・保存・通知がある。現在単一workerは処理中に自分のjobを再取得しないが、通常反映時は既存設定ASTOR_WORKER_STALE_RUNNING_SECONDS=1800へ合わせる案とする。任意の全履歴を1800秒以内に処理できる保証ではない。DB最新migration20261115011424は維持、新migration不要。
+
+次はこの修正候補を同じ12記録で一回検証し、完成したLEAF／MERGE rawを原入力・全文・両端根拠へ照合する。成功した同rawだけを既存SQLで一回保存・非生成再読し、採用可能な通常API／workerと提供schemaを同版へ揃える。途中失敗は部分保存0、旧提供へ復元し、未完を完了へ変換しない。今回bdf391の一回は終了し、新候補の実測へ流用しない。STRUCTURE_MAP_DELTA_NONE：今回の直接修正は既存decoder内の根拠選択で、商品route／source／artifact／公開型／保存ownerは変更しない。
