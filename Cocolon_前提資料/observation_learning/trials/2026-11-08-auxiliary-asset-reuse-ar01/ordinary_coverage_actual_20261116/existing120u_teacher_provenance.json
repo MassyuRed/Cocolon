@@ -1,0 +1,131 @@
+{
+  "schema": "cocolon.analysis.existing120u.teacher_provenance.v1",
+  "state": "EXISTING_ROOT_AUTHORED_SYNTHETIC_PROVENANCE_NOT_MASH_TEACHER_OR_QUALITY_ACCEPTANCE",
+  "source_repository": "MassyuRed/Cocolon",
+  "source_ref": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+  "source_files": {
+    "semantic_map_teaching9_plan.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_teaching9_plan.json",
+      "bytes": 158072,
+      "sha256": "f969cd2b2b8020a21cb4a848371a15b9c89d475464b392d1043bec5fe8063474"
+    },
+    "semantic_map_continue96_plan.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_continue96_plan.json",
+      "bytes": 159756,
+      "sha256": "bd33b617d420f81791217b0feadbe277e4209c5863870e6a146a306803fb3168"
+    },
+    "semantic_map_resume40_plan.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_resume40_plan.json",
+      "bytes": 158782,
+      "sha256": "189182165cf1d9593b6d7539fdf2c1750e1f4c6cc1159b6966d9076181247cc4"
+    },
+    "semantic_map_teaching24_results.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_teaching24_results.json",
+      "bytes": 40013,
+      "sha256": "9e483f84bc6b60ae4fad73c4ea2136fd9a1bf4d76d067ae8f2672f0345c2f96a"
+    },
+    "semantic_map_continue56_interrupted.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_continue56_interrupted.json",
+      "bytes": 10010,
+      "sha256": "30a4e577f172cb18093c64d047be98ed9bb6e4d0dcce8cb5e4eb56d02b4706a5"
+    },
+    "semantic_map_teaching120_results.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_teaching120_results.json",
+      "bytes": 30696,
+      "sha256": "a1abbd233ac58bca8a5baf8b8bf3ec19a966f37e33ff2485913087efbd9fef6f"
+    },
+    "semantic_map_connection_outcome_20261107.json": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_map_connection_outcome_20261107.json",
+      "bytes": 32709,
+      "sha256": "3d0fe492ca33d162c4d6d20b0dd92adada838f5e3775b3156cdffa90275bf2a9"
+    }
+  },
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "teacher_original_ids": [
+    "T01_manual10",
+    "T02_music",
+    "T03_chair",
+    "T04_book",
+    "T05_listening",
+    "T06_unfinished",
+    "T07_future",
+    "T08_other",
+    "T09_time"
+  ],
+  "heldout_original_ids": [
+    "H01_research",
+    "H02_mug",
+    "H03_boundary",
+    "H04_garden"
+  ],
+  "heldouts_have_assistant_target": false,
+  "lineage": {
+    "fresh_base_updates": 24,
+    "preserved_continuation_updates": 56,
+    "resume_updates": 40,
+    "effective_total_updates": 120,
+    "unpreserved_reported_step_excluded": true,
+    "optimizer_rng_exact_resume": false,
+    "final_weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+    "final_config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+    "alias": "cocolon-qwen3.5-4b-analysis-semantic-120u"
+  },
+  "same_decoded_targets_and_messages_across_three_plans": true,
+  "formats": {
+    "assistant_schema": "cocolon.analysis.semantic_map.model.v2",
+    "input_keys": [
+      "analysis_as_of",
+      "fields",
+      "records"
+    ],
+    "history_stage_in_teaching": false,
+    "training": "assistant-only cross entropy with EOS, enable_thinking=False",
+    "initial24_target_top_order": [
+      "edges",
+      "nodes",
+      "overview",
+      "schema_version"
+    ],
+    "subsequent_saved96_target_top_order": [
+      "schema_version",
+      "overview",
+      "nodes",
+      "edges"
+    ]
+  },
+  "selected_existing_lessons": [
+    {
+      "original_id": "T09_time",
+      "input_user_message_sha256": "09d4bbff4b0eca1ddd8a7bc160032d4c0de42b83bbc6f09cdb780c64a374f75b",
+      "assistant_target_sha256": "c7152e1d2bcdc654410d794371ca1ed9632a3112d07b26eee5f4d775f66b16d7",
+      "schema_version": "cocolon.analysis.semantic_map.model.v2",
+      "source_records": 2,
+      "nodes": 2,
+      "edges": 1
+    },
+    {
+      "original_id": "T08_other",
+      "input_user_message_sha256": "5b6e1ac9f0d4cdff444561c1ed3b17dbbf7f6887045ad6b5bd914655bac7156f",
+      "assistant_target_sha256": "17f313142c4f0bcf58fd3f26ec4370012d92ff3fca8c57a096e9348150fd0d3d",
+      "schema_version": "cocolon.analysis.semantic_map.model.v2",
+      "source_records": 2,
+      "nodes": 2,
+      "edges": 1
+    },
+    {
+      "original_id": "T06_unfinished",
+      "input_user_message_sha256": "44f5ce5861b0d7d00eb7fbd4c252945fc32e725b957441aa7f34bb2f7ff6c235",
+      "assistant_target_sha256": "e60c347fd0b0fc9e3356415949d4be56ef3146dd6bddf30b4101ed1f01709dbd",
+      "schema_version": "cocolon.analysis.semantic_map.model.v2",
+      "source_records": 2,
+      "nodes": 2,
+      "edges": 1
+    }
+  ],
+  "weights_binary_retrieved_or_reverified_in_this_diagnostic": false,
+  "failure_causality_established": false,
+  "new_training": 0,
+  "model_calls": 0,
+  "full_plan_or_raw_lesson_bodies_copied_here": false
+}

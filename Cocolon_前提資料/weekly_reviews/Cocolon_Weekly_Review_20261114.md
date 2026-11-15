@@ -1046,3 +1046,15 @@ API144656aのAnalysis CIはSUCCESS、Cocolon6558ae3の5CIもSUCCESS。新3file22
 既存nativeがrecord被覆mappingをhistoryだけに渡す適用漏れを修復、共有core／schema／receiverは不変。実受領raw回帰を含む287件成功、独立reviewに阻害要因なし。修正API f1ffa8a67699d7b68ac6365f8c86093b070b90caの作業branch保存と、実意味／通常提供成功を区別する。新しいA2／条件付きB2は既送付core／schemaを再利用し、新4file123621byte・A2最大2応答／復元7分一回、適切な場合だけB2最大13新規応答／復元17分一回として準備済み・未送付／未実行。A1の一回とB1の条件不成立を保持し、未使用B枠を別Aへ転用しない。
 
 取得前SQL checkpoint／源泉／全12計画は維持、復元runtimeで一致と合成保存物の別process非生成再読を再確認した。通常API／worker24bc228d・DB20261115011424はfresh確認済み、worker1800設定は未適用。第11回§5の全体主枠・build／TestFlight／本人実機保留、補助全体未完を維持する。原本・原因・次の具体scope・通常反映までの残件は補助設計§9.86。
+
+
+### 11/16 継続 — A2は両record参照と完結へ到達、意味不一致でB2を実行しない
+
+明示承認された新4file123621byte案のうちA2用parser＋launcher33126byteだけを送付し、一回の2条件を実施。両方HTTP200／stop・CMEE GENERATED、各source／mapped／processed2・unparsed0で、通常record被覆の修復は働いた。読書会は後日の送信を未送信へ戻し、確認済み一人の返信を一般的な不明へ戻して問い合わせ先も混同。照明は後日購入を認めたが、局所記録を習慣、条件整理を先後関係、一つの手段を排他的な応用範囲へ広げ、両本文とも独立原文照合で不採用とした。完結・引用一致と意味品質を分ける。
+
+driver180.8253秒・復元込み234.5074秒で元提供PID128408／health200へ戻した。学習／retry0、A2の一回は消費済み、条件付きB2は未送付／未実行・SQL保存／同raw実再読／通常反映0。API f1ffa8aの2CIとCocolon6f681dbの5CIは成功し、通常API／worker24bc228d・DB20261115011424は維持する。実原本actual e0ececf4／ZIP b37ec72aと独立review、SQLreadiness／CIreceiptを既存trialへ保存した。
+
+source_dutiesのclaims0、finite／raw frameのdefault actor、8欄111個の既存原文spanの位置indexは意味の確認済み事実ではなく、新生成もしていない。現120uの出自は同じ架空9教師の24＋保存56＋40で、厳密なoptimizer／RNG再開ではない。教師の文言やJSON順序をA2失敗の原因と断定しない。既存作者instructionへ全体2記録／2node／1edgeとLEAF単一記録／2node／edges=[]の正例を実装し、関連138件を確認済みである。新4file319749byteのA3／条件付きB3は未送付・未実行、新実意味は未確認。全12・同raw実保存再読・通常反映、第11回§5の主枠・配布保留・補助全体未完を保持し、最新原本・診断・再開先は補助設計§9.87へ戻る。
+
+
+作者の形式だけの例を、異なる架空題材の原文→完成マップを示す正例へ置き換える修正を実装した。通常／MERGEは2記録2項目1線、LEAFは単一記録2項目・線なしで、後の出来事をLEAFへ混ぜない。既存受領・native／schema・source／guard・公開map・SQL契約は不変、関連138件の検証が成功。新4file319749byteのA3最大2応答／復元7分一回と、意味が適切な場合だけB3新規13応答／復元17分一回を具体化したが、未送付・未実行で新実意味は未確認。作者修正は5108a10f38e9e1da641dc8956d582df9eb245e9aへ保存。元SQL源泉・時計を変えず新指示の12LEAF計画を取得前に固定し、合成13応答の同raw一回保存・別process非生成再読も確認した。実4B保存・通常反映へ換算しない。詳細§9.87。

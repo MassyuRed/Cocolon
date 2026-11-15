@@ -1,0 +1,108 @@
+{
+  "state": "OFFLINE_PREPARATION_AND_INDEPENDENT_TECHNICAL_REVIEW_PASS_NOT_EXECUTED",
+  "files": [
+    {
+      "name": "semantic_admission.worked_lesson.py",
+      "bytes": 196652,
+      "sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa"
+    },
+    {
+      "name": "semantic_reader_worked_lesson_once.py",
+      "bytes": 32609,
+      "sha256": "ed46be71b4101427597dedee97e7a6e927cdcb150737b40362ed1c8c093c74a1"
+    },
+    {
+      "name": "full12_sql_worked_lesson_once.py",
+      "bytes": 31342,
+      "sha256": "3ed6df891f75cdb71d7d653e5d33a5abe36cb02a655f2f31a4cba60f93876c94"
+    },
+    {
+      "name": "full12-sql.pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    }
+  ],
+  "total_bytes": 319749,
+  "roots": {
+    "a3": "/workspace/semantic-reader-worked-lesson-20261116-once",
+    "conditional_b3": "/workspace/full12-sql-worked-lesson-20261116-once"
+  },
+  "existing_same_pod_files_not_resent": {
+    "schema_function_file_sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e",
+    "parser_function_file_sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54",
+    "native_base_sha256": "583a10e8bc25d0bf50e35e53dcfd9407963dc9575e6faac1199c5e5ab30c0c8a"
+  },
+  "a3_native_sha256": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562",
+  "a3_driver_sha256": "7d810e2122daaf80f4a5cc7c303ca1b95bb03c3496d08cc79898ea26c1b894f4",
+  "b3_native_sha256": "8dc87e9c41649e928c7ea40a2a5fe634e0b90e53847b9d6b9c746c26ab62a181",
+  "b3_driver_sha256": "00b7d5b52ffd2d873d588516da45f5d9d8d5bfe56637c529bb3e66dae1f94d99",
+  "a3": {
+    "expected_original_pid": 128408,
+    "predecessor_actual_sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a",
+    "predecessor": "A2 two HTTP200/stop/GENERATED, exact native/driver/core/parser and restored PID; meaning rejected, no acceptance inherited.",
+    "max_posts": 2,
+    "native_request_seconds": 210,
+    "source_http_seconds": 220,
+    "source_request_seconds": 225,
+    "shared_driver_seconds": 265,
+    "acquisition_seconds": 300,
+    "restore_inclusive_seconds": 420,
+    "shared_budget_note": "265 seconds covers both conditions together; deadline may abort without retry; restoration still runs.",
+    "immediate_pre_stop_identity_recheck": true
+  },
+  "b3": {
+    "launch": "Only after independent meaning adequacy of new A3; no automatic semantic PASS or Mash acceptance claim.",
+    "predecessor": "New A3 exact native/parser/driver/core, two GENERATED/HTTP200/stop; PID only from A3 restored_pid, no fallback.",
+    "fresh_leaves": 12,
+    "fresh_merge": 1,
+    "max_posts": 13,
+    "service_seconds": 840,
+    "driver_seconds": 850,
+    "acquisition_seconds": 900,
+    "restore_inclusive_seconds": 1020
+  },
+  "offline_compile": "PASS: launchers, embedded drivers and exact583a native transplants compile.",
+  "pure_preparation_checks": {
+    "a3_conditions": [
+      {
+        "name": "book_club_two_day",
+        "request_ref": "analysis-semantic-request:30212c194cf0f7208e44c3343ef49e540226fdba35f3053e017b96bf77217bac",
+        "messages_sha256": "d7402724605386198608caf2cb640028be38381c5fd76206b5489d7829d8fb8b",
+        "message_bytes": 11592,
+        "field_count": 4,
+        "old_exact_receipt_rejected": true
+      },
+      {
+        "name": "lighting_prior_and_later",
+        "request_ref": "analysis-semantic-request:0d9d92b6d0483d2912ee04a1fdd4ec6566406756f1c18ca08b85978b0224d598",
+        "messages_sha256": "aa2558e0e31dde03344d88d44b87b43fadbfcbb4189766f4614627ef733ad82d",
+        "message_bytes": 19585,
+        "field_count": 4,
+        "old_exact_receipt_rejected": true
+      }
+    ],
+    "actual_sources_and_user_messages_unchanged": true,
+    "all_a3_system_message_hashes_changed": true,
+    "old_a2_receipts_rejected_without_rebinding": true,
+    "b3_new_plan_path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.plan.json",
+    "b3_new_plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+    "b3_all_twelve_messages_and_refs_exactly_match_new_plan": true,
+    "b3_all_twelve_message_hashes_changed_from_old_plan": true,
+    "same_sql_input_parent_guard_preserved": true
+  },
+  "old_a2_b2_frozen_bytes_unchanged": true,
+  "retry": 0,
+  "training": 0,
+  "new_dependencies": 0,
+  "new_weights": 0,
+  "remote_operations": 0,
+  "new_model_calls": 0,
+  "tokenizer_calls": 0,
+  "credentials": "Existing same-Pod environment/authentication only; no environment/key serialization or export.",
+  "independent_review": {
+    "path": "/workspace/scratch/8262f97b141c/preparation/worked_lesson_payload_technical_review.json",
+    "bytes": 3405,
+    "sha256": "9ac3d6f6da536d8ee34edfee77ce108b01cb50a90b358a0436e50bf58b0cab5d",
+    "blockers": []
+  }
+}

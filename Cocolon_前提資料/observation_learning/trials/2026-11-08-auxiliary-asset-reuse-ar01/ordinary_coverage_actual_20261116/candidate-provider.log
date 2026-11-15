@@ -1,0 +1,45 @@
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<01:15,  9.62it/s]Loading weights:   6%|▌         | 40/723 [00:00<00:02, 228.83it/s]Loading weights:   9%|▉         | 67/723 [00:00<00:02, 244.15it/s]Loading weights:  14%|█▎        | 98/723 [00:00<00:02, 264.27it/s]Loading weights:  18%|█▊        | 130/723 [00:00<00:02, 283.63it/s]Loading weights:  22%|██▏       | 159/723 [00:00<00:02, 270.44it/s]Loading weights:  27%|██▋       | 198/723 [00:00<00:01, 299.54it/s]Loading weights:  32%|███▏      | 229/723 [00:00<00:01, 299.28it/s]Loading weights:  36%|███▌      | 259/723 [00:00<00:01, 282.67it/s]Loading weights:  40%|████      | 291/723 [00:01<00:01, 287.83it/s]Loading weights:  46%|████▌     | 329/723 [00:01<00:01, 312.91it/s]Loading weights:  50%|████▉     | 361/723 [00:01<00:01, 308.66it/s]Loading weights:  55%|█████▍    | 397/723 [00:01<00:01, 315.11it/s]Loading weights:  59%|█████▉    | 429/723 [00:01<00:00, 305.40it/s]Loading weights:  84%|████████▍ | 607/723 [00:01<00:00, 722.09it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 433.36it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=tokenize monotonic=2345968.711
+analysis_generation_stage=constraint monotonic=2345968.761
+analysis_generation_stage=decode monotonic=2345968.766
+analysis_generation_stage=prefix_enter_0 monotonic=2345970.025
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2345970.032
+analysis_generation_stage=prefix_enter_128 monotonic=2345981.058
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_4 monotonic=2345981.064
+analysis_generation_stage=prefix_enter_256 monotonic=2345992.753
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_free_allowed_244501 monotonic=2345992.772
+analysis_generation_stage=prefix_enter_384 monotonic=2346003.66
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_244501 monotonic=2346003.688
+analysis_generation_stage=prefix_enter_512 monotonic=2346014.106
+analysis_generation_stage=prefix_exit_512_JsonSchemaParser_other_allowed_3 monotonic=2346014.111
+analysis_generation_stage=prefix_enter_640 monotonic=2346027.345
+analysis_generation_stage=prefix_exit_640_JsonSchemaParser_free_allowed_244502 monotonic=2346027.367
+analysis_generation_stage=prefix_enter_768 monotonic=2346042.393
+analysis_generation_stage=prefix_exit_768_JsonSchemaParser_free_allowed_244502 monotonic=2346042.414
+analysis_generation_stage=complete_stop monotonic=2346050.828
+analysis_generation_stage=special_count_1 monotonic=2346050.89
+analysis_generation_stage=tokenize monotonic=2346051.54
+analysis_generation_stage=constraint monotonic=2346051.564
+analysis_generation_stage=decode monotonic=2346051.572
+analysis_generation_stage=prefix_enter_0 monotonic=2346052.0
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2346052.258
+analysis_generation_stage=prefix_enter_128 monotonic=2346062.05
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_244501 monotonic=2346062.073
+analysis_generation_stage=prefix_enter_256 monotonic=2346072.814
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_3 monotonic=2346072.819
+analysis_generation_stage=prefix_enter_384 monotonic=2346085.925
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_other_allowed_2 monotonic=2346085.93
+analysis_generation_stage=prefix_enter_512 monotonic=2346095.886
+analysis_generation_stage=prefix_exit_512_JsonSchemaParser_free_allowed_244501 monotonic=2346095.905
+analysis_generation_stage=prefix_enter_640 monotonic=2346108.062
+analysis_generation_stage=prefix_exit_640_JsonSchemaParser_other_allowed_2 monotonic=2346108.068
+analysis_generation_stage=prefix_enter_768 monotonic=2346117.849
+analysis_generation_stage=prefix_exit_768_JsonSchemaParser_other_allowed_6 monotonic=2346117.856
+analysis_generation_stage=prefix_enter_896 monotonic=2346131.467
+analysis_generation_stage=prefix_exit_896_JsonSchemaParser_free_allowed_244502 monotonic=2346131.492
+analysis_generation_stage=prefix_enter_1024 monotonic=2346145.738
+analysis_generation_stage=prefix_exit_1024_JsonSchemaParser_free_allowed_244501 monotonic=2346145.76
+analysis_generation_stage=complete_stop monotonic=2346148.48
+analysis_generation_stage=special_count_1 monotonic=2346148.55

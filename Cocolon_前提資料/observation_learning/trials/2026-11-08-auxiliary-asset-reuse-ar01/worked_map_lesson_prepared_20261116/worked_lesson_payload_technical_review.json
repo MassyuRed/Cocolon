@@ -1,0 +1,79 @@
+{
+  "a3_embedded_driver_sha256": "7d810e2122daaf80f4a5cc7c303ca1b95bb03c3496d08cc79898ea26c1b894f4",
+  "a3_immediate_pre_stop_ticks_argv_script_identity_recheck": true,
+  "a3_native_sha256": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562",
+  "all_launchers_drivers_native_variants_compile": true,
+  "b3_embedded_driver_sha256": "00b7d5b52ffd2d873d588516da45f5d9d8d5bfe56637c529bb3e66dae1f94d99",
+  "b3_native_sha256": "8dc87e9c41649e928c7ea40a2a5fe634e0b90e53847b9d6b9c746c26ab62a181",
+  "b3_requires_new_a3_exact_identities_completed_two_stops_and_derived_restored_pid": true,
+  "blocking_findings": [],
+  "budgets": {
+    "a3_acquisition_seconds": 300,
+    "a3_http_seconds": 220,
+    "a3_max_posts": 2,
+    "a3_native_seconds": 210,
+    "a3_restore_inclusive_seconds": 420,
+    "a3_shared_total_seconds": 265,
+    "a3_source_request_seconds": 225,
+    "b3_acquisition_seconds": 900,
+    "b3_driver_seconds": 850,
+    "b3_leaves": 12,
+    "b3_max_posts": 13,
+    "b3_merge": 1,
+    "b3_pipeline_seconds": 840,
+    "b3_restore_inclusive_seconds": 1020
+  },
+  "database_calls": 0,
+  "exact_a2_predecessor_verified": {
+    "actual_sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a",
+    "core": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+    "driver": "b7fddb27be301d3f99546dfa90ebc535b42f597b8e646bfc9867495fe3de6d3f",
+    "native": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562",
+    "restored_pid": 128408,
+    "technical_completed_meaning_rejected_not_inherited_acceptance": true
+  },
+  "files": [
+    {
+      "bytes": 196652,
+      "name": "semantic_admission.worked_lesson.py",
+      "sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa"
+    },
+    {
+      "bytes": 32609,
+      "name": "semantic_reader_worked_lesson_once.py",
+      "sha256": "ed46be71b4101427597dedee97e7a6e927cdcb150737b40362ed1c8c093c74a1"
+    },
+    {
+      "bytes": 31342,
+      "name": "full12_sql_worked_lesson_once.py",
+      "sha256": "3ed6df891f75cdb71d7d653e5d33a5abe36cb02a655f2f31a4cba60f93876c94"
+    },
+    {
+      "bytes": 59146,
+      "name": "full12-sql.pre_acquisition.input.json",
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    }
+  ],
+  "independent_meaning_review_remains_outside_code": true,
+  "model_calls": 0,
+  "native_base_sha256": "583a10e8bc25d0bf50e35e53dcfd9407963dc9575e6faac1199c5e5ab30c0c8a",
+  "old_a2_b2_launchers_unchanged": true,
+  "preflight_or_main_executed": false,
+  "process_actions": 0,
+  "product_or_meaning_quality_accepted": false,
+  "pure_source_checks": {
+    "a3_material_user_fields_guard_request_refs_equal_a2": true,
+    "a3_system_lesson_only_changes_messages": true,
+    "b3_exact_twelve_leaf_messages_and_refs_equal_new_plan": true,
+    "new_plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+    "same_sql_input_and_source_guard": true
+  },
+  "remote_calls": 0,
+  "restoration_finally_preserved": true,
+  "source_core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "source_parser_overlay_sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54",
+  "source_schema_overlay_sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e",
+  "state": "PASS_OFFLINE_TECHNICAL_REVIEW",
+  "tokenizer_calls": 0,
+  "total_bytes": 319749
+}

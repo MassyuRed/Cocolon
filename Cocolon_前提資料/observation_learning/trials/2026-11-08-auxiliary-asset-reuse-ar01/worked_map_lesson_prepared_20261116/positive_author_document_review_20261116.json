@@ -1,0 +1,105 @@
+{
+  "state": "DOCUMENT_AND_EVIDENCE_REVIEW_PASS",
+  "reviewer": "review_integration",
+  "review_scope": "Four canonical document diffs/current headers, design sections 11.2/12/9.87, and the two new trial evidence folders. No publication, model, Pod, database or source mutation performed.",
+  "documents_at_review": [
+    {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/00_cocolon_current_product_and_state.md",
+      "bytes": 269393,
+      "sha256": "a9c0c18a6fcaf26956f5f1b451359e8581bb02f90e3a267fb176f1237b8871a2"
+    },
+    {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/current_structure/03_analysis_current_structure.md",
+      "bytes": 355728,
+      "sha256": "b2c8580caf9375ed4a0dc20970ee88ea7244be2bc6f1b689c184cf1c6e2f1f74"
+    },
+    {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md",
+      "bytes": 896868,
+      "sha256": "7e973e21a395bde92b2d8fa984b88924d78939160e28f21abdae079400e08686"
+    },
+    {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261114.md",
+      "bytes": 188550,
+      "sha256": "0524f53e58667b5bb9bcb05a333337bdfc66238b4e8004e893e4e6860b77799d"
+    }
+  ],
+  "blocking_findings": [],
+  "nits": [],
+  "current_state_consistency": {
+    "A2": "Two HTTP200/stop/GENERATED; meaning rejected in both cases; original provider restored PID128408, driver180.82531058695167 seconds and restore-inclusive234.50742218876258 seconds.",
+    "meaning_findings": "Book known later sending/one receipt and inquiry actors/recipients remain errors. Lighting later purchase is acknowledged; rejection cites unsupported habit, event order and exclusivity. No omission is mislabeled fabricated purchase.",
+    "B2": "Condition false; zero transfer/execute. Consumed A2 and unused B2 are not reused as A3 budget.",
+    "A3_B3": "Distinct four-file319749byte candidate, not uploaded or executed. A3 max2/restore420s once; B3 max13/restore1020s once only after adequate independent meaning review of new A3. No automatic semantic PASS or Mash formal acceptance.",
+    "normal": "API/worker24bc228d, DB20261115011424, current worker stale900; native/API/worker alignment and optional existing1800 setting remain future after actual meaning and save/reread. Build/TestFlight/device hold unchanged.",
+    "scope": "Existing author instruction/example changes; no new owner/controller/rule/route/source material/schema/receiver/DTO/SQL/weights. Ordinary-map-format isolated result is not described as production full-history coverage."
+  },
+  "evidence_integrity": {
+    "A2_manifest": {
+      "files": 17,
+      "hash_or_size_mismatches": [],
+      "missing": [],
+      "unlisted": []
+    },
+    "worked_lesson_manifest": {
+      "files": 22,
+      "hash_or_size_mismatches": [],
+      "missing": [],
+      "unlisted": []
+    },
+    "A2_originals": "Actual result, execution, independent review, ZIP and both source input files exactly match verification originals.",
+    "A2_actual": {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/ordinary_coverage_actual_20261116/positive-reading.actual.result.json",
+      "bytes": 115132,
+      "sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a"
+    },
+    "A2_ZIP": {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/ordinary_coverage_actual_20261116/original_result.zip",
+      "bytes": 59919,
+      "sha256": "b37ec72ae1d29e6bec1c8c254aba378928eda983e43022de9b8b1c48b0a97eb1",
+      "members": 9,
+      "CRC_error": null,
+      "all_members_byte_identical_to_copies": true
+    },
+    "published_API_identity": "Trial core equals local source and locally fetched published5108a10f38e9e1da641dc8956d582df9eb245e9a Git object; both trees b2e1413bcbd88489bfab3e66eafd53e8c971d460. Publication receipt reports six exact blobs. This review did not query GitHub again.",
+    "core_copy": {
+      "path": "/workspace/scratch/8262f97b141c/cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/worked_map_lesson_prepared_20261116/semantic_admission.worked_lesson.py",
+      "bytes": 196652,
+      "sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa"
+    },
+    "four_payload_files": {
+      "total_bytes": 319749,
+      "all_sizes_and_hashes_match_offline_manifest": true
+    },
+    "CPU_evidence": "138 distinct bounded targets; initial137pass/1stale-MAP-wire failure and final26pass with25 overlap. Not new model-quality evidence; 5108 CI success is not asserted while publication receipt shows in_progress.",
+    "source_diagnostics": "claims0/UNASSESSED and coarse default actor remain explicitly unadopted source-only diagnostics. Position index unused. Existing120u teacher provenance is not Mash quality acceptance and no unique failure cause is claimed."
+  },
+  "SQL_preparation_boundary": {
+    "input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+    "checkpoint_sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+    "new_plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+    "guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "as_of": "2026-11-16T00:32:38.924+09:00",
+    "source_clock_rule": "Pre-call new author plan on same frozen SQL source; no acquired old raw rebound to new messages or post-call source/clock replacement.",
+    "synthetic_only": "13 test responses with one SQL commit/one artifact/monthly reference and fresh-process read-only service/HTTP reread are explicitly synthetic technical evidence, not real4B quality, actual-acquisition save success or rollout.",
+    "binary_source_and_private_artifacts": "Checkpoint/runtime/large source plan are explicitly held in handoff rather than silently implied present in public trial. Public copied plan/input and receipts match their recorded hashes.",
+    "this_reviewer_restored_or_queried_SQL": false
+  },
+  "limits": {
+    "model_meaning_quality_proven": false,
+    "formal_Mash_acceptance": false,
+    "normal_rollout_completed": false,
+    "manifests_cover_this_new_review_yet": false,
+    "note": "Parent may add this review and regenerate manifests after final wording correction; the file counts above describe the reviewed pre-addition snapshot."
+  },
+  "resolved_clarity_findings": [
+    {
+      "location": "Auxiliary design §9.87 literal lesson test evidence",
+      "resolution": "Verified final wording native文字制約・CPU合成token／EOS検査; actual cached-tokenizer/capacity measurement remains unperformed."
+    },
+    {
+      "location": "Latest weekly continuation",
+      "resolution": "Verified implemented138/new4file319749not-uploaded state replaces leftover local-draft wording. Index count is111 existing original spans, not a claim of111 linguistic clauses."
+    }
+  ]
+}

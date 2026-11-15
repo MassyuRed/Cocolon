@@ -1,0 +1,183 @@
+{
+  "observed_at_utc": "2026-11-15T21:45:10.278Z",
+  "repository": "MassyuRed/mashos-api",
+  "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+  "local_commit": "f7c338100809edc28a75e74fac2df9446fbfc426",
+  "remote_commit": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "parent": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+  "tree": "b2e1413bcbd88489bfab3e66eafd53e8c971d460",
+  "remote_commit_url": "https://github.com/MassyuRed/mashos-api/commit/5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "lease": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+  "force": false,
+  "whole_tree_sha_matches_local": true,
+  "tree_truncated": false,
+  "changed_blob_checks": [
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+      "bytes": 196652,
+      "mode": "100644",
+      "local_blob": "296f2dba3a27b0d88c9ffa97c15e2377f724d918",
+      "remote_blob": "296f2dba3a27b0d88c9ffa97c15e2377f724d918",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_map_lesson.py",
+      "bytes": 6410,
+      "mode": "100644",
+      "local_blob": "8ffda96bdc8d29910ac46f88a0647c65eb634264",
+      "remote_blob": "8ffda96bdc8d29910ac46f88a0647c65eb634264",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_generation_schema.py",
+      "bytes": 70757,
+      "mode": "100644",
+      "local_blob": "a71bbdbb5afbd84a93943cac8864a0b700542e2a",
+      "remote_blob": "a71bbdbb5afbd84a93943cac8864a0b700542e2a",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_history_core.py",
+      "bytes": 30588,
+      "mode": "100644",
+      "local_blob": "34aab8cb30d71121280c360e1c9ad36a292c726f",
+      "remote_blob": "34aab8cb30d71121280c360e1c9ad36a292c726f",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_source_duties.py",
+      "bytes": 21021,
+      "mode": "100644",
+      "local_blob": "1d3a8d54eb40c069f94a509b7cbea4c18f0d3d52",
+      "remote_blob": "1d3a8d54eb40c069f94a509b7cbea4c18f0d3d52",
+      "match": true
+    },
+    {
+      "path": "ai/tests/fixtures/cmee_current_4b_packet_20261114.json",
+      "bytes": 152708,
+      "mode": "100644",
+      "local_blob": "27524c2704ede11d13b374a0966c2cfd38490519",
+      "remote_blob": "27524c2704ede11d13b374a0966c2cfd38490519",
+      "match": true
+    }
+  ],
+  "ci_runs": [
+    {
+      "id": 43765370099,
+      "name": "Analysis observed content",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43765370099",
+      "run_attempt": 1
+    },
+    {
+      "id": 43765370062,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43765370062",
+      "run_attempt": 1
+    }
+  ],
+  "source_core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "native_unchanged_sha256": "7d7cb41a861e89b605dcbe7ebf107d25416cef90dcda4e509bb40c9338256dc1",
+  "schema_function_unchanged_sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e",
+  "tests": {
+    "after_fixture_only_change": {
+      "log": {
+        "bytes": 1467,
+        "path": "/workspace/scratch/8262f97b141c/verification/positive_author_packet_tests_20261116.log",
+        "sha256": "9aa4178cc1801f2a2f6a5955d97e463f57f5c0ee4ed1ed82be622f0e282c805c"
+      },
+      "overlap_with_initial_passes": 25,
+      "passed": 26,
+      "seconds": 6.36
+    },
+    "distinct_target_cases_covered": 138,
+    "full_278_suite_rerun": false,
+    "initial_run": {
+      "failed": 1,
+      "failure": "Frozen MAP wire was stale before the intentional fixture refresh; not a production-code failure.",
+      "log": {
+        "bytes": 4107,
+        "path": "/workspace/scratch/8262f97b141c/verification/positive_author_targeted_tests_20261116.log",
+        "sha256": "83655f97785a04e194d865728b6c8ad215c81be9fedfaa1d5098488e36777b95"
+      },
+      "passed": 137,
+      "seconds": 22.64
+    }
+  },
+  "fixture_changes": [
+    {
+      "case_id": "EMLIS-EXPLICIT-CORRECTION",
+      "changed_keys": []
+    },
+    {
+      "case_id": "EMLIS-REJECTED-PERSON-FRAME",
+      "changed_keys": []
+    },
+    {
+      "case_id": "PIECE-COHERENT-PARAGRAPH",
+      "changed_keys": []
+    },
+    {
+      "case_id": "PIECE-COHERENT-TWO-FIELDS",
+      "changed_keys": []
+    },
+    {
+      "case_id": "ANALYSIS-MAP-SOURCE-DUTIES",
+      "changed_keys": [
+        "wire_bytes",
+        "wire_json",
+        "wire_sha256"
+      ]
+    },
+    {
+      "case_id": "ANALYSIS-IF-TWO-CANDIDATES",
+      "changed_keys": []
+    }
+  ],
+  "history_receipt_hashes": {
+    "current_pins_updated": 4,
+    "former_current_hashes_preserved_as_rejection_controls": 4,
+    "old_raw_rebound": false,
+    "older_rejection_hashes_retained": 8
+  },
+  "ordinary_and_history_dynamic_source_warning_suffixes_ast_unchanged": true,
+  "actual_source_continuity": [
+    {
+      "condition": "book_club_two_day",
+      "dictionary_role_foundation_exact": true,
+      "guard_and_request_ref_exact": true,
+      "new_messages_sha256": "d7402724605386198608caf2cb640028be38381c5fd76206b5489d7829d8fb8b",
+      "old_actual_messages_sha256": "b2dd7ab9e6d92a1bbb06753d35c34559b500d88e3e09ccccf1bfb929178c0dd5",
+      "user_message_and_source_fields_exact": true
+    },
+    {
+      "condition": "lighting_prior_and_later",
+      "dictionary_role_foundation_exact": true,
+      "guard_and_request_ref_exact": true,
+      "new_messages_sha256": "aa2558e0e31dde03344d88d44b87b43fadbfcbb4189766f4614627ef733ad82d",
+      "old_actual_messages_sha256": "1454ec7993c8b9e9b361e45fbf7d775a0466ed383d9120f0e6ec9ecd6c2e6165",
+      "user_message_and_source_fields_exact": true
+    }
+  ],
+  "model_quality_improvement_proven": false,
+  "source_test_receipt": "/workspace/scratch/8262f97b141c/verification/positive_author_source_test_receipt_20261116.json",
+  "cocolon_draft_staged": false,
+  "workflow_reruns": 0,
+  "merges": 0,
+  "deployments": 0,
+  "pod_operations": 0,
+  "model_calls": 0,
+  "db_operations": 0,
+  "fetched_ref": {
+    "ref": "refs/remotes/origin/approved-published-positive-author-20261116",
+    "sha": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+    "whole_tree_diff_empty": true,
+    "head_unchanged": "f7c338100809edc28a75e74fac2df9446fbfc426",
+    "tracked_status": ""
+  }
+}

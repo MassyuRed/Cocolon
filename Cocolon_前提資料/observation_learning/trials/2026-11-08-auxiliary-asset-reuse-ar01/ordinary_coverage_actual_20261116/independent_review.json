@@ -1,0 +1,192 @@
+{
+  "state": "A2_MEANING_REJECTED_B2_CONDITION_NOT_SATISFIED",
+  "all_fictional": true,
+  "review_kind": "Independent whole-source to actual raw/projection/overview/edge review; formal product acceptance not evaluated.",
+  "actual_result_file_sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a",
+  "earlier_export_snapshot_exactly_matches_final_actual": true,
+  "earlier_partial_export_label_does_not_mean_partial_response_content": true,
+  "source_files": {
+    "original_fixed_two_input.json": "bb642569f2a1920735426905a6c1b5b9168af981770c4362d59a12dc6cf2ae0c",
+    "source_full_twelve_input.json": "5f362414c7aaba8249862f53892d62951329874474cc8c56a27a3f58a6c3b91c"
+  },
+  "acquisition_observations": [
+    {
+      "name": "book_club_two_day",
+      "raw_sha256": "d631ac03dd1ad273b7c577330121ee1ccfedbe307bb79d357ce7d45df5015512",
+      "raw_scalars": 2071,
+      "finish_reason": "stop",
+      "consumer_state": "GENERATED",
+      "nodes": 4,
+      "edges": 2,
+      "evidence_fields": [
+        1,
+        2,
+        3
+      ],
+      "request_duration_seconds": 82.78251676028594
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "raw_sha256": "fb92a6e8f252837f8c140b74e53945698312681f845b9cc6cba17d2d5f101dff",
+      "raw_scalars": 2429,
+      "finish_reason": "stop",
+      "consumer_state": "GENERATED",
+      "nodes": 4,
+      "edges": 2,
+      "evidence_fields": [
+        1,
+        3
+      ],
+      "request_duration_seconds": 97.63615953596309
+    }
+  ],
+  "conditions": [
+    {
+      "name": "book_club_two_day",
+      "state": "REJECTED_SOURCE_CONTRADICTIONS_AND_ROLE_MISMATCH",
+      "blocking_errors": [
+        {
+          "kind": "COMPLETED_LATER_SENDING_CHANGED_TO_UNSENT",
+          "location": "overview.summary and edges[1].explanation",
+          "model_quotes": [
+            "読書会の参加者への案内は未送信で、会場の椅子数については共同担当者が確認したいと言っています。",
+            "参加者への送信が未定であることと、椅子の確認が本人へ伝わったかは別の未確認範囲です。"
+          ],
+          "source_record": 2,
+          "source_quote": "案内を直して参加者へ送り、一人から「了解」と返信を受け取った。",
+          "basis": "The earlier unsent draft is treated as the final status even though later sending and one received reply are explicit."
+        },
+        {
+          "kind": "KNOWN_PARTIAL_RECEIPT_CHANGED_TO_GENERAL_UNKNOWN",
+          "location": "nodes[0].unknowns[0]",
+          "model_quote": "参加者が案内を受け取ったか、参加希望を伝えたかは未確認です。",
+          "source_record": 2,
+          "source_quotes": [
+            "案内を直して参加者へ送り、一人から「了解」と返信を受け取った。",
+            "全員が読んだかは分からない。"
+          ],
+          "basis": "Receipt by at least one participant is known. The unresolved scope is all participants reading, not whether a participant received it at all. Participation wishes are an extra unsupported topic, not an observed event."
+        },
+        {
+          "kind": "INQUIRY_RECIPIENT_INVENTED",
+          "location": "nodes[2].unknowns[0]",
+          "model_quote": "椅子の確認について本人へ問い合わせを送ったかは未確認です。",
+          "source_record": 2,
+          "source_quote": "共同担当者は椅子の数も確認したいと言っているが、その問い合わせを送ったかは聞いていない。",
+          "basis": "The source does not identify an inquiry addressed to the user. It reports the coworkers wish to check chair count and the users lack of knowledge about whether that inquiry was sent."
+        },
+        {
+          "kind": "SEPARATE_INQUIRIES_CONFLATED",
+          "location": "nodes[2].summary",
+          "model_quote": "会場へ問い合わせを送ったかは未確認ですが、本人は関わっていないと述べています。",
+          "source_record": 1,
+          "source_quote": "共同担当者は朝のうちに会場へ問い合わせのメールを送っていたが、返事はまだ来ていなかった。",
+          "basis": "The general venue inquiry was explicitly sent. Unknown sending concerns the later chair inquiry; its scope is not retained in the summary."
+        },
+        {
+          "kind": "GRAPH_EXPLANATION_DOES_NOT_MATCH_NAMED_NODE",
+          "location": "edges[0].explanation",
+          "model_quote": "n4 で本人が二階の部屋が使えると思い、n3 で一階の部屋が予約できたと連絡が来たことです。",
+          "basis": "Node n3 actually describes inquiry involvement and chair confirmation, not the downstairs reservation. The later reservation is in the source, so this is an endpoint/content mismatch, not an invented reservation."
+        }
+      ],
+      "supported_parts": [
+        {
+          "location": "nodes[2] evidence",
+          "basis": "The user explicitly reports noninvolvement in the venue inquiry. The output does not turn that into a refusal."
+        },
+        {
+          "location": "nodes[1].summary",
+          "basis": "The coworker expressed a wish to check chair count; sending of that particular inquiry remains unknown."
+        },
+        {
+          "location": "nodes[3].summary",
+          "basis": "The user did start to write the upstairs room name and remove it in the earlier draft."
+        }
+      ],
+      "coverage_observation": "Both record IDs are now anchored, but every quote from the later record selects only the chair-inquiry sentence. Confirmed room/start, corrected sending and the one participant reply remain outside the node evidence. Record anchoring is not correct chronological synthesis.",
+      "baseline_comparison": "The prior one-record-only closure is removed. The previous receipt-unknown error remains, and the final overview again asserts unsent status. No adequate before/after reading is established."
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "state": "REJECTED_UNSUPPORTED_GENERALIZATION_AND_ORDER",
+      "blocking_errors": [
+        {
+          "kind": "LOCAL_RECORDING_BECOMES_HABIT",
+          "location": "nodes[3].summary",
+          "model_quote": "過去の選択方法が次にそのまま適用されるとは決めていない一方で、候補と寸法を記録する習慣は残しています。",
+          "source_original_record": 4,
+          "source_quote": "それでも、候補と寸法を記録しておけば、次に考える時に同じ画面を最初から探さずに済みそうだった。",
+          "basis": "The record supports keeping candidate/dimension notes for this decision, not an established continuing habit. The later record also explicitly declines a general commitment to the same future procedure."
+        },
+        {
+          "kind": "UNSUPPORTED_CHRONOLOGICAL_ORDER",
+          "location": "nodes[1].summary",
+          "model_quote": "具体的な使い方を想像する前に、置きたい条件と必須条件を区別して選んでいます。",
+          "source_original_records": [
+            4,
+            9
+          ],
+          "source_quotes": [
+            "困るのは、夜に細かい線を描く時と、机の端へ紙を動かした時だった。",
+            "使い方を細かく想像しているつもりでも、実際に困っていたのは二つほどだった。"
+          ],
+          "basis": "The claimed before-imagining order is not given. Concrete use scenarios were already considered in the earlier record, and the later record explicitly mentions imagining use."
+        },
+        {
+          "kind": "UNSUPPORTED_EXCLUSIVE_GENERALIZATION",
+          "location": "nodes[3].explanation",
+          "model_quote": "後者だけが、次の購入へ応用できる具体的な手段です。",
+          "basis": "The source suggests notes may make the next consideration easier. It does not establish that only this method is applicable to later purchases."
+        }
+      ],
+      "supported_parts": [
+        {
+          "location": "nodes[2].summary",
+          "model_quote": "前に候補に残した照明と、後で買った照明は別の製品で",
+          "basis": "The earlier nonpurchase and later purchase of a different tested model are distinguished."
+        },
+        {
+          "location": "nodes[1] evidence",
+          "basis": "The later record explicitly lists clearance, light reaching the paper edge and retaining reserve money as conditions."
+        },
+        {
+          "location": "overview.summary",
+          "basis": "The later record contains a limited actual-use impression and no commitment to the same future shopping procedure."
+        }
+      ],
+      "material_omissions_not_fabrications": "The stopped old lamp and later installation/cable adjustment/thirty-minute drawing are not represented as concrete transitions in nodes or edges. The later purchase is acknowledged, so it would be inaccurate to report that purchase is wholly absent. Missing detail alone is not the rejection basis.",
+      "baseline_comparison": "Unlike A1, the lighting JSON now completes and the map acknowledges a later different-product purchase. It still contains unsupported habitual/order/exclusive claims and policy-like explanations; completion alone does not establish adequate source-grounded meaning."
+    }
+  ],
+  "a2_adequate_for_conditional_b2": false,
+  "b2_condition": "NOT_SATISFIED",
+  "required_b2_action": "DO_NOT_TRANSFER_OR_EXECUTE_CONDITIONAL_FULL12_RUN",
+  "adopted": false,
+  "normal_rollout_eligible": false,
+  "same_raw_sql_finalize_eligible": false,
+  "product_acceptance": false,
+  "run_observations_from_saved_execution": {
+    "driver_seconds": 180.82531058695167,
+    "restore_inclusive_seconds": 234.50742218876258,
+    "original_provider_restored": true,
+    "restored_pid": 128408,
+    "max_posts": 2,
+    "new_model_calls": 2,
+    "training": 0,
+    "retry": 0
+  },
+  "limits": [
+    "No missing irrelevant fact is treated as an error merely for being omitted.",
+    "Literal source quotation and both-record anchoring do not certify generated title, explanation, unknown or overview meaning.",
+    "The reason the model selected these wrong interpretations is not causally established by this finite comparison.",
+    "This review makes no general claim that the base model or adapter can or cannot understand Japanese."
+  ],
+  "review_effects": {
+    "source_edits": 0,
+    "pod_calls": 0,
+    "model_calls": 0,
+    "sql_calls": 0,
+    "raw_rewrites": 0
+  }
+}

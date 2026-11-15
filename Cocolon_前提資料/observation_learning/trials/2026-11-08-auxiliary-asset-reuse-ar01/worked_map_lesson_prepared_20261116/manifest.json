@@ -1,0 +1,120 @@
+{
+  "state": "A3_B3_FOURFILES319749_PREPARED_REVIEWED_NOT_UPLOADED_NOT_EXECUTED",
+  "files": [
+    {
+      "path": "README.txt",
+      "bytes": 1133,
+      "sha256": "b699714ed4d6baeb652937f3caaa3d7836f490c38e8e79c3009bb0b82a8a4f2e"
+    },
+    {
+      "path": "full12-sql.pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    {
+      "path": "full12_normal_rollout_plan_20261116.json",
+      "bytes": 7449,
+      "sha256": "77b8d06df5f071471b2babe0ece1190908173609d739913805d91785869cce92"
+    },
+    {
+      "path": "full12_sql_worked_lesson_once.py",
+      "bytes": 31342,
+      "sha256": "3ed6df891f75cdb71d7d653e5d33a5abe36cb02a655f2f31a4cba60f93876c94"
+    },
+    {
+      "path": "full12_worked_lesson_replan_independent_review_20261116.json",
+      "bytes": 3636,
+      "sha256": "ea188613d5dc4ef7fa6a322598ae4584c8bf06ba64f452b24d284f1de60b137b"
+    },
+    {
+      "path": "positive_author_document_review_20261116.json",
+      "bytes": 7186,
+      "sha256": "7b3d9a28e761a8fbb8f9c0bae379b698ef2c6ec876a065ccf945a50efcb20f23"
+    },
+    {
+      "path": "positive_author_independent_product_review_20261116.json",
+      "bytes": 6016,
+      "sha256": "2308ff4c7033a8ae0604cb8b23afae86de7e80ce3745f3cb2d77f070c7b7e767"
+    },
+    {
+      "path": "positive_author_packet_tests_20261116.log",
+      "bytes": 1467,
+      "sha256": "9aa4178cc1801f2a2f6a5955d97e463f57f5c0ee4ed1ed82be622f0e282c805c"
+    },
+    {
+      "path": "positive_author_source_test_receipt_20261116.json",
+      "bytes": 5153,
+      "sha256": "03f6e91d6a4c8ddd627e4c59a782bbe0f00c9411105d383b70a90989d68abf78"
+    },
+    {
+      "path": "positive_author_targeted_tests_20261116.log",
+      "bytes": 4107,
+      "sha256": "83655f97785a04e194d865728b6c8ad215c81be9fedfaa1d5098488e36777b95"
+    },
+    {
+      "path": "publication_positive_author_20261116.json",
+      "bytes": 6539,
+      "sha256": "a423ab145d8b07cf1d3051dd61e72e821c7775d53b2b0800f02490b68de2100e"
+    },
+    {
+      "path": "semantic_admission.worked_lesson.py",
+      "bytes": 196652,
+      "sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa"
+    },
+    {
+      "path": "semantic_reader_worked_lesson_once.py",
+      "bytes": 32609,
+      "sha256": "ed46be71b4101427597dedee97e7a6e927cdcb150737b40362ed1c8c093c74a1"
+    },
+    {
+      "path": "sql_pre_acquisition/pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    {
+      "path": "sql_pre_acquisition/pre_acquisition.plan.json",
+      "bytes": 169408,
+      "sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb"
+    },
+    {
+      "path": "sql_pre_acquisition/pre_acquisition.receipt.json",
+      "bytes": 3019,
+      "sha256": "afb8ef178db0330a106619eefeb879f405f5e3ba4f0966817a07e4150f52aba0"
+    },
+    {
+      "path": "sql_pre_acquisition/pre_acquisition.restart_verified.json",
+      "bytes": 620,
+      "sha256": "4c8d7d71e130a71e40edf478ec18a432852cf759648a9df1f84405f4ec17f45a"
+    },
+    {
+      "path": "synthetic_save_and_reread/final_receipt.json",
+      "bytes": 2883,
+      "sha256": "8ef60bf662d44149ae1ff85dd442885e9ffb42a5c1f154aa8392802a5f98733c"
+    },
+    {
+      "path": "synthetic_save_and_reread/reread_receipt.json",
+      "bytes": 1383,
+      "sha256": "b8b3a0fb5d4b0f3741eed23e3916a996801f1dfefef30363c4950f33d52dedb4"
+    },
+    {
+      "path": "synthetic_save_and_reread/save_receipt.json",
+      "bytes": 2565,
+      "sha256": "c090c39a41ff24b343ec62c39a7765802a706582590e7c30960ad691994d0ef3"
+    },
+    {
+      "path": "worked_lesson_payload_offline.json",
+      "bytes": 4902,
+      "sha256": "554be678cad726ab204935c2a6a579945c2b325d5619fb7be63a9a879cf391b1"
+    },
+    {
+      "path": "worked_lesson_payload_technical_review.json",
+      "bytes": 3405,
+      "sha256": "9ac3d6f6da536d8ee34edfee77ce108b01cb50a90b358a0436e50bf58b0cab5d"
+    },
+    {
+      "path": "worked_lesson_prepared_final_review_20261116.json",
+      "bytes": 2705,
+      "sha256": "9aaa442dc6bff2c314c8f11a04d84e939119a60591a95ef33c86c530799021ff"
+    }
+  ]
+}

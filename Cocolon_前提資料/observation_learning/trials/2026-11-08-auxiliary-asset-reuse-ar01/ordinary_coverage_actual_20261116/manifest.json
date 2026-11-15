@@ -1,0 +1,90 @@
+{
+  "state": "A2_EXECUTED_NOT_ADOPTED_B2_NOT_TRANSFERRED_NOT_EXECUTED",
+  "files": [
+    {
+      "path": "candidate-provider.log",
+      "bytes": 4690,
+      "sha256": "93b0bc1b6e74572a2d21f34432b203078921131a55b5f71d1a89d17bdedb40f5"
+    },
+    {
+      "path": "driver.log",
+      "bytes": 113,
+      "sha256": "3e7b9414b32cec7f731947146acbfceb35523fa60c63b2d67ea12194ab216635"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 1930,
+      "sha256": "b9217b644aa833f94145da192a342eb7b6fb866e4e433314751fc92ec88c559d"
+    },
+    {
+      "path": "existing120u_teacher_provenance.json",
+      "bytes": 5268,
+      "sha256": "77fdd53c84d3ca22a451c6cf70fd55c436b48571d85849cdf87acc5b99aef6f8"
+    },
+    {
+      "path": "existing_source_duties_pure_diagnostic.json",
+      "bytes": 9329,
+      "sha256": "06d4d29914d79bff3344b285612614430b1d12e1c6034aefdfa67c39ce8a7a89"
+    },
+    {
+      "path": "existing_teaching_style_source_audit.json",
+      "bytes": 5428,
+      "sha256": "f2065b413d9b76560b0f9109681d4fdf1b583be469b33dc50b0ec2be0a31f1cd"
+    },
+    {
+      "path": "independent_review.json",
+      "bytes": 10696,
+      "sha256": "e2761f49d0ce60f4f10378ab5ddd00a8319a4b400ece2d4daecca9b282995722"
+    },
+    {
+      "path": "ordinary_coverage_sql_finalize_readiness_20261116.json",
+      "bytes": 2118,
+      "sha256": "0a02e67690c33dfef0c114c1cdb5ff3bc8658a522684f31ad331637d0184d38f"
+    },
+    {
+      "path": "original_fixed_two_input.json",
+      "bytes": 2867,
+      "sha256": "bb642569f2a1920735426905a6c1b5b9168af981770c4362d59a12dc6cf2ae0c"
+    },
+    {
+      "path": "original_result.zip",
+      "bytes": 59919,
+      "sha256": "b37ec72ae1d29e6bec1c8c254aba378928eda983e43022de9b8b1c48b0a97eb1"
+    },
+    {
+      "path": "positive-reading.actual.result.json",
+      "bytes": 115132,
+      "sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a"
+    },
+    {
+      "path": "positive-reading.preflight.json",
+      "bytes": 40445,
+      "sha256": "df484ec5414966e3db995174073bb3db6c0cde02245d675c6c151aa9de57c1af"
+    },
+    {
+      "path": "positive_reading_driver.py",
+      "bytes": 10550,
+      "sha256": "b7fddb27be301d3f99546dfa90ebc535b42f597b8e646bfc9867495fe3de6d3f"
+    },
+    {
+      "path": "preflight.log",
+      "bytes": 317,
+      "sha256": "e32b92c6172ee6c04c1c7b3ea511c6c372479235f64a2b41849e96746cd7d4d1"
+    },
+    {
+      "path": "resume_a2_github_ci_20261116.json",
+      "bytes": 5141,
+      "sha256": "39e25434d8c1901b1ce68a11ce2c8ebae7098a88ed998b05df3d259d094a1c5b"
+    },
+    {
+      "path": "source_full_twelve_input.json",
+      "bytes": 59027,
+      "sha256": "5f362414c7aaba8249862f53892d62951329874474cc8c56a27a3f58a6c3b91c"
+    },
+    {
+      "path": "source_only_diagnostic_summary.json",
+      "bytes": 2710,
+      "sha256": "0bacdff577497367a216e0ccc0de8a6c2701feceac46e4f40a16c4adbfb937dd"
+    }
+  ]
+}

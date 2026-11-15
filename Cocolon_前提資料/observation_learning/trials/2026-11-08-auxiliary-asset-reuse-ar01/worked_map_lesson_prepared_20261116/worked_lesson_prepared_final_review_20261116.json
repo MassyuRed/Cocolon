@@ -1,0 +1,51 @@
+{
+  "blocking_findings": [],
+  "core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "distinct_bounded_cpu_targets_verified": 138,
+  "fixture_change": "Only MAP wire_json/wire_bytes/wire_sha256; five other complete cases and all originals unchanged.",
+  "frozen_as_of": "2026-11-16T00:32:38.924+09:00",
+  "input_unchanged_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+  "leaf_receipt_controls": "Four current message hashes updated; four former-current and eight older hashes retained as rejection controls; no actual raw rebound.",
+  "native_unchanged_sha256": "7d7cb41a861e89b605dcbe7ebf107d25416cef90dcda4e509bb40c9338256dc1",
+  "new_payload_uploaded_or_executed": false,
+  "new_same_source_plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+  "payload_technical_review": {
+    "bytes": 3405,
+    "path": "/workspace/scratch/8262f97b141c/preparation/worked_lesson_payload_technical_review.json",
+    "sha256": "9ac3d6f6da536d8ee34edfee77ce108b01cb50a90b358a0436e50bf58b0cab5d"
+  },
+  "pre_checkpoint_unchanged_sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+  "prepared_payload_files": 4,
+  "prepared_payload_total_bytes": 319749,
+  "reviewer_new_sql_model_remote_or_process_actions": 0,
+  "same_source_sql_independent_review": {
+    "bytes": 3636,
+    "path": "/workspace/scratch/8262f97b141c/verification/full12_worked_lesson_replan_independent_review_20261116.json",
+    "sha256": "ea188613d5dc4ef7fa6a322598ae4584c8bf06ba64f452b24d284f1de60b137b"
+  },
+  "source_test_review": {
+    "bytes": 5153,
+    "path": "/workspace/scratch/8262f97b141c/verification/positive_author_source_test_receipt_20261116.json",
+    "sha256": "03f6e91d6a4c8ddd627e4c59a782bbe0f00c9411105d383b70a90989d68abf78"
+  },
+  "sql_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+  "state": "PREPARED_OFFLINE_REVIEW_PASS_NOT_MODEL_MEANING_ACCEPTANCE",
+  "synthetic_final_receipt": {
+    "bytes": 2883,
+    "path": "/workspace/scratch/8262f97b141c/preparation/full12_worked_lesson_synthetic_dryrun_20261116/save_and_reread/final_receipt.json",
+    "sha256": "8ef60bf662d44149ae1ff85dd442885e9ffb42a5c1f154aa8392802a5f98733c"
+  },
+  "synthetic_only": {
+    "hosted_database_calls": 0,
+    "model_calls": 0,
+    "model_meaning_quality_proven": false,
+    "native_capacity_measured": false,
+    "product_acceptance": false,
+    "replayed_responses": 13,
+    "reported_disposable_sql_commits": 1,
+    "reported_fresh_process_http_status": 200,
+    "reported_monthly_references": 1,
+    "reported_reread_sql_writes": 0,
+    "reported_saved_artifacts": 1
+  }
+}
