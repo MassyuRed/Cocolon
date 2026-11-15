@@ -1,4 +1,4 @@
-> **11/15最新：LEAFのAI説明を最終生成から外すMERGE v2候補。** 前8ae18c75の全24欄統合はHTTP200で4380字を受領したが、10項目完成・11項目目途中のlength終了、consumer503・保存0。driver256.733秒、復元込み301.928秒で元提供PID117095へ戻した。LEAF文の再使用による宛先逆転・既知返信の未知化と、compilerのAIunknown自動継承を確認。API dca20231は本人原文24欄全文、完全一致引用索引41件、12受領hashで再統合し、LEAF自然文・unknownを最終作者へ渡さない。元raw等とunknown候補はprivate未検証で保持し、公開nodeへ自動追加しない。LEAF v1 messagesはbyte同一、12receipt再検証済み、新messages88558bytes・省略0。関連167 PASS、CI進行中。次は新MERGE一回だけ、全体480秒上限。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
+> **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速なPyTorch代替処理も確認し、高速部品を候補専用に隔離準備中。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.83: source-only MERGE v2 dca20231; prior full merge actual200/length and raw preserved, original PID117095 restored. Reuse exact12 LEAF receipts, pass original24fullfields +41source quotes +12hash receipts, no AI leaf prose/unknown; candidates remain private unassessed, no public auto-inheritance. CPU167PASS, payload88558bytes/omitted0; acquire only1 new merge after cached-tokenizer proof, driver320/acquisition390/overall480seconds. Source review, same-version SQL save/reread and normal rollout remain. CI pending. Normal24bc228d/DB20261115011424; oldmaps unchanged, build/device deferred."
+current_next: "Section9.83: source-only v2 boundary fixed and167PASS/both CI success, but actual final200/length and semantic mismatches rejected. Raw4834chars preserved, driver258.179745/restore334.644275, original PID117766 restored, saved0. Resolve actor binding, negation scope and later confirmation through finite same-message newfictional2-record adapter/base diagnostic, after isolated kernel import/parity proof. No unchanged full12 retry. Normal24bc228d/DB20261115011424 unchanged, oldmaps unchanged, build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -4527,3 +4527,13 @@ LEAF v1 messagesはbyte同一で、既存12receiptを変更せず再検証した
 非生成検証はcore／service58件（84.73秒）と既存consumer109件（17.72秒）の計167 PASS。必要な検査は公式LMFE pinを使用した。CIは記録時点で進行中。Piece workflowは先行8aeで2701件＋78件成功後に最終stepが20分上限で取消しとなったため、job上限を35分へ変更した。検査の削除・選択縮小はない。
 
 次のsemantic_history_source_merge_once_20261115.py（SHA256 b6f047d08538333a14593056a89c51f3c59e35e81aad64e83cd773b821beadb6／26063bytes）は、同じ12receiptを使う新MERGE一回だけを取得する。新coreとintentのみ固定hashで取得し、native全bytes583a10e8・transport131072byte枠・同model／adapter／bridgeを維持する。停止前にcached tokenizerで実input＋4096≤32768を確認する。driver320秒、準備・候補取得390秒、取得・復元を含む全体480秒。旧516.389秒と新取得枠320秒は840秒内だが、fresh13件一括完走とは区別する。学習0、再試行0、元argv／env／cwdは同Pod内RAMから復元する。完成rawの意味照合・同版SQL保存再読・通常反映は未成立。通常API／worker24bc228d、DB20261115011424、build／TestFlight／本人実機は保留する。
+
+### §9.83 実施後追記 — 原文境界の修復と作者の意味品質を分けて判定
+
+同controller b6f047d0は予定どおり新規1MERGEのみ取得、旧12wire／bodyは全件byte同一で再利用した。停止前のcached tokenizer実測は入力20235＋出力4096＝24331token、24欄全文／省略0／messages878eb918を確認。dcaのAnalysis CI43703156299とPiece CI43703156238はいずれもsuccessになった。
+
+実MERGEはHTTP200／finish_reason=length、raw4834 Unicode scalar／SHA256 c9d3a2250581d2c1606169b38892ef78bff001feed5bebc5fc3aab445b7e459c、11node完成・12番目途中でJSON未閉。consumer503、driver258.17974476423115秒、停止復元込み334.64427521498874秒で元提供PID117766へ復旧。原本source_only_actual_20261115/semantic-history.actual.result.json.gzの展開後SHA256はb05c4d7428d5a8e00f397c1702be4d04b46f2b1e3c9ee5b2fe93d52d2bd88c94。response-13.txt／execution／logs／reviewも同所に保持する。保存0、JSON修補0、finishの読み替え0。
+
+原文との独立照合ではn3が記録1の同僚のうなずきを記録2の家族の反応へ混同、n10は『終わるまで残ることに予定を変えない』を『終わるまで残る予定を変えない』へ反転、n2は後続の窓口確認を消失、n7は今回読了と次回未読を不明瞭化、n11は実際の片づけを未決定へ戻している。AI LEAF文の混入経路を外しても、作者自身の主体・否定・時点の意味保持は未成立であり、時間枠の解消だけでは採用しない。全candidateを通常へ配置して『境界修復だけ通常完了』と数えることもせず、未採用の長履歴経路は通常未反映のままとする。
+
+実providerはPython3.12.3／Torch2.8.0+cu128／Transformers5.19.0／Triton3.4.0。GatedDeltaNetとcausal_conv1dが最適化部品未導入のため低速参照処理へ切り替わるlogも確認した。既存環境を更新せず、fla-core0.6.0／einops0.8.2の固定wheelを別targetへhash必須・no-depsで導入する候補準備に着手した。導入を意味品質改善の証拠にはしない。実import選択と数値の有限性・参照計算との誤差を検査した後、学習に使わない新規架空2記録を同messagesで、同4B base851bf6eとadapter120u各1回の有限比較へ進める。別model IDと実adapter状態を明記し、通常の自動fallbackや新weights採用にはしない。改善を確認した場合だけ全12原文へ戻す。通常反映・同版保存再読は未完である。

@@ -1,0 +1,1 @@
+{"python": "3.12.3", "packages": {"torch": "2.8.0+cu128", "transformers": "5.19.0", "triton": "3.4.0", "flash-linear-attention": null, "fla-core": null, "causal-conv1d": null, "einops": null}, "nvcc_exists": true}

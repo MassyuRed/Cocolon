@@ -1,0 +1,62 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   5%|▌         | 37/723 [00:00<00:01, 365.26it/s]
+Loading weights:  10%|█         | 74/723 [00:00<00:01, 346.88it/s]
+Loading weights:  15%|█▌        | 109/723 [00:00<00:01, 342.50it/s]
+Loading weights:  20%|██        | 146/723 [00:00<00:01, 348.54it/s]
+Loading weights:  25%|██▌       | 181/723 [00:00<00:01, 340.42it/s]
+Loading weights:  30%|██▉       | 216/723 [00:00<00:01, 328.34it/s]
+Loading weights:  35%|███▍      | 251/723 [00:00<00:01, 334.73it/s]
+Loading weights:  39%|███▉      | 285/723 [00:00<00:01, 326.80it/s]
+Loading weights:  44%|████▍     | 318/723 [00:00<00:01, 304.26it/s]
+Loading weights:  49%|████▉     | 355/723 [00:01<00:01, 320.94it/s]
+Loading weights:  54%|█████▎    | 388/723 [00:01<00:01, 304.66it/s]
+Loading weights:  58%|█████▊    | 419/723 [00:01<00:01, 290.74it/s]
+Loading weights:  80%|███████▉  | 576/723 [00:01<00:00, 640.79it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 481.50it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=admitted monotonic=2307717.428
+analysis_generation_stage=tokenize monotonic=2307717.428
+analysis_generation_stage=constraint monotonic=2307717.553
+analysis_generation_stage=decode monotonic=2307717.567
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_0 monotonic=2307725.232
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2307725.244
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_128 monotonic=2307738.623
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_1 monotonic=2307738.631
+analysis_generation_stage=prefix_enter_256 monotonic=2307750.141
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_5 monotonic=2307750.149
+analysis_generation_stage=prefix_enter_384 monotonic=2307763.591
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_244419 monotonic=2307763.615
+analysis_generation_stage=prefix_enter_512 monotonic=2307777.443
+analysis_generation_stage=prefix_exit_512_JsonSchemaParser_other_allowed_2 monotonic=2307777.45
+analysis_generation_stage=prefix_enter_640 monotonic=2307791.562
+analysis_generation_stage=prefix_exit_640_JsonSchemaParser_other_allowed_1 monotonic=2307791.57
+analysis_generation_stage=prefix_enter_768 monotonic=2307803.393
+analysis_generation_stage=prefix_exit_768_JsonSchemaParser_free_allowed_244501 monotonic=2307803.417
+analysis_generation_stage=prefix_enter_896 monotonic=2307814.732
+analysis_generation_stage=prefix_exit_896_JsonSchemaParser_free_allowed_244501 monotonic=2307814.754
+analysis_generation_stage=prefix_enter_1024 monotonic=2307827.616
+analysis_generation_stage=prefix_exit_1024_JsonSchemaParser_other_allowed_2 monotonic=2307827.625
+analysis_generation_stage=prefix_enter_1152 monotonic=2307840.574
+analysis_generation_stage=prefix_exit_1152_JsonSchemaParser_free_allowed_244501 monotonic=2307840.599
+analysis_generation_stage=prefix_enter_1280 monotonic=2307852.512
+analysis_generation_stage=prefix_exit_1280_JsonSchemaParser_free_allowed_244501 monotonic=2307852.537
+analysis_generation_stage=prefix_enter_1408 monotonic=2307864.163
+analysis_generation_stage=prefix_exit_1408_JsonSchemaParser_other_allowed_3 monotonic=2307864.172
+analysis_generation_stage=prefix_enter_1536 monotonic=2307878.112
+analysis_generation_stage=prefix_exit_1536_JsonSchemaParser_other_allowed_2 monotonic=2307878.122
+analysis_generation_stage=prefix_enter_1664 monotonic=2307892.427
+analysis_generation_stage=prefix_exit_1664_JsonSchemaParser_other_allowed_6 monotonic=2307892.437
+analysis_generation_stage=prefix_enter_1792 monotonic=2307904.03
+analysis_generation_stage=prefix_exit_1792_JsonSchemaParser_free_allowed_244501 monotonic=2307904.052
+analysis_generation_stage=prefix_enter_1920 monotonic=2307915.805
+analysis_generation_stage=prefix_exit_1920_JsonSchemaParser_free_allowed_244501 monotonic=2307915.829
+analysis_generation_stage=prefix_enter_2048 monotonic=2307927.352
+analysis_generation_stage=prefix_exit_2048_JsonSchemaParser_free_allowed_244426 monotonic=2307927.377
+analysis_generation_stage=complete_length monotonic=2307927.429
+analysis_generation_stage=special_count_0 monotonic=2307927.461
