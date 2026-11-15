@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+  File "/workspace/semantic-kernel-deps-20261115/fla/ops/__init__.py", line 12, in <module>
+    from .comba import chunk_comba, fused_recurrent_comba
+  File "/workspace/semantic-kernel-deps-20261115/fla/ops/comba/__init__.py", line 8, in <module>
+    from .chunk import chunk_comba
+  File "/workspace/semantic-kernel-deps-20261115/fla/ops/comba/chunk.py", line 10, in <module>
+    from fla.modules.norm.l2norm import l2norm_bwd, l2norm_fwd
+  File "/workspace/semantic-kernel-deps-20261115/fla/modules/__init__.py", line 15, in <module>
+    from fla.modules.fused_cross_entropy import FusedCrossEntropyLoss
+  File "/workspace/semantic-kernel-deps-20261115/fla/modules/fused_cross_entropy/__init__.py", line 18, in <module>
+    from fla.modules.fused_cross_entropy import gluon  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/semantic-kernel-deps-20261115/fla/modules/fused_cross_entropy/gluon.py", line 17, in <module>
+    from triton.experimental.gluon.language import extra
+ImportError: cannot import name 'extra' from 'triton.experimental.gluon.language' (/usr/local/lib/python3.12/dist-packages/triton/experimental/gluon/language/__init__.py)
