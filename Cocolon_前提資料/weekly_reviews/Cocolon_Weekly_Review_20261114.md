@@ -1028,3 +1028,12 @@ worker既定900秒はstarted_at基準で、source取得／最終保存を含む�
 旧公開版Analysis CIの固定packet／schema順hash2失敗を、既存テスト資材だけで現builderへ同期した。全原入力・他5caseを保持し、MAP wire3値と新順pinを更新。本体core8193bdf7／nativeefaeba2b・次の3fileは不変、資材26件成功を含め最終sourceのlocal検証は計278件成功。旧CI失敗・新CI進行と実意味品質未確認を区別して記録する。
 
 最終公開APIは144656a9（固定資材同期、本体はef329983と同一）。新CIは進行中、local278件成功・実意味未確認・通常未反映を維持する。
+
+
+### 11/16 継続 — 追加送付前停止、取得前SQLと一回保存・別process再読の準備
+
+API144656aのAnalysis CIはSUCCESS、Cocolon6558ae3の5CIもSUCCESS。新3file226769byteは前承認225975byteとの差に対する明示承認不足として自動承認審査が送付前拒否し、追加送付／モデル呼出し0、元提供PID126071／health200を維持した。
+
+待機中に、架空12記録を実SQLで取得した生成前snapshot／guard／as_ofとcheckpointを固定し、別processと移動先で同じ材料・12LEAFを再現した。合成13応答では同raw一回SQL保存と別process／通常HTTPensure=falseの同一再読まで成立。モデル／hostedDB0、実4B品質や実取得物の保存成功へ換算しない。全12の実確認は新規12LEAF＋MERGE計13応答が必要で、旧receiptを再使用しない。
+
+次の具体scopeは未送付5file315741byte。Aは2条件最大2応答・復元7分一回、独立原文照合が適切な場合だけBは最大13応答・復元17分一回。A不成立ならB送付／実行0、学習／retry0。具体的明示承認前に実行せず、同raw実保存再読・通常反映の未完を残す。worker実設定900秒の余裕不足を確認し、既存1800設定を品質成立後の調整候補へ具体化したが、設定変更や全job期限保証は0。詳細と全原本は補助設計§9.85。通常版・DB・配布保留・管理評価を維持する。

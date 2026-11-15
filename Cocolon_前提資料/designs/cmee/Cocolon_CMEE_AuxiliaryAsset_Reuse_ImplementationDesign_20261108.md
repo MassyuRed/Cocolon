@@ -1770,7 +1770,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 <a id="112-現在の進行欄"></a>
 ### 11.2 現在の進行欄（11/15・§9.72通常反映後、§9.73長履歴候補）
 
-全体主枠は§9.54／第11回§5。§9.72の実1〜3回答とその後の本人訂正→Piece・保存再読・通常DB／API反映は完了済み。通常API／worker24bc228d、migration20261115011424、対応RN sourceを継承し、build／TestFlight／本人実機は保留する。未完単位は§9.73から継続する現semantic長履歴。最新の§9.84では、明示承認済み3file225975byteを送り2条件を一回実行、両方stop／GENERATED・134.689秒で元提供PID126071へ復元した。読書会は概要の既知送信→未実行が矛盾し、照明は後日の購入／使用への変化が不足して不採用。JSON完結・record参照と意味保持を区別する。診断の狭い通常schemaは通常候補から復元し、原本は隔離比較として残す。公開API1c9f6f7／Cocolon720bce1への準備済み差分と架空原本の反映は完了。最新の修正候補・根拠・次の有限確認は§9.84を正とし、過去の未送付や承認待ちへ戻さない。
+全体主枠は§9.54／第11回§5。§9.72の回答・本人訂正→Piece・保存再読・通常DB／API反映は完了済み。通常API／worker24bc228d・DB20261115011424と配布保留を維持する。現在の未完単位は§9.85のsource-first実意味・新全12・同raw実保存再読・通常反映。公開API144656aの最終Analysis CIとCocolon6558ae3の5CIは成功した。新3file226769byteの追加送付は自動承認審査が明示承認不足で拒否、送付／生成0。待機中に取得前SQL固定・合成13応答の一回保存／別process再読を準備・検証した。次の最大5file315741byteはA最大2応答・復元7分、原文照合が適切な場合だけB最大13新規応答・復元17分、各一回として具体化し、明示承認前に実行しない。前の一回を再実行せず、機械成功を意味・商品受入れへ換算しない。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1787,9 +1787,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/15・現在の再開先：第11回§5の四作業を維持し、§9.84の実本文に残った既知行動の逆転・時点をまたぐ変化の欠落を既存意味作者の中で修復する。** §9.72の実回答と本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3、§9.68の有効source／Saved印は成立済みとして繰り返さない。最新の2条件は両方stop／CMEE GENERATEDだが意味採用は0、許可された一回は消費済み。元提供PID126071へ復元し、通常API／worker24bc228d・DB20261115011424は今回変更0。
+**11/16・現在の再開先：第11回§5の四作業を維持し、§9.85の未送付A／条件付きBを具体的明示承認後に実施し、同raw保存再読から通常反映へ進む。** §9.72の実回答と本人訂正→Piece・通常DB／API反映、§9.67の標準自動IF3、§9.68の有効source／Saved印は成立済みとして繰り返さない。最新の2条件は両方stop／CMEE GENERATEDだが意味採用は0、許可された一回は消費済み。元提供PID126071へ復元し、通常API／worker24bc228d・DB20261115011424は今回変更0。
 
-§9.84の実rawと原入力を直接参照する。概要の生成時点が項目より前である点と、短文化による独立意味の消失を分けて是正する。診断用compact2条件を通常の容量・全12成立へ換算しない。具体的な改善が確認できた後だけ、現指示で全12を新規取得し、同じsource guard／最終rawのSQL一回保存・別process非生成再読・通常decoder／API／workerの期限整合と配置へ進む。旧12LEAFを新messagesへ再束縛せず、既存current／月次当時版と失敗時の一回保存境界を保つ。一般品質・本単位／補助全体は未完、build／TestFlight／本人実機保留を維持する。
+§9.85の具体scopeとprecheckpoint・helper・独立reviewを参照する。新5fileを前の225975byte承認や今回の再開指示へまとめて読み替えず、明示承認後に有限A、適切な場合だけ有限Bへ進む。既存13原本を新messagesへ再束縛しない。実原文と全出力が適切な場合だけ同じSQL源泉／最終rawを一回保存し、別processで非生成再読して通常native／API／workerへ反映する。生成前SQLcheckpointを失わず、guardやas_ofを取得後に差し替えない。workerの1800設定候補は品質・保存成立後に扱い、全job保証を捏造しない。一般品質・本単位／補助全体は未完、build／TestFlight／本人実機保留を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -4628,3 +4628,38 @@ STRUCTURE_MAP_DELTA_NONE：変更は既存の意味作者指示と既存native�
 最終test資材候補local834a9cf3は26PASS・FAIL／SKIP0、6.34秒。本体core8193bdf7／nativeefaeba2bと次3file226769byteは不変。今回の最終sourceに対するlocal検証は215＋37＋26の重複しない計278件成功。26件の前回runやCIの1522件・21subtestsは加算せず、旧CI失敗を成功へ変更しない。新revisionのCI状況はpublication receiptで区別する。
 
 固定資材修正版を公開API144656a9f312b8b4dce39c03e05da84e190eaf74へ保存し、local834a9cf3とtreeb8eeb6c37fe1935031421adba51c2c53f24d1aef・変更2blobの完全一致を再取得照合した。本体sourceと新3fileはef329983版から不変。最終headの新CIは進行中であり、local278件をCI成功へ読み替えない。
+
+
+<a id="source-first-sql-preacquisition-resume-20261116"></a>
+## 9.85 11/16 — 送付前停止を維持し、取得前SQL固定・同raw保存再読と条件付き全12実行を準備
+
+再開時に公開API144656aとCocolon6558ae3のHEAD／全treeが保存済み候補と一致し、tracked差分なしを確認した。最終APIのAnalysis CI43728862913はSUCCESS、以前の固定packet／schema順hash2失敗を含む群も1524PASS／21subtestsで完了。Cocolonの5CIもSUCCESS。旧ef329983の2失敗と最終headの成功は別revisionとして保持し、local278件や先行CI群を重複加算しない。
+
+準備済み新3file226769byteの送付を試みたが、自動承認審査が、前回承認225975byteと異なる外部送付への明示承認が確認できないとして送付前拒否した。再開指示を新scopeの明示承認へ換算せず、別経路で送付／実行しない。新root不存在・新3file未配置、元提供PID126071／health200をread-onlyで再確認した。今回追加送付・モデル・学習・再試行・本番DB操作は0。§9.84の完了済み一回は再実行しない。
+
+### 取得前SQL状態と元原文の固定
+
+既存Q3Database／PGliteと実Analysis9migrationを使い、既存架空12記録の原文・二欄・選択・時刻をSQLへ保持した。生成前のanalysis_cumulative_source_snapshotからguard a000deb9、snapshot.now／period_start／end、親requestと全12LEAFのmessagesを固定し、4,835,570byteのprecheckpoint801ba068を保存した。新SQL guardは旧full12入力guardと同じであり、旧guardをPython由来と推定しない。時計だけ進んだ別process／移動先復元でも同じguard・原文・凍結材料・全12LEAF messagesが一致する。guardが同じでも、新指示・新as_ofに旧receiptを付け替えない。snapshot／plan／receipt／restart／relocation原本はsource_first_full12_prepared_20261116、binary checkpointは引継ぎ一式に保持する。
+
+### 同raw一回保存・別process非生成再読の準備
+
+full12_same_raw_finalize.pyは、未来の実13応答が完全受領／stop／GENERATEDであり、元input／guard／as_of／messages／wire request bytes／body hashと一致する場合だけ同じ既存pipelineへ再生する。承認された実artifact identityをrealizerだけへ固定してprojection・本文・private根拠・coverageを元取得物と完全比較する。12記録24欄・省略0と全source refsを保持し、元guardと期間のanalysis_cumulative_commitを一回だけ行う。元precheckpoint／actualrawは不変。保存後のcheckpointを別Pythonへ復元し、直接current／detail／monthlyと通常HTTPensure=falseから同じID・本文・投影・coverage・private根拠を読み、モデル／新writeを拒否する。
+
+既存test packet由来の合成13応答で上記dryrunと移動先読取りが成功し、1artifact／1commit／1monthly reference、追加model／hostedDB0を確認した。合成応答を実4B本文・意味品質・商品受入れと数えない。初回の合成packetは全長引用を複製してMERGE131072byte上限で保存前拒否となり、失敗原本を保持した。合成fixtureの引用だけを既存nativeの短い完全一致候補へ変更し、実source／生成容量／保存境界は変更しない。実rawでの保存再読は未実施である。
+
+### 追加実行を一括で確認できる有限scope
+
+| 段階 | 未送付の正確なpayload | 実行上限と条件 |
+|---|---|---|
+| A | 既存source-first3file226769byte：core8193bdf7／function29fe72a2／launcher50f3d576 | 同じ読書会2記録と照明2記録、最大2応答、停止復元込み420秒・一回 |
+| B | 追加2file88972byte：full12_sql_source_first_once.py29826byte／72f5cb7dと、full12-sql.pre_acquisition.input.json59146byte／bdb872a5 | Aの実原文照合で今回対象の意味が適切な場合だけ、新規12LEAF＋MERGE最大13応答。停止復元込み1020秒・一回。A不成立時は送付／実行0 |
+
+最大5file315741byte・最大15応答、各段階の実行復元枠は7分／17分である。照合時間を実行枠へ混同しない。学習／retry／旧応答再利用／新Pod／新重み／新依存0、既存認証と起動環境は同Pod内だけで利用する。A送付物をBで再送せず、4.8MBのSQL checkpointはPodへ送らない。Bは完了したAの実2stop／GENERATED・source／native／driver identityとrestored_pidを必須とし、PID fallbackを持たない。意味の合否は原文と全出力の独立照合で判断し、自動の意味PASS flagやMash正式商品受入れへ置き換えない。
+
+BはSQL由来inputと親ref／全12LEAFをofflineで再導出済み。実cached tokenizerで各LEAFを停止前に検査し、実MERGEも送信前に入力token＋4096≤32768を確認する。native要求上限13・単体210秒、既存typedsource／service840秒・driver850秒・準備取得900秒・復元1020秒。受領不明後は次POSTを止め、finallyで元提供を復元する。両driver・native関数transplant・各payloadのcompile／source-plan照合と独立reviewはPASSだが、実token検査・実生成は未実施。具体範囲・ハッシュはsource_first_full12_combined_scope_20261116.jsonを正とする。前の許可や今回の再開指示だけで新scopeを実行しない。
+
+### 通常反映の期限整合
+
+実worker起動logでstale_after900秒を確認した。840秒の意味pipelineの外に、通常の保存経路ではHTTP7処理（設定値合計54秒）とCPU／thread／JSON処理がある。HTTP timeoutはinactivity／phase値なので、894秒の全job上限や840＜900だけで安全とは証明しない。既存設定ASTOR_WORKER_STALE_RUNNING_SECONDS=1800を品質・同raw保存再読後の最小調整候補とし、workerだけへ指定版と併せて適用・起動log確認する。新controller・API設定・outer deadlineは追加しておらず、1800秒も任意入力の完了保証ではない。17分の隔離試行枠を通常jobのclaim→mark_done実測へ換算しない。
+
+通常API／worker24bc228d・DB20261115011424、selector／重み・月次当時版、build／TestFlight／本人実機保留は今回不変。A／Bの実意味と同raw保存再読が成立してから、既存native／API／workerの版・context・期限と通常反映を閉じる。本単位／補助全体は未完。STRUCTURE_MAP_DELTA_NONE：既存商品source／公開contractの変更0、追加は既存trial内の一回用検証・再読準備だけである。

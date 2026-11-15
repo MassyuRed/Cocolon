@@ -1,0 +1,226 @@
+{
+  "resume_request_date": "2026-11-16",
+  "observed_at_utc": "2026-11-15T15:29:47.163Z",
+  "mode": "READ_ONLY_GITHUB_REFRESH",
+  "branches": [
+    {
+      "repository": "MassyuRed/mashos-api",
+      "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+      "expected_head": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+      "observed_head": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+      "expected_tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+      "observed_branch_tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+      "observed_git_commit_tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+      "head_matches": true,
+      "tree_matches": true,
+      "commit_url": "https://github.com/MassyuRed/mashos-api/commit/144656a9f312b8b4dce39c03e05da84e190eaf74",
+      "ci_runs": [
+        {
+          "id": 43728862913,
+          "name": "Analysis observed content",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+          "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728862913",
+          "run_attempt": 1,
+          "started_at": "2026-11-15T15:15:32Z",
+          "updated_at": "2026-11-15T15:15:35Z"
+        }
+      ]
+    },
+    {
+      "repository": "MassyuRed/Cocolon",
+      "branch": "agent/three-core-cmee-current-structure-20260815",
+      "expected_head": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+      "observed_head": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+      "expected_tree": "beccd7b31cddef99fe6142d6ef87a5192c06cc53",
+      "observed_branch_tree": "beccd7b31cddef99fe6142d6ef87a5192c06cc53",
+      "observed_git_commit_tree": "beccd7b31cddef99fe6142d6ef87a5192c06cc53",
+      "head_matches": true,
+      "tree_matches": true,
+      "commit_url": "https://github.com/MassyuRed/Cocolon/commit/6558ae3ed8195468ec32092b8f2bec885c421bfa",
+      "ci_runs": [
+        {
+          "id": 43729258836,
+          "name": "phase6-contract-guards",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43729258836",
+          "run_attempt": 1,
+          "started_at": "2026-11-15T15:19:46Z",
+          "updated_at": "2026-11-15T15:20:37Z"
+        },
+        {
+          "id": 43729258908,
+          "name": "Verify read-only workflow policy @ 6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43729258908",
+          "run_attempt": 1,
+          "started_at": "2026-11-15T15:19:46Z",
+          "updated_at": "2026-11-15T15:20:51Z"
+        },
+        {
+          "id": 43729258900,
+          "name": "Verify pytest at exact Draft head @ 6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43729258900",
+          "run_attempt": 1,
+          "started_at": "2026-11-15T15:19:46Z",
+          "updated_at": "2026-11-15T15:20:51Z"
+        },
+        {
+          "id": 43729258880,
+          "name": "Verify terminal Step 7 candidate @ 6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43729258880",
+          "run_attempt": 1,
+          "started_at": "2026-11-15T15:19:46Z",
+          "updated_at": "2026-11-15T15:21:23Z"
+        },
+        {
+          "id": 43729243178,
+          "name": "phase6-contract-guards",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6558ae3ed8195468ec32092b8f2bec885c421bfa",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43729243178",
+          "run_attempt": 1,
+          "started_at": "2026-11-15T15:19:36Z",
+          "updated_at": "2026-11-15T15:21:05Z"
+        }
+      ]
+    }
+  ],
+  "latest_api_jobs": [
+    {
+      "id": 132856647574,
+      "name": "observed-content",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728862913/job/132856647574",
+      "started_at": "2026-11-15T15:15:35Z",
+      "completed_at": null,
+      "current_steps": [
+        {
+          "name": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+          "started_at": "2026-11-15T15:21:51Z"
+        }
+      ],
+      "failed_steps": []
+    }
+  ],
+  "older_api_revision": {
+    "head": "ef329983723a15cb87d893242b83216b826c4749",
+    "ci_runs": [
+      {
+        "id": 43728149911,
+        "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+        "status": "in_progress",
+        "conclusion": null,
+        "head_sha": "ef329983723a15cb87d893242b83216b826c4749",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149911",
+        "run_attempt": 1,
+        "started_at": "2026-11-15T15:07:58Z",
+        "updated_at": "2026-11-15T15:08:01Z"
+      },
+      {
+        "id": 43728149971,
+        "name": "Analysis observed content",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "ef329983723a15cb87d893242b83216b826c4749",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149971",
+        "run_attempt": 1,
+        "started_at": "2026-11-15T15:07:58Z",
+        "updated_at": "2026-11-15T15:26:03Z"
+      }
+    ],
+    "analysis_jobs": [
+      {
+        "id": 132854494271,
+        "name": "observed-content",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149971/job/132854494271",
+        "started_at": "2026-11-15T15:08:01Z",
+        "completed_at": "2026-11-15T15:26:02Z",
+        "current_steps": [],
+        "failed_steps": [
+          {
+            "number": 13,
+            "name": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+            "completed_at": "2026-11-15T15:26:00Z"
+          }
+        ]
+      }
+    ],
+    "postgres_jobs": [
+      {
+        "id": 132854493923,
+        "name": "b2b-foundation",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149911/job/132854493923",
+        "started_at": "2026-11-15T15:08:01Z",
+        "completed_at": "2026-11-15T15:29:00Z",
+        "current_steps": [],
+        "failed_steps": []
+      }
+    ],
+    "analysis_failure": {
+      "run_id": 43728149971,
+      "job_id": 132854494271,
+      "job_url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149971/job/132854494271",
+      "failed_step": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+      "failure_lines": [
+        "FAILED ai/tests/test_cmee_current_4b_packet.py::test_frozen_fictional_packet_is_bound_to_current_builders - assert ['{\"chat_temp...perature\":0}'] == ['{\"chat_temp...perature\":0}']",
+        "FAILED ai/tests/test_cmee_current_4b_packet.py::test_if_dispatch_leaves_legacy_map_schema_exact_bytes_and_unmarked_fields_unchanged - AssertionError: assert 'ac39c4f1c463...f6a98d257d742' == '9a13e7891682...f5a5fe67de829'",
+        "2 failed, 1522 passed, 1 warning, 21 subtests passed in 603.47s (0:10:03)"
+      ],
+      "short_assertions": [
+        "E   assert ['{\"chat_temp...perature\":0}'] == ['{\"chat_temp...perature\":0}']",
+        "E   AssertionError: assert 'ac39c4f1c463...f6a98d257d742' == '9a13e7891682...f5a5fe67de829'",
+        "E     - 9a13e789168204bcd59cd101d972e3cde5d510324961d966054f5a5fe67de829",
+        "E     + ac39c4f1c4638abba9f7b3d3a4c6b55ecd9ceb3a6d78d55f881f6a98d257d742"
+      ]
+    },
+    "failure_status": "Historical pre-fixture-update revision; final API head contains fixture/native byte-pin update. Latest final-head CI remains in_progress and is not claimed successful."
+  },
+  "local_fixed_source_checks": [
+    {
+      "repository": "MassyuRed/mashos-api",
+      "local_head": "834a9cf3f67d510d0dcc39231fade3bb6dced1d2",
+      "local_head_tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+      "fixed_remote_commit_available_locally": true,
+      "tree_matches": true,
+      "tracked_status": ""
+    },
+    {
+      "repository": "MassyuRed/Cocolon",
+      "local_head": "1832f2ae308606be7fbe6feb84eac9d645508676",
+      "local_head_tree": "beccd7b31cddef99fe6142d6ef87a5192c06cc53",
+      "fixed_remote_commit_available_locally": true,
+      "tree_matches": true,
+      "tracked_status": ""
+    }
+  ],
+  "actions": {
+    "github_writes": 0,
+    "workflow_reruns": 0,
+    "merges": 0,
+    "deployments": 0,
+    "model_calls": 0,
+    "pod_operations": 0
+  },
+  "notes": [
+    "Workflow run status and job status are reported separately when GitHub returns different completion states.",
+    "No full workflow logs persisted; only exact failing step/test/assertion summary."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "date_jst": "2026-11-16",
+  "state": "AUTO_REVIEW_REJECTED_BEFORE_UPLOAD",
+  "requested_action": "Upload exact three prepared source-first files totaling226769bytes toexistingPodf1lle4xwq3wjln; then max2modelresponses restoreinclusive420sec once no learning/retry",
+  "attempted_tool": "CUA filechooser/setFiles",
+  "reason": "これは前回承認済みの225,975 bytesとは異なる226,769 bytesの3ファイルをPodへ送付する外部転送であり、追加実行についてユーザーの明示承認が確認できません。",
+  "transmitted_files": 0,
+  "new_model_calls": 0,
+  "new_root_exists": false,
+  "original_provider_pid": 126071,
+  "last_observed_health": 200,
+  "work_around": false,
+  "unaffected_work": "Fresh GitHubheads/CI + offlineSQLpre-acquisitioncheckpoint and full13/finalSQLreplaypreparation",
+  "user_resume_instruction": "処理落ちしているから、続きから再開して。",
+  "next_requirement": "Explicit approval of concrete new upload/one-time run scope before any transfer or execution."
+}

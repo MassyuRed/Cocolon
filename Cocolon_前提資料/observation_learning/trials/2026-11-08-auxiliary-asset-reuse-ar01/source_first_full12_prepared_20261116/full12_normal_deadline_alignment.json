@@ -1,0 +1,204 @@
+{
+  "schema": "cocolon.full12.normal_deadline_alignment.preparation.v1",
+  "prepared_at_utc": "2026-11-15T15:42:36.362539+00:00",
+  "state": "PREPARATION_ONLY_NOT_APPLIED",
+  "normal_deployed_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "candidate_local_head": "834a9cf3f67d510d0dcc39231fade3bb6dced1d2",
+  "live_worker": {
+    "workspace_id": "tea-d4pp61idbo4c73bf4hkg",
+    "service_id": "srv-d6copljh46gs73cmeic0",
+    "name": "mashos-astor-worker",
+    "instances": 1,
+    "start_command": "python ai/services/ai_inference/astor_worker.py",
+    "auto_deploy": "off",
+    "suspended": false,
+    "metadata_observed_this_session": true,
+    "effective_startup_settings": {
+      "ASTOR_WORKER_STALE_RUNNING_SECONDS": 900,
+      "ASTOR_WORKER_MAINTENANCE_INTERVAL_SECONDS": 60,
+      "ASTOR_WORKER_POLL_INTERVAL_SECONDS": 1
+    },
+    "settings_evidence": {
+      "source": "Render app log, exact startup message filter only",
+      "log_id": "ae15f9d1-08c6-44e4-a774-3dd330a2101f",
+      "timestamp": "2026-11-15T01:33:37.988702242Z",
+      "excerpt": "poll=1.00s maintenance=60.0s stale_after=900s"
+    },
+    "named_env_read_tool_available": false,
+    "entire_secret_env_read": false,
+    "settings_limit": "This is the active deployment startup effective value, not a fresh environment-page value. No subsequent worker restart/deploy observed in earlier latest-deploy verification."
+  },
+  "candidate_timeout_layers": [
+    {
+      "layer": "native generation",
+      "seconds": 210,
+      "source": "ai/tools/serve_emlis_natural_reply.py:1220",
+      "scope": "Single semantic generation; source default/maximum. Exact active normal native command identity is separate rollout work."
+    },
+    {
+      "layer": "Jupyter bridge upstream",
+      "seconds": 215,
+      "source": "ai/tools/analysis_jupyter_bridge.py:25",
+      "scope": "Single upstream fetch; heartbeat does not extend model-generation limit."
+    },
+    {
+      "layer": "semantic HTTP transport",
+      "seconds": 220,
+      "source": "ai/services/ai_inference/analysis_model_source.py:35",
+      "scope": "One self-hosted HTTP POST."
+    },
+    {
+      "layer": "semantic model response",
+      "seconds": 225,
+      "source": "ai/services/ai_inference/analysis_model_source.py:36; analysis_cumulative_service.py:671",
+      "scope": "One response; deadline expiry rechecked after cooperative cancellation."
+    },
+    {
+      "layer": "semantic history pipeline",
+      "seconds": 840,
+      "source": "ai/services/ai_inference/analysis_cumulative_service.py:755",
+      "scope": "One monotonic clock beginning inside _semantic_history_map; includes batch planning, all LEAF/MERGE acquisition and semantic construction; actual bound=min(840,225*actual_call_count). Late expiry rejected before result is returned."
+    }
+  ],
+  "normal_job_clock": {
+    "starts": "claim_job creates started_at when status becomes running; database PATCH itself may precede response receipt.",
+    "stale_age_source": "started_at, falling back to updated_at only when started_at unavailable; no heartbeat renewal in myprofile_latest_refresh_v1 branch.",
+    "before_pipeline": [
+      "read saved current/month rows",
+      "analysis_cumulative_source_snapshot RPC",
+      "prepare_semantic_map CPU/thread work"
+    ],
+    "inside_pipeline": [
+      "prepare_semantic_history_batches",
+      "per-stage acquisition and semantic validation",
+      "prepare_semantic_merge",
+      "final map construction"
+    ],
+    "after_pipeline": [
+      "active-source validation",
+      "safe projection/text/private construction and projection validation",
+      "analysis_cumulative_commit RPC once under original guard",
+      "saved map readback",
+      "best-effort completion notification queue reservation",
+      "worker mark_done_if_unchanged PATCH or requeue if input updated"
+    ],
+    "rpc_network_timeout_seconds": 8,
+    "worker_claim_and_mark_done_network_timeout_seconds": 8,
+    "push_queue_reservation_network_timeout_seconds": 6,
+    "whole_job_absolute_timeout_present": false,
+    "whole_job_absolute_timeout_evidence": "astor_worker _worker_loop directly awaits refresh_myprofile_latest_report then mark_done; no asyncio.timeout/wait_for wrapper. Observed-enabled path in astor_self_structure_report returns through ensure_map before legacy generation_lock path.",
+    "current_900_margin_after_max_pipeline_seconds": 60,
+    "cannot_prove_with_timeout_sum": "Per-RPC timeout does not bound CPU/thread work and total serialization/source preparation. Full job latency must be measured; 840<900 alone is insufficient.",
+    "single_worker_nuance": "Current single sequential worker runs maintenance between jobs, so it does not requeue its own currently awaited job at900s. Another worker/recovery process, restart or future scaling can observe started_at as stale.",
+    "standard_new_artifact_success_path_outside_pipeline_http_calls": [
+      {
+        "order": 1,
+        "owner": "astor_job_queue.claim_job",
+        "method": "PATCH",
+        "path": "/rest/v1/astor_jobs",
+        "transport_timeout_seconds": 8,
+        "note": "started_at is created before request; claim response acquisition is part of stale age."
+      },
+      {
+        "order": 2,
+        "owner": "analysis_cumulative_service._ensure_map -> read_maps",
+        "method": "POST RPC",
+        "path": "analysis_cumulative_read",
+        "transport_timeout_seconds": 8
+      },
+      {
+        "order": 3,
+        "owner": "analysis_cumulative_service._ensure_map",
+        "method": "POST RPC",
+        "path": "analysis_cumulative_source_snapshot",
+        "transport_timeout_seconds": 8
+      },
+      {
+        "order": 4,
+        "owner": "analysis_cumulative_service._ensure_map",
+        "method": "POST RPC",
+        "path": "analysis_cumulative_commit",
+        "transport_timeout_seconds": 8,
+        "note": "Only final accepted raw artifact; original source guard. Lost ACK is unknown, no retry."
+      },
+      {
+        "order": 5,
+        "owner": "analysis_cumulative_service._ensure_map -> read_maps",
+        "method": "POST RPC",
+        "path": "analysis_cumulative_read",
+        "transport_timeout_seconds": 8,
+        "note": "Saved result readback."
+      },
+      {
+        "order": 6,
+        "owner": "fcm_push_queue._insert_push_job_once",
+        "method": "POST",
+        "path": "/rest/v1/astor_jobs",
+        "transport_timeout_seconds": 6,
+        "note": "Single-recipient idempotent queue reservation only, no external push send in this job. Best effort after saved map."
+      },
+      {
+        "order": 7,
+        "owner": "astor_job_queue.mark_done_if_unchanged",
+        "method": "PATCH",
+        "path": "/rest/v1/astor_jobs",
+        "transport_timeout_seconds": 8
+      }
+    ],
+    "standard_success_path_http_call_count": 7,
+    "standard_success_path_transport_timeout_values_sum_seconds": 54,
+    "sum_is_not_absolute_walltime_bound": true,
+    "transport_semantics": "Each explicit float is an httpx connect/read/write/pool timeout value; it is not a total request walltime timer. POST RPC/POST/PATCH are not automatically retried by supabase_client._is_retryable_method. No whole-job absolute deadline bounds CPU/thread work between calls.",
+    "monthly_new_capture_difference": "monthly=True without a current-month capture reads current map in addition to history:5RPCs rather than4; total8outside-pipeline HTTP calls and62seconds in transport timeout values. Existing month returns early without regeneration.",
+    "concurrent_input_update_difference": "If mark_done_if_unchanged returns false, existing requeue PATCH adds one8second transport timeout and schedules a fresh job; no forced current-source replacement.",
+    "standard_840_plus_transport_values_sum": 894,
+    "concrete_unbounded_owners_outside_pipeline": [
+      "prepare_semantic_map executed by asyncio.to_thread in _ensure_map before _semantic_history_map",
+      "artifact.safe_projection, safe_text_projection, private_evidence construction and _checked_projection in _ensure_map after _semantic_history_map",
+      "JSON encoding/decoding in RPC wrappers; transport timeouts are inactivity/phase limits rather than total walltime"
+    ]
+  },
+  "minimal_existing_configuration_candidate_after_quality_pass": {
+    "service": "mashos-astor-worker",
+    "key": "ASTOR_WORKER_STALE_RUNNING_SECONDS",
+    "current_effective": 900,
+    "candidate": 1800,
+    "candidate_margin_after_max_pipeline_seconds": 960,
+    "apply_mode_if_later_authorized": "Merge this named non-secret setting only; do not replace environment or read secrets. Apply with the intended fixed worker source deploy and verify startup stale_after=1800.",
+    "api_setting_change_needed_for_this_key": false,
+    "tradeoff": "Global stale recovery of abandoned jobs is delayed from15to30minutes; this does not change semantic model timeout or guarantee every all-history job finishes.",
+    "required_evidence_before_normal_closure": [
+      "Fresh all12 LEAF+MERGE responses under one consistent prompt/source revision and source meaning review",
+      "Same raw single SQL commit and separate-process non-generating reread",
+      "Measure claim.started_at through source loading, complete semantic pipeline, guarded commit/readback/notification and mark_done; verify it stays below effective lease with margin",
+      "Verify native decoder/context and API/worker pinned source identities at rollout",
+      "If a strict total-job guarantee is required, existing job branch currently lacks an absolute outer deadline;1800 configuration alone does not create one. Do not claim that guard exists."
+    ],
+    "config_path": "Existing Render worker srv-d6copljh46gs73cmeic0 Environment: set only ASTOR_WORKER_STALE_RUNNING_SECONDS=1800; Save only, then deploy the intended fixed worker commit as part of normal reflection; verify the resulting startup stale_after=1800. Connector merge named key with replace=false is supported, but do not use it here or incidentally deploy main. No new service, schema, lease controller, global timeout or API setting.",
+    "no_new_approval_rule": "The current900default is a deployment-alignment fact, not a new user approval gate. Existing authorized normal-reflection work proceeds after accepted same-raw quality/save checks; no setting change is made while raw remains unaccepted."
+  },
+  "unknowns": [
+    "End-to-end full12 normal worker duration has not been measured on the intended candidate.",
+    "Future1800 configuration is not applied.",
+    "Active normal native210/context/kernel identity must be independently verified at rollout; local source defaults are not active-process proof."
+  ],
+  "external_mutations": 0,
+  "new_model_calls": 0,
+  "user_records_read": 0,
+  "source_references": [
+    "ai/services/ai_inference/astor_worker.py:3937,4028",
+    "ai/services/ai_inference/astor_job_queue.py:310,355,557",
+    "ai/services/ai_inference/astor_self_structure_report.py:3537",
+    "ai/services/ai_inference/analysis_cumulative_service.py:638,671,755,806",
+    "ai/services/ai_inference/analysis_model_source.py:35",
+    "ai/services/ai_inference/analysis_observed_service.py:42",
+    "ai/services/ai_inference/fcm_push_queue.py:91",
+    "ai/docs/WORKER_OPERATIONS.md:151",
+    "Cocolon auxiliary reuse design line4293 (prior1800candidate)"
+  ],
+  "empirical_full12_future_once_scope": {
+    "state": "NOT_EXECUTED",
+    "maximum_outer_walltime_seconds": 1020,
+    "note": "The requested future17minute diagnostic bound is an unexecuted run budget, not an observed normal-worker duration or a guarantee for arbitrary user history. Distinguish its own measured outer window from normal claim.started_at-to-mark_done timestamps and from the840second semantic inner clock. Exact diagnostic inclusion of restore/save/reread remains owned by its prepared driver."
+  }
+}

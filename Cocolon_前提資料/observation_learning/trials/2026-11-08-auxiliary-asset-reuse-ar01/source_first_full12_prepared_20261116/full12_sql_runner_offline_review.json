@@ -1,0 +1,31 @@
+{
+  "state": "PASS_OFFLINE_ONLY",
+  "runner_bytes": 29826,
+  "runner_sha256": "72f5cb7d6818cfcfd6147a2c945452da5e7742f1a3636f3bf2ffea8eef575344",
+  "native_base_sha256": "583a10e8bc25d0bf50e35e53dcfd9407963dc9575e6faac1199c5e5ab30c0c8a",
+  "patched_native_sha256": "7278db041d1c65c41b4d721e57f083cfdeda687c42214c8cb91f855d01fab18e",
+  "driver_sha256": "fd2e1d3b85d554752edf43e50718cb39307978082bc4fcb3863d55cdb823fc1e",
+  "source_first_prior_driver_sha256": "10227a62a14ff0e4f22e1af193f37f95540ca6c4d24a128c18b4a9b84a871ca0",
+  "sql_input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+  "sql_parent_request_ref": "analysis-semantic-request:4654ca3faa2276e6173027b46713c568ded2ccfcc794b030606acc2c895a4964",
+  "sql_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+  "fresh_leaves": 12,
+  "fresh_merge_calls": 1,
+  "max_posts": 13,
+  "old_response_reuse": 0,
+  "exact_leaf_messages_match_sql_preacquisition_plan": true,
+  "source_is_exact_typed_class_direct": true,
+  "tokenizer_check_before_each_post": true,
+  "synthetic_capacity_boundary_checked": true,
+  "actual_tokenizer_measurement_performed": false,
+  "new_model_calls": 0,
+  "remote_operations": 0,
+  "api_edits": 0,
+  "limits": {
+    "native_request_seconds": 210,
+    "service_seconds": 840,
+    "driver_seconds": 850,
+    "acquisition_seconds": 900,
+    "restore_inclusive_seconds": 1020
+  }
+}

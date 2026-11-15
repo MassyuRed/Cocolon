@@ -1,0 +1,10 @@
+{
+  "state": "SYNTHETIC_FIXTURE_REJECTED_BEFORE_SAVE",
+  "synthetic_test_output": true,
+  "reason": "analysis_semantic_history_capacity_exceeded",
+  "basis": "Existing generic packet builder duplicated full long-field quotations into the merge source index.",
+  "model_calls": 0,
+  "hosted_database_calls": 0,
+  "sql_commits": 0,
+  "resolution": "Use the same existing synthetic packet builder with legal unique short original sentences as evidence. Actual full source and transport budgets unchanged."
+}
