@@ -6,7 +6,7 @@
 記録担当：華恋  
 会議状態：**終了。11/14、Mashが報告会終了を明示。公開日未定・12/6までに提出可能候補、対象週は補助経路活用全体の完了へ集中する§5と、対応する補助設計の現在再開先を以後の前提として引き継ぐ。今後の短い継続指示と終了記録は§9。補助全体・商品完成・新しい実環境操作の実行を認定したものではない。**
 
-> **報告会後の最新到達点：§24。V4既存19失敗を修復・通常source採用。統合画像全体は未完。以下は先行§23の記録。** 先行本人更新を後続Pieceの有効sourceへ通し、IFカードに確認済み保存意向を表示（§23）。§22の標準自動3案は限定接続単位として完了済み。 標準自動3案の限定単位を同raw保存・通常7f51反映まで完了（§22）。以下は先行§19の到達履歴。 本人提示の実3候補set1＋Saved1を同raw隔離保存・別process再読・既存RN受口へ接続し、API／worker c7968c6を通常反映。先行1／2を含め各候補数1set／Saved1件が成立。標準RN自動3案・条件表示・一般品質・本人利用・補助全体は未完。主枠§5、管理評価61.625％、11/21判定・12/6候補、build／TestFlight／本人実機保留は維持。
+> **報告会後の最新到達点：§26。複数本人訂正のPiece作成・保存再読と通常DB／API反映を完了。以下は先行§25。V4既存19失敗を修復・通常source採用。統合画像全体は未完。以下は先行§23の記録。** 先行本人更新を後続Pieceの有効sourceへ通し、IFカードに確認済み保存意向を表示（§23）。§22の標準自動3案は限定接続単位として完了済み。 標準自動3案の限定単位を同raw保存・通常7f51反映まで完了（§22）。以下は先行§19の到達履歴。 本人提示の実3候補set1＋Saved1を同raw隔離保存・別process再読・既存RN受口へ接続し、API／worker c7968c6を通常反映。先行1／2を含め各候補数1set／Saved1件が成立。標準RN自動3案・条件表示・一般品質・本人利用・補助全体は未完。主枠§5、管理評価61.625％、11/21判定・12/6候補、build／TestFlight／本人実機保留は維持。
 
 [前回・第10回議事録](Cocolon_Weekly_Review_20261107.md)の決定・実行履歴・未達を継承する。今回の11/14〜11/21は記録を進める対象週であり、未来の作業を実績へ数えない。
 
@@ -900,6 +900,16 @@ IFの条件／負荷／未知表示は既存実装。今回追加する印は同
 3planの訂正／撤回6作品と二欄1作品の隔離保存再読、本文・payload／recipeとhash、quota各1・原入力／Emlis不変を確認。合成Auth／recipient provider・PGliteの範囲で、新4B・本人保存・画像成功へ加算しない。取得時／SQL時の時系列検査差、S7親sourceの借用拒否を同じ単位で修復。最終CI・必要migration／指定配置は[補助設計§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ集約する。通常DB／API反映の限定単位は完了。API／worker e5a1dc6が双方Live、SQL履歴20261114215806と関数・ACL／RLSを照合した。最終Piece CI43647458738はsuccess、製品source同一の09f Analysis CI43645344316もsuccess。RNは2ccで1841件成功だがworkflow全体は既存native19失敗でfailure、画像合格は未認定。旧版比較fixtureだけの修復と失敗履歴も§9.69へ保持した。build／TestFlight／本人実機保留、model selector OFF、新GPU／学習0、§5の主枠・補助全体未完を維持。
 
 
-## 24. 11/15 — 画像の既存V4修復を通常sourceへ回収
+## 25. 11/15 — 画像の既存V4修復を通常sourceへ回収
 
 前回§9.69の通常DB／API反映完了を継承。既存V4 19失敗について、研究3646のclip参照支持・CTM／配置原点修復と小数24対照を通常source／既存workflowへ採用した。現行版native V4 20/20・小数24/24・既存native／bitmap各群とRN1841件は成功。統合canvasは6method中2失敗で全体failure。WholeCanvasは旗絵文字行の3481×1285が4Mi画素上限を超過。新たにretained-card Aの候補探索6call拒否が観測され、plan／bitmap前に停止した。通常bitmap／保存export／model73等4method成功を、失敗したA→Bの置換・失効成功へ換算しない。既存V4 19失敗の修復・現行20＋小数24・通常RN source反映の限定単位は完了、全画像合格・新拒否原因の解消は未完。通常bitmap／WholeCanvas／本人端末・補助全体の完了へ換算しない。詳細と最終結果は[補助設計§9.70](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-v4-normal-adoption-20261115)。API／DB／model設定変更0、配布保留と§5の主枠を維持する。
+
+
+<a id="piece-multiple-corrections-normal-20261115"></a>
+## 26. 報告会後 — 複数本人訂正をPieceへ保持し通常反映（11/15）
+
+§5.3／5.6を継続し、[補助設計§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)の初回訂正限定から、異なる原節への複数REVISE／WITHDRAWを全履歴で解決する範囲へ進めた。先の本人説明を失わず、残原節と現在有効な本人置換だけを既存作者・独立S7へ渡し、全説明と各OBS・受領／完了・prefixを保存境界で照合する。RNは説明を全て表示し、最新表示OBSから明示作成する。
+
+3plan×訂正／撤回4構成の12作品でプレビュー・画像設定変更・保存・新serviceでの非生成再読、保存した本文／payload／recipeとhash一致、quota各1、原入力／Emlis不変を確認した。合成Auth／provider・隔離SQLの成果で、新実4B／native画像／本人利用の成功ではない。通常DB migration20261115000750を適用し、API／worker d10c3f86双方Live、RN source b142969e。既存3writerの許可した2差分だけを逆投影すると適用前定義MD5に一致、署名／権限／RLS／table／column・旧preview primitiveは不変。
+
+実装・全検証／CI・配置receipt・残差は[補助設計§9.71](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-multiple-corrections-normal-rollout-20261115)と既存trialのpublic原本へ集約する。限定接続と通常反映の単位は完了。一般自由文・ANSWER混在・置換節再訂正、編集品質・長履歴・本人利用・補助全体は未完。§25の画像2残差は維持。管理評価61.625％、11/21判定・公開日未定／12/6候補、build／TestFlight／本人実機保留、selector OFF・新GPU／学習0は変更しない。

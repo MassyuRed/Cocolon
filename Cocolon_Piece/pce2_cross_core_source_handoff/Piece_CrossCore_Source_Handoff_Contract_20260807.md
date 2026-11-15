@@ -167,7 +167,7 @@ corrected専用のprivate lineageに限り、`interpretation_correction_source`�
 | `semantic_source_roles` | yes | stage matrixとexact一致 | new abstract owner | PCE-2 |
 | `lineage_control_roles` | yes | stage matrixとexact一致 | new abstract owner | PCE-2 |
 | `piece_generation_eligibility` | yes | explicit decision。missingをtrue扱いしない | future adapter decision | PCE-2 / PCE-9C |
-| `interpretation_correction_source` | corrected only, private | 上記4keys exact。本人説明とAI対象controlを区別し、本文を持たない | 保存済み初回訂正sourceとtarget OBSへの束縛 | 2026-11-15限定追加 |
+| `interpretation_correction_source` | corrected only, private | 上記4keys exact。本人説明とAI対象controlを区別し、本文を持たない | 最新の保存済み訂正sourceとtarget OBSへの束縛。全履歴はprivate fenceで別照合 | 2026-11-15限定追加 |
 | `body_free` | yes | exact `true` | current body-free artifactsと同原則 | PCE-2 |
 
 ## 5. stage contract
@@ -227,9 +227,9 @@ invariant:
 
 - semantic rolesは`[original_input, interpretation_correction]`、control rolesは`[emlis_observation_result, ai_interpretation_target]`。実envelopeの本人説明roleは`USER_INTERPRETATION_CORRECTION`であり、QUESTION／ANSWERでもAI生成本文でもない。
 - `emlis_observation_result_identity`は最新の保存済みCORRECTED OBS UUIDへ固定。question identityとsupplemental identity／version／commitmentは全てnull。元`source_input_version`／`source_input_bundle_commitment`は従来の必須値を維持する。
-- 初回の二入力訂正1件・ANSWER0・COMPLETED／FINALと、その訂正に対応する受領／完了・現在OBSだけを対象にする。説明中の完全引用から既存意味ownerが解決できる単一REVISE／WITHDRAWに限定し、原入力の有効節を1つ以上残す。REVISEは本人説明の有効置換節だけ、WITHDRAWは失効節を除いた原入力だけを作者へ渡す。
-- 元の七項目と本人説明envelope・絶対根拠は別々に保持し、AI訂正対象は出所・対象を示すprivate controlに留める。完全引用中の旧節・失効節を本人の新事実として連結しない。初期形式はshort_essay、既存の最大3body block・独立S7を維持する。一般自由文・複数訂正・ANSWERとの混在・原有効節0等はpending／拒否で、一般訂正理解の完成ではない。
-- private expected source stateの`interpretation_correction`は、保存source・source_prefix_ref・events・thread_dataを既存preview／visual／save境界で再照合するfenceである。これはbody-free lineageとは別のprivate検証材料で、公開DTO・ログへ出さず、`meaning_checkpoint(s)`と混在させない。SQL適用・通常反映の結果は§9.69へ集約する。
+- 二入力訂正1..N件・ANSWER0・COMPLETED／FINALと、全訂正に対応する各受領／完了・prefix・最新OBSを対象にする。各説明の完全引用が異なる原入力の完全な節を指定し、既存意味ownerが単一REVISE／WITHDRAWとして解決できる範囲に限定する。全履歴を適用して残る原節と、まだ有効な本人置換節だけを既存作者へ渡し、原入力の有効節を1つ以上残す。問いの上限を訂正件数へ適用しない。
+- 元の七項目と本人説明envelope・絶対根拠は別々に保持し、AI訂正対象は出所・対象を示すprivate controlに留める。完全引用中の旧節・失効節を本人の新事実として連結しない。初期形式はshort_essay、既存の最大3body block・独立S7を維持する。一般自由文・置換節の再訂正・ANSWERとの混在・原有効節0等はpending／拒否で、一般訂正理解の完成ではない。
+- private expected source stateの`interpretation_correction`は、最新保存source・複数時だけの`prior_sources`・source_prefix_ref・全events・thread_dataを既存preview／visual／save境界で再照合するfenceである。これはbody-free lineageとは別のprivate検証材料で、公開DTO・ログへ出さず、`meaning_checkpoint(s)`と混在させない。各prefixはBASE＋その時点までの順序付き全訂正から導出する。各本人説明の記録時刻は前応答の完了以降とする。初回互換・SQL適用・通常反映の実結果は§9.69／9.71へ集約する。
 
 同一saved inputのnormal／pre-question／refined／correctedの各preview／recordはexact1 stage lineageへbindする。後発の回答・訂正で既存Pieceのlineageを暗黙更新しない。
 

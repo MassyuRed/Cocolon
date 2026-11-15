@@ -20,7 +20,7 @@ production_effect: "exact0"
 
 ## 1. role class
 
-2026-11-15の限定実装差分は`corrected_observation`だけに追加する。normal／pre-question／refinedの既存契約と保存済みlineageは変更しない。source実装・RN境界と、検証・SQL適用・通常反映・CIの成否を分け、最終結果は[補助設計§9.69](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ戻る。build／TestFlight／本人実機は保留し、新実4B・一般品質の成立へ換算しない。 8月のdesign-only／runtime exact0は当時のPCE-2単位の状態として保持する。
+2026-11-15の限定実装差分は`corrected_observation`だけに追加する。normal／pre-question／refinedの既存契約と保存済みlineageは変更しない。source実装・RN境界と、検証・SQL適用・通常反映・CIの成否を分け、最終結果は[補助設計§9.71](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-multiple-corrections-normal-rollout-20261115)へ戻る。build／TestFlight／本人実機は保留し、新実4B・一般品質の成立へ換算しない。 8月のdesign-only／runtime exact0は当時のPCE-2単位の状態として保持する。
 
 PCE-2では、`source role`を一つの配列へ潰さず、次の2 classへ分ける。
 
@@ -39,7 +39,7 @@ lineage control role:
 |---|---|---|---:|---:|---:|---:|---|---|
 | `original_input` | semantic | saved input owner | exact1 | exact1 | exact1 | exact1 | allowed | required |
 | `supplemental_answer` | semantic | question / answer owner | exact0 | exact0 | exact1 | exact0 | allowed only as separate role | conditional required |
-| `interpretation_correction` | semantic | saved interpretation-correction owner | exact0 | exact0 | exact0 | exact1 | 本人説明の有効範囲だけ | corrected-only private four-key binding |
+| `interpretation_correction` | semantic | saved interpretation-correction owner | exact0 | exact0 | exact0 | 1..N | 各本人説明の現在有効な範囲だけ | latest-only private four-key binding、全履歴はprivate fence |
 | `emlis_observation_result` | control | Emlis result owner | exact1 | exact1 | exact1 | exact1 | forbidden | required |
 | `question_need_decision` | control | question system owner | exact0 | exact1 | exact1 | exact0 | forbidden | conditional required |
 | `ai_interpretation_target` | control | Emlis saved target owner | exact0 | exact0 | exact0 | exact1 | forbidden | target event identity only |
@@ -120,7 +120,7 @@ refined stageでは、supplemental answerをoriginalと別のsemantic partition�
 
 corrected-only `interpretation_correction_source`は`correction_id`／`source_version`／`explanation_commitment`／`target_event_id`の4keys exactで、本人説明や対象本文は入れない。private source fence `interpretation_correction`は保存source・prefix・events・thread_dataを再照合する別材料であり、公開lineage／DTOへ投影しない。
 
-初回訂正1件・ANSWER0・COMPLETED／FINAL・最新CORRECTED OBSを対象とし、完全引用の単一REVISE／WITHDRAWから残原節と本人説明の有効置換節を分離する。原active節nonempty・最大3body block・short_essayと既存S7を保持。一般自由文、複数訂正・回答混在、原active0等は未対応を維持する。normal／refinedの意味役割をcorrectedへ偽装しない。
+ANSWER0・COMPLETED／FINAL・最新CORRECTED OBSを対象に、異なる原入力の完全な節を指定する複数のREVISE／WITHDRAWを時系列で解決する。先行説明はproper sourceのままprivate `prior_sources`へ保持し、各prefix・受領・完了と最新OBSを再照合する。4keysのlineageは最新訂正へのlocatorであり、履歴全体の代用ではない。原active節nonempty・最大3body block・short_essayと既存S7を保持し、訂正回数に問いの3回上限を流用しない。一般自由文、ANSWER混在、置換節の再訂正・既撤回節の復活、原active0等は未対応。normal／refinedの意味役割をcorrectedへ偽装しない。実装・通常適用と検証範囲は補助設計§9.71へ。
 
 ## 5. question_need_decision
 

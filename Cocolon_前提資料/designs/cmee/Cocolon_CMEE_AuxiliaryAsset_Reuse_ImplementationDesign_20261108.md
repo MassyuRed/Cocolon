@@ -22,7 +22,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.69: completed first two-input interpretation correction with no answers feeds only effective original and person replacement to Piece; proper correction role and OBS identity, locked event/prefix fence, existing author/S7/save/reread. Continue weekly5 remaining general meaning/editorial quality, complex updates and long-history capability; build/device deferred; no new GPU/training/retry."
+current_next: "Section9.71: completed ordered proper interpretation corrections on distinct original clauses through Piece and normal SQL/API/worker; continue weekly5 complex updates, general meaning/editorial quality and long-history capability. Build/device deferred; no new GPU/training/retry."
 runtime_effect_of_this_document: 0
 ---
 
@@ -452,11 +452,11 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | 最大3問・設定・二入力訂正・有効更新／失効と下流接続は通常DB／API反映済み（§9.55／62）。一般問い判断・本人説明の読取・自然な本文と本人一巡は未完。研究hint未採用 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
-| AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.68の全prefix有効sourceに続き、§9.69で応答への二入力訂正をproper sourceとして既存作者・S7・保存へ接続し通常反映。初回訂正1・ANSWER0・完全引用の限定範囲。複数訂正／回答併存・一般本文品質・model通常採用・本人一巡は残る |
+| AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.68／69を継承し、§9.71で複数のproperな本人訂正をPieceへ接続し通常反映。異なる原節の完全引用REVISE／WITHDRAW・ANSWER0の限定範囲。ANSWER併存・置換節再訂正・一般本文品質・model通常採用・本人一巡は残る |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | 本人原根拠材料をnatural OBSと同時保存し三中核へ接続（§9.62）。成立意味GENERATED／未対応NOT_GENERATED・UNASSESSED。長履歴分割・跨ぐ関係・全量意味品質は未完 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61／62／67／68を継承。§9.69の二入力訂正sourceに必要な既存SQL拡張とAPI／worker e5a1dc6が双方Live。RN明示選択はsource反映。§9.70でV4 19失敗を修復・通常source採用し20/20＋小数24/24成功。WholeCanvas資源拒否と新たなretained-card Aの候補探索拒否は未完、build／配布／本人実機保留を維持。稼働監視を実job成功・一般品質・補助全体完了へ換算しない |
+| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61／62／67／68を継承。§9.69の初回訂正に続き§9.71で複数proper sourceの全履歴を既存SQLへ接続し、API／worker d10c3f86が双方Live。RN明示選択はsource反映。§9.70でV4 19失敗を修復・通常source採用し20/20＋小数24/24成功。WholeCanvas資源拒否と新たなretained-card Aの候補探索拒否は未完、build／配布／本人実機保留を維持。稼働監視を実job成功・一般品質・補助全体完了へ換算しない |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -4085,3 +4085,54 @@ canvas artifact14136619921（75,438,962bytes／SHA256=d29571874ed601a2f7fa050f21
 通常API／workerは前回e5a1dc68の指定2deployがLiveのままと読取確認。稼働DBのpiece_natural_effective_round_sources／piece_interpretation_correction_source履歴は20261114192124／20261114215806を維持。今回API／DBの再配置・migration0。既存比較関数のsource／検査pinを通常RN正本へ反映する単位で、保留中の署名・TestFlight／本人実機を実行していない。
 
 STRUCTURE_MAP_DELTA_NONE：既存比較関数内の計算修復だけで、owner／route／wire／保存形式／renderer選択の責任は変わらない。Piece mapには未採用→通常source採用という状態差と原本への参照だけを更新する。Cocolonの一般自由文・複数訂正／回答併存、Emlis本人判断／時点、Piece編集品質、Analysis記録間関係・長履歴、本人利用・補助全体は未完。次の主線は§5の有効な本人更新と完成物への利用であり、旧prototypeの追加診断・待機／上限緩和へ進行を置き換えない。
+
+
+<a id="piece-multiple-corrections-normal-rollout-20261115"></a>
+## 9.71 2026-11-15 — 複数の本人訂正を失わずPieceへ渡し、通常DB／APIへ反映
+
+### 今回閉じた範囲
+
+週次§5.3／5.6の「本人更新を完成物へ届け、通常適用まで同じ単位で閉じる」を継続。開始時PR30 4dfc5e67／API PR3 e5a1dc68。§9.69の初回訂正・§9.70のV4修復を完了済みとして継承した。初回限定で拒否していた、異なる原節への複数の本人説明をproper sourceのまま既存Piece作者・S7・保存へ通す作業単位である。
+
+- `PieceSavedCorrectedHandoff`／`PieceCorrectedSourceSnapshot`に先行説明tupleを追加。1件の既存private bytes・identityを保つため、先行0件なら保存fieldを出さない。全履歴を既存Analysis active-source ownerへ一度渡し、各原節の失効と各本人置換の有効範囲を導出。先行REVISEをANSWERや原入力へ偽装しない。WITHDRAW後も別の先行REVISEを保つ。
+- 全OBSと各START／RECEIVED／FINISH、訂正target・operation／attempt・時刻・contextを照合。各prefixはBASE＋その時点までの順序付き全本人説明から導出する。前応答FINISH以前の本人説明時刻はAPI／SQL双方で拒否。公開source-ref7keysと最新訂正への4keys lineageは保持し、全履歴は複数時だけprivate `prior_sources`へ分離する。
+- preparation／model受口は各sourceの現在有効な範囲だけを渡す。旧原節・完全引用の旧側・AI対象文は作者材料へ足さず、安全検査は原入力と全本人説明の全文を読む。既存作者・独立S7で全partitionを検査し、保存再読は再生成しない。
+- RNは全説明を順に表示し、全訂正と前後OBSの対応・唯一の最新表示OBSへ作成要求を束縛する。結果不明POST／途中の別更新への乗換え拒否は継承。SQLは既存preview／visual／saveのcorrected分岐だけを全履歴へ拡張する。
+
+対象はANSWER0・COMPLETED／FINAL・最新CORRECTED OBSで、各説明が異なる原入力の完全な節を指定し、既存readerで単一REVISE／WITHDRAWを導出できる範囲。原active nonempty・最大3body block・short_essay・権利差は維持する。訂正件数に問いの3回上限を流用せず、4撤回で原1節を残すCPU対照も成功。一般自由文、ANSWER混在、置換節の再訂正・既撤回節の復活、原active0／3block超過は未対応を維持する。
+
+### 完成物と検証
+
+架空の思考「私は本を読みたい。私は仕事を続けたい。」と行動「私は資料を調べた。」に、仕事→家族を守る希望、資料→約束を守る希望の訂正／撤回を別々に適用した。3plan×4組合せの12作品をプレビュー→画像設定変更→明示保存→新serviceでの非生成再読へ通し、本文・payload・保存したrecipe／renderer・hash一致、quota各1、原七項目・Emlis thread／events不変を確認した。
+
+| 履歴 | 残った本文の内容 |
+|---|---|
+| 訂正→訂正 | 読書の希望＋家族を守る希望＋約束を守る希望 |
+| 訂正→撤回 | 読書の希望＋家族を守る希望 |
+| 撤回→訂正 | 読書の希望＋約束を守る希望 |
+| 撤回→撤回 | 読書の希望だけ |
+
+各操作は別の原節に対する更新であり、同じ置換内容を再訂正できた証拠ではない。これは合成Auth／recipient provider・隔離PGlite0.5.8／既存通常作者の結果。新実4B・本人の稼働DB保存・新native画像・編集品質改善ではない。原本は既存trialの`piece_multiple_corrections_normal_rollout_20261115.public.json`へ保存し、架空本文と選別したhash／検証結果だけを含める。
+
+localではcoreの最終各case74、application26＋関連128＝154、SQLの最終各case72、RN対象623が成功。件数は重複するため合算しない。SQL新27件は3writer×履歴欠落／入替／重複・中間receipt欠落／完了時計・中間／latest-only prefix偽装・旧対象・本人記録時計の9変異を、保存状態と期待値をそろえた上でも拒否、Piece／quota不変。CPUの独立S7／受領検査では正常候補を採用、旧原節復活・partition入替・AI対象混入・先行欠落・child graftを拒否。初回localの時計対照はUTC／JST文字列比較と同一millisecondでtest setupが失敗したため、時刻をparseし1microsecondの決定的な差を与えて修復。RN initial runはMetro依存不在のbundle検査1件で失敗し、既存CIと同じ除外条件で623件成功、bundle検査を成功へ加算しない。
+
+| 検証 | source固定の実結果 |
+|---|---|
+| API Piece | d10c3f86／run43656551656／job132636228118、push・attempt1、41step全success。27pytest invocationで5688 PASS、FAIL／ERROR／SKIP0、420 deselected。重複invocationを固有件数へ合算しない |
+| API Analysis | d10c3f86／run43656551550／job132636227808、push・attempt1、全工程success。6pytest invocationで4865 PASS＋12995 subtests PASS、FAIL／ERROR／SKIP0、194 deselected。重複を固有件数へ合算しない |
+| RN | b142969e／run43656612542、全6job success。RN1499＋344＝1843 PASS、FAIL／SKIP／cancel0。source nativeは既存129＋v9_46＋V4_20、bitmap44・AR04_4・小数24が成功。native群は分母重複あり。canvas／export系の実行工程はpath条件でskipされ、新しい統合画像の成功へ換算しない |
+
+API10pathとRN2pathのremote内容・親commit・tree・changed pathsをlocalと照合。新runのrerun／dispatch0。先行§9.69のCI失敗・§9.70の画像残差は原記録として残す。
+
+### 通常反映
+
+CLI生成の`20261114235041_piece_multiple_interpretation_corrections.sql`を通常DBへ一度適用し、履歴version20261115000750／name=piece_multiple_interpretation_correctionsを確認した。既存3writerの定義から許可した宣言・corrected分岐の2差分だけを戻すと適用前MD5に全一致。旧5引数preview primitiveはMD5も不変。4関数の署名・SECURITY DEFINER・search_path=pg_catalog・ACL、全public tableのACL／RLS、対象5tableのcolumn型／nullabilityを保持。新table／column・quota変更0。security advisorsは前後7group同一、新規0。実本人行の読取・書込0。
+
+| 通常service | 指定版の終状態 |
+|---|---|
+| API | dep-dbsfm8mk1f9s73959hn0、2026-11-15 09:23:17 JSTにLive、commit=d10c3f8688ae77afd3907a2d1c94db9d58312665 |
+| worker | dep-dbsfmcgn74is739o569g、2026-11-15 09:23:09 JSTにLive、同じd10c3f86 |
+
+両serviceは既存main参照・auto deploy OFFを保持し、指定commitを明示して配置。反映後healthz／bootstrap200、未認証のIF／Saved／Piece source-ref／owner history401と既存private no-storeを確認。worker新instance pmtbvの起動・DB poll200・queue stats（ready0／running0／stale0／既存failed171）を確認した。両serviceの09:23:17〜09:24:29 JSTの観測窓でerror levelログ0。実job完了・既存failed解消・認証済み本人生成保存の成功とはしない。料金・設定・quota・model／weights／selector、build／配布は変更しない。
+
+STRUCTURE_MAP_DELTA_PRESENT：全体現在地・01A／01B・Piece／CMEE地図・PCE source契約・本設計・週次を同じ作業単位で差分更新。新service・作者・モデルprovider・table・column・rendererは追加しない。GPU／学習／再試行0、通常model selector OFFを維持。build／TestFlight／本人実機は保留。一般自由文・複雑な本人更新／回答併存、Emlis本人判断／時点、Piece編集品質、Analysis記録間関係／長履歴、本人利用・補助全体は未完。§9.70のWholeCanvas資源拒否とretained-card A候補探索拒否は今回未解決。次も週次§5を主枠とし、今回の限定保存接続を全体完成へ換算しない。
