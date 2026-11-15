@@ -1,0 +1,21 @@
+{
+  "api_commit": "5cf37079a01430bf6dbcb2b99d45a3f849f2c228",
+  "all_fictional": true,
+  "final_state": "NOT_GENERATED",
+  "first_leaf_records": 8,
+  "second_leaf_calls": 0,
+  "merge_calls": 0,
+  "saved_artifacts": 0,
+  "normal_rollout": 0,
+  "model_finish_reason": "length",
+  "elapsed_seconds": 211.3016055021435,
+  "raw_characters": 5740,
+  "meaning_admitted": false,
+  "findings": [
+    "R2 family node quotes field2 R1 action",
+    "R3 exhibition node quotes field3 R2 family memo, expanding to 24 distinct roots",
+    "R4 lamp node denies explicit old-lamp use stop",
+    "R5 imports another record and turns leaving midway into joining midway"
+  ],
+  "next_direct_change": "quote-first then source-bound field; native per-node evidence max4; original source remains complete"
+}

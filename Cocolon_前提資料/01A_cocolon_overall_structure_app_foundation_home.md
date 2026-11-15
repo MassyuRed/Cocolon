@@ -7291,3 +7291,10 @@ API f5d8967の変更11pathを復元manifestと全文一致で照合。新しい�
 補助設計§9.74／9.75を最新とする。API候補1fb55b49の既存3pathはai/tools/serve_emlis_natural_reply.py（semantic_json_parser→isolated _semantic_unique_json_schema_parser）、ai/tests/test_analysis_semantic_generation_schema.py、ai/tests/test_piece_model_server_constraints.py。既存Analysis／Piece／IF namespaceを分離し、生成中の同node根拠ペア重複を除く。商品の全source、公開wire、保存経路は同じで、STRUCTURE_MAP_DELTA_NONE。
 
 実一回は第一LEAF92.58秒stop・根拠2個／2種類へ進んだが、実node1件に対する存在しないnodeへの6edgeと、未遂→完了の変異があり不採用。関連176件PASSと実意味品質を分ける。最終artifact／保存再読／通常反映0、通常API／worker24bc228d・DB20261115011424を維持。次は生成済みnode参照と原文の未遂／完了を保つ修復、全段階実原本の照合と通常反映まで。資料内の旧「候補未実行」は当時の記録で、最新実結果へ戻って確認する。
+
+
+### 11/15 長履歴の原文欄混同・根拠膨張の直接修正（補助設計§9.76）
+
+**11/15最新：長履歴候補5cf37079の第一LEAFは211.30秒でlength受領、不採用。引用→原文欄の順序へ直接修正。** 実12記録の8／4分割で1POSTのみ、5740文字の未完JSON。記録番号とfield番号の取り違え、24件の異なる根拠への膨張、旧照明の使用停止の逆転・別記録混入を確認した。第二LEAF／MERGE・保存／再読・通常反映0、元提供PID113387へ復元（停止復元込み252.01秒）。新候補ccdd0a6cは引用を先に選び同じ原文欄へ束縛、生成根拠最大4・node連番・生成済み端点を保持し関連267件PASS。新実4Bは別一回を準備中。通常API／worker24bc228d・DB20261115011424を維持し、本単位／補助全体未完、build／TestFlight／本人実機保留。詳細と原本は補助設計§9.76。
+
+既存semantic作者・隔離decoder内だけの修復。source／rights・cohort・全量guard・公開v3・SQL保存owner・月次・唯一realizer・RNは不変。新規恒久subsystemや移行は追加しません。API変更は既存semantic_admission、native提供、生成制約test、4B packet testと既存fixture（API ccdd0a6c）。実raw・scope・途中失敗・次の直接一回は設計§9.76を正とします。

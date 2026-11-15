@@ -1,4 +1,4 @@
-> **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](#analysis-semantic-history-candidate-20261115)。
+> **11/15最新：長履歴候補5cf37079の第一LEAFは211.30秒でlength受領、不採用。引用→原文欄の順序へ直接修正。** 実12記録の8／4分割で1POSTのみ、5740文字の未完JSON。記録番号とfield番号の取り違え、24件の異なる根拠への膨張、旧照明の使用停止の逆転・別記録混入を確認した。第二LEAF／MERGE・保存／再読・通常反映0、元提供PID113387へ復元（停止復元込み252.01秒）。新候補ccdd0a6cは引用を先に選び同じ原文欄へ束縛、生成根拠最大4・node連番・生成済み端点を保持し関連267件PASS。新実4Bは別一回を準備中。通常API／worker24bc228d・DB20261115011424を維持し、本単位／補助全体未完、build／TestFlight／本人実機保留。詳細と原本は補助設計§9.76。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -4323,3 +4323,32 @@ APIの直接修正は既存3path（serve_emlis_natural_reply.py、test_analysis_
 次の直接修正は、生成済みのnode IDだけをedge候補へ束縛し、node ID重複と1node時の空edgesを扱うこと、同時に未遂／完了の原文条件を完成文へ保つこと。旧bodyのedge削除・意味補修で代用しない。全段階の新rawを原入力・本文・両端根拠へ照合し、成立した同版だけを既存一回SQL保存・非生成再読・通常API／worker／提供schemaへ反映する。新sourceの機械検証だけを商品採用や補助全体完了へ換算しない。追加学習が必要とは今回だけでは確定しない。
 
 STRUCTURE_MAP_DELTA_NONE：既存semantic decoder内の制約修復であり、商品route・source／rights・公開型・保存owner・月次・唯一realizerは不変。build／TestFlight／本人実機の保留と、補助全体未完を維持。
+
+<a id="analysis-semantic-history-quote-first-20261115"></a>
+## 9.76 11/15 — 実長履歴の原文欄混同・根拠膨張を、引用先行の生成へ直接修正（通常未採用）
+
+§9.75から、API候補5cf37079a01430bf6dbcb2b99d45a3f849f2c228で生成済みnodeだけへのedge束縛と未遂／完了の生成指示を修正した。別root `/workspace/semantic-history-graph-scope-20261115-once` で一回実行。実launch PID113318、候補提供PID113322、元提供を同じargs／env／cwdでPID113387へ復元した。旧96source・driver・架空12入力・親guardと8／4分割を固定し、既存2runは再実行しない。学習・依存install・新GPU0。
+
+第一LEAFのみ1POST・HTTP200、211.301605秒でfinish_reason=lengthの5740文字を受領した。driverは503／NOT_GENERATED、第二LEAF／MERGE・artifact保存／再読・通常採用0。停止復元込み252.007804秒、前後health200。受領rawを閉じたり補修して採用しない。生成の一部は改善したが、全量読解成功や意味品質向上済みには数えない。
+
+### 全文照合で判明した原因
+
+n1会議の根拠field1は対応するが、n2家族の食事はfield2（R1の行動）、n3展示はfield3（R2の家族memo）、n4照明の初めはfield4（R2行動）、n5荷物整理はfield5（R3展示memo）を選んだ。記録番号と各原文欄番号を混同し、field先行のdecoderが別の原文欄から引用を供給している形である。n3は重複pair0でも異なる引用を24件まで展開し、一文とそれを含む段落を重ねた。JSON途中でnativeの210秒生成上限に到達した（提供ログは位置2560後にcomplete_length、4096token到達の証拠ではない）。
+
+機械的な参照だけの問題ではない。照明の「使用を止める決定もしていません」は原文の旧照明使用停止と逆。荷物整理に別記録の「必ず店へ行くとも決めていません」が混入し、途中で帰ったことも「途中へ参加したこと」へ変わった。本人の事実を強めたり他の場面へ移すため、このrawは商品不採用である。全12記録は架空、thread=null／events=[]で、本人回答・訂正の実4B実証には数えない。
+
+### 同じ既存作者・decoder内の直接修正
+
+新API候補 `ccdd0a6cc955efa806929943e0e3d4845a44336c` は、nativeのevidenceをquote→fieldの順で生成する。原文の連続引用を先に選び、その引用が実在するfieldの整数だけを同じoneOfで許可する。元field全文・全引用候補・公開map／DB／RN・CMEEの既存採否上限24は変えない。生成だけ各項目最大4根拠とし、比較する2記録の思考／行動を各1つ保持できる有限構成へ戻す。生成後の番号置換・根拠削除・本文修補ではない。
+
+既存隔離parser内でnode IDを次の連番へ限定し、完成済みnodeだけをedgeへ渡し、自己線と存在しない端点を生成時に除く。1nodeのedgesは[]。引用の選択状態・完成nodeは分岐ごとに複製し、通常Piece／IF／ライブラリ本体へ影響を出さない。v1／v2共通の既存生成指示に、記録番号とfield番号の区別、未完／完了・否定・時点の保持、unknownsへ未記載の出来事を置かないこと、短い必要な根拠だけを使うことを明示した。一般的な未完相parserや意味検査を完成したとは扱わず、新raw全件の原文照合を保持する。
+
+### 検証・原本・次の直接作業
+
+修正後の関連8suiteは267 PASS／FAIL・SKIP0、85.47秒。実固定LMFE0.11.3の文字／TokenEnforcer、原文欄束縛・重複根拠・連番／端点・分岐、既存履歴SQL保存／非生成再読、source duties、IF、Pieceを含む。先行検査の218／51等と合算しない。既存Pydantic非推奨warning1を保持する。途中のpacket検査はasync plugin指定不足4件と、生成指示変更後の凍結packet不一致1件で失敗した。pluginを明示し、同じbuilderで既存架空packetを更新。原入力全件と他5wireは同一、Analysis wireとそれに依存するIF prepared identityだけを更新して最終成功した。
+
+先行1fb55b49のCI43677592608は1516 PASS／1 FAIL（通常Analysisのfield順Falseという旧期待）、Piece43677592610はSUCCESS。通常Analysisは根拠束縛のため既に順序固定なので、未知markerを付けても元のAnalysis schema／設定が変わらないという元の検査責務へ修正した。5cf37079のCI43679810921／43679810872は後続確認対象で、今回の新候補成功へ転用しない。
+
+[5cf実原本](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_graph_scope_actual_20261115/)にexecution.json・semantic-history.actual.result.json・candidate-provider.log・driver.log・restored-provider.log・review.jsonを無修補保存する。[新一回launcher](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_history_quote_first_once_20261115.py)は9508byte、SHA256 `31b48eb9ea3ed3ae29d2097b9529e836546ae37bcd53fa5f5d8a11286193e547`。同Podの別root `semantic-history-quote-first-20261115-once` で最大3応答＋前後2GET、停止復元込み900秒・一回、学習／再試行なし。既存98fileと補足依存は再送せず、固定sourceを取得し、既存認証と起動環境は同Pod内だけで使う。
+
+通常API／workerは24bc228d Live、DB20261115011424を維持。workerの放置job再取得期限900→1800秒は未変更で、長履歴成功後の同版反映で扱う。新migration・RN変更・build・TestFlight0。新rawの両LEAF→MERGEを原入力・全本文・両端根拠へ照合し、成立した同版だけを既存一回SQL保存・非生成再読・通常API／worker／提供schemaへ反映する。STRUCTURE_MAP_DELTA_NONE、本単位／補助全体は未完。
