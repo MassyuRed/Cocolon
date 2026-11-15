@@ -1,4 +1,4 @@
-> **11/15最新：基礎4B・小分割候補の実本文は不採用。根拠を先に選ぶ生成へ修正。** 基礎4Bは第一LEAFが212.47秒でlength、他者理解の創作と分類別反復があり採用しない。学習差分付き139f8a88の3／3／3／3は4件stopだが独立話題欠落・対象／実行状態の変異が残り、MERGEは49,485byteで送信前拒否。元提供PID114967へ復元済み。新候補0df12bb1はhistoryだけ根拠→意味の順序、実提示・引用可能recordの参照保持（24以内）を既存decoderへ接続。LEAF目標24,576・不可分cohort49,152・最大6LEAF、MERGEだけ98,304byteとし、native実token＋4096≤32768・全体840秒・一回保存を維持。関連300件成功は意味成功へ換算しない。同じ架空12記録の新一回を準備。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、build／TestFlight／実機保留。詳細§9.79。
+> **11/15最新：3記録の引用参照後も家族／友人の意味混同を確認し、不採用。個別仮読みへ進む。** 0df12bb1の第一LEAFは66.11秒／stop、3記録の引用を保持したが、家族の新店を友人へ移し、本人の夜の用事を友人の夕食用事へ変更。既存CMEEは逆向き同種edgeの重複で拒否し、保存0・元提供PID115233へ復元（108.62秒）。新18ec8b47は既存nativeへCMEEと同じedge重複制約を接続。LEAFのpacking目標16,384byte／最大16とし、今回12記録は自然に各1仮読み＋同じMERGEの最大13応答になる。不可分cohort49,152・MERGE98,304・request262,144・native実token＋4096≤32768・全体840秒・一回保存は維持。関連315件成功は意味成功ではない。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.79追記。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -4433,3 +4433,18 @@ API0df12bb15a937108ca01b72a09382f418c1f2a0e：
 原本は同trial配下base_unicode_actual_20261115／compact_leaf_actual_20261115へ保存する。compactのmerge-capacity-diagnostic.jsonはCPU再導出だけで、新model／SQL0。実source・wire・rawは変更しない。
 
 再開はsemantic_history_source_first_once_20261115.py。同じ既存Pod・同じ架空12記録、現adapter／model名を維持し、4LEAF＋MERGE最大5応答・pipeline840秒・停止復元込み960秒以内の別一回。学習・追加GPU契約・自動再試行0。受領全本文を原入力へ照合し、適切な最終mapができた場合だけ同じrawを隔離SQLへ一回保存・非生成再読し、通常API／workerと提供decoderへ反映する。配布・本人実機は別保留で、他の補助作業の開始条件にはしない。
+
+
+### 9.79 実行後追記 — 3記録引用の達成と意味混同、個別仮読みへの修正
+
+**11/15最新：3記録の引用参照後も家族／友人の意味混同を確認し、不採用。個別仮読みへ進む。** 0df12bb1の第一LEAFは66.11秒／stop、3記録の引用を保持したが、家族の新店を友人へ移し、本人の夜の用事を友人の夕食用事へ変更。既存CMEEは逆向き同種edgeの重複で拒否し、保存0・元提供PID115233へ復元（108.62秒）。新18ec8b47は既存nativeへCMEEと同じedge重複制約を接続。LEAFのpacking目標16,384byte／最大16とし、今回12記録は自然に各1仮読み＋同じMERGEの最大13応答になる。不可分cohort49,152・MERGE98,304・request262,144・native実token＋4096≤32768・全体840秒・一回保存は維持。関連315件成功は意味成功ではない。通常API／worker24bc228d・DB20261115011424、本単位／補助全体未完、配布保留。詳細§9.79追記。
+
+0dfのshape受理は成功したが、stage compilerのintent_compiler.py:4135でunordered(from,to)+relation_kind重複を拒否した。受領rawのSHA256は4f3761cf3c04e446ed409410384f04ee97876758ff673a87f4352e6fbfcd7168。新モデル生成を行わず同じrawから位置を確認した。3record参照と意味保持を分けた実原本／再生診断はsource_first_actual_20261115へ保持する。
+
+18ec8b47bd79de101012b202b09db5749a85b212は既存graphの生成済みedgeを同じ対称keyで保持し、未使用のfrom／to／kind候補だけを生成する。逆向き同種を禁止し、同pair別kind・別pair同kind・途中の空終了・一nodeの空edgesを維持。生成後のedge削除や本文修補はしない。
+
+同時に読ませた3record間で主体と条件が混ざったため、既存LEAFのsoft packing目標だけ16KiBへ下げ、最大16LEAFとする。record／回答／本人訂正cohortを分割せず、単独cohortは旧49,152byte上限のまま。固定の記録数上限や新しいcontroller／pipelineではない。同じ実12recordは各13,098〜13,312byte、二件同時は18,164byte以上なので、全12LEAFへ自然に分かれる。最終MERGEと全量guard、一回保存、非生成再読、月次当時版は維持。最大17stageでも全体840秒を再始動せず、各要求225秒の総和は保証しない。
+
+個別読取・SQL履歴・planner63件、native／Piece／三中核隣接252件の異なる計315件成功。native95件は252の内数。新sourceのCI・実13応答・意味採用・SQL保存・通常配置はまだ未主張。
+
+**現在の再開先：semantic_history_individual_cohort_once_20261115.py。** 同じ架空12record、同じ現adapter、12LEAF＋MERGE最大13応答・前後2GET、pipeline840秒・停止復元込み960秒、学習／新GPU契約／自動再試行0の新一回。旧閉じたtrialは再実行しない。全受領rawを原入力と読み、最終mapが適切な場合だけ隔離SQL同版保存・再読と通常API／worker／decoder反映へ進む。build／TestFlight／本人実機は保留。
