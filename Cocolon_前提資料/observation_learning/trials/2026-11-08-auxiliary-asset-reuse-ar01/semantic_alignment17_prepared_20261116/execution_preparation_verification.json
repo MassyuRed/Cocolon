@@ -1,0 +1,14 @@
+{
+  "state": "OFFLINE_PREPARATION_VERIFIED_NOT_MODEL_QUALITY",
+  "python_compile": 3,
+  "native_functions_preserved_except_request_count_main": true,
+  "sql13_driver_only_model_identity_changed": true,
+  "candidate_args_separate_and_equals_forms": 2,
+  "current_source_bindings": 19,
+  "payload_links_fixed": true,
+  "plan_sha256": "58a1c90dab2f117c13d1dddb3ae58d5cc85ca1d446538858e0eea14d1cfd0363",
+  "driver_sha256": "e2a794090b8d412eef75354eec5a974d31f7981108c4f715381b35bcfd2e600c",
+  "new_model_calls": 0,
+  "training": 0,
+  "remote_mutations": 0
+}

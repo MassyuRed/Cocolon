@@ -1,0 +1,65 @@
+{
+  "state": "PREPARED_AWAITING_NEW_EXPLICIT_GPU_TRAINING_APPROVAL",
+  "same_pod": "f1lle4xwq3wjln",
+  "files": [
+    {
+      "name": "semantic_alignment17_plan.json",
+      "bytes": 356925,
+      "sha256": "58a1c90dab2f117c13d1dddb3ae58d5cc85ca1d446538858e0eea14d1cfd0363",
+      "pod_path": "/workspace/semantic_alignment17_plan.json"
+    },
+    {
+      "name": "alignment17_driver.py",
+      "bytes": 19283,
+      "sha256": "e2a794090b8d412eef75354eec5a974d31f7981108c4f715381b35bcfd2e600c",
+      "pod_path": "/workspace/alignment17_driver.py"
+    },
+    {
+      "name": "semantic_alignment17_once.py",
+      "bytes": 9520,
+      "sha256": "a6f111f91094c380f0078af746a3fb9865f49e3f07bcc98988397a92406752ae",
+      "pod_path": "/workspace/semantic_alignment17_once.py"
+    },
+    {
+      "name": "full12_sql_alignment17_once.py",
+      "bytes": 34288,
+      "sha256": "12fb1abee103d51f8b98b58a54a4a459e647250def3d25229bc4c2aa2b2ea746",
+      "pod_path": "/workspace/full12_sql_alignment17_once.py"
+    }
+  ],
+  "total_bytes": 420016,
+  "A5": {
+    "max_updates": 34,
+    "teacher_rows": 17,
+    "independent_new_training_episodes": 2,
+    "old_source_rehearsal_rows": 9,
+    "max_new_model_calls": 7,
+    "baseline_unseen_calls": 2,
+    "candidate_after_calls": 5,
+    "training_update_seconds": 600,
+    "generation_seconds": 900,
+    "work_seconds": 1620,
+    "restore_inclusive_seconds": 1800,
+    "attempts": 1
+  },
+  "B5": {
+    "condition": "Independent full-source/raw/projection/text/unknown review of all five candidate A5 outputs adequate; A5 technical success and original provider restoration required",
+    "new_leaf_calls": 12,
+    "new_merge_calls": 1,
+    "max_new_model_calls": 13,
+    "restore_inclusive_seconds": 1020,
+    "attempts": 1,
+    "training": 0
+  },
+  "retries": 0,
+  "new_model_calls_actual": 0,
+  "training_updates_actual": 0,
+  "files_uploaded_actual": 0,
+  "normal_mutations_actual": 0,
+  "credentials": "Existing credentials/environment used only inside the same Pod for authentication and exact restoration; never exported.",
+  "old_scope": "A3/A4 consumed; B3/B4 condition unmet and not reassignable.",
+  "completion": "After B5 all13 raw independent meaning review: same final raw one SQL save, separate-process non-generation reread and normal native/model profile/API/worker alignment. Build/TestFlight/device deferred.",
+  "work_unit_closed": false,
+  "auxiliary_complete": false,
+  "product_acceptance": false
+}
