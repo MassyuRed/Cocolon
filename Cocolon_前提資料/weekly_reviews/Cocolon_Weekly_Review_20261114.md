@@ -913,3 +913,12 @@ IFの条件／負荷／未知表示は既存実装。今回追加する印は同
 3plan×訂正／撤回4構成の12作品でプレビュー・画像設定変更・保存・新serviceでの非生成再読、保存した本文／payload／recipeとhash一致、quota各1、原入力／Emlis不変を確認した。合成Auth／provider・隔離SQLの成果で、新実4B／native画像／本人利用の成功ではない。通常DB migration20261115000750を適用し、API／worker d10c3f86双方Live、RN source b142969e。既存3writerの許可した2差分だけを逆投影すると適用前定義MD5に一致、署名／権限／RLS／table／column・旧preview primitiveは不変。
 
 実装・全検証／CI・配置receipt・残差は[補助設計§9.71](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-multiple-corrections-normal-rollout-20261115)と既存trialのpublic原本へ集約する。限定接続と通常反映の単位は完了。一般自由文・ANSWER混在・置換節再訂正、編集品質・長履歴・本人利用・補助全体は未完。§25の画像2残差は維持。管理評価61.625％、11/21判定・公開日未定／12/6候補、build／TestFlight／本人実機保留、selector OFF・新GPU／学習0は変更しない。
+
+
+## 27. 報告会後 — 回答とその後の本人訂正を同じPieceへ保持（11/15）
+
+§5.3／5.6を継続し、実1〜3回答の後に本人が訂正／撤回した場合も、最新一回答と現在有効な原節・本人置換を既存作者／独立S7へ渡す。全QUESTION／ANSWER／checkpoint・受領／完了／continue／stopと、その後の全訂正を時系列で照合する。先行の独立ADDを全連結せず、未読取の選択最新ADDと対象の曖昧さは拒否する。RNは回答と全説明を同時表示し、結果不明の再開でも最新ANSWER＋表示CORRECTED OBSの組を保持する。
+
+3plan×1〜3回答×訂正／撤回の18作品と、原節ANSWER更新×proper更新4構成で、画像設定変更・保存・別service非生成再読、本文／payload／保存recipe／hash一致、quota各1・元source／Emlis不変を確認した。合成Auth／provider・隔離SQLであり、新実4B／native画像／本人利用の成功ではない。新application29、SQL7（内部で81履歴改変＋無回答への偽mixed3拒否）、既存／core197、RN Piece1511と関連React172が成功。重複の対象266・freshfixture1を加算しない。
+
+通常DBへhosted migration20261115011424を適用し、3writerの許可した3差分だけを逆投影すると適用前MD5へ一致、権限・署名・RLS／column・旧preview primitiveを保持した。API source24bc228d／RN70527711をGitHubへ反映。API／workerは同じ指定版でLive、Piece／AnalysisとRNのCI成功、health／bootstrap200・private4経路401／no-store・新worker poll200を確認し、通常DB／API反映と対応RN sourceの限定単位を完了。最終結果・公開原本・限定範囲は[補助設計§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ集約する。配布／本人実機保留、selector OFF・新GPU／学習0、画像2残差・一般品質／本人利用／補助全体未完を維持する。

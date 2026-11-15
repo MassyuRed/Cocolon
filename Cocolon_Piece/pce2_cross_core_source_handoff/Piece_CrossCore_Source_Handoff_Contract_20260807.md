@@ -23,7 +23,7 @@ production_effect: "exact0"
 
 ## 1. 結論
 
-2026-11-15の限定実装差分は`corrected_observation`だけに追加する。normal／pre-question／refinedの既存契約と保存済みlineageは変更しない。source実装・RN境界と、検証・SQL適用・通常反映・CIの成否を分け、最終結果は[補助設計§9.69](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ戻る。build／TestFlight／本人実機は保留し、新実4B・一般品質の成立へ換算しない。 8月PCE-2の`runtime binding exact0`／design-only状態と固定source refは当時の設計単位の記録として保持する。
+2026-11-15の限定実装差分は`corrected_observation`だけに追加する。normal／pre-question／refinedの既存契約と保存済みlineageは変更しない。source実装・RN境界と、検証・SQL適用・通常反映・CIの成否を分け、最終結果は[補助設計§9.72](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ戻る。build／TestFlight／本人実機は保留し、新実4B・一般品質の成立へ換算しない。 8月PCE-2の`runtime binding exact0`／design-only状態と固定source refは当時の設計単位の記録として保持する。
 
 ```text
 cross-core contract:
@@ -161,9 +161,9 @@ corrected専用のprivate lineageに限り、`interpretation_correction_source`�
 | `emlis_observation_result_identity` | yes | same source commitment + same stageにboundされたbody-free identity | `observation_trace_id` / `trace_id` candidate | PCE-9C |
 | `emlis_observation_result_state` | yes | `terminal_success` or `terminal_nonadmitting` | `passed` -> success; other terminal public states -> nonadmitting candidate | PCE-2 / PCE-9C |
 | `question_need_decision_identity` | conditional | control lineage only。semantic sourceにしない | current decision commitment candidate | PCE-9C |
-| `supplemental_answer_identity` | conditional | refined only。originalと別identity | future question owner | PCE-9C |
-| `supplemental_answer_version` | conditional | refined supplemental schema/version | future question owner | PCE-9C |
-| `supplemental_answer_bundle_commitment` | conditional | refined bundle bodyへのcommitment | current stage-context commitment pattern | PCE-9C |
+| `supplemental_answer_identity` | conditional | refinedまたは実回答を明示選択したcorrected。originalと別identity | future question owner | PCE-9C |
+| `supplemental_answer_version` | conditional | 選択した実supplementalのschema/version。ANSWER0 correctedはnull | future question owner | PCE-9C |
+| `supplemental_answer_bundle_commitment` | conditional | 選択した実supplemental bundle bodyへのcommitment。ANSWER0 correctedはnull | current stage-context commitment pattern | PCE-9C |
 | `semantic_source_roles` | yes | stage matrixとexact一致 | new abstract owner | PCE-2 |
 | `lineage_control_roles` | yes | stage matrixとexact一致 | new abstract owner | PCE-2 |
 | `piece_generation_eligibility` | yes | explicit decision。missingをtrue扱いしない | future adapter decision | PCE-2 / PCE-9C |
@@ -225,11 +225,13 @@ invariant:
 
 ### corrected_observation（2026-11-15限定実装）
 
-- semantic rolesは`[original_input, interpretation_correction]`、control rolesは`[emlis_observation_result, ai_interpretation_target]`。実envelopeの本人説明roleは`USER_INTERPRETATION_CORRECTION`であり、QUESTION／ANSWERでもAI生成本文でもない。
-- `emlis_observation_result_identity`は最新の保存済みCORRECTED OBS UUIDへ固定。question identityとsupplemental identity／version／commitmentは全てnull。元`source_input_version`／`source_input_bundle_commitment`は従来の必須値を維持する。
-- 二入力訂正1..N件・ANSWER0・COMPLETED／FINALと、全訂正に対応する各受領／完了・prefix・最新OBSを対象にする。各説明の完全引用が異なる原入力の完全な節を指定し、既存意味ownerが単一REVISE／WITHDRAWとして解決できる範囲に限定する。全履歴を適用して残る原節と、まだ有効な本人置換節だけを既存作者へ渡し、原入力の有効節を1つ以上残す。問いの上限を訂正件数へ適用しない。
-- 元の七項目と本人説明envelope・絶対根拠は別々に保持し、AI訂正対象は出所・対象を示すprivate controlに留める。完全引用中の旧節・失効節を本人の新事実として連結しない。初期形式はshort_essay、既存の最大3body block・独立S7を維持する。一般自由文・置換節の再訂正・ANSWERとの混在・原有効節0等はpending／拒否で、一般訂正理解の完成ではない。
-- private expected source stateの`interpretation_correction`は、最新保存source・複数時だけの`prior_sources`・source_prefix_ref・全events・thread_dataを既存preview／visual／save境界で再照合するfenceである。これはbody-free lineageとは別のprivate検証材料で、公開DTO・ログへ出さず、`meaning_checkpoint(s)`と混在させない。各prefixはBASE＋その時点までの順序付き全訂正から導出する。各本人説明の記録時刻は前応答の完了以降とする。初回互換・SQL適用・通常反映の実結果は§9.69／9.71へ集約する。
+- ANSWER0のsemantic rolesは`[original_input, interpretation_correction]`、controlsは`[emlis_observation_result, ai_interpretation_target]`を継承する。実ANSWER1〜3件と、その後のproper訂正を明示選択した場合だけ、semantic rolesを`[original_input,supplemental_answer,interpretation_correction]`、controlsを`[emlis_observation_result,question_need_decision,ai_interpretation_target]`とする。本人説明は`USER_INTERPRETATION_CORRECTION`であり、ANSWER／原入力へ偽装しない。
+- `emlis_observation_result_identity`は最新CORRECTED OBS UUIDへ固定する。ANSWER0ではquestion／supplemental identity・version・commitmentは全てnull。併存時は最新の選択ANSWERと対応する実QUESTION eventのidentityを条件付きpairで持ち、private lineageにその回答version／commitmentを保持する。公開source-refの7keysは増やさず、既存`supplemental_answer_identity` queryで回答を明示選択する。元`source_input_version`／`source_input_bundle_commitment`は不変。
+- COMPLETED／FINALの全実回答prefixと、その後の全訂正prefix・各受領／完了・最新OBSを照合する。回答1〜3の最新を選び、読める独立ADDまたは原入力完全節へのREVISE／WITHDRAWを対象にする。先行有効REVISEは保持するが、独立した先行ADDの本文は加えない。読める先行ADDはshared compatibility検査を継承し、opaque先行ADDは履歴controlだけ、opaque選択回答は拒否する。
+- 各proper訂正は異なる原入力の完全な節を指定する単一REVISE／WITHDRAWに限定する。全履歴から残る原節・有効な本人置換・選択回答の有効部分だけを既存作者とS7へ渡す。原active節を1つ以上残し、short_essay・最大3body blockを維持する。問いの3回上限を訂正件数へ適用しない。一般自由文、回答／置換節への再訂正、既撤回節の復活、曖昧な原／回答対象、原active0／3block超過は拒否のまま。
+- 元七項目、実回答、各本人説明のenvelope・絶対scalar／UTF8根拠を別々に保持する。AI訂正対象とQUESTION本文はcontrolに留め、完全引用の旧側・失効節を本人の新事実へ戻さない。安全検査は原入力・全回答・全本人説明の全文を対象とし、有効な作者範囲だけへ狭めない。
+- private expected stateの`interpretation_correction`は最新source・複数時の`prior_sources`・source_prefix_ref・全events・thread_dataを持ち、併存時だけ同fence内に`answer_sources`／`answer_checkpoints`を追加する。外側の`meaning_checkpoint(s)`と混在させず、公開DTO／ログへ出さない。各prefixは実回答prefixと、その時点までの順序付き全本人訂正から独立導出する。各本人説明は直前応答の完了以降。3writerで最新選択回答・表示OBSと全履歴を再検査する。ANSWER0の既存field／bytes／identityは保持する。
+- API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 本契約差分はsource採用範囲の記録であり、新実4B・画像・本人利用の成功ではない。最終検証・通常適用と残差は[補助設計§9.72](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ集約する。
 
 同一saved inputのnormal／pre-question／refined／correctedの各preview／recordはexact1 stage lineageへbindする。後発の回答・訂正で既存Pieceのlineageを暗黙更新しない。
 

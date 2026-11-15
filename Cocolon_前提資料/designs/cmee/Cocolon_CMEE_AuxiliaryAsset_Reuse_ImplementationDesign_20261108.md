@@ -4136,3 +4136,57 @@ CLI生成の`20261114235041_piece_multiple_interpretation_corrections.sql`を通
 両serviceは既存main参照・auto deploy OFFを保持し、指定commitを明示して配置。反映後healthz／bootstrap200、未認証のIF／Saved／Piece source-ref／owner history401と既存private no-storeを確認。worker新instance pmtbvの起動・DB poll200・queue stats（ready0／running0／stale0／既存failed171）を確認した。両serviceの09:23:17〜09:24:29 JSTの観測窓でerror levelログ0。実job完了・既存failed解消・認証済み本人生成保存の成功とはしない。料金・設定・quota・model／weights／selector、build／配布は変更しない。
 
 STRUCTURE_MAP_DELTA_PRESENT：全体現在地・01A／01B・Piece／CMEE地図・PCE source契約・本設計・週次を同じ作業単位で差分更新。新service・作者・モデルprovider・table・column・rendererは追加しない。GPU／学習／再試行0、通常model selector OFFを維持。build／TestFlight／本人実機は保留。一般自由文・複雑な本人更新／回答併存、Emlis本人判断／時点、Piece編集品質、Analysis記録間関係／長履歴、本人利用・補助全体は未完。§9.70のWholeCanvas資源拒否とretained-card A候補探索拒否は今回未解決。次も週次§5を主枠とし、今回の限定保存接続を全体完成へ換算しない。
+
+
+<a id="piece-answer-corrections-normal-rollout-20261115"></a>
+## 9.72 2026-11-15 — 回答と、その後の本人訂正を同じPieceへ保ち、通常DB／APIへ反映
+
+### 今回の能力と境界
+
+週次§5.3／5.6を継続し、§9.71のANSWER0・複数訂正を完了済みとして引き継いだ。今回は自然応答で実際に完了した1〜3回答の後に、本人が二入力で訂正・撤回した場合を接続する。最新一回答を明示選択し、元情報の現在有効な節・先行の有効な原節置換・全適格本人説明を既存Piece作者と独立S7へ渡す。過去回答を全部連結しない。新service・作者・model provider・route・公開DTO keyは追加しない。
+
+- 実際のQUESTION／ANSWER／MEANING_UPDATEと各INITIAL／REFINEDの受領・完了・continue／stopを全round照合し、その後の全proper correction／CORRECTED OBSと時系列で接続する。元threadをREFINEDへ書き換えたり、回答や訂正を原入力へ偽装したりしない。最新CORRECTED OBSと最新ANSWERの両IDを、同じ7keys source-refに保持する。
+- correctedの本人意味rolesは混在時だけ `original_input / supplemental_answer / interpretation_correction`、制御rolesは `emlis_observation_result / question_need_decision / ai_interpretation_target`。QUESTION IDとANSWER IDは両方non-nullとし、ANSWER0では従来どおり両方null・旧2rolesである。最新本人説明への4keys locatorは保持し、private `interpretation_correction`内に実 `answer_sources`／全round `answer_checkpoints`を追加する。本文なしlineageや公開GETへ私的履歴を流さない。
+- ANSWERによるREVISE／WITHDRAWとproper説明は、それぞれ異なる原入力の完全な節を対象にする。先行の独立ADDは自動選択しない。既存共有readerが読めるADDは整合・矛盾照合へ残す。読み切れない**未選択の先行ADD**は履歴制御に限り、本人意味の完全読取へ昇格しない。読み切れない**選択最新ADD**は `piece_correction_selected_answer_pending`で拒否する。読取不成立を取り除いて矛盾を再試行する仕組みにはしない。
+- 同じ旧引用が別の普通の回答にも現れる場合、原入力を勝手に対象に選ばず曖昧として拒否する。ANSWER／置換節への再訂正、同原節の再更新、原active0、最大3block超過は対象外。原節nonempty・short_essay・既存tier／Safety／S7は維持し、訂正回数を問いの3回上限へ制限しない。
+- RNは最新回答と全本人説明を同時に表示し、「回答と説明を含めてピースを作成」から既存APIを使う。GET queryは既存の選択ANSWERだけ、期待OBS／stageはRN内の照合だけに使う。保存結果不明の復元でも両IDを保持し、同じOBSでも回答が変われば拒否する。
+
+### 完成物と検証
+
+架空の思考・行動二欄、実1〜3回答、資料を調べた原節への訂正／撤回を、3plan×3round×2操作の18作品でpreview→画像設定変更→明示保存→replay→新service非生成再読へ通した。選択回答「私は嬉しかった。」は本文に残り、未選択の先行回答「私は怖かった。」と失効した資料の原節、AI訂正対象文は本文に入らない。REVISEだけ「私は約束を守りたい」を保持する。別の原節へのANSWER REVISE／WITHDRAWとproper訂正／撤回の4構成も同じ保存一巡へ到達した。 先行ANSWER REVISE→最新ADD→別原節のproper WITHDRAWの補足1構成でも、先行の有効置換と最新ADDの両方が残り、保存／新reader再読・quota1・原source不変を確認した（local17.43秒、29case本体とは別）。本文・payload・保存recipe／renderer・hash一致、各quota1、原入力／Emlis thread／events不変を確認した。
+
+これは合成Auth／Emlis providerと隔離PGlite0.5.8、既存作者の結果であり、新実4B・一般編集品質・本人の稼働DB保存・新native画像ではない。架空18作品の全文と選別したartifact／hash・検証結果は既存trialの `piece_answer_corrections_normal_rollout_20261115.public.json`へ保存する。本人ID・token・private lineage／source checkpointは含めない。
+
+| 確認 | 実結果 |
+|---|---|
+| CPU・既存訂正／保存回帰 | 最終197 PASS、FAIL／SKIP0。旧74coreに新25を含む99、既存application26・SQL72との合計。別に実adapter→source-ref→normal previewの開通1件成功 |
+| 新application | 29 PASS：上記18＋4、選択漏れ／旧・別ANSWER／opt-out／旧OBSの5拒否、後続訂正によるstale保存拒否1、実HTTP GETの7keys／no-store1。最新DDLのfresh fixtureでも通常一巡1件成功。重複を固有数へ加算しない |
+| 新SQL | 7 PASS内で、3writer×27の81履歴改変transactionと、回答のない実履歴への偽mixed lineage3件を全てPIECE_CONFLICTで拒否。各失敗後Piece／quota不変。各writer正常対照・catalog／ACL／旧5引数primitiveも保持 |
+| RN local | 既存Piece13suite1511 PASS、重複しないReact関連4suite172 PASS。対象3suite266は重複するので加算しない。CIの確定結果は後記 |
+
+初回application期待値が既存作者の「私は、仕事…」の句読点に依存して1件失敗し、保持／除去する述語で照合して修復した。MD5事前条件追加時のCASE式の括弧漏れはfresh migration setupで失敗し、DDL適用前に修正した。最終DDLの新fixture適用・通常一巡とSQL7件が成功している。RN初回14失敗はTypeScript不在のsetupであり、CI固定5.2.2をscratchへ配置して1511件成功。Metro bundle検査はlocal成功へ含めない。全て実行前／隔離検証の記録で、通常DBで構文失敗・本人データ更新を起こした記録ではない。
+
+### 通常反映と残件
+
+実装API `24bc228dbf54abc983906323c0ae7d937fae1fd6`、対応RN `70527711e92821c0ae6f8704be5331f6c8011147`。API13path／RN7pathのremote内容と親commit／treeをlocalに照合した。CLI生成migration `20261115005742_piece_answer_and_interpretation_corrections.sql`（SHA256 b539a571c5d3f2bce417aba8a2bfcc0c6eddb9ed43ef11c93f74cbe68cace139）を通常DBへ一回適用し、hosted version20261115011424／name=piece_answer_and_interpretation_correctionsを確認した。
+
+既存preview／visual／saveのcorrected armへ実ANSWER履歴の照合を追加し、2CHECKだけにmixed variantを追加。no-answer旧分岐へ偽mixed lineageを付ける経路は分岐内guardで拒否し、ANSWER IDと原入力IDの分離、stop TERMINALが最初の訂正本人source記録以前である時刻条件も維持する。3writerの許可した宣言・global guard・corrected armの3差分だけを逆投影すると、適用前定義MD5に全一致。適用後MD5はpreview c4dd33b628df9cf6e2672a7d3edfd6bc／visual c3b5eda55f876864351d6dc8bb029628／save d2fbb93975391cbe6f954a8299c51c46でfresh PGliteと一致する。旧5引数primitiveは不変。署名・SECURITY DEFINER・search_path・ACL、対象4tableのcolumn／RLS／policyを保持し、新table／column・quota変更0。全35CHECK validated、security advisor前後7group・新規0、既存Piece行数も不変。本人行の読取・書込0。
+
+| 固定sourceのCI | 確定結果 |
+|---|---|
+| API Piece | 24bc228d／run43662053792／job132653307233、push・attempt1、41step全success。27pytest invocationで延べ5749 PASS、FAIL／ERROR／SKIP0、420 deselected。最大の2699件は724.56秒。重複suiteを固有件数へ換算しない |
+| API Analysis | 同24bc228d／run43662053793／job132653307125、attempt1、全19step success。6invocationで4865 PASS＋12995 subtests PASS、FAIL／ERROR／SKIP0、194 deselected |
+| RN | 70527711／run43661799495、attempt2で全6job success。JavaScript1511＋365＝1876 PASS、FAIL／SKIP／cancel0。iOS nativeは既存129＋v9_46＋V4_20の195固有assert、AR04 bitmap4・小数24も成功。legacy97は129の部分集合。新しい混在作品のnative画像成功へは換算しない |
+
+RN attempt1は5job成功後、iOS source job132652535782が10分上限で取消。standaloneアプリのsimctl launch開始後にmain_enteredが出ず、本文検証へ未到達だった。native source／harness／workflowが先行成功版から不変であることを確認し、該当1jobだけ一回再実行した（API両runのrerun／dispatch0）。attempt2のiOS job132655920101はmain起動・全検査・PNG原本書出し・artifact保持までsuccess、他5jobは元成功時刻の結果を継承。起動受渡し不成立が有力だが根本原因の確定とはしない。10分上限・8秒製品条件・画像判定を緩和せず、初回の取消とPNG未生成によるupload失敗も記録へ残す。canvas／exportの統合実行工程はpath条件でskipされており、全画像合格を主張しない。
+
+| 通常service | 指定版の終状態 |
+|---|---|
+| API | dep-dbsgn8t6e07s739qfk50、2026-11-15 10:34:04 JST Live、commit24bc228dbf54abc983906323c0ae7d937fae1fd6 |
+| worker | dep-dbsgnet6e07s739qg5a0、同10:33:28 JST Live、同24bc228d |
+
+両serviceの既存main参照・auto deploy OFF、rootDir／runtime・build／start commandを保持して指定commitを配置した。配置後10:34:39〜10:34:46 JSTにhealthz／bootstrap200、未認証IF／Saved／Piece source-ref／owner historyの4GETは401と既存no-storeを確認。worker新instance ndnvrの起動・DB poll200とready0／running0／stale0／既存failed171を確認した。10:34:05〜10:36:07 JSTの両service error levelログは0。新job完了・既存failedの解消や、認証済み本人の生成保存成功を主張しない。
+
+通常DB／API／worker反映と対応RN sourceの限定機能単位を完了。実認証による本人一巡、build／TestFlight／本人実機は別の未完として保留する。
+
+STRUCTURE_MAP_DELTA_PRESENT：全体現在地・01A／01B・Piece／CMEE地図・PCE source契約・本設計・週次を差分更新する。通常model selector OFF、新GPU／学習0、build／TestFlight／本人実機保留を維持。一般自由文・未対応の複雑な本人更新、回答／置換節への再訂正、Emlis本人判断／時点、Piece編集品質、Analysis記録間関係／長履歴、本人利用・補助全体は未完。旧WholeCanvas4Mi資源拒否とretained-card A候補探索拒否は今回未解決。次も週次§5を主枠に、本人更新が実返答・作品・図へ届く残りを続ける。

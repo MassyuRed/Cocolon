@@ -1,4 +1,4 @@
-> **11/15最新：複数の二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 異なる原入力の完全な節へのREVISE／WITHDRAWを全履歴から導出し、先の本人訂正を失わず、残る原節と有効な本人置換だけを既存作者・独立S7へ渡す。3plan×4構成の12作品で保存・非生成再読、各quota1・原入力／Emlis不変。最新OBSと各prefix・受領／完了を3writerで照合。API／worker d10c3f86双方Live、RN明示選択はb142969e。一般自由文・ANSWER混在・置換節の再訂正、編集品質・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [実装・検証・通常反映§9.71](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-multiple-corrections-normal-rollout-20261115)。
+> **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -4431,3 +4431,14 @@ codeのprefixは`ai/services/ai_inference/`、CMEE側はその下の`cocolon_mea
 **追加CI観測（source b2ac790）：** [既存RN CI43634012760](https://github.com/MassyuRed/Cocolon/actions/runs/43634012760)のRN契約は1,790件成功。一方、iOS V4 native検査は20件中1成功／19失敗でworkflow全体はfailureとなった。今回の通常DB／API能力の検証と区別し、このheadの画像合格は未認定・原因未解決とする。過去commitの限定画像成功記録は維持する。native source変更0・再実行0、build／TestFlight／本人実機保留。失敗直接根拠・artifact・変更path比較は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
 STRUCTURE_MAP_DELTA_PRESENT：共有Emlis有効意味から既存Pieceのsource／plan／SQL保存境界への受渡し拡張。新作者・新source保存基盤・公開wire・RN rendererを追加しない。build／TestFlight／本人実機保留を継承。
+
+
+## 2026-11-15 — 実回答と、その後の本人訂正を同じPieceへ明示選択
+
+実ANSWER1〜3件を持つ完了natural threadで、選択した最新回答と、その後のproperな本人訂正を現在のCORRECTED OBSへ束縛する。各回答／訂正は原入力とは別の実envelope・元scalar／UTF8根拠を保持する。最新回答は既存readerで読める独立ADD、または原入力の完全な節へのREVISE／WITHDRAWを対象にする。先行REVISEの有効置換は保持し、先行独立ADDの本文は作者へ連結しない。読める先行ADDは既存shared compatibility検査へ残す。opaqueな先行ADDは履歴controlだけ、opaqueな選択最新回答は拒否する。訂正は全回答の後で、異なる原入力の完全な節への単一REVISE／WITHDRAWに限定する。回答と原入力の対象が曖昧な場合、既撤回節の復活、回答／置換節への再訂正は拒否する。
+
+併存時のsemantic rolesは`[original_input,supplemental_answer,interpretation_correction]`、controlsは`[emlis_observation_result,question_need_decision,ai_interpretation_target]`。公開source-refは既存7keysのまま、corrected stageに実QUESTION eventと明示選択した最新ANSWERのidentityを条件付きpairで持つ。最新CORRECTED OBSも同時に固定する。privateな`answer_sources`／`answer_checkpoints`はproper訂正fenceの内側に保持し、公開DTOや外側の`meaning_checkpoint(s)`へ混ぜない。ANSWER0のfield／bytes／identityは追加fieldなしで継承する。
+
+原七項目・原active nonempty・最大3body block・short_essay・権利／quota・既存唯一作者と独立S7を維持する。回答上限1〜3を訂正回数の上限へ流用しない。原入力・全実回答・全本人説明を全文safety検査し、AI対象引用・質問本文・失効節・選択外ADDを作者の事実へ戻さない。RNは回答と全説明を表示し、GET前・取得中・preview・結果不明save復元で最新ANSWERと最新OBSの両identityを保持する。既存の補助なし／回答だけ／ANSWER0訂正の経路は維持する。
+
+API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 実4B・新native画像・本人端末の成功へ換算しない。検証・通常適用の終状態は[補助設計§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ集約する。STRUCTURE_MAP_DELTA_PRESENT（既存corrected sourceへの実回答partition・条件付きpair接続）。
