@@ -1,0 +1,139 @@
+{
+  "schema": "cocolon.analysis.actual.independent_meaning_review.v1",
+  "state": "A4_NOT_ADOPTED_B4_CONDITION_NOT_SATISFIED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "actual_sha256": "15deb23615d562e0c49a05167bb9bbad2c345bedaa2a21779e88499d134b7c2a",
+  "actual_bytes": 116563,
+  "original_archive_sha256": "a57be7031e08fc11956bd47b2437b61ac42bb67a0f4e5429a1761d6a412f4763",
+  "original_archive_bytes": 78799,
+  "original_archive_members": 13,
+  "actual_and_execution_exact_remote_byte_match": true,
+  "private_evidence_owner": "Cocolon_CMEE_ConcreteReading_20261115.zip",
+  "private_evidence_library_file_id": "libfile_fde3_f-0b6a62903bc08191a00a9efbe2f4250a_2f7470f963808191aaebf050935e72de",
+  "source_api_commit": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "execution_api_commit_label": "dca20231ad1791c07a5011d6905340c78d4de0b3",
+  "execution_api_commit_label_is_normal_deployment": false,
+  "source_core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "A3_actual_sha256": "e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb",
+  "same_A3_messages_material_guard_refs_and_input_tokens": true,
+  "reviewed_layers": [
+    "original_material_all_fields",
+    "all_acquisition_raw",
+    "book_all_projection_nodes_edges_overview_unknowns_and_text",
+    "lighting_incomplete_raw_and_failure"
+  ],
+  "independent_read_only_review_completed": true,
+  "root_review_agrees": true,
+  "conditions": [
+    {
+      "name": "book_club_two_day",
+      "state": "GENERATED",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 2,
+        "processed_count": 2,
+        "profile": "cumulative.v1",
+        "source_count": 2,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "wire_http": 200,
+      "finish_reason": "stop",
+      "consumer_failure_status": null,
+      "cumulative_received_seconds": 109.85527718812227,
+      "raw_chars": 2708,
+      "raw_utf8_bytes": 5360,
+      "raw_sha256": "b9f6ef8f596557e3f2e05656b0b66fcddf845566486c4cd7395a2f289fec55ff",
+      "complete_projection_and_text_present": true
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "state": "NOT_GENERATED",
+      "coverage": null,
+      "wire_http": 200,
+      "finish_reason": "length",
+      "consumer_failure_status": 503,
+      "cumulative_received_seconds": 321.98308742325753,
+      "raw_chars": 5273,
+      "raw_utf8_bytes": 10999,
+      "raw_sha256": "12740e669aaa3dcebe969596cb075ebc8ceb3521893a13372cd8387b4f491234",
+      "complete_projection_and_text_present": false
+    }
+  ],
+  "acquisition_seconds": 321.98543121805415,
+  "restore_inclusive_seconds": 374.44939384795725,
+  "max_model_calls": 2,
+  "new_model_calls": 2,
+  "transferred_new_files": 2,
+  "transferred_new_bytes": 68581,
+  "training": 0,
+  "retry": 0,
+  "base_model": "cocolon-qwen3.5-4b-analysis-base-851bf6e-candidate",
+  "analysis_adapter_enabled": false,
+  "analysis_base_marker_count": 2,
+  "findings": {
+    "book_club_two_day": [
+      {
+        "location": "n1/n3.unknowns",
+        "code": "PAST_ROOM_USAGE_UNKNOWN_CONFLICTS_WITH_EXPLICIT_NOT_YET_HELD_EVENT"
+      },
+      {
+        "location": "n1.unknowns",
+        "code": "PHOTO_BASED_SELF_ASSUMPTION_SHIFTED_TO_COORGANIZER_RESERVATION_TARGET"
+      },
+      {
+        "location": "n3.unknowns",
+        "code": "ROOM_CHANGE_UNKNOWN_NOT_COHERENT_WITH_LATER_CONFIRMATION_AND_REVISED_NOTICE"
+      }
+    ],
+    "lighting_prior_and_later": [
+      {
+        "location": "wire raw",
+        "code": "INCOMPLETE_JSON_WITH_REPEATED_NODE_CONTENT"
+      },
+      {
+        "location": "n3_through_partial_n11",
+        "repeated_title_count": 9,
+        "code": "REPEATED_SAME_BUDGET_TIME_NODE"
+      },
+      {
+        "location": "consumer",
+        "code": "NON_STOP_RESPONSE_REJECTED_WITHOUT_PROJECTION_OR_TEXT"
+      }
+    ]
+  },
+  "improvements": [
+    "book_later_notice_sending_and_one_acknowledgement_retained",
+    "book_all_read_unknown_separated_from_known_one_reply",
+    "book_chair_inquiry_unknown_and_event_not_yet_held_retained",
+    "A3_venue_reply_and_self_noninvolvement_not_reverted_to_unknown_in_this_book_output"
+  ],
+  "meaning_limits": [
+    "lighting_incomplete_raw_is_not_a_completed_map_or_accepted_meaning_comparison",
+    "book_waiting_phrase_and_disagreement_label_alone_are_not_rejection_reasons",
+    "adapter_only_cause_or_base_solution_not_established",
+    "teacher_gap_not_established_as_failure_cause",
+    "stop_cause_not_inferred_from_length_label_alone"
+  ],
+  "b4_files_transferred": true,
+  "b4_executed": false,
+  "b4_root_exists": false,
+  "b4_authorization_condition_satisfied": false,
+  "b4_scope_reassignable": false,
+  "sql_save": 0,
+  "actual_non_generation_sql_reread": 0,
+  "normal_rollout": 0,
+  "current_provider_restored": true,
+  "current_provider_pid": 131491,
+  "current_health": 200,
+  "candidate_process_absent": true,
+  "normal_api_worker_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "database_latest_migration": "20261115011424",
+  "worker_stale_seconds": 900,
+  "build_testflight_device": "ON_HOLD",
+  "work_unit_closed": false,
+  "auxiliary_work_complete": false,
+  "product_acceptance": false,
+  "next_work": "Existing meaning author still needs coherent later-known/event-state integration and non-repeating completion. No new prompt/controller/learning/GPU trial has been prepared or executed. A4 consumed; conditional B4 cannot be used for another trial."
+}
