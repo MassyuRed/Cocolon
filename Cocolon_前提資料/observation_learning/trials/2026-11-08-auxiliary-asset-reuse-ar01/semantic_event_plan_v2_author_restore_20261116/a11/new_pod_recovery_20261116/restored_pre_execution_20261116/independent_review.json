@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "driver AST differs only in HELPER_SHA",
+    "helper differs from reviewed migration stage only in actual PROOF_SHA and PYTHONPATH_SUFFIX_SHA",
+    "original PID1106/start98995881 matches actual restored baseline",
+    "all 8 payload hashes bound; source ZIP and all sources/cases/plans unchanged",
+    "fresh A5000SM8.6 kernel proof, 7 parities, causal tested, 2warm1752, dependency tree252 unchanged",
+    "A11 9responses/1800s and conditionalB11 11responses/1020s, once and exact restoration unchanged",
+    "no environment or authentication secret values exported"
+  ],
+  "model_calls": 0,
+  "new_model_quality": "UNASSESSED",
+  "normal_rollout": 0,
+  "reviewer": "execution_review",
+  "scope_sha256": "6317b2676984386c60716c7698abfe10072b284b06e988c18872749174aac29f",
+  "source_git_head": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "state": "PASS_INDEPENDENT_NEW_POD_EXECUTION_REBIND_NOT_MODEL_QUALITY",
+  "training": 0
+}
