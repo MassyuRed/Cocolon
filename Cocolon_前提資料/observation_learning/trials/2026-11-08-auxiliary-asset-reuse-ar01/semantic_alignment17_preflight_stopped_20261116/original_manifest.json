@@ -1,0 +1,45 @@
+{
+  "state": "A5_PREFLIGHT_STOPPED_BEFORE_PROVIDER_STOP",
+  "provider_pid": 131491,
+  "provider_start_ticks": "235250260",
+  "health": 200,
+  "original_model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+  "original_adapter_weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+  "model_calls": 0,
+  "training_updates": 0,
+  "provider_stops": 0,
+  "retry": 0,
+  "B5_root_exists": false,
+  "execution_json_exists": false,
+  "baseline_exists": false,
+  "fit_exists": false,
+  "after_exists": false,
+  "copied_source_files": 97,
+  "copied_source_matches": true,
+  "root_files": {
+    "plan.json": {
+      "bytes": 356925,
+      "sha256": "58a1c90dab2f117c13d1dddb3ae58d5cc85ca1d446538858e0eea14d1cfd0363"
+    },
+    "driver.py": {
+      "bytes": 19283,
+      "sha256": "e2a794090b8d412eef75354eec5a974d31f7981108c4f715381b35bcfd2e600c"
+    },
+    "native.py": {
+      "bytes": 63175,
+      "sha256": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562"
+    },
+    "A3.actual.result.json": {
+      "bytes": 130017,
+      "sha256": "e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb"
+    },
+    "kernel-proof.json": {
+      "bytes": 6936,
+      "sha256": "28908c29ee066397bcc1a3326eefe41453ce159c11a90eec06f691932fc7675e"
+    },
+    "preflight.log": {
+      "bytes": 1175,
+      "sha256": "f5e22ada352d04e42fd283e294b950282f230c5657efe1edda2026019285bfff"
+    }
+  }
+}

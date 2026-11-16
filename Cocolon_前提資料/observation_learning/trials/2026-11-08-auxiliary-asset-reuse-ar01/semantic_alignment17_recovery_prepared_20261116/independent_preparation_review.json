@@ -1,0 +1,28 @@
+{
+  "state": "INDEPENDENT_RECOVERY_PREPARATION_NO_SOURCE_BLOCKER_NOT_REMOTE_PREFLIGHT_PASS",
+  "files": [
+    {
+      "name": "full12_sql_alignment17_recovery_once.py",
+      "bytes": 34306,
+      "sha256": "f36cc0eb4f1cbd8f6ab73c7f18abcdc6d4bfb16a39a43f0cf8dd52472ab7f8b4",
+      "pod_path": "/workspace/full12_sql_alignment17_recovery_once.py"
+    },
+    {
+      "name": "semantic_alignment17_recovery_once.py",
+      "bytes": 12236,
+      "sha256": "585343e63ac7694156a97bd28558d319c6dd2893d394dcac128ccc208214a78f",
+      "pod_path": "/workspace/semantic_alignment17_recovery_once.py"
+    }
+  ],
+  "findings": [
+    "A5 original archive3entries1657B CRC/bytes/hash and declared failure position independently matched",
+    "Original PID/start/health200/120u unchanged, model/training/provider stop0, B5 absent; remote token validation incomplete",
+    "A6 all modes share existing client dependency reference; inference DEPS remain absent from training",
+    "Two CPU import probes and existing full preflight included in started+1620/1800 budgets, all before provider stop",
+    "B6 changes only fresh A6/B6 locators; all functions, embedded driver and completion conditions unchanged",
+    "Old payload/material/driver unchanged, new2files46542B match frozen scope; no new execution or transfer"
+  ],
+  "remote_A6_preflight": 0,
+  "new_model_calls": 0,
+  "training": 0
+}

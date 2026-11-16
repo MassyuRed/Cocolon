@@ -1,4 +1,4 @@
-> **11/16最新：A4の意味・完結未達を継承し、既存作者の教材整合と一回の追加学習案を準備。** 旧9＋新2題材の4形ずつ＝17教材・34更新、前2＋候補後5の最大7応答／復元30分のA5と、候補後5件の独立全文照合が適切な場合だけ新12LEAF＋MERGE最大13応答／復元17分のB5。新4file420016byteは未送付・未実行、新学習／生成0。現行schema・引用・受口・EOS列と実行範囲の非生成確認を完了したが、意味改善は未実証。A3／A4消費済み・B3／B4条件不成立を維持し、新学習は別の明示承認待ち。同raw保存再読・通常反映、本単位／補助全体は未完。通常24bc228d・DB20261115011424・worker900、配布保留を維持。 詳細[§9.91](#analysis-semantic-alignment17-prepared-20261116)。
+> **11/16最新：承認済みA5は提供停止前のCPU照合で停止、生成・学習0。** 起動処理の既存API依存参照漏れでfastapi importに失敗し、元PID131491/start235250260/health200・120u重みを維持。B5は前提不成立で未実行、A5一回は消費済み。原ZIP/ログ/receiptのCRC・全byte/SHAと停止位置を独立照合した。全段階の既存依存参照を修復し、新2launcher46542byteのA6（同17教材・34更新/最大7応答・復元30分）と条件付きB6（新12LEAF+MERGE最大13応答・復元17分）を準備、未送付/未実行・新承認待ち。教材/driverは無変更・再送なし。通常24bc228d・DB20261115011424・worker900、配布保留、本単位/補助全体未完を維持。 詳細[§9.92](#analysis-alignment17-preflight-stop-recovery-20261116)。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.91: A4 consumed/B4 condition unmet; aligned17 synthetic forms/34updates + at most7 native replies A5(restore1800s), conditional fresh12LEAF+MERGE B5(restore1020s) prepared. Fourfiles420016bytes not transferred; new explicit learning/GPU approval required. Offline preparation only, model0/training0; same-raw SQL save/reread and normal rollout unfinished. Normal24bc228d/DB20261115011424/worker900;build/device deferred."
+current_next: "Section9.92: approved A5 launch consumed at CPU preflight fastapi import failure before provider stop/model/training; B5 unexecuted, not reassignable. Original PID131491/start235250260/health200/120u unchanged. New2launchers46542bytes A6/B6 prepared, existing plan/driver not resent; new explicit approval required. A6max34updates/7replies/restore1800s; conditionally B6fresh13/restore1020s. Normal24bc228d/DB20261115011424/worker900; same-raw save/reread/normal rollout unfinished, build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1739,6 +1739,30 @@ STRUCTURE_MAP_DELTA_NONE：今回の実行／原本回収／人の全文review�
 
 通常API/worker24bc228d双方Live・DB最新20261115011424（38migration）はfresh read-only確認、本人記録読取/設定変更0。worker900・selector/研究重み未採用、build/TestFlight/本人実機保留を維持する。三中核の本人更新・意味活用・累積/IF/Saved・通常反映の四仕事、全体の未完範囲、補助全体未完と正式受入れ未認定は変更しない。
 
+
+<a id="analysis-alignment17-preflight-stop-recovery-20261116"></a>
+## 9.92 11/16 — A5はCPU照合の依存参照漏れで停止、全段階の参照を修復して別一回を準備（未実行）
+
+Mashの明示承認後、新4file420016byteを同Podへ送付し全SHA一致、元提供health200・A5/B5root未作成を確認してA5を一回起動した。既存作者の原入力を再導出する`validate_pack→prepared_row→prepare_semantic_map→analysis_cumulative_service:22`で`fastapi.HTTPException`のimportが失敗した。A5 launcherの`training_env`を継承したCPU環境には、旧A3/B5が参照していた既存client-runtime-depsへの接続がなかった。私の起動処理の参照漏れであり、教材・EOS・モデル能力の失敗ではない。前回の独立source確認でもこの依存を見落としていた。
+
+launcher83行のpreflight return code assertで終了し、execution.json作成・元提供停止・baseline/train/afterの前で停止した。**生成/学習/提供停止/再試行0、A5一回は消費済み、B5は前提不成立で未実行・転用不可。** remote全19prompt/17fullのHF列/EOS/mask検証は未完で、§9.91のlocal準備成功とは分ける。元PID131491/start235250260/health200と120u weights ecbdd0d1を保持、launcher132251終了、execution/baseline/fit/afterとB5root不在を確認。原ZIP3entry1657byte/SHA39792077f007efff264df8fc6d0a919ff6548b042d3236f3a6104ea69ce47b2c、元preflight log f5e22ada…5bfff/launch log/receiptを回収し、CRC・全byte・metadata/停止位置を独立照合した。原本は既存引継ぎに無修補保存、[公開の実績とhash](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_alignment17_preflight_stopped_20261116/observed_result.json)。未記録の実行全体秒数は補わない。
+
+不足したAPI依存は同Podの`/workspace/semantic-history-20261115-once/client-runtime-deps`に既存配置済みで、新install不要。408file/tree07c2ac87f67cdcc531966906085813fe125b8efbda81d2ab7907d0c200de1b41、FastAPI0.116.1/Pydantic2.11.7/httpx0.28.1等、Torch/transformers/peft/accelerate/safetensors/tritonのpackage無しをread-only確認した。
+
+**新しい別一回の準備：2launcher・46542byte、未送付/未実行・新しい明示承認待ち。** [修復準備README/固定scope](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_alignment17_recovery_prepared_20261116/README.md)。A5の既存4file/failed root/原本を変更せず、教材plan356925byte SHA58a1c90d・driver19283byte SHAe2a79409は同Podの送付済み原本を照合して再利用、再送なし。新A6/B6は専用fresh rootに分離する。R10.3の一ファイル機械修正例外として二ファイルを扱わず、両launcherの正確な新範囲を承認対象へ含める。
+
+| 修復・範囲 | 確定した新準備 |
+|---|---|
+| A6 launcher | semantic_alignment17_recovery_once.py 12236byte SHA585343e63ac7694156a97bd28558d319c6dd2893d394dcac128ccc208214a78f。既存client依存をpreflight/baseline/train/afterの共通参照へ接続、推論DEPSはbaseline/afterだけ、学習へ追加しない |
+| CPU確認 | 提供停止前に元環境/client参照環境のML6module実import元/versionを各30秒以内で照合→既存driver full preflight。追加CPU確認も全体1620/1800秒枠内。新環境の実確認は未実行 |
+| A6 | 同17教材/最大34更新、未学習前2＋候補後5の最大7応答、一回。更新600秒/生成累積900秒/作業1620秒/復元込み1800秒。教材/driver/語り方/比較対象/元重み・学習ロジックは不変 |
+| B6 launcher | full12_sql_alignment17_recovery_once.py 34306byte SHAf36cc0eb4f1cbd8f6ab73c7f18abcdc6d4bfb16a39a43f0cf8dd52472ab7f8b4。旧B5からfresh A6/B6root locatorだけ変更、全関数/埋込driver/制約/復元は不変 |
+| B6条件 | 候補後5件の全原文/raw/図/本文/unknownの独立照合が適切な場合だけ、新12LEAF+MERGE最大13応答、一回・復元込み1020秒。新規学習/追加モデル取得/再試行なし |
+
+新2Python compile・B6全関数/埋込driver維持・fresh root整合・既存plan/driverとclient参照hash、全2file46542byte/両SHAと独立source reviewを確認。これをremote preflight成功や実品質改善にしない。新A6/B6送付/起動/学習/生成0。既存認証情報と起動環境は同Pod内の認証/元状態復元だけに使い、外部へ出さない。
+
+B6全13rawも独立照合後、適切な同じ最終rawを一回SQL保存→別process非生成再読→通常native/model identity/map・IF境界/自然・Piece profile/API・worker整合までが未完。source7hash/全12源泉/取得前plan75daa8/SQLcheckpoint801ba068/guard a000deb9/as_ofを変えず旧raw再束縛なし。通常API/worker24bc228d双方Live・DB38migration/最新20261115011424をfresh read-only確認、本人記録読取/設定変更0。worker900・selector/研究重み未採用、build/TestFlight/本人実機保留、四仕事/第11回§5、本単位/補助全体/正式受入れ未完を維持する。
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
@@ -1794,9 +1818,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/16・17教材の有限一回を準備、新承認待ち）
+### 11.2 現在の進行欄（11/16・A5はCPUで停止、依存参照修正版は新承認待ち）
 
-全体主枠は§9.54／第11回§5。§9.72の回答・本人訂正→Piece・通常DB/API反映は完了済み。現在の未完単位は長履歴の実意味改善から同raw実保存再読・通常反映まで。§9.90のA4は読書会の意味未達と照明の反復・未完を残し、B4条件不成立。§9.91で既存120uを初期値に旧9＋新2題材4形の17教材を現行出力へ整合し、34更新・比較最大7応答/復元30分A5、独立意味照合が適切な場合だけ新13応答/復元17分B5の4file420016byteを準備した。非生成確認済みだが新送付/学習/生成0、追加学習は新しい明示承認待ち。A3/A4消費済み、B3/B4を転用しない。通常24bc228d/DB20261115011424・worker900・配布保留、本単位/補助全体未完を維持する。
+全体主枠は§9.54/第11回§5。§9.72の回答・本人訂正→Piece・通常DB/API反映は完了済み。現在の未完単位は長履歴の実意味改善から同raw実保存再読・通常反映まで。§9.92で承認済みA5を起動したが、既存API依存の参照漏れによるfastapi import失敗でCPU preflight停止。提供停止/学習/生成/再試行0、元PID131491/health200・120uを保持、A5一回は消費済み・B5は未実行。全段階の依存参照を修復した新2launcher46542byteのA6/B6を準備、未送付/未実行・新承認待ち。同じ17教材/34更新/最大7応答/復元30分と、独立全文意味照合が適切な場合だけ新13応答/復元17分。教材/driverは無変更・再送なし。通常24bc228d/DB20261115011424・worker900・配布保留、本単位/補助全体未完を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1809,13 +1833,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | §9.72の24bc228d API／worker双方Live・migration適用・対応RN sourceとCI成功を継承。§9.73候補は通常未反映 | 起動・queue poll・未認証HTTPを本人生成保存や実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
-現在の実原文・raw照合根拠は§9.90、新しい有限一回の準備と次の実行範囲は§9.91。A5の技術完了を意味採用にせず、候補後5件の独立全文照合が適切な場合だけB5、さらに全13rawを独立照合して同raw実保存再読・通常反映へ進む。正式受入れ・補助全体完了は未認定。
+現在の意味照合原本は§9.90、17教材の定義は§9.91、最新停止原本/原因と新しい別一回の準備は§9.92。A5未生成を未消費へ戻さずB5を転用しない。新A6後5件の独立全文照合が適切な場合だけB6へ進み、全13rawの独立照合→同raw保存再読→通常整合まで進める。正式受入れ・補助全体完了は未認定。
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：第11回§5を維持し、§9.91の17教材と有限一回を新承認後に進める。** 既存120uから17行/最大34更新、未学習前2＋候補後5の最大7応答A5（復元込み30分）を一回。候補後5件の全原文/raw/図/本文/unknownの独立照合が適切な場合だけB5新12LEAF＋MERGE最大13応答（復元込み17分）一回へ進む。4file420016byteの新学習/GPU範囲は具体化済み・未送付/未実行で、新しい明示承認が必要。A4の学習なし一回は消費済みで流用しない。上限/例外/不適切な意味で停止した場合は元提供復元・原本保存後に未完として残し、無承認で追加学習/再試行しない。
+**11/16・現在の再開先：第11回§5を維持し、§9.92の依存参照修正版A6/B6を新しい明示承認後に進める。** 承認済みA5はCPU preflightでfastapi import失敗、提供停止/生成/学習0だが起動一回は消費済み。B5は前提不成立で未実行、failed root/旧原本/旧コードを保持し転用しない。元PID131491/start235250260/health200・120uは維持。新2launcher46542byteは未送付/未実行で、同Podに既存の教材/driverは再送しない。全段階の既存client参照を整合し、新しいA6/B6 rootで別一回に分離した。追加CPU確認も同じ期限内であり、A6は同17教材/最大34更新・最大7応答/復元30分、独立全文意味照合が適切な場合だけB6新12LEAF+MERGE最大13応答/復元17分。再試行/追加依存取得なし、認証/起動環境は同Pod内だけで使う。
 
-A3/A4実原本を保持しB3/B4未実行、core b489・source7hash・全12源泉・取得前plan75daa8・SQLcheckpoint801ba068/guard a000deb9/as_ofを変えず旧rawを再束縛しない。B5全13rawも独立照合後、適切な同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・既存自然/Piece profile・API/worker整合まで進め、該当単位を閉じる。通常24bc228d/DB20261115011424・worker900・selector/研究重み未採用、build/TestFlight/本人実機保留を維持する。今回の非生成準備を実品質改善・通常反映・本単位/補助全体完了へ換算しない。
+A6後5件の全原文/raw/図/本文/unknownを独立照合し、適切な場合だけB6へ進む。さらにB6全13rawの独立照合後、適切な同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF境界・既存自然/Piece profile・API/worker整合まで進め該当単位を閉じる。上限/例外/不適切な意味は停止・元提供復元・原本保全し無承認で追加実行しない。core b489/source7hash/全12源泉/取得前plan75daa8/SQLcheckpoint801ba068/guard a000deb9/as_ofを変えず旧raw再束縛なし。通常24bc228d/DB20261115011424・worker900・selector/研究重み未採用、build/TestFlight/本人実機保留、本単位/補助全体/正式受入れ未完を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 

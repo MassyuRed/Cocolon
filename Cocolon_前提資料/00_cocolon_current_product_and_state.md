@@ -1,4 +1,4 @@
-> **11/16最新：A4の意味・完結未達を継承し、既存作者の教材整合と一回の追加学習案を準備。** 旧9＋新2題材の4形ずつ＝17教材・34更新、前2＋候補後5の最大7応答／復元30分のA5と、候補後5件の独立全文照合が適切な場合だけ新12LEAF＋MERGE最大13応答／復元17分のB5。新4file420016byteは未送付・未実行、新学習／生成0。現行schema・引用・受口・EOS列と実行範囲の非生成確認を完了したが、意味改善は未実証。A3／A4消費済み・B3／B4条件不成立を維持し、新学習は別の明示承認待ち。同raw保存再読・通常反映、本単位／補助全体は未完。通常24bc228d・DB20261115011424・worker900、配布保留を維持。 詳細[補助設計§9.91](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-alignment17-prepared-20261116)。STRUCTURE_MAP_DELTA_NONE：教材と隔離実行準備、商品source／公開contract追加なし。
+> **11/16最新：承認済みA5は提供停止前のCPU照合で停止、生成・学習0。** 起動処理の既存API依存参照漏れでfastapi importに失敗し、元PID131491/start235250260/health200・120u重みを維持。B5は前提不成立で未実行、A5一回は消費済み。原ZIP/ログ/receiptのCRC・全byte/SHAと停止位置を独立照合した。全段階の既存依存参照を修復し、新2launcher46542byteのA6（同17教材・34更新/最大7応答・復元30分）と条件付きB6（新12LEAF+MERGE最大13応答・復元17分）を準備、未送付/未実行・新承認待ち。教材/driverは無変更・再送なし。通常24bc228d・DB20261115011424・worker900、配布保留、本単位/補助全体未完を維持。 詳細[補助設計§9.92](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-alignment17-preflight-stop-recovery-20261116)。STRUCTURE_MAP_DELTA_NONE：起動依存参照の修復準備、商品source/公開contract追加なし。
 
 
 
