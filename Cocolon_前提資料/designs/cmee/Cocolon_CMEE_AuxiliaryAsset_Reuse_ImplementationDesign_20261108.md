@@ -1,4 +1,6 @@
-> **11/16最新：A10失敗原本から既存v2作者へ完成正例を復元し、候補API7bb605bへ反映。実4B改善・通常反映は未確認。** 確認待ち→翌日確認済みと、別人の残る未確認を分離した入力／完成JSON例を既存指示定数内へ戻した。定数以外の製品ASTはb14960eと一致、原5入力／guard／固定時点／同12記録24欄・同6組を保持。最終33件成功、送信時最大LEAF16,379byte。247sourceのremote blob一致と既存実行コードの材料読込、既存finalizerの8source／SQL原本4件の非生成束縛を確認。新scope6c2c2a51・新6file3,039,282byte／同Pod内copy3file、全9file3,139,037byteのA11/B11を準備した。A11最大9応答30分、全5件独立全文適合時だけB11最大11応答17分、各一回。個別未承認・未送付・未実行。A10消費済み／B10条件不成立を転用しない。両CI結果は同候補ci_verification.jsonを参照。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424をfresh再確認。worker900は現deployの既存起動log再取得で確認し、今回変更0。元単位／補助全体未完、配布保留。詳細は補助設計§9.103。
+> **11/16最新：A11／条件付きB11の承認と新Pod8d6lpvzb35at8xでの続行指示を受領。主要保存資産の回収を確認、認証引き継ぎ待ち。** 旧GPUは残高不足で停止したとのMash申告で、旧volume全残存は未確認。通常120u／候補34更新のweight・configが保存原本と完全一致し、A10原本・全12元input／SQL checkpoint・portable依存も保持されている。再学習をせず同じadapterへ復元できる。新GPUのbase cache／全runtime／GPU互換性は未確認。Google経路を安全な認証で進めたが、fresh Runpodページは未ログイン。A11／B11は未実行・枠未消費。認証後、新Podの実identityで既存helper／scopeを最小更新し、同じ9応答30分・条件付き11応答17分を各一回行う。API7bb605b・両CI成功を継承、model／Pod転送／SQL write／通常反映0。通常反映を含む元単位／補助全体は未完、配布保留。詳細は補助設計§9.104と既存a11/new_pod_recovery_20261116/。
+
+> **11/16前回source修復：A10失敗原本から既存v2作者へ完成正例を復元し、候補API7bb605bへ反映。実4B改善・通常反映は未確認。** 確認待ち→翌日確認済みと、別人の残る未確認を分離した入力／完成JSON例を既存指示定数内へ戻した。定数以外の製品ASTはb14960eと一致、原5入力／guard／固定時点／同12記録24欄・同6組を保持。最終33件成功、送信時最大LEAF16,379byte。247sourceのremote blob一致と既存実行コードの材料読込、既存finalizerの8source／SQL原本4件の非生成束縛を確認。新scope6c2c2a51・新6file3,039,282byte／同Pod内copy3file、全9file3,139,037byteのA11/B11を準備した。A11最大9応答30分、全5件独立全文適合時だけB11最大11応答17分、各一回。個別未承認・未送付・未実行。A10消費済み／B10条件不成立を転用しない。両CI結果は同候補ci_verification.jsonを参照。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424をfresh再確認。worker900は現deployの既存起動log再取得で確認し、今回変更0。元単位／補助全体未完、配布保留。詳細は補助設計§9.103。
 
 > **11/16前回準備（後続実績§9.102・現候補§9.103）：既存v2作者の意味条件を復元し、候補source b14960eへ反映。実4Bでの改善・通常反映は未確認。** 生成指示定数だけで、確認済み／不明、前後・状態別event、同義項目の反復抑制、線の両端根拠の和集合を明示した。既存170件と実行境界22件／28subtest成功、最終指示3632byte（旧3436＋196）で同じ全12記録・6分割を維持。原入力／guard／固定時点／native／保存条件は不変。A10/B10の新候補はscopef68618f0、新送付6file3,039,091byte・同Pod内copy3file、全9file3,138,846byte。A10最大9応答30分、全5独立全文適合時だけB10最大11応答17分、各一回・失敗時閉鎖。個別未承認／未送付／未実行で、旧repair1の承認・rawは流用しない。通常24bc228d／DB20261115011424は前回確認記録の継承。本単位／補助全体／正式受入れ未完、build／TestFlight／本人実機保留。詳細は補助設計§9.101。
 
@@ -2078,6 +2080,19 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+## 9.104 11/16 — GPU停止後の保存原本回収と、新Podでの承認済みA11/B11再開
+
+MashはA11／条件付きB11を承認したうえで、残高不足により旧Pod f1lle4xwq3wjlnが停止し、新Pod8d6lpvzb35at8xをレンタルしたと連絡した。「新しいGPUで続きからできるなら進めて」と明示し、GoogleでRunpodへログインする方法を指定した。A11/B11の実行自体はまだ始まっておらず、枠未消費。旧scope6c2c2a51の準備時点の未承認表示を現在の承認不足へ戻さない。
+
+通常120uの実weight ecbdd0d1／config4389a598は保存原本Cocolon_Analysis_Semantic_Map_Training_20261107.zipで回収し、完全SHAを照合した。候補34更新の2f33f9be／09ac18caもConcreteReadingの実memberで一致。保存Piece344a候補は入れ子ZIPまでCRC・SHA一致したが、A10元argvに--piece-adapterはなく、通常Piece/baseと混同しない。A10実原本25memberと入れ子元14member、全12元input bdb872a5／checkpoint801ba068・固定SQL原本、portable SQL／client／LMFE等も回収可能な実体を確認した。全詳細hashは既存trial a11/new_pod_recovery_20261116/recovery_state.jsonに置く。主要adapterを再学習せず同byteへ復元できるが、base全shard／旧全venv・CUDA binaryの保全と、新GPU互換性までは認定しない。
+
+新Jupyterは認証画面を表示。初回の安全なJupyter入力はキャンセル後、Mash指定のGoogle経路でRunpodログインを進めた。Googleと保存accountの選択はbrowserAuthでsubmittedになったが、fresh Runpodページは未ログインのため認証完了としない。Pod内のmount／GPU／ファイルは未確認。旧Podの全volume残存／削除も未確認である。認証を引き継ぎ、新Podへ入れた後に現物を確認する。
+
+新Podへの続行では、旧PID／start／envや旧RTX4000Adaのwarm proofを流用しない。保存済み同weightと既存native・client依存を必要な範囲で復元し、新Podのbaseline提供実PID／start／argv／env／cwdと、新GPUでの既存kernel確認結果へhelper／scopeを最小再束縛する。3入力を旧Pod内copyできなければ手元の同hash原本から送る実態へ更新する。新controller／別method familyは作らず、鍵をpayload／GitHubへ残さない。実行identityだけの移設であり、旧rawを新messagesへ束縛しない。
+
+承認済みA11は5件＋前後4対照・最大9応答／復元込み30分、一回。全5新実source／raw／図／本文がroot＋independent全文照合で適切な場合だけB11を全12記録6LEAF＋MERGE＋前後4対照・最大11応答／復元込み17分、一回。学習／retry／raw修補0。GPU変更を追加の実験枠へ換算しない。適切な新全12実結果→同raw一回SQL保存→別process非生成再読→互換native／exact API-worker通常反映まで同じ未完単位を保持する。API7bb605bのsourceと両CI成功は継承。今回model call／Pod転送／SQL write／通常反映0、正式受入れ／補助全体未完、build／TestFlight／本人実機保留。STRUCTURE_MAP_DELTA_NONE。
+
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
@@ -2133,9 +2148,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/16・A10閉鎖を継承し、既存作者完成例とA11/B11を準備）
+### 11.2 現在の進行欄（11/16・承認済みA11/B11、新Pod移設・認証待ち）
 
-全体主枠は§9.54／第11回§5。最新実績は§9.102のA10失敗閉鎖、現在のsource修復と有限候補は§9.103。既存v2作者へ正の完成例を復元し、API7bb605b・最終33PASS、同5入力／同12記録24欄／同6組・最大16379byteを確認。新scope6c2c2a51、新6file3,039,282byte＋同Pod内copy3file、全9file3,139,037byte。A11最大9応答30分、全5独立全文適合時だけB11最大11応答17分、各一回・個別未承認／未送付／未実行。旧A10/B10は転用しない。両CI結果は同候補ci_verification.jsonを参照。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424と現deploy起動logのworker900をfresh再確認、今回変更0。全12実意味→同raw保存再読→通常反映の元単位／補助全体／正式受入れ未完、配布保留。
+主枠は第11回§5、最新再開位置は§9.104。A11／条件付きB11はMash承認済みだが旧GPU停止のため未実行で枠未消費。通常120uと候補34の同weight／config、A10原本、全12input／SQL checkpointとportable依存は回収確認済み。新Pod8d6lpvzb35at8xはGoogle認証引き継ぎ待ちで、内部GPU／mount／runtimeは未確認。認証後、既存helper／scopeを新Podの現物へ最小再束縛して、同じ9応答30分／条件付き11応答17分を各一回実施する。新たな実験枠にしない。API7bb605b・両CI成功を保持。適切な新全12実意味→同raw保存再読→通常反映の元単位・補助全体は未完、配布保留。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2152,7 +2167,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：第11回§5と§9.103の既存v2作者完成例・有限A11/B11候補。** API7bb605b、scope6c2c2a51、新6file3,039,282byteと同Pod内copy3file・同6組を固定した。両CI成功確認後も個別明示承認前に送付／実行しない。A10実2分析の不適合原本は§9.102に保持し、消費済みA10／未成立B10は再利用しない。新全5件の原文／raw／図／本文をrootと独立で照合し、適切な場合だけ新全12を取得する。適切な新最終rawの一回SQL保存→別process非生成再読→互換native／exact API-worker・map alias2通常反映まで同じ未完単位。通常24bc228d／DB20261115011424・worker900、IF120u／natural・Piece既定、build／TestFlight／本人実機保留を維持する。
+**11/16・現在の再開先：§9.104の新Pod8d6lpvzb35at8xへの復元と承認済みA11/B11。** 主要保存adapter／入力／checkpoint／A10原本は回収確認済み。Google認証後、新Pod内のGPU／mount／cache／runtimeを実物で確かめ、既存helper／scopeの移設identityだけを最小更新する。旧PID／旧GPU proofを新Podへ流用しない。A11/B11は未実行で枠未消費、承認不足として再質問しない。条件・回数・時間・同raw保存再読／通常反映までの元未完単位は§9.104を維持。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

@@ -1,0 +1,68 @@
+{
+  "A10_actual_archive_sha256": "bff9507c57614b9b572d6a257fc26d8be257e2a244a5dd89ee284cdc5a9cd8a2",
+  "A10_raw_repaired_or_rebound": false,
+  "A11": {
+    "executed": false,
+    "max_responses": 9,
+    "once_remaining": true,
+    "restore_inclusive_seconds": 1800
+  },
+  "B11": {
+    "condition": "all five new A11 actual source/raw/projection/text adequate under root and independent full meaning review",
+    "executed": false,
+    "max_responses": 11,
+    "restore_inclusive_seconds": 1020
+  },
+  "SQL_writes": 0,
+  "approved_A11_scope_sha256": "6c2c2a5119ddfc07b3570cc9317c25175e8a2d8533010eab8de9188ae657d7bb",
+  "assets": [
+    {
+      "archive": "Cocolon_Analysis_Semantic_Map_Training_20261107.zip",
+      "archive_bytes": 42734454,
+      "archive_sha256": "a7081da470d85364497f924199b0e416031db98d21e9aa0f08a914864392478a",
+      "bytes": 15351792,
+      "config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+      "member": "candidate120/adapter/adapter_model.safetensors",
+      "name": "original120u",
+      "verified": "archive CRC and actual member SHA match expected original",
+      "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495"
+    },
+    {
+      "archive": "Cocolon_CMEE_ConcreteReading_20261115.zip",
+      "archive_bytes": 64538431,
+      "bytes": 15351792,
+      "config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+      "member": "verification/semantic_alignment17_recovery_actual_20261116/fit/adapter/adapter_model.safetensors",
+      "name": "candidate34",
+      "verified": "archive CRC and actual member SHA match expected candidate",
+      "weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b"
+    },
+    {
+      "archive": "Cocolon_CMEE_AR04_PreferenceTense_Correction48_Prepared_20261111.zip",
+      "archive_bytes": 30833327,
+      "archive_sha256": "aa6206c9bae9085d4cf651b9dce715f747e7618bc0e1936c4b5a6efc65cdeeb1",
+      "bytes": 15351792,
+      "config_sha256": "24f34137fd7b0aca0366c1a76fb280216d810565e4062974d12dd2096f93d12c",
+      "member": "fit/adapter/adapter_model.safetensors",
+      "name": "saved Piece344a candidate, not A10 baseline Piece/base",
+      "nested_archive": "preference8/gpu_result/piece_preference48_evidence.private.zip",
+      "verified": "both ZIP CRC and actual member SHA match; original argv has no --piece-adapter",
+      "weights_sha256": "344a9defd0c890982d9718805d8b630b5d48719475c998aa9a57ed6df6bfc337"
+    }
+  ],
+  "auth_status": "New Jupyter login screen observed. After user selected Google, browserAuth submitted Runpod Google and saved account choices; fresh Runpod tab still shows sign-in page. No successful login or Pod-internal inspection claimed.",
+  "authorization": "Mash explicitly approved A11 plus conditional B11 and continuation on the newly rented Pod if feasible; then explicitly selected Runpod Google sign-in. Approval is retained. No new model experiment or rerun is authorized by migration.",
+  "checkpoint_sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+  "input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+  "model_calls": 0,
+  "new_pod": "8d6lpvzb35at8x",
+  "new_pod_transfers": 0,
+  "normal_rollout": 0,
+  "old_pod": "f1lle4xwq3wjln",
+  "old_pod_status": "User reports balance exhaustion stopped rental; actual old volume retention not inspected",
+  "pod_operations": 0,
+  "runtime_status": "Existing portable SQL/client/LMFE and checkpoint are present. Base model shards, complete old venv/CUDA/fastkernel binary backup and new GPU compatibility remain unverified. Do not reuse old GPU warm proof as new proof.",
+  "state": "MAJOR_SAVED_ASSETS_RECOVERABLE_NEW_POD_AUTHENTICATION_NOT_COMPLETE",
+  "structure_map_delta": "NONE; only recovery and continuation record, product source/owner/route unchanged",
+  "training": 0
+}

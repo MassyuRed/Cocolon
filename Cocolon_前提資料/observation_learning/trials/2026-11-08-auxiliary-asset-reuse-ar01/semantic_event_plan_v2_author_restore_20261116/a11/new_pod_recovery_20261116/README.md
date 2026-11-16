@@ -1,0 +1,11 @@
+# 新Podへの復元と承認済みA11/B11の再開
+
+MashはA11／条件付きB11を承認し、残高不足で旧GPUが停止したため新Pod `8d6lpvzb35at8x` で続けるよう指示した。旧scopeの未承認表示は準備時点の履歴。A11/B11は未実行で、一回枠は消費していない。
+
+通常120uと候補34更新のweight／configは保存原本の実member SHAまで一致。保存Piece344a候補、A10実原本、全12元input／SQL checkpoint、portable SQL/client依存も回収可能な現物を確認した。旧Podの全workspace・base全shard・全venv/CUDA binaryの残存や新GPU互換性までは未確認。保存済みadapterを別モデルや再学習で代替しない。
+
+新Jupyterは認証画面。Mash指定のGoogle経路をbrowserAuthで進めたが、アカウント選択後のfresh Runpodページはまだ未ログイン。認証の引き継ぎ後、新Pod内のmount／ファイル／GPU／実行環境を確認する。旧Podの停止理由と全volume残存を断定しない。
+
+続行時は既存helperとscopeの新Pod実identityだけを最小更新し、必要なら3入力を手元同hash原本から送る。通常120u baselineの重み・native・起動環境を新Podで確定し、新GPUの実kernel確認を使う。旧PID141466／start238372709と旧GPU warm proofを新Pod由来として流用しない。鍵は同アカウント新Pod内だけで扱い、値を記録しない。
+
+A11は5件＋前後4対照・最大9応答・復元込み30分一回。全5件の新実本文が独立全文照合で適切な場合だけ、B11は全12記録6LEAF＋MERGE＋前後4対照・最大11応答・復元込み17分一回。学習・再試行・raw修補0。同raw保存再読→通常反映まで元の未完単位を継続する。通常反映／正式受入れ・補助全体は未完、build／TestFlight／本人実機保留。API7bb605bとその両CI成功は継承する。
