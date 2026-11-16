@@ -1,6 +1,6 @@
 # 同じevent-plan-v2を使うbase対照の準備（A12/B12）
 
-未承認・未送付・未実行・通常未採用です。A11一回は消費済み・失敗閉鎖、B11条件不成立であり、残枠を転用しません。次の実生成前に新scopeの承認が必要です。CIは本記録時点で実行中です。
+未承認・未送付・未実行・通常未採用です。A11一回は消費済み・失敗閉鎖、B11条件不成立であり、残枠を転用しません。次の実生成前に新scopeの承認が必要です。同API46fff73のAnalysis43846424667／Piece43846424124は両方completed/success、各job全stepもfailure0をfresh確認しました。詳細はci_verification.jsonです。
 
 17教師の全assistant_targetは旧直接nodes/edges/overviewのmodel.v2で、新events/readings/unit_refsの教師は0件でした。後日の確認自体を教える旧教師はあり、教材がない／34adapterが原因／baseなら解決するとは断定していません。過去A3/A4比較でもbaseに改善と誤りが併存しています。診断の詳細と不確定範囲はadapter_conditioning_diagnosis.jsonに保存しました。
 
