@@ -1,3 +1,5 @@
+> **後続実績：A12は一回実行済み・失敗閉鎖、B12は条件不成立で未実行。** この準備記録／scopeは履歴として保持し、消費済み枠を再実行しない。最新の実績と復元は[実績](../semantic_event_plan_v2_a12_base_actual_20261116/README.md)および補助設計§9.107を参照。
+
 # 同じevent-plan-v2を使うbase対照の準備（A12/B12）
 
 未承認・未送付・未実行・通常未採用です。A11一回は消費済み・失敗閉鎖、B11条件不成立であり、残枠を転用しません。次の実生成前に新scopeの承認が必要です。同API46fff73のAnalysis43846424667／Piece43846424124は両方completed/success、各job全stepもfailure0をfresh確認しました。詳細はci_verification.jsonです。

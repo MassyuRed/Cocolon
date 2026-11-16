@@ -1,0 +1,11 @@
+{
+  "bytes": 70556,
+  "codes_included": false,
+  "credential_scan": "NO_BEARER_OR_TOKEN_ENV_OR_AUTH_HEADER",
+  "file": "Cocolon_CMEE_A12_Base_Actual_20261116.zip",
+  "library_file_id": "libfile_fde3_f-c9e6e3252f80819193204256ae38772a_2f7470f963808191aaebf050935e72de",
+  "members": 30,
+  "original_archive_unchanged": true,
+  "remote_original_zip_sha256": "00c62e1c717dca54ca0d2b597623e0f9ebe9c88d9edc2c8cf2ee59e2b779c36f",
+  "sha256": "76068be5a51a003cbf70c624c5d3a350169c748a5e353c58519a92e35f6c363a"
+}

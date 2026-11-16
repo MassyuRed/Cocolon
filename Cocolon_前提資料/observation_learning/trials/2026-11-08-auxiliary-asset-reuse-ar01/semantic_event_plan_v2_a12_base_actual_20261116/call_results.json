@@ -1,0 +1,112 @@
+{
+  "B12_executed": false,
+  "actual_result_sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04",
+  "body_free": true,
+  "calls": [
+    {
+      "admission": "GENERATED",
+      "array_counts": {
+        "edges": 12,
+        "events": 2,
+        "nodes": 3,
+        "readings": 1
+      },
+      "complete_json": true,
+      "elapsed_seconds": 121.56180696806405,
+      "finish_reason": "stop",
+      "id": "book_club_two_day",
+      "meaning_adequate": false,
+      "projection_present": true,
+      "projection_sha256": "ade111f9da4728ba9db0e8b33c27809c3ba5d890fc11a34c2c4e78bb6fd18d41",
+      "raw_bytes": 3126,
+      "raw_sha256": "4ebb330ea484e3bbfca6469bf2688d2019f2c9d310e9c00b4ac763682b273bee",
+      "response_sha256": "04ce801ae70e8efbfaa2895f58d4d3596b935b89e2aa6f700917cce6ef05287b",
+      "seconds": 49.68756192398723,
+      "state": "RECEIVED",
+      "status_code": 200,
+      "text_present": true,
+      "text_sha256": "15330badfd30bf4f9ba6832ec27c6e5b9f091cd37a514b3da3eb78fe1cfa0aaf"
+    },
+    {
+      "admission": "NOT_ATTEMPTED_NON_STOP_RESPONSE",
+      "complete_json": false,
+      "elapsed_seconds": 333.0555635020137,
+      "finish_reason": "length",
+      "id": "lighting_prior_and_later",
+      "projection_present": false,
+      "raw_bytes": 13111,
+      "raw_sha256": "15b1c36ac07e4dbfc46fa88e98b691e54e30fe365a7dd4e46bb942342efbbcd7",
+      "response_sha256": "5df2d6363bf5747b05351df675cca2626764eb5c2bcaa18360fd394257687495",
+      "seconds": 211.45318434096407,
+      "state": "RECEIVED",
+      "status_code": 200,
+      "termination": {
+        "4096_token_exhaustion_established": false,
+        "actual_generated_token_ids_saved": false,
+        "cause": "NATIVE_210_SECOND_DEADLINE",
+        "cpu_reencode_count_is_not_actual_generated_token_id_count": true,
+        "cpu_reencoded_raw_tokens": 3353,
+        "log_elapsed_decode_to_complete_seconds": 209.999,
+        "log_elapsed_tokenize_to_complete_seconds": 210.021,
+        "reencode_count_source": "Execution owner CPU inspection; this receipt performs no tokenizer/model call.",
+        "reserved_max_new_tokens": 4096
+      },
+      "text_present": false
+    }
+  ],
+  "controls": [
+    {
+      "admission": "CONTROL_TRANSPORT_ONLY",
+      "complete_json": false,
+      "elapsed_seconds": 2.60173728200607,
+      "finish_reason": "stop",
+      "id": "EMLIS-EXPLICIT-CORRECTION",
+      "phase": "before",
+      "projection_present": false,
+      "raw_bytes": 106,
+      "raw_sha256": "985a541cbecb8a15e83270a52f60025d977791ae745e316e40a00c5e46a75c07",
+      "response_sha256": "aedb32b36f583f281acaa7ab298dca617c649172e004a411bd5c1a047a1a2b12",
+      "seconds": 2.492405398050323,
+      "state": "RECEIVED",
+      "status_code": 200,
+      "text_present": false
+    },
+    {
+      "admission": "CONTROL_TRANSPORT_ONLY",
+      "complete_json": true,
+      "elapsed_seconds": 71.87229525507428,
+      "finish_reason": "stop",
+      "id": "ANALYSIS-IF-TWO-CANDIDATES",
+      "phase": "before",
+      "projection_present": false,
+      "raw_bytes": 3257,
+      "raw_sha256": "2e2899e394292803d656d0874a02caf08b10a017ca3393be18a1b62db15f345d",
+      "response_sha256": "8dd53ecf6e04e43e0ac2ac435fa812e18719aa779679a08751c8e618a1868d96",
+      "seconds": 69.26927834795788,
+      "state": "RECEIVED",
+      "status_code": 200,
+      "text_present": false
+    }
+  ],
+  "input_content_included": false,
+  "log_body_included": false,
+  "messages_included": false,
+  "projection_or_text_content_included": false,
+  "quality_gate": {
+    "all_five_adequate": false,
+    "book_meaning_adequate": false,
+    "final_meaning_review_sha256": "3a30cb631fa9b66ac5623dfd4622950236e9f30b2699245fd6d77d121e44be2e",
+    "lighting_completed_candidate": false
+  },
+  "raw_content_included": false,
+  "request_content_included": false,
+  "schema": "cocolon.a12.call_results.public.v1",
+  "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "state": "TWO_MAP_RESULTS_RECEIVED_FIRST_COMPLETE_BUT_MEANING_INADEQUATE_SECOND_INCOMPLETE",
+  "unreceived_cases": [
+    "U01_repair_report",
+    "U02_withdraw_submission",
+    "T01_manual10"
+  ]
+}

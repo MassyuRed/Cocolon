@@ -101,7 +101,7 @@
     "current_natural_or_piece_profile_is_valid_control": false,
     "invalid_control_reason": "Natural/Piece profiles use 2048 output and 8192 context budgets. Reusing them to disable the adapter would change more than adapter selection.",
     "current_full12_leaf_groups": 6,
-    "recorded_maximum_input_plus_reserved_output_tokens": 16379
+    "recorded_maximum_leaf_message_bytes": 16379
   },
   "historical_actual_comparison": {
     "a3_a4_messages_equal_for_both_cases": true,
