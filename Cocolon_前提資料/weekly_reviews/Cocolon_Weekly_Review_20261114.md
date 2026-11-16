@@ -1,4 +1,6 @@
-> **11/16最新：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
+> **11/16最新：A8原本の留保・判断・達成状態とreading根拠を、既存作者内のevent-plan v2候補へ修復。実4B・通常反映は未確認。** API80d94db7で、未確認事項は原文引用のまま表示し、本人判断／希望／決定済予定／実行済経験を先に区別、reading根拠は一度の指定からcompilerへ継承する。回帰824件・現行source等51件・runner15件、合成7応答の一回SQL保存／別process非生成再読を確認。旧A8 raw・拒否条件・原入力／guard／as_of／月次は不変。新scope b53ac4d9の9file3,133,443byteを確定、A9最大9応答30分・条件付きB9は全12記録6LEAF＋MERGEと4対照で最大11応答17分、各一回・学習／retry0。未承認／未送付／未実行、既存A8消費済み／B8未成立の枠は転用しない。通常API／worker24bc228d Live・DB20261115011424をfresh確認、配布保留・本単位／補助全体未完。詳細は補助設計§9.98。
+
+> **11/16前回実績：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
 
 > **11/16前回実績：承認済みA7は最初の1件で思考2048token上限に達し、最終JSON未生成で停止。B7は条件不成立で未実行。** 新4file129859byteを同Podへ送付・全SHA一致、実HF preflight5件を通過。同A6重み／読書会messagesで1call105.1615秒、子process127.4212秒、自然な整理終端なしのsemantic_thinking_budget_exceededで残り4件へ進まず、復元込み160.9508秒で元120u／PID134586／health200へ復元した。raw／図／本文0で意味品質は評価不能、候補は通常不採用。原本9member／ZIP10450byteを回収照合、追加学習／retry／B7新12LEAF／MERGE／SQL保存／通常反映0。A7一回は消費済み・未使用枠を転用しない。通常API-worker24bc228d／DB20261115011424の前回確認記録・worker900／配布保留、本単位／補助全体未完を維持。 詳細は補助設計§9.95／11.2／12。
 
@@ -1137,3 +1139,10 @@ A6原本の既知状態／場所の不整合を、同じ事実の別々の作文
 復元込み397.503209秒、元argv／env／cwdとsource／weightsを照合して元120uへ戻し、PID136765／start237021687・healthz200、候補停止・B8root不存在を確認した。原本13memberのZIP30,152byteと全SHAを回収保全。学習／retry／同raw SQL保存／通常反映0、A8一回は消費済みで残枠を転用しない。通常API／workerはfreshに24bc228d Live、DB最新20261115011424（38件）。詳細・原本・残る修復対象は補助設計§9.97と同trialのsemantic_event_plan_actual_20261116。
 
 適切な全12実結果→同raw一回保存→別process非生成再読→通常native／API-worker反映までの同じ単位を維持する。本単位／補助全体／正式受入れは未完、配布／本人実機保留。局所CIや合成保存をこの完了へ数えない。
+
+
+### 11/16 継続 — A8の原本にある意味・参照不整合をv2作者内へ修復（実生成前）
+
+A8原本と全原入力の照合を継続し、留保は同event原文引用、本人判断／希望／決定済予定／実行済経験を先に区別、reading根拠は一度の指定からcompilerへ引き継ぐ候補をAPI80d94db7へ反映した。旧A8 raw・v1拒否条件は変更せず、三中核／九カテゴリ／二欄／本人訂正・権利・月次・公開v3を保持。回帰824件・現行source等51件・runner15件、CPU合成7応答の一回保存／別process非生成再読は事前検証で、実4B改善・通常反映の証拠へ数えない。
+
+新9file3,133,443byte／scope b53ac4d9のA9は5件＋前後4対照・最大9応答30分。全5の独立全文意味照合が適切な場合だけB9は全12記録6LEAF＋MERGE＋4対照・最大11応答17分。各一回・復元込み・学習／retry0。未承認／未送付／未実行、旧消費枠は転用しない。詳細・再開は補助設計§9.98／11.2／12と同trialのsemantic_event_plan_v2_prepared_20261116。通常API／worker24bc228d Live・autoDeploy off、DB38migration／20261115011424をfresh確認し、新deploy／DB変更／本人記録読取0。本単位／補助全体／正式受入れ未完、build／TestFlight／本人実機保留、第11回§5の主枠を維持する。

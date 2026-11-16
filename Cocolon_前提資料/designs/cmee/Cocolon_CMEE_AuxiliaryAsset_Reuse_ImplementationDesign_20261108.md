@@ -1,4 +1,6 @@
-> **11/16最新：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
+> **11/16最新：A8原本の留保・判断・達成状態とreading根拠を、既存作者内のevent-plan v2候補へ修復。実4B・通常反映は未確認。** API80d94db7で、未確認事項は原文引用のまま表示し、本人判断／希望／決定済予定／実行済経験を先に区別、reading根拠は一度の指定からcompilerへ継承する。回帰824件・現行source等51件・runner15件、合成7応答の一回SQL保存／別process非生成再読を確認。旧A8 raw・拒否条件・原入力／guard／as_of／月次は不変。新scope b53ac4d9の9file3,133,443byteを確定、A9最大9応答30分・条件付きB9は全12記録6LEAF＋MERGEと4対照で最大11応答17分、各一回・学習／retry0。未承認／未送付／未実行、既存A8消費済み／B8未成立の枠は転用しない。通常API／worker24bc228d Live・DB20261115011424をfresh確認、配布保留・本単位／補助全体未完。詳細は補助設計§9.98。
+
+> **11/16前回実績：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
 
 > **11/16前回実績：承認済みA7は最初の1件で思考2048token上限に達し、最終JSON未生成で停止。B7は条件不成立で未実行。** 新4file129859byteを同Podへ送付・全SHA一致、実HF preflight5件を通過。同A6重み／読書会messagesで1call105.1615秒、子process127.4212秒、自然な整理終端なしのsemantic_thinking_budget_exceededで残り4件へ進まず、復元込み160.9508秒で元120u／PID134586／health200へ復元した。raw／図／本文0で意味品質は評価不能、候補は通常不採用。原本9member／ZIP10450byteを回収照合、追加学習／retry／B7新12LEAF／MERGE／SQL保存／通常反映0。A7一回は消費済み・未使用枠を転用しない。通常API-worker24bc228d／DB20261115011424の前回確認記録・worker900／配布保留、本単位／補助全体未完を維持。 [詳細§9.95](#analysis-bounded-thinking-actual-20261116)。
 
@@ -26,7 +28,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.97: A8 consumed; four actual calls (two precontrols + two maps), book meaning rejected, lighting reference admission rejected. Original120u restored PID136765/health200 in397.503209s. B8 condition unmet/not run; no training/retry/SQL/normal adoption. Preserve exact originals and repair actual author meaning/reference failures before preparing any new concrete GPU scope. Whole unit incomplete; build/device deferred."
+current_next: "Section9.98: API80d94db7 source-qualified event-plan v2 implemented and CPU verified, not actual-model verified or adopted. A9/conditionalB9 exact9files3133443bytes scopeb53ac4d9 prepared, unapproved/unuploaded/unexecuted; 9calls/1800s and 11calls/1020s each once. A8 consumed/B8 unmet, originals unchanged. After new approval, actual full meaning review then same-raw SQL/save/fresh-process reread and normal native/API-worker rollout. Whole unit incomplete; build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1878,6 +1880,50 @@ primary outcomeはBLOCKER_NARROWED。今回のA8実行・復元・原本保全�
 
 STRUCTURE_MAP_DELTA_NONE：§9.96候補の実行結果だけを追記。商品owner／公開v3／source・rights／DB型／RN renderer／唯一realizer／月次保存の構造変更はない。
 
+<a id="analysis-event-plan-v2-prepared-20261116"></a>
+## 9.98 11/16 — A8の留保・判断・参照根拠を既存作者内で修復（実4B未実行・通常未採用）
+
+§9.97の受領原本・全原文・独立reviewから、問い合わせの送信者／宛先逆転はunknownsを疑問文へ作文した時点、照明のscope不整合はreadingと項目／線の同じ根拠を二度指定した時点にあると確認した。本人が保証として扱わなかった判断の不明化、買えた満足の希望化も作者rawの課題として保持し、保存／受口の問題へ転記しない。旧A8 rawを新形式へ修補せず、旧v1のstrict拒否条件を維持する。
+
+API候補[80d94db7833e9fa0039ac581fb73151b0767dda4](https://github.com/MassyuRed/mashos-api/commit/80d94db7833e9fa0039ac581fb73151b0767dda4)へ既存作者・native・compilerの差分を反映した。private profileはsemantic_map.event_plan.v2、schemaはcocolon.analysis.semantic_map.event_plan.model.v2、exact map aliasはcocolon-qwen3.5-4b-analysis-event-plan-v2。公開watashi.map.v3・唯一realizer・DB／RN型・商品ownerを増やさない。
+
+| 既存責務 | 修復した内容と限界 |
+|---|---|
+| semantic_admission.py の作者材料 | 全fieldsを変えず、RECORDED／PERSON_JUDGMENT／PERSON_WISH／DECIDED_PLANを選んでからfactを作る。3つの架空例を含む3436byteの指示。modeはモデルの未評価解釈であり、本人の事実・意味適合を認定しない |
+| serve_emlis_natural_reply.py の既存native schema／parser | unknownsは同event根拠内・同fieldの一意な原文引用source_quote／source_field、最大240字。主体を含む隣接文の候補も根拠側へ同じように提示し、選べない留保を作らない。本人訂正の根拠は全文を維持。引用は表示時に言い換えず、どの引用が適切かは実rawの全文照合が必要 |
+| intent_compiler.py の既存expand／compile | readingのevent_refsを一度指定。nodes／edges／overviewは表示したいe／rのunit_refsを順に選び、根拠closureだけをcompilerが継承する。未選択の事実文を詳細へ追加しない。表示の未知件数・根拠件数・文字数・source／rights／両端scope・orphan拒否は維持 |
+| analysis_model_source.py／analysis_if_model_source.py | exact alias2だけでv2を選び、IFは元120u。旧alias1／通常Analysis・自然Emlis／Pieceのprofile・重みを維持。通常設定はまだ変更しない |
+| test_analysis_semantic_event_plan_v2.py／既存Analysis CI | 原文留保・全訂正根拠・表示選択と根拠の分離・6根拠・unknown集約上限・旧profile混入拒否・native alias／IF境界を検証 |
+
+初回の拡張回帰は813成功／11失敗だった。うち10件は旧汎用parserにschema_versionがない場合のKeyErrorで、新v2処理のmarker参照だけをoptionalへ直した。1件は6根拠の合成fixtureが既存record網羅順へ従わないためで、先に二recordを網羅する並びへ修正し、native網羅規則を緩めていない。修復後の回帰824件成功。現在の3436byte指示と保存前意味reviewの束縛51件、runner15件、完全source抽出のfresh importも成功した。件数は重複するため加算しない。Pydantic非推奨warningは残る。候補CIは下記verificationで別記し、いずれも実4B品質の証明へ換算しない。
+
+最初のv2指示4913byteでは既存plannerが12LEAFを導出した。原入力は削らず、重複説明を整理して3436byteへ短縮した結果、同plannerから6LEAF＋MERGE=7生成を再導出した。分割数を強制せず、停止前preflightで新plan／scopeの分割数・map数・control数・総数を照合する。全12の入力bdb872a5・元checkpoint801ba068・旧plan75daa8・guard／凍結as_ofはbyte不変、新取得前planはa41950c09689400663af6b22a7e6c0c075022655d261207602cb414492b50dc8である。全九カテゴリ・感情／強度・二欄・本人回答／訂正を提示sourceと時点のまま保持する。
+
+既存finalizerをv2へ合わせ、新しく作った明示CPU合成7応答で一回SQL保存・artifact1／月次参照1、別processでservice/current/detail/monthとHTTPの同ID・図・本文・coverage・private再読を確認した。元checkpointは不変、実model／tokenizer／hosted DB呼出し0。これは新形式の保存経路だけの事前検証で、実4Bの意味品質・本人受入れではない。非synthetic保存ではexact B9／profile2／alias2と、全7raw／projection／text／12原文・guard／as_of・planへ束縛されたroot＋独立reviewをSQL forkの構築前に要求し、実httpx送信bytesのままreplayする。未評価rawの自動SQL保存、旧raw再束縛、受領後の修補は行わない。
+
+新scope SHA256 **b53ac4d90b45631608451c47dc1163265af0b53498bdabdf241d1d0c8743c6fd**。初期9file合計 **3,133,443byte**、247完全source／展開12,593,607byteはAPI80d94db7／tree3310733bの全git blobと一致し、IFの明示moduleも含む。全payloadとscope自身のbytes／SHAを独立検証した。正本は同trialのsemantic_event_plan_v2_prepared_20261116。
+
+| file | bytes | SHA256 |
+|---|---:|---|
+| execution_scope.json | 6344 | b53ac4d90b45631608451c47dc1163265af0b53498bdabdf241d1d0c8743c6fd |
+| event_plan_execution.py | 31819 | 567d085a6aa580bccc3e65111dffb41c8e4ec9bb65aeb4f4b0344bbf8458d123 |
+| current_api_sources.zip | 2584300 | 06f8e7f507b4f0d18ab6180d21c9b57b4139d9499ef4539bf1d5d01ae7775bad |
+| source_manifest.json | 191064 | 830912476146aa9237ea17418f13995248f5fdbab9fcdf5256384b098ad45c84 |
+| input_cases.json | 22769 | abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1 |
+| diagnostic_preparation.json | 55355 | f09ae60106c04276cea5ef465d8abd9ed9a7557ad8d391ef51078a675b4096c8 |
+| full12.input.json | 59146 | bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d |
+| full12_pre_acquisition.plan.json | 164806 | a41950c09689400663af6b22a7e6c0c075022655d261207602cb414492b50dc8 |
+| controls.json | 17840 | 29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362 |
+
+- A9：同Pod f1lle4xwq3wjlnへ上記9fileを送り、同じ架空5件＋候補内前後4対照、最大9応答・停止復元込み30分、一回・学習／retry0。新rootは/workspace/semantic-event-plan-v2-diagnostic-20261116-once。
+- B9：A9全5件の原文／raw／図／本文がroot＋独立全文照合で適切な場合だけ、4KB以内の結果SHA／5rawSHA／reviewer役割を同Podへ追加。全12記録の6LEAF＋MERGE＋前後4対照、最大11応答・停止復元込み17分、一回・学習／retry0。新rootは/workspace/semantic-event-plan-v2-full12-20261116-once。
+
+直近の元提供はA8復元PID136765／start237021687。停止直前に現proc／argv／env／cwd／source／両weights-configを再照合し、既存鍵・全envは同Pod内認証と元提供の復元だけに使う。秘密値の外部送付・保存0。両scopeは未承認／未送付／未実行で、A8の消費済み一回・未成立B8は転用しない。実tokenizerのMERGE容量は新LEAF原本を使いPOST前に確認する。
+
+fresh読取では通常API／worker双方24bc228d Live・autoDeploy off、DB38migration／最新20261115011424。新deploy／DB変更／本人記録読取0。適切な新全12実結果→同raw一回保存→別process非生成再読→互換native配置→worker stale1800のSave-only→exact新commit worker／API→map alias2有効化（IF120u・自然／Piece保持）まで同じ未完単位で進める。build／TestFlight／本人実機は保留のまま、通常反映も補助全体も正式受入れも未完である。
+
+primary outcomeはTECHNICAL_CREDIT。source修復・合成保存・実行前の完全byte境界に再利用可能な検証結果が増えたが、PRODUCT_CREDITや実商品出力の意味改善へ換算しない。STRUCTURE_MAP_DELTA：既存Analysis作者／native／compiler内のprivate形式v2・内部根拠継承とexact alias選択をcurrent analysis mapへ追記。新reader／controller／authority／公開型／DB／RN構造の追加はない。
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
@@ -1933,9 +1979,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/16・A8実行後に不採用、B8・通常反映は未完）
+### 11.2 現在の進行欄（11/16・v2 source修復済み、A9／条件付きB9は実行前）
 
-全体主枠は§9.54／第11回§5。最新実績は§9.97の承認済みA8一回実行・意味／参照不成立・元120u復元である。前対照2＋map2の4呼出し、読書会は図／本文生成後に送信者／宛先の意味誤り、照明は完結raw後にreading参照範囲拒否。残り3件と後対照は未実行、全5適合条件は不成立でB8起動0。復元込み397.503209秒・PID136765／healthz200、候補停止とB8root不存在を確認。9file3,127,144byte・全SHA一致の送付と原本13member回収を完了し、学習／retry／SQL保存／通常反映0。§9.96の475局所件・両CI成功と合成保存は準備検証に限定する。通常API／worker24bc228d Live・DB20261115011424をfresh確認、worker900・通常aliasは未変更。本単位／補助全体／正式受入れ未完、build／TestFlight／本人実機保留を維持する。
+全体主枠は§9.54／第11回§5。直近の実4Bは§9.97のA8停止／意味不適合・元120u復元であり、その原本を保持する。現在は§9.98のv2をAPI80d94db7へ反映し、回帰824・現行source等51・runner15・合成7応答の一回保存／別process非生成再読まで確認した。実4B品質／実raw保存再読／通常反映は未確認。新9file3,133,443byte／scope b53ac4d9のA9最大9応答30分、全5独立意味照合後のみB9全12の6LEAF＋MERGEと4対照・最大11応答17分を確定し、未承認／未送付／未実行。旧A8消費済み／B8未成立は転用しない。通常API／worker24bc228d Live・autoDeploy off、DB38migration／20261115011424をfresh確認。配布保留・本単位／補助全体／正式受入れ未完を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1944,15 +1990,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／一回保存を保持。§9.97のA8は意味／参照不成立、全12のB8は未実行 | 全量の実意味・同raw実保存再読・通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持 |
+| AR-06 | 完全親source／cohort／一回保存を保持。§9.97のA8は不適合、§9.98のv2 source修復・合成検証まで。A9／全12B9は未実行 | 全量の実意味・同raw実保存再読・通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | §9.72の24bc228d API／worker双方Live・migration適用・対応RN sourceとCI成功を継承。§9.97でA8不採用となった候補c258cf0eも通常未反映 | 起動・queue poll・未認証HTTPを本人生成保存や実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
+| AR-08 | §9.72の24bc228d API／worker双方Live・migration適用・対応RN sourceとCI成功を継承。§9.98候補80d94db7も通常未反映 | 起動・queue poll・未認証HTTPを本人生成保存や実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
-最新の実原文/rawの意味・参照不成立は§9.97。§9.96の具体scopeはA8消費済み／B8条件不成立となった。最終JSONなしの旧停止・復元は§9.95。§9.92/旧prepared scopeは実行前の準備履歴でA6再起動やB6起動の指示ではない。全原本/新重みを保持し、意味未達の既存作者から同raw保存再読/通常反映へ継続する。正式受入れ・補助全体完了は未認定。
+最新の修復準備は§9.98、直近の実原文/rawの意味・参照不成立は§9.97。§9.96の具体scopeはA8消費済み／B8条件不成立となった。最終JSONなしの旧停止・復元は§9.95。§9.92/旧prepared scopeは実行前の準備履歴でA6再起動やB6起動の指示ではない。全原本/新重みを保持し、意味未達の既存作者から同raw保存再読/通常反映へ継続する。正式受入れ・補助全体完了は未認定。
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：第11回§5と§9.97のA8原本・独立review。** 確定9file3,127,144byte／scopee84f40b9のA8一回は消費済み。読書会の送信者／宛先、照明のreading参照scopeと本人の判断・達成状態の意味変異を、既存作者／compilerから修復する。B8は全5適合条件不成立で未実行、残枠をA8再試行や別試行へ転用しない。新しいGPU scopeは未準備／未実施であり、旧runnerを再起動しない。原文・受領raw・source SHA・元checkpoint／guard／as_of・旧月次を保持し、新しい適切な全12実結果から同raw SQL一回保存・別process非生成再読、互換native／API-worker配置・alias有効化まで同じ未完単位でつなぐ。通常24bc228d／DB20261115011424、build／TestFlight／本人実機保留を継承する。
+**11/16・現在の再開先：第11回§5と§9.98のv2 source／確定scope。** API80d94db7・profile2・新plan a41950c0、同trialの全準備fileを正本とする。A9／条件付きB9の新一回は9file3,133,443byte／scope b53ac4d9で未承認／未送付／未実行。A8原本と不適合採否は§9.97のまま保持し、旧一回を再利用しない。新実結果の全文照合→同raw SQL一回保存→別process非生成再読→互換native／exact新commit worker／API・map alias2の通常配置まで同じ未完単位で続ける。通常24bc228d／DB20261115011424、build／TestFlight／本人実機保留を継承する。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

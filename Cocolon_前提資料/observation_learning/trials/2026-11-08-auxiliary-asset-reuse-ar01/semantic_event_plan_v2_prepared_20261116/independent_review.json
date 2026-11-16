@@ -1,0 +1,30 @@
+{
+  "A8_originals_unchanged": true,
+  "SQL_calls": 0,
+  "actual_semantic_quality": "UNASSESSED",
+  "all_payload_bytes_and_hashes_match": true,
+  "all_source_bytes_match_git_blobs": true,
+  "controls_unchanged": true,
+  "finally_restore_same_original_argv_env_cwd_weights": true,
+  "initial_files": 9,
+  "meaning_review_required_before_SQL": true,
+  "model_calls": 0,
+  "network_calls": 0,
+  "old_SQL_source_checkpoint_guard_as_of_unchanged": true,
+  "once_roots_and_caps": {
+    "A9": 9,
+    "B9": 11
+  },
+  "reviewer": "independent",
+  "root_review": true,
+  "scope": {
+    "bytes": 6344,
+    "sha256": "b53ac4d90b45631608451c47dc1163265af0b53498bdabdf241d1d0c8743c6fd"
+  },
+  "source_commit": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+  "source_files": 247,
+  "source_tree": "3310733b7ab42c4a9e670eb76b31e2f695fcdd1c",
+  "state": "PASS_PREPARED_BYTES_AND_SOURCE_BOUNDARIES_ONLY",
+  "tokenizer_calls": 0,
+  "total_bytes": 3133443
+}

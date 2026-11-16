@@ -1,4 +1,6 @@
-> **11/16最新：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
+> **11/16最新：A8原本の留保・判断・達成状態とreading根拠を、既存作者内のevent-plan v2候補へ修復。実4B・通常反映は未確認。** API80d94db7で、未確認事項は原文引用のまま表示し、本人判断／希望／決定済予定／実行済経験を先に区別、reading根拠は一度の指定からcompilerへ継承する。回帰824件・現行source等51件・runner15件、合成7応答の一回SQL保存／別process非生成再読を確認。旧A8 raw・拒否条件・原入力／guard／as_of／月次は不変。新scope b53ac4d9の9file3,133,443byteを確定、A9最大9応答30分・条件付きB9は全12記録6LEAF＋MERGEと4対照で最大11応答17分、各一回・学習／retry0。未承認／未送付／未実行、既存A8消費済み／B8未成立の枠は転用しない。通常API／worker24bc228d Live・DB20261115011424をfresh確認、配布保留・本単位／補助全体未完。詳細は補助設計§9.98。
+
+> **11/16前回実績：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
 
 > **11/16前回実績：承認済みA7は最初の1件で思考2048token上限に達し、最終JSON未生成で停止。B7は条件不成立で未実行。** 新4file129859byteを同Podへ送付・全SHA一致、実HF preflight5件を通過。同A6重み／読書会messagesで1call105.1615秒、子process127.4212秒、自然な整理終端なしのsemantic_thinking_budget_exceededで残り4件へ進まず、復元込み160.9508秒で元120u／PID134586／health200へ復元した。raw／図／本文0で意味品質は評価不能、候補は通常不採用。原本9member／ZIP10450byteを回収照合、追加学習／retry／B7新12LEAF／MERGE／SQL保存／通常反映0。A7一回は消費済み・未使用枠を転用しない。通常API-worker24bc228d／DB20261115011424の前回確認記録・worker900／配布保留、本単位／補助全体未完を維持。 詳細は補助設計§9.95／11.2／12。
 
@@ -1750,3 +1752,10 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 | analysis_cumulative_service.py／既存SQL／observed_route_realizer.py／RN | 新owner追加なし。全親source・cohort・guard、最終一回保存、月次当時性、唯一realizer、公開v3を継承 |
 
 sourceは未採用のままGitHub反映、通常稼働24bc228dは維持。新実行9file3,127,144byte／scopee84f40b9は承認後に送付・全SHA一致。A8は前対照2＋map2の計4応答で停止し、397.503209秒で元120u／PID136765／healthz200へ復元した。残り3件・後対照未実行、B8条件不成立。全12の実意味照合と同raw保存再読、通常native／API-workerへの接続まで未完。商品owner／公開型等の構造変更はなく、全blob意味理解や一般日本語品質をfile数・CPU結果から主張しない。
+
+
+## 11/16 差分 — event-plan v2の既存作者内修復（通常未採用）
+
+詳細正本は補助設計§9.98。API80d94db7のsemantic_admission.py／intent_compiler.py／serve_emlis_natural_reply.pyに、4種のsource_mode、同event根拠内の留保原文引用、unit_refsからの表示と根拠closureの分離を実装。analysis_model_source.pyのexact alias2とanalysis_if_model_source.pyのIF120u分離、新規ai/tests/test_analysis_semantic_event_plan_v2.pyと既存.github/workflows/analysis-observed-content.ymlが対象。既存source入力・二欄・本人回答／訂正・権利・watashi.map.v3・DB／RN／唯一realizer／月次当時版は保持し、新reader／controllerは作らない。v1 rawを修補・緩和採用しない。runtime sourceの実装pathとhashは同trialのsource_manifest／diagnostic_preparationへ束縛し、新test／workflowのbyte identityはAPI80d94db7のgit blobへ束縛。
+
+回帰824・現行source等51・runner15とCPU合成保存再読は事前確認。新実4B／tokenizer／Pod操作0、A9／条件付きB9の9file3,133,443byteは未承認／未送付／未実行。通常API／worker24bc228d Live・DB20261115011424、全12実意味・同raw実保存再読・通常反映・補助全体未完を維持する。

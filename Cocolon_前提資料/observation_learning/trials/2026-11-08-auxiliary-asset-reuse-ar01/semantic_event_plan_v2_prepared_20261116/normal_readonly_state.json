@@ -1,0 +1,25 @@
+{
+  "api": {
+    "autoDeploy": "off",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "deploy": "dep-dbsgn8t6e07s739qfk50",
+    "service": "srv-d4ppfpm3jp1c73952bj0",
+    "status": "live"
+  },
+  "database": {
+    "latest": "20261115011424",
+    "migrations": 38
+  },
+  "new_deploys": 0,
+  "new_migrations": 0,
+  "normal_model_activation": 0,
+  "personal_record_reads": 0,
+  "state": "FRESH_METADATA_READ_ONLY_NO_MUTATION",
+  "worker": {
+    "autoDeploy": "off",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "deploy": "dep-dbsgnet6e07s739qg5a0",
+    "service": "srv-d6copljh46gs73cmeic0",
+    "status": "live"
+  }
+}
