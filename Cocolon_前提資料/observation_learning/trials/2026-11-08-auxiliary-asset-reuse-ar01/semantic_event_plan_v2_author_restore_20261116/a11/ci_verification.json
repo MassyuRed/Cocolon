@@ -1,25 +1,35 @@
 {
-  "head_sha": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
-  "model_meaning_effect": "UNASSESSED",
-  "normal_rollout": 0,
-  "older_source_CI_reused": false,
+  "state": "PASS_BOTH_CI_AT_EXACT_SOURCE_NOT_MODEL_QUALITY",
   "repository": "MassyuRed/mashos-api",
+  "head_sha": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
   "runs": [
     {
-      "conclusion": null,
-      "id": 43828489239,
-      "name": "Analysis observed content",
-      "status": "in_progress",
-      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43828489239"
-    },
-    {
-      "conclusion": null,
       "id": 43828489257,
       "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
-      "status": "in_progress",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+      "run_attempt": 1,
+      "started_at": "2026-11-16T08:05:30Z",
+      "completed_record_updated_at": "2026-11-16T08:22:43Z",
       "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43828489257"
+    },
+    {
+      "id": 43828489239,
+      "name": "Analysis observed content",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+      "run_attempt": 1,
+      "started_at": "2026-11-16T08:05:30Z",
+      "completed_record_updated_at": "2026-11-16T08:25:34Z",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43828489239"
     }
   ],
   "source_sha256": "67dd81e26637c912ae9e178f1997dd579c4efca840580023f224b10a41c548c6",
-  "state": "IN_PROGRESS_NOT_A_PASS"
+  "older_source_CI_reused": false,
+  "model_meaning_effect": "UNASSESSED",
+  "A11_executed": false,
+  "B11_executed": false,
+  "normal_rollout": 0
 }
