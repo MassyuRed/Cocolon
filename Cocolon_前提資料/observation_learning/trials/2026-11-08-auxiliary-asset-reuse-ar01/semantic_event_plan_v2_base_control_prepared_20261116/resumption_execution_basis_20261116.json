@@ -1,0 +1,36 @@
+{
+  "state": "USER_DIRECTED_RESUMPTION_OF_PRESENTED_A12_B12_SCOPE",
+  "basis": "Mash instructed continuation immediately after the exact A12/conditional B12 proposal. Proceed only within those presented once-only bounds; no A11/B11 authority is reused.",
+  "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "new_pod": "8d6lpvzb35at8x",
+  "same_pod_copy_files": 3,
+  "new_upload_files": 6,
+  "new_upload_bytes": 3040359,
+  "A12": {
+    "max_responses": 9,
+    "restore_inclusive_seconds": 1800,
+    "once": true
+  },
+  "B12": {
+    "condition": "all five new A12 actual source/raw/projection/text adequate under root and independent full review",
+    "max_responses": 11,
+    "restore_inclusive_seconds": 1020,
+    "once": true
+  },
+  "pre_transfer_checks": {
+    "both_exact_source_ci_completed_success": true,
+    "runs": [
+      43846424667,
+      43846424124
+    ],
+    "baseline_pid": 4089,
+    "start_ticks": "99099105",
+    "baseline_argv_native_helper_proof_match": true,
+    "internal_health": 200,
+    "A12_B12_roots_unused": true
+  },
+  "training": 0,
+  "retry": 0,
+  "normal_rollout": 0
+}
