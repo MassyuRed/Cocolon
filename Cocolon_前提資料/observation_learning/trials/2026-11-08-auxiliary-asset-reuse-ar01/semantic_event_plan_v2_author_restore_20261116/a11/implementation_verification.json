@@ -1,0 +1,69 @@
+{
+  "Pod_operations": 0,
+  "SQL_calls": 0,
+  "complete_lesson_review": {
+    "completed_registration_explicit_in_source_and_quote": true,
+    "current_confirmation_vs_residual_unknown": true,
+    "every_event_and_reading_selected": true,
+    "place_and_version_retained": true,
+    "roles": [
+      "root",
+      "architecture_review"
+    ],
+    "source_qualifications_and_non_action_not_invented_intent": true
+  },
+  "existing_test_path": "ai/tests/test_analysis_semantic_event_plan_v2.py",
+  "final_v2_tests": {
+    "failed": 0,
+    "passed": 33,
+    "seconds": 2.05,
+    "skipped": 0
+  },
+  "full_unit_complete": false,
+  "instruction_bytes": {
+    "new_json_string": 3650,
+    "new_raw": 3472,
+    "old_json_string": 3647,
+    "old_raw": 3632
+  },
+  "intermediate_source_only_suite": {
+    "failed": 0,
+    "instruction_raw_bytes": 3626,
+    "not_a_final_source_test_count": true,
+    "passed": 260,
+    "seconds": 146.45,
+    "skipped": 0
+  },
+  "leaf_message_limit": 16384,
+  "max_leaf_message_bytes": 16379,
+  "model_calls": 0,
+  "model_loads": 0,
+  "new_meaningful_regressions": 2,
+  "normal_rollout": 0,
+  "other_production_ast_unchanged": true,
+  "parent_source_commit": "b14960e1e546643942be7786ed4e487274e4422e",
+  "preparation_metadata_compatibility": {
+    "final_diagnostic_sha256": "cf74da66487ae253cf116d15c8e5803070088baddd304d41db3bf8cd2ea67f6b",
+    "independent_preparation_output_kept_unchanged": true,
+    "model_revision_correction_before_approval": "scope.revision restored to original cached model851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a; source_git_head independently binds API7bb605b; mistaken interim source commit used as model revision was never transferred/executed",
+    "only_new_diagnostic_state_label_corrected_to_existing_finalizer_contract": true,
+    "original_diagnostic_sha256": "f0db9740c7dfa3ae3fe70c123809c9ee2969387b3d483bb3c723c16eabc2fd4b"
+  },
+  "production_changes": [
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py:_SEMANTIC_MAP_EVENT_PLAN_V2_INSTRUCTION"
+  ],
+  "raw_repair": false,
+  "runtime": {
+    "lmfe_git": "817f944fcc8851917c40300a47f62d1defc3ffc3",
+    "new_dependency_installations": 0,
+    "pglite": "0.5.8",
+    "pytest": "9.2.0",
+    "python": "3.12.14"
+  },
+  "same_5_inputs_and_6_groups": true,
+  "source_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "source_sha256": "67dd81e26637c912ae9e178f1997dd579c4efca840580023f224b10a41c548c6",
+  "state": "PASS_SOURCE_REPAIR_AND_CPU_ONLY_MODEL_QUALITY_UNASSESSED",
+  "tokenizer_loads": 0,
+  "training": 0
+}

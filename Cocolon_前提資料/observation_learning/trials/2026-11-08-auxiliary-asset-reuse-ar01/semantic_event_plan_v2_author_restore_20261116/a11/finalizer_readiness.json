@@ -1,0 +1,69 @@
+{
+  "Pod_operations": 0,
+  "SQL_calls": 0,
+  "actual_reread": 0,
+  "actual_save": 0,
+  "binding": {
+    "candidate_plan": {
+      "bytes": 166199,
+      "path": "/workspace/scratch/56cfe0a372d7/candidate_execution/a11/full12_pre_acquisition.plan.json",
+      "sha256": "c4b36f8d3e23be096bd021e72adf070af648129854b1b165664a7f6deca39d83"
+    },
+    "candidate_preparation": {
+      "bytes": 56350,
+      "path": "/workspace/scratch/56cfe0a372d7/candidate_execution/a11/diagnostic_preparation.json",
+      "sha256": "cf74da66487ae253cf116d15c8e5803070088baddd304d41db3bf8cd2ea67f6b"
+    },
+    "checkpoint": {
+      "bytes": 4835570,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.pglite.gz",
+      "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485"
+    },
+    "fresh_model_calls_required": 7,
+    "historical_plan": {
+      "bytes": 169408,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.plan.json",
+      "sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb"
+    },
+    "historical_receipt": {
+      "bytes": 3019,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.receipt.json",
+      "sha256": "afb8ef178db0330a106619eefeb879f405f5e3ba4f0966817a07e4150f52aba0"
+    },
+    "leaf_count": 6,
+    "prompt_version": "semantic_map.event_plan.v2",
+    "source_hashes": {
+      "ai/services/ai_inference/analysis_cumulative_service.py": "9e6eb77154ace9fb5b20fdd4630d5ab4b44c9d55e91cfd7512a11de67edda49e",
+      "ai/services/ai_inference/analysis_if_model_source.py": "5eeb36862e1420701b856b7fcc2617380a1b63bc4ac1d3e4c1e361f50197ef5e",
+      "ai/services/ai_inference/analysis_model_source.py": "d2b3369a9607f348c6f5090e1a39e2c894a3b808d09147a8410156256d2a5cf6",
+      "ai/services/ai_inference/analysis_semantic_map.py": "c03cdd391b24d2ee19d68a7d93eaf59ffa26b558a83b1cd585900ab2462d7395",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "249d3caed394ca85d7cd84c41bb2b7d4e0b0d53b8c66e9facf79c528712ce1b4",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "8f39bd56a145cbb23065e49b9961ddf76127b85be50b7da2211314859126126e",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "67dd81e26637c912ae9e178f1997dd579c4efca840580023f224b10a41c548c6",
+      "ai/tools/serve_emlis_natural_reply.py": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be"
+    },
+    "source_records": 12,
+    "sql_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "sql_input": {
+      "bytes": 59146,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.input.json",
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "state": "EVENT_PLAN_CANDIDATE_BOUND_TO_IMMUTABLE_SQL_SOURCE"
+  },
+  "finalizer_sha256": "4973c8c31fc992a0d94c758e924a511154cdb6ea3275fa598cd0baa276e2678e",
+  "finalizer_source_path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_event_plan_v2_prepared_20261116/event_plan_same_raw_finalize.py",
+  "full12_records": 12,
+  "hosted_database_calls": 0,
+  "leaf_count": 6,
+  "model_calls": 0,
+  "normal_rollout": 0,
+  "prior_check": {
+    "corrected_in": "new unapproved preparation metadata only; established SOURCE_ONLY_EVENT_PLAN_PREPARED_NOT_EXECUTED_NOT_ADOPTED label restored; finalizer and historical originals unchanged",
+    "reason": "new preparation used a novel label instead of the existing finalizer source-only state",
+    "state": "STOPPED_BEFORE_SQL"
+  },
+  "source_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "state": "PASS_EXISTING_FINALIZER_SOURCE_AND_IMMUTABLE_CHECKPOINT_BINDING_ONLY",
+  "unchanged_finalizer_bytes": true
+}

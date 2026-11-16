@@ -1,0 +1,50 @@
+{
+  "schema": "cocolon.a11.normal_readonly_state.v1",
+  "observed_at_utc": "2026-11-16T08:20:26.769Z",
+  "state": "FRESH_METADATA_READ_ONLY_NO_MUTATION",
+  "workspace": "tea-d4pp61idbo4c73bf4hkg",
+  "api": {
+    "service": "srv-d4ppfpm3jp1c73952bj0",
+    "name": "mashos-api",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "deploy": "dep-dbsgn8t6e07s739qfk50",
+    "status": "live",
+    "branch": "main",
+    "autoDeploy": "off",
+    "suspended": "not_suspended"
+  },
+  "worker": {
+    "service": "srv-d6copljh46gs73cmeic0",
+    "name": "mashos-astor-worker",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "deploy": "dep-dbsgnet6e07s739qg5a0",
+    "status": "live",
+    "branch": "main",
+    "autoDeploy": "off",
+    "suspended": "not_suspended",
+    "stale_after_seconds": 900,
+    "stale_after_evidence": {
+      "fresh_plugin_read": true,
+      "event_at_utc": "2026-11-15T01:33:37.988702242Z",
+      "kind": "Existing current-deploy startup log freshly retrieved, not a new restart or new startup event."
+    }
+  },
+  "database": {
+    "project": "oeahmpmigszggnkyiivq",
+    "name": "cocolon-project",
+    "status": "ACTIVE_HEALTHY",
+    "migration_count": 38,
+    "latest": "20261115011424",
+    "latest_name": "piece_answer_and_interpretation_corrections"
+  },
+  "new_deploys": 0,
+  "new_migrations": 0,
+  "normal_model_activation": 0,
+  "settings_changes": 0,
+  "sql_writes": 0,
+  "personal_record_reads": 0,
+  "secret_values_requested": false,
+  "pod_connections": 0,
+  "model_calls": 0,
+  "quality_or_rollout_completion_claimed": false
+}
