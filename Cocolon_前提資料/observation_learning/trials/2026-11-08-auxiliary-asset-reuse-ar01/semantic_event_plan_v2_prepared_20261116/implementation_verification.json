@@ -22,6 +22,29 @@
     "tested_execution_sha256": "567d085a6aa580bccc3e65111dffb41c8e4ec9bb65aeb4f4b0344bbf8458d123",
     "tests_run": 15
   },
+  "github_ci": [
+    {
+      "conclusion": "success",
+      "head_sha": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+      "id": 43806114624,
+      "name": "Analysis observed content",
+      "started_at": "2026-11-16T04:46:44Z",
+      "status": "completed",
+      "updated_at": "2026-11-16T05:05:45Z",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43806114624"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+      "id": 43806114615,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "started_at": "2026-11-16T04:46:44Z",
+      "status": "completed",
+      "updated_at": "2026-11-16T05:11:05Z",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43806114615"
+    }
+  ],
+  "github_ci_exact_source_head_success": true,
   "instruction_compaction": {
     "final_derived_leaves": 6,
     "final_v2_bytes": 3436,
