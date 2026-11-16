@@ -1,0 +1,15 @@
+{
+  "A9": "once max9 calls restore inclusive1800sec",
+  "B9": "conditional all5 independently adequate once max11 calls restore inclusive1020sec",
+  "approved_target": "existing Runpod f1lle4xwq3wjln",
+  "bytes": 3133443,
+  "credential_use": "same Pod auth and original-provider restoration only",
+  "derived_review_file": "one hash-only file <=4096bytes only after actual all-five adequate root and independent review",
+  "files": 9,
+  "no_new_trial_started": true,
+  "retry": 0,
+  "scope_sha256": "b53ac4d90b45631608451c47dc1163265af0b53498bdabdf241d1d0c8743c6fd",
+  "state": "USER_EXPLICITLY_APPROVED",
+  "training": 0,
+  "user_instruction": "承認するから進めろ。"
+}
