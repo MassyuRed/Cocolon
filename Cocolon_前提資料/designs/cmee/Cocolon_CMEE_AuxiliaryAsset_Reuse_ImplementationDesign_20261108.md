@@ -1,4 +1,4 @@
-> **11/17最新：A15／A16は意味不適合で不採用・元提供へ復元済み。A17の同4B基礎モデル比較を準備したが、対象RunPodへの転送が自動承認審査で送信前拒否となり未実行。** 候補APIeec0262b、同5入力・全12記録の原本と247sourceを照合。A17/B17の実行先・model別名・CI束縛を更新し、オフラインのB実行先不一致は送信前に修正した。新10file3,286,846byte（展開後、うちsourceZIP2,592,186byte）を確定。新GPU送付／CPU再導出／tokenizer／model／学習／SQL保存／通常反映0。候補Piece43968192444はsuccess、Analysis43968192233は実行中で、両CI成功へ換算しない。通常API／workerは24bc228dで双方Live・autoDeploy OFF、DB38migration／最新20261115011424を再確認。GPUの元提供PID5836の稼働を画面で確認したが、通常API／workerから新GPUへの実モデル到達は未確認。通常反映を含む本単位／補助全体は未完、build／TestFlight／本人実機保留。再開は補助設計§9.111。
+> **11/17最新：承認済みA17を一回実行し、読書会の予約完了を「予約可能」へ変える誤りが残ったため不採用。元提供へ復元済み、B17・同raw保存再読・通常反映は未実行。** 候補APIeec0262bの両CI成功と確定10file3,286,846byteの転送を確認後、同5入力と12LEAF計画を現source／実tokenizerへ再束縛。4POST中、前対照2と読書会1の3応答を受領した。読書会は図／本文まで生成したが、原文・raw・全可視出力のroot＋独立全文照合で意味不適合。照明は送信済み・未受領、残3件／後対照0。意味判定後に取得childだけを停止したもので、native時間切れとはしない。復元込み374.293秒、元native／120uとargv／env／cwdを保持してPID6855へ復元し、別確認でhealth200・候補18008閉鎖・B17root不存在を確認。通常API／worker24bc228d双方Live・DB38migration／最新20261115011424をfresh確認。学習／model再試行／SQL／通常配備0。本単位／補助全体／正式受入れは未完、build／TestFlight／本人実機保留。詳細・原本は補助設計§9.112。
 
 > **11/16前回候補：fresh16教師32更新は完走したがA14は不適合で失敗閉鎖。既存作者をnode_local.v3へ改修し、候補コード・局所検査・独立review・GitHub反映まで完了。実4B・保存・通常採用は未実施。** AF1は306.882秒／復元込み341.020秒、新73f5／configfb2eを保持。A14は前対照2＋読書会1の3応答、反復・15未使用・後日事実欠落が残り、図／本文・残4件・後対照／B14／SQL／通常反映0。305.217秒で元native d678fe2c・PID13576/start100524246へ復元、別health200・18008閉鎖。新private候補APIc95d17dはnode根拠付きunitから同じ公開graphへ投影し、旧v1／v2・guard／cohort／権利・保存／RNを保持。対象回帰314成功／skip0、最終新2suite47成功とnative既存303成功は重複のため合算しない。独立reviewにblockingなし。両CIは実行中で未成功。A15／新GPUは区切り前に開始せず、同5入力→全12→同raw保存再読→通常反映は次に残す。Render認証による通常接続未確認、元単位／補助全体未完・配布保留。詳細は補助設計§9.109。
 
@@ -2082,6 +2082,35 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="analysis-node-local-a17-actual-20261117"></a>
+## 9.112 11/17 — 承認済みA17の実読書会を不採用、残取得を止め元提供へ復元
+
+Mashが確定10file3,286,846byteの既存Pod5mkzaznzir6ygy送付と、A17最大9応答／復元込み30分一回・全5件独立全文適合時だけB17最大17応答／24分一回・判定hash4KB以下を具体承認した。§9.111の送信前拒否を迂回せず、その新承認後に同ZIP2,697,007byteと準備script5,385byteを送った。遠隔の両SHA・ZIP全9member／CRC・展開合計を確認し、転送は承認byteのまま一回である。
+
+生成前の外側準備では、scriptのinterpreter literalが/optだったためCLIが起動しなかった。実在baselineの/workspace配置へ既存同Podscriptの一行を修正（5,385→5,391byte、修正後SHA265b475822dc52593e2d0da75df098e108fd3a1c9d268e6921dfbb868ca6fc29、追加転送0）。次のCPU事前確認はterminalのHF_HOME未設定によりcached tokenizerを見つけられず、元providerを止める前に終了した。baselineで実測した同じ既存cacheを明示し、失敗CPUstageを別名で保持して再確認した。新download／dependency／model／学習0であり、これらをA17 model再試行や成功実績へ混ぜない。
+
+その後current eec0262bの247source／全8材料hash・同5入力／全12記録・12LEAF＋MERGE計画db43b255を再導出し、cached固定revisionの実tokenizerを確認した。5入力は3199／4698／3124／3256／4217token、12LEAF最大3215tokenで、全件入力＋4096≤32768。元runtimePID5836/start242598228・native eec418d3・120u/fresh32重み／client408file／kernel proofとhealth200をfresh確認。Analysis43968192233／Piece43968192444は同候補headで両completed/success。scope0bb5af44c03a615ceaa4adf9828882abecdb85fd321cac3325c30de7ea4c9fa4を新規凍結し、元8payload全hash・正しいA17/B17 roots・alias・上限・runtime／CIをrootと独立担当が照合した。
+
+A17は内部A9入口で一回起動した。実POST4（前Emlis／IF2＋map2試行）に対し、前対照2と読書会1の3応答を受領。読書会はHTTP200／stop・60.744569秒、CMEE GENERATED、5node／4edgeと本文まで到達した。次の照明は送信済みのまま未受領。rootと独立担当が読書会の全原文・raw・全node／edge／概要／本文を照合し、全5件適合のB条件が成立しないと判断した。
+
+| 読書会の保持と不保持 | 実結果 |
+|---|---|
+| 保持 | 共同担当者の問い合わせと本人非関与、後日の案内送信、一人の了解・全員既読不明、椅子確認の希望と送信状況不明はfactに残った。unknowns=[]そのものを不合格理由にはしない |
+| 完了→可能の変異 | 根拠quoteは「一階の部屋を予約できた」を正しく含むが、同unit.factは「予約可能である」、node.meaningは「予約可能となり」、関係線labelも「一階部屋予約可能」とする。n3／概要／本文へ同じ変異が届く |
+| 時点・開催状態 | 「来週・まだ開かれていない」はraw／図／本文に欠ける。初日の送信未実施もn2.meaning／概要で当時の限定が弱く、翌日送信と並ぶ。後日の送信をrawが明示否定したとは記録しない |
+
+読書会raw SHA9f1fe26a3f3e6dda6166904cd86d2017eb6258ca46213fdcea5080ecbd49c405と全call objectは途中取得と最終回収でbyte同一。正しい引用を選べたことを生成factの意味適切へ換算しない。明示base別名・exact native sourceに従う比較だが、基礎モデルへ切替えるだけでは今回の予約完了の誤読は解消しなかった。他4件の品質やfresh32だけが原因だったことは、この部分実行から認定しない。
+
+意味不採用を記録して、既存取得child6813だけへSIGTERMを一回送った。照明の取得はCancelledErrorで終了し、driver.logには既存signal handlerのevent_plan_child_deadlineが現れるが、root_meaning_abort.jsonと操作事実を優先し、native生成期限到達や照明の完成意味不適合とは呼ばない。受領不明後の次POST0、残3入力／後対照／B17・12LEAF／MERGE0。前後対照同値は未成立。A17一回は消費済み・失敗閉鎖、B17は条件不成立で未実行、残枠を次試行へ流用しない。
+
+停止・復元込み374.293216秒、取得child315.330577秒。元argv／env／cwdと元native eec418d3・120u重みecbdd0d1へPID6855/start242920362で復元し、主driverの完全一致検査と別captureでhash／client／proof・health200を確認。候補PID6556不存在・18008閉鎖・B17root不存在を別readで確認した。鍵・全環境は同Pod内の認証／復元だけに使い、原本exportには含めず、export全fileに両鍵値がないことも同Pod内で確認した。
+
+最終after.result SHA cbadc0eba40d783c88b762a2b4331cf38270402a488d2fc56909b8ade7da4b42、11原本ZIP36,646byte／SHA742bdd91ac4d14b186e06bc204f5b55db9099350c388ccf9fc92592679d1b78bを全CRC・元SHA一致で回収した。原文・raw・投影／本文・scope・preflight・log／意味停止理由・別復元確認は既存private引継ぎのresume_a17_actual_20261117へ保持する。公開trialのnode_local_v3_a17_actual_20261117は本文なし採否・counts／hashだけを記録する。
+
+通常API dep-dbsgn8t6e07s739qfk50／worker dep-dbsgnet6e07s739qg5a0はfresh確認で双方24bc228d Live、DB38migration／最新20261115011424。新candidate通常採用／設定／配備・SQL保存／非生成再読・新学習／model再試行0、build／TestFlight／本人実機保留である。適切な最終rawがないため通常反映へ進めず、本単位／補助全体／正式受入れを完了とはしない。
+
+次は既存作者が正しい根拠quoteからfact／meaning／edgeへ移る時の完了／可能・過去／現在・未開催の読取を、現v3契約と実誤文へ戻って修復する。既存指示には状態保持が既にあり、同じ禁止文やbase切替の反復・raw修補・拒否緩和・新controllerを改善の代用にしない。新しいmodel／学習scopeは未準備・未実行。primary outcome=BLOCKER_NARROWED（明示base比較でも同じ完了状態変異が残ることを実測）、商品改善credit0。STRUCTURE_MAP_DELTA_NONE：今回の実評価と記録・復元のみでproduct source／公開型／保存ownerの変更なし。
+
 <a id="analysis-node-local-a17-transfer-blocked-20261117"></a>
 ## 9.111 11/17 — A15/A16実績からA17の実生成準備へ再開、対象Pod転送は送信前拒否
 
@@ -2327,9 +2356,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・A15/A16不採用を継承、A17転送は具体承認不足で送信前拒否）
+### 11.2 現在の進行欄（11/17・A17実読書会は意味不採用、復元済み・通常反映未完）
 
-主枠は第11回§5、最新実績と再開は§9.111。A15／A16の実raw意味不適合と元提供への復元を引継ぎ、A17の同4B基礎モデル比較を準備した。対象source eec0262bと247file・同5／12材料を照合、実行先不一致は送信前に修正済み。10file3,286,846byteの対象Pod送付が自動承認審査で拒否され、今回はupload／CPU再導出／tokenizer／新model／SQL／通常反映0。新scopeは未凍結・未消費、候補Pieceは成功、Analysisは実行中。通常API／worker24bc228d双方Live・DB38migration／20261115011424をfresh確認。本単位／補助全体未完、配布保留を維持する。
+主枠は第11回§5、最新実績と再開は§9.112。具体承認後、同10fileを転送し現source／tokenizer／runtime／両CI成功へscopeを凍結、A17を一回実行した。4POST／3応答で、読書会は予約完了の可能化等がraw／図／本文へ残りroot＋独立全文照合で不採用。取得childのみ停止して374.293秒で元提供へ復元、別health200・候補閉鎖を確認。残3件／後対照／B17／同raw保存再読／通常反映0。通常API／worker24bc228d双方Live・DB38migration／20261115011424をfresh確認。新model再試行／学習0、本単位／補助全体未完・配布保留。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2338,15 +2367,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／一回保存を保持。A15/A16不採用・復元済み。A17 explicit base候補eec0262bと同材料のオフライン再束縛を確認（§9.111） | 対象Podへの具体送付承認、current CPU／tokenizer／CI確認、同5実意味・全12・同raw保存再読・通常反映。full_source_semantic_coverage=falseと月次当時版を保持 |
+| AR-06 | 完全親source／cohort／一回保存を保持。A17はexplicit baseで実読書会の図／本文へ到達したが、完了状態変異で不採用・元提供復元済み（§9.112） | 引用から生成fact／meaningへの状態保持が未達。同5実意味・全12・同raw保存再読・受入候補の通常反映は未完。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF、DB38migration／最新20261115011424をfresh確認。GPU／Render認証と元提供復元は前session成立、今回も元提供稼働を確認 | 通常API／workerから新GPUへの実モデル到達、設定／鍵一致、受入候補指定版の配置は未成立。画像2残差・配布／本人利用・補助全体未完 |
 
-最新確認・次は§9.111。A15／A16の消費済み試行を再実行せず、不適合rawを採用・新sourceへ再束縛しない。A17は未送付・未実行、Piece成功／Analysis実行中を両成功へしない。一般品質・同raw実保存再読・通常採用・補助全体・正式受入れは未完。
+最新実績と次は§9.112。A17一回は消費済み・不採用で、B17条件不成立。過去rawは診断用原本として保持し、採用・新sourceへの再束縛はしない。一般品質・適切な全12・同raw保存再読・通常採用・補助全体・正式受入れは未完。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.111のA17/B17具体送付承認後、未実行比較を継続。** 既存Pod5mkzaznzir6ygyへ確定10file3,286,846byteを送付し、CPU／tokenizer・fresh runtime／CIを確認して新scopeを凍結する。A17は同5件＋前後4対照・最大9応答／復元込み30分一回、全5件独立全文適合時だけB17は新12LEAF＋MERGE＋4対照・最大17応答／復元込み24分一回。学習／自動retry／raw修補0。A15/A16と旧B枠は転用しない。候補eec0262bのAnalysis成功が隔離開始に、両CI成功が通常採用に必要。対象転送は自動承認審査で送信前拒否、現在新model／SQL／通常反映0である。適切な最終rawの一回SQL保存・別process非生成再読から通常native／map専用別名／IF120u・自然／Piece／API-worker整合反映までを同じ未完単位として進める。build／TestFlight／本人実機保留を維持する。
+**11/17・現在の再開先：§9.112のA17不採用を継承し、既存作者の原文から生成fact／meaningへの状態保持を修復する。** A17は具体承認後に一回実行し、正しい根拠quoteを選んでも予約完了を可能へ変えたため不採用・復元済み。追加学習を外すだけでは今回の誤りは解消しなかった。A17を再実行せず、条件不成立B17枠を流用しない。既存指示の状態保持を再読し、単なる同禁止文追加／base切替反復・raw修補・拒否緩和・新controllerへ戻らない。新model／学習scopeは未準備・未実行。適切な新実結果の同5入力→全12→同最終raw一回SQL保存・別process非生成再読→通常native／map専用別名／IF120u・自然／Piece／API-worker整合反映までが同じ未完単位である。build／TestFlight／本人実機保留を維持する。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

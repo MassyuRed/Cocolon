@@ -1,0 +1,95 @@
+{
+  "schema": "cocolon.analysis.a17.actual.bodyfree.v1",
+  "state": "A17_CONSUMED_REJECTED_BASELINE_RESTORED",
+  "source_commit": "eec0262baf833084cd548819a7960adc1b043c4b",
+  "scope_sha256": "0bb5af44c03a615ceaa4adf9828882abecdb85fd321cac3325c30de7ea4c9fa4",
+  "result_sha256": "cbadc0eba40d783c88b762a2b4331cf38270402a488d2fc56909b8ade7da4b42",
+  "zip_sha256": "742bdd91ac4d14b186e06bc204f5b55db9099350c388ccf9fc92592679d1b78b",
+  "POST_attempts": 4,
+  "received_responses": 3,
+  "completed_maps": 1,
+  "lighting": "SENT_NO_RESPONSE",
+  "remaining_three": "NOT_SENT",
+  "after_controls": 0,
+  "B17_executed": false,
+  "stop_reason": "ROOT_AND_INDEPENDENT_BOOK_MEANING_REJECTION",
+  "termination": "SIGTERM_acquire_child_not_native_timeout",
+  "restore_inclusive_seconds": 374.2932162466459,
+  "restoration": {
+    "state": "A17_BASELINE_RESTORED_HEALTH_AND_CANDIDATE_CLOSED_VERIFIED",
+    "pid": 6855,
+    "ticks": "242920362",
+    "healthz": 200,
+    "candidate_18008_closed": true,
+    "B17_exists": false,
+    "model_calls": 0
+  },
+  "CI": {
+    "actual_verified": true,
+    "source_commit": "eec0262baf833084cd548819a7960adc1b043c4b",
+    "state": "REQUIRED_CI_SUCCESS",
+    "runs": [
+      {
+        "id": 43968192233,
+        "status": "completed",
+        "conclusion": "success",
+        "head": "eec0262baf833084cd548819a7960adc1b043c4b",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43968192233"
+      },
+      {
+        "id": 43968192444,
+        "status": "completed",
+        "conclusion": "success",
+        "head": "eec0262baf833084cd548819a7960adc1b043c4b",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43968192444"
+      }
+    ]
+  },
+  "training": 0,
+  "model_retry": 0,
+  "SQL_save": 0,
+  "non_generating_SQL_reread": 0,
+  "normal_adoption": false,
+  "review": {
+    "schema": "cocolon.analysis.node_local_a17.independent_review.v1",
+    "verdict": "NOT_ADEQUATE_NOT_ADOPTED",
+    "reviewers": [
+      "root",
+      "independent"
+    ],
+    "raw_sha256": "9f1fe26a3f3e6dda6166904cd86d2017eb6258ca46213fdcea5080ecbd49c405",
+    "result_sha256": "cbadc0eba40d783c88b762a2b4331cf38270402a488d2fc56909b8ade7da4b42",
+    "whole_book_call_equal_live_snapshot": true,
+    "retained": [
+      "coowner_inquiry_and_self_noninvolvement",
+      "later_send_one_ack_all_read_unknown",
+      "chair_wish_and_inquiry_status_unknown"
+    ],
+    "blocking": [
+      {
+        "locus": "/nodes/2/units/0/fact",
+        "source": "completed_reservation",
+        "actual": "possibility"
+      },
+      {
+        "locus": "/nodes/2/meaning;/edges/1/label;projection.n3;overview;text",
+        "actual": "same_completion_to_possibility"
+      },
+      {
+        "locus": "all_authored_and_visible_output",
+        "actual": "next_week_and_not_yet_held_omitted"
+      }
+    ],
+    "secondary": [
+      "first_day_non_send_lacks_temporal_qualifier_in_n2meaning_and_overview"
+    ],
+    "not_failure_reasons": [
+      "empty_unknown_array_alone"
+    ],
+    "causal_limit": "Explicit base variant alone did not fix this book failure; other four case quality and adapter-only causation not determined."
+  },
+  "primary_outcome": "BLOCKER_NARROWED",
+  "original_unit_complete": false,
+  "auxiliary_reuse_complete": false,
+  "STRUCTURE_MAP_DELTA_NONE": true
+}
