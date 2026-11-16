@@ -1,4 +1,6 @@
-> **11/16最新：承認済みA7は最初の1件で思考2048token上限に達し、最終JSON未生成で停止。B7は条件不成立で未実行。** 新4file129859byteを同Podへ送付・全SHA一致、実HF preflight5件を通過。同A6重み／読書会messagesで1call105.1615秒、子process127.4212秒、自然な整理終端なしのsemantic_thinking_budget_exceededで残り4件へ進まず、復元込み160.9508秒で元120u／PID134586／health200へ復元した。raw／図／本文0で意味品質は評価不能、候補は通常不採用。原本9member／ZIP10450byteを回収照合、追加学習／retry／B7新12LEAF／MERGE／SQL保存／通常反映0。A7一回は消費済み・未使用枠を転用しない。通常API-worker24bc228d／DB20261115011424の前回確認記録・worker900／配布保留、本単位／補助全体未完を維持。 詳細は補助設計§9.95／11.2／12。
+> **11/16最新：既存作者内の事実文を一度だけ作り、項目・関係線・概要が同じ文を参照する隔離候補を準備。実4B・通常採用は未実施。** API `c258cf0e5a6ba59429553638c4765fe7c17b561a`の新private profile／参照compiler／別adapter・model aliasを実装し、475固有の局所CPU・SQL・HTTP検証と既存Analysis／Piece両CIを通過。公開v3・旧保存版・原文／本人訂正の境界を保持し、IFは元120u、Emlis／Pieceは既存baseへ分離する。合成7応答の同raw一回SQL保存・別process非生成再読は事前確認だけ。A7消費済み／B7条件不成立を継承し、新しいA8／条件付きB8は未送付・未実行、意味改善・本単位／補助全体の完了へ加算しない。詳細は補助設計§9.96。
+
+> **11/16前回実績：承認済みA7は最初の1件で思考2048token上限に達し、最終JSON未生成で停止。B7は条件不成立で未実行。** 新4file129859byteを同Podへ送付・全SHA一致、実HF preflight5件を通過。同A6重み／読書会messagesで1call105.1615秒、子process127.4212秒、自然な整理終端なしのsemantic_thinking_budget_exceededで残り4件へ進まず、復元込み160.9508秒で元120u／PID134586／health200へ復元した。raw／図／本文0で意味品質は評価不能、候補は通常不採用。原本9member／ZIP10450byteを回収照合、追加学習／retry／B7新12LEAF／MERGE／SQL保存／通常反映0。A7一回は消費済み・未使用枠を転用しない。通常API-worker24bc228d／DB20261115011424の前回確認記録・worker900／配布保留、本単位／補助全体未完を維持。 詳細は補助設計§9.95／11.2／12。
 
 > **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速な参照処理を確認し、適合版の隔離高速部品は実GPUで4関数選択・7数値比較を完了。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
 
@@ -1732,3 +1734,19 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 
 
 > **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速なPyTorch代替処理も確認し、高速部品を候補専用に隔離準備中。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
+
+
+## 11/16 — 事実文を共有する私的作者候補の責務（未採用）
+
+[詳細設計§9.96](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-event-plan-prepared-20261116)を現行の準備記録とする。API c258cf0eのprivate profileは原文からevents／readingsを一度作り、nodes／edges／overviewが同じ文を参照する。原rawの事後修補ではなく、既存作者の応答契約と参照展開を分離した候補で、実4B品質は未検証。
+
+| 既存owner | 今回の限定責務 |
+|---|---|
+| cores/analysis/semantic_admission.py | 明示profile、元source／本人訂正、取得前parentと履歴stageの再導出 |
+| cores/analysis/intent_compiler.py | 根拠・参照scope検査と同じ事実文の展開、元plan／raw identityのprivate保持 |
+| ai/tools/serve_emlis_natural_reply.py | private JSON制約、明示alias＋schema＋Analysis認証だけ別adapter選択、default120uへ復元 |
+| analysis_model_source.py | 完全一致候補aliasだけprivate profileを選択、4設定の変更検知 |
+| analysis_if_model_source.py | 同候補alias選択時もIFは元120uへ送信、元4設定identityを保持 |
+| analysis_cumulative_service.py／既存SQL／observed_route_realizer.py／RN | 新owner追加なし。全親source・cohort・guard、最終一回保存、月次当時性、唯一realizer、公開v3を継承 |
+
+sourceは未採用のままGitHub反映、通常稼働24bc228dは維持。新実行9file3,127,144byte／scopee84f40b9は未送付。全12の実意味照合と同raw保存再読、通常native／API-workerへの接続まで未完。全blob意味理解や一般日本語品質をfile数・CPU結果から主張しない。
