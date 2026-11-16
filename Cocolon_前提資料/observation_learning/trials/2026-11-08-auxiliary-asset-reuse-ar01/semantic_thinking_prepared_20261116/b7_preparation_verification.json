@@ -1,0 +1,79 @@
+{
+  "SQL_save": 0,
+  "artifact": {
+    "bytes": 35240,
+    "path": "full12_sql_thinking_once.py",
+    "sha256": "60b9e7ba69e7e0682f16f44bb6491e7c2985c701190178a85c68c17685536afd"
+  },
+  "candidate": {
+    "config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+    "model": "cocolon-qwen3.5-4b-analysis-bounded-thinking",
+    "normal_adoption": false,
+    "weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b"
+  },
+  "capacity": {
+    "effective_input_tokens_and_effective_input_plus_output_tokens": "Effective True template plus6144; independently enforced<=32768. Native additionally counts its switch prefix.",
+    "input_tokens_and_input_plus_output_tokens": "Original wire False template plus4096; unchanged finalizer compatibility."
+  },
+  "conditions": {
+    "A7_calls_required": 5,
+    "A7_technical_completion_is_not_meaning_acceptance": true,
+    "independent_full_source_raw_projection_text_review": "REQUIRED_BEFORE_B7_LAUNCH_NOT_AUTOMATED"
+  },
+  "cpu_verification": {
+    "final_change_exactly_three_SHA_bindings": true,
+    "frozen_native_exact_byte_copy": true,
+    "outer_and_embedded_driver_compile": true,
+    "prior_CPU_and_independent_review_retained": true,
+    "source_SQL_plan_guard_and_finalizer_unchanged": true
+  },
+  "limits": {
+    "acquisition_seconds": 900,
+    "context_tokens": 32768,
+    "driver_seconds": 850,
+    "effective_enable_thinking": true,
+    "final_JSON_tokens": 4096,
+    "fresh_LEAF": 12,
+    "fresh_MERGE": 1,
+    "max_model_calls": 13,
+    "native_request_seconds": 210,
+    "native_total_new_tokens": 6144,
+    "restoration_inclusive_seconds": 1020,
+    "service_pipeline_seconds": 840,
+    "thinking_tokens": 2048,
+    "wire_enable_thinking": false
+  },
+  "new_model_calls": 0,
+  "non_generation_SQL_reread": 0,
+  "normal_rollout": 0,
+  "predecessor": {
+    "path": "semantic_alignment17_recovery_prepared_20261116/full12_sql_alignment17_recovery_once.py",
+    "sha256": "f36cc0eb4f1cbd8f6ab73c7f18abcdc6d4bfb16a39a43f0cf8dd52472ab7f8b4"
+  },
+  "product_acceptance": false,
+  "remote_operations": 0,
+  "retry": 0,
+  "roots": {
+    "A7": "/workspace/semantic-thinking-bounded-20261116-once",
+    "B7": "/workspace/full12-sql-thinking-20261116-once"
+  },
+  "schema": "cocolon.analysis.b7.thinking.preparation.v1",
+  "source_bindings": {
+    "semantic_thinking_candidate.py": {
+      "bytes": 68977,
+      "sha256": "4aefaa7a4e08d0c391938f6106f82dfc77e5a5d2fae2deb33dd222cae177159f"
+    },
+    "semantic_thinking_once.py": {
+      "bytes": 16987,
+      "sha256": "880399e982ca15539f7772a9b8b5d2c236fa96f2ccfd8e08f34dcf91169b498b"
+    },
+    "semantic_thinking_plan.json": {
+      "bytes": 8655,
+      "sha256": "da060a0c2750c2f614caee88c8007002b3aa26c171933a6d9a3a10fb3b53c93f"
+    }
+  },
+  "state": "PREPARED_NOT_SENT_NOT_EXECUTED_NOT_ADOPTED",
+  "training": 0,
+  "uploaded_files": 0,
+  "work_unit_closed": false
+}

@@ -1,0 +1,33 @@
+{
+  "state": "AUTHOR_SEMANTIC_INTEGRATION_UNMET_NOT_RENDERER_OR_SAVE_REVERSAL",
+  "source_api_commit": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "a6_after_sha256": "98f0021d6c40b2d33829f1d2b77d70e77d5dac91a11acc5227fac9a8656bdcf2",
+  "confirmed": [
+    "All five actual A6 materials contain analysis_as_of/fields/records; complete original fields reach author.",
+    "Book raw itself says sent in n2 explanation while edge/overview say unsent.",
+    "Lighting raw itself says shop in title and own desk in summary.",
+    "All five raw to main visible projection fields are unchanged; text re-derives from the same projection.",
+    "Current native source includes sent/store evidence candidates and nodes/edges before overview.",
+    "Existing source_duties run on book/lighting yields zero claims/relations; switching profile alone is not supported as a fix.",
+    "Source duties preserve finite per-record propositions; explicit revision/withdrawal does not replace valid earlier-event history.",
+    "No demonstrated eval/grad, attention-mask, adapter identity or explicit cross-request KV carryover bug was found in inspected native code.",
+    "Current author instruction already specifies event-bound subject/location/time/state and coherent overview. More notice text is not justified."
+  ],
+  "inference_limits": [
+    "No single cause of semantic errors was proven.",
+    "No claim that thinking improves quality or that more training is necessary.",
+    "Historical thinking120 timeout and forced budget512 format1/3 are retained as failed/non-adopted evidence.",
+    "The native mode candidate is a new combination with A6 weights and current constraints, not the first thinking test."
+  ],
+  "next": "Single-call natural thinking then same constrained final JSON, no added fit, only as a new finite approved comparison.",
+  "independent_reviewers": [
+    "whole_product_review",
+    "review_handoff",
+    "normal_rollout_review"
+  ],
+  "new_model_calls": 0,
+  "training": 0,
+  "pod_access": 0,
+  "remote_mutations": 0,
+  "structural_delta": "None for production. No source/rights/CMEE dispatch/SQL/RN change."
+}

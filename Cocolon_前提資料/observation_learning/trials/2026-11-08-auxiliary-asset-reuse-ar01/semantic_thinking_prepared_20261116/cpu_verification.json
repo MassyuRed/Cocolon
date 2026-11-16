@@ -1,0 +1,107 @@
+{
+  "state": "CPU_SYNTHETIC_TOKEN_BOUNDARIES_PASS_NOT_MODEL_QUALITY",
+  "source_sha256": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562",
+  "candidate_sha256": "4aefaa7a4e08d0c391938f6106f82dfc77e5a5d2fae2deb33dd222cae177159f",
+  "candidate_bytes": 68977,
+  "changed_top_level_functions": [
+    "load_generator",
+    "main"
+  ],
+  "other_functions_byte_unchanged": true,
+  "lmfe_commit": "817f944fcc8851917c40300a47f62d1defc3ffc3",
+  "pinned_lmfe_source_hashes_match": true,
+  "tokenizer_receipt_files_match": true,
+  "model_loads": 0,
+  "gpu_calls": 0,
+  "remote_calls": 0,
+  "training": 0,
+  "checks": [
+    {
+      "name": "default_zero_same_real_parser_result_and_generate_options",
+      "state": "PASS",
+      "seconds": 8.855838330000552
+    },
+    {
+      "name": "natural_close_then_first_json_token_private_once",
+      "state": "PASS",
+      "seconds": 38.76414302300327
+    },
+    {
+      "name": "thinking_budget_exact_boundary_and_overrun",
+      "state": "PASS",
+      "seconds": 41.36188575300184
+    },
+    {
+      "name": "no_close_no_forced_close_or_retry",
+      "state": "PASS",
+      "seconds": 0.8516451800023788
+    },
+    {
+      "name": "natural_eos_unchanged_and_missing_close_not_generated",
+      "state": "PASS",
+      "seconds": 0.8095517369984009
+    },
+    {
+      "name": "prompt_close_cannot_start_final_phase",
+      "state": "PASS",
+      "seconds": 0.841211402999761
+    },
+    {
+      "name": "unused_thinking_budget_cannot_enlarge_final_json_budget",
+      "state": "PASS",
+      "seconds": 0.4087145369994687
+    },
+    {
+      "name": "context_reserves_thinking_plus_final",
+      "state": "PASS",
+      "seconds": 0.3096552810020512
+    },
+    {
+      "name": "if_optin_rejected_before_generation",
+      "state": "PASS",
+      "seconds": 0.29431259199918713
+    },
+    {
+      "name": "natural_piece_keep_default_mode_and_base_profile",
+      "state": "PASS",
+      "seconds": 0.6527284420008073
+    },
+    {
+      "name": "wrong_json_key_rejected_and_next_request_fresh",
+      "state": "PASS",
+      "seconds": 41.24667511900043
+    },
+    {
+      "name": "real_lmfe_first_call_anchor_negative_control",
+      "state": "PASS",
+      "seconds": 0.00029645799804711714
+    },
+    {
+      "name": "invalid_thinking_configuration_before_model_load",
+      "state": "PASS",
+      "seconds": 6.464500256697647e-05
+    },
+    {
+      "name": "same_quote_field_pair_and_required_records_constraints",
+      "state": "PASS",
+      "seconds": 20.716456481000932
+    },
+    {
+      "name": "cli_optin_delivery_and_default_zero_without_server",
+      "state": "PASS",
+      "seconds": 0.0012767469997925218
+    }
+  ],
+  "passed": 15,
+  "failed": 0,
+  "limitations": [
+    "No HF model.generate, model forward, GPU or weight load was run.",
+    "Actual HF integration/GPU latency, thinking natural closure and semantic quality are unmeasured.",
+    "Synthetic CPU tensor/generation harness executes the candidate decode closure and pinned LMFE.",
+    "The final-4096 quota is probed directly after real LMFE root setup; no 4096-step model/decoder replay is claimed.",
+    "Private alias wire false versus internal true remains an explicit experiment, not normal deployment."
+  ],
+  "executed_verification_script_sha256": "834d7e50d92f9245cdfd123e02849533ad8ece90105e5278bcb9362004cb26e6",
+  "published_verification_script_sha256": "5bbb59c49fdbe589a17d588447aae61fcf4a286cca442b5f8038420f78836f00",
+  "publication_path_adjustment_only": "Use workspace cwd and final identical native filename; validated candidate and all executed test functions unchanged. Full 15-case replay not repeated after path-only adjustment."
+}

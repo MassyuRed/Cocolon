@@ -1,0 +1,152 @@
+{
+  "a6_originals": {
+    "A3.actual.result.json": "e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb",
+    "after.result.json": "98f0021d6c40b2d33829f1d2b77d70e77d5dac91a11acc5227fac9a8656bdcf2",
+    "baseline.result.json": "7d628676bc75dfc89c9d6484114b42eacb39cd776fd1c096b84b85d4576b834b",
+    "driver.py": "e2a794090b8d412eef75354eec5a974d31f7981108c4f715381b35bcfd2e600c",
+    "execution.json": "c58b31b6288d43d1591781f7bcc3e031f544d34dba9ce26912ad6bc85af105ee",
+    "fit/report.json": "4bb525a52b14b1c232115aa5f3376151f885f4ce724ebf083d5ddfcb26d8fec9",
+    "native.py": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562",
+    "plan.json": "58a1c90dab2f117c13d1dddb3ae58d5cc85ca1d446538858e0eea14d1cfd0363"
+  },
+  "a7": {
+    "baseline_new_generations": 0,
+    "max_model_calls": 5,
+    "per_call_seconds": 300,
+    "restore_inclusive_seconds": 1800,
+    "retry": 0,
+    "root": "/workspace/semantic-thinking-bounded-20261116-once",
+    "training": 0,
+    "work_seconds": 1620
+  },
+  "authorization": {
+    "new_scope": "Upload the exact four new files to the same Pod, A7 once and B7 only under the stated independent meaning condition. Existing env/credentials are used only within that Pod to restore the unchanged provider.",
+    "previous": "A6 consumed; B6 condition unmet and not transferable.",
+    "requires_new_explicit_approval": true
+  },
+  "b7": {
+    "acquisition_seconds": 900,
+    "condition": "Only after root and independent full source/raw/projection/text review of all five A7 outputs is adequate. Script technical success is not meaning approval.",
+    "fresh_leaf": 12,
+    "max_model_calls": 13,
+    "merge": 1,
+    "native_request_seconds": 210,
+    "restore_inclusive_seconds": 1020,
+    "retry": 0,
+    "reused_responses": 0,
+    "root": "/workspace/full12-sql-thinking-20261116-once",
+    "service_pipeline_seconds": 840,
+    "training": 0
+  },
+  "candidate_adapter": {
+    "config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+    "path": "/workspace/semantic-alignment17-recovery-20261116-once/fit/adapter",
+    "updates": 34,
+    "weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b"
+  },
+  "candidate_model_alias": "cocolon-qwen3.5-4b-analysis-bounded-thinking",
+  "candidate_native_sha256": "4aefaa7a4e08d0c391938f6106f82dfc77e5a5d2fae2deb33dd222cae177159f",
+  "case_ids": [
+    "book_club_two_day",
+    "lighting_prior_and_later",
+    "U01_repair_report",
+    "U02_withdraw_submission",
+    "T01_manual10"
+  ],
+  "current_product_state": "A6 failure and auxiliary/whole unit incomplete; ordinary API/worker24bc228d and DB20261115011424 last verified in prior A6 turn, worker900; current turn model/GPU/remote operations0.",
+  "expected_product_difference": [
+    "Book later sent notice must stay sent in all visible fields; initial draft remains an earlier scene.",
+    "Lighting in-store trial must stay in the shop; imagined desk shape and later home use remain separate.",
+    "Retain U01/U02 gains and T01 source facts; all five must complete. T01 is trained, not held out."
+  ],
+  "frozen_api": {
+    "commit": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+    "core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+    "source_mutations": 0
+  },
+  "generation": {
+    "context_tokens": 32768,
+    "effective_enable_thinking": true,
+    "final_json_tokens": 4096,
+    "forced_close": false,
+    "model_generate_calls_per_response": 1,
+    "natural_close_only": true,
+    "raw_repair": false,
+    "reasoning_exported": false,
+    "thinking_tokens": 2048,
+    "total_max_new_tokens": 6144
+  },
+  "hypothesis": "Same fixed 4B and A6 candidate weights/messages, internal natural thinking before the same constrained JSON. Improvement and completion are unverified.",
+  "model": "Qwen/Qwen3.5-4B",
+  "normal_rollout_remaining": "After suitable final full12 and identical raw SQL save/reread: align actual native mode/model alias/wire max budgets and map-only selection without changing IF120u or natural/Piece base, then same-version API/worker and operational checks. No current normal adoption from this private comparison.",
+  "original_adapter": {
+    "config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+    "path": "/workspace/semantic-resume40-v1/run/adapter",
+    "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495"
+  },
+  "original_provider_identity": "Last observed after A6; exact PID/start/argv/env/cwd/source/weights must match before stop. No new live check claimed.",
+  "original_provider_pid": 133674,
+  "original_provider_start_ticks": "235925816",
+  "prior_thinking": [
+    {
+      "calls": 1,
+      "final_empty": true,
+      "finish": "length",
+      "owner": "semantic_map_thinking120_results.json",
+      "seconds": 210.044,
+      "weights": "ecbdd0d1"
+    },
+    {
+      "all_stop": true,
+      "calls": 3,
+      "cmee_format_pass": 1,
+      "forced_close_at": 512,
+      "forced_close_was_at_512_not_natural_end": true,
+      "not_adopted": true,
+      "owner": "semantic_map_budget512_results.json",
+      "weights": "ecbdd0d1"
+    }
+  ],
+  "private_wire_boundary": "B7 keeps existing wire False/final4096 while the dedicated native alias explicitly uses True/2048+4096. It is an isolated comparison, not aligned normal deployment. Wire and effective token counts are both recorded. Normal adoption requires explicit mode/max-budget alignment first.",
+  "prohibited": [
+    "training",
+    "retry",
+    "new dependencies",
+    "new model/service",
+    "raw semantic repair",
+    "new reader/controller/checker",
+    "normal adoption from technical completion",
+    "changing natural/Piece base or IF120u",
+    "production DB/Render/build/TestFlight/device without applicable authorization"
+  ],
+  "purpose": "Existing semantic author: coherent known state and location/target across node fields, edges and overview; no added learning or per-case rules.",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema": "cocolon.analysis.bounded_thinking.preparation.v1",
+  "sql": {
+    "automatic_save": false,
+    "checkpoint_sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+    "guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+    "pre_acquisition_plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+    "same_raw_save": "Only after adequate independent full B7 meaning review, existing finalizer one SQL save and separate process non-generation reread; no raw rebinding.",
+    "source7_current_byte_hashes_verified": true
+  },
+  "start_record": {
+    "affected_current_structure_maps": "Analysis03/CMEE04, no production structure delta",
+    "approval_or_delegation_basis": "Current request to continue existing design and reversible local preparation. No GPU approval inferred.",
+    "completion_condition": "Concrete four-file payload, independent review, non-generation tests, durable publication",
+    "current_docs_and_heads": "Cocolon84cbf84a/API5108; whole product current original, latest weekly5/8.5, auxiliary9.93/11.2/12",
+    "current_gate_or_subgate": "Auxiliary design9.93/11.2/12 existing author meaning integration",
+    "current_source_test_receipt": "A6 original21 members and raw, API5108/core b489, candidate7ae predecessor",
+    "exact_work": "Prepare one untrained same-input internal-mode comparison, retaining conditional full12/same-raw continuation",
+    "execution_owner": "root",
+    "next_product_read_or_mash_decision_point": "Explicit approval of the exact new four-file finite same-Pod scope",
+    "product_destination": "Source-grounded cumulative map and same-raw save/reread through normal API; no effect claimed until actual meaning improvement.",
+    "prohibited_scope": "Consumed A6/B6 reuse, training, retry, production mutation",
+    "scope_classification": "LEVEL_2 reversible local implementation/preparation; LEVEL_3 new Pod upload/execution requires exact approval",
+    "stop_condition": "No new execution until explicit approval; stop on source/provider/dependency mismatch, timeout, non-stop or invalid raw; B7 requires separate full meaning review",
+    "success_credit": "Preparation only; no model quality or product credit"
+  },
+  "state": "PREPARED_NOT_EXECUTED_REQUIRES_NEW_EXPLICIT_APPROVAL",
+  "structure_map_delta": "STRUCTURE_MAP_DELTA_NONE: private existing decoder mode comparison only; public/core/source/storage boundaries unchanged."
+}

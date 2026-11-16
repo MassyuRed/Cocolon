@@ -1,0 +1,13 @@
+{
+  "state": "OFFLINE_PREPARATION_VERIFIED_NOT_MODEL_QUALITY",
+  "exact_same_source_preparations": 5,
+  "exact_same_a6_messages": 5,
+  "tokenizer": "Fixed original Rust tokenizer and Jinja template; not a new HF model call",
+  "real_hf_remote_preflight": "Required before provider stop; not claimed here",
+  "native_sha256": "4aefaa7a4e08d0c391938f6106f82dfc77e5a5d2fae2deb33dd222cae177159f",
+  "plan_sha256": "da060a0c2750c2f614caee88c8007002b3aa26c171933a6d9a3a10fb3b53c93f",
+  "new_model_calls": 0,
+  "training": 0,
+  "gpu_access": 0,
+  "remote_mutations": 0
+}
