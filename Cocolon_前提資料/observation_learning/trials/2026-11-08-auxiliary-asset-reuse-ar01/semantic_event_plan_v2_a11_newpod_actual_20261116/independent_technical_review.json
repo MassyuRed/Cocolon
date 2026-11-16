@@ -1,0 +1,180 @@
+{
+  "B11": {
+    "condition_met": false,
+    "executed": false,
+    "root_exists_in_postcheck": false,
+    "unused_conditional_authority_not_reusable_after_A11_failure": true
+  },
+  "SQL_save": 0,
+  "acquisition": {
+    "all_before_after_control_equality_established": false,
+    "all_three_HTTP_status": 200,
+    "all_three_finish_reason": "stop",
+    "controls_after": 0,
+    "controls_before": 2,
+    "diagnostic_cases_admitted": 0,
+    "diagnostic_cases_not_executed": 4,
+    "diagnostic_cases_received": 1,
+    "driver_exit": 1,
+    "driver_seconds": 128.33162843703758,
+    "max_model_calls": 9,
+    "messages_sha256": "1bc556cde0d071f86d82f5d338dcd934cb812cb732f7fa0222a163b6acc1be5d",
+    "new_model_calls": 3,
+    "projection_generated": false,
+    "raw_case_id": "book_club_two_day",
+    "raw_sha256": "d96f825c3ae828709f2c7f128e4f75278e610801ce4ea05b501877b7530b89eb",
+    "response_body_sha256": "f8eeffd463340a09d8a03ab25206b4ff9edbd9ffdcc8320268f5255618c43d8b",
+    "restoration_inclusive_limit_seconds": 1800,
+    "restoration_inclusive_seconds": 192.17056906805374,
+    "text_generated": false,
+    "wire_request_sha256": "544b6962408b2fd5d770011af0e8280e557d447f441822170692ddcec8dd5aeb",
+    "within_limit": true
+  },
+  "archive": {
+    "CRC_valid": true,
+    "all_members_equal_recovered_local_original_bytes": true,
+    "bytes": 22927,
+    "members": 14,
+    "sha256": "79eda51294b4c37e23e7dd8b5cc325f3d003d18c4a54f70e30c940515b720cf6"
+  },
+  "authority_lifecycle": {
+    "A11_once_consumed_failed_closed": true,
+    "additional_model_call_authorized_by_this_review": false,
+    "automatic_retry_authorized": false
+  },
+  "binding_checks": {
+    "actual_candidate_and_default_adapters_match_scope": true,
+    "actual_driver_and_scope_match_preexecution": true,
+    "actual_scope_JSON_equals_verified_preexecution_scope": true,
+    "all_response_body_hashes_match": true,
+    "all_wire_request_hashes_match": true,
+    "candidate_source_archive_manifest_native_inputs_match_verified_A11": true,
+    "kernel_proof_bytes_equal_verified_new_A5000_proof": true,
+    "no_raw_repair_or_new_message_rebinding": true,
+    "received_case_messages_and_request_ref_equal_frozen_preparation": true,
+    "received_case_raw_exact_response_content_and_sha_match": true,
+    "runtime_canonical_scope_bytes_distinct_from_original_pretty_scope": true
+  },
+  "driver_sha256": "dcf7077c43fa2e8504b3bb512ca2f79e569adfba5fb6be18a6c103e93cec9e63",
+  "execution_sha256": "74a6335329be21d5d4088184d928191e797f34b9044e6f274c9bf32833f23d1d",
+  "failure": {
+    "cause": "The authored reading r1 is not selected in any node, edge or overview unit_refs. All two events are reachable; rejection is the unchanged unused-reading condition.",
+    "code": "analysis_semantic_event_plan_orphan",
+    "compiler_replay": false,
+    "exact_site": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py:4146",
+    "exception_type": "AnalysisSemanticMapError",
+    "orphan_event_ids": [],
+    "pure_JSON_and_source_inspection_only": true,
+    "unused_reading_ids": [
+      "r1"
+    ]
+  },
+  "helper_sha256": "3e5153601958f83f1dd49f56e212c75357957e56903f61d5b4c6913002de2f5f",
+  "human_product_acceptance_claim": false,
+  "kernel_proof_sha256": "d759203ab51d7efbb0d82736d574fca47822ce40d19cc81651b5d340e0760820",
+  "model": "Qwen/Qwen3.5-4B",
+  "native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+  "non_generating_SQL_reread": 0,
+  "normal_4B_connection": {
+    "explanation": "New-Pod loopback health200, adapter restoration and internal diagnostic control responses do not establish that the deployed app/API/worker can reach and authenticate to this provider. Normal connection and rollout require their own actual path evidence; none is supplied by this one-shot result.",
+    "internal_provider_health_confirmed_only": true,
+    "normal_deployed_endpoint_credentials_new_pod_routing_not_exercised": true,
+    "normal_model_generation_success_not_claimed": true,
+    "status": "NOT_VERIFIED_FROM_APP_API_OR_WORKER",
+    "two_before_controls_confirm_candidate_internal_natural_and_IF_routes_only": true
+  },
+  "normal_rollout": 0,
+  "original_file_hashes": {
+    "actual/after.result.json": {
+      "bytes": 40465,
+      "sha256": "d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266"
+    },
+    "actual/candidate-provider.log": {
+      "bytes": 3903,
+      "sha256": "1874968291dfbf8353d861a5d34c1647e25d2c1617a42517c3bc6974f357f832"
+    },
+    "actual/driver.log": {
+      "bytes": 1451,
+      "sha256": "37a30a4b3d0a717996d72245b4db93c08cc17de03b057e2acce9fe5aefbde998"
+    },
+    "actual/execution.json": {
+      "bytes": 1020,
+      "sha256": "74a6335329be21d5d4088184d928191e797f34b9044e6f274c9bf32833f23d1d"
+    },
+    "actual/kernel-proof.json": {
+      "bytes": 6953,
+      "sha256": "d759203ab51d7efbb0d82736d574fca47822ce40d19cc81651b5d340e0760820"
+    },
+    "actual/preflight.json": {
+      "bytes": 1756,
+      "sha256": "6c9d6c537d5f0f14248658ac35d244fc2cdf65aa54d16995a6732217770369e5"
+    },
+    "actual/preflight.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual/provider.argv.json": {
+      "bytes": 1004,
+      "sha256": "3b1f885ff44b0b79ade9ea2a6ec8dd772346c6b274b89e733ec7d28cfdba5c70"
+    },
+    "actual/restored-provider.log": {
+      "bytes": 1566,
+      "sha256": "8eff1d3eff2ba1d8095b8d342c95dcc6441d44e23ec865e936fa55ee47b32823"
+    },
+    "actual/scope.json": {
+      "bytes": 8257,
+      "sha256": "fd04287b55e422d76fbdb910cee4eddcde45c5f8843f6a784ffdc24d15e34e26"
+    },
+    "runtime/a11-launch.log": {
+      "bytes": 146,
+      "sha256": "6b0f1d61574aa22f55d3bc143d86d78b1e07cba2abf7d99d034f27a9b227dc3a"
+    },
+    "runtime/a11-post-restoration-receipt.json": {
+      "bytes": 392,
+      "sha256": "b7ffb5d8c1247be328a54b6fa05f701731f54afe42f832df26d3db664ae06348"
+    },
+    "runtime/authorization-A11-B11.json": {
+      "bytes": 315,
+      "sha256": "59647ad58f2c6f7070fc8b8ab3899fbcb8dc4e2b41b44ca5dc9b2b04adaee512"
+    },
+    "runtime/baseline.argv.json": {
+      "bytes": 623,
+      "sha256": "9ca3bb2c6cd90e8648da46720042704e40d30e0255b5d68df81e204f61ce73e0"
+    }
+  },
+  "product_credit": 0,
+  "restoration": {
+    "argv_matches_preexecution_baseline": true,
+    "candidate_adapter_files_match": true,
+    "candidate_pid": 3048,
+    "candidate_process_alive": false,
+    "candidate_start_ticks": "99083278",
+    "cwd": "/workspace",
+    "health_status": 200,
+    "native_matches_baseline": true,
+    "original_adapter_files_match": true,
+    "original_pid": 1106,
+    "original_provider_restored_recorded": true,
+    "original_start_ticks": "98995881",
+    "postcheck_source": "Recorded independent post-restoration receipt from Pod, verified against recovered archive; reviewer did not reconnect or generate.",
+    "restored_pid": 4089,
+    "restored_start_ticks": "99099105",
+    "same_env_and_cwd_asserted_by_unchanged_driver_before_success_flag": true,
+    "trial_port_closed": true
+  },
+  "result_sha256": "d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266",
+  "retry": 0,
+  "reviewer_GPU_calls": 0,
+  "reviewer_Pod_operations": 0,
+  "reviewer_network_calls": 0,
+  "reviewer_role": "independent",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "schema": "cocolon.analysis.a11.newpod.independent_technical_review.v1",
+  "scope_sha256": "6317b2676984386c60716c7698abfe10072b284b06e988c18872749174aac29f",
+  "source_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "source_modified_by_reviewer": false,
+  "state": "ACTUAL_FAILURE_AND_RESTORATION_CONFIRMED_NOT_ADOPTED",
+  "technical_verification": "PASS_FOR_RECORDED_FAILURE_IDENTITY_AND_LIMITS_ONLY",
+  "training": 0,
+  "unit_complete": false
+}

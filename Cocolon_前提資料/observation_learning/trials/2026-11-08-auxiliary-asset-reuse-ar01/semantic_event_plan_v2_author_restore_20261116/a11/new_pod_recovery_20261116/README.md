@@ -1,11 +1,13 @@
-# 新Podへの復元と承認済みA11/B11の再開
+# 新Podへの復元とA11の実結果
 
-MashはA11／条件付きB11を承認し、残高不足で旧GPUが停止したため新Pod `8d6lpvzb35at8x` で続けるよう指示した。旧scopeの未承認表示は準備時点の履歴。A11/B11は未実行で、一回枠は消費していない。
+新Pod `8d6lpvzb35at8x` のJupyter認証は完了しています。追加のJupyterトークンは不要です。認証値を記録していません。
 
-通常120uと候補34更新のweight／configは保存原本の実member SHAまで一致。保存Piece344a候補、A10実原本、全12元input／SQL checkpoint、portable SQL/client依存も回収可能な現物を確認した。旧Podの全workspace・base全shard・全venv/CUDA binaryの残存や新GPU互換性までは未確認。保存済みadapterを別モデルや再学習で代替しない。
+通常120u・候補34更新のweight/config、固定base851bf6eの11file/9,342,816,694byte、CPU client408を同hashへ復元しました。A5000の新しいkernel probeは7数値一致と2warmを通過しました。再学習はありません。実行前原本は`restored_pre_execution_20261116/`、Git checkpointはe625f7acです。旧Podの全volume残存は未確認で、旧環境全体の同一複製を主張しません。
 
-新Jupyterは認証画面。Mash指定のGoogle経路をbrowserAuthで進めたが、アカウント選択後のfresh Runpodページはまだ未ログイン。認証の引き継ぎ後、新Pod内のmount／ファイル／GPU／実行環境を確認する。旧Podの停止理由と全volume残存を断定しない。
+承認済みA11は一回実行しました。2前対照と最初の分析を受領後、未使用r1で既存compilerが拒否しました。原文／rawの独立全文照合でも、後日の確認済み事実が落ち、参加者受領に椅子照会の根拠を当てる誤りがあり、不採用です。残4件・後対照は実行していません。B11は条件不成立、未使用枠を別試行へ転用しません。
 
-続行時は既存helperとscopeの新Pod実identityだけを最小更新し、必要なら3入力を手元同hash原本から送る。通常120u baselineの重み・native・起動環境を新Podで確定し、新GPUの実kernel確認を使う。旧PID141466／start238372709と旧GPU warm proofを新Pod由来として流用しない。鍵は同アカウント新Pod内だけで扱い、値を記録しない。
+復元込み192.170569秒で、新Pod実行前baseline120uをPID4089/start99099105へ戻しました。argv・重み・新native d678fe2c一致、health200、候補停止／18008閉鎖を確認しました。この新baselineは旧private native ad3d301dと同一ではありません。旧native自体は保存原本からSHA一致で回収しましたが、新Podへ未送付／未有効化です。
 
-A11は5件＋前後4対照・最大9応答・復元込み30分一回。全5件の新実本文が独立全文照合で適切な場合だけ、B11は全12記録6LEAF＋MERGE＋前後4対照・最大11応答・復元込み17分一回。学習・再試行・raw修補0。同raw保存再読→通常反映まで元の未完単位を継続する。通常反映／正式受入れ・補助全体は未完、build／TestFlight／本人実機保留。API7bb605bとその両CI成功は継承する。
+今回の内部確認は通常アプリ/API/workerの新Pod4B疎通成功ではありません。現Render endpoint、通常bridgeと認証接続は未確認です。Render設定／配備・SQL保存・通常反映は0で、元単位と補助全体は未完です。build／TestFlight／本人実機は保留です。次の具体的なGPU試行は未準備・未承認で、自動再実行しません。
+
+詳細は設計§9.105と`../../../semantic_event_plan_v2_a11_newpod_actual_20261116/`のbody-free原本receipt／独立reviewを参照してください。受領raw／source本文／logは公開Gitへ置きません。

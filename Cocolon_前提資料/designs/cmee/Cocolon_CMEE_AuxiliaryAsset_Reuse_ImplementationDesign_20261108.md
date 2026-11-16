@@ -1,4 +1,4 @@
-> **11/16最新：A11／条件付きB11の承認と新Pod8d6lpvzb35at8xでの続行指示を受領。主要保存資産の回収を確認、認証引き継ぎ待ち。** 旧GPUは残高不足で停止したとのMash申告で、旧volume全残存は未確認。通常120u／候補34更新のweight・configが保存原本と完全一致し、A10原本・全12元input／SQL checkpoint・portable依存も保持されている。再学習をせず同じadapterへ復元できる。新GPUのbase cache／全runtime／GPU互換性は未確認。Google経路を安全な認証で進めたが、fresh Runpodページは未ログイン。A11／B11は未実行・枠未消費。認証後、新Podの実identityで既存helper／scopeを最小更新し、同じ9応答30分・条件付き11応答17分を各一回行う。API7bb605b・両CI成功を継承、model／Pod転送／SQL write／通常反映0。通常反映を含む元単位／補助全体は未完、配布保留。詳細は補助設計§9.104と既存a11/new_pod_recovery_20261116/。
+> **11/16最新：新Podへの主要資産復元と新GPU検証を完了。承認済みA11は最初の分析で拒否され、失敗閉鎖・新Pod baseline120uへ復元。B11は条件不成立。** Jupyter認証完了、固定base11file／9,342,816,694byte・通常120u／候補34更新・client408を原本照合。RTX A5000で7数値一致と2warm確認を実施し、旧GPU proofを流用していない。候補API7bb605b・両CI成功の同材料でA11を一回実行、前対照2＋読書会1の実3応答を受領。r1未使用でanalysis_semantic_event_plan_orphanとなり、後続の確認済み事実欠落・受領と椅子照会の根拠混同もroot／独立全文照合で不適合。残4件／後対照／B11は未実行。復元込み192.170569秒、PID4089・health200・argv／adapter一致・候補停止を確認。学習／retry／SQL保存／通常反映0。内部稼働確認を通常アプリの4B接続成功へ換算せず、現Render endpointと新Pod bridge／認証接続は未確認。A11一回は消費済み、未使用B11枠の転用なし。旧volume全残存は未確認だが必要保存資産は回収済み。通常反映を含む元単位／補助全体未完、配布保留。詳細は補助設計§9.105、原本参照はsemantic_event_plan_v2_a11_newpod_actual_20261116。
 
 > **11/16前回source修復：A10失敗原本から既存v2作者へ完成正例を復元し、候補API7bb605bへ反映。実4B改善・通常反映は未確認。** 確認待ち→翌日確認済みと、別人の残る未確認を分離した入力／完成JSON例を既存指示定数内へ戻した。定数以外の製品ASTはb14960eと一致、原5入力／guard／固定時点／同12記録24欄・同6組を保持。最終33件成功、送信時最大LEAF16,379byte。247sourceのremote blob一致と既存実行コードの材料読込、既存finalizerの8source／SQL原本4件の非生成束縛を確認。新scope6c2c2a51・新6file3,039,282byte／同Pod内copy3file、全9file3,139,037byteのA11/B11を準備した。A11最大9応答30分、全5件独立全文適合時だけB11最大11応答17分、各一回。個別未承認・未送付・未実行。A10消費済み／B10条件不成立を転用しない。両CI結果は同候補ci_verification.jsonを参照。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424をfresh再確認。worker900は現deployの既存起動log再取得で確認し、今回変更0。元単位／補助全体未完、配布保留。詳細は補助設計§9.103。
 
@@ -2078,6 +2078,26 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 - 学習／retry／raw修補／応答再利用0、失敗時は一回を閉じる。既存鍵・全envは同Pod内認証と元提供復元だけに使用。個別承認前の送付／実行0。直近A10復元PID141466/start238372709を前提記録とし、実行前の既存preflightで現procと両weights等が一致しなければ停止前に終了する。
 
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
+
+
+<a id="analysis-event-plan-v2-a11-newpod-actual-20261116"></a>
+## 9.105 11/16 — 新GPUへ同資産を復元してA11を実行、最初の分析で失敗閉鎖
+
+§9.104の認証待ちは解消した。新Jupyterの安全な認証が完了し、追加tokenは不要である。値はpayload／Git／logへ保存していない。新Pod8d6lpvzb35at8xの実GPUはRTX A5000 24GB、Python3.12.3／torch2.8.0+cu128／triton3.4.0。通常120u ecbdd0d1/4389a598と候補34更新2f33f9be/09ac18caを保存原本と同byteへ復元した。固定Qwen3.5-4B revision851bf6eの11file/9,342,816,694byteを公開原本から取得し、保存manifestの全SHAと一致した。408fileのCPU client tree07c2ac87も一致した。旧全volume残存は未確認だが、この続行に必要な主要保存資産は回収できた。再学習による代替ではない。
+
+既存kernel probeを新実identityへ最小更新し、A5000 capability8.6で7数値parity・有限性、2回の1752token warm、252依存tree不変を確認した。probe81.427326秒、proof d759203a。旧Ada GPU proofを流用しない。既存helper/driver/scopeだけを新PodのbaselinePID1106/start98995881と新proofへ束縛し、実行前原本をCocolon e625f7acへ保存した。driverのAST差分はHELPER_SHAだけで、原5input／guard／固定時点／同12記録24欄・同6組、出力上限、生成数／復元時間は保持した。3fileは新Podへ回収済み同byteからPod内copyした。source247fileはAPI7bb605bの確定原本を使い、Analysis43828489239／Piece43828489257両CI成功を継承した。
+
+同scope6317b267で承認済みA11を一回実行した。新baseline nativeは公開API7bbのd678fe2cで、旧private native ad3d301dの同一復元ではない。元120u adapterと自然base profileを保持し、保存Piece344a候補は元argvにないため追加しなかった。model用一時鍵は新Pod内でのみ生成・使用され、Jupyter認証値と分離して外部へ保存しない。前対照2件はHTTP200/stop、次の読書会もHTTP200/stopで完結rawを受領したが、既存compilerのanalysis_semantic_event_plan_orphanで拒否された。実3応答／最大9、追加学習／retry0。残4件と後対照は未実行で、前後同値成立を主張しない。
+
+読書会の2eventは到達可能だったが、唯一のreading r1が全node/edge/overviewのunit_refsで未選択となり、既存intent_compiler.py:4146の条件で適切に拒否された。原2記録4欄、prepared、受領rawを華恋と独立担当が全文照合した。初日の書きかけ削除が完了した変更へ変わり、翌日の一階予約・会場返信を読んだ確認・案内送信・一人受領がeventから落ちている。参加者受領のnodeは椅子照会eventだけを参照し、readingにも選択event根拠外の本人行為が入る。今回のrawを「後日の確定を明示的に不明へ戻した」とは記録せず、確定事実の欠落と根拠混同を区別する。図／本文は未生成、独立全5件適切条件は不成立であり、B11は起動していない。
+
+復元込み192.170569068秒（上限1800秒）、driver128.331628437秒。新Podの実行前baselineへargv/env/cwd、同native／両adapterを復元し、PID4089/start99099105・health200を確認した。別読取でもargv／adapter一致、候補PID3048不存在・18008閉鎖・B11root不存在を確認した。A11一回は消費済み・失敗閉鎖であり、残時間や未使用B11を追加試行へ振り替えない。新しい具体的GPU試行は未準備／未承認である。
+
+遠隔14file exportは22,927byte／SHA79eda51294b4c37e23e7dd8b5cc325f3d003d18c4a54f70e30c940515b720cf6、全CRCと各memberの同byteを確認した。after.result40,465byte／SHA d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266、読書会raw SHA d96f825c3ae828709f2c7f128e4f75278e610801ce4ea05b501877b7530b89eb。受領原本は修補／別messagesへの再束縛なし。公開trial semantic_event_plan_v2_a11_newpod_actual_20261116にbody-free receipt／execution／復元証跡／独立技術・意味reviewを置き、source本文／raw／logはprivate実結果へ保持する。
+
+通常4B接続は別の未確認境界である。内部health200と隔離候補のEmlis/IF前対照を、実アプリ/API/workerの新Pod到達・認証・通常応答成功へ換算しない。最後の通常接続資料は旧Podを指すが、現Render endpointの値はfresh未確定なので旧値の継続も断定しない。旧native42367byte/SHAad3d301dは保存原本で回収一致したが、新Podへの送付／有効化なし。新bridge／通常鍵の移設、Render設定／配備、SQL保存／同raw非生成再読、通常反映は0。新候補は通常不採用のままであり、通常反映を含む元単位／補助全体／正式受入れは未完、配布保留である。
+
+primary outcomeはSAVED_ASSETS_RESTORED_AND_FAILED_ATTEMPT_CLOSED。データ回収と新GPU上の実行・復元は成立したが、作者の意味品質と全12・同raw保存再読・通常接続／反映は成立していない。新controller／新guard／拒否条件緩和で成功へ変換しない。STRUCTURE_MAP_DELTA_NONE：隔離移設と実結果の更新のみで、商品owner／入口／公開型／DB型を追加しない。
 
 
 ## 9.104 11/16 — GPU停止後の保存原本回収と、新Podでの承認済みA11/B11再開

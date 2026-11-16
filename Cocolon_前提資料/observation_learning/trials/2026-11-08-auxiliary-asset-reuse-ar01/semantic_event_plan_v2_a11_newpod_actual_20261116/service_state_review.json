@@ -1,0 +1,59 @@
+{
+  "schema": "cocolon.a11.normal_connection.readonly_review.v1",
+  "state": "NEW_POD_INTERNAL_RESTORATION_CONFIRMED_NORMAL_MODEL_CONNECTION_UNCONFIRMED",
+  "reviewer": "service_state",
+  "normal_render": {
+    "workspace": "tea-d4pp61idbo4c73bf4hkg",
+    "api_service": "srv-d4ppfpm3jp1c73952bj0",
+    "worker_service": "srv-d6copljh46gs73cmeic0",
+    "last_verified_live_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "api_updated_at_utc": "2026-11-15T01:34:05.483241Z",
+    "worker_updated_at_utc": "2026-11-15T01:33:28.944611Z",
+    "auto_deploy": "off",
+    "suspended": false,
+    "endpoint_values_freshly_established": false,
+    "endpoint_read_limitation": "Current Render plugin has service/deploy/log metadata but no environment-variable read. No Render UI reauthentication or environment reveal was attempted.",
+    "last_documented_connected_pod": "f1lle4xwq3wjln",
+    "old_pod_still_configured": "POSSIBLE_FROM_UNCHANGED_SERVICE_METADATA_AND_LAST_DOCUMENTED_ROUTE_NOT_PROVEN_CURRENT_ENDPOINT_VALUE",
+    "api_health_meaning": "app.healthz returns fixed status/app fields and does not call the model. API health200 cannot prove Render-to-GPU connection."
+  },
+  "existing_routing_owners": {
+    "natural_and_piece": "Emlis thread factory and Piece model source both use EMLIS_NATURAL_REPLY_ENDPOINT/MODEL/API_KEY.",
+    "analysis": "Analysis model source uses COCOLON_ANALYSIS_MODEL_ENDPOINT/MODEL/API_KEY.",
+    "jupyter_bridge": "Dedicated analysis and natural routes on existing Jupyter HTTP port forward to loopback8000 with distinct model bearer authentication; management authentication remains separate."
+  },
+  "new_pod_internal_restoration": {
+    "evidence": "a11_actual/runtime/a11-post-restoration-receipt.json",
+    "restored_pid": 4089,
+    "health_status": 200,
+    "candidate_process_alive": false,
+    "trial_port_closed": true,
+    "b11_root_exists": false,
+    "normal_api_to_new_pod_connection_proven": false
+  },
+  "original_native_recovery": {
+    "path": "/workspace/scratch/9aae8c9a5481/handoff/extracted/verification/semantic_alignment17_recovery_actual_20261116/original_piece_ordered_server.py",
+    "bytes": 42367,
+    "sha256": "ad3d301d2d1abd9226703dc72e3734eb8da79d8e0cf084d4b0666e97298370be",
+    "matches_requested_original_sha": true,
+    "second_identical_copy_found": true,
+    "read_only_recovery_only": true,
+    "sent_to_new_pod": false,
+    "activated_on_new_pod": false
+  },
+  "remaining_blocker": "Normal connection remains unverified: current Render endpoints have not been inspected and compatibility/authentication between the existing normal runtime configuration and the new Pod is not established. Internal restoration and health checks do not resolve that boundary.",
+  "effects": {
+    "render_ui_reauthentication": 0,
+    "secret_values_requested_or_displayed": 0,
+    "environment_changes": 0,
+    "deploys": 0,
+    "database_writes": 0,
+    "model_posts": 0,
+    "old_native_uploads_to_new_pod": 0,
+    "old_key_transfers": 0,
+    "normal_connection_changes": 0
+  },
+  "normal_rollout_complete": false,
+  "unit_complete": false,
+  "product_acceptance": false
+}

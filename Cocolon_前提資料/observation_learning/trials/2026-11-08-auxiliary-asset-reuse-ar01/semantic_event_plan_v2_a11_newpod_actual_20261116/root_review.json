@@ -1,0 +1,33 @@
+{
+  "all_five_adequate": false,
+  "failure": "analysis_semantic_event_plan_orphan",
+  "independent_meaning_review_sha256": "e37a2e3eb4a10624116664daa3ec0f2a3ea884a5d1da5990daea259670fcc44d",
+  "independent_technical_review_sha256": "8bfee0dd633718e065cf0164ebd80247064781239626f32ec121d996d365ee9d",
+  "known_to_unknown_explicit_inversion_claimed": false,
+  "meaning_findings": [
+    "r1 never selected in node, edge or overview",
+    "First-day incomplete room entry/deletion represented as a completed change",
+    "Later confirmed reservation, venue reply confirmation, transmitted notice and one participant acknowledgment omitted",
+    "Participant acknowledgment node refers only to a chair inquiry event",
+    "Reading includes a source action outside the selected events evidence roots"
+  ],
+  "new_model_calls_by_reviewers": 0,
+  "normal_app_connection": "NOT_VERIFIED",
+  "normal_rollout": 0,
+  "product_unit_complete": false,
+  "raw_repair": 0,
+  "raw_sha256": "d96f825c3ae828709f2c7f128e4f75278e610801ce4ea05b501877b7530b89eb",
+  "received_map_cases": 1,
+  "result_sha256": "d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266",
+  "retry": 0,
+  "reviewers": [
+    "root",
+    "independent"
+  ],
+  "source_and_request_unchanged": true,
+  "source_review": "Full two original records and all four fields, prepared messages, exact received raw and unchanged compiler; no accepted projection or text exists.",
+  "sql_save": 0,
+  "state": "A11_FAILED_CLOSED_B11_CONDITION_NOT_SATISFIED",
+  "structure_map_delta": "NONE; restoration and failed isolated result only, no new product route/controller/DTO/DB",
+  "ungenerated_map_cases": 4
+}

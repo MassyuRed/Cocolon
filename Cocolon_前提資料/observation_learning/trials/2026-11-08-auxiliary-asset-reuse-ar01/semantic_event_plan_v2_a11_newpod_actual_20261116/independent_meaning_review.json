@@ -1,0 +1,133 @@
+{
+  "schema": "cocolon.analysis.independent_meaning_review.v1",
+  "reviewer": "independent_architecture_review",
+  "body_free": true,
+  "unit": "A11",
+  "review_scope": "Full original source, prepared messages and received raw for the sole generated map case; no accepted projection or text exists.",
+  "artifacts": {
+    "source_input": {
+      "path": "new_pod_preexecution/input_cases.json",
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    "preparation": {
+      "path": "new_pod_preexecution/diagnostic_preparation.json",
+      "bytes": 56350,
+      "sha256": "cf74da66487ae253cf116d15c8e5803070088baddd304d41db3bf8cd2ea67f6b"
+    },
+    "actual": {
+      "path": "a11_actual/actual/after.result.json",
+      "bytes": 40465,
+      "sha256": "d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266"
+    }
+  },
+  "identity_checks": {
+    "actual_messages_equal_prepared": true,
+    "actual_request_ref_equal_prepared": true,
+    "actual_messages_sha256_equal_prepared": true,
+    "all_four_source_fields_equal_actual_user_fields": true,
+    "supplement_count": 0,
+    "raw_sha256_recomputed": "d96f825c3ae828709f2c7f128e4f75278e610801ce4ea05b501877b7530b89eb",
+    "raw_sha256_matches_receipt": true
+  },
+  "case_reviews": [
+    {
+      "case_id": "book_club_two_day",
+      "review_state": "REJECTED_NOT_ADOPTED",
+      "http_status": 200,
+      "finish_reason": "stop",
+      "source_records": 2,
+      "source_fields": 4,
+      "events": ["e1", "e2"],
+      "readings": ["r1"],
+      "nodes": ["n1", "n2", "n3"],
+      "accepted_projection_exists": false,
+      "accepted_text_exists": false,
+      "orphan_review": {
+        "all_event_ids_reachable_from_nodes": true,
+        "all_display_unit_refs": ["e1", "e2"],
+        "unused_reading_ids": ["r1"],
+        "reading_selected_by_node": false,
+        "reading_selected_by_edge": false,
+        "reading_selected_by_overview": false,
+        "reported_failure": "analysis_semantic_event_plan_orphan",
+        "matching_compiler_check": "intent_compiler.py:4146 set(readings) <= used_units",
+        "conclusion": "The reading is authored but never selected. Event reachability does not satisfy the independent reading-use requirement. The existing refusal is appropriate."
+      },
+      "meaning_findings": [
+        {
+          "code": "FIRST_DAY_ACTION_CHANGED",
+          "severity": "material",
+          "raw_refs": ["e1", "r1"],
+          "source_fields": [1, 2],
+          "finding": "An interrupted room-name entry followed by deletion is restated as a completed change. The original assumption about the upstairs room is not a confirmed venue state."
+        },
+        {
+          "code": "CONFIRMED_FOLLOWUP_OMITTED",
+          "severity": "material",
+          "raw_refs": ["e1", "e2", "n1", "n2", "n3", "overview"],
+          "source_fields": [3, 4],
+          "finding": "No event represents the later downstairs reservation, the author's reading of the venue reply and confirmation of room/start time, the corrected invitation's transmission, or one participant's acknowledgment. These are known later facts, distinct from the remaining uncertainties."
+        },
+        {
+          "code": "TITLE_SUPPORT_SUBJECT_MISMATCH",
+          "severity": "material",
+          "raw_refs": ["n1", "n3", "e2", "overview"],
+          "source_fields": [3, 4],
+          "finding": "The participant-acknowledgment node selects only the co-organizer's chair-inquiry event. The transmission-related node and overview also lack an authored event establishing transmission. Their labels do not obtain the required support from their selected units."
+        },
+        {
+          "code": "READING_EXCEEDS_EVENT_ROOTS",
+          "severity": "material",
+          "raw_refs": ["r1", "e1", "e2"],
+          "source_fields": [1, 2],
+          "finding": "The reading adds the author's communication of confirmation points. That action is in the original input but outside the selected events' evidence roots. Its occurrence and the co-organizer's venue inquiry must remain distinct."
+        },
+        {
+          "code": "STATE_AND_ACTOR_COVERAGE_INCOMPLETE",
+          "severity": "material",
+          "raw_refs": ["e1", "e2", "n2"],
+          "source_fields": [1, 2, 3, 4],
+          "finding": "The source distinguishes the co-organizer's venue inquiry, the author's nonparticipation in that inquiry, the first-day draft-only state, and the later confirmed venue/transmission state. The raw does not preserve that progression as distinct authored facts. The future meeting's unheld state and the uncertainty about whether every participant has read the invitation are also absent."
+        }
+      ],
+      "bounded_preservation_observations": [
+        {
+          "raw_refs": ["e2"],
+          "source_fields": [3],
+          "finding": "The co-organizer's stated wish about chair numbers remains an observed statement, and whether the associated inquiry was sent remains explicitly unconfirmed. This limited qualification is source-supported."
+        },
+        {
+          "raw_refs": ["e1", "e2"],
+          "finding": "The raw does not explicitly assert that the later venue confirmation is currently unknown. The observed failure is omission of the confirmed followup, rather than a demonstrated explicit known-to-unknown assertion."
+        }
+      ],
+      "meaning_adequate": false,
+      "format_receipt_is_not_meaning_success": true
+    }
+  ],
+  "ungenerated_cases": [
+    "lighting_prior_and_later",
+    "U01_repair_report",
+    "U02_withdraw_submission",
+    "T01_manual10"
+  ],
+  "limits": {
+    "remaining_cases_certified": false,
+    "accepted_projection_or_text_reviewed": false,
+    "new_model_calls_by_reviewer": 0,
+    "gpu_operations_by_reviewer": 0,
+    "product_code_changes_by_reviewer": 0,
+    "raw_or_source_repairs_by_reviewer": 0
+  },
+  "closure": {
+    "all_five_cases_adequate": false,
+    "b11_condition_satisfied": false,
+    "b11_executed": false,
+    "sql_save": 0,
+    "non_generation_sql_reread": 0,
+    "normal_adoption": false,
+    "retry_permission_created": false,
+    "conclusion": "A11 is closed as a failed once-only attempt. The current unfinished product/normal-reflection unit remains incomplete; neither the four ungenerated cases nor B11 can be counted as successful."
+  }
+}
