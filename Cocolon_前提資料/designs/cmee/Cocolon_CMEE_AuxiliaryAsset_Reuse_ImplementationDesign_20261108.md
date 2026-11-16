@@ -1,4 +1,4 @@
-> **11/16最新：承認済みA5は提供停止前のCPU照合で停止、生成・学習0。** 起動処理の既存API依存参照漏れでfastapi importに失敗し、元PID131491/start235250260/health200・120u重みを維持。B5は前提不成立で未実行、A5一回は消費済み。原ZIP/ログ/receiptのCRC・全byte/SHAと停止位置を独立照合した。全段階の既存依存参照を修復し、新2launcher46542byteのA6（同17教材・34更新/最大7応答・復元30分）と条件付きB6（新12LEAF+MERGE最大13応答・復元17分）を準備、未送付/未実行・新承認待ち。教材/driverは無変更・再送なし。通常24bc228d・DB20261115011424・worker900、配布保留、本単位/補助全体未完を維持。 詳細[§9.92](#analysis-alignment17-preflight-stop-recovery-20261116)。
+> **11/16最新：承認済みA6は34更新・7応答・復元を完了、意味不整合のためB6未実行・新重み不採用。** 新2file46542byteを送付し旧教材/driverは再送0。学習451.4675秒、前2＋後5すべてstop/CMEE GENERATED、生成合計581.5280秒、復元込み1177.2444秒で元120u・PID133674/health200へ復元。読書会の送信済み→未送信の逆転と内部矛盾、照明の店での試用→自分の机への場所移動が原raw/図/本文に残る。修理の予定/未受取・取消後の本人意向は保持が改善したが、全体の意味条件は不成立。B6新12LEAF/MERGE・SQL保存/実再読/通常反映0。原本21memberと新重み112テンソルを回収・照合、通常24bc228d/DB20261115011424・worker900、配布保留、本単位/補助全体未完を維持。 詳細[§9.93](#analysis-alignment17-recovery-actual-20261116)。
 
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](#piece-corrected-observation-source-20261115)。
 
@@ -24,7 +24,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.92: approved A5 launch consumed at CPU preflight fastapi import failure before provider stop/model/training; B5 unexecuted, not reassignable. Original PID131491/start235250260/health200/120u unchanged. New2launchers46542bytes A6/B6 prepared, existing plan/driver not resent; new explicit approval required. A6max34updates/7replies/restore1800s; conditionally B6fresh13/restore1020s. Normal24bc228d/DB20261115011424/worker900; same-raw save/reread/normal rollout unfinished, build/device deferred."
+current_next: "Section9.93: approved A6 consumed/completed34updates7direct-native replies/restored1177.2444s; allstop/GENERATED but book state reversal and lighting trial-location transfer remain, independent meaning condition unmet. B6 not executed or reassignable; candidate2f33f9be not adopted, old120u restored PID133674/health200. No new GPU/learning scope prepared. Same-raw SQL save/reread and normal rollout unfinished. Normal24bc228d/DB20261115011424/worker900;build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1763,6 +1763,37 @@ launcher83行のpreflight return code assertで終了し、execution.json作成�
 
 B6全13rawも独立照合後、適切な同じ最終rawを一回SQL保存→別process非生成再読→通常native/model identity/map・IF境界/自然・Piece profile/API・worker整合までが未完。source7hash/全12源泉/取得前plan75daa8/SQLcheckpoint801ba068/guard a000deb9/as_ofを変えず旧raw再束縛なし。通常API/worker24bc228d双方Live・DB38migration/最新20261115011424をfresh read-only確認、本人記録読取/設定変更0。worker900・selector/研究重み未採用、build/TestFlight/本人実機保留、四仕事/第11回§5、本単位/補助全体/正式受入れ未完を維持する。
 
+
+<a id="analysis-alignment17-recovery-actual-20261116"></a>
+## 9.93 11/16 — A6の34更新・7応答・復元を完了、状態逆転と場所移動が残り通常不採用
+
+Mashの明示承認後、同Podへ新2file46542byteを送付し、旧plan/driverを含む全4SHAを照合。教材/driverの再送0、A6を一回起動した。§9.92の全段階client依存参照の修復は働き、元/client環境のML6module import元/versionは完全一致、既存driverによる19prompt/17fullのHF列/EOS/mask preflightを通過した。学習は17表示形（旧9保持＋新2題材の各4形）を各2回、最大34更新を完了。追加install/model取得/retryなし。
+
+| 実測 | 結果と範囲 |
+|---|---|
+| 学習 | 34更新451.467500949秒<600、学習process498.419228661秒。120uからfresh optimizer、exact optimizer/RNG resumeではない。保存112tensorのRAM一致、新規読込/非学習状態を確認 |
+| 学習前 | 未学習U01/U02の2応答、両stop/CMEE GENERATED、生成合計164.140483225秒 |
+| 候補後 | A3対象2＋U01/U02同prompt2＋既存T01保持1の5応答、全stop/GENERATED、生成合計417.387533536秒。DIRECT_CURRENT_NATIVEであり7HTTP200とは記録しない |
+| 上限 | 合計7応答・生成581.528016761秒<900、最長196.116305772秒<210。復元込み1177.244417483秒<1800、3phase exit0 |
+| 復元 | 元args/env/cwd/元120uへ復元。PID133674/start235925816/health200、初期weights ecbdd0d1不変。B6root無し |
+| 新候補 | weights2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b、config09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750。15351792byte/112F32/3833856parameter、全finiteを独立CPU数値確認。通常不採用、次の初期値へ自動採用しない |
+
+候補後の全原文・raw・図/本文・unknownsをrootと独立担当で全文照合した。**B6条件不成立の直接理由は、読書会の既知状態逆転/内部矛盾と、照明の試用場所の移動。** 完結・引用・record被覆成功を意味品質へ昇格しない。
+
+| 対象・候補後秒数 | 原文と生成物の最終照合 |
+|---|---|
+| 読書会44.194568521 | 後日案内を修正送信済みなのにoverview/edgeは未送信。同じraw n2説明は送信済みで内部矛盾。初日下書きのn1未送信は時点を限れば支持。椅子問い合わせのunknown/未開催は正しく、予約/一人返信の省略自体を別拒否理由にしない |
+| 照明61.650510473 | 店で持参ノートを使った試用をn2.summaryが自分の机での試用へ移す。今回はA4の同項目9回反復・未完が起こらず完結、購入後の30分描画はoverviewに保持。棚の足は原文に存在し、語の創作とは数えない |
+| U01修理52.102165914 | 完了連絡/明日の受取予定/未受取/未動作確認/弟の別端末と相談不明を保持。前の受取未定/店へ電話したという混同は消失。修理完了未確認の表現は現物未確認とも読め、連絡未着へ戻ったとは断定しない |
+| U02取消63.323982856 | 候補→海辺一枚応募/受領→取消/再応募意図なし/友人へ取消未伝達を保持、前の友人の再応募予定という主体飛躍は消失。初日の未決定を後で決める選択へ強め、unknownは述語がなく曖昧 |
+| T01保持196.116305772 | 12項目5線/10record被覆で主な事実は保持。ただし落ち着いた経験へ望みを付加、未特定の受け取り対象を未発言相談の内容へ固定。意味重複/冗長さあり。学習済みsource・前比較なしで、未見や一般化成功率へ数えない |
+
+[公開の実行/独立review](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_alignment17_recovery_actual_20261116/independent_review.json)。原本は21memberの元ZIP14283397byte/SHA dd3406a8abd9c132e5fc05a407b7a5e09462100e9e2eacc0e92d11f4599ea171と展開物/新重みを回収し、全CRC/byte/receipt17file SHAを独立照合。別UI読取after/baseline/fitも全byte一致。after SHA98f0021d6c40b2d33829f1d2b77d70e77d5dac91a11acc5227fac9a8656bdcf2、baseline SHA7d628676bc75dfc89c9d6484114b42eacb39cd776fd1c096b84b85d4576b834b。無修補原本/重み/復元画面は既存引継ぎへ保持。実稼働native ad3d301d…370beの42367byte原本も回収し、583a診断参照原本と混同しない。
+
+**A6の有限一回は終了・消費済み、B6は送付済みでも起動/新12LEAF/MERGE0・条件不成立/転用不可。** SQL保存/同raw実再読/通常反映0、新重み不採用。format/引用/語り方/時点教材が同時に変わった一回で、個々の原因や一般品質を断定しない。通常接続のmap専用model選択案はscratchだけでAPI tracked source/Pod/設定へ適用0。未評価のIFへ新重みを広げず、既存自然/PieceのbaseとIF120uを維持する。
+
+第11回§5/四仕事を維持し、次の未完は既存作者が複数記録の既知状態と場所/対象を一貫した図本文にすること。新しいreader/controller/注意文・別Gateの追加を意味改善の代用にせず、原本/教材/既存作者の責務から再開する。新GPU/学習案は未準備/未実施で、A6/B6を再利用しない。適切な全12結果→同raw一回SQL保存→別process非生成再読→通常native/model identity/map・IF境界/自然・Piece profile/API/worker整合までは未完。source7hash/全12源泉/取得前plan75daa8/SQLcheckpoint801ba068/guard a000deb9/as_ofを維持する。通常API/worker24bc228d双方Live・DB38migration/最新20261115011424をfresh read-only確認、設定/本人記録読取0。worker900・selector/研究重み未採用、build/TestFlight/本人実機保留、本単位/補助全体/正式受入れ未完。
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
@@ -1818,9 +1849,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/16・A5はCPUで停止、依存参照修正版は新承認待ち）
+### 11.2 現在の進行欄（11/16・A6完了、意味条件未達でB6未実行）
 
-全体主枠は§9.54/第11回§5。§9.72の回答・本人訂正→Piece・通常DB/API反映は完了済み。現在の未完単位は長履歴の実意味改善から同raw実保存再読・通常反映まで。§9.92で承認済みA5を起動したが、既存API依存の参照漏れによるfastapi import失敗でCPU preflight停止。提供停止/学習/生成/再試行0、元PID131491/health200・120uを保持、A5一回は消費済み・B5は未実行。全段階の依存参照を修復した新2launcher46542byteのA6/B6を準備、未送付/未実行・新承認待ち。同じ17教材/34更新/最大7応答/復元30分と、独立全文意味照合が適切な場合だけ新13応答/復元17分。教材/driverは無変更・再送なし。通常24bc228d/DB20261115011424・worker900・配布保留、本単位/補助全体未完を維持する。
+全体主枠は§9.54/第11回§5。§9.72の回答・本人訂正→Piece・通常DB/API反映は完了済み。現在の未完単位は長履歴の実意味改善から同raw実保存再読・通常反映まで。§9.93で承認済みA6を一回実行し、34更新451.4675秒、前2/後5の7応答すべてstop/GENERATED、復元1177.2444秒で元120u・PID133674/health200へ戻した。依存修復/保存112tensor照合/完結は成立したが、読書会の状態逆転と照明の場所移動が残り、新重み不採用/B6条件不成立。B6起動/新12LEAF/MERGE、SQL保存/実再読/通常反映0。新GPU/学習scopeは未準備、A6消費済み/未使用B6を転用しない。通常24bc228d/DB20261115011424・worker900・配布保留、本単位/補助全体未完を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1833,13 +1864,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | §9.72の24bc228d API／worker双方Live・migration適用・対応RN sourceとCI成功を継承。§9.73候補は通常未反映 | 起動・queue poll・未認証HTTPを本人生成保存や実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
-現在の意味照合原本は§9.90、17教材の定義は§9.91、最新停止原本/原因と新しい別一回の準備は§9.92。A5未生成を未消費へ戻さずB5を転用しない。新A6後5件の独立全文照合が適切な場合だけB6へ進み、全13rawの独立照合→同raw保存再読→通常整合まで進める。正式受入れ・補助全体完了は未認定。
+現在の最終実原文/raw/意味採否と再開根拠は§9.93。§9.92/旧prepared scopeは実行前の準備履歴でA6再起動やB6起動の指示ではない。全原本/新重みを保持し、意味未達の既存作者から同raw保存再読/通常反映へ継続する。正式受入れ・補助全体完了は未認定。
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：第11回§5を維持し、§9.92の依存参照修正版A6/B6を新しい明示承認後に進める。** 承認済みA5はCPU preflightでfastapi import失敗、提供停止/生成/学習0だが起動一回は消費済み。B5は前提不成立で未実行、failed root/旧原本/旧コードを保持し転用しない。元PID131491/start235250260/health200・120uは維持。新2launcher46542byteは未送付/未実行で、同Podに既存の教材/driverは再送しない。全段階の既存client参照を整合し、新しいA6/B6 rootで別一回に分離した。追加CPU確認も同じ期限内であり、A6は同17教材/最大34更新・最大7応答/復元30分、独立全文意味照合が適切な場合だけB6新12LEAF+MERGE最大13応答/復元17分。再試行/追加依存取得なし、認証/起動環境は同Pod内だけで使う。
+**11/16・現在の再開先：第11回§5を維持し、§9.93のA6全原文/rawと独立照合を既存作者の修復根拠にする。** A6は承認どおり一回の34更新/7応答/元提供復元を完了・消費済み、B6は意味条件不成立で未実行。元120u/PID133674/health200・初期weights不変、candidate2f33f9beは通常不採用/次初期値へ自動採用しない。前提資料と原本を読む再開確認は必要だが、新しいreader/controller/注意文やGateだけを増やさず、複数記録の既知状態/場所/対象を一貫した図本文へ統合する未達から進める。新GPU/学習/再試行案は未準備/未実施で、消費済みA6や未使用B6を流用しない。
 
-A6後5件の全原文/raw/図/本文/unknownを独立照合し、適切な場合だけB6へ進む。さらにB6全13rawの独立照合後、適切な同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF境界・既存自然/Piece profile・API/worker整合まで進め該当単位を閉じる。上限/例外/不適切な意味は停止・元提供復元・原本保全し無承認で追加実行しない。core b489/source7hash/全12源泉/取得前plan75daa8/SQLcheckpoint801ba068/guard a000deb9/as_ofを変えず旧raw再束縛なし。通常24bc228d/DB20261115011424・worker900・selector/研究重み未採用、build/TestFlight/本人実機保留、本単位/補助全体/正式受入れ未完を維持する。
+適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。今回rawを別receiptへ再束縛せず、core b489/source7hash/取得前plan75daa8/SQLcheckpoint801ba068/guard a000deb9/as_ofを保つ。通常修正は既存frozen checkpointの保存/再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d/DB20261115011424・worker900・selector/研究重み未採用、build/TestFlight/本人実機保留、本単位/補助全体/正式受入れ未完を維持する。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
