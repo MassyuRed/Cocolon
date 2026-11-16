@@ -1,0 +1,22 @@
+{
+  "schema": "cocolon.a10.user_authorization.v1",
+  "user_authorized": true,
+  "basis": "Current user explicitly approved exact A10/conditional B10; requested continuing through normal reflection only after prerequisites.",
+  "scope_sha256": "f68618f074eb5ce176491e4a45926b5bfa4e6ebbcbbd8c9d9dcda812d29d0d86",
+  "scope_immutable_preserved": true,
+  "new_upload_files": 6,
+  "new_upload_bytes": 3039091,
+  "same_pod_copy_files": 3,
+  "prepared_files": 9,
+  "prepared_bytes": 3138846,
+  "A10_once": true,
+  "A10_restore_inclusive_seconds": 1800,
+  "B10_conditional_once": true,
+  "B10_max_seconds": 1020,
+  "training": 0,
+  "retry": 0,
+  "after_any_failure_no_further_correction_or_retry": true,
+  "B10_condition_met": false,
+  "A10_authority_state": "CONSUMED_CLOSED_FAILURE",
+  "B10_state": "NOT_EXECUTED_CONDITION_UNMET_NOT_REUSABLE"
+}

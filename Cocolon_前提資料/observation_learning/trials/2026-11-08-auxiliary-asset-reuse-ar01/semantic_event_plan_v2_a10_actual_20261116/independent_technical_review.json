@@ -1,0 +1,62 @@
+{
+  "B10": {
+    "condition_met": false,
+    "executed": false,
+    "root_present_in_postcheck": false
+  },
+  "SQL_save": 0,
+  "actual_result_sha256": "51b7808b233c0959c4935d277f98da16e5a8eb15158459e725cdef42f5ad4f52",
+  "both_actual_cases_prepared_messages_and_request_refs_match": true,
+  "both_raw_response_body_hashes_match": true,
+  "both_wire_hashes_match": true,
+  "controls_after": 0,
+  "controls_before": 2,
+  "diagnostic_cases_admitted": 1,
+  "diagnostic_cases_received": 2,
+  "driver_sha256": "04431cee0e334f3a268125fba2b38525502154c1a789948a315779ca4bde2ab7",
+  "exact_scope_json_equal": true,
+  "execution_sha256": "5aaa1c383206bd6d903309292db05e0b5569764066ce45688019a7688ee59a77",
+  "failure": {
+    "case_id": "lighting_prior_and_later",
+    "cause": "Both authored readings are absent from all displayed unit_refs. All four events are reachable; this is the unused-reading check, not an orphan event.",
+    "code": "analysis_semantic_event_plan_orphan",
+    "no_rerequest_or_raw_repair": true,
+    "site": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py:4146",
+    "unused_reading_ids": [
+      "r1",
+      "r2"
+    ]
+  },
+  "full_before_after_control_equality_established": false,
+  "new_model_calls": 4,
+  "non_generating_SQL_reread": 0,
+  "normal_adoption": false,
+  "original_archive": {
+    "bytes": 31359,
+    "original_manifest_verified_files": 11,
+    "sha256": "563bc9bc2cb4fa191c84b5773f97f80cfaf832d5539082e5ab2c8624d0f9b18f",
+    "zip_crc_verified": true
+  },
+  "product_quality_pass": false,
+  "restoration": {
+    "candidate_listener_present": false,
+    "elapsed_seconds": 276.14428925700486,
+    "health_status": 200,
+    "independently_reexecuted": false,
+    "pid": 141466,
+    "reported_and_postchecked": true,
+    "restore_inclusive_limit_seconds": 1800,
+    "start_ticks": "238372709",
+    "within_limit": true
+  },
+  "retry": 0,
+  "review_actions": "Offline original-byte, JSON, hash and source inspection only; no model generation, compiler replay, network request or product source modification.",
+  "reviewer_role": "independent",
+  "schema": "cocolon.analysis.a10.independent_technical_review.v1",
+  "scope_sha256": "f68618f074eb5ce176491e4a45926b5bfa4e6ebbcbbd8c9d9dcda812d29d0d86",
+  "source_commit": "b14960e1e546643942be7786ed4e487274e4422e",
+  "state": "ACTUAL_FAILURE_CONFIRMED_NOT_ADOPTED",
+  "training": 0,
+  "unexecuted_cases": 3,
+  "unit_complete": false
+}

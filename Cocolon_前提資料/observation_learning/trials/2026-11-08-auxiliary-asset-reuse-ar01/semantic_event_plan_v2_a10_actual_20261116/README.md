@@ -1,0 +1,11 @@
+# A10実行原本 — 2026-11-16
+
+承認済みA10を各上限内で一回実行しました。前対照2件と分析2件の4応答を受領。読書会は図・本文へ到達したものの、原文と独立照合で不適合。照明は未使用reading r1/r2によりanalysis_semantic_event_plan_orphanで拒否され、図・本文は未生成です。残り3件・後対照は未実行。
+
+取得218.862417985秒、元提供への復元込み276.144289257秒。元argv/env/cwdと両重みの一致をdriverで確認、別processでPID141466/start238372709、health200、候補listener停止、B10root不存在を確認。追加学習・再試行・SQL保存・通常採用0。A10は消費済み・失敗閉鎖、B10は条件不成立で未実行です。通常反映を含む元の作業単位・補助全体・正式受入れは未完です。
+
+API候補b14960e、Cocolon開始点b3948419、scopef68618f074eb5ce176491e4a45926b5bfa4e6ebbcbbd8c9d9dcda812d29d0d86。元の生成rawを修補・別messagesへ再bindしていません。通常API/workerは24bc228d、DB38migration/20261115011424、worker stale900。build/TestFlight/本人実機は保留です。
+
+originals/はPod取得の元byte、original_zip/はPodで作成した31359byte ZIPです。reviews/はrootと独立reviewerの本文なし照合、identity/は実行・承認・通常read-only確認です。秘密値・env値・model weights・本人実データ・ブラウザ画像を含めません。コード原本と新6fileはGitHubのsemantic_event_plan_v2_author_restore_20261116/とAPI b14960eへ戻れます。原本ZIPはUIダウンロード待機がtimeoutしたため、Jupyter Editorのbase64全文copyで回収し、ZIP CRCと全元member hashを照合しました。推論再実行はしていません。
+
+公開folderの本文なし記録と、上記originals/・reviews/・identity/等の非公開ZIP内構成は別です。保存成果物はprivate_artifact.jsonのLibrary identityへ戻ります。

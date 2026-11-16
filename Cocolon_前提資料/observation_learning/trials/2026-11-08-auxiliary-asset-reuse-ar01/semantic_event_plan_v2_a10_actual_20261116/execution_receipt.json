@@ -1,0 +1,58 @@
+{
+  "state": "A10_INCOMPLETE_NOT_ADOPTED_RESTORED_B10_NOT_EXECUTED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "candidate_api_commit": "b14960e1e546643942be7786ed4e487274e4422e",
+  "cocolon_predecessor": "b3948419ea6f6ad7b3416c3f0d41ed85df45e721",
+  "scope_sha256": "f68618f074eb5ce176491e4a45926b5bfa4e6ebbcbbd8c9d9dcda812d29d0d86",
+  "driver_sha256": "04431cee0e334f3a268125fba2b38525502154c1a789948a315779ca4bde2ab7",
+  "candidate_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+  "profile": "semantic_map.event_plan.v2",
+  "internal_entrypoint_unit": "A9",
+  "external_unit": "A10",
+  "ci": {
+    "Analysis": {
+      "run": 43820851718,
+      "conclusion": "success"
+    },
+    "Piece": {
+      "run": 43820851867,
+      "conclusion": "success"
+    }
+  },
+  "new_model_calls": 4,
+  "control_before_calls": 2,
+  "map_calls": 2,
+  "map_raws": 2,
+  "generated_projection_text": 1,
+  "remaining_cases_not_run": 3,
+  "after_controls_not_run": 2,
+  "failure_type": "AnalysisSemanticMapError",
+  "failure_code": "analysis_semantic_event_plan_orphan",
+  "driver_seconds": 218.86241798475385,
+  "restore_inclusive_seconds": 276.14428925700486,
+  "original_provider_restored": true,
+  "restored_pid": 141466,
+  "restored_start_ticks": "238372709",
+  "result_sha256": "51b7808b233c0959c4935d277f98da16e5a8eb15158459e725cdef42f5ad4f52",
+  "raw_sha256_by_case": {
+    "book_club_two_day": "4efbf64d4e5e9f1ccc43192512cc1e24bc4dd95a8aca749d5c14a4513f141f53",
+    "lighting_prior_and_later": "7b3bc527eb6de141324991d66ed1344f5f1074dcafca0d43336457346193749d"
+  },
+  "original_zip_bytes": 31359,
+  "original_zip_sha256": "563bc9bc2cb4fa191c84b5773f97f80cfaf832d5539082e5ab2c8624d0f9b18f",
+  "retrieval": "Jupyter UI text-editor copy of base64 export; ZIP CRC/all declared original member hashes matched; failed browser download did not rerun inference.",
+  "training": 0,
+  "retry": 0,
+  "B10_model_calls": 0,
+  "sql_save": 0,
+  "non_generation_sql_reread": 0,
+  "normal_adoption": false,
+  "new_deploys": 0,
+  "build_TestFlight_device": "ON_HOLD",
+  "A10_closed": true,
+  "overall_work_unit_complete": false,
+  "auxiliary_complete": false,
+  "formal_acceptance": false,
+  "STRUCTURE_MAP_DELTA_NONE": "No new product source/route/contract effects; runtime evaluation only."
+}
