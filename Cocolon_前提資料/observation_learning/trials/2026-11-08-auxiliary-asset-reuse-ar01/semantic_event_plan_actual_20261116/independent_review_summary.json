@@ -1,0 +1,44 @@
+{
+  "schema_version": "cocolon.event_plan.a8.independent_review_summary.v1",
+  "state": "A8_MEANING_AND_REFERENCE_REJECTED_B8_CONDITION_NOT_SATISFIED",
+  "reviewers": [
+    "root",
+    "independent_meaning",
+    "independent_technical"
+  ],
+  "all_five_adequate": false,
+  "actual_result_sha256": "6f91630aff9d1bf2ec1b6f7c94e8bc835285a1c0e3bc2a9ea50d379b3c499158",
+  "raw_sha256_by_received_case": {
+    "book_club_two_day": "dc906d1c2ec7c0bf66e3ad1ee29f952a35783981d42111695e8fc8677d47024a",
+    "lighting_prior_and_later": "07b3f2ca5291a1904d307d4d4c57fb35e23ace342269ba445ee66150243a9858"
+  },
+  "book": {
+    "projection_and_text_reviewed": true,
+    "later_sent_state_preserved": true,
+    "known_reply_not_reverted_unknown": true,
+    "failure": "UNKNOWN_SEND_ACTOR_CHANGED_TO_RECIPIENT_IN_RAW_AND_PROJECTION_TEXT"
+  },
+  "lighting": {
+    "raw_and_all_original_fields_reviewed": true,
+    "projection_and_text_exist": false,
+    "first_reference_violation": "n1_event_refs_e1_e2_selects_r1_requiring_e1_e2_e3",
+    "additional_meaning_failures": [
+      "EXPLICIT_NON_GUARANTEE_STANCE_CHANGED_TO_UNKNOWN",
+      "ACHIEVED_EXPLAINABLE_PURCHASE_SATISFACTION_CHANGED_TO_WISH_TITLE"
+    ]
+  },
+  "unattempted_cases": [
+    "U01_repair_report",
+    "U02_withdraw_submission",
+    "T01_manual10"
+  ],
+  "technical_original_crc_sha_messages_wire_raw_binding_pass": true,
+  "unchanged_raw_compiler_reproduction_pass": true,
+  "scope_invalid_node_count": 4,
+  "scope_invalid_edge_count": 4,
+  "full_independent_meaning_review_sha256": "4fdba6711f3f20f32a997b998c47d4f01e531fbf006c654336444a1f22cf4084",
+  "full_independent_technical_review_sha256": "7a4d14edcdceaa162fd614cab2bbebe7a8cbba66d3a70c58058550a4833d2e66",
+  "root_review_sha256": "31f2961df0ebb5c96893b61dc835d79f3a5ccaaf37bd4fce4acd0c2b11c0cee8",
+  "B8_admission_review_created_or_sent": false,
+  "training_retry_sql_normal_adoption": 0
+}

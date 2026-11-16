@@ -1,4 +1,4 @@
-> **11/16最新：既存作者内の事実文を一度だけ作り、項目・関係線・概要が同じ文を参照する隔離候補を準備。実4B・通常採用は未実施。** API `c258cf0e5a6ba59429553638c4765fe7c17b561a`の新private profile／参照compiler／別adapter・model aliasを実装し、475固有の局所CPU・SQL・HTTP検証と既存Analysis／Piece両CIを通過。公開v3・旧保存版・原文／本人訂正の境界を保持し、IFは元120u、Emlis／Pieceは既存baseへ分離する。合成7応答の同raw一回SQL保存・別process非生成再読は事前確認だけ。A7消費済み／B7条件不成立を継承し、新しいA8／条件付きB8は未送付・未実行、意味改善・本単位／補助全体の完了へ加算しない。詳細は補助設計§9.96。
+> **11/16最新：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
 
 > **11/16前回実績：承認済みA7は最初の1件で思考2048token上限に達し、最終JSON未生成で停止。B7は条件不成立で未実行。** 新4file129859byteを同Podへ送付・全SHA一致、実HF preflight5件を通過。同A6重み／読書会messagesで1call105.1615秒、子process127.4212秒、自然な整理終端なしのsemantic_thinking_budget_exceededで残り4件へ進まず、復元込み160.9508秒で元120u／PID134586／health200へ復元した。raw／図／本文0で意味品質は評価不能、候補は通常不採用。原本9member／ZIP10450byteを回収照合、追加学習／retry／B7新12LEAF／MERGE／SQL保存／通常反映0。A7一回は消費済み・未使用枠を転用しない。通常API-worker24bc228d／DB20261115011424の前回確認記録・worker900／配布保留、本単位／補助全体未完を維持。 詳細は補助設計§9.95／11.2／12。
 
@@ -1736,9 +1736,9 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 > **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速なPyTorch代替処理も確認し、高速部品を候補専用に隔離準備中。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
 
 
-## 11/16 — 事実文を共有する私的作者候補の責務（未採用）
+## 11/16 — 事実文を共有する私的作者候補の責務とA8実行後の状態（未採用）
 
-[詳細設計§9.96](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-event-plan-prepared-20261116)を現行の準備記録とする。API c258cf0eのprivate profileは原文からevents／readingsを一度作り、nodes／edges／overviewが同じ文を参照する。原rawの事後修補ではなく、既存作者の応答契約と参照展開を分離した候補で、実4B品質は未検証。
+[詳細設計§9.96](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-event-plan-prepared-20261116)は実行前の準備履歴で、現在の実結果は[§9.97](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-event-plan-a8-actual-20261116)。API c258cf0eのprivate profileは原文からevents／readingsを一度作り、nodes／edges／overviewが同じ文を参照する。原rawの事後修補ではなく、既存作者の応答契約と参照展開を分離した候補である。A8の読書会は送信者／宛先の意味変異、照明はreading参照範囲不成立で不採用となり、残り3件の実品質は未検証。
 
 | 既存owner | 今回の限定責務 |
 |---|---|
@@ -1749,4 +1749,4 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 | analysis_if_model_source.py | 同候補alias選択時もIFは元120uへ送信、元4設定identityを保持 |
 | analysis_cumulative_service.py／既存SQL／observed_route_realizer.py／RN | 新owner追加なし。全親source・cohort・guard、最終一回保存、月次当時性、唯一realizer、公開v3を継承 |
 
-sourceは未採用のままGitHub反映、通常稼働24bc228dは維持。新実行9file3,127,144byte／scopee84f40b9は未送付。全12の実意味照合と同raw保存再読、通常native／API-workerへの接続まで未完。全blob意味理解や一般日本語品質をfile数・CPU結果から主張しない。
+sourceは未採用のままGitHub反映、通常稼働24bc228dは維持。新実行9file3,127,144byte／scopee84f40b9は承認後に送付・全SHA一致。A8は前対照2＋map2の計4応答で停止し、397.503209秒で元120u／PID136765／healthz200へ復元した。残り3件・後対照未実行、B8条件不成立。全12の実意味照合と同raw保存再読、通常native／API-workerへの接続まで未完。商品owner／公開型等の構造変更はなく、全blob意味理解や一般日本語品質をfile数・CPU結果から主張しない。
