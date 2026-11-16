@@ -1,0 +1,14 @@
+{
+  "A9": "one fresh repair1 run max9 responses restore-inclusive1800sec",
+  "B9": "only after all-five independent meaning adequacy one fresh repair1 run max11 restore-inclusive1020sec",
+  "conditional_hash_file_max_bytes": 4096,
+  "retry": 0,
+  "reused_same_pod_files": 7,
+  "same_Pod": "f1lle4xwq3wjln",
+  "scope_sha256": "75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e",
+  "state": "USER_EXPLICITLY_APPROVED_NOT_YET_STARTED",
+  "training": 0,
+  "upload_bytes": 42201,
+  "upload_files": 2,
+  "user_instruction": "承認するから進めろ。"
+}
