@@ -1,4 +1,4 @@
-> **11/17最新：node-local候補c95d17dの両CI成功と、通常API／worker24bc228dのLiveを確認。新GPUの認証入力が成立せず、A15・全12・同raw保存再読・候補の通常反映は未実施。** 分析43883976914／Piece43883976919は同候補headでsuccess。通常2deployはLive・autoDeploy OFF・unsuspended、Supabase ACTIVE_HEALTHY／最新migration20261115011424。fresh32重み73f5／configfb2eと、元SQL checkpoint801ba068（4,835,570byte）を回収照合した。新Pod5mkzaznzir6ygyはJupyterのtoken入力が必要で、安全入力がlocator_invalidで2回終了し、ログイン成功未観測。新GPU送付・生成・学習0。Renderの構造化読取は成立したが、新GPU接続・設定／鍵一致・指定候補配置は未確認。原単位／補助全体は未完、build／TestFlight／本人実機保留。詳細は補助設計§9.110。
+> **11/17最新：A15／A16は意味不適合で不採用・元提供へ復元済み。A17の同4B基礎モデル比較を準備したが、対象RunPodへの転送が自動承認審査で送信前拒否となり未実行。** 候補APIeec0262b、同5入力・全12記録の原本と247sourceを照合。A17/B17の実行先・model別名・CI束縛を更新し、オフラインのB実行先不一致は送信前に修正した。新10file3,286,846byte（展開後、うちsourceZIP2,592,186byte）を確定。新GPU送付／CPU再導出／tokenizer／model／学習／SQL保存／通常反映0。候補Piece43968192444はsuccess、Analysis43968192233は実行中で、両CI成功へ換算しない。通常API／workerは24bc228dで双方Live・autoDeploy OFF、DB38migration／最新20261115011424を再確認。GPUの元提供PID5836の稼働を画面で確認したが、通常API／workerから新GPUへの実モデル到達は未確認。通常反映を含む本単位／補助全体は未完、build／TestFlight／本人実機保留。再開は補助設計§9.111。
 
 > **11/16前回候補：fresh16教師32更新は完走したがA14は不適合で失敗閉鎖。既存作者をnode_local.v3へ改修し、候補コード・局所検査・独立review・GitHub反映まで完了。実4B・保存・通常採用は未実施。** AF1は306.882秒／復元込み341.020秒、新73f5／configfb2eを保持。A14は前対照2＋読書会1の3応答、反復・15未使用・後日事実欠落が残り、図／本文・残4件・後対照／B14／SQL／通常反映0。305.217秒で元native d678fe2c・PID13576/start100524246へ復元、別health200・18008閉鎖。新private候補APIc95d17dはnode根拠付きunitから同じ公開graphへ投影し、旧v1／v2・guard／cohort／権利・保存／RNを保持。対象回帰314成功／skip0、最終新2suite47成功とnative既存303成功は重複のため合算しない。独立reviewにblockingなし。両CIは実行中で未成功。A15／新GPUは区切り前に開始せず、同5入力→全12→同raw保存再読→通常反映は次に残す。Render認証による通常接続未確認、元単位／補助全体未完・配布保留。詳細は補助設計§9.109。
 
@@ -2082,6 +2082,25 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="analysis-node-local-a17-transfer-blocked-20261117"></a>
+## 9.111 11/17 — A15/A16実績からA17の実生成準備へ再開、対象Pod転送は送信前拒否
+
+原本は既存private引継ぎCocolon_CMEE_A13_Continuation_20261116.zipのresume_after_a16_20261117/current_checkpoint.jsonとA15/A16 actualである。§9.110の認証未成立は当時の記録であり、その後JupyterとRenderのログイン、元モデル提供と既存bridge復元は完了した。今回もJupyterの認証済み画面・元nativeプロセスPID5836の稼働を確認した。内部稼働と通常Render経由のモデル疎通は分ける。
+
+A15は前対照2とmap3の5応答を受領し、4map目送信後に原文照合の意味不適合で中止、復元込み462.028秒。A16は前対照2とmap2の4応答、読書会は図／本文へ到達したが予約済みの可能化・関係線の根拠ずれ・未開催等の欠落が残った。照明は同項目反復と後日の購入／設置／使用を落とし既存analysis_semantic_map_invalidで拒否。復元込み379.344秒、元native eec418d3・120u重みecbdd0d1へPID5836/start242598228で戻した。両一回は消費済み、不採用を変更せず、各B／新全12／同raw実保存再読／通常反映0を保持する。
+
+既存API候補eec0262baf833084cd548819a7960adc1b043c4b／tree9c7822fb365532397e463295c9f695198531edd3をfresh取得した。A17はsemantic_map.node_local.v3の同じ指示／容量／原入力で、明示別名cocolon-qwen3.5-4b-analysis-node-local-v3-base-851bf6eだけを既存event_plan_baseへ振り分け、生成中だけadapterをdisableする比較である。fresh32は同byteで読込み・identityを維持するがmap推論には使用しない。IF120uと自然／Piece、旧raw・公開v3／保存型／月次当時版を変更しない。基礎モデルが意味不適合を解決するかは未確認である。
+
+247sourceはcleanなexact candidateのGit blobとarchive全member・manifestを照合。新driverはsource／model／CI／A17・B17実行先を再束縛した。独立reviewでB実行先だけ旧B16の残存を発見し、送付前に修正・再生成、rootもdriverとscope双方の一致と全payload SHAを確認した。5input abf97a90、全12input bdb872a5、plan db43b255はA16とbyte同一で、leaf12＋MERGE1を維持する。今回の実HF token検査とcurrent-source CPU再導出はまだ行っていない。継承された138成功は前sessionの検査記録で、今回の新規pytest成功とは数えない。
+
+確定送付候補は展開後10file3,286,846byte。9fileをまとめたZIPは2,697,007byte／SHAe4b8f0470c49980425668347e46488b3d13bf4b807bd21d7bd7855111d40a4ad、CPU準備scriptは5,385byte／SHAb3c595b387b2882b7f530c38de0f76511421abe7baa73268db81bd54eb9c2ee9。対象は既存Pod5mkzaznzir6ygyの専用新payloadフォルダだけ。中身は公開source closureと架空5／12記録・対照・実行コード・manifest／未凍結templateで、資格情報を含めない。既存鍵／全起動環境は同Pod内の認証と元提供復元だけに使用し、外へ書出さない。
+
+Jupyter filechooserから上記2fileを送ろうとした時、自動承認審査は「specific third-party destinationへのthese filesの開示を具体承認していない」として送信前に拒否した。別経路で迂回せず、新GPUupload／CPU準備／tokenizer／新model・学習／SQL／通常設定・配備0で停止した。execution_scope.jsonは未凍結、A17/B17の一回は未消費である。候補Piece43968192444は同headでcompleted/success、Analysis43968192233はin_progress/null。Analysis successが隔離比較開始に、両successが通常採用に必要であり、未完CIを成功へしない。
+
+具体承認後は、同byteを転送・展開し、新sourceで5件と12LEAFをCPU再導出・cached tokenizerで実測、現在runtimeと最新CIへscopeを凍結する。A17は5件＋前後4対照・最大9応答・復元込み1800秒一回。全5件の原文／raw／全図／本文のroot＋独立全文照合が適切な場合だけ、判定hash4KB以下を同Podへ追加してB17を新12LEAF＋MERGE＋4対照・最大17応答・復元込み1440秒一回。pipeline840秒・work1260秒と各210秒要求、学習／自動retry／raw修補0を維持し、失敗または受領不明後の次POSTを止め元提供へ復元する。適切なB17最終rawだけを元SQL checkpointから一回保存し、別processで非生成再読した後、通常native／map専用model／API-worker exact版へ反映する。
+
+今回fresh読取で通常API dep-dbsgn8t6e07s739qfk50とworker dep-dbsgnet6e07s739qg5a0は双方24bc228d Live、autoDeploy OFF。既存active factory起動を維持しlegacy app:appへ戻さない。DBは38migration／最新20261115011424。通常API／workerから新GPUへの実モデル到達・鍵一致・候補配置は未完。一般意味品質・AR全体・本人受入れを今回準備へ換算しない。STRUCTURE_MAP_DELTA_NONE：実生成のための既存実行物再束縛・状態更新だけで新owner／API／DB型なし。
+
 <a id="analysis-node-local-v3-ci-runtime-recovery-20261117"></a>
 ## 9.110 11/17 — 候補CI・通常稼働・保存資産を確認、新GPUは認証入力未成立
 
@@ -2308,9 +2327,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・候補CI／通常稼働／原資産を確認、新GPU認証未成立・実4Bと通常反映は未完）
+### 11.2 現在の進行欄（11/17・A15/A16不採用を継承、A17転送は具体承認不足で送信前拒否）
 
-主枠は第11回§5、候補契約は§9.109、最新確認と再開先は§9.110。AF1完走・A14不適合／失敗閉鎖を継承し、node-local候補c95d17dの両CI成功を確認した。fresh32重み73f5／configfb2eと元SQL checkpoint801ba068を回収照合、通常API／worker24bc228d双方Live・DB最新migration20261115011424を再確認した。Renderの構造化読取は成立したが、新Pod5mkzaznzir6ygyのtoken入力はlocator_invalidで2回終了し、認証成功未観測。新GPU送付・生成・学習、A15／全12／同raw保存再読／候補の通常反映は0。新runtime接続から同5入力の実意味・適切な全12・同raw保存再読・通常反映までが同じ未完単位であり、原単位／補助全体未完・配布保留を維持する。
+主枠は第11回§5、最新実績と再開は§9.111。A15／A16の実raw意味不適合と元提供への復元を引継ぎ、A17の同4B基礎モデル比較を準備した。対象source eec0262bと247file・同5／12材料を照合、実行先不一致は送信前に修正済み。10file3,286,846byteの対象Pod送付が自動承認審査で拒否され、今回はupload／CPU再導出／tokenizer／新model／SQL／通常反映0。新scopeは未凍結・未消費、候補Pieceは成功、Analysisは実行中。通常API／worker24bc228d双方Live・DB38migration／20261115011424をfresh確認。本単位／補助全体未完、配布保留を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2319,15 +2338,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／一回保存を保持。AF1完走・A14失敗閉鎖を継承、node-local候補c95d17dの実装・局所検査・独立review・GitHub反映と両CI成功を確認。元fresh32／SQL checkpointを回収照合（§9.110） | 新GPU認証成功未観測、実5件・全12・同raw保存再読・候補の通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持 |
+| AR-06 | 完全親source／cohort／一回保存を保持。A15/A16不採用・復元済み。A17 explicit base候補eec0262bと同材料のオフライン再束縛を確認（§9.111） | 対象Podへの具体送付承認、current CPU／tokenizer／CI確認、同5実意味・全12・同raw保存再読・通常反映。full_source_semantic_coverage=falseと月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF・unsuspended、DB ACTIVE_HEALTHY／最新migration20261115011424を再確認（§9.110）。Render構造化読取は成立 | 新GPUの認証・通常接続、設定／鍵一致、候補の指定版配置は未成立。画像2残差・配布／本人利用・補助全体未完。旧Podの稼働証拠を新Podへ移送しない |
+| AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF、DB38migration／最新20261115011424をfresh確認。GPU／Render認証と元提供復元は前session成立、今回も元提供稼働を確認 | 通常API／workerから新GPUへの実モデル到達、設定／鍵一致、受入候補指定版の配置は未成立。画像2残差・配布／本人利用・補助全体未完 |
 
-最新確認は§9.110、候補契約は§9.109、A13／A12原本は§9.108／9.107。AF1学習の一回は完了済み、A10〜A14は各一回消費済み・失敗閉鎖、各条件付きBは不成立。新node-local候補の両CIは成功し、元重み／取得前SQL原本と通常24bc228dの稼働を確認した。新GPU認証成功・A15実意味・全12・同raw保存再読／候補の通常反映・正式受入れ・補助全体完了は未認定。
+最新確認・次は§9.111。A15／A16の消費済み試行を再実行せず、不適合rawを採用・新sourceへ再束縛しない。A17は未送付・未実行、Piece成功／Analysis実行中を両成功へしない。一般品質・同raw実保存再読・通常採用・補助全体・正式受入れは未完。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.110の新GPU認証・runtime接続から、同fresh32／node-local候補の実5件・全12・同raw保存再読・通常反映。** 候補c95d17dの両CI成功、元fresh32重み／SQL checkpointの回収照合、通常API／worker24bc228d LiveとDB最新migrationを再確認した。新Pod5mkzaznzir6ygyはtoken入力が必要で、安全入力2回がlocator_invalidで終了し認証成功未観測、新GPU送付／生成／学習0。旧v1／v2rawと拒否条件、owner／guard／cohort／権利、公開graph／storage／RNを保持し、適切な同5入力→全12→同raw一回保存・別process非生成再読→通常native／API-worker反映を同じ未完単位として進める。Renderの構造化読取は成立したが、新GPU通常接続・設定／鍵一致・候補配置は未完。build／TestFlight／本人実機保留を維持する。
+**11/17・現在の再開先：§9.111のA17/B17具体送付承認後、未実行比較を継続。** 既存Pod5mkzaznzir6ygyへ確定10file3,286,846byteを送付し、CPU／tokenizer・fresh runtime／CIを確認して新scopeを凍結する。A17は同5件＋前後4対照・最大9応答／復元込み30分一回、全5件独立全文適合時だけB17は新12LEAF＋MERGE＋4対照・最大17応答／復元込み24分一回。学習／自動retry／raw修補0。A15/A16と旧B枠は転用しない。候補eec0262bのAnalysis成功が隔離開始に、両CI成功が通常採用に必要。対象転送は自動承認審査で送信前拒否、現在新model／SQL／通常反映0である。適切な最終rawの一回SQL保存・別process非生成再読から通常native／map専用別名／IF120u・自然／Piece／API-worker整合反映までを同じ未完単位として進める。build／TestFlight／本人実機保留を維持する。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 
