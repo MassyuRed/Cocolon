@@ -1,0 +1,19 @@
+# A9の起動確認だけを修復する新一回（未承認・未送付・未実行）
+
+A9は実HF preflight5件通過後、候補Popen直後のargv照合で停止し、応答0件のまま29.388061529025435秒で元120uへ復元した。原本11fileは無変更で保持する。observed argvが保存されていないため、空cmdline競合が今回の原因とは断定しない。
+
+この差分は既存event_plan_execution.pyの起動確認だけである。生存中のchildが空cmdlineなら同じ60秒の期限内で最大0.05秒待つ。非空の不一致は即拒否し、個数とhashだけをerrorへ残す。完全一致前のソケット確認／health／認証POSTは禁止し、既存のPID・loopback socket所有・health条件は維持する。商品の作者／モデル／重み／source／入力／比較／意味採否／保存条件は変えない。
+
+新scope SHA256 75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e。送るのはevent_plan_execution.py（32195byte、SHA75254429efe91bf70654feb3c402d188e7106a4856d43562be1839b72ec62d5f）とexecution_scope.json（10006byte）の2file、合計42201byteだけ。旧A9の専用payload folder内の残り7fileは、scopeに列挙した同じbytes／SHAのまま同Pod内で新folderへcopyし、外部再送はしない。元9fileと旧rootは編集しない。全準備物は9file3137481byteで、新scopeと全payloadを再照合してから起動する。
+
+新payload=/workspace/semantic-event-plan-v2-payload-repair1-20261116。新A9実行root=/workspace/semantic-event-plan-v2-diagnostic-repair1-20261116-once、新B9 root=/workspace/semantic-event-plan-v2-full12-repair1-20261116-once。driver内のunit名A9/B9は同じ契約の入口名であり、旧scope／rootの再利用ではない。新authority exact1とfresh helper hashへ別に束縛する。
+
+新A9は同じ架空5件＋前後4対照、最大9応答・停止復元込み1800秒、一回。全5の新原文／raw／図／本文がroot＋独立全文照合で適切な場合だけ、同Podへ4KB以下の結果SHA／5rawSHA／reviewer役割1fileを追加し、新B9で全12の同6LEAF＋MERGEと4対照、最大11応答・停止復元込み1020秒、一回。学習／retry0、既存鍵と全envは同Pod内認証・元argv/env/cwd復元だけに使う。元提供の最終値はA9復元PID138365／start237571631／healthz200で、停止直前に再照合する。
+
+境界7件は旧helperの空cmdline拒否を再現し、新helperの空→一致、非空不一致、空→不一致、空の期限切れ、socket所有不成立、child終了を検証した。既存runner15件も成功。実Pod／tokenizer／model／SQL呼出しはしていない。独立ローカルCPUの119/1500空cmdline観測は可能性の証拠で、A9の観測値ではない。
+
+今回の起動時の待機修正を、R10.3に列挙された4種類の機械的修復へ自動適合させない。Rule18に従い、起動確認の新しい限定修正として今回の一回への個別明示承認が必要。第二の失敗では追加修復・自動retryをしない。元scope b53ac4d9のA9消費済み／B9条件不成立をこの修復の許可へ転用しない。
+
+公開source80d94db7・247file／ZIP06f8e7f5、5件input abf97a90／controls29fc6271／full12input bdb872a5／plan a41950c0は既存prepared folderを正本とする。local再現時は7fileをこのfolderと同じ作業階層へ配置する。既存finalizerも同じprofile2／unitB9／alias2／plan／sourceに束縛され、独立全12意味reviewをSQL構築前に要求する。既存checkpoint／guard／as_of・月次当時版を保持する。
+
+新全12実結果→同raw一回SQL保存→別process非生成再読→通常native/API-worker反映までは未完。この比較実行のscope内では通常source adoptionを行わず、適切な実結果の同raw保存再読後に、元から依頼された通常反映へ進む。build／TestFlight／本人実機は保留。全体主枠・再開正本は補助設計§9.99／11.2／12。

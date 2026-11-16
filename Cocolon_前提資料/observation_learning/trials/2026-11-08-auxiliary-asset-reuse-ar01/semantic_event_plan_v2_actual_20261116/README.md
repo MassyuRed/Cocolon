@@ -1,0 +1,11 @@
+# A9：候補起動時のargv拒否・応答0件・元提供復元（11/16）
+
+確定9file3,133,443byte／scope b53ac4d9を同Podへ送り、全bytes／SHA一致後に一回起動した。全5件の実HF preflightは通過したが、候補Popen直後のtrial_health_waitでcandidate_provider_argv_changedとなり、取得処理へ進まなかった。新規model呼出し／raw／図／本文0。B9は全5件適合条件が成立せず、起動0。再試行／学習／SQL保存／通常反映0。
+
+元argv／全env／cwd・source／両adapter weights-configを同Pod内で保持して復元し、29.388061529025435秒で元120u PID138365／start237571631へ戻った。別の読取でもhealthz200・18008 listenerなし・B9root不存在・after.result不存在を確認した。候補logは0byte。原executionのstate=PREPARED_NOT_ADOPTEDは例外時に更新されなかった残値で、準備中・実行継続とは解釈しない。
+
+原本11fileのZIP8,945byte／SHA55da0f7d170fd989293e81cf92b914808e60c5401c151d1b5cc1aaef5ca6df88をUIで回収し、全memberのCRC／byte一致とsource bindingを独立確認した。kernel-proofはA8原本とbyte同一で、全env／鍵値は保存・送付していない。原本は既存private引継ぎへ追加し、この公開folderにはbody-free実行／独立確認／原本identityを置く。
+
+独立したローカルCPU観測では、生存childの起動直後のcmdlineが空になる事象を1500回中119回、2.12秒で再現した。非空不一致・読取error0。ただしA9のobserved argvは保存されていないため、今回のA9原因を空cmdlineと断定しない。既存起動helperで空だけを同じ60秒期限内で待機し、非空不一致・ソケット所有・health・認証前のexact照合は維持する最小修復を準備する。旧scope／root／原本は再利用しない。
+
+適切な全12実結果→同raw一回保存→別process非生成再読→通常native/API-worker反映という同じ作業単位は未完。API source80d94db7のAnalysis／Piece両CIと合成保存の成功を、実4Bの意味適合へ数えない。build／TestFlight／本人実機は保留。

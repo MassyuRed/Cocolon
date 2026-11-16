@@ -1,4 +1,6 @@
-> **11/16最新：A8原本の留保・判断・達成状態とreading根拠を、既存作者内のevent-plan v2候補へ修復。実4B・通常反映は未確認。** API80d94db7で、未確認事項は原文引用のまま表示し、本人判断／希望／決定済予定／実行済経験を先に区別、reading根拠は一度の指定からcompilerへ継承する。回帰824件・現行source等51件・runner15件、合成7応答の一回SQL保存／別process非生成再読を確認。旧A8 raw・拒否条件・原入力／guard／as_of／月次は不変。新scope b53ac4d9の9file3,133,443byteを確定、A9最大9応答30分・条件付きB9は全12記録6LEAF＋MERGEと4対照で最大11応答17分、各一回・学習／retry0。未承認／未送付／未実行、既存A8消費済み／B8未成立の枠は転用しない。通常API／worker24bc228d Live・DB20261115011424をfresh確認、配布保留・本単位／補助全体未完。詳細は補助設計§9.98。
+> **11/16最新：A9は候補起動時のargv照合で停止、応答0件のまま元120uへ復元。B9未実行・通常反映未完。** 承認済み9file3,133,443byte／scope b53ac4d9は遠隔全SHA一致。実HF preflight5件を通過後、取得前にcandidate_provider_argv_changedとなり、29.388062秒でPID138365／healthz200へ復元。原本11fileの回収・CRC／byte一致と別読取の候補listener停止・B9root不存在を確認した。CPUで起動直後の空cmdlineを再現したが、A9の観測値は未保存で同原因とは断定しない。空だけを同じ期限内で待ち、非空不一致を拒否する既存helper修正を7＋15件で検証。新2file42,201byte／scope75d8633d・同Pod内copy7fileの限定一回は未承認／未送付／未実行。通常API／worker24bc228d Live・DB20261115011424をfresh確認、元作業単位／補助全体／正式受入れ未完・配布保留。詳細は補助設計§9.99。
+
+> **11/16前回準備：A8原本の留保・判断・達成状態とreading根拠を、既存作者内のevent-plan v2候補へ修復。実4B・通常反映は未確認。** API80d94db7で、未確認事項は原文引用のまま表示し、本人判断／希望／決定済予定／実行済経験を先に区別、reading根拠は一度の指定からcompilerへ継承する。回帰824件・現行source等51件・runner15件、合成7応答の一回SQL保存／別process非生成再読を確認。旧A8 raw・拒否条件・原入力／guard／as_of／月次は不変。新scope b53ac4d9の9file3,133,443byteを確定、A9最大9応答30分・条件付きB9は全12記録6LEAF＋MERGEと4対照で最大11応答17分、各一回・学習／retry0。未承認／未送付／未実行、既存A8消費済み／B8未成立の枠は転用しない。通常API／worker24bc228d Live・DB20261115011424をfresh確認、配布保留・本単位／補助全体未完。詳細は補助設計§9.98。
 
 > **11/16前回実績：承認済みA8は実2分析で停止、元120uへ復元。B8は条件不成立で未実行、通常採用0。** 確定9file3,127,144byte／scopee84f40b9を同Podへ送付し全SHA一致。Emlis／IFの前対照2件と分析2件の計4応答を受領。読書会はHTTP200／stop・GENERATEDだが問い合わせの送信者／宛先を逆転、照明はHTTP200／stop後にreading参照範囲不整合で拒否。残り3件・後対照は未実行。復元込み397.503209秒で元argv／env／cwd・source／重みへ戻し、PID136765／healthz200・候補停止・B8root不存在を確認。学習／retry／SQL保存／通常反映0。通常API／worker24bc228d Live・DB20261115011424をfresh確認。本単位／補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.97。
 
@@ -28,7 +30,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.98: API80d94db7 source-qualified event-plan v2 implemented and CPU verified, not actual-model verified or adopted. A9/conditionalB9 exact9files3133443bytes scopeb53ac4d9 prepared, unapproved/unuploaded/unexecuted; 9calls/1800s and 11calls/1020s each once. A8 consumed/B8 unmet, originals unchanged. After new approval, actual full meaning review then same-raw SQL/save/fresh-process reread and normal native/API-worker rollout. Whole unit incomplete; build/device deferred."
+current_next: "Section9.99: A9 startup argv rejection before acquire, zero responses, original120u restored PID138365/start237571631/health200 in29.388062s; B9 not run. Originals preserved and source80d unchanged. Readiness-guard repair1 exact2files42201bytes scope75d8633d prepared, individually unapproved/unuploaded/unexecuted; same-Pod copy7 unchanged files. Fresh9call/1800s and conditional11call/1020s each once. No automatic R10.3 application; no retry. Whole same-raw/normal rollout unit incomplete; build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1924,6 +1926,40 @@ fresh読取では通常API／worker双方24bc228d Live・autoDeploy off、DB38mi
 
 primary outcomeはTECHNICAL_CREDIT。source修復・合成保存・実行前の完全byte境界に再利用可能な検証結果が増えたが、PRODUCT_CREDITや実商品出力の意味改善へ換算しない。STRUCTURE_MAP_DELTA：既存Analysis作者／native／compiler内のprivate形式v2・内部根拠継承とexact alias選択をcurrent analysis mapへ追記。新reader／controller／authority／公開型／DB／RN構造の追加はない。
 
+<a id="analysis-event-plan-v2-startup-stop-repair1-20261116"></a>
+## 9.99 11/16 — A9は起動確認で応答取得前に停止・復元、起動guardだけの新限定修正を準備
+
+Mashの明示承認後、§9.98の確定9file3,133,443byte／scope b53ac4d90b45631608451c47dc1163265af0b53498bdabdf241d1d0c8743c6fdを同Pod f1lle4xwq3wjlnの新payload folderへ送り、遠隔側でも全byte／SHAを照合してA9を一回起動した。元PID136765／start237021687と両新root不存在を確認し、launcher PID138358へ束縛した。source80d94db7／native d678fe2c／driver567d085aと全元入力は確定時と同じである。
+
+| 実工程 | 確認した結果と限界 |
+|---|---|
+| 全5件の実HF preflight | request refs／messages hash一致。input tokensは1526／3025／1451／1583／2544、予約4096・32768context内。CPUのpreflight通過でありモデル応答の意味品質ではない |
+| 候補Popen直後 | trial_health_wait line191のargv照合がcandidate_provider_argv_changedで停止。observed argv値は原本に保存されていない。candidate-provider.logは0byte。起動後のモデルload完了は確認していない |
+| 応答取得／B9 | acquire前で新model呼出し0・raw／図／本文0、after.result／driver.logなし。全5意味適合条件は成立せず、B9起動／LEAF／MERGE0。意味評価は不適合ではなく評価不能 |
+| 元提供の復元 | finallyで元argv／全env／cwd・source／両weights-configを照合し、29.388061529025435秒で元120u PID138365／start237571631へ復元。別の読取でもhealthz200、18008listenerなし、B9root不存在を確認 |
+
+原executionのstate=PREPARED_NOT_ADOPTEDは、起動例外時に更新されなかった残値である。原本を書換えず、実際の終端はSTARTUP_ARGV_REJECTED_ZERO_RESPONSES_RESTOREDとして記録する。原A9の一回は終了・消費済みで、未成立B9や残応答枠を再試行へ転用していない。学習／retry／同raw SQL保存／通常反映0である。
+
+原本11fileのZIP8,945byte／SHA256 55da0f7d170fd989293e81cf92b914808e60c5401c151d1b5cc1aaef5ca6df88を回収し、CRC・各member byte・scope/source/prompt束縛を独立確認した。kernel-proofはA8原本と同一、env・鍵値は外部保存しない。既存private引継ぎのversion17へ15entryを追加し、先行398entryを全byte保持した。公開trialのsemantic_event_plan_v2_actual_20261116には本文を含まない実行・独立確認・原本identity・通常読取状態だけを置く。
+
+独立ローカルCPU観測では、生存childの起動直後に/proc/cmdlineが空となる事象を1500回中119回・2.12秒で再現し、非空不一致／読取errorは0だった。この観測は空の開始状態が起こり得る証拠であり、observed argv未保存のA9も同じ原因だったという証明ではない。再度の実生成・Pod probe・provider再起動はしていない。
+
+既存event_plan_execution.py一つの起動guardに、**空cmdlineだけを同じ60秒の期限内で最大0.05秒待つ**差分を用意した。非空の不一致は即拒否し、秘密値を含まない個数／hashをerrorへ残す。完全一致する前にsocket／health／認証POSTへ進めず、PID生存・自分のloopback listener所有・healthの既存条件を保持する。ほかのコード差分は新scopeのfresh rootsだけで、production source80d94db7／作者・重み・入力／比較／意味採否／最終保存条件は変えない。
+
+旧guardの空cmdline即拒否、新guardの空→一致・非空不一致・空→不一致・空の期限切れ・listener未所有・child終了をCPU7件で確認し、既存runner15件も成功した。テストは新しい実4Bの意味適合・runtime readinessではない。これはR10.3に列挙された4種類の機械的修復へ自動適合させるものではなく、Rule18の個別承認を要する起動guardの新限定修正として扱う。規則の適用範囲を広げない。
+
+新しい具体scopeは同trialのsemantic_event_plan_v2_prepared_20261116/repair1。**新送付2file合計42,201byte**、scope SHA256 **75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e**。event_plan_execution.pyは32,195byte／SHA75254429efe91bf70654feb3c402d188e7106a4856d43562be1839b72ec62d5f、execution_scope.jsonは10,006byte。全準備は9file3,137,481byteだが、source ZIP／manifest／input5／diagnostic preparation／full12input／full12plan／controlsの既送付7fileは同Pod内で新folderへbyte不変copyし、外部再送しない。旧helper／scope／root／原本は変更しない。
+
+- 新payload：/workspace/semantic-event-plan-v2-payload-repair1-20261116。
+- 新A9 root：/workspace/semantic-event-plan-v2-diagnostic-repair1-20261116-once。同じ架空5件＋前後4対照、最大9応答・停止復元込み1800秒、一回。
+- 新B9 root：/workspace/semantic-event-plan-v2-full12-repair1-20261116-once。全5件の新原文／raw／図／本文がroot＋独立全文照合で適切な場合だけ、4KB以下のhash判定1fileを同Podへ追加。全12の同6LEAF＋MERGEと前後4対照、最大11応答・停止復元込み1020秒、一回。
+
+新scopeは**未承認／未送付／未実行**で、元提供PID138365／start237571631へ新たに束縛する。学習／retry0、追加dependency／外部service0、既存鍵と全envは同Pod内認証・元提供復元だけに使う。次の失敗後に同scope内で追加修復・自動retryをしない。B9の新raw・exact profile2／alias2・全12独立意味reviewをSQL構築前に要求する既存finalizerと、旧checkpoint／guard／凍結as_of／月次当時版は保持する。
+
+fresh読取では通常API／workerは双方24bc228d Live、DB38migration／最新20261115011424。新deploy／DB変更／本人記録読取0。適切な新全12実結果→同raw一回SQL保存→別process非生成再読→互換native／exact API-worker・map alias2の通常反映（IF120u・自然／Piece保持）まで同じ未完単位で続ける。build／TestFlight／本人実機は保留。
+
+primary outcomeはBLOCKER_NARROWED。今回の応答は0件で、実4B品質・通常採用のcreditは増えていない。source／CI／合成保存の既績と、起動guard差分の検証をその代わりにしない。STRUCTURE_MAP_DELTA_NONE：商品owner／公開型／DB／RN／唯一realizer／保存構造は変わらず、一時実行helperの修正準備だけである。本単位／補助全体／正式受入れは未完。
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
@@ -1979,9 +2015,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/16・v2 source修復済み、A9／条件付きB9は実行前）
+### 11.2 現在の進行欄（11/16・A9起動停止／復元、新限定guard修正は実行前）
 
-全体主枠は§9.54／第11回§5。直近の実4Bは§9.97のA8停止／意味不適合・元120u復元であり、その原本を保持する。現在は§9.98のv2をAPI80d94db7へ反映し、回帰824・現行source等51・runner15・合成7応答の一回保存／別process非生成再読まで確認した。実4B品質／実raw保存再読／通常反映は未確認。新9file3,133,443byte／scope b53ac4d9のA9最大9応答30分、全5独立意味照合後のみB9全12の6LEAF＋MERGEと4対照・最大11応答17分を確定し、未承認／未送付／未実行。旧A8消費済み／B8未成立は転用しない。通常API／worker24bc228d Live・autoDeploy off、DB38migration／20261115011424をfresh確認。配布保留・本単位／補助全体／正式受入れ未完を維持する。
+全体主枠は§9.54／第11回§5。最新実行は§9.99のA9起動時argv拒否で、全5HF preflight通過後に取得前停止、新応答0件のまま29.388062秒で元120u PID138365／health200へ復元した。B9は条件不成立・起動0。11原本を回収・独立照合・private保全し、旧一回の再利用をしない。新guard修正は空だけを同じ期限内で待ち、非空不一致は即rejectするhelper一つとfresh rootsだけ。CPU7＋既存runner15件、2file42,201byte／scope75d8633d・同Pod内copy7fileを確定し、個別未承認／未送付／未実行。R10.3の自動適合とはしない。source80d94db7の両CI・回帰／合成保存は既績として保持し、実4B品質へ換算しない。通常API／worker24bc228d Live・DB38migration／20261115011424をfresh確認。全12実意味→同raw実保存再読→通常反映、本単位／補助全体／正式受入れ未完・配布保留を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -1990,15 +2026,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／一回保存を保持。§9.97のA8は不適合、§9.98のv2 source修復・合成検証まで。A9／全12B9は未実行 | 全量の実意味・同raw実保存再読・通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持 |
+| AR-06 | 完全親source／cohort／一回保存を保持。§9.99のA9は取得前停止／復元・応答0、B9未実行。v2 source修復とguard修正のCPU検証まで | 全量の実意味・同raw実保存再読・通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | §9.72の24bc228d API／worker双方Live・migration適用・対応RN sourceとCI成功を継承。§9.98候補80d94db7も通常未反映 | 起動・queue poll・未認証HTTPを本人生成保存や実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
-最新の修復準備は§9.98、直近の実原文/rawの意味・参照不成立は§9.97。§9.96の具体scopeはA8消費済み／B8条件不成立となった。最終JSONなしの旧停止・復元は§9.95。§9.92/旧prepared scopeは実行前の準備履歴でA6再起動やB6起動の指示ではない。全原本/新重みを保持し、意味未達の既存作者から同raw保存再読/通常反映へ継続する。正式受入れ・補助全体完了は未認定。
+最新は§9.99の起動停止／復元・新guard修正準備。応答原本のある直近意味不適合は§9.97。§9.96の具体scopeはA8消費済み／B8条件不成立となった。最終JSONなしの旧停止・復元は§9.95。§9.92/旧prepared scopeは実行前の準備履歴でA6再起動やB6起動の指示ではない。全原本/新重みを保持し、意味未達の既存作者から同raw保存再読/通常反映へ継続する。正式受入れ・補助全体完了は未認定。
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：第11回§5と§9.98のv2 source／確定scope。** API80d94db7・profile2・新plan a41950c0、同trialの全準備fileを正本とする。A9／条件付きB9の新一回は9file3,133,443byte／scope b53ac4d9で未承認／未送付／未実行。A8原本と不適合採否は§9.97のまま保持し、旧一回を再利用しない。新実結果の全文照合→同raw SQL一回保存→別process非生成再読→互換native／exact新commit worker／API・map alias2の通常配置まで同じ未完単位で続ける。通常24bc228d／DB20261115011424、build／TestFlight／本人実機保留を継承する。
+**11/16・現在の再開先：第11回§5と§9.99のA9停止原本・新限定guard修正。** A9の一回は応答0件の起動停止／復元で終了し、未成立B9を転用しない。新helper752544／scope75d8633d・新送付2file42,201byteと既送付7fileの同Pod内copyを正本とし、個別明示承認前の送付／実行はしない。新A9最大9応答30分、全5独立意味適合後だけ新B9全12の6LEAF＋MERGE＋4対照・最大11応答17分、各一回・学習／retry0。scope内で追加修復・自動retryをしない。適切な全12実結果から同raw SQL一回保存→別process非生成再読→互換native／exact API-worker・map alias2の通常反映まで同じ未完単位で進める。通常24bc228d／DB20261115011424、build／TestFlight／本人実機保留を継承する。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

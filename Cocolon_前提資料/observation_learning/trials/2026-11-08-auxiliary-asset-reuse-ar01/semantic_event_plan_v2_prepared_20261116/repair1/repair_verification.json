@@ -1,0 +1,23 @@
+{
+  "state": "PREPARED_NOT_UPLOADED_NOT_EXECUTED_REQUIRES_NEW_APPROVAL",
+  "scope_sha256": "75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e",
+  "scope_bytes": 10006,
+  "upload_files": 2,
+  "upload_bytes": 42201,
+  "reused_same_pod_files": 7,
+  "prepared_files": 9,
+  "prepared_bytes": 3137481,
+  "helper_sha256": "75254429efe91bf70654feb3c402d188e7106a4856d43562be1839b72ec62d5f",
+  "helper_bytes": 32195,
+  "source_commit": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+  "new_GPU_calls": 0,
+  "startup_boundary_tests": 7,
+  "existing_runner_tests": 15,
+  "semantics_changed": false,
+  "originals_changed": false,
+  "old_scope_unchanged": true,
+  "R10_3_automatic_application": false,
+  "individual_new_scope_approval_required": true,
+  "independent_final_bytes_review": "PASS",
+  "production_source_unchanged_from": "80d94db7833e9fa0039ac581fb73151b0767dda4"
+}
