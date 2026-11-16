@@ -1,0 +1,149 @@
+{
+  "schema": "cocolon.analysis.native_event_plan_base_protocol_cpu_verification.v1",
+  "state": "FINAL_CANDIDATE_CPU_PROTOCOL_VERIFIED_NO_MODEL_QUALITY_OR_RUNTIME_CREDIT",
+  "record_class": "BODY_FREE_ALREADY_OBSERVED_EXECUTION_EVIDENCE",
+  "api_source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "previous_api_source_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "source_identity": [
+    {
+      "path": "ai/tools/serve_emlis_natural_reply.py",
+      "role": "production_source",
+      "bytes": 88747,
+      "sha256": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56",
+      "local_git_blob_exact_match": true
+    },
+    {
+      "path": "ai/services/ai_inference/analysis_model_source.py",
+      "role": "production_source",
+      "bytes": 15440,
+      "sha256": "d1a87be0b02afec43fc68e08fd0a7ea350d54f6b9ec8fe27c4eea4f8794cbfc7",
+      "local_git_blob_exact_match": true
+    },
+    {
+      "path": "ai/services/ai_inference/analysis_if_model_source.py",
+      "role": "production_source",
+      "bytes": 5153,
+      "sha256": "92990dacd92debb68e1a452270ad271523fc8c067025eea42ded633a11ae2fa0",
+      "local_git_blob_exact_match": true
+    },
+    {
+      "path": "ai/tests/test_emlis_natural_reply_probe_http.py",
+      "role": "executed_test",
+      "bytes": 32966,
+      "sha256": "07e19673544b04167a6f7776a3e47dc51c68a1881afae4e51966c78f1d9097bd",
+      "local_git_blob_exact_match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_event_plan_runtime.py",
+      "role": "executed_test",
+      "bytes": 10487,
+      "sha256": "3be57404fabb868b69fa357b0eaf67fdafa18155aa3d3bbd03be29c359f26323",
+      "local_git_blob_exact_match": true
+    },
+    {
+      "path": "ai/tests/test_piece_model_server_constraints.py",
+      "role": "executed_test",
+      "bytes": 32318,
+      "sha256": "15482ec54f80b976e07ea9f7ef92af8aecb035fdbf1dd07a3cb02a7953556bcf",
+      "local_git_blob_exact_match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_event_plan_v2.py",
+      "role": "executed_test",
+      "bytes": 21351,
+      "sha256": "347f343977c791cba723750eea4b02a0504848370dc17d810e632542455a77ad",
+      "local_git_blob_exact_match": true
+    }
+  ],
+  "verification": {
+    "command_exact": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/8262f97b141c/runtime_recovery/lm-format-enforcer-src:/workspace/scratch/8262f97b141c/runtime_recovery/test-deps:/workspace/scratch/8262f97b141c/runtime_recovery/client-deps \"$CODEX_PRIMARY_RUNTIME_PYTHON\" -m pytest -q tests/test_emlis_natural_reply_probe_http.py tests/test_analysis_event_plan_runtime.py tests/test_piece_model_server_constraints.py tests/test_analysis_semantic_event_plan_v2.py",
+    "working_directory": "/workspace/scratch/56cfe0a372d7/mashos-api/ai",
+    "resolved_python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "test_paths": [
+      "ai/tests/test_emlis_natural_reply_probe_http.py",
+      "ai/tests/test_analysis_event_plan_runtime.py",
+      "ai/tests/test_piece_model_server_constraints.py",
+      "ai/tests/test_analysis_semantic_event_plan_v2.py"
+    ],
+    "execution_session_id": 94735,
+    "observed_final_output": "143 passed, 1 warning in 18.86s",
+    "exit_code": 0,
+    "passed": 143,
+    "failed": 0,
+    "elapsed_seconds_reported_by_pytest": 18.86,
+    "warning_summary_count": 1,
+    "warnings": [
+      "Existing pytest_asyncio asyncio_default_fixture_loop_scope unset deprecation warning emitted before tests.",
+      "Existing PydanticDeprecatedSince20 warning at api_emotion_submit.py:919 appears in pytest warning summary."
+    ],
+    "environment": {
+      "python": "3.12.14",
+      "pytest": "9.2.0",
+      "httpx": "0.28.1",
+      "fastapi": "0.116.1",
+      "lmfe_source_commit": "817f944fcc8851917c40300a47f62d1defc3ffc3",
+      "lmfe_import_path": "/workspace/scratch/8262f97b141c/runtime_recovery/lm-format-enforcer-src/lmformatenforcer/__init__.py",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/workspace/scratch/8262f97b141c/runtime_recovery/lm-format-enforcer-src:/workspace/scratch/8262f97b141c/runtime_recovery/test-deps:/workspace/scratch/8262f97b141c/runtime_recovery/client-deps"
+    },
+    "tests_rerun_to_write_this_record": false
+  },
+  "final_protocol": {
+    "explicit_alias": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+    "existing_cli_flag": "--event-plan-model",
+    "generator_profile": "event_plan_base",
+    "configured_alias_only": true,
+    "old_v2_and_base_aliases_not_opened_in_parallel": true,
+    "schema": "cocolon.analysis.semantic_map.event_plan.model.v2",
+    "same_event_adapter_loaded_and_identity_options_retained": true,
+    "adapter_disable_owner": "base_inference_context",
+    "output_budget": 4096,
+    "context_budget": 32768,
+    "tokenizer_truncation": false,
+    "existing_schema_grammar_decoder_instructions_and_other_profiles_preserved": true
+  },
+  "final_cpu_observations": [
+    "Real loopback HTTP admits only configured alias and expected v2 marker with Analysis authentication; invalid authentication, wrong marker, other alias and wrong budget are rejected before generator invocation.",
+    "Default Analysis/IF, natural and Piece profile selection remains covered; the shared max_requests=9 admits exactly nine generator calls and then returns 429 without another call.",
+    "Existing CLI configuration forwards the original 120u identity, same explicit event adapter identity and 4096/32768 budgets to the loader and base alias to the handler.",
+    "Existing synthetic_generator test fixture executes the actual load_generator serving closure with actual pinned LMFE parsing/token enforcement and a CPU deterministic model/tokenizer stand-in.",
+    "Base profile disables adapters during the forward; success and injected forward failure restore the default active adapter, evaluation mode and gradients disabled.",
+    "28672 input positions plus 4096 output reserve are accepted at 32768; 28673 input positions are rejected before a forward.",
+    "The same loaded closure can subsequently select the original event adapter, complete constrained output and restore default state.",
+    "Missing event adapter never falls back to default or unconstrained generation."
+  ],
+  "native_ast_comparison": {
+    "against_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+    "top_level_definition_inventory_unchanged": true,
+    "changed_existing_definitions": [
+      "make_handler",
+      "load_generator"
+    ],
+    "added_constant": "EVENT_PLAN_V2_BASE_MODEL",
+    "all_other_existing_definitions_unchanged": true
+  },
+  "interim_design": {
+    "initial_parallel_alias_design": "Initially the base alias was available alongside the original v2 alias when the existing v2 alias was configured.",
+    "resolution": "Corrected before publication to explicit selection through the existing --event-plan-model value; only that configured alias is admitted.",
+    "final_143_test_result_is_after_correction": true,
+    "interim_results_not_used_as_final_verification": true
+  },
+  "diff_check": {
+    "command": "git diff --check",
+    "observed_exit_code": 0,
+    "observed_output": ""
+  },
+  "limits": {
+    "model_or_cuda_downloads": 0,
+    "actual_gpu_calls": 0,
+    "actual_model_generation": 0,
+    "pod_operations": 0,
+    "new_training": 0,
+    "normal_rollout": 0,
+    "runtime_readiness_claim": false,
+    "meaning_quality_improvement_claim": false,
+    "candidate_acceptance_claim": false,
+    "actual_peft_weights_not_exercised_by_cpu_stand_in": true,
+    "remote_blob_verification": "Not independently repeated in this CPU record; source files were compared byte-for-byte with the specified local published Git commit."
+  }
+}

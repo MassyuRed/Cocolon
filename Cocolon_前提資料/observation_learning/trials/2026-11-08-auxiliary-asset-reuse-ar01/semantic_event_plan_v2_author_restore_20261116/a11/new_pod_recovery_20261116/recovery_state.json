@@ -66,6 +66,12 @@
   "new_pod_baseline_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
   "new_pod_scope_sha256": "6317b2676984386c60716c7698abfe10072b284b06e988c18872749174aac29f",
   "new_pod_transfers": "One verified restoration archive of 34954120 bytes and 434 members; 433 manifest entries verified on Pod.",
+  "next_prepared": {
+    "owner": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_event_plan_v2_base_control_prepared_20261116",
+    "prior_authority_reused": false,
+    "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+    "state": "UNAPPROVED_UNEXECUTED"
+  },
   "normal_connection": "NOT_VERIFIED_FROM_APP_API_OR_WORKER",
   "normal_rollout": 0,
   "old_native_recovered": {

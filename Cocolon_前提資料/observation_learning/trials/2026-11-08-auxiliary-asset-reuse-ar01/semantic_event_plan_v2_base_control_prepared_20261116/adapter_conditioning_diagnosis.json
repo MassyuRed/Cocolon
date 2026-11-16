@@ -1,0 +1,143 @@
+{
+  "schema": "cocolon.analysis.adapter_conditioning_diagnosis.v1",
+  "body_free": true,
+  "reviewer": "independent_architecture_review",
+  "state": "OFFLINE_DIAGNOSIS_NOT_REPAIR_OR_QUALITY_PROOF",
+  "current_document_commit": "4da6a4f3e5c5d6fe112d909172fec78e5fe32314",
+  "references": {
+    "a11_actual": {
+      "path": "a11_actual/actual/after.result.json",
+      "bytes": 40465,
+      "sha256": "d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266"
+    },
+    "a11_independent_review": {
+      "path": "a11_actual/reviews/independent_meaning_review.json",
+      "sha256": "e37a2e3eb4a10624116664daa3ec0f2a3ea884a5d1da5990daea259670fcc44d"
+    },
+    "training_plan": {
+      "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_alignment17_prepared_20261116/semantic_alignment17_plan.json",
+      "bytes": 356925,
+      "sha256": "58a1c90dab2f117c13d1dddb3ae58d5cc85ca1d446538858e0eea14d1cfd0363"
+    },
+    "historical_archive": {
+      "path": "/workspace/scratch/9aae8c9a5481/handoff/A9_repair1_updated/Cocolon_CMEE_ConcreteReading_20261115.zip",
+      "bytes": 64538431,
+      "sha256": "ade54212bff6e855095b2a70e850b8d2bf164c081affd9d614e7b22c7f2c55d6"
+    },
+    "a3_original": {
+      "archive_member": "verification/worked_map_lesson_actual_20261116/positive-reading.actual.result.json",
+      "bytes": 130017,
+      "sha256": "e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb",
+      "book_raw_sha256": "5fa671e47a69bbab042b7359bb1916585b54aa5aca7fcd807bbfb70de0a6844b"
+    },
+    "a4_original": {
+      "archive_member": "verification/base_control_actual_20261116/positive-reading.actual.result.json",
+      "bytes": 116563,
+      "sha256": "15deb23615d562e0c49a05167bb9bbad2c345bedaa2a21779e88499d134b7c2a",
+      "book_raw_sha256": "b9f6ef8f596557e3f2e05656b0b66fcddf845566486c4cd7395a2f289fec55ff",
+      "lighting_raw_sha256": "12740e669aaa3dcebe969596cb075ebc8ceb3521893a13372cd8387b4f491234"
+    },
+    "candidate34_post_training": {
+      "archive_member": "verification/semantic_alignment17_recovery_actual_20261116/after.result.json",
+      "bytes": 188960,
+      "sha256": "98f0021d6c40b2d33829f1d2b77d70e77d5dac91a11acc5227fac9a8656bdcf2",
+      "book_raw_sha256": "a53289db3924873dfa1a4897d45e5816800e921643a29695209681742a79081e"
+    },
+    "a6_original": {
+      "archive_member": "verification/ordinary_coverage_actual_20261116/positive-reading.actual.result.json",
+      "bytes": 115132,
+      "sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a",
+      "book_raw_sha256": "d631ac03dd1ad273b7c577330121ee1ccfedbe307bb79d357ce7d45df5015512"
+    },
+    "native_before_new_candidate": {
+      "path": "ai/tools/serve_emlis_natural_reply.py",
+      "sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be"
+    },
+    "author_before_new_candidate": {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+      "sha256": "67dd81e26637c912ae9e178f1997dd579c4efca840580023f224b10a41c548c6"
+    },
+    "compiler": {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+      "sha256": "249d3caed394ca85d7cd84c41bb2b7d4e0b0d53b8c66e9facf79c528712ce1b4"
+    },
+    "design_sections": ["9.84", "9.90", "9.91", "9.102", "9.103", "9.104"]
+  },
+  "training_lineage": {
+    "base_model": "Qwen/Qwen3.5-4B",
+    "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "initial_updates": 120,
+    "initial_weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+    "initial_config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+    "additional_updates": 34,
+    "teacher_count": 17,
+    "teacher_groups": {"ORDINARY": 11, "LEAF": 4, "MERGE": 2},
+    "passes_over_fixed_teacher_order": 2,
+    "optimizer": "AdamW_FRESH_NOT_EXACT_RESUME",
+    "candidate_weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b",
+    "candidate_config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+    "assistant_target_schema_counts": {"cocolon.analysis.semantic_map.model.v2": 17},
+    "event_plan_target_count": 0,
+    "events_readings_unit_refs_target_count": 0,
+    "teacher_prompt_event_plan_occurrence_count": 0,
+    "later_confirmation_teaching_exists": true,
+    "later_confirmation_teacher_ids": ["N10_archive_ordinary", "N11_course_ordinary"],
+    "finding": "The trained output is a directly authored quoted graph, not event-plan v1 or v2. The later-confirmation content is present in old-format teachers; the missing alignment is the new event/reading/selection representation, not a demonstrated complete absence of temporal teaching."
+  },
+  "native_and_author_review": {
+    "current_model_schema": "cocolon.analysis.semantic_map.event_plan.model.v2",
+    "author_constant": "_SEMANTIC_MAP_EVENT_PLAN_V2_INSTRUCTION",
+    "native_schema_function": "_semantic_event_plan_v2_schema",
+    "compiler_function": "_expand_analysis_semantic_event_plan_v2",
+    "source_and_prepared_messages_complete": true,
+    "later_source_confirmation_spans_available_to_decoder": true,
+    "generated_reading_refs_available_to_unit_refs": true,
+    "reading_selection_forbidden_by_decoder": false,
+    "event_reachability_and_reading_usage_are_separate_checks": true,
+    "a11_reading_orphan_refusal_is_correct": true,
+    "observed_input_profile_or_schema_impossibility_defect": false,
+    "representation_finding": "The current author first emits independent facts and readings, then separately selects e/r units for display. The 34-update adapter was trained to write node prose directly. A11 retained later-state concepts in node titles while failing to author their facts, and authored a reading without selecting it. This is consistent with an output-conditioning mismatch, but does not establish a unique cause.",
+    "existing_base_context": "base_inference_context",
+    "current_natural_or_piece_profile_is_valid_control": false,
+    "invalid_control_reason": "Natural/Piece profiles use 2048 output and 8192 context budgets. Reusing them to disable the adapter would change more than adapter selection.",
+    "current_full12_leaf_groups": 6,
+    "recorded_maximum_input_plus_reserved_output_tokens": 16379
+  },
+  "historical_actual_comparison": {
+    "a3_a4_messages_equal_for_both_cases": true,
+    "a3_a4_schema": "cocolon.analysis.semantic_map.model.v2",
+    "a3_adapter": "original120u",
+    "a4_adapter_state": "disabled_base_context",
+    "a4_book_relative_improvement": "Later transmission, one participant's acknowledgment, remaining readership uncertainty and the future/unheld meeting state were retained. The prior explicit reversals of confirmed venue reply and nonparticipation were absent.",
+    "a4_book_remaining_errors": "Unsupported uncertainty about use of the upstairs room and actor/venue-reservation attribution remained. It was not adopted.",
+    "a4_lighting": {"http_status": 200, "finish_reason": "length", "repeated_budget_time_nodes": 9, "accepted_projection": false},
+    "a6_limitation": "A legacy directly authored graph also contradicted its own later-transmission node in edge/overview prose. Therefore event-plan refactoring is not established as the sole cause of the semantic failures.",
+    "a4_is_current_v2_candidate34_control": false,
+    "a4_proves_base_solution": false
+  },
+  "diagnostic_recommendation": {
+    "action": "Prepare an explicit Analysis event-plan base alias/profile using the existing base_inference_context, while retaining the exact current event-plan v2 messages, schema, decoder, limits, source and acceptance conditions.",
+    "purpose": "Isolate the contribution of the learned adapter under the current representation before changing that representation or adding further teaching.",
+    "not_a_quality_or_deployment_decision": true,
+    "new_gpu_approval_required": true,
+    "a11_permission_reusable": false,
+    "no_additional_training_authorized_by_this_review": true,
+    "no_new_schema_or_prompt_required_for_this_contrast": true,
+    "new_implementation_independently_reviewed_here": false,
+    "curriculum_conclusion": "Current-format event-plan teaching is absent. That absence identifies an alignment issue, but does not yet prove that additional training is necessary or sufficient. A fixed-current-format base contrast can distinguish an adapter-dependent effect from failure that persists without the learned adapter."
+  },
+  "preserved_product_contracts": [
+    "No relaxation of source qualification, exact evidence, unknown binding, compiler rejection, graph coverage or reading usage.",
+    "No automatic insertion of unused readings, repair of received raw or binding of old raw to new messages.",
+    "No global Analysis model switch that would implicitly change IF; map/IF and natural/Piece profile boundaries remain explicit.",
+    "Public v3, the sole realizer, source rights, cohort, correction and withdrawal semantics, SQL ownership and monthly saved-version behavior remain unchanged.",
+    "A new diagnostic is not permission for B progression, SQL save, normal reflection, model adoption or another retry."
+  ],
+  "review_actions": {
+    "new_tests": 0,
+    "new_model_calls": 0,
+    "gpu_operations": 0,
+    "product_source_edits": 0,
+    "raw_repairs": 0
+  }
+}

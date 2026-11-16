@@ -1,4 +1,4 @@
-> **11/16最新：新Podへの主要資産復元と新GPU検証を完了。承認済みA11は最初の分析で拒否され、失敗閉鎖・新Pod baseline120uへ復元。B11は条件不成立。** Jupyter認証完了、固定base11file／9,342,816,694byte・通常120u／候補34更新・client408を原本照合。RTX A5000で7数値一致と2warm確認を実施し、旧GPU proofを流用していない。候補API7bb605b・両CI成功の同材料でA11を一回実行、前対照2＋読書会1の実3応答を受領。r1未使用でanalysis_semantic_event_plan_orphanとなり、後続の確認済み事実欠落・受領と椅子照会の根拠混同もroot／独立全文照合で不適合。残4件／後対照／B11は未実行。復元込み192.170569秒、PID4089・health200・argv／adapter一致・候補停止を確認。学習／retry／SQL保存／通常反映0。内部稼働確認を通常アプリの4B接続成功へ換算せず、現Render endpointと新Pod bridge／認証接続は未確認。A11一回は消費済み、未使用B11枠の転用なし。旧volume全残存は未確認だが必要保存資産は回収済み。通常反映を含む元単位／補助全体未完、配布保留。詳細は補助設計§9.105、原本参照はsemantic_event_plan_v2_a11_newpod_actual_20261116。
+> **11/16最新：新GPU復元・A11失敗閉鎖を保持し、同じevent-plan-v2の追加学習だけを外すA12/B12対照を準備。実生成・通常反映は未実施。** 17教師は旧直接graph形式で新events/readings/unit_refs教材0、ただし後日確認の旧教師はあり、原因やbase解決は未確定。候補API46fff73は明示base専用名だけを既存disable_adapter contextへ接続し、同指示/schema/grammar/4096出力/32768context・IF120u/Emlis/Pieceを保持。CPU4file143成功（部分集合56を加算しない）・既存driver15成功・247source/SQL原本束縛と独立reviewを確認、両CIは実行中。新scope c9aa3d15、同Pod内copy3＋新6file3,040,359byte、A12同5件＋4対照/最大9応答30分、全5件独立全文適切時だけB12同12記録6LEAF＋MERGE＋4対照/最大11応答17分を各一回の準備。未承認・未送付・未実行、A11/B11の枠は転用しない。PID4089はA11復元時の記録で実行前fresh検査が必要。通常4B接続は未確認、学習/SQL/Render設定/通常反映0、元単位・補助全体未完/配布保留。詳細は補助設計§9.106。
 
 > **11/16前回source修復：A10失敗原本から既存v2作者へ完成正例を復元し、候補API7bb605bへ反映。実4B改善・通常反映は未確認。** 確認待ち→翌日確認済みと、別人の残る未確認を分離した入力／完成JSON例を既存指示定数内へ戻した。定数以外の製品ASTはb14960eと一致、原5入力／guard／固定時点／同12記録24欄・同6組を保持。最終33件成功、送信時最大LEAF16,379byte。247sourceのremote blob一致と既存実行コードの材料読込、既存finalizerの8source／SQL原本4件の非生成束縛を確認。新scope6c2c2a51・新6file3,039,282byte／同Pod内copy3file、全9file3,139,037byteのA11/B11を準備した。A11最大9応答30分、全5件独立全文適合時だけB11最大11応答17分、各一回。個別未承認・未送付・未実行。A10消費済み／B10条件不成立を転用しない。両CI結果は同候補ci_verification.jsonを参照。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424をfresh再確認。worker900は現deployの既存起動log再取得で確認し、今回変更0。元単位／補助全体未完、配布保留。詳細は補助設計§9.103。
 
@@ -2078,6 +2078,26 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 - 学習／retry／raw修補／応答再利用0、失敗時は一回を閉じる。既存鍵・全envは同Pod内認証と元提供復元だけに使用。個別承認前の送付／実行0。直近A10復元PID141466/start238372709を前提記録とし、実行前の既存preflightで現procと両weights等が一致しなければ停止前に終了する。
 
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
+
+
+<a id="analysis-event-plan-v2-base-control-prepared-20261116"></a>
+## 9.106 11/16 — 同じv2指示・形式を固定して追加学習だけを外す対照の準備
+
+§9.105のA11 rawと現native/schema/parser、17教師の全assistant_target・学習結果来歴を独立全文確認した。現candidate34は旧cocolon.analysis.semantic_map.model.v2の直接nodes/edges/overviewで17件を各2更新したもので、events/readings/unit_refsを出す教師は0件だった。ただしN10/N11には後日の確認済みと残る未確認を分ける良い旧graph教師があり、「後日確認の教材自体がない」とはしない。現作者は別の事実/読み/参照への分解を推論時だけ要求している。A11の全入力とspanは実際に存在し、nativeは既出r1を許していた。切詰め・誤profile・誤adapterの具体bugは未発見で、形式差だけを失敗原因とは認定しない。
+
+A3/A4のexact原本も全読し、同messagesでbaseが読書会の後日送信/一人受領を保持する改善と、未開催なのに二階使用をunknownへ足す誤り、照明9反復lengthが併存したことを確認した。旧A4は旧direct-graph形式/120uとの比較で、現v2/34の品質へ移送できない。このため次は指示文・schema・制約・原入力を増減せず、現v2のまま34LoRAを適用しない対照を準備した。17教師/各actualのidentity、因果の限界はtrial semantic_event_plan_v2_base_control_prepared_20261116/adapter_conditioning_diagnosis.jsonへ保存した。
+
+候補API46fff73fe685b6c46d7f4b03c0bdeb003424a5e3は既存native make_handler/load_generator、既存Analysis model sourceとIF sourceの3製品fileだけを変更した。新base専用名cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6eを既存--event-plan-modelへ明示した場合だけ、Analysis鍵/v2 markerでevent_plan_baseを選ぶ。元v2名との相互送信は拒否し、別のmodel名でbase結果を返さない。同120u/34は読み込んだまま、map生成だけ既存base_inference_contextで全LoRAを無効化する。自然/Pieceの2048/8192分岐へ入れず、同Analysis4096/32768とsemanticJSON・全decoder設定・210秒期限を保つ。終了/例外時のeval・全gradOFFは既存finallyを使う。APIは新名だけ同v2材料へ、IFは元4設定を監視したまま120uへ束縛する。新CLI/controller/guard/依存/公開DTO/DB型、意味の拒否条件緩和は0である。
+
+既存test2fileへ、実loopback HTTPの認証/alias/marker分離・共有9回上限、実load_generator closure/実LMFEを通すCPU stand-inで全adapter無効、28672入力＋4096出力=32768境界/超過拒否、forward例外後復元と元event adapter再使用を確認した。4testfile143 PASS/18.86秒（primaryPython3.12.14、pytest9.2/httpx0.28.1/固定LMFE source）。rootの先行2file56件は部分集合として重複加算しない。nativeの変更関数はmake_handler/load_generatorだけで、schema/parser/context/CLIのASTは前版と一致。独立full diffとcaller reviewにblockerなし。これは実GPU・実重みでの生成/意味改善ではない。
+
+同5入力の全messages/request_ref/guard/固定時点、同12記録24欄・同6組planはA11とbyte一致、diagnosticの差はsource_hashes内の3pathだけ。source247の全memberは公開API46fffのGit blobと同byte、ZIP2,584,579byte/SHAdabed616b974628b94743d629f89d7024dfa5e1cf20e33cd2f6f14fa02d156a5。全ASTと新interpreterでの6module importも成功した。既存driverはROOTS/MODEL定数だけを変更し、15検査3.968秒が成功。新finalizerも既存のactual model名束縛1literalだけを変え、8sourceと元SQL input/checkpoint/plan/receipt4原本・同6組・最大16,379byteへ非生成で束縛できた。SQL実行/保存0、元原本は無変更である。
+
+新scope c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624、9,957byte。全9file3,140,114byteのうち、新Pod8d6lpvzb35at8x内A11 payloadの同3fileをcopyし、新6file3,040,359byteを送る準備をした。A12は5件＋前後4対照・最大9応答/復元込み1800秒一回。全5新実source/raw/projection/textのroot+independent全文照合が適切な場合だけ、B12を同12記録6LEAF＋MERGE＋4対照・最大11応答/復元込み1020秒一回。学習/retry/raw修補0、失敗で閉鎖し、旧A11消費済み/B11不成立の承認は転用しない。新scopeは未承認・未送付・未実行である。候補commitのAnalysis43846424667/Piece43846424124は本記録時点で実行中、実操作前に両successを確認する。
+
+baseline helper3e515360/proof d759203aは新Pod実A5000のbaseline native d678fe2cへ束縛したままで、新candidate native569042c2の新warm proofへ偽装しない。PID4089/start99099105はA11復元時の最後の記録であり、実開始前のsame PID/start/argv/env/cwd/native/adapter/client/proofを検査する。今は新Pod操作も0。新exactscopeを承認された後に一回だけ実行し、新全12意味→同最終raw一回disposable SQL保存→別process非生成再読→通常native/API-worker整合反映へ続ける。内部healthを通常4B疎通へ換算せず、現Render endpointと新Pod bridge/認証は未確認のままである。通常設定/配備、SQL保存、通常反映0、元単位/補助全体/正式受入れ未完・build/TestFlight/本人実機保留を維持する。
+
+private5材料と診断の保存原本はtrial/private_material_receipt.jsonへ記録し、実行code/scope/manifestとbody-free検証/独立reviewはGitへ残す。全sourceはexactAPIと既存source builderから再構成し、各member/ZIP SHAを照合する。STRUCTURE_MAP_DELTA_NONE：既存owner内の有限な対照準備のみで、三中核の通常利用目標や責務を変えていない。
 
 
 <a id="analysis-event-plan-v2-a11-newpod-actual-20261116"></a>

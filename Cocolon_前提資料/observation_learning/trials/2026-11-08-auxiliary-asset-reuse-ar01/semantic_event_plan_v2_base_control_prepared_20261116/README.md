@@ -1,0 +1,19 @@
+# 同じevent-plan-v2を使うbase対照の準備（A12/B12）
+
+未承認・未送付・未実行・通常未採用です。A11一回は消費済み・失敗閉鎖、B11条件不成立であり、残枠を転用しません。次の実生成前に新scopeの承認が必要です。CIは本記録時点で実行中です。
+
+17教師の全assistant_targetは旧直接nodes/edges/overviewのmodel.v2で、新events/readings/unit_refsの教師は0件でした。後日の確認自体を教える旧教師はあり、教材がない／34adapterが原因／baseなら解決するとは断定していません。過去A3/A4比較でもbaseに改善と誤りが併存しています。診断の詳細と不確定範囲はadapter_conditioning_diagnosis.jsonに保存しました。
+
+候補API46fff73fe685b6c46d7f4b03c0bdeb003424a5e3は、既存--event-plan-modelへ新しいbase専用名を明示した場合だけ、既存base_inference_contextを使います。元120uとcandidate34は同じように読み込み、map生成中だけ全LoRAを無効にします。指示文・材料・schema・grammar・compiler・4096出力／32768context・期限は同じです。IF120u、Emlis/Pieceの既存経路を維持します。API source3fileと既存test2fileだけで、新CLI・controller・guard・依存・公開DTO/DB型は追加していません。
+
+実loader closure／実LMFEを通るCPU stand-in、実loopback HTTPを含む4file143 PASS/18.86秒と、既存driver15検査、247source全byte/AST・新interpreterの6module import、8sourceと元SQL原本4件の非生成束縛が成立しています。これは実GPU／実重みの前後比較や意味品質の成功ではありません。143の部分集合56件を重複加算しません。独立source/preparation reviewに不一致0、model/SQL/新Pod操作0です。
+
+新scope c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624。9file3,140,114byteのうち、新Pod8d6lpvzb35at8xのA11 payloadから原入力2＋対照1の同3fileをcopyし、新6file3,040,359byteを送る準備です。A12は同5件＋前後4対照・最大9応答／復元込み30分一回。全5新実source/raw/projection/textがroot+independent全文適切な場合だけB12を同12記録6LEAF＋MERGE＋4対照・最大11応答／復元込み17分一回。学習／retry0、失敗で閉鎖します。内部unit名A9/B9とreview keysは既存runner protocolのままです。
+
+PID4089/start99099105はA11復元時の最後の記録です。新scopeの実開始前には同PID/start/argv/env/cwd、baseline native d678fe2c、重み／client／既存A5000 proofをfresh検査します。新candidate569042c2とbaseline nativeを混同しません。既存helper/proofはbaselineの束縛を保持し、新candidateを再warmした証拠とはしません。model鍵は同Pod process内の認証・復元だけ、値の外部保存0です。
+
+private_material_receipt.jsonが保存済みの5材料と診断を解決します。実行code／scope／manifestはこのGit owner、source247はexactAPI46fff73にあります。既存../semantic_event_plan_v2_prepared_20261116/build_source_package.pyを同Python3.12.14でそのAPI checkoutへ適用すると、current_api_sources.zipを完全sourceから再構成できます。byte/SHAはsource_manifest.jsonと一致させます。再構成したcode archiveをprivate材料と合わせ、全8payloadfileとscopeのSHAを検査してから扱います。別compressionによる不一致も同じ承認へ推測で継承しません。
+
+全12実意味が適切なら、同最終rawを一回だけdisposable SQLへ保存し、別processから非生成current/id/monthly/API ensure=falseで読み戻す既存finalizerを使います。今回その保存／SQL実行は0で、旧checkpoint/input/plan/receiptは無変更です。通常接続・native/API-worker互換反映は実意味と同raw実保存再読の後に残ります。現Render endpointと新Pod bridge/認証経路は未確認です。通常設定/配備0、元単位／補助全体未完、build/TestFlight/本人実機保留を維持します。
+
+STRUCTURE_MAP_DELTA_NONE：既存map作者/native/同model source内の明示比較だけ。指示語「補助経路の活用作業」と三中核の通常採用目標は変えていません。

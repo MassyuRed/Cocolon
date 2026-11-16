@@ -1,0 +1,12 @@
+{
+  "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+  "scope_bytes": 9957,
+  "file_count": 9,
+  "total_bytes": 3140114,
+  "same_pod_copy_files": 3,
+  "upload_file_count": 6,
+  "upload_total_bytes": 3040359,
+  "native_sha256": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56",
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "state": "PREPARED_NOT_EXECUTED_REQUIRES_NEW_EXPLICIT_APPROVAL"
+}

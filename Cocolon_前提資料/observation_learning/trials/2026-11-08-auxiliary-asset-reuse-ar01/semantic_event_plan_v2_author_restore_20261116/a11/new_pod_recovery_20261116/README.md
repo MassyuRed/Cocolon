@@ -8,6 +8,6 @@
 
 復元込み192.170569秒で、新Pod実行前baseline120uをPID4089/start99099105へ戻しました。argv・重み・新native d678fe2c一致、health200、候補停止／18008閉鎖を確認しました。この新baselineは旧private native ad3d301dと同一ではありません。旧native自体は保存原本からSHA一致で回収しましたが、新Podへ未送付／未有効化です。
 
-今回の内部確認は通常アプリ/API/workerの新Pod4B疎通成功ではありません。現Render endpoint、通常bridgeと認証接続は未確認です。Render設定／配備・SQL保存・通常反映は0で、元単位と補助全体は未完です。build／TestFlight／本人実機は保留です。次の具体的なGPU試行は未準備・未承認で、自動再実行しません。
+今回の内部確認は通常アプリ/API/workerの新Pod4B疎通成功ではありません。現Render endpoint、通常bridgeと認証接続は未確認です。Render設定／配備・SQL保存・通常反映は0で、元単位と補助全体は未完です。build／TestFlight／本人実機は保留です。次のA12/B12対照は設計§9.106で準備済み・未承認です。自動再実行しません。
 
 詳細は設計§9.105と`../../../semantic_event_plan_v2_a11_newpod_actual_20261116/`のbody-free原本receipt／独立reviewを参照してください。受領raw／source本文／logは公開Gitへ置きません。
