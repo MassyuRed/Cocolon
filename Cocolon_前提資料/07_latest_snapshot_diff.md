@@ -1,4 +1,4 @@
-> **11/16最新：新PodでA12を一回実行し、不採用のまま復元完了。B12は条件不成立で未実行。** API46fff73の両CI成功を再確認し、同Pod内copy3＋新6file3,040,359byte、全9fileのSHAと247sourceを確認した。実4応答は前対照2＋分析2。読書会は図／本文へ到達したが、後日の確定事実の根拠欠落・12線の反復で独立全文不適合。照明は210秒期限で不完全JSON（finish=length）、残3件と後対照は未取得。4096token到達とは記録しない。復元込み406.375640秒、元argv/env/cwd・native d678fe2c・同adapterへPID5433/start99553630で復元し、別読取でhealthz200・argv一致・候補PID停止／18008閉鎖を確認。A12一回は消費済み・失敗閉鎖、学習/retry/SQL/通常反映0。主要保存資産は回収済み、旧volume全体の残存は未確認。新Podの通常Render/API接続は未確認、元単位・補助全体は未完／配布保留。詳細は補助設計§9.107。
+> **11/16最新：既存v2作者の段階別完成例をAPIb340a0eへ修復し、A13／条件付きB13を準備。未送付・未実行。** 通常／MERGEの時点・人物・未確認の完成例と単記録LEAF例を分離。局所165成功／SQL依存25skip、26件の再確認は重複加算しない。原5入力／全12記録・同6組、compiler／native／guard／DB／権利は不変。新6file3,066,093byte＋同Pod内copy3file99,755byte、全9file3,165,848byte・scope4cdec4a7。A13最大9応答30分、全5件の独立全文適切時のみB13最大11応答17分、各一回・学習／retry0。Piece CIは全工程成功。分析CIは25分枠で取消後、検査を変えず40分枠で再実行中で、送付前success確認が必要。既存bridgeを5.975秒で復元し、認証分離を確認、nativePID5433を保持。Renderログインが通常設定／鍵照合・配置を阻害しており、通常API／worker24bc228d・DB20261115011424は最終確認記録。A12失敗閉鎖／B12未実行を維持し、実意味・同raw保存再読・通常反映と元単位／補助全体は未完、配布保留。詳細は補助設計§9.108。
 
 > **11/11・AR-04最新：** APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。 [本人前置の文体比較・範囲と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。
 
@@ -42131,3 +42131,10 @@ API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体
 APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。
 
 本人前置＋文体差の比較修復・固定CPU3件と9保存は完了。次は同じ条件の新規実4B本文での確認と、元focal語順・引用／理由一般などの残差を既存の比較と保存経路で進める。今回、新たなGPU packetの送信・起動・提供停止・起動環境読取・学習・通常採用は行っていない。以前の一回実行は完了済みで再実行しない。広い文章、新f6daeによる旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗、AR-01と他ARは未完。 [同一材料・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。
+
+
+# 2026-11-16 CURRENT — 分析v2作者の段階別完成例修復とA13/B13未実行準備
+
+既存v2作者の通常／MERGEとLEAFの完成例をAPIb340a0eへ修復した。局所165成功・SQL依存25skipで、26件の再確認は重複加算しない。新A13/B13はscope4cdec4a7、同Pod内copy3file99,755byte＋新6file3,066,093byte、全9file3,165,848byte。原5入力・全12／同6組とcompiler／native／guard／DB／権利は保持、実生成・送付0。A13最大9応答30分、全5件の独立全文適切時だけB13最大11応答17分、各一回・学習／retry0。Piece CI43859216881は全工程成功、分析43859216743は25分枠到達で取消。CI枠だけを40分へ直した21ec7a1の分析43863462728を実行中で、送付前success確認が必要。
+
+既存bridgeは同handlerへ5.975秒で復元し、ローカル認証分離とnativePID5433保持を確認した。model／external requests0。Renderログインにより通常設定／鍵一致・配置は未実施、通常API／worker24bc228d・DB20261115011424は最終確認記録。A12失敗閉鎖／B12不成立は維持する。詳細・現在の再開先は[補助設計§9.108](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-stage-aware-a13-prepared-20261116)。同raw保存再読・通常反映／元単位・補助全体は未完、build／TestFlight／本人実機保留。STRUCTURE_MAP_DELTA_NONE。
