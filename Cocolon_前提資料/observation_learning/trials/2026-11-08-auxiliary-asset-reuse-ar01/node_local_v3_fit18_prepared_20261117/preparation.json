@@ -1,0 +1,42 @@
+{
+  "schema": "cocolon.analysis.current_v3_fit18_prepared.bodyfree.v1",
+  "state": "NEW_FIT18_A18_B18_PREPARED_PENDING_EXPLICIT_CONSENT_NOT_EXECUTED",
+  "source_commit": "eec0262baf833084cd548819a7960adc1b043c4b",
+  "scope_sha256": "4bd274663c9bf0186143cf91fcb8fc6ae16a808a78a18fcf20eaf74f5b0a6909",
+  "dataset_sha256": "dd81dccc2b4fbe96effa6188351a251468105d042c926b06264ebda5b3b21918",
+  "records": 33,
+  "fields": 66,
+  "training_rows": 16,
+  "stages": {
+    "ORDINARY": 12,
+    "LEAF": 2,
+    "MERGE": 2
+  },
+  "all_source_snapshots_unchanged": true,
+  "all_fields_cited": true,
+  "independent_review_pass_for_teaching_only": true,
+  "capacity": {
+    "maximum_training_sequence_tokens": 7280,
+    "maximum_target_tokens": 1210,
+    "cutoff": 0
+  },
+  "upload_files": 13,
+  "upload_bytes": 721009,
+  "fit_seconds": 1080,
+  "A18": {
+    "max_responses": 9,
+    "max_seconds": 1800
+  },
+  "B18": {
+    "condition": "ALL5_ROOT_AND_INDEPENDENT_FULL_MEANING_ADEQUATE",
+    "max_responses": 17,
+    "max_seconds": 1440
+  },
+  "prepared_updates": 32,
+  "actual_updates": 0,
+  "actual_model_calls": 0,
+  "SQL": 0,
+  "normal_adoption": false,
+  "STRUCTURE_MAP_DELTA_NONE": true,
+  "unit_complete": false
+}
