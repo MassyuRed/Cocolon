@@ -1,0 +1,13 @@
+{
+  "state": "OFFLINE_ONLY_NO_MODEL_OR_POD",
+  "tests": 22,
+  "subtests": 28,
+  "driver_only_fresh_ROOTS_change": true,
+  "scope_old_copy_metadata_removed": true,
+  "old_scope_file_unchanged": true,
+  "new_scope_sha256": "f68618f074eb5ce176491e4a45926b5bfa4e6ebbcbbd8c9d9dcda812d29d0d86",
+  "model_calls": 0,
+  "Pod_operations": 0,
+  "training": 0,
+  "retry": 0
+}

@@ -1,0 +1,195 @@
+{
+  "SQL": {
+    "automatic_save": false,
+    "candidate_plan_sha256": "d4b24425c3799bb120b8b02a1e63f365db13d6f0182cce8c41f68be5b4e389f6",
+    "checkpoint_sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+    "input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+    "next": "Only new actual B10 raw after full independent12-record meaning review, one same-raw SQL save and separate-process non-generating reread. No save under this acquisition scope.",
+    "old_plan_sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb"
+  },
+  "authorization": "Prior A9 repair1 consumed/closed, B9 unmet and not reusable. User continuation authorized reversible existing-author source repair only. A10/B10 evaluation remains unapproved/unuploaded/unexecuted until exact new explicit approval. Internal A9/B9 entrypoint keys are preserved; new scope, payload and execution roots distinguish this source evaluation. No repair of closed execution or new method family.",
+  "candidate_adapter": {
+    "config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+    "path": "/workspace/semantic-alignment17-recovery-20261116-once/fit/adapter",
+    "updates": 34,
+    "weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b"
+  },
+  "candidate_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+  "controls": "Two frozen repository-owned synthetic wire inputs; candidate before/after full response bytes must match. No teacher or semantic acceptance is inferred.",
+  "credential_boundary": "Existing credentials/environment used only for same-Pod auth and original-provider restoration. No credential values copied into payload/results.",
+  "derived_review_transfer": {
+    "contents": "Only adequate-state label, reviewer roles, actual result SHA and the five actual raw hashes. No raw/body, source text, credential or model output.",
+    "exact_keys": [
+      "state",
+      "reviewers",
+      "A9_result_sha256",
+      "raw_sha256_by_case"
+    ],
+    "file": "A9.independent-meaning-review.json",
+    "max_bytes": 4096,
+    "only_if": "All five actual A9 source/raw/projection/text adequate under root and independent review."
+  },
+  "generation": {
+    "context_tokens": 32768,
+    "enable_thinking": false,
+    "forced_close": false,
+    "max_new_tokens": 4096,
+    "raw_repair": false,
+    "reused_responses": 0
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "model_alias": "cocolon-qwen3.5-4b-analysis-event-plan-v2",
+  "original_adapter": {
+    "config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+    "path": "/workspace/semantic-resume40-v1/run/adapter",
+    "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495"
+  },
+  "original_identity_status": "Last repair1 restoration record PID139472/start237826333, healthz200; exact current proc/argv/env/cwd/source/weights must pass existing preflight before stop.",
+  "original_model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+  "original_provider_pid": 139472,
+  "original_provider_start_ticks": "237826333",
+  "payload_files": {
+    "controls.json": {
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    "current_api_sources.zip": {
+      "bytes": 2584358,
+      "sha256": "6ce4348b6b30af46dded0d0d34e7d722fb406e7a10025ea557933b083ef5be55"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 56335,
+      "sha256": "6c32c6adad37c8853dfd175a035372d8b58e7e30f161d363cf80a9aa69f69585"
+    },
+    "event_plan_execution.py": {
+      "bytes": 32187,
+      "sha256": "04431cee0e334f3a268125fba2b38525502154c1a789948a315779ca4bde2ab7"
+    },
+    "full12.input.json": {
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 166178,
+      "sha256": "d4b24425c3799bb120b8b02a1e63f365db13d6f0182cce8c41f68be5b4e389f6"
+    },
+    "input_cases.json": {
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    "source_manifest.json": {
+      "bytes": 191162,
+      "sha256": "88cd5c426252cf6840d9626ec0b4faac645209aa7f10053eb55d8343aaa332a4"
+    }
+  },
+  "payload_total_bytes_excluding_scope": 3129975,
+  "prepared_file_count": 9,
+  "preserved": "Original default Analysis/IF120u, natural base, Piece arguments/weights; entire original argv/env/cwd restored within same Pod.",
+  "product_author_restore": {
+    "changed_source": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+    "full12_same_six_record_groups": true,
+    "instruction_bytes": 3632,
+    "new_messages_hashes": true,
+    "no_schema_guard_native_input_model_change": true,
+    "only_v2_instruction_constant": true,
+    "prior_instruction_bytes": 3436,
+    "request_refs_unchanged_with_same_profile": true,
+    "source_sha256": "d1772ef4bfe0ebe74de8c2f5a25c4357dc9949fa015adfb0e8b930db277a1583",
+    "terminal": "This is one fresh evaluation only. Any failure closes A10; no additional correction or automatic retry. B10 requires all five independent full meaning checks to pass."
+  },
+  "profile": "semantic_map.event_plan.v2",
+  "prohibited": [
+    "training",
+    "retry",
+    "new dependencies",
+    "new external service",
+    "raw semantic repair",
+    "normal adoption from technical completion",
+    "build",
+    "TestFlight",
+    "device",
+    "live SQL",
+    "Render mutation",
+    "production source changes",
+    "protected test/fixture/sample changes",
+    "reuse of consumed A9 or unmet B9 authority",
+    "further correction or retry after any failure under this new authority"
+  ],
+  "proposal_name": "A10/B10 existing-author semantic repair evaluation",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "same_pod_copy": {
+    "destination_root": "/workspace/semantic-event-plan-v2-payload-a10-20261116",
+    "files": {
+      "controls.json": {
+        "bytes": 17840,
+        "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+      },
+      "full12.input.json": {
+        "bytes": 59146,
+        "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+      },
+      "input_cases.json": {
+        "bytes": 22769,
+        "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+      }
+    },
+    "operation": "Copy only these three unchanged data files inside the same Pod; do not edit prior files or resend them. Validate hashes before launch.",
+    "source_root": "/workspace/semantic-event-plan-v2-payload-repair1-20261116"
+  },
+  "schema": "cocolon.analysis.event_plan.execution_scope.v1",
+  "source_git_head": "b14960e1e546643942be7786ed4e487274e4422e",
+  "source_package": {
+    "files": 247,
+    "uncompressed_bytes": 12593803
+  },
+  "source_snapshot_note": "Complete source bytes from the exact published unadopted candidate commit; no normal activation. Source manifest is exact identity.",
+  "state": "PREPARED_NOT_EXECUTED_REQUIRES_NEW_EXPLICIT_APPROVAL",
+  "trial_provider": {
+    "host": "127.0.0.1",
+    "ownership": "Exact child argv/PID and its listening socket inode checked before authenticated trial requests.",
+    "port": 18008,
+    "wrapper": "Same execution driver process-local wrapper: published native make_handler exact per-unit cap and loopback listener; native bytes unchanged."
+  },
+  "units": {
+    "A9": {
+      "max_control_calls": 4,
+      "max_map_calls": 5,
+      "max_model_calls": 9,
+      "native_request_seconds": 210,
+      "once": true,
+      "restore_inclusive_seconds": 1800,
+      "retry": 0,
+      "root": "/workspace/semantic-event-plan-v2-diagnostic-a10-20261116-once",
+      "training": 0,
+      "work_seconds": 1620
+    },
+    "B9": {
+      "condition": "All five newly acquired A10 source/raw/projection/text adequate after root and independent full meaning review; prior raw/results never reused.",
+      "fresh_leaves": 6,
+      "fresh_merge": 1,
+      "max_control_calls": 4,
+      "max_map_calls": 7,
+      "max_model_calls": 11,
+      "native_request_seconds": 210,
+      "once": true,
+      "restore_inclusive_seconds": 1020,
+      "retry": 0,
+      "root": "/workspace/semantic-event-plan-v2-full12-b10-20261116-once",
+      "service_pipeline_seconds": 840,
+      "source_records": 12,
+      "training": 0,
+      "work_seconds": 900
+    }
+  },
+  "upload_file_count": 6,
+  "upload_files": [
+    "event_plan_execution.py",
+    "current_api_sources.zip",
+    "source_manifest.json",
+    "diagnostic_preparation.json",
+    "full12_pre_acquisition.plan.json",
+    "execution_scope.json"
+  ],
+  "upload_root": "/workspace/semantic-event-plan-v2-payload-a10-20261116",
+  "upload_total_bytes_excluding_scope": 3030220
+}

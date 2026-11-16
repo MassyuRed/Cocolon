@@ -1,0 +1,112 @@
+{
+  "state": "EXISTING_AUTHOR_SEMANTIC_CONDITIONS_RESTORED_NOT_MODEL_VERIFIED",
+  "base_api_commit": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+  "source_path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+  "source_sha256": "d1772ef4bfe0ebe74de8c2f5a25c4357dc9949fa015adfb0e8b930db277a1583",
+  "source_git_blob_sha": "c0c27e2bff17bfb6498208228684d2e87afe1d43",
+  "only_v2_instruction_constant_changed": true,
+  "old_instruction_bytes": 3436,
+  "new_instruction_bytes": 3632,
+  "tests": {
+    "distinct_passed": 170,
+    "initial_plugin_missing_before_collection": true,
+    "initial_169_passed_1_SQL_skipped": true,
+    "SQL_configured_followup_passed": 1,
+    "new_tests_added": 0
+  },
+  "all5_user_messages_guards_and_request_refs_unchanged": true,
+  "all5_system_messages_and_message_hashes_changed": true,
+  "input_case_bytes_unchanged": true,
+  "full12_input_bytes_unchanged": true,
+  "full12_guard_and_as_of_unchanged": true,
+  "full12_leaf_count": 6,
+  "leaf_record_groups_unchanged": true,
+  "max_leaf_bytes": 16376,
+  "cases": [
+    {
+      "id": "book_club_two_day",
+      "request_ref": "analysis-semantic-request:3e08ee3aea6315355f34ae21d3007c9ef1b7b4e37243ee60bfee3908baacee16",
+      "messages_sha256": "32c1e1ea8ede3010b73186829c13b2073e2ec93c30a32f0bfced573b945de3c7",
+      "message_bytes": 7176,
+      "source_guard": "analysis-db-cumulative-v1:cd9a667df0f4c43bb782f27d3edd77e16d8aa0e60a2d5a7b9e5a7c8b2c612dee"
+    },
+    {
+      "id": "lighting_prior_and_later",
+      "request_ref": "analysis-semantic-request:1c689755859dfb2f890743a581623f4e426dded17a7eae5ff731990bb075c3a6",
+      "messages_sha256": "fd021b932bb7329beec2e3132de7883f00f4e79bec36ce47899e775e557e5dba",
+      "message_bytes": 15169,
+      "source_guard": "analysis-db-cumulative-v1:ab6fec7e93b08127eaec1f33226454c0b9907352a515a8c48f785ca9c28ac429"
+    },
+    {
+      "id": "U01_repair_report",
+      "request_ref": "analysis-semantic-request:95412ef763f580c3ef6048b2f19f7a649a1de89165a3811502f27f0e88695ea7",
+      "messages_sha256": "16fc71294c67cfe79c3f7a48e120a4dc12a94add2d59a173968c27f3bfffc5f6",
+      "message_bytes": 6747,
+      "source_guard": "analysis-db-cumulative-v1:d1fa89602c5b3c415017c27f223acb78fdb3e36e31a11812a52816ed10656559"
+    },
+    {
+      "id": "U02_withdraw_submission",
+      "request_ref": "analysis-semantic-request:2781d089eaf8fa692b8f0ed349f09892f22ec894de46959c994f32fa622297da",
+      "messages_sha256": "9c0ac740e9b83cf8e73b710e6071fc0bdafee6e5a188e0d9428bbb56a1dd20fa",
+      "message_bytes": 7327,
+      "source_guard": "analysis-db-cumulative-v1:731f1f71bb1db6606b00b6dac7f505b67fb522ff60232d4bb81e0ec3f3b3c2be"
+    },
+    {
+      "id": "T01_manual10",
+      "request_ref": "analysis-semantic-request:ba6785d2c4b7a0947dd1dfeb2f89c0d1e141c2fbf4aec49403709bdc2793c440",
+      "messages_sha256": "b91e76f43cf98ef8a6aae962d1271ac17266d5db7b79c5c00a0d45e787a5802d",
+      "message_bytes": 11627,
+      "source_guard": "analysis-db-cumulative-v1:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "full12_parent_request_ref": "analysis-semantic-request:4b0ef9f8b9025d6b1220c8af986f1cda74a55f1a6a175d17c27a2a85aa2f1894",
+  "full12_plan_sha256": "d4b24425c3799bb120b8b02a1e63f365db13d6f0182cce8c41f68be5b4e389f6",
+  "old_scope_consumed_closed": true,
+  "old_raw_rebound": false,
+  "new_GPU_scope_prepared": true,
+  "model_calls": 0,
+  "Pod_operations": 0,
+  "training": 0,
+  "normal_rollout": 0,
+  "meaning_effect": "UNASSESSED",
+  "independent_source_review": "NO_MATERIAL_OMISSIONS",
+  "longer_intermediate_rejected_due_to_partition_increase": true,
+  "api_commit": "b14960e1e546643942be7786ed4e487274e4422e",
+  "api_tree": "393d052d0abd072311594350cab7ebd3f7583c8d",
+  "next_GPU_scope_prepared": true,
+  "next_GPU_scope_state": "UNAPPROVED_UNUPLOADED_UNEXECUTED",
+  "execution_tests": {
+    "passed": 22,
+    "subtests": 28
+  },
+  "new_trial": {
+    "state": "A10_B10_EXACT_CANDIDATE_PREPARED_NOT_APPROVED_NOT_UPLOADED_NOT_EXECUTED",
+    "folder": "candidate_execution/event_plan_v2_author_restore_20261116",
+    "files": 9,
+    "total_bytes": 3138846,
+    "upload_files": [
+      "event_plan_execution.py",
+      "current_api_sources.zip",
+      "source_manifest.json",
+      "diagnostic_preparation.json",
+      "full12_pre_acquisition.plan.json",
+      "execution_scope.json"
+    ],
+    "upload_bytes": 3039091,
+    "same_pod_copy_files": [
+      "controls.json",
+      "input_cases.json",
+      "full12.input.json"
+    ],
+    "scope_sha256": "f68618f074eb5ce176491e4a45926b5bfa4e6ebbcbbd8c9d9dcda812d29d0d86",
+    "source_package_all247_match_remote_blobs": true,
+    "driver_change_only_fresh_ROOTS": true,
+    "model_calls": 0,
+    "Pod_operations": 0,
+    "SQL_calls": 0,
+    "training": 0,
+    "normal_rollout": 0,
+    "source_commit": "b14960e1e546643942be7786ed4e487274e4422e",
+    "scope_old_copy_instruction_removed": true
+  }
+}
