@@ -1,4 +1,4 @@
-> **11/16最新：A13を一回実行し、最初の読書会で意味・参照不適合のため失敗閉鎖。B13は条件不成立で未実行。** APIb340a0eの段階別完成例で前対照2＋分析1の実3応答を取得。読書会は97.297秒／stopだがe4未使用で拒否され、独立全文照合でもr1の根拠不一致・達成状態の変化が残った。図／本文・残4件・後対照／SQL保存／通常反映0。両CI成功後のscope4cdec4a7は消費済み、復元込み229.407秒で元native d678fe2c・PID7098/start100159506へ復元し、別読取でhealthz200・18008閉鎖を確認。次はv2形式のfresh LoRA教材と既存trainerの準備へ進み、新学習・実生成や品質改善は未認定。既存bridge復元は維持、Renderログインで通常設定／鍵照合・配置は未実施。通常API／worker24bc228d・DB20261115011424は最終確認記録。元単位／補助全体未完・build／TestFlight／本人実機保留。詳細は補助設計§9.108。
+> **11/16最新：fresh16教師32更新は完走したがA14は不適合で失敗閉鎖。既存作者をnode_local.v3へ改修し、候補コード・局所検査・独立review・GitHub反映まで完了。実4B・保存・通常採用は未実施。** AF1は306.882秒／復元込み341.020秒、新73f5／configfb2eを保持。A14は前対照2＋読書会1の3応答、反復・15未使用・後日事実欠落が残り、図／本文・残4件・後対照／B14／SQL／通常反映0。305.217秒で元native d678fe2c・PID13576/start100524246へ復元、別health200・18008閉鎖。新private候補APIc95d17dはnode根拠付きunitから同じ公開graphへ投影し、旧v1／v2・guard／cohort／権利・保存／RNを保持。対象回帰314成功／skip0、最終新2suite47成功とnative既存303成功は重複のため合算しない。独立reviewにblockingなし。両CIは実行中で未成功。A15／新GPUは区切り前に開始せず、同5入力→全12→同raw保存再読→通常反映は次に残す。Render認証による通常接続未確認、元単位／補助全体未完・配布保留。詳細は補助設計§9.109。
 
 > **11/16前回source修復：A10失敗原本から既存v2作者へ完成正例を復元し、候補API7bb605bへ反映。実4B改善・通常反映は未確認。** 確認待ち→翌日確認済みと、別人の残る未確認を分離した入力／完成JSON例を既存指示定数内へ戻した。定数以外の製品ASTはb14960eと一致、原5入力／guard／固定時点／同12記録24欄・同6組を保持。最終33件成功、送信時最大LEAF16,379byte。247sourceのremote blob一致と既存実行コードの材料読込、既存finalizerの8source／SQL原本4件の非生成束縛を確認。新scope6c2c2a51・新6file3,039,282byte／同Pod内copy3file、全9file3,139,037byteのA11/B11を準備した。A11最大9応答30分、全5件独立全文適合時だけB11最大11応答17分、各一回。個別未承認・未送付・未実行。A10消費済み／B10条件不成立を転用しない。両CI結果は同候補ci_verification.jsonを参照。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424をfresh再確認。worker900は現deployの既存起動log再取得で確認し、今回変更0。元単位／補助全体未完、配布保留。詳細は補助設計§9.103。
 
@@ -38,7 +38,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.108: A13 scope4cdec4a7 executed once using sourceb340 after Analysis43863462728 all19steps/Piece43859216881 success. Three responses=two precontrols+book stop97.297s; orphan e4 rejects graph/text, independent reading also finds unsupported r1 roots and changed achievement states. Other4/postcontrols/B13/SQL/normal0. Failed closed; baseline native d678 restored PID7098/start100159506 in229.407s, separate health200/18008closed. Next existing v2 author qualification/reference planning via fresh-v2-LoRA teaching/trainer preparation, not another prompt-only loop/raw repair/guard weakening; no new training/generation/quality claim. Frozen5 then full12 then same-raw SQL/fresh read/normal rollout remain incomplete. Existing bridge restored; Render sign-in still blocks normal env/key/deploy grounding. Build/device deferred."
+current_next: "Section9.109: AF1 fresh16teachers/32updates completed306.882s/reload73f5-fb2e/restore341.020s; A14sameb340 failed3calls/24events8unique15orphan/missinglaterfacts, B14/SQL/normal0, baseline13576/start100524246 d678 restored305.217s/health200/18008closed. Node-local-v3 candidatec95d17d published8blobs/localtreeverified; existingauthor/core/native/modelsource/IFbinding implemented. Targetregression314PASS0SKIP163.48s; final2suites47PASS4.78s/nativeexisting303PASS43.84s overlap, do not sum. Independentreview blocking0/correction-cohort-LEAF5PASS. CIAnalysis43883976914/Piece43883976919 in_progress, notsuccess. Newprivate actual4B/save/normal0; samefresh32weights, no newtraining. Currentbreak code+localchecks+review+GitHubcandidate/docs; no A15/GPU before report. Later frozen5/full12/same-rawSQL/freshread/normal remain incomplete; Renderauthblocksnormal, build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -470,9 +470,9 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
 | AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.68／69を継承し、§9.71で複数のproperな本人訂正をPieceへ接続し通常反映。異なる原節の完全引用REVISE／WITHDRAW・ANSWER0の限定範囲。ANSWER併存・置換節再訂正・一般本文品質・model通常採用・本人一巡は残る |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
-| AR-06 | 完全親source／cohort／一回保存を保持。§9.108のA13は3応答で意味・参照不適合のまま失敗閉鎖・復元済み、B13条件不成立。既存v2作者を新v2教材／trainer準備へ接続する段階 | 新実意味・全量同raw実保存再読・通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持。新学習／実生成・品質改善は未認定 |
+| AR-06 | 完全親source／cohort／一回保存を保持。AF1完走・A14失敗閉鎖を継承し、§9.109のnode-local private候補c95d17dを実装・局所検査・独立review・GitHub反映済み | 両CI実行中、実5件・全12・同raw保存再読・通常反映は未完、今回A15／新GPU0。full_source_semantic_coverage=falseと月次当時版を保持 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常24bc228d API／worker・DB38migration／20261115011424を最終確認記録として保持。既存bridge復元を継承し、A13後は元nativePID7098・別health200／候補18008閉鎖を確認 | Renderログインで通常設定／鍵照合・配置未実施、新Podの通常API接続も未確認。内部復元を本人保存・実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
+| AR-08 | 通常24bc228d API／worker・DB38migration／20261115011424を最終確認記録として保持。既存bridgeを継承し、A14後は元nativePID13576・別health200／候補18008閉鎖を確認 | Renderログインで通常設定／鍵照合・配置未実施、新Podの通常API接続も未確認。新private候補を通常採用へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -2080,6 +2080,52 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="analysis-node-local-v3-candidate-20261116"></a>
+## 9.109 11/16 — fresh32学習とA14不適合を踏まえ、node-local private契約を実装候補へ反映
+
+### 完了したAF1とA14の実結果
+
+A13の失敗原本と§9.106の旧direct-graph教師との差を踏まえ、本人原文の資格・時点とevent／reading参照を含む新16教師をrootと独立担当が全文確認した。原評価5件は教師へ混ぜていない。AF1は既存trainerでfresh base＋新random LoRA／新optimizerから32更新し、保存・非学習reload一致まで306.882秒、元提供復元込み341.020362568秒で完了した。旧adapter重みを初期値へ読まず、既存configだけを使った別学習である。新weights SHA73f5fdcb3c8fec59216a40113e2b0e3396b2ef284a5783588cb8dabb26bb6f4a／config SHAfb2ef59b128df8d922ada85afa4d78a2e9d5c6b8085eba31e4658239cf72fbecを保存・再読照合し、元提供PID12711へ復元。AF1内の新model生成0、通常採用false。学習完走を意味品質の改善へ換算しない。
+
+続くA14は同b340作者・candidate native569042c2・同5入力／messagesを保ち、このfresh32 adapterを明示event-plan-v2へ選んで一回実行した。scope be6bfee879d87f86ce6cfda3c25e1dd5bdb5fbbcad326e5818430d0a69161b7f。前対照2＋読書会1の実3応答、読書会は165.149517187秒／HTTP200／stopだったがanalysis_semantic_event_plan_orphanで拒否された。result SHAd4a3427adf74e23feacc1fe25307c6e57cfd24b1a5ba1d9f65731584ceade047、raw SHA4fb950c334fed75fe2a07c492ba5c7825420d1e01f824cfeb8ab6bc0c14c8740。
+
+独立全文照合では24eventに対しIDを除く内容は8種類だけで、15eventがnodeへ到達していなかった。edge2本にも両端根拠外の参照があるが、実際の最初のcompiler拒否理由はorphanであり、後段の潜在違反と混同しない。後日の実送信・受領・未開催の保持が欠け、r2の意味も選択根拠に支えられていない。完了形など一部の資格差が回復しても、実意味・図／本文の成立とはしない。残4件／後対照は未実行、B14条件不成立、新全12／SQL保存／非生成再読／通常採用0。学習はAF1で実施済みだが、A14取得内の追加学習／retry0である。
+
+A14は失敗閉鎖し、305.216661125秒で元native d678fe2c・元argv／env／cwd・元120uと同adapter identityへPID13576/start100524246で復元した。別読取でhealthz200・候補18008閉鎖を確認した。AF1とA14の一回は消費済みで、未使用応答やB14枠を次へ転用しない。A13／A12の原本と§9.108／9.107は履歴として保持する。
+
+### 次の最小改修：既存author内のprivate node-local v3
+
+失敗箇所は、事実候補の資格だけでなく、global events／readings／unit_refs間の生成・参照計画に残った。fresh v2学習後も同型の反復・未使用・根拠外参照が残った実結果を根拠に、その表をさらに注意文で補う周回をやめ、各nodeが自分の根拠付きunitと意味を持つ候補へ変更する。形式だけが失敗の唯一の原因と確定したわけではなく、新形式の実品質は未確認である。
+
+新private profileは`semantic_map.node_local.v3`、model schemaは`cocolon.analysis.semantic_map.node_local.model.v3`、明示aliasは`cocolon-qwen3.5-4b-analysis-node-local-v3`。公開`watashi.map.v3`とは別のprivate author契約であり、公開wireの版上げではない。次のA15候補では保存済み同fresh32 weights73f5／configfb2eを使い、追加学習や別重みへの自動切替は行わない。既存v1／event-plan v1／v2は旧schema・orphan拒否・保存raw読取をそのまま保ち、新形式で旧rawを再解釈・修補しない。
+
+| private要素 | 決めた契約と上限 |
+|---|---|
+| root | `schema_version,nodes,edges,overview`の閉じた4key。global events／readings表とunit_refsは持たない |
+| node | `units,node_kind,perspective,title,meaning`。1〜12node、`node_id`はmodel出力に含めず、CMEEが配列位置からn1…を付ける。分類・視点は既存enum、title1〜80字、meaningは空可・240字以内 |
+| unit | 各nodeに1〜2unit、合計最大24fact。`evidence,source_mode,fact,unknowns`。fact1〜160字、evidence1〜4の`quote,field`。source_modeは既存4値を維持し、その分類だけで意味確認済みとはしない |
+| unknowns | unitごと0〜2の`source_quote,source_field`。同fieldかつ当該unitの採用根拠内にある一意な原文引用・240字以内。2unitでも公開nodeの既存4件上限内に収まり、切り落とさない |
+| edge | `from,to,relation_kind,label`。from/toは既出の位置nN、関係は既存enum、labelは既存上限。根拠scopeは両endpoint unitだけ、独立したevent／reading参照表や新事実文を持たない |
+| overview | `title,node_refs`。node_refsは既出nodeから重複なし最大8。summaryは選択nodeのsummaryから導出し、新しい事実文を独立生成しない。node本体12件はすべて通常graph／本文へ残す |
+
+compilerは各nodeの全local unitを必ず本文と根拠へ取り込み、内部unit identityをn1.u1…の位置で確定する。node.summaryはmeaningが非空ならそのmeaning、空なら先頭unit.fact、node.explanationは全unit.factを順に改行接続しmeaningが非空なら末尾へ一回加える。edge.explanationはfrom／to両nodeの同じ完成bodyだけ、overview.summaryは選択node_refs順の完成node.summaryを改行接続する。独立した新事実文は生成しない。新しいmodel call、application側の第二作者、生成後の文章修補ではない。旧v2のorphan検査を消して旧不適合rawを通す変更でもない。新profileのnativeではevidence開始時に未使用recordを優先する旧制約を流用せず、提示recordが24件以下の時はnodes配列を閉じる時に全recordの根拠coverageを確認する。24件超は既存nativeのrecord-coverage強制無効の例外を継承する。12node×2unit×4根拠の96枠を、商品側の100件cohortや全入力の新しい上限にしない。全入力とsource guard、部分／UNASSESSED coverage、未解析範囲を保持し、latest Nへ切り捨てない。無関係なrecordを同一nodeへ混ぜる順序は強制せず、引用coverageを全意味理解済みとは扱わない。
+
+変更ownerは既存`semantic_admission.py`のprepare／private author／stage、`intent_compiler.py`のprivate plan→既存`AnalysisSemanticMapGraph`、native `serve_emlis_natural_reply.py`の新marker／grammar／alias、`analysis_model_source.py`の明示model→profileと受口、`analysis_if_model_source.py`のmap alias時のIF120u固定である。source_adapter・唯一observed_route_realizer・公開graph型・DB列・RN・新controller／serviceは増やさない。元owner／guard／二欄／本人回答・訂正／権利と、4設定のfreshness確認を保つ。意味と方向、当時の未確認と後日の確認、希望・判断・予定と実行の区別は新形式でも同じ受入れ条件である。 原planのsource_mode／unknown原文はprivate meaning_reviewのnode_local_plan.planへ保持し、位置unit ID・edgeのunit closure・展開hashを付記する。意味状態はUNASSESSEDで、public DTOへ内部planを追加しない。
+
+### 現在の到達範囲と今回の区切り
+
+- 新候補コード：[c95d17d840d1955a3a3c2ae5d4682aed989f7213](https://github.com/MassyuRed/mashos-api/commit/c95d17d840d1955a3a3c2ae5d4682aed989f7213)。parent21ec7a1、tree a658ebda6b673bc03cf928a7fa13b427054a7866。対象8blobのGitHub／local一致を確認し、候補として反映済み。通常採用ではない。
+- 局所検査：PGliteありの対象回帰314 PASS／skip0、163.48秒。最終新2suiteはcore23＋native24の47 PASS／4.78秒。native既存5suiteは303 PASS／43.84秒。各集合は重複するため合算せず、全suite合格とも呼ばない。
+- 独立review：blocking0。本人訂正・cohort・LEAFの追加5検査が成功。これも対象検査との重複を加算せず、新private形式の実4B品質や本人受入れへ換算しない。
+- 新候補CI：分析[43883976914](https://github.com/MassyuRed/mashos-api/actions/runs/43883976914)／Piece[43883976919](https://github.com/MassyuRed/mashos-api/actions/runs/43883976919)は実行中、成功は未確認。
+- 新private形式の実4B・同raw保存再読・通常採用：未実施。A15／新GPU実行は今回の区切り前に始めない。
+
+新契約のコード・局所検査・独立review・GitHub候補反映は完了した。AF1の完走・A14の失敗を新候補の意味品質成功へ移送しない。今回の区切りはこの候補と資料の反映までであり、通常反映を含む元作業単位と補助全体の完了ではない。
+
+次の実行単位では同fresh32・新private契約で元5入力を実生成し、全source／raw／図／本文を照合する。全5件が適切な場合だけ、既存全量・cohort分割器で導出する同12記録のLEAF／MERGEへ進む。旧SQL input／checkpoint／guard／凍結as_ofを保持し、新profileのplan／source identityを明示して、同じ最終rawの一回保存・別process非生成再読を確認する。その後に通常native／APIとworkerの同版・設定・map alias／IF120u・自然／Pieceの分離を反映する。新受口のbyte／token・call／待機・840秒pipelineとworker期限も実際の構成で照合し、形式変更だけで速さや費用の改善を認定しない。
+
+既存bridge復元は保持するが、Renderログインによる通常設定／鍵一致・指定版配置の阻害と新Podの通常Render/API接続未確認は残る。通常API／worker24bc228d・DB20261115011424は最終確認記録のまま。月次当時版・保存後0生成・現在の再認可を維持し、未判定を採用や全量意味coverageへ変えない。STRUCTURE_MAP_DELTA_PRESENT：既存owner内のprivate author profile／schema／model選択の候補実装。公開graph・storage・RN・商品中核は変えない。build／TestFlight／本人実機保留、元単位／補助全体／正式受入れ未完を維持する。
+
 <a id="analysis-stage-aware-a13-prepared-20261116"></a>
 ## 9.108 11/16 — v2作者の段階別完成例でA13を実行、意味・参照不適合で失敗閉鎖して復元
 
@@ -2236,9 +2282,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/16・A13失敗閉鎖／復元済み、v2教材準備と通常反映は未完）
+### 11.2 現在の進行欄（11/16・A14不適合／node-local候補反映済み、実4Bと通常反映は未完）
 
-主枠は第11回§5、最新のA13実績と再開位置は§9.108。両CI成功後に一回実行し、前対照2＋読書会1の3応答で意味・参照不適合、図／本文なしのまま失敗閉鎖した。元native／PID7098へ復元・別health200を確認し、B13は条件不成立で未実行。次はv2形式のfresh LoRA教材と既存trainerの準備へ進むが、新学習・実生成や品質改善は未認定。Renderログインによる通常設定／鍵照合・配置の未確認も残る。適切な同5入力→新全12→同raw保存再読→通常反映の元単位・補助全体は未完、配布保留。
+主枠は第11回§5、最新実績と候補は§9.109。AF1でfresh16教師32更新・保存再読を完走したが、同5入力のA14は最初の読書会で反復・未使用・意味欠落が残り失敗閉鎖、元nativePID13576へ復元した。B14／SQL／通常採用0。既存作者内のnode-local private候補c95d17dは実装・局所検査・独立review・GitHub反映済みで、資料反映までを今回の区切りとする。両CIは実行中で、実4B・保存・通常採用は未実施。A15／新GPUはその区切り前に開始しない。新形式の実意味・全12・同raw保存再読・通常反映とRender認証確認が残り、元単位・補助全体は未完、配布保留。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2247,15 +2293,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／一回保存を保持。§9.108のA13は3応答で意味・参照不適合のまま失敗閉鎖・復元済み、B13条件不成立。既存v2作者を新v2教材／trainer準備へ接続する段階 | 新実意味・全量同raw実保存再読・通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持。新学習／実生成・品質改善は未認定 |
+| AR-06 | 完全親source／cohort／一回保存を保持。AF1完走・A14失敗閉鎖を継承し、§9.109のnode-local private候補c95d17dを実装・局所検査・独立review・GitHub反映済み | 両CI実行中、実5件・全12・同raw保存再読・通常反映は未完、今回A15／新GPU0。full_source_semantic_coverage=falseと月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常24bc228d API／worker・DB38migration／20261115011424を最終確認記録として保持。既存bridge復元を継承し、A13後は元nativePID7098・別health200／候補18008閉鎖を確認 | Renderログインで通常設定／鍵照合・配置未実施、新Podの通常API接続も未確認。内部復元を本人保存・実job成功へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
+| AR-08 | 通常24bc228d API／worker・DB38migration／20261115011424を最終確認記録として保持。既存bridgeを継承し、A14後は元nativePID13576・別health200／候補18008閉鎖を確認 | Renderログインで通常設定／鍵照合・配置未実施、新Podの通常API接続も未確認。新private候補を通常採用へ数えない。画像2残差、配布／本人利用・補助全体は未完 |
 
-最新実績・再開位置は§9.108、A12失敗原本は§9.107。A10／A11／A12／A13の一回は各消費済み・失敗閉鎖、B10／B11／B12／B13は各条件不成立。旧未実行表記は準備時点の履歴。新v2教材／trainerは準備段階で、新学習・実意味改善・同raw保存再読／通常反映・正式受入れ・補助全体完了は未認定。
+最新実績と候補は§9.109、A13／A12原本は§9.108／9.107。AF1学習の一回は完了済み、A10〜A14は各一回消費済み・失敗閉鎖、各条件付きBは不成立。新node-local形式は候補コード・局所検査・独立review・GitHub反映済み、両CI実行中。A15／新GPU・実意味改善・同raw保存再読／通常反映・正式受入れ・補助全体完了は未認定。
 
 ## 12. 今後の指示と再開方法
 
-**11/16・現在の再開先：§9.108のA13失敗原本を踏まえた既存v2作者の教材／実現修復。** A13 scope4cdec4a7は実行済み・失敗閉鎖、B13は条件不成立であり、残枠を再使用しない。次はv2形式のfresh LoRA教材と既存trainerの準備へ進み、新学習・実生成は未実行のまま扱う。raw修補・guard緩和・注意文だけの周回をせず、同5入力の実意味→適切な全12→同raw保存再読→通常反映まで同じ元単位で続ける。元nativePID7098／start100159506・health200／候補18008閉鎖を確認済み。Renderログインによる通常設定／鍵照合・配置と新Podの通常API接続は未確認、build／TestFlight／本人実機保留。
+**11/16・現在の再開先：§9.109のnode-local private候補c95d17dのCI確認と、区切り後の実生成・保存再読・通常反映。** fresh32学習は完了したがA14は不適合・失敗閉鎖で、B14／SQL／通常反映0。新形式はコード・局所検査・独立review・GitHub候補反映済み、両CI実行中。資料反映までで区切り、A15／新GPUはその前に始めない。その後の同5入力の実意味→適切な全12→同raw一回保存・非生成再読→通常native／API-worker反映は未完のまま引き継ぐ。旧v1／v2rawと拒否条件、owner／guard／cohort／権利、公開graph／storage／RNを保持する。元nativePID13576/start100524246・別health200／18008閉鎖を確認済み。Render認証による通常接続未確認とbuild／TestFlight／本人実機保留を維持する。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 
