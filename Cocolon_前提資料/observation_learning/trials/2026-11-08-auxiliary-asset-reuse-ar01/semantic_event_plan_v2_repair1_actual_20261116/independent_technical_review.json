@@ -1,0 +1,80 @@
+{
+  "HTTP_status": 200,
+  "SQL": 0,
+  "actual_model_calls": 3,
+  "all_payload_bytes_and_hashes_match": true,
+  "body_sha256": "5248f0c26b1d294368a93097b3bf577995c71af641e4fab5a077822402e78b6c",
+  "context_tokens": 32768,
+  "driver_sha256": "75254429efe91bf70654feb3c402d188e7106a4856d43562be1839b72ec62d5f",
+  "endpoint_scope_violations": [
+    7,
+    8,
+    9,
+    10,
+    14,
+    15,
+    16,
+    18,
+    19,
+    20,
+    21
+  ],
+  "finish_reason": "stop",
+  "first_rejection": {
+    "compiler_line": 4140,
+    "edge": 7,
+    "endpoint_event_roots": [
+      "e1"
+    ],
+    "failure": "analysis_semantic_event_plan_invalid",
+    "selected_event_refs": [
+      "e1",
+      "e2"
+    ],
+    "selection_line": 4109,
+    "source_node": "n1",
+    "target_node": "n8"
+  },
+  "map_calls": 1,
+  "native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+  "new_independent_model_tokenizer_Pod_calls": 0,
+  "normal_rollout": 0,
+  "original_zip": {
+    "CRC_ok": true,
+    "all_extracted_bytes_match": true,
+    "bytes": 23616,
+    "members": 13,
+    "sha256": "27aa266d21e4bcc144eacb24e30f3bc394b173d758d7cb2a7aff26c903cec52c"
+  },
+  "post_restoration": {
+    "B9_root_absent": true,
+    "elapsed_seconds": 287.5162225649692,
+    "healthz": 200,
+    "new_model_calls": 3,
+    "pid": 139472,
+    "start_ticks": "237826333",
+    "state": "A9_REPAIR1_STOP_RESTORED",
+    "trial_listener_absent": true
+  },
+  "preflight_cases": 5,
+  "raw_sha256": "a4d3bc5579536c6bd56eb96d61618976b60b5505ed24f814fc59a27630ec6082",
+  "recorded_HF_input_tokens": [
+    1526,
+    3025,
+    1451,
+    1583,
+    2544
+  ],
+  "request_refs_full_messages_hashes_match": true,
+  "reserved_output_tokens": 4096,
+  "retry": 0,
+  "reviewer": "independent",
+  "root_replay": true,
+  "scope_sha256": "75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e",
+  "source_commit": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+  "state": "PASS_ORIGINAL_INTEGRITY_AND_REJECTION_REPRODUCTION_NOT_PRODUCT_QUALITY",
+  "training": 0,
+  "unused_readings": [
+    "r1"
+  ]
+}

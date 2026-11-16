@@ -1,0 +1,44 @@
+{
+  "schema_version": "cocolon.analysis.native_prefix_check.v1",
+  "state": "CPU_ONLY_EXISTING_DIAGNOSTIC_EXPORTED",
+  "profile": "semantic_map.event_plan.v2",
+  "raw_sha256": "a4d3bc5579536c6bd56eb96d61618976b60b5505ed24f814fc59a27630ec6082",
+  "native_source_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+  "inputs": "Unchanged original messages and raw prefixes with the unchanged native schema/parser.",
+  "offset_unit": "Python string Unicode code points; prefix end offsets are exclusive.",
+  "checkpoints": [
+    {
+      "array": "nodes",
+      "completed_items": 2,
+      "prefix_end_offset": 1297,
+      "closing_bracket": "]",
+      "closing_bracket_allowed": true,
+      "continuation_comma": ",",
+      "continuation_comma_allowed": true
+    },
+    {
+      "array": "edges",
+      "completed_items": 1,
+      "prefix_end_offset": 3805,
+      "closing_bracket": "]",
+      "closing_bracket_allowed": true,
+      "continuation_comma": ",",
+      "continuation_comma_allowed": true
+    }
+  ],
+  "cpu_only": true,
+  "model_calls": 0,
+  "model_loads": 0,
+  "tokenizer_loads": 0,
+  "pod_operations": 0,
+  "sql_calls": 0,
+  "network_calls": 0,
+  "source_changes": 0,
+  "raw_changes": 0,
+  "additional_diagnostic_execution_for_export": 0,
+  "interpretation": "The native parser permitted ending the arrays at these two checkpoints; it did not require continuation there.",
+  "interpretation_limits": [
+    "These observations do not establish why the model repeated content.",
+    "They do not certify semantic quality or validate every earlier or later prefix."
+  ]
+}

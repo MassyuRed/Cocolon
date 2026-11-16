@@ -1,0 +1,94 @@
+{
+  "B9": "ALL_FIVE_CONDITION_UNMET_NOT_RUN",
+  "R10_2_two_consecutive_same_cause_not_asserted": true,
+  "SQL_save": 0,
+  "actual_counters": {
+    "fresh_model_calls_legacy_field": 0,
+    "legacy_zero_is_not_actual_call_count": true,
+    "map_calls": 1,
+    "new_model_calls": 3
+  },
+  "after_controls": "NOT_RUN",
+  "before_controls": [
+    {
+      "body_sha256": "aedb32b36f583f281acaa7ab298dca617c649172e004a411bd5c1a047a1a2b12",
+      "id": "EMLIS-EXPLICIT-CORRECTION",
+      "phase": "before",
+      "seconds": 2.0745550841093063,
+      "state": "RECEIVED",
+      "status_code": 200
+    },
+    {
+      "body_sha256": "6088e511e98083de02bcce4fa582e8eebb25ef71d91553c07ca99818a4e97b7a",
+      "id": "ANALYSIS-IF-TWO-CANDIDATES",
+      "phase": "before",
+      "seconds": 72.11362316226587,
+      "state": "RECEIVED",
+      "status_code": 200
+    }
+  ],
+  "driver_seconds": 231.25115654198453,
+  "execution": {
+    "candidate": {
+      "config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+      "path": "/workspace/semantic-alignment17-recovery-20261116-once/fit/adapter",
+      "updates": 34,
+      "weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b"
+    },
+    "candidate_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+    "candidate_pid": 139054,
+    "candidate_start_ticks": "237800551",
+    "driver_exit": 1,
+    "driver_sha256": "75254429efe91bf70654feb3c402d188e7106a4856d43562be1839b72ec62d5f",
+    "elapsed_seconds": 287.5162225649692,
+    "max_model_calls": 9,
+    "new_model_calls": 3,
+    "original_provider_pid": 138365,
+    "original_provider_restored": true,
+    "original_start_ticks": "237571631",
+    "profile": "semantic_map.event_plan.v2",
+    "restored_pid": 139472,
+    "restored_start_ticks": "237826333",
+    "result_sha256": "c83465792524a5cdd2441477878adca3445b1d8d5a2a7308474ec7b1d2ad904d",
+    "retry": 0,
+    "scope_sha256": "75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e",
+    "state": "INCOMPLETE_NOT_ADOPTED",
+    "training": 0,
+    "unit": "A9"
+  },
+  "map": {
+    "HTTP_status": 200,
+    "body_sha256": "5248f0c26b1d294368a93097b3bf577995c71af641e4fab5a077822402e78b6c",
+    "finish_reason": "stop",
+    "id": "book_club_two_day",
+    "projection": false,
+    "raw_sha256": "a4d3bc5579536c6bd56eb96d61618976b60b5505ed24f814fc59a27630ec6082",
+    "seconds": 156.94280468020588,
+    "text": false
+  },
+  "next_execution_scope_prepared": false,
+  "normal_rollout": 0,
+  "post_restoration": {
+    "B9_root_absent": true,
+    "elapsed_seconds": 287.5162225649692,
+    "healthz": 200,
+    "new_model_calls": 3,
+    "pid": 139472,
+    "start_ticks": "237826333",
+    "state": "A9_REPAIR1_STOP_RESTORED",
+    "trial_listener_absent": true
+  },
+  "prepared_bytes": 3137481,
+  "prepared_files": 9,
+  "primary_outcome": "BLOCKER_NARROWED",
+  "retry": 0,
+  "same_pod_copied_files": 7,
+  "scope_closed": true,
+  "scope_sha256": "75d8633d9d5005386c6f82c28425535af0e4ac60fb50fdb659d977c9ebd8713e",
+  "state": "A9_REPAIR1_TERMINAL_RAW_REJECTED_RESTORED_B9_NOT_RUN",
+  "stop_basis": "Current approved scope closes repair1 after any failure; no further correction or automatic retry.",
+  "training": 0,
+  "uploaded_bytes": 42201,
+  "uploaded_files": 2,
+  "whole_unit_complete": false
+}

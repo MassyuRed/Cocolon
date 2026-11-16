@@ -1,0 +1,88 @@
+{
+  "adoption": false,
+  "all_nodes_select_only_e1_or_e2": true,
+  "case": "book_club_two_day",
+  "duplicate_title_and_unit_ref_groups": [
+    [
+      "n4",
+      "n16"
+    ],
+    [
+      "n7",
+      "n12",
+      "n17",
+      "n23",
+      "n24"
+    ],
+    [
+      "n8",
+      "n21"
+    ],
+    [
+      "n9",
+      "n19"
+    ],
+    [
+      "n10",
+      "n20"
+    ],
+    [
+      "n13",
+      "n18"
+    ]
+  ],
+  "edges": 21,
+  "endpoint_scope_violations": [
+    7,
+    8,
+    9,
+    10,
+    14,
+    15,
+    16,
+    18,
+    19,
+    20,
+    21
+  ],
+  "events": 2,
+  "evidence_quotes_exact": true,
+  "limits": [
+    "Chair-inquiry uncertainty itself was not selected; its direction has not been demonstrated as correctly understood.",
+    "No final projection or text exists; raw review is not final-map acceptance.",
+    "Remaining four map cases and full12 B9 were not acquired."
+  ],
+  "material_failures": [
+    {
+      "issue": "Confirmed invitation sending and one participant acknowledgement selected as unknown.",
+      "path": "events.e2.unknowns.0"
+    },
+    {
+      "issue": "Confirmed reading of venue reply and room/time confirmation selected as unknown.",
+      "path": "events.e2.unknowns.1"
+    },
+    {
+      "issue": "Known thought and writing/erasure action selected as unknown.",
+      "path": "events.e1.unknowns.1"
+    }
+  ],
+  "nodes": 24,
+  "raw_sha256": "a4d3bc5579536c6bd56eb96d61618976b60b5505ed24f814fc59a27630ec6082",
+  "reading_r1_never_selected": true,
+  "readings": 1,
+  "retained": [
+    "Later room/time confirmation and corrected invitation sending are retained in e2.fact.",
+    "Qualifications use literal source text; no sender-to-recipient rewriting was observed."
+  ],
+  "reviewers": [
+    "root",
+    "independent"
+  ],
+  "secondary_ambiguities": [
+    "Unqualified respondent and inferred waiting blur venue reply versus already-received colleague acknowledgement.",
+    "All-participant read status is not clearly distinguished from one confirmed acknowledgement."
+  ],
+  "source_fields": 4,
+  "state": "RAW_NOT_ADEQUATE_NO_FINAL_PROJECTION_OR_TEXT",
+  "validator_relaxation": false
+}
