@@ -1,4 +1,4 @@
-> **11/17最新：RESTORE19と18教材36更新は完了しましたが、A19は4件の意味不適合とT01のHTTP503／raw未取得で不採用です。次の限定D20を確定し、個別承認前・未送付／未実行です。** A19は前対照2＋分析5の7要求・7HTTP応答、4件200／stop／GENERATED、後対照0。605.455秒で元120uへ復元、PID11827／start95478605・別health200／B19root不存在。D20は同5a25重み・同T01依頼、既存nativeのgeneration_failureをboundedでも有効化し、型・発生関数・行番号・monotonicだけを記録、生成・HTTP結果は変更しない。新2file47,841byte／同Pod内copy7file3,264,431byte、scope6c53aefa。最大5応答・復元込み10分一回、新学習／B／SQL／通常変更0。通常API-worker24bc228d Live・DB38／最新20261115011424をfresh確認。元単位・補助全体・通常反映は未完、配布／本人実機保留。詳細§9.117。
+> **11/17最新：承認済みD20を一回実行し、T01の503をValueError／semantic_free_text_tokens:81まで特定。元120uへ217.382秒で復元しました。** 前対照2＋同T01の3POST／3HTTP、T01は102.532秒・rawなし、後対照0。PID12816／start95872254・別health200を確認。最終許可token集合が空だが、元集合が空かfilter後かは未観測。CPUでは最大12node＋未被覆recordの行き止まりを再現したが、実T01の原因とは未結合。D21は失敗prefixを最大256KiBのprivate原本へ残してCPU再構成する診断版（新2file50,933byte／同Podcopy7file3,264,431byte、最大5応答・復元10分一回）を準備・独立確認済み、未承認・未送付／未実行。学習／retry／SQL／通常変更0、A19不採用・B19条件不成立・元単位／補助全体／通常反映未完。詳細§9.118。
 
 
 

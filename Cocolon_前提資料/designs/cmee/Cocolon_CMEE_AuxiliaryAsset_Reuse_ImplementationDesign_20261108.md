@@ -1,4 +1,4 @@
-> **11/17最新：RESTORE19と18教材36更新は完了しましたが、A19は4件の意味不適合とT01のHTTP503／raw未取得で不採用です。次の限定D20を確定し、個別承認前・未送付／未実行です。** A19は前対照2＋分析5の7要求・7HTTP応答、4件200／stop／GENERATED、後対照0。605.455秒で元120uへ復元、PID11827／start95478605・別health200／B19root不存在。D20は同5a25重み・同T01依頼、既存nativeのgeneration_failureをboundedでも有効化し、型・発生関数・行番号・monotonicだけを記録、生成・HTTP結果は変更しない。新2file47,841byte／同Pod内copy7file3,264,431byte、scope6c53aefa。最大5応答・復元込み10分一回、新学習／B／SQL／通常変更0。通常API-worker24bc228d Live・DB38／最新20261115011424をfresh確認。元単位・補助全体・通常反映は未完、配布／本人実機保留。詳細§9.117。
+> **11/17最新：承認済みD20を一回実行し、T01の503をValueError／semantic_free_text_tokens:81まで特定。元120uへ217.382秒で復元しました。** 前対照2＋同T01の3POST／3HTTP、T01は102.532秒・rawなし、後対照0。PID12816／start95872254・別health200を確認。最終許可token集合が空だが、元集合が空かfilter後かは未観測。CPUでは最大12node＋未被覆recordの行き止まりを再現したが、実T01の原因とは未結合。D21は失敗prefixを最大256KiBのprivate原本へ残してCPU再構成する診断版（新2file50,933byte／同Podcopy7file3,264,431byte、最大5応答・復元10分一回）を準備・独立確認済み、未承認・未送付／未実行。学習／retry／SQL／通常変更0、A19不採用・B19条件不成立・元単位／補助全体／通常反映未完。詳細§9.118。
 
 
 
@@ -42,7 +42,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.117: RESTORE19 and fresh18x2 FIT19complete36; A19consumed7POST/7HTTP,4GENERATEDmeaningnotadequate,T01HTTP503no raw. Restored605.455s PID11827/ticks95478605health200,B19unmet/SQL0/normal0. D20prepared new2files47841B+samePodcopy7files3264431B,scope6c53aefab04d56b076d1ff132c09f9ab30abc7950e82766754ee523e2bee10af. Same5a25/T01request; existing generation_failure locator enabled for bounded requests(type/function/line/monotonic only), generation/parser/decoder/HTTPunchanged. Max5responses/restore600s once/training0/B0; specificapprovalpending,notsent/notexecuted. Freshnormal24bcLive/DB38/source5af; unit/wholeincomplete."
+current_next: "Section9.118: D20consumed3POST/3HTTP,T01HTTP503/no raw,ValueError semantic_free_text_tokens81; upstreamempty vs filteredempty unknown. Restored217.382s PID12816/ticks95872254health200. CPU12node/uncoveredrecord deadend reproduced but actualprefix unlinked. D21prepared2files50933B+copy7files3264431B,scope218483af; sameweights/T01,max5/600sonce,privatefailedprefix<=262144B for CPU replay,10CPUchecks+independentreview. Newapprovalpending,notsent/notexecuted; no training/retry/B/SQL/normal. A19inadequate/B19unmet/unitwholeunfinished."
 runtime_effect_of_this_document: 0
 ---
 
@@ -474,9 +474,9 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
 | AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.68／69を継承し、§9.71で複数のproperな本人訂正をPieceへ接続し通常反映。異なる原節の完全引用REVISE／WITHDRAW・ANSWER0の限定範囲。ANSWER併存・置換節再訂正・一般本文品質・model通常採用・本人一巡は残る |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
-| AR-06 | 完全親source／cohort／一回保存を保持。AF1完走・A14失敗閉鎖を継承、node-local候補c95d17dの実装・局所検査・独立review・GitHub反映と両CI成功を確認。元fresh32／SQL checkpointを回収照合（§9.110） | 新GPU認証成功未観測、実5件・全12・同raw保存再読・候補の通常反映は未完。full_source_semantic_coverage=falseと月次当時版を保持 |
+| AR-06 | 完全親source／cohort／同raw一回保存を保持。RESTORE19／FIT19完了、A19不適合を継承。D20でT01のValueError／最終許可token集合の空まで特定、元提供復元とCPU行き止まりを確認（§9.118） | D21は同T01のprivate失敗prefixをCPU再構成する最大5応答／復元10分一回・新2file50,933byte、別承認前／未実行。全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF・unsuspended、DB ACTIVE_HEALTHY／最新migration20261115011424を再確認（§9.110）。Render構造化読取は成立 | 新GPUの認証・通常接続、設定／鍵一致、候補の指定版配置は未成立。画像2残差・配布／本人利用・補助全体未完。旧Podの稼働証拠を新Podへ移送しない |
+| AR-08 | 通常API／worker24bc228d双方Live・DB38／最新20261115011424をfresh確認。D20後の元120uをPID12816／start95872254・別health200で確認、B19root不存在 | D20後対照未実行、新候補の通常到達／配置は未成立。D21別承認前。画像2残差・配布／本人利用・補助全体未完 |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -2084,6 +2084,30 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="xrpl-d20-actual-d21-prepared-20261117"></a>
+## 9.118 11/17 — D20の実例外位置、CPUの行き止まりと、失敗prefixの再構成準備
+
+Mashから§9.117の新2file47,841byte・同Pod内copy7file3,264,431byte、同じ重み・同じ失敗入力と前後対照、最大5応答・復元込み10分一回の明示承認を受領した。xrplcoeb5ec77fのPID11827／start95478605・health200、新root不存在と全9fileのbyte／SHAを照合してD20を一回実行した。新学習・再試行・B19・SQL保存・通常変更は0。
+
+実際は前対照2＋T01の3POST／3HTTP。前対照は200／stop、T01は102.532154727秒で503／generation_unavailable、raw・finish reason・図本文は未取得、後対照は未実行。実例外ValueErrorの最深位置は診断nativeのsemantic_free_text_tokens:81（元sourceも同じ81行）で、最終allowed listが空になった箇所と一致する。上流allowed集合が既に空だったのか、invalid／free-text filterで空になったのかは区別できない。直前の定期記録は1536token時点のUnionParser／other／allowed51であり、失敗時の正確なprefixやtoken数ではない。OOM・timeout・token上限等を原因と断定しない。
+
+元提供復元まで217.382323316秒、元argv／env／cwdと両adapterの不変をdriver内で照合。別読取でもPID12816／start95872254・health200、元model／native・map試行alias不存在、B19root不存在を確認した。原本ZIP56,031byte／SHA891556263a356dfc9da4985c8232ff238f6fff68b3ef39e7f2ea036d34842f65は12member＋manifestで、CRC・全byte／SHA・result944bba25・D20 scope6c53aefa／driver6dfca45f／nativecdf76dd2を回収照合した。独立reviewでも同じ結論。D20の一回は消費済みであり、残2応答枠を再利用しない。
+
+追加model呼出しなしのCPU確認では、同じnative／既存LMFEで架空2recordのうち1recordだけを参照する12nodeの構文prefixを進め、追加の「,」も終了の「]」も許可されず、残る文字は空白4種だけになる状態を再現した。原本305byte／SHA3d62a7af987494c0d83815d6bbaf8345b7ff95a704fad536d1c7ee2d395fccb0。これはsource coverageとnode上限が行き止まりを作る別CPU実証で、D20の実失敗prefixとの結合は未成立。filter解除・EOS挿入・受理緩和で成功へ置換しない。
+
+### 次のD21：同じT01の失敗prefixをprivateに一度保持し、CPUで再構成する
+
+既存D20 driverのprovider内で既存filterを一回だけ呼ぶ観測wrapperを追加した。元の成功返却値・元例外、nativecdf76dd2、生成・parser・decoder・重み・依頼・復元関数は維持。失敗時だけfictionalなprompt／途中出力のtoken IDsと件数を最大262,144byteのprivate fileへ排他的保存し、source本文・prefix・credential・argv／envをlogへ出さない。保存失敗でも元例外を再送出する。CPU再構成に実重みや追加生成は不要。10項目のCPU確認と独立reviewを通したが、実失敗prefixの取得・原因確定・品質改善はまだ0。
+
+| 内容 | 固定した範囲 |
+|---|---|
+| 新規送付候補 | diagnose_t01_prefix_once.py 38,425byte／SHA4e6706905ca60e67a2a2867b9222ec3f2dad04f4b3ba5b8e19e7375377cf5eee、diagnostic_scope.json 12,508byte／SHA218483af8df917e9dc6f18dafcdd786bf269516d3a830c6e017b2132108e76f5。計2file50,933byte |
+| 同Pod内copy | D20 payloadの既存7file3,264,431byte。新送付には加算しない |
+| 実行候補 | 同5a25／45c0、同T01、前後4対照込み最大5応答、復元込み600秒、一回。学習／再試行／B／SQL／通常採用0 |
+| 状態 | 新しい個別承認前、未送付・未実行。D20実行済みroot・scope・残枠を再利用しない |
+
+2026-11-17T04:45:44.829Zのfresh通常確認でもAPI／worker双方24bc228d・Live・autoDeploy OFF、DB38migration／最新20261115011424。今回変更0。A19の4件の時点／局所根拠／関係線の意味不適合を診断成功で取り消さず、B19条件不成立を保持する。適切な新全5／全12実結果、同最終raw一回SQL保存、別process非生成再読、map専用aliasとIF120u／natural／Pieceの境界を保つ通常反映は未成立。元単位・補助全体・正式受入れは未完、build／TestFlight／本人実機保留。primary BLOCKER_NARROWED。STRUCTURE_MAP_DELTA_NONE（製品構造・公開契約は変更せず、試行観測と現在状態のみ）。
+
 <a id="xrpl-restore19-actual-20261117"></a>
 ## 9.117 11/17 — 新Podの実復元・18教材36更新とA19不採用、T01の未記録例外から継続
 
@@ -2515,9 +2539,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・A19不採用、同候補T01の限定D20を準備）
+### 11.2 現在の進行欄（11/17・D20実例外位置と復元、D21未承認準備）
 
-主枠は第11回§5、現在は§9.117。新Pod RESTORE19・18教材36更新は実原本独立照合まで完了。A19は4図本文の意味不適合とT01の503／raw未取得で不採用、元提供復元を別確認した。同5a25候補・同T01依頼で未記録の型・発生箇所だけを観測する限定D20を確定したが、新個別承認前・未送付／未実行。B19／SQL／通常変更0。新学習や同じ禁止文を改善へ換算せず、元単位・補助全体未完。
+主枠は第11回§5、現在は§9.118。D20は3POSTでT01のValueError／semantic_free_text_tokens:81まで観測し、217.382秒で元120uへ復元。CPUの12node／未被覆recordの行き止まりは実T01と未結合。D21のprivate失敗prefix保持を新2file50,933byte・同Podcopy7fileとして準備・独立確認、別承認前・未送付／未実行。A19不採用／B19条件不成立・元単位／通常反映／補助全体未完。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2526,15 +2550,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／同raw一回保存を保持。新Pod RESTORE19・18教材36更新完了を独立照合。A19は4GENERATEDだが意味不適合、T01は503／raw未取得で不採用。同候補の限定D20を確定（§9.117） | D20は既存failure locator再利用の新2file47,841byte／同Podcopy7file3,264,431byte、最大5応答・復元10分一回、個別承認前・未実行。全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
+| AR-06 | 完全親source／cohort／同raw一回保存を保持。RESTORE19／FIT19完了、A19不適合を継承。D20でT01のValueError／最終許可token集合の空まで特定、元提供復元とCPU行き止まりを確認（§9.118） | D21は同T01のprivate失敗prefixをCPU再構成する最大5応答／復元10分一回・新2file50,933byte、別承認前／未実行。全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常API／worker24bc228d双方Live・DB38／最新20261115011424をfresh確認、通常変更0。新xrplはRESTORE／FIT／A19後に元120u復元を確認、直近PID11827／start95478605・別health200／B19root不存在。旧5mkの現在稼働は未確認 | A19後対照は未実行。限定D20は新個別承認前で、通常API／workerから新候補への実model到達・設定／鍵一致・受入指定版配置は未成立。画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | 通常API／worker24bc228d双方Live・DB38／最新20261115011424をfresh確認。D20後の元120uをPID12816／start95872254・別health200で確認、B19root不存在 | D20後対照未実行、新候補の通常到達／配置は未成立。D21別承認前。画像2残差・配布／本人利用・補助全体未完 |
 
-最新実績と次は§9.117。RESTORE19／FIT19／A19の各一回は消費済み、B19条件不成立・未実行。限定D20は確定scope6c53aefa、新2file47,841byte／同Podcopy7file3,264,431byte、同5a25・同T01依頼で既存failure locatorを有効にする最大5応答・復元10分の一回。新個別承認前・未送付／未実行で、旧枠を流用しない。元単位・補助全体・通常採用は未完。
+最新実績と次は§9.118。D20一回は消費済み。D21はscope218483af、新2file50,933byte／同Podcopy7file3,264,431byte、同5a25・同T01依頼、最大5応答・復元10分一回で、失敗prefixをprivateに保持してCPU再構成する。未承認・未送付／未実行。A19不採用・B19条件不成立、通常採用・元単位・補助全体未完。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.117のA19実原本と限定D20。** RESTORE19は299.241秒、18教材36更新は345.488秒／復元込み372.945秒で完了。A19は7POSTで4GENERATED・意味不適合、T01はHTTP503／raw未取得。605.455秒で元120uのPID11827／start95478605・別health200へ復元しB19root不存在を確認した。各消費済み一回を再起動せず、同5a25候補・同T01依頼の未記録の型・発生箇所を既存failure locatorで取得するD20から続ける。新2file47,841byte・同Podcopy7file3,264,431byte、scope6c53aefab04d56b076d1ff132c09f9ab30abc7950e82766754ee523e2bee10af。最大5応答・復元込み10分一回、新学習0・B0・新個別承認前・未送付／未実行。適切な同最終rawの一回SQL保存／別process非生成再読と通常反映までを継続し、元単位・補助全体未完、配布／本人実機保留。
+**11/17・現在の再開先：§9.118のD20実原本と、別承認前のD21。** D20は3POST／3HTTP、T01のValueError／semantic_free_text_tokens:81を観測し、217.382秒で元120uのPID12816／start95872254・別health200へ復元。CPUで12node／未被覆recordの行き止まりを再現したが、実T01との因果は未確定。新D21は同重み・同T01・最大5応答／復元600秒一回、失敗prefixを最大256KiBのprivate原本へ保持しCPU再構成する。新2file50,933byte／同Podcopy7file3,264,431byte、scope218483af。未承認・未送付／未実行、学習／retry／B／SQL／通常変更0。A19不採用・B19条件不成立と、適切な新実結果→同raw保存／別process非生成再読→通常反映の未完を保持する。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

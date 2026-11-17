@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "success_free",
+    "success_other",
+    "upstream_empty",
+    "filter_empty",
+    "unrelated_exception_identity_preserved",
+    "oversize_capture_preserves_original_failure",
+    "write_failure_preserves_original_failure",
+    "existing_capture_not_overwritten",
+    "unchanged_generation_request_lifecycle_native_transform_ast",
+    "frozen_scope_same_T01_weights_limits_and_fresh_binding"
+  ],
+  "count": 10,
+  "driver_sha256": "4e6706905ca60e67a2a2867b9222ec3f2dad04f4b3ba5b8e19e7375377cf5eee",
+  "model_calls": 0,
+  "normal_changes": 0,
+  "scope_sha256": "218483af8df917e9dc6f18dafcdd786bf269516d3a830c6e017b2132108e76f5",
+  "state": "D21_CPU_CAPTURE_BEHAVIOR_VERIFIED_NOT_ACTUAL_DIAGNOSIS",
+  "training": 0
+}

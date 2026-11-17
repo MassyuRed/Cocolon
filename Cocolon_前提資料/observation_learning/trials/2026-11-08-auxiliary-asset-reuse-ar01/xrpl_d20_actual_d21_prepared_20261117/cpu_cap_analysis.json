@@ -1,0 +1,12 @@
+{
+  "actual_T01_cause_proved": false,
+  "covered_records": 1,
+  "generated_nodes": 12,
+  "model_calls": 0,
+  "remaining_character_count": 4,
+  "source_records": 2,
+  "state": "CPU_SYNTHETIC_NODE_CAP_MISSING_COVERAGE_DEADEND",
+  "structural_close": false,
+  "structural_continue": false,
+  "training": 0
+}

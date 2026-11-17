@@ -1,0 +1,55 @@
+{
+  "SQL": 0,
+  "copy_from": "/workspace/cocolon-node-local-v3-d20-payload-20261117",
+  "max_POST": 5,
+  "new_bytes": 50933,
+  "new_files": {
+    "diagnose_t01_prefix_once.py": {
+      "bytes": 38425,
+      "sha256": "4e6706905ca60e67a2a2867b9222ec3f2dad04f4b3ba5b8e19e7375377cf5eee"
+    },
+    "diagnostic_scope.json": {
+      "bytes": 12508,
+      "sha256": "218483af8df917e9dc6f18dafcdd786bf269516d3a830c6e017b2132108e76f5"
+    }
+  },
+  "normal_changes": 0,
+  "once": true,
+  "pod": "xrplcoeb5ec77f",
+  "private_capture_max_bytes": 262144,
+  "restore_inclusive_seconds": 600,
+  "retry": 0,
+  "same_pod_copy": {
+    "controls.json": {
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    "current_api_sources.zip": {
+      "bytes": 2592703,
+      "sha256": "2b660e2541c6b895e920051b0eb48ab1bbfc2e5a2830308a2b42a83a3ddb180e"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 105208,
+      "sha256": "19ba5f15daf329fcbdc0022e46b9894b478727dc48cb3c0792c2bc183be1ad5c"
+    },
+    "full12.input.json": {
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 275412,
+      "sha256": "8b4be44c7d9ca2f60d4e1ed829d3652658a7bdeb0fcaccf1dc6d95e16f68ac24"
+    },
+    "input_cases.json": {
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    "source_manifest.json": {
+      "bytes": 191353,
+      "sha256": "d357534cc9d1f3b3899cb2fc45d829016abf9eba18efa13e5f0e103bc1067efa"
+    }
+  },
+  "scope_sha256": "218483af8df917e9dc6f18dafcdd786bf269516d3a830c6e017b2132108e76f5",
+  "state": "D21_PREPARED_NOT_SENT_NOT_EXECUTED_APPROVAL_PENDING",
+  "training": 0
+}
