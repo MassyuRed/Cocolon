@@ -1,3 +1,5 @@
+> **11/17・次候補の準備：A25原本で確認した選定・場面編成の不足へ、新規架空4群12段階を既存54行へ追加した66行を作成しました。** 独立担当者は全22群・66段階の原文／教師を全文照合し、華恋は新12段階を全文確認、旧54行は前回完了reviewと同一内容・順序の照合を継承しました。通常作者sourceはe58c1e49のまま、全247fileをfresh remote treeと照合し、既存両CIの同source成功を再確認。新FIT26は66更新・4損失計測・復元込み20分、A26は同5入力・最大19応答／30分、全5独立全文適合時だけB26は同12記録・最大43応答／17分を各一回とする確定packetを準備しました。送付は新12file 2,087,291byte＋同Pod内copy9file 3,286,728byte。新学習／GPUの具体承認・送付・実行・通常採用は0で、旧FIT25／A25の消費済み枠と未成立B25を転用しません。通常API／worker24bc228d・autoDeployOFF、DB38／20261115011424を今回はfresh照会済みです。GPUメモリ適合は未実証で、OOM／期限時は復元し再試行・切詰め・部分採用を行いません。実全12・同raw実保存再読・通常反映・元単位／補助全体は未完、build／TestFlight／本人実機保留。詳細は補助設計§9.127、前回実績§9.126。
+
 ---
 doc_id: cocolon_three_core_and_cmee_current_structure_entry
 title: "三大中核構造とCMEE — Current Structure Read First"
@@ -211,3 +213,4 @@ Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統
 ## 2026-09-11 Q4 — 現在の接続
 
 Q4の変更file・直接変更しない影響ownerは[01 EmlisAI地図のQ4節](01_emlis_ai_current_structure.md)に集約。bootstrapでreader、server modeでwriterを選び、共有作者へ明示EMLIS_APPLICATIONを渡す。停止は保存済み本文と本人の訂正を保持するread_only。旧I5への単純切戻しを回復としない。原入力保存・国家dispatchと他中核の責務は分離したまま、実装/本文検証を既存PR3/30で継続する。
+
