@@ -1,4 +1,5 @@
-> **11/17再開確認：確定FIT19/A19/B19資料は保持されていますが、既存Podの画面接続が成立せず、新送付・学習・生成は0件です。** 候補5af8625／確定16file4,033,458byte／scopeb5bd60f7と両CI成功を再照合。Jupyterは対象フォルダ取得エラーを繰返し、再読取がURLポリシーで拒否されたため停止。Podの起動状態・現PID／health・実ファイル有無は今回未確認で、停止や消失とは断定しない。FIT19／A19／B19の一回枠は未消費、旧FIT18／A18消費済みを保持。通常API／worker24bc228d双方Live・DB38migration／最新20261115011424をfresh再確認、変更0。通常反映・元単位・補助全体は未完。詳細は§9.115の再接続記録。
+> **11/17最新：Mashが用意した新Pod xrplcoeb5ec77fへログインし、空のRTX A5000環境を確認しました。復元＋未実行FIT19/A19/B19の新Pod用資料を準備済みで、送付・実復元・学習・生成は未実施です。** 新確定33file／21,779,197byte、scope 0511b114b8202194a091d8183768d32c2fa895f7c89ea1fc8d79e870eaa2883e。元提供復元30分（依存導入・固定公開base約9.34GB取得・元4B重みload・人工tensorのkernel検証、応答0）→18教材36更新／復元込み18分→同5件＋前後4対照／最大9応答30分→全5件の独立全文照合が適切な時だけ全12／最大17応答24分、判定hash最大4KB。各一回・再試行なし、段階ごとに実結果を確認する。新Podへの送付・復元を含む具体承認前。API候補5af8625／教材59978e6c／両CI成功を保持。通常API／worker24bc228d Live・DB38／最新20261115011424、今回変更0。通常反映・元単位・補助全体は未完、配布／本人実機保留。詳細§9.116。
+
 
 
 > **11/16前回候補：fresh16教師32更新は完走したがA14は不適合で失敗閉鎖。既存作者をnode_local.v3へ改修し、候補コード・局所検査・独立review・GitHub反映まで完了。実4B・保存・通常採用は未実施。** AF1は306.882秒／復元込み341.020秒、新73f5／configfb2eを保持。A14は前対照2＋読書会1の3応答、反復・15未使用・後日事実欠落が残り、図／本文・残4件・後対照／B14／SQL／通常反映0。305.217秒で元native d678fe2c・PID13576/start100524246へ復元、別health200・18008閉鎖。新private候補APIc95d17dはnode根拠付きunitから同じ公開graphへ投影し、旧v1／v2・guard／cohort／権利・保存／RNを保持。対象回帰314成功／skip0、最終新2suite47成功とnative既存303成功は重複のため合算しない。独立reviewにblockingなし。両CIは実行中で未成功。A15／新GPUは区切り前に開始せず、同5入力→全12→同raw保存再読→通常反映は次に残す。Render認証による通常接続未確認、元単位／補助全体未完・配布保留。詳細は補助設計§9.109。
@@ -41,7 +42,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.115 reconnect note: frozen19 scope b5bd60f7/16files4033458B unchanged, no19upload/fit/model/SQL/adoption;19once budgets unconsumed. ExistingJupyter directory error/reloadtimeout/URLpolicydenial prevents freshPod/runtime checks. Need existingPod status/usableJupyterconnection; do not infer shutdown/data loss or reuse olderhealth. NormalAPI/worker24bcLIVE/DB38 unchanged; unit/wholeincomplete."
+current_next: "Section9.116: authenticated new xrpl emptyA5000; exact33files21779197B restore30min then conditional FIT19once36/18min A19once9/30min B19all5adequateonly17/24min+4KB. Newscope prepared not sent/executed; actual runtime proof must bind first. Original5af/data59978 unchanged, SQL/normal/unit/wholeincomplete; old18consumed."
 runtime_effect_of_this_document: 0
 ---
 
@@ -2083,6 +2084,28 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="xrpl-restore19-prepared-20261117"></a>
+## 9.116 11/17 — 新Podのログイン・実環境確認と、元提供復元から未実行19へつなぐ具体準備
+
+§9.115の18教材・候補5af8625・同5／全12の原入力とSQL取得前checkpointを引き継ぐ。Mashが新しく借りたPod `xrplcoeb5ec77f` と安全な入力でのログインを明示し、ログイン後のJupyterLabへ到達した。ログインcredentialの値は読取・記録しない。新PodはNVIDIA RTX A5000／24,564MiB／driver595.91.07／compute8.6、Python3.12.3・CUDA12.8・x86_64・glibc2.39。作業領域は空、空き約49.98GiB、port8000待受なし、復元root／venv／basecacheなし。system torch2.8.0+cu128／triton3.4.0はあるが、モデル依存・重み・旧Podの実行物はない。read-only端末の複数行入力が成立せず、その空の端末だけをUIから閉じ、単一行commandで環境確認を完了した。model load／応答・学習・新file送付／package変更0。旧5mkの停止／消失は依然実証していない。
+
+新Pod用の正確な送付候補は33file／21,779,197byte、scope `0511b114b8202194a091d8183768d32c2fa895f7c89ea1fc8d79e870eaa2883e`。送付ZIPは20,264,058byte／SHA `cc58a6102faf1781e407b73205f326787d95f5b98fe07f7adb37603973567efb`。ZIP内に元提供411member（default120uの重み／config、元native eec418、408client依存）と候補5afの247sourceを含む。旧同Podcopy3fileも今回の確定送付に含み、旧5mkへの接続・旧鍵・旧PID13758・古いkernel証明があることを前提にしない。元の旧Pod用16file／scopeb5bd60f7は不変・未実行の履歴として残し、新scopeへ実行許可を流用しない。
+
+| 一回の段階 | 具体的な実行・上限と次へ進む条件 |
+|---|---|
+| RESTORE19 | 新専用root、復元全体30分の共有時計。固定依存導入と公式公開Qwen/Qwen3.5-4B revision851bf6eの11file・9,342,816,694byte取得／SHA照合を含む。元native／default120uで4B全重みをloadし提供を起動、healthと実PID／start ticksを確認する。元の人工tensor kernel probeで1752token相当のforward／更新／state parityを確認し、新しいproof／helperを生成する。これはtext応答0・学習0。失敗時は今回の所有processだけを停止、再試行なし |
+| FIT19 | RESTORE19末尾でcaptureを再照合して新data-only bindingを作り、新Podの実値を凍結templateへ結合する。RESTORE19完了後、その実runtime／kernel／clientとbinding原本を独立確認してから、FIT19を別に起動する。旧教材・5af source・上限・実行codeは変更しない。18件×2周36更新、fresh LoRA／fresh AdamW・旧learned tensor初期利用0、fit780秒／work900秒／復元込み18分。完全保存再load／config一致と元提供復元が必要、中間18更新の採用なし |
+| A19 | 新36更新の実weights／configと復元後PIDを結合した後、同5件＋前後4対照、最大9応答・復元込み30分、一回。旧原文／rawの再利用や修補で結果を作らない |
+| 条件付きB19 | A19全5件の全原文・無修補raw・全node／edge／overview／unknowns・図本文がroot＋独立全文照合で適切な時だけ、判定hash最大4KBを追加。全12記録の12LEAF＋MERGE＋前後4対照、最大17応答・復元込み24分・pipeline840秒、一回 |
+
+各段階を自動連続起動せず、実結果と復元を確認して進む。RESTORE19は新しいanalysis／natural認証鍵を同Podで生成し0600 privatefileとprovider環境にだけ保持する。鍵値をprint／外部送付／結果へ保存せず、Jupyterログイン鍵をmodel鍵に転用しない。通常Renderの鍵／endpointは今回変更しない。新Podを用意した指示とログイン承認は受領済みだが、増えた送付・初期復元と新scopeの各一回は具体承認前である。
+
+容量／教材・同5／全12原文・計画は§9.115からbyte不変。独立担当が全33file・scope・元提供411memberと候補247sourceのGit実byteを照合し、境界・条件・上限の具体的blockerなし。起動helper失敗時の別session子process残存を修復し、実PopenのCPU模擬4件（spawn後例外／SIGTERM／receipt後例外／成功）で所有childの回収と無関係sentinel維持を確認した。runtime binder／FIT wrapper／post-FIT scope結合のCPU検証はprivateの実検証receiptを正とする。これらは実GPU復元／実意味品質の成功へ換算しない。
+
+通常API／workerは今回のfresh読取でも双方24bc228d・Live、DB38migration／最新20261115011424。候補5afのexact-head CI Analysis43991420434／Piece43991420308もcompleted／success。新upload／RESTORE19／FIT19／A19／B19／新model応答・学習・SQL／通常変更0、19各一回は未消費。旧FIT18／A18消費済み・B18条件不成立は保持。適切な全12の同raw一回SQL保存→別process非生成再読→通常native／map専用alias／IF120u・自然／Piece／API-worker整合反映が残り、通常への実model到達も未確認。元単位・補助全体・正式受入れ未完、build／TestFlight／本人実機保留。
+
+STRUCTURE_MAP_DELTA_NONE：既存提供と未実行学習の新Pod復元準備だけで、新reader／controller／公開型／API／DB列なし。全体方針は第11回§5を保持。公開trial `xrpl_restore19_prepared_20261117` にbody-free receipt、完全な確定file・復元手順・全reviewは既存private引継ぎの同名checkpointへ保存する。
+
 <a id="analysis-understanding-long-scenes-fit19-prepared-20261117"></a>
 ## 9.115 11/17 — 理解の更新と実際の交換を分ける完成例、独立長文2件を加えた現v3教師18件
 
@@ -2444,9 +2467,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・確定19資料保持、既存Pod再接続で停止）
+### 11.2 現在の進行欄（11/17・新Pod復元と条件付き19の具体準備）
 
-主枠は第11回§5、現在は§9.115の再接続記録。18教材・候補5af8625／両CI成功・確定16file4,033,458byteは保持、19各一回は未消費。既存Jupyterの取得エラーとURLポリシー拒否でfreshPod／runtimeを確認できず、新送付／学習・生成／SQL／通常反映0。現接続状態を解決してから元のscope・条件で再開する。旧FIT18／A18消費済み・B18未成立、通常24bc228d／DB38・配布保留、元単位・補助全体未完を維持する。
+主枠は第11回§5、現在は§9.116。新Podへのログイン・実環境確認と、元提供復元から未実行FIT19／A19／条件付きB19へつなぐ新具体scopeを準備した。送付・実復元・学習／生成・SQL／通常反映0、具体承認前。元単位・補助全体未完を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2457,13 +2480,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
 | AR-06 | 完全親source／cohort／同raw一回保存を保持。FIT18完走・A18不採用を継承し、既存作者完成例と18教材・FIT19/A19/B19を独立照合して準備（§9.115） | 実モデルのtitle／meaning・長文反復の改善、同5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF、DB38migration／最新20261115011424をfresh確認。GPU／Render認証と元提供復元は前session成立、今回も元提供稼働を確認 | 通常API／workerから新GPUへの実モデル到達、設定／鍵一致、受入候補指定版の配置は未成立。画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF、DB38migration／最新20261115011424をfresh確認。旧5mkのGPU／Render認証と元提供復元は前session成立。新xrplはログイン・空の環境確認までで元提供未復元、旧5mk稼働も今回未確認 | 通常API／workerから新GPUへの実モデル到達、設定／鍵一致、受入候補指定版の配置は未成立。画像2残差・配布／本人利用・補助全体未完 |
 
-最新実績と次は§9.115。確定した新scopeへの具体承認が次であり、FIT18／A18・B18枠やrawは再利用しない。元単位・補助全体・通常採用は未完。
+最新実績と次は§9.116。新Pod送付・復元と条件付き19の具体承認が次であり、FIT18／A18・B18枠やrawは再利用しない。元単位・補助全体・通常採用は未完。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.115の再接続記録。** 確定19資料・scopeb5bd60f7・16file4,033,458byteは不変、新19送付／起動／学習・応答0で各一回未消費。既存Jupyterのフォルダ取得エラーとURLポリシー拒否で元Podのfresh状態が未確認。現在の既存Pod稼働状態と利用可能なJupyter接続を得て、実runtime／未使用19rootを確認する。前回health200を現在へ流用せず、別Pod・payload変更・旧18枠流用・無検証再束縛をしない。接続後は元の具体承認条件とFIT19→A19→全5適合時だけB19→適切な全12同rawの保存再読→通常反映を継続。元単位・補助全体未完、build／TestFlight／本人実機保留。
+**11/17・現在の再開先：§9.116の新Pod具体scope。** xrplcoeb5ec77fへログインし空のA5000環境を確認。新33file／21,779,197byte・scope0511b114b8202194a091d8183768d32c2fa895f7c89ea1fc8d79e870eaa2883eの送付とRESTORE19（30分）→FIT19（18教材36更新／18分）→A19（同5＋4対照／9応答30分）→全5独立適合時のみB19（全12／17応答24分、hash4KB）を具体承認後に各一回だけ進める。実環境・完全保存再load・復元の確認を段階間に置き、自動連続／再試行なし。旧Pod用scope未実行・FIT18／A18消費済みを保持。適切な同最終rawのSQL保存再読と通常反映までが残り、元単位・補助全体未完、配布／本人実機保留。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

@@ -1,0 +1,51 @@
+{
+  "pod": "xrplcoeb5ec77f",
+  "browser_tab": "34",
+  "url": "https://xrplcoeb5ec77f-8888.proxy.runpod.net/lab",
+  "method": "Authenticated live Jupyter terminal read-only; no file upload/download/package installation or model response.",
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "memory_mib": 24564,
+    "driver": "595.91.07",
+    "count": 1,
+    "capability": [
+      8,
+      6
+    ],
+    "cuda": "12.8",
+    "cxx11_abi": true
+  },
+  "python": "3.12.3",
+  "python_executable": "/usr/bin/python3",
+  "python312": "/usr/bin/python3.12",
+  "machine": "x86_64",
+  "libc": [
+    "glibc",
+    "2.39"
+  ],
+  "workspace_entries": [],
+  "root_free_gib_rounded": 49.98,
+  "workspace_free_gib_rounded": 49.98,
+  "port8000_connect_exit": 111,
+  "restore_root_exists": false,
+  "venv_exists": false,
+  "cache_exists": false,
+  "packages": {
+    "torch": "2.8.0+cu128",
+    "triton": "3.4.0",
+    "tornado": "6.5.10",
+    "transformers": null,
+    "peft": null,
+    "accelerate": null,
+    "safetensors": null,
+    "lm-format-enforcer": null,
+    "mamba-ssm": null,
+    "causal-conv1d": null,
+    "fastapi": null,
+    "pydantic": null
+  },
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "package_mutations": 0,
+  "files_sent": 0
+}
