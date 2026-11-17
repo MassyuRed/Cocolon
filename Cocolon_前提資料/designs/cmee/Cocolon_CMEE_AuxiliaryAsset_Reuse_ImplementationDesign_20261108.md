@@ -1,3 +1,5 @@
+> **11/18 JST・学習と本番生成制約の不整合を修復し、次の一回分を準備。通常反映は未完了。** 旧FIT26/A26の消費済み・全5件意味不適合・53ab不採用・B26未起動を維持する。全span索引・mandatory複合claim・REL原quote全文再掲は元の入力／共有4096枠で容量退行するため採用しない。現bound_roots.v2と3取得を保ち、private fresh-fitを本番許可token集合内のconditional CEへ修復した。元66を保持し、別revisionでは2targetの「鞄」を同じJSON値のUnicode escapeへ表記、自由文で不許可だった3位置だけを同wireのtoken分割へ合わせた。本人source・全messages・全parsed target・他65行のencodeは保持。本番と同じLMFE全21source／依存で66行・36,182token／全EOSの許可をCPU確認し、厳密loaderと独立レビューも完了。これは意味改善の実証ではない。新GPU・学習・生成・SQL・通常設定変更0。Pod読取では旧復元PIDが既に不在、8000は接続拒否だったため、新試行には元120u仕様の一回復元も含める。保存再読用PGlite0.5.8の既存依存はローカル復元済み。新実行は未承認・未送付・未実行で、全5実意味→条件成立時全12→同raw保存再読・通常DB/API反映を残す。build/TestFlight保留。詳細は補助設計§9.129。STRUCTURE_MAP_DELTA_NONE（製品source・公開型・owner配置は不変）。
+
 > **11/18 JST・FIT26／A26の実行と全文照合：両方の一回枠を完了し、元提供へ正常復元しました。意味は全5件不適合で、B26の条件は不成立です。** 同Podへ承認済み新12file 2,087,291byteを送付し、既存9file 3,286,728byteをPod内copy、全21のbyte/hashを照合。FIT26は66更新・4損失計測・112個F32tensorの保存fresh reload一致、復元込み412.121秒。A26は同5入力・15phase＋前後4対照の19応答を完了し、対照の全body一致、復元込み808.570秒。rootと独立担当が19記録／38欄・全15raw・公開図／全文を照合し、読書会の初回未送信の欠落、照明の購入／留保／条件差の欠落、修理の旧未確認の現在化、取消理由の強化、T01概要の恋人非面会への反転を確認。T01の10独立nodeと取消後の再応募意向なし等の改善は保持し、全5適合や一般品質へ換算しません。新重み53ab4293は不採用、B26未起動・同実raw SQL保存／通常API・worker変更0。追加学習を既定とせず、既存作者の選定・時点・派生表現の一体修復を具体化する段階です。元単位／補助全体・通常反映は未完、build／TestFlight／本人実機保留。詳細は補助設計§9.128、承認前の準備記録は§9.127。
 
 > **11/17最新実績：承認済みFIT25は54更新・4回の損失計測、112 tensorの保存／fresh reload一致、元提供復元を完了。続くA25も全5件・三段階15phase＋前後4対照の19応答を一回で完了しましたが、rootの全文照合で全5件が意味不適合となり、通常不採用です。** 独立担当者の全5件の全文照合も完了し、全5件不適合で一致しました。FIT25は復元込み592.445476秒、新weights5b36fe0a／configb1f2d89b。A25は復元込み844.331987秒、元120uのPID36492／start99185008・別health200、候補18008閉鎖・B25root不存在を確認。B25は全5適合条件不成立で起動0、実全12・実rawのSQL保存／非生成再読・通常反映0です。新17file4,818,633byte送付＋同Pod copy4file118,409byteと派生scope7fe32f73を原本へ保持し、FIT25／A25の一回は消費済み、未使用B25を別試行へ流用しません。候補APIe58c1e49・準備／既存CI／合成SQLの記録は§9.125、今回実績と残件は§9.126。通常24bc228d／DB20261115011424は前回確認記録の継承で、今回fresh Live照会ではありません。元単位／補助全体未完、build／TestFlight／本人実機保留を維持します。
@@ -6005,4 +6007,46 @@ driver321.985431秒、停止・元argv／env／cwdへの復元込み374.449394�
 SQL保存・同raw実再読・native通常採用・Render設定変更／配備0。今回開始時のfresh照会では通常API／worker双方24bc228d・Live、Supabase最新migration20261115011424（38件）。worker900・selector／重みと配布保留を維持する。将来のbase通常採用ではmodel identityとmap専用選択の整合が別に必要で、共有COCOLON_ANALYSIS_MODELを変えるだけではIFまで切り替わるため、今回のmap比較をIFの品質確認へ換算しない。自然／Pieceの既存profileも継承が必要で、今回そこを変更しない。
 
 primary outcomeはBLOCKER_NARROWED。追加学習を外しただけの解決は成立せず、既存作者による後続確定事実・未開催・未知の統合と、反復せず完結する生成が未完である。同じ注意文や新controllerを足して改善扱いせず、新しい学習・GPU試行の具体scopeは未準備／未実施。長履歴の実意味改善・全12・同raw実保存再読・通常反映が未成立のため、本単位も補助全体も閉じていない。STRUCTURE_MAP_DELTA_NONE：隔離実行の結果のみで、新owner／公開型／API／DB型の追加なし。
+
+
+
+## 9.129 学習と本番decoderの整合修復（2026-11-18 JST・新GPU未実行）
+
+### 採らない形式と、既存作者内の修復
+
+§9.128の複合claim／直前全文echo案を実装済みとしない。独立確認で、現unit.factでも他者の発言・本人の非行動・当時の不明を同じ自然文へ区別して表せ、A26は型の絶対的な表現不能を示していないと判断した。照明の根拠未選定、修理の旧未確認の現在化、正しいNODESから誤ったREL見出しを作る失敗は、引き続き作者の責務である。
+
+| 試作 | 現枠での結果と判断 |
+|---|---|
+| 全原文span索引を重ねる | 全12親PLANは18564→57926 prompt token、4096予約込み62022。32768超過のため不採用。原文・候補を削って合わせない |
+| mandatory複合claims＋全文echo | 独立小例2件は3088／3648だが、旧22群の楽観的な一旧unit一shadowclaimでも5〜7群が共有4096超過。小例fitを十分性へ一般化しない |
+| 現PLAN/NODES保持、RELだけ原quote全文再掲 | 最小配列でもL01=4380／L02=4433／A26照明=4115。元4096へ収まらず不採用 |
+
+同call const束縛等の隔離CPU試作は保持するが、製品への採用・意味合格には転用しない。初期試作に使ったローカルLMFE0.11.3は、実Podのpinned sourceと4file異なっていたため、その結果を本番一致の証明としない。
+
+### 教材の意味を変えず、実際に出せるtoken列へ合わせる
+
+private FIT26のfull-vocabulary CEは、nativeが強制するschema/hash/根拠の再掲や、本番で除外するtokenにも損失を掛ける。新候補は、各教師prefixで実nativeが許可する集合内のconditional CEを、複数選択肢のある位置で平均する。一意の位置は損失0、EOS後のchat-template newlineも対象外。固定表層にも代替BPE選択は残るため、「固定コピーを全て学習しない」「意味だけを学ぶ」とはしない。旧CEがA26の意味失敗の原因だったという証明でもない。
+
+元66（1634183byte／25c438ae…）は不変。別revision（1634231byte／51736766…）はL02 PLAN4箇所・NODES8箇所のU+9784「鞄」を既存nativeのJSON Unicode escapeへ表記しただけで、全本人source・messages・parsed target全値・行順・残り64target bytesを保持する。新しい意味教師や評価5／12の教師化ではない。
+
+canonical BPEには自由文の未完backslash＋uを一tokenへまとめ、本番freetext cacheが許可しない経路もあった。L02 NODESの元tail位置876／1195／1623だけを3642→[59,84]へ分ける固定manifest（fc6d85ee…）を作り、同じwire bytes・prompt IDs・意味を保つ。共有Piece encoderは変更しない。他65行のencoded値は完全同一で、この行のtailのみ2205→2208、EOSまでの出力2207となる。全22groupの共有runtime出力最大3393、最大sequence11476、最大prompt11199で元の4096／32768を維持する。旧rawへの事後修補ではない。
+
+### 本番同一sourceとCPU確認
+
+LMFE公式817f944fcc8851917c40300a47f62d1defc3ffc3の21 Python fileをローカルへ復元し、全Git blob SHAと実Pod側canonical SHA f8084eef865ba6a86367b95e9e84e8627382def82959dfb0f59395ca5c993004の一致を確認した。初回は先頭fを4と転記したが、Podで先頭文字コード102と全hash一致Trueを再表示して訂正し、旧記録も保持した。Podの依存やsourceを別版へ変更していない。transformers5.19.0／tokenizers0.23.3／pydantic2.13.5／pydantic-core2.46.5／interegular0.3.3も一致する。
+
+修復後は66/66行・36182tokenと全EOSが実nativeで許可された（CPU346.67秒、model/Torch/GPU0）。non-singleton27754／singleton8428、EOS後newline66のみ目的関数外。非singleton数を意味理解の箇所数へ換算しない。1715許可集合の同値圧縮・全復元SHA・厳密loader正系を確認し、旧不適合row5条件とpool改変4条件の拒否も確認した。
+
+凍結artifactはnative_allowed_training66.json.gz、340135byte、SHA60ff07b1174b984ca29840f12f11449f662c45d76f7481d27664a821a28fa430。helper5582a26e…／固定token manifestfc6d85ee…／新教材51736766…／本番21source・5依存・tokenizer・全row hashへ束縛する。新trainer4a66be53…の数式・causal shift・scope結合を独立全文レビューし、66更新・4measurement forward・112 F32保存fresh reloadの既存手順を保持した。実Torch小数値検査は次のfit内、GPUメモリ・900秒内完走・実意味改善は未検証。
+
+### 復元、通常反映、完了境界
+
+Podの読取では旧復元PID43656が不在、8000/healthzはConnectionRefusedError errno111だった。A26終了時の正常復元観測と、その後の停止を区別し、停止時刻・原因は未特定。本回の再起動・model load・学習・生成は0である。
+
+新候補は既存120u仕様・既存同Pod private鍵・同kernelを一回復元し、新PID/startを派生scopeへ束縛する。失われた旧processの全環境一致は主張せず、FIT／評価後は新baselineのargv/env/cwdへexact復元する。新鍵・再インストール・新kernel warm・自動FIT・再試行は増やさない。RESTORE27は180秒0生成、FIT27は66更新／4損失計測・復元込み20分、A27は同5入力の最大19応答・復元込み30分、全5独立全文適合時だけB27は同12記録最大43応答・復元込み17分の準備である。旧FIT26/A26の承認や未成立B26条件を新scopeへ流用しない。新準備は送付16file・2265457byte＋同Pod内copy9file・3286728byteの全25fileをbyte/hash固定した。training scope templateはfb83f0f58a1172cd89bfb77322c01b688fa95494673b84f3bbb1ee60e8dd077f、upload ZIPは573573byte。新baseline後のtraining scope/receiptと、完成fit後のevaluation scope/receiptは各131072byte以内の限定派生、B前の独立review記録は4096byte以内。新候補は未承認・未送付・未実行。
+
+保存再読の既存依存PGlite0.5.8は、通常配布のSHA512/SHA1を一致確認してローカル復元した。require/export確認のみで、DB constructor・SQL・稼働DB操作は0。既存7helper／元checkpoint／公開v3／DTO／RN／唯一realizer・保存owner・IF120u分離を保持する。API製品sourceはe58c1e4のまま、STRUCTURE_MAP_DELTA_NONE。通常API／worker／DBの以前のlive metadataを今回のfresh確認へ換算しない。
+
+CPU整合修復・実行準備の成立を、補助経路全体や通常反映の完了にはしない。全5の実原文／三phase raw／図／全文の独立意味照合、条件成立時だけの全12、同raw実保存・非生成再読・同版本文、通常DB/API反映と公開後確認が残る。build／TestFlight／本人実機の保留を他作業の開始条件へ戻さない。
 
