@@ -1,4 +1,4 @@
-> **11/17最新：承認済みD20を一回実行し、T01の503をValueError／semantic_free_text_tokens:81まで特定。元120uへ217.382秒で復元しました。** 前対照2＋同T01の3POST／3HTTP、T01は102.532秒・rawなし、後対照0。PID12816／start95872254・別health200を確認。最終許可token集合が空だが、元集合が空かfilter後かは未観測。CPUでは最大12node＋未被覆recordの行き止まりを再現したが、実T01の原因とは未結合。D21は失敗prefixを最大256KiBのprivate原本へ残してCPU再構成する診断版（新2file50,933byte／同Podcopy7file3,264,431byte、最大5応答・復元10分一回）を準備・独立確認済み、未承認・未送付／未実行。学習／retry／SQL／通常変更0、A19不採用・B19条件不成立・元単位／補助全体／通常反映未完。詳細§9.118。
+> **11/17最新：D21を一回実行し、実T01の失敗原因をCPUで確定。既存parserの残り根拠容量を修復し、API候補d610facbへ反映しました。** 前対照2＋T01の3POST、T01は109.230秒で503。失敗token列をprivateに保全し、同token列のCPU再現で12node上限／未参照record1・10による許可token0を確認。229.745秒で元120uのPID13620／start96015493・別health200へ復元。修正版は残りnode・unit・evidence容量だけを予約し、上限／全source被覆／schema／別profileは保持。固定LMFEで247件成功、両CI成功。実4Bの改善・通常採用は未確認。A22は新5file2,963,450byte／同Podcopy4file375,167byte、同重み・同T01＋前後対照、最大5応答／復元10分一回を確定準備、未承認・未送付／未実行。学習／retry／SQL／通常変更0。A19他4件の意味不適合・B19未成立・元単位／補助全体／通常反映未完を保持。詳細§9.119。
 
 
 
@@ -1792,3 +1792,4 @@ scope75d8633dは失敗時終了条件で閉鎖。追加修正／retry／次scope
 全体主枠は§9.54／第11回§5。最新実績は§9.102。両CI成功後に承認済みA10を一回実行し、前対照2＋分析2の計4応答で停止。読書会はGENERATEDだが意味不適合、照明は未使用r1/r2によるorphan拒否。残3件・後対照・B10は未実行。復元込み276.144289秒、元120u PID141466/start238372709・health200へ復元し候補listener停止を確認。scopef68618f0のA10は消費済み／失敗閉鎖、B10の全5件適合条件は不成立・枠転用なし。追加修正／retry／次試行準備0。通常API／worker24bc228d Live・DB38migration／20261115011424・worker900をfresh確認。全12実意味→同raw保存再読→通常反映の元単位／補助全体／正式受入れ未完、配布保留。
 
 原本とroot／独立全文照合は補助設計§9.102と同trial semantic_event_plan_v2_a10_actual_20261116/。既存作者source b14960eは候補のまま、今回商品source／route／schema／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。先行準備と旧失敗原本はGit historyおよび§9.100〜101に保持する。
+

@@ -1,4 +1,4 @@
-> **11/17最新：承認済みD20を一回実行し、T01の503をValueError／semantic_free_text_tokens:81まで特定。元120uへ217.382秒で復元しました。** 前対照2＋同T01の3POST／3HTTP、T01は102.532秒・rawなし、後対照0。PID12816／start95872254・別health200を確認。最終許可token集合が空だが、元集合が空かfilter後かは未観測。CPUでは最大12node＋未被覆recordの行き止まりを再現したが、実T01の原因とは未結合。D21は失敗prefixを最大256KiBのprivate原本へ残してCPU再構成する診断版（新2file50,933byte／同Podcopy7file3,264,431byte、最大5応答・復元10分一回）を準備・独立確認済み、未承認・未送付／未実行。学習／retry／SQL／通常変更0、A19不採用・B19条件不成立・元単位／補助全体／通常反映未完。詳細§9.118。
+> **11/17最新：D21を一回実行し、実T01の失敗原因をCPUで確定。既存parserの残り根拠容量を修復し、API候補d610facbへ反映しました。** 前対照2＋T01の3POST、T01は109.230秒で503。失敗token列をprivateに保全し、同token列のCPU再現で12node上限／未参照record1・10による許可token0を確認。229.745秒で元120uのPID13620／start96015493・別health200へ復元。修正版は残りnode・unit・evidence容量だけを予約し、上限／全source被覆／schema／別profileは保持。固定LMFEで247件成功、両CI成功。実4Bの改善・通常採用は未確認。A22は新5file2,963,450byte／同Podcopy4file375,167byte、同重み・同T01＋前後対照、最大5応答／復元10分一回を確定準備、未承認・未送付／未実行。学習／retry／SQL／通常変更0。A19他4件の意味不適合・B19未成立・元単位／補助全体／通常反映未完を保持。詳細§9.119。
 
 
 
@@ -42,7 +42,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.118: D20consumed3POST/3HTTP,T01HTTP503/no raw,ValueError semantic_free_text_tokens81; upstreamempty vs filteredempty unknown. Restored217.382s PID12816/ticks95872254health200. CPU12node/uncoveredrecord deadend reproduced but actualprefix unlinked. D21prepared2files50933B+copy7files3264431B,scope218483af; sameweights/T01,max5/600sonce,privatefailedprefix<=262144B for CPU replay,10CPUchecks+independentreview. Newapprovalpending,notsent/notexecuted; no training/retry/B/SQL/normal. A19inadequate/B19unmet/unitwholeunfinished."
+current_next: "Section9.119: D21consumed3POST/T01HTTP503,restored229.745s PID13620/ticks96015493health200. Exact6326token CPUreplay confirms12node cap with records1/10 uncovered and upstreamallowed0. Existingparser repaired at API d610facb;247pinnedLMFEchecks and both CI success; modelquality/adoption unverified. A22prepared5files2963450B+copy4files375167B scopeeebf53ae09ee47cce753c53b2407fdb76752bd64031ff3dfb6f4d88268aaf25f,sameweights/T01,max5/600sonce; newapprovalpending,notsent/notexecuted. No training/retry/B/SQL/normal. A19other4meaningfailures/B19unmet/unitwholeunfinished."
 runtime_effect_of_this_document: 0
 ---
 
@@ -474,9 +474,9 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
 | AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.68／69を継承し、§9.71で複数のproperな本人訂正をPieceへ接続し通常反映。異なる原節の完全引用REVISE／WITHDRAW・ANSWER0の限定範囲。ANSWER併存・置換節再訂正・一般本文品質・model通常採用・本人一巡は残る |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
-| AR-06 | 完全親source／cohort／同raw一回保存を保持。RESTORE19／FIT19完了、A19不適合を継承。D20でT01のValueError／最終許可token集合の空まで特定、元提供復元とCPU行き止まりを確認（§9.118） | D21は同T01のprivate失敗prefixをCPU再構成する最大5応答／復元10分一回・新2file50,933byte、別承認前／未実行。全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
+| AR-06 | D21実失敗token列のCPU再現で12node上限／未参照record1・10の容量不足を確定。既存parserをAPI候補d610facbへ修復、247件と両CI成功（§9.119） | A22同T01＋対照の一回は別承認前／未実行。A19他4件の意味不適合、全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常API／worker24bc228d双方Live・DB38／最新20261115011424をfresh確認。D20後の元120uをPID12816／start95872254・別health200で確認、B19root不存在 | D20後対照未実行、新候補の通常到達／配置は未成立。D21別承認前。画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | D21後は元120uのPID13620／start96015493・別health200へ復元、18008閉鎖・B19root不存在。DB38／最新20261115011424。通常API／worker24bc228dは04:55UTCの最終確認値 | 05:25〜05:26UTCのRender読取はInternal errorでfresh未確認。今回配置変更0。A22別承認前、通常到達／配置・画像2残差・配布／本人利用・補助全体未完 |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -2084,6 +2084,31 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="xrpl-d21-actual-capacity-repair-a22-prepared-20261117"></a>
+## 9.119 11/17 — D21実失敗のCPU再現で原因確定、既存parser容量修復とA22準備
+
+MashのD21明示承認に従い、新2file50,933byteを同Pod xrplcoeb5ec77fへ送付、既存7file3,264,431byteをPod内copyし、全9fileのSHA照合後に一回実行した。scope218483af、同5a25／45c0・同T01・前後対照・最大5応答／復元600秒を保持した。前対照2は200／stop、T01は109.230041742092秒で503／ValueError semantic_free_text_tokens:81。実3POST／3応答で停止し、後対照0・raw／図／本文なし。学習／再試行／B19／SQL／通常変更0。
+
+復元込み229.74460114294197秒、元120uのPID13620／start96015493・別health200、元model／native／adapter、試行alias不存在、18008閉鎖・B19root不存在を確認した。private失敗capture35,904byte／SHAa879142b60a8e3a8f89ac828418e3d8dfa7ae3ff793e0df8ccd91273733cc40cを保全。6326token（prompt4703＋generated1623）を同じ固定LMFE/tokenizer/configでCPU再生し、全先行tokenの合法性と最後の許可token0を23.909978862秒で再現した。重みload・追加推論・CUDAなし。上流の許可集合が既に空であり、free-text filterによる消去ではない。
+
+実prefixは12nodeを完成したが、10記録中record1・10が未参照。node上限12で次のcommaが拒否され、全source被覆条件で終端array closeも拒否される組合せが原因だった。型・時間からの推測ではなく実token列と同sourceの再現で結合した。原本ZIP66,826byte／SHA1fc7fe5eb5f88b819b9ffaa745942f4148a582bc33e7d4f77e9a6ffcbe41dd40、15data member＋manifestのCRC／全byte／SHAを照合。result4d4fd22b・CPU report3b6b9e50・private原token列を分離保全し、public GitHubへsource入力／prefix／credentialを転記しない。D21一回は消費済み。
+
+### 既存parserの修復と確認範囲
+
+API PR3候補d610facb9d162a74bc57ef6323b7499f68d0ef1eでは、既存serve_emlis_natural_reply.pyの_semantic_unique_json_schema_parserだけを修復した。残りnode×unit×evidence容量を既存の上限12／2／4から計算し、未参照recordを収められなくなる直前にevidence／unitsの早いcloseを拒否し、必要な時だけ次の根拠候補を未参照recordへ絞る。余裕がある段階の重複参照・複数record nodeは保持する。schema・上限・全被覆条件・model／decoder／messages／HTTP・旧v1／IF／Pieceは不変。raw修補・EOS挿入・制約緩和はない。
+
+固定LMFE commit817f944fcc8851917c40300a47f62d1defc3ffc3で関連5suite247件成功／skip0。新10caseは未参照数1／2／4／5／8、evidence／units close、容量直前の根拠選択と初期重複許可、13／24record、decoder分岐の独立を確認した。旧parserで新回帰2件の失敗も確認。実12node値をJSONの綴りだけ正規化した別CPU構造検査では、修正版が行き止まりより前のcloseを拒否し合法commaを残す。これは原token列の再生成・完成rawの修補や品質適合ではなく、合成の構造検査である。製品source1file＋既存test1fileのremote blob／変更path2件を照合し、[Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/44023489173)と[Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/44023489170)は同commitで成功した。
+
+### A19他4件を継承する理由と次の意味owner
+
+独立read-only再確認では、読書会n6のmeaningがn2の返事待ちを借用、照明n4が購入前を後へ変更しn7が電源を抜いた対象を移動、U01が過去の未確認を現在へ戻し、U02の線e2／e3が両端以外の完了を借用していた。いずれも無修補rawに既存であり、表示投影の新失敗ではない。現intent_compilerは引用・所属・形を照合して投影する一方、意味はUNASSESSEDを残す。これを合格へ読み替えない。次の作者改修候補は、既存owner内で根拠・記述時点の選択と局所作文を分け、node説明をその根拠、線説明を両端根拠に限定して実現すること。追加call／費用を伴い得る候補設計であり、未実装・改善未確認。注意文追加だけ、raw自動修補、誤出力の全面非表示で元単位を閉じない。
+
+### 次のA22：修正版で同じT01を一回だけ実生成する候補
+
+新5fileはcurrent_api_sources.zip、source_manifest.json、diagnostic_preparation.json、verify_t01_capacity_once.py、diagnostic_scope.jsonの計2,963,450byte。D21 payloadのcontrols.json／full12.input.json／full12_pre_acquisition.plan.json／input_cases.jsonの既存4file375,167byteを同Pod内copyする。全247sourceのうち既存native parser以外246fileは同一byte、同T01の依頼／messages、原入力／guard／as_of／重みは保持する。scope SHA eebf53ae09ee47cce753c53b2407fdb76752bd64031ff3dfb6f4d88268aaf25f。最大5応答（同T01＋前後4対照）・復元込み600秒一回、学習／再試行／B／SQL／通常採用なし。新しい個別承認前、未送付／未実行でありD21の残枠は使わない。
+
+通常DBは05:25UTCのread-only確認で38migration／最新20261115011424のまま。通常API／worker24bc228d・Liveは04:55UTCの最終確認値で、05:25〜05:26UTCのRender読取2回はInternal errorとなりfresh状態は未確認。今回の配置操作は0。A19他4件の時点／局所根拠／関係線の不適合とB19未成立を維持する。A22がT01で成功しても、全5適合・全12・同最終raw保存／別process非生成再読・通常DB／API反映へ自動換算しない。元単位／補助全体／正式受入れは未完、build／TestFlight／本人実機は保留。primary TECHNICAL_CREDIT（再利用可能なparser修復／CPU回帰／source反映）、商品品質creditは増やさない。STRUCTURE_MAP_DELTA_NONE（既存parser内部修復、公開契約・owner・DTO不変）。
+
 <a id="xrpl-d20-actual-d21-prepared-20261117"></a>
 ## 9.118 11/17 — D20の実例外位置、CPUの行き止まりと、失敗prefixの再構成準備
 
@@ -2539,9 +2564,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・D20実例外位置と復元、D21未承認準備）
+### 11.2 現在の進行欄（11/17・D21原因確定とparser修復、A22承認待ち）
 
-主枠は第11回§5、現在は§9.118。D20は3POSTでT01のValueError／semantic_free_text_tokens:81まで観測し、217.382秒で元120uへ復元。CPUの12node／未被覆recordの行き止まりは実T01と未結合。D21のprivate失敗prefix保持を新2file50,933byte・同Podcopy7fileとして準備・独立確認、別承認前・未送付／未実行。A19不採用／B19条件不成立・元単位／通常反映／補助全体未完。
+主枠は第11回§5、現在は§9.119。D21は一回消費済み、実T01のtoken列とCPU再現で12node上限と未参照record1・10の行き止まりを確定。既存parserの残り根拠容量だけを修復し、247件／両CI成功。実4Bの意味改善・通常反映は未確認。A22を別承認前の一回として準備し、A19他4件の不適合・B19未成立を保持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2550,15 +2575,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／同raw一回保存を保持。RESTORE19／FIT19完了、A19不適合を継承。D20でT01のValueError／最終許可token集合の空まで特定、元提供復元とCPU行き止まりを確認（§9.118） | D21は同T01のprivate失敗prefixをCPU再構成する最大5応答／復元10分一回・新2file50,933byte、別承認前／未実行。全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
+| AR-06 | D21実失敗token列のCPU再現で12node上限／未参照record1・10の容量不足を確定。既存parserをAPI候補d610facbへ修復、247件と両CI成功（§9.119） | A22同T01＋対照の一回は別承認前／未実行。A19他4件の意味不適合、全5適合／全12／同raw保存再読／通常反映は未成立。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 通常API／worker24bc228d双方Live・DB38／最新20261115011424をfresh確認。D20後の元120uをPID12816／start95872254・別health200で確認、B19root不存在 | D20後対照未実行、新候補の通常到達／配置は未成立。D21別承認前。画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | D21後は元120uのPID13620／start96015493・別health200へ復元、18008閉鎖・B19root不存在。DB38／最新20261115011424。通常API／worker24bc228dは04:55UTCの最終確認値 | 05:25〜05:26UTCのRender読取はInternal errorでfresh未確認。今回配置変更0。A22別承認前、通常到達／配置・画像2残差・配布／本人利用・補助全体未完 |
 
-最新実績と次は§9.118。D20一回は消費済み。D21はscope218483af、新2file50,933byte／同Podcopy7file3,264,431byte、同5a25・同T01依頼、最大5応答・復元10分一回で、失敗prefixをprivateに保持してCPU再構成する。未承認・未送付／未実行。A19不採用・B19条件不成立、通常採用・元単位・補助全体未完。
+最新実績と次は§9.119。D21一回は消費済み。A22はscopeeebf53ae09ee47cce753c53b2407fdb76752bd64031ff3dfb6f4d88268aaf25f、新5file2,963,450byte／同Podcopy4file375,167byte、修正版d610facb・同5a25／45c0・同T01＋前後4対照、最大5応答・復元600秒一回。未承認・未送付／未実行。T01の品質適合が得られても、A19他4件と全12・同raw保存再読・通常採用は別の残件であり、自動成立しない。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.118のD20実原本と、別承認前のD21。** D20は3POST／3HTTP、T01のValueError／semantic_free_text_tokens:81を観測し、217.382秒で元120uのPID12816／start95872254・別health200へ復元。CPUで12node／未被覆recordの行き止まりを再現したが、実T01との因果は未確定。新D21は同重み・同T01・最大5応答／復元600秒一回、失敗prefixを最大256KiBのprivate原本へ保持しCPU再構成する。新2file50,933byte／同Podcopy7file3,264,431byte、scope218483af。未承認・未送付／未実行、学習／retry／B／SQL／通常変更0。A19不採用・B19条件不成立と、適切な新実結果→同raw保存／別process非生成再読→通常反映の未完を保持する。
+**11/17・現在の再開先：§9.119のD21実原因とAPI候補d610facb、別承認前のA22。** D21を再実行しない。実token列のCPU再現と容量修復の検証、両CIは成功。修正版の実4B生成は0で、同Podへ新5file2,963,450byte／既存4file375,167byteをcopyして同T01＋前後対照を最大5応答・復元600秒一回で確認する候補を準備した。scopeeebf53ae09ee47cce753c53b2407fdb76752bd64031ff3dfb6f4d88268aaf25f、未承認・未送付／未実行。学習／retry／B／SQL／通常変更0。適切な全5／全12の新実結果→同最終raw一回保存／別process非生成再読→通常反映は未完。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 
@@ -5606,3 +5631,4 @@ driver321.985431秒、停止・元argv／env／cwdへの復元込み374.449394�
 SQL保存・同raw実再読・native通常採用・Render設定変更／配備0。今回開始時のfresh照会では通常API／worker双方24bc228d・Live、Supabase最新migration20261115011424（38件）。worker900・selector／重みと配布保留を維持する。将来のbase通常採用ではmodel identityとmap専用選択の整合が別に必要で、共有COCOLON_ANALYSIS_MODELを変えるだけではIFまで切り替わるため、今回のmap比較をIFの品質確認へ換算しない。自然／Pieceの既存profileも継承が必要で、今回そこを変更しない。
 
 primary outcomeはBLOCKER_NARROWED。追加学習を外しただけの解決は成立せず、既存作者による後続確定事実・未開催・未知の統合と、反復せず完結する生成が未完である。同じ注意文や新controllerを足して改善扱いせず、新しい学習・GPU試行の具体scopeは未準備／未実施。長履歴の実意味改善・全12・同raw実保存再読・通常反映が未成立のため、本単位も補助全体も閉じていない。STRUCTURE_MAP_DELTA_NONE：隔離実行の結果のみで、新owner／公開型／API／DB型の追加なし。
+

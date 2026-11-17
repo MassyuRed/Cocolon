@@ -1,4 +1,4 @@
-> **11/17最新：承認済みD20を一回実行し、T01の503をValueError／semantic_free_text_tokens:81まで特定。元120uへ217.382秒で復元しました。** 前対照2＋同T01の3POST／3HTTP、T01は102.532秒・rawなし、後対照0。PID12816／start95872254・別health200を確認。最終許可token集合が空だが、元集合が空かfilter後かは未観測。CPUでは最大12node＋未被覆recordの行き止まりを再現したが、実T01の原因とは未結合。D21は失敗prefixを最大256KiBのprivate原本へ残してCPU再構成する診断版（新2file50,933byte／同Podcopy7file3,264,431byte、最大5応答・復元10分一回）を準備・独立確認済み、未承認・未送付／未実行。学習／retry／SQL／通常変更0、A19不採用・B19条件不成立・元単位／補助全体／通常反映未完。詳細§9.118。
+> **11/17最新：D21を一回実行し、実T01の失敗原因をCPUで確定。既存parserの残り根拠容量を修復し、API候補d610facbへ反映しました。** 前対照2＋T01の3POST、T01は109.230秒で503。失敗token列をprivateに保全し、同token列のCPU再現で12node上限／未参照record1・10による許可token0を確認。229.745秒で元120uのPID13620／start96015493・別health200へ復元。修正版は残りnode・unit・evidence容量だけを予約し、上限／全source被覆／schema／別profileは保持。固定LMFEで247件成功、両CI成功。実4Bの改善・通常採用は未確認。A22は新5file2,963,450byte／同Podcopy4file375,167byte、同重み・同T01＋前後対照、最大5応答／復元10分一回を確定準備、未承認・未送付／未実行。学習／retry／SQL／通常変更0。A19他4件の意味不適合・B19未成立・元単位／補助全体／通常反映未完を保持。詳細§9.119。
 
 
 
@@ -1181,3 +1181,4 @@ scope75d8633dは失敗時終了条件で閉鎖。追加修正／retry／次scope
 補助設計§9.101を正とする。API b14960eの既存semantic_admission.py内v2 instruction定数だけを修復し、確認済み／不明、出来事の状態分割、反復抑制、edge根拠の和集合を明確化した。原入力・資格／引用・本人訂正・公開型／DB／RN／保存owner／native／モデルは不変、STRUCTURE_MAP_DELTA_NONE。170既存test＋runner22件／28subtest成功、最終3632byteで同全12・6分割を維持。実意味効果は未確認。
 
 新A10/B10はscopef68618f0、新送付6file3,039,091byte＋同Pod内copy3file、全9file3,138,846byte。A10最大9応答30分、全5独立全文適合時だけB10最大11応答17分、各一回・失敗時閉鎖、個別未承認／未送付／未実行。旧repair1は閉鎖・rawを再bindしない。通常24bc228d／DB20261115011424は前回記録を継承し、今回model／Pod／配置／DB変更0。全12実意味・同raw保存再読・通常反映、本単位／補助全体／正式受入れ未完・配布保留。
+
