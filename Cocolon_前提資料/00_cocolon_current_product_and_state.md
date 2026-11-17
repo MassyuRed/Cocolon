@@ -1,4 +1,4 @@
-> **11/17最新：既存作者を固定3段階のprivate候補v4へ改修し、API809e9332・519回帰・Analysis／Piece両CI、合成原本の隔離SQL保存／別process再読まで確認。実4B改善・通常採用は未確認。** PLANで全根拠と明示ID、NODESで固定unitの本文、RELATIONSで実node台帳から関係を生成。全3回で生成4096token／source220秒を共有し、三原本を無修補で保持。元120u／Emlis／Piece・公開watashi.map.v3は維持。次のA23/B23は新6file3,210,593byte・同Podcopy3file99,755byte、同重み・同5入力を最大19応答／復元込み30分、全5適合時だけ同12記録を最大43応答／復元込み17分、各一回。判定1file4KiB以下を条件付き追加。未承認・未送付・新GPU／学習／通常変更0。A22消費済み、元単位／通常反映／補助全体未完。詳細§9.121。
+> **11/17最新：承認済みA23は全5件・固定3phase計15応答＋前後4対照の19応答を完了したが、全5件の独立全文照合が不適合で通常不採用。** 全HTTP200／stop、図・本文5件まで到達。固定根拠とNODES本文のID対応ずれが全件に残り、公開のカテゴリ・感情・役割と本文も誤結合した。原引用の破損や表示だけの誤りではない。復元込み696.135066秒、元120u PID19109／start97486258・別health200、候補18008停止を確認。原本13file210549byteを回収照合。B23は全5適合条件不成立で未実行、学習／retry／SQL保存／通常変更0。A23の一回は消費済み、B23残枠の転用なし。通常API／worker24bc228d・DB20261115011424、build／TestFlight／本人実機保留、元単位／補助全体未完。詳細§9.122。
 
 
 
@@ -224,7 +224,7 @@
 
 ## 2. 商品全体と、取り落としてはいけない決定
 
-**現在の主線は補助経路活用全体の完了。** 本人更新・意味／内容選択の能力を三中核へ適用し、通常利用まで同じ単位で閉じる。現行計画は第11回§5と本資料§8。補助設計の§9.67は標準自動3案の限定接続完了、現在の実装・残件は同書current_next／§9.121（先行通常反映は§9.72）へ戻る。以下の日付付き方針のうち、現在と異なる作業順は履歴として扱う。
+**現在の主線は補助経路活用全体の完了。** 本人更新・意味／内容選択の能力を三中核へ適用し、通常利用まで同じ単位で閉じる。現行計画は第11回§5と本資料§8。補助設計の§9.67は標準自動3案の限定接続完了、現在の実装・残件は同書current_next／§9.122（先行通常反映は§9.72）へ戻る。以下の日付付き方針のうち、現在と異なる作業順は履歴として扱う。
 
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
@@ -288,7 +288,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|
-| 現semanticの長履歴 | 原文境界・既存分割統合を保持。候補b14960eの承認済みA10は読書会が意味不適合、照明は未使用readingで拒否 | 実4応答＝前対照2＋map2。残3件・後対照・B10未実行。276.144289秒で元120uへ復元、A10は失敗閉鎖。全12実意味・同raw保存再読・通常反映は未完。詳細§9.102 |
+| 現semanticの長履歴 | 既存作者v4候補809e9332のA23は全5件／19応答・図／本文まで完結。固定根拠とNODES本文の対応ずれを全件で確認 | 全5がroot＋独立全文不適合、B23条件不成立・未実行。元120uへ696.135066秒で復元・別health200。全12実適合・同raw保存再読・通常反映は未完。詳細§9.122 |
 | こころグラフ（旧こころ天気） | JST今日／月曜始まり週／暦月の原入力直接集計。今日の円＋4時間帯、週／月の日別100%棒と内訳。改名・天気印撤去、履歴metadata取得と既読競合修復を実装し、497f7008／RN6fdea583・8001へ反映した最終記録あり | 7901表示はMashが概ね指示どおりと報告。8001の改名・履歴既読、新入力／削除の実集計、通知到着／tapは本人確認が残る。欠測・未来・既存閲覧範囲、秘密入力／自己理解だけの記録の除外と旧保存reportを保持。今回live再照会はしていない |
 | 従来わたしマップ | 役割スイッチ／ルート／分かれ道／未観測領域を表示。旧builder・保存・latest／history／detail・renderer経路あり | 固定4step・汎用結果文を含む旧経路。完成目標の根拠付き観測グラフと同一視しない。V2へのglobal cutover未完了 |
 | V2観測ルート | 期間内の原入力と適格補足から五種node、明示順序・無方向共起、訂正・撤回を限定対応。source adapter／compiler／realizer、immutable保存、既存API分岐、RN表示あり | 一般日本語・全段階の理解は未完成。V1-D基盤とu102〜118は指定開発配置済み。最新内容修正をAPI744336c0で配置。一般入力の内容品質・保存identity独立照合・商品受入れは残る。最新の累積/月次機構と7201確認は§44/45 |
@@ -368,7 +368,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-**当面の主枠は補助経路活用全体の完了：[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)、補助設計の現行作業・残件は[current_next／§9.121](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-node-local-v4-three-phase-prepared-20261117)。§9.54は全体方針の決定根拠として保持する。** 公開日未定・12/6提出可能候補は維持する。対象週11/14〜11/21は日別割当なし、以下の四作業と最小共通枠へ集約。旧W1〜15は改訂前commitの履歴として保持し、個別の失敗文を次々に修復する進行を全体の再開先へ戻さない。
+**当面の主枠は補助経路活用全体の完了：[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)、補助設計の現行作業・残件は[current_next／§9.122](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-node-local-v4-a23-rejected-20261117)。§9.54は全体方針の決定根拠として保持する。** 公開日未定・12/6提出可能候補は維持する。対象週11/14〜11/21は日別割当なし、以下の四作業と最小共通枠へ集約。旧W1〜15は改訂前commitの履歴として保持し、個別の失敗文を次々に修復する進行を全体の再開先へ戻さない。
 
 | 優先・領域 | 対象週に閉じる工事と、Cocolon全体への接続 |
 |---|---|
@@ -388,7 +388,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | [第11回・11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)は終了。§9にMashの終了明示・継続指示、§5に補助全体完了主枠の計画、§8.5に指摘と意見を記録。補助設計current_next／§9.121を現在の実装・残件へ、§9.54を全体方針の根拠へ使う。実績・全残件・同尺度61.625％・公開日未定／12/6候補は維持。会議終了を商品完成や実環境操作済みへ変換しない。実結果は各weekly・trialとAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る |
+| 最新判断・配置記録 | [第11回・11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)は終了。§9にMashの終了明示・継続指示、§5に補助全体完了主枠の計画、§8.5に指摘と意見を記録。補助設計current_next／§9.122を現在の実装・残件へ、§9.54を全体方針の根拠へ使う。実績・全残件・同尺度61.625％・公開日未定／12/6候補は維持。会議終了を商品完成や実環境操作済みへ変換しない。実結果は各weekly・trialとAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
