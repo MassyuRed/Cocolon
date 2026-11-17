@@ -1,4 +1,19 @@
-> **11/17最新：承認済みA22を一回実行、T01は例外を越えたが210秒でlength終了し不採用。元120uへ332.104秒で復元しました。** 新5file2,963,450byte送付・同Podcopy4file375,167byte、全9file照合。前対照2＋T01の3POST、T01はHTTP200／length・210.134736秒、後対照0。partialは12node／全10record参照・29edge＋30本目途中、overviewなし。n12の無関係な根拠混在、7組の同label全4種反復、端点IDと説明の不一致があり、時間延長だけの次試行は準備しない。PID14681／start96402996・別health200、元model/native・18008閉鎖・B19root不存在を確認。A22消費済み、学習／retry／B／SQL／通常変更0。次は既存作者の局所根拠→node構成と実端点→関係選択／文章化の改修。局所生成への分割案は最大61生成単位となり得る未実装案で、採用・新実行承認は0。元単位／通常反映／補助全体未完。詳細§9.120。
+> **11/17最新：既存作者を固定3段階のprivate候補v4へ改修し、API809e9332・519回帰・Analysis／Piece両CI、合成原本の隔離SQL保存／別process再読まで確認。実4B改善・通常採用は未確認。** PLANで全根拠と明示ID、NODESで固定unitの本文、RELATIONSで実node台帳から関係を生成。全3回で生成4096token／source220秒を共有し、三原本を無修補で保持。元120u／Emlis／Piece・公開watashi.map.v3は維持。次のA23/B23は新6file3,210,593byte・同Podcopy3file99,755byte、同重み・同5入力を最大19応答／復元込み30分、全5適合時だけ同12記録を最大43応答／復元込み17分、各一回。判定1file4KiB以下を条件付き追加。未承認・未送付・新GPU／学習／通常変更0。A22消費済み、元単位／通常反映／補助全体未完。詳細§9.121。
+
+### 11/17 — private作者v4のfile地図（未採用候補）
+
+API809e9332の既存owner内を次の順に通ります。新しい公開保存型・RN型はありません。全体の実行状態と未承認packetは補助設計§9.121を正とします。
+
+| 既存file | 候補v4での責務 |
+|---|---|
+| analysis_model_source.py | exact alias選択、3phase取得、実使用token残量・共通絶対期限、三原本保持 |
+| cores/analysis/semantic_admission.py | 元資料・source duties／訂正のqualified材料、固定ID／unitの段階束縛、三原本の構造組立て |
+| ai/tools/serve_emlis_natural_reply.py | PLAN／NODES／RELATIONSのprivate schemaと既存decoder、実usage、既存安全な失敗箇所log |
+| cores/analysis/intent_compiler.py | 三原本の再検証、既存v3 graph投影、唯一realizer／private来歴へ接続 |
+| analysis_if_model_source.py | 共有map aliasがv4でもIFを元120uへ束縛 |
+
+test_analysis_node_local_v4_phases.pyを追加し、既存test_analysis_event_plan_model_alias.pyへv4境界を追加しました。全体生成を3回へ分ける候補であり、nodeごとのKV隔離・実品質成功・通常採用ではありません。
+
 
 
 
@@ -77,7 +92,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-13 JST"
+revision_date: "2026-11-17 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"

@@ -1,0 +1,237 @@
+{
+  "schema": "cocolon.analysis.node_local_v4.three_phase_prepared.v1",
+  "state": "CANDIDATE_PREPARED_NOT_APPROVED_NOT_SENT_NOT_EXECUTED",
+  "previous": "A22_consumed_not_adopted",
+  "source": {
+    "state": "PUBLISHED_CANDIDATE_NOT_MODEL_QUALITY_OR_NORMAL_ADOPTION",
+    "parent": "d610facb9d162a74bc57ef6323b7499f68d0ef1e",
+    "commit": "809e933265718bd08260ef0728d7761f7f206554",
+    "tree": "0b820fc13ae7867be762b71ccb041079fe92de3a",
+    "head_verified": true,
+    "changed_paths_exact": true,
+    "files": [
+      {
+        "path": "ai/tools/serve_emlis_natural_reply.py",
+        "sha": "e08c8fba651320e140f3595a3886a76d3aae2328",
+        "content_equal": true,
+        "bytes": 106883,
+        "sha256": "d533c5d6849de5892f1b1e507882a6c9137f8a43cf188f046597148bb5cf3bd9"
+      },
+      {
+        "path": "ai/services/ai_inference/analysis_if_model_source.py",
+        "sha": "8d8afd288b9d3745ef4e9dce4f42f97781316041",
+        "content_equal": true,
+        "bytes": 5362,
+        "sha256": "c53d23952032c3a30634dfe7334a7f2f666735b636f93cd145efb2a9456b736e"
+      },
+      {
+        "path": "ai/services/ai_inference/analysis_model_source.py",
+        "sha": "abd32661443c604a8850beafca5c0ac01b5e5af9",
+        "content_equal": true,
+        "bytes": 22452,
+        "sha256": "01c8da213a152cb68a63e2050d42494ed2e8c81b0c842a103f33c94844ad5fc3"
+      },
+      {
+        "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+        "sha": "373ffaecc28014279597344fc9d5eedd80d0e7c3",
+        "content_equal": true,
+        "bytes": 243148,
+        "sha256": "a327d5ce7b114e734855ed1a94ae372f4b7f042132899439a4037bfc88cf2feb"
+      },
+      {
+        "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+        "sha": "68afafa9baecb4446a8fe007cc6e8f4cb363e3bd",
+        "content_equal": true,
+        "bytes": 263649,
+        "sha256": "f29bd7407155cd6ab08ddc7a5cc772c8ff335b91d5abecb0d0697bb1b3108ce3"
+      },
+      {
+        "path": "ai/tests/test_analysis_node_local_v4_phases.py",
+        "sha": "8d482b7fc9e8f27f5091736e1e8b90a2cf49adde",
+        "content_equal": true,
+        "bytes": 20329,
+        "sha256": "92fe0bf8128154831944ad286ac82bc882561e565fe1aef127f3a5c9961cf6ea"
+      },
+      {
+        "path": "ai/tests/test_analysis_event_plan_model_alias.py",
+        "sha": "ecdd28a31413dc990684d915e07d49ff8d2d4c98",
+        "content_equal": true,
+        "bytes": 10732,
+        "sha256": "3b9d809b8f5d957f2dfe5849608c7330839ea0049d3030feb0e99359c090f45b"
+      }
+    ],
+    "tests": {
+      "passed": 519,
+      "failed": 0,
+      "skipped": 0
+    },
+    "model_calls": 0,
+    "training": 0,
+    "normal_deployments": 0
+  },
+  "ci": {
+    "state": "REQUIRED_CI_SUCCESS",
+    "source_commit": "809e933265718bd08260ef0728d7761f7f206554",
+    "actual_verified": true,
+    "runs": [
+      {
+        "id": 44042667399,
+        "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+        "head": "809e933265718bd08260ef0728d7761f7f206554",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "push",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/44042667399"
+      },
+      {
+        "id": 44042667381,
+        "name": "Analysis observed content",
+        "head": "809e933265718bd08260ef0728d7761f7f206554",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "push",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/44042667381"
+      }
+    ]
+  },
+  "execution_packet": {
+    "A_max_responses": 19,
+    "A_restore_seconds": 1800,
+    "B_max_responses": 43,
+    "B_restore_seconds": 1020,
+    "SQL_calls": 0,
+    "copied_bytes": 99755,
+    "later_conditional_review_max_bytes": 4096,
+    "model_calls": 0,
+    "normal_changes": 0,
+    "same_pod_copy": {
+      "files": {
+        "controls.json": {
+          "bytes": 17840,
+          "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+        },
+        "full12.input.json": {
+          "bytes": 59146,
+          "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+        },
+        "input_cases.json": {
+          "bytes": 22769,
+          "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+        }
+      },
+      "source": "/workspace/cocolon-node-local-v3-a22-payload-20261117"
+    },
+    "source_commit": "809e933265718bd08260ef0728d7761f7f206554",
+    "state": "FROZEN_PREPARED_NOT_APPROVED_NOT_SENT_NOT_EXECUTED",
+    "training": 0,
+    "upload_bytes": 3210593,
+    "upload_files": {
+      "current_api_sources.zip": {
+        "bytes": 2622855,
+        "sha256": "fef42e6de6fa2495be4323ff608bbe39dd014363285bbe4b8a914e7d333bf5ce"
+      },
+      "diagnostic_preparation.json": {
+        "bytes": 83860,
+        "sha256": "12eb3f1bf9f6365b19107a5337eb4648f25424f8bb3cfa0ad6b86f0c86c2e891"
+      },
+      "event_plan_execution.py": {
+        "bytes": 33724,
+        "sha256": "74728ad878566d6a89a1f5d09ecf8d307ae3684ae1159e57208a412d8607cae8"
+      },
+      "execution_scope.json": {
+        "bytes": 13430,
+        "sha256": "fe794470ef4fac258423ba5421b1e79a5f75243456ad5f5118674daf2ab9b1bd"
+      },
+      "full12_pre_acquisition.plan.json": {
+        "bytes": 246795,
+        "sha256": "8ee5ebcd4b4b8a94e3747e6452addd3a2a380630daaab55b7c4157d9c8dfe82c"
+      },
+      "source_manifest.json": {
+        "bytes": 209929,
+        "sha256": "8f1acb5b3e363d8cc72bcac8a826fa56e0a59c35b1ceb863059970f7d2811219"
+      }
+    }
+  },
+  "cpu_runner": {
+    "state": "CPU_SYNTHETIC_PREPARED_RUNNER_PROTOCOL_PASS_NOT_MODEL_QUALITY",
+    "runner_sha256": "74728ad878566d6a89a1f5d09ecf8d307ae3684ae1159e57208a412d8607cae8",
+    "preparation_sha256": "12eb3f1bf9f6365b19107a5337eb4648f25424f8bb3cfa0ad6b86f0c86c2e891",
+    "units": [
+      {
+        "unit": "A9",
+        "state": "COMPLETE_NOT_ADOPTED_PENDING_MEANING_REVIEW",
+        "loopback_http": 19,
+        "logical_calls": 5,
+        "phase_calls": 15,
+        "result_sha256": "0b0d8f7c52382c4e0f7e1b22cfb1ecd8bfa4524b49cfff3dafdb3e6b2f65452a"
+      },
+      {
+        "unit": "B9",
+        "state": "GENERATED",
+        "loopback_http": 43,
+        "logical_calls": 13,
+        "phase_calls": 39,
+        "result_sha256": "49baad0c1602f9797fbf8b6ffa2934de7b82cda2fcd03566cca5bce34ca8aa38"
+      }
+    ],
+    "model_calls": 0,
+    "Pod_calls": 0,
+    "SQL_calls": 0,
+    "training": 0,
+    "limitation": "Does not execute main provider-stop/restore on host. Existing real restoration path retained; preflight/acquire exercised against synthetic loopback only."
+  },
+  "full12_sql": {
+    "state": "SAVED_AND_SEPARATE_PROCESS_REREAD_TECHNICAL_ONLY",
+    "synthetic": true,
+    "model_calls": 0,
+    "hosted_database_calls": 0,
+    "replayed_native_responses": 39,
+    "logical_artifacts": 13,
+    "saved_final_artifacts": 1,
+    "source_private_projection_text_same": true,
+    "fresh_process_non_generating_HTTP": 200,
+    "final_receipt_sha256": "55729efa43831ace2e4f398cf5e6b4386f7d4f3d50cd66cd72fa716542cab6fa"
+  },
+  "two_record_sql": {
+    "synthetic": true,
+    "saved_final_artifacts": 1,
+    "fresh_process_read_scopes": 4,
+    "phase_raw_spelling_exact": true,
+    "existing_SQL_detail_same_id_duplicate": true
+  },
+  "normal": {
+    "checked_at_utc": "2026-11-17T08:23:57Z",
+    "render": [
+      {
+        "role": "API",
+        "id": "dep-dbsgn8t6e07s739qfk50",
+        "status": "live",
+        "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+      },
+      {
+        "role": "worker",
+        "id": "dep-dbsgnet6e07s739qg5a0",
+        "status": "live",
+        "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+      }
+    ],
+    "database": {
+      "project_id": "oeahmpmigszggnkyiivq",
+      "migration_count": 38,
+      "latest_version": "20261115011424"
+    },
+    "render_changes": 0,
+    "hosted_database_changes": 0,
+    "model_calls": 0
+  },
+  "product_quality": "UNASSESSED_NO_NEW_MODEL_OUTPUT_NO_ADOPTION",
+  "trained_this_work": 0,
+  "new_model_calls": 0,
+  "normal_mutations": 0,
+  "private_evidence": {
+    "library_file_id": "libfile_fde3_f-d885aa3a0ca48191882a090b6df12947_2f7470f963808191aaebf050935e72de",
+    "bundle": "Cocolon_CMEE_A13_Continuation_20261116.zip",
+    "prepared_path": "resume_v4_a23_b23_prepared_20261117",
+    "Git_backed_current_source_excluded": true
+  }
+}

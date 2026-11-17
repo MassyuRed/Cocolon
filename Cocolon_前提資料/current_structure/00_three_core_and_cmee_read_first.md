@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_three_core_and_cmee_current_structure_entry
 title: "三大中核構造とCMEE — Current Structure Read First"
-revision_date: "2026-10-22 JST"
+revision_date: "2026-11-17 JST"
 document_role: "CURRENT_STRUCTURE_ROUTING_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -10,6 +10,8 @@ operational_owner: "Karen"
 implementation_effect: 0
 automatic_progression: false
 ---
+
+> **11/17最新：既存作者を固定3段階のprivate候補v4へ改修し、API809e9332・519回帰・Analysis／Piece両CI、合成原本の隔離SQL保存／別process再読まで確認。実4B改善・通常採用は未確認。** PLANで全根拠と明示ID、NODESで固定unitの本文、RELATIONSで実node台帳から関係を生成。全3回で生成4096token／source220秒を共有し、三原本を無修補で保持。元120u／Emlis／Piece・公開watashi.map.v3は維持。次のA23/B23は新6file3,210,593byte・同Podcopy3file99,755byte、同重み・同5入力を最大19応答／復元込み30分、全5適合時だけ同12記録を最大43応答／復元込み17分、各一回。判定1file4KiB以下を条件付き追加。未承認・未送付・新GPU／学習／通常変更0。A22消費済み、元単位／通常反映／補助全体未完。詳細§9.121。
 
 > **全製品の必読現在地：[Cocolon 最新情報](../00_cocolon_current_product_and_state.md)。毎作業全文を読み、関連差分を同じ変更単位で置換更新する。** 本fileは詳細ownerへの構造案内。以下のQ1〜Q4等の日付付き経過は当時の記録で、全製品の現時点ではない。
 

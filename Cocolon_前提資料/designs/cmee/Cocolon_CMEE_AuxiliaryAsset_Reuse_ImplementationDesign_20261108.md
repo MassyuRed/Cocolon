@@ -1,4 +1,4 @@
-> **11/17最新：承認済みA22を一回実行、T01は例外を越えたが210秒でlength終了し不採用。元120uへ332.104秒で復元しました。** 新5file2,963,450byte送付・同Podcopy4file375,167byte、全9file照合。前対照2＋T01の3POST、T01はHTTP200／length・210.134736秒、後対照0。partialは12node／全10record参照・29edge＋30本目途中、overviewなし。n12の無関係な根拠混在、7組の同label全4種反復、端点IDと説明の不一致があり、時間延長だけの次試行は準備しない。PID14681／start96402996・別health200、元model/native・18008閉鎖・B19root不存在を確認。A22消費済み、学習／retry／B／SQL／通常変更0。次は既存作者の局所根拠→node構成と実端点→関係選択／文章化の改修。局所生成への分割案は最大61生成単位となり得る未実装案で、採用・新実行承認は0。元単位／通常反映／補助全体未完。詳細§9.120。
+> **11/17最新：既存作者を固定3段階のprivate候補v4へ改修し、API809e9332・519回帰・Analysis／Piece両CI、合成原本の隔離SQL保存／別process再読まで確認。実4B改善・通常採用は未確認。** PLANで全根拠と明示ID、NODESで固定unitの本文、RELATIONSで実node台帳から関係を生成。全3回で生成4096token／source220秒を共有し、三原本を無修補で保持。元120u／Emlis／Piece・公開watashi.map.v3は維持。次のA23/B23は新6file3,210,593byte・同Podcopy3file99,755byte、同重み・同5入力を最大19応答／復元込み30分、全5適合時だけ同12記録を最大43応答／復元込み17分、各一回。判定1file4KiB以下を条件付き追加。未承認・未送付・新GPU／学習／通常変更0。A22消費済み、元単位／通常反映／補助全体未完。詳細§9.121。
 
 
 
@@ -42,7 +42,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.120: A22consumed3POST,T01HTTP200/length210.134736s,12completeNodes/all10records,29completeEdges+partial30/nooverview. Unrelatedroots inn12,7pairs repeat4relationkinds/samelabel,endpointID/label mismatches; inadequate before deadline, no timeextension trial prepared. Restored332.103564s PID14681/ticks96402996/health200,originalmodel/native,18008closed/B19rootabsent. Fix existing author coherent localroot->node and actualendpointroot/ID->relationchoice/wording offline. Scopedrealization alternative canrequire61generationsequences; notimplemented/accepted/approved. A22notreusable; no training/retry/B/SQL/normal. A19other4/B19/full12/save/reread/normal/unitwholeunfinished."
+current_next: "Section9.121: fixed3phase opt-in v4 candidate809e9332,519CPUregressions,bothCI success,syntheticSQL/freshread only. FrozenA23B23 new6files3210593B/copy3files99755B; sameweights,Afive3phase19responses30min;onlyall5adequateBremainder12LEAF+MERGE39phase+4controls43responses17min;conditionalreview<=4096B. Notapproved/notsent/model0/training0/normal0. A22consumed;realall5/full12/same-rawsave/reread/normal/unitwholeunfinished."
 runtime_effect_of_this_document: 0
 ---
 
@@ -474,9 +474,9 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
 | AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.68／69を継承し、§9.71で複数のproperな本人訂正をPieceへ接続し通常反映。異なる原節の完全引用REVISE／WITHDRAW・ANSWER0の限定範囲。ANSWER併存・置換節再訂正・一般本文品質・model通常採用・本人一巡は残る |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
-| AR-06 | A22同T01は修正版で12node／全10recordへ到達し、旧容量行き止まりを通過。ただしHTTP200／length210.135秒、29edge＋30本目途中で未完成・不採用（§9.120） | 局所根拠に沿うnode構成、実端点ID／根拠に沿う関係選択と文章化が不適合。時間延長では直らず、次GPU未準備。全5／全12／同raw保存再読／通常反映未成立、full_source_semantic_coverage=false・月次当時版を保持 |
+| AR-06 | 既存作者v4の固定3phase候補API809e9332、519回帰・両CI・合成39phase同raw SQL保存／別process再読を確認（§9.121） | 新実4B品質は未確認。A23同5最大19応答30分／全5適合時だけB23同12最大43応答17分を具体準備・未承認。全5／全12／実同raw保存再読／通常反映・補助全体未成立 | 新承認待ち。実4B適合・通常反映は未完 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | A22後は元120uのPID14681／start96402996・別health200、元model/native・試行alias不存在・18008閉鎖・B19root不存在を確認 | 今回通常配置／SQL操作0。通常API／worker24bc228dは04:55UTC、DB38／20261115011424は05:25UTCの最終確認値。後続Render読取失敗とfresh未確認を保持。新候補の通常採用・画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | A22最後の復元PID14681／start96402996を保持。今回fresh読取で通常API／worker24bc228d・Live、DB38／20261115011424 | 通常配置／hosted SQL変更0。v4候補の通常採用・画像2残差・配布／本人利用・補助全体未完 | AR-06の実適合・同raw実保存再読後に通常反映を閉じる |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -2084,6 +2084,41 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="analysis-node-local-v4-three-phase-prepared-20261117"></a>
+## 9.121 11/17 — A22の誤結合に対する既存作者の三段階候補と、同5／全12の実行準備
+
+§9.120のA22無修補partial、A19他4件の時点・他node借用、全体設計／全file地図・最新weekly・一般rule／既存incidentを再確認した。単純な時間延長では、無関係な根拠の混在、IDと線の内容不一致、同labelの四分類反復を直せない。既存semantic_admission／native作者／intent_compiler／model source内で、private候補semantic_map.node_local.v4を実装した。61回のnode／edge別生成案は採用せず、固定3回の**全体生成**である。nodeごとのKV文脈隔離や意味借用の機械的排除を成立済みとしない。
+
+| 段階 | 作者の入力と確定内容 |
+|---|---|
+| PLAN | 元fields全文・既存source_duties・有効訂正・役割辞書から、明示n1…とunit根拠を先に配置。複数record根拠・訂正cohort・本人説明全文を保持 |
+| NODES | 同じ原文文脈と確定planで、固定nN/uNへfact／資格／unknown／title／meaningを生成。根拠・unit数の再選択はしない |
+| RELATIONS | 原文と、**実際に完成した**ID→根拠→本文の台帳から、from/to→label→relation_kindとoverviewを生成。関係なしの[]を許し、四分類を埋めるための反復を指示しない |
+
+三つのraw／finish／messages hashと実native completion_tokensをprivate phase_artifactへ残し、既存v3形式へ構造だけを正確に組立て、同じ唯一realizerから公開watashi.map.v3を得る。本文／引用／ID／線の付替え、未完JSONを閉じる修補はしない。既存本人更新・Emlis source ID・訂正日時・cohort／提示fragment／source guard・source dutiesのUNASSESSED・月次当時版を維持する。共有設定をv4 aliasへ切替えてもIFは元120uへ写像する。旧v1／v2／v3 messagesの既定bytesは独立採取hashとの一致を確認した。
+
+生成上限は**全3回の実出力合計4096token**で、nativeの実len(tokens)を差し引いた残量を次要求へ渡す。各回4096の3倍枠ではない。sourceは全3回共通の絶対220秒、既存外側225秒、history pipeline840秒を維持し、途中失敗／length／取消／期限／量使切り後は後続生成しない。3prefillの実費・時間と意味品質は未検証で、従来1回と同じ計算量とは扱わない。
+
+候補source [809e933265718bd08260ef0728d7761f7f206554](https://github.com/MassyuRed/mashos-api/commit/809e933265718bd08260ef0728d7761f7f206554)／tree0b820fc1は製品5file＋test2file。remote全文・Git blob・変更path7件・親d610facbを確認した。関連13suite519件成功／FAIL0／SKIP0。[Analysis CI44042667381](https://github.com/MassyuRed/mashos-api/actions/runs/44042667381)／[Piece CI44042667399](https://github.com/MassyuRed/mashos-api/actions/runs/44042667399)は同commit・attempt1で成功。新reader／checker／controller／public API／DB型／RN型／依存は増やしていない。
+
+固定revision851bf6eの3 tokenizer fileとtransformers5.19.0をCPUで使用し、A22同T01の同messages4703tokenを実GPU測定と一致させた。新5＋12LEAF＋MERGEの合成完成例を3phaseずつ測定し、既存32768context／message byte枠内だった。ただし実PLAN／本文で後段token量は変わる。実行時はNODES／RELATIONSの実材料を毎POST前に再測定し、原文を切捨てて枠へ入れない。モデル重みload・新推論・新学習0。
+
+最終runnerを合成loopbackでA19POST／B43POST、論理5／13・native15／39に分けて実行した。Bはexact型の既存model sourceを使用し、誤ってlegacy60秒へ入らない。development指定は隔離driverだけで元provider／復元環境へ入れない。最初のCPU実装では旧件数条件・環境前提・subclassによる誤timeoutを独立reviewで発見し、修正後の最終版を再実行した。無修補39phase HTTP原本→同13aggregate→同UUID／public／本文／privateをreplay照合し、既存SQLへ一回保存・dump・別processの非生成service／HTTP200再読を確認した。別2record合成でもUnicode escape／空白の綴りを持つ三rawをSQL後に完全保持し、明示月を含む4scopeを再読した。いずれもCPU_SYNTHETICであり、実4Bの全12適合・商品品質・通常DB保存を増やさない。旧SQLのdetail既定limitではUNION ALLによる同ID重複を観測し、内容一致とは別の既存制約として保持した。
+
+### 次のA23/B23の具体scope（未承認・未送付・未実行）
+
+同Pod xrplcoeb5ec77fへ新6file **3,210,593byte**を送付し、A22 payloadから不変controls／5input／full12.inputの3file **99,755byte**をPod内copyする。scope SHA fe794470ef4fac258423ba5421b1e79a5f75243456ad5f5118674daf2ab9b1bd、driver74728ad8、source247fileのZIP fef42e6d。元入力／guard／凍結as_of・候補weights5a25／config45c0・元120uを保持し、追加学習／retry／新weights／SQL自動保存0。
+
+- A23：同5入力×3phase＋前後4対照、**最大19応答・復元込み1800秒・一回**。
+- 全5の実全原文／三raw／全項目・線・概要／図／本文がroot＋独立全文確認で適切な場合だけ、既存形式の判定1file **4KiB以下**を追加しB23を手動起動。旧raw／消費済みA22承認を転用しない。
+- B23：同12記録→現plannerの12LEAF＋MERGE×3phase＋前後4対照、**最大43応答・復元込み1020秒・一回**。作業900秒にはpreflight／起動／対照も含み、内部840秒が丸ごと別枠で保証されるものではない。上限まで完走する保証はない。
+
+PID14681／start96402996はA22最後の復元確認値で、新しいPod現況確認済みとは扱わない。停止前にlive cwd・元native／両重み・既存helper／kernelを確認し、停止直前にlive /procのticks／argv／envを再照合し、不一致ならモデル／提供停止前に止める。既存鍵・全起動環境は同Pod内の認証／復元だけに使い、外部保存しない。finally復元と別health確認を継承する。
+
+通常Render API／workerは今回fresh読取でともに24bc228d・Live、DBは38migration／最新20261115011424。今回の通常配置／hosted SQL変更0。適切な全5→全12の**新実4B結果**→同じ最終rawの一回SQL保存→別process非生成再読→native alias／map-IF境界／自然-PieceとAPI-workerの整合した通常反映を閉じる条件は未成立。build／TestFlight／本人実機は保留。元単位／補助全体／正式受入れ未完を維持する。
+
+STRUCTURE_MAP_DELTA：既存5製品owner内のopt-in private3phase経路をcurrent03／04・全体地図へ記載。公開owner／型／source権限は不変。primary TECHNICAL_CREDITのみで、実4B品質creditは0。
+
 <a id="xrpl-a22-actual-author-coherence-blocker-20261117"></a>
 ## 9.120 11/17 — A22は容量境界を通過、関係反復・端点不一致とlengthで不採用
 
@@ -2589,9 +2624,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・A22不採用と復元、作者の構成／関係生成が残件）
+### 11.2 現在の進行欄（11/17・固定3phase候補実装、実4B比較は新承認待ち）
 
-主枠は第11回§5、現在は§9.120。A22は一回消費済み。修正版で旧容量境界を通過したが、同T01は210秒length・未完成となり、既出node／edgeにも意味不適合がある。332.104秒で元120uへ復元。次は時間延長や表面補修ではなく、既存作者の局所根拠→node構成と実端点→関係選択／文章化の改修。追加GPU／学習・局所生成分割案の採用は0。元単位／通常反映／補助全体未完。
+主枠は第11回§5、現在は§9.121。A22不採用と復元を継承し、作者をPLAN／NODES／RELATIONSへ分けたopt-in候補を実装した。API809e9332・519回帰・両CI・合成原本の隔離SQL保存再読は技術確認済み。実4B意味改善／全5・全12適合／実同raw保存再読／通常反映は未完。新6file3,210,593byteのA23/B23は未承認・未送付。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2600,15 +2635,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | A22同T01は修正版で12node／全10recordへ到達し、旧容量行き止まりを通過。ただしHTTP200／length210.135秒、29edge＋30本目途中で未完成・不採用（§9.120） | 局所根拠に沿うnode構成、実端点ID／根拠に沿う関係選択と文章化が不適合。時間延長では直らず、次GPU未準備。全5／全12／同raw保存再読／通常反映未成立、full_source_semantic_coverage=false・月次当時版を保持 |
+| AR-06 | 既存作者v4の固定3phase候補API809e9332、519回帰・両CI・合成39phase同raw SQL保存／別process再読を確認（§9.121） | 新実4B品質は未確認。A23同5最大19応答30分／全5適合時だけB23同12最大43応答17分を具体準備・未承認。全5／全12／実同raw保存再読／通常反映・補助全体未成立 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | A22後は元120uのPID14681／start96402996・別health200、元model/native・試行alias不存在・18008閉鎖・B19root不存在を確認 | 今回通常配置／SQL操作0。通常API／worker24bc228dは04:55UTC、DB38／20261115011424は05:25UTCの最終確認値。後続Render読取失敗とfresh未確認を保持。新候補の通常採用・画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | A22最後の復元PID14681／start96402996を保持。今回fresh読取で通常API／worker24bc228d・Live、DB38／20261115011424 | 通常配置／hosted SQL変更0。v4候補の通常採用・画像2残差・配布／本人利用・補助全体未完 |
 
-最新実績と次は§9.120。A22のscopeeebf53ae一回は消費済み、未使用2応答枠は再利用しない。次GPUのscope・packetは未準備。作者の根拠／時点・実IDに沿う構成と関係実現が先であり、最大61生成単位を要し得る分割案を現一回／4096token／210秒と同等には扱わない。A19他4件、全5／全12適合、同raw保存再読・通常反映は継続して未成立。
+最新実績と次は§9.121。A22の一回と残枠を再利用しない。新候補は固定3回の全体生成で、61回のnode別隔離案とは異なる。全3回4096token／220秒を共有し、同5最大19応答30分、全5独立全文適合時だけ同12最大43応答17分・判定4KiB以下追加を、具体的新承認後に各一回だけ実行する。実全5／全12・同raw保存再読・通常反映を未完として保持する。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.120のA22実原本から、既存作者のnode構成・実端点に沿う関係選択／文章化へ戻る。** A22を再実行・時間延長せず、partial JSONを閉じたり既出の線やIDを書換えたりしない。旧容量行き止まりの修復だけは実境界通過として保持する。局所根拠による作文分割案は未実装・効果未確認、最大61生成単位の費用／時間を隠して一回承認へ含めない。新候補の実装・CPU確認と具体的実行材料を先に揃え、新しいmodel実行は別の具体承認を得る。全5／全12の新適合結果→同最終raw一回保存／別process非生成再読→通常DB／API反映の未完を保持する。
+**11/17・現在の再開先：§9.121の固定3phase候補と確定A23/B23 packet。** 実装・CPU・両CI・合成SQL／別process非生成再読は確認済み。新model実行承認を受領した後、Pod元状態と全9fileを停止前照合して同5を一回実行し、全原文・三raw・項目／線／概要・図／本文を独立照合する。全5適合時だけ判定4KiB以下を追加し同12のB23を一回。A22の再実行・期限延長・未完修補／旧rawの再束縛はしない。実結果に不適合が残れば通常採用へ進めない。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

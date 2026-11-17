@@ -1,4 +1,4 @@
-> **11/17最新：承認済みA22を一回実行、T01は例外を越えたが210秒でlength終了し不採用。元120uへ332.104秒で復元しました。** 新5file2,963,450byte送付・同Podcopy4file375,167byte、全9file照合。前対照2＋T01の3POST、T01はHTTP200／length・210.134736秒、後対照0。partialは12node／全10record参照・29edge＋30本目途中、overviewなし。n12の無関係な根拠混在、7組の同label全4種反復、端点IDと説明の不一致があり、時間延長だけの次試行は準備しない。PID14681／start96402996・別health200、元model/native・18008閉鎖・B19root不存在を確認。A22消費済み、学習／retry／B／SQL／通常変更0。次は既存作者の局所根拠→node構成と実端点→関係選択／文章化の改修。局所生成への分割案は最大61生成単位となり得る未実装案で、採用・新実行承認は0。元単位／通常反映／補助全体未完。詳細§9.120。
+> **11/17最新：既存作者を固定3段階のprivate候補v4へ改修し、API809e9332・519回帰・Analysis／Piece両CI、合成原本の隔離SQL保存／別process再読まで確認。実4B改善・通常採用は未確認。** PLANで全根拠と明示ID、NODESで固定unitの本文、RELATIONSで実node台帳から関係を生成。全3回で生成4096token／source220秒を共有し、三原本を無修補で保持。元120u／Emlis／Piece・公開watashi.map.v3は維持。次のA23/B23は新6file3,210,593byte・同Podcopy3file99,755byte、同重み・同5入力を最大19応答／復元込み30分、全5適合時だけ同12記録を最大43応答／復元込み17分、各一回。判定1file4KiB以下を条件付き追加。未承認・未送付・新GPU／学習／通常変更0。A22消費済み、元単位／通常反映／補助全体未完。詳細§9.121。
 
 
 
@@ -224,7 +224,7 @@
 
 ## 2. 商品全体と、取り落としてはいけない決定
 
-**現在の主線は補助経路活用全体の完了。** 本人更新・意味／内容選択の能力を三中核へ適用し、通常利用まで同じ単位で閉じる。現行計画は第11回§5と本資料§8。補助設計の§9.67は標準自動3案の限定接続完了、現在の実装・残件は同書current_next／§9.83（先行通常反映は§9.72）へ戻る。以下の日付付き方針のうち、現在と異なる作業順は履歴として扱う。
+**現在の主線は補助経路活用全体の完了。** 本人更新・意味／内容選択の能力を三中核へ適用し、通常利用まで同じ単位で閉じる。現行計画は第11回§5と本資料§8。補助設計の§9.67は標準自動3案の限定接続完了、現在の実装・残件は同書current_next／§9.121（先行通常反映は§9.72）へ戻る。以下の日付付き方針のうち、現在と異なる作業順は履歴として扱う。
 
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
@@ -368,7 +368,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-**当面の主枠は補助経路活用全体の完了：[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)、補助設計の現行作業・残件は[current_next／§9.83](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-source-only-merge-20261115)。§9.54は全体方針の決定根拠として保持する。** 公開日未定・12/6提出可能候補は維持する。対象週11/14〜11/21は日別割当なし、以下の四作業と最小共通枠へ集約。旧W1〜15は改訂前commitの履歴として保持し、個別の失敗文を次々に修復する進行を全体の再開先へ戻さない。
+**当面の主枠は補助経路活用全体の完了：[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)、補助設計の現行作業・残件は[current_next／§9.121](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-node-local-v4-three-phase-prepared-20261117)。§9.54は全体方針の決定根拠として保持する。** 公開日未定・12/6提出可能候補は維持する。対象週11/14〜11/21は日別割当なし、以下の四作業と最小共通枠へ集約。旧W1〜15は改訂前commitの履歴として保持し、個別の失敗文を次々に修復する進行を全体の再開先へ戻さない。
 
 | 優先・領域 | 対象週に閉じる工事と、Cocolon全体への接続 |
 |---|---|
@@ -388,7 +388,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | [第11回・11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)は終了。§9にMashの終了明示・継続指示、§5に補助全体完了主枠の計画、§8.5に指摘と意見を記録。補助設計current_next／§9.83を現在の実装・残件へ、§9.54を全体方針の根拠へ使う。実績・全残件・同尺度61.625％・公開日未定／12/6候補は維持。会議終了を商品完成や実環境操作済みへ変換しない。実結果は各weekly・trialとAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る |
+| 最新判断・配置記録 | [第11回・11/14〜11/21](weekly_reviews/Cocolon_Weekly_Review_20261114.md)は終了。§9にMashの終了明示・継続指示、§5に補助全体完了主枠の計画、§8.5に指摘と意見を記録。補助設計current_next／§9.121を現在の実装・残件へ、§9.54を全体方針の根拠へ使う。実績・全残件・同尺度61.625％・公開日未定／12/6候補は維持。会議終了を商品完成や実環境操作済みへ変換しない。実結果は各weekly・trialとAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
