@@ -11,7 +11,7 @@ implementation_effect: 0
 automatic_progression: false
 ---
 
-> **11/17最新：承認済みA23は全5件・固定3phase計15応答＋前後4対照の19応答を完了したが、全5件の独立全文照合が不適合で通常不採用。** 全HTTP200／stop、図・本文5件まで到達。固定根拠とNODES本文のID対応ずれが全件に残り、公開のカテゴリ・感情・役割と本文も誤結合した。原引用の破損や表示だけの誤りではない。復元込み696.135066秒、元120u PID19109／start97486258・別health200、候補18008停止を確認。原本13file210549byteを回収照合。B23は全5適合条件不成立で未実行、学習／retry／SQL保存／通常変更0。A23の一回は消費済み、B23残枠の転用なし。通常API／worker24bc228d・DB20261115011424、build／TestFlight／本人実機保留、元単位／補助全体未完。詳細§9.122。
+> **11/17最新候補：A23全5件の根拠・本文対応ずれに対し、既存三段階作者へ固定根拠再掲の別opt-in profileを実装し、関連727件のCPU検証に成功。** `semantic_map.node_local.v4.bound_roots.v1`はNODESの各unit本文直前へPLANの原引用・欄番号を固定再掲し、nativeと受信側で完全一致を検査する。旧v4の全5原本・messages／request refは不変。18合成容量例は既存byte／32768token枠内だが、新実4Bの意味改善は未確認。A23は全5不適合・消費済み、B23条件不成立・未実行を維持。候補e9046deeのremote8path一致を確認。両CIは同候補・attempt1で成功。A24/B24は新6file3,214,698byte＋同Pod copy3file99,755byteを確定し未承認、同原12記録の合成39phase／13aggregateを一回SQL保存し、別process非生成再読も成功。新送付／GPU／追加学習／通常変更0。通常API／worker24bc228d・DB20261115011424、build／TestFlight／本人実機保留、元単位／補助全体未完。詳細§9.123、A23実績§9.122。
 
 > **全製品の必読現在地：[Cocolon 最新情報](../00_cocolon_current_product_and_state.md)。毎作業全文を読み、関連差分を同じ変更単位で置換更新する。** 本fileは詳細ownerへの構造案内。以下のQ1〜Q4等の日付付き経過は当時の記録で、全製品の現時点ではない。
 
