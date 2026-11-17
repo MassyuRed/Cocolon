@@ -1,0 +1,20 @@
+{
+  "bound_material_sha256": "59978e6c05ba3ef24a6e8eb990b1466e2bcb98d0d84d9a6a90fb4de30656a8d9",
+  "fit_process_seconds": 780,
+  "model_calls": 0,
+  "prior_peak_allocated_gib": 13.054522514343262,
+  "prior_peak_reserved_gib": 15.80859375,
+  "ratios_independently_recomputed": true,
+  "restored_seconds": 1080,
+  "reviewer": "/root/execution_audit",
+  "rough_fit_seconds": {
+    "squared_sequence_lengths": 483.15381324353365,
+    "supervised_target_tokens": 410.9815352478363,
+    "total_sequence_tokens": 407.5473748574036
+  },
+  "state": "REASONABLE_BOUNDED_ATTEMPT_NOT_MEMORY_OR_COMPLETION_GUARANTEE",
+  "strict_failure_stop_and_restore": true,
+  "token_capacity_sha256": "43e6a910d76eec51eb9845b4e58f18948e44f081fb0f5e7313ee1c64853a82a5",
+  "unresolved_findings": [],
+  "work_seconds": 900
+}
