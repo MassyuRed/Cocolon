@@ -1,0 +1,21 @@
+{
+  "observed_at_utc": "2026-11-17T03:59:59.815Z",
+  "api": {
+    "id": "dep-dbsgn8t6e07s739qfk50",
+    "status": "live",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+  },
+  "worker": {
+    "id": "dep-dbsgnet6e07s739qg5a0",
+    "status": "live",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+  },
+  "database": {
+    "migrations": 38,
+    "latest": {
+      "version": "20261115011424",
+      "name": "piece_answer_and_interpretation_corrections"
+    }
+  },
+  "mutations": 0
+}

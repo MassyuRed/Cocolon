@@ -1,0 +1,70 @@
+{
+  "B19_unmet": true,
+  "SQL": 0,
+  "candidate_adapter": {
+    "config_sha256": "45c08258bc83b69aa5f6a9bad852e60db43b1d788c61c71f9480481081b64b2e",
+    "path": "/workspace/cocolon-node-local-v3-fit19-20261117-once/fit/adapter",
+    "updates": 36,
+    "weights_sha256": "5a25a1429a823bfac55ada102384a27b869b72503283e26fe87dee012706af53"
+  },
+  "case_ids": [
+    "T01_manual10"
+  ],
+  "maximum_responses": 5,
+  "model_quality_acceptance": false,
+  "native_change": "Enable existing safe type/function/line failure locator for bounded requests; original generation and HTTP outcomes unchanged.",
+  "native_sha256": "cdf76dd2bab1523d6532c304b67eb2e01776837c8bb0542d43926eab9be71a09",
+  "new_payload_root": "/workspace/cocolon-node-local-v3-d20-payload-20261117",
+  "new_training": 0,
+  "normal_changes": 0,
+  "pod": "xrplcoeb5ec77f",
+  "prior_A19_unit_closed": true,
+  "restore_inclusive_seconds": 600,
+  "same_pod_copy": {
+    "controls.json": {
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    "current_api_sources.zip": {
+      "bytes": 2592703,
+      "sha256": "2b660e2541c6b895e920051b0eb48ab1bbfc2e5a2830308a2b42a83a3ddb180e"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 105208,
+      "sha256": "19ba5f15daf329fcbdc0022e46b9894b478727dc48cb3c0792c2bc183be1ad5c"
+    },
+    "full12.input.json": {
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 275412,
+      "sha256": "8b4be44c7d9ca2f60d4e1ed829d3652658a7bdeb0fcaccf1dc6d95e16f68ac24"
+    },
+    "input_cases.json": {
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    "source_manifest.json": {
+      "bytes": 191353,
+      "sha256": "d357534cc9d1f3b3899cb2fc45d829016abf9eba18efa13e5f0e103bc1067efa"
+    }
+  },
+  "same_pod_copy_from": "/workspace/cocolon-node-local-v3-payload-a19-20261117",
+  "scope_sha256": "6c53aefab04d56b076d1ff132c09f9ab30abc7950e82766754ee523e2bee10af",
+  "source_commit": "5af8625599aa80f90c983cdec34144e88a133d1e",
+  "source_native_sha256": "d502b3c547e55a959a6dfe3081e24b4bb2fd5d517b9deff64d0f6ddc15657355",
+  "state": "D20_PREPARED_NOT_SENT_NOT_EXECUTED_SPECIFIC_APPROVAL_PENDING",
+  "upload_bytes": 47841,
+  "upload_files": 2,
+  "upload_manifest": {
+    "diagnose_t01_generation_once.py": {
+      "bytes": 35674,
+      "sha256": "6dfca45fe3b0dba325ab56863836ea0ec8c326133b10109fb4a301c1010506d3"
+    },
+    "diagnostic_scope.json": {
+      "bytes": 12167,
+      "sha256": "6c53aefab04d56b076d1ff132c09f9ab30abc7950e82766754ee523e2bee10af"
+    }
+  }
+}
