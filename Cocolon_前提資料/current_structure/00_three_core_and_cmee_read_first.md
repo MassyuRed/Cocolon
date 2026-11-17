@@ -11,7 +11,7 @@ implementation_effect: 0
 automatic_progression: false
 ---
 
-> **11/17最新候補：A23全5件の根拠・本文対応ずれに対し、既存三段階作者へ固定根拠再掲の別opt-in profileを実装し、関連727件のCPU検証に成功。** `semantic_map.node_local.v4.bound_roots.v1`はNODESの各unit本文直前へPLANの原引用・欄番号を固定再掲し、nativeと受信側で完全一致を検査する。旧v4の全5原本・messages／request refは不変。18合成容量例は既存byte／32768token枠内だが、新実4Bの意味改善は未確認。A23は全5不適合・消費済み、B23条件不成立・未実行を維持。候補e9046deeのremote8path一致を確認。両CIは同候補・attempt1で成功。A24/B24は新6file3,214,698byte＋同Pod copy3file99,755byteを確定し未承認、同原12記録の合成39phase／13aggregateを一回SQL保存し、別process非生成再読も成功。新送付／GPU／追加学習／通常変更0。通常API／worker24bc228d・DB20261115011424、build／TestFlight／本人実機保留、元単位／補助全体未完。詳細§9.123、A23実績§9.122。
+> **11/17最新候補：A24の対応保持と派生表現の残差を引き継ぎ、既存三段階作者の概要refs先決めv2を候補e58c1e49へ反映。旧18架空教師を54phaseへ変換し、全文独立reviewを完了。** 関連738固有test成功。Analysis CI44072901877／Piece CI44072901970はともに同e58・attempt1で成功をfresh再取得で確認。FIT25はBF16のfresh LoRA・54更新一回／復元込み18分、その完了・保存reload・元提供復元後のA25は同5入力・最大19応答／30分、全5独立全文適合時だけB25は同12記録・最大43応答／17分を提案中。教材と概要順序の混合候補で効果分離不能、旧教師の再要約／表示重複・最大4記録等の限界は残る。共通packetは新17file4,818,633byte＋同Pod copy4file118,409byte（原3file99,755＋既存generic18,654）で凍結。学習後は同Pod内で派生2file計128KiB以下・条件成立時判定1file4KiB以下だけを追加し、generic copy不在時の追加uploadへ切替えない。sealed CPUでFIT54行・合成A19／B43を確認し、同原12の合成39phase／13aggregateを一回SQL保存・別process非生成再読まで成功、未承認／未送付／未学習／未実行／通常未採用。A24は4件意味不適合＋応募取消表示修復要・消費済み、B24条件不成立。実全12・同raw保存再読・通常反映・元単位／補助全体は未完、通常24bc228d／DB20261115011424・配布保留を維持。現候補§9.125、A24実績§9.124。
 
 > **全製品の必読現在地：[Cocolon 最新情報](../00_cocolon_current_product_and_state.md)。毎作業全文を読み、関連差分を同じ変更単位で置換更新する。** 本fileは詳細ownerへの構造案内。以下のQ1〜Q4等の日付付き経過は当時の記録で、全製品の現時点ではない。
 

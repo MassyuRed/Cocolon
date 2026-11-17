@@ -1,6 +1,16 @@
-> **11/17最新候補：A23全5件の根拠・本文対応ずれに対し、既存三段階作者へ固定根拠再掲の別opt-in profileを実装し、関連727件のCPU検証に成功。** `semantic_map.node_local.v4.bound_roots.v1`はNODESの各unit本文直前へPLANの原引用・欄番号を固定再掲し、nativeと受信側で完全一致を検査する。旧v4の全5原本・messages／request refは不変。18合成容量例は既存byte／32768token枠内だが、新実4Bの意味改善は未確認。A23は全5不適合・消費済み、B23条件不成立・未実行を維持。候補e9046deeのremote8path一致を確認。両CIは同候補・attempt1で成功。A24/B24は新6file3,214,698byte＋同Pod copy3file99,755byteを確定し未承認、同原12記録の合成39phase／13aggregateを一回SQL保存し、別process非生成再読も成功。新送付／GPU／追加学習／通常変更0。通常API／worker24bc228d・DB20261115011424、build／TestFlight／本人実機保留、元単位／補助全体未完。詳細§9.123、A23実績§9.122。
+> **11/17最新候補：A24の対応保持と派生表現の残差を引き継ぎ、既存三段階作者の概要refs先決めv2を候補e58c1e49へ反映。旧18架空教師を54phaseへ変換し、全文独立reviewを完了。** 関連738固有test成功。Analysis CI44072901877／Piece CI44072901970はともに同e58・attempt1で成功をfresh再取得で確認。FIT25はBF16のfresh LoRA・54更新一回／復元込み18分、その完了・保存reload・元提供復元後のA25は同5入力・最大19応答／30分、全5独立全文適合時だけB25は同12記録・最大43応答／17分を提案中。教材と概要順序の混合候補で効果分離不能、旧教師の再要約／表示重複・最大4記録等の限界は残る。共通packetは新17file4,818,633byte＋同Pod copy4file118,409byte（原3file99,755＋既存generic18,654）で凍結。学習後は同Pod内で派生2file計128KiB以下・条件成立時判定1file4KiB以下だけを追加し、generic copy不在時の追加uploadへ切替えない。sealed CPUでFIT54行・合成A19／B43を確認し、同原12の合成39phase／13aggregateを一回SQL保存・別process非生成再読まで成功、未承認／未送付／未学習／未実行／通常未採用。A24は4件意味不適合＋応募取消表示修復要・消費済み、B24条件不成立。実全12・同raw保存再読・通常反映・元単位／補助全体は未完、通常24bc228d／DB20261115011424・配布保留を維持。現候補§9.125、A24実績§9.124。
 
-> private作者bound_roots別opt-in候補の現行file対応は [分析の構造地図](current_structure/03_analysis_current_structure.md)、[CMEEの構造地図](current_structure/04_cmee_current_structure.md)、[補助設計§9.123](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-node-local-bound-roots-candidate-20261117)へ戻ります。製品ownerは既存5file内、公開watashi.map.v3・保存型は同じで、実4B品質と通常反映は未完です。
+> private作者bound_roots.v2の現行file対応は [分析の構造地図](current_structure/03_analysis_current_structure.md)、[CMEEの構造地図](current_structure/04_cmee_current_structure.md)、[補助設計§9.125](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-node-local-bound-roots-v2-fit25-prepared-20261117)へ戻ります。概要refs先決め候補e58c1e49・738固有test成功、54phase教材の独立review完了。FIT25／A25／条件B25は未承認・未学習／未実行／通常未採用。A24実績は§9.124、既存v1実装履歴は§9.123に保持し、公開watashi.map.v3・保存型／source権利は同じです。
+
+### 11/17差分 — v2候補の追加検査file
+
+候補e58c1e49は新規1path・既存6path変更で、製品5ownerは既存file内、製品source packageは247fileのままです。今回新しい製品fileはありません。新規検査fileをこの全ファイル地図へ明示し、既存7月ZIPのfile_countsや当時の01A／01B／01C本文は別基準の履歴として保持します。
+
+| path | 現在の責務・接続 |
+|---|---|
+| `mashos-api/ai/tests/test_analysis_bound_roots_v2_selection.py` | 新規の候補限定検査。v2だけの概要node_refs→title順、旧v4／v1の順序・原messages互換、固定根拠と別profile／outer・alias境界を検証。738固有件の一部で、実4B意味合格の証拠ではない。 |
+| `mashos-api/.github/workflows/analysis-observed-content.yml` | 既存CI収集へ上記testを追加。新しいruntime ownerではない。既存製品5fileとの関係・未採用境界はcurrent03／04と補助設計§9.125へ戻る。 |
+
 
 > **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
 
