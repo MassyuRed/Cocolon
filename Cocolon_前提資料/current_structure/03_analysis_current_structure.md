@@ -1,3 +1,17 @@
+### 11/18 — 分析の開発用作者 occurrence.v1
+
+`13e35eff3708c56b8629d1e690e82170ae919177` は `semantic_map.node_local.v4.occurrence.v1` を開発用の明示選択肢に加えた。元の記録日時を原入力欄に添え、別日に書かれた同じ出来事と、同じ対象について別の日に行ったことを読み分ける材料を渡す。本人の訂正・記録・出来事の日時は別に扱う。生成中には、一つのunitの「不明」に同じ欄の同じ引用を重ねることを禁じる。FIT28／A28は旧 `bound_roots.v2` の実績で、この追加候補の実生成・通常採用は未確認。
+
+| 既存の担当ファイル | 開発候補の接続 |
+|---|---|
+| `ai/services/ai_inference/analysis_model_source.py` | exact alias `cocolon-qwen3.5-4b-analysis-node-local-v4-occurrence-v1` から既存のPLAN、NODES、RELATIONSの3段階を選ぶ |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 新profileで元の各記録欄へ記録日時を添える。関係線には選んだ両端、概要には選んだ項目を根拠に書くよう三段階の材料・作例を構成し、既存の検査で受領する |
+| `ai/tools/serve_emlis_natural_reply.py` | profileとaliasを照合し、新profileの生成文法で同一引用の重複を防ぐ |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 新しいprivate outerの三段階rawを既存の投影・表示へつなぐ |
+| `ai/services/ai_inference/analysis_if_model_source.py` | map候補を明示してもIFは既存の120uを使う |
+
+既存の `ai/tests/test_analysis_bound_roots_v2_selection.py` に候補の経路と旧版互換の検査を追記した。公開する `watashi.map.v3`、保存、本人の権利とRN表示の担当は既存経路を使う。評価の結果とCPU確認の範囲は[補助設計§9.131](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)に記録した。
+
 > **11/18 JST・FIT26／A26の実行と全文照合：両方の一回枠を完了し、元提供へ正常復元しました。意味は全5件不適合で、B26の条件は不成立です。** 同Podへ承認済み新12file 2,087,291byteを送付し、既存9file 3,286,728byteをPod内copy、全21のbyte/hashを照合。FIT26は66更新・4損失計測・112個F32tensorの保存fresh reload一致、復元込み412.121秒。A26は同5入力・15phase＋前後4対照の19応答を完了し、対照の全body一致、復元込み808.570秒。rootと独立担当が19記録／38欄・全15raw・公開図／全文を照合し、読書会の初回未送信の欠落、照明の購入／留保／条件差の欠落、修理の旧未確認の現在化、取消理由の強化、T01概要の恋人非面会への反転を確認。T01の10独立nodeと取消後の再応募意向なし等の改善は保持し、全5適合や一般品質へ換算しません。新重み53ab4293は不採用、B26未起動・同実raw SQL保存／通常API・worker変更0。追加学習を既定とせず、既存作者の選定・時点・派生表現の一体修復を具体化する段階です。元単位／補助全体・通常反映は未完、build／TestFlight／本人実機保留。詳細は補助設計§9.128、承認前の準備記録は§9.127。
 
 > **11/17最新実績：承認済みFIT25は54更新・4回の損失計測、112 tensorの保存／fresh reload一致、元提供復元を完了。続くA25も全5件・三段階15phase＋前後4対照の19応答を一回で完了しましたが、rootの全文照合で全5件が意味不適合となり、通常不採用です。** 独立担当者の全5件の全文照合も完了し、全5件不適合で一致しました。FIT25は復元込み592.445476秒、新weights5b36fe0a／configb1f2d89b。A25は復元込み844.331987秒、元120uのPID36492／start99185008・別health200、候補18008閉鎖・B25root不存在を確認。B25は全5適合条件不成立で起動0、実全12・実rawのSQL保存／非生成再読・通常反映0です。新17file4,818,633byte送付＋同Pod copy4file118,409byteと派生scope7fe32f73を原本へ保持し、FIT25／A25の一回は消費済み、未使用B25を別試行へ流用しません。候補APIe58c1e49・準備／既存CI／合成SQLの記録は§9.125、今回実績と残件は§9.126。通常24bc228d／DB20261115011424は前回確認記録の継承で、今回fresh Live照会ではありません。元単位／補助全体未完、build／TestFlight／本人実機保留を維持します。
