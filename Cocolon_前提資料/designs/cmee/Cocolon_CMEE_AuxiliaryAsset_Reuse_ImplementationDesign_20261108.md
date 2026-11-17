@@ -1,4 +1,4 @@
-> **11/17最新：既存16教師を現node-local.v3で再著述し、全原文・図・本文の独立照合と構文検証を完了。新FIT18／条件付きA18・B18は具体準備済み、未送付・未実行です。** 原33記録66欄を保持し、評価5入力／全12記録を教師へ混ぜず、全66欄の根拠と現v3形式を確認。最大系列7280／教師1210tokenで切詰め0。既存学習方式32更新・復元込み18分一回、新候補の同5件最大9応答／30分と全5件適切時だけ全12最大17応答／24分の範囲を用意。確定13file721,009byteの既存Pod送付・新学習はA17の承認を流用せず、具体承認待ち。A17不採用・元提供PID6855復元を継承し、healthz200をread-only確認。実model品質改善／SQL保存再読／通常反映は未成立、本単位・補助全体未完。配布保留。詳細は補助設計§9.113。
+> **11/17最新：承認済みFIT18は32更新・保存再読込まで完了。A18は読書会の未確認断定と照明の誤時点／重複で不採用、元提供へ復元済みです。** 確定13file721,009byteを同Podへ送り全SHAを確認。現v3教師16件を既存方式で新規32更新し、学習308.121秒／復元込み336.233秒、新weightsを保全した。A18は一回4POST／4応答（前対照2＋読書会＋照明）、読書会は予約完了・初日未送信・来週未開催を保持したが、実際の部屋変更をmeaningで創作。照明は購入前後の反転・架空時間・重複がrawにあり既存compilerで停止。残3件／後対照／B18／同raw保存再読／通常反映0、復元込み379.836秒。別確認でPID13758／health200・候補閉鎖・B18root不存在。通常API／worker24bc228d双方Live、DB38migration／最新20261115011424をfresh確認。FIT18／A18は一回消費済み。本単位・補助全体・正式受入れは未完、build／TestFlight／本人実機保留。詳細は補助設計§9.114。
 
 > **11/16前回候補：fresh16教師32更新は完走したがA14は不適合で失敗閉鎖。既存作者をnode_local.v3へ改修し、候補コード・局所検査・独立review・GitHub反映まで完了。実4B・保存・通常採用は未実施。** AF1は306.882秒／復元込み341.020秒、新73f5／configfb2eを保持。A14は前対照2＋読書会1の3応答、反復・15未使用・後日事実欠落が残り、図／本文・残4件・後対照／B14／SQL／通常反映0。305.217秒で元native d678fe2c・PID13576/start100524246へ復元、別health200・18008閉鎖。新private候補APIc95d17dはnode根拠付きunitから同じ公開graphへ投影し、旧v1／v2・guard／cohort／権利・保存／RNを保持。対象回帰314成功／skip0、最終新2suite47成功とnative既存303成功は重複のため合算しない。独立reviewにblockingなし。両CIは実行中で未成功。A15／新GPUは区切り前に開始せず、同5入力→全12→同raw保存再読→通常反映は次に残す。Render認証による通常接続未確認、元単位／補助全体未完・配布保留。詳細は補助設計§9.109。
 
@@ -2082,6 +2082,39 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 候補と検証原本は同trial semantic_event_plan_v2_author_restore_20261116/a11/。scope／準備hashと完全ZIPを既存builderで再現できる。通常API／worker24bc228d Live・autoDeployOFF、DB38migration／20261115011424を2026-11-16T08:20:26Zにfresh再確認。worker900は現deployの11/15起動logを今回再取得した値で、新起動eventではない。今回はmodel／Pod／SQL／通常配置変更0。STRUCTURE_MAP_DELTA_NONE（既存作者定数と既存testだけ）。全量の実意味→同raw実保存再読→通常反映／正式受入れ／補助全体は未完、build／TestFlight／本人実機保留。
 
 
+<a id="analysis-node-local-v3-fit18-a18-actual-20261117"></a>
+## 9.114 11/17 — FIT18は現v3教師32更新を完走、A18実応答は意味不適合・重複で不採用
+
+Mashが§9.113の確定13file721,009byteの既存Pod5mkzaznzir6ygy送付、FIT18教材16件32更新／復元込み18分一回、A18同5件＋前後対照／最大9応答・30分一回、全5件独立全文照合が適切な場合だけB18全12記録／最大17応答・24分一回と判定hash最大4KBを明示承認した。旧A17の承認を流用していない。ZIP98,734byte／SHA96a96877553ecded341a0fd9dfccf918c5ed602942451c25c53db215969fb72bを一回送り、全13member／総展開byte／CRC・全SHAを送付先で一致確認した。既送付eec source247fileのZIP・manifestと凍結評価入力／対照は同Pod内copyで再利用し再送0。元PID6855/start242920362・healthz200、新FIT18root不存在を確認後、scope4bd274663c9bf0186143cf91fcb8fc6ae16a808a78a18fcf20eaf74f5b0a6909で一回起動した。
+
+FIT18は提供停止前の同Pod HF CPU preflightで全16件のprompt／assistant＋EOS tokenが凍結値と一致した。現node_local.v3教材SHA dd81dccc2b4fbe96effa6188351a251468105d042c926b06264ebda5b3b21918、元33記録66欄不変、通常12／LEAF2／MERGE2、全16件×2周32更新を完了した。既存のfresh LoRA／fresh AdamW、同seed・固定base revision851bf6e、112個3,833,856個のfloat32学習param、旧学習済み重みの初期利用0、assistant/EOSのみloss・切詰め0を維持。32更新のloss／gradient normと前後4測定lossは全て有限で、保存後の新base再load＋adapter全112tensor同一、configは元scopeとinference_mode以外同一を確認した。これは実学習・保存の完走で、応答の意味適合ではない。
+
+学習処理308.121秒、元提供復元込み336.232687秒で18分以内。元argv／env／cwd・native eec418d3／120u重みecbdd0d1・config4389a598をPID13085/start243238682へ戻し、別の既存captureでhealth200・kernel proof／client408file・自然／IFの既存設定を確認。新weights a46f3f5003e9c81ad5c150f4538422f6f06ae959348dedd00fafa8bfd3296212、config e1773a619e4d23461d8302319c85417187c575323967520586c4aa90febe6796を保存した。FIT18の15原本＋manifestのZIP14,198,065byte／SHA84ba96a637e2a0be8401c0f4eea63692ac4661eab12b887e766f1ee3ad41c7d2を回収し、全memberのSHA／CRCと実weightsをroot・独立担当が照合、ローカルでも112個float32tensorの全値有限・3,833,856param・全56個のLoRA_B非零を確認した。checkpoint16は採用していない。新最終weightsと原本はprivate引継ぎへ耐久保全した。
+
+別captureのcandidate_adapter_pathは既存fresh32を不変確認する情報であり、新候補の指定ではない。新A18scopeはFIT18のCOMPLETE32・保存再読・完全復元から同Pod内で新weights/configSHAと実復元PID/startへ結合し、SHA8bd43ffb19759e1b121216a9922973e7e3e7905952296d037d5895d47d3e5b1aを凍結。source eec0262b、native d502b3c5、非base alias cocolon-qwen3.5-4b-analysis-node-local-v3、旧default120u／自然／Pieceは元のまま。root＋独立担当が全実原本・新scopeと元templateの差分を照合してから、A18を内部A9入口で一回起動した。
+
+A18は4POSTを行い、前Emlis／IF対照2件と読書会／照明の4応答を受領した。読書会はHTTP200／stop・86.628271秒、9node／6edgeの図・概要・本文へGENERATED。照明はHTTP200／stop・179.848910秒で12node／13edgeのrawを受領したが、既存intent_compiler._compile_analysis_semantic_map_v2の4485行、同一title／summary／explanationの拒否でAnalysisSemanticMapError／analysis_semantic_map_invalidとなり、既存取得処理が終了した。rootからのsignal、native時間切れ、受領不能、model再試行ではない。残3件・後対照0、B18は条件不成立で未実行。A18のunused枠やB18枠を別試行へ流用しない。
+
+| 全原文と実raw／可視出力の照合 | 実際の結果 |
+|---|---|
+| 読書会で回復・保持した内容 | 一階の予約完了、本人の初日未送信、翌日の送信と一人の了解、全員既読の不明、椅子確認の希望と問い合わせ未確認、来週未開催がfact／図／本文に残った。旧A17の完了→可能の誤変異は今回出なかった |
+| 読書会の不適合 | n4.meaningが、写真で二階を使えると思っただけの段階を実際の旧部屋へ昇格させ、一階へ変更されたことと変更が返信確認時点に起きたことを創作。n4自身の根拠も翌日の一階予約連絡・写し確認だけであり、local根拠外。このmeaningはsummary／explanation／関係線説明／概要／本文へ同じまま届く |
+| 読書会の補足 | n1titleは返信未着を問い合わせ自体の未着とも読める表現にする。n6title／meaningの一人の了解は全体原文では真だが、そのnode自身のunitは全員既読不明しか支えていない。こちらはn4の創作と区別した根拠外持込み・反復 |
+| 照明の意味不適合 | 購入前の別日の窓際一時間と、購入後三十分を合算できないのに、n6title／meaningと関係線が購入後一時間半の描画を作る。n4は購入前の値札→家計確認を購入後へ、n7は購入前の店頭展示試用を購入後へ変える |
+| 照明の形式拒否 | n10／n11／n12はunits・引用・fact・unknowns・title・meaningまで完全同一。変換が新しく複製したのではなくrawに既にある。native character parserは引用・wire／参照として完結受理する一方、既存compilerは表示内容の一意制約で拒否。重複を消すだけでも上の意味不適合は解消しない。照明のprojection／本文／採用artifactは作られていない |
+
+読書会raw SHA9e599deeeb9a5679f97f1044c59843cca21825620efe012a719c0df141dff1daと全call objectは途中取得と最終原本で同一。照明raw SHA91343c0c866ee8e6de0aee619218fdd7c424aa07600fdddea56d23f8b8f53f86。両件の全原文・raw、読書会の全node／edge／概要／本文をrootと独立担当が読み、同じ不適合を確認した。照明は独立CPUでも同messages／request_refを凍結原本から導出し、同rawを修正せずにnative完結受理→同4485行拒否を再現した。parser通過を意味適合へ、学習loss減少を商品合格へ換算しない。
+
+現教師16件・82node／109unit／24meaningと現lessonを再監査したが、本人の見込みを実世界の変更へ昇格させる正解、別nodeからmeaning根拠を借用する正解、完全同一nodeの繰返しを教える明確な教材は見つかっていない。24meaningは全て同nodeの前後／範囲2unitsを根拠とし、残58nodeはmeaning空だった。ただし教師の原文量は109〜237token、照明原文は1,688tokenで、長い段落と多い場面を扱う教師の範囲には差がある。これは観測した範囲差で、失敗原因の確定や、追加学習で必ず直る保証ではない。正しいquote／factからtitle／meaning／関係線へ移る段階の資格・時点・根拠範囲の保持と、長い出力での重複が未達である。
+
+現在の通常history plannerでも読書会14,845byte／照明22,838byteは49,152byte以内で0batchとなり、A18のdirect whole-mapは同じ通常経路である。評価だけ不当に分割を外した結果ではない。既存LEAF＋MERGEの利用範囲を広げる案は未実装・未実証。全記録を逐件化するとmax16LEAFと17〜100件以上／本人訂正cohortが衝突し、MERGEはLEAFのfact／meaningでなく全有効原文を再読するため、最終meaning誤変異を隔離だけで直せるとは言えない。分割変更や新guardを現在の実意味修復の代わりに採用しない。
+
+A18は停止・元提供復元込み379.836003秒で30分以内。元native・120u・全argv／env／cwdをPID13758/start243321420へ戻し、別captureでhealth200・client／proofを一致確認。候補PID13460不存在、候補listener18008閉鎖、B18root不存在も別readで確認した。全原本13file＋manifest ZIP47,469byte／SHAffbe5ac7fff609ebe27c2d133e6a2c229081fb3d5bfa502c80000c08bb60392fを全CRC・member SHA一致で回収、after.result SHA6d90710f42e0289bce442802e7c8405f1a4a7379e996fb896805b5fc85517ce3がexecutionに一致した。鍵・全環境は同Pod内認証／復元に留め、出力対象全byteに両鍵値が含まれないことを同Pod内で検査してから回収した。
+
+通常反映へ進むための元SQL plan75daa8b7／receiptafb8ef17／inputbdb872a5は現在Cocolonのworked_map_lesson_prepared_20261116/sql_pre_acquisitionに正しい原本があると確認し、既存checkpoint801ba068と別ローカルpre-rootへ原本を変えずに揃えた。現source／v3 candidate planとのsource-only bindingはCPUで通ったが、適切な新最終rawがないためSQL再生・保存・再読は実行していない。これをSQL成功実績へ換算しない。
+
+通常API dep-dbsgn8t6e07s739qfk50／worker dep-dbsgnet6e07s739qg5a0はfresh確認で双方24bc228d Live、autoDeploy OFF・DB38migration／最新20261115011424。新候補通常採用・Render設定／配備・Supabase変更0。FIT18一回は完走で消費済み、A18一回は不採用で消費済み、B18は条件不成立。build／TestFlight／本人実機保留。本単位・補助全体・正式受入れは未完であり、新source／学習／model scopeはまだ準備・実行していない。次は現作者の意味付けと長文の場面保持へ戻り、未確認の世界変化・合算時間・根拠外meaningを修復する。新scopeを用意する場合は、この不適合rawを診断原本のまま保存し、旧rawの再束縛・raw修補・compiler緩和・unused枠流用は行わない。primary_outcome=BLOCKER_NARROWED、実読書会の個別状態保持は改善したが、商品採用credit0。STRUCTURE_MAP_DELTA_NONE：本番source／公開型／保存ownerの変更なし。
+
 <a id="analysis-node-local-v3-matched-fit18-prepared-20261117"></a>
 ## 9.113 11/17 — 既存16教師を現node-local.v3で再著述、FIT18／条件付きA18・B18を具体準備
 
@@ -2379,9 +2412,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・現v3教師16件の修復準備、実model／通常反映未完）
+### 11.2 現在の進行欄（11/17・FIT18実32更新完了、A18不採用・元提供復元済み）
 
-主枠は第11回§5、最新の具体準備は§9.113。既存33記録66欄を変えず現v3教師16件へ再著述し、全原文・全可視出力の独立照合／native・compiler／token計測を完了した。新13file721,009byteの送付とFIT18一回／条件付きA18・B18は具体承認待ち・未実行。A17不採用と元提供復元を保持し、実意味改善・同raw保存再読・通常反映・補助全体完了へ準備成果を換算しない。build／TestFlight／本人実機保留。
+主枠は第11回§5、最新実績と次は§9.114。新13fileを具体承認後に送りFIT18は32更新・保存再load・完全復元を完了、新weightsを保全した。A18は同候補で4POST／4応答、読書会の個別状態保持は回復したがmeaningが実部屋変更を創作。照明も誤時点／架空時間と同一node反復で既存compiler拒否となり、残3件／後対照／B18／同raw保存再読／通常反映0。元提供PID13758／health200、候補閉鎖を別確認。FIT18／A18は一回消費済み・B18条件不成立、本単位／補助全体未完。build／TestFlight／本人実機保留。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2390,15 +2423,15 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | 完全親source／cohort／同raw一回保存を保持。A17不採用後、既存16教師を現v3で再著述し全文・構文・tokenを確認、新FIT18／条件付きA18・B18を具体準備（§9.113） | 新scope承認後の実学習／同5実意味／全12／同raw保存再読／通常反映が残る。full_source_semantic_coverage=false／月次当時版を保持 |
+| AR-06 | 完全親source／cohort／同raw一回保存を保持。FIT18は現v3教師32更新を完走し新weightsを保全、A18実2応答は意味不適合／重複で不採用・元提供復元済み（§9.114） | title／meaningでの状態・根拠範囲保持と長文反復が未達。同5適合／全12／同raw保存再読／通常反映は未完。full_source_semantic_coverage=false／月次当時版を保持 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | 通常API／worker24bc228d双方Live・autoDeploy OFF、DB38migration／最新20261115011424をfresh確認。GPU／Render認証と元提供復元は前session成立、今回も元提供稼働を確認 | 通常API／workerから新GPUへの実モデル到達、設定／鍵一致、受入候補指定版の配置は未成立。画像2残差・配布／本人利用・補助全体未完 |
 
-最新の具体準備と次は§9.113。A17は一回消費済み・不採用、B17条件不成立。新FIT18／A18／B18は未実行で旧枠を流用しない。実意味改善・適切な全12・同raw保存再読・通常採用・補助全体・正式受入れは未完。
+最新実績と次は§9.114。FIT18は32更新完走、A18は不採用で各一回消費済み。B18条件不成立で旧枠／rawは再利用しない。適切な新実意味・全12・同raw保存再読・通常採用・補助全体・正式受入れは未完。
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.113の現v3教師修復済みFIT18／条件付きA18・B18。** 具体承認後に確定13file721,009byteを同Podへ送り、既存32更新の新規学習を復元込み18分一回。完走・保存再load・元提供復元後の実weights/config/PIDを同Pod内で結合した候補で、同5入力を最大9応答／30分一回。全5件がroot＋独立全文照合で適切な場合だけ全12記録12LEAF＋MERGEを最大17応答／24分一回へ進む。追加判定hash4KB以下。旧raw・consumed scopeの再利用や新guard／raw修補・拒否緩和は行わない。適切な新実結果の同最終raw一回SQL保存・別process非生成再読→通常native／map専用alias／IF120u・自然／Piece／API-worker整合反映までが同じ未完単位。build／TestFlight／本人実機保留。
+**11/17・現在の再開先：§9.114のFIT18完走・A18不採用を継承し、現作者のtitle／meaningでの資格・時点・根拠範囲保持と、長文の反復を修復する。** 新weightsと実原本は保全済みで、学習やA18を再実行しない。実読書会の予約完了／初日未送信／来週未開催は保持されたが、meaningに未確認の部屋変更・変更時点が残った。照明は購入前後と別日の時間を混同し、同一node重複で既存compilerが拒否した。B18・同raw保存再読・通常反映へは進めない。新source／学習／model scopeは未準備・未実行。原本や採用条件を変えずに修復し、適切な新同5入力→全12→同最終raw一回SQL保存・別process非生成再読→通常native／map専用alias／IF120u・自然／Piece／API-worker整合反映までを同じ未完単位として続ける。build／TestFlight／本人実機保留。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 

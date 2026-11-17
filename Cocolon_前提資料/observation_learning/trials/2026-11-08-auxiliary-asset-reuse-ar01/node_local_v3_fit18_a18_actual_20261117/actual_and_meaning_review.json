@@ -1,0 +1,166 @@
+{
+  "schema": "cocolon.analysis.fit18_a18.actual.bodyfree.v1",
+  "state": "A18_CONSUMED_REJECTED_BASELINE_RESTORED_B18_UNMET",
+  "source_commit": "eec0262baf833084cd548819a7960adc1b043c4b",
+  "FIT18": {
+    "state": "FIT18_COMPLETE32_EXACT_NEW_WEIGHTS_AND_RESTORATION_VERIFIED_NOT_MODEL_QUALITY",
+    "scope_sha256": "4bd274663c9bf0186143cf91fcb8fc6ae16a808a78a18fcf20eaf74f5b0a6909",
+    "fit_seconds": 308.121,
+    "restore_inclusive_seconds": 336.2326873280108,
+    "weights_sha256": "a46f3f5003e9c81ad5c150f4538422f6f06ae959348dedd00fafa8bfd3296212",
+    "config_sha256": "e1773a619e4d23461d8302319c85417187c575323967520586c4aa90febe6796",
+    "restored_pid": 13085,
+    "restored_start_ticks": "243238682",
+    "A18_scope_sha256": "8bd43ffb19759e1b121216a9922973e7e3e7905952296d037d5895d47d3e5b1a",
+    "zip_sha256": "84ba96a637e2a0be8401c0f4eea63692ac4661eab12b887e766f1ee3ad41c7d2",
+    "zip_bytes": 14198065,
+    "model_calls": 0,
+    "normal_adoption": false
+  },
+  "A18": {
+    "state": "A18_CONSUMED_REJECTED_BASELINE_RESTORED_B18_UNMET",
+    "scope_sha256": "8bd43ffb19759e1b121216a9922973e7e3e7905952296d037d5895d47d3e5b1a",
+    "result_sha256": "6d90710f42e0289bce442802e7c8405f1a4a7379e996fb896805b5fc85517ce3",
+    "zip_sha256": "ffbe5ac7fff609ebe27c2d133e6a2c229081fb3d5bfa502c80000c08bb60392f",
+    "POST_attempts": 4,
+    "received_responses": 4,
+    "received_controls": 2,
+    "received_maps": 2,
+    "generated_maps": 1,
+    "remaining_maps_not_sent": 3,
+    "after_controls": 0,
+    "book_raw_sha256": "9e599deeeb9a5679f97f1044c59843cca21825620efe012a719c0df141dff1da",
+    "lighting_raw_sha256": "91343c0c866ee8e6de0aee619218fdd7c424aa07600fdddea56d23f8b8f53f86",
+    "book_call_equal_live_snapshot": true,
+    "root_and_independent_book_verdict": "NOT_ADEQUATE",
+    "lighting_admission": "REJECTED_BY_UNCHANGED_DUPLICATE_NODE_DISPLAY_GUARD",
+    "failure_type": "AnalysisSemanticMapError",
+    "failure_code": "analysis_semantic_map_invalid",
+    "driver_exit": 1,
+    "restoration": {
+      "B18_exists": false,
+      "candidate_18008_closed": true,
+      "candidate_pid_absent": true,
+      "healthz": 200,
+      "model_calls": 0,
+      "pid": 13758,
+      "state": "A18_RESTORED_HEALTH_CANDIDATE_CLOSED_B18_ABSENT",
+      "ticks": "243321420"
+    },
+    "restore_inclusive_seconds": 379.83600340085104,
+    "root_signal_sent": false,
+    "B18_executed": false,
+    "model_retry": 0,
+    "SQL_save": 0,
+    "non_generating_SQL_reread": 0,
+    "normal_adoption": false
+  },
+  "meaning_review": {
+    "state": "ROOT_AND_INDEPENDENT_FULL_CONTENT_NOT_ADEQUATE_NOT_ADOPTED",
+    "reviewers": [
+      "root",
+      "/root/design_review",
+      "/root/candidate_audit"
+    ],
+    "result_sha256": "6d90710f42e0289bce442802e7c8405f1a4a7379e996fb896805b5fc85517ce3",
+    "book": {
+      "raw_sha256": "9e599deeeb9a5679f97f1044c59843cca21825620efe012a719c0df141dff1da",
+      "whole_final_call_equal_live01": true,
+      "retained": [
+        "completed_1F_reservation",
+        "initial_non_send",
+        "following_day_send_one_ack",
+        "all_read_unknown",
+        "chair_wish_and_inquiry_unknown",
+        "next_week_not_yet_held"
+      ],
+      "blocking": [
+        {
+          "locus": "nodes[3].meaning and derived overview/summary/explanation/edge explanations/text",
+          "actual": "Promotes tentative photographed2Fbelief to actualoldroom, creates actualchange to1F and change-time at replycheck.",
+          "source": "Tentative2Fassumption and deletion, then1Freservationnotice/copychecked; no confirmed2Freservation or change-time."
+        }
+      ],
+      "secondary": [
+        {
+          "locus": "nodes[0].title",
+          "actual": "Describes inquiry itself as not arrived rather than reply."
+        },
+        {
+          "locus": "nodes[5].title/meaning",
+          "actual": "Oneackis true in parent source but not in thisnode ownunit, whose only root is all-readunknown."
+        }
+      ],
+      "verdict": "NOT_ADEQUATE"
+    },
+    "lighting": {
+      "raw_sha256": "91343c0c866ee8e6de0aee619218fdd7c424aa07600fdddea56d23f8b8f53f86",
+      "HTTP": 200,
+      "finish_reason": "stop",
+      "nodes": 12,
+      "edges": 13,
+      "blocking": [
+        {
+          "locus": "nodes[5].title/meaning;edges[4].label",
+          "actual": "Invents90minutes afterpurchase; localquote says30minutes, earlier1hour belongs to anotherday/prepurchase."
+        },
+        {
+          "locus": "nodes[3].title/meaning;edges[2].label",
+          "actual": "Moves price/householdcheck from beforepurchase to afterpurchase."
+        },
+        {
+          "locus": "nodes[6].title/meaning;edges[6].label",
+          "actual": "Moves shopdisplaytrial from beforepurchase to afterpurchase."
+        },
+        {
+          "locus": "nodes[9:12]",
+          "actual": "Three entire nodes identical; generic repetition already exists in raw."
+        }
+      ],
+      "native_character_parser_accepts": true,
+      "compiler_rejects_unmodified_raw": true,
+      "compiler_locus": "intent_compiler._compile_analysis_semantic_map_v2:4485 displaytuple uniqueness",
+      "projection": null,
+      "text": null,
+      "verdict": "NOT_ADEQUATE_REJECTED"
+    },
+    "diagnostic_limits": [
+      "No raw repair, deduplication, guard relaxation or new source ref binding performed.",
+      "Historical target differences and shorter teaching sources do not prove a sole cause.",
+      "Current normal history planner also returns0batches for both inputs; this is the current ordinary direct route, not an invalid evaluation shortcut."
+    ],
+    "original_unit_complete": false,
+    "normal_adoption": false
+  },
+  "normal_live": {
+    "api": [
+      {
+        "id": "dep-dbsgn8t6e07s739qfk50",
+        "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+        "status": "live"
+      }
+    ],
+    "worker": [
+      {
+        "id": "dep-dbsgnet6e07s739qg5a0",
+        "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+        "status": "live"
+      }
+    ],
+    "migrations": 38,
+    "latest_migration": {
+      "version": "20261115011424",
+      "name": "piece_answer_and_interpretation_corrections"
+    },
+    "mutations": 0
+  },
+  "source_changes": 0,
+  "Render_mutations": 0,
+  "Supabase_mutations": 0,
+  "primary_outcome": "BLOCKER_NARROWED",
+  "case_specific_improvement": true,
+  "product_adoption_credit": 0,
+  "unit_complete": false,
+  "whole_auxiliary_complete": false,
+  "STRUCTURE_MAP_DELTA_NONE": true
+}
