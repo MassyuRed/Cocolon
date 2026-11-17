@@ -1,3 +1,7 @@
+> **11/18 JST・FIT27は学習前CPU確認で停止。実依存で66行を再確認し、新28の一回分を準備しました。** 承認済みRESTORE27は23.948631秒で元120u受口をPID569／start1320991・health200へ復元。FIT27は既存clientを加えた実依存2.11.7／core2.33.2と旧proof2.13.5／2.46.5の差をguardが拒否し、提供停止・学習前で0更新・新生成0、A27／B27未実行だった。事後比較ではCPUとFIT／試行提供側の全8依存版・9import元が一致し、順序変更だけでは直らないと確認。Podを変えず実8版で66行・36,182token／全EOSをCPU再確認し、1,715全集合・gold等の旧一致、private全encode／厳密loaderの正系と旧artifact拒否も確認した。新候補は送付8file・530,712byte＋同Pod内copy16file・5,013,117byte、RESTORE28なし。FIT28は66更新／4計測・復元込み20分、A28は同5入力最大19応答・30分、全5独立全文適合時だけB28は同12記録最大43応答・17分。独立最終確認は阻害事項0で完了し、新28は未承認・未送付・未実行。CPU確認を学習成功・意味改善・通常採用へ換算せず、全12・同raw保存再読・通常反映と補助全体は未完、build／TestFlight／本人実機保留。詳細は§9.130。STRUCTURE_MAP_DELTA_NONE。
+
+> 以下の§9.129は承認・送付前の準備記録です。今回の実行事実は上記と§9.130を優先します。
+
 > **11/18 JST・学習と本番生成制約の不整合を修復し、次の一回分を準備。通常反映は未完了。** 旧FIT26/A26の消費済み・全5件意味不適合・53ab不採用・B26未起動を維持する。全span索引・mandatory複合claim・REL原quote全文再掲は元の入力／共有4096枠で容量退行するため採用しない。現bound_roots.v2と3取得を保ち、private fresh-fitを本番許可token集合内のconditional CEへ修復した。元66を保持し、別revisionでは2targetの「鞄」を同じJSON値のUnicode escapeへ表記、自由文で不許可だった3位置だけを同wireのtoken分割へ合わせた。本人source・全messages・全parsed target・他65行のencodeは保持。本番と同じLMFE全21source／依存で66行・36,182token／全EOSの許可をCPU確認し、厳密loaderと独立レビューも完了。これは意味改善の実証ではない。新GPU・学習・生成・SQL・通常設定変更0。Pod読取では旧復元PIDが既に不在、8000は接続拒否だったため、新試行には元120u仕様の一回復元も含める。保存再読用PGlite0.5.8の既存依存はローカル復元済み。新実行は未承認・未送付・未実行で、全5実意味→条件成立時全12→同raw保存再読・通常DB/API反映を残す。build/TestFlight保留。詳細は補助設計§9.129。STRUCTURE_MAP_DELTA_NONE（製品source・公開型・owner配置は不変）。
 
 > **11/18 JST・FIT26／A26の実行と全文照合：両方の一回枠を完了し、元提供へ正常復元しました。意味は全5件不適合で、B26の条件は不成立です。** 同Podへ承認済み新12file 2,087,291byteを送付し、既存9file 3,286,728byteをPod内copy、全21のbyte/hashを照合。FIT26は66更新・4損失計測・112個F32tensorの保存fresh reload一致、復元込み412.121秒。A26は同5入力・15phase＋前後4対照の19応答を完了し、対照の全body一致、復元込み808.570秒。rootと独立担当が19記録／38欄・全15raw・公開図／全文を照合し、読書会の初回未送信の欠落、照明の購入／留保／条件差の欠落、修理の旧未確認の現在化、取消理由の強化、T01概要の恋人非面会への反転を確認。T01の10独立nodeと取消後の再応募意向なし等の改善は保持し、全5適合や一般品質へ換算しません。新重み53ab4293は不採用、B26未起動・同実raw SQL保存／通常API・worker変更0。追加学習を既定とせず、既存作者の選定・時点・派生表現の一体修復を具体化する段階です。元単位／補助全体・通常反映は未完、build／TestFlight／本人実機保留。詳細は補助設計§9.128、承認前の準備記録は§9.127。
@@ -46,7 +50,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.128: FIT26 complete66/reload112/restored; A26 complete5/19/restored808.570sec, root+independent allfive meaning inadequate. B26 condition false never started. Both once consumed,53ab not adopted. Existing-author integrated repair next; extraSFT not assumed. Actualfull12/same-rawSQL/reread/normal/wholeunit unfinished."
+current_next: "Section9.130: RESTORE27 healthy569/start1320991; FIT27 CPU preflight stopped before provider stop,0updates/gens; A27/B27 not run. Actual8 native66 recomputation complete36182prefixes/1715sets equalold; fullencode/strictloader PASS and oldartifact rejected. New28 frozen8upload530712B+16copy5013117B,scope8319f9f3; final independent review PASS, unapproved/unsent/unexecuted. NoRESTORE28; FIT66/4/1200s,A19/1800s,conditionalB43/1020s. Actualfull12/same-rawSQL/reread/normal/wholeunit unfinished."
 runtime_effect_of_this_document: 0
 ---
 
@@ -480,7 +484,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
 | AR-06 | 候補e58c1e49のFIT25は54更新・4計測・保存reload112／元提供復元、A25は全5件19応答・復元を実確認（§9.126）。準備履歴は§9.125 | root全5意味不適合、独立全文照合も全5不適合、B25条件不成立・未実行 | 実全12・実同raw保存再読・通常反映は0、元単位未完。今回両一回は消費済み、新具体修正／GPU試行は未準備 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | A25元120u復元PID36492／start99185008・別health200／候補18008閉鎖・B25root不存在を確認。通常API／worker24bc228d・DB38／20261115011424は前回記録の継承 | 今回通常配置／hosted SQL変更0・fresh Live照会0。実保存再読／通常適用・画像2残差・配布／本人利用・補助全体未完 |
+| AR-08 | 元120uはRESTORE27のPID569／start1320991・health200。通常API／workerはread-only配置metadataで双方24bc228d Live、DB履歴38／20261115011424・ACTIVE_HEALTHY | 配置・履歴metadataのみ。API一巡／SQL本文／モデル品質は未確認、新通常採用・配置・hosted SQL変更0。実保存再読／画像2残差・配布／本人利用・補助全体未完 |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -2936,11 +2940,11 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/18 JST・FIT26／A26実行完了、意味不採用・B26条件不成立）
+### 11.2 現在の進行欄（11/18 JST・RESTORE27復元完了、FIT27学習前停止）
 
-現在の実績と残件は§9.128。FIT26実66更新／112reload／復元完了、A26実5入力19応答／復元完了。rootと独立全文照合で全5不適合、B26条件不成立・未起動、53ab不採用。通常反映／全12実raw保存再読／元単位は未完。以下は前回までの実績と準備の履歴として保持する。
+現在の実績と残件は§9.130。RESTORE27は元120u受口を復元し、FIT27は実client依存と凍結proofの版差により提供停止前のCPU確認で停止。学習0・新生成0、A27／B27未実行。実8版66行のnative許可再計算と厳密loader確認は成立し、新28は送付8file・530,712byte＋同Pod copy16file・5,013,117byteの凍結候補を作成。独立最終確認は阻害事項0で完了、新実行承認は未了。FIT26／A26の全5不適合・53ab不採用・B26未起動は§9.128へ保持し、通常反映／全12実raw保存再読／元単位は未完。以下の旧実績は履歴として保持する。
 
-主枠は第11回§5、最新実績・残件は§9.126。候補e58c1e49／凍結17upload＋4copyによりFIT25を54更新・4計測・112保存reload一致／復元まで592.445476秒、A25を全5件19応答／元120u復元まで844.331987秒で各一回完了した。root全5の全文照合は意味不適合で通常不採用、独立全文照合も全5不適合。B25条件不成立・起動0、実全12・同実raw保存再読・通常反映0。候補／教材／738固有test・両CI・合成SQLの準備履歴§9.125とA24実績§9.124を保持し、消費済みFIT25／A25と未使用B25を次試行へ流用しない。元単位／補助全体は未完。
+以下は§9.126時点の履歴。主枠は第11回§5を継承する。候補e58c1e49／凍結17upload＋4copyによりFIT25を54更新・4計測・112保存reload一致／復元まで592.445476秒、A25を全5件19応答／元120u復元まで844.331987秒で各一回完了した。root全5の全文照合は意味不適合で通常不採用、独立全文照合も全5不適合。B25条件不成立・起動0、実全12・同実raw保存再読・通常反映0。候補／教材／738固有test・両CI・合成SQLの準備履歴§9.125とA24実績§9.124を保持し、消費済みFIT25／A25と未使用B25を次試行へ流用しない。元単位／補助全体は未完。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2949,15 +2953,17 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
 | AR-04 | §9.72の実1〜3回答＋複数proper訂正と最新回答明示選択を既存作者／S7・保存再読へ接続、通常DB／API反映済み | 一般自由文・回答／置換節への再訂正、編集品質・本人利用は未完 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
-| AR-06 | FIT25の54更新・4損失計測・112保存reload一致／復元、A25全5件19応答／復元を実確認。候補e58・準備§9.125、実績§9.126 | root全5意味不適合・独立全文照合も全5不適合で通常不採用。B25条件不成立・起動0、実全12／実同raw保存再読／通常反映未完。PLAN選定・教師構成と実rawの対比へ戻る。新具体修正／GPU試行未準備 |
+| AR-06 | 本人原根拠・有効訂正と長履歴候補を保持。§9.130でRESTORE27復元、FIT27は学習前CPU停止と原因版差を確認 | 学習／試行提供側も実8版2.11.7／core2.33.2。Pod無変更の66行CPU再計算・厳密loaderは成立。新28凍結候補の独立最終確認は阻害事項0、実行承認待ち。実意味／全12実raw保存再読／通常反映は未完 |
 | AR-07 | 適格現在map＋本人意向／制約、必要確認、1〜3候補、Savedと再読削除・受領復帰を通常反映。標準自動3案も§9.67の限定1set・同raw保存再読まで成立 | 条件／負荷／未知と§9.68の同display内Saved印を保持。一般品質・本人利用・AR-07全体は未完 |
 | AR-08 | A25元120u復元PID36492／start99185008・別health200／候補18008閉鎖・B25root不存在を確認。通常API／worker24bc228d・DB38／20261115011424は前回記録の継承 | 今回通常配置／hosted SQL変更0・fresh Live照会0。実保存再読／通常適用・画像2残差・配布／本人利用・補助全体未完 |
 
-最新実績・残件は§9.126。v2候補・教材／CPU／合成SQL準備は§9.125、A24実績§9.124、v1実装§9.123、A23実績§9.122へ保持する。FIT25の54更新・保存reloadとA25の完結は成立したが、全5意味適合・実同raw保存再読・通常採用は成立していない。教材と概要順の混合効果を分離せず、旧教材の再要約・最大4記録等の限界を保持する。次はPLAN選定／教師構成と実rawの対比を直接修復対象とし、同趣旨の禁止文追加だけを成果にしない。新具体修正／学習／GPU試行は未準備・未実施。
+以下は§9.126時点の履歴。v2候補・教材／CPU／合成SQL準備は§9.125、A24実績§9.124、v1実装§9.123、A23実績§9.122へ保持する。FIT25の54更新・保存reloadとA25の完結は成立したが、全5意味適合・実同raw保存再読・通常採用は成立していない。教材と概要順の混合効果を分離せず、旧教材の再要約・最大4記録等の限界を保持する。次はPLAN選定／教師構成と実rawの対比を直接修復対象とし、同趣旨の禁止文追加だけを成果にしない。新具体修正／学習／GPU試行は未準備・未実施。
 
 ## 12. 今後の指示と再開方法
 
-**11/18 JST・現在の再開先：§9.128のA26全5原本とroot／独立全文照合を基に、既存作者の選定・時点・派生表現を一体で具体化する。** FIT26／A26は消費済み、B26条件false、53ab不採用。追加学習や旧onceの再実行を既定にせず、実全12・同raw保存再読・通常反映の未完を保持する。下記は前回までの経緯である。
+**11/18 JST・現在の再開先：§9.130の実8依存版66行CPU確認と独立最終確認済みの新28凍結候補を基に、新しい限定実行承認を得てFIT28へ進む。** 新28は未承認・未送付・未実行。RESTORE28は行わず、元120u baselineを再照合する。RESTORE27／FIT27は消費済み、A27／B27未実行で、旧一回を再利用しない。全5の実意味→条件成立時全12→同raw保存再読→通常反映の元単位と第11回§5の主枠を維持する。
+
+**11/18 JST・§9.128時点の再開記録（履歴）：A26全5原本とroot／独立全文照合を基に、既存作者の選定・時点・派生表現を一体で具体化する。** FIT26／A26は消費済み、B26条件false、53ab不採用。追加学習や旧onceの再実行を既定にせず、実全12・同raw保存再読・通常反映の未完を保持する。下記は前回までの経緯である。
 
 **11/17・現在の再開先：§9.126の実原本・全5不適合から、既存作者のPLAN選定／別場面結合と教材構成、派生表現の意味保持へ戻る直接修復。** FIT25は54更新・4計測・保存reload112／復元、A25は全5件19応答・復元を完了したが、root全5意味不適合、独立全文照合も全5不適合でB25条件不成立。両一回は消費済み・B25未実行、実全12／SQL保存再読／通常反映0。§9.125の準備原本・教材と既存CI／合成SQLの限定技術credit、旧実績は保持する。既存指示・教師の対比を確認し、同じ禁止文を足すだけで実改善とはしない。新具体修正・学習／GPU試行は未準備・未実施であり、未使用B25や消費済み枠を流用しない。適切な全12実結果→同raw実保存再読→通常反映まで元単位を維持する。
 
@@ -6050,3 +6056,36 @@ Podの読取では旧復元PID43656が不在、8000/healthzはConnectionRefusedE
 
 CPU整合修復・実行準備の成立を、補助経路全体や通常反映の完了にはしない。全5の実原文／三phase raw／図／全文の独立意味照合、条件成立時だけの全12、同raw実保存・非生成再読・同版本文、通常DB/API反映と公開後確認が残る。build／TestFlight／本人実機の保留を他作業の開始条件へ戻さない。
 
+## 9.130 承認済みRESTORE27の復元と、FIT27の学習前停止（2026-11-18 JST）
+
+### 承認範囲と実際に行ったこと
+
+Mashの「承認するから進めて。」を、新16file・2,265,457byte、同Pod内copy9file・3,286,728byte、template `fb83f0f58a1172cd89bfb77322c01b688fa95494673b84f3bbb1ee60e8dd077f` のRESTORE27／FIT27／A27／条件付きB27へ結び付けた。各一回・再試行なし、B27は全5件の実原文／raw／図／全文をrootと独立担当が適切と判断した場合だけという範囲を維持する。
+
+RESTORE27は23.948631秒で完了した。既存の同Pod鍵・source・kernel・元120u重みを使い、新PID569／start1320991、8000の所有とhealth200を確認。新baselineのargv／env／cwdを検証し、training scope `ebdd19ea8b49ef2177fbba143aa1bf66499e1e671602654784d4b5233086398a` を派生した。失われた旧PID43656の全環境一致は主張しない。RESTOREは提供モデルを読み込んだが、学習・新応答生成・新しい鍵や依存の追加は0である。
+
+### FIT27が停止した位置と直接原因
+
+FIT27の一回は提供停止前のCPU preflightで停止した。既存client-runtime-depsがpydantic2.11.7／pydantic-core2.33.2を優先し、元提供側でclientを加えず作成したnative許可artifactの2.13.5／2.46.5とは異なっていた。`native_allowed_decoder_dependency_versions_changed` のguardがValueErrorで拒否した。
+
+事後の同Pod読取で、CPU側のCLIENT→DEPSと、学習／試行提供側のDEPS→CLIENT→DEPSをそれぞれ確認した。両方とも全8依存版・9import元が一致し、pydantic2.11.7／core2.33.2だった。transformers5.19.0／tokenizers0.23.3／interegular0.3.3、annotated-types0.8.0／typing-extensions4.16.0／typing-inspection0.4.5も同じで、LMFEは既存venvから読み込まれた。DEPSを先頭へ置くだけではCLIENTの版が残り、この差を解消しない。記録は3,442byte、SHA256 `d6b2a3634ab24cc3e027769d1b184877eb313c056518a5a7a756c09e5bb36c0f`。metadata読取によるmodel load・生成・学習・再起動は0、PID569／start1320991とhealth200を維持した。
+
+§9.129の「依存一致」は、元提供側と、clientを加える実際のCPU／学習／試行提供側を区別できていなかった。私の実行前の環境確認不足として訂正する。これはguardを弱める理由でも、モデル意味品質の失敗でもない。新trainerの学習・GPU上の損失計測・保存再読・意味改善の成立へ換算しない。
+
+FITのexecution.json／fit report作成、元提供停止、学習開始の前であり、更新0・新生成0。事後読取で元120uはPID569／start1320991のまま、所有8000のhealth200を維持した。A27／B27は起動しておらず、新5件／全12の原応答・SQL保存・実非生成再読は0。RESTORE27／FIT27の一回は消費済みとし、未使用のA27／B27を別試行へ転用しない。
+
+### 原本、実依存での再確認、次の一回分
+
+原本10件はmember manifestと各byte／SHA、ZIP内の同一byteを照合した。archiveは25,769byte、SHA256 `5d218fed61e93c716866f04406f22d0e548cf79eee8c91ae4107bc97898b942e`、10原本＋member manifestの11entryでCRC正常。鍵値・全環境値は出力していない。
+
+Pod側の既存依存・元提供プロセスを変えず、実際の8依存版を隔離ローカルへ再現し、全66行・36,182tokenと全EOSのnative許可を332.873544秒で再確認した。non-singleton27,754／singleton8,428、EOS後newline除外66を保持。独立比較で1,715許可集合の全uint32配列と全prefixの選択、gold tail全ID・損失位置が旧proofと完全一致した。旧promptは全配列を保存していないため、66件のprompt ID SHA一致という範囲で記録する。helper5582a26e…・教材51736766…・固定token manifestfc6d85ee…・本番LMFE全21sourceは不変で、新しい意味教師やraw修補は加えていない。
+
+新artifactは340,748byte、SHA256 `146faf6616691ee29fe8134ddcc91c838a7198328787b840b59a21d03acfd3b6`。privatefit `65125760a5c11d3579f86026783747299f9e914808a5037912c2be2e93ed5013` はこのartifactと実8版へ束縛した。全private encodeと厳密objective loaderは5.636151秒で成功し、旧artifact60ff…は同guardで明示拒否した。依存guardを弱めず、実版へproofを作り直したCPU確認である。これはPod上の全scope preflight・学習・GPUメモリ／900秒内完走・保存reload・モデル意味品質の成功ではない。
+
+新FIT28／A28／条件付きB28の凍結候補は、送付8file・530,712byte、既存同Pod内copy16file・5,013,117byte。全24fileのbyte/hashを固定し、copy不足時は追加送付fallbackせず停止する。training scopeは54,186byte、SHA256 `8319f9f3f78cb0cc74d758fb1f9f80de518e26efe1153a7ee0c46425a1b2ea75`。upload ZIPは388,411byte、SHA256 `5b7a678ce21b399ff54d37d2d0621124508cae724587b1b2604e93ea297a432e`。新しいRESTORE28は行わず、現在の元120u baselineを開始前に再照合し、FIT／評価後は同argv／env／cwdへ復元する。
+
+FIT28は同66行を一巡66更新・4損失計測、GPU処理900秒・復元込み20分。保存fresh reloadの一致と元提供復元が成立した場合だけ、派生scope／receipt合計131,072byte以内で新重みhashと復元PID／startを束縛する。A28は同5入力・15phase＋前後4対照の最大19応答・復元込み30分。全5件をrootと独立担当が原文／三phase raw／図／全文まで適切と判断し、4,096byte以内の同原本hash記録が一致した場合だけ、B28は同12記録の12LEAF＋MERGE・39phase＋4対照の最大43応答・復元込み17分。共有4,096出力token・32,768context、既存全量source／訂正cohort・guard・840秒pipeline・最終一回保存の境界を維持する。各一回・再試行なしで、旧27や未使用枠を流用しない。
+
+新28の独立最終確認は阻害事項0で完了。未承認・未送付・未実行。新しいPod依存install・鍵・kernel warm・提供再起動・新GPU学習／生成・SQL実行は0。適切な実4Bの全5意味照合→条件成立時だけ全12→同raw保存・非生成再読→通常反映の元単位を継続する。
+
+primaryはBLOCKER_NARROWED。元120uローカル受口の復元は成立したが、学習方式の実成功・作者品質の修復・通常採用は0。API製品sourceはe58c1e4のままで、公開v3・唯一realizer・保存／月次・本人source／権利・IF120u分離・対応RNを変更していない。SQL・通常API／worker反映0。今回のread-only再照会ではAPI／workerの配置metadataが双方24bc228dでLive、DB履歴38件・最新20261115011424、project status ACTIVE_HEALTHYを確認した。これは配置metadata・migration履歴の確認であり、API一巡・適用済みSQL本文・モデル品質の確認ではない。鍵値読取・SQL query・DB書込・配置・env変更はいずれも0。元単位／補助活用全体は未完、build／TestFlight／本人実機保留。STRUCTURE_MAP_DELTA_NONE（実行事実と未完状態の更新のみ）。
