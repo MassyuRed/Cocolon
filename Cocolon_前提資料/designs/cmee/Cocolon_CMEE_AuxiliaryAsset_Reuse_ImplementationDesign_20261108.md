@@ -1,4 +1,4 @@
-> **11/17最新：既存v3完成例へ「理解の更新／実際の交換」の対照を補い、長文2件を追加した18教材とFIT19/A19/B19を準備しました。実モデル改善・通常反映は未確認です。** API候補5af8625、関連204検査と同headのAnalysis／Piece両CI成功。旧16教材の原文33記録66欄と正解rawは完全保持、新2件4記録8欄を独立全文照合し、全18件のnative／compiler／図本文を確認。最大系列7,767・教師2,148token、切詰め0。新送付は確定16file 4,033,458byte、既存Pod5mkzaznzir6ygyの変更なし入力／対照3fileだけを同Pod内copyする。FIT19は18件36更新／復元込み18分一回、A19同5件＋前後対照／最大9応答30分一回、全5件独立全文適合時だけB19全12記録／最大17応答24分一回と判定hash最大4KB。具体承認前の送付・GPU学習／新応答・SQL／通常採用0。FIT18／A18は消費済み・B18条件不成立を継承。本単位・補助全体未完、build／TestFlight／本人実機保留。詳細は補助設計§9.115。
+> **11/17再開確認：確定FIT19/A19/B19資料は保持されていますが、既存Podの画面接続が成立せず、新送付・学習・生成は0件です。** 候補5af8625／確定16file4,033,458byte／scopeb5bd60f7と両CI成功を再照合。Jupyterは対象フォルダ取得エラーを繰返し、再読取がURLポリシーで拒否されたため停止。Podの起動状態・現PID／health・実ファイル有無は今回未確認で、停止や消失とは断定しない。FIT19／A19／B19の一回枠は未消費、旧FIT18／A18消費済みを保持。通常API／worker24bc228d双方Live・DB38migration／最新20261115011424をfresh再確認、変更0。通常反映・元単位・補助全体は未完。詳細は§9.115の再接続記録。
 
 
 > **11/16前回候補：fresh16教師32更新は完走したがA14は不適合で失敗閉鎖。既存作者をnode_local.v3へ改修し、候補コード・局所検査・独立review・GitHub反映まで完了。実4B・保存・通常採用は未実施。** AF1は306.882秒／復元込み341.020秒、新73f5／configfb2eを保持。A14は前対照2＋読書会1の3応答、反復・15未使用・後日事実欠落が残り、図／本文・残4件・後対照／B14／SQL／通常反映0。305.217秒で元native d678fe2c・PID13576/start100524246へ復元、別health200・18008閉鎖。新private候補APIc95d17dはnode根拠付きunitから同じ公開graphへ投影し、旧v1／v2・guard／cohort／権利・保存／RNを保持。対象回帰314成功／skip0、最終新2suite47成功とnative既存303成功は重複のため合算しない。独立reviewにblockingなし。両CIは実行中で未成功。A15／新GPUは区切り前に開始せず、同5入力→全12→同raw保存再読→通常反映は次に残す。Render認証による通常接続未確認、元単位／補助全体未完・配布保留。詳細は補助設計§9.109。
@@ -41,7 +41,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.115: candidate5af8625 instruction-only positive contrast; all18 currentv3 teachers reviewed, old16 sources/targets retained. FIT19/A19/B19 exact new files prepared, pending specific disclosure/GPU consent; zero new upload/model/SQL/adoption. Both exact-head CI success. FIT18/A18 consumed, B18 unmet. Same5 then full12 then same-raw save/reread and matching normal reflection remain incomplete; build/device deferred."
+current_next: "Section9.115 reconnect note: frozen19 scope b5bd60f7/16files4033458B unchanged, no19upload/fit/model/SQL/adoption;19once budgets unconsumed. ExistingJupyter directory error/reloadtimeout/URLpolicydenial prevents freshPod/runtime checks. Need existingPod status/usableJupyterconnection; do not infer shutdown/data loss or reuse olderhealth. NormalAPI/worker24bcLIVE/DB38 unchanged; unit/wholeincomplete."
 runtime_effect_of_this_document: 0
 ---
 
@@ -2086,6 +2086,13 @@ API7bb605b25138e9b9fc70ad8abca10dcfb46cd60bは既存semantic_admission.pyのv2�
 <a id="analysis-understanding-long-scenes-fit19-prepared-20261117"></a>
 ## 9.115 11/17 — 理解の更新と実際の交換を分ける完成例、独立長文2件を加えた現v3教師18件
 
+### 同日・処理中断後の再接続確認（FIT19未開始）
+
+再開指示後、source5af8625／前提0971a6e／scopeb5bd60f7／送付ZIP1f5e90da・全16file4,033,458byteをrootと独立担当が再照合し、不一致なし。接続前の候補・資料を再実装／再学習していない。既存Jupyter tab30は`workspace/cocolon_resume_20261117/runtime`を取得できないdialogを表示。閉じても再発し、read-only確認commandの完了は観測できなかった。一回のreload後は画面取得timeout、次の観察は許可外プロトコルというbrowser URL policyにより拒否されたため、その時点で全browser操作を止めた。別URL／API／別surfaceによる迂回はしていない。
+
+これは今回の接続確認不能であり、Pod停止・volume消失・元提供停止の実証ではない。PID13758／health200は前回確認記録で、今回のfresh値には使わない。新送付・FIT19／A19／B19起動・新学習／応答・SQL保存／通常変更0、19の各一回枠は未消費。現在の既存Pod稼働状態と利用可能なJupyter接続を確認し、実runtimeと未使用実行先をfresh確認してから、既存の具体承認条件・確定file・上限に従って再開する。新runtimeへの無検証再束縛、旧18枠流用、payload変更、別Pod送付はしない。通常API／worker24bc228d双方Live・DB38migration／20261115011424は今回再照会、変更0。通常反映・元単位・補助全体は未完、build／TestFlight／本人実機保留。原接続記録は同trialの`understanding_and_long_scene_prepared_20261117/connection_resume.json`、完全引継ぎは既存private最新checkpointへ。
+
+
 §9.114の実不適合原本と、旧16教材／現作者／通常plannerを確認して続行した。明確な誤教師や変換での複製bugは見つかっておらず、長文量の差だけを失敗原因とは断定しない。既存source_duties.v2をv3へ無検証でONにすること、全記録を一律LEAF化すること、rawの重複除去やcompiler緩和で受理させることはしていない。現作者に欠けた正の対照を既存完成例と教材へ補う修復であり、一般意味検査の新controllerを追加しない。
 
 API候補`5af8625599aa80f90c983cdec34144e88a133d1e`／tree`a2ce64b8e2fb968306760e8f20adee9e403e489b`で、`semantic_admission._semantic_node_local_v3_lesson_instruction`内に、同じ支柱を光沢から金属と思った段階→材質表示で樹脂と確かめた段階と、赤い留め具を外し青へ交換した実行を別nodeで示した。旧whole／MERGE6node＋edgeと旧LEAF3nodeは値を保持。whole／MERGE8node、LEAF5nodeで、LEAFへ後日の確認・交換を持ち込まない。完成例は指示内に留まり本人sourceに混入しない。新しい公開型／保存owner／API／DB列はなく、native・compiler・本文投影／default120u・自然／Pieceは不変。関連204検査成功、同headのAnalysis43991420434／Piece43991420308はcompleted／success。候補の通常配備とは区別する。
@@ -2437,9 +2444,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/17・18教材とFIT19/A19/B19準備、具体承認前）
+### 11.2 現在の進行欄（11/17・確定19資料保持、既存Pod再接続で停止）
 
-主枠は第11回§5、最新実績と次は§9.115。FIT18完走・A18不採用を継承し、既存完成例の認識更新／実交換対照、旧16保持＋新長文2件、原文・図本文の独立全文照合と204検査、候補5af8625の両CI成功まで完了。確定16file／4,033,458byteと各一回のFIT19・A19・条件付きB19を準備。具体承認前の送付／新GPU学習・応答／SQL／通常採用0。本単位／補助全体は未完、配布／本人実機保留。
+主枠は第11回§5、現在は§9.115の再接続記録。18教材・候補5af8625／両CI成功・確定16file4,033,458byteは保持、19各一回は未消費。既存Jupyterの取得エラーとURLポリシー拒否でfreshPod／runtimeを確認できず、新送付／学習・生成／SQL／通常反映0。現接続状態を解決してから元のscope・条件で再開する。旧FIT18／A18消費済み・B18未成立、通常24bc228d／DB38・配布保留、元単位・補助全体未完を維持する。
 
 | AR | 現在の成立範囲 | 残件・次の到達点 |
 |---|---|---|
@@ -2456,7 +2463,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/17・現在の再開先：§9.115の新18教材・FIT19/A19/B19具体準備を継承する。** 候補5af8625・両CI成功・教材59978e6c・training scope b5bd60f7b5fe7396af02f7d797b9d2765eb198c1e37ba8b4be1399da90d49893、新16file／4,033,458byte。未送付・未実行・個別承認待ちであり、旧FIT18／A18を再実行しない。承認後の新一回FIT19完走／保存再load／完全復元→実weights/PIDをA19へ結合→同5件の独立全文適合時だけB19→適切な全12最終rawの一回SQL保存と別process非生成再読→通常整合反映を続ける。失敗時は閉じ、unused枠や旧rawを再束縛しない。元単位・補助全体未完、build／TestFlight／本人実機保留。
+**11/17・現在の再開先：§9.115の再接続記録。** 確定19資料・scopeb5bd60f7・16file4,033,458byteは不変、新19送付／起動／学習・応答0で各一回未消費。既存Jupyterのフォルダ取得エラーとURLポリシー拒否で元Podのfresh状態が未確認。現在の既存Pod稼働状態と利用可能なJupyter接続を得て、実runtime／未使用19rootを確認する。前回health200を現在へ流用せず、別Pod・payload変更・旧18枠流用・無検証再束縛をしない。接続後は元の具体承認条件とFIT19→A19→全5適合時だけB19→適切な全12同rawの保存再読→通常反映を継続。元単位・補助全体未完、build／TestFlight／本人実機保留。
 
 適切な全12結果→同じ最終rawの一回SQL保存→別process非生成再読→通常native/model identity・map/IF選択境界・自然/Piece profile・API/worker整合までは未完。旧core b489／旧source7hash／旧取得前plan75daa8は凍結済み原本として保持する履歴であり、A8 rawの現在のsource束縛へ戻さない。A8各rawはAPIc258cf0e／driverfbe0109a／native3555e17aと、diagnostic_preparationの5事例それぞれの元入力／guard／messages／request refへ束縛される。新plan af8a1a75と元SQLcheckpoint801ba068／guard a000deb9／凍結as_ofは、未実行B8の全12記録用準備として保持する。今回rawを別receiptへ再束縛せず、通常修正は適切な新実結果による既存frozen checkpointの保存／再読を先に完了し、未評価のIFへmap候補重みを広げない。通常24bc228d／DB20261115011424・worker900・通常alias未変更、build／TestFlight／本人実機保留、本単位／補助全体／正式受入れ未完を維持する。
 
