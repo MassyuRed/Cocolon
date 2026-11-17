@@ -1,8 +1,8 @@
-> **11/17最新候補：A24の対応保持と派生表現の残差を引き継ぎ、既存三段階作者の概要refs先決めv2を候補e58c1e49へ反映。旧18架空教師を54phaseへ変換し、全文独立reviewを完了。** 関連738固有test成功。Analysis CI44072901877／Piece CI44072901970はともに同e58・attempt1で成功をfresh再取得で確認。FIT25はBF16のfresh LoRA・54更新一回／復元込み18分、その完了・保存reload・元提供復元後のA25は同5入力・最大19応答／30分、全5独立全文適合時だけB25は同12記録・最大43応答／17分を提案中。教材と概要順序の混合候補で効果分離不能、旧教師の再要約／表示重複・最大4記録等の限界は残る。共通packetは新17file4,818,633byte＋同Pod copy4file118,409byte（原3file99,755＋既存generic18,654）で凍結。学習後は同Pod内で派生2file計128KiB以下・条件成立時判定1file4KiB以下だけを追加し、generic copy不在時の追加uploadへ切替えない。sealed CPUでFIT54行・合成A19／B43を確認し、同原12の合成39phase／13aggregateを一回SQL保存・別process非生成再読まで成功、未承認／未送付／未学習／未実行／通常未採用。A24は4件意味不適合＋応募取消表示修復要・消費済み、B24条件不成立。実全12・同raw保存再読・通常反映・元単位／補助全体は未完、通常24bc228d／DB20261115011424・配布保留を維持。現候補§9.125、A24実績§9.124。
+> **11/17最新実績：承認済みFIT25は54更新・4回の損失計測、112 tensorの保存／fresh reload一致、元提供復元を完了。続くA25も全5件・三段階15phase＋前後4対照の19応答を一回で完了しましたが、rootの全文照合で全5件が意味不適合となり、通常不採用です。** 独立担当者の全5件の全文照合も完了し、全5件不適合で一致しました。FIT25は復元込み592.445476秒、新weights5b36fe0a／configb1f2d89b。A25は復元込み844.331987秒、元120uのPID36492／start99185008・別health200、候補18008閉鎖・B25root不存在を確認。B25は全5適合条件不成立で起動0、実全12・実rawのSQL保存／非生成再読・通常反映0です。新17file4,818,633byte送付＋同Pod copy4file118,409byteと派生scope7fe32f73を原本へ保持し、FIT25／A25の一回は消費済み、未使用B25を別試行へ流用しません。候補APIe58c1e49・準備／既存CI／合成SQLの記録は§9.125、今回実績と残件は§9.126。通常24bc228d／DB20261115011424は前回確認記録の継承で、今回fresh Live照会ではありません。元単位／補助全体未完、build／TestFlight／本人実機保留を維持します。
 
-### 11/17 — private作者bound_roots.v2のfile地図（FIT25／A25・条件B25未実行候補）
+### 11/17 — private作者bound_roots.v2のfile地図（FIT25／A25実行済み・通常不採用）
 
-新候補は`semantic_map.node_local.v4.bound_roots.v2`、aliasは`cocolon-qwen3.5-4b-analysis-node-local-v4-bound-roots-v2`、outerは`cocolon.analysis.semantic_map.node_local.model.v4.bound_roots.v2`です。内側PLAN／NODES／RELATIONSのv4 schema・公開watashi.map.v3・同じ保存ownerを維持します。候補source e58c1e49386b28c93a2c74adc6fc50d55ba20936は既存製品5owner＋test＋CIの計7path、parent e9046dee・remote bytes／head／parentを確認。738固有test成功、Analysis CI44072901877／Piece CI44072901970はともに同e58・attempt1で成功を確認しました。A24実績は§9.124、今回候補・準備は§9.125、v1実装履歴は§9.123を正とします。
+新候補は`semantic_map.node_local.v4.bound_roots.v2`、aliasは`cocolon-qwen3.5-4b-analysis-node-local-v4-bound-roots-v2`、outerは`cocolon.analysis.semantic_map.node_local.model.v4.bound_roots.v2`です。内側PLAN／NODES／RELATIONSのv4 schema・公開watashi.map.v3・同じ保存ownerを維持します。候補source e58c1e49386b28c93a2c74adc6fc50d55ba20936は既存製品5owner＋test＋CIの計7path、parent e9046dee・remote bytes／head／parentを確認。738固有test成功、Analysis CI44072901877／Piece CI44072901970はともに同e58・attempt1で成功を確認しました。A24実績は§9.124、v2候補・準備は§9.125、FIT25／A25実結果と残件は§9.126、v1実装履歴は§9.123を正とします。今回の実行後も製品sourceは同e58で、追加のsource変更はありません。
 
 | 既存file | v2候補での責務 |
 |---|---|
@@ -14,7 +14,7 @@
 
 新test_analysis_bound_roots_v2_selection.pyとAnalysis CI収集を更新。旧v4／bound_roots.v1それぞれ原5入力の15phase messages／request refs・無修補rawの構造採否をCPUで再照合し、意味不適合の再分類0を保持します。A24は今回46unit／74root対応を保持した一方、4件意味不適合＋応募取消表示修復要で通常不採用、B24条件不成立です。T01のn1／n2へ同じ原記録の補助role context各1参照があり、全private根拠をPLANだけと説明しません。
 
-旧18架空教師37record74欄の原source・teacher assertionを維持して54phaseへ変換し、独立全文reviewに新変換のblockingなし。既存full-assistant／EOS学習を再利用するFIT25はBF16 fresh LoRA・54更新一回／復元込み18分の未承認提案で、実学習は0。最大sequence9366／target2292／group emitted3393はCPU容量値で、速度・メモリ・意味改善を保証しません。正しい前段を与える教材、旧再要約・表示重複、最大4記録／平穏medium一種の限界を保持。v2順序変更と再教授の混合効果は分離できません。学習後に実weight/configと復元PID/start・証跡だけを固定templateへ限定束縛し、未確認の旧重みや部分学習を採用しません。両CI成功。共通packetは新17file4,818,633byte＋同Pod copy4file118,409byte（原3file99,755＋既存generic18,654）で凍結。学習後は同Pod内で派生2file計128KiB以下・条件成立時判定1file4KiB以下だけを追加し、generic copy不在時の追加uploadへ切替えない。sealed CPUでFIT54行・合成A19／B43を確認し、同原12の合成39phase／13aggregateを一回SQL保存・別process非生成再読まで成功、新送付・新学習／A25・B25・実同raw保存再読・通常反映は未実施です。
+旧18架空教師37record74欄を54phaseへ変換した教材の由来・限界とCPU／合成SQLの準備実績は§9.125へ保持します。Mashの明示承認後、同17送付＋4copyの凍結packetを使い、FIT25はBF16 fresh LoRAの54更新と前後4損失計測、112 tensor保存／fresh reload一致・元提供復元を592.445476秒で完了しました。新weights5b36fe0a／configb1f2d89b・復元実PID等だけを固定templateへ限定束縛し、派生scope7fe32f73でA25を一回実行。全5件15phase＋前後4対照の19応答を844.331987秒で完了し、元120uへ復元しました。全5件のroot全文照合は意味不適合、独立全文照合も全5不適合です。B25条件不成立・起動0、実全12・実同raw保存再読・通常反映0。実結果は§9.126を正とし、既存file責務／公開v3／保存owner／mapとIF120uの選択境界を維持します。新しいGPU試行は未準備・未実施で、両一回と未使用B25を流用しません。STRUCTURE_MAP_DELTA_NONE_ACTUAL_RESULT：本差分は実行・不採用状態の更新だけで、新owner／source／route／公開型／DB型の追加はありません。
 
 
 
@@ -148,7 +148,7 @@ Q1は、今回の入力を読んだ初回観測とフォローを先に返し、
 
 ## 0. Current conclusion
 
-> この節のQ1実績と以下のCurrent state／resume preimageは2026-09-10時点の履歴です。現在の候補・作業範囲は冒頭と補助設計§9.125、A24実績は§9.124、v1候補実装履歴は§9.123、A23実結果は§9.122へ戻り、旧SHAを現在の再開先へ固定しません。
+> この節のQ1実績と以下のCurrent state／resume preimageは2026-09-10時点の履歴です。現在の実績・残件は冒頭と補助設計§9.126、v2候補準備は§9.125、A24実績は§9.124、v1候補実装履歴は§9.123、A23実結果は§9.122へ戻り、旧SHAを現在の再開先へ固定しません。
 
 2026-09-10現在はQ1のFree相当thread callableを既存本文作者へ接続し、意味更新・訂正・時点と実本文を検証済み。追加7ownerとアプリ境界は冒頭Q1地図、詳細はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」を使う。未公開・商品NON_PASSを維持する。
 
@@ -2278,7 +2278,7 @@ API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643
 
 source_ref七項目・PUBLIC7参照・source_lineage、Piece唯一作者・既存体裁・最大3slot・renderer、旧ADD／最新2・3回答独立ADDを継承する。新table／公開DTO／route／top-level RPC引数／RN sourceは0。既存expected source state JSONへ有効更新だけexact meaning_checkpointを移し、locked sourceとの完全一致を既存issue／visual／saveの3関数で確認する。
 
-全17変更pathは[01B](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)、Piece責務と未対応境界は[02](02_piece_current_structure.md#piece-natural-answer-active-source-20261114)。migration actual20261114054136、通常API／worker同75e526d1 Live・既存両CI成功までの限定技術単位はCLOSED。新しいPiece実4B3件・同実本文の保存再読／画像は未完、一般解釈訂正・多段／依存跨ぎ・一般商品品質・補助全体へ広げない。外部送付前停止と証跡消失を含む[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を当時の再開先とした。現在の再開先は先頭と補助設計§9.125を参照し、§9.62は本人map訂正の接続履歴として保持する。研究selector／重み不採用とbuild／TestFlight／本人実機保留は維持。STRUCTURE_MAP_DELTA_PRESENT。
+全17変更pathは[01B](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)、Piece責務と未対応境界は[02](02_piece_current_structure.md#piece-natural-answer-active-source-20261114)。migration actual20261114054136、通常API／worker同75e526d1 Live・既存両CI成功までの限定技術単位はCLOSED。新しいPiece実4B3件・同実本文の保存再読／画像は未完、一般解釈訂正・多段／依存跨ぎ・一般商品品質・補助全体へ広げない。外部送付前停止と証跡消失を含む[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を当時の再開先とした。現在の再開先は先頭と補助設計§9.126を参照し、§9.62は本人map訂正の接続履歴として保持する。研究selector／重み不採用とbuild／TestFlight／本人実機保留は維持。STRUCTURE_MAP_DELTA_PRESENT。
 
 ## 2026-11-14 — 共有有効意味から三中核・IF／Savedへの責任境界
 
