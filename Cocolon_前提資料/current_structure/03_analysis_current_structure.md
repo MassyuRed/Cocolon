@@ -1,20 +1,20 @@
-### 11/18 — 分析MAPの開発候補 occurrence.v3
+### 11/18 — 分析MAPの開発候補 occurrence.v4
 
-開発正本は `6b5d0537`。明示した分析MAP用の `semantic_map.node_local.v4.occurrence.v3` が計画・項目・関係の3段階を担当する。各項目が伝える事実・判断を先に選び、表記上の修正と実際の状態変化、行為者・対象・否定の範囲を短い見出しにも残す。
+分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32の実生成と通常採用は未実施。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
 
 実装先は既存の5ファイル。
 
 | ファイル | 開発候補で担う処理 |
 |---|---|
-| `analysis_model_source.py` | MAPで明示されたv3のモデル名を3段階の作者へ接続する |
+| `analysis_model_source.py` | MAPで明示されたv4のモデル名を3段階の作者へ接続する |
 | `analysis_if_model_source.py` | 同じ設定下でもIFを既存の120uへ振り分ける |
-| `semantic_admission.py` | 計画・項目・関係の指示と架空教材を供給し、同じ読みの重複と根拠のない文末の構造文字列を公開前に検査する |
-| `intent_compiler.py` | v3の非公開応答の来歴を検証し、公開図の元になる根拠・項目・関係を組み立てる |
-| `serve_emlis_natural_reply.py` | 明示したv3と段階を照合し、項目生成時に既存の重複検査を適用する |
+| `semantic_admission.py` | 計画・項目・関係の指示と作例を供給し、各項目の根拠を照合して図の構成へ渡す |
+| `intent_compiler.py` | v4の非公開応答の来歴を検証し、公開図の元になる根拠・項目・関係を組み立てる |
+| `serve_emlis_natural_reply.py` | 明示したv4と段階を照合し、項目内の未確認引用について、割当済み根拠に含まれ同じ欄で一意な節を候補に加える |
 
 既存試験 `ai/tests/test_analysis_bound_roots_v2_selection.py` に正負の例を追加。製品ソース束は247ファイル、公開形式は `watashi.map.v3`。
 
-A30で使った版は `b02ae51e`（occurrence.v2）。読書会の完成品は二者とも不適合、照明は項目の生成途中で停止した。元120uは復元済み。B30は未起動で、実12記録の保存・非生成再読・通常反映は未完。 [補助設計§9.133](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)
+A31の読書会は二者照合で不適合。照明は完成した図・全文に達せず、元120uへ復元した。B31は起動していない。 [補助設計§9.134](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)
 
 ### 11/18 — 分析の開発用作者 occurrence.v1
 

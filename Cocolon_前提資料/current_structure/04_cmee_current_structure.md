@@ -1,10 +1,10 @@
-### 11/18 — 分析MAPの開発候補 occurrence.v3
+### 11/18 — 分析MAPの開発候補 occurrence.v4
 
-開発正本は `6b5d0537`。明示した分析MAP用の `semantic_map.node_local.v4.occurrence.v3` が計画・項目・関係の3段階を担当する。各項目が伝える事実・判断を先に選び、表記上の修正と実際の状態変化、行為者・対象・否定の範囲を短い見出しにも残す。
+分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32の実生成と通常採用は未実施。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
 
 CMEEの分析側では、割り当てた原文引用が包含関係にあり、種類・視点・見出し・明示した読みが一致する項目を `semantic_admission.py` が拒否する。同じ引用を別の読みに使うことと、原文にある構造記号の引用は許す。非公開の3段階応答の来歴を検証し、公開図の元になる根拠・項目・関係を組み立てるのは `intent_compiler.py`。図と全文への最終投影は既存の `observed_route_realizer.py` が担当する。IFは元の120uを選ぶ。Emlis・Piece・Astorの稼働経路への通常反映は行っていない。
 
-A30で使った版は `b02ae51e`（occurrence.v2）。読書会の完成品は二者とも不適合、照明は項目の生成途中で停止した。元120uは復元済み。B30は未起動で、実12記録の保存・非生成再読・通常反映は未完。 [分析の構造地図](03_analysis_current_structure.md)・[補助設計§9.133](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)
+A31の読書会は二者照合で不適合。照明は完成した図・全文に達せず、元120uへ復元した。B31は起動していない。 [補助設計§9.134](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md) [分析の構造地図](03_analysis_current_structure.md)
 
 ### 11/18 — 分析の開発用作者 occurrence.v1
 
