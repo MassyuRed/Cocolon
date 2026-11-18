@@ -1,3 +1,7 @@
+### 11/18 — わたしマップの開発版 occurrence.v8
+
+`analysis_model_source.py` が明示指定したMAPのモデルを選び、`semantic_admission.py` が計画には記録ごとの原文欄、項目には各引用の記録番号を渡す。関係線には原文根拠を含む項目一覧と計画の照合値を渡す。`serve_emlis_natural_reply.py` が同じ一覧から計画を復元し、照合した上で従来の生成制約を組み立てる。`analysis_if_model_source.py` はIFを従来のモデルへ振り分け、`intent_compiler.py` は検査済みの関係線と項目から公開図と本文を組み立てる。思考・行動・日付に基づく読み取りの改善は実4Bでの照合が残る。 [補助設計§9.144](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-prepared-20261118)
+
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
 元の記録にある行動を「まだ記録にないこと」と表示したA34を受け、開発版では項目生成後に候補を再分類する。最終段階で、候補が今も未確認か、すでに書かれた事実か、以前の時点の状態か、重複かを選ぶ。今も未確認なら、候補と原文の欄の両方で位置が一意に定まる引用を図・全文に渡す。
