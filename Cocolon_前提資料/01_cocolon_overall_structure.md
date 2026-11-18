@@ -1,4 +1,4 @@
-> **11/19・CAL39で、新Podの通常用120uがA38の分析IFと同じ本文を返しました。** 同じ要求を1回送り、2案を含む応答全体がA38とバイト単位で一致し、旧Podの応答とは異なりました。第2案では、本人が先に確保したい読書時間を残り時間に委ねています。わたしマップ5入力の実評価と通常DB/APIへの反映が残っています。 [補助設計§9.149](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-cal39-result-20261119)
+> **11/19・A39は7応答。読書会の図と全文ができましたが、初日の下書きと翌日の送信の順序が崩れ、椅子の問い合わせ状況も抜けました。** 照明は4項目目の途中で止まり、残る3入力は未実行です。元の通常用120uは復元済み。B39の全5件適合条件は成立せず、通常反映は見送りました。 [補助設計§9.150](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a39-result-20261119)
 
 v8の新しい回帰試験はAPIの `ai/tests/test_analysis_occurrence_v8_source_reading.py`（記録・思考／行動欄の参照、本人訂正・分割した原文の区別）と `ai/tests/test_analysis_occurrence_v8_relation_transport.py`（短縮した入力からの計画復元・旧生成制約との照合・不整合の拒否）。製品側の既存ファイルの接続は[分析の構造地図](current_structure/03_analysis_current_structure.md)に記載した。
 

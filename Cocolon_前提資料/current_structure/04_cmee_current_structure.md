@@ -1,6 +1,6 @@
-### 11/19 — CAL39で確認した通常用120uとA38の分析IF応答
+### 11/19 — A39の読書会の原文照合と照明の生成途中停止
 
-新Podで通常用120uに分析IFの同じ要求を1回送り、A38の候補提供中に取得した応答と本文全体が一致した。両方の第2案で読書時間が残り時間扱いになり、旧Podの本文とは異なる。CAL39ではわたしマップを生成しておらず、A38の5入力と全12記録の意味評価、通常保存・再読・反映が残る。 [補助設計§9.149](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-cal39-result-20261119)
+同じPodで前対照2件が一致し、読書会の図と全文を取得した。読書会は初日の未送信が翌日の送信より後に表示され、共同担当者の椅子の問い合わせ状況が抜けた。照明は4項目目の生成途中で止まり、残る3入力と全12記録は未実行。元の通常用120uは復元済み。 [補助設計§9.150](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a39-result-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
