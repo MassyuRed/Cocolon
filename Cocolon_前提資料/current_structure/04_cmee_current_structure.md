@@ -2,7 +2,7 @@
 
 開発版 `8f7659c8` では、項目（NODES）の本文を計画内の引用ごとに書き、その順につないで一つの事実文とする。関係線（RELATIONS）は両端の項目に属する事実単位をそれぞれ指定し、その根拠を線の詳細に対応付ける。片側の項目の題と同じラベルは受理せず、根拠のある関係を提示できないときは線なしを許す。内部の単位IDは公開図へ出さない。
 
-MAPでの明示選択は `analysis_model_source.py`、IFを従来の120uへ振り分けるのは `analysis_if_model_source.py`。生成時の許容形は `serve_emlis_natural_reply.py`、3段階の指示と受付は `semantic_admission.py`、線の両端の根拠を公開物へ対応付けるのは `intent_compiler.py` が担う。新しい回帰試験は `ai/tests/test_analysis_occurrence_fact_endpoints.py`。実モデルによるA34と通常採用は未実施。 [補助設計§9.137](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a34-prepared-20261118)
+MAPでの明示選択は `analysis_model_source.py`、IFを従来の120uへ振り分けるのは `analysis_if_model_source.py`。生成時の許容形は `serve_emlis_natural_reply.py`、3段階の指示と受付は `semantic_admission.py`、線の両端の根拠を公開物へ対応付けるのは `intent_compiler.py` が担う。新しい回帰試験は `ai/tests/test_analysis_occurrence_fact_endpoints.py`。A34では実4Bで5件の図と全文を取得し、二者とも全5件を原文との意味照合で不適合と判定した。別の開発差分では、概要が指定した項目の引用に根拠を絞った。独立した二つの記録を用いた隔離API試験で選択外の記録との取り違えを拒否した。A34の実応答5件をこの修正で再生しても、その読み違いは残った。 [補助設計§9.138](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a34-actual-20261118)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v5
 
