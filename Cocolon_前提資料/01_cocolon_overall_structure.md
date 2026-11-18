@@ -1,4 +1,4 @@
-> **11/19・A39は7応答。読書会の図と全文ができましたが、初日の下書きと翌日の送信の順序が崩れ、椅子の問い合わせ状況も抜けました。** 照明は4項目目の途中で止まり、残る3入力は未実行です。元の通常用120uは復元済み。B39の全5件適合条件は成立せず、通常反映は見送りました。 [補助設計§9.150](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a39-result-20261119)
+> **11/19・A40は5入力すべての図と全文を生成し、隔離SQLへの保存と別プロセスでの再読も5件とも確認しました。** 読書会では未開催、照明では2つの制作場面が抜けました。修理の未受取を示す文や、応募・友人の記録で既知の事実を未記録とする表示もあり、二者とも適合0件と判断しました。B40は起動せず、通常用120uを復元しました。 [補助設計§9.151](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a40-result-20261119)
 
 v8の新しい回帰試験はAPIの `ai/tests/test_analysis_occurrence_v8_source_reading.py`（記録・思考／行動欄の参照、本人訂正・分割した原文の区別）と `ai/tests/test_analysis_occurrence_v8_relation_transport.py`（短縮した入力からの計画復元・旧生成制約との照合・不整合の拒否）。製品側の既存ファイルの接続は[分析の構造地図](current_structure/03_analysis_current_structure.md)に記載した。
 

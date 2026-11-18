@@ -1,6 +1,6 @@
-### 11/19 — A39の読書会の原文照合と照明の生成途中停止
+### 11/19 — A40の5件の図・全文と隔離SQL再読
 
-同じPodで前対照2件が一致し、読書会の図と全文を取得した。読書会は初日の未送信が翌日の送信より後に表示され、共同担当者の椅子の問い合わせ状況が抜けた。照明は4項目目の生成途中で止まり、残る3入力と全12記録は未実行。元の通常用120uは復元済み。 [補助設計§9.150](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a39-result-20261119)
+A40は5件すべてを生成し、同じ原本を隔離SQLに保存して別プロセスから再読できた。読書会の開催前の状態、照明の2つの制作場面が欠落し、修理の未受取や応募の未通知・友人からの連絡にも表示上の誤りが残った。二者とも適合0/5。B40は未実行、通常用120uは復元済み。 [補助設計§9.151](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a40-result-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
