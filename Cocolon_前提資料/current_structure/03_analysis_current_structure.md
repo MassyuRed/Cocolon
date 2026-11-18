@@ -1,8 +1,20 @@
-### 11/18 — 開発用の重複防止と推測／確定の区別
+### 11/18 — 分析MAPの開発候補 occurrence.v3
 
-開発正本 `b02ae51e` の `semantic_map.node_local.v4.occurrence.v2` は、本人の予想と確認事実・状態の実際の変化を作者材料で区別し、NODESの生成途中で公開時の表示が重複する項目を拒否する。同じ出典の別主張は許す。 `analysis_model_source.py`が明示したaliasで3段階を選び、`semantic_admission.py`が材料と作例を渡し、`serve_emlis_natural_reply.py`が新profileで生成途中の重複を防ぐ。既存の`intent_compiler.py`が新しいprivate outerの来歴を扱い、公開図の重複を検査する。IFは`analysis_if_model_source.py`で元の120uに分離した。既存の `test_analysis_bound_roots_v2_selection.py` に回帰検証を追記した。
+開発正本は `6b5d0537`。明示した分析MAP用の `semantic_map.node_local.v4.occurrence.v3` が計画・項目・関係の3段階を担当する。各項目が伝える事実・判断を先に選び、表記上の修正と実際の状態変化、行為者・対象・否定の範囲を短い見出しにも残す。
 
-開発正本の修復と、公開図0件で終わったA29を[補助設計§9.132](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)に記録した。
+実装先は既存の5ファイル。
+
+| ファイル | 開発候補で担う処理 |
+|---|---|
+| `analysis_model_source.py` | MAPで明示されたv3のモデル名を3段階の作者へ接続する |
+| `analysis_if_model_source.py` | 同じ設定下でもIFを既存の120uへ振り分ける |
+| `semantic_admission.py` | 計画・項目・関係の指示と架空教材を供給し、同じ読みの重複と根拠のない文末の構造文字列を公開前に検査する |
+| `intent_compiler.py` | v3の非公開応答の来歴を検証し、公開図の元になる根拠・項目・関係を組み立てる |
+| `serve_emlis_natural_reply.py` | 明示したv3と段階を照合し、項目生成時に既存の重複検査を適用する |
+
+既存試験 `ai/tests/test_analysis_bound_roots_v2_selection.py` に正負の例を追加。製品ソース束は247ファイル、公開形式は `watashi.map.v3`。
+
+A30で使った版は `b02ae51e`（occurrence.v2）。読書会の完成品は二者とも不適合、照明は項目の生成途中で停止した。元120uは復元済み。B30は未起動で、実12記録の保存・非生成再読・通常反映は未完。 [補助設計§9.133](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)
 
 ### 11/18 — 分析の開発用作者 occurrence.v1
 
