@@ -1,6 +1,6 @@
 ### 11/18 — 分析MAPの開発候補 occurrence.v4
 
-分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32の実生成と通常採用は未実施。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
+分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32で実生成した結果、通常採用は見送った（[二者照合と復元の記録](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a32-20261118)）。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
 
 実装先は既存の5ファイル。
 

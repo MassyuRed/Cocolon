@@ -1,6 +1,6 @@
 ### 11/18 — 分析MAPの開発候補 occurrence.v4
 
-分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32の実生成と通常採用は未実施。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
+分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32で実生成した結果、通常採用は見送った（[二者照合と復元の記録](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a32-20261118)）。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
 
 CMEEの分析側では、割り当てた原文引用が包含関係にあり、種類・視点・見出し・明示した読みが一致する項目を `semantic_admission.py` が拒否する。同じ引用を別の読みに使うことと、原文にある構造記号の引用は許す。非公開の3段階応答の来歴を検証し、公開図の元になる根拠・項目・関係を組み立てるのは `intent_compiler.py`。図と全文への最終投影は既存の `observed_route_realizer.py` が担当する。IFは元の120uを選ぶ。Emlis・Piece・Astorの稼働経路への通常反映は行っていない。
 
