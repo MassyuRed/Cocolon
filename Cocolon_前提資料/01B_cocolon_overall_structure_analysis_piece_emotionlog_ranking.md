@@ -1,4 +1,4 @@
-> **11/18・分析MAPの開発版 occurrence.v8。** 計画段階で原文の思考・行動欄を対応させ、項目段階で引用元の記録を示す。関係線の材料は根拠を重複させずに渡す。実4Bでの日付・行動の対応と通常反映は未確認。 [補助設計§9.144](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-prepared-20261118)
+> **11/18・わたしマップのA37で、読書会の翌日の送信と一人からの返信が図・全文に戻りました。** 開催前であることを椅子の問い合わせ状況へ取り違え、二者とも不適合と判定しました。照明は計画で同じ4引用を10項目に繰り返し、項目の生成途中で停止しました。5入力中1件が完成し、B37と通常反映は未実施です。 [補助設計§9.145](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-result-20261118)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 

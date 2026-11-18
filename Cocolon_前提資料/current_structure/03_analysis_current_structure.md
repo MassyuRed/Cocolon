@@ -1,6 +1,6 @@
 ### 11/18 — わたしマップの開発版 occurrence.v8
 
-`analysis_model_source.py` が明示指定したMAPのモデルを選び、`semantic_admission.py` が計画には記録ごとの原文欄、項目には各引用の記録番号を渡す。関係線には原文根拠を含む項目一覧と計画の照合値を渡す。`serve_emlis_natural_reply.py` が同じ一覧から計画を復元し、照合した上で従来の生成制約を組み立てる。`analysis_if_model_source.py` はIFを従来のモデルへ振り分け、`intent_compiler.py` は検査済みの関係線と項目から公開図と本文を組み立てる。思考・行動・日付に基づく読み取りの改善は実4Bでの照合が残る。 [補助設計§9.144](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-prepared-20261118)
+`analysis_model_source.py` が明示指定したMAPのモデルを選び、`semantic_admission.py` が計画には記録ごとの原文欄、項目には各引用の記録番号を渡す。関係線には原文根拠を含む項目一覧と計画の照合値を渡す。`serve_emlis_natural_reply.py` が同じ一覧から計画を復元し、照合した上で従来の生成制約を組み立てる。`analysis_if_model_source.py` はIFを従来のモデルへ振り分け、`intent_compiler.py` は検査済みの関係線と項目から公開図と本文を組み立てる。A37で読書会は図・全文が完成したが二者不適合。照明は計画に同じ4引用を10項目分繰り返し、項目の生成途中で終了したため、短縮した関係線入力の実生成には到達していない。通常反映は未実施。 [補助設計§9.145](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-result-20261118)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
