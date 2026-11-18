@@ -1,3 +1,9 @@
+### 11/18 — 分析MAPの開発候補 occurrence.v6
+
+開発版 `8f7659c8` では、項目（NODES）の本文を計画内の引用ごとに書き、その順につないで一つの事実文とする。関係線（RELATIONS）は両端の項目に属する事実単位をそれぞれ指定し、その根拠を線の詳細に対応付ける。片側の項目の題と同じラベルは受理せず、根拠のある関係を提示できないときは線なしを許す。内部の単位IDは公開図へ出さない。
+
+MAPでの明示選択は `analysis_model_source.py`、IFを従来の120uへ振り分けるのは `analysis_if_model_source.py`。生成時の許容形は `serve_emlis_natural_reply.py`、3段階の指示と受付は `semantic_admission.py`、線の両端の根拠を公開物へ対応付けるのは `intent_compiler.py` が担う。新しい回帰試験は `ai/tests/test_analysis_occurrence_fact_endpoints.py`。実モデルによるA34と通常採用は未実施。 [補助設計§9.137](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a34-prepared-20261118)
+
 ### 11/18 — 分析MAPの開発候補 occurrence.v5
 
 開発版 `7405e4de` のNODESは、PLANで割り当て済みの根拠を原文ごと出力し直す代わりに、そのPLANのハッシュと項目・単位を示す。モデル入力には原文と計画を渡す。受付で参照を照合し、関係線の生成と図・全文・保存が使う根拠は同じPLANの欄と引用から復元する。旧版との混在、異なる項目・単位や違う版の計画は受理しない。通常MAPとIFのモデル選択は従来のまま。

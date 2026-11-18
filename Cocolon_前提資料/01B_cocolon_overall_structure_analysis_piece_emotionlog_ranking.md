@@ -1,3 +1,5 @@
+> **11/18・分析MAPの開発候補 occurrence.v6。** 開発版 `8f7659c8` のNODESは計画の各引用に一つの本文片を対応させ、RELATIONSは線の両側の事実単位を指定する。生成・検査・公開用データ組立てには既存の5ファイルを使い、回帰試験 `ai/tests/test_analysis_occurrence_fact_endpoints.py` を追加。通常MAPと分析IFのモデル選択は従来どおり。 [補助設計§9.137](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a34-prepared-20261118)
+
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 
 > **11/18・分析MAPの開発候補 occurrence.v4。** 分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32で実生成した結果、通常採用は見送った（[二者照合と復元の記録](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a32-20261118)）。 既存製品5ファイルと既存試験1ファイルを更新。新規ファイルはない。 [補助設計§9.134](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)
