@@ -1,4 +1,4 @@
-> **11/19・A38は、わたしマップの5入力に進む前の分析IF対照で終了しました。** EmlisAIの本人訂正は旧Podの応答とバイト単位で一致しました。分析IFの同一要求はHTTP 200で完了し、2つのシナリオの文が旧Podの記録から変わりました。A38のMAP生成は0/5、B38の開始条件は未成立です。通常用120uは復元済みです。 [補助設計§9.148](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-result-20261119)
+> **11/19・CAL39で、新Podの通常用120uがA38の分析IFと同じ本文を返しました。** 同じ要求を1回送り、2案を含む応答全体がA38とバイト単位で一致し、旧Podの応答とは異なりました。第2案では、本人が先に確保したい読書時間を残り時間に委ねています。わたしマップ5入力の実評価と通常DB/APIへの反映が残っています。 [補助設計§9.149](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-cal39-result-20261119)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 

@@ -1,6 +1,6 @@
-### 11/19 — わたしマップA38の実行と分析IF対照の差
+### 11/19 — CAL39で確認した通常用120uとA38の分析IF応答
 
-わたしマップの候補 occurrence.v9 は、MAP生成に進む前にEmlisAIと分析IFへ固定の要求を送る。A38では本人訂正の応答が旧Podの記録と一致し、分析IFの2シナリオでは本文が変わった。対照の完全一致検査がここで終了したため、5入力のMAP生成は0件、B38も未実行。通常用120uは新Podで復元済み。 [補助設計§9.148](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-result-20261119)
+新Podで通常用120uに分析IFの同じ要求を1回送り、A38の候補提供中に取得した応答と本文全体が一致した。両方の第2案で読書時間が残り時間扱いになり、旧Podの本文とは異なる。CAL39ではわたしマップを生成しておらず、A38の5入力と全12記録の意味評価、通常保存・再読・反映が残る。 [補助設計§9.149](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-cal39-result-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
