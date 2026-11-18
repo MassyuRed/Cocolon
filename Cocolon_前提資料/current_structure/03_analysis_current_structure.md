@@ -2,7 +2,7 @@
 
 元の記録にある行動を「まだ記録にないこと」と表示したA34を受け、開発版では項目生成後に候補を再分類する。最終段階で、候補が今も未確認か、すでに書かれた事実か、以前の時点の状態か、重複かを選ぶ。今も未確認なら、候補と原文の欄の両方で位置が一意に定まる引用を図・全文に渡す。
 
-明示的なMAPモデル選択は `analysis_model_source.py`、IFの従来モデルへの振り分けは `analysis_if_model_source.py`。モデルが返せる形式を `serve_emlis_natural_reply.py` が制約し、`semantic_admission.py` が根拠・判定を検査し、`intent_compiler.py` が確認済みの表示内容を組み立てる。A35ではFIT28の実4Bで5件の図・全文を取得した。未確認候補42箇所は31箇所が記載済み、11箇所が公開され、以前の状態・重複の選択は0。二者とも意味適合0/5。通常の生成APIを使った隔離SQLで5件の保存・非生成再読は成立した。B35は条件不成立で実行せず、全12記録の実生成・保存再読・通常採用は未完。 [補助設計§9.140](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a35-actual-20261118)
+明示的なMAPモデル選択は `analysis_model_source.py`、IFの従来モデルへの振り分けは `analysis_if_model_source.py`。モデルが返せる形式を `serve_emlis_natural_reply.py` が制約し、`semantic_admission.py` が根拠・判定を検査し、`intent_compiler.py` が確認済みの表示内容を組み立てる。A35の5件は二者とも原文との意味照合で不適合だった。次の継続学習用に、現行の3段階で引用別の本文と未確認の分類を示す45行を準備した。実モデルの改善と通常採用は未確認。 [補助設計§9.141](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fit36-prepared-20261118)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v5
 

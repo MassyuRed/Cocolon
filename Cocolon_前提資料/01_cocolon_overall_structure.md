@@ -1,4 +1,4 @@
-> **11/18・分析MAPの開発候補 occurrence.v7。** `25bfec6c` でA35を1回実行。成立した5件の公開図・全文を原文と照合し、二者とも意味適合0/5。未確認候補42箇所のうち11箇所を実4Bが公開に回した。引用と本文片の取り違え、重複した留保、関係線の誤った目的づけが残り、通常採用は見送った。 [補助設計§9.140](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a35-actual-20261118)
+> **11/18・分析MAPの開発候補 occurrence.v7。** A35で原文との照合が双方0/5だったため、既存の3段階を対象に未確認の分類と引用別の本文片を扱う継続学習を準備した。通常8組、個別5組、統合2組の各3段階、計45行。FIT28から作る候補の実行・保存再読・実生成は未確認。通常MAPとIFのモデル設定は従来どおり。 [補助設計§9.141](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fit36-prepared-20261118)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 
