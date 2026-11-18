@@ -1,3 +1,9 @@
+### 11/18 — 開発用の重複防止と推測／確定の区別
+
+開発正本 `b02ae51e` の `semantic_map.node_local.v4.occurrence.v2` は、本人の予想と確認事実・状態の実際の変化を作者材料で区別し、NODESの生成途中で公開時の表示が重複する項目を拒否する。同じ出典の別主張は許す。 `analysis_model_source.py`が明示したaliasで3段階を選び、`semantic_admission.py`が材料と作例を渡し、`serve_emlis_natural_reply.py`が新profileで生成途中の重複を防ぐ。既存の`intent_compiler.py`が新しいprivate outerの来歴を扱い、公開図の重複を検査する。IFは`analysis_if_model_source.py`で元の120uに分離した。既存の `test_analysis_bound_roots_v2_selection.py` に回帰検証を追記した。
+
+開発正本の修復と、公開図0件で終わったA29を[補助設計§9.132](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)に記録した。
+
 ### 11/18 — 分析の開発用作者 occurrence.v1
 
 `13e35eff3708c56b8629d1e690e82170ae919177` は `semantic_map.node_local.v4.occurrence.v1` を開発用の明示選択肢に加えた。元の記録日時を原入力欄に添え、別日に書かれた同じ出来事と、同じ対象について別の日に行ったことを読み分ける材料を渡す。本人の訂正・記録・出来事の日時は別に扱う。生成中には、一つのunitの「不明」に同じ欄の同じ引用を重ねることを禁じる。FIT28／A28は旧 `bound_roots.v2` の実績で、この追加候補の実生成・通常採用は未確認。
