@@ -1,4 +1,4 @@
-> **11/19・新Podで通常提供用の4B（120u）を復元し、FIT36の重みと設定が保存版と一致しました。** 初期復元は1回、約3分5秒で完了しました。Pod内の提供状態はHTTP 200、GPUの数値照合にも合格しました。次はわたしマップのA38候補を同じ5入力で実生成し、原文・図・全文の対応を確かめます。A38・全12記録の評価と通常DB/API反映は未実施です。 [補助設計§9.147](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-restore38-result-20261119)
+> **11/19・A38は、わたしマップの5入力に進む前の分析IF対照で終了しました。** EmlisAIの本人訂正は旧Podの応答とバイト単位で一致しました。分析IFの同一要求はHTTP 200で完了し、2つのシナリオの文が旧Podの記録から変わりました。A38のMAP生成は0/5、B38の開始条件は未成立です。通常用120uは復元済みです。 [補助設計§9.148](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-result-20261119)
 
 v8の新しい回帰試験はAPIの `ai/tests/test_analysis_occurrence_v8_source_reading.py`（記録・思考／行動欄の参照、本人訂正・分割した原文の区別）と `ai/tests/test_analysis_occurrence_v8_relation_transport.py`（短縮した入力からの計画復元・旧生成制約との照合・不整合の拒否）。製品側の既存ファイルの接続は[分析の構造地図](current_structure/03_analysis_current_structure.md)に記載した。
 

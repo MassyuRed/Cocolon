@@ -1,6 +1,6 @@
-### 11/19 — わたしマップの開発候補 occurrence.v9 と新Podの復元
+### 11/19 — わたしマップA38の実行と分析IF対照の差
 
-`analysis_model_source.py` と `analysis_if_model_source.py` がMAPとIFのモデルをそれぞれ選ぶ。わたしマップの開発候補では `serve_emlis_natural_reply.py` が同じ根拠一式を計画項目に繰り返す生成を止め、事実文と関係線の両端に原文から選んだ短い引用を付ける。`semantic_admission.py` が割当を検査し、`intent_compiler.py` が図と本文を構成する。新PodのRESTORE38で通常用120uが起動し、GPUの数値照合と、評価用FIT36の重み・設定の照合を完了した。開発候補の実生成と通常反映は未実施。 [補助設計§9.147](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-restore38-result-20261119)
+わたしマップの候補 occurrence.v9 は、MAP生成に進む前にEmlisAIと分析IFへ固定の要求を送る。A38では本人訂正の応答が旧Podの記録と一致し、分析IFの2シナリオでは本文が変わった。対照の完全一致検査がここで終了したため、5入力のMAP生成は0件、B38も未実行。通常用120uは新Podで復元済み。 [補助設計§9.148](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-result-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
