@@ -2,7 +2,7 @@
 
 元の記録にある行動を「まだ記録にないこと」と表示したA34を受け、開発版では項目生成後に候補を再分類する。最終段階で、候補が今も未確認か、すでに書かれた事実か、以前の時点の状態か、重複かを選ぶ。今も未確認なら、候補と原文の欄の両方で位置が一意に定まる引用を図・全文に渡す。
 
-明示的なMAPモデル選択は `analysis_model_source.py`、IFの従来モデルへの振り分けは `analysis_if_model_source.py`。モデルが返せる形式を `serve_emlis_natural_reply.py` が制約し、`semantic_admission.py` が根拠・判定を検査し、`intent_compiler.py` が確認済みの表示内容を組み立てる。A35の5件は二者とも原文との意味照合で不適合だった。次の継続学習用に、現行の3段階で引用別の本文と未確認の分類を示す45行を準備した。実モデルの改善と通常採用は未確認。 [補助設計§9.141](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fit36-prepared-20261118)
+明示的なMAPモデル選択は `analysis_model_source.py`、IFの従来モデルへの振り分けは `analysis_if_model_source.py`。モデルが返せる形式を `serve_emlis_natural_reply.py` が制約し、`semantic_admission.py` が根拠・判定を検査し、`intent_compiler.py` が確認済みの表示内容を組み立てる。A35の5件は二者とも原文との意味照合で不適合だった。FIT36は45更新、学習を伴わない損失計測12回、全112テンソルの保存再読一致、元の120u提供への復元までを完了した。A36用の候補を確定する既存処理は、設定内の学習対象28名の並び順で不一致となり、評価の開始前に停止。A36・B36とも未実行。新しい重みでの5入力の意味照合、全12記録の生成・同じ原本の保存再読、通常反映が残る。 [補助設計§9.142](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fit36-actual-20261118)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v5
 
