@@ -1,6 +1,6 @@
-### 11/19 — わたしマップの開発候補 occurrence.v9
+### 11/19 — わたしマップの開発候補 occurrence.v9 と新Podの復元
 
-`analysis_model_source.py` が明示指定されたMAPの候補を選び、`analysis_if_model_source.py` がIFを従来の設定で扱う。`serve_emlis_natural_reply.py` が既出項目と丸ごと同じ根拠割当を計画の生成中に止め、事実文・関係線端点には該当する原文から短い引用を選ばせる。`semantic_admission.py` も割当と引用を照合し、`intent_compiler.py` が検査後の図と本文を構成する。新しい回帰試験は `ai/tests/test_analysis_occurrence_v9_plan.py`（計画）と `ai/tests/test_analysis_occurrence_v9_source_cues.py`（事実文・関係線）で、既存のAnalysis CIが実行する。実4Bの品質と通常反映は未確認。 [補助設計§9.146](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-preparation-20261119)
+`analysis_model_source.py` と `analysis_if_model_source.py` がMAPとIFのモデルをそれぞれ選ぶ。わたしマップの開発候補では `serve_emlis_natural_reply.py` が同じ根拠一式を計画項目に繰り返す生成を止め、事実文と関係線の両端に原文から選んだ短い引用を付ける。`semantic_admission.py` が割当を検査し、`intent_compiler.py` が図と本文を構成する。新PodのRESTORE38で通常用120uが起動し、GPUの数値照合と、評価用FIT36の重み・設定の照合を完了した。開発候補の実生成と通常反映は未実施。 [補助設計§9.147](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-restore38-result-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
