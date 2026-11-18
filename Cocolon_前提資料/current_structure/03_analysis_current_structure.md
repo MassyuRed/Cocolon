@@ -2,7 +2,7 @@
 
 開発版 `7405e4de` のNODESは、PLANで割り当て済みの根拠を原文ごと出力し直す代わりに、そのPLANのハッシュと項目・単位を示す。モデル入力には原文と計画を渡す。受付で参照を照合し、関係線の生成と図・全文・保存が使う根拠は同じPLANの欄と引用から復元する。旧版との混在、異なる項目・単位や違う版の計画は受理しない。通常MAPとIFのモデル選択は従来のまま。
 
-実装先は下記v4と同じ5ファイル（`analysis_model_source.py`、`analysis_if_model_source.py`、`semantic_admission.py`、`intent_compiler.py`、`serve_emlis_natural_reply.py`）。追加の回帰試験は `ai/tests/test_analysis_occurrence_compact_binding.py`。A33の実生成と通常採用は未実施。 [補助設計§9.135](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
+実装先は下記v4と同じ5ファイル（`analysis_model_source.py`、`analysis_if_model_source.py`、`semantic_admission.py`、`intent_compiler.py`、`serve_emlis_natural_reply.py`）。追加の回帰試験は `ai/tests/test_analysis_occurrence_compact_binding.py`。A33は全5入力で図と全文を生成し、二者照合で全5件不適合のため通常採用を見送った（[実行結果](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-actual-20261118)）。 [補助設計§9.135](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v4
 
