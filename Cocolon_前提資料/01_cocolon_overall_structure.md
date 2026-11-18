@@ -1,4 +1,4 @@
-> **11/18・分析MAPの開発候補 occurrence.v6。** `8f7659c8` のA34は、実4Bの5件すべてで図・全文が完成し、二者とも意味適合0件でした。別の開発差分で、概要が参照する項目とその引用だけを意味検査に使うよう修正しました。A34の実応答5件を再生しても同じ図・全文が検査を通るため、当該候補は通常採用に至っていません。 [補助設計§9.138](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a34-actual-20261118)
+> **11/18・分析MAPの開発候補 occurrence.v7。** 項目生成で拾った未確認候補を、関係線と概要を作る段階で原文と記録時点に照らして再分類する。選択済みの原文から今も未確認の箇所だけを抜き出して、図・全文に渡す。追加のモデル呼出しはなく、既存MAPと分析IFの通常設定は継承する。 [補助設計§9.139](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a35-prepared-20261118)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 
