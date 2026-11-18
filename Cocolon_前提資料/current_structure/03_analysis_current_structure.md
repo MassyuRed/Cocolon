@@ -1,3 +1,9 @@
+### 11/18 — 分析MAPの開発候補 occurrence.v5
+
+開発版 `7405e4de` のNODESは、PLANで割り当て済みの根拠を原文ごと出力し直す代わりに、そのPLANのハッシュと項目・単位を示す。モデル入力には原文と計画を渡す。受付で参照を照合し、関係線の生成と図・全文・保存が使う根拠は同じPLANの欄と引用から復元する。旧版との混在、異なる項目・単位や違う版の計画は受理しない。通常MAPとIFのモデル選択は従来のまま。
+
+実装先は下記v4と同じ5ファイル（`analysis_model_source.py`、`analysis_if_model_source.py`、`semantic_admission.py`、`intent_compiler.py`、`serve_emlis_natural_reply.py`）。追加の回帰試験は `ai/tests/test_analysis_occurrence_compact_binding.py`。A33の実生成と通常採用は未実施。 [補助設計§9.135](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
+
 ### 11/18 — 分析MAPの開発候補 occurrence.v4
 
 分析MAPの開発正本 `b37fa479` は `semantic_map.node_local.v4.occurrence.v4` を追加した。IFは元120uを選ぶ。A31で試したv3は読書会の意味照合が不適合、照明はNODES途中で停止した。A32で実生成した結果、通常採用は見送った（[二者照合と復元の記録](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a32-20261118)）。 PLANは通常のMAPの作例に、異なる日時・条件の試行と後から実際に行った行為を分ける例を含める。NODESとRELATIONSは、報告が完了を伝えたか可能性を伝えたか、本人が何を照合したかを分ける。未確認欄には、その項目に割り当てた根拠の中の短い節を、同じ欄で一意に照合できる場合に選べる。
