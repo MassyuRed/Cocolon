@@ -1,4 +1,4 @@
-> **11/18・分析MAPの開発候補 occurrence.v7。** 項目生成で拾った未確認候補を、関係線と概要を作る段階で原文と記録時点に照らして再分類する。選択済みの原文から今も未確認の箇所だけを抜き出して、図・全文に渡す。追加のモデル呼出しはなく、既存MAPと分析IFの通常設定は継承する。 [補助設計§9.139](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a35-prepared-20261118)
+> **11/18・分析MAPの開発候補 occurrence.v7。** `25bfec6c` でA35を1回実行。成立した5件の公開図・全文を原文と照合し、二者とも意味適合0/5。未確認候補42箇所のうち11箇所を実4Bが公開に回した。引用と本文片の取り違え、重複した留保、関係線の誤った目的づけが残り、通常採用は見送った。 [補助設計§9.140](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a35-actual-20261118)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 
