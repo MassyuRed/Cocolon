@@ -1,6 +1,6 @@
-### 11/18 — わたしマップの開発版 occurrence.v8
+### 11/19 — わたしマップの開発候補 occurrence.v9
 
-`analysis_model_source.py` が明示指定したMAPのモデルを選び、`semantic_admission.py` が計画には記録ごとの原文欄、項目には各引用の記録番号を渡す。関係線には原文根拠を含む項目一覧と計画の照合値を渡す。`serve_emlis_natural_reply.py` が同じ一覧から計画を復元し、照合した上で従来の生成制約を組み立てる。`analysis_if_model_source.py` はIFを従来のモデルへ振り分け、`intent_compiler.py` は検査済みの関係線と項目から公開図と本文を組み立てる。A37で読書会は図・全文が完成したが二者不適合。照明は計画に同じ4引用を10項目分繰り返し、項目の生成途中で終了したため、短縮した関係線入力の実生成には到達していない。通常反映は未実施。 [補助設計§9.145](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-result-20261118)
+`analysis_model_source.py` が明示指定されたMAPの候補を選び、`analysis_if_model_source.py` がIFを従来の設定で扱う。`serve_emlis_natural_reply.py` が既出項目と丸ごと同じ根拠割当を計画の生成中に止め、事実文・関係線端点には該当する原文から短い引用を選ばせる。`semantic_admission.py` も割当と引用を照合し、`intent_compiler.py` が検査後の図と本文を構成する。新しい回帰試験は `ai/tests/test_analysis_occurrence_v9_plan.py`（計画）と `ai/tests/test_analysis_occurrence_v9_source_cues.py`（事実文・関係線）で、既存のAnalysis CIが実行する。実4Bの品質と通常反映は未確認。 [補助設計§9.146](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-preparation-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 

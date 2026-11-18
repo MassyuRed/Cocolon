@@ -1,4 +1,4 @@
-> **11/18・わたしマップのA37で、読書会の翌日の送信と一人からの返信が図・全文に戻りました。** 開催前であることを椅子の問い合わせ状況へ取り違え、二者とも不適合と判定しました。照明は計画で同じ4引用を10項目に繰り返し、項目の生成途中で停止しました。5入力中1件が完成し、B37と通常反映は未実施です。 [補助設計§9.145](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a37-result-20261118)
+> **11/19・わたしマップのA38候補は、照明の重複項目を計画中に止め、読書会の各事実文と関係線を選んだ原文へ結び付けます。** A37の原本を用いて、重複していない過去8計画を受け付け、照明は最初に重複した第4項目で止まることをCPUで確認しました。新しいGPUでの評価と通常反映は未実施です。 [補助設計§9.146](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a38-preparation-20261119)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 
