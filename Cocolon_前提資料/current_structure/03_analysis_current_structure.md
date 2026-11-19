@@ -1,8 +1,8 @@
-### 11/20 — B53の統合計画は12記録の出典を保持し、統合項目の応答は4件目で終了
+### 11/20 — 統合応答の繰り返しを減らし、原記録の行動欄の経過を根拠に残す
 
-分割36段階の送信と実応答がB52と一致した。実際の統合計画では12項目にそれぞれ該当する原記録の引用を選んだ。統合項目は4件目の根拠を生成する途中で応答が終わり、図・全文の評価と通常反映には至っていない。 [補助設計§9.182](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b53-actual-result-20261120)
+B53で途切れた項目と関係の入出力に対し、同じ原文へ戻せる引用・留保の表記を設けた。対象の12記録では行動欄の41文と各記録の思考根拠を照合した。手元の誤時点例・出力超過例が残るため、次の実統合で図・全文の意味と完走を確かめる。 [補助設計§9.183](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b54-merge-nodes-preparation-20261120)
 
-分析MAPはB53の統合計画を受け取り、統合項目の途中までの応答を保存原本として回収した。公開図・全文は成立せず、今回の実原本を通常APIから保存する工程と通常モデルの切替は未実施。
+分析の送受信は新しい統合形式で短い根拠を元の原文に展開し、計画と項目・関係の選択を保存に渡す。既存形式の要求と保存結果はそれぞれの版で読み取る。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

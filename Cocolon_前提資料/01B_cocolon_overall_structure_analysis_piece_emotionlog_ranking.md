@@ -1,4 +1,6 @@
-> **11/20・B53の実統合計画では、12項目がそれぞれ元の記録の引用を選びました。** 統合項目は4件目の途中で応答が切れ、完成した図・全文は得られませんでした。元の120uは復元済みです。今回の実原本の保存・通常反映は未成立です。 [補助設計§9.182](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b53-actual-result-20261120)
+> **11/20・12記録の統合で引用と留保を短く表して元へ戻す変更と、原記録の行動欄の経過を計画に残す変更を開発枝に反映しました。** 手元では保存・再読まで確認しました。正しい引用から誤った時点の文章が成立する例と、出力予約を超す例が残り、B54での実生成・本文評価・通常反映は未実施です。 [補助設計§9.183](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b54-merge-nodes-preparation-20261120)
+
+B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
 B52後の履歴統合では、新規試験 `ai/tests/test_analysis_merge_constraint_prefix.py` を追加した。通常サービス・統合送信形式・意味確認・モデル提供・関連試験とCIを含む既存11ファイルを変更。Cocolonは5,972ファイル、API開発枝は2,722から2,723ファイル。固定地図はCocolon 1,598、API 2,116項目。
 
