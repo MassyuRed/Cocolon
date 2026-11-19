@@ -1,8 +1,8 @@
-### 11/19 — A42実原本で確認した閉じ括弧の制約と記録日時の表示
+### 11/19 — 分析MAPの記録ごとの根拠選択とA43の準備
 
-開発版v14は原文にない閉じ括弧を生成と受入れで退け、同じ本文単位に別記録の引用があるときは個別の出典日時を表示する。A42原本のCPU再生で読書会の概要・修理の本文を拒否し、照明の7項目の両日を図・全文から識別できた。根拠選択と実4Bの意味適合は未完。 [補助設計§9.157](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a42-admission-20261119)
+開発版v15の通常MAPは計画の最初に記録ごとの思考・行動を照合し、実施・未実施・未確認の区別と各回の条件を根拠に残すよう指示する。A43は5入力、条件付きB43は12記録＋統合。実4Bの意味判定と通常反映が残る。 [補助設計§9.158](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-record-first-plan-20261119)
 
-分析側は既存の `analysis_plan_source_choices.py` が計画の短句を元の入力欄へ戻し、個々の原文の記録日時を照合する。`analysis_model_source.py`・`analysis_if_model_source.py` がMAP・IFの開発版を選ぶ。
+分析の既存モデル選択（`analysis_model_source.py`、`analysis_if_model_source.py`）と根拠照合（`analysis_plan_source_choices.py`）で開発用v15を識別する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

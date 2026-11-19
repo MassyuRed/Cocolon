@@ -1,4 +1,6 @@
-> **11/19・分析MAPの開発版v14で、根拠のない閉じ括弧を抑え、同じ項目に入った別記録の本文に出典日時を表示するようにしました。** A42の原本を使ったCPU再生と開発枝のCIで確認しました。実4Bの最新結果は§9.156のA42で、v14の実生成・通常採用は0件です。 [補助設計§9.157](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a42-admission-20261119)
+> **11/19・分析MAPの開発版v15に、各記録で実行・未実施・未確認を確かめてから根拠をまとめる指示を組み込みました。** A43の5入力と、二者が全件の意味を確認した場合に進むB43の12記録を凍結しました。実4Bでの効果と通常反映は未確認です。 [補助設計§9.158](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-record-first-plan-20261119)
+
+開発版v15の計画指示を既存のCMEE分析に統合した。新規回帰 `ai/tests/test_analysis_occurrence_v15_record_plan.py` と既存の開発モデル選択・Analysis CIで確認する。アプリ・前提資料のGitツリーは5,972ファイル、API開発枝は2,694ファイル。
 
 開発版v14の新規回帰は `ai/tests/test_analysis_occurrence_v14_visible_closers.py`（表示する文章内の記号）と `ai/tests/test_analysis_v14_mixed_record_dates.py`（別記録に対応する日時）。既存のAnalysis CIとモデル選択の回帰を更新した。Gitツリーの全ファイルはアプリ側5,972件、API開発枝2,693件。
 

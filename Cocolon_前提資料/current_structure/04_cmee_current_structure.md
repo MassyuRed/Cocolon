@@ -1,8 +1,8 @@
-### 11/19 — A42実原本で確認した閉じ括弧の制約と記録日時の表示
+### 11/19 — 分析MAPの記録ごとの根拠選択とA43の準備
 
-開発版v14は原文にない閉じ括弧を生成と受入れで退け、同じ本文単位に別記録の引用があるときは個別の出典日時を表示する。A42原本のCPU再生で読書会の概要・修理の本文を拒否し、照明の7項目の両日を図・全文から識別できた。根拠選択と実4Bの意味適合は未完。 [補助設計§9.157](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a42-admission-20261119)
+開発版v15の通常MAPは計画の最初に記録ごとの思考・行動を照合し、実施・未実施・未確認の区別と各回の条件を根拠に残すよう指示する。A43は5入力、条件付きB43は12記録＋統合。実4Bの意味判定と通常反映が残る。 [補助設計§9.158](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-record-first-plan-20261119)
 
-CMEE側は既存の `intent_compiler.py`・`semantic_admission.py` が段階別の要求、原文に結び付いた本文の受入れと日付表示を扱い、`serve_emlis_natural_reply.py` が生成時の制約を扱う。
+CMEEの `semantic_admission.py` が通常MAP用PLAN指示を選び、`intent_compiler.py` と `serve_emlis_natural_reply.py` はv15にもv14の出典日時表示と記号制約を適用する。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
