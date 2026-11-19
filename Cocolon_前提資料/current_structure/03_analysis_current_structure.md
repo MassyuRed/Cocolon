@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A43の5件の意味照合と保存・再読
+### 11/19 — A43の原本を使った開発版v16の本文と見出しの照合
 
-A43は5件の公開図・全文を生成し、通常APIのコードで隔離DBに保存、同一IDから別プロセスで再読した。二者とも全5件を不適合とした。根拠や留保の選択、項目の意味、本文への書式記号の混入に問題があり、B43は未実行。通常用120uは復元した。 [補助設計§9.159](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-actual-result-20261119)
+開発版v16は、計画が選んだ根拠を完全な文として本文に選べるようにし、原文に裏付けのない書式断片と記号だけの本文を検査する。A43実原本のCPU再生と隔離DB再読までを確認。意味適合・通常採用は未確認。 [補助設計§9.160](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a43-body-and-heading-20261119)
 
-分析の既存モデル選択（`analysis_model_source.py`、`analysis_if_model_source.py`）と根拠照合（`analysis_plan_source_choices.py`）で開発用v15を識別する。
+分析側の `analysis_plan_source_choices.py` が選択根拠内の完全な文の参照と本文片を検査する。MAP・IFのモデル選択は既存の `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

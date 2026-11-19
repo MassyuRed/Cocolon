@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A43の5件の意味照合と保存・再読
+### 11/19 — A43の原本を使った開発版v16の本文と見出しの照合
 
-A43は5件の公開図・全文を生成し、通常APIのコードで隔離DBに保存、同一IDから別プロセスで再読した。二者とも全5件を不適合とした。根拠や留保の選択、項目の意味、本文への書式記号の混入に問題があり、B43は未実行。通常用120uは復元した。 [補助設計§9.159](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-actual-result-20261119)
+開発版v16は、計画が選んだ根拠を完全な文として本文に選べるようにし、原文に裏付けのない書式断片と記号だけの本文を検査する。A43実原本のCPU再生と隔離DB再読までを確認。意味適合・通常採用は未確認。 [補助設計§9.160](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a43-body-and-heading-20261119)
 
-CMEEの `semantic_admission.py` が通常MAP用PLAN指示を選び、`intent_compiler.py` と `serve_emlis_natural_reply.py` はv15にもv14の出典日時表示と記号制約を適用する。
+CMEEは `semantic_admission.py` と `intent_compiler.py` で本文と見出しの根拠・表示を扱い、`serve_emlis_natural_reply.py` が生成時に許可する参照・本文を制約する。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

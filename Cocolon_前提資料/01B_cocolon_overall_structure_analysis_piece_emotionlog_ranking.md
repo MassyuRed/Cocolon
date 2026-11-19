@@ -1,4 +1,6 @@
-> **11/19・実4B試験A43は5入力すべてで図と全文を生成し、隔離DBに保存して別プロセスで再読しました。** 主担当と独立担当は5件すべてを不適合と判定しました。条件付きB43は未実行で、v15の通常採用は0件です。 [補助設計§9.159](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-actual-result-20261119)
+> **11/19・分析MAPの開発版v16で、A43の照明に出たコンマだけの本文と、修理に出た内部書式を生成・受入れの両方で拒否できることを確認しました。** 受け取ったA43の原本によるCPU再生です。v16の実4B生成・通常採用は0件です。 [補助設計§9.160](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a43-body-and-heading-20261119)
+
+開発版v16の専用回帰は`ai/tests/test_analysis_occurrence_v16_fact_content.py`、`ai/tests/test_analysis_v16_attributed_caption.py`、`ai/tests/test_analysis_v16_source_title_endings.py`。実ツリーはアプリ・前提資料5,972ファイル、API開発枝2,697ファイル。
 
 開発版v15の計画指示を既存のCMEE分析に統合した。新規回帰 `ai/tests/test_analysis_occurrence_v15_record_plan.py` と既存の開発モデル選択・Analysis CIで確認する。アプリ・前提資料のGitツリーは5,972ファイル、API開発枝は2,694ファイル。
 
