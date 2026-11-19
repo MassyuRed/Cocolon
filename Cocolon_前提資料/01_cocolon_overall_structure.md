@@ -1,4 +1,6 @@
-> **11/19・分析MAPの実4B試験A48で、読書会は来週で未開催という留保と、修理で弟自身が店に相談したかは未確認という原文が図・全文に戻りました。** 5件を隔離DBに保存し同じIDから再読しました。二者がともに適合としたのは1/5件（修理）。照明の初日の制作時間、応募取消後に残る受領メールの意味、全体題・要約と10記録の重複が残り、B48・通常反映は実行0件です。 [補助設計§9.170](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a48-actual-result-20261119)
+> **11/19・分析MAP開発版v22で、A48の照明で抜けた「窓際の約1時間と夜の条件」、応募取消で抜けた「残る受領メールと今の状態」を根拠として扱えるようにしました。** 実応答を使ったCPU再生で、補った二つの原文が図・全文まで届き、読書会と10記録の概要、文の重複も改善しました。A49と条件付きB49は資材の凍結までで、v22の実4B生成・通常反映は実行0件です。 [補助設計§9.171](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a48-source-coverage-and-display-20261119)
+
+開発版v22で追加した回帰試験は`ai/tests/test_analysis_v22_plan_source_coverage.py`、`ai/tests/test_analysis_v22_prior_evidence.py`、`ai/tests/test_analysis_v22_record_overview.py`。アプリ・前提資料は5,972ファイル、API開発枝は2,713から2,716ファイル（既存10変更・新規3）。System Contextの固定地図はアプリ1,598・API 2,116の計3,714項目。
 
 開発版v21で追加した回帰試験は`ai/tests/test_analysis_v21_authored_overview.py`、`ai/tests/test_analysis_v21_overlapping_source_facts.py`、`ai/tests/test_analysis_v21_recorded_schedule.py`。アプリ・前提資料は5,972ファイル、API開発枝は2,710から2,713ファイル（既存8変更・新規3）。System Contextの固定地図はアプリ1,598・API 2,116の計3,714項目。
 
