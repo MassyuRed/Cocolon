@@ -1,6 +1,6 @@
-### 11/19 — 分析MAPの記録ごとの根拠選択とA43の準備
+### 11/19 — 実4B試験A43の5件の意味照合と保存・再読
 
-開発版v15の通常MAPは計画の最初に記録ごとの思考・行動を照合し、実施・未実施・未確認の区別と各回の条件を根拠に残すよう指示する。A43は5入力、条件付きB43は12記録＋統合。実4Bの意味判定と通常反映が残る。 [補助設計§9.158](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-record-first-plan-20261119)
+A43は5件の公開図・全文を生成し、通常APIのコードで隔離DBに保存、同一IDから別プロセスで再読した。二者とも全5件を不適合とした。根拠や留保の選択、項目の意味、本文への書式記号の混入に問題があり、B43は未実行。通常用120uは復元した。 [補助設計§9.159](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-actual-result-20261119)
 
 CMEEの `semantic_admission.py` が通常MAP用PLAN指示を選び、`intent_compiler.py` と `serve_emlis_natural_reply.py` はv15にもv14の出典日時表示と記号制約を適用する。
 

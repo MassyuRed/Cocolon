@@ -1,4 +1,4 @@
-> **11/19・分析MAPの開発版v15に、各記録で実行・未実施・未確認を確かめてから根拠をまとめる指示を組み込みました。** A43の5入力と、二者が全件の意味を確認した場合に進むB43の12記録を凍結しました。実4Bでの効果と通常反映は未確認です。 [補助設計§9.158](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-record-first-plan-20261119)
+> **11/19・実4B試験A43は5入力すべてで図と全文を生成し、隔離DBに保存して別プロセスで再読しました。** 主担当と独立担当は5件すべてを不適合と判定しました。条件付きB43は未実行で、v15の通常採用は0件です。 [補助設計§9.159](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a43-actual-result-20261119)
 
 開発版v15の計画指示を既存のCMEE分析に統合した。新規回帰 `ai/tests/test_analysis_occurrence_v15_record_plan.py` と既存の開発モデル選択・Analysis CIで確認する。アプリ・前提資料のGitツリーは5,972ファイル、API開発枝は2,694ファイル。
 
