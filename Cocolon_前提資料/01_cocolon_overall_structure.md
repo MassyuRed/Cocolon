@@ -1,4 +1,4 @@
-> **11/20・12記録の統合で引用と留保を短く表して元へ戻す変更と、原記録の行動欄の経過を計画に残す変更を開発枝に反映しました。** 手元では保存・再読まで確認しました。正しい引用から誤った時点の文章が成立する例と、出力予約を超す例が残り、B54での実生成・本文評価・通常反映は未実施です。 [補助設計§9.183](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b54-merge-nodes-preparation-20261120)
+> **11/20・B54では12記録すべての図と全文が完成し、照明を購入して使った経過も表示されました。** 一方、読書会場の点検条件に「だけ」が加わり、7記録の図では同じ行動欄の文が原文と異なる順に並びました。二者の照合で通常採用を見送り、元の120uの復元を確認しました。 [補助設計§9.184](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b54-actual-result-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
