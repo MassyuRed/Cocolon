@@ -1,6 +1,6 @@
-### 11/19 — A45の実出力で分析MAP開発版v19の本文と全体題を照合
+### 11/19 — 実4B試験A46の5件を保存・再読、意味判定と通常反映の条件
 
-開発版v19で本文の内部形式と複数記録の全体題を出典と照合し、実A45の19欄が単独でそれぞれ拒否されることを確認した。A46と条件付きB46を凍結。最新の実生成はA45のv18。 [補助設計§9.165](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a45-source-bound-display-20261119)
+分析MAP開発版v19のA46は、5件すべての図と全文を隔離DBで保存・再読した。意味適合は主担当0/5件、独立担当1/5件（応募取消）、両者が適合としたものは0/5件。照明で新しい形の内部参照が8欄に出て、応募取消の初日の判断は要約で別の意味に変わった。B46と通常反映は開始条件に達しなかった。 [補助設計§9.166](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a46-actual-result-20261119)
 
 分析の `analysis_plan_source_choices.py` が事実欄の原文選択・自由記述の出典と、複数記録を参照する題の原文を照合する。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
 

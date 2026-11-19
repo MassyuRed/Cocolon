@@ -1,4 +1,4 @@
-> **11/19・分析MAP開発版v19で、A45の図・全文に漏れた内部形式19個を、生成時とCMEEの公開前にそれぞれ単独で拒否できることを確認しました。** 複数記録の概要題も元の入力と照合し、A46と条件付きB46の実行資材を凍結しました。v19の実4B生成・通常反映は各0件です。 [補助設計§9.165](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a45-source-bound-display-20261119)
+> **11/19・分析MAP開発版v19のA46は、5件すべてで図と全文を生成し、通常API経由で隔離DBに保存して別プロセスで再読できました。** 意味適合は主担当0/5件、独立担当1/5件（応募取消）、両者が適合としたものは0/5件。照明の本文8欄には新しい形の内部参照が残り、応募取消では選択保留の意味が変わりました。B46の条件は未達で、通常反映は0件です。 [補助設計§9.166](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a46-actual-result-20261119)
 
 開発版v19の追加検証は`ai/tests/test_analysis_v19_overview_original_record.py`、`ai/tests/test_analysis_v19_source_facts.py`。全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,706ファイル。
 
