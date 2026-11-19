@@ -1,6 +1,6 @@
-### 11/20 — 開発版v24の実生成で原文5件を照合し、修理の本人と弟を両日とも区別
+### 11/20 — B51は12記録の分割読取りを完了し、統合計画の送信前に文脈上限で停止
 
-A51の読書会・照明・修理・応募取消・手動10記録は、原文・実応答・図・全文を二者が照合して全件適合。5件とも隔離SQLに保存し、別プロセスで同じIDから再読した。同じPodで12記録を扱うB51を開始した。 [補助設計§9.176](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a51-actual-result-20261120)
+A51の実5入力は二者適合・同一ID再読済み。B51の12記録では分割36応答を受領した。統合の計画は入力30,814トークンと予約4,096の合計が上限を2,142超え、送信前に停止した。統合の図・全文・保存と通常反映が残る。 [補助設計§9.177](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b51-actual-result-20261120)
 
 生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が両日の記述を計画で照合し、`intent_compiler.py` が通常MAPのv24指定に応じた原文を生成側へ渡す。
 

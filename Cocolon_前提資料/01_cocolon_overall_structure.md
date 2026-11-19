@@ -1,4 +1,4 @@
-> **11/20・分析MAP開発版v24のA51で、読書会・照明・修理・応募取消・手動10記録の5件すべてが、主担当と独立担当の原文照合に適合しました。** 修理では本人の画面修理と弟の別件を両日とも区別できました。実応答5件を隔離SQLへ保存し、別プロセスで同じIDから読み戻しました。同じPodで12記録を扱うB51を開始しました。 [補助設計§9.176](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a51-actual-result-20261120)
+> **11/20・分析MAPのB51は12記録をそれぞれ3段階で読み終えました。統合の計画は、送信前にモデルの文脈上限を2,142トークン超えたため停止しました。** 12記録の統合図・全文は生成されず、B51の保存・通常反映は未実施です。通常用120uは復元済みで、A51の5件の二者適合と保存・再読の結果を保持しています。 [補助設計§9.177](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b51-actual-result-20261120)
 
 開発版v24で追加したファイルは `ai/tests/test_analysis_v24_distinct_participants.py`。アプリ・前提資料の実ツリーは5,972ファイル、API開発枝は2,718から2,719ファイル（既存7件を変更、新規1件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 
