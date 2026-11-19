@@ -1,4 +1,6 @@
-> **11/20・B52は12記録の分割36応答と統合計画を受領し、統合項目の応答待ちで通常処理の840秒に達しました。** 計画には荷物整理と展示説明、読書会と照明など異なる記録の引用が混ざりました。統合図・全文、今回の原本の保存、通常反映は未成立です。元の120uは復元しました。 [補助設計§9.180](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-actual-result-20261120)
+> **11/20・B52で混ざった引用の出典を記録ごとに確かめ、12記録を統合する処理の待ち時間を短縮する版を開発枝に反映しました。** B52の実計画にあった混在を新方式で拒否し、過去の読取りを保持しました。B53の実生成・公開図と全文の評価・通常反映が残ります。 [補助設計§9.181](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-history-merge-repair-20261120)
+
+B52後の履歴統合では、新規試験 `ai/tests/test_analysis_merge_constraint_prefix.py` を追加した。通常サービス・統合送信形式・意味確認・モデル提供・関連試験とCIを含む既存11ファイルを変更。Cocolonは5,972ファイル、API開発枝は2,722から2,723ファイル。固定地図はCocolon 1,598、API 2,116項目。
 
 B51後のv24の履歴統合に `ai/services/ai_inference/analysis_merge_wire.py`、`ai/tests/test_analysis_merge_wire.py`、`ai/tests/test_analysis_merge_transport.py` を追加した。アプリ・前提資料は実ツリー5,972ファイル、API開発枝は2,719から2,722ファイル（既存4件を変更、新規3件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 
