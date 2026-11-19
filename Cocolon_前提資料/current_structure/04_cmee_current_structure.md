@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A49で修理・応募取消・10記録が両者の意味判定に適合
+### 11/19 — A49で原文と異なった全体題と複数記録の時系列を、分析MAP開発版v23で照合
 
-分析MAP開発版v22を実4Bで評価し、5件を通常API・隔離DBで保存再読した。両者の意味適合は3/5件（修理・応募取消・10記録）。読書会と照明の全体題が原文にない意味を加えたため、B49は開始条件に達せず、通常反映は未完です。 [補助設計§9.172](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a49-actual-result-20261119)
+A49で根拠のない読書会・照明の題をv23で検出し、複数記録の概要に日付と本人の行動を表示した。元の5件はCPUで再生し、A50・条件付きB50を準備した。実4Bの最新結果はA49の二者3/5件。 [補助設計§9.173](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a49-source-titles-and-chronology-20261119)
 
-生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が計画で選ぶ原文を照合し、`intent_compiler.py` と `observed_route_realizer.py` が図・全文に出す要約と根拠の重複を整理する。
+生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が題案を同じ条件で確かめ、`intent_compiler.py` が記録の日付を含む概要を図と全文へ渡す。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

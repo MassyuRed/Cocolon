@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A49で修理・応募取消・10記録が両者の意味判定に適合
+### 11/19 — A49で原文と異なった全体題と複数記録の時系列を、分析MAP開発版v23で照合
 
-分析MAP開発版v22を実4Bで評価し、5件を通常API・隔離DBで保存再読した。両者の意味適合は3/5件（修理・応募取消・10記録）。読書会と照明の全体題が原文にない意味を加えたため、B49は開始条件に達せず、通常反映は未完です。 [補助設計§9.172](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a49-actual-result-20261119)
+A49で根拠のない読書会・照明の題をv23で検出し、複数記録の概要に日付と本人の行動を表示した。元の5件はCPUで再生し、A50・条件付きB50を準備した。実4Bの最新結果はA49の二者3/5件。 [補助設計§9.173](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a49-source-titles-and-chronology-20261119)
 
-分析の `analysis_plan_source_choices.py` が、別記録の制作実績と条件、以前の証拠と現在の状態を区別した原文を計画で確認し、件数見出しの概要に使う行動を選ぶ。
+分析の `analysis_plan_source_choices.py` が全体題を原文の行動・対象と記録に対応させ、複数記録の概要に日付と選ばれた行動を示す。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
