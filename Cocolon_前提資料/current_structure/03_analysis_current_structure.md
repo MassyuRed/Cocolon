@@ -1,6 +1,6 @@
-### 11/19 — A50の修理で抜けた弟の依頼と相談状況を、分析MAP開発版v24で照合
+### 11/20 — 開発版v24の実生成で原文5件を照合し、修理の本人と弟を両日とも区別
 
-本人の修理とは別に、弟の電話は依頼しておらず、後日の電池相談は不明だった。両日の原文を補ったCPU例で図・全文と保存後の再読まで確認した。v24の新規生成はA51で評価する。 [補助設計§9.175](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a50-participant-coverage-20261119)
+A51の読書会・照明・修理・応募取消・手動10記録は、原文・実応答・図・全文を二者が照合して全件適合。5件とも隔離SQLに保存し、別プロセスで同じIDから再読した。同じPodで12記録を扱うB51を開始した。 [補助設計§9.176](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a51-actual-result-20261120)
 
 分析の `analysis_plan_source_choices.py` が、異なる日の思考・行動両欄に同じ話題と明示的な否定・留保がある場合に、計画で照合する原文の範囲を決める。
 
