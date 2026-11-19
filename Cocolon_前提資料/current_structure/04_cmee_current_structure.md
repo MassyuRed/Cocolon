@@ -1,6 +1,6 @@
-### 11/19 — A44原本を使った開発版v18の根拠・本文・見出しの照合
+### 11/19 — 実4B試験A45の応募取消が意味適合、4件に本文の問題
 
-開発版v18の計画は条件に合う短い行動欄の全文と同じ記録の思考を照合する。本文の内部参照、複数記録を選んだ見出し、同じ根拠の表示重複も検査した。A45・条件付きB45を凍結。最新の実生成はA44のv17。 [補助設計§9.163](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a44-grounded-generation-20261119)
+開発版v18のA45で分析MAPの5件を実生成し、通常API経由で隔離DBに保存・再読した。応募取消の全体見出しと本文は二者の意味照合を通った。4件に内部形式が露出し、B45と通常反映は開始条件に達しなかった。 [補助設計§9.164](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a45-actual-result-20261119)
 
 CMEEの `semantic_admission.py` と生成時の `serve_emlis_natural_reply.py` が計画・本文・見出しの根拠を検査し、`intent_compiler.py` が同じ根拠の繰返し表示を扱う。
 
