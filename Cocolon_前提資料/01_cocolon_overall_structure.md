@@ -1,4 +1,4 @@
-> **11/19・開発版v23で、A49の読書会と照明で原文にない意味を加えた全体題を検出し、複数記録の概要に日付と本人の行動を表示しました。** A49の5件をCPUで再生し、既存履歴の読取と三中核の回帰を確認しました。A50・条件付きB50は準備済みで、v23の実4B評価と通常反映は未実施です。 [補助設計§9.173](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a49-source-titles-and-chronology-20261119)
+> **11/19・開発版v23のA50は、読書会・照明・応募取消・手動10記録が二者とも適合し、修理は不適合でした。** 修理では弟の依頼と相談状況の区別が図・全文から抜けました。全5件を隔離DBで保存・同一ID再読。B50は条件不成立、通常反映は未完です。 [補助設計§9.174](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a50-actual-result-20261119)
 
 開発版v23で追加したファイルは`ai/tests/test_analysis_v23_overview_arguments.py`、`ai/tests/test_analysis_v23_record_summary.py`。GitHubの実ツリーはアプリ・前提資料が5,972ファイル、API開発枝が2,716から2,718ファイル（既存8件を変更、新規2件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 

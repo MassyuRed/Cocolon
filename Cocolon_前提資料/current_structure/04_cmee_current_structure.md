@@ -1,6 +1,6 @@
-### 11/19 — A49で原文と異なった全体題と複数記録の時系列を、分析MAP開発版v23で照合
+### 11/19 — 分析MAP開発版v23の実4B試験A50で二者4/5件適合
 
-A49で根拠のない読書会・照明の題をv23で検出し、複数記録の概要に日付と本人の行動を表示した。元の5件はCPUで再生し、A50・条件付きB50を準備した。実4Bの最新結果はA49の二者3/5件。 [補助設計§9.173](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a49-source-titles-and-chronology-20261119)
+A50は読書会・照明・応募取消・10記録が二者とも適合した。修理は弟に関する記述が計画から抜け不適合。全5件を通常APIのコードで隔離DBへ保存し、別プロセスで同一IDを再読した。B50は条件不成立、通常反映は未完。 [補助設計§9.174](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a50-actual-result-20261119)
 
 生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が題案を同じ条件で確かめ、`intent_compiler.py` が記録の日付を含む概要を図と全文へ渡す。
 
