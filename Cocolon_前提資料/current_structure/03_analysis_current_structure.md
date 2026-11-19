@@ -1,8 +1,8 @@
-### 11/19 — 分析MAP開発版v23の実4B試験A50で二者4/5件適合
+### 11/19 — A50の修理で抜けた弟の依頼と相談状況を、分析MAP開発版v24で照合
 
-A50は読書会・照明・応募取消・10記録が二者とも適合した。修理は弟に関する記述が計画から抜け不適合。全5件を通常APIのコードで隔離DBへ保存し、別プロセスで同一IDを再読した。B50は条件不成立、通常反映は未完。 [補助設計§9.174](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a50-actual-result-20261119)
+本人の修理とは別に、弟の電話は依頼しておらず、後日の電池相談は不明だった。両日の原文を補ったCPU例で図・全文と保存後の再読まで確認した。v24の新規生成はA51で評価する。 [補助設計§9.175](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a50-participant-coverage-20261119)
 
-分析の `analysis_plan_source_choices.py` が全体題を原文の行動・対象と記録に対応させ、複数記録の概要に日付と選ばれた行動を示す。
+分析の `analysis_plan_source_choices.py` が、異なる日の思考・行動両欄に同じ話題と明示的な否定・留保がある場合に、計画で照合する原文の範囲を決める。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

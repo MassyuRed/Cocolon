@@ -1,4 +1,6 @@
-> **11/19・開発版v23のA50は、読書会・照明・応募取消・手動10記録が二者とも適合し、修理は不適合でした。** 修理では弟の依頼と相談状況の区別が図・全文から抜けました。全5件を隔離DBで保存・同一ID再読。B50は条件不成立、通常反映は未完です。 [補助設計§9.174](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a50-actual-result-20261119)
+> **11/19・分析MAP開発版v24で、A50の修理から抜けた弟の二つの記述を、計画・図・全文で照合しました。** A50の実計画は根拠不足で退け、CPUで両日の原文を補った例は隔離DBに保存し、同一IDで読み戻しました。A51・条件付きB51は準備済み。v24の実4B生成と通常反映は未完です。 [補助設計§9.175](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a50-participant-coverage-20261119)
+
+開発版v24で追加したファイルは `ai/tests/test_analysis_v24_distinct_participants.py`。アプリ・前提資料の実ツリーは5,972ファイル、API開発枝は2,718から2,719ファイル（既存7件を変更、新規1件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 
 開発版v23で追加したファイルは`ai/tests/test_analysis_v23_overview_arguments.py`、`ai/tests/test_analysis_v23_record_summary.py`。GitHubの実ツリーはアプリ・前提資料が5,972ファイル、API開発枝が2,716から2,718ファイル（既存8件を変更、新規2件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 

@@ -1,8 +1,8 @@
-### 11/19 — 分析MAP開発版v23の実4B試験A50で二者4/5件適合
+### 11/19 — A50の修理で抜けた弟の依頼と相談状況を、分析MAP開発版v24で照合
 
-A50は読書会・照明・応募取消・10記録が二者とも適合した。修理は弟に関する記述が計画から抜け不適合。全5件を通常APIのコードで隔離DBへ保存し、別プロセスで同一IDを再読した。B50は条件不成立、通常反映は未完。 [補助設計§9.174](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a50-actual-result-20261119)
+本人の修理とは別に、弟の電話は依頼しておらず、後日の電池相談は不明だった。両日の原文を補ったCPU例で図・全文と保存後の再読まで確認した。v24の新規生成はA51で評価する。 [補助設計§9.175](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a50-participant-coverage-20261119)
 
-生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が題案を同じ条件で確かめ、`intent_compiler.py` が記録の日付を含む概要を図と全文へ渡す。
+生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が両日の記述を計画で照合し、`intent_compiler.py` が通常MAPのv24指定に応じた原文を生成側へ渡す。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
