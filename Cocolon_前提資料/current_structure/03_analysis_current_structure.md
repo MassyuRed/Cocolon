@@ -1,6 +1,8 @@
-### 11/19 — 選択した原文の復元と、長い関係要求の保存・再読
+### 11/19 — 原文短句を選ぶ計画と、別記録をまたぐ見出し
 
-選択済みの原文を短い番号で返す開発候補で、読書会の11片と、照明の実計画にCPUで本文を補った2例の72片を復元した。照明2例は関係要求の重複を減らし、隔離SQLへ保存して別プロセスで同じ公開図・全文・非公開根拠を再読できた。実4Bの最新結果はA41。計画に含まれなかった未開催・椅子の状態と、初日・翌日を混ぜた説明は次の課題。 [補助設計§9.154](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fact-reference-candidate-20261119)
+開発版v13は、計画で選ぶ短句を同じ入力欄の原文へ結び付け、複数の記録にまたがる項目では片方だけを引用した見出しを退ける。5入力と全12記録・統合をCPUで検査し、A42と条件付きB42の条件を凍結した。実行は承認前。 [補助設計§9.155](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a42-candidate-scope-20261119)
+
+分析の既存ソースでは `analysis_plan_source_choices.py` が短句と元の文・入力欄を結ぶ。通常MAP・IFのモデル選択を担う既存 `analysis_model_source.py`・`analysis_if_model_source.py` が新しい開発版を識別する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

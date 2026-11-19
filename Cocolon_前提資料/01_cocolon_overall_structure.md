@@ -1,4 +1,6 @@
-> **11/19・選択済みの原文を短い番号で返し、公開・保存時に全文へ戻す開発候補を確認しました。** 照明の実計画にCPUで本文を補った2例は全72引用を保ち、通常APIのコードで隔離SQLへの保存と別プロセスでの再読を完了しました。実4Bの最新評価は§9.153のA41で、読書会の意味不適合と照明の本文途中終了が残ります。 [補助設計§9.154](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fact-reference-candidate-20261119)
+> **11/19・分析MAPの開発版v13で、根拠を原文の短句から選ぶ仕組みと、異なる日の出来事を含む項目の見出しを改めました。** 5入力のA42と、全件で二者が意味適合を確認した場合の12記録のB42の条件を凍結しました。実4Bの最新結果は§9.153のA41です。A42・B42は承認前で、実行と通常反映は未着手です。 [補助設計§9.155](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a42-candidate-scope-20261119)
+
+API開発枝の新規回帰は `ai/tests/test_analysis_occurrence_v13_plan_choices.py`（原文短句と旧形式）と `ai/tests/test_analysis_v13_separate_record_titles.py`（別記録の項目題・概要題と日時）。既存のAnalysis CIに両方を登録し、製品側6ファイルを更新した。アプリ側の全ファイル地図は5,972件、API開発枝は2,691件。
 
 開発枝の新規ファイルは `mashos-api/ai/tests/test_analysis_occurrence_v12_fact_refs.py`。選択した原文の番号表記・復元、関係要求の重複と上限を検査する。既存の `.github/workflows/analysis-observed-content.yml` がこの試験を実行する。製品側は既存5ファイルを更新した。両リポジトリの全ファイル地図をGitツリーで再照合し、アプリ側は5,972、API開発枝はこの新規試験を含め2,689ファイル。
 
