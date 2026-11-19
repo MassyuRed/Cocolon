@@ -1,4 +1,6 @@
-> **11/19・A41は実4Bから7応答を受領し、読書会1件の図・全文を生成、隔離SQLで保存・再読できました。** 読書会は二者とも不適合。照明は2つの制作場面を計画に選んだものの本文の生成中に停止し、残り3件は未実行です。通常用120uを復元し、B41・本番反映は見送りました。 [補助設計§9.153](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a41-result-20261119)
+> **11/19・選択済みの原文を短い番号で返し、公開・保存時に全文へ戻す開発候補を確認しました。** 照明の実計画にCPUで本文を補った2例は全72引用を保ち、通常APIのコードで隔離SQLへの保存と別プロセスでの再読を完了しました。実4Bの最新評価は§9.153のA41で、読書会の意味不適合と照明の本文途中終了が残ります。 [補助設計§9.154](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fact-reference-candidate-20261119)
+
+開発枝の新規ファイルは `mashos-api/ai/tests/test_analysis_occurrence_v12_fact_refs.py`。選択した原文の番号表記・復元、関係要求の重複と上限を検査する。既存の `.github/workflows/analysis-observed-content.yml` がこの試験を実行する。製品側は既存5ファイルを更新した。両リポジトリの全ファイル地図をGitツリーで再照合し、アプリ側は5,972、API開発枝はこの新規試験を含め2,689ファイル。
 
 v8の新しい回帰試験はAPIの `ai/tests/test_analysis_occurrence_v8_source_reading.py`（記録・思考／行動欄の参照、本人訂正・分割した原文の区別）と `ai/tests/test_analysis_occurrence_v8_relation_transport.py`（短縮した入力からの計画復元・旧生成制約との照合・不整合の拒否）。製品側の既存ファイルの接続は[分析の構造地図](current_structure/03_analysis_current_structure.md)に記載した。
 

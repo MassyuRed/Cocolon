@@ -1,6 +1,8 @@
-### 11/19 — A41の読書会の実生成と照明の途中終了
+### 11/19 — 選択した原文の復元と、長い関係要求の保存・再読
 
-読書会の予約完了は見出しに残ったが、翌週の未開催と椅子の問い合わせ状況が抜け、二者とも不適合。照明は窓際で1時間、購入後に30分描いた原文を選択したが、9項目・18場面・72引用を計画し、本文6項目目で停止した。残り3件は未実行。隔離SQLに保存して別プロセスで再読できたのは完成した読書会1件。 [補助設計§9.153](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a41-result-20261119)
+選択済みの原文を短い番号で返す開発候補で、読書会の11片と、照明の実計画にCPUで本文を補った2例の72片を復元した。照明2例は関係要求の重複を減らし、隔離SQLへ保存して別プロセスで同じ公開図・全文・非公開根拠を再読できた。実4Bの最新結果はA41。計画に含まれなかった未開催・椅子の状態と、初日・翌日を混ぜた説明は次の課題。 [補助設計§9.154](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-fact-reference-candidate-20261119)
+
+既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
