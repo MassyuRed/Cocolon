@@ -1,8 +1,8 @@
-### 11/20 — 12記録を統合するときの重複する引用と欄情報を位置参照で送る
+### 11/20 — B52の送付と開始前の状態、試験と通常サービスの起動設定
 
-B51の統合計画で重複した引用と欄情報を、元の記録内の位置へ結び直せる形式に変更した。元の論理メッセージと送信用メッセージを両方照合する。A51の5件とB51の分割12件の実応答は、新しい開発版でも元と同じ内容に再生できた。 [補助設計§9.178](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-merge-source-encoding-20261120)
+元のB52送付ZIPを同じPodで照合した。実行前に試験側と通常用120uの復元設定を分け、差分3ファイルを確定した。開始前の120uは前回復元時のPIDで状態確認200。B52のモデル要求は0回。 [補助設計§9.179](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-prestart-operator-20261120)
 
-分析の `analysis_merge_wire.py` が、v24の履歴統合に限り、元の引用範囲と完全な欄の情報を復元できる位置参照へ符号化する。モデルへの送信は `analysis_model_source.py` が担当する。
+分析MAPは開発版290b6f67のまま。A51の5入力とB51の12分割の実応答を保持し、新しい12記録の統合図・全文をB52で評価する段階にある。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

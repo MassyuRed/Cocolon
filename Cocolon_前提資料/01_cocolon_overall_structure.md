@@ -1,4 +1,4 @@
-> **11/20・分析MAPの12記録を統合する際、元の欄と重複する引用・欄情報を位置参照で送る修正を開発枝へ反映しました。** B51で送信前に止まった計画は、同じ原文と出力予約を保ったまま文脈内に収まりました。A51の5件とB51の分割12件は実応答の再生で照合済みです。B52による新しい統合図・全文の評価と通常反映が残ります。 [補助設計§9.178](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-merge-source-encoding-20261120)
+> **11/20・B52の元のZIPを同じPodへ送り、起動前に試験と通常用120uの設定を分けた差分を用意しました。** 元の120uはPID 38747で状態確認200。新しい範囲は5de41089、差分は23,080バイトです。B52の実生成・統合図の判定・通常反映は未実施です。 [補助設計§9.179](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-prestart-operator-20261120)
 
 B51後のv24の履歴統合に `ai/services/ai_inference/analysis_merge_wire.py`、`ai/tests/test_analysis_merge_wire.py`、`ai/tests/test_analysis_merge_transport.py` を追加した。アプリ・前提資料は実ツリー5,972ファイル、API開発枝は2,719から2,722ファイル（既存4件を変更、新規3件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 

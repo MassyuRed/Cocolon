@@ -1,8 +1,8 @@
-### 11/20 — 12記録を統合するときの重複する引用と欄情報を位置参照で送る
+### 11/20 — B52の送付と開始前の状態、試験と通常サービスの起動設定
 
-B51の統合計画で重複した引用と欄情報を、元の記録内の位置へ結び直せる形式に変更した。元の論理メッセージと送信用メッセージを両方照合する。A51の5件とB51の分割12件の実応答は、新しい開発版でも元と同じ内容に再生できた。 [補助設計§9.178](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-merge-source-encoding-20261120)
+元のB52送付ZIPを同じPodで照合した。実行前に試験側と通常用120uの復元設定を分け、差分3ファイルを確定した。開始前の120uは前回復元時のPIDで状態確認200。B52のモデル要求は0回。 [補助設計§9.179](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-prestart-operator-20261120)
 
-CMEEの `semantic_admission.py` が統合の各段階で送信時と復元後のメッセージを照合し、提供側の `serve_emlis_natural_reply.py` は復元した元の根拠で生成制約を確認する。
+CMEEが使う原文、分割・統合の生成要求、受領形式を維持した。B52は試験専用の一時認証で動かし、通常用120uの復元には初回復元で固定した起動引数を用いる。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
