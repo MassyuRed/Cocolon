@@ -1,4 +1,6 @@
-> **11/19・分析MAP開発版v17の実4B試験A44で、5件の図と全文を生成し、同じ実応答を隔離DBへ保存して別プロセスで再読しました。** 主担当・独立担当の意味判定はいずれも全5件で不適合でした。B44の実行と通常反映は0件です。 [補助設計§9.162](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-actual-result-20261119)
+> **11/19・分析MAP開発版v18で、A44の原本を使い、行動欄と考えを対にする根拠選択、本文に漏れた内部参照、複数記録の見出し、本文の重複と過去の未確認の表示を検証しました。** A45の5入力と条件付きB45の12記録＋統合を凍結しました。凍結時点でv18の実4B生成・通常反映は0件です。 [補助設計§9.163](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a44-grounded-generation-20261119)
+
+開発版v18の追加検証は`ai/tests/test_analysis_occurrence_v18_compact_originals.py`、`ai/tests/test_analysis_v18_fact_key_literals.py`、`ai/tests/test_analysis_v18_historical_unknowns.py`、`ai/tests/test_analysis_v18_overview_source_coverage.py`、`ai/tests/test_analysis_v18_repeated_bound_facts.py`。全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,704ファイル。
 
 開発版v17は既存の分析モデル選択・PLAN・RELATIONS・生成制約から呼び出す。 新規ファイルは`ai/tests/test_analysis_occurrence_v17_record_owners.py`、`ai/tests/test_analysis_v17_stated_non_actions.py`。 全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,699ファイル。
 

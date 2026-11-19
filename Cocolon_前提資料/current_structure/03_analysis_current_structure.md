@@ -1,8 +1,8 @@
-### 11/19 — 分析MAPの実4B試験A44で生成した5件の意味判定
+### 11/19 — A44原本を使った開発版v18の根拠・本文・見出しの照合
 
-開発版v17の分析MAPで5件の図・全文を実生成し、同じ原本を通常API経由で隔離DBへ保存し、別プロセスで再読した。二者の意味判定はいずれも全5件で不適合。B44と通常反映は実行0件。 [補助設計§9.162](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-actual-result-20261119)
+開発版v18の計画は条件に合う短い行動欄の全文と同じ記録の思考を照合する。本文の内部参照、複数記録を選んだ見出し、同じ根拠の表示重複も検査した。A45・条件付きB45を凍結。最新の実生成はA44のv17。 [補助設計§9.163](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a44-grounded-generation-20261119)
 
-分析側の `analysis_plan_source_choices.py` が記録別項目へ割り当てられる原文と補足を区別し、出典付きの未実施を抽出する。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
+分析の `analysis_plan_source_choices.py` が同じ記録の思考・行動の候補、本文と見出しの出典を扱う。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

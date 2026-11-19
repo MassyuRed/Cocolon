@@ -1,8 +1,8 @@
-### 11/19 — 分析MAPの実4B試験A44で生成した5件の意味判定
+### 11/19 — A44原本を使った開発版v18の根拠・本文・見出しの照合
 
-開発版v17の分析MAPで5件の図・全文を実生成し、同じ原本を通常API経由で隔離DBへ保存し、別プロセスで再読した。二者の意味判定はいずれも全5件で不適合。B44と通常反映は実行0件。 [補助設計§9.162](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-actual-result-20261119)
+開発版v18の計画は条件に合う短い行動欄の全文と同じ記録の思考を照合する。本文の内部参照、複数記録を選んだ見出し、同じ根拠の表示重複も検査した。A45・条件付きB45を凍結。最新の実生成はA44のv17。 [補助設計§9.163](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a44-grounded-generation-20261119)
 
-CMEEの `semantic_admission.py` がPLANの根拠の帰属とRELATIONSの判定を受け入れ時に検査し、`serve_emlis_natural_reply.py` が対応する生成制約を適用する。
+CMEEの `semantic_admission.py` と生成時の `serve_emlis_natural_reply.py` が計画・本文・見出しの根拠を検査し、`intent_compiler.py` が同じ根拠の繰返し表示を扱う。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
