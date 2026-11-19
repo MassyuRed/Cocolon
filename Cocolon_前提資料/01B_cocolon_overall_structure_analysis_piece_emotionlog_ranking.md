@@ -1,4 +1,4 @@
-> **11/19・分析MAP開発版v22で、A48の照明で抜けた「窓際の約1時間と夜の条件」、応募取消で抜けた「残る受領メールと今の状態」を根拠として扱えるようにしました。** 実応答を使ったCPU再生で、補った二つの原文が図・全文まで届き、読書会と10記録の概要、文の重複も改善しました。A49と条件付きB49は資材の凍結までで、v22の実4B生成・通常反映は実行0件です。 [補助設計§9.171](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a48-source-coverage-and-display-20261119)
+> **11/19・分析MAP開発版v22の実4B試験A49を完了しました。** 5件を隔離DBへ保存し、同じIDから再読しました。主担当は3/5件、独立担当は3/5件、二者とも適合は3/5件（修理・応募取消・10記録）でした。読書会と照明の全体題が原文にない意味を加えたため、B49は開始条件に達せず、通常反映は未完です。 [補助設計§9.172](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a49-actual-result-20261119)
 
 開発版v22で追加した回帰試験は`ai/tests/test_analysis_v22_plan_source_coverage.py`、`ai/tests/test_analysis_v22_prior_evidence.py`、`ai/tests/test_analysis_v22_record_overview.py`。アプリ・前提資料は5,972ファイル、API開発枝は2,713から2,716ファイル（既存10変更・新規3）。System Contextの固定地図はアプリ1,598・API 2,116の計3,714項目。
 

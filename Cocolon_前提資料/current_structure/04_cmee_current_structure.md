@@ -1,6 +1,6 @@
-### 11/19 — A48で欠けた原文2件と概要・重複を分析MAP開発版v22で照合
+### 11/19 — 実4B試験A49で修理・応募取消・10記録が両者の意味判定に適合
 
-開発版v22で照明の1時間と夜の条件、応募取消後の受領メールと現在の状態、件数で表示する場合の概要、同じ原文の重複を修正した。A48実応答を基にしたCPU例5件を保存・再読した。A49・条件付きB49は準備済みで、実4Bの最新結果はA48。 [補助設計§9.171](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a48-source-coverage-and-display-20261119)
+分析MAP開発版v22を実4Bで評価し、5件を通常API・隔離DBで保存再読した。両者の意味適合は3/5件（修理・応募取消・10記録）。読書会と照明の全体題が原文にない意味を加えたため、B49は開始条件に達せず、通常反映は未完です。 [補助設計§9.172](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a49-actual-result-20261119)
 
 生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が計画で選ぶ原文を照合し、`intent_compiler.py` と `observed_route_realizer.py` が図・全文に出す要約と根拠の重複を整理する。
 
