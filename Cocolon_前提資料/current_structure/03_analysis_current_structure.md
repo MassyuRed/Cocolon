@@ -1,8 +1,8 @@
-### 11/19 — A42の実4Bで生成した2件の意味判定と保存・再読
+### 11/19 — A42実原本で確認した閉じ括弧の制約と記録日時の表示
 
-A42では読書会・照明の図と全文を生成し、通常APIのコードで隔離SQLに保存し、別プロセスで再読した。読書会の未開催と椅子の問い合わせ、照明で実際に描いた二度の出来事が抜け、二者とも2件不適合。修理の本文はCMEEが拒否し、残り2件とB42は未実行。通常用120uは復元済み。 [補助設計§9.156](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a42-actual-result-20261119)
+開発版v14は原文にない閉じ括弧を生成と受入れで退け、同じ本文単位に別記録の引用があるときは個別の出典日時を表示する。A42原本のCPU再生で読書会の概要・修理の本文を拒否し、照明の7項目の両日を図・全文から識別できた。根拠選択と実4Bの意味適合は未完。 [補助設計§9.157](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a42-admission-20261119)
 
-分析の既存ソースでは `analysis_plan_source_choices.py` が短句と元の文・入力欄を結ぶ。通常MAP・IFのモデル選択を担う既存 `analysis_model_source.py`・`analysis_if_model_source.py` が新しい開発版を識別する。
+分析側は既存の `analysis_plan_source_choices.py` が計画の短句を元の入力欄へ戻し、個々の原文の記録日時を照合する。`analysis_model_source.py`・`analysis_if_model_source.py` がMAP・IFの開発版を選ぶ。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
