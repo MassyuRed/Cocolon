@@ -1,6 +1,6 @@
-### 11/19 — 分析MAPの記録別の根拠と未実施、A44の準備
+### 11/19 — 分析MAPの実4B試験A44で生成した5件の意味判定
 
-開発版v17の通常MAPが、原記録ごとの先頭項目と根拠の帰属を検査する。本人の記載から確認できる一部の未実施を、未確認として表示する経路も検査する。A44の5入力と条件付きB44の12記録＋統合を凍結した。 [補助設計§9.161](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-20261119)
+開発版v17の分析MAPで5件の図・全文を実生成し、同じ原本を通常API経由で隔離DBへ保存し、別プロセスで再読した。二者の意味判定はいずれも全5件で不適合。B44と通常反映は実行0件。 [補助設計§9.162](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-actual-result-20261119)
 
 CMEEの `semantic_admission.py` がPLANの根拠の帰属とRELATIONSの判定を受け入れ時に検査し、`serve_emlis_natural_reply.py` が対応する生成制約を適用する。
 

@@ -1,4 +1,4 @@
-> **11/19・分析MAPの開発版v17で、原記録ごとの先頭項目の根拠と、明記された未実施を未確認として表示する経路を検査しました。** A44の5入力と条件付きB44の12記録＋統合を凍結しました。凍結時点でv17の実4Bによる判定・通常反映は0件です。 [補助設計§9.161](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-20261119)
+> **11/19・分析MAP開発版v17の実4B試験A44で、5件の図と全文を生成し、同じ実応答を隔離DBへ保存して別プロセスで再読しました。** 主担当・独立担当の意味判定はいずれも全5件で不適合でした。B44の実行と通常反映は0件です。 [補助設計§9.162](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-actual-result-20261119)
 
 開発版v17は既存の分析モデル選択・PLAN・RELATIONS・生成制約から呼び出す。 新規ファイルは`ai/tests/test_analysis_occurrence_v17_record_owners.py`、`ai/tests/test_analysis_v17_stated_non_actions.py`。 全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,699ファイル。
 

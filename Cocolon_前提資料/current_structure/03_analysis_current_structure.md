@@ -1,6 +1,6 @@
-### 11/19 — 分析MAPの記録別の根拠と未実施、A44の準備
+### 11/19 — 分析MAPの実4B試験A44で生成した5件の意味判定
 
-開発版v17の通常MAPが、原記録ごとの先頭項目と根拠の帰属を検査する。本人の記載から確認できる一部の未実施を、未確認として表示する経路も検査する。A44の5入力と条件付きB44の12記録＋統合を凍結した。 [補助設計§9.161](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-20261119)
+開発版v17の分析MAPで5件の図・全文を実生成し、同じ原本を通常API経由で隔離DBへ保存し、別プロセスで再読した。二者の意味判定はいずれも全5件で不適合。B44と通常反映は実行0件。 [補助設計§9.162](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-actual-result-20261119)
 
 分析側の `analysis_plan_source_choices.py` が記録別項目へ割り当てられる原文と補足を区別し、出典付きの未実施を抽出する。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
 
