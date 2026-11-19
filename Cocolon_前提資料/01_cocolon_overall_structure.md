@@ -1,4 +1,4 @@
-> **11/19・分析MAP開発版v20で、A46の原文選択・事実欄・項目要約・全体題を修正しました。** 人が原文を選んだ5件のCPU試験で92欄が該当項目の図と全文に届き、5件を保存して別プロセスで再読できました。稼働版相当の旧APIでは新形式5件の再読が503となり、v20対応APIでは通常用120u設定で全件を再読できました。次のA47・条件付きB47は実行資材を凍結した段階です。v20の実モデル生成・通常反映は各0件です。 [補助設計§9.167](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a46-source-selection-and-display-20261119)
+> **11/19・分析MAPの実4B試験A47で、照明の図と全文に、窓際で約1時間、購入後に約30分描いた二つの行動が戻りました。** 5件を隔離DBで保存・再読しました。二者とも適合としたのは1/5件（応募取消）です。読書会の未開催、修理で弟が問い合わせたかの留保、全体題の時系列・途中で切れた語句が残件です。B47と通常反映は実行0件です。 [補助設計§9.168](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a47-actual-result-20261119)
 
 開発版v20で追加した回帰試験は`ai/tests/test_analysis_v20_bound_fact_ranges.py`、`ai/tests/test_analysis_v20_paired_node_meaning.py`、`ai/tests/test_analysis_v20_plan_reading_regions.py`、`ai/tests/test_analysis_v20_whole_map_overview.py`。GitHubの全ツリーはアプリ・前提資料5,972ファイル、API開発枝は2,706から2,710ファイル（新規4・既存8変更）。System Contextの3,714項目は固定された過去のGitツリー（アプリ1,598・API 2,116）を表す。
 

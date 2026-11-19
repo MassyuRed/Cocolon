@@ -1,6 +1,6 @@
-### 11/19 — A46の原本で分析MAP開発版v20の根拠・本文・項目要約・全体題を照合
+### 11/19 — 実4B試験A47で照明の二場面が復元、5件の意味判定と残件
 
-A46で欠けた根拠の選択、事実欄への内部参照、項目要約の意味の変化、全体題の範囲を更新した。手選択した例は5件92欄を図と全文で確認し、5件を隔離DBで保存・再読。A47と条件付きB47の実行資材を凍結した。最新の実モデル生成はv19のA46。 [補助設計§9.167](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a46-source-selection-and-display-20261119)
+分析MAP開発版v20の実生成5件を保存・再読し、照明の二つの制作時間、修理の受取予定、応募取消の初日の保留を確認した。両者が適合としたのは1/5件（応募取消）。読書会の時系列・未開催、弟の相談状況、全体題の断片と重複に残件があり、B47の条件は未達。 [補助設計§9.168](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a47-actual-result-20261119)
 
 生成時の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が計画・本文・要約・全体題の出典を検査する。`intent_compiler.py` は、受け入れた項目を全体概要に収め、図・全文・非公開根拠を組み立てる。
 
