@@ -1,6 +1,6 @@
-### 11/19 — 原文短句を選ぶ計画と、別記録をまたぐ見出し
+### 11/19 — A42の実4Bで生成した2件の意味判定と保存・再読
 
-開発版v13は、計画で選ぶ短句を同じ入力欄の原文へ結び付け、複数の記録にまたがる項目では片方だけを引用した見出しを退ける。5入力と全12記録・統合をCPUで検査し、A42と条件付きB42の条件を凍結した。実行は承認前。 [補助設計§9.155](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a42-candidate-scope-20261119)
+A42では読書会・照明の図と全文を生成し、通常APIのコードで隔離SQLに保存し、別プロセスで再読した。読書会の未開催と椅子の問い合わせ、照明で実際に描いた二度の出来事が抜け、二者とも2件不適合。修理の本文はCMEEが拒否し、残り2件とB42は未実行。通常用120uは復元済み。 [補助設計§9.156](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a42-actual-result-20261119)
 
 分析の既存ソースでは `analysis_plan_source_choices.py` が短句と元の文・入力欄を結ぶ。通常MAP・IFのモデル選択を担う既存 `analysis_model_source.py`・`analysis_if_model_source.py` が新しい開発版を識別する。
 
