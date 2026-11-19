@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A47で照明の二場面が復元、5件の意味判定と残件
+### 11/19 — A47の原本で分析MAP開発版v21の計画・全体題・説明を照合
 
-分析MAP開発版v20の実生成5件を保存・再読し、照明の二つの制作時間、修理の受取予定、応募取消の初日の保留を確認した。両者が適合としたのは1/5件（応募取消）。読書会の時系列・未開催、弟の相談状況、全体題の断片と重複に残件があり、B47の条件は未達。 [補助設計§9.168](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a47-actual-result-20261119)
+v21で原文の予定と現状・未確認の相談、複数記録の題、同一項目内の完結文の重複を検査した。A47の実応答に対し、計画2件と題3件の問題を検出し、10記録の事実説明3項目の重複を解消した。A48・条件付きB48は凍結まで。実モデルの最新結果はv20のA47。 [補助設計§9.169](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a47-source-coverage-and-overview-20261119)
 
-生成時の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が計画・本文・要約・全体題の出典を検査する。`intent_compiler.py` は、受け入れた項目を全体概要に収め、図・全文・非公開根拠を組み立てる。
+生成時の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が、選択する原文と全体題の候補を同じ条件で確認する。`intent_compiler.py` は同じ項目で重なる原文の事実説明を整理し、図・全文・非公開根拠を組み立てる。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

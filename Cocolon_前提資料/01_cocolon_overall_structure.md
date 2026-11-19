@@ -1,4 +1,6 @@
-> **11/19・分析MAPの実4B試験A47で、照明の図と全文に、窓際で約1時間、購入後に約30分描いた二つの行動が戻りました。** 5件を隔離DBで保存・再読しました。二者とも適合としたのは1/5件（応募取消）です。読書会の未開催、修理で弟が問い合わせたかの留保、全体題の時系列・途中で切れた語句が残件です。B47と通常反映は実行0件です。 [補助設計§9.168](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a47-actual-result-20261119)
+> **11/19・分析MAP開発版v21で、A47の読書会・修理で抜けた原文と、全体題に残った時系列・語句の断片を修正しました。** 実応答のCPU再生では欠けた2件の計画と3件の題を検出し、10記録の事実説明3項目では重複を解消しました。A48と条件付きB48は実行資材の凍結まで。v21の実4B生成と通常反映は各0件です。 [補助設計§9.169](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a47-source-coverage-and-overview-20261119)
+
+開発版v21で追加した回帰試験は`ai/tests/test_analysis_v21_authored_overview.py`、`ai/tests/test_analysis_v21_overlapping_source_facts.py`、`ai/tests/test_analysis_v21_recorded_schedule.py`。アプリ・前提資料は5,972ファイル、API開発枝は2,710から2,713ファイル（既存8変更・新規3）。System Contextの固定地図はアプリ1,598・API 2,116の計3,714項目。
 
 開発版v20で追加した回帰試験は`ai/tests/test_analysis_v20_bound_fact_ranges.py`、`ai/tests/test_analysis_v20_paired_node_meaning.py`、`ai/tests/test_analysis_v20_plan_reading_regions.py`、`ai/tests/test_analysis_v20_whole_map_overview.py`。GitHubの全ツリーはアプリ・前提資料5,972ファイル、API開発枝は2,706から2,710ファイル（新規4・既存8変更）。System Contextの3,714項目は固定された過去のGitツリー（アプリ1,598・API 2,116）を表す。
 
