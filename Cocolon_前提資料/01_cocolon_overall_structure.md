@@ -1,4 +1,4 @@
-> **11/19・わたしマップのA41候補を開発枝に反映し、実4B用の評価資材を確定しました。** 過去の5入力で選ばれた75件の根拠をすべて原文に戻せました。A41による新規生成、12記録の評価、本番の通常DB・APIへの反映は未実施です。 [補助設計§9.152](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a41-candidate-20261119)
+> **11/19・A41は実4Bから7応答を受領し、読書会1件の図・全文を生成、隔離SQLで保存・再読できました。** 読書会は二者とも不適合。照明は2つの制作場面を計画に選んだものの本文の生成中に停止し、残り3件は未実行です。通常用120uを復元し、B41・本番反映は見送りました。 [補助設計§9.153](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a41-result-20261119)
 
 v8の新しい回帰試験はAPIの `ai/tests/test_analysis_occurrence_v8_source_reading.py`（記録・思考／行動欄の参照、本人訂正・分割した原文の区別）と `ai/tests/test_analysis_occurrence_v8_relation_transport.py`（短縮した入力からの計画復元・旧生成制約との照合・不整合の拒否）。製品側の既存ファイルの接続は[分析の構造地図](current_structure/03_analysis_current_structure.md)に記載した。
 
