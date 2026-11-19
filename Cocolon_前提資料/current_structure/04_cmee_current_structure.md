@@ -1,6 +1,6 @@
-### 11/19 — A47の原本で分析MAP開発版v21の計画・全体題・説明を照合
+### 11/19 — 実4B試験A48で読書会・修理の原文が復元、5件を保存・再読
 
-v21で原文の予定と現状・未確認の相談、複数記録の題、同一項目内の完結文の重複を検査した。A47の実応答に対し、計画2件と題3件の問題を検出し、10記録の事実説明3項目の重複を解消した。A48・条件付きB48は凍結まで。実モデルの最新結果はv20のA47。 [補助設計§9.169](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a47-source-coverage-and-overview-20261119)
+分析MAP開発版v21で5件を生成・保存し、同じIDで図と全文を再読した。読書会の未開催、弟の相談状況が戻り、二者の意味適合は1/5件（修理）。照明の制作時間と夜の条件、取消後の受領メールの意味と10記録の重複が残った。 [補助設計§9.170](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a48-actual-result-20261119)
 
 生成時の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が、選択する原文と全体題の候補を同じ条件で確認する。`intent_compiler.py` は同じ項目で重なる原文の事実説明を整理し、図・全文・非公開根拠を組み立てる。
 

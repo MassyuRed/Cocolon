@@ -1,4 +1,4 @@
-> **11/19・分析MAP開発版v21で、A47の読書会・修理で抜けた原文と、全体題に残った時系列・語句の断片を修正しました。** 実応答のCPU再生では欠けた2件の計画と3件の題を検出し、10記録の事実説明3項目では重複を解消しました。A48と条件付きB48は実行資材の凍結まで。v21の実4B生成と通常反映は各0件です。 [補助設計§9.169](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a47-source-coverage-and-overview-20261119)
+> **11/19・分析MAPの実4B試験A48で、読書会は来週で未開催という留保と、修理で弟自身が店に相談したかは未確認という原文が図・全文に戻りました。** 5件を隔離DBに保存し同じIDから再読しました。二者がともに適合としたのは1/5件（修理）。照明の初日の制作時間、応募取消後に残る受領メールの意味、全体題・要約と10記録の重複が残り、B48・通常反映は実行0件です。 [補助設計§9.170](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a48-actual-result-20261119)
 
 開発版v21で追加した回帰試験は`ai/tests/test_analysis_v21_authored_overview.py`、`ai/tests/test_analysis_v21_overlapping_source_facts.py`、`ai/tests/test_analysis_v21_recorded_schedule.py`。アプリ・前提資料は5,972ファイル、API開発枝は2,710から2,713ファイル（既存8変更・新規3）。System Contextの固定地図はアプリ1,598・API 2,116の計3,714項目。
 
