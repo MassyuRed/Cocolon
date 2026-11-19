@@ -1,4 +1,4 @@
-> **11/19・A40は5入力すべての図と全文を生成し、隔離SQLへの保存と別プロセスでの再読も5件とも確認しました。** 読書会では未開催、照明では2つの制作場面が抜けました。修理の未受取を示す文や、応募・友人の記録で既知の事実を未記録とする表示もあり、二者とも適合0件と判断しました。B40は起動せず、通常用120uを復元しました。 [補助設計§9.151](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a40-result-20261119)
+> **11/19・わたしマップのA41候補を開発枝に反映し、実4B用の評価資材を確定しました。** 過去の5入力で選ばれた75件の根拠をすべて原文に戻せました。A41による新規生成、12記録の評価、本番の通常DB・APIへの反映は未実施です。 [補助設計§9.152](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a41-candidate-20261119)
 
 > **11/18・分析MAPの開発候補 occurrence.v5。** 開発版 `7405e4de` は項目生成時に、計画の同じ項目・単位へ結び付く参照を出す。原文の引用と欄は計画から復元し、関係生成・表示・保存へ渡す。MAPの既定版とIFの120uは従来どおり。既存製品5ファイルを更新し、回帰試験 `ai/tests/test_analysis_occurrence_compact_binding.py` を追加した。 [補助設計§9.135](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a33-prepared-20261118)
 

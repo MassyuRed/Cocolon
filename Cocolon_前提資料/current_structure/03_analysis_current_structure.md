@@ -1,6 +1,6 @@
-### 11/19 — A40の5件の図・全文と隔離SQL再読
+### 11/19 — わたしマップのA41修正候補
 
-A40は5件すべてを生成し、同じ原本を隔離SQLに保存して別プロセスから再読できた。読書会の開催前の状態、照明の2つの制作場面が欠落し、修理の未受取や応募の未通知・友人からの連絡にも表示上の誤りが残った。二者とも適合0/5。B40は未実行、通常用120uは復元済み。 [補助設計§9.151](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a40-result-20261119)
+A41候補では各根拠を元の欄の原文に結び、条件を満たす見出しと本文片には選んだ一文を使う。過去の5入力から75件の根拠を元どおりに復元した。新たな4B応答で、独立した行動・結果・未確認を同じ図と全文に残せるかは未確認。 [補助設計§9.152](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a41-candidate-20261119)
 
 ### 11/18 — 分析MAPの開発候補 occurrence.v7
 
