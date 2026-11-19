@@ -1,8 +1,8 @@
-### 11/20 — B51は12記録の分割読取りを完了し、統合計画の送信前に文脈上限で停止
+### 11/20 — 12記録を統合するときの重複する引用と欄情報を位置参照で送る
 
-A51の実5入力は二者適合・同一ID再読済み。B51の12記録では分割36応答を受領した。統合の計画は入力30,814トークンと予約4,096の合計が上限を2,142超え、送信前に停止した。統合の図・全文・保存と通常反映が残る。 [補助設計§9.177](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b51-actual-result-20261120)
+B51の統合計画で重複した引用と欄情報を、元の記録内の位置へ結び直せる形式に変更した。元の論理メッセージと送信用メッセージを両方照合する。A51の5件とB51の分割12件の実応答は、新しい開発版でも元と同じ内容に再生できた。 [補助設計§9.178](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-merge-source-encoding-20261120)
 
-生成の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が両日の記述を計画で照合し、`intent_compiler.py` が通常MAPのv24指定に応じた原文を生成側へ渡す。
+CMEEの `semantic_admission.py` が統合の各段階で送信時と復元後のメッセージを照合し、提供側の `serve_emlis_natural_reply.py` は復元した元の根拠で生成制約を確認する。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

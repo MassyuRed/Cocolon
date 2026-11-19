@@ -1,8 +1,8 @@
-### 11/20 — B51は12記録の分割読取りを完了し、統合計画の送信前に文脈上限で停止
+### 11/20 — 12記録を統合するときの重複する引用と欄情報を位置参照で送る
 
-A51の実5入力は二者適合・同一ID再読済み。B51の12記録では分割36応答を受領した。統合の計画は入力30,814トークンと予約4,096の合計が上限を2,142超え、送信前に停止した。統合の図・全文・保存と通常反映が残る。 [補助設計§9.177](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b51-actual-result-20261120)
+B51の統合計画で重複した引用と欄情報を、元の記録内の位置へ結び直せる形式に変更した。元の論理メッセージと送信用メッセージを両方照合する。A51の5件とB51の分割12件の実応答は、新しい開発版でも元と同じ内容に再生できた。 [補助設計§9.178](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-merge-source-encoding-20261120)
 
-分析の `analysis_plan_source_choices.py` が、異なる日の思考・行動両欄に同じ話題と明示的な否定・留保がある場合に、計画で照合する原文の範囲を決める。
+分析の `analysis_merge_wire.py` が、v24の履歴統合に限り、元の引用範囲と完全な欄の情報を復元できる位置参照へ符号化する。モデルへの送信は `analysis_model_source.py` が担当する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
