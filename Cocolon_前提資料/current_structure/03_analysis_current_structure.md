@@ -1,8 +1,8 @@
-### 11/20 — B52の送付と開始前の状態、試験と通常サービスの起動設定
+### 11/20 — B52は12記録を分割し統合計画を受領、項目の応答待ちで終了
 
-元のB52送付ZIPを同じPodで照合した。実行前に試験側と通常用120uの復元設定を分け、差分3ファイルを確定した。開始前の120uは前回復元時のPIDで状態確認200。B52のモデル要求は0回。 [補助設計§9.179](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-prestart-operator-20261120)
+分割12件・36応答はB51と一致した。今回初めて受け取った統合計画は、出来事や時点の異なる一部の引用を同じ項目に結び付けた。統合項目の応答待ちで通常処理の840秒に達し、図・全文は未生成。元の120uは復元済み。 [補助設計§9.180](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-actual-result-20261120)
 
-分析MAPは開発版290b6f67のまま。A51の5入力とB51の12分割の実応答を保持し、新しい12記録の統合図・全文をB52で評価する段階にある。
+分析MAPの履歴統合は開発版290b6f67で計画を送信・受領できた。項目の応答を受ける前に通常サービスがHTTP 504を返し、公開図・本文への投影、今回の実原本の保存再読は成立していない。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

@@ -1,4 +1,4 @@
-> **11/20・B52の元のZIPを同じPodへ送り、起動前に試験と通常用120uの設定を分けた差分を用意しました。** 元の120uはPID 38747で状態確認200。新しい範囲は5de41089、差分は23,080バイトです。B52の実生成・統合図の判定・通常反映は未実施です。 [補助設計§9.179](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-prestart-operator-20261120)
+> **11/20・B52は12記録の分割36応答と統合計画を受領し、統合項目の応答待ちで通常処理の840秒に達しました。** 計画には荷物整理と展示説明、読書会と照明など異なる記録の引用が混ざりました。統合図・全文、今回の原本の保存、通常反映は未成立です。元の120uは復元しました。 [補助設計§9.180](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-actual-result-20261120)
 
 B51後のv24の履歴統合に `ai/services/ai_inference/analysis_merge_wire.py`、`ai/tests/test_analysis_merge_wire.py`、`ai/tests/test_analysis_merge_transport.py` を追加した。アプリ・前提資料は実ツリー5,972ファイル、API開発枝は2,719から2,722ファイル（既存4件を変更、新規3件）。System Contextの固定地図はアプリ1,598、API 2,116の計3,714項目。
 

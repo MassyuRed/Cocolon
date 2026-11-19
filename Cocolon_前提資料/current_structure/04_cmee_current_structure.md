@@ -1,8 +1,8 @@
-### 11/20 — B52の送付と開始前の状態、試験と通常サービスの起動設定
+### 11/20 — B52は12記録を分割し統合計画を受領、項目の応答待ちで終了
 
-元のB52送付ZIPを同じPodで照合した。実行前に試験側と通常用120uの復元設定を分け、差分3ファイルを確定した。開始前の120uは前回復元時のPIDで状態確認200。B52のモデル要求は0回。 [補助設計§9.179](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-prestart-operator-20261120)
+分割12件・36応答はB51と一致した。今回初めて受け取った統合計画は、出来事や時点の異なる一部の引用を同じ項目に結び付けた。統合項目の応答待ちで通常処理の840秒に達し、図・全文は未生成。元の120uは復元済み。 [補助設計§9.180](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b52-actual-result-20261120)
 
-CMEEが使う原文、分割・統合の生成要求、受領形式を維持した。B52は試験専用の一時認証で動かし、通常用120uの復元には初回復元で固定した起動引数を用いる。
+CMEEが受け取った統合計画には、荷物整理と展示説明を同じ項目に束ねるなど、記録や時点の対応が崩れる例があった。統合項目・関係の実応答、完成した図・全文は得られていない。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
