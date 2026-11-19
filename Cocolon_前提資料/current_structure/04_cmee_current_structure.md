@@ -1,8 +1,8 @@
-### 11/19 — A43の原本を使った開発版v16の本文と見出しの照合
+### 11/19 — 分析MAPの記録別の根拠と未実施、A44の準備
 
-開発版v16は、計画が選んだ根拠を完全な文として本文に選べるようにし、原文に裏付けのない書式断片と記号だけの本文を検査する。A43実原本のCPU再生と隔離DB再読までを確認。意味適合・通常採用は未確認。 [補助設計§9.160](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a43-body-and-heading-20261119)
+開発版v17の通常MAPが、原記録ごとの先頭項目と根拠の帰属を検査する。本人の記載から確認できる一部の未実施を、未確認として表示する経路も検査する。A44の5入力と条件付きB44の12記録＋統合を凍結した。 [補助設計§9.161](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-20261119)
 
-CMEEは `semantic_admission.py` と `intent_compiler.py` で本文と見出しの根拠・表示を扱い、`serve_emlis_natural_reply.py` が生成時に許可する参照・本文を制約する。
+CMEEの `semantic_admission.py` がPLANの根拠の帰属とRELATIONSの判定を受け入れ時に検査し、`serve_emlis_natural_reply.py` が対応する生成制約を適用する。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

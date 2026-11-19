@@ -1,4 +1,6 @@
-> **11/19・分析MAPの開発版v16で、A43の照明に出たコンマだけの本文と、修理に出た内部書式を生成・受入れの両方で拒否できることを確認しました。** 受け取ったA43の原本によるCPU再生です。v16の実4B生成・通常採用は0件です。 [補助設計§9.160](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a43-body-and-heading-20261119)
+> **11/19・分析MAPの開発版v17で、原記録ごとの先頭項目の根拠と、明記された未実施を未確認として表示する経路を検査しました。** A44の5入力と条件付きB44の12記録＋統合を凍結しました。凍結時点でv17の実4Bによる判定・通常反映は0件です。 [補助設計§9.161](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a44-20261119)
+
+開発版v17は既存の分析モデル選択・PLAN・RELATIONS・生成制約から呼び出す。 新規ファイルは`ai/tests/test_analysis_occurrence_v17_record_owners.py`、`ai/tests/test_analysis_v17_stated_non_actions.py`。 全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,699ファイル。
 
 開発版v16の専用回帰は`ai/tests/test_analysis_occurrence_v16_fact_content.py`、`ai/tests/test_analysis_v16_attributed_caption.py`、`ai/tests/test_analysis_v16_source_title_endings.py`。実ツリーはアプリ・前提資料5,972ファイル、API開発枝2,697ファイル。
 
