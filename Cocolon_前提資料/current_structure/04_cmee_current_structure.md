@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A45の応募取消が意味適合、4件に本文の問題
+### 11/19 — A45の実出力で分析MAP開発版v19の本文と全体題を照合
 
-開発版v18のA45で分析MAPの5件を実生成し、通常API経由で隔離DBに保存・再読した。応募取消の全体見出しと本文は二者の意味照合を通った。4件に内部形式が露出し、B45と通常反映は開始条件に達しなかった。 [補助設計§9.164](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a45-actual-result-20261119)
+開発版v19で本文の内部形式と複数記録の全体題を出典と照合し、実A45の19欄が単独でそれぞれ拒否されることを確認した。A46と条件付きB46を凍結。最新の実生成はA45のv18。 [補助設計§9.165](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a45-source-bound-display-20261119)
 
-CMEEの `semantic_admission.py` と生成時の `serve_emlis_natural_reply.py` が計画・本文・見出しの根拠を検査し、`intent_compiler.py` が同じ根拠の繰返し表示を扱う。
+生成時の `serve_emlis_natural_reply.py` とCMEEの `semantic_admission.py` が事実欄・全体題の出典を照合する。`intent_compiler.py` が受け入れた生応答から図・全文・非公開根拠を組み立てる。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A45の応募取消が意味適合、4件に本文の問題
+### 11/19 — A45の実出力で分析MAP開発版v19の本文と全体題を照合
 
-開発版v18のA45で分析MAPの5件を実生成し、通常API経由で隔離DBに保存・再読した。応募取消の全体見出しと本文は二者の意味照合を通った。4件に内部形式が露出し、B45と通常反映は開始条件に達しなかった。 [補助設計§9.164](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a45-actual-result-20261119)
+開発版v19で本文の内部形式と複数記録の全体題を出典と照合し、実A45の19欄が単独でそれぞれ拒否されることを確認した。A46と条件付きB46を凍結。最新の実生成はA45のv18。 [補助設計§9.165](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a45-source-bound-display-20261119)
 
-分析の `analysis_plan_source_choices.py` が同じ記録の思考・行動の候補、本文と見出しの出典を扱う。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
+分析の `analysis_plan_source_choices.py` が事実欄の原文選択・自由記述の出典と、複数記録を参照する題の原文を照合する。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

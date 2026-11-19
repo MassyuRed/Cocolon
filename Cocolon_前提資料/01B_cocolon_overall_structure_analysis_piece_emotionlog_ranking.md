@@ -1,4 +1,6 @@
-> **11/19・分析MAP開発版v18の実4B試験A45で、応募取消の1件は主担当・独立担当とも意味適合と判定しました。** 5件すべての図・全文を生成し隔離DBで保存・再読しました。残る4件は両者とも不適合で、B45と通常反映は実行0件です。 [補助設計§9.164](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a45-actual-result-20261119)
+> **11/19・分析MAP開発版v19で、A45の図・全文に漏れた内部形式19個を、生成時とCMEEの公開前にそれぞれ単独で拒否できることを確認しました。** 複数記録の概要題も元の入力と照合し、A46と条件付きB46の実行資材を凍結しました。v19の実4B生成・通常反映は各0件です。 [補助設計§9.165](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a45-source-bound-display-20261119)
+
+開発版v19の追加検証は`ai/tests/test_analysis_v19_overview_original_record.py`、`ai/tests/test_analysis_v19_source_facts.py`。全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,706ファイル。
 
 開発版v18の追加検証は`ai/tests/test_analysis_occurrence_v18_compact_originals.py`、`ai/tests/test_analysis_v18_fact_key_literals.py`、`ai/tests/test_analysis_v18_historical_unknowns.py`、`ai/tests/test_analysis_v18_overview_source_coverage.py`、`ai/tests/test_analysis_v18_repeated_bound_facts.py`。全ツリーはアプリ・前提資料5,972ファイル、API開発枝2,704ファイル。
 
