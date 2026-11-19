@@ -1,8 +1,8 @@
-### 11/19 — 実4B試験A46の5件を保存・再読、意味判定と通常反映の条件
+### 11/19 — A46の原本で分析MAP開発版v20の根拠・本文・項目要約・全体題を照合
 
-分析MAP開発版v19のA46は、5件すべての図と全文を隔離DBで保存・再読した。意味適合は主担当0/5件、独立担当1/5件（応募取消）、両者が適合としたものは0/5件。照明で新しい形の内部参照が8欄に出て、応募取消の初日の判断は要約で別の意味に変わった。B46と通常反映は開始条件に達しなかった。 [補助設計§9.166](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-a46-actual-result-20261119)
+A46で欠けた根拠の選択、事実欄への内部参照、項目要約の意味の変化、全体題の範囲を更新した。手選択した例は5件92欄を図と全文で確認し、5件を隔離DBで保存・再読。A47と条件付きB47の実行資材を凍結した。最新の実モデル生成はv19のA46。 [補助設計§9.167](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-post-a46-source-selection-and-display-20261119)
 
-分析の `analysis_plan_source_choices.py` が事実欄の原文選択・自由記述の出典と、複数記録を参照する題の原文を照合する。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
+分析の `analysis_plan_source_choices.py` が計画の原文範囲、事実欄の原文選択、同一記録の行動と思考に対応する項目要約、全体題と各記録の出典を照合する。MAP・IFのモデル選択は `analysis_model_source.py`、`analysis_if_model_source.py` が担当する。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
