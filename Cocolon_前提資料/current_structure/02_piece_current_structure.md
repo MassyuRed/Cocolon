@@ -1,3 +1,7 @@
+### 11/20　通常Pieceで4Bを使用
+
+本番APIの `PIECE_MODEL_SOURCE=shared_4b.cmee.v2` を有効にした。問いへの本人補足を選んだ作品は思考・行動・補足の3段落、問いをスキップした入力の通常作品は元入力だけの1段落になった。いずれも非公開保存後、本人の詳細・履歴・画像書き出し用データで本文と描画情報が一致した。端末での画像保存と自由文の編集品質は未確認。 [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
+
 > **11/15最新：実回答後の本人訂正と最新回答を、同じPieceへ明示選択するsourceを反映。** 実ANSWER1〜3件の後に保存したproper訂正を別sourceで保持し、残原節・明示した最新回答の有効部分・先行の有効置換だけを既存作者／独立S7へ渡す。先行独立ADDを作品へ連結しない。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 一般自由文・回答／置換節を対象とする再訂正、編集品質・既存画像2残差・本人利用・補助全体は未完。build／TestFlight／本人実機保留、selector OFF、新GPU／学習0を維持。 [範囲・実結果・通常適用§9.72](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。

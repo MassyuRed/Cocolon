@@ -1,3 +1,7 @@
+### 11/20　三中核が参照する4Bと保存経路
+
+Emlisは本人が回答した時とスキップした時に自然応答を確定する。Pieceは選んだ入力と問い・回答の対応を検査し、本文と画像の描画情報を同じ版で非公開保存する。わたしマップは保存後の通知ジョブから本人の保存版を開く。通常の実測、各経路の到達点、GPUの2つの推論URLと認証キーの対応は [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
+
 ### 11/20 — 通常ワーカーでB61を保存し、本人の再読と更新通知を確認
 
 通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。 [補助設計§9.204](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)

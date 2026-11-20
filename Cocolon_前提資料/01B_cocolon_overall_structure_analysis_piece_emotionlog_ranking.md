@@ -1,3 +1,9 @@
+### 11/20　通常Pieceに渡す問いと本人回答のファイル地図
+
+APIの `ai/services/ai_inference/piece_v2_source_adapter.py` は、問いをスキップ・終了した履歴で、最後の確定した観測を本人の元入力に対応付ける。回答を使う場合は、実際に発行した問いと選ばれた本人回答を確かめて `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` に渡す。これにより「その時は重かった。」のように問いを受けて意味が定まる感情を、原文のまま採用できる。
+
+追加した `ai/tests/piece_v2/test_b05_natural_unanswered_question.py` と、更新した同ディレクトリの `test_b05_natural_refined_saved_pipeline.py`、`test_b05a_piece_saved_state_handoff.py` が、回答／未回答、保存再開、同じ版の再読を検査する。実Postgresを含むCIは既存の `.github/workflows/piece-b2b-isolated-postgres.yml`。製品ツリーはアプリ `0e3a8251` で5,972ファイル、API `ac9978a9` で2,736ファイル。 [補助設計§9.205](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
+
 > **通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。** [補助設計§9.204](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
