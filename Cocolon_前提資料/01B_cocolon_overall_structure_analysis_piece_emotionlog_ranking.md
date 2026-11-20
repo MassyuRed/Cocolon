@@ -1,4 +1,4 @@
-> **11/20・B54で点検条件に「だけ」が加わった見出しと、図で行動の順序が変わった問題を受け、分析の開発版を更新しました。** 分割・統合の見出しを選択した根拠に結び、同じ行動欄の文を原文の順で表示します。B55の実生成・通常採用は未実施です。 [補助設計§9.185](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b55-preparation-20261120)
+> **11/20・B55の実表示で家族の食事会場の点検条件が原文どおりになり、行動欄の41文が元の順に並びました。** 友人が最近勉強を始めたことや家族が語った希望は統合表示に残らず、両者が適合としたのは12件中6件でした。元120uを復元し、通常採用は見送りました。 [補助設計§9.186](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b55-actual-result-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
