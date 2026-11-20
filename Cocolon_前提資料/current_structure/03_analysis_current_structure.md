@@ -1,8 +1,8 @@
-### 11/20 — 通常8888番を切り替え、Renderワーカーから両モデルの専用経路に到達した
+### 11/20 — 通常APIとワーカーの接続設定を反映し、ワーカーの資格で両モデル経路を確認した
 
-同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。 [補助設計§9.201](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
 
-通常APIとワーカーはdf7a39d0、GPUはB61用提供で稼働している。ワーカーから指定の分析経路に到達した。通常設定の接続先・資格の整合確認、分析MAPの選択、試験所有者による通常の生成保存・同一ID再読が残る。
+接続設定は通常API・ワーカーの稼働版df7a39d0に反映済み。ワーカーの分析経路は認証付きGETで確認した。API自身のモデル呼出し、分析MAP v24の選択、専用試験所有者の通常生成・保存・再読が次の対象。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

@@ -1,4 +1,4 @@
-> **同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。** [補助設計§9.200](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+> **通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。** [補助設計§9.201](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 

@@ -1,4 +1,4 @@
-> **同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。** [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+> **通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。** [補助設計§9.201](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
 
 11月20日18:01の同PodのConnect画面では、公開HTTPサービスは8888番のJupyter Labのみで `Ready`。Web terminalは `Stopped`、SSH鍵は未設定で、Direct TCPは22番向けだった。Jupyterを復旧するための独立した管理経路は引き続き確認が必要。
 

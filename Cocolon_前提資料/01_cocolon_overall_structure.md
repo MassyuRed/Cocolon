@@ -1,4 +1,4 @@
-> **同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。** [補助設計§9.200](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+> **通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。** [補助設計§9.201](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
 
 B61は、分析の統合応答の解読・関係判断・根拠候補、CMEEの分析指示、生成中の形式制約試験の既存5ファイルを変更した。B60からの追加・削除は0件。アプリ・前提資料のGitツリーは5,972件、API開発版は2,731件。
 

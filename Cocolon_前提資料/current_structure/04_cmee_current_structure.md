@@ -1,8 +1,8 @@
-### 11/20 — 通常8888番を切り替え、Renderワーカーから両モデルの専用経路に到達した
+### 11/20 — 通常APIとワーカーの接続設定を反映し、ワーカーの資格で両モデル経路を確認した
 
-同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。 [補助設計§9.201](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
 
-Pod内で両モデル経路とJupyter管理認証を区別できることを確認した。Renderワーカーからの無資格GETは分析・自然応答とも専用401。ワーカーの実資格での確認と、通常の分析・EmlisAI・Pieceの応答は未検証。
+ワーカーで分析・自然応答それぞれに既定の資格を使ってGETし、いずれも期待した405本文と一致した。APIには同じ接続設定を反映した。GETでの確認にモデル推論は含まれず、通常の分析・EmlisAI・Pieceの応答確認が残る。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
