@@ -1,4 +1,4 @@
-> **11/20・B60では、読書会の司会の発言と本人の受け取りを同じ記録に残し、別日に続く依頼をたどれるよう修正しました。** 検査用の図・全文では、誰に向けた言葉か分からないという留保と、図面依頼を提案した日から家族の連絡を受けた日までを確認しました。B60の実生成と通常反映は未実施です。 [補助設計§9.195](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b60-preparation-20261120)
+> **11/20・B60の実4Bでは、読書会で司会が伝えた感想と、誰に向けた言葉か分からないという本人の留保が図・全文に戻りました。** 二者とも12件すべてを個別に適合としました。照明を見送った日と購入した日は結べました。業者に図面を依頼する提案と、後日の家族からの依頼連絡は同じ案件として結ばれず、通常反映は見送りました。 [補助設計§9.196](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b60-actual-result-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
