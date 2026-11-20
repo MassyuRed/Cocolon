@@ -1,8 +1,8 @@
-### 11/20 — 通常の分析MAP選択をv24に切り替え、APIとワーカーの稼働を確認した
+### 11/20 — 専用の試験所有者で通常MAP生成を1回試み、HTTP 503で保存IDが発行されなかった
 
-通常API・ワーカーの分析MAP選択を120uからv24へ切り替え、両方の設定画面で保存値を再確認しました。ワーカーの起動とAPIのヘルス200を確認しています。次は専用の試験所有者による通常生成・DB保存・同一IDの最新／詳細再読です。 [補助設計§9.202](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-map-selection-20261120)
+専用の試験所有者にB61の架空入力12件を用意し、通常APIから分析MAPの生成を1回試みました。生成要求は約865秒後に503となり、本人のレポートは0件のままでした。保存IDは発行されず、同一IDの最新・詳細再読は未検証です。 [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
-ワーカーでは両モデル経路への認証付きGETを完了し、通常の分析MAP選択もv24に切り替えた。分析IFの120u選択と自然応答の専用経路を保つ構成で、今回の切替時に分析・自然応答の試験推論は行っていない。
+B61の12件を扱う通常MAP生成を1回試行した。503の発生箇所と生成がどの段階まで進んだかは、この時点の通常APIの応答だけでは確定できない。§9.198の隔離SQLの適合結果は、その試験で取得した実原本に対するもの。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

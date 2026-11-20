@@ -1,4 +1,4 @@
-> **通常API・ワーカーの分析MAP選択を120uからv24へ切り替え、両方の設定画面で保存値を再確認しました。ワーカーの起動とAPIのヘルス200を確認しています。次は専用の試験所有者による通常生成・DB保存・同一IDの最新／詳細再読です。** [補助設計§9.202](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-map-selection-20261120)
+> **専用の試験所有者にB61の架空入力12件を用意し、通常APIから分析MAPの生成を1回試みました。生成要求は約865秒後に503となり、本人のレポートは0件のままでした。保存IDは発行されず、同一IDの最新・詳細再読は未検証です。** [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
 11月20日18:01の同PodのConnect画面では、公開HTTPサービスは8888番のJupyter Labのみで `Ready`。Web terminalは `Stopped`、SSH鍵は未設定で、Direct TCPは22番向けだった。Jupyterを復旧するための独立した管理経路は引き続き確認が必要。
 

@@ -1,8 +1,8 @@
-### 11/20 — 通常の分析MAP選択をv24に切り替え、APIとワーカーの稼働を確認した
+### 11/20 — 専用の試験所有者で通常MAP生成を1回試み、HTTP 503で保存IDが発行されなかった
 
-通常API・ワーカーの分析MAP選択を120uからv24へ切り替え、両方の設定画面で保存値を再確認しました。ワーカーの起動とAPIのヘルス200を確認しています。次は専用の試験所有者による通常生成・DB保存・同一IDの最新／詳細再読です。 [補助設計§9.202](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-map-selection-20261120)
+専用の試験所有者にB61の架空入力12件を用意し、通常APIから分析MAPの生成を1回試みました。生成要求は約865秒後に503となり、本人のレポートは0件のままでした。保存IDは発行されず、同一IDの最新・詳細再読は未検証です。 [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
-分析MAPの通常設定はv24になった。稼働版df7a39d0では同じ設定の分析IFは120uを選ぶ。通常の試験入力に対する生成・保存と、本人用APIでの同一ID再読は未検証。
+通常API・ワーカーのv24設定は稼働中。専用試験所有者の生成前の最新取得は200、生成要求は503で、本人の保存レポートは0件だった。後の非生成GETは別の要求で、Renderでは503と記録された。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
