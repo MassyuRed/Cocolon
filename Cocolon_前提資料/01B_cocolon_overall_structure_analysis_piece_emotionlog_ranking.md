@@ -1,4 +1,4 @@
-> **B61の互換読取版が通常のAPI・ワーカーで稼働しました。APIのヘルスは200、最新・詳細の匿名取得はともに401です。同Podの公開経路2本はJupyterの404を返し、通常の分析モデル切替と通常DBでの保存・再読が残っています。** [補助設計§9.199](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-deployment-20261120)
+> **通常GPUをB61用に切り替え、同Pod内でヘルス200と既存120u・分析MAP v24の両方の起動引数を確認しました。切替時の生成は0件です。分析・自然応答の公開経路はともに404で、通常APIからの推論、通常DBでの保存・再読が残っています。** [補助設計§9.200](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 

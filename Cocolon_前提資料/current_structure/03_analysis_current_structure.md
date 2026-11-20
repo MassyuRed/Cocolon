@@ -1,8 +1,8 @@
-### 11/20 — B61の互換読取版を通常API・ワーカーに配備し、同Podの公開経路を確認した
+### 11/20 — 同Podの通常GPUをB61用に切り替え、120uとv24の起動、公開経路の未接続を確認した
 
-B61の互換読取版が通常のAPI・ワーカーで稼働しました。APIのヘルスは200、最新・詳細の匿名取得はともに401です。同Podの公開経路2本はJupyterの404を返し、通常の分析モデル切替と通常DBでの保存・再読が残っています。 [補助設計§9.199](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-deployment-20261120)
+通常GPUをB61用に切り替え、同Pod内でヘルス200と既存120u・分析MAP v24の両方の起動引数を確認しました。切替時の生成は0件です。分析・自然応答の公開経路はともに404で、通常APIからの推論、通常DBでの保存・再読が残っています。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
 
-通常APIとワーカーの配備コミットはdf7a39d0。今回のRender環境設定変更はワーカーの1800秒設定のみで、分析MAPの選択変更と通常DBへのB61の新規保存は各0件。実原本の隔離保存・同一ID再読は§9.198に記録した。
+通常API・ワーカーは互換読取版df7a39d0で稼働中。通常GPUは候補版が起動し、同Pod内のヘルスは200。Renderの分析MAP選択変更、通常の生成保存、最新・詳細の同一ID再読が残る。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
