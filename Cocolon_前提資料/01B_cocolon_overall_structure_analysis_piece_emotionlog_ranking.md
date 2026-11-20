@@ -1,4 +1,4 @@
-> **専用試験所有者の通常MAP生成は、最後の統合で全段階共通の時間上限に達し、未完の応答を受け入れず503で終了しました。最終段階のトークン枠には少なくとも1,152トークン残っていました。レポートは0件で、同一ID再読は未検証です。** [補助設計§9.203](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+> **通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。** [補助設計§9.204](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 

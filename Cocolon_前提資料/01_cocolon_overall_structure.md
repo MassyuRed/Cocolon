@@ -1,4 +1,15 @@
-> **専用試験所有者の通常MAP生成は、最後の統合で全段階共通の時間上限に達し、未完の応答を受け入れず503で終了しました。最終段階のトークン枠には少なくとも1,152トークン残っていました。レポートは0件で、同一ID再読は未検証です。** [補助設計§9.203](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+> **通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。** [補助設計§9.204](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)
+
+通常MAPのバックグラウンド生成（`mashos-api@dd20d322`）では、API開発版の既存5ファイルを変更し、4ファイルを追加した。Gitの全ファイル数はアプリ・前提資料5,972件、API開発版2,735件（直前2,731件）。
+
+| 追加したファイル | 役割 |
+| --- | --- |
+| `ai/services/ai_inference/analysis_job_progress.py` | 実行を引き受けたワーカーと進捗の更新を結び、保存前にも実行権を確認する |
+| `ai/tests/test_analysis_v24_progress_history.py` | 分割が必要なv24履歴に限る適用条件、長時間の進捗、準備停止時と保存前の判定を検査する |
+| `ai/tests/test_analysis_v24_progress_transport.py` | 推論の段階ごとの期限と共有トークン枠、段階の失敗や実行権の喪失後に続行しないことを検査する |
+| `ai/tests/test_analysis_worker_progress.py` | 進捗更新、処理中の新規入力、再試行と停止、ワーカーの引き継ぎ時の競合を検査する |
+
+既存の生成経路2ファイル（`analysis_cumulative_service.py`、`analysis_model_source.py`）、キュー・ワーカー2ファイル（`astor_job_queue.py`、`astor_worker.py`）、回帰試験を起動する `.github/workflows/analysis-observed-content.yml` がこれらを通常経路に接続する。
 
 B61は、分析の統合応答の解読・関係判断・根拠候補、CMEEの分析指示、生成中の形式制約試験の既存5ファイルを変更した。B60からの追加・削除は0件。アプリ・前提資料のGitツリーは5,972件、API開発版は2,731件。
 

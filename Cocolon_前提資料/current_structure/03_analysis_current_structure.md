@@ -1,8 +1,8 @@
-### 11/20 — 専用の試験所有者で通常MAP生成を1回試み、HTTP 503で保存IDが発行されなかった
+### 11/20 — 通常ワーカーでB61を保存し、本人の再読と更新通知を確認
 
-専用試験所有者の通常MAP生成は、最後の統合で全段階共通の時間上限に達し、未完の応答を受け入れず503で終了しました。最終段階のトークン枠には少なくとも1,152トークン残っていました。レポートは0件で、同一ID再読は未検証です。 [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。 [補助設計§9.204](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)
 
-通常API・ワーカーのv24設定は稼働中。専用試験所有者の生成前の最新取得は200、生成要求は503で、本人の保存レポートは0件だった。後の非生成GETは別の要求で、Renderでは503と記録された。
+本人の保存版は入力12件すべてに対応し、各項目の根拠を元のメモ・行動欄まで再照合した。新規入力の送信は0件で、今回は本人のマップ閲覧から既存の更新予約を確認した。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 
