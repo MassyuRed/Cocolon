@@ -1,4 +1,4 @@
-> **11/20・B61では、別日の記録を結ぶ場合と結ばない場合のどちらにも、両日の根拠文を指定する形式を用意しました。** B60の実応答38段階を使い、最後の判断を検査用に置き換えると、照明の見送りから購入までと、図面を頼む提案から家族の連絡までを表示できました。B61の実モデルの判断と通常反映は未確認です。 [補助設計§9.197](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-preparation-20261120)
+> **B61の実4Bでは12件の図と全文に、照明の見送りから購入までと、寸法図の提案から家族の依頼連絡までが表示されました。二者の照合を経て同じ実原本を隔離SQLへ1件保存し、別プロセスで同じIDから再読しました。通常API・ワーカーへの配備が残っています。** [補助設計§9.198](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-actual-result-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
