@@ -1,4 +1,6 @@
-> **11/20・B57は1回実行し、架空12記録の読取りと統合の項目作成まで進みました。** 関係線の生成要求を送った後に評価中の通常処理が504で終了し、図・全文を取得できませんでした。元120uを復元済みです。実結果の保存・再読・通常反映は未完です。 [補助設計§9.190](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b57-actual-result-20261120)
+> **11/20・B58では、関係線の生成に使える時間を増やし、線を開いたときに両日の判断を示す原文を各1文表示するよう修正しました。** B57の実応答を再生すると、最後の生成枠は約22秒から約45秒になりました。照明の見送りと購入、図面依頼の提案と後日の返答を合成表示で照合しました。B58の実生成と通常反映は未実施です。 [補助設計§9.191](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b58-preparation-20261120)
+
+B58の開発版は既存10ファイルを変更し、通常処理と統合段階の期限を扱う回帰試験 `ai/tests/test_analysis_merge_deadline.py` を追加した。アプリ・前提資料のGitツリーは5,972件、API開発版は2,729件（B57は2,728件）。
 
 B57の開発版では、MERGEの複数根拠に対する回帰試験 `ai/tests/test_analysis_merge_distinct_contexts.py` と、原文の表示順の回帰試験 `ai/tests/test_analysis_merge_source_order.py` を追加した。既存11ファイルを変更した。Gitの全ツリーはアプリ・前提資料5,972件、API開発版2,728件（B56は2,726件）。System Contextの固定地図はアプリ1,598件、API 2,116件。
 
