@@ -1,6 +1,6 @@
 ### 11月20日　通常の4BでPieceを生成・保存、iPhone向けの配布状況
 
-本番の通常4BをPieceで有効にした。問いに答えた作品は3段落、スキップした作品は1段落で非公開保存し、詳細・履歴・書き出し用データが一致した。Emlisの回答・スキップと、わたしマップの自動更新・保存再読も本番で確認した。Emlisが二つの欄の出来事に、原文にない前後関係を加えた1例が残る。iPhone版1.0（8101）は署名とIPA作成に成功。TestFlightへの送信はAppleの配布契約エラー403で停止し、内部配布・本人の実機確認は保留。 [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
+本番の通常4BをPieceで有効にした。問いに答えた作品は3段落、スキップした作品は1段落で非公開保存し、詳細・履歴・書き出し用データが一致した。Emlisの回答・スキップと、わたしマップの自動更新・保存再読も本番で確認した。Emlisが二つの欄の出来事に、原文にない前後関係を加えた1例が残る。iPhone版1.0（8102）はAppleで処理完了し、内部グループ「Emlis テスト版配布」のiOS欄でTestingを確認。本人端末での起動・画像保存・通知受信は未確認。 [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
 
 > **通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。** [補助設計§9.204](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)
 

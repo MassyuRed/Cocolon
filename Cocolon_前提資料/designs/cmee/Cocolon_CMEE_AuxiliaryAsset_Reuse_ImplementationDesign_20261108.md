@@ -1,4 +1,4 @@
-> **11/20 JST　Pieceの通常4Bへの切替、三中核の保存確認とiOS配布。** iPhone版1.0（8101）は署名とIPA作成に成功。TestFlightへの送信はAppleの配布契約エラー403で停止し、内部配布・本人の実機確認は保留。 [今回の実測・残件・GPU借り替え](#three-core-device-and-pod-20261120)。 12件のわたしマップの通常保存は [§9.204](#analysis-b61-normal-background-map-20261120)。
+> **11/20 JST　Pieceの通常4Bへの切替、三中核の保存確認とiOS配布。** iPhone版1.0（8102）はAppleで処理完了し、内部グループ「Emlis テスト版配布」のiOS欄でTestingを確認。本人端末での起動・画像保存・通知受信は未確認。 [今回の実測・残件・GPU借り替え](#three-core-device-and-pod-20261120)。 12件のわたしマップの通常保存は [§9.204](#analysis-b61-normal-background-map-20261120)。
 
 > **11/18 JST・A30は7応答。読書会の図と全文を取得し、原文との二者照合で不適合、照明はNODESの途中で停止した。** 読書会では下書きから消した対象が変わり、同じ内容を繰り返した項目の文末に構造文字列が露出した。元120uは復元済み。残る3入力と後対照は未実行。B30は条件不成立で起動せず、全12記録の実保存・非生成再読・通常反映は未完。補助設計§9.133に記録した。
 
@@ -7978,11 +7978,13 @@ B61の実原本を隔離SQLで保存し、同一IDの別プロセス再読を確
 
 11月20日22:05 JSTに本番APIへ `ac9978a9486dfb2e9c91be021fd2bfed37bc6d60` を配備し、`PIECE_MODEL_SOURCE=shared_4b.cmee.v2` を有効にした。22:06、同じ試験所有者が問いをスキップした別の入力で、本人の入力参照→通常プレビュー1回→非公開保存→詳細・書き出し・履歴まで全HTTP 200。本文は「誘われたのに、悲しかった。」の1段落で、保存時と本人再読時の同じ8項目が一致、利用回数は1→2。設定・配備版と成功した通常プレビューの処理分岐を照合した。カナリアでは4Bの実モデル名を記録した。通常公開レスポンスには生のモデル識別子を含めない。試験は元の情報を正しく保持して保存するところまでで、自然な編集文への改善やiPhoneでのPNG書き出しは別に確認が必要。今回の2つのAPI修正を含む関連回帰は225件成功。DBスキーマ変更なし。証跡は専用の架空入力だけを収録した `Cocolon_Normal_API_Evidence_20261120.zip`（SHA-256 `5c2dbcb2c13e79e6389df9461f33ca223c0341f3ff301ce84d7add6b9b87c38b`）。
 
-本番ワーカーも同じ `ac9978a9` に更新した。22:09:54 JSTにLive、22:10にASTORの処理ループがキューを確認した。APIは22:06に `/healthz` が200。APIとワーカーをそれぞれ対象のコミットを指定して1回配備した。 この版のGitHub検査は [Pieceの実Postgres CI](https://github.com/MassyuRed/mashos-api/actions/runs/44740677837) と [分析のCI](https://github.com/MassyuRed/mashos-api/actions/runs/44740677985) に記録される。
+本番ワーカーも同じ `ac9978a9` に更新した。22:09:54 JSTにLive、22:10にASTORの処理ループがキューを確認した。APIは22:06に `/healthz` が200。APIとワーカーをそれぞれ対象のコミットを指定して1回配備した。 この版のGitHub検査は [Pieceの実Postgres CI](https://github.com/MassyuRed/mashos-api/actions/runs/44740677837) と [分析のCI](https://github.com/MassyuRed/mashos-api/actions/runs/44740677985) がともに成功した。
 
 ### iPhone用のビルドと配布
 
-前回内部配布が確認された8001の後に、問いの設定、観測の確定状態、わたしマップの表示、Pieceの作成画面が更新された。iOSの通常API接続先を持つアプリ版 `0e3a8251aafd998b69d215c2010295f28830ba1a` のJavaScriptとHermesバイトコードを生成し、関連するクライアント試験1,133件が成功した。[GitHub ActionsのiOSビルド #81](https://github.com/MassyuRed/Cocolon/actions/runs/44740379282)は、署名付きアーカイブ・写真アクセス目的文の検証・IPA書き出しに成功した。22:10:33 JSTのアップロードで、AppleはHTTP 403 `FORBIDDEN_ERROR.CONTRACT_NOT_VALID` を返した。ログに対象契約名は表示されていない。版1.0（8101）はApple未受領で、内部グループ「Emlis テスト版配布」への提供と本人iPhoneの動作確認が残る。契約の有効化後に送信を再実行し、App Store Connectで内部グループのTestingを確認する。前回の8001は11月8日に同グループのTestingを確認している。
+前回内部配布が確認された8001の後に、問いの設定、観測の確定状態、わたしマップの表示、Pieceの作成画面が更新された。iOSの通常API接続先を持つアプリ版 `0e3a8251aafd998b69d215c2010295f28830ba1a` のJavaScriptとHermesバイトコードを生成し、関連するクライアント試験1,133件が成功した。[GitHub ActionsのiOSビルド #81](https://github.com/MassyuRed/Cocolon/actions/runs/44740379282)は、署名付きアーカイブ・写真アクセス目的文の検証・IPA書き出しに成功した。22:10:33 JSTのアップロードで、AppleはHTTP 403 `FORBIDDEN_ERROR.CONTRACT_NOT_VALID` を返した。ログに対象契約名は表示されていない。1回目の版1.0（8101）はApple未受領で、この時点では内部配布前だった。前回の8001は11月8日に同グループのTestingを確認している。
+
+Mashが契約を確認して同意した後、同じアプリコミットで [ビルド #81 の再実行](https://github.com/MassyuRed/Cocolon/actions/runs/44740379282/job/136310132259) を1回開始した。再実行回数がビルド番号に含まれるため、Appleが受領した版は1.0（8102）。19工程がすべて成功し、App Store ConnectのBuild Uploadsで11月20日22:35 JSTの受領とCompleteを確認した。8001と8102のアプリ依存・Pod依存に差分はなく、iOSネイティブ変更はPieceの文字計測に限られ、追加の暗号実装も見つからなかったため、8001と同じOS標準の暗号化に関する申告を保存した。既存内部グループ「Emlis テスト版配布」のBuildsで、1.0（8102）・Testing・Expires in 90 days・iOSを確認（Apple build ID `e77f9f33-4b11-4dd1-9afe-fe7ed23b3a05`）。この配布単位は完了。MashのiPhoneでの8102の起動、実画像保存と端末へのプッシュ着信は未確認。
 
 ### GPUを借り替えるとき
 
