@@ -1,4 +1,4 @@
-> **専用試験所有者の通常MAP生成は503となり、レポートは0件でした。同じ時間帯の39件のモデル応答は38件が正常終了し、最後の1件が `length` で終了しました。未完の応答を採用しないv24の実装と一致します。トークン数と残り時間のどちらの制限に達したかは未確定です。** [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+> **専用試験所有者の通常MAP生成は、最後の統合で全段階共通の時間上限に達し、未完の応答を受け入れず503で終了しました。最終段階のトークン枠には少なくとも1,152トークン残っていました。レポートは0件で、同一ID再読は未検証です。** [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
 11月20日18:01の同PodのConnect画面では、公開HTTPサービスは8888番のJupyter Labのみで `Ready`。Web terminalは `Stopped`、SSH鍵は未設定で、Direct TCPは22番向けだった。Jupyterを復旧するための独立した管理経路は引き続き確認が必要。
 
