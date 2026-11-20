@@ -1,4 +1,4 @@
-> **11/20・B58では、関係線の生成に使える時間を増やし、線を開いたときに両日の判断を示す原文を各1文表示するよう修正しました。** B57の実応答を再生すると、最後の生成枠は約22秒から約45秒になりました。照明の見送りと購入、図面依頼の提案と後日の返答を合成表示で照合しました。B58の実生成と通常反映は未実施です。 [補助設計§9.191](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b58-preparation-20261120)
+> **11/20・B58では実4Bで12項目・1本の線・全文3,939字が完成し、照明の見送りと購入を両日の原文で比較できました。** 個別に二者とも適合としたのは11/12件です。図面依頼の提案と後日の依頼連絡を「別の対象」とした履歴比較は両者とも不適合で、実原本の保存・通常反映は見送りました。元120uは復元済みです。 [補助設計§9.192](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b58-actual-result-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
