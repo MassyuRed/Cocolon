@@ -1,8 +1,8 @@
-### 11/20 — B61の実4Bが照明と寸法図の経過を表示し、12件をまとめた実原本を隔離SQLへ保存・再読した
+### 11/20 — B61の互換読取版を通常API・ワーカーに配備し、同Podの公開経路を確認した
 
-B61の実4Bでは12件の図と全文に、照明の見送りから購入までと、寸法図の提案から家族の依頼連絡までが表示されました。二者の照合を経て同じ実原本を隔離SQLへ1件保存し、別プロセスで同じIDから再読しました。通常API・ワーカーへの配備が残っています。 [補助設計§9.198](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-actual-result-20261120)
+B61の互換読取版が通常のAPI・ワーカーで稼働しました。APIのヘルスは200、最新・詳細の匿名取得はともに401です。同Podの公開経路2本はJupyterの404を返し、通常の分析モデル切替と通常DBでの保存・再読が残っています。 [補助設計§9.199](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-deployment-20261120)
 
-通常処理759.460秒で12項目・2線、全文4,032字を取得した。両日の根拠をたどると、寸法図を提案した本人と、後日業者へ依頼したと連絡した家族を区別できる。
+通常APIとワーカーの配備コミットはdf7a39d0。今回のRender環境設定変更はワーカーの1800秒設定のみで、分析MAPの選択変更と通常DBへのB61の新規保存は各0件。実原本の隔離保存・同一ID再読は§9.198に記録した。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

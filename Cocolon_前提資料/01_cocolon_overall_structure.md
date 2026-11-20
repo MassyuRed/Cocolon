@@ -1,4 +1,4 @@
-> **B61の実4Bでは12件の図と全文に、照明の見送りから購入までと、寸法図の提案から家族の依頼連絡までが表示されました。二者の照合を経て同じ実原本を隔離SQLへ1件保存し、別プロセスで同じIDから再読しました。通常API・ワーカーへの配備が残っています。** [補助設計§9.198](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-actual-result-20261120)
+> **B61の互換読取版が通常のAPI・ワーカーで稼働しました。APIのヘルスは200、最新・詳細の匿名取得はともに401です。同Podの公開経路2本はJupyterの404を返し、通常の分析モデル切替と通常DBでの保存・再読が残っています。** [補助設計§9.199](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-deployment-20261120)
 
 B61は、分析の統合応答の解読・関係判断・根拠候補、CMEEの分析指示、生成中の形式制約試験の既存5ファイルを変更した。B60からの追加・削除は0件。アプリ・前提資料のGitツリーは5,972件、API開発版は2,731件。
 
