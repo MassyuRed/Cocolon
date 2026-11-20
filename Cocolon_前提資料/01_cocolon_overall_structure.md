@@ -1,4 +1,6 @@
-> **11/20・B59の実4Bは12記録の図・全文を返し、本人が広い机を望む条件を表示しました。** 二者とも個別11件を適合としました。読書会では司会の感想とその宛先が不確かなことが抜けました。照明の見送りと購入は結べましたが、別日の同じ図面依頼を別の対象と判断したため、通常反映は見送りました。 [補助設計§9.194](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b59-actual-result-20261120)
+> **11/20・B60では、読書会の司会の発言と本人の受け取りを同じ記録に残し、別日に続く依頼をたどれるよう修正しました。** 検査用の図・全文では、誰に向けた言葉か分からないという留保と、図面依頼を提案した日から家族の連絡を受けた日までを確認しました。B60の実生成と通常反映は未実施です。 [補助設計§9.195](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b60-preparation-20261120)
+
+B60は既存9ファイルを変更し、他者の発言と本人が受け取った意味を原文で確かめる試験 `ai/tests/test_analysis_merge_attributed_account.py` を追加した。既存の生成途中の制約試験も改訂した。アプリ・前提資料のGitツリーは5,972件、API開発版は2,731件（B59は2,730件）。
 
 B59の開発版は既存7ファイルを変更し、話者・本人の返答・指示語の根拠を検査する回帰試験 `ai/tests/test_analysis_merge_speaker_context.py` を追加した。アプリ・前提資料のGitツリーは5,972件、API開発版は2,730件（B58は2,729件）。
 
