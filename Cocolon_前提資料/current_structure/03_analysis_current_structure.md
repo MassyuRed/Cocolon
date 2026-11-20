@@ -1,8 +1,8 @@
-### 11/20 — 同Podの通常GPUをB61用に切り替え、120uとv24の起動、公開経路の未接続を確認した
+### 11/20 — 通常8888番を切り替え、Renderワーカーから両モデルの専用経路に到達した
 
-通常GPUをB61用に切り替え、同Pod内でヘルス200と既存120u・分析MAP v24の両方の起動引数を確認しました。切替時の生成は0件です。分析・自然応答の公開経路はともに404で、通常APIからの推論、通常DBでの保存・再読が残っています。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
 
-通常API・ワーカーは互換読取版df7a39d0で稼働中。通常GPUは候補版が起動し、同Pod内のヘルスは200。Renderの分析MAP選択変更、通常の生成保存、最新・詳細の同一ID再読が残る。
+通常APIとワーカーはdf7a39d0、GPUはB61用提供で稼働している。ワーカーから指定の分析経路に到達した。通常設定の接続先・資格の整合確認、分析MAPの選択、試験所有者による通常の生成保存・同一ID再読が残る。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

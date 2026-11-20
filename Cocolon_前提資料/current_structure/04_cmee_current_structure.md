@@ -1,8 +1,8 @@
-### 11/20 — 同Podの通常GPUをB61用に切り替え、120uとv24の起動、公開経路の未接続を確認した
+### 11/20 — 通常8888番を切り替え、Renderワーカーから両モデルの専用経路に到達した
 
-通常GPUをB61用に切り替え、同Pod内でヘルス200と既存120u・分析MAP v24の両方の起動引数を確認しました。切替時の生成は0件です。分析・自然応答の公開経路はともに404で、通常APIからの推論、通常DBでの保存・再読が残っています。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
+同Podの通常8888番を切り替えました。Renderワーカーから分析・自然応答の各経路に無資格でGETすると、両方から専用の401応答を受け取りました。ワーカーの分析設定は接続先ホストが異なり、自然応答の接続先は未設定でした。通常サービスの資格を使った推論・保存・再読は未確認です。 [補助設計§9.200](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-gpu-20261120)
 
-同Podの通常GPUで120u・v24の両モデル名を起動引数に確認した。専用公開経路2本の事前確認はいずれも404。認証済みJupyter画面にターミナル8・カーネルセッション0を確認した。
+Pod内で両モデル経路とJupyter管理認証を区別できることを確認した。Renderワーカーからの無資格GETは分析・自然応答とも専用401。ワーカーの実資格での確認と、通常の分析・EmlisAI・Pieceの応答は未検証。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 
