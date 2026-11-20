@@ -7891,3 +7891,5 @@ B61の実原本を隔離SQLで保存し、同一IDの別プロセス再読を確
 受領原本のSHA-256は `run.txt` が `bd47110ce8eccd7b2a857c0c95b254a580814b549b82b8d09982df5b62dde2ca`、`preflight.json` が `0afe3edbac07df70cb3522b7e6540118f8ef109987f65594539baaff149a4733`、追加確認を収めた `verified.json` が `6f0949940533829d90be07e1dd5c97178dd7e63c3c3d37b8bf9ddfec9ec75d60`。いずれもPod側の表示と受領側で一致した。
 
 **通常反映の残件。** Render API・ワーカーの互換読取版は§9.199で配備済み。同Pod内での起動確認にはモデル生成を使っていない。両公開経路を開通させた後、通常サービスからの到達、分析MAP・分析IF・EmlisAI・Pieceそれぞれのモデル選択を確認する。今回のRenderのモデル選択変更、通常DBへの生成保存、通常DB上の同一IDでの非生成再読はいずれも0件。
+
+**11月20日18:01時点のRunpod Connect画面。** 同じPodのHTTP services欄には8888番のJupyter Labだけが表示され、状態は `Ready` だった。Direct TCPの接続先は22番で、SSH鍵は未設定、Web terminalは `Stopped` と表示されていた。8000番のGPUを公開HTTPサービスとして使えることや、Jupyterを停止した状態から復旧できることは、この画面では確認できていない。
