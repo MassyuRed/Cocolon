@@ -7893,3 +7893,5 @@ B61の実原本を隔離SQLで保存し、同一IDの別プロセス再読を確
 **通常反映の残件。** Render API・ワーカーの互換読取版は§9.199で配備済み。同Pod内での起動確認にはモデル生成を使っていない。両公開経路を開通させた後、通常サービスからの到達、分析MAP・分析IF・EmlisAI・Pieceそれぞれのモデル選択を確認する。今回のRenderのモデル選択変更、通常DBへの生成保存、通常DB上の同一IDでの非生成再読はいずれも0件。
 
 **11月20日18:01時点のRunpod Connect画面。** 同じPodのHTTP services欄には8888番のJupyter Labだけが表示され、状態は `Ready` だった。Direct TCPの接続先は22番で、SSH鍵は未設定、Web terminalは `Stopped` と表示されていた。8000番のGPUを公開HTTPサービスとして使えることや、Jupyterを停止した状態から復旧できることは、この画面では確認できていない。
+
+**11月20日18:09 JSTの起動元診断。** 承認済みの `B61_jupyter_owner_check.py`（8,189バイト、SHA-256 `cb700a423c50a6eb0a6103620c99c2621e5f942a49257ca513958735a3820a95`）1件を同Podで照合し、18:09:07に1回実行して同秒に正常終了した。8888番のJupyter（PID 149、開始tick `8316431`）は、PID 1の初期化プロセスから `/start.sh` のシェルを介して起動していた。`/start.sh` は照合対象のRunpodテンプレートと一致し、Jupyterを `nohup` で起動してシェルを `sleep infinity` で待機させる記述と、標準出力・標準エラーが所定のログを指すことを確認した。受領原本 `owner-check.json` は1,172バイトで、SHA-256 `b2621b1e1034ac427f05b1b3cbf0a770b8b519f5568a0d9ad2bbe9fece538605` がPod側と一致した。診断は読取りだけで、Jupyter単体の再起動・自動復帰は未検証（`verified_service_restart=false`）。次に確認するのは、Runpod側のWeb terminalがJupyterとは独立した管理経路として使えるかどうか。
