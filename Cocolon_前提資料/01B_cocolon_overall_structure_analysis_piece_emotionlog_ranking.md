@@ -1,4 +1,4 @@
-> **11/20・B55の実表示で家族の食事会場の点検条件が原文どおりになり、行動欄の41文が元の順に並びました。** 友人が最近勉強を始めたことや家族が語った希望は統合表示に残らず、両者が適合としたのは12件中6件でした。元120uを復元し、通常採用は見送りました。 [補助設計§9.186](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b55-actual-result-20261120)
+> **11/20・履歴統合で発言者と判断の原文を計画に残し、複数記録の比較候補を一組ずつ判定する変更を開発版に反映しました。** B55の行動文は説明内では12/12件が原文順でした。見出しから最初の出現を数えると10/12件で、8・12件目は後の行動が先に現れました。手元の検証ではB55で不足した6記録の原文を選べました。照明同士を比較して照明と家具を別対象にできたのは検証用応答であり、B56の実生成・通常採用は未実施です。 [補助設計§9.187](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b56-preparation-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
