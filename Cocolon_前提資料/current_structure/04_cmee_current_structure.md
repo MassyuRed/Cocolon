@@ -1,8 +1,8 @@
 ### 11/20 — 専用の試験所有者で通常MAP生成を1回試み、HTTP 503で保存IDが発行されなかった
 
-専用の試験所有者にB61の架空入力12件を用意し、通常APIから分析MAPの生成を1回試みました。生成要求は約865秒後に503となり、本人のレポートは0件のままでした。保存IDは発行されず、同一IDの最新・詳細再読は未検証です。 [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+専用試験所有者の通常MAP生成は503となり、レポートは0件でした。同じ時間帯の39件のモデル応答は38件が正常終了し、最後の1件が `length` で終了しました。未完の応答を採用しないv24の実装と一致します。トークン数と残り時間のどちらの制限に達したかは未確定です。 [補助設計§9.203](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
-B61の12件を扱う通常MAP生成を1回試行した。503の発生箇所と生成がどの段階まで進んだかは、この時点の通常APIの応答だけでは確定できない。§9.198の隔離SQLの適合結果は、その試験で取得した実原本に対するもの。
+通常v24は `finish_reason=stop` の応答のみを採用する。該当区間で最後の `complete_length` が生成要求の503の約60ミリ秒前に記録された。ログ単独で所有者・フェーズは特定できず、`length` に達した制限の種類も未確定。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

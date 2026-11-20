@@ -1,4 +1,4 @@
-> **専用の試験所有者にB61の架空入力12件を用意し、通常APIから分析MAPの生成を1回試みました。生成要求は約865秒後に503となり、本人のレポートは0件のままでした。保存IDは発行されず、同一IDの最新・詳細再読は未検証です。** [補助設計§9.203](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+> **専用試験所有者の通常MAP生成は503となり、レポートは0件でした。同じ時間帯の39件のモデル応答は38件が正常終了し、最後の1件が `length` で終了しました。未完の応答を採用しないv24の実装と一致します。トークン数と残り時間のどちらの制限に達したかは未確定です。** [補助設計§9.203](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
 B61は、分析の統合応答の解読・関係判断・根拠候補、CMEEの分析指示、生成中の形式制約試験の既存5ファイルを変更した。B60からの追加・削除は0件。アプリ・前提資料のGitツリーは5,972件、API開発版は2,731件。
 

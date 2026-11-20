@@ -1,4 +1,4 @@
-> **専用の試験所有者にB61の架空入力12件を用意し、通常APIから分析MAPの生成を1回試みました。生成要求は約865秒後に503となり、本人のレポートは0件のままでした。保存IDは発行されず、同一IDの最新・詳細再読は未検証です。** [補助設計§9.203](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
+> **専用試験所有者の通常MAP生成は503となり、レポートは0件でした。同じ時間帯の39件のモデル応答は38件が正常終了し、最後の1件が `length` で終了しました。未完の応答を採用しないv24の実装と一致します。トークン数と残り時間のどちらの制限に達したかは未確定です。** [補助設計§9.203](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-owner-check-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
