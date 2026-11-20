@@ -1,8 +1,8 @@
-### 11/20 — 通常APIとワーカーの接続設定を反映し、ワーカーの資格で両モデル経路を確認した
+### 11/20 — 通常の分析MAP選択をv24に切り替え、APIとワーカーの稼働を確認した
 
-通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。 [補助設計§9.201](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
+通常API・ワーカーの分析MAP選択を120uからv24へ切り替え、両方の設定画面で保存値を再確認しました。ワーカーの起動とAPIのヘルス200を確認しています。次は専用の試験所有者による通常生成・DB保存・同一IDの最新／詳細再読です。 [補助設計§9.202](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-map-selection-20261120)
 
-ワーカーで分析・自然応答それぞれに既定の資格を使ってGETし、いずれも期待した405本文と一致した。APIには同じ接続設定を反映した。GETでの確認にモデル推論は含まれず、通常の分析・EmlisAI・Pieceの応答確認が残る。
+ワーカーでは両モデル経路への認証付きGETを完了し、通常の分析MAP選択もv24に切り替えた。分析IFの120u選択と自然応答の専用経路を保つ構成で、今回の切替時に分析・自然応答の試験推論は行っていない。
 
 既存の `intent_compiler.py` と `semantic_admission.py` が要求への原文の結び付け・受入れ・元の本文への展開を扱い、`serve_emlis_natural_reply.py` が対応する出力を生成時に制約する。
 

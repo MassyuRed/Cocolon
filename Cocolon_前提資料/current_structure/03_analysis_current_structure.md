@@ -1,8 +1,8 @@
-### 11/20 — 通常APIとワーカーの接続設定を反映し、ワーカーの資格で両モデル経路を確認した
+### 11/20 — 通常の分析MAP選択をv24に切り替え、APIとワーカーの稼働を確認した
 
-通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。 [補助設計§9.201](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
+通常API・ワーカーの分析MAP選択を120uからv24へ切り替え、両方の設定画面で保存値を再確認しました。ワーカーの起動とAPIのヘルス200を確認しています。次は専用の試験所有者による通常生成・DB保存・同一IDの最新／詳細再読です。 [補助設計§9.202](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-map-selection-20261120)
 
-接続設定は通常API・ワーカーの稼働版df7a39d0に反映済み。ワーカーの分析経路は認証付きGETで確認した。API自身のモデル呼出し、分析MAP v24の選択、専用試験所有者の通常生成・保存・再読が次の対象。
+分析MAPの通常設定はv24になった。稼働版df7a39d0では同じ設定の分析IFは120uを選ぶ。通常の試験入力に対する生成・保存と、本人用APIでの同一ID再読は未検証。
 
 既存の `analysis_model_source.py` が各段階の要求上限を適用し、`analysis_if_model_source.py` が分析IFのモデル選択を扱う。開発候補の専用試験は `ai/tests/test_analysis_occurrence_v12_fact_refs.py` にある。
 

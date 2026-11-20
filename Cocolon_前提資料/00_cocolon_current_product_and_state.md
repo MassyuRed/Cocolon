@@ -1,4 +1,4 @@
-> **通常APIとワーカーに分析・自然応答の接続設定を反映しました。ワーカーは両方の経路で認証付きGETの期待応答を確認し、再配備後のAPIはヘルス200でした。分析MAP v24の選択と、試験所有者の通常入力による生成・保存・同一ID再読が残っています。** [補助設計§9.201](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-service-connection-20261120)
+> **通常API・ワーカーの分析MAP選択を120uからv24へ切り替え、両方の設定画面で保存値を再確認しました。ワーカーの起動とAPIのヘルス200を確認しています。次は専用の試験所有者による通常生成・DB保存・同一IDの最新／詳細再読です。** [補助設計§9.202](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-map-selection-20261120)
 
 > **11/18 JST・A30は7応答。読書会の図と全文を取得し、原文との二者照合で不適合、照明はNODESの途中で停止した。** 読書会では下書きから消した対象が変わり、同じ内容を繰り返した項目の文末に構造文字列が露出した。元120uは復元済み。残る3入力と後対照は未実行。B30は条件不成立で起動せず、全12記録の実保存・非生成再読・通常反映は未完。補助設計§9.133に記録した。
 
