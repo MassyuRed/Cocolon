@@ -1,4 +1,4 @@
-> **11/20・B57は、別々の発言・訂正・判断に対応する原文を選び、図と全文に各記録の記載順で表示する候補です。** 照明を見送った日と別日に購入した日の比較は、両日に選んだ原文と照合します。実4Bの品質判定と通常反映は未実施です。 [補助設計§9.189](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b57-preparation-20261120)
+> **11/20・B57は1回実行し、架空12記録の読取りと統合の項目作成まで進みました。** 関係線の生成要求を送った後に評価中の通常処理が504で終了し、図・全文を取得できませんでした。元120uを復元済みです。実結果の保存・再読・通常反映は未完です。 [補助設計§9.190](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b57-actual-result-20261120)
 
 B53後に履歴統合の応答を読む `ai/services/ai_inference/analysis_merge_response_parser.py`、対応する `ai/tests/test_analysis_merge_response_parser.py` と `ai/tests/test_analysis_merge_action_sources.py` を新設。B53の実行版から既存9ファイルを変更し、実ツリーはCocolon 5,972件、API 2,723から2,726件。固定地図はCocolon 1,598件、API 2,116件。
 
