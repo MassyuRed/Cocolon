@@ -18,9 +18,11 @@ import { ANALYSIS_WIRE, PIECE_WIRE, SELF_STRUCTURE_WIRE, buildSelfStructureRepor
 import { getCurrentUserId } from "../lib/user";
 import { API_BASE_URL, apiFetch, apiGet, apiPost } from "../lib/apiClient";
 import { getNexusPiecesAsQnaList } from "../lib/nexusApi";
+import { hasPushNotificationPermission } from "../lib/pushToken";
 import { BottomTabUnreadBadge } from "../components/UnreadBadge";
 import GlobalFrameLayout, { FRAME_BORDER_WIDTH } from "../components/GlobalFrameLayout";
 import { navigationRef, buildAnalysisRootNavigationParams } from "./navigationRef";
+import { requestOpenRouteFromNotification, resolveNotificationTargetRoute } from "./notificationRouting";
 import InputStackNavigator from "./InputStackNavigator";
 import AnalysisStackNavigator from "./AnalysisStackNavigator";
 import PieceStackNavigator from "./PieceStackNavigator";
@@ -92,6 +94,37 @@ function CocolonTabBar(props) {
     >
       <BottomTabBar {...props} state={filteredState} />
     </View>
+  );
+}
+
+function NotificationBanner({ colors, message, onPress }) {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.92}
+      accessibilityRole="button"
+      onPress={onPress}
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: colors.BORDER_GOLD,
+        backgroundColor: colors.PANEL_BG,
+        borderRadius: 14,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+        shadowColor: "#000000",
+        shadowOpacity: 0.12,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 4,
+      }}
+    >
+      <Ionicons name="notifications-outline" size={18} color={colors.TITLE_GOLD} style={{ marginRight: 10 }} />
+      <View style={{ flex: 1 }}>
+        <Text style={{ color: colors.TEXT_ON_LIGHT, fontSize: 13, fontWeight: "700" }}>{message}</Text>
+      </View>
+      <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
+    </TouchableOpacity>
   );
 }
 
@@ -174,6 +207,8 @@ export default function MainTabs() {
   } = useTutorial();
   const [isAppActive, setIsAppActive] = useState(() => (AppState?.currentState || "active") === "active");
   const [selfStructureBanner, setSelfStructureBanner] = useState({ visible: false, reportMode: "standard" });
+  const [deepInsightBanners, setDeepInsightBanners] = useState([]);
+  const deepInsightNotifiedRef = useRef(new Set());
   const selfStructureBannerHideTimerRef = useRef(null);
   const selfStructureLatestVersionRef = useRef(null);
   const selfStructureLatestInitializedRef = useRef(false);
@@ -948,12 +983,20 @@ export default function MainTabs() {
 
   useEffect(() => {
     hideSelfStructureBanner();
+    deepInsightNotifiedRef.current.clear();
+    setDeepInsightBanners([]);
     selfStructureLatestInitializedRef.current = false;
     selfStructureLatestVersionRef.current = null;
     selfStructurePushVersionRef.current = null;
     selfStructureNotifiedVersionRef.current = null;
     selfStructureStatusSequenceRef.current += 1;
   }, [hideSelfStructureBanner, currentOwner, authOwnerGeneration]);
+
+  useEffect(() => {
+    if (!deepInsightBanners.length) return undefined;
+    const timer = setTimeout(() => setDeepInsightBanners([]), SELF_STRUCTURE_BANNER_AUTO_HIDE_MS);
+    return () => clearTimeout(timer);
+  }, [deepInsightBanners]);
 
   const refreshSelfStructureLatestStatus = React.useCallback(async () => {
     if (!isAppActive || !isOwnerCurrent(ownerRequest)) return;
@@ -980,10 +1023,24 @@ export default function MainTabs() {
   useEffect(() => {
     if (!isAppActive || !ownerRequest.owner) return undefined;
     try {
-      return messaging().onMessage((remoteMessage) => {
+      return messaging().onMessage(async (remoteMessage) => {
         const data = remoteMessage?.data || {};
-        if (!isOwnerCurrent(ownerRequest) || AppState.currentState !== "active"
-          || data.type !== "watashi_map_updated" || data.user_id !== ownerRequest.owner) return;
+        if (!isOwnerCurrent(ownerRequest) || AppState.currentState !== "active" || data.user_id !== ownerRequest.owner) return;
+        if (data.type === "deep_insight_theme_ready" || data.type === "deep_insight_record_ready") {
+          if (!resolveNotificationTargetRoute(remoteMessage)) return;
+          const notificationKey = `${data.type}:${data.question_id}`;
+          const allowed = await hasPushNotificationPermission().catch(() => false);
+          if (!allowed || !isOwnerCurrent(ownerRequest) || AppState.currentState !== "active"
+            || deepInsightNotifiedRef.current.has(notificationKey)) return;
+          deepInsightNotifiedRef.current.add(notificationKey);
+          setDeepInsightBanners((previous) => [...previous.filter((item) => item.type !== data.type), {
+            type: data.type,
+            remoteMessage,
+            scope: ownerRequest,
+          }]);
+          return;
+        }
+        if (data.type !== "watashi_map_updated") return;
         const versionKey = String(data.version_key || "").trim();
         if (!versionKey) return;
         selfStructurePushVersionRef.current = versionKey;
@@ -1039,40 +1096,33 @@ export default function MainTabs() {
     (async () => { await refreshEmotionLogUnreadState(); })();
   }, [activeRouteName, refreshEmotionLogUnreadState]);
 
-  const selfStructureBannerHud = selfStructureBanner.visible ? (
-    <TouchableOpacity
-      activeOpacity={0.92}
-      onPress={openSelfStructureLatestFromBanner}
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        borderWidth: 1,
-        borderColor: colors.BORDER_GOLD,
-        backgroundColor: colors.PANEL_BG,
-        borderRadius: 14,
-        paddingHorizontal: 14,
-        paddingVertical: 12,
-        shadowColor: "#000000",
-        shadowOpacity: 0.12,
-        shadowRadius: 12,
-        shadowOffset: { width: 0, height: 4 },
-        elevation: 4,
-      }}
-    >
-      <Ionicons name="notifications-outline" size={18} color={colors.TITLE_GOLD} style={{ marginRight: 10 }} />
-      <View style={{ flex: 1 }}>
-        <Text style={{ color: colors.TEXT_ON_LIGHT, fontSize: 13, fontWeight: "700" }}>
-          わたしマップが更新されました
-        </Text>
-      </View>
-      <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />
-    </TouchableOpacity>
+  const visibleDeepInsightBanners = deepInsightBanners.filter(({ scope }) => isOwnerCurrent(scope));
+  const notificationBanners = (selfStructureBanner.visible || visibleDeepInsightBanners.length > 0) ? (
+    <View style={{ gap: 8 }}>
+      {selfStructureBanner.visible && (
+        <NotificationBanner colors={colors} message="わたしマップが更新されました" onPress={openSelfStructureLatestFromBanner} />
+      )}
+      {visibleDeepInsightBanners.map(({ type, remoteMessage, scope }) => (
+        <NotificationBanner
+          key={type}
+          colors={colors}
+          message={type === "deep_insight_theme_ready"
+            ? "わたしを知る問いで新しいテーマの問いを受け取れます"
+            : "わたしを知る問いに新しいふりかえりの問いが届きました"}
+          onPress={() => {
+            if (!isOwnerCurrent(scope)) return;
+            setDeepInsightBanners((previous) => previous.filter((item) => item.remoteMessage !== remoteMessage));
+            requestOpenRouteFromNotification(remoteMessage);
+          }}
+        />
+      ))}
+    </View>
   ) : null;
 
   return (
     <View style={{ flex: 1 }}>
     <View style={{ flex: 1 }} accessibilityElementsHidden={!appStartupReady} importantForAccessibility={appStartupReady ? "auto" : "no-hide-descendants"}>
-    <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={selfStructureBannerHud}>
+    <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={notificationBanners}>
       <Tab.Navigator
         backBehavior="history"
         initialRouteName="Input"

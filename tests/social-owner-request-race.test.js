@@ -59,6 +59,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     }
     if (options.method !== 'GET') return { unread_count: 0, resonated: true, resonances: 1 };
     const p = new URL(url).pathname;
+    if (p === '/deep-insight') return control.deepInsightState;
+    if (p.startsWith('/deep-insight/questions/')) return control.notifiedQuestion;
     if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
     if (p === '/nexus/pieces') return { items: control.pieceFeedItems || [] };
     if (p === '/piece/resonances/pieces') return { items: control.resonanceHistoryItems || [] };
@@ -99,9 +101,15 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (name === 'react-native-vector-icons/Ionicons') return 'Icon';
       if (name === 'react-native-safe-area-context') return { SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
       if (name === '@react-native-async-storage/async-storage') return { getItem: async () => null };
-      if (name === '@react-native-firebase/messaging') return () => ({ onMessage: listener => {
-        pushListeners.add(listener); return () => pushListeners.delete(listener);
-      } });
+      if (name === '@react-native-firebase/messaging') return Object.assign(
+        () => ({
+          onMessage: listener => {
+            pushListeners.add(listener); return () => pushListeners.delete(listener);
+          },
+          hasPermission: () => control.pushPermission?.() ?? Promise.resolve(1),
+        }),
+        { AuthorizationStatus: { AUTHORIZED: 1, PROVISIONAL: 2 } },
+      );
       if (name === '@react-navigation/native') return {
         StackActions: { popToTop: noop }, useNavigation: () => navigation, useIsFocused: () => true,
         useFocusEffect: effect => React.useEffect(() => {
@@ -131,7 +139,12 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (target === 'lib/supabase.js') return { supabase: { auth } };
       if (target === 'lib/user.js') return { getCurrentUserId: async () => control.owner };
       if (target === 'lib/monitoring.js') return { captureApiError: noop };
-      if (target === 'navigation/navigationRef.js') return { navigationRef: { isReady: () => false }, buildAnalysisRootNavigationParams: value => value };
+      if (target === 'navigation/navigationRef.js') return {
+        navigationRef: { isReady: () => false },
+        buildAnalysisRootNavigationParams: value => value,
+        requestOpenRoute: value => routes.push(value),
+      };
+      if (target === 'screens/AnalysisMenuCommon.js') return { AnalysisSubHeader: 'Header' };
       if (target === 'components/GlobalFrameLayout.js') return { __esModule: true, FRAME_BORDER_WIDTH: 0,
         default: props => React.createElement('GlobalFrameLayout', props, props.headerBottomSlot, props.children) };
       if (target === 'lib/noticeActionRuntime.js') return { getNoticeButtonActions: () => [{ label: 'リンクを開く' }],
@@ -820,4 +833,104 @@ test('DeepInsight notifications open the right entry only for the intended owner
     ['Input', { screen: 'DeepInsight', initial: false, params: { notification: { lane: 'records', questionId: 'record-4' } } }],
     ['Input', { screen: 'DeepInsight', initial: false, params: { notification: { lane: 'theme' } } }],
   ]);
+});
+
+test('foreground DeepInsight notifications display once and open the selected private route', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js');
+  const record = { type: 'deep_insight_record_ready', target: 'deep_insight', user_id: 'A', question_id: 'record-4' };
+  const theme = { ...record, type: 'deep_insight_theme_ready', question_id: 'theme-5' };
+  const recordLabel = 'わたしを知る問いに新しいふりかえりの問いが届きました';
+  const themeLabel = 'わたしを知る問いで新しいテーマの問いを受け取れます';
+  const banners = () => h.root.root.findAllByType('TouchableOpacity')
+    .filter(node => node.findAllByType('Text').some(text => [recordLabel, themeLabel].includes(text.props.children)));
+  await h.push({ ...record, user_id: 'B' });
+  await h.push({ ...record, target: 'other' });
+  assert.equal(banners().length, 0);
+
+  h.control.pushPermission = async () => 0;
+  await h.push(record);
+  assert.equal(banners().length, 0);
+  h.control.pushPermission = async () => 1;
+  await h.push(record);
+  await h.push(theme);
+  assert.equal(banners().length, 2);
+
+  const pressOldTheme = banners()[1].props.onPress;
+  await act(async () => banners()[0].props.onPress());
+  assert.deepEqual(h.routes, [{
+    name: 'Input',
+    expectedUserId: 'A',
+    params: { screen: 'DeepInsight', initial: false, params: { notification: { lane: 'records', questionId: 'record-4' } } },
+  }]);
+  await h.push(record);
+  assert.equal(banners().length, 1, 'a duplicate must remain suppressed after a tap');
+  await h.switchTo('B');
+  await act(async () => pressOldTheme());
+  assert.equal(banners().length, 0);
+  assert.equal(h.routes.length, 1);
+});
+
+test('pending foreground notification permission cannot cross an account switch', async t => {
+  const permission = deferred();
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', { pushPermission: () => permission.promise });
+  await h.push({ type: 'deep_insight_record_ready', target: 'deep_insight', user_id: 'A', question_id: 'record-4' });
+  await h.switchTo('B');
+  await act(async () => permission.resolve(1));
+  assert.doesNotMatch(JSON.stringify(h.root.toJSON()), /新しいふりかえりの問い/);
+});
+
+test('theme cooldown read recovers after failure without creating a question', async t => {
+  const base = { can_use_theme: true, can_use_records: false, record_available_today: false,
+    theme_available_today: false, theme_next_available_at: new Date(Date.now() - 1000).toISOString(),
+    records: null, theme: null, history: [] };
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', { deepInsightState: base });
+  const text = () => JSON.stringify(h.root.toJSON());
+  assert.match(text(), /次の問いは.*日本時間/);
+  h.control.failRead = call => call.path === '/deep-insight';
+  await h.fireTimers();
+  assert.match(text(), /新しい問いを受け取れるか確認できませんでした/);
+  h.control.failRead = null;
+  h.control.deepInsightState = { ...base, theme_available_today: true };
+  const retry = h.root.root.findAllByType('CocolonButton').find(node => node.props.children === 'もう一度確認する');
+  await act(async () => { await retry.props.onPress(); });
+  assert.match(text(), /考えたいテーマを選んでください/);
+  assert.doesNotMatch(text(), /確認できませんでした/);
+  assert.equal(h.calls.filter(call => call.path === '/deep-insight').length, 3);
+  assert.deepEqual(h.mutations(), []);
+});
+
+test('returning to an open DeepInsight screen checks a cooldown that elapsed in the background', async t => {
+  const base = { can_use_theme: true, can_use_records: false, record_available_today: false,
+    theme_available_today: false, theme_next_available_at: new Date(Date.now() - 1000).toISOString(),
+    records: null, theme: null, history: [] };
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', { deepInsightState: base });
+  await h.background('background');
+  h.control.deepInsightState = { ...base, theme_available_today: true };
+  await h.background('active');
+  assert.match(JSON.stringify(h.root.toJSON()), /考えたいテーマを選んでください/);
+  assert.equal(h.calls.filter(call => call.path === '/deep-insight').length, 2);
+  assert.deepEqual(h.mutations(), []);
+});
+
+test('an old reflection notification opens its own question and answer outside recent history', async t => {
+  const deepInsightState = { can_use_theme: true, can_use_records: true, record_available_today: true,
+    theme_available_today: true, records: null, theme: null, history: [] };
+  const notifiedQuestion = { id: 'older-record', lane: 'records', question_text: '前の通知の問い',
+    answer_text: 'その問いに保存した回答', issued_on: '2026-09-10', answered_at: '2026-09-11T00:00:00Z' };
+  const questionPath = '/deep-insight/questions/older-record';
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    deepInsightState, notifiedQuestion,
+    screenParams: { notification: { lane: 'records', questionId: notifiedQuestion.id } },
+    failRead: (call) => call.path === questionPath,
+  });
+  const text = () => JSON.stringify(h.root.toJSON());
+  assert.match(text(), /通知に対応する問いを読み込めませんでした/);
+  h.control.failRead = null;
+  const retry = h.root.root.findAllByType('CocolonButton').find(node => node.props.children === 'もう一度確認する');
+  await act(async () => { await retry.props.onPress(); });
+  assert.match(text(), /前の通知の問い/);
+  assert.match(text(), /その問いに保存した回答/);
+  assert.doesNotMatch(text(), /通知に対応する問いを読み込めませんでした/);
+  assert.deepEqual(h.calls.filter(call => call.path === questionPath).map(call => call.owner), ['A', 'A']);
+  assert.deepEqual(h.mutations(), []);
 });

@@ -64,7 +64,8 @@ export default function DeepInsightScreen({ navigation, route }) {
 }
 
 function DeepInsightContent({ ownerId, notification, navigation, styles, colors }) {
-  const { data, loadError, questionLoads, questionErrors, reload, issueRecords, issueTheme, answer,
+  const { data, loadError, notifiedQuestion, notificationReadFailed, themeRefreshError, questionLoads, questionErrors,
+    reload, refreshTheme, issueRecords, issueTheme, answer,
     notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId, notification);
   const { isFeatureEnabled } = useAppRuntime();
   const { subscriptionBootstrap } = useSubscription();
@@ -117,11 +118,10 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   const nextThemeLabel = Number.isFinite(nextThemeAt) ? THEME_TIME_FORMAT.format(nextThemeAt) : null;
   const history = (data.history || []).filter((item) =>
     !(recordPending && item.id === data.records.id) && !(themePending && item.id === data.theme.id));
-  const notifiedHistoryQuestion = notification?.lane === "records"
-    ? history.find((item) => item.lane === "records" && item.id === notification.questionId)
-    : null;
+  const notifiedHistoryQuestion = notifiedQuestion
+    && !(recordPending && data.records.id === notifiedQuestion.id) ? notifiedQuestion : null;
   const displayedHistory = notifiedHistoryQuestion
-    ? [notifiedHistoryQuestion, ...history.filter((item) => item !== notifiedHistoryQuestion)]
+    ? [notifiedHistoryQuestion, ...history.filter((item) => item.id !== notifiedHistoryQuestion.id)]
     : history;
 
   const recordsCard = showRecords && (
@@ -189,6 +189,12 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
       {data.can_use_theme && !data.theme_available_today && nextThemeLabel && (
         <Text style={styles.detail}>次の問いは{nextThemeLabel}（日本時間）から受け取れます。</Text>
       )}
+      {themeRefreshError && (
+        <>
+          <Text style={styles.error} accessibilityRole="alert">新しい問いを受け取れるか確認できませんでした。</Text>
+          <CocolonButton variant="secondary" onPress={refreshTheme}>もう一度確認する</CocolonButton>
+        </>
+      )}
       {data.can_use_theme && typeof data.theme_notification_enabled === "boolean" && (
         <>
           <View style={styles.notificationRow}>
@@ -206,7 +212,7 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   const historyCard = (
     <View key="history" style={styles.card}>
       <Text accessibilityRole="header" style={styles.heading}>回答の履歴</Text>
-      {history.length === 0 && <Text style={styles.body}>まだ履歴はありません。</Text>}
+      {displayedHistory.length === 0 && <Text style={styles.body}>まだ履歴はありません。</Text>}
       {displayedHistory.map((question) => (
         <View key={question.id} style={styles.historyItem}>
           <Text style={styles.detail}>{question.issued_on} · {question.theme || LANE_LABELS[question.lane]}</Text>
@@ -224,6 +230,13 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   );
 
   if (notification?.lane === "theme") return [themeCard, recordsCard, historyCard];
+  if (notificationReadFailed) return [
+    <View key="notification-unavailable" style={styles.card}>
+      <Text style={styles.error} accessibilityRole="alert">通知に対応する問いを読み込めませんでした。</Text>
+      <CocolonButton variant="secondary" onPress={reload}>もう一度確認する</CocolonButton>
+    </View>,
+    recordsCard, themeCard, historyCard,
+  ];
   if (notifiedHistoryQuestion) return [historyCard, recordsCard, themeCard];
   return [recordsCard, themeCard, historyCard];
 }

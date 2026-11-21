@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AppState } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import {
   getDeepInsight,
+  getDeepInsightQuestion,
   requestDeepInsightQuestion,
   saveDeepInsightAnswer,
   updateDeepInsightThemeNotification,
@@ -15,6 +17,9 @@ export default function useDeepInsight(ownerId, notification) {
   const current = useRef(null);
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState(false);
+  const [notifiedQuestion, setNotifiedQuestion] = useState(null);
+  const [notificationReadFailed, setNotificationReadFailed] = useState(false);
+  const [themeRefreshError, setThemeRefreshError] = useState(false);
   const [questionLoads, setQuestionLoads] = useState({});
   const [questionErrors, setQuestionErrors] = useState({});
   const [notificationSaving, setNotificationSaving] = useState(false);
@@ -55,6 +60,7 @@ export default function useDeepInsight(ownerId, notification) {
     const savedDuringRead = themeOnly ? new Map() : null;
     request.savedDuringThemeRead = savedDuringRead;
     if (!themeOnly) setLoadError(false);
+    setThemeRefreshError(false);
     try {
       const result = await getDeepInsight(request.options);
       if (request.signal.aborted) return;
@@ -74,12 +80,31 @@ export default function useDeepInsight(ownerId, notification) {
         });
         return;
       }
+      const questionId = request.notifiedQuestionId;
+      if (questionId) {
+        const matches = (question) => question?.id === questionId && question.lane === "records";
+        setNotificationReadFailed(false);
+        try {
+          const question = [result.records, ...(result.history || [])].find(matches)
+            ?? await getDeepInsightQuestion(questionId, request.options);
+          if (request.signal.aborted) return;
+          setNotifiedQuestion(matches(question) ? question : null);
+          setNotificationReadFailed(!matches(question));
+        } catch (error) {
+          if (request.signal.aborted || error?.name === "AccountChangedError") return;
+          setNotifiedQuestion(null);
+          setNotificationReadFailed(true);
+        }
+      }
       setData(result);
-      if (result.can_use_records !== false && result.record_available_today && !isUnanswered(result.records)) {
+      if (!questionId && result.can_use_records !== false && result.record_available_today && !isUnanswered(result.records)) {
         void issue(request, "records");
       }
     } catch (error) {
-      if (!themeOnly && !request.signal.aborted && error?.name !== "AccountChangedError") setLoadError(true);
+      if (!request.signal.aborted && error?.name !== "AccountChangedError") {
+        if (themeOnly) setThemeRefreshError(true);
+        else setLoadError(true);
+      }
     } finally {
       request.loading = false;
       request.savedDuringThemeRead = null;
@@ -95,9 +120,12 @@ export default function useDeepInsight(ownerId, notification) {
       lanes: new Set(),
       loading: false,
       savingNotification: false,
+      notifiedQuestionId: notification?.lane === "records" ? notification.questionId : null,
     };
     current.current = request;
     setData(null);
+    setNotifiedQuestion(null);
+    setNotificationReadFailed(false);
     setQuestionLoads({});
     setQuestionErrors({});
     setNotificationSaving(false);
@@ -112,10 +140,15 @@ export default function useDeepInsight(ownerId, notification) {
     const request = current.current;
     const unlockAt = Date.parse(nextThemeAt);
     if (themeAvailable || !Number.isFinite(unlockAt) || !request || request.signal.aborted) return;
-    const timer = setTimeout(() => void load(request, true), Math.max(0, unlockAt - Date.now() + 1000));
+    const refreshTheme = () => void load(request, true);
+    const timer = setTimeout(refreshTheme, Math.max(0, unlockAt - Date.now() + 1000));
     const cancel = () => clearTimeout(timer);
+    const appState = AppState.addEventListener("change", (state) => {
+      if (state === "active" && Date.now() >= unlockAt) refreshTheme();
+    });
     request.signal.addEventListener("abort", cancel);
     return () => {
+      appState.remove();
       request.signal.removeEventListener("abort", cancel);
       cancel();
     };
@@ -128,6 +161,7 @@ export default function useDeepInsight(ownerId, notification) {
     if (request.signal.aborted) return;
     const saved = result.question;
     request.savedDuringThemeRead?.set(saved.id, saved);
+    setNotifiedQuestion((previous) => previous?.id === saved.id ? saved : previous);
     setData((prev) => ({
       ...prev,
       [saved.lane]: prev[saved.lane]?.id === saved.id ? saved : prev[saved.lane],
@@ -157,12 +191,16 @@ export default function useDeepInsight(ownerId, notification) {
   return {
     data,
     loadError,
+    notifiedQuestion,
+    notificationReadFailed,
+    themeRefreshError,
     questionLoads,
     questionErrors,
     notificationSaving,
     notificationError,
     setThemeNotification,
     reload: () => load(current.current),
+    refreshTheme: () => load(current.current, true),
     issueRecords: () => data?.can_use_records !== false && issue(current.current, "records"),
     issueTheme: (theme) => issue(current.current, "theme", theme),
     answer,
