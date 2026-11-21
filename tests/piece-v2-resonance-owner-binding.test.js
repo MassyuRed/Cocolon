@@ -22,14 +22,16 @@ const deferred = () => { let resolve; const promise = new Promise(r => { resolve
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const clone = value => JSON.parse(JSON.stringify(value));
 
-function harness({ already = false, tutorial = false, holdAuth = false, holdResponse = false } = {}) {
+function harness({ already = false, tutorial = false, holdAuth = false, holdResponse = false, viewedUserId = 'target-A' } = {}) {
   const calls = [], states = [], alerts = [], authGate = deferred(), responseGate = deferred();
   const session = { current: { user: { id: 'owner-A' }, access_token: 'token-A' } };
   const context = {
     user: { id: 'owner-A' }, ownerRequestRef: { current: null }, AbortController,
     selected: { q_instance_id: 'public-piece', q_key: 'canonical-key', resonances: 3, is_resonated: already },
     isTutorialMode: tutorial, resetSeqRef: { current: 0 }, listRequestSeqRef: { current: 0 },
-    detailLoading: false, activeViewedUserId: 'target-A',
+    detailLoading: false, activeViewedUserId: viewedUserId,
+    navigation: { isFocused: () => true }, AppState: { currentState: 'active' },
+    get viewingOtherUser() { return !!this.activeViewedUserId && this.activeViewedUserId !== this.user?.id; },
     resonanceStrength: 'large', resonanceMemo: '響いた原文',
     PIECE_RESONANCE_SUBMIT_ENDPOINT: '/piece/resonance/submit', PIECE_RESONANCE_DELETE_ENDPOINT: '/piece/resonance/delete',
     Alert: { alert: (...args) => alerts.push(args) }, buildErrorMessage: String,
@@ -122,14 +124,14 @@ test('changing the viewed target invalidates both pending list and selected deta
 });
 
 test('a newer list sort invalidates an earlier list request', async () => {
-  const h = harness({ holdResponse: true });
+  const h = harness({ holdResponse: true, viewedUserId: 'owner-A' });
   const first = h.loadQnaList('newest'); await settle();
   const second = h.loadQnaList('resonances'); await settle();
   assert.equal(h.calls.length, 2);
   h.responseGate.resolve(); await Promise.all([first, second]);
   const cache = h.states.filter(([name]) => name === 'cache');
   assert.equal(cache.length, 1);
-  assert.equal(cache[0][1][1], 'qnaList:target-A:resonances');
+  assert.equal(cache[0][1][1], 'qnaList:owner-A:resonances');
   h.cleanup();
 });
 

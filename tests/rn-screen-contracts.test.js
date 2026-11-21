@@ -1630,7 +1630,7 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
 });
 
 
-test('AccountScreen keeps profile, follow, visibility, subscription, and ID search boundaries mounted through Phase 7 split modules', () => {
+test('AccountScreen keeps profile, follow, subscription, and ID search without public-settings controls', () => {
   const account = read('screens/AccountScreen.js');
   const accountModel = read('screens/account/accountModel.js');
   const accountProfileHook = read('screens/account/useAccountProfile.js');
@@ -1642,22 +1642,22 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
   const accountIdSearchSection = read('screens/account/AccountIdSearchSection.js');
   const accountStatusSection = read('screens/account/AccountStatusSection.js');
   const accountNameEditModal = read('screens/account/AccountNameEditModal.js');
-  const accountVisibilitySection = read('screens/account/AccountVisibilitySection.js');
 
   assertIncludes(account, [
     'from "./account/accountModel";',
     'from "./account/useAccountProfile";',
     'from "./account/useAccountFollowState";',
-    'from "./account/useAccountVisibility";',
     'from "./account/useAccountSubscription";',
     'from "./account/useAccountIdSearch";',
     'AccountProfileSection',
     'AccountIdSearchSection',
     'AccountStatusSection',
     'AccountNameEditModal',
-    'AccountVisibilitySection',
     'readShareCodePublic',
+    'const canShowShareCode = !user || isSelf || isShareCodePublic;',
   ], 'AccountScreen.js');
+  assertNotIncludes(account, ['useAccountVisibility', 'AccountVisibilitySection', 'openAccountSettings', 'isPrivateAccount'],
+    'The account screen has no visibility-settings control');
 
   assertIncludes(accountModel, [
     'export const PANEL_MIN_HEIGHT = 695;',
@@ -1728,10 +1728,15 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
     'フォロー数',
     'フォロワー数',
     'ユーザーID',
+    'プロフィールURLを共有',
+    'ユーザーIDを共有',
+    '{canShowShareCode ? (',
     'onToggleFollow',
     'openFollowList("following")',
     'openFollowList("followers")',
   ], 'AccountProfileSection.js');
+  assertNotIncludes(accountProfileSection, ['アカウント設定', 'settings-outline', 'shield-outline', 'isPrivateAccount'],
+    'The account profile shows no settings button or private shield');
 
   assertIncludes(accountIdSearchSection, [
     'export default function AccountIdSearchSection',
@@ -1756,13 +1761,6 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
     'saveDisplayName',
   ], 'AccountNameEditModal.js');
 
-  assertIncludes(accountVisibilitySection, [
-    'export default function AccountVisibilitySection',
-    'VisibilitySettingRow',
-    'アカウントの公開設定',
-    'ユーザーID表示設定',
-    'ACCOUNT_WIRE.fields.shareCodePublic',
-  ], 'AccountVisibilitySection.js');
 });
 
 test('SubscriptionSelectScreen keeps revenue-critical IAP and sales flag guards mounted', () => {

@@ -16,6 +16,7 @@ import {
   Share,
   useWindowDimensions,
 } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
@@ -31,7 +32,9 @@ import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
-import { apiFetch } from "../lib/apiClient";
+import { apiGet } from "../lib/apiClient";
+import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 
 // 🔧 ここを変えると感情ログ画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
@@ -116,33 +119,6 @@ async function getAuthContext() {
   return { userId, accessToken };
 }
 
-async function getJsonWithAuth(url) {
-  const { accessToken } = await getAuthContext();
-  if (!accessToken) {
-    throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
-  }
-
-  const res = await apiFetch(url, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    let detail = `HTTP ${res.status}`;
-    try {
-      const j = await res.json();
-      if (j && j.detail) detail = j.detail;
-    } catch {}
-    const error = new Error(detail);
-    error.httpStatus = res.status;
-    throw error;
-  }
-
-  return await res.json();
-}
-
 export default function EmotionLogScreen(props) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -160,22 +136,12 @@ export default function EmotionLogScreen(props) {
     hasTutorialEmotionLog,
   } = useTutorial();
 
-  const { getPrefetchEntry, getPrefetchEntryFresh, setPrefetch, setUnread } = useUnread();
-
-  const FEED_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
-
-  const prefetchedFeedItems = useMemo(() => {
-    try {
-      const entry = getPrefetchEntryFresh
-        ? getPrefetchEntryFresh("EmotionLog", "feed", FEED_PREFETCH_MAX_AGE_MS)
-        : getPrefetchEntry("EmotionLog", "feed");
-      const v = entry?.value;
-      const items = Array.isArray(v?.items) ? v.items : null;
-      return items;
-    } catch {
-      return null;
-    }
-  }, [getPrefetchEntry, getPrefetchEntryFresh]);
+  const { setUnread } = useUnread();
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
+  const isFocused = useIsFocused();
+  const feedRequestRef = useRef(0);
+  const [feedScope, setFeedScope] = useState(null);
   const { navigation, onEmotionLogDisplayed } = props || {};
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -191,7 +157,6 @@ export default function EmotionLogScreen(props) {
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const [tutorialNotificationShown, setTutorialNotificationShown] = useState(false);
   const tutorialNotificationFlowRef = useRef(false);
-  const skipNextFocusFeedRefreshRef = useRef(true);
 
   const isEmotionLogTutorialVisible =
     !!isTutorialMode &&
@@ -263,10 +228,8 @@ export default function EmotionLogScreen(props) {
 
 
   // ===== feed（既存） =====
-  const [feed, setFeed] = useState(() =>
-    Array.isArray(prefetchedFeedItems) ? prefetchedFeedItems : []
-  ); // { id, ownerName, items[], timeLabel }
-  const [loading, setLoading] = useState(() => !Array.isArray(prefetchedFeedItems));
+  const [feed, setFeed] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleTutorialScroll = useCallback((e) => {
@@ -310,7 +273,7 @@ export default function EmotionLogScreen(props) {
       overlayMetrics: tutorialOverlayMetrics,
       windowHeight,
       safeInsets,
-      cardPlacement: tutorialOverlayConfig?.cardPlacement || "bottom",
+      cardPlacement: "bottom",
       measureOptions: {
         maxAttempts: 3,
         settleFrames: 1,
@@ -320,7 +283,6 @@ export default function EmotionLogScreen(props) {
     getTutorialTargetRef,
     isEmotionLogTutorialVisible,
     safeInsets,
-    tutorialOverlayConfig?.cardPlacement,
     tutorialOverlayMetrics,
     windowHeight,
   ]);
@@ -495,21 +457,17 @@ export default function EmotionLogScreen(props) {
 
 
 
-  const loadFeed = useCallback(async (opts) => {
-    if (isTutorialMode) {
-      setErrorMsg("");
-      setLoading(false);
-      setFeed(Array.isArray(tutorialDisplayFeed) ? tutorialDisplayFeed : []);
-      return;
-    }
-
-    const silent = !!opts?.silent;
-    if (!silent) {
-      setLoading(true);
-    }
+  const loadFeed = useCallback(async () => {
+    if (isTutorialMode || !isOwnerCurrent(ownerRequest)) return;
+    const request = ++feedRequestRef.current;
+    const isCurrent = () => isOwnerCurrent(ownerRequest) && request === feedRequestRef.current;
+    setFeed([]);
+    setFeedScope(ownerRequest);
+    setLoading(true);
     setErrorMsg("");
     try {
-      const json = await getJsonWithAuth(EMOTION_LOG_FEED_ENDPOINT);
+      const json = await apiGet(EMOTION_LOG_FEED_ENDPOINT, ownerRequest.options);
+      if (!isCurrent()) return;
       const rows = Array.isArray(json)
         ? json
         : Array.isArray(json?.items)
@@ -539,54 +497,27 @@ export default function EmotionLogScreen(props) {
 
       const latestDisplayedCreatedAt = mapped.find((item) => item?.createdAt)?.createdAt || null;
       if (latestDisplayedCreatedAt && typeof onEmotionLogDisplayed === "function") {
-        setTimeout(() => {
-          Promise.resolve(onEmotionLogDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
-            console.warn("EmotionLogScreen: failed to mark displayed feed as read", callbackError);
-          });
-        }, 0);
-      }
-
-      // cache (used by app-level preload / next open)
-      try {
-        const { userId } = await getAuthContext();
-        if (userId) {
-          setPrefetch("EmotionLog", "feed", { userId, items: mapped });
-        }
-      } catch {
-        // noop
+        Promise.resolve(onEmotionLogDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
+          console.warn("EmotionLogScreen: failed to mark displayed feed as read", callbackError);
+        });
       }
     } catch (e) {
+      if (!isCurrent()) return;
       console.error("emotion log feed load error:", e);
       setErrorMsg(String(e?.message || e));
-      setFeed([]);
     } finally {
-      setLoading(false);
+      if (isCurrent()) setLoading(false);
     }
-  }, [isTutorialMode, onEmotionLogDisplayed, tutorialDisplayFeed, setPrefetch]);
-  useEffect(() => {
-    if (isTutorialMode) return;
-    // If feed was preloaded at app start, render immediately and refresh silently.
-    if (Array.isArray(prefetchedFeedItems)) {
-      loadFeed({ silent: true });
-      return;
-    }
+  }, [isTutorialMode, isOwnerCurrent, onEmotionLogDisplayed, ownerRequest]);
+
+  useLayoutEffect(() => {
+    if (isTutorialMode || !isFocused || !ownerRequest.foreground) return undefined;
     loadFeed();
-  }, [isTutorialMode, loadFeed, prefetchedFeedItems]);
-
-  useEffect(() => {
-    if (isTutorialMode) return undefined;
-    if (!navigation || typeof navigation.addListener !== "function") return undefined;
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      if (skipNextFocusFeedRefreshRef.current) {
-        skipNextFocusFeedRefreshRef.current = false;
-        return;
-      }
-      loadFeed({ silent: true });
-    });
-
-    return typeof unsubscribe === "function" ? unsubscribe : undefined;
-  }, [isTutorialMode, loadFeed, navigation]);
+    return () => {
+      feedRequestRef.current += 1;
+      setFeedScope(null);
+    };
+  }, [isTutorialMode, isFocused, loadFeed, ownerRequest]);
 
   const handleOpenFollowList = useCallback(async () => {
     if (isTutorialMode) {
@@ -691,13 +622,14 @@ export default function EmotionLogScreen(props) {
 
   const isDark = themeName === "dark";
 
+  const canShowFeed = isFocused && ownerRequest.foreground && feedScope === ownerRequest;
   const effectiveFeed = isTutorialMode
     ? Array.isArray(tutorialDisplayFeed)
       ? tutorialDisplayFeed
       : []
-    : feed;
-  const effectiveLoading = isTutorialMode ? false : loading;
-  const effectiveErrorMsg = isTutorialMode ? "" : errorMsg;
+    : canShowFeed ? feed : [];
+  const effectiveLoading = !isTutorialMode && (!canShowFeed || loading);
+  const effectiveErrorMsg = !isTutorialMode && canShowFeed ? errorMsg : "";
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>

@@ -74,7 +74,7 @@ export const guideTermsJa = Object.freeze({
   },
   emotion_notifications: {
     termId: "emotion_notifications",
-    display: "感情通知を送らない",
+    display: "今回だけ感情通知を送らない",
     reading: "かんじょうつうちをおくらない",
     shortDef: "その入力をフォロー中ユーザーへ通知しないための設定です。",
     longDef:

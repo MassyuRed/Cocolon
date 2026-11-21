@@ -737,7 +737,7 @@ test('post confirmation explains followers and keeps the same saved image availa
   host.componentDidMount(); await tick();
   assert.equal(h.calls.length, 1, 'opening a preview action cannot publish');
   assert.equal(h.alerts[0][0], 'アプリ内に投稿しますか？');
-  assert.match(h.alerts[0][1], /あなたをフォローしている人/);
+  assert.match(h.alerts[0][1], /ピース投稿の公開を許可しているフォロワー/);
   assert.ok(button(host, 'アプリ内に投稿する')); assert.ok(button(host, '画像を保存'));
   h.alerts[0][2][1].onPress(); await tick();
   assert.ok(pendingDetail);

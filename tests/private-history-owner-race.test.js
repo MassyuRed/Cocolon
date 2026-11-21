@@ -34,6 +34,7 @@ function harness(file, exportName, args = {}) {
   const settings = Function('apiGet','apiPatch',strip(read('lib/reportDistributionApi.js'))+'\nreturn {getReportDistributionSettings,patchReportDistributionSettings};')(client.apiGet,client.apiPatch);
   const today = Function('apiGet','apiPatch','apiPost',strip(read('lib/api/home/todayQuestionApi.js'))+'\nreturn {getTodayQuestionSettings,patchTodayQuestionSettings,resolveLocalTimezoneName,getTodayQuestionHistory,patchTodayQuestionAnswer};')(client.apiGet,client.apiPatch,client.apiPost);
   const bindings = { ...client, ...model, ...settings, ...today, AbortController, Platform: { OS: 'android' },
+    AppState: { currentState: 'active', addEventListener: () => ({ remove() {} }) },
     useAuth: () => ({ user: currentUser(), authOwnerGeneration: generation, authLoading: false, signOut: async opts => signouts.push(opts) }),
     useSubscription: () => ({ isPaid: true, tier: 'plus', loading: false }),
     makeUiTokens: () => ({}), createStyles: () => ({}), useWindowDimensions: () => ({ height: 800 }),

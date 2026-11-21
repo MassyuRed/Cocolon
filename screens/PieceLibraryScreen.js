@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import {
   ActivityIndicator,
   Alert,
+  AppState,
   Keyboard,
   Modal,
   Platform,
@@ -230,6 +231,7 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
   const [activeViewedUserId, setActiveViewedUserId] = useState(
     initialViewedUserId ? String(initialViewedUserId) : null
   );
+  const viewingOtherUser = !!activeViewedUserId && activeViewedUserId !== user?.id;
 
   // viewer（自分）の user_id（表示/フォロー一覧取得用）
   const [viewerUserId, setViewerUserId] = useState(null);
@@ -256,6 +258,8 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailLoadingId, setDetailLoadingId] = useState(null);
   const [selected, setSelected] = useState(null);
+  const selectedOwner = selected?.owner_user_id || selected?.owner?.user_id;
+  const sharedDetail = !!selected && selectedOwner !== user?.id;
 
   const [resonanceDeleting, setResonanceDeleting] = useState(false);
 
@@ -671,6 +675,19 @@ const resetToMain = useCallback(() => {
   setDetailLoadingId(null);
 }, []);
 
+  const clearPieceList = useCallback(() => {
+    setQnaItems([]);
+    setListMeta(null);
+    setListError("");
+    setListLoading(false);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (isTutorialMode) return;
+    resetToMain();
+    clearPieceList();
+  }, [user?.id, authOwnerGeneration, isTutorialMode, resetToMain, clearPieceList]);
+
 useEffect(() => {
   if (!navigation?.addListener) return;
 
@@ -687,14 +704,25 @@ useEffect(() => {
   // 画面遷移（Account など）で PieceScreen が裏に回ったとき、
   // Modal が「表示状態のまま残る」ことでタップが吸われる事故を防ぐ
   useEffect(() => {
-    if (!navigation?.addListener) return;
-    const unsubscribe = navigation.addListener("blur", () => {
-          setPickerVisible(false);
+    const clearSharedContent = () => {
+      if (isTutorialMode || (!viewingOtherUser && !sharedDetail && !detailLoading)) return;
+      resetToMain();
+      if (viewingOtherUser) clearPieceList();
+    };
+    const unsubscribe = navigation?.addListener?.("blur", () => {
+      setPickerVisible(false);
       setUserPickerVisible(false);
       setResonanceModalVisible(false);
-        });
-    return unsubscribe;
-  }, [navigation]);
+      clearSharedContent();
+    });
+    const activity = AppState?.addEventListener?.("change", state => {
+      if (state !== "active") clearSharedContent();
+    });
+    return () => {
+      unsubscribe?.();
+      activity?.remove?.();
+    };
+  }, [navigation, viewingOtherUser, sharedDetail, detailLoading, isTutorialMode, resetToMain, clearPieceList]);
 
   // route params が変わった場合も追従（例：他画面から viewedUserId で遷移）
   useEffect(() => {
@@ -974,6 +1002,11 @@ useEffect(() => {
       const sequence = ++listRequestSeqRef.current;
       const ownerRequest = ownerRequestRef.current;
       if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
+      if (viewingOtherUser && !isTutorialMode) {
+        if (navigation?.isFocused?.() === false || (AppState?.currentState || "active") !== "active") return;
+        setQnaItems([]);
+        setListMeta(null);
+      }
       const isCurrent = () => sequence === listRequestSeqRef.current &&
         (isTutorialMode || !ownerRequest.signal.aborted);
       const silent = !!opts?.silent;
@@ -1009,7 +1042,7 @@ useEffect(() => {
         // cache（次回表示を即時化）
         try {
           const cacheKey = `qnaList:${String(targetUserId || "").trim()}:${String(mode || "newest").trim() || "newest"}`;
-          if (String(targetUserId || "").trim()) {
+          if (targetUserId === userId) {
             setPrefetch("Piece", cacheKey, {
               userId: userId || null,
               targetUserId,
@@ -1035,6 +1068,8 @@ useEffect(() => {
       getTutorialSortedItems,
       setPrefetch,
       user?.id,
+      viewingOtherUser,
+      navigation,
     ]
   );
 
@@ -1049,7 +1084,7 @@ useEffect(() => {
     // まずキャッシュ（アプリ起動時プリロード）を即反映
     try {
       const targetId = activeViewedUserId || viewerUserId;
-      const cacheKey = targetId ? `qnaList:${String(targetId)}:${String(sortMode || "newest")}` : null;
+      const cacheKey = targetId && targetId === user?.id ? `qnaList:${String(targetId)}:${String(sortMode || "newest")}` : null;
       const entry = cacheKey
         ? getPrefetchEntryFresh
           ? getPrefetchEntryFresh("Piece", cacheKey, PREFETCH_MAX_AGE_MS)
@@ -1078,6 +1113,7 @@ useEffect(() => {
     isTutorialMode,
     activeViewedUserId,
     viewerUserId,
+    user?.id,
     sortMode,
     loadQnaList,
     getPrefetchEntry,
@@ -1097,7 +1133,7 @@ useEffect(() => {
       // まずキャッシュを即反映して、切替の体感を速くする
       try {
         const targetId = activeViewedUserId || viewerUserId;
-        const cacheKey = targetId ? `qnaList:${String(targetId)}:${String(m || "newest")}` : null;
+        const cacheKey = targetId && targetId === user?.id ? `qnaList:${String(targetId)}:${m}` : null;
         const entry = cacheKey
           ? getPrefetchEntryFresh
             ? getPrefetchEntryFresh("Piece", cacheKey, PREFETCH_MAX_AGE_MS)
@@ -1127,6 +1163,7 @@ useEffect(() => {
       isTutorialMode,
       activeViewedUserId,
       viewerUserId,
+      user?.id,
       loadQnaList,
       getPrefetchEntry,
       getPrefetchEntryFresh,
@@ -1139,6 +1176,8 @@ useEffect(() => {
       if (detailLoading) return;
       const ownerRequest = ownerRequestRef.current;
       if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
+      if (!isTutorialMode &&
+          (navigation?.isFocused?.() === false || (AppState?.currentState || "active") !== "active")) return;
       const resetSeq = resetSeqRef.current;
       const qInstanceId = String(item.q_instance_id);
       const shouldRefreshUnread = !!item?.is_new;
@@ -1223,6 +1262,7 @@ useEffect(() => {
       refreshPieceUnread,
       updateTutorialPiece,
       user?.id,
+      navigation,
     ]
   );
 

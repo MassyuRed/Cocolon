@@ -58,7 +58,6 @@ export default function AccountProfileSection({
   displayName,
   shareCode,
   userIdForDisplay,
-  isPrivateAccount,
   canShowShareCode,
   followingCount,
   followerCount,
@@ -70,7 +69,6 @@ export default function AccountProfileSection({
   openNameEdit,
   onCopyShareCode,
   onShareProfile,
-  openAccountSettings,
   onToggleFollow,
   openFollowList,
 }) {
@@ -78,36 +76,15 @@ export default function AccountProfileSection({
   return (
     <>
       {isSelf ? (
-        <View
-          style={[styles.profileActionRow, { justifyContent: "flex-end" }]}
-        >
+        <View style={styles.profileActionRow}>
           <CocolonPressable
-            style={[
-              styles.accountSettingsBtn,
-              (loading || !user) && styles.accountSettingsBtnDisabled,
-            ]}
+            style={styles.profileShareBtn}
             onPress={onShareProfile}
             disabled={loading || !user}
             accessibilityLabel="プロフィールURLを共有"
           >
             <Ionicons
               name="share-outline"
-              size={20}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
-
-          <CocolonPressable
-            style={[
-              styles.accountSettingsBtn,
-              (loading || !user) && styles.accountSettingsBtnDisabled,
-            ]}
-            onPress={openAccountSettings}
-            disabled={loading || !user}
-            accessibilityLabel="アカウント設定"
-          >
-            <Ionicons
-              name="settings-outline"
               size={20}
               color={colors.TEXT_ON_LIGHT}
             />
@@ -192,28 +169,7 @@ export default function AccountProfileSection({
               loading ? (
                 "…"
               ) : (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    maxWidth: "100%",
-                  }}
-                >
-                  <Text
-                    style={[styles.value, { flexShrink: 1 }]}
-                  >
-                    {displayName || "（未設定）"}
-                  </Text>
-                  {isPrivateAccount ? (
-                    <Ionicons
-                      name="shield-outline"
-                      size={14}
-                      color={colors.TITLE_GOLD}
-                      style={{ marginLeft: 6, opacity: 0.7 }}
-                    />
-                  ) : null}
-                </View>
+                <Text style={styles.value}>{displayName || "（未設定）"}</Text>
               )
             }
           />

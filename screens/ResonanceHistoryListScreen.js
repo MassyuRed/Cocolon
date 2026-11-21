@@ -2,6 +2,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
+  AppState,
   FlatList,
   RefreshControl,
   StatusBar,
@@ -156,6 +157,8 @@ export default function ResonanceHistoryListScreen({ navigation }) {
   }, [user?.id, ownerKey]);
 
   const fetchInitial = useCallback(async (nextOrder = order) => {
+    setItems([]);
+    setErrorText("");
     setLoading(true);
     setLoadingMore(false);
     setHasMore(true);
@@ -192,18 +195,25 @@ export default function ResonanceHistoryListScreen({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      fetchInitial(order).catch((e) => {
+      const reload = () => fetchInitial(order).catch((e) => {
         if (latestOwnerKeyRef.current !== ownerKey || e?.name === "AbortError" || e?.name === "AccountChangedError") return;
         setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
         setLoading(false);
       });
 
+      const clearSharedContent = () => {
+        abortRef.current?.abort();
+        setItems([]);
+        setLoading(true);
+      };
+      if ((AppState?.currentState || "active") === "active") void reload();
+      const activity = AppState?.addEventListener?.("change", state => {
+        if (state === "active") void reload();
+        else clearSharedContent();
+      });
       return () => {
-        try {
-          abortRef.current?.abort?.();
-        } catch {
-          // noop
-        }
+        activity?.remove?.();
+        clearSharedContent();
       };
     }, [fetchInitial, order, ownerKey])
   );

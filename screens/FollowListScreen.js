@@ -20,6 +20,8 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useUnread } from "../UnreadContext";
+import { useAppRuntime } from "../AppRuntimeContext";
+import FollowerVisibilityMenu from "./follow/FollowerVisibilityMenu";
 import { apiFetch, apiPost } from "../lib/apiClient";
 import { CONNECT_WIRE, EMOTION_NOTIFICATION_WIRE, FOLLOW_WIRE, buildFollowListPath, buildFollowRequestsPath, buildFollowStatsPath, readEmotionNotificationOwnerId, readRelatedConnectCode } from "../lib/compat/legacyWireContracts";
 
@@ -96,22 +98,6 @@ function extractEmotionNotificationMap(payload) {
 }
 
 
-function PrivateMembraneBadge({ size = 16, color = "#FFFFFF", style }) {
-  return (
-    <View
-      style={style}
-      pointerEvents="none"
-      accessibilityLabel="非公開アカウント"
-    >
-      <Ionicons
-        name="shield-outline"
-        size={size}
-        color={color}
-        style={{ opacity: 0.7 }}
-      />
-    </View>
-  );
-}
 
 
 // navigation の state を再帰的に探索して、指定 routeName が存在するか確認
@@ -155,6 +141,7 @@ export default function FollowListScreen({ navigation, route }) {
   const { user, authOwnerGeneration } = useAuth();
   const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { getFeatureUnread, setUnread } = useUnread();
+  const { isFeatureEnabled } = useAppRuntime();
 
   const viewedUserId =
     route?.params?.viewedUserId || route?.params?.targetUserId || user?.id || null;
@@ -173,6 +160,7 @@ export default function FollowListScreen({ navigation, route }) {
   const [emotionNotifMap, setEmotionNotifMap] = useState({});
   const [emotionNotifLoading, setEmotionNotifLoading] = useState(false);
   const [emotionNotifBusyId, setEmotionNotifBusyId] = useState(null);
+  const [sharingTarget, setSharingTarget] = useState(null);
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
@@ -182,6 +170,12 @@ export default function FollowListScreen({ navigation, route }) {
     selectionRef.current = { owner: ownerRequest, target: viewedUserId, tab };
   }
   const selection = selectionRef.current;
+  const followerRowsScope = useRef(null);
+  const canManageSharing = isSelfList && tab === TAB_FOLLOWERS &&
+    isFeatureEnabled("follower_sharing_enabled", false) === true && ownerRequest.foreground;
+  const activeSharingTarget = canManageSharing && sharingTarget?.selection === selection ? sharingTarget : null;
+  useEffect(() => { setSharingTarget(null); }, [selection, canManageSharing]);
+  useEffect(() => navigation?.addListener?.("blur", () => setSharingTarget(null)), [navigation]);
   const listRequestSeq = useRef(0);
   const notificationRequestSeq = useRef(0);
   const countRequestSeq = useRef(0);
@@ -483,6 +477,7 @@ export default function FollowListScreen({ navigation, route }) {
         setRows(list);
       } else {
         const list = Array.isArray(json?.rows) ? json.rows : [];
+        if (isSelfList && tab === TAB_FOLLOWERS) followerRowsScope.current = selection;
         setRows(list);
       }
     } catch (e) {
@@ -889,18 +884,11 @@ export default function FollowListScreen({ navigation, route }) {
     const notificationForeground = notificationDisabled ? colors.TEXT_SUBTLE : isEmotionNotificationEnabled ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT;
     return (
       <View style={styles.row}>
-        <TouchableOpacity style={{ alignSelf: 'stretch', minWidth: 0, minHeight: 44, justifyContent: 'center' }} activeOpacity={0.75} onPress={() => openProfile(item?.id)} accessibilityRole="button" accessibilityLabel={`${name}${item?.is_private_account ? "（非公開アカウント）" : ""}のアカウントを開く`}>
+        <TouchableOpacity style={{ alignSelf: 'stretch', minWidth: 0, minHeight: 44, justifyContent: 'center' }} activeOpacity={0.75} onPress={() => openProfile(item?.id)} accessibilityRole="button" accessibilityLabel={`${name}のアカウントを開く`}>
           <View style={styles.nameRow}>
             <Text style={[styles.rowName, { flexShrink: 1 }]}>
               {name}
             </Text>
-            {item?.is_private_account ? (
-              <PrivateMembraneBadge
-                size={16}
-                color={colors.TITLE_GOLD}
-                style={{ marginLeft: 6, marginTop: 1 }}
-              />
-            ) : null}
           </View>
           {(tab === TAB_REQUESTS || tab === TAB_REQUESTED) && item?._request_created_at ? (
             <Text style={styles.rowSub}>
@@ -1057,20 +1045,37 @@ export default function FollowListScreen({ navigation, route }) {
               </TouchableOpacity>
             </View>
           ) : isSelfList ? (
-            <TouchableOpacity
-              style={[styles.qnaBtn, { backgroundColor: colors.ERROR_BG, borderColor: colors.ERROR }]}
-              activeOpacity={0.8}
-                accessibilityRole="button" accessibilityLabel={`${name}：フォロー関係を削除`}
-              onPress={() => removeFollowLink(item?.id)}
-            >
-              <Ionicons
-                name="trash-outline"
-                size={16}
-                color={colors.ERROR}
-                style={{ marginRight: 6 }}
-              />
-              <Text style={[styles.qnaBtnText, { color: colors.ERROR }]}>削除</Text>
-            </TouchableOpacity>
+            <View style={styles.rowRightGroup}>
+              {canManageSharing && item?.id ? (
+                <TouchableOpacity
+                  style={styles.iconPill}
+                  activeOpacity={0.8}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${name}への公開範囲を設定`}
+                  onPress={() => {
+                    if (followerRowsScope.current !== selection || selectionRef.current !== selection ||
+                        !isOwnerCurrent(ownerRequest)) return;
+                    setSharingTarget({ id: String(item.id), name, selection });
+                  }}
+                >
+                  <Ionicons name="ellipsis-horizontal" size={20} color={colors.TEXT_ON_LIGHT} />
+                </TouchableOpacity>
+              ) : null}
+              <TouchableOpacity
+                style={[styles.qnaBtn, { backgroundColor: colors.ERROR_BG, borderColor: colors.ERROR }]}
+                activeOpacity={0.8}
+                  accessibilityRole="button" accessibilityLabel={`${name}：フォロー関係を削除`}
+                onPress={() => removeFollowLink(item?.id)}
+              >
+                <Ionicons
+                  name="trash-outline"
+                  size={16}
+                  color={colors.ERROR}
+                  style={{ marginRight: 6 }}
+                />
+                <Text style={[styles.qnaBtnText, { color: colors.ERROR }]}>削除</Text>
+              </TouchableOpacity>
+            </View>
           ) : null}
         </View>
       </View>
@@ -1189,6 +1194,17 @@ export default function FollowListScreen({ navigation, route }) {
             loading ? <View style={styles.loadingWrap}><ActivityIndicator color={colors.ON_SURFACE_TONAL} accessibilityLabel="フォローリストを読込中" /></View> : errorText ? null : <Text style={styles.emptyText}>{emptyText}</Text>
           }
         />
+      {activeSharingTarget ? (
+        <FollowerVisibilityMenu
+          key={activeSharingTarget.id}
+          follower={activeSharingTarget}
+          ownerRequest={ownerRequest}
+          isOwnerCurrent={isOwnerCurrent}
+          onClose={() => setSharingTarget(null)}
+          colors={colors}
+          ui={ui}
+        />
+      ) : null}
     </SafeAreaView>
   );
 }

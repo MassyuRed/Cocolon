@@ -38,9 +38,9 @@ export default function InputActionArea({
               style={styles.preferenceIcon}
             />
             <View style={styles.preferenceTextWrap}>
-              <Text style={styles.preferenceTitle}>感情通知を送らない</Text>
+              <Text style={styles.preferenceTitle}>今回だけ感情通知を送らない</Text>
               <Text style={styles.preferenceDesc}>
-                オンにするとフォロー中ユーザーに通知されません。
+                この記録の感情通知を、公開を許可している相手にも送りません。
               </Text>
             </View>
           </View>
@@ -59,7 +59,7 @@ export default function InputActionArea({
                 : undefined
             }
             disabled={isTutorialMode}
-            accessibilityLabel="感情通知を送らない設定を切り替える"
+            accessibilityLabel="今回だけ感情通知を送らない"
           />
         </View>
       </View>

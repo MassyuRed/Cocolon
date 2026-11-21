@@ -789,37 +789,6 @@ export default function MainTabs() {
   const PREFETCH_MAX_AGE_MS = 2 * 60 * 1000;
   const __lastScreenPrefetchAtRef = React.useRef(0);
 
-  const formatTimeLabel = React.useCallback((iso) => {
-    if (!iso) return "";
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return "";
-    return d.toLocaleString("ja-JP", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
-  }, []);
-
-  const prefetchEmotionLogFeed = React.useCallback(async () => {
-    if (!isOwnerCurrent(ownerRequest)) return;
-    try {
-      const userId = ownerRequest.owner;
-      if (!userId) return;
-      try {
-        const fresh = getPrefetchEntryFresh?.("EmotionLog", "feed", PREFETCH_MAX_AGE_MS);
-        if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) return;
-      } catch {}
-
-      const json = await apiGet("/emotion-log/feed", ownerRequest.options);
-      if (!isOwnerCurrent(ownerRequest)) return;
-      const rows = Array.isArray(json?.items) ? json.items : Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
-      const mapped = rows.map((row) => ({
-        id: row?.id,
-        ownerName: row?.ownerName || row?.owner_name || "ユーザー",
-        items: Array.isArray(row?.items) ? row.items : [],
-        timeLabel: row?.timeLabel || formatTimeLabel(row?.created_at || row?.createdAt || null),
-        createdAt: row?.createdAt || row?.created_at || null,
-      }));
-      try { setPrefetch("EmotionLog", "feed", { userId, items: mapped }); } catch {}
-    } catch {}
-  }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch, ownerRequest, isOwnerCurrent]);
-
   const prefetchPieceScreenData = React.useCallback(async () => {
     if (!isOwnerCurrent(ownerRequest)) return;
     try {
@@ -848,13 +817,9 @@ export default function MainTabs() {
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
       if (now - last < SCREEN_PREFETCH_MIN_INTERVAL_MS) return;
       __lastScreenPrefetchAtRef.current = now;
-      const tasks = [prefetchEmotionLogFeed, prefetchPieceScreenData];
-      for (const fn of tasks) {
-        if (!isOwnerCurrent(ownerRequest)) return;
-        try { await fn(); } catch {}
-      }
+      await prefetchPieceScreenData();
     } catch {}
-  }, [prefetchEmotionLogFeed, prefetchPieceScreenData, ownerRequest, isOwnerCurrent]);
+  }, [prefetchPieceScreenData, ownerRequest, isOwnerCurrent]);
 
   const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
     if (!isOwnerCurrent(ownerRequest)) return;

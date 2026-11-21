@@ -319,7 +319,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (posting && !view.permissions.publish) return;
     const scope = posting ? 'public' : 'private';
     Alert.alert(posting ? 'アプリ内に投稿しますか？' : '投稿を取り下げますか？',
-      posting ? 'あなたと、あなたをフォローしている人が「投稿」からピースの本文を読めます。'
+      posting ? 'あなたと、ピース投稿の公開を許可しているフォロワーが「投稿」から本文を読めます。'
         : '「投稿」から消え、自分のピースには残ります。',
       [{ text: 'キャンセル', style: 'cancel' }, { text: posting ? '投稿する' : '取り下げる', onPress: () => {
         if (this.current() && this.controller.getView().record === record) this.act('setVisibility', scope);

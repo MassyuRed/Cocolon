@@ -22,14 +22,12 @@ import {
 } from "./account/accountModel";
 import { useAccountProfile } from "./account/useAccountProfile";
 import { useAccountFollowState } from "./account/useAccountFollowState";
-import { useAccountVisibility } from "./account/useAccountVisibility";
 import { useAccountSubscription } from "./account/useAccountSubscription";
 import { useAccountIdSearch } from "./account/useAccountIdSearch";
 import AccountProfileSection from "./account/AccountProfileSection";
 import AccountIdSearchSection from "./account/AccountIdSearchSection";
 import AccountStatusSection from "./account/AccountStatusSection";
 import AccountNameEditModal from "./account/AccountNameEditModal";
-import AccountVisibilitySection from "./account/AccountVisibilitySection";
 
 export default function AccountScreen({ navigation, route, viewedUserId }) {
   const { colors, themeName } = useTheme();
@@ -43,7 +41,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const isDark = themeName === "dark";
 
   const profile = useAccountProfile({ user, targetUserId, isSelf });
-  const visibility = useAccountVisibility({ navigation, user, isSelf });
   const followState = useAccountFollowState({
     navigation,
     user,
@@ -55,11 +52,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
   const idSearch = useAccountIdSearch({ navigation, user });
 
   const userIdForDisplay = user ? profile.shareCode || "（生成中）" : "未ログイン";
-
-  const isPrivateAccount = !!(
-    (isSelf && visibility.accountVisibility?.is_private_account) ||
-      (!isSelf && (followState.accountStatus?.is_private_account || followState.accountStatus?.isPrivateAccount))
-  );
 
   const isShareCodePublic = !!(
     readShareCodePublic(followState.accountStatus, false) ??
@@ -103,7 +95,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
             displayName={profile.displayName}
             shareCode={profile.shareCode}
             userIdForDisplay={userIdForDisplay}
-            isPrivateAccount={isPrivateAccount}
             canShowShareCode={canShowShareCode}
             followingCount={followState.followingCount}
             followerCount={followState.followerCount}
@@ -115,7 +106,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
             openNameEdit={profile.openNameEdit}
             onCopyShareCode={profile.onCopyShareCode}
             onShareProfile={profile.onShareProfile}
-            openAccountSettings={visibility.openAccountSettings}
             onToggleFollow={followState.onToggleFollow}
             openFollowList={followState.openFollowList}
           />
@@ -156,19 +146,6 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
           setNameError={profile.setNameError}
           closeNameEdit={profile.closeNameEdit}
           saveDisplayName={profile.saveDisplayName}
-        />
-      ) : null}
-
-      {isSelf ? (
-        <AccountVisibilitySection
-          visible={visibility.accountSettingsOpen}
-          styles={styles}
-          colors={colors}
-          accountVisibility={visibility.accountVisibility}
-          visibilityLoading={visibility.visibilityLoading}
-          visibilitySaving={visibility.visibilitySaving}
-          closeAccountSettings={visibility.closeAccountSettings}
-          patchAccountVisibilityMe={visibility.patchAccountVisibilityMe}
         />
       ) : null}
     </SafeAreaView>
@@ -517,7 +494,7 @@ function createStyles(COLORS, ui) {
     profileActionRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
       width: "100%",
       marginTop: 0,
       marginBottom: 16,
@@ -525,7 +502,7 @@ function createStyles(COLORS, ui) {
       gap: 8,
     },
 
-    accountSettingsBtn: {
+    profileShareBtn: {
       width: 44,
       height: 44,
       borderRadius: 16,
@@ -534,9 +511,6 @@ function createStyles(COLORS, ui) {
       backgroundColor: COLORS.FIELD_BG,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-    },
-    accountSettingsBtnDisabled: {
-      backgroundColor: COLORS.FIELD_BG,
     },
 
     // ---- Modal (display name edit) ----
@@ -564,131 +538,6 @@ function createStyles(COLORS, ui) {
       maxHeight: "100%",
       flexShrink: 1,
       alignSelf: "center",
-    },
-
-    // ---- Account settings modal ----
-    settingsModalCard: {
-      backgroundColor: COLORS.PANEL_BG,
-      borderRadius: 24,
-      padding: 20,
-      paddingBottom: 20,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      shadowColor: ui.shadow.float.shadowColor,
-      shadowOpacity: ui.shadow.float.shadowOpacity,
-      shadowRadius: ui.shadow.float.shadowRadius,
-      shadowOffset: ui.shadow.float.shadowOffset,
-      elevation: ui.shadow.float.elevation,
-      width: "100%",
-      maxWidth: 520,
-      maxHeight: "100%",
-      flexShrink: 1,
-      alignSelf: "center",
-    },
-    settingsModalHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "flex-start",
-      paddingBottom: 12,
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
-      gap: 12,
-      minWidth: 0,
-    },
-    settingsTabRow: {
-      flex: 1,
-      flexDirection: "row",
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      overflow: "hidden",
-      marginLeft: 0,
-      flexWrap: "wrap",
-      gap: 8,
-    },
-    modalHeaderSpinner: {
-      flexShrink: 0,
-    },
-    settingsTabBtn: {
-      flex: 1,
-      paddingVertical: 12,
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: 44,
-      minWidth: 0,
-      paddingHorizontal: 12,
-    },
-    settingsTabBtnActive: {
-      backgroundColor: COLORS.SURFACE_TONAL,
-    },
-    settingsTabText: {
-      color: COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-      textAlign: "center",
-    },
-    settingsTabTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
-    },
-
-    settingsModalTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-      minWidth: 0,
-    },
-    visibilityRow: {
-      flexDirection: "column",
-      alignItems: "stretch",
-      justifyContent: "space-between",
-      paddingVertical: 16,
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
-      gap: 12,
-    },
-    visibilityLeft: {
-      paddingRight: 0,
-      width: "100%",
-    },
-    visibilityTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    visibilityDesc: {
-      marginTop: 8,
-      color: COLORS.TEXT_SUBTLE,
-    },
-    visibilityRight: {
-      flexDirection: "row",
-      alignItems: "center",
-      flexShrink: 1,
-      flexWrap: "wrap",
-      gap: 8,
-      maxWidth: "100%",
-    },
-    visibilityChoiceBtn: {
-      minWidth: 70,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: 44,
-      maxWidth: "100%",
-      flexShrink: 1,
-    },
-    visibilityChoiceBtnActive: {
-      backgroundColor: COLORS.SURFACE_TONAL,
-      borderColor: COLORS.ON_SURFACE_TONAL,
-    },
-    visibilityChoiceText: {
-      color: COLORS.TEXT_ON_LIGHT,
-      textAlign: "center",
-      flexShrink: 1,
-    },
-    visibilityChoiceTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
     },
 
     // ---- Profile edit modal ----
@@ -943,5 +792,5 @@ restoreBtnText: {
       flexShrink: 1,
       textAlign: "center",
     },
-  }, ui, {"headerTitle":"screenTitle","sectionLabel":"sectionTitle","idSearchInput":"body","idSearchButtonText":"button","idSearchResultName":"body","idSearchErrorText":"description","statusTitle":"sectionTitle","statusRowLabel":"description","statusRowValue":"sectionTitle","profileRowValue":"body","statusErrorText":"description","label":"description","value":"modalTitle","valueRight":"modalTitle","profileText":"body","followBtnText":"button","followStatNumber":"sectionTitle","followStatLabel":"description","followCountValue":"sectionTitle","editNameBtnText":"button","settingsTabText":"button","settingsModalTitle":"modalTitle","visibilityTitle":"sectionTitle","visibilityDesc":"body","visibilityChoiceText":"button","profileSaveBtnText":"button","profileFieldLabel":"description","profileBioInput":"body","nameModalTitle":"modalTitle","nameModalHint":"description","nameInput":"body","nameHelperText":"description","nameErrorText":"body","nameModalBtnText":"button","valueMono":"meta","valueMonoRight":"meta","subBadgeText":"button","subNote":"description","subErrorText":"description","restoreBtnText":"button","subCtaText":"button"}));
+  }, ui, {"headerTitle":"screenTitle","sectionLabel":"sectionTitle","idSearchInput":"body","idSearchButtonText":"button","idSearchResultName":"body","idSearchErrorText":"description","statusTitle":"sectionTitle","statusRowLabel":"description","statusRowValue":"sectionTitle","profileRowValue":"body","statusErrorText":"description","label":"description","value":"modalTitle","valueRight":"modalTitle","profileText":"body","followBtnText":"button","followStatNumber":"sectionTitle","followStatLabel":"description","followCountValue":"sectionTitle","editNameBtnText":"button","profileSaveBtnText":"button","profileFieldLabel":"description","profileBioInput":"body","nameModalTitle":"modalTitle","nameModalHint":"description","nameInput":"body","nameHelperText":"description","nameErrorText":"body","nameModalBtnText":"button","valueMono":"meta","valueMonoRight":"meta","subBadgeText":"button","subNote":"description","subErrorText":"description","restoreBtnText":"button","subCtaText":"button"}));
 }

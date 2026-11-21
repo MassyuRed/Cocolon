@@ -18,8 +18,9 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   const calls = [], events = [], alerts = [], routes = [], timers = [], listeners = new Set(), pushListeners = new Set(), modules = new Map();
   const noop = () => {};
   const tutorialPieces = [];
-  const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView', 'StatusBar',
+  const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'Pressable', 'ScrollView', 'StatusBar',
     'Text', 'TextInput', 'TouchableOpacity', 'View', 'RefreshControl'].map(name => [name, name]));
+  native.Keyboard = { addListener: () => ({ remove: noop }) };
   Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: value => value, flatten: value => value },
     useWindowDimensions: () => ({ width: 390, height: 844, fontScale: 1 }),
     AppState: { currentState: 'active', addEventListener: (_name, listener) => {
@@ -47,10 +48,20 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   const notice = { notice_id: 'notice', title: 'お知らせ', body: '確認本文', is_read: false, actions: [] };
   const packet = (body, ok = true) => ({ ok, status: ok ? 200 : 503, text: async () => JSON.stringify(body), json: async () => body });
   function defaultBody(url, options) {
+    const sharingPath = new URL(url).pathname;
+    if (sharingPath === '/follow/followers/content-visibility') return { items: control.followerSettings || [] };
+    if (options.method === 'PATCH' && sharingPath.endsWith('/content-visibility')) {
+      const id = decodeURIComponent(sharingPath.split('/').at(-2));
+      const target = control.followerSettings.find(row => row.follower_user_id === id);
+      Object.assign(target, JSON.parse(options.body));
+      return target;
+    }
     if (options.method !== 'GET') return { unread_count: 0, resonated: true, resonances: 1 };
     const p = new URL(url).pathname;
     if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
     if (p === '/nexus/pieces') return { items: control.pieceFeedItems || [] };
+    if (p === '/piece/resonances/pieces') return { items: control.resonanceHistoryItems || [] };
+    if (p.startsWith('/nexus/pieces/')) return control.legacyPieceDetail || {};
     if (p === '/notices/history') return { items: [notice], unread_count: 1 };
     if (p === '/follow/list') return { rows: [{ id: 'C', display_name: 'C-name' }, { id: 'D', display_name: 'D-name' }] };
     if (p === '/follow/stats') return { following_count: 2, follower_count: 0 };
@@ -69,7 +80,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       Object.assign(call, deferred());
       return call.promise.then(body => packet(body));
     }
-    return packet(defaultBody(url, options), options.method === 'GET' || !control.failWrite);
+    return packet(defaultBody(url, options), options.method === 'GET' ? !control.failRead?.(call) : !control.failWrite);
   };
   const timer = (callback, ms) => { const entry = { callback, ms, active: true }; timers.push(entry); return entry; };
   const clear = entry => { if (entry) entry.active = false; };
@@ -85,12 +96,20 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (name === 'react') return React;
       if (name === 'react-native') return native;
       if (name === 'react-native-vector-icons/Ionicons') return 'Icon';
-      if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
+      if (name === 'react-native-safe-area-context') return { SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
       if (name === '@react-native-async-storage/async-storage') return { getItem: async () => null };
       if (name === '@react-native-firebase/messaging') return () => ({ onMessage: listener => {
         pushListeners.add(listener); return () => pushListeners.delete(listener);
       } });
-      if (name === '@react-navigation/native') return { StackActions: { popToTop: noop } };
+      if (name === '@react-navigation/native') return {
+        StackActions: { popToTop: noop }, useNavigation: () => navigation, useIsFocused: () => true,
+        useFocusEffect: effect => React.useEffect(() => {
+          let cleanup = effect();
+          const unFocus = navigation.addListener('focus', () => { cleanup?.(); cleanup = effect(); });
+          const unBlur = navigation.addListener('blur', () => { cleanup?.(); cleanup = undefined; });
+          return () => { cleanup?.(); unFocus(); unBlur(); };
+        }, [effect]),
+      };
       if (name === '@react-navigation/bottom-tabs') return { createBottomTabNavigator: () => ({
         Navigator: props => React.createElement('Navigator', props, props.children),
         Screen: props => typeof props.children === 'function' ? props.children({ navigation }) : null,
@@ -103,8 +122,10 @@ async function harness(t, file, initialTab = 'following', options = {}) {
         tier: 'free', subscriptionBootstrapLoaded: true, subscriptionBootstrapLoading: false }) };
       if (target === 'TutorialContext.js') return { useTutorial: () => ({ isTutorialMode: false, tutorialStep: 0, tutorialPieces,
         tutorialFlagsLoaded: true, tutorialCompleted: true, ensureTutorialPiecesSeed: noop, setTutorialStep: noop }) };
-      if (target === 'AppRuntimeContext.js') return { useAppRuntime: () => ({ isFeatureEnabled: () => false }) };
-      if (target === 'tutorial/tutorialScenarioData.js') return { TUTORIAL_TOTAL_STEPS: 16 };
+      if (target === 'AppRuntimeContext.js') return { useAppRuntime: () => ({
+        isFeatureEnabled: name => name === 'follower_sharing_enabled' && !!control.followerSharingEnabled,
+      }) };
+      if (target === 'tutorial/tutorialScenarioData.js') return { TUTORIAL_TOTAL_STEPS: 16, TUTORIAL_PIECES: [] };
       if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors: {}, themeName: 'light' }) };
       if (target === 'lib/supabase.js') return { supabase: { auth } };
       if (target === 'lib/user.js') return { getCurrentUserId: async () => control.owner };
@@ -129,7 +150,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   }
   const Screen = load(file).default;
   let root;
-  const element = () => React.createElement(Screen, { navigation, route: { params: { initialTab } } });
+  const element = () => React.createElement(Screen, { navigation, route: { params: { initialTab, ...options.screenParams } } });
   await act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await act(async () => root.unmount()); });
   const h = { control, calls, events, alerts, routes, root,
@@ -168,6 +189,48 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   };
   await h.flush(); return h;
 }
+
+test('own follower menu shows independent saved defaults and changes only the selected permission', async t => {
+  const defaults = follower_user_id => ({ follower_user_id, can_view_pieces: true, can_receive_emotion_notifications: true });
+  const h = await harness(t, 'screens/FollowListScreen.js', 'followers', {
+    followerSharingEnabled: true, followerSettings: [defaults('C'), { ...defaults('D'), can_view_pieces: false }],
+  });
+  const press = async name => {
+    const control = h.root.root.findAllByType('TouchableOpacity').find(node => node.props.accessibilityLabel === name);
+    assert.ok(control, name);
+    await act(async () => { control.props.onPress(); await tick(); });
+  };
+  const switches = () => h.root.root.findAllByType('CocolonSwitch');
+  await press('C-nameへの公開範囲を設定');
+  assert.deepEqual(switches().map(node => [node.props.accessibilityLabel, node.props.value]), [['ピース投稿', true], ['感情通知', true]]);
+  await act(async () => { switches()[0].props.onValueChange(false); await tick(); });
+  const writes = h.mutations();
+  assert.equal(writes.length, 1);
+  assert.equal(writes[0].path, '/follow/followers/C/content-visibility');
+  assert.deepEqual(JSON.parse(writes[0].options.body), { can_view_pieces: false });
+  assert.deepEqual(switches().map(node => node.props.value), [false, true]);
+
+  const close = h.root.root.findAllByType('CocolonButton').find(node => node.props.title === '閉じる');
+  await act(async () => { close.props.onPress(); await tick(); });
+  await press('D-nameへの公開範囲を設定');
+  assert.deepEqual(switches().map(node => node.props.value), [false, true]);
+  await act(async () => { switches()[1].props.onValueChange(false); await tick(); });
+  assert.deepEqual(JSON.parse(h.mutations()[1].options.body), { can_receive_emotion_notifications: false });
+});
+
+test('follower permission reads cannot reopen an obsolete owner menu', async t => {
+  const h = await harness(t, 'screens/FollowListScreen.js', 'followers', {
+    followerSharingEnabled: true, holdRead: call => call.path === '/follow/followers/content-visibility',
+  });
+  const open = h.root.root.findAllByType('TouchableOpacity').find(node => node.props.accessibilityLabel === 'C-nameへの公開範囲を設定');
+  await act(async () => { open.props.onPress(); await tick(); });
+  const old = h.calls.find(call => call.path === '/follow/followers/content-visibility');
+  assert.ok(old);
+  await h.switchTo('B');
+  await h.resolve(old, { items: [{ follower_user_id: 'C', can_view_pieces: true, can_receive_emotion_notifications: true }] });
+  assert.equal(h.root.root.findAllByType('CocolonSwitch').length, 0);
+  assert.equal(h.mutations().length, 0);
+});
 
 for (const [tab, label] of [['following', 'フォロー中'], ['followers', 'フォロワー']]) {
   test(`opening the account's ${tab} list renders the selected tab with valid native text`, async t => {
@@ -356,14 +419,32 @@ test('rapid background and foreground retire old work and leave a usable new sco
   assert.equal(h.mutations().length, 1);
 });
 
-test('MainTabs never labels an obsolete feed prefetch as the new owner', async t => {
-  const h = await harness(t, 'navigation/MainTabs.js', 'following', { holdRead: call => call.path === '/emotion-log/feed' });
+test('the dedicated emotion log clears prior rows on foreground and ignores an older refresh', async t => {
+  const path = '/emotion-log/feed';
+  const row = { id: 'before-restriction', owner_name: '前回だけの相手', items: [{ type: '不安' }] };
+  const h = await harness(t, 'screens/EmotionLogScreen.js', undefined, { holdRead: call => call.path === path });
+  const textVisible = () => h.root.root.findAllByType('Text').some(node => node.props.children === row.owner_name);
+  await h.resolve(h.calls.find(call => call.path === path), { items: [row] });
+  assert.equal(textVisible(), true);
+  await h.backgroundCycle();
+  const obsolete = h.calls.findLast(call => call.path === path);
+  assert.equal(textVisible(), false);
+  await h.backgroundCycle();
+  await h.resolve(obsolete, { items: [row] });
+  assert.equal(textVisible(), false);
+  const latest = h.calls.findLast(call => call.path === path);
+  assert.notEqual(latest, obsolete);
+  await h.resolve(latest, { items: [] });
+  assert.equal(textVisible(), false);
+});
+
+test('MainTabs refreshes the unread badge without prefetching protected emotion feed rows', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js');
   await h.fireTimers();
-  const old = h.calls.findLast(call => call.path === '/emotion-log/feed' && call.resolve);
-  assert.ok(old);
-  await h.switchTo('B');
-  await h.resolve(old, { items: [{ id: 'obsolete-A-feed', owner_name: 'obsolete-A-feed' }] });
-  assert.ok(!JSON.stringify(h.events).includes('obsolete-A-feed'));
+  await h.flush();
+  assert.ok(h.calls.some(call => call.path === '/emotion-log/unread-status'));
+  assert.ok(!h.calls.some(call => call.path === '/emotion-log/feed'));
+  assert.ok(!h.events.some(([kind, scope, key]) => kind === 'prefetch' && scope === 'EmotionLog' && key === 'feed'));
 });
 
 test('the opt-in post feed renders new Piece text, preserves old Q&A, and refreshes after withdrawal', async t => {
@@ -434,12 +515,75 @@ test('Nexus automatic feed read stops on background and resumes only from a fres
   assert.deepEqual(JSON.parse(reads[0].options.body), { last_seen_created_at: '2026-11-07T00:00:00Z' });
 });
 
+for (const { tab, endpoint, section, stateProp, itemsProp, itemId } of [
+  { tab: 'emotion_log', endpoint: '/nexus/emotion-log', section: 'NexusEmotionLogSection',
+    stateProp: 'emotionLogState', itemsProp: 'items', itemId: 'id' },
+  { tab: 'history', endpoint: '/nexus/history/resonances', section: 'NexusHistorySection',
+    stateProp: 'historyState', itemsProp: 'resonances', itemId: 'qInstanceId' },
+]) test(`Nexus ${tab} clears previously shared rows before rechecking access`, async t => {
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, { holdRead: call => call.path === endpoint });
+  const select = async key => act(async () => { h.find('NexusTabBar').props.setActiveTab(key); await tick(); });
+  const request = () => h.calls.findLast(call => call.path === endpoint);
+  const rows = () => h.find(section).props[stateProp][itemsProp].map(row => row[itemId]);
+  const payload = { items: [{ id: 'previously-shared', q_instance_id: 'previously-shared' }] };
+
+  await select(tab);
+  await h.resolve(request(), payload);
+  assert.deepEqual(rows(), ['previously-shared']);
+
+  await h.navigationEvent('blur');
+  assert.deepEqual(rows(), []);
+  await h.navigationEvent('focus');
+  const staleRequest = request();
+  assert.deepEqual(rows(), []);
+
+  await select('piece');
+  await select(tab);
+  const currentRequest = request();
+  assert.notEqual(currentRequest, staleRequest);
+  assert.deepEqual(rows(), []);
+  await h.resolve(currentRequest, { items: [] });
+  await h.resolve(staleRequest, payload);
+  assert.deepEqual(rows(), []);
+});
+
 test('same-owner MainTabs feed read retains its displayed timestamp', async t => {
   const h = await harness(t, 'navigation/MainTabs.js');
   await act(async () => { await h.find('PieceStackNavigator').props.onEmotionLogDisplayed('2026-11-07T00:00:00Z'); });
   const reads = h.mutations().filter(call => call.path === '/emotion-log/unread/read-feed');
   assert.equal(reads.length, 1); assert.equal(reads[0].owner, 'A');
   assert.deepEqual(JSON.parse(reads[0].options.body), { last_seen_created_at: '2026-11-07T00:00:00Z' });
+});
+
+test('legacy resonance history clears previous results before a failed recheck on focus', async t => {
+  const endpoint = '/piece/resonances/pieces';
+  const h = await harness(t, 'screens/ResonanceHistoryListScreen.js', undefined, {
+    resonanceHistoryItems: [{ q_instance_id: 'previously-shared', title: '以前の共鳴' }],
+  });
+  const ids = () => h.find('List').props.data.map(row => row.q_instance_id);
+  assert.deepEqual(ids(), ['previously-shared']);
+  await h.navigationEvent('blur');
+  assert.deepEqual(ids(), []);
+  h.control.failRead = call => call.path === endpoint;
+  await h.navigationEvent('focus');
+  assert.deepEqual(ids(), []);
+});
+
+test('legacy Piece Library clears a shared detail on blur and never caches a followed user list', async t => {
+  const h = await harness(t, 'screens/PieceLibraryScreen.js', undefined, {
+    screenParams: { viewedUserId: 'C', openQInstanceId: 'shared-detail' },
+    legacyPieceDetail: { title: '以前共有されたピース', q_instance_id: 'shared-detail' },
+  });
+  const contains = value => h.root.root.findAllByType('Text').some(node => node.props.children === value);
+  assert.equal(contains('以前共有されたピース'), true);
+  const picker = h.root.root.findAllByType('CocolonButton').find(node =>
+    node.findAllByType('Text').some(label => label.props.children === 'ピースを表示'));
+  assert.ok(picker);
+  await act(async () => { await picker.props.onPress(); await tick(); });
+  assert.ok(h.calls.some(call => call.path === '/nexus/pieces' && new URL(call.url).searchParams.get('user_id') === 'C'));
+  assert.ok(!h.events.some(([kind, scope, key]) => kind === 'prefetch' && scope === 'Piece' && key.includes(':C:')));
+  await h.navigationEvent('blur');
+  assert.equal(contains('以前共有されたピース'), false);
 });
 
 const mapStatusPath = '/self-structure/latest/status';
