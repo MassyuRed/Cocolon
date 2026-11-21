@@ -256,20 +256,6 @@ export default function AnalysisContentFirstScreen({
       <View style={styles.homeHeaderRow}>
         <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.homeTitleRow}>
           <Text style={styles.homeTitle}>分析</Text>
-          <View ref={tutorialRefs?.guideRef} collapsable={false}>
-            <CocolonPressable
-              style={styles.guideButton}
-              onPress={isTutorialMode ? undefined : onOpenGuide}
-              disabled={isTutorialMode}
-              accessibilityLabel="Analysisのガイドを開く"
-            >
-              <Ionicons
-                name="help-circle-outline"
-                size={20}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
-          </View>
         </View>
       </View>
 
@@ -336,6 +322,7 @@ export default function AnalysisContentFirstScreen({
                   titleOverride="今のわたしマップ"
                   useServerDefaultMode
                   onLatestSeenVersion={onLatestSeenVersion}
+                  onOpenGuide={onOpenGuide}
                 />
               </>
             )}

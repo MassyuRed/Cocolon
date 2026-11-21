@@ -233,7 +233,8 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   const result={...latest(semantic),map_context:{...counts,processed_count:4,mapped_count:3,unparsed_count:1,excluded_count:1}};
   const h=harness(async()=>result);
   const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
-  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true}));});
+  let guideOpens=0;
+  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true,onOpenGuide:()=>guideOpens++}));});
   assert.equal(view.root.findAllByProps({testID:'watashi-map-v3'}).length,1);
   assert(JSON.stringify(view.toJSON()).includes(semantic.overview.title));
   assert(!JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
@@ -243,12 +244,15 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   assert.equal(latestCall[2].timeoutMs,15000);
   assert(latestCall[1].includes('background=true'));
   assert.equal(latestCall[2].expectedUserId,owner);
+  assert(!button(view,'分析の使い方を見る'));
   await act(async()=>button(view,'分析について').props.onPress());
   const about=JSON.stringify(view.toJSON());
   assert(about.includes('対象の記録5件／根拠として結び付いた記録3件'));
   assert(about.includes('図に結び付けていない記録1件／分析に使っていない記録1件'));
   assert(!about.includes('構造に反映できた記録'));
   assert(!about.includes('未解析の範囲'));
+  button(view,'分析の使い方を見る').props.onPress();
+  assert.equal(guideOpens,1);
   await act(async()=>view.unmount());
 });
 

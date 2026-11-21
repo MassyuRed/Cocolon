@@ -1155,11 +1155,25 @@ function nexusEntryHarness(options = {}) {
   const find = type => nodes(tree).find(n => n.type === type);
   render();
   return { control, routes, legacyCalls, render, find,
+    header: () => Header(find(Header).props),
     entry: () => nodes(Header(find(Header).props)).find(n => n.props.accessibilityLabel === '自分のPieceを開く'),
     tab: value => { find('NexusTabBar').props.setActiveTab(value); render(); },
     dispose: () => { for (const hook of hooks) hook?.cleanup?.(); },
   };
 }
+
+test('the ordinary Piece screen opens its guide chapter from the end of every tab', () => {
+  const n = nexusEntryHarness();
+  assert.ok(!nodes(n.header()).some(node => node.props.accessibilityLabel === 'ピースのガイドを開く'));
+  for (const tab of ['piece', 'emotion_log', 'recommend', 'history']) {
+    n.tab(tab);
+    const guide = n.find('ScrollView').children.at(-1);
+    assert.equal(guide.props.title, 'ピースについて');
+    guide.props.onPress();
+  }
+  assert.deepEqual(n.routes, Array.from({ length: 4 }, () => ['CocolonGuide', { screenId: 'piece' }]));
+  n.dispose();
+});
 
 test('ordinary Piece header opens owner history and its existing dedicated read without a saved target', async () => {
   const n = nexusEntryHarness();

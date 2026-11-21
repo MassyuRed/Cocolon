@@ -236,6 +236,19 @@ test('input harness uses the actual nine categories, five emotions and three str
   assert.deepEqual(Array.from(inputOptions.VALID_STRENGTHS), ['weak', 'medium', 'strong']);
 });
 
+test('Home opens the home chapter from the last control in its scroll', () => {
+  const h = harness();
+  const routes = [];
+  h.navigation.navigate = (...args) => routes.push(clone(args));
+  const scroll = h.find('ScrollView');
+  const guide = scroll.children.at(-1);
+  assert.equal(guide.props.title, 'ホームについて');
+  assert.deepEqual(scroll.children[0].children[0].children.map(node => node.type), ['Text']);
+  guide.props.onPress();
+  assert.deepEqual(routes, [['CocolonGuide', { screenId: 'home' }]]);
+  h.dispose();
+});
+
 test('owner-scoped draft save and reload retain both fields, all scene selections and per-emotion string strengths', async () => {
   const storage = new Map();
   const module = { exports: {} };

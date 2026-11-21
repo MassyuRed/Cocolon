@@ -33,7 +33,7 @@ const temporarilyUnavailable = error => {
     || error?.name === 'TimeoutError'
     || (error?.name === 'TypeError' && /network|fetch/i.test(String(error?.message || '')));
 };
-export default function CumulativeWatashiMapView({ reportId = null, month = null, onBack, onLatestSeenVersion, embedded = false, hideHeader = false }) {
+export default function CumulativeWatashiMapView({ reportId = null, month = null, onBack, onLatestSeenVersion, embedded = false, hideHeader = false, onOpenGuide }) {
   const { session } = useAuth();
   const { tier, loading: planLoading } = useSubscription();
   const focused = useIsFocused();
@@ -291,6 +291,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       </> : null}
       {visible && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
       {visible && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text> : null}
+      {visible && about && onOpenGuide ? <CocolonButton variant="secondary" title="分析の使い方を見る" onPress={onOpenGuide} /> : null}
       {visible && !state.loading && !refreshing && canRetry ? <CocolonButton variant="secondary"
         onPress={() => load(compare, retryUpdate)}
         title={retryUpdate ? '更新を再試行' : '再取得'} /> : null}

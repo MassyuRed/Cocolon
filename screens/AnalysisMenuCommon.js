@@ -210,18 +210,6 @@ function createStyles(colors, ui) {
       flexShrink: 1,
       minWidth: 0,
     },
-        guideButton: {
-          width: 44,
-          height: 44,
-          borderRadius: 22,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: colors.FIELD_BG,
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          marginLeft: 10,
-        },
-
         subHeaderRow: {
           flexDirection: "row",
           alignItems: "center",

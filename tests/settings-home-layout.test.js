@@ -5,9 +5,19 @@ const path = require('node:path');
 const React = require('react');
 const Renderer = require('react-test-renderer');
 const babel = require('@babel/core');
-const source = fs.readFileSync(path.join(__dirname, '../screens/SettingsScreen.js'), 'utf8');
-const code = babel.transformSync(source, { babelrc: false, configFile: false,
-  presets: [require.resolve('@babel/preset-react')], plugins: [require.resolve('@babel/plugin-transform-modules-commonjs')] }).code;
+const rootPath = path.resolve(__dirname, '..');
+const compiledSources = new Map();
+
+function loadSource(file, dependencies) {
+  if (!compiledSources.has(file)) {
+    const source = fs.readFileSync(path.join(rootPath, file), 'utf8');
+    compiledSources.set(file, babel.transformSync(source, { babelrc: false, configFile: false,
+      presets: [require.resolve('@babel/preset-react')], plugins: [require.resolve('@babel/plugin-transform-modules-commonjs')] }).code);
+  }
+  const module = { exports: {} };
+  Function('require', 'module', 'exports', compiledSources.get(file))(dependencies, module, module.exports);
+  return module.exports;
+}
 const colors = { FIELD_BG: '#FFFFFF', CARD_BORDER: '#D7D2C9', TITLE_GOLD: '#800020', GOLD_BUTTON: '#5A1020' };
 const menuStyles = { homeHeaderRow: { marginBottom: 16 }, homeTitle: { color: colors.TITLE_GOLD } };
 function mount(t, changes = {}) {
@@ -26,8 +36,8 @@ function mount(t, changes = {}) {
     if(name==='./AnalysisMenuCommon') return {AnalysisMenuScroll:'Scroll',useAnalysisMenuStyles:()=>({styles:menuStyles,colors,ui:{}})};
     return {__esModule:true,default:name};
   };
-  const module={exports:{}}; Function('require','module','exports',code)(dependencies,module,module.exports);
-  let root; Renderer.act(()=>{root=Renderer.create(React.createElement(module.exports.SettingsHomeContent,{subscription,navigation:{navigate:r=>navigated.push(r)}}));});
+  const { SettingsHomeContent } = loadSource('screens/SettingsScreen.js', dependencies);
+  let root; Renderer.act(()=>{root=Renderer.create(React.createElement(SettingsHomeContent,{subscription,navigation:{navigate:r=>navigated.push(r)}}));});
   t.after(()=>Renderer.act(()=>root.unmount()));
   return {root,actions,navigated, subscription, button:label=>root.root.findAllByType('Pressable').find(x=>x.props.accessibilityLabel===label)};
 }
@@ -49,7 +59,8 @@ test('settings shares the title and card styles and keeps Account in the setting
   const title = h.root.root.findAllByType('Text').find(node => node.props.children === '設定');
   assert.equal(title.props.style, menuStyles.homeTitle);
   assert.ok(labels.indexOf('設定') < labels.indexOf('アカウント'));
-  assert.ok(labels.indexOf('アカウント') < labels.indexOf('アプリ設定'));
+  assert.ok(labels.indexOf('アカウント') < labels.indexOf('アプリの使い方'));
+  assert.ok(labels.indexOf('アプリの使い方') < labels.indexOf('アプリ設定'));
   assert.ok(labels.indexOf('サブスク加入状況') < labels.indexOf('現在のプラン'));
   assert.ok(!labels.includes('YOUR SPACE'));
 
@@ -59,7 +70,8 @@ test('settings shares the title and card styles and keeps Account in the setting
     assert.equal(surface.borderColor, colors.CARD_BORDER);
   }
   h.button('アカウントを開く').props.onPress();
-  assert.deepEqual(h.navigated, ['Account']);
+  h.button('アプリの使い方').props.onPress();
+  assert.deepEqual(h.navigated, ['Account', 'CocolonGuide']);
 
   const read = file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
   assert.doesNotMatch(read('navigation/MainTabs.js'), /settingsAccountAvatar|headerRightSlot/);
@@ -76,4 +88,79 @@ test('loading plan never presents a fabricated Plus subscription',t=>{
   const h=mount(t,{loading:true,currentLabel:'Plusプラン',currentPriceLabel:'月額680円'});
   assert.equal(h.root.root.findAllByType('Spinner').length,1);
   assert.ok(!h.root.root.findAllByType('Text').some(x=>x.props.children==='Plus'));
+});
+
+function mountGuide(t, params) {
+  const actions = [];
+  const navigation = { canGoBack: () => true, goBack: () => actions.push('back') };
+  const modules = new Map();
+  const native = {
+    Modal: ({ visible, children }) => visible ? React.createElement('Modal', null, children) : null,
+    Pressable: 'Pressable', ScrollView: 'ScrollView', StatusBar: 'StatusBar', StyleSheet: { create: x => x },
+    Text: 'Text', TouchableOpacity: 'Pressable', View: 'View',
+  };
+  function load(file) {
+    if (!modules.has(file)) {
+      modules.set(file, loadSource(file, name => {
+        if (name === 'react') return React;
+        if (name === 'react-native') return native;
+        if (name === 'react-native-safe-area-context') return { SafeAreaProvider: 'View', SafeAreaView: 'View' };
+        if (name === '@react-navigation/native') return { useNavigation: () => navigation };
+        if (name.endsWith('/Ionicons')) return 'Icon';
+        if (name.endsWith('/ThemeContext')) return { useTheme: () => ({ colors, themeName: 'light' }) };
+        if (name.endsWith('/CocolonButton')) return 'Button';
+        return load(path.normalize(path.join(path.dirname(file), name + '.js')));
+      }));
+    }
+    return modules.get(file);
+  }
+  const Guide = load('screens/CocolonGuideScreen.js').default;
+  let root;
+  Renderer.act(() => { root = Renderer.create(React.createElement(Guide, { route: { params } })); });
+  t.after(() => Renderer.act(() => root.unmount()));
+  const tabs = () => root.root.findAllByType('Pressable').filter(x => x.props.accessibilityRole === 'tab');
+  return {
+    root, actions, tabs,
+    selected: () => tabs().filter(tab => tab.props.accessibilityState.selected).map(tab => tab.props.accessibilityLabel),
+    text: () => root.root.findAllByType('Text').map(node => node.props.children),
+    press: node => Renderer.act(() => node.props.onPress()),
+  };
+}
+
+test('the manual switches between all four chapters and resets the chapter scroll', t => {
+  const h = mountGuide(t);
+  assert.deepEqual(h.tabs().map(tab => tab.props.accessibilityLabel), ['ホーム', '分析', 'ピース', '感情通知']);
+  assert.deepEqual(h.selected(), ['ホーム']);
+  for (const [label, excerpt] of [
+    ['分析', '今日・週・月'],
+    ['ピース', 'ピース'],
+    ['感情通知', 'フォロー中'],
+  ]) {
+    const previousBody = h.root.root.findByType('ScrollView');
+    h.press(h.tabs().find(tab => tab.props.accessibilityLabel === label));
+    assert.deepEqual(h.selected(), [label]);
+    assert.notEqual(h.root.root.findByType('ScrollView'), previousBody);
+    assert.ok(h.root.root.findByType('ScrollView').findAllByType('Text')
+      .some(node => typeof node.props.children === 'string' && node.props.children.includes(excerpt)));
+  }
+  h.press(h.root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === '戻る'));
+  assert.deepEqual(h.actions, ['back']);
+});
+
+test('manual shortcuts select the requested chapter and the original inline definitions still open', t => {
+  const home = mountGuide(t, { screenId: 'home' });
+  assert.deepEqual(home.selected(), ['ホーム']);
+  const term = home.root.root.findAllByType('Text').find(node => node.props.accessibilityRole === 'link' && node.props.children === '感情入力');
+  home.press(term);
+  assert.ok(home.text().includes('今の思考・行動・感情をまとめて記録する入力です。'));
+  home.press(home.root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === '用語説明を閉じる'));
+  assert.equal(home.root.root.findAllByType('Modal').length, 0);
+
+  for (const [params, title] of [
+    [{ screenId: 'piece' }, 'ピース'],
+    [{ screenId: 'analysis' }, '分析'],
+    [{ screen_id: 'emotion_log' }, '感情通知'],
+  ]) {
+    assert.deepEqual(mountGuide(t, params).selected(), [title]);
+  }
 });

@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import CocolonPressable from "../../components/CocolonPressable";
+import CocolonButton from "../../components/CocolonButton";
 import PieceHomeActionCard from "./PieceHomeActionCard";
 import { TUTORIAL_PIECE_QUESTION } from "./usePieceHomeTutorial";
 
@@ -36,17 +36,6 @@ export default function PieceHomeMainActions({
       <View style={styles.panelHeader}>
         <View ref={refs.pieceTitleRef} collapsable={false} style={styles.panelTitleRow}>
           <Text style={styles.panelTitle}>ピース</Text>
-          <CocolonPressable
-            style={styles.guideTitleButton}
-            onPress={onPressGuide}
-            accessibilityLabel="ガイドを開く"
-          >
-            <Ionicons
-              name="help-circle-outline"
-              size={20}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
         </View>
         <View style={styles.headerRight} />
       </View>
@@ -159,6 +148,7 @@ export default function PieceHomeMainActions({
           accessibilityLabel="履歴を確認する"
         />
       </View>
+      <CocolonButton variant="secondary" style={styles.guideFooter} title="ピースについて" onPress={onPressGuide} />
     </ScrollView>
   );
 }

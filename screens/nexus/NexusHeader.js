@@ -13,7 +13,6 @@ export default function NexusHeader({
   canReadOwnPieces,
   handleOpenOwnerHistory,
   handleOpenFollowList,
-  handlePressGuide,
   onRefresh,
 }) {
   return (
@@ -21,17 +20,6 @@ export default function NexusHeader({
       <View style={styles.panelHeader}>
         <View ref={titleRef} collapsable={false} style={styles.panelTitleRow}>
           <Text style={styles.panelTitle}>ピース</Text>
-          <CocolonPressable
-            style={styles.guideTitleButton}
-            onPress={handlePressGuide}
-            accessibilityLabel="ピースのガイドを開く"
-          >
-            <Ionicons
-              name="help-circle-outline"
-              size={20}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
         </View>
         <View style={styles.panelHeaderActions}>
           {!isTutorialMode ? (

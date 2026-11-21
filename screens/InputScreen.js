@@ -33,6 +33,7 @@ import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 
 // UI (Design System)
+import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -1292,17 +1293,6 @@ ${String(error?.message || error)}`
               <View style={styles.panelHeader}>
                 <View style={styles.panelTitleRow}>
                   <Text style={styles.panelTitle}>ホーム</Text>
-                  <CocolonPressable
-                    style={styles.guideTitleButton}
-                    onPress={handlePressGuide}
-                    accessibilityLabel="ガイドを開く"
-                  >
-                    <Ionicons
-                      name="help-circle-outline"
-                      size={20}
-                      color={colors.TEXT_ON_LIGHT}
-                    />
-                  </CocolonPressable>
                 </View>
 
                 <View style={styles.headerRight}>
@@ -1480,6 +1470,7 @@ ${String(error?.message || error)}`
                 </View>
               ) : null}
 
+              <CocolonButton variant="secondary" style={styles.guideFooter} title="ホームについて" onPress={handlePressGuide} />
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -1643,15 +1634,7 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
     },
-    guideTitleButton: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "transparent",
-      marginLeft: 4,
-    },
+    guideFooter: { marginTop: 16 },
     headerRight: {
       flexDirection: "row",
       alignItems: "center",

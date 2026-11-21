@@ -254,7 +254,7 @@ OSが描く権限・共有・購入・契約管理・既存Alertは、そのOS�
 
 | ID・対象 | 実装 | 配置と必要な操作／状態 |
 |---|---|---|
-| H01 ホーム・感情入力 | `InputScreen.js`、`InputMemoSection.js`、`InputEmotionSection.js`、`InputCategorySection.js`、`InputActionArea.js` | 見出し・ガイド・アカウント・お知らせ→問い／履歴入口→思考・行動の二欄→感情／強さ→カテゴリ→通知→保存。感情は実幅と文字倍率に応じた1〜3列で折返す。通常5感情の複数選択、自己理解の単独選択、カテゴリ最低1件を保持 |
+| H01 ホーム・感情入力 | `InputScreen.js`、`InputMemoSection.js`、`InputEmotionSection.js`、`InputCategorySection.js`、`InputActionArea.js` | 見出し・アカウント・お知らせ→問い／履歴入口→思考・行動の二欄→感情／強さ→カテゴリ→通知→保存→末尾の「ホームについて」。感情は実幅と文字倍率に応じた1〜3列で折返す。通常5感情の複数選択、自己理解の単独選択、カテゴリ最低1件を保持 |
 | H02 保存・読取の案内 | `InputToastOverlay.js`等 | 該当情報群の失敗＋再読、保存成功toast。キーボード・下部ナビと重ねない。原入力の保存成功をEmlis生成成功と同じ表示にしない |
 | H03 感情入力履歴・行内全文 | `AnalysisHistoryScreen.js` | 戻る→検索→Secret区分／新旧順→条件・保持期間→記録カード。日付・感情・思考全文・行動全文・カテゴリ・応答・削除を区分。追加取得、hit強調、refresh、削除確認を維持 |
 | H04 Emlis応答 | `screens/input/EmlisThreadModal.js` | 見出し→応答本文→任意の質問／本人回答→現在できる操作。本文400。末尾「ピースの作成」「閉じる」、質問・skip・続行・終了・再試行／同一要求確認を保持。横画面＋keyboard時の操作到達を優先し、末尾2操作も同じ本文ScrollView内へ置く |
@@ -273,7 +273,7 @@ OSが描く権限・共有・購入・契約管理・既存Alertは、そのOS�
 
 | ID・対象 | 実装 | 配置と必要な操作／状態 |
 |---|---|---|
-| A01 分析ホーム | `AnalysisContentFirstScreen.js` | こころ天気／わたしマップ→今日週月→感情推移→履歴。二段の選択、更新日、未読、guideを統一。埋込み結果の重複headerを出さない |
+| A01 分析ホーム | `AnalysisContentFirstScreen.js` | こころ天気／わたしマップ→今日週月→感情推移→履歴。二段の選択、更新日、未読を統一。わたしマップ内の「分析について」から使い方の分析章を開ける。埋込み結果の重複headerを出さない |
 | A02 こころ天気の推移 | `KokoroWeatherTimeline.js`／`useKokoroWeather.js` | 今日の全体円＋4時間帯の小円、週／月の日別100%積み上げ棒。本人保存入力を直接取得。未記録・未来・閲覧範囲外を区別。旧CurrentCardは互換部品で通常の先頭には表示しない |
 | A03 日／週／月レポート | `AnalysisReportViewerScreen.js`、`AnalysisReportCharts.js` | 天気一覧→図・グラフ→権利内の分析群→本文。埋込みと全画面で内容部品を共有。時間推移、時間帯、Deepのメモテーマ・遷移・回復等、月前後半を勝手に省略しない |
 | A04 天気の日付一覧 | `KokoroWeatherForecastStrip.js` | 日本語の日付・天気・温度・観測メモを共通書体へ。期間の横スクロールは残せるが、固定116幅・1行省略・900太字を見直す |
@@ -294,7 +294,7 @@ OSが描く権限・共有・購入・契約管理・既存Alertは、そのOS�
 
 | ID・対象 | 実装 | 配置と必要な操作／状態 |
 |---|---|---|
-| P01 Piece通常入口・投稿feed | `PieceEntryScreen.js`→`NexusScreen.js` | 見出し・guide・フォロー／更新→自分のPiece→全体感情→4タブ→表示対象／新旧順→投稿カード。全体感情TOP3を小さい独立群へ |
+| P01 Piece通常入口・投稿feed | `PieceEntryScreen.js`→`NexusScreen.js` | 見出し・フォロー／更新→自分のPiece→全体感情→4タブ→各タブの内容→末尾の「ピースについて」。全体感情TOP3を小さい独立群へ |
 | P02 旧Q&A投稿カード | `screens/nexus/NexusPieceCard.js` | 投稿者・日時・未読→問いを補助見出し→答え16/27/400→共鳴数／操作。本人削除を独立。新画像Pieceへ仕様置換しない |
 | P03 Nexus感情通知 | `NexusEmotionLogSection.js` | 名前・時刻→感情名＋強さ。意味色と文字を併記し、メモ本文を公開表示へ足さない |
 | P04 おすすめユーザー | `NexusRecommendSection.js` | 見出し→表示名・共有コード・矢印の行。候補なし・読込・失敗、既存Account遷移を保持 |
@@ -336,13 +336,13 @@ IDのコピー形アイコンは現在`Share.share`を呼ぶため、文言はID
 
 | ID・対象 | 実装 | 配置と必要な操作／状態 |
 |---|---|---|
-| S01 設定入口 | `SettingsScreen.js` | 右上アカウント＋見出し／説明→実プラン→アプリ設定2行→契約3行→その他3行→規約等。実データを使い、文字量で伸ばす |
+| S01 設定入口 | `SettingsScreen.js` | 設定見出し→アカウント・アプリの使い方→アプリ設定→現プラン・契約操作→その他→規約等。実データを使い、文字量で伸ばす |
 | S02 アプリ設定 | `SettingsAppSettingsScreen.js` | 単独routeと設定入口embedded表示を兼用。 見た目→テーマ3択の色見本・名称・現在印、通知→全体と3子switch。全体OFFの説明、取得／更新中・部分保存失敗・復元を読み分ける。配信時刻の編集UIを新設しない |
 | S03 その他・ログアウト・削除 | `SettingsOtherScreen.js` | 単独routeと設定入口embedded表示を兼用。 tutorial再体験→別群のログアウト→末尾の危険操作。flag・認証・二段階確認・処理中停止を保持 |
 | S04 加入状況・購入・復元 | `SubscriptionSelectScreen.js` | 既存handler・実プラン・policy・legal linksをrenderSettingsで設定入口へ渡す。 現契約・更新／有効期限→販売状態→プラン比較→自動更新等の重要説明→復元・管理・規約・privacy・support。現在／購入中／復元中／保留／失効／停止を区別。復元を販売停止で一律に隠さない |
 | I01 お知らせmodal／welcome | `NoticeModal.js`、`NoticeRichText.js` | 題名・配信日→長文・リンク→動的CTA→履歴／閉じる。welcomeも同じ面・本文へ。複数CTAでも本文と閉じるへ到達可能に |
 | I02 お知らせ履歴・展開詳細 | `NoticeHistoryScreen.js` | 日付・題名・New／未読→展開本文・配信／既読日時・カテゴリ・CTA→追加取得。初回／追加読込・空・失敗を分ける |
-| I03 各画面ガイド | `CocolonGuideScreen.js`、`GuideRichText.js` | 対象画面名→要約→説明section→関連用語。本文16/27、用語リンクは下線。screenId別／準備中も同じ設計 |
+| I03 アプリの使い方 | `CocolonGuideScreen.js`、`GuideRichText.js` | 設定から開く共通画面。ホーム／分析／ピース／感情通知の4章タブは上部に固定し、切替時は本文の先頭を表示する。直接入口では指定された章を開く。要約→既存本文→関連用語。本文16/27、用語リンクは下線 |
 | I04 用語説明modal | `GuideTermModal.js` | 語名・読み→定義→説明・例→関連語→閉じる。×44以上、本文スクロール、関連語へ移っても閉じるを維持 |
 | I05 初回tutorial開始案内 | `TutorialStartModal.js` | 一つの面に保存されない説明→開始→今回のみ／今後表示しない。三重の囲み枠を整理し、閉じ方を保持 |
 | I06 tutorial導入・まとめ・完了 | `TutorialFlowScreen.js` | 導入、4体験、その他、完了を同じ見出し・本文・操作へ。模擬と本人記録を区別し、完了処理の二重操作停止を維持 |
@@ -571,7 +571,7 @@ read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis 
 |---|---|
 | お知らせpopup | 通常／welcomeを同じ一面・幅640以内・角丸24・内側20へ。見出し22/30/600、本文16/27/400。全面scrimと独立Provider／全辺safe area、×44をheader内へ。題名・日時・本文・全CTA・履歴・welcome主操作を一つの可変高scrollへ入れ、本文だけ260／300高の旧構成を解除。×／背景／AndroidはonClose、welcome主操作はonPrimaryCloseを維持。本文リンク・action key正規化・表示条件は不変 |
 | お知らせ履歴 | header・未読・一覧を同じFlatListへ。題名を省略せず、展開を読み上げに渡す。初回失敗を正常0件から区別して再試行を表示。追加失敗は既存rows／hasMore／nextOffset／unreadを保ち、同じoffsetから再試行。focus再読失敗も前回内容と更新失敗を併記。50件・重複除去・指定通知の一度だけの展開・楽観既読・CTA前の既読処理を維持 |
-| ガイド・用語 | 画面名も本文scroll内へ、最大外幅680／左右20。長い対象名を省略せず、説明16/27・見出し18/26、本文内リンクはサイズを継承して600＋下線。用語modalは全辺safe area・幅640／角丸24、本文scrollと44の×／共通閉じるを分離。関連語の切替で本文scrollをreset。term regex／screenId正規化／関連語／戻り先を維持。ProfileCreateを通常利用できる説明から旧機能へ、感情通知には感情・強さ・時刻のみと明記 |
+| ガイド・用語 | ガイドの見出し・4章タブは本文より上に固定し、最大外幅680／左右20。説明16/27・見出し18/26、本文内リンクはサイズを継承して600＋下線。用語modalは全辺safe area・幅640／角丸24、本文scrollと44の×／共通閉じるを分離。関連語の切替で本文scrollをreset。term regex／screenId正規化／関連語／戻り先を維持。ProfileCreateを通常利用できる説明から旧機能へ、感情通知には感情・強さ・時刻のみと明記 |
 | tutorial開始・まとめ | 開始案内の三重枠を一面＋tonal説明へ。説明と開始／今回のみ／今後表示しないを同scrollへ入れ、閉じる条件を維持。Flowの導入・4体験・まとめ・完了を同じ文字／面へ。headerのtop safe areaを重ねず、非表示tabbar分のbottomを確保。step1／17／18／19、完了中停止、endTutorialとhome resetは不変 |
 | spotlight overlay | 通常componentと未接続root資産の双方を3テーマ・本文16/27へ。説明とprimaryを同scrollへ入れ、無効面と文字を薄めず分離。左右safe insetを含むmarginと640最大幅を、描画とonMetricsChangeのcardRectで同じ式にする。既存の測定・hole・上下配置・proxy target・背景停止・callbackは保持。root資産の相対theme importも修正し、接続は復活させない |
 | tutorialの現仕様説明 | Pieceは保存した入力本文から画像へ整えること、投稿欄の旧Q&Aとは別と説明。現在マップは全プラン共通、月次2／12／全期間へ。捕捉済みgenerated fixtureは改変・再生成せず、表示adapterでmap本体とreportの期間ラベルを「練習用の表示例」にする。旧rendererへ既定trueのshowPlanNoticeを追加し、tutorial呼出だけfalse。旧保存mapの通常表示・visibility／locked sections・tier／mode・日時／証拠は不変 |

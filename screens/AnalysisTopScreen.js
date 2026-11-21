@@ -1,8 +1,5 @@
 import React from "react";
 import { Text, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-
-import CocolonPressable from "../components/CocolonPressable";
 import {
   AnalysisMenuScroll,
   useAnalysisMenuStyles,
@@ -10,7 +7,6 @@ import {
 import { MenuActionCard } from "./MenuActionCardCommon";
 
 export default function AnalysisTopScreen({
-  onOpenGuide,
   onOpenEmotionAnalysis,
   onOpenSelfStructure,
   tutorialScrollRef,
@@ -21,26 +17,13 @@ export default function AnalysisTopScreen({
   unreadEmotion = false,
   unreadSelfStructure = false,
 }) {
-  const { styles, colors } = useAnalysisMenuStyles();
+  const { styles } = useAnalysisMenuStyles();
 
   return (
     <AnalysisMenuScroll scrollRef={tutorialScrollRef} onScroll={onTutorialScroll}>
       <View style={styles.homeHeaderRow}>
         <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.homeTitleRow}>
           <Text style={styles.homeTitle}>分析</Text>
-          <View ref={tutorialRefs?.guideRef} collapsable={false}>
-            <CocolonPressable
-              style={styles.guideButton}
-              onPress={onOpenGuide}
-              accessibilityLabel="Analysisのガイドを開く"
-            >
-              <Ionicons
-                name="help-circle-outline"
-                size={20}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
-          </View>
         </View>
       </View>
 

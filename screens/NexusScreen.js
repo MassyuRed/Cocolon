@@ -20,6 +20,7 @@ import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
+import CocolonButton from "../components/CocolonButton";
 import { useTutorial } from "../TutorialContext";
 import { useAuth } from "../AuthContext";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
@@ -1376,7 +1377,6 @@ export default function NexusScreen({ navigation }) {
           canReadOwnPieces={canReadOwnPieces}
           handleOpenOwnerHistory={handleOpenOwnerHistory}
           handleOpenFollowList={handleOpenFollowList}
-          handlePressGuide={handlePressGuide}
           onRefresh={() => {
             void refreshNexusUnreadState();
             void loadRanking();
@@ -1406,6 +1406,7 @@ export default function NexusScreen({ navigation }) {
         />
 
         <View style={styles.tabContent}>{renderActiveTab()}</View>
+        <CocolonButton variant="secondary" style={styles.guideFooter} title="ピースについて" onPress={handlePressGuide} />
       </ScrollView>
 
       <NexusOwnerPickerModal
@@ -1479,17 +1480,7 @@ function createStyles(COLORS, ui) {
       flexWrap: 'wrap',
       minWidth: 0,
     },
-        guideTitleButton: {
-          width: 44,
-          height: 44,
-          borderRadius: 22,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: COLORS.FIELD_BG,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          marginLeft: 10,
-        },
+        guideFooter: { marginTop: 16 },
         panelHeaderActions: {
       flexDirection: "row",
       alignItems: "center",

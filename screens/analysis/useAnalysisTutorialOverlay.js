@@ -32,7 +32,6 @@ export function useAnalysisTutorialOverlay({
   const analysisSelfStructureRef = useRef(null);
   const analysisReportRef = useRef(null);
   const analysisSelfReportRef = useRef(null);
-  const analysisGuideRef = useRef(null);
 
   const isAnalysisTutorialStep =
     !!isTutorialMode &&
@@ -254,7 +253,6 @@ export function useAnalysisTutorialOverlay({
       selfStructureRef: analysisSelfStructureRef,
       reportRef: analysisReportRef,
       selfReportRef: analysisSelfReportRef,
-      guideRef: analysisGuideRef,
     },
   };
 }

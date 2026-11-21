@@ -92,10 +92,14 @@ export function SettingsHomeContent({ navigation, subscription }) {
     <View style={menuStyles.homeHeaderRow}>
       <Text accessibilityRole="header" style={menuStyles.homeTitle}>設定</Text>
     </View>
-    <View style={styles.group}>
+    <View style={[styles.group, styles.rows]}>
       <SettingsMenuRow
         item={{ label: "アカウント", accessibilityLabel: "アカウントを開く", icon: "person-outline", onPress: () => navigation.navigate("Account") }}
-        styles={styles} colors={colors} first last
+        styles={styles} colors={colors} first
+      />
+      <SettingsMenuRow
+        item={{ label: "アプリの使い方", icon: "book-outline", onPress: () => navigation.navigate("CocolonGuide") }}
+        styles={styles} colors={colors} last
       />
     </View>
     <View style={styles.group}>

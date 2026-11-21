@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ScrollView,
   StatusBar,
@@ -18,17 +18,10 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import CocolonBackButton from "../components/CocolonBackButton";
 import GuideRichText from "../components/GuideRichText";
 import GuideTermModal from "../components/GuideTermModal";
-import { getGuideContent, normalizeGuideScreenId } from "../guide/guidesJa";
+import { getGuideContent, guidesJa, normalizeGuideScreenId } from "../guide/guidesJa";
 import { getGuideTerm } from "../guide/termsJa";
 
-/**
- * CocolonGuideScreen
- * ------------------
- * Tip-style guide screen
- * - A single guide body per screen
- * - Terms in the body can be tapped to open in-place explanations
- * - Guide text / terms are driven by data files (guidesJa / termsJa)
- */
+const guideScreenIds = Object.keys(guidesJa).filter((id) => id !== "unknown");
 
 export default function CocolonGuideScreen({ route } = {}) {
   const { colors, themeName } = useTheme();
@@ -36,13 +29,18 @@ export default function CocolonGuideScreen({ route } = {}) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
-  const rawScreenId = route?.params?.screenId || route?.params?.screen_id || "";
-  const screenId = useMemo(() => normalizeGuideScreenId(rawScreenId), [rawScreenId]);
-  const content = useMemo(() => getGuideContent(screenId), [screenId]);
-
+  const requestedScreenId = normalizeGuideScreenId(route?.params?.screenId || route?.params?.screen_id);
+  const initialScreenId = guideScreenIds.includes(requestedScreenId) ? requestedScreenId : "home";
+  const [screenId, setScreenId] = useState(initialScreenId);
   const [activeTermId, setActiveTermId] = useState(null);
 
-  const activeTerm = useMemo(() => getGuideTerm(activeTermId), [activeTermId]);
+  useEffect(() => {
+    setScreenId(initialScreenId);
+    setActiveTermId(null);
+  }, [initialScreenId]);
+
+  const content = getGuideContent(screenId);
+  const activeTerm = getGuideTerm(activeTermId);
 
   const relatedTerms = useMemo(() => {
     const ids = Array.isArray(content?.relatedTerms) ? content.relatedTerms : [];
@@ -66,34 +64,42 @@ export default function CocolonGuideScreen({ route } = {}) {
         backgroundColor={colors.BG_SILVER}
       />
 
-
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-      >
-      <View style={styles.headerRow}>
-        <CocolonBackButton
-          style={styles.backBtn}
-          fallbackRouteName="Input"
-          accessibilityLabel="戻る"
-        />
-        <Text style={styles.headerTitle}>
-          Cocolonガイド
-        </Text>
-        <View style={styles.headerRightSpacer} />
+      <View style={styles.top}>
+        <View style={styles.headerRow}>
+          <CocolonBackButton style={styles.backBtn} accessibilityLabel="戻る" />
+          <Text accessibilityRole="header" style={styles.headerTitle}>アプリの使い方</Text>
+          <View style={styles.headerRightSpacer} />
+        </View>
+        <View style={styles.tabBar} accessibilityRole="tablist">
+          {guideScreenIds.map((id) => {
+            const selected = id === screenId;
+            return (
+              <Pressable
+                key={id}
+                accessibilityRole="tab"
+                accessibilityLabel={guidesJa[id].title}
+                accessibilityState={{ selected }}
+                onPress={() => {
+                  setActiveTermId(null);
+                  setScreenId(id);
+                }}
+                style={({ pressed }) => [
+                  styles.tab,
+                  selected && styles.tabSelected,
+                  pressed && styles.pressed,
+                ]}
+              >
+                <Text style={[styles.tabText, selected && styles.tabTextSelected]}>
+                  {guidesJa[id].title}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </View>
       </View>
 
-        <View style={styles.targetRow}>
-          <View style={styles.targetPill}>
-            <Text style={styles.targetPillText}>
-              {content?.title || "ガイド"}
-            </Text>
-          </View>
-          <Text style={styles.targetHint}>
-            {content?.summary || "この画面の使い方を確認できます。"}
-          </Text>
-        </View>
-
+      <ScrollView key={screenId} style={styles.chapterScroll} contentContainerStyle={styles.chapter}>
+        <Text style={styles.summary}>{content.summary}</Text>
         <View style={styles.tipLeadCard}>
           <Ionicons
             name="sparkles-outline"
@@ -109,7 +115,7 @@ export default function CocolonGuideScreen({ route } = {}) {
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>画面の見方</Text>
           <GuideRichText
-            blocks={Array.isArray(content?.blocks) ? content.blocks : []}
+            blocks={content.blocks}
             onPressTerm={handleOpenTerm}
           />
         </View>
@@ -126,7 +132,7 @@ export default function CocolonGuideScreen({ route } = {}) {
                   onPress={() => handleOpenTerm(term.termId)}
                   style={({ pressed }) => [
                     styles.relatedTermChip,
-                    pressed && styles.relatedTermChipPressed,
+                    pressed && styles.pressed,
                   ]}
                 >
                   <Text style={styles.relatedTermChipText}>{term.display}</Text>
@@ -148,100 +154,69 @@ export default function CocolonGuideScreen({ route } = {}) {
   );
 }
 
-function createStyles(COLORS, ui) {
-  const font = ui?.font || {};
+function createStyles(colors, ui) {
   const text = ui?.text || {};
+  const bodyWidth = {
+    width: "100%",
+    maxWidth: 680,
+    alignSelf: "center",
+    paddingHorizontal: 20,
+  };
 
-  return StyleSheet.create(
-    applyTypographyTokens(
-      {
-        container: {
-      flex: 1,
-      backgroundColor: COLORS.BG_SILVER,
-    },
-
-        headerRow: {
-      paddingHorizontal: 0,
-      paddingTop: 0,
-      paddingBottom: 16,
+  return StyleSheet.create(applyTypographyTokens({
+    container: { flex: 1, backgroundColor: colors.BG_SILVER },
+    top: { ...bodyWidth, paddingTop: 16, paddingBottom: 12 },
+    headerRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
       gap: 8,
+      marginBottom: 12,
     },
-        backBtn: {
-      width: 44,
-      minHeight: 44,
-    },
-        headerTitle: {
+    backBtn: { width: 44, minHeight: 44 },
+    headerTitle: {
       flex: 1,
-      textAlign: "center",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0,
       minWidth: 0,
+      textAlign: "center",
+      color: colors.TITLE_GOLD,
     },
-        headerRightSpacer: {
-      width: 44,
-    },
-
-        scrollContainer: {
-      paddingHorizontal: 20,
-      paddingBottom: 24,
-      paddingTop: 16,
-      alignItems: "stretch",
-      width: '100%',
-      maxWidth: 680,
-      alignSelf: 'center',
-    },
-
-        targetRow: {
-      marginBottom: 16,
-    },
-        targetPill: {
-      alignSelf: "flex-start",
-      paddingHorizontal: 12,
+    headerRightSpacer: { width: 44 },
+    tabBar: { flexDirection: "row", gap: 6 },
+    tab: {
+      flex: 1,
+      minWidth: 0,
+      minHeight: 44,
+      paddingHorizontal: 4,
       paddingVertical: 8,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.SURFACE_TONAL,
-      maxWidth: '100%',
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 24,
+      backgroundColor: colors.SURFACE_TONAL,
     },
-        targetPillText: {
-      color: COLORS.ON_SURFACE_TONAL,
-    },
-        targetHint: {
-      marginTop: 12,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
-    },
-
-        tipLeadCard: {
+    tabSelected: { backgroundColor: colors.GOLD_BUTTON },
+    tabText: { color: colors.ON_SURFACE_TONAL, textAlign: "center" },
+    tabTextSelected: { color: colors.ACCENT_TEXT },
+    pressed: { opacity: 0.82 },
+    chapterScroll: { flex: 1 },
+    chapter: { ...bodyWidth, paddingBottom: 24 },
+    summary: { marginBottom: 16, color: text.description ?? colors.TEXT_SUBTLE },
+    tipLeadCard: {
+      flexDirection: "row",
+      alignItems: "flex-start",
       marginBottom: 16,
       borderRadius: 16,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.SURFACE_TONAL,
-      paddingHorizontal: 16,
-      paddingVertical: 16,
-      flexDirection: "row",
-      alignItems: "flex-start",
+      borderColor: colors.CARD_BORDER,
+      backgroundColor: colors.SURFACE_TONAL,
+      padding: 16,
     },
-        tipLeadIcon: {
-          marginTop: 1,
-          marginRight: 8,
-        },
-        tipLeadText: {
-      flex: 1,
-      color: COLORS.ON_SURFACE_TONAL,
-    },
-
-        card: {
+    tipLeadIcon: { marginTop: 1, marginRight: 8 },
+    tipLeadText: { flex: 1, color: colors.ON_SURFACE_TONAL },
+    card: {
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      borderColor: colors.CARD_BORDER,
+      backgroundColor: colors.FIELD_BG,
+      padding: 20,
       marginBottom: 16,
       shadowColor: "#000",
       shadowOpacity: 0.06,
@@ -249,39 +224,26 @@ function createStyles(COLORS, ui) {
       shadowOffset: { width: 0, height: 2 },
       elevation: 1,
     },
-        sectionTitle: {
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 12,
-    },
-
-        relatedTermsWrap: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      marginHorizontal: 0,
-      gap: 8,
-    },
-        relatedTermChip: {
-      marginHorizontal: 0,
-      marginBottom: 0,
+    sectionTitle: { color: text.primary ?? colors.TEXT_ON_LIGHT, marginBottom: 12 },
+    relatedTermsWrap: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+    relatedTermChip: {
       paddingHorizontal: 12,
       paddingVertical: 10,
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      maxWidth: '100%',
+      borderColor: colors.CARD_BORDER,
+      backgroundColor: colors.FIELD_BG,
+      maxWidth: "100%",
       minHeight: 44,
-      justifyContent: 'center',
+      justifyContent: "center",
     },
-        relatedTermChipPressed: {
-          opacity: 0.82,
-        },
-        relatedTermChipText: {
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-    },
-      },
-      ui, {"headerTitle":"screenTitle","targetPillText":"description","targetHint":"description","tipLeadText":"description","sectionTitle":"sectionTitle","relatedTermChipText":"button"}
-    )
-  );
+    relatedTermChipText: { color: text.primary ?? colors.TEXT_ON_LIGHT, flexShrink: 1 },
+  }, ui, {
+    headerTitle: "screenTitle",
+    tabText: "button",
+    summary: "description",
+    tipLeadText: "description",
+    sectionTitle: "sectionTitle",
+    relatedTermChipText: "button",
+  }));
 }

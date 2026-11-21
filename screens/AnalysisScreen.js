@@ -525,7 +525,6 @@ function AnalysisHome({
   tutorialScrollRef,
   onTutorialScroll,
   tutorialRefs,
-  onOpenGuide,
   onOpenHistory,
   onOpenDaily,
   onOpenWeekly,
@@ -559,17 +558,6 @@ function AnalysisHome({
         <View style={styles.panelHeader}>
           <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.panelTitleRow}>
             <Text style={styles.panelTitle}>分析</Text>
-            <CocolonPressable
-              style={styles.guideButton}
-              onPress={onOpenGuide}
-              accessibilityLabel="Analysisのガイドを開く"
-            >
-              <Ionicons
-                name="help-circle-outline"
-                size={20}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
           </View>
         </View>
 
@@ -914,18 +902,6 @@ function createStyles(COLORS, ui) {
       minWidth: 0,
       flexShrink: 1,
     },
-    guideButton: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginLeft: 10,
-    },
-
     section: {
       marginBottom: 18,
       width: "100%",
