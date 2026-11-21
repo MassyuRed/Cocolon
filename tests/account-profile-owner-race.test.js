@@ -148,7 +148,23 @@ for (const changed of [false, true]) test(`push-token lookup ${changed ? 'reject
   const work = push.syncPushTokenOnce({ userId: 'A' }); await tick();
   if (changed) api.setOwner('B'); token.resolve('synthetic-device-token');
   if (changed) { await assert.rejects(work, { name: 'AccountChangedError' }); assert.equal(api.writes.length, 0); }
-  else { assert.equal((await work).ok, true); assert.equal(api.writes[0].owner, 'A'); assert.equal(api.writes[0].body.push_token, 'synthetic-device-token'); }
+  else {
+    assert.equal((await work).ok, true);
+    assert.equal(api.writes[0].owner, 'A');
+    assert.equal(api.writes[0].body.push_token, 'synthetic-device-token');
+    assert.equal(api.writes[0].body.push_deep_insight_supported, true);
+  }
+});
+
+test('compatibility marker is written with a real supported token only', async () => {
+  const api = transport('A');
+  await api.syncAccountProfilePushToken({ token: 'legacy-device', expectedUserId: 'A' });
+  await api.syncAccountProfilePushToken({ token: ' ', deepInsightSupported: true, expectedUserId: 'A' });
+  await api.clearAccountProfilePushToken({ expectedUserId: 'A' });
+  assert.equal(api.writes[0].body.push_token, 'legacy-device');
+  assert.equal(api.writes[1].body.push_token, null);
+  assert.equal(api.writes[2].body.push_token, null);
+  assert.ok(api.writes.every(({ body }) => !Object.hasOwn(body, 'push_deep_insight_supported')));
 });
 
 test('old-owner push-token clearing cannot PATCH the newly authenticated owner', async () => {
