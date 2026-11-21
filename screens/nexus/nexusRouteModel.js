@@ -1,7 +1,6 @@
 export const TABS = [
   { key: "piece", label: "投稿" },
   { key: "emotion_log", label: "感情通知" },
-  { key: "recommend", label: "おすすめ" },
   { key: "history", label: "共鳴" },
 ];
 

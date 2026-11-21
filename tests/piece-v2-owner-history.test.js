@@ -1128,7 +1128,8 @@ function nexusEntryHarness(options = {}) {
       if (name.endsWith('/tutorialScenarioData')) return { TUTORIAL_TOTAL_STEPS: 16 };
       if (name.endsWith('/TutorialOverlay')) return { __esModule: true, default: 'TutorialOverlay',
         syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
-      if (/\/(NexusHeader|nexusRouteModel|nexusNormalize|nexusHistoryModel|useOwnerRequestScope)$/.test(name)) {
+      if (name.endsWith('/UnreadBadge')) return { ScreenUnreadBadge: 'ScreenUnreadBadge' };
+      if (/\/(NexusHeader|NexusTabBar|nexusRouteModel|nexusNormalize|nexusHistoryModel|useOwnerRequestScope)$/.test(name)) {
         return load(path.resolve(path.dirname(file), name + '.js'));
       }
       return { __esModule: true, default: name.split('/').pop() };
@@ -1143,6 +1144,7 @@ function nexusEntryHarness(options = {}) {
   }
   const Screen = load(path.join(ROOT, 'screens/NexusScreen.js')).default;
   const Header = load(path.join(ROOT, 'screens/nexus/NexusHeader.js')).default;
+  const TabBar = load(path.join(ROOT, 'screens/nexus/NexusTabBar.js')).default;
   function render() {
     let count = 0;
     do {
@@ -1157,7 +1159,8 @@ function nexusEntryHarness(options = {}) {
   return { control, routes, legacyCalls, render, find,
     header: () => Header(find(Header).props),
     entry: () => nodes(Header(find(Header).props)).find(n => n.props.accessibilityLabel === '自分のPieceを開く'),
-    tab: value => { find('NexusTabBar').props.setActiveTab(value); render(); },
+    tabBar: () => TabBar(find(TabBar).props),
+    tab: value => { find(TabBar).props.setActiveTab(value); render(); },
     dispose: () => { for (const hook of hooks) hook?.cleanup?.(); },
   };
 }
@@ -1165,13 +1168,33 @@ function nexusEntryHarness(options = {}) {
 test('the ordinary Piece screen opens its guide chapter from the end of every tab', () => {
   const n = nexusEntryHarness();
   assert.ok(!nodes(n.header()).some(node => node.props.accessibilityLabel === 'ピースのガイドを開く'));
-  for (const tab of ['piece', 'emotion_log', 'recommend', 'history']) {
+  for (const tab of ['piece', 'emotion_log', 'history']) {
     n.tab(tab);
     const guide = n.find('ScrollView').children.at(-1);
     assert.equal(guide.props.title, 'ピースについて');
     guide.props.onPress();
   }
-  assert.deepEqual(n.routes, Array.from({ length: 4 }, () => ['CocolonGuide', { screenId: 'piece' }]));
+  assert.deepEqual(n.routes, Array.from({ length: 3 }, () => ['CocolonGuide', { screenId: 'piece' }]));
+  n.dispose();
+});
+
+test('Piece displays only the three available tabs in one equally spaced row', () => {
+  const n = nexusEntryHarness();
+  const bar = n.tabBar();
+  const items = bar.children.flat();
+  assert.equal(bar.props.style.flexDirection, 'row');
+  assert.notEqual(bar.props.style.flexWrap, 'wrap');
+  assert.deepEqual(Array.from(items, item => item.props.style.flex), [1, 1, 1]);
+  const tabButtons = nodes(bar).filter(node => node.props.accessibilityRole === 'tab');
+  assert.deepEqual(tabButtons.map(button => texts(button)[0]), ['投稿', '感情通知', '共鳴']);
+  for (const [index, section] of ['NexusPieceFeedSection', 'NexusEmotionLogSection', 'NexusHistorySection'].entries()) {
+    tabButtons[index].props.onPress();
+    n.render();
+    assert.ok(n.find(section));
+    const selected = nodes(n.tabBar()).filter(node => node.props.accessibilityRole === 'tab' && node.props.accessibilityState.selected);
+    assert.deepEqual(selected.map(button => texts(button)[0]), [texts(tabButtons[index])[0]]);
+  }
+  assert.ok(!n.legacyCalls.some(([name]) => name === 'getNexusRecommendUsers'));
   n.dispose();
 });
 
@@ -1211,7 +1234,7 @@ test('owner entry remains available independently of public and resonance loadin
   const n = nexusEntryHarness({ feedFailure: true });
   assert.equal(n.find('NexusPieceFeedSection').props.pieceState.loading, true); assert.ok(n.entry());
   await tick(); n.render(); assert.equal(n.find('NexusPieceFeedSection').props.pieceState.error, 'feed unavailable');
-  for (const tab of ['history', 'emotion_log', 'recommend', 'piece']) {
+  for (const tab of ['history', 'emotion_log', 'piece']) {
     n.tab(tab); assert.ok(n.entry()); await tick(); n.render(); assert.ok(n.entry());
     if (tab === 'history') assert.equal(n.find('NexusHistorySection').props.historyState.error, 'feed unavailable');
   }

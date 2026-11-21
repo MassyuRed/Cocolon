@@ -1387,7 +1387,6 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
   const nexusTabBar = read('screens/nexus/NexusTabBar.js');
   const nexusPieceFeedSection = read('screens/nexus/NexusPieceFeedSection.js');
   const nexusEmotionLogSection = read('screens/nexus/NexusEmotionLogSection.js');
-  const nexusRecommendSection = read('screens/nexus/NexusRecommendSection.js');
   const nexusHistorySection = read('screens/nexus/NexusHistorySection.js');
   const nexusOwnerPickerModal = read('screens/nexus/NexusOwnerPickerModal.js');
   const nexusTodayEmotionSummary = read('screens/nexus/NexusTodayEmotionSummary.js');
@@ -1417,13 +1416,11 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
 
   assertIncludes(nexus, [
     'rankingState',
-    'recommendState',
     'historyState',
     'historyOrder',
     'getNexusResonancePieces',
     'setUnread("EmotionLog", "feed"',
     'activeTab === "history"',
-    'activeTab === "recommend"',
     'TUTORIAL_TOTAL_STEPS',
   ], 'NexusScreen.js split guard');
 
@@ -1507,11 +1504,9 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
   const piece = read('screens/PieceScreen.js');
   const pieceGlobalSummary = read('screens/piece/usePieceHomeGlobalSummary.js');
   const pieceTutorial = read('screens/piece/usePieceHomeTutorial.js');
-  const pieceRecommend = read('screens/piece/usePieceRecommendUsers.js');
   const pieceHomeActionCard = read('screens/piece/PieceHomeActionCard.js');
   const pieceHomeMainActions = read('screens/piece/PieceHomeMainActions.js');
   const pieceTutorialCreateModal = read('screens/piece/PieceTutorialCreateModal.js');
-  const pieceRecommendModal = read('screens/piece/PieceRecommendModal.js');
   const nexus = read('screens/NexusScreen.js');
   const library = read('screens/PieceLibraryScreen.js');
 
@@ -1523,10 +1518,8 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
   assertIncludes(piece, [
     'from "./piece/usePieceHomeGlobalSummary";',
     'from "./piece/usePieceHomeTutorial";',
-    'from "./piece/usePieceRecommendUsers";',
     'PieceHomeMainActions',
     'PieceTutorialCreateModal',
-    'PieceRecommendModal',
     'navigation.navigate("PieceHistory")',
     'navigation.navigate("EmotionLog")',
     'navigation.navigate("CocolonGuide", { screenId: "piece" })',
@@ -1554,16 +1547,6 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     'const routeName = resolvePieceLibraryRouteName(navigation)',
   ], 'usePieceHomeTutorial.js');
 
-  assertIncludes(pieceRecommend, [
-    'export function usePieceRecommendUsers',
-    'PIECE_WIRE.routes.recommendUsers',
-    'getPrefetchEntryFresh("Piece", "recoUsers"',
-    'setPrefetch("Piece", "recoUsers"',
-    'supabase.auth.getSession',
-    'resolveAccountRouteName',
-    'resetRecommendState',
-  ], 'usePieceRecommendUsers.js');
-
   assertIncludes(pieceHomeActionCard, [
     'export default function PieceHomeActionCard',
     'MenuActionCard',
@@ -1577,9 +1560,9 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     '今日の全体活動',
     'ピース一覧を開く',
     '感情ログを開く',
-    '新しいユーザーを探す',
     '履歴を確認する',
   ], 'PieceHomeMainActions.js');
+  assertNotIncludes(pieceHomeMainActions, ['新しいユーザーを探す', 'onOpenRecommend'], 'retired Piece recommendations');
 
   assertIncludes(pieceTutorialCreateModal, [
     'export default function PieceTutorialCreateModal',
@@ -1589,14 +1572,6 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     'onSave',
     'onStartShouldSetResponderCapture',
   ], 'PieceTutorialCreateModal.js');
-
-  assertIncludes(pieceRecommendModal, [
-    'export default function PieceRecommendModal',
-    'readShareCode',
-    'onRefresh',
-    'onOpenAccount(uid)',
-    'アクティブユーザー',
-  ], 'PieceRecommendModal.js');
 
   assertIncludes(nexus, [
     'getNexusPieces',

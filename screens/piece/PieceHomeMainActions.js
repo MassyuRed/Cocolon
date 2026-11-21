@@ -22,7 +22,6 @@ export default function PieceHomeMainActions({
   onOpenPieceLibrary,
   onOpenEmotionLog,
   onOpenPieceCreate,
-  onOpenRecommend,
   onOpenReactionHistory,
 }) {
   return (
@@ -122,21 +121,6 @@ export default function PieceHomeMainActions({
           />
         </View>
       ) : null}
-
-      <View style={{ marginTop: 16 }}>
-        <PieceHomeActionCard
-          title="探す"
-          description={
-            tutorialSurfaceEnabled && isTutorialMode
-              ? "ここから新しいユーザーを探せます。"
-              : "新しいユーザーを探すことができます。"
-          }
-          buttonLabel="新しいユーザーを探す"
-          buttonIconName="search-outline"
-          onPress={onOpenRecommend}
-          accessibilityLabel="新しいユーザーを探す"
-        />
-      </View>
 
       <View style={{ marginTop: 16 }}>
         <PieceHomeActionCard

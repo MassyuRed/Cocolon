@@ -35,7 +35,6 @@ import {
   getNexusEmotionLogUnreadStatus,
   getNexusEmotionRanking,
   getNexusFollowingUsers,
-  getNexusRecommendUsers,
   deleteNexusPiece,
   getNexusPieces,
   getNexusPiecesUnreadStatus,
@@ -47,7 +46,6 @@ import NexusTodayEmotionSummary from "./nexus/NexusTodayEmotionSummary";
 import NexusTabBar from "./nexus/NexusTabBar";
 import NexusPieceFeedSection from "./nexus/NexusPieceFeedSection";
 import NexusEmotionLogSection from "./nexus/NexusEmotionLogSection";
-import NexusRecommendSection from "./nexus/NexusRecommendSection";
 import NexusHistorySection from "./nexus/NexusHistorySection";
 import NexusOwnerPickerModal from "./nexus/NexusOwnerPickerModal";
 import {
@@ -64,7 +62,6 @@ import {
 import {
   normalizeEmotionRankingItems,
   normalizeEmotionLogItems,
-  normalizeRecommendUsers,
   normalizeFollowListUsers,
   normalizeSavedPieces,
   normalizeTutorialPieceItems,
@@ -163,7 +160,7 @@ export default function NexusScreen({ navigation }) {
     historyReadScopeRef.current = { owner: ownerRequest, order: historyOrder, tutorial: isTutorialMode };
   }
   const historyReadScope = historyReadScopeRef.current;
-  const readSequences = useRef({ pieces: 0, history: 0, ranking: 0, owners: 0, emotions: 0, recommend: 0 });
+  const readSequences = useRef({ pieces: 0, history: 0, ranking: 0, owners: 0, emotions: 0 });
 
   const tutorialPieceItems = useMemo(
     () => normalizeTutorialPieceItems(tutorialPieces),
@@ -187,12 +184,6 @@ export default function NexusScreen({ navigation }) {
     error: "",
   });
   const emotionLogLoadedScopeRef = useRef(null);
-  const [recommendState, setRecommendState] = useState({
-    loading: false,
-    loaded: false,
-    users: [],
-    error: "",
-  });
   const [historyState, setHistoryState] = useState({
     loading: false,
     loadedModes: {},
@@ -206,7 +197,6 @@ export default function NexusScreen({ navigation }) {
   useEffect(() => {
     setResonanceSubmittingIds({});
     setPieceDeleteSubmittingIds({});
-    setRecommendState(previous => ({ ...previous, loading: false }));
   }, [ownerRequest]);
 
   const baseOwnerOptions = useMemo(() => {
@@ -531,42 +521,6 @@ export default function NexusScreen({ navigation }) {
     }
   }, [isTutorialMode, ownerRequest, isOwnerCurrent]);
 
-  const loadRecommend = useCallback(async () => {
-    if (!isOwnerCurrent(ownerRequest)) return;
-    const sequence = ++readSequences.current.recommend;
-    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.recommend;
-    if (isTutorialMode) {
-      setRecommendState({
-        loading: false,
-        loaded: true,
-        users: [],
-        error: "",
-      });
-      return;
-    }
-
-    setRecommendState((prev) => ({ ...prev, loading: true, error: "" }));
-    try {
-      const usersJson = await getNexusRecommendUsers(8, ownerRequest.options);
-      if (!isFresh()) return;
-      setRecommendState({
-        loading: false,
-        loaded: true,
-        users: normalizeRecommendUsers(usersJson),
-        error: "",
-      });
-    } catch (e) {
-      if (!isFresh()) return;
-      console.warn("NexusScreen: loadRecommend failed", e);
-      setRecommendState({
-        loading: false,
-        loaded: true,
-        users: [],
-        error: String(e?.message || "おすすめを読み込めませんでした。"),
-      });
-    }
-  }, [isTutorialMode, ownerRequest, isOwnerCurrent]);
-
   const loadHistory = useCallback(
     async () => {
       if (!isOwnerCurrent(ownerRequest)) return;
@@ -754,9 +708,6 @@ export default function NexusScreen({ navigation }) {
   }, [activeTab, loadEmotionLog]);
 
   useEffect(() => {
-    if (activeTab === "recommend" && !recommendState.loaded && !recommendState.loading) {
-      void loadRecommend();
-    }
     const historyOrderLoaded =
       historyState.order === historyOrder &&
       !!historyState.loadedModes?.[historyLoadedModeKey];
@@ -771,9 +722,6 @@ export default function NexusScreen({ navigation }) {
     historyState.loading,
     historyState.order,
     loadHistory,
-    loadRecommend,
-    recommendState.loaded,
-    recommendState.loading,
   ]);
 
   const handlePressGuide = useCallback(() => {
@@ -1297,15 +1245,6 @@ export default function NexusScreen({ navigation }) {
             ui={ui}
           />
         );
-      case "recommend":
-        return (
-          <NexusRecommendSection
-            recommendState={recommendState}
-            styles={styles}
-            colors={colors}
-            handleOpenOwner={handleOpenOwner}
-          />
-        );
       case "history":
         return (
           <NexusHistorySection
@@ -1383,7 +1322,6 @@ export default function NexusScreen({ navigation }) {
             void loadOwnerOptions();
             if (activeTab === "piece") void loadPieces();
             if (activeTab === "emotion_log") void loadEmotionLog();
-            if (activeTab === "recommend") void loadRecommend();
             if (activeTab === "history") void loadHistory();
           }}
         />
@@ -1560,14 +1498,12 @@ function createStyles(COLORS, ui) {
       backgroundColor: COLORS.FIELD_BG,
       borderRadius: 24,
       padding: 4,
-      flexWrap: 'wrap',
       gap: 4,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
     },
         tabItemWrap: {
-      flexGrow: 1,
-      flexBasis: '45%',
+      flex: 1,
       minWidth: 0,
     },
         tabItem: {

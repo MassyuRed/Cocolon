@@ -1,3 +1,7 @@
+### 11/21　Piece画面の投稿・感情通知・共鳴
+
+通常の `PieceEntryScreen` → `NexusScreen` で、投稿・感情通知・共鳴を等幅の一列に表示する。おすすめの表示・取得と、旧入口 `PieceScreen` の「探す」、`MainTabs` のおすすめ先読みを廃止。投稿一覧は既存の公開フィードを読む。新Pieceの非公開保存・本人の画像書き出しと、旧形式の投稿一覧は別経路。
+
 ### 11/20　通常Pieceで4Bを使用
 
 本番APIの `PIECE_MODEL_SOURCE=shared_4b.cmee.v2` を有効にした。問いへの本人補足を選んだ作品は思考・行動・補足の3段落、問いをスキップした入力の通常作品は元入力だけの1段落になった。いずれも非公開保存後、本人の詳細・履歴・画像書き出し用データで本文と描画情報が一致した。端末での画像保存と自由文の編集品質は未確認。 [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。

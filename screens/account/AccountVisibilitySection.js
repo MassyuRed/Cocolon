@@ -145,7 +145,7 @@ export default function AccountVisibilitySection({
               styles={styles}
               colors={colors}
               title="アカウントの公開設定"
-              description="非公開にすると、フォロー時に承認が必要になります。おすすめにも表示されなくなります"
+              description="非公開にすると、フォロー時に承認が必要になります。"
               isPublic={!accountVisibility.is_private_account}
               onPressPublic={() =>
                 patchAccountVisibilityMe({

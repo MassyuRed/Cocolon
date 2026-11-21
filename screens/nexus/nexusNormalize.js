@@ -79,24 +79,6 @@ export function normalizeEmotionLogItems(json) {
   });
 }
 
-export function normalizeRecommendUsers(json) {
-  const users = Array.isArray(json?.users)
-    ? json.users
-    : Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json)
-    ? json
-    : [];
-  return users.map((user, index) => ({
-    id: String(user?.id || user?.user_id || `user-${index}`),
-    displayName:
-      String(
-        user?.display_name || user?.name || readShareCode(user, "") || "ユーザー"
-      ).trim() || "ユーザー",
-    shareCode: readShareCode(user, null),
-  }));
-}
-
 export function normalizeFollowListUsers(json) {
   const rows = Array.isArray(json?.rows)
     ? json.rows

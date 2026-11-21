@@ -9,11 +9,9 @@ import TutorialOverlay from "../components/TutorialOverlay";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import PieceHomeMainActions from "./piece/PieceHomeMainActions";
-import PieceRecommendModal from "./piece/PieceRecommendModal";
 import PieceTutorialCreateModal from "./piece/PieceTutorialCreateModal";
 import usePieceHomeGlobalSummary from "./piece/usePieceHomeGlobalSummary";
 import usePieceHomeTutorial, { TUTORIAL_TOTAL_STEPS } from "./piece/usePieceHomeTutorial";
-import usePieceRecommendUsers from "./piece/usePieceRecommendUsers";
 
 /**
  * PieceScreen (Home)
@@ -21,7 +19,6 @@ import usePieceRecommendUsers from "./piece/usePieceRecommendUsers";
  * - Piece の「Home」画面として、軽い導線のみを提供します
  *   - フォロー切替（Piece対象ユーザー切替）
  *   - 履歴導線（Resonance一覧へ）
- *   - おすすめ導線（現状はモーダルのまま）
  *   - 「Pieceを開く」ボタン（→ PieceLibraryScreen へ）
  */
 
@@ -33,12 +30,7 @@ export default function PieceScreen({ route } = {}) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const navigation = useNavigation();
 
-  const {
-    getFeatureUnread,
-    getPrefetchEntry,
-    getPrefetchEntryFresh,
-    setPrefetch,
-  } = useUnread();
+  const { getFeatureUnread } = useUnread();
   const {
     isTutorialMode,
     tutorialStep,
@@ -65,14 +57,6 @@ export default function PieceScreen({ route } = {}) {
     globalResonanceCount,
   } = usePieceHomeGlobalSummary({ navigation, isTutorialMode });
 
-  const recommend = usePieceRecommendUsers({
-    navigation,
-    isTutorialMode,
-    getPrefetchEntry,
-    getPrefetchEntryFresh,
-    setPrefetch,
-  });
-
   const tutorial = usePieceHomeTutorial({
     navigation,
     targetUserId,
@@ -88,9 +72,8 @@ export default function PieceScreen({ route } = {}) {
   const isDark = themeName === "dark";
 
   const resetToMain = useCallback(() => {
-    recommend.resetRecommendState();
     tutorial.resetTutorialCreateState();
-  }, [recommend, tutorial]);
+  }, [tutorial]);
 
   useEffect(() => {
     if (!navigation?.addListener) return;
@@ -171,16 +154,6 @@ export default function PieceScreen({ route } = {}) {
     Alert.alert("ガイド", "ガイド画面へのナビゲーションがまだ設定されていません。");
   }, [navigation]);
 
-  const openRecommend = useCallback(() => {
-    if (tutorialSurfaceEnabled && isTutorialMode) {
-      recommend.showTutorialRecommendInfo();
-      return;
-    }
-
-    recommend.setRecoModalVisible(true);
-    recommend.loadRecommendUsers();
-  }, [isTutorialMode, recommend, tutorialSurfaceEnabled]);
-
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
@@ -210,7 +183,6 @@ export default function PieceScreen({ route } = {}) {
           onOpenPieceLibrary={tutorial.openPieceLibrary}
           onOpenEmotionLog={openEmotionLog}
           onOpenPieceCreate={openPieceCreateFromHome}
-          onOpenRecommend={openRecommend}
           onOpenReactionHistory={openReactionHistory}
         />
       </View>
@@ -264,18 +236,6 @@ export default function PieceScreen({ route } = {}) {
         tutorialModalOverlayConfig={tutorial.tutorialModalOverlayConfig}
         tutorialModalTargetRect={tutorial.tutorialModalTargetRect}
         setTutorialModalOverlayMetrics={tutorial.setTutorialModalOverlayMetrics}
-      />
-
-      <PieceRecommendModal
-        visible={recommend.recoModalVisible}
-        styles={styles}
-        colors={colors}
-        users={recommend.recoUsers}
-        loading={recommend.recoUsersLoading}
-        error={recommend.recoUsersError}
-        onClose={() => recommend.setRecoModalVisible(false)}
-        onRefresh={recommend.loadRecommendUsers}
-        onOpenAccount={recommend.openAccount}
       />
     </View>
   );
@@ -418,7 +378,7 @@ function createStyles(COLORS, ui) {
       textAlign: 'center',
     },
 
-    // Recommend
+    // Tutorial introduction
     recoCard: {
       borderRadius: 24,
       borderWidth: 1,
@@ -442,89 +402,9 @@ function createStyles(COLORS, ui) {
     createUnreadBadge: {
       marginLeft: 8,
     },
-    recoRefreshBtn: {
-      width: 44,
-      height: 44,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      alignItems: "center",
-      justifyContent: "center",
-      flexShrink: 0,
-    },
-    recoToggleRow: {
-      flexDirection: "row",
-      alignItems: 'stretch',
-      marginTop: 4,
-      marginBottom: 12,
-      columnGap: 8,
-    },
-    recoTogglePill: {
-      flex: 1,
-      marginRight: 0,
-      paddingVertical: 10,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: 44,
-      paddingHorizontal: 12,
-    },
-    recoTogglePillActive: {
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.SURFACE_TONAL,
-    },
-    recoToggleText: {
-      color: COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-      textAlign: 'center',
-    },
-    recoToggleTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
-    },
     recoSectionLabel: {
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
-    recoPillScroll: { marginTop: 8 },
-    recoPill: {
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      maxWidth: 320,
-      minHeight: 44,
-    },
-    recoPillActive: {
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.SURFACE_TONAL,
-    },
-    recoPillText: {
-      color: COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-    },
-    recoPillTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
-    },
-    recoEmptyText: {
-      marginTop: 8,
-      color: COLORS.TEXT_SUBTLE,
-    },
-    recoLoadingRow: {
-      flexDirection: "row",
-      alignItems: 'flex-start',
-      marginTop: 8,
-    },
-    recoLoadingText: {
-      marginLeft: 10,
-      color: COLORS.TEXT_SUBTLE,
-      flexShrink: 1,
-    },
-
     // Home
     qnaIntroCard: {
       borderRadius: 24,
@@ -704,29 +584,6 @@ function createStyles(COLORS, ui) {
       paddingBottom: 16,
     },
 
-    // Recommend users list rows
-    recoUserRow: {
-      flexDirection: "row",
-      alignItems: 'center',
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 16,
-      paddingVertical: 16,
-      marginBottom: 8,
-      minHeight: 64,
-    },
-    recoUserName: {
-      color: COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-    },
-    recoUserSub: {
-      marginTop: 2,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
-      flexShrink: 1,
-    },
-
     // Follow picker list rows
     listRow: {
       flexDirection: "row",
@@ -811,6 +668,6 @@ function createStyles(COLORS, ui) {
       color: COLORS.ERROR,
       textAlign: "center",
     },
-  }, ui, {"panelTitle":"screenTitle","globalSummaryLabel":"button","globalSummaryText":"description","homeActionCardTitle":"sectionTitle","homeActionCardDescription":"description","homeActionButtonText":"button","recoTitle":"sectionTitle","recoSummaryText":"description","recoToggleText":"button","recoToggleTextActive":"button","recoSectionLabel":"sectionTitle","recoPillText":"button","recoPillTextActive":"button","recoEmptyText":"description","recoLoadingText":"description","qnaIntroTitle":"sectionTitle","qnaIntroText":"description","targetLabel":"button","targetName":"button","goldButtonText":"button","neutralButtonText":"button","historyCardTitle":"sectionTitle","historyEntryText":"button","modalTitle":"modalTitle","modalLoadingText":"description","modalEmptyText":"description","recoUserName":"button","recoUserSub":"meta","rowTitle":"button","activeBadgeText":"meta","tutorialQuestionLabel":"button","tutorialTextArea":"body","tutorialHelperText":"description","modeErrorText":"description"}));
+  }, ui, {"panelTitle":"screenTitle","globalSummaryLabel":"button","globalSummaryText":"description","homeActionCardTitle":"sectionTitle","homeActionCardDescription":"description","homeActionButtonText":"button","recoTitle":"sectionTitle","recoSummaryText":"description","recoSectionLabel":"sectionTitle","qnaIntroTitle":"sectionTitle","qnaIntroText":"description","targetLabel":"button","targetName":"button","goldButtonText":"button","neutralButtonText":"button","historyCardTitle":"sectionTitle","historyEntryText":"button","modalTitle":"modalTitle","modalLoadingText":"description","modalEmptyText":"description","rowTitle":"button","activeBadgeText":"meta","tutorialQuestionLabel":"button","tutorialTextArea":"body","tutorialHelperText":"description","modeErrorText":"description"}));
 }
 

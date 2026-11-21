@@ -353,6 +353,14 @@ test('MainTabs never labels an obsolete feed prefetch as the new owner', async t
   assert.ok(!JSON.stringify(h.events).includes('obsolete-A-feed'));
 });
 
+test('MainTabs prefetches existing Piece data without requesting recommended users', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js');
+  await h.fireTimers();
+  await h.flush();
+  assert.ok(h.events.some(([kind, scope, key]) => kind === 'prefetch' && scope === 'Piece' && key.startsWith('qnaList:')));
+  assert.ok(!h.calls.some(call => call.path === '/nexus/recommend/users'));
+});
+
 test('MainTabs ignores the old startup response after switching owners', async t => {
   const h = await harness(t, 'navigation/MainTabs.js', 'following', { holdRead: call => call.path === '/app/startup' });
   const old = h.calls.findLast(call => call.path === '/app/startup' && call.resolve);

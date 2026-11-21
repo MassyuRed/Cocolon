@@ -824,47 +824,20 @@ export default function MainTabs() {
     if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const userId = ownerRequest.owner;
-
-      try {
-        const fresh = getPrefetchEntryFresh?.("Piece", "recoUsers", PREFETCH_MAX_AGE_MS);
-        const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
-        if (!isFresh) {
-          const url = `${API_BASE_URL}${PIECE_WIRE.routes.recommendUsers}?limit=20`;
-          const res = await apiFetch(url, { method: "GET", ...ownerRequest.options });
-          const json = await res.json().catch(() => null);
-          if (!isOwnerCurrent(ownerRequest)) return;
-          if (res.ok) {
-            const users = Array.isArray(json?.users)
-              ? json.users
-              : Array.isArray(json?.items)
-              ? json.items
-              : Array.isArray(json?.rows)
-              ? json.rows
-              : Array.isArray(json)
-              ? json
-              : [];
-            setPrefetch("Piece", "recoUsers", { userId, items: users });
-          }
-        }
-      } catch {}
-
-      try {
+      const cacheKey = `qnaList:${userId}:newest`;
+      const fresh = getPrefetchEntryFresh?.("Piece", cacheKey, PREFETCH_MAX_AGE_MS);
+      const isFresh = !!fresh?.value?.targetUserId && String(fresh.value.targetUserId) === String(userId);
+      if (!isFresh) {
+        const json = await getNexusPiecesAsQnaList({
+          targetUserId: userId,
+          mode: "newest",
+          limit: 100,
+        }, ownerRequest.options);
         if (!isOwnerCurrent(ownerRequest)) return;
-        const cacheKey = `qnaList:${userId}:newest`;
-        const fresh = getPrefetchEntryFresh?.("Piece", cacheKey, PREFETCH_MAX_AGE_MS);
-        const isFresh = !!fresh?.value?.targetUserId && String(fresh.value.targetUserId) === String(userId);
-        if (!isFresh) {
-          const json = await getNexusPiecesAsQnaList({
-            targetUserId: userId,
-            mode: "newest",
-            limit: 100,
-          }, ownerRequest.options);
-          if (!isOwnerCurrent(ownerRequest)) return;
-          const items = Array.isArray(json?.items) ? json.items : [];
-          const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
-          setPrefetch("Piece", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
-        }
-      } catch {}
+        const items = Array.isArray(json?.items) ? json.items : [];
+        const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
+        setPrefetch("Piece", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
+      }
     } catch {}
   }, [getPrefetchEntryFresh, setPrefetch, ownerRequest, isOwnerCurrent]);
 
