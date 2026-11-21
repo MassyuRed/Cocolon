@@ -1435,12 +1435,12 @@ function createStyles(COLORS, ui) {
       marginBottom: 16,
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
       justifyContent: 'center',
     },
         ownerHistoryButtonText: {
-      color: COLORS.ON_SURFACE_TONAL,
+      color: COLORS.ACCENT_TEXT,
     },
         todayOverallEmotionSummary: {
       borderTopWidth: 1,
@@ -1522,7 +1522,7 @@ function createStyles(COLORS, ui) {
     },
         tabLabelWrapActive: {
       borderBottomColor: 'transparent',
-      backgroundColor: COLORS.SURFACE_TONAL,
+      backgroundColor: COLORS.GOLD_BUTTON,
     },
         tabLabelText: {
       color: COLORS.TEXT_ON_LIGHT,
@@ -1530,7 +1530,7 @@ function createStyles(COLORS, ui) {
       textAlign: 'center',
     },
         tabLabelTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
+      color: COLORS.ACCENT_TEXT,
     },
         tabUnreadBadge: {
       marginLeft: 0,
@@ -1590,14 +1590,14 @@ function createStyles(COLORS, ui) {
       marginLeft: 0,
     },
         pieceSortButtonActive: {
-      backgroundColor: COLORS.SURFACE_TONAL,
-      borderColor: COLORS.ON_SURFACE_TONAL,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
     },
         pieceSortButtonText: {
       color: COLORS.TEXT_ON_LIGHT,
     },
         pieceSortButtonTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
+      color: COLORS.ACCENT_TEXT,
     },
         loader: {
           marginTop: 24,
@@ -1732,14 +1732,14 @@ function createStyles(COLORS, ui) {
       marginLeft: 0,
     },
         historySortButtonActive: {
-      backgroundColor: COLORS.SURFACE_TONAL,
-      borderColor: COLORS.ON_SURFACE_TONAL,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
     },
         historySortButtonText: {
       color: COLORS.TEXT_ON_LIGHT,
     },
         historySortButtonTextActive: {
-      color: COLORS.ON_SURFACE_TONAL,
+      color: COLORS.ACCENT_TEXT,
     },
         pickerBackdrop: {
       flex: 1,

@@ -18,6 +18,7 @@ export default function CocolonButton({
   onPress,
   disabled = false,
   loading = false,
+  keepPrimaryColorsWhenDisabled = false,
   style,
   textStyle,
   accessibilityLabel,
@@ -96,14 +97,16 @@ export default function CocolonButton({
 
   const v = String(variant || "primary").toLowerCase();
   const isPrimary = v === "primary";
+  const useDisabledPalette = isDisabled && !(isPrimary && keepPrimaryColorsWhenDisabled);
+  const foreground = useDisabledPalette ? colors.TEXT_SUBTLE : isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT;
 
   const containerStyle = [
     styles.base,
     {
       maxWidth: ui.layout.maxButtonWidth,
       borderRadius: ui.radius.button,
-      borderColor: isDisabled ? colors.CARD_BORDER : isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
-      backgroundColor: isDisabled ? colors.FIELD_BG : isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
+      borderColor: useDisabledPalette ? colors.CARD_BORDER : isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
+      backgroundColor: useDisabledPalette ? colors.FIELD_BG : isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
     },
     isDisabled ? shadowDisabled : pressed ? shadowPressed : shadowFloat,
     style,
@@ -114,7 +117,7 @@ export default function CocolonButton({
     styles.label,
     {
       fontSize: ui.font.button,
-      color: isDisabled ? colors.TEXT_SUBTLE : isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT,
+      color: foreground,
       ...ui.typography.button,
     },
     textStyle,
@@ -134,7 +137,7 @@ export default function CocolonButton({
     >
       <Animated.View style={containerStyle}>
         {loading ? (
-          <ActivityIndicator color={isDisabled ? colors.TEXT_SUBTLE : isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT} />
+          <ActivityIndicator color={foreground} />
         ) : typeof label === "string" || typeof label === "number" ? (
           <Text style={labelStyle}>
             {label}

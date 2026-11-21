@@ -1121,7 +1121,11 @@ function nexusEntryHarness(options = {}) {
   const control = { owner: OWNER, enabled: true, tutorial: false, initializing: false, focused: true, ...options };
   const hooks = [], effects = [], routes = [], legacyCalls = [], modules = new Map();
   let cursor = 0, dirty = false, tree;
-  const noop = () => {}, colors = {}, tutorialPieces = [];
+  const noop = () => {}, tutorialPieces = [];
+  const colors = {
+    GOLD_BUTTON: '#5A1020', GOLD_BUTTON_BORDER: '#430814', ACCENT_TEXT: '#FFFFFF',
+    FIELD_BG: '#F9F9F9', TEXT_ON_LIGHT: '#111827', CARD_BORDER: '#D7D2C9',
+  };
   const same = (a, b) => a && b && a.length === b.length && a.every((v, i) => Object.is(v, b[i]));
   const React = {
     createElement: (type, props, ...children) => ({ type, props: props || {}, children }),
@@ -1207,9 +1211,10 @@ function nexusEntryHarness(options = {}) {
   }
   const find = type => nodes(tree).find(n => n.type === type);
   render();
-  return { control, routes, legacyCalls, render, find,
+  return { control, routes, legacyCalls, render, find, colors,
+    styles: () => find(Header).props.styles,
     header: () => Header(find(Header).props),
-    entry: () => nodes(Header(find(Header).props)).find(n => n.props.accessibilityLabel === '自分のPieceを開く'),
+    entry: () => nodes(Header(find(Header).props)).find(n => n.props.accessibilityLabel === '自分のピースを開く'),
     tabBar: () => TabBar(find(TabBar).props),
     tab: value => { find(TabBar).props.setActiveTab(value); render(); },
     dispose: () => { for (const hook of hooks) hook?.cleanup?.(); },
@@ -1244,6 +1249,18 @@ test('Piece displays only the three available tabs in one equally spaced row', (
     assert.ok(n.find(section));
     const selected = nodes(n.tabBar()).filter(node => node.props.accessibilityRole === 'tab' && node.props.accessibilityState.selected);
     assert.deepEqual(selected.map(button => texts(button)[0]), [texts(tabButtons[index])[0]]);
+    assert.equal(selected[0].children[0].props.style[1].backgroundColor, n.colors.GOLD_BUTTON);
+    assert.equal(nodes(selected[0]).find(node => node.type === 'Text').props.style[1].color, n.colors.ACCENT_TEXT);
+    for (const button of nodes(n.tabBar()).filter(node => node.props.accessibilityRole === 'tab' && !node.props.accessibilityState.selected)) {
+      assert.equal(button.children[0].props.style[1], false);
+      assert.equal(nodes(button).find(node => node.type === 'Text').props.style[0].color, n.colors.TEXT_ON_LIGHT);
+    }
+  }
+  const styles = n.styles();
+  for (const key of ['pieceSortButton', 'historySortButton']) {
+    assert.equal(styles[key].backgroundColor, n.colors.FIELD_BG);
+    assert.equal(styles[`${key}Active`].backgroundColor, n.colors.GOLD_BUTTON);
+    assert.equal(styles[`${key}TextActive`].color, n.colors.ACCENT_TEXT);
   }
   assert.ok(!n.legacyCalls.some(([name]) => name === 'getNexusRecommendUsers'));
   n.dispose();
@@ -1251,7 +1268,10 @@ test('Piece displays only the three available tabs in one equally spaced row', (
 
 test('ordinary Piece header opens owner history and its existing dedicated read without a saved target', async () => {
   const n = nexusEntryHarness();
-  assert.ok(n.entry()); assert.ok(texts({ children: [n.entry()] }).includes('自分のPieceを開く'));
+  const entry = n.entry();
+  assert.ok(entry); assert.ok(texts({ children: [entry] }).includes('自分のピースを開く'));
+  assert.equal(entry.props.style.backgroundColor, n.colors.GOLD_BUTTON);
+  assert.equal(nodes(entry).find(node => node.type === 'Text').props.style.color, n.colors.ACCENT_TEXT);
   n.entry().props.onPress();
   assert.deepEqual(n.routes, [['PieceOwnerHistory', { savedPiece: null }]]);
   const h = harness({ send: ownerSend }), host = ownerHost(h, n.routes[0][1].savedPiece);

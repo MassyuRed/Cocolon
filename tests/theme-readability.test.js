@@ -2,6 +2,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
+const vm = require('node:vm');
+const ts = require('typescript');
 
 const ROOT = path.resolve(__dirname, '..');
 const read = (relativePath) => fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
@@ -146,11 +148,56 @@ test('runtime blocking screen keeps retry and busy/disabled wiring through the s
   assert.match(source, /onPress=\{onRetry\}/);
   assert.match(source, /disabled=\{retrying\}/);
   assert.match(source, /loading=\{retrying\}/);
-  const button = read('components/CocolonButton.js');
-  assert.match(button, /backgroundColor: isDisabled \? colors\.FIELD_BG : isPrimary \? colors\.GOLD_BUTTON/);
-  assert.match(button, /color: isDisabled \? colors\.TEXT_SUBTLE : isPrimary \? colors\.ACCENT_TEXT/);
-  assert.match(button, /<ActivityIndicator color=\{isDisabled \? colors\.TEXT_SUBTLE : isPrimary \? colors\.ACCENT_TEXT/);
-  assert.match(button, /const isDisabled = !!disabled \|\| !!loading/);
+});
+
+test('the opt-in primary button retains readable colors without making disabled or busy controls interactive', () => {
+  const tokenSource = read('ui/uiTokens.js').replace(/export\s+(const|function)\s+/g, '$1 ');
+  const makeUiTokens = Function(tokenSource + '\nreturn makeUiTokens;')();
+  const source = ts.transpileModule(read('components/CocolonButton.js'), {
+    fileName: 'CocolonButton.tsx',
+    compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React },
+  }).outputText;
+  const React = {
+    createElement: (type, props, ...children) => ({ type, props, children }),
+    useMemo: fn => fn(), useRef: current => ({ current }), useCallback: fn => fn,
+    useState: initial => [initial, () => {}], useEffect: fn => fn(),
+  };
+  const native = {
+    Pressable: 'Pressable', Text: 'Text', ActivityIndicator: 'Spinner',
+    StyleSheet: { create: styles => styles },
+    Animated: { Value: class {}, View: 'AnimatedView', timing: () => ({ start() {} }) },
+  };
+  const cases = [
+    [{}, true],
+    [{ disabled: true }, false],
+    [{ loading: true }, false],
+    [{ disabled: true, keepPrimaryColorsWhenDisabled: true }, true],
+    [{ loading: true, keepPrimaryColorsWhenDisabled: true }, true],
+    [{ disabled: true, variant: 'secondary', keepPrimaryColorsWhenDisabled: true }, false],
+  ];
+  for (const [themeName, colors] of Object.entries(palettes)) {
+    const module = { exports: {} };
+    const dependencies = {
+      react: { default: React, ...React }, 'react-native': native,
+      '../theme/ThemeContext': { useTheme: () => ({ themeName, colors }) },
+      '../ui/uiTokens': { makeUiTokens },
+    };
+    vm.runInNewContext(source, { exports: module.exports, module, require: name => dependencies[name] });
+    for (const [props, primary] of cases) {
+      const node = module.exports.default({ ...props, title: 'この内容でOK' });
+      const [container] = node.children;
+      const [content] = container.children;
+      const baseStyle = Object.assign({}, ...container.props.style);
+      assert.equal(baseStyle.backgroundColor, primary ? colors.GOLD_BUTTON : colors.FIELD_BG);
+      assert.equal(baseStyle.borderColor, primary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER);
+      const foreground = props.loading ? content.props.color : Object.assign({}, ...content.props.style).color;
+      assert.equal(foreground, primary ? colors.ACCENT_TEXT : colors.TEXT_SUBTLE);
+      assertReadable(foreground, baseStyle.backgroundColor, themeName);
+      assert.equal(node.props.disabled, !!props.disabled || !!props.loading);
+      assert.equal(node.props.accessibilityState.disabled, node.props.disabled);
+      assert.equal(node.props.accessibilityState.busy, !!props.loading);
+    }
+  }
 });
 
 test('explicit typography roles replace weight and leading without altering artwork or unmapped styles', () => {

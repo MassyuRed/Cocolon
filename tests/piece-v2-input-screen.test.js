@@ -713,8 +713,14 @@ function actionButtons(h) {
 
 for (const enabled of [false, true]) {
   test(`normal input has only the submit action and no old modal with Piece v2 ${enabled ? 'ON' : 'OFF'}`, () => {
-    const h = harness({ enabled }); h.fill();
-    assert.deepEqual(actionButtons(h).map(n => n.props.accessibilityLabel), ['この内容でOK']);
+    const h = harness({ enabled });
+    const [emptySubmit] = actionButtons(h);
+    assert.equal(emptySubmit.props.disabled, true);
+    assert.equal(emptySubmit.props.keepPrimaryColorsWhenDisabled, true);
+    h.fill();
+    const buttons = actionButtons(h);
+    assert.deepEqual(buttons.map(n => n.props.accessibilityLabel), ['この内容でOK']);
+    assert.equal(buttons[0].props.disabled, false);
     assert.equal(h.find('InputPiecePreviewController'), undefined); h.dispose();
   });
   test(`normal input cannot call raw Piece preview even by a retained callback with v2 ${enabled ? 'ON' : 'OFF'}`, async () => {

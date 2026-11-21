@@ -68,7 +68,7 @@ export default function PieceHistoryMenuScreen({ navigation }) {
         description="保存したPieceの本文と公開範囲を確認します"
         onPress={() => navigation?.navigate?.("PieceOwnerHistory", { savedPiece: null })}
         chevron="forward"
-        accessibilityLabel="自分のPieceを開く"
+        accessibilityLabel="自分のピースを開く"
       /></View> : null}
     </PieceMenuScroll>
   );

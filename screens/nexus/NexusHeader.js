@@ -55,9 +55,9 @@ export default function NexusHeader({
         <CocolonPressable
           style={styles.ownerHistoryButton}
           onPress={handleOpenOwnerHistory}
-          accessibilityLabel="自分のPieceを開く"
+          accessibilityLabel="自分のピースを開く"
         >
-          <Text style={styles.ownerHistoryButtonText}>自分のPieceを開く</Text>
+          <Text style={styles.ownerHistoryButtonText}>自分のピースを開く</Text>
         </CocolonPressable>
       ) : null}
     </View>

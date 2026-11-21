@@ -98,7 +98,7 @@ test('the Piece heading shows three intro lines without hiding its existing acti
   });
   t.after(() => Renderer.act(() => root.unmount()));
   assertIntroText(root, ['ひとりひとりの記録から', 'ことばを、分け合う。', '言葉や気持ちにふれて、共鳴を届ける。']);
-  for (const action of ['自分のフォローリストを開く', 'ピースを再読み込みする', '自分のPieceを開く']) {
+  for (const action of ['自分のフォローリストを開く', 'ピースを再読み込みする', '自分のピースを開く']) {
     const button = root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === action);
     assert.ok(button, action);
     button.props.onPress();

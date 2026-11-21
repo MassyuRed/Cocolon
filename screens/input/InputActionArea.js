@@ -118,6 +118,7 @@ export default function InputActionArea({
           onPress={handleOk}
           disabled={!canSubmit}
           loading={submitting}
+          keepPrimaryColorsWhenDisabled
           accessibilityLabel="この内容でOK"
         >
           この内容でOK
