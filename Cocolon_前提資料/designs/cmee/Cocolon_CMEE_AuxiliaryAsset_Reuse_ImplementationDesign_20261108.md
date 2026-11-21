@@ -8025,11 +8025,13 @@ Mashが契約を確認して同意した後、同じアプリコミットで [�
 
 ### 9.206.3 4BとCMEEの分担、既存技術の使い方
 
+表は設計時の分担と参照した既存技術を示す。開発版が直接呼ぶ処理と、今回の材料取得の範囲は§9.206.5に記録する。
+
 | 順序 | 処理と確定する内容 | 活用する既存の実装 |
 |---|---|---|
 | 1 材料を束縛 | APIが同じ本人の材料を取得し、原文・回答ごとのID、版、欄、引用位置を固定する。既存のマップ材料と同様に、本人の訂正・撤回の有効範囲を決めてから4Bへ渡す。 | CMEEの `source_kernel.py` の原文凍結・参照照合、`emlis_thread_source.py` の根拠resolver、`astor_material_snapshots.py` の保存済みsource確認。 §§9.57・9.72・9.204。 |
 | 2 出題計画と文面の候補 | 同じ4B提供で、発行候補または見送りを返す。発行候補は「何について、何が既知で、何がまだ不明で、その答えで何が分かるか」と、自然な一問を別欄に持つ。記録入口では本人原文の参照、テーマ入口では選択したテーマを持つ。 | `emlis_question.py` の既知の本人説明を検出してENDにする考え方、根拠付き確認対象と発行IDの分離、有限なモデル経路での `NOT_STATED` の根拠束縛。`natural_reply_provider_settings` で既存4Bへ接続。 |
-| 3 計画と自然文を独立に照合 | CMEEが原文・回答の引用位置を再読し、主体、場面、時点、否定、留保、条件、テーマ、問う観点を確認する。問いが前提として置く各内容が根拠と結び付き、一文を読み戻して計画と同じことを尋ねていることを確認する。既知の答えを言い換えた問い、テーマ外、答えても確認点が増えない問い、根拠不足は発行しない。 | `emlis_question.py` の `question_candidate`・`validate_question_binding` が行う同じ資料での根拠・対象の独立照合を適用する。既存の一入力向け文型・最大3問・thread制御はEmlisが所有し、DeepInsightには共通の判定部と根拠の再確認を適用する。 |
+| 3 計画と自然文を独立に照合 | CMEEが原文・回答の引用位置を再読し、主体、場面、時点、否定、留保、条件、テーマ、問う観点を確認する。問いが前提として置く各内容が根拠と結び付き、一文を読み戻して計画と同じことを尋ねていることを確認する。既知の答えを言い換えた問い、テーマ外、答えても確認点が増えない問い、根拠不足は発行しない。 | `emlis_question.py` の `question_candidate`・`validate_question_binding` を、同じ資料で根拠と対象を照合する設計の参照元とする。DeepInsightは既存の根拠台帳・引用位置の解決を直接使い、複数資料とテーマに対応する出題判定は `deep_insight_question.py` が受け持つ。 |
 | 4 発行・本人回答を保存 | CMEEが根拠から確認対象IDを導出する。SQLが同じ材料版、本人、日次枠、未回答を再確認し、同じ発行IDの保存・再読を返す。回答時はその発行IDと本人を照合し、同じ回答の再送は同じ保存結果を返す。 | `emlis_thread_service.py` の実発行IDと回答の対応、`deep_insight_issue`・`deep_insight_answer` の既存原子処理と本人確認。 |
 | 5 次の問いとマップ | 次回出題では質問を文脈、回答を本人根拠として取得する。マップには `USER_DEEP_INSIGHT_ANSWER` を根拠として渡し、確定した原文だけを引用候補にする。回答の保存後は既存のASTOR更新と同じ保存マップの読み出しを使う。 | `analysis_cumulative_service.py`、`20261121133000_analysis_deep_insight_answer_handoff.sql`、§9.204の既存マップ通知式更新・最新・詳細・根拠の再読。 |
 
@@ -8060,9 +8062,13 @@ APIの作業版は [`a464167f`](https://github.com/MassyuRed/mashos-api/commit/a
 
 発行SQLは本人・プラン・JST日次枠・未回答・資料の版を再確認し、参照元ID・版・欄・表示引用の位置とハッシュを発行IDに結び付けて非公開で保存する。同一の本人・入口・日・資料の版による同時生成は既存の生成ロックで抑え、同じ資料でモデルが明示的に見送った場合だけ短時間再利用する。本人回答は発行IDに対応付け、次の問いと既存のマップ更新キューで再利用する。
 
+開発版が直接共用するのは、`natural_reply_provider_settings`、`build_evidence_ledger` と `build_evidence_span_resolver`、`build_emlis_safety_triage_decision`、`emlis_thread_source.identity`、既存の生成ロックとマップ更新キューである。§9.206.3の `source_kernel.py`、`astor_material_snapshots.py`、Emlisの問い候補・適合判定は設計時の参照元。発行対象の選定・一問の文章化・独立した読み直しはDeepInsightの専用実装で行う。
+
 補助経路のEmlis回答は、元の記録・版・発行した問いへの対応が立証できた単一回答を渡す。訂正や複数回答の有効な意味を再構成する処理は開発版の範囲外で、その回答本文を根拠から除く。Emlisの有効な保留中の問いは、本人回答や出来事の証拠と区別して使う。マップは現在の材料に一致するものを参照し、引用の出典には使わない。 [出題と判定](https://github.com/MassyuRed/mashos-api/blob/a464167f9df45d42bd06a542d262e9b6664ce9f3/ai/services/ai_inference/cocolon_meaning_experience_engine/deep_insight_question.py) · [発行と材料のSQL](https://github.com/MassyuRed/mashos-api/blob/a464167f9df45d42bd06a542d262e9b6664ce9f3/supabase/migrations/20261121134000_deep_insight_grounded_questions.sql)
 
-新しいRunpodのRTX A4500で、既存の自然応答用 `Qwen/Qwen3.5-4B` の固定版を隔離起動した。架空材料を使い、採否・実出力・私有の根拠情報を確認した。
+新しいRunpodのRTX A4500で、通常のEmlis・Pieceと同じ固定版 `Qwen/Qwen3.5-4B` の11ファイルを照合し、B61同梱の推論ソースと同一の自然応答処理をPod内の隔離経路で実行した。通常の自然応答と同じく分析用LoRAは使用しない。架空材料を使い、採否・実出力・私有の根拠情報を確認した。
+
+§9.205の通常GPU構成一式の復元は未実施。分析IF用120uとマップv24用FIT36は手元のB61復元ZIP内で照合済みで、新GPUへの配置・起動、通常の公開ゲートウェイとRenderからの疎通は残る。既存の復元スクリプトはRTX 4000 AdaとCUDA 12.9を前提とする。RTX A4500の現在のイメージでは、依存関係とCUDAカーネルの再検証が必要。
 
 | 材料 | 実4Bからの結果 |
 |---|---|
