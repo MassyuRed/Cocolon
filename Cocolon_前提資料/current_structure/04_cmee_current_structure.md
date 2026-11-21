@@ -1,6 +1,6 @@
 ### 11/21 — わたしを知る問いの候補検査
 
-開発差分では、既存の4B提供で一問の候補を生成し、`cocolon_meaning_experience_engine/deep_insight_question.py` が記録の引用との一致、候補の形式、既出の問いとの重複を検査する。わたしマップとEmlisで確認した点は次の問いを選ぶ材料にし、本人が書いた原文と回答を根拠に扱う。`api_deep_insight.py` が本人の発行・回答・再読を接続する。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)
+開発差分では、既存の4B提供で一問の候補を生成し、`cocolon_meaning_experience_engine/deep_insight_question.py` が記録の引用との一致、候補の形式、既出の問いとの重複を検査する。わたしマップとEmlisで確認した点は次の問いを選ぶ材料にし、本人が書いた原文と回答を根拠に扱う。`api_deep_insight.py` が本人の発行・回答・再読を接続する。 通知が指すふりかえりの問いは、直近履歴にない場合に `GET /deep-insight/questions/{question_id}` から取得する。Supabaseの `deep_insight_question_by_id` が本人IDと発行IDを照合し、`features/home/useDeepInsight.js` が同じ問い・回答を画面に渡す。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)
 
 ### 11/20　三中核が参照する4Bと保存経路
 
