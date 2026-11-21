@@ -364,6 +364,16 @@ Mashは、**既存の「今日の問い」の構造を活用して改修する�
 
 「わたしを知る問い」、こころグラフ変更は今回決めた方針として扱う。Premiumの提供を含む初版の具体範囲、各変更を入れる版、公開日は別途の判断事項。補助経路活用の全体完了と提出候補の成立は、[前回の決定](Cocolon_Weekly_Review_20261114.md#submission-candidate-deadline-20261206)どおり別々に判断する。
 
+<a id="release-main-alignment-20261121"></a>
+### 9.1 公開候補を固定するときの main 統合
+
+- [ ] **担当は華恋。公開候補を固定するときに、アプリとAPIで公開に使う版をそれぞれ `main` に揃える。**
+  1. 初版に採用する変更と、対応するアプリ・APIの候補コミットを確認する。
+  2. APIの [PR #3](https://github.com/MassyuRed/mashos-api/pull/3) と `main` の競合を解消する。`main` 側の [OpenAPI契約テストの変更](https://github.com/MassyuRed/mashos-api/commit/2d2f06dad0d373373cdac63e10734385eefb53ca) も引き継ぎ、統合結果を検証する。
+  3. アプリの [PR #30](https://github.com/MassyuRed/Cocolon/pull/30) とAPIの採用変更をそれぞれ `main` に統合し、アプリのビルド元とRenderのAPI・ワーカーの配備元が、確認した候補の組み合わせに一致することを照合する。
+
+このタスクは公開候補を固定するときに実施する。作業中は既存の作業ブランチからビルド対象を選び、Renderでは確認したAPIコミットを指定する。
+
 <a id="app-current-state-20261121"></a>
 ## 10. 議題2 — アプリ全体の現在地（11/21）
 
