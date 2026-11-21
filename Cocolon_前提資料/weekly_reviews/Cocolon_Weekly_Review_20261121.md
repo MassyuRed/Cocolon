@@ -508,3 +508,10 @@ Renderの本番API `dep-dc0lkj97lnhs739215pg` は17:47:48 JSTにLive。テーマ
 架空の2記録を実4Bへ渡し、理由が書かれていない記録で発行できた。理由が書かれている対照は見送った。隔離DBのAPIで発行、回答保存、再送、同じIDの履歴を確認。保存した回答を含む実v24のマップは、最新と詳細で同じ版・図・本文を返し、根拠から同じ発行IDの問いと回答を確認した。
 
 最新のAPI検証版は `b7c1d8a8`。ふりかえりの発行修正を残し、テーマは5テーマ各2件で7件が発行前の検査を通過した版を採用候補として保持した。テーマ250件の受入れ、Supabaseの5移行、本番の配備・発行・通知、新規配布は未完。 [実4Bの文と保存再読の記録](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-premium-answer-map-replay-20261121)
+
+<a id="deep-insight-theme-context-history-and-format-20261121"></a>
+### 11.11 テーマ出題の場面・既出問・応答形式を修正（11/21 JST）
+
+表示する場面を初稿から使い、問いの意味と既出問との重複を別々に確認した。同じ判断を聞くと確認した候補は、片方の発行履歴があればもう片方を選ばない。既出本文と一対一で読み直し、「勧めを試すとき」と「約束を守るとき」の負担を区別できることを実4Bで確認した。
+
+各テーマ10件の実4B試験では、候補の自動検査通過が37件から41件に増えた。最新のAPI検証版は `56f73b31`。最初の計20件は通過したが、後半に見送りと意味のずれが残った。5テーマ各50件の受入れ、候補の本番反映と配布は未完。 [実出力の比較と結果](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-theme-context-and-history-20261121)
