@@ -1,0 +1,25 @@
+{
+  "status": "CPU_PREPARATION_COMPLETE_GPU_NOT_AUTHORIZED",
+  "checks": [
+    "fixed unapproved proposal accepted for CPU only",
+    "unapproved GPU plan rejected",
+    "step scope and initial adapter mutations rejected",
+    "all9 frozen original teachers and hashes unchanged",
+    "fixed interleaved12 order: chair6 once daily3 twice",
+    "existing full teacher causal predecessor/slice captured without model",
+    "sparse11 causal call captured; full helper rejects sparse labels",
+    "Jupyter actual tokenizer report: chair6 full/EOS daily3 eleven-only limits",
+    "CPU-only authorization branch and mixed training dispatch present",
+    "conditional gate accepts existing successful shapes; rejects missing ASK, lost correction, no EOS"
+  ],
+  "case_count": 10,
+  "runner_sha256": "30432c53003bf39ea7eb746a59a5faa69d05db64390d157e3b9029d59f9e37a4",
+  "plan_sha256": "a99bd50d3bf730a33c2846d96ce83e55907451a6dbd3593a5c190506453c114d",
+  "tokenization_sha256": "bdcfcb810542b3532e124c75f544f242854b1d0eb4f7d5b07dedaa14c4644a8a",
+  "model_calls": 0,
+  "optimizer_updates": 0,
+  "causal_call_capture_is_model_execution": false,
+  "real_tokenizer": "Jupyter cached pinned tokenizer; CUDA_VISIBLE_DEVICES empty; no model loaded",
+  "conditional_guard_inputs": "copies of three prior successful stage records; guard exercise only, not new model/SQL cases",
+  "holdout_runner_sha256": "68ba4448032ecdaeeb20f4d5213f399af90b087d24aaa9ad10764b81b952a86d"
+}

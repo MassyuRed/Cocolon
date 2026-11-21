@@ -1,0 +1,123 @@
+{
+  "schema_version": "piece.ar04_native_bitmap_pair_fixture.v1",
+  "source_case_id": "TARGET_VIEWPOINT",
+  "variant": "candidate",
+  "tier": "free",
+  "origin": "Recorded fictional 4B candidate, isolated SQL preview/save/detail replay; not live user data.",
+  "scope": "Same adopted transparent bitmap glyph layer with explicit fixed test rows. This does not run RN/B9 row selection, themed background, save RPC or owner device.",
+  "native_rows": [
+    "僕にとって、静かな場所で",
+    "予定を確かめる時間が重要だ。",
+    "一人で考えることが好きだ。"
+  ],
+  "preview": {
+    "content_payload": {
+      "body_blocks": [
+        "僕にとって、静かな場所で予定を確かめる時間が重要だ。一人で考えることが好きだ。"
+      ],
+      "format_type": "short_essay",
+      "language": "ja",
+      "meaning_contract_version": "piece.content_meaning.v1",
+      "safety_contract_version": "piece.public_safety_transformation.v1",
+      "schema_version": "piece.content_payload.v1",
+      "title": null
+    },
+    "content_payload_hash": "ccf4a9a673cc66f6614995620a8ee9c549e47624f71556085b631ac2a359bb0c",
+    "eligible_formats": [
+      "short_essay"
+    ],
+    "expires_at": "2026-11-09T20:56:44.529+09:00",
+    "format_type": "short_essay",
+    "idempotency_replayed": false,
+    "piece_text": "僕にとって、静かな場所で予定を確かめる時間が重要だ。一人で考えることが好きだ。",
+    "piece_text_hash": "8013d0e7a91e863252b0d154623a53049d0a01d7c568df10790859727fab1388",
+    "preview_id": "35946822-7aef-c2cd-d716-bee58d5c31f4",
+    "preview_revision": 1,
+    "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+    "row_version": 1,
+    "safety_state": "ready",
+    "visibility_scope": "private",
+    "visual_recipe": {
+      "aspect_ratio": "4:5",
+      "branding": {
+        "branding_mark_id": "cocolon_text_mark",
+        "branding_mark_version": 1,
+        "branding_mode": "required_small"
+      },
+      "font_style": {
+        "font_style_id": "system_readable",
+        "font_style_version": 1
+      },
+      "format_type": "short_essay",
+      "language": "ja",
+      "layout_policy_version": "piece.long_text_layout.v1",
+      "template": {
+        "template_id": "essay_frame",
+        "template_version": 1
+      },
+      "theme": {
+        "theme_id": "soft_paper",
+        "theme_version": 1
+      },
+      "visual_catalog_version": "piece.visual_catalog.v1",
+      "visual_recipe_version": "piece.visual_recipe.v1"
+    },
+    "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+  },
+  "detail": {
+    "api_contract_version": "piece.api.v2",
+    "piece_contract_version": "piece.record.v2",
+    "export_contract_version": "piece.export_contract.v1",
+    "render_interface_version": "piece.render_interface.v1",
+    "render_reproducibility_version": "piece.render_reproducibility.v1",
+    "format_type": "short_essay",
+    "piece_text": "僕にとって、静かな場所で予定を確かめる時間が重要だ。一人で考えることが好きだ。",
+    "piece_text_hash": "8013d0e7a91e863252b0d154623a53049d0a01d7c568df10790859727fab1388",
+    "content_payload": {
+      "body_blocks": [
+        "僕にとって、静かな場所で予定を確かめる時間が重要だ。一人で考えることが好きだ。"
+      ],
+      "format_type": "short_essay",
+      "language": "ja",
+      "meaning_contract_version": "piece.content_meaning.v1",
+      "safety_contract_version": "piece.public_safety_transformation.v1",
+      "schema_version": "piece.content_payload.v1",
+      "title": null
+    },
+    "content_payload_hash": "ccf4a9a673cc66f6614995620a8ee9c549e47624f71556085b631ac2a359bb0c",
+    "visual_recipe": {
+      "aspect_ratio": "4:5",
+      "branding": {
+        "branding_mark_id": "cocolon_text_mark",
+        "branding_mark_version": 1,
+        "branding_mode": "required_small"
+      },
+      "font_style": {
+        "font_style_id": "system_readable",
+        "font_style_version": 1
+      },
+      "format_type": "short_essay",
+      "language": "ja",
+      "layout_policy_version": "piece.long_text_layout.v1",
+      "template": {
+        "template_id": "essay_frame",
+        "template_version": 1
+      },
+      "theme": {
+        "theme_id": "soft_paper",
+        "theme_version": 1
+      },
+      "visual_catalog_version": "piece.visual_catalog.v1",
+      "visual_recipe_version": "piece.visual_recipe.v1"
+    },
+    "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+    "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+    "piece_id": "35946822-7aef-c2cd-d716-bee58d5c31f4",
+    "public_id": "piece:35946822-7aef-c2cd-d716-bee58d5c31f4",
+    "lifecycle_status": "saved",
+    "visibility_scope": "private",
+    "row_version": 2,
+    "saved_at": "2026-11-09T20:46:44.564+09:00",
+    "content_status": "ready"
+  }
+}

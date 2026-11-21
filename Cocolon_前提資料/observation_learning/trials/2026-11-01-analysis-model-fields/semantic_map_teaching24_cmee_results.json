@@ -1,0 +1,27 @@
+[
+  {
+    "id": "T01_manual10",
+    "result": "analysis_semantic_map_invalid",
+    "finish_reason": "stop"
+  },
+  {
+    "id": "H01_research",
+    "result": "CMEE_FORMAT_PASS_NOT_MEANING_ACCEPTANCE",
+    "finish_reason": "stop"
+  },
+  {
+    "id": "H02_mug",
+    "result": "analysis_semantic_response_unbound",
+    "finish_reason": "length"
+  },
+  {
+    "id": "H03_boundary",
+    "result": "analysis_semantic_map_invalid",
+    "finish_reason": "stop"
+  },
+  {
+    "id": "H04_garden",
+    "result": "analysis_semantic_evidence_unbound",
+    "finish_reason": "stop"
+  }
+]

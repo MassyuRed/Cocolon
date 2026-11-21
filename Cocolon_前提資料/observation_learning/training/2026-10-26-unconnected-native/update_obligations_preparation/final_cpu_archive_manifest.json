@@ -1,0 +1,38 @@
+{
+  "pending_execution_check.json": {
+    "bytes": 1159,
+    "sha256": "8099d137e0694dbf38153d892d660025a541a5ca227db58ac871a6ac807ca12e"
+  },
+  "run_update_probe2.py": {
+    "bytes": 8960,
+    "sha256": "6f59a66434d2e5329cc43ae45bbe1ad117dfea15872b8714c5dddf2087553b9c"
+  },
+  "consume_update_probe2.py": {
+    "bytes": 6957,
+    "sha256": "50f062ad3c6a3de8182c950b1d36a61605ae92bc1f6f261e21dae3c7353efb78"
+  },
+  "probe2.plan.json": {
+    "bytes": 1532,
+    "sha256": "277e7f8e4c946a8c7b2fa0b273b8bcf7b5d54296a814d09895d68fce4a21b74d"
+  },
+  "consumer_cpu_smoke/diagnosis.json": {
+    "bytes": 40290,
+    "sha256": "b8965cadf4273ceaaa90886c22eabf760418070b8a22ce7118d291099c1cabf7"
+  },
+  "logs/cocolon_restore_base.log": {
+    "bytes": 344,
+    "sha256": "11b9bc68044496ea959fe44f979c06f34c1f4e21431be2035793497fb8a0be23"
+  },
+  "logs/cocolon_restore_base.exit": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "logs/cocolon_update_final_cpu.log": {
+    "bytes": 387,
+    "sha256": "98a5a037c2299e9fbc9013520ae3def3db3e9363eb0017cea112b1fb2af60994"
+  },
+  "logs/cocolon_update_final_cpu.exit": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  }
+}

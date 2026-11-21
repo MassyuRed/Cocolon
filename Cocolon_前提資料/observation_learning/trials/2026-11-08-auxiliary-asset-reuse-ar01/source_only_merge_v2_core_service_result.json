@@ -1,0 +1,52 @@
+{
+  "kind": "completed_test_result_record",
+  "tool_session_id": 58366,
+  "same_execution_resumed": true,
+  "new_duplicate_test_runs_after_resume": 0,
+  "test_files": [
+    "ai/tests/test_analysis_semantic_history_core.py",
+    "ai/tests/test_analysis_semantic_history_service.py"
+  ],
+  "command": "timeout 180s env Q2_PGLITE_MODULE=/workspace/scratch/ee70446ad6c2/testdeps/node_modules/@electric-sql/pglite PYTHONPATH=.:ai/services/ai_inference:ai/tests:/workspace/scratch/5518537f4b6a/preparation/pinned-lmfe:/workspace/scratch/de51a43af552/qa_dependencies PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 /workspace/scratch/ee70446ad6c2/testvenv/bin/python -m pytest -q -p pytest_asyncio.plugin -p no:cacheprovider -c /dev/null --rootdir=. --noconftest ai/tests/test_analysis_semantic_history_core.py ai/tests/test_analysis_semantic_history_service.py",
+  "cwd": "/workspace/scratch/5518537f4b6a/api",
+  "exit_code": 0,
+  "passed": 58,
+  "failed": 0,
+  "skipped": 0,
+  "warnings": 1,
+  "duration_seconds": 84.73,
+  "pytest_summary": "58 passed, 1 warning in 84.73s (0:01:24)",
+  "warning_summary": "Existing PydanticDeprecatedSince20 root_validator warning at api_emotion_submit.py:919; pytest_asyncio configuration deprecation appeared before collection.",
+  "core_first_run": {
+    "passed": 30,
+    "duration_seconds": 8.33,
+    "included_again_in_combined_count": true
+  },
+  "leaf_v1_fixed_message_hashes": [
+    "0ed9e6c3dcb9b436f13c4418575dc9237762d1e4edd4f18426b217a975c49b99",
+    "f574cab50cfc085e3978b9eef12b626541309d6ef1b913edaf06c55532241798",
+    "8d11d9426788eaccaea3c70fe68c55483d7f1aaac8eb339d1f4abee880108087",
+    "2068408ed06947b40a94eb169901101a0afe7cc1a4550403ff679c99c8e0ab9a"
+  ],
+  "validation": [
+    "MERGE v2 source-only receipt and flat quote index",
+    "Exact LEAF v1 messages preserved",
+    "No automatic visible unknown append; final maximum four retained",
+    "Original LEAF raw, packet and scoped unknowns retained privately",
+    "Later written confirmation and person stated unknown preserved",
+    "Full and excerpt source boundaries and tamper rejection",
+    "Person map correction cohort and complete explanation",
+    "Existing SQL one commit, current/monthly non-generating reread, exact private evidence preservation"
+  ],
+  "files_sha256": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "42fc2f04421c3a89241a6f940f15845d28439cadb059c5d69afd1af846ac6e56",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "138f54c9c8800e970bae69a81e2a696c45f7515687636daae0e5fa8085512f10",
+    "ai/tests/test_analysis_semantic_history_core.py": "acdce57f0755a6f2d15c5391148c88a8ecdec8f8a9ca959b3411d1cbbcb6e801",
+    "ai/tests/test_analysis_semantic_history_service.py": "df9378d16f8faa7d74473b8b65ba758c1e7de3e1df8a5c4295e1e5d486ecd322"
+  },
+  "diff_check": "PASS",
+  "model_calls": 0,
+  "pod_operations": 0,
+  "github_operations": 0,
+  "controller_edits": 0
+}

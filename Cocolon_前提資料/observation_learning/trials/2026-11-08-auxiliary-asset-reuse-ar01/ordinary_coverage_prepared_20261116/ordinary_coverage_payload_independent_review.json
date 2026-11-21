@@ -1,0 +1,127 @@
+{
+  "state": "PASS_BOUNDED_OFFLINE_SCOPE_REVIEW",
+  "scope": "Independent semantic-risk and authorization-boundary review of final prepared four-file A2/B2 payload; no launch or product-quality approval.",
+  "meaning_quality": "UNPROVED",
+  "authorization_state": "PREPARED_ONLY_REVIEW_DOES_NOT_GRANT_NEW_TRANSFER_OR_EXECUTION",
+  "scope_file_sha256": "d15ad928f6f2eef1356502b96a9228dcd015fed1ccfbdc5a4ca84b96c7eb0c97",
+  "files": [
+    {
+      "name": "semantic_json_parser.ordinary_coverage.py",
+      "bytes": 1450,
+      "sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54",
+      "bytes_and_sha_match": true
+    },
+    {
+      "name": "semantic_reader_ordinary_coverage_once.py",
+      "bytes": 31676,
+      "sha256": "83311b9a7e75d6dc582f6a38c8fbf1669d0f791d5425dbc543e518f391ff4b0c",
+      "bytes_and_sha_match": true
+    },
+    {
+      "name": "full12_sql_ordinary_coverage_once.py",
+      "bytes": 31349,
+      "sha256": "78f615ed93c48de1c2de7d0742352fafa450b646dce5bb57eee307beffcbecde",
+      "bytes_and_sha_match": true
+    },
+    {
+      "name": "full12-sql.pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+      "bytes_and_sha_match": true
+    }
+  ],
+  "total_bytes": 123621,
+  "superseded_unuploaded_payload": {
+    "a2_script_sha256": "6a940681a4e2943aabfa5ccea4d735f4551dbc25a56694502235da29f485972c",
+    "total_bytes": 123313,
+    "status": "SUPERSEDED_BEFORE_UPLOAD"
+  },
+  "blockers_found_in_reviewed_scope": [],
+  "prior_a1_facts": {
+    "actual_sha256": "8d01fcbe28f3e7da2db395218c238ffb4a4dc2dbc3ad3800790bb5cfa7f259ba",
+    "new_model_calls": 2,
+    "structural_results": [
+      "GENERATED/stop",
+      "NOT_GENERATED/length"
+    ],
+    "provider_restored": true,
+    "restored_pid": 127974,
+    "meaning_adequate": false,
+    "conditional_b1_eligible": false,
+    "basis": "Full A1 result is pinned as a truthful failed predecessor. A2 is a distinct new one-shot root with an additional parser insertion and new finite timing scope, not rerunning consumed A1."
+  },
+  "parser_change": {
+    "full_file_sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54",
+    "predecessor_function_sha256": "b8a25861b097b40d0bc552d876489ce2fb43bf3b77fe740f75cd6fdf7248bf6b",
+    "matches_current_api_function_ast": true,
+    "effect": "Use existing required-record decoder for ordinary maps too, requiring at least one real source quotation from each eligible record before nodes may end.",
+    "source_text_rewritten": false,
+    "source_guard_rebound": false,
+    "weights_changed": false,
+    "node_limit_reduced": false,
+    "public_schema_changed": false,
+    "limits": [
+      "One source quote per record does not prove actor, chronology, completion-state or meaning correctness.",
+      "It does not ensure that both original fields or all independent meanings of a record were used.",
+      "Forced anchors may still be followed by unsupported explanations.",
+      "More than24record source sets preserve the existing explicitly partial behavior."
+    ]
+  },
+  "a2_boundary": {
+    "root": "/workspace/semantic-reader-ordinary-coverage-20261116-once",
+    "expected_original_pid": 127974,
+    "max_posts": 2,
+    "native_seconds": 210,
+    "source_http_seconds": 220,
+    "source_request_seconds": 225,
+    "shared_driver_seconds": 265,
+    "acquisition_seconds": 300,
+    "restore_inclusive_seconds": 420,
+    "same_inputs_messages_and_source_core_as_a1": true,
+    "retry": 0,
+    "training": 0,
+    "sql_saves": 0,
+    "normal_rollout": 0,
+    "immediate_pre_stop_identity_recheck": "Captured start_ticks, exact argv and serving-file hash rechecked after preflight, immediately before original provider stop.",
+    "budget_limit": "265seconds is shared by both conditions. Two worst-case210second calls cannot both fit. Deadline means noncompletion and restoration, not a retry."
+  },
+  "b2_boundary": {
+    "root": "/workspace/full12-sql-ordinary-coverage-20261116-once",
+    "launch_condition": "Both A2 cases must be complete stop/GENERATED and adequate after independent whole-source meaning review before the separate conditional launcher is invoked. Structural success alone is insufficient.",
+    "automatic_semantic_pass_or_mash_acceptance": false,
+    "predecessor": "Exact A2 driver/native/parser/core identities, two200/stop/GENERATED results, and restored PID obtained only from that A2 execution.",
+    "max_posts": 13,
+    "fresh_leaves": 12,
+    "fresh_merge": 1,
+    "old_receipts_reused": 0,
+    "source": "Exact frozen SQL input bytes, original guard/as_of, parent request and twelve leaf messages; no post-acquisition source/guard rewrite.",
+    "sql_input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+    "service_seconds": 840,
+    "driver_seconds": 850,
+    "acquisition_seconds": 900,
+    "restore_inclusive_seconds": 1020,
+    "budget_limit": "840seconds bounds the complete service pipeline, not each stage;13responses are a maximum, not a completion guarantee.",
+    "adoption": "Raw output remains unadopted, pending independent final-source review. This runner performs no SQL commit or normal rollout."
+  },
+  "credential_and_effect_boundary": {
+    "credential_values_in_payload": false,
+    "existing_auth": "Same-Pod loopback authentication only; original environment held in same-Pod RAM for restoring original source/argv/env/cwd. No key values are emitted in result bodies/logs.",
+    "new_dependencies": 0,
+    "new_pod": 0,
+    "new_training": 0,
+    "build_testflight_or_device_operations": 0
+  },
+  "review_effects": {
+    "uploads": 0,
+    "model_calls": 0,
+    "pod_calls": 0,
+    "sql_calls": 0,
+    "source_edits": 0
+  },
+  "not_claimed": [
+    "New payload actual tokenizer measurements before remote preflight.",
+    "A2/B2 model meaning quality.",
+    "Full-history completion, actual-raw SQL save or normal API/worker rollout.",
+    "Formal product acceptance or Mash approval generated by this review."
+  ]
+}

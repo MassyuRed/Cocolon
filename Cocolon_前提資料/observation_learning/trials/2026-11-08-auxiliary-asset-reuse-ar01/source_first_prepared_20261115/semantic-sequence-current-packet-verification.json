@@ -1,0 +1,69 @@
+{
+  "state": "FIXTURE_AND_PIN_ALIGNED_LOCAL",
+  "files": {
+    "ai/tests/fixtures/cmee_current_4b_packet_20261114.json": {
+      "bytes": 150106,
+      "sha256": "65ef96662a9eeffb6b5d7f91d5ab4f556c60d853c62c6eeec59bf8c60d8ed5cc"
+    },
+    "ai/tests/test_cmee_current_4b_packet.py": {
+      "bytes": 30864,
+      "sha256": "b6ba1fdf179f16abf1f4e98a61beeab90c1ad1534d273683d5301614d0568aea"
+    }
+  },
+  "production_unchanged": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+    "ai/tools/serve_emlis_natural_reply.py": "efaeba2b35a7dc750bf31d0f9a211ae12a920005a4d8de625fed82ab7da28710"
+  },
+  "all_six_wires_match_current_builders": true,
+  "all_five_nonmap_cases_exactly_preserved": true,
+  "if_random_prepared_identity_churn_avoided": true,
+  "case_deltas": [
+    {
+      "case_id": "EMLIS-EXPLICIT-CORRECTION",
+      "changed_keys": [],
+      "wire_changed": false,
+      "originals_unchanged": true
+    },
+    {
+      "case_id": "EMLIS-REJECTED-PERSON-FRAME",
+      "changed_keys": [],
+      "wire_changed": false,
+      "originals_unchanged": true
+    },
+    {
+      "case_id": "PIECE-COHERENT-PARAGRAPH",
+      "changed_keys": [],
+      "wire_changed": false,
+      "originals_unchanged": true
+    },
+    {
+      "case_id": "PIECE-COHERENT-TWO-FIELDS",
+      "changed_keys": [],
+      "wire_changed": false,
+      "originals_unchanged": true
+    },
+    {
+      "case_id": "ANALYSIS-MAP-SOURCE-DUTIES",
+      "changed_keys": [
+        "wire_bytes",
+        "wire_json",
+        "wire_sha256"
+      ],
+      "wire_changed": true,
+      "originals_unchanged": true
+    },
+    {
+      "case_id": "ANALYSIS-IF-TWO-CANDIDATES",
+      "changed_keys": [],
+      "wire_changed": false,
+      "originals_unchanged": true
+    }
+  ],
+  "passed": 26,
+  "failed": 0,
+  "skipped": 0,
+  "seconds": 6.34,
+  "new_model_calls": 0,
+  "network_calls": 0,
+  "log": "/workspace/scratch/8262f97b141c/preparation/semantic-sequence-current-packet-tests.log"
+}

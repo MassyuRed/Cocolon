@@ -1,0 +1,69 @@
+{
+  "schema_version": "cocolon.analysis.same-source-replan-independent-review.v1",
+  "state": "PASS_FILE_HASHES_SOURCE_LINEAGE_AND_SYNTHETIC_RECEIPTS_ONLY",
+  "reviewer": "/root/recover_execution/guard_harness_review",
+  "review_scope": "Read existing files and receipts; no SQL, model, remote, training, test runner, or application source changes.",
+  "blockers": [],
+  "pre_acquisition_root": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116",
+  "same_checkpoint": {
+    "byte_identical_to_previous_sql_preplan": true,
+    "bytes": 4835570,
+    "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485"
+  },
+  "same_input": {
+    "byte_identical_to_previous_sql_preplan": true,
+    "bytes": 59146,
+    "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+  },
+  "new_plan": {
+    "bytes": 169408,
+    "sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb",
+    "source_records": 12,
+    "leaf_count": 12,
+    "fresh_model_calls_required": 13,
+    "reuse_old_receipts": 0,
+    "all_twelve_leaf_user_materials_record_refs_and_request_refs_unchanged": true,
+    "leaf_changes_only_system_messages_message_hashes_and_byte_counts": true,
+    "all_leaf_message_hashes_verified": true
+  },
+  "source_and_clock": {
+    "source_hashes_match_current_files": true,
+    "only_changed_source_path_against_previous_sql_receipt": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+    "core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+    "guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "frozen_as_of": "2026-11-16T00:32:38.924+09:00",
+    "restart_receipt_reports_separate_process_same_plan_and_exact_leaf_messages": true,
+    "restart_receipt_reports_artifact_rows": 0,
+    "restart_receipt_reports_monthly_rows": 0,
+    "sql_state_not_requeried_by_this_review": true
+  },
+  "synthetic_dry_run": {
+    "root": "/workspace/scratch/8262f97b141c/preparation/full12_worked_lesson_synthetic_dryrun_20261116",
+    "result_sha256": "fe7006b870e3e543ecaf8a4982b9b06f1e84b842e27f5bb43408ac0cb3ae9771",
+    "synthetic_response_count": 13,
+    "stages": "12 LEAF plus 1 MERGE",
+    "body_hashes_message_hashes_and_exact_model_source_wire_byte_hashes_verified": true,
+    "first_twelve_wire_messages_exactly_match_new_plan": true,
+    "merge_all_24_fields_complete_and_exact_source_text": true,
+    "merge_field_manifest_quote_index_and_all_fresh_leaf_receipt_bindings_verified": true,
+    "final_receipt_sha256": "8ef60bf662d44149ae1ff85dd442885e9ffb42a5c1f154aa8392802a5f98733c",
+    "final_receipt_file_references_hashes_and_sizes_verified": true,
+    "reported_generation_commits": 1,
+    "reported_saved_artifacts": 1,
+    "reported_monthly_references": 1,
+    "reported_same_artifact_http_status": 200,
+    "reported_separate_process_service_http_text_projection_coverage_private_evidence_same": true,
+    "reported_reread_sql_writes": 0,
+    "reported_model_calls": 0,
+    "reported_hosted_database_calls": 0,
+    "product_acceptance": false,
+    "native_capacity": "NOT_MEASURED_SYNTHETIC_DRY_RUN",
+    "meaning_quality": "NOT_DECIDED_BY_SYNTHETIC_PACKETS"
+  },
+  "previous_manual_lesson_review": {
+    "state": "PASS_AUTHOR_LESSON_SOURCE_SEMANTICS_AND_STAGE_LAYOUT",
+    "core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+    "native_sha256_unchanged": "7d7cb41a861e89b605dcbe7ebf107d25416cef90dcda4e509bb40c9338256dc1",
+    "model_improvement_not_proven": true
+  }
+}

@@ -1,0 +1,1359 @@
+{
+  "source_api_commit": "a98c6e59cc9ab0d3e1691a969736651c2bf6a88f",
+  "model_generations": 0,
+  "saved_outputs": 66,
+  "verdict_counts": {
+    "UNASSESSED": 61,
+    "NO_CONFLICT_IN_CHECKED_SCOPE": 5
+  },
+  "quality_acceptance": false,
+  "records": [
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_ROLE01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-fac8d0e0b1f83c24b68adc5e46d181c735574a87e5182321a9cd4c012605e821",
+        "material_sha256": "93d9be64decb14c33673272777ae2a44c6f8d558b8b386fb98ec322851b9f416",
+        "reply_sha256": "06ce0ab86893bbdb96bc782d1219847c80a098d4973353a3174e768d7cbc2f6d",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_ROLE02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-da917913ad5a6ab4cb836dba8f83ba7b13d588582c62007050c2c64e33d1638d",
+        "material_sha256": "c24de66db5eee282c03a2f27ce7375f827547471ca9dce65b4b033d46f611993",
+        "reply_sha256": "087336875300c12ead2e93569f53743081097bdfd757b046c78d3f907bc70c21",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_ROLE03",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-f97a8c358f77091a4e0725afe34c6c48853a2e7e5a85fca1807c79d569d69454",
+        "material_sha256": "401032c0d6d18ead455e0c2fadc9674b4f2cc07215fd69d798ba10be9971a699",
+        "reply_sha256": "fe78dbe973906b7c4d099f99061664e323d9d5b6702f93b5fb84ded9fea332eb",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_NEG01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-cf3fa692858484127910dcf381e29197b2a347ff3571c0516d9f7fd9b5082108",
+        "material_sha256": "d252e78c055b58678661bc4ccfd1a820549e122322c0de6dec32de04c93e159c",
+        "reply_sha256": "0f5d84df894ece00c81d54412b744d34fe743c53e728832c345979581dccf762",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_EPI01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0f86534c1ec2e4a606c3ad3422b156c71a24150f50d003aa2373bd1d81f22f1d",
+        "material_sha256": "3bc154acaced86643ba75ff596d8bc2bf9fa7cfc742623a382cf1350a788c302",
+        "reply_sha256": "7744427957f05313e8368624b3ab4cd4459acbce30870b7f36b019272a78d4c2",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_EPI02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-6a36a286ea56659ecf268505a8e3f4ddd06a9f983a0b237cacd9bb20a582afd5",
+        "material_sha256": "5b903789657f5b316721f2979587e42840601a22ef345aa99338ae15665aa542",
+        "reply_sha256": "6ab543d83131ff6bab4d5599506fd4ebf6517f47f4ca43492e3c29fa826bc7fc",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_OWN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a765aa597d17ac9fdd3e81adfc52bf068784c3a4fb50aa45ea6b635a0767d2f3",
+        "material_sha256": "71592ecfe5a9c4c50992f534bdb763e617fe5746cad743dc25a6fb238b49dbcd",
+        "reply_sha256": "943f4db268835b8ae45ceb1d5e975cea0f5a79f363dab14097c78d9d3396728c",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_PRED01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-48ef63dc5fdd548fd40877d7e8b7fa5605fa50171a15f8097f918dbcdcf768f5",
+        "material_sha256": "cf9845fd9f8a31084b82990639b711d1b8fa8e981fbc003433ecf5fab9bdd3e0",
+        "reply_sha256": "de004fce0b77f93f6b9048c9f59521447cbd6a0e07d51eaf978e94c9cec421d6",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_TIME01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4329507c8bb50c3ec2d9c57bfb46baa8067edb63f9697eb2c5292df750cf2912",
+        "material_sha256": "377324b47f494862ee5736692ef826d0bccb75650aa4261e078ba0ae1901943e",
+        "reply_sha256": "2b42feb6625633d9e4fb5d32d170f0281d2bdafefdd08a4deaf2f493fed22aaf",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_TIME02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0fc192ce38b80dad91c5eb31146e21b37d7329662393e25338967e0248100907",
+        "material_sha256": "7856662106cfa7270a3665456ff5e0ee1b58a5fa8f35b4606dcf4df3b728b7ff",
+        "reply_sha256": "5025c4d15014b4f19c611a89b2e855fa1cf724c600e9e8b4fd8d806dbb5b6a08",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_REJOIN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a00dbed7049f5bbf93dd461f1a337d629d180a3ec30adce56ffbc62cf9d5de9e",
+        "material_sha256": "d36af82ec23d678f377bca541997ac49e5da46a2872f1cfd900c4cec83f9081c",
+        "reply_sha256": "4e515d06155b17d75daf45018ec8fae5a3c56466d5e8e3285988c89e71d4a7f5",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_12.json",
+      "case_id": "AR01_NEW_SHORT01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4163274c0bd47152a8cca50d4f8d44719ff920f09c2f44b09c3e1babd36780e1",
+        "material_sha256": "e7bf41d3993ff1c92adc21e1dea46f415561214a132fde1da10ae9f7769d2fe3",
+        "reply_sha256": "6501c0a466884d9b6e8fc5aeeca2ea684a55a08720590babb837d2e86b79cb1e",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_ROLE01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-fac8d0e0b1f83c24b68adc5e46d181c735574a87e5182321a9cd4c012605e821",
+        "material_sha256": "c8b9926a51211a36af3b5099181b23bb3cc7a28f55a3f64380a327693c4bf7ec",
+        "reply_sha256": "1f6ba46aa728890d076a974642a02d0247748ae4dea89707761791b7f64304d2",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_ROLE02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-da917913ad5a6ab4cb836dba8f83ba7b13d588582c62007050c2c64e33d1638d",
+        "material_sha256": "f7a7cdd6280aba81e495661ff61408ed6231ed0178669a07a961906794c6eb7d",
+        "reply_sha256": "5ea978ec1dd0d14edb6b61ee3f97faedd4a1aff88b73929987777b00ccc87d70",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_ROLE03",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-f97a8c358f77091a4e0725afe34c6c48853a2e7e5a85fca1807c79d569d69454",
+        "material_sha256": "401032c0d6d18ead455e0c2fadc9674b4f2cc07215fd69d798ba10be9971a699",
+        "reply_sha256": "fe78dbe973906b7c4d099f99061664e323d9d5b6702f93b5fb84ded9fea332eb",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_NEG01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-cf3fa692858484127910dcf381e29197b2a347ff3571c0516d9f7fd9b5082108",
+        "material_sha256": "d252e78c055b58678661bc4ccfd1a820549e122322c0de6dec32de04c93e159c",
+        "reply_sha256": "0f5d84df894ece00c81d54412b744d34fe743c53e728832c345979581dccf762",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_EPI01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0f86534c1ec2e4a606c3ad3422b156c71a24150f50d003aa2373bd1d81f22f1d",
+        "material_sha256": "3bc154acaced86643ba75ff596d8bc2bf9fa7cfc742623a382cf1350a788c302",
+        "reply_sha256": "7744427957f05313e8368624b3ab4cd4459acbce30870b7f36b019272a78d4c2",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_EPI02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-6a36a286ea56659ecf268505a8e3f4ddd06a9f983a0b237cacd9bb20a582afd5",
+        "material_sha256": "5b903789657f5b316721f2979587e42840601a22ef345aa99338ae15665aa542",
+        "reply_sha256": "6ab543d83131ff6bab4d5599506fd4ebf6517f47f4ca43492e3c29fa826bc7fc",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_OWN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a765aa597d17ac9fdd3e81adfc52bf068784c3a4fb50aa45ea6b635a0767d2f3",
+        "material_sha256": "71592ecfe5a9c4c50992f534bdb763e617fe5746cad743dc25a6fb238b49dbcd",
+        "reply_sha256": "943f4db268835b8ae45ceb1d5e975cea0f5a79f363dab14097c78d9d3396728c",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_PRED01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-48ef63dc5fdd548fd40877d7e8b7fa5605fa50171a15f8097f918dbcdcf768f5",
+        "material_sha256": "cf9845fd9f8a31084b82990639b711d1b8fa8e981fbc003433ecf5fab9bdd3e0",
+        "reply_sha256": "de004fce0b77f93f6b9048c9f59521447cbd6a0e07d51eaf978e94c9cec421d6",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_TIME01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4329507c8bb50c3ec2d9c57bfb46baa8067edb63f9697eb2c5292df750cf2912",
+        "material_sha256": "377324b47f494862ee5736692ef826d0bccb75650aa4261e078ba0ae1901943e",
+        "reply_sha256": "2b42feb6625633d9e4fb5d32d170f0281d2bdafefdd08a4deaf2f493fed22aaf",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_TIME02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0fc192ce38b80dad91c5eb31146e21b37d7329662393e25338967e0248100907",
+        "material_sha256": "7856662106cfa7270a3665456ff5e0ee1b58a5fa8f35b4606dcf4df3b728b7ff",
+        "reply_sha256": "5025c4d15014b4f19c611a89b2e855fa1cf724c600e9e8b4fd8d806dbb5b6a08",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_REJOIN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a00dbed7049f5bbf93dd461f1a337d629d180a3ec30adce56ffbc62cf9d5de9e",
+        "material_sha256": "d36af82ec23d678f377bca541997ac49e5da46a2872f1cfd900c4cec83f9081c",
+        "reply_sha256": "4e515d06155b17d75daf45018ec8fae5a3c56466d5e8e3285988c89e71d4a7f5",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v1_12.json",
+      "case_id": "AR01_NEW_SHORT01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4163274c0bd47152a8cca50d4f8d44719ff920f09c2f44b09c3e1babd36780e1",
+        "material_sha256": "e7bf41d3993ff1c92adc21e1dea46f415561214a132fde1da10ae9f7769d2fe3",
+        "reply_sha256": "6501c0a466884d9b6e8fc5aeeca2ea684a55a08720590babb837d2e86b79cb1e",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_transfer_6.json",
+      "case_id": "AR01_ROLE_TRANSFER01_REQUESTER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-18f485443f2bae3f805afa2589b47db456287377537aa3f8cf42534964753b15",
+        "material_sha256": "627a5d5f0f5b38e3931213328be5aa996011b8da2ae085119264123f970936be",
+        "reply_sha256": "c4354ad35c11d7bc75da0bce67b9b91ec1876379084035c04ce7ac91de4c1c90",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 3,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 3,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_transfer_6.json",
+      "case_id": "AR01_ROLE_TRANSFER02_REQUESTED_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-99d15b9a65ec04091dbf1cb78158d47d1c7dc9d504907b9bf549dd7604a4afa0",
+        "material_sha256": "a949421ae7d9886a2b017d229ca41e1d2e9fd3b799b565592b5098f3a08aa0fc",
+        "reply_sha256": "919ca5a9f9ab1c125d41a7cbf02ae2af5b203ac5a1d4da88cd460461f771e752",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_transfer_6.json",
+      "case_id": "AR01_ROLE_TRANSFER03_LENDER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-1ca2d8ab8beabf73f4f394b465463bbbb0f2bdb2331f0b53d5ab3e111a96710e",
+        "material_sha256": "d53a7ad0ed1fc92be4d83dfd1b8a6998a85dfda2bec6106578f83629190ce79d",
+        "reply_sha256": "aebc1ee60e793c0c7efb6f1dd7db23c2d1fa9731e368ce3664215b1c0a3bc7e4",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_transfer_6.json",
+      "case_id": "AR01_ROLE_TRANSFER04_BORROWER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-b806290a0814ccdab7ab7441930acb3925505f6ca821f651f67e6d81ea8919cc",
+        "material_sha256": "9d0ad41145e93f2f6e1f7ecef97f63d919e45dc4532fb517d6a43a12af00545a",
+        "reply_sha256": "b81c3aa727496097d057b620bc2f6ac5a47e07da2496c0a7bdf4e4ffe3399964",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_transfer_6.json",
+      "case_id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-b1821920fa0796c6b0a12ea85b9033ac7174891d61f2e4031ff3e7fa6e288ab9",
+        "material_sha256": "faf402d2fb505515a7c4ee6626a332cdf3aa6e2207d2750468985a8409f39095",
+        "reply_sha256": "f53bc0fedaa8adf075a192928e3938e64e16902d83761755a446d01dc142cd7d",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "baseline_transfer_6.json",
+      "case_id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a27a7c7c3bae7cd2cd3a173247caa2eea4e5820640c023deb35ca8be81c48bde",
+        "material_sha256": "30d03215645d28fb1e5855d558ec7a28f2344ff06ee96b4c06c731cdf824dfd3",
+        "reply_sha256": "804d515d707cca2ee9781f51fcd00db6f5dddc57480977bcd8fb1ff7dd6e7924",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_ROLE01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-fac8d0e0b1f83c24b68adc5e46d181c735574a87e5182321a9cd4c012605e821",
+        "material_sha256": "c8b9926a51211a36af3b5099181b23bb3cc7a28f55a3f64380a327693c4bf7ec",
+        "reply_sha256": "c12aa55e2408038e5b7601f124cb178c3e4bbb2d61ed982b6d1d72f5056a6fe1",
+        "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 1,
+        "checked_reply_count": 1,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": [
+          {
+            "reply_start": 0,
+            "reply_end": 14,
+            "source_path": "current.memo_action",
+            "source_start": 0,
+            "source_end": 11,
+            "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+            "assessed_axes": [
+              "predicate",
+              "written_arguments",
+              "polarity",
+              "modality",
+              "finite_tense",
+              "written_agent",
+              "written_counterpart"
+            ],
+            "reason_codes": []
+          }
+        ]
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_ROLE02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-da917913ad5a6ab4cb836dba8f83ba7b13d588582c62007050c2c64e33d1638d",
+        "material_sha256": "f7a7cdd6280aba81e495661ff61408ed6231ed0178669a07a961906794c6eb7d",
+        "reply_sha256": "85b652c0b8eb828fa3e312146675da0bf49e2ee0d689c9b85dc1223ad78ed122",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_ROLE03",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-f97a8c358f77091a4e0725afe34c6c48853a2e7e5a85fca1807c79d569d69454",
+        "material_sha256": "401032c0d6d18ead455e0c2fadc9674b4f2cc07215fd69d798ba10be9971a699",
+        "reply_sha256": "fe78dbe973906b7c4d099f99061664e323d9d5b6702f93b5fb84ded9fea332eb",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_NEG01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-cf3fa692858484127910dcf381e29197b2a347ff3571c0516d9f7fd9b5082108",
+        "material_sha256": "d252e78c055b58678661bc4ccfd1a820549e122322c0de6dec32de04c93e159c",
+        "reply_sha256": "0f5d84df894ece00c81d54412b744d34fe743c53e728832c345979581dccf762",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_EPI01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0f86534c1ec2e4a606c3ad3422b156c71a24150f50d003aa2373bd1d81f22f1d",
+        "material_sha256": "3bc154acaced86643ba75ff596d8bc2bf9fa7cfc742623a382cf1350a788c302",
+        "reply_sha256": "7744427957f05313e8368624b3ab4cd4459acbce30870b7f36b019272a78d4c2",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_EPI02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-6a36a286ea56659ecf268505a8e3f4ddd06a9f983a0b237cacd9bb20a582afd5",
+        "material_sha256": "5b903789657f5b316721f2979587e42840601a22ef345aa99338ae15665aa542",
+        "reply_sha256": "6ab543d83131ff6bab4d5599506fd4ebf6517f47f4ca43492e3c29fa826bc7fc",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_OWN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a765aa597d17ac9fdd3e81adfc52bf068784c3a4fb50aa45ea6b635a0767d2f3",
+        "material_sha256": "71592ecfe5a9c4c50992f534bdb763e617fe5746cad743dc25a6fb238b49dbcd",
+        "reply_sha256": "943f4db268835b8ae45ceb1d5e975cea0f5a79f363dab14097c78d9d3396728c",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_PRED01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-48ef63dc5fdd548fd40877d7e8b7fa5605fa50171a15f8097f918dbcdcf768f5",
+        "material_sha256": "cf9845fd9f8a31084b82990639b711d1b8fa8e981fbc003433ecf5fab9bdd3e0",
+        "reply_sha256": "de004fce0b77f93f6b9048c9f59521447cbd6a0e07d51eaf978e94c9cec421d6",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_TIME01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4329507c8bb50c3ec2d9c57bfb46baa8067edb63f9697eb2c5292df750cf2912",
+        "material_sha256": "377324b47f494862ee5736692ef826d0bccb75650aa4261e078ba0ae1901943e",
+        "reply_sha256": "2b42feb6625633d9e4fb5d32d170f0281d2bdafefdd08a4deaf2f493fed22aaf",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_TIME02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0fc192ce38b80dad91c5eb31146e21b37d7329662393e25338967e0248100907",
+        "material_sha256": "7856662106cfa7270a3665456ff5e0ee1b58a5fa8f35b4606dcf4df3b728b7ff",
+        "reply_sha256": "5025c4d15014b4f19c611a89b2e855fa1cf724c600e9e8b4fd8d806dbb5b6a08",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_REJOIN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a00dbed7049f5bbf93dd461f1a337d629d180a3ec30adce56ffbc62cf9d5de9e",
+        "material_sha256": "d36af82ec23d678f377bca541997ac49e5da46a2872f1cfd900c4cec83f9081c",
+        "reply_sha256": "4e515d06155b17d75daf45018ec8fae5a3c56466d5e8e3285988c89e71d4a7f5",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_NEW_SHORT01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4163274c0bd47152a8cca50d4f8d44719ff920f09c2f44b09c3e1babd36780e1",
+        "material_sha256": "e7bf41d3993ff1c92adc21e1dea46f415561214a132fde1da10ae9f7769d2fe3",
+        "reply_sha256": "6501c0a466884d9b6e8fc5aeeca2ea684a55a08720590babb837d2e86b79cb1e",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_ROLE_TRANSFER01_REQUESTER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-18f485443f2bae3f805afa2589b47db456287377537aa3f8cf42534964753b15",
+        "material_sha256": "2399083b4c763945a5952b956a156499de234a5998ff61e38f48e2ab2ce044af",
+        "reply_sha256": "c0277e59c86436e7149faa51772214ba84953b08dd8d527a64d0f985dbfb626e",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_ROLE_TRANSFER02_REQUESTED_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-99d15b9a65ec04091dbf1cb78158d47d1c7dc9d504907b9bf549dd7604a4afa0",
+        "material_sha256": "7f0a3c7a6fb95d1dc527b8c216e14f2216bab46dee6f2f0febd95fb7deea83f6",
+        "reply_sha256": "3c350fcc7b3bb5409d0b91b7b09ce0594caceceb176916ef1acb2d7c6b1c151c",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 3,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 3,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_ROLE_TRANSFER03_LENDER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-1ca2d8ab8beabf73f4f394b465463bbbb0f2bdb2331f0b53d5ab3e111a96710e",
+        "material_sha256": "cb617d186c50d8a7c8661d9d3e2945e79551f621bdd368b7e72d570652445c72",
+        "reply_sha256": "04fa8b07574d13e4e2ca6a19c3a364981860416e7964b45fd8b25d86cb998e02",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_ROLE_TRANSFER04_BORROWER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-b806290a0814ccdab7ab7441930acb3925505f6ca821f651f67e6d81ea8919cc",
+        "material_sha256": "1ca49631a5d68d25cc1a40e50326d3aaa9acd90f7d0d824d918266cb8ece9af1",
+        "reply_sha256": "0612f6d2651dba70776c498c283673bc8393bedce911635fcf4a51eb06e3021e",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 3,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 3,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-b1821920fa0796c6b0a12ea85b9033ac7174891d61f2e4031ff3e7fa6e288ab9",
+        "material_sha256": "866f12f6f0a71624b34f30e64921aebd8705baf96626e5ac74f23f19b080f9b8",
+        "reply_sha256": "f3cbd0bd7fe0c2801d50781a389fa5f962d026c6bde38879832df59649dadb11",
+        "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 1,
+        "checked_reply_count": 1,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": [
+          {
+            "reply_start": 0,
+            "reply_end": 15,
+            "source_path": "current.memo_action",
+            "source_start": 0,
+            "source_end": 13,
+            "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+            "assessed_axes": [
+              "predicate",
+              "written_arguments",
+              "polarity",
+              "modality",
+              "finite_tense",
+              "written_agent",
+              "written_counterpart"
+            ],
+            "reason_codes": []
+          }
+        ]
+      }
+    },
+    {
+      "run": "candidate_v2_18.json",
+      "case_id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a27a7c7c3bae7cd2cd3a173247caa2eea4e5820640c023deb35ca8be81c48bde",
+        "material_sha256": "672d0be669d9f379c70264815a35ddc3a5ddfb04245881904faf335c1f6bfd7e",
+        "reply_sha256": "b7cbc0bec18fa044c051210cddf4e13b84ef213b6efa7a6728da25c08ed19031",
+        "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 1,
+        "checked_reply_count": 1,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": [
+          {
+            "reply_start": 0,
+            "reply_end": 16,
+            "source_path": "current.memo_action",
+            "source_start": 0,
+            "source_end": 13,
+            "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+            "assessed_axes": [
+              "predicate",
+              "written_arguments",
+              "polarity",
+              "modality",
+              "finite_tense",
+              "written_agent"
+            ],
+            "reason_codes": []
+          }
+        ]
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_ROLE01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-fac8d0e0b1f83c24b68adc5e46d181c735574a87e5182321a9cd4c012605e821",
+        "material_sha256": "8a1ffdab7f7e4eccdb84156416063e0bd344c7b38dd7b9933cc5cbc2b0741a5f",
+        "reply_sha256": "fbda8fddf13671170a481e51216a1fb14398e78f9c6b04c609beb1fac8619332",
+        "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 1,
+        "checked_reply_count": 1,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": [
+          {
+            "reply_start": 0,
+            "reply_end": 15,
+            "source_path": "current.memo_action",
+            "source_start": 0,
+            "source_end": 11,
+            "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+            "assessed_axes": [
+              "predicate",
+              "written_arguments",
+              "polarity",
+              "modality",
+              "finite_tense",
+              "written_agent",
+              "written_counterpart"
+            ],
+            "reason_codes": []
+          }
+        ]
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_ROLE02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-da917913ad5a6ab4cb836dba8f83ba7b13d588582c62007050c2c64e33d1638d",
+        "material_sha256": "695aa684accd4500a795337887fd8a74a66eb0b807030540a1fbec2c27701403",
+        "reply_sha256": "85b652c0b8eb828fa3e312146675da0bf49e2ee0d689c9b85dc1223ad78ed122",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_ROLE03",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-f97a8c358f77091a4e0725afe34c6c48853a2e7e5a85fca1807c79d569d69454",
+        "material_sha256": "401032c0d6d18ead455e0c2fadc9674b4f2cc07215fd69d798ba10be9971a699",
+        "reply_sha256": "fe78dbe973906b7c4d099f99061664e323d9d5b6702f93b5fb84ded9fea332eb",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_NEG01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-cf3fa692858484127910dcf381e29197b2a347ff3571c0516d9f7fd9b5082108",
+        "material_sha256": "d252e78c055b58678661bc4ccfd1a820549e122322c0de6dec32de04c93e159c",
+        "reply_sha256": "0f5d84df894ece00c81d54412b744d34fe743c53e728832c345979581dccf762",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_EPI01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0f86534c1ec2e4a606c3ad3422b156c71a24150f50d003aa2373bd1d81f22f1d",
+        "material_sha256": "3bc154acaced86643ba75ff596d8bc2bf9fa7cfc742623a382cf1350a788c302",
+        "reply_sha256": "7744427957f05313e8368624b3ab4cd4459acbce30870b7f36b019272a78d4c2",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_EPI02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-6a36a286ea56659ecf268505a8e3f4ddd06a9f983a0b237cacd9bb20a582afd5",
+        "material_sha256": "5b903789657f5b316721f2979587e42840601a22ef345aa99338ae15665aa542",
+        "reply_sha256": "6ab543d83131ff6bab4d5599506fd4ebf6517f47f4ca43492e3c29fa826bc7fc",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_OWN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a765aa597d17ac9fdd3e81adfc52bf068784c3a4fb50aa45ea6b635a0767d2f3",
+        "material_sha256": "71592ecfe5a9c4c50992f534bdb763e617fe5746cad743dc25a6fb238b49dbcd",
+        "reply_sha256": "943f4db268835b8ae45ceb1d5e975cea0f5a79f363dab14097c78d9d3396728c",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_PRED01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-48ef63dc5fdd548fd40877d7e8b7fa5605fa50171a15f8097f918dbcdcf768f5",
+        "material_sha256": "cf9845fd9f8a31084b82990639b711d1b8fa8e981fbc003433ecf5fab9bdd3e0",
+        "reply_sha256": "de004fce0b77f93f6b9048c9f59521447cbd6a0e07d51eaf978e94c9cec421d6",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_TIME01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4329507c8bb50c3ec2d9c57bfb46baa8067edb63f9697eb2c5292df750cf2912",
+        "material_sha256": "377324b47f494862ee5736692ef826d0bccb75650aa4261e078ba0ae1901943e",
+        "reply_sha256": "2b42feb6625633d9e4fb5d32d170f0281d2bdafefdd08a4deaf2f493fed22aaf",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_TIME02",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-0fc192ce38b80dad91c5eb31146e21b37d7329662393e25338967e0248100907",
+        "material_sha256": "7856662106cfa7270a3665456ff5e0ee1b58a5fa8f35b4606dcf4df3b728b7ff",
+        "reply_sha256": "5025c4d15014b4f19c611a89b2e855fa1cf724c600e9e8b4fd8d806dbb5b6a08",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_REJOIN01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a00dbed7049f5bbf93dd461f1a337d629d180a3ec30adce56ffbc62cf9d5de9e",
+        "material_sha256": "d36af82ec23d678f377bca541997ac49e5da46a2872f1cfd900c4cec83f9081c",
+        "reply_sha256": "4e515d06155b17d75daf45018ec8fae5a3c56466d5e8e3285988c89e71d4a7f5",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_NEW_SHORT01",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-4163274c0bd47152a8cca50d4f8d44719ff920f09c2f44b09c3e1babd36780e1",
+        "material_sha256": "e7bf41d3993ff1c92adc21e1dea46f415561214a132fde1da10ae9f7769d2fe3",
+        "reply_sha256": "6501c0a466884d9b6e8fc5aeeca2ea684a55a08720590babb837d2e86b79cb1e",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 0,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_ROLE_TRANSFER01_REQUESTER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-18f485443f2bae3f805afa2589b47db456287377537aa3f8cf42534964753b15",
+        "material_sha256": "380868cb705a7e8b3c18962cb0c0c42a01fa5da4cf981a8ff91c75503e750fcc",
+        "reply_sha256": "b89d739460dd2918eac7720d825dfc79b751401f843b2f9b10de874a9c8c5d6c",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_ROLE_TRANSFER02_REQUESTED_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-99d15b9a65ec04091dbf1cb78158d47d1c7dc9d504907b9bf549dd7604a4afa0",
+        "material_sha256": "572594789aaacff381231486a9affbdc3afcd56a2d2d471bbde2366c882e6e1f",
+        "reply_sha256": "1103bcdbdd1fc405c4524466fda4dad1b2db2084e17b6a054e09788ab4897060",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_ROLE_TRANSFER03_LENDER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-1ca2d8ab8beabf73f4f394b465463bbbb0f2bdb2331f0b53d5ab3e111a96710e",
+        "material_sha256": "72b86a41f013f02400b8cb3a998a2a9a23e2b50538b19df22b1cd36ae737d7ca",
+        "reply_sha256": "04fa8b07574d13e4e2ca6a19c3a364981860416e7964b45fd8b25d86cb998e02",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 2,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_ROLE_TRANSFER04_BORROWER_SELF",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-b806290a0814ccdab7ab7441930acb3925505f6ca821f651f67e6d81ea8919cc",
+        "material_sha256": "105a10298de46dcef65798ff3dcedeb82c0d74864f488d94b70ed2c955760d7d",
+        "reply_sha256": "45659cbeae5588c6cfa59fda162dab3f5c2560c72743a78bdb079a62b39fecf1",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 3,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 3,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-b1821920fa0796c6b0a12ea85b9033ac7174891d61f2e4031ff3e7fa6e288ab9",
+        "material_sha256": "57c83309df4ab37a135551868d8f3b723d328a5cd105b9da2be45a958927bb92",
+        "reply_sha256": "18bb3f7bc956b1f880da5a14df3accb25f294a7b2a723e41b09e07ef86ede48b",
+        "verdict": "UNASSESSED",
+        "source_witness_count": 1,
+        "reply_segment_count": 1,
+        "parsed_reply_count": 0,
+        "checked_reply_count": 0,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": []
+      }
+    },
+    {
+      "run": "candidate_v3_18.json",
+      "case_id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+      "report": {
+        "schema_version": "cocolon.emlis.natural_meaning_comparison.v1",
+        "source_prefix_ref": "emlis-q3-source-prefix-a27a7c7c3bae7cd2cd3a173247caa2eea4e5820640c023deb35ca8be81c48bde",
+        "material_sha256": "5eb712e3325cf0638f1f43fc90b75d166e189f90b03b31f52ff756e617da62be",
+        "reply_sha256": "b81967eb8fe72c0887a2b1367da7167961e34a70ccd3971844f85db63f5bb5d0",
+        "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+        "source_witness_count": 1,
+        "reply_segment_count": 2,
+        "parsed_reply_count": 1,
+        "checked_reply_count": 1,
+        "unassessed_reply_count": 1,
+        "excluded_source_count": 0,
+        "full_reply_semantic_coverage": false,
+        "checks": [
+          {
+            "reply_start": 0,
+            "reply_end": 16,
+            "source_path": "current.memo_action",
+            "source_start": 0,
+            "source_end": 13,
+            "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+            "assessed_axes": [
+              "predicate",
+              "written_arguments",
+              "polarity",
+              "modality",
+              "finite_tense",
+              "written_agent"
+            ],
+            "reason_codes": []
+          }
+        ]
+      }
+    }
+  ]
+}

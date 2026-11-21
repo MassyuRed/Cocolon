@@ -1,0 +1,148 @@
+{
+  "status": "CPU_TOKENIZED_GPU_NOT_TESTED",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "runner_sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+  "dataset_manifest_sha256": "a97a83bca9b32b4af7f2e600d8fe31cf95ddb05587c3815dfb4816271d078b49",
+  "execution_plan_sha256": "c5330ed1d585713b7f3a5393e953bef5a6bdd88597e3267b93851dccdf9cc609",
+  "data_sha256": {
+    "sft_examples.jsonl": "cbbf67ab938d8c343c56ccb06489a960a4fa05cceb4f80fc5c917f76fbf5abf0",
+    "train_messages.jsonl": "5b0ca5bdb3c8e56427dc98da0ba759b52423f7643c31223832c6076ce22b0433",
+    "eval_inputs.jsonl": "be74d96231e3f7e43939ae9686511cf4aa50389f3b1ca886911d15ffd92a8208",
+    "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
+  },
+  "source_commit": "a4280eeb4d9d7afad989ab4a7a831a65a2dd895c",
+  "dependencies": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "weight_index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+  "weight_bytes": 9319737856,
+  "target_modules": [
+    "model.language_model.layers.11.self_attn.q_proj",
+    "model.language_model.layers.11.self_attn.v_proj",
+    "model.language_model.layers.15.self_attn.q_proj",
+    "model.language_model.layers.15.self_attn.v_proj",
+    "model.language_model.layers.19.self_attn.q_proj",
+    "model.language_model.layers.19.self_attn.v_proj",
+    "model.language_model.layers.23.self_attn.q_proj",
+    "model.language_model.layers.23.self_attn.v_proj",
+    "model.language_model.layers.27.self_attn.q_proj",
+    "model.language_model.layers.27.self_attn.v_proj",
+    "model.language_model.layers.3.self_attn.q_proj",
+    "model.language_model.layers.3.self_attn.v_proj",
+    "model.language_model.layers.31.self_attn.q_proj",
+    "model.language_model.layers.31.self_attn.v_proj",
+    "model.language_model.layers.7.self_attn.q_proj",
+    "model.language_model.layers.7.self_attn.v_proj"
+  ],
+  "training_rows": 2,
+  "optimizer_steps": 2,
+  "training_tokens": [
+    {
+      "id": "FT-CHAIR-INITIAL",
+      "prompt_tokens": 2055,
+      "completion_tokens": 1094,
+      "total_tokens": 3149,
+      "loss_labels_start": 2054,
+      "logits_positions": 1095,
+      "full_context_retained": true
+    },
+    {
+      "id": "FT-CHAIR-AFTER-CORRECTION",
+      "prompt_tokens": 5078,
+      "completion_tokens": 1877,
+      "total_tokens": 6955,
+      "loss_labels_start": 5077,
+      "logits_positions": 1878,
+      "full_context_retained": true
+    }
+  ],
+  "generation_inputs": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "input_tokens": 2055
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "input_tokens": 5078
+    }
+  ],
+  "generations_per_stage": 2,
+  "dataset_evaluation_rows": 6,
+  "available_generation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION",
+    "EFREE-E01",
+    "EFREE-E02",
+    "EFREE-E03",
+    "EFREE-E04",
+    "EFREE-E05",
+    "EFREE-E06"
+  ],
+  "selected_generation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "plan": {
+    "schema": "cocolon.emlis_4b_execution_plan.v1",
+    "status": "AUTHORIZED_INFERENCE_ONLY_CURRENT_MASH_CONTINUATION",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "semantic_profile": "emlis_model_proposal.v1",
+    "epochs": 1,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "max_seconds": 900,
+    "gpu_hourly_usd": 0.26,
+    "max_total_usd": 1.0,
+    "minimum_free_gib": 14.0,
+    "gpu_preference_gb": [
+      16,
+      24
+    ],
+    "gpu_run_authorized": false,
+    "additional_diagnostic_authorized": false,
+    "pod_billing_scope_confirmed": false,
+    "storage_mount_verified": false,
+    "storage_mount_description": null,
+    "pod_external_receipt_destination": null,
+    "automatic_pod_stop": false,
+    "limits": "Inference only; no optimizer, update, retry or Pod lifecycle effects. Original training plan remains closed.",
+    "proposed_pod_scope": {
+      "approval_state": "PROPOSED_NOT_APPROVED",
+      "gpu": "RTX A4000 16GB first; no automatic 24GB retry",
+      "gpu_hourly_usd_ceiling": 0.3,
+      "pod_total_uptime_seconds": 7200,
+      "container_disk_gb": 20,
+      "volume_disk_gb": 40,
+      "proposed_mount": "/workspace (actual mount not verified)",
+      "post_stop_retention_hours_max": 24,
+      "month_hours_for_estimate": 720,
+      "gpu_cost_at_ceiling_usd": 0.6,
+      "running_storage_estimate_usd": 0.016666666666666666,
+      "stopped_storage_24h_estimate_usd": 0.26666666666666666,
+      "gpu_and_storage_estimate_usd": 0.8833333333333333,
+      "reserve_for_tax_and_variance_usd": 0.1166666666666667,
+      "external_receipt": "Download archive and checksum to Mash PC; attach for manifest and adapter verification",
+      "stop_owner": "UNCONFIRMED; the Python timeout does not stop the Pod",
+      "retention_exit": "Proposed approval includes terminating only this new trial Pod after verified off-Pod receipt; no existing Pods or unreceived data deletion. Without that approval, do not launch.",
+      "hard_billing_cap_enforced": false,
+      "charges_started": false
+    },
+    "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。",
+    "evaluation_case_ids": [
+      "FIT-FT-CHAIR-INITIAL",
+      "FIT-FT-CHAIR-AFTER-CORRECTION"
+    ],
+    "inference_only": true
+  },
+  "model_weights_loaded": false,
+  "gpu_used": false,
+  "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU."
+}

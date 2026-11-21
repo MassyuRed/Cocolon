@@ -1,0 +1,69 @@
+{
+  "scope": "CPU_REPLAY_OF_PREVIOUS_GOOD_RAW_NOT_A_NEW_GENERATION_AND_NOT_REPLACEMENT_FOR_FAILED_RECEPTION_REQUEST",
+  "api_commit": "7a4dc32c07f8c8a30609e8345207c6a9c831de23",
+  "api_tree_equal_to": "a3e82f0e2156f9142ca37878425eb0a4b6046761",
+  "previous_raw_source": "unicode_fit32_20261025/after.jsonl",
+  "previous_raw_sha256": "670aa754f8ef3f6347a5b72353ab7686111630e8c8f1db0eaa9198a4fd40dd61",
+  "new_model_calls": 0,
+  "raw_mutations": 0,
+  "results_equal_to_previous_consumer": true,
+  "meaning_adopted": 2,
+  "body_available": 1,
+  "cases": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "adoption": "ADOPTED_PROVISIONAL",
+      "body": {
+        "artifact_id": "emlis-model-artifact-25f39ce168877444c93cc55cdb409b83c537561fd9a32d0b23a65fd23d3b5b1e",
+        "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null,
+        "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+      },
+      "question": {
+        "question_id": "emlis-question-cd72ae18d958a726228058745f68f4bde42bd028848a1435c6bb3ca58c695db3",
+        "parent_request_id": "ft-chair-native-request",
+        "thread_id": "ft-chair-native-thread",
+        "original_source_ref": "src-7554a750377f05e1e107e620",
+        "decision": {
+          "disposition": "ASK",
+          "target_ref": "emlis-target-197b04852b24ae8e28a256206c0138736a22c5db99602680bcb20763af88248a",
+          "target_kind": "PERSONAL_JOY_SIGNIFICANCE",
+          "supporting_evidence_refs": [
+            "model-question-evidence-b2506749fd6f620133ce3218549fbf7a23bdce6accd2d76a30f7fef9a9494e15",
+            "model-question-evidence-95241c2a93fd315955908f2ea8697353b635f9c7014a3166abb7bda415a0b8b7"
+          ],
+          "missing_dimension": "personal_joy_significance",
+          "affected_meaning_refs": [
+            "solo_appraisal_object",
+            "joy"
+          ],
+          "affected_reception_refs": [
+            "solo_appraisal_object",
+            "joy"
+          ],
+          "asked_target_refs": [],
+          "decision_reason": "source_bound_joy_personal_significance_missing"
+        },
+        "prompt_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "skip_allowed": true,
+        "answer_limit": 1,
+        "answer_source_role": "SUPPLEMENTAL_ANSWER",
+        "schema_version": "cocolon.cmee.emlis_clarification.v1"
+      },
+      "messages_match": true,
+      "identity_matches": true
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "adoption": "ADOPTED_PROVISIONAL",
+      "body": null,
+      "question": null,
+      "messages_match": true,
+      "identity_matches": true
+    }
+  ]
+}

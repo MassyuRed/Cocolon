@@ -1,0 +1,58 @@
+{
+  "CI_verified": true,
+  "SQL": 0,
+  "actual_repaired_generation": false,
+  "copy_from": "/workspace/cocolon-node-local-v3-d21-payload-20261117",
+  "max_POST": 5,
+  "new_bytes": 2963450,
+  "new_files": {
+    "current_api_sources.zip": {
+      "bytes": 2615646,
+      "sha256": "9e75e62069f3619978a0595359a48479545de5ab36942f7c665368a09ef27200"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 105208,
+      "sha256": "c7073c8815f923b4323812fae4e024a2e8e9cfbf5459d5c6876672c6327747d3"
+    },
+    "diagnostic_scope.json": {
+      "bytes": 12765,
+      "sha256": "eebf53ae09ee47cce753c53b2407fdb76752bd64031ff3dfb6f4d88268aaf25f"
+    },
+    "source_manifest.json": {
+      "bytes": 191404,
+      "sha256": "b00ff6b19cc4f6fa4afedde55752c7d8993db27555029d9fb956e76f2ec7beff"
+    },
+    "verify_t01_capacity_once.py": {
+      "bytes": 38427,
+      "sha256": "72ffd68803588e47baf4ee908cb405fa8a3d908d1f752ec16bd3df22e050d7b0"
+    }
+  },
+  "normal_changes": 0,
+  "once": true,
+  "pod": "xrplcoeb5ec77f",
+  "restore_inclusive_seconds": 600,
+  "retry": 0,
+  "same_pod_copy": {
+    "controls.json": {
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    "full12.input.json": {
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 275412,
+      "sha256": "8b4be44c7d9ca2f60d4e1ed829d3652658a7bdeb0fcaccf1dc6d95e16f68ac24"
+    },
+    "input_cases.json": {
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    }
+  },
+  "same_pod_copy_bytes": 375167,
+  "scope_sha256": "eebf53ae09ee47cce753c53b2407fdb76752bd64031ff3dfb6f4d88268aaf25f",
+  "source_commit": "d610facb9d162a74bc57ef6323b7499f68d0ef1e",
+  "state": "A22_PREPARED_NOT_APPROVED_NOT_SENT_NOT_EXECUTED",
+  "training": 0
+}

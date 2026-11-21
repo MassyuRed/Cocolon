@@ -1,0 +1,297 @@
+{
+  "schema_version": "cocolon.analysis_actor_ownership_summary.v1",
+  "api_runtime": "d241671597efd4a351b88343f6ff89cecbd18b12",
+  "api_final": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "new_training": 0,
+  "new_generation": 24,
+  "model_loads": 1,
+  "seconds": 169.2388746291399,
+  "replay_seconds": 2.892669301480055,
+  "all_raw_read": true,
+  "normal_adoption": false,
+  "public_raw_count": 0,
+  "isolated_mock_rpc": true,
+  "old_default": "selected_material.v4",
+  "opt_in": "selected_material.v7",
+  "paired": {
+    "sources": 8,
+    "v6_saved": 5,
+    "v7_saved": 6,
+    "other_actor_stays_unsupported": true,
+    "reason_and_wish_still_candidate_only": true,
+    "role_decision_positive_negative_raw_unchanged": true
+  },
+  "known_diagnostics": {
+    "sources": 8,
+    "old_v4_same_current_consumer_saved": 4,
+    "v7_saved": 5,
+    "OP02": "invented_actor_removed_negative_unspecified_saved",
+    "OP03": "same_incorrect_possessive_actor_unsupported",
+    "OP07": "wish_kind_improved_but_comparative_reason_error",
+    "OP08": "literal_binding_improved_but_incomplete_action_and_possessive_actor_remain"
+  },
+  "prepare_tokens": [
+    {
+      "id": "AP01_v6",
+      "input": 3233
+    },
+    {
+      "id": "AP01_v7",
+      "input": 3747
+    },
+    {
+      "id": "AP02_v6",
+      "input": 3234
+    },
+    {
+      "id": "AP02_v7",
+      "input": 3748
+    },
+    {
+      "id": "AP03_v6",
+      "input": 3234
+    },
+    {
+      "id": "AP03_v7",
+      "input": 3748
+    },
+    {
+      "id": "AP04_v6",
+      "input": 3236
+    },
+    {
+      "id": "AP04_v7",
+      "input": 3750
+    },
+    {
+      "id": "AP05_v6",
+      "input": 3236
+    },
+    {
+      "id": "AP05_v7",
+      "input": 3750
+    },
+    {
+      "id": "AP06_v6",
+      "input": 3248
+    },
+    {
+      "id": "AP06_v7",
+      "input": 3762
+    },
+    {
+      "id": "AP07_v6",
+      "input": 3242
+    },
+    {
+      "id": "AP07_v7",
+      "input": 3756
+    },
+    {
+      "id": "AP08_v6",
+      "input": 3240
+    },
+    {
+      "id": "AP08_v7",
+      "input": 3754
+    },
+    {
+      "id": "OP01_v7",
+      "input": 3738
+    },
+    {
+      "id": "OP02_v7",
+      "input": 3739
+    },
+    {
+      "id": "OP03_v7",
+      "input": 3738
+    },
+    {
+      "id": "OP04_v7",
+      "input": 3739
+    },
+    {
+      "id": "OP05_v7",
+      "input": 3745
+    },
+    {
+      "id": "OP06_v7",
+      "input": 3744
+    },
+    {
+      "id": "OP07_v7",
+      "input": 3758
+    },
+    {
+      "id": "OP08_v7",
+      "input": 3760
+    }
+  ],
+  "private_original": "https://chatgpt.com/library?file_id=libfile_1189a389d9e481918f59607846dbe8fe&account_id=personal",
+  "original_members": 60,
+  "original_hashes_verified": true,
+  "ci": {
+    "run": 42052701621,
+    "job": 127332726656,
+    "status": "success",
+    "generation_saved": 2312,
+    "skipped": 1,
+    "subtests": 12048,
+    "shared_owner": 1,
+    "cumulative": 182,
+    "cumulative_subtests": 2,
+    "sql_source_records": 201,
+    "monthly_refs": 15
+  },
+  "cases": [
+    {
+      "id": "AP01_v6",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "58054a0620957cf750c9a76ec5f5561c4fae6615e8693b874e98921f6d739736"
+    },
+    {
+      "id": "AP01_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "58054a0620957cf750c9a76ec5f5561c4fae6615e8693b874e98921f6d739736"
+    },
+    {
+      "id": "AP02_v6",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "c5fa7cc7f5ac7d246e6e8dc5ae8822242e080fa87819804de5dacab02746d8b7"
+    },
+    {
+      "id": "AP02_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "fad9863743af237a8978b85d7547516bdc5bbbc2b03a725cad03e458ae0b5876"
+    },
+    {
+      "id": "AP03_v6",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "9ef67056f3e7d229ccfdd6606bf6abba49e4e8429f135da96f87ef63893f7ae7"
+    },
+    {
+      "id": "AP03_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "ec037c4f4835ac0f754c68d2b9040a1aafd3abd7c4749d35d5e5760fa5612571"
+    },
+    {
+      "id": "AP04_v6",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "8737b3635b86e39d8a71b957855c6ed02b0c75d46b9eaebdb775a3408bf568e4"
+    },
+    {
+      "id": "AP04_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "68e68cf5751a372accc21ffdeb2a5ed89b36f2a272b5314787efa53708128ea2"
+    },
+    {
+      "id": "AP05_v6",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "0b46d20a77b286b054e2ed261ba6d853388f25862fff6fd026af64337c0d96be"
+    },
+    {
+      "id": "AP05_v7",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "031a32599cc96ef748fda7f57f095f2b8b7c581e29f5dd64565e4f982cbb5203"
+    },
+    {
+      "id": "AP06_v6",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "508d2516e2c3d1f9984015210bd5e07f5dda5eea56a0c36fa36f1b35f5ec9ff4"
+    },
+    {
+      "id": "AP06_v7",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "eefb2c5ed461e1a32766b1f8ae8a0ef673e5f42696067a69b77a6f029fa61bcc"
+    },
+    {
+      "id": "AP07_v6",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "0e8af7675af743b2b5494c76aea419e49933021f4bd227477d62090fccf9a35b"
+    },
+    {
+      "id": "AP07_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "0e8af7675af743b2b5494c76aea419e49933021f4bd227477d62090fccf9a35b"
+    },
+    {
+      "id": "AP08_v6",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "2b47e3e84d4134789642d03557ee093eae8012568f3e4b20ca066734824668d9"
+    },
+    {
+      "id": "AP08_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "2b47e3e84d4134789642d03557ee093eae8012568f3e4b20ca066734824668d9"
+    },
+    {
+      "id": "OP01_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "7f6bf108d11136aad99b5a5df77d285f226affcaa65b7765067a364f5cfdf707"
+    },
+    {
+      "id": "OP02_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "685245d5ea1d55f45b5d5d05b56b02447274c5f1a5234f0541f89fd21250fd74"
+    },
+    {
+      "id": "OP03_v7",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "f973151cdf0a4891e82dc2b27da021c4b3932e69d1e32311e0570d1a81308d26"
+    },
+    {
+      "id": "OP04_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "36d3396a8e73e2b4942a6d5ab2182b0a0a035c41a894d0e45a56e780ae2d77d4"
+    },
+    {
+      "id": "OP05_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "e47506816eef728aa7fcaf7678a5c42401e7e9dc9bccefbab6be63ac311064f1"
+    },
+    {
+      "id": "OP06_v7",
+      "status": "SAVED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "5e9fa677c5930b314729f1a6c38e2bb4538dc034b79c20b1afdfddc8db816168"
+    },
+    {
+      "id": "OP07_v7",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "6f11e5b126859e67b84415d2123f9891e20970a7fd5ab5c31eaa584cafcea2db"
+    },
+    {
+      "id": "OP08_v7",
+      "status": "UNSUPPORTED",
+      "candidate": "PRESERVED",
+      "raw_sha256": "d7a8e201ba698f295c5f82e85b12d57ccf86233b3d3c7d50e9fd4820675f132c"
+    }
+  ]
+}

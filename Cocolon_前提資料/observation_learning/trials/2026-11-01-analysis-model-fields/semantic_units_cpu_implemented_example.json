@@ -1,0 +1,1066 @@
+{
+  "status": "CPU_SYNTHETIC_IMPLEMENTATION_NOT_MODEL_OR_TEACHER",
+  "candidate_id": "analysis-unit-candidate:caa71f09252091a4943e45e7775f97905f542118fc8bf397bbc6a51d52dd7c61",
+  "text": "未検証の意味候補です。元の全文と一緒に確認するための表示です。\n\n原文 1（memo）：\n断ったことを後悔してはいない。でも、相手がどう思ったかは分からない。\n未検証の意味候補 1・従属内容候補（CONTENT_TARGET）：「断ったこと」／従属先候補 2\n未検証の意味候補 2・経路の分類候補（ATTENTION_OR_THOUGHT）：「後悔してはいない」／NEGATION候補「はいない」\n未検証の意味候補 3・従属内容候補（UNKNOWN_CONTENT）：「相手がどう思ったか」／従属先候補 4\n未検証の意味候補 4・本人記載の不明候補（WRITTEN_UNKNOWN）：「分からない」／EPISTEMIC_EXPRESSION候補「分からない」\n意味の確認は未完了です。候補同士の経路・因果は確定していません。\n\n原文 2（memo_action）：\n疲れていたので、今日の集まりへの誘いは断った。\n未検証の意味候補 1・従属内容候補（WRITTEN_REASON）：「疲れていたので」／従属先候補 2／REASON_MARKER候補「ので」\n未検証の意味候補 2・経路の分類候補（ACTION_OR_NONACTION）：「今日の集まりへの誘いは断った」／WRITTEN_MODIFIER候補「今日の集まり」\n意味の確認は未完了です。候補同士の経路・因果は確定していません。\n\n原文 3（memo）：\n昨日は分からなかった問題が、今日は解けてうれしい。🙂\n未検証の意味候補 1・従属内容候補（ATTRIBUTIVE_CONTENT）：「昨日は分からなかった問題」／従属先候補 2／RELATIVE_TIME候補「昨日」、EPISTEMIC_EXPRESSION候補「分からなかった」\n未検証の意味候補 2・従属内容候補（TE_CONTEXT）：「今日は解けて」／従属先候補 3／RELATIVE_TIME候補「今日」\n未検証の意味候補 3・経路の分類候補（IMMEDIATE_RESULT_OR_AFTERMATH）：「うれしい」\n意味の確認は未完了です。候補同士の経路・因果は確定していません。",
+  "diagram": {
+    "coverage": {
+      "mapped_count": 0,
+      "source_count": 2,
+      "unparsed_count": 2,
+      "unparsed_record_refs": [
+        "00000000-0000-0000-0000-000000000065",
+        "00000000-0000-0000-0000-000000000066"
+      ]
+    },
+    "fields": [
+      {
+        "candidates": [
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "従属内容候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:97f5152ed0d025f833675a3c5e57b8a51091cbb5e581f886a42a9e2eacbe03bb",
+              "field_path": "memo",
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "field_utf8_end": 111,
+              "field_utf8_start": 9,
+              "literal_sha256": "e0524c312645382ee850b96426b638c2cec8bfcc516a68ac0447c9d299b4962f",
+              "scalar_end": 5,
+              "scalar_start": 0,
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "utf8_end": 24,
+              "utf8_start": 9
+            },
+            "index": 1,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": null,
+            "parent": 2,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [],
+            "quote": "断ったこと",
+            "scope_role": "CONTENT_TARGET",
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "経路の分類候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:162e7f8e6a2f759a440950c7d97f46c0a7533ddb9ef8292f591ba4603dd7efa0",
+              "field_path": "memo",
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "field_utf8_end": 111,
+              "field_utf8_start": 9,
+              "literal_sha256": "4d5fd70bcd252bfaf9d03c30c0c6562f06f40cda0cf1b33ebc8bad77662147cd",
+              "scalar_end": 14,
+              "scalar_start": 6,
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "utf8_end": 51,
+              "utf8_start": 27
+            },
+            "index": 2,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": "ATTENTION_OR_THOUGHT",
+            "parent": null,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:e006d8ce259b66984e771bfcbda8fea4cbd1e26d7ee935e2725314d88caf94e1",
+                  "field_path": "memo",
+                  "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+                  "field_utf8_end": 111,
+                  "field_utf8_start": 9,
+                  "literal_sha256": "846de11dc0d7caf93fe4f3f32d7c22221aa0a39172d3f07fb576f1d55f8f92da",
+                  "scalar_end": 14,
+                  "scalar_start": 10,
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+                  "utf8_end": 51,
+                  "utf8_start": 39
+                },
+                "kind": "NEGATION",
+                "quote": "はいない"
+              }
+            ],
+            "quote": "後悔してはいない",
+            "scope_role": null,
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "従属内容候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:ab5ad96fecc10a974c77fad745687e022b94bf5eaf8b590f71eda5b364386e22",
+              "field_path": "memo",
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "field_utf8_end": 111,
+              "field_utf8_start": 9,
+              "literal_sha256": "4965ab738f0cf964587eaf328de10337f16f8ce5803229c5716a08173be2a342",
+              "scalar_end": 27,
+              "scalar_start": 18,
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "utf8_end": 90,
+              "utf8_start": 63
+            },
+            "index": 3,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": null,
+            "parent": 4,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [],
+            "quote": "相手がどう思ったか",
+            "scope_role": "UNKNOWN_CONTENT",
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "本人記載の不明候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:c56f5846d4a9ef5fa4167de05b838de8de5682caef7f03c82ce9d46845574663",
+              "field_path": "memo",
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "field_utf8_end": 111,
+              "field_utf8_start": 9,
+              "literal_sha256": "9eeeb6139211a384cbf11c8747ceaf0d0c92040a3ed6813d1afc4d119815e0d4",
+              "scalar_end": 33,
+              "scalar_start": 28,
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "utf8_end": 108,
+              "utf8_start": 93
+            },
+            "index": 4,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": null,
+            "parent": null,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:c56f5846d4a9ef5fa4167de05b838de8de5682caef7f03c82ce9d46845574663",
+                  "field_path": "memo",
+                  "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+                  "field_utf8_end": 111,
+                  "field_utf8_start": 9,
+                  "literal_sha256": "9eeeb6139211a384cbf11c8747ceaf0d0c92040a3ed6813d1afc4d119815e0d4",
+                  "scalar_end": 33,
+                  "scalar_start": 28,
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+                  "utf8_end": 108,
+                  "utf8_start": 93
+                },
+                "kind": "EPISTEMIC_EXPRESSION",
+                "quote": "分からない"
+              }
+            ],
+            "quote": "分からない",
+            "scope_role": "WRITTEN_UNKNOWN",
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          }
+        ],
+        "complete_source_text": "断ったことを後悔してはいない。でも、相手がどう思ったかは分からない。",
+        "evidence": {
+          "element_index": 0,
+          "evidence_id": "analysis-evidence:dff95339956c63b4514d6f16acae6b11c70683a34bbb99aca5527d49cc0bce44",
+          "field_path": "memo",
+          "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+          "field_utf8_end": 111,
+          "field_utf8_start": 9,
+          "literal_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+          "scalar_end": 34,
+          "scalar_start": 0,
+          "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+          "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+          "utf8_end": 111,
+          "utf8_start": 9
+        },
+        "field": 1,
+        "field_path": "memo",
+        "meaning_coverage": "UNPARSED",
+        "record_ref": "00000000-0000-0000-0000-000000000065",
+        "record_version": "sha256:605db132eb45f6995fd137824405cb9e0f2acfad5571649147d0af3ed51b936a",
+        "requires_complete_field_context": true,
+        "residual_source_ranges": [
+          {
+            "end": 6,
+            "quote": "を",
+            "start": 5
+          },
+          {
+            "end": 18,
+            "quote": "。でも、",
+            "start": 14
+          },
+          {
+            "end": 28,
+            "quote": "は",
+            "start": 27
+          },
+          {
+            "end": 34,
+            "quote": "。",
+            "start": 33
+          }
+        ]
+      },
+      {
+        "candidates": [
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "従属内容候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:b0395c29ac2eb2179c41d8355da338075910c0c184eb8c9d319f2e72b95b5f5c",
+              "field_path": "memo_action",
+              "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+              "field_utf8_end": 195,
+              "field_utf8_start": 126,
+              "literal_sha256": "dfafa179b6e16abc5900c0d3fa27d8a759d78263447b50cc20105ab2280147cb",
+              "scalar_end": 7,
+              "scalar_start": 0,
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+              "utf8_end": 147,
+              "utf8_start": 126
+            },
+            "index": 1,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": null,
+            "parent": 2,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:d737c114d408f03f2f57f2262d6b5e718bfcad8e26915440fba6199474991f28",
+                  "field_path": "memo_action",
+                  "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+                  "field_utf8_end": 195,
+                  "field_utf8_start": 126,
+                  "literal_sha256": "f17bfc45f716299f8c1565b6d3651237bd1faf9f60dde14f7fc19db59036218c",
+                  "scalar_end": 7,
+                  "scalar_start": 5,
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+                  "utf8_end": 147,
+                  "utf8_start": 141
+                },
+                "kind": "REASON_MARKER",
+                "quote": "ので"
+              }
+            ],
+            "quote": "疲れていたので",
+            "scope_role": "WRITTEN_REASON",
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "経路の分類候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:2425044703750301724ffc0a70fd4d3e094c18fc54f570944acee7cd67396b1d",
+              "field_path": "memo_action",
+              "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+              "field_utf8_end": 195,
+              "field_utf8_start": 126,
+              "literal_sha256": "51878b05c11073051ea53837b2c580628620d94e3f1329e4e301fd7365cd4ac3",
+              "scalar_end": 22,
+              "scalar_start": 8,
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+              "utf8_end": 192,
+              "utf8_start": 150
+            },
+            "index": 2,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": "ACTION_OR_NONACTION",
+            "parent": null,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:8ecf9f13862f2577902baf036940e56166a45ea47f38cda93bc0beb3953234cf",
+                  "field_path": "memo_action",
+                  "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+                  "field_utf8_end": 195,
+                  "field_utf8_start": 126,
+                  "literal_sha256": "8b05eafa504eaac636a8814ba1345cc32ef48bf5a512ac535f52919a25119fcb",
+                  "scalar_end": 14,
+                  "scalar_start": 8,
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+                  "utf8_end": 168,
+                  "utf8_start": 150
+                },
+                "kind": "WRITTEN_MODIFIER",
+                "quote": "今日の集まり"
+              }
+            ],
+            "quote": "今日の集まりへの誘いは断った",
+            "scope_role": null,
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          }
+        ],
+        "complete_source_text": "疲れていたので、今日の集まりへの誘いは断った。",
+        "evidence": {
+          "element_index": 0,
+          "evidence_id": "analysis-evidence:568b686ff5c89c99ec678504e04dd5f879a920f0a2d0f2d9d7d97b089e69e8d5",
+          "field_path": "memo_action",
+          "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+          "field_utf8_end": 195,
+          "field_utf8_start": 126,
+          "literal_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+          "scalar_end": 23,
+          "scalar_start": 0,
+          "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+          "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+          "utf8_end": 195,
+          "utf8_start": 126
+        },
+        "field": 2,
+        "field_path": "memo_action",
+        "meaning_coverage": "UNPARSED",
+        "record_ref": "00000000-0000-0000-0000-000000000065",
+        "record_version": "sha256:605db132eb45f6995fd137824405cb9e0f2acfad5571649147d0af3ed51b936a",
+        "requires_complete_field_context": true,
+        "residual_source_ranges": [
+          {
+            "end": 8,
+            "quote": "、",
+            "start": 7
+          },
+          {
+            "end": 23,
+            "quote": "。",
+            "start": 22
+          }
+        ]
+      },
+      {
+        "candidates": [
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "従属内容候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:b2313c9b5457b8ba1985fd2967c76d3a8eac2249f79a2e7dde29aebe9c9c168c",
+              "field_path": "memo",
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "field_utf8_end": 87,
+              "field_utf8_start": 8,
+              "literal_sha256": "0204bd07f7df0112143e5250f26dbfa87f95d8c1014d04d5cac0df2310cf1815",
+              "scalar_end": 12,
+              "scalar_start": 0,
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "utf8_end": 44,
+              "utf8_start": 8
+            },
+            "index": 1,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": null,
+            "parent": 2,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:355ac5fe7b5e0b813dd5ddaa71a607edb565acb59525678ffb6ef17354e414f0",
+                  "field_path": "memo",
+                  "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+                  "field_utf8_end": 87,
+                  "field_utf8_start": 8,
+                  "literal_sha256": "655d11bd2af019c238f11727545fcd8409afcf0ace2cf5041d7f51ec5fc73ede",
+                  "scalar_end": 2,
+                  "scalar_start": 0,
+                  "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+                  "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+                  "utf8_end": 14,
+                  "utf8_start": 8
+                },
+                "kind": "RELATIVE_TIME",
+                "quote": "昨日"
+              },
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:b4a491fabcbd904eb3860469e18da6517d615a30061d60fd6026b7af758570bc",
+                  "field_path": "memo",
+                  "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+                  "field_utf8_end": 87,
+                  "field_utf8_start": 8,
+                  "literal_sha256": "6e593485ebdd21d00d788b7d6b7036764c0760f4b9ccbeb6ccbd667de5d11586",
+                  "scalar_end": 10,
+                  "scalar_start": 3,
+                  "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+                  "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+                  "utf8_end": 38,
+                  "utf8_start": 17
+                },
+                "kind": "EPISTEMIC_EXPRESSION",
+                "quote": "分からなかった"
+              }
+            ],
+            "quote": "昨日は分からなかった問題",
+            "scope_role": "ATTRIBUTIVE_CONTENT",
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "従属内容候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:4e7be3cdd2330f02b8cb134c0edcfb232ac9e4232daec36bada88f2d944178f7",
+              "field_path": "memo",
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "field_utf8_end": 87,
+              "field_utf8_start": 8,
+              "literal_sha256": "b8a01d96d252723215b61a7f6ec8f6a953448bcb0ddb786614d1cfac6e15cb20",
+              "scalar_end": 20,
+              "scalar_start": 14,
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "utf8_end": 68,
+              "utf8_start": 50
+            },
+            "index": 2,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": null,
+            "parent": 3,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [
+              {
+                "evidence": {
+                  "element_index": 0,
+                  "evidence_id": "analysis-unit-evidence:ba304b5b998438de4f4771a89137994551e1e73ea9d772abab7cb4e70cbfd805",
+                  "field_path": "memo",
+                  "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+                  "field_utf8_end": 87,
+                  "field_utf8_start": 8,
+                  "literal_sha256": "5c9cf5e0dd47dc80ac046d84c26886ec532668448d339ab524ddb876103b26e4",
+                  "scalar_end": 16,
+                  "scalar_start": 14,
+                  "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+                  "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+                  "utf8_end": 56,
+                  "utf8_start": 50
+                },
+                "kind": "RELATIVE_TIME",
+                "quote": "今日"
+              }
+            ],
+            "quote": "今日は解けて",
+            "scope_role": "TE_CONTEXT",
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "carrier": "経路の分類候補",
+            "evidence": {
+              "element_index": 0,
+              "evidence_id": "analysis-unit-evidence:f27cddbbb1d268968385f451a9770503752c871ef90ea4b486ea04d490f127f0",
+              "field_path": "memo",
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "field_utf8_end": 87,
+              "field_utf8_start": 8,
+              "literal_sha256": "9d6036d528b2008b4420eb59959b0f816435d7c562d5ffc46ea2bbb1f033e1b5",
+              "scalar_end": 24,
+              "scalar_start": 20,
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "utf8_end": 80,
+              "utf8_start": 68
+            },
+            "index": 3,
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "parent": null,
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "qualifiers": [],
+            "quote": "うれしい",
+            "scope_role": null,
+            "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          }
+        ],
+        "complete_source_text": "昨日は分からなかった問題が、今日は解けてうれしい。🙂",
+        "evidence": {
+          "element_index": 0,
+          "evidence_id": "analysis-evidence:2f89dcdd38b8f368b4b0700c1efa4287445baea8c8c674652a7c3bfa9e3ee9c6",
+          "field_path": "memo",
+          "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+          "field_utf8_end": 87,
+          "field_utf8_start": 8,
+          "literal_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+          "scalar_end": 26,
+          "scalar_start": 0,
+          "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+          "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+          "utf8_end": 87,
+          "utf8_start": 8
+        },
+        "field": 3,
+        "field_path": "memo",
+        "meaning_coverage": "UNPARSED",
+        "record_ref": "00000000-0000-0000-0000-000000000066",
+        "record_version": "sha256:61663b28717b6017bf20d007d01b506c1e90b39a75aa43ba7cf1979e5e6c187d",
+        "requires_complete_field_context": true,
+        "residual_source_ranges": [
+          {
+            "end": 14,
+            "quote": "が、",
+            "start": 12
+          },
+          {
+            "end": 26,
+            "quote": "。🙂",
+            "start": 24
+          }
+        ]
+      }
+    ],
+    "owner_scope": "00000000-0000-0000-0000-000000000001",
+    "route_edges": [],
+    "schema_version": "cocolon.cmee.analysis_unit_candidate_diagram.v1",
+    "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+    "source_set_ref": "analysis-set:2eedda5acd62944038c0cf9babb730eea9843238100ae81c7818abd649a77ae8"
+  },
+  "graph": {
+    "owner_scope": "00000000-0000-0000-0000-000000000001",
+    "source_set_ref": "analysis-set:2eedda5acd62944038c0cf9babb730eea9843238100ae81c7818abd649a77ae8",
+    "request_ref": "analysis-model-units-request:734a67057f95961531a6c079d11935bc3a6b9bb7f9213ad8ec6d3d868b9c5ae7",
+    "response_ref": "analysis-model-units-response:caafed0165ad19f5dbf0eac26a14ed7df3e073dd6326a043e19417123b7b6d90",
+    "fields": [
+      {
+        "field": 1,
+        "field_ref": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+        "field_path": "memo",
+        "record_ref": "00000000-0000-0000-0000-000000000065",
+        "record_version": "sha256:605db132eb45f6995fd137824405cb9e0f2acfad5571649147d0af3ed51b936a",
+        "complete_source_text": "断ったことを後悔してはいない。でも、相手がどう思ったかは分からない。",
+        "evidence": {
+          "evidence_id": "analysis-evidence:dff95339956c63b4514d6f16acae6b11c70683a34bbb99aca5527d49cc0bce44",
+          "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+          "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+          "field_path": "memo",
+          "element_index": 0,
+          "field_utf8_start": 9,
+          "field_utf8_end": 111,
+          "scalar_start": 0,
+          "scalar_end": 34,
+          "utf8_start": 9,
+          "utf8_end": 111,
+          "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+          "literal_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa"
+        },
+        "units": [
+          {
+            "index": 1,
+            "quote": "断ったこと",
+            "node_kind": null,
+            "parent": 2,
+            "scope_role": "CONTENT_TARGET",
+            "qualifiers": [],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:97f5152ed0d025f833675a3c5e57b8a51091cbb5e581f886a42a9e2eacbe03bb",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 9,
+              "field_utf8_end": 111,
+              "scalar_start": 0,
+              "scalar_end": 5,
+              "utf8_start": 9,
+              "utf8_end": 24,
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "literal_sha256": "e0524c312645382ee850b96426b638c2cec8bfcc516a68ac0447c9d299b4962f"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "index": 2,
+            "quote": "後悔してはいない",
+            "node_kind": "ATTENTION_OR_THOUGHT",
+            "parent": null,
+            "scope_role": null,
+            "qualifiers": [
+              {
+                "kind": "NEGATION",
+                "quote": "はいない",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:e006d8ce259b66984e771bfcbda8fea4cbd1e26d7ee935e2725314d88caf94e1",
+                  "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 9,
+                  "field_utf8_end": 111,
+                  "scalar_start": 10,
+                  "scalar_end": 14,
+                  "utf8_start": 39,
+                  "utf8_end": 51,
+                  "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+                  "literal_sha256": "846de11dc0d7caf93fe4f3f32d7c22221aa0a39172d3f07fb576f1d55f8f92da"
+                }
+              }
+            ],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:162e7f8e6a2f759a440950c7d97f46c0a7533ddb9ef8292f591ba4603dd7efa0",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 9,
+              "field_utf8_end": 111,
+              "scalar_start": 6,
+              "scalar_end": 14,
+              "utf8_start": 27,
+              "utf8_end": 51,
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "literal_sha256": "4d5fd70bcd252bfaf9d03c30c0c6562f06f40cda0cf1b33ebc8bad77662147cd"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "index": 3,
+            "quote": "相手がどう思ったか",
+            "node_kind": null,
+            "parent": 4,
+            "scope_role": "UNKNOWN_CONTENT",
+            "qualifiers": [],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:ab5ad96fecc10a974c77fad745687e022b94bf5eaf8b590f71eda5b364386e22",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 9,
+              "field_utf8_end": 111,
+              "scalar_start": 18,
+              "scalar_end": 27,
+              "utf8_start": 63,
+              "utf8_end": 90,
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "literal_sha256": "4965ab738f0cf964587eaf328de10337f16f8ce5803229c5716a08173be2a342"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "index": 4,
+            "quote": "分からない",
+            "node_kind": null,
+            "parent": null,
+            "scope_role": "WRITTEN_UNKNOWN",
+            "qualifiers": [
+              {
+                "kind": "EPISTEMIC_EXPRESSION",
+                "quote": "分からない",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:c56f5846d4a9ef5fa4167de05b838de8de5682caef7f03c82ce9d46845574663",
+                  "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 9,
+                  "field_utf8_end": 111,
+                  "scalar_start": 28,
+                  "scalar_end": 33,
+                  "utf8_start": 93,
+                  "utf8_end": 108,
+                  "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+                  "literal_sha256": "9eeeb6139211a384cbf11c8747ceaf0d0c92040a3ed6813d1afc4d119815e0d4"
+                }
+              }
+            ],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:c56f5846d4a9ef5fa4167de05b838de8de5682caef7f03c82ce9d46845574663",
+              "source_span_id": "field:f939bb4ffb086bb13452406bd9c8e09759025d2a98bc33e2149040f4a8333d0c",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 9,
+              "field_utf8_end": 111,
+              "scalar_start": 28,
+              "scalar_end": 33,
+              "utf8_start": 93,
+              "utf8_end": 108,
+              "field_sha256": "348d67816422436ae178351e1627fabf4e046f4378d63d54d42f29d4b14fbdfa",
+              "literal_sha256": "9eeeb6139211a384cbf11c8747ceaf0d0c92040a3ed6813d1afc4d119815e0d4"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          }
+        ],
+        "residual_ranges": [
+          [
+            5,
+            6
+          ],
+          [
+            14,
+            18
+          ],
+          [
+            27,
+            28
+          ],
+          [
+            33,
+            34
+          ]
+        ]
+      },
+      {
+        "field": 2,
+        "field_ref": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+        "field_path": "memo_action",
+        "record_ref": "00000000-0000-0000-0000-000000000065",
+        "record_version": "sha256:605db132eb45f6995fd137824405cb9e0f2acfad5571649147d0af3ed51b936a",
+        "complete_source_text": "疲れていたので、今日の集まりへの誘いは断った。",
+        "evidence": {
+          "evidence_id": "analysis-evidence:568b686ff5c89c99ec678504e04dd5f879a920f0a2d0f2d9d7d97b089e69e8d5",
+          "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+          "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+          "field_path": "memo_action",
+          "element_index": 0,
+          "field_utf8_start": 126,
+          "field_utf8_end": 195,
+          "scalar_start": 0,
+          "scalar_end": 23,
+          "utf8_start": 126,
+          "utf8_end": 195,
+          "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+          "literal_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0"
+        },
+        "units": [
+          {
+            "index": 1,
+            "quote": "疲れていたので",
+            "node_kind": null,
+            "parent": 2,
+            "scope_role": "WRITTEN_REASON",
+            "qualifiers": [
+              {
+                "kind": "REASON_MARKER",
+                "quote": "ので",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:d737c114d408f03f2f57f2262d6b5e718bfcad8e26915440fba6199474991f28",
+                  "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "field_path": "memo_action",
+                  "element_index": 0,
+                  "field_utf8_start": 126,
+                  "field_utf8_end": 195,
+                  "scalar_start": 5,
+                  "scalar_end": 7,
+                  "utf8_start": 141,
+                  "utf8_end": 147,
+                  "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+                  "literal_sha256": "f17bfc45f716299f8c1565b6d3651237bd1faf9f60dde14f7fc19db59036218c"
+                }
+              }
+            ],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:b0395c29ac2eb2179c41d8355da338075910c0c184eb8c9d319f2e72b95b5f5c",
+              "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo_action",
+              "element_index": 0,
+              "field_utf8_start": 126,
+              "field_utf8_end": 195,
+              "scalar_start": 0,
+              "scalar_end": 7,
+              "utf8_start": 126,
+              "utf8_end": 147,
+              "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+              "literal_sha256": "dfafa179b6e16abc5900c0d3fa27d8a759d78263447b50cc20105ab2280147cb"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "index": 2,
+            "quote": "今日の集まりへの誘いは断った",
+            "node_kind": "ACTION_OR_NONACTION",
+            "parent": null,
+            "scope_role": null,
+            "qualifiers": [
+              {
+                "kind": "WRITTEN_MODIFIER",
+                "quote": "今日の集まり",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:8ecf9f13862f2577902baf036940e56166a45ea47f38cda93bc0beb3953234cf",
+                  "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+                  "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+                  "field_path": "memo_action",
+                  "element_index": 0,
+                  "field_utf8_start": 126,
+                  "field_utf8_end": 195,
+                  "scalar_start": 8,
+                  "scalar_end": 14,
+                  "utf8_start": 150,
+                  "utf8_end": 168,
+                  "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+                  "literal_sha256": "8b05eafa504eaac636a8814ba1345cc32ef48bf5a512ac535f52919a25119fcb"
+                }
+              }
+            ],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:2425044703750301724ffc0a70fd4d3e094c18fc54f570944acee7cd67396b1d",
+              "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo_action",
+              "element_index": 0,
+              "field_utf8_start": 126,
+              "field_utf8_end": 195,
+              "scalar_start": 8,
+              "scalar_end": 22,
+              "utf8_start": 150,
+              "utf8_end": 192,
+              "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+              "literal_sha256": "51878b05c11073051ea53837b2c580628620d94e3f1329e4e301fd7365cd4ac3"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          }
+        ],
+        "residual_ranges": [
+          [
+            7,
+            8
+          ],
+          [
+            22,
+            23
+          ]
+        ]
+      },
+      {
+        "field": 3,
+        "field_ref": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+        "field_path": "memo",
+        "record_ref": "00000000-0000-0000-0000-000000000066",
+        "record_version": "sha256:61663b28717b6017bf20d007d01b506c1e90b39a75aa43ba7cf1979e5e6c187d",
+        "complete_source_text": "昨日は分からなかった問題が、今日は解けてうれしい。🙂",
+        "evidence": {
+          "evidence_id": "analysis-evidence:2f89dcdd38b8f368b4b0700c1efa4287445baea8c8c674652a7c3bfa9e3ee9c6",
+          "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+          "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+          "field_path": "memo",
+          "element_index": 0,
+          "field_utf8_start": 8,
+          "field_utf8_end": 87,
+          "scalar_start": 0,
+          "scalar_end": 26,
+          "utf8_start": 8,
+          "utf8_end": 87,
+          "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+          "literal_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e"
+        },
+        "units": [
+          {
+            "index": 1,
+            "quote": "昨日は分からなかった問題",
+            "node_kind": null,
+            "parent": 2,
+            "scope_role": "ATTRIBUTIVE_CONTENT",
+            "qualifiers": [
+              {
+                "kind": "RELATIVE_TIME",
+                "quote": "昨日",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:355ac5fe7b5e0b813dd5ddaa71a607edb565acb59525678ffb6ef17354e414f0",
+                  "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+                  "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 87,
+                  "scalar_start": 0,
+                  "scalar_end": 2,
+                  "utf8_start": 8,
+                  "utf8_end": 14,
+                  "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+                  "literal_sha256": "655d11bd2af019c238f11727545fcd8409afcf0ace2cf5041d7f51ec5fc73ede"
+                }
+              },
+              {
+                "kind": "EPISTEMIC_EXPRESSION",
+                "quote": "分からなかった",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:b4a491fabcbd904eb3860469e18da6517d615a30061d60fd6026b7af758570bc",
+                  "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+                  "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 87,
+                  "scalar_start": 3,
+                  "scalar_end": 10,
+                  "utf8_start": 17,
+                  "utf8_end": 38,
+                  "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+                  "literal_sha256": "6e593485ebdd21d00d788b7d6b7036764c0760f4b9ccbeb6ccbd667de5d11586"
+                }
+              }
+            ],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:b2313c9b5457b8ba1985fd2967c76d3a8eac2249f79a2e7dde29aebe9c9c168c",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 8,
+              "field_utf8_end": 87,
+              "scalar_start": 0,
+              "scalar_end": 12,
+              "utf8_start": 8,
+              "utf8_end": 44,
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "literal_sha256": "0204bd07f7df0112143e5250f26dbfa87f95d8c1014d04d5cac0df2310cf1815"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "index": 2,
+            "quote": "今日は解けて",
+            "node_kind": null,
+            "parent": 3,
+            "scope_role": "TE_CONTEXT",
+            "qualifiers": [
+              {
+                "kind": "RELATIVE_TIME",
+                "quote": "今日",
+                "evidence": {
+                  "evidence_id": "analysis-unit-evidence:ba304b5b998438de4f4771a89137994551e1e73ea9d772abab7cb4e70cbfd805",
+                  "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+                  "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 87,
+                  "scalar_start": 14,
+                  "scalar_end": 16,
+                  "utf8_start": 50,
+                  "utf8_end": 56,
+                  "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+                  "literal_sha256": "5c9cf5e0dd47dc80ac046d84c26886ec532668448d339ab524ddb876103b26e4"
+                }
+              }
+            ],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:4e7be3cdd2330f02b8cb134c0edcfb232ac9e4232daec36bada88f2d944178f7",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 8,
+              "field_utf8_end": 87,
+              "scalar_start": 14,
+              "scalar_end": 20,
+              "utf8_start": 50,
+              "utf8_end": 68,
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "literal_sha256": "b8a01d96d252723215b61a7f6ec8f6a953448bcb0ddb786614d1cfac6e15cb20"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          },
+          {
+            "index": 3,
+            "quote": "うれしい",
+            "node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "parent": null,
+            "scope_role": null,
+            "qualifiers": [],
+            "evidence": {
+              "evidence_id": "analysis-unit-evidence:f27cddbbb1d268968385f451a9770503752c871ef90ea4b486ea04d490f127f0",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 8,
+              "field_utf8_end": 87,
+              "scalar_start": 20,
+              "scalar_end": 24,
+              "utf8_start": 68,
+              "utf8_end": 80,
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "literal_sha256": "9d6036d528b2008b4420eb59959b0f816435d7c562d5ffc46ea2bbb1f033e1b5"
+            },
+            "actor": "UNRESOLVED_NOT_OWNER_DERIVED",
+            "polarity": "AS_WRITTEN_UNRESOLVED",
+            "modality": "AS_WRITTEN_UNRESOLVED",
+            "temporal_scope": "AS_WRITTEN_UNRESOLVED"
+          }
+        ],
+        "residual_ranges": [
+          [
+            12,
+            14
+          ],
+          [
+            24,
+            26
+          ]
+        ]
+      }
+    ],
+    "unparsed_record_refs": [
+      "00000000-0000-0000-0000-000000000065",
+      "00000000-0000-0000-0000-000000000066"
+    ],
+    "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+    "route_edges": []
+  },
+  "coverage": {
+    "profile": "cumulative.v1",
+    "source_count": 2,
+    "processed_count": 2,
+    "mapped_count": 0,
+    "unparsed_count": 2,
+    "excluded_count": 0,
+    "exclusion_reasons": {},
+    "stale_supplement_count": 0
+  }
+}

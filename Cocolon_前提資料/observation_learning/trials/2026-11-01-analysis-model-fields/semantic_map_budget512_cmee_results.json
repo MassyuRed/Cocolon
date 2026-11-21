@@ -1,0 +1,14 @@
+[
+  {
+    "id": "T01_manual10",
+    "result": "analysis_semantic_map_invalid"
+  },
+  {
+    "id": "H03_boundary",
+    "result": "analysis_semantic_map_invalid"
+  },
+  {
+    "id": "H04_garden",
+    "result": "CMEE_FORMAT_PASS_LIMITED_CANDIDATE_NOT_PRODUCT_ACCEPTANCE"
+  }
+]

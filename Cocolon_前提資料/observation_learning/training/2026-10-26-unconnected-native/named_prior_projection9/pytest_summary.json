@@ -1,0 +1,26 @@
+{
+  "status": "CPU_PYTEST_PASS",
+  "exit_code": 0,
+  "seconds": 20.141268383944407,
+  "files": [
+    "test_cmee_preparation.py",
+    "test_cmee_model_candidate_source.py",
+    "test_cmee_quote_candidate.py",
+    "test_cmee_emlis_model_meaning.py",
+    "test_cmee_emlis_model_daily_calm.py",
+    "test_cmee_emlis_sixrow.py",
+    "test_cmee_named_reference_candidate.py"
+  ],
+  "sql_tests_deselected": true,
+  "sql_operations": 0,
+  "tests": 349,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "product_credit": 0,
+  "automatic_progression": false
+}

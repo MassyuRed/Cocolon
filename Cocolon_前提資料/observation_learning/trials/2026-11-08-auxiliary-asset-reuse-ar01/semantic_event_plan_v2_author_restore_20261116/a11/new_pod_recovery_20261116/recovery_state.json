@@ -1,0 +1,91 @@
+{
+  "A10_actual_archive_sha256": "bff9507c57614b9b572d6a257fc26d8be257e2a244a5dd89ee284cdc5a9cd8a2",
+  "A10_raw_repaired_or_rebound": false,
+  "A11": {
+    "actual_responses": 3,
+    "executed": true,
+    "max_responses": 9,
+    "once_remaining": false,
+    "received_map_cases": 1,
+    "restore_inclusive_actual_seconds": 192.17056906805374,
+    "restore_inclusive_seconds": 1800,
+    "state": "FAILED_CLOSED"
+  },
+  "B11": {
+    "condition": "all five new A11 actual source/raw/projection/text adequate under root and independent full meaning review",
+    "condition_met": false,
+    "executed": false,
+    "max_responses": 11,
+    "restore_inclusive_seconds": 1020,
+    "unused_scope_reusable": false
+  },
+  "SQL_writes": 0,
+  "actual_owner": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_event_plan_v2_a11_newpod_actual_20261116",
+  "approved_A11_scope_sha256": "6c2c2a5119ddfc07b3570cc9317c25175e8a2d8533010eab8de9188ae657d7bb",
+  "assets": [
+    {
+      "archive": "Cocolon_Analysis_Semantic_Map_Training_20261107.zip",
+      "archive_bytes": 42734454,
+      "archive_sha256": "a7081da470d85364497f924199b0e416031db98d21e9aa0f08a914864392478a",
+      "bytes": 15351792,
+      "config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+      "member": "candidate120/adapter/adapter_model.safetensors",
+      "name": "original120u",
+      "verified": "archive CRC and actual member SHA match expected original",
+      "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495"
+    },
+    {
+      "archive": "Cocolon_CMEE_ConcreteReading_20261115.zip",
+      "archive_bytes": 64538431,
+      "bytes": 15351792,
+      "config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+      "member": "verification/semantic_alignment17_recovery_actual_20261116/fit/adapter/adapter_model.safetensors",
+      "name": "candidate34",
+      "verified": "archive CRC and actual member SHA match expected candidate",
+      "weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b"
+    },
+    {
+      "archive": "Cocolon_CMEE_AR04_PreferenceTense_Correction48_Prepared_20261111.zip",
+      "archive_bytes": 30833327,
+      "archive_sha256": "aa6206c9bae9085d4cf651b9dce715f747e7618bc0e1936c4b5a6efc65cdeeb1",
+      "bytes": 15351792,
+      "config_sha256": "24f34137fd7b0aca0366c1a76fb280216d810565e4062974d12dd2096f93d12c",
+      "member": "fit/adapter/adapter_model.safetensors",
+      "name": "saved Piece344a candidate, not A10 baseline Piece/base",
+      "nested_archive": "preference8/gpu_result/piece_preference48_evidence.private.zip",
+      "verified": "both ZIP CRC and actual member SHA match; original argv has no --piece-adapter",
+      "weights_sha256": "344a9defd0c890982d9718805d8b630b5d48719475c998aa9a57ed6df6bfc337"
+    }
+  ],
+  "auth_status": "New Jupyter authentication completed using secure browser authentication; no additional token required. Credential value is not recorded.",
+  "authorization": "Mash explicitly approved A11 plus conditional B11 and continuation on the newly rented Pod if feasible; then explicitly selected Runpod Google sign-in. Approval is retained. No new model experiment or rerun is authorized by migration.",
+  "checkpoint_sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+  "input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+  "model_calls": 3,
+  "new_pod": "8d6lpvzb35at8x",
+  "new_pod_baseline_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+  "new_pod_scope_sha256": "6317b2676984386c60716c7698abfe10072b284b06e988c18872749174aac29f",
+  "new_pod_transfers": "One verified restoration archive of 34954120 bytes and 434 members; 433 manifest entries verified on Pod.",
+  "next_prepared": {
+    "owner": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_event_plan_v2_base_control_prepared_20261116",
+    "prior_authority_reused": false,
+    "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+    "state": "UNAPPROVED_UNEXECUTED"
+  },
+  "normal_connection": "NOT_VERIFIED_FROM_APP_API_OR_WORKER",
+  "normal_rollout": 0,
+  "old_native_recovered": {
+    "activated": false,
+    "bytes": 42367,
+    "sent_to_new_pod": false,
+    "sha256": "ad3d301d2d1abd9226703dc72e3734eb8da79d8e0cf084d4b0666e97298370be"
+  },
+  "old_pod": "f1lle4xwq3wjln",
+  "old_pod_status": "User reports balance exhaustion stopped rental; actual old volume retention not inspected",
+  "pod_operations": "Restoration, dependency setup, exact base snapshot retrieval, existing A5000 kernel probe, one approved A11 and non-generating verification.",
+  "restored_pid": 4089,
+  "runtime_status": "New RTX A5000 runtime verified with fresh 7 numerical parities and two 1752-token warm runs. Base 11 files/9342816694 bytes match historical SHA manifest. Original120u and candidate34 adapter bytes match backups. CPU client408 tree matches. No training.",
+  "state": "A11_FAILED_CLOSED_B11_CONDITION_NOT_SATISFIED",
+  "structure_map_delta": "NONE; only recovery and continuation record, product source/owner/route unchanged",
+  "training": 0
+}

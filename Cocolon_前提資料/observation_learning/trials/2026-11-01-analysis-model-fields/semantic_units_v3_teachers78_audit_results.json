@@ -1,0 +1,81 @@
+{
+  "status": "COMPLETE_CPU_AUDIT_REVIEWED_NOT_PRODUCT_ADOPTION",
+  "api_commit": "58c47dd8d6512fdd7db5eb413a383925e8b31a87",
+  "old_api_commit": "dc05dc358d1c44ce47fd844f6041d74f1f74fe6a",
+  "old78_plan_sha256": "72696f33ae6e8284eb928e7497fa966b64bb072c99474ea99abc6b5a93b133be",
+  "runner_sha256": "0604388379c095a94328b8434e82e4f5d7491fdc009b7c8f1244bea0143b20f0",
+  "prompt_version": "semantic_boundaries.v3",
+  "before_prompt_version": "semantic_boundaries.v2",
+  "teachers": 78,
+  "old78_source_target_order_unchanged": true,
+  "input_update_order_length": 106,
+  "model_loads": 0,
+  "model_generations": 0,
+  "training_updates": 0,
+  "nll_measurements": 0,
+  "new_teachers_created": 0,
+  "new_training_plan_created": false,
+  "additional_gpu_selected": false,
+  "normal_adoption": false,
+  "next_training_initial_selected": false,
+  "product_credit": 0,
+  "source_target_order_sha256": "f6ea645a410eed0f71ac97f2c8577ee0748c9bc9bf1d07301f5600584d1b4819",
+  "runtime_versions": {
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.8.0+cu128"
+  },
+  "training_renderer_source_sha256": "59939d81022c4e8a86ce2217180a4f8143e6f46cc8141bc28dc6163f1593dbb4",
+  "model_forward_and_loss_equality_tested": false,
+  "strict_candidate_saved_replays": 156,
+  "typed_role_saved_replays": 8,
+  "typed_role_teachers_preserved": 4,
+  "multiclause_typed_scope_refusals": 4,
+  "multiclause_teacher_ids": 2,
+  "saved_reader_engine_both_compilers_both_authors_prohibited": true,
+  "candidate_identity_exclusions": [
+    "graph.request_ref",
+    "graph.response_ref"
+  ],
+  "role_identity_exclusions": [
+    "artifact_id",
+    "safe_text_projection.projection_of",
+    "safe_projection.projection_of"
+  ],
+  "min_training_context_margin": 6148,
+  "min_generation_budget_margin": 4342,
+  "process_seconds": 27.258230581879616,
+  "result_sha256": "69016aeb4f4ea03f2973f77742b5b9ca591d1f7ee7b75c428f7e904cb361c97b",
+  "source_target_review": {
+    "teachers": 78,
+    "fields": 88,
+    "units": 291,
+    "direct_contradictions_observed": 0,
+    "sha256": "81dce4e3ce71eeec347172eebc58e3b2604ea04010d4c96df69c321b6024e343",
+    "general_semantic_quality_proven": false
+  },
+  "cpu_tensor_pairs_saved_reloaded": 78,
+  "all_prompt_masks_shifted_gold_tail_boundaries_exact": true,
+  "original_archive": {
+    "bytes": 993239,
+    "members": 261,
+    "sha256": "590eaff22b1416db77a02604df03a46b33e725caa314ad0d1647f66882fc2058",
+    "crc_and_all_member_bytes_sha256_verified": true
+  },
+  "audit_exit": 0,
+  "archive_exit": 0,
+  "ordinary_api_db_rn_deployment_changes": 0,
+  "structure_map_delta": "NONE",
+  "gpu_rental_maintained": true,
+  "review_sha256": {
+    "ROOT_REVIEW.md": "6c99832c9f8e144dcbe6a05970ef14d2342d9b003059343547118fc00958fbf7",
+    "SOURCE_TARGET_REVIEW.md": "81dce4e3ce71eeec347172eebc58e3b2604ea04010d4c96df69c321b6024e343",
+    "INTEGRITY_REVIEW.md": "5e53a604f037e3faf8a1e31e1f4aa73720a17d4cb0478f50e23adbb14e9fde28"
+  },
+  "result_artifact": {
+    "library_file_id": "libfile_c7ab2f40bdc081918ccf09e991ed4028",
+    "bytes": 944945,
+    "members": 7,
+    "sha256": "f55dc65148ca8b1d7509b7ed1055ca7646a82f7a61974c183db05382a51704be"
+  }
+}

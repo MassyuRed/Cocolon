@@ -56,16 +56,6 @@ function parseJsonObject(value) {
   return parseMaybeJsonObject(value);
 }
 
-function normalizeReport(report, reportType) {
-  const safe = readFirstObject(report);
-  return Object.freeze({
-    ...safe,
-    report_type: compact(safe.report_type) || reportType,
-    title: compact(safe.title),
-    content_text: compact(safe.content_text),
-  });
-}
-
 function normalizeWatashiMapReport(report) {
   const safe = readFirstObject(report);
   const contentJson = parseJsonObject(safe.content_json || safe.contentJson);
@@ -75,7 +65,7 @@ function normalizeWatashiMapReport(report) {
     title: compact(safe.title) || "今のわたしマップ",
     report_mode: compact(safe.report_mode || safe.reportMode) || "light",
     viewer_tier: compact(safe.viewer_tier || safe.viewerTier) || "free",
-    period_label: compact(safe.period_label || safe.periodLabel) || "直近28日",
+    period_label: "練習用の表示例",
     content_text: compact(safe.content_text || safe.contentText),
     content_json: freezeClone(contentJson),
   });
@@ -190,16 +180,62 @@ export const TUTORIAL_PIECES = Object.freeze([
   TUTORIAL_FOLLOWED_USER_PIECE,
 ]);
 
-export const TUTORIAL_ANALYSIS_COUNTS = Object.freeze({
-  today: Number(FIXTURE_ANALYSIS?.counts?.today || 0) || 4,
-  week: Number(FIXTURE_ANALYSIS?.counts?.week || 0) || 21,
-  month: Number(FIXTURE_ANALYSIS?.counts?.month || 0) || 72,
-});
+const GRAPH_EMOTIONS = ["joy", "sadness", "anger", "anxiety", "calm"];
 
-export const TUTORIAL_ANALYSIS_REPORTS = Object.freeze({
-  daily: normalizeReport(FIXTURE_ANALYSIS?.reports?.daily, "daily"),
-  weekly: normalizeReport(FIXTURE_ANALYSIS?.reports?.weekly, "weekly"),
-  monthly: normalizeReport(FIXTURE_ANALYSIS?.reports?.monthly, "monthly"),
+function graphExampleAggregate(emotions) {
+  const inputCount = emotions.length;
+  const weights = Object.fromEntries(GRAPH_EMOTIONS.map(key => [key, emotions.filter(value => value === key).length]));
+  const shares = Object.fromEntries(GRAPH_EMOTIONS.map(key => [key, inputCount ? Math.round(weights[key] * 100 / inputCount) : 0]));
+  return {
+    input_count: inputCount,
+    emotion_weights: weights,
+    emotion_share_pct: shares,
+    status: inputCount ? "ok" : "no_observation",
+  };
+}
+
+const GRAPH_EXAMPLE_BANDS = [
+  { key: "early", label: "深夜", hours: "0:00–6:00", emotions: [] },
+  { key: "morning", label: "朝", hours: "6:00–12:00", emotions: ["joy", "anxiety"] },
+  { key: "afternoon", label: "昼", hours: "12:00–18:00", emotions: ["joy", "calm"] },
+  { key: "night", label: "夜", hours: "18:00–24:00", emotions: ["calm"] },
+];
+const GRAPH_EXAMPLE_RECORDS = {
+  2: ["anxiety", "calm"],
+  3: ["sadness"],
+  5: ["anger", "anxiety", "calm", "calm"],
+  7: ["joy", "joy", "calm", "calm"],
+  8: GRAPH_EXAMPLE_BANDS.flatMap(band => band.emotions),
+  10: ["anxiety", "calm", "calm", "calm"],
+  14: ["joy", "calm"],
+  17: ["joy", "anxiety"],
+  22: ["sadness", "calm"],
+  25: ["joy", "calm", "calm", "calm"],
+  30: ["joy", "calm"],
+};
+
+function graphExamplePeriod(firstDay, lastDay) {
+  const date = day => `2026-11-${String(day).padStart(2, "0")}`;
+  const days = Array.from({ length: lastDay - firstDay + 1 }, (_, offset) => firstDay + offset);
+  const items = days.map(day => ({ date: date(day), ...graphExampleAggregate(GRAPH_EXAMPLE_RECORDS[day] || []) }));
+  return {
+    start_date: date(firstDay),
+    end_date: date(lastDay),
+    items,
+    summary: {
+      ...graphExampleAggregate(days.flatMap(day => GRAPH_EXAMPLE_RECORDS[day] || [])),
+      recorded_days: items.filter(item => item.input_count).length,
+    },
+  };
+}
+
+export const TUTORIAL_KOKORO_WEATHER = Object.freeze({
+  today: {
+    ...graphExamplePeriod(8, 8),
+    time_buckets: GRAPH_EXAMPLE_BANDS.map(({ emotions, ...band }) => ({ ...band, ...graphExampleAggregate(emotions) })),
+  },
+  week: graphExamplePeriod(2, 8),
+  month: graphExamplePeriod(1, 30),
 });
 
 const fixtureWatashiMapLatest = normalizeWatashiMapReport(
@@ -278,9 +314,11 @@ const FALLBACK_WATASHI_MAP = Object.freeze({
   }),
 });
 
-export const TUTORIAL_WATASHI_MAP = freezeClone(
-  Object.keys(fixtureWatashiMap).length > 0 ? fixtureWatashiMap : FALLBACK_WATASHI_MAP
-);
+// Keep the captured fixture intact; project only the tutorial's display label.
+export const TUTORIAL_WATASHI_MAP = freezeClone({
+  ...(Object.keys(fixtureWatashiMap).length > 0 ? fixtureWatashiMap : FALLBACK_WATASHI_MAP),
+  period_label: "練習用の表示例",
+});
 
 export const TUTORIAL_WATASHI_MAP_REPORT = freezeClone({
   ...fixtureWatashiMapLatest,
@@ -289,7 +327,7 @@ export const TUTORIAL_WATASHI_MAP_REPORT = freezeClone({
   report_type: compact(fixtureWatashiMapLatest.report_type) || "self_structure",
   report_mode: compact(fixtureWatashiMapLatest.report_mode || fixtureWatashiMapLatest.reportMode) || "light",
   viewer_tier: compact(fixtureWatashiMapLatest.viewer_tier || fixtureWatashiMapLatest.viewerTier) || "free",
-  period_label: compact(fixtureWatashiMapLatest.period_label || fixtureWatashiMapLatest.periodLabel) || "直近28日",
+  period_label: "練習用の表示例",
   content_text:
     compact(fixtureWatashiMapLatest.content_text || fixtureWatashiMapLatest.contentText) ||
     "人は、相手や場所によって少しずつ違う自分で動いています。",
@@ -341,11 +379,11 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
   nodes: Object.freeze([
     Object.freeze({
       label: "その場で受け取る",
-      title: "Emlisの観測",
+      title: "Emlisからの返答",
     }),
     Object.freeze({
       label: "あとで振り返る",
-      title: "こころ天気",
+      title: "こころグラフ",
     }),
     Object.freeze({
       label: "自分の動き方を見る",
@@ -360,16 +398,16 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
 
 export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
-    title: "Emlisの観測",
+    title: "Emlisからの返答",
     description:
-      "入力した気持ちを、その場でEmlisが観測して言葉にします。",
-    example: "今の言葉を、ひとつの観測として受け取れます。",
+      "保存した入力を受け取り、その内容にEmlisが返答します。",
+    example: "返答は、あとから同じ内容を読み返せます。",
   }),
   Object.freeze({
-    title: "こころ天気",
+    title: "こころグラフ",
     description:
-      "入力が続くと、こころ天気（日/週/月）として振り返れます。",
-    example: "自分の気持ちの流れを、天気のようにあとから見返せます。",
+      "入力が続くと、こころグラフ（日/週/月）として振り返れます。",
+    example: "自分の気持ちの流れを、グラフであとから見返せます。",
   }),
   Object.freeze({
     title: "わたしマップ",
@@ -380,8 +418,8 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
     title: "ピース",
     description:
-      "あなたの入力内容を、問いと答えに整えて投稿します。",
-    example: "自分の価値観や考え方を投稿でき、他者の価値観や考え方を閲覧できます。",
+      "保存した入力の本文をもとに、言葉を画像のピースに整えられます。",
+    example: "作った画像はアプリ内で見返し、写真へ保存できます。投稿欄では、これまでの問いと答えのピースも読めます。",
   }),
 ]);
 
@@ -392,7 +430,7 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
     "わたしマップでは、あなたがどんな場面でどんな役割になりやすいか、そしてそのとき選びやすい行動を見ていきます。",
     `例：${TUTORIAL_WATASHI_MAP_PREVIEW.summary}`,
     "これは性格タイプではなく、入力から見えた場面ごとの動き方です。",
-    "入口はFreeプランでも見られ、詳しい自己分析レポートはPlusプラン以上で読めます。",
+    "今のわたしマップは全プランで利用できます。月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。",
   ].join("\n"),
   watashiMap: TUTORIAL_WATASHI_MAP,
 });
@@ -400,5 +438,5 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
   body:
-    "Emlisには、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
+    "Emlisには、感情通知や共鳴履歴など、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

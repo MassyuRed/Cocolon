@@ -1,0 +1,412 @@
+{
+  "date": "2026-11-05",
+  "api_commit": "5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a",
+  "before_api": "f1048a8f8883791013786dc6da225dcf1e31ae61",
+  "scope": "Single original record and memo; exactly two explicitly SELF past responsibility/decision clauses. Keep existing source graph and explicit written order. Synthetic integration evidence, not general quality.",
+  "new_responses": 4,
+  "new_model_loads": 1,
+  "new_training": 0,
+  "normal_adoption": false,
+  "after_saved": 1,
+  "after_unsupported": 3,
+  "before_saved": 0,
+  "cases": [
+    {
+      "id": "RD01",
+      "synthetic_original": "私は会合の進行を担当した。その後、私は分担を決めた。",
+      "category": [
+        "仕事"
+      ],
+      "before_status": "UNSUPPORTED",
+      "after_status": "SAVED",
+      "before": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：仕事\n会合の進行を担当した（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\nその後：分担を決める（実行済み）（1件の記録）\n記録内の順序：選択カテゴリ：仕事\n会合の進行を担当した（記録された担当） → 選択カテゴリ：仕事\nその後：分担を決める（実行済み）。原因を示す線ではありません。\n未確定（選択カテゴリ：仕事\n会合の進行を担当した（記録された担当））：確定していない項目：場面、考え・注意、結果・余韻。",
+        "generated_at": "2026-11-05T08:20:18.173555+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T08:20:18.173555+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [
+            {
+              "edge_kind": "OBSERVED_ORDER",
+              "edge_ref": "e1",
+              "from_ref": "n1",
+              "to_ref": "n2",
+              "visible_label": "記録内に書かれた順序"
+            }
+          ],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n会合の進行を担当した（記録された担当）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\nその後：分担を決める（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T08:20:18.173555+00:00",
+          "projection_of": "artifact:925c899455924e75a9c49532abe9320f@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T08:20:18.173555+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "925c8994-5592-4e75-a9c4-9532abe9320f",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      },
+      "reading": "ROLE + ACTION"
+    },
+    {
+      "id": "RD02",
+      "synthetic_original": "私は会合の進行を担当しなかった。その後、私は分担を決めなかった。",
+      "category": [
+        "仕事"
+      ],
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "reading": "model担当root=ACTION; source role kind mismatch; unchanged unsupported"
+    },
+    {
+      "id": "RD03",
+      "synthetic_original": "僕は受付を担当した。それから、僕は参加を決めておいた。",
+      "category": [
+        "生活"
+      ],
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "reading": "model担当root=ACTION; source role kind mismatch; unchanged unsupported"
+    },
+    {
+      "id": "RD04",
+      "synthetic_original": "僕は受付を担当しなかった。僕は参加を決めなかった。",
+      "category": [
+        "生活"
+      ],
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": null,
+        "generated_at": null,
+        "has_visible_content": false,
+        "history_saved": false,
+        "latest_generated_at": null,
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": null,
+        "period": "all",
+        "period_end": null,
+        "period_start": null,
+        "reason": "insufficient_input",
+        "refreshed": false,
+        "report_id": null,
+        "report_mode": "standard",
+        "skip_reason": "analysis_insufficient_input",
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": null
+      },
+      "reading": "model担当root=ACTION; source role kind mismatch; unchanged unsupported"
+    }
+  ],
+  "old22": {
+    "bound_responses": 22,
+    "deployed": false,
+    "model_loads": 0,
+    "new_generation": 0,
+    "new_training": 0,
+    "non_generation_current_monthly_readonly": 16,
+    "normal_4b_enabled": false,
+    "product_credit": 0,
+    "rejected": 2,
+    "saved": 16,
+    "scope": "original 22 response bindings; real ensure/build/read validators; mock isolated RPC persistence",
+    "seconds": 1.6257301205769181,
+    "sql_evidence": "independent synthetic responses in test_analysis_cumulative_model_source",
+    "unsupported": 4
+  },
+  "old_samefield_saved": 4,
+  "jupyter": {
+    "passed": 574,
+    "skipped": 1,
+    "seconds": 42.1,
+    "skip": "old model-fields SQL WASM unconfigured; also skipped in CI generation stage"
+  },
+  "ci": {
+    "run": 41993360792,
+    "job": 127130612355,
+    "all_steps_success": true,
+    "generation_passed": 2226,
+    "generation_skipped": 1,
+    "subtests": 12048,
+    "generation_seconds": 275.64,
+    "shared_owner_passed": 1,
+    "cumulative_passed": 48,
+    "cumulative_seconds": 28.83,
+    "sql_source_records": 201,
+    "sql_monthly_references": 15
+  },
+  "reporting_failure": {
+    "original_finally": "meta=None .get AttributeError after all four raw responses",
+    "original_live_status": "RUNNING",
+    "original_driver": {
+      "before": 1,
+      "live": 1,
+      "old22": 1,
+      "old_samefield": 0,
+      "tests": 0
+    },
+    "old22_initial": "file argument instead of directory; no replay completed",
+    "recovery": "reporting-only fixed runner; same original four; zero generation/load; old22 corrected directory; three recovery processes exit0",
+    "recovery_seconds": 9.667802683077753
+  },
+  "remaining": [
+    "All-record model admission (currently one record only); never truncate to latest1",
+    "Natural responsibility node_kind stability:3 of new4 unsupported",
+    "Implicit self/role, personal criterion, motives and crossrecord meaning links",
+    "HTTP/cron explicit model_source activation, transport deadlines/duplicate suppression and selected weights",
+    "Order qualifier not tested in actual new4",
+    "Mash product review, IF/Saved/device/deployment remain"
+  ],
+  "structure_map_delta": "PRESENT existing compiler/admission source-proof integration; no new graph/type/author/schema/DB/RN"
+}

@@ -1,0 +1,49 @@
+{
+  "owner": "root 華恋",
+  "mode": "Codex Work / GPT-6 family; not formal Pro/Ultra/human Product Read",
+  "scope": "all15 source/teacher/current raw and old9 actual served body/questions/updates reviewed; BOOK malformed packet read as original text without repair",
+  "known_teacher_fit_only": true,
+  "new_observation_session_needed_now": false,
+  "old9": {
+    "raw_text_bytes_equal_previous109c": 9,
+    "parsed_packet_value_equal_teacher": 9,
+    "meaning": 9,
+    "body": 9,
+    "reading": "椅子は修理と再利用の喜びを保持。訂正は共同修理・喜びの対象変更・GAP解消の3更新を全て保持。うどんは帰宅/調理/食事と少しの落着きを保持。旧9は2言語familyの近い反復で、9独立題材や新しい文章の深さの証明ではない。椅子の本文は喜び/再利用の反復が強く、訂正文は処理説明として硬い。"
+  },
+  "new6_reading": [
+    {
+      "id": "FT-BOOK-INITIAL",
+      "reading": "4claim/2relation/6quoteは保持するが、日本語unknown_idが既存契約に不適合。本文観測の旧安心感/内質問は消えた一方、受け取りは「大丈夫」の発話側と返却側が混線し、未記載の「その後のこと、まだ聞けていない」を補う。"
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "reading": "EOSまで完結したがcandidate.schema_versionが2回。引用13行に対して参照13〜16が存在し、回答側の原文役割/時点も混線。教師7更新に対してADD1のみ、INVALIDATE_GAPなし。update_noteは説明済みの対象を未記載へ戻す。本文を採用成功に数えない。"
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "reading": "4claim/2relationと喜び/主観的置いていかれた感じを意味採用。IDは合法な別名。観測の「开店」「…のですか」という質問、近い復唱が残り、本文なし。"
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "reading": "EOS/strictJSONと6relationまで出すが、引用に原文にない英語3行と誤source。教師8更新に対してADD1だけでGAP解消なし。17引用に参照17/18、update_refs[0,1]に実更新1という不整合。受け取りは友人側の実現を本人の感じ方から断定へ強め、うれしさも落とす。"
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "reading": "意味4claim/2relationは採用するが「叔父に植え替えの手順を説明し」で教わった側が説明側へ反転。聞く側の旧「聞かせた」は「聞けて」へ改善したものの本文不成立。「安心できよかった」も不自然。"
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "reading": "EOSと短い合法IDへ改善し、旧system逐語露出と数字長反復は消えた。一方句点を含む引用/明示unknownのscopeで意味拒否。本文2欄は完全同文で未記載の作者の安心と「不明さを保持します」という処理説明が残る。"
+    }
+  ],
+  "decision": "新937233a0は通常不採用。完結性の局所改善を認めるが意味11/本文9・新6本文0は前回から増えず、長い意味・全更新・自然本文の同時成立に届かない。",
+  "next_action": "既存教師と今回の失敗原本を使い、長い意味・全更新・根拠・本文を同時に保つ学習設計の見直しをCPU準備で具体化する。新指示と重点lossの効果は単独帰属しない。同じ回数/LRの有料反復・reader緩和・出力補修・追加生成へ自動進行しない。",
+  "product_credit": 0,
+  "formal_product_reads": "0/3",
+  "product_management_percent": 54.5,
+  "product_status": "PRODUCT_NOT_CLEAR",
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "communication_correction": "途中の「SHOP回答後8更新」は期待値との取り違えとしてユーザーへ訂正。実出力は1更新。"
+}

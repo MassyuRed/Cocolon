@@ -1,0 +1,899 @@
+<div id="cocolon-ui-four">
+  <div class="viz-controls" aria-label="表示する画面">
+    <button type="button" class="btn" data-preview-view="home" aria-pressed="false">ホーム</button>
+    <button type="button" class="btn btn-primary" data-preview-view="analysis" aria-pressed="true">分析</button>
+    <button type="button" class="btn" data-preview-view="piece" aria-pressed="false">Pieceのプレビュー</button>
+    <button type="button" class="btn" data-preview-view="settings" aria-pressed="false">設定</button>
+  </div>
+  <div class="viz-carousel viz-dotted-background" aria-label="Cocolonの3つのデザイン案" data-previous-label="前の案" data-next-label="次の案">
+    <section class="c-stage" data-variant="Day One寄り · 静かな余白" aria-label="Day Oneを参考にしたCocolon">
+      <div class="c-device c-editorial" data-style="editorial"></div>
+    </section>
+    <section class="c-stage" data-variant="How We Feel寄り · やわらかな感情" aria-label="How We Feelを参考にしたCocolon" hidden>
+      <div class="c-device c-emotional" data-style="emotional"></div>
+    </section>
+    <section class="c-stage" data-variant="Material寄り · 明快なかたち" aria-label="Material 3 Expressiveを参考にしたCocolon" hidden>
+      <div class="c-device c-expressive" data-style="expressive"></div>
+    </section>
+  </div>
+  <span class="sr-only" data-announcement aria-live="polite"></span>
+
+  <template id="cocolon-four-phone-template">
+    <div class="c-status" aria-hidden="true"><span>9:41</span><span class="c-status-icons"><i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i></span></div>
+    <div data-app-view="home">
+      <header class="c-brandbar">
+        <span class="c-wordmark">Emlis<span class="c-brand-dot"></span></span>
+        <div class="c-header-actions"><button type="button" class="c-icon-button cursor-interaction" data-action="history" aria-label="入力履歴"><i data-lucide="history"></i></button><button type="button" class="c-avatar cursor-interaction" data-action="account" aria-label="アカウント">M</button></div>
+      </header>
+      <main class="c-home-main">
+        <div class="c-intro"><div class="c-date">11月6日 金曜日</div><h2>今日のあなたを、<br class="c-emotional-break">ひとこと。</h2><p>まとまっていなくても、そのままで。</p></div>
+        <button type="button" class="c-question cursor-interaction" data-action="question"><span class="c-question-symbol"><i data-lucide="sparkles"></i></span><span><small>今日の問い</small><strong>今日、心に残った小さなことは？</strong></span><i data-lucide="chevron-right"></i></button>
+        <section class="c-feelings">
+          <div class="c-section-label"><h3>今の気持ち</h3><span class="c-feeling-summary" data-feeling-name>平穏</span></div>
+          <div class="c-emotion-options" aria-label="感情を選ぶ">
+            <button type="button" class="c-emotion c-joy cursor-interaction" data-emotion="喜び" aria-pressed="false"><span class="c-emotion-circle"><i data-lucide="smile"></i></span><span>喜び</span></button>
+            <button type="button" class="c-emotion c-sad cursor-interaction" data-emotion="悲しみ" aria-pressed="false"><span class="c-emotion-circle"><i data-lucide="cloud-rain"></i></span><span>悲しみ</span></button>
+            <button type="button" class="c-emotion c-anger cursor-interaction" data-emotion="怒り" aria-pressed="false"><span class="c-emotion-circle"><i data-lucide="flame"></i></span><span>怒り</span></button>
+            <button type="button" class="c-emotion c-anxiety cursor-interaction" data-emotion="不安" aria-pressed="false"><span class="c-emotion-circle"><i data-lucide="waves"></i></span><span>不安</span></button>
+            <button type="button" class="c-emotion c-calm cursor-interaction" data-emotion="平穏" aria-pressed="true"><span class="c-emotion-circle"><i data-lucide="leaf"></i></span><span>平穏</span></button>
+          </div>
+          <div class="c-feeling-footer"><button type="button" class="c-self cursor-interaction" data-emotion="自己理解" aria-pressed="false"><i data-lucide="scan-face"></i>自己理解</button><div class="c-intensity" aria-label="感情の強さ"><button type="button" class="cursor-interaction" data-intensity="弱" aria-pressed="false">弱</button><button type="button" class="cursor-interaction" data-intensity="中" aria-pressed="true">中</button><button type="button" class="cursor-interaction" data-intensity="強" aria-pressed="false">強</button></div></div>
+        </section>
+        <section class="c-writing">
+          <div class="c-section-label"><h3>言葉にしてみる</h3><i data-lucide="pencil-line" aria-hidden="true"></i></div>
+          <label class="c-writing-field"><span>考えたこと・感じたこと</span><textarea rows="2" data-field="thought" aria-label="考えたこと・感じたこと">急がない時間も、大切にしたい。</textarea></label>
+          <label class="c-writing-field"><span>出来事・行動</span><textarea rows="2" data-field="action" aria-label="出来事・行動">帰り道、公園でひと休みした。</textarea></label>
+        </section>
+        <section class="c-context">
+          <div class="c-section-label"><h3>どんな場面？</h3><span>複数選択可</span></div>
+          <div class="c-categories" aria-label="カテゴリ"><button type="button" class="cursor-interaction" data-category="日常" aria-pressed="true">日常</button><button type="button" class="cursor-interaction" data-category="仕事" aria-pressed="false">仕事</button><button type="button" class="cursor-interaction" data-category="家族" aria-pressed="false">家族</button><button type="button" class="cursor-interaction" data-category="友人" aria-pressed="false">友人</button><button type="button" class="cursor-interaction" data-category="その他" aria-pressed="false">その他</button></div>
+        </section>
+        <div class="c-home-footer">
+          <label class="c-notify"><span><i data-lucide="radio" aria-hidden="true"></i>感情通知を送る</span><input type="checkbox" data-field="notify" aria-label="感情通知を送る"><span class="c-switch" aria-hidden="true"></span></label>
+          <button type="button" class="c-primary cursor-interaction" data-action="submit"><span>この内容でOK</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+          <p class="c-input-error" role="alert" data-input-error hidden>本文とカテゴリを選んでください。</p>
+        </div>
+      </main>
+      <nav class="c-bottom-nav" aria-label="メインナビゲーション">
+        <button type="button" class="cursor-interaction is-current" data-action="home" aria-current="page"><span><i data-lucide="house"></i></span>ホーム</button>
+        <button type="button" class="cursor-interaction" data-action="nav-analysis"><span><i data-lucide="chart-no-axes-combined"></i></span>分析</button>
+        <button type="button" class="cursor-interaction" data-action="nav-piece"><span><i data-lucide="layers"></i></span>ピース</button>
+        <button type="button" class="cursor-interaction" data-action="nav-settings"><span><i data-lucide="settings-2"></i></span>設定</button>
+      </nav>
+    </div>
+    <div data-app-view="piece" hidden>
+      <header class="c-piece-header"><button type="button" class="c-icon-button cursor-interaction" data-action="back-home" aria-label="戻る"><i data-lucide="arrow-left"></i></button><div><span class="c-piece-eyebrow">PIECE</span><h2>ことばを、一枚に。</h2></div><button type="button" class="c-icon-button cursor-interaction" data-action="back-home" aria-label="閉じる"><i data-lucide="x"></i></button></header>
+      <main class="c-piece-main">
+        <div class="c-artwork-stage">
+          <div class="c-artwork c-palette-paper" data-artwork role="img" aria-label="Pieceの作品プレビュー">
+            <span class="c-artwork-mark" aria-hidden="true"><i data-lucide="quote"></i></span>
+            <div class="c-artwork-text"><p data-piece-action>帰り道、公園で<br>ひと休みした。</p><p data-piece-thought>急がない時間も、<br>大切にしたい。</p></div>
+            <div class="c-artwork-brand" data-artwork-brand>Emlis</div>
+          </div>
+        </div>
+        <div class="c-piece-caption"><span>エッセイ</span><span data-ratio-caption>4:5</span></div>
+        <section class="c-piece-settings" aria-label="Pieceの画像設定">
+          <div class="c-section-label"><h3>背景と文字色</h3><span data-theme-label>ペーパー</span></div>
+          <div class="c-palette-options">
+            <button type="button" class="c-palette-button cursor-interaction" data-palette="paper" aria-label="ペーパー：生成りの背景と濃い文字" aria-pressed="true"><span class="c-swatch c-swatch-paper">Aa</span><small>ペーパー</small><span class="c-swatch-check"><i data-lucide="check"></i></span></button>
+            <button type="button" class="c-palette-button cursor-interaction" data-palette="night" aria-label="ナイト：濃紺の背景と明るい文字" aria-pressed="false"><span class="c-swatch c-swatch-night">Aa</span><small>ナイト</small><span class="c-swatch-check"><i data-lucide="check"></i></span></button>
+            <button type="button" class="c-palette-button cursor-interaction" data-palette="sage" aria-label="セージ：淡い緑の背景と深緑の文字" aria-pressed="false"><span class="c-swatch c-swatch-sage">Aa</span><small>セージ</small><span class="c-swatch-check"><i data-lucide="check"></i></span></button>
+            <button type="button" class="c-palette-button cursor-interaction" data-palette="rose" aria-label="ローズ：淡い桃色の背景と濃い赤の文字" aria-pressed="false"><span class="c-swatch c-swatch-rose">Aa</span><small>ローズ</small><span class="c-swatch-check"><i data-lucide="check"></i></span></button>
+          </div>
+          <div class="c-setting-row"><span>画像の比率</span><div class="c-segments" aria-label="画像の比率"><button type="button" class="cursor-interaction" data-ratio="4:5" aria-pressed="true">4:5</button><button type="button" class="cursor-interaction" data-ratio="9:16" aria-pressed="false">9:16</button></div></div>
+          <label class="c-setting-row c-logo-option"><span>Emlisロゴ</span><input type="checkbox" data-field="logo" checked aria-label="Emlisロゴを表示"><span class="c-switch" aria-hidden="true"></span></label>
+        </section>
+        <div class="c-piece-save"><div class="c-save-caption"><i data-lucide="lock-keyhole" aria-hidden="true"></i><span>自分だけのPieceとして保存</span></div><button type="button" class="c-primary cursor-interaction" data-action="save-piece"><span>このPieceを保存</span><i data-lucide="bookmark" aria-hidden="true"></i></button><button type="button" class="c-cancel cursor-interaction" data-action="cancel-piece">候補を取り消す</button></div>
+      </main>
+      <div class="c-home-indicator" aria-hidden="true"></div>
+    </div>
+    <div data-app-view="analysis" hidden>
+      <header class="c-brandbar"><span class="c-wordmark">Emlis<span class="c-brand-dot"></span></span><button type="button" class="c-icon-button cursor-interaction" data-action="analysis-history" aria-label="分析の履歴"><i data-lucide="history"></i></button></header>
+      <main class="c-analysis-main">
+        <div class="c-view-intro"><span class="c-date">あなたの記録から</span><h2>わたしを、振り返る。</h2><p>気持ちと、日々の選択を少しずつ。</p></div>
+        <div class="c-analysis-tabs" role="group" aria-label="分析の種類">
+          <button type="button" class="cursor-interaction" data-analysis-mode="weather" aria-pressed="true"><i data-lucide="cloud-sun"></i>こころ天気</button>
+          <button type="button" class="cursor-interaction" data-analysis-mode="map" aria-pressed="false"><i data-lucide="waypoints"></i>わたしマップ</button>
+        </div>
+        <div data-analysis-panel="weather">
+          <div class="c-weather-period"><div class="c-period-buttons" aria-label="集計期間"><button type="button" class="cursor-interaction" data-period="day" aria-pressed="false">日</button><button type="button" class="cursor-interaction" data-period="week" aria-pressed="true">週</button><button type="button" class="cursor-interaction" data-period="month" aria-pressed="false">月</button></div><span data-weather-range>10.31 ― 11.6</span></div>
+          <section class="c-weather-hero">
+            <div class="c-weather-title"><div><span data-weather-eyebrow>この1週間のこころ</span><h3 data-weather-title>平穏の多かった1週間</h3></div><div class="c-weather-symbol"><i data-lucide="cloud-sun" aria-hidden="true"></i></div></div>
+            <div class="c-weather-chart">
+              <div class="c-mood-ring" data-mood-ring role="img" aria-label="12件の記録の内訳：平穏5件、喜び3件、悲しみ2件、不安1件、怒り1件"><span aria-hidden="true"><strong data-record-count>12</strong><small>件の記録</small></span></div>
+              <div class="c-mood-legend" data-mood-legend>
+                <div><span class="c-mood-dot c-dot-calm"></span>平穏<strong>5</strong></div>
+                <div><span class="c-mood-dot c-dot-joy"></span>喜び<strong>3</strong></div>
+                <div><span class="c-mood-dot c-dot-sad"></span>悲しみ<strong>2</strong></div>
+                <div><span class="c-mood-dot c-dot-anxiety"></span>不安<strong>1</strong></div>
+                <div><span class="c-mood-dot c-dot-anger"></span>怒り<strong>1</strong></div>
+              </div>
+            </div>
+            <p class="c-weather-copy" data-weather-copy>平穏と喜びの記録が多くありました。ほかの気持ちも、一緒に残っています。</p>
+          </section>
+          <section class="c-week-section" data-week-section>
+            <div class="c-section-label"><h3>日ごとの記録</h3><span>10月31日〜11月6日</span></div>
+            <div class="c-week-days" aria-label="記録した日">
+              <button type="button" class="cursor-interaction" data-day="0" aria-pressed="false"><small>土</small><span class="c-day-circle c-day-joy">31</span><em>1件</em></button>
+              <button type="button" class="cursor-interaction" data-day="1" aria-pressed="false"><small>日</small><span class="c-day-circle c-day-calm">1</span><em>2件</em></button>
+              <button type="button" class="cursor-interaction" data-day="2" aria-pressed="false"><small>月</small><span class="c-day-circle c-day-anxiety">2</span><em>1件</em></button>
+              <button type="button" class="cursor-interaction" data-day="3" aria-pressed="false"><small>火</small><span class="c-day-circle c-day-sad">3</span><em>3件</em></button>
+              <button type="button" class="cursor-interaction" data-day="4" aria-pressed="false"><small>水</small><span class="c-day-circle c-day-anger">4</span><em>1件</em></button>
+              <button type="button" class="cursor-interaction" data-day="5" aria-pressed="false"><small>木</small><span class="c-day-circle c-day-joy">5</span><em>2件</em></button>
+              <button type="button" class="cursor-interaction" data-day="6" aria-pressed="true"><small>金</small><span class="c-day-circle c-day-calm">6</span><em>2件</em></button>
+            </div>
+          </section>
+          <section class="c-reflection">
+            <div class="c-section-label"><h3>記録を読み返す</h3><button type="button" class="c-text-button cursor-interaction" data-action="analysis-history">履歴を見る<i data-lucide="arrow-up-right" aria-hidden="true"></i></button></div>
+            <button type="button" class="c-memory-row cursor-interaction" data-action="weather-record"><span class="c-memory-icon"><i data-lucide="leaf"></i></span><span><small data-memory-date>11月6日 · 日常</small><strong data-memory-text>急がない時間も、大切にしたい。</strong></span><i data-lucide="chevron-right"></i></button>
+            <div class="c-record-excerpt" data-weather-record hidden><span data-record-heading>11月6日の記録</span><p data-record-body>帰り道、公園でひと休みした。急がない時間も、大切にしたい。</p></div>
+          </section>
+          <div class="c-analysis-updated">11月6日 更新</div>
+        </div>
+        <div data-analysis-panel="map" hidden>
+          <div class="c-map-heading"><div><span class="c-date">今のわたしマップ</span><h3>仕事で見えた、小さなつながり。</h3></div><span class="c-map-symbol"><i data-lucide="waypoints" aria-hidden="true"></i></span></div>
+          <div class="c-map-coverage">対象2記録 · 反映2記録 · 未解析0記録</div>
+          <section class="c-map-route" aria-label="記録に書かれた順序のマップ">
+            <div class="c-route-context"><i data-lucide="briefcase-business" aria-hidden="true"></i>仕事の場面</div>
+            <button type="button" class="c-route-node cursor-interaction" data-evidence="role"><span class="c-node-icon"><i data-lucide="users-round" aria-hidden="true"></i></span><span><small>役割</small><strong>進行役を担当する</strong></span><span class="c-node-source">2記録<i data-lucide="chevron-right" aria-hidden="true"></i></span></button>
+            <div class="c-route-connector"><span></span><small>記録にある順序</small></div>
+            <button type="button" class="c-route-node cursor-interaction" data-evidence="listen"><span class="c-node-icon"><i data-lucide="messages-square" aria-hidden="true"></i></span><span><small>行動</small><strong>まず、全員の話を聞く</strong></span><span class="c-node-source">2記録<i data-lucide="chevron-right" aria-hidden="true"></i></span></button>
+            <div class="c-route-connector"><span></span><small>その後</small></div>
+            <button type="button" class="c-route-node cursor-interaction" data-evidence="decide"><span class="c-node-icon"><i data-lucide="list-ordered" aria-hidden="true"></i></span><span><small>行動</small><strong>進める順番を決める</strong></span><span class="c-node-source">1記録<i data-lucide="chevron-right" aria-hidden="true"></i></span></button>
+          </section>
+          <div class="c-record-excerpt" data-evidence-panel hidden><span>根拠になった記録</span><p data-evidence-text>進行役を担当し、まず全員の話を聞いた。その後、進める順番を決めた。</p></div>
+          <div class="c-map-unknown"><span><i data-lucide="circle-help" aria-hidden="true"></i>まだ分からないこと</span><p>別の場面でも同じ役割や行動を選ぶかは、まだ分かりません。</p></div>
+          <button type="button" class="c-map-history cursor-interaction" data-action="map-history"><span class="c-memory-icon"><i data-lucide="calendar-days" aria-hidden="true"></i></span><span><strong>わたしマップの履歴</strong><small>その月のマップと、今を見比べる</small></span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+          <div class="c-map-compare" data-map-compare hidden><div class="c-compare-title">10月の保存マップと現在</div><div class="c-compare-grid"><div><small>10月に保存</small><strong>進行役</strong><span>1記録に根拠</span></div><div><small>現在</small><strong>進行役</strong><span>2記録に根拠</span></div></div><p>役割の記録が増えています。選ぶ理由は、まだ分かりません。</p></div>
+          <div class="c-analysis-updated">11月6日 更新</div>
+        </div>
+      </main>
+      <div data-nav-slot></div>
+    </div>
+    <div data-app-view="settings" hidden>
+      <header class="c-brandbar"><span class="c-wordmark">Emlis<span class="c-brand-dot"></span></span><span class="c-avatar" aria-hidden="true">M</span></header>
+      <main class="c-settings-main">
+        <div class="c-view-intro"><span class="c-date">YOUR SPACE</span><h2>設定</h2><p>あなたに合う使い方で。</p></div>
+        <section class="c-plan-banner"><div class="c-plan-art" aria-hidden="true"><i data-lucide="sparkles"></i></div><div class="c-plan-body"><small>現在のプラン</small><div><strong>Plus</strong><span>月額680円</span></div><p>日々のことばを、あなたらしく。</p></div><button type="button" class="c-plan-link cursor-interaction" data-settings-panel="plan" aria-label="プランを選ぶ"><i data-lucide="arrow-up-right"></i></button></section>
+        <section class="c-settings-section">
+          <h3>アプリ設定</h3>
+          <div class="c-settings-group">
+            <button type="button" class="c-settings-row cursor-interaction" data-settings-panel="theme" aria-expanded="false"><span class="c-settings-icon"><i data-lucide="palette" aria-hidden="true"></i></span><span>カラーテーマ</span><small data-current-theme>デフォルト</small><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <div class="c-settings-expand" data-setting-content="theme" hidden><div class="c-app-themes" aria-label="アプリのカラーテーマ"><button type="button" class="cursor-interaction" data-app-theme="default" aria-pressed="true"><span class="c-theme-dot c-theme-default"></span>デフォルト</button><button type="button" class="cursor-interaction" data-app-theme="whitegold" aria-pressed="false"><span class="c-theme-dot c-theme-whitegold"></span>ホワイト＆ゴールド</button><button type="button" class="cursor-interaction" data-app-theme="blacknavy" aria-pressed="false"><span class="c-theme-dot c-theme-blacknavy"></span>ブラック＆ネイビー</button></div></div>
+            <button type="button" class="c-settings-row cursor-interaction" data-settings-panel="notifications" aria-expanded="false"><span class="c-settings-icon"><i data-lucide="bell" aria-hidden="true"></i></span><span>通知設定</span><small data-notification-summary>オン</small><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <div class="c-settings-expand" data-setting-content="notifications" hidden>
+              <label class="c-notification-option"><span>全ての通知</span><input type="checkbox" data-setting-notification="all" checked aria-label="全ての通知"><span class="c-switch" aria-hidden="true"></span></label>
+              <label class="c-notification-option"><span>今日の問い通知</span><input type="checkbox" data-setting-notification="question" checked aria-label="今日の問い通知"><span class="c-switch" aria-hidden="true"></span></label>
+              <label class="c-notification-option"><span>レポート配布通知</span><input type="checkbox" data-setting-notification="report" checked aria-label="レポート配布通知"><span class="c-switch" aria-hidden="true"></span></label>
+              <label class="c-notification-option"><span>感情通知</span><input type="checkbox" data-setting-notification="emotion" checked aria-label="感情通知"><span class="c-switch" aria-hidden="true"></span></label>
+            </div>
+          </div>
+        </section>
+        <section class="c-settings-section">
+          <h3>サブスク加入状況</h3>
+          <div class="c-settings-group">
+            <button type="button" class="c-settings-row cursor-interaction" data-settings-panel="plan" aria-expanded="false"><span class="c-settings-icon"><i data-lucide="gem" aria-hidden="true"></i></span><span>プランを選ぶ</span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <div class="c-settings-expand" data-setting-content="plan" hidden><div class="c-plan-choices"><div><span>Free</span><strong>無料</strong></div><div class="is-selected"><span>Plus<small>選択中</small></span><strong>月680円</strong></div><div><span>Premium</span><strong>月1,480円</strong></div></div></div>
+            <button type="button" class="c-settings-row cursor-interaction" data-action="restore"><span class="c-settings-icon"><i data-lucide="rotate-ccw" aria-hidden="true"></i></span><span>購入内容を復元</span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <button type="button" class="c-settings-row cursor-interaction" data-action="manage-subscription"><span class="c-settings-icon"><i data-lucide="credit-card" aria-hidden="true"></i></span><span>サブスクリプションを管理</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+          </div>
+        </section>
+        <section class="c-settings-section">
+          <h3>その他</h3>
+          <div class="c-settings-group">
+            <button type="button" class="c-settings-row cursor-interaction" data-action="tutorial"><span class="c-settings-icon"><i data-lucide="book-open" aria-hidden="true"></i></span><span>チュートリアルを再体験する</span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <button type="button" class="c-settings-row cursor-interaction" data-action="logout-preview"><span class="c-settings-icon"><i data-lucide="log-out" aria-hidden="true"></i></span><span>ログアウト</span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+            <button type="button" class="c-settings-row c-delete-row cursor-interaction" data-action="delete-preview"><span class="c-settings-icon"><i data-lucide="user-round-x" aria-hidden="true"></i></span><span>アカウント削除</span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </section>
+        <div class="c-settings-legal"><button type="button" class="cursor-interaction" data-action="legal">利用規約</button><span>·</span><button type="button" class="cursor-interaction" data-action="legal">プライバシーポリシー</button><span>·</span><button type="button" class="cursor-interaction" data-action="support">サポート</button></div>
+      </main>
+      <div data-nav-slot></div>
+    </div>
+    <div class="c-modal-layer" data-modal-layer hidden>
+      <div class="c-modal-shade"></div>
+      <section class="c-dialog" role="dialog" aria-modal="true" aria-label="Emlisからの応答">
+        <div class="c-sheet-handle" aria-hidden="true"></div>
+        <div class="c-reply-icon"><i data-lucide="sparkles" aria-hidden="true"></i></div>
+        <span class="c-dialog-eyebrow">Emlisからの応答</span>
+        <h3>今日の言葉を、<br>受け取りました。</h3>
+        <p>公園でひと休みして、急がない時間も大切にしたいと思ったのですね。</p>
+        <button type="button" class="c-primary cursor-interaction" data-action="create-piece"><span>ピースの作成</span><i data-lucide="arrow-up-right" aria-hidden="true"></i></button>
+        <button type="button" class="c-cancel cursor-interaction" data-action="close-modal">閉じる</button>
+      </section>
+    </div>
+    <div class="c-toast" role="status" data-toast hidden><i data-lucide="check" aria-hidden="true"></i><span></span></div>
+  </template>
+</div>
+
+<style>
+#cocolon-ui-four{width:100%}
+#cocolon-ui-four [hidden]{display:none!important}
+#cocolon-ui-four .viz-controls{margin-bottom:16px}
+#cocolon-ui-four .c-stage{min-height:var(--c-stage-height,950px);padding:24px 8px 28px;box-sizing:border-box}
+#cocolon-ui-four .c-device{--c-bg:light-dark(#f5f4f1,#19191c);--c-surface:light-dark(#fff,#242427);--c-text:light-dark(#28272b,#f2efed);--c-muted:light-dark(#77737b,#b9b3bc);--c-line:light-dark(#e8e5e3,#3b383f);--c-accent:light-dark(#7c3c50,#edb4c4);--c-on-accent:light-dark(#fff,#422130);--c-soft:light-dark(#f1e5e9,#3a2931);--c-error:light-dark(#a63240,#ffacb7);--c-shadow:light-dark(#24212a18,#00000055);color-scheme:light dark;width:min(390px,100%);margin:0 auto;background:var(--c-bg);color:var(--c-text);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;border:1px solid var(--c-line);border-radius:32px;box-shadow:0 18px 48px var(--c-shadow);overflow:hidden;position:relative;isolation:isolate}
+#cocolon-ui-four .c-device *{box-sizing:border-box}
+#cocolon-ui-four .c-device button,#cocolon-ui-four .c-device textarea,#cocolon-ui-four .c-device input{font:inherit;color:inherit}
+#cocolon-ui-four .c-device button{border:0;appearance:none;-webkit-tap-highlight-color:transparent;transition:background .18s ease,transform .18s ease,border-radius .18s ease}
+#cocolon-ui-four .c-device button:active{transform:scale(.975)}
+#cocolon-ui-four .c-device button:disabled{opacity:.38}
+#cocolon-ui-four .c-device svg{width:20px;height:20px;stroke-width:1.65;flex-shrink:0}
+#cocolon-ui-four .c-device h2,#cocolon-ui-four .c-device h3,#cocolon-ui-four .c-device p{margin:0}
+#cocolon-ui-four .c-status{height:38px;padding:13px 27px 4px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;line-height:1}
+#cocolon-ui-four .c-status-icons{display:flex;gap:5px;align-items:center}
+#cocolon-ui-four .c-status-icons svg{width:14px;height:14px;stroke-width:2}
+#cocolon-ui-four .c-brandbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 5px}
+#cocolon-ui-four .c-wordmark{font:500 28px/1.1 Georgia,"Times New Roman",serif;letter-spacing:-1.2px}
+#cocolon-ui-four .c-brand-dot{display:inline-block;width:5px;height:5px;background:var(--c-accent);border-radius:50%;margin-left:3px}
+#cocolon-ui-four .c-header-actions{display:flex;align-items:center;gap:8px}
+#cocolon-ui-four .c-icon-button{width:40px;height:40px;display:grid;place-items:center;background:transparent;border-radius:50%}
+#cocolon-ui-four .c-avatar{width:32px;height:32px;border-radius:50%;background:var(--c-soft);color:var(--c-accent)!important;font-size:12px!important;font-weight:600!important}
+#cocolon-ui-four .c-home-main{padding:15px 24px 19px;display:flex;flex-direction:column;gap:22px}
+#cocolon-ui-four .c-intro{order:0}
+#cocolon-ui-four .c-date{font-size:12px;color:var(--c-muted);letter-spacing:.04em;margin-bottom:9px}
+#cocolon-ui-four .c-intro h2{font-size:25px;line-height:1.45;letter-spacing:-.055em;font-weight:600}
+#cocolon-ui-four .c-intro p{font-size:12px;color:var(--c-muted);margin-top:6px}
+#cocolon-ui-four .c-emotional-break{display:none}
+#cocolon-ui-four .c-question{order:1;display:flex;align-items:center;text-align:left;gap:10px;width:100%;padding:12px 0;background:transparent;border-top:1px solid var(--c-line)!important;border-bottom:1px solid var(--c-line)!important}
+#cocolon-ui-four .c-question>span:nth-child(2){flex:1;min-width:0}
+#cocolon-ui-four .c-question-symbol{width:32px;height:32px;display:grid;place-items:center;color:var(--c-accent)}
+#cocolon-ui-four .c-question small{display:block;font-size:11px;color:var(--c-muted);margin-bottom:2px}
+#cocolon-ui-four .c-question strong{display:block;font-size:12px;font-weight:400}
+#cocolon-ui-four .c-question>svg{width:15px;color:var(--c-muted)}
+#cocolon-ui-four .c-section-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+#cocolon-ui-four .c-section-label h3{font-size:13px;line-height:1.5;font-weight:500;letter-spacing:.015em}
+#cocolon-ui-four .c-section-label>span{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-section-label>svg{width:16px;height:16px;color:var(--c-muted)}
+#cocolon-ui-four .c-writing{order:2}
+#cocolon-ui-four .c-writing-field{display:block;background:var(--c-surface);padding:13px 15px}
+#cocolon-ui-four .c-writing-field:first-of-type{border-radius:14px 14px 0 0;border-bottom:1px solid var(--c-line)}
+#cocolon-ui-four .c-writing-field:last-of-type{border-radius:0 0 14px 14px}
+#cocolon-ui-four .c-writing-field>span{font-size:11px;color:var(--c-muted);display:block;margin-bottom:7px}
+#cocolon-ui-four .c-writing-field textarea{display:block;resize:vertical;min-height:48px;width:100%;border:0;background:transparent;padding:0;outline-offset:4px;font-size:15px;line-height:1.8;letter-spacing:.015em}
+#cocolon-ui-four .c-feelings{order:3}
+#cocolon-ui-four .c-emotion-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+#cocolon-ui-four .c-emotion{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:0 0 3px;background:transparent;font-size:11px!important;color:var(--c-muted)!important}
+#cocolon-ui-four .c-emotion-circle{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;background:var(--c-surface);border:1px solid var(--c-line)}
+#cocolon-ui-four .c-emotion-circle svg{width:20px;height:20px}
+#cocolon-ui-four .c-emotion[aria-pressed="true"]{color:var(--c-accent)!important;font-weight:600!important}
+#cocolon-ui-four .c-emotion[aria-pressed="true"] .c-emotion-circle{background:var(--c-soft);border-color:var(--c-accent)}
+#cocolon-ui-four .c-feeling-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+#cocolon-ui-four .c-self{display:flex;align-items:center;justify-content:center;gap:5px;border-radius:8px;background:transparent;padding:6px 8px;color:var(--c-muted)!important;font-size:11px!important;min-height:32px}
+#cocolon-ui-four .c-self svg{width:15px;height:15px}
+#cocolon-ui-four .c-self[aria-pressed="true"]{background:var(--c-soft);color:var(--c-accent)!important}
+#cocolon-ui-four .c-intensity{display:flex;align-items:center;border-radius:8px;background:var(--c-surface);padding:3px;gap:2px}
+#cocolon-ui-four .c-intensity button{width:34px;min-height:28px;border-radius:6px;background:transparent;font-size:11px!important;color:var(--c-muted)!important}
+#cocolon-ui-four .c-intensity button[aria-pressed="true"]{background:var(--c-soft);color:var(--c-accent)!important}
+#cocolon-ui-four .c-context{order:4}
+#cocolon-ui-four .c-categories{display:flex;flex-wrap:wrap;gap:7px}
+#cocolon-ui-four .c-categories button{background:transparent;border:1px solid var(--c-line)!important;border-radius:8px;padding:7px 11px;font-size:11px!important;min-height:32px;color:var(--c-muted)!important}
+#cocolon-ui-four .c-categories button[aria-pressed="true"]{background:var(--c-soft);border-color:transparent!important;color:var(--c-accent)!important}
+#cocolon-ui-four .c-home-footer{order:5}
+#cocolon-ui-four .c-notify{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:15px;min-height:32px;color:var(--c-muted);font-size:11px}
+#cocolon-ui-four .c-notify>span:first-child{display:flex;align-items:center;gap:7px}
+#cocolon-ui-four .c-notify svg{width:14px;height:14px}
+#cocolon-ui-four .c-notify input,#cocolon-ui-four .c-logo-option input{appearance:none;width:38px;height:22px;position:absolute;right:0;opacity:0;z-index:2;margin:0}
+#cocolon-ui-four .c-notify,#cocolon-ui-four .c-logo-option{position:relative}
+#cocolon-ui-four .c-switch{width:36px;height:21px;border-radius:20px;background:var(--c-line);padding:3px;display:block;transition:background .2s ease;flex-shrink:0}
+#cocolon-ui-four .c-switch:after{content:"";display:block;width:15px;height:15px;border-radius:50%;background:var(--c-surface);transition:transform .2s ease}
+#cocolon-ui-four input:checked+.c-switch{background:var(--c-accent)}
+#cocolon-ui-four input:checked+.c-switch:after{transform:translateX(15px)}
+#cocolon-ui-four input:focus-visible+.c-switch{outline:2px solid var(--c-accent);outline-offset:3px}
+#cocolon-ui-four .c-primary{display:flex;align-items:center;justify-content:center;position:relative;gap:12px;width:100%;padding:15px 18px;min-height:50px;background:var(--c-accent);color:var(--c-on-accent)!important;border-radius:13px;font-size:14px!important;font-weight:500!important;box-shadow:0 4px 10px color-mix(in srgb,var(--c-accent) 10%,transparent)}
+#cocolon-ui-four .c-primary svg{width:18px;height:18px;position:absolute;right:18px}
+#cocolon-ui-four .c-input-error{font-size:11px;color:var(--c-error);margin-top:8px!important}
+#cocolon-ui-four .c-bottom-nav{display:flex;align-items:center;justify-content:space-around;background:color-mix(in srgb,var(--c-surface) 94%,transparent);border-top:1px solid var(--c-line);padding:8px 10px 20px}
+#cocolon-ui-four .c-bottom-nav button{width:25%;display:flex;align-items:center;flex-direction:column;gap:4px;background:transparent;color:var(--c-muted);font-size:11px!important;padding:4px;min-height:45px}
+#cocolon-ui-four .c-bottom-nav button>span{display:grid;place-items:center;height:23px;width:43px;border-radius:12px}
+#cocolon-ui-four .c-bottom-nav .is-current{color:var(--c-accent)}
+#cocolon-ui-four .c-bottom-nav .is-current>span{background:var(--c-soft)}
+#cocolon-ui-four .c-piece-header{display:flex;align-items:center;justify-content:space-between;padding:12px 13px 0;gap:5px}
+#cocolon-ui-four .c-piece-header>div{flex:1;text-align:center}
+#cocolon-ui-four .c-piece-eyebrow{font-size:11px;letter-spacing:.22em;color:var(--c-muted)}
+#cocolon-ui-four .c-piece-header h2{font-size:17px;font-weight:500;letter-spacing:-.035em;line-height:1.5}
+#cocolon-ui-four .c-piece-main{padding:22px 24px 8px}
+#cocolon-ui-four .c-artwork-stage{padding:10px 24px 14px}
+#cocolon-ui-four .c-artwork{aspect-ratio:4/5;width:100%;position:relative;padding:29px 24px 25px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;box-shadow:0 12px 25px var(--c-shadow);transition:background .3s ease,color .3s ease,aspect-ratio .25s ease;border:1px solid #00000008}
+#cocolon-ui-four .c-palette-paper{background:#f4eedf;color:#3e3832}
+#cocolon-ui-four .c-palette-night{background:#222c43;color:#f3ebde}
+#cocolon-ui-four .c-palette-sage{background:#dfe9de;color:#29463d}
+#cocolon-ui-four .c-palette-rose{background:#f0dfe0;color:#653946}
+#cocolon-ui-four .c-artwork:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 10% 0%,#ffffff30,transparent 60%);pointer-events:none;z-index:-1}
+#cocolon-ui-four .c-artwork-mark{opacity:.37}
+#cocolon-ui-four .c-artwork-mark svg{width:19px;height:19px;fill:currentColor;stroke-width:0}
+#cocolon-ui-four .c-artwork-text{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;font-size:15px;line-height:2.15;letter-spacing:.035em;margin:15px 0;word-break:normal;overflow-wrap:anywhere;white-space:pre-line}
+#cocolon-ui-four .c-artwork-text p+p{margin-top:20px}
+#cocolon-ui-four .c-artwork-brand{font:500 19px/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.5px;opacity:.72;display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+#cocolon-ui-four .c-artwork-brand span{font:400 6px/1.3 -apple-system,sans-serif;letter-spacing:.05em}
+#cocolon-ui-four .c-piece-caption{display:flex;align-items:center;justify-content:center;gap:9px;color:var(--c-muted);font-size:11px;margin-bottom:21px}
+#cocolon-ui-four .c-piece-caption span+span:before{content:"·";margin-right:9px}
+#cocolon-ui-four .c-piece-settings{background:var(--c-surface);padding:16px;border-radius:16px}
+#cocolon-ui-four .c-palette-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 15px}
+#cocolon-ui-four .c-palette-button{background:transparent;padding:0;position:relative;text-align:center;min-width:0}
+#cocolon-ui-four .c-swatch{height:42px;display:grid;place-items:center;border-radius:9px;font:400 18px/1.2 Georgia,serif;border:1px solid #00000008;transition:transform .2s ease}
+#cocolon-ui-four .c-swatch-paper{background:#f4eedf;color:#3e3832}
+#cocolon-ui-four .c-swatch-night{background:#222c43;color:#f3ebde}
+#cocolon-ui-four .c-swatch-sage{background:#dfe9de;color:#29463d}
+#cocolon-ui-four .c-swatch-rose{background:#f0dfe0;color:#653946}
+#cocolon-ui-four .c-palette-button small{font-size:11px;color:var(--c-muted);display:block;margin-top:6px;white-space:nowrap}
+#cocolon-ui-four .c-swatch-check{display:none;position:absolute;top:-5px;right:-3px;width:17px;height:17px;border-radius:50%;background:var(--c-accent);color:var(--c-on-accent);place-items:center}
+#cocolon-ui-four .c-swatch-check svg{width:11px;height:11px;stroke-width:2.5}
+#cocolon-ui-four .c-palette-button[aria-pressed="true"] .c-swatch{outline:1.5px solid var(--c-accent);outline-offset:3px}
+#cocolon-ui-four .c-palette-button[aria-pressed="true"] .c-swatch-check{display:grid}
+#cocolon-ui-four .c-setting-row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:47px;border-top:1px solid var(--c-line);font-size:12px}
+#cocolon-ui-four .c-segments{display:flex;border-radius:8px;background:var(--c-bg);padding:3px;gap:2px}
+#cocolon-ui-four .c-segments button{background:transparent;border-radius:6px;padding:5px 11px;font-size:11px!important;color:var(--c-muted)}
+#cocolon-ui-four .c-segments button[aria-pressed="true"]{background:var(--c-surface);color:var(--c-accent);box-shadow:0 1px 3px var(--c-shadow)}
+#cocolon-ui-four .c-piece-save{margin-top:18px}
+#cocolon-ui-four .c-save-caption{display:flex;justify-content:center;align-items:center;gap:5px;font-size:11px;color:var(--c-muted);margin-bottom:9px}
+#cocolon-ui-four .c-save-caption svg{width:12px;height:12px}
+#cocolon-ui-four .c-cancel{display:block;margin:7px auto 0;background:transparent;color:var(--c-muted)!important;padding:10px 16px;font-size:11px!important;min-height:36px}
+#cocolon-ui-four .c-home-indicator{height:4px;width:104px;margin:8px auto 10px;background:var(--c-text);opacity:.85;border-radius:5px}
+#cocolon-ui-four .c-modal-layer{position:absolute;inset:0;z-index:10;display:flex;align-items:flex-end}
+#cocolon-ui-four .c-modal-shade{position:absolute;inset:0;background:#10101666;backdrop-filter:blur(5px)}
+#cocolon-ui-four .c-dialog{width:100%;background:var(--c-surface);padding:12px 27px 28px;position:relative;border-radius:26px 26px 0 0;box-shadow:0 -8px 40px #00000012}
+#cocolon-ui-four .c-sheet-handle{height:4px;width:35px;background:var(--c-line);border-radius:10px;margin:0 auto 20px}
+#cocolon-ui-four .c-reply-icon{display:grid;place-items:center;background:var(--c-soft);color:var(--c-accent);width:43px;height:43px;border-radius:15px;margin-bottom:17px}
+#cocolon-ui-four .c-dialog-eyebrow{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-dialog h3{font-size:22px;line-height:1.6;font-weight:500;letter-spacing:-.04em;margin-top:9px}
+#cocolon-ui-four .c-dialog p{font-size:14px;line-height:1.9;margin:18px 0 24px}
+#cocolon-ui-four .c-toast{position:absolute;z-index:20;top:58px;left:20px;right:20px;background:var(--c-text);color:var(--c-bg);padding:13px 15px;border-radius:13px;box-shadow:0 6px 25px var(--c-shadow);font-size:12px;display:flex;align-items:center;gap:8px}
+#cocolon-ui-four .c-toast svg{width:15px;height:15px}
+
+#cocolon-ui-four .c-emotional{--c-bg:light-dark(#fbf8f3,#22201e);--c-surface:light-dark(#ffffff,#302d29);--c-text:light-dark(#343d39,#f5f1e9);--c-muted:light-dark(#737b72,#bebfb1);--c-line:light-dark(#e5e7dd,#484a40);--c-accent:light-dark(#3e6656,#bed9bd);--c-on-accent:light-dark(#fff,#233e30);--c-soft:light-dark(#e4eedf,#3a4c3b)}
+#cocolon-ui-four .c-emotional .c-brandbar{padding-bottom:0}
+#cocolon-ui-four .c-emotional .c-wordmark{font-family:Georgia,serif;color:var(--c-accent)}
+#cocolon-ui-four .c-emotional .c-home-main{gap:19px;padding-top:14px}
+#cocolon-ui-four .c-emotional .c-intro h2{font-size:26px;line-height:1.5}
+#cocolon-ui-four .c-emotional .c-emotional-break{display:block}
+#cocolon-ui-four .c-emotional .c-intro p{margin-top:7px}
+#cocolon-ui-four .c-emotional .c-feelings{order:1;background:var(--c-soft);border-radius:26px;padding:17px 13px 11px}
+#cocolon-ui-four .c-emotional .c-feelings .c-section-label{padding:0 3px}
+#cocolon-ui-four .c-emotional .c-emotion-circle{height:46px;width:46px;border:0}
+#cocolon-ui-four .c-emotional .c-emotion-circle svg{width:22px;height:22px}
+#cocolon-ui-four .c-emotional .c-joy .c-emotion-circle{background:light-dark(#f9dda0,#65543a);color:light-dark(#805d20,#fae0ac)}
+#cocolon-ui-four .c-emotional .c-sad .c-emotion-circle{background:light-dark(#d1deee,#3e4b60);color:light-dark(#416286,#c6dcfa)}
+#cocolon-ui-four .c-emotional .c-anger .c-emotion-circle{background:light-dark(#f0c3b6,#69443c);color:light-dark(#97482e,#ffc4b0)}
+#cocolon-ui-four .c-emotional .c-anxiety .c-emotion-circle{background:light-dark(#e0cde9,#594365);color:light-dark(#775384,#e8c7f9)}
+#cocolon-ui-four .c-emotional .c-calm .c-emotion-circle{background:light-dark(#bfd5b5,#3e603e);color:light-dark(#365638,#d5f0c7)}
+#cocolon-ui-four .c-emotional .c-emotion[aria-pressed="true"] .c-emotion-circle{outline:2px solid var(--c-accent);outline-offset:3px;border-radius:38% 45% 35% 47%;transform:rotate(-5deg)}
+#cocolon-ui-four .c-emotional .c-emotion[aria-pressed="true"] .c-emotion-circle svg{transform:rotate(5deg)}
+#cocolon-ui-four .c-emotional .c-self,#cocolon-ui-four .c-emotional .c-intensity{background:var(--c-surface);border-radius:20px}
+#cocolon-ui-four .c-emotional .c-intensity button{border-radius:20px}
+#cocolon-ui-four .c-emotional .c-question{order:3;background:var(--c-surface);border:0!important;border-radius:18px;padding:12px}
+#cocolon-ui-four .c-emotional .c-writing-field{padding:12px 0;background:transparent}
+#cocolon-ui-four .c-emotional .c-writing-field:first-of-type{border-bottom:1px solid var(--c-line);border-radius:0}
+#cocolon-ui-four .c-emotional .c-writing-field:last-of-type{border-radius:0;padding-bottom:0}
+#cocolon-ui-four .c-emotional .c-categories button{border:0!important;background:var(--c-surface);border-radius:30px}
+#cocolon-ui-four .c-emotional .c-categories button[aria-pressed="true"]{background:var(--c-soft)}
+#cocolon-ui-four .c-emotional .c-primary{border-radius:30px}
+#cocolon-ui-four .c-emotional .c-bottom-nav{border:0;background:var(--c-surface);padding-top:9px}
+#cocolon-ui-four .c-emotional .c-bottom-nav .is-current>span{background:transparent}
+#cocolon-ui-four .c-emotional .c-bottom-nav .is-current{font-weight:600}
+#cocolon-ui-four .c-emotional .c-piece-header{padding-top:18px}
+#cocolon-ui-four .c-emotional .c-piece-main{padding-top:20px}
+#cocolon-ui-four .c-emotional .c-artwork-stage{background:var(--c-soft);border-radius:43% 43% 28px 28px;padding:22px 32px 24px;margin:0 -4px}
+#cocolon-ui-four .c-emotional .c-artwork{transform:rotate(-2deg)}
+#cocolon-ui-four .c-emotional .c-piece-caption{margin-top:15px}
+#cocolon-ui-four .c-emotional .c-piece-settings{background:transparent;padding:0 2px;border-radius:0}
+#cocolon-ui-four .c-emotional .c-swatch{border-radius:50%;height:49px;width:49px;margin:0 auto}
+#cocolon-ui-four .c-emotional .c-palette-button[aria-pressed="true"] .c-swatch{outline-offset:4px}
+#cocolon-ui-four .c-emotional .c-segments,#cocolon-ui-four .c-emotional .c-segments button{border-radius:22px}
+#cocolon-ui-four .c-emotional .c-segments{background:var(--c-surface)}
+#cocolon-ui-four .c-emotional .c-segments button[aria-pressed="true"]{background:var(--c-soft)}
+
+#cocolon-ui-four .c-expressive{--c-bg:light-dark(#f7f1f8,#201922);--c-surface:light-dark(#fffaff,#302535);--c-text:light-dark(#312436,#f6eaf8);--c-muted:light-dark(#7a6b7d,#c9b6cc);--c-line:light-dark(#e5d7e7,#4d3d51);--c-accent:light-dark(#694775,#dfb3eb);--c-on-accent:light-dark(#fff,#3e2447);--c-soft:light-dark(#eaddf0,#49354f)}
+#cocolon-ui-four .c-expressive .c-wordmark{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:25px;letter-spacing:-1.3px;font-weight:700}
+#cocolon-ui-four .c-expressive .c-brandbar{padding:12px 20px 4px}
+#cocolon-ui-four .c-expressive .c-header-actions{background:var(--c-soft);padding:1px 4px;border-radius:26px;gap:1px}
+#cocolon-ui-four .c-expressive .c-avatar{background:var(--c-surface)}
+#cocolon-ui-four .c-expressive .c-home-main{padding:15px 20px 19px;gap:17px}
+#cocolon-ui-four .c-expressive .c-intro h2{font-size:27px;line-height:1.45;font-weight:650}
+#cocolon-ui-four .c-expressive .c-date{margin-bottom:7px}
+#cocolon-ui-four .c-expressive .c-question{border:0!important;padding:13px 14px;background:light-dark(#f7e2af,#5a4729);border-radius:18px;gap:8px}
+#cocolon-ui-four .c-expressive .c-question-symbol{color:light-dark(#735726,#f4dcab);background:light-dark(#ffedc9,#6c5631);border-radius:12px}
+#cocolon-ui-four .c-expressive .c-question small{color:light-dark(#776039,#e5cd9d)}
+#cocolon-ui-four .c-expressive .c-question strong{font-weight:500;color:light-dark(#594426,#f7e3bf)}
+#cocolon-ui-four .c-expressive .c-writing{background:var(--c-surface);border-radius:24px;padding:16px}
+#cocolon-ui-four .c-expressive .c-writing .c-section-label{margin-bottom:1px}
+#cocolon-ui-four .c-expressive .c-writing-field{background:transparent;padding:11px 0}
+#cocolon-ui-four .c-expressive .c-writing-field:first-of-type{border-radius:0}
+#cocolon-ui-four .c-expressive .c-writing-field:last-of-type{border-radius:0;padding-bottom:0}
+#cocolon-ui-four .c-expressive .c-feelings{background:var(--c-soft);padding:15px 13px 12px;border-radius:24px}
+#cocolon-ui-four .c-expressive .c-emotion-circle{background:var(--c-surface);border:0;border-radius:15px;width:44px;height:40px}
+#cocolon-ui-four .c-expressive .c-emotion[aria-pressed="true"] .c-emotion-circle{background:var(--c-accent);color:var(--c-on-accent);border-radius:24px}
+#cocolon-ui-four .c-expressive .c-self{background:var(--c-surface);border-radius:18px}
+#cocolon-ui-four .c-expressive .c-intensity{background:color-mix(in srgb,var(--c-accent) 10%,var(--c-surface));border-radius:20px}
+#cocolon-ui-four .c-expressive .c-intensity button{border-radius:20px}
+#cocolon-ui-four .c-expressive .c-intensity button[aria-pressed="true"]{background:var(--c-accent);color:var(--c-on-accent)!important}
+#cocolon-ui-four .c-expressive .c-categories{gap:5px}
+#cocolon-ui-four .c-expressive .c-categories button{background:var(--c-surface);border:0!important;border-radius:9px;padding:8px 13px}
+#cocolon-ui-four .c-expressive .c-categories button[aria-pressed="true"]{background:var(--c-accent);color:var(--c-on-accent)!important;border-radius:20px}
+#cocolon-ui-four .c-expressive .c-primary{min-height:54px;border-radius:27px 27px 12px 27px;box-shadow:none;font-size:15px!important}
+#cocolon-ui-four .c-expressive .c-bottom-nav{border:0;background:var(--c-soft);padding:7px 6px 19px}
+#cocolon-ui-four .c-expressive .c-bottom-nav .is-current>span{background:var(--c-accent);color:var(--c-on-accent);width:54px;height:26px;border-radius:17px}
+#cocolon-ui-four .c-expressive .c-piece-header{padding:12px 11px 0}
+#cocolon-ui-four .c-expressive .c-piece-header .c-icon-button{background:var(--c-soft)}
+#cocolon-ui-four .c-expressive .c-piece-header h2{font-weight:650;font-size:18px}
+#cocolon-ui-four .c-expressive .c-piece-main{padding:18px 20px 8px}
+#cocolon-ui-four .c-expressive .c-artwork-stage{padding:17px 39px 20px;background:var(--c-soft);border-radius:28px}
+#cocolon-ui-four .c-expressive .c-piece-caption{margin-top:11px;margin-bottom:15px}
+#cocolon-ui-four .c-expressive .c-piece-settings{border-radius:24px;padding:16px}
+#cocolon-ui-four .c-expressive .c-swatch{border-radius:17px 17px 7px 17px}
+#cocolon-ui-four .c-expressive .c-segments{background:var(--c-soft);border-radius:20px}
+#cocolon-ui-four .c-expressive .c-segments button{border-radius:17px;padding:6px 13px}
+#cocolon-ui-four .c-expressive .c-segments button[aria-pressed="true"]{background:var(--c-accent);color:var(--c-on-accent);box-shadow:none}
+#cocolon-ui-four .c-expressive .c-reply-icon{border-radius:50% 50% 14px 50%}
+
+#cocolon-ui-four .c-device{--c-mood-calm:light-dark(#8ca88b,#97b797);--c-mood-joy:light-dark(#dfb35d,#e6c279);--c-mood-sad:light-dark(#8baacb,#9db9da);--c-mood-anxiety:light-dark(#b59abf,#c1a8cd);--c-mood-anger:light-dark(#cc8b78,#e2a08a)}
+#cocolon-ui-four .c-analysis-main,#cocolon-ui-four .c-settings-main{padding:19px 24px 25px}
+#cocolon-ui-four .c-view-intro .c-date{display:block}
+#cocolon-ui-four .c-view-intro h2{font-size:25px;line-height:1.45;letter-spacing:-.045em;font-weight:600;margin:6px 0 5px}
+#cocolon-ui-four .c-view-intro p{font-size:12px;color:var(--c-muted)}
+#cocolon-ui-four .c-analysis-tabs{display:flex;gap:3px;padding:4px;background:var(--c-line);border-radius:12px;margin:23px 0 20px}
+#cocolon-ui-four .c-analysis-tabs button{display:flex;justify-content:center;align-items:center;gap:6px;min-height:39px;flex:1;font-size:12px;background:transparent;border-radius:9px;color:var(--c-muted)}
+#cocolon-ui-four .c-analysis-tabs button svg{width:17px;height:17px}
+#cocolon-ui-four .c-analysis-tabs button[aria-pressed="true"]{background:var(--c-surface);color:var(--c-accent);box-shadow:0 1px 4px var(--c-shadow);font-weight:500}
+#cocolon-ui-four .c-weather-period{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:15px}
+#cocolon-ui-four .c-weather-period>span{font-size:11px;color:var(--c-muted);letter-spacing:.03em}
+#cocolon-ui-four .c-period-buttons{display:flex;gap:4px}
+#cocolon-ui-four .c-period-buttons button{min-width:36px;min-height:34px;border-radius:8px;background:transparent;font-size:12px;color:var(--c-muted)}
+#cocolon-ui-four .c-period-buttons button[aria-pressed="true"]{background:var(--c-soft);color:var(--c-accent);font-weight:500}
+#cocolon-ui-four .c-weather-hero{--c-hero-bg:var(--c-surface);background:var(--c-hero-bg);border-radius:18px;padding:21px 19px}
+#cocolon-ui-four .c-weather-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#cocolon-ui-four .c-weather-title>div:first-child{min-width:0}
+#cocolon-ui-four .c-weather-title span{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-weather-title h3{font-size:17px;font-weight:500;line-height:1.55;letter-spacing:-.035em;margin-top:6px}
+#cocolon-ui-four .c-weather-symbol{display:grid;place-items:center;min-width:36px;color:var(--c-accent)}
+#cocolon-ui-four .c-weather-symbol svg{width:30px;height:30px;stroke-width:1.4}
+#cocolon-ui-four .c-weather-chart{display:flex;align-items:center;gap:23px;padding:22px 0 19px}
+#cocolon-ui-four .c-mood-ring{position:relative;width:136px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--c-mood-calm) 0% 41.6667%,var(--c-mood-joy) 41.6667% 66.6667%,var(--c-mood-sad) 66.6667% 83.3333%,var(--c-mood-anxiety) 83.3333% 91.6667%,var(--c-mood-anger) 91.6667% 100%);flex-shrink:0}
+#cocolon-ui-four .c-mood-ring:before{content:"";position:absolute;inset:15px;border-radius:50%;background:var(--c-hero-bg)}
+#cocolon-ui-four .c-mood-ring>span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#cocolon-ui-four .c-mood-ring strong{font-size:32px;line-height:1.1;font-weight:500;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+#cocolon-ui-four .c-mood-ring small{font-size:11px;color:var(--c-muted);margin-top:5px}
+#cocolon-ui-four .c-mood-legend{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+#cocolon-ui-four .c-mood-legend>div{display:flex;align-items:center;gap:7px;font-size:11px}
+#cocolon-ui-four .c-mood-legend strong{margin-left:auto;font-weight:500;font-variant-numeric:tabular-nums}
+#cocolon-ui-four .c-mood-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+#cocolon-ui-four .c-dot-calm{background:var(--c-mood-calm)}
+#cocolon-ui-four .c-dot-joy{background:var(--c-mood-joy)}
+#cocolon-ui-four .c-dot-sad{background:var(--c-mood-sad)}
+#cocolon-ui-four .c-dot-anxiety{background:var(--c-mood-anxiety)}
+#cocolon-ui-four .c-dot-anger{background:var(--c-mood-anger)}
+#cocolon-ui-four .c-weather-copy{font-size:12px;line-height:1.9;color:var(--c-muted);padding-top:13px;border-top:1px solid var(--c-line)}
+#cocolon-ui-four .c-week-section{margin-top:25px}
+#cocolon-ui-four .c-week-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+#cocolon-ui-four .c-week-days button{display:flex;flex-direction:column;align-items:center;gap:8px;background:transparent;padding:4px 0;color:var(--c-muted);min-width:0}
+#cocolon-ui-four .c-week-days small,#cocolon-ui-four .c-week-days em{font-size:11px;font-style:normal}
+#cocolon-ui-four .c-day-circle{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;font-size:11px;color:var(--c-text)}
+#cocolon-ui-four .c-day-calm{background:color-mix(in srgb,var(--c-mood-calm) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-joy{background:color-mix(in srgb,var(--c-mood-joy) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-sad{background:color-mix(in srgb,var(--c-mood-sad) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-anxiety{background:color-mix(in srgb,var(--c-mood-anxiety) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-anger{background:color-mix(in srgb,var(--c-mood-anger) 25%,var(--c-bg))}
+#cocolon-ui-four .c-week-days button[aria-pressed="true"] .c-day-circle{outline:1.5px solid var(--c-accent);outline-offset:2px}
+#cocolon-ui-four .c-reflection{margin-top:26px}
+#cocolon-ui-four .c-text-button{display:flex;align-items:center;gap:3px;background:transparent;color:var(--c-accent)!important;padding:0;font-size:11px!important;min-height:30px}
+#cocolon-ui-four .c-text-button svg{height:13px;width:13px}
+#cocolon-ui-four .c-memory-row,#cocolon-ui-four .c-map-history{width:100%;display:flex;align-items:center;gap:11px;background:var(--c-surface);border-radius:14px;padding:15px;text-align:left}
+#cocolon-ui-four .c-memory-icon{display:grid;place-items:center;width:33px;height:37px;flex-shrink:0;color:var(--c-accent)}
+#cocolon-ui-four .c-memory-row>span:nth-child(2),#cocolon-ui-four .c-map-history>span:nth-child(2){flex:1;min-width:0}
+#cocolon-ui-four .c-memory-row small{display:block;font-size:11px;color:var(--c-muted);margin-bottom:4px}
+#cocolon-ui-four .c-memory-row strong{display:block;font-size:12px;font-weight:400;line-height:1.7}
+#cocolon-ui-four .c-memory-row>svg,#cocolon-ui-four .c-map-history>svg{width:14px;height:14px;color:var(--c-muted)}
+#cocolon-ui-four .c-record-excerpt{margin-top:12px;background:var(--c-soft);border-radius:12px;padding:14px 15px}
+#cocolon-ui-four .c-record-excerpt>span{font-size:11px;color:var(--c-accent)}
+#cocolon-ui-four .c-record-excerpt p{font-size:12px;line-height:1.9;margin-top:7px}
+#cocolon-ui-four .c-analysis-updated{text-align:center;font-size:11px;color:var(--c-muted);margin:20px 0 0}
+#cocolon-ui-four .c-map-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:24px}
+#cocolon-ui-four .c-map-heading h3{font-size:19px;line-height:1.7;letter-spacing:-.04em;font-weight:500;margin-top:6px}
+#cocolon-ui-four .c-map-symbol{display:grid;place-items:center;min-width:38px;height:48px;color:var(--c-accent)}
+#cocolon-ui-four .c-map-symbol svg{width:31px;height:31px}
+#cocolon-ui-four .c-map-coverage{font-size:11px;color:var(--c-muted);margin:12px 0 22px}
+#cocolon-ui-four .c-route-context{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--c-muted);margin-bottom:14px}
+#cocolon-ui-four .c-route-context svg{width:14px;height:14px}
+#cocolon-ui-four .c-route-node{width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:var(--c-surface);border-radius:14px;padding:16px 12px;min-height:76px}
+#cocolon-ui-four .c-node-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--c-soft);color:var(--c-accent);flex-shrink:0}
+#cocolon-ui-four .c-node-icon svg{width:17px;height:17px}
+#cocolon-ui-four .c-route-node>span:nth-child(2){flex:1;min-width:0}
+#cocolon-ui-four .c-route-node small{display:block;font-size:11px;color:var(--c-muted);margin-bottom:3px}
+#cocolon-ui-four .c-route-node strong{display:block;font-size:13px;font-weight:500}
+#cocolon-ui-four .c-node-source{display:flex;align-items:center;gap:2px;font-size:11px;color:var(--c-muted);flex-shrink:0}
+#cocolon-ui-four .c-node-source svg{width:11px;height:11px}
+#cocolon-ui-four .c-route-connector{display:flex;align-items:center;gap:11px;min-height:35px;margin-left:29px;color:var(--c-muted)}
+#cocolon-ui-four .c-route-connector span{display:block;height:35px;width:1px;background:var(--c-line);position:relative}
+#cocolon-ui-four .c-route-connector span:after{content:"";position:absolute;bottom:2px;left:-2px;width:5px;height:5px;border-bottom:1px solid var(--c-line);border-right:1px solid var(--c-line);transform:rotate(45deg)}
+#cocolon-ui-four .c-route-connector small{font-size:11px}
+#cocolon-ui-four .c-map-unknown{padding:18px 0;margin-top:18px}
+#cocolon-ui-four .c-map-unknown>span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-map-unknown svg{width:15px;height:15px}
+#cocolon-ui-four .c-map-unknown p{font-size:12px;line-height:1.9;margin-top:7px}
+#cocolon-ui-four .c-map-history{margin-top:12px}
+#cocolon-ui-four .c-map-history strong{font-size:12px;font-weight:500;display:block}
+#cocolon-ui-four .c-map-history small{font-size:11px;color:var(--c-muted);display:block;margin-top:4px}
+#cocolon-ui-four .c-map-compare{background:var(--c-surface);padding:16px;border-radius:14px;margin-top:10px}
+#cocolon-ui-four .c-compare-title{font-size:12px;font-weight:500;margin-bottom:12px}
+#cocolon-ui-four .c-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#cocolon-ui-four .c-compare-grid>div{background:var(--c-bg);padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:7px}
+#cocolon-ui-four .c-compare-grid small,#cocolon-ui-four .c-compare-grid span{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-compare-grid strong{font-size:15px;font-weight:500}
+#cocolon-ui-four .c-map-compare p{font-size:11px;line-height:1.9;color:var(--c-muted);margin-top:12px}
+#cocolon-ui-four .c-plan-banner{display:flex;gap:13px;align-items:center;position:relative;background:var(--c-soft);border-radius:17px;padding:18px 15px;margin:23px 0 28px}
+#cocolon-ui-four .c-plan-art{width:37px;height:43px;color:var(--c-accent);display:grid;place-items:center;flex-shrink:0}
+#cocolon-ui-four .c-plan-art svg{height:28px;width:28px;stroke-width:1.3}
+#cocolon-ui-four .c-plan-body{flex:1;min-width:0}
+#cocolon-ui-four .c-plan-body>small{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-plan-body>div{display:flex;align-items:baseline;gap:10px;margin-top:2px;flex-wrap:wrap}
+#cocolon-ui-four .c-plan-body strong{font-size:27px;line-height:1.4;font-weight:500;letter-spacing:-.04em}
+#cocolon-ui-four .c-plan-body>div span{font-size:11px;color:var(--c-accent)}
+#cocolon-ui-four .c-plan-body p{font-size:11px;color:var(--c-muted);margin-top:4px;line-height:1.7}
+#cocolon-ui-four .c-plan-link{width:31px;height:35px;background:transparent;color:var(--c-accent)!important;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+#cocolon-ui-four .c-plan-link svg{width:18px;height:18px}
+#cocolon-ui-four .c-settings-section{margin-top:22px}
+#cocolon-ui-four .c-settings-section>h3{font-size:11px;font-weight:400;color:var(--c-muted);margin:0 0 9px 4px;letter-spacing:.03em}
+#cocolon-ui-four .c-settings-group{background:var(--c-surface);border-radius:15px;padding:0 14px}
+#cocolon-ui-four .c-settings-row{display:flex;align-items:center;gap:10px;width:100%;background:transparent;min-height:53px;text-align:left}
+#cocolon-ui-four .c-settings-row+.c-settings-row{border-top:1px solid var(--c-line)}
+#cocolon-ui-four .c-settings-row>span:nth-child(2){font-size:12px;flex:1;min-width:0}
+#cocolon-ui-four .c-settings-icon{width:24px;height:29px;flex-shrink:0;display:grid;place-items:center;color:var(--c-muted)}
+#cocolon-ui-four .c-settings-icon svg{height:18px;width:18px}
+#cocolon-ui-four .c-settings-row>small{font-size:11px;color:var(--c-muted);max-width:92px;text-align:right}
+#cocolon-ui-four .c-settings-row>svg{width:13px;height:13px;flex-shrink:0;color:var(--c-muted)}
+#cocolon-ui-four .c-delete-row>span:nth-child(2){color:var(--c-error)}
+#cocolon-ui-four .c-settings-expand{border-bottom:1px solid var(--c-line);padding:3px 0 13px}
+#cocolon-ui-four .c-app-themes{display:flex;flex-direction:column;gap:6px}
+#cocolon-ui-four .c-app-themes button{display:flex;align-items:center;gap:9px;text-align:left;background:var(--c-bg);border-radius:10px;padding:10px 12px;font-size:11px}
+#cocolon-ui-four .c-app-themes button[aria-pressed="true"]{background:var(--c-soft);color:var(--c-accent)}
+#cocolon-ui-four .c-app-themes button[aria-pressed="true"]:after{content:"✓";margin-left:auto}
+#cocolon-ui-four .c-theme-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0}
+#cocolon-ui-four .c-theme-default{background:linear-gradient(120deg,#b695a4 50%,#ede4d6 50%)}
+#cocolon-ui-four .c-theme-whitegold{background:linear-gradient(120deg,#f2ecdd 50%,#c1a668 50%)}
+#cocolon-ui-four .c-theme-blacknavy{background:linear-gradient(120deg,#172334 50%,#8698b5 50%)}
+#cocolon-ui-four .c-notification-option{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;font-size:11px}
+#cocolon-ui-four .c-notification-option input{position:absolute;right:0;width:44px;height:40px;opacity:0;z-index:2;margin:0}
+#cocolon-ui-four .c-notification-option:has(input:disabled){opacity:.38}
+#cocolon-ui-four .c-plan-choices{display:flex;flex-direction:column;gap:5px}
+#cocolon-ui-four .c-plan-choices>div{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;background:var(--c-bg);border-radius:10px;gap:10px;font-size:12px}
+#cocolon-ui-four .c-plan-choices strong{font-weight:500}
+#cocolon-ui-four .c-plan-choices .is-selected{background:var(--c-soft);color:var(--c-accent)}
+#cocolon-ui-four .c-plan-choices small{font-size:11px;margin-left:7px}
+#cocolon-ui-four .c-settings-legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:23px -6px 3px;color:var(--c-muted)}
+#cocolon-ui-four .c-settings-legal button{background:transparent;padding:4px 0;font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-settings-legal>span{font-size:11px;opacity:.5}
+#cocolon-ui-four .c-emotional .c-view-intro h2{font-size:26px;line-height:1.5}
+#cocolon-ui-four .c-emotional .c-analysis-tabs{background:var(--c-soft);border-radius:25px}
+#cocolon-ui-four .c-emotional .c-analysis-tabs button{border-radius:22px}
+#cocolon-ui-four .c-emotional .c-analysis-tabs button[aria-pressed="true"]{background:var(--c-accent);color:var(--c-on-accent);box-shadow:none}
+#cocolon-ui-four .c-emotional .c-period-buttons button{border-radius:50%}
+#cocolon-ui-four .c-emotional .c-weather-hero{--c-hero-bg:var(--c-soft);border-radius:29px;padding:24px 20px}
+#cocolon-ui-four .c-emotional .c-weather-title h3{font-size:19px}
+#cocolon-ui-four .c-emotional .c-weather-symbol{width:44px;height:44px;border-radius:45% 42% 37% 48%;background:var(--c-surface)}
+#cocolon-ui-four .c-emotional .c-weather-chart{flex-direction:column;padding:23px 0 18px;gap:22px}
+#cocolon-ui-four .c-emotional .c-mood-ring{width:160px}
+#cocolon-ui-four .c-emotional .c-mood-ring:before{inset:19px}
+#cocolon-ui-four .c-emotional .c-mood-ring strong{font-size:39px}
+#cocolon-ui-four .c-emotional .c-mood-legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;gap:9px}
+#cocolon-ui-four .c-emotional .c-mood-legend>div{flex-direction:column;gap:5px}
+#cocolon-ui-four .c-emotional .c-mood-legend strong{margin:0;font-size:14px}
+#cocolon-ui-four .c-emotional .c-day-circle{border-radius:40% 48% 42% 45%;width:34px;height:36px}
+#cocolon-ui-four .c-emotional .c-memory-row,#cocolon-ui-four .c-emotional .c-map-history{border-radius:23px}
+#cocolon-ui-four .c-emotional .c-route-context{background:var(--c-soft);border-radius:20px;width:max-content;padding:7px 12px}
+#cocolon-ui-four .c-emotional .c-route-node{background:var(--c-soft);border-radius:22px;padding:18px 12px}
+#cocolon-ui-four .c-emotional .c-node-icon{background:var(--c-surface);border-radius:50%}
+#cocolon-ui-four .c-emotional .c-map-unknown{padding:15px 16px;background:var(--c-surface);border-radius:20px}
+#cocolon-ui-four .c-emotional .c-plan-banner{padding:22px 16px;background:var(--c-soft);border-radius:28px 28px 43px 28px}
+#cocolon-ui-four .c-emotional .c-plan-art{width:45px;height:52px;border-radius:47% 45% 39% 50%;background:var(--c-surface)}
+#cocolon-ui-four .c-emotional .c-plan-body strong{font-family:Georgia,serif;font-size:32px}
+#cocolon-ui-four .c-emotional .c-settings-group{border-radius:23px;padding:2px 15px}
+#cocolon-ui-four .c-emotional .c-settings-icon{background:var(--c-soft);border-radius:50%;height:30px;width:30px;color:var(--c-accent)}
+#cocolon-ui-four .c-emotional .c-settings-icon svg{width:15px;height:15px}
+#cocolon-ui-four .c-emotional .c-app-themes button{border-radius:20px}
+#cocolon-ui-four .c-expressive .c-analysis-main,#cocolon-ui-four .c-expressive .c-settings-main{padding-left:20px;padding-right:20px}
+#cocolon-ui-four .c-expressive .c-view-intro h2{font-size:27px;font-weight:650}
+#cocolon-ui-four .c-expressive .c-analysis-tabs{padding:0;background:transparent;gap:8px;margin-top:23px}
+#cocolon-ui-four .c-expressive .c-analysis-tabs button{border-radius:24px;background:var(--c-soft);min-height:44px}
+#cocolon-ui-four .c-expressive .c-analysis-tabs button[aria-pressed="true"]{background:var(--c-accent);color:var(--c-on-accent);box-shadow:none}
+#cocolon-ui-four .c-expressive .c-period-buttons{background:var(--c-surface);padding:3px;border-radius:22px}
+#cocolon-ui-four .c-expressive .c-period-buttons button{border-radius:20px}
+#cocolon-ui-four .c-expressive .c-period-buttons button[aria-pressed="true"]{background:var(--c-accent);color:var(--c-on-accent)}
+#cocolon-ui-four .c-expressive .c-weather-hero{border-radius:27px;padding:20px 16px}
+#cocolon-ui-four .c-expressive .c-weather-title h3{font-weight:650;font-size:19px}
+#cocolon-ui-four .c-expressive .c-weather-symbol{background:light-dark(#f3d995,#5b482c);color:light-dark(#715326,#f4d997);border-radius:50% 50% 10px 50%;width:42px;height:42px}
+#cocolon-ui-four .c-expressive .c-weather-chart{background:var(--c-soft);border-radius:23px;padding:17px 13px;margin:17px 0;gap:17px}
+#cocolon-ui-four .c-expressive .c-mood-ring{--c-hero-bg:var(--c-soft);width:122px}
+#cocolon-ui-four .c-expressive .c-weather-copy{border:0;padding-top:0}
+#cocolon-ui-four .c-expressive .c-day-circle{border-radius:12px}
+#cocolon-ui-four .c-expressive .c-week-days button[aria-pressed="true"] .c-day-circle{outline:0;background:var(--c-accent);color:var(--c-on-accent);border-radius:18px}
+#cocolon-ui-four .c-expressive .c-memory-row,#cocolon-ui-four .c-expressive .c-map-history{border-radius:20px;background:var(--c-soft)}
+#cocolon-ui-four .c-expressive .c-route-context{background:var(--c-accent);color:var(--c-on-accent);border-radius:8px 18px 18px 18px;padding:7px 12px;width:max-content}
+#cocolon-ui-four .c-expressive .c-route-node{border-radius:23px 23px 9px 23px;padding:18px 12px;background:var(--c-soft)}
+#cocolon-ui-four .c-expressive .c-node-icon{background:var(--c-accent);color:var(--c-on-accent);border-radius:50% 50% 8px 50%}
+#cocolon-ui-four .c-expressive .c-map-unknown{background:var(--c-surface);padding:16px;border-radius:20px}
+#cocolon-ui-four .c-expressive .c-plan-banner{background:var(--c-accent);color:var(--c-on-accent);border-radius:28px 28px 11px 28px;padding:21px 17px}
+#cocolon-ui-four .c-expressive .c-plan-art{background:color-mix(in srgb,var(--c-on-accent) 15%,transparent);color:var(--c-on-accent);border-radius:50% 50% 10px 50%;height:48px;width:43px}
+#cocolon-ui-four .c-expressive .c-plan-body>small,#cocolon-ui-four .c-expressive .c-plan-body p,#cocolon-ui-four .c-expressive .c-plan-body>div span,#cocolon-ui-four .c-expressive .c-plan-link{color:var(--c-on-accent)!important}
+#cocolon-ui-four .c-expressive .c-plan-body>small,#cocolon-ui-four .c-expressive .c-plan-body p{opacity:.8}
+#cocolon-ui-four .c-expressive .c-plan-body strong{font-size:34px;font-weight:650}
+#cocolon-ui-four .c-expressive .c-settings-group{background:transparent;padding:0;display:flex;flex-direction:column;gap:3px}
+#cocolon-ui-four .c-expressive .c-settings-row{background:var(--c-surface);border-radius:10px;min-height:56px;padding:0 12px;border:0!important}
+#cocolon-ui-four .c-expressive .c-settings-row:first-child{border-radius:21px 21px 10px 10px}
+#cocolon-ui-four .c-expressive .c-settings-row:last-child{border-radius:10px 10px 21px 21px}
+#cocolon-ui-four .c-expressive .c-settings-icon{background:var(--c-soft);border-radius:11px;color:var(--c-accent);height:31px;width:31px}
+#cocolon-ui-four .c-expressive .c-settings-icon svg{height:16px;width:16px}
+#cocolon-ui-four .c-expressive .c-settings-expand{border:0;padding:9px 12px;background:var(--c-surface);border-radius:12px}
+#cocolon-ui-four .c-expressive .c-app-themes button{border-radius:20px}
+#cocolon-ui-four .c-device[data-preference-theme="whitegold"]{color-scheme:light;--c-bg:#f8f6ef;--c-surface:#fffefb;--c-text:#3c3628;--c-muted:#7f7660;--c-line:#e9e2d1;--c-accent:#816623;--c-on-accent:#fff;--c-soft:#eee6d0;--c-shadow:#41372313}
+#cocolon-ui-four .c-device[data-preference-theme="blacknavy"]{color-scheme:dark;--c-bg:#17202e;--c-surface:#202d3e;--c-text:#f0f2f6;--c-muted:#a7b4c8;--c-line:#35465d;--c-accent:#c1d1ec;--c-on-accent:#243750;--c-soft:#2d3e54;--c-shadow:#00000044}
+@media(max-width:350px){
+  #cocolon-ui-four .c-analysis-main,#cocolon-ui-four .c-settings-main{padding-left:16px;padding-right:16px}
+  #cocolon-ui-four .c-weather-hero{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-weather-chart{gap:17px}
+  #cocolon-ui-four .c-mood-ring{width:120px}
+  #cocolon-ui-four .c-weather-title h3{font-size:16px}
+  #cocolon-ui-four .c-emotional .c-mood-legend{gap:5px}
+  #cocolon-ui-four .c-emotional .c-weather-hero{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-expressive .c-analysis-main,#cocolon-ui-four .c-expressive .c-settings-main{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-expressive .c-weather-chart{gap:12px;padding-left:10px;padding-right:10px}
+  #cocolon-ui-four .c-expressive .c-mood-ring{width:108px}
+  #cocolon-ui-four .c-mood-legend>div{gap:5px}
+  #cocolon-ui-four .c-route-node{gap:7px;padding-left:10px;padding-right:10px}
+  #cocolon-ui-four .c-route-node strong{font-size:12px}
+  #cocolon-ui-four .c-node-source{font-size:11px}
+}
+@media(max-width:420px){
+  #cocolon-ui-four .c-stage{padding:16px 0 24px}
+  #cocolon-ui-four .c-device{border-radius:26px}
+  #cocolon-ui-four .c-home-main{padding-left:19px;padding-right:19px}
+  #cocolon-ui-four .c-brandbar{padding-left:19px;padding-right:19px}
+  #cocolon-ui-four .c-piece-main{padding-left:18px;padding-right:18px}
+}
+@media(max-width:350px){
+  #cocolon-ui-four .c-home-main{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-brandbar{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-emotion-circle{width:39px;height:39px}
+  #cocolon-ui-four .c-emotional .c-emotion-circle{width:39px;height:39px}
+  #cocolon-ui-four .c-expressive .c-emotion-circle{width:38px}
+  #cocolon-ui-four .c-categories{gap:5px}
+  #cocolon-ui-four .c-categories button{padding-left:10px;padding-right:10px}
+  #cocolon-ui-four .c-artwork-stage{padding-left:17px;padding-right:17px}
+  #cocolon-ui-four .c-expressive .c-artwork-stage{padding-left:28px;padding-right:28px}
+  #cocolon-ui-four .c-artwork{padding-left:20px;padding-right:20px}
+}
+@media(pointer:coarse){
+  #cocolon-ui-four .c-icon-button{width:44px;height:44px}
+  #cocolon-ui-four .c-emotion{min-height:63px}
+  #cocolon-ui-four .c-categories button{min-height:40px}
+  #cocolon-ui-four .c-intensity button{min-height:38px;width:37px}
+  #cocolon-ui-four .c-self{min-height:40px}
+  #cocolon-ui-four .c-segments button{min-height:38px}
+  #cocolon-ui-four .c-notify,#cocolon-ui-four .c-logo-option{min-height:44px}
+  #cocolon-ui-four .c-notify input,#cocolon-ui-four .c-logo-option input{height:44px;width:44px}
+  #cocolon-ui-four .c-writing-field textarea{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  #cocolon-ui-four .c-device *,#cocolon-ui-four .c-device *:after{transition:none!important;animation:none!important}
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('cocolon-ui-four');
+  const template = document.getElementById('cocolon-four-phone-template');
+  const phones = Array.from(root.querySelectorAll('.c-device'));
+  const state = {view:'analysis',emotion:'平穏',intensity:'中',categories:new Set(['日常']),thought:'急がない時間も、大切にしたい。',action:'帰り道、公園でひと休みした。',notify:false,palette:'paper',ratio:'4:5',logo:true,analysisMode:'weather',period:'week',day:6,weatherRecord:false,mapEvidence:null,mapCompare:false,settingsPanel:null,appTheme:'default',notifications:{all:true,question:true,report:true,emotion:true}};
+  const paletteNames = {paper:'ペーパー',night:'ナイト',sage:'セージ',rose:'ローズ'};
+  const themeNames={default:'デフォルト',whitegold:'ホワイト＆ゴールド',blacknavy:'ブラック＆ネイビー'};
+  const weatherData={
+    day:{range:'11.5',eyebrow:'昨日のこころ',title:'喜びを残した1日',counts:[0,2,0,0,0],copy:'昨日は、喜びの記録が2件ありました。どんな場面だったか、読み返せます。'},
+    week:{range:'10.31 ― 11.6',eyebrow:'この1週間のこころ',title:'平穏の多かった1週間',counts:[5,3,2,1,1],copy:'平穏と喜びの記録が多くありました。ほかの気持ちも、一緒に残っています。'},
+    month:{range:'10.10 ― 11.6',eyebrow:'この28日間のこころ',title:'いくつもの気持ちを、少しずつ',counts:[16,12,7,5,3],copy:'28日間に、43件の気持ちを残しました。平穏16件、喜び12件のほか、さまざまな記録があります。'}
+  };
+  const moodData=[{name:'平穏',key:'calm'},{name:'喜び',key:'joy'},{name:'悲しみ',key:'sad'},{name:'不安',key:'anxiety'},{name:'怒り',key:'anger'}];
+  const dayData=[
+    {date:'10月31日',label:'10月31日 · 日常',text:'好きな音楽を聴きながら、帰った。',body:'帰り道に好きな音楽を聴いた。新しい曲を見つけて嬉しかった。'},
+    {date:'11月1日',label:'11月1日 · 日常',text:'予定を入れずに、ゆっくり過ごした。',body:'予定を入れずに、家でゆっくり過ごした。穏やかな一日だった。'},
+    {date:'11月2日',label:'11月2日 · 仕事',text:'明日の発表が、少し気になっている。',body:'明日の発表が少し気になって、不安を感じた。資料をもう一度読み直した。'},
+    {date:'11月3日',label:'11月3日 · 日常',text:'楽しみにしていた予定が、延期になった。',body:'楽しみにしていた予定が延期になって、悲しかった。'},
+    {date:'11月4日',label:'11月4日 · 仕事',text:'急な変更に、いらいらした。',body:'準備した後に急な変更があって、いらいらした。'},
+    {date:'11月5日',label:'11月5日 · 日常',text:'帰り道の空が、きれいだった。',body:'帰り道の空がきれいで、写真を撮った。嬉しい気持ちを残しておきたい。'},
+    {date:'11月6日',label:'11月6日 · 日常',text:'急がない時間も、大切にしたい。',body:'帰り道、公園でひと休みした。急がない時間も、大切にしたい。'}
+  ];
+  const evidenceTexts={
+    role:'10月29日：「今日は進行役を担当した。まず、全員の話を聞いた。」 11月3日：「進行役を担当し、まず全員の話を聞いた。その後、進める順番を決めた。」',
+    listen:'10月29日と11月3日の2記録に、「まず、全員の話を聞いた」と書かれています。',
+    decide:'11月3日：「進行役を担当し、まず全員の話を聞いた。その後、進める順番を決めた。」'
+  };
+  const toastTimers = new WeakMap();
+  let sizing = false;
+  phones.forEach((phone,index) => {
+    phone.appendChild(template.content.cloneNode(true));
+    const nav=phone.querySelector('.c-bottom-nav');
+    phone.querySelectorAll('[data-nav-slot]').forEach(slot=>slot.replaceWith(nav.cloneNode(true)));
+    phone.querySelectorAll('textarea').forEach((field,n) => {field.id='cocolon-four-'+index+'-'+n;});
+  });
+  function iconRefresh(){if(globalThis.lucide)globalThis.lucide.createIcons({attrs:{width:20,height:20}});}
+  function announce(message){root.querySelector('[data-announcement]').textContent=message;}
+  function equalize(){
+    if(sizing)return;
+    sizing=true;
+    const width=root.clientWidth;
+    let max=0;
+    phones.forEach(phone=>{
+      const section=phone.closest('[data-variant]');
+      const wasHidden=section.hidden;
+      const old=section.getAttribute('style');
+      section.hidden=false;
+      section.style.cssText='position:absolute;visibility:hidden;left:-10000px;top:0;width:'+width+'px;min-height:0;pointer-events:none';
+      max=Math.max(max,section.scrollHeight);
+      if(old===null)section.removeAttribute('style');else section.setAttribute('style',old);
+      section.hidden=wasHidden;
+    });
+    root.style.setProperty('--c-stage-height',Math.ceil(max)+'px');
+    sizing=false;
+  }
+  function sync(){
+    root.querySelectorAll('[data-preview-view]').forEach(b=>{
+      const selected=b.dataset.previewView===state.view;
+      b.setAttribute('aria-pressed',String(selected));b.classList.toggle('btn-primary',selected);
+    });
+    phones.forEach(phone=>{
+      phone.querySelectorAll('[data-app-view]').forEach(v=>v.hidden=v.dataset.appView!==state.view);
+      phone.querySelectorAll('[data-emotion]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.emotion===state.emotion)));
+      phone.querySelector('[data-feeling-name]').textContent=state.emotion;
+      phone.querySelector('.c-intensity').hidden=state.emotion==='自己理解';
+      phone.querySelectorAll('[data-intensity]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.intensity===state.intensity)));
+      phone.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(state.categories.has(b.dataset.category))));
+      phone.querySelectorAll('[data-palette]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.palette===state.palette)));
+      phone.querySelectorAll('[data-ratio]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.ratio===state.ratio)));
+      phone.querySelectorAll('[data-field]').forEach(f=>{
+        const key=f.dataset.field;
+        if(f.type==='checkbox')f.checked=state[key];else if(f.value!==state[key])f.value=state[key];
+      });
+      phone.querySelector('[data-theme-label]').textContent=paletteNames[state.palette];
+      phone.querySelector('[data-ratio-caption]').textContent=state.ratio;
+      const art=phone.querySelector('[data-artwork]');
+      art.className='c-artwork c-palette-'+state.palette;
+      art.style.aspectRatio=state.ratio==='4:5'?'4 / 5':'9 / 16';
+      phone.querySelector('[data-artwork-brand]').style.visibility=state.logo?'visible':'hidden';
+      phone.querySelector('[data-piece-action]').textContent=state.action;
+      phone.querySelector('[data-piece-thought]').textContent=state.thought;
+      phone.dataset.preferenceTheme=state.appTheme;
+      phone.querySelectorAll('.c-bottom-nav button').forEach(b=>{
+        const viewForAction={home:'home','nav-analysis':'analysis','nav-piece':'piece','nav-settings':'settings'};
+        const current=viewForAction[b.dataset.action]===state.view;
+        b.classList.toggle('is-current',current);
+        if(current)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
+      });
+      phone.querySelectorAll('[data-analysis-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.analysisMode===state.analysisMode)));
+      phone.querySelectorAll('[data-analysis-panel]').forEach(p=>p.hidden=p.dataset.analysisPanel!==state.analysisMode);
+      phone.querySelectorAll('[data-period]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.period===state.period)));
+      const weather=weatherData[state.period];
+      const total=weather.counts.reduce((a,b)=>a+b,0);
+      phone.querySelector('[data-weather-range]').textContent=weather.range;
+      phone.querySelector('[data-weather-eyebrow]').textContent=weather.eyebrow;
+      phone.querySelector('[data-weather-title]').textContent=weather.title;
+      phone.querySelector('[data-weather-copy]').textContent=weather.copy;
+      phone.querySelector('[data-record-count]').textContent=String(total);
+      const legend=phone.querySelector('[data-mood-legend]');
+      legend.replaceChildren();
+      let cumulative=0;
+      const stops=[];
+      moodData.forEach((m,index)=>{
+        const row=document.createElement('div');
+        const dot=document.createElement('span');dot.className='c-mood-dot c-dot-'+m.key;
+        const count=document.createElement('strong');count.textContent=String(weather.counts[index]);
+        row.append(dot,document.createTextNode(m.name),count);legend.append(row);
+        const start=cumulative; cumulative+=weather.counts[index]/total*100;
+        stops.push('var(--c-mood-'+m.key+') '+start+'% '+cumulative+'%');
+      });
+      const ring=phone.querySelector('[data-mood-ring]');
+      ring.style.background='conic-gradient('+stops.join(',')+')';
+      ring.setAttribute('aria-label',String(total)+'件の記録：'+moodData.map((m,i)=>m.name+weather.counts[i]+'件').join('、'));
+      phone.querySelector('[data-week-section]').hidden=state.period!=='week';
+      phone.querySelectorAll('[data-day]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.day)===state.day)));
+      const record=dayData[state.period==='day'?5:state.day];
+      phone.querySelector('[data-memory-date]').textContent=record.label;
+      phone.querySelector('[data-memory-text]').textContent=record.text;
+      phone.querySelector('[data-record-heading]').textContent=record.date+'の記録';
+      phone.querySelector('[data-record-body]').textContent=record.body;
+      phone.querySelector('[data-weather-record]').hidden=!state.weatherRecord;
+      phone.querySelector('[data-evidence-panel]').hidden=!state.mapEvidence;
+      phone.querySelector('[data-evidence-text]').textContent=evidenceTexts[state.mapEvidence]||'';
+      phone.querySelectorAll('[data-evidence]').forEach(b=>b.setAttribute('aria-expanded',String(state.mapEvidence===b.dataset.evidence)));
+      phone.querySelector('[data-map-compare]').hidden=!state.mapCompare;
+      phone.querySelectorAll('[data-settings-panel]').forEach(b=>b.setAttribute('aria-expanded',String(state.settingsPanel===b.dataset.settingsPanel)));
+      phone.querySelectorAll('[data-setting-content]').forEach(p=>p.hidden=p.dataset.settingContent!==state.settingsPanel);
+      phone.querySelectorAll('[data-app-theme]').forEach(b=>b.setAttribute('aria-pressed',String(state.appTheme===b.dataset.appTheme)));
+      phone.querySelector('[data-current-theme]').textContent=themeNames[state.appTheme];
+      phone.querySelector('[data-notification-summary]').textContent=state.notifications.all?'オン':'オフ';
+      phone.querySelectorAll('[data-setting-notification]').forEach(input=>{
+        input.checked=state.notifications[input.dataset.settingNotification];
+        input.disabled=input.dataset.settingNotification!=='all'&&!state.notifications.all;
+      });
+    });
+    requestAnimationFrame(equalize);
+  }
+  function setView(view){
+    state.view=view;
+    phones.forEach(p=>{p.querySelector('[data-modal-layer]').hidden=true;p.querySelector('[data-toast]').hidden=true;p.querySelectorAll('[data-app-view]').forEach(v=>v.inert=false);});
+    const viewNames={home:'ホーム',piece:'Pieceのプレビュー',analysis:'分析',settings:'設定'};
+    sync();announce(viewNames[view]+'を表示');
+  }
+  function toast(phone,message){
+    clearTimeout(toastTimers.get(phone));
+    const node=phone.querySelector('[data-toast]');
+    node.querySelector('span').textContent=message;node.hidden=false;
+    toastTimers.set(phone,setTimeout(()=>node.hidden=true,2600));
+  }
+  root.addEventListener('input',event=>{
+    const notification=event.target.closest('[data-setting-notification]');
+    if(notification){state.notifications[notification.dataset.settingNotification]=notification.checked;sync();return;}
+    const field=event.target.closest('[data-field]');
+    if(!field)return;
+    const key=field.dataset.field;
+    state[key]=field.type==='checkbox'?field.checked:field.value;
+    sync();
+  });
+  root.addEventListener('click',event=>{
+    const button=event.target.closest('button');
+    if(!button)return;
+    if(button.dataset.previewView){setView(button.dataset.previewView);return;}
+    const phone=button.closest('.c-device');if(!phone)return;
+    if(button.dataset.emotion){state.emotion=button.dataset.emotion;sync();return;}
+    if(button.dataset.intensity){state.intensity=button.dataset.intensity;sync();return;}
+    if(button.dataset.category){
+      const c=button.dataset.category;
+      if(state.categories.has(c))state.categories.delete(c);else state.categories.add(c);
+      sync();return;
+    }
+    if(button.dataset.palette){state.palette=button.dataset.palette;sync();announce(paletteNames[state.palette]+'を選択');return;}
+    if(button.dataset.ratio){state.ratio=button.dataset.ratio;sync();return;}
+    if(button.dataset.analysisMode){state.analysisMode=button.dataset.analysisMode;sync();return;}
+    if(button.dataset.period){state.period=button.dataset.period;state.weatherRecord=false;sync();return;}
+    if(button.dataset.day!==undefined){state.day=Number(button.dataset.day);state.weatherRecord=true;sync();return;}
+    if(button.dataset.evidence){state.mapEvidence=state.mapEvidence===button.dataset.evidence?null:button.dataset.evidence;sync();return;}
+    if(button.dataset.settingsPanel){state.settingsPanel=state.settingsPanel===button.dataset.settingsPanel?null:button.dataset.settingsPanel;sync();return;}
+    if(button.dataset.appTheme){state.appTheme=button.dataset.appTheme;sync();announce(themeNames[state.appTheme]+'を選択');return;}
+    const action=button.dataset.action;
+    if(action==='home'||action==='back-home'){setView('home');return;}
+    if(action==='nav-analysis'){setView('analysis');return;}
+    if(action==='nav-settings'){setView('settings');return;}
+    if(action==='nav-piece'){setView('piece');return;}
+    if(action==='weather-record'){state.weatherRecord=!state.weatherRecord;sync();return;}
+    if(action==='map-history'){state.mapCompare=!state.mapCompare;sync();return;}
+    if(action==='analysis-history'){
+      if(state.analysisMode==='map')state.mapCompare=!state.mapCompare;else state.weatherRecord=!state.weatherRecord;
+      sync();return;
+    }
+    if(action==='account'){setView('settings');return;}
+    if(action==='submit'){
+      const valid=(state.thought.trim()||state.action.trim())&&state.categories.size;
+      phone.querySelector('[data-input-error]').hidden=!!valid;
+      if(!valid)return;
+      const layer=phone.querySelector('[data-modal-layer]');
+      layer.hidden=false;
+      phone.querySelector('[data-app-view="home"]').inert=true;
+      const para=layer.querySelector('p');
+      para.textContent='「'+(state.thought.trim()||state.action.trim())+'」と書いてくれたのですね。';
+      layer.querySelector('[data-action="create-piece"]').focus({preventScroll:true});
+      return;
+    }
+    if(action==='close-modal'){phone.querySelector('[data-modal-layer]').hidden=true;phone.querySelector('[data-app-view="home"]').inert=false;phone.querySelector('[data-action="submit"]').focus({preventScroll:true});return;}
+    if(action==='create-piece'){setView('piece');return;}
+    if(action==='save-piece'){toast(phone,'Pieceを保存しました');return;}
+    if(action==='cancel-piece'){setView('home');toast(phone,'候補を取り消しました');return;}
+    const messages={history:'入力履歴は、今回の4画面には含めていません',question:'今日の問いは、表示の見本です',restore:'購入内容の復元は、試作では実行しません','manage-subscription':'ストアの契約管理は、試作では開きません',tutorial:'チュートリアルは、今回の試作には含めていません','logout-preview':'ログアウトは、試作では実行しません','delete-preview':'アカウント削除は、試作では実行しません',legal:'規約ページは、今回の試作には含めていません',support:'サポートページは、今回の試作には含めていません'};
+    if(messages[action])toast(phone,messages[action]);
+  });
+  root.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){
+      const activePhone=event.target.closest('.c-device');
+      phones.forEach(phone=>{phone.querySelector('[data-modal-layer]').hidden=true;phone.querySelectorAll('[data-app-view]').forEach(v=>v.inert=false);});
+      if(activePhone)activePhone.querySelector('[data-action="submit"]').focus({preventScroll:true});
+    }
+  });
+  sync();iconRefresh();
+  if(globalThis.ResizeObserver)new ResizeObserver(()=>requestAnimationFrame(equalize)).observe(root);
+})();
+</script>

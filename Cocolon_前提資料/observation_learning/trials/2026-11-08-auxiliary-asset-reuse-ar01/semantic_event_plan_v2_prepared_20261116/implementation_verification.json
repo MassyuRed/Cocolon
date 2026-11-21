@@ -1,0 +1,101 @@
+{
+  "actual_semantic_quality": "UNASSESSED",
+  "api_commit": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+  "current_source_and_review_binding_tests": {
+    "passed": 51,
+    "scope": "Overlaps regression; not an additive total."
+  },
+  "execution_offline": {
+    "GPU": 0,
+    "SQL_calls": 0,
+    "actual_tokenizer_preflight_calls": 0,
+    "dummy_scope_only": true,
+    "errors": 0,
+    "failures": 0,
+    "main_calls": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "runtime_ready_claim": false,
+    "scope_file_used": false,
+    "source_archive_sha256": "06f8e7f507b4f0d18ab6180d21c9b57b4139d9499ef4539bf1d5d01ae7775bad",
+    "state": "PASS_OFFLINE_BOUNDARIES_ONLY",
+    "tested_execution_sha256": "567d085a6aa580bccc3e65111dffb41c8e4ec9bb65aeb4f4b0344bbf8458d123",
+    "tests_run": 15
+  },
+  "github_ci": [
+    {
+      "conclusion": "success",
+      "head_sha": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+      "id": 43806114624,
+      "name": "Analysis observed content",
+      "started_at": "2026-11-16T04:46:44Z",
+      "status": "completed",
+      "updated_at": "2026-11-16T05:05:45Z",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43806114624"
+    },
+    {
+      "conclusion": "success",
+      "head_sha": "80d94db7833e9fa0039ac581fb73151b0767dda4",
+      "id": 43806114615,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "started_at": "2026-11-16T04:46:44Z",
+      "status": "completed",
+      "updated_at": "2026-11-16T05:11:05Z",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43806114615"
+    }
+  ],
+  "github_ci_exact_source_head_success": true,
+  "instruction_compaction": {
+    "final_derived_leaves": 6,
+    "final_v2_bytes": 3436,
+    "first_derived_leaves": 12,
+    "forced_leaf_count": false,
+    "full_original_input_unchanged": true,
+    "initial_v2_bytes": 4913
+  },
+  "model_alias": "cocolon-qwen3.5-4b-analysis-event-plan-v2",
+  "new_GPU_calls": 0,
+  "new_Pod_operations": 0,
+  "new_training": 0,
+  "normal_rollout": 0,
+  "profile": "semantic_map.event_plan.v2",
+  "regression": {
+    "final_passed": 824,
+    "initial_failed": 11,
+    "initial_passed": 813,
+    "repair": "Ten legacy generic-parser failures fixed by optional schema marker lookup; six-root fixture fixed to obey unchanged record coverage order. No admission rule relaxed.",
+    "warning_count": 1
+  },
+  "scope": {
+    "bytes": 6344,
+    "initial_files": 9,
+    "sha256": "b53ac4d90b45631608451c47dc1163265af0b53498bdabdf241d1d0c8743c6fd",
+    "total_bytes": 3133443
+  },
+  "source_package": {
+    "GPU": 0,
+    "archive_sha256": "06f8e7f507b4f0d18ab6180d21c9b57b4139d9499ef4539bf1d5d01ae7775bad",
+    "exit_code": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "python_version": "3.12.14",
+    "source_bytes": 12593607,
+    "source_count": 247,
+    "stderr": "",
+    "stdout": "{\"GPU\": 0, \"event_plan_profile\": \"semantic_map.event_plan.v2\", \"fields\": 1, \"imported_modules\": [\"analysis_semantic_map\", \"analysis_cumulative_service\", \"analysis_model_source\", \"analysis_if_model_source\", \"cocolon_meaning_experience_engine\", \"serve_emlis_natural_reply\"], \"legacy_profile\": \"semantic_map.v1\", \"model_calls\": 0, \"network_calls\": 0, \"parsed_modules\": 246, \"repository_path_imports\": 0, \"state\": \"PASS_IMPORT_AND_SYNTHETIC_PREPARE_NO_GPU\"}\n",
+    "verification_scope": "full source byte/AST verification, fresh extracted imports and synthetic prepare; not model generation or semantic quality"
+  },
+  "state": "SOURCE_IMPLEMENTED_TESTED_PREPARED_NOT_MODEL_VERIFIED_NOT_ADOPTED",
+  "synthetic_sql": {
+    "generation_commits": 1,
+    "hosted_database_calls": 0,
+    "model_calls": 0,
+    "monthly_references": 1,
+    "product_acceptance": false,
+    "saved_artifacts": 1,
+    "separate_process_non_generating_reread": true,
+    "state": "SAVED_AND_SEPARATE_PROCESS_REREAD_TECHNICAL_ONLY"
+  },
+  "tree": "3310733b7ab42c4a9e670eb76b31e2f695fcdd1c"
+}

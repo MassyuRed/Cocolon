@@ -1,0 +1,681 @@
+{
+  "actual": {
+    "body": 6,
+    "chair": {
+      "body": 3,
+      "meaning": 4,
+      "total": 6
+    },
+    "daily": {
+      "body": 3,
+      "meaning": 3,
+      "total": 3
+    },
+    "meaning": 7,
+    "total": 9
+  },
+  "additional_updates": 0,
+  "all9_meaning_and_body_success": false,
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "automatic_progression": false,
+  "cases": [
+    {
+      "body": null,
+      "body_available": false,
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "family": "CHAIR",
+      "finish_reason": "stop",
+      "meaning_adopted": false,
+      "outcome_reasons": null,
+      "output_tokens": 1380,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": {
+        "claim_refs": [
+          "solo_appraisal_object",
+          "joy"
+        ],
+        "focus": "PERSONAL_JOY_SIGNIFICANCE",
+        "target_unknown_ref": "personal_significance",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。またその「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "update_note": null
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "74b5acb88a019a751882f3ea6e410ac26fb2e06d22b8abcf8ac807677722a391",
+      "reason_code": "model_relation_direction_or_scope_not_bound",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "INITIAL",
+      "status": "SEMANTIC_NOT_ADOPTED",
+      "teacher_differences": [
+        {
+          "actual": "appraisal_object",
+          "path": "/candidate/relations/1/to_claim_id",
+          "teacher": "joy"
+        },
+        {
+          "actual": "appraisal_object",
+          "path": "/candidate/surface_proposal/bindings/1/claim_refs/2",
+          "teacher": "usable_again"
+        },
+        {
+          "actual": "全部一人で直せたことが、うれしかったのですね。またその「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+          "path": "/candidate/surface_proposal/reception",
+          "teacher": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+        }
+      ],
+      "updates": 0
+    },
+    {
+      "body": null,
+      "body_available": false,
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "family": "CHAIR",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "model_surface_not_validated"
+      ],
+      "output_tokens": 2331,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直せたのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "5ffda3295215ce1527ab196eab00792b51280c8bdab0e88f5dc38243005d47c0",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "CORRECTION",
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "teacher_differences": [
+        {
+          "actual": "友人に手順を教わり、一緒に椅子を直せたのですね。",
+          "path": "/candidate/surface_proposal/observation",
+          "teacher": "友人に手順を教わり、一緒に椅子を直したのですね。"
+        }
+      ],
+      "updates": 3
+    },
+    {
+      "body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "body_available": true,
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "family": "CHAIR",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "model_question_candidate_ready"
+      ],
+      "output_tokens": 1375,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": true,
+      "question_text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "raw_question": {
+        "claim_refs": [
+          "solo_appraisal_object",
+          "joy"
+        ],
+        "focus": "PERSONAL_JOY_SIGNIFICANCE",
+        "target_unknown_ref": "personal_significance",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "b11b6bc3022e1fd5cd15e52562efc239e3194a1759624d6eec58be6f8edc2d55",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "teacher_differences": [],
+      "updates": 0
+    },
+    {
+      "body": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "body_available": true,
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "family": "CHAIR",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "free_round_complete"
+      ],
+      "output_tokens": 2334,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "9a84c1a64269880dec1a19ce8aa538f8f9b5eaf1ea45e59f4ca252af874e565d",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "CORRECTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "teacher_differences": [],
+      "updates": 3
+    },
+    {
+      "body": null,
+      "body_available": false,
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "family": "CHAIR",
+      "finish_reason": "length",
+      "meaning_adopted": false,
+      "outcome_reasons": null,
+      "output_tokens": 2560,
+      "parse_error": "Unterminated string starting at: line 1 column 3230 (char 3229)",
+      "parsed": false,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": null,
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "6c5404a90c14fde039be8c84aa2ed578d52e6ce8020ba45159e9a0f0269a290c",
+      "reason_code": null,
+      "receipt_status": "TOKEN_LIMIT",
+      "stage": "INITIAL",
+      "status": "CANDIDATE_NOT_ELIGIBLE",
+      "teacher_differences": [],
+      "updates": 0
+    },
+    {
+      "body": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "body_available": true,
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "family": "CHAIR",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "free_round_complete"
+      ],
+      "output_tokens": 2340,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "d0bd5cf8b6b07808815531c361f873e373166fd42994ed59ff92d5b6b7663750",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "CORRECTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "teacher_differences": [],
+      "updates": 3
+    },
+    {
+      "body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "body_available": true,
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "family": "DAILY",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "model_question_not_proposed"
+      ],
+      "output_tokens": 1586,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "teacher_differences": [],
+      "updates": 0
+    },
+    {
+      "body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "body_available": true,
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "family": "DAILY",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "model_question_not_proposed"
+      ],
+      "output_tokens": 1560,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "teacher_differences": [],
+      "updates": 0
+    },
+    {
+      "body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "body_available": true,
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "family": "DAILY",
+      "finish_reason": "stop",
+      "meaning_adopted": true,
+      "outcome_reasons": [
+        "model_question_not_proposed"
+      ],
+      "output_tokens": 1599,
+      "parse_error": null,
+      "parsed": true,
+      "question_present": false,
+      "question_text": null,
+      "raw_question": null,
+      "raw_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "raw_unchanged": true,
+      "raw_utf8_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "stage": "INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "teacher_differences": [],
+      "updates": 0
+    }
+  ],
+  "conditional_holdout_actual_model_calls": 0,
+  "conditional_holdout_eval_plan_created": false,
+  "conditional_holdout_runner_activated": false,
+  "conditional_sql_actual_model_cases": 0,
+  "consumer_sha256": "1ef66cae5eb5373f33f7fcf9cbacb54a13b8c3604c9ccd9dd2963f61cd60f4db",
+  "cost_excludes": "preparation/recovery/continuing rental/storage/tax; not the bill total",
+  "formal_product_acceptance": "0/3",
+  "gpu_hourly_usd_last_recorded": 0.26,
+  "gpu_stop_restart_delete_operations": 0,
+  "identity_groups": 6,
+  "independent_stories": 2,
+  "initial_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "4df29c5daa4e4e25273f9fa0e18268929d7cb2fa2993a6e6e8136628efb5adc7",
+    "adapter_model.safetensors": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102"
+  },
+  "initial_adapter_unchanged": true,
+  "loss_scope": "DAILY3_RECEPTION_11TOKENS_EACH_X2_FULL_CONTEXT",
+  "model_retry": 0,
+  "new_adapter_adopted": false,
+  "new_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "45646e6a29832f748336bd70afa8764a591f9d49853a3dee7aced75fe4cb3989",
+    "adapter_model.safetensors": "f1e88e3e43fdd8c200969dfffbcf0551791b392e435826b26c0a247b7582c81a"
+  },
+  "new_generations": 9,
+  "new_observation_session_needed_for_this_residual": false,
+  "new_training_attempts": 1,
+  "next": "Use saved differences to plan preservation of chair and daily reception together. Do not restart closed plans or launch another GPU trial.",
+  "old_quote18_result": {
+    "body": 6,
+    "meaning": 9,
+    "total": 9
+  },
+  "old_readers_teacher_prompt_raw_unchanged": true,
+  "peak_allocated_gib": 10.482319355010986,
+  "peak_reserved_gib": 11.97265625,
+  "process_allocation_usd": 0.06786834016153588,
+  "product_credit": 0,
+  "production_db_render_rn_changes": 0,
+  "provider_management_accesses": 0,
+  "raw_repair": 0,
+  "reader_relaxation": 0,
+  "reception_nll": {
+    "after": 0.015793585528930027,
+    "before": 0.27911195158958435,
+    "per_row_after": [
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "loss_tokens": 11,
+        "nll": 0.015615698881447315
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "loss_tokens": 11,
+        "nll": 0.0162351056933403
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "loss_tokens": 11,
+        "nll": 0.015529952012002468
+      }
+    ],
+    "per_row_before": [
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "loss_tokens": 11,
+        "nll": 0.2783232629299164
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "loss_tokens": 11,
+        "nll": 0.2808712124824524
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "loss_tokens": 11,
+        "nll": 0.2781413793563843
+      }
+    ],
+    "target_tokens_per_row": 11
+  },
+  "saved_adapter_unchanged_during_inference": true,
+  "schema": "cocolon.quote_reception_fit6.closed_result.v1",
+  "seconds": 939.7154791597277,
+  "selected_for_service": false,
+  "source_commit": "6cea88162cc552668ace9d7de516281d99c942aa",
+  "source_raw_sha256": "e0b13ce620d1a67300bd971c88877416617226df5420e281973f13590e62a6fd",
+  "status": "CLOSED_ALL9_GATE_NOT_MET_NO_HOLDOUT_NO_RETRY",
+  "synthetic_conditional_preparation": {
+    "meaning_interruption_resume_cases": 1,
+    "model_calls": 0,
+    "not_actual_model_or_product_evidence": true,
+    "saved_reread_cases": 2,
+    "source_calls": 2,
+    "sql_rpc_calls": 30,
+    "status": "PASSED_BEFORE_GATE"
+  },
+  "training_story_count": 1,
+  "updates": 6,
+  "weights_library_file_id": "libfile_5c99cce0e5c48191b628ba37d62be5d0",
+  "whole_product_management_percent": 54.5
+}

@@ -1,0 +1,248 @@
+{
+  "provider_pid": 111294,
+  "source_sha256": "ad3d301d2d1abd9226703dc72e3734eb8da79d8e0cf084d4b0666e97298370be",
+  "selected_nonsecret_flags": {
+    "--model-name": "cocolon-qwen3.5-4b-analysis-semantic-120u"
+  },
+  "function_ast_sha256": {
+    "semantic_output_schema": "da788659ade341d2ddba07e524d38c6ed44b2bd26673a08addbb942315c943f5",
+    "semantic_json_parser": "c87fb0b7a29b677bc051e651259dae1d1403224024917ea15302ac6ad9a1f75d",
+    "make_handler": "4841cde933c7f0315de35e6b8307ba2a046d09bdde0a9b632a784000acb276c8"
+  },
+  "clock_correlation": "result final file mtime and same-Pod monotonic; approximate window -2/+5 seconds",
+  "matching_safe_stages": [
+    {
+      "stage": "admitted",
+      "relative_seconds": 0.205
+    },
+    {
+      "stage": "tokenize",
+      "relative_seconds": 0.205
+    },
+    {
+      "stage": "constraint",
+      "relative_seconds": 0.246
+    },
+    {
+      "stage": "decode",
+      "relative_seconds": 0.255
+    },
+    {
+      "stage": "prefix_enter_0",
+      "relative_seconds": 2.968
+    },
+    {
+      "stage": "prefix_exit_0_JsonSchemaParser_other_allowed_16",
+      "relative_seconds": 3.095
+    },
+    {
+      "stage": "prefix_enter_128",
+      "relative_seconds": 14.244
+    },
+    {
+      "stage": "prefix_exit_128_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 14.251
+    },
+    {
+      "stage": "prefix_enter_256",
+      "relative_seconds": 22.0
+    },
+    {
+      "stage": "prefix_exit_256_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 22.006
+    },
+    {
+      "stage": "prefix_enter_384",
+      "relative_seconds": 30.066
+    },
+    {
+      "stage": "prefix_exit_384_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 30.072
+    },
+    {
+      "stage": "prefix_enter_512",
+      "relative_seconds": 37.953
+    },
+    {
+      "stage": "prefix_exit_512_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 37.959
+    },
+    {
+      "stage": "prefix_enter_640",
+      "relative_seconds": 46.051
+    },
+    {
+      "stage": "prefix_exit_640_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 46.057
+    },
+    {
+      "stage": "prefix_enter_768",
+      "relative_seconds": 53.722
+    },
+    {
+      "stage": "prefix_exit_768_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 53.729
+    },
+    {
+      "stage": "prefix_enter_896",
+      "relative_seconds": 61.298
+    },
+    {
+      "stage": "prefix_exit_896_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 61.305
+    },
+    {
+      "stage": "prefix_enter_1024",
+      "relative_seconds": 68.902
+    },
+    {
+      "stage": "prefix_exit_1024_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 68.91
+    },
+    {
+      "stage": "prefix_enter_1152",
+      "relative_seconds": 76.489
+    },
+    {
+      "stage": "prefix_exit_1152_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 76.496
+    },
+    {
+      "stage": "prefix_enter_1280",
+      "relative_seconds": 84.107
+    },
+    {
+      "stage": "prefix_exit_1280_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 84.113
+    },
+    {
+      "stage": "prefix_enter_1408",
+      "relative_seconds": 91.709
+    },
+    {
+      "stage": "prefix_exit_1408_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 91.715
+    },
+    {
+      "stage": "prefix_enter_1536",
+      "relative_seconds": 99.244
+    },
+    {
+      "stage": "prefix_exit_1536_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 99.25
+    },
+    {
+      "stage": "prefix_enter_1664",
+      "relative_seconds": 106.77
+    },
+    {
+      "stage": "prefix_exit_1664_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 106.777
+    },
+    {
+      "stage": "prefix_enter_1792",
+      "relative_seconds": 114.384
+    },
+    {
+      "stage": "prefix_exit_1792_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 114.392
+    },
+    {
+      "stage": "prefix_enter_1920",
+      "relative_seconds": 122.093
+    },
+    {
+      "stage": "prefix_exit_1920_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 122.102
+    },
+    {
+      "stage": "prefix_enter_2048",
+      "relative_seconds": 129.694
+    },
+    {
+      "stage": "prefix_exit_2048_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 129.701
+    },
+    {
+      "stage": "prefix_enter_2176",
+      "relative_seconds": 137.393
+    },
+    {
+      "stage": "prefix_exit_2176_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 137.401
+    },
+    {
+      "stage": "prefix_enter_2304",
+      "relative_seconds": 145.004
+    },
+    {
+      "stage": "prefix_exit_2304_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 145.012
+    },
+    {
+      "stage": "prefix_enter_2432",
+      "relative_seconds": 152.721
+    },
+    {
+      "stage": "prefix_exit_2432_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 152.729
+    },
+    {
+      "stage": "prefix_enter_2560",
+      "relative_seconds": 160.446
+    },
+    {
+      "stage": "prefix_exit_2560_JsonSchemaParser_other_allowed_3",
+      "relative_seconds": 160.455
+    },
+    {
+      "stage": "prefix_enter_2688",
+      "relative_seconds": 168.295
+    },
+    {
+      "stage": "prefix_exit_2688_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 168.303
+    },
+    {
+      "stage": "prefix_enter_2816",
+      "relative_seconds": 176.056
+    },
+    {
+      "stage": "prefix_exit_2816_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 176.064
+    },
+    {
+      "stage": "prefix_enter_2944",
+      "relative_seconds": 183.817
+    },
+    {
+      "stage": "prefix_exit_2944_JsonSchemaParser_other_allowed_1",
+      "relative_seconds": 183.825
+    },
+    {
+      "stage": "prefix_enter_3072",
+      "relative_seconds": 195.064
+    },
+    {
+      "stage": "prefix_exit_3072_JsonSchemaParser_free_allowed_245464",
+      "relative_seconds": 195.088
+    },
+    {
+      "stage": "prefix_enter_3200",
+      "relative_seconds": 207.916
+    },
+    {
+      "stage": "prefix_exit_3200_JsonSchemaParser_other_allowed_2",
+      "relative_seconds": 207.925
+    },
+    {
+      "stage": "complete_length",
+      "relative_seconds": 210.235
+    },
+    {
+      "stage": "special_count_0",
+      "relative_seconds": 210.27
+    }
+  ],
+  "model_requests_added": 0
+}

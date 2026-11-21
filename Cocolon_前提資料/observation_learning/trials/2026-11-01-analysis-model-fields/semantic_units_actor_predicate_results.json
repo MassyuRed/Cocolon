@@ -1,0 +1,410 @@
+{
+  "status": "COMPLETE_DIAGNOSTIC_REVIEWED_NOT_ADOPTED",
+  "source_prepared_commit": "1d3cdc15c646fca139efd84a380c40dfa75df0eb",
+  "source_running_commit": "f93c834b1b00756db898860f5dd2b3f051a1d810",
+  "api_commit": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "plan_sha256": "d40ffd4ed65f78faf8f163c115f36c1786e2f1298293939364baf0697345c77d",
+  "runner_sha256": "e871b41816590b847bc3b650d57286557a38d78de6cb3abd127136c03198b9ed",
+  "new_calls": 12,
+  "reused_results": 4,
+  "comparison_results": 16,
+  "model_loads": 2,
+  "training_updates": 0,
+  "training_forwards": 0,
+  "all_new_finish_stop": true,
+  "seconds": 185.83377493103035,
+  "supervisor": {
+    "exit": 0,
+    "process_seconds": 187.11248743580654,
+    "initial_pairs_unchanged": true,
+    "compute_apps": ""
+  },
+  "conditions": [
+    {
+      "id": "f982",
+      "adapter_dir": "/workspace/analysis-mixed60-20261102/result/adapter",
+      "weights_sha256": "f9824503b8af3f0b67f6f75cc129f713c861a07d1a9f62f556e4b03461bb522b",
+      "config_sha256": "cc21925a85bf067989ca41adadb3fdd1d2051a2150e58ae4c8a9c74ac4575db3"
+    },
+    {
+      "id": "89ba",
+      "adapter_dir": "/workspace/analysis-other62-20261102/result/adapter",
+      "weights_sha256": "89badc47bc21bf315e4475267c007b9ee51c0b013a4d7d3161333f02fd30f580",
+      "config_sha256": "b357ff96373f1dac800ce0e5216daabbd9741358a2c72674c2838ac470cf60eb"
+    }
+  ],
+  "counts": {
+    "f982": {
+      "structural_admission": 3,
+      "local_complete_components": 0,
+      "new_structural_admission": 2
+    },
+    "89ba": {
+      "structural_admission": 4,
+      "local_complete_components": 2,
+      "new_structural_admission": 2
+    }
+  },
+  "meaning_success_rate": null,
+  "raw_unchanged_cells": 1,
+  "rows": [
+    {
+      "probe_id": "AD01",
+      "context": "MD",
+      "actor": "姉",
+      "predicate": "参加",
+      "reused": true,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "a8994d14479d0011e56f674163f4ed7186305778b2eb682d4be624e14afb7753",
+          "structurally_admitted": true,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": true,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Actor qualifier is on a full subject/predicate CONTENT_TARGET; absent root actor/NEGATION."
+        },
+        "89ba": {
+          "raw_sha256": "0b4c780f593ca3588c29cf6a66b226604d8855f3fae94b17b7abf88990a12246",
+          "structurally_admitted": true,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": true,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Actor becomes CONTENT_TARGET without root actor/NEGATION."
+        }
+      },
+      "raw_unchanged": false
+    },
+    {
+      "probe_id": "AD02",
+      "context": "MD",
+      "actor": "姉",
+      "predicate": "返送",
+      "reused": false,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "9025e3ccb7bfab2fc4e3e12c5ee96c65d3884959f951d7c182c9f377994c485b",
+          "structurally_admitted": false,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Invalid EXPLICIT_ACTOR scope_role, absent root actor/NEGATION."
+        },
+        "89ba": {
+          "raw_sha256": "9025e3ccb7bfab2fc4e3e12c5ee96c65d3884959f951d7c182c9f377994c485b",
+          "structurally_admitted": false,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Byte-identical invalid EXPLICIT_ACTOR scope_role, absent root actor/NEGATION."
+        }
+      },
+      "raw_unchanged": true
+    },
+    {
+      "probe_id": "AD03",
+      "context": "MD",
+      "actor": "父",
+      "predicate": "参加",
+      "reused": false,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "8919f76f76bec1d0a7540ab7357d5b08e660949e20f983fac70d20217f6b554b",
+          "structurally_admitted": true,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Full ACTION and actor present, root NEGATION absent; redundant participation target."
+        },
+        "89ba": {
+          "raw_sha256": "d9a311f56ff37c4a53b4761bd7cc500779667e28bed2d588de010435d5b4c6e3",
+          "structurally_admitted": true,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": true,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Regression: full actor root removed, father becomes CONTENT_TARGET, root NEGATION absent."
+        }
+      },
+      "raw_unchanged": false
+    },
+    {
+      "probe_id": "AD04",
+      "context": "MD",
+      "actor": "父",
+      "predicate": "返送",
+      "reused": false,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "97c11d2b1bc153c34c128dc9e748243e562883da90f28c8c5e2999db5cdb1336",
+          "structurally_admitted": false,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Actor root and separate untyped NEGATION carrier; structurally rejected."
+        },
+        "89ba": {
+          "raw_sha256": "69d51ac07aabb8ab618b49a3cee6d6d01e2e1ed0c551252f8b56bc2ba83ca2a6",
+          "structurally_admitted": false,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Invalid actor scope_role separate from bare negative ACTION; structurally rejected."
+        }
+      },
+      "raw_unchanged": false
+    },
+    {
+      "probe_id": "AD05",
+      "context": "OA",
+      "actor": "姉",
+      "predicate": "参加",
+      "reused": false,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "8ec7694395f8ff4a026268ebe27976672b5991de99100a9122323122fbd2a242",
+          "structurally_admitted": true,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Full ACTION with actor but absent root NEGATION."
+        },
+        "89ba": {
+          "raw_sha256": "dda0fe6e19b1ad74fe678a3fd2c8844304277c6474f427a8cf877dec0f40a844",
+          "structurally_admitted": false,
+          "full_action_root": false,
+          "actor_qualifier_on_full_root": false,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Regression: bare negative root plus untyped full actor carrier, structurally rejected."
+        }
+      },
+      "raw_unchanged": false
+    },
+    {
+      "probe_id": "AD06",
+      "context": "OA",
+      "actor": "姉",
+      "predicate": "返送",
+      "reused": false,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "a4499937852f26233885924e39afa75965d37af5206d2e751f4b3f345ed9943b",
+          "structurally_admitted": false,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": false,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Root actor present but NEGATION absent; right unknown quote changes written wa to mo, violating source."
+        },
+        "89ba": {
+          "raw_sha256": "109429a34c8b2d3763396b166635705058f6f7a107f11dd6f563141e9ce5b911",
+          "structurally_admitted": true,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": true,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": true,
+          "reading": "Independent full ACTION with actor/NEGATION; both unknown pairs source-exact."
+        }
+      },
+      "raw_unchanged": false
+    },
+    {
+      "probe_id": "AD07",
+      "context": "OA",
+      "actor": "父",
+      "predicate": "参加",
+      "reused": false,
+      "prior_teacher_source": false,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "a2562bb6e5a3169ef0181d33a0cba20ac1f2d850ad22772f982a39b5ffb928b3",
+          "structurally_admitted": false,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Actor root and separate untyped NEGATION carrier; rejected."
+        },
+        "89ba": {
+          "raw_sha256": "a35a7671cc4cf8d0e222cca9621171478286438538e57aed8dd165558d8e3df4",
+          "structurally_admitted": false,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Invalid extra actor unit and self-referencing participation CONTENT_TARGET; rejected."
+        }
+      },
+      "raw_unchanged": false
+    },
+    {
+      "probe_id": "AD08",
+      "context": "OA",
+      "actor": "父",
+      "predicate": "返送",
+      "reused": true,
+      "prior_teacher_source": true,
+      "conditions": {
+        "f982": {
+          "raw_sha256": "9410caf452b4e52d78b90de76b08c6e1429dd475c3083e185992733537531bf6",
+          "structurally_admitted": false,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": false,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": false,
+          "reading": "Actor root and separate untyped NEGATION carrier; rejected."
+        },
+        "89ba": {
+          "raw_sha256": "65b934edc9d0d2b95c6854fd417f52972b1b1732e19630251ab4359b7d70a60d",
+          "structurally_admitted": true,
+          "full_action_root": true,
+          "actor_qualifier_on_full_root": true,
+          "negation_qualifier_on_full_root": true,
+          "actor_as_content_target": false,
+          "both_unknown_parents_source_exact": true,
+          "full_action_actor_negation_and_unknown_pairs": true,
+          "reading": "Independent full ACTION with actor/NEGATION and correct unknown pairs; trained original OA02, not new transfer."
+        }
+      },
+      "raw_unchanged": false
+    }
+  ],
+  "readers": [
+    "root Karen Codex Work/GPT-6",
+    "read-only agent same environment, not independent Pro/Ultra/human acceptance"
+  ],
+  "conclusions": [
+    "Actor name alone is insufficient: sister return succeeds in OA while father cases can fail.",
+    "Return predicate alone is insufficient: identical father-return clause succeeds in OA and fails in MD.",
+    "Participation lacks complete root actor/NEGATION scope across both contexts and actors for these two adapters.",
+    "OA sister-return improves, trained original father-return reproduces; MD father-participation and OA sister-participation regress in components/structure.",
+    "Curriculum scopes are associated with observed behavior; no sole token, context token or internal mechanism causation established."
+  ],
+  "teacher_scope_audit": {
+    "participation_source_ids": [
+      "AT21",
+      "NT05",
+      "ST01"
+    ],
+    "participation_target_roles": [
+      "CONTENT_TARGET"
+    ],
+    "participation_negative_independent_action_targets": 0,
+    "return_source_ids": [
+      "OA01",
+      "OA02"
+    ],
+    "return_scope": "One topic in two orders, father negative independent ACTION with actor/NEGATION.",
+    "sending_exact_word_teacher_count": 0,
+    "sending_related_action_ids": [
+      "AT06",
+      "BT01",
+      "BT02",
+      "ST07"
+    ],
+    "absence_does_not_prove_cause": true
+  },
+  "saved_cpu_replay": {
+    "status": "SAVED_16_REPLAYED_IN_SEPARATE_CPU_PROCESS",
+    "matched_candidates": 7,
+    "rejected_responses": 9,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "saved_reader_generate_compiler_author_forbidden": true
+  },
+  "preservation": {
+    "library_file_id": "libfile_a9e85a64a9608191a0e9dfe6f5602d1d",
+    "filename": "cocolon-analysis-actor-predicate-diagnosis-20261102.zip",
+    "bytes": 203114,
+    "archive_sha256": "c5e14d8f0fedd2e59f7726bd5a94ea09c60f269a344037f9ed9ac67c17007be2",
+    "original_gpu_zip_sha256": "0dc5172fe567e6395340658098aac7ee2615924fe54f98567716502cd8671083",
+    "members": 66,
+    "manifest_members": 65,
+    "every_original_member_bytes_sha256_matched": true,
+    "zip_crc_valid": true,
+    "container_recompressed": true
+  },
+  "next_cpu": {
+    "status": "CPU_SCOPE_CONTRAST6_ONLY_NO_GPU_PLAN_OR_MODEL_QUALITY",
+    "file": "semantic_units_scope_contrast_cpu.json",
+    "sha256": "dfa900b01675ad4401adcf9dbb7bc11376ff54421d5cb281bbf5d846843ab430",
+    "synthetic_sources": 6,
+    "contexts": 2,
+    "constructions": [
+      "NEGATIVE_ACTION",
+      "POSITIVE_ACTION",
+      "NOUN_TARGET"
+    ],
+    "actors": 1,
+    "old62_unchanged": true,
+    "strict_build_and_actual_file_same_process_reload_all_matched": true,
+    "full_target_tokenizer_eos_all_matched": true,
+    "max_prompt_tokens": 1007,
+    "max_target_tokens": 237,
+    "max_full_tokens": 1244,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "next_gpu_plan_selected": false
+  },
+  "next_implementation": "Keep old62 unchanged. Before any next model run explicitly select initial checkpoint/dose/order/retention probes/new nearby controls/cap using SC6 contrasts; retain participation noun-target lessons and action contrast across contexts. Do not automatically train the diagnosis sources, adopt89ba, or resolve HQ03/CQ04/HQ04 by assumption.",
+  "limits": [
+    "All16 are known or root-authored nearby minimal counterfactuals, not blind general evaluation.",
+    "Two source contexts bundle surrounding unknown words and cannot identify a unique contextual token.",
+    "Trained original OA02 is not a new success. Local component counts are not meaning/general accuracy.",
+    "SC6 has one actor and two contexts xthree constructions, not six independent teaching observations."
+  ],
+  "normal_adoption": false,
+  "product_credit": 0,
+  "formal_read": "0/3",
+  "management_completion_percent": 54.5,
+  "candidate_ready": false,
+  "structure_map_delta": "NONE",
+  "process_cost_usd_at_prior_hourly_058": 0.029939885961110444,
+  "cost_excludes": "Preparation/recovery/holding/storage/network/tax; current price not rechecked."
+}

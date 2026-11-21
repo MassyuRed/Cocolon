@@ -8,6 +8,13 @@ react {
   autolinkLibrariesWithApp()
 }
 
+// CI may supply the next Play Console version code without editing source.
+// Keep local builds on the existing value until a release code is selected.
+def releaseVersionCode = providers.gradleProperty('releaseVersionCode').getOrElse('17')
+if (!(releaseVersionCode ==~ /[1-9][0-9]*/) || new BigInteger(releaseVersionCode) > 2100000000) {
+  throw new GradleException('releaseVersionCode must be an integer from 1 to 2100000000.')
+}
+
 // --- Release signing (Emlis) ---
 def keystoreProperties = new java.util.Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
@@ -27,7 +34,7 @@ android {
     applicationId 'com.anonymous.cocolonmvp'
     minSdk rootProject.ext.minSdkVersion
     targetSdk rootProject.ext.targetSdkVersion
-    versionCode 17
+    versionCode releaseVersionCode.toInteger()
     versionName '1.0.0'
 
     buildConfigField 'boolean', 'NEW_ARCH_ENABLED', 'false'

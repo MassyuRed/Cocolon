@@ -1,0 +1,51 @@
+{
+  "state": "PREPARED_NOT_SENT_NOT_EXECUTED_REQUIRES_NEW_EXPLICIT_APPROVAL",
+  "same_pod": "f1lle4xwq3wjln",
+  "files": [
+    {
+      "name": "semantic_thinking_candidate.py",
+      "bytes": 68977,
+      "sha256": "4aefaa7a4e08d0c391938f6106f82dfc77e5a5d2fae2deb33dd222cae177159f",
+      "remote_path": "/workspace/semantic_thinking_candidate.py"
+    },
+    {
+      "name": "semantic_thinking_once.py",
+      "bytes": 16987,
+      "sha256": "880399e982ca15539f7772a9b8b5d2c236fa96f2ccfd8e08f34dcf91169b498b",
+      "remote_path": "/workspace/semantic_thinking_once.py"
+    },
+    {
+      "name": "full12_sql_thinking_once.py",
+      "bytes": 35240,
+      "sha256": "60b9e7ba69e7e0682f16f44bb6491e7c2985c701190178a85c68c17685536afd",
+      "remote_path": "/workspace/full12_sql_thinking_once.py"
+    },
+    {
+      "name": "semantic_thinking_plan.json",
+      "bytes": 8655,
+      "sha256": "da060a0c2750c2f614caee88c8007002b3aa26c171933a6d9a3a10fb3b53c93f",
+      "remote_path": "/workspace/semantic_thinking_plan.json"
+    }
+  ],
+  "total_bytes": 129859,
+  "old_teachers_driver_and_weights_resent": false,
+  "new_model_calls": 0,
+  "training": 0,
+  "remote_mutations": 0,
+  "A7": {
+    "max_responses": 5,
+    "restore_inclusive_seconds": 1800,
+    "once": true
+  },
+  "B7": {
+    "max_responses": 13,
+    "fresh_LEAF": 12,
+    "MERGE": 1,
+    "restore_inclusive_seconds": 1020,
+    "once": true,
+    "condition": "A7 all5 full independent source/raw/projection/text review adequate"
+  },
+  "normal_rollout": "Unfinished; require suitable B7 meaning and same final raw SQL save/separate-process non-generation reread, then explicit mode/wire/model and map/IF profile alignment.",
+  "source_api": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "source_cocolon": "84cbf84a0eebda568a7c8fcb0aca7d7f258269e7"
+}

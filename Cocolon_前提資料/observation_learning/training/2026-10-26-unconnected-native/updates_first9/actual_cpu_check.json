@@ -1,0 +1,191 @@
+{
+  "status": "CPU_UPDATESFIRST9_READY_NO_MODEL_EXECUTION",
+  "seconds": 26.858870967989787,
+  "optimizer_steps": 9,
+  "changed_prompts": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "only_two_named_prompts_changed": true,
+  "fresh_same_family_tests_passed": true,
+  "inherited_112_f32_finite": true,
+  "schedule_counts_verified": true,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "old_prompt_tokens": 1750,
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "full_tokens": 3081,
+      "prompt_plus_cap": 4310,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "old_prompt_tokens": 3827,
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "full_tokens": 6055,
+      "prompt_plus_cap": 6387,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "old_prompt_tokens": 1746,
+      "prompt_tokens": 1746,
+      "target_tokens": 1331,
+      "full_tokens": 3077,
+      "prompt_plus_cap": 4306,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "old_prompt_tokens": 3842,
+      "prompt_tokens": 3842,
+      "target_tokens": 2231,
+      "full_tokens": 6073,
+      "prompt_plus_cap": 6402,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "old_prompt_tokens": 1743,
+      "prompt_tokens": 1743,
+      "target_tokens": 1321,
+      "full_tokens": 3064,
+      "prompt_plus_cap": 4303,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "old_prompt_tokens": 3825,
+      "prompt_tokens": 3825,
+      "target_tokens": 2237,
+      "full_tokens": 6062,
+      "prompt_plus_cap": 6385,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "old_prompt_tokens": 1778,
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "full_tokens": 3363,
+      "prompt_plus_cap": 4338,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "old_prompt_tokens": 1773,
+      "prompt_tokens": 1773,
+      "target_tokens": 1559,
+      "full_tokens": 3332,
+      "prompt_plus_cap": 4333,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "old_prompt_tokens": 1777,
+      "prompt_tokens": 1777,
+      "target_tokens": 1598,
+      "full_tokens": 3375,
+      "prompt_plus_cap": 4337,
+      "max_new_tokens": 2560
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "old_prompt_tokens": 2204,
+      "prompt_tokens": 2204,
+      "target_tokens": 1038,
+      "full_tokens": 3242,
+      "prompt_plus_cap": 5916,
+      "max_new_tokens": 3712
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "old_prompt_tokens": 4379,
+      "prompt_tokens": 4387,
+      "target_tokens": 2913,
+      "full_tokens": 7300,
+      "prompt_plus_cap": 8099,
+      "max_new_tokens": 3712
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "old_prompt_tokens": 2239,
+      "prompt_tokens": 2239,
+      "target_tokens": 1082,
+      "full_tokens": 3321,
+      "prompt_plus_cap": 5951,
+      "max_new_tokens": 3712
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "old_prompt_tokens": 4531,
+      "prompt_tokens": 4539,
+      "target_tokens": 3238,
+      "full_tokens": 7777,
+      "prompt_plus_cap": 8123,
+      "max_new_tokens": 3584
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "old_prompt_tokens": 2090,
+      "prompt_tokens": 2090,
+      "target_tokens": 961,
+      "full_tokens": 3051,
+      "prompt_plus_cap": 5802,
+      "max_new_tokens": 3712
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "old_prompt_tokens": 2132,
+      "prompt_tokens": 2132,
+      "target_tokens": 896,
+      "full_tokens": 3028,
+      "prompt_plus_cap": 5844,
+      "max_new_tokens": 3712
+    }
+  ],
+  "canonical_targets_unchanged": true,
+  "derived_two_targets_reordered_only": true,
+  "target_sha256": {
+    "TRAIN-SERVICE-CHAIR-01-INITIAL": "9d58451872c5ee54777ba0c1295723c03edaa6b6db61d26f2cf70a622becf3eb",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION": "f7a812fa3cc2c7d6591dfcb3b144097156c52f5ca300698fe6861da108be2ad2",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL": "667d3ee29d6534be5e14373cbc8ac27225284111a9c96a6565fcd0d99b836ccd",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION": "f35a3f58f7e39621ecb29d647b86f7bf1f5e2ec7534a8a4aadb4643595ce8ea7",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL": "b728898b92f735cbafe4b2e1f9fa7139fdff7dede4dc2d8be9611978c065538b",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION": "d3512848d091ca8c173c6b430a23758201d3c9a5ffea0c778c26eedf8dae56eb",
+    "TRAIN-DAILY-CALM-01-INITIAL": "98fbd2d414285e1f00423a9d997564c7fd62fa47714504f36c14e01b52a38900",
+    "TRAIN-DAILY-CALM-02-INITIAL": "db0df6a376fdd6f93cb29789b7b21203a848fe5dfcf7f26d5bd8d87cc0306c04",
+    "TRAIN-DAILY-CALM-03-INITIAL": "757dd6d5c9d83c856e27a04eb1cb030953fae3a703f03e1233ce14f8136eb279",
+    "FT-BOOK-INITIAL": "a01929543c966751b1e03889babac750de8d4ed55ef13fb24860207fb2273469",
+    "FT-BOOK-AFTER-ANSWER": "262837bdb05b5e125326ca4219e1c55bb1cc4bbcd367c5ff1d6017b4dda9ed54",
+    "FT-SHOP-INITIAL": "da57bfbbc912117b67696ed00e35146936731ccd37d0383e01f9a582b7aa77b3",
+    "FT-SHOP-AFTER-ANSWER": "c5b1024ddde284f8918cf5659eb406abfc90cb9f8cbb68cda0971c6f47a394e2",
+    "FT-REPOT-INITIAL": "04a4153fb3782fc4b5b8ba0e4145595f96ab275ea2eb6151ca019ce9d7913868",
+    "FT-KNIT-INITIAL": "d8855518fa52e36ed82200375578176155f1b7cbce4007d30bf1f7ebbd9965ea"
+  },
+  "old13_inputs_unchanged": true,
+  "prior_projection_roundtrip": 2,
+  "pytest_exit": 0,
+  "series_tokens": 57730,
+  "series_length_squared_sum": 398780542,
+  "source_manifest_sha256": "1573e92124f26971468404092ca13fcba68289c34b21237a73ecb1f6ef3439f4",
+  "payload_sha256": {
+    "train_messages.jsonl": "fd481f5b7b607876f965968526022a4a657538cb8f25b1affdac279bb1179ab7",
+    "eval_inputs.json": "0cce7b0601ad579e480f81ccafe211c3596b3b841ff97e45b851dde6bc2b2028",
+    "adaptive_loss.py": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141",
+    "run_updatesfirst9.py": "9e18bf239ea9116a338c8844dc5a9b1a64bcd846477dfc8de12228e1f2baca27",
+    "consume_named9.py": "af6752e79381802fce776cc17686e8ac5ed7feaa6acbf6bc65411027d3483d1f",
+    "prepare_updatesfirst9.py": "42dc512386e5ba68100040ebaac3bee84387f4a4c70e344189c392a2db3bc8a3"
+  },
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "cuda_initialized": false,
+  "product_credit": 0,
+  "automatic_progression": false
+}

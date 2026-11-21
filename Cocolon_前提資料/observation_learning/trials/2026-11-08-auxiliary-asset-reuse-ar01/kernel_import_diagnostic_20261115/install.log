@@ -1,0 +1,8 @@
+Collecting fla-core==0.6.0 (from -r /workspace/semantic-kernel-preparation-20261115/requirements-kernels.txt (line 1))
+  Downloading fla_core-0.6.0-py3-none-any.whl (1.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 5.1 MB/s eta 0:00:00
+Collecting einops==0.8.2 (from -r /workspace/semantic-kernel-preparation-20261115/requirements-kernels.txt (line 2))
+  Downloading einops-0.8.2-py3-none-any.whl (65 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.6/65.6 kB 14.5 MB/s eta 0:00:00
+Installing collected packages: fla-core, einops
+Successfully installed einops-0.8.2 fla-core-0.6.0

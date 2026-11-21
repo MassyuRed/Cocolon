@@ -1,0 +1,45 @@
+{
+  "initial_adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "frozen_unchanged": true,
+  "initial_archive_library_file_id": "libfile_9623b67a65588191926a1bb0a0ea5797",
+  "run_source_commit": "3928b9571bc5465998c0c528d207177e212aca03",
+  "historical_frozen_weights": [
+    {
+      "path": "/workspace/cocolon_auxiliary4_20261029/archive/run/adapter/adapter_model.safetensors",
+      "bytes": 15351792,
+      "sha256": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4",
+      "included": false,
+      "reason": "historical frozen weight; initial adapter separately preserved"
+    },
+    {
+      "path": "/workspace/cocolon_auxiliary_fit8_run_20261029/adapter/adapter_model.safetensors",
+      "bytes": 15351792,
+      "sha256": "afaa2c2e2f7263792d5cf9930bb2fac0bf44bdccd04ff2ffa8049a2cfd2f12d2",
+      "included": false,
+      "reason": "historical frozen weight; initial adapter separately preserved"
+    },
+    {
+      "path": "/workspace/cocolon_joint_role18_run_20261029/adapter/adapter_model.safetensors",
+      "bytes": 15351792,
+      "sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+      "included": false,
+      "reason": "historical frozen weight; initial adapter separately preserved"
+    },
+    {
+      "path": "/workspace/cocolon_rehearsal13_run_20261029/adapter/adapter_model.safetensors",
+      "bytes": 15351792,
+      "sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+      "included": false,
+      "reason": "historical frozen weight; initial adapter separately preserved"
+    }
+  ],
+  "pretrained_model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "base_model_weights_included": false,
+  "cuda_initialized_by_export": false,
+  "new_model_loads": 0,
+  "forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "cmee_calls": 0
+}

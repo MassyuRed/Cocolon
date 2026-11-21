@@ -1,0 +1,94 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "date_jst": "2026-10-29",
+  "proposal_commit": "5c21326cf80be2c04c9ece3b9474bb0105a7532f",
+  "runtime_authorization_commit": "943ee425ef7796b92ed9ee56f71fbb241ea2e45f",
+  "launch_checkpoint_commit": "204e5629bc454acea2d91cdfb0f082fa8745842a",
+  "export_source_commit": "cd54ffd20cf67fae4d3ae6b2ec83fb117e6246b1",
+  "runtime_run_status_preserved": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW",
+  "model_loads": 1,
+  "training_updates": 0,
+  "training_forwards": 0,
+  "generations": 2,
+  "old9_regenerated": 0,
+  "new_weights_created": false,
+  "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "adapter_unchanged": true,
+  "frozen_inputs_unchanged": true,
+  "processing_seconds": 326.24169293697923,
+  "processing_proration_usd": 0.02537435389509839,
+  "rate_usd_per_hour": 0.28,
+  "rate_basis": "Previously observed same-Pod rate; no live management query",
+  "excluded_costs": [
+    "preparation",
+    "parent-external CMEE CPU",
+    "recovery",
+    "holding",
+    "storage",
+    "network",
+    "tax"
+  ],
+  "cmee_parent_external_cpu_seconds": 1.6252545759780332,
+  "cpu_preparation_seconds": 4.674841582076624,
+  "full2": {
+    "meaning": 0,
+    "body": 0
+  },
+  "receipt_status": [
+    "TOKEN_LIMIT",
+    "TOKEN_LIMIT"
+  ],
+  "decision": [
+    "REJECT",
+    "REJECT"
+  ],
+  "reason_code": [
+    "semantic_receipt_not_validated",
+    "semantic_receipt_not_validated"
+  ],
+  "receipt_replay_identical": 2,
+  "adopted_snapshots": 0,
+  "cold_targets": 0,
+  "cold_pass_count": 0,
+  "root_full_raw_read": 2,
+  "root_person_body_read": 0,
+  "person_body_formed": 0,
+  "independent_assistance": "Read-only full raw/receipt/baseline review; root sole writer/executor/judge",
+  "prelaunch_syntax_error": {
+    "before_model_or_lock_or_download": true,
+    "model_calls": 0,
+    "training_updates": 0,
+    "resolution": "Launcher newline quoting only corrected to chr(10); approved runner/plan/input unchanged; actual GPU launch exactly once"
+  },
+  "retry": false,
+  "automatic_progression": false,
+  "candidate_ready": false,
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "overall_management_percent": 54.5,
+  "gpu_kept_running": true,
+  "lifecycle_or_management_api_actions": 0,
+  "next_paid_run_authorized": false,
+  "additional_observation_for_current_two": "Not needed; fixed-row/quotation/binding/prose defects remain in existing material",
+  "structure_map_delta": "NONE",
+  "archive": {
+    "status": "SAVED_AND_IDENTITY_APPLIED",
+    "name": "cocolon-prior-rows2-originals-20261029.zip",
+    "bytes": 2829165,
+    "sha256": "b69f7cb0b9c6e47a120491d4068aeebb0c6bf58ebd52f5bc1049884cd9d34015",
+    "member_count": 202,
+    "payload_count": 201,
+    "library_file_id": "libfile_bcb2caa7fdb481918c4a590df598d5e5",
+    "file_id": "file_000000007ba88206bc77f3b5b06d27c7",
+    "version": 0,
+    "identity_xattrs_applied": true,
+    "new_weights_created": false,
+    "unchanged_weights_archive": {
+      "library_file_id": "libfile_9623b67a65588191926a1bb0a0ea5797",
+      "name": "cocolon-rehearsal13-weights-originals-20261029.zip",
+      "bytes": 60053438,
+      "sha256": "71741059ee92e627ea4183186b554d04ffc245ae857c6fd1bf1654217b6498d9"
+    },
+    "note": "Current archive has raw/token IDs/CMEE/source/CPU/frozen nonweight originals. Four unchanged full adapter files remain in the prior complete weights archive, referenced by exact byte counts/SHA256. No base/optimizer/RNG checkpoint claim."
+  }
+}

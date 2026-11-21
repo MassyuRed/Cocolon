@@ -1,0 +1,10 @@
+{
+  "frozen_files": 266,
+  "all_frozen_bytes_unchanged": true,
+  "changed_paths": [],
+  "initial_adapter_sha256": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab",
+  "initial_config_sha256": "8fb59378b4c6c3d6abf59227a6679804fd354b9a0aa10b9ec9e01788753dc40c",
+  "gpu_read_only": "NVIDIA RTX A5000, 1 MiB, 0 %",
+  "model_rerun": false,
+  "retry": false
+}

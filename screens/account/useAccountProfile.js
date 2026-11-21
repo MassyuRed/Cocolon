@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert, Share } from "react-native";
 
-import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../AuthContext";
 import { apiGet, apiPatch } from "../../lib/apiClient";
 import {
   readConnectCode,
@@ -14,13 +14,13 @@ import {
   normalizeDisplayName,
 } from "./accountModel";
 
-async function checkDisplayNameAvailability(candidate) {
+async function checkDisplayNameAvailability(candidate, options) {
   const normalized = normalizeDisplayName(candidate);
   if (!normalized) return false;
 
   try {
     const json = await apiGet(
-      `/account/display-name/availability?candidate=${encodeURIComponent(normalized)}`
+      `/account/display-name/availability?candidate=${encodeURIComponent(normalized)}`, options
     );
     return typeof json?.available === "boolean" ? json.available : !!json?.available;
   } catch (e) {
@@ -30,6 +30,8 @@ async function checkDisplayNameAvailability(candidate) {
 }
 
 export function useAccountProfile({ user, targetUserId, isSelf }) {
+  const { authOwnerGeneration } = useAuth();
+  const ownerRequestRef = useRef(null);
   const [displayName, setDisplayName] = useState("");
   const [shareCode, setShareCode] = useState("");
   const [connectCode, setConnectCode] = useState("");
@@ -43,6 +45,18 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
 
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
+    const request = { expectedUserId: user?.id, signal: controller.signal };
+    ownerRequestRef.current = request;
+    setDisplayName("");
+    setShareCode("");
+    setConnectCode("");
+    setNameDraft("");
+    setNameEditOpen(false);
+    setNameError("");
+    setNameSaving(false);
+    setNameChecking(false);
+    setLoading(!!user);
 
     const loadProfile = async () => {
       try {
@@ -53,11 +67,11 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
 
         const isSelfNow = String(targetUserId || "") === String(user.id);
         const json = isSelfNow
-          ? await apiGet("/account/profile/me")
+          ? await apiGet("/account/profile/me", request)
           : await apiGet(
               `/account/profile?target_user_id=${encodeURIComponent(
                 String(targetUserId || user.id)
-              )}`
+              )}`, request
             );
 
         if (!cancelled) {
@@ -75,8 +89,9 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
     loadProfile();
     return () => {
       cancelled = true;
+      controller.abort();
     };
-  }, [user, targetUserId]);
+  }, [user?.id, targetUserId, authOwnerGeneration]);
 
   const openNameEdit = () => {
     if (!user) {
@@ -105,6 +120,8 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
     }
     if (!isSelf) return;
 
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     const nextName = normalizeDisplayName(nameDraft);
 
     if (!nextName) {
@@ -123,29 +140,27 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
     setNameError("");
     setNameChecking(true);
     try {
-      const available = await checkDisplayNameAvailability(nextName);
+      const available = await checkDisplayNameAvailability(nextName, request);
+      if (request.signal.aborted) return;
       if (available === false) {
         setNameError(DISPLAY_NAME_TAKEN_MESSAGE);
         return;
       }
     } finally {
-      setNameChecking(false);
+      if (!request.signal.aborted) setNameChecking(false);
     }
 
+    if (request.signal.aborted) return;
     setNameSaving(true);
     try {
       const json = await apiPatch("/account/profile/me", {
         display_name: nextName,
-      });
+      }, request);
+      if (request.signal.aborted) return;
 
-      try {
-        await supabase.auth.updateUser({
-          data: { display_name: nextName },
-        });
-      } catch (e) {
-        console.warn("updateUser metadata failed:", e);
-      }
-
+      // The account profile is the display-name source of truth. A second
+      // current-session metadata write could target an account switched to
+      // while this profile request was pending.
       const resolvedDisplayName = normalizeDisplayName(json?.display_name || nextName);
       setDisplayName(resolvedDisplayName || nextName);
       setNameDraft(resolvedDisplayName || nextName);
@@ -153,6 +168,7 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
       setNameError("");
       Alert.alert("更新完了", "ユーザー名を更新しました。");
     } catch (e) {
+      if (request.signal.aborted || e?.name === "AccountChangedError") return;
       const displayNameMessage = mapDisplayNameConflictMessage(e) || String(e?.message || e);
       if (displayNameMessage === DISPLAY_NAME_TAKEN_MESSAGE) {
         setNameError(displayNameMessage);
@@ -160,7 +176,7 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
       console.warn("profile update error:", e);
       Alert.alert("更新に失敗しました", displayNameMessage);
     } finally {
-      setNameSaving(false);
+      if (!request.signal.aborted) setNameSaving(false);
     }
   };
 

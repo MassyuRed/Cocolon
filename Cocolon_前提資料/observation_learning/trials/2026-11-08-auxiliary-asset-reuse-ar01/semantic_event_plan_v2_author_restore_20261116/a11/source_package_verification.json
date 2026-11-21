@@ -1,0 +1,16 @@
+{
+  "state": "PASS_EXACT_REMOTE_BLOBS",
+  "repository": "MassyuRed/mashos-api",
+  "commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "tree_sha": "4bd3d42fa3ef9b1ce2ee33d19f6beff9691e353d",
+  "tree_truncated": false,
+  "archive_member_count": 247,
+  "all_archive_members_match_remote_blob_identity": true,
+  "packaging_entrypoints_addition": "analysis_if_model_source.py retained explicitly as in A10 for independent IF/default alias compatibility; existing build_source_package.py.build reused unchanged",
+  "model_loads": 0,
+  "model_calls": 0,
+  "tokenizer_loads": 0,
+  "training": 0,
+  "hosted_database_calls": 0,
+  "normal_rollout": 0
+}

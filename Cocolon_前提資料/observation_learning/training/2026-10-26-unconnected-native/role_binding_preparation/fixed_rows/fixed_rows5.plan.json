@@ -1,0 +1,110 @@
+{
+  "status": "PROPOSAL_NOT_APPROVED_NOT_ACTIVATED",
+  "schema": "cocolon.fixed_rows5_proposal.v1",
+  "classification": "LEVEL_3_NEW_PRIVATE_CANDIDATE_FORMAT",
+  "executor": "root Karen only; independent assistant read-only; formal Pro/Ultra not asserted",
+  "cpu_source_sha256": "df650fd82663ac1c72954cc640ace9c53de71a3e9fd46155279670253de7dde3",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "initial_adapter_sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+  "initial_adapter_path": "/workspace/cocolon_joint_role18_run_20261029/adapter",
+  "format": "cocolon.cmee.fixed_rows_comparison.v1",
+  "new_adapter_45a1_adopted": false,
+  "implementation_scope": {
+    "api_prefix": "ai/services/ai_inference/cocolon_meaning_experience_engine/",
+    "new_module": "fixed_rows_reference_wire.py",
+    "changed_existing": [
+      "preparation.py",
+      "emlis_semantic_admission.py"
+    ],
+    "test": "ai/tests/test_cmee_fixed_rows_reference_wire.py",
+    "boundary": "explicit offline Free BOOK/SHOP AFTER_EXPLANATION only, original rows raw/format/metadata retained and replayed; no legacy/named fallback or content repair; default/async model source not activated",
+    "explicit_format_checks": "both receive and semantic admission retain private/free/ANSWER plus BOOK/SHOP AFTER_EXPLANATION scope; no format autodetection or fallback when unselected",
+    "current_identity_fixture": "only if existing current owner identity fixture requires exact recalculation for changed source; do not change historical/frozen proof or acceptance denominator",
+    "cocolon_runtime_files": [
+      "run_fixed_rows5.py",
+      "consume_fixed_rows5.py",
+      "runtime_authorized_plan.json",
+      "current_api_source_manifest.json"
+    ],
+    "model_candidate_source": "unchanged and does not support new format; dedicated offline harness with fixed v2 messages only",
+    "format_identity": "keep comparison.v1 marker and exact v2 messages; re-count prompt/context if identifier or instructions change"
+  },
+  "cpu_required_before_gpu": [
+    "pure fixed rows decoder keeps every provided semantic value and explicit alias/name",
+    "actual rows receive/replay 2 teachers, identical named candidate meaning and visible body; cold full outcome identical within the new-format receipt",
+    "old format omitted/named/quote controls unchanged including serialized receipt bytes",
+    "five row shape/type mutations plus malformed/truncated/version, undefined q/update/alias name and duplicate table-name cases via existing checks; repeated use of a valid name is not a new prohibited condition",
+    "missing claim, wrong time string and bad update/bind remain unfilled and are rejected by unchanged semantic rules",
+    "finish timeout/length/error overrides parsed success",
+    "exact train/eval input match and full/EOS mask, context8192 and frozen old9",
+    "fresh code/CPU/adapter/dependencies/source hashes and remote readback"
+  ],
+  "before_generation_order": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "before_both_meaning_and_body_2of2": "close with zero updates, one load and two generations only after actual before raw/receipt/meaning/body review and saved snapshot cold-full-outcome/receipt replay; no automatic next run",
+  "otherwise_update_order": [
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL"
+  ],
+  "loss": "ordinary complete assistant CE through EOS, no suffix or token weight sweep",
+  "learning_rate": 5e-05,
+  "weight_decay": 0.0,
+  "gradient_clip": 1.0,
+  "seed": 20261024,
+  "max_updates": 5,
+  "max_loads": 2,
+  "max_generations": 13,
+  "after_generation_order": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "max_new_tokens": {
+    "BOOK": 3712,
+    "SHOP": 3584,
+    "old9_each": 2560
+  },
+  "context_tokens": 8192,
+  "per_generation_seconds": 180,
+  "max_gpu_process_seconds": 2400,
+  "parent_timeout_seconds": 2390,
+  "parent_kill_after_seconds": 10,
+  "prior_hourly_usd": 0.28,
+  "current_rate_requeried": false,
+  "max_gpu_process_usd": 0.19,
+  "gpu_holding_cpu_preparation_recovery_storage_network_tax_extra": true,
+  "cpu_cmee_per_before_or_after_phase_seconds": 150,
+  "cpu_cold_per_snapshot_seconds": 60,
+  "retry": false,
+  "new_gpu_rental": false,
+  "gpu_stop_restart_delete": false,
+  "new_dependencies": false,
+  "sql_production_db_render_supabase_rn_public_api_merge_deploy": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "success": "after full2 meaning/body2/2 on the same new-format prompt; every one of the seven saved f493 successes preserved by case ID, not aggregate count alone; all formed snapshots cold-full-outcome and receipt-replay identical within new format; root reads every actual raw and person-directed body. Technical candidate only; no human/product admission.",
+  "baseline_old9_success_case_ids": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "gpu_process_seconds_includes_wait_for_before_cmee_child": true
+}

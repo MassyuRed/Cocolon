@@ -2,7 +2,7 @@ export const SELF_INSIGHT = "自己理解";
 
 export const VALID_STRENGTHS = new Set(["weak", "medium", "strong"]);
 
-// 感情ボタンの配置（2段構成：自己理解は平穏の隣）
+// 感情ボタンの順序（列数は表示幅と文字サイズに合わせる）
 export const EMOTION_ROWS = Object.freeze([
   Object.freeze(["喜び", "悲しみ", "怒り"]),
   Object.freeze(["不安", "平穏", SELF_INSIGHT]),

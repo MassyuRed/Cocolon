@@ -1,0 +1,45 @@
+{
+  "SQL_calls": 0,
+  "case": "book_club_two_day",
+  "frames": [
+    {
+      "function": "<module>",
+      "line": 8,
+      "path": "<stdin>"
+    },
+    {
+      "function": "compile_analysis_semantic_map",
+      "line": 4269,
+      "path": "intent_compiler.py"
+    },
+    {
+      "function": "expand_analysis_semantic_event_plan",
+      "line": 3941,
+      "path": "intent_compiler.py"
+    },
+    {
+      "function": "_expand_analysis_semantic_event_plan_v2",
+      "line": 4140,
+      "path": "intent_compiler.py"
+    },
+    {
+      "function": "selected",
+      "line": 4109,
+      "path": "intent_compiler.py"
+    },
+    {
+      "function": "_semantic_map_require",
+      "line": 2364,
+      "path": "semantic_admission.py"
+    }
+  ],
+  "model_calls": 0,
+  "network_calls": 0,
+  "production_source_edits": 0,
+  "raw_bytes_unchanged": true,
+  "raw_sha256": "a4d3bc5579536c6bd56eb96d61618976b60b5505ed24f814fc59a27630ec6082",
+  "reason": "analysis_semantic_event_plan_invalid",
+  "request_and_full_messages_match": true,
+  "state": "ORIGINAL_RAW_REJECTION_REPRODUCED_NO_RELAXATION",
+  "tokenizer_calls": 0
+}

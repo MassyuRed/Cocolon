@@ -1,0 +1,69 @@
+{
+  "schema_version": "cocolon.emlis_thread.application.v1",
+  "thread_id": "d39a7358-0322-4456-b556-3dcc2bdfb3a9",
+  "revision": 12,
+  "state": "COMPLETED",
+  "original": {
+    "id": "301f49f8-6be5-4848-9c24-5442544eddf8",
+    "created_at": "2026-10-25T06:37:17",
+    "memo": "全部一人で直せたことが、うれしかった。",
+    "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+  },
+  "timeline": [
+    {
+      "event_id": "390f200f-fb79-42cd-b9da-22b693825e9b",
+      "kind": "OBSERVATION",
+      "recorded_at": "2026-10-24T23:41:08.496-08:00",
+      "round_index": 0,
+      "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "stage": "INITIAL",
+      "is_current": false
+    },
+    {
+      "event_id": "4d1ee814-6fe0-465c-89d3-181c311a4a24",
+      "kind": "QUESTION",
+      "recorded_at": "2026-10-24T23:41:08.497-08:00",
+      "round_index": 1,
+      "question_id": "emlis-question-d4ab97bbde0a63ee440a0304de440de43faedfc46ab5ebaf5b59df0ff41eb4b3",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    {
+      "event_id": "d5c2e1da-41c8-4948-a955-22f2f7d8c0a9",
+      "kind": "ANSWER",
+      "recorded_at": "2026-10-24T23:41:08.552-08:00",
+      "round_index": 1,
+      "text": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+      "question_id": "emlis-question-d4ab97bbde0a63ee440a0304de440de43faedfc46ab5ebaf5b59df0ff41eb4b3",
+      "authored_at": "2026-10-25T07:41:08.535937+00:00"
+    },
+    {
+      "event_id": "13c72428-2e5e-4da2-8bb5-32efd75b2d22",
+      "kind": "OBSERVATION",
+      "recorded_at": "2026-10-24T23:41:08.782-08:00",
+      "round_index": 1,
+      "text": "見えたこと：\n友人に手順を教わり、一緒に椅子を直したのですね。\n\nEmlisから：\n捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\n\n読み直したこと：\n共同修理と、また使えることへの喜びへ訂正しました。",
+      "stage": "REFINED",
+      "is_current": true
+    }
+  ],
+  "can_write": true,
+  "pending_question": null,
+  "current_observation": {
+    "event_id": "13c72428-2e5e-4da2-8bb5-32efd75b2d22",
+    "text": "見えたこと：\n友人に手順を教わり、一緒に椅子を直したのですね。\n\nEmlisから：\n捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\n\n読み直したこと：\n共同修理と、また使えることへの喜びへ訂正しました。"
+  },
+  "body_state": "REFINED",
+  "answer_saved": true,
+  "answer_assessment": "RESOLVED",
+  "meaning_updated": true,
+  "failure_code": null,
+  "operation_id": "901e6250-c022-47ec-8c2e-6dc0f5219054",
+  "attempt_id": "008be2ef-bfc4-44a3-a323-4f9004ce728d",
+  "requested_attempt_id": null,
+  "can_retry": false,
+  "can_continue": false,
+  "issued_count": 1,
+  "question_limit": 1,
+  "started_question_limit": 1,
+  "processing_deadline_at": null
+}

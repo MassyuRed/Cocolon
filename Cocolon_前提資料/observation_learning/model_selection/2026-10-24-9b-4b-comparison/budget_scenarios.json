@@ -1,0 +1,314 @@
+{
+  "schema": "cocolon_680_1480_price_envelope.v1",
+  "status": "ILLUSTRATIVE_NOT_MEASURED_PROFIT",
+  "prices_jpy": {
+    "plus": 680,
+    "premium": 1480
+  },
+  "paid_mix": {
+    "plus": 0.8,
+    "premium": 0.2
+  },
+  "assumed_jpy_per_usd_not_current_fx": 160,
+  "pricing_checked_jst": "2026-10-24",
+  "formula": "price/1.1 - fee*price; weighted receipts*(1-reserve) - shared backend",
+  "free_usage_is_inside_gpu_budget_not_a_second_token_bill": true,
+  "usage_scenarios_are_not_product_quotas": true,
+  "reserve_is_not_approved_margin": true,
+  "limits": "Remaining amount pays Free+paid inference, storage and other costs. GPU hours ignore storage, capacity, model fit, cold start and batching. No payroll, ads, refunds or training expense has been subtracted.",
+  "sources": [
+    "https://www.runpod.io/pricing",
+    "https://docs.runpod.io/serverless/pricing",
+    "https://developer.apple.com/support/app-distribution-in-japan/"
+  ],
+  "rows": [
+    {
+      "paid_users": 10,
+      "free_users_if_5pct_paid": 190,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 6376.36,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": -4623.64,
+      "nominal_monthly_generations_scenario": 15796,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 0.0,
+        "pod_a5000": 0.0,
+        "flex_48gb": 0.0,
+        "flex_24gb": 0.0,
+        "flex_16gb": 0.0
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 0.0
+    },
+    {
+      "paid_users": 10,
+      "free_users_if_5pct_paid": 190,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 6376.36,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": -5898.91,
+      "nominal_monthly_generations_scenario": 15796,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 0.0,
+        "pod_a5000": 0.0,
+        "flex_48gb": 0.0,
+        "flex_24gb": 0.0,
+        "flex_16gb": 0.0
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 0.0
+    },
+    {
+      "paid_users": 10,
+      "free_users_if_5pct_paid": 190,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 5452.36,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": -5547.64,
+      "nominal_monthly_generations_scenario": 15796,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 0.0,
+        "pod_a5000": 0.0,
+        "flex_48gb": 0.0,
+        "flex_24gb": 0.0,
+        "flex_16gb": 0.0
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 0.0
+    },
+    {
+      "paid_users": 10,
+      "free_users_if_5pct_paid": 190,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 5452.36,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": -6638.11,
+      "nominal_monthly_generations_scenario": 15796,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 0.0,
+        "pod_a5000": 0.0,
+        "flex_48gb": 0.0,
+        "flex_24gb": 0.0,
+        "flex_16gb": 0.0
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 0.0
+    },
+    {
+      "paid_users": 50,
+      "free_users_if_5pct_paid": 950,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 31881.82,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 20881.82,
+      "nominal_monthly_generations_scenario": 78980,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 221.206,
+        "pod_a5000": 483.375,
+        "flex_48gb": 106.977,
+        "flex_24gb": 189.147,
+        "flex_16gb": 225.02
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 4.876
+    },
+    {
+      "paid_users": 50,
+      "free_users_if_5pct_paid": 950,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 31881.82,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 14505.45,
+      "nominal_monthly_generations_scenario": 78980,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 153.659,
+        "pod_a5000": 335.774,
+        "flex_48gb": 74.311,
+        "flex_24gb": 131.39,
+        "flex_16gb": 156.309
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 3.387
+    },
+    {
+      "paid_users": 50,
+      "free_users_if_5pct_paid": 950,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 27261.82,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 16261.82,
+      "nominal_monthly_generations_scenario": 78980,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 172.265,
+        "pod_a5000": 376.431,
+        "flex_48gb": 83.308,
+        "flex_24gb": 147.299,
+        "flex_16gb": 175.235
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 3.797
+    },
+    {
+      "paid_users": 50,
+      "free_users_if_5pct_paid": 950,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 27261.82,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 10809.45,
+      "nominal_monthly_generations_scenario": 78980,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 114.507,
+        "pod_a5000": 250.219,
+        "flex_48gb": 55.376,
+        "flex_24gb": 97.912,
+        "flex_16gb": 116.481
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 2.524
+    },
+    {
+      "paid_users": 100,
+      "free_users_if_5pct_paid": 1900,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 63763.64,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 52763.64,
+      "nominal_monthly_generations_scenario": 157960,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 558.937,
+        "pod_a5000": 1221.38,
+        "flex_48gb": 270.306,
+        "flex_24gb": 477.931,
+        "flex_16gb": 568.574
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 6.16
+    },
+    {
+      "paid_users": 100,
+      "free_users_if_5pct_paid": 1900,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 63763.64,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 40010.91,
+      "nominal_monthly_generations_scenario": 157960,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 423.844,
+        "pod_a5000": 926.178,
+        "flex_48gb": 204.974,
+        "flex_24gb": 362.418,
+        "flex_16gb": 431.152
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 4.671
+    },
+    {
+      "paid_users": 100,
+      "free_users_if_5pct_paid": 1900,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 54523.64,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 43523.64,
+      "nominal_monthly_generations_scenario": 157960,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 461.055,
+        "pod_a5000": 1007.492,
+        "flex_48gb": 222.969,
+        "flex_24gb": 394.236,
+        "flex_16gb": 469.005
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 5.082
+    },
+    {
+      "paid_users": 100,
+      "free_users_if_5pct_paid": 1900,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 54523.64,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 32618.91,
+      "nominal_monthly_generations_scenario": 157960,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 345.539,
+        "pod_a5000": 755.067,
+        "flex_48gb": 167.105,
+        "flex_24gb": 295.461,
+        "flex_16gb": 351.497
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 3.808
+    },
+    {
+      "paid_users": 500,
+      "free_users_if_5pct_paid": 9500,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 318818.18,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 307818.18,
+      "nominal_monthly_generations_scenario": 789800,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 3260.786,
+        "pod_a5000": 7125.421,
+        "flex_48gb": 1576.937,
+        "flex_24gb": 2788.208,
+        "flex_16gb": 3317.006
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 7.188
+    },
+    {
+      "paid_users": 500,
+      "free_users_if_5pct_paid": 9500,
+      "fee_assumption": 0.15,
+      "net_receipts_planning_jpy": 318818.18,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 244054.55,
+      "nominal_monthly_generations_scenario": 789800,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 2585.324,
+        "pod_a5000": 5649.411,
+        "flex_48gb": 1250.279,
+        "flex_24gb": 2210.639,
+        "flex_16gb": 2629.898
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 5.699
+    },
+    {
+      "paid_users": 500,
+      "free_users_if_5pct_paid": 9500,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 272618.18,
+      "reserve_fraction_proposal": 0.0,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 261618.18,
+      "nominal_monthly_generations_scenario": 789800,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 2771.379,
+        "pod_a5000": 6055.976,
+        "flex_48gb": 1340.257,
+        "flex_24gb": 2369.73,
+        "flex_16gb": 2819.161
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 6.109
+    },
+    {
+      "paid_users": 500,
+      "free_users_if_5pct_paid": 9500,
+      "fee_assumption": 0.26,
+      "net_receipts_planning_jpy": 272618.18,
+      "reserve_fraction_proposal": 0.2,
+      "shared_backend_budget_jpy": 11000,
+      "remaining_all_inference_storage_etc_jpy": 207094.55,
+      "nominal_monthly_generations_scenario": 789800,
+      "max_gpu_hours_before_storage": {
+        "pod_a40": 2193.798,
+        "pod_a5000": 4793.855,
+        "flex_48gb": 1060.935,
+        "flex_24gb": 1875.856,
+        "flex_16gb": 2231.622
+      },
+      "max_average_flex48_billable_gpu_seconds_per_nominal_generation": 4.836
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "api_commit": "a8abcc5a3dd26ddfd0774e7bc649f7144976ec18",
+  "all_fictional": true,
+  "state": "NOT_GENERATED",
+  "calls": [
+    {
+      "status": 503,
+      "seconds": 32.00094819581136
+    }
+  ],
+  "findings": [
+    "one isolated second-leaf acquisition reproduced failure at quote before 鞄",
+    "fixed fictional message hash gates prefix capture",
+    "actual tokenizer splits 鞄 into [97271,226] replacement fragments",
+    "JSON Unicode escape closes exact captured prefix in CPU replay without new model calls"
+  ],
+  "meaning_admitted": false,
+  "merge_calls": 0,
+  "saved_artifacts": 0,
+  "normal_rollout": 0,
+  "original_provider_restored": true,
+  "restored_pid": 114109,
+  "total_seconds": 72.45103430608287
+}

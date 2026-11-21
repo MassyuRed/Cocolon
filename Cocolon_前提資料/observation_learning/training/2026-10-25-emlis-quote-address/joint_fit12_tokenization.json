@@ -1,0 +1,211 @@
+{
+  "status": "CPU_TOKENIZATION_VERIFIED_NO_MODEL_OR_GPU_CALL",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "manifest_sha256": "e183984bc4716ee0f7b3a0ca5af543fbd9e8ea957bced07dcdcdced1b36fefb3",
+  "rows": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 2076,
+      "assistant_eos_tokens": 1374,
+      "full_tokens": 3450
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 5030,
+      "assistant_eos_tokens": 2330,
+      "full_tokens": 7360
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 2072,
+      "assistant_eos_tokens": 1374,
+      "full_tokens": 3446
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 5045,
+      "assistant_eos_tokens": 2333,
+      "full_tokens": 7378
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 2069,
+      "assistant_eos_tokens": 1364,
+      "full_tokens": 3433
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 5028,
+      "assistant_eos_tokens": 2339,
+      "full_tokens": 7367
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1733,
+      "assistant_eos_tokens": 1585,
+      "full_tokens": 3318
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1728,
+      "assistant_eos_tokens": 1559,
+      "full_tokens": 3287
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1732,
+      "assistant_eos_tokens": 1598,
+      "full_tokens": 3330
+    }
+  ],
+  "surface_masks": [
+    {
+      "loss_start": 2866,
+      "logits_positions": 452,
+      "reception_tokens": 11,
+      "observation_tokens": 9,
+      "boundary_tokens": 5,
+      "loss_tokens": 25,
+      "surface_char_span": [
+        3912,
+        3977
+      ],
+      "surface_text": "帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"",
+      "value_loss_start": 2879,
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "full_context_tokens": 3318,
+      "prompt_tokens": 1733,
+      "teacher_eos_retained": true
+    },
+    {
+      "loss_start": 2851,
+      "logits_positions": 436,
+      "reception_tokens": 11,
+      "observation_tokens": 9,
+      "boundary_tokens": 5,
+      "loss_tokens": 25,
+      "surface_char_span": [
+        3912,
+        3977
+      ],
+      "surface_text": "帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"",
+      "value_loss_start": 2864,
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "full_context_tokens": 3287,
+      "prompt_tokens": 1728,
+      "teacher_eos_retained": true
+    },
+    {
+      "loss_start": 2870,
+      "logits_positions": 460,
+      "reception_tokens": 11,
+      "observation_tokens": 9,
+      "boundary_tokens": 5,
+      "loss_tokens": 25,
+      "surface_char_span": [
+        3912,
+        3977
+      ],
+      "surface_text": "帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"",
+      "value_loss_start": 2883,
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "full_context_tokens": 3330,
+      "prompt_tokens": 1732,
+      "teacher_eos_retained": true
+    }
+  ],
+  "tokenization_verified": true,
+  "token_counter_is_stub": false,
+  "training_updates": 0,
+  "model_calls": 0,
+  "training_order": [
+    6,
+    0,
+    7,
+    1,
+    8,
+    2,
+    6,
+    3,
+    7,
+    4,
+    8,
+    5
+  ],
+  "full_loss_windows": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "loss_start": 2075,
+      "logits_positions": 1375,
+      "loss_tokens": 1374,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "loss_start": 5029,
+      "logits_positions": 2331,
+      "loss_tokens": 2330,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "loss_start": 2071,
+      "logits_positions": 1375,
+      "loss_tokens": 1374,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "loss_start": 5044,
+      "logits_positions": 2334,
+      "loss_tokens": 2333,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "loss_start": 2068,
+      "logits_positions": 1365,
+      "loss_tokens": 1364,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "loss_start": 5027,
+      "logits_positions": 2340,
+      "loss_tokens": 2339,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "loss_start": 1732,
+      "logits_positions": 1586,
+      "loss_tokens": 1585,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "loss_start": 1727,
+      "logits_positions": 1560,
+      "loss_tokens": 1559,
+      "eos_trained": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "loss_start": 1731,
+      "logits_positions": 1599,
+      "loss_tokens": 1598,
+      "eos_trained": true
+    }
+  ],
+  "daily_objective": {
+    "full_mean_weight": 0.5,
+    "surface_mean_weight": 0.5,
+    "optimizer_steps": 12,
+    "chair_forward_backward": 6,
+    "daily_forward_backward": 12
+  }
+}

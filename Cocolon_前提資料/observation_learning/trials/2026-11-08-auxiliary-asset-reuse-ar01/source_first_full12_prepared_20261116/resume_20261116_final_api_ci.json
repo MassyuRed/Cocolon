@@ -1,0 +1,154 @@
+{
+  "observed_at_utc": "2026-11-15T15:45:24.943Z",
+  "repository": "MassyuRed/mashos-api",
+  "head_sha": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+  "run": {
+    "id": 43728862913,
+    "status": "completed",
+    "conclusion": "success",
+    "run_started_at": "2026-11-15T15:15:32Z",
+    "updated_at": "2026-11-15T15:30:28Z",
+    "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728862913",
+    "run_attempt": 1
+  },
+  "jobs": [
+    {
+      "id": 132856647574,
+      "name": "observed-content",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-11-15T15:15:35Z",
+      "completed_at": "2026-11-15T15:30:27Z",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728862913/job/132856647574",
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Check out the triggering commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Set up Python",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Install isolated-test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Record tested source and runtime",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Verify input-based live Kokoro weather and saved compatibility",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Verify notification candidate retries and async Emlis delivery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Verify Analysis generation and saved read",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Verify shared owner identity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Read synthetic Analysis content",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Set up Node for existing PostgreSQL test harness",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Install PostgreSQL WASM test dependency",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Verify monthly rank, immutable re-read and source deletion SQL",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Verify report facts, complete input sources and safe legacy recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 28,
+          "name": "Post Set up Node for existing PostgreSQL test harness",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 29,
+          "name": "Post Set up Python",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 30,
+          "name": "Post Check out the triggering commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 31,
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "completed_log_test_summaries": [
+    "73 passed, 2 warnings in 6.34s",
+    "45 passed, 1 warning in 1.81s",
+    "2882 passed, 1 warning, 12236 subtests passed in 329.78s (0:05:29)",
+    "1 passed, 194 deselected in 22.02s",
+    "1524 passed, 1 warning, 21 subtests passed in 465.78s (0:07:45)",
+    "408 passed, 2 warnings, 738 subtests passed in 36.29s"
+  ],
+  "workflow_rerun": false,
+  "source_changed": false,
+  "published": false,
+  "deployed": false,
+  "gpu_calls": 0
+}

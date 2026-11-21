@@ -1,0 +1,126 @@
+[
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "full_raw_unchanged": true,
+    "strict_json_complete": true,
+    "named_decoder": "PASS",
+    "static_only_no_semantic_replay": true,
+    "quote_count": 13,
+    "unique_quote_names": 13,
+    "source_field_text_matches": 13,
+    "duplicate_quote_source_field_text_groups": [
+      [
+        "self_statement",
+        "statement_concession"
+      ],
+      [
+        "returned",
+        "returned_concession"
+      ],
+      [
+        "continuing_concern",
+        "answer_explains_target"
+      ]
+    ],
+    "claims": 13,
+    "unique_claim_ids": 13,
+    "relations": 9,
+    "unique_relation_ids": 7,
+    "complete_update_objects": 7,
+    "updates_array_complete": true,
+    "complete_update_ops": {
+      "ADD": 6,
+      "INVALIDATE_GAP": 1
+    },
+    "update_replace_values": [
+      [
+        "self_statement"
+      ],
+      [
+        "returned"
+      ],
+      [
+        "no_contact"
+      ],
+      [
+        "counterfactual"
+      ],
+      [
+        "continuing_concern"
+      ],
+      [
+        "late_awareness"
+      ],
+      []
+    ],
+    "string_null_time_expressions": 0
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "full_raw_unchanged": true,
+    "strict_json_complete": false,
+    "named_decoder": "NOT_RUN_INCOMPLETE_FULL_JSON",
+    "static_only_no_semantic_replay": true,
+    "quote_count": 18,
+    "unique_quote_names": 18,
+    "source_field_text_matches": 18,
+    "duplicate_quote_source_field_text_groups": [
+      [
+        "memo_link_quote",
+        "answer_concession_quote"
+      ],
+      [
+        "felt_distance_quote",
+        "distance_link_quote",
+        "de_link_quote"
+      ],
+      [
+        "answer_sadness_quote",
+        "answer_explains_target_quote",
+        "answer_sadness_explains_quote"
+      ]
+    ],
+    "claims": 16,
+    "unique_claim_ids": 12,
+    "relations": 6,
+    "unique_relation_ids": 6,
+    "complete_update_objects": 10,
+    "updates_array_complete": false,
+    "complete_update_ops": {
+      "ADD": 10
+    },
+    "update_replace_values": [
+      [
+        "shared_talk"
+      ],
+      [
+        "past_reference"
+      ],
+      [
+        "opening_known"
+      ],
+      [
+        "celebration_sent"
+      ],
+      [
+        "joy"
+      ],
+      [
+        "felt_left_behind"
+      ],
+      [
+        "perceived_realization"
+      ],
+      [
+        "answer_joy"
+      ],
+      [
+        "felt_distance"
+      ],
+      [
+        "answer_sadness"
+      ]
+    ],
+    "string_null_time_expressions": 0
+  }
+]

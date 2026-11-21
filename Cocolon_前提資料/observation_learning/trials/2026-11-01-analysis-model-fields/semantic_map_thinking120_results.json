@@ -1,0 +1,38 @@
+{
+  "report": {
+    "status": "COMPLETE_NOT_ADOPTED_PENDING_FINAL_READ",
+    "adapter_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+    "adapter_config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+    "fixed_base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "same_messages": true,
+    "thinking": true,
+    "private_reasoning_exported": false,
+    "model_adopted": false,
+    "calls": [
+      {
+        "id": "T01_manual10",
+        "finish_reason": "length",
+        "seconds": 210.044,
+        "final_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "runner_sha256": "1a7b737ab6664ce25717c0fa8378db824037049faaa701a691e75de9aa36a9a0",
+    "generator_variant_sha256": "27fe4138ad5eb077f02ebd231db74871a4dc4165efb93a9d3c7bb30c2d1f22de",
+    "seconds": 219.792
+  },
+  "responses": {
+    "T01_manual10.response.json": {
+      "model": "cocolon-qwen3.5-4b-analysis-semantic-thinking120",
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "length",
+          "message": {
+            "role": "assistant",
+            "content": ""
+          }
+        }
+      ]
+    }
+  }
+}

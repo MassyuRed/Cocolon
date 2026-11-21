@@ -1,0 +1,490 @@
+{
+  "status": "CPU_PRIOR_QUOTE_INPUT_FIXED_MODEL_EFFECT_UNMEASURED",
+  "seconds": 6.912890954990871,
+  "api_predecessor": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+  "changed_api_paths": [
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py",
+    "ai/tests/test_cmee_quote_candidate.py"
+  ],
+  "source_sha256": "31512acc35b374ca3ab5924b55cc120404d1208d98375f40a801240e2cb6852c",
+  "case_count": 15,
+  "changed_answer_prompts": 5,
+  "unchanged_initial_prompts": 10,
+  "removed_scalar_offsets": 60,
+  "original_quotes_uniquely_recoverable": 30,
+  "legacy15_unchanged": true,
+  "teacher15_target_ids_unchanged": true,
+  "original_api_unchanged": true,
+  "original_input_teacher_and_prior_unchanged": true,
+  "direct_assertions_passed": true,
+  "tokenizer_trust_remote_code": false,
+  "pytest_available": false,
+  "pytest_suite_executed": false,
+  "pytest_attempt_returncode": 1,
+  "pytest_log_sha256": "0201f5e0bf02b532b6ed52c553c89ce595011ebb6c26aca63f26bd12732d21d0",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 1750,
+      "new_prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "prompt_plus_cap": 4310,
+      "teacher_content_sha256": "9d58451872c5ee54777ba0c1295723c03edaa6b6db61d26f2cf70a622becf3eb",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_changed": true,
+      "old_prompt_tokens": 3884,
+      "new_prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "prompt_plus_cap": 6387,
+      "teacher_content_sha256": "f7a812fa3cc2c7d6591dfcb3b144097156c52f5ca300698fe6861da108be2ad2",
+      "original_quote_rows": [
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "field_path": "memo_action",
+          "quote": "ぐらついていた椅子を修理して",
+          "original_start": 0,
+          "original_end": 14,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "field_path": "memo_action",
+          "quote": "また座れるようになった",
+          "original_start": 15,
+          "original_end": 26,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "field_path": "memo",
+          "quote": "うれしかった",
+          "original_start": 12,
+          "original_end": 18,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "field_path": "memo",
+          "quote": "全部一人で直せたこと",
+          "original_start": 0,
+          "original_end": 10,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "field_path": "memo_action",
+          "quote": "して、",
+          "original_start": 12,
+          "original_end": 15,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "field_path": "memo",
+          "quote": "全部一人で直せたことが、うれしかった",
+          "original_start": 0,
+          "original_end": 18,
+          "uniquely_recoverable": true
+        }
+      ],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 1746,
+      "new_prompt_tokens": 1746,
+      "target_tokens": 1331,
+      "prompt_plus_cap": 4306,
+      "teacher_content_sha256": "667d3ee29d6534be5e14373cbc8ac27225284111a9c96a6565fcd0d99b836ccd",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_changed": true,
+      "old_prompt_tokens": 3899,
+      "new_prompt_tokens": 3842,
+      "target_tokens": 2231,
+      "prompt_plus_cap": 6402,
+      "teacher_content_sha256": "f35a3f58f7e39621ecb29d647b86f7bf1f5e2ec7534a8a4aadb4643595ce8ea7",
+      "original_quote_rows": [
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "field_path": "memo_action",
+          "quote": "ぐらついていた椅子を修理して",
+          "original_start": 0,
+          "original_end": 14,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "field_path": "memo_action",
+          "quote": "また座れるようになった",
+          "original_start": 15,
+          "original_end": 26,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "field_path": "memo",
+          "quote": "うれしかった",
+          "original_start": 12,
+          "original_end": 18,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "field_path": "memo",
+          "quote": "全部一人で直せたこと",
+          "original_start": 0,
+          "original_end": 10,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "field_path": "memo_action",
+          "quote": "して、",
+          "original_start": 12,
+          "original_end": 15,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "field_path": "memo",
+          "quote": "全部一人で直せたことが、うれしかった",
+          "original_start": 0,
+          "original_end": 18,
+          "uniquely_recoverable": true
+        }
+      ],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 1743,
+      "new_prompt_tokens": 1743,
+      "target_tokens": 1321,
+      "prompt_plus_cap": 4303,
+      "teacher_content_sha256": "b728898b92f735cbafe4b2e1f9fa7139fdff7dede4dc2d8be9611978c065538b",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_changed": true,
+      "old_prompt_tokens": 3882,
+      "new_prompt_tokens": 3825,
+      "target_tokens": 2237,
+      "prompt_plus_cap": 6385,
+      "teacher_content_sha256": "d3512848d091ca8c173c6b430a23758201d3c9a5ffea0c778c26eedf8dae56eb",
+      "original_quote_rows": [
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "field_path": "memo_action",
+          "quote": "ぐらついていた椅子を修理して",
+          "original_start": 0,
+          "original_end": 14,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "field_path": "memo_action",
+          "quote": "また座れるようになった",
+          "original_start": 15,
+          "original_end": 26,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "field_path": "memo",
+          "quote": "うれしかった",
+          "original_start": 12,
+          "original_end": 18,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "field_path": "memo",
+          "quote": "全部一人で直せたこと",
+          "original_start": 0,
+          "original_end": 10,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "field_path": "memo_action",
+          "quote": "して、",
+          "original_start": 12,
+          "original_end": 15,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "field_path": "memo",
+          "quote": "全部一人で直せたことが、うれしかった",
+          "original_start": 0,
+          "original_end": 18,
+          "uniquely_recoverable": true
+        }
+      ],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 1778,
+      "new_prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "prompt_plus_cap": 4338,
+      "teacher_content_sha256": "98fbd2d414285e1f00423a9d997564c7fd62fa47714504f36c14e01b52a38900",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 1773,
+      "new_prompt_tokens": 1773,
+      "target_tokens": 1559,
+      "prompt_plus_cap": 4333,
+      "teacher_content_sha256": "db0df6a376fdd6f93cb29789b7b21203a848fe5dfcf7f26d5bd8d87cc0306c04",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 1777,
+      "new_prompt_tokens": 1777,
+      "target_tokens": 1598,
+      "prompt_plus_cap": 4337,
+      "teacher_content_sha256": "757dd6d5c9d83c856e27a04eb1cb030953fae3a703f03e1233ce14f8136eb279",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 2204,
+      "new_prompt_tokens": 2204,
+      "target_tokens": 1038,
+      "prompt_plus_cap": 5916,
+      "teacher_content_sha256": "a01929543c966751b1e03889babac750de8d4ed55ef13fb24860207fb2273469",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_changed": true,
+      "old_prompt_tokens": 4257,
+      "new_prompt_tokens": 4201,
+      "target_tokens": 3178,
+      "prompt_plus_cap": 7913,
+      "teacher_content_sha256": "c8691a547bcac8e9236bdb4d8d639ffc2a6f5b7eeaaebac9e6ecb327b878636b",
+      "original_quote_rows": [
+        {
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo_action",
+          "quote": "借りていた本を返すのが遅れて",
+          "original_start": 0,
+          "original_end": 14,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo_action",
+          "quote": "友人に謝った",
+          "original_start": 15,
+          "original_end": 21,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo",
+          "quote": "大丈夫って言ってくれた",
+          "original_start": 0,
+          "original_end": 11,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo",
+          "quote": "まだちょっと気になる",
+          "original_start": 14,
+          "original_end": 24,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo_action",
+          "quote": "借りていた本を返すのが遅れて、友人に謝った",
+          "original_start": 0,
+          "original_end": 21,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo",
+          "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+          "original_start": 0,
+          "original_end": 24,
+          "uniquely_recoverable": true
+        }
+      ],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 2239,
+      "new_prompt_tokens": 2239,
+      "target_tokens": 1082,
+      "prompt_plus_cap": 5951,
+      "teacher_content_sha256": "da57bfbbc912117b67696ed00e35146936731ccd37d0383e01f9a582b7aa77b3",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_changed": true,
+      "old_prompt_tokens": 4419,
+      "new_prompt_tokens": 4365,
+      "target_tokens": 3561,
+      "prompt_plus_cap": 8077,
+      "teacher_content_sha256": "e3a81a2995081a2c40537762731469521fe676bcfbfd7420f826ccaf3f3e4806",
+      "original_quote_rows": [
+        {
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo_action",
+          "quote": "昔からの友人が店を開いたと知って",
+          "original_start": 0,
+          "original_end": 16,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo_action",
+          "quote": "お祝いのメッセージを送った",
+          "original_start": 17,
+          "original_end": 30,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo",
+          "quote": "うれしかった",
+          "original_start": 0,
+          "original_end": 6,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo",
+          "quote": "少し置いていかれた気がした",
+          "original_start": 9,
+          "original_end": 22,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo_action",
+          "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+          "original_start": 0,
+          "original_end": 30,
+          "uniquely_recoverable": true
+        },
+        {
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo",
+          "quote": "うれしかったけど、少し置いていかれた気がした",
+          "original_start": 0,
+          "original_end": 22,
+          "uniquely_recoverable": true
+        }
+      ],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 2090,
+      "new_prompt_tokens": 2090,
+      "target_tokens": 961,
+      "prompt_plus_cap": 5802,
+      "teacher_content_sha256": "04a4153fb3782fc4b5b8ba0e4145595f96ab275ea2eb6151ca019ce9d7913868",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "prompt_changed": false,
+      "old_prompt_tokens": 2132,
+      "new_prompt_tokens": 2132,
+      "target_tokens": 896,
+      "prompt_plus_cap": 5844,
+      "teacher_content_sha256": "d8855518fa52e36ed82200375578176155f1b7cbce4007d30bf1f7ebbd9965ea",
+      "original_quote_rows": [],
+      "source_and_output_spec_unchanged": true,
+      "saved_prior_unchanged": true,
+      "legacy_messages_unchanged": true,
+      "target_ids_unchanged": true
+    }
+  ],
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "production_sql_operations": 0,
+  "gpu_lifecycle_operations": 0,
+  "automatic_progression": false,
+  "product_credit": 0
+}

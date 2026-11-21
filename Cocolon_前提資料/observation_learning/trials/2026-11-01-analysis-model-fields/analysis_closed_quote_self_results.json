@@ -1,0 +1,1089 @@
+{
+  "kind": "FINITE_CLOSED_QUOTE_SELF_ACTION_RESULTS",
+  "api_base": "427b7ae3315fd304927316eb25053236852f6b3c",
+  "api_commit": "be2281f86d5d1f96ae090e075e263d81401941d9",
+  "model_loads": 0,
+  "new_model_generations": 0,
+  "new_training_updates": 0,
+  "live_db": false,
+  "deployment": false,
+  "before": {
+    "phase": "before",
+    "compiler_sha256": "9a24923aa76ebb6d39d3abb0e97be86fe653f47d93a9555bb9aa74f106e38353",
+    "model_loads": 0,
+    "cases": [
+      {
+        "case": "standalone_self",
+        "source": "私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 1,
+          "unparsed_count": 0,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": {
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "私は資料を調べた",
+              "record_refs": [
+                "00000000-0000-0000-0000-000000000065"
+              ],
+              "evidence_refs": [
+                {
+                  "evidence_id": "analysis-evidence:d304035d794e13d9da3d598c9bee85da8b32182dab9b3e7ffba66711d128e049",
+                  "source_span_id": "s1",
+                  "source_envelope_id": "analysis-source:ff8c3be0b4cc557e3929e8200351dccb93d107a038bbde0b120a7714c70e6aeb",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 35,
+                  "scalar_start": 0,
+                  "scalar_end": 8,
+                  "utf8_start": 8,
+                  "utf8_end": 32,
+                  "field_sha256": "d379300b381a8cb6bdfeaa776a8daa48ee9f6cc1af85b2feed152ecbf362a74f",
+                  "literal_sha256": "1d354385eb6eaa94b6eb8fa865faa3d6db60e4f924d99f3306a23f33a663abee"
+                }
+              ],
+              "polarity": "positive",
+              "modality": "fact",
+              "temporal_scope": "past",
+              "proposition": {
+                "actor": "SELF",
+                "arguments": [
+                  [
+                    "を",
+                    "資料"
+                  ]
+                ],
+                "predicate_lemma": "調べる",
+                "polarity": "positive",
+                "modality": "fact",
+                "temporal_scope": "past",
+                "source_parts": [
+                  [
+                    "SELF_TOPIC",
+                    0,
+                    2
+                  ],
+                  [
+                    "CASE_を",
+                    2,
+                    5
+                  ],
+                  [
+                    "FINITE_PREDICATE",
+                    5,
+                    8
+                  ]
+                ],
+                "sequence_marker": "",
+                "relative_day": "",
+                "possible_content": null,
+                "result_state": "",
+                "dependent_form": "",
+                "scene_state": "",
+                "role_state": "",
+                "written_modifiers": []
+              },
+              "update_refs": [],
+              "quoted_field": null,
+              "selected_categories": [
+                "仕事"
+              ],
+              "selected_category_context": true
+            }
+          ],
+          "edges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SCENE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g2",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ROLE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g3",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ATTENTION_OR_THOUGHT",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g4",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            }
+          ],
+          "source_updates": [],
+          "conflicts": [],
+          "annotations": []
+        },
+        "text": {
+          "projection_of": "artifact:5061a15276fd4812b17d326395711970@1",
+          "text": "行動・非行動：選択カテゴリ：仕事\n資料を調べる（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n資料を調べる（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。",
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        },
+        "diagram": {
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "wire_kind": "watashi.map.v2",
+          "projection_of": "artifact:5061a15276fd4812b17d326395711970@1",
+          "artifact_version": 1,
+          "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+          "period_comparison": {
+            "state": "NO_PREVIOUS",
+            "reason_codes": [],
+            "safe_change_kinds": []
+          },
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "選択カテゴリ：仕事\n資料を調べる（実行済み）",
+              "evidence_badge_count": 1
+            }
+          ],
+          "edges": [],
+          "annotation_badges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            }
+          ],
+          "conflict_badges": [],
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        }
+      },
+      {
+        "case": "closed_quote_then_self",
+        "source": "受付の人は「会議室を確保しました」と言った。私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": null,
+        "text": null,
+        "diagram": null
+      },
+      {
+        "case": "quoted_self_is_not_owner",
+        "source": "友人は「私は記録を残した」と言った。私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": null,
+        "text": null,
+        "diagram": null
+      },
+      {
+        "case": "quote_between_self_actions",
+        "source": "私は予定を書いた。友人は「記録を残した」と言った。私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": null,
+        "text": null,
+        "diagram": null
+      }
+    ]
+  },
+  "after": {
+    "phase": "after",
+    "compiler_sha256": "f57e1d845033c1eea3bf42166563ad4c82158cc4020077eb6b2409cf4b75444a",
+    "model_loads": 0,
+    "cases": [
+      {
+        "case": "standalone_self",
+        "source": "私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 1,
+          "unparsed_count": 0,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": {
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "私は資料を調べた",
+              "record_refs": [
+                "00000000-0000-0000-0000-000000000065"
+              ],
+              "evidence_refs": [
+                {
+                  "evidence_id": "analysis-evidence:d304035d794e13d9da3d598c9bee85da8b32182dab9b3e7ffba66711d128e049",
+                  "source_span_id": "s1",
+                  "source_envelope_id": "analysis-source:ff8c3be0b4cc557e3929e8200351dccb93d107a038bbde0b120a7714c70e6aeb",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 35,
+                  "scalar_start": 0,
+                  "scalar_end": 8,
+                  "utf8_start": 8,
+                  "utf8_end": 32,
+                  "field_sha256": "d379300b381a8cb6bdfeaa776a8daa48ee9f6cc1af85b2feed152ecbf362a74f",
+                  "literal_sha256": "1d354385eb6eaa94b6eb8fa865faa3d6db60e4f924d99f3306a23f33a663abee"
+                }
+              ],
+              "polarity": "positive",
+              "modality": "fact",
+              "temporal_scope": "past",
+              "proposition": {
+                "actor": "SELF",
+                "arguments": [
+                  [
+                    "を",
+                    "資料"
+                  ]
+                ],
+                "predicate_lemma": "調べる",
+                "polarity": "positive",
+                "modality": "fact",
+                "temporal_scope": "past",
+                "source_parts": [
+                  [
+                    "SELF_TOPIC",
+                    0,
+                    2
+                  ],
+                  [
+                    "CASE_を",
+                    2,
+                    5
+                  ],
+                  [
+                    "FINITE_PREDICATE",
+                    5,
+                    8
+                  ]
+                ],
+                "sequence_marker": "",
+                "relative_day": "",
+                "possible_content": null,
+                "result_state": "",
+                "dependent_form": "",
+                "scene_state": "",
+                "role_state": "",
+                "written_modifiers": []
+              },
+              "update_refs": [],
+              "quoted_field": null,
+              "selected_categories": [
+                "仕事"
+              ],
+              "selected_category_context": true
+            }
+          ],
+          "edges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SCENE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g2",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ROLE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g3",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ATTENTION_OR_THOUGHT",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g4",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            }
+          ],
+          "source_updates": [],
+          "conflicts": [],
+          "annotations": []
+        },
+        "text": {
+          "projection_of": "artifact:83f97442306e450ca1c2d92c9a550e6f@1",
+          "text": "行動・非行動：選択カテゴリ：仕事\n資料を調べる（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n資料を調べる（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。",
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        },
+        "diagram": {
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "wire_kind": "watashi.map.v2",
+          "projection_of": "artifact:83f97442306e450ca1c2d92c9a550e6f@1",
+          "artifact_version": 1,
+          "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+          "period_comparison": {
+            "state": "NO_PREVIOUS",
+            "reason_codes": [],
+            "safe_change_kinds": []
+          },
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "選択カテゴリ：仕事\n資料を調べる（実行済み）",
+              "evidence_badge_count": 1
+            }
+          ],
+          "edges": [],
+          "annotation_badges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            }
+          ],
+          "conflict_badges": [],
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        }
+      },
+      {
+        "case": "closed_quote_then_self",
+        "source": "受付の人は「会議室を確保しました」と言った。私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 1,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": {
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "私は資料を調べた",
+              "record_refs": [
+                "00000000-0000-0000-0000-000000000065"
+              ],
+              "evidence_refs": [
+                {
+                  "evidence_id": "analysis-evidence:65c6522dec6591a73c1cf88b6436332110f5403056b0aa84d7bec4792835d52a",
+                  "source_span_id": "s2",
+                  "source_envelope_id": "analysis-source:083dab219c06df674886ad75608d434ef228232c6aff50c0e54dad2c2a077b0c",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 101,
+                  "scalar_start": 22,
+                  "scalar_end": 30,
+                  "utf8_start": 74,
+                  "utf8_end": 98,
+                  "field_sha256": "283fecedb0c6b53ac03c0aa887f1e275cbeaa6c41bc0c4269315edbc746f90d9",
+                  "literal_sha256": "1d354385eb6eaa94b6eb8fa865faa3d6db60e4f924d99f3306a23f33a663abee"
+                }
+              ],
+              "polarity": "positive",
+              "modality": "fact",
+              "temporal_scope": "past",
+              "proposition": {
+                "actor": "SELF",
+                "arguments": [
+                  [
+                    "を",
+                    "資料"
+                  ]
+                ],
+                "predicate_lemma": "調べる",
+                "polarity": "positive",
+                "modality": "fact",
+                "temporal_scope": "past",
+                "source_parts": [
+                  [
+                    "SELF_TOPIC",
+                    0,
+                    2
+                  ],
+                  [
+                    "CASE_を",
+                    2,
+                    5
+                  ],
+                  [
+                    "FINITE_PREDICATE",
+                    5,
+                    8
+                  ]
+                ],
+                "sequence_marker": "",
+                "relative_day": "",
+                "possible_content": null,
+                "result_state": "",
+                "dependent_form": "",
+                "scene_state": "",
+                "role_state": "",
+                "written_modifiers": []
+              },
+              "update_refs": [],
+              "quoted_field": null,
+              "selected_categories": [
+                "仕事"
+              ],
+              "selected_category_context": true
+            }
+          ],
+          "edges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SCENE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g2",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ROLE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g3",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ATTENTION_OR_THOUGHT",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g4",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g5",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SOURCE_SCOPE",
+              "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+            }
+          ],
+          "source_updates": [],
+          "conflicts": [],
+          "annotations": []
+        },
+        "text": {
+          "projection_of": "artifact:d256d3480925439b91fa31cb1bc19f00@1",
+          "text": "行動・非行動：選択カテゴリ：仕事\n資料を調べる（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n資料を調べる（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n資料を調べる（実行済み））：まだ読み取れていない内容は、この記録からは確定していません。",
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        },
+        "diagram": {
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "wire_kind": "watashi.map.v2",
+          "projection_of": "artifact:d256d3480925439b91fa31cb1bc19f00@1",
+          "artifact_version": 1,
+          "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+          "period_comparison": {
+            "state": "NO_PREVIOUS",
+            "reason_codes": [],
+            "safe_change_kinds": []
+          },
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "選択カテゴリ：仕事\n資料を調べる（実行済み）",
+              "evidence_badge_count": 1
+            }
+          ],
+          "edges": [],
+          "annotation_badges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            },
+            {
+              "gap_ref": "g5",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "conflict_badges": [],
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        }
+      },
+      {
+        "case": "quoted_self_is_not_owner",
+        "source": "友人は「私は記録を残した」と言った。私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 1,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": {
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "私は資料を調べた",
+              "record_refs": [
+                "00000000-0000-0000-0000-000000000065"
+              ],
+              "evidence_refs": [
+                {
+                  "evidence_id": "analysis-evidence:9243468c390cb4896ef4043c43facf5d3d6c2193036371c85e59d34a916367a0",
+                  "source_span_id": "s2",
+                  "source_envelope_id": "analysis-source:f935e4e59f2788cc7761c45631ea258d1cec3bc2d597aa3f3ae654c083d094a8",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 8,
+                  "field_utf8_end": 89,
+                  "scalar_start": 18,
+                  "scalar_end": 26,
+                  "utf8_start": 62,
+                  "utf8_end": 86,
+                  "field_sha256": "65720511ee90d55b03b966e5ac2defabf894aad0ddca517f4cfcc0bb72af1494",
+                  "literal_sha256": "1d354385eb6eaa94b6eb8fa865faa3d6db60e4f924d99f3306a23f33a663abee"
+                }
+              ],
+              "polarity": "positive",
+              "modality": "fact",
+              "temporal_scope": "past",
+              "proposition": {
+                "actor": "SELF",
+                "arguments": [
+                  [
+                    "を",
+                    "資料"
+                  ]
+                ],
+                "predicate_lemma": "調べる",
+                "polarity": "positive",
+                "modality": "fact",
+                "temporal_scope": "past",
+                "source_parts": [
+                  [
+                    "SELF_TOPIC",
+                    0,
+                    2
+                  ],
+                  [
+                    "CASE_を",
+                    2,
+                    5
+                  ],
+                  [
+                    "FINITE_PREDICATE",
+                    5,
+                    8
+                  ]
+                ],
+                "sequence_marker": "",
+                "relative_day": "",
+                "possible_content": null,
+                "result_state": "",
+                "dependent_form": "",
+                "scene_state": "",
+                "role_state": "",
+                "written_modifiers": []
+              },
+              "update_refs": [],
+              "quoted_field": null,
+              "selected_categories": [
+                "仕事"
+              ],
+              "selected_category_context": true
+            }
+          ],
+          "edges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SCENE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g2",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ROLE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g3",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ATTENTION_OR_THOUGHT",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g4",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g5",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SOURCE_SCOPE",
+              "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+            }
+          ],
+          "source_updates": [],
+          "conflicts": [],
+          "annotations": []
+        },
+        "text": {
+          "projection_of": "artifact:3bf23a86f43842bd957d8ad94561afa5@1",
+          "text": "行動・非行動：選択カテゴリ：仕事\n資料を調べる（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n資料を調べる（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n資料を調べる（実行済み））：まだ読み取れていない内容は、この記録からは確定していません。",
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        },
+        "diagram": {
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "wire_kind": "watashi.map.v2",
+          "projection_of": "artifact:3bf23a86f43842bd957d8ad94561afa5@1",
+          "artifact_version": 1,
+          "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+          "period_comparison": {
+            "state": "NO_PREVIOUS",
+            "reason_codes": [],
+            "safe_change_kinds": []
+          },
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "選択カテゴリ：仕事\n資料を調べる（実行済み）",
+              "evidence_badge_count": 1
+            }
+          ],
+          "edges": [],
+          "annotation_badges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            },
+            {
+              "gap_ref": "g5",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "conflict_badges": [],
+          "accessibility_linear_order": [
+            "n1"
+          ]
+        }
+      },
+      {
+        "case": "quote_between_self_actions",
+        "source": "私は予定を書いた。友人は「記録を残した」と言った。私は資料を調べた。",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 1,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "graph": {
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "私は予定を書いた",
+              "record_refs": [
+                "00000000-0000-0000-0000-000000000065"
+              ],
+              "evidence_refs": [
+                {
+                  "evidence_id": "analysis-evidence:2dfb56346fa73b3b1374a5824bbd2e4af69e7b1e6ec6a4927a01da4bb43db2ff",
+                  "source_span_id": "s1",
+                  "source_envelope_id": "analysis-source:dedc0ab5bf9bb05b79e7fcc19db992fde076c6e99fd672aa513877a3c002aec0",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 9,
+                  "field_utf8_end": 111,
+                  "scalar_start": 0,
+                  "scalar_end": 8,
+                  "utf8_start": 9,
+                  "utf8_end": 33,
+                  "field_sha256": "4bfd75044efb7a55367bab4816f2bf2affab56196bc84c47723210ac9b8a40da",
+                  "literal_sha256": "e895d9198c1d86aff43f63cb6f73fc6c5cea42ebde96abbc52e3ea7725fc37af"
+                }
+              ],
+              "polarity": "positive",
+              "modality": "fact",
+              "temporal_scope": "past",
+              "proposition": {
+                "actor": "SELF",
+                "arguments": [
+                  [
+                    "を",
+                    "予定"
+                  ]
+                ],
+                "predicate_lemma": "書く",
+                "polarity": "positive",
+                "modality": "fact",
+                "temporal_scope": "past",
+                "source_parts": [
+                  [
+                    "SELF_TOPIC",
+                    0,
+                    2
+                  ],
+                  [
+                    "CASE_を",
+                    2,
+                    5
+                  ],
+                  [
+                    "FINITE_PREDICATE",
+                    5,
+                    8
+                  ]
+                ],
+                "sequence_marker": "",
+                "relative_day": "",
+                "possible_content": null,
+                "result_state": "",
+                "dependent_form": "",
+                "scene_state": "",
+                "role_state": "",
+                "written_modifiers": []
+              },
+              "update_refs": [],
+              "quoted_field": null,
+              "selected_categories": [
+                "仕事"
+              ],
+              "selected_category_context": true
+            },
+            {
+              "node_ref": "n2",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "私は資料を調べた",
+              "record_refs": [
+                "00000000-0000-0000-0000-000000000065"
+              ],
+              "evidence_refs": [
+                {
+                  "evidence_id": "analysis-evidence:011e5c08e34c99617fb49f6b63dd571c90dbfc97e1e671762d3005eb972727ea",
+                  "source_span_id": "s3",
+                  "source_envelope_id": "analysis-source:dedc0ab5bf9bb05b79e7fcc19db992fde076c6e99fd672aa513877a3c002aec0",
+                  "field_path": "memo",
+                  "element_index": 0,
+                  "field_utf8_start": 9,
+                  "field_utf8_end": 111,
+                  "scalar_start": 25,
+                  "scalar_end": 33,
+                  "utf8_start": 84,
+                  "utf8_end": 108,
+                  "field_sha256": "4bfd75044efb7a55367bab4816f2bf2affab56196bc84c47723210ac9b8a40da",
+                  "literal_sha256": "1d354385eb6eaa94b6eb8fa865faa3d6db60e4f924d99f3306a23f33a663abee"
+                }
+              ],
+              "polarity": "positive",
+              "modality": "fact",
+              "temporal_scope": "past",
+              "proposition": {
+                "actor": "SELF",
+                "arguments": [
+                  [
+                    "を",
+                    "資料"
+                  ]
+                ],
+                "predicate_lemma": "調べる",
+                "polarity": "positive",
+                "modality": "fact",
+                "temporal_scope": "past",
+                "source_parts": [
+                  [
+                    "SELF_TOPIC",
+                    0,
+                    2
+                  ],
+                  [
+                    "CASE_を",
+                    2,
+                    5
+                  ],
+                  [
+                    "FINITE_PREDICATE",
+                    5,
+                    8
+                  ]
+                ],
+                "sequence_marker": "",
+                "relative_day": "",
+                "possible_content": null,
+                "result_state": "",
+                "dependent_form": "",
+                "scene_state": "",
+                "role_state": "",
+                "written_modifiers": []
+              },
+              "update_refs": [],
+              "quoted_field": null,
+              "selected_categories": [
+                "仕事"
+              ],
+              "selected_category_context": true
+            }
+          ],
+          "edges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SCENE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g2",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ROLE",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g3",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "ATTENTION_OR_THOUGHT",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g4",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+              "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+            },
+            {
+              "gap_ref": "g5",
+              "between_node_refs": [
+                "n1"
+              ],
+              "missing_scope": "SOURCE_SCOPE",
+              "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+            },
+            {
+              "gap_ref": "g6",
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "missing_scope": "ROUTE_CONNECTION",
+              "reason_code": "ONLY_EXPLICIT_ORDER_IS_SHOWN"
+            }
+          ],
+          "source_updates": [],
+          "conflicts": [],
+          "annotations": []
+        },
+        "text": {
+          "projection_of": "artifact:a678f34e932b4e548b66d0cb9197952d@1",
+          "text": "行動・非行動：選択カテゴリ：仕事\n予定を書く（実行済み）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n資料を調べる（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n予定を書く（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n予定を書く（実行済み））：まだ読み取れていない内容は、この記録からは確定していません。\n未確定（選択カテゴリ：仕事\n予定を書く（実行済み） ／ 選択カテゴリ：仕事\n資料を調べる（実行済み））：段階同士のつながりは、この記録からは確定していません。",
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ]
+        },
+        "diagram": {
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "wire_kind": "watashi.map.v2",
+          "projection_of": "artifact:a678f34e932b4e548b66d0cb9197952d@1",
+          "artifact_version": 1,
+          "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+          "period_comparison": {
+            "state": "NO_PREVIOUS",
+            "reason_codes": [],
+            "safe_change_kinds": []
+          },
+          "nodes": [
+            {
+              "node_ref": "n1",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "選択カテゴリ：仕事\n予定を書く（実行済み）",
+              "evidence_badge_count": 1
+            },
+            {
+              "node_ref": "n2",
+              "node_kind": "ACTION_OR_NONACTION",
+              "visible_label": "選択カテゴリ：仕事\n資料を調べる（実行済み）",
+              "evidence_badge_count": 1
+            }
+          ],
+          "edges": [],
+          "annotation_badges": [],
+          "unknown_gaps": [
+            {
+              "gap_ref": "g1",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            },
+            {
+              "gap_ref": "g5",
+              "between_node_refs": [
+                "n1"
+              ],
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            },
+            {
+              "gap_ref": "g6",
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "conflict_badges": [],
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ]
+        }
+      }
+    ]
+  },
+  "tests": {
+    "exit_code": 0,
+    "elapsed_seconds": 100.65237531810999,
+    "modules": [
+      "test_analysis_closed_quote_self_action",
+      "test_analysis_cumulative",
+      "test_cmee_analysis_v1d_vertical"
+    ]
+  },
+  "test_count": 495,
+  "test_failures": 0,
+  "test_skips": 0,
+  "test_log_tail": "navailable stage=current reason=analysis_observed_route_not_established\nanalysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\nanalysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\nanalysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\nanalysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\nanalysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\nanalysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\n...analysis_observed_generation_unavailable stage=current reason=analysis_observed_route_not_established\n..analysis_observed_generation_unavailable stage=comparison reason=analysis_comparison_request_invalid\n.......\n----------------------------------------------------------------------\nRan 495 tests in 97.738s\n\nOK\n",
+  "test_log_sha256": "7699927cacc05ca43858e8404fe1e8fb65df9da5bd16887520b8ac43cd2917ef",
+  "source_checks": {
+    "identical_four_inputs": true,
+    "standalone_graph_retained": true,
+    "unread_scope_retained": true,
+    "no_order_over_quote": true
+  },
+  "gpu": "2 MiB, 0 %",
+  "compute_apps": ""
+}

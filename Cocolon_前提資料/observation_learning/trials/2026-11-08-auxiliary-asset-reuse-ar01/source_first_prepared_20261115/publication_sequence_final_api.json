@@ -1,0 +1,62 @@
+{
+  "observed_at_utc": "2026-11-15T15:15:46.532Z",
+  "repository": "MassyuRed/mashos-api",
+  "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+  "local_commit": "834a9cf3f67d510d0dcc39231fade3bb6dced1d2",
+  "remote_commit": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+  "parent": "ef329983723a15cb87d893242b83216b826c4749",
+  "tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+  "remote_commit_url": "https://github.com/MassyuRed/mashos-api/commit/144656a9f312b8b4dce39c03e05da84e190eaf74",
+  "lease": "ef329983723a15cb87d893242b83216b826c4749",
+  "force": false,
+  "changed_blob_checks": [
+    {
+      "path": "ai/tests/fixtures/cmee_current_4b_packet_20261114.json",
+      "local_blob": "0d25b265f3a9ca9ee650d12b5272962c459d75ea",
+      "remote_blob": "0d25b265f3a9ca9ee650d12b5272962c459d75ea",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_cmee_current_4b_packet.py",
+      "local_blob": "b1baf3c9b64f17652ed449cbfa72755ce225e9f4",
+      "remote_blob": "b1baf3c9b64f17652ed449cbfa72755ce225e9f4",
+      "match": true
+    }
+  ],
+  "ci_runs": [
+    {
+      "id": 43728862913,
+      "name": "Analysis observed content",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728862913",
+      "run_attempt": 1
+    }
+  ],
+  "previous_revision_ci": {
+    "head": "ef329983723a15cb87d893242b83216b826c4749",
+    "ci_runs": [
+      {
+        "id": 43728149971,
+        "name": "Analysis observed content",
+        "status": "in_progress",
+        "conclusion": null,
+        "head_sha": "ef329983723a15cb87d893242b83216b826c4749",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149971",
+        "run_attempt": 1
+      },
+      {
+        "id": 43728149911,
+        "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+        "status": "in_progress",
+        "conclusion": null,
+        "head_sha": "ef329983723a15cb87d893242b83216b826c4749",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43728149911",
+        "run_attempt": 1
+      }
+    ]
+  },
+  "no_workflow_rerun": true,
+  "no_deployment": true
+}

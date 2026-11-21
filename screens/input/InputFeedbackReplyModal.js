@@ -1,6 +1,8 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
 import { Modal, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import CocolonButton from "../../components/CocolonButton";
 import { isPassedEmlisObservationReply } from "./inputFeedbackModel";
@@ -24,14 +26,11 @@ export default function InputFeedbackReplyModal({
   );
 
   return (
-    <Modal visible={shouldShow} transparent animationType="fade" onRequestClose={onClose}>
-      <View style={styles.inputFeedbackBackdrop}>
-        <View
-          style={[
-            styles.inputFeedbackCard,
-            { maxHeight: Math.max(380, Math.min(620, Math.floor((windowHeight || 0) * 0.84) || 560)) },
-          ]}
-        >
+    <Modal visible={shouldShow} transparent animationType="fade" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
+      <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.inputFeedbackBackdrop}>
+        <View style={styles.inputFeedbackCard}>
+          <ScrollView style={styles.inputFeedbackBodyScroll}
+            contentContainerStyle={styles.inputFeedbackBodyContent} showsVerticalScrollIndicator>
           <View style={styles.inputFeedbackHeader}>
             <View style={styles.inputFeedbackTitleRow}>
               <Ionicons
@@ -55,14 +54,6 @@ export default function InputFeedbackReplyModal({
             ) : null}
           </View>
 
-          <ScrollView
-            style={[
-              styles.inputFeedbackBodyScroll,
-              { maxHeight: Math.max(220, Math.min(470, Math.floor((windowHeight || 0) * 0.56) || 390)) },
-            ]}
-            contentContainerStyle={styles.inputFeedbackBodyContent}
-            showsVerticalScrollIndicator
-          >
             <Text style={styles.inputFeedbackBodyText}>{text}</Text>
           </ScrollView>
 
@@ -76,7 +67,7 @@ export default function InputFeedbackReplyModal({
             </CocolonButton>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </Modal>
   );
 }

@@ -1,0 +1,90 @@
+{
+  "schema_version": "analysis_cardinality123_review.v1",
+  "status": "COMPLETE_NORMAL_ADOPTION_REJECTED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "api_commit": "100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4",
+  "api_working_head_not_used": "5c9606507d296adfe69fe0350c84a5d5deab585b",
+  "runner_commit": "12323274698241fcdc16c689e705aae783fb4d0e",
+  "runner_sha256": "05a4b67ee1d3de76b5d7882f91e9a318bdb9ebcd80f3f670a3720f3130f07657",
+  "pack_sha256": "1768fed4f2537ef15213e36bd13278156382a0f9bcdd0d84186db4770cf04d1f",
+  "profile": "selected_material.v7",
+  "model_loads": 1,
+  "model_calls_started": 3,
+  "new_generation": 3,
+  "new_training": 0,
+  "retry": 0,
+  "per_call_23_seconds_met": true,
+  "shared_60_seconds_model_phase_met": true,
+  "candidate_replay_no_generation": true,
+  "source_and_adapter_unchanged": true,
+  "optional_target_unchanged": true,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "production_writes": 0,
+  "new_builds": 0,
+  "database_calls": 0,
+  "interpretation": "OVERLAPPING_KNOWN_IDENTICAL_CONTENT_PREFIXES_NOT_INDEPENDENT_LANGUAGE_ACCURACY",
+  "private_originals": {
+    "library_file_id": "libfile_fde3_f-d636c3ec5d6881919b861f5ed6b4bf5f_2f7470f963808191aaebf050935e72de",
+    "files_verified": 19,
+    "original_manifest_files_verified": 16,
+    "archive_bytes": 92732,
+    "archive_sha256": "90a0480b9875c5c295907633f097d4cd6fc802c627ae5b7e0adf131c1e6bbdd9",
+    "library_version": 1
+  },
+  "cases": [
+    {
+      "id": "N1",
+      "source_records": 1,
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "strict_candidate": "PRESERVED_UNVALIDATED_MODEL_CANDIDATE",
+      "raw_sha256": "136bb798e520e0fc2d297fd280434d9c728445d6104de9253b15909dfecf07bb",
+      "map_present": false,
+      "mapped_records": 0,
+      "unparsed_records": 1,
+      "semantic_review": "WISH_NODE_KIND_INCORRECT_QUOTE_MODALITY_RETAINED",
+      "map_nodes": 0,
+      "map_edges": 0
+    },
+    {
+      "id": "N2",
+      "source_records": 2,
+      "expected_fields": 2,
+      "returned_field_ordinals": [
+        1,
+        2
+      ],
+      "strict_candidate": "PRESERVED_UNVALIDATED_MODEL_CANDIDATE",
+      "raw_sha256": "e625bb993d737239b41866dddd3ecf43c690874f4b2f9f6e4852960f1fdc37d2",
+      "map_present": false,
+      "mapped_records": 0,
+      "unparsed_records": 2,
+      "semantic_review": "WISH_NODE_KIND_INCORRECT_QUOTE_MODALITY_RETAINED",
+      "map_nodes": 0,
+      "map_edges": 0
+    },
+    {
+      "id": "N3",
+      "source_records": 3,
+      "expected_fields": 3,
+      "returned_field_ordinals": [
+        1,
+        2,
+        3
+      ],
+      "strict_candidate": "PRESERVED_UNVALIDATED_MODEL_CANDIDATE",
+      "raw_sha256": "aec63d74721478f5167db831c0c4f8dced787b7709dcb6586b42d379c99f2c74",
+      "map_present": true,
+      "mapped_records": 3,
+      "unparsed_records": 0,
+      "semantic_review": "EXPLICIT_SELF_PAST_FACT_AND_CURRENT_WISH_KEPT",
+      "map_nodes": 2,
+      "map_edges": 0
+    }
+  ],
+  "next": "Independent CPU-only fact-versus-wish contrasts preserving existing5wish rows, then define one bounded training comparison; do not use B20/N raw or evaluation as teachers.",
+  "teacher_audit": "cardinality_teacher_audit.json"
+}

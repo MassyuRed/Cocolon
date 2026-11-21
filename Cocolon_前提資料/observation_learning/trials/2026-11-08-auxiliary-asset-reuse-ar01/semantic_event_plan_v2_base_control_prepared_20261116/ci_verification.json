@@ -1,0 +1,422 @@
+{
+  "schema": "cocolon.a12.exact_source_ci_verification.v1",
+  "observed_at_utc": "2026-11-16T10:37:02.347Z",
+  "repository": "MassyuRed/mashos-api",
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "state": "BOTH_PUSH_WORKFLOWS_COMPLETED_SUCCESS",
+  "runs": [
+    {
+      "id": 43846424667,
+      "name": "Analysis observed content",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+      "head_branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+      "run_attempt": 1,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43846424667",
+      "created_at": "2026-11-16T10:10:25Z",
+      "updated_at": "2026-11-16T10:27:44Z"
+    },
+    {
+      "id": 43846424124,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+      "head_branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+      "run_attempt": 1,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43846424124",
+      "created_at": "2026-11-16T10:10:25Z",
+      "updated_at": "2026-11-16T10:36:07Z"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 133227615803,
+      "name": "b2b-foundation",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Check out the triggering commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Read the fixed pre-change Piece source for byte compatibility",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Set up Python",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Install unchanged isolated-test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Record tested source and runtime identity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Run only the existing B2-B tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Run B3 access and native RLS tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Run B4 atomic transactions and adapter tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Run legacy public aliases with independent PostgreSQL connections",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Run B5 preview persistence and B4 connection tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Install existing backend requirements for HTTP cancellation tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Run B5 cancellation HTTP and native SQL integration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Run B5 quota HTTP and native retained consumption",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 16,
+          "name": "Run visual-only preview mutation and native revision locks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Run pre-save tier fence with native lock-wait verification",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 18,
+          "name": "Run B6 authenticated save and native source-lock integration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 19,
+          "name": "Run B6 saved Q3 context with native lock-wait verification",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run B7 owner history and detail with native saved artifacts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Run B7 mutation HTTP and native transaction integration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 22,
+          "name": "Run B8 source-result binding and safety regressions",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 23,
+          "name": "Run B5 generated-artifact issuance connection (synthetic safety review)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 24,
+          "name": "Run B5 read-only restart replay (synthetic source and safety)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 25,
+          "name": "Run B5 actual bounded review and native issuance (synthetic Auth/source)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 26,
+          "name": "Run existing preview composition and source-reference contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 27,
+          "name": "Run composed preview through actual CMEE review and native persistence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 28,
+          "name": "Install existing shared-application requirements",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 29,
+          "name": "Verify prepared shared API and unchanged default contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 30,
+          "name": "Set up the existing Node runtime for saved-input SQL checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 31,
+          "name": "Install only the existing PostgreSQL WASM test dependency",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 32,
+          "name": "Verify complete input materials, purchase owners and private profile failures",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 33,
+          "name": "Install existing pinned GPU JSON parser for CPU protocol tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 34,
+          "name": "Verify Piece model receipt, mutations, cancellation and saved reuse",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 35,
+          "name": "Verify prepared shared API through native disposable persistence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 66,
+          "name": "Post Set up the existing Node runtime for saved-input SQL checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 67,
+          "name": "Post Set up Python",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 68,
+          "name": "Post Read the fixed pre-change Piece source for byte compatibility",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 69,
+          "name": "Post Check out the triggering commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 70,
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 71,
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "failure_steps": []
+    },
+    {
+      "id": 133227616435,
+      "name": "observed-content",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Check out the triggering commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Set up Python",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Install isolated-test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Record tested source and runtime",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Verify input-based live Kokoro weather and saved compatibility",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Verify notification candidate retries and async Emlis delivery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Verify Analysis generation and saved read",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Verify shared owner identity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Read synthetic Analysis content",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Set up Node for existing PostgreSQL test harness",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Install PostgreSQL WASM test dependency",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Verify monthly rank, immutable re-read and source deletion SQL",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Verify report facts, complete input sources and safe legacy recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 28,
+          "name": "Post Set up Node for existing PostgreSQL test harness",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 29,
+          "name": "Post Set up Python",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 30,
+          "name": "Post Check out the triggering commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 31,
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "failure_steps": []
+    }
+  ],
+  "reruns": 0,
+  "manual_dispatches": 0,
+  "model_calls": 0,
+  "pod_access": 0,
+  "deploys": 0,
+  "normal_runtime_changes": 0,
+  "scope": "Source branch CI only; no normal deployment, model meaning quality or product acceptance claim."
+}

@@ -1,0 +1,182 @@
+{
+  "api_commit": "c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9",
+  "comparison": {
+    "api_condition": "Both original v4/v7 and v10 teacher targets are consumed by current API c150; this is not historical API replay.",
+    "existing_target_bytes_exact": true,
+    "interpretation": "Candidate admission and typed coverage for immutable existing targets; not free model generation accuracy or complete semantic equivalence.",
+    "old_new_request_source_guard_and_user_material_exact": true,
+    "only_system_prompt_request_ref_and_encoding_rebound": true,
+    "original_messages_and_request_refs_reproduced": true,
+    "original_profile_on_current_api": {
+      "candidate_non_generation_reloads": 23,
+      "strict_candidates": 23,
+      "typed": 12,
+      "unsupported": 11
+    },
+    "original_profiles": [
+      "selected_material.v4",
+      "selected_material.v7"
+    ],
+    "v10_on_current_api": {
+      "candidate_non_generation_reloads": 23,
+      "strict_candidates": 23,
+      "typed": 12,
+      "unsupported": 11
+    }
+  },
+  "historical_training_scope": {
+    "historical_fact_wish23_and_mw_candidates_adopted": false,
+    "interpretation": "Existing correct past-wish targets are present. Their absence from selected a2e final18 is not proof about all ancestry, and prior unadopted training runs do not demonstrate an improvement in the selected model.",
+    "negative_past_wish_teacher_ids": [
+      "F05"
+    ],
+    "past_wish_suffix_modifier_count": 0,
+    "positive_past_teachers_in_selected_a2e_final18_updates": {
+      "F03": 0,
+      "F08": 0
+    },
+    "positive_past_wish_teacher_ids": [
+      "F03",
+      "F08"
+    ]
+  },
+  "immutable_inputs": {
+    "evaluation_rows_used": 0,
+    "existing_teacher_count": 23,
+    "mw_assembly_rows_used": 0,
+    "new_teachers": 0,
+    "original_pack_bytes_unchanged": true,
+    "original_pack_sha256": "7acc464f1b45916a9d96bf91a27b042b71532456cec667e123d86208cf0c58e3",
+    "original_rows_source_owner_and_target_bytes_unchanged": true
+  },
+  "limitations": [
+    "The source targets are unchanged existing teachers, not newly authored labels or evaluation/raw-to-teacher conversion.",
+    "Typed12/unsupported11 on CPU does not establish free generation accuracy, all meaning retention, learned improvement, normal adoption or human product acceptance.",
+    "No new training runner execution or model learning is included in this checkpoint.",
+    "General role/judgment/choice and inter-record meaning, all-history normal processing, IF/Saved, live DB and user device verification remain unfinished."
+  ],
+  "prepared_private_artifacts": {
+    "all_manifest_and_stdout_hashes_match": true,
+    "all_mask_valid": true,
+    "files": {
+      "audit.private.json": {
+        "bytes": 21298,
+        "sha256": "2a87e8a070aedeea359a8aab5d4eb5d2be8d12c2152fd4ff5b7fe8353c15a77f"
+      },
+      "encoded.private.json": {
+        "bytes": 1091107,
+        "sha256": "a3db8d365016ddab4843a8467573ea0caf8a4e1b07f6038bfbd6607a582ccd43"
+      },
+      "manifest.private.json": {
+        "bytes": 267,
+        "sha256": "0dede013152dd5bf0385d0171f5aa5ad531457a76104ccc75b8048ab68433e8a"
+      },
+      "pack.private.json": {
+        "bytes": 511591,
+        "sha256": "e5786aff296699ded23935393b93c20394dcff309c517412265996d1ac244d86"
+      }
+    },
+    "pack_not_adopted": true,
+    "status": "COMPLETE_CPU_PREPARED_NOT_ADOPTED",
+    "target_bytes_unchanged": true
+  },
+  "prior_live_checkpoint_preserved": {
+    "api_commit": "c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9",
+    "ci_conclusion": "success",
+    "ci_run": 42217456387,
+    "corrected_same_raw_jupyter_reader_reads": 32,
+    "model_loads": 1,
+    "model_stops": 10,
+    "new_cpu_work_additional_model_calls": 0,
+    "training_updates": 0,
+    "weekly_section": 236
+  },
+  "private_bundle": {
+    "bytes": 710442,
+    "library_url": "https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "members": 77,
+    "prior_payloads_preserved": true,
+    "sha256": "ed9e3686cb180e7d61f216e9b398cc3dd87701491752df8239baee75f98f3a06",
+    "version": 3
+  },
+  "profile": "selected_material.v10",
+  "real_tokenizer": {
+    "all_generation_target_and_training_budgets_fit": true,
+    "all_prefix_and_target_plus_eos_decodes_exact": true,
+    "all_prompt_labels_minus_100_and_target_plus_eos_labels_only": true,
+    "context_tokens": 8192,
+    "local_files_only": true,
+    "logits_positions": "assistant_with_eos_length + 1",
+    "loss_start": "prompt_length - 1",
+    "max_assistant_with_eos_tokens": 225,
+    "max_v10_full_training_tokens": 4510,
+    "max_v10_input_tokens": 4289,
+    "model": "Qwen/Qwen3.5-4B",
+    "pins": {
+      "accelerate": "1.15.0",
+      "peft": "0.21.2",
+      "safetensors": "0.8.0",
+      "transformers": "5.19.0"
+    },
+    "reserved_output_tokens": 2048,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "status": "PINNED_CACHED_TOKENIZER_CHECKED",
+    "trust_remote_code": false
+  },
+  "schema_version": "analysis_existing_teacher_v10_cpu_results.v1",
+  "source_files": {
+    "audit_existing_teacher_v10.py": {
+      "bytes": 15012,
+      "checkpoint": "bcc541f3e98648fa874ba6580c11ab91d3054029",
+      "sha256": "aa778c9225c9b87599c4620d3807f33d73077c662b5b837e232b84b556fac8c1"
+    },
+    "prepare_existing_teacher_v10.py": {
+      "bytes": 13666,
+      "checkpoint": "976ddf184a07f7e5b4d65007f4d203064d98fa9d",
+      "sha256": "caca683c0391092e0815f9d5a054efc587b69b2990b801d299b7fcd120c91add"
+    },
+    "trial_existing23_v10.py": {
+      "bytes": 42741,
+      "sha256": "b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a",
+      "status": "SOURCE_COMPLETE_PRE_EXECUTION_REVIEWED_PREPARE_AND_RUN_UNEXECUTED"
+    }
+  },
+  "status": "CPU_AUDIT_AND_PREPARE_COMPLETE_NOT_ADOPTED",
+  "structure_map_delta": "NONE",
+  "this_cpu_work": {
+    "candidate_adoption": false,
+    "db_calls": 0,
+    "model_calls": 0,
+    "model_loads": 0,
+    "new_model_weights": 0,
+    "new_training_runner_status": "SOURCE_COMPLETE_PRE_EXECUTION_REVIEWED_PREPARE_AND_RUN_UNEXECUTED_NOT_COUNTED_AS_SUCCESS",
+    "normal_adoption": false,
+    "training_updates": 0
+  },
+  "unexecuted_trial_plan": {
+    "before_inference": "No new before inference; verified existing baselines only.",
+    "candidate_automatic_adoption": false,
+    "evaluation_originals_verified": true,
+    "gpu_completion_policy": "Observe GPU process/memory state after execution; not yet performed for this unexecuted runner.",
+    "known_hc_development_cases": 10,
+    "max_after_generation": 14,
+    "max_model_loads": 2,
+    "max_nll_forwards": 20,
+    "max_training_updates": 23,
+    "missing_original_policy": "Stop during prepare; do not synthesize an original.",
+    "model_calls_to_date": 0,
+    "next_training_initial_adoption": false,
+    "normal_adoption": false,
+    "per_generation_seconds": 23,
+    "prepare_executed": false,
+    "retention_controls_are_blind": false,
+    "retry_count": 0,
+    "run_executed": false,
+    "shared_max_seconds": 900,
+    "source": "trial_existing23_v10.py",
+    "timeout_policy": "Preserve partial counts and mark unknown values; do not count a missing value as zero.",
+    "training_updates_to_date": 0,
+    "v10_retention_controls": 4
+  },
+  "work_date": "2026-11-06"
+}

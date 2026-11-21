@@ -1,0 +1,23 @@
+{
+  "candidate_selected_for_known_fit": true,
+  "product_accepted": false,
+  "meaning_before": 2,
+  "meaning_after": 2,
+  "body_before": 1,
+  "body_after": 2,
+  "raw_text_unchanged": [
+    true,
+    false
+  ],
+  "semantic_packet_unchanged": [
+    true,
+    true
+  ],
+  "selected_adapter_revision": "9b845eced7738b32eb21cfe9193798a41ae58d6f439aac9a5731c68e96952835",
+  "previous_best_adapter": "a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6",
+  "new_model_calls": 2,
+  "training_updates": 4,
+  "retry": 0,
+  "database_operations": 0,
+  "pod_stopped": false
+}

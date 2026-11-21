@@ -1,0 +1,21 @@
+{
+  "source_commit": "5af8625599aa80f90c983cdec34144e88a133d1e",
+  "state": "REQUIRED_CI_SUCCESS",
+  "actual_verified": true,
+  "runs": [
+    {
+      "id": 43991420434,
+      "head": "5af8625599aa80f90c983cdec34144e88a133d1e",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43991420434"
+    },
+    {
+      "id": 43991420308,
+      "head": "5af8625599aa80f90c983cdec34144e88a133d1e",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43991420308"
+    }
+  ]
+}

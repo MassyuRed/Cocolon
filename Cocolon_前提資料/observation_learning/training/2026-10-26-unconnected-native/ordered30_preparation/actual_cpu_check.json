@@ -1,0 +1,560 @@
+{
+  "status": "CPU_ORDERED15_READY_MODEL_NOT_LOADED",
+  "seconds": 13.005556795978919,
+  "runner_check": {
+    "status": "CPU_RUNNER_READY_MODEL_NOT_LOADED",
+    "rows": [
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "prompt_tokens": 1705,
+        "assistant_eos_tokens": 1330,
+        "full_tokens": 3035,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "prompt_tokens": 3839,
+        "assistant_eos_tokens": 2228,
+        "full_tokens": 6067,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "prompt_tokens": 1701,
+        "assistant_eos_tokens": 1330,
+        "full_tokens": 3031,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "prompt_tokens": 3854,
+        "assistant_eos_tokens": 2231,
+        "full_tokens": 6085,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "prompt_tokens": 1698,
+        "assistant_eos_tokens": 1320,
+        "full_tokens": 3018,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "prompt_tokens": 3837,
+        "assistant_eos_tokens": 2237,
+        "full_tokens": 6074,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "prompt_tokens": 1733,
+        "assistant_eos_tokens": 1584,
+        "full_tokens": 3317,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "prompt_tokens": 1728,
+        "assistant_eos_tokens": 1558,
+        "full_tokens": 3286,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "prompt_tokens": 1732,
+        "assistant_eos_tokens": 1597,
+        "full_tokens": 3329,
+        "generation_cap": 2560
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "prompt_tokens": 2159,
+        "assistant_eos_tokens": 1037,
+        "full_tokens": 3196,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "prompt_tokens": 4212,
+        "assistant_eos_tokens": 3178,
+        "full_tokens": 7390,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "prompt_tokens": 2194,
+        "assistant_eos_tokens": 1081,
+        "full_tokens": 3275,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "prompt_tokens": 4374,
+        "assistant_eos_tokens": 3561,
+        "full_tokens": 7935,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "prompt_tokens": 2045,
+        "assistant_eos_tokens": 960,
+        "full_tokens": 3005,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "prompt_tokens": 2087,
+        "assistant_eos_tokens": 895,
+        "full_tokens": 2982,
+        "generation_cap": 3712
+      }
+    ],
+    "original_rows": [
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "prompt_tokens": 1705,
+        "assistant_eos_tokens": 1331,
+        "full_tokens": 3036,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "prompt_tokens": 3839,
+        "assistant_eos_tokens": 2228,
+        "full_tokens": 6067,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "prompt_tokens": 1701,
+        "assistant_eos_tokens": 1331,
+        "full_tokens": 3032,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "prompt_tokens": 3854,
+        "assistant_eos_tokens": 2231,
+        "full_tokens": 6085,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "prompt_tokens": 1698,
+        "assistant_eos_tokens": 1321,
+        "full_tokens": 3019,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "prompt_tokens": 3837,
+        "assistant_eos_tokens": 2237,
+        "full_tokens": 6074,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "prompt_tokens": 1733,
+        "assistant_eos_tokens": 1585,
+        "full_tokens": 3318,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "prompt_tokens": 1728,
+        "assistant_eos_tokens": 1559,
+        "full_tokens": 3287,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "prompt_tokens": 1732,
+        "assistant_eos_tokens": 1598,
+        "full_tokens": 3330,
+        "generation_cap": 2560
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "prompt_tokens": 2159,
+        "assistant_eos_tokens": 1038,
+        "full_tokens": 3197,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "prompt_tokens": 4212,
+        "assistant_eos_tokens": 3178,
+        "full_tokens": 7390,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "prompt_tokens": 2194,
+        "assistant_eos_tokens": 1082,
+        "full_tokens": 3276,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "prompt_tokens": 4374,
+        "assistant_eos_tokens": 3561,
+        "full_tokens": 7935,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "prompt_tokens": 2045,
+        "assistant_eos_tokens": 961,
+        "full_tokens": 3006,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "prompt_tokens": 2087,
+        "assistant_eos_tokens": 896,
+        "full_tokens": 2983,
+        "generation_cap": 3712
+      }
+    ],
+    "serialization_checks": [
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "9d58451872c5ee54777ba0c1295723c03edaa6b6db61d26f2cf70a622becf3eb",
+        "derived_target_sha256": "cd6eacb2838c327b101fee3c44772d29f3ff181f40cf01c19b97b9d8d9ce5dff",
+        "original_assistant_eos_tokens": 1331,
+        "derived_assistant_eos_tokens": 1330
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "f7a812fa3cc2c7d6591dfcb3b144097156c52f5ca300698fe6861da108be2ad2",
+        "derived_target_sha256": "c1a1448f8012c73cd53240f4c3f1e86ab73a63043ee3de629f59cd0178441da9",
+        "original_assistant_eos_tokens": 2228,
+        "derived_assistant_eos_tokens": 2228
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "667d3ee29d6534be5e14373cbc8ac27225284111a9c96a6565fcd0d99b836ccd",
+        "derived_target_sha256": "baa863bc6e08de235095c466ab9256873c9d282ca7c3908f02197500659cc0ae",
+        "original_assistant_eos_tokens": 1331,
+        "derived_assistant_eos_tokens": 1330
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "f35a3f58f7e39621ecb29d647b86f7bf1f5e2ec7534a8a4aadb4643595ce8ea7",
+        "derived_target_sha256": "6b886805ba2f8f6b07bcecaac486a98cfe984bc157bd0ff09d93b30a6cdd0ba5",
+        "original_assistant_eos_tokens": 2231,
+        "derived_assistant_eos_tokens": 2231
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "b728898b92f735cbafe4b2e1f9fa7139fdff7dede4dc2d8be9611978c065538b",
+        "derived_target_sha256": "f23752cc1d6b049a4a516c1d9462fc5f6822ef260cdc6cf6888ea919205229a6",
+        "original_assistant_eos_tokens": 1321,
+        "derived_assistant_eos_tokens": 1320
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "d3512848d091ca8c173c6b430a23758201d3c9a5ffea0c778c26eedf8dae56eb",
+        "derived_target_sha256": "9a9527061a87d5ed005951ab8903d40570f67bc523640f6081def2f16d06a389",
+        "original_assistant_eos_tokens": 2237,
+        "derived_assistant_eos_tokens": 2237
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "98fbd2d414285e1f00423a9d997564c7fd62fa47714504f36c14e01b52a38900",
+        "derived_target_sha256": "4b2c0ba5a5f24ee99d1fcac371b37661dce06deb107bf1eaf8fede2e7a9f576a",
+        "original_assistant_eos_tokens": 1585,
+        "derived_assistant_eos_tokens": 1584
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "db0df6a376fdd6f93cb29789b7b21203a848fe5dfcf7f26d5bd8d87cc0306c04",
+        "derived_target_sha256": "84c443cf63ec41558539421a2a292f617e74496d74c5831ab08e6ac6c2ba302f",
+        "original_assistant_eos_tokens": 1559,
+        "derived_assistant_eos_tokens": 1558
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "757dd6d5c9d83c856e27a04eb1cb030953fae3a703f03e1233ce14f8136eb279",
+        "derived_target_sha256": "eeaeee5e819d2a588e28ccc5b4970486b0f9bdd8ca954142e452d06ed6f1756d",
+        "original_assistant_eos_tokens": 1598,
+        "derived_assistant_eos_tokens": 1597
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "a01929543c966751b1e03889babac750de8d4ed55ef13fb24860207fb2273469",
+        "derived_target_sha256": "7a94b7e3f93271b668031eb575e74318c269622c2fae85df9b849a7075b01edc",
+        "original_assistant_eos_tokens": 1038,
+        "derived_assistant_eos_tokens": 1037
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "c8691a547bcac8e9236bdb4d8d639ffc2a6f5b7eeaaebac9e6ecb327b878636b",
+        "derived_target_sha256": "3896a192c18303fed5f1a2385b8dde0b3d063e6fb054cbb5d7a4fef04025b3b1",
+        "original_assistant_eos_tokens": 3178,
+        "derived_assistant_eos_tokens": 3178
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "da57bfbbc912117b67696ed00e35146936731ccd37d0383e01f9a582b7aa77b3",
+        "derived_target_sha256": "e2e19ab5e101917523cc96c2ad2709d68fb1aea023ff9e573714efd010c03a41",
+        "original_assistant_eos_tokens": 1082,
+        "derived_assistant_eos_tokens": 1081
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "e3a81a2995081a2c40537762731469521fe676bcfbfd7420f826ccaf3f3e4806",
+        "derived_target_sha256": "04f62da24bb92aa230c87f264b8aefb856d9e9d5da20fe0544a57010785bca0f",
+        "original_assistant_eos_tokens": 3561,
+        "derived_assistant_eos_tokens": 3561
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "04a4153fb3782fc4b5b8ba0e4145595f96ab275ea2eb6151ca019ce9d7913868",
+        "derived_target_sha256": "e702ef7b1a405d319f9d360da32a957d23cc89624110ec81f5e6979486949d3b",
+        "original_assistant_eos_tokens": 961,
+        "derived_assistant_eos_tokens": 960
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "parsed_values_equal": true,
+        "system_user_equal": true,
+        "original_target_sha256": "d8855518fa52e36ed82200375578176155f1b7cbce4007d30bf1f7ebbd9965ea",
+        "derived_target_sha256": "752f624b5b9b0cbad12422322dbbd55537abe560eba3f0b44868d90342f6aa31",
+        "original_assistant_eos_tokens": 896,
+        "derived_assistant_eos_tokens": 895
+      }
+    ],
+    "target_serialization": "evidence_meaning_updates_before_surface_v1",
+    "dependency_versions": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "runner_sha256": "e830de4f9f489860da8629a85085ea63730141874577f6f47fe4f03bf8a2349d",
+    "proposal_sha256": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9",
+    "initial_adapter_sha256": {
+      "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "adapter_config.json": "7f64972a9ff0ac07cec00d6b53f66dc4390efef4a2e566444a357c7ccd254fad",
+      "adapter_model.safetensors": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b"
+    },
+    "initial_adapter_directory": "/workspace/cocolon_native15_interleaved30_run_20261027/adapter",
+    "learning_rate": 1e-05,
+    "loss": "full_assistant_plus_eos_mean_cross_entropy_immutable_teacher_loss",
+    "strict_optimizer_resume": false
+  },
+  "serialization_order": {
+    "root": [
+      "schema_version",
+      "evidence_quotes",
+      "candidate"
+    ],
+    "candidate": [
+      "schema_version",
+      "core",
+      "claims",
+      "relations",
+      "unknowns",
+      "conflicts",
+      "updates",
+      "question_proposal",
+      "surface_proposal"
+    ]
+  },
+  "cmee_teacher_comparisons": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "985293401e3110065bb2ec3a784913b312c1ade3e0add2ff0242c9812a4dab7f",
+      "ordered_outcome_sha256": "985293401e3110065bb2ec3a784913b312c1ade3e0add2ff0242c9812a4dab7f"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "5c75cf3e0b84491cea56e97d4d8b9fdc58f0fc0ff1672adbf8686817bea8f56a",
+      "ordered_outcome_sha256": "5c75cf3e0b84491cea56e97d4d8b9fdc58f0fc0ff1672adbf8686817bea8f56a"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "6f566d4c4f84d5303a81ef52b9113337f9da6e822da535e6b75361f3b9eaad76",
+      "ordered_outcome_sha256": "6f566d4c4f84d5303a81ef52b9113337f9da6e822da535e6b75361f3b9eaad76"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "c9edcf9948dee86b5ea14ea50de6a334abe81735e0ef7b0926bd926374633022",
+      "ordered_outcome_sha256": "c9edcf9948dee86b5ea14ea50de6a334abe81735e0ef7b0926bd926374633022"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "8e850fb4a8d845bfef9e90fe92637bdf4c837e4534a299ef8d5c08594368dcfd",
+      "ordered_outcome_sha256": "8e850fb4a8d845bfef9e90fe92637bdf4c837e4534a299ef8d5c08594368dcfd"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "901032052d1aded4d71d230719034a6aa6c380b9368d841ec4baaca1d9a46db3",
+      "ordered_outcome_sha256": "901032052d1aded4d71d230719034a6aa6c380b9368d841ec4baaca1d9a46db3"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "bc9fd4aa75d5f55d43b66c80d83c90ee127675fc8ea1b13d3fee877b35f1e62a",
+      "ordered_outcome_sha256": "bc9fd4aa75d5f55d43b66c80d83c90ee127675fc8ea1b13d3fee877b35f1e62a"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "5a0a2388f181f726b0cb5aaa5b1bc69e667e8596aeb264ae93f739c69b0b392b",
+      "ordered_outcome_sha256": "5a0a2388f181f726b0cb5aaa5b1bc69e667e8596aeb264ae93f739c69b0b392b"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "d53c183cf816511acf201d694d30f1e5ff90d7f255a7d6bbf0983e27ece20fec",
+      "ordered_outcome_sha256": "d53c183cf816511acf201d694d30f1e5ff90d7f255a7d6bbf0983e27ece20fec"
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "42da59205fe520b8d88151d1b09e1911393d5415c12d5699dd5adcc88bab9e0c",
+      "ordered_outcome_sha256": "42da59205fe520b8d88151d1b09e1911393d5415c12d5699dd5adcc88bab9e0c"
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "7e4d135dbb83a268e64e19dad867700654bb5ad21b78287c9ffb5b6e25eeb3fd",
+      "ordered_outcome_sha256": "7e4d135dbb83a268e64e19dad867700654bb5ad21b78287c9ffb5b6e25eeb3fd"
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "1ac0c6c23a418df1ea12e7d8e41afc15fa9f807dbce0db7f18bb609d9f058c3a",
+      "ordered_outcome_sha256": "1ac0c6c23a418df1ea12e7d8e41afc15fa9f807dbce0db7f18bb609d9f058c3a"
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "f7eb5f41d4f8657a390d0aa037394ef12c7c5d510a1683ac6adb5cc656024aed",
+      "ordered_outcome_sha256": "f7eb5f41d4f8657a390d0aa037394ef12c7c5d510a1683ac6adb5cc656024aed"
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "a70cb702b2e981daac4b51bce52a279edfaf3d788d89bb5f87350aa7a3dbba1f",
+      "ordered_outcome_sha256": "a70cb702b2e981daac4b51bce52a279edfaf3d788d89bb5f87350aa7a3dbba1f"
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "both_meanings_adopted": true,
+      "both_bodies_available": true,
+      "meaning_packet_equal": true,
+      "outcome_equal_except_receipt_raw_serialization": true,
+      "original_outcome_sha256": "5c4a51bae4e7fcc5e43d8035081471715c1fb35050b119da1289ecd992f40f05",
+      "ordered_outcome_sha256": "5c4a51bae4e7fcc5e43d8035081471715c1fb35050b119da1289ecd992f40f05"
+    }
+  ],
+  "initial_finite_f32_tensors": 32,
+  "pending_execute_refused_before_output": true,
+  "gpu_output_exists": false,
+  "base_model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "model_generations": 0,
+  "teacher_cpu_adoptions": 30,
+  "sql_operations": 0,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "source_files": {
+    "run_native15_ordered30.py": {
+      "bytes": 22749,
+      "sha256": "e830de4f9f489860da8629a85085ea63730141874577f6f47fe4f03bf8a2349d"
+    },
+    "gpu30_ordered.plan.json": {
+      "bytes": 3369,
+      "sha256": "bb8e2a22d63c0a6a9bb5a97f5a44c0efd8a586de5fc86ab0f019424e91ad78c8"
+    },
+    "consume_ordered30.py": {
+      "bytes": 19214,
+      "sha256": "f01c021920537eb834e5ff7f503dd104cd3279d035ee0fc11fc264a392a03c14"
+    },
+    "verify_ordered30_cpu.py": {
+      "bytes": 6201,
+      "sha256": "112776f3004eb43a1208fe151e164d696c4561e9a4d412c1f0e9afb6da7f6b6e"
+    }
+  }
+}

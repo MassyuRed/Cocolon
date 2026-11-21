@@ -1,0 +1,42 @@
+{
+  "state": "NOT_ADEQUATE_NO_ADOPTION",
+  "reviewer": "root",
+  "review_scope": "Both received actual raw bodies; first actual projection/text; all original memo/memo_action fields. No projection fabricated for rejected second raw.",
+  "result_sha256": "51b7808b233c0959c4935d277f98da16e5a8eb15158459e725cdef42f5ad4f52",
+  "human_product_acceptance": false,
+  "cases": [
+    {
+      "id": "book_club_two_day",
+      "raw_sha256": "4efbf64d4e5e9f1ccc43192512cc1e24bc4dd95a8aca749d5c14a4513f141f53",
+      "machine_admission": "GENERATED",
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "Explicit later venue reply and self-confirmation is labeled unknown and rendered as missing-record information.",
+        "Earlier pending reply remains a current unknown despite next-day confirmation.",
+        "Overview conflates confirmed room enquiry with genuinely unknown chair enquiry; all-recipient reading and chair enquiry status are omitted.",
+        "Author combines different stages into two broad events and repeats their facts/readings across overview/nodes/edge; earlier draft-not-sent to later sent/one-acknowledgement distinction is incomplete.",
+        "Reading suggests a current information gap between actors without grounding that gap."
+      ]
+    },
+    {
+      "id": "lighting_prior_and_later",
+      "raw_sha256": "7b3bc527eb6de141324991d66ed1344f5f1074dcafca0d43336457346193749d",
+      "machine_admission": "REJECTED_analysis_semantic_event_plan_orphan",
+      "projection_text_generated": false,
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "r1 and r2 are never used by node/edge/overview unit_refs; all events are reachable. Failure is existing unused-reading requirement, not unreachable events.",
+        "e1 mixes prior-store staff recommendation uncertainty with later-store trial/price-confirmation as one event.",
+        "e2 and e4 duplicate placement/drawing; e4 evidence omits the claimed drawing sentence.",
+        "Purchase itself, temporary substitute-workspace/old-light stop, and nuanced choice limits are not adequately carried by the selected events.",
+        "SELF_OUTSIDE_GAP edge between post-purchase work and use-record node does not express a sourced self/outside discrepancy."
+      ]
+    }
+  ],
+  "B10_condition_met": false,
+  "new_review_admission_file_created": false,
+  "new_model_calls": 0,
+  "raw_semantic_repairs": 0,
+  "source_changes": 0,
+  "further_retry_prepared": false
+}

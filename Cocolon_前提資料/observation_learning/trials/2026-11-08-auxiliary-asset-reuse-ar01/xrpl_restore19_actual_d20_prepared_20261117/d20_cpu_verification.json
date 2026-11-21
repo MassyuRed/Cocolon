@@ -1,0 +1,32 @@
+{
+  "state": "D20_CPU_EXISTING_FAILURE_LOCATOR_AND_EXACT_T01_BINDING_PASS_NOT_GPU_DIAGNOSIS",
+  "driver_sha256": "6dfca45fe3b0dba325ab56863836ea0ec8c326133b10109fb4a301c1010506d3",
+  "scope_sha256": "6c53aefab04d56b076d1ff132c09f9ab30abc7950e82766754ee523e2bee10af",
+  "native_diagnostic_sha256": "cdf76dd2bab1523d6532c304b67eb2e01776837c8bb0542d43926eab9be71a09",
+  "AST_changed_operator_functions": [
+    "acquire",
+    "install_sources",
+    "material",
+    "scope_read"
+  ],
+  "provider_and_lifecycle_functions_unchanged": true,
+  "native_changed_function": "make_handler_exception_log_only",
+  "other246_source_files_byte_identical": true,
+  "T01_messages_request_and_wire_exact": true,
+  "all_payload_copy_and_hashes_pass": true,
+  "local_fake_HTTP_requests": 12,
+  "original_and_variant_HTTP_status_and_body_exact": true,
+  "success_and_generate_error_and_handler_finish_type_errors_observed": true,
+  "identical_generator_arguments_and_max5_invocations": true,
+  "quota_sixth_request_rejected": true,
+  "only_software_exception_type_function_line_and_monotonic_logged": true,
+  "no_exception_message_credentials_raw_export": true,
+  "case_count": 1,
+  "max_responses": 5,
+  "restore_inclusive_seconds": 600,
+  "actual_model_loads": 0,
+  "actual_model_calls": 0,
+  "training": 0,
+  "SQL": 0,
+  "limitation": "Local HTTP uses a fake generator only. Actual T01 exception type and meaning quality remain unobserved."
+}

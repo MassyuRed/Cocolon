@@ -1,0 +1,8 @@
+{
+  "status": "REFUSED_BEFORE_OUTPUT_AND_MODEL",
+  "output_absent": true,
+  "model_loads": 0,
+  "forwards": 0,
+  "updates": 0,
+  "generations": 0
+}

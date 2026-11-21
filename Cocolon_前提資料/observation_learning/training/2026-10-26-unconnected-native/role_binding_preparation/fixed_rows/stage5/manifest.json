@@ -1,0 +1,37 @@
+[
+  {
+    "path": "execution.json",
+    "bytes": 491,
+    "sha256": "a8f64bb8002a4bd8a31424f96e5c5159adf84945e048af0d2d87e1ecb6ab529e"
+  },
+  {
+    "path": "original_teachers2.json",
+    "bytes": 124187,
+    "sha256": "1a1bf1367fa186ac317aeb5b185b5720ce3c00e36bd16a919d46c4cbc6113ca3"
+  },
+  {
+    "path": "report.json",
+    "bytes": 5010,
+    "sha256": "c14a7dac97e5a21a6ae6299fbc270e0cf4a97b483128afbbe04d3bd6cef1fcd5"
+  },
+  {
+    "path": "stage5-cpu.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "stage5-cpu.log",
+    "bytes": 855,
+    "sha256": "be1d4551c3e11079dcba0d8128bbaa40c273733012e2b0007fc1c829d678891e"
+  },
+  {
+    "path": "stage_train10.jsonl",
+    "bytes": 264558,
+    "sha256": "80606965e9b664c8b468a6c19d25f4ab3ac7f343c9f70244818d62424b91d6e5"
+  },
+  {
+    "path": "study.py",
+    "bytes": 7164,
+    "sha256": "f1e6aff9387fe1b31fb7f46927acb317b261b2579357e5df1f288b582d453c28"
+  }
+]

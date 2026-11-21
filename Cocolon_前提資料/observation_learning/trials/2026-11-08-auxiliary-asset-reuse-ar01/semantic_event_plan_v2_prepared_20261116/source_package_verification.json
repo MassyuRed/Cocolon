@@ -1,0 +1,14 @@
+{
+  "GPU": 0,
+  "archive_sha256": "06f8e7f507b4f0d18ab6180d21c9b57b4139d9499ef4539bf1d5d01ae7775bad",
+  "exit_code": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "python_version": "3.12.14",
+  "source_bytes": 12593607,
+  "source_count": 247,
+  "stderr": "",
+  "stdout": "{\"GPU\": 0, \"event_plan_profile\": \"semantic_map.event_plan.v2\", \"fields\": 1, \"imported_modules\": [\"analysis_semantic_map\", \"analysis_cumulative_service\", \"analysis_model_source\", \"analysis_if_model_source\", \"cocolon_meaning_experience_engine\", \"serve_emlis_natural_reply\"], \"legacy_profile\": \"semantic_map.v1\", \"model_calls\": 0, \"network_calls\": 0, \"parsed_modules\": 246, \"repository_path_imports\": 0, \"state\": \"PASS_IMPORT_AND_SYNTHETIC_PREPARE_NO_GPU\"}\n",
+  "verification_scope": "full source byte/AST verification, fresh extracted imports and synthetic prepare; not model generation or semantic quality"
+}

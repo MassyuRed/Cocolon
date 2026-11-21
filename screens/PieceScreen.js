@@ -9,11 +9,9 @@ import TutorialOverlay from "../components/TutorialOverlay";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import PieceHomeMainActions from "./piece/PieceHomeMainActions";
-import PieceRecommendModal from "./piece/PieceRecommendModal";
 import PieceTutorialCreateModal from "./piece/PieceTutorialCreateModal";
 import usePieceHomeGlobalSummary from "./piece/usePieceHomeGlobalSummary";
 import usePieceHomeTutorial, { TUTORIAL_TOTAL_STEPS } from "./piece/usePieceHomeTutorial";
-import usePieceRecommendUsers from "./piece/usePieceRecommendUsers";
 
 /**
  * PieceScreen (Home)
@@ -21,7 +19,6 @@ import usePieceRecommendUsers from "./piece/usePieceRecommendUsers";
  * - Piece の「Home」画面として、軽い導線のみを提供します
  *   - フォロー切替（Piece対象ユーザー切替）
  *   - 履歴導線（Resonance一覧へ）
- *   - おすすめ導線（現状はモーダルのまま）
  *   - 「Pieceを開く」ボタン（→ PieceLibraryScreen へ）
  */
 
@@ -33,12 +30,7 @@ export default function PieceScreen({ route } = {}) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const navigation = useNavigation();
 
-  const {
-    getFeatureUnread,
-    getPrefetchEntry,
-    getPrefetchEntryFresh,
-    setPrefetch,
-  } = useUnread();
+  const { getFeatureUnread } = useUnread();
   const {
     isTutorialMode,
     tutorialStep,
@@ -65,14 +57,6 @@ export default function PieceScreen({ route } = {}) {
     globalResonanceCount,
   } = usePieceHomeGlobalSummary({ navigation, isTutorialMode });
 
-  const recommend = usePieceRecommendUsers({
-    navigation,
-    isTutorialMode,
-    getPrefetchEntry,
-    getPrefetchEntryFresh,
-    setPrefetch,
-  });
-
   const tutorial = usePieceHomeTutorial({
     navigation,
     targetUserId,
@@ -88,9 +72,8 @@ export default function PieceScreen({ route } = {}) {
   const isDark = themeName === "dark";
 
   const resetToMain = useCallback(() => {
-    recommend.resetRecommendState();
     tutorial.resetTutorialCreateState();
-  }, [recommend, tutorial]);
+  }, [tutorial]);
 
   useEffect(() => {
     if (!navigation?.addListener) return;
@@ -171,16 +154,6 @@ export default function PieceScreen({ route } = {}) {
     Alert.alert("ガイド", "ガイド画面へのナビゲーションがまだ設定されていません。");
   }, [navigation]);
 
-  const openRecommend = useCallback(() => {
-    if (tutorialSurfaceEnabled && isTutorialMode) {
-      recommend.showTutorialRecommendInfo();
-      return;
-    }
-
-    recommend.setRecoModalVisible(true);
-    recommend.loadRecommendUsers();
-  }, [isTutorialMode, recommend, tutorialSurfaceEnabled]);
-
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
@@ -192,6 +165,7 @@ export default function PieceScreen({ route } = {}) {
         <PieceHomeMainActions
           styles={styles}
           colors={colors}
+          ui={ui}
           tutorialSurfaceEnabled={tutorialSurfaceEnabled}
           isTutorialMode={isTutorialMode}
           tutorialHasSelfPiece={tutorial.tutorialHasSelfPiece}
@@ -210,7 +184,6 @@ export default function PieceScreen({ route } = {}) {
           onOpenPieceLibrary={tutorial.openPieceLibrary}
           onOpenEmotionLog={openEmotionLog}
           onOpenPieceCreate={openPieceCreateFromHome}
-          onOpenRecommend={openRecommend}
           onOpenReactionHistory={openReactionHistory}
         />
       </View>
@@ -265,18 +238,6 @@ export default function PieceScreen({ route } = {}) {
         tutorialModalTargetRect={tutorial.tutorialModalTargetRect}
         setTutorialModalOverlayMetrics={tutorial.setTutorialModalOverlayMetrics}
       />
-
-      <PieceRecommendModal
-        visible={recommend.recoModalVisible}
-        styles={styles}
-        colors={colors}
-        users={recommend.recoUsers}
-        loading={recommend.recoUsersLoading}
-        error={recommend.recoUsersError}
-        onClose={() => recommend.setRecoModalVisible(false)}
-        onRefresh={recommend.loadRecommendUsers}
-        onOpenAccount={recommend.openAccount}
-      />
     </View>
   );
 }
@@ -285,93 +246,66 @@ function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     safeContent: { flex: 1 },
     body: { flex: 1 },
     bodyContent: {
       paddingTop: 16,
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
       alignItems: "stretch",
       paddingBottom: 32,
-      minHeight: PANEL_MIN_HEIGHT,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
     },
 
-    // Header
-    panelHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 16,
-    },
-    panelTitle: {
-      fontSize: 26,
-      lineHeight: 32,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
-    },
-    panelTitleRow: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    guideTitleButton: {
-      width: 36,
-      height: 32,
-      borderRadius: 12,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginLeft: 10,
-    },
-    headerRight: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
+    guideFooter: { marginTop: 16 },
     globalSummaryBlock: {
-      marginBottom: 14,
+      marginBottom: 20,
     },
     globalSummaryInner: {
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      paddingVertical: 8,
+      paddingVertical: 16,
+      borderRadius: 24,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 20,
     },
     globalSummaryHeaderRow: {
       flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 4,
+      alignItems: 'flex-start',
+      marginBottom: 8,
     },
     globalSummaryIcon: {
       marginRight: 6,
     },
     globalSummaryLabel: {
-      fontSize: 11,
-      fontWeight: "800",
-      letterSpacing: 0.3,
-      color: COLORS.TEXT_ON_LIGHT,
+      letterSpacing: 0,
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
     },
     globalSummaryText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 2,
+      color: COLORS.ON_SURFACE_TONAL,
+      marginBottom: 4,
     },
 
     homeActionCard: {
-      borderRadius: 26,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 22,
-      paddingTop: 18,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingTop: 20,
       paddingBottom: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
+      shadowOpacity: 0,
+      shadowRadius: 0,
       shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      elevation: 0,
     },
     homeActionCardTitleRow: {
       flexDirection: "row",
@@ -379,69 +313,63 @@ function createStyles(COLORS, ui) {
     },
     homeActionCardTitle: {
       flex: 1,
-      fontSize: 16,
-      lineHeight: 22,
-      fontWeight: "800",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      letterSpacing: 0.2,
+      letterSpacing: 0,
+      minWidth: 0,
+      flexShrink: 1,
     },
     homeActionCardBadge: {
       marginLeft: 10,
     },
     homeActionCardDescription: {
-      marginTop: 10,
-      fontSize: 14,
-      lineHeight: 21,
+      marginTop: 8,
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     homeActionButton: {
       marginTop: 18,
-      borderRadius: 999,
-      paddingVertical: 16,
-      paddingHorizontal: 18,
+      borderRadius: 24,
+      paddingVertical: 14,
+      paddingHorizontal: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.16,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+      minHeight: 52,
+      maxWidth: 520,
     },
     homeActionButtonRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      maxWidth: '100%',
     },
     homeActionButtonIcon: {
       marginRight: 10,
     },
     homeActionButtonText: {
-      fontSize: 16,
-      lineHeight: 22,
-      fontWeight: "800",
-      color: "#FFFFFF",
-      letterSpacing: 0.2,
+      color: COLORS.ACCENT_TEXT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      textAlign: 'center',
     },
 
-    // Recommend
+    // Tutorial introduction
     recoCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 12,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
     },
     recoTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
     },
     recoSummaryText: {
-      marginTop: 6,
-      fontSize: 12,
-      lineHeight: 18,
+      marginTop: 8,
       color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
     },
     createTitleRow: {
       flexDirection: "row",
@@ -450,100 +378,18 @@ function createStyles(COLORS, ui) {
     createUnreadBadge: {
       marginLeft: 8,
     },
-    recoRefreshBtn: {
-      width: 34,
-      height: 34,
-      borderRadius: 12,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    recoToggleRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginTop: 4,
-      marginBottom: 10,
-    },
-    recoTogglePill: {
-      flex: 1,
-      marginRight: 8,
-      paddingVertical: 8,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    recoTogglePillActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
-    },
-    recoToggleText: {
-      fontSize: 11,
-      fontWeight: "900",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    recoToggleTextActive: {
-      color: "#FFFFFF",
-    },
     recoSectionLabel: {
-      fontSize: font.sectionLabel ?? 12,
-      fontWeight: "800",
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
-    recoPillScroll: { marginTop: 8 },
-    recoPill: {
-      paddingHorizontal: 10,
-      paddingVertical: 8,
-      borderRadius: 999,
+    // Home
+    qnaIntroCard: {
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      maxWidth: 240,
-    },
-    recoPillActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
-    },
-    recoPillText: {
-      fontSize: 11,
-      fontWeight: "900",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    recoPillTextActive: {
-      color: "#FFFFFF",
-    },
-    recoEmptyText: {
-      marginTop: 8,
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
-    },
-    recoLoadingRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginTop: 8,
-    },
-    recoLoadingText: {
-      marginLeft: 10,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
-    },
-
-    // Home
-    qnaIntroCard: {
-      borderRadius: 18,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      marginBottom: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
     },
     qnaIntroTitleRow: {
       flexDirection: "row",
@@ -551,45 +397,47 @@ function createStyles(COLORS, ui) {
       marginBottom: 4,
     },
     qnaIntroTitle: {
-      fontSize: 13,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 0,
     },
     qnaIntroText: {
-      fontSize: 12,
-      lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
     },
 
     // Actions
-    actions: { marginTop: 6, marginBottom: 2 },
+    actions: {
+      marginTop: 16,
+      marginBottom: 12,
+    },
     targetRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
-      marginBottom: 10,
+      justifyContent: 'flex-start',
+      marginBottom: 16,
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 8,
     },
     targetLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     targetNamePressable: {
       flexDirection: "row",
       alignItems: "center",
-      marginLeft: 6,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
+      marginLeft: 0,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      maxWidth: "80%",
+      maxWidth: '100%',
+      minHeight: 44,
     },
     targetName: {
-      fontSize: 12,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
     },
 
     // Shared button row
@@ -597,47 +445,46 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      maxWidth: '100%',
     },
     goldButtonText: {
-      fontSize: 13,
-      fontWeight: "900",
-      color: "#FFFFFF",
-      letterSpacing: 0.6,
+      color: COLORS.ACCENT_TEXT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      textAlign: 'center',
     },
     neutralButtonText: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
-      letterSpacing: 0.6,
+      letterSpacing: 0,
+      flexShrink: 1,
+      textAlign: 'center',
     },
 
     // History
     historyCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 12,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
     },
     historyCardTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
     },
     historyEntry: {
       borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      minHeight: 52,
     },
     historyEntryText: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
 
     // Modal
@@ -646,36 +493,45 @@ function createStyles(COLORS, ui) {
       backgroundColor: "rgba(0,0,0,0.35)",
       paddingHorizontal: 16,
       justifyContent: "center",
+      paddingVertical: 16,
     },
     modalCard: {
-      borderRadius: 22,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      maxHeight: "82%",
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      maxHeight: '90%',
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+      flexShrink: 1,
+      minHeight: 0,
     },
     modalHeader: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       justifyContent: "space-between",
-      marginBottom: 10,
+      marginBottom: 16,
+      columnGap: 12,
     },
     modalTitle: {
-      fontSize: 14,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
     },
     modalCloseBtn: {
-      width: 36,
-      height: 36,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
+      flexShrink: 0,
     },
     modalLoading: {
       paddingVertical: 20,
@@ -684,9 +540,7 @@ function createStyles(COLORS, ui) {
     },
     modalLoadingText: {
       marginTop: 10,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
+      color: COLORS.TEXT_SUBTLE,
     },
     modalEmpty: {
       paddingVertical: 18,
@@ -694,36 +548,16 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
     },
     modalEmptyText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
+      color: COLORS.TEXT_SUBTLE,
       textAlign: "center",
     },
-    listArea: { paddingBottom: 4 },
-    modalScrollContent: { paddingBottom: 12 },
-
-    // Recommend users list rows
-    recoUserRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      marginBottom: 8,
+    listArea: {
+      paddingBottom: 8,
+      flexShrink: 1,
+      minHeight: 0,
     },
-    recoUserName: {
-      fontSize: 13,
-      fontWeight: "900",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    recoUserSub: {
-      marginTop: 2,
-      fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+    modalScrollContent: {
+      paddingBottom: 16,
     },
 
     // Follow picker list rows
@@ -734,39 +568,44 @@ function createStyles(COLORS, ui) {
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 8,
+      minHeight: 64,
     },
     listRowActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     rowTitleLine: {
       flexDirection: "row",
       alignItems: "flex-start",
       justifyContent: "space-between",
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 6,
     },
     rowTitle: {
-      flex: 1,
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
-      paddingRight: 10,
+      paddingRight: 0,
+      flexGrow: 1,
+      flexShrink: 1,
+      flexBasis: 160,
+      minWidth: 0,
     },
     activeBadge: {
-      paddingHorizontal: 8,
-      paddingVertical: 3,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
       borderRadius: 999,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      backgroundColor: COLORS.SURFACE_TONAL,
       borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      borderColor: COLORS.CARD_BORDER,
       alignSelf: "flex-start",
+      maxWidth: '100%',
     },
     activeBadgeText: {
-      fontSize: 10,
-      fontWeight: "900",
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
     },
     pickerEmptyInline: {
       paddingVertical: 18,
@@ -777,43 +616,34 @@ function createStyles(COLORS, ui) {
       borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
     tutorialQuestionLabel: {
-      fontSize: 11,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
-      marginBottom: 4,
+      color: COLORS.ON_SURFACE_TONAL,
+      marginBottom: 8,
     },
     tutorialTextArea: {
       marginTop: 8,
-      minHeight: 120,
+      minHeight: 144,
       borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      fontSize: 13,
-      lineHeight: 19,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       color: COLORS.TEXT_ON_LIGHT,
     },
     tutorialHelperText: {
       marginTop: 8,
-      fontSize: 11,
-      lineHeight: 16,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      opacity: 0.9,
     },
     modeErrorText: {
       marginTop: 10,
-      fontSize: 11,
-      lineHeight: 16,
-      color: "#B91C1C",
+      color: COLORS.ERROR,
       textAlign: "center",
     },
-  }, ui));
+  }, ui, {"globalSummaryLabel":"button","globalSummaryText":"description","homeActionCardTitle":"sectionTitle","homeActionCardDescription":"description","homeActionButtonText":"button","recoTitle":"sectionTitle","recoSummaryText":"description","recoSectionLabel":"sectionTitle","qnaIntroTitle":"sectionTitle","qnaIntroText":"description","targetLabel":"button","targetName":"button","goldButtonText":"button","neutralButtonText":"button","historyCardTitle":"sectionTitle","historyEntryText":"button","modalTitle":"modalTitle","modalLoadingText":"description","modalEmptyText":"description","rowTitle":"button","activeBadgeText":"meta","tutorialQuestionLabel":"button","tutorialTextArea":"body","tutorialHelperText":"description","modeErrorText":"description"}));
 }
 

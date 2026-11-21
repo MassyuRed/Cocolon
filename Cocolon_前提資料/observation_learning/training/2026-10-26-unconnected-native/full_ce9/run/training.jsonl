@@ -1,0 +1,9 @@
+{"step": 1, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.0015879335114732385, "loss_type": "full_assistant_ce", "target_tokens": 1331, "gradient_norm": 0.05090430751442909}
+{"step": 2, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.1436745822429657, "loss_type": "full_assistant_ce", "target_tokens": 2913, "gradient_norm": 0.8798174262046814}
+{"step": 3, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.15703777968883514, "loss_type": "full_assistant_ce", "target_tokens": 3238, "gradient_norm": 0.8482828140258789}
+{"step": 4, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.002025732770562172, "loss_type": "full_assistant_ce", "target_tokens": 2228, "gradient_norm": 0.4059763550758362}
+{"step": 5, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.11388731747865677, "loss_type": "full_assistant_ce", "target_tokens": 2913, "gradient_norm": 0.6248800158500671}
+{"step": 6, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.130875825881958, "loss_type": "full_assistant_ce", "target_tokens": 3238, "gradient_norm": 0.6132944822311401}
+{"step": 7, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.0017347013344988227, "loss_type": "full_assistant_ce", "target_tokens": 1585, "gradient_norm": 0.11566665023565292}
+{"step": 8, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.0925913155078888, "loss_type": "full_assistant_ce", "target_tokens": 2913, "gradient_norm": 0.479495644569397}
+{"step": 9, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.1104748472571373, "loss_type": "full_assistant_ce", "target_tokens": 3238, "gradient_norm": 0.515392005443573}

@@ -2,6 +2,7 @@
 doc_id: piece_source_role_matrix_20260807
 title: "Piece cross-core source role matrix"
 created_at: "2026-08-07 JST"
+revision_date: "2026-11-15 JST"
 decision_owner: "Mash"
 operational_owner: "Karen"
 workstream: "Cocolon / Piece / EmlisAI / Analysis"
@@ -19,6 +20,8 @@ production_effect: "exact0"
 
 ## 1. role class
 
+2026-11-15の限定実装差分は`corrected_observation`だけに追加する。normal／pre-question／refinedの既存契約と保存済みlineageは変更しない。source実装・RN境界と、検証・SQL適用・通常反映・CIの成否を分け、最終結果は[補助設計§9.72](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ戻る。build／TestFlight／本人実機は保留し、新実4B・一般品質の成立へ換算しない。 8月のdesign-only／runtime exact0は当時のPCE-2単位の状態として保持する。
+
 PCE-2では、`source role`を一つの配列へ潰さず、次の2 classへ分ける。
 
 ```text
@@ -32,19 +35,21 @@ lineage control role:
 
 ## 2. canonical roles
 
-| role | class | body owner | normal | pre-question | refined | Piece text material | persisted body-free lineage |
-|---|---|---|---:|---:|---:|---:|---:|
-| `original_input` | semantic | saved input owner | exact1 | exact1 | exact1 | allowed | required |
-| `supplemental_answer` | semantic | question / answer owner | exact0 | exact0 | exact1 | allowed only as separate role | conditional required |
-| `emlis_observation_result` | control | Emlis result owner | exact1 | exact1 | exact1 | forbidden | required |
-| `question_need_decision` | control | question system owner | exact0 | exact1 | exact1 | forbidden | conditional required |
-| `piece_generation_eligibility` | control | cross-core adapter | exact1 | exact1 | exact1 | forbidden | required |
-| `analysis_inference` | forbidden | Analysis | exact0 | exact0 | exact0 | forbidden | forbidden |
-| `analysis_route` | forbidden | Analysis | exact0 | exact0 | exact0 | forbidden | forbidden |
-| `simulated_route` | forbidden | simulation owner | exact0 | exact0 | exact0 | forbidden | forbidden |
-| `emlis_visible_body` | forbidden | Emlis surface owner | exact0 | exact0 | exact0 | forbidden | forbidden |
-| `emlis_internal_artifact` | forbidden | Emlis internal owner | exact0 | exact0 | exact0 | forbidden | forbidden |
-| `public_hidden_meta` | forbidden | public boundary owner | exact0 | exact0 | exact0 | forbidden | forbidden |
+| role | class | body owner | normal | pre-question | refined | corrected | Piece text material | persisted body-free lineage |
+|---|---|---|---:|---:|---:|---:|---|---|
+| `original_input` | semantic | saved input owner | exact1 | exact1 | exact1 | exact1 | allowed | required |
+| `supplemental_answer` | semantic | question / answer owner | exact0 | exact0 | exact1 | ANSWER0:0／併存:1..3 | 別partition。選択最新の有効部分と先行有効REVISEだけ | latest answerの条件付きidentity／commitment、全回答はprivate fence |
+| `interpretation_correction` | semantic | saved interpretation-correction owner | exact0 | exact0 | exact0 | 1..N | 各本人説明の現在有効な範囲だけ | latest-only private four-key binding、全履歴はprivate fence |
+| `emlis_observation_result` | control | Emlis result owner | exact1 | exact1 | exact1 | exact1 | forbidden | required |
+| `question_need_decision` | control | question system owner | exact0 | exact1 | exact1 | ANSWER0:0／併存:1 | forbidden | 明示選択した最新回答の実QUESTION event |
+| `ai_interpretation_target` | control | Emlis saved target owner | exact0 | exact0 | exact0 | exact1 | forbidden | target event identity only |
+| `piece_generation_eligibility` | control | cross-core adapter | exact1 | exact1 | exact1 | exact1 | forbidden | required |
+| `analysis_inference` | forbidden | Analysis | exact0 | exact0 | exact0 | exact0 | forbidden | forbidden |
+| `analysis_route` | forbidden | Analysis | exact0 | exact0 | exact0 | exact0 | forbidden | forbidden |
+| `simulated_route` | forbidden | simulation owner | exact0 | exact0 | exact0 | exact0 | forbidden | forbidden |
+| `emlis_visible_body` | forbidden | Emlis surface owner | exact0 | exact0 | exact0 | exact0 | forbidden | forbidden |
+| `emlis_internal_artifact` | forbidden | Emlis internal owner | exact0 | exact0 | exact0 | exact0 | forbidden | forbidden |
+| `public_hidden_meta` | forbidden | public boundary owner | exact0 | exact0 | exact0 | exact0 | forbidden | forbidden |
 
 ## 3. original_input
 
@@ -84,6 +89,7 @@ cardinality:
   normal exact0
   pre-question exact0
   refined exact1
+  corrected ANSWER0: exact0 / explicit answer selection: 1..3 real envelopes
 
 identity:
   supplemental_answer_identity
@@ -97,16 +103,28 @@ control-plane owner:
   no
 ```
 
-refined stageでは、supplemental answerをoriginalと別のsemantic partitionとして扱う。
+refinedおよび実回答併存corrected stageでは、supplemental answerをoriginalと別のsemantic partitionとして扱う。併存correctedの複数実回答envelopeを、そのまま全て本文へ連結する意味ではない。
 
 必須条件:
 
 1. originalと別identityである。
 2. originalと別commitmentである。
 3. corresponding `question_need_decision_identity`が存在する。
-4. refined Emlis result identityが両commitmentにbindされる。
+4. 該当refined／corrected Emlis result identityが元sourceと選択回答のcommitmentにbindされる。
 5. source roleを失わず、本文生成後もlineageへ残る。
 6. originalの欠落を補うplaceholderとして使わない。
+
+### correctedの本人説明とAI対象
+
+`interpretation_correction`は実`USER_INTERPRETATION_CORRECTION` envelopeの本人説明、`supplemental_answer`は実ANSWERの別roleである。AI対象引用は`ai_interpretation_target` controlだけに保持する。ANSWER0の既存2 semantic／2 controlsと、nullのquestion／supplemental identity・version／commitmentは保持する。
+
+実ANSWER1〜3の後にproper訂正を保存した併存時だけ、semantic rolesは`[original_input,supplemental_answer,interpretation_correction]`、controlsは`[emlis_observation_result,question_need_decision,ai_interpretation_target]`。公開source-ref7keysは増やさず、最新CORRECTED OBSと、明示した最新実ANSWER／その実QUESTION eventの条件付きpairを結ぶ。最新ANSWERのversion／commitmentはprivate observation lineageへ保持する。
+
+corrected-only `interpretation_correction_source`は従来4keys（correction_id／source_version／explanation_commitment／target_event_id）のまま最新訂正を指す。全訂正はprivate fenceのsource／prior_sources／prefix／全events／thread_dataへ、全実回答とcheckpointは同fence内の`answer_sources`／`answer_checkpoints`へ保持する。これらは公開lineage／DTOではなく、外側の`meaning_checkpoint(s)`へ混在させない。
+
+最新の読めるADDまたは原完全節へのREVISE／WITHDRAWを明示選択する。先行REVISEの有効置換は保持するが、先行独立ADDは本文へ加えない。読める先行ADDは既存shared compatibility検査に残し、opaqueな先行ADDは履歴controlのみ、opaqueな選択最新回答は拒否する。proper訂正は全回答の後で、異なる原入力の完全な節に対する単一REVISE／WITHDRAWに限る。回答／置換節への再訂正、曖昧な原／回答対象、既撤回節の復活、一般自由文は未対応。
+
+COMPLETED／FINAL・最新CORRECTED OBS、原active nonempty・3body block・short_essay・独立S7・権利を保持する。訂正回数へ問いの3回上限を流用しない。各sourceと受領／完了・prefix・本人説明時刻を全履歴で再照合し、RN取得・preview・結果不明save復元では最新ANSWERと表示OBSの両IDを固定する。API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5331f6c8011147`をsource反映済み。通常DBへmigration20261115011424を適用し、API／workerとも24bc228dでLive、Piece／AnalysisとRNのCI成功を確認した。併存経路の通常DB／API反映と対応RN sourceの限定単位は完了。§9.71のANSWER0経路と通常d10c3f86の先行完了を維持する。 検証／通常反映の終状態は[補助設計§9.72](../../Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-corrections-normal-rollout-20261115)へ集約する。
 
 ## 5. question_need_decision
 
@@ -120,9 +138,11 @@ semantic source:
 required:
   pre-question exact1
   refined exact1
+  corrected explicit answer selection exact1
 
 forbidden:
   normal
+  corrected ANSWER0
 ```
 
 question need decisionは、なぜfuture stageへ進んだかを証明するcontrol-plane identityである。質問本文、回答候補、判断理由をPiece contentへ渡さない。
@@ -180,19 +200,19 @@ decision ownerは上位cross-core adapterである。Emlis内部module、Piece g
 
 ## 8. stage matrix
 
-| invariant | normal | pre-question | refined |
-|---|---:|---:|---:|
-| original input identity | exact1 | exact1 | exact1 |
-| original bundle commitment | exact1 | exact1 | exact1 |
-| Emlis result identity | exact1 | exact1 | exact1 |
-| terminal success required for eligibility | yes | yes | yes |
-| question decision identity | exact0 | exact1 | exact1 |
-| supplemental identity | exact0 | exact0 | exact1 |
-| supplemental bundle commitment | exact0 | exact0 | exact1 |
-| semantic roles | `[original]` | `[original]` | `[original,supplemental]` |
-| original remains root | yes | yes | yes |
-| answer assumed | no | no | yes, separately saved |
-| Analysis dependency | exact0 | exact0 | exact0 |
+| invariant | normal | pre-question | refined | corrected |
+|---|---:|---:|---:|---:|
+| original input identity | exact1 | exact1 | exact1 | exact1 |
+| original bundle commitment | exact1 | exact1 | exact1 | exact1 |
+| Emlis result identity | exact1 | exact1 | exact1 | exact1, latest CORRECTED OBS |
+| terminal success required for eligibility | yes | yes | yes | yes |
+| question decision identity | exact0 | exact1 | exact1 | exact0/null |
+| supplemental identity | exact0 | exact0 | exact1 | exact0/null |
+| supplemental bundle commitment | exact0 | exact0 | exact1 | exact0/null |
+| semantic roles | `[original]` | `[original]` | `[original,supplemental]` | `[original,interpretation_correction]` |
+| original remains root | yes | yes | yes | yes |
+| answer assumed | no | no | yes, separately saved | no, first correction1/ANSWER0 |
+| Analysis dependency | exact0 | exact0 | exact0 | exact0 |
 
 ## 9. identity / body matrix
 
@@ -202,6 +222,8 @@ decision ownerは上位cross-core adapterである。Emlis内部module、Piece g
 | original input body | no | no | yes, internal authorized retrieval | no |
 | supplemental ID/version/commitment | refined only | refined only | refined internal retrieval | no |
 | supplemental body | no | no | refined internal retrieval | no |
+| corrected explanation identity/version/commitment and target event ID | corrected private only | corrected private four-key binding only | explanation only, authenticated separate source | no additional public key |
+| corrected explanation / AI target body | no | no | qualified explanation only; AI target is control | no |
 | question decision identity | conditional | conditional | no body retrieval for Piece | no |
 | question decision body | no | no | no | no |
 | Emlis result identity/state | yes | yes | no body retrieval for Piece | no |
@@ -221,7 +243,7 @@ saved_input.owner_user_id
 
 このequalityを満たさないsource referenceは、bodyを読まずにrejectする。RNから送られたowner IDだけで成立させない。
 
-supplemental answerも同じauthenticated principalへbindされなければならない。cross-user original/supplemental combinationは禁止する。
+supplemental answerも同じauthenticated principalへbindされなければならない。cross-user original/supplemental combinationは禁止する。correctedの本人説明も同じowner・original source・thread・対象eventへ束縛し、別人／別版／別訂正との組合せを拒否する。
 
 ## 11. version and immutability
 
@@ -236,6 +258,8 @@ record mutation:
   commitmentが変われば別source versionとして扱う。
   existing Piece lineageを暗黙更新しない。
 ```
+
+correctedでは説明・対象・訂正版の変更を旧lineageへ上書きせず、最新CORRECTED OBSと訂正sourceの版／commitmentを再照合する。RNの明示選択・source GET・保存不明の復元は同OBS／stageだけを認める。
 
 現在のadapter candidateは`emlis.current_input_bundle.v1`である。将来saved source schemaが変わる場合、旧versionの意味を上書きせず、新versionを追加する。
 

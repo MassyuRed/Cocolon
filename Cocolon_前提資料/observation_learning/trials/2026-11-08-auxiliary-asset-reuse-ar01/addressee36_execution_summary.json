@@ -1,0 +1,139 @@
+{
+  "schema": "ar01.addressee36.actual_execution_summary.v1",
+  "date_jst": "2026-11-09",
+  "status": "COMPLETED_NOT_ADOPTED",
+  "uploaded_exact_approved_payload": true,
+  "private_pod_archive": {
+    "sha256": "030d356ac3f953ca0ffea4922be0115ed5581e9fa0c928a7ed48e88c5d73a5b9",
+    "bytes": 40215710,
+    "manifest_members_verified": 1790
+  },
+  "actual": {
+    "teachers": 36,
+    "target_expression_edits": 7,
+    "source_edits": 0,
+    "updates": 36,
+    "learning_rate": 0.00001,
+    "training_compute_seconds": 34.935888511827216,
+    "trial_seconds": 105.47638953104615,
+    "new_generations": 34,
+    "all_stop": true,
+    "generation_seconds": 43.40654259594157,
+    "old_before_generations_reused": 34,
+    "model_loads": 2,
+    "tensor_count": 112,
+    "parameters": 3833856,
+    "finite_float32_cpu_verified": true,
+    "saved_reload_exact": true,
+    "changed_tensors": 112,
+    "changed_replies": 15,
+    "unchanged_replies": 19,
+    "peak_allocated_bytes": 9623211520,
+    "peak_reserved_bytes": 9814671360
+  },
+  "candidate_identity": {
+    "adapter_model.safetensors": "6b3df8c9efdda1e97987b3479fd2b5d25f1520cec84883f228f285f087f7a794",
+    "adapter_config.json": "65bade7bf109ff316ee92fbce4a8e60487c958f23751fde8011abea69e7b50ae"
+  },
+  "restoration": {
+    "status": "RESTORED_ORIGINAL_SERVICE",
+    "previous_pid": 24179,
+    "server_sha256": "f95fc7ce13ce197916b753b7cebb3946243225a0139d40e528908d62e27b2371",
+    "original_analysis_adapter": {
+      "adapter_model.safetensors": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+      "adapter_config.json": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c"
+    },
+    "maximum_trial_seconds": 300,
+    "new_model_adopted": false,
+    "trial_returncode": 0,
+    "restored_pid": 26784,
+    "original_launch_reused_exact": true,
+    "health_http_status": 200,
+    "original_analysis_adapter_after": {
+      "adapter_model.safetensors": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+      "adapter_config.json": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c"
+    },
+    "trial_succeeded": true
+  },
+  "sql": {
+    "schema": "ar01.addressee36.local_sql_replay.v1",
+    "purpose": "PERSISTENCE_AND_READ_BEHAVIOR_ONLY_NOT_MEANING_QUALITY",
+    "application_source_commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+    "captured_preparation_source_commit": "a98c6e59cc9ab0d3e1691a969736651c2bf6a88f",
+    "current_source_overlay_sha256": {
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "e31430b76d9f22d14ae31aa6bc3f99d5f74a64f23ebbe82fd31056640ec5c41f",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_cognition.py": "6d0a9f61527d61f3e71dd12b5f1546612b023ebc139038d583be216c89dd947e",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py": "66356c9dcbb0533bf0421ff36e4b0c79a4f205d0f0971905d61f4653cc777889"
+    },
+    "capture_files_sha256": {
+      "pack": "95455c44c219fb8a543bb593b8159fc26572166dd0b1477f36edb1b2464630c5",
+      "all_results": "a43660aabce2885432339d4d21ecc2c2c6197dadebf81f8cdfb24b2944a41899"
+    },
+    "planned_evaluation_captures": 26,
+    "actual_evaluation_captures": 26,
+    "teacher_diagnostic_captures_not_replayed": 8,
+    "not_generated_count": 0,
+    "new_generations": 0,
+    "network_requests": 0,
+    "real_database_requests": 0,
+    "response_rewrites": 0,
+    "retries": 0,
+    "outcomes": {
+      "FINAL_SAVED_AND_REOPENED": 26
+    },
+    "by_phase": {
+      "after36": {
+        "FINAL_SAVED_AND_REOPENED": 26
+      }
+    },
+    "capture_and_sql_ref_equal": 18,
+    "capture_user_id_projection_ref_differences": 8,
+    "checks_passed": true,
+    "saved_count": 26,
+    "all_saved_body_hashes_match": true,
+    "existing_provider_outer_whitespace_removed_count": 26,
+    "all_source_stores_and_get_events_unchanged": true,
+    "finite_reader_report_verdict_counts": {
+      "UNASSESSED": 25,
+      "NO_CONFLICT_IN_CHECKED_SCOPE": 1
+    },
+    "finite_reader_clause_counters": {
+      "reply_segment_count": 33,
+      "parsed_reply_count": 1,
+      "checked_reply_count": 1,
+      "unassessed_reply_count": 32,
+      "source_witness_count": 9
+    },
+    "all_full_reply_semantic_coverage_false": true,
+    "full_meaning_acceptance": false
+  },
+  "quality": {
+    "root_read_all_sources_before_after": true,
+    "independent_read_all_sources_before_after": true,
+    "normal_adoption": false,
+    "formal_product_acceptance": false,
+    "limited_improvement_axes": [
+      "unsupported realization removed",
+      "generic greeting removed",
+      "prior knowing plus current regret received"
+    ],
+    "remaining_or_regressed_axes": [
+      "inappropriate recipient address",
+      "requester-recipient reversal",
+      "first-person narrator shift",
+      "emotion object changed",
+      "advice substituted for writer intent",
+      "ungrammatical object composition"
+    ],
+    "isolated_pronoun_causal_effect_established": false,
+    "fresh_generalization": false
+  },
+  "normal_system_changed": false,
+  "production_source_changed": false,
+  "render_deployment": false,
+  "real_database_writes": false,
+  "rn_build": false,
+  "structure_map_delta": "NONE",
+  "ar01_complete": false,
+  "all_auxiliary_assets_complete": false
+}

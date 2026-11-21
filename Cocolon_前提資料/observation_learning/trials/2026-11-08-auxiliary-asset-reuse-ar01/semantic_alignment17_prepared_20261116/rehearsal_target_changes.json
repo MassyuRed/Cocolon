@@ -1,0 +1,121 @@
+[
+  {
+    "id": "T01_manual10",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n1.explanation",
+      "nodes.n2.explanation",
+      "nodes.n3.explanation",
+      "nodes.n4.explanation",
+      "nodes.n5.explanation",
+      "nodes.n6.explanation",
+      "nodes.n7.explanation",
+      "edges.0.explanation",
+      "edges.1.explanation",
+      "edges.2.explanation",
+      "edges.3.explanation",
+      "overview.summary"
+    ],
+    "evidence_removed_fields": [
+      12,
+      14
+    ],
+    "old_target_sha256": "7143264f71bb87755e858a9a3a144c182fe236b035d4c95baaac054594879bae",
+    "new_target_sha256": "2839c2db4c5f6b75f279ad303129b7f265e0f73098e6e8bc1fd2f69725463302"
+  },
+  {
+    "id": "T02_music",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "edges.1.explanation"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "9b082f1931e03a0a914f71420c181df5b2e9f351184565c489568e857568df22",
+    "new_target_sha256": "b99a60b9dfd3f923ec7396837ec8caefcfe32f517004a8df2bad31b750791bfd"
+  },
+  {
+    "id": "T03_chair",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n1.explanation",
+      "nodes.n2.explanation",
+      "edges.0.explanation",
+      "overview.summary"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "d6a2978026b0a4e1c5bddb78bce3b716dc5d753f74eb22659aba41db4c8b66dd",
+    "new_target_sha256": "e6a89ead3a25243b38449882702a79cebc391e9f431c8dcdf7cb5ae71a7a1fb2"
+  },
+  {
+    "id": "T04_book",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n2.explanation",
+      "nodes.n3.explanation",
+      "edges.0.explanation",
+      "overview.summary"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "e477db9916bbb99e26c1dc36d522c8ee699837569333cea46c508335db77bff3",
+    "new_target_sha256": "896f8f37d28990619a3634c2cad0b1f45b807c0d46d66d56d5bee9245880371f"
+  },
+  {
+    "id": "T05_listening",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n2.explanation",
+      "overview.summary"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "91a49a8e6636d314b99027e805d6e59bec85922b4aac63a913ef2a5b04b2f153",
+    "new_target_sha256": "aac69cd0be06be31a03a48690f8d2647f12dd0936ec90f28b68ed9276579e7b0"
+  },
+  {
+    "id": "T06_unfinished",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n2.explanation",
+      "edges.0.explanation",
+      "overview.summary"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "e60c347fd0b0fc9e3356415949d4be56ef3146dd6bddf30b4101ed1f01709dbd",
+    "new_target_sha256": "93ba33b48c318b90336bbef5e2750148a9fa1f1b96a1dfa85796fcb45a39b0a5"
+  },
+  {
+    "id": "T07_future",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n1.explanation",
+      "edges.0.explanation"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "0e1a1e4518d0408d13dcd9d9cd1a3f8e61552bf3996c0ba613472024bcd1aac2",
+    "new_target_sha256": "e9666fc45ec7445bf3a2e1478255d4d04862e3f61ff1448ce4ba58042cd645a5"
+  },
+  {
+    "id": "T08_other",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n1.explanation",
+      "edges.0.explanation"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "17f313142c4f0bcf58fd3f26ec4370012d92ff3fca8c57a096e9348150fd0d3d",
+    "new_target_sha256": "026a74da3716b95b265e940cfdd38834bdeb1b2d50c25c71c8d5626db546e105"
+  },
+  {
+    "id": "T09_time",
+    "source_originals_unchanged": true,
+    "style_paths": [
+      "nodes.n1.title",
+      "nodes.n1.explanation",
+      "nodes.n2.explanation",
+      "edges.0.explanation",
+      "overview.summary"
+    ],
+    "evidence_removed_fields": [],
+    "old_target_sha256": "c7152e1d2bcdc654410d794371ca1ed9632a3112d07b26eee5f4d775f66b16d7",
+    "new_target_sha256": "6bed4e8409cd6389012380f300d970449372279c898ac10580095b540bdb68bb"
+  }
+]

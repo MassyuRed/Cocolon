@@ -1,12 +1,10 @@
 import Ionicons from "react-native-vector-icons/Ionicons";
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState, useMemo } from "react";
 import {
-  ActivityIndicator,
   Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -18,14 +16,12 @@ import {
 // Supabase Auth
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
-import {
-  cancelEmotionPiece,
-  previewEmotionPiece,
-  publishEmotionPiece,
-} from "../lib/api/home/emotionPieceApi";
+import { useEmlisThread } from "./input/useEmlisThread";
+import { useEmlisQuestionPreference } from "./input/useEmlisQuestionPreference";
+import { useAppRuntime } from "../AppRuntimeContext";
+import EmlisThreadModal from "./input/EmlisThreadModal";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
-import { markAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
-import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
+import { useHomeState } from "../features/home/useHomeState";
 import { useHomeActions } from "../features/home/useHomeActions";
 
 // テーマ
@@ -35,6 +31,7 @@ import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 
 // UI (Design System)
+import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -44,8 +41,6 @@ import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
-import TodayQuestionCard from "../components/TodayQuestionCard";
-import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import {
   getTutorialEmlisReplyText,
   TUTORIAL_EMLIS_REPLY,
@@ -68,9 +63,12 @@ import { useInputDraftPersistence } from "./input/useInputDraftPersistence";
 import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
 import { useInputKeyboardAwareMemo } from "./input/useInputKeyboardAwareMemo";
 import InputActionArea from "./input/InputActionArea";
+import InputPieceActionArea from "./input/InputPieceActionArea";
+import { isPieceBitmapSaveAdmitted, supportsPieceBitmapCreation } from "../features/piece/pieceRenderer";
 import InputCategorySection from "./input/InputCategorySection";
 import InputEmotionSection from "./input/InputEmotionSection";
 import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
+import HomeScreenIntro from "./input/HomeScreenIntro";
 import InputMemoSection from "./input/InputMemoSection";
 import InputPiecePreviewController from "./input/InputPiecePreviewController";
 import InputStartupModals from "./input/InputStartupModals";
@@ -120,11 +118,27 @@ async function refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState) {
   }
 }
 
+// One opaque key per confirmed saved-input selection. The already-installed
+// index.js random-values polyfill supplies entropy; never fall back to a clock,
+// source ID, owner ID or Math.random. Failure cannot fail the input save itself.
+function buildSavedPieceInput(savedInputId, expectedUserId) {
+  if (typeof savedInputId !== "string" ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
+      savedInputId === "00000000-0000-0000-0000-000000000000") return null;
+  try {
+    const bytes = new Uint8Array(16);
+    globalThis.crypto.getRandomValues(bytes);
+    const idempotencyKey = "piece-preview-" + Array.from(bytes,
+      value => value.toString(16).padStart(2, "0")).join("");
+    return Object.freeze({ savedInputId, expectedUserId, idempotencyKey });
+  } catch { return null; }
+}
+
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
  */
-export default function InputScreen({ navigation, route }) {
+export default function InputScreen({ navigation, route, onInitialInputSettled, appStartupReady = true, saveRecovery }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
   const { session } = useAuth();
@@ -140,6 +154,39 @@ export default function InputScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const currentUserId = String(session?.user?.id || "").trim();
+  const { isFeatureEnabled } = useAppRuntime();
+  const feedbackOwner = useRef({ id: currentUserId, epoch: 0 });
+  if (feedbackOwner.current.id !== currentUserId) feedbackOwner.current = { id: currentUserId, epoch: feedbackOwner.current.epoch + 1 };
+  useEffect(() => () => { feedbackOwner.current = { id: "", epoch: feedbackOwner.current.epoch + 1 }; }, []);
+  const emlisThread = useEmlisThread({ userId: currentUserId, enabled: isFeatureEnabled("emlis_threads_enabled", false) && !isTutorialMode });
+  const emlisQuestionPreference = useEmlisQuestionPreference({ userId: currentUserId, enabled: !isTutorialMode });
+  // Piece keeps only a saved ID/key, not the input or Emlis body. A render-time
+  // owner/tutorial boundary conceals a previous selection before effect cleanup.
+  const pieceInputLifetime = useRef(null);
+  if (!pieceInputLifetime.current || pieceInputLifetime.current.owner !== feedbackOwner.current ||
+      pieceInputLifetime.current.tutorial !== isTutorialMode ||
+      pieceInputLifetime.current.reset !== tutorialResetToken) {
+    pieceInputLifetime.current = { owner: feedbackOwner.current,
+      tutorial: isTutorialMode, reset: tutorialResetToken, ticket: null };
+  }
+  const renderedPieceLifetime = pieceInputLifetime.current;
+  const [savedPieceInput, setSavedPieceInput] = useState(null);
+  const pieceInputMounted = useRef(false);
+  useEffect(() => {
+    pieceInputMounted.current = true;
+    return () => {
+      pieceInputMounted.current = false;
+      pieceInputLifetime.current.ticket = null;
+    };
+  }, []);
+  useEffect(() => { setSavedPieceInput(null); }, [currentUserId, isTutorialMode, tutorialResetToken]);
+  useEffect(() => {
+    const unsubscribe = navigation?.addListener?.("blur", () => {
+      pieceInputLifetime.current.ticket = null;
+      setSavedPieceInput(null);
+    });
+    return typeof unsubscribe === "function" ? unsubscribe : undefined;
+  }, [navigation]);
   const tutorialDisplayName = useMemo(() => {
     const metadata = session?.user?.user_metadata || {};
     return (
@@ -175,6 +222,13 @@ export default function InputScreen({ navigation, route }) {
     setTutorialStep,
   });
 
+  useEffect(() => {
+    resetInputFeedbackModal();
+    setSubmitting(false);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+  }, [currentUserId, resetInputFeedbackModal]);
+
   const {
     keyboardInset,
     inputMaxHeight,
@@ -204,12 +258,12 @@ export default function InputScreen({ navigation, route }) {
   const [sendEmotionNotification, setSendEmotionNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [piecePreviewVisible, setPiecePreviewVisible] = useState(false);
-  const [piecePreviewLoading, setPiecePreviewLoading] = useState(false);
-  const [piecePublishLoading, setPiecePublishLoading] = useState(false);
   const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
   const wasTutorialModeRef = useRef(false);
 
   const resetLocalInputState = useCallback(() => {
+    pieceInputLifetime.current.ticket = null;
+    setSavedPieceInput(null);
     setSelectedEmotions([]);
     setMemo("");
     setMemoAction("");
@@ -220,8 +274,6 @@ export default function InputScreen({ navigation, route }) {
     setIsSecret(false);
     setSendEmotionNotification(true);
     setPiecePreviewVisible(false);
-    setPiecePreviewLoading(false);
-    setPiecePublishLoading(false);
     setPiecePreviewPayload(null);
     resetInputFeedbackModal();
     currentScrollYRef.current = 0;
@@ -284,7 +336,6 @@ useEffect(() => {
   }
 }, [navigation, resetLocalInputState, route?.params?.tutorialFinishedAt]);
 
-const [isTodayQuestionExpanded, setIsTodayQuestionExpanded] = useState(false);
 const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
   useState(false);
 
@@ -303,81 +354,38 @@ const homeState = useHomeState({
 });
 
   const {
-    activeStartupPopup,
     advanceStartupPopupQueue,
     closeStartupPopupWindow,
-    globalEmotionUsers,
+    initialHomeReadComplete,
+    homeReadError,
     isNoticeStartupPopupVisible,
-    isTodayQuestionStartupPopupVisible,
     isTutorialStartupPopupVisible,
     loadHomeState,
     noticeFeatureEnabled,
     noticeLoading,
     noticePopup,
-    noticeUnreadCount,
     registerInputInteraction,
     rememberDismissedNotice,
-    rememberDismissedTodayQuestionDay,
     setNoticePopup,
-    setNoticeUnreadCount,
     startupModalVisible,
     startupQueuePreparing,
-    todayQuestionBundle,
-    todayQuestionLoading,
   } = homeState;
 
-  const pieceQuota = homeState.pieceQuota;
-  const setPieceQuota = homeState.setPieceQuota;
 
 
 const {
-  todayQuestionSubmitting,
-  handleSubmitTodayQuestion,
   markCurrentNoticePopupSeen,
   markCurrentNoticeRead,
 } = useHomeActions({
   noticePopup,
-  todayQuestionBundle,
-  activeStartupPopupKind: activeStartupPopup?.kind,
-  loadHomeState,
-  advanceStartupPopupQueue,
   rememberDismissedNotice,
-  rememberDismissedTodayQuestionDay,
-  setNoticeUnreadCount,
   setNoticePopup,
-  showToast,
 });
-
-useEffect(() => {
-  setIsTodayQuestionExpanded(false);
-}, [todayQuestionBundle?.service_day_key, todayQuestionBundle?.question?.question_id]);
 
 const isWelcomeNoticeStartupPopup = useMemo(
   () => isWelcomeNoticePopupCandidate(noticePopup),
   [noticePopup],
 );
-const isTodayQuestionAnswered = todayQuestionBundle?.answer_status === "answered";
-const todayQuestionReleaseStatus = String(todayQuestionBundle?.release_status || "");
-const isTodayQuestionLockedUntilDelivery =
-  todayQuestionReleaseStatus === "locked_until_delivery" && !todayQuestionBundle?.question;
-const hasTodayQuestionSlot =
-  !!todayQuestionBundle?.question ||
-  !!todayQuestionBundle?.has_current_question ||
-  isTodayQuestionLockedUntilDelivery;
-const todayQuestionStatusLabel = isTodayQuestionLockedUntilDelivery
-  ? "配信待ち"
-  : isTodayQuestionAnswered
-    ? "回答済み"
-    : "未回答";
-
-const handleDismissTodayQuestionModal = useCallback(() => {
-  const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
-  if (serviceDayKey) {
-    rememberDismissedTodayQuestionDay(serviceDayKey);
-  }
-  advanceStartupPopupQueue();
-}, [advanceStartupPopupQueue, rememberDismissedTodayQuestionDay, todayQuestionBundle?.service_day_key]);
-
 const handleOpenEmotionHistory = useCallback(() => {
   closeStartupPopupWindow();
 
@@ -401,54 +409,10 @@ const handleOpenEmotionHistory = useCallback(() => {
   }
 }, [closeStartupPopupWindow, navigation]);
 
-const handleOpenTodayQuestionHistory = useCallback(() => {
-  if (activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
-    closeStartupPopupWindow();
-  }
-
-  try {
-    navigation?.navigate?.("TodayQuestionHistory");
-    return;
-  } catch {
-    // noop
-  }
-
-  try {
-    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-    if (parent && typeof parent.navigate === "function") {
-      parent.navigate("Input", {
-        screen: "TodayQuestionHistory",
-      });
-      return;
-    }
-  } catch {
-    // noop
-  }
-
-  try {
-    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-    if (parent && typeof parent.navigate === "function") {
-      parent.navigate("Analysis", {
-        openTodayQuestionHistory: true,
-        openTodayQuestionHistoryAt: Date.now(),
-      });
-      return;
-    }
-  } catch {
-    // noop
-  }
-
-  try {
-    navigation?.navigate?.("Analysis", {
-      openTodayQuestionHistory: true,
-      openTodayQuestionHistoryAt: Date.now(),
-    });
-  } catch {
-    // noop
-  }
-}, [activeStartupPopup?.kind, closeStartupPopupWindow, navigation]);
-
-
+const handleOpenDeepInsight = useCallback(() => {
+  closeStartupPopupWindow();
+  navigation?.navigate?.("DeepInsight");
+}, [closeStartupPopupWindow, navigation]);
 
 const safeInsets = useSafeAreaInsets();
 
@@ -468,14 +432,8 @@ const safeInsets = useSafeAreaInsets();
     isTutorialMode &&
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
-  const shouldHideTodayQuestionForTutorial = isTutorialMode;
-  const shouldHideHomeSummaryForTutorial =
-    isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
   const shouldHideInputHistoryForTutorial =
     isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
-  const shouldShowHomeQuickActionsRow =
-    (!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot) ||
-    !shouldHideInputHistoryForTutorial;
 
   const shouldApplyTutorialInputSample =
     isInputTutorialStep && tutorialStep >= 3;
@@ -549,6 +507,7 @@ const safeInsets = useSafeAreaInsets();
     restorePendingInputDraft,
     discardPendingInputDraft,
     draftRestoreSavedAtLabel,
+    draftBootstrapComplete,
   } = useInputDraftPersistence({
     currentUserId,
     isTutorialMode,
@@ -557,11 +516,16 @@ const safeInsets = useSafeAreaInsets();
     startupQueuePreparing,
     startupModalVisible,
     noticeLoading,
-    todayQuestionLoading,
-    inputFeedbackModalVisible,
+    inputFeedbackModalVisible: inputFeedbackModalVisible || emlisThread.visible,
     applyInputDraft,
     showToast,
   });
+
+  useEffect(() => {
+    if (initialHomeReadComplete && draftBootstrapComplete && !startupQueuePreparing) {
+      onInitialInputSettled?.(currentUserId);
+    }
+  }, [initialHomeReadComplete, draftBootstrapComplete, startupQueuePreparing, currentUserId, onInitialInputSettled]);
 
   useEffect(() => {
     if (!tutorialResetToken) return;
@@ -588,13 +552,26 @@ const safeInsets = useSafeAreaInsets();
   const hasSelectedCategories = selectedCategories.length > 0;
   const canSubmit =
     !submitting &&
+    (isTutorialMode || emlisQuestionPreference.ready) &&
     hasMemoInput &&
     selectedEmotions.length > 0 &&
     hasSelectedCategories;
-  const canPreviewPiece =
-    !piecePreviewLoading &&
-    !piecePublishLoading &&
-    canSubmit;
+  // The old preview is a local tutorial demonstration only. Real Piece uses
+  // the confirmed saved-input host; disabling V2 never restores legacy HTTP.
+  const canPreviewPiece = isTutorialMode && canSubmit;
+  const pieceCreationSupported = supportsPieceBitmapCreation();
+  const piecePreviewEnabled = pieceCreationSupported && !isTutorialMode &&
+    isFeatureEnabled("piece_v2_preview_enabled", false) === true;
+  const mountSavedPieceInput =
+    pieceCreationSupported && savedPieceInput?.lifetime === pieceInputLifetime.current &&
+    !isTutorialMode && !submitting && !emlisThread.visible && !emlisThread.busy &&
+    !inputFeedbackModalVisible && !startupModalVisible &&
+    !draftRestoreModalVisible && !hasMemoInput && selectedEmotions.length === 0 &&
+    selectedCategories.length === 0 && activeField === null;
+  // Keep the existing saved-input host through runtime refresh so its
+  // body-free cancellation receipt/unknown outcome survives. The host hides
+  // all actions while OFF and clears on owner/input/key/lifetime changes.
+  const showSavedPieceInput = mountSavedPieceInput && piecePreviewEnabled;
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
     memo.trim().length > 0 ||
@@ -784,9 +761,6 @@ const safeInsets = useSafeAreaInsets();
     memo,
     memoAction,
     keyboardInset,
-    shouldHideTodayQuestionForTutorial,
-    hasTodayQuestionSlot,
-    todayQuestionLoading,
     noticeLoading,
     tutorialOverlayMetrics,
     syncTutorialTargetRect,
@@ -862,7 +836,7 @@ const safeInsets = useSafeAreaInsets();
     });
   };
 
-  const buildEmotionSubmitPayload = useCallback(() => {
+  const buildEmotionSubmitPayload = useCallback((receiveEmlisQuestions) => {
     const emotionDetails = selectedEmotions.map((e) => ({
       type: e.type,
       strength: e.strength,
@@ -874,6 +848,7 @@ const safeInsets = useSafeAreaInsets();
       created_at: new Date().toISOString(),
       is_secret: false,
       [EMOTION_NOTIFICATION_WIRE.submitField]: sendEmotionNotification,
+      receive_emlis_questions: receiveEmlisQuestions,
     };
 
     if (hasMemoInput && selectedCategories.length > 0) {
@@ -895,175 +870,79 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
 
-  const handlePreviewPiece = useCallback(async () => {
-    if (!canPreviewPiece) return;
-
+  // Preserve the existing tutorial sample without retaining raw-input Piece
+  // HTTP. Bind its callbacks to the already-existing owner/tutorial lifetime.
+  const handlePreviewPiece = useCallback(() => {
+    if (!pieceInputMounted.current || !isTutorialMode || !canPreviewPiece ||
+        pieceInputLifetime.current !== renderedPieceLifetime ||
+        feedbackOwner.current !== renderedPieceLifetime.owner) return;
     registerInputInteraction();
+    setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
+    setPiecePreviewVisible(true);
+  }, [canPreviewPiece, isTutorialMode, registerInputInteraction, renderedPieceLifetime]);
 
-    if (isTutorialMode) {
-      setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
-      setPiecePreviewVisible(true);
-      return;
-    }
-
-    setPiecePreviewLoading(true);
-    try {
-      const payload = buildEmotionSubmitPayload();
-      const preview = await previewEmotionPiece(payload);
-      const quota = preview?.quota && typeof preview.quota === "object"
-        ? preview.quota
-        : null;
-      if (quota) {
-        setPieceQuota(quota);
-      }
-      setPiecePreviewPayload(preview && typeof preview === "object" ? preview : null);
-      setPiecePreviewVisible(true);
-    } catch (e) {
-      console.warn("InputScreen: previewEmotionPiece failed", e);
-      Alert.alert(
-        "ピースの生成",
-        String(e?.message || "ピースの生成に失敗しました。")
-      );
-    } finally {
-      setPiecePreviewLoading(false);
-    }
-  }, [
-    buildEmotionSubmitPayload,
-    canPreviewPiece,
-    isTutorialMode,
-    registerInputInteraction,
-  ]);
-
-  const handleCancelPiecePreview = useCallback(async () => {
-    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
+  const handleCancelPiecePreview = useCallback(() => {
+    if (!pieceInputMounted.current || !isTutorialMode ||
+        pieceInputLifetime.current !== renderedPieceLifetime ||
+        feedbackOwner.current !== renderedPieceLifetime.owner) return;
     setPiecePreviewVisible(false);
-
-    if (isTutorialMode) {
-      setPiecePreviewPayload(null);
-      return;
-    }
-
-    if (!previewId) {
-      setPiecePreviewPayload(null);
-      return;
-    }
-    try {
-      await cancelEmotionPiece(previewId);
-    } catch (e) {
-      console.warn("InputScreen: cancelEmotionPiece failed", e);
-    } finally {
-      setPiecePreviewPayload(null);
-    }
-  }, [isTutorialMode, piecePreviewPayload?.preview_id]);
+    setPiecePreviewPayload(null);
+  }, [isTutorialMode, renderedPieceLifetime]);
 
   const handlePublishPiece = useCallback(async () => {
-    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
-    if (!previewId || piecePublishLoading) return;
-
-    if (isTutorialMode) {
-      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
-      setPiecePreviewVisible(false);
-      setPiecePreviewPayload(null);
-      void ensureTutorialPiecesSeed();
-      await clearPersistedInputDraft();
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-      Keyboard.dismiss();
-      const openedObservation = openInputFeedbackModal({
-        commentText: tutorialEmlisReplyText,
-        ...inputFeedbackEmotionMeta,
-        contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
-        emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
-        observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
-      });
-      if (openedObservation) {
-        setTutorialNavigateAfterReply(true);
-      } else {
-        completeTutorialAfterReply();
-      }
-      return;
+    const ownsResponse = () => pieceInputMounted.current && isTutorialMode &&
+      pieceInputLifetime.current === renderedPieceLifetime &&
+      feedbackOwner.current === renderedPieceLifetime.owner;
+    if (!ownsResponse() || !piecePreviewPayload?.preview_id) return;
+    const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+    void ensureTutorialPiecesSeed();
+    await clearPersistedInputDraft();
+    if (!ownsResponse()) return;
+    setPendingInputDraft(null);
+    setDraftRestoreModalVisible(false);
+    Keyboard.dismiss();
+    const openedObservation = openInputFeedbackModal({
+      commentText: tutorialEmlisReplyText,
+      ...inputFeedbackEmotionMeta,
+      contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
+      emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
+      observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
+    });
+    if (openedObservation) {
+      setTutorialNavigateAfterReply(true);
+    } else {
+      completeTutorialAfterReply();
     }
-
-    setPiecePublishLoading(true);
-    try {
-      const publishResult = await publishEmotionPiece(previewId);
-      const inputFeedback = publishResult?.input_feedback || null;
-      const inputFeedbackText = String(
-        inputFeedback?.comment_text || ""
-      ).trim();
-      const inputFeedbackAI = inputFeedback?.emlis_ai || null;
-      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
-
-      await clearPersistedInputDraft();
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-
-      setSelectedEmotions([]);
-      setMemo("");
-      setMemoAction("");
-      setSelectedCategories([]);
-      setShowMemoSection(true);
-      setActiveField(null);
-      resetMemoInputHeights();
-      setIsSecret(false);
-      Keyboard.dismiss();
-
-      setPiecePreviewVisible(false);
-      setPiecePreviewPayload(null);
-
-      const nextQuota = publishResult?.quota && typeof publishResult.quota === "object"
-        ? publishResult.quota
-        : null;
-      if (nextQuota) {
-        setPieceQuota(nextQuota);
-      }
-
-      await loadHomeState({ force: true, includeStartupCandidate: false });
-      await markAnalysisHomeSummaryDirty();
-
-      const openedObservation = inputFeedbackText
-        ? openInputFeedbackModal({
-            commentText: inputFeedbackText,
-            ...inputFeedbackEmotionMeta,
-            contextLabel: "ピースを生成しました",
-            emlisAiMeta: inputFeedbackAI,
-            observationStatus: inputFeedbackAI?.observation_status,
-          })
-        : false;
-      if (!openedObservation) {
-        showToast("ピースを生成しました");
-      }
-    } catch (e) {
-      console.warn("InputScreen: publishEmotionPiece failed", e);
-      Alert.alert(
-        "ピースの生成",
-        String(e?.message || "ピースの生成に失敗しました。")
-      );
-    } finally {
-      setPiecePublishLoading(false);
-    }
-  }, [
-    clearPersistedInputDraft,
-    completeTutorialAfterReply,
-    ensureTutorialPiecesSeed,
-    isTutorialMode,
-    loadHomeState,
-    openInputFeedbackModal,
-    piecePreviewPayload?.preview_id,
-    piecePublishLoading,
-    resetMemoInputHeights,
-    selectedEmotions,
-    setTutorialStep,
-    showToast,
-    tutorialEmlisReplyText,
-  ]);
+  }, [clearPersistedInputDraft, completeTutorialAfterReply, ensureTutorialPiecesSeed,
+    isTutorialMode, openInputFeedbackModal, piecePreviewPayload?.preview_id,
+    renderedPieceLifetime, selectedEmotions, setDraftRestoreModalVisible,
+    setPendingInputDraft, setTutorialNavigateAfterReply, tutorialEmlisReplyText]);
 
   const handleOk = async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canSubmit) return;
+    const receiveEmlisQuestions = isTutorialMode ? true : emlisQuestionPreference.capture();
+    if (typeof receiveEmlisQuestions !== "boolean") return;
+    const pieceLifetime = pieceInputLifetime.current;
+    const pieceTicket = {};
+    pieceLifetime.ticket = pieceTicket;
+    setSavedPieceInput(null);
+    const rememberSavedPieceInput = (savedInputId) => {
+      if (!pieceInputMounted.current || !ownsResponse() || isTutorialMode ||
+          pieceInputLifetime.current !== pieceLifetime || pieceLifetime.ticket !== pieceTicket ||
+          !supportsPieceBitmapCreation() ||
+          isFeatureEnabled("piece_v2_preview_enabled", false) !== true) return;
+      const savedInput = buildSavedPieceInput(savedInputId, requestOwner.id);
+      if (savedInput) setSavedPieceInput({ lifetime: pieceLifetime, savedInput });
+    };
     setSubmitting(true);
     try {
       // 1) 入力内容を MashOS Emotion Submit API 用のペイロードに変換
-      const payload = buildEmotionSubmitPayload();
+      const payload = buildEmotionSubmitPayload(receiveEmlisQuestions);
       const emotionDetails = Array.isArray(payload?.emotions) ? payload.emotions : [];
       const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(emotionDetails);
 
@@ -1078,6 +957,7 @@ const safeInsets = useSafeAreaInsets();
         void ensureTutorialPiecesSeed();
 
         await clearPersistedInputDraft();
+        if (!ownsResponse()) return;
         setPendingInputDraft(null);
         setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
@@ -1097,7 +977,9 @@ const safeInsets = useSafeAreaInsets();
         return;
       }
 
-      const submitResult = await submitEmotionInput(payload);
+      const submitResult = await submitEmotionInput(payload, { expectedUserId: requestOwner.id });
+      if (!ownsResponse()) return;
+      const savedInputIdForPiece = submitResult?.id;
       const inputFeedback = submitResult?.input_feedback || null;
       const inputFeedbackAI = inputFeedback?.emlis_ai || null;
       const inputFeedbackText = String(
@@ -1108,6 +990,7 @@ const safeInsets = useSafeAreaInsets();
 
 
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
@@ -1123,7 +1006,16 @@ const safeInsets = useSafeAreaInsets();
       Keyboard.dismiss();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
-      await markAnalysisHomeSummaryDirty();
+      if (!ownsResponse()) return;
+
+      const replyPending = Array.isArray(inputFeedbackAI?.rejection_reasons)
+        && inputFeedbackAI.rejection_reasons.includes("thread_reply_pending");
+      const openedThread = await emlisThread.open(submitResult?.id, { showNotCreated: replyPending, waitForInitial: replyPending });
+      if (!ownsResponse()) return;
+      // Opening a reader is not terminal eligibility. The Piece host performs
+      // the existing authoritative source-ref GET only on a separate action.
+      rememberSavedPieceInput(savedInputIdForPiece);
+      if (openedThread) return;
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1144,9 +1036,11 @@ const safeInsets = useSafeAreaInsets();
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }
     } catch (error) {
+      if (!ownsResponse()) return;
       if (isRequestTimeoutError(error)) {
         console.warn("InputScreen: emotion submit completion timed out", error);
         const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);
+        if (!ownsResponse()) return;
         Alert.alert(
           "記録の確認",
           getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)
@@ -1161,6 +1055,7 @@ ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
 ${String(error?.message || error)}`
       );
     } finally {
+      if (!ownsResponse()) return;
       setSubmitting(false);
     }
   };
@@ -1240,18 +1135,6 @@ ${String(error?.message || error)}`
     markCurrentNoticeRead,
   ]);
 
-  const handlePressNotifications = useCallback(() => {
-    closeStartupPopupWindow();
-    try {
-      navigation?.navigate?.("NoticeHistory", {
-        open_notice_id: null,
-        open_notice_at: Date.now(),
-      });
-    } catch {
-      // noop
-    }
-  }, [closeStartupPopupWindow, navigation]);
-
   const handlePressGuide = () => {
     closeStartupPopupWindow();
     if (navigation && navigation.navigate) {
@@ -1261,17 +1144,6 @@ ${String(error?.message || error)}`
     }
   };
 
-  const handlePressAccount = () => {
-    closeStartupPopupWindow();
-    if (navigation && navigation.navigate) {
-      navigation.navigate("Account");
-    } else {
-      Alert.alert(
-        "アカウント",
-        "アカウント画面へのナビゲーションがまだ設定されていません。"
-      );
-    }
-  };
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
       <StatusBar
@@ -1299,178 +1171,35 @@ ${String(error?.message || error)}`
                 e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
             }}
           >
-{/* パネルヘッダー */}
-              <View style={styles.panelHeader}>
-                <View style={styles.panelTitleRow}>
-                  <Text style={styles.panelTitle}>ホーム</Text>
-                  <CocolonPressable
-                    style={styles.guideTitleButton}
-                    onPress={handlePressGuide}
-                    accessibilityLabel="ガイドを開く"
-                  >
-                    <Ionicons
-                      name="help-circle-outline"
-                      size={20}
-                      color={colors.TEXT_ON_LIGHT}
-                    />
-                  </CocolonPressable>
-                </View>
-
-                <View style={styles.headerRight}>
-                  <CocolonPressable
-                    style={styles.accountIconButton}
-                    onPress={handlePressAccount}
-                    accessibilityLabel="アカウントページを開く"
-                  >
-                    <Ionicons
-                      name="person-circle-outline"
-                      size={20}
-                      color={colors.TEXT_ON_LIGHT}
-                    />
-                  </CocolonPressable>
-                  <CocolonPressable
-                    style={styles.noticePill}
-                    onPress={handlePressNotifications}
-                    accessibilityLabel="お知らせを開く"
-                  >
-                    <Ionicons
-                      name="notifications-outline"
-                      size={20}
-                      color={colors.TEXT_ON_LIGHT}
-                    />
-                    {noticeFeatureEnabled && noticeUnreadCount > 0 ? (
-                      <ScreenUnreadBadge
-                        visible
-                        style={styles.noticeBadgeDot}
-                      />
-                    ) : null}
-                  </CocolonPressable>
-                </View>
-              </View>
+              <HomeScreenIntro colors={colors} ui={ui} />
 
               <View style={styles.homeOverviewBlock}>
-                {!shouldHideHomeSummaryForTutorial ? (
-                  <View style={styles.globalSummaryBlock}>
-                  <View style={styles.globalSummaryInner}>
-                    <View style={styles.globalSummaryHeaderRow}>
-                      <Ionicons
-                        name="radio-outline"
-                        size={14}
-                        color={colors.TITLE_GOLD}
-                        style={styles.globalSummaryIcon}
-                      />
-                      <Text style={styles.globalSummaryLabel}>今日の全体行動</Text>
-                    </View>
-                    <Text style={styles.globalSummaryText}>
-                      {`今日、全体で ${
-                        typeof globalEmotionUsers === "number" ? globalEmotionUsers : "—"
-                      } 人が感情入力しました`}
-                    </Text>
-                  </View>
+                {homeReadError ? (
+                  <View accessibilityLiveRegion="polite" style={{ marginBottom: 12 }}>
+                    <Text style={{ color: colors.TEXT_ON_LIGHT }}>ホームの情報を読み込めませんでした。</Text>
+                    <CocolonPressable accessibilityRole="button" accessibilityLabel="ホームをもう一度読み込む" style={{ minHeight: 44, justifyContent: "center" }} onPress={() => loadHomeState({ force: true, includeStartupCandidate: false })} disabled={noticeLoading}><Text style={{ color: colors.TITLE_GOLD }}>もう一度読み込む</Text></CocolonPressable>
                   </View>
                 ) : null}
-
-                {shouldShowHomeQuickActionsRow ? (
-                  <View style={styles.homeQuickActionsRow}>
-                  {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
-                    <Pressable
-                      style={styles.homeQuickActionButton}
-                      onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
-                      accessibilityState={{ expanded: isTodayQuestionExpanded }}
-                    >
-                      <View style={styles.homeQuickActionLeft}>
-                        <Ionicons
-                          name="help-circle-outline"
-                          size={17}
-                          color={colors.TEXT_SUBTLE}
-                          style={styles.homeQuickActionIcon}
-                        />
-                        <Text
-                          style={styles.homeQuickActionTitle}
-                          numberOfLines={1}
-                          ellipsizeMode="tail"
-                        >
-                          今日の問い
-                        </Text>
-                      </View>
-                      {todayQuestionLoading ? (
-                        <ActivityIndicator
-                          size="small"
-                          color={colors.TEXT_SUBTLE}
-                          style={styles.homeQuickActionSpinner}
-                        />
-                      ) : null}
-                      <Ionicons
-                        name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
-                        size={17}
-                        color={colors.TEXT_SUBTLE}
-                      />
-                    </Pressable>
-                  ) : null}
-
-                  {!shouldHideInputHistoryForTutorial ? (
-                    <Pressable
-                      style={styles.homeQuickActionButton}
-                      onPress={handleOpenEmotionHistory}
-                      accessibilityRole="button"
-                      accessibilityLabel="入力履歴を開く"
-                    >
-                    <View style={styles.homeQuickActionLeft}>
-                      <Ionicons
-                        name="time-outline"
-                        size={17}
-                        color={colors.TEXT_SUBTLE}
-                        style={styles.homeQuickActionIcon}
-                      />
-                      <Text
-                        style={styles.homeQuickActionTitle}
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
-                      >
-                        入力履歴
-                      </Text>
+                {!isTutorialMode ? (
+                  <CocolonPressable
+                    style={styles.homeQuestionButton}
+                    onPress={handleOpenDeepInsight}
+                    accessibilityRole="button"
+                    accessibilityLabel="わたしを知る問いを開く"
+                  >
+                    <View style={styles.homeQuestionIcon}>
+                      <Ionicons name="sparkles-outline" size={20} color={colors.ON_SURFACE_HIGHLIGHT} />
                     </View>
-                    <Ionicons
-                      name="chevron-forward"
-                      size={17}
-                      color={colors.TEXT_SUBTLE}
-                    />
-                    </Pressable>
-                  ) : null}
-                </View>
-                ) : null}
-
-                {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot && isTodayQuestionExpanded ? (
-                  <View style={styles.todayQuestionInlineContent}>
-                    <TodayQuestionCard
-                      question={todayQuestionBundle?.question}
-                      answerSummary={todayQuestionBundle?.answer_summary || null}
-                      loading={todayQuestionLoading}
-                      submitting={todayQuestionSubmitting}
-                      compact
-                      hideHeader
-                      embedded
-                      showHistoryButton
-                      releaseStatus={todayQuestionBundle?.release_status}
-                      releaseTimeLocal={todayQuestionBundle?.release_time_local}
-                      releaseMessage={todayQuestionBundle?.release_message}
-                      delivery={todayQuestionBundle?.delivery}
-                      onSubmit={handleSubmitTodayQuestion}
-                      onOpenHistory={handleOpenTodayQuestionHistory}
-                    />
-                  </View>
+                    <Text style={styles.homeQuestionText}>わたしを知る問い</Text>
+                    <Ionicons name="chevron-forward" size={18} color={colors.ON_SURFACE_HIGHLIGHT} />
+                  </CocolonPressable>
                 ) : null}
               </View>
 
               <View style={styles.heroMemoCard}>
                 <View style={styles.heroCardHeader}>
-                  <Text style={styles.heroEyebrow}>感情入力</Text>
-                  <Text style={styles.heroTitle}>今の気持ちを残す</Text>
-                  <Text style={styles.heroLead}>
-                    思ったことや起きたことを入力して、今の感情を選んでください。
-                  </Text>
+                  <Text style={styles.heroFieldLabel}>言葉にしてみる</Text>
+                  <Ionicons name="create-outline" size={20} color={colors.TEXT_SUBTLE} />
                 </View>
 
                 <InputMemoSection
@@ -1496,46 +1225,64 @@ ${String(error?.message || error)}`
                   styles={styles}
                   colors={colors}
                 />
-
-                <InputEmotionSection
-                  sectionRef={emotionAreaRef}
-                  selectedEmotions={selectedEmotions}
-                  isSelfInsightSelected={isSelfInsightSelected}
-                  toggleEmotion={toggleEmotion}
-                  changeStrength={changeStrength}
-                  strengthRowRefs={strengthRowRefs}
-                  styles={styles}
-                  colors={colors}
-                />
-
-                <InputCategorySection
-                  sectionRef={categorySectionRef}
-                  hasMemoInput={hasMemoInput}
-                  hasSelectedCategories={hasSelectedCategories}
-                  selectedCategories={selectedCategories}
-                  toggleCategory={toggleCategory}
-                  styles={styles}
-                />
-
-                <InputActionArea
-                  notificationRef={notificationRef}
-                  pieceButtonRef={pieceButtonRef}
-                  okButtonRef={okButtonRef}
-                  doNotSendEmotionNotification={doNotSendEmotionNotification}
-                  isTutorialMode={isTutorialMode}
-                  registerInputInteraction={registerInputInteraction}
-                  setSendEmotionNotification={setSendEmotionNotification}
-                  handlePreviewPiece={handlePreviewPiece}
-                  canPreviewPiece={canPreviewPiece}
-                  piecePreviewLoading={piecePreviewLoading}
-                  handleOk={handleOk}
-                  canSubmit={canSubmit}
-                  submitting={submitting}
-                  styles={styles}
-                  colors={colors}
-                />
               </View>
 
+              <InputEmotionSection
+                sectionRef={emotionAreaRef}
+                selectedEmotions={selectedEmotions}
+                isSelfInsightSelected={isSelfInsightSelected}
+                toggleEmotion={toggleEmotion}
+                changeStrength={changeStrength}
+                strengthRowRefs={strengthRowRefs}
+                styles={styles}
+                colors={colors}
+              />
+
+              <InputCategorySection
+                sectionRef={categorySectionRef}
+                hasMemoInput={hasMemoInput}
+                hasSelectedCategories={hasSelectedCategories}
+                selectedCategories={selectedCategories}
+                toggleCategory={toggleCategory}
+                styles={styles}
+              />
+
+              <InputActionArea
+                notificationRef={notificationRef}
+                pieceButtonRef={pieceButtonRef}
+                okButtonRef={okButtonRef}
+                doNotSendEmotionNotification={doNotSendEmotionNotification}
+                isTutorialMode={isTutorialMode}
+                registerInputInteraction={registerInputInteraction}
+                setSendEmotionNotification={setSendEmotionNotification}
+                emlisQuestionPreference={emlisQuestionPreference}
+                handlePreviewPiece={handlePreviewPiece}
+                canPreviewPiece={canPreviewPiece}
+                handleOk={handleOk}
+                canSubmit={canSubmit}
+                submitting={submitting}
+                styles={styles}
+                colors={colors}
+              />
+
+              {mountSavedPieceInput ? (
+                <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
+                  {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
+                  <InputPieceActionArea colors={colors} ui={ui} savedInput={savedPieceInput.savedInput} navigation={navigation}
+                    saveRecovery={saveRecovery} isSaveAdmitted={isPieceBitmapSaveAdmitted} />
+                </View>
+              ) : null}
+
+              {!shouldHideInputHistoryForTutorial ? (
+                <CocolonButton
+                  variant="secondary"
+                  style={styles.footerButton}
+                  title="入力履歴"
+                  accessibilityLabel="入力履歴を開く"
+                  onPress={handleOpenEmotionHistory}
+                />
+              ) : null}
+              <CocolonButton variant="secondary" style={styles.footerButton} title="ホームについて" onPress={handlePressGuide} />
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -1544,7 +1291,7 @@ ${String(error?.message || error)}`
   colors={colors}
   isTutorialMode={isTutorialMode}
   noticeFeatureEnabled={noticeFeatureEnabled}
-  isNoticeStartupPopupVisible={isNoticeStartupPopupVisible}
+  isNoticeStartupPopupVisible={appStartupReady && isNoticeStartupPopupVisible}
   noticePopup={noticePopup}
   noticeLoading={noticeLoading}
   handleDismissNoticeModal={handleDismissNoticeModal}
@@ -1552,21 +1299,15 @@ ${String(error?.message || error)}`
   handlePressNoticeAction={handlePressNoticeAction}
   isWelcomeNoticeStartupPopup={isWelcomeNoticeStartupPopup}
   handlePrimaryNoticeModalAction={handlePrimaryNoticeModalAction}
-  shouldHideTodayQuestionForTutorial={shouldHideTodayQuestionForTutorial}
-  isTodayQuestionStartupPopupVisible={isTodayQuestionStartupPopupVisible}
-  todayQuestionBundle={todayQuestionBundle}
-  todayQuestionLoading={todayQuestionLoading}
-  todayQuestionSubmitting={todayQuestionSubmitting}
-  handleDismissTodayQuestionModal={handleDismissTodayQuestionModal}
-  handleSubmitTodayQuestion={handleSubmitTodayQuestion}
-  handleOpenTodayQuestionHistory={handleOpenTodayQuestionHistory}
-  draftRestoreModalVisible={draftRestoreModalVisible}
+  draftRestoreModalVisible={appStartupReady && draftRestoreModalVisible}
   draftRestoreSavedAtLabel={draftRestoreSavedAtLabel}
   restorePendingInputDraft={restorePendingInputDraft}
   discardPendingInputDraft={discardPendingInputDraft}
 />
 
-<InputFeedbackReplyModal
+      <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation} userId={currentUserId}
+        pieceEnabled={piecePreviewEnabled} />
+      <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}
   meta={inputFeedbackModalMeta}
@@ -1577,15 +1318,13 @@ ${String(error?.message || error)}`
   colors={colors}
 />
 
-<InputPiecePreviewController
+{isTutorialMode ? <InputPiecePreviewController
   visible={piecePreviewVisible}
   previewPayload={piecePreviewPayload}
-  pieceQuota={pieceQuota}
-  publishLoading={piecePublishLoading}
   onClose={handleCancelPiecePreview}
   onPublish={handlePublishPiece}
-  hideCancelButton={isTutorialMode}
-/>
+  hideCancelButton={true}
+/> : null}
       </View>
 
 {tutorialOverlayConfig ? (
@@ -1625,7 +1364,7 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
     },
     safeContent: {
       flex: 1,
@@ -1633,13 +1372,16 @@ function createStyles(COLORS, ui) {
     scrollContainer: {
       paddingTop: 16,
       paddingBottom: 32,
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
       alignItems: "stretch",
     },
     homeOverviewBlock: {
       width: "100%",
       alignSelf: "stretch",
-      marginBottom: 8,
+      marginBottom: 17,
     },
 
     /** ブランドヘッダー */
@@ -1663,68 +1405,64 @@ function createStyles(COLORS, ui) {
 
     /** メインパネル（Piece共通） */
     panel: {
-      width: "94%",
+      width: "100%",
       minHeight: PANEL_MIN_HEIGHT,
       backgroundColor: COLORS.PANEL_BG,
-      borderRadius: 26,
-      borderWidth: 2,
-      borderColor: COLORS.BORDER_GOLD,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
       paddingHorizontal: 18,
       paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.24,
-      shadowRadius: 26,
-      shadowOffset: { width: 0, height: 16 },
-      elevation: 12,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
     },
-    panelHeader: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 16,
-    },
-    panelTitle: {
-      fontSize: 26,
-      lineHeight: 32,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
-    },
-    panelTitleRow: {
+    footerButton: { marginTop: 16 },
+    homeQuestionButton: {
+      width: "100%",
+      minHeight: 68,
+      paddingHorizontal: 14,
+      paddingVertical: 13,
+      borderRadius: 18,
+      backgroundColor: COLORS.SURFACE_HIGHLIGHT,
       flexDirection: "row",
       alignItems: "center",
+      gap: 8,
     },
-    guideTitleButton: {
-      width: 36,
+    homeQuestionIcon: {
+      width: 32,
       height: 32,
       borderRadius: 12,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginLeft: 10,
     },
-    headerRight: {
-      flexDirection: "row",
-      alignItems: "center",
+    homeQuestionText: {
+      flex: 1,
+      fontSize: 15,
+      lineHeight: 22,
+      fontWeight: "600",
+      color: COLORS.ON_SURFACE_HIGHLIGHT,
     },
     inputTrialPromoCard: {
       marginBottom: 14,
-      borderRadius: 16,
+      borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
-      backgroundColor: "#FFFFFF",
-      paddingHorizontal: 14,
-      paddingVertical: 12,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 20,
+      paddingVertical: 16,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
+      flexWrap: "wrap",
+      gap: 12,
     },
     inputTrialPromoHeadline: {
       flex: 1,
@@ -1736,82 +1474,19 @@ function createStyles(COLORS, ui) {
     },
     inputTrialPromoButton: {
       flexShrink: 0,
-      minHeight: 38,
+      minHeight: 44,
       paddingHorizontal: 14,
-      borderRadius: 12,
+      borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
-      backgroundColor: COLORS.BORDER_GOLD,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
       alignItems: "center",
       justifyContent: "center",
     },
     inputTrialPromoButtonText: {
       fontSize: 12,
       fontWeight: "800",
-      color: "#FFFFFF",
-    },
-    globalSummaryBlock: {
-      width: "100%",
-      alignSelf: "stretch",
-      marginBottom: 8,
-    },
-    globalSummaryInner: {
-      width: "100%",
-      alignSelf: "stretch",
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
-      borderTopColor: COLORS.CARD_BORDER,
-      borderBottomColor: COLORS.CARD_BORDER,
-      paddingVertical: 8,
-    },
-    globalSummaryHeaderRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 4,
-    },
-    globalSummaryIcon: {
-      marginRight: 6,
-    },
-    globalSummaryLabel: {
-      fontSize: 11,
-      fontWeight: "800",
-      letterSpacing: 0.3,
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    globalSummaryText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      fontWeight: "400",
-      marginBottom: 2,
-    },
-    accountIconButton: {
-      width: 42,
-      height: 38,
-      borderRadius: 12,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginRight: 10,
-    },
-    noticePill: {
-      width: 42,
-      height: 38,
-      borderRadius: 12,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      position: "relative",
-      overflow: "visible",
-    },
-    noticeBadgeDot: {
-      position: "absolute",
-      top: 8,
-      right: 8,
+      color: COLORS.ACCENT_TEXT,
     },
 
     /** 今日の観測（常設） */
@@ -1863,17 +1538,15 @@ function createStyles(COLORS, ui) {
     },
     homeQuickActionButton: {
       flex: 1,
-      height: 40,
-      minHeight: 40,
-      maxHeight: 40,
+      minHeight: 52,
       minWidth: 0,
       marginHorizontal: 4,
-      borderRadius: 12,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       paddingHorizontal: 10,
-      paddingVertical: 0,
+      paddingVertical: 8,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
@@ -1915,74 +1588,17 @@ function createStyles(COLORS, ui) {
     homeQuickActionSpinner: {
       marginRight: 4,
     },
-    todayQuestionInlineContent: {
-      marginTop: 8,
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      overflow: "hidden",
-      paddingHorizontal: 12,
-      paddingTop: 12,
-      paddingBottom: 12,
-    },
-    todayQuestionAccordionCard: {
-      marginBottom: 10,
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      overflow: "hidden",
-    },
-    todayQuestionAccordionHeader: {
-      minHeight: 46,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
-    todayQuestionAccordionTitle: {
-      fontSize: 12,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    todayQuestionAccordionHeaderRight: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginLeft: 12,
-    },
-    todayQuestionAccordionStatus: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-      marginRight: 8,
-    },
-    todayQuestionAccordionStatusAnswered: {
-      color: COLORS.TITLE_GOLD,
-    },
-    todayQuestionAccordionSpinner: {
-      marginRight: 6,
-    },
-    todayQuestionAccordionContent: {
-      borderTopWidth: 1,
-      borderTopColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingTop: 12,
-      paddingBottom: 12,
-    },
-
     inputHistoryQuickCard: {
       marginBottom: 0,
-      borderRadius: 14,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       overflow: "hidden",
     },
     inputHistoryQuickButton: {
-      minHeight: 46,
-      paddingHorizontal: 12,
+      minHeight: 52,
+      paddingHorizontal: 20,
       paddingVertical: 12,
       flexDirection: "row",
       alignItems: "center",
@@ -2013,22 +1629,16 @@ function createStyles(COLORS, ui) {
     },
 
     heroMemoCard: {
-      marginBottom: 18,
-      borderRadius: 26,
-      borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 16,
-      paddingTop: 16,
-      paddingBottom: 16,
-      shadowColor: "#000",
-      shadowOpacity: 0.14,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 10,
+      marginBottom: 17,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      padding: 16,
     },
     heroCardHeader: {
-      marginBottom: 12,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 8,
     },
     heroEyebrow: {
       fontSize: 11,
@@ -2041,42 +1651,103 @@ function createStyles(COLORS, ui) {
       marginTop: 3,
       fontSize: 20,
       lineHeight: 28,
-      fontWeight: "800",
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
     },
     heroLead: {
       marginTop: 6,
-      fontSize: font.description ?? 12,
-      lineHeight: 19,
+      fontSize: 14,
+      lineHeight: 22,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontWeight: "600",
+      fontWeight: "400",
     },
     heroMemoInputGroup: {
-      marginTop: 2,
+      marginTop: 0,
     },
     heroFieldBlock: {
-      marginBottom: 14,
+      paddingVertical: 11,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+    },
+    heroFieldBlockLast: {
+      borderBottomWidth: 0,
+      paddingBottom: 0,
+    },
+    memoFieldLabel: {
+      fontSize: 14,
+      lineHeight: 22,
+      fontWeight: "400",
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 6,
     },
     heroFieldLabel: {
-      fontSize: font.sectionLabel ?? 12,
-      lineHeight: 18,
-      fontWeight: "800",
-      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 4,
+      fontSize: 15,
+      lineHeight: 22,
+      fontWeight: "600",
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
     },
     heroFieldHint: {
-      fontSize: font.description ?? 11,
-      lineHeight: 17,
+      fontSize: 14,
+      lineHeight: 22,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontWeight: "600",
+      fontWeight: "400",
       marginBottom: 8,
     },
     heroEmotionSection: {
-      marginTop: 2,
-      marginBottom: 4,
+      marginBottom: 17,
+      borderRadius: 24,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 13,
+      paddingTop: 15,
+      paddingBottom: 12,
+    },
+    emotionSectionHeader: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 6,
+      marginBottom: 11,
+    },
+    emotionSectionMeta: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.ON_SURFACE_TONAL,
+    },
+    emotionIconSurface: {
+      width: 44,
+      height: 44,
+      borderRadius: 15,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: COLORS.FIELD_BG,
+    },
+    emotionIconSurfaceOn: {
+      borderRadius: 24,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    emotionFooter: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: 8,
+      marginTop: 12,
+    },
+    selfInsightContainer: {
+      maxWidth: "100%",
+    },
+    selfInsightHint: {
+      flex: 1,
+      minWidth: 96,
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     heroActionArea: {
-      marginTop: 10,
+      marginTop: 0,
+      marginBottom: 17,
     },
     preferenceCardInActionArea: {
       marginTop: 0,
@@ -2091,33 +1762,31 @@ function createStyles(COLORS, ui) {
       fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
+      fontWeight: "600",
     },
 
     /** 感情ボタン */
     buttons: {
-      marginTop: 2,
+      marginTop: 0,
     },
     selfInsightCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
+      borderRadius: 18,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 12,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      borderColor: "transparent",
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      minHeight: 44,
+      justifyContent: "center",
     },
     selfInsightCardOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.BORDER_GOLD,
     },
     selfInsightRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
+      gap: 5,
     },
     selfInsightLeft: {
       flexDirection: "row",
@@ -2127,74 +1796,94 @@ function createStyles(COLORS, ui) {
     },
     selfInsightText: {
       fontSize: 14,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
+      lineHeight: 20,
+      fontWeight: "600",
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     selfInsightTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     emotionRow: {
       flexDirection: "row",
-      justifyContent: "space-between",
-      marginBottom: 12,
+      flexWrap: "wrap",
+      gap: 4,
     },
     emotionBlock: {
-      width: "30%",
-      alignItems: "center",
+      alignItems: "stretch",
+      minWidth: 0,
+    },
+    emotionChipContainer: {
+      width: "100%",
     },
     chip: {
-      flexDirection: "row",
+      width: "100%",
+      minWidth: 0,
+      minHeight: 70,
+      flexDirection: "column",
       alignItems: "center",
-      paddingVertical: 8,
-      paddingHorizontal: 14,
-      marginBottom: 4,
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      justifyContent: "flex-start",
+      paddingHorizontal: 0,
+      gap: 6,
     },
     chipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.BORDER_GOLD,
     },
     chipText: {
-      fontSize: 14,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+      minWidth: 0,
+      textAlign: "center",
     },
-    // アクティブ時は ACCENT_TEXT（＝白）で塗る
+    // 選択時はtonal面に対応する前景色を使う
     chipTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
       fontWeight: "600",
     },
 
-    /** 感情強度（高さ固定） */
+    /** 選択した感情だけ強度を表示。空のrefは高さを予約しない。 */
     strengthRow: {
+      width: "100%",
+      minHeight: 0,
       flexDirection: "row",
-      justifyContent: "center",
+      flexWrap: "wrap",
       alignItems: "center",
-      marginTop: 2,
-      height: 28,
+      gap: 0,
+    },
+    strengthRowActive: {
+      marginTop: 10,
+      gap: 8,
+    },
+    strengthLabel: {
+      fontSize: 14,
+      lineHeight: 22,
+      fontWeight: "400",
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+    },
+    strengthOptions: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 4,
     },
     strengthChip: {
-      paddingVertical: 4,
-      paddingHorizontal: 8,
-      marginHorizontal: 2,
-      borderRadius: 10,
+      paddingVertical: 8,
+      paddingHorizontal: 10,
+      minWidth: 44,
+      minHeight: 44,
+      borderRadius: 20,
       backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      justifyContent: "center",
+      alignItems: "center",
     },
     strengthChipOn: {
       backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
     },
     strengthText: {
-      fontSize: 12,
+      fontSize: 15,
+      lineHeight: 22,
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
     },
     strengthTextOn: {
@@ -2203,50 +1892,59 @@ function createStyles(COLORS, ui) {
     },
 
     categorySection: {
-      marginTop: 12,
-      marginBottom: 10,
+      marginBottom: 17,
+    },
+    categoryHeader: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 6,
+      marginBottom: 6,
+    },
+    categoryMetaText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_SUBTLE,
+    },
+    categoryChipContainer: {
+      maxWidth: "100%",
     },
     categoryHintText: {
-      marginBottom: 10,
-      fontSize: 11,
-      lineHeight: 16,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginBottom: 9,
+      fontSize: 13,
+      lineHeight: 20,
+      fontWeight: "400",
+      color: COLORS.TEXT_SUBTLE,
     },
     categoryGrid: {
       flexDirection: "row",
       flexWrap: "wrap",
-      marginHorizontal: -4,
+      gap: 5,
     },
     categoryChip: {
-      minWidth: "28%",
-      marginHorizontal: 4,
-      marginBottom: 8,
       paddingVertical: 8,
-      paddingHorizontal: 12,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 13,
+      borderRadius: 9,
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
-      shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      minHeight: 44,
     },
     categoryChipOn: {
       backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      transform: [{ scale: 1.04 }],
+      borderRadius: 20,
     },
     categoryChipDisabled: {
-      opacity: 0.45,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
     },
     categoryChipText: {
-      fontSize: 12,
-      fontWeight: "700",
+      fontSize: 14,
+      lineHeight: 20,
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     categoryChipTextOn: {
       color: COLORS.ACCENT_TEXT,
@@ -2258,29 +1956,21 @@ function createStyles(COLORS, ui) {
       marginTop: 2,
       fontSize: 11,
       lineHeight: 16,
-      color: "#B91C1C",
+      color: COLORS.ERROR,
     },
 
     /** メモ入力カード（展開式：タップで開く） */
     memoCard: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      backgroundColor: "transparent",
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     memoCardCollapsed: {
       minHeight: 54,
       justifyContent: "center",
     },
     memoCardExpanded: {
-      minHeight: 120,
+      minHeight: 44,
     },
     collapsedRow: {
       flexDirection: "row",
@@ -2302,10 +1992,13 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     memoInput: {
-      flex: 1,
-      minHeight: 90,
-      fontSize: 14,
+      minHeight: 44,
+      fontSize: 16,
       color: COLORS.TEXT_ON_LIGHT,
+      lineHeight: 27,
+      fontWeight: "400",
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     memoSection: {
       marginTop: 0,
@@ -2326,19 +2019,16 @@ function createStyles(COLORS, ui) {
      * - 感情通知（送信しない設定）
      */
     preferenceCard: {
-      marginTop: 18,
-      borderRadius: 14,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      overflow: "hidden",
+      marginTop: 0,
+      borderRadius: 0,
+      backgroundColor: "transparent",
     },
     preferenceRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 0,
+      paddingVertical: 8,
     },
     preferenceLeft: {
       flexDirection: "row",
@@ -2427,20 +2117,21 @@ function createStyles(COLORS, ui) {
     goldButton: {
       paddingVertical: 13,
       paddingHorizontal: 28,
-      borderRadius: 999,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
       alignItems: "center",
       justifyContent: "center",
       shadowColor: "#000",
-      shadowOpacity: 0.22,
-      shadowRadius: 16,
-      shadowOffset: { width: 0, height: 7 },
-      elevation: 9,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
+      minHeight: 52,
     },
     goldButtonText: {
-      color: "#FFFFFF",
+      color: COLORS.ACCENT_TEXT,
       fontWeight: "700",
       fontSize: 15,
     },
@@ -2454,23 +2145,26 @@ function createStyles(COLORS, ui) {
       backgroundColor: "rgba(15, 23, 42, 0.34)",
       justifyContent: "center",
       alignItems: "center",
-      paddingHorizontal: 24,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     draftRestoreCard: {
       width: "100%",
-      maxWidth: 360,
+      maxWidth: 520,
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
+      borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       paddingHorizontal: 20,
       paddingTop: 20,
-      paddingBottom: 18,
+      paddingBottom: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.18,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 10,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
+      maxHeight: "100%",
+      flexShrink: 1,
     },
     draftRestoreBadgeRow: {
       alignItems: "center",
@@ -2480,9 +2174,9 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       borderRadius: 999,
-      borderWidth: 1,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
+      backgroundColor: COLORS.SURFACE_TONAL,
       paddingHorizontal: 12,
       paddingVertical: 7,
     },
@@ -2517,10 +2211,10 @@ function createStyles(COLORS, ui) {
     },
     draftRestoreInfoCard: {
       width: "100%",
-      borderRadius: 20,
-      borderWidth: 1,
+      borderRadius: 16,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
+      backgroundColor: COLORS.SURFACE_TONAL,
       paddingHorizontal: 16,
       paddingVertical: 16,
     },
@@ -2560,23 +2254,26 @@ function createStyles(COLORS, ui) {
       backgroundColor: "rgba(15, 23, 42, 0.38)",
       justifyContent: "center",
       alignItems: "center",
-      paddingHorizontal: 24,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     inputFeedbackCard: {
       width: "100%",
-      maxWidth: 360,
+      maxWidth: 520,
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
+      borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       paddingHorizontal: 20,
       paddingTop: 20,
-      paddingBottom: 18,
+      paddingBottom: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.18,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 10,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
+      maxHeight: "100%",
+      flexShrink: 1,
     },
     inputFeedbackHeader: {
       alignItems: "center",
@@ -2607,14 +2304,15 @@ function createStyles(COLORS, ui) {
     },
     inputFeedbackBodyScroll: {
       width: "100%",
-      borderRadius: 20,
-      borderWidth: 1,
+      borderRadius: 0,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
+      flexShrink: 1,
     },
     inputFeedbackBodyContent: {
-      paddingHorizontal: 18,
-      paddingVertical: 18,
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     inputFeedbackBodyText: {
       fontSize: 16,
@@ -2638,21 +2336,22 @@ toastOverlay: {
   alignItems: "center",
 },
 toastCard: {
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  paddingVertical: 14,
-  paddingHorizontal: 18,
-  borderRadius: 18,
-  backgroundColor: COLORS.FIELD_BG,
-  borderWidth: 1,
-  borderColor: COLORS.CARD_BORDER,
-  shadowColor: "#000",
-  shadowOpacity: 0.18,
-  shadowRadius: 12,
-  shadowOffset: { width: 0, height: 6 },
-  elevation: 6,
-},
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      paddingHorizontal: 18,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      shadowColor: "#000",
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
+      maxWidth: 520,
+    },
 toastText: {
   flexShrink: 1,
   fontSize: 15,
@@ -2660,6 +2359,36 @@ toastText: {
   fontWeight: "700",
   color: COLORS.TEXT_ON_LIGHT,
 },
-  }, ui));
+  }, ui, {
+  "strengthText": "button",
+  "collapsedText": "body",
+  "homeQuestionText": "button",
+  "memoFieldLabel": "description",
+  "emotionSectionMeta": "meta",
+  "selfInsightHint": "meta",
+  "categoryMetaText": "meta",
+  "categoryHintText": "description",
+  "strengthLabel": "description",
+  "inputTrialPromoHeadline": "description",
+  "inputTrialPromoButtonText": "button",
+  "homeQuickActionTitle": "description",
+  "homeQuickActionMeta": "meta",
+  "inputHistoryQuickTitle": "sectionTitle",
+  "inputHistoryQuickSubtitle": "description",
+  "heroEyebrow": "meta",
+  "preferenceTitle": "description",
+  "preferenceDesc": "description",
+  "memoToggleText": "button",
+  "goldButtonText": "button",
+  "draftRestoreBadgeText": "meta",
+  "draftRestoreTitle": "modalTitle",
+  "draftRestoreLeadText": "description",
+  "draftRestoreInfoText": "meta",
+  "draftRestoreBodyText": "body",
+  "inputFeedbackTitle": "modalTitle",
+  "inputFeedbackMetaText": "description",
+  "inputFeedbackBodyText": "body",
+  "toastText": "description"
+}));
 }
 

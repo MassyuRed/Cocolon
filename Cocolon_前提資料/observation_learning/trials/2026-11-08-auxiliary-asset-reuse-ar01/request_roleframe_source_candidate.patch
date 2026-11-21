@@ -1,0 +1,47 @@
+--- a/ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py
++++ b/ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py
+@@ -127,6 +127,12 @@
+                 if witness["arguments"]:
+                     compact["明記された格"] = [{"格": case, "原文": noun}
+                                               for case, noun in witness["arguments"]]
++                if witness["support_kind"] == "REQUEST_WITH_UNSTATED_RECIPIENT":
++                    # Same source witness, one request-role projection. Do
++                    # not duplicate generic labels or author reply prose.
++                    compact["読取種別"] = "依頼の役割と未記載の受け手"
++                    compact["依頼した人"] = compact.pop("行為者")
++                    compact["依頼を受けた人"] = compact.pop("相手")
+             if len(_compact_json(compact).encode("utf-8")) > MEANING_SUPPORT_MAX_WITNESS_BYTES:
+                 continue
+             proposed = [*selected, compact]
+--- a/ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py
++++ b/ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py
+@@ -387,12 +387,23 @@
+     qualified = (not material.get("current_answers", []) and not current_changed
+                  and not any(_SOURCE_UPDATE.search(text) for text in texts)
+                  and source_context_allows_finite_hints(*texts))
+-    # The broad v1 finite-role generation hints regressed actual output.
+-    # Keep their source witnesses for comparison, but only the new explicit
+-    # focus and separately ranged cognition shapes are eligible as hints.
+-    generation = [{**asdict(row), "support_kind": "EXPLICIT_ROLE_FOCUS"}
+-                  for row in witnesses if qualified and row.source_group == "CURRENT"
+-                  and row.source_construction == "EXPLICIT_FOCUS"]
++    # Broad v1 finite-role hints regressed actual output. Do not reactivate
++    # them. A single omitted-recipient request shape reuses the existing
++    # reader's written passive agent and UNSTATED patient; it never supplies
++    # SELF for that patient. The projection names the two request roles,
++    # rather than the generic v1 counterpart that blurred their direction.
++    generation = []
++    for row in witnesses:
++        if not qualified or row.source_group != "CURRENT":
++            continue
++        if row.source_construction == "EXPLICIT_FOCUS":
++            generation.append({**asdict(row), "support_kind": "EXPLICIT_ROLE_FOCUS"})
++        elif (row.source_construction == "PLAIN_FINITE"
++              and row.predicate == "頼む" and row.voice == "passive"
++              and row.subject == row.counterpart == "UNSTATED"
++              and (row.agent == "SELF" or row.agent.startswith("WRITTEN:"))
++              and (row.polarity, row.modality, row.temporal_scope) == ("positive", "fact", "past")):
++            generation.append({**asdict(row), "support_kind": "REQUEST_WITH_UNSTATED_RECIPIENT"})
+     cognition = []
+     if qualified:
+         for field, text in zip(("memo", "memo_action"), texts):

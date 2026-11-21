@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 
@@ -107,12 +107,14 @@ function RangeSelector({ styles, colors, value, onChange }) {
         return (
           <TouchableOpacity
             key={opt.key}
+            accessibilityRole="button"
+            accessibilityState={{ selected: on }}
             style={[styles.rangeChip, on && styles.rangeChipOn]}
             onPress={() => onChange(opt.key)}
             activeOpacity={0.85}
           >
             <Text style={[styles.rangeText, on && styles.rangeTextOn]}>
-              {opt.label}
+              {on ? "✓ " : ""}{opt.label}
             </Text>
           </TouchableOpacity>
         );
@@ -132,7 +134,7 @@ function RankingHeader({ styles, title, navigation }) {
 
       <Text style={styles.panelTitle}>{title}</Text>
 
-      <View style={{ width: 72 }} />
+
     </View>
   );
 }
@@ -159,7 +161,7 @@ function RankingRow({ styles, left, right, onPressLeft, isPrivateAccount }) {
 
         <View style={[styles.nameRow, onPressLeft && styles.nameTap]}>
           <View style={styles.nameLabelRow}>
-            <Text style={[styles.rowLeft, styles.nameLabelText]} numberOfLines={1}>
+            <Text style={[styles.rowLeft, styles.nameLabelText]}>
               {nameLabel}
             </Text>
             {isPrivateAccount ? (
@@ -218,7 +220,7 @@ export default function InputCountRankingScreen({ navigation }) {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["left", "right"]} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -240,7 +242,7 @@ export default function InputCountRankingScreen({ navigation }) {
           <Text style={styles.sectionLabel}>ランキング</Text>
 
           {loading ? (
-            <ActivityIndicator style={{ marginTop: 10 }} />
+            <ActivityIndicator color={colors.TEXT_SUBTLE} style={{ marginTop: 10 }} />
           ) : error ? (
             <Text style={styles.errorText}>取得エラー: {error}</Text>
           ) : rows.length === 0 ? (
@@ -282,163 +284,199 @@ export default function InputCountRankingScreen({ navigation }) {
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     scrollContainer: {
       paddingTop: 16,
       paddingBottom: 32,
       alignItems: "stretch",
-      paddingHorizontal: 18,
+      paddingHorizontal: 16,
+      flexGrow: 1,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
 
     panelHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 12,
+      flexDirection: "column",
+      alignItems: "stretch",
+      justifyContent: "flex-start",
+      marginBottom: 24,
+      gap: 8,
     },
     panelTitle: {
-      fontSize: 18,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.6,
+      color: COLORS.TEXT_ON_LIGHT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      minWidth: 0,
     },
     backBtn: {
-      width: 72,
+      width: 44,
       flexDirection: "row",
       alignItems: "center",
-      paddingVertical: 4,
+      paddingVertical: 10,
+      minHeight: 44,
+      alignSelf: "flex-start",
+      justifyContent: "center",
     },
     backText: {
       marginLeft: 2,
-      fontSize: 12,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontWeight: "600",
+      color: COLORS.TEXT_ON_LIGHT,
     },
 
-    section: { marginTop: 6, marginBottom: 10 },
+    section: {
+      marginTop: 0,
+      marginBottom: 24,
+    },
     sectionLabel: {
-      fontSize: 12,
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 8,
+      marginBottom: 12,
     },
 
     rangeRow: {
       flexDirection: "row",
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 14,
-      borderWidth: 1,
+      backgroundColor: "transparent",
+      borderRadius: 0,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      overflow: "hidden",
+      overflow: "visible",
+      flexWrap: "wrap",
+      gap: 8,
     },
     rangeChip: {
-      flex: 1,
-      paddingVertical: 10,
+      paddingVertical: 12,
       alignItems: "center",
       justifyContent: "center",
+      flexBasis: "46%",
+      flexGrow: 1,
+      minWidth: 0,
+      minHeight: 48,
+      paddingHorizontal: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: ui?.radius?.button ?? 24,
+      backgroundColor: COLORS.FIELD_BG,
     },
     rangeChipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
     },
     rangeText: {
-      fontSize: 12,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+      flexShrink: 1,
     },
     rangeTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
 
     rowCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 14,
+      borderRadius: ui?.radius?.card ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 8,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginBottom: 12,
       shadowColor: "#000",
-      shadowOpacity: 0.06,
-      shadowRadius: 6,
-      shadowOffset: { width: 0, height: 3 },
-      elevation: 2,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
+      minHeight: 64,
     },
     rowTop: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
+      minWidth: 0,
     },
     nameRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       alignSelf: "flex-start",
       maxWidth: "100%",
+      flex: 1,
+      minWidth: 0,
     },
     nameLabelRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       flexShrink: 1,
       minWidth: 0,
+      flex: 1,
     },
     nameLabelText: {
       flexShrink: 1,
       minWidth: 0,
+      color: COLORS.TEXT_ON_LIGHT,
     },
     privateShield: {
       marginLeft: 6,
-      color: COLORS.TITLE_GOLD,
-      opacity: 0.7,
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 0,
     },
     nameTap: {
       paddingVertical: 2,
       paddingHorizontal: 2,
       borderRadius: 10,
+      minWidth: 0,
     },
     rowBottom: {
       marginTop: 8,
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
     },rowLeft: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
       flexShrink: 1,
+      minWidth: 0,
     },
     rowSub: {
       marginTop: 2,
-      fontSize: 11,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: COLORS.TEXT_SUBTLE,
     },
     rowRight: {
-      fontSize: 13,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_ON_LIGHT,
       marginLeft: 10,
+      flexShrink: 1,
+      minWidth: 0,
+      textAlign: "right",
     },
 
-    errorText: { color: "#B91C1C" },
-    emptyText: { color: text.description ?? COLORS.TEXT_SUBTLE },
+    errorText: {
+      color: COLORS.ERROR,
+      paddingVertical: 16,
+    },
+    emptyText: {
+      color: COLORS.TEXT_SUBTLE,
+      paddingVertical: 16,
+    },
 
     reloadBtn: {
       marginTop: 6,
       alignSelf: "center",
       flexDirection: "row",
       alignItems: "center",
-      paddingVertical: 10,
-      paddingHorizontal: 16,
-      borderRadius: 999,
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      borderRadius: ui?.radius?.button ?? 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
       shadowColor: "#000",
-      shadowOpacity: 0.18,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
+      minHeight: 52,
+      width: "100%",
+      maxWidth: ui?.layout?.maxButtonWidth ?? 520,
+      justifyContent: "center",
     },
     reloadText: {
       marginLeft: 6,
       color: COLORS.ACCENT_TEXT,
-      fontWeight: "800",
-      fontSize: 12,
+      flexShrink: 1,
     },
-  }, ui));
+  }, ui, {"panelTitle":"screenTitle","backText":"button","sectionLabel":"sectionTitle","rangeText":"button","rowLeft":"body","nameLabelText":"body","rowSub":"description","rowRight":"body","errorText":"description","emptyText":"description","reloadText":"button"}));
 }

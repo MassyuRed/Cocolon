@@ -1,0 +1,29 @@
+{
+  "local_commit": "bf45b93f2a670648457199646d30bd88946c9984",
+  "parent": "1c9f6f73511dac0f220db1f65297c5d748d7a3fe",
+  "tree": "95cd46d94f3128321a4ebab0787ab2bde9676eb1",
+  "paths": [
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+    "ai/tools/serve_emlis_natural_reply.py",
+    "ai/tests/test_analysis_semantic_generation_schema.py",
+    "ai/tests/test_analysis_semantic_history_core.py"
+  ],
+  "native_full_sha256": "efaeba2b35a7dc750bf31d0f9a211ae12a920005a4d8de625fed82ab7da28710",
+  "core_sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+  "tests": {
+    "passed": 252,
+    "failed": 0,
+    "skipped": 0,
+    "groups": [
+      {
+        "passed": 215,
+        "seconds": 19.33
+      },
+      {
+        "passed": 37,
+        "seconds": 81.42
+      }
+    ]
+  },
+  "remote_actions": 0
+}

@@ -1,0 +1,397 @@
+{
+  "status": "CPU_NATIVE15_READY_GPU_NOT_EXECUTED",
+  "model_load": 0,
+  "model_forward": 0,
+  "training_updates": 0,
+  "generation": 0,
+  "sql": 0,
+  "gpu_run_authorized": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "seconds": 15.142913525924087,
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "api_blobs": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "aadfdf6411e7a8da115adf36cf3c1e8b46932f01",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "14d0ac0b0cba41d391f757020ee18e609f4626b1",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "55e76cf43fe1f78df37d8978ff71ce517073e366",
+    "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "4fb2d75d410b9c16d2f84b96154ed8ce9ab46438",
+    "ai/tests/test_cmee_emlis_sixrow.py": "5538e7ae269393937585615a2e00a3919bd33277",
+    "ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "fb59debc39301b019807299ebc9c86198aa5e089"
+  },
+  "source_sha256": {
+    "/workspace/cocolon_4b_interface_review_20261026/native_quote_messages.jsonl": "dba590a5e48dbd709c8ca75f5d56255c180a08926cd9283c6d855bbd36b0acfc",
+    "/workspace/cocolon_sixrow_cpu_20261026/native-01/native6.jsonl": "101a89425f8b88330a14d870dce123079209c3e3586b9eafd9cbb91234631acb",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025/run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+  },
+  "initial_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "26095c64075c5e88934f200eed8a6a3b5e389ad708d394f8567a1180e4aeb89c",
+    "adapter_model.safetensors": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6"
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "cases": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1705,
+      "assistant_eos_tokens": 1331,
+      "full_tokens": 3036,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 4265,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "question_disposition": "ASK",
+      "prior_origin": null
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3839,
+      "assistant_eos_tokens": 2228,
+      "full_tokens": 6067,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 6399,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": "TEACHER_ADOPTED_PRIOR"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1701,
+      "assistant_eos_tokens": 1331,
+      "full_tokens": 3032,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 4261,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "question_disposition": "ASK",
+      "prior_origin": null
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3854,
+      "assistant_eos_tokens": 2231,
+      "full_tokens": 6085,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 6414,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": "TEACHER_ADOPTED_PRIOR"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1698,
+      "assistant_eos_tokens": 1321,
+      "full_tokens": 3019,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 4258,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "question_disposition": "ASK",
+      "prior_origin": null
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3837,
+      "assistant_eos_tokens": 2237,
+      "full_tokens": 6074,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 6397,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": "TEACHER_ADOPTED_PRIOR"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1733,
+      "assistant_eos_tokens": 1585,
+      "full_tokens": 3318,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 4293,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": null
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1728,
+      "assistant_eos_tokens": 1559,
+      "full_tokens": 3287,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 4288,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": null
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1732,
+      "assistant_eos_tokens": 1598,
+      "full_tokens": 3330,
+      "generation_cap": 2560,
+      "prompt_plus_cap": 4292,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": null
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "prompt_tokens": 2159,
+      "assistant_eos_tokens": 1038,
+      "full_tokens": 3197,
+      "generation_cap": 3712,
+      "prompt_plus_cap": 5871,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "本を返すのが遅れて友人に謝り、「大丈夫」と言われても、まだ少し気がかりが残っているのですね。",
+        "reception": "「大丈夫」と言ってもらえたことも、まだ気になることも、聞いていたいです。",
+        "update_note": null
+      },
+      "question": "何が気になりますか？",
+      "question_disposition": "ASK",
+      "prior_origin": null
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4212,
+      "assistant_eos_tokens": 3178,
+      "full_tokens": 7390,
+      "generation_cap": 3712,
+      "prompt_plus_cap": 7924,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "遅くなると分かった時に連絡しなかったことが、今も気になっているのですね。",
+        "reception": "本を返しても、あの時に一言伝えておけば、という思いは残っているのですね。何が気になっているのか、話してくださってありがとうございます。",
+        "update_note": "気がかりの対象が、遅れると分かった時に連絡しなかったことだと説明されました。"
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": "TEACHER_ADOPTED_PRIOR"
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "prompt_tokens": 2194,
+      "assistant_eos_tokens": 1082,
+      "full_tokens": 3276,
+      "generation_cap": 3712,
+      "prompt_plus_cap": 5906,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "友人の開店を知ってお祝いのメッセージを送り、うれしさと、少し置いていかれたような感覚があったのですね。",
+        "reception": "開店を喜ぶ気持ちと、少し置いていかれたような感覚を、どちらも聞いていたいです。",
+        "update_note": null
+      },
+      "question": "「少し置いていかれた気がした」のはなぜですか？",
+      "question_disposition": "ASK",
+      "prior_origin": null
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4374,
+      "assistant_eos_tokens": 3561,
+      "full_tokens": 7935,
+      "generation_cap": 3712,
+      "prompt_plus_cap": 8086,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。その一方で、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+        "reception": "一緒に準備したり約束したりしていたわけではなくても、二人で話した時間はあったのですね。開店のうれしさも、その頃から離れたような寂しさも、受け取りました。",
+        "update_note": "本人の説明で、二人で話していた未来と、あの頃からの距離が気持ちに関わっていたことが分かりました。共同準備や約束があったことにはしません。"
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": "TEACHER_ADOPTED_PRIOR"
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "prompt_tokens": 2045,
+      "assistant_eos_tokens": 961,
+      "full_tokens": 3006,
+      "generation_cap": 3712,
+      "prompt_plus_cap": 5757,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。",
+        "reception": "やり方が分かって、安心できてよかったです。",
+        "update_note": null
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": null
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "prompt_tokens": 2087,
+      "assistant_eos_tokens": 896,
+      "full_tokens": 2983,
+      "generation_cap": 3712,
+      "prompt_plus_cap": 5799,
+      "eos_supervised": true,
+      "prompt_supervised": false,
+      "meaning_adopted": true,
+      "body_available": true,
+      "surface": {
+        "observation": "編みかけの見本をほどいたのですね。面倒だったことと、少しさみしかったことが、どちらもあったのですね。",
+        "reception": "二つがどうつながるのかは、まだ分からないのですね。分からないところも含めて、今の言葉として聞いていたいです。",
+        "update_note": null
+      },
+      "question": null,
+      "question_disposition": "END",
+      "prior_origin": null
+    }
+  ],
+  "training_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "before_ids": [
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "after_ids": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "max_training_tokens": 7935,
+  "max_generation_tokens": 8086,
+  "source_rows_and_provenance_preserved": true,
+  "source_and_weights_unchanged": true,
+  "teacher_fit_count": 15,
+  "independent_language_families": 6,
+  "planned_before_calls": 6,
+  "planned_after_calls": 15,
+  "unknown_evaluation_count": 0,
+  "runner_sha256": "602033ae0d84b7d6a4dff88b4c25d571bf1acc47af7876d46373e715da5abecb",
+  "payloads": {
+    "train_messages.jsonl": {
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+      "bytes": 349174
+    },
+    "eval_inputs.jsonl": {
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+      "bytes": 169628
+    }
+  }
+}

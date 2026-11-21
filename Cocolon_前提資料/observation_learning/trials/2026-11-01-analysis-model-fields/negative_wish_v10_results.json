@@ -1,0 +1,228 @@
+{
+  "schema_version": "analysis_negative_wish_v10_public_result.v1",
+  "status": "LIMITED_NEGATIVE_WISH_IMPROVEMENT_NOT_NORMALLY_ADOPTED",
+  "api_commit": "f50acbc379dfb8f7c01cb7b58dfda9d674914e65",
+  "runner_commit": "1ae1c811ece7ae00e48f2eaf2ebe892f58ca0358",
+  "runner_sha256": "19e75cd71c41ad33396c63fe49aac9f0fb582d7286278b17972855f5487e8bd6",
+  "profile": "selected_material.v10",
+  "fixed_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "fixed_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "baseline_profile": "selected_material.v9",
+  "baseline_source": "Exact preserved v9 responses reused; no baseline regeneration.",
+  "system_change": "v9 plus two independent synthetic explanation examples, 930 characters; user/material unchanged.",
+  "examples": {
+    "count": 2,
+    "exact_overlap_with_existing_86_teachers_and_22_evaluations": false,
+    "target_raw_or_evaluation_used_as_teacher": false,
+    "blind_evaluation": false
+  },
+  "limits": {
+    "seconds": 240,
+    "per_generation_seconds": 23,
+    "new_generation": 10,
+    "model_loads": 1,
+    "training_updates": 0
+  },
+  "actual": {
+    "parent_seconds": 73.99475753959268,
+    "child_seconds": 68.61624022759497,
+    "generation_seconds": 53.53791414294392,
+    "new_generation": 10,
+    "stop": 10,
+    "returned_fields": 11,
+    "model_loads": 1,
+    "updates": 0,
+    "exit": 0,
+    "timeout": false,
+    "api_calls": 0,
+    "database_calls": 0
+  },
+  "max_input_tokens": 4279,
+  "output_tokens": 2048,
+  "context_tokens": 8192,
+  "old_supported": 8,
+  "new_supported": 10,
+  "improved_ids": [
+    "E04",
+    "E05"
+  ],
+  "old_supported_graph_text_projection_exact": 8,
+  "old_supported_raw_exact": 6,
+  "changed_candidate_without_typed_delta": [
+    "E06",
+    "AE05"
+  ],
+  "results": [
+    {
+      "id": "E01",
+      "raw_same": true,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 4.674641662277281,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "29bb9b38261c139ef48dc3951bfdf1d5b6fe610bf111d106d6b941c0854f2ebf"
+    },
+    {
+      "id": "E02",
+      "raw_same": true,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 3.8901381827890873,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "89b4b3ccb8aa6ead0f8748ca1563ed674c1af0109689c81e49a857eb2e315bad"
+    },
+    {
+      "id": "E03",
+      "raw_same": true,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 3.938360477797687,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "eacbb0d93eea95d6ef226601373546dc415b0386cb3561b015e3266cfd72583b"
+    },
+    {
+      "id": "E04",
+      "raw_same": false,
+      "before": "UNSUPPORTED",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 4.5497384471818805,
+      "raw_sha256": "360106eb39a740a950696c98b79cf4576ecf1515bee6c531e873e309d07d9f35"
+    },
+    {
+      "id": "E05",
+      "raw_same": false,
+      "before": "UNSUPPORTED",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 6.790104895830154,
+      "raw_sha256": "26a5b0111ba8b268a0f716632ab4bddd924e4154fa8442405a1bca1fc0aa3301"
+    },
+    {
+      "id": "E06",
+      "raw_same": false,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 6.436693010851741,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "9b3e1fff42416fda8dbb3319971a7b46b51f79c9a9ad646e905bbe3f41c410ec"
+    },
+    {
+      "id": "AE05",
+      "raw_same": false,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 5.182036698795855,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "1f24bc9d705c7971a00e95fd79e0b6c3658ba8138495f11fe14e83ab38bea6c4"
+    },
+    {
+      "id": "AP07_v7",
+      "raw_same": true,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 5.8614006182178855,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "0e8af7675af743b2b5494c76aea419e49933021f4bd227477d62090fccf9a35b"
+    },
+    {
+      "id": "AP08_v7",
+      "raw_same": true,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 7.013583792373538,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "2b47e3e84d4134789642d03557ee093eae8012568f3e4b20ca066734824668d9"
+    },
+    {
+      "id": "OP02_v7",
+      "raw_same": true,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "seconds": 5.201216356828809,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "685245d5ea1d55f45b5d5d05b56b02447274c5f1a5234f0541f89fd21250fd74"
+    }
+  ],
+  "checks": {
+    "run": 42188492957,
+    "job": 127794437986,
+    "head": "f50acbc379dfb8f7c01cb7b58dfda9d674914e65",
+    "conclusion": "success",
+    "generation_saved": {
+      "passed": 2442,
+      "skipped": 1,
+      "subtests": 12048,
+      "seconds": 391.56
+    },
+    "owner": {
+      "passed": 1,
+      "deselected": 194,
+      "seconds": 25.79
+    },
+    "cumulative": {
+      "passed": 302,
+      "warnings": 1,
+      "subtests": 2,
+      "seconds": 153.21
+    },
+    "sql": {
+      "source_records": 201,
+      "monthly_references": 15
+    },
+    "local": {
+      "passed": 638,
+      "skipped": 19,
+      "warnings": 1,
+      "seconds": 203.89
+    },
+    "jupyter": {
+      "passed": 37,
+      "warnings": 1,
+      "seconds": 5.65
+    }
+  },
+  "replay": {
+    "candidate_non_generating": 10,
+    "fixed_raw_map_rebuild": 10,
+    "actual_db_current_monthly_reader": false,
+    "independent_same_environment_cpu_confirmation": 10
+  },
+  "preservation": {
+    "filename": "Cocolon_Analysis_NegativeWishV10_20261106.zip",
+    "bytes": 374894,
+    "sha256": "27906586bedbfa694144989fb3a99967e4cd3b940659fa9e870785d9f940b35f",
+    "members": 42,
+    "original_remote_members": 33,
+    "original_members_bytes_sha_matched": true,
+    "export_bytes": 1992562,
+    "export_sha256": "1f87a7d2e7c2db6b41f6fab9a677531c3aef6041d31318491667f9ee50f8aa11",
+    "private_reference": "https://chatgpt.com/library?file_id=libfile_fde3_f-1f1bf457dbd4819189d6b7841b5f0508_2f7470f963808191aaebf050935e72de&account_id=personal"
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "production_deployed": false,
+  "automatic_progression": false,
+  "limitations": [
+    "Known synthetic minimal contrasts, each one record and total11fields; not held-out general meaning accuracy.",
+    "E06 removes one CONTENT_TARGET candidate; AE05 broadens factual NEGATION and adds one CONTENT_TARGET. Typed graph/text/projection remain exact.",
+    "Saved map artifact non-generating reload and multi-record/full-parent/batch composition were not exercised.",
+    "N1/N2 content-target scope and N3 were not regenerated or evaluated here.",
+    "No actual DB/Auth/phone, general implicit role/choice/inter-record acceptance or production deployment."
+  ],
+  "next": "Inspect preserved N1/N2 content-target scope against original material/owner on CPU; do not rerun this closed trial or adopt v10 normally."
+}

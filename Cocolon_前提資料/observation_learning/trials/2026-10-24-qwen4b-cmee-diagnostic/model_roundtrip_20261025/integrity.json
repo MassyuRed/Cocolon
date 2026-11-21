@@ -1,0 +1,20 @@
+{
+  "archive_sha256": "c7544154321f283ff1fff6ef6d144b2e2e768f5b59c2fcfc940fc6404fa72a13",
+  "archive_bytes": 42694,
+  "members": 11,
+  "all_hashes_valid": true,
+  "script_sha256": "007233cdf80f3372c5417f949bc1997bb1be3f8308afc3d97a1ac6b0fc51b4ac",
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "meaning_count": 2,
+  "body_count": 2,
+  "actual_initial_snapshot_used": true,
+  "final_question_is_none": true,
+  "final_decision": "END",
+  "actual_raw_matches_prior_fit": [
+    true,
+    true
+  ],
+  "raw_substitution": false,
+  "product_accepted": false
+}

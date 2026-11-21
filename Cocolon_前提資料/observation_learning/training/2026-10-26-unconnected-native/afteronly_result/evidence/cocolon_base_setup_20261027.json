@@ -1,0 +1,9 @@
+{
+  "status": "BASE_AND_BOUND_PLAN_READY",
+  "seconds": 9.087590788025409,
+  "base": "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "model_loaded": false,
+  "learning": 0,
+  "gpu_calls": 0,
+  "plan_sha256": "be3cc5712a30c26f52baae79a7b4d63fbdba37cda347575f438c9b196783a228"
+}

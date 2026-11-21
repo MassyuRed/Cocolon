@@ -1,0 +1,89 @@
+{
+  "schema": "cocolon.native15_afteronly.book_reading_review.v1",
+  "review_date_jst": "2026-10-27",
+  "scope": "BOOK初回・回答後の実rawと凍結元入力/教師/旧before2の読み取り比較。全体JSONの修復や欠落補完は行っていない。",
+  "comparison_sources": {
+    "after_directory": "/workspace/scratch/8b32a91611bc/afteronly_preview",
+    "frozen_train_file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+    "frozen_train_sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "frozen_eval_file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+    "frozen_eval_sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "before_archive": "/workspace/scratch/native15_gpu_result_20261026.tar.gz",
+    "teacher_ids": [
+      "FT-BOOK-INITIAL",
+      "FT-BOOK-AFTER-ANSWER"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "after_file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_FT-BOOK-INITIAL.jsonl",
+      "after_file_sha256": "7e639f8ce1f1c8ad390afe6a5353459380a02a542b8a21fb33287b913fadca6a",
+      "after_raw_utf8_sha256": "8abadb75a224df20be4d55917bf687d2159bbe66bd6467dda7585ad35d3bd743",
+      "after_output_tokens": 1053,
+      "after_seconds": 41.71425641095266,
+      "after_eos_reached": true,
+      "after_finish_reason": "stop",
+      "before_member": "before_FT-BOOK-INITIAL.jsonl",
+      "before_output_tokens": 1261,
+      "before_seconds": 63.86589823756367,
+      "before_eos_reached": true,
+      "before_raw_utf8_sha256": "bffac30e5d2514fcc287d260b5ca12bd2f7b19e948f184a7032232a5a10f7a40",
+      "improvements": [
+        "旧beforeの原文にない「その場は済んだけど」とAI側の「私の方で持ち続けています」が消えた。",
+        "claim6個から元の4個へ戻り、claim_id・文字列参照・about_timeのobject形式を出力した。",
+        "evidence_quotes6件は全て元のmemoまたはmemo_action内に実在する。",
+        "問い「何が気になりますか？」を維持した。"
+      ],
+      "remaining_issues": [
+        "remaining_concern.about_timeは教師のWRITTEN_PRESENT/expression=nullに対して、PRESENT/expression=\"2026-10-26\"。原文にない日付を時点表現へ追加。",
+        "reassurance_receivedのclaimと引用へ接続詞「けど」まで含め、教師の原子役割範囲と異なる。",
+        "Receptionは「まだちょっと気になるのですね。気がかりの対象は未記載です。」。Observationの反復と内部説明調で、本人へ向けた受け取りが薄い。",
+        "Reception bindingはremaining_concernだけで、教師が共同保持するreassurance_receivedを含まない。",
+        "unknown_id/target_unknown_refは教師missing_explanationから説明文IDへ変更。相互参照自体は同じ値だが、CMEE採否は未実測。"
+      ]
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "after_file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "after_file_sha256": "724903e55d284e1e6845a7adf745c03517a9c4ef7d2178acd93c5a3f58f0e6e6",
+      "after_raw_utf8_sha256": "5f96a0294ae9c068bf5b696ee87a995ce891917a40426161b873256cac367ba9",
+      "after_output_tokens": 3712,
+      "after_seconds": 146.4204135609325,
+      "after_eos_reached": false,
+      "after_finish_reason": "length",
+      "before_member": "before_FT-BOOK-AFTER-ANSWER.jsonl",
+      "before_output_tokens": 3625,
+      "before_seconds": 180.02064375579357,
+      "before_eos_reached": false,
+      "before_raw_utf8_sha256": "d2c2de66bd80eb5a710bec5d0ba067e1abc9a4aad958b74a51528b160e15b617",
+      "improvements_limited_to_prefix": [
+        "旧beforeにあった一部claim内の局所JSON崩れに対し、今回のclaims/relations配列はraw内の完結した部分として読める。全体JSON成功ではない。",
+        "self_statementは旧beforeの反実的振返り引用から、本人の「週末に返すね」と述べた過去の発言へ近付いた。ただし時点/sourceの誤りは残る。"
+      ],
+      "remaining_issues": [
+        "3712token上限で未閉鎖JSON。update_note用bindingsをupdate_refs=[0]から[95]まで96個反復し、次の項目の途中で終了。",
+        "本文observation/reception/update_note文字列、evidence_quotes、unknowns、updates本体へ到達していない。したがって回答後の本人向け受け取り本文を評価できない。",
+        "元のremaining_concern claimが欠落しているが、memo_linkはその不存在IDを参照している。",
+        "returned claim_idが重複し、片方のtext/predicateは「まだちょっと気になる」。返却行動と残存する感情が混線している。",
+        "no_contactのtextは反実的な「一言、遅くなるって伝えておけばよかったな」、counterfactualのtextは実際の「遅くなると分かった時点で連絡しなかったことです」。無連絡の事実と振返りの役割を取り違えている。",
+        "late_awarenessも「遅くなると分かった」へ限定されず、無連絡まで含む全文をSTATEとして抱えている。",
+        "回答由来のclaimのabout_time.anchor_source_idが全て原入力FT-BOOK-Oのままで、回答source sixrow-answer-bookへ束縛されていない。",
+        "time.kindにPRESENTを使用し、expressionへANSWER_TIME/WRITTEN_PAST_UNRESOLVED_OCCASIONの内部ラベルを記入。原文の時点表現との区別が崩れている。",
+        "教師の回答説明に対応するanswer_explains_target関係は、raw内で完結したrelations配列には存在しない。"
+      ]
+    }
+  ],
+  "summary": "初回には架空内容の削除と形式整合の局所改善。回答後は意味の取り違え/元経験保持漏れ/binding反復/本文未到達が残る。",
+  "cmee_adoption_status": "NOT_MEASURED_BY_THIS_REVIEW_ROOT_MEASURING_SEPARATELY",
+  "cmee_pass_or_fail_claimed": false,
+  "performance_comparison_limit": "旧A4500と新A5000でGPUが異なるため、時間短縮を学習効果へ換算しない。",
+  "new_model_calls": 0,
+  "raw_repair": 0,
+  "teacher_changes": 0,
+  "evaluation_changes": 0,
+  "github_writes": 0,
+  "gpu_operations": 0,
+  "external_operations": 0,
+  "product_accepted": false
+}

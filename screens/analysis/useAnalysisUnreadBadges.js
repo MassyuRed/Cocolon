@@ -1,10 +1,10 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useUnread } from "../../UnreadContext";
-import { apiGet, apiPost } from "../../lib/apiClient";
+import { apiGet } from "../../lib/apiClient";
 import { supabase } from "../../lib/supabase";
-import { ANALYSIS_WIRE, SELF_STRUCTURE_WIRE } from "../../lib/compat/legacyWireContracts";
+import { SELF_STRUCTURE_WIRE } from "../../lib/compat/legacyWireContracts";
 import {
   REPORT_READ_STATUS_CHUNK_SIZE,
   SELF_STRUCTURE_HISTORY_FETCH_LIMIT,
@@ -18,27 +18,9 @@ export function useAnalysisUnreadBadges({
 }) {
   const { getFeatureUnread } = useUnread();
   const unreadRefreshSeqRef = useRef(0);
-
-  const [unreadByType, setUnreadByType] = useState({
-    daily: false,
-    weekly: false,
-    monthly: false,
-    selfStructure: false,
-  });
-  const [unreadResolved, setUnreadResolved] = useState(false);
   const [selfStructureUnreadResolved, setSelfStructureUnreadResolved] = useState(false);
   const [selfStructureLatestUnread, setSelfStructureLatestUnread] = useState(false);
   const [selfStructureHistoryUnread, setSelfStructureHistoryUnread] = useState(false);
-
-  const prefetchedUnreadByType = useMemo(
-    () => ({
-      daily: !!getFeatureUnread("Analysis", "daily"),
-      weekly: !!getFeatureUnread("Analysis", "weekly"),
-      monthly: !!getFeatureUnread("Analysis", "monthly"),
-      selfStructure: !!getFeatureUnread("Analysis", "selfStructure"),
-    }),
-    [getFeatureUnread]
-  );
 
   const fetchReportReadIdSet = useCallback(async (reportIds) => {
     const ids = Array.from(
@@ -134,115 +116,47 @@ export function useAnalysisUnreadBadges({
       }
 
       setSelfStructureLatestUnread(false);
-      setUnreadByType((prev) => ({
-        ...prev,
-        selfStructure: !!selfStructureHistoryUnread,
-      }));
       await requestParentTabUnreadRefresh();
     },
-    [getSelfStructureLatestSeenStorageKey, selfStructureHistoryUnread, requestParentTabUnreadRefresh]
+    [getSelfStructureLatestSeenStorageKey, requestParentTabUnreadRefresh]
   );
 
   const refreshUnreadBadges = useCallback(async () => {
     const refreshSeq = ++unreadRefreshSeqRef.current;
     const isStale = () => refreshSeq !== unreadRefreshSeqRef.current;
 
-    const selfStructureTask = Promise.all([
-      fetchSelfStructureLatestUnread().catch((e) => {
-        console.warn("AnalysisScreen: failed to refresh latest self-structure unread badge", e);
+    const [latestUnread, historyUnread] = await Promise.all([
+      fetchSelfStructureLatestUnread().catch((error) => {
+        console.warn("AnalysisScreen: failed to refresh latest self-structure unread badge", error);
         return false;
       }),
-      fetchSelfStructureHistoryUnread().catch((e) => {
-        console.warn("AnalysisScreen: failed to refresh self-structure history unread badge", e);
+      fetchSelfStructureHistoryUnread().catch((error) => {
+        console.warn("AnalysisScreen: failed to refresh self-structure history unread badge", error);
         return false;
       }),
-    ])
-      .then(([nextSelfStructureLatestUnread, nextSelfStructureHistoryUnread]) => {
-        if (isStale()) return;
+    ]);
 
-        const effectiveSelfStructureUnread =
-          !!nextSelfStructureLatestUnread || !!nextSelfStructureHistoryUnread;
-
-        setSelfStructureLatestUnread(!!nextSelfStructureLatestUnread);
-        setSelfStructureHistoryUnread(!!nextSelfStructureHistoryUnread);
-        setUnreadByType((prev) => ({
-          ...prev,
-          selfStructure: effectiveSelfStructureUnread,
-        }));
-        setSelfStructureUnreadResolved(true);
-      })
-      .catch(() => {
-        // noop
-      });
-
-    try {
-      const query = new URLSearchParams({
-        limit: "1",
-        include_self_structure: "false",
-      }).toString();
-
-      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${query}`);
-      const unread = json?.unread_by_type || {};
-
-      if (isStale()) return;
-
-      setUnreadByType((prev) => ({
-        ...prev,
-        daily: !!unread?.daily,
-        weekly: !!unread?.weekly,
-        monthly: !!unread?.monthly,
-      }));
-      setUnreadResolved(true);
-    } catch (e) {
-      if (isStale()) return;
-      console.warn("AnalysisScreen: failed to refresh unread badges", e);
-    }
-
-    void selfStructureTask;
+    if (isStale()) return;
+    setSelfStructureLatestUnread(latestUnread);
+    setSelfStructureHistoryUnread(historyUnread);
+    setSelfStructureUnreadResolved(true);
     await requestParentTabUnreadRefresh();
   }, [fetchSelfStructureHistoryUnread, fetchSelfStructureLatestUnread, requestParentTabUnreadRefresh]);
 
-  const markReportRead = useCallback(async (report) => {
-    const reportId = report?.id ? String(report.id) : null;
-    if (!reportId) return;
-
-    try {
-      await apiPost("/report-reads/mark", {
-        report_id: reportId,
-        report_table: ANALYSIS_WIRE.reportFamily.table,
-        report_scope: ANALYSIS_WIRE.reportFamily.scope,
-      });
-    } catch (e) {
-      console.warn("AnalysisScreen: failed to mark report read", e);
-    }
-  }, []);
-
-  const emotionAnalysisUnread = unreadResolved
-    ? !!(unreadByType.daily || unreadByType.weekly || unreadByType.monthly)
-    : !!(
-        prefetchedUnreadByType.daily ||
-        prefetchedUnreadByType.weekly ||
-        prefetchedUnreadByType.monthly
-      );
   const selfStructureUnread = (() => {
     if (subscriptionLoading) return false;
     if (selfStructureUnreadResolved) {
       return !!(selfStructureLatestUnread || (isPaid && selfStructureHistoryUnread));
     }
-    return !!prefetchedUnreadByType.selfStructure;
+    return !!getFeatureUnread("Analysis", "selfStructure");
   })();
 
   return {
-    unreadByType,
-    unreadResolved,
     selfStructureUnreadResolved,
     selfStructureLatestUnread,
     selfStructureHistoryUnread,
-    prefetchedUnreadByType,
-    emotionAnalysisUnread,
     selfStructureUnread,
     refreshUnreadBadges,
     markSelfStructureLatestSeen,
-    markReportRead,
   };
 }

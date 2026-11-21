@@ -1,0 +1,28 @@
+{
+  "state": "STATIC_CODE_AND_FROZEN_PACKET_REVIEW_NO_BLOCKING_ISSUE",
+  "api_commit": "c258cf0e5a6ba59429553638c4765fe7c17b561a",
+  "scope_sha256": "e84f40b9c3d70c551344ccbae900116ca520e2f6e12344865bd1614be901a76e",
+  "initial_files": 9,
+  "initial_bytes": 3127144,
+  "candidate_execution_sha256": "fbe0109ac1bbbdc81f4046eaa390b1936523fd19d24fdfedb796c92157af4e7e",
+  "local_finalizer_sha256": "cb2bea6b7e270615af9e589a7261078eeb479079002a6548304e024c90c471b3",
+  "resolved_before_remote_execution": [
+    "finite_native_call_cap_and_loopback_listener_ownership",
+    "exact_B8_transport_request_bytes_preserved",
+    "required_result_raw_projection_text_source_bound_meaning_review_before_SQL"
+  ],
+  "original_provider_restoration_proof_scope": "argv/env/cwd/source-and-weight hashes and health; candidate before/after controls are not original-native response equality",
+  "open_limits": [
+    "Real4B semantic quality unmeasured",
+    "Actual cachedtokenizer and GPU dependencies not checked this turn",
+    "Syntactically valid duplicate/scope/length output may be rejected by compiler",
+    "Titles/labels/readings remain model-authored and require full source comparison"
+  ],
+  "GPU": 0,
+  "Pod_upload": 0,
+  "training": 0,
+  "retry": 0,
+  "normal_rollout": 0,
+  "approval": "NEW_EXACT_SCOPE_REQUIRED_NOT_INHERITED_FROM_CONSUMED_A7",
+  "product_acceptance": false
+}

@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-08 JST",
+  "api_before": "e14d4fec18394e5257508f3e92100f9cc1bf536e",
+  "api_after": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+  "new_actual_replies": 24,
+  "source_count": 6,
+  "variants": 4,
+  "all_http_200_and_stop": true,
+  "run_seconds": 37.146570779848844,
+  "http_seconds": 36.95894757495262,
+  "training_updates": 0,
+  "new_model_loads": 0,
+  "provider_retry": 0,
+  "normal_adoption": false,
+  "local_before_tests": 237,
+  "local_after_tests": 250,
+  "baseline_final": 24,
+  "after_final": 22,
+  "after_rejected": 2,
+  "retained_reply_bytes_unchanged": true,
+  "full_reply_semantic_coverage": false,
+  "normal_prompt_and_material_unchanged": true,
+  "production_deployment": false,
+  "live_db_writes": 0,
+  "rn_build_changes": 0,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "general_meaning_quality_accepted": false,
+  "structure_map_delta": "NONE",
+  "structure_map_reason": "bounded validation change inside existing natural reply owner; no new path, type, author, wire, persistence owner or lifecycle",
+  "ci_status": "SUCCESS",
+  "ci_runs": [
+    {
+      "id": 42485547144,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42485547144"
+    },
+    {
+      "id": 42485547296,
+      "name": "Analysis observed content",
+      "commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42485547296"
+    }
+  ],
+  "ci_verified_jst": "2026-11-08T22:49:47.000+09:00"
+}

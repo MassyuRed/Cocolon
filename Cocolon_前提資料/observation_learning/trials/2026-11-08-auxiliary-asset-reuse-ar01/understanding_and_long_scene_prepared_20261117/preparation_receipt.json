@@ -1,0 +1,95 @@
+{
+  "SQL": 0,
+  "file_manifest": {
+    "current_api_sources.zip": {
+      "bytes": 2592703,
+      "sha256": "2b660e2541c6b895e920051b0eb48ab1bbfc2e5a2830308a2b42a83a3ddb180e"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 105208,
+      "sha256": "19ba5f15daf329fcbdc0022e46b9894b478727dc48cb3c0792c2bc183be1ad5c"
+    },
+    "event_plan_execution.py": {
+      "bytes": 34103,
+      "sha256": "904d7e1ee937c7e79ae297db42132156f3825997b4374be60e0a2c8d79ca664a"
+    },
+    "execution_scope.template.json": {
+      "bytes": 10278,
+      "sha256": "f84e4a4ffbf4522fb36e75d1ee7091b8a46bcdccb70a675761d38bd18401e3cd"
+    },
+    "fresh_v3_fit.py": {
+      "bytes": 17070,
+      "sha256": "a3532a0e315aaeaa8a8c63200085957d53306c58255061dea01a694583ac37b8"
+    },
+    "fresh_v3_fit_once.py": {
+      "bytes": 13192,
+      "sha256": "cb3b3c985890b9104ab19a1c071e1123be3c0890020fbe4d2e5f27008e2fb351"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 275412,
+      "sha256": "8b4be44c7d9ca2f60d4e1ed829d3652658a7bdeb0fcaccf1dc6d95e16f68ac24"
+    },
+    "prepare_fit19_and_eval19.py": {
+      "bytes": 5533,
+      "sha256": "b6f787abd52ac30b4b5f58b71a3ac366bcc55bcbea02c17c00bae7997faff919"
+    },
+    "source_manifest.json": {
+      "bytes": 191353,
+      "sha256": "d357534cc9d1f3b3899cb2fc45d829016abf9eba18efa13e5f0e103bc1067efa"
+    },
+    "token_capacity.json": {
+      "bytes": 8423,
+      "sha256": "43e6a910d76eec51eb9845b4e58f18948e44f081fb0f5e7313ee1c64853a82a5"
+    },
+    "train_piece_model_adapter.py": {
+      "bytes": 18654,
+      "sha256": "04c1438a4e8ac9f2939d2bfb4fc958553ad462acfef1d8ddcc8d2612ac11ec67"
+    },
+    "training_independent_review.json": {
+      "bytes": 3269,
+      "sha256": "f4281228c4e226502cf0a0e99bb5b4a9bb8dd7ecec00f7640ed49f0ed33f76a7"
+    },
+    "training_material.json": {
+      "bytes": 409969,
+      "sha256": "59978e6c05ba3ef24a6e8eb990b1466e2bcb98d0d84d9a6a90fb4de30656a8d9"
+    },
+    "training_root_review.json": {
+      "bytes": 1698,
+      "sha256": "e3dd65d3172064f0213928ccdb941615448e90fdb406bb14156af384952821e8"
+    },
+    "training_scope.json": {
+      "bytes": 12505,
+      "sha256": "b5bd60f7b5fe7396af02f7d797b9d2765eb198c1e37ba8b4be1399da90d49893"
+    },
+    "training_validation.json": {
+      "bytes": 334088,
+      "sha256": "0bbb2b088cd52ba7e9e83adf8ee4ce153edca46761daef9063f9bbf6a0c699a8"
+    }
+  },
+  "model_calls": 0,
+  "normal_adoption": false,
+  "same_pod_copy": {
+    "destination_root": "/workspace/cocolon-node-local-v3-fit19-payload-20261117",
+    "files": {
+      "controls.json": {
+        "bytes": 17840,
+        "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+      },
+      "full12.input.json": {
+        "bytes": 59146,
+        "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+      },
+      "input_cases.json": {
+        "bytes": 22769,
+        "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+      }
+    },
+    "source_root": "/workspace/cocolon-node-local-v3-payload-a17-20261117"
+  },
+  "source_commit": "5af8625599aa80f90c983cdec34144e88a133d1e",
+  "state": "FIT19_A19_B19_PREPARED_PENDING_SPECIFIC_CONSENT_NOT_EXECUTED",
+  "training_scope_sha256": "b5bd60f7b5fe7396af02f7d797b9d2765eb198c1e37ba8b4be1399da90d49893",
+  "training_updates": 0,
+  "upload_bytes": 4033458,
+  "upload_files": 16
+}

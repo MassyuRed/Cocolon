@@ -1,0 +1,66 @@
+{
+  "status": "COMPLETE",
+  "calls": [
+    {
+      "condition": "base_clarified",
+      "probe_id": "AF01",
+      "status": "RETURNED",
+      "finish_reason": "stop",
+      "seconds": 15.368167724926025,
+      "raw_sha256": "ead0706fac64d8ab109a7dd42dc0f29d490dcc6da127d0007c8715ff7c78d539",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_quote_ambiguous_or_missing",
+      "artifact_created": false
+    },
+    {
+      "condition": "base_clarified",
+      "probe_id": "AF02",
+      "status": "RETURNED",
+      "finish_reason": "length",
+      "seconds": 23.010649827076122,
+      "raw_sha256": "708895bfd22d002a52855e350b75203ecf5262f31dd6a788ebb56925f2ec81ae",
+      "admission": "REJECTED",
+      "reason": "analysis_model_generation_incomplete",
+      "artifact_created": false
+    }
+  ],
+  "synthetic_only": true,
+  "training": false,
+  "retry": false,
+  "max_calls": 2,
+  "max_process_seconds": 300,
+  "max_request_seconds": 23,
+  "requests_sha256": "14ae799ae81f16710d6c519b3efffb4dfae800a94cbc8b50361708b13f573e17",
+  "runner_sha256": "909b7c8eb764f3928718609672dc8f2a6bf0e4a9b2151847343964c8279aa823",
+  "started_at": "2026-11-01T23:56:23.094694+00:00",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "adapter_identity": [
+    "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+    "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145"
+  ],
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "input_tokens": {
+    "AF01": 932,
+    "AF02": 902
+  },
+  "process_seconds": 48.970337043982,
+  "ended_at": "2026-11-01T23:57:12.065431+00:00",
+  "private_archive": {
+    "library_file_id": "libfile_566fc5131b848191849a3747bbbd7d64",
+    "filename": "cocolon-analysis-units-clarified2-20261102.zip",
+    "bytes": 124432,
+    "sha256": "604a18f7cea55d642ed146f974a70fee5fd538c8230a4a0c3051759a170de06c",
+    "members": 13
+  },
+  "semantic_quality": "NOT_ACCEPTED: wrong quoted qualifier/carrier binding and repeated output",
+  "product_credit": 0
+}

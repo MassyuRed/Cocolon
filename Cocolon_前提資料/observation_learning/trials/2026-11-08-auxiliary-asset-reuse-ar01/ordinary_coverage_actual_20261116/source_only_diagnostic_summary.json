@@ -1,0 +1,68 @@
+{
+  "schema": "cocolon.analysis.a2.source_only_diagnostic_summary.v1",
+  "state": "SOURCE_ONLY_DIAGNOSTICS_NOT_USED_AS_FACT_OR_GENERATION_INPUT",
+  "actual_result_sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a",
+  "source_artifacts": {
+    "existing_source_duties_pure_diagnostic.json": {
+      "bytes": 9329,
+      "sha256": "06d4d29914d79bff3344b285612614430b1d12e1c6034aefdfa67c39ce8a7a89",
+      "copied_to_public_trial": true
+    },
+    "neutral_original_clause_attention_index.source_only.json": {
+      "bytes": 12876,
+      "sha256": "b138e58172333e35c7a3e4b1a06c8bb383ec76f05906e275752ec99ebdb0eba9",
+      "copied_to_public_trial": false
+    },
+    "source_grounded_plan_outputs.source_only.json": {
+      "bytes": 903048,
+      "sha256": "2150bb80029c9bf022ff3d496cf84717228f4370338ababbd155f17df031ee57",
+      "copied_to_public_trial": false
+    },
+    "existing_teaching_style_source_audit.json": {
+      "bytes": 5428,
+      "sha256": "f2065b413d9b76560b0f9109681d4fdf1b583be469b33dc50b0ec2be0a31f1cd",
+      "copied_to_public_trial": true
+    }
+  },
+  "existing_source_duties": [
+    {
+      "condition": "book_club_two_day",
+      "claims_count": 0,
+      "written_relations_count": 0,
+      "interpretation_status": "UNASSESSED",
+      "counterfactual_v2_not_actual_response": true
+    },
+    {
+      "condition": "lighting_prior_and_later",
+      "claims_count": 0,
+      "written_relations_count": 0,
+      "interpretation_status": "UNASSESSED",
+      "counterfactual_v2_not_actual_response": true
+    }
+  ],
+  "neutral_index": {
+    "field_count": 8,
+    "clause_count": 111,
+    "contains_actor_state_polarity_or_time_claims": false,
+    "used_for_generation": false,
+    "adopted_for_next_candidate": false
+  },
+  "finite_raw_frame": {
+    "source_owner_output_not_adopted_proposition": true,
+    "default_actor_current_user_is_not_proof_of_self": true,
+    "example_limit": "The coworkers venue-inquiry clause can carry coarse actor=current_user. This is not evidence that the user sent the inquiry.",
+    "existing_owner": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+    "owner_lines": [
+      457,
+      961
+    ],
+    "owner_sha256": "138f54c9c8800e970bae69a81e2a696c45f7515687636daae0e5fa8085512f10"
+  },
+  "teaching_style_audit_limit": "Existing synthetic target policy wording is inventoried; its presence is not a proof of error or A2 failure causality.",
+  "source_or_actual_raw_edited": false,
+  "actual_receipts_rebound": false,
+  "diagnostic_model_calls": 0,
+  "diagnostic_database_calls": 0,
+  "meaning_quality_verified": false,
+  "large_source_plan_kept_in_private_handoff_not_copied": true
+}

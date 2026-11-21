@@ -1,0 +1,62 @@
+{
+  "run/run.json": {
+    "bytes": 2999,
+    "sha256": "9eea21a00af228520f897d71be041d12a63260057bbb79f6dfa46f93f2f91070"
+  },
+  "run/loaded_tensors.json": {
+    "bytes": 26053,
+    "sha256": "8db843456c150b019c7ce9f7db269f6ccfeb9954cb476338d6e0a6d52d8a46a5"
+  },
+  "run/after_FT-BOOK-AFTER-ANSWER.jsonl": {
+    "bytes": 43183,
+    "sha256": "a68b12690de6be4d989f57045c76eb1e71408ad954ba6fbe32cfa9f58ebccac8"
+  },
+  "run/after_FT-SHOP-AFTER-ANSWER.jsonl": {
+    "bytes": 41708,
+    "sha256": "6074d356c35b15d842ce4ee41978978a5d22e682401d6e064b83f33dc531e426"
+  },
+  "diagnosis/diagnosis.json": {
+    "bytes": 40523,
+    "sha256": "699fed3a392af969d35bbb0c1cf94c80d1dc0058bd20b4a841742b2bd2583baf"
+  },
+  "source/probe2.plan.json": {
+    "bytes": 1671,
+    "sha256": "57ff68b26a24fd53b771c506926180abdd8adae07f58f1626525889defd3f129"
+  },
+  "source/run_probe2.py": {
+    "bytes": 7701,
+    "sha256": "76eca409b1746e9a2bd7e6490c1c7d2659e7816c1661787eaafe071206b8c292"
+  },
+  "source/consume_probe2.py": {
+    "bytes": 5289,
+    "sha256": "97396aa4797a74dbba77b8acc0eaa69f29e2860ce4d0072fc5520ecd26f6123c"
+  },
+  "source/model_candidate_source.py": {
+    "bytes": 28419,
+    "sha256": "31512acc35b374ca3ab5924b55cc120404d1208d98375f40a801240e2cb6852c"
+  },
+  "source/actual_cpu_check.json": {
+    "bytes": 16984,
+    "sha256": "e5a409b988771e422d34a4bcca8cb32e34772fea4ea2bd4f3f9566380b81db86"
+  },
+  "source/eval_inputs.json": {
+    "bytes": 173280,
+    "sha256": "05d2e02f042b478dec28605d28f6dd9ae93c132aeb7a715f95a83bb4458d1774"
+  },
+  "execution/cocolon_prior_quote_probe2_gpu_launch_20261027.json": {
+    "bytes": 565,
+    "sha256": "addce13cbc5cdf1cf593afd7a9d7bec19252d63627a0617cb0a2082664fd4765"
+  },
+  "execution/cocolon_prior_quote_probe2_gpu_20261027.log": {
+    "bytes": 2903,
+    "sha256": "10aa9580dcde2aa68e0a1c37b39d6804817809b065b3e58439964f6ae3ed9fcb"
+  },
+  "execution/cocolon_prior_quote_probe2_consumer_launch_20261027.json": {
+    "bytes": 447,
+    "sha256": "1d4c689b33f0b9d6ba5dde01117ed265f2914360b82f73133f90f4dfc6b80f04"
+  },
+  "execution/cocolon_prior_quote_probe2_consumer_20261027.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,1317 @@
+{
+  "schema": "cocolon.piece.multiple_corrections.normal_rollout.v1",
+  "fictional_only": true,
+  "api_source": "d10c3f8688ae77afd3907a2d1c94db9d58312665",
+  "rn_source": "b142969e97b2d584d029428ce5b06e82be9a2c1a",
+  "cases": [
+    {
+      "tier": "free",
+      "operations": [
+        "REVISE",
+        "REVISE"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」ではなく「私は家族を守りたい」です。",
+        "「私は資料を調べた」ではなく「私は約束を守りたい」です。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は家族を守りたい\n\n私は約束を守りたい",
+        "piece_text_hash": "4ecf5eb2c545c88b129fb5827ea087cae94effeea00df1daa2fa75be7a1fd799",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は家族を守りたい",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "2703ad7d9705f6a047b37a4e3025fa1b2e96b4b6d60d9d5e5e94590ea2fae1e8",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "plus",
+      "operations": [
+        "REVISE",
+        "REVISE"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」ではなく「私は家族を守りたい」です。",
+        "「私は資料を調べた」ではなく「私は約束を守りたい」です。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は家族を守りたい\n\n私は約束を守りたい",
+        "piece_text_hash": "4ecf5eb2c545c88b129fb5827ea087cae94effeea00df1daa2fa75be7a1fd799",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は家族を守りたい",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "2703ad7d9705f6a047b37a4e3025fa1b2e96b4b6d60d9d5e5e94590ea2fae1e8",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "plus",
+      "operations": [
+        "WITHDRAW",
+        "WITHDRAW"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」は取り消します。",
+        "「私は資料を調べた」は取り消します。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。",
+        "piece_text_hash": "b06f013d9cb00d2cceaf89037abf464da184ae68dbf19f318c05057aa8fb571d",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "437c66d6fc6ff4e39689b6b293a49036289ec30822270f70077b2f1c03a0bec7",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "premium",
+      "operations": [
+        "WITHDRAW",
+        "WITHDRAW"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」は取り消します。",
+        "「私は資料を調べた」は取り消します。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。",
+        "piece_text_hash": "b06f013d9cb00d2cceaf89037abf464da184ae68dbf19f318c05057aa8fb571d",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "437c66d6fc6ff4e39689b6b293a49036289ec30822270f70077b2f1c03a0bec7",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "premium",
+      "operations": [
+        "REVISE",
+        "REVISE"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」ではなく「私は家族を守りたい」です。",
+        "「私は資料を調べた」ではなく「私は約束を守りたい」です。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は家族を守りたい\n\n私は約束を守りたい",
+        "piece_text_hash": "4ecf5eb2c545c88b129fb5827ea087cae94effeea00df1daa2fa75be7a1fd799",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は家族を守りたい",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "2703ad7d9705f6a047b37a4e3025fa1b2e96b4b6d60d9d5e5e94590ea2fae1e8",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "free",
+      "operations": [
+        "REVISE",
+        "WITHDRAW"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」ではなく「私は家族を守りたい」です。",
+        "「私は資料を調べた」は取り消します。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は家族を守りたい",
+        "piece_text_hash": "0e370dd4332432c3ad3807055622a527b63867c0f684fe771253a214ec8d4d69",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は家族を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d87e9c195b34d97163f0912238ff886e090046ef1d6e5f0310ffa58b4335d171",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "plus",
+      "operations": [
+        "REVISE",
+        "WITHDRAW"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」ではなく「私は家族を守りたい」です。",
+        "「私は資料を調べた」は取り消します。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は家族を守りたい",
+        "piece_text_hash": "0e370dd4332432c3ad3807055622a527b63867c0f684fe771253a214ec8d4d69",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は家族を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d87e9c195b34d97163f0912238ff886e090046ef1d6e5f0310ffa58b4335d171",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "premium",
+      "operations": [
+        "REVISE",
+        "WITHDRAW"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」ではなく「私は家族を守りたい」です。",
+        "「私は資料を調べた」は取り消します。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は家族を守りたい",
+        "piece_text_hash": "0e370dd4332432c3ad3807055622a527b63867c0f684fe771253a214ec8d4d69",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は家族を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d87e9c195b34d97163f0912238ff886e090046ef1d6e5f0310ffa58b4335d171",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "free",
+      "operations": [
+        "WITHDRAW",
+        "REVISE"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」は取り消します。",
+        "「私は資料を調べた」ではなく「私は約束を守りたい」です。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は約束を守りたい",
+        "piece_text_hash": "42a4e950337fc33e32a4f1d37160df68a557c7e1f4bea5e0f2906cc232aa7804",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4eae16b92ad978143800ff4d5f11196f96b75112a85c805242e613e553df9281",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "plus",
+      "operations": [
+        "WITHDRAW",
+        "REVISE"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」は取り消します。",
+        "「私は資料を調べた」ではなく「私は約束を守りたい」です。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は約束を守りたい",
+        "piece_text_hash": "42a4e950337fc33e32a4f1d37160df68a557c7e1f4bea5e0f2906cc232aa7804",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4eae16b92ad978143800ff4d5f11196f96b75112a85c805242e613e553df9281",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "premium",
+      "operations": [
+        "WITHDRAW",
+        "REVISE"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」は取り消します。",
+        "「私は資料を調べた」ではなく「私は約束を守りたい」です。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。\n\n私は約束を守りたい",
+        "piece_text_hash": "42a4e950337fc33e32a4f1d37160df68a557c7e1f4bea5e0f2906cc232aa7804",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4eae16b92ad978143800ff4d5f11196f96b75112a85c805242e613e553df9281",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    },
+    {
+      "tier": "free",
+      "operations": [
+        "WITHDRAW",
+        "WITHDRAW"
+      ],
+      "original": {
+        "memo": "私は本を読みたい。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "explanations": [
+        "「私は仕事を続けたい」は取り消します。",
+        "「私は資料を調べた」は取り消します。"
+      ],
+      "saved_artifact": {
+        "piece_text": "私は本を読みたい。",
+        "piece_text_hash": "b06f013d9cb00d2cceaf89037abf464da184ae68dbf19f318c05057aa8fb571d",
+        "content_payload": {
+          "body_blocks": [
+            "私は本を読みたい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "437c66d6fc6ff4e39689b6b293a49036289ec30822270f70077b2f1c03a0bec7",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "quota": 1,
+      "original_and_emlis_unchanged": true,
+      "provider_calls": 3
+    }
+  ],
+  "db": {
+    "migration": {
+      "name": "piece_multiple_interpretation_corrections",
+      "version": "20261115000750",
+      "source": "supabase/migrations/20261114235041_piece_multiple_interpretation_corrections.sql",
+      "sha256": "93655133be33d4ac6cea81da135f11f89fbc4587cfc4819bd135b26d301c8edd"
+    },
+    "functions_before": [
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_issue_preview_v2(uuid,text,text,jsonb,integer,text,jsonb)",
+        "definition_md5": "69f7fdc7f6fbb4010d559ecce54941db",
+        "security_definer": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_issue_preview_v2(uuid,text,text,jsonb,integer)",
+        "definition_md5": "01a97bb7999bf18e6f4b7032ca3b871d",
+        "security_definer": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb)",
+        "definition_md5": "018b4babfe2205668714e6e653c015d8",
+        "security_definer": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_save_v2(uuid,uuid,bigint,text,text,text,text,text,text,jsonb,boolean)",
+        "definition_md5": "f961f9950b2ea209473147958c458537",
+        "security_definer": true
+      }
+    ],
+    "functions_after": [
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_issue_preview_v2(uuid,text,text,jsonb,integer,text,jsonb)",
+        "definition_md5": "d9ab63625133626efa4689cdf5ce7eb3",
+        "security_definer": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_issue_preview_v2(uuid,text,text,jsonb,integer)",
+        "definition_md5": "01a97bb7999bf18e6f4b7032ca3b871d",
+        "security_definer": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb)",
+        "definition_md5": "abaec46041bc9d83e7430c147e849606",
+        "security_definer": true
+      },
+      {
+        "acl": "{postgres=X/postgres,service_role=X/postgres}",
+        "config": [
+          "search_path=pg_catalog"
+        ],
+        "signature": "piece_save_v2(uuid,uuid,bigint,text,text,text,text,text,text,jsonb,boolean)",
+        "definition_md5": "03bf226132da62b32f2122729d0a4c88",
+        "security_definer": true
+      }
+    ],
+    "reverse": [
+      {
+        "signature": "piece_issue_preview_v2(uuid,text,text,jsonb,integer,text,jsonb)",
+        "reverse_md5": "69f7fdc7f6fbb4010d559ecce54941db"
+      },
+      {
+        "signature": "piece_issue_preview_v2(uuid,text,text,jsonb,integer)",
+        "reverse_md5": "01a97bb7999bf18e6f4b7032ca3b871d"
+      },
+      {
+        "signature": "piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb)",
+        "reverse_md5": "018b4babfe2205668714e6e653c015d8"
+      },
+      {
+        "signature": "piece_save_v2(uuid,uuid,bigint,text,text,text,text,text,text,jsonb,boolean)",
+        "reverse_md5": "f961f9950b2ea209473147958c458537"
+      }
+    ],
+    "tables_acl_rls_and_column_definitions_unchanged": true,
+    "security_advisor_groups_before_after_unchanged": 7,
+    "new_security_advisor_groups": 0,
+    "authenticated_application_writes": 0,
+    "real_person_row_reads": 0
+  },
+  "local_checks": {
+    "core_final_cases": 74,
+    "application_and_related": 154,
+    "sql_final_cases": 72,
+    "rn_focused": 623,
+    "counts_overlap": true,
+    "metro_bundle_test_excluded_as_in_existing_ci": true
+  },
+  "new_gpu_calls": 0,
+  "new_training": 0,
+  "real_person_db_reads": 0,
+  "authenticated_live_save": 0,
+  "new_native_image": 0,
+  "build_testflight_device": "DEFERRED",
+  "source_files": [
+    {
+      "path": ".github/workflows/piece-b2b-isolated-postgres.yml",
+      "chars": 31047,
+      "bytes": 31047,
+      "sha256": "c2fbc8a981bd18a30ab4b295517de3b62b94a3b5c6e2a080831547f97213b2b5"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py",
+      "chars": 44513,
+      "bytes": 44663,
+      "sha256": "e50accda6e53a98eb5b3d8a2344fa240a2a977f4cf627873e3c32dacbb22c4b5"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py",
+      "chars": 23985,
+      "bytes": 23985,
+      "sha256": "493ad44b945759086065935108973d4fa918f8a909279a22281086f15423defc"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_model_source.py",
+      "chars": 40969,
+      "bytes": 44529,
+      "sha256": "123668be9761369c36f3617fffa387f7fe6e8acd531feae22fbd659fc76d60ed"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_v2_safety_review.py",
+      "chars": 9601,
+      "bytes": 9601,
+      "sha256": "94e402bc9fcf10412b49f0665404ba8a7f24a369be944ae0dc087eb9598e4f94"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_v2_source_adapter.py",
+      "chars": 113956,
+      "bytes": 114004,
+      "sha256": "2deefbb6d387c2e68ac0363ecc2a7578c2bd3f9614a6fdca7dd31a7161946625"
+    },
+    {
+      "path": "ai/tests/piece_v2/test_b05_interpretation_correction_application.py",
+      "chars": 17844,
+      "bytes": 18440,
+      "sha256": "0326f64396dcf2debe5e8b9209babd23e8a682400887d1f6cbe384ac45d6409f"
+    },
+    {
+      "path": "ai/tests/piece_v2/test_b05_interpretation_correction_sql_fence.py",
+      "chars": 22931,
+      "bytes": 23005,
+      "sha256": "d01df68834b8586cd363a39352de53d993a24883c2f8eb970e64daa38711ea64"
+    },
+    {
+      "path": "ai/tests/test_cmee_piece_interpretation_correction.py",
+      "chars": 29321,
+      "bytes": 30471,
+      "sha256": "38314bc1bdfe0e570c9661af9c0d91e9b93cd327b2220fb8bf3812d8a8129562"
+    },
+    {
+      "path": "supabase/migrations/20261114235041_piece_multiple_interpretation_corrections.sql",
+      "chars": 45333,
+      "bytes": 45333,
+      "sha256": "93655133be33d4ac6cea81da135f11f89fbc4587cfc4819bd135b26d301c8edd"
+    }
+  ],
+  "rollout": {
+    "api": {
+      "commit": {
+        "createdAt": "2026-11-15T00:06:38Z",
+        "id": "d10c3f8688ae77afd3907a2d1c94db9d58312665",
+        "message": "feat(piece): preserve ordered interpretation corrections through saved artifacts"
+      },
+      "createdAt": "2026-11-15T00:21:54.320764Z",
+      "finishedAt": "2026-11-15T00:23:17.257361Z",
+      "id": "dep-dbsfm8mk1f9s73959hn0",
+      "startedAt": "2026-11-15T00:21:54.294254Z",
+      "status": "live",
+      "trigger": "manual",
+      "updatedAt": "2026-11-15T00:23:17.257652Z"
+    },
+    "worker": {
+      "commit": {
+        "createdAt": "2026-11-15T00:06:38Z",
+        "id": "d10c3f8688ae77afd3907a2d1c94db9d58312665",
+        "message": "feat(piece): preserve ordered interpretation corrections through saved artifacts"
+      },
+      "createdAt": "2026-11-15T00:22:10.303093Z",
+      "finishedAt": "2026-11-15T00:23:09.836237Z",
+      "id": "dep-dbsfmcgn74is739o569g",
+      "startedAt": "2026-11-15T00:22:10.301074Z",
+      "status": "live",
+      "trigger": "manual",
+      "updatedAt": "2026-11-15T00:23:09.836407Z"
+    },
+    "service_config": [
+      {
+        "id": "srv-d4ppfpm3jp1c73952bj0",
+        "unchanged": true
+      },
+      {
+        "id": "srv-d6copljh46gs73cmeic0",
+        "unchanged": true
+      }
+    ],
+    "worker_instance": "srv-d6copljh46gs73cmeic0-pmtbv",
+    "worker_poll_200_observed": true,
+    "worker_queue": {
+      "ready": 0,
+      "running": 0,
+      "stale_running": 0,
+      "existing_failed": 171
+    },
+    "error_window_utc": {
+      "start": "2026-11-15T00:23:17Z",
+      "end": "2026-11-15T00:24:29.68707995Z",
+      "count": 0,
+      "has_more": false
+    },
+    "http": [
+      {
+        "path": "/healthz",
+        "status": 200,
+        "cache_control": null,
+        "seconds": 7.145,
+        "body": {
+          "status": "ok",
+          "app": "Cocolon MyModel"
+        }
+      },
+      {
+        "path": "/app/bootstrap",
+        "status": 200,
+        "cache_control": null,
+        "seconds": 7.259
+      },
+      {
+        "path": "/analysis/if-route/scenario-sets",
+        "status": 401,
+        "cache_control": "private, no-store",
+        "seconds": 7.143
+      },
+      {
+        "path": "/analysis/saved-route-intents",
+        "status": 401,
+        "cache_control": "private, no-store",
+        "seconds": 7.143
+      },
+      {
+        "path": "/emotion/piece/source-ref/11111111-1111-4111-8111-111111111111",
+        "status": 401,
+        "cache_control": "no-store",
+        "seconds": 7.206
+      },
+      {
+        "path": "/emotion/piece/history",
+        "status": 401,
+        "cache_control": "no-store",
+        "seconds": 7.141
+      }
+    ]
+  },
+  "ci": {
+    "piece": {
+      "run": 43656551656,
+      "job": 132636228118,
+      "attempt": 1,
+      "status": "success",
+      "steps": 41,
+      "pytest_invocations": 27,
+      "passes": 5688,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "deselected": 420,
+      "summary": [
+        "2026-11-15T00:07:17.9006445Z 46 passed, 1 warning in 0.35s",
+        "2026-11-15T00:07:18.5673867Z 4 passed in 0.44s",
+        "2026-11-15T00:07:19.0538190Z 61 passed in 0.29s",
+        "2026-11-15T00:07:24.5193799Z 48 passed in 5.25s",
+        "2026-11-15T00:07:26.3628969Z 9 passed in 1.59s",
+        "2026-11-15T00:07:30.1338488Z 36 passed in 3.58s",
+        "2026-11-15T00:07:38.7607896Z 57 passed in 0.97s",
+        "2026-11-15T00:07:40.0074205Z 39 passed in 0.88s",
+        "2026-11-15T00:07:43.3035095Z 94 passed, 1 warning in 2.82s",
+        "2026-11-15T00:07:57.2909726Z 47 passed, 1 warning in 13.43s",
+        "2026-11-15T00:08:00.0202547Z 33 passed in 2.35s",
+        "2026-11-15T00:08:04.5651245Z 87 passed, 1 warning in 4.04s",
+        "2026-11-15T00:08:12.7500697Z 26 passed, 1 warning in 7.55s",
+        "2026-11-15T00:08:17.8688020Z 54 passed, 1 warning in 4.49s",
+        "2026-11-15T00:08:19.3418704Z 166 passed in 1.02s",
+        "2026-11-15T00:08:21.7742105Z 13 passed in 2.11s",
+        "2026-11-15T00:08:25.3307516Z 1202 passed in 3.13s",
+        "2026-11-15T00:08:37.7155422Z 67 passed, 1 warning in 11.89s",
+        "2026-11-15T00:08:44.6876779Z 36 passed, 1 warning in 6.44s",
+        "2026-11-15T00:09:00.8148858Z 136 passed, 1 warning in 15.51s",
+        "2026-11-15T00:09:04.3335101Z 173 passed, 1 warning in 2.93s",
+        "2026-11-15T00:09:09.0385727Z 13 passed, 1 warning in 4.17s",
+        "2026-11-15T00:09:46.0633310Z 172 passed, 237 warnings in 33.67s",
+        "2026-11-15T00:11:48.8557800Z 307 passed, 1 warning in 119.82s (0:01:59)",
+        "2026-11-15T00:20:01.1991740Z 2638 passed, 1 warning in 487.81s (0:08:07)",
+        "2026-11-15T00:20:03.5320370Z 78 passed, 420 deselected in 1.83s",
+        "2026-11-15T00:20:21.5263877Z 46 passed, 65 warnings in 15.89s"
+      ]
+    },
+    "rn": {
+      "run": 43656612542,
+      "attempt": 1,
+      "status": "success",
+      "jobs": [
+        {
+          "id": 132636418947,
+          "name": "piece-rn-contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "skipped_steps": []
+        },
+        {
+          "id": 132636419197,
+          "name": "piece-ios-rn-canvas",
+          "status": "completed",
+          "conclusion": "success",
+          "skipped_steps": [
+            "Run actions/setup-node@v6",
+            "Install locked packages and existing native patches",
+            "Render the actual Piece component in an isolated simulator test host",
+            "Run actions/upload-artifact@v4"
+          ]
+        },
+        {
+          "id": 132636419295,
+          "name": "piece-export-android",
+          "status": "completed",
+          "conclusion": "success",
+          "skipped_steps": [
+            "Run actions/setup-node@v6",
+            "Run actions/setup-java@v4",
+            "Install locked packages and apply native patches",
+            "Compile only the four Android export libraries"
+          ]
+        },
+        {
+          "id": 132636419336,
+          "name": "piece-ios-source",
+          "status": "completed",
+          "conclusion": "success",
+          "skipped_steps": []
+        },
+        {
+          "id": 132636419338,
+          "name": "piece-android-source",
+          "status": "completed",
+          "conclusion": "success",
+          "skipped_steps": []
+        },
+        {
+          "id": 132636419430,
+          "name": "piece-export-pods",
+          "status": "completed",
+          "conclusion": "success",
+          "skipped_steps": [
+            "Run actions/setup-node@v6",
+            "Install locked packages and apply native patches",
+            "Resolve native Pods without building, signing or distribution",
+            "Compile the four export Pods for the simulator without signing",
+            "Run actions/upload-artifact@v4"
+          ]
+        }
+      ],
+      "contracts": [
+        1499,
+        344
+      ],
+      "source_native": {
+        "native": 129,
+        "v9": 46,
+        "v4": 20,
+        "bitmap": 44,
+        "ar04_bitmap": 4,
+        "fractional": 24
+      },
+      "new_canvas_integration_executed": false
+    },
+    "analysis": {
+      "run": 43656551550,
+      "job": 132636227808,
+      "attempt": 1,
+      "status": "success",
+      "pytest_invocations": 6,
+      "passes": 4865,
+      "subtests_passed": 12995,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "summary": [
+        "2026-11-15T00:07:18.2252900Z 73 passed, 2 warnings in 10.33s",
+        "2026-11-15T00:07:21.8200033Z 45 passed, 1 warning in 3.11s",
+        "2026-11-15T00:17:02.4813013Z 2882 passed, 1 warning, 12236 subtests passed in 579.85s (0:09:39)",
+        "2026-11-15T00:17:33.5650686Z 1 passed, 194 deselected in 30.44s",
+        "2026-11-15T00:29:20.4110555Z 1456 passed, 1 warning, 21 subtests passed in 701.81s (0:11:41)",
+        "2026-11-15T00:30:40.5771270Z 408 passed, 2 warnings, 738 subtests passed in 62.90s (0:01:02)"
+      ]
+    }
+  }
+}

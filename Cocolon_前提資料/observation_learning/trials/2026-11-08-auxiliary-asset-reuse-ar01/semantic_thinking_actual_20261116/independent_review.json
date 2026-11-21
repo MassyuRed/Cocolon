@@ -1,0 +1,71 @@
+{
+  "state": "A7_ORIGINALS_VERIFIED_THINKING_BUDGET_STOP_NO_FINAL_JSON_NOT_ADOPTED",
+  "review_scope": "Recovered originals and exact approved source; body-free summary; no new model or remote operation",
+  "originals": {
+    "archive_bytes": 10450,
+    "archive_sha256": "95d133a9826bc54e7a66214e0c6a98287c3f5a3382a29ce8b9a9a8b1c2b670aa",
+    "members": 9,
+    "CRC_and_extracted_bytes_match": true,
+    "receipt_file_hashes_checked": 6,
+    "receipt_file_hashes_match": true,
+    "export_metadata_and_receipt_match": true,
+    "after_result_sha256": "8f820f9aaa1050dd0b3b8ab5399a3e67629ecfa0ca6e9624e832684c295ff484"
+  },
+  "comparison_identity": {
+    "same_A6_book_messages_request_ref_and_hash": true,
+    "preflight_all_five_A6_message_and_baseline_hashes_match": true,
+    "same_A6_candidate_adapter": true,
+    "candidate_weights_sha256": "2f33f9bedce06dffa07dad4301650a0ec47c5fc50ffe56994569628ee2b2d47b",
+    "candidate_config_sha256": "09ac18caef48bd66914f80f521d3df6034bac4657862d7aaafeab56e30ac8750",
+    "native_sha256": "4aefaa7a4e08d0c391938f6106f82dfc77e5a5d2fae2deb33dd222cae177159f"
+  },
+  "actual": {
+    "model_calls": 1,
+    "case": "book_club_two_day",
+    "state": "NOT_GENERATED",
+    "error_type": "ValueError",
+    "error_code": "semantic_thinking_budget_exceeded",
+    "source_location": "native.py:1077",
+    "thinking_budget_tokens": 2048,
+    "native_close_token_observed_before_budget": false,
+    "final_json_budget_tokens": 4096,
+    "final_json_responses": 0,
+    "raw_projection_text_absent": true,
+    "private_reasoning_exported": false,
+    "call_seconds": 105.16151467896998,
+    "after_process_seconds": 127.4211700311862,
+    "restore_inclusive_seconds": 160.95075384434313,
+    "within_300_second_request_and_1800_second_restore_limits": true,
+    "aggregate_generation_seconds_recorded": 0,
+    "aggregate_note": "The driver increments this aggregate only after a successful return; it does not negate the failed call's recorded 105.16151467896998 seconds."
+  },
+  "restoration": {
+    "original_provider_restored": true,
+    "pid": 134586,
+    "start_ticks": "236359682",
+    "health": 200,
+    "original_model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+    "original_weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+    "original_config_sha256": "4389a598b2815adb1a114053944bfc1214518065d9ce5f2e464baaf8181d6f4c",
+    "candidate_weights_unchanged": true,
+    "adopted": false
+  },
+  "conclusion": {
+    "meaning_quality": "NOT_EVALUABLE_NO_FINAL_JSON",
+    "semantic_improvement_proven": false,
+    "A6_meaning_failure_cause_established": false,
+    "A7_once_consumed": true,
+    "unexecuted_A7_cases": 4,
+    "reusable_A7_slots": 0,
+    "B7_executed": false,
+    "B7_root_exists": false,
+    "B7_condition": "UNMET_NO_FIVE_FINAL_JSON_RESPONSES",
+    "automatic_retry_allowed": false,
+    "training": 0,
+    "retry": 0,
+    "SQL_save": 0,
+    "normal_rollout": 0,
+    "work_unit_closed": false,
+    "auxiliary_complete": false
+  }
+}

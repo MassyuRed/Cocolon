@@ -1,0 +1,122 @@
+{
+  "schema": "cocolon.auxiliary.a23.actual.bodyfree.v1",
+  "state": "A23_REJECTED_B23_CONDITION_NOT_SATISFIED",
+  "source_commit": "809e933265718bd08260ef0728d7761f7f206554",
+  "scope_sha256": "fe794470ef4fac258423ba5421b1e79a5f75243456ad5f5118674daf2ab9b1bd",
+  "result_sha256": "f9d7734048e07a30eadfa9424cda714b00b2acb31b96ca399f51814ff6051cb6",
+  "archive": {
+    "bytes": 210549,
+    "sha256": "22746e877eb4548c6f3ddcefe5ca1480f1ca1629e17aab2f237257f0dd3eb2ae",
+    "members": 13
+  },
+  "new_model_calls": 19,
+  "logical_maps": 5,
+  "phase_calls": 15,
+  "control_calls": 4,
+  "all_http_200_stop": true,
+  "controls_before_after_byte_equal": true,
+  "driver_seconds": 634.3269045870984,
+  "restore_inclusive_seconds": 696.1350659909658,
+  "restored_pid": 19109,
+  "restored_start_ticks": "97486258",
+  "fresh_health": 200,
+  "trial18008_closed": true,
+  "training": 0,
+  "retry": 0,
+  "B23_calls": 0,
+  "SQL_save": 0,
+  "normal_changes": 0,
+  "rows": [
+    {
+      "id": "book_club_two_day",
+      "raw_sha256": "5524e9bb667aa606e8cf628f6bcd3c62410909350638206c0f546c458578d280",
+      "phase_tokens": [
+        401,
+        715,
+        225
+      ],
+      "nodes": 6,
+      "edges": 3,
+      "structural": "GENERATED",
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "Fixed-unit evidence/prose mismatch including n4u1/u2.",
+        "Notice-recipient count narrowed in title."
+      ]
+    },
+    {
+      "id": "lighting_prior_and_later",
+      "raw_sha256": "59da505c891760412d9a5f629010470f98e3fbb3eefe4129b96bedb05de418fc",
+      "phase_tokens": [
+        693,
+        896,
+        350
+      ],
+      "nodes": 12,
+      "edges": 7,
+      "structural": "GENERATED",
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "Multiple fixed node IDs borrow another planned unit fact.",
+        "Actual-use root selected at PLAN is replaced by warranty prose at NODES; edge labels mismatch actual endpoints."
+      ]
+    },
+    {
+      "id": "U01_repair_report",
+      "raw_sha256": "b91185509cf77ccd091031747c71dfb3fdbd52ea3527cb84d2ea99622f1ca1cf",
+      "phase_tokens": [
+        293,
+        528,
+        162
+      ],
+      "nodes": 5,
+      "edges": 1,
+      "structural": "GENERATED",
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "n3/n5 facts swapped across original dates/emotions.",
+        "Direct operation check and brother consultation unknown omitted."
+      ]
+    },
+    {
+      "id": "U02_withdraw_submission",
+      "raw_sha256": "c6858fc75bc55638317271f642b7dc45e853f42d43322c675998e1604b76d5d9",
+      "phase_tokens": [
+        359,
+        520,
+        238
+      ],
+      "nodes": 6,
+      "edges": 3,
+      "structural": "GENERATED",
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "n6 prose borrowed from n5; friend-not-informed root disappears from endpoint.",
+        "Cancellation remains cancelled; rejection is not cancellation reversal."
+      ]
+    },
+    {
+      "id": "T01_manual10",
+      "raw_sha256": "d822a1649efc377817e86435adc2d2982575521c1bebca8cd110300cf775dc0f",
+      "phase_tokens": [
+        617,
+        963,
+        238
+      ],
+      "nodes": 12,
+      "edges": 3,
+      "structural": "GENERATED",
+      "meaning": "NOT_ADEQUATE",
+      "findings": [
+        "Broad fixed-ID swaps bind unrelated original category/emotion/role context to prose.",
+        "Independent topics are mixed in final plan node; unknowns/person values omitted."
+      ]
+    }
+  ],
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "original_work_unit": "UNFINISHED",
+  "auxiliary_whole": "UNFINISHED",
+  "next": "Direct repair of existing author fixed-root prose association after separating PLAN grouping failures; no new GPU scope prepared or authorized.",
+  "structure_map_delta": "NONE: execution and semantic result only; source/API/DB/RN architecture unchanged."
+}

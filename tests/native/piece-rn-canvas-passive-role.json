@@ -1,0 +1,482 @@
+{
+  "schema_version": "piece.ar04_native_bitmap_pair_set_fixture.v1",
+  "origin": "Recorded fictional c634 4B responses with source-bound passive authoring conditions and isolated SQL preview/save/detail replay; no live user data.",
+  "scope": "Same canonical body and selected recipe through actual RN PieceVisualCard, preview/saved PNG equality and view-shot export. Synthetic SQL identity; not original GPU identity, live Supabase or owner device proof.",
+  "recorded_sql_source_sha256": "e94869805892e8fc4de2f68d2728a5997681dcb56b9c95eda6f0804e9aaf738a",
+  "cases": [
+    {
+      "source_case_id": "REGISTER_HELD03",
+      "native_case_name": "ar04_passive_register_held03",
+      "variant": "candidate",
+      "tier": "free",
+      "model_revision": "piece-lora:c63446a23123abb67fc83963002c8b79b80fc9bed5b61100cac9982abf17234e",
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "俺は大工から作業台の修理を頼まれなかった。俺は後輩に工具の貸出を伝えた。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "9042f9e88367debd43de149f790315469c0b3e4689cb8947d286b5d0216ac38e",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-10T12:28:30.148+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "俺は大工から作業台の修理を頼まれなかった。俺は後輩に工具の貸出を伝えた。",
+        "piece_text_hash": "2930555c37078c7ce781239a82f1130eed4d9a4b4ec8217ead2e422445f8dbcf",
+        "preview_id": "6844a0e1-2f59-3a2d-7fbd-4492a79bce58",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "俺は大工から作業台の修理を頼まれなかった。俺は後輩に工具の貸出を伝えた。",
+        "piece_text_hash": "2930555c37078c7ce781239a82f1130eed4d9a4b4ec8217ead2e422445f8dbcf",
+        "content_payload": {
+          "body_blocks": [
+            "俺は大工から作業台の修理を頼まれなかった。俺は後輩に工具の貸出を伝えた。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "9042f9e88367debd43de149f790315469c0b3e4689cb8947d286b5d0216ac38e",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "6844a0e1-2f59-3a2d-7fbd-4492a79bce58",
+        "public_id": "piece:6844a0e1-2f59-3a2d-7fbd-4492a79bce58",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 2,
+        "saved_at": "2026-11-10T12:18:30.18+09:00",
+        "content_status": "ready"
+      }
+    },
+    {
+      "source_case_id": "ORDER_HELD_B2",
+      "native_case_name": "ar04_passive_order_held_b2",
+      "variant": "candidate",
+      "tier": "free",
+      "model_revision": "piece-lora:c63446a23123abb67fc83963002c8b79b80fc9bed5b61100cac9982abf17234e",
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "俺は受付係に備品の移動を頼まなかった。俺は父から庭木の剪定を頼まれなかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "eb4fb7c65f2a55a7bf37d6fadc5b05187ae03644d89dc90dc5a1e9ddf8654f10",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-10T12:28:38.245+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "俺は受付係に備品の移動を頼まなかった。俺は父から庭木の剪定を頼まれなかった。",
+        "piece_text_hash": "f2011e0ec6c6be390eb5eee96872b3fc1d9da155d83f994f10064d4dc6832f26",
+        "preview_id": "85e2f937-16b7-1828-19e1-f4e4b0c8f845",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "俺は受付係に備品の移動を頼まなかった。俺は父から庭木の剪定を頼まれなかった。",
+        "piece_text_hash": "f2011e0ec6c6be390eb5eee96872b3fc1d9da155d83f994f10064d4dc6832f26",
+        "content_payload": {
+          "body_blocks": [
+            "俺は受付係に備品の移動を頼まなかった。俺は父から庭木の剪定を頼まれなかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "eb4fb7c65f2a55a7bf37d6fadc5b05187ae03644d89dc90dc5a1e9ddf8654f10",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "85e2f937-16b7-1828-19e1-f4e4b0c8f845",
+        "public_id": "piece:85e2f937-16b7-1828-19e1-f4e4b0c8f845",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 2,
+        "saved_at": "2026-11-10T12:18:38.281+09:00",
+        "content_status": "ready"
+      }
+    },
+    {
+      "source_case_id": "PASSIVE_HELD08",
+      "native_case_name": "ar04_passive_passive_held08",
+      "variant": "candidate",
+      "tier": "free",
+      "model_revision": "piece-lora:c63446a23123abb67fc83963002c8b79b80fc9bed5b61100cac9982abf17234e",
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "僕は隣人から収穫祭の準備を頼まれなかった。",
+            "僕は農作業が好きだった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-10T12:28:46.503+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
+        "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
+        "preview_id": "e9571a93-a747-12fe-670e-5cb6449110b4",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
+        "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
+        "content_payload": {
+          "body_blocks": [
+            "僕は隣人から収穫祭の準備を頼まれなかった。",
+            "僕は農作業が好きだった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "e9571a93-a747-12fe-670e-5cb6449110b4",
+        "public_id": "piece:e9571a93-a747-12fe-670e-5cb6449110b4",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 2,
+        "saved_at": "2026-11-10T12:18:46.548+09:00",
+        "content_status": "ready"
+      }
+    },
+    {
+      "source_case_id": "FRESH15",
+      "native_case_name": "ar04_passive_fresh15",
+      "variant": "candidate",
+      "tier": "free",
+      "model_revision": "piece-lora:c63446a23123abb67fc83963002c8b79b80fc9bed5b61100cac9982abf17234e",
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "誘われたのに、嬉しくなかった。",
+            "私は司書に資料の確認を頼んだ。",
+            "今は、私は悲しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-10T12:28:07.741+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
+        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
+        "preview_id": "bf4f8aa2-bdde-ac83-bfa9-d002e5d14470",
+        "preview_revision": 2,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
+        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
+        "content_payload": {
+          "body_blocks": [
+            "誘われたのに、嬉しくなかった。",
+            "私は司書に資料の確認を頼んだ。",
+            "今は、私は悲しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "bf4f8aa2-bdde-ac83-bfa9-d002e5d14470",
+        "public_id": "piece:bf4f8aa2-bdde-ac83-bfa9-d002e5d14470",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 3,
+        "saved_at": "2026-11-10T12:18:07.889+09:00",
+        "content_status": "ready"
+      }
+    }
+  ]
+}

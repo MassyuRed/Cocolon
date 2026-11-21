@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -9,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { supabase } from "../lib/supabase";
@@ -235,7 +235,7 @@ export default function RankingTopScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["left", "right"]} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -294,9 +294,9 @@ function RankingPreviewCard({ styles, colors, config, state, navigation, onOpenA
     <View style={styles.rankingCard}>
       <View style={styles.rankingCardHeader}>
         <View style={styles.rankingIconWrap}>
-          <Ionicons name={config.icon} size={20} color={colors.TEXT_ON_LIGHT} />
+          <Ionicons name={config.icon} size={20} color={colors.ON_SURFACE_TONAL} />
         </View>
-        <Text style={styles.rankingCardTitle} numberOfLines={2}>
+        <Text style={styles.rankingCardTitle}>
           {config.title}
         </Text>
       </View>
@@ -326,12 +326,13 @@ function RankingPreviewCard({ styles, colors, config, state, navigation, onOpenA
       </View>
 
       <CocolonPressable
+        containerStyle={styles.showAllContainer}
         style={styles.showAllButton}
         onPress={onOpenAll}
         accessibilityLabel={`${config.title}を全表示`}
       >
         <Text style={styles.showAllButtonText}>全表示</Text>
-        <Ionicons name="chevron-forward" size={16} color={colors.ACCENT_TEXT} />
+        <Ionicons name="chevron-forward" size={16} color={colors.ON_SURFACE_TONAL} />
       </CocolonPressable>
     </View>
   );
@@ -358,7 +359,7 @@ function RankingPreviewRow({ styles, row, index, valueKeys, navigation }) {
         </Text>
         <View style={[styles.previewNameWrap, onPressAccount && styles.previewNameTap]}>
           <View style={styles.previewNameLabelRow}>
-            <Text style={styles.previewNameText} numberOfLines={1}>
+            <Text style={styles.previewNameText}>
               {name}
             </Text>
             {isPrivateAccount ? (
@@ -380,130 +381,138 @@ function createStyles(COLORS, ui) {
   const text = ui?.text || {};
 
   return StyleSheet.create(applyTypographyTokens({
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     scrollContainer: {
       paddingTop: 16,
       paddingBottom: 32,
       alignItems: "stretch",
-      paddingHorizontal: 18,
+      paddingHorizontal: 16,
+      flexGrow: 1,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
     panelHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 12,
+      flexDirection: "column",
+      alignItems: "stretch",
+      justifyContent: "flex-start",
+      marginBottom: 24,
+      gap: 8,
     },
     panelTitle: {
-      fontSize: 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      color: COLORS.TEXT_ON_LIGHT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      minWidth: 0,
     },
     panelTitleRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      alignSelf: "stretch",
     },
     guideTitleButton: {
-      width: 36,
-      height: 32,
-      borderRadius: 12,
+      width: 44,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       marginLeft: 10,
+      minHeight: 44,
+      flexShrink: 0,
     },
 
     rankingList: {
       marginTop: 4,
     },
     rankingCard: {
-      borderRadius: 18,
+      borderRadius: ui?.radius?.card ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 14,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginBottom: 16,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
     },
     rankingCardHeader: {
       flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 10,
+      alignItems: "flex-start",
+      marginBottom: 16,
+      minWidth: 0,
     },
     rankingIconWrap: {
-      width: 34,
-      height: 34,
-      borderRadius: 17,
+      width: 40,
+      height: 40,
+      borderRadius: 20,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.SURFACE_TONAL,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginRight: 10,
+      borderColor: COLORS.SURFACE_TONAL,
+      marginRight: 12,
     },
     rankingCardTitle: {
       flex: 1,
       textAlign: "left",
-      fontSize: 13,
-      lineHeight: 18,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
     },
     previewBody: {
       borderTopWidth: 1,
       borderTopColor: COLORS.CARD_BORDER,
-      paddingTop: 4,
+      paddingTop: 8,
     },
     previewStatusRow: {
       flexDirection: "row",
       alignItems: "center",
-      paddingVertical: 10,
+      paddingVertical: 16,
+      flexWrap: "wrap",
     },
     previewStatusText: {
       marginLeft: 8,
-      fontSize: 12,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     previewErrorText: {
-      paddingVertical: 10,
-      fontSize: 12,
-      color: "#B91C1C",
+      paddingVertical: 16,
+      color: COLORS.ERROR,
     },
     previewEmptyText: {
-      paddingVertical: 10,
-      fontSize: 12,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      paddingVertical: 16,
+      color: COLORS.TEXT_SUBTLE,
     },
     previewRow: {
       minHeight: 44,
-      paddingVertical: 7,
+      paddingVertical: 12,
       borderBottomWidth: 1,
       borderBottomColor: COLORS.CARD_BORDER,
     },
     previewPrimaryRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
+      minWidth: 0,
     },
     previewRankText: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
       flexShrink: 1,
+      minWidth: 0,
     },
     previewRankLabel: {
       flexShrink: 0,
-      marginRight: 6,
+      marginRight: 8,
     },
     previewNameWrap: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       alignSelf: "flex-start",
       maxWidth: "100%",
       flex: 1,
@@ -511,74 +520,79 @@ function createStyles(COLORS, ui) {
     },
     previewNameLabelRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       flexShrink: 1,
       minWidth: 0,
+      flex: 1,
     },
     previewNameText: {
       flexShrink: 1,
       minWidth: 0,
-      fontSize: font.body ?? 13,
-      fontWeight: "700",
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_ON_LIGHT,
     },
     privateShield: {
       marginLeft: 6,
-      color: COLORS.TITLE_GOLD,
-      opacity: 0.7,
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 0,
     },
     previewNameTap: {
       paddingVertical: 2,
       paddingHorizontal: 2,
       borderRadius: 10,
+      minWidth: 0,
     },
     previewValueRow: {
       marginTop: 8,
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
     },
     previewValueText: {
-      fontSize: 13,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.TEXT_ON_LIGHT,
       marginLeft: 10,
+      flexShrink: 1,
+      textAlign: "right",
+      minWidth: 0,
     },
-    showAllButton: {
+    showAllContainer: {
       marginTop: 10,
       alignSelf: "flex-end",
+      maxWidth: "100%",
+    },
+    showAllButton: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      paddingHorizontal: 14,
-      paddingVertical: 8,
-      borderRadius: 999,
+      paddingHorizontal: 16,
+      paddingVertical: 10,
+      borderRadius: ui?.radius?.button ?? 24,
       borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      minHeight: 44,
     },
     showAllButtonText: {
       marginRight: 3,
-      fontSize: 12,
-      fontWeight: "900",
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+      textAlign: "center",
     },
 
     noteCard: {
       marginTop: 2,
       flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      borderRadius: 12,
+      alignItems: "flex-start",
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
     },
     noteText: {
       marginLeft: 8,
-      fontSize: font.description ?? 9,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: COLORS.TEXT_SUBTLE,
       flex: 1,
     },
-  }, ui));
+  }, ui, {"panelTitle":"screenTitle","rankingCardTitle":"sectionTitle","previewStatusText":"description","previewErrorText":"description","previewEmptyText":"description","previewRankText":"body","previewNameText":"body","previewValueText":"body","showAllButtonText":"button","noteText":"description"}));
 }

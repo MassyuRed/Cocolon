@@ -1,0 +1,40 @@
+{
+  "status": "KNOWN_REAL_MODEL_OFFLINE_SERVICE_SQL_ROUNDTRIP_COMPLETE_NOT_PRODUCT_ACCEPTED",
+  "scope": "Fresh training-excluded identity02 after closed identity01, with already known fictional chair language. New real 4B max2 calls through existing offline service/isolated SQL; actual initial question/prior, interruption after meaning save, explicit resume and non-generating reads. Not unseen language, general quality, normal application/Auth/HTTP/RN/device or product acceptance.",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "adapter_revision": "76309b86c6a76ed61cf3600f4beb1f45c658fac3bb3e3add4284ef54259276c5",
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "isolated_rpc_calls": 30,
+  "seconds": 210.9396560722962,
+  "service_saved_roundtrip": true,
+  "correction_updates": 3,
+  "initial_and_final_saved_body_count": 2,
+  "actual_initial_snapshot_used": true,
+  "source_reacquisitions_during_explicit_retry": 0,
+  "adapter_files_unchanged": true,
+  "source_files_unchanged": true,
+  "api_worktree_clean_after": true,
+  "identity_call_checks": [
+    {
+      "stage": "initial",
+      "uuid_count": 2,
+      "timestamp_count": 1,
+      "overlap": false,
+      "actual_prior_used": false
+    },
+    {
+      "stage": "correction",
+      "uuid_count": 3,
+      "timestamp_count": 3,
+      "overlap": false,
+      "actual_prior_used": true
+    }
+  ],
+  "cold_process_restart": false,
+  "product_acceptance": false,
+  "independent_language_story_count": 1,
+  "output_archive_sha256": "95aff777ba23c75c8cec6f00990c0f0a054963f032c53668f10fa0be6a6d33ea",
+  "output_archive_bytes": 129782,
+  "output_archive_members": 33
+}

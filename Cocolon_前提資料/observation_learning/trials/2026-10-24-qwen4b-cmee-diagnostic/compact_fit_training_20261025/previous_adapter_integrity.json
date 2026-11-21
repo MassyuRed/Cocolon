@@ -1,0 +1,10 @@
+{
+  "previous_run_id": "20261025-011309-9f0c8622",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "2f7408bbcd3a416162e54cc82486a773ac94bbd4434da200f7e783b9d7877cf4",
+    "adapter_model.safetensors": "0bdac5e90c79f20129de9a765ac7ee7c59714f3102bc68a2f4aff363c7dd3b78"
+  },
+  "unchanged": true,
+  "additional_training_on_previous_adapter": false
+}

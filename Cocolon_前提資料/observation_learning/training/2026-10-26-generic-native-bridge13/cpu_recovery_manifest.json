@@ -1,0 +1,42 @@
+{
+  "README.md": {
+    "bytes": 5909,
+    "sha256": "a7c073831b084bdcdebdafe21bf31a3b9890831437e1adaedc796a94fe84c79c"
+  },
+  "bridge13.plan.json": {
+    "bytes": 3010,
+    "sha256": "8bc19ca5a8ba747a56fb9c49e264c70a9af3fd3cfa2b1f02b69a180ef4464005"
+  },
+  "bridge_eval_inputs.jsonl": {
+    "bytes": 103599,
+    "sha256": "56d8545c4a8215e2196ce00e8b57706691626eceac0bee2b33fa14c42f4f32b4"
+  },
+  "bridge_train_messages.jsonl": {
+    "bytes": 160042,
+    "sha256": "60efe0a0ef95fa79687e015083733cea4bfa8154d4f0952e655164acb48d4567"
+  },
+  "generic_teacher_provenance.json": {
+    "bytes": 4038,
+    "sha256": "66070252f9f7e1f8174ba2a7c3d35100c579896d91437011e0824fb53ab4ef03"
+  },
+  "run_bridge13.py": {
+    "bytes": 15826,
+    "sha256": "f54645b246822ca251c0ab6f6a9aa6fc3eddaca3cdde5b39d984246d31ae4cfd"
+  },
+  "source_comparison.json": {
+    "bytes": 1862,
+    "sha256": "659823496ff555ddd51c495477b0b5681003e3c4d9514c4ffcb4e6ddfceb130e"
+  },
+  "source_manifest.json": {
+    "bytes": 2126,
+    "sha256": "10e27aa74a7e634eadce8f73c3f78fb89aa7ca176e950adc025b4e16062be075"
+  },
+  "bridge13_cpu_preflight.json": {
+    "bytes": 381767,
+    "sha256": "2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99"
+  },
+  "cpu_launch.json": {
+    "bytes": 702,
+    "sha256": "32ed4fb4be8fb386ffe8bcd9a0c08e0552e62542234f035ea5184eaa89292c59"
+  }
+}

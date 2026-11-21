@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/cocolon_syntax2_pack_20261030/syntax2.py", line 467, in <module>
+    cpu_main(p.parse_args())
+  File "/workspace/cocolon_syntax2_pack_20261030/syntax2.py", line 361, in cpu_main
+    engine = TokenMask(tokenizer)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_syntax2_pack_20261030/syntax2.py", line 208, in __init__
+    raise ValueError('non_model_added_token_requires_explicit_byte_proof')
+ValueError: non_model_added_token_requires_explicit_byte_proof

@@ -1,0 +1,57 @@
+[
+  {
+    "path": "cpu_summary.json",
+    "bytes": 3843,
+    "sha256": "c8072b70774e13e39a91d2d3046fb3447e303883a6696f8f8c5d51785a188795"
+  },
+  {
+    "path": "eval_inputs11.json",
+    "bytes": 131321,
+    "sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea"
+  },
+  {
+    "path": "prepared_cpu.json.gz",
+    "bytes": 104552,
+    "sha256": "ddf81a26f67e98fff901cc78e405f06919ab9cbe4ad6cbc49908a6b8cf616165"
+  },
+  {
+    "path": "teacher_cmee/FT-BOOK-AFTER-ANSWER_cold.json",
+    "bytes": 143133,
+    "sha256": "5c2e9bc9400dfddfba5b8ac07a55b13a0b1c1b0e278cb6c5b9f2a59f956492a3"
+  },
+  {
+    "path": "teacher_cmee/FT-BOOK-AFTER-ANSWER_saved.json",
+    "bytes": 263135,
+    "sha256": "c335665b009c2969c892072c8a2a60c2b311f4984ad1dbe17dd64519164622a7"
+  },
+  {
+    "path": "teacher_cmee/FT-SHOP-AFTER-ANSWER_cold.json",
+    "bytes": 161006,
+    "sha256": "5d7196dc5483494968af0abc6b79fd547dc3c09d6f583de2878a11cc2abeeaf3"
+  },
+  {
+    "path": "teacher_cmee/FT-SHOP-AFTER-ANSWER_saved.json",
+    "bytes": 290610,
+    "sha256": "937cf0b08dc39213dbbcff91661008c45b76022ac8cc494082389a46eca48e82"
+  },
+  {
+    "path": "train_messages11.jsonl",
+    "bytes": 269883,
+    "sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b"
+  },
+  {
+    "path": "prepare_rehearsal13.py",
+    "bytes": 7174,
+    "sha256": "845fa39064245e5ad30787202f6e272e082d4e1f389172a972aabec74944703b"
+  },
+  {
+    "path": "rehearsal13-cpu.log",
+    "bytes": 3151,
+    "sha256": "f2ed555d078f3e615a862f2cacb36156814b1ec5b501407b043309ec74222a3c"
+  },
+  {
+    "path": "rehearsal13-cpu.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "captured_after_result_commit": "71a300ac75a64a552d9f233f2d88f60288a20fb5",
+  "read_back_paths": 31,
+  "name": "jupyter_completed.jpg",
+  "bytes": 78948,
+  "sha256": "2d5f668dea69c45fde4b7c70b6e59939768b946a726e5ad66123c045a38ce693",
+  "same_bytes_as_displayed": true,
+  "runtime_archive_inclusion": false,
+  "gpu_kept_running": true,
+  "gpu_lifecycle_operations": 0
+}

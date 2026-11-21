@@ -1,0 +1,1 @@
+{"torch": "2.8.0+cu128", "available": true, "name": "NVIDIA RTX 4000 Ada Generation", "capability": [8, 9], "total_memory": 20991901696}

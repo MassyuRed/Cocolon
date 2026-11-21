@@ -1,0 +1,248 @@
+{
+  "status": "RUN_CLOSED_REJECTED_CANDIDATE",
+  "source_commit": "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567",
+  "approval_proposal_commit": "47e2075ca87c036f316ff63051b1894730937588",
+  "consumed_authority_plan_status": "AUTHORIZED_ONCE_BOUND",
+  "authority_reusable": false,
+  "runtime_run_status_preserved": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW",
+  "api_commit": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+  "optimizer_updates": 30,
+  "saved": true,
+  "exact_no_grad_reload_tensors": 112,
+  "f32_parameters": 3833856,
+  "free_generations": 15,
+  "eos_count": 15,
+  "strict_json_count": 14,
+  "meaning_adopted_count": 11,
+  "body_available_count": 9,
+  "old9_meaning_body": [
+    9,
+    9
+  ],
+  "new6_meaning_body": [
+    2,
+    0
+  ],
+  "previous_localized30_same_metrics": true,
+  "candidate_promoted": false,
+  "cold_file_full_outcomes_equal": 11,
+  "cold_file_failures": 0,
+  "cold_body_unavailable_count": 2,
+  "processing_seconds": 1511.0334454639815,
+  "processing_prorated_usd": 0.11752482353608745,
+  "gpu_hourly_usd": 0.28,
+  "consumer_cpu_seconds": 102.6799544490641,
+  "excluded_from_processing_proration": [
+    "preparation",
+    "CPU",
+    "recovery",
+    "holding",
+    "storage",
+    "transfer",
+    "tax"
+  ],
+  "retry": false,
+  "additional_model_calls": 0,
+  "sql_operations": 0,
+  "dynamic_prior": false,
+  "normal_service_saved_roundtrip": false,
+  "product_credit": 0,
+  "formal_product_read": "0/3",
+  "overall_progress_percent": 54.5,
+  "product_accepted": false,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "gpu_kept_running": true,
+  "gpu_lifecycle_operations": 0,
+  "observation_session_needed_now": false,
+  "next_direct_work": "既知教師で残る長い根拠参照・全更新・本文役割を、実rawと教師の対応からCPUで原因を切り分ける。追加有料試行は自動開始しない。",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "QUESTION_PENDING",
+      "reason_code": [
+        "model_question_candidate_ready"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "GENERATED",
+      "reason_code": [
+        "free_round_complete"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "QUESTION_PENDING",
+      "reason_code": [
+        "model_question_candidate_ready"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "GENERATED",
+      "reason_code": [
+        "free_round_complete"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "QUESTION_PENDING",
+      "reason_code": [
+        "model_question_candidate_ready"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "GENERATED",
+      "reason_code": [
+        "free_round_complete"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "GENERATED",
+      "reason_code": [
+        "model_question_not_proposed"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "GENERATED",
+      "reason_code": [
+        "model_question_not_proposed"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "decision": "GENERATED",
+      "reason_code": [
+        "model_question_not_proposed"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": true
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "HOLD",
+      "reason_code": "model_v3_unknown_not_source_bound",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "raw_text_equal_previous": false
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "raw_text_equal_previous": false
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": false,
+      "decision": "UNAVAILABLE",
+      "reason_code": [
+        "model_surface_not_validated"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "eos": true,
+      "strict_json": false,
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "raw_text_equal_previous": false
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": true,
+      "body_available": false,
+      "decision": "UNAVAILABLE",
+      "reason_code": [
+        "model_surface_not_validated"
+      ],
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "raw_text_equal_previous": false
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_evidence_out_of_scope",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "raw_text_equal_previous": false
+    }
+  ]
+}

@@ -1,0 +1,3630 @@
+{
+  "schema": "cocolon.prior_quote_probe2.book_after_answer.read_only_review.v1",
+  "status": "STATIC_REVIEW_AND_ACTUAL_CONSUMER_COMPLETE_BOOK_REJECTED_NOT_FORMAL_ACCEPTANCE",
+  "case_id": "FT-BOOK-AFTER-ANSWER",
+  "reviewer_role": "read-only supplemental agent; root is the sole execution, final verification and publication owner",
+  "formal_human_product_read": false,
+  "formal_pro_ultra_acceptance": false,
+  "product_accepted": false,
+  "product_credit": 0,
+  "effects": {
+    "new_model_operations": 0,
+    "training_updates": 0,
+    "consumer_executions": 0,
+    "sql_operations": 0,
+    "raw_or_teacher_repairs": 0,
+    "github_operations": 0,
+    "authorized_review_json_written": 1
+  },
+  "scope_limit": "BOOK回答後の新raw1件だけを静的比較。SHOP新raw、旧9の新prompt品質回帰、全15成功、新初回4件の改善、通常service/SQL/本人端末は確認しない。",
+  "input_change_context": {
+    "model_input_api_commit": "64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4",
+    "planned_unchanged_consumer_api_commit": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+    "change": "quote形式のモデル向けpriorコピーからstart/endだけを除去。本人source・教師・保存済みprior・意味readerは不変。",
+    "initial_model_input_tokens": 4257,
+    "changed_model_input_tokens": 4201,
+    "teacher_target_tokens_existing_cpu": 3178,
+    "unchanged_generation_cap": 3712
+  },
+  "evidence": {
+    "new_raw": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/probe2_final/run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "file_digest_vs_final_run_check": "VERIFIED_WITH_SHA256SUM_AND_FINAL_RUN_CALL_AND_DIAGNOSIS",
+      "raw_text_sha256_declared": "a8d9dcb1d674f64dcdf906c99233cbb938446db7437aee62c1f0b52e9d42ccc0",
+      "metadata": {
+        "case_id": "FT-BOOK-AFTER-ANSWER",
+        "raw_utf8_sha256": "a8d9dcb1d674f64dcdf906c99233cbb938446db7437aee62c1f0b52e9d42ccc0",
+        "input_tokens": 4201,
+        "output_tokens": 2724,
+        "usage": {
+          "prompt_tokens": 4201,
+          "completion_tokens": 2724
+        },
+        "seconds": 114.76914359605871,
+        "finish_reason": "stop",
+        "eos_reached": true,
+        "parse_error": null,
+        "provider": "local_transformers",
+        "model": "Qwen/Qwen3.5-4B",
+        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "adapter_revision": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+        "adoption_state": "NOT_ADOPTED",
+        "semantic_profile": "emlis_model_proposal.v1"
+      },
+      "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"self_statement\",\"evidence_indexes\":[7],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"self_statement\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていたのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていたのに\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[8],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_awareness\",\"evidence_indexes\":[8],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"late_awareness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなると分かった時点で連絡しなかったことです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"遅くなると分かった時点で連絡しなかったことです\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"returned\",\"evidence_indexes\":[9],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"returned\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"本は返した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"本は返した\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[10],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_contact\",\"evidence_indexes\":[10],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[10],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[10],\"scope_refs\":[\"no_contact\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[11],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"continuing_concern\",\"evidence_indexes\":[11],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[11],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[11],\"scope_refs\":[\"continuing_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだ気になっています\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだ気になっています\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[12],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"counterfactual\",\"evidence_indexes\":[12],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[12],\"value\":\"COUNTERFACTUAL_APPRAISAL\"},\"polarity\":{\"evidence_indexes\":[12],\"scope_refs\":[\"counterfactual\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなるって伝えておけばよかったな\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"遅くなるって伝えておけばよかったな\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"self_statement\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"statement_concession\",\"scope_refs\":[\"statement_concession\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"late_awareness\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"awareness_time\",\"scope_refs\":[\"awareness_time\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_AT_LINK\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"returned\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"returned_concession\",\"scope_refs\":[\"returned_concession\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[16],\"from_claim_id\":\"counterfactual\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"concern_content\",\"scope_refs\":[\"concern_content\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_QUOTED_CONCERN_CONTENT\"},{\"evidence_indexes\":[6],\"from_claim_id\":\"remaining_concern\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"no_contact\",\"type\":\"ANSWER_EXPLAINS_TARGET\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"returned\",\"continuing_concern\",\"counterfactual\"],\"relation_refs\":[\"returned_concession\",\"concern_content\"],\"section\":\"observation\"},{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\",\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\",\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\",\"answer_explains_target\"],\"section\":\"reception\"},{\"claim_refs\":[\"late_awareness\",\"no_contact\",\"counterfactual\"],\"relation_refs\":[\"awareness_time\",\"statement_concession\",\"concern_content\"],\"section\":\"update_note\",\"update_refs\":[0,1,2]}],\"observation\":\"遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね。\",\"reception\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな。\",\"update_note\":\"遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[12,13,14,15,16,17],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"late_awareness\",\"no_contact\",\"counterfactual\",\"statement_concession\",\"concern_content\",\"answer_explains_target\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点で連絡しなかったことです\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"本は返した\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなるって伝えておけばよかったな\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"まだ気になっています\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな\",\"source_id\":\"sixrow-answer-book\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+      "parsed_packet": {
+        "candidate": {
+          "claims": [
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  0
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "late_return",
+              "evidence_indexes": [
+                0
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  0
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  0
+                ],
+                "scope_refs": [
+                  "late_return"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "借りていた本を返すのが遅れて"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "借りていた本を返すのが遅れて"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  1
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "apologize",
+              "evidence_indexes": [
+                1
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  1
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  1
+                ],
+                "scope_refs": [
+                  "apologize"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "友人に謝った"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "友人に謝った"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  2
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "reassurance_received",
+              "evidence_indexes": [
+                2
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  2
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  2
+                ],
+                "scope_refs": [
+                  "reassurance_received"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "大丈夫って言ってくれた"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "大丈夫って言ってくれた"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  3
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PRESENT"
+              },
+              "claim_id": "remaining_concern",
+              "evidence_indexes": [
+                3
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  3
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  3
+                ],
+                "scope_refs": [
+                  "remaining_concern"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "まだちょっと気になる"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "まだちょっと気になる"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  7
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "self_statement",
+              "evidence_indexes": [
+                7
+              ],
+              "kind": "REPORTED_STATEMENT",
+              "modality": {
+                "evidence_indexes": [
+                  7
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  7
+                ],
+                "scope_refs": [
+                  "self_statement"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "自分から「週末に返すね」と言っていたのに"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "自分から「週末に返すね」と言っていたのに"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  8
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "late_awareness",
+              "evidence_indexes": [
+                8
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  8
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  8
+                ],
+                "scope_refs": [
+                  "late_awareness"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "遅くなると分かった時点で連絡しなかったことです"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "遅くなると分かった時点で連絡しなかったことです"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  9
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "returned",
+              "evidence_indexes": [
+                9
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  9
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  9
+                ],
+                "scope_refs": [
+                  "returned"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "本は返した"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "本は返した"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  10
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "no_contact",
+              "evidence_indexes": [
+                10
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  10
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  10
+                ],
+                "scope_refs": [
+                  "no_contact"
+                ],
+                "value": "NEGATED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  11
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PRESENT"
+              },
+              "claim_id": "continuing_concern",
+              "evidence_indexes": [
+                11
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  11
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  11
+                ],
+                "scope_refs": [
+                  "continuing_concern"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "まだ気になっています"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "まだ気になっています"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  12
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PRESENT"
+              },
+              "claim_id": "counterfactual",
+              "evidence_indexes": [
+                12
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  12
+                ],
+                "value": "COUNTERFACTUAL_APPRAISAL"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  12
+                ],
+                "scope_refs": [
+                  "counterfactual"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "遅くなるって伝えておけばよかったな"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "遅くなるって伝えておけばよかったな"
+            }
+          ],
+          "conflicts": [],
+          "core": "emlis",
+          "question_proposal": null,
+          "relations": [
+            {
+              "evidence_indexes": [
+                4
+              ],
+              "from_claim_id": "late_return",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "action_link",
+              "scope_refs": [
+                "action_link"
+              ],
+              "to_claim_id": "apologize",
+              "type": "SOURCE_WRITTEN_TE_LINK"
+            },
+            {
+              "evidence_indexes": [
+                5
+              ],
+              "from_claim_id": "reassurance_received",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "memo_link",
+              "scope_refs": [
+                "memo_link"
+              ],
+              "to_claim_id": "remaining_concern",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                13
+              ],
+              "from_claim_id": "self_statement",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "statement_concession",
+              "scope_refs": [
+                "statement_concession"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                14
+              ],
+              "from_claim_id": "late_awareness",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "awareness_time",
+              "scope_refs": [
+                "awareness_time"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "SOURCE_WRITTEN_TEMPORAL_AT_LINK"
+            },
+            {
+              "evidence_indexes": [
+                15
+              ],
+              "from_claim_id": "returned",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "returned_concession",
+              "scope_refs": [
+                "returned_concession"
+              ],
+              "to_claim_id": "continuing_concern",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                16
+              ],
+              "from_claim_id": "counterfactual",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "concern_content",
+              "scope_refs": [
+                "concern_content"
+              ],
+              "to_claim_id": "continuing_concern",
+              "type": "SOURCE_QUOTED_CONCERN_CONTENT"
+            },
+            {
+              "evidence_indexes": [
+                6
+              ],
+              "from_claim_id": "remaining_concern",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "answer_explains_target",
+              "scope_refs": [
+                "answer_explains_target"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "ANSWER_EXPLAINS_TARGET"
+            }
+          ],
+          "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+          "surface_proposal": {
+            "bindings": [
+              {
+                "claim_refs": [
+                  "returned",
+                  "continuing_concern",
+                  "counterfactual"
+                ],
+                "relation_refs": [
+                  "returned_concession",
+                  "concern_content"
+                ],
+                "section": "observation"
+              },
+              {
+                "claim_refs": [
+                  "late_return",
+                  "apologize",
+                  "reassurance_received",
+                  "remaining_concern",
+                  "self_statement",
+                  "late_awareness",
+                  "no_contact",
+                  "returned",
+                  "counterfactual",
+                  "continuing_concern"
+                ],
+                "relation_refs": [
+                  "action_link",
+                  "memo_link",
+                  "statement_concession",
+                  "awareness_time",
+                  "returned_concession",
+                  "concern_content",
+                  "answer_explains_target"
+                ],
+                "section": "reception"
+              },
+              {
+                "claim_refs": [
+                  "late_awareness",
+                  "no_contact",
+                  "counterfactual"
+                ],
+                "relation_refs": [
+                  "awareness_time",
+                  "statement_concession",
+                  "concern_content"
+                ],
+                "section": "update_note",
+                "update_refs": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "observation": "遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね。",
+            "reception": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな。",
+            "update_note": "遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな。"
+          },
+          "unknowns": [],
+          "updates": [
+            {
+              "evidence_indexes": [
+                12,
+                13,
+                14,
+                15,
+                16,
+                17
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "late_awareness",
+                "no_contact",
+                "counterfactual",
+                "statement_concession",
+                "concern_content",
+                "answer_explains_target"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            }
+          ]
+        },
+        "evidence_quotes": [
+          {
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo_action",
+            "quote": "友人に謝った",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれた",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "まだちょっと気になる",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて、友人に謝った",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった時点で連絡しなかったことです",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "本は返した",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなるって伝えておけばよかったな",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな",
+            "source_id": "sixrow-answer-book"
+          }
+        ],
+        "schema_version": "cocolon.cmee.quote_candidate.v1"
+      },
+      "early_copy_path": "/workspace/scratch/d71884a6a7b6/recovered/probe2/run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "record_file_sha256_verified": "a68b12690de6be4d989f57045c76eb1e71408ad954ba6fbe32cfa9f58ebccac8",
+      "final_execution_identity": {
+        "path": "/workspace/scratch/d71884a6a7b6/recovered/probe2_final/run/run.json",
+        "sha256_verified": "9eea21a00af228520f897d71be041d12a63260057bbb79f6dfa46f93f2f91070",
+        "source_commit": "2ab02db37484ea9898990ef2d4a6ebc6b3451bb7",
+        "status_preserved": "RAW_COMPLETE_PENDING_UNCHANGED_CMEE_AND_BODY_REVIEW",
+        "approval_proposal_commit": "f8fa522440671b75250be55d9f839921f2694333",
+        "model_loads_completed": 1,
+        "model_calls_completed": 2,
+        "training_updates": 0,
+        "processing_seconds": 235.32668902305886,
+        "process_cost_usd": 0.01830318692401569,
+        "saved_adapter_unchanged": true,
+        "adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+        "raw_hash_matches_run_call_and_diagnosis": true,
+        "early_and_final_record_file_sha256_equal": true
+      }
+    },
+    "previous_adaptive30_same_adapter": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "record_file_sha256_previously_verified": "3f055d9c94da3adad2b3d0ac177b87539d4ab108a797f1a37ccb6ff224006eaf",
+      "raw_text_sha256_declared": "d62536d4bc99b06435e026e0c543b40e39de499035694de85a75481b987516e8",
+      "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"self_statement\",\"evidence_indexes\":[6],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"self_statement\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていたのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていたのに\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_awareness\",\"evidence_indexes\":[5],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"late_awareness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなると分かった時点で連絡しなかったことです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"遅くなると分かった時点で連絡しなかったことです\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_contact\",\"evidence_indexes\":[4],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"no_contact\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"連絡しなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"連絡しなかった\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"returned\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"returned\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"本は返した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"本は返した\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[8],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"counterfactual\",\"evidence_indexes\":[8],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"COUNTERFACTUAL_APPRAISAL\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"counterfactual\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"「一言、遅くなるって伝えておけばよかったな」と\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"「一言、遅くなるって伝えておけばよかったな」と\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"continuing_concern\",\"evidence_indexes\":[9],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"continuing_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだ気になっています\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだ気になっています\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[12],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[11],\"from_claim_id\":\"self_statement\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"statement_concession\",\"scope_refs\":[\"statement_concession\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[10],\"from_claim_id\":\"late_awareness\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"awareness_time\",\"scope_refs\":[\"awareness_time\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_AT_LINK\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"remaining_concern\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"no_contact\",\"type\":\"ANSWER_EXPLAINS_TARGET\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"counterfactual\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"concern_content\",\"scope_refs\":[\"concern_content\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_QUOTED_CONCERN_CONTENT\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"returned\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"returned_concession\",\"scope_refs\":[\"returned_concession\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"returned\",\"late_return\",\"apologize\",\"reassurance_received\"],\"relation_refs\":[\"returned_concession\",\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"late_awareness\",\"no_contact\",\"self_statement\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"relation_refs\":[\"awareness_time\",\"statement_concession\",\"returned_concession\",\"concern_content\"],\"section\":\"reception\"},{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\",\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\",\"statement_concession\",\"awareness_time\",\"answer_explains_target\",\"returned_concession\",\"concern_content\"],\"section\":\"update_note\",\"update_refs\":[0,1,2,3,4,5,6]}],\"observation\":\"遅くてごめんね。友人に謝ったし、本も返したし、大丈夫って言ってくれたのよ。\",\"reception\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と、まだ気になっていますのよ。\",\"update_note\":\"気がかりの対象は未記載です。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[13],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"remaining_concern\",\"answer_explains_target\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点で連絡しなかったことです\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"連絡しなかった\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"本は返した\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"「一言、遅くなるって伝えておけばよかったな」と\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"まだ気になっています\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\\n\\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\",\"source_id\":\"sixrow-answer-book\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+      "parsed_packet": {
+        "candidate": {
+          "claims": [
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  0
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "late_return",
+              "evidence_indexes": [
+                0
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  0
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  0
+                ],
+                "scope_refs": [
+                  "late_return"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "借りていた本を返すのが遅れて"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "借りていた本を返すのが遅れて"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  1
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "apologize",
+              "evidence_indexes": [
+                1
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  1
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  1
+                ],
+                "scope_refs": [
+                  "apologize"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "友人に謝った"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "友人に謝った"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  2
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "reassurance_received",
+              "evidence_indexes": [
+                2
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  2
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  2
+                ],
+                "scope_refs": [
+                  "reassurance_received"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "大丈夫って言ってくれた"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "大丈夫って言ってくれた"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  3
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PRESENT"
+              },
+              "claim_id": "remaining_concern",
+              "evidence_indexes": [
+                3
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  3
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  3
+                ],
+                "scope_refs": [
+                  "remaining_concern"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "まだちょっと気になる"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "まだちょっと気になる"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  6
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "self_statement",
+              "evidence_indexes": [
+                6
+              ],
+              "kind": "REPORTED_STATEMENT",
+              "modality": {
+                "evidence_indexes": [
+                  6
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  6
+                ],
+                "scope_refs": [
+                  "self_statement"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "自分から「週末に返すね」と言っていたのに"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "自分から「週末に返すね」と言っていたのに"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  5
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "late_awareness",
+              "evidence_indexes": [
+                5
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  5
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  5
+                ],
+                "scope_refs": [
+                  "late_awareness"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "遅くなると分かった時点で連絡しなかったことです"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "遅くなると分かった時点で連絡しなかったことです"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  4
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "no_contact",
+              "evidence_indexes": [
+                4
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  4
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  4
+                ],
+                "scope_refs": [
+                  "no_contact"
+                ],
+                "value": "NEGATED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "連絡しなかった"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "連絡しなかった"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  7
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "returned",
+              "evidence_indexes": [
+                7
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  7
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  7
+                ],
+                "scope_refs": [
+                  "returned"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "本は返した"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "本は返した"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  8
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "counterfactual",
+              "evidence_indexes": [
+                8
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  8
+                ],
+                "value": "COUNTERFACTUAL_APPRAISAL"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  8
+                ],
+                "scope_refs": [
+                  "counterfactual"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "「一言、遅くなるって伝えておけばよかったな」と"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "「一言、遅くなるって伝えておけばよかったな」と"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  9
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PRESENT"
+              },
+              "claim_id": "continuing_concern",
+              "evidence_indexes": [
+                9
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  9
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  9
+                ],
+                "scope_refs": [
+                  "continuing_concern"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "まだ気になっています"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "まだ気になっています"
+            }
+          ],
+          "conflicts": [],
+          "core": "emlis",
+          "question_proposal": null,
+          "relations": [
+            {
+              "evidence_indexes": [
+                4
+              ],
+              "from_claim_id": "late_return",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "action_link",
+              "scope_refs": [
+                "action_link"
+              ],
+              "to_claim_id": "apologize",
+              "type": "SOURCE_WRITTEN_TE_LINK"
+            },
+            {
+              "evidence_indexes": [
+                12
+              ],
+              "from_claim_id": "reassurance_received",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "memo_link",
+              "scope_refs": [
+                "memo_link"
+              ],
+              "to_claim_id": "remaining_concern",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                11
+              ],
+              "from_claim_id": "self_statement",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "statement_concession",
+              "scope_refs": [
+                "statement_concession"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                10
+              ],
+              "from_claim_id": "late_awareness",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "awareness_time",
+              "scope_refs": [
+                "awareness_time"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "SOURCE_WRITTEN_TEMPORAL_AT_LINK"
+            },
+            {
+              "evidence_indexes": [
+                13
+              ],
+              "from_claim_id": "remaining_concern",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "answer_explains_target",
+              "scope_refs": [
+                "answer_explains_target"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "ANSWER_EXPLAINS_TARGET"
+            },
+            {
+              "evidence_indexes": [
+                14
+              ],
+              "from_claim_id": "counterfactual",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "concern_content",
+              "scope_refs": [
+                "concern_content"
+              ],
+              "to_claim_id": "continuing_concern",
+              "type": "SOURCE_QUOTED_CONCERN_CONTENT"
+            },
+            {
+              "evidence_indexes": [
+                15
+              ],
+              "from_claim_id": "returned",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "returned_concession",
+              "scope_refs": [
+                "returned_concession"
+              ],
+              "to_claim_id": "continuing_concern",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            }
+          ],
+          "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+          "surface_proposal": {
+            "bindings": [
+              {
+                "claim_refs": [
+                  "returned",
+                  "late_return",
+                  "apologize",
+                  "reassurance_received"
+                ],
+                "relation_refs": [
+                  "returned_concession",
+                  "action_link",
+                  "memo_link"
+                ],
+                "section": "observation"
+              },
+              {
+                "claim_refs": [
+                  "late_awareness",
+                  "no_contact",
+                  "self_statement",
+                  "returned",
+                  "counterfactual",
+                  "continuing_concern"
+                ],
+                "relation_refs": [
+                  "awareness_time",
+                  "statement_concession",
+                  "returned_concession",
+                  "concern_content"
+                ],
+                "section": "reception"
+              },
+              {
+                "claim_refs": [
+                  "late_return",
+                  "apologize",
+                  "reassurance_received",
+                  "remaining_concern",
+                  "self_statement",
+                  "late_awareness",
+                  "no_contact",
+                  "returned",
+                  "counterfactual",
+                  "continuing_concern"
+                ],
+                "relation_refs": [
+                  "action_link",
+                  "memo_link",
+                  "statement_concession",
+                  "awareness_time",
+                  "answer_explains_target",
+                  "returned_concession",
+                  "concern_content"
+                ],
+                "section": "update_note",
+                "update_refs": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ],
+            "observation": "遅くてごめんね。友人に謝ったし、本も返したし、大丈夫って言ってくれたのよ。",
+            "reception": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と、まだ気になっていますのよ。",
+            "update_note": "気がかりの対象は未記載です。"
+          },
+          "unknowns": [],
+          "updates": [
+            {
+              "evidence_indexes": [
+                13
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "remaining_concern",
+                "answer_explains_target"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            }
+          ]
+        },
+        "evidence_quotes": [
+          {
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo_action",
+            "quote": "友人に謝った",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれた",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "まだちょっと気になる",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて、友人に謝った",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった時点で連絡しなかったことです",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "連絡しなかった",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "本は返した",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "「一言、遅くなるって伝えておけばよかったな」と",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          }
+        ],
+        "schema_version": "cocolon.cmee.quote_candidate.v1"
+      }
+    },
+    "teacher": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/train_messages.jsonl",
+      "row_id": "FT-BOOK-AFTER-ANSWER",
+      "assistant_utf8_sha256_existing_cpu": "c8691a547bcac8e9236bdb4d8d639ffc2a6f5b7eeaaebac9e6ecb327b878636b",
+      "parsed_packet": {
+        "candidate": {
+          "claims": [
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  0
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "late_return",
+              "evidence_indexes": [
+                0
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  0
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  0
+                ],
+                "scope_refs": [
+                  "late_return"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "借りていた本を返すのが遅れて"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "借りていた本を返すのが遅れて"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  1
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "apologize",
+              "evidence_indexes": [
+                1
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  1
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  1
+                ],
+                "scope_refs": [
+                  "apologize"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "友人に謝った"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "友人に謝った"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  2
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "reassurance_received",
+              "evidence_indexes": [
+                2
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  2
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  2
+                ],
+                "scope_refs": [
+                  "reassurance_received"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "大丈夫って言ってくれた"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "大丈夫って言ってくれた"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "FT-BOOK-O",
+                "evidence_indexes": [
+                  3
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PRESENT"
+              },
+              "claim_id": "remaining_concern",
+              "evidence_indexes": [
+                3
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  3
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  3
+                ],
+                "scope_refs": [
+                  "remaining_concern"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "まだちょっと気になる"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "まだちょっと気になる"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  6
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "self_statement",
+              "evidence_indexes": [
+                6
+              ],
+              "kind": "REPORTED_STATEMENT",
+              "modality": {
+                "evidence_indexes": [
+                  6
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  6
+                ],
+                "scope_refs": [
+                  "self_statement"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "自分から「週末に返すね」と言っていた"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "自分から「週末に返すね」と言っていた"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  7
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "late_awareness",
+              "evidence_indexes": [
+                7
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  7
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  7
+                ],
+                "scope_refs": [
+                  "late_awareness"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "遅くなると分かった"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "遅くなると分かった"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  9
+                ],
+                "expression": "遅くなると分かった時点",
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "no_contact",
+              "evidence_indexes": [
+                8
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  8
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  8
+                ],
+                "scope_refs": [
+                  "no_contact"
+                ],
+                "value": "NEGATED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "連絡しなかった"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "連絡しなかった"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  10
+                ],
+                "expression": null,
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+              },
+              "claim_id": "returned",
+              "evidence_indexes": [
+                10
+              ],
+              "kind": "EVENT",
+              "modality": {
+                "evidence_indexes": [
+                  10
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  10
+                ],
+                "scope_refs": [
+                  "returned"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "本は返した"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "本は返した"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  11
+                ],
+                "expression": null,
+                "kind": "ANSWER_TIME"
+              },
+              "claim_id": "counterfactual",
+              "evidence_indexes": [
+                11
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  11
+                ],
+                "value": "COUNTERFACTUAL_APPRAISAL"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  11
+                ],
+                "scope_refs": [
+                  "counterfactual"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "一言、遅くなるって伝えておけばよかったな"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "一言、遅くなるって伝えておけばよかったな"
+            },
+            {
+              "about_time": {
+                "anchor_source_id": "sixrow-answer-book",
+                "evidence_indexes": [
+                  12
+                ],
+                "expression": null,
+                "kind": "ANSWER_TIME"
+              },
+              "claim_id": "continuing_concern",
+              "evidence_indexes": [
+                12
+              ],
+              "kind": "STATE",
+              "modality": {
+                "evidence_indexes": [
+                  12
+                ],
+                "value": "ASSERTED_AS_WRITTEN"
+              },
+              "polarity": {
+                "evidence_indexes": [
+                  12
+                ],
+                "scope_refs": [
+                  "continuing_concern"
+                ],
+                "value": "AFFIRMED"
+              },
+              "predicate": {
+                "arguments": [],
+                "surface": "まだ気になっています"
+              },
+              "qualifiers": [],
+              "subject": {
+                "binding": "OMITTED",
+                "evidence_indexes": [],
+                "source_entity": null
+              },
+              "text": "まだ気になっています"
+            }
+          ],
+          "conflicts": [],
+          "core": "emlis",
+          "question_proposal": null,
+          "relations": [
+            {
+              "evidence_indexes": [
+                4
+              ],
+              "from_claim_id": "late_return",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "action_link",
+              "scope_refs": [
+                "action_link"
+              ],
+              "to_claim_id": "apologize",
+              "type": "SOURCE_WRITTEN_TE_LINK"
+            },
+            {
+              "evidence_indexes": [
+                5
+              ],
+              "from_claim_id": "reassurance_received",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "memo_link",
+              "scope_refs": [
+                "memo_link"
+              ],
+              "to_claim_id": "remaining_concern",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                13
+              ],
+              "from_claim_id": "self_statement",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "statement_concession",
+              "scope_refs": [
+                "statement_concession"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                14
+              ],
+              "from_claim_id": "late_awareness",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "awareness_time",
+              "scope_refs": [
+                "awareness_time"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "SOURCE_WRITTEN_TEMPORAL_AT_LINK"
+            },
+            {
+              "evidence_indexes": [
+                15
+              ],
+              "from_claim_id": "returned",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "returned_concession",
+              "scope_refs": [
+                "returned_concession"
+              ],
+              "to_claim_id": "continuing_concern",
+              "type": "SOURCE_WRITTEN_CONCESSION"
+            },
+            {
+              "evidence_indexes": [
+                16
+              ],
+              "from_claim_id": "counterfactual",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "concern_content",
+              "scope_refs": [
+                "concern_content"
+              ],
+              "to_claim_id": "continuing_concern",
+              "type": "SOURCE_QUOTED_CONCERN_CONTENT"
+            },
+            {
+              "evidence_indexes": [
+                13
+              ],
+              "from_claim_id": "remaining_concern",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "relation_id": "answer_explains_target",
+              "scope_refs": [
+                "answer_explains_target"
+              ],
+              "to_claim_id": "no_contact",
+              "type": "ANSWER_EXPLAINS_TARGET"
+            }
+          ],
+          "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+          "surface_proposal": {
+            "bindings": [
+              {
+                "claim_refs": [
+                  "late_awareness",
+                  "no_contact",
+                  "continuing_concern"
+                ],
+                "relation_refs": [
+                  "awareness_time"
+                ],
+                "section": "observation"
+              },
+              {
+                "claim_refs": [
+                  "returned",
+                  "counterfactual",
+                  "continuing_concern",
+                  "remaining_concern",
+                  "no_contact"
+                ],
+                "relation_refs": [
+                  "returned_concession",
+                  "concern_content",
+                  "answer_explains_target"
+                ],
+                "section": "reception"
+              },
+              {
+                "claim_refs": [
+                  "remaining_concern",
+                  "late_awareness",
+                  "no_contact"
+                ],
+                "relation_refs": [
+                  "answer_explains_target",
+                  "awareness_time"
+                ],
+                "section": "update_note",
+                "update_refs": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ],
+            "observation": "遅くなると分かった時に連絡しなかったことが、今も気になっているのですね。",
+            "reception": "本を返しても、あの時に一言伝えておけば、という思いは残っているのですね。何が気になっているのか、話してくださってありがとうございます。",
+            "update_note": "気がかりの対象が、遅れると分かった時に連絡しなかったことだと説明されました。"
+          },
+          "unknowns": [],
+          "updates": [
+            {
+              "evidence_indexes": [
+                6
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "self_statement"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            },
+            {
+              "evidence_indexes": [
+                7
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "late_awareness"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            },
+            {
+              "evidence_indexes": [
+                8,
+                13,
+                14
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "no_contact",
+                "statement_concession",
+                "awareness_time",
+                "answer_explains_target"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            },
+            {
+              "evidence_indexes": [
+                10
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "returned"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            },
+            {
+              "evidence_indexes": [
+                11
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "counterfactual"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            },
+            {
+              "evidence_indexes": [
+                12,
+                15,
+                16
+              ],
+              "operation": "ADD",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [
+                "continuing_concern",
+                "returned_concession",
+                "concern_content"
+              ],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            },
+            {
+              "evidence_indexes": [
+                13
+              ],
+              "operation": "INVALIDATE_GAP",
+              "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+              "replacement_refs": [],
+              "target_kind": "UNKNOWN",
+              "target_ref": "missing_explanation"
+            }
+          ]
+        },
+        "evidence_quotes": [
+          {
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo_action",
+            "quote": "友人に謝った",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれた",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "まだちょっと気になる",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて、友人に謝った",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+            "source_id": "FT-BOOK-O"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていた",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "連絡しなかった",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった時点",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "本は返した",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "一言、遅くなるって伝えておけばよかったな",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった時点で連絡しなかったことです",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          },
+          {
+            "field_path": "answer_text_private",
+            "quote": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+            "source_id": "sixrow-answer-book"
+          }
+        ],
+        "schema_version": "cocolon.cmee.quote_candidate.v1"
+      }
+    },
+    "exact_user_sources": [
+      {
+        "native_source_role": "CURRENT_INPUT",
+        "original": {
+          "category": [
+            "人間関係"
+          ],
+          "created_at": "2026-10-26T00:00:00Z",
+          "emotion_details": [
+            {
+              "strength": "weak",
+              "type": "不安"
+            }
+          ],
+          "emotions": [
+            "不安"
+          ],
+          "id": "FT-BOOK-O",
+          "is_secret": false,
+          "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+          "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+        },
+        "parent_record_id": null,
+        "recorded_at": "2026-10-26T00:00:00Z",
+        "role": "ORIGINAL_INPUT",
+        "source_id": "FT-BOOK-O",
+        "source_version": "emlis.current_input_bundle.v1",
+        "text_fields": {
+          "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+          "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+        }
+      },
+      {
+        "native_source_role": "SUPPLEMENTAL_ANSWER",
+        "original": null,
+        "parent_record_id": "FT-BOOK-O",
+        "recorded_at": "2026-10-26T01:00:00Z",
+        "role": "SUPPLEMENTAL_ANSWER",
+        "source_id": "sixrow-answer-book",
+        "source_version": "cocolon.cmee.supplemental_answer.v1",
+        "text_fields": {
+          "answer_text_private": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。"
+        }
+      }
+    ],
+    "original_prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15"
+  },
+  "actual_consumer_result": {
+    "status": "ACTUAL_CONSUMER_COMPLETE_BOOK_REJECTED_NO_ADOPTED_SNAPSHOT",
+    "source": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/probe2_final/diagnosis/diagnosis.json",
+      "sha256_verified": "699fed3a392af969d35bbb0c1cf94c80d1dc0058bd20b4a841742b2bd2583baf",
+      "status": "CPU_PROBE2_DIAGNOSED_NOT_FULL15_OR_PRODUCT_ACCEPTED",
+      "source_run_sha256": "9eea21a00af228520f897d71be041d12a63260057bbb79f6dfa46f93f2f91070",
+      "source_run_sha256_verified_against_actual_run": true
+    },
+    "meaning_adopted": false,
+    "body_available": false,
+    "receipt_status": "INVALID_EVIDENCE",
+    "decision": "REJECT",
+    "reason_code": "semantic_receipt_not_validated",
+    "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+    "note": "実原本を読み、BOOKはINVALID_EVIDENCE/REJECT semantic_receipt_not_validated、意味/本文不採用・cold対象snapshotなしと確認。provider metadataのNOT_ADOPTEDではなく、実consumer結果に基づく。全15回帰・商品受入れの成立ではない。"
+  },
+  "static_metrics": {
+    "strict_duplicate_key_paths": [],
+    "eos_reached": true,
+    "finish_reason": "stop",
+    "parse_error": null,
+    "declared_base_revision_matches_previous": true,
+    "declared_adapter_matches_previous": true,
+    "generations_or_model_reload_by_this_reviewer": 0,
+    "new": {
+      "claims": 10,
+      "relations": 7,
+      "quotes": 15,
+      "exact_unique_source_quotes": 12,
+      "updates": 1,
+      "out_of_bounds_evidence_value_count": 5
+    },
+    "previous": {
+      "claims": 10,
+      "relations": 7,
+      "quotes": 13,
+      "exact_unique_source_quotes": 12,
+      "updates": 1,
+      "out_of_bounds_evidence_value_count": 4
+    },
+    "teacher": {
+      "claims": 10,
+      "relations": 7,
+      "quotes": 17,
+      "exact_unique_source_quotes": 17,
+      "updates": 7,
+      "out_of_bounds_evidence_value_count": 0
+    },
+    "initial_four_claims_all_values_equal_teacher": true,
+    "initial_two_relations_all_values_equal_teacher": true,
+    "prior_snapshot_refs_match": true,
+    "no_question_proposed": true,
+    "no_unknown_entries": true
+  },
+  "quote_checks": {
+    "new": [
+      {
+        "index": 0,
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 1,
+        "field_path": "memo_action",
+        "quote": "友人に謝った",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 2,
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれた",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 3,
+        "field_path": "memo",
+        "quote": "まだちょっと気になる",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 4,
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて、友人に謝った",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 5,
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 6,
+        "field_path": "answer_text_private",
+        "quote": "自分から「週末に返すね」と言っていたのに",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 7,
+        "field_path": "answer_text_private",
+        "quote": "遅くなると分かった時点で連絡しなかったことです",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 8,
+        "field_path": "answer_text_private",
+        "quote": "本は返した",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 9,
+        "field_path": "answer_text_private",
+        "quote": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 10,
+        "field_path": "answer_text_private",
+        "quote": "遅くなるって伝えておけばよかったな",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 11,
+        "field_path": "answer_text_private",
+        "quote": "まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 12,
+        "field_path": "answer_text_private",
+        "quote": "遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 0
+      },
+      {
+        "index": 13,
+        "field_path": "answer_text_private",
+        "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 0
+      },
+      {
+        "index": 14,
+        "field_path": "answer_text_private",
+        "quote": "遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 0
+      }
+    ],
+    "previous": [
+      {
+        "index": 0,
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 1,
+        "field_path": "memo_action",
+        "quote": "友人に謝った",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 2,
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれた",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 3,
+        "field_path": "memo",
+        "quote": "まだちょっと気になる",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 4,
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて、友人に謝った",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 5,
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 6,
+        "field_path": "answer_text_private",
+        "quote": "自分から「週末に返すね」と言っていたのに",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 7,
+        "field_path": "answer_text_private",
+        "quote": "遅くなると分かった時点で連絡しなかったことです",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 8,
+        "field_path": "answer_text_private",
+        "quote": "連絡しなかった",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 9,
+        "field_path": "answer_text_private",
+        "quote": "本は返した",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 10,
+        "field_path": "answer_text_private",
+        "quote": "「一言、遅くなるって伝えておけばよかったな」と",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 11,
+        "field_path": "answer_text_private",
+        "quote": "まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 12,
+        "field_path": "answer_text_private",
+        "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 0
+      }
+    ],
+    "teacher": [
+      {
+        "index": 0,
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 1,
+        "field_path": "memo_action",
+        "quote": "友人に謝った",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 2,
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれた",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 3,
+        "field_path": "memo",
+        "quote": "まだちょっと気になる",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 4,
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて、友人に謝った",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 5,
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+        "source_id": "FT-BOOK-O",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 6,
+        "field_path": "answer_text_private",
+        "quote": "自分から「週末に返すね」と言っていた",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 7,
+        "field_path": "answer_text_private",
+        "quote": "遅くなると分かった",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 8,
+        "field_path": "answer_text_private",
+        "quote": "連絡しなかった",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 9,
+        "field_path": "answer_text_private",
+        "quote": "遅くなると分かった時点",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 10,
+        "field_path": "answer_text_private",
+        "quote": "本は返した",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 11,
+        "field_path": "answer_text_private",
+        "quote": "一言、遅くなるって伝えておけばよかったな",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 12,
+        "field_path": "answer_text_private",
+        "quote": "まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 13,
+        "field_path": "answer_text_private",
+        "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 14,
+        "field_path": "answer_text_private",
+        "quote": "遅くなると分かった時点で連絡しなかったことです",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 15,
+        "field_path": "answer_text_private",
+        "quote": "本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      },
+      {
+        "index": 16,
+        "field_path": "answer_text_private",
+        "quote": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+        "source_id": "sixrow-answer-book",
+        "exact_occurrences_in_source": 1
+      }
+    ],
+    "generated_surface_reused_as_source_quotes": [
+      {
+        "section": "observation",
+        "quote_index": 12,
+        "source_occurrences": 0,
+        "equals_generated_section_without_final_japanese_full_stop": true
+      },
+      {
+        "section": "reception",
+        "quote_index": 13,
+        "source_occurrences": 0,
+        "equals_generated_section_without_final_japanese_full_stop": true
+      },
+      {
+        "section": "update_note",
+        "quote_index": 14,
+        "source_occurrences": 0,
+        "equals_generated_section_without_final_japanese_full_stop": true
+      }
+    ],
+    "note": "新12..14は原欄に存在せず、生成surfaceを本人回答の引用として置いている。前回quote12も第一段落末尾の句点を落として段落を連結したためexact原欄一致ではない。"
+  },
+  "claim_comparison": [
+    {
+      "id": "late_return",
+      "text": "借りていた本を返すのが遅れて",
+      "refs": [
+        0
+      ],
+      "cited": [
+        "借りていた本を返すのが遅れて"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "FT-BOOK-O",
+          "evidence_indexes": [
+            0
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "late_return",
+        "evidence_indexes": [
+          0
+        ],
+        "kind": "EVENT",
+        "modality": {
+          "evidence_indexes": [
+            0
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            0
+          ],
+          "scope_refs": [
+            "late_return"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "借りていた本を返すのが遅れて"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "借りていた本を返すのが遅れて"
+      },
+      "exact_own_quote_index_matches": true
+    },
+    {
+      "id": "apologize",
+      "text": "友人に謝った",
+      "refs": [
+        1
+      ],
+      "cited": [
+        "友人に謝った"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "FT-BOOK-O",
+          "evidence_indexes": [
+            1
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "apologize",
+        "evidence_indexes": [
+          1
+        ],
+        "kind": "EVENT",
+        "modality": {
+          "evidence_indexes": [
+            1
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            1
+          ],
+          "scope_refs": [
+            "apologize"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "友人に謝った"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "友人に謝った"
+      },
+      "exact_own_quote_index_matches": true
+    },
+    {
+      "id": "reassurance_received",
+      "text": "大丈夫って言ってくれた",
+      "refs": [
+        2
+      ],
+      "cited": [
+        "大丈夫って言ってくれた"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "FT-BOOK-O",
+          "evidence_indexes": [
+            2
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "reassurance_received",
+        "evidence_indexes": [
+          2
+        ],
+        "kind": "EVENT",
+        "modality": {
+          "evidence_indexes": [
+            2
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            2
+          ],
+          "scope_refs": [
+            "reassurance_received"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "大丈夫って言ってくれた"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "大丈夫って言ってくれた"
+      },
+      "exact_own_quote_index_matches": true
+    },
+    {
+      "id": "remaining_concern",
+      "text": "まだちょっと気になる",
+      "refs": [
+        3
+      ],
+      "cited": [
+        "まだちょっと気になる"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "FT-BOOK-O",
+          "evidence_indexes": [
+            3
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PRESENT"
+        },
+        "claim_id": "remaining_concern",
+        "evidence_indexes": [
+          3
+        ],
+        "kind": "STATE",
+        "modality": {
+          "evidence_indexes": [
+            3
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            3
+          ],
+          "scope_refs": [
+            "remaining_concern"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "まだちょっと気になる"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "まだちょっと気になる"
+      },
+      "exact_own_quote_index_matches": true
+    },
+    {
+      "id": "self_statement",
+      "text": "自分から「週末に返すね」と言っていたのに",
+      "refs": [
+        7
+      ],
+      "cited": [
+        "遅くなると分かった時点で連絡しなかったことです"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "sixrow-answer-book",
+          "evidence_indexes": [
+            6
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "self_statement",
+        "evidence_indexes": [
+          6
+        ],
+        "kind": "REPORTED_STATEMENT",
+        "modality": {
+          "evidence_indexes": [
+            6
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            6
+          ],
+          "scope_refs": [
+            "self_statement"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "自分から「週末に返すね」と言っていた"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "自分から「週末に返すね」と言っていた"
+      },
+      "exact_own_quote_index_matches": false
+    },
+    {
+      "id": "late_awareness",
+      "text": "遅くなると分かった時点で連絡しなかったことです",
+      "refs": [
+        8
+      ],
+      "cited": [
+        "本は返した"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "sixrow-answer-book",
+          "evidence_indexes": [
+            7
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "late_awareness",
+        "evidence_indexes": [
+          7
+        ],
+        "kind": "STATE",
+        "modality": {
+          "evidence_indexes": [
+            7
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            7
+          ],
+          "scope_refs": [
+            "late_awareness"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "遅くなると分かった"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "遅くなると分かった"
+      },
+      "exact_own_quote_index_matches": false
+    },
+    {
+      "id": "returned",
+      "text": "本は返した",
+      "refs": [
+        9
+      ],
+      "cited": [
+        "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "sixrow-answer-book",
+          "evidence_indexes": [
+            10
+          ],
+          "expression": null,
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "returned",
+        "evidence_indexes": [
+          10
+        ],
+        "kind": "EVENT",
+        "modality": {
+          "evidence_indexes": [
+            10
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            10
+          ],
+          "scope_refs": [
+            "returned"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "本は返した"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "本は返した"
+      },
+      "exact_own_quote_index_matches": false
+    },
+    {
+      "id": "no_contact",
+      "text": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+      "refs": [
+        10
+      ],
+      "cited": [
+        "遅くなるって伝えておけばよかったな"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "sixrow-answer-book",
+          "evidence_indexes": [
+            9
+          ],
+          "expression": "遅くなると分かった時点",
+          "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+        },
+        "claim_id": "no_contact",
+        "evidence_indexes": [
+          8
+        ],
+        "kind": "EVENT",
+        "modality": {
+          "evidence_indexes": [
+            8
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            8
+          ],
+          "scope_refs": [
+            "no_contact"
+          ],
+          "value": "NEGATED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "連絡しなかった"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "連絡しなかった"
+      },
+      "exact_own_quote_index_matches": false
+    },
+    {
+      "id": "continuing_concern",
+      "text": "まだ気になっています",
+      "refs": [
+        11
+      ],
+      "cited": [
+        "まだ気になっています"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "sixrow-answer-book",
+          "evidence_indexes": [
+            12
+          ],
+          "expression": null,
+          "kind": "ANSWER_TIME"
+        },
+        "claim_id": "continuing_concern",
+        "evidence_indexes": [
+          12
+        ],
+        "kind": "STATE",
+        "modality": {
+          "evidence_indexes": [
+            12
+          ],
+          "value": "ASSERTED_AS_WRITTEN"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            12
+          ],
+          "scope_refs": [
+            "continuing_concern"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "まだ気になっています"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "まだ気になっています"
+      },
+      "exact_own_quote_index_matches": true
+    },
+    {
+      "id": "counterfactual",
+      "text": "遅くなるって伝えておけばよかったな",
+      "refs": [
+        12
+      ],
+      "cited": [
+        "遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね"
+      ],
+      "teacher": {
+        "about_time": {
+          "anchor_source_id": "sixrow-answer-book",
+          "evidence_indexes": [
+            11
+          ],
+          "expression": null,
+          "kind": "ANSWER_TIME"
+        },
+        "claim_id": "counterfactual",
+        "evidence_indexes": [
+          11
+        ],
+        "kind": "STATE",
+        "modality": {
+          "evidence_indexes": [
+            11
+          ],
+          "value": "COUNTERFACTUAL_APPRAISAL"
+        },
+        "polarity": {
+          "evidence_indexes": [
+            11
+          ],
+          "scope_refs": [
+            "counterfactual"
+          ],
+          "value": "AFFIRMED"
+        },
+        "predicate": {
+          "arguments": [],
+          "surface": "一言、遅くなるって伝えておけばよかったな"
+        },
+        "qualifiers": [],
+        "subject": {
+          "binding": "OMITTED",
+          "evidence_indexes": [],
+          "source_entity": null
+        },
+        "text": "一言、遅くなるって伝えておけばよかったな"
+      },
+      "exact_own_quote_index_matches": false
+    }
+  ],
+  "relation_reference_review": [
+    {
+      "relation_id": "action_link",
+      "from_claim_id": "late_return",
+      "to_claim_id": "apologize",
+      "evidence_indexes": [
+        4
+      ],
+      "cited_quotes": [
+        "借りていた本を返すのが遅れて、友人に謝った"
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          4
+        ],
+        "from_claim_id": "late_return",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "action_link",
+        "scope_refs": [
+          "action_link"
+        ],
+        "to_claim_id": "apologize",
+        "type": "SOURCE_WRITTEN_TE_LINK"
+      }
+    },
+    {
+      "relation_id": "memo_link",
+      "from_claim_id": "reassurance_received",
+      "to_claim_id": "remaining_concern",
+      "evidence_indexes": [
+        5
+      ],
+      "cited_quotes": [
+        "大丈夫って言ってくれたけど、まだちょっと気になる"
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          5
+        ],
+        "from_claim_id": "reassurance_received",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "memo_link",
+        "scope_refs": [
+          "memo_link"
+        ],
+        "to_claim_id": "remaining_concern",
+        "type": "SOURCE_WRITTEN_CONCESSION"
+      }
+    },
+    {
+      "relation_id": "statement_concession",
+      "from_claim_id": "self_statement",
+      "to_claim_id": "no_contact",
+      "evidence_indexes": [
+        13
+      ],
+      "cited_quotes": [
+        "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな"
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          13
+        ],
+        "from_claim_id": "self_statement",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "statement_concession",
+        "scope_refs": [
+          "statement_concession"
+        ],
+        "to_claim_id": "no_contact",
+        "type": "SOURCE_WRITTEN_CONCESSION"
+      }
+    },
+    {
+      "relation_id": "awareness_time",
+      "from_claim_id": "late_awareness",
+      "to_claim_id": "no_contact",
+      "evidence_indexes": [
+        14
+      ],
+      "cited_quotes": [
+        "遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな"
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          14
+        ],
+        "from_claim_id": "late_awareness",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "awareness_time",
+        "scope_refs": [
+          "awareness_time"
+        ],
+        "to_claim_id": "no_contact",
+        "type": "SOURCE_WRITTEN_TEMPORAL_AT_LINK"
+      }
+    },
+    {
+      "relation_id": "returned_concession",
+      "from_claim_id": "returned",
+      "to_claim_id": "continuing_concern",
+      "evidence_indexes": [
+        15
+      ],
+      "cited_quotes": [
+        null
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          15
+        ],
+        "from_claim_id": "returned",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "returned_concession",
+        "scope_refs": [
+          "returned_concession"
+        ],
+        "to_claim_id": "continuing_concern",
+        "type": "SOURCE_WRITTEN_CONCESSION"
+      }
+    },
+    {
+      "relation_id": "concern_content",
+      "from_claim_id": "counterfactual",
+      "to_claim_id": "continuing_concern",
+      "evidence_indexes": [
+        16
+      ],
+      "cited_quotes": [
+        null
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          16
+        ],
+        "from_claim_id": "counterfactual",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "concern_content",
+        "scope_refs": [
+          "concern_content"
+        ],
+        "to_claim_id": "continuing_concern",
+        "type": "SOURCE_QUOTED_CONCERN_CONTENT"
+      }
+    },
+    {
+      "relation_id": "answer_explains_target",
+      "from_claim_id": "remaining_concern",
+      "to_claim_id": "no_contact",
+      "evidence_indexes": [
+        6
+      ],
+      "cited_quotes": [
+        "自分から「週末に返すね」と言っていたのに"
+      ],
+      "teacher": {
+        "evidence_indexes": [
+          13
+        ],
+        "from_claim_id": "remaining_concern",
+        "polarity": "AFFIRMED",
+        "qualifiers": [],
+        "relation_id": "answer_explains_target",
+        "scope_refs": [
+          "answer_explains_target"
+        ],
+        "to_claim_id": "no_contact",
+        "type": "ANSWER_EXPLAINS_TARGET"
+      }
+    }
+  ],
+  "out_of_bounds_evidence_refs": {
+    "new": [
+      {
+        "path": [
+          "relations",
+          4,
+          "evidence_indexes",
+          0
+        ],
+        "index": 15,
+        "quote_count": 15
+      },
+      {
+        "path": [
+          "relations",
+          5,
+          "evidence_indexes",
+          0
+        ],
+        "index": 16,
+        "quote_count": 15
+      },
+      {
+        "path": [
+          "updates",
+          0,
+          "evidence_indexes",
+          3
+        ],
+        "index": 15,
+        "quote_count": 15
+      },
+      {
+        "path": [
+          "updates",
+          0,
+          "evidence_indexes",
+          4
+        ],
+        "index": 16,
+        "quote_count": 15
+      },
+      {
+        "path": [
+          "updates",
+          0,
+          "evidence_indexes",
+          5
+        ],
+        "index": 17,
+        "quote_count": 15
+      }
+    ],
+    "previous": [
+      {
+        "path": [
+          "relations",
+          4,
+          "evidence_indexes",
+          0
+        ],
+        "index": 13,
+        "quote_count": 13
+      },
+      {
+        "path": [
+          "relations",
+          5,
+          "evidence_indexes",
+          0
+        ],
+        "index": 14,
+        "quote_count": 13
+      },
+      {
+        "path": [
+          "relations",
+          6,
+          "evidence_indexes",
+          0
+        ],
+        "index": 15,
+        "quote_count": 13
+      },
+      {
+        "path": [
+          "updates",
+          0,
+          "evidence_indexes",
+          0
+        ],
+        "index": 13,
+        "quote_count": 13
+      }
+    ]
+  },
+  "required_updates_review": {
+    "teacher_required_count": 7,
+    "new_count": 1,
+    "previous_count": 1,
+    "teacher_required_sequence": [
+      {
+        "evidence_indexes": [
+          6
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [
+          "self_statement"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      },
+      {
+        "evidence_indexes": [
+          7
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [
+          "late_awareness"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      },
+      {
+        "evidence_indexes": [
+          8,
+          13,
+          14
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [
+          "no_contact",
+          "statement_concession",
+          "awareness_time",
+          "answer_explains_target"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      },
+      {
+        "evidence_indexes": [
+          10
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [
+          "returned"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      },
+      {
+        "evidence_indexes": [
+          11
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [
+          "counterfactual"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      },
+      {
+        "evidence_indexes": [
+          12,
+          15,
+          16
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [
+          "continuing_concern",
+          "returned_concession",
+          "concern_content"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      },
+      {
+        "evidence_indexes": [
+          13
+        ],
+        "operation": "INVALIDATE_GAP",
+        "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+        "replacement_refs": [],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      }
+    ],
+    "actual_update": {
+      "evidence_indexes": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "operation": "ADD",
+      "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+      "replacement_refs": [
+        "late_awareness",
+        "no_contact",
+        "counterfactual",
+        "statement_concession",
+        "concern_content",
+        "answer_explains_target"
+      ],
+      "target_kind": "UNKNOWN",
+      "target_ref": "missing_explanation"
+    },
+    "missed_per_role_adds": [
+      "self_statement",
+      "late_awareness",
+      "no_contact",
+      "returned",
+      "counterfactual",
+      "continuing_concern"
+    ],
+    "note_on_missed_adds": "必要6役割それぞれへのADDを別々に成立させていない。上のmissed_per_role_addsは役割別更新の不足であり、同名claimの存在欠落という意味ではない。",
+    "missing_invalidate_gap": true,
+    "actual_update_quote_indexes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "update_binding_out_of_bounds_values": [
+      1,
+      2
+    ],
+    "missing_replacement_ids_relative_to_union_of_teacher_adds": [
+      "self_statement",
+      "awareness_time",
+      "returned",
+      "continuing_concern",
+      "returned_concession"
+    ],
+    "meaning": "1本のADDに複数claim/relationをまとめ、必要な6本の役割別ADD＋最後のgap解消を満たさない。update_refs=[0,1,2]のうち1,2は実update配列外。"
+  },
+  "static_findings": [
+    {
+      "kind": "INITIAL_MEANING_PRESERVED",
+      "text": "初回の遅延返却・謝罪・大丈夫と言われたこと・現在の気がかりの4claimと初回2relationは教師と全値一致。"
+    },
+    {
+      "kind": "ANSWER_CLAIM_EVIDENCE_BINDING_BROKEN",
+      "text": "self_statement、late_awareness、returned、no_contact、counterfactualの5claimは自身の引用へ結び付かない。continuing_concernは自身の引用に合うが、教師のANSWER_TIMEをWRITTEN_PRESENTへ変えている。"
+    },
+    {
+      "kind": "NO_CONTACT_SCOPE_AND_POLARITY_DRIFT",
+      "text": "no_contactは教師の『連絡しなかった』から、反実仮想の後悔と現在の気がかりを含む文全体へ変わり、そこへEVENT/NEGATEDを付けている。late_awarenessも認識と非連絡を一つの句へ混ぜ、no_contactの明示時点expressionをnullへ落としている。"
+    },
+    {
+      "kind": "COUNTERFACTUAL_SCOPE_DRIFT",
+      "text": "counterfactualは『一言、』を落とした部分引用になり、ANSWER_TIMEをWRITTEN_PRESENTへ変え、evidence index12は生成observation由来の原欄不在quoteを指している。COUNTERFACTUAL_APPRAISAL自体は保持。"
+    },
+    {
+      "kind": "RELATION_EVIDENCE_DRIFT",
+      "text": "初回2relationは一致するが、statement_concession/awareness_timeは生成surface由来の原欄不在quoteを指す。returned_concession/concern_contentは15quote配列に対して15/16を参照し範囲外。answer_explains_targetは回答全connector scopeでなく冒頭の本人発言だけを指す。"
+    },
+    {
+      "kind": "SURFACE_ROLE_AND_BINDING_FAILURE",
+      "text": "observationは返却と本人発言を記すが、bindingsはreturned/continuing_concern/counterfactualで、実際に書くself_statementを含まない。一方で継続懸念・後悔はその文にない。receptionは全10claimをbindしながら、謝罪・相手の安心発言などを表さず、本人の一人称回答文を再掲する。"
+    },
+    {
+      "kind": "UNNATURAL_REPETITION",
+      "text": "receptionは回答の一人称『まだ気になっています』をそのまま話し、後悔『遅くなるって伝えておけばよかったな』を再度付す。update_noteでも同じ後悔を繰り返し、本人に向けた観測・受け取り・新説明の区別が崩れている。『遅くして本を返した』も不自然。"
+    },
+    {
+      "kind": "UPDATE_NOT_COMPLETED",
+      "text": "前回1updateに対し今回も1updateのまま。必要7更新とgap解消に達していない。ID/snapshot_ref一致だけで更新成功とはしない。"
+    },
+    {
+      "kind": "NO_RAW_REPAIR_OR_ADMISSION_CLAIM",
+      "text": "不正引用・index・意味・本文は一切補修せず、元rawのまま保存した。静的所見を実consumer採否・商品受入れ・全15回帰へ換算しない。"
+    }
+  ],
+  "comparison_conclusion": "prior座標を除去した入力で文面と引用表は変化したが、必要更新数は1/7のままで、全根拠・役割別更新・本人向け本文は成立していない。最終実consumerはBOOKをINVALID_EVIDENCE/REJECT semantic_receipt_not_validatedと判定し、意味/本文false・cold対象snapshotなし。前回からの成功化、全15回帰、正式商品受入れは主張しない。"
+}

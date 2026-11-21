@@ -1,0 +1,560 @@
+{
+  "status": "COMPLETED_THREE_REPLAY_SLOT_COMPARISON_NO_NEW_MEANING_GAIN_NOT_ADOPTED",
+  "date_jst": "2026-11-03",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "product_credit": 0,
+  "source_commit": "a133906e24ee0f0c34569e54cc6cf66f9745b7a4",
+  "preceding_ce68_result_commit": "fb49666506d8174b4644b61e5dc4cf2d291bfe66",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "runtime_api_production_commit": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "source_snapshot_files": 2134,
+  "source_snapshot_historical_test_commit": "cddf185594b5eeffcf72a92dcc2a2c5a44ff8b4c",
+  "source_snapshot_single_commit_checkout": false,
+  "training_initial": {
+    "adapter_config.json": "b357ff96373f1dac800ce0e5216daabbd9741358a2c72674c2838ac470cf60eb",
+    "adapter_model.safetensors": "89badc47bc21bf315e4475267c007b9ee51c0b013a4d7d3161333f02fd30f580"
+  },
+  "training_objective": "EXISTING_UNWEIGHTED_FULL_ASSISTANT_CE_V1",
+  "initial_explicitly_chosen": "SAVED89BA_NOT_CE68_B2A5_OR_WEIGHTED6964",
+  "teachers_unchanged": 68,
+  "update_order_total": 74,
+  "changed_slots": [
+    {
+      "step": 35,
+      "before": "SC01",
+      "after": "UQ01"
+    },
+    {
+      "step": 40,
+      "before": "SC02",
+      "after": "BT08"
+    },
+    {
+      "step": 55,
+      "before": "SC05",
+      "after": "ST07"
+    }
+  ],
+  "all68_at_least_once": true,
+  "last14_order_unchanged": true,
+  "actual74_steps_match_plan": true,
+  "initial_teacher_nll_max_abs_delta_from_ce68": 0,
+  "dropout_modules_zero": 0,
+  "functional_attention_dropout": 0,
+  "adapter_lora_dropout": {
+    "default": 0
+  },
+  "before_reused_exact": 32,
+  "baseline_new_generations": 0,
+  "new_after_generations": 32,
+  "all_finish_stop": true,
+  "updates_completed": 74,
+  "measurement_forwards": 136,
+  "model_loads": 2,
+  "process_seconds": 491.8630458388943,
+  "supervisor_seconds": 493.3085395540111,
+  "run_exit": 0,
+  "new_weights_sha256": "bb6eae4f7be7d01c88bf794dcf76cd962918e557b83d801c06fa39152a3db1b9",
+  "new_config_sha256": "85ef77ed42bd7c66483e04b2a20664a786c520b8aeb9170a18577b4d240a6e99",
+  "new_tensors": 112,
+  "new_parameters": 3833856,
+  "new_tensors_dtype": "F32",
+  "all_finite": true,
+  "saved_nontraining_reload": "MATCHED_112_TENSORS",
+  "initial89ba_weighted6964_ce68b2a5_files_unchanged": true,
+  "compute_apps_after": "",
+  "teacher_nll_means": {
+    "before_updates": 0.004437959549678079,
+    "after_updates": 0.0016671452355213284
+  },
+  "teacher_json_exact": {
+    "AT4": "4/4",
+    "UQ2": "2/2",
+    "MX2": "2/2",
+    "OA2": "2/2",
+    "SC6": "6/6"
+  },
+  "structural_before": 28,
+  "structural_ce68": 31,
+  "structural_after": 30,
+  "structural_denominator": 32,
+  "structural_count_is_meaning_success_rate": false,
+  "raw_byte_unchanged_from89ba": 20,
+  "raw_byte_unchanged_from_ce68": 29,
+  "raw_byte_unchanged_from_weighted": 23,
+  "all32_source_before_control_after_reviewed": true,
+  "new_meaning_improvements_observed": 0,
+  "meaning_changes": [
+    {
+      "ids": [
+        "SQ03",
+        "MD02"
+      ],
+      "change": "UNCHANGED_CE68_TARGETED_FAILURES_NO_GAIN"
+    },
+    {
+      "ids": [
+        "OD01"
+      ],
+      "change": "REJECTED_AGAIN_NOW_MALFORMED_UNKNOWN_UNITS_TARGET_OMITTED"
+    },
+    {
+      "ids": [
+        "MD01"
+      ],
+      "change": "NEW_STRUCTURAL_REJECTION_AMBIGUOUS_SHORT_UNKNOWN_PARENTS_PRIOR_MODIFIER_SCOPE_ALREADY_IMPERFECT"
+    },
+    {
+      "ids": [
+        "PQ01"
+      ],
+      "change": "VALID_UNIQUE_SHORT_ROOT_EXPRESSION_DIFFERENCE_NO_GAIN_OR_REGRESSION"
+    },
+    {
+      "ids": [
+        "SC01",
+        "SC02",
+        "SC03",
+        "SC04",
+        "SC05",
+        "SC06",
+        "SD01",
+        "SD02",
+        "HQ03",
+        "CQ04"
+      ],
+      "change": "CE68_LOCAL_RESULTS_RETAINED_BYTE_IDENTICAL"
+    },
+    {
+      "ids": [
+        "MX02",
+        "OA02"
+      ],
+      "change": "CORRECT89BA_WITHOUT_WEIGHTED_EXTRA_VERBSTEM_TARGET_RETAINED"
+    },
+    {
+      "ids": [
+        "HQ04"
+      ],
+      "change": "UNCHANGED_WRITTEN_REASON_FAILURE"
+    }
+  ],
+  "rejected_after": [
+    {
+      "id": "MD01",
+      "reason": "analysis_quoted_parent_units_parent_ambiguous_or_missing"
+    },
+    {
+      "id": "OD01",
+      "reason": "analysis_quoted_parent_units_unit_invalid"
+    }
+  ],
+  "checks": [
+    {
+      "id": "AF01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "NV04",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "REHEARSAL_AT17",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT19",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT21",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT29",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "CQ03",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "CQ04",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "SQ01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "SQ03",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "PQ01",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "PQ02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "UQ01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "UQ02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "HQ03",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "HQ04",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "MX01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "MX02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "MD01",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "MD02",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "OA01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "OA02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "OD01",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "OD02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "SC01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "SC02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "SC03",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": false,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "SC04",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": false,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "SC05",
+      "unchanged_from_89ba": true,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "SC06",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": false,
+      "ce68_teacher_equal": true
+    },
+    {
+      "id": "SD01",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    },
+    {
+      "id": "SD02",
+      "unchanged_from_89ba": false,
+      "unchanged_from_ce68": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "ce68_teacher_equal": null
+    }
+  ],
+  "saved_replay": {
+    "responses": 64,
+    "matched_candidates": 58,
+    "maintained_rejections": 6,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "saved_reader_generation_compiler_author_patched_to_fail": true
+  },
+  "recovery": {
+    "original_run_members": 267,
+    "original_manifest_entries": 266,
+    "total_run_related_source_members": 273,
+    "all_original_member_bytes_and_sha_matched": true,
+    "all112_weight_bytes_and_sha_matched": true,
+    "container_repacked": true,
+    "new_model_calls_added": 0
+  },
+  "original_report_status_preserved": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+  "new_combination2_cpu": {
+    "status": "TWO_NEW_SOURCE_CONTRASTS_STRICT_FILE_TOKENIZER_MATCHED_CPU_ONLY",
+    "source_sha256": "13d59d02644919f86bc2b2c67c62ea7b112bdd2f50b411f217913bcf077ef099",
+    "new_source_exact_overlap_with_old68_or32_fields": 0,
+    "old68_unchanged": true,
+    "source_provenance": "ROOT_AUTHORED_NEARBY_COMBINATIONS_NOT_MASH_TEACHING_OR_MODEL_RAW_NOT_BLIND",
+    "rows": [
+      {
+        "id": "RC01",
+        "units": 2,
+        "prompt_tokens": 994,
+        "target_tokens": 96,
+        "full_tokens": 1090,
+        "file_reload": "MATCHED_NO_GENERATION_COMPILER_AUTHOR"
+      },
+      {
+        "id": "RC02",
+        "units": 5,
+        "prompt_tokens": 1005,
+        "target_tokens": 214,
+        "full_tokens": 1219,
+        "file_reload": "MATCHED_NO_GENERATION_COMPILER_AUTHOR"
+      }
+    ],
+    "strict_file_tokenizer_prefix_and_eos_matched": true,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "initial_cpu_attempt": "STOPPED_BEFORE_STRICT_BY_ROOT_OVERBROAD_PATCH_OF_EXISTING_ENGINE_DISPATCH",
+    "correction": "REMOVED_BUILD_PATCH_ONLY_SAVED_RELOAD_PATCHES_RETAINED_SAME_SOURCE_FRESH_V2_OUTPUT",
+    "initial_helper_and_failure_metadata_preserved": true,
+    "not_a_selected70_teacher_training_plan": true
+  },
+  "normal_adoption": false,
+  "model_initial_adoption": false,
+  "all_unparsed": true,
+  "actor_unresolved": true,
+  "route_count": 0,
+  "formal_acceptance": "UNCHANGED_0_OF_3",
+  "completion_percent_unchanged": 54.5,
+  "full_route_quality_proven": false,
+  "review": "ROOT_AND_SAME_ENVIRONMENT_READ_ONLY_AGENT_NOT_PRO_ULTRA_OR_HUMAN_ACCEPTANCE",
+  "structure_map_delta": "NONE_ISOLATED_RESEARCH_ONLY",
+  "production_api_db_rn_render_supabase_deployment_effect": 0,
+  "pod_management_effect": 0,
+  "gpu_hourly_usd_previously_observed": 0.58,
+  "gpu_process_allocated_usd": 0.07924460182959964,
+  "cost_excludes": "preparation,download,transfer,recovery,holding,storage,tax",
+  "next_cpu": "Fix one explicit initial,dose,order,retention,nearby evaluation and cap using preserved68 plus separately prepared source-authored combination2;do not automatically adopt weights,teacherize diagnostic raw,relax reader or rerun closed comparisons",
+  "next_gpu_selected": false,
+  "automatic_progression": false,
+  "private_artifact": {
+    "library_file_id": "libfile_16270a90f67c8191859d75e8e1fcc578",
+    "filename": "cocolon-analysis-replay68-result-20261103.zip",
+    "bytes": 14870458,
+    "sha256": "31ec004b9584170e7d40103a4ad6b70f07698ab253b27763af598a7d90d5bdd4",
+    "members": 286
+  }
+}

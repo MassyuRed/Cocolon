@@ -1,0 +1,78 @@
+{
+  "actual_bytes_unchanged": true,
+  "actual_tokenizer_preflight": null,
+  "artifact_id": "artifact:b696546407a94e7492bd68a72f40939d",
+  "candidate_plan_sha256": "a41950c09689400663af6b22a7e6c0c075022655d261207602cb414492b50dc8",
+  "checkpoint": {
+    "bytes": 5034969,
+    "path": "/workspace/scratch/9aae8c9a5481/candidate_execution/event_plan_v2_20261116/synthetic_event_plan_v2_save_rehearsal_20261116/save_and_reread/post_save.pglite.gz",
+    "sha256": "db448e1bb04c0091c5f9ae1b8b552798f923302b8039e3030040f9ea9db67ca6"
+  },
+  "expected": {
+    "bytes": 55673,
+    "path": "/workspace/scratch/9aae8c9a5481/candidate_execution/event_plan_v2_20261116/synthetic_event_plan_v2_save_rehearsal_20261116/save_and_reread/saved_expected.json",
+    "sha256": "7d055093705e1fad892638d95ff5f2529f03929972dc2aa434bf92eb76744dc9"
+  },
+  "fresh_process_reread": {
+    "hosted_database_calls": 0,
+    "http_read_same_id_text_projection_coverage": true,
+    "http_status": 200,
+    "model_calls": 0,
+    "product_acceptance": false,
+    "report_id": "b6965464-07a9-4e74-92bd-68a72f40939d",
+    "service_current_detail_and_month_same_id_text_projection_coverage": true,
+    "source_hashes": {
+      "ai/services/ai_inference/analysis_cumulative_service.py": "9e6eb77154ace9fb5b20fdd4630d5ab4b44c9d55e91cfd7512a11de67edda49e",
+      "ai/services/ai_inference/analysis_if_model_source.py": "5eeb36862e1420701b856b7fcc2617380a1b63bc4ac1d3e4c1e361f50197ef5e",
+      "ai/services/ai_inference/analysis_model_source.py": "d2b3369a9607f348c6f5090e1a39e2c894a3b808d09147a8410156256d2a5cf6",
+      "ai/services/ai_inference/analysis_semantic_map.py": "c03cdd391b24d2ee19d68a7d93eaf59ffa26b558a83b1cd585900ab2462d7395",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "249d3caed394ca85d7cd84c41bb2b7d4e0b0d53b8c66e9facf79c528712ce1b4",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "8f39bd56a145cbb23065e49b9961ddf76127b85be50b7da2211314859126126e",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "8b02e62232702a7480f6383776ac32649ff0679e58c64975f3c19f1df81b672d",
+      "ai/tools/serve_emlis_natural_reply.py": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be"
+    },
+    "sql_writes": 0,
+    "state": "SAME_SAVED_ARTIFACT_REREAD_IN_FRESH_PROCESS",
+    "stored_private_evidence_same": true,
+    "synthetic_test_output": true
+  },
+  "generation_commits": 1,
+  "hosted_database_calls": 0,
+  "model_calls": 0,
+  "monthly_references": 1,
+  "original_frozen_as_of": "2026-11-16T00:32:38.924+09:00",
+  "original_period_end": "2026-11-16T00:32:38.924+09:00",
+  "original_period_start": "2026-10-01T18:00:00+09:00",
+  "original_pre_checkpoint_unchanged": true,
+  "pre_checkpoint": {
+    "bytes": 4835570,
+    "path": "/workspace/scratch/9aae8c9a5481/handoff/extracted/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.pglite.gz",
+    "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485"
+  },
+  "product_acceptance": false,
+  "replayed_http_responses": 7,
+  "reread": {
+    "bytes": 1504,
+    "path": "/workspace/scratch/9aae8c9a5481/candidate_execution/event_plan_v2_20261116/synthetic_event_plan_v2_save_rehearsal_20261116/save_and_reread/reread_receipt.json",
+    "sha256": "2e73767c9a0fb2e70f62c82d38e334c73c14fd34fe155f82bd431272d2acb5a3"
+  },
+  "saved_artifacts": 1,
+  "semantic_quality": "CPU_SYNTHETIC_NOT_MODEL_QUALITY",
+  "source_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+  "source_hashes": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "9e6eb77154ace9fb5b20fdd4630d5ab4b44c9d55e91cfd7512a11de67edda49e",
+    "ai/services/ai_inference/analysis_if_model_source.py": "5eeb36862e1420701b856b7fcc2617380a1b63bc4ac1d3e4c1e361f50197ef5e",
+    "ai/services/ai_inference/analysis_model_source.py": "d2b3369a9607f348c6f5090e1a39e2c894a3b808d09147a8410156256d2a5cf6",
+    "ai/services/ai_inference/analysis_semantic_map.py": "c03cdd391b24d2ee19d68a7d93eaf59ffa26b558a83b1cd585900ab2462d7395",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "249d3caed394ca85d7cd84c41bb2b7d4e0b0d53b8c66e9facf79c528712ce1b4",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "8f39bd56a145cbb23065e49b9961ddf76127b85be50b7da2211314859126126e",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "8b02e62232702a7480f6383776ac32649ff0679e58c64975f3c19f1df81b672d",
+    "ai/tools/serve_emlis_natural_reply.py": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be"
+  },
+  "state": "SAVED_AND_SEPARATE_PROCESS_REREAD_TECHNICAL_ONLY",
+  "synthetic_result": {
+    "bytes": 249883,
+    "sha256": "2cdf1ecdede8d2bbe4841c884590d43613d0d4a1d061dbbd87a80fa2191deecd"
+  },
+  "synthetic_test_output": true
+}

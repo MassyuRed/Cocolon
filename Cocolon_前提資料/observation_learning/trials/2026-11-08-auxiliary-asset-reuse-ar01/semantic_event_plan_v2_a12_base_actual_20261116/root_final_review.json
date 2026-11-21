@@ -1,0 +1,46 @@
+{
+  "B12": "NOT_RUN_PRECONDITION_FAILED",
+  "actual_sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04",
+  "after_controls_received": 0,
+  "body_free": true,
+  "book": {
+    "findings": [
+      "CONFIRMED_LATER_EVENT_SUPPORT_OMITTED",
+      "READING_EXCEEDS_SELECTED_EVENT_ROOTS",
+      "MEETING_STATUS_CHAIR_ONLY_SUPPORT",
+      "TWELVE_RELATION_SLOTS_REPEATED_WITHOUT_DISTINCT_MEANING"
+    ],
+    "full_source_raw_projection_text_review": "INADEQUATE",
+    "partial_and_final_entire_case_exact_match": true,
+    "raw_sha256": "4ebb330ea484e3bbfca6469bf2688d2019f2c9d310e9c00b4ac763682b273bee",
+    "technical_admission": "GENERATED",
+    "technical_admission_is_not_semantic_approval": true
+  },
+  "lighting": {
+    "complete_json": false,
+    "completion_meaning_rating": "NOT_RATED_INCOMPLETE_RESPONSE",
+    "deadline_seconds": 210,
+    "finish_reason": "length",
+    "output_token_cap": 4096,
+    "prefix_observations": [
+      "PURCHASE_BEFORE_AFTER_TIME_SWAP",
+      "UNCERTAIN_OBJECT_CHANGED",
+      "REPEATED_EVENTS_AND_NODES"
+    ],
+    "raw_sha256": "15b1c36ac07e4dbfc46fa88e98b691e54e30fe365a7dd4e46bb942342efbbcd7",
+    "token_cap_reached_claim": false,
+    "utf8_bytes": 13111
+  },
+  "meaning_approval_receipt_created": false,
+  "new_gpu_attempt_prepared": false,
+  "normal_adoption": false,
+  "normal_connection": "UNVERIFIED",
+  "retry": 0,
+  "reviewer": "root",
+  "schema": "cocolon.a12.root_final_review.v1",
+  "sql_save": 0,
+  "state": "INCOMPLETE_NOT_ADOPTED_FAILED_ATTEMPT_CLOSED",
+  "training": 0,
+  "unreceived_case_count": 3,
+  "whole_work_unit": "UNFINISHED_INCLUDING_NORMAL_ROLLOUT"
+}

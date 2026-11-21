@@ -1,0 +1,162 @@
+{
+  "SQL": 0,
+  "file_manifest": {
+    "baseline_assets.zip": {
+      "bytes": 17475066,
+      "sha256": "59ed638ee028fb65fde19d4e1f0d9032c497e82c7197d293f7ee3f65b41c0db1"
+    },
+    "baseline_assets_manifest.json": {
+      "bytes": 72370,
+      "sha256": "2a5afaf241613cc2baac37352842a18bb28d9187e30097a64839a00ddfbffee9"
+    },
+    "baseline_capture.py": {
+      "bytes": 10869,
+      "sha256": "623435c73a8e644d45a48c00b513cc2918c63fba5eb50a7877ef9c8c30135540"
+    },
+    "bind19_after_restore.py": {
+      "bytes": 15120,
+      "sha256": "891db7fc9f48bfe48d6ffb4c0e74347ac9acbdbe782bee695e4c97bac8ff344f"
+    },
+    "bind_runtime_helper.py": {
+      "bytes": 2869,
+      "sha256": "e73d165faa8b560d5e5fe901e34f7d570846f57e8cacecbeff524048cb797649"
+    },
+    "bootstrap_gpu_20261117.py": {
+      "bytes": 13169,
+      "sha256": "eeef7a05639fafefd8ab659f2c13565f52aad519c48046142cf3474f641c4792"
+    },
+    "controls.json": {
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    "current_api_sources.zip": {
+      "bytes": 2592703,
+      "sha256": "2b660e2541c6b895e920051b0eb48ab1bbfc2e5a2830308a2b42a83a3ddb180e"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 105208,
+      "sha256": "19ba5f15daf329fcbdc0022e46b9894b478727dc48cb3c0792c2bc183be1ad5c"
+    },
+    "event_plan_execution.py": {
+      "bytes": 34103,
+      "sha256": "1c8a664afd3c3c27df99d913f1c8f0a0a1ab201fedaa70e96782e5ee85f8a045"
+    },
+    "execution_scope.template.json": {
+      "bytes": 8741,
+      "sha256": "6d5100f9d2fc33925e6c1ba12a7faeb4b1eedaf6d040caeadb367a85eb0cf1f5"
+    },
+    "fresh_v3_fit.py": {
+      "bytes": 17070,
+      "sha256": "a3532a0e315aaeaa8a8c63200085957d53306c58255061dea01a694583ac37b8"
+    },
+    "fresh_v3_fit_once.py": {
+      "bytes": 14481,
+      "sha256": "6bb65b5173a57ef6e622997737a4070d523321b4f821741823648147ca24408e"
+    },
+    "full12.input.json": {
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 275412,
+      "sha256": "8b4be44c7d9ca2f60d4e1ed829d3652658a7bdeb0fcaccf1dc6d95e16f68ac24"
+    },
+    "input_cases.json": {
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    "prepare_fit19_and_eval19.py": {
+      "bytes": 5250,
+      "sha256": "c57bda3b447d445e75bd97a895c5eaa6824515d16d1d254728d0d86331f342e5"
+    },
+    "restore_new_gpu_once.py": {
+      "bytes": 11248,
+      "sha256": "94464d8340a8c5097da987b3d4a20a8ae34e689130f76422faee48ea06cbb9d5"
+    },
+    "restore_scope.json": {
+      "bytes": 8776,
+      "sha256": "0511b114b8202194a091d8183768d32c2fa895f7c89ea1fc8d79e870eaa2883e"
+    },
+    "runtime_helper_functions.py.txt": {
+      "bytes": 5064,
+      "sha256": "62ba12758d8ed9daf02ccfb189befb0c3256da684b6cdc16e1a089bc6dd56754"
+    },
+    "semantic-reader-diagnostic.capacity.json": {
+      "bytes": 322,
+      "sha256": "b47a6cdf3fb7095e5d2a428f1ee5672a973c275e1f7cc3a028c0905bb4fa0a6c"
+    },
+    "semantic-reader-diagnostic.input.json": {
+      "bytes": 2867,
+      "sha256": "bb642569f2a1920735426905a6c1b5b9168af981770c4362d59a12dc6cf2ae0c"
+    },
+    "semantic-reader-diagnostic.messages.json": {
+      "bytes": 8605,
+      "sha256": "a2d9d7a545df2706f8b207be432e9c2f31ab546578af9c4cc23a50928a461cb9"
+    },
+    "source_manifest.json": {
+      "bytes": 191353,
+      "sha256": "d357534cc9d1f3b3899cb2fc45d829016abf9eba18efa13e5f0e103bc1067efa"
+    },
+    "start_restored_baseline.py": {
+      "bytes": 4063,
+      "sha256": "ad9cec32d35905a57be5366d5c2393f33043c30855dbaa1a42f259a82d81ea84"
+    },
+    "token_capacity.json": {
+      "bytes": 8423,
+      "sha256": "43e6a910d76eec51eb9845b4e58f18948e44f081fb0f5e7313ee1c64853a82a5"
+    },
+    "train_piece_model_adapter.py": {
+      "bytes": 18654,
+      "sha256": "04c1438a4e8ac9f2939d2bfb4fc958553ad462acfef1d8ddcc8d2612ac11ec67"
+    },
+    "training_independent_review.json": {
+      "bytes": 3269,
+      "sha256": "f4281228c4e226502cf0a0e99bb5b4a9bb8dd7ecec00f7640ed49f0ed33f76a7"
+    },
+    "training_material.json": {
+      "bytes": 409969,
+      "sha256": "59978e6c05ba3ef24a6e8eb990b1466e2bcb98d0d84d9a6a90fb4de30656a8d9"
+    },
+    "training_root_review.json": {
+      "bytes": 1698,
+      "sha256": "e3dd65d3172064f0213928ccdb941615448e90fdb406bb14156af384952821e8"
+    },
+    "training_scope.template.json": {
+      "bytes": 11552,
+      "sha256": "f9e25403c5437999415bc9d6466ca8f20d7c29b9503627529a5572d640b91e21"
+    },
+    "training_validation.json": {
+      "bytes": 334088,
+      "sha256": "0bbb2b088cd52ba7e9e83adf8ee4ce153edca46761daef9063f9bbf6a0c699a8"
+    },
+    "warm_kernel_probe_once.py": {
+      "bytes": 17060,
+      "sha256": "15733af1e373fe1757b734e8991bfb11b2c56d39cb545221bfac93d99d5b3f83"
+    }
+  },
+  "material_sha256": "59978e6c05ba3ef24a6e8eb990b1466e2bcb98d0d84d9a6a90fb4de30656a8d9",
+  "nested_archives": {
+    "baseline_members": 411,
+    "candidate_source_members": 247
+  },
+  "new_model_generations": 0,
+  "new_training_updates": 0,
+  "no_old_Pod_copy_assumed": true,
+  "normal_adoption": false,
+  "pod": "xrplcoeb5ec77f",
+  "restore_scope_sha256": "0511b114b8202194a091d8183768d32c2fa895f7c89ea1fc8d79e870eaa2883e",
+  "scope": "Specific new-Pod transfer/restoration and conditional once FIT19/A19/B19 approval required; no remote changes yet.",
+  "source_commit": "5af8625599aa80f90c983cdec34144e88a133d1e",
+  "state": "XRPL_RESTORE19_AND_CONDITIONAL_FIT19_A19_B19_PREPARED_NOT_SENT_NOT_EXECUTED",
+  "upload_archive": {
+    "bytes": 20264058,
+    "entries": 33,
+    "expanded_bytes": 21779197,
+    "restore_scope_sha256": "0511b114b8202194a091d8183768d32c2fa895f7c89ea1fc8d79e870eaa2883e",
+    "sent": false,
+    "sha256": "cc58a6102faf1781e407b73205f326787d95f5b98fe07f7adb37603973567efb"
+  },
+  "upload_bytes": 21779197,
+  "upload_files": 33,
+  "verification": "Independent static full file/source/archive review; CPU lifecycle/binding fixtures only. Not actual new GPU proof or model quality."
+}

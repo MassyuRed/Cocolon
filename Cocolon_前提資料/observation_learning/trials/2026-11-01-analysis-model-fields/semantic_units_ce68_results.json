@@ -1,0 +1,474 @@
+{
+  "status": "COMPLETED_SAME68_PLAIN_CE_COMPARISON_MEANING_REVIEWED_NOT_ADOPTED",
+  "date_jst": "2026-11-03",
+  "source_commit": "e92c1211cfa1fe4bee9b9a72d64d5d6b9d3464e5",
+  "runtime_api_production_commit": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "source_snapshot_files": 2134,
+  "source_snapshot_historical_test_commit": "cddf185594b5eeffcf72a92dcc2a2c5a44ff8b4c",
+  "source_snapshot_single_commit_checkout": false,
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "training_initial": {
+    "adapter_config.json": "b357ff96373f1dac800ce0e5216daabbd9741358a2c72674c2838ac470cf60eb",
+    "adapter_model.safetensors": "89badc47bc21bf315e4475267c007b9ee51c0b013a4d7d3161333f02fd30f580"
+  },
+  "new_weights_sha256": "b2a5cbf18f4ab37253da2e8680d769c3b8dc78f9cf603c177eca6abc96dd240a",
+  "new_config_sha256": "1076df9e03a0d444d70d4787e057053325417369a1951f18b8705ad56cc542a3",
+  "new_tensors": 112,
+  "new_parameters": 3833856,
+  "new_tensors_dtype": "F32",
+  "all_new_weights_finite": true,
+  "saved_adapter_nontraining_reload": "MATCHED_112_TENSORS",
+  "plan_sha256": "d6604f006dec0faa314e33560094e65a0146a2bfd77b5aec77e256cbc03ddb23",
+  "runner_sha256": "f9801d6225af0e7a5e3806fbef97f51c87f7b1d4b3528813738bccc1f113f949",
+  "teachers_unchanged": 68,
+  "update_order_unchanged": 74,
+  "training_objective": "EXISTING_UNWEIGHTED_FULL_ASSISTANT_CE_V1",
+  "before_reused_exact": 32,
+  "baseline_new_generations": 0,
+  "new_after_generations": 32,
+  "all_finish_reason_stop": true,
+  "updates_completed": 74,
+  "measurement_forwards": 136,
+  "model_loads": 2,
+  "process_seconds": 495.4590950771235,
+  "supervisor_seconds": 496.8048804451246,
+  "run_exit": 0,
+  "initial_teacher_nll_max_abs_delta": 0,
+  "dropout_modules_zero": 0,
+  "functional_attention_dropout": 0,
+  "adapter_lora_dropout": {
+    "default": 0
+  },
+  "teacher_nll_means": {
+    "before_updates": 0.004437959549678079,
+    "after_updates": 0.0016023807603393354
+  },
+  "initial89ba_and_weighted6964_files_unchanged": true,
+  "compute_apps_after": "",
+  "teacher_json_exact": {
+    "AT4": "4/4",
+    "UQ2": "2/2",
+    "MX2": "2/2",
+    "OA2": "2/2",
+    "SC6": "6/6"
+  },
+  "all32_source_before_weighted_after_meaning_read": true,
+  "structural_before": 28,
+  "structural_after": 31,
+  "structural_denominator": 32,
+  "structural_count_is_meaning_success_rate": false,
+  "raw_byte_unchanged_from89ba": 22,
+  "raw_byte_unchanged_from_weighted": 25,
+  "meaning_changes": [
+    {
+      "ids": [
+        "SC04",
+        "SC05",
+        "SC06",
+        "SD02"
+      ],
+      "change": "VERBATIM_NONPAST_UNKNOWN_CONTENT_AND_COMPLETE_LOCAL_SCOPE_RESTORED_VS_WEIGHTED"
+    },
+    {
+      "ids": [
+        "MX02",
+        "OA02"
+      ],
+      "change": "WEIGHTED_EXTRA_VERBSTEM_TARGET_REMOVED_EXACT89BA_RESTORED"
+    },
+    {
+      "ids": [
+        "SC03",
+        "SD01"
+      ],
+      "change": "WEIGHTED_LOCAL_SCOPE_GAIN_RETAINED"
+    },
+    {
+      "ids": [
+        "HQ03",
+        "CQ04"
+      ],
+      "change": "ACTOR_AND_MILD_MODIFIER_GAIN_RETAINED"
+    },
+    {
+      "ids": [
+        "OD01"
+      ],
+      "change": "NEW_REGRESSION_AMBIGUOUS_SHORT_UNKNOWN_PARENTS_STRICT_REJECTION"
+    },
+    {
+      "ids": [
+        "SQ03"
+      ],
+      "change": "CONTINUATION_MODIFIER_OMISSION_REMAINS_REGRESSION_FROM89BA"
+    },
+    {
+      "ids": [
+        "MD02"
+      ],
+      "change": "ACTOR_RECOVERY_NEGATION_MISSING_EXTRA_VERBSTEM_TARGET_REMAINS"
+    },
+    {
+      "ids": [
+        "HQ04"
+      ],
+      "change": "UNCHANGED_WRITTEN_REASON_STILL_TE_CONTEXT"
+    },
+    {
+      "ids": [
+        "MD01"
+      ],
+      "change": "UNCHANGED_COARSE_MODIFIER_SCOPE_REMAINS"
+    }
+  ],
+  "checks": [
+    {
+      "id": "AF01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "NV04",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "REHEARSAL_AT17",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT19",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT21",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "REHEARSAL_AT29",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "CQ03",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "CQ04",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "SQ01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "SQ03",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "PQ01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "PQ02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "UQ01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "UQ02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "HQ03",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "HQ04",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "MX01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "MX02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": false
+    },
+    {
+      "id": "MD01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "MD02",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "OA01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "OA02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": false
+    },
+    {
+      "id": "OD01",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "OD02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "SC01",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "SC02",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "SC03",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": false,
+      "weighted_teacher_equal": true
+    },
+    {
+      "id": "SC04",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": false,
+      "weighted_teacher_equal": false
+    },
+    {
+      "id": "SC05",
+      "unchanged_from_89ba": true,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": true,
+      "weighted_teacher_equal": false
+    },
+    {
+      "id": "SC06",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": true,
+      "before_teacher_equal": false,
+      "weighted_teacher_equal": false
+    },
+    {
+      "id": "SD01",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": true,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    },
+    {
+      "id": "SD02",
+      "unchanged_from_89ba": false,
+      "unchanged_from_weighted": false,
+      "after_json_valid": true,
+      "teacher_equal": null,
+      "before_teacher_equal": null,
+      "weighted_teacher_equal": null
+    }
+  ],
+  "saved_replay": {
+    "responses": 64,
+    "matched_candidates": 59,
+    "maintained_rejections": 5,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "saved_reader_generation_compiler_author_patched_to_fail": true
+  },
+  "recovery": {
+    "original_run_members": 268,
+    "original_manifest_entries": 267,
+    "total_source_members": 276,
+    "all_original_member_bytes_and_sha_matched": true,
+    "all112_weight_bytes_and_sha_matched": true,
+    "container_repacked": true,
+    "new_model_calls_added": 0
+  },
+  "original_report_status_preserved": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+  "normal_adoption": false,
+  "model_initial_adoption": false,
+  "all_unparsed": true,
+  "actor_unresolved": true,
+  "route_count": 0,
+  "product_credit": 0,
+  "formal_acceptance": "UNCHANGED_0_OF_3",
+  "completion_percent_unchanged": 54.5,
+  "full_route_quality_proven": false,
+  "independent_review": "SAME_ENVIRONMENT_READ_ONLY_AGENT_NOT_PRO_ULTRA_OR_HUMAN_ACCEPTANCE",
+  "structure_map_delta": "NONE_ISOLATED_RESEARCH_ONLY",
+  "production_api_db_rn_render_supabase_deployment_effect": 0,
+  "pod_management_effect": 0,
+  "gpu_hourly_usd_previously_observed": 0.58,
+  "gpu_process_allocated_usd": 0.079823965317981,
+  "cost_excludes": "preparation,download,transfer,holding,storage,tax",
+  "intermediate_count_correction": {
+    "process_seconds": 150.36834761709906,
+    "misread_count": 18,
+    "actual_new_calls": 1,
+    "final_new_calls": 32
+  },
+  "next_cpu_only": "Retain controlled local gains;address ambiguous unknown-parent regression,continuation modifier omission and negative-action/noun-target distinction with existing teacher contrasts;track written reason and modifier scope separately;fix one initial/dose/order/retention/nearby/cap before new GPU",
+  "next_gpu_selected": false,
+  "automatic_progression": false,
+  "private_artifact": {
+    "library_file_id": "libfile_ceb97f613864819184a52359ae56affc",
+    "filename": "cocolon-analysis-ce68-result-20261103.zip",
+    "bytes": 14889669,
+    "sha256": "4ef5a91abc74c28ad78c8f8f88b3ab38fa19b9b0873ec72c85383c8481716427",
+    "members": 281
+  }
+}

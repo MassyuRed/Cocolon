@@ -1,0 +1,22 @@
+{
+  "library_file_id": "libfile_9f058918928c81919765b7b5e9248a20",
+  "file_id": "file_000000008d4c8206ac28f6337dd16fac",
+  "file_name": "cocolon-focus29-weights-20261030.zip",
+  "library_version": 0,
+  "library_url": "https://chatgpt.com/library?file_id=libfile_9f058918928c81919765b7b5e9248a20&account_id=personal",
+  "bytes": 14208416,
+  "sha256": "159ee10709c209f09c5b70d783474a9bf2ed08f84b679db89d719199cf374f25",
+  "members": [
+    "adapter/README.md",
+    "adapter/adapter_config.json",
+    "adapter/adapter_model.safetensors",
+    "weights_verification.json"
+  ],
+  "adapter_sha256": "ed298856feff61b36dcc23f57996c8821a8e7da5d745ca7b92344cd89f5d77f0",
+  "all_112_finite_f32": true,
+  "params": 3833856,
+  "full_base_weights_included": false,
+  "optimizer_rng_state_included": false,
+  "product_adopted": false,
+  "note": "Complete additional weights/config/model card plus independent binary verification; original base model required."
+}

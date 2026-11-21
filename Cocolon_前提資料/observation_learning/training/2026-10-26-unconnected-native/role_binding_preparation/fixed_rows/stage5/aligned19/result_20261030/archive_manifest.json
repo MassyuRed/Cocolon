@@ -1,0 +1,59 @@
+{
+  "files": [
+    {
+      "path": "cpu/cpu_summary.json",
+      "bytes": 9031,
+      "sha256": "beee9c4bcb0cd243c3e8b2e74e77dd56cc6bfe2e1682d87c0402c3e44e6b53ab"
+    },
+    {
+      "path": "cpu/post_identity.json",
+      "bytes": 261,
+      "sha256": "1be7c8decab7694f6845be2477cae8ccaee47636eec7d5c4a5380a3ce3e8add9"
+    },
+    {
+      "path": "cpu/prepared_cpu.json.gz",
+      "bytes": 149744,
+      "sha256": "84d2d641ab1bccb3ad3b6140304b0026fecc1e1dcbb9129814c1d7d327c7de62"
+    },
+    {
+      "path": "cpu/train19.jsonl",
+      "bytes": 411959,
+      "sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7"
+    },
+    {
+      "path": "runtime/README.md",
+      "bytes": 4074,
+      "sha256": "e4fdc7cfe113a2f8286b56ca3634a0b198030f0cc2e41ddee1bbd1ff5ca4ca80"
+    },
+    {
+      "path": "runtime/cpu.log",
+      "bytes": 607,
+      "sha256": "2e6237993ffb8c92863f845bcdd49db3c649a22f6a8c1a237ce93312f93a5823"
+    },
+    {
+      "path": "runtime/execution.json",
+      "bytes": 197,
+      "sha256": "d7532da91fc4e1cc5f2c2fcd0be0cdfe046d44eb0b1b6d207eb848d68720c645"
+    },
+    {
+      "path": "runtime/prepare_aligned19.py",
+      "bytes": 9255,
+      "sha256": "1c190be1a01d2fd1eb9a58e72c303e5810f4dd46ab9c1702ccfd19d9882bff21"
+    },
+    {
+      "path": "runtime/prompt_source_index.py",
+      "bytes": 11806,
+      "sha256": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96"
+    },
+    {
+      "path": "runtime/proposal.json",
+      "bytes": 5444,
+      "sha256": "bcb4459e805aaef00fdcdc068b19f1bc83b49d175792aa8e4c885a2f73d41724"
+    },
+    {
+      "path": "runtime/run_aligned19_once.py",
+      "bytes": 18769,
+      "sha256": "acaf2021ec84b193d4e50903ba2b5bc86bf79b33c05f1fce9b344135fa08ec1b"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "cocolon.emlis_service_binding_training_candidates.v1",
+  "scope": "CPU-generated training candidates for one existing fictional chair story, initial/correction stages under three isolated service identities. Not model outputs, independent language examples, held-out evaluation, training execution, production DB/application or product acceptance.",
+  "status": "CPU_VERIFIED_CANDIDATE_NOT_TRAINING_AUTHORIZATION",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "training_rows": 6,
+  "identity_pairs": 3,
+  "unique_language_story_count": 1,
+  "unique_stages": 2,
+  "evaluation_rows": 0,
+  "evaluation_owner": "root_separate_untrained_identity_pair",
+  "source_texts": {
+    "memo": "全部一人で直せたことが、うれしかった。",
+    "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。",
+    "correction": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+  },
+  "tokenization_verified": true,
+  "token_counter_is_stub": false,
+  "files": {
+    "generate_candidates.py": {
+      "sha256": "44fd35eff71b59756c315f9bd958515cae91c7a5784c478b3c6523974bec9a6b",
+      "bytes": 29442
+    },
+    "sft_examples.jsonl": {
+      "sha256": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7",
+      "bytes": 246024
+    },
+    "train_messages.jsonl": {
+      "sha256": "fa340592b8b208bca91ce83a3623dcc6b7f96e02b2ccdf9cca0c00e7cf0fcf50",
+      "bytes": 116574
+    },
+    "training_identities.json": {
+      "sha256": "7aaab80b17a387b0b297e51f0edaa56e95931fa9597f3803fe8d2546fee7b9b5",
+      "bytes": 1107
+    },
+    "cpu_connection_results.json": {
+      "sha256": "5f5aeaf572aa366c684dde777c59fe78eaef85dd28820a7ff1e8dd745fffab83",
+      "bytes": 80480
+    },
+    "cpu_tokenization_results.json": {
+      "sha256": "5cc2ff0cb41402e6a75c36f6e84344605a4d7afdc306f1e7ed8c0d7f68e0aaed",
+      "bytes": 3278
+    }
+  },
+  "original_dataset_hashes": {
+    "sft_examples.jsonl": "198847f535eed7a3cac8d6f9cd59f8bfe3e53bc9165eb6d3fb32ed6b17ee54d0",
+    "train_messages.jsonl": "32cd574649525c1352d870c8f276ed440a2362722e5026fe472254ce3cedea0e",
+    "eval_inputs.jsonl": "3a5ddb79ac3a6ae3a3a042728986d498dd6a55efec7b7212d1fb198ac96537c4",
+    "dataset_manifest.json": "189fcc3a424731ad4074ef2901a6c8b5546913ea6410bbdca4e800fc73d6c867"
+  },
+  "api_source_hashes": {
+    "ai/services/ai_inference/emlis_thread_service.py": "3c5bdaf79885df0b3607dc5c925d738c5fb7ae717e1d4354ffc05d6f23022fb8",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "b3058e4cdff65465516056fc0af4c7452bad6a6960310ecdd69ac008da872297",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "4a57bb27d3c0e00bb52d399c662749962cac282d9ff33282c909b21874f4f9c3",
+    "ai/tests/test_cmee_emlis_model_meaning.py": "686d84fa75c67965b1e1048aad543eaf2275eeeb95f14f80b0d1428e37e1863e",
+    "ai/tests/test_cmee_emlis_model_proposal.py": "4e939e5773cd0e376cd3d1c314e2bf4d8397ceb8291200d81972e44ec6dfe139",
+    "ai/tests/test_emlis_q2_application.py": "771bc98fe23eee41fdd10c86f91accb55863cb24fee77b2609686e7ba1a6d514",
+    "ai/tests/helpers/emlis_q2_postgres.cjs": "bc4fc9a7bb46512a12ebe2ee2da5307e6d9d0ba8bacd4b94d69f26d09bfde7a6",
+    "supabase/migrations/20260911020509_emlis_input_threads_q2.sql": "8ec3369d5377046d933daaccc39123b7e92b7c1c33339136fdbc1a56a379c88f"
+  },
+  "training_performed": false,
+  "real_model_called": false,
+  "product_accepted": false,
+  "post_check": {
+    "schema": "cocolon.emlis_service_binding_postcheck.v1",
+    "new_service_or_teacher_generations": 0,
+    "old_teacher_semantic_and_text_fingerprints": {
+      "INITIAL": "af8a36604315776d68c242266f58fb8f272eef54bec24299445145ebb9cc4fb3",
+      "CORRECTION": "52e895f750d3f3d8eefde920fc757cf36851efcf158ebe54de9974cf7730f708"
+    },
+    "old_teacher_semantic_and_text_match_count": 6,
+    "observed_legacy_generation_budget": 2048,
+    "observed_legacy2048_exceeded": [
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+    ],
+    "legacy2048_all_completions_fit": false,
+    "proposed_generation_budget": 2560,
+    "proposed_max_prompt_tokens": 5632,
+    "proposed2560_fits": true,
+    "context_limit": 8192,
+    "targets_truncated_or_shortened": false,
+    "training_performed": false,
+    "actual_inference_budget_changed_by_this_cpu_check": false,
+    "note": "Original measured generation_budget=2048 rows remain unchanged; 2560 is a separate plan feasibility check."
+  },
+  "observed_legacy2048_exceeded": [
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+  ],
+  "proposed2560_fits": true
+}

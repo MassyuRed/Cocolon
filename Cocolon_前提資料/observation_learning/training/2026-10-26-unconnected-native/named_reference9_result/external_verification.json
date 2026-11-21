@@ -1,0 +1,39 @@
+{
+  "runtime": {
+    "bytes": 108328,
+    "sha256": "3f5f28e3585ae835e0f86b72b1ad08b09fedcb08d39efc12dabf2d4ad8ccb9b1",
+    "payloads": 24,
+    "members": 25,
+    "crc": true,
+    "all_hash_sizes": true
+  },
+  "weights_and_originals": {
+    "bytes": 14374039,
+    "sha256": "ff812e0708e2bd831796070cdeba4090476d67dfb7e2a200c83ae0ca5939407e",
+    "payloads": 28,
+    "members": 29,
+    "crc": true,
+    "all_hash_sizes": true
+  },
+  "weights": [
+    {
+      "path": "run/adapter/adapter_model.safetensors",
+      "sha256": "9ba8dccb37953000d7b2f2700f796dd89bc75a6e1b9d664199f6dafd024449d8",
+      "bytes": 15351792,
+      "tensors": 112,
+      "parameters": 3833856,
+      "dtype": "F32",
+      "all_finite": true,
+      "contiguous": true
+    }
+  ],
+  "runtime_full_payloads_identical": true,
+  "cpu_originals_identical": true,
+  "saved_weight_matches_run": true,
+  "initial_284f_shapes_identical": true,
+  "plan_identical": true,
+  "raw_hashes_match_run": true,
+  "model_loads": 0,
+  "generations": 0,
+  "sql_operations": 0
+}

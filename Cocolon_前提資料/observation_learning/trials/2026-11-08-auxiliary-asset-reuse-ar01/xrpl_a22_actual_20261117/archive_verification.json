@@ -1,0 +1,50 @@
+{
+  "state": "A22_ORIGINAL_ARCHIVE_CRC_ALL13MEMBERS_VERIFIED",
+  "archive_bytes": 63989,
+  "archive_sha256": "4c3824b78edaa1366987b17b9b20a127a0bdfb8c499bd26d0e135c2daaea7cb4",
+  "data_members": 13,
+  "execution": {
+    "state": "INCOMPLETE_NOT_ADOPTED",
+    "new_model_calls": 3,
+    "elapsed_seconds": 332.1035637019668,
+    "original_provider_restored": true,
+    "restored_pid": 14681,
+    "restored_start_ticks": "96402996",
+    "result_sha256": "1a154e1adeee52bdc5cdb18a4f69e2a0cc6fccb40789484a0a4797ccd6174fd1"
+  },
+  "call": {
+    "status_code": 200,
+    "finish_reason": "length",
+    "seconds": 210.13473596505355,
+    "raw_sha256": "7c27c840fa48fea9f2563e1fc92270358c673e1a7a0fb9c49791d22a61e325cc",
+    "messages_sha256": "41c6f755bdba5a9949ff5468b10a4b21f91f8c0a6a252e5b9ab1481a2db313d9",
+    "request_ref": "analysis-semantic-request:23cf341fb4a87aee6730ec9cd086d7a67a4340f36f67dcf74f865ec99fc6c778"
+  },
+  "raw_characters": 8106,
+  "controls": [
+    {
+      "phase": "before",
+      "id": "EMLIS-EXPLICIT-CORRECTION",
+      "status_code": 200,
+      "seconds": 1.8957594329258427
+    },
+    {
+      "phase": "before",
+      "id": "ANALYSIS-IF-TWO-CANDIDATES",
+      "status_code": 200,
+      "seconds": 56.60677963600028
+    }
+  ],
+  "fresh_restored": {
+    "state": "A22_RESTORED_PROVIDER_FRESHLY_VERIFIED",
+    "pid": 14681,
+    "start_ticks": "96402996",
+    "health": 200,
+    "original_model_matches": true,
+    "original_native_sha256": "eec418d3298ddc0e2ae54af0ab84a638ccb17edbbd2196b95b4bbb2a87745dce",
+    "map_trial_alias_absent": true,
+    "trial_port_closed": true,
+    "B19_root_absent": true,
+    "additional_model_calls": 0
+  }
+}

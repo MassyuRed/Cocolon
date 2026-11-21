@@ -1,0 +1,14 @@
+{
+  "status": "CONDITIONAL2_STARTED_ONCE",
+  "pid": 649085,
+  "started_unix": 1792968888.7096236,
+  "source_commit": "6e6ae549a03988142324958d672a0b130fb09c40",
+  "training_source_commit": "fe3f0f9a01968bd283b73d22d91d77f516c661ae",
+  "max_model_calls": 2,
+  "max_seconds": 900,
+  "max_process_usd": 0.065,
+  "all9_passed": true,
+  "root_all9_read": true,
+  "retry": false,
+  "gpu_lifecycle_operations": 0
+}

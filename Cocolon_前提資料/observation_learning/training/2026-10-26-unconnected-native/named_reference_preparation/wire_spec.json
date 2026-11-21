@@ -1,0 +1,53 @@
+{
+  "schema": "cocolon.cmee.named_reference_candidate.v1",
+  "root": {
+    "v": "cocolon.cmee.named_reference_candidate.v1",
+    "a": {
+      "s0": "actual_source_id",
+      "p0": "actual_prior_snapshot_ref"
+    },
+    "q": [
+      {
+        "id": "model_chosen_unique_name",
+        "s": "@s0",
+        "f": "actual_field_path",
+        "t": "exact_quote"
+      }
+    ],
+    "c": "same semantic candidate with the key aliases below"
+  },
+  "key_aliases": {
+    "about_time": "time",
+    "anchor_source_id": "at_source",
+    "arguments": "args",
+    "binding": "bind",
+    "bindings": "binds",
+    "claim_id": "cid",
+    "claim_refs": "cr",
+    "evidence_indexes": "ev",
+    "expression": "expr",
+    "from_claim_id": "from",
+    "modality": "mode",
+    "operation": "op",
+    "predicate": "pred",
+    "prior_snapshot_ref": "prior",
+    "qualifiers": "qual",
+    "question_proposal": "question",
+    "relation_id": "rid",
+    "relation_refs": "rr",
+    "replacement_refs": "replace",
+    "schema_version": "schema",
+    "scope_refs": "scope",
+    "source_entity": "entity",
+    "surface_proposal": "prose",
+    "target_claim_refs": "target_claims",
+    "target_ref": "target",
+    "target_unknown_ref": "target_unknown",
+    "to_claim_id": "to",
+    "unknown_id": "uid",
+    "update_refs": "ur"
+  },
+  "references": "ev lists quote names from q; ur lists $id names of output updates; never numeric positions. Every update has unique $id. Other claim/relation/unknown IDs are unchanged.",
+  "identity_aliases": "All actual source IDs and prior snapshot IDs are explicit once in a; q.s, at_source and prior contain @name into a. No source or prior ID is supplied by the decoder.",
+  "preservation": "All meanings, literal values, source IDs, quotes, question, prose, update operations/order/count/targets and prior snapshot references remain model outputs. No semantic field is filled or repaired. Duplicate/undefined names and incomplete JSON are rejected. This is not an adopted CMEE wire."
+}

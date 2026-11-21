@@ -1,0 +1,326 @@
+{
+  "synthetic_only": true,
+  "teacher_plan": "semantic_map_resume40_plan.json",
+  "teacher_id": "T01_manual10",
+  "request_messages_unchanged": true,
+  "provider_response": {
+    "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "{\"schema_version\":\"cocolon.analysis.semantic_map.model.v2\",\"overview\":{\"summary\":\"部屋や風景からは自分がきれいと感じたものを残したいという気持ちがあります。一方で、予定や選択で外側から決まる経験もあって、その場では意見を言わなかったこともあります。本人が何を大切にして選んだかが、出力に表れています。\",\"title\":\"自分の基準で関わる場面と対象\"},\"nodes\":[{\"evidence\":[{\"field\":1,\"quote\":\"部屋が少し片づくと気持ちも落ち着きます。今日は全部終えなくてもよいと思いました。\"},{\"field\":2,\"quote\":\"私は机を片づけた。残りの棚は片づけなかった。\"}],\"explanation\":\"部屋が少し片づくと落ち着くという感覚と、今日は全部終えなくてもよいという考えがあります。机は片づけていますが、残りの棚は片づけられていません。\",\"node_id\":\"n1\",\"node_kind\":\"STATE_CONTEXT\",\"perspective\":\"SELF\",\"summary\":\"少し片づけることと、全部終えなくてもよいという考えが同時に記されています。\",\"title\":\"少し整えることと、全部を終えることの区別\",\"unknowns\":[]},{\"evidence\":[{\"field\":3,\"quote\":\"任された内容はきちんと確認したいです。直前に予定が変わったことには少し腹が立ちました。\"},{\"field\":4,\"quote\":\"私は会議を担当した。私は会議の資料を調べた。\"}],\"explanation\":\"会議の資料を調べた行動と、任された内容をきちんと確認したいという考えがあります。予定変更への怒りと、確認したいという基準は別の表現です。\",\"node_id\":\"n2\",\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"summary\":\"資料を調べる役割と、内容をきちんと確認したいという望みが記されています。\",\"title\":\"会議で関わる対象と確認したいこと\",\"unknowns\":[]},{\"evidence\":[{\"field\":5,\"quote\":\"自分がきれいだと思った風景を残せたのが嬉しかったです。人に見せるかどうかは、まだ決めていません。\"},{\"field\":6,\"quote\":\"私は写真を撮った。私は写真を見た。\"}],\"explanation\":\"写真を見た後、自分がきれいだと思った風景を残せたのが嬉しかったですと述べています。人に見せるかは未決定です。\",\"node_id\":\"n3\",\"node_kind\":\"TARGET_MEANING\",\"perspective\":\"SELF\",\"summary\":\"自分がきれいだと思った風景を残せたことが嬉しかったです。\",\"title\":\"自分が感じた風景を残すこと\",\"unknowns\":[]},{\"evidence\":[{\"field\":7,\"quote\":\"友人と会えなくなって寂しかったです。予定が合わなかっただけなのか、相手の気持ちはわかりません。\"},{\"field\":8,\"quote\":\"友人から予定を変えたいと連絡が来た。今日は会わなかった。\"}],\"explanation\":\"会えなかった原因は予定の合わない一方面だけとは決まりません。友人のその日の意図や、友人が会いたかったかという情報は記録にありません。\",\"node_id\":\"n4\",\"node_kind\":\"TARGET_MEANING\",\"perspective\":\"OBSERVED_INTERACTION\",\"summary\":\"友人の予定変化と会わなかったことは記されています。相手の気持ちはわかりませんと述べています。\",\"title\":\"会わなかった原因と相手の気持ち\",\"unknowns\":[\"友人がその日に会いたかったか\",\"予定以外に会いたくない理由があるか\"]},{\"evidence\":[{\"field\":9,\"quote\":\"一緒に過ごせたことは嬉しいです。ただ、話せなかったこともあり、相手がどう受け取ったかは気になっています。\"},{\"field\":10,\"quote\":\"恋人と夕食を食べた。相談したかった話はしなかった。\"}],\"explanation\":\"夕食では一緒に過ごせたことが嬉しいです。相談したかった話はしなくて、相手がどう受け取ったかは気になっています。話さなかったことが、相手が楽しくなかった原因とは決まりません。\",\"node_id\":\"n5\",\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"summary\":\"一緒に過ごせたことは嬉しいです。相談したかった話はしなくて、相手がどう受け取ったかは気になっています。\",\"title\":\"一緒に過ごした時間と相談したかったこと\",\"unknowns\":[]},{\"evidence\":[{\"field\":11,\"quote\":\"休んだら少し落ち着きました。今日動けなかったことは残念ですが、明日の調子はまだわかりません。\"},{\"field\":12,\"quote\":\"今日は散歩をしなかった。家で休んだ。\"}],\"explanation\":\"今日は散歩をしなかったことと、休んだ後少し落ち着きましたという反応があります。明日の調子はまだわかりませんと述べています。\",\"node_id\":\"n6\",\"node_kind\":\"STATE_CONTEXT\",\"perspective\":\"SELF\",\"summary\":\"休むことで少し落ち着くことが、動けなかった日に記されています。\",\"title\":\"休息が身体に与えた影響と明日の未確定\",\"unknowns\":[]},{\"evidence\":[{\"field\":13,\"quote\":\"同じところで間違えて悔しかったです。それでも、どこで迷うのかは前より少しわかりました。\"},{\"field\":14,\"quote\":\"私は問題を解いた。私は答えを確認した。\"}],\"explanation\":\"答えを確認した行動と、同じところで間違えて悔しかったことがあります。どこで迷うかは前より少しわかりたと述べています。\",\"node_id\":\"n7\",\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"summary\":\"答えを確認しています。同じ間違いへの悔しさと、迷う場所が少しわかるという読みがあります。\",\"title\":\"答えの確認と、迷う場所への理解\",\"unknowns\":[]},{\"evidence\":[{\"field\":15,\"quote\":\"自分の意見を聞かずに決められたことに腹が立ちました。私は自分で選びたい。\"},{\"field\":16,\"quote\":\"集まりでは別の人が方針を決めた。私はその場では意見を言わなかった。\"}],\"explanation\":\"その場で意見を言わなかったことが、自分の意見を聞かずに決められた原因ではありません。自分で選びたいという望みが記されています。\",\"node_id\":\"n8\",\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"summary\":\"方針が本人の意見で決まらなかったことと、自分で選びたいという望みが記されています。\",\"title\":\"意見を出さなかった場と自分で選びたいこと\",\"unknowns\":[]},{\"evidence\":[{\"field\":17,\"quote\":\"以前思い描いた暮らしと今の暮らしが違って、今日はつらく感じました。これから何を変えるかはまだ決めていません。\"},{\"field\":18,\"quote\":\"古い日記を読んだ。今後の予定は決めなかった。\"}],\"explanation\":\"以前の暮らしの像と今の距離が、今日にはつらく感じられています。具体的な変更策はまだ決めていません。\",\"node_id\":\"n9\",\"node_kind\":\"TARGET_MEANING\",\"perspective\":\"SELF\",\"summary\":\"以前思い描いた暮らしと今の暮らしの違いが、今日にはつらく感じられています。\",\"title\":\"思い描いた暮らしと現在の距離\",\"unknowns\":[\"今日以外に同じ感覚が現れるか\",\"具体的に何を変えたいか\"]},{\"evidence\":[{\"field\":19,\"quote\":\"周りと同じ進み方をすることより、自分が納得して選ぶことを大切にしたいと考えました。\"}],\"explanation\":\"複数の場面では、本人が何を大切にして選んだかが表れています。その選択を、周りの基準の欠如によって説明することはできません。\",\"node_id\":\"n10\",\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"summary\":\"自分が納得して選ぶことを、同じ進み方をすることより大切にしたいと述べています。\",\"title\":\"自分が納得して選ぶことを大切にしたい\",\"unknowns\":[]}],\"edges\":[{\"explanation\":\"自分がきれいだと思った風景を残せた嬉しさ(n3)と、部屋が少し片づくと落ち着く考え(n1)は、本人が関わる対象と、その場での基準を比べる視点になります。\",\"from\":\"n1\",\"label\":\"自分の感覚を残す対象\",\"relation_kind\":\"SHARED_MEANING\",\"to\":\"n3\"},{\"explanation\":\"任された内容を確認したい基準(n2)と、自分で選びたい望み(n8)は、選択や出力に何を置くかという本人の基準として見られます。\",\"from\":\"n2\",\"label\":\"選択や確認に本人の基準を置く\",\"relation_kind\":\"CRITERION_EXPRESSION\",\"to\":\"n8\"},{\"explanation\":\"友人の予定変化には怒り(n4)があり、集まりの方針決定にも怒り(n8)があります。原因を同じものへまとめず、本人が関わる対象や選択の位置づけを見比べます。\",\"from\":\"n4\",\"label\":\"原因の同一化はせず、関わる位置を見比べる\",\"relation_kind\":\"CONTEXT_CONTRAST\",\"to\":\"n8\"}]}"
+        }
+      }
+    ]
+  },
+  "cmee_result": {
+    "synthetic_only": true,
+    "actual_gpu_generation": true,
+    "source_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
+    "finish": "stop",
+    "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+    "cmee_admitted": true,
+    "wire_kind": "watashi.map.v3",
+    "nodes": 10,
+    "edges": 3,
+    "full_prose_characters": 1964,
+    "counts": {
+      "excluded_count": 0,
+      "exclusion_reasons": {},
+      "mapped_count": 10,
+      "processed_count": 10,
+      "profile": "cumulative.v1",
+      "source_count": 10,
+      "stale_supplement_count": 0,
+      "unparsed_count": 0
+    },
+    "meaning_quality_accepted": false,
+    "ordinary_device_saved": false
+  },
+  "safe_projection": {
+    "schema_version": "cocolon.analysis.semantic_map.v1",
+    "wire_kind": "watashi.map.v3",
+    "projection_of": "artifact:fb2778d3d4a64fb684a10f30eb6d907c@1",
+    "artifact_version": 1,
+    "period_label": "これまでの記録",
+    "overview": {
+      "summary": "部屋や風景からは自分がきれいと感じたものを残したいという気持ちがあります。一方で、予定や選択で外側から決まる経験もあって、その場では意見を言わなかったこともあります。本人が何を大切にして選んだかが、出力に表れています。",
+      "title": "自分の基準で関わる場面と対象"
+    },
+    "nodes": [
+      {
+        "context": [
+          "生活：喜び・弱、平穏・中"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "部屋が少し片づくと落ち着くという感覚と、今日は全部終えなくてもよいという考えがあります。机は片づけていますが、残りの棚は片づけられていません。",
+        "node_kind": "STATE_CONTEXT",
+        "node_ref": "n1",
+        "perspective": "SELF",
+        "summary": "少し片づけることと、全部終えなくてもよいという考えが同時に記されています。",
+        "title": "少し整えることと、全部を終えることの区別",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "仕事：不安・中、怒り・弱"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "会議の資料を調べた行動と、任された内容をきちんと確認したいという考えがあります。予定変更への怒りと、確認したいという基準は別の表現です。",
+        "node_kind": "SELF_POSITION",
+        "node_ref": "n2",
+        "perspective": "SELF",
+        "summary": "資料を調べる役割と、内容をきちんと確認したいという望みが記されています。",
+        "title": "会議で関わる対象と確認したいこと",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "趣味：喜び・強"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "写真を見た後、自分がきれいだと思った風景を残せたのが嬉しかったですと述べています。人に見せるかは未決定です。",
+        "node_kind": "TARGET_MEANING",
+        "node_ref": "n3",
+        "perspective": "SELF",
+        "summary": "自分がきれいだと思った風景を残せたことが嬉しかったです。",
+        "title": "自分が感じた風景を残すこと",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "人間関係：悲しみ・中、不安・弱"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "会えなかった原因は予定の合わない一方面だけとは決まりません。友人のその日の意図や、友人が会いたかったかという情報は記録にありません。",
+        "node_kind": "TARGET_MEANING",
+        "node_ref": "n4",
+        "perspective": "OBSERVED_INTERACTION",
+        "summary": "友人の予定変化と会わなかったことは記されています。相手の気持ちはわかりませんと述べています。",
+        "title": "会わなかった原因と相手の気持ち",
+        "unknowns": [
+          "友人がその日に会いたかったか",
+          "予定以外に会いたくない理由があるか"
+        ]
+      },
+      {
+        "context": [
+          "恋愛：喜び・中、不安・強"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "夕食では一緒に過ごせたことが嬉しいです。相談したかった話はしなくて、相手がどう受け取ったかは気になっています。話さなかったことが、相手が楽しくなかった原因とは決まりません。",
+        "node_kind": "CHOICE_OUTPUT",
+        "node_ref": "n5",
+        "perspective": "SELF",
+        "summary": "一緒に過ごせたことは嬉しいです。相談したかった話はしなくて、相手がどう受け取ったかは気になっています。",
+        "title": "一緒に過ごした時間と相談したかったこと",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "健康：悲しみ・弱、平穏・強"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "今日は散歩をしなかったことと、休んだ後少し落ち着きましたという反応があります。明日の調子はまだわかりませんと述べています。",
+        "node_kind": "STATE_CONTEXT",
+        "node_ref": "n6",
+        "perspective": "SELF",
+        "summary": "休むことで少し落ち着くことが、動けなかった日に記されています。",
+        "title": "休息が身体に与えた影響と明日の未確定",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "学習：怒り・中、平穏・弱"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "答えを確認した行動と、同じところで間違えて悔しかったことがあります。どこで迷うかは前より少しわかりたと述べています。",
+        "node_kind": "CHOICE_OUTPUT",
+        "node_ref": "n7",
+        "perspective": "SELF",
+        "summary": "答えを確認しています。同じ間違いへの悔しさと、迷う場所が少しわかるという読みがあります。",
+        "title": "答えの確認と、迷う場所への理解",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "価値観：怒り・強"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "その場で意見を言わなかったことが、自分の意見を聞かずに決められた原因ではありません。自分で選びたいという望みが記されています。",
+        "node_kind": "SELF_POSITION",
+        "node_ref": "n8",
+        "perspective": "SELF",
+        "summary": "方針が本人の意見で決まらなかったことと、自分で選びたいという望みが記されています。",
+        "title": "意見を出さなかった場と自分で選びたいこと",
+        "unknowns": []
+      },
+      {
+        "context": [
+          "人生：悲しみ・強"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "以前の暮らしの像と今の距離が、今日にはつらく感じられています。具体的な変更策はまだ決めていません。",
+        "node_kind": "TARGET_MEANING",
+        "node_ref": "n9",
+        "perspective": "SELF",
+        "summary": "以前思い描いた暮らしと今の暮らしの違いが、今日にはつらく感じられています。",
+        "title": "思い描いた暮らしと現在の距離",
+        "unknowns": [
+          "今日以外に同じ感覚が現れるか",
+          "具体的に何を変えたいか"
+        ]
+      },
+      {
+        "context": [
+          "価値観／人生：自己理解"
+        ],
+        "evidence_badge_count": 1,
+        "explanation": "複数の場面では、本人が何を大切にして選んだかが表れています。その選択を、周りの基準の欠如によって説明することはできません。",
+        "node_kind": "SELF_POSITION",
+        "node_ref": "n10",
+        "perspective": "SELF",
+        "summary": "自分が納得して選ぶことを、同じ進み方をすることより大切にしたいと述べています。",
+        "title": "自分が納得して選ぶことを大切にしたい",
+        "unknowns": []
+      }
+    ],
+    "edges": [
+      {
+        "edge_ref": "e1",
+        "explanation": "自分がきれいだと思った風景を残せた嬉しさ(n3)と、部屋が少し片づくと落ち着く考え(n1)は、本人が関わる対象と、その場での基準を比べる視点になります。",
+        "from_ref": "n1",
+        "label": "自分の感覚を残す対象",
+        "relation_kind": "SHARED_MEANING",
+        "to_ref": "n3"
+      },
+      {
+        "edge_ref": "e2",
+        "explanation": "任された内容を確認したい基準(n2)と、自分で選びたい望み(n8)は、選択や出力に何を置くかという本人の基準として見られます。",
+        "from_ref": "n2",
+        "label": "選択や確認に本人の基準を置く",
+        "relation_kind": "CRITERION_EXPRESSION",
+        "to_ref": "n8"
+      },
+      {
+        "edge_ref": "e3",
+        "explanation": "友人の予定変化には怒り(n4)があり、集まりの方針決定にも怒り(n8)があります。原因を同じものへまとめず、本人が関わる対象や選択の位置づけを見比べます。",
+        "from_ref": "n4",
+        "label": "原因の同一化はせず、関わる位置を見比べる",
+        "relation_kind": "CONTEXT_CONTRAST",
+        "to_ref": "n8"
+      }
+    ],
+    "accessibility_linear_order": [
+      "n1",
+      "n2",
+      "n3",
+      "n4",
+      "n5",
+      "n6",
+      "n7",
+      "n8",
+      "n9",
+      "n10"
+    ]
+  },
+  "normal_device_save_verified": false,
+  "latency_20261108": {
+    "fast_candidate": {
+      "stage": "complete",
+      "synthetic_only": true,
+      "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+      "kernel_versions": {
+        "fla-core": "0.5.0",
+        "causal-conv1d": "1.7.0",
+        "einops": "0.8.1"
+      },
+      "provider_pid": 20117,
+      "seconds": 185.88516809605062,
+      "http": 200,
+      "finish": "stop",
+      "characters": 4270,
+      "raw_sha256": "cc704a051250459091f4d1d551615e6d04c2b78eb13edf6a3bd138a744ead9ef",
+      "cmee_admitted": true,
+      "nodes": 9,
+      "edges": 5,
+      "prose_characters": 1812,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 9,
+        "processed_count": 10,
+        "profile": "cumulative.v1",
+        "source_count": 10,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "health_http": 200,
+      "model_weights_changed": false,
+      "request_messages_changed": false,
+      "context_or_output_budgets_changed": false,
+      "meaning_quality_accepted": false,
+      "provider_response": {
+        "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "{\"schema_version\":\"cocolon.analysis.semantic_map.model.v2\",\"overview\":{\"summary\":\"部屋や風景からは自分がきれいと感じたものを残したいという気持ちがあります。一方で、予定や選択で他者や自分の意見が反映されていない苦しさも記されています。\",\"title\":\"自分の基準で関わる場面と対象\"},\"nodes\":[{\"evidence\":[{\"field\":1,\"quote\":\"部屋が少し片づくと気持ちも落ち着きます。今日は全部終えなくてもよいと思いました。\"},{\"field\":2,\"quote\":\"私は机を片づけた。残りの棚は片づけなかった。\"}],\"explanation\":\"本人は部屋が少し片づくと落ち着くと言い、今日は全部終えなくてもよいと述べられています。机は片づけていますが、残りの棚は片づけられていません。完了の基準と、実際に片づけた範囲の差が見えます。\",\"node_id\":\"n1\",\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"summary\":\"少し片づけることと、全部終えなくてもよいという考えが記されています。\",\"title\":\"少し整えることと終えなくてよいこと\",\"unknowns\":[]},{\"evidence\":[{\"field\":3,\"quote\":\"任された内容はきちんと確認したいです。直前に予定が変わったことには少し腹が立ちました。\"},{\"field\":4,\"quote\":\"私は会議を担当した。私は会議の資料を調べた。\"}],\"explanation\":\"会議を担当し資料を調べています。同時に、任された内容をきちんと確認したいという言葉があります。予定変更には腹が立ち方も記されています。\",\"node_id\":\"n2\",\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"summary\":\"自分の担当内容には確認したい基準があり、予定変更には怒りもいます。\",\"title\":\"確認したい担当と予定変更\",\"unknowns\":[]},{\"evidence\":[{\"field\":5,\"quote\":\"自分がきれいだと思った風景を残せたのが嬉しかったです。人に見せるかどうかは、まだ決めていません。\"},{\"field\":6,\"quote\":\"私は写真を撮った。私は写真を見た。\"}],\"explanation\":\"写真を見た後、自分がきれいだと思った風景を残せたのが嬉しいと述べています。人に見せるかはまだ決めていません。\",\"node_id\":\"n3\",\"node_kind\":\"TARGET_MEANING\",\"perspective\":\"SELF\",\"summary\":\"自分がきれいだと思った風景を残せたことが嬉しかったです。\",\"title\":\"自分の感覚を残す写真\",\"unknowns\":[]},{\"evidence\":[{\"field\":7,\"quote\":\"友人と会えなくなって寂しかったです。予定が合わなかっただけなのか、相手の気持ちはわかりません。\"},{\"field\":8,\"quote\":\"友人から予定を変えたいと連絡が来た。今日は会わなかった。\"}],\"explanation\":\"友人と会えなかったことには寂しさがあります。予定の合否だけでは相手の気持ちを測れないという不確かさも記されています。\",\"node_id\":\"n4\",\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"summary\":\"会わなかった原因は予定だけとは断定せず、相手の気持ちはわからないと述べています。\",\"title\":\"会わなかった原因と相手の気持ち\",\"unknowns\":[\"友人が会いたかったかという相手の意図\"]},{\"evidence\":[{\"field\":9,\"quote\":\"一緒に過ごせたことは嬉しいです。ただ、話せなかったこともあり、相手がどう受け取ったかは気になっています。\"},{\"field\":10,\"quote\":\"恋人と夕食を食べた。相談したかった話はしなかった。\"}],\"explanation\":\"一緒に過ごせたことは嬉しいです。一方で相談したかった話はしずまり、相手がどう受け取ったかは気になっています。\",\"node_id\":\"n5\",\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"summary\":\"一緒にいた嬉しさと、話さなかったことによる相手がどう受け取ったかという不安があります。\",\"title\":\"一緒に過ごせたことと相談した話\",\"unknowns\":[]},{\"evidence\":[{\"field\":11,\"quote\":\"休んだら少し落ち着きました。今日動けなかったことは残念ですが、明日の調子はまだわかりません。\"},{\"field\":12,\"quote\":\"今日は散歩をしなかった。家で休んだ。\"}],\"explanation\":\"今日は散歩をしなかったことが残念ですが、休んだら少し落ち着きました。明日の調子はまだわかりませんと述べています。\",\"node_id\":\"n6\",\"node_kind\":\"STATE_CONTEXT\",\"perspective\":\"SELF\",\"summary\":\"休んだ日は落ち着きがあり、今日の動けなかったことは残念です。\",\"title\":\"休息で少し落ち着くこと\",\"unknowns\":[]},{\"evidence\":[{\"field\":13,\"quote\":\"同じところで間違えて悔しかったです。それでも、どこで迷うのかは前より少しわかりました。\"},{\"field\":14,\"quote\":\"私は問題を解いた。私は答えを確認した。\"}],\"explanation\":\"間違えて悔しい一方、どこで迷うかは前より少しわかりましたと述べています。\",\"node_id\":\"n7\",\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"summary\":\"答えの確認で悔しさも、どこで迷うかという理解も進んでいます。\",\"title\":\"正解と迷う場所の理解\",\"unknowns\":[]},{\"evidence\":[{\"field\":15,\"quote\":\"自分の意見を聞かずに決められたことに腹が立ちました。私は自分で選びたい。\"},{\"field\":16,\"quote\":\"集まりでは別の人が方針を決めた。私はその場では意見を言わなかった。\"}],\"explanation\":\"その場で意見を言わなかった原因が本人の無言であるとは決まりません。本人は自分で選びたいと述べています。\",\"node_id\":\"n8\",\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"summary\":\"自分で選びたいという希望と、意見が反映されていない選択の間に距離があります。\",\"title\":\"自分で選びたいという希望\",\"unknowns\":[\"本人の意見がその決定に入らなかったか\",\"本人がその場で意見しなかったか\"]},{\"evidence\":[{\"field\":17,\"quote\":\"以前思い描いた暮らしと今の暮らしが違って、今日はつらく感じました。これから何を変えるかはまだ決めていません。\"},{\"field\":18,\"quote\":\"古い日記を読んだ。今後の予定は決めなかった。\"}],\"explanation\":\"以前の暮らしのイメージと今が違っていてつらく感じています。具体的な変更策はまだ決めていません。\",\"node_id\":\"n9\",\"node_kind\":\"TARGET_MEANING\",\"perspective\":\"SELF\",\"summary\":\"思い描いた暮らしと今の差が、今日はつらく感じられています。\",\"title\":\"思い描いた暮らしと今の距離\",\"unknowns\":[]}],\"edges\":[{\"explanation\":\"自分がきれいだと思った風景を残したいというn3と、部屋が少し片づくと落ち着くというn1は、本人が対象や環境で自分の感覚を確かめる場面です。\",\"from\":\"n1\",\"label\":\"自分の感覚を確かめる場面\",\"relation_kind\":\"SHARED_MEANING\",\"to\":\"n3\"},{\"explanation\":\"自分で選びたいと述べるn8と、任された内容をきちんと確認したいというn2は、本人が関わる対象で自分の基準を表す言葉です。\",\"from\":\"n2\",\"label\":\"自分の基準を言葉にする場面\",\"relation_kind\":\"SHARED_MEANING\",\"to\":\"n8\"},{\"explanation\":\"友人の予定だけでは相手の気持ちは測れないn4と、恋人と過ごした嬉しさでも相談した話はしなかったn5は、会った相手の内面や受け取りを同じ言葉へまとめられません。\",\"from\":\"n4\",\"label\":\"相手の内面を測る未確性\",\"relation_kind\":\"CONTEXT_CONTRAST\",\"to\":\"n5\"},{\"explanation\":\"休んだ日で落ち着くn6と、同じ問題で間違えて悔しいn7は、原因を同じものへまとめられません。どちらも本人の現在の状態や学習の一面です。\",\"from\":\"n6\",\"label\":\"現在の状態と迷う場所の理解\",\"relation_kind\":\"CONTEXT_CONTRAST\",\"to\":\"n7\"},{\"explanation\":\"部屋や写真で本人が関わる基準や感覚は見えますが、友人や恋人の意図や、集まりで方針が決まった原因は記録にありません。\",\"from\":\"n4\",\"label\":\"他者の意図や決定の原因\",\"relation_kind\":\"CONTEXT_CONTRAST\",\"to\":\"n8\"}]}"
+            }
+          }
+        ]
+      }
+    },
+    "adopted_filter_only": {
+      "stage": "complete",
+      "synthetic_only": true,
+      "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+      "kernel_versions": {},
+      "provider_pid": 20854,
+      "seconds": 171.34955875994638,
+      "http": 200,
+      "finish": "stop",
+      "characters": 4486,
+      "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+      "cmee_admitted": true,
+      "nodes": 10,
+      "edges": 3,
+      "prose_characters": 1964,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 10,
+        "processed_count": 10,
+        "profile": "cumulative.v1",
+        "source_count": 10,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "health_http": 200,
+      "model_weights_changed": false,
+      "request_messages_changed": false,
+      "context_or_output_budgets_changed": false,
+      "meaning_quality_accepted": false
+    },
+    "health_http": 200,
+    "active_pid": 20854,
+    "fast_target_active": false,
+    "baseline_seconds": 175.505,
+    "baseline_raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+    "baseline_raw_reference": "provider_response in this file (unchanged)",
+    "teacher_id": "T01_manual10",
+    "teacher_plan_sha256": "189182165cf1d9593b6d7539fdf2c1750e1f4c6cc1159b6966d9076181247cc4",
+    "request_messages_and_request_ref_exactly_verified": true,
+    "filter_only_raw_matches_baseline": true,
+    "fast_candidate_adopted": false,
+    "fast_candidate_rejection": "Cold run slower; mapped coverage fell from 10 to 9 and output changed",
+    "single_run_before_after_only": true,
+    "not_authenticated_device_latency_measurement": true
+  }
+}

@@ -1,0 +1,3669 @@
+{
+  "schema": "cocolon.token_diagnostic.result_summary.v1",
+  "status": "DIAGNOSTIC_COMPLETE_NO_GENERATION_NO_ADOPTION",
+  "authorized_proposal": "d5a3d644b1cddc06f246ed7beff49d5be2de8ea7",
+  "source_commit": "53984cdf58f745b1f891b1da2b9bc36145623884",
+  "adapter_sha256": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a",
+  "forwards_completed": 15,
+  "optimizer_steps": 0,
+  "generations": 0,
+  "cmee_adoptions": 0,
+  "sql_operations": 0,
+  "processing_seconds": 28.46961408201605,
+  "process_cost_usd": 0.002214303099946119,
+  "cost_exclusions": "preparation, CPU, recovery, holding, storage, network, taxes and other costs separate",
+  "old9": {
+    "target_tokens": 15421,
+    "wrong_top1": 0
+  },
+  "new6": {
+    "target_tokens": 10716,
+    "wrong_top1": 203,
+    "wrong_fraction": 0.018943635684957074,
+    "field_metrics": {
+      "JSON_STRUCTURE": {
+        "tokens": 386,
+        "wrong_tokens": 0,
+        "nll_sum": 0.2203998565673828,
+        "mean_nll": 0.000570984084371458
+      },
+      "candidate.claims": {
+        "tokens": 5189,
+        "wrong_tokens": 18,
+        "nll_sum": 90.8456916809082,
+        "mean_nll": 0.017507360123512856
+      },
+      "candidate.conflicts": {
+        "tokens": 12,
+        "wrong_tokens": 0,
+        "nll_sum": 0.0100250244140625,
+        "mean_nll": 0.000835418701171875
+      },
+      "candidate.question_proposal": {
+        "tokens": 78,
+        "wrong_tokens": 4,
+        "nll_sum": 25.418317794799805,
+        "mean_nll": 0.32587586916410005
+      },
+      "candidate.relations": {
+        "tokens": 1077,
+        "wrong_tokens": 2,
+        "nll_sum": 19.33112335205078,
+        "mean_nll": 0.017949046752136287
+      },
+      "candidate.surface_proposal.bindings": {
+        "tokens": 470,
+        "wrong_tokens": 33,
+        "nll_sum": 103.11105918884277,
+        "mean_nll": 0.21938523231668675
+      },
+      "candidate.surface_proposal.observation": {
+        "tokens": 166,
+        "wrong_tokens": 31,
+        "nll_sum": 128.75074291229248,
+        "mean_nll": 0.7756068850138101
+      },
+      "candidate.surface_proposal.reception": {
+        "tokens": 154,
+        "wrong_tokens": 58,
+        "nll_sum": 277.14719581604004,
+        "mean_nll": 1.7996571156885717
+      },
+      "candidate.surface_proposal.update_note": {
+        "tokens": 60,
+        "wrong_tokens": 26,
+        "nll_sum": 124.39287853240967,
+        "mean_nll": 2.073214642206828
+      },
+      "candidate.unknowns": {
+        "tokens": 135,
+        "wrong_tokens": 1,
+        "nll_sum": 4.360288619995117,
+        "mean_nll": 0.032298434222186055
+      },
+      "candidate.updates": {
+        "tokens": 1486,
+        "wrong_tokens": 21,
+        "nll_sum": 63.271034240722656,
+        "mean_nll": 0.04257808495337998
+      },
+      "evidence_quotes": {
+        "tokens": 1491,
+        "wrong_tokens": 9,
+        "nll_sum": 52.105621337890625,
+        "mean_nll": 0.03494676146069123
+      },
+      "EOS": {
+        "tokens": 6,
+        "wrong_tokens": 0,
+        "nll_sum": 0.001194000244140625,
+        "mean_nll": 0.00019900004069010416
+      },
+      "TEMPLATE_TAIL": {
+        "tokens": 6,
+        "wrong_tokens": 0,
+        "nll_sum": 0.0,
+        "mean_nll": 0.0
+      }
+    },
+    "surface_three_fields": {
+      "tokens": 380,
+      "wrong_tokens": 115,
+      "nll_sum": 530.2908172607422,
+      "nll_share": 0.5965257078006126
+    },
+    "surface_three_fields_include_four_null_update_note_tokens": true,
+    "wrong_argmax_with_gold_competition_rank1_ties": 4
+  },
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "target_tokens": 1331,
+      "mean_nll": 0.0019126522370875106,
+      "top1_correct": 1331,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 64,
+          "nll_sum": 0.03452301025390625,
+          "top1_correct": 64,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005394220352172852,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 664,
+          "nll_sum": 0.4478931427001953,
+          "top1_correct": 664,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0006745378655123424,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.002727508544921875,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0013637542724609375,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 47,
+          "nll_sum": 0.476898193359375,
+          "top1_correct": 47,
+          "wrong_tokens": 0,
+          "mean_nll": 0.010146770071476064,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 110,
+          "nll_sum": 0.07737350463867188,
+          "top1_correct": 110,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0007033954967151989,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 46,
+          "nll_sum": 0.024225234985351562,
+          "top1_correct": 46,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005266355431598166,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 17,
+          "nll_sum": 0.1418437957763672,
+          "top1_correct": 17,
+          "wrong_tokens": 0,
+          "mean_nll": 0.008343752692727482,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 27,
+          "nll_sum": 0.7106590270996094,
+          "top1_correct": 27,
+          "wrong_tokens": 0,
+          "mean_nll": 0.02632070470739294,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 7.2479248046875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 7.2479248046875e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 46,
+          "nll_sum": 0.5455608367919922,
+          "top1_correct": 46,
+          "wrong_tokens": 0,
+          "mean_nll": 0.011860018191130264,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.0003452301025390625,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0003452301025390625,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 304,
+          "nll_sum": 0.08358383178710938,
+          "top1_correct": 304,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00027494681508917555,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 3.4332275390625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.4332275390625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "29994933c6116b8c88d1a00357f021c87ccd0362a8055b370f3434f92930e1f9",
+        "raw_tokens": 1332,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4136,
+        "common_prefix_tokens": 1330,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1330,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "1dd41\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "1dd41\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 1330,
+          "full_input_position": 3035,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "639462cc78b7b8b5bd6964fb3091f1cf8c99aef88986942e983832b9b69373f2"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "target_tokens": 2228,
+      "mean_nll": 0.001411249650444976,
+      "top1_correct": 2228,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 63,
+          "nll_sum": 0.008144378662109375,
+          "top1_correct": 63,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00012927585177951388,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 987,
+          "nll_sum": 0.3361835479736328,
+          "top1_correct": 987,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00034061149744035746,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.000583648681640625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0002918243408203125,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 1.52587890625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 1.52587890625e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 115,
+          "nll_sum": 0.06044769287109375,
+          "top1_correct": 115,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005256321119225544,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 87,
+          "nll_sum": 0.09021377563476562,
+          "top1_correct": 87,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0010369399498248923,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 17,
+          "nll_sum": 0.5408973693847656,
+          "top1_correct": 17,
+          "wrong_tokens": 0,
+          "mean_nll": 0.03181749231675092,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 26,
+          "nll_sum": 0.7974987030029297,
+          "top1_correct": 26,
+          "wrong_tokens": 0,
+          "mean_nll": 0.03067302703857422,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 16,
+          "nll_sum": 0.6291656494140625,
+          "top1_correct": 16,
+          "wrong_tokens": 0,
+          "mean_nll": 0.039322853088378906,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.010541915893554688,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.005270957946777344,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 297,
+          "nll_sum": 0.16123008728027344,
+          "top1_correct": 297,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005428622467349274,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 613,
+          "nll_sum": 0.5093173980712891,
+          "top1_correct": 613,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0008308603557443541,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 2.47955322265625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.47955322265625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "49b3296306aafdc78accd7b966205998f245e88673f6d7a42203266b53db2e12",
+        "raw_tokens": 2229,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 6557,
+        "common_prefix_tokens": 2227,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 2227,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "2dc3f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "2dc3f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 2227,
+          "full_input_position": 6066,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "1961df6804eeb2fa520174bcd77b4bf1f5080d6b655f175ef1fb0d54cac3effb"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "target_tokens": 1331,
+      "mean_nll": 0.0018367093814932968,
+      "top1_correct": 1331,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 64,
+          "nll_sum": 0.0327606201171875,
+          "top1_correct": 64,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005118846893310547,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 664,
+          "nll_sum": 0.41750144958496094,
+          "top1_correct": 664,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0006287672433508448,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.001922607421875,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009613037109375,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 47,
+          "nll_sum": 0.4606037139892578,
+          "top1_correct": 47,
+          "wrong_tokens": 0,
+          "mean_nll": 0.009800079021048038,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 110,
+          "nll_sum": 0.05933952331542969,
+          "top1_correct": 110,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005394502119584517,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 46,
+          "nll_sum": 0.020906448364257812,
+          "top1_correct": 46,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0004544880079186481,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 17,
+          "nll_sum": 0.14767074584960938,
+          "top1_correct": 17,
+          "wrong_tokens": 0,
+          "mean_nll": 0.008686514461741728,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 27,
+          "nll_sum": 0.6971969604492188,
+          "top1_correct": 27,
+          "wrong_tokens": 0,
+          "mean_nll": 0.025822109646267362,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 8.20159912109375e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 8.20159912109375e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 46,
+          "nll_sum": 0.4865264892578125,
+          "top1_correct": 46,
+          "wrong_tokens": 0,
+          "mean_nll": 0.010576662809952446,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.0002536773681640625,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0002536773681640625,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 304,
+          "nll_sum": 0.119842529296875,
+          "top1_correct": 304,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0003942188463712993,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 5.340576171875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 5.340576171875e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "33d24cf7740145e4ce8951e3c04e57d9723a24dfdf1973c832ad629d4a1ce4ca",
+        "raw_tokens": 1332,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4136,
+        "common_prefix_tokens": 1330,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1330,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "18e2f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "18e2f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 1330,
+          "full_input_position": 3031,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "b25f1f573646cd219d13725dee5466e14a4f63653059eed3bbc3c2228735a426"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "target_tokens": 2231,
+      "mean_nll": 0.0015721152257299486,
+      "top1_correct": 2231,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 63,
+          "nll_sum": 0.012233734130859375,
+          "top1_correct": 63,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0001941862560453869,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 987,
+          "nll_sum": 0.5513172149658203,
+          "top1_correct": 987,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005585787385671938,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0010623931884765625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005311965942382812,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 2.47955322265625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.47955322265625e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 115,
+          "nll_sum": 0.09830284118652344,
+          "top1_correct": 115,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0008548073146654212,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 87,
+          "nll_sum": 0.08250617980957031,
+          "top1_correct": 87,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009483468943628771,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 17,
+          "nll_sum": 0.5828800201416016,
+          "top1_correct": 17,
+          "wrong_tokens": 0,
+          "mean_nll": 0.034287060008329505,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 26,
+          "nll_sum": 0.7012767791748047,
+          "top1_correct": 26,
+          "wrong_tokens": 0,
+          "mean_nll": 0.026972183814415567,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 16,
+          "nll_sum": 0.7013530731201172,
+          "top1_correct": 16,
+          "wrong_tokens": 0,
+          "mean_nll": 0.043834567070007324,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.0038967132568359375,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0019483566284179688,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 300,
+          "nll_sum": 0.24019622802734375,
+          "top1_correct": 300,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0008006540934244791,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 613,
+          "nll_sum": 0.5322952270507812,
+          "top1_correct": 613,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000868344579201927,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 4.38690185546875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 4.38690185546875e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "08854f1d8dd227693522887245955c36830becaa34cf6ccaa53973c237ade923",
+        "raw_tokens": 2232,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 6557,
+        "common_prefix_tokens": 2230,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 2230,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "66756\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "66756\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 2230,
+          "full_input_position": 6084,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "afdc5ed2c934a3edc2f69e4d08ab8c8aa015d754b77110f4d3e34241f814236d"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "target_tokens": 1321,
+      "mean_nll": 0.0019105453548965627,
+      "top1_correct": 1321,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 64,
+          "nll_sum": 0.03484344482421875,
+          "top1_correct": 64,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000544428825378418,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 660,
+          "nll_sum": 0.44146156311035156,
+          "top1_correct": 660,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0006688811562278054,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0035037994384765625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0017518997192382812,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 47,
+          "nll_sum": 0.48238563537597656,
+          "top1_correct": 47,
+          "wrong_tokens": 0,
+          "mean_nll": 0.010263524156935672,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 110,
+          "nll_sum": 0.06426239013671875,
+          "top1_correct": 110,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005842035466974432,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 46,
+          "nll_sum": 0.021898269653320312,
+          "top1_correct": 46,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000476049340289572,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 17,
+          "nll_sum": 0.15022659301757812,
+          "top1_correct": 17,
+          "wrong_tokens": 0,
+          "mean_nll": 0.008836858412798713,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 27,
+          "nll_sum": 0.7073917388916016,
+          "top1_correct": 27,
+          "wrong_tokens": 0,
+          "mean_nll": 0.02619969403302228,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 5.7220458984375e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 5.7220458984375e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 46,
+          "nll_sum": 0.49155235290527344,
+          "top1_correct": 46,
+          "wrong_tokens": 0,
+          "mean_nll": 0.010685920715332031,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.00043487548828125,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00043487548828125,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 298,
+          "nll_sum": 0.12577247619628906,
+          "top1_correct": 298,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00042205528924929217,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 4.00543212890625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 4.00543212890625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "827d1b3ab8f35ffcc7e0127565f0c5f39827eb5c64b5d6796b721a0682ba57a8",
+        "raw_tokens": 1322,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4136,
+        "common_prefix_tokens": 1320,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1320,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "610e5\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "610e5\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 1320,
+          "full_input_position": 3018,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "5857a77f218ad6e38760b47f237975c4a260bee6cebaad936941f1a3bc72e9ca"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "target_tokens": 2237,
+      "mean_nll": 0.0017235508229405314,
+      "top1_correct": 2237,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 63,
+          "nll_sum": 0.007846832275390625,
+          "top1_correct": 63,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00012455289326016866,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 987,
+          "nll_sum": 0.6475009918212891,
+          "top1_correct": 987,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0006560293736791176,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.000759124755859375,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0003795623779296875,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 2.09808349609375e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.09808349609375e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 115,
+          "nll_sum": 0.10753440856933594,
+          "top1_correct": 115,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009350818136463994,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 87,
+          "nll_sum": 0.1651172637939453,
+          "top1_correct": 87,
+          "wrong_tokens": 0,
+          "mean_nll": 0.001897899583838452,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 17,
+          "nll_sum": 0.6390495300292969,
+          "top1_correct": 17,
+          "wrong_tokens": 0,
+          "mean_nll": 0.03759114882525276,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 26,
+          "nll_sum": 0.8239669799804688,
+          "top1_correct": 26,
+          "wrong_tokens": 0,
+          "mean_nll": 0.03169103769155649,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 16,
+          "nll_sum": 0.7402839660644531,
+          "top1_correct": 16,
+          "wrong_tokens": 0,
+          "mean_nll": 0.04626774787902832,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.0037326812744140625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0018663406372070312,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 306,
+          "nll_sum": 0.11522293090820312,
+          "top1_correct": 306,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00037654552584380106,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 613,
+          "nll_sum": 0.604522705078125,
+          "top1_correct": 613,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009861708076315252,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 2.47955322265625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.47955322265625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "ec4663c0b114ba5b051e203cbaecc5363ec5246cfeb0a2695d21576bf68d630b",
+        "raw_tokens": 2238,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 6557,
+        "common_prefix_tokens": 2236,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 2236,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "4454d\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "4454d\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 2236,
+          "full_input_position": 6073,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "ec7be1d5de8c62adf7dbd46a31f153f49f3706bcf34307e68af53582b33447ee"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "target_tokens": 1585,
+      "mean_nll": 0.0014872361432866719,
+      "top1_correct": 1585,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 66,
+          "nll_sum": 0.0077114105224609375,
+          "top1_correct": 66,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00011683955337062027,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 796,
+          "nll_sum": 0.7419700622558594,
+          "top1_correct": 796,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009321231937887681,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0017147064208984375,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0008573532104492188,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 3.814697265625e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.814697265625e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 235,
+          "nll_sum": 0.8021125793457031,
+          "top1_correct": 235,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0034132450184923536,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 60,
+          "nll_sum": 0.027858734130859375,
+          "top1_correct": 60,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0004643122355143229,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 11,
+          "nll_sum": 0.14318466186523438,
+          "top1_correct": 11,
+          "wrong_tokens": 0,
+          "mean_nll": 0.013016787442294035,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 13,
+          "nll_sum": 0.34673309326171875,
+          "top1_correct": 13,
+          "wrong_tokens": 0,
+          "mean_nll": 0.026671776404747598,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 4.1961669921875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 4.1961669921875e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.0012378692626953125,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0006189346313476562,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.0036907196044921875,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0036907196044921875,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 395,
+          "nll_sum": 0.28098487854003906,
+          "top1_correct": 395,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0007113541228861748,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 2.47955322265625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.47955322265625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+        "raw_tokens": 1586,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4877,
+        "common_prefix_tokens": 1584,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1584,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "fcb97\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "fcb97\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 1584,
+          "full_input_position": 3317,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "1c36d813fe985250298e828ccf5a82178f4211cf1a095676b1f84ba58a0c36bb"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "target_tokens": 1559,
+      "mean_nll": 0.00148573405013167,
+      "top1_correct": 1559,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 66,
+          "nll_sum": 0.009246826171875,
+          "top1_correct": 66,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0001401034268465909,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 786,
+          "nll_sum": 0.82659912109375,
+          "top1_correct": 786,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0010516528258190203,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.00150299072265625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000751495361328125,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 3.814697265625e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.814697265625e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 235,
+          "nll_sum": 0.5070877075195312,
+          "top1_correct": 235,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0021578200319980053,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 60,
+          "nll_sum": 0.057170867919921875,
+          "top1_correct": 60,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009528477986653646,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 11,
+          "nll_sum": 0.15729713439941406,
+          "top1_correct": 11,
+          "wrong_tokens": 0,
+          "mean_nll": 0.014299739490855824,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 13,
+          "nll_sum": 0.3644695281982422,
+          "top1_correct": 13,
+          "wrong_tokens": 0,
+          "mean_nll": 0.028036117553710938,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 3.814697265625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.814697265625e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.000919342041015625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0004596710205078125,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.002254486083984375,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.002254486083984375,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 379,
+          "nll_sum": 0.3896293640136719,
+          "top1_correct": 379,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0010280458153395036,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 4.00543212890625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 4.00543212890625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+        "raw_tokens": 1560,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4877,
+        "common_prefix_tokens": 1558,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1558,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "d588e\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "d588e\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 1558,
+          "full_input_position": 3286,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "a3b01c71976916522fdaf77d40dc0c9819bffe880fcbf9d558a912d773148c91"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "target_tokens": 1598,
+      "mean_nll": 0.0014029134050925474,
+      "top1_correct": 1598,
+      "top1_accuracy": 1.0,
+      "first_wrong_target_index": null,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 66,
+          "nll_sum": 0.008838653564453125,
+          "top1_correct": 66,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00013391899340080494,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 801,
+          "nll_sum": 0.7544727325439453,
+          "top1_correct": 801,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009419135237752126,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.001499176025390625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0007495880126953125,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 3.814697265625e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.814697265625e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 235,
+          "nll_sum": 0.6210479736328125,
+          "top1_correct": 235,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0026427573346077126,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 60,
+          "nll_sum": 0.014598846435546875,
+          "top1_correct": 60,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00024331410725911458,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 11,
+          "nll_sum": 0.14466285705566406,
+          "top1_correct": 11,
+          "wrong_tokens": 0,
+          "mean_nll": 0.013151168823242188,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 13,
+          "nll_sum": 0.34529685974121094,
+          "top1_correct": 13,
+          "wrong_tokens": 0,
+          "mean_nll": 0.02656129690317007,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 4.1961669921875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 4.1961669921875e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.0008087158203125,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00040435791015625,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.0025959014892578125,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0025959014892578125,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 403,
+          "nll_sum": 0.34796714782714844,
+          "top1_correct": 403,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0008634420541616586,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 2.09808349609375e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.09808349609375e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+        "raw_tokens": 1599,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4877,
+        "common_prefix_tokens": 1597,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1597,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "b76ab\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "b76ab\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": null,
+        "first_wrong_minus_free_divergence": null,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 1597,
+          "full_input_position": 3329,
+          "gold_id": 198,
+          "char_span": null,
+          "raw_lexeme": null,
+          "field": "TEMPLATE_TAIL",
+          "touched_fields": [],
+          "nll": 0.0,
+          "predicted_id": 198,
+          "gold_rank": 1,
+          "top1_correct": true,
+          "gold_text": "\n",
+          "predicted_text": "\n"
+        }
+      },
+      "report_sha256": "b09ceb2eb010a9420139656794accabf3c6d22063edb82b52a691469bf7bde6f"
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "target_tokens": 1038,
+      "mean_nll": 0.06356858564020351,
+      "top1_correct": 1023,
+      "top1_accuracy": 0.9855491329479769,
+      "first_wrong_target_index": 577,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 64,
+          "nll_sum": 0.03412055969238281,
+          "top1_correct": 64,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005331337451934814,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 540,
+          "nll_sum": 0.7951087951660156,
+          "top1_correct": 540,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0014724236947518809,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0018939971923828125,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009469985961914062,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 33,
+          "nll_sum": 13.254396438598633,
+          "top1_correct": 31,
+          "wrong_tokens": 2,
+          "mean_nll": 0.4016483769272313,
+          "top1_accuracy": 0.9393939393939394
+        },
+        "candidate.relations": {
+          "tokens": 110,
+          "nll_sum": 0.03951263427734375,
+          "top1_correct": 110,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00035920576615767043,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 55,
+          "nll_sum": 0.2712669372558594,
+          "top1_correct": 55,
+          "wrong_tokens": 0,
+          "mean_nll": 0.004932126131924716,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 29,
+          "nll_sum": 21.9559268951416,
+          "top1_correct": 22,
+          "wrong_tokens": 7,
+          "mean_nll": 0.757100927418676,
+          "top1_accuracy": 0.7586206896551724
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 18,
+          "nll_sum": 29.430864334106445,
+          "top1_correct": 12,
+          "wrong_tokens": 6,
+          "mean_nll": 1.635048018561469,
+          "top1_accuracy": 0.6666666666666666
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 0.00011444091796875,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00011444091796875,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 39,
+          "nll_sum": 0.03508567810058594,
+          "top1_correct": 39,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0008996327718098959,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 8.58306884765625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 8.58306884765625e-05,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 144,
+          "nll_sum": 0.1657428741455078,
+          "top1_correct": 144,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0011509921815660265,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 7.2479248046875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 7.2479248046875e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [
+        577,
+        578,
+        778,
+        789,
+        791,
+        793,
+        798,
+        800,
+        801,
+        813,
+        815,
+        818,
+        819,
+        821,
+        822
+      ],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "792339cca4b381cb014042c3570628a6eb1dbbe10b37ae58e2a84e948fc4b7df",
+        "raw_tokens": 1048,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 2206,
+        "common_prefix_tokens": 577,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2206,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 577,
+        "teacher_token_at_divergence": 29617,
+        "generated_token_at_divergence": 155788,
+        "teacher_field_at_divergence": "candidate.question_proposal",
+        "teacher_excerpt": "n\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"missing_explanation\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\"",
+        "raw_excerpt": "n\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"気がかりの対象は未記載\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": 577,
+        "first_wrong_minus_free_divergence": 0,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 577,
+          "full_input_position": 2736,
+          "gold_id": 29617,
+          "char_span": [
+            2206,
+            2213
+          ],
+          "raw_lexeme": "missing",
+          "field": "candidate.question_proposal",
+          "touched_fields": [
+            "candidate.question_proposal"
+          ],
+          "nll": 3.6337528228759766,
+          "predicted_id": 42000,
+          "gold_rank": 4,
+          "top1_correct": false,
+          "gold_text": "missing",
+          "predicted_text": "remaining",
+          "top5": [
+            {
+              "id": 42000,
+              "text": "remaining",
+              "logit": 15.6875
+            },
+            {
+              "id": 155788,
+              "text": "気が",
+              "logit": 15.625
+            },
+            {
+              "id": 15615,
+              "text": "unknown",
+              "logit": 14.375
+            },
+            {
+              "id": 29617,
+              "text": "missing",
+              "logit": 13.3125
+            },
+            {
+              "id": 161661,
+              "text": "気に",
+              "logit": 13.0625
+            }
+          ]
+        }
+      },
+      "report_sha256": "bfd889ba983c52dc1e1dc56c8e6ab9641978eeb4dce209f1e2612716abf00486"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "target_tokens": 3178,
+      "mean_nll": 0.07636107732245875,
+      "top1_correct": 3116,
+      "top1_accuracy": 0.9804908747640025,
+      "first_wrong_target_index": 656,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 63,
+          "nll_sum": 0.06094932556152344,
+          "top1_correct": 63,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0009674496120876736,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 1373,
+          "nll_sum": 27.248632431030273,
+          "top1_correct": 1367,
+          "wrong_tokens": 6,
+          "mean_nll": 0.01984605421051003,
+          "top1_accuracy": 0.9956300072833212
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0008411407470703125,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00042057037353515625,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 7.62939453125e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 7.62939453125e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 403,
+          "nll_sum": 7.98716926574707,
+          "top1_correct": 402,
+          "wrong_tokens": 1,
+          "mean_nll": 0.019819278575054763,
+          "top1_accuracy": 0.9975186104218362
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 122,
+          "nll_sum": 42.0578727722168,
+          "top1_correct": 107,
+          "wrong_tokens": 15,
+          "mean_nll": 0.3447366620673508,
+          "top1_accuracy": 0.8770491803278688
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 20,
+          "nll_sum": 17.079973220825195,
+          "top1_correct": 16,
+          "wrong_tokens": 4,
+          "mean_nll": 0.8539986610412598,
+          "top1_accuracy": 0.8
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 34,
+          "nll_sum": 67.7244930267334,
+          "top1_correct": 19,
+          "wrong_tokens": 15,
+          "mean_nll": 1.9918968537274528,
+          "top1_accuracy": 0.5588235294117647
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 21,
+          "nll_sum": 31.906010627746582,
+          "top1_correct": 14,
+          "wrong_tokens": 7,
+          "mean_nll": 1.519333839416504,
+          "top1_accuracy": 0.6666666666666666
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.08430862426757812,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.04215431213378906,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 681,
+          "nll_sum": 35.84584617614746,
+          "top1_correct": 671,
+          "wrong_tokens": 10,
+          "mean_nll": 0.05263707221167028,
+          "top1_accuracy": 0.9853157121879589
+        },
+        "evidence_quotes": {
+          "tokens": 454,
+          "nll_sum": 12.678958892822266,
+          "top1_correct": 450,
+          "wrong_tokens": 4,
+          "mean_nll": 0.027927222230886048,
+          "top1_accuracy": 0.9911894273127754
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 0.0004405975341796875,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0004405975341796875,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [
+        656,
+        801,
+        848,
+        851,
+        884,
+        1127,
+        1740,
+        1821,
+        1822,
+        1829,
+        1840,
+        1848,
+        1858,
+        1859,
+        1862,
+        1863,
+        1891,
+        1902,
+        1911,
+        1912,
+        1929,
+        1931,
+        1946,
+        1950,
+        1952,
+        1955,
+        1964,
+        1966,
+        1968,
+        1969,
+        1970,
+        1971,
+        1974,
+        1975,
+        1977,
+        1979,
+        1983,
+        1988,
+        1989,
+        1992,
+        1993,
+        2002,
+        2003,
+        2005,
+        2006,
+        2015,
+        2016,
+        2018,
+        2029,
+        2214,
+        2217,
+        2293,
+        2294,
+        2301,
+        2510,
+        2617,
+        2618,
+        2621,
+        3029,
+        3070,
+        3137,
+        3161
+      ],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "ac0e360b703b0375ed5ed7af98b2f39806fa15802cec31ce3bcc9e657b413ba3",
+        "raw_tokens": 3712,
+        "raw_eos_reached": false,
+        "common_prefix_chars": 2491,
+        "common_prefix_tokens": 656,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2491,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 656,
+        "teacher_token_at_divergence": 56658,
+        "generated_token_at_divergence": 159432,
+        "teacher_field_at_divergence": "candidate.claims",
+        "teacher_excerpt": "\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていた\"},{\"about_time\":{\"anchor_source_id\":\"si",
+        "raw_excerpt": "\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていたのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていたのに\"},{\"about_time\":{\"anchor_source_id\"",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": 656,
+        "first_wrong_minus_free_divergence": 0,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 656,
+          "full_input_position": 4868,
+          "gold_id": 56658,
+          "char_span": [
+            2491,
+            2495
+          ],
+          "raw_lexeme": "\"},\"",
+          "field": "candidate.claims",
+          "touched_fields": [
+            "candidate.claims"
+          ],
+          "nll": 4.391838073730469,
+          "predicted_id": 159432,
+          "gold_rank": 2,
+          "top1_correct": false,
+          "gold_text": "\"},\"",
+          "predicted_text": "のに",
+          "top5": [
+            {
+              "id": 159432,
+              "text": "のに",
+              "logit": 22.0
+            },
+            {
+              "id": 56658,
+              "text": "\"},\"",
+              "logit": 17.625
+            },
+            {
+              "id": 184493,
+              "text": "なのに",
+              "logit": 14.625
+            },
+            {
+              "id": 15303,
+              "text": "の",
+              "logit": 14.0
+            },
+            {
+              "id": 19054,
+              "text": "に",
+              "logit": 12.75
+            }
+          ]
+        }
+      },
+      "report_sha256": "f745aeb5bb87f0c56ff6ee4a2e3782375a3f9d32448489692aea5eb058daa84f"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "target_tokens": 1082,
+      "mean_nll": 0.06850379848656504,
+      "top1_correct": 1067,
+      "top1_accuracy": 0.9861367837338263,
+      "first_wrong_target_index": 596,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 64,
+          "nll_sum": 0.021825790405273438,
+          "top1_correct": 64,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00034102797508239746,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 557,
+          "nll_sum": 0.5746269226074219,
+          "top1_correct": 557,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0010316461806237378,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0022125244140625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00110626220703125,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 41,
+          "nll_sum": 12.163896560668945,
+          "top1_correct": 39,
+          "wrong_tokens": 2,
+          "mean_nll": 0.2966804039187548,
+          "top1_accuracy": 0.9512195121951219
+        },
+        "candidate.relations": {
+          "tokens": 110,
+          "nll_sum": 0.11629486083984375,
+          "top1_correct": 110,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0010572260076349431,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 54,
+          "nll_sum": 0.06651496887207031,
+          "top1_correct": 54,
+          "wrong_tokens": 0,
+          "mean_nll": 0.001231758682816117,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 27,
+          "nll_sum": 25.667153358459473,
+          "top1_correct": 21,
+          "wrong_tokens": 6,
+          "mean_nll": 0.950635309572573,
+          "top1_accuracy": 0.7777777777777778
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 23,
+          "nll_sum": 35.20119667053223,
+          "top1_correct": 16,
+          "wrong_tokens": 7,
+          "mean_nll": 1.5304868117622707,
+          "top1_accuracy": 0.6956521739130435
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 2.288818359375e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 2.288818359375e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 42,
+          "nll_sum": 0.08424186706542969,
+          "top1_correct": 42,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0020057587396530878,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 4.57763671875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 4.57763671875e-05,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 158,
+          "nll_sum": 0.22304153442382812,
+          "top1_correct": 158,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0014116552811634692,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 3.62396240234375e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.62396240234375e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [
+        596,
+        598,
+        803,
+        806,
+        814,
+        815,
+        822,
+        823,
+        831,
+        833,
+        834,
+        847,
+        848,
+        849,
+        850
+      ],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "8c084b2922738eb8fdf77f1efdfdcd3b5ad3d6da7d62f209b0bc861870ba879a",
+        "raw_tokens": 1088,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 2224,
+        "common_prefix_tokens": 596,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2224,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 596,
+        "teacher_token_at_divergence": 2615,
+        "generated_token_at_divergence": 36962,
+        "teacher_field_at_divergence": "candidate.question_proposal",
+        "teacher_excerpt": "us\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"missing_explanation\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relat",
+        "raw_excerpt": "us\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"missing_reason\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_i",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": 596,
+        "first_wrong_minus_free_divergence": 0,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 596,
+          "full_input_position": 2790,
+          "gold_id": 2615,
+          "char_span": [
+            2223,
+            2226
+          ],
+          "raw_lexeme": "_ex",
+          "field": "candidate.question_proposal",
+          "touched_fields": [
+            "candidate.question_proposal"
+          ],
+          "nll": 9.438753128051758,
+          "predicted_id": 36962,
+          "gold_rank": 68,
+          "top1_correct": false,
+          "gold_text": "_ex",
+          "predicted_text": "_reason",
+          "top5": [
+            {
+              "id": 36962,
+              "text": "_reason",
+              "logit": 19.875
+            },
+            {
+              "id": 7399,
+              "text": "_fe",
+              "logit": 17.375
+            },
+            {
+              "id": 1243,
+              "text": "_re",
+              "logit": 16.75
+            },
+            {
+              "id": 736,
+              "text": "_f",
+              "logit": 15.875
+            },
+            {
+              "id": 14065,
+              "text": "_detail",
+              "logit": 15.8125
+            }
+          ]
+        }
+      },
+      "report_sha256": "f8f26180d72b95abee16ac259d6bf49e499177a6f8e7edde4830fc527eba33a9"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "target_tokens": 3561,
+      "mean_nll": 0.10786904461160868,
+      "top1_correct": 3474,
+      "top1_accuracy": 0.9755686604886268,
+      "first_wrong_target_index": 744,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 63,
+          "nll_sum": 0.0367279052734375,
+          "top1_correct": 63,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005829826233878969,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 1599,
+          "nll_sum": 56.68496131896973,
+          "top1_correct": 1588,
+          "wrong_tokens": 11,
+          "mean_nll": 0.035450257235128034,
+          "top1_accuracy": 0.9931207004377736
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0032405853271484375,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0016202926635742188,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 9.5367431640625e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 9.5367431640625e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 340,
+          "nll_sum": 11.004816055297852,
+          "top1_correct": 339,
+          "wrong_tokens": 1,
+          "mean_nll": 0.03236710604499368,
+          "top1_accuracy": 0.9970588235294118
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 148,
+          "nll_sum": 47.679542541503906,
+          "top1_correct": 132,
+          "wrong_tokens": 16,
+          "mean_nll": 0.32215907122637777,
+          "top1_accuracy": 0.8918918918918919
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 42,
+          "nll_sum": 23.95659065246582,
+          "top1_correct": 37,
+          "wrong_tokens": 5,
+          "mean_nll": 0.5703950155349005,
+          "top1_accuracy": 0.8809523809523809
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 39,
+          "nll_sum": 86.20065689086914,
+          "top1_correct": 20,
+          "wrong_tokens": 19,
+          "mean_nll": 2.210273253612029,
+          "top1_accuracy": 0.5128205128205128
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 35,
+          "nll_sum": 92.48666763305664,
+          "top1_correct": 16,
+          "wrong_tokens": 19,
+          "mean_nll": 2.6424762180873325,
+          "top1_accuracy": 0.45714285714285713
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.0068149566650390625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0034074783325195312,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 801,
+          "nll_sum": 27.424589157104492,
+          "top1_correct": 790,
+          "wrong_tokens": 11,
+          "mean_nll": 0.03423793902260236,
+          "top1_accuracy": 0.9862671660424469
+        },
+        "evidence_quotes": {
+          "tokens": 487,
+          "nll_sum": 38.636474609375,
+          "top1_correct": 482,
+          "wrong_tokens": 5,
+          "mean_nll": 0.0793356768159651,
+          "top1_accuracy": 0.9897330595482546
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 0.000576019287109375,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000576019287109375,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [
+        744,
+        808,
+        884,
+        1021,
+        1060,
+        1074,
+        1090,
+        1192,
+        1208,
+        1226,
+        1282,
+        1902,
+        1984,
+        1988,
+        1993,
+        1997,
+        2007,
+        2017,
+        2026,
+        2030,
+        2034,
+        2045,
+        2049,
+        2070,
+        2081,
+        2097,
+        2102,
+        2124,
+        2130,
+        2147,
+        2151,
+        2152,
+        2166,
+        2176,
+        2177,
+        2179,
+        2181,
+        2182,
+        2184,
+        2187,
+        2188,
+        2189,
+        2193,
+        2194,
+        2195,
+        2196,
+        2199,
+        2200,
+        2201,
+        2202,
+        2207,
+        2208,
+        2215,
+        2216,
+        2217,
+        2219,
+        2222,
+        2224,
+        2226,
+        2227,
+        2230,
+        2231,
+        2232,
+        2234,
+        2235,
+        2239,
+        2240,
+        2243,
+        2244,
+        2245,
+        2246,
+        2259,
+        2550,
+        2632,
+        2654,
+        2828,
+        2853,
+        2855,
+        2856,
+        2939,
+        2963,
+        2964,
+        3286,
+        3471,
+        3489,
+        3523,
+        3544
+      ],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "4cd466a4be244b9310125aaf6b822a392bf5717e8d1973cad4ee6c04acc4dde5",
+        "raw_tokens": 3712,
+        "raw_eos_reached": false,
+        "common_prefix_chars": 2730,
+        "common_prefix_tokens": 744,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2730,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 744,
+        "teacher_token_at_divergence": 22,
+        "generated_token_at_divergence": 19,
+        "teacher_field_at_divergence": "candidate.claims",
+        "teacher_excerpt": "\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_in",
+        "raw_excerpt": "\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[4],\"kind\":\"EVENT\",\"modality\":{\"evidence_in",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": 744,
+        "first_wrong_minus_free_divergence": 0,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 744,
+          "full_input_position": 5118,
+          "gold_id": 22,
+          "char_span": [
+            2730,
+            2731
+          ],
+          "raw_lexeme": "7",
+          "field": "candidate.claims",
+          "touched_fields": [
+            "candidate.claims"
+          ],
+          "nll": 0.8058547973632812,
+          "predicted_id": 19,
+          "gold_rank": 2,
+          "top1_correct": false,
+          "gold_text": "7",
+          "predicted_text": "4",
+          "top5": [
+            {
+              "id": 19,
+              "text": "4",
+              "logit": 27.25
+            },
+            {
+              "id": 22,
+              "text": "7",
+              "logit": 27.125
+            },
+            {
+              "id": 20,
+              "text": "5",
+              "logit": 24.75
+            },
+            {
+              "id": 23,
+              "text": "8",
+              "logit": 22.375
+            },
+            {
+              "id": 16,
+              "text": "1",
+              "logit": 20.5
+            }
+          ]
+        }
+      },
+      "report_sha256": "89c4277f38d7d299270df1adc89d233cc4d44add788fa587b52f9ca59ea44767"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "target_tokens": 961,
+      "mean_nll": 0.011324667161510836,
+      "top1_correct": 959,
+      "top1_accuracy": 0.9979188345473465,
+      "first_wrong_target_index": 761,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 66,
+          "nll_sum": 0.017316818237304688,
+          "top1_correct": 66,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0002623760338985559,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 552,
+          "nll_sum": 0.7059783935546875,
+          "top1_correct": 552,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0012789463651353035,
+          "top1_accuracy": 1.0
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0009765625,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00048828125,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 3.814697265625e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.814697265625e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 112,
+          "nll_sum": 0.05533027648925781,
+          "top1_correct": 112,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0004940203257969447,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 45,
+          "nll_sum": 0.019018173217773438,
+          "top1_correct": 45,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0004226260715060764,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 19,
+          "nll_sum": 3.7904014587402344,
+          "top1_correct": 18,
+          "wrong_tokens": 1,
+          "mean_nll": 0.19949481361790708,
+          "top1_accuracy": 0.9473684210526315
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 12,
+          "nll_sum": 5.951482772827148,
+          "top1_correct": 11,
+          "wrong_tokens": 1,
+          "mean_nll": 0.4959568977355957,
+          "top1_accuracy": 0.9166666666666666
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 3.0517578125e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.0517578125e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 2,
+          "nll_sum": 0.00090789794921875,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000453948974609375,
+          "top1_accuracy": 1.0
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.0003643035888671875,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0003643035888671875,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 146,
+          "nll_sum": 0.34117889404296875,
+          "top1_correct": 146,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0023368417400203337,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 1.52587890625e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 1.52587890625e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [
+        761,
+        779
+      ],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+        "raw_tokens": 967,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 2915,
+        "common_prefix_tokens": 761,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2915,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 761,
+        "teacher_token_at_divergence": 176927,
+        "generated_token_at_divergence": 14259,
+        "teacher_field_at_divergence": "candidate.surface_proposal.observation",
+        "teacher_excerpt": "link\"],\"section\":\"reception\"}],\"observation\":\"叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。\",\"reception\":\"やり方が分かって、安心できてよかったです。\",\"update_note\":null},\"unknowns\":[],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"植",
+        "raw_excerpt": "link\"],\"section\":\"reception\"}],\"observation\":\"叔父に植え替えの手順を説明し、最後まで聞かせたのですね。\",\"reception\":\"やり方が分かって、安心したと聞けて、よかったです。\",\"update_note\":null},\"unknowns\":[],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": 761,
+        "first_wrong_minus_free_divergence": 0,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 761,
+          "full_input_position": 2806,
+          "gold_id": 176927,
+          "char_span": [
+            2914,
+            2918
+          ],
+          "raw_lexeme": "してもら",
+          "field": "candidate.surface_proposal.observation",
+          "touched_fields": [
+            "candidate.surface_proposal.observation"
+          ],
+          "nll": 2.6825180053710938,
+          "predicted_id": 14259,
+          "gold_rank": 3,
+          "top1_correct": false,
+          "gold_text": "してもら",
+          "predicted_text": "し",
+          "top5": [
+            {
+              "id": 14259,
+              "text": "し",
+              "logit": 19.0
+            },
+            {
+              "id": 148353,
+              "text": "して",
+              "logit": 17.0
+            },
+            {
+              "id": 176927,
+              "text": "してもら",
+              "logit": 16.625
+            },
+            {
+              "id": 80416,
+              "text": "され",
+              "logit": 16.5
+            },
+            {
+              "id": 160198,
+              "text": "させ",
+              "logit": 14.375
+            }
+          ]
+        }
+      },
+      "report_sha256": "863ad2be6ef1acc0c4b2613b58eca7c5a2b5acbaf50e58dd2319a727ef3d4b7b"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "target_tokens": 896,
+      "mean_nll": 0.12408492607729775,
+      "top1_correct": 874,
+      "top1_accuracy": 0.9754464285714286,
+      "first_wrong_target_index": 118,
+      "field_metrics": {
+        "JSON_STRUCTURE": {
+          "tokens": 66,
+          "nll_sum": 0.04945945739746094,
+          "top1_correct": 66,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0007493857181433475,
+          "top1_accuracy": 1.0
+        },
+        "candidate.claims": {
+          "tokens": 568,
+          "nll_sum": 4.836383819580078,
+          "top1_correct": 567,
+          "wrong_tokens": 1,
+          "mean_nll": 0.008514760245739574,
+          "top1_accuracy": 0.9982394366197183
+        },
+        "candidate.conflicts": {
+          "tokens": 2,
+          "nll_sum": 0.0008602142333984375,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.00043010711669921875,
+          "top1_accuracy": 1.0
+        },
+        "candidate.question_proposal": {
+          "tokens": 1,
+          "nll_sum": 3.814697265625e-06,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.814697265625e-06,
+          "top1_accuracy": 1.0
+        },
+        "candidate.relations": {
+          "tokens": 2,
+          "nll_sum": 0.12800025939941406,
+          "top1_correct": 2,
+          "wrong_tokens": 0,
+          "mean_nll": 0.06400012969970703,
+          "top1_accuracy": 1.0
+        },
+        "candidate.surface_proposal.bindings": {
+          "tokens": 46,
+          "nll_sum": 13.016843795776367,
+          "top1_correct": 44,
+          "wrong_tokens": 2,
+          "mean_nll": 0.2829748651255732,
+          "top1_accuracy": 0.9565217391304348
+        },
+        "candidate.surface_proposal.observation": {
+          "tokens": 29,
+          "nll_sum": 36.300697326660156,
+          "top1_correct": 21,
+          "wrong_tokens": 8,
+          "mean_nll": 1.2517481836779365,
+          "top1_accuracy": 0.7241379310344828
+        },
+        "candidate.surface_proposal.reception": {
+          "tokens": 28,
+          "nll_sum": 52.63850212097168,
+          "top1_correct": 18,
+          "wrong_tokens": 10,
+          "mean_nll": 1.879946504320417,
+          "top1_accuracy": 0.6428571428571429
+        },
+        "candidate.surface_proposal.update_note": {
+          "tokens": 1,
+          "nll_sum": 3.24249267578125e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 3.24249267578125e-05,
+          "top1_accuracy": 1.0
+        },
+        "candidate.unknowns": {
+          "tokens": 48,
+          "nll_sum": 4.148929595947266,
+          "top1_correct": 47,
+          "wrong_tokens": 1,
+          "mean_nll": 0.08643603324890137,
+          "top1_accuracy": 0.9791666666666666
+        },
+        "candidate.updates": {
+          "tokens": 1,
+          "nll_sum": 0.000102996826171875,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.000102996826171875,
+          "top1_accuracy": 1.0
+        },
+        "evidence_quotes": {
+          "tokens": 102,
+          "nll_sum": 0.06022453308105469,
+          "top1_correct": 102,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0005904365988338695,
+          "top1_accuracy": 1.0
+        },
+        "EOS": {
+          "tokens": 1,
+          "nll_sum": 5.340576171875e-05,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 5.340576171875e-05,
+          "top1_accuracy": 1.0
+        },
+        "TEMPLATE_TAIL": {
+          "tokens": 1,
+          "nll_sum": 0.0,
+          "top1_correct": 1,
+          "wrong_tokens": 0,
+          "mean_nll": 0.0,
+          "top1_accuracy": 1.0
+        }
+      },
+      "wrong_target_indices": [
+        118,
+        625,
+        640,
+        670,
+        672,
+        673,
+        675,
+        676,
+        679,
+        681,
+        682,
+        696,
+        697,
+        704,
+        705,
+        706,
+        710,
+        711,
+        712,
+        713,
+        714,
+        769
+      ],
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "43ff4fcd95868255fb9680cdffd46e051b781d154e766e9d51bf027f7045d0dd",
+        "raw_tokens": 3712,
+        "raw_eos_reached": false,
+        "common_prefix_chars": 419,
+        "common_prefix_tokens": 118,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 419,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 118,
+        "teacher_token_at_divergence": 56658,
+        "generated_token_at_divergence": 1710,
+        "teacher_field_at_divergence": "candidate.claims",
+        "teacher_excerpt": "MED\"},\"predicate\":{\"arguments\":[],\"surface\":\"今日は編みかけの見本をほどいた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日は編みかけの見本をほどいた\"},{\"about_time\":{\"anchor_source_id\":\"FT-KN",
+        "raw_excerpt": "MED\"},\"predicate\":{\"arguments\":[],\"surface\":\"今日は編みかけの見本をほどいた。\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日は編みかけの見本をほどいた。\"},{\"about_time\":{\"anchor_source_id\":\"FT-",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it.",
+        "teacher_forced_first_wrong_target_index": 118,
+        "first_wrong_minus_free_divergence": 0,
+        "teacher_forced_at_free_divergence": {
+          "target_index": 118,
+          "full_input_position": 2205,
+          "gold_id": 56658,
+          "char_span": [
+            419,
+            423
+          ],
+          "raw_lexeme": "\"},\"",
+          "field": "candidate.claims",
+          "touched_fields": [
+            "candidate.claims"
+          ],
+          "nll": 3.774412155151367,
+          "predicted_id": 1710,
+          "gold_rank": 2,
+          "top1_correct": false,
+          "gold_text": "\"},\"",
+          "predicted_text": "。",
+          "top5": [
+            {
+              "id": 1710,
+              "text": "。",
+              "logit": 23.25
+            },
+            {
+              "id": 56658,
+              "text": "\"},\"",
+              "logit": 19.5
+            },
+            {
+              "id": 13933,
+              "text": "\"},",
+              "logit": 15.4375
+            },
+            {
+              "id": 31853,
+              "text": "。”",
+              "logit": 14.5625
+            },
+            {
+              "id": 152084,
+              "text": "۔",
+              "logit": 14.375
+            }
+          ]
+        }
+      },
+      "report_sha256": "77ee43b19bfef7b74c20d3c50a1c462774fdd6a631477305e2605cf71cfc60e6"
+    }
+  ],
+  "selected_token_examples": [
+    {
+      "target_index": 577,
+      "full_input_position": 2736,
+      "gold_id": 29617,
+      "char_span": [
+        2206,
+        2213
+      ],
+      "raw_lexeme": "missing",
+      "field": "candidate.question_proposal",
+      "touched_fields": [
+        "candidate.question_proposal"
+      ],
+      "nll": 3.6337528228759766,
+      "predicted_id": 42000,
+      "gold_rank": 4,
+      "top1_correct": false,
+      "gold_text": "missing",
+      "predicted_text": "remaining",
+      "top5": [
+        {
+          "id": 42000,
+          "text": "remaining",
+          "logit": 15.6875
+        },
+        {
+          "id": 155788,
+          "text": "気が",
+          "logit": 15.625
+        },
+        {
+          "id": 15615,
+          "text": "unknown",
+          "logit": 14.375
+        },
+        {
+          "id": 29617,
+          "text": "missing",
+          "logit": 13.3125
+        },
+        {
+          "id": 161661,
+          "text": "気に",
+          "logit": 13.0625
+        }
+      ],
+      "case_id": "FT-BOOK-INITIAL",
+      "gold_probability": 0.026416860354822647
+    },
+    {
+      "target_index": 656,
+      "full_input_position": 4868,
+      "gold_id": 56658,
+      "char_span": [
+        2491,
+        2495
+      ],
+      "raw_lexeme": "\"},\"",
+      "field": "candidate.claims",
+      "touched_fields": [
+        "candidate.claims"
+      ],
+      "nll": 4.391838073730469,
+      "predicted_id": 159432,
+      "gold_rank": 2,
+      "top1_correct": false,
+      "gold_text": "\"},\"",
+      "predicted_text": "のに",
+      "top5": [
+        {
+          "id": 159432,
+          "text": "のに",
+          "logit": 22.0
+        },
+        {
+          "id": 56658,
+          "text": "\"},\"",
+          "logit": 17.625
+        },
+        {
+          "id": 184493,
+          "text": "なのに",
+          "logit": 14.625
+        },
+        {
+          "id": 15303,
+          "text": "の",
+          "logit": 14.0
+        },
+        {
+          "id": 19054,
+          "text": "に",
+          "logit": 12.75
+        }
+      ],
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "gold_probability": 0.012377956701020954
+    },
+    {
+      "target_index": 2029,
+      "full_input_position": 6241,
+      "gold_id": 21,
+      "char_span": [
+        7716,
+        7717
+      ],
+      "raw_lexeme": "6",
+      "field": "candidate.updates",
+      "touched_fields": [
+        "candidate.updates"
+      ],
+      "nll": 4.53746223449707,
+      "predicted_id": 16,
+      "gold_rank": 2,
+      "top1_correct": false,
+      "gold_text": "6",
+      "predicted_text": "1",
+      "top5": [
+        {
+          "id": 16,
+          "text": "1",
+          "logit": 28.125
+        },
+        {
+          "id": 22,
+          "text": "7",
+          "logit": 23.625
+        },
+        {
+          "id": 21,
+          "text": "6",
+          "logit": 23.625
+        },
+        {
+          "id": 18,
+          "text": "3",
+          "logit": 23.25
+        },
+        {
+          "id": 20,
+          "text": "5",
+          "logit": 22.25
+        }
+      ],
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "gold_probability": 0.010700527555289033
+    },
+    {
+      "target_index": 2618,
+      "full_input_position": 6830,
+      "gold_id": 27573,
+      "char_span": [
+        9254,
+        9257
+      ],
+      "raw_lexeme": "],\"",
+      "field": "candidate.updates",
+      "touched_fields": [
+        "candidate.updates"
+      ],
+      "nll": 0.6950225830078125,
+      "predicted_id": 11,
+      "gold_rank": 1,
+      "top1_correct": false,
+      "gold_text": "],\"",
+      "predicted_text": ",",
+      "top5": [
+        {
+          "id": 11,
+          "text": ",",
+          "logit": 22.5
+        },
+        {
+          "id": 27573,
+          "text": "],\"",
+          "logit": 22.5
+        },
+        {
+          "id": 1288,
+          "text": ",\"",
+          "logit": 16.125
+        },
+        {
+          "id": 52888,
+          "text": ",{\"",
+          "logit": 15.75
+        },
+        {
+          "id": 35607,
+          "text": "},{\"",
+          "logit": 12.6875
+        }
+      ],
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "gold_probability": 0.4990631775102392
+    },
+    {
+      "target_index": 2621,
+      "full_input_position": 6833,
+      "gold_id": 45294,
+      "char_span": [
+        9269,
+        9276
+      ],
+      "raw_lexeme": "INVALID",
+      "field": "candidate.updates",
+      "touched_fields": [
+        "candidate.updates"
+      ],
+      "nll": 0.6981525421142578,
+      "predicted_id": 15206,
+      "gold_rank": 1,
+      "top1_correct": false,
+      "gold_text": "INVALID",
+      "predicted_text": "ADD",
+      "top5": [
+        {
+          "id": 15206,
+          "text": "ADD",
+          "logit": 25.375
+        },
+        {
+          "id": 45294,
+          "text": "INVALID",
+          "logit": 25.375
+        },
+        {
+          "id": 9747,
+          "text": "VALID",
+          "logit": 19.375
+        },
+        {
+          "id": 669,
+          "text": "IN",
+          "logit": 18.875
+        },
+        {
+          "id": 1745,
+          "text": "AD",
+          "logit": 18.75
+        }
+      ],
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "gold_probability": 0.49750357219676744
+    },
+    {
+      "target_index": 596,
+      "full_input_position": 2790,
+      "gold_id": 2615,
+      "char_span": [
+        2223,
+        2226
+      ],
+      "raw_lexeme": "_ex",
+      "field": "candidate.question_proposal",
+      "touched_fields": [
+        "candidate.question_proposal"
+      ],
+      "nll": 9.438753128051758,
+      "predicted_id": 36962,
+      "gold_rank": 68,
+      "top1_correct": false,
+      "gold_text": "_ex",
+      "predicted_text": "_reason",
+      "top5": [
+        {
+          "id": 36962,
+          "text": "_reason",
+          "logit": 19.875
+        },
+        {
+          "id": 7399,
+          "text": "_fe",
+          "logit": 17.375
+        },
+        {
+          "id": 1243,
+          "text": "_re",
+          "logit": 16.75
+        },
+        {
+          "id": 736,
+          "text": "_f",
+          "logit": 15.875
+        },
+        {
+          "id": 14065,
+          "text": "_detail",
+          "logit": 15.8125
+        }
+      ],
+      "case_id": "FT-SHOP-INITIAL",
+      "gold_probability": 7.957957225178452e-05
+    },
+    {
+      "target_index": 815,
+      "full_input_position": 3009,
+      "gold_id": 186870,
+      "char_span": [
+        3085,
+        3087
+      ],
+      "raw_lexeme": "さと",
+      "field": "candidate.surface_proposal.observation",
+      "touched_fields": [
+        "candidate.surface_proposal.observation"
+      ],
+      "nll": 1.6995115280151367,
+      "predicted_id": 177283,
+      "gold_rank": 1,
+      "top1_correct": false,
+      "gold_text": "さと",
+      "predicted_text": "さを",
+      "top5": [
+        {
+          "id": 177283,
+          "text": "さを",
+          "logit": 13.375
+        },
+        {
+          "id": 186870,
+          "text": "さと",
+          "logit": 13.375
+        },
+        {
+          "id": 149299,
+          "text": "かった",
+          "logit": 12.375
+        },
+        {
+          "id": 180139,
+          "text": "さが",
+          "logit": 11.9375
+        },
+        {
+          "id": 48061,
+          "text": "き",
+          "logit": 11.75
+        }
+      ],
+      "case_id": "FT-SHOP-INITIAL",
+      "gold_probability": 0.18277278163446978
+    },
+    {
+      "target_index": 744,
+      "full_input_position": 5118,
+      "gold_id": 22,
+      "char_span": [
+        2730,
+        2731
+      ],
+      "raw_lexeme": "7",
+      "field": "candidate.claims",
+      "touched_fields": [
+        "candidate.claims"
+      ],
+      "nll": 0.8058547973632812,
+      "predicted_id": 19,
+      "gold_rank": 2,
+      "top1_correct": false,
+      "gold_text": "7",
+      "predicted_text": "4",
+      "top5": [
+        {
+          "id": 19,
+          "text": "4",
+          "logit": 27.25
+        },
+        {
+          "id": 22,
+          "text": "7",
+          "logit": 27.125
+        },
+        {
+          "id": 20,
+          "text": "5",
+          "logit": 24.75
+        },
+        {
+          "id": 23,
+          "text": "8",
+          "logit": 22.375
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "logit": 20.5
+        }
+      ],
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "gold_probability": 0.44670592027082306
+    },
+    {
+      "target_index": 808,
+      "full_input_position": 5182,
+      "gold_id": 23,
+      "char_span": [
+        2964,
+        2965
+      ],
+      "raw_lexeme": "8",
+      "field": "candidate.claims",
+      "touched_fields": [
+        "candidate.claims"
+      ],
+      "nll": 13.875003814697266,
+      "predicted_id": 22,
+      "gold_rank": 2,
+      "top1_correct": false,
+      "gold_text": "8",
+      "predicted_text": "7",
+      "top5": [
+        {
+          "id": 22,
+          "text": "7",
+          "logit": 32.0
+        },
+        {
+          "id": 23,
+          "text": "8",
+          "logit": 18.125
+        },
+        {
+          "id": 20,
+          "text": "5",
+          "logit": 17.75
+        },
+        {
+          "id": 15,
+          "text": "0",
+          "logit": 17.125
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "logit": 17.0
+        }
+      ],
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "gold_probability": 9.422418873584405e-07
+    },
+    {
+      "target_index": 3286,
+      "full_input_position": 7660,
+      "gold_id": 241256,
+      "char_span": [
+        11083,
+        11087
+      ],
+      "raw_lexeme": "具体的に",
+      "field": "evidence_quotes",
+      "touched_fields": [
+        "evidence_quotes"
+      ],
+      "nll": 15.50063705444336,
+      "predicted_id": 247711,
+      "gold_rank": 317,
+      "top1_correct": false,
+      "gold_text": "具体的に",
+      "predicted_text": "約束",
+      "top5": [
+        {
+          "id": 247711,
+          "text": "約束",
+          "logit": 23.625
+        },
+        {
+          "id": 109625,
+          "text": "约束",
+          "logit": 13.9375
+        },
+        {
+          "id": 98222,
+          "text": "約",
+          "logit": 13.375
+        },
+        {
+          "id": 31171,
+          "text": "お",
+          "logit": 13.25
+        },
+        {
+          "id": 20908,
+          "text": " constraint",
+          "logit": 12.5625
+        }
+      ],
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "gold_probability": 1.8542097537188142e-07
+    },
+    {
+      "target_index": 761,
+      "full_input_position": 2806,
+      "gold_id": 176927,
+      "char_span": [
+        2914,
+        2918
+      ],
+      "raw_lexeme": "してもら",
+      "field": "candidate.surface_proposal.observation",
+      "touched_fields": [
+        "candidate.surface_proposal.observation"
+      ],
+      "nll": 2.6825180053710938,
+      "predicted_id": 14259,
+      "gold_rank": 3,
+      "top1_correct": false,
+      "gold_text": "してもら",
+      "predicted_text": "し",
+      "top5": [
+        {
+          "id": 14259,
+          "text": "し",
+          "logit": 19.0
+        },
+        {
+          "id": 148353,
+          "text": "して",
+          "logit": 17.0
+        },
+        {
+          "id": 176927,
+          "text": "してもら",
+          "logit": 16.625
+        },
+        {
+          "id": 80416,
+          "text": "され",
+          "logit": 16.5
+        },
+        {
+          "id": 160198,
+          "text": "させ",
+          "logit": 14.375
+        }
+      ],
+      "case_id": "FT-REPOT-INITIAL",
+      "gold_probability": 0.06839072893877073
+    },
+    {
+      "target_index": 779,
+      "full_input_position": 2824,
+      "gold_id": 179733,
+      "char_span": [
+        2958,
+        2961
+      ],
+      "raw_lexeme": "できて",
+      "field": "candidate.surface_proposal.reception",
+      "touched_fields": [
+        "candidate.surface_proposal.reception"
+      ],
+      "nll": 5.093719482421875,
+      "predicted_id": 148344,
+      "gold_rank": 5,
+      "top1_correct": false,
+      "gold_text": "できて",
+      "predicted_text": "した",
+      "top5": [
+        {
+          "id": 148344,
+          "text": "した",
+          "logit": 18.5
+        },
+        {
+          "id": 177552,
+          "text": "できた",
+          "logit": 16.375
+        },
+        {
+          "id": 170521,
+          "text": "された",
+          "logit": 14.5625
+        },
+        {
+          "id": 153203,
+          "text": "しました",
+          "logit": 14.1875
+        },
+        {
+          "id": 14259,
+          "text": "し",
+          "logit": 13.625
+        }
+      ],
+      "case_id": "FT-REPOT-INITIAL",
+      "gold_probability": 0.006135157784396943
+    },
+    {
+      "target_index": 118,
+      "full_input_position": 2205,
+      "gold_id": 56658,
+      "char_span": [
+        419,
+        423
+      ],
+      "raw_lexeme": "\"},\"",
+      "field": "candidate.claims",
+      "touched_fields": [
+        "candidate.claims"
+      ],
+      "nll": 3.774412155151367,
+      "predicted_id": 1710,
+      "gold_rank": 2,
+      "top1_correct": false,
+      "gold_text": "\"},\"",
+      "predicted_text": "。",
+      "top5": [
+        {
+          "id": 1710,
+          "text": "。",
+          "logit": 23.25
+        },
+        {
+          "id": 56658,
+          "text": "\"},\"",
+          "logit": 19.5
+        },
+        {
+          "id": 13933,
+          "text": "\"},",
+          "logit": 15.4375
+        },
+        {
+          "id": 31853,
+          "text": "。”",
+          "logit": 14.5625
+        },
+        {
+          "id": 152084,
+          "text": "۔",
+          "logit": 14.375
+        }
+      ],
+      "case_id": "FT-KNIT-INITIAL",
+      "gold_probability": 0.022950578056370567
+    }
+  ],
+  "existing_raw_contract_analysis": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "teacher_unknown": {
+        "description": "気がかりの対象は未記載。",
+        "evidence_indexes": [
+          3
+        ],
+        "kind": "NOT_STATED",
+        "target_claim_refs": [
+          "remaining_concern"
+        ],
+        "unknown_id": "missing_explanation"
+      },
+      "existing_raw_unknown": {
+        "description": "気がかりの対象は未記載。",
+        "evidence_indexes": [
+          3
+        ],
+        "kind": "NOT_STATED",
+        "target_claim_refs": [
+          "remaining_concern"
+        ],
+        "unknown_id": "気がかりの対象は未記載"
+      },
+      "semantic_fields_equal": {
+        "kind": true,
+        "target_claim_refs": true,
+        "description": true,
+        "evidence_indexes": true
+      },
+      "question_ref_matches_own_id": true,
+      "id_collision": false,
+      "ascii_1_64_legal": false,
+      "ascii_constraint_explicit_in_existing_messages": false
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "teacher_unknown": {
+        "description": "置いていかれたように感じた理由は未記載。",
+        "evidence_indexes": [
+          3
+        ],
+        "kind": "NOT_STATED",
+        "target_claim_refs": [
+          "felt_left_behind"
+        ],
+        "unknown_id": "missing_explanation"
+      },
+      "existing_raw_unknown": {
+        "description": "置いていかれたように感じた理由は未記載。",
+        "evidence_indexes": [
+          3
+        ],
+        "kind": "NOT_STATED",
+        "target_claim_refs": [
+          "felt_left_behind"
+        ],
+        "unknown_id": "missing_reason"
+      },
+      "semantic_fields_equal": {
+        "kind": true,
+        "target_claim_refs": true,
+        "description": true,
+        "evidence_indexes": true
+      },
+      "question_ref_matches_own_id": true,
+      "id_collision": false,
+      "ascii_1_64_legal": true,
+      "ascii_constraint_explicit_in_existing_messages": false
+    }
+  ],
+  "analysis_limits": [
+    "gold prefix teacher forcing, not free generation",
+    "known training fixtures, not unknown generalization",
+    "first lexical divergence not necessarily first semantic error",
+    "top5 numbers are logits, not probabilities",
+    "rank=1 can tie while argmax chooses another token",
+    "no new quality or adoption credit"
+  ],
+  "previous_normal_generation_unchanged": {
+    "meaning": 11,
+    "body": 9,
+    "total": 15,
+    "new6_body": 0,
+    "candidate_accepted": false
+  },
+  "next_priority": [
+    "Make existing unknown_id ASCII1..64 contract explicit in output specification; keep reader unchanged. Not executed.",
+    "Separately design local-token learning emphasis for role, evidence, binding and complete updates while retaining full-packet CE and old9. Not executed."
+  ],
+  "automatic_progression": false,
+  "product_credit": 0,
+  "unknown_generalization_credit": 0
+}

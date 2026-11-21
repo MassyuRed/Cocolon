@@ -1,0 +1,50 @@
+{
+  "observed_at_utc": "2026-11-16T07:28:03Z",
+  "state": "FRESH_METADATA_READ_ONLY_NO_MUTATION",
+  "workspace_id": "tea-d4pp61idbo4c73bf4hkg",
+  "workspace_grounding": "ordinary_coverage_prepared_20261116/full12_normal_rollout_plan_20261116.json and sole list_workspaces result",
+  "api": {
+    "service": "srv-d4ppfpm3jp1c73952bj0",
+    "name": "mashos-api",
+    "deploy": "dep-dbsgn8t6e07s739qfk50",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "status": "live",
+    "branch": "main",
+    "autoDeploy": "off",
+    "suspended": false,
+    "direct_health_request": "First request timed out after30 seconds; one subsequent GET succeeded with status ok/app Cocolon MyModel. This proves health response, not model output quality.",
+    "health_body": {"status":"ok","app":"Cocolon MyModel"}
+  },
+  "worker": {
+    "service": "srv-d6copljh46gs73cmeic0",
+    "name": "mashos-astor-worker",
+    "deploy": "dep-dbsgnet6e07s739qg5a0",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "status": "live",
+    "branch": "main",
+    "autoDeploy": "off",
+    "suspended": false,
+    "startup_log_at": "2026-11-15T01:33:37.988702242Z",
+    "startup_stale_after_seconds": 900
+  },
+  "database": {
+    "project": "oeahmpmigszggnkyiivq",
+    "name": "cocolon-project",
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.4.1.074",
+    "latest_migration": "20261115011424",
+    "latest_migration_name": "piece_answer_and_interpretation_corrections",
+    "migration_count": 38,
+    "analysis_observed_artifacts_rls": true,
+    "analysis_cumulative_months_rls": true,
+    "semantic_wire_v3_constraint_present": true,
+    "cumulative_month_owner_fk_present": true,
+    "user_content_read": false,
+    "sql_writes": 0
+  },
+  "normal_model_activation": 0,
+  "new_deploys": 0,
+  "new_migrations": 0,
+  "secret_values_requested": false,
+  "closure_limitation": "A10/B10 actual meaning, same-raw isolated save/non-generation reread, native alignment and target exact-SHA normal rollout are owned by root and not proven by this metadata."
+}

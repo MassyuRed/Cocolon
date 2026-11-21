@@ -1,0 +1,328 @@
+{
+  "schema": "cocolon.analysis.a12.independent_final_execution_review.v1",
+  "state": "TECHNICAL_RESTORATION_VERIFIED_A12_INCOMPLETE_NOT_ADOPTED_B12_UNEXECUTED",
+  "body_free": true,
+  "reviewer": "execution_review",
+  "original_archive": {
+    "path": "/workspace/shared/newpod-a12-actual-20261116.zip",
+    "bytes": 36895,
+    "sha256": "00c62e1c717dca54ca0d2b597623e0f9ebe9c88d9edc2c8cf2ee59e2b779c36f",
+    "unique_members": 15,
+    "crc_valid": true,
+    "all_extracted_original_members_exact": true
+  },
+  "original_file_manifest": [
+    {
+      "path": "actual/scope.json",
+      "bytes": 8737,
+      "sha256": "039ef36e6b7bee0b5a6775a6224869f1444844d04c7fba8bd82eac9c2f2f1dab"
+    },
+    {
+      "path": "actual/kernel-proof.json",
+      "bytes": 6953,
+      "sha256": "d759203ab51d7efbb0d82736d574fca47822ce40d19cc81651b5d340e0760820"
+    },
+    {
+      "path": "actual/preflight.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "actual/preflight.json",
+      "bytes": 1769,
+      "sha256": "9af12c0237aa4b51ce3d25e2ed27ff6a58f667fdf6c68bc39f74d6059ce46e58"
+    },
+    {
+      "path": "actual/provider.argv.json",
+      "bytes": 1022,
+      "sha256": "20ef5b94ce90b59977152ba6a8cdbd4e7188c547dd660961a630e981ce8d8478"
+    },
+    {
+      "path": "actual/execution.json",
+      "bytes": 1077,
+      "sha256": "79c15f68b55e925c71a946278af3edbfdee3c56ede0068e574a27c6ae9ed4014"
+    },
+    {
+      "path": "actual/candidate-provider.log",
+      "bytes": 9131,
+      "sha256": "51c45b092bff45401f114ae68fb256f0c27617bd2f5eaa441ee5835c9830a989"
+    },
+    {
+      "path": "actual/driver.log",
+      "bytes": 829,
+      "sha256": "a4a5a4c9c3b0b03fdcb80ebebbe865c912107b0094cd74f7637a3e90f52647ed"
+    },
+    {
+      "path": "actual/after.result.json",
+      "bytes": 130479,
+      "sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04"
+    },
+    {
+      "path": "actual/restored-provider.log",
+      "bytes": 1792,
+      "sha256": "10e08db871e98322f86cf44cb6c8e1f8cb6b0e93d5ffc332a4fa738b904bf8ef"
+    },
+    {
+      "path": "runtime/a12-launch.log",
+      "bytes": 145,
+      "sha256": "1e425ebc3880ca4ca27757287383e0089e33f6f57eaae4a3228bc22bb455140c"
+    },
+    {
+      "path": "runtime/baseline.argv.json",
+      "bytes": 623,
+      "sha256": "9ca3bb2c6cd90e8648da46720042704e40d30e0255b5d68df81e204f61ce73e0"
+    },
+    {
+      "path": "runtime/authorization-A12-B12.json",
+      "bytes": 407,
+      "sha256": "26976f09ddaf75bd549a94d978e7158f71dc1c18a48133b845520a81e30f851e"
+    },
+    {
+      "path": "runtime/a12-transfer-verification.json",
+      "bytes": 320,
+      "sha256": "28b898d834138bf43fbd0756b511e5289eb20e76544513834b95d4a381169667"
+    },
+    {
+      "path": "runtime/a12-post-restoration.json",
+      "bytes": 403,
+      "sha256": "8cf9b2a753327a0739305f1f2effec7f5d2e47e4f6399257e0884b20e121639d"
+    }
+  ],
+  "binding": {
+    "api_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+    "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+    "scope_recovered_object_equal_frozen_payload": true,
+    "scope_recovered_serialization_is_canonical_not_original_pretty_bytes": true,
+    "driver_sha256": "619739b07365e6bb7fdbf121d535c6fc8c4a818f2552a0631488b6bc99e2ed01",
+    "candidate_native_sha256": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56",
+    "baseline_and_restored_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+    "kernel_proof_sha256": "d759203ab51d7efbb0d82736d574fca47822ce40d19cc81651b5d340e0760820",
+    "helper_sha256": "3e5153601958f83f1dd49f56e212c75357957e56903f61d5b4c6913002de2f5f",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "model_alias": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+    "candidate34_loaded_but_disabled_for_map_inference": true,
+    "actual_result_sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04"
+  },
+  "calls": {
+    "new_model_calls": 4,
+    "maximum": 9,
+    "before_controls": 2,
+    "map_calls": 2,
+    "after_controls": 0,
+    "remaining_diagnostic_cases_not_attempted": [
+      "U01_repair_report",
+      "U02_withdraw_submission",
+      "T01_manual10"
+    ],
+    "control_before_bytes_equal_a11": true,
+    "source_request_messages_exact_preparation_and_a11": true,
+    "rows": [
+      {
+        "id": "EMLIS-EXPLICIT-CORRECTION",
+        "body_sha256": "aedb32b36f583f281acaa7ab298dca617c649172e004a411bd5c1a047a1a2b12",
+        "wire_request_sha256": "1e9280ed23ecd49a7202c5dadbdfdc60434c1aa79e6061d8e95976d99262c2f0",
+        "status_code": 200,
+        "seconds": 2.492405398050323,
+        "finish_reason": "stop",
+        "response_model": "cocolon-qwen35-4b-base-851bf6e",
+        "phase": "before"
+      },
+      {
+        "id": "ANALYSIS-IF-TWO-CANDIDATES",
+        "body_sha256": "8dd53ecf6e04e43e0ac2ac435fa812e18719aa779679a08751c8e618a1868d96",
+        "wire_request_sha256": "54972d8e6a96f635ca5d175d791ee5740688ea794bd9850a1fa1dc45bcf6f15f",
+        "status_code": 200,
+        "seconds": 69.26927834795788,
+        "finish_reason": "stop",
+        "response_model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+        "phase": "before"
+      },
+      {
+        "id": "book_club_two_day",
+        "body_sha256": "04ce801ae70e8efbfaa2895f58d4d3596b935b89e2aa6f700917cce6ef05287b",
+        "wire_request_sha256": "c06636920f7311b779200a571ed7439ba476ad13cdd8872e624475dcaef19836",
+        "status_code": 200,
+        "seconds": 49.68756192398723,
+        "finish_reason": "stop",
+        "response_model": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+        "raw_sha256": "4ebb330ea484e3bbfca6469bf2688d2019f2c9d310e9c00b4ac763682b273bee",
+        "messages_sha256": "1bc556cde0d071f86d82f5d338dcd934cb812cb732f7fa0222a163b6acc1be5d",
+        "raw_bytes": 3126,
+        "raw_characters": 2282,
+        "admission": "GENERATED",
+        "projection_present": true,
+        "text_present": true
+      },
+      {
+        "id": "lighting_prior_and_later",
+        "body_sha256": "5df2d6363bf5747b05351df675cca2626764eb5c2bcaa18360fd394257687495",
+        "wire_request_sha256": "d5faa6cc92bf1db7abfb5a4511c47886f612ab7259e95c9b6762a6b2c37bfd44",
+        "status_code": 200,
+        "seconds": 211.45318434096407,
+        "finish_reason": "length",
+        "response_model": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+        "raw_sha256": "15b1c36ac07e4dbfc46fa88e98b691e54e30fe365a7dd4e46bb942342efbbcd7",
+        "messages_sha256": "e0cd802e20e0ae5add9f2fe2fc3621d12449a22c88c68cfe6b846424832fcc0e",
+        "raw_bytes": 13111,
+        "raw_characters": 8747,
+        "admission": null,
+        "projection_present": false,
+        "text_present": false
+      }
+    ]
+  },
+  "failure": {
+    "state": "INCOMPLETE_NOT_ADOPTED",
+    "driver_exit": 1,
+    "failure_type": "AssertionError",
+    "direct_trigger": "Existing driver rejected lighting finish_reason=length at assert finish == stop before semantic admission.",
+    "lighting_projection_or_text_present": false,
+    "raw_repair": 0,
+    "forced_close": 0,
+    "no_retry": true,
+    "raw_sha256": "15b1c36ac07e4dbfc46fa88e98b691e54e30fe365a7dd4e46bb942342efbbcd7",
+    "lighting_complete_sections": {
+      "events": 24,
+      "readings": 7,
+      "nodes": 24
+    },
+    "lighting_incomplete_section": {
+      "section": "edges",
+      "error": "Unterminated string",
+      "error_char_position": 8742,
+      "complete_items": 10
+    },
+    "overview_not_reached": true
+  },
+  "bounds": {
+    "restore_inclusive_seconds": 406.3756398630794,
+    "restore_cap_seconds": 1800,
+    "within_cap": true,
+    "acquisition_seconds": 333.0572341410443,
+    "max_output_tokens_setting": 4096,
+    "context_tokens_setting": 32768,
+    "native_request_seconds_setting": 210,
+    "maximum_actual_preflight_input_plus_reserve": 7231,
+    "input_context_exhaustion_not_observed": true
+  },
+  "finish_length_diagnosis": {
+    "provider_final_tokenize_monotonic": 995320.222,
+    "provider_complete_length_monotonic": 995530.243,
+    "provider_interval_seconds": 210.021,
+    "largest_logged_lighting_prefix_progress": 3328,
+    "lighting_http_seconds": 211.45318434096407,
+    "interpretation": "The approximately 210-second native interval, incomplete prefix and largest logged progress3328 support request-deadline termination. A 4096-generated-token limit hit is not established by finish_reason=length. Native emits length both for budget/no-EOS and expired Deadline.",
+    "actual_generated_token_ids_saved": false,
+    "raw_cpu_retokenization": [
+      {
+        "case": "book_club_two_day",
+        "decoded_raw_reencoded_tokens": 801,
+        "roundtrip_exact": true,
+        "retokenized_ids_sha256": "5059af9768216215b21e6e8e79e5fbda5051d2702b0ef7e4b5edf72fedccaaae"
+      },
+      {
+        "case": "lighting_prior_and_later",
+        "decoded_raw_reencoded_tokens": 3353,
+        "roundtrip_exact": true,
+        "retokenized_ids_sha256": "0c23639c0b18552367a529610ff07d12069b3a5d4d654985633a204d6cbb991a"
+      }
+    ],
+    "retokenization_is_not_exact_original_generation_token_count": true,
+    "tokenizer_assets": {
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "tokenizers_version": "0.22.2",
+      "all_five_saved_files_verified": true,
+      "files": [
+        {
+          "name": "tokenizer.json",
+          "bytes": 12807982,
+          "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "bytes": 16710,
+          "sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+        },
+        {
+          "name": "config.json",
+          "bytes": 3161,
+          "sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670"
+        },
+        {
+          "name": "vocab.json",
+          "bytes": 6722759,
+          "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+        },
+        {
+          "name": "merges.txt",
+          "bytes": 3353259,
+          "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+        }
+      ]
+    }
+  },
+  "parser_diagnosis": {
+    "book_prefix_record": "edge_prefix_parser_inspection.json",
+    "book_first_edge_allows_close_and_continue": true,
+    "book_12_edges_exhaust_all_three_node_unordered_pairs_times_four_kinds": true,
+    "lighting_original_incomplete_raw_all_characters_allowed": true,
+    "lighting_parser_can_end": false,
+    "lighting_first_event_array_close_permitted_after_item": 2,
+    "lighting_first_node_array_close_permitted_after_item": 1,
+    "lighting_first_edge_array_close_permitted_after_item": 1,
+    "lighting_event_and_node_commas_disallowed_at_enum_cap_24": true,
+    "interpretation": "Existing character parser permits shorter sections; it does not force all24 events or nodes, nor all book edge combinations. The original output continues past permissible closure points.",
+    "token_mask_or_logits_replayed": false
+  },
+  "restoration": {
+    "original_pid": 4089,
+    "original_start_ticks": "99099105",
+    "candidate_pid": 4865,
+    "candidate_start_ticks": "99516935",
+    "restored_pid": 5433,
+    "restored_start_ticks": "99553630",
+    "original_provider_restored_reported_and_source_assertion_path_verified": true,
+    "post_receipt_argv_exact": true,
+    "post_receipt_health_status": 200,
+    "post_receipt_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+    "candidate_port_closed": true,
+    "candidate_stop_evidence": "Executed finally invokes existing helper stop, which waits for child absence/zombie before return; post-restoration receipt independently records port18008 closed. No fresh process inspection was performed by this reviewer.",
+    "env_cwd_and_both_adapter_file_identity": "Existing executed driver sets restored=true only after exact original argv/env/cwd and both adapter file hash assertions. The exported post-receipt separately records argv/native/health, not each environment value.",
+    "default_analysis_if_natural_piece_args_preserved": true,
+    "baseline_native_and_candidate_native_kept_distinct": true,
+    "kernel_proof_limit": "Saved warm proof verifies fixed kernel compatibility with no model/weights loaded and is not evidence of candidate native model quality.",
+    "secret_values_exported_by_driver": false
+  },
+  "authority_and_followon": {
+    "new_a12_scope_basis_separate_from_consumed_a11": true,
+    "a12_once_consumed": true,
+    "old_a11_or_b11_authority_reused": false,
+    "b12_root_absent": true,
+    "b12_review_receipt_absent": true,
+    "b12_condition_satisfied": false,
+    "b12_executed": false,
+    "sql_save": 0,
+    "non_generation_sql_reread": 0,
+    "normal_adoption": false,
+    "normal_connection_from_deployed_app_api_worker": "NOT_VERIFIED: internal loopback health/authenticated diagnostic responses do not establish reachability/authentication from normal deployed application routes.",
+    "normal_rollout": 0,
+    "work_unit_closed": false
+  },
+  "next_source_work_implication": [
+    "Disabling candidate34 alone did not complete the same-v2 five-case work: lighting remains an incomplete generation. This does not prove candidate34 caused A11 failure or that the base is adequate.",
+    "Observed author continuation reached event/node caps and many relations despite earlier parser closure choices. Existing author material selection, state integration and concise graph composition remain useful repair targets.",
+    "Raising context/output limits, forcing closure, dropping readings or weakening admission would not establish source meaning adequacy; the observed failure should not be relabelled as successful completion."
+  ],
+  "review_actions": {
+    "GPU_operations": 0,
+    "model_calls": 0,
+    "new_tests": 0,
+    "network_calls": 0,
+    "pod_operations": 0,
+    "source_changes": 0,
+    "original_raw_changes": 0,
+    "raw_rebinding": 0,
+    "new_training": 0
+  }
+}

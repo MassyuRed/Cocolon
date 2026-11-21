@@ -1,0 +1,12 @@
+{
+  "archive": "cocolon-fixedrows-cpu-20261029.zip",
+  "bytes": 292780,
+  "sha256": "8c41d07c821437ebc37320cd95b4d23c2e5d0215abb66a9da0116615f0f059a5",
+  "payloads": 20,
+  "all_crc_size_hash_verified_outside_pod": true,
+  "final_source_matches_local": true,
+  "final_teacher_exact_named_bytes_and_cmee_outcome_identical": 2,
+  "old9_messages_teacher_tokens_masks_identical": 9,
+  "gpu_model_updates_generations": 0,
+  "library_file_id": "libfile_380690ad8eec8191ad327c7d2669e35a"
+}

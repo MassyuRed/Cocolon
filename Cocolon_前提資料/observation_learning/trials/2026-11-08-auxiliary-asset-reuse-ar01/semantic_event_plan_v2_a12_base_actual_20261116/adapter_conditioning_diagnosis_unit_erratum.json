@@ -1,0 +1,50 @@
+{
+  "actions": {
+    "gpu_operations": 0,
+    "historical_archive_changes": 0,
+    "model_calls": 0,
+    "payload_changes": 0,
+    "product_code_changes": 0
+  },
+  "after": {
+    "bytes": 9411,
+    "json_pointer": "/native_and_author_review/recorded_maximum_leaf_message_bytes",
+    "sha256": "c6891fd4ecbaac1d49d540e3bf51a081cb88ec9eb36d85916433e3e090d11f2e",
+    "unit": "UTF-8 message bytes",
+    "value": 16379
+  },
+  "before": {
+    "bytes": 9426,
+    "json_pointer": "/native_and_author_review/recorded_maximum_input_plus_reserved_output_tokens",
+    "sha256": "a2dc41362289ed7f0cafb0459ed4a702f0ecf6be977b6032d61154c127d039dd",
+    "unit_claim": "input plus reserved output tokens",
+    "unit_claim_correct": false,
+    "value": 16379
+  },
+  "body_free": true,
+  "clarification": "The 16379 quantity is the maximum serialized LEAF message byte count. It is not a token count or the sum of input tokens and output reservation. The unchanged runner separately measures actual tokenizer input and requires input_tokens plus 4096 not to exceed 32768 before each relevant POST.",
+  "evidence": {
+    "bytes": 166199,
+    "field": "leaf_stages[*].message_bytes",
+    "file": "a12_payload/full12_pre_acquisition.plan.json",
+    "leaf_count": 6,
+    "maximum": 16379,
+    "sha256": "c4b36f8d3e23be096bd021e72adf070af648129854b1b165664a7f6deca39d83"
+  },
+  "file": "a11_actual/reviews/adapter_conditioning_diagnosis.json",
+  "historical_archive_policy": "Previously saved private prepared archive bytes, including their historical diagnosis JSON, remain immutable. This erratum is a separate correction reference for public result receipts and the future private actual bundle.",
+  "schema": "cocolon.analysis.body_free_unit_erratum.v1",
+  "state": "METADATA_UNIT_CORRECTED_NO_EXECUTION_OR_SEMANTIC_CHANGE",
+  "unchanged": [
+    "a12_payload",
+    "execution_scope.json c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+    "GPU payload",
+    "execution driver",
+    "immutable private prepared ZIP originals",
+    "all source inputs",
+    "raw outputs",
+    "meaning judgments",
+    "approval scope",
+    "runtime limits"
+  ]
+}

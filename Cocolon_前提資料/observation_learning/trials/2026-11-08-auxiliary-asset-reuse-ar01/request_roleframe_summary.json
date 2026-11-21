@@ -1,0 +1,94 @@
+{
+  "schema": "ar01.request_roleframe.actual_summary.v1",
+  "date_jst": "2026-11-09",
+  "status": "ACTUAL_COMPARISON_COMPLETE_CANDIDATE_NOT_ADOPTED_AR01_IN_PROGRESS",
+  "design_owner": "Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md",
+  "api_source_commit_unchanged": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+  "intervention": "Existing finite request witness projected as requester and unstated requested person; research-only support remains false by default.",
+  "source_reading_or_SYSTEM_edits": 0,
+  "new_fictional_inputs": 6,
+  "reused_development_inputs": 6,
+  "new_generations": 24,
+  "phases": {
+    "baseline": 12,
+    "candidate": 12
+  },
+  "all_http_200_and_stop": true,
+  "generation_loop_seconds": 45.16551368194632,
+  "changed_message_and_body_pairs": 3,
+  "byte_identical_message_and_body_controls": 9,
+  "training_updates": 0,
+  "new_model_loads": 0,
+  "provider_retries": 0,
+  "tokenizer_max_input_tokens": 1118,
+  "source_and_source_ref_unchanged": true,
+  "all_normal_false_messages_equal_baseline": true,
+  "tests": {
+    "pass": 267,
+    "fail": 0,
+    "error": 0,
+    "skip": 0,
+    "seconds": 17.09,
+    "existing_warning_count": 1,
+    "meaning_reuse": 126,
+    "cognition": 47,
+    "meaning_budget": 23,
+    "application": 71,
+    "application_test_fetched_exact_current": true,
+    "pglite": "0.5.8",
+    "prior_collection_blockers": "Missing canonical helper Python and ledger files in recovered source-only snapshot; fetched unchanged current helper2 plus package init and fixture, no tests ran before restoration."
+  },
+  "isolated_sql_final_saved_and_reopened": 24,
+  "existing_outer_strip_body_hash_equal": 24,
+  "GET_provider_reader_engine_calls": 0,
+  "reader_UNASSESSED": 24,
+  "reader_reply_segments": 50,
+  "reader_checked_segments": 0,
+  "full_reply_semantic_coverage": false,
+  "normal_candidate_adoption": false,
+  "decision_reason": "Written requester, unstated recipient, and unstated acceptance are not preserved as separate targets; actual reply contradicts written facts. No product quality acceptance.",
+  "quality_review": "Root and independent reviewer read all 12 sources and 24 actual replies; this is not Mash formal acceptance.",
+  "generalization_limit": "New six use previously exposed semantic families; no blind generalization claim.",
+  "shared_serving_pid": 26784,
+  "server_pid_and_source_unchanged": true,
+  "server_sha256": "f95fc7ce13ce197916b753b7cebb3946243225a0139d40e528908d62e27b2371",
+  "analysis_adapter_unchanged": true,
+  "health_http_status": 200,
+  "source_identities": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "e9f3cfd9029c0f2402e4e21e82a5937ed253acf56382144101b5f5f6a53ee08b",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py": "dfa13fe8a95826654fdf2f3fe068ff6927a708ba8c56b4d71822ec3eb35257de",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_cognition.py": "6d0a9f61527d61f3e71dd12b5f1546612b023ebc139038d583be216c89dd947e"
+  },
+  "public_source_patch_sha256": "254aba75d34c5c4538e04b9d8ffc8165db5f70eb3ac4b1788f6fc75567c7e934",
+  "public_source_patch_apply_check_and_exact_postimages": true,
+  "private_test_patch_sha256": "c906539ddcb5c7eb5cf4fd162387fb7031acfe32410d5da8944dc8df9e4963e4",
+  "private_input_or_actual_reply_in_public_source_patch": false,
+  "input_zip": {
+    "bytes": 34790,
+    "sha256": "38d1811010589e50baa13406e5bcdbddb06b90d0548e6aaae183fc9290a3c967"
+  },
+  "downloaded_pod_output_zip": {
+    "bytes": 50238,
+    "sha256": "c35cdd9944172afa65b7ea76454052d16ef843e1071c38be0fd3272f6ab31957",
+    "manifest_members_verified": 13
+  },
+  "render_deploy_real_database_RN_build_changes": 0,
+  "structure_map_delta": "NONE: rejected research source patch only; active API, author, types, wires, and persistence owner unchanged.",
+  "next_existing_owner": [
+    "preparation.prepare_emlis / receive_candidate",
+    "emlis_semantic_admission.prepare_model_snapshot / _model_meaning_packet",
+    "natural_reply single author"
+  ],
+  "next_implementation_requirement": "Admit requester, recipient, and acceptance as distinct claim/reference axes before realization. Adapt existing binding responsibilities, not another role-label prompt loop or fixed legacy renderer.",
+  "remaining": [
+    "AR-01 normal meaning quality",
+    "AR-02 through AR-08",
+    "all necessary auxiliary asset reuse",
+    "physical device and Mash formal acceptance"
+  ],
+  "private_evidence": {
+    "filename": "Cocolon_CMEE_AR01_RequestRoleFrame24_20261109.zip",
+    "bytes": 159547,
+    "sha256": "24141f82e129df36e55a8b3d78b2c92b22da79e2063034acbc03c2e9e509cced"
+  }
+}

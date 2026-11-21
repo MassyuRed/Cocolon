@@ -1,0 +1,7941 @@
+{
+  "schema": "piece.ar04.natural_context_link.executed.v1",
+  "recorded_date_utc": "2026-11-12",
+  "scope": "One original WholeCanvas13 XCTest method, one automatic CI attempt; other five native methods were not executed.",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "credit_scope": "Only same-callback linkage of pre-existing context records; product_credit=0, no drawing or latency repair proved.",
+  "status": "FAILED_UNADOPTED",
+  "normal_adoption": false,
+  "product_credit": 0,
+  "source": {
+    "repository": "MassyuRed/Cocolon",
+    "parent": "ca7e2502de3b9ec19b64361607bef2c6f4685ec0",
+    "candidate": "07ea24cccd380ef3cc740883b0152fdbab1b343e",
+    "branch": "agent/piece-v4-natural-context-link-20261112",
+    "changed_paths": [
+      ".github/workflows/piece-rn-contracts.yml",
+      "tests/native/piece-rn-canvas-ios.m"
+    ],
+    "harness_added_lines": 32,
+    "harness_deleted_lines": 0,
+    "harness_inverse_restores_parent_bytes": true,
+    "harness_sha256": "5ffc884b5e73dedbfc8a7efc848af5949e42ec84678a488ab7518b0141bb053c",
+    "native_source_unchanged_sha256": "8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b",
+    "instrumented_native_sha256": "2c908ff2f4dd92e5aa0ea9dc8bc5e1ad6e6578b82b2111135a33acb8ce09b40f",
+    "runner_unchanged": true,
+    "original_13_inputs_assertions_order_and_8000ms_limit_unchanged": true,
+    "normal_runtime_source_pin_and_model_selector_not_changed": true
+  },
+  "execution": {
+    "run_id": 43118077795,
+    "job_id": 130851139571,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "failure",
+    "started_at": "2026-11-11T23:12:56Z",
+    "updated_at": "2026-11-11T23:52:59Z",
+    "workflow_wall_seconds": 2403,
+    "job_timeout_minutes_unchanged": 45,
+    "remote_native_compile": "SUCCEEDED",
+    "build_started_at": "2026-11-11T23:17:08.0808080Z",
+    "build_completed_at": "2026-11-11T23:28:00.3939970Z",
+    "test_started_at": "2026-11-11T23:34:53.3596880Z",
+    "executed_methods": 1,
+    "failed_methods": 1,
+    "other_methods_skipped": 5,
+    "manual_dispatches": 0,
+    "reruns": 0
+  },
+  "artifact": {
+    "id": 13901638151,
+    "bytes": 93315177,
+    "sha256": "66f4551cff0e92346eea559d62626da2441f1c40980586f534508183b08eb1cd",
+    "all_zip_members_crc_verified": true,
+    "archive_members": 991,
+    "result_files": {
+      "results.json": {
+        "bytes": 1709892,
+        "sha256": "9a13bf3f2e76fa7bcfe7138c3346e3a88014962a9dd8767a11d0334a533311f4"
+      },
+      "piece-native-diagnostic-map.json": {
+        "bytes": 20370,
+        "sha256": "f3932646da8a7a040d361ca4ef22f2f8ede64b9328a739c7a9316b16fcb4c428"
+      }
+    }
+  },
+  "prior_comparison": {
+    "run_id": 43106065561,
+    "results_sha256": "10e8f53b7bb88164f6e65bb8289b00c2cac07510bcbc74121c2659c27f510bc4",
+    "structured_root_assertion_failures": {
+      "prior": 14,
+      "new": 26,
+      "retained": 14,
+      "removed": 0,
+      "new_relative_to_prior": 12,
+      "new_by_case": {
+        "essay_paragraphs": 1,
+        "declaration_no_brand": 5,
+        "suffix_arabic": 6
+      },
+      "new_assertions": [
+        {
+          "case": "essay_paragraphs",
+          "prior_document_line": 1517,
+          "actual_document_line": 1549,
+          "expression": "(([report[@\"elapsed_ms\"] doubleValue]) less than (8000))"
+        },
+        {
+          "case": "declaration_no_brand",
+          "prior_document_line": 1513,
+          "actual_document_line": 1545,
+          "expression": "((report[@\"phase\"]) equal to (@\"native_checked\"))"
+        },
+        {
+          "case": "declaration_no_brand",
+          "prior_document_line": 1515,
+          "actual_document_line": 1547,
+          "expression": "(([report[@\"native_canvas_valid\"] boolValue]) is true)"
+        },
+        {
+          "case": "declaration_no_brand",
+          "prior_document_line": 1521,
+          "actual_document_line": 1553,
+          "expression": "((report[@\"save_fit_current\"]) equal to (@(preview)))"
+        },
+        {
+          "case": "declaration_no_brand",
+          "prior_document_line": 1523,
+          "actual_document_line": 1555,
+          "expression": "((report[@\"save_fit_handle_keys\"]) equal to (preview ? @[@\"isCurrent\"] : @[]))"
+        },
+        {
+          "case": "declaration_no_brand",
+          "prior_document_line": 1209,
+          "actual_document_line": 1241,
+          "expression": "((all.count) equal to (rows.count+([report[@\"branding\"]boolValue]?1:0)))"
+        },
+        {
+          "case": "suffix_arabic",
+          "prior_document_line": 1538,
+          "actual_document_line": 1570,
+          "expression": "((report[@\"phase\"]) equal to (@\"native_checked\"))"
+        },
+        {
+          "case": "suffix_arabic",
+          "prior_document_line": 1540,
+          "actual_document_line": 1572,
+          "expression": "(([report[@\"native_canvas_valid\"] boolValue]) is true)"
+        },
+        {
+          "case": "suffix_arabic",
+          "prior_document_line": 1541,
+          "actual_document_line": 1573,
+          "expression": "(([report[@\"capture_error\"] boolValue]) is false)"
+        },
+        {
+          "case": "suffix_arabic",
+          "prior_document_line": 1544,
+          "actual_document_line": 1576,
+          "expression": "((report[@\"save_fit_current\"]) equal to (@YES))"
+        },
+        {
+          "case": "suffix_arabic",
+          "prior_document_line": 1546,
+          "actual_document_line": 1578,
+          "expression": "((report[@\"save_fit_handle_keys\"]) equal to (@[@\"isCurrent\"]))"
+        },
+        {
+          "case": "suffix_arabic",
+          "prior_document_line": 1209,
+          "actual_document_line": 1241,
+          "expression": "((all.count) equal to (rows.count+([report[@\"branding\"]boolValue]?1:0)))"
+        }
+      ]
+    },
+    "all_26_assertion_source_lines_equal_with_offset_32": true,
+    "all_13_contract_candidate_metadata_plan_and_selected_metrics_unchanged": true,
+    "png_count_before": 11,
+    "png_count_after": 9,
+    "same_name_png_pairs": 9,
+    "all_pairs_file_sha_dimensions_and_RGBA_equal": true
+  },
+  "counts": {
+    "calls": 100,
+    "stage_0": 92,
+    "natural_drawRect_pre_paint_record_references": 93,
+    "natural_shared_paint_record_references": 93,
+    "reference_shared_paint_record_references": 184,
+    "natural_snapshot_present": 93,
+    "strict_resolved": 92,
+    "strict_local": 48,
+    "fractional_phase": 34,
+    "fractional_public_bounds": 92,
+    "Cq_not_public_bounds": 92,
+    "Cq_not_expanded_B": 92,
+    "exact_Cq_and_CTM_formula": 92,
+    "stage_15": 1,
+    "comparison_unobserved": 8,
+    "stage_58": 7,
+    "natural_snapshot_absent": 7,
+    "strict_placed": 44
+  },
+  "distinct_existing_context_keys": {
+    "natural_drawRect_pre_paint": 49,
+    "natural_shared_paint": 49,
+    "reference_shared_paint": 96
+  },
+  "context_linkage": {
+    "available_helpers": 100,
+    "identity_array_count_kind_or_current_geometry_errors": 0,
+    "counts_order": [
+      "natural_drawRect_pre_paint",
+      "natural_shared_paint",
+      "reference_shared_paint"
+    ],
+    "cross_tab": [
+      {
+        "first_failure_stage": 0,
+        "natural_snapshot_present": true,
+        "calls": 92,
+        "context_counts_per_call": [
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "first_failure_stage": 15,
+        "natural_snapshot_present": true,
+        "calls": 1,
+        "context_counts_per_call": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "first_failure_stage": 58,
+        "natural_snapshot_present": false,
+        "calls": 7,
+        "context_counts_per_call": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "returned_record_occurrences": 370,
+    "different_historical_geometry_occurrences": 0,
+    "count_semantics": "Deduplicated historical record references, not draw invocation counts or latest-attribute/BeginPaint/Finish proof.",
+    "zero_semantics": "No matching recorded contexts; nil UIGraphicsGetCurrentContext is omitted, so zero does not prove no drawing."
+  },
+  "reports": [
+    {
+      "case": "essay_paragraphs",
+      "phase": "unavailable",
+      "reason": "measurement_timeout",
+      "elapsed_ms": 8072.684166000225,
+      "v4_calls": 0,
+      "png_present": false,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "quote_unicode",
+      "phase": "unavailable",
+      "reason": "native_measurement_unavailable",
+      "elapsed_ms": 1957.8883750000969,
+      "v4_calls": 4,
+      "png_present": false,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "declaration_no_brand",
+      "phase": "unavailable",
+      "reason": "native_measurement_unavailable",
+      "elapsed_ms": 710.8691250002012,
+      "v4_calls": 5,
+      "png_present": false,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "essay_max420",
+      "phase": "native_checked",
+      "reason": null,
+      "elapsed_ms": 7027.513624999672,
+      "v4_calls": 38,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "saved_essay_canvas",
+      "phase": "native_checked",
+      "reason": null,
+      "elapsed_ms": 430.01949999993667,
+      "v4_calls": 0,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.prototype.v3"
+    },
+    {
+      "case": "suffix_latin_ligature",
+      "phase": "native_checked",
+      "reason": null,
+      "elapsed_ms": 800.6733749997802,
+      "v4_calls": 4,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "suffix_arabic",
+      "phase": "unavailable",
+      "reason": "native_measurement_unavailable",
+      "elapsed_ms": 1085.6619170000777,
+      "v4_calls": 2,
+      "png_present": false,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "suffix_max420_a",
+      "phase": "native_checked",
+      "reason": null,
+      "elapsed_ms": 5943.207417000085,
+      "v4_calls": 36,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "suffix_spaces_raw",
+      "phase": "measurement_checked",
+      "reason": null,
+      "elapsed_ms": 218.11833299975842,
+      "v4_calls": 2,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "suffix_hebrew_raw",
+      "phase": "measurement_checked",
+      "reason": null,
+      "elapsed_ms": 191.86612499970943,
+      "v4_calls": 2,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "suffix_mixed_bidi_raw",
+      "phase": "measurement_checked",
+      "reason": null,
+      "elapsed_ms": 259.0645829997957,
+      "v4_calls": 2,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "containment_native_clip_trap",
+      "phase": "measurement_checked",
+      "reason": null,
+      "elapsed_ms": 238.03733299998567,
+      "v4_calls": 1,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    },
+    {
+      "case": "containment_branding_opacity08",
+      "phase": "native_checked",
+      "reason": null,
+      "elapsed_ms": 627.1737079997547,
+      "v4_calls": 4,
+      "png_present": true,
+      "candidate_profile": "piece.rn_native_preview.containment.prototype.v2"
+    }
+  ],
+  "first_essay": {
+    "reason": "measurement_timeout",
+    "elapsed_ms": 8072.684166000225,
+    "paint_or_Cq_inference": "UNOBSERVED",
+    "v4_boundary_calls": 0,
+    "original_deadline_ms": 8000,
+    "cause": "UNPROVEN; timeout occurred before V4 dispatch, so same-callback helper did not execute for this case.",
+    "product_relevance": "May affect shared first-start measurement; not isolated as a V4-only runtime gate."
+  },
+  "quote_resource_limit": {
+    "columns": 3481,
+    "rows": 1285,
+    "pixels": 4473085,
+    "limit_pixels": 4194304,
+    "comparison": "UNOBSERVED"
+  },
+  "png_scope": {
+    "total": 9,
+    "V4_reports": 8,
+    "legacy_saved_v3_reports": 1,
+    "missing": [
+      {
+        "name": "essay_paragraphs.png",
+        "phase": "unavailable",
+        "reason": "measurement_timeout",
+        "capture_error": true,
+        "missing_in_previous_run": true
+      },
+      {
+        "name": "quote_unicode.png",
+        "phase": "unavailable",
+        "reason": "native_measurement_unavailable",
+        "capture_error": true,
+        "missing_in_previous_run": true
+      },
+      {
+        "name": "declaration_no_brand.png",
+        "phase": "unavailable",
+        "reason": "native_measurement_unavailable",
+        "capture_error": true,
+        "missing_in_previous_run": false
+      },
+      {
+        "name": "suffix_arabic.png",
+        "phase": "unavailable",
+        "reason": "native_measurement_unavailable",
+        "capture_error": true,
+        "missing_in_previous_run": false
+      }
+    ],
+    "newly_missing": [
+      "declaration_no_brand",
+      "suffix_arabic"
+    ]
+  },
+  "per_call_numeric_geometry": [
+    {
+      "case": "quote_unicode",
+      "ordinal": 1,
+      "font_size": 80,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        108.33334350585938
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        108.33334350585938
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        108.33334350585938
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        108.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        325.0000305175781
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        108.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        325.0000305175781
+      ],
+      "expanded_B_extent": [
+        -52,
+        -160.33332316080728,
+        1047.3333333333333,
+        428.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        108.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "quote_unicode",
+      "ordinal": 2,
+      "font_size": 80,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 15,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        108.33334350585938
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        108.33334350585938
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        108.33334350585938
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        108.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        325.0000305175781
+      ],
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "quote_unicode",
+      "ordinal": 3,
+      "font_size": 80,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        108.33332824707031
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        108.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        108.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        108.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        324.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        108.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        324.99998474121094
+      ],
+      "expanded_B_extent": [
+        -52,
+        -160.00000508626303,
+        956.3333333333334,
+        428.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        108.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "quote_unicode",
+      "ordinal": 4,
+      "font_size": 28,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        864,
+        40.3333740234375
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        864,
+        40.3333740234375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        864,
+        40.3333740234375
+      ],
+      "observed_clip": [
+        0,
+        0.00004069010417140362,
+        864,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        121.0001220703125
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000040690104166666664,
+        864,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        121.0001220703125
+      ],
+      "expanded_B_extent": [
+        325.3333333333333,
+        -56.333292643229164,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.00004069010417140362,
+        864,
+        40.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "declaration_no_brand",
+      "ordinal": 5,
+      "font_size": 72,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        103.33334350585938
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        103.33334350585938
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "declaration_no_brand",
+      "ordinal": 6,
+      "font_size": 72,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        103.33334350585938
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        103.33334350585938
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "declaration_no_brand",
+      "ordinal": 7,
+      "font_size": 72,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        103.33332824707031
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        103.33332824707031
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "declaration_no_brand",
+      "ordinal": 8,
+      "font_size": 72,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        103.33333587646484
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        103.33333587646484
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "declaration_no_brand",
+      "ordinal": 9,
+      "font_size": 72,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        103.33333587646484
+      ],
+      "current_content_frame": [
+        108,
+        0,
+        864,
+        103.33333587646484
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 10,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        927,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 11,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 12,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 13,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        825,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 14,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33333206176758
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "observed_clip": [
+        0,
+        -0.0000012715657504713818,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.0000012715657552083333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000127156575,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 15,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        893,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 16,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        927,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 17,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 18,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 19,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        825,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 20,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 21,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        893,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 22,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        927,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 23,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 24,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 25,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        825,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 26,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 27,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        893,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 28,
+      "font_size": 28,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 29,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        927,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        134.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 30,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        190.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 31,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        246.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 32,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        825,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        302
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 33,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33333206176758
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "observed_clip": [
+        0,
+        -0.0000012715657504713818,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.0000012715657552083333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000127156575,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "phase": [
+        0,
+        358.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 34,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        893,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        414.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 35,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        927,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        470.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 36,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        526.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 37,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        582.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 38,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        825,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        638
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 39,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        694.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 40,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        893,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        750.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 41,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        927,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        806.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 42,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        862.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 43,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        918.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 44,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        825,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        974
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 45,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        995,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        1030.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 46,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        893,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        1086.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "essay_max420",
+      "ordinal": 47,
+      "font_size": 28,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        96,
+        1182
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_latin_ligature",
+      "ordinal": 48,
+      "font_size": 72,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        98.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        98.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        98.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "expanded_B_extent": [
+        -48,
+        -144.00000508626303,
+        879.6666666666666,
+        386.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_latin_ligature",
+      "ordinal": 49,
+      "font_size": 28,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_latin_ligature",
+      "ordinal": 50,
+      "font_size": 72,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        98.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        98.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        98.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "expanded_B_extent": [
+        -48,
+        -144.00000508626303,
+        879.6666666666666,
+        386.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "phase": [
+        148.177734375,
+        584
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_latin_ligature",
+      "ordinal": 51,
+      "font_size": 28,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        96,
+        1182
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_arabic",
+      "ordinal": 52,
+      "font_size": 72,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        98.33332824707031
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "suffix_arabic",
+      "ordinal": 53,
+      "font_size": 28,
+      "stage": "local",
+      "status": "rejected",
+      "failure_stage": 58,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": false,
+      "natural_snapshot_stable": "UNOBSERVED",
+      "Cq": "UNOBSERVED",
+      "phase": "UNOBSERVED"
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 54,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 55,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 56,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 57,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 58,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33333206176758
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "observed_clip": [
+        0,
+        -0.0000012715657504713818,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.0000012715657552083333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000127156575,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 59,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 60,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 61,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 62,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 63,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 64,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 65,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 66,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 67,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 68,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 69,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 70,
+      "font_size": 36,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 71,
+      "font_size": 28,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 72,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        162.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 73,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        218.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 74,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        274.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 75,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        330.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 76,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33333206176758
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "observed_clip": [
+        0,
+        -0.0000012715657504713818,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.0000012715657552083333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99999618530273
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000127156575,
+        959.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33333206176758
+      ],
+      "phase": [
+        0,
+        386.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 77,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        442.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 78,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333335876464844
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333335876464844
+      ],
+      "observed_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.0000025431315104166665,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00000762939453
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.33333079020183,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.0000025431315151536182,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        498.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 79,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        554.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 80,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        610.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 81,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99998474121094
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00000508626302,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33332824707031
+      ],
+      "phase": [
+        0,
+        666.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 82,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        722.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 83,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        778.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 84,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        834.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 85,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.333343505859375
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.333343505859375
+      ],
+      "observed_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        0.000010172526041666666,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        169.00003051757812
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.3333231608073,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0.000010172526046403618,
+        1080,
+        56.33333333333333
+      ],
+      "phase": [
+        0,
+        890.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 86,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        946.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 87,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        1002.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 88,
+      "font_size": 36,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        56.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        1080,
+        56.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        1080,
+        56.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        168.99993896484375
+      ],
+      "expanded_B_extent": [
+        24,
+        -72.00002034505208,
+        993.3333333333334,
+        200.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        56.33331298828125
+      ],
+      "phase": [
+        0,
+        1058.5
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_max420_a",
+      "ordinal": 89,
+      "font_size": 28,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        96,
+        1182
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_spaces_raw",
+      "ordinal": 90,
+      "font_size": 48,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        0,
+        -96.00000508626302,
+        489.3333333333333,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_spaces_raw",
+      "ordinal": 91,
+      "font_size": 48,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        0,
+        -96.00000508626302,
+        489.3333333333333,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        96
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_hebrew_raw",
+      "ordinal": 92,
+      "font_size": 48,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        -11.333333333333334,
+        -96.00000508626302,
+        424.3333333333333,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_hebrew_raw",
+      "ordinal": 93,
+      "font_size": 48,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        -11.333333333333334,
+        -96.00000508626302,
+        424.3333333333333,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        96
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_mixed_bidi_raw",
+      "ordinal": 94,
+      "font_size": 48,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        -22.666666666666668,
+        -96.00000508626302,
+        560.6666666666666,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "suffix_mixed_bidi_raw",
+      "ordinal": 95,
+      "font_size": 48,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        -22.666666666666668,
+        -96.00000508626302,
+        560.6666666666666,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        96
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "containment_native_clip_trap",
+      "ordinal": 96,
+      "font_size": 48,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        75.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        75.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        75.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        225.99998474121094
+      ],
+      "expanded_B_extent": [
+        0,
+        -96.00000508626302,
+        711.6666666666666,
+        267.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        75.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "containment_branding_opacity08",
+      "ordinal": 97,
+      "font_size": 72,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        98.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        98.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        98.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "expanded_B_extent": [
+        -48,
+        -144.00000508626303,
+        879.6666666666666,
+        386.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "containment_branding_opacity08",
+      "ordinal": 98,
+      "font_size": 28,
+      "stage": "local",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        0,
+        0
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "containment_branding_opacity08",
+      "ordinal": 99,
+      "font_size": 72,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "current_content_frame": [
+        96,
+        0,
+        888,
+        98.33332824707031
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "observed_clip": [
+        0,
+        -0.000005086263016096382,
+        1080,
+        98.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000005086263020833333,
+        1080,
+        98.33333333333333
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        294.99998474121094
+      ],
+      "expanded_B_extent": [
+        -48,
+        -144.00000508626303,
+        879.6666666666666,
+        386.3333333333333
+      ],
+      "source_clip": [
+        0,
+        0,
+        1080,
+        98.33332824707031
+      ],
+      "phase": [
+        148.177734375,
+        584
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    },
+    {
+      "case": "containment_branding_opacity08",
+      "ordinal": 100,
+      "font_size": 28,
+      "stage": "placed",
+      "status": "resolved",
+      "failure_stage": 0,
+      "same_call_identity_verified": true,
+      "history_available": true,
+      "current_public_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "current_content_frame": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "natural_snapshot_present": true,
+      "natural_snapshot_stable": true,
+      "observed_bounds": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "observed_clip": [
+        0,
+        -0.000020345052078596382,
+        888,
+        40.33333333333333
+      ],
+      "observed_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "strict_occupancy_result": "RESOLVED_AFTER_UNCHANGED_COMPARATOR",
+      "Cq": [
+        0,
+        -0.000020345052083333332,
+        888,
+        40.333333333333336
+      ],
+      "clipped_paint_ctm": [
+        3,
+        0,
+        0,
+        -3,
+        0,
+        120.99993896484375
+      ],
+      "expanded_B_extent": [
+        337.3333333333333,
+        -56.000020345052086,
+        213.33333333333334,
+        152.33333333333334
+      ],
+      "source_clip": [
+        0,
+        0,
+        888,
+        40.33331298828125
+      ],
+      "phase": [
+        96,
+        1182
+      ],
+      "Cq_formula_exact": true,
+      "clipped_paint_CTM_formula_exact": true,
+      "Cq_differs_public_bounds": true,
+      "Cq_differs_expanded_B": true
+    }
+  ],
+  "normal_runtime_route": {
+    "ios_v1_v2": "pieceLayout bitmap profile -> PieceVisualCard.inspectBitmapDrawing -> renderBitmapCanvas",
+    "requires_v4_natural_snapshot_gate": false,
+    "V4_natural_layer_reference_logical1_exact_equivalence_proved_by_bitmap": false,
+    "V4_specific_ability_status": "UNRESOLVED_UNADOPTED",
+    "normal_model_adoption": "UNCONFIRMED_SELECTOR_PRESERVED_OFF_PER_CURRENT_OWNER",
+    "shared_v5_TextKit_paint_budget_regression_still_relevant": true
+  },
+  "next_direct_product_unit": {
+    "route": "saved-input host -> preview -> real native fit -> explicit save -> receipt -> fresh owner history/detail -> same-version ios.v2 PNG export",
+    "reuse": "Existing canonical 344a normal051 / explicit refined007 recorded source_request/messages/raw response; track actual returned recipe, three hashes and saved version.",
+    "fixture_identity_limit": "Public 051/007 preview/detail fixtures are Premium/required_subtle and omit original seven fields, source_ref and raw response. Configured recording three Free saves are separate artifacts.",
+    "forbidden_evidence_substitutions": [
+      "invent source_ref or raw response from public DTO",
+      "splice Premium native6 with separate Free saved3",
+      "count syntheticFit or mockPNG as native success"
+    ],
+    "new_model_or_GPU_round_required": false
+  },
+  "unexecuted": [
+    "other five native methods",
+    "standalone24",
+    "model73",
+    "SQL243",
+    "static6",
+    "transition4",
+    "normal host continuous native save/export",
+    "Photos",
+    "owner device"
+  ],
+  "effects": {
+    "production": false,
+    "SQL": false,
+    "Render": false,
+    "GPU_or_model": false,
+    "signing_or_distribution": false
+  }
+}

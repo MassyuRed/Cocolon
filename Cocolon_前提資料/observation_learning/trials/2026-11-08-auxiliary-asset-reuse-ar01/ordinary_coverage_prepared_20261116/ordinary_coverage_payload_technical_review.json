@@ -1,0 +1,65 @@
+{
+  "a2_expected_original_pid": 127974,
+  "a2_immediate_pre_stop_pid_start_ticks_argv_script_recheck": true,
+  "a2_shared_265_seconds_is_total_cap_not_two_full_210_second_guarantee": true,
+  "b2_independent_meaning_review_required_outside_code": true,
+  "b2_requires_exact_completed_a2_and_restored_pid": true,
+  "database_calls": 0,
+  "embedded_drivers": {
+    "a2": {
+      "compile": true,
+      "driver_sha256": "b7fddb27be301d3f99546dfa90ebc535b42f597b8e646bfc9867495fe3de6d3f",
+      "pure_input_identity_pass": true
+    },
+    "b2": {
+      "compile": true,
+      "driver_sha256": "dfb3295ec0779131009eec723f33cd7d80f0a3b619cf093359e27481c3fc9bcb",
+      "pure_input_identity_pass": true
+    }
+  },
+  "files": [
+    {
+      "bytes": 1450,
+      "name": "semantic_json_parser.ordinary_coverage.py",
+      "sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54"
+    },
+    {
+      "bytes": 31676,
+      "name": "semantic_reader_ordinary_coverage_once.py",
+      "sha256": "83311b9a7e75d6dc582f6a38c8fbf1669d0f791d5425dbc543e518f391ff4b0c"
+    },
+    {
+      "bytes": 31349,
+      "name": "full12_sql_ordinary_coverage_once.py",
+      "sha256": "78f615ed93c48de1c2de7d0742352fafa450b646dce5bb57eee307beffcbecde"
+    },
+    {
+      "bytes": 59146,
+      "name": "full12-sql.pre_acquisition.input.json",
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    }
+  ],
+  "frozen_a1_b1_launcher_hashes_verified": true,
+  "native_variants": {
+    "a2": {
+      "compile": true,
+      "native_sha256": "7ae06f31b4db9f8b705dddf67e098a8338c94765c78fc3d5d02194eb89eee562",
+      "parser_matches_final_api": true,
+      "schema_matches_final_api": true
+    },
+    "b2": {
+      "compile": true,
+      "native_sha256": "8dc87e9c41649e928c7ea40a2a5fe634e0b90e53847b9d6b9c746c26ab62a181",
+      "parser_matches_final_api": true,
+      "schema_matches_final_api": true
+    }
+  },
+  "new_model_calls": 0,
+  "no_main_or_preflight_or_tokenizer_execution": true,
+  "original_restoration_finally_preserved": true,
+  "product_acceptance": false,
+  "remote_calls": 0,
+  "source_core_schema_and_fixed_inputs_unchanged": true,
+  "state": "PASS_OFFLINE_TECHNICAL_REVIEW",
+  "total_bytes": 123621
+}

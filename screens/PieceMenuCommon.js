@@ -35,7 +35,7 @@ export function PieceLargeCard({
       <View style={[styles.largeCardContent, { justifyContent: "center" }]}>
         <View>
           <View style={styles.cardTitleRow}>
-            <Text numberOfLines={1} style={styles.largeCardTitle}>
+            <Text style={styles.largeCardTitle}>
               {title}
             </Text>
             <ScreenUnreadBadge

@@ -1,0 +1,188 @@
+{
+  "schema_version": "analysis_multirecord_wire_results.v1",
+  "status": "COMPLETE_REVIEWED_NOT_ADOPTED",
+  "api_commit": "09b65013658c661cbc33a3857bd2e360e6f4c424",
+  "model": "QWEN3_5_4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "trained_weights_sha256": "3f937251cf35be23efbaccd5504b2f232b95a69d1f77b879b964d34393eda000",
+  "trained_config_sha256": "ede2ce81fc0040bd36d90d19f3364f85ea19931f58c8995b56a0b81d752f823e",
+  "source_pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
+  "old_encoded_sha256": "d439ff2017914fc53acf5b41240c88d9421d64edbe36964758f59d492008919b",
+  "assemblies": {
+    "snapshot_kind": "NEW_COMPLETE_SYNTHETIC",
+    "guard_kind": "ALL_MEMBER_SYNTHETIC",
+    "real_database_snapshot": false,
+    "real_database_guard": false,
+    "old_encoded_teachers": 18,
+    "old_encoded_exact": true,
+    "new_assembly_teachers": 6,
+    "total_updates": 24,
+    "old_encoded_profile": "SELECTED_MATERIAL_V4",
+    "new_assembly_profile": "SELECTED_MATERIAL_V7",
+    "new_assembly_record_counts": [
+      2,
+      2,
+      3,
+      3,
+      4,
+      4
+    ],
+    "new_assembly_after_only": true,
+    "new_assembly_teacher_match_fields": 18
+  },
+  "execution": {
+    "new_generation": 16,
+    "stop_count": 16,
+    "model_loads": 3,
+    "updates": 24,
+    "before_new_generation": 2,
+    "after_new_generation": 14,
+    "cached_before": 6,
+    "nll_forwards": 20,
+    "seconds": 544.0003323350102,
+    "stage_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "retry": false,
+    "source_unchanged": true,
+    "initial_unchanged": true,
+    "old_pack_unchanged": true,
+    "old_encoded_unchanged": true
+  },
+  "raw_review": {
+    "new_raws": 16,
+    "request_field_positions": 51,
+    "returned_field_positions": 40,
+    "missing_field_positions": 11,
+    "source_supported_returned_fields": 39,
+    "invented_actor_fields": 1,
+    "exact_all_field_cases": 14,
+    "raw_units": 54,
+    "literal_valid_units": 54,
+    "qualifiers": 60,
+    "literal_valid_qualifiers": 59,
+    "actor_qualifiers": 43,
+    "invented_actor_qualifiers": 1,
+    "negation_qualifiers": 17,
+    "valid_local_negation_qualifiers": 17,
+    "field_local_parent_links": 10,
+    "independent_accuracy_measurement": false
+  },
+  "matched8": {
+    "matched_pairs": 8,
+    "exact_identity_pairs": 8,
+    "raw_identical_pairs": 6,
+    "all_field_completeness_improved": 0,
+    "field_drop_failures_repaired": 0,
+    "HN01": {
+      "before_fields": 4,
+      "after_fields": 4,
+      "raw_identical": true,
+      "direct_map_identical": true
+    },
+    "HX01": {
+      "before_fields": 4,
+      "after_fields": 4,
+      "correct_target_children_added": 2,
+      "direct_map_identical": true
+    },
+    "cached_success_controls": 4,
+    "cached_success_preserved": 3,
+    "preserved_controls": [
+      "AP07_V7",
+      "AP08_V7",
+      "OP02_V7"
+    ],
+    "regressed_control": "AE05",
+    "regression": "SOURCE_ABSENT_ACTOR_ADDED",
+    "regression_rejection": "analysis_model_units_quote_ambiguous_or_missing",
+    "regression_actor_source_occurrences": 0,
+    "regression_negation_preserved": true,
+    "known_batch_failures": [
+      {
+        "id": "B20_C01",
+        "expected_fields": 7,
+        "returned_fields": 1,
+        "missing_fields": 6,
+        "raw_identical": true,
+        "response_all_five_exact": true,
+        "status": "REJECTED",
+        "rejection": "analysis_quoted_parent_units_packet_invalid"
+      },
+      {
+        "id": "B20_C03",
+        "expected_fields": 6,
+        "returned_fields": 1,
+        "missing_fields": 5,
+        "raw_identical": true,
+        "response_all_five_exact": true,
+        "status": "REJECTED",
+        "rejection": "analysis_quoted_parent_units_packet_invalid"
+      }
+    ],
+    "batch_raw_sha256": "4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9"
+  },
+  "candidate_state_replay": {
+    "preserved": 13,
+    "rejected": 3,
+    "saved_candidate_fields": 37,
+    "semantic_status": "UNVALIDATED_MODEL_CANDIDATE",
+    "non_generating": true,
+    "graph_exact": true,
+    "text_exact": true,
+    "projection_exact": true
+  },
+  "direct_map": {
+    "generated_private": 13,
+    "rejected": 3,
+    "api_saved_maps": 0,
+    "full20_composition": false
+  },
+  "nll": {
+    "fixed_samples": 10,
+    "forwards": 20,
+    "before_sample_mean": 0.00015384457583422773,
+    "after_sample_mean": 0.0002040052379015833,
+    "full_old18_loss_retention_measured": false,
+    "semantic_quality_proxy": false
+  },
+  "trained_weight_audit": {
+    "tensors": 112,
+    "parameters": 3833856,
+    "changed_tensors": 112,
+    "all_finite": true,
+    "cpu_only": true
+  },
+  "recovered_full_zip": {
+    "bytes": 15274238,
+    "sha256": "86ba14a67fccb952ffdd29866bec096defa19f2fed0fa8075138acb26154ed7f",
+    "members": 97,
+    "manifest_members_verified": 96,
+    "crc_verified": true
+  },
+  "private_archive": {
+    "version": 5,
+    "saved": true,
+    "bytes": 31272648,
+    "sha256": "5ad02cb7812c0c4749f225f2fc422e7831a6f67376f385e616233e73b7029ee2"
+  },
+  "subsequent_v8": {
+    "status": "CODE_CHECKPOINT_TESTING",
+    "requests_planned": 2,
+    "result_included": false
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "api_calls": 0,
+  "database_access": 0,
+  "production_writes": 0,
+  "builds": 0,
+  "deployments": 0,
+  "structure_map_delta": "NONE",
+  "product_acceptance": false,
+  "general_quality_rate_claim": false
+}

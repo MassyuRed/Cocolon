@@ -1,0 +1,99 @@
+{
+  "status": "INPUTS15_AND_EXISTING_SAVED_COLD3_VERIFIED",
+  "seconds": 27.004795804037713,
+  "records": [
+    {
+      "kind": "inputs15",
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "/workspace/cocolon_adaptive30_pack_20261027/consume_adaptive30.py",
+        "--run",
+        "/workspace/cocolon_adaptive30_pack_20261027",
+        "--validate-inputs-only"
+      ],
+      "returncode": 0,
+      "stdout": "CPU_ADAPTIVE30_INPUTS_VERIFIED_NO_MODEL_OR_ADOPTION\n",
+      "stderr": ""
+    },
+    {
+      "kind": "existing_saved_not_new_model",
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "/workspace/cocolon_adaptive30_pack_20261027/consume_adaptive30.py",
+        "--worker",
+        "--run",
+        "/workspace/cocolon_adaptive30_pack_20261027",
+        "--saved-input",
+        "/workspace/cocolon_localized30_diagnosis_20261027/TRAIN-SERVICE-CHAIR-01-CORRECTION_saved.json",
+        "--expected-saved-sha256",
+        "d15239406bf5fa6b25f54dd3b6d25f890cc1d42e59fddadc0c673c92143d25f9",
+        "--worker-output",
+        "/workspace/cocolon_adaptive30_pack_20261027/TRAIN-SERVICE-CHAIR-01-CORRECTION_consumer_smoke.json"
+      ],
+      "source_sha256": "d15239406bf5fa6b25f54dd3b6d25f890cc1d42e59fddadc0c673c92143d25f9",
+      "output_sha256": "6ded89ef8a29d0109b8ad7e20fb4e1e416d392810db13df693603d92c6aea509",
+      "status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "kind": "existing_saved_not_new_model",
+      "case_id": "FT-SHOP-INITIAL",
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "/workspace/cocolon_adaptive30_pack_20261027/consume_adaptive30.py",
+        "--worker",
+        "--run",
+        "/workspace/cocolon_adaptive30_pack_20261027",
+        "--saved-input",
+        "/workspace/cocolon_localized30_diagnosis_20261027/FT-SHOP-INITIAL_saved.json",
+        "--expected-saved-sha256",
+        "441d8754608ca48bb9564238c4694654207a2475455712d7d3aa6661c931be63",
+        "--worker-output",
+        "/workspace/cocolon_adaptive30_pack_20261027/FT-SHOP-INITIAL_consumer_smoke.json"
+      ],
+      "source_sha256": "441d8754608ca48bb9564238c4694654207a2475455712d7d3aa6661c931be63",
+      "output_sha256": "e032c84f56ac4b8c33d4fc347c0a070f7754b1c743fe133240d96f5facc12102",
+      "status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "kind": "existing_saved_not_new_model",
+      "case_id": "FT-REPOT-INITIAL",
+      "command": [
+        "/usr/local/bin/python",
+        "-B",
+        "/workspace/cocolon_adaptive30_pack_20261027/consume_adaptive30.py",
+        "--worker",
+        "--run",
+        "/workspace/cocolon_adaptive30_pack_20261027",
+        "--saved-input",
+        "/workspace/cocolon_localized30_diagnosis_20261027/FT-REPOT-INITIAL_saved.json",
+        "--expected-saved-sha256",
+        "f9f584c7571ca2606286f1e8fb0f53fb4095b1148324ad111589db629ed069f2",
+        "--worker-output",
+        "/workspace/cocolon_adaptive30_pack_20261027/FT-REPOT-INITIAL_consumer_smoke.json"
+      ],
+      "source_sha256": "f9f584c7571ca2606286f1e8fb0f53fb4095b1148324ad111589db629ed069f2",
+      "output_sha256": "f53176afc93c954017de19083fa5fd16687db8e7ec42981943e6523485d3c52f",
+      "status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "new_model_quality_credit": 0,
+  "automatic_progression": false
+}

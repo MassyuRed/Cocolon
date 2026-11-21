@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import InputScreen from "../screens/InputScreen";
 import TutorialFlowScreen from "../screens/TutorialFlowScreen";
 import AnalysisHistoryScreen from "../screens/AnalysisHistoryScreen";
-import TodayQuestionHistoryScreen from "../screens/TodayQuestionHistoryScreen";
+import DeepInsightScreen from "../screens/DeepInsightScreen";
 import CocolonGuideScreen from "../screens/CocolonGuideScreen";
 import NoticeHistoryScreen from "../screens/NoticeHistoryScreen";
 import AccountScreen from "../screens/AccountScreen";
@@ -13,10 +13,14 @@ import FollowListScreen from "../screens/FollowListScreen";
 
 const InputStack = createNativeStackNavigator();
 
-export default function InputStackNavigator() {
+export default function InputStackNavigator({ onInitialInputSettled, appStartupReady, saveRecovery }) {
   return (
     <InputStack.Navigator initialRouteName="Input" screenOptions={{ headerShown: false }}>
-      <InputStack.Screen name="Input" component={InputScreen} />
+      <InputStack.Screen name="Input">
+        {(props) => <InputScreen {...props} onInitialInputSettled={onInitialInputSettled}
+          appStartupReady={appStartupReady} saveRecovery={saveRecovery} />}
+      </InputStack.Screen>
+      <InputStack.Screen name="DeepInsight" component={DeepInsightScreen} />
       <InputStack.Screen name="TutorialIntro" component={TutorialFlowScreen} />
       <InputStack.Screen
         name="InputHistory"
@@ -24,28 +28,6 @@ export default function InputStackNavigator() {
       >
         {(navProps) => (
           <AnalysisHistoryScreen
-            {...navProps}
-            onBack={() => {
-              try {
-                if (navProps?.navigation?.canGoBack?.()) {
-                  navProps.navigation.goBack();
-                  return;
-                }
-              } catch {}
-
-              try {
-                navProps?.navigation?.navigate?.("Input");
-              } catch {}
-            }}
-          />
-        )}
-      </InputStack.Screen>
-      <InputStack.Screen
-        name="TodayQuestionHistory"
-        options={{ headerShown: false }}
-      >
-        {(navProps) => (
-          <TodayQuestionHistoryScreen
             {...navProps}
             onBack={() => {
               try {

@@ -128,7 +128,7 @@ export function useAccountSubscription({ user }) {
         return;
       }
 
-      await syncPurchaseToSubscriptionTier(targetPurchase);
+      await syncPurchaseToSubscriptionTier(targetPurchase, { expectedUserId: user.id });
       await refreshSubscriptionState();
 
       Alert.alert("復元が完了しました", "プラン情報を更新しました。");

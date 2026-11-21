@@ -1,0 +1,42 @@
+{
+  "schema": "cocolon.daily_calm_training_candidates.v1",
+  "status": "CPU_VERIFIED_NOT_YET_TOKENIZED",
+  "api_commit": "bd356566d37370911e14dab2819ab25a619c6353",
+  "training_rows": 9,
+  "daily_rows": 3,
+  "chair_rows": 6,
+  "independent_language_families": 2,
+  "evaluation_rows": 0,
+  "files": {
+    "generate_candidates.py": {
+      "sha256": "db83739b58ee6731d06363cb73f21fa5980a3a5b2322d49fbe7a7aae3a15d9c7",
+      "bytes": 8015
+    },
+    "sft_examples.jsonl": {
+      "sha256": "118a9d7e3bd5728d66af95d7a7388504683da957a2c9b24fa1632ac9ef780f8c",
+      "bytes": 295701
+    },
+    "train_messages.jsonl": {
+      "sha256": "07644176add91ed858f1de2ac2a8d73b4ceed02814f9962c70af1b850c366942",
+      "bytes": 159255
+    },
+    "cpu_connection_results.json": {
+      "sha256": "6e6e678bc054d514df3aa34e73b94a94c3e8d6b3dd241b02049b12e78316c260",
+      "bytes": 234074
+    },
+    "source_mapping_candidate.json": {
+      "sha256": "43439c5d1a05fc8c62cd21fb5e39f37a21ca638767145d6298124b5576bd8a68",
+      "bytes": 11310
+    }
+  },
+  "api_source_hashes": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "cf7c4c92f2591a0a624b9fbb6044c5a71926aab1e7ca87efb4560aeb0ec1ba2a",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "d09490412e7542d6046c913d10b5ef612a82a157e1ca2abbfac3bf58893b9b7e",
+    "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "2a2e1a5632777a692d333db0ad0ec2984205417f987b59b7b9069afe19cb871d"
+  },
+  "old_chair_hashes": {
+    "sft_examples.jsonl": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7",
+    "train_messages.jsonl": "fa340592b8b208bca91ce83a3623dcc6b7f96e02b2ccdf9cca0c00e7cf0fcf50",
+    "dataset_manifest.json": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107"
+  }
+}

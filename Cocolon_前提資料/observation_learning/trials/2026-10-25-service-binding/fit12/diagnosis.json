@@ -1,0 +1,134 @@
+{
+  "schema": "cocolon.emlis_service_binding_fit12_evidence_end_diagnosis.v1",
+  "scope": "READ_ONLY_CPU_DIAGNOSIS_TRAINING_FIT_FIXED_PRIOR_NOT_DYNAMIC",
+  "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+  "raw_file_sha256": "a7e6ac9e7b696fcd253c2b6865b708a377ab7d70ca749fcbe4056008b10a7158",
+  "raw_text_sha256": "6d3e532c0e47878fec3496bfbebe31ce23810025f619fb9fd78e7371d66b45d8",
+  "raw_text_checksum_matches_record": true,
+  "teacher_sft_sha256": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7",
+  "consumer_result_sha256": "a759bbd8f48ef9552556421148a336eceee6ea0202c10f47becf4cca11093e44",
+  "finish_reason": "stop",
+  "eos_reached": true,
+  "output_tokens": 2340,
+  "generation_budget": 2560,
+  "json_parse_success": true,
+  "json_difference_count": 5,
+  "json_differences": [
+    {
+      "path": "/evidence/7/end",
+      "expected": 38,
+      "actual": 77
+    },
+    {
+      "path": "/evidence/8/end",
+      "expected": 47,
+      "actual": 76
+    },
+    {
+      "path": "/evidence/9/end",
+      "expected": 91,
+      "actual": 92
+    },
+    {
+      "path": "/evidence/10/end",
+      "expected": 71,
+      "actual": 86
+    },
+    {
+      "path": "/evidence/11/end",
+      "expected": 91,
+      "actual": 92
+    }
+  ],
+  "source_id_copy_error": false,
+  "all_source_ids_fields_starts_quotes_match_teacher": true,
+  "all_candidate_meaning_surface_update_reference_fields_match_teacher": true,
+  "evidence_count": 12,
+  "exact_evidence_count": 7,
+  "invalid_evidence_count": 5,
+  "invalid_evidence": [
+    {
+      "evidence_index": 7,
+      "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+      "field_path": "answer_text_private",
+      "start": 25,
+      "actual_end": 77,
+      "expected_end": 38,
+      "quote": "友人に手順を教えてもらって",
+      "actual_source_slice": "友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにま",
+      "source_field_length": 92,
+      "source_and_field_match_teacher": true,
+      "start_matches_teacher": true,
+      "quote_matches_teacher": true
+    },
+    {
+      "evidence_index": 8,
+      "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+      "field_path": "answer_text_private",
+      "start": 39,
+      "actual_end": 76,
+      "expected_end": 47,
+      "quote": "一緒に直しました",
+      "actual_source_slice": "一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずに",
+      "source_field_length": 92,
+      "source_and_field_match_teacher": true,
+      "start_matches_teacher": true,
+      "quote_matches_teacher": true
+    },
+    {
+      "evidence_index": 9,
+      "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+      "field_path": "answer_text_private",
+      "start": 72,
+      "actual_end": 92,
+      "expected_end": 91,
+      "quote": "捨てずにまた使えるようになったからです",
+      "actual_source_slice": "捨てずにまた使えるようになったからです。",
+      "source_field_length": 92,
+      "source_and_field_match_teacher": true,
+      "start_matches_teacher": true,
+      "quote_matches_teacher": true
+    },
+    {
+      "evidence_index": 10,
+      "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+      "field_path": "answer_text_private",
+      "start": 59,
+      "actual_end": 86,
+      "expected_end": 71,
+      "quote": "一人でできたからではなく",
+      "actual_source_slice": "一人でできたからではなく、捨てずにまた使えるようになっ",
+      "source_field_length": 92,
+      "source_and_field_match_teacher": true,
+      "start_matches_teacher": true,
+      "quote_matches_teacher": true
+    },
+    {
+      "evidence_index": 11,
+      "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+      "field_path": "answer_text_private",
+      "start": 50,
+      "actual_end": 92,
+      "expected_end": 91,
+      "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+      "actual_source_slice": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+      "source_field_length": 92,
+      "source_and_field_match_teacher": true,
+      "start_matches_teacher": true,
+      "quote_matches_teacher": true
+    }
+  ],
+  "receipt_status": "INVALID_EVIDENCE",
+  "meaning_adopted": false,
+  "body_available": false,
+  "confirmed_failure": "Five generated evidence end coordinates disagree with the unchanged original source slices; this is not an ID-copying or JSON-closure failure.",
+  "meaning_limit": "The written candidate matches the teacher except five end numbers; no semantic/body admission occurred because evidence validation failed.",
+  "cause_not_established": "Why the model selected these end numbers, and which training change would reliably prevent it, are not established by this output-only comparison.",
+  "raw_repaired_or_reconsumed": false,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "frozen_pack_modified": false,
+  "source_raw_unchanged": true,
+  "product_accepted": false,
+  "automatic_progression": false
+}

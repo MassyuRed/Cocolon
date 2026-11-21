@@ -1,0 +1,58 @@
+{
+  "SQL_calls": 0,
+  "base_alias_actual_validation_changed_only": true,
+  "finalizer_sha256": "c9e3438c669a2a2ab3377e1d9713ce56807ff2b3a6676d89f0ce83b9ca20652b",
+  "full12_plan_equal_A11": true,
+  "maximum_leaf_message_bytes": 16379,
+  "model_calls": 0,
+  "network_calls": 0,
+  "receipt": {
+    "candidate_plan": {
+      "bytes": 166199,
+      "path": "/workspace/scratch/56cfe0a372d7/candidate_execution/a12/full12_pre_acquisition.plan.json",
+      "sha256": "c4b36f8d3e23be096bd021e72adf070af648129854b1b165664a7f6deca39d83"
+    },
+    "candidate_preparation": {
+      "bytes": 56350,
+      "path": "/workspace/scratch/56cfe0a372d7/candidate_execution/a12/diagnostic_preparation.json",
+      "sha256": "0aa06bf49fa7c7fc2d22cffbc7e259c44b19966f6f163fc3e57024c6a707b49d"
+    },
+    "checkpoint": {
+      "bytes": 4835570,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.pglite.gz",
+      "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485"
+    },
+    "fresh_model_calls_required": 7,
+    "historical_plan": {
+      "bytes": 169408,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.plan.json",
+      "sha256": "75daa8b75e24216293e11aac9eec2025efcda838c18bbae2e9d0e6326b9fedeb"
+    },
+    "historical_receipt": {
+      "bytes": 3019,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.receipt.json",
+      "sha256": "afb8ef178db0330a106619eefeb879f405f5e3ba4f0966817a07e4150f52aba0"
+    },
+    "leaf_count": 6,
+    "prompt_version": "semantic_map.event_plan.v2",
+    "source_hashes": {
+      "ai/services/ai_inference/analysis_cumulative_service.py": "9e6eb77154ace9fb5b20fdd4630d5ab4b44c9d55e91cfd7512a11de67edda49e",
+      "ai/services/ai_inference/analysis_if_model_source.py": "92990dacd92debb68e1a452270ad271523fc8c067025eea42ded633a11ae2fa0",
+      "ai/services/ai_inference/analysis_model_source.py": "d1a87be0b02afec43fc68e08fd0a7ea350d54f6b9ec8fe27c4eea4f8794cbfc7",
+      "ai/services/ai_inference/analysis_semantic_map.py": "c03cdd391b24d2ee19d68a7d93eaf59ffa26b558a83b1cd585900ab2462d7395",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "249d3caed394ca85d7cd84c41bb2b7d4e0b0d53b8c66e9facf79c528712ce1b4",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "8f39bd56a145cbb23065e49b9961ddf76127b85be50b7da2211314859126126e",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "67dd81e26637c912ae9e178f1997dd579c4efca840580023f224b10a41c548c6",
+      "ai/tools/serve_emlis_natural_reply.py": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56"
+    },
+    "source_records": 12,
+    "sql_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "sql_input": {
+      "bytes": 59146,
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_worked_lesson_preacquisition_20261116/pre_acquisition.input.json",
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "state": "EVENT_PLAN_CANDIDATE_BOUND_TO_IMMUTABLE_SQL_SOURCE"
+  },
+  "state": "PASS_IMMUTABLE_SQL_AND_CANDIDATE_SOURCE_BINDING_NO_SQL_EXECUTION"
+}

@@ -3,6 +3,7 @@ import React, {
   useMemo,
   useCallback,
   useRef,
+  useState,
 } from "react";
 import {
   ActivityIndicator,
@@ -21,16 +22,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 // 既存
 import AnalysisHistoryScreen from "./AnalysisHistoryScreen";
-import AnalysisReportHistoryScreen from "./AnalysisReportHistoryScreen";
-import AnalysisReportViewerScreen from "./AnalysisReportViewerScreen";
 import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen";
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
-import TodayQuestionHistoryScreen from "./TodayQuestionHistoryScreen";
 import AnalysisContentFirstScreen from "./AnalysisContentFirstScreen";
-import AnalysisEmotionScreen from "./AnalysisEmotionScreen";
 import AnalysisSelfStructureScreen from "./AnalysisSelfStructureScreen";
-import AnalysisInputHistoryMenuScreen from "./AnalysisInputHistoryMenuScreen";
 
 // 🎨 テーマコンテキスト
 import { useTheme } from "../theme/ThemeContext";
@@ -47,8 +43,7 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay from "../components/TutorialOverlay";
 import {
-  TUTORIAL_ANALYSIS_COUNTS,
-  TUTORIAL_ANALYSIS_REPORTS,
+  TUTORIAL_KOKORO_WEATHER,
   TUTORIAL_SELF_ANALYSIS_GUIDE,
   TUTORIAL_TOTAL_STEPS,
   TUTORIAL_WATASHI_MAP_REPORT,
@@ -59,8 +54,6 @@ import {
   isAnalysisReportType,
   normalizeSelfStructureMode,
   PANEL_MIN_HEIGHT,
-  REPORT_TYPE_LABEL,
-  ROUTE_EMOTION_ANALYSIS,
   ROUTE_HOME,
   ROUTE_INPUT_HISTORY,
   ROUTE_SELF_STRUCTURE,
@@ -69,9 +62,7 @@ import { useAnalysisRouteState } from "./analysis/useAnalysisRouteState";
 import { useAnalysisUnreadBadges } from "./analysis/useAnalysisUnreadBadges";
 import { useAnalysisReportActions } from "./analysis/useAnalysisReportActions";
 import { useAnalysisSelfStructureActions } from "./analysis/useAnalysisSelfStructureActions";
-import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 import { useAnalysisTutorialOverlay } from "./analysis/useAnalysisTutorialOverlay";
-import { consumeAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 
 function useThemedStyles() {
   const { colors, themeName } = useTheme();
@@ -81,10 +72,11 @@ function useThemedStyles() {
   return { styles, colors, themeName, isDark, ui };
 }
 
-export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
+export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
   const { ensurePaid, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
+  const [graphOpenRequest, setGraphOpenRequest] = useState(null);
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
   const { styles, colors, isDark } = useThemedStyles();
@@ -92,20 +84,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   const {
     route,
     setRoute,
-    reportType,
-    setReportType,
-    selectedReport,
-    setSelectedReport,
     selectedSelfReport,
     setSelectedSelfReport,
-    reportHistoryBackRoute,
-    setReportHistoryBackRoute,
-    reportViewBackRoute,
-    setReportViewBackRoute,
-    historyBackRoute,
-    setHistoryBackRoute,
-    todayQuestionHistoryBackRoute,
-    setTodayQuestionHistoryBackRoute,
     selfReportGenerateBackRoute,
     setSelfReportGenerateBackRoute,
     selfReportHistoryBackRoute,
@@ -117,24 +97,16 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
 
   const {
     entryMeta,
-    homeSummariesLoading,
-    fetchLatestReadyReport,
     refreshHomeSummaries,
-    refreshCurrentWeatherSummary,
   } = useAnalysisReportActions();
 
   const {
-    unreadByType,
-    unreadResolved,
     selfStructureUnreadResolved,
     selfStructureLatestUnread,
     selfStructureHistoryUnread,
-    prefetchedUnreadByType,
-    emotionAnalysisUnread,
     selfStructureUnread,
     refreshUnreadBadges,
     markSelfStructureLatestSeen,
-    markReportRead,
   } = useAnalysisUnreadBadges({
     isPaid,
     subscriptionLoading,
@@ -156,10 +128,9 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   });
 
   const resetAnalysisTutorialRoute = useCallback(() => {
-    setSelectedReport(null);
     setSelectedSelfReport(null);
     setRoute(ROUTE_HOME);
-  }, [setRoute, setSelectedReport, setSelectedSelfReport]);
+  }, [setRoute, setSelectedSelfReport]);
 
   const {
     isAnalysisTutorialStep,
@@ -183,25 +154,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     resetSelectedReports: resetAnalysisTutorialRoute,
     onResetToHome: resetAnalysisTutorialRoute,
   });
-
-  useEffect(() => {
-    const shouldOpen = !!(tabRoute?.params?.openTodayQuestionHistory || screenRoute?.params?.openTodayQuestionHistory);
-    if (!shouldOpen) return;
-    setTodayQuestionHistoryBackRoute(ROUTE_INPUT_HISTORY);
-    setRoute("todayQuestionHistory");
-    clearExternalOpenParams({
-      openTodayQuestionHistory: false,
-      openTodayQuestionHistoryAt: null,
-    });
-  }, [
-    clearExternalOpenParams,
-    screenRoute?.params?.openTodayQuestionHistory,
-    screenRoute?.params?.openTodayQuestionHistoryAt,
-    setRoute,
-    setTodayQuestionHistoryBackRoute,
-    tabRoute?.params?.openTodayQuestionHistory,
-    tabRoute?.params?.openTodayQuestionHistoryAt,
-  ]);
 
   // ------------------------------------------------------------
   // Tab reselect → Analysis "home" に戻す
@@ -228,8 +180,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         } catch {
           // noop
         }
-        // 選択状態もクリアしておく（homeへ戻ったときの混入を防ぐ）
-        setSelectedReport(null);
         setSelectedSelfReport(null);
         setRoute("home");
       }
@@ -239,31 +189,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   }, [navigation]);
 
   useEffect(() => {
-    if (!navigation?.addListener) return undefined;
-
-    let disposed = false;
-    const unsubscribe = navigation.addListener("focus", () => {
-      (async () => {
-        const shouldRefresh = await consumeAnalysisHomeSummaryDirty();
-        if (!shouldRefresh || disposed) return;
-        await refreshCurrentWeatherSummary();
-      })();
-    });
-
-    return () => {
-      disposed = true;
-      unsubscribe?.();
-    };
-  }, [navigation, refreshCurrentWeatherSummary]);
-
-  const openReportHistory = (type, backRoute = ROUTE_EMOTION_ANALYSIS) => {
-    setReportHistoryBackRoute(backRoute);
-    setReportType(type);
-    setSelectedReport(null);
-    setRoute("reportHistory");
-  };
-
-  useEffect(() => {
     const shouldOpenReportHistory = !!(
       tabRoute?.params?.openReportHistory || screenRoute?.params?.openReportHistory
     );
@@ -271,11 +196,10 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       tabRoute?.params?.openReportHistoryType || screenRoute?.params?.openReportHistoryType || ""
     ).trim().toLowerCase();
 
+    // Older notifications use report-history params. Open the corresponding live graph.
     if (shouldOpenReportHistory && isAnalysisReportType(nextReportType)) {
-      setSelectedReport(null);
-      setReportHistoryBackRoute(ROUTE_EMOTION_ANALYSIS);
-      setReportType(nextReportType);
-      setRoute("reportHistory");
+      setGraphOpenRequest({ period: { daily: "today", weekly: "week", monthly: "month" }[nextReportType] });
+      setRoute(ROUTE_HOME);
       clearExternalOpenParams({
         openReportHistory: false,
         openReportHistoryType: null,
@@ -316,6 +240,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       tabRoute?.params?.openDistributionHome || screenRoute?.params?.openDistributionHome
     );
     if (shouldOpenDistributionHome) {
+      setGraphOpenRequest({ period: "today" });
       setRoute(ROUTE_HOME);
       clearExternalOpenParams({
         openDistributionHome: false,
@@ -347,44 +272,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     tabRoute?.params?.openSelfReportHistory,
     tabRoute?.params?.openSelfReportHistoryAt,
   ]);
-
-  const openReportView = useCallback(
-    async (report, backRoute = "reportHistory") => {
-      setSelectedReport(report || null);
-      setReportViewBackRoute(backRoute);
-      setRoute("reportView");
-      try {
-        await markReportRead(report);
-      } finally {
-        refreshUnreadBadges();
-      }
-    },
-    [markReportRead, refreshUnreadBadges]
-  );
-
-  const openLatestEmotionReport = useCallback(
-    async (type) => {
-      const normalizedType = String(type || "").trim().toLowerCase();
-      const label = REPORT_TYPE_LABEL[normalizedType] || "レポート";
-
-      try {
-        const cachedReport = entryMeta?.latestReports?.[normalizedType] || null;
-        const usableCachedReport = isKokoroWeatherReportRecord(cachedReport) ? cachedReport : null;
-        const latestReport = usableCachedReport || (await fetchLatestReadyReport(normalizedType));
-
-        if (!latestReport) {
-          Alert.alert("最新レポート", `最新の${label}はまだありません。`);
-          return;
-        }
-
-        await openReportView(latestReport, ROUTE_EMOTION_ANALYSIS);
-      } catch (e) {
-        console.warn("AnalysisScreen: failed to open latest emotion report", normalizedType, e);
-        Alert.alert("取得エラー", `${label}の取得に失敗しました。`);
-      }
-    },
-    [entryMeta?.latestReports, fetchLatestReadyReport, openReportView]
-  );
 
   // ✅ Paywall CTA: SubscriptionSelect へ遷移（ナビが無い場合も落とさない）
   const openSubscriptionSelect = useCallback(() => {
@@ -456,7 +343,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     let cancelled = false;
     (async () => {
       try {
-        await refreshHomeSummaries({ prioritizeVisibleReport: route === ROUTE_HOME });
+        await refreshHomeSummaries();
         if (!cancelled) {
           await refreshUnreadBadges();
         }
@@ -470,7 +357,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     };
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
-  const emotionUpdateLabel = formatLatestUpdateLabel(entryMeta.emotionLatestDate);
   const selfStructureUpdateLabel = formatLatestUpdateLabel(entryMeta.selfStructureLatestDate);
 
   return (
@@ -479,51 +365,14 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      {route === "history" ? (
+      {route === ROUTE_INPUT_HISTORY ? (
         <AnalysisHistoryScreen
+          navigation={navigation}
           onBack={() => {
-            setRoute(historyBackRoute);
+            setRoute(ROUTE_HOME);
             refreshHomeSummaries();
           }}
         />
-      ) : route === "reportHistory" ? (
-        <AnalysisReportHistoryScreen
-          reportType={reportType}
-          onBack={() => {
-            setRoute(reportHistoryBackRoute);
-            refreshUnreadBadges();
-            refreshHomeSummaries();
-          }}
-          onOpenReport={(report) => openReportView(report, "reportHistory")}
-          onGenerateLatest={() => openLatestEmotionReport(reportType)}
-          onOpenSubscription={openSubscriptionSelect}
-        />
-      ) : route === "reportView" ? (
-        <AnalysisReportViewerScreen
-          report={selectedReport}
-          onBack={() => {
-            setRoute(reportViewBackRoute);
-            refreshUnreadBadges();
-            refreshHomeSummaries();
-          }}
-          onOpenPieceDeepDive={onOpenPieceDeepDive}
-          onOpenSubscription={openSubscriptionSelect}
-        />
-      ) : route === ROUTE_EMOTION_ANALYSIS ? (
-        <View style={styles.safeContent}>
-          <AnalysisEmotionScreen
-            onBack={() => setRoute(ROUTE_HOME)}
-            onOpenLatestDaily={() => openLatestEmotionReport("daily")}
-            onOpenLatestWeekly={() => openLatestEmotionReport("weekly")}
-            onOpenLatestMonthly={() => openLatestEmotionReport("monthly")}
-            onOpenDailyHistory={() => openReportHistory("daily", ROUTE_EMOTION_ANALYSIS)}
-            onOpenWeeklyHistory={() => openReportHistory("weekly", ROUTE_EMOTION_ANALYSIS)}
-            onOpenMonthlyHistory={() => openReportHistory("monthly", ROUTE_EMOTION_ANALYSIS)}
-            unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
-            unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
-            unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
-          />
-        </View>
       ) : route === ROUTE_SELF_STRUCTURE ? (
         <View style={styles.safeContent}>
           <AnalysisSelfStructureScreen
@@ -540,20 +389,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
                 ? selfStructureHistoryUnread
                 : false
             }
-          />
-        </View>
-      ) : route === ROUTE_INPUT_HISTORY ? (
-        <View style={styles.safeContent}>
-          <AnalysisInputHistoryMenuScreen
-            onBack={() => setRoute(ROUTE_HOME)}
-            onOpenEmotionHistory={() => {
-              setHistoryBackRoute(ROUTE_INPUT_HISTORY);
-              setRoute("history");
-            }}
-            onOpenTodayQuestionHistory={() => {
-              setTodayQuestionHistoryBackRoute(ROUTE_INPUT_HISTORY);
-              setRoute("todayQuestionHistory");
-            }}
           />
         </View>
       ) : route === "selfReportHistory" ? (
@@ -587,13 +422,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
           }}
           onLatestSeenVersion={markSelfStructureLatestSeen}
         />
-      ) : route === "todayQuestionHistory" ? (
-        <TodayQuestionHistoryScreen
-          onBack={() => {
-            setRoute(todayQuestionHistoryBackRoute);
-            refreshHomeSummaries();
-          }}
-        />
       ) : (
         <View style={styles.safeContent}>
           <AnalysisContentFirstScreen
@@ -601,41 +429,20 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             onTutorialScroll={handleTutorialScroll}
             tutorialRefs={tutorialRefs}
             onOpenGuide={openGuide}
-            emotionUpdateLabel={emotionUpdateLabel}
+            graphOpenRequest={graphOpenRequest}
             selfStructureUpdateLabel={selfStructureUpdateLabel}
-            todayCount={entryMeta.todayCount}
-            weekCount={entryMeta.weekCount}
-            monthCount={entryMeta.monthCount}
-            currentWeather={entryMeta.currentWeather}
-            unreadEmotion={emotionAnalysisUnread}
             unreadSelfStructure={selfStructureUnread}
-            unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
-            unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
-            unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
-            unreadSelfStructureLatest={
-              selfStructureUnreadResolved && !subscriptionLoading
-                ? selfStructureLatestUnread
-                : false
-            }
             unreadSelfStructureHistory={
               selfStructureUnreadResolved && !subscriptionLoading && isPaid
                 ? selfStructureHistoryUnread
                 : false
             }
-            latestReports={entryMeta.latestReports}
-            homeSummariesLoading={homeSummariesLoading}
-            onOpenDailyHistory={() => openReportHistory("daily", ROUTE_HOME)}
-            onOpenWeeklyHistory={() => openReportHistory("weekly", ROUTE_HOME)}
-            onOpenMonthlyHistory={() => openReportHistory("monthly", ROUTE_HOME)}
             onOpenSelfHistory={() => openSelfReportHistory(ROUTE_HOME)}
             onOpenSubscription={openSubscriptionSelect}
-            onRefreshEmotionUnread={refreshUnreadBadges}
             onLatestSeenVersion={markSelfStructureLatestSeen}
-            isPaid={!subscriptionLoading && isPaid}
             isTutorialMode={isAnalysisTutorialStep}
             tutorialStep={tutorialStep}
-            tutorialReports={TUTORIAL_ANALYSIS_REPORTS}
-            tutorialCounts={TUTORIAL_ANALYSIS_COUNTS}
+            tutorialGraphData={TUTORIAL_KOKORO_WEATHER}
             tutorialSelfAnalysisGuide={TUTORIAL_SELF_ANALYSIS_GUIDE}
             tutorialWatashiMapReport={TUTORIAL_WATASHI_MAP_REPORT}
           />
@@ -672,7 +479,6 @@ function AnalysisHome({
   tutorialScrollRef,
   onTutorialScroll,
   tutorialRefs,
-  onOpenGuide,
   onOpenHistory,
   onOpenDaily,
   onOpenWeekly,
@@ -680,7 +486,6 @@ function AnalysisHome({
   onOpenSelfReportLatest,
   onOpenSelfReportHistory,
   onOpenPieceSurface,
-  onOpenTodayQuestionHistory,
   unreadDaily,
   unreadWeekly,
   unreadMonthly,
@@ -706,17 +511,6 @@ function AnalysisHome({
         <View style={styles.panelHeader}>
           <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.panelTitleRow}>
             <Text style={styles.panelTitle}>分析</Text>
-            <CocolonPressable
-              style={styles.guideButton}
-              onPress={onOpenGuide}
-              accessibilityLabel="Analysisのガイドを開く"
-            >
-              <Ionicons
-                name="help-circle-outline"
-                size={20}
-                color={colors.TEXT_ON_LIGHT}
-              />
-            </CocolonPressable>
           </View>
         </View>
 
@@ -751,14 +545,14 @@ function AnalysisHome({
                 </View>
                 <View style={styles.dashboardSummaryRow}>
                   <Text style={styles.dashboardSummaryLabel}>主要感情</Text>
-                  <Text style={styles.dashboardSummaryValue} numberOfLines={2}>
+                  <Text style={styles.dashboardSummaryValue}>
                     {Array.isArray(weeklySummary.top) && weeklySummary.top.length > 0
                       ? weeklySummary.top.map(([name]) => name).join(" / ")
                       : "—"}
                   </Text>
                 </View>
                 <Text style={styles.dashboardSummaryHint}>
-                  詳しい流れはこころ天気（週）で確認できます。
+                  詳しい流れはこころグラフ（週）で確認できます。
                 </Text>
               </>
             ) : (
@@ -778,7 +572,7 @@ function AnalysisHome({
                     color={colors.TEXT_ON_LIGHT}
                     style={{ marginRight: 6 }}
                   />
-                  <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころ天気（週）を見る</Text>
+                  <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころグラフ（週）を見る</Text>
                 </View>
               </CocolonButton>
               <UnreadBadge
@@ -793,7 +587,7 @@ function AnalysisHome({
         <View style={styles.section}>
           <View ref={tutorialRefs?.dailyRef} collapsable={false} style={styles.dashboardButtonsCard}>
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>最新のこころ天気（日）</Text>
+              <Text style={styles.dashboardCardTitle}>最新のこころグラフ（日）</Text>
               <UnreadBadge
                 visible={unreadDaily}
                 style={styles.dashboardUnreadBadge}
@@ -808,7 +602,7 @@ function AnalysisHome({
                   color={colors.TEXT_ON_LIGHT}
                   style={{ marginRight: 6 }}
                 />
-                <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころ天気（日）を開く</Text>
+                <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころグラフ（日）を開く</Text>
               </View>
             </CocolonButton>
           </View>
@@ -819,10 +613,10 @@ function AnalysisHome({
             <CocolonPressable
               style={styles.dashboardInfoCard}
               onPress={onOpenMonthly}
-              accessibilityLabel="こころ天気（月）を開く"
+              accessibilityLabel="こころグラフ（月）を開く"
             >
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>こころ天気（月）</Text>
+              <Text style={styles.dashboardCardTitle}>こころグラフ（月）</Text>
               <View style={styles.dashboardCardRight}>
                 <UnreadBadge
                   visible={unreadMonthly}
@@ -912,18 +706,6 @@ function AnalysisHome({
             />
           </CocolonPressable>
 
-          <CocolonPressable
-            style={[styles.historyInlineLink, { marginTop: 8 }]}
-            onPress={onOpenTodayQuestionHistory}
-            accessibilityLabel="今日の問い履歴を見る"
-          >
-            <Text style={styles.historyInlineText}>今日の問い履歴を見る</Text>
-            <Ionicons
-              name="chevron-forward"
-              size={16}
-              color={colors.TEXT_SUBTLE}
-            />
-          </CocolonPressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -954,11 +736,11 @@ function QuickLink({
           />
         </View>
         <View style={styles.linkTextWrap}>
-          <Text numberOfLines={1} style={styles.linkLabel}>
+          <Text style={styles.linkLabel}>
             {label}
           </Text>
           {subtitle ? (
-            <Text numberOfLines={1} style={styles.linkSubtitle}>
+            <Text style={styles.linkSubtitle}>
               {subtitle}
             </Text>
           ) : null}
@@ -984,7 +766,10 @@ function createStyles(COLORS, ui) {
 
   return StyleSheet.create(applyTypographyTokens({
     // ルート
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     safeContent: { flex: 1 },
 
     // Analysis Home 用
@@ -992,7 +777,10 @@ function createStyles(COLORS, ui) {
       paddingTop: 16,
       paddingBottom: 32,
       alignItems: "stretch",
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
 
     // Emlis ロゴ
@@ -1005,65 +793,63 @@ function createStyles(COLORS, ui) {
       fontSize: 24,
       color: COLORS.BRAND_GOLD,
       letterSpacing: 1.2,
+      lineHeight: 32,
     },
     appSubtitleText: {
       fontFamily: "CormorantGaramond-Regular",
       marginTop: 4,
-      fontSize: 11,
+      fontSize: 14,
       color: COLORS.BRAND_GOLD,
       letterSpacing: 0.8,
+      lineHeight: 22,
     },
 
     // メインパネル
     panel: {
-      width: "94%",
-      backgroundColor: COLORS.PANEL_BG,
-      borderRadius: 26,
-      borderWidth: 2,
-      borderColor: COLORS.BORDER_GOLD,
-      paddingHorizontal: 18,
+      width: "100%",
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 20,
       paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.24,
-      shadowRadius: 26,
-      shadowOffset: { width: 0, height: 16 },
-      elevation: 12,
-      height: PANEL_MIN_HEIGHT,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      maxWidth: 640,
+      alignSelf: "center",
     },
     panelHeader: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       marginBottom: 20,
+      minWidth: 0,
+      flexWrap: "wrap",
+      gap: 12,
     },
     panelTitle: {
-      fontSize: font.title ?? 20,
-      fontWeight: "800",
       color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      letterSpacing: 0,
+      minWidth: 0,
+      flexShrink: 1,
     },
 
     panelTitleRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      flexShrink: 1,
     },
-    guideButton: {
-      width: 36,
-      height: 32,
-      borderRadius: 12,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginLeft: 10,
-    },
-
     section: {
       marginBottom: 18,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
     sectionLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
     },
@@ -1073,22 +859,26 @@ function createStyles(COLORS, ui) {
       flexGrow: 1,
       justifyContent: "space-between",
     },
-    linkItem: { marginBottom: 10 },
+    linkItem: {
+      marginBottom: 10,
+      minHeight: 44,
+    },
     linkInner: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 14,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      minHeight: 52,
     },
     linkIconWrap: {
       width: 32,
@@ -1101,82 +891,105 @@ function createStyles(COLORS, ui) {
     },
     linkTextWrap: {
       flex: 1,
+      minWidth: 0,
     },
     linkLabel: {
-      fontSize: font.body ?? 13,
-      fontWeight: "600",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     linkSubtitle: {
       marginTop: 2,
-      fontSize: font.description ?? 9,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+      minWidth: 0,
+      flexShrink: 1,
     },
 
     dashboardSummaryCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
     },
     dashboardSummaryHeader: {
       flexDirection: "row",
       alignItems: "center",
       marginBottom: 8,
+      minWidth: 0,
     },
     dashboardSummaryTitle: {
       flex: 1,
-      fontSize: font.body ?? 14,
-      fontWeight: "800",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     dashboardSummaryLoadingRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      flexWrap: "wrap",
+      gap: 8,
     },
     dashboardSummaryRow: {
       flexDirection: "row",
       alignItems: "flex-start",
       justifyContent: "space-between",
       paddingVertical: 2,
+      minWidth: 0,
+      flexWrap: "wrap",
+      rowGap: 8,
     },
     dashboardSummaryLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
       paddingRight: 12,
+      minWidth: 0,
+      maxWidth: "100%",
+      flexShrink: 1,
     },
     dashboardSummaryValue: {
       flex: 1,
-      fontSize: font.body ?? 14,
-      fontWeight: "700",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       textAlign: "right",
+      minWidth: 0,
+      maxWidth: "100%",
+      flexShrink: 1,
     },
     dashboardSummaryHint: {
       marginTop: 8,
-      fontSize: font.description ?? 9,
-      lineHeight: 15,
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
 
     // Dashboard buttons card (Piece-like)
     dashboardButtonsCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
     },
     dashboardInfoCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      minHeight: 52,
     },
     dashboardButtonWrap: {
       position: "relative",
@@ -1189,34 +1002,40 @@ function createStyles(COLORS, ui) {
     dashboardCardTitleRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
     },
     dashboardCardRight: {
       flexDirection: "row",
       alignItems: "center",
       marginLeft: 8,
+      flexShrink: 0,
     },
     dashboardCardChevron: {
       marginLeft: 6,
     },
     dashboardCardTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
     },
     dashboardUnreadBadge: {
       marginLeft: 8,
+      flexShrink: 0,
     },
     monthlySummaryRow: {
       marginTop: 8,
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      flexWrap: "wrap",
+      gap: 8,
     },
     monthlySummaryText: {
       marginTop: 8,
-      fontSize: font.body ?? 13,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      opacity: 0.9,
+      minWidth: 0,
+      flexShrink: 1,
     },
     dashboardDivider: {
       height: 1,
@@ -1227,18 +1046,21 @@ function createStyles(COLORS, ui) {
     historyInlineLink: {
       flexDirection: "row",
       alignItems: "center",
-      alignSelf: "flex-start",
+      alignSelf: "stretch",
       paddingVertical: 4,
       marginBottom: 8,
+      minHeight: 44,
+      maxWidth: "100%",
     },
     historyInlineText: {
-      fontSize: font.body ?? 13,
-      fontWeight: "700",
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
       marginRight: 4,
+      minWidth: 0,
+      flexShrink: 1,
     },
     historyInlineUnreadBadge: {
       marginRight: 6,
+      flexShrink: 0,
     },
 
     // Shared button row (Piece style)
@@ -1246,12 +1068,15 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      width: "100%",
+      minWidth: 0,
     },
     goldButtonText: {
-      fontSize: 13,
-      fontWeight: "900",
-      color: "#FFFFFF",
-      letterSpacing: 0.6,
+      color: COLORS.ACCENT_TEXT,
+      letterSpacing: 0.2,
+      minWidth: 0,
+      flexShrink: 1,
+      textAlign: "center",
     },
 
 
@@ -1266,54 +1091,93 @@ function createStyles(COLORS, ui) {
     reportContainer: {
       flex: 1,
       backgroundColor: COLORS.BG_SILVER,
-      paddingHorizontal: 12,
+      paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
     headerRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingVertical: 10,
+      paddingVertical: 12,
+      minHeight: 64,
+      gap: 8,
     },
     backBtn: {
       flexDirection: "row",
       alignItems: "center",
       paddingVertical: 4,
       paddingRight: 10,
+      minWidth: 44,
+      minHeight: 44,
+      justifyContent: "center",
     },
     backText: {
       marginLeft: 2,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontSize: 13,
-      fontWeight: "600",
     },
-    reportTitle: { fontSize: 16, fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-    error: { padding: 12, color: "#B91C1C" },
+    reportTitle: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flex: 1,
+      flexShrink: 1,
+    },
+    error: {
+      padding: 16,
+      color: COLORS.ERROR,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      borderRadius: 16,
+      backgroundColor: COLORS.ERROR_BG,
+    },
 
     summaryCard: {
       marginTop: 6,
       marginBottom: 10,
-      padding: 12,
+      padding: 20,
       borderWidth: 1,
-      borderColor: "#E5E7EB",
-      borderRadius: 12,
-      backgroundColor: "#F9FAFB",
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
     summaryTitle: {
-      fontWeight: "700",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
-    summaryItem: { color: text.description ?? COLORS.TEXT_SUBTLE, marginBottom: 2 },
+    summaryItem: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginBottom: 2,
+    },
 
     row: {
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 20,
+      paddingVertical: 16,
       borderBottomWidth: 1,
-      borderColor: "#EEE",
+      borderColor: COLORS.CARD_BORDER,
+      minHeight: 44,
     },
-    dateText: { fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 4 },
-    emotionsText: { color: text.description ?? COLORS.TEXT_SUBTLE },
-    memoText: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4, fontStyle: "italic" },
-  }, ui));
+    dateText: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 4,
+    },
+    emotionsText: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+    memoText: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginTop: 4,
+    },
+  }, ui, {"panelTitle":"screenTitle","sectionLabel":"sectionTitle","linkLabel":"button","linkSubtitle":"description","dashboardSummaryTitle":"sectionTitle","dashboardSummaryLabel":"description","dashboardSummaryValue":"body","dashboardSummaryHint":"description","dashboardCardTitle":"sectionTitle","monthlySummaryText":"body","historyInlineText":"button","goldButtonText":"button","backText":"button","reportTitle":"screenTitle","error":"body","summaryTitle":"sectionTitle","summaryItem":"body","dateText":"sectionTitle","emotionsText":"description","memoText":"body"}));
 }
 

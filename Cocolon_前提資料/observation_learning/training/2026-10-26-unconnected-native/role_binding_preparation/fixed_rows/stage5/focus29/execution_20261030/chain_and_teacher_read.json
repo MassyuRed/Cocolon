@@ -1,0 +1,112 @@
+[
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "stage": 1,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": true,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 506,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "stage": 2,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": true,
+    "output_tokens": 900,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "stage": 3,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": true,
+    "output_tokens": 284,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "stage": 4,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": true,
+    "output_tokens": 268,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "stage": 5,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 203,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "stage": 1,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": true,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 499,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "stage": 2,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 1091,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "stage": 3,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 239,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "stage": 4,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 302,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "stage": 5,
+    "actual_previous_chain_exact": true,
+    "messages_equal_teacher": false,
+    "json_error": null,
+    "json_values_equal_teacher": false,
+    "output_tokens": 221,
+    "eos_reached": true,
+    "finish_reason": "stop"
+  }
+]

@@ -1,0 +1,94 @@
+{
+  "scope": "SYNTHETIC_TEACHERS_NOT_REAL_MODEL",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "cases": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "format": "legacy_numeric",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 0
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "format": "legacy_numeric",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 3
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "format": "legacy_numeric",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 0
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "format": "legacy_numeric",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 3
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "format": "legacy_numeric",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 0
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "format": "legacy_numeric",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 3
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 0
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 0
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "format": "cocolon.cmee.quote_candidate.v1",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_preserved": true,
+      "native_packet_equal": true,
+      "updates": 0
+    }
+  ],
+  "meaning_count": 9,
+  "body_count": 9,
+  "model_calls": 0,
+  "training_updates": 0,
+  "old_chair_example_rows_unchanged": true,
+  "old_chair_message_rows_unchanged": true,
+  "prompt_clarification": "New quote prompt removes contradictory legacy relations instruction about numeric coordinates; canonical JSON serialization matches actual builder. Source/candidate meanings unchanged."
+}

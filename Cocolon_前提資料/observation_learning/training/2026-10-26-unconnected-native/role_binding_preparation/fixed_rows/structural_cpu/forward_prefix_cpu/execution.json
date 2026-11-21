@@ -1,0 +1,23 @@
+{
+  "scope": "source and saved-output CPU analysis only",
+  "pretrained_model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "free_generations": 0,
+  "new_cmee_calls": 0,
+  "cpu_success_seconds": 7.903162448084913,
+  "cpu_setup_failures": [
+    {
+      "type": "local_materialized_source_extra_final_LF_pin_mismatch",
+      "stage": "before tokenizer/model import",
+      "output_written": false
+    },
+    {
+      "type": "BatchEncoding_plus_list_return_type_error",
+      "stage": "after tokenizer; before result write",
+      "output_written": false
+    }
+  ],
+  "download_note": "single JSON download event timed out; use this lossless ZIP for recovery",
+  "gpu_read_only": "NVIDIA RTX A5000, 1 MiB, 0 %"
+}

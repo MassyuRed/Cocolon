@@ -1,0 +1,164 @@
+{
+  "schema_version": "analysis_wish_boundary_v9_public_result.v1",
+  "status": "LOCAL_RESEARCH_IMPROVEMENT_NOT_NORMALLY_ADOPTED",
+  "api_commit": "17c7078f2fb867f69e966b8c0b9c384fa2e47a1d",
+  "runner_commit": "dc085ef9ef7764b5b3a0749d345a4266352e5c6a",
+  "runner_sha256": "c3a955be796eb0fc2d45822d089822f5acc007e87a531e514a5eb57ecdba6028",
+  "profile": "selected_material.v9",
+  "fixed_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "fixed_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "limits": {
+    "seconds": 240,
+    "per_generation_seconds": 23,
+    "model_loads": 1,
+    "new_generation": 10,
+    "training_updates": 0
+  },
+  "actual": {
+    "parent_seconds": 70.82114694919437,
+    "child_seconds": 65.92518838401884,
+    "generation_seconds": 51.181330990977585,
+    "new_generation": 10,
+    "stop": 10,
+    "model_loads": 1,
+    "updates": 0,
+    "returned_fields": 11,
+    "api_calls": 0,
+    "database_calls": 0,
+    "exit": 0
+  },
+  "baseline_source": "Exact preserved v7 before responses, re-consumed on the same current API; no baseline re-generation.",
+  "results": [
+    {
+      "id": "E01",
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": true,
+      "raw_sha256": "29bb9b38261c139ef48dc3951bfdf1d5b6fe610bf111d106d6b941c0854f2ebf",
+      "seconds": 4.845477046445012
+    },
+    {
+      "id": "E02",
+      "before": "UNSUPPORTED",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": false,
+      "raw_sha256": "89b4b3ccb8aa6ead0f8748ca1563ed674c1af0109689c81e49a857eb2e315bad",
+      "seconds": 3.849079241976142
+    },
+    {
+      "id": "E03",
+      "before": "UNSUPPORTED",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": false,
+      "raw_sha256": "eacbb0d93eea95d6ef226601373546dc415b0386cb3561b015e3266cfd72583b",
+      "seconds": 3.7253303416073322
+    },
+    {
+      "id": "E04",
+      "before": "UNSUPPORTED",
+      "after": "UNSUPPORTED",
+      "raw_same_as_baseline": false,
+      "raw_sha256": "22ff7c94f2ae1f47d55219f6caa5ad6e6c57b31e29af60ed827cb9aa5dc9352e",
+      "seconds": 4.16883303783834
+    },
+    {
+      "id": "E05",
+      "before": "UNSUPPORTED",
+      "after": "UNSUPPORTED",
+      "raw_same_as_baseline": false,
+      "raw_sha256": "96557286873a1ed90884f5a78856fe97dba269aee565efccec4dc23eb3340a11",
+      "seconds": 5.941181177273393
+    },
+    {
+      "id": "E06",
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": true,
+      "raw_sha256": "758eb55f017443b4e8af081db5d7a08e1016370fc0d7d0f7fa02d2fde5494724",
+      "seconds": 7.819733970798552
+    },
+    {
+      "id": "AE05",
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": true,
+      "raw_sha256": "7e2b68e11add9df655e2cf43f53e49c97df77c34b911ecba4d6d2456995eefc6",
+      "seconds": 3.3620955171063542
+    },
+    {
+      "id": "AP07_v7",
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": true,
+      "raw_sha256": "0e8af7675af743b2b5494c76aea419e49933021f4bd227477d62090fccf9a35b",
+      "seconds": 5.666627190075815
+    },
+    {
+      "id": "AP08_v7",
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": true,
+      "raw_sha256": "2b47e3e84d4134789642d03557ee093eae8012568f3e4b20ca066734824668d9",
+      "seconds": 6.659974393434823
+    },
+    {
+      "id": "OP02_v7",
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same_as_baseline": true,
+      "raw_sha256": "685245d5ea1d55f45b5d5d05b56b02447274c5f1a5234f0541f89fd21250fd74",
+      "seconds": 5.142999074421823
+    }
+  ],
+  "improved_ids": [
+    "E02",
+    "E03"
+  ],
+  "remaining_negative_ids": [
+    "E04",
+    "E05"
+  ],
+  "unchanged_success_ids": [
+    "E01",
+    "E06",
+    "AE05",
+    "AP07_v7",
+    "AP08_v7",
+    "OP02_v7"
+  ],
+  "checks": {
+    "local": "630 PASS / PostgreSQL-WASM-dependent 19 SKIP / existing warning1;131.27s",
+    "jupyter": "actor-profile 29 PASS / warning1;5.22s",
+    "ci_run": 42182501217,
+    "ci_job": 127775124816,
+    "ci_status": "all steps success",
+    "ci_generation_saved": "2434 PASS / existing SQL1 SKIP /12048 subtests;393.16s",
+    "ci_owner": "1 PASS /194 deselected;25.32s",
+    "ci_cumulative": "302 PASS / warning1 /2subtests;153.77s",
+    "ci_sql": "201 source records /15 month references",
+    "candidate_replay": "all10 exact saved candidates with compiler/author forbidden;0 model calls",
+    "typed_map_rebuild": "8 supported maps reproduced;direct offline rebuild, not DB/current/monthly reader",
+    "old_success": "all6 raw/graph/text/projection exact except each new artifact projection_of"
+  },
+  "preservation": {
+    "original_manifest_members": 28,
+    "original_manifest_itself": 1,
+    "source_files": 5,
+    "bundle_members": 39,
+    "zip_bytes": 361372,
+    "zip_sha256": "3f923a105d87bb65208436788db29a961acce835a9ab073fa7711c02033a5c57",
+    "private_reference": "https://chatgpt.com/library?file_id=libfile_fde3_f-6d9d811d887c8191b67bc0ada201cde4_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "notes": "Original ZIP download failed; all text members recovered losslessly. generate.log lone CR preserved and matched original manifest. Original remote ZIP binary equality not claimed."
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "production_deployed": false,
+  "limitations": [
+    "Known synthetic minimal contrasts, not held-out general meaning accuracy.",
+    "E04/E05 negative root kinds improve, but NEGATION still quotes only suffix; unsupported maps remain.",
+    "E05 first action drops EXPLICIT_ACTOR annotation; actual subject text remains in its original quote.",
+    "N1/N2 content-target scope and N3 were not regenerated or evaluated here.",
+    "No full-source batch, actual DB/Auth/phone or general role/choice/inter-record acceptance."
+  ],
+  "next": "Prepare independent current/past negative-wish instruction examples on CPU, keeping complete predicate and explicit actor; do not reuse evaluation text as teachers or rerun this trial."
+}

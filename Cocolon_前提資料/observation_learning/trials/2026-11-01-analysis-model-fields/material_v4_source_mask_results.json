@@ -1,0 +1,72 @@
+{
+  "status": "REVIEWED_NOT_ADOPTED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "corrected_source_commit": "93fd8c1261f496c7d4ff7e7d4b8edacf67bd7fd5",
+  "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "normal_adoption": false,
+  "training_updates": 0,
+  "new_weights_written": false,
+  "first_attempt": {
+    "status": "PARTIAL_FAILED",
+    "requests_started": 4,
+    "length_responses": 3,
+    "interrupted": 1,
+    "seconds": 232.1116635883227
+  },
+  "corrected": {
+    "status": "COMPLETED",
+    "stop_responses": 22,
+    "seconds": 204.86776454094797,
+    "root": "/workspace/analysis-material-v4-source-mask-eos2-20261103",
+    "runner_sha256": "7c3c3554f69f026b03af80390001e0d4483dcd770c4d87fea017787d6ebaad68",
+    "grammar_sha256": "f9e20f0e8bb50d1602205c937c4d3e2a9a6f743ac2aa062f165f9801168b38d7"
+  },
+  "same22": {
+    "candidate_before": 20,
+    "candidate_guided": 21,
+    "typed_before": 14,
+    "typed_guided": 14,
+    "new_typed_successes": 0,
+    "lost_typed_successes": 0,
+    "common_graph_and_visible_unchanged": 14,
+    "json_values_unchanged": 21
+  },
+  "saved_replays": {
+    "candidate": 41,
+    "typed": 28,
+    "all_matched": true
+  },
+  "totals": {
+    "requests_started": 26,
+    "model_loads": 2,
+    "processing_seconds": 436.9794281292707,
+    "processing_prorata_usd_at_0_29_per_hour": 0.03520112059930236,
+    "excludes": "CPU preparation, collection, idle rental retention, storage/network/taxes; actual total bill unmeasured"
+  },
+  "result_file": {
+    "url": "https://chatgpt.com/library?file_id=libfile_ea27b60e3ee48191b0ed89a5065e6a0d&account_id=personal",
+    "library_file_id": "libfile_ea27b60e3ee48191b0ed89a5065e6a0d",
+    "bytes": 785921,
+    "sha256": "01ee9ff6e39030c3d405181e1c03191af21d58083f5d94ce27826575442de2f1"
+  },
+  "originals": {
+    "bytes": 782845,
+    "sha256": "9af577a5395934b42530a5c44b623d7ead9e090580c64e5124b4a9c7bfc1d5db",
+    "outer_members": 9,
+    "failed_manifest_members": 135,
+    "corrected_manifest_members": 240
+  },
+  "gpu_final": "2 MiB / 0%; compute apps empty; rental retained",
+  "judgment": "Source-exact decoding does not fix CONTENT_TARGET semantic range; no visible improvement. Keep default/strict/typed unchanged. Failed initial EOS integration is preserved and not counted as model quality success.",
+  "next": "Inspect existing nominal-target/finite-clause teacher-to-generation boundary using original sources and existing learning owner. No repeat of completed trials or new GPU conditions selected.",
+  "remaining": [
+    "general user-grounded meaning quality",
+    "supplementary typed",
+    "record relations/comparison",
+    "normal cumulative 4B integration",
+    "IF/Saved"
+  ],
+  "product_structure_map_delta": "NONE"
+}

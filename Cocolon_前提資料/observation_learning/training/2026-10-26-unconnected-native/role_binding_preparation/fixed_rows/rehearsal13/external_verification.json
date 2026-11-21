@@ -1,0 +1,23 @@
+{
+  "status": "EXTERNAL_CRC_BYTES_SHA_SOURCE_VERIFIED",
+  "archive_bytes": 235752,
+  "archive_sha256": "178917a6f0d8013de961e8944e6d4c507afb428ed0f7b16a6608fde1c9abd9b5",
+  "member_count": 12,
+  "payload_count": 11,
+  "all_payloads_retained": true,
+  "source_matches": true,
+  "crc": true,
+  "all_sizes_hashes": true,
+  "cpu_exit": 0,
+  "cpu_seconds": 29.907477136002854,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "runner_ast": "PASSED",
+  "proposed_runner_denial": "ValueError separate_rehearsal13_approval_required before any model import/load",
+  "read_only_review": "call adapter_sha256 missing found and corrected before execution; final runner and plan checked; not formal Pro/Ultra/human acceptance",
+  "additional_downloads": 0,
+  "product_credit": 0,
+  "automatic_progression": false
+}

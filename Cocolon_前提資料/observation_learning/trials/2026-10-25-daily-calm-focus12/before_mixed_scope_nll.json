@@ -1,0 +1,56 @@
+[
+  {
+    "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+    "selected_loss_tokens": 1374,
+    "nll": 0.00167250563390553
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+    "selected_loss_tokens": 2330,
+    "nll": 0.0014143179869279265
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+    "selected_loss_tokens": 1374,
+    "nll": 0.0017435670597478747
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+    "selected_loss_tokens": 2333,
+    "nll": 0.0013204074930399656
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+    "selected_loss_tokens": 1364,
+    "nll": 0.0017022611573338509
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+    "selected_loss_tokens": 2339,
+    "nll": 0.0012147531379014254
+  },
+  {
+    "id": "TRAIN-DAILY-CALM-01-INITIAL",
+    "loss_scope": "DAILY_SELECTED_VALUES",
+    "selected_loss_tokens": 910,
+    "nll": 0.06806472688913345
+  },
+  {
+    "id": "TRAIN-DAILY-CALM-02-INITIAL",
+    "loss_scope": "DAILY_SELECTED_VALUES",
+    "selected_loss_tokens": 894,
+    "nll": 0.06901591271162033
+  },
+  {
+    "id": "TRAIN-DAILY-CALM-03-INITIAL",
+    "loss_scope": "DAILY_SELECTED_VALUES",
+    "selected_loss_tokens": 918,
+    "nll": 0.0682826042175293
+  }
+]

@@ -1,0 +1,99 @@
+{
+  "payloads": [
+    {
+      "path": "run/run.json",
+      "bytes": 6077,
+      "sha256": "98d70b7bc7bf49de0d18c177aa469c797571bc90591889cc61f241e116fd54dd"
+    },
+    {
+      "path": "run/loaded_tensors.json",
+      "bytes": 26030,
+      "sha256": "8022d25204cf994b831c41e2154033adccfbc6b409c021cde9854961ad9b2459"
+    },
+    {
+      "path": "run/before_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 34459,
+      "sha256": "3a3297af05b9f5986d54fca5a8068aa77c09b00cdbb8cc6bf9aa6636531a34c5"
+    },
+    {
+      "path": "run/before_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 41442,
+      "sha256": "bb976fdea2ec3fd1c204d76d08b1bed329b78eda15c2a6a398c576528e4d90e0"
+    },
+    {
+      "path": "run/.ipynb_checkpoints/run-checkpoint.json",
+      "bytes": 4583,
+      "sha256": "fa6ffac50567f442035052b42dd4580a297d267678a3fda8a900e17877cc45da"
+    },
+    {
+      "path": "run/cmee/diagnosis.json",
+      "bytes": 32596,
+      "sha256": "d436f82a19fb47041ad38d7cbf40bfcf650b303891f44836f2800ebc7a157523"
+    },
+    {
+      "path": "pack/syntax2b.py",
+      "bytes": 25681,
+      "sha256": "28e78eb120f07aef0806ddb1159e8257fb83e4972515eed63ec48b33cf205dc5"
+    },
+    {
+      "path": "pack/run_syntax2b.py",
+      "bytes": 10481,
+      "sha256": "8dd2286850cb978d8fe2c5df59a39d1d1420db61391fafe054d56ccc6e31fb9d"
+    },
+    {
+      "path": "pack/plan2b.json",
+      "bytes": 3749,
+      "sha256": "fbe65ea0e7895e3b04e5f3a810b83772b3f173bb88b58ead22edfc5e176f7630"
+    },
+    {
+      "path": "cpu/cpu.json",
+      "bytes": 6610,
+      "sha256": "3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563"
+    },
+    {
+      "path": "cpu_originals.zip",
+      "bytes": 18725,
+      "sha256": "a9c66b88cc8bea7471df4c152a2333c6e968a7ec0b87f3a0135a9e555ee5660a"
+    },
+    {
+      "path": "external/syntax2b-gpu.log",
+      "bytes": 2933,
+      "sha256": "22b16107832f29be12743695bba4634a71ef8ed68c3eead1cba77e7cf40bc377"
+    },
+    {
+      "path": "external/syntax2b-gpu.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "external/syntax2b-gpu-launch.json",
+      "bytes": 532,
+      "sha256": "7668914fbe5e74a9835467151b6a6f8d86409485309ac4035a242632814456e5"
+    },
+    {
+      "path": "external/syntax2b-gpu-elapsed.json",
+      "bytes": 85,
+      "sha256": "7922f3dde763844f1a0600f998e939610c8c9e95770a9a45fdaa1d613bfa026d"
+    },
+    {
+      "path": "external/syntax2b-cmee.log",
+      "bytes": 237,
+      "sha256": "04fc5dcb1715d895c8c01a60abd245cff18b316272dbf600cdd145305c0d119c"
+    },
+    {
+      "path": "external/syntax2b-cmee.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "external/syntax2b-cmee-execution.json",
+      "bytes": 541,
+      "sha256": "a5d4151c34a90be63ce8af6dca55f10c820724ebc82d8430641fee15d43fc541"
+    },
+    {
+      "path": "post_identity.json",
+      "bytes": 966,
+      "sha256": "9bdb4cabfdb80875b2c2faebcea22a8620d61a100b7fb527dca73737b4d52706"
+    }
+  ]
+}

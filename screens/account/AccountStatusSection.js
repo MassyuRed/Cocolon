@@ -6,9 +6,8 @@ import { PIECE_WIRE } from "../../lib/compat/legacyWireContracts";
 function StatusRow({ styles, label, value }) {
   return (
     <View style={styles.statusRow}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={{ gap: 6, minWidth: 0 }}>
         <Text style={styles.statusRowLabel}>{label}</Text>
-        <View style={{ flex: 1 }} />
         <Text style={styles.statusRowValue}>{value}</Text>
       </View>
     </View>

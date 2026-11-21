@@ -1,0 +1,160 @@
+{
+  "schema_version": "cocolon.analysis_actor_metadata4_summary.v1",
+  "status": "REVIEWED_MODEL_ONLY_NOT_ADOPTED",
+  "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+  "runner_sha256": "e19d74a139e70d49933e62d5a40aecc0145f18752b738bdc860987af4089cf27",
+  "loader_sha256": "d3b7a04e38769485da995c8323aaaaf4426ff5273fcba6dff578ada85bdb77b6",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "accelerate": "1.15.0",
+    "peft": "0.21.2",
+    "safetensors": "0.8.0",
+    "transformers": "5.19.0"
+  },
+  "adapter_weights_sha256": "6c879a887e3188f4fa2b6e1df573c8648febaac1661dd874f385d72d1edbd6c9",
+  "adapter_config_sha256": "1deacb44b87cd363b94fd85fe7f86d5ee671ffe10f6d248405783ecaf45509db",
+  "source_hashes": {
+    "ae02": "70525eaadaf423699993c670c0ffe6c41d98b1eb5fcf3711584b3aeed17c166e",
+    "https": "771c19950ba9069e31442b24cf80f7d1b4baaf5430e48cfa9ef155046658ad3d"
+  },
+  "pack_sha256": "9421751bd7a17f8100a00811520da111be25b5093f92e0a46be615a8f8e9c4b6",
+  "new_training": 0,
+  "new_generation": 4,
+  "stop_count": 4,
+  "model_calls_started": 4,
+  "model_loads": 1,
+  "model_loads_started": 1,
+  "seconds": 35.65210749767721,
+  "generation_child_seconds": 34.38919013552368,
+  "child_exit": 0,
+  "max_processing_seconds": 120,
+  "per_request_seconds": 23,
+  "model_only": true,
+  "database_or_api_calls": 0,
+  "semantic_save_performed": false,
+  "source_response_binding_created": false,
+  "old_response_reuse": false,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "factors": [
+    "analysis_as_of",
+    "records[0].emotion_details"
+  ],
+  "held_constant": [
+    "system message bytes",
+    "full fields and source literal",
+    "recorded_at",
+    "selected_categories",
+    "selected_emotions",
+    "adapter and generation settings"
+  ],
+  "cases": [
+    {
+      "id": "META00",
+      "factors": {
+        "analysis_as_of": "old",
+        "emotion_details": "empty"
+      },
+      "messages_sha256": "df187ab17bb2ca303be7ef76d6adf950a4217f97a700b08a65b0315fdc9eec6b",
+      "raw_sha256": "796513955b341b2efaf833b51bf5ab064d277d3e570f79fdd8d1d43850a273aa",
+      "finish_reason": "stop",
+      "seconds": 7.17811322119087,
+      "spurious_possessive_actor_proposed": true,
+      "negation_qualifier_retained": true,
+      "target_and_root_kind_and_parent_retained": true
+    },
+    {
+      "id": "META01",
+      "factors": {
+        "analysis_as_of": "old",
+        "emotion_details": "medium"
+      },
+      "messages_sha256": "fbd96d168b7f1c041930b942a204c71224962a91d7ca7bf28b6716e983d4eddf",
+      "raw_sha256": "796513955b341b2efaf833b51bf5ab064d277d3e570f79fdd8d1d43850a273aa",
+      "finish_reason": "stop",
+      "seconds": 6.43643207475543,
+      "spurious_possessive_actor_proposed": true,
+      "negation_qualifier_retained": true,
+      "target_and_root_kind_and_parent_retained": true
+    },
+    {
+      "id": "META10",
+      "factors": {
+        "analysis_as_of": "new",
+        "emotion_details": "empty"
+      },
+      "messages_sha256": "925148f9697c6950ff9f68521f0b07feed2143d9d5e1449daca88e3f31145aea",
+      "raw_sha256": "796513955b341b2efaf833b51bf5ab064d277d3e570f79fdd8d1d43850a273aa",
+      "finish_reason": "stop",
+      "seconds": 6.322665969841182,
+      "spurious_possessive_actor_proposed": true,
+      "negation_qualifier_retained": true,
+      "target_and_root_kind_and_parent_retained": true
+    },
+    {
+      "id": "META11",
+      "factors": {
+        "analysis_as_of": "new",
+        "emotion_details": "medium"
+      },
+      "messages_sha256": "f359abfd9c0f9fd0969be5ca893c597bb1fbc5fb8761329410481a3602601ad2",
+      "raw_sha256": "200fcefeb1b2880babcb2b1018e8f1846f6b3264aabe4f305094890002976675",
+      "finish_reason": "stop",
+      "seconds": 5.807110596448183,
+      "spurious_possessive_actor_proposed": false,
+      "negation_qualifier_retained": true,
+      "target_and_root_kind_and_parent_retained": true
+    }
+  ],
+  "all_four_raws_read": true,
+  "raw_groups": [
+    {
+      "ids": [
+        "META00",
+        "META01",
+        "META10"
+      ],
+      "raw_sha256": "796513955b341b2efaf833b51bf5ab064d277d3e570f79fdd8d1d43850a273aa"
+    },
+    {
+      "ids": [
+        "META11"
+      ],
+      "raw_sha256": "200fcefeb1b2880babcb2b1018e8f1846f6b3264aabe4f305094890002976675"
+    }
+  ],
+  "all_non_actor_packet_content_identical": true,
+  "prior_anchor_reproduction": {
+    "META00": {
+      "source": "AE02 after",
+      "messages_bytes_exact": true,
+      "raw_bytes_exact": true
+    },
+    "META11": {
+      "source": "VH03 actual sent call",
+      "messages_bytes_exact": true,
+      "raw_bytes_exact": true
+    },
+    "new_calls_for_both": true
+  },
+  "observed_pattern": "Only the jointly changed time/details cell omitted the spurious possessive actor. Either factor alone left the same false-actor raw in this one observed grid.",
+  "interpretation": [
+    "One known source and one once-only 2x2 grid; not a held-out or general semantic accuracy evaluation.",
+    "The three first cells propose the possessor as EXPLICIT_ACTOR although the fixed source does not explicitly name the acting subject.",
+    "META11 does not propose an actor; explicit negation, target, root kind and parent relation otherwise remain identical across all four outputs.",
+    "No semantic admission, graph projection, API/SQL save or saved-read test was performed here.",
+    "This conditional output pattern does not establish an internal causal mechanism, numerical determinism or a general rule about either metadata field.",
+    "The observed instability supplies no basis for deleting metadata, weakening grammar/admission, repeating this completed run, training automatically or adopting the adapter."
+  ],
+  "adapter_unchanged": true,
+  "original_reports_preserved": true,
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "private_archive_version": 1,
+  "private_archive": {
+    "library_file_id": "libfile_78de85117ab48191ba102c0c2f42ccec",
+    "version": 1,
+    "bytes": 15681307,
+    "sha256": "28d049030e5f9f16691b2b958fd20a3251aeba556973ea8de7f11f112d2634f4"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "B10_may_start": false,
+  "SQL_save": 0,
+  "actual_result_sha256": "51b7808b233c0959c4935d277f98da16e5a8eb15158459e725cdef42f5ad4f52",
+  "all_five_adequate": false,
+  "all_five_reviewed": false,
+  "cases": [
+    {
+      "admission": "GENERATED",
+      "case_id": "book_club_two_day",
+      "issues": [
+        {
+          "code": "COMPLETED_CONFIRMATION_AS_UNKNOWN",
+          "finding": "An explicitly completed self-confirmation is represented as missing information.",
+          "location": "events.e2.unknowns; both projected nodes.unknowns; text"
+        },
+        {
+          "code": "HISTORICAL_PENDING_STATE_AS_CURRENT_UNKNOWN",
+          "finding": "An earlier pending state is carried into current uncertainty despite a later confirmation. The genuinely unconfirmed later inquiry is not distinguished.",
+          "location": "events.e1.unknowns; overview; projected nodes"
+        },
+        {
+          "code": "ACTUAL_REMAINING_UNCERTAINTY_OMITTED",
+          "finding": "Two explicit current uncertainties in the later record are absent from the authored uncertainty representation.",
+          "location": "events; readings; overview"
+        },
+        {
+          "code": "ACTOR_AND_TEMPORAL_DISTINCTION_LOSS",
+          "finding": "A comparison of actors information obscures the prior-to-later confirmation sequence and does not establish a present discrepancy. The explicit nonparticipation and prior nonsending are not clearly represented.",
+          "location": "readings.r1; overview; nodes"
+        },
+        {
+          "code": "REPEATED_LOW_INFORMATION_REALIZATION",
+          "finding": "The same two factual statements and one reading recur across overview, node summaries, explanations and edge. The second node does not add a distinct grounded relation.",
+          "location": "projection and complete text"
+        }
+      ],
+      "meaning": "NOT_ADEQUATE",
+      "preserved_partial_content": [
+        "Later correction and sending remain recorded.",
+        "No invented actor motive or fixed personality was observed."
+      ],
+      "quality_improvement_claim": false,
+      "raw_projection_text_all_read": true,
+      "raw_sha256": "4efbf64d4e5e9f1ccc43192512cc1e24bc4dd95a8aca749d5c14a4513f141f53"
+    },
+    {
+      "admission": "REJECTED",
+      "case_id": "lighting_prior_and_later",
+      "issues": [
+        {
+          "code": "UNUSED_AUTHORED_READINGS",
+          "finding": "Neither reading is selected for display, causing the exact structural rejection. No final graph or text was produced.",
+          "location": "readings.r1,r2; all displayed unit_refs"
+        },
+        {
+          "code": "DUPLICATED_EVENTS_AND_NODES",
+          "finding": "Two events repeat the same completed action under different evidence selections; two displayed nodes repeat that action instead of separating independent meanings.",
+          "location": "events.e2,e4; nodes.n2,n3"
+        },
+        {
+          "code": "FACT_EVIDENCE_SUPPORT_INCOMPLETE",
+          "finding": "One event evidence selection lacks the direct checks stated in its fact; another states a completed action while selecting budget, intention and judgment evidence instead of that action.",
+          "location": "events.e3,e4"
+        },
+        {
+          "code": "PRIOR_TO_LATER_CHOICE_CHANGE_LOST",
+          "finding": "The earlier nonpurchase, stopping prior use and later purchase are not clearly represented as separate conditions and choices. Summary collapses the record into checking conditions and subsequent use.",
+          "location": "events; nodes; overview"
+        },
+        {
+          "code": "CURRENT_UNCERTAINTY_AND_JUDGMENT_OMISSION",
+          "finding": "Later durability uncertainty, limited-use qualification, causal uncertainty and the persons stated evaluation are absent from selected displayed units.",
+          "location": "events; readings; selected unit_refs"
+        },
+        {
+          "code": "UNSUPPORTED_RELATION_TYPE",
+          "finding": "The self-versus-outside-gap relation joins two nodes about the same use episode without representing an outside counterpart or grounded discrepancy.",
+          "location": "edges[1]"
+        }
+      ],
+      "meaning": "NOT_ADEQUATE_NOT_DISPLAYABLE",
+      "preserved_partial_content": [
+        "Prior other-person motive uncertainty is retained in raw.",
+        "Some later completed setup/use and budget facts remain accurate."
+      ],
+      "projection_text_available": false,
+      "quality_improvement_claim": false,
+      "raw_sha256": "7b3bc527eb6de141324991d66ed1344f5f1074dcafca0d43336457346193749d"
+    }
+  ],
+  "first_case_initial_snapshot_sha256": "4a2ae3fe39ddfe44fcb0698422b94d5bf945d0f95240943912cc4c95d5acea17",
+  "human_product_acceptance_claim": false,
+  "independence": "First-case judgment sent before receiving root judgment; second-case original/raw inspection completed independently of root conclusions.",
+  "normal_adoption": false,
+  "not_executed_case_count": 3,
+  "product_credit": 0,
+  "raw_modified": false,
+  "reviewed_source": "Complete original input cases and exact actual USER message fields for both received cases. Complete raw for both; full projection and text for the first. Second projection/text does not exist because admission rejected.",
+  "reviewer_role": "independent",
+  "schema": "cocolon.analysis.a10.independent_meaning_review.v1",
+  "state": "NOT_ALL_FIVE_ADEQUATE_B10_CONDITION_FALSE"
+}

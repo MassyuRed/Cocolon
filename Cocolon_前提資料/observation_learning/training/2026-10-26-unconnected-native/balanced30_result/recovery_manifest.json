@@ -1,0 +1,262 @@
+{
+  "adapter/README.md": {
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "bytes": 5184
+  },
+  "adapter/adapter_config.json": {
+    "sha256": "97cdc15200e936711c7fdcb1b2dbb97129ef05e3d759d1c0d799268e4439ea3a",
+    "bytes": 1940
+  },
+  "adapter/adapter_model.safetensors": {
+    "sha256": "228edccf7db10889b303124785f917f1124f94ce23ac0866d18f37697ed00502",
+    "bytes": 3674728
+  },
+  "after_FT-BOOK-AFTER-ANSWER.jsonl": {
+    "sha256": "dee3a177e541c3c87c52612fa6d1b13f14c955cb2d2694d1d5fea1fced89d334",
+    "bytes": 49296
+  },
+  "after_FT-BOOK-INITIAL.jsonl": {
+    "sha256": "6759208986f359fcf30efe7b599cf1387d8d17ca2f49fb1da35923036a4aa4be",
+    "bytes": 40803
+  },
+  "after_FT-KNIT-INITIAL.jsonl": {
+    "sha256": "89fc08e0aab5b0ea039fd12da430344357aa24eb42bdd3b4b4473b246ff3854a",
+    "bytes": 17919
+  },
+  "after_FT-REPOT-INITIAL.jsonl": {
+    "sha256": "db2d97f83ec0f4bfa8f3468e2484145507a330654b6e638de542cb07c40955d2",
+    "bytes": 15420
+  },
+  "after_FT-SHOP-AFTER-ANSWER.jsonl": {
+    "sha256": "d2f74d7af08fa799c308bc70a0f8aec59f9a63671586ef4f639cd078b9c0e3fe",
+    "bytes": 42870
+  },
+  "after_FT-SHOP-INITIAL.jsonl": {
+    "sha256": "5c476767e9509f3637b1d4d2212af9dc38b20cc39b0451cff62a0f3ff81215c9",
+    "bytes": 18141
+  },
+  "after_TRAIN-DAILY-CALM-01-INITIAL.jsonl": {
+    "sha256": "121165e8ac56aec8698dc095ee9ddf531a66dd3e9326a8f7cb9d2eef54c545bb",
+    "bytes": 21210
+  },
+  "after_TRAIN-DAILY-CALM-02-INITIAL.jsonl": {
+    "sha256": "d49ab65e48e73cc22731c608d135d9de09a5d87dbeb2c0d6f6ec92125a91fc56",
+    "bytes": 21185
+  },
+  "after_TRAIN-DAILY-CALM-03-INITIAL.jsonl": {
+    "sha256": "576b707c50cc85ddf2613b403e7d8911dbae57f5da6156779dae062759f163ad",
+    "bytes": 21223
+  },
+  "after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl": {
+    "sha256": "d5f05d8184a640d34bf509ad090cabf6d61fb808ef9db2d46614cd91faf2a549",
+    "bytes": 27741
+  },
+  "after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl": {
+    "sha256": "1567db29089e9dfa5d905477bc9656c6322b702e48d836897c79f5aba81c0fbb",
+    "bytes": 18583
+  },
+  "after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl": {
+    "sha256": "a770336de02053eae4fa010a08f96a203ea67411fcbee946037108b809522273",
+    "bytes": 20524
+  },
+  "after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl": {
+    "sha256": "cd1b400196ec08a8f5cddd7df789993fa81c6260b38ddb5fa35962a55ee0f799",
+    "bytes": 18583
+  },
+  "after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl": {
+    "sha256": "876edd25b912e3556719bd35ea57670dade3e1219bf064f59355e3e372b50275",
+    "bytes": 27457
+  },
+  "after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl": {
+    "sha256": "5d9f3b2f176a5deb7b81af168e1be3061f123554cfc5291af28d5c32426e9974",
+    "bytes": 18583
+  },
+  "api_blobs.json": {
+    "sha256": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85",
+    "bytes": 688
+  },
+  "candidate_focus_loss.py": {
+    "sha256": "f0adc2b09410b93b9f1d91676f2a37e0bb4a599be5db9997e43a21dec5b74350",
+    "bytes": 11170
+  },
+  "cpu_preparation.json": {
+    "sha256": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d",
+    "bytes": 16296
+  },
+  "diagnosis/FT-REPOT-INITIAL_cold.json": {
+    "sha256": "11f24307ae50c2b5c2261ca2a69a2e3bd3a299d49a7270755ccb62334689d890",
+    "bytes": 25904
+  },
+  "diagnosis/FT-REPOT-INITIAL_saved.json": {
+    "sha256": "f2a741a84c6003771fcb7f375741ad0c13c3d8240aec53f53368b81cc0acdfd4",
+    "bytes": 25447
+  },
+  "diagnosis/FT-REPOT-INITIAL_saved_completed.json": {
+    "sha256": "56c0de0acf6f6649086a410e164845d364b3e01cdae577a592cffd4747884e2f",
+    "bytes": 25382
+  },
+  "diagnosis/TRAIN-DAILY-CALM-01-INITIAL_cold.json": {
+    "sha256": "f394202f02b31e484ea59dd2b046e4c805177358c91b52a1834ebe4216cfae73",
+    "bytes": 56029
+  },
+  "diagnosis/TRAIN-DAILY-CALM-01-INITIAL_saved.json": {
+    "sha256": "b6e78824be1b7f58adef763337b0cd71adcaa1b32dee84164fe02c14ebc71a55",
+    "bytes": 33232
+  },
+  "diagnosis/TRAIN-DAILY-CALM-01-INITIAL_saved_completed.json": {
+    "sha256": "0c2b88693eb80b2e5df5b460ba278d55eed6ef286105dcd88121c14fc7052562",
+    "bytes": 54112
+  },
+  "diagnosis/TRAIN-DAILY-CALM-02-INITIAL_cold.json": {
+    "sha256": "634e1cc7455bb9a6ac657d1038e58f4e9d31645000029ceb3c3c741cef1a414c",
+    "bytes": 56030
+  },
+  "diagnosis/TRAIN-DAILY-CALM-02-INITIAL_saved.json": {
+    "sha256": "a264e82df6255dcc1356fc1730c2420f5e31ad1e25f1c60ab706fda30c1437b1",
+    "bytes": 33233
+  },
+  "diagnosis/TRAIN-DAILY-CALM-02-INITIAL_saved_completed.json": {
+    "sha256": "5ce3dd03c18cbdfe91fee3f648ca4bc8ae905fb21fc38b10680bec03dc6e17d6",
+    "bytes": 54113
+  },
+  "diagnosis/TRAIN-DAILY-CALM-03-INITIAL_cold.json": {
+    "sha256": "624cfdda76cad86ed167594add40d68076d67bfa8bc9db0327ba75dbc9a7e31a",
+    "bytes": 56029
+  },
+  "diagnosis/TRAIN-DAILY-CALM-03-INITIAL_saved.json": {
+    "sha256": "e9e57c40093645cc267575b3d8505d8b7e57d6ddd9d8da2cdae1056701fa2049",
+    "bytes": 33232
+  },
+  "diagnosis/TRAIN-DAILY-CALM-03-INITIAL_saved_completed.json": {
+    "sha256": "d933b004647f81bd91d367bf5510bc9634f20642ba7ad2e8e891c9eb0d2681c9",
+    "bytes": 54112
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_cold.json": {
+    "sha256": "27bd0394e9fd50279dde9e4eb45960b5786a8c5254a62777301f9e3ce3435d62",
+    "bytes": 48772
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_saved.json": {
+    "sha256": "dc90045161fa829ca6d2e97f6b402a0e0dd7a4bb234deee134d3ed868fae1831",
+    "bytes": 28520
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_saved_completed.json": {
+    "sha256": "474b2806bc90c572e96f72fae25629f697ffefd0a9a70b9c3615138d1884b0d1",
+    "bytes": 47060
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_cold.json": {
+    "sha256": "9f7886b7ab520e175cc120a695ec8dde00e69449e67c8ff0239468a97708206d",
+    "bytes": 48772
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_saved.json": {
+    "sha256": "0329618a56c52790f53c5ba4e98b1036241799576bbe88667e2f3ecead107e08",
+    "bytes": 28520
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_saved_completed.json": {
+    "sha256": "7a544671f0c496ba44ad94883e2b0156803830f9a56498fc7b3249b789b1406e",
+    "bytes": 47060
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_cold.json": {
+    "sha256": "a90f3184859ed0325facdeffdd5eaa505b6e74425a6442b74aa0602abae85852",
+    "bytes": 48772
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_saved.json": {
+    "sha256": "5f5f8be221626d02b2d0dc7e49e5be2567915da091223a8176dde5df7bcbef51",
+    "bytes": 28520
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_saved_completed.json": {
+    "sha256": "a396c1f009c4ad3075a0451830f790865a23bbc6fdb6abf6870e96e9f9fcf139",
+    "bytes": 47060
+  },
+  "diagnosis/diagnosis.json": {
+    "sha256": "90cd459c4348b33c45863bedd135fa55c3bca2aba5e12046ee6b52c20487f72d",
+    "bytes": 1905440
+  },
+  "eval_inputs.jsonl": {
+    "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "bytes": 169628
+  },
+  "evidence/actual_cpu_check.json": {
+    "sha256": "33ce6313b7762ebce8ccafdb44751e1f6221a5ef5b942bc707459f010596b713",
+    "bytes": 35768
+  },
+  "evidence/cocolon_balanced30_consumer_20261027.log": {
+    "sha256": "e2a659cb827711ccede500f2fd81621517875238e2d0fef4dfdda0cb744c0cea",
+    "bytes": 689
+  },
+  "evidence/cocolon_balanced30_consumer_inputs_20261027.log": {
+    "sha256": "44e49a56dd6c392c0ef037f96c5afb0d02c00662728c35ed574c631145c91c02",
+    "bytes": 261
+  },
+  "evidence/cocolon_balanced30_consumer_launch_20261027.json": {
+    "sha256": "3a6c5c19aa7f73490f6ad2a3734f2b7624d2cebc0178825943811cda4936c487",
+    "bytes": 665
+  },
+  "evidence/cocolon_balanced30_gpu_20261027.log": {
+    "sha256": "4acf338f79789a76279fe1de7c92cff1b3e71b6f3ee22027d798b6b2fee74fbb",
+    "bytes": 4517
+  },
+  "evidence/cocolon_balanced30_launch_20261027.json": {
+    "sha256": "e3540f01424158ec45147055a7408f084fff83ded82a6247ea44438415e30b98",
+    "bytes": 608
+  },
+  "gpu15.plan.json": {
+    "sha256": "6c48a26871102797291f7cf531929af58b2e2a2e65d6ca85d9e9ba8b4c08dfd7",
+    "bytes": 7670
+  },
+  "gpu15.proposed.json": {
+    "sha256": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9",
+    "bytes": 7434
+  },
+  "gpu30_balanced.plan.json": {
+    "sha256": "cb25a8e4beb5393f16391342730ddeec04c6fd08de54a2c8b64f6621325082ca",
+    "bytes": 3354
+  },
+  "reloaded_tensors.json": {
+    "sha256": "8e23ca4fd83804c4eea1142f3cea4678a113fe0878278823a5ba37c9bf621367",
+    "bytes": 7484
+  },
+  "run.json": {
+    "sha256": "8c329a54b23c51bc28d34bbd0b76ba2ed430856462367d57a9f58c7915cf5f61",
+    "bytes": 46967
+  },
+  "run_native15.py": {
+    "sha256": "02819f033dfae099971d6d474141d4855d40eba9f5ca8e28fa0dfbb12c5ca4eb",
+    "bytes": 12742
+  },
+  "run_native15_afteronly.py": {
+    "sha256": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+    "bytes": 17891
+  },
+  "run_native15_balanced30.py": {
+    "sha256": "d989bcf5a7bc9e3bc8669ff455113c956bcb5ba813473693fc8f493ad3217268",
+    "bytes": 21420
+  },
+  "source/consume_balanced30.py": {
+    "sha256": "692d325147dd1484d6ed61c93c0ab82467f49be63f3256ba9bb09a35923fc623",
+    "bytes": 18496
+  },
+  "source/run_pilot.py": {
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "bytes": 28950
+  },
+  "source/run_quote_joint_fit.py": {
+    "sha256": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128",
+    "bytes": 28123
+  },
+  "source/test_candidate_focus_loss.py": {
+    "sha256": "f1130a7fd2490f329ad4a4bb0cef55e17132f16e3fab87b7f3ac7dc9b80e0893",
+    "bytes": 11548
+  },
+  "source/verify_balanced30_cpu.py": {
+    "sha256": "c4f6f8c895d4c1e1fdbf3aa654dda2f8e44ce3fc9c5f50c4514449593cd29d6a",
+    "bytes": 6704
+  },
+  "train_messages.jsonl": {
+    "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "bytes": 349174
+  },
+  "training.jsonl": {
+    "sha256": "25a05d24ea764e60b8d21e5d4501daea5a85b5220290118a917e218f4916b250",
+    "bytes": 31309
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "status": "CPU_REHEARSAL13_READY_NO_MODEL",
+  "source_sha256": "845fa39064245e5ad30787202f6e272e082d4e1f389172a972aabec74944703b",
+  "order": [
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "counts": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4295,
+      "total_tokens": 6443,
+      "supervised": 2148,
+      "cap": 3712,
+      "scheduled_updates": 2,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4447,
+      "total_tokens": 6871,
+      "supervised": 2424,
+      "cap": 3584,
+      "scheduled_updates": 2,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "total_tokens": 3081,
+      "supervised": 1331,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "total_tokens": 6055,
+      "supervised": 2228,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1746,
+      "total_tokens": 3077,
+      "supervised": 1331,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3842,
+      "total_tokens": 6073,
+      "supervised": 2231,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1743,
+      "total_tokens": 3064,
+      "supervised": 1321,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3825,
+      "total_tokens": 6062,
+      "supervised": 2237,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "total_tokens": 3363,
+      "supervised": 1585,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1773,
+      "total_tokens": 3332,
+      "supervised": 1559,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1777,
+      "total_tokens": 3375,
+      "supervised": 1598,
+      "cap": 2560,
+      "scheduled_updates": 1,
+      "messages_unchanged": true
+    }
+  ],
+  "dependencies": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "initial_adapter_sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+  "old9_bytes_unchanged": true,
+  "full2_messages_targets_tokens_unchanged": true,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "seconds": 29.907477136002854,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "prepared_cpu_sha256": "ddf81a26f67e98fff901cc78e405f06919ab9cbe4ad6cbc49908a6b8cf616165",
+  "prepared_cpu_bytes": 104552,
+  "teacher_meaning_body_cold_replay": "2/2; full outcome identical to shape2 CPU teacher",
+  "frozen_count": 176
+}

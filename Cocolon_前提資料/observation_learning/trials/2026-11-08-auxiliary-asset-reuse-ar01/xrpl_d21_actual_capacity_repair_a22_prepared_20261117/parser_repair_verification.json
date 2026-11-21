@@ -1,0 +1,31 @@
+{
+  "LMFE_commit": "817f944fcc8851917c40300a47f62d1defc3ffc3",
+  "Python": "3.12.14",
+  "SQL": 0,
+  "actual_graph_capacity_repair_CPU_only": true,
+  "actual_prefix_exact_replay_preserved": true,
+  "baseline_new_regressions_fail": 2,
+  "changed_existing_functions": [
+    "_semantic_unique_json_schema_parser"
+  ],
+  "model_quality_acceptance": false,
+  "new_model_calls": 0,
+  "new_regressions": 10,
+  "normal_changes": 0,
+  "production_files_changed": [
+    "ai/tools/serve_emlis_natural_reply.py"
+  ],
+  "pytest": "8.3.5",
+  "pytest_failed": 0,
+  "pytest_passed": 247,
+  "pytest_skipped": 0,
+  "schema_maxima_full_source_coverage_and_other_native_profiles_unchanged": true,
+  "source_commit": "d610facb9d162a74bc57ef6323b7499f68d0ef1e",
+  "source_sha256": "d4caeda68daaabc83958ee25d0519f7b267761418e6018b9cdf61015b0767756",
+  "state": "PARSER_ROOT_SLOT_CAPACITY_REPAIR_CPU_AND_SOURCE_VERIFIED_NOT_MODEL_ADOPTED",
+  "test_files_changed": [
+    "ai/tests/test_analysis_node_local_native_profile.py"
+  ],
+  "training": 0,
+  "whole_auxiliary_complete": false
+}

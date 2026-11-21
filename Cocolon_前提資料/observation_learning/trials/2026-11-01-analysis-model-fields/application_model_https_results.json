@@ -1,0 +1,154 @@
+{
+  "schema_version": "analysis_actual_https_public_results.v1",
+  "source": "Karen synthetic examples; bounded connection probe, not independent quality evaluation",
+  "api_commit": "65e7fa0b4b29fb293f1da07f866dc6c912bbae29",
+  "runner_commit": "09346d3f00d4216729acf143d8d61ca485b23d8e",
+  "seconds": 47.11187983956188,
+  "new_generation": 4,
+  "model_loads": 1,
+  "new_training": 0,
+  "saved": 4,
+  "normal_adoption": false,
+  "actual_model_network": "verified loopback HTTPS",
+  "auth": "synthetic",
+  "database": "isolated PGlite SQL",
+  "cases": [
+    {
+      "id": "H01",
+      "input": {
+        "memo": "僕の役割は受付係だった。",
+        "memo_action": "僕は費用を記録した。",
+        "category": [
+          "仕事"
+        ]
+      },
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "api_callers": 3,
+      "model_calls": 1,
+      "saved_artifacts": 1,
+      "month_references": 1,
+      "saved_read_identical": true,
+      "node_kinds": [
+        "ROLE",
+        "ACTION_OR_NONACTION"
+      ],
+      "node_count": 2,
+      "edge_count": 0,
+      "unknown_gap_count": 2,
+      "safe_projection_sha256": "0cb250223aefa0862b5c3d86523dd9fa523b17f0d14daf0dd00dda8c11218acf",
+      "visible_text_sha256": "b3b39aa40f3544cbc9257df4666009b8ce5a8057b4db57e6d3e46320e7aea9c5"
+    },
+    {
+      "id": "H02",
+      "input": {
+        "memo": "僕の役割は案内係ではなかった。",
+        "memo_action": "僕は資料を調べなかった。",
+        "category": [
+          "生活"
+        ]
+      },
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "api_callers": 3,
+      "model_calls": 1,
+      "saved_artifacts": 1,
+      "month_references": 1,
+      "saved_read_identical": true,
+      "node_kinds": [
+        "ROLE",
+        "ACTION_OR_NONACTION"
+      ],
+      "node_count": 2,
+      "edge_count": 0,
+      "unknown_gap_count": 2,
+      "safe_projection_sha256": "f590f63898b66621de26bf0bcc7f5926afab12be6953227bef409a70e9d2c0d8",
+      "visible_text_sha256": "e76114d406dec04c4128e550e4171e128610d3b3c8e0bbbaa98d7987267319d2"
+    },
+    {
+      "id": "H03",
+      "input": {
+        "memo": "僕の役割は案内係だった。僕は資料を調べた。",
+        "memo_action": "",
+        "category": [
+          "生活"
+        ]
+      },
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "api_callers": 3,
+      "model_calls": 1,
+      "saved_artifacts": 1,
+      "month_references": 1,
+      "saved_read_identical": true,
+      "node_kinds": [
+        "ROLE",
+        "ACTION_OR_NONACTION"
+      ],
+      "node_count": 2,
+      "edge_count": 0,
+      "unknown_gap_count": 2,
+      "safe_projection_sha256": "61f21cc28e1b66dd5855fc529807f5739e05234094037f71a99c52e6b058623b",
+      "visible_text_sha256": "5f9a648663a15eb5285ad31ae2ffe3cab00025225671025267cc120da5e62e29"
+    },
+    {
+      "id": "H04",
+      "input": {
+        "memo": "私の役割は記録係ではありませんでした。私は費用を記録しなかった。",
+        "memo_action": "",
+        "category": [
+          "仕事"
+        ]
+      },
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "api_callers": 3,
+      "model_calls": 1,
+      "saved_artifacts": 1,
+      "month_references": 1,
+      "saved_read_identical": true,
+      "node_kinds": [
+        "ROLE",
+        "ACTION_OR_NONACTION"
+      ],
+      "node_count": 2,
+      "edge_count": 0,
+      "unknown_gap_count": 2,
+      "safe_projection_sha256": "b52db28bc04b9a4bd09b851e1b83fbe9329be9848baa029ace46bb9a53613606",
+      "visible_text_sha256": "26fca49d231c790524c1c025b3a0514fdd8c2091561155f0ead79a8d88fc8f75"
+    }
+  ],
+  "public_content": "Synthetic source input and body-free statistics/hashes only; full output and model raw remain private."
+}

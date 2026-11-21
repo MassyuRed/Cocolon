@@ -1,0 +1,58 @@
+{
+  "status": "CPU_FINITE_CANDIDATE_CHECKS_PASSED",
+  "checks": [
+    {
+      "name": "proposed_plan_cpu_only",
+      "passed": true
+    },
+    {
+      "name": "unauthorized_gpu_rejected",
+      "passed": true
+    },
+    {
+      "name": "extra_update_rejected",
+      "passed": true
+    },
+    {
+      "name": "unadopted_initial_adapter_rejected",
+      "passed": true
+    },
+    {
+      "name": "frozen_source_hash",
+      "passed": true
+    },
+    {
+      "name": "actual_cpu_nine_no_truncation_no_model",
+      "passed": true
+    },
+    {
+      "name": "chair_full_eos_and_fixed_replay",
+      "passed": true
+    },
+    {
+      "name": "daily_complete_surface_and_connectors",
+      "passed": true
+    },
+    {
+      "name": "causal_slice_dispatch_matches_full_context",
+      "passed": true
+    },
+    {
+      "name": "cpu_to_execution_surface_mask_schema",
+      "passed": true
+    },
+    {
+      "name": "conditional_saved_reread_gate_unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 11,
+  "failed": 0,
+  "runner_sha256": "819456ce9bf6589fb91becf16852a955ce3540eca59b2e9b4d5a01efe3d39826",
+  "tokenization_sha256": "e66adf4be5c638fad3c55e8b30c0af0be584a7be424f9f9ab19caa8c63c9869a",
+  "gpu_run_authorized": false,
+  "new_training_updates": 0,
+  "new_model_calls": 0,
+  "scope": "One-shot candidate checks, not GPU/model quality or human acceptance",
+  "corrected_before_gpu": "CPU output used reception_masks while execution required surface_masks; aligned key and reran actual CPU tokenization."
+}

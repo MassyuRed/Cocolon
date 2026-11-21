@@ -231,20 +231,24 @@ JPEG、animated image、multi-page image、videoはinitial exact0。
 
 ## 6. plan matrix
 
+**11/7 Mash明示変更：Freeは初期2色を選択、サブスク加入者は12色・比率・ロゴ有無を選択する。** 下表は今回の新しい画像設定方針。API/RN候補を用意した段階で、本番反映・ビルド・実機確認は未実施。文章形式・保存枠・公開範囲の既存差は変更しない。
+
 | capability | Free | Plus | Premium |
 |---|---|---|---|
 | render fidelity / safety | full | full | full |
 | output pixel size | full | full | full |
 | template | format-mapped | format-mapped | format-mapped |
-| theme | `soft_paper` fixed | exact2から選択 | exact2から選択 |
-| ratio | `4:5` fixed | `4:5` fixed | `4:5` / `9:16` |
+| theme | `soft_paper` / `quiet_night` の2色 | 既存12色から選択 | 既存12色から選択 |
+| ratio | `4:5` fixed | `4:5` / `9:16` | `4:5` / `9:16` |
 | body font | `system_readable` | same | same |
-| branding | `required_small` | `required_subtle` | `required_subtle` or `off` |
+| branding | `required_small` fixed | `required_subtle` or `off` | `required_subtle` or `off` |
 | save / share / re-export | yes | yes | yes |
 
 Freeの画質や可読性を落とさない。plan差はchoice breadthとbrandingであり、本文の意味、安全性、解像度、欠落防止ではない。
 
-`branding_mode=off`はPremium entitlementがsave時・export時の両方で成立する場合だけ許可する。downgrade後の既存record再exportについては、saved recipeを尊重し、record生成時に合法だったbranding modeを後から強制変更しない。exact entitlement bindingはPCE-6で固定する。
+新規候補の`branding_mode=off`は、サーバーが確認したPlusまたはPremiumの権利に従う。UIはロゴの「あり／なし」を表示するが、recipeは既存のmodeを保存し、既存の小さな必須表示と控えめな表示を勝手に同じ値へ変更しない。downgrade後の既存record再読・再exportはsaved recipeを尊重し、合法だったbranding modeを後から強制変更しない。exact entitlement bindingはPCE-6で固定する。
+
+Freeにも12色の見本を表示し、有料10色には鍵を表示する。比率・ロゴは現在値を表示したままグレーにし、変更できないことを示す。ロック項目は案内のためタップでき、「サブスク加入者限定です」のpopupだけを表示する。変更要求や新候補生成は送信しない。色・比率・ロゴの権利はserverのcapabilitiesを正本とし、clientが独自に拡張しない。
 
 ## 7. record binding
 

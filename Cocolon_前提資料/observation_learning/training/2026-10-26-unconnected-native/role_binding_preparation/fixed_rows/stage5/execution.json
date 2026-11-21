@@ -1,0 +1,16 @@
+{
+  "command": "timeout --signal=TERM --kill-after=5s 60s python3.12 -B /workspace/stage5_study.py",
+  "exit": 0,
+  "preliminary_read_errors": [
+    "list_root_items_attribute_error",
+    "string_items_attribute_error"
+  ],
+  "preliminary_verbose_read": "string_characters_printed_no_result_artifact",
+  "upload_chooser": "timeout_no_upload_used_terminal_paste",
+  "model_loads": 0,
+  "forwards": 0,
+  "training": 0,
+  "generation": 0,
+  "cmee": 0,
+  "gpu": "NVIDIA RTX A5000, 1 MiB, 0 %"
+}

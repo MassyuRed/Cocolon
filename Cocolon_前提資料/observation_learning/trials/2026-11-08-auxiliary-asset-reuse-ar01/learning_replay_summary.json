@@ -1,0 +1,335 @@
+{
+  "purpose": "EXECUTION_AND_REVIEW_SUMMARY_NOT_ACCEPTANCE",
+  "source_commit": "a98c6e59cc9ab0d3e1691a969736651c2bf6a88f",
+  "new_generations": 120,
+  "finish_counts": {
+    "stop": 119,
+    "length": 1
+  },
+  "first_trial": {
+    "status": "PASS_PARTIAL_FAILED_TRIAL_EVIDENCE",
+    "semantic_acceptance": false,
+    "production_adoption": false,
+    "source_commit": "a98c6e59cc9ab0d3e1691a969736651c2bf6a88f",
+    "initial_candidate": "saved72_plus_fresh36 research initial value; not normal deployment",
+    "new_teachers": 8,
+    "new_updates": 16,
+    "strict_optimizer_resume": false,
+    "training_compute_seconds": 15.485606564907357,
+    "planned_generations": 102,
+    "recorded_generations": 86,
+    "phase_counts": {
+      "before": 34,
+      "step8": 34,
+      "step16": 18
+    },
+    "finish_counts": {
+      "stop": 85,
+      "length": 1
+    },
+    "last_call": {
+      "phase": "step16",
+      "id": "AR01_NEW_ROLE02",
+      "finish_reason": "length",
+      "output_tokens": 419,
+      "seconds": 23.03388604708016
+    },
+    "trial_status": "FAILED_NO_RETRY_NOT_ACCEPTANCE",
+    "complete_marker_present": false,
+    "checkpoint_8_complete_generation": true,
+    "checkpoint_8_fresh_reloaded": false,
+    "checkpoint_16_fresh_reloaded": true,
+    "saved_tensor_count_each": 112,
+    "saved_parameter_count_each": 3833856,
+    "weights": {
+      "initial_adapter": {
+        "adapter_model.safetensors": "db3242c035fa06d538861c3285ff68345ff77629dbe40741351d22266a483f42",
+        "adapter_config.json": "a60d908d2cc636d18f2bdc5d22ce6330bf0211a90e6847d7288f7d362dcd2f83"
+      },
+      "checkpoint_8": {
+        "adapter_model.safetensors": "d5b3a4466eb1ae513ed85777c5bc7d2e49bed2dfe01083667a9f91906b557f0c",
+        "adapter_config.json": "b53872aa612b87b0b4f2f09e8f85341843f61c4c56b44212d2c9de79569d2c05"
+      },
+      "checkpoint_16": {
+        "adapter_model.safetensors": "9fd4dec82bddd259011e0495da76c7ee23b0a52b615402d5d0f572031b428337",
+        "adapter_config.json": "b53872aa612b87b0b4f2f09e8f85341843f61c4c56b44212d2c9de79569d2c05"
+      }
+    },
+    "original_service_restored": true,
+    "health_http_status": 200,
+    "trial_returncode": 1,
+    "credentials_serialized": false,
+    "audit_checks": 681,
+    "audit_failed_checks": [],
+    "archive_sha256": "0f9195067c54c312b66cf6a38f651a0e7eaf68cd7848158996ac903b0e6bd070",
+    "payload_member_count": 132,
+    "quality_review": "COMPLETE_ALL86_DIRECT_AND_INDEPENDENT_READ; STEP8_AND_STEP16_NOT_ADOPTED",
+    "next_step8_fresh_reload": "Only if independent body review finds step8 worth pursuing; use a separately bounded new trial, never an automatic retry of this failed run."
+  },
+  "mixed_replay_trial": {
+    "status": "PASS_EXECUTION_EVIDENCE_NOT_ACCEPTANCE",
+    "semantic_acceptance": false,
+    "production_adoption": false,
+    "source_commit": "a98c6e59cc9ab0d3e1691a969736651c2bf6a88f",
+    "initial_candidate": "db3242 saved72+fresh36 private research initial value",
+    "teacher_count": 44,
+    "replay_teacher_count": 36,
+    "new_variant_teacher_count": 8,
+    "training_updates": 44,
+    "epochs": 1,
+    "learning_rate": 1e-05,
+    "strict_optimizer_resume": false,
+    "training_compute_seconds": 43.1774524981156,
+    "trial_seconds": 121.17059202981181,
+    "previous_baseline_generations_reused_exact": 34,
+    "new_generation_count": 34,
+    "diagnostic_teacher_count": 8,
+    "previously_used_development_control_count": 26,
+    "finish_counts": {
+      "stop": 34
+    },
+    "unseen_generalization_evidence": false,
+    "checkpoint44_weights": {
+      "adapter_model_sha256": "6d9592755926b6dd80cdb920371d07797c25e1e916e8c853b7c4726cdf8706ae",
+      "adapter_config_sha256": "e83cacba41463bcab0028dcf62b00e16b52fdab87221a717efb449aa938d598f",
+      "tensor_count": 112,
+      "parameters": 3833856,
+      "finite_float32": true,
+      "complete_nonoverlapping_data": true
+    },
+    "initial_weights": {
+      "adapter_model_sha256": "db3242c035fa06d538861c3285ff68345ff77629dbe40741351d22266a483f42",
+      "adapter_config_sha256": "a60d908d2cc636d18f2bdc5d22ce6330bf0211a90e6847d7288f7d362dcd2f83",
+      "tensor_count": 112,
+      "parameters": 3833856,
+      "finite_float32": true,
+      "complete_nonoverlapping_data": true
+    },
+    "saved_values_fresh_reloaded_exact112": true,
+    "original_service_restored": true,
+    "health_http_status": 200,
+    "trial_returncode": 0,
+    "quality_acceptance": "COMPLETE_ALL34_DIRECT_AND_INDEPENDENT_READ; NOT_ADOPTED",
+    "archive_sha256": "77b784d7f8728facf3e0cdf96a469273bd9e29b5284299fb63c7655caf05a729",
+    "payload_member_count": 71,
+    "zip_total_member_count": 72,
+    "audit_failed_checks": []
+  },
+  "first_trial_sql": {
+    "schema": "ar01.next8.local_sql_replay.v1",
+    "purpose": "PERSISTENCE_AND_READ_BEHAVIOR_ONLY_NOT_MEANING_QUALITY",
+    "capture_files_sha256": {
+      "pack": "8d01044003c50616c459e9e6065d7eaf97ac1f40cf9f576232116b036ab2dc6b",
+      "all_results": "27b663946fd1d6251aec90188a7531022bfdea480413529439fa96c15695deca"
+    },
+    "planned_evaluation_captures": 78,
+    "actual_evaluation_captures": 62,
+    "teacher_diagnostic_captures_not_replayed": 24,
+    "not_generated_count": 16,
+    "new_generations": 0,
+    "network_requests": 0,
+    "real_database_requests": 0,
+    "response_rewrites": 0,
+    "retries": 0,
+    "outcomes": {
+      "FINAL_SAVED_AND_REOPENED": 61,
+      "REJECTED_BY_EXISTING_PROVIDER_CONTRACT_AND_REOPENED": 1
+    },
+    "by_phase": {
+      "before": {
+        "FINAL_SAVED_AND_REOPENED": 26
+      },
+      "step8": {
+        "FINAL_SAVED_AND_REOPENED": 26
+      },
+      "step16": {
+        "FINAL_SAVED_AND_REOPENED": 9,
+        "REJECTED_BY_EXISTING_PROVIDER_CONTRACT_AND_REOPENED": 1
+      }
+    },
+    "capture_and_sql_ref_equal": 38,
+    "capture_user_id_projection_ref_differences": 24,
+    "checks_passed": true
+  },
+  "mixed_replay_sql": {
+    "schema": "ar01.next8.local_sql_replay.v1",
+    "purpose": "PERSISTENCE_AND_READ_BEHAVIOR_ONLY_NOT_MEANING_QUALITY",
+    "capture_files_sha256": {
+      "pack": "59fd32668f6f2989d75a846d2d0dab84bf03fe51487debe48af30f5b263f5afa",
+      "all_results": "03f292b6ba4e19cacf3027a01e44ba8a3bc3ccdb09ee66f3f34f95c83e54d1cf"
+    },
+    "planned_evaluation_captures": 26,
+    "actual_evaluation_captures": 26,
+    "teacher_diagnostic_captures_not_replayed": 8,
+    "not_generated_count": 0,
+    "new_generations": 0,
+    "network_requests": 0,
+    "real_database_requests": 0,
+    "response_rewrites": 0,
+    "retries": 0,
+    "outcomes": {
+      "FINAL_SAVED_AND_REOPENED": 26
+    },
+    "by_phase": {
+      "after44": {
+        "FINAL_SAVED_AND_REOPENED": 26
+      }
+    },
+    "capture_and_sql_ref_equal": 18,
+    "capture_user_id_projection_ref_differences": 8,
+    "checks_passed": true,
+    "existing_provider_outer_whitespace_removed_count": 26
+  },
+  "saved_reader_limits": [
+    {
+      "trial": "ar01_next8_work",
+      "saved_reports": 61,
+      "verdicts": {
+        "UNASSESSED": 60,
+        "NO_CONFLICT_IN_CHECKED_SCOPE": 1
+      },
+      "checked_reply_count_sum": 1,
+      "all_full_coverage_false": true,
+      "per_phase": {
+        "before": {
+          "UNASSESSED": 25,
+          "NO_CONFLICT_IN_CHECKED_SCOPE": 1
+        },
+        "step16": {
+          "UNASSESSED": 9
+        },
+        "step8": {
+          "UNASSESSED": 26
+        }
+      },
+      "role_owner_known_bad_cases": [
+        {
+          "id": "AR01_NEW_ROLE02",
+          "phase": "before",
+          "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+          "checked_reply_count": 1,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_NEW_ROLE03",
+          "phase": "before",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_NEW_OWN01",
+          "phase": "before",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+          "phase": "before",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+          "phase": "before",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_NEW_ROLE02",
+          "phase": "step8",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 2
+        },
+        {
+          "id": "AR01_NEW_ROLE03",
+          "phase": "step8",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 2
+        },
+        {
+          "id": "AR01_NEW_OWN01",
+          "phase": "step8",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+          "phase": "step8",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+          "phase": "step8",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 2
+        }
+      ]
+    },
+    {
+      "trial": "ar01_replay44_work",
+      "saved_reports": 26,
+      "verdicts": {
+        "UNASSESSED": 25,
+        "NO_CONFLICT_IN_CHECKED_SCOPE": 1
+      },
+      "checked_reply_count_sum": 1,
+      "all_full_coverage_false": true,
+      "per_phase": {
+        "after44": {
+          "UNASSESSED": 25,
+          "NO_CONFLICT_IN_CHECKED_SCOPE": 1
+        }
+      },
+      "role_owner_known_bad_cases": [
+        {
+          "id": "AR01_NEW_ROLE02",
+          "phase": "after44",
+          "verdict": "NO_CONFLICT_IN_CHECKED_SCOPE",
+          "checked_reply_count": 1,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_NEW_ROLE03",
+          "phase": "after44",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_NEW_OWN01",
+          "phase": "after44",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+          "phase": "after44",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        },
+        {
+          "id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+          "phase": "after44",
+          "verdict": "UNASSESSED",
+          "checked_reply_count": 0,
+          "unassessed_reply_count": 1
+        }
+      ]
+    }
+  ],
+  "production_adoption": false,
+  "structure_map_delta": "NONE_THIS_CONTINUATION",
+  "formal_Mash_acceptance": false
+}

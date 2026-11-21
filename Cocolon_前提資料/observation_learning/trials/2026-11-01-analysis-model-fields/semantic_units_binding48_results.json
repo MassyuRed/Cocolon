@@ -1,0 +1,1932 @@
+{
+  "status": "COMPLETE_LOCAL_PARENT_AND_LITERAL_IMPROVEMENT_WITH_SEMANTIC_REGRESSION_NOT_ADOPTED",
+  "report": {
+    "status": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+    "plan_sha256": "ace9b8f8683aa55d50977bd4387bee819f6536c50da210ccf1810c9a0ca216d2",
+    "runner_sha256": "13daa18f6f13b041b55568af50bff43b7a66d8a3b4176c081bac068d993daba7",
+    "plan": {
+      "max_updates": 64,
+      "epochs": null,
+      "batch_size": 1,
+      "gradient_accumulation": 1,
+      "learning_rate": 5e-05,
+      "weight_decay": 0.0,
+      "gradient_clip": 1.0,
+      "seed": 20261107,
+      "max_seconds": 900,
+      "max_new_generations": 26,
+      "request_seconds": 23,
+      "context_tokens": 8192,
+      "max_new_tokens": 2048,
+      "initial": "SAVED_CANONICAL40_ADAPTER_PLUS_8_UNIT_POSITION_LITERAL_REASON_CONTRASTS",
+      "normal_adoption": false,
+      "update_order": [
+        "AT01",
+        "NT01",
+        "AT02",
+        "NT02",
+        "AT03",
+        "NT03",
+        "AT04",
+        "NT04",
+        "AT05",
+        "NT05",
+        "AT06",
+        "NT06",
+        "AT07",
+        "NT07",
+        "AT08",
+        "NT08",
+        "AT09",
+        "NT01",
+        "AT10",
+        "NT02",
+        "AT11",
+        "NT03",
+        "AT12",
+        "NT04",
+        "AT13",
+        "NT05",
+        "AT14",
+        "NT06",
+        "AT15",
+        "NT07",
+        "AT16",
+        "NT08",
+        "AT17",
+        "NT01",
+        "AT18",
+        "NT02",
+        "AT19",
+        "NT03",
+        "AT20",
+        "NT04",
+        "AT21",
+        "NT05",
+        "AT22",
+        "NT06",
+        "AT23",
+        "NT07",
+        "AT24",
+        "NT08",
+        "AT25",
+        "AT26",
+        "AT27",
+        "AT28",
+        "AT29",
+        "AT30",
+        "AT31",
+        "AT32",
+        "BT01",
+        "BT02",
+        "BT03",
+        "BT04",
+        "BT05",
+        "BT06",
+        "BT07",
+        "BT08"
+      ],
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "max_model_loads": 3,
+      "trainable_tensors": 112,
+      "trainable_parameters": 3833856,
+      "base_config_sha256": "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145",
+      "gpu_hourly_usd_observed": 0.58,
+      "process_cost_upper_usd": 0.145,
+      "shared_demo_scope": "Existing clarified.v1 system/demo and byte-identical original40 targets; eight separate synthetic all-unit-position and literal-reason contrasts; prompt masked",
+      "evaluation_scope": "Reused original16 raw before by exact ref/messages/weight/SHA; new4 before; after22 including original16, new4, newteacher2. Development/teacher reproduction, not independent acceptance.",
+      "max_teacher_measurements": 96,
+      "max_training_forwards": 64,
+      "outer_timeout_term_seconds": 890,
+      "outer_kill_grace_seconds": 10,
+      "training_objective": "EXISTING_FULL_TARGET_DETACHED_ERROR_WEIGHTED_CE_V1",
+      "measurement_objective": "UNWEIGHTED_FULL_ASSISTANT_NLL",
+      "initial_weights_sha256": "b8b7c2e978fa15decb60612b1abd44813e8e09987de2210899370f68147bd967",
+      "initial_config_sha256": "337313ee96a48e4d55abed29b0c0b73f13e7c8c0f7b7e782055c899dd5e93fda",
+      "initial_private_library_file_id": "libfile_6f703f3b576c8191bda988aea4234173",
+      "adaptive_loss_source": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/named_reference9_preparation/adaptive_loss.py",
+      "adaptive_loss_sha256": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141",
+      "rehearsal_stop_condition": "Read every raw. Reject semantic regression; no automatic extra epochs/data/generation or normal adoption.",
+      "diagnosis_private_library_file_id": "libfile_a47af2edc63c8191a4ee426efe0ce3f9",
+      "representation_comparison": "Original representation held fixed; new focused8 plus bounded64 updates from prior b8b7; not isolated causal attribution to any one case.",
+      "diagnosis_followup_private_library_file_id": "libfile_2a9e52f433ec8191aeb2551300955681"
+    },
+    "updates_started": 64,
+    "updates_completed": 64,
+    "training_forwards": 64,
+    "measurement_forwards": 96,
+    "model_loads": 3,
+    "new_calls": 26,
+    "calls": [
+      {
+        "phase": "before",
+        "probe_id": "DQ01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 9.437752336962149,
+        "finish_reason": "stop",
+        "raw_sha256": "926f44759f44b5a168c5b860990a83a5ad703d9988d0529748e76d6c7f9af1b3",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:435cf08b273f71ba905d6cc5e56728e4378958473616b38dbc1ba9180029709d",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 4,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "before",
+        "probe_id": "DQ02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 9.988075212109834,
+        "finish_reason": "stop",
+        "raw_sha256": "6f65df14c2d973fdfbf28cddcf58d5ce20b08017261e0da091506a3ece530f77",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:c6f1ab8fb05dff8806bed91fe4edaa47d7836f929c4659e83fd7a1cf74e33bd7",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "before",
+        "probe_id": "DQ03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 12.592503360006958,
+        "finish_reason": "stop",
+        "raw_sha256": "5185c2f8d974f98557fb52a24aed8736ca94157835f4d50a3601f66f9ea43d35",
+        "admission": "REJECTED",
+        "reason": "analysis_semantic_json_invalid"
+      },
+      {
+        "phase": "before",
+        "probe_id": "DQ04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.821383930044249,
+        "finish_reason": "stop",
+        "raw_sha256": "ce3ae605885d54a4fe044ce361bb336e8c6e9990e957884d6b0c0decc981a082",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:215a1c6017847abf70954d1590755c93b38db61becc836e03561882f89645777",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "AF01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 16.103558683069423,
+        "finish_reason": "stop",
+        "raw_sha256": "7853e2b180da3475d2ae829df23999be29537b2ee5c8a5432e658e2226bfd9bf",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:4682993ab02d491bce774f20fc61d63623dc0943ab21bbf958f20c6ae518a61e",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 7,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "AF02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.765049505978823,
+        "finish_reason": "stop",
+        "raw_sha256": "5908d61ec6d8125c99f21d538015069152e2170c6f1adba268471378acf78cbc",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:2bd19fefa3b34f9ecd8614cb0180411b583d791fc01e952bcd5e1886bc4f9c91",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "UV03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.639865456847474,
+        "finish_reason": "stop",
+        "raw_sha256": "9ee9fcbe7b01a915251ffcfab3acded96e3d5cd9257143188800c6cd80cae43b",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:5d94ffef5aec18a3c9e2a938d7be6cc6d6ec72682a1157144fe882ffb8cc2e3d",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "UV12",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.367469151969999,
+        "finish_reason": "stop",
+        "raw_sha256": "a48eee6629fd4af014af0f4f3282b6a2355ac26a4659c461e449354db357fd60",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:07b27dd9cb8980195d7d2127fbb274deb59e65338136e7a106acb848108b5fc5",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 2,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.774516909848899,
+        "finish_reason": "stop",
+        "raw_sha256": "b105ed47b4b61cc692e405479a74a4ec042441a4be3c3146283290008bd5a6b0",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:f05d41140179bed17c548476dd4b6de1d09f03acd81efe23e6badbc5697af7b1",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 6,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.03241483704187,
+        "finish_reason": "stop",
+        "raw_sha256": "e7453d7814710325fee02f0c33e05fabb40e89bc73e99c5f244877cbb211194b",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:e86aef9ce44a3699b467f31318f6218177c35bb167e533c295b21117d0f47890",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 6.515434958972037,
+        "finish_reason": "stop",
+        "raw_sha256": "0a979c2d8f7fc441b4b6b5eea774e72fbd7e2cb1a334411edf4f4f39b9d3146c",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:7a99cf950c9586f1195caf8f65fb9993ec30d73ee55df7d4f72abdce85623ba7",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 2,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 11.619946428807452,
+        "finish_reason": "stop",
+        "raw_sha256": "c1cbed393c35c800e8940f166fcd1241b3c1d7bda59821851d319898d6386d64",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:e941fe5df9b99d3a03dd5c9d3c0092faacc30c753bb70752d0890af921e5464c",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT17",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 9.773842985974625,
+        "finish_reason": "stop",
+        "raw_sha256": "311e309cd035a12b1c9f47af07ffa4a8834689c672d6a6b3050d7e90ac3b9ae3",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:7fa32827b0f9bfe5e79bc28bad1e895fbdb58212a7a80af57571c6710f7ec892",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT19",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 6.833734118845314,
+        "finish_reason": "stop",
+        "raw_sha256": "2a9c865be50ab9d880f24b8d173602311f1f74d626096c84cf363610aa4aa9eb",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:5d3c55016fa63101f655a4b52447e22a055f7a4f843ae9a4f828525f719fc862",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 2,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT21",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 6.125094938091934,
+        "finish_reason": "stop",
+        "raw_sha256": "52facbc2b191d58d9f1367ae8ba34063f225b1669ea825a1019749c2dd013d6b",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:28da1a32cb444eaed6838c5fc4fc982e052febf865d5124262bb35b6a169035d",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT29",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 12.956798792118207,
+        "finish_reason": "stop",
+        "raw_sha256": "c07ff83779e69c39e5e6eddd0bdfbbaf64726c4d99f34aec19c8690c4df2b925",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:b313bfe5a75720bdad6e8e9f07d920986cdaf9d59c0cc2a3c6852cde9ecc6d7b",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 6,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.561865385156125,
+        "finish_reason": "stop",
+        "raw_sha256": "fe884a51a85d2d9808d91cad6e6a230c92c9dc84cdfb822b1d5ee5675e42c203",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:b7719a48f67064d055c140f25beea25bcccc4f232d3cfb90331d7c9b537d0a8e",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.058264276012778,
+        "finish_reason": "stop",
+        "raw_sha256": "b90368a76490bebbae8437528822b3a68942f558a0b8ca8e1a173f8161a680c3",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:977e8db7bdfcd77f7beff9a5b17e7cb2fab383d1c4f44923d2ec6cff556c2ca1",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.689670654013753,
+        "finish_reason": "stop",
+        "raw_sha256": "f4239f4d0507ba13d59f2c11a9a4c96acfe873317c45bb8b6856998acd19c6e9",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:d2c8e0a5e1ca55abeecb6ac03cf9755d9c6b19eadff2d5e7070076b695571262",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 4,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.140702052041888,
+        "finish_reason": "stop",
+        "raw_sha256": "7fa8227f74948919140a55d0a82f199271e4dbb6a1ce1509ab374fb9fb56117d",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:e9fd33819c3b8a9e9b93625a08679ab9dfba4b7e5753aeab9203c6358ddc90b7",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 4,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "DQ01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.296765005914494,
+        "finish_reason": "stop",
+        "raw_sha256": "926f44759f44b5a168c5b860990a83a5ad703d9988d0529748e76d6c7f9af1b3",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:435cf08b273f71ba905d6cc5e56728e4378958473616b38dbc1ba9180029709d",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 4,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "DQ02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 9.51930569508113,
+        "finish_reason": "stop",
+        "raw_sha256": "6f65df14c2d973fdfbf28cddcf58d5ce20b08017261e0da091506a3ece530f77",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:c6f1ab8fb05dff8806bed91fe4edaa47d7836f929c4659e83fd7a1cf74e33bd7",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "DQ03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.9660452560056,
+        "finish_reason": "stop",
+        "raw_sha256": "1722e02207c18ba85d4bcf82df3a6652fd89d2a03c5ec6cca74cab8b64c6fbe5",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:2277c250be7dd0cb09384ccef255f2763a65265e8aa6778d3820c36ce238bf18",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "DQ04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.827518990961835,
+        "finish_reason": "stop",
+        "raw_sha256": "ce3ae605885d54a4fe044ce361bb336e8c6e9990e957884d6b0c0decc981a082",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:215a1c6017847abf70954d1590755c93b38db61becc836e03561882f89645777",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_NT03",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 11.610902100102976,
+        "finish_reason": "stop",
+        "raw_sha256": "fa8cc2c83b9e64b1930be45d562b63af2d3c5ee349cb27a7b9da6477f369b447",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:21dcf9979e8e341134b05a13b37c95f213a6ee550af03449ee18a1edcbdf74f3",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 6,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_NT05",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 10.806812965776771,
+        "finish_reason": "stop",
+        "raw_sha256": "e3d6f5258c78ceee276f13d5c1aaaab2415156e8d10e185f47a7d0cc2fe490a1",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:fdc4f76b4c74bd90093656744c3b77c4ad656030717a211e62d4d2904baed92a",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      }
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "teacher": "AT01",
+        "loss": 0.0006950537208467722,
+        "gradient_norm": 0.07988686859607697
+      },
+      {
+        "step": 2,
+        "teacher": "NT01",
+        "loss": 0.7102034091949463,
+        "gradient_norm": 43.95574951171875
+      },
+      {
+        "step": 3,
+        "teacher": "AT02",
+        "loss": 0.0003035152330994606,
+        "gradient_norm": 0.012759413570165634
+      },
+      {
+        "step": 4,
+        "teacher": "NT02",
+        "loss": 0.6987597942352295,
+        "gradient_norm": 18.977766036987305
+      },
+      {
+        "step": 5,
+        "teacher": "AT03",
+        "loss": 0.0008226197678595781,
+        "gradient_norm": 0.3608173727989197
+      },
+      {
+        "step": 6,
+        "teacher": "NT03",
+        "loss": 0.002719217911362648,
+        "gradient_norm": 0.2653716206550598
+      },
+      {
+        "step": 7,
+        "teacher": "AT04",
+        "loss": 0.0011293685529381037,
+        "gradient_norm": 0.06385082006454468
+      },
+      {
+        "step": 8,
+        "teacher": "NT04",
+        "loss": 0.05239589512348175,
+        "gradient_norm": 3.657168388366699
+      },
+      {
+        "step": 9,
+        "teacher": "AT05",
+        "loss": 0.6998468041419983,
+        "gradient_norm": 65.66265869140625
+      },
+      {
+        "step": 10,
+        "teacher": "NT05",
+        "loss": 0.007476196624338627,
+        "gradient_norm": 0.6688142418861389
+      },
+      {
+        "step": 11,
+        "teacher": "AT06",
+        "loss": 0.3893917500972748,
+        "gradient_norm": 49.085662841796875
+      },
+      {
+        "step": 12,
+        "teacher": "NT06",
+        "loss": 0.5664350986480713,
+        "gradient_norm": 33.22380447387695
+      },
+      {
+        "step": 13,
+        "teacher": "AT07",
+        "loss": 0.25897786021232605,
+        "gradient_norm": 22.562437057495117
+      },
+      {
+        "step": 14,
+        "teacher": "NT07",
+        "loss": 0.020763996988534927,
+        "gradient_norm": 2.753244638442993
+      },
+      {
+        "step": 15,
+        "teacher": "AT08",
+        "loss": 0.023178422823548317,
+        "gradient_norm": 2.0291006565093994
+      },
+      {
+        "step": 16,
+        "teacher": "NT08",
+        "loss": 0.09574397653341293,
+        "gradient_norm": 9.643489837646484
+      },
+      {
+        "step": 17,
+        "teacher": "AT09",
+        "loss": 0.008246753364801407,
+        "gradient_norm": 0.6890785098075867
+      },
+      {
+        "step": 18,
+        "teacher": "NT01",
+        "loss": 0.0006008198251947761,
+        "gradient_norm": 0.04360954463481903
+      },
+      {
+        "step": 19,
+        "teacher": "AT10",
+        "loss": 0.001141462242230773,
+        "gradient_norm": 0.10838975757360458
+      },
+      {
+        "step": 20,
+        "teacher": "NT02",
+        "loss": 0.3872237801551819,
+        "gradient_norm": 112.60543060302734
+      },
+      {
+        "step": 21,
+        "teacher": "AT11",
+        "loss": 0.005297945346683264,
+        "gradient_norm": 0.2428807020187378
+      },
+      {
+        "step": 22,
+        "teacher": "NT03",
+        "loss": 0.0007752355886623263,
+        "gradient_norm": 0.026088926941156387
+      },
+      {
+        "step": 23,
+        "teacher": "AT12",
+        "loss": 0.07334654778242111,
+        "gradient_norm": 8.995687484741211
+      },
+      {
+        "step": 24,
+        "teacher": "NT04",
+        "loss": 0.002030698349699378,
+        "gradient_norm": 0.21716894209384918
+      },
+      {
+        "step": 25,
+        "teacher": "AT13",
+        "loss": 0.0010184278944507241,
+        "gradient_norm": 0.05531959980726242
+      },
+      {
+        "step": 26,
+        "teacher": "NT05",
+        "loss": 0.0010495836613699794,
+        "gradient_norm": 0.05272291973233223
+      },
+      {
+        "step": 27,
+        "teacher": "AT14",
+        "loss": 0.003518900368362665,
+        "gradient_norm": 0.3455254137516022
+      },
+      {
+        "step": 28,
+        "teacher": "NT06",
+        "loss": 0.20186272263526917,
+        "gradient_norm": 11.633641242980957
+      },
+      {
+        "step": 29,
+        "teacher": "AT15",
+        "loss": 0.010327346622943878,
+        "gradient_norm": 1.521936058998108
+      },
+      {
+        "step": 30,
+        "teacher": "NT07",
+        "loss": 0.07223598659038544,
+        "gradient_norm": 9.851485252380371
+      },
+      {
+        "step": 31,
+        "teacher": "AT16",
+        "loss": 0.0019169310107827187,
+        "gradient_norm": 0.1431741565465927
+      },
+      {
+        "step": 32,
+        "teacher": "NT08",
+        "loss": 0.003365851938724518,
+        "gradient_norm": 0.1757272630929947
+      },
+      {
+        "step": 33,
+        "teacher": "AT17",
+        "loss": 0.0013747637858614326,
+        "gradient_norm": 0.0543132983148098
+      },
+      {
+        "step": 34,
+        "teacher": "NT01",
+        "loss": 0.0006140100304037333,
+        "gradient_norm": 0.03182370960712433
+      },
+      {
+        "step": 35,
+        "teacher": "AT18",
+        "loss": 0.009893489070236683,
+        "gradient_norm": 2.0342884063720703
+      },
+      {
+        "step": 36,
+        "teacher": "NT02",
+        "loss": 0.016927972435951233,
+        "gradient_norm": 1.895679235458374
+      },
+      {
+        "step": 37,
+        "teacher": "AT19",
+        "loss": 0.0065849702805280685,
+        "gradient_norm": 0.6432433724403381
+      },
+      {
+        "step": 38,
+        "teacher": "NT03",
+        "loss": 0.0007441581692546606,
+        "gradient_norm": 0.024018259719014168
+      },
+      {
+        "step": 39,
+        "teacher": "AT20",
+        "loss": 0.05657730624079704,
+        "gradient_norm": 11.967714309692383
+      },
+      {
+        "step": 40,
+        "teacher": "NT04",
+        "loss": 0.0007108222343958914,
+        "gradient_norm": 0.03302939236164093
+      },
+      {
+        "step": 41,
+        "teacher": "AT21",
+        "loss": 0.00018680906214285642,
+        "gradient_norm": 0.004537638742476702
+      },
+      {
+        "step": 42,
+        "teacher": "NT05",
+        "loss": 0.000612921838182956,
+        "gradient_norm": 0.030504301190376282
+      },
+      {
+        "step": 43,
+        "teacher": "AT22",
+        "loss": 0.6371933817863464,
+        "gradient_norm": 38.474464416503906
+      },
+      {
+        "step": 44,
+        "teacher": "NT06",
+        "loss": 0.013390613719820976,
+        "gradient_norm": 2.5198800563812256
+      },
+      {
+        "step": 45,
+        "teacher": "AT23",
+        "loss": 0.2758677005767822,
+        "gradient_norm": 36.9351692199707
+      },
+      {
+        "step": 46,
+        "teacher": "NT07",
+        "loss": 0.0023711821995675564,
+        "gradient_norm": 0.2715744078159332
+      },
+      {
+        "step": 47,
+        "teacher": "AT24",
+        "loss": 0.0011872126488015056,
+        "gradient_norm": 0.0644918829202652
+      },
+      {
+        "step": 48,
+        "teacher": "NT08",
+        "loss": 0.001648368313908577,
+        "gradient_norm": 0.08706884831190109
+      },
+      {
+        "step": 49,
+        "teacher": "AT25",
+        "loss": 0.00989269558340311,
+        "gradient_norm": 1.5744444131851196
+      },
+      {
+        "step": 50,
+        "teacher": "AT26",
+        "loss": 0.008773282170295715,
+        "gradient_norm": 1.7020121812820435
+      },
+      {
+        "step": 51,
+        "teacher": "AT27",
+        "loss": 0.01355630625039339,
+        "gradient_norm": 1.8438297510147095
+      },
+      {
+        "step": 52,
+        "teacher": "AT28",
+        "loss": 0.0015223147347569466,
+        "gradient_norm": 0.10057731717824936
+      },
+      {
+        "step": 53,
+        "teacher": "AT29",
+        "loss": 0.14085228741168976,
+        "gradient_norm": 7.887149333953857
+      },
+      {
+        "step": 54,
+        "teacher": "AT30",
+        "loss": 0.005443766713142395,
+        "gradient_norm": 1.0890504121780396
+      },
+      {
+        "step": 55,
+        "teacher": "AT31",
+        "loss": 0.0016747547779232264,
+        "gradient_norm": 0.1745149791240692
+      },
+      {
+        "step": 56,
+        "teacher": "AT32",
+        "loss": 0.007714791223406792,
+        "gradient_norm": 0.7962643504142761
+      },
+      {
+        "step": 57,
+        "teacher": "BT01",
+        "loss": 0.0006605575326830149,
+        "gradient_norm": 0.05682852864265442
+      },
+      {
+        "step": 58,
+        "teacher": "BT02",
+        "loss": 0.0004959072102792561,
+        "gradient_norm": 0.027451353147625923
+      },
+      {
+        "step": 59,
+        "teacher": "BT03",
+        "loss": 0.04924565181136131,
+        "gradient_norm": 6.086415767669678
+      },
+      {
+        "step": 60,
+        "teacher": "BT04",
+        "loss": 0.006826057098805904,
+        "gradient_norm": 0.9574081897735596
+      },
+      {
+        "step": 61,
+        "teacher": "BT05",
+        "loss": 0.0016504568047821522,
+        "gradient_norm": 0.1861889660358429
+      },
+      {
+        "step": 62,
+        "teacher": "BT06",
+        "loss": 0.01649404875934124,
+        "gradient_norm": 6.457733154296875
+      },
+      {
+        "step": 63,
+        "teacher": "BT07",
+        "loss": 0.01751125417649746,
+        "gradient_norm": 4.945061683654785
+      },
+      {
+        "step": 64,
+        "teacher": "BT08",
+        "loss": 0.012807773426175117,
+        "gradient_norm": 2.4289543628692627
+      }
+    ],
+    "measurements": [
+      {
+        "phase": "before_updates",
+        "losses": {
+          "AT01": 0.0006822655559517443,
+          "AT02": 0.00032985422876663506,
+          "AT03": 0.0010190155589953065,
+          "AT04": 0.0007869613473303616,
+          "AT05": 0.0011509401956573129,
+          "AT06": 0.0004813486593775451,
+          "AT07": 0.0006531256949529052,
+          "AT08": 0.010815931484103203,
+          "AT09": 0.016152875497937202,
+          "AT10": 0.001283251098357141,
+          "AT11": 0.004101907834410667,
+          "AT12": 0.01014965120702982,
+          "AT13": 0.0007310053915716708,
+          "AT14": 0.006691781338304281,
+          "AT15": 0.0032584755681455135,
+          "AT16": 0.0009452475933358073,
+          "AT17": 0.0012370735639706254,
+          "AT18": 0.019358618184924126,
+          "AT19": 0.002035922836512327,
+          "AT20": 0.0033660761546343565,
+          "AT21": 0.001126506831496954,
+          "AT22": 0.021368876099586487,
+          "AT23": 0.0014828197890892625,
+          "AT24": 0.0012446874752640724,
+          "AT25": 0.001681530731730163,
+          "AT26": 0.0015999890165403485,
+          "AT27": 0.003308089915663004,
+          "AT28": 0.0014640040462836623,
+          "AT29": 0.003963231109082699,
+          "AT30": 0.0022825109772384167,
+          "AT31": 0.0019491604762151837,
+          "AT32": 0.001630264101549983,
+          "BT01": 0.0005581484874710441,
+          "BT02": 0.0005082633579149842,
+          "BT03": 0.00027975550619885325,
+          "BT04": 0.00030964339384809136,
+          "BT05": 0.0011883553816005588,
+          "BT06": 0.0018578803865239024,
+          "BT07": 0.006061854772269726,
+          "BT08": 0.00310210301540792,
+          "NT01": 0.05936310812830925,
+          "NT02": 0.08197834342718124,
+          "NT03": 0.0588841587305069,
+          "NT04": 0.03609541803598404,
+          "NT05": 0.010809480212628841,
+          "NT06": 0.042683012783527374,
+          "NT07": 0.014279716648161411,
+          "NT08": 0.044354148209095
+        },
+        "mean": 0.01022179979251329
+      },
+      {
+        "phase": "after_updates",
+        "losses": {
+          "AT01": 0.00038952866452746093,
+          "AT02": 0.00029632143559865654,
+          "AT03": 0.0003110439865849912,
+          "AT04": 0.0014389834832400084,
+          "AT05": 0.005070784129202366,
+          "AT06": 0.00022989546414464712,
+          "AT07": 0.0005446224822662771,
+          "AT08": 0.001309820101596415,
+          "AT09": 0.026249736547470093,
+          "AT10": 0.0015094114933162928,
+          "AT11": 0.001867098966613412,
+          "AT12": 0.001985790440812707,
+          "AT13": 0.00039801650564186275,
+          "AT14": 0.0005493738572113216,
+          "AT15": 0.003983129281550646,
+          "AT16": 0.004420189652591944,
+          "AT17": 0.0010395937133580446,
+          "AT18": 0.0003076959983445704,
+          "AT19": 0.0013017930323258042,
+          "AT20": 0.0013417631853371859,
+          "AT21": 0.0005368305719457567,
+          "AT22": 0.010729474015533924,
+          "AT23": 0.0013862514169886708,
+          "AT24": 0.0008943789871409535,
+          "AT25": 0.016103865578770638,
+          "AT26": 0.0009503919281996787,
+          "AT27": 0.0039652143605053425,
+          "AT28": 0.004593451041728258,
+          "AT29": 0.0073576089926064014,
+          "AT30": 0.003409499069675803,
+          "AT31": 0.006145581137388945,
+          "AT32": 0.00102238601539284,
+          "BT01": 0.0004822771588806063,
+          "BT02": 0.0004097813507542014,
+          "BT03": 0.00031820853473618627,
+          "BT04": 0.00018743665714282542,
+          "BT05": 0.0027064273599535227,
+          "BT06": 0.0036365464329719543,
+          "BT07": 0.009286177344620228,
+          "BT08": 0.0023556745145469904,
+          "NT01": 0.005891536828130484,
+          "NT02": 0.004682454746216536,
+          "NT03": 0.011390815488994122,
+          "NT04": 0.0029797267634421587,
+          "NT05": 0.0007499493076466024,
+          "NT06": 0.0043374295346438885,
+          "NT07": 0.002933593699708581,
+          "NT08": 0.0024378355592489243
+        },
+        "mean": 0.0034671957670677025
+      }
+    ],
+    "training_initial": "PRIOR_ISOLATED_CANONICAL40_ADAPTER_FOCUSED8_UNIT_POSITION_LITERAL_REASON",
+    "initial_hashes": {
+      "adapter_config.json": "337313ee96a48e4d55abed29b0c0b73f13e7c8c0f7b7e782055c899dd5e93fda",
+      "adapter_model.safetensors": "b8b7c2e978fa15decb60612b1abd44813e8e09987de2210899370f68147bd967"
+    },
+    "training_objective": "EXISTING_FULL_TARGET_DETACHED_ERROR_WEIGHTED_CE_V1",
+    "measurement_objective": "UNWEIGHTED_FULL_ASSISTANT_NLL",
+    "model_adopted": false,
+    "retry": false,
+    "product_credit": 0,
+    "process_seconds": 386.87166467309,
+    "ce_window_cpu_validation": [
+      {
+        "weighted": false,
+        "loss": 2.9459385871887207,
+        "full_tail_loss_and_all_gradients_match": true,
+        "all_target_weights_positive": true
+      },
+      {
+        "weighted": true,
+        "loss": 2.9459593296051025,
+        "full_tail_loss_and_all_gradients_match": true,
+        "all_target_weights_positive": true
+      }
+    ],
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "pins": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+    "seed": 20261107,
+    "token_counts": {
+      "AT01": {
+        "prompt_tokens": 903,
+        "target_tokens": 141
+      },
+      "AT02": {
+        "prompt_tokens": 902,
+        "target_tokens": 107
+      },
+      "AT03": {
+        "prompt_tokens": 905,
+        "target_tokens": 129
+      },
+      "AT04": {
+        "prompt_tokens": 907,
+        "target_tokens": 173
+      },
+      "AT05": {
+        "prompt_tokens": 898,
+        "target_tokens": 87
+      },
+      "AT06": {
+        "prompt_tokens": 899,
+        "target_tokens": 79
+      },
+      "AT07": {
+        "prompt_tokens": 903,
+        "target_tokens": 109
+      },
+      "AT08": {
+        "prompt_tokens": 905,
+        "target_tokens": 156
+      },
+      "AT09": {
+        "prompt_tokens": 898,
+        "target_tokens": 136
+      },
+      "AT10": {
+        "prompt_tokens": 901,
+        "target_tokens": 139
+      },
+      "AT11": {
+        "prompt_tokens": 902,
+        "target_tokens": 144
+      },
+      "AT12": {
+        "prompt_tokens": 899,
+        "target_tokens": 117
+      },
+      "AT13": {
+        "prompt_tokens": 903,
+        "target_tokens": 118
+      },
+      "AT14": {
+        "prompt_tokens": 898,
+        "target_tokens": 78
+      },
+      "AT15": {
+        "prompt_tokens": 903,
+        "target_tokens": 133
+      },
+      "AT16": {
+        "prompt_tokens": 901,
+        "target_tokens": 125
+      },
+      "AT17": {
+        "prompt_tokens": 903,
+        "target_tokens": 157
+      },
+      "AT18": {
+        "prompt_tokens": 900,
+        "target_tokens": 117
+      },
+      "AT19": {
+        "prompt_tokens": 904,
+        "target_tokens": 110
+      },
+      "AT20": {
+        "prompt_tokens": 900,
+        "target_tokens": 118
+      },
+      "AT21": {
+        "prompt_tokens": 898,
+        "target_tokens": 99
+      },
+      "AT22": {
+        "prompt_tokens": 897,
+        "target_tokens": 96
+      },
+      "AT23": {
+        "prompt_tokens": 899,
+        "target_tokens": 117
+      },
+      "AT24": {
+        "prompt_tokens": 904,
+        "target_tokens": 134
+      },
+      "AT25": {
+        "prompt_tokens": 899,
+        "target_tokens": 118
+      },
+      "AT26": {
+        "prompt_tokens": 902,
+        "target_tokens": 104
+      },
+      "AT27": {
+        "prompt_tokens": 902,
+        "target_tokens": 140
+      },
+      "AT28": {
+        "prompt_tokens": 902,
+        "target_tokens": 151
+      },
+      "AT29": {
+        "prompt_tokens": 923,
+        "target_tokens": 214
+      },
+      "AT30": {
+        "prompt_tokens": 911,
+        "target_tokens": 120
+      },
+      "AT31": {
+        "prompt_tokens": 902,
+        "target_tokens": 124
+      },
+      "AT32": {
+        "prompt_tokens": 901,
+        "target_tokens": 104
+      },
+      "BT01": {
+        "prompt_tokens": 903,
+        "target_tokens": 118
+      },
+      "BT02": {
+        "prompt_tokens": 901,
+        "target_tokens": 115
+      },
+      "BT03": {
+        "prompt_tokens": 910,
+        "target_tokens": 160
+      },
+      "BT04": {
+        "prompt_tokens": 906,
+        "target_tokens": 133
+      },
+      "BT05": {
+        "prompt_tokens": 902,
+        "target_tokens": 139
+      },
+      "BT06": {
+        "prompt_tokens": 902,
+        "target_tokens": 120
+      },
+      "BT07": {
+        "prompt_tokens": 905,
+        "target_tokens": 158
+      },
+      "BT08": {
+        "prompt_tokens": 901,
+        "target_tokens": 106
+      },
+      "NT01": {
+        "prompt_tokens": 906,
+        "target_tokens": 175
+      },
+      "NT02": {
+        "prompt_tokens": 904,
+        "target_tokens": 152
+      },
+      "NT03": {
+        "prompt_tokens": 904,
+        "target_tokens": 173
+      },
+      "NT04": {
+        "prompt_tokens": 910,
+        "target_tokens": 224
+      },
+      "NT05": {
+        "prompt_tokens": 920,
+        "target_tokens": 174
+      },
+      "NT06": {
+        "prompt_tokens": 931,
+        "target_tokens": 230
+      },
+      "NT07": {
+        "prompt_tokens": 927,
+        "target_tokens": 236
+      },
+      "NT08": {
+        "prompt_tokens": 924,
+        "target_tokens": 221
+      }
+    },
+    "training_initial_reload": "MATCHED_ALL_112_SAVED_TENSORS",
+    "changed_trainable_tensors": 112,
+    "peak_allocated_gib": 9.369555473327637,
+    "peak_reserved_gib": 11.5546875,
+    "adapter_sha256": "6152e16268a17477118dfb79780ee810e729af0ab047a211ea1666d98e5015e8",
+    "adapter_config_sha256": "08715ea255fe433651a4c543d4b40afc10677d14cde772b1e4e42edc97508c56",
+    "saved_adapter_nontraining_reload": "MATCHED_112_TENSORS",
+    "initial_adapter_unchanged": true
+  },
+  "supervisor": {
+    "process_seconds": 388.41115838917904,
+    "exit": 0,
+    "compute_apps": ""
+  },
+  "root_read": {
+    "AF01": "All required keys and literal fatigue text recover, so structural admission succeeds. Memo target expands to include predicate regret and a spurious modifier. Action WRITTEN_REASON quote includes the declined action and target, rather than reason clause alone; fatigue-reason is WRITTEN_MODIFIER instead of REASON_MARKER. Semantically incomplete.",
+    "AF02": "Yesterday unknown EPI, today solving context and delight remain separate; no reason inferred.",
+    "UV03": "Coworker actor/quoted negation and independent self concern/mada retained.",
+    "UV12": "Independent desire/undecided thoughts retained, but undecided NEGATION becomes WRITTEN_MODIFIER (regression vs b8b7). Extra nanimo modifier is rough. Complete written text remains available; that is not complete qualifier meaning.",
+    "NV01": "Reply target correctly parent3, unknown-content correctly parent5, waiting ACTION retained. Still-unknown merged into one EPI quote rather than separate mada qualifier; parent improvement is on a previously seen DEV input.",
+    "NV02": "Father actor/quoted content and independent self worry/degree retained.",
+    "NV03": "Desire and independent undecided thought retained, time/negation/mada local.",
+    "NV04": "Morning negative attribute, night context and reassurance, why-unknown root4/content remain separate.",
+    "REHEARSAL_AT17": "Teacher JSON equivalent.",
+    "REHEARSAL_AT19": "Teacher JSON equivalent.",
+    "REHEARSAL_AT21": "Teacher JSON equivalent.",
+    "REHEARSAL_AT29": "Teacher JSON equivalent.",
+    "CQ01": "Regression: explicit cancellation/nonaction becomes ATTENTION_OR_THOUGHT, and application target child disappears. Valid wire, wrong meaning.",
+    "CQ02": "Actions and unknown parent4 retained, but mada/EPI separation regresses to whole EPI quote.",
+    "CQ03": "Waiting ACTION, target and unknown parent3 retained; raw byte-identical to b8b7 after.",
+    "CQ04": "Yesterday unknown EPI and today understanding/slight relief retained; raw byte-identical to b8b7 after.",
+    "DQ01": "Before/after raw byte-identical. Actions use full-clause roots without child targets, so unknown3 does not distinguish root ordinal from all-unit index. No new transfer proof.",
+    "DQ02": "Before/after raw byte-identical. Three full-clause action roots give unknown4, with the same limitation. No new transfer proof.",
+    "DQ03": "Before malformed JSON rejected; after valid2 fields, literal慌てていたので and REASON_MARKER recover. Correct consecutive te in source is retained, not globally removed.",
+    "DQ04": "Before/after raw byte-identical. Literal written reason and reason marker retained; evening stays inside target rather than relocating to postponement time.",
+    "REHEARSAL_NT03": "Parent3/5 correct. JSON differs from teacher only by object particles:机を/配達を rather than机/配達. Both are unique literal targets, no identified semantic regression; trained reproduction, not unseen transfer.",
+    "REHEARSAL_NT05": "Teacher JSON equivalent; literal reason/REASON_MARKER and unknown root retained."
+  },
+  "structural": {
+    "DEV8": "8/8 vs6/8",
+    "old_trained4": "4/4",
+    "new_trained2": "2/2",
+    "CQ4": "4/4 vs4/4",
+    "new_DQ4": "4/4 vs3/4"
+  },
+  "trained_teacher_json_equivalence": {
+    "REHEARSAL_AT17": true,
+    "REHEARSAL_AT19": true,
+    "REHEARSAL_AT21": true,
+    "REHEARSAL_AT29": true,
+    "REHEARSAL_NT03": false,
+    "REHEARSAL_NT05": true
+  },
+  "new_DQ_byte_unchanged": [
+    "DQ01",
+    "DQ02",
+    "DQ04"
+  ],
+  "grouped_teacher_nll": {
+    "original40": {
+      "before_mean": 0.0035549750966310965,
+      "after_mean": 0.0032755513722804606,
+      "decreased": 24,
+      "increased": 16
+    },
+    "new8": {
+      "before_mean": 0.04355592327192426,
+      "after_mean": 0.004425417741003912,
+      "decreased": 8,
+      "increased": 0
+    }
+  },
+  "independent_local_saved_candidate_replays": [
+    {
+      "file": "after_AF01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:4682993ab02d491bce774f20fc61d63623dc0943ab21bbf958f20c6ae518a61e",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_AF02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:2bd19fefa3b34f9ecd8614cb0180411b583d791fc01e952bcd5e1886bc4f9c91",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_CQ01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:b7719a48f67064d055c140f25beea25bcccc4f232d3cfb90331d7c9b537d0a8e",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_CQ02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:977e8db7bdfcd77f7beff9a5b17e7cb2fab383d1c4f44923d2ec6cff556c2ca1",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_CQ03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:d2c8e0a5e1ca55abeecb6ac03cf9755d9c6b19eadff2d5e7070076b695571262",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_CQ04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:e9fd33819c3b8a9e9b93625a08679ab9dfba4b7e5753aeab9203c6358ddc90b7",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_DQ01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:435cf08b273f71ba905d6cc5e56728e4378958473616b38dbc1ba9180029709d",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_DQ02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:c6f1ab8fb05dff8806bed91fe4edaa47d7836f929c4659e83fd7a1cf74e33bd7",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_DQ03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:2277c250be7dd0cb09384ccef255f2763a65265e8aa6778d3820c36ce238bf18",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_DQ04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:215a1c6017847abf70954d1590755c93b38db61becc836e03561882f89645777",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_NV01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:f05d41140179bed17c548476dd4b6de1d09f03acd81efe23e6badbc5697af7b1",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_NV02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:e86aef9ce44a3699b467f31318f6218177c35bb167e533c295b21117d0f47890",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_NV03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:7a99cf950c9586f1195caf8f65fb9993ec30d73ee55df7d4f72abdce85623ba7",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_NV04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:e941fe5df9b99d3a03dd5c9d3c0092faacc30c753bb70752d0890af921e5464c",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_REHEARSAL_AT17.candidate.json",
+      "candidate_id": "analysis-unit-candidate:7fa32827b0f9bfe5e79bc28bad1e895fbdb58212a7a80af57571c6710f7ec892",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_REHEARSAL_AT19.candidate.json",
+      "candidate_id": "analysis-unit-candidate:5d3c55016fa63101f655a4b52447e22a055f7a4f843ae9a4f828525f719fc862",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_REHEARSAL_AT21.candidate.json",
+      "candidate_id": "analysis-unit-candidate:28da1a32cb444eaed6838c5fc4fc982e052febf865d5124262bb35b6a169035d",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_REHEARSAL_AT29.candidate.json",
+      "candidate_id": "analysis-unit-candidate:b313bfe5a75720bdad6e8e9f07d920986cdaf9d59c0cc2a3c6852cde9ecc6d7b",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_REHEARSAL_NT03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:21dcf9979e8e341134b05a13b37c95f213a6ee550af03449ee18a1edcbdf74f3",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_REHEARSAL_NT05.candidate.json",
+      "candidate_id": "analysis-unit-candidate:fdc4f76b4c74bd90093656744c3b77c4ad656030717a211e62d4d2904baed92a",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_UV03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:5d94ffef5aec18a3c9e2a938d7be6cc6d6ec72682a1157144fe882ffb8cc2e3d",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "after_UV12.candidate.json",
+      "candidate_id": "analysis-unit-candidate:07b27dd9cb8980195d7d2127fbb274deb59e65338136e7a106acb848108b5fc5",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "before_DQ01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:435cf08b273f71ba905d6cc5e56728e4378958473616b38dbc1ba9180029709d",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "before_DQ02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:c6f1ab8fb05dff8806bed91fe4edaa47d7836f929c4659e83fd7a1cf74e33bd7",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "file": "before_DQ04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:215a1c6017847abf70954d1590755c93b38db61becc836e03561882f89645777",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    }
+  ],
+  "private_preservation": {
+    "status": "SAVED_112_F32_TENSORS_AND_ALL_136_ORIGINAL_MEMBERS_HASH_MATCHED",
+    "library_file_id": "libfile_179ddf90fa5c8191acfe12f9d025d2df",
+    "archive": "cocolon-analysis-binding48-result-20261102.zip",
+    "archive_bytes": 14548458,
+    "archive_sha256": "f575611c2f88f6b79b91e2f444987aa4977addc827979de3ec0489cddf662016",
+    "original_manifest_members": 135,
+    "original_zip_sha256": "f6b627256381feec81f7eb6e9ea069d5b9881b3a8783eac3c608b0695f704eb6",
+    "recompressed_container": true,
+    "original_weights_exact": true
+  },
+  "normal_adoption": false,
+  "product_credit": 0,
+  "process_usd": 0.06232932375288672,
+  "next_step": "Retain both b8b7 and6152 without choosing6152 as default. Inspect distinct written-reason/content-target scope and explicit nonaction/NEGATION classification regressions; design a separate smallest contrast from new source text, before another bounded candidate. Do not repeat epochs, expand data, repair raw, or weaken receiver automatically.",
+  "comparison_block_totals": {
+    "additional_updates": 192,
+    "new_generations": 78,
+    "local_diagnostic_forwards": 9,
+    "not_independent_78_evaluations": true
+  },
+  "cpu_scope": "Prior instruction-version pytest112 passed2 WASM-dependent skipped; preparation48 source-bound targets and integrity receipt are not additional pytest cases or a repeated860 suite."
+}

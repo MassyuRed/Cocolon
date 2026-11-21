@@ -1,0 +1,20 @@
+{
+  "pid": 3851,
+  "started_unix": 1793053285.442164,
+  "command": [
+    "/usr/local/bin/python",
+    "-u",
+    "/workspace/cocolon_native15_afteronly_pack_20261026/run_native15_afteronly.py",
+    "--pack",
+    "/workspace/cocolon_native15_afteronly_pack_20261026",
+    "--execute",
+    "--source-commit",
+    "9a6c56ed5657e50e31cef50bab0015fc5e6484f9"
+  ],
+  "runner_sha256": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+  "pod_id": "bkj4qvnhwtdqc2",
+  "maximum_seconds": 2700,
+  "maximum_process_usd": 0.21,
+  "new_before_generations": 0,
+  "retry": false
+}

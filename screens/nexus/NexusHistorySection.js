@@ -15,6 +15,7 @@ function NexusHistoryControls({ visible, historyOrder, handleSetHistoryOrder, st
           style={[styles.historySortButton, historyOrder === HISTORY_ORDER_LATEST && styles.historySortButtonActive]}
           onPress={() => handleSetHistoryOrder(HISTORY_ORDER_LATEST)}
           accessibilityLabel="履歴を新しい順で表示する"
+          accessibilityState={{ selected: historyOrder === HISTORY_ORDER_LATEST }}
         >
           <Text style={[styles.historySortButtonText, historyOrder === HISTORY_ORDER_LATEST && styles.historySortButtonTextActive]}>新しい順</Text>
         </CocolonPressable>
@@ -22,6 +23,7 @@ function NexusHistoryControls({ visible, historyOrder, handleSetHistoryOrder, st
           style={[styles.historySortButton, styles.historySortButtonSpacer, historyOrder === HISTORY_ORDER_OLDEST && styles.historySortButtonActive]}
           onPress={() => handleSetHistoryOrder(HISTORY_ORDER_OLDEST)}
           accessibilityLabel="履歴を古い順で表示する"
+          accessibilityState={{ selected: historyOrder === HISTORY_ORDER_OLDEST }}
         >
           <Text style={[styles.historySortButtonText, historyOrder === HISTORY_ORDER_OLDEST && styles.historySortButtonTextActive]}>古い順</Text>
         </CocolonPressable>
@@ -70,6 +72,7 @@ export default function NexusHistorySection({
   return (
     <View>
       <NexusHistoryControls visible={!isTutorialMode} historyOrder={historyOrder} handleSetHistoryOrder={handleSetHistoryOrder} styles={styles} />
+      {historyState.error && historyState.resonances.length > 0 ? <Text style={styles.errorText} accessibilityRole="alert">{historyState.error}</Text> : null}
       {content}
     </View>
   );

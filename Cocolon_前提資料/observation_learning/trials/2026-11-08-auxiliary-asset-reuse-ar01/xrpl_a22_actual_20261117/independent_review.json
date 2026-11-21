@@ -1,0 +1,27 @@
+{
+  "state": "A22_ARCHIVE_PASS_VISIBLE_PARTIAL_QUALITY_NOT_ADOPTED",
+  "reviewer": "/root/d20_review",
+  "data_members": 13,
+  "all_CRC_sizes_hashes_bindings_match": true,
+  "source_request_weights_same": true,
+  "raw_characters": 8106,
+  "raw_bytes": 13584,
+  "complete_nodes": 12,
+  "complete_edges": 29,
+  "partial_edge": 30,
+  "overview": false,
+  "covered_records": 10,
+  "unreferenced_field6": true,
+  "n12_unrelated_roots": [
+    1,
+    7,
+    10
+  ],
+  "n12_title_meaning_omit_its_study_unit": true,
+  "all_29_edges_from_n1": true,
+  "seven_pairs_repeat_all_four_relation_kinds_with_same_label": true,
+  "endpoint_ID_label_mismatches": true,
+  "time_extension_justified": false,
+  "repair_adoption_SQL_model_calls": 0,
+  "next": "Coherent local-root node formation and actual endpoint-ID/root relation selection and wording in existing author. More generation time cannot correct already committed inadequate content."
+}

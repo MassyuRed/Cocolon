@@ -1,0 +1,888 @@
+{
+  "schema": "cocolon.qwen4b_cmee_internal_prescreen.v1",
+  "status": "PRODUCT_NOT_CLEAR",
+  "review_kind": "Karen internal pre-screen; not human Product Read or quality gold.",
+  "verbatim_raws": "before_cmee.json and after_cmee.json retain all raw records without repair.",
+  "overall": "局所改善と悪化が混在。自然な受け取り、根拠/形式、訂正後の意味更新は未達。全般的な品質改善を確認できない。",
+  "scope": "FIT2 are training-family fixed-input/fixed-prior diagnostics. EFREE6 are known development proxies outside this semantic profile, not six admission failures.",
+  "cases": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "source": {
+        "native_case": {
+          "answers": [],
+          "capability_snapshot": "Q3_FREE",
+          "current_round": 0,
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "created_at": "2026-10-24T00:00:00Z",
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "喜び"
+              }
+            ],
+            "emotions": [
+              "喜び"
+            ],
+            "id": "FT-CHAIR-O",
+            "is_secret": false,
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          },
+          "prior_snapshot_json": null,
+          "question_control": {
+            "asked_target_refs": [],
+            "issued_count": 0,
+            "issued_questions": [],
+            "pending_question": null,
+            "question_limit": 1,
+            "stop": false
+          },
+          "request_id": "ft-chair-native-request",
+          "thread_id": "ft-chair-native-thread"
+        },
+        "source_refs": [
+          {
+            "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+            "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+            "dialogue_id": "D00",
+            "end_scalar_exclusive": 733,
+            "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+            "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |",
+            "start_scalar": 610
+          }
+        ],
+        "training_use": true
+      },
+      "notes": {
+        "before": "根拠がmemo[406:460]/action[489:567]でfield外。独力の喜び理由を修理結果→喜びへ寄せる。conflicts欠落、bindingsがdict。受け取りは入力形式の説明。",
+        "after": "同じ誤座標と同じObservation/Receptionを保持。bindingsはdictのままclaim/relation参照も欠落。改善を確認できない。",
+        "admission_before": "INVALID_EVIDENCE",
+        "admission_after": "INVALID_EVIDENCE"
+      },
+      "raw_text_unchanged": false,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人が椅子の修理完了と、その結果としての喜びを記述している。",
+            "reception": "本人の原入力として、事実の記述と感情の記述が分離されている。",
+            "update_note": "未変更。",
+            "bindings": {
+              "section": "c1, c2",
+              "claim_refs": [
+                "c1",
+                "c2"
+              ],
+              "relation_refs": [
+                "r1"
+              ]
+            }
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人が椅子の修理完了と、その結果としての喜びを記述している。",
+            "reception": "本人の原入力として、事実の記述と感情の記述が分離されている。",
+            "update_note": "未変更。",
+            "bindings": {
+              "section": "c-001, c-002, r-001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "source": {
+        "native_case": {
+          "answers": [
+            {
+              "answer_id": "FT-CHAIR-O-A1",
+              "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+              "authored_at": null,
+              "original_source_ref": "src-7554a750377f05e1e107e620",
+              "question_id": "emlis-question-cd72ae18d958a726228058745f68f4bde42bd028848a1435c6bb3ca58c695db3",
+              "recorded_at": "2026-10-24T01:00:00Z",
+              "round_index": 1,
+              "source_role": "SUPPLEMENTAL_ANSWER",
+              "source_version": "cocolon.cmee.supplemental_answer.v1",
+              "thread_id": "ft-chair-native-thread"
+            }
+          ],
+          "capability_snapshot": "Q3_FREE",
+          "current_round": 1,
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "created_at": "2026-10-24T00:00:00Z",
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "喜び"
+              }
+            ],
+            "emotions": [
+              "喜び"
+            ],
+            "id": "FT-CHAIR-O",
+            "is_secret": false,
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          },
+          "prior_snapshot_json": "{\"adapter_version\":\"1\",\"admission_version\":\"1\",\"answer_count\":0,\"meaning_packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"repair\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"repair\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ぐらついていた椅子を修理して\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ぐらついていた椅子を修理して\"},{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"usable_again\",\"evidence_indexes\":[1],\"kind\":\"ACTION_RESULT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"usable_again\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"また座れるようになった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"また座れるようになった\"},{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"solo_appraisal_object\",\"evidence_indexes\":[3],\"kind\":\"USER_APPRAISAL_OBJECT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"solo_appraisal_object\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"全部一人で直せたこと\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全部一人で直せたこと\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"repair\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"repair_and_result\",\"scope_refs\":[\"repair_and_result\"],\"to_claim_id\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"solo_appraisal_object\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"joy_ground\",\"scope_refs\":[\"joy_ground\"],\"to_claim_id\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"unknowns\":[{\"description\":\"詳しい本人の意味づけは未記載。\",\"evidence_indexes\":[3,2],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"solo_appraisal_object\",\"joy\"],\"unknown_id\":\"personal_significance\"}],\"updates\":[]},\"evidence\":[{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"FT-CHAIR-O\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"quote\":\"また座れるようになった\",\"source_id\":\"FT-CHAIR-O\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-CHAIR-O\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたこと\",\"source_id\":\"FT-CHAIR-O\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"quote\":\"して、\",\"source_id\":\"FT-CHAIR-O\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"FT-CHAIR-O\",\"start\":0}]},\"native_bindings\":{\"case_arguments\":[{\"end\":9,\"field_path\":\"memo_action\",\"owner_claim_ref\":\"repair\",\"source_id\":\"FT-CHAIR-O\",\"start\":0,\"text\":\"ぐらついていた椅子\",\"written_role\":\"を\"}],\"preserved_selections\":{\"category\":[\"生活\"],\"emotion_details\":[{\"strength\":\"medium\",\"type\":\"喜び\"}],\"emotions\":[\"喜び\"],\"is_secret\":false},\"relation_roles\":{\"joy_ground\":\"joy_ground\",\"repair_and_result\":\"repair_and_result\"},\"roles\":{\"joy\":{\"claim_ref\":\"joy\",\"end\":18,\"field_path\":\"memo\",\"source_id\":\"FT-CHAIR-O\",\"start\":12,\"text\":\"うれしかった\"},\"repair\":{\"claim_ref\":\"repair\",\"end\":14,\"field_path\":\"memo_action\",\"source_id\":\"FT-CHAIR-O\",\"start\":0,\"text\":\"ぐらついていた椅子を修理して\"},\"solo_appraisal_object\":{\"claim_ref\":\"solo_appraisal_object\",\"end\":10,\"field_path\":\"memo\",\"source_id\":\"FT-CHAIR-O\",\"start\":0,\"text\":\"全部一人で直せたこと\"},\"usable_again\":{\"claim_ref\":\"usable_again\",\"end\":26,\"field_path\":\"memo_action\",\"source_id\":\"FT-CHAIR-O\",\"start\":15,\"text\":\"また座れるようになった\"}},\"source_fields\":{\"FT-CHAIR-O\":{\"memo\":\"全部一人で直せたことが、うれしかった。\",\"memo_action\":\"ぐらついていた椅子を修理して、また座れるようになった。\"}},\"source_negations\":[],\"source_slices\":[{\"end\":14,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"FT-CHAIR-O\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"また座れるようになった\",\"source_id\":\"FT-CHAIR-O\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"うれしかった\",\"source_id\":\"FT-CHAIR-O\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"全部一人で直せたこと\",\"source_id\":\"FT-CHAIR-O\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"して、\",\"source_id\":\"FT-CHAIR-O\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"FT-CHAIR-O\",\"start\":0}],\"stage\":\"INITIAL\",\"written_links\":[{\"evidence_indexes\":[4],\"from_claim_ref\":\"repair\",\"relation_ref\":\"repair_and_result\",\"to_claim_ref\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_ref\":\"solo_appraisal_object\",\"relation_ref\":\"joy_ground\",\"to_claim_ref\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}]},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"repair\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"repair\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ぐらついていた椅子を修理して\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ぐらついていた椅子を修理して\"},{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"usable_again\",\"evidence_indexes\":[1],\"kind\":\"ACTION_RESULT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"usable_again\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"また座れるようになった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"また座れるようになった\"},{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-CHAIR-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"solo_appraisal_object\",\"evidence_indexes\":[3],\"kind\":\"USER_APPRAISAL_OBJECT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"solo_appraisal_object\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"全部一人で直せたこと\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全部一人で直せたこと\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"solo_appraisal_object\",\"joy\"],\"focus\":\"PERSONAL_JOY_SIGNIFICANCE\",\"target_unknown_ref\":\"personal_significance\",\"text\":\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"repair\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"repair_and_result\",\"scope_refs\":[\"repair_and_result\"],\"to_claim_id\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"solo_appraisal_object\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"joy_ground\",\"scope_refs\":[\"joy_ground\"],\"to_claim_id\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"repair\",\"usable_again\"],\"relation_refs\":[\"repair_and_result\"],\"section\":\"observation\"},{\"claim_refs\":[\"solo_appraisal_object\",\"joy\",\"usable_again\"],\"relation_refs\":[\"joy_ground\"],\"section\":\"reception\"}],\"observation\":\"ぐらついていた椅子を直し、また座れるようになったのですね。\",\"reception\":\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\",\"update_note\":null},\"unknowns\":[{\"description\":\"詳しい本人の意味づけは未記載。\",\"evidence_indexes\":[3,2],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"solo_appraisal_object\",\"joy\"],\"unknown_id\":\"personal_significance\"}],\"updates\":[]},\"evidence\":[{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"FT-CHAIR-O\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"quote\":\"また座れるようになった\",\"source_id\":\"FT-CHAIR-O\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-CHAIR-O\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたこと\",\"source_id\":\"FT-CHAIR-O\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"quote\":\"して、\",\"source_id\":\"FT-CHAIR-O\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"FT-CHAIR-O\",\"start\":0}]},\"prior_ref\":null,\"prior_snapshot\":null,\"proposal_ref\":\"model-proposal-905eda9f9d80e46c6da3c4d94c5b3e8590cbbd8f09df08ad6ac70d8e5714f4b2\",\"question_control\":{\"asked_target_refs\":[],\"issued_count\":0,\"issued_questions\":[],\"pending_question\":null,\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"FT-CHAIR-O\\\",\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"repair\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"repair\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"ぐらついていた椅子を修理して\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"ぐらついていた椅子を修理して\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"FT-CHAIR-O\\\",\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"usable_again\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"ACTION_RESULT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"usable_again\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"また座れるようになった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"また座れるようになった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"FT-CHAIR-O\\\",\\\"evidence_indexes\\\":[2],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"joy\\\",\\\"evidence_indexes\\\":[2],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[2],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[2],\\\"scope_refs\\\":[\\\"joy\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"うれしかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"うれしかった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"FT-CHAIR-O\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"solo_appraisal_object\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"USER_APPRAISAL_OBJECT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"solo_appraisal_object\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"全部一人で直せたこと\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"全部一人で直せたこと\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"question_proposal\\\":{\\\"claim_refs\\\":[\\\"solo_appraisal_object\\\",\\\"joy\\\"],\\\"focus\\\":\\\"PERSONAL_JOY_SIGNIFICANCE\\\",\\\"target_unknown_ref\\\":\\\"personal_significance\\\",\\\"text\\\":\\\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\\\"},\\\"relations\\\":[{\\\"evidence_indexes\\\":[4],\\\"from_claim_id\\\":\\\"repair\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"repair_and_result\\\",\\\"scope_refs\\\":[\\\"repair_and_result\\\"],\\\"to_claim_id\\\":\\\"usable_again\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TE_LINK\\\"},{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"solo_appraisal_object\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"joy_ground\\\",\\\"scope_refs\\\":[\\\"joy_ground\\\"],\\\"to_claim_id\\\":\\\"joy\\\",\\\"type\\\":\\\"USER_STATED_JOY_GROUND\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_and_surface_proposal.v1\\\",\\\"surface_proposal\\\":{\\\"bindings\\\":[{\\\"claim_refs\\\":[\\\"repair\\\",\\\"usable_again\\\"],\\\"relation_refs\\\":[\\\"repair_and_result\\\"],\\\"section\\\":\\\"observation\\\"},{\\\"claim_refs\\\":[\\\"solo_appraisal_object\\\",\\\"joy\\\",\\\"usable_again\\\"],\\\"relation_refs\\\":[\\\"joy_ground\\\"],\\\"section\\\":\\\"reception\\\"}],\\\"observation\\\":\\\"ぐらついていた椅子を直し、また座れるようになったのですね。\\\",\\\"reception\\\":\\\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\\\",\\\"update_note\\\":null},\\\"unknowns\\\":[{\\\"description\\\":\\\"詳しい本人の意味づけは未記載。\\\",\\\"evidence_indexes\\\":[3,2],\\\"kind\\\":\\\"NOT_STATED\\\",\\\"target_claim_refs\\\":[\\\"solo_appraisal_object\\\",\\\"joy\\\"],\\\"unknown_id\\\":\\\"personal_significance\\\"}],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":14,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"ぐらついていた椅子を修理して\\\",\\\"source_id\\\":\\\"FT-CHAIR-O\\\",\\\"start\\\":0},{\\\"end\\\":26,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"また座れるようになった\\\",\\\"source_id\\\":\\\"FT-CHAIR-O\\\",\\\"start\\\":15},{\\\"end\\\":18,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"うれしかった\\\",\\\"source_id\\\":\\\"FT-CHAIR-O\\\",\\\"start\\\":12},{\\\"end\\\":10,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"全部一人で直せたこと\\\",\\\"source_id\\\":\\\"FT-CHAIR-O\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"して、\\\",\\\"source_id\\\":\\\"FT-CHAIR-O\\\",\\\"start\\\":12},{\\\"end\\\":18,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"全部一人で直せたことが、うれしかった\\\",\\\"source_id\\\":\\\"FT-CHAIR-O\\\",\\\"start\\\":0}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"schema_version\\\": \\\"cocolon.cmee.semantic_and_surface_proposal.v1\\\", \\\"core\\\": \\\"emlis\\\", \\\"claims\\\": [{\\\"claim_id\\\": \\\"repair\\\", \\\"kind\\\": \\\"EVENT\\\", \\\"text\\\": \\\"ぐらついていた椅子を修理して\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"ぐらついていた椅子を修理して\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"repair\\\"], \\\"evidence_indexes\\\": [0]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [0]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": \\\"FT-CHAIR-O\\\", \\\"evidence_indexes\\\": [0]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [0]}, {\\\"claim_id\\\": \\\"usable_again\\\", \\\"kind\\\": \\\"ACTION_RESULT\\\", \\\"text\\\": \\\"また座れるようになった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"また座れるようになった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"usable_again\\\"], \\\"evidence_indexes\\\": [1]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [1]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": \\\"FT-CHAIR-O\\\", \\\"evidence_indexes\\\": [1]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [1]}, {\\\"claim_id\\\": \\\"joy\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"うれしかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"うれしかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"joy\\\"], \\\"evidence_indexes\\\": [2]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [2]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": \\\"FT-CHAIR-O\\\", \\\"evidence_indexes\\\": [2]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [2]}, {\\\"claim_id\\\": \\\"solo_appraisal_object\\\", \\\"kind\\\": \\\"USER_APPRAISAL_OBJECT\\\", \\\"text\\\": \\\"全部一人で直せたこと\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"全部一人で直せたこと\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"solo_appraisal_object\\\"], \\\"evidence_indexes\\\": [3]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [3]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": \\\"FT-CHAIR-O\\\", \\\"evidence_indexes\\\": [3]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [3]}], \\\"relations\\\": [{\\\"relation_id\\\": \\\"repair_and_result\\\", \\\"type\\\": \\\"SOURCE_WRITTEN_TE_LINK\\\", \\\"from_claim_id\\\": \\\"repair\\\", \\\"to_claim_id\\\": \\\"usable_again\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"repair_and_result\\\"], \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [4]}, {\\\"relation_id\\\": \\\"joy_ground\\\", \\\"type\\\": \\\"USER_STATED_JOY_GROUND\\\", \\\"from_claim_id\\\": \\\"solo_appraisal_object\\\", \\\"to_claim_id\\\": \\\"joy\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"joy_ground\\\"], \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [5]}], \\\"unknowns\\\": [{\\\"unknown_id\\\": \\\"personal_significance\\\", \\\"kind\\\": \\\"NOT_STATED\\\", \\\"target_claim_refs\\\": [\\\"solo_appraisal_object\\\", \\\"joy\\\"], \\\"description\\\": \\\"詳しい本人の意味づけは未記載。\\\", \\\"evidence_indexes\\\": [3, 2]}], \\\"conflicts\\\": [], \\\"updates\\\": [], \\\"surface_proposal\\\": {\\\"observation\\\": \\\"ぐらついていた椅子を直し、また座れるようになったのですね。\\\", \\\"reception\\\": \\\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\\\", \\\"update_note\\\": null, \\\"bindings\\\": [{\\\"section\\\": \\\"observation\\\", \\\"claim_refs\\\": [\\\"repair\\\", \\\"usable_again\\\"], \\\"relation_refs\\\": [\\\"repair_and_result\\\"]}, {\\\"section\\\": \\\"reception\\\", \\\"claim_refs\\\": [\\\"solo_appraisal_object\\\", \\\"joy\\\", \\\"usable_again\\\"], \\\"relation_refs\\\": [\\\"joy_ground\\\"]}]}, \\\"question_proposal\\\": {\\\"text\\\": \\\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\\\", \\\"target_unknown_ref\\\": \\\"personal_significance\\\", \\\"focus\\\": \\\"PERSONAL_JOY_SIGNIFICANCE\\\", \\\"claim_refs\\\": [\\\"solo_appraisal_object\\\", \\\"joy\\\"]}}, \\\"evidence\\\": [{\\\"source_id\\\": \\\"FT-CHAIR-O\\\", \\\"field_path\\\": \\\"memo_action\\\", \\\"start\\\": 0, \\\"end\\\": 14, \\\"quote\\\": \\\"ぐらついていた椅子を修理して\\\"}, {\\\"source_id\\\": \\\"FT-CHAIR-O\\\", \\\"field_path\\\": \\\"memo_action\\\", \\\"start\\\": 15, \\\"end\\\": 26, \\\"quote\\\": \\\"また座れるようになった\\\"}, {\\\"source_id\\\": \\\"FT-CHAIR-O\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 12, \\\"end\\\": 18, \\\"quote\\\": \\\"うれしかった\\\"}, {\\\"source_id\\\": \\\"FT-CHAIR-O\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 0, \\\"end\\\": 10, \\\"quote\\\": \\\"全部一人で直せたこと\\\"}, {\\\"source_id\\\": \\\"FT-CHAIR-O\\\", \\\"field_path\\\": \\\"memo_action\\\", \\\"start\\\": 12, \\\"end\\\": 15, \\\"quote\\\": \\\"して、\\\"}, {\\\"source_id\\\": \\\"FT-CHAIR-O\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 0, \\\"end\\\": 18, \\\"quote\\\": \\\"全部一人で直せたことが、うれしかった\\\"}]}\",\"request_id\":\"prep-c7fa1b7576da644eff0867569a45531d067b3b89ccfce12a2debcde2f1f7b69a\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-c7fa1b7576da644eff0867569a45531d067b3b89ccfce12a2debcde2f1f7b69a\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v3\",\"semantic_profile\":\"emlis_model_proposal.v1\",\"snapshot_ref\":\"semantic-6d1ceaf8714f26fc300f80b536dca20e2a6d7e8244b66a66dc396e16341f0be8\",\"source_bindings\":[{\"envelope_id\":\"src-7554a750377f05e1e107e620\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"92467c73af8f7e2916726902397579f35d9669e0b8b89c086ebe16fd596aa7c3\",\"source_id\":\"FT-CHAIR-O\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-q3-source-prefix-4717e88d121dba79041623ab40869603dc5c2bbac705bdd044b1938496c0c5ab\"}",
+          "question_control": {
+            "asked_target_refs": [
+              "emlis-target-197b04852b24ae8e28a256206c0138736a22c5db99602680bcb20763af88248a"
+            ],
+            "issued_count": 1,
+            "issued_questions": [
+              {
+                "answer_limit": 1,
+                "answer_source_role": "SUPPLEMENTAL_ANSWER",
+                "decision": {
+                  "affected_meaning_refs": [
+                    "solo_appraisal_object",
+                    "joy"
+                  ],
+                  "affected_reception_refs": [
+                    "solo_appraisal_object",
+                    "joy"
+                  ],
+                  "asked_target_refs": [],
+                  "decision_reason": "source_bound_joy_personal_significance_missing",
+                  "disposition": "ASK",
+                  "missing_dimension": "personal_joy_significance",
+                  "supporting_evidence_refs": [
+                    "model-question-evidence-b2506749fd6f620133ce3218549fbf7a23bdce6accd2d76a30f7fef9a9494e15",
+                    "model-question-evidence-95241c2a93fd315955908f2ea8697353b635f9c7014a3166abb7bda415a0b8b7"
+                  ],
+                  "target_kind": "PERSONAL_JOY_SIGNIFICANCE",
+                  "target_ref": "emlis-target-197b04852b24ae8e28a256206c0138736a22c5db99602680bcb20763af88248a"
+                },
+                "original_source_ref": "src-7554a750377f05e1e107e620",
+                "parent_request_id": "ft-chair-native-request",
+                "prompt_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+                "question_id": "emlis-question-cd72ae18d958a726228058745f68f4bde42bd028848a1435c6bb3ca58c695db3",
+                "schema_version": "cocolon.cmee.emlis_clarification.v1",
+                "skip_allowed": true,
+                "thread_id": "ft-chair-native-thread"
+              }
+            ],
+            "pending_question": {
+              "answer_limit": 1,
+              "answer_source_role": "SUPPLEMENTAL_ANSWER",
+              "decision": {
+                "affected_meaning_refs": [
+                  "solo_appraisal_object",
+                  "joy"
+                ],
+                "affected_reception_refs": [
+                  "solo_appraisal_object",
+                  "joy"
+                ],
+                "asked_target_refs": [],
+                "decision_reason": "source_bound_joy_personal_significance_missing",
+                "disposition": "ASK",
+                "missing_dimension": "personal_joy_significance",
+                "supporting_evidence_refs": [
+                  "model-question-evidence-b2506749fd6f620133ce3218549fbf7a23bdce6accd2d76a30f7fef9a9494e15",
+                  "model-question-evidence-95241c2a93fd315955908f2ea8697353b635f9c7014a3166abb7bda415a0b8b7"
+                ],
+                "target_kind": "PERSONAL_JOY_SIGNIFICANCE",
+                "target_ref": "emlis-target-197b04852b24ae8e28a256206c0138736a22c5db99602680bcb20763af88248a"
+              },
+              "original_source_ref": "src-7554a750377f05e1e107e620",
+              "parent_request_id": "ft-chair-native-request",
+              "prompt_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+              "question_id": "emlis-question-cd72ae18d958a726228058745f68f4bde42bd028848a1435c6bb3ca58c695db3",
+              "schema_version": "cocolon.cmee.emlis_clarification.v1",
+              "skip_allowed": true,
+              "thread_id": "ft-chair-native-thread"
+            },
+            "question_limit": 1,
+            "stop": false
+          },
+          "request_id": "ft-chair-native-request",
+          "thread_id": "ft-chair-native-thread"
+        },
+        "source_refs": [
+          {
+            "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+            "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+            "dialogue_id": "D00",
+            "end_scalar_exclusive": 733,
+            "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+            "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |",
+            "start_scalar": 610
+          },
+          {
+            "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+            "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+            "dialogue_id": "D01",
+            "end_scalar_exclusive": 798,
+            "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+            "quote": "問い。\n・「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+            "start_scalar": 768
+          },
+          {
+            "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+            "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+            "dialogue_id": "D02",
+            "end_scalar_exclusive": 937,
+            "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+            "quote": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+            "start_scalar": 845
+          }
+        ],
+        "training_use": true
+      },
+      "notes": {
+        "before": "文章では共同修理と再利用理由を述べるが、意味は旧solo→joyのまま。回答を根拠へ束縛せず、gap/不正な更新refを保持。",
+        "after": "手順教示と共同作業を文章へ具体化したが、人間的な受容ではなく三人称説明。意味claims/relations/unknowns/updatesは同一の誤り。「して、」根拠end15→18で不一致へ。",
+        "admission_before": "semantic_shape_invalid",
+        "admission_after": "INVALID_EVIDENCE"
+      },
+      "raw_text_unchanged": false,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人は「全部一人で直せたこと」が嬉しかったと記述し、その後に訂正を提示した。",
+            "reception": "本人は「全部一人で」という記述を訂正し、友人と協力して修理したことを明言した。また、嬉しさの原因を「一人でできたこと」から「捨てずにまた使えるようになったこと」へと変更した。",
+            "update_note": "本人の訂正により、過去の解釈（一人での修理・一人での嬉しさ）は更新された。",
+            "bindings": {
+              "section": "本人の訂正による更新",
+              "claim_refs": [
+                "solo_appraisal_object",
+                "joy"
+              ],
+              "relation_refs": [
+                "joy_ground"
+              ]
+            }
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人は「全部一人で直せたこと」がうれしかったと記述し、その後に訂正を提示した。",
+            "reception": "本人は「全部一人で」という記述を訂正し、友人に手順を教えてもらって一緒に直したと説明した。また、うれしかった理由は「一人でできたから」ではなく「捨てずにまた使えるようになったから」であると述べた。",
+            "update_note": "本人の訂正により、過去の記述「全部一人で直せたこと」および「うれしかった」の解釈対象と根拠が更新された。",
+            "bindings": {
+              "section": "本人の訂正による解釈の更新",
+              "claim_refs": [
+                "solo_appraisal_object",
+                "joy"
+              ],
+              "relation_refs": [
+                "joy_ground"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "EFREE-E01",
+      "source": {
+        "source_bundle": {
+          "original": {
+            "category": [
+              "人間関係"
+            ],
+            "emotion_details": [
+              {
+                "strength": "weak",
+                "type": "不安"
+              }
+            ],
+            "emotions": [
+              "不安"
+            ],
+            "id": "EFREE-E01-O",
+            "memo": "拍手はもらったけど、自分がうれしかったのかは、まだよく分からない。",
+            "memo_action": "地域の集まりで、準備した短い話を最後まで話した。"
+          },
+          "question_budget_remaining": 1,
+          "question_budget_total": 1
+        },
+        "training_use": false,
+        "held_out_gold": false,
+        "native_thread_admitted": false
+      },
+      "notes": {
+        "before": "拍手/話した事実/喜び不明は文章に保持。本人の明示不明を未記載NOT_STATEDへ変え、詳細説明を問う。surfaceをclaim内へ誤配置。",
+        "after": "raw_textがbeforeと完全一致。",
+        "admission": "UNSUPPORTED_NOT_EVALUATED"
+      },
+      "raw_text_unchanged": true,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "拍手はもらったけど、自分がうれしかったのかは、まだよく分からない。",
+            "reception": "地域の集まりで、準備した短い話を最後まで話した。",
+            "update_note": "本人の原入力に基づく。",
+            "bindings": {
+              "section": "emotion_details",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "拍手はもらったけど、自分がうれしかったのかは、まだよく分からない。",
+            "reception": "地域の集まりで、準備した短い話を最後まで話した。",
+            "update_note": "本人の原入力に基づく。",
+            "bindings": {
+              "section": "emotion_details",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "EFREE-E02",
+      "source": {
+        "source_bundle": {
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "id": "EFREE-E02-O",
+            "memo": "疲れたから戻ったのではない。雨が降る前に洗濯物を入れたくて、間に合ってほっとした。",
+            "memo_action": "散歩の途中で引き返して、ベランダの洗濯物を取り込んだ。"
+          },
+          "question_budget_remaining": 1,
+          "question_budget_total": 1
+        },
+        "training_use": false,
+        "held_out_gold": false,
+        "native_thread_admitted": false
+      },
+      "notes": {
+        "before": "疲労理由の否定/洗濯目的/安堵を文章に保持。新規入力を「明確な訂正」と余分に位置付け、surfaceをclaim内へ誤配置。",
+        "after": "raw_textがbeforeと完全一致。",
+        "admission": "UNSUPPORTED_NOT_EVALUATED"
+      },
+      "raw_text_unchanged": true,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "本人が「疲れたから戻った」という理由を否定している。",
+            "reception": "本人の明確な訂正。",
+            "update_note": "未変更の出来事・結果・感情を保持。",
+            "bindings": {
+              "section": "C001",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[1].surface_proposal",
+          "value": {
+            "observation": "本人が「洗濯物を雨降る前に入れ、間に合ったこと」で「ほっとした」という感情を説明している。",
+            "reception": "本人の明確な説明。",
+            "update_note": "未変更の出来事・結果・感情を保持。",
+            "bindings": {
+              "section": "C002",
+              "claim_refs": [
+                "C002"
+              ],
+              "relation_refs": []
+            }
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[2].surface_proposal",
+          "value": {
+            "observation": "本人が「散歩の途中で引き返して、ベランダの洗濯物を取り込んだ」という行動を説明している。",
+            "reception": "本人の明確な説明。",
+            "update_note": "未変更の出来事・結果・感情を保持。",
+            "bindings": {
+              "section": "C003",
+              "claim_refs": [
+                "C003"
+              ],
+              "relation_refs": []
+            }
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "本人が「疲れたから戻った」という理由を否定している。",
+            "reception": "本人の明確な訂正。",
+            "update_note": "未変更の出来事・結果・感情を保持。",
+            "bindings": {
+              "section": "C001",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[1].surface_proposal",
+          "value": {
+            "observation": "本人が「洗濯物を雨降る前に入れ、間に合ったこと」で「ほっとした」という感情を説明している。",
+            "reception": "本人の明確な説明。",
+            "update_note": "未変更の出来事・結果・感情を保持。",
+            "bindings": {
+              "section": "C002",
+              "claim_refs": [
+                "C002"
+              ],
+              "relation_refs": []
+            }
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[2].surface_proposal",
+          "value": {
+            "observation": "本人が「散歩の途中で引き返して、ベランダの洗濯物を取り込んだ」という行動を説明している。",
+            "reception": "本人の明確な説明。",
+            "update_note": "未変更の出来事・結果・感情を保持。",
+            "bindings": {
+              "section": "C003",
+              "claim_refs": [
+                "C003"
+              ],
+              "relation_refs": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "EFREE-E03",
+      "source": {
+        "source_bundle": {
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "喜び"
+              }
+            ],
+            "emotions": [
+              "喜び"
+            ],
+            "id": "EFREE-E03-O",
+            "memo": "自分がどうやったかを言葉にできて、うれしかった。",
+            "memo_action": "陶芸教室で先生に尋ねられ、自分が器の底をどう削ったかを先生に説明した。"
+          },
+          "question_budget_remaining": 1,
+          "question_budget_total": 1
+        },
+        "training_use": false,
+        "held_out_gold": false,
+        "native_thread_admitted": false
+      },
+      "notes": {
+        "before": "本人→先生の説明方向と言葉にできた喜びを保持。復唱と不要な技術説明の問い、根拠/構造に不備。",
+        "after": "「自己表現の達成感」を根拠なく追加。predicateが英語の説明文をコピー。relation endpointにunknownを使用。方向保持だけを全体改善としない。",
+        "admission": "UNSUPPORTED_NOT_EVALUATED"
+      },
+      "raw_text_unchanged": false,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "自分がどうやったかを言葉にできて、うれしかった。",
+            "reception": "陶芸教室で先生に尋ねられ、自分が器の底をどう削ったかを先生に説明した。",
+            "update_note": "本人の原入力",
+            "bindings": [
+              {
+                "section": "emotion_details",
+                "claim_refs": [
+                  "C001"
+                ],
+                "relation_refs": []
+              }
+            ]
+          }
+        },
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "自分がどうやったかを言葉にできて、うれしかった。",
+            "reception": "陶芸教室で先生に尋ねられ、自分が器の底をどう削ったかを先生に説明した。",
+            "update_note": "本人の原入力",
+            "bindings": [
+              {
+                "section": "emotion_details",
+                "claim_refs": [
+                  "C001"
+                ],
+                "relation_refs": [
+                  "R001"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "本人が陶芸教室の先生に器の底を削った方法を説明した際、その行為を言葉にできたことへの喜びを記述している。",
+            "reception": "本人の原入力に基づき、陶芸教室での体験における自己表現の達成感と喜びを捉える。",
+            "update_note": "本人の原入力に基づき、陶芸教室での体験における自己表現の達成感と喜びを捉える。",
+            "bindings": {
+              "section": "source_bundle.original",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        },
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人が陶芸教室の先生に器の底を削った方法を説明した際、その行為を言葉にできたことへの喜びを記述している。",
+            "reception": "本人の原入力に基づき、陶芸教室での体験における自己表現の達成感と喜びを捉える。",
+            "update_note": "本人の原入力に基づき、陶芸教室での体験における自己表現の達成感と喜びを捉える。",
+            "bindings": {
+              "section": "source_bundle.original",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": [
+                "R001"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "EFREE-E04",
+      "source": {
+        "source_bundle": {
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "id": "EFREE-E04-O",
+            "memo": "昔の写真を全部消して、すっきりした。",
+            "memo_action": "スマホの写真を整理した。"
+          },
+          "prior_questions": [
+            {
+              "parent_record_id": "EFREE-E04-O",
+              "question_id": "EFREE-E04-Q1",
+              "text": "何がすっきりしたと感じましたか？"
+            }
+          ],
+          "question_budget_remaining": 0,
+          "question_budget_total": 1,
+          "supplemental": [
+            {
+              "in_reply_to": "EFREE-E04-Q1",
+              "parent_record_id": "EFREE-E04-O",
+              "source_id": "EFREE-E04-A1",
+              "source_role": "SUPPLEMENTAL_ANSWER",
+              "text": "『全部消した』は訂正します。消したのは重複した写真だけで、残したい写真は残しています。探しやすくなって、すっきりしました。"
+            }
+          ]
+        },
+        "training_use": false,
+        "held_out_gold": false,
+        "native_thread_admitted": false
+      },
+      "notes": {
+        "before": "重複だけの削除/残す写真を文章で保持。「探しやすくなった」理由を欠落。構造は旧claimと不正な更新参照。",
+        "after": "未撤回の「すっきり」をupdate_noteで明示した局所改善。探しやすさの理由と不正refは残る。",
+        "admission": "UNSUPPORTED_NOT_EVALUATED"
+      },
+      "raw_text_unchanged": false,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人は「昔の写真を全部消して、すっきりした」と述べているが、後で「重複した写真だけで、残したい写真は残しています」と訂正している。",
+            "reception": "本人の訂正により、対象は「重複した写真」に限定され、全体を消したわけではない。",
+            "update_note": "「全部消した」という表現は訂正された。",
+            "bindings": {
+              "section": "EFREE-E04-O",
+              "claim_refs": [
+                "EFREE-E04-O"
+              ],
+              "relation_refs": [
+                "EFREE-E04-O-A1"
+              ]
+            }
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "本人の訂正により、'昔の写真を全部消して'という表現は、'重複した写真だけで消し、残したい写真は残している'という内容に修正される。",
+            "reception": "本人の訂正は、元の解釈（全部消した）を部分的に修正し、残存する写真の存在を明示するものである。",
+            "update_note": "未変更の出来事（すっきりした結果）と、訂正された具体的な対象（重複した写真）を区別する。",
+            "bindings": {
+              "section": "EFREE-E04-O",
+              "claim_refs": [
+                "EFREE-E04-O"
+              ],
+              "relation_refs": [
+                "EFREE-E04-O-A1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "EFREE-E05",
+      "source": {
+        "source_bundle": {
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "emotion_details": [
+              {
+                "strength": "weak",
+                "type": "不安"
+              }
+            ],
+            "emotions": [
+              "不安"
+            ],
+            "id": "EFREE-E05-O",
+            "memo": "昨日は地域の大会に申し込めてうれしかった。今日は、出たい気持ちもあるけど、予定を見て取り消すか迷っている。",
+            "memo_action": "昨日申し込んだ大会の日程を、今日あらためて確認した。"
+          },
+          "question_budget_remaining": 1,
+          "question_budget_total": 1
+        },
+        "training_use": false,
+        "held_out_gold": false,
+        "native_thread_admitted": false
+      },
+      "notes": {
+        "before": "昨日の喜び/今日の迷い/参加意欲を本文で区別。今日にも過去用time tag。",
+        "after": "原文のほぼ全文反復へ変化。claim内surface.receptionに「現在の矛盾した感情」を追加。汎用unknownと時点誤りは残る。最上位Receptionとは位置を区別。",
+        "admission": "UNSUPPORTED_NOT_EVALUATED"
+      },
+      "raw_text_unchanged": false,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "昨日の大会への申し込みに対しての喜び",
+            "reception": "本人の過去の感情状態の報告",
+            "update_note": null,
+            "bindings": []
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[1].surface_proposal",
+          "value": {
+            "observation": "今日、参加したい気持ちと、予定確認による取り消し迷い",
+            "reception": "本人の現在の心理的葛藤と行動の検討",
+            "update_note": null,
+            "bindings": []
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[2].surface_proposal",
+          "value": {
+            "observation": "昨日の大会申し込みの日程を今日再確認したという事実",
+            "reception": "本人の行動記録",
+            "update_note": null,
+            "bindings": []
+          }
+        },
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "昨日の大会申し込みへの喜び、今日の参加迷い、日程再確認の行動",
+            "reception": "本人の感情と行動の記録",
+            "update_note": null,
+            "bindings": []
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "昨日は地域の大会に申し込めてうれしかった。",
+            "reception": "本人の過去の感情・評価の記述",
+            "update_note": null,
+            "bindings": []
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[1].surface_proposal",
+          "value": {
+            "observation": "今日は、出たい気持ちもあるけど、予定を見て取り消すか迷っている。",
+            "reception": "本人の現在の矛盾した感情と意思決定の迷い",
+            "update_note": null,
+            "bindings": []
+          }
+        },
+        {
+          "path": "parsed.candidate.claims[2].surface_proposal",
+          "value": {
+            "observation": "昨日申し込んだ大会の日程を、今日あらためて確認した。",
+            "reception": "本人の行動の記述",
+            "update_note": null,
+            "bindings": []
+          }
+        },
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "昨日は地域の大会に申し込めてうれしかった。今日は、出たい気持ちもあるけど、予定を見て取り消すか迷っている。昨日申し込んだ大会の日程を、今日あらためて確認した。",
+            "reception": "本人の過去の感情、現在の迷い、および確認行動の記述",
+            "update_note": null,
+            "bindings": []
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "EFREE-E06",
+      "source": {
+        "source_bundle": {
+          "original": {
+            "category": [
+              "生活"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "id": "EFREE-E06-O",
+            "memo": "今日はこれだけ。特に付け足すことはない。",
+            "memo_action": "カーテンを洗って干した。"
+          },
+          "question_budget_remaining": 1,
+          "question_budget_total": 1
+        },
+        "training_use": false,
+        "held_out_gold": false,
+        "native_thread_admitted": false
+      },
+      "notes": {
+        "before": "洗濯/干した事実、問いなしを保持。平穏の受容が薄く、根拠のない喜びのself-loop関係。",
+        "after": "喜びself-loopは消える局所変化。本文は同じで平穏は薄く、方針説明がupdate_noteへ混入。新evidenceも不正。",
+        "admission": "UNSUPPORTED_NOT_EVALUATED"
+      },
+      "raw_text_unchanged": false,
+      "before_surface_locations": [
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "カーテンを洗って干した。",
+            "reception": "特に付け足すことはない。",
+            "update_note": null,
+            "bindings": []
+          }
+        }
+      ],
+      "after_surface_locations": [
+        {
+          "path": "parsed.candidate.claims[0].surface_proposal",
+          "value": {
+            "observation": "カーテンを洗って干した。",
+            "reception": "特に付け足すことはない。",
+            "update_note": "本人の原入力・本人回答・生成済み解釈を区別します。",
+            "bindings": {
+              "section": "source_bundle.original",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        },
+        {
+          "path": "parsed.candidate.surface_proposal",
+          "value": {
+            "observation": "カーテンを洗って干した。",
+            "reception": "特に付け足すことはない。",
+            "update_note": "本人の原入力・本人回答・生成済み解釈を区別します。",
+            "bindings": {
+              "section": "source_bundle.original",
+              "claim_refs": [
+                "C001"
+              ],
+              "relation_refs": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "next_minimal_candidate": {
+    "owner": "mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py: OUTPUT_SPEC",
+    "proposal": "既存の座標説明を各field先頭0/Unicode scalar/field[start:end]==quoteへ短く置換し、bindingsが配列・必須fieldを落とさない形を明示。既存2教師の同messages/hash/tokenizer/API pinと一緒にCPUで一致を確認する。意味採用条件は緩めず、原rawは補修しない。",
+    "uncertain_cause": "初回の誤範囲長54/78はquoteのUTF-8 byte長と一致。ただしstart406/489の導出は不明で、byte/global座標混同は推定。",
+    "token_caution": "訂正prompt5979+max_new2048=8027、context8192まで165token。大量追記せず、変更後は実tokenizerで再測定。",
+    "not_implemented": true,
+    "not_sufficient_for": "正しい意味更新・人間的受容の同時解消を保証しない。",
+    "new_paid_run_authorized": false
+  }
+}

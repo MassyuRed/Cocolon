@@ -1,0 +1,2236 @@
+{
+  "schema": "cocolon.adaptive30.book_shop.reading_review.v1",
+  "reviewer_role": "read_only_auxiliary_model_review",
+  "formal_human_product_read": false,
+  "formal_pro_ultra_acceptance": false,
+  "product_accepted": false,
+  "product_credit": 0,
+  "raw_repair_performed": false,
+  "modified_packet_admission_performed": false,
+  "new_model_operations": 0,
+  "source_commit": "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567",
+  "adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+  "review_scope": "BOOK初回/回答後・SHOP初回/回答後の4出力。全文raw、source/prior、凍結教師の本文/問い/全更新、前回937233a0 rawを比較。原文を改変せず静的読解。実consumer判断は別欄に原本どおり記録。",
+  "global_run_result": {
+    "source": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/diagnosis/diagnosis.json",
+      "sha256": "d71db945a89d810f3f4eeacc5c9aa8f80cc4cadd302daabd7bf60a60f66e0aaf"
+    },
+    "meaning_adopted_count": 11,
+    "body_available_count": 9,
+    "denominator": 15,
+    "new6_body_available_count": 0,
+    "cold_file_checked_count": 11,
+    "cold_file_failures": 0,
+    "service_saved_roundtrip": false,
+    "dynamic_prior": false
+  },
+  "cases": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "evidence": {
+        "actual": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-BOOK-INITIAL.jsonl",
+          "file_sha256": "1278dd0e533fc29d59373c68710c320a379e20cc030adc535d25bc20d9241c18",
+          "raw_text_sha256": "21b25654ec59f9799777d78666839c3883f4a80df96650c8c3c193f5ea025a77",
+          "adapter_revision": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"remaining_concern\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"remaining_concern\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"memo_link\"],\"section\":\"reception\"}],\"observation\":\"遅れた本の返却と謝罪、そして「大丈夫」という安心感を受け取り、その後に残る気持ちは自分自身のものとして認識します。\",\"reception\":\"返した本と、その後の会話の記憶は、その場での出来事として受け止め、現在の気持ちはそれとは別物として保持します。\",\"update_note\":null},\"unknowns\":[{\"description\":\"気がかりの対象は未記載。\",\"evidence_indexes\":[3],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"remaining_concern\"],\"unknown_id\":\"remaining_concern\"}],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "previous": {
+          "path": "/workspace/scratch/d71884a6a7b6/baseline_raw/after_FT-BOOK-INITIAL.jsonl",
+          "file_sha256": "90b1f1d19679b486edea00ecb3421fb26536e8b00a9d1d990e0e3b09d5cea9e4",
+          "adapter_revision": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"remaining_concern\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"気がかりの対象は未記載\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"memo_link\"],\"section\":\"reception\"}],\"observation\":\"本を返すのが遅れて友人に謝り、大丈夫と言ってくれたのですね。でも、まだ少し気になっているのですね。\",\"reception\":\"「大丈夫」って言って、その本を返したのですね。その後のこと、まだ聞けていないのですね。\",\"update_note\":null},\"unknowns\":[{\"description\":\"気がかりの対象は未記載。\",\"evidence_indexes\":[3],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"remaining_concern\"],\"unknown_id\":\"気がかりの対象は未記載\"}],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "teacher": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/train_messages.jsonl",
+          "file_sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396",
+          "row_id": "FT-BOOK-INITIAL",
+          "assistant_utf8_sha256": "a01929543c966751b1e03889babac750de8d4ed55ef13fb24860207fb2273469",
+          "assistant_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"remaining_concern\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"missing_explanation\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"memo_link\"],\"section\":\"reception\"}],\"observation\":\"本を返すのが遅れて友人に謝り、「大丈夫」と言われても、まだ少し気がかりが残っているのですね。\",\"reception\":\"「大丈夫」と言ってもらえたことも、まだ気になることも、聞いていたいです。\",\"update_note\":null},\"unknowns\":[{\"description\":\"気がかりの対象は未記載。\",\"evidence_indexes\":[3],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"remaining_concern\"],\"unknown_id\":\"missing_explanation\"}],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}"
+        },
+        "source_material_sources": [
+          {
+            "native_source_role": "CURRENT_INPUT",
+            "original": {
+              "category": [
+                "人間関係"
+              ],
+              "created_at": "2026-10-26T00:00:00Z",
+              "emotion_details": [
+                {
+                  "strength": "weak",
+                  "type": "不安"
+                }
+              ],
+              "emotions": [
+                "不安"
+              ],
+              "id": "FT-BOOK-O",
+              "is_secret": false,
+              "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+              "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-26T00:00:00Z",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "FT-BOOK-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+              "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+            }
+          }
+        ],
+        "prior_adopted_interpretation": null
+      },
+      "actual_generation": {
+        "eos_reached": true,
+        "output_tokens": 1062,
+        "seconds": 45.82404301397037,
+        "parse_error_reported_by_runner": null,
+        "strict_duplicate_keys": [],
+        "previous_strict_duplicate_keys": []
+      },
+      "actual_consumer_judgment": {
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "HOLD",
+        "reason_code": "model_v3_unknown_not_source_bound",
+        "outcome_status": null,
+        "outcome_body_state": null,
+        "outcome_reason_codes": [],
+        "question_disposition": null,
+        "question_reason": null,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+        "raw_file_sha256": "1278dd0e533fc29d59373c68710c320a379e20cc030adc535d25bc20d9241c18"
+      },
+      "static_inventory_only": {
+        "valid_adopted_packet_claim": false,
+        "candidate_claim_count": 4,
+        "candidate_relation_count": 2,
+        "quote_count": 6,
+        "textual_update_count": 0,
+        "teacher_expected_update_count": 0,
+        "actual_updates_lexically_read": [],
+        "teacher_expected_updates": [],
+        "actual_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "late_return",
+                "apologize",
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "memo_link"
+              ],
+              "section": "reception"
+            }
+          ],
+          "observation": "遅れた本の返却と謝罪、そして「大丈夫」という安心感を受け取り、その後に残る気持ちは自分自身のものとして認識します。",
+          "reception": "返した本と、その後の会話の記憶は、その場での出来事として受け止め、現在の気持ちはそれとは別物として保持します。",
+          "update_note": null
+        },
+        "teacher_surface": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "late_return",
+                "apologize",
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "memo_link"
+              ],
+              "section": "reception"
+            }
+          ],
+          "observation": "本を返すのが遅れて友人に謝り、「大丈夫」と言われても、まだ少し気がかりが残っているのですね。",
+          "reception": "「大丈夫」と言ってもらえたことも、まだ気になることも、聞いていたいです。",
+          "update_note": null
+        },
+        "previous_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "late_return",
+                "apologize",
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "memo_link"
+              ],
+              "section": "reception"
+            }
+          ],
+          "observation": "本を返すのが遅れて友人に謝り、大丈夫と言ってくれたのですね。でも、まだ少し気になっているのですね。",
+          "reception": "「大丈夫」って言って、その本を返したのですね。その後のこと、まだ聞けていないのですね。",
+          "update_note": null
+        },
+        "quote_original_membership": [
+          {
+            "index": 0,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 1,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo_action",
+            "quote": "友人に謝った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 2,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれた",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 3,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo",
+            "quote": "まだちょっと気になる",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 4,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて、友人に謝った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 5,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          }
+        ]
+      },
+      "reading": {
+        "preserved": [
+          "4 claims、2 relations、6 evidence_quotesは凍結教師と全値一致。原文の謝罪・大丈夫と言われたこと・現在の少しの気がかりを意味候補内に保持。",
+          "問いのclaim_refs/focus/textは教師どおり。unknownのdescription/target_claim_refs/evidence/kindも教師どおり。"
+        ],
+        "changes_from_previous": [
+          "前回の日本語unknown_idからASCII remaining_concernへ変化。ただし同名claim_idとの衝突が発生し、合法な別名とは扱えない。",
+          "観測/受け取りが前回の近い復唱から、認識します・保持しますという処理説明へ変化した。本文成立の改善ではない。"
+        ],
+        "remaining_failures": [
+          "unknown_id=remaining_concernが既存claim_idと衝突し、question.target_unknown_refも同じ衝突IDを参照する。",
+          "観測の「大丈夫」という安心感を受け取り、は本人が安心したという未記載の感情を補う。",
+          "受け取りの「その後の会話の記憶」は原文にない記憶/時点の説明を加え、「現在の気持ちはそれとは別物」と不明な関係を断定する。",
+          "認識します・保持しますは内部処理の説明で、人に向けた自然な受け取りになっていない。"
+        ],
+        "body_reader_scope": "意味採用の前でHOLD。上の本文所見は静的な候補読解であり、実本文readerの拒否理由ではない。"
+      }
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "evidence": {
+        "actual": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+          "file_sha256": "3f055d9c94da3adad2b3d0ac177b87539d4ab108a797f1a37ccb6ff224006eaf",
+          "raw_text_sha256": "d62536d4bc99b06435e026e0c543b40e39de499035694de85a75481b987516e8",
+          "adapter_revision": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"self_statement\",\"evidence_indexes\":[6],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"self_statement\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていたのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていたのに\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_awareness\",\"evidence_indexes\":[5],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"late_awareness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなると分かった時点で連絡しなかったことです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"遅くなると分かった時点で連絡しなかったことです\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_contact\",\"evidence_indexes\":[4],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"no_contact\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"連絡しなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"連絡しなかった\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"returned\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"returned\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"本は返した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"本は返した\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[8],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"counterfactual\",\"evidence_indexes\":[8],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"COUNTERFACTUAL_APPRAISAL\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"counterfactual\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"「一言、遅くなるって伝えておけばよかったな」と\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"「一言、遅くなるって伝えておけばよかったな」と\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"continuing_concern\",\"evidence_indexes\":[9],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"continuing_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだ気になっています\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだ気になっています\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[12],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[11],\"from_claim_id\":\"self_statement\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"statement_concession\",\"scope_refs\":[\"statement_concession\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[10],\"from_claim_id\":\"late_awareness\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"awareness_time\",\"scope_refs\":[\"awareness_time\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_AT_LINK\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"remaining_concern\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"no_contact\",\"type\":\"ANSWER_EXPLAINS_TARGET\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"counterfactual\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"concern_content\",\"scope_refs\":[\"concern_content\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_QUOTED_CONCERN_CONTENT\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"returned\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"returned_concession\",\"scope_refs\":[\"returned_concession\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"returned\",\"late_return\",\"apologize\",\"reassurance_received\"],\"relation_refs\":[\"returned_concession\",\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"late_awareness\",\"no_contact\",\"self_statement\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"relation_refs\":[\"awareness_time\",\"statement_concession\",\"returned_concession\",\"concern_content\"],\"section\":\"reception\"},{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\",\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\",\"statement_concession\",\"awareness_time\",\"answer_explains_target\",\"returned_concession\",\"concern_content\"],\"section\":\"update_note\",\"update_refs\":[0,1,2,3,4,5,6]}],\"observation\":\"遅くてごめんね。友人に謝ったし、本も返したし、大丈夫って言ってくれたのよ。\",\"reception\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と、まだ気になっていますのよ。\",\"update_note\":\"気がかりの対象は未記載です。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[13],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"remaining_concern\",\"answer_explains_target\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点で連絡しなかったことです\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"連絡しなかった\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"本は返した\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"「一言、遅くなるって伝えておけばよかったな」と\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"まだ気になっています\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\\n\\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\",\"source_id\":\"sixrow-answer-book\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "previous": {
+          "path": "/workspace/scratch/d71884a6a7b6/baseline_raw/after_FT-BOOK-AFTER-ANSWER.jsonl",
+          "file_sha256": "2d723f97d54e45d5ee9c80c5345316d5c78fda5c2d9e132b015b926989924e94",
+          "adapter_revision": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"self_statement\",\"evidence_indexes\":[6],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"self_statement\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていたのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていたのに\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_awareness\",\"evidence_indexes\":[5],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"late_awareness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなると分かった時点で連絡しなかったことです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"遅くなると分かった時点で連絡しなかったことです\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_contact\",\"evidence_indexes\":[4],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"no_contact\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"連絡しなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"連絡しなかった\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"returned\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"returned\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"本は返した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"本は返した\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[8],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"counterfactual\",\"evidence_indexes\":[8],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"COUNTERFACTUAL_APPRAISAL\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"counterfactual\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"「一言、遅くなるって伝えておけばよかったな」と\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"「一言、遅くなるって伝えておけばよかったな」と\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"continuing_concern\",\"evidence_indexes\":[9],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"continuing_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだ気になっています\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだ気になっています\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[11],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[12],\"from_claim_id\":\"self_statement\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"statement_concession\",\"scope_refs\":[\"statement_concession\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"late_awareness\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"awareness_time\",\"scope_refs\":[\"awareness_time\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_AT_LINK\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"remaining_concern\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"no_contact\",\"type\":\"ANSWER_EXPLAINS_TARGET\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"counterfactual\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"concern_content\",\"scope_refs\":[\"concern_content\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_QUOTED_CONCERN_CONTENT\"},{\"evidence_indexes\":[16],\"from_claim_id\":\"returned\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"returned_concession\",\"scope_refs\":[\"returned_concession\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"returned\",\"continuing_concern\"],\"relation_refs\":[\"returned_concession\"],\"section\":\"observation\"},{\"claim_refs\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"reception\"},{\"claim_refs\":[\"late_awareness\",\"no_contact\",\"self_statement\",\"counterfactual\"],\"relation_refs\":[\"statement_concession\",\"awareness_time\",\"concern_content\"],\"section\":\"update_note\",\"update_refs\":[0,1,2,3,4,5,6]}],\"observation\":\"本は返して、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と思っているのですね。\",\"reception\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。\",\"update_note\":\"気がかりの対象は未記載。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[10,11,12,13,14,15,16],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"self_statement\",\"statement_concession\",\"no_contact\",\"continuing_concern\",\"awareness_time\",\"concern_content\",\"answer_explains_target\",\"returned_concession\",\"continuing_concern\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\",\"start\":0},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\",\"start\":15},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\",\"start\":0},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\",\"start\":14},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\",\"start\":0},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\",\"start\":0},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに\",\"source_id\":\"sixrow-answer-book\",\"start\":0},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点で連絡しなかったことです\",\"source_id\":\"sixrow-answer-book\",\"start\":22},{\"field_path\":\"answer_text_private\",\"quote\":\"連絡しなかった\",\"source_id\":\"sixrow-answer-book\",\"start\":20},{\"field_path\":\"answer_text_private\",\"quote\":\"本は返した\",\"source_id\":\"sixrow-answer-book\",\"start\":18},{\"field_path\":\"answer_text_private\",\"quote\":\"「一言、遅くなるって伝えておけばよかったな」と\",\"source_id\":\"sixrow-answer-book\",\"start\":10},{\"field_path\":\"answer_text_private\",\"quote\":\"まだ気になっています\",\"source_id\":\"sixrow-answer-book\",\"start\":34},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。\",\"source_id\":\"sixrow-answer-book\",\"start\":0}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "teacher": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/train_messages.jsonl",
+          "file_sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396",
+          "row_id": "FT-BOOK-AFTER-ANSWER",
+          "assistant_utf8_sha256": "c8691a547bcac8e9236bdb4d8d639ffc2a6f5b7eeaaebac9e6ecb327b878636b",
+          "assistant_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"apologize\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"友人に謝った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"友人に謝った\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reassurance_received\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"about_time\":{\"anchor_source_id\":\"FT-BOOK-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PRESENT\"},\"claim_id\":\"remaining_concern\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだちょっと気になる\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだちょっと気になる\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"self_statement\",\"evidence_indexes\":[6],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"self_statement\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていた\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"late_awareness\",\"evidence_indexes\":[7],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"late_awareness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなると分かった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"遅くなると分かった\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[9],\"expression\":\"遅くなると分かった時点\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_contact\",\"evidence_indexes\":[8],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"no_contact\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"連絡しなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"連絡しなかった\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[10],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"returned\",\"evidence_indexes\":[10],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[10],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[10],\"scope_refs\":[\"returned\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"本は返した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"本は返した\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[11],\"expression\":null,\"kind\":\"ANSWER_TIME\"},\"claim_id\":\"counterfactual\",\"evidence_indexes\":[11],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[11],\"value\":\"COUNTERFACTUAL_APPRAISAL\"},\"polarity\":{\"evidence_indexes\":[11],\"scope_refs\":[\"counterfactual\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"一言、遅くなるって伝えておけばよかったな\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"一言、遅くなるって伝えておけばよかったな\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-book\",\"evidence_indexes\":[12],\"expression\":null,\"kind\":\"ANSWER_TIME\"},\"claim_id\":\"continuing_concern\",\"evidence_indexes\":[12],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[12],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[12],\"scope_refs\":[\"continuing_concern\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"まだ気になっています\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだ気になっています\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"self_statement\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"statement_concession\",\"scope_refs\":[\"statement_concession\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"late_awareness\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"awareness_time\",\"scope_refs\":[\"awareness_time\"],\"to_claim_id\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_AT_LINK\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"returned\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"returned_concession\",\"scope_refs\":[\"returned_concession\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[16],\"from_claim_id\":\"counterfactual\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"concern_content\",\"scope_refs\":[\"concern_content\"],\"to_claim_id\":\"continuing_concern\",\"type\":\"SOURCE_QUOTED_CONCERN_CONTENT\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"remaining_concern\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"no_contact\",\"type\":\"ANSWER_EXPLAINS_TARGET\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"late_awareness\",\"no_contact\",\"continuing_concern\"],\"relation_refs\":[\"awareness_time\"],\"section\":\"observation\"},{\"claim_refs\":[\"returned\",\"counterfactual\",\"continuing_concern\",\"remaining_concern\",\"no_contact\"],\"relation_refs\":[\"returned_concession\",\"concern_content\",\"answer_explains_target\"],\"section\":\"reception\"},{\"claim_refs\":[\"remaining_concern\",\"late_awareness\",\"no_contact\"],\"relation_refs\":[\"answer_explains_target\",\"awareness_time\"],\"section\":\"update_note\",\"update_refs\":[0,1,2,3,4,5,6]}],\"observation\":\"遅くなると分かった時に連絡しなかったことが、今も気になっているのですね。\",\"reception\":\"本を返しても、あの時に一言伝えておけば、という思いは残っているのですね。何が気になっているのか、話してくださってありがとうございます。\",\"update_note\":\"気がかりの対象が、遅れると分かった時に連絡しなかったことだと説明されました。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[6],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"self_statement\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[7],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"late_awareness\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[8,13,14],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"no_contact\",\"statement_concession\",\"awareness_time\",\"answer_explains_target\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[10],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"returned\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[11],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"counterfactual\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[12,15,16],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[\"continuing_concern\",\"returned_concession\",\"concern_content\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[13],\"operation\":\"INVALIDATE_GAP\",\"prior_snapshot_ref\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\",\"replacement_refs\":[],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれた\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo_action\",\"quote\":\"借りていた本を返すのが遅れて、友人に謝った\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"memo\",\"quote\":\"大丈夫って言ってくれたけど、まだちょっと気になる\",\"source_id\":\"FT-BOOK-O\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていた\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"連絡しなかった\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"本は返した\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"一言、遅くなるって伝えておけばよかったな\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"まだ気になっています\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"遅くなると分かった時点で連絡しなかったことです\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\",\"source_id\":\"sixrow-answer-book\"},{\"field_path\":\"answer_text_private\",\"quote\":\"「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\",\"source_id\":\"sixrow-answer-book\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}"
+        },
+        "source_material_sources": [
+          {
+            "native_source_role": "CURRENT_INPUT",
+            "original": {
+              "category": [
+                "人間関係"
+              ],
+              "created_at": "2026-10-26T00:00:00Z",
+              "emotion_details": [
+                {
+                  "strength": "weak",
+                  "type": "不安"
+                }
+              ],
+              "emotions": [
+                "不安"
+              ],
+              "id": "FT-BOOK-O",
+              "is_secret": false,
+              "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+              "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-26T00:00:00Z",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "FT-BOOK-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+              "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+            }
+          },
+          {
+            "native_source_role": "SUPPLEMENTAL_ANSWER",
+            "original": null,
+            "parent_record_id": "FT-BOOK-O",
+            "recorded_at": "2026-10-26T01:00:00Z",
+            "role": "SUPPLEMENTAL_ANSWER",
+            "source_id": "sixrow-answer-book",
+            "source_version": "cocolon.cmee.supplemental_answer.v1",
+            "text_fields": {
+              "answer_text_private": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。"
+            }
+          }
+        ],
+        "prior_adopted_interpretation": {
+          "meaning_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-BOOK-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "late_return",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "late_return"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "借りていた本を返すのが遅れて"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "借りていた本を返すのが遅れて"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-BOOK-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "apologize",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "apologize"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "友人に謝った"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "友人に謝った"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-BOOK-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "reassurance_received",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "reassurance_received"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "大丈夫って言ってくれた"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "大丈夫って言ってくれた"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-BOOK-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PRESENT"
+                  },
+                  "claim_id": "remaining_concern",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "remaining_concern"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "まだちょっと気になる"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "まだちょっと気になる"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "relations": [
+                {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "from_claim_id": "late_return",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "action_link",
+                  "scope_refs": [
+                    "action_link"
+                  ],
+                  "to_claim_id": "apologize",
+                  "type": "SOURCE_WRITTEN_TE_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_id": "reassurance_received",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "memo_link",
+                  "scope_refs": [
+                    "memo_link"
+                  ],
+                  "to_claim_id": "remaining_concern",
+                  "type": "SOURCE_WRITTEN_CONCESSION"
+                }
+              ],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "unknowns": [
+                {
+                  "description": "気がかりの対象は未記載。",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "NOT_STATED",
+                  "target_claim_refs": [
+                    "remaining_concern"
+                  ],
+                  "unknown_id": "missing_explanation"
+                }
+              ],
+              "updates": []
+            },
+            "evidence": [
+              {
+                "end": 14,
+                "field_path": "memo_action",
+                "quote": "借りていた本を返すのが遅れて",
+                "source_id": "FT-BOOK-O",
+                "start": 0
+              },
+              {
+                "end": 21,
+                "field_path": "memo_action",
+                "quote": "友人に謝った",
+                "source_id": "FT-BOOK-O",
+                "start": 15
+              },
+              {
+                "end": 11,
+                "field_path": "memo",
+                "quote": "大丈夫って言ってくれた",
+                "source_id": "FT-BOOK-O",
+                "start": 0
+              },
+              {
+                "end": 24,
+                "field_path": "memo",
+                "quote": "まだちょっと気になる",
+                "source_id": "FT-BOOK-O",
+                "start": 14
+              },
+              {
+                "end": 21,
+                "field_path": "memo_action",
+                "quote": "借りていた本を返すのが遅れて、友人に謝った",
+                "source_id": "FT-BOOK-O",
+                "start": 0
+              },
+              {
+                "end": 24,
+                "field_path": "memo",
+                "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+                "source_id": "FT-BOOK-O",
+                "start": 0
+              }
+            ]
+          },
+          "semantic_profile": "emlis_model_proposal.v1",
+          "snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15"
+        }
+      },
+      "actual_generation": {
+        "eos_reached": true,
+        "output_tokens": 2578,
+        "seconds": 110.8406874530483,
+        "parse_error_reported_by_runner": null,
+        "strict_duplicate_keys": [],
+        "previous_strict_duplicate_keys": [
+          {
+            "key": "schema_version",
+            "first_value": "cocolon.cmee.semantic_and_surface_proposal.v1",
+            "second_value": "cocolon.cmee.quote_candidate.v1",
+            "path": "candidate.schema_version"
+          }
+        ]
+      },
+      "actual_consumer_judgment": {
+        "receipt_status": "INVALID_EVIDENCE",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "outcome_status": null,
+        "outcome_body_state": null,
+        "outcome_reason_codes": [],
+        "question_disposition": null,
+        "question_reason": null,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+        "raw_file_sha256": "3f055d9c94da3adad2b3d0ac177b87539d4ab108a797f1a37ccb6ff224006eaf"
+      },
+      "static_inventory_only": {
+        "valid_adopted_packet_claim": false,
+        "candidate_claim_count": 10,
+        "candidate_relation_count": 7,
+        "quote_count": 13,
+        "textual_update_count": 1,
+        "teacher_expected_update_count": 7,
+        "actual_updates_lexically_read": [
+          {
+            "evidence_indexes": [
+              13
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "remaining_concern",
+              "answer_explains_target"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          }
+        ],
+        "teacher_expected_updates": [
+          {
+            "evidence_indexes": [
+              6
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "self_statement"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              7
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "late_awareness"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              8,
+              13,
+              14
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "no_contact",
+              "statement_concession",
+              "awareness_time",
+              "answer_explains_target"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              10
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "returned"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              11
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "counterfactual"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              12,
+              15,
+              16
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [
+              "continuing_concern",
+              "returned_concession",
+              "concern_content"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              13
+            ],
+            "operation": "INVALIDATE_GAP",
+            "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+            "replacement_refs": [],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          }
+        ],
+        "actual_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "returned",
+                "late_return",
+                "apologize",
+                "reassurance_received"
+              ],
+              "relation_refs": [
+                "returned_concession",
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "late_awareness",
+                "no_contact",
+                "self_statement",
+                "returned",
+                "counterfactual",
+                "continuing_concern"
+              ],
+              "relation_refs": [
+                "awareness_time",
+                "statement_concession",
+                "returned_concession",
+                "concern_content"
+              ],
+              "section": "reception"
+            },
+            {
+              "claim_refs": [
+                "late_return",
+                "apologize",
+                "reassurance_received",
+                "remaining_concern",
+                "self_statement",
+                "late_awareness",
+                "no_contact",
+                "returned",
+                "counterfactual",
+                "continuing_concern"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link",
+                "statement_concession",
+                "awareness_time",
+                "answer_explains_target",
+                "returned_concession",
+                "concern_content"
+              ],
+              "section": "update_note",
+              "update_refs": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            }
+          ],
+          "observation": "遅くてごめんね。友人に謝ったし、本も返したし、大丈夫って言ってくれたのよ。",
+          "reception": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と、まだ気になっていますのよ。",
+          "update_note": "気がかりの対象は未記載です。"
+        },
+        "teacher_surface": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "late_awareness",
+                "no_contact",
+                "continuing_concern"
+              ],
+              "relation_refs": [
+                "awareness_time"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "returned",
+                "counterfactual",
+                "continuing_concern",
+                "remaining_concern",
+                "no_contact"
+              ],
+              "relation_refs": [
+                "returned_concession",
+                "concern_content",
+                "answer_explains_target"
+              ],
+              "section": "reception"
+            },
+            {
+              "claim_refs": [
+                "remaining_concern",
+                "late_awareness",
+                "no_contact"
+              ],
+              "relation_refs": [
+                "answer_explains_target",
+                "awareness_time"
+              ],
+              "section": "update_note",
+              "update_refs": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            }
+          ],
+          "observation": "遅くなると分かった時に連絡しなかったことが、今も気になっているのですね。",
+          "reception": "本を返しても、あの時に一言伝えておけば、という思いは残っているのですね。何が気になっているのか、話してくださってありがとうございます。",
+          "update_note": "気がかりの対象が、遅れると分かった時に連絡しなかったことだと説明されました。"
+        },
+        "previous_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "returned",
+                "continuing_concern"
+              ],
+              "relation_refs": [
+                "returned_concession"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "late_return",
+                "apologize",
+                "reassurance_received",
+                "remaining_concern"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "reception"
+            },
+            {
+              "claim_refs": [
+                "late_awareness",
+                "no_contact",
+                "self_statement",
+                "counterfactual"
+              ],
+              "relation_refs": [
+                "statement_concession",
+                "awareness_time",
+                "concern_content"
+              ],
+              "section": "update_note",
+              "update_refs": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            }
+          ],
+          "observation": "本は返して、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と思っているのですね。",
+          "reception": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。",
+          "update_note": "気がかりの対象は未記載。"
+        },
+        "quote_original_membership": [
+          {
+            "index": 0,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 1,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo_action",
+            "quote": "友人に謝った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 2,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれた",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 3,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo",
+            "quote": "まだちょっと気になる",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 4,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo_action",
+            "quote": "借りていた本を返すのが遅れて、友人に謝った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 5,
+            "source_id": "FT-BOOK-O",
+            "field_path": "memo",
+            "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 6,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 7,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "遅くなると分かった時点で連絡しなかったことです",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 8,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "連絡しなかった",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 9,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "本は返した",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 10,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "「一言、遅くなるって伝えておけばよかったな」と",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 11,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "まだ気になっています",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 12,
+            "source_id": "sixrow-answer-book",
+            "field_path": "answer_text_private",
+            "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています",
+            "exact_occurrences_in_original_field": 0,
+            "extra_coordinate_keys": []
+          }
+        ]
+      },
+      "reading": {
+        "preserved": [
+          "原入力由来4 claimsは教師と全値一致。全10 claim IDと7 relation IDは出ている。",
+          "counterfactualのCOUNTERFACTUAL_APPRAISAL、no_contactのNEGATED、全claimのOMITTED主体は値として残る。ただし根拠/時点は不整合。",
+          "prior_snapshot_refと未知target_ref missing_explanationの文字列は実際の凍結priorと一致。これは本実生成初回からの動的priorではない。"
+        ],
+        "changes_from_previous": [
+          "前回のcandidate.schema_version重複は消え、今回のstrict JSONには重複キーなし。",
+          "前回13引用に推定startを加えた形式から、今回はquoteだけの形へ戻った。しかし引用12に句点欠落があり、INVALID_EVIDENCEのまま。",
+          "更新は前回と同じADD1件であり、必要7更新を保持していない。"
+        ],
+        "remaining_failures": [
+          "引用12は原文の「ことです。\\n\\n」から句点を落としており、原source内の完全一致出現数0。引用表は13行(index0..12)だがrelation/updateに13/14/15参照がある。",
+          "late_awarenessは旧memoのindex5、no_contactは旧actionのindex4を根拠にする。returnedの7はawareness/no-contact句、counterfactualの8は連絡しなかった、continuing_concernの9は本は返したを指し、主張自身と根拠が一致しない。",
+          "no_contactの書かれた時点expressionがnullになり、counterfactual/continuing_concernのANSWER_TIMEが過去/現在へずれる。",
+          "必要な6ADD+1INVALIDATE_GAPに対しADD1のみ。そのreplacement_refsは旧remaining_concernとanswer_explains_targetだけで、新説明全体を更新へ結べていない。GAP解消更新なし。",
+          "update_refs[0,1,2,3,4,5,6]に対し実updatesは1行で、1..6は範囲外。",
+          "本人が気がかりの対象を説明しているのに、update_noteは「気がかりの対象は未記載です。」と逆戻りする。",
+          "観測の「遅くてごめんね」は原文にない直接発話を作り、本人の声として「のよ」と語る。受け取りは本人回答の一人称復唱で「まだ気になっていますのよ」という不自然な文になっている。",
+          "observation/reception/update_noteのbindingsが実際の文で表現した意味と一致しない。"
+        ],
+        "body_reader_scope": "実receipt INVALID_EVIDENCEから意味REJECT。本文readerへ到達していないため、本文所見を実拒否原因へ置き換えない。"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "evidence": {
+        "actual": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-SHOP-INITIAL.jsonl",
+          "file_sha256": "87d6bba7bb58082df8a31c97aca2293b6ea9ca45c3e110873f8ed873a641759a",
+          "raw_text_sha256": "f954e937b0baeec037da29f7b908306c7de0cf4e16f82e449d3bc0ea9927e5a3",
+          "adapter_revision": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"opening_known\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"opening_known\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"昔からの友人が店を開いたと知って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"昔からの友人が店を開いたと知って\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"celebration_sent\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"celebration_sent\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"お祝いのメッセージを送った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"お祝いのメッセージを送った\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_left_behind\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"felt_left_behind\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"少し置いていかれた気がした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"少し置いていかれた気がした\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"felt_left_behind\"],\"focus\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"missing_reason\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"celebration_sent\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"felt_left_behind\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"opening_known\",\"celebration_sent\",\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"memo_link\"],\"section\":\"reception\"}],\"observation\":\"友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。\",\"reception\":\"お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれたように感じたのですか。\",\"update_note\":null},\"unknowns\":[{\"description\":\"置いていかれたように感じた理由は未記載。\",\"evidence_indexes\":[3],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"felt_left_behind\"],\"unknown_id\":\"missing_reason\"}],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかったけど、少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "previous": {
+          "path": "/workspace/scratch/d71884a6a7b6/baseline_raw/after_FT-SHOP-INITIAL.jsonl",
+          "file_sha256": "1e8f0052b76a9ae7514fc07f5518da1210fd890106c136cca560fe0382fb1212",
+          "adapter_revision": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"opening_known\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"opening_known\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"昔からの友人が店を開いたと知って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"昔からの友人が店を開いたと知って\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"celebration_sent\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"celebration_sent\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"お祝いのメッセージを送った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"お祝いのメッセージを送った\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_left_behind\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"felt_left_behind\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"少し置いていかれた気がした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"少し置いていかれた気がした\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"felt_left_behind\"],\"focus\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"felt_left_behind_reason\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"celebration_sent\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"felt_left_behind\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"opening_known\",\"celebration_sent\",\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"memo_link\"],\"section\":\"reception\"}],\"observation\":\"友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。\",\"reception\":\"お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれた気がしたのですね。\",\"update_note\":null},\"unknowns\":[{\"description\":\"置いていかれたように感じた理由は未記載。\",\"evidence_indexes\":[3],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"felt_left_behind\"],\"unknown_id\":\"felt_left_behind_reason\"}],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかったけど、少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "teacher": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/train_messages.jsonl",
+          "file_sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396",
+          "row_id": "FT-SHOP-INITIAL",
+          "assistant_utf8_sha256": "da57bfbbc912117b67696ed00e35146936731ccd37d0383e01f9a582b7aa77b3",
+          "assistant_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"opening_known\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"opening_known\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"昔からの友人が店を開いたと知って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"昔からの友人が店を開いたと知って\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"celebration_sent\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"celebration_sent\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"お祝いのメッセージを送った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"お祝いのメッセージを送った\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_left_behind\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"felt_left_behind\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"少し置いていかれた気がした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"少し置いていかれた気がした\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"felt_left_behind\"],\"focus\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"missing_explanation\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"celebration_sent\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"felt_left_behind\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"opening_known\",\"celebration_sent\",\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"memo_link\"],\"section\":\"reception\"}],\"observation\":\"友人の開店を知ってお祝いのメッセージを送り、うれしさと、少し置いていかれたような感覚があったのですね。\",\"reception\":\"開店を喜ぶ気持ちと、少し置いていかれたような感覚を、どちらも聞いていたいです。\",\"update_note\":null},\"unknowns\":[{\"description\":\"置いていかれたように感じた理由は未記載。\",\"evidence_indexes\":[3],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"felt_left_behind\"],\"unknown_id\":\"missing_explanation\"}],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかったけど、少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}"
+        },
+        "source_material_sources": [
+          {
+            "native_source_role": "CURRENT_INPUT",
+            "original": {
+              "category": [
+                "人間関係"
+              ],
+              "created_at": "2026-10-26T00:00:00Z",
+              "emotion_details": [
+                {
+                  "strength": "medium",
+                  "type": "喜び"
+                },
+                {
+                  "strength": "weak",
+                  "type": "悲しみ"
+                }
+              ],
+              "emotions": [
+                "喜び",
+                "悲しみ"
+              ],
+              "id": "FT-SHOP-O",
+              "is_secret": false,
+              "memo": "うれしかったけど、少し置いていかれた気がした。",
+              "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-26T00:00:00Z",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "FT-SHOP-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "うれしかったけど、少し置いていかれた気がした。",
+              "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。"
+            }
+          }
+        ],
+        "prior_adopted_interpretation": null
+      },
+      "actual_generation": {
+        "eos_reached": true,
+        "output_tokens": 1089,
+        "seconds": 46.83189845900051,
+        "parse_error_reported_by_runner": null,
+        "strict_duplicate_keys": [],
+        "previous_strict_duplicate_keys": []
+      },
+      "actual_consumer_judgment": {
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "meaning_adopted": true,
+        "body_available": false,
+        "decision": null,
+        "reason_code": null,
+        "outcome_status": "UNAVAILABLE",
+        "outcome_body_state": "UNAVAILABLE",
+        "outcome_reason_codes": [
+          "model_surface_not_validated"
+        ],
+        "question_disposition": "BLOCKED",
+        "question_reason": "model_surface_not_validated",
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_file_sha256": "87d6bba7bb58082df8a31c97aca2293b6ea9ca45c3e110873f8ed873a641759a"
+      },
+      "static_inventory_only": {
+        "valid_adopted_packet_claim": false,
+        "candidate_claim_count": 4,
+        "candidate_relation_count": 2,
+        "quote_count": 6,
+        "textual_update_count": 0,
+        "teacher_expected_update_count": 0,
+        "actual_updates_lexically_read": [],
+        "teacher_expected_updates": [],
+        "actual_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "opening_known",
+                "celebration_sent",
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "memo_link"
+              ],
+              "section": "reception"
+            }
+          ],
+          "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。",
+          "reception": "お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれたように感じたのですか。",
+          "update_note": null
+        },
+        "teacher_surface": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "opening_known",
+                "celebration_sent",
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "memo_link"
+              ],
+              "section": "reception"
+            }
+          ],
+          "observation": "友人の開店を知ってお祝いのメッセージを送り、うれしさと、少し置いていかれたような感覚があったのですね。",
+          "reception": "開店を喜ぶ気持ちと、少し置いていかれたような感覚を、どちらも聞いていたいです。",
+          "update_note": null
+        },
+        "previous_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "opening_known",
+                "celebration_sent",
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "memo_link"
+              ],
+              "section": "reception"
+            }
+          ],
+          "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。",
+          "reception": "お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれた気がしたのですね。",
+          "update_note": null
+        },
+        "quote_original_membership": [
+          {
+            "index": 0,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo_action",
+            "quote": "昔からの友人が店を開いたと知って",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 1,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo_action",
+            "quote": "お祝いのメッセージを送った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 2,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo",
+            "quote": "うれしかった",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 3,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo",
+            "quote": "少し置いていかれた気がした",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 4,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo_action",
+            "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          },
+          {
+            "index": 5,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo",
+            "quote": "うれしかったけど、少し置いていかれた気がした",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": []
+          }
+        ]
+      },
+      "reading": {
+        "preserved": [
+          "4 claims、2 relations、6 evidence_quotesは凍結教師と全値一致。喜びと少し置いていかれたという本人の主観を保持。",
+          "unknown_id missing_reasonはASCII/非衝突の合法な別名で、description/target/evidence/kindと問い参照が整合。教師IDとの逐語差を意味誤りに数えない。"
+        ],
+        "changes_from_previous": [
+          "前回のfelt_left_behind_reasonからmissing_reasonへ合法ID名が変化しただけで、意味改善とは数えない。",
+          "観測は前回と同文で「开店」「気がしたのですか」が残る。受け取りの末尾は「気がしたのですね」から「ように感じたのですか」へ変わり、本文内の質問が増えた。"
+        ],
+        "remaining_failures": [
+          "日本語表記の「開店」が「开店」のまま。",
+          "観測と受け取りに「のですか」という質問があり、問い候補へ分ける契約を保てていない。",
+          "受け取りが観測の近い復唱で、喜びと置いていかれた感覚を人間的に受け取る別の責務を果たしていない。"
+        ],
+        "body_reader_scope": "実際に意味採用し、本文readerでmodel_surface_not_validated。意味採用と本文利用可能性を分ける。別process cold-file一致は本文なしoutcomeの一致であり、本文成功ではない。"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "evidence": {
+        "actual": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-SHOP-AFTER-ANSWER.jsonl",
+          "file_sha256": "c7ad3b8aab2a0ac0bdc61c13fbedbe2a505365795a4312fb0107c2051440d2a4",
+          "raw_text_sha256": "8d778f657d0bd9ccf477d030254516ca93c0c49311af3c7718957dac2158ceb4",
+          "adapter_revision": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"opening_known\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"opening_known\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"昔からの友人が店を開いたと知って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"昔からの友人が店を開いたと知って\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"celebration_sent\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"celebration_sent\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"お祝いのメッセージを送った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"お祝いのメッセージを送った\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_left_behind\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"felt_left_behind\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"少し置いていかれた気がした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"少し置いていかれた気がした\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"shared_talk\",\"evidence_indexes\":[6],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"shared_talk\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"いつか店をやれたらいいね\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"いつか店をやれたらいいね\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"no_joint_preparation\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"一緒に準備をしていたわけでも\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"一緒に準備をしていたわけでも\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[8],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_promise\",\"evidence_indexes\":[8],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"no_promise\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"約束していたわけでもありません\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"約束していたわけでもありません\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[4],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"perceived_realization\",\"evidence_indexes\":[4],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"perceived_realization\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[5],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"answer_joy\",\"evidence_indexes\":[5],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"answer_joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしいのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしいのに\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[9],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_distance\",\"evidence_indexes\":[9],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"felt_distance\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"あの話を一緒にしていた頃から少し離れてしまったようで\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"あの話を一緒にしていた頃から少し離れてしまったようで\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[10],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"answer_sadness\",\"evidence_indexes\":[10],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[10],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[10],\"scope_refs\":[\"answer_sadness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"寂しかったです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"寂しかったです\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"celebration_sent\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"felt_left_behind\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[11],\"from_claim_id\":\"answer_joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_concession\",\"scope_refs\":[\"answer_concession\"],\"to_claim_id\":\"answer_sadness\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[12],\"from_claim_id\":\"felt_left_behind\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"felt_distance\",\"type\":\"ANSWER_EXPLAINS_TARGET\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"felt_distance\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"distance_link\",\"scope_refs\":[\"distance_link\"],\"to_claim_id\":\"answer_sadness\",\"type\":\"SOURCE_WRITTEN_DE_LINK\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"shared_talk\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"past_reference\",\"scope_refs\":[\"past_reference\"],\"to_claim_id\":\"perceived_realization\",\"type\":\"SOURCE_WRITTEN_REFERENCE\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"opening_known\",\"celebration_sent\",\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"shared_talk\",\"perceived_realization\",\"answer_joy\",\"felt_distance\",\"answer_sadness\"],\"relation_refs\":[\"past_reference\",\"answer_concession\",\"answer_explains_target\",\"distance_link\"],\"section\":\"reception\"},{\"claim_refs\":[\"no_joint_preparation\",\"no_promise\"],\"relation_refs\":[\"no_promise\"],\"section\":\"update_note\",\"update_refs\":[0,1]}],\"observation\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送ったのですね。うれしかったのですね。少し置いていかれた気がしたのですね。\",\"reception\":\"「いつか店をやれたらいいね」と話していたのですね。一緒に準備をしていたわけでも、約束していたわけでもありません。二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。\",\"update_note\":\"一緒に準備をしていたわけでも、約束していたわけでもありません。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[6,7,8],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"shared_talk\",\"no_joint_preparation\",\"no_promise\"]},{\"evidence_indexes\":[11,12,13,14],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"answer_concession\",\"answer_explains_target\",\"distance_link\",\"past_reference\"]},{\"evidence_indexes\":[15],\"operation\":\"INVALIDATE_GAP\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"answer_explains_target\"]},{\"evidence_indexes\":[16,17,18],\"operation\":\"INVALIDATE_GAP\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[0,1]}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って\",\"source_id\":\"FT-SHOP-O\",\"start\":0},{\"end\":30,\"field_path\":\"memo_action\",\"quote\":\"お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\",\"start\":17},{\"end\":6,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-SHOP-O\",\"start\":0},{\"end\":22,\"field_path\":\"memo\",\"quote\":\"少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\",\"start\":9},{\"end\":30,\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\",\"start\":0},{\"end\":22,\"field_path\":\"memo\",\"quote\":\"うれしかったけど、少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\",\"start\":0},{\"end\":14,\"field_path\":\"answer_text_private\",\"quote\":\"いつか店をやれたらいいね\",\"source_id\":\"sixrow-answer-shop\",\"start\":0},{\"end\":30,\"field_path\":\"answer_text_private\",\"quote\":\"一緒に準備をしていたわけでも\",\"source_id\":\"sixrow-answer-shop\",\"start\":15},{\"end\":46,\"field_path\":\"answer_text_private\",\"quote\":\"約束していたわけでもありません\",\"source_id\":\"sixrow-answer-shop\",\"start\":31},{\"end\":60,\"field_path\":\"answer_text_private\",\"quote\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな\",\"source_id\":\"sixrow-answer-shop\",\"start\":47},{\"end\":54,\"field_path\":\"answer_text_private\",\"quote\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな\",\"source_id\":\"sixrow-answer-shop\",\"start\":47},{\"end\":54,\"field_path\":\"answer_text_private\",\"quote\":\"うれしいのに\",\"source_id\":\"sixrow-answer-shop\",\"start\":61},{\"end\":69,\"field_path\":\"answer_text_private\",\"quote\":\"開店したと聞いたとき\",\"source_id\":\"sixrow-answer-shop\",\"start\":55},{\"end\":80,\"field_path\":\"answer_text_private\",\"quote\":\"あの話を一緒にしていた頃から少し離れてしまったようで\",\"source_id\":\"sixrow-answer-shop\",\"start\":71},{\"end\":86,\"field_path\":\"answer_text_private\",\"quote\":\"開店したと聞いたとき\",\"source_id\":\"sixrow-answer-shop\",\"start\":71},{\"end\":86,\"field_path\":\"answer_text_private\",\"quote\":\"寂しかったです\",\"source_id\":\"sixrow-answer-shop\",\"start\":81},{\"end\":92,\"field_path\":\"answer_text_private\",\"quote\":\"開店したと聞いたとき\",\"source_id\":\"sixrow-answer-shop\",\"start\":81},{\"end\":92,\"field_path\":\"answer_text_private\",\"quote\":\"その話を一緒にしていた頃から少し離れてしまったようで、寂しかったです\",\"source_id\":\"sixrow-answer-shop\",\"start\":81}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "previous": {
+          "path": "/workspace/scratch/d71884a6a7b6/baseline_raw/after_FT-SHOP-AFTER-ANSWER.jsonl",
+          "file_sha256": "337c0bde4e328787a3c75b003031673d9c6c020992a97751981768ff5e1a71db",
+          "adapter_revision": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd",
+          "raw_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"opening_known\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"opening_known\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"昔からの友人が店を開いたと知って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"昔からの友人が店を開いたと知って\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"celebration_sent\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"celebration_sent\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"お祝いのメッセージを送った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"お祝いのメッセージを送った\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_left_behind\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"felt_left_behind\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"少し置いていかれた気がした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"少し置いていかれた気がした\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"shared_talk\",\"evidence_indexes\":[4],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"shared_talk\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"いつか店をやれたらいいね\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"いつか店をやれたらいいね\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[5],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"no_joint_preparation\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"一緒に準備をしていたわけでも\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"一緒に準備をしていたわけでも\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_promise\",\"evidence_indexes\":[6],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"no_promise\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"約束していたわけでもありません\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"約束していたわけでもありません\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[7],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"perceived_realization\",\"evidence_indexes\":[7],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"perceived_realization\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[8],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"answer_joy\",\"evidence_indexes\":[8],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"answer_joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしいのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしいのに\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_distance\",\"evidence_indexes\":[9],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"felt_distance\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"あの話を一緒にしていた頃から少し離れてしまったようで\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"あの話を一緒にしていた頃から少し離れてしまったようで\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[10],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"answer_sadness\",\"evidence_indexes\":[10],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[10],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[10],\"scope_refs\":[\"answer_sadness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"寂しかったです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"寂しかったです\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[11],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"celebration_sent\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[12],\"from_claim_id\":\"joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"felt_left_behind\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"answer_joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_concession\",\"scope_refs\":[\"answer_concession\"],\"to_claim_id\":\"answer_sadness\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[14],\"from_claim_id\":\"felt_left_behind\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"felt_distance\",\"type\":\"ANSWER_EXPLAINS_TARGET\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"felt_distance\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"distance_link\",\"scope_refs\":[\"distance_link\"],\"to_claim_id\":\"answer_sadness\",\"type\":\"SOURCE_WRITTEN_DE_LINK\"},{\"evidence_indexes\":[16],\"from_claim_id\":\"shared_talk\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"past_reference\",\"scope_refs\":[\"past_reference\"],\"to_claim_id\":\"perceived_realization\",\"type\":\"SOURCE_WRITTEN_REFERENCE\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"opening_known\",\"celebration_sent\",\"joy\",\"felt_left_behind\"],\"relation_refs\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"shared_talk\",\"perceived_realization\",\"answer_joy\",\"felt_distance\",\"answer_sadness\"],\"relation_refs\":[\"past_reference\",\"answer_concession\",\"answer_explains_target\",\"distance_link\"],\"section\":\"reception\"},{\"claim_refs\":[\"no_joint_preparation\",\"no_promise\"],\"relation_refs\":[],\"section\":\"update_note\",\"update_refs\":[0,1]}],\"observation\":\"昔からの友人が店を開いたと知り、お祝いのメッセージを送ったのですね。うれしかったと聞けて、少し置いていかれた気がしたのですね。\",\"reception\":\"「いつか店をやれたらいいね」と話していたこと、その未来が友人の方ではもう現実になっていたのですね。あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。\",\"update_note\":\"一緒に準備をしていたわけでも、約束していたわけでもありません。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[17,18],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"no_joint_preparation\",\"no_promise\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかったけど、少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"answer_text_private\",\"quote\":\"いつか店をやれたらいいね\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"一緒に準備をしていたわけでも\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"約束していたわけでもありません\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"うれしいのに\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"あの話を一緒にしていた頃から少し離れてしまったようで\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"寂しかったです\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"joyful yet felt left behind\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"that we had talked about\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"from when we talked about it\",\"source_id\":\"sixrow-answer-shop\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+        },
+        "teacher": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/train_messages.jsonl",
+          "file_sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396",
+          "row_id": "FT-SHOP-AFTER-ANSWER",
+          "assistant_utf8_sha256": "e3a81a2995081a2c40537762731469521fe676bcfbfd7420f826ccaf3f3e4806",
+          "assistant_text": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"opening_known\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"opening_known\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"昔からの友人が店を開いたと知って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"昔からの友人が店を開いたと知って\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"celebration_sent\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"celebration_sent\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"お祝いのメッセージを送った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"お祝いのメッセージを送った\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"FT-SHOP-O\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_left_behind\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"felt_left_behind\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"少し置いていかれた気がした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"少し置いていかれた気がした\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"shared_talk\",\"evidence_indexes\":[6],\"kind\":\"REPORTED_STATEMENT\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"shared_talk\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"以前、その友人と「いつか店をやれたらいいね」と話していたことがあるんです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"以前、その友人と「いつか店をやれたらいいね」と話していたことがあるんです\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"no_joint_preparation\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"具体的に一緒に準備をしていたわけでも\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"具体的に一緒に準備をしていたわけでも\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_promise\",\"evidence_indexes\":[9],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"no_promise\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"約束していたわけでもありません\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"約束していたわけでもありません\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[11],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"perceived_realization\",\"evidence_indexes\":[10],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[10],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[10],\"scope_refs\":[\"perceived_realization\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[11],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PRESENT_IN_PAST_CONTEXT\"},\"claim_id\":\"answer_joy\",\"evidence_indexes\":[12],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[12],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[12],\"scope_refs\":[\"answer_joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしい\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしい\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[11],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"felt_distance\",\"evidence_indexes\":[13],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[13],\"value\":\"PERSON_PERCEPTION\"},\"polarity\":{\"evidence_indexes\":[13],\"scope_refs\":[\"felt_distance\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"あの話を一緒にしていた頃から少し離れてしまったようで\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"あの話を一緒にしていた頃から少し離れてしまったようで\"},{\"about_time\":{\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[11],\"expression\":\"開店したと聞いたとき\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"answer_sadness\",\"evidence_indexes\":[14],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[14],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[14],\"scope_refs\":[\"answer_sadness\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"寂しかったです\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"寂しかったです\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action_link\",\"scope_refs\":[\"action_link\"],\"to_claim_id\":\"celebration_sent\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"memo_link\",\"scope_refs\":[\"memo_link\"],\"to_claim_id\":\"felt_left_behind\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[15],\"from_claim_id\":\"shared_talk\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"past_reference\",\"scope_refs\":[\"past_reference\"],\"to_claim_id\":\"perceived_realization\",\"type\":\"SOURCE_WRITTEN_REFERENCE\"},{\"evidence_indexes\":[16],\"from_claim_id\":\"answer_joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_concession\",\"scope_refs\":[\"answer_concession\"],\"to_claim_id\":\"answer_sadness\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[17],\"from_claim_id\":\"felt_distance\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"distance_link\",\"scope_refs\":[\"distance_link\"],\"to_claim_id\":\"answer_sadness\",\"type\":\"SOURCE_WRITTEN_DE_LINK\"},{\"evidence_indexes\":[13],\"from_claim_id\":\"felt_left_behind\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\",\"scope_refs\":[\"answer_explains_target\"],\"to_claim_id\":\"felt_distance\",\"type\":\"ANSWER_EXPLAINS_TARGET\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"shared_talk\",\"perceived_realization\",\"felt_distance\",\"answer_sadness\"],\"relation_refs\":[\"past_reference\",\"distance_link\"],\"section\":\"observation\"},{\"claim_refs\":[\"no_joint_preparation\",\"no_promise\",\"shared_talk\",\"answer_joy\",\"felt_distance\",\"answer_sadness\"],\"relation_refs\":[\"answer_concession\",\"distance_link\"],\"section\":\"reception\"},{\"claim_refs\":[\"shared_talk\",\"perceived_realization\",\"felt_left_behind\",\"felt_distance\",\"answer_sadness\",\"no_joint_preparation\",\"no_promise\"],\"relation_refs\":[\"past_reference\",\"answer_explains_target\"],\"section\":\"update_note\",\"update_refs\":[0,1,2,3,4,5,6,7]}],\"observation\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。その一方で、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。\",\"reception\":\"一緒に準備したり約束したりしていたわけではなくても、二人で話した時間はあったのですね。開店のうれしさも、その頃から離れたような寂しさも、受け取りました。\",\"update_note\":\"本人の説明で、二人で話していた未来と、あの頃からの距離が気持ちに関わっていたことが分かりました。共同準備や約束があったことにはしません。\"},\"unknowns\":[],\"updates\":[{\"evidence_indexes\":[6],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"shared_talk\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[7],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"no_joint_preparation\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[9],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"no_promise\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[10,15],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"perceived_realization\",\"past_reference\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[12],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"answer_joy\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[13],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"felt_distance\",\"answer_explains_target\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[14,16,17],\"operation\":\"ADD\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[\"answer_sadness\",\"answer_concession\",\"distance_link\"],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"},{\"evidence_indexes\":[13],\"operation\":\"INVALIDATE_GAP\",\"prior_snapshot_ref\":\"semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6\",\"replacement_refs\":[],\"target_kind\":\"UNKNOWN\",\"target_ref\":\"missing_explanation\"}]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo_action\",\"quote\":\"昔からの友人が店を開いたと知って、お祝いのメッセージを送った\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"memo\",\"quote\":\"うれしかったけど、少し置いていかれた気がした\",\"source_id\":\"FT-SHOP-O\"},{\"field_path\":\"answer_text_private\",\"quote\":\"以前、その友人と「いつか店をやれたらいいね」と話していたことがあるんです\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"具体的に一緒に準備をしていたわけでも\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"具体的に一緒に準備をしていたわけでも、約束していたわけでもありません\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"約束していたわけでもありません\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"開店したと聞いたとき\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"うれしい\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"あの話を一緒にしていた頃から少し離れてしまったようで\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"寂しかったです\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"二人で話していた未来\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"うれしいのに、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったです\",\"source_id\":\"sixrow-answer-shop\"},{\"field_path\":\"answer_text_private\",\"quote\":\"あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったです\",\"source_id\":\"sixrow-answer-shop\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}"
+        },
+        "source_material_sources": [
+          {
+            "native_source_role": "CURRENT_INPUT",
+            "original": {
+              "category": [
+                "人間関係"
+              ],
+              "created_at": "2026-10-26T00:00:00Z",
+              "emotion_details": [
+                {
+                  "strength": "medium",
+                  "type": "喜び"
+                },
+                {
+                  "strength": "weak",
+                  "type": "悲しみ"
+                }
+              ],
+              "emotions": [
+                "喜び",
+                "悲しみ"
+              ],
+              "id": "FT-SHOP-O",
+              "is_secret": false,
+              "memo": "うれしかったけど、少し置いていかれた気がした。",
+              "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-26T00:00:00Z",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "FT-SHOP-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "うれしかったけど、少し置いていかれた気がした。",
+              "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。"
+            }
+          },
+          {
+            "native_source_role": "SUPPLEMENTAL_ANSWER",
+            "original": null,
+            "parent_record_id": "FT-SHOP-O",
+            "recorded_at": "2026-10-26T01:00:00Z",
+            "role": "SUPPLEMENTAL_ANSWER",
+            "source_id": "sixrow-answer-shop",
+            "source_version": "cocolon.cmee.supplemental_answer.v1",
+            "text_fields": {
+              "answer_text_private": "以前、その友人と「いつか店をやれたらいいね」と話していたことがあるんです。具体的に一緒に準備をしていたわけでも、約束していたわけでもありません。\n\nでも、開店したと聞いたとき、二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました。うれしいのに、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったです。"
+            }
+          }
+        ],
+        "prior_adopted_interpretation": {
+          "meaning_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-SHOP-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "opening_known",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "opening_known"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "昔からの友人が店を開いたと知って"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "昔からの友人が店を開いたと知って"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-SHOP-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "celebration_sent",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "celebration_sent"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "お祝いのメッセージを送った"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "お祝いのメッセージを送った"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-SHOP-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "joy",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "joy"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "うれしかった"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "うれしかった"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-SHOP-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "felt_left_behind",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "PERSON_PERCEPTION"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "felt_left_behind"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "少し置いていかれた気がした"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "少し置いていかれた気がした"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "relations": [
+                {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "from_claim_id": "opening_known",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "action_link",
+                  "scope_refs": [
+                    "action_link"
+                  ],
+                  "to_claim_id": "celebration_sent",
+                  "type": "SOURCE_WRITTEN_TE_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_id": "joy",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "memo_link",
+                  "scope_refs": [
+                    "memo_link"
+                  ],
+                  "to_claim_id": "felt_left_behind",
+                  "type": "SOURCE_WRITTEN_CONCESSION"
+                }
+              ],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "unknowns": [
+                {
+                  "description": "置いていかれたように感じた理由は未記載。",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "NOT_STATED",
+                  "target_claim_refs": [
+                    "felt_left_behind"
+                  ],
+                  "unknown_id": "missing_explanation"
+                }
+              ],
+              "updates": []
+            },
+            "evidence": [
+              {
+                "end": 16,
+                "field_path": "memo_action",
+                "quote": "昔からの友人が店を開いたと知って",
+                "source_id": "FT-SHOP-O",
+                "start": 0
+              },
+              {
+                "end": 30,
+                "field_path": "memo_action",
+                "quote": "お祝いのメッセージを送った",
+                "source_id": "FT-SHOP-O",
+                "start": 17
+              },
+              {
+                "end": 6,
+                "field_path": "memo",
+                "quote": "うれしかった",
+                "source_id": "FT-SHOP-O",
+                "start": 0
+              },
+              {
+                "end": 22,
+                "field_path": "memo",
+                "quote": "少し置いていかれた気がした",
+                "source_id": "FT-SHOP-O",
+                "start": 9
+              },
+              {
+                "end": 30,
+                "field_path": "memo_action",
+                "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+                "source_id": "FT-SHOP-O",
+                "start": 0
+              },
+              {
+                "end": 22,
+                "field_path": "memo",
+                "quote": "うれしかったけど、少し置いていかれた気がした",
+                "source_id": "FT-SHOP-O",
+                "start": 0
+              }
+            ]
+          },
+          "semantic_profile": "emlis_model_proposal.v1",
+          "snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6"
+        }
+      },
+      "actual_generation": {
+        "eos_reached": true,
+        "output_tokens": 3239,
+        "seconds": 139.1773589659715,
+        "parse_error_reported_by_runner": "duplicate_json_key",
+        "strict_duplicate_keys": [
+          {
+            "key": "schema_version",
+            "first_value": "cocolon.cmee.semantic_and_surface_proposal.v1",
+            "second_value": "cocolon.cmee.quote_candidate.v1",
+            "path": "candidate.schema_version"
+          }
+        ],
+        "previous_strict_duplicate_keys": []
+      },
+      "actual_consumer_judgment": {
+        "receipt_status": "INVALID_FORMAT",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "outcome_status": null,
+        "outcome_body_state": null,
+        "outcome_reason_codes": [],
+        "question_disposition": null,
+        "question_reason": null,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+        "raw_file_sha256": "c7ad3b8aab2a0ac0bdc61c13fbedbe2a505365795a4312fb0107c2051440d2a4"
+      },
+      "static_inventory_only": {
+        "valid_adopted_packet_claim": false,
+        "candidate_claim_count": 11,
+        "candidate_relation_count": 6,
+        "quote_count": 18,
+        "textual_update_count": 4,
+        "teacher_expected_update_count": 8,
+        "actual_updates_lexically_read": [
+          {
+            "evidence_indexes": [
+              6,
+              7,
+              8
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "shared_talk",
+              "no_joint_preparation",
+              "no_promise"
+            ]
+          },
+          {
+            "evidence_indexes": [
+              11,
+              12,
+              13,
+              14
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "answer_concession",
+              "answer_explains_target",
+              "distance_link",
+              "past_reference"
+            ]
+          },
+          {
+            "evidence_indexes": [
+              15
+            ],
+            "operation": "INVALIDATE_GAP",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "answer_explains_target"
+            ]
+          },
+          {
+            "evidence_indexes": [
+              16,
+              17,
+              18
+            ],
+            "operation": "INVALIDATE_GAP",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              0,
+              1
+            ]
+          }
+        ],
+        "teacher_expected_updates": [
+          {
+            "evidence_indexes": [
+              6
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "shared_talk"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              7
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "no_joint_preparation"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              9
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "no_promise"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              10,
+              15
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "perceived_realization",
+              "past_reference"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              12
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "answer_joy"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              13
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "felt_distance",
+              "answer_explains_target"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              14,
+              16,
+              17
+            ],
+            "operation": "ADD",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [
+              "answer_sadness",
+              "answer_concession",
+              "distance_link"
+            ],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          },
+          {
+            "evidence_indexes": [
+              13
+            ],
+            "operation": "INVALIDATE_GAP",
+            "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+            "replacement_refs": [],
+            "target_kind": "UNKNOWN",
+            "target_ref": "missing_explanation"
+          }
+        ],
+        "actual_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "opening_known",
+                "celebration_sent",
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "shared_talk",
+                "perceived_realization",
+                "answer_joy",
+                "felt_distance",
+                "answer_sadness"
+              ],
+              "relation_refs": [
+                "past_reference",
+                "answer_concession",
+                "answer_explains_target",
+                "distance_link"
+              ],
+              "section": "reception"
+            },
+            {
+              "claim_refs": [
+                "no_joint_preparation",
+                "no_promise"
+              ],
+              "relation_refs": [
+                "no_promise"
+              ],
+              "section": "update_note",
+              "update_refs": [
+                0,
+                1
+              ]
+            }
+          ],
+          "observation": "昔からの友人が店を開いたと知って、お祝いのメッセージを送ったのですね。うれしかったのですね。少し置いていかれた気がしたのですね。",
+          "reception": "「いつか店をやれたらいいね」と話していたのですね。一緒に準備をしていたわけでも、約束していたわけでもありません。二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+          "update_note": "一緒に準備をしていたわけでも、約束していたわけでもありません。"
+        },
+        "teacher_surface": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "shared_talk",
+                "perceived_realization",
+                "felt_distance",
+                "answer_sadness"
+              ],
+              "relation_refs": [
+                "past_reference",
+                "distance_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "no_joint_preparation",
+                "no_promise",
+                "shared_talk",
+                "answer_joy",
+                "felt_distance",
+                "answer_sadness"
+              ],
+              "relation_refs": [
+                "answer_concession",
+                "distance_link"
+              ],
+              "section": "reception"
+            },
+            {
+              "claim_refs": [
+                "shared_talk",
+                "perceived_realization",
+                "felt_left_behind",
+                "felt_distance",
+                "answer_sadness",
+                "no_joint_preparation",
+                "no_promise"
+              ],
+              "relation_refs": [
+                "past_reference",
+                "answer_explains_target"
+              ],
+              "section": "update_note",
+              "update_refs": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ]
+            }
+          ],
+          "observation": "二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。その一方で、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+          "reception": "一緒に準備したり約束したりしていたわけではなくても、二人で話した時間はあったのですね。開店のうれしさも、その頃から離れたような寂しさも、受け取りました。",
+          "update_note": "本人の説明で、二人で話していた未来と、あの頃からの距離が気持ちに関わっていたことが分かりました。共同準備や約束があったことにはしません。"
+        },
+        "previous_surface_lexically_read": {
+          "bindings": [
+            {
+              "claim_refs": [
+                "opening_known",
+                "celebration_sent",
+                "joy",
+                "felt_left_behind"
+              ],
+              "relation_refs": [
+                "action_link",
+                "memo_link"
+              ],
+              "section": "observation"
+            },
+            {
+              "claim_refs": [
+                "shared_talk",
+                "perceived_realization",
+                "answer_joy",
+                "felt_distance",
+                "answer_sadness"
+              ],
+              "relation_refs": [
+                "past_reference",
+                "answer_concession",
+                "answer_explains_target",
+                "distance_link"
+              ],
+              "section": "reception"
+            },
+            {
+              "claim_refs": [
+                "no_joint_preparation",
+                "no_promise"
+              ],
+              "relation_refs": [],
+              "section": "update_note",
+              "update_refs": [
+                0,
+                1
+              ]
+            }
+          ],
+          "observation": "昔からの友人が店を開いたと知り、お祝いのメッセージを送ったのですね。うれしかったと聞けて、少し置いていかれた気がしたのですね。",
+          "reception": "「いつか店をやれたらいいね」と話していたこと、その未来が友人の方ではもう現実になっていたのですね。あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+          "update_note": "一緒に準備をしていたわけでも、約束していたわけでもありません。"
+        },
+        "quote_original_membership": [
+          {
+            "index": 0,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo_action",
+            "quote": "昔からの友人が店を開いたと知って",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start"
+            ]
+          },
+          {
+            "index": 1,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo_action",
+            "quote": "お祝いのメッセージを送った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 2,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo",
+            "quote": "うれしかった",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 3,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo",
+            "quote": "少し置いていかれた気がした",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 4,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo_action",
+            "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 5,
+            "source_id": "FT-SHOP-O",
+            "field_path": "memo",
+            "quote": "うれしかったけど、少し置いていかれた気がした",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 6,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "いつか店をやれたらいいね",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 7,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "一緒に準備をしていたわけでも",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 8,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "約束していたわけでもありません",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 9,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "二人で話していた未来が、友人の方ではもう現実になっていたんだな",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 10,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "二人で話していた未来が、友人の方ではもう現実になっていたんだな",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 11,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "うれしいのに",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 12,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "開店したと聞いたとき",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 13,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "あの話を一緒にしていた頃から少し離れてしまったようで",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 14,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "開店したと聞いたとき",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 15,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "寂しかったです",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 16,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "開店したと聞いたとき",
+            "exact_occurrences_in_original_field": 1,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          },
+          {
+            "index": 17,
+            "source_id": "sixrow-answer-shop",
+            "field_path": "answer_text_private",
+            "quote": "その話を一緒にしていた頃から少し離れてしまったようで、寂しかったです",
+            "exact_occurrences_in_original_field": 0,
+            "extra_coordinate_keys": [
+              "start",
+              "end"
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "preserved": [
+          "原入力由来4 claimsは教師と全値一致。全11 claim IDと6 relation IDが文字上はある。",
+          "観測欄には喜びと置いていかれた主観が残る。受け取り欄には共同準備/約束の否定と主観的な距離/寂しさが書かれている。"
+        ],
+        "changes_from_previous": [
+          "前回の架空の英語3引用は消えた。",
+          "受け取りの「現実になっていたのですね」から「現実になっていたんだな、と感じたのですね」へ変わり、本人の主観の留保が本文に戻った。これは局所的な静的文章差で、packet採用/全体品質成功ではない。",
+          "前回ADD1行から文字上は2ADD+2INVALIDATE_GAPの4行になったが、全4行が対象指定を欠く。必要な8更新への改善成立と呼ばない。",
+          "前回strict JSONは通っていたが、今回はcandidate.schema_version重複が発生した。"
+        ],
+        "remaining_failures": [
+          "candidate.schema_versionをsemantic_and_surface_proposal.v1とquote_candidate.v1で二重出力し、strict JSONはduplicate_json_key。通常のdict parseによる後勝ち値を採用済packetへ扱わない。",
+          "引用18行すべてに禁止されたstart/endが出る(index0はstartのみ)。実座標も原文と一致しない。引用17は原文の「あの話」を「その話」に変え、完全一致出現数0。",
+          "引用9/10は同じ現実化句、12/14/16は同じ時点句を重複。updateのevidence index18は引用0..17の外。",
+          "共同準備と約束の二否定を束ねる「ありません」までの共有否定文が引用表にない。no_joint_preparationは途中の「一緒に準備をしていたわけでも」のみを否定根拠にし、共同scopeを保持しない。",
+          "perceived_realizationの根拠4は旧action、answer_joyの5は旧memo。felt_distanceの9とanswer_sadnessの10は現実化句を指し、書かれた時点の参照も一致しない。answer_joyはWRITTEN_PRESENT_IN_PAST_CONTEXTから過去へずれる。",
+          "必要な7ADD+1INVALIDATE_GAPに対し4行だけで、全4行にtarget_kind/target_refがない。2つのINVALIDATE_GAPは非空replacement_refsで、最後はsemantic IDではない数値[0,1]。unknowns=[]だけではGAP解消成功にしない。",
+          "update_refs[0,1]自体は4行中の範囲内だが、全更新を参照していない。update_noteのrelation_refsにclaim ID no_promiseを入れ、relation集合と不整合。",
+          "receptionはanswer_joyをbindingするが喜びを文に表していない。一方、文にあるno_joint_preparation/no_promiseはreceptionのclaim_refsにない。",
+          "観測は初回の復唱、受け取りは回答の長い言い換えで、「のですね」の反復とsection責務不足が残る。"
+        ],
+        "body_reader_scope": "実receipt INVALID_FORMATから意味REJECT。引用/意味/本文に関する上の所見は棄却packetを静的に読んだもので、実readerの到達済み拒否理由ではない。"
+      }
+    }
+  ]
+}

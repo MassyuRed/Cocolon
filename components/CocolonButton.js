@@ -14,12 +14,15 @@ import { makeUiTokens } from "../ui/uiTokens";
 export default function CocolonButton({
   variant = "primary",
   children,
+  title,
   onPress,
   disabled = false,
   loading = false,
+  keepPrimaryColorsWhenDisabled = false,
   style,
   textStyle,
   accessibilityLabel,
+  accessibilityState,
   testID,
 }) {
   const { colors, themeName } = useTheme();
@@ -57,6 +60,7 @@ export default function CocolonButton({
     };
 
   const isDisabled = !!disabled || !!loading;
+  const label = children ?? title;
   const [pressed, setPressed] = useState(false);
 
   const scale = useRef(new Animated.Value(1)).current;
@@ -93,17 +97,18 @@ export default function CocolonButton({
 
   const v = String(variant || "primary").toLowerCase();
   const isPrimary = v === "primary";
+  const useDisabledPalette = isDisabled && !(isPrimary && keepPrimaryColorsWhenDisabled);
+  const foreground = useDisabledPalette ? colors.TEXT_SUBTLE : isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT;
 
   const containerStyle = [
     styles.base,
     {
       maxWidth: ui.layout.maxButtonWidth,
-      borderRadius: ui.radius.pill,
-      borderColor: isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
-      backgroundColor: isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
+      borderRadius: ui.radius.button,
+      borderColor: useDisabledPalette ? colors.CARD_BORDER : isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
+      backgroundColor: useDisabledPalette ? colors.FIELD_BG : isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
     },
     isDisabled ? shadowDisabled : pressed ? shadowPressed : shadowFloat,
-    isDisabled && styles.disabled,
     style,
     { transform: [{ scale }] },
   ];
@@ -112,8 +117,8 @@ export default function CocolonButton({
     styles.label,
     {
       fontSize: ui.font.button,
-      color: isPrimary ? "#FFFFFF" : colors.TEXT_ON_LIGHT,
-      fontWeight: "800",
+      color: foreground,
+      ...ui.typography.button,
     },
     textStyle,
   ];
@@ -127,17 +132,18 @@ export default function CocolonButton({
       style={[styles.pressable, { maxWidth: ui.layout.maxButtonWidth }]}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ ...accessibilityState, disabled: isDisabled, busy: !!loading }}
       testID={testID}
     >
       <Animated.View style={containerStyle}>
         {loading ? (
-          <ActivityIndicator color={isPrimary ? "#FFFFFF" : colors.TEXT_ON_LIGHT} />
-        ) : typeof children === "string" || typeof children === "number" ? (
-          <Text style={labelStyle} numberOfLines={1}>
-            {children}
+          <ActivityIndicator color={foreground} />
+        ) : typeof label === "string" || typeof label === "number" ? (
+          <Text style={labelStyle}>
+            {label}
           </Text>
         ) : (
-          children
+          label
         )}
       </Animated.View>
     </Pressable>
@@ -153,16 +159,15 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "center",
     paddingVertical: 14,
-    paddingHorizontal: 16,
-    minHeight: 48,
+    paddingHorizontal: 20,
+    minHeight: 52,
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   label: {
     letterSpacing: 0.2,
-  },
-  disabled: {
-    opacity: 0.55,
+    textAlign: "center",
   },
 });
+

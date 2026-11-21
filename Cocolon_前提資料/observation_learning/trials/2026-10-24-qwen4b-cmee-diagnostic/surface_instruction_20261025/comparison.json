@@ -1,0 +1,72 @@
+{
+  "scope": "SAME_ADAPTER_INITIAL_FIT_PROMPT_CHANGE_ONLY_NOT_GENERALIZATION",
+  "api_commit": "7b649a23a6cdbfb5d55576a6ce58446ff24b414a",
+  "cocolon_commit": "6dbd250e36c8a43cc455fb6eada5193866bba4d1",
+  "new_calls": 1,
+  "training_updates": 0,
+  "inference_report_sha256": "2b717d128cc964300bf5c6ded35ef31571116114e8138e9daf7b29c9e7efe1b1",
+  "raw_file_sha256": "4a38f5a09b801f1ba32608ebaa3ccf9575dc7372965024e5ca6e9a0a3c748a28",
+  "raw_text_sha256": "5c2c686b8cf8d0b1adb22acb5d87a94729a5b7f5941de4f5144adbf3f362ba29",
+  "comparison": {
+    "previous_raw_text_sha256": "dd0071f2066c69e28e7ca67055c107b23c3c29530a9902d0a041a5e47f453786",
+    "previous_finish": "stop",
+    "current_finish": "stop",
+    "previous_surface_types": {
+      "observation": "dict",
+      "reception": "NoneType",
+      "update_note": "NoneType",
+      "bindings": "list"
+    },
+    "current_surface_types": {
+      "observation": "str",
+      "reception": "str",
+      "update_note": "NoneType",
+      "bindings": "list"
+    },
+    "previous_claim_count": 2,
+    "current_claim_count": 2,
+    "current_core_missing": true,
+    "current_candidate_conflicts_missing": true,
+    "current_subject_source_entity_missing": true,
+    "current_section_names": [
+      "repair_result",
+      "solo_joy"
+    ],
+    "current_evidence": [
+      {
+        "source_id": "FT-CHAIR-O",
+        "field_path": "text_fields.memo",
+        "start": 406,
+        "end": 460,
+        "quote": "全部一人で直せたことが、うれしかった"
+      },
+      {
+        "source_id": "FT-CHAIR-O",
+        "field_path": "text_fields.memo_action",
+        "start": 489,
+        "end": 567,
+        "quote": "ぐらついていた椅子を修理して、また座れるようになった"
+      }
+    ],
+    "observation_equals_reception": true
+  },
+  "meaning_adopted": 0,
+  "body_available": 0,
+  "counted_cases": 1,
+  "reason": "INVALID_EVIDENCE",
+  "root_raw_modified": false,
+  "private_user_data_access": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "evidence_failure_source": "Copied SOURCE_ENVELOPE utf8_start/end from material.sources[0].evidence, not required field-local scalar_start/end",
+  "required_field_scalar_ranges": {
+    "memo": [
+      0,
+      18
+    ],
+    "memo_action": [
+      0,
+      26
+    ]
+  }
+}

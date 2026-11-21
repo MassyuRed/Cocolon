@@ -1,0 +1,14 @@
+{
+  "source_library_file_id": "libfile_3e5553b6d2488191a753b8baee0f077f",
+  "source_archive_sha256": "39ac2ff058fe65a961b70f8477c2561306ca2daa1029a1bf3bb33f620c0df342",
+  "source_payloads_verified": 76,
+  "crc_verified": true,
+  "restored_adapter": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "8e2fa340bbba53210c982fb5ae6e5839960bafa390c643b57ff4f195a1b9d8d4",
+    "adapter_model.safetensors": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684"
+  },
+  "supplement_sha256": "33fee8a9a84e218165b0a49d1281a5ec5872d7730023a6f2487c1e215f05798f",
+  "supplement_bytes": 14226512,
+  "model_loads": 0
+}

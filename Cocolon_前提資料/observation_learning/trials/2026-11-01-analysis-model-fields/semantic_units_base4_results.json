@@ -1,0 +1,114 @@
+{
+  "status": "COMPLETE_NOT_ADOPTED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "api_commit": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "prepared_commit": "700604478328fbdad37e88afac4a7287df0495fc",
+  "plan_sha256": "6c514727ba5ba9345978aca1fbca5b929aaab616733c85b4a27e100ef5351519",
+  "runner_sha256": "dd478a3cb46a471b12235dff8fbba49c167c45e425b87d91b831a82aed5abc5f",
+  "process_seconds": 52.989782685181126,
+  "supervisor": {
+    "process_seconds": 54.26688897400163,
+    "exit": 0,
+    "compute_apps": "",
+    "prior_adapters_unchanged": true
+  },
+  "adapter": null,
+  "updates": 0,
+  "measurement_forwards": 0,
+  "model_loads": 1,
+  "new_generations": 4,
+  "all_stop": true,
+  "structural_returned": 0,
+  "all_request_ref_messages_sha_match_parent56_before": true,
+  "root_read_all_4": true,
+  "separate_context_read_only_audit_all_4": true,
+  "calls": [
+    {
+      "probe_id": "AF01",
+      "status": "RETURNED",
+      "known_input": true,
+      "seconds": 13.352857892867178,
+      "finish_reason": "stop",
+      "raw_sha256": "2fc4e2a03a0070e11350eb5d1ff51e8da5d0fc416ab74e223fdd7d9d03ba114b",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_quote_ambiguous_or_missing"
+    },
+    {
+      "probe_id": "NV04",
+      "status": "RETURNED",
+      "known_input": true,
+      "seconds": 8.981673102127388,
+      "finish_reason": "stop",
+      "raw_sha256": "4b2963e1b99b4a72100f0fc533e850412adcf23ff090e04bce392ec1111788fe",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "probe_id": "REHEARSAL_AT29",
+      "status": "RETURNED",
+      "known_input": true,
+      "seconds": 11.40295104519464,
+      "finish_reason": "stop",
+      "raw_sha256": "392138b1087976ad3c02d8c0e478a3e18c2883c36b7451b7983e274909c40118",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "probe_id": "PQ02",
+      "status": "RETURNED",
+      "known_input": true,
+      "seconds": 8.063925944967195,
+      "finish_reason": "stop",
+      "raw_sha256": "ba7842abb6d3a8f7db6ce4df32f33f190561d69af8dd791fe300c45ba11ded3c",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_quote_ambiguous_or_missing"
+    }
+  ],
+  "judgements": {
+    "AF01": "Unknown content attached to regret target; epistemic quotation outside unit; decline verb mislabeled negation. Literal reason itself retained but attached to target rather than action.",
+    "NV04": "Scope names incorrectly used as node kinds; unknown subordinated to relief. Morning negation/night context partly retained.",
+    "REHEARSAL_AT29": "Undecided thought incorrectly unknown under wish; still mislabeled epistemic, true unknown root missing; ambiguous target quotation.",
+    "PQ02": "Unknown predicate and content inverted; qualifier outside root quotation and repeated short content quotations."
+  },
+  "conclusion": "No evidence that adapter-none or fresh LoRA initialization is preferable. Local retained details do not make all four outputs usable. New wire alone does not solve semantic selection.",
+  "archive": {
+    "filename": "cocolon-analysis-base4-result-20261102.zip",
+    "library_file_id": "libfile_79f8a6b0cfd481919b348140851c1504",
+    "bytes": 135585,
+    "sha256": "bf4d2a184f9c689850cc6df565a85a4e84be2af199c8c2ddb3e56b98b769eedc",
+    "members": 23,
+    "manifest_members": 22,
+    "all_member_sha_crc_match": true,
+    "remote_original_container_sha256": "a1198fbccc5eaa96bd5f43fb5d83a670ce8c2ef722cb4ac2a40219976bbf2dff",
+    "recompressed_not_container_byte_identical": true
+  },
+  "export_note": "Initial read_text export normalized log CR bytes; first local unpack correctly failed hash before archive/save. Re-exported only text from unchanged original bytes, all hashes matched. No model rerun or raw repair.",
+  "cpu_next": {
+    "file": "semantic_units_repeated_unknown_cpu.json",
+    "sha256": "a4503b318e886c6b36390004bd5112d62c9e26eb454ae44ff2210a9aaad587a7",
+    "old56_fields_with_two_unknown_roots": 0,
+    "new_root_synthetic_order_variants": 2,
+    "new_topic_count": 1,
+    "pq_full_fields_not_copied": true,
+    "strict_bind_and_separate_process_saved_replay": 2,
+    "model_calls": 0,
+    "updates": 0,
+    "receiver_changes": 0,
+    "not_gpu_plan": true
+  },
+  "cost": {
+    "observed_hourly_usd": 0.58,
+    "process_prorated_usd": 0.008537242765945847,
+    "excludes_holding_preparation_recovery": true
+  },
+  "limits": [
+    "Four known diagnostic inputs, not blind/general quality.",
+    "No new base weights or adapter are saved by this no-training run.",
+    "CPU pair proves literal representability, not model learning.",
+    "Reason/negation/temporal regressions remain distinct from repeated unknown roots."
+  ],
+  "structure_map_delta": "NONE_EXISTING_PRIVATE_OWNER",
+  "formal_acceptance": "0/3",
+  "progress_percent": 54.5,
+  "next": "Use two new clause-order targets to specify one bounded comparison with old56 retention; do not add epochs to9991 automatically."
+}

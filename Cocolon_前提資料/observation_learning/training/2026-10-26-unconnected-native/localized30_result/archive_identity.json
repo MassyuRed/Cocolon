@@ -1,0 +1,23 @@
+{
+  "archive_bytes": 15171902,
+  "archive_sha256": "d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20",
+  "payloads": 82,
+  "members": 83,
+  "library": {
+    "library_file_id": "libfile_93e16ba81d5c8191986438057de80a9a",
+    "file_id": "file_000000002f4c82069efcd1c38e9729dd",
+    "file_name": "cocolon_localized30_complete_20261027.zip",
+    "path": "/cocolon_localized30_complete_20261027.zip",
+    "current_version_number": 0,
+    "file_size_bytes": 15171902
+  },
+  "filename": "cocolon_localized30_complete_20261027.zip",
+  "complete_runtime_payloads": true,
+  "original_diagnosis_bytes": 1371768,
+  "original_diagnosis_sha256": "1f6b300e7638faa0446707e88c65b16eabbac347a9cd2a78dd2c7ea54e19e903",
+  "diagnosis_split_reassembled_value_equal": true,
+  "base_weights_included": false,
+  "optimizer_state_included": false,
+  "root_reading_reviews_location": "reading_reviews/",
+  "runtime_archive_is_immutable": true
+}

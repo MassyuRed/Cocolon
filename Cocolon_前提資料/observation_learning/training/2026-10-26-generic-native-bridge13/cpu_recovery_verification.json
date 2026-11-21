@@ -1,0 +1,51 @@
+{
+  "status": "CPU_ORIGINALS_RECOVERED_AND_VERIFIED_GPU_NOT_EXECUTED",
+  "archive_sha256": "8c7f4e7cd0ffb6b291e912787c47785a073b5eb87437136bc94ce94a754ae564",
+  "archive_bytes": 72210,
+  "payload_files_verified": [
+    "README.md",
+    "bridge13.plan.json",
+    "bridge_eval_inputs.jsonl",
+    "bridge_train_messages.jsonl",
+    "generic_teacher_provenance.json",
+    "run_bridge13.py",
+    "source_comparison.json",
+    "source_manifest.json",
+    "bridge13_cpu_preflight.json",
+    "cpu_launch.json"
+  ],
+  "payload_count": 10,
+  "archive_member_count": 11,
+  "cpu_report_sha256": "2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99",
+  "source_payloads_match_github_prep_commit": true,
+  "source_commit": "c0b14d700237d01b0b955ec66c1c46cc5604cf26",
+  "validation_cases": [
+    "reject_optimizer_steps",
+    "reject_max_model_calls",
+    "reject_learning_rate",
+    "reject_initial_adapter_sha256",
+    "reject_max_seconds",
+    "reject_unapproved_execute"
+  ],
+  "training_rows": 10,
+  "evaluation_inputs": 11,
+  "max_prompt": 5045,
+  "max_assistant_eos": 2339,
+  "max_full_tokens": 7378,
+  "generic_udon_tokens": {
+    "id": "FT-UDON-INITIAL",
+    "prompt_tokens": 428,
+    "assistant_eos_tokens": 67,
+    "full_tokens": 495,
+    "loss_start": 427,
+    "logits_positions": 68
+  },
+  "daily_surface_tokens": [
+    25,
+    25,
+    25
+  ],
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "production_changes": 0
+}

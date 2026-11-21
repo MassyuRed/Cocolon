@@ -1,0 +1,163 @@
+{
+  "schema_version": "analysis_explicit_v7_model_https_results.v1",
+  "status": "COMPLETE_RESEARCH_ONLY",
+  "api_commit": "db311746144f03935f860fc2b827845573ff8742",
+  "runner_commit": "abd1570df58395c3f11567d55bfa59443d40a076",
+  "runner_sha256": "36aaaae1109f002d7b489375346e84832e9b4c71600171313f8d1f4ca2906194",
+  "transport_scope": "explicit constructor selected_material.v7; normal application factory remains selected_material.v4",
+  "new_training": 0,
+  "new_generation": 4,
+  "model_loads": 1,
+  "stop": 4,
+  "seconds": 36.4116005115211,
+  "authentication": "synthetic",
+  "api": "normal FastAPI routes through ASGITransport",
+  "model_transport": "real loopback HTTPS socket; certificate and hostname verified",
+  "database": "fresh isolated PostgreSQL WASM; no production DB access",
+  "adapter_weights_sha256": "6c879a887e3188f4fa2b6e1df573c8648febaac1661dd874f385d72d1edbd6c9",
+  "adapter_config_sha256": "1deacb44b87cd363b94fd85fe7f86d5ee671ffe10f6d248405783ecaf45509db",
+  "adapter_unchanged": true,
+  "source_hashes_unchanged": true,
+  "saved": 3,
+  "unsupported": 1,
+  "rejected": 0,
+  "concurrent_callers": 12,
+  "model_requests": 4,
+  "saved_current_readonly_monthly_match": true,
+  "source_hashes": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "c3b6c1f3af877b098572f5a2443f42763819564d8ce378eaf95b224da071018e",
+    "ai/services/ai_inference/analysis_model_source.py": "00c25f30e0510989984d46f2ef17030c0eba139be6459d36562371f8eb35fd64"
+  },
+  "untrusted_ca_rejected_before_generation": true,
+  "synthetic_smoke": {
+    "seconds": 4.697821494191885,
+    "saved": 1,
+    "new_generation": 0,
+    "model_loads": 0
+  },
+  "cases": [
+    {
+      "id": "VH01",
+      "status": "SAVED",
+      "callers": 3,
+      "model_calls": 1,
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "stored_artifacts": 1,
+      "stored_months": 1,
+      "saved_read_match": true,
+      "content_sha256": "384a045b6905fce2830e9ad8694cb65ac4b4a9fa1d298c6c9cb03653ae4d2f4b",
+      "projection_sha256": "08dbcde458df9f0e622c6f355045747970111ac46fff260b88679e22eecba889"
+    },
+    {
+      "id": "VH02",
+      "status": "SAVED",
+      "callers": 3,
+      "model_calls": 1,
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "stored_artifacts": 1,
+      "stored_months": 1,
+      "saved_read_match": true,
+      "content_sha256": "4d1cf25a72fe9fdbca1e5666544b8a51833ea5a9728b564c0a56aac61bd07f68",
+      "projection_sha256": "a82ebc1742296085bdf5d9529f8b97c83e28f1e6b2dc8f44986b13effe349d02"
+    },
+    {
+      "id": "VH03",
+      "status": "SAVED",
+      "callers": 3,
+      "model_calls": 1,
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "stored_artifacts": 1,
+      "stored_months": 1,
+      "saved_read_match": true,
+      "content_sha256": "b0b30155de337c94743fae4e958cd27cbb3ec12c66f6a903c1589d388d2590be",
+      "projection_sha256": "765a876897a5c5556bbb8d4250066aea70699feca6ef354baca211aac6c4ad56"
+    },
+    {
+      "id": "VH04",
+      "status": "UNSUPPORTED",
+      "callers": 3,
+      "model_calls": 1,
+      "map_context": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "stored_artifacts": 0,
+      "stored_months": 0,
+      "saved_read_match": null,
+      "content_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "projection_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  ],
+  "interpretation": [
+    "Known phrases with fresh synthetic owner/record/snapshot and emotion context; wiring probes, not held-out quality evaluation.",
+    "VH01 and VH03 keep omitted actor UNSPECIFIED, including explicit negation in VH03.",
+    "VH02 model omits EXPLICIT_ACTOR qualifier; existing finite source proof reads explicit SELF from the whole literal and saves.",
+    "VH03 shares AE02 phrase but uses different prepared input; this differing response demonstrates context sensitivity, not matched-pair generalization.",
+    "VH04 remains unsupported with unparsed_count=1 and no artifact/month row; no OTHER to SELF promotion.",
+    "All preserved unparsed/private candidate boundaries and existing admission proofs remain unchanged."
+  ],
+  "normal_adoption": false,
+  "production_effect": false,
+  "builds": 0,
+  "merges": 0,
+  "validation": {
+    "jupyter": {
+      "passed": 253,
+      "warnings": 1,
+      "seconds": 90.41
+    },
+    "github": {
+      "run_id": 42071956193,
+      "job_id": 127401975421,
+      "conclusion": "success",
+      "generation_saved_passed": 2312,
+      "existing_sql_skip": 1,
+      "subtests": 12048,
+      "owner_passed": 1,
+      "cumulative_api_jobs_passed": 193,
+      "cumulative_subtests": 2,
+      "sql_source_records": 201,
+      "sql_monthly_references": 15
+    }
+  },
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "private_archive": {
+    "filename": "Cocolon_Analysis_ActorOwnership_Balanced48_HTTPS_20261105.zip",
+    "version": 0,
+    "bytes": 15030496,
+    "sha256": "75b216473288c2d49360350562212b3dba89f0a11f07395c2313dfec2ec7f2d9"
+  }
+}

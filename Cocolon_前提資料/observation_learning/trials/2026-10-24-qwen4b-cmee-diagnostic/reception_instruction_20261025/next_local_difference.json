@@ -1,0 +1,11 @@
+{
+  "scope": "CPU_TEXT_DIFFERENCE_ONLY_NOT_NEW_MODEL_OUTPUT_OR_PROBABILITY_TRACE",
+  "field": "candidate.surface_proposal.reception",
+  "teacher": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+  "previous_good_actual": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになったのですね。",
+  "first_differing_character": 45,
+  "shared_prefix": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになっ",
+  "teacher_suffix": "て、よかったですね。",
+  "actual_suffix": "たのですね。",
+  "next": "Keep the restored prompt and saved adapter fixed; diagnose the first local generation choice before changing instruction, loss weighting or update count."
+}

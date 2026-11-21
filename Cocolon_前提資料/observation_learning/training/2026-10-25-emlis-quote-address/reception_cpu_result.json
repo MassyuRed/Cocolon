@@ -1,0 +1,154 @@
+{
+  "adapter_sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+  "automatic_progression": false,
+  "model_forwards": 0,
+  "model_loads": 0,
+  "new_generations": 0,
+  "optimizer_updates": 0,
+  "product_credit": 0,
+  "raw_repair": false,
+  "rows": [
+    {
+      "changed_paths": [],
+      "family": "CHAIR",
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "parsed_exact": true
+    },
+    {
+      "changed_paths": [],
+      "family": "CHAIR",
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "parsed_exact": true
+    },
+    {
+      "changed_paths": [],
+      "family": "CHAIR",
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "parsed_exact": true
+    },
+    {
+      "changed_paths": [],
+      "family": "CHAIR",
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "parsed_exact": true
+    },
+    {
+      "changed_paths": [],
+      "family": "CHAIR",
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "parsed_exact": true
+    },
+    {
+      "changed_paths": [],
+      "family": "CHAIR",
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "parsed_exact": true
+    },
+    {
+      "changed_paths": [
+        "/candidate/surface_proposal/reception"
+      ],
+      "family": "DAILY",
+      "first_divergent_assistant_token": 1153,
+      "first_divergent_raw_token": 247951,
+      "first_divergent_teacher_token": 188606,
+      "full_context_tokens": 3318,
+      "full_teacher_and_eos_retained": true,
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "logits_positions": 439,
+      "loss_start": 2879,
+      "prompt_other_json_eos_labels_excluded": true,
+      "prompt_tokens": 1733,
+      "raw_reception": "あったかいものを食べて、少し落ち着いたのですね。",
+      "raw_token_text": "落ち着いた",
+      "reception_char_range": [
+        3948,
+        3974
+      ],
+      "reception_loss_fraction": 0.00694006309148265,
+      "reception_tokens": 11,
+      "teacher_eos_tokens": 1585,
+      "teacher_reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "teacher_token_char_range": [
+        3962,
+        3965
+      ],
+      "teacher_token_text": "落ち着"
+    },
+    {
+      "changed_paths": [
+        "/candidate/surface_proposal/reception"
+      ],
+      "family": "DAILY",
+      "first_divergent_assistant_token": 1144,
+      "first_divergent_raw_token": 154437,
+      "first_divergent_teacher_token": 149542,
+      "full_context_tokens": 3287,
+      "full_teacher_and_eos_retained": true,
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "logits_positions": 423,
+      "loss_start": 2864,
+      "prompt_other_json_eos_labels_excluded": true,
+      "prompt_tokens": 1728,
+      "raw_reception": "あったかいものを食べて、少し落ち着けたのですね。",
+      "raw_token_text": "けた",
+      "reception_char_range": [
+        3948,
+        3974
+      ],
+      "reception_loss_fraction": 0.007055805003207184,
+      "reception_tokens": 11,
+      "teacher_eos_tokens": 1559,
+      "teacher_reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "teacher_token_char_range": [
+        3965,
+        3967
+      ],
+      "teacher_token_text": "けて"
+    },
+    {
+      "changed_paths": [
+        "/candidate/surface_proposal/reception"
+      ],
+      "family": "DAILY",
+      "first_divergent_assistant_token": 1159,
+      "first_divergent_raw_token": 154437,
+      "first_divergent_teacher_token": 149542,
+      "full_context_tokens": 3330,
+      "full_teacher_and_eos_retained": true,
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "logits_positions": 447,
+      "loss_start": 2883,
+      "prompt_other_json_eos_labels_excluded": true,
+      "prompt_tokens": 1732,
+      "raw_reception": "あったかいものを食べて、少し落ち着けたのですね。",
+      "raw_token_text": "けた",
+      "reception_char_range": [
+        3948,
+        3974
+      ],
+      "reception_loss_fraction": 0.00688360450563204,
+      "reception_tokens": 11,
+      "teacher_eos_tokens": 1598,
+      "teacher_reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "teacher_token_char_range": [
+        3965,
+        3967
+      ],
+      "teacher_token_text": "けて"
+    }
+  ],
+  "schema": "cocolon.quote_reception_cpu_diagnostic.v1",
+  "source_hashes": {
+    "adapter/README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter/adapter_config.json": "4df29c5daa4e4e25273f9fa0e18268929d7cb2fa2993a6e6e8136628efb5adc7",
+    "adapter/adapter_model.safetensors": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+    "after_fit.jsonl": "21787a79c2ecf5e1a60b47e5b9590bb18423d263ae88dc927e2b256b8eb5bb5d",
+    "legacy_run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "run.json": "b0692ff8717bcd5e3a063f0992143bee8797b27e9a106b5efc98528fc1c6180b",
+    "sft_examples.jsonl": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5"
+  },
+  "source_unchanged": true,
+  "status": "CPU_TOKEN_AND_MASK_DIAGNOSIS_COMPLETE",
+  "tokenizer_cache_only": true
+}

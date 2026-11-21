@@ -1,0 +1,68 @@
+{
+  "GPU_operations_by_receipt_generation": 0,
+  "actual_result_sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04",
+  "body_free": true,
+  "model_calls_by_receipt_generation": 0,
+  "originals": {
+    "a12_actual/recovered/actual/after.result.json": {
+      "bytes": 130479,
+      "sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04"
+    },
+    "a12_actual/recovered/actual/execution.json": {
+      "bytes": 1077,
+      "sha256": "79c15f68b55e925c71a946278af3edbfdee3c56ede0068e574a27c6ae9ed4014"
+    },
+    "a12_actual/recovered/actual/preflight.json": {
+      "bytes": 1769,
+      "sha256": "9af12c0237aa4b51ce3d25e2ed27ff6a58f667fdf6c68bc39f74d6059ce46e58"
+    },
+    "a12_actual/recovered/runtime/a12-post-restoration.json": {
+      "bytes": 403,
+      "sha256": "8cf9b2a753327a0739305f1f2effec7f5d2e47e4f6399257e0884b20e121639d"
+    },
+    "a12_actual/recovered/runtime/a12-transfer-verification.json": {
+      "bytes": 320,
+      "sha256": "28b898d834138bf43fbd0756b511e5289eb20e76544513834b95d4a381169667"
+    },
+    "a12_actual/recovered/runtime/authorization-A12-B12.json": {
+      "bytes": 407,
+      "sha256": "26976f09ddaf75bd549a94d978e7158f71dc1c18a48133b845520a81e30f851e"
+    },
+    "a12_actual/reviews/adapter_conditioning_diagnosis_unit_erratum.json": {
+      "bytes": 2144,
+      "sha256": "81d30d163fb97851c12de7583eccb63529e6277e93dce183bc17edd7321217f7"
+    },
+    "a12_actual/reviews/edge_prefix_parser_inspection.json": {
+      "bytes": 7215,
+      "sha256": "25ccc8fd43c6b5c03c98ae495ba5bbbfc3f18f9a41138c376a64762ed1d3f0cb"
+    },
+    "a12_actual/reviews/final_meaning_review.json": {
+      "bytes": 13259,
+      "sha256": "3a30cb631fa9b66ac5623dfd4622950236e9f30b2699245fd6d77d121e44be2e"
+    },
+    "a12_actual/reviews/partial_book_meaning_review.json": {
+      "bytes": 12669,
+      "sha256": "08031c8602f59bcdba9e72330198afe5effbbb1dda6b75ef98b4ba8944ef57c1"
+    },
+    "a12_payload/execution_scope.json": {
+      "bytes": 9957,
+      "sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624"
+    },
+    "a12_verification/ci_verification.json": {
+      "bytes": 12709,
+      "sha256": "e455adebdfd4d568d8beb4b8289657761647cb0a4a64b3c996004b6e4070b7fc"
+    }
+  },
+  "originals_unchanged_by_receipt_generation": true,
+  "remote_original_zip": {
+    "bytes": 36895,
+    "identity_source": "Execution owner reported remote original ZIP identity; this receipt does not reconstruct or alter that ZIP.",
+    "member_files": 15,
+    "sha256": "00c62e1c717dca54ca0d2b597623e0f9ebe9c88d9edc2c8cf2ee59e2b779c36f"
+  },
+  "review_originals_edited": false,
+  "schema": "cocolon.a12.original_identity_manifest.public.v1",
+  "scope_sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624",
+  "services_or_database_changes_by_receipt_generation": 0,
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3"
+}

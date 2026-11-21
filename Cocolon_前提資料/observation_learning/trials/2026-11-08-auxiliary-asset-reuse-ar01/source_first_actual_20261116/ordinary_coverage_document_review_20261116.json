@@ -1,0 +1,110 @@
+{
+  "schema": "cocolon.ordinary_coverage.document_review.v1",
+  "reviewed_at_utc": "2026-11-15T20:48:13.855552+00:00",
+  "state": "NO_BLOCKING_FINDINGS",
+  "scope": "Final local four canonical-document patch and two trial directories; no new remote checks, model calls or source changes.",
+  "documents": [
+    {
+      "path": "Cocolon_前提資料/00_cocolon_current_product_and_state.md",
+      "sha256": "ea05c2e1f8a03268fed2cfabfbf8570ab1b70d2be9cbe1e54ec42ed14e05877d"
+    },
+    {
+      "path": "Cocolon_前提資料/current_structure/03_analysis_current_structure.md",
+      "sha256": "222e141533ba841d9774d1e3b605cd64cbbdebc92042a95948306583d74b0f10"
+    },
+    {
+      "path": "Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md",
+      "sha256": "7e84c2690dd38bd130f3a4c6899b39ab122f574cbf8b51cfa03223def9bebad7"
+    },
+    {
+      "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261114.md",
+      "sha256": "13162283cb1d6d7ba159018a3d93e103b149aeb4ead7f15583569aed902366f8"
+    }
+  ],
+  "current_navigation": {
+    "top_and_analysis_map_to_9_86": true,
+    "design_11_2_and_12_to_9_86": true,
+    "weekly_latest_to_9_86": true,
+    "9_84_and_9_85_history_retained": true
+  },
+  "wording_corrections_confirmed": {
+    "known_one_participant_receipt_generalized_to_participant_uncertainty": true,
+    "later_sending_mention_in_n2_explicitly_retained": true,
+    "replay427_and509_are_zero_based_raw_indexes": true,
+    "pending_wording_nits": []
+  },
+  "factual_consistency": {
+    "a1_posts": 2,
+    "a1_states": [
+      "GENERATED",
+      "NOT_GENERATED"
+    ],
+    "a1_finishes": [
+      "stop",
+      "length"
+    ],
+    "driver_seconds": 139.290247221943,
+    "restore_inclusive_seconds": 191.244379428681,
+    "restored_pid": 127974,
+    "b1_transfer_and_execution": 0,
+    "sql_saves": 0,
+    "normal_rollout": 0,
+    "new_semantic_success_claim": false,
+    "api_public_commit": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+    "api_ci_as_recorded": "in_progress; no success claim",
+    "normal_api_worker": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "db_latest_migration": "20261115011424",
+    "new_controls_or_approval_gates_introduced": false
+  },
+  "source_equality": {
+    "actual_trial_scratch_file_comparisons": 16,
+    "original_zip_member_comparisons": 9,
+    "all_matching": true,
+    "final_offline_json_matches_scratch": true,
+    "a2_b2_files": [
+      {
+        "name": "semantic_json_parser.ordinary_coverage.py",
+        "bytes": 1450,
+        "sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54",
+        "scratch_and_shared_equal": true
+      },
+      {
+        "name": "semantic_reader_ordinary_coverage_once.py",
+        "bytes": 31676,
+        "sha256": "83311b9a7e75d6dc582f6a38c8fbf1669d0f791d5425dbc543e518f391ff4b0c",
+        "scratch_and_shared_equal": true
+      },
+      {
+        "name": "full12_sql_ordinary_coverage_once.py",
+        "bytes": 31349,
+        "sha256": "78f615ed93c48de1c2de7d0742352fafa450b646dce5bb57eee307beffcbecde",
+        "scratch_and_shared_equal": true
+      },
+      {
+        "name": "full12-sql.pre_acquisition.input.json",
+        "bytes": 59146,
+        "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+        "scratch_and_shared_equal": true
+      }
+    ],
+    "total_new_upload_bytes": 123621,
+    "a2_shared_driver_seconds": 265,
+    "immediate_pre_stop_process_identity_recheck_present": true
+  },
+  "secret_value_review": {
+    "text_files_pattern_checked": 26,
+    "matches": 0,
+    "candidate_provider_driver_preflight_logs_read_in_full": true,
+    "credential_value_exposure_found": false,
+    "actual_values_reported": false,
+    "limit": "Pattern checks plus full log inspection; not a general guarantee about unrelated repository history."
+  },
+  "effects": {
+    "canonical_document_edits": 0,
+    "remote_operations": 0,
+    "model_calls": 0,
+    "sql_calls": 0,
+    "deployments": 0
+  },
+  "blocking_findings": []
+}

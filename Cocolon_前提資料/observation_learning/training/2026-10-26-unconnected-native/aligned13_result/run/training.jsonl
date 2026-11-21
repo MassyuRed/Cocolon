@@ -1,0 +1,13 @@
+{"step": 1, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.002008243463933468, "adaptive": false, "target_tokens": 1331, "gradient_norm": 0.06939579546451569}
+{"step": 2, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.7285146713256836, "adaptive": true, "target_tokens": 3178, "gradient_norm": 4.6586151123046875}
+{"step": 3, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.0014402425149455667, "adaptive": false, "target_tokens": 1585, "gradient_norm": 0.09833905845880508}
+{"step": 4, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.00219188560731709, "adaptive": false, "target_tokens": 2228, "gradient_norm": 0.17551931738853455}
+{"step": 5, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.9806720018386841, "adaptive": true, "target_tokens": 3561, "gradient_norm": 6.05733060836792}
+{"step": 6, "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0014941752888262272, "adaptive": false, "target_tokens": 1331, "gradient_norm": 0.046217288821935654}
+{"step": 7, "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.0013712416402995586, "adaptive": false, "target_tokens": 1559, "gradient_norm": 0.06210670992732048}
+{"step": 8, "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.0022513004951179028, "adaptive": false, "target_tokens": 2231, "gradient_norm": 0.2540694773197174}
+{"step": 9, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.6480934619903564, "adaptive": true, "target_tokens": 3178, "gradient_norm": 3.83878493309021}
+{"step": 10, "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.0015208777040243149, "adaptive": false, "target_tokens": 1321, "gradient_norm": 0.04662352055311203}
+{"step": 11, "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.0013237587409093976, "adaptive": false, "target_tokens": 1598, "gradient_norm": 0.06292007863521576}
+{"step": 12, "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.001654556836001575, "adaptive": false, "target_tokens": 2237, "gradient_norm": 0.09456989169120789}
+{"step": 13, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.9118432402610779, "adaptive": true, "target_tokens": 3561, "gradient_norm": 5.20558500289917}

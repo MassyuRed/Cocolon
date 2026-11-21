@@ -1,0 +1,281 @@
+{
+  "status": "DIAGNOSTIC_COMPLETE_NO_ADOPTION_NO_FREE_GENERATION",
+  "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+  "plan": {
+    "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+    "schema": "cocolon.same_prefix_shop_once.v1",
+    "date_jst": "2026-10-30",
+    "owner": "root Karen only; read-only support; Codex Work; no formal Pro/Ultra/human claim",
+    "purpose": "Compare actual generate cached logits and full-prefix no-cache logits at the same preserved SHOP prefixes, before any further training or free-generation proposal. This is not proof that cache is faulty or a product-quality measurement.",
+    "prior_run_source": "3928b9571bc5465998c0c528d207177e212aca03",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "adapter_files_sha256": {
+      "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "adapter_config.json": "b9ebe894a3ed52feffa50c57adc44f7bce9d0711358e3e0dfefe1bd4f128da37",
+      "adapter_model.safetensors": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981"
+    },
+    "train_messages_sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+    "prefix_points_sha256": "9b1cd288cbbc9662c5495aad1f3b86d5b068ea610f13292a42632efa1469b77f",
+    "runner_sha256": "a2fbfa8ee94e4f8fb86f110e368ec966cddf92450ca63df7abb87eb36ac31c06",
+    "installed_source_sha256": {
+      "/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_5/modeling_qwen3_5.py": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+      "/usr/local/lib/python3.12/dist-packages/transformers/loss/loss_utils.py": "83db16b24ce5c3a0642097624aa9a0ae7eb72445c41d8b4d5059a129862fdbbe",
+      "/usr/local/lib/python3.12/dist-packages/transformers/generation/utils.py": "905a7e7e67c49a4df9a623f6ca7a962306003b42ea7f86ce2674cc1acaba7538"
+    },
+    "generation_methods_sha256": {
+      "prepare_inputs_for_generation": "45c20cf1eb13c99edd4e8a199000d22243cb56755237d6b55cf18bce79fe1137",
+      "_sample": "9f5d2e3906df657912a0025b73b4f03ccc9b33f2c2c7ea5ded251c4fc998a277"
+    },
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "raw_prefix_tokens": [
+      292,
+      473
+    ],
+    "total_input_tokens": [
+      4739,
+      4920
+    ],
+    "max_model_loads": 1,
+    "max_core_forwards": 476,
+    "max_cached_forwards": 474,
+    "max_uncached_forwards": 2,
+    "max_forced_replays": 1,
+    "max_forced_prefix_tokens": 474,
+    "generate_api_calls": 1,
+    "max_free_generations": 0,
+    "max_updates": 0,
+    "new_cmee_calls": 0,
+    "max_process_seconds": 180,
+    "parent_timeout_seconds": 170,
+    "parent_kill_after_seconds": 10,
+    "prior_hourly_usd": 0.28,
+    "max_process_usd": 0.014,
+    "cost_exclusions": "preparation/recovery/holding/storage/network/tax etc extra; no live rate requery; not total billing",
+    "output_directory": "/workspace/cocolon_cache_prefix_shop_run_20261030",
+    "cpu_source_and_prefix_check": "completed; no pretrained model load/forward; actual new4B replay unexecuted",
+    "success": "2 identical-input logit comparisons, margins/ranks/deltas, exact observed forward counts, unchanged source/input/weights. Not semantic adoption or product success.",
+    "interpretation": "Name-token divergence alone is not semantic failure. BF16 logit difference or near-tied argmax alone is not a bug. Same invalid choice in both paths excludes cache as cause only at that prefix. Do not infer whole-model correctness, material sufficiency or required learning amount.",
+    "stop": "One run only. Timeout, identity mismatch, missing comparison, nonfinite score, unexpected callback/count or other failure: preserve partial report and close. No retry/repair/fallback, added updates, new free generation, CMEE call or next paid run.",
+    "retry": false,
+    "automatic_progression": false,
+    "product_credit": 0,
+    "candidate_ready": false,
+    "gpu_stop_restart_delete": false,
+    "new_dependency": false,
+    "production_api_db_rn_render_supabase_change": false,
+    "approval": {
+      "user_text": "「4B学習＋CMEE接続」を続けて。",
+      "received_date_utc": "2026-10-30",
+      "proposal_commit": "f5120ba03522b4f01e8f8ddde418bb126367d080",
+      "scope": "Immediately following the concrete one-SHOP same-prefix comparison proposal; one execution, max180 seconds, GPU processing prorated max USD0.014; preparation/recovery/holding etc extra. No training/free generation/new CMEE/retry.",
+      "interpretation_owner": "root Karen"
+    },
+    "control_token": "none; returned474 tokens must equal savedraw[0:474]; normal max_new_tokens termination",
+    "source_review": "independent read-only static review; no formal Pro/Ultra/human or runtime admission claim",
+    "deferred_stop_cap_check": "actual __init__ stores max_length; __call__ sets stopping when length>=max_length; source captured and reviewed"
+  },
+  "started_unix": 1793320593.056791,
+  "model_loads_started": 1,
+  "model_loads_completed": 1,
+  "core_forwards_started": 476,
+  "core_forwards_completed": 476,
+  "cached_forwards_started": 474,
+  "uncached_forwards_started": 2,
+  "generate_api_calls_started": 1,
+  "forced_replays_completed": 1,
+  "forced_prefix_tokens": 474,
+  "free_generations": 0,
+  "updates": 0,
+  "new_cmee_calls": 0,
+  "comparisons": [
+    {
+      "label": "first_teacher_token_divergence",
+      "raw_prefix_tokens": 292,
+      "total_input_tokens": 4739,
+      "input_ids_sha256": "7100d877ba2ee391abe93b9ff1669da57e52928d0287af94ea99f400a942ba20",
+      "cached": {
+        "argmax": 6333,
+        "observed_id": 6333,
+        "observed_rank": 1,
+        "observed_logit": 23.5,
+        "top1_minus_observed": 0.0,
+        "top1_top2_margin": 6.375,
+        "top5": [
+          {
+            "id": 6333,
+            "logit": 23.5,
+            "text": "_no"
+          },
+          {
+            "id": 30812,
+            "logit": 17.125,
+            "text": "_extra"
+          },
+          {
+            "id": 1054,
+            "logit": 17.125,
+            "text": "_n"
+          },
+          {
+            "id": 2797,
+            "logit": 16.875,
+            "text": "_add"
+          },
+          {
+            "id": 605,
+            "logit": 16.375,
+            "text": "_p"
+          }
+        ],
+        "teacher_id": 30812,
+        "teacher_rank": 2,
+        "teacher_logit": 17.125
+      },
+      "uncached": {
+        "argmax": 6333,
+        "observed_id": 6333,
+        "observed_rank": 1,
+        "observed_logit": 23.5,
+        "top1_minus_observed": 0.0,
+        "top1_top2_margin": 6.25,
+        "top5": [
+          {
+            "id": 6333,
+            "logit": 23.5,
+            "text": "_no"
+          },
+          {
+            "id": 1054,
+            "logit": 17.25,
+            "text": "_n"
+          },
+          {
+            "id": 30812,
+            "logit": 17.125,
+            "text": "_extra"
+          },
+          {
+            "id": 2797,
+            "logit": 16.875,
+            "text": "_add"
+          },
+          {
+            "id": 605,
+            "logit": 16.5,
+            "text": "_p"
+          }
+        ],
+        "teacher_id": 30812,
+        "teacher_rank": 3,
+        "teacher_logit": 17.125
+      },
+      "max_abs_logit_difference": 0.359375,
+      "mean_abs_logit_difference": 0.034228257834911346,
+      "same_argmax": true,
+      "teacher_at_syntax_point_not_used_as_gold": true
+    },
+    {
+      "label": "first_syntax_violation",
+      "raw_prefix_tokens": 473,
+      "total_input_tokens": 4920,
+      "input_ids_sha256": "324d5e9f2c00ddc46d1b2db0979a5fc2479ee49a14743100f2782ad76ec2dbc4",
+      "cached": {
+        "argmax": 15050,
+        "observed_id": 15050,
+        "observed_rank": 1,
+        "observed_logit": 24.125,
+        "top1_minus_observed": 0.0,
+        "top1_top2_margin": 0.875,
+        "top5": [
+          {
+            "id": 15050,
+            "logit": 24.125,
+            "text": "[["
+          },
+          {
+            "id": 58,
+            "logit": 23.25,
+            "text": "["
+          },
+          {
+            "id": 1249,
+            "logit": 20.375,
+            "text": "[]"
+          },
+          {
+            "id": 12623,
+            "logit": 20.25,
+            "text": "[],"
+          },
+          {
+            "id": 75994,
+            "logit": 20.0,
+            "text": " [[\""
+          }
+        ]
+      },
+      "uncached": {
+        "argmax": 15050,
+        "observed_id": 15050,
+        "observed_rank": 1,
+        "observed_logit": 24.25,
+        "top1_minus_observed": 0.0,
+        "top1_top2_margin": 1.125,
+        "top5": [
+          {
+            "id": 15050,
+            "logit": 24.25,
+            "text": "[["
+          },
+          {
+            "id": 58,
+            "logit": 23.125,
+            "text": "["
+          },
+          {
+            "id": 75994,
+            "logit": 20.25,
+            "text": " [[\""
+          },
+          {
+            "id": 1249,
+            "logit": 19.625,
+            "text": "[]"
+          },
+          {
+            "id": 12623,
+            "logit": 19.375,
+            "text": "[],"
+          }
+        ]
+      },
+      "max_abs_logit_difference": 0.875,
+      "mean_abs_logit_difference": 0.07754450291395187,
+      "same_argmax": true,
+      "teacher_at_syntax_point_not_used_as_gold": true
+    }
+  ],
+  "retry": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "elapsed_seconds": 34.98031149094459,
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "cached_points_saved": [
+    292,
+    473
+  ],
+  "stage": "CACHED_REPLAY_COMPLETE_UNCACHED_REFERENCES_PENDING",
+  "peak_allocated_bytes": 10387017728,
+  "peak_reserved_bytes": 12018778112,
+  "inputs_source_weights_unchanged": true,
+  "processing_seconds": 34.98030951595865,
+  "process_cost_usd": 0.002720690740130118
+}

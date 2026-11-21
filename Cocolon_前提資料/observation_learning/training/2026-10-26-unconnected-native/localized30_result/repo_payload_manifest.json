@@ -1,0 +1,673 @@
+{
+  "parent_commit": "d54ea1db19ab8fb3c3a57fc07b5a20566f245591",
+  "repository": "MassyuRed/Cocolon",
+  "manifest_self_excluded": true,
+  "files": [
+    {
+      "path": "Cocolon_前提資料/00_cocolon_current_product_and_state.md",
+      "bytes": 54770,
+      "sha256": "291892b30f95cfdb9f02906c413fd7e916891464bfdf471c433e0d829432eac7",
+      "git_blob_sha": "9efcfc8fa7edce1cd490984d5505e89387619f87"
+    },
+    {
+      "path": "Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md",
+      "bytes": 499202,
+      "sha256": "df2f779ea51af9933f490d50929e6636222afc8b03ea1c67b752fa27eb078069",
+      "git_blob_sha": "34c311a7e822829ad85cb2feb8406829ca9a0feb"
+    },
+    {
+      "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md",
+      "bytes": 256975,
+      "sha256": "690f2527ab009656617bccf325de46dea1ffbc81df40441b2e934e9271a27081",
+      "git_blob_sha": "e849e92824a2db069dc62e8215fe8e626940bb9d"
+    },
+    {
+      "path": "Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md",
+      "bytes": 137453,
+      "sha256": "c6f94225b4e033abb1b0d9979e134eba35e19413a658083acbea98cb3e0f055a",
+      "git_blob_sha": "6c9e5a3238888d191bfca18b91cd3a64bd4f7c99"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/README.md",
+      "bytes": 44120,
+      "sha256": "d0d3099061f303ea62d8f3a180ef5a7943d7a43b2cb43de55d6f306cb4f0c8ee",
+      "git_blob_sha": "124de332522d1cb2d7b7d60d1011ed6ea80eeedc"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/README.md",
+      "bytes": 82746,
+      "sha256": "8f7eea2555b98aa6633c1f0dafae86910ff8386a80aad15c740bb753372a0eac",
+      "git_blob_sha": "40b776723061d2fdf5fc09c4972c260687adf1ee"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_preparation/README.md",
+      "bytes": 10477,
+      "sha256": "1aa5a1f93e85b494a2466bfbaedbbf7e857610d5c249d007e38f072d4570ce6b",
+      "git_blob_sha": "4a21281b3ccaf965ee47646f3c456f1a56d89898"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/README.md",
+      "bytes": 11607,
+      "sha256": "626e00abd6b0ce16491c46eafc8fdfb40630d9fd1e945157c360318f179689d6",
+      "git_blob_sha": "fbae08d3600de3110a71243c3dfdc666a73df72e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/actual_cpu_check.json",
+      "bytes": 365071,
+      "sha256": "66642e828981054835ae8f791bb7a0555ab9d50208c534af450422fdbdb61031",
+      "git_blob_sha": "bb977d2ba4bd9c47f84127a2a14ee2220853e1d7"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/adapter/README.md",
+      "bytes": 5184,
+      "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "git_blob_sha": "60609bdf15223e13853b5a24bff18450501658e2"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/adapter/adapter_config.json",
+      "bytes": 1674,
+      "sha256": "ee244dd7a444a2617b40f74f80e843f4fcfd651c38e599ab02d2ddede8e7fa02",
+      "git_blob_sha": "9520e048282971e941ae21619a92e1d56cb60a29"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 29458,
+      "sha256": "ca8f2cd70af1251f4582e5fda588e4fe4f6ba7e9348ea1212cc703cb76b09fba",
+      "git_blob_sha": "e39eac51044350640799dc890fa5b5e19110b955"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_FT-BOOK-INITIAL.jsonl",
+      "bytes": 17230,
+      "sha256": "ad61d9ac2ec64294244b6a0ebfb1a2d96893085dd1c7246cabdfc48c46705023",
+      "git_blob_sha": "85956dcba62e585f35ef648ed8f0593496d673ef"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_FT-KNIT-INITIAL.jsonl",
+      "bytes": 15887,
+      "sha256": "f054fa9a06179b1406fc7970ebd35fa84ba1bf1d13ef539dcfc99a55c8ed6a63",
+      "git_blob_sha": "f95c671f0f8359c342b0e7ac90d4e18e117d175f"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_FT-REPOT-INITIAL.jsonl",
+      "bytes": 15382,
+      "sha256": "2fb6b4094975469c46e55edd6381b9fad6f196d50cd08b42b895c71983efc983",
+      "git_blob_sha": "1ab8c282c191bd6551582481e7887b49e709b7f5"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 42948,
+      "sha256": "8249ad21605f05bab7ba439cdf78abde4e6b95a17adce6595ce8f4da14d78679",
+      "git_blob_sha": "568d312d3b57c8f207f2cd54074ee0ecef5102f7"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_FT-SHOP-INITIAL.jsonl",
+      "bytes": 17749,
+      "sha256": "456b498a809a45dea46db37ee7f40baf7ca5dd090fda3cfd027a23e200a83447",
+      "git_blob_sha": "3ab7a077216709f303e9f6c87d3d5ddeb6aa1870"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+      "bytes": 21210,
+      "sha256": "ee71a4b217e86969b0eb378699510bd601522482360ac59ff656b7938967be7c",
+      "git_blob_sha": "fb9684814a27a34168f6bba7d6e1031b16c92e59"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+      "bytes": 21183,
+      "sha256": "4bed18e979c718174dd5abe2b2a59c514926a5ba396cd8c12a562138f86a4d9e",
+      "git_blob_sha": "951d4ed2d034e1ea250d4b086c4e0480c3bc523b"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+      "bytes": 21223,
+      "sha256": "2c6e9fc3df742de98283796e99f3a7b8f33b2ab5519ac907b6551235afc98609",
+      "git_blob_sha": "c3f3409d3c7e77af80be40079599035180a00d23"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+      "bytes": 29328,
+      "sha256": "486f27e3e828de62078cf8a037dfd577badc5544a14dfb708966c6b588b41add",
+      "git_blob_sha": "d6670706734ebb276d944d2fd617c628e859de00"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+      "bytes": 18584,
+      "sha256": "7f07b078b4b8ee3cd515d18e9c0e6024bdb6ffbd3322e8a19ce9ec85ec46a5a1",
+      "git_blob_sha": "1e0a87db00b9c5a67187cc94ec45e20df54d425e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+      "bytes": 29346,
+      "sha256": "d9cbc4e34b34c0ea0cfb1d48b6adeee92af980b3e1ff6c58cecbf172c3d3e005",
+      "git_blob_sha": "fdd7b339402766ea1f7dc0bc380e496e262872b2"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+      "bytes": 18583,
+      "sha256": "f6817dc608b915c9894adaef47ccff47e3a6c96aaa9ab300811c3b74cb18aa96",
+      "git_blob_sha": "4607e3d387848a2e1d83025177f1ce0ee1c79a05"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+      "bytes": 29412,
+      "sha256": "3897705044921c683529cdec1c1104172ba5dff0c8ab60664f4cec2520898672",
+      "git_blob_sha": "ede3769e9bc298cc66d8b7609b5e1cac8d2bcc02"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+      "bytes": 18583,
+      "sha256": "acf95815b41a921c49351fff43be65d51da180297a45183b46edf35d609908a9",
+      "git_blob_sha": "c8cd74d514a62fe61edda3daa00d16bdf1bafbcc"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/api_changes.json",
+      "bytes": 309,
+      "sha256": "db9ef631b3d37579fd2b2a1e444f925c3e5f7d099e7eae62681fe2b8a0bd6069",
+      "git_blob_sha": "72fef7e36f99263baec8d3c53ae777dc41911ada"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/archive_identity.json",
+      "bytes": 934,
+      "sha256": "6c966ff21eaf3839dc5989df9dfbf500cfd6fc11efcffb5d86a7402585327eba",
+      "git_blob_sha": "68e9bfa748c0213140f9fb9cd5978424c79b3251"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/case_comparison.json",
+      "bytes": 56935,
+      "sha256": "03ee0033d6d3b0cb993f18a9777e39564f89ee3d034ef74b1206a26cb954a396",
+      "git_blob_sha": "4626eef41a3db9c597b308c7148f09ec1755dcd0"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/consume_localized30.py",
+      "bytes": 8968,
+      "sha256": "888b637bb15c76a01abcfc3a11ac7b0fad6cfe243086ebcf2ef6bc916305ea08",
+      "git_blob_sha": "02626d81cec1ddb3aae0a3edc13fac432935c091"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/consumer_cpu_check.json",
+      "bytes": 933,
+      "sha256": "6e298d0294b4318400ddbab49306fbfe7c1645d7addb5bffdd2bc7bc6d195789",
+      "git_blob_sha": "537b1204c97581ff2fc66c601e1d07e2d5fe0e6a"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/cpu_launch.json",
+      "bytes": 539,
+      "sha256": "638e65c3f6e700087d4bb0644f9a817acbec12f45f69af86bdb98b1436bb61fe",
+      "git_blob_sha": "9289834204e6a21101eeb0917877c4e1e595ad6a"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/cpu_launch_v2.json",
+      "bytes": 280,
+      "sha256": "83abb5216cef1e81a3bd85412ddf6d2372b0fd6c3c778ffb7ec6342f24c5bceb",
+      "git_blob_sha": "d6e2bedb6ca327fc8f4b782f27afd57e99a839f9"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/dependency_bindings.json",
+      "bytes": 2283,
+      "sha256": "1be45235b58f0d5a106bee7b90ed7668e415c0a48d2bad91c2da330d04169a54",
+      "git_blob_sha": "d18ae18d03028ded5f5dfecaf723c4c65f2e626f"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/FT-REPOT-INITIAL_cold.json",
+      "bytes": 25879,
+      "sha256": "a41daedd657f1f9b14b852bddb4bac9ef59597b1766ab4e2c60aba8040b2f443",
+      "git_blob_sha": "0df82ca332692f329a4f373b1dbfd516094da0bf"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/FT-REPOT-INITIAL_saved.json",
+      "bytes": 25421,
+      "sha256": "f9f584c7571ca2606286f1e8fb0f53fb4095b1148324ad111589db629ed069f2",
+      "git_blob_sha": "93d539c29385db084cbdce82b713d3efcca39d5d"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/FT-REPOT-INITIAL_saved_completed.json",
+      "bytes": 25356,
+      "sha256": "9c8b0a0b977c2491d0a556d355842d62873a97603d4afe9a3549942be833328a",
+      "git_blob_sha": "d9f95737f95ae587bc1492d59e6acfec57f74b7e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/FT-SHOP-INITIAL_cold.json",
+      "bytes": 28371,
+      "sha256": "7344e75773d52bab02bbebaee6cc8c46f56db24350df6290feeba1bf8b098f74",
+      "git_blob_sha": "ffc015462de5d290412a4d019bf52621502eb5d0"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/FT-SHOP-INITIAL_saved.json",
+      "bytes": 28060,
+      "sha256": "441d8754608ca48bb9564238c4694654207a2475455712d7d3aa6661c931be63",
+      "git_blob_sha": "4ef0a8d276b7a220b8c1d482517cf0cea8662ee8"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/FT-SHOP-INITIAL_saved_completed.json",
+      "bytes": 27849,
+      "sha256": "334abae920bb9f6fec57ee64d9fd26d7b629bee7f9eaffeb9063fa801e1a5626",
+      "git_blob_sha": "959fc4f41e9e172136a2088cfe7f87f05a22f10a"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-01-INITIAL_cold.json",
+      "bytes": 56030,
+      "sha256": "55d2116193f28a845b3339bb2c89c6853ac60e1eb21379fab2ec91b28fcaf59e",
+      "git_blob_sha": "05fc392dfcc55bbeb155a440502da544a6ca1480"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-01-INITIAL_saved.json",
+      "bytes": 33232,
+      "sha256": "b99dda8e2d3f11085f6ac1b74ea424a04ea9f70e6229a66c1765d48e11245c70",
+      "git_blob_sha": "3b075930a8fd2107b5ecffe0cd564e491ec964c6"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-01-INITIAL_saved_completed.json",
+      "bytes": 54112,
+      "sha256": "5f01477e213d48007b1bac66f00795b98dc4b5abe3461f6f1bdc22ee633f6ce9",
+      "git_blob_sha": "ce5118609367f9002a9e6928842c35b4d1ca6520"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-02-INITIAL_cold.json",
+      "bytes": 56029,
+      "sha256": "3c44f0a5faa23a9b88feb0c4df67f27d899d4e76e6f81c948ff69c60a2234ea3",
+      "git_blob_sha": "7c6e45efb8b4c6c08967dd5291f08c66ca5b2bd6"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-02-INITIAL_saved.json",
+      "bytes": 33231,
+      "sha256": "e9ed91f6271eb808e4b8f79885f29459b5a5da2e3a76b4fcd0337960493395f3",
+      "git_blob_sha": "152fd8ebab2352961abe02642f4daa17289deba2"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-02-INITIAL_saved_completed.json",
+      "bytes": 54111,
+      "sha256": "4c75aaadb7f3a082bbde4f3a89a0b5d22728f6964c7108f6c7774fb2601ffe92",
+      "git_blob_sha": "ca888f8566a5709123a233dca8be78e3f74dc97e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-03-INITIAL_cold.json",
+      "bytes": 56030,
+      "sha256": "5150b15ab6a868799e5af14157933ec09e13a137694628bd88b34b62385ad1e1",
+      "git_blob_sha": "40edfb0c363dbcc3bdaaccd7ff382dc9da5e9a85"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-03-INITIAL_saved.json",
+      "bytes": 33232,
+      "sha256": "9e2fdcc336ea81cb633acb45111f30ad77a3ac8168b109b3acfd159c5e576ebc",
+      "git_blob_sha": "bb8cb174313e815b3677c87a5b5d1c6150a4685d"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-DAILY-CALM-03-INITIAL_saved_completed.json",
+      "bytes": 54112,
+      "sha256": "270acb3085c170fa3d3a6830987bac00773dc8006a9fd1cb2fb6bf8df496c3bb",
+      "git_blob_sha": "e761005483ed2d32fce0c50e1637736c994e11ce"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-01-CORRECTION_cold.json",
+      "bytes": 106918,
+      "sha256": "a319b77a8a74b9b1259d8938cbe4c8272c68563eef1e16645a1398dbe68546a5",
+      "git_blob_sha": "25acb57b9d1ecca7a581641b132baaf2a61b77c7"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-01-CORRECTION_saved.json",
+      "bytes": 102967,
+      "sha256": "d15239406bf5fa6b25f54dd3b6d25f890cc1d42e59fddadc0c673c92143d25f9",
+      "git_blob_sha": "9d82527852d0ed868d7285e146c7e9a5b1fe3d25"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-01-CORRECTION_saved_completed.json",
+      "bytes": 104446,
+      "sha256": "576a6075719b57d6fa67fe6b30735bf0f213fbfae4c18d637ddfe3b1527c3452",
+      "git_blob_sha": "bf3ac9c80fb35d585e1f531ea4bf0ab221c388e0"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_cold.json",
+      "bytes": 48774,
+      "sha256": "927cf6fb66b1da3d9c928303fffc48d37775e9480cee86e370a8c10b1ec26486",
+      "git_blob_sha": "3a2d67d0a4c04cf9f0c4ab984de5bf4486890956"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_saved.json",
+      "bytes": 28521,
+      "sha256": "358f46bb018c46bce73e3fd2c0d147a98eca43e6d166be1c7bcc02ce8c14885a",
+      "git_blob_sha": "add6dab252eef1346afef347ceb8288733eadd47"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_saved_completed.json",
+      "bytes": 47061,
+      "sha256": "63e0c385a6fd8adf685b7406d48571f66e798ca7bda1d6e207be5742521f86ae",
+      "git_blob_sha": "e6c2927e21fcece5530cbe82b9c1375fac0b0cc0"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-02-CORRECTION_cold.json",
+      "bytes": 106918,
+      "sha256": "69c9dc9c458ff9d291d0d63b3f5f6bee5e9154bcf6e0745889acfa845355770f",
+      "git_blob_sha": "1bc0d4ae6fd7c5969b7840f01961fa3f39a53c52"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-02-CORRECTION_saved.json",
+      "bytes": 102967,
+      "sha256": "6680f2dde05de828602db0d21c211db4d35b6435fc77a5955e46b4f7371c5f15",
+      "git_blob_sha": "6f4f5bd5335fa43b047cfe6976b46070e01a71c5"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-02-CORRECTION_saved_completed.json",
+      "bytes": 104446,
+      "sha256": "41495a10058e1968d61b89cfcd31d2f4f7463c50388ead8263e77a4bcbeaf443",
+      "git_blob_sha": "707d6325fe5bafdfaf064766971b78fe94899644"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_cold.json",
+      "bytes": 48773,
+      "sha256": "0691a1a20be4a0418c37e7b8a41bed8b083e30be650f2559188bb4633bce7d40",
+      "git_blob_sha": "89fec8bc7ef905ba22553dc685b9f67ca3bb0a2e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_saved.json",
+      "bytes": 28520,
+      "sha256": "fc3c4eb3987fc702cafaeae075310baaadaae37457df0bdcce6cfd26de4b1778",
+      "git_blob_sha": "4da16a66ec73c3e91599c9a2e969f6ae741c56bd"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_saved_completed.json",
+      "bytes": 47060,
+      "sha256": "7fe174c2f7bcf328e8d794fd502d1685f1cff54c24b13675330a3870f4f0c524",
+      "git_blob_sha": "2854ade16cab2610277aa3dcb6ef4a0dd7fd2bf4"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-03-CORRECTION_cold.json",
+      "bytes": 106918,
+      "sha256": "8a64051138845f730eb5adfb995db8d77fa6f0e555bcae5974b32b14906ac968",
+      "git_blob_sha": "b60621c3a2644d3e8233946d0550d87f2549f2d5"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-03-CORRECTION_saved.json",
+      "bytes": 102967,
+      "sha256": "5f2ea0d89f666ce22ce88ad7e5adf73d283ecb21e7d30687f5416edd988aac7b",
+      "git_blob_sha": "4d70b31ec588629acd9e03f11901b29ddcec58c6"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-03-CORRECTION_saved_completed.json",
+      "bytes": 104446,
+      "sha256": "750cbdd546e50c0a8214a39e37dc2371bb5599ba41efad081fa5e93590ecde06",
+      "git_blob_sha": "e7e41e85a03205701633f9361fd34b3aa1691544"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_cold.json",
+      "bytes": 48773,
+      "sha256": "72c601b6117732d4ae1e206742ff77ee33794ab5b4de72987aa5609b854955ec",
+      "git_blob_sha": "7f62b34275935707db946f6085fe3a01f1347c4f"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_saved.json",
+      "bytes": 28520,
+      "sha256": "7e4b1e71d622499cc633edb5b7743bc0d7d19327661021778ce71965c36df1d6",
+      "git_blob_sha": "dd6374499aa056922228a073aed0765772b1a307"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_saved_completed.json",
+      "bytes": 47060,
+      "sha256": "e8f0414ae2ca27e9a668d08276eb4fe24f764b1c407bf6178e7162b53e7f9b10",
+      "git_blob_sha": "c90607576749165589b8b4defb9f8bb746eafdbb"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/FT-BOOK-AFTER-ANSWER.json",
+      "bytes": 13097,
+      "sha256": "d8ac9999c0b1b611785c7929a22a394bf876292ee16d6204e53c01fcef0e182c",
+      "git_blob_sha": "a60864d78e24822b1ba7ee2e1d464c396efb0420"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/FT-BOOK-INITIAL.json",
+      "bytes": 11003,
+      "sha256": "cb8cce6188e6abb10e9a345bdc93136ca0fa5ebb7b614c5d5b3f09ce9907f158",
+      "git_blob_sha": "032ab38e76a1f05d70faf61e577629e630593d64"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/FT-KNIT-INITIAL.json",
+      "bytes": 9966,
+      "sha256": "2677dce24748414a7d0c22e44498e2c730d5b73c312ce2bd669ef739cda5943f",
+      "git_blob_sha": "aaec2ab98fdc231da990b282a24f197af5459a42"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/FT-REPOT-INITIAL.json",
+      "bytes": 59918,
+      "sha256": "be33419d8c6bcfab4edfc29bfb58d034497c00beaaab2b8d82f5884b62a9bad9",
+      "git_blob_sha": "2fddf7ca32ea188a72a9b0f46ca3ed5931a5f06e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/FT-SHOP-AFTER-ANSWER.json",
+      "bytes": 13717,
+      "sha256": "aab21f5ef515b02c65f3dbe2f7a63188915f26456f517e3ccfd7217465ecf99d",
+      "git_blob_sha": "1ea2f6f1f296e2a3e718370fa3c45dd807d87b12"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/FT-SHOP-INITIAL.json",
+      "bytes": 66367,
+      "sha256": "7f795fc2d169d6a5072f203b95c87d8ed260283b646aa6e1b082a5f85ea5f6c4",
+      "git_blob_sha": "67b92e06ae17130bb57e020354309c03a7fbc8ae"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-DAILY-CALM-01-INITIAL.json",
+      "bytes": 100719,
+      "sha256": "97351cf679c99406f1c102b571fcb62437e9199d0edb60024278801f452a801f",
+      "git_blob_sha": "e3369af5cbc60b2985f3c610e17cb44c2cb4b20e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-DAILY-CALM-02-INITIAL.json",
+      "bytes": 100716,
+      "sha256": "63f97dd21c0443559c6926a61cc8d4eea3eec33423a26c9cb1416773387f7700",
+      "git_blob_sha": "14139e6d357556f64292390f4d42e26a1246a539"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-DAILY-CALM-03-INITIAL.json",
+      "bytes": 100719,
+      "sha256": "ee085a4e3c3c3e75e087ced2042db80fa640e62d222b15e017018597b7fc3413",
+      "git_blob_sha": "ba7a8f2075fc23c679ec90480f276418298354f2"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-SERVICE-CHAIR-01-CORRECTION.json",
+      "bytes": 200610,
+      "sha256": "539e349c05239439b786a2fa77fb9f75332553d8f26ac61cd34abf2a1a0aae66",
+      "git_blob_sha": "23ee452a81a49ea765b6f89f6120f9ace7a6c47d"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-SERVICE-CHAIR-01-INITIAL.json",
+      "bytes": 87370,
+      "sha256": "8f75202d2affd14aa25fe9f4a0b4cc8f38a9db1aad79ba84679e2cf6b637adf4",
+      "git_blob_sha": "9e1081a42bb29c575d16a854fc2609d3937595cb"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-SERVICE-CHAIR-02-CORRECTION.json",
+      "bytes": 200610,
+      "sha256": "84deb775dbfe85a7f257c068a9df670abc4d1b64b36f50b44c1d5e137fbcfe53",
+      "git_blob_sha": "a88d3216c7084c06e5b416b4631ca0aa295d647d"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-SERVICE-CHAIR-02-INITIAL.json",
+      "bytes": 87367,
+      "sha256": "86a42b75353b9c3bb150b0c85dc6b3ffb578dc0ebfa5a5cbb294448d4ddca670",
+      "git_blob_sha": "9b7d31dec31f5c90f028a672021b3e20b421af29"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-SERVICE-CHAIR-03-CORRECTION.json",
+      "bytes": 200610,
+      "sha256": "79c03a132ee154c567a2bd96b88a6ad7d3d5a74360fec5ed94e37a180b46575b",
+      "git_blob_sha": "3f75f137b2c654a5d1425c981719bcec894cc275"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/cases/TRAIN-SERVICE-CHAIR-03-INITIAL.json",
+      "bytes": 87367,
+      "sha256": "a33d22928a3ab5302f748f14a5cf5bd57a34d47a6ef92dac4634e5fb8cfa4f39",
+      "git_blob_sha": "b489707d1c6ef4fae7f55cb879dfeb881947553e"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/diagnosis/summary.json",
+      "bytes": 1278,
+      "sha256": "1baa39af874958a2d9aebe2996d482482f7c3e7395684264059e947f239986ee",
+      "git_blob_sha": "8529310d8b8084be11ceb50c767eab144f57b8d9"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/eval_inputs.jsonl",
+      "bytes": 172433,
+      "sha256": "8b568a962188c307627f73bcf2fc8dbbd5cad80f235c377d640dc55cf956aeb6",
+      "git_blob_sha": "6a7209eba95f05c225266a6557e70c625885b173"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_consumer_20261027.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_consumer_launch_20261027.json",
+      "bytes": 526,
+      "sha256": "3fbaea31a5ea994014c7acb7ed4f1a9350599f27c9b50faa37c7668696a8099a",
+      "git_blob_sha": "38017d5aee5e9ad82ad33039033c3b06d3767cb8"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_gpu_20261027.log",
+      "bytes": 950,
+      "sha256": "770738a87246df92c1ff782280ecd12b1c12b5db6f7081e255907e676f3b0a89",
+      "git_blob_sha": "f5f9654e929ea145cede1dfa4d0c72c460bd61d2"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_gpu_v2_20261027.log",
+      "bytes": 4432,
+      "sha256": "04c8c183d1ac2b275d2844f4a414839c9bd10ea4a2e523e8d7faae47478c6d83",
+      "git_blob_sha": "6376605e040ea4beb36341320269393a13126e65"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_launch_20261027.json",
+      "bytes": 744,
+      "sha256": "fd6004eee58212331d3c1a5e328cede2fb5ce20c3105505c95096faf4bd6bb99",
+      "git_blob_sha": "3dc12e1f2ea6dc75eeacb609eff1096a95ae96b0"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_launch_v2_20261027.json",
+      "bytes": 758,
+      "sha256": "656e08105fdbb989939dc068a0b6d288873c5a10c25a46563a79c9629f8ee8b6",
+      "git_blob_sha": "6309caaff42023cfa3560d2c78cf663b7df7b61d"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/execution/cocolon_localized30_preexec_rejection_20261027.json",
+      "bytes": 396,
+      "sha256": "66abb2df88492df80ebff681e8c0d2c53cd23777815ab42e77706934893d8ddb",
+      "git_blob_sha": "0684933e5afd647c2d0d84ee5cb3e6fc130367d6"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/external_verification.json",
+      "bytes": 948,
+      "sha256": "8593642f7be0eac850fd6990a0c30ee4924c18a54f645eecb24532d72023b911",
+      "git_blob_sha": "da61aac4d5bbce16f3a9c16f6bdf7fb0989af1ee"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/fixed_token_mask.json",
+      "bytes": 19817,
+      "sha256": "54a3a82c87595b9f214bf2b7db3bfadec446e306d5dcc3a4f7ac190079562128",
+      "git_blob_sha": "878d01df7fd0b5ba4658ca2be2ebdda1fc265bf9"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/initial_loaded_tensors.json",
+      "bytes": 26063,
+      "sha256": "3f5863643dd95564357b092561302e7379742633a6406b9aea393d28be0aada0",
+      "git_blob_sha": "2e6408a171df60656867b80fa1939b0ddeecdfa9"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/local_token_loss.py",
+      "bytes": 2412,
+      "sha256": "2710c4976d3fd334e61cf2d9e498a84a539972bfd6225d119682e718235e06f8",
+      "git_blob_sha": "3f6b2a046c8603e479b44e4a9d8dedaf2c44a355"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/localized30.plan.json",
+      "bytes": 2645,
+      "sha256": "5d6215972c09a09def4f74576acbe38e4452d24c6f15c5cff890991c96930bb4",
+      "git_blob_sha": "e3963bc31620e041ab1de4f5f89d9b46681dd98a"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/pending_execution_check.json",
+      "bytes": 341,
+      "sha256": "3af18409caaed3ff6fc6c5c135528d5d4fee3add6e43f0b505ea585973eada4a",
+      "git_blob_sha": "9fba5ed089d71231362f3ab2dbefffdf05a83cc2"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/preparation_manifest.json",
+      "bytes": 5361,
+      "sha256": "4679fccb03a1eb3eee850bb2d0046041dca8385bbf482ed1f1c07b35f3d28377",
+      "git_blob_sha": "bac5cbfb2a95b81533a7ffb4c617453e69198656"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/prepare_localized30.py",
+      "bytes": 15010,
+      "sha256": "8a4f95f399d2e442cc34836f7e9880a21cd3d6f9289bad6822aebce617378cbe",
+      "git_blob_sha": "2f6af0f63423bad433720737e05e0fc5c8ce47aa"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/reading_reviews/body_review.json",
+      "bytes": 47255,
+      "sha256": "fbdef31cd8b0032aa25d900a47fd389e21285278da8507319f33aae4fac78136",
+      "git_blob_sha": "c333d2c317618b87d75c37e3340810b38bfbc861"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/reading_reviews/identity_review.json",
+      "bytes": 15275,
+      "sha256": "31059b7667c686653b95e5c707a80a68049f8bc2141186f5e09eff170dce5ffa",
+      "git_blob_sha": "3e33086ed1c673b240cf5b505aa447b1b5123acf"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/reading_reviews/root.json",
+      "bytes": 3927,
+      "sha256": "27059df28da3b69e082c7851645c034c1da4e69636061a22bb16013283c0b673",
+      "git_blob_sha": "5c54adac53bf94d372865ac7dbf4460393348a2f"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/reloaded_tensors.json",
+      "bytes": 26059,
+      "sha256": "8db7c48937334223b1e8814393e73f610920383d7b99464c973a3ca3371761ee",
+      "git_blob_sha": "61fcbf6819a68949687163cf5beda90b34cf0769"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/result_summary.json",
+      "bytes": 4875,
+      "sha256": "5d618a934c799b71f154c258877fdc846d9ea689022efb4dba47b7e402161e5e",
+      "git_blob_sha": "754fdc248ec0d0d3a941beff8076c9ac1b5247d9"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/run.json",
+      "bytes": 8438,
+      "sha256": "efcde044fadd15875fc74227da3c9268a14cdddce8b44be0aaa948fa1545b203",
+      "git_blob_sha": "8e9f11127bcfc0958a6175660385f3d12a6d3c92"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/run_localized30.py",
+      "bytes": 14810,
+      "sha256": "1f6f709de911c18e665fea27d39c311028a1e571c2b5508ff8cd762a027a7992",
+      "git_blob_sha": "0b032d1f5295e290e7c65a28b144b38d74aeefa4"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/runtime_archive_manifest.json",
+      "bytes": 14772,
+      "sha256": "770fcb943b6307b6663a599915574c27876606b50b6657af5a4da4f8af1d7a11",
+      "git_blob_sha": "7642643f6fdd42ceb09c3061e747cf95cf5366da"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/train_messages.jsonl",
+      "bytes": 351979,
+      "sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396",
+      "git_blob_sha": "4bd001e7cabc58ed73948400cabc74410d72295f"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/training.jsonl",
+      "bytes": 4098,
+      "sha256": "79802e7f75639ce87bcb64f615e498f16de5ef4a6ed92ea1afad85bc95f3fafc",
+      "git_blob_sha": "a0e26baba21ea8062c69a4af3cb03f38da4accbf"
+    },
+    {
+      "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/localized30_result/verify_recovery_external.py",
+      "bytes": 4955,
+      "sha256": "476aaebf096c87b742cb3fa40927ca3e54b69d5bfc4bf1e395b05705ba6964f4",
+      "git_blob_sha": "a885e1170b5dca041f9e0141c0d4c987c06a3fde"
+    },
+    {
+      "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261024.md",
+      "bytes": 539113,
+      "sha256": "d44ec1971b2a41e01944d9e6f2412a3d1a0eeb71b59484859e5a47ae44dcdeab",
+      "git_blob_sha": "5d6c9f95c1549689ac8dc61f072e39ffe82c5eb0"
+    }
+  ]
+}

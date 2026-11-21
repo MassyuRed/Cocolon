@@ -1,0 +1,246 @@
+{
+  "record_kind": "BODY_FREE_READ_ONLY_ROLE_BOUNDARY_AUDIT",
+  "date_jst": "2026-11-03",
+  "source": {
+    "cocolon_head": "e4300f1",
+    "weekly_section": 102,
+    "api_commit": "dc05dc358d1c44ce47fd844f6041d74f1f74fe6a",
+    "reason76_plan_sha256": "571434c425f059a8f5f8ffd6a57b5afb1727df46db5a4206e6f35a7ed21972b1",
+    "teacher_count": 76,
+    "evaluation_count": 50,
+    "initial_teacher_count": 74
+  },
+  "teacher_findings": {
+    "role_teacher_rows": [
+      {
+        "teacher_id": "AT32",
+        "multi_sentence": true,
+        "role_units": 1,
+        "affirmative_copula_modifier_count": 0
+      },
+      {
+        "teacher_id": "T01",
+        "multi_sentence": false,
+        "role_units": 1,
+        "affirmative_copula_modifier_count": 0
+      },
+      {
+        "teacher_id": "T02",
+        "multi_sentence": false,
+        "role_units": 1,
+        "affirmative_copula_modifier_count": 0
+      },
+      {
+        "teacher_id": "T03",
+        "multi_sentence": false,
+        "role_units": 1,
+        "affirmative_copula_modifier_count": 0
+      },
+      {
+        "teacher_id": "T04",
+        "multi_sentence": false,
+        "role_units": 1,
+        "affirmative_copula_modifier_count": 0
+      }
+    ],
+    "role_teacher_count": 5,
+    "single_clause_explicit_possessive_role_teacher_ids": [
+      "T01",
+      "T02",
+      "T03",
+      "T04"
+    ],
+    "multi_sentence_role_teacher_ids": [
+      "AT32"
+    ],
+    "explicit_possessive_role_plus_independent_action_teacher_ids": [],
+    "affirmative_copula_wrong_modifier_teacher_count": 0,
+    "new_reason_unknown_role_teachers": 0,
+    "existing_R_series_are_evaluation_not_role_teachers": true
+  },
+  "observed_boundary": {
+    "R01_R08_role_clause_exactly_equal": true,
+    "R01_preserved_R08_modifier_regressed": true,
+    "sentence_count_alone_cause_established": false,
+    "role_actor_reversal_observed": false,
+    "object_words_erased": false,
+    "every_object_separate_target_required": false,
+    "single_cause_established": false
+  },
+  "case_deltas": [
+    {
+      "probe_id": "R01",
+      "exact_full_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "node_kind_counts": {
+          "ROLE": 1
+        },
+        "scope_counts": {},
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1
+        },
+        "affirmative_role_copula_modifier_count": 0
+      },
+      "after": {
+        "node_kind_counts": {
+          "ROLE": 1
+        },
+        "scope_counts": {},
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1
+        },
+        "affirmative_role_copula_modifier_count": 0
+      },
+      "raw_bytes_equal": true
+    },
+    {
+      "probe_id": "R07",
+      "exact_full_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "node_kind_counts": {
+          "ROLE": 1
+        },
+        "scope_counts": {},
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "NEGATION": 1,
+          "WRITTEN_MODIFIER": 1
+        },
+        "affirmative_role_copula_modifier_count": 1
+      },
+      "after": {
+        "node_kind_counts": {
+          "ROLE": 1
+        },
+        "scope_counts": {},
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "NEGATION": 1,
+          "WRITTEN_MODIFIER": 1
+        },
+        "affirmative_role_copula_modifier_count": 0
+      },
+      "raw_bytes_equal": false
+    },
+    {
+      "probe_id": "R08",
+      "exact_full_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "node_kind_counts": {
+          "ROLE": 1,
+          "ACTION_OR_NONACTION": 1
+        },
+        "scope_counts": {
+          "CONTENT_TARGET": 1
+        },
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1
+        },
+        "affirmative_role_copula_modifier_count": 0
+      },
+      "after": {
+        "node_kind_counts": {
+          "ROLE": 1,
+          "ACTION_OR_NONACTION": 1
+        },
+        "scope_counts": {},
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "WRITTEN_MODIFIER": 1
+        },
+        "affirmative_role_copula_modifier_count": 1
+      },
+      "raw_bytes_equal": false
+    }
+  ],
+  "typed_scope": {
+    "one_record": true,
+    "one_nonempty_field": true,
+    "complete_field_single_explicit_self_past_role_clause": true,
+    "whole_source_witness_required": true,
+    "candidate_actor_does_not_establish_self": true,
+    "multi_clause_R08_before_after_scope_rejected": true,
+    "accepted_role10_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "T01",
+      "T02",
+      "T03",
+      "T04",
+      "XROLE01",
+      "XROLE02"
+    ],
+    "accepted_role10_pair_bytes_identical": 10,
+    "normal_scope_expansion_proposed": false,
+    "authority_refs": [
+      {
+        "repository": "MassyuRed/mashos-api",
+        "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+        "symbols": [
+          "_written_role_material",
+          "generate_analysis_model_written_role",
+          "AnalysisModelQuotedParentUnitsInput.messages"
+        ]
+      },
+      {
+        "repository": "MassyuRed/mashos-api",
+        "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+        "symbols": [
+          "_written_role_proposition",
+          "_model_written_role_proof"
+        ]
+      }
+    ]
+  },
+  "R07_diagnostic": {
+    "out_of_source_negative_quote_removed": true,
+    "after_negative_qualifier_still_semantically_wrong": true,
+    "after_nonrole_classification_still_wrong": true,
+    "typed_rejection_retained": true,
+    "formal_admission_not_semantic_success": true,
+    "new_correct_node_kind_assigned": false,
+    "training_expansion_selected": false
+  },
+  "improvement_proposal": {
+    "state": "AUDIT_SUGGESTION_ONLY_NOT_AUTHORED_OR_ADOPTED_TEACHERS",
+    "candidate_structure": "Two order variants of an explicit positive possessive past-role clause plus an independent completed action, with source-authored references retaining the role copula without a written modifier and preserving action independence.",
+    "required_preservation": [
+      "Accepted explicit role10 source-bound meaning and saved projections",
+      "Current multi-clause typed refusal",
+      "No affirmative-copula modifier on the role clause",
+      "No invented cause/order edge or actor transfer",
+      "Existing reason/unknown scope results"
+    ],
+    "constraints": [
+      "Do not promote generated raw into teachers",
+      "Do not require universal object splitting",
+      "Do not crop complete source or widen typed scope",
+      "Do not silently replace old teacher history"
+    ],
+    "new_teacher_count_adopted": 0,
+    "cpu_preparation_selected": false,
+    "gpu_plan_selected": false,
+    "training_initial_order_dose_selected": false
+  },
+  "effects": {
+    "model_loads": 0,
+    "generations": 0,
+    "gpu_runs": 0,
+    "teacher_changes": 0,
+    "production_changes": 0,
+    "db_changes": 0,
+    "rule_changes": 0,
+    "private_body_or_raw_included": false
+  },
+  "limitations": [
+    "Observed R01/R08 difference is not a controlled proof that sentence count, actor vocabulary or additional lesson dose is the unique cause.",
+    "AT32 already supplies a multi-sentence ROLE teacher, so a blanket lack-of-multisentence-teaching claim is false.",
+    "Correct private candidate qualifiers do not authorize ordinary graph adoption of a multi-clause full source.",
+    "Same-environment audit is not independent or human product acceptance."
+  ]
+}

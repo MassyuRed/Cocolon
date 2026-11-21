@@ -1,0 +1,126 @@
+{
+  "state": "OFFLINE_PREPARATION_VERIFIED_TRANSFER_BLOCKED_NOT_EXECUTED",
+  "files": [
+    {
+      "name": "controls.json",
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    {
+      "name": "current_api_sources.zip",
+      "bytes": 2592186,
+      "sha256": "6e6a067b66c96761a35b688125f1e63c0f3464b7cba672f567c13f600036ac51"
+    },
+    {
+      "name": "diagnostic_preparation.json",
+      "bytes": 94073,
+      "sha256": "2cee33d6e55abfb9fc91ded3cb04f5b9ea86d0804ecce4eaec0f847d71a6e599"
+    },
+    {
+      "name": "event_plan_execution.py",
+      "bytes": 34116,
+      "sha256": "52b976fb1f504d7766341b934aa3431f95932da12a4a23a15a96c52b98c201d1"
+    },
+    {
+      "name": "full12.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    {
+      "name": "full12_pre_acquisition.plan.json",
+      "bytes": 260921,
+      "sha256": "db43b255de3567785bc00be183540f97d3d9f318f2f20dfa6eae012a5adbba2f"
+    },
+    {
+      "name": "input_cases.json",
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    {
+      "name": "scope_template.json",
+      "bytes": 9346,
+      "sha256": "e44b4b9bc9c54ab374250a59949305b57982f9b452c993f8bc097ff048b86785"
+    },
+    {
+      "name": "source_manifest.json",
+      "bytes": 191064,
+      "sha256": "4f7c1b0da1003f44da07af141e2e1fc1528f3206f6a16aa17e1cdf4a3ee78bae"
+    },
+    {
+      "name": "prepare_a17_on_pod.py",
+      "bytes": 5385,
+      "sha256": "b3c595b387b2882b7f530c38de0f76511421abe7baa73268db81bd54eb9c2ee9"
+    }
+  ],
+  "expanded_files": 10,
+  "expanded_bytes": 3286846,
+  "A": {
+    "max_control_calls": 4,
+    "max_map_calls": 5,
+    "max_model_calls": 9,
+    "native_request_seconds": 210,
+    "once": true,
+    "restore_inclusive_seconds": 1800,
+    "retry": 0,
+    "root": "/workspace/cocolon-node-local-v3-a17-20261117-once",
+    "training": 0,
+    "work_seconds": 1620
+  },
+  "B": {
+    "condition": "All five new A17 actual source/raw/projection/text adequate under completed root and independent full meaning review. No automatic B launch.",
+    "fresh_leaves": 12,
+    "fresh_merge": 1,
+    "max_control_calls": 4,
+    "max_map_calls": 13,
+    "max_model_calls": 17,
+    "native_request_seconds": 210,
+    "once": true,
+    "restore_inclusive_seconds": 1440,
+    "retry": 0,
+    "root": "/workspace/cocolon-node-local-v3-b17-20261117-once",
+    "service_pipeline_seconds": 840,
+    "source_records": 12,
+    "training": 0,
+    "work_seconds": 1260
+  },
+  "source_commit": "eec0262baf833084cd548819a7960adc1b043c4b",
+  "model": "cocolon-qwen3.5-4b-analysis-node-local-v3-base-851bf6e",
+  "frozen_execution_scope_exists": false,
+  "model_calls": 0,
+  "automatic_review": {
+    "state": "REJECTED_BEFORE_TRANSFER",
+    "reason": "Specific disclosure authorization for these files to this RunPod/Jupyter destination was not established.",
+    "bypass": 0
+  },
+  "runtime_observation": "Authenticated Jupyter UI; baseline PID5836 running. Fresh full runtime capture and current tokenizer preflight not executed.",
+  "normal": {
+    "api": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "worker": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "live": true,
+    "deploys": 0,
+    "DB_writes": 0,
+    "migration_latest": "20261115011424"
+  },
+  "STRUCTURE_MAP_DELTA_NONE": true,
+  "CI": {
+    "actual_verified": true,
+    "source_commit": "eec0262baf833084cd548819a7960adc1b043c4b",
+    "state": "PENDING_ANALYSIS_SUCCESS_NOT_EXECUTABLE",
+    "runs": [
+      {
+        "id": 43968192233,
+        "status": "in_progress",
+        "conclusion": null,
+        "head": "eec0262baf833084cd548819a7960adc1b043c4b",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43968192233"
+      },
+      {
+        "id": 43968192444,
+        "status": "completed",
+        "conclusion": "success",
+        "head": "eec0262baf833084cd548819a7960adc1b043c4b",
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43968192444"
+      }
+    ]
+  }
+}

@@ -16,6 +16,7 @@ import {
   Share,
   useWindowDimensions,
 } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
@@ -24,13 +25,16 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 
+import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
-import { apiFetch } from "../lib/apiClient";
+import { apiGet } from "../lib/apiClient";
+import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 
 // 🔧 ここを変えると感情ログ画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
@@ -115,33 +119,6 @@ async function getAuthContext() {
   return { userId, accessToken };
 }
 
-async function getJsonWithAuth(url) {
-  const { accessToken } = await getAuthContext();
-  if (!accessToken) {
-    throw new Error("ログイン情報の取得に失敗しました（tokenなし）");
-  }
-
-  const res = await apiFetch(url, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    let detail = `HTTP ${res.status}`;
-    try {
-      const j = await res.json();
-      if (j && j.detail) detail = j.detail;
-    } catch {}
-    const error = new Error(detail);
-    error.httpStatus = res.status;
-    throw error;
-  }
-
-  return await res.json();
-}
-
 export default function EmotionLogScreen(props) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -159,22 +136,12 @@ export default function EmotionLogScreen(props) {
     hasTutorialEmotionLog,
   } = useTutorial();
 
-  const { getPrefetchEntry, getPrefetchEntryFresh, setPrefetch, setUnread } = useUnread();
-
-  const FEED_PREFETCH_MAX_AGE_MS = 2 * 60 * 1000; // 2 minutes
-
-  const prefetchedFeedItems = useMemo(() => {
-    try {
-      const entry = getPrefetchEntryFresh
-        ? getPrefetchEntryFresh("EmotionLog", "feed", FEED_PREFETCH_MAX_AGE_MS)
-        : getPrefetchEntry("EmotionLog", "feed");
-      const v = entry?.value;
-      const items = Array.isArray(v?.items) ? v.items : null;
-      return items;
-    } catch {
-      return null;
-    }
-  }, [getPrefetchEntry, getPrefetchEntryFresh]);
+  const { setUnread } = useUnread();
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
+  const isFocused = useIsFocused();
+  const feedRequestRef = useRef(0);
+  const [feedScope, setFeedScope] = useState(null);
   const { navigation, onEmotionLogDisplayed } = props || {};
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
@@ -190,7 +157,6 @@ export default function EmotionLogScreen(props) {
   const [tutorialOverlayMetrics, setTutorialOverlayMetrics] = useState(null);
   const [tutorialNotificationShown, setTutorialNotificationShown] = useState(false);
   const tutorialNotificationFlowRef = useRef(false);
-  const skipNextFocusFeedRefreshRef = useRef(true);
 
   const isEmotionLogTutorialVisible =
     !!isTutorialMode &&
@@ -262,10 +228,8 @@ export default function EmotionLogScreen(props) {
 
 
   // ===== feed（既存） =====
-  const [feed, setFeed] = useState(() =>
-    Array.isArray(prefetchedFeedItems) ? prefetchedFeedItems : []
-  ); // { id, ownerName, items[], timeLabel }
-  const [loading, setLoading] = useState(() => !Array.isArray(prefetchedFeedItems));
+  const [feed, setFeed] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleTutorialScroll = useCallback((e) => {
@@ -309,7 +273,7 @@ export default function EmotionLogScreen(props) {
       overlayMetrics: tutorialOverlayMetrics,
       windowHeight,
       safeInsets,
-      cardPlacement: tutorialOverlayConfig?.cardPlacement || "bottom",
+      cardPlacement: "bottom",
       measureOptions: {
         maxAttempts: 3,
         settleFrames: 1,
@@ -319,7 +283,6 @@ export default function EmotionLogScreen(props) {
     getTutorialTargetRef,
     isEmotionLogTutorialVisible,
     safeInsets,
-    tutorialOverlayConfig?.cardPlacement,
     tutorialOverlayMetrics,
     windowHeight,
   ]);
@@ -494,21 +457,17 @@ export default function EmotionLogScreen(props) {
 
 
 
-  const loadFeed = useCallback(async (opts) => {
-    if (isTutorialMode) {
-      setErrorMsg("");
-      setLoading(false);
-      setFeed(Array.isArray(tutorialDisplayFeed) ? tutorialDisplayFeed : []);
-      return;
-    }
-
-    const silent = !!opts?.silent;
-    if (!silent) {
-      setLoading(true);
-    }
+  const loadFeed = useCallback(async () => {
+    if (isTutorialMode || !isOwnerCurrent(ownerRequest)) return;
+    const request = ++feedRequestRef.current;
+    const isCurrent = () => isOwnerCurrent(ownerRequest) && request === feedRequestRef.current;
+    setFeed([]);
+    setFeedScope(ownerRequest);
+    setLoading(true);
     setErrorMsg("");
     try {
-      const json = await getJsonWithAuth(EMOTION_LOG_FEED_ENDPOINT);
+      const json = await apiGet(EMOTION_LOG_FEED_ENDPOINT, ownerRequest.options);
+      if (!isCurrent()) return;
       const rows = Array.isArray(json)
         ? json
         : Array.isArray(json?.items)
@@ -538,54 +497,27 @@ export default function EmotionLogScreen(props) {
 
       const latestDisplayedCreatedAt = mapped.find((item) => item?.createdAt)?.createdAt || null;
       if (latestDisplayedCreatedAt && typeof onEmotionLogDisplayed === "function") {
-        setTimeout(() => {
-          Promise.resolve(onEmotionLogDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
-            console.warn("EmotionLogScreen: failed to mark displayed feed as read", callbackError);
-          });
-        }, 0);
-      }
-
-      // cache (used by app-level preload / next open)
-      try {
-        const { userId } = await getAuthContext();
-        if (userId) {
-          setPrefetch("EmotionLog", "feed", { userId, items: mapped });
-        }
-      } catch {
-        // noop
+        Promise.resolve(onEmotionLogDisplayed(latestDisplayedCreatedAt)).catch((callbackError) => {
+          console.warn("EmotionLogScreen: failed to mark displayed feed as read", callbackError);
+        });
       }
     } catch (e) {
+      if (!isCurrent()) return;
       console.error("emotion log feed load error:", e);
       setErrorMsg(String(e?.message || e));
-      setFeed([]);
     } finally {
-      setLoading(false);
+      if (isCurrent()) setLoading(false);
     }
-  }, [isTutorialMode, onEmotionLogDisplayed, tutorialDisplayFeed, setPrefetch]);
-  useEffect(() => {
-    if (isTutorialMode) return;
-    // If feed was preloaded at app start, render immediately and refresh silently.
-    if (Array.isArray(prefetchedFeedItems)) {
-      loadFeed({ silent: true });
-      return;
-    }
+  }, [isTutorialMode, isOwnerCurrent, onEmotionLogDisplayed, ownerRequest]);
+
+  useLayoutEffect(() => {
+    if (isTutorialMode || !isFocused || !ownerRequest.foreground) return undefined;
     loadFeed();
-  }, [isTutorialMode, loadFeed, prefetchedFeedItems]);
-
-  useEffect(() => {
-    if (isTutorialMode) return undefined;
-    if (!navigation || typeof navigation.addListener !== "function") return undefined;
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      if (skipNextFocusFeedRefreshRef.current) {
-        skipNextFocusFeedRefreshRef.current = false;
-        return;
-      }
-      loadFeed({ silent: true });
-    });
-
-    return typeof unsubscribe === "function" ? unsubscribe : undefined;
-  }, [isTutorialMode, loadFeed, navigation]);
+    return () => {
+      feedRequestRef.current += 1;
+      setFeedScope(null);
+    };
+  }, [isTutorialMode, isFocused, loadFeed, ownerRequest]);
 
   const handleOpenFollowList = useCallback(async () => {
     if (isTutorialMode) {
@@ -674,7 +606,7 @@ export default function EmotionLogScreen(props) {
                     key={`${it.type}-${it.strength}-${idx}`}
                     style={[styles.badge, { backgroundColor: tint.bg }]}
                   >
-                    <Text style={[styles.badgeText, { color: tint.text }]}>
+                    <Text style={[styles.badgeText, { color: colors.TEXT_ON_LIGHT }]}>
                       {it.type}
                       {labelStrength ? `（${labelStrength}）` : ""}
                     </Text>
@@ -690,13 +622,14 @@ export default function EmotionLogScreen(props) {
 
   const isDark = themeName === "dark";
 
+  const canShowFeed = isFocused && ownerRequest.foreground && feedScope === ownerRequest;
   const effectiveFeed = isTutorialMode
     ? Array.isArray(tutorialDisplayFeed)
       ? tutorialDisplayFeed
       : []
-    : feed;
-  const effectiveLoading = isTutorialMode ? false : loading;
-  const effectiveErrorMsg = isTutorialMode ? "" : errorMsg;
+    : canShowFeed ? feed : [];
+  const effectiveLoading = !isTutorialMode && (!canShowFeed || loading);
+  const effectiveErrorMsg = !isTutorialMode && canShowFeed ? errorMsg : "";
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
@@ -708,8 +641,18 @@ export default function EmotionLogScreen(props) {
       {/* 画面全体は固定（背景＆タイトル固定） */}
       <View style={styles.screenContainer}>
         {/* パネルヘッダー：EmotionLog */}
+
+          <ScrollView
+            ref={tutorialScrollRef}
+            style={styles.panelScroll}
+            contentContainerStyle={styles.panelScrollContent}
+            showsVerticalScrollIndicator={false}
+            onScroll={handleTutorialScroll}
+            scrollEventThrottle={16}
+          >
           <View style={styles.panelHeader}>
             <View ref={panelTitleRowRef} collapsable={false} style={styles.panelTitleRow}>
+            <CocolonBackButton navigation={props.navigation} fallbackRouteName="Piece" accessibilityLabel="ピースに戻る" />
             <Text style={styles.panelTitle}>感情ログ</Text>
             <CocolonPressable
               style={styles.guideTitleButton}
@@ -725,7 +668,7 @@ export default function EmotionLogScreen(props) {
           </View>
 
             {/* 右上：更新（フィード再取得） + フォロー一覧 */}
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
               <CocolonPressable
                 onPress={() => {
                   if (isTutorialMode) {
@@ -740,12 +683,12 @@ export default function EmotionLogScreen(props) {
                 style={[
                   styles.emotionLogPill,
                   { marginRight: 10 },
-                  effectiveLoading && { opacity: 0.5 },
                 ]}
                 disabled={effectiveLoading}
+                accessibilityLabel="感情ログを更新する" accessibilityState={{ busy: effectiveLoading }}
               >
                 {effectiveLoading ? (
-                  <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+                  <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
                 ) : (
                   <Ionicons
                     name="refresh"
@@ -769,15 +712,7 @@ export default function EmotionLogScreen(props) {
             </View>
           </View>
 
-          <ScrollView
-            ref={tutorialScrollRef}
-            style={styles.panelScroll}
-            contentContainerStyle={styles.panelScrollContent}
-            showsVerticalScrollIndicator={false}
-            onScroll={handleTutorialScroll}
-            scrollEventThrottle={16}
-          >
-            <Text style={[styles.lead, { fontWeight: "700" }]}>感情ログ</Text>
+
 
             {isTutorialMode ? (
               <View ref={tutorialIntroRef} collapsable={false} style={styles.manageIntroCard}>
@@ -870,10 +805,10 @@ export default function EmotionLogScreen(props) {
                     <Ionicons
                       name="checkmark-circle-outline"
                       size={18}
-                      color="#FFFFFF"
+                      color={(!hasTutorialEmotionLog || tutorialStep !== STEP_EMOTION_LOG_COMPLETE) ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                       style={{ marginRight: 6 }}
                     />
-                    <Text style={styles.tutorialCompleteButtonText}>
+                    <Text style={[styles.tutorialCompleteButtonText, { color: (!hasTutorialEmotionLog || tutorialStep !== STEP_EMOTION_LOG_COMPLETE) ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT }]}>
                       完了にする
                     </Text>
                   </CocolonPressable>
@@ -917,7 +852,7 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
     },
     safeContent: {
       flex: 1,
@@ -925,9 +860,12 @@ function createStyles(COLORS, ui) {
     screenContainer: {
       flex: 1,
       paddingTop: 16,
-      paddingBottom: 16,
-      paddingHorizontal: 18,
+      paddingBottom: 20,
+      paddingHorizontal: 20,
       alignItems: "stretch",
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
 
     // Emlis ロゴ
@@ -951,47 +889,52 @@ function createStyles(COLORS, ui) {
 
     // メインパネル
     panel: {
-      width: "94%",
+      width: "100%",
       backgroundColor: COLORS.PANEL_BG,
-      borderRadius: 26,
-      borderWidth: 2,
+      borderRadius: 24,
+      borderWidth: 0,
       borderColor: COLORS.BORDER_GOLD,
       paddingHorizontal: 18,
       paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.24,
+      shadowOpacity: 0,
       shadowRadius: 26,
       shadowOffset: { width: 0, height: 16 },
-      elevation: 12,
+      elevation: 0,
       flex: 1,
       minHeight: 0,
     },
     panelHeader: {
-      flexDirection: "row",
+      flexDirection: "column",
+      rowGap: 12,
       justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 8,
+      alignItems: "stretch",
+      marginBottom: 20,
     },
     panelTitle: {
-      fontSize: 20,
-      fontWeight: "800",
       color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      letterSpacing: 0,
+      flexShrink: 1,
     },
     panelTitleRow: {
       flexDirection: "row",
       alignItems: "center",
+      flex: 1,
+      minWidth: 0,
+      paddingRight: 0,
+      gap: 8,
     },
     guideTitleButton: {
-      width: 36,
-      height: 32,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      marginLeft: 10,
+      marginLeft: 0,
+      flexShrink: 0,
     },
 
     panelScroll: {
@@ -1002,9 +945,9 @@ function createStyles(COLORS, ui) {
     },
 
     emotionLogPill: {
-      width: 42,
-      height: 38,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       borderWidth: 1,
@@ -1013,41 +956,40 @@ function createStyles(COLORS, ui) {
     },
 
     lead: {
-      color: TEXT_SUB,
-      fontSize: 12,
+      color: COLORS.TEXT_SUBTLE,
       marginBottom: 10,
     },
 
     // フィードカード
     card: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingVertical: 4,
+      paddingVertical: 8,
       shadowColor: "#000",
-      shadowOpacity: 0.06,
+      shadowOpacity: 0,
       shadowRadius: 8,
       shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      elevation: 0,
     },
 
     row: {
-      paddingVertical: 10,
-      paddingHorizontal: 12,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
     },
     feedItemHeaderRow: {
       flexDirection: "row",
       alignItems: "flex-start",
       justifyContent: "space-between",
+      flexWrap: "wrap",
+      rowGap: 4,
     },
     name: {
       flex: 1,
       minWidth: 0,
       paddingRight: 8,
-      fontWeight: "700",
-      color: TEXT_MAIN,
-      fontSize: 15,
+      color: COLORS.TEXT_ON_LIGHT,
     },
 
     emotionArea: {
@@ -1055,8 +997,7 @@ function createStyles(COLORS, ui) {
       alignItems: "flex-start",
     },
     noEmotion: {
-      fontSize: 12,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     emotionRow: {
@@ -1065,29 +1006,27 @@ function createStyles(COLORS, ui) {
       justifyContent: "flex-start",
     },
     badge: {
-      paddingHorizontal: 10,
-      paddingVertical: 4,
-      borderRadius: 999,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 16,
       marginHorizontal: 2,
       marginVertical: 2,
     },
     badgeText: {
-      fontSize: 12,
-      fontWeight: "700",
     },
 
     time: {
-      color: TEXT_SUB,
-      fontSize: 12,
-      width: 80,
+      color: COLORS.TEXT_SUBTLE,
       textAlign: "right",
+      maxWidth: "45%",
+      flexShrink: 1,
     },
 
     separator: {
       height: 1,
-      backgroundColor: "#EEE",
-      marginLeft: 12,
-      marginRight: 12,
+      backgroundColor: COLORS.CARD_BORDER,
+      marginLeft: 16,
+      marginRight: 16,
     },
 
     centerBox: {
@@ -1096,39 +1035,39 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
     },
     errorText: {
-      color: "#B91C1C",
+      color: COLORS.ERROR,
       marginBottom: 8,
       textAlign: "center",
     },
     emptyText: {
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
       textAlign: "center",
-      fontSize: 13,
     },
 
     retryBtn: {
       marginTop: 4,
-      paddingHorizontal: 12,
-      paddingVertical: 6,
-      borderRadius: 999,
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
+      minHeight: 48,
+      alignItems: "center",
+      justifyContent: "center",
     },
     retryText: {
       color: TEXT_MAIN,
-      fontSize: 12,
-      fontWeight: "600",
     },
 
     tutorialNotificationCard: {
       marginTop: 12,
-      borderRadius: 14,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
     tutorialNotificationHeader: {
       flexDirection: "row",
@@ -1136,49 +1075,44 @@ function createStyles(COLORS, ui) {
       marginBottom: 8,
     },
     tutorialNotificationTitle: {
-      fontSize: 12,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
     },
     tutorialNotificationText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     tutorialCompleteCard: {
       marginTop: 12,
-      borderRadius: 14,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
     tutorialCompleteText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
       marginBottom: 10,
     },
     tutorialCompleteButton: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      paddingHorizontal: 14,
+      paddingHorizontal: 20,
       paddingVertical: 12,
-      borderRadius: 999,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 52,
     },
     tutorialCompleteButtonDisabled: {
-      opacity: 0.5,
+      opacity: 1,
+      backgroundColor: COLORS.PANEL_BG,
+      borderColor: COLORS.CARD_BORDER,
     },
     tutorialCompleteButtonText: {
-      color: "#FFFFFF",
-      fontSize: 13,
-      fontWeight: "800",
+      color: COLORS.ACCENT_TEXT,
     },
 
     // ---- Modal（Profile card 方式） ----
@@ -1198,15 +1132,15 @@ function createStyles(COLORS, ui) {
       right: 20,
       bottom: 70,
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
-      padding: 12,
+      borderRadius: 24,
+      padding: 20,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       shadowColor: "#000",
-      shadowOpacity: 0.18,
-      shadowRadius: 22,
-      shadowOffset: { width: 0, height: 12 },
-      elevation: 12,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
     },
     manageHeader: {
       flexDirection: "row",
@@ -1218,29 +1152,29 @@ function createStyles(COLORS, ui) {
       marginBottom: 10,
     },
     manageTitle: {
-      fontSize: 15,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
     },
     manageCloseBtn: {
       paddingHorizontal: 6,
       paddingVertical: 4,
       borderRadius: 10,
+      minWidth: 44,
+      minHeight: 44,
+      alignItems: "center",
+      justifyContent: "center",
     },
 
     manageIntroCard: {
-      borderRadius: 14,
+      borderRadius: 20,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 10,
     },
     manageIntroText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     manageScroll: { flex: 1 },
@@ -1254,15 +1188,11 @@ function createStyles(COLORS, ui) {
       marginBottom: 6,
     },
     manageSectionTitle: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
     manageHelpText: {
-      fontSize: 11,
-      lineHeight: 16,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
       marginTop: 6,
     },
 
@@ -1275,10 +1205,13 @@ function createStyles(COLORS, ui) {
       marginLeft: 8,
       paddingHorizontal: 10,
       paddingVertical: 8,
-      borderRadius: 999,
+      borderRadius: 20,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
+      alignItems: "center",
+      justifyContent: "center",
     },
     copyBtnDisabled: {
       opacity: 0.5,
@@ -1294,8 +1227,6 @@ function createStyles(COLORS, ui) {
       borderColor: COLORS.CARD_BORDER,
     },
     codeText: {
-      fontSize: 13,
-      fontWeight: "800",
       letterSpacing: 0.5,
       color: COLORS.TEXT_ON_LIGHT,
     },
@@ -1306,19 +1237,18 @@ function createStyles(COLORS, ui) {
     },
     manageInput: {
       flex: 1,
-      borderRadius: 12,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
-      paddingVertical: Platform.OS === "ios" ? 10 : 8,
-      fontSize: 13,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
       color: COLORS.TEXT_ON_LIGHT,
     },
     smallButton: {
       paddingHorizontal: 14,
       paddingVertical: 10,
-      borderRadius: 999,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
@@ -1326,39 +1256,33 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
       minWidth: 70,
       marginLeft: 8,
+      minHeight: 48,
     },
     smallButtonDisabled: {
       opacity: 0.5,
     },
     smallButtonText: {
-      color: "#FFFFFF",
-      fontWeight: "800",
-      fontSize: 13,
+      color: COLORS.ACCENT_TEXT,
     },
 
     manageMessage: {
       marginTop: 8,
-      fontSize: 12,
-      lineHeight: 16,
       color: COLORS.TEXT_ON_LIGHT,
     },
     manageEmptyText: {
-      fontSize: 12,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     requestCard: {
-      borderRadius: 14,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 8,
     },
     requestName: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
@@ -1366,61 +1290,64 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       justifyContent: "flex-end",
       marginTop: 8,
+      flexWrap: "wrap",
+      rowGap: 8,
     },
     requestBtn: {
       paddingHorizontal: 12,
       paddingVertical: 8,
-      borderRadius: 999,
+      borderRadius: 20,
+      minHeight: 44,
+      alignItems: "center",
+      justifyContent: "center",
     },
     requestBtnSpacer: { marginLeft: 8 },
-    requestBtnOk: { backgroundColor: "#10B981" },
-    requestBtnNo: { backgroundColor: "#EF4444" },
+    requestBtnOk: {
+      backgroundColor: COLORS.SURFACE_TONAL,
+    },
+    requestBtnNo: {
+      backgroundColor: COLORS.ERROR_BG,
+    },
     requestBtnDisabled: { opacity: 0.6 },
     requestBtnText: {
-      color: "#FFFFFF",
-      fontSize: 12,
-      fontWeight: "800",
+      color: COLORS.TEXT_ON_LIGHT,
     },
 
     ownerRow: {
       flexDirection: "row",
       alignItems: "center",
-      borderRadius: 14,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 8,
     },
     ownerName: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
     },
     ownerSub: {
-      fontSize: 11,
-      color: TEXT_SUB,
+      color: COLORS.TEXT_SUBTLE,
       marginTop: 2,
     },
 
     ghostBtn: {
       paddingHorizontal: 10,
       paddingVertical: 8,
-      borderRadius: 999,
+      borderRadius: 20,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
+      alignItems: "center",
+      justifyContent: "center",
     },
     ghostBtnText: {
-      fontSize: 12,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
     },
 
     pendingTag: {
-      fontSize: 11,
-      fontWeight: "800",
       color: TEXT_SUB,
       paddingHorizontal: 8,
       paddingVertical: 4,
@@ -1442,25 +1369,26 @@ function createStyles(COLORS, ui) {
     actionBtn: {
       paddingHorizontal: 10,
       paddingVertical: 6,
-      borderRadius: 999,
+      borderRadius: 20,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       marginLeft: 8,
+      minHeight: 44,
+      alignItems: "center",
+      justifyContent: "center",
     },
     actionBtnText: {
-      fontSize: 11,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
     },
     actionBtnDanger: {
       // border は同じだが、テキスト色で「取り下げ」を示す
     },
     actionBtnDangerText: {
-      color: "#B91C1C",
+      color: COLORS.ERROR,
     },
     actionBtnDisabled: {
       opacity: 0.5,
     },
-  }, ui));
+  }, ui, {"panelTitle":"screenTitle","lead":"description","name":"button","noEmotion":"description","badgeText":"description","time":"meta","errorText":"description","emptyText":"body","retryText":"button","tutorialNotificationTitle":"sectionTitle","tutorialNotificationText":"body","tutorialCompleteText":"description","tutorialCompleteButtonText":"button","manageTitle":"modalTitle","manageIntroText":"description","manageSectionTitle":"sectionTitle","manageHelpText":"description","codeText":"button","manageInput":"body","smallButtonText":"button","manageMessage":"description","manageEmptyText":"description","requestName":"button","requestBtnText":"button","ownerName":"button","ownerSub":"meta","ghostBtnText":"button","pendingTag":"meta","actionBtnText":"button"}));
 }

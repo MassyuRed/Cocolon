@@ -1,0 +1,133 @@
+{
+  "api_commit": "88078cdb3cf19da0e9fe9188915bce9c0899a797",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "initial_weights_sha256": "a5eafe344189ede6a4a664396d43af651e5482c0d3c720d6b329a1b44d01bd41",
+  "initial_config_sha256": "9bc9f1f3f2979d49911dae1b028cc2fb064e8e000baebcb84b84a3f50448b5cf",
+  "model_loads": 1,
+  "new_calls": 8,
+  "training_updates": 0,
+  "process_seconds": 42.15062083210796,
+  "initial_unchanged": true,
+  "normal_default_enabled": false,
+  "production_adoption": false,
+  "product_credit": 0,
+  "status": "COMPLETE_REVIEWED_PARTIAL_ROLE_VERTICAL_NOT_PRODUCTION_ADOPTED",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "role_scope_supported": 4,
+  "supported_admitted": [
+    "R02"
+  ],
+  "supported_model_failed": [
+    "R01",
+    "R03",
+    "R04"
+  ],
+  "out_of_scope_rejected": [
+    "R05",
+    "R06",
+    "R07",
+    "R08"
+  ],
+  "all_eight_stop": true,
+  "meaning": "ONE_WRITTEN_NEGATIVE_SELF_ROLE_NOT_A_POSITIVE_ROLE_ASSIGNMENT",
+  "admitted_frame": {
+    "node_kind": "ROLE",
+    "actor": "SELF",
+    "polarity": "negative",
+    "modality": "fact",
+    "temporal_scope": "past",
+    "role_state": "WRITTEN_PAST_ROLE",
+    "mapped_count": 1,
+    "unparsed_count": 0,
+    "missing_stages": 4,
+    "edges": 0
+  },
+  "saved_replay": {
+    "matched": 1,
+    "rejections_preserved": 7,
+    "engine_compiler_author_forbidden_for_restored_artifact": true,
+    "new_model_calls": 0
+  },
+  "old_candidates_unchanged": {
+    "returned": 6,
+    "rejected": 2,
+    "mapped_count": 0,
+    "all_unparsed": true
+  },
+  "api_tests": {
+    "initial_passed": 655,
+    "initial_failed": 2,
+    "initial_skipped": 2,
+    "initial_seconds": 110.92,
+    "failure": "category-record dataclass JSON serialization",
+    "final_passed": 657,
+    "final_failed": 0,
+    "final_skipped": 2,
+    "existing_warning": 1,
+    "final_seconds": 110.82
+  },
+  "structure_map_delta": "PRESENT_EXPLICIT_OFFLINE_WRITTEN_ROLE_VERTICAL",
+  "new_logical_types": 0,
+  "production_http_db_rn_changes": 0,
+  "public_case_bodies_included": false,
+  "private_gpu_source_files": 54,
+  "cpu_role4": {
+    "status": "FOUR_ROLE_CONTRASTS_STRICT_MAP_FILE_TOKENIZER_CPU_ONLY",
+    "teachers": 4,
+    "positive": 2,
+    "negative": 2,
+    "old70_unchanged": true,
+    "old70_role_teachers": 1,
+    "old70_explicit_possessive_role_teachers": 0,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "next_gpu_selected": false,
+    "source_sha256": "d730947484234d4bd2e5a57a363c7c8d4ed1838de4707082470ba88fef5d1710",
+    "old70_plan_sha256": "3717326a93d2510d7dd25cf1ef950ac568e6fa1b4ec9e3fafc9160265da8db30",
+    "token_lengths": [
+      {
+        "id": "T01",
+        "prompt_tokens": 993,
+        "target_tokens": 52,
+        "full_tokens": 1045
+      },
+      {
+        "id": "T02",
+        "prompt_tokens": 995,
+        "target_tokens": 64,
+        "full_tokens": 1059
+      },
+      {
+        "id": "T03",
+        "prompt_tokens": 995,
+        "target_tokens": 54,
+        "full_tokens": 1049
+      },
+      {
+        "id": "T04",
+        "prompt_tokens": 996,
+        "target_tokens": 65,
+        "full_tokens": 1061
+      }
+    ]
+  },
+  "prelaunch_transport_stopped_before_any_script_source_pid_report": true,
+  "gpu_retries": 0,
+  "raw_repair_or_admission_relaxation": false,
+  "next_action": "SOURCE_AUTHORED_ROLE_CONTRAST4_WITH_OLD70_RETENTION_FOR_4B_OUTPUT_IMPROVEMENT",
+  "remaining": [
+    "positive_and_variant_role_quality",
+    "person_grounded_judgement_and_choice",
+    "cross_record_recurrence_and_change",
+    "multiple_fields_supplements_comparison",
+    "normal_cumulative_save_and_runtime_adoption"
+  ],
+  "private_archive": {
+    "library_file_id": "libfile_9e1dc5ec3ad0819195d0549b96da7de9",
+    "bytes": 90029,
+    "members": 71,
+    "sha256": "67259224d9404c9b892c4c4c0fb1ccd23459a2a2817474479ea2d4d5f2a7e44a"
+  }
+}

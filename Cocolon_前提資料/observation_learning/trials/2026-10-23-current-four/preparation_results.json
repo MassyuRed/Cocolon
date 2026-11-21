@@ -1,0 +1,1136 @@
+{
+  "schema_version": "cocolon.cmee.p1_four_roundtrip.v1",
+  "fixture_blob": "6aaa369c9c31388325d0e1203627b355ebb87d61",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "external_inference_requests": 0,
+  "db_or_public_api_calls": 0,
+  "semantic_adoptions": 0,
+  "generated_artifacts": 0,
+  "source_blobs": {
+    "cocolon_meaning_experience_engine/engine.py": "398a3a8b546d673646fe80805331dc22304a72b3",
+    "cocolon_meaning_experience_engine/contracts.py": "a6272fc99fcf74f901f72658239b03354cef693a",
+    "cocolon_meaning_experience_engine/source_kernel.py": "501ddd995ae491022d39b3c086161139938b6707",
+    "cocolon_meaning_experience_engine/emlis_thread_contracts.py": "89e8ac4cf47370c21eca952543ed95721f118b9c",
+    "cocolon_meaning_experience_engine/emlis_thread_source.py": "90beaa6003f2737cdf5dd621ac4da253f32a03f3",
+    "cocolon_meaning_experience_engine/emlis_thread_engine.py": "ee46b479c876307a75f43df9be43fb9389d017bd",
+    "cocolon_meaning_experience_engine/emlis_answer_update.py": "6cd44cf44850993a26bb964cb256a8a4843e4730",
+    "cocolon_meaning_experience_engine/emlis_question.py": "3137cdcd1d2a15ae47e8139fc6fc567528a4c88d",
+    "emlis_ai_current_input_bundle.py": "087798fcb8ebe7781d2769b43bad38fca8bc6128",
+    "cocolon_meaning_experience_engine/emlis_thread_history.py": "6dcbdf0fe1d7939f1c276f9d3daf19136d9e36dd",
+    "cocolon_meaning_experience_engine/emlis_thread_surface.py": "a29fc1db67f8457ad5b3b6c204d1f7d211e0fc18",
+    "cocolon_meaning_experience_engine/emlis_v1a.py": "9f5852e4f956c42db833ebecb928b4583ad36c26",
+    "emlis_ai_evidence_ledger_service.py": "f5a38e64a3c75d0c7699c073f4790ccb55f9e04d",
+    "emlis_ai_grounded_human_reception.py": "e8f2aead313f06b584dc5d2c03096fd0546fdcd0",
+    "emlis_ai_grounded_observation_plan.py": "48f679964ba78a4f209ed876d9217b5bffebc3d7",
+    "emlis_ai_safety_triage.py": "18b756a90d9f6c452566e88fc6d0d92541d1d318",
+    "emlis_ai_types.py": "22dd596a97d07bd53979d4d429a0b7d6f77b7e8a",
+    "cocolon_meaning_experience_engine/__init__.py": "3b88577d2d74a0cca3f97b566a2d63b0a5ebe881",
+    "cocolon_meaning_experience_engine/emlis_stage1_response.py": "eb6de19e9c257cece4cc577455fe648772884385",
+    "cocolon_meaning_experience_engine/emlis_thread_projection.py": "0826fdb6292cee60e58cdaa9a1051d59d20e1d0e",
+    "cocolon_text_generation_core/adapters/emlis_observation_composer.py": "d232876cc8fdb1cc38847c2080e2636a42d2282d",
+    "cocolon_text_generation_core/guards/base.py": "b20bb298ecbea7626e9ac1f61dc437e8fb1be416",
+    "emlis_ai_conversation_composer_service.py": "f6de95940b244a921cfd102d985feeec22826827",
+    "emlis_ai_grounded_observation_gate.py": "13aff825df4c42cdc94ffaff6824b546775c7d7f",
+    "emlis_ai_grounded_sentence_surface.py": "673dad2f9ce949500f5e6c9c5f802e81f8699672",
+    "emlis_ai_observation_integrator_service.py": "3a601f819a3cee14db9ce4208f27d7ea7541ccb6",
+    "emlis_ai_perspective_board.py": "a31875eadfeed66784c19c685ddd263a8f4fc451",
+    "emlis_ai_perspective_observers.py": "7d0589ce3a141d3e988ea57e83e0a138e4d7fe78",
+    "emlis_ai_response_contract.py": "45deb845a23510dc7c971aeb7ebf87e83c31da52",
+    "emlis_ai_user_label_connection_surface.py": "0da15239a1fc388cd485618d3deeb79588f3dfbe",
+    "cocolon_meaning_experience_engine/emlis_input_specific_meaning.py": "afebe316b18f0b79618a2a0f693a1a2cc7a78b42",
+    "cocolon_meaning_experience_engine/emlis_stage1_composition.py": "06241d4af21f3e6c7592c602725ca53b61e29f3c",
+    "cocolon_text_generation_core/adapters/emlis_evidence_adapter.py": "171e6108524f77d8eeee20314ea6c90572c8a7d1",
+    "cocolon_text_generation_core/composer.py": "e1382c58ecbe920f12c4f3435b3a748838cdb3b4",
+    "cocolon_text_generation_core/policies.py": "1daa333e8e719307fee8225acb6fc05b8bf242be",
+    "cocolon_text_generation_core/result.py": "8aed161249a8c9b24c3fd680b321443d4afe7d57",
+    "cocolon_text_generation_core/stabilization.py": "5c2c81fac669496839391822505ed55ddf36050c",
+    "cocolon_text_generation_core/types.py": "0d2f3bd6f8dd577cef1dd8de0dd29833009f7c4e",
+    "emlis_ai_environment_state_output_surface_contract_completion.py": "3f4d5d42e37d30784cf2ef4dcd87b6d60cf4c79e",
+    "emlis_ai_observation_structure_material_service.py": "f8feeb5a36b8f1b6870804bf67695d6612fe4636",
+    "emlis_ai_safety_boundary_service.py": "cb9c618c257411409503e4773aaadb12c142b737",
+    "emlis_ai_state_answer_composer_contract.py": "a6e4b52f7a1ad325f0ba223d586f40b8c4d1adbe",
+    "emlis_ai_user_address_service.py": "9ef53faedbe24a227b78cb90c894d46a2dc533fc",
+    "emlis_ai_user_label_connection_candidate.py": "9986955f655445d0233fee5833267d69a36035a9",
+    "emlis_ai_user_label_connection_gate.py": "59b07852b91d33eb7738d0427c1af25deddb29d3",
+    "cocolon_environment_state_output_frame.py": "3c8ac9dd07a25cb8dfa197cbfc2ba633ab120187",
+    "cocolon_text_generation_core/evidence.py": "5714f385fec15a01891dc581bfe04aa31d0aeee6",
+    "cocolon_text_generation_core/guards/__init__.py": "eacbec5e3e54d0ab775c2616ef6ff40306bc5701",
+    "emlis_ai_observation_structure_dictionary_loader.py": "b06a40376567ac7a97a7682cfc40db58bff44d7f",
+    "emlis_ai_state_answer_surface_contract.py": "173415137035c1ba6919beb524941acf50e122ee",
+    "emlis_ai_two_stage_section_surface_plan.py": "9873ed95d4b17845184879579e3c67132164f19c",
+    "emlis_ai_user_label_connection_material.py": "74ad092e8bfe39cf4a2bd97e5e9eb0d8d6c67fa9",
+    "emlis_ai_user_label_connection_types.py": "51cf533d849296c8866376d716905d1e62793dbf",
+    "cocolon_text_generation_core/guards/grounding.py": "5ea76fd36e1242615b948dc47dea935ad02add67",
+    "cocolon_text_generation_core/guards/japanese_coherence.py": "9171514ad21c9bb55dcb2848087a5ea08b7c33a9",
+    "cocolon_text_generation_core/guards/must_keep_coverage.py": "7be48d0dc51ea273a8c719fb3376c4cf874ecd95",
+    "cocolon_text_generation_core/guards/overclaim_diagnosis.py": "00af6e65cfed66ca77cdd63a432610e9b3d7234a",
+    "cocolon_text_generation_core/guards/template_echo.py": "7f701c9f1e6158348ffa4e333a953816750b8588",
+    "emlis_ai_human_follow_selector.py": "e504ffaa64395451d39d53f9786884c5f7b9f0f1",
+    "emlis_ai_reception_assistance_dictionary_loader.py": "09d58e4628e46b0ec1b71ced5a8ab3c03198fabf",
+    "emlis_ai_safe_daily_metaphor_material.py": "a88e1c954925cc4545369364ce4151c0ff5441a5",
+    "emlis_ai_state_answer_ratio_policy.py": "62de19335bcb05d92d8308a671950f9f2670d0ec",
+    "emlis_ai_state_answer_special_cases.py": "fc8b9f87f67e84cc67bdfd8c8ed50c2000b25e6d",
+    "emlis_ai_user_fact_grounding_boundary.py": "2712981ceeff814cca7a7db214954012b366b347",
+    "emlis_ai_observation_reply_contract.py": "65ebc8114ed53c823708c690a9c0a8e182bef3fa",
+    "emlis_ai_reception_mode_resolver.py": "741ab77314da2d27d2e5ccab07584b9c556b1fd1",
+    "emlis_ai_shared_reception_evidence.py": "1a01a69ae2438bb30201c3be065a92176641123b",
+    "config/emlis_observation_structure_dictionary.schema.json": "0c23704825d883c2f876dab18ef644fc69f1261f",
+    "config/emlis_observation_structure_dictionary.v1.json": "490d7c6de81d80e828e2fea71dcac6c308ef56e8",
+    "config/emlis_reception_assistance_dictionary.schema.json": "aeee3b50bf11608ddabc43e8167eb6f1628cf982",
+    "config/emlis_reception_assistance_dictionary.v1.json": "60ca5005630b88388e356e665624956b8cbd2997",
+    "emlis_ai_input_meaning_block_service.py": "36779eace1d53fe49efc33b3cae0c1a9f70ebabd",
+    "piece_v2_generation.py": "f557f406e28944d45c51d3d104b2dd6cd6164845",
+    "piece_v2_contract.py": "e4d20c9d0994b0a05f086ff6543de9d5cf2f31aa",
+    "piece_v2_content_policy.py": "ff03637c701e8253523667dc7c429fe0df6f2f66",
+    "piece_v2_expression.py": "79d5606223e49de8c52704c829395ba030aafa59",
+    "piece_text_formatter.py": "2573ea391dba9c84123a4762174bb7978b35ac8a",
+    "cocolon_meaning_experience_engine/piece_source.py": "9420b855858d36a53d7814b8ee51ba09bbe653e2",
+    "cocolon_meaning_experience_engine/piece_v1c.py": "c8223642822b613f29f16e92580bb5bdf2334f78",
+    "cocolon_meaning_experience_engine/cores/analysis/source_adapter.py": "9fb6a26a3f9eab0bc140a25a15e63d111a921cc1",
+    "cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "5081e2d6e803c2b4fed9ca71a2b739f7474a86f5",
+    "cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "673c5777d2954567cf4b6bc661903fec85bc3194",
+    "cocolon_meaning_experience_engine/cores/__init__.py": "c995d72459083ec20d1333d387d5c484991c0b2f",
+    "cocolon_meaning_experience_engine/cores/analysis/__init__.py": "7ae98fb29a476430a946c651167d72879a23c3b7",
+    "cocolon_meaning_experience_engine/preparation.py": "be1922de0e2e88d2ed50908a0b433507265935bf",
+    "cocolon_meaning_experience_engine/preparation_sources.py": "60049e458e0c7c660576781f459751fcb679e5dd"
+  },
+  "records": [
+    {
+      "case_id": "E02-0",
+      "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+      "material": {
+        "adoption_state": "NOT_ADOPTED",
+        "control": {
+          "actual_question_budget_remaining": 1,
+          "asked_target_refs": [],
+          "capability": "Q3_FREE",
+          "current_round": 0,
+          "frame_feedback": [],
+          "history_groups": [],
+          "issued_count": 0,
+          "issued_questions": [],
+          "pending_question": null,
+          "probe_only": false,
+          "question_limit": 1,
+          "rejected_frame_keys": [],
+          "stop": false
+        },
+        "core": "emlis",
+        "execution_mode": "OFFLINE_PREPARATION",
+        "output_conditions": "Observation, human reception and optional question have separate responsibilities; preserve the actual question budget.",
+        "period": null,
+        "policies": {
+          "adoption": "NOT_ADOPTED; source quotation checks do not validate interpretation.",
+          "cross_core": "Generated observations, Piece prose and Analysis claims are not user sources.",
+          "meaning": "Preserve subject, time, polarity, relations, unknowns and conflicts.",
+          "source": "Original, supplemental, history and generated interpretation stay separate."
+        },
+        "schema_version": "cocolon.cmee.internal_preparation.v1",
+        "sources": [
+          {
+            "envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+            "evidence": [
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": -1,
+                "evidence_id": "ev-867aada7ad7a937b15b3eb8f",
+                "field_path": "memo",
+                "field_sha256": "a21dc0c744e85f17e4a47a0efdef7fcd848ffb12451e10df53a0d54bd3115ae5",
+                "field_utf8_end": 466,
+                "field_utf8_start": 391,
+                "literal": "うれしかったけど、どこがうれしかったかはまだ曖昧",
+                "literal_sha256": "5cca23233b650b9108ba100cea80e86907d8fcc43e90486ec801da5e7427f739",
+                "scalar_end": 24,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s1",
+                "utf8_end": 463,
+                "utf8_start": 391
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": -1,
+                "evidence_id": "ev-0880f935e8200f8c8eaf15dc",
+                "field_path": "memo_action",
+                "field_sha256": "8e15740f9d1b465c0ad160825a07f2991903bc4e74a67093169468b094b02f3e",
+                "field_utf8_end": 558,
+                "field_utf8_start": 492,
+                "literal": "打合せで後輩に説明を任せて、最後まで聞いた",
+                "literal_sha256": "b97c616499a7cd12842bb70ec3dc194de11cd6980fe328eb3855be0b40d27daf",
+                "scalar_end": 21,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s2",
+                "utf8_end": 555,
+                "utf8_start": 492
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-e7598cd01b919047e3fb0086",
+                "field_path": "emotion_details.0.type",
+                "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "field_utf8_end": 600,
+                "field_utf8_start": 594,
+                "literal": "喜び",
+                "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "scalar_end": 2,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s3",
+                "utf8_end": 600,
+                "utf8_start": 594
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-236aedf3c506d83ad6a31fb7",
+                "field_path": "emotions.0",
+                "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "field_utf8_end": 630,
+                "field_utf8_start": 624,
+                "literal": "喜び",
+                "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "scalar_end": 2,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s4",
+                "utf8_end": 630,
+                "utf8_start": 624
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-41a03c146ad1e4de7803ca7e",
+                "field_path": "category.0",
+                "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "field_utf8_end": 660,
+                "field_utf8_start": 654,
+                "literal": "仕事",
+                "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "scalar_end": 2,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s5",
+                "utf8_end": 660,
+                "utf8_start": 654
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-4deec802cb3f0d1f1076e3f7",
+                "field_path": "emotion_details.0.strength",
+                "field_sha256": "c082456a7766e23a18db084cd34b6ff510baef506548b897cc80e9b7d3e121c8",
+                "field_utf8_end": 706,
+                "field_utf8_start": 700,
+                "literal": "medium",
+                "literal_sha256": "c082456a7766e23a18db084cd34b6ff510baef506548b897cc80e9b7d3e121c8",
+                "scalar_end": 6,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "structured:emotion_strength",
+                "utf8_end": 706,
+                "utf8_start": 700
+              }
+            ],
+            "native_source_role": "CURRENT_INPUT",
+            "original": {
+              "category": [
+                "仕事"
+              ],
+              "created_at": "2026-10-21T16:30:00+09:00",
+              "emotion_details": [
+                {
+                  "strength": "medium",
+                  "type": "喜び"
+                }
+              ],
+              "emotions": [
+                "喜び"
+              ],
+              "id": "E02-O",
+              "memo": "うれしかったけど、どこがうれしかったかはまだ曖昧。",
+              "memo_action": "打合せで後輩に説明を任せて、最後まで聞いた。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-21T16:30:00+09:00",
+            "role": "ORIGINAL_INPUT",
+            "source_commitment": "829274c067ed897e3eafed7b1640607321c9e3805d576081736df1535ea3b02a",
+            "source_id": "E02-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "うれしかったけど、どこがうれしかったかはまだ曖昧。",
+              "memo_action": "打合せで後輩に説明を任せて、最後まで聞いた。"
+            }
+          }
+        ],
+        "task": "EMLIS_INITIAL_MATERIAL",
+        "tier": "free"
+      },
+      "receipts": [
+        {
+          "scenario": "normal",
+          "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+          "status": "CANDIDATE_UNREVIEWED",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 25, \"quote\": \"うれしかったけど、どこがうれしかったかはまだ曖昧。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":25,\"field_path\":\"memo\",\"quote\":\"うれしかったけど、どこがうれしかったかはまだ曖昧。\",\"source_id\":\"E02-O\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "empty",
+          "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+          "status": "EMPTY",
+          "raw_output": "",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "invalid_json",
+          "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+          "status": "INVALID_FORMAT",
+          "raw_output": "{",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "timeout",
+          "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+          "status": "TIMEOUT",
+          "raw_output": null,
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"timeout\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "token_limit",
+          "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+          "status": "TOKEN_LIMIT",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 25, \"quote\": \"うれしかったけど、どこがうれしかったかはまだ曖昧。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":25,\"field_path\":\"memo\",\"quote\":\"うれしかったけど、どこがうれしかったかはまだ曖昧。\",\"source_id\":\"E02-O\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"length\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        }
+      ]
+    },
+    {
+      "case_id": "E02-B",
+      "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+      "material": {
+        "adoption_state": "NOT_ADOPTED",
+        "control": {
+          "actual_question_budget_remaining": 1,
+          "actual_update_status": "N_A_NO_ACTUAL_PENDING_QUESTION",
+          "asked_target_refs": [],
+          "capability": "Q3_FREE",
+          "current_round": 0,
+          "frame_feedback": [],
+          "history_groups": [],
+          "issued_count": 0,
+          "issued_questions": [],
+          "pending_question": null,
+          "probe_only": true,
+          "probe_question_budget_remaining": 0,
+          "question_limit": 1,
+          "rejected_frame_keys": [],
+          "stop": false
+        },
+        "core": "emlis",
+        "execution_mode": "OFFLINE_PREPARATION",
+        "output_conditions": "Observation, human reception and optional question have separate responsibilities; preserve the actual question budget.",
+        "period": null,
+        "policies": {
+          "adoption": "NOT_ADOPTED; source quotation checks do not validate interpretation.",
+          "cross_core": "Generated observations, Piece prose and Analysis claims are not user sources.",
+          "meaning": "Preserve subject, time, polarity, relations, unknowns and conflicts.",
+          "source": "Original, supplemental, history and generated interpretation stay separate."
+        },
+        "schema_version": "cocolon.cmee.internal_preparation.v1",
+        "sources": [
+          {
+            "envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+            "evidence": [
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": -1,
+                "evidence_id": "ev-867aada7ad7a937b15b3eb8f",
+                "field_path": "memo",
+                "field_sha256": "a21dc0c744e85f17e4a47a0efdef7fcd848ffb12451e10df53a0d54bd3115ae5",
+                "field_utf8_end": 466,
+                "field_utf8_start": 391,
+                "literal": "うれしかったけど、どこがうれしかったかはまだ曖昧",
+                "literal_sha256": "5cca23233b650b9108ba100cea80e86907d8fcc43e90486ec801da5e7427f739",
+                "scalar_end": 24,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s1",
+                "utf8_end": 463,
+                "utf8_start": 391
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": -1,
+                "evidence_id": "ev-0880f935e8200f8c8eaf15dc",
+                "field_path": "memo_action",
+                "field_sha256": "8e15740f9d1b465c0ad160825a07f2991903bc4e74a67093169468b094b02f3e",
+                "field_utf8_end": 558,
+                "field_utf8_start": 492,
+                "literal": "打合せで後輩に説明を任せて、最後まで聞いた",
+                "literal_sha256": "b97c616499a7cd12842bb70ec3dc194de11cd6980fe328eb3855be0b40d27daf",
+                "scalar_end": 21,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s2",
+                "utf8_end": 555,
+                "utf8_start": 492
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-e7598cd01b919047e3fb0086",
+                "field_path": "emotion_details.0.type",
+                "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "field_utf8_end": 600,
+                "field_utf8_start": 594,
+                "literal": "喜び",
+                "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "scalar_end": 2,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s3",
+                "utf8_end": 600,
+                "utf8_start": 594
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-236aedf3c506d83ad6a31fb7",
+                "field_path": "emotions.0",
+                "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "field_utf8_end": 630,
+                "field_utf8_start": 624,
+                "literal": "喜び",
+                "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "scalar_end": 2,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s4",
+                "utf8_end": 630,
+                "utf8_start": 624
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-41a03c146ad1e4de7803ca7e",
+                "field_path": "category.0",
+                "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "field_utf8_end": 660,
+                "field_utf8_start": 654,
+                "literal": "仕事",
+                "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "scalar_end": 2,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "s5",
+                "utf8_end": 660,
+                "utf8_start": 654
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "ev-4deec802cb3f0d1f1076e3f7",
+                "field_path": "emotion_details.0.strength",
+                "field_sha256": "c082456a7766e23a18db084cd34b6ff510baef506548b897cc80e9b7d3e121c8",
+                "field_utf8_end": 706,
+                "field_utf8_start": 700,
+                "literal": "medium",
+                "literal_sha256": "c082456a7766e23a18db084cd34b6ff510baef506548b897cc80e9b7d3e121c8",
+                "scalar_end": 6,
+                "scalar_start": 0,
+                "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                "source_span_id": "structured:emotion_strength",
+                "utf8_end": 706,
+                "utf8_start": 700
+              }
+            ],
+            "native_source_role": "CURRENT_INPUT",
+            "original": {
+              "category": [
+                "仕事"
+              ],
+              "created_at": "2026-10-21T16:30:00+09:00",
+              "emotion_details": [
+                {
+                  "strength": "medium",
+                  "type": "喜び"
+                }
+              ],
+              "emotions": [
+                "喜び"
+              ],
+              "id": "E02-O",
+              "memo": "うれしかったけど、どこがうれしかったかはまだ曖昧。",
+              "memo_action": "打合せで後輩に説明を任せて、最後まで聞いた。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-21T16:30:00+09:00",
+            "role": "ORIGINAL_INPUT",
+            "source_commitment": "829274c067ed897e3eafed7b1640607321c9e3805d576081736df1535ea3b02a",
+            "source_id": "E02-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "うれしかったけど、どこがうれしかったかはまだ曖昧。",
+              "memo_action": "打合せで後輩に説明を任せて、最後まで聞いた。"
+            }
+          },
+          {
+            "envelope_id": null,
+            "evidence": [],
+            "native_source_role": "SUPPLEMENTAL_ANSWER",
+            "original": null,
+            "parent_record_id": "E02-O",
+            "recorded_at": null,
+            "role": "SUPPLEMENTAL_PROBE",
+            "source_id": "E02-S2",
+            "source_version": null,
+            "text_fields": {
+              "answer_text_private": "自分が口を挟まずに済んだから嬉しかったのではないです。後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。"
+            },
+            "thread_answer_admitted": false
+          }
+        ],
+        "task": "EMLIS_SUPPLEMENTAL_MATERIAL_PROBE",
+        "tier": "free"
+      },
+      "receipts": [
+        {
+          "scenario": "normal",
+          "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+          "status": "CANDIDATE_UNREVIEWED",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 25, \"quote\": \"うれしかったけど、どこがうれしかったかはまだ曖昧。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":25,\"field_path\":\"memo\",\"quote\":\"うれしかったけど、どこがうれしかったかはまだ曖昧。\",\"source_id\":\"E02-O\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "empty",
+          "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+          "status": "EMPTY",
+          "raw_output": "",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "invalid_json",
+          "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+          "status": "INVALID_FORMAT",
+          "raw_output": "{",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "timeout",
+          "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+          "status": "TIMEOUT",
+          "raw_output": null,
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"timeout\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "token_limit",
+          "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+          "status": "TOKEN_LIMIT",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 25, \"quote\": \"うれしかったけど、どこがうれしかったかはまだ曖昧。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":25,\"field_path\":\"memo\",\"quote\":\"うれしかったけど、どこがうれしかったかはまだ曖昧。\",\"source_id\":\"E02-O\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"length\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        }
+      ]
+    },
+    {
+      "case_id": "P01-N",
+      "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+      "material": {
+        "adoption_state": "NOT_ADOPTED",
+        "control": {
+          "original_text_view": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\n\n頼まれて同僚の発表資料を一緒に直した。",
+          "projection_only": true,
+          "source_role": "original",
+          "source_stage": "normal_observation"
+        },
+        "core": "piece",
+        "execution_mode": "OFFLINE_PREPARATION",
+        "output_conditions": "Preserve the person's voice, negations and conditions; existing owners retain format, recipe, fit and export responsibilities.",
+        "period": null,
+        "policies": {
+          "adoption": "NOT_ADOPTED; source quotation checks do not validate interpretation.",
+          "cross_core": "Generated observations, Piece prose and Analysis claims are not user sources.",
+          "meaning": "Preserve subject, time, polarity, relations, unknowns and conflicts.",
+          "source": "Original, supplemental, history and generated interpretation stay separate."
+        },
+        "schema_version": "cocolon.cmee.internal_preparation.v1",
+        "sources": [
+          {
+            "envelope_id": null,
+            "evidence": [
+              {
+                "coordinate_space": "FIELD",
+                "evidence_id": "preparation-field:2ee36c27fee7d1c763cd5212d11a361cbfc3d4ec1ebdf551a918fa21d061a81c",
+                "field_path": "memo",
+                "literal": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。",
+                "scalar_end": 84,
+                "scalar_start": 0,
+                "source_id": "P01-O",
+                "utf8_end": 252,
+                "utf8_start": 0
+              },
+              {
+                "coordinate_space": "FIELD",
+                "evidence_id": "preparation-field:48708c90762d89e05bfef0855359cf333aa9d39d224349626bc3f05f990cb986",
+                "field_path": "memo_action",
+                "literal": "頼まれて同僚の発表資料を一緒に直した。",
+                "scalar_end": 19,
+                "scalar_start": 0,
+                "source_id": "P01-O",
+                "utf8_end": 57,
+                "utf8_start": 0
+              }
+            ],
+            "original": {
+              "category": [
+                "仕事",
+                "人間関係"
+              ],
+              "created_at": "2026-10-20T20:40:00+09:00",
+              "emotion_details": [
+                {
+                  "strength": "weak",
+                  "type": "喜び"
+                },
+                {
+                  "strength": "weak",
+                  "type": "不安"
+                }
+              ],
+              "emotions": [
+                "喜び",
+                "不安"
+              ],
+              "id": "P01-O",
+              "memo": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。",
+              "memo_action": "頼まれて同僚の発表資料を一緒に直した。"
+            },
+            "parent_record_id": null,
+            "recorded_at": "2026-10-20T20:40:00+09:00",
+            "role": "ORIGINAL_INPUT",
+            "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4",
+            "source_id": "P01-O",
+            "source_version": "emlis.current_input_bundle.v1",
+            "text_fields": {
+              "memo": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。",
+              "memo_action": "頼まれて同僚の発表資料を一緒に直した。"
+            }
+          }
+        ],
+        "task": "PIECE_ORIGINAL_MATERIAL",
+        "tier": "free"
+      },
+      "receipts": [
+        {
+          "scenario": "normal",
+          "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+          "status": "CANDIDATE_UNREVIEWED",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 84, \"quote\": \"助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":84,\"field_path\":\"memo\",\"quote\":\"助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\",\"source_id\":\"P01-O\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "empty",
+          "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+          "status": "EMPTY",
+          "raw_output": "",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "invalid_json",
+          "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+          "status": "INVALID_FORMAT",
+          "raw_output": "{",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "timeout",
+          "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+          "status": "TIMEOUT",
+          "raw_output": null,
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"timeout\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "token_limit",
+          "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+          "status": "TOKEN_LIMIT",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 84, \"quote\": \"助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":84,\"field_path\":\"memo\",\"quote\":\"助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\",\"source_id\":\"P01-O\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"length\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        }
+      ]
+    },
+    {
+      "case_id": "A02-P1",
+      "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+      "material": {
+        "adoption_state": "NOT_ADOPTED",
+        "control": {
+          "members": [
+            {
+              "child_source_envelope_refs": [
+                "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d"
+              ],
+              "inclusion_or_exclusion_reason": "IN_PERIOD",
+              "inclusion_status": "INCLUDED",
+              "member_role": "PERIOD_RECORD_IDENTITY",
+              "saved_record_ref": "A02-4",
+              "saved_record_version": "sha256:2548497997817272799af54a7424b0bff1b899fca70e8cdc2c57628f024dffa6",
+              "source_commitment": "sha256:86a89060e49b6dd12518c130f6387dae58bbbee4c59a3b0963d5aac176c02830"
+            },
+            {
+              "child_source_envelope_refs": [
+                "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff"
+              ],
+              "inclusion_or_exclusion_reason": "IN_PERIOD",
+              "inclusion_status": "INCLUDED",
+              "member_role": "PERIOD_RECORD_IDENTITY",
+              "saved_record_ref": "A02-5",
+              "saved_record_version": "sha256:f797ed63b2ab868d777dda2ce5763364a43bd15e52565997ef918e7eed49426e",
+              "source_commitment": "sha256:5aae77607270c499457c023ae538bdf5e6da2b6ab53238c1fb0ed91690cfd471"
+            },
+            {
+              "child_source_envelope_refs": [
+                "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67"
+              ],
+              "inclusion_or_exclusion_reason": "IN_PERIOD",
+              "inclusion_status": "INCLUDED",
+              "member_role": "PERIOD_RECORD_IDENTITY",
+              "saved_record_ref": "A02-6",
+              "saved_record_version": "sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf",
+              "source_commitment": "sha256:9b7fe22a7498b6ba5aebd65f16820235230f9902811495576cd67869320c2169"
+            }
+          ],
+          "operation": "ANALYSIS_OBSERVED_MAP",
+          "projection_only": true,
+          "source_set_ref": "analysis-set:7108340b2d886b44aa7ec1328a7723a059059ee4b122f783f35a69898cc67416"
+        },
+        "core": "analysis",
+        "execution_mode": "OFFLINE_PREPARATION",
+        "output_conditions": "Only source-supported period nodes, edges, unknowns and conflicts; do not fill missing roles or predict outcomes.",
+        "period": {
+          "end_exclusive": "2026-10-14T15:00:00+00:00",
+          "start": "2026-10-07T15:00:00+00:00"
+        },
+        "policies": {
+          "adoption": "NOT_ADOPTED; source quotation checks do not validate interpretation.",
+          "cross_core": "Generated observations, Piece prose and Analysis claims are not user sources.",
+          "meaning": "Preserve subject, time, polarity, relations, unknowns and conflicts.",
+          "source": "Original, supplemental, history and generated interpretation stay separate."
+        },
+        "schema_version": "cocolon.cmee.internal_preparation.v1",
+        "sources": [
+          {
+            "envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+            "evidence": [
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:750c4a40f28a72cd6914ca1ce3d3f60f3bc77c027173aae1a3ba2948ad816574",
+                "field_path": "memo",
+                "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+                "field_utf8_end": 141,
+                "field_utf8_start": 9,
+                "literal": "今日も連絡係だった",
+                "literal_sha256": "524c7fe92e75641a70e9f2492cf12232543532b73cbf3a4d8e91e3b66f8a086b",
+                "material_field_path": "memo",
+                "scalar_end": 9,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+                "source_span_id": "s1",
+                "utf8_end": 36,
+                "utf8_start": 9
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:5edd6a2887772751a5c96e6578939e4e6180919481d0d7ea28c661fc3c999227",
+                "field_path": "memo",
+                "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+                "field_utf8_end": 141,
+                "field_utf8_start": 9,
+                "literal": "まだ返事のない人がいることも残したかった",
+                "literal_sha256": "fa45701245bd4e540e1f2b691b2a9edf240171b85947154709c3c5ce814ca893",
+                "material_field_path": "memo",
+                "scalar_end": 30,
+                "scalar_start": 10,
+                "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+                "source_span_id": "s2",
+                "utf8_end": 99,
+                "utf8_start": 39
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:5380c6929f7bb216c7e5e7fcc781c2bcf8d91aeb5173d3a52a20bdf2a8e8e13d",
+                "field_path": "memo",
+                "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+                "field_utf8_end": 141,
+                "field_utf8_start": 9,
+                "literal": "前より待つ時間は短かった",
+                "literal_sha256": "1287267764d09f678cad4cde860f81e469d8d8d6a82381ddc19b79dddc30f9b0",
+                "material_field_path": "memo",
+                "scalar_end": 43,
+                "scalar_start": 31,
+                "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+                "source_span_id": "s3",
+                "utf8_end": 138,
+                "utf8_start": 102
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa",
+                "field_path": "memo_action",
+                "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+                "field_utf8_end": 249,
+                "field_utf8_start": 156,
+                "literal": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った",
+                "literal_sha256": "9c97ba3bd4a10230e8afbafc06f74003416f12006d202f8548fe4dbb75406960",
+                "material_field_path": "memo_action",
+                "scalar_end": 30,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+                "source_span_id": "s4",
+                "utf8_end": 246,
+                "utf8_start": 156
+              }
+            ],
+            "original": {
+              "category": [
+                "生活",
+                "人間関係"
+              ],
+              "created_at": "2026-10-09T18:10:00+09:00",
+              "emotion_details": [
+                {
+                  "strength": "weak",
+                  "type": "平穏"
+                }
+              ],
+              "emotions": [
+                "平穏"
+              ],
+              "id": "A02-4",
+              "memo": "今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。",
+              "memo_action": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。"
+            },
+            "parent_record_id": null,
+            "parent_record_version": null,
+            "recorded_at": "2026-10-09T18:10:00+09:00",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "A02-4",
+            "source_version": "sha256:2548497997817272799af54a7424b0bff1b899fca70e8cdc2c57628f024dffa6",
+            "text_fields": {
+              "memo": "今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。",
+              "memo_action": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。"
+            }
+          },
+          {
+            "envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+            "evidence": [
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:376e4ae164508163b156db747677f72c6446338a7fc2bf07b0ce6ce228157d64",
+                "field_path": "memo",
+                "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+                "field_utf8_end": 138,
+                "field_utf8_start": 9,
+                "literal": "今日は道具係だった",
+                "literal_sha256": "ca696d4876d65437da532a6dc98c325238c82267c3b7f5ef7482ac7d6a1d3c4c",
+                "material_field_path": "memo",
+                "scalar_end": 9,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+                "source_span_id": "s1",
+                "utf8_end": 36,
+                "utf8_start": 9
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:d18d37e7e04851dd795a84bf5057880badcc80b34410aee2a8986a27557b7af0",
+                "field_path": "memo",
+                "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+                "field_utf8_end": 138,
+                "field_utf8_start": 9,
+                "literal": "数を照らし合わせられてほっとした",
+                "literal_sha256": "1afbc0290ba1d3279f7ffecee1b57106bb405dc645c75f3ef60673e0beec1249",
+                "material_field_path": "memo",
+                "scalar_end": 26,
+                "scalar_start": 10,
+                "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+                "source_span_id": "s2",
+                "utf8_end": 87,
+                "utf8_start": 39
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:43806a950c0418a08e35743877c2fcedba0c0cf39b8423c649a32341072c993a",
+                "field_path": "memo",
+                "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+                "field_utf8_end": 138,
+                "field_utf8_start": 9,
+                "literal": "使いやすかったかは聞いていない",
+                "literal_sha256": "ecadbcd44f4cc479f38cc08ef14b3e344a27261c29c19cdeb9891e77c462d612",
+                "material_field_path": "memo",
+                "scalar_end": 42,
+                "scalar_start": 27,
+                "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+                "source_span_id": "s3",
+                "utf8_end": 135,
+                "utf8_start": 90
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2",
+                "field_path": "memo_action",
+                "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+                "field_utf8_end": 252,
+                "field_utf8_start": 153,
+                "literal": "道具を貸す時に数を記録し、返ってきた数と照合した",
+                "literal_sha256": "55bc376bfa4371cb360dac16c2d53f016702a660bb68d3439bd4f0c56a17f84e",
+                "material_field_path": "memo_action",
+                "scalar_end": 24,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+                "source_span_id": "s4",
+                "utf8_end": 225,
+                "utf8_start": 153
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:bee1e1b620004dadeda43528609e5f953fdc4bcba747e1589dafdbb158790aef",
+                "field_path": "memo_action",
+                "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+                "field_utf8_end": 252,
+                "field_utf8_start": 153,
+                "literal": "全て戻っていた",
+                "literal_sha256": "7b1e8474c99f93691a9aa3cd43f86ea5d235ec718620e24b9ee8a738d78fe5cc",
+                "material_field_path": "memo_action",
+                "scalar_end": 32,
+                "scalar_start": 25,
+                "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+                "source_span_id": "s5",
+                "utf8_end": 249,
+                "utf8_start": 228
+              }
+            ],
+            "original": {
+              "category": [
+                "生活"
+              ],
+              "created_at": "2026-10-11T16:10:00+09:00",
+              "emotion_details": [
+                {
+                  "strength": "medium",
+                  "type": "平穏"
+                }
+              ],
+              "emotions": [
+                "平穏"
+              ],
+              "id": "A02-5",
+              "memo": "今日は道具係だった。数を照らし合わせられてほっとした。使いやすかったかは聞いていない。",
+              "memo_action": "道具を貸す時に数を記録し、返ってきた数と照合した。全て戻っていた。"
+            },
+            "parent_record_id": null,
+            "parent_record_version": null,
+            "recorded_at": "2026-10-11T16:10:00+09:00",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "A02-5",
+            "source_version": "sha256:f797ed63b2ab868d777dda2ce5763364a43bd15e52565997ef918e7eed49426e",
+            "text_fields": {
+              "memo": "今日は道具係だった。数を照らし合わせられてほっとした。使いやすかったかは聞いていない。",
+              "memo_action": "道具を貸す時に数を記録し、返ってきた数と照合した。全て戻っていた。"
+            }
+          },
+          {
+            "envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+            "evidence": [
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb",
+                "field_path": "memo",
+                "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+                "field_utf8_end": 92,
+                "field_utf8_start": 8,
+                "literal": "買う物は買えたけど、今日はメモを作るのが少し面倒だった",
+                "literal_sha256": "071aad0a5ed86b967a98c8acfacdcae299a0f2663069a4418e6e64a1140ec582",
+                "material_field_path": "memo",
+                "scalar_end": 27,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+                "source_span_id": "s1",
+                "utf8_end": 89,
+                "utf8_start": 8
+              },
+              {
+                "coordinate_space": "SOURCE_ENVELOPE",
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6",
+                "field_path": "memo_action",
+                "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+                "field_utf8_end": 173,
+                "field_utf8_start": 107,
+                "literal": "買い物前にメモを作り、メモを見ながら買った",
+                "literal_sha256": "d9a55aafd885f923482ba7e752a99863b329f7afcdfdbc585e6d6b2c1341aff5",
+                "material_field_path": "memo_action",
+                "scalar_end": 21,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+                "source_span_id": "s2",
+                "utf8_end": 170,
+                "utf8_start": 107
+              }
+            ],
+            "original": {
+              "category": [
+                "生活"
+              ],
+              "created_at": "2026-10-13T21:10:00+09:00",
+              "emotion_details": [
+                {
+                  "strength": "weak",
+                  "type": "平穏"
+                },
+                {
+                  "strength": "weak",
+                  "type": "不安"
+                }
+              ],
+              "emotions": [
+                "平穏",
+                "不安"
+              ],
+              "id": "A02-6",
+              "memo": "買う物は買えたけど、今日はメモを作るのが少し面倒だった。",
+              "memo_action": "買い物前にメモを作り、メモを見ながら買った。"
+            },
+            "parent_record_id": null,
+            "parent_record_version": null,
+            "recorded_at": "2026-10-13T21:10:00+09:00",
+            "role": "ORIGINAL_INPUT",
+            "source_id": "A02-6",
+            "source_version": "sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf",
+            "text_fields": {
+              "memo": "買う物は買えたけど、今日はメモを作るのが少し面倒だった。",
+              "memo_action": "買い物前にメモを作り、メモを見ながら買った。"
+            }
+          }
+        ],
+        "task": "ANALYSIS_OBSERVED_PERIOD_MATERIAL",
+        "tier": "plus"
+      },
+      "receipts": [
+        {
+          "scenario": "normal",
+          "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+          "status": "CANDIDATE_UNREVIEWED",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"A02-4\", \"field_path\": \"memo\", \"start\": 0, \"end\": 44, \"quote\": \"今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":44,\"field_path\":\"memo\",\"quote\":\"今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。\",\"source_id\":\"A02-4\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "empty",
+          "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+          "status": "EMPTY",
+          "raw_output": "",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "invalid_json",
+          "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+          "status": "INVALID_FORMAT",
+          "raw_output": "{",
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "timeout",
+          "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+          "status": "TIMEOUT",
+          "raw_output": null,
+          "candidate_json": null,
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"timeout\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        },
+        {
+          "scenario": "token_limit",
+          "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+          "status": "TOKEN_LIMIT",
+          "raw_output": "{\"candidate\": {\"specimen\": \"FIXED_STUB_NOT_A_MEANING_ASSERTION\"}, \"evidence\": [{\"source_id\": \"A02-4\", \"field_path\": \"memo\", \"start\": 0, \"end\": 44, \"quote\": \"今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。\"}]}",
+          "candidate_json": "{\"candidate\":{\"specimen\":\"FIXED_STUB_NOT_A_MEANING_ASSERTION\"},\"evidence\":[{\"end\":44,\"field_path\":\"memo\",\"quote\":\"今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。\",\"source_id\":\"A02-4\",\"start\":0}]}",
+          "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"length\",\"model\":null,\"provider\":\"FIXED_OFFLINE_STUB\",\"revision\":null,\"usage\":null}",
+          "adoption_state": "NOT_ADOPTED"
+        }
+      ]
+    }
+  ],
+  "finished_utc": "2026-10-23T02:31:54.930156+00:00",
+  "execution_history": {
+    "initial_run_finished_utc": "2026-10-23T02:24:35.790490+00:00",
+    "initial_result_sha256": "85b4a697624f70a6dbcf0bdf21145880e641fc367c6015151180d0a2161ac1c4",
+    "initial_preparation_source_blobs": {
+      "cocolon_meaning_experience_engine/preparation.py": "f0012ced962ef9ca2dabe6ae3bf78123b71b1807",
+      "cocolon_meaning_experience_engine/preparation_sources.py": "60049e458e0c7c660576781f459751fcb679e5dd"
+    },
+    "final_run_reason": "Stopped question controls must have remaining budget zero; added regression test and rebound result to final source bytes.",
+    "material_and_all_twenty_receipts_equal_to_initial": true,
+    "actual_stub_runs": 2,
+    "unique_fixture_scenarios": 20,
+    "unit_test_history": [
+      {
+        "methods": 18,
+        "passed": 18
+      },
+      {
+        "methods": 21,
+        "passed": 21
+      },
+      {
+        "methods": 22,
+        "passed": 22,
+        "seconds": 0.116
+      }
+    ],
+    "distinct_final_unit_test_methods": 22
+  }
+}

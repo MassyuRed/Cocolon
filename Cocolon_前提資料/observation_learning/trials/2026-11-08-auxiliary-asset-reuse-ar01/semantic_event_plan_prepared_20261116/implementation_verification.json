@@ -1,0 +1,88 @@
+{
+  "state": "PREPARED_NOT_UPLOADED_NOT_EXECUTED_NOT_ADOPTED",
+  "api_commit": "c258cf0e5a6ba59429553638c4765fe7c17b561a",
+  "api_tree": "a37beca9f38ce8b494183d49bb1d0b4d0d3ab919",
+  "source_postverification": "TEN_CHANGED_PATHS_REMOTE_BLOBS_AND_TREE_MATCH_LOCAL",
+  "validation": {
+    "product_targeted": 449,
+    "separate_frozen_transport": 26,
+    "distinct_product_tests": 475,
+    "runner_fresh_process": 14,
+    "runner_subtests_not_added_to_count": 17,
+    "finalizer_review_fresh_process": 20,
+    "optimized_interpreter_early_refusal": 2,
+    "combined_runner_finalizer_same_process": "One extracted-module path assertion failed due prior binder import; fresh-process14 and20 passed without relaxing source binding.",
+    "product_warning": "Existing Pydantic root_validator deprecation",
+    "semantic_quality": "NOT_MEASURED_NO_NEW_MODEL_CALL"
+  },
+  "scope": {
+    "sha256": "e84f40b9c3d70c551344ccbae900116ca520e2f6e12344865bd1614be901a76e",
+    "files": 9,
+    "initial_bytes": 3127144,
+    "derived_review_max_bytes": 4096
+  },
+  "local_helpers": {
+    "event_plan_execution.py": {
+      "bytes": 31316,
+      "sha256": "fbe0109ac1bbbdc81f4046eaa390b1936523fd19d24fdfedb796c92157af4e7e"
+    },
+    "event_plan_same_raw_finalize.py": {
+      "bytes": 34255,
+      "sha256": "cb2bea6b7e270615af9e589a7261078eeb479079002a6548304e024c90c471b3"
+    },
+    "test_event_plan_execution_offline.py": {
+      "bytes": 14377,
+      "sha256": "2918c406db84aab2ebfb528959fc492534ed688df0a1ce26e12d6efb1ed6e6f8"
+    },
+    "test_event_plan_finalize_review.py": {
+      "bytes": 7070,
+      "sha256": "d9860e3282346720d50c93704f958100fbee3c16687287448c50e188ab8cbded"
+    }
+  },
+  "normal_readonly": {
+    "api_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "worker_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "status": "live",
+    "latest_migration": "20261115011424",
+    "healthz_status": 200,
+    "app_bootstrap_status": 200,
+    "first_health_probe": "Timeout before later200; wrong /api/app/bootstrap probe corrected to source-defined /app/bootstrap200; no failure hidden as success"
+  },
+  "first_unfinished": "New real4B whole-source/raw/projection/text review, same-raw actual SQLsave/re-read, then compatible normal rollout",
+  "new_GPU_calls": 0,
+  "new_training": 0,
+  "Pod_upload": 0,
+  "hosted_SQL_mutations": 0,
+  "normal_rollout": 0,
+  "build_TestFlight_device": "DEFERRED",
+  "work_unit_closed": false,
+  "auxiliary_complete": false,
+  "product_acceptance": false,
+  "remote_CI": [
+    {
+      "id": 43795890260,
+      "name": "Analysis observed content",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 43795890312,
+      "name": "Piece isolated PostgreSQL",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "final_synthetic_rehearsal": {
+    "receipt_sha256": "3cf3c7c940debb356c0f14b39c0e5af098aaa9a8ff7f1d78e928ceb14ee38bc8",
+    "state": "SAVED_AND_SEPARATE_PROCESS_REREAD_TECHNICAL_ONLY",
+    "synthetic_test_output": true,
+    "model_calls": 0,
+    "hosted_database_calls": 0,
+    "saved_artifacts": 1,
+    "generation_commits": 1,
+    "monthly_references": 1,
+    "separate_process_reread": true,
+    "original_checkpoint_unchanged": true,
+    "original_plan_unchanged": true
+  }
+}

@@ -2,13 +2,15 @@ import React from "react";
 import { ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import CocolonPressable from "../../components/CocolonPressable";
+import CocolonButton from "../../components/CocolonButton";
+import PieceScreenIntro from "./PieceScreenIntro";
 import PieceHomeActionCard from "./PieceHomeActionCard";
 import { TUTORIAL_PIECE_QUESTION } from "./usePieceHomeTutorial";
 
 export default function PieceHomeMainActions({
   styles,
   colors,
+  ui,
   tutorialSurfaceEnabled,
   isTutorialMode,
   tutorialHasSelfPiece,
@@ -22,7 +24,6 @@ export default function PieceHomeMainActions({
   onOpenPieceLibrary,
   onOpenEmotionLog,
   onOpenPieceCreate,
-  onOpenRecommend,
   onOpenReactionHistory,
 }) {
   return (
@@ -33,23 +34,7 @@ export default function PieceHomeMainActions({
       onScroll={onScroll}
       scrollEventThrottle={16}
     >
-      <View style={styles.panelHeader}>
-        <View ref={refs.pieceTitleRef} collapsable={false} style={styles.panelTitleRow}>
-          <Text style={styles.panelTitle}>ピース</Text>
-          <CocolonPressable
-            style={styles.guideTitleButton}
-            onPress={onPressGuide}
-            accessibilityLabel="ガイドを開く"
-          >
-            <Ionicons
-              name="help-circle-outline"
-              size={20}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
-        </View>
-        <View style={styles.headerRight} />
-      </View>
+      <PieceScreenIntro titleRef={refs.pieceTitleRef} colors={colors} ui={ui} />
 
       {tutorialSurfaceEnabled && isTutorialMode ? (
         <View style={styles.recoCard}>
@@ -136,21 +121,6 @@ export default function PieceHomeMainActions({
 
       <View style={{ marginTop: 16 }}>
         <PieceHomeActionCard
-          title="探す"
-          description={
-            tutorialSurfaceEnabled && isTutorialMode
-              ? "ここから新しいユーザーを探せます。"
-              : "新しいユーザーを探すことができます。"
-          }
-          buttonLabel="新しいユーザーを探す"
-          buttonIconName="search-outline"
-          onPress={onOpenRecommend}
-          accessibilityLabel="新しいユーザーを探す"
-        />
-      </View>
-
-      <View style={{ marginTop: 16 }}>
-        <PieceHomeActionCard
           title="履歴"
           description="共鳴と発見の履歴を確認できます。"
           buttonLabel="履歴を確認する"
@@ -159,6 +129,7 @@ export default function PieceHomeMainActions({
           accessibilityLabel="履歴を確認する"
         />
       </View>
+      <CocolonButton variant="secondary" style={styles.guideFooter} title="ピースについて" onPress={onPressGuide} />
     </ScrollView>
   );
 }

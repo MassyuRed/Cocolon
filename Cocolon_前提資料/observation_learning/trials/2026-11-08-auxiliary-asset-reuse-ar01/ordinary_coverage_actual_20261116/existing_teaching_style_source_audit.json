@@ -1,0 +1,108 @@
+{
+  "source_teaching_plan_sha256": "f969cd2b2b8020a21cb4a848371a15b9c89d475464b392d1043bec5fe8063474",
+  "method": "Inventory of selected literal inference-policy phrases in existing ROOT_AUTHORED_SYNTHETIC targets, not a quality score or model-failure cause.",
+  "exact_examples": [
+    {
+      "teacher": "T01_manual10",
+      "location": "nodes[0].explanation",
+      "literal_phrases": [
+        "固定した性格ではありません"
+      ],
+      "exact_text": "周りと同じ進み方より、自分が納得して選ぶことを大切にしたいと述べています。集まりでも自分で選びたいと述べています。これはこの記録で本人が望む位置であり、固定した性格ではありません。"
+    },
+    {
+      "teacher": "T01_manual10",
+      "location": "edges[1].explanation",
+      "literal_phrases": [
+        "判断しません"
+      ],
+      "exact_text": "納得して選びたいという本人の言葉と、自分がきれいだと認めた風景を残せた場面を見比べられます。この選び方の基準が写真行動の原因だったとまでは判断しません。"
+    },
+    {
+      "teacher": "T01_manual10",
+      "location": "edges[3].explanation",
+      "literal_phrases": [
+        "置き換え"
+      ],
+      "exact_text": "納得して選びたいという基準は言葉になっていますが、暮らしの何を変えるかはまだ決めていません。具体策の未定を、本人に基準がないことへ置き換えません。"
+    },
+    {
+      "teacher": "T03_chair",
+      "location": "nodes[1].explanation",
+      "literal_phrases": [
+        "置き換え"
+      ],
+      "exact_text": "椅子が部屋にあることと、修理方法をまだ決めていないことが同時に記されています。修理しないと決めたことや、修理を避ける動機へは置き換えません。"
+    },
+    {
+      "teacher": "T04_book",
+      "location": "nodes[2].explanation",
+      "literal_phrases": [
+        "へは変換しません"
+      ],
+      "exact_text": "残したい一文を写す行動は成立しています。その感想を人に話すかは未決定で、残せていないことや、話さないと決めたことへは変換しません。"
+    },
+    {
+      "teacher": "T06_unfinished",
+      "location": "nodes[1].explanation",
+      "literal_phrases": [
+        "置き換え"
+      ],
+      "exact_text": "外に出られなかったことは残念とされ、一方で体の重さを少し軽く感じたと記されています。どちらかをもう片方の否定へ置き換えずに残せます。"
+    },
+    {
+      "teacher": "T06_unfinished",
+      "location": "edges[0].explanation",
+      "literal_phrases": [
+        "判断しません"
+      ],
+      "exact_text": "編み物も外出も完了していない面がありますが、その場で本人が受け取ったものも記されています。同じ原因で止まったことや、同じ性格の表れだとは判断しません。"
+    },
+    {
+      "teacher": "T08_other",
+      "location": "nodes[0].explanation",
+      "literal_phrases": [
+        "姉の希望を本人の開店希望へ移さず"
+      ],
+      "exact_text": "本人は姉の大切にしたい点を聞いてから手伝い方を考えたいと述べ、具体的な約束はまだしていません。姉の希望を本人の開店希望へ移さず、姉が実際に期待した役割も決めません。"
+    },
+    {
+      "teacher": "T08_other",
+      "location": "edges[0].explanation",
+      "literal_phrases": [
+        "固定像にはまとめません"
+      ],
+      "exact_text": "姉の店では姉が大切にする点を聞くことを、自分の机では自分の使いやすさを試すことを置いています。どちらも本人が必ず同じ役割を担うという固定像にはまとめません。"
+    },
+    {
+      "teacher": "T09_time",
+      "location": "nodes[0].explanation",
+      "literal_phrases": [
+        "延長できません"
+      ],
+      "exact_text": "過去の伝えたい気持ちを、今も伝えられていない希望へ延長できません。昨日その話をしなかったことが、現在の意図の原因だったかも記録からは決まりません。"
+    },
+    {
+      "teacher": "T09_time",
+      "location": "nodes[1].explanation",
+      "literal_phrases": [
+        "へは変換しません"
+      ],
+      "exact_text": "本人は今の自分が何を考えたか残すために書きたいと述べ、一人でノートへ書いています。他者との会話を避ける性格という説明へは変換しません。"
+    },
+    {
+      "teacher": "T09_time",
+      "location": "edges[0].explanation",
+      "literal_phrases": [
+        "一般化しません"
+      ],
+      "exact_text": "友人へ伝える現在の意図と、自分のために文章を残す目的は別の情報です。話さなかった出来事を、表現そのものができていないことへ一般化しません。"
+    }
+  ],
+  "limits": [
+    "Ordinary negative facts or remaining unknowns are not counted as policy language merely for containing a negative ending.",
+    "The presence of a protective explanation is not itself an error.",
+    "This does not establish why A2 produced its policy-like prose or factual conflicts."
+  ],
+  "model_calls": 0
+}

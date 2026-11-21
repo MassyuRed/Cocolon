@@ -25,7 +25,6 @@ function ProfileRow({ styles, label, labelAction, value, onPress, disabled }) {
         {labelAction ? labelAction : null}
       </View>
       <View style={styles.kvRowBottom}>
-        <View style={{ flex: 1 }} />
         {valueNode}
       </View>
     </>
@@ -38,6 +37,7 @@ function ProfileRow({ styles, label, labelAction, value, onPress, disabled }) {
         activeOpacity={0.7}
         onPress={onPress}
         disabled={!!disabled}
+        accessibilityRole="button"
       >
         {inner}
       </TouchableOpacity>
@@ -58,7 +58,6 @@ export default function AccountProfileSection({
   displayName,
   shareCode,
   userIdForDisplay,
-  isPrivateAccount,
   canShowShareCode,
   followingCount,
   followerCount,
@@ -70,44 +69,22 @@ export default function AccountProfileSection({
   openNameEdit,
   onCopyShareCode,
   onShareProfile,
-  openAccountSettings,
   onToggleFollow,
   openFollowList,
 }) {
+  const followForeground = loading || followActionLoading ? colors.TEXT_SUBTLE : isFollowing || isFollowRequested ? colors.ON_SURFACE_TONAL : colors.ACCENT_TEXT;
   return (
     <>
       {isSelf ? (
-        <View
-          style={[styles.profileActionRow, { justifyContent: "flex-end" }]}
-        >
+        <View style={styles.profileActionRow}>
           <CocolonPressable
-            style={[
-              styles.accountSettingsBtn,
-              { marginRight: 10 },
-              (loading || !user) && styles.accountSettingsBtnDisabled,
-            ]}
+            style={styles.profileShareBtn}
             onPress={onShareProfile}
             disabled={loading || !user}
-            accessibilityLabel="共有"
+            accessibilityLabel="プロフィールURLを共有"
           >
             <Ionicons
               name="share-outline"
-              size={20}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
-
-          <CocolonPressable
-            style={[
-              styles.accountSettingsBtn,
-              (loading || !user) && styles.accountSettingsBtnDisabled,
-            ]}
-            onPress={openAccountSettings}
-            disabled={loading || !user}
-            accessibilityLabel="アカウント設定"
-          >
-            <Ionicons
-              name="settings-outline"
               size={20}
               color={colors.TEXT_ON_LIGHT}
             />
@@ -124,6 +101,7 @@ export default function AccountProfileSection({
           onPress={onToggleFollow}
           activeOpacity={0.85}
           disabled={loading || followActionLoading || isFollowRequested}
+          accessibilityRole="button" accessibilityState={{ disabled: loading || followActionLoading || isFollowRequested, busy: followActionLoading, selected: isFollowing || isFollowRequested }}
           accessibilityLabel={
             isFollowing ? "フォロー解除" : isFollowRequested ? "申請中" : "フォローする"
           }
@@ -131,11 +109,7 @@ export default function AccountProfileSection({
           {followActionLoading ? (
             <ActivityIndicator
               size="small"
-              color={
-                isFollowing || isFollowRequested
-                  ? colors.TEXT_ON_LIGHT
-                  : "#FFFFFF"
-              }
+              color={followForeground}
               style={{ marginRight: 6 }}
             />
           ) : (
@@ -148,11 +122,7 @@ export default function AccountProfileSection({
                   : "person-add-outline"
               }
               size={18}
-              color={
-                isFollowing || isFollowRequested
-                  ? colors.TEXT_ON_LIGHT
-                  : "#FFFFFF"
-              }
+              color={followForeground}
               style={{ marginRight: 6 }}
             />
           )}
@@ -160,6 +130,7 @@ export default function AccountProfileSection({
             style={[
               styles.followBtnText,
               !isFollowing && !isFollowRequested && styles.followBtnTextOnGold,
+              { color: followForeground },
             ]}
           >
             {isFollowing ? "フォロー中" : isFollowRequested ? "申請中" : "フォローする"}
@@ -188,7 +159,7 @@ export default function AccountProfileSection({
                 >
                   <Ionicons
                     name="create-outline"
-                    size={12}
+                    size={18}
                     color={colors.TEXT_ON_LIGHT}
                   />
                 </Pressable>
@@ -198,29 +169,7 @@ export default function AccountProfileSection({
               loading ? (
                 "…"
               ) : (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    maxWidth: "100%",
-                  }}
-                >
-                  <Text
-                    style={[styles.profileRowValue, { flexShrink: 1 }]}
-                    numberOfLines={1}
-                  >
-                    {displayName || "（未設定）"}
-                  </Text>
-                  {isPrivateAccount ? (
-                    <Ionicons
-                      name="shield-outline"
-                      size={14}
-                      color={colors.TITLE_GOLD}
-                      style={{ marginLeft: 6, opacity: 0.7 }}
-                    />
-                  ) : null}
-                </View>
+                <Text style={styles.value}>{displayName || "（未設定）"}</Text>
               )
             }
           />
@@ -256,8 +205,8 @@ export default function AccountProfileSection({
                     hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                   >
                     <Ionicons
-                      name="copy-outline"
-                      size={12}
+                      name="share-outline"
+                      size={18}
                       color={colors.TEXT_ON_LIGHT}
                     />
                   </Pressable>
@@ -271,8 +220,7 @@ export default function AccountProfileSection({
         <Text
           style={{
             marginTop: 6,
-            fontSize: ui?.font?.sectionLabel ?? 14,
-            lineHeight: 19,
+            ...ui.typography.description,
             color: ui?.text?.description ?? colors.TEXT_SUBTLE,
           }}
         >

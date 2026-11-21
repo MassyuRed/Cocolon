@@ -1,0 +1,60 @@
+{
+  "kind": "BOUNDED_SEMANTIC_COMPONENT2_NOT_NORMAL_ADOPTION",
+  "scope": "reason parent uniqueness and quoted-speech attribution in unchanged CP2/CP4 teaching",
+  "initial_weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
+  "initial_config_sha256": "933c124413a8486d79a5da3c151321cf8d0e1622165b6241ddde38939933721c",
+  "initial_explicit_research_selection": true,
+  "runner_sha256": "fd8f40c42e132bad7dfd9b326a5f43e3193f28b03249eae490b53d3eba991375",
+  "teachers_unchanged_from_composition24": 24,
+  "updates": 24,
+  "measurement_forwards": 48,
+  "new_generations": 38,
+  "retained_baselines": 34,
+  "cp4_before_free_generation": false,
+  "model_loads": 2,
+  "max_seconds": 900,
+  "termination_allowance_seconds": 30,
+  "objective": "unchanged full mean CE24 + prior RU02 and CP4 union means; additional coefficient1 mean CE for CP02 reason tail and CP04 utterance/content pair",
+  "seed": 20261113,
+  "learning_rate": 1e-05,
+  "clip": 1.0,
+  "held_QF4_not_trained": true,
+  "original90_unchanged": true,
+  "targets_messages_order_mask_unchanged": true,
+  "prior19_projection_retention_required": true,
+  "previous_display_usd_hour": 0.29,
+  "processing_reference_upper_usd": 0.07491666666666666,
+  "preparation_retrieval_rental_tax_separate": true,
+  "no_retry": true,
+  "normal_adoption": false,
+  "next_initial_auto_adoption": false,
+  "product_boundary_changes": false,
+  "new_components": {
+    "CP02": {
+      "target_chars": [
+        241,
+        330
+      ],
+      "meaning": "complete reason marker through same reason object end"
+    },
+    "CP04": {
+      "target_chars": [
+        30,
+        318
+      ],
+      "meaning": "array opener plus entire utterance root and its quoted CONTENT_TARGET pair"
+    }
+  },
+  "previous_closed_trial": "material_v5_composition_unit24_results.json",
+  "previous_unadopted_weights_not_initial": true,
+  "cpu_status": "PENDING_REAL_TOKENIZER_NO_GPU_BEFORE_PASS",
+  "diagnosis": "saved text sequence only, not proven model intent or unique causality",
+  "evaluation": "old30 + heldQF4 + learnedCP4; old19 visible and five teacher matches; CP02 parent uniqueness, CP04 reported-content attribution, QF01 and CP03 local gains, SC01/MD02 NEG range",
+  "cpu_recovery": {
+    "first_status": "SERIALIZATION_COMPARISON_FAILURE_NO_MODEL",
+    "first_runner_sha256": "b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867",
+    "change": "canonical comparison of identical tuple/list coordinate values; fresh root and preservation of first CPU bytes",
+    "target_mask_objective_or_acceptance_changes": false,
+    "second_failure_stop": true
+  }
+}

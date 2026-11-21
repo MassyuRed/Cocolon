@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/local/bin/python",
+    "/workspace/cocolon_4b_quote_joint_pack_20261026/consume_quote_fit_raw.py",
+    "--raw-file",
+    "/workspace/cocolon_4b_generic_native_bridge13_result_20261026/after_native_fit.jsonl",
+    "--expected-adapter-sha256",
+    "c39bbc27936d98ad45b0b42b43c476cad0c34f19e9f960f1a74f51eb05a564e5",
+    "--expected-raw-sha256",
+    "d66988339ccbedbe0d7f3959557adb865a97f476f0b2379673aea0f4ef908266",
+    "--pack",
+    "/workspace/cocolon_4b_quote_joint_pack_20261026",
+    "--api-root",
+    "/workspace/cocolon_quote_reception_fixed_api_20261025",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--output",
+    "/workspace/cocolon_4b_generic_native_bridge13_result_20261026/consumer.json"
+  ],
+  "returncode": 0,
+  "stdout": "{\"scope\": \"TRAINING_FIT_FIXED_PRIOR_NOT_DYNAMIC\", \"meaning_count\": 8, \"body_count\": 8, \"seconds\": 10.491744413971901}\n",
+  "stderr": "",
+  "seconds": 10.650575889274478,
+  "source_raw_sha256": "d66988339ccbedbe0d7f3959557adb865a97f476f0b2379673aea0f4ef908266",
+  "new_model_calls": 0
+}

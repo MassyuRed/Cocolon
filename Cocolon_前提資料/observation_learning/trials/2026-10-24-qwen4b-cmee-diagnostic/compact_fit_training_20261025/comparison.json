@@ -1,0 +1,40 @@
+{
+  "scope": "REAL_4B_FIXED_TEACHER_FIT_NOT_GENERAL_QUALITY",
+  "weighted_teacher_nll": {
+    "before": 0.21648896377482266,
+    "after": 0.21064085826072096
+  },
+  "raw_changed_count": 0,
+  "cases": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "raw_unchanged": true,
+      "before_sha256": "f36560392710ddad32e60881adca2ac640e115f3e666c409c04063940a9f3ec9",
+      "after_sha256": "f36560392710ddad32e60881adca2ac640e115f3e666c409c04063940a9f3ec9",
+      "before_output_tokens": 1740,
+      "after_output_tokens": 1740,
+      "before_finish": "stop",
+      "after_finish": "stop",
+      "consumer_reason": "INVALID_FORMAT"
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "raw_unchanged": true,
+      "before_sha256": "0e06150fd554fc494e2c5770e11dd0d8b3feda5e9e0feaf82ce59b590b93892f",
+      "after_sha256": "0e06150fd554fc494e2c5770e11dd0d8b3feda5e9e0feaf82ce59b590b93892f",
+      "before_output_tokens": 2048,
+      "after_output_tokens": 2048,
+      "before_finish": "length",
+      "after_finish": "length",
+      "consumer_reason": "TOKEN_LIMIT"
+    }
+  ],
+  "adopted_before": 0,
+  "adopted_after": 0,
+  "body_before": 0,
+  "body_after": 0,
+  "raw_mutations": 0,
+  "new_teacher_or_observation_session_required_for_current_format_repair": false,
+  "product_accepted": false,
+  "automatic_progression": false
+}

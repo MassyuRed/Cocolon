@@ -49,7 +49,17 @@ export function resolveNotificationTargetRoute(remoteMessage) {
   const type = String(data?.type || "").trim().toLowerCase();
   const screen = String(data?.screen || "").trim();
 
-  if (type === "today_question" || screen === "Input") {
+  if (type === "watashi_map_updated") {
+    const expectedUserId = String(data?.user_id || "").trim();
+    if (!expectedUserId || !String(data?.version_key || "").trim()) return null;
+    return {
+      name: "Analysis",
+      expectedUserId,
+      params: { openSelfReportLatest: true, openSelfReportLatestAt: Date.now() },
+    };
+  }
+
+  if (screen === "Input") {
     return { name: "Input" };
   }
   if (type === "report_distribution") {
@@ -63,5 +73,6 @@ export function resolveNotificationTargetRoute(remoteMessage) {
 
 
 export function requestOpenRouteFromNotification(remoteMessage) {
-  requestOpenRoute(resolveNotificationTargetRoute(remoteMessage));
+  const target = resolveNotificationTargetRoute(remoteMessage);
+  if (target) requestOpenRoute(target);
 }

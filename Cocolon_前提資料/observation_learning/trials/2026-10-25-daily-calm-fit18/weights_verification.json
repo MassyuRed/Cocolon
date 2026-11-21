@@ -1,0 +1,14 @@
+{
+  "schema": "cocolon.daily_weights_offpod_verification.v1",
+  "archive_sha256": "594de06300c04f0e403cb6b8c68f4fc5e7e1d490fce8b5dae3f7c48b2ed6b205",
+  "archive_bytes": 3495824,
+  "pod_hash_match": true,
+  "members_verified": 18,
+  "tensor_count": 32,
+  "all_finite": true,
+  "optimizer_steps": 18,
+  "adapter_sha256": "5f0e51e9fbd5c94ba7bd213b033397dcc0982c19853819c1966afc8ece5613ed",
+  "stage": "ADAPTER_SAVED_BEFORE_GENERATION",
+  "includes_base_weights": false,
+  "includes_optimizer_state": false
+}

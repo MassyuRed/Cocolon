@@ -1,0 +1,132 @@
+--- a/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py
++++ b/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py
+@@ -1577,6 +1577,67 @@
+     return dict(candidate=candidate, evidence=packet["evidence"])
+ 
+ 
++def prepare_natural_request_bindings(request):
++    """Project bounded request roles from native source, without old authors.
++
++    Reuse preparation's admitted source identity and the existing finite
++    witness. Each role has its own target ref. A missing argument is scoped
++    to this clause; an unestablished acceptance is NOT a person-stated gap,
++    nor a claim that no other clause states acceptance. No model receipt or
++    matching quote can self-select this semantic interpretation.
++    """
++    material = prepare_emlis(request)
++    payload = material.payload()
++    control = payload["control"]
++    if (len(payload["sources"]) != 1 or control["frame_feedback"]
++            or control["rejected_frame_keys"] or control["probe_only"]):
++        return ()
++    source = payload["sources"][0]
++    from .natural_reply_cognition import source_context_allows_finite_hints
++    from .natural_reply_meaning import prepare_meaning_support, _SOURCE_UPDATE
++    fields = source["text_fields"]
++    texts = tuple(fields.get(name) or "" for name in ("memo", "memo_action"))
++    if (not source_context_allows_finite_hints(*texts)
++            or any(_SOURCE_UPDATE.search(text) for text in texts)):
++        return ()
++    support = prepare_meaning_support(dict(current=fields,
++        current_input_id=source["source_id"], current_answers=[],
++        past_user_records=[], user_frame_feedback=[]))
++    bindings = []
++    for witness in support["witnesses"]:
++        if not (witness["source_construction"] == "PLAIN_FINITE"
++                and witness["predicate"] == "頼む" and witness["voice"] == "passive"
++                and witness["subject"] == witness["counterpart"] == "UNSTATED"
++                and (witness["agent"] == "SELF" or witness["agent"].startswith("WRITTEN:"))
++                and (witness["polarity"], witness["modality"], witness["temporal_scope"])
++                    == ("positive", "fact", "past")):
++            continue
++        field = witness["source_path"].removeprefix("current.")
++        start, end = witness["scalar_start"], witness["scalar_end"]
++        # Coordinate equality is an integrity check AFTER finite interpretation.
++        # It is never used to adopt a model-written role.
++        if fields[field][start:end] != witness["raw_text"]:
++            raise ValueError("natural_request_source_slice_invalid")
++        anchor = dict(source_id=source["source_id"], source_version=source["source_version"],
++            envelope_id=source["envelope_id"], source_commitment=source["source_commitment"],
++            field_path=field, scalar_start=start, scalar_end=end, quote=witness["raw_text"])
++        claim_ref = identity("natural-request", anchor, witness["predicate"], witness["agent"])
++        slice_ref = identity("natural-request-slice", anchor)
++        axes = []
++        for dimension, status, entity in (
++                ("REQUESTER", "WRITTEN_ARGUMENT", witness["agent"]),
++                ("RECIPIENT", "OMITTED_IN_CLAUSE", None),
++                ("ACCEPTANCE", "NOT_ESTABLISHED_BY_REQUEST", None)):
++            axes.append(dict(target_ref=identity("natural-request-target", claim_ref, dimension),
++                claim_ref=claim_ref, dimension=dimension, status=status,
++                entity=entity, source_slice_refs=[slice_ref]))
++        bindings.append(dict(claim_ref=claim_ref, predicate="頼む", polarity="positive",
++            modality="fact", temporal_scope="past", relative_day=witness["relative_day"],
++            source_slice_ref=slice_ref, source_slice=anchor, targets=axes,
++            interpretation_scope="FINITE_PASSIVE_REQUEST_CLAUSE_ONLY"))
++    return tuple(bindings)
++
++
+ def _model_semantic_ref(p):
+     semantic = {k:p[k] for k in ("schema_version","semantic_profile","admission_version","adapter_version",
+         "request_ref","source_prefix_ref","source_bindings","meaning_packet","native_bindings",
+--- a/ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py
++++ b/ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py
+@@ -64,6 +64,9 @@
+     try:
+         material = request if type(request) is dict else json.loads(
+             request if isinstance(request, str) else request.material_json)
++        if material.get("source_request_bindings"):
++            return SYSTEM_MESSAGE + """
++source_request_bindingsは原文の特定の依頼節と、その節に対応した別々の対象です。同じclaim_ref内でもREQUESTER（依頼した人）、RECIPIENT（依頼を受けた人）、ACCEPTANCE（依頼の承諾）は別のtarget_refです。WRITTEN_ARGUMENTはその役割が明記されています。OMITTED_IN_CLAUSEはその節で受け手が省略されているだけです。NOT_ESTABLISHED_BY_REQUESTは依頼があったという節だけでは承諾は確定しない意味です。他の節や欄の記載を否定せず、原文全体を読んでください。未確定を別の対象へ移さず、既知の依頼者や依頼自体を不明にしないでください。この内部情報を説明せず、本人宛の自然な返事だけを返してください。"""
+         support = material.get("source_meaning_support")
+         if not (type(support) is dict and isinstance(support.get("witnesses"), list)
+                 and support["witnesses"]):
+@@ -76,7 +79,7 @@
+     return SYSTEM_MESSAGE
+ 
+ 
+-def material_with_meaning_support(material):
++def material_with_meaning_support(material, *, request_bindings=()):
+     """Add bounded source-role hints without dropping any admitted material.
+ 
+     Full witnesses remain the comparison reader's responsibility. Oversized
+@@ -86,6 +89,29 @@
+         from .natural_reply_meaning import SUPPORT_SCHEMA, prepare_meaning_support
+         full = prepare_meaning_support(material)
+         witnesses = full["generation_witnesses"]
++        request_rows = []
++        for index, binding in enumerate(request_bindings):
++            anchor = binding["source_slice"]
++            # A projection retains explicit claim-to-target correspondence.
++            # Long native refs remain in the private preparation result.
++            ref = "request_" + str(index)
++            request_rows.append({"claim_ref": ref, "原文": anchor["quote"],
++                "source_path": "current." + anchor["field_path"],
++                "scalar_start": anchor["scalar_start"], "scalar_end": anchor["scalar_end"],
++                "動作": "依頼があった", "時点": binding["relative_day"] or "過去",
++                "targets": [{"target_ref": ref + "." + row["dimension"],
++                    "claim_ref": ref, "dimension": row["dimension"],
++                    "status": row["status"], "entity": _written_role(row["entity"])}
++                    for row in binding["targets"]]})
++        if request_rows:
++            # These are finite admitted bindings, not a second author or a
++            # free-form model proposal. Never trim the person's source.
++            supported = {**material, "source_request_bindings": request_rows}
++            messages = [{"role": "system", "content": system_message_for(supported)},
++                        {"role": "user", "content": _compact_json(supported)}]
++            if len(_compact_json(messages).encode("utf-8")) <= MEANING_SUPPORT_MESSAGES_MAX_BYTES:
++                return supported
++            return material
+         selected = []
+ 
+         def compact_support(rows):
+@@ -225,7 +251,9 @@
+     # the original prompt/material; only an explicit research call adds hints.
+     # The independent post-generation reader still uses the original sources.
+     if use_meaning_support:
+-        material = material_with_meaning_support(material)
++        from .emlis_semantic_admission import prepare_natural_request_bindings
++        material = material_with_meaning_support(material,
++            request_bindings=prepare_natural_request_bindings(request))
+     return NaturalReplyInput(admitted.source_prefix_ref,
+         _compact_json(material)), safety
+ 

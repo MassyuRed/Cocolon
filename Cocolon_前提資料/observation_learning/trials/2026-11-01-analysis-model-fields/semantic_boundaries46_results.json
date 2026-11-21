@@ -1,0 +1,696 @@
+{
+  "status": "COMPLETE_RAW_READ_SEMANTIC_PROMPT_NOT_ADOPTED",
+  "api_commit": "dc05dc358d1c44ce47fd844f6041d74f1f74fe6a",
+  "source_checkpoint": "138753094ad27fa030f36d0a50930704ee833bcf",
+  "prompt_version": "semantic_boundaries.v2",
+  "before_prompt_version": "baseline.v1",
+  "plan_sha256": "79b7b671f1a82c5b09c0b19f1c2b7ff35b68d2445d2196e98e491f71c2cabc45",
+  "runner_sha256": "0ea0eb617b3e3a38c9a27766d552c3c3406b68b1dc2fcbe723cd6370ca126335",
+  "same_user_material_all46": true,
+  "only_system_append": true,
+  "new_generations": 46,
+  "reused_before": 46,
+  "model_loads": 1,
+  "training_updates": 0,
+  "process_seconds": 417.78063899697736,
+  "parent_seconds": 427.4157771640457,
+  "request_seconds": 23,
+  "max_seconds": 900,
+  "initial_weights_sha256": "73ee8d05a2e9be611df8654f4a583c87b3d27f266bedfe700f25f2d5325eae96",
+  "initial_config_sha256": "07262234563cbca51bfe75c3d6797b04cf89e7569f4cd0ee862e664ba5638685",
+  "source_weight_archive": "libfile_e120a914f9348191b7f065b419e1693b",
+  "source_weight_archive_version": 1,
+  "new_weights": false,
+  "prior_six_adapter_pairs_unchanged": true,
+  "gpu_compute_empty_at_exit": true,
+  "old34_raw_unchanged": 21,
+  "old34_raw_changed": 13,
+  "all46_raw_unchanged": 28,
+  "all46_raw_changed": 18,
+  "exact_a5_old34": 24,
+  "prior_regressions_exactly_restored_to_a5": [
+    "CQ03",
+    "MX02",
+    "MD02"
+  ],
+  "partial_repair": [
+    "OD01"
+  ],
+  "temporal_error_relabelled_not_full_success": [
+    "PQ02"
+  ],
+  "clear_new_semantic_regressions": [
+    "NV04",
+    "REHEARSAL_AT19",
+    "MD01",
+    "RC01"
+  ],
+  "actor_qualifier_omissions_with_actor_words_retained": [
+    "HQ03",
+    "MX01"
+  ],
+  "role_before": 3,
+  "role_after": 2,
+  "role_total": 4,
+  "teacher_role_before": 4,
+  "teacher_role_after": 2,
+  "teacher_role_total": 4,
+  "role_positive_losses": [
+    "R03",
+    "T01",
+    "T03"
+  ],
+  "role_unresolved": [
+    "R01"
+  ],
+  "after_admitted_role_ids": [
+    "R02",
+    "R04",
+    "T02",
+    "T04"
+  ],
+  "all_after_roles_negative": true,
+  "scope_controls_not_promoted": [
+    "R05",
+    "R06",
+    "R07",
+    "R08"
+  ],
+  "teacher_json_reproduction": {
+    "AT4": {
+      "before": 4,
+      "after": 3,
+      "total": 4
+    },
+    "UQ2": {
+      "before": 2,
+      "after": 1,
+      "total": 2
+    },
+    "MX2": {
+      "before": 1,
+      "after": 1,
+      "total": 2
+    },
+    "OA2": {
+      "before": 2,
+      "after": 2,
+      "total": 2
+    },
+    "SC6": {
+      "before": 6,
+      "after": 6,
+      "total": 6
+    },
+    "RC2": {
+      "before": 2,
+      "after": 1,
+      "total": 2
+    },
+    "T4": {
+      "before": 4,
+      "after": 2,
+      "total": 4
+    }
+  },
+  "teacher_total_before": 21,
+  "teacher_total_after": 16,
+  "teacher_total": 22,
+  "teacher_reproduction_is_not_general_semantic_accuracy": true,
+  "saved_responses": 92,
+  "candidate_files_restored": 86,
+  "candidate_rejections_preserved": 6,
+  "role_files_restored": 11,
+  "role_rejections_preserved": 13,
+  "saved_reader_engine_both_compilers_both_authors_forbidden": true,
+  "replay_model_loads": 0,
+  "replay_new_generations": 0,
+  "replay_training_updates": 0,
+  "original_export_members": 400,
+  "completed_collection_logs": 2,
+  "derived_reference_files": 1,
+  "targeted_tests_passed": 666,
+  "targeted_tests_skipped": 2,
+  "targeted_tests_existing_warnings": 1,
+  "targeted_tests_seconds": 114.14,
+  "pretest_launcher_syntax_failures": 2,
+  "pretest_launcher_setup_pytest_generation_updates": 0,
+  "resumed_without_duplicate_run": true,
+  "retry": false,
+  "extra_epoch": false,
+  "raw_repair": false,
+  "receiver_relaxation": false,
+  "evaluation_scope": "TRAINED_OR_SEEN_SYNTHETIC_DEVELOPMENT_NOT_BLIND_NOT_MASH_TEACHING",
+  "normal_adoption": false,
+  "new_prompt_adopted": false,
+  "default_prompt_unchanged": true,
+  "normal_ensure_http_db_rn_deploy_unchanged": true,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "product_credit": 0,
+  "structure_map_delta": "PRESENT_PRIVATE_PROMPT_STATE_ONLY_GENERATION_COMPARISON_NONE",
+  "historical_hourly_usd": 0.58,
+  "historical_process_cost_usd": 0.067309102949513,
+  "current_price_freshly_checked": false,
+  "next_direct_work": "Keep original source-authored74 targets and prior outcomes; align the actual learning input with role copula/polarity and old semantic preservation before fixing one next learning condition. Do not repeat system-only wording trials or label model raw as teaching. General judgment/choice, recurrence/change and normal cumulative connection remain open.",
+  "cases": [
+    {
+      "probe_id": "AF01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "NV04",
+      "raw_unchanged": false,
+      "admission": "REJECTED",
+      "rejection_reason": "analysis_quoted_parent_units_parent_ambiguous_or_missing",
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "REHEARSAL_AT17",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "REHEARSAL_AT19",
+      "raw_unchanged": false,
+      "admission": "REJECTED",
+      "rejection_reason": "analysis_model_units_carrier_invalid",
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        false
+      ],
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "REHEARSAL_AT21",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "REHEARSAL_AT29",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "CQ03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "CQ04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SQ01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SQ03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "PQ01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "PQ02",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "UQ01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        false
+      ],
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "UQ02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "HQ03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "HQ04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "MX01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        false
+      ],
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "MX02",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        false,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "MD01",
+      "raw_unchanged": false,
+      "admission": "REJECTED",
+      "rejection_reason": "analysis_quoted_parent_units_parent_ambiguous_or_missing",
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "MD02",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "OA01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "OA02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "OD01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "OD02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SC01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SC02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SC03",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SC04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SC05",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SC06",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SD01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "SD02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "RC01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        false
+      ],
+      "exact_a5_reversion": false
+    },
+    {
+      "probe_id": "RC02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": null,
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": true
+    },
+    {
+      "probe_id": "R01",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_qualifier_mismatch",
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "RETURNED",
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_qualifier_mismatch",
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "RETURNED",
+      "role_rejection_reason": null,
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R05",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_scope_unsupported",
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R06",
+      "raw_unchanged": false,
+      "admission": "REJECTED",
+      "rejection_reason": "analysis_model_units_carrier_invalid",
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_model_units_carrier_invalid",
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R07",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_scope_unsupported",
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "R08",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_scope_unsupported",
+      "teacher_before_after": null,
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "T01",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_qualifier_mismatch",
+      "teacher_before_after": [
+        true,
+        false
+      ],
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "T02",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "RETURNED",
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "T03",
+      "raw_unchanged": false,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "REJECTED",
+      "role_rejection_reason": "analysis_written_role_qualifier_mismatch",
+      "teacher_before_after": [
+        true,
+        false
+      ],
+      "exact_a5_reversion": null
+    },
+    {
+      "probe_id": "T04",
+      "raw_unchanged": true,
+      "admission": "RETURNED",
+      "rejection_reason": null,
+      "role_admission": "RETURNED",
+      "role_rejection_reason": null,
+      "teacher_before_after": [
+        true,
+        true
+      ],
+      "exact_a5_reversion": null
+    }
+  ],
+  "private_archive": {
+    "filename": "cocolon-analysis-semantic-boundaries46-result-20261103.zip",
+    "bytes": 747227,
+    "sha256": "25603cc4acfc34eb70aacab396091187e0d3d4a7d2a8261237928d3b15a6f1a2",
+    "members": 409,
+    "original_source_members": 402,
+    "derived_reference_members": 1,
+    "review_recovery_helper_and_manifest_members": 6,
+    "new_weights": false,
+    "library_file_id": "libfile_933d01e1c04c8191a3aec76fe9ba0e63",
+    "url": "https://chatgpt.com/library?file_id=libfile_933d01e1c04c8191a3aec76fe9ba0e63&account_id=personal",
+    "current_version_number": 0
+  }
+}

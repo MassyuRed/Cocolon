@@ -1,0 +1,34 @@
+{
+  "status": "CPU_STATIC_FIT8_READY_NO_MODEL",
+  "optimizer_steps": 8,
+  "training_order": [
+    "AUX-A-FT-BOOK-AFTER-ANSWER",
+    "AUX-B-FT-BOOK-AFTER-ANSWER",
+    "AUX-A-FT-SHOP-AFTER-ANSWER",
+    "AUX-B-FT-SHOP-AFTER-ANSWER",
+    "AUX-A-FT-BOOK-AFTER-ANSWER",
+    "AUX-B-FT-BOOK-AFTER-ANSWER",
+    "AUX-A-FT-SHOP-AFTER-ANSWER",
+    "AUX-B-FT-SHOP-AFTER-ANSWER"
+  ],
+  "frozen_auxiliary_rows": 4,
+  "original19_and_eval_unchanged": true,
+  "pretrained_model_loads": 0,
+  "model_forwards": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "initial_adapter_sha256": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4",
+  "model_calls_planned": 6,
+  "all_inputs_unchanged": true,
+  "runtime_check_performed": false,
+  "seconds": 0.025731945000188716,
+  "execution_disabled_refusal_verified": true,
+  "prior_bundle_all_bytes_unchanged": true,
+  "import_loaded_no_torch": true,
+  "source_compile": true,
+  "source_sha256": {
+    "prepare_fit8.py": "f6f32d37c3403d45baf00ddba63ef486750aa88b7e2442844821eabb2875dae3",
+    "consume_fit8.py": "a70c7dbf7415c747b38903c54ffc4dcc8bcd38f5f1595af4bbca7dcb0b54eb6f",
+    "run_fit8.py": "1240bbe71fefd69e6cca6fa0231f5afbf6f82b71ec50f60851338191952a6bd2"
+  }
+}

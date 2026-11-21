@@ -1,0 +1,364 @@
+{
+  "schema": "cocolon.native15_continuation30.new6_content_review.v1",
+  "status": "FULL_RAW_READ_AND_FINAL_CONSUMER_RECONCILED",
+  "review": "root integration of all original files and new6_content_review read-only agent; not formal Pro/Ultra/human acceptance",
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "afac6be0e91b370268a0ea7f78193d0cba2a38e7b7aeeea7465e666f94d48552",
+    "adapter_model.safetensors": "dd1188e8d715cf2d7bb1479c5c2158a0ecc98a9355d80f3d94510736bddc317b"
+  },
+  "eos_count": 3,
+  "json_parsed_count": 3,
+  "meaning_adopted_count": 2,
+  "body_available_count": 0,
+  "baseline_1d": {
+    "eos": 6,
+    "json_parsed": 6,
+    "meaning": 2,
+    "body": 0
+  },
+  "previous_228": {
+    "eos": 4,
+    "json_parsed": 3,
+    "meaning": 1,
+    "body": 0
+  },
+  "records": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "teacher_line": 10,
+      "source_origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "raw_utf8_sha256": "cbbcd02eab29f8ce020b05e1f43f2c2bbc33fddbd89d890bf1f682ef713de77f",
+      "output_tokens": 1040,
+      "eos": true,
+      "json_parsed": true,
+      "parse_error": null,
+      "source_expected_reading": "本返却遅延/謝罪、大丈夫と言われたことと残る気がかりを併存。本人の安心は未記載。",
+      "findings": [
+        "4claim/2relation/6引用は教師と一致。unknown_id/問いtargetはremaining_concernへ変わりclaim IDと同名。CMEEはmodel_v3_unknown_not_source_boundでHOLD。",
+        "未記載の安心を補い、受け取りが本人へ向けた自然文になっていない。初期1dの本文内の問いが消えた局所差はあるが安心補完は残る。"
+      ],
+      "raw_text_equal_initial_1d": false,
+      "actual_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "late_return",
+              "apologize",
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "遅れた本の返却と謝罪、そして「大丈夫」という安心感を受け取りました。しかし、その後も少し気になります。",
+        "reception": "「大丈夫」と言われたことと、まだ少し気になっていることを共有します。",
+        "update_note": null
+      },
+      "evidence": [
+        {
+          "literal": "安心感を受け取りました",
+          "raw_char0": 3093,
+          "occurrences": 1
+        },
+        {
+          "literal": "ことを共有します",
+          "raw_char0": 3162,
+          "occurrences": 1
+        }
+      ],
+      "consumer_overlay": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "HOLD",
+        "reason_code": "model_v3_unknown_not_source_bound",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "body_reason_codes": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+      }
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "teacher_line": 11,
+      "source_origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "raw_utf8_sha256": "f1fe60dc01172cca3b53d5205cbb94d4ea99d274713ac070ab251a8f446c5c62",
+      "output_tokens": 3712,
+      "eos": false,
+      "json_parsed": false,
+      "parse_error": "Unterminated string starting at: line 1 column 7848 (char 7847)",
+      "source_expected_reading": "返却時期の自己発言/遅れる認識/非連絡の事実/返却/反実振返り/現在の気がかりを分離。教師は6 ADDとGAP解消。",
+      "findings": [
+        "surface前prefixは初期1dと同一。late_awarenessに非連絡までまとめ、no_contactへ反実振返り全文をNEGATEDで割り当てる誤読が残る。",
+        "update_refs7個らしい断片だけで、updates/evidence/reception/update_noteへ未到達。初期1dのEOS/JSONから反復打切りへ退行。"
+      ],
+      "raw_text_equal_initial_1d": false,
+      "actual_surface": null,
+      "evidence": [
+        {
+          "literal": "\"claim_id\":\"no_contact\"",
+          "raw_char0": 3805,
+          "occurrences": 1
+        },
+        {
+          "literal": "気になられていて、また、",
+          "raw_char0": 7865,
+          "occurrences": 237
+        }
+      ],
+      "consumer_overlay": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "receipt_status": "TOKEN_LIMIT",
+        "body_reason_codes": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "teacher_line": 12,
+      "source_origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "raw_utf8_sha256": "bcb6b8789c78942aa6891697b6cc24bd4185bb221e69575a5f739c4b6caabea1",
+      "output_tokens": 1093,
+      "eos": true,
+      "json_parsed": true,
+      "parse_error": null,
+      "source_expected_reading": "喜びと少し置いていかれたような本人知覚を併存し、理由を補わない。",
+      "findings": [
+        "意味/6引用は初期1dと同じ。今回本文とreception bindingに喜びが復旧。",
+        "観測内で既述の感覚を問い直し、開店の異体表記と近い復唱を二節で繰り返す。前228の内部説明/注意喚起は消えたが本文成立ではない。"
+      ],
+      "raw_text_equal_initial_1d": false,
+      "actual_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。",
+        "reception": "お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれた気がしたのですね。",
+        "update_note": null
+      },
+      "evidence": [
+        {
+          "literal": "友人の开店",
+          "raw_char0": 3058,
+          "occurrences": 1
+        },
+        {
+          "literal": "少し置いていかれた気がしたのですか",
+          "raw_char0": 3099,
+          "occurrences": 1
+        }
+      ],
+      "consumer_overlay": {
+        "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+        "meaning_adopted": true,
+        "body_available": false,
+        "decision": null,
+        "reason_code": null,
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "body_reason_codes": [
+          "model_surface_not_validated"
+        ],
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "teacher_line": 13,
+      "source_origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "raw_utf8_sha256": "47320351dbfc1e230a8676685a14dbada4149e2fb29b3c688ec031553b14f171",
+      "output_tokens": 3712,
+      "eos": false,
+      "json_parsed": false,
+      "parse_error": "Expecting ',' delimiter: line 1 column 3845 (char 3844)",
+      "source_expected_reading": "共同準備/約束の両否定、友人側の実現という本人知覚、共有した頃からの距離、喜び/寂しさを保つ。教師は7 ADDとGAP解消。",
+      "findings": [
+        "no_promise/実現/距離の字面の対応には初期1dからの局所改善が見えるが、claim_id直後のコロンとobjectでJSON不正。",
+        "update_refsは2個、対応updates配列なし。answer_concessionも未成立。観測文の反復でreception/更新/引用表へ未到達。初期1d/前228のEOSから退行。"
+      ],
+      "raw_text_equal_initial_1d": false,
+      "actual_surface": null,
+      "evidence": [
+        {
+          "literal": "\"claim_id\":\"perceived_realization\":",
+          "raw_char0": 3810,
+          "occurrences": 1
+        },
+        {
+          "literal": "二人で話していた未来が、友人の方ではもう現実になっていたんだなと、",
+          "raw_char0": 7865,
+          "occurrences": 97
+        }
+      ],
+      "consumer_overlay": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "receipt_status": "TOKEN_LIMIT",
+        "body_reason_codes": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+      }
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "teacher_line": 14,
+      "source_origin": "KAREN_NEW_FICTITIOUS_SUPPLEMENT",
+      "raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+      "output_tokens": 967,
+      "eos": true,
+      "json_parsed": true,
+      "parse_error": null,
+      "source_expected_reading": "叔父が説明し、本人が説明してもらって最後まで聞いた。理解と安心を保持する。",
+      "findings": [
+        "意味/引用/bindingは教師同一だが、説明する/されると聞く/聞かせるを二重に反転する。受け取りは観測の誤りを相殺しない。",
+        "raw_text全文/UTF8 SHAが初期1dと一致。adapter/time metadataを含むraw record file全体の一致ではない。前228の聞いたへの局所改善も失われた。"
+      ],
+      "raw_text_equal_initial_1d": true,
+      "actual_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "guidance_received",
+              "listened_to_end"
+            ],
+            "relation_refs": [
+              "action_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "understood_method",
+              "relief"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "叔父に植え替えの手順を説明し、最後まで聞かせたのですね。",
+        "reception": "やり方が分かって、安心したと聞けて、よかったです。",
+        "update_note": null
+      },
+      "evidence": [
+        {
+          "literal": "叔父に植え替えの手順を説明し、最後まで聞かせたのですね。",
+          "raw_char0": 2901,
+          "occurrences": 1
+        }
+      ],
+      "consumer_overlay": {
+        "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+        "meaning_adopted": true,
+        "body_available": false,
+        "decision": null,
+        "reason_code": null,
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "body_reason_codes": [
+          "model_surface_not_validated"
+        ],
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "teacher_line": 15,
+      "source_origin": "KAREN_NEW_FICTITIOUS_SUPPLEMENT",
+      "raw_utf8_sha256": "41157550133f8de343a675e9617194917b443466a2977058538bba5d82018f32",
+      "output_tokens": 3712,
+      "eos": false,
+      "json_parsed": false,
+      "parse_error": "Unterminated string starting at: line 1 column 2563 (char 2562)",
+      "source_expected_reading": "面倒さ/少しのさみしさ、両者のつながりが本人にも不明という対象付き明示不明を保持。関係0。",
+      "findings": [
+        "surface前prefixは初期1dと同一。4claim断片/relations0があってもunknowns配列は未出力。",
+        "観測の列挙/私側の安心、Receptionの話者混線と未記載の距離/過去離脱を補い、反復で閉じられない。初期1dのEOS/JSONから退行。前228の早期形式破損は弱まっても全文成立ではない。"
+      ],
+      "raw_text_equal_initial_1d": false,
+      "actual_surface": null,
+      "evidence": [
+        {
+          "literal": "聞けて安心しました",
+          "raw_char0": 2538,
+          "occurrences": 1
+        },
+        {
+          "literal": "距離を置いて、過去から離れて",
+          "raw_char0": 2631,
+          "occurrences": 1
+        },
+        {
+          "literal": "私の方で、",
+          "raw_char0": 2563,
+          "occurrences": 734
+        }
+      ],
+      "consumer_overlay": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "meaning_adopted": false,
+        "body_available": false,
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "receipt_status": "TOKEN_LIMIT",
+        "body_reason_codes": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+      }
+    }
+  ],
+  "limitations": [
+    "After-answer prior is frozen teacher prior, not a dynamic model thread.",
+    "Known-teacher FIT only, teacher is not formally human-accepted product gold.",
+    "No long verbatim system instruction observed in the six raw strings; several sections were not reached, so this is not leak-resolution proof.",
+    "Initial/loss/LR changed together; no single-factor causal claim.",
+    "Additional observation session is not needed before repairing these existing-teacher failures."
+  ],
+  "raw_repairs": 0,
+  "agent_writes": 0,
+  "additional_model_calls": 0,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}

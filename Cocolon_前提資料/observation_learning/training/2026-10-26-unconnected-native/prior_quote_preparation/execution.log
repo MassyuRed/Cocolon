@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/cocolon_prior_quote_pack_20261027/check_cpu.py", line 80, in <module>
+    parser=argparse.ArgumentParser();parser.add_argument('--pack',type=Path,required=True);main(parser.parse_args().pack)
+                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_prior_quote_pack_20261027/check_cpu.py", line 61, in main
+    target=[x for x in encoded['labels'] if x!=-100]
+                       ~~~~~~~^^^^^^^^^^
+TypeError: tuple indices must be integers or slices, not str

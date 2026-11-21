@@ -1,0 +1,15 @@
+........................................................................ [ 17%]
+........................................................................ [ 35%]
+........................................................................ [ 52%]
+................................................................................................................................................................................................       [100%]
+=============================== warnings summary ===============================
+ai/services/ai_inference/api_emotion_submit.py:919
+  /workspace/scratch/5be2f3c58d61/mashos-api/ai/services/ai_inference/api_emotion_submit.py:919: PydanticDeprecatedSince20: Pydantic V1 style `@root_validator` validators are deprecated. You should migrate to Pydantic V2 style `@model_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @root_validator(pre=True)
+
+../../ee70446ad6c2/testvenv/lib/python3.12/site-packages/starlette/testclient.py:51
+  /workspace/scratch/ee70446ad6c2/testvenv/lib/python3.12/site-packages/starlette/testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+408 passed, 2 warnings, 738 subtests passed in 40.08s

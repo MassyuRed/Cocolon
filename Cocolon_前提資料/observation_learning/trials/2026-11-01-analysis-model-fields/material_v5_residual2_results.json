@@ -1,0 +1,135 @@
+{
+  "status": "ONE_KNOWN_TEACHER_REPAIR_WITH_NEW_QUALIFIER_REGRESSION_NOT_ADOPTED",
+  "date_jst": "2026-11-05",
+  "plan_commit": "ace8b762bf0000ab6430f694fba582d69756b41a",
+  "weekly_section": 177,
+  "trial_readme_section": 141,
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "profile": "selected_material.v5",
+  "runner_sha256": "b38127a4c99b95f8e3d38ed5119f67b52425a8a8d6178c2ee3b3317573fc4118",
+  "parent_archive_id": "libfile_9d7f177b15f081918f764beccdc72700",
+  "research_initial_weights_sha256": "811a33ee11a57ba55a279838aeec84b84fd0d1450ebb04b15403136578ffdf8b",
+  "research_initial_config_sha256": "343ee81f0a3596dd18fcfb3f2817576537a5d56700307557edd806083e3a4422",
+  "all16_pack_encoded_unchanged": true,
+  "diagnostic_forwards": 4,
+  "active_ids": [
+    "RU02",
+    "AT24"
+  ],
+  "removed_resolved_branch_terms": [
+    "AT11",
+    "AT17"
+  ],
+  "objective": "All16 unchanged full-target mean CE; coefficient1 correct first-divergence teacher-token CE only on measured residual RU02/AT24. Fresh AdamW, not optimizer-state resume.",
+  "model_loads": 3,
+  "updates": 16,
+  "measurement_forwards": 32,
+  "new_generations": 30,
+  "reused_before_responses": 30,
+  "same_pod_runtime_comparison": true,
+  "seconds": 648.501540184021,
+  "stage_exits": [
+    {
+      "phase": "train",
+      "exit": 0
+    },
+    {
+      "phase": "after",
+      "exit": 0
+    }
+  ],
+  "cpu_seconds": 14.15554237831384,
+  "before_candidate": 30,
+  "after_candidate": 30,
+  "before_typed": 19,
+  "after_typed": 19,
+  "prior_graph_and_visible_preserved": 19,
+  "new_typed": [],
+  "lost_typed": [],
+  "raw_same": 28,
+  "raw_changed_ids": [
+    "YREASON01",
+    "AT24"
+  ],
+  "semantic_repairs": [
+    "AT24"
+  ],
+  "prior_teacher_values_preserved": [
+    "AT04",
+    "AT11",
+    "AT17"
+  ],
+  "partial_changes": [
+    "YREASON01_TWO_WRONG_MODIFIERS_REMOVED"
+  ],
+  "remaining_errors": [
+    "YREASON01_REASON_MARKER_MISSING",
+    "YREASON01_ATTRIBUTIVE_NEGATION_QUALIFIER_MISSING"
+  ],
+  "new_candidate_semantic_regressions": [
+    "YREASON01_ATTRIBUTIVE_NEGATION_QUALIFIER_DROPPED"
+  ],
+  "negative_source_quote_preserved": true,
+  "new_visible_graph_regressions": [],
+  "teacher_json_matching": {
+    "RU02": false,
+    "AT04": true,
+    "AT11": true,
+    "AT17": true,
+    "AT24": true
+  },
+  "branch_ce_before": {
+    "RU02": 2.206451416015625,
+    "AT24": 2.508896827697754
+  },
+  "branch_ce_after": {
+    "RU02": 0.573882520198822,
+    "AT24": 0.5772112607955933
+  },
+  "branch_probability_after": {
+    "RU02": 0.5633340316047583,
+    "AT24": 0.5614619562993767
+  },
+  "teacher_nll_before": 0.003620820200012531,
+  "teacher_nll_after": 0.0015147032102049707,
+  "reason_first_character_divergence_before": 247,
+  "reason_first_character_divergence_after": 237,
+  "reason_branch_observation": "Latest raw closes qualifiers after RELATIVE_TIME before the previously targeted kind choice. Improved conditional teacher-prefix probability does not prove that free generation reaches that prefix; character offsets are not original generated token IDs.",
+  "causal_limit": "Research initial and active subset both differ from previous trial. Removal of repaired-row terms has no isolated causal attribution.",
+  "known_teacher_replay_not_unseen_transfer": true,
+  "saved_replay": {
+    "responses": 60,
+    "candidate": 60,
+    "typed": 38,
+    "generation_compiler_author_forbidden": true,
+    "projection_sidecar_matches": true
+  },
+  "initial_weights_unchanged": true,
+  "new_weights_sha256": "0587db632df33896d853191816106f13ef41e91440f19fdf08025f587ac3e99f",
+  "new_config_sha256": "a36e96af06b79cf1b2b9b36b528ee06b05cf82d21b7b4872f25d2d07aa9d0269",
+  "archive": {
+    "library_file_id": "libfile_70c4e57dc7b881919451c025885fcdc5",
+    "file_name": "Cocolon_Analysis_v5_residual2_20261105.zip",
+    "bytes": 15152848,
+    "sha256": "84c9ce77f3d46ac8fe3d7607ea64381ada1339f46c0c70efc555338de501669b",
+    "members": 375,
+    "manifest_members": 374,
+    "crc_all_bytes_sha_verified": true,
+    "parent_dependencies_retrieved_separately": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_code_change": false,
+  "deployment": false,
+  "db_write": false,
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "gpu_end": {
+    "memory": "2 MiB",
+    "utilization": "0 %",
+    "compute_processes": 0,
+    "pod_rental_maintained": true
+  },
+  "next_work": "Do not repeat the same single-token branch strengthening. Preserve explicit reason marker and attributive negation together in the existing teacher and assess full generation. Mixed-source typed meaning needs attribution, residual-scope display and saved-reader contracts within existing owners before normal cumulative connection."
+}

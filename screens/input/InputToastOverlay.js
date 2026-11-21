@@ -13,7 +13,7 @@ export default function InputToastOverlay({ message, styles, colors }) {
           color={colors.TITLE_GOLD}
           style={{ marginRight: 8 }}
         />
-        <Text style={styles.toastText} numberOfLines={3}>
+        <Text style={styles.toastText}>
           {message}
         </Text>
       </View>

@@ -30,9 +30,9 @@ const EMOTION_LABELS = Object.freeze(
 );
 
 const REPORT_LABELS = Object.freeze({
-  daily: "こころ天気（日）",
-  weekly: "こころ天気（週）",
-  monthly: "こころ天気（月）",
+  daily: "こころグラフ（日）",
+  weekly: "こころグラフ（週）",
+  monthly: "こころグラフ（月）",
 });
 
 const KOKORO_WEATHER_VERSION_KEYS = Object.freeze([
@@ -322,12 +322,22 @@ export function formatDominantEmotion(dominantEmotion) {
 export const formatKokoroDominantEmotion = formatDominantEmotion;
 
 export function getKokoroWeatherReportLabel(reportType) {
-  return REPORT_LABELS[asString(reportType, "")] || "こころ天気";
+  return REPORT_LABELS[asString(reportType, "")] || "こころグラフ";
 }
 
 export function buildKokoroWeatherDetailTitle(item, reportType = "") {
   const normalized = item?.raw ? item : normalizeKokoroWeatherItem(item || {});
   const label = asString(normalized?.label, "この期間");
-  if (String(reportType || "") === "daily") return `${label} のこころ天気`;
-  return `${label} のこころ天気`;
+  if (String(reportType || "") === "daily") return `${label} のこころグラフ`;
+  return `${label} のこころグラフ`;
+}
+
+// Saved artifacts retain their original title; normalize only the known feature name for display.
+export function formatKokoroGraphTitle(title, fallback = "こころグラフ") {
+  return asString(title, fallback).replace(/こころ天気図|こころ天気/g, "こころグラフ");
+}
+
+export function formatKokoroGraphText(text) {
+  // Only a generated heading at the start is a feature name, never an occurrence in the body.
+  return String(text ?? "").replace(/^(\s*)こころ天気(?=（[日週月]）[:：])/, "$1こころグラフ");
 }

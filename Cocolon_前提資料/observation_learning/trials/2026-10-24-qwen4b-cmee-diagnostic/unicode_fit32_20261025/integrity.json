@@ -1,0 +1,8 @@
+{
+  "archive_sha256": "439547199bccdb625c41a961639dbfa1d774711b26893cf7fccee7497607133c",
+  "members_verified": 24,
+  "adapter_tensors": 32,
+  "all_tensors_finite": true,
+  "source_script_sha256": "5ffb0983e961e4a548b799324e840af6264fdf1c7a96777fe892beb14b26c26a",
+  "raw_bytes_unmodified": true
+}

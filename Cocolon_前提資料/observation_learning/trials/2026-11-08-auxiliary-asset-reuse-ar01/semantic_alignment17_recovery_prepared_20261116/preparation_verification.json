@@ -1,0 +1,15 @@
+{
+  "state": "OFFLINE_RECOVERY_PREPARATION_NOT_REMOTE_PREFLIGHT_PASS",
+  "python_compile": 2,
+  "B6_all_functions_and_embedded_driver_unchanged": true,
+  "fresh_A6_B6_roots_bound": true,
+  "original_plan_and_driver_unchanged": true,
+  "existing_client_reference_matches_read_only_receipt": true,
+  "client_files": 408,
+  "payload_files": 2,
+  "payload_bytes": 46542,
+  "new_model_calls": 0,
+  "training": 0,
+  "remote_A6_preflight_calls": 0,
+  "remote_A6_or_B6_launches": 0
+}

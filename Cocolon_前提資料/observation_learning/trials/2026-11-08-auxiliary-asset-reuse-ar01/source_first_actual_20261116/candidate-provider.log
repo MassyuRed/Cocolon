@@ -1,0 +1,37 @@
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   1%|          | 8/723 [00:00<00:09, 79.35it/s]Loading weights:   6%|▋         | 46/723 [00:00<00:02, 238.03it/s]Loading weights:  12%|█▏        | 89/723 [00:00<00:02, 312.03it/s]Loading weights:  17%|█▋        | 120/723 [00:00<00:02, 300.50it/s]Loading weights:  22%|██▏       | 158/723 [00:00<00:01, 324.80it/s]Loading weights:  28%|██▊       | 201/723 [00:00<00:01, 354.31it/s]Loading weights:  34%|███▍      | 248/723 [00:00<00:01, 385.60it/s]Loading weights:  40%|███▉      | 287/723 [00:00<00:01, 383.91it/s]Loading weights:  46%|████▌     | 330/723 [00:00<00:00, 395.92it/s]Loading weights:  51%|█████     | 370/723 [00:01<00:00, 378.55it/s]Loading weights:  57%|█████▋    | 413/723 [00:01<00:00, 389.99it/s]Loading weights:  82%|████████▏ | 590/723 [00:01<00:00, 789.08it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 542.36it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=tokenize monotonic=2342678.684
+analysis_generation_stage=constraint monotonic=2342678.731
+analysis_generation_stage=decode monotonic=2342678.736
+analysis_generation_stage=prefix_enter_0 monotonic=2342689.477
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2342689.484
+analysis_generation_stage=prefix_enter_128 monotonic=2342700.34
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_4 monotonic=2342700.345
+analysis_generation_stage=prefix_enter_256 monotonic=2342711.785
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_free_allowed_244501 monotonic=2342711.804
+analysis_generation_stage=prefix_enter_384 monotonic=2342724.892
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_244501 monotonic=2342724.912
+analysis_generation_stage=complete_stop monotonic=2342727.088
+analysis_generation_stage=special_count_1 monotonic=2342727.093
+analysis_generation_stage=tokenize monotonic=2342727.33
+analysis_generation_stage=constraint monotonic=2342727.347
+analysis_generation_stage=decode monotonic=2342727.352
+analysis_generation_stage=prefix_enter_0 monotonic=2342737.419
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2342737.677
+analysis_generation_stage=prefix_enter_128 monotonic=2342747.197
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_244501 monotonic=2342747.216
+analysis_generation_stage=prefix_enter_256 monotonic=2342757.847
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_3 monotonic=2342757.852
+analysis_generation_stage=prefix_enter_384 monotonic=2342770.645
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_other_allowed_4 monotonic=2342770.65
+analysis_generation_stage=prefix_enter_512 monotonic=2342782.404
+analysis_generation_stage=prefix_exit_512_JsonSchemaParser_free_allowed_244506 monotonic=2342782.425
+analysis_generation_stage=prefix_enter_640 monotonic=2342790.999
+analysis_generation_stage=prefix_exit_640_JsonSchemaParser_other_allowed_2 monotonic=2342791.004
+analysis_generation_stage=prefix_enter_768 monotonic=2342802.594
+analysis_generation_stage=prefix_exit_768_JsonSchemaParser_other_allowed_4 monotonic=2342802.599
+analysis_generation_stage=prefix_enter_896 monotonic=2342816.77
+analysis_generation_stage=prefix_exit_896_JsonSchemaParser_free_allowed_244502 monotonic=2342816.79
+analysis_generation_stage=complete_length monotonic=2342817.341
+analysis_generation_stage=special_count_0 monotonic=2342817.365

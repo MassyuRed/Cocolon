@@ -1,0 +1,21 @@
+{
+  "material_sha256": "59978e6c05ba3ef24a6e8eb990b1466e2bcb98d0d84d9a6a90fb4de30656a8d9",
+  "new_cases": 2,
+  "new_edges": 7,
+  "new_fields": 8,
+  "new_meanings": 12,
+  "new_model_calls": 0,
+  "new_nodes": 18,
+  "new_records": 4,
+  "new_units": 30,
+  "normal_adoption": false,
+  "old16_sources_and_targets_exact": true,
+  "reviewers": [
+    "root",
+    "candidate_audit",
+    "design_review"
+  ],
+  "source_commit": "5af8625599aa80f90c983cdec34144e88a133d1e",
+  "state": "AUTHOR_TEACHING_ADEQUATE_NOT_MODEL_QUALITY",
+  "unresolved_findings": []
+}

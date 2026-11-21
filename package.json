@@ -11,10 +11,11 @@
     "lint": "eslint .",
     "postinstall": "node ./scripts/postinstall.js",
     "test": "npm run test:rn-screens",
-    "test:rn-screens": "node --test tests/rn-screen-contracts.test.js"
+    "test:rn-screens": "node --test tests/rn-screen-contracts.test.js tests/iap-restore-purchases.test.js tests/theme-readability.test.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-native-camera-roll/camera-roll": "7.10.2",
     "@react-native-community/blur": "^4.4.1",
     "@react-native-community/slider": "4.5.7",
     "@react-native-firebase/app": "23.7.0",
@@ -27,6 +28,7 @@
     "@supabase/supabase-js": "2.56.1",
     "react": "18.3.1",
     "react-native": "0.77.3",
+    "react-native-file-access": "3.2.0",
     "react-native-gesture-handler": "2.25.0",
     "react-native-get-random-values": "^1.11.0",
     "react-native-html-to-pdf": "0.12.0",
@@ -36,11 +38,13 @@
     "react-native-reanimated": "3.17.0",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "4.11.1",
+    "react-native-share": "12.3.1",
     "react-native-svg": "15.12.1",
     "react-native-svg-transformer": "1.5.1",
     "react-native-tab-view": "3.5.2",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "10.3.0",
+    "react-native-view-shot": "5.1.1",
     "react-native-webview": "13.16.1"
   },
   "devDependencies": {

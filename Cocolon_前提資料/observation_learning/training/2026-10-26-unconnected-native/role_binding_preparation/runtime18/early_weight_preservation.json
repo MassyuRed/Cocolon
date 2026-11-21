@@ -1,0 +1,24 @@
+{
+  "stage": "EARLY_NOT_FINAL_RESULT",
+  "library_file_id": "libfile_e865770fd01c81918ddd3f8b34b5772c",
+  "library_version": 0,
+  "archive_bytes": 14575989,
+  "archive_sha256": "b94818b8ec222eb10fae7b55543d5def55dedfe317fabe04642edadb9a0e3b41",
+  "manifest_payload_count": 27,
+  "source_commit": "6c1cb777df34f3cc0ec8791d565fcb00b3e8756a",
+  "optimizer_steps_completed": 18,
+  "model_loads_completed": 2,
+  "model_calls_completed_at_snapshot": 1,
+  "changed_tensors": 112,
+  "tensor_count": 112,
+  "all_f32_finite": true,
+  "all_member_crc_hash_bytes_verified": true,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "a08f36c4b7f29abc7d85564e876ff7b90ce7fe6aa641ffe1b25fb56c908809db",
+    "adapter_model.safetensors": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19"
+  },
+  "product_credit": 0,
+  "note": "SHOP raw file was empty during generation and is not counted as complete; early snapshot does not replace final results.",
+  "terminal_input_identity_check": "PENDING"
+}

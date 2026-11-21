@@ -1,0 +1,22 @@
+{
+  "state": "FRESH_METADATA_READ_ONLY_NO_MUTATION",
+  "sampled_at": "2026-11-16T05:47:04.877Z",
+  "api": {
+    "deploy": "dep-dbsgn8t6e07s739qfk50",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "status": "live"
+  },
+  "worker": {
+    "deploy": "dep-dbsgnet6e07s739qg5a0",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "status": "live"
+  },
+  "database": {
+    "migrations": 38,
+    "latest": "20261115011424"
+  },
+  "new_deploys": 0,
+  "new_migrations": 0,
+  "personal_record_reads": 0,
+  "normal_rollout": 0
+}

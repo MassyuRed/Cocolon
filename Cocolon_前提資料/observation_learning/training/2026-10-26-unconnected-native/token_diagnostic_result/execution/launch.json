@@ -1,0 +1,23 @@
+{
+  "source_commit": "53984cdf58f745b1f891b1da2b9bc36145623884",
+  "plan_sha256": "2e826a4795b697f4bfd9202b9ee6f06b70ff0d93ad181b842ab50d17d806dbe6",
+  "status": "STARTED_ONCE",
+  "started_unix": 1793085002.1038582,
+  "retries": 0,
+  "optimizer_steps": 0,
+  "generations": 0,
+  "timeout_pid": 171619,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "890s",
+    "python",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027/run_token_diagnostic.py",
+    "--pack",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027",
+    "--execute",
+    "--source-commit",
+    "53984cdf58f745b1f891b1da2b9bc36145623884"
+  ]
+}

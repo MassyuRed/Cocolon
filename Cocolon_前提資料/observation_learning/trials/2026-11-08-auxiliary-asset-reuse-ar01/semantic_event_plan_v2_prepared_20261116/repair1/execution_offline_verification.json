@@ -1,0 +1,17 @@
+{
+  "GPU": 0,
+  "SQL_calls": 0,
+  "actual_tokenizer_preflight_calls": 0,
+  "dummy_scope_only": true,
+  "errors": 0,
+  "failures": 0,
+  "main_calls": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "runtime_ready_claim": false,
+  "scope_file_used": false,
+  "source_archive_sha256": "06f8e7f507b4f0d18ab6180d21c9b57b4139d9499ef4539bf1d5d01ae7775bad",
+  "state": "PASS_OFFLINE_BOUNDARIES_ONLY",
+  "tested_execution_sha256": "75254429efe91bf70654feb3c402d188e7106a4856d43562be1839b72ec62d5f",
+  "tests_run": 15
+}

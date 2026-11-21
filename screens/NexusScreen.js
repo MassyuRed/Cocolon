@@ -8,21 +8,23 @@ import React, {
 } from "react";
 import {
   Alert,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   View,
   useWindowDimensions,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
+import CocolonButton from "../components/CocolonButton";
 import { useTutorial } from "../TutorialContext";
 import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
+import { useAppRuntime } from "../AppRuntimeContext";
 import { useUnread } from "../UnreadContext";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
@@ -33,7 +35,6 @@ import {
   getNexusEmotionLogUnreadStatus,
   getNexusEmotionRanking,
   getNexusFollowingUsers,
-  getNexusRecommendUsers,
   deleteNexusPiece,
   getNexusPieces,
   getNexusPiecesUnreadStatus,
@@ -45,7 +46,6 @@ import NexusTodayEmotionSummary from "./nexus/NexusTodayEmotionSummary";
 import NexusTabBar from "./nexus/NexusTabBar";
 import NexusPieceFeedSection from "./nexus/NexusPieceFeedSection";
 import NexusEmotionLogSection from "./nexus/NexusEmotionLogSection";
-import NexusRecommendSection from "./nexus/NexusRecommendSection";
 import NexusHistorySection from "./nexus/NexusHistorySection";
 import NexusOwnerPickerModal from "./nexus/NexusOwnerPickerModal";
 import {
@@ -62,7 +62,6 @@ import {
 import {
   normalizeEmotionRankingItems,
   normalizeEmotionLogItems,
-  normalizeRecommendUsers,
   normalizeFollowListUsers,
   normalizeSavedPieces,
   normalizeTutorialPieceItems,
@@ -71,17 +70,22 @@ import {
 import {
   resolvePieceQInstanceId,
   resolvePieceQKey,
+  isPieceV2Post,
   resolvePieceOwnerUserId,
   buildResonanceHistoryItemFromPiece,
   sortHistoryItems,
 } from "./nexus/nexusHistoryModel";
 import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
+const EMPTY_EMOTION_LOG = { loading: false, loaded: false, items: [], error: "" };
+const LOADING_EMOTION_LOG = { ...EMPTY_EMOTION_LOG, loading: true };
+const LOADING_HISTORY = { loading: true, loadedModes: {}, order: null, resonances: [], error: "" };
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const { getFeatureUnread, setUnread } = useUnread();
-  const { user, initializing: authInitializing } = useAuth();
+  const { user, initializing: authInitializing, authOwnerGeneration } = useAuth();
+  const { isFeatureEnabled } = useAppRuntime();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
@@ -99,6 +103,26 @@ export default function NexusScreen({ navigation }) {
     () => String(user?.id || "").trim() || null,
     [user?.id]
   );
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(viewerUserId, authOwnerGeneration);
+  const canReadOwnPieces = !authInitializing && !!viewerUserId && !isTutorialMode &&
+    isFeatureEnabled("piece_v2_owner_read_enabled", false) === true;
+  const ownerHistoryEntry = useRef(null);
+  if (!ownerHistoryEntry.current || ownerHistoryEntry.current.owner !== viewerUserId ||
+      ownerHistoryEntry.current.enabled !== canReadOwnPieces) {
+    ownerHistoryEntry.current = { owner: viewerUserId, enabled: canReadOwnPieces };
+  }
+  const renderedOwnerHistoryEntry = ownerHistoryEntry.current;
+  const ownerHistoryMounted = useRef(false);
+  useEffect(() => {
+    ownerHistoryMounted.current = true;
+    return () => { ownerHistoryMounted.current = false; };
+  }, []);
+  const handleOpenOwnerHistory = useCallback(() => {
+    if (!ownerHistoryMounted.current || navigation?.isFocused?.() === false ||
+        ownerHistoryEntry.current !== renderedOwnerHistoryEntry ||
+        !renderedOwnerHistoryEntry.enabled) return;
+    navigation.navigate("PieceOwnerHistory", { savedPiece: null });
+  }, [navigation, renderedOwnerHistoryEntry]);
   const viewerDisplayName = useMemo(() => {
     const metadata = user?.user_metadata || {};
     return (
@@ -126,6 +150,25 @@ export default function NexusScreen({ navigation }) {
   const [ownerOptions, setOwnerOptions] = useState([]);
   const [pieceOrder, setPieceOrder] = useState(PIECE_ORDER_LATEST);
   const [historyOrder, setHistoryOrder] = useState(HISTORY_ORDER_LATEST);
+  const pieceReadScopeRef = useRef(null);
+  if (!pieceReadScopeRef.current || pieceReadScopeRef.current.owner !== ownerRequest ||
+      pieceReadScopeRef.current.filter !== ownerFilterMode || pieceReadScopeRef.current.target !== ownerFilterUserId ||
+      pieceReadScopeRef.current.order !== pieceOrder || pieceReadScopeRef.current.tutorial !== isTutorialMode ||
+      pieceReadScopeRef.current.tab !== activeTab) {
+    pieceReadScopeRef.current = { owner: ownerRequest, filter: ownerFilterMode, target: ownerFilterUserId,
+      order: pieceOrder, tutorial: isTutorialMode, tab: activeTab };
+  }
+  const pieceReadScope = pieceReadScopeRef.current;
+  const historyReadScopeRef = useRef(null);
+  if (!historyReadScopeRef.current || historyReadScopeRef.current.owner !== ownerRequest ||
+      historyReadScopeRef.current.order !== historyOrder || historyReadScopeRef.current.tutorial !== isTutorialMode ||
+      historyReadScopeRef.current.tab !== activeTab) {
+    historyReadScopeRef.current = { owner: ownerRequest, order: historyOrder, tutorial: isTutorialMode, tab: activeTab };
+  }
+  const historyReadScope = historyReadScopeRef.current;
+  const emotionLogReadScope = useMemo(() => ({ ownerRequest, activeTab, isTutorialMode }),
+    [ownerRequest, activeTab, isTutorialMode]);
+  const readSequences = useRef({ pieces: 0, history: 0, ranking: 0, owners: 0, emotions: 0 });
 
   const tutorialPieceItems = useMemo(
     () => normalizeTutorialPieceItems(tutorialPieces),
@@ -136,34 +179,25 @@ export default function NexusScreen({ navigation }) {
     tutorialStep >= PIECE_TUTORIAL_STEP_START &&
     tutorialStep <= PIECE_TUTORIAL_STEP_END;
 
-  const [rankingState, setRankingState] = useState({ loading: true, items: [] });
+  const [rankingState, setRankingState] = useState({ loading: true, items: [], error: "" });
   const [pieceState, setPieceState] = useState({
     loading: true,
     items: [],
     error: "",
   });
-  const [emotionLogState, setEmotionLogState] = useState({
-    loading: false,
-    loaded: false,
-    items: [],
-    error: "",
-  });
-  const [recommendState, setRecommendState] = useState({
-    loading: false,
-    loaded: false,
-    users: [],
-    error: "",
-  });
-  const [historyState, setHistoryState] = useState({
-    loading: false,
-    loadedModes: {},
-    order: null,
-    resonances: [],
-    error: "",
-  });
+  const [emotionLogResult, setEmotionLogState] = useState(null);
+  const emotionLogState = emotionLogResult?.scope === emotionLogReadScope
+    ? emotionLogResult
+    : !isTutorialMode && (authInitializing || viewerUserId) ? LOADING_EMOTION_LOG : EMPTY_EMOTION_LOG;
+  const [historyResult, setHistoryState] = useState(null);
+  const historyState = historyResult?.scope === historyReadScope ? historyResult : LOADING_HISTORY;
 
   const [resonanceSubmittingIds, setResonanceSubmittingIds] = useState({});
   const [pieceDeleteSubmittingIds, setPieceDeleteSubmittingIds] = useState({});
+  useEffect(() => {
+    setResonanceSubmittingIds({});
+    setPieceDeleteSubmittingIds({});
+  }, [ownerRequest]);
 
   const baseOwnerOptions = useMemo(() => {
     if (!viewerUserId) return [];
@@ -270,13 +304,15 @@ export default function NexusScreen({ navigation }) {
   }, [emotionLogState.items]);
 
   const refreshPieceUnreadState = useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return null;
     if (isTutorialMode) {
       setUnread("Piece", "piecesNew", false);
       return false;
     }
 
     try {
-      const json = await getNexusPiecesUnreadStatus();
+      const json = await getNexusPiecesUnreadStatus(ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return null;
       const hasUnread =
         typeof json?.has_unread === "boolean"
           ? json.has_unread
@@ -289,9 +325,10 @@ export default function NexusScreen({ navigation }) {
       console.warn("NexusScreen: refreshPieceUnreadState failed", e);
       return null;
     }
-  }, [isTutorialMode, setUnread]);
+  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
 
   const refreshEmotionLogUnreadState = useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return null;
     if (isTutorialMode) {
       setUnread("EmotionLog", "feed", false);
       setUnread("EmotionLog", "requests", false);
@@ -299,7 +336,8 @@ export default function NexusScreen({ navigation }) {
     }
 
     try {
-      const json = await getNexusEmotionLogUnreadStatus();
+      const json = await getNexusEmotionLogUnreadStatus(ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return null;
       const nextFeed = !!json?.feed_unread;
       const nextRequests = !!json?.requests_unread;
       setUnread("EmotionLog", "feed", nextFeed);
@@ -309,7 +347,7 @@ export default function NexusScreen({ navigation }) {
       console.warn("NexusScreen: refreshEmotionLogUnreadState failed", e);
       return null;
     }
-  }, [isTutorialMode, setUnread]);
+  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
 
   const refreshNexusUnreadState = useCallback(async () => {
     await Promise.all([
@@ -319,6 +357,9 @@ export default function NexusScreen({ navigation }) {
   }, [refreshEmotionLogUnreadState, refreshPieceUnreadState]);
 
   const loadOwnerOptions = useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++readSequences.current.owners;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.owners;
     if (isTutorialMode || authInitializing || !viewerUserId) {
       setOwnerOptions([]);
       setOwnerOptionsLoading(false);
@@ -328,7 +369,8 @@ export default function NexusScreen({ navigation }) {
     setOwnerOptions(baseOwnerOptions);
     setOwnerOptionsLoading(true);
     try {
-      const json = await getNexusFollowingUsers(viewerUserId, 1000);
+      const json = await getNexusFollowingUsers(viewerUserId, 1000, ownerRequest.options);
+      if (!isFresh()) return;
       const followUsers = normalizeFollowListUsers(json);
       const followOptions = followUsers
         .filter((followUser) => followUser.id !== viewerUserId)
@@ -342,31 +384,38 @@ export default function NexusScreen({ navigation }) {
 
       setOwnerOptions([...baseOwnerOptions, ...followOptions]);
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("NexusScreen: loadOwnerOptions failed", e);
       setOwnerOptions(baseOwnerOptions);
     } finally {
-      setOwnerOptionsLoading(false);
+      if (isFresh()) setOwnerOptionsLoading(false);
     }
-  }, [authInitializing, baseOwnerOptions, isTutorialMode, viewerUserId]);
+  }, [authInitializing, baseOwnerOptions, isTutorialMode, viewerUserId, ownerRequest, isOwnerCurrent]);
 
 
   const loadRanking = useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++readSequences.current.ranking;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.ranking;
     if (isTutorialMode) {
       setRankingState({ loading: false, items: [] });
       return;
     }
 
     try {
-      const json = await getNexusEmotionRanking(3, "day");
+      const json = await getNexusEmotionRanking(3, "day", ownerRequest.options);
+      if (!isFresh()) return;
       setRankingState({
         loading: false,
         items: normalizeEmotionRankingItems(json),
+        error: "",
       });
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("NexusScreen: loadRanking failed", e);
-      setRankingState({ loading: false, items: [] });
+      setRankingState({ loading: false, items: [], error: "全体感情を取得できませんでした。画面を開き直すと再試行できます。" });
     }
-  }, [isTutorialMode]);
+  }, [isTutorialMode, ownerRequest, isOwnerCurrent]);
 
   const loadPieces = useCallback(async () => {
     if (isTutorialMode) {
@@ -377,6 +426,10 @@ export default function NexusScreen({ navigation }) {
       });
       return;
     }
+    if (navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++readSequences.current.pieces;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && pieceReadScopeRef.current === pieceReadScope &&
+      sequence === readSequences.current.pieces;
 
     if (authInitializing) {
       setPieceState((prev) => ({ ...prev, loading: true, error: "" }));
@@ -386,6 +439,7 @@ export default function NexusScreen({ navigation }) {
     const params = {
       sort: pieceOrder,
       limit: 20,
+      include_piece_v2: true,
     };
 
     if (ownerFilterMode === OWNER_FILTER_SELF) {
@@ -405,14 +459,17 @@ export default function NexusScreen({ navigation }) {
       params.following_only = false;
     }
 
-    setPieceState((prev) => ({ ...prev, loading: true, error: "" }));
+    setPieceState({ scope: pieceReadScope, loading: true, items: [], error: "" });
     try {
-      const json = await getNexusPieces(params);
+      const json = await getNexusPieces(params, ownerRequest.options);
+      if (!isFresh()) return;
       const items = Array.isArray(json?.items) ? json.items : [];
-      setPieceState({ loading: false, items, error: "" });
+      setPieceState({ scope: pieceReadScope, loading: false, items, error: "" });
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("NexusScreen: loadPieces failed", e);
       setPieceState({
+        scope: pieceReadScope,
         loading: false,
         items: [],
         error: String(e?.message || "ピースを読み込めませんでした。"),
@@ -426,116 +483,99 @@ export default function NexusScreen({ navigation }) {
     pieceOrder,
     tutorialPieceItems,
     viewerUserId,
+    ownerRequest, isOwnerCurrent, pieceReadScope, navigation,
   ]);
 
   const loadEmotionLog = useCallback(async () => {
     if (isTutorialMode) {
       setEmotionLogState({
-        loading: false,
+        ...EMPTY_EMOTION_LOG,
+        scope: emotionLogReadScope,
         loaded: true,
-        items: [],
-        error: "",
       });
       return;
     }
+    if (navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++readSequences.current.emotions;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.emotions;
 
-    setEmotionLogState((prev) => ({ ...prev, loading: true, error: "" }));
+    setEmotionLogState({ ...LOADING_EMOTION_LOG, scope: emotionLogReadScope });
     try {
-      const json = await getNexusEmotionLog(20);
+      const json = await getNexusEmotionLog(20, ownerRequest.options);
+      if (!isFresh()) return;
       setEmotionLogState({
-        loading: false,
+        ...EMPTY_EMOTION_LOG,
+        scope: emotionLogReadScope,
         loaded: true,
         items: normalizeEmotionLogItems(json),
-        error: "",
       });
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("NexusScreen: loadEmotionLog failed", e);
       setEmotionLogState({
-        loading: false,
+        ...EMPTY_EMOTION_LOG,
+        scope: emotionLogReadScope,
         loaded: true,
-        items: [],
         error: String(e?.message || "感情通知を読み込めませんでした。"),
       });
     }
-  }, [isTutorialMode]);
-
-  const loadRecommend = useCallback(async () => {
-    if (isTutorialMode) {
-      setRecommendState({
-        loading: false,
-        loaded: true,
-        users: [],
-        error: "",
-      });
-      return;
-    }
-
-    setRecommendState((prev) => ({ ...prev, loading: true, error: "" }));
-    try {
-      const usersJson = await getNexusRecommendUsers(8);
-      setRecommendState({
-        loading: false,
-        loaded: true,
-        users: normalizeRecommendUsers(usersJson),
-        error: "",
-      });
-    } catch (e) {
-      console.warn("NexusScreen: loadRecommend failed", e);
-      setRecommendState({
-        loading: false,
-        loaded: true,
-        users: [],
-        error: String(e?.message || "おすすめを読み込めませんでした。"),
-      });
-    }
-  }, [isTutorialMode]);
+  }, [isTutorialMode, ownerRequest, isOwnerCurrent, navigation, emotionLogReadScope]);
 
   const loadHistory = useCallback(
     async () => {
+      if (navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
+      const sequence = ++readSequences.current.history;
+      const isFresh = () => isOwnerCurrent(ownerRequest) && historyReadScopeRef.current === historyReadScope &&
+        sequence === readSequences.current.history;
       const safeMode = `resonances:${historyOrder}`;
       if (isTutorialMode) {
-        setHistoryState((prev) => ({
-          ...prev,
+        setHistoryState({
+          scope: historyReadScope,
           loading: false,
-          loadedModes: { ...(prev.loadedModes || {}), [safeMode]: true },
+          loadedModes: { [safeMode]: true },
           order: historyOrder,
           resonances: [],
           error: "",
-        }));
+        });
         return;
       }
 
-      setHistoryState((prev) => ({ ...prev, loading: true, error: "" }));
+      setHistoryState({ ...LOADING_HISTORY, scope: historyReadScope });
       try {
-        const json = await getNexusResonancePieces(20, historyOrder);
+        const json = await getNexusResonancePieces(20, historyOrder, ownerRequest.options);
+        if (!isFresh()) return;
         const normalized = sortHistoryItems(normalizeSavedPieces(json), historyOrder);
-        setHistoryState((prev) => ({
-          ...prev,
+        setHistoryState({
+          scope: historyReadScope,
           loading: false,
-          loadedModes: { ...(prev.loadedModes || {}), [safeMode]: true },
+          loadedModes: { [safeMode]: true },
           order: historyOrder,
           resonances: normalized,
           error: "",
-        }));
+        });
       } catch (e) {
+        if (!isFresh()) return;
         console.warn("NexusScreen: loadHistory failed", e);
-        setHistoryState((prev) => ({
-          ...prev,
+        setHistoryState({
+          scope: historyReadScope,
           loading: false,
-          loadedModes: { ...(prev.loadedModes || {}), [safeMode]: true },
+          loadedModes: { [safeMode]: true },
           order: historyOrder,
           resonances: [],
           error: String(e?.message || "履歴を読み込めませんでした。"),
-        }));
+        });
       }
     },
-    [historyOrder, isTutorialMode]
+    [historyOrder, isTutorialMode, ownerRequest, isOwnerCurrent, historyReadScope, navigation]
   );
 
   useEffect(() => {
     void loadRanking();
-    void loadPieces();
-  }, [loadRanking, loadPieces]);
+  }, [loadRanking]);
+
+  useEffect(() => {
+    if (activeTab === "piece") void loadPieces();
+  }, [activeTab, loadPieces]);
 
   useEffect(() => {
     void loadOwnerOptions();
@@ -619,15 +659,15 @@ export default function NexusScreen({ navigation }) {
   ]);
 
   useEffect(() => {
-    if (activeTab !== "emotion_log") return;
+    if (activeTab !== "emotion_log" || navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
     if (!emotionLogState.loaded || emotionLogState.loading || emotionLogState.error) return;
     if (!prefetchedEmotionLogUnread || !latestEmotionLogCreatedAt) return;
     let cancelled = false;
 
     (async () => {
       try {
-        await markNexusEmotionLogFeedRead(latestEmotionLogCreatedAt);
-        if (cancelled) return;
+        await markNexusEmotionLogFeedRead(latestEmotionLogCreatedAt, ownerRequest.options);
+        if (cancelled || !isOwnerCurrent(ownerRequest)) return;
         setUnread("EmotionLog", "feed", false);
       } catch (e) {
         console.warn("NexusScreen: failed to mark emotion log feed read", e);
@@ -645,6 +685,7 @@ export default function NexusScreen({ navigation }) {
     latestEmotionLogCreatedAt,
     prefetchedEmotionLogUnread,
     setUnread,
+    ownerRequest, isOwnerCurrent, navigation,
   ]);
 
   useEffect(() => {
@@ -655,38 +696,37 @@ export default function NexusScreen({ navigation }) {
     if (!navigation?.addListener) return undefined;
     const unsubscribe = navigation.addListener("focus", () => {
       void refreshNexusUnreadState();
+      void loadRanking();
+      void loadOwnerOptions();
+      if (activeTab === "piece") void loadPieces();
+      if (activeTab === "emotion_log") void loadEmotionLog();
+      if (activeTab === "history") void loadHistory();
     });
-    return unsubscribe;
-  }, [navigation, refreshNexusUnreadState]);
+    const unsubscribeBlur = navigation.addListener("blur", () => {
+      if (isTutorialMode) return;
+      readSequences.current.pieces += 1;
+      readSequences.current.emotions += 1;
+      readSequences.current.history += 1;
+      setPieceState({ loading: true, items: [], error: "" });
+      setEmotionLogState(null);
+      setHistoryState(null);
+    });
+    return () => {
+      unsubscribe?.();
+      unsubscribeBlur?.();
+    };
+  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadRanking, loadOwnerOptions,
+      loadPieces, loadEmotionLog, loadHistory]);
 
   useEffect(() => {
-    if (activeTab === "emotion_log") {
-      void loadEmotionLog();
-    }
+    if (activeTab !== "emotion_log") return undefined;
+    void loadEmotionLog();
+    return () => { readSequences.current.emotions += 1; };
   }, [activeTab, loadEmotionLog]);
 
   useEffect(() => {
-    if (activeTab === "recommend" && !recommendState.loaded && !recommendState.loading) {
-      void loadRecommend();
-    }
-    const historyOrderLoaded =
-      historyState.order === historyOrder &&
-      !!historyState.loadedModes?.[historyLoadedModeKey];
-    if (activeTab === "history" && !historyOrderLoaded && !historyState.loading) {
-      void loadHistory();
-    }
-  }, [
-    activeTab,
-    historyLoadedModeKey,
-    historyOrder,
-    historyState.loadedModes,
-    historyState.loading,
-    historyState.order,
-    loadHistory,
-    loadRecommend,
-    recommendState.loaded,
-    recommendState.loading,
-  ]);
+    if (activeTab === "history") void loadHistory();
+  }, [activeTab, loadHistory]);
 
   const handlePressGuide = useCallback(() => {
     try {
@@ -711,44 +751,6 @@ export default function NexusScreen({ navigation }) {
 
     Alert.alert("ガイド", "ガイド画面を開けませんでした。");
   }, [navigation]);
-
-  const handleOpenFollowList = useCallback(() => {
-    if (isTutorialMode) return;
-
-    const selfUserId = String(viewerUserId || "").trim();
-    if (!selfUserId) {
-      Alert.alert("フォローリストを開けません", "ログイン情報を取得できませんでした。");
-      return;
-    }
-
-    const params = {
-      viewedUserId: selfUserId,
-      targetUserId: selfUserId,
-      initialTab: "following",
-    };
-
-    try {
-      if (navigation?.navigate) {
-        navigation.navigate("FollowListScreen", params);
-        return;
-      }
-    } catch (e) {
-      console.warn("NexusScreen: navigate FollowListScreen failed", e);
-    }
-
-    try {
-      const parent =
-        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-      if (parent && typeof parent.navigate === "function") {
-        parent.navigate("FollowListScreen", params);
-        return;
-      }
-    } catch (e) {
-      console.warn("NexusScreen: parent navigate FollowListScreen failed", e);
-    }
-
-    Alert.alert("フォローリストを開けません", "フォローリスト画面を開けませんでした。");
-  }, [isTutorialMode, navigation, viewerUserId]);
 
   const handleOpenOwner = useCallback(
     (userId) => {
@@ -813,7 +815,7 @@ export default function NexusScreen({ navigation }) {
 
   const canResonatePiece = useCallback(
     (item) => {
-      if (isTutorialMode) return false;
+      if (isTutorialMode || isPieceV2Post(item)) return false;
       const ownerUserId = resolvePieceOwnerUserId(item);
       if (!viewerUserId || !ownerUserId || ownerUserId === viewerUserId) {
         return false;
@@ -880,7 +882,7 @@ export default function NexusScreen({ navigation }) {
 
   const handlePressPieceResonance = useCallback(
     async (item) => {
-      if (!item || isPieceResonated(item) || !canResonatePiece(item)) return;
+      if (!item || !isOwnerCurrent(ownerRequest) || isPieceResonated(item) || !canResonatePiece(item)) return;
 
       const qInstanceId = resolvePieceQInstanceId(item);
       if (!qInstanceId || resonanceSubmittingIds[qInstanceId]) return;
@@ -894,7 +896,8 @@ export default function NexusScreen({ navigation }) {
         const result = await postNexusPieceResonance({
           qInstanceId,
           qKey: resolvePieceQKey(item),
-        });
+        }, ownerRequest.options);
+        if (!isOwnerCurrent(ownerRequest)) return;
         const hasResultResonances =
           result?.resonances !== undefined && result?.resonances !== null;
         const currentResonances =
@@ -942,7 +945,8 @@ export default function NexusScreen({ navigation }) {
             can_resonate: true,
           },
         });
-        setHistoryState((prev) => {
+        if (historyReadScopeRef.current === historyReadScope) setHistoryState((prev) => {
+          if (prev?.scope !== historyReadScope || prev.loading) return prev;
           const currentRows = Array.isArray(prev.resonances) ? prev.resonances : [];
           const rowsWithoutCurrent = currentRows.filter(
             (row) => String(row?.qInstanceId || "") !== qInstanceId
@@ -962,6 +966,7 @@ export default function NexusScreen({ navigation }) {
           };
         });
       } catch (e) {
+        if (!isOwnerCurrent(ownerRequest)) return;
         console.warn("NexusScreen: piece resonance failed", e);
         const statusCode = Number(e?.status || e?.statusCode || 0);
         const rawMessage = String(e?.message || "").trim();
@@ -973,6 +978,7 @@ export default function NexusScreen({ navigation }) {
               : rawMessage || "共鳴できませんでした。";
         Alert.alert("共鳴できません", message);
       } finally {
+        if (!isOwnerCurrent(ownerRequest)) return;
         setResonanceSubmittingIds((prev) => {
           const next = { ...(prev || {}) };
           delete next[qInstanceId];
@@ -986,12 +992,13 @@ export default function NexusScreen({ navigation }) {
       historyOrder,
       isPieceResonated,
       resonanceSubmittingIds,
+      ownerRequest, isOwnerCurrent, historyReadScope,
     ]
   );
 
   const handlePressPieceDelete = useCallback(
     (item) => {
-      if (isTutorialMode) return;
+      if (isTutorialMode || isPieceV2Post(item) || !isOwnerCurrent(ownerRequest)) return;
 
       const qInstanceId = resolvePieceQInstanceId(item);
       const ownerUserId = resolvePieceOwnerUserId(item);
@@ -1009,13 +1016,15 @@ export default function NexusScreen({ navigation }) {
             text: "削除",
             style: "destructive",
             onPress: async () => {
+              if (!isOwnerCurrent(ownerRequest)) return;
               setPieceDeleteSubmittingIds((prev) => ({
                 ...(prev || {}),
                 [qInstanceId]: true,
               }));
 
               try {
-                await deleteNexusPiece({ qInstanceId });
+                await deleteNexusPiece({ qInstanceId }, ownerRequest.options);
+                if (!isOwnerCurrent(ownerRequest)) return;
                 setPieceState((prev) => ({
                   ...prev,
                   items: Array.isArray(prev.items)
@@ -1024,15 +1033,14 @@ export default function NexusScreen({ navigation }) {
                       )
                     : prev.items,
                 }));
-                setHistoryState((prev) => ({
+                setHistoryState((prev) => prev ? ({
                   ...prev,
-                  resonances: Array.isArray(prev.resonances)
-                    ? prev.resonances.filter(
-                        (row) => String(row?.qInstanceId || "") !== qInstanceId
-                      )
-                    : prev.resonances,
-                }));
+                  resonances: prev.resonances.filter(
+                    (row) => String(row?.qInstanceId || "") !== qInstanceId,
+                  ),
+                }) : prev);
               } catch (e) {
+                if (!isOwnerCurrent(ownerRequest)) return;
                 console.warn("NexusScreen: piece delete failed", e);
                 const statusCode = Number(e?.status || e?.statusCode || 0);
                 const rawMessage = String(e?.message || "").trim();
@@ -1042,6 +1050,7 @@ export default function NexusScreen({ navigation }) {
                     : rawMessage || "ピースを削除できませんでした。";
                 Alert.alert("削除できません", message);
               } finally {
+                if (!isOwnerCurrent(ownerRequest)) return;
                 setPieceDeleteSubmittingIds((prev) => {
                   const next = { ...(prev || {}) };
                   delete next[qInstanceId];
@@ -1053,7 +1062,7 @@ export default function NexusScreen({ navigation }) {
         ]
       );
     },
-    [isTutorialMode, pieceDeleteSubmittingIds, viewerUserId]
+    [isTutorialMode, pieceDeleteSubmittingIds, viewerUserId, ownerRequest, isOwnerCurrent]
   );
 
   const getTutorialTargetRef = useCallback(() => {
@@ -1201,15 +1210,6 @@ export default function NexusScreen({ navigation }) {
             ui={ui}
           />
         );
-      case "recommend":
-        return (
-          <NexusRecommendSection
-            recommendState={recommendState}
-            styles={styles}
-            colors={colors}
-            handleOpenOwner={handleOpenOwner}
-          />
-        );
       case "history":
         return (
           <NexusHistorySection
@@ -1243,7 +1243,9 @@ export default function NexusScreen({ navigation }) {
             setOwnerPickerVisible={setOwnerPickerVisible}
             pieceOrder={pieceOrder}
             handleSetPieceOrder={handleSetPieceOrder}
-            pieceState={pieceState}
+            pieceState={pieceState.scope === pieceReadScope
+              ? pieceState
+              : { loading: authInitializing || !!viewerUserId, items: [], error: "" }}
             pieceEmptyText={pieceEmptyText}
             viewerUserId={viewerUserId}
             canResonatePiece={canResonatePiece}
@@ -1257,7 +1259,7 @@ export default function NexusScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
+    <SafeAreaView edges={["left", "right"]} ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -1276,21 +1278,10 @@ export default function NexusScreen({ navigation }) {
           titleRef={titleRef}
           styles={styles}
           colors={colors}
-          isTutorialMode={isTutorialMode}
-          viewerUserId={viewerUserId}
-          handleOpenFollowList={handleOpenFollowList}
-          handlePressGuide={handlePressGuide}
-          onRefresh={() => {
-            void refreshNexusUnreadState();
-            void loadRanking();
-            void loadOwnerOptions();
-            if (activeTab === "piece") void loadPieces();
-            if (activeTab === "emotion_log") void loadEmotionLog();
-            if (activeTab === "recommend") void loadRecommend();
-            if (activeTab === "history") void loadHistory();
-          }}
+          ui={ui}
+          canReadOwnPieces={canReadOwnPieces}
+          handleOpenOwnerHistory={handleOpenOwnerHistory}
         />
-
 
         <NexusTodayEmotionSummary
           visible={!isTutorialMode}
@@ -1309,6 +1300,7 @@ export default function NexusScreen({ navigation }) {
         />
 
         <View style={styles.tabContent}>{renderActiveTab()}</View>
+        <CocolonButton variant="secondary" style={styles.guideFooter} title="ピースについて" onPress={handlePressGuide} />
       </ScrollView>
 
       <NexusOwnerPickerModal
@@ -1352,156 +1344,144 @@ function createStyles(COLORS, ui) {
     applyTypographyTokens(
       {
         container: {
-          flex: 1,
-          backgroundColor: COLORS.PANEL_BG,
-        },
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
         scrollContainer: {
-          paddingTop: 16,
-          paddingBottom: 32,
-          paddingHorizontal: 18,
-          alignItems: "stretch",
-        },
-        panelHeader: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 10,
-        },
-        panelTitle: {
-          fontSize: 26,
-          lineHeight: 32,
-          fontWeight: "800",
-          color: COLORS.TITLE_GOLD,
-          letterSpacing: 0.8,
-        },
-        panelTitleRow: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
-        guideTitleButton: {
-          width: 36,
-          height: 32,
-          borderRadius: 12,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: COLORS.FIELD_BG,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          marginLeft: 10,
-        },
-        panelHeaderActions: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-end",
-        },
-        refreshButton: {
-          width: 40,
-          height: 36,
-          borderRadius: 12,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: COLORS.FIELD_BG,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-        },
-        followListButton: {
-          marginRight: 8,
-        },
-        headerButtonDisabled: {
-          opacity: 0.52,
-        },
+      paddingTop: 16,
+      paddingBottom: 24,
+      paddingHorizontal: 20,
+      alignItems: "stretch",
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
+    },
+        guideFooter: { marginTop: 16 },
+        ownerHistoryButton: {
+      minHeight: 48,
+      paddingHorizontal: 14,
+      paddingVertical: 12,
+      marginBottom: 16,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      justifyContent: 'center',
+    },
+        ownerHistoryButtonText: {
+      color: COLORS.ACCENT_TEXT,
+    },
         todayOverallEmotionSummary: {
-          paddingVertical: 8,
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderTopColor: COLORS.CARD_BORDER,
-          borderBottomColor: COLORS.CARD_BORDER,
-          marginBottom: 14,
-        },
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
+      borderTopColor: COLORS.CARD_BORDER,
+      borderBottomColor: COLORS.CARD_BORDER,
+      marginBottom: 16,
+      padding: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 16,
+      backgroundColor: COLORS.FIELD_BG,
+    },
         todayOverallEmotionHeader: {
-          flexDirection: "row",
-          alignItems: "center",
-          marginBottom: 4,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 8,
+      flexWrap: 'wrap',
+    },
         todayOverallEmotionIcon: {
           marginRight: 6,
         },
         todayOverallEmotionTitle: {
-          fontSize: 11,
-          fontWeight: "800",
-          letterSpacing: 0.3,
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      letterSpacing: 0,
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+    },
         todayOverallEmotionText: {
-          fontSize: 12,
-          lineHeight: 18,
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
         todayOverallEmotionPlaceholder: {
-          fontSize: 12,
-          lineHeight: 18,
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.TEXT_SUBTLE,
+    },
         tabBar: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottomWidth: 1,
-          borderBottomColor: COLORS.CARD_BORDER,
-          marginBottom: 14,
-        },
+      flexDirection: "row",
+      alignItems: 'stretch',
+      justifyContent: "space-between",
+      borderBottomWidth: 0,
+      borderBottomColor: COLORS.CARD_BORDER,
+      marginBottom: 16,
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 24,
+      padding: 4,
+      gap: 4,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+    },
         tabItemWrap: {
-          flex: 1,
-        },
+      flex: 1,
+      minWidth: 0,
+    },
         tabItem: {
-          alignItems: "center",
-          justifyContent: "center",
-          paddingTop: 10,
-          paddingHorizontal: 2,
-        },
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: 0,
+      paddingHorizontal: 0,
+      minHeight: 48,
+      paddingVertical: 0,
+      width: '100%',
+    },
         tabLabelWrap: {
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: 9,
-          borderBottomWidth: 2,
-          borderBottomColor: "transparent",
-        },
+      alignItems: "center",
+      justifyContent: "center",
+      paddingBottom: 10,
+      borderBottomWidth: 0,
+      borderBottomColor: "transparent",
+      width: "100%",
+      minHeight: 48,
+      paddingVertical: 10,
+      paddingHorizontal: 8,
+      borderRadius: 20,
+    },
         tabLabelRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      flexWrap: 'wrap',
+      gap: 4,
+    },
         tabLabelWrapActive: {
-          borderBottomColor: COLORS.TITLE_GOLD,
-        },
+      borderBottomColor: 'transparent',
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
         tabLabelText: {
-          fontSize: 13,
-          fontWeight: "800",
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
         tabLabelTextActive: {
-          color: COLORS.TITLE_GOLD,
-        },
+      color: COLORS.ACCENT_TEXT,
+    },
         tabUnreadBadge: {
-          marginLeft: 6,
-        },
+      marginLeft: 0,
+    },
         tabContent: {
           marginTop: 2,
         },
         pieceControls: {
-          marginBottom: 14,
-        },
+      marginBottom: 16,
+    },
         ownerFilterButton: {
-          borderRadius: 14,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.PANEL_BG,
-          paddingHorizontal: 12,
-          paddingVertical: 10,
-        },
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      minHeight: 48,
+    },
         ownerFilterButtonDisabled: {
-          opacity: 0.72,
-        },
+
+    },
         ownerFilterButtonContent: {
           flexDirection: "row",
           alignItems: "center",
@@ -1513,283 +1493,265 @@ function createStyles(COLORS, ui) {
           justifyContent: "center",
         },
         ownerFilterButtonText: {
-          flex: 1,
-          fontSize: 13,
-          lineHeight: 18,
-          fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
-          textAlign: "center",
-        },
+      flex: 1,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
         pieceSortRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          marginTop: 10,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: 'flex-start',
+      marginTop: 12,
+      flexWrap: 'wrap',
+      gap: 8,
+    },
         pieceSortButton: {
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-        },
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
+      justifyContent: 'center',
+    },
         pieceSortButtonSpacer: {
-          marginLeft: 8,
-        },
+      marginLeft: 0,
+    },
         pieceSortButtonActive: {
-          backgroundColor: COLORS.GOLD_BUTTON,
-          borderColor: COLORS.GOLD_BUTTON_BORDER,
-        },
+      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+    },
         pieceSortButtonText: {
-          fontSize: 12,
-          lineHeight: 16,
-          fontWeight: "900",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
         pieceSortButtonTextActive: {
-          color: COLORS.ACCENT_TEXT,
-        },
+      color: COLORS.ACCENT_TEXT,
+    },
         loader: {
           marginTop: 24,
           marginBottom: 24,
         },
         emptyText: {
-          fontSize: 13,
-          lineHeight: 20,
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-        },
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
         errorText: {
-          fontSize: 13,
-          lineHeight: 20,
-          color: "#B91C1C",
-        },
+      color: COLORS.ERROR,
+    },
         subsectionTitle: {
-          fontSize: 12,
-          fontWeight: "800",
-          color: COLORS.TITLE_GOLD,
-          marginBottom: 8,
-          marginTop: 2,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
+      marginTop: 0,
+    },
         emotionLogCard: {
-          backgroundColor: COLORS.FIELD_BG,
-          borderRadius: 20,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          paddingVertical: 4,
-          shadowColor: "#000",
-          shadowOpacity: 0.06,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 3,
-        },
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingVertical: 0,
+      shadowColor: "#000",
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+    },
         emotionLogRow: {
-          paddingVertical: 10,
-          paddingHorizontal: 12,
-        },
+      paddingVertical: 20,
+      paddingHorizontal: 20,
+    },
         emotionLogHeaderRow: {
-          flexDirection: "row",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-        },
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      justifyContent: "space-between",
+      gap: 6,
+    },
         emotionLogName: {
-          flex: 1,
-          minWidth: 0,
-          paddingRight: 8,
-          fontWeight: "700",
-          color: COLORS.TEXT_ON_LIGHT,
-          fontSize: 15,
-        },
+      minWidth: 0,
+      paddingRight: 0,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
         emotionLogBadgeArea: {
-          marginTop: 8,
-          alignItems: "center",
-        },
+      marginTop: 12,
+      alignItems: 'flex-start',
+    },
         emotionLogNoEmotion: {
-          width: "100%",
-          fontSize: 12,
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-          textAlign: "center",
-        },
+      width: "100%",
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      textAlign: 'left',
+    },
         emotionLogBadgeRow: {
-          width: "100%",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        },
+      width: "100%",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: 'flex-start',
+      gap: 6,
+    },
         emotionLogBadge: {
-          paddingHorizontal: 10,
-          paddingVertical: 4,
-          borderRadius: 999,
-          marginHorizontal: 2,
-          marginVertical: 2,
-        },
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 999,
+      marginHorizontal: 0,
+      marginVertical: 0,
+    },
         emotionLogBadgeText: {
-          fontSize: 12,
-          fontWeight: "700",
-        },
+    },
         emotionLogTime: {
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-          fontSize: 12,
-          width: 80,
-          textAlign: "right",
-        },
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      textAlign: 'left',
+    },
         emotionLogSeparator: {
-          height: 1,
-          backgroundColor: "#EEE",
-          marginLeft: 12,
-          marginRight: 12,
-        },
+      height: 1,
+      backgroundColor: COLORS.CARD_BORDER,
+      marginLeft: 20,
+      marginRight: 20,
+    },
         simpleCard: {
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 12,
-          marginBottom: 10,
-          shadowColor: "#000",
-          shadowOpacity: 0.08,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 3,
-        },
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      marginBottom: 12,
+      shadowColor: "#000",
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+      minHeight: 56,
+    },
         simpleCardHeader: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 6,
-        },
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      justifyContent: "space-between",
+      marginBottom: 0,
+      gap: 6,
+    },
         simpleCardTitle: {
-          flex: 1,
-          fontSize: 14,
-          fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
-          paddingRight: 10,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+      paddingRight: 0,
+    },
         simpleCardMeta: {
-          fontSize: 11,
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-        },
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
         historyControls: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          marginBottom: 12,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: 'flex-start',
+      marginBottom: 16,
+      flexWrap: 'wrap',
+    },
         historySortRow: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: 'wrap',
+      gap: 8,
+    },
         historySortButton: {
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-        },
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
+      justifyContent: 'center',
+    },
         historySortButtonSpacer: {
-          marginLeft: 8,
-        },
+      marginLeft: 0,
+    },
         historySortButtonActive: {
-          backgroundColor: COLORS.GOLD_BUTTON,
-          borderColor: COLORS.GOLD_BUTTON_BORDER,
-        },
+      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+    },
         historySortButtonText: {
-          fontSize: 12,
-          lineHeight: 16,
-          fontWeight: "900",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
         historySortButtonTextActive: {
-          color: COLORS.ACCENT_TEXT,
-        },
+      color: COLORS.ACCENT_TEXT,
+    },
         pickerBackdrop: {
-          flex: 1,
-          backgroundColor: "rgba(15, 23, 42, 0.38)",
-          justifyContent: "center",
-          alignItems: "center",
-          paddingHorizontal: 24,
-        },
+      flex: 1,
+      backgroundColor: "rgba(15, 23, 42, 0.38)",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+    },
         pickerCard: {
-          width: "100%",
-          maxWidth: 380,
-          maxHeight: 620,
-          borderRadius: 24,
-          borderWidth: 1,
-          borderColor: COLORS.BORDER_GOLD,
-          backgroundColor: COLORS.PANEL_BG,
-          paddingHorizontal: 18,
-          paddingTop: 18,
-          paddingBottom: 16,
-          shadowColor: "#000",
-          shadowOpacity: 0.18,
-          shadowRadius: 18,
-          shadowOffset: { width: 0, height: 10 },
-          elevation: 10,
-        },
+      width: "100%",
+      maxWidth: 520,
+      maxHeight: '100%',
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 20,
+      shadowColor: "#000",
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+      flexShrink: 1,
+    },
         pickerHeader: {
-          marginBottom: 10,
-        },
+      marginBottom: 16,
+    },
         pickerTitle: {
-          fontSize: 18,
-          lineHeight: 24,
-          fontWeight: "900",
-          color: COLORS.TEXT_ON_LIGHT,
-          textAlign: "center",
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
         pickerScroll: {
-          maxHeight: 420,
-          width: "100%",
-        },
+      width: "100%",
+      flexShrink: 1,
+    },
         pickerScrollContent: {
           paddingVertical: 4,
         },
         pickerOption: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 11,
-          marginBottom: 8,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      marginBottom: 8,
+      minHeight: 48,
+    },
         pickerOptionActive: {
-          borderColor: COLORS.BORDER_GOLD,
-          backgroundColor: COLORS.PANEL_BG,
-        },
+      borderColor: COLORS.ON_SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
+    },
         pickerOptionTextWrap: {
-          flex: 1,
-          paddingRight: 10,
-        },
+      flex: 1,
+      paddingRight: 10,
+      minWidth: 0,
+    },
         pickerOptionText: {
-          fontSize: 14,
-          lineHeight: 20,
-          fontWeight: "800",
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.TEXT_ON_LIGHT,
+    },
         pickerOptionTextActive: {
-          color: COLORS.TITLE_GOLD,
-        },
+      color: COLORS.ON_SURFACE_TONAL,
+    },
         pickerOptionMeta: {
-          marginTop: 3,
-          fontSize: 11,
-          lineHeight: 16,
-          fontWeight: "700",
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-        },
+      marginTop: 3,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
         pickerOptionMetaActive: {
-          color: COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.ON_SURFACE_TONAL,
+    },
         pickerActionRow: {
-          marginTop: 10,
-          width: "100%",
-        },
+      marginTop: 16,
+      width: "100%",
+    },
       },
-      ui
+      ui, {"ownerHistoryButtonText":"button","todayOverallEmotionTitle":"description","todayOverallEmotionText":"description","todayOverallEmotionPlaceholder":"description","tabLabelText":"button","ownerFilterButtonText":"button","pieceSortButtonText":"button","emptyText":"description","errorText":"description","subsectionTitle":"sectionTitle","emotionLogName":"body","emotionLogNoEmotion":"description","emotionLogBadgeText":"description","emotionLogTime":"meta","simpleCardTitle":"body","simpleCardMeta":"meta","historySortButtonText":"button","pickerTitle":"modalTitle","pickerOptionText":"body","pickerOptionMeta":"meta"}
     )
   );
 }
+

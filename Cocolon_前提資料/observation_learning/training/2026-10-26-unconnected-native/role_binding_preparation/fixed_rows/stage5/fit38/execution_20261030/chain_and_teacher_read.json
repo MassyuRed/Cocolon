@@ -1,0 +1,168 @@
+[
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "stage": 1,
+    "actual_prompt_chain_equal": true,
+    "json_valid": true,
+    "teacher_json_equal": true,
+    "differences": [],
+    "quotes": 17,
+    "all_quotes_literal_grounded": true,
+    "actual_messages_equal_gold_training_prefix": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "stage": 2,
+    "actual_prompt_chain_equal": true,
+    "json_valid": true,
+    "teacher_json_equal": true,
+    "differences": [],
+    "actual_messages_equal_gold_training_prefix": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "stage": 3,
+    "actual_prompt_chain_equal": true,
+    "json_valid": false,
+    "parse_error": "Extra data: line 1 column 1128 (char 1127)",
+    "actual_messages_equal_gold_training_prefix": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "stage": 1,
+    "actual_prompt_chain_equal": true,
+    "json_valid": true,
+    "teacher_json_equal": true,
+    "differences": [],
+    "quotes": 18,
+    "all_quotes_literal_grounded": true,
+    "actual_messages_equal_gold_training_prefix": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "stage": 2,
+    "actual_prompt_chain_equal": true,
+    "json_valid": true,
+    "teacher_json_equal": false,
+    "differences": [
+      [
+        "$[0][5][5][0][0]",
+        "value",
+        "q_extra_8",
+        "q_no_joint_preparation"
+      ],
+      [
+        "$[0][6][5][0][0]",
+        "value",
+        "q_extra_8",
+        "q_no_promise"
+      ],
+      [
+        "$[0][7][0][1][0]",
+        "value",
+        "q_extra_11",
+        "q_perceived_realization"
+      ],
+      [
+        "$[0][7][0][2]",
+        "type",
+        "開店したと聞いたとき",
+        null
+      ],
+      [
+        "$[0][8][0][2]",
+        "type",
+        "開店したと聞いたとき",
+        null
+      ],
+      [
+        "$[0][8][0][3]",
+        "value",
+        "WRITTEN_PRESENT_IN_PAST_CONTEXT",
+        "WRITTEN_PAST_UNRESOLVED_OCCASION"
+      ],
+      [
+        "$[0][9][0][1][0]",
+        "value",
+        "q_extra_11",
+        "q_felt_distance"
+      ],
+      [
+        "$[0][9][0][2]",
+        "type",
+        "開店したと聞いたとき",
+        null
+      ],
+      [
+        "$[0][10][0][1][0]",
+        "value",
+        "q_extra_11",
+        "q_answer_sadness"
+      ],
+      [
+        "$[0][10][0][2]",
+        "type",
+        "開店したと聞いたとき",
+        null
+      ]
+    ],
+    "actual_messages_equal_gold_training_prefix": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "stage": 3,
+    "actual_prompt_chain_equal": true,
+    "json_valid": true,
+    "teacher_json_equal": true,
+    "differences": [],
+    "actual_messages_equal_gold_training_prefix": false
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "stage": 4,
+    "actual_prompt_chain_equal": true,
+    "json_valid": true,
+    "teacher_json_equal": false,
+    "differences": [
+      [
+        "$[0][3][0]",
+        "length",
+        2,
+        1
+      ],
+      [
+        "$[0][3][3]",
+        "length",
+        2,
+        1
+      ],
+      [
+        "$[0][5][3]",
+        "length",
+        2,
+        1
+      ],
+      [
+        "$[0][6][0]",
+        "length",
+        3,
+        1
+      ],
+      [
+        "$[0][6][3]",
+        "length",
+        3,
+        1
+      ]
+    ],
+    "actual_messages_equal_gold_training_prefix": false
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "stage": 5,
+    "actual_prompt_chain_equal": true,
+    "json_valid": false,
+    "parse_error": "Expecting ',' delimiter: line 1 column 243 (char 242)",
+    "actual_messages_equal_gold_training_prefix": false
+  }
+]

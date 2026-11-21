@@ -1,0 +1,21 @@
+{
+  "operation": "create_library_file",
+  "status": "succeeded",
+  "path": "/cocolon-stage5-complete-20261030.zip",
+  "file_id": "file_00000000a0e08206b929c4208650a810",
+  "library_file_id": "libfile_cc6b41f4f62c81919cbaec65e51ef379",
+  "file_name": "cocolon-stage5-complete-20261030.zip",
+  "current_version_number": 0,
+  "restored_from_version_number": null,
+  "xattrs": [
+    {
+      "name": "user.library-file-version",
+      "value": "0"
+    }
+  ],
+  "directory_id": "libdir_b7b80590d8ac81918cd895018e6b474b",
+  "mime_type": "application/zip",
+  "library_artifact_type": "other",
+  "file_size_bytes": 31667246,
+  "external_connectors_accessed": false
+}

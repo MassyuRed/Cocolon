@@ -1,7 +1,10 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import {
   ActivityIndicator,
   Keyboard,
+  KeyboardAvoidingView,
   Modal,
   Platform,
   Pressable,
@@ -42,8 +45,9 @@ export default function PieceTutorialCreateModal({
       animationType="fade"
       transparent
       onRequestClose={onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
-      <View ref={refs.modalOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
+      <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}><View ref={refs.modalOverlayRootRef} style={[styles.modalOverlay, { backgroundColor: "transparent" }]} collapsable={false}>
         <View style={styles.modalCard}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>チュートリアル ピース</Text>
@@ -106,19 +110,20 @@ export default function PieceTutorialCreateModal({
                 style={{ marginTop: 12 }}
                 onPress={onSave}
                 disabled={submitting}
+                loading={submitting}
               >
                 <View style={styles.btnRow}>
                   {submitting ? (
-                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                    <ActivityIndicator color={colors.TEXT_SUBTLE} style={{ marginRight: 8 }} />
                   ) : (
                     <Ionicons
                       name="save-outline"
                       size={18}
-                      color="#FFFFFF"
+                      color={submitting ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                       style={{ marginRight: 6 }}
                     />
                   )}
-                  <Text style={styles.goldButtonText}>保存</Text>
+                  <Text style={[styles.goldButtonText, { color: submitting ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT }]}>保存</Text>
                 </View>
               </CocolonButton>
             </View>
@@ -150,7 +155,7 @@ export default function PieceTutorialCreateModal({
             />
           </View>
         ) : null}
-      </View>
+      </View></KeyboardAvoidingView></SafeAreaView></SafeAreaProvider>
     </Modal>
   );
 }

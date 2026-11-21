@@ -1,0 +1,114 @@
+{
+  "schema": "cocolon.native15_balanced30.independent_read_only_review.v1",
+  "review_date_jst": "2026-10-27",
+  "reviewer": "training_failure_review independent subagent",
+  "review_kind": "SOURCE_DIFF_AND_RECORDED_CPU_EVIDENCE_READ_ONLY",
+  "formal_pro_ultra_or_human_acceptance": false,
+  "verdict": "NO_BLOCKING_ISSUE_FOUND_FOR_PENDING_CANDIDATE",
+  "reviewed_files": [
+    {
+      "path": "run_native15_balanced30.py",
+      "bytes": 21420,
+      "sha256": "d989bcf5a7bc9e3bc8669ff455113c956bcb5ba813473693fc8f493ad3217268"
+    },
+    {
+      "path": "candidate_focus_loss.py",
+      "bytes": 11170,
+      "sha256": "f0adc2b09410b93b9f1d91676f2a37e0bb4a599be5db9997e43a21dec5b74350"
+    },
+    {
+      "path": "consume_balanced30.py",
+      "bytes": 18496,
+      "sha256": "692d325147dd1484d6ed61c93c0ab82467f49be63f3256ba9bb09a35923fc623"
+    },
+    {
+      "path": "gpu30_balanced.plan.json",
+      "bytes": 3103,
+      "sha256": "20fb5ccdee3c02fd8584110bef08e92eb0a9dfbfba3b2267cfddad380ff1cf9f"
+    },
+    {
+      "path": "verify_balanced30_cpu.py",
+      "bytes": 6704,
+      "sha256": "c4f6f8c895d4c1e1fdbf3aa654dda2f8e44ce3fc9c5f50c4514449593cd29d6a"
+    },
+    {
+      "path": "test_candidate_focus_loss.py",
+      "bytes": 11548,
+      "sha256": "f1130a7fd2490f329ad4a4bb0cef55e17132f16e3fab87b7f3ac7dc9b80e0893"
+    },
+    {
+      "path": "actual_cpu_check.json",
+      "bytes": 35768,
+      "sha256": "33ce6313b7762ebce8ccafdb44751e1f6221a5ef5b942bc707459f010596b713"
+    }
+  ],
+  "source_comparison": "interleaved30_preparation/run_native15_interleaved30.py and consume_interleaved30.py at Cocolon f0cc6ed43c159ff5804dc86c2d0dc3d137265848",
+  "findings": [
+    "Authorization is checked before output creation, model imports, pretrained weight loading, updates, or generation. Current plan remains PREPARED_AWAITING_MASH_APPROVAL, gpu_run_authorized=false, approval_basis=null.",
+    "Frozen teacher/prompt/evaluation/reader, old45779 start, fixed30 order/two passes, save and separate inference-only reload, after15 calls, 2700-second global and 180-second call limits, no retry, no raw repair, and original adapter/source verification remain preserved.",
+    "Single-forward weighted CE uses the predecessor tail-logit window, float32 CE and the same causal target shift; every assistant/EOS target retains positive full-loss mass. No extra pretrained forward is introduced by group balancing.",
+    "S includes semantic values/evidence/surface bindings, F only non-null natural-language string contents, and U only nonempty updates. Raw character spans and actual tokenizer offsets preserve teacher bytes; cross-group token overlap is rejected and EOS/template tail receives full-loss mass only.",
+    "Effective epochs metadata is set to training_passes=2 without rewriting predecessor artifacts.",
+    "Consumer differences verify new runner/focus identities and loss specification while keeping existing CMEE adoption and body checks."
+  ],
+  "observed_cpu_evidence": {
+    "status": "CPU_BALANCED30_VERIFIED_NO_MODEL_LOAD",
+    "span_unit_tests": 16,
+    "actual_tokenizer_rows": 15,
+    "max_full_tokens": 7935,
+    "context_tokens": 8192,
+    "pending_execute_refused_before_effects": true,
+    "synthetic_ce": [
+      {
+        "dtype": "torch.float32",
+        "uniform_value_matches_old_hf": true,
+        "uniform_gradient_matches_old_hf": true,
+        "weighted_value_and_gradient_match_independent_group_means": true,
+        "one_forward": true,
+        "prompt_and_last_logit_gradient_zero": true,
+        "uniform_abs_error": 0.0,
+        "weighted_abs_error": 2.384185791015625e-07
+      },
+      {
+        "dtype": "torch.bfloat16",
+        "uniform_value_matches_old_hf": true,
+        "uniform_gradient_matches_old_hf": true,
+        "weighted_value_and_gradient_match_independent_group_means": true,
+        "one_forward": true,
+        "prompt_and_last_logit_gradient_zero": true,
+        "uniform_abs_error": 2.384185791015625e-07,
+        "weighted_abs_error": 2.384185791015625e-07
+      }
+    ],
+    "hf_loss_source_sha256": "c7f950f4eb7eba01f9339bc4937c9e1cc2885cf1c1bc116d764990c694a90ff9",
+    "model_weights_loaded": 0,
+    "pretrained_model_forwards": 0,
+    "synthetic_cpu_model_calls": 6,
+    "training_updates": 0,
+    "generations": 0,
+    "cmee_adoptions": 0,
+    "sql_operations": 0,
+    "tests_rerun_by_reviewer": 0,
+    "evidence_scope": "Read of the recorded Jupyter CPU report and verifier source; not an independent rerun, pretrained-model evaluation, GPU-memory measurement, or product-quality result."
+  },
+  "warnings_and_limits": [
+    "The reported CPU scalar-conversion warning comes from converting synthetic metric tensors to Python floats after comparison. It does not change the training objective or recorded equivalence result and is nonblocking for this candidate.",
+    "The loss coefficients are a bounded hypothesis. CPU equivalence does not establish improvement, CUDA peak memory, generation speed, unknown-input generalization, or product acceptance.",
+    "Balanced loss values must not be compared as ordinary full-mean NLL improvements.",
+    "Paid GPU execution remains pending a new explicit approval; no prior closed run is reactivated."
+  ],
+  "reviewer_effects": {
+    "source_edits": 0,
+    "test_runs": 0,
+    "pretrained_model_calls": 0,
+    "training_updates": 0,
+    "generations": 0,
+    "gpu_operations": 0,
+    "sql_operations": 0,
+    "external_writes": 0,
+    "review_evidence_files_written": 1
+  },
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}

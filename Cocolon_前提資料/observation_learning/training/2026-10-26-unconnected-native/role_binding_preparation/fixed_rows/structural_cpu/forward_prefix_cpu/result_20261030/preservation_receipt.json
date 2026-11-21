@@ -1,0 +1,30 @@
+{
+  "status": "PRESERVED",
+  "archive_bytes": 1884361,
+  "archive_sha256": "2f3afb00579d5674f241740011f085e12c380e9e2cec3e1efd4b06ccc61a5d89",
+  "archive_members": 18,
+  "archive_payloads": 17,
+  "library_identity": {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/originals.zip",
+    "file_id": "file_000000000f988206b67161fdebe8342b",
+    "library_file_id": "libfile_01631bb06ca88191aab25f201113af5a",
+    "file_name": "originals.zip",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_b7b80590d8ac81918cd895018e6b474b",
+    "mime_type": "application/zip",
+    "library_artifact_type": "other",
+    "file_size_bytes": 1884361,
+    "external_connectors_accessed": false
+  },
+  "all_crc_bytes_sha_match": true,
+  "metadata_applied": true
+}

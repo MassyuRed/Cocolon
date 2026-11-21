@@ -1,0 +1,7 @@
+{
+  "source_commit": "3e612f2bc105ace5efae57efe7446a3f22ed91d0",
+  "parent": "61a5bf10a6d91dab20c2042fd508c9e2c38e12f5",
+  "exact_paths": 9,
+  "all_read_back_bytes_equal": true,
+  "api_unchanged": "7b9ee073de03940ba71587297d8600b2b6094dd1"
+}

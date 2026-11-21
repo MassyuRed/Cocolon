@@ -34,7 +34,7 @@ export default function NexusEmotionLogSection({ emotionLogState, styles, colors
                     const tint = emotionTint(type, ui?.text?.description ?? colors.TEXT_SUBTLE);
                     return (
                       <View key={`${type}-${strengthKey}-${itemIndex}`} style={[styles.emotionLogBadge, { backgroundColor: tint.bg }]}>
-                        <Text style={[styles.emotionLogBadgeText, { color: tint.text }]}>
+                        <Text style={[styles.emotionLogBadgeText, { color: colors.TEXT_ON_LIGHT }]}>
                           {type}{labelStrength ? `（${labelStrength}）` : ""}
                         </Text>
                       </View>

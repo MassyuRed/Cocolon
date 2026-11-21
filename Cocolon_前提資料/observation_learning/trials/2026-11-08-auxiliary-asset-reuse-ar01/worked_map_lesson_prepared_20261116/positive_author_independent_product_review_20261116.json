@@ -1,0 +1,77 @@
+{
+  "state": "POSITIVE_AUTHOR_LESSON_SOURCE_REVIEW_PASS_ONLY",
+  "reviewer": "review_integration",
+  "reviewed_api_commit": "f7c338100809edc28a75e74fac2df9446fbfc426",
+  "core": {
+    "path": "/workspace/scratch/8262f97b141c/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+    "bytes": 196652,
+    "sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa"
+  },
+  "lesson_test": {
+    "path": "/workspace/scratch/8262f97b141c/api/ai/tests/test_analysis_semantic_map_lesson.py",
+    "bytes": 6410,
+    "sha256": "06cb8231dca61fa1ac91f3e98cd2d851d47e274bfefb7264f22d91f0415343fe"
+  },
+  "source_test_receipt": {
+    "path": "/workspace/scratch/8262f97b141c/verification/positive_author_source_test_receipt_20261116.json",
+    "bytes": 5153,
+    "sha256": "03f6e91d6a4c8ddd627e4c59a782bbe0f00c9411105d383b70a90989d68abf78"
+  },
+  "blocking_findings": [],
+  "source_to_product_review": [
+    {
+      "scope": "ordinary and MERGE / n1",
+      "finding": "Initial wet soil and omitted watering, then two days later dry soil and completed watering of the same pot, are both retained. The stated change follows the explicitly observed soil condition. It adds no fixed habit, motive, future choice or cause beyond that source."
+    },
+    {
+      "scope": "ordinary and MERGE / n2",
+      "finding": "The sister is the actor for completed saucer washing and for the later stated wish to change fertilizer. Completion of fertilizer replacement remains unknown to the narrator. The wish is not turned into completion or noncompletion; unknowns does not erase known washing or the narrator's later watering."
+    },
+    {
+      "scope": "ordinary and MERGE / edge and overview",
+      "finding": "The n1-to-n2 contrast refers to the actual contents of both endpoints: narrator watering, sister washing, and fertilizer completion unknown. It adds no causal dependency between their actions. Overview retains the initial omission, later completed watering, completed washing and remaining fertilizer uncertainty; it agrees with the nodes."
+    },
+    {
+      "scope": "LEAF",
+      "finding": "One record and two fields teach two distinct actor-bound facts, with edges=[]. No later dry-soil action, fertilizer wish or fertilizer uncertainty is imported. Its overview agrees with both nodes."
+    },
+    {
+      "scope": "visible voice",
+      "finding": "Titles, summaries, explanations and the edge use concrete actors, objects, actions and conditions rather than internal node categories or generation policy. The lesson is a small literal example; n2's source-narration wording is modest and does not establish deep or general product quality."
+    }
+  ],
+  "boundary_review": {
+    "existing_owner_only": true,
+    "example_provenance": "ROOT_AUTHORED_SYNTHETIC; expressly separated from current input, not a model teacher or Mash-accepted output.",
+    "actual_A2_topics_embedded": false,
+    "shared_schema_native_receiver_DTO_SQL_weights_or_route_changed": false,
+    "neutral_index_frame_claims_or_source_duties_switch_added": false,
+    "dynamic_source_warning_suffixes": "Independently compared AST bodies after the first instruction assignment: ordinary and history messages remainder identical to f1ffa8a.",
+    "actual_user_material": "messages still returns current material_json unchanged as the user message; the example is confined to system instructions. Receipt independently records both actual condition source fields, dictionary, role foundation, guard and request_ref unchanged.",
+    "evidence_isolation": "New tests require exact, unique example quotes; unrelated real prepared input cannot admit example evidence. This does not establish factual accuracy of future free natural text.",
+    "format": "Same model.v2 output keys/enums and existing constraints; full example has two records/two nodes/one edge, LEAF one record/two nodes/no edges. Native source hash remains 7d7cb41a861e89b605dcbe7ebf107d25416cef90dcda4e509bb40c9338256dc1."
+  },
+  "test_and_history_review": {
+    "new_tests_scope": "Exact source quotation, schema/grammar acceptance, stage-local sources, current source binding, and rejection of example roots for unrelated input. They explicitly do not rate model meaning.",
+    "CPU_evidence": "Read original logs: initial 137 passed/1 stale MAP-wire failure; after only intended fixture update, 26 passed. Receipt reports 138 distinct covered targets, not 163 distinct successes.",
+    "fixture_diff_independently_checked": "Only ANALYSIS-MAP-SOURCE-DUTIES wire_json/wire_bytes/wire_sha256 changed. All five non-MAP cases, including IF, remain identical.",
+    "history_controls": "Four new message hashes intentionally replace current prompt pins; four former-current and eight older hashes remain rejection controls. This is prompt identity maintenance, not reuse of old acquired raw under new messages."
+  },
+  "prior_actual": {
+    "path": "/workspace/scratch/8262f97b141c/verification/ordinary_coverage_actual_20261116/positive-reading.actual.result.json",
+    "bytes": 115132,
+    "sha256": "e0ececf484bdd6f16bf561773c0167d96924a86f5d0c09eecec30fde7a40501a",
+    "judgment_unchanged": "A2 meaning rejected; consumed two-call run remains unchanged. B2 condition was not satisfied. This source review does not make those responses acceptable or authorize their save/rebinding."
+  },
+  "limits": {
+    "model_calls_by_this_review": 0,
+    "pod_or_hosted_database_calls_by_this_review": 0,
+    "new_model_meaning_quality_proven": false,
+    "A2_failure_unique_cause_identified": false,
+    "capacity_or_deadline_measured_for_new_messages": false,
+    "same_raw_actual_SQL_save_or_reread_proven": false,
+    "normal_rollout_completed": false,
+    "Mash_formal_acceptance": false,
+    "remaining_work": "Fresh authorized actual outputs require whole-source meaning review; only adequate final actual raw can proceed through same-source one-save/separate-process reread and normal native/API/worker rollout."
+  }
+}

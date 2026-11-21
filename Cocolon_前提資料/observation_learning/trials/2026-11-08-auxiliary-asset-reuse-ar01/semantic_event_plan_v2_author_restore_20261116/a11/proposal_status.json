@@ -1,0 +1,25 @@
+{
+  "A11": {
+    "max_responses": 9,
+    "once": true,
+    "restore_inclusive_seconds": 1800
+  },
+  "B11": {
+    "condition": "all five new source/raw/projection/text adequate under root and independent full review",
+    "max_responses": 11,
+    "once": true,
+    "restore_inclusive_seconds": 1020
+  },
+  "all_file_bytes": 3139037,
+  "all_files": 9,
+  "build_TestFlight_device": "held",
+  "new_file_bytes": 3039282,
+  "new_files": 6,
+  "normal_readonly_receipt": "normal_readonly_state.json",
+  "normal_state": "fresh read-only 2026-11-16T08:20:26Z: API/worker24bc228d Live, autoDeploy off, DB ACTIVE_HEALTHY38 migrations latest20261115011424; existing deploy startup log stale900 reacquired, not new restart",
+  "previous_A10": "consumed_failed_closed",
+  "previous_B10": "condition_unmet_not_executed_not_reusable",
+  "same_pod_copy_files": 3,
+  "scope_sha256": "6c2c2a5119ddfc07b3570cc9317c25175e8a2d8533010eab8de9188ae657d7bb",
+  "state": "PREPARED_NOT_APPROVED_NOT_TRANSFERRED_NOT_EXECUTED"
+}

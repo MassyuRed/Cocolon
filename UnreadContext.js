@@ -205,9 +205,9 @@ function buildStartupHydrationData(rawStartup, options = {}) {
     const analysisUnread = pickObject(analysisUnreadSection.value);
     const unreadByType = pickObject(analysisUnread?.unread_by_type);
     unreadPatch.Analysis = {
-      daily: !!unreadByType.daily,
-      weekly: !!unreadByType.weekly,
-      monthly: !!unreadByType.monthly,
+      daily: false,
+      weekly: false,
+      monthly: false,
       selfStructure: !!unreadByType.selfStructure,
     };
     prefetchPatch.Analysis = {
@@ -234,7 +234,7 @@ function buildStartupHydrationData(rawStartup, options = {}) {
   }
 
   // Input/Home startup UI is canonically owned by /home/state.
-  // Intentionally ignore notice / today-question compat payloads from /app/startup
+  // Intentionally ignore notice payloads from /app/startup
   // so app boot only hydrates app-level unread/prefetch state.
 
   const analysisHomeSummarySection = resolveSection(

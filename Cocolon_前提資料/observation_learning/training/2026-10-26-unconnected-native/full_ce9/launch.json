@@ -1,0 +1,6 @@
+{
+  "pid": 311476,
+  "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout --signal=TERM --kill-after=10s 590s /workspace/cocolon_venv/bin/python -B /workspace/cocolon_fullce9_pack_20261028/run_fullce9.py --pack /workspace/cocolon_fullce9_pack_20261028 --execute --source-commit 3e612f2bc105ace5efae57efe7446a3f22ed91d0 > /workspace/cocolon_fullce9_gpu.log 2>&1; gpu_status=$?; printf %s \"$gpu_status\" > /workspace/cocolon_fullce9_gpu.exit",
+  "source_commit": "3e612f2bc105ace5efae57efe7446a3f22ed91d0",
+  "retry": false
+}

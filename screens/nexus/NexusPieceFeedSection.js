@@ -10,6 +10,7 @@ import {
 } from "./nexusRouteModel";
 import {
   resolvePieceQInstanceId,
+  isPieceV2Post,
   resolvePieceOwnerUserId,
 } from "./nexusHistoryModel";
 
@@ -38,7 +39,7 @@ function NexusPieceControls({
       >
         <View style={styles.ownerFilterButtonContent}>
           <View style={styles.ownerFilterSideSlot} />
-          <Text style={styles.ownerFilterButtonText} numberOfLines={1}>
+          <Text style={styles.ownerFilterButtonText}>
             {selectedOwnerLabel}
           </Text>
           <View style={styles.ownerFilterSideSlot}>
@@ -63,6 +64,7 @@ function NexusPieceControls({
           ]}
           onPress={() => handleSetPieceOrder(PIECE_ORDER_LATEST)}
           accessibilityLabel="新しい順で表示する"
+          accessibilityState={{ selected: pieceOrder === PIECE_ORDER_LATEST }}
         >
           <Text
             style={[
@@ -81,6 +83,7 @@ function NexusPieceControls({
           ]}
           onPress={() => handleSetPieceOrder(PIECE_ORDER_OLDEST)}
           accessibilityLabel="古い順で表示する"
+          accessibilityState={{ selected: pieceOrder === PIECE_ORDER_OLDEST }}
         >
           <Text
             style={[
@@ -156,7 +159,7 @@ export default function NexusPieceFeedSection({
     content = pieceState.items.map((item) => {
       const qInstanceId = resolvePieceQInstanceId(item);
       const ownerUserId = resolvePieceOwnerUserId(item);
-      const canDeletePiece = !!qInstanceId && !!viewerUserId && ownerUserId === viewerUserId;
+      const canDeletePiece = !isPieceV2Post(item) && !!qInstanceId && !!viewerUserId && ownerUserId === viewerUserId;
       return (
         <NexusPieceCard
           key={String(qInstanceId || Math.random())}

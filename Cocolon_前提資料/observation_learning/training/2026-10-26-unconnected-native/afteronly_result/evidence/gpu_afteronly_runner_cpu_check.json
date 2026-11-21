@@ -1,0 +1,118 @@
+{
+  "status": "CPU_RUNNER_READY_MODEL_NOT_LOADED",
+  "rows": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1705,
+      "assistant_eos_tokens": 1331,
+      "full_tokens": 3036,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3839,
+      "assistant_eos_tokens": 2228,
+      "full_tokens": 6067,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1701,
+      "assistant_eos_tokens": 1331,
+      "full_tokens": 3032,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3854,
+      "assistant_eos_tokens": 2231,
+      "full_tokens": 6085,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1698,
+      "assistant_eos_tokens": 1321,
+      "full_tokens": 3019,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3837,
+      "assistant_eos_tokens": 2237,
+      "full_tokens": 6074,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1733,
+      "assistant_eos_tokens": 1585,
+      "full_tokens": 3318,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1728,
+      "assistant_eos_tokens": 1559,
+      "full_tokens": 3287,
+      "generation_cap": 2560
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1732,
+      "assistant_eos_tokens": 1598,
+      "full_tokens": 3330,
+      "generation_cap": 2560
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "prompt_tokens": 2159,
+      "assistant_eos_tokens": 1038,
+      "full_tokens": 3197,
+      "generation_cap": 3712
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4212,
+      "assistant_eos_tokens": 3178,
+      "full_tokens": 7390,
+      "generation_cap": 3712
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "prompt_tokens": 2194,
+      "assistant_eos_tokens": 1082,
+      "full_tokens": 3276,
+      "generation_cap": 3712
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4374,
+      "assistant_eos_tokens": 3561,
+      "full_tokens": 7935,
+      "generation_cap": 3712
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "prompt_tokens": 2045,
+      "assistant_eos_tokens": 961,
+      "full_tokens": 3006,
+      "generation_cap": 3712
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "prompt_tokens": 2087,
+      "assistant_eos_tokens": 896,
+      "full_tokens": 2983,
+      "generation_cap": 3712
+    }
+  ],
+  "dependency_versions": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "runner_sha256": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+  "proposal_sha256": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9"
+}

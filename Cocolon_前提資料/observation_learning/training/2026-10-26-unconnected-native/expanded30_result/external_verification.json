@@ -1,0 +1,29 @@
+{
+  "status": "STOPPED_RUN_EXTERNALLY_VERIFIED_QUALITY_UNMEASURED",
+  "old32_equal_in_expanded_initial": true,
+  "initial_new40_B_zero": true,
+  "final_tensor_count": 112,
+  "final_finite_f32": true,
+  "final_parameter_count": 3833856,
+  "final_tensor_shapes_equal_initial": true,
+  "changed_tensors": 112,
+  "new_B_nonzero_after_training": 40,
+  "adapter_sha256": {
+    "adapter_model.safetensors": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a",
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e"
+  },
+  "optimizer_steps": 30,
+  "update_order_exact": true,
+  "training_loss_and_gradient_finite": true,
+  "raw_generations": 0,
+  "meaning_body_quality": "NOT_MEASURED",
+  "actual_base_model_loads": 1,
+  "reported_base_model_loads_started": 2,
+  "second_counter_is_stage_intent_before_validation_not_completed_load": true,
+  "saved_inference_reload_completed": false,
+  "new_model_calls_after_stop": 0,
+  "worker_ps": "",
+  "gpu_state": "NVIDIA RTX A5000, 1 MiB, 24564 MiB",
+  "source_commit": "bd5d169ad457fc440bf01d1876cb40d697ce6847"
+}

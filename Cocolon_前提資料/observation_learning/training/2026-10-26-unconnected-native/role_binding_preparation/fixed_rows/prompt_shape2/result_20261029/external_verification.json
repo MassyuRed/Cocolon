@@ -1,0 +1,13 @@
+{
+  "archive": "cocolon-shape2-originals-20261029.zip",
+  "bytes": 59721291,
+  "sha256": "f23346c5aaf362017e58930cb0c23029f0d9906293a755595f2ba5d11408bc33",
+  "payload_count": 204,
+  "member_count": 205,
+  "all_crc_lengths_sha_verified": true,
+  "initial_adapter_sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+  "base_weights_included": false,
+  "optimizer_rng_resume_included": false,
+  "new_weights_created": false,
+  "library_file_id": "libfile_bf6d39c3dbac819189e4ed6ee9749a0a"
+}

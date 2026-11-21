@@ -1,0 +1,315 @@
+/** B13 fixed-canvas export for the current owner's saved record.
+ * The host supplies owner/runtime/lifecycle checks, mounts the saved-record
+ * canvas and establishes renderer admission before exposing actions.
+ * A receipt records render evidence before the later OS operation.
+ */
+import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
+import { captureRef, releaseCapture } from 'react-native-view-shot';
+import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+import { Dirs, FileSystem } from 'react-native-file-access';
+import { requestPieceOwner, PieceApiError } from './pieceApi';
+import { readPieceOwnerDisplay } from './pieceOwnerModel';
+import { verifyPieceExportPngSrgb, verifyPieceExportPngStructure } from './pieceExportPngProfile';
+import { preparePieceNativeSavedDisplay, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
+
+const failed = () => new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+export class PieceExportReceiptRetryError extends Error {}
+const IOS_RECEIPT_RENDERERS = [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION];
+const hashPattern = /^[0-9a-f]{64}$/;
+let rawCleanup;
+const pendingExportCleanup = new Map();
+
+function roots() {
+  const base = Dirs.CacheDir;
+  if (typeof base !== 'string' || !base.startsWith('/') || base.endsWith('/')) throw failed();
+  return { raw: `${base}/piece-capture`, exports: `${base}/piece-export` };
+}
+
+function rawPath(value, root) {
+  if (typeof value !== 'string') throw failed();
+  const path = value.startsWith('file://') ? value.slice(7) : value;
+  if (!path.startsWith(`${root}/`) || !/^piece-[A-Za-z0-9-]+\.png$/.test(path.slice(root.length + 1))) throw failed();
+  return path;
+}
+
+// First use in a fresh JS process, before any prototype capture. Only exact
+// owned raw names are removed; shared files, common caches and photos are not.
+async function prepareRawCache(root) {
+  if (!rawCleanup) rawCleanup = (async () => {
+    // RNFA on Android rejects mkdir for an existing directory after restart.
+    if (!await FileSystem.exists(root)) await FileSystem.mkdir(root);
+    if ((await FileSystem.stat(root)).type !== 'directory') throw failed();
+    const names = await FileSystem.ls(root);
+    for (const name of names) {
+      if (/^piece-[A-Za-z0-9-]+\.png$/.test(name)) await FileSystem.unlink(`${root}/${name}`);
+    }
+  })();
+  const pending = rawCleanup;
+  try { await pending; }
+  catch (error) {
+    // Keep successful cleanup one-time and concurrent callers on one promise.
+    // A failed attempt may be retried only by a later explicit preparation.
+    if (rawCleanup === pending) rawCleanup = undefined;
+    throw error;
+  }
+}
+
+// Only copies with no external reader enter this queue. Unknown or active
+// share handoffs never enter it, including when a different export starts.
+function removeExportCopy(directory) {
+  const pending = pendingExportCleanup.get(directory);
+  if (pending) return pending;
+  const removal = Promise.resolve().then(async () => {
+    try {
+      if (await FileSystem.exists(directory)) await FileSystem.unlink(directory);
+      pendingExportCleanup.delete(directory);
+    } catch {
+      pendingExportCleanup.set(directory, null);
+      throw failed();
+    }
+  });
+  pendingExportCleanup.set(directory, removal);
+  return removal;
+}
+
+function sessionId() {
+  const bytes = new Uint8Array(16);
+  globalThis.crypto.getRandomValues(bytes);
+  return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function pngIdentity(path, width, height, requireSrgb = false) {
+  const stat = await FileSystem.stat(path);
+  if (stat.type !== 'file') throw failed();
+  const verify = requireSrgb ? verifyPieceExportPngSrgb : verifyPieceExportPngStructure;
+  if (await verify({ width, height, size: stat.size,
+    readChunk: (offset, length) => FileSystem.readFileChunk(path, offset, length, 'base64') }) !== true) throw failed();
+  const hash = await FileSystem.hash(path, 'SHA-256');
+  if (!hashPattern.test(hash)) throw failed();
+  return hash;
+}
+
+export async function preparePieceExportPrototype({ pieceId, expectedUserId, isCurrent, signal } = {}) {
+  if (!['ios', 'android'].includes(Platform.OS)) throw failed();
+  const current = () => {
+    if (signal?.aborted || typeof isCurrent !== 'function' || isCurrent() !== true) throw failed();
+  };
+  current();
+  const readExportRecord = async () => {
+    let receipt = false;
+    const record = readPieceOwnerDisplay(await requestPieceOwner('export',
+      { piece_id: pieceId }, { expectedUserId, signal,
+        ...(Platform.OS === 'ios' ? { onExportReceiptSupport: value => { receipt = value === true; } } : {}) }));
+    return { record, receipt: receipt && IOS_RECEIPT_RENDERERS.includes(record.renderer_version) };
+  };
+  const { record, receipt: requireReceipt } = await readExportRecord();
+  current();
+  const input = preparePieceNativeSavedDisplay(record);
+  if (!input) throw failed();
+  const dirs = roots();
+  try { await prepareRawCache(dirs.raw); } catch { throw failed(); }
+  current();
+  await Promise.allSettled(Array.from(pendingExportCleanup.keys(), removeExportCopy));
+  current();
+  let busy = false, captured = false;
+  return Object.freeze({ record, async capture(target) {
+    current();
+    if (busy || captured || target?.key !== input.key || target.width !== input.width ||
+        target.height !== input.height || typeof target.isCurrent !== 'function' || !target.node) throw failed();
+    const check = () => { current(); if (target.isCurrent() !== true) throw failed(); };
+    if ([PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version) &&
+        (typeof target.bitmapToken !== 'string' || !target.bitmapToken ||
+         typeof target.bitmapBinding !== 'string' || !target.bitmapBinding)) throw failed();
+    check(); busy = true;
+    let raw = null, directory = null, path = null, handedOff = false, operating = false;
+    const cleanup = async () => {
+      if (directory && !handedOff && !operating) {
+        await removeExportCopy(directory);
+        directory = null;
+      }
+    };
+    try {
+      raw = await captureRef(target.node, { format: 'png', result: 'tmpfile', quality: 1,
+        width: input.width, height: input.height, snapshotContentContainer: false, cocolonPieceCache: true,
+        ...([PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version) ? {
+          useRenderInContext: true, cocolonPieceBitmapToken: target.bitmapToken, cocolonPieceBitmapBinding: target.bitmapBinding } : {}) });
+      const source = rawPath(raw, dirs.raw);
+      check();
+      const token = sessionId();
+      const exportDirectory = `${dirs.exports}/${token}`;
+      await FileSystem.mkdir(exportDirectory);
+      directory = exportDirectory;
+      check();
+      const filename = `cocolon-piece_${record.piece_id.replace(/-/g, '')}_${record.visual_recipe_hash.slice(0, 12)}_${record.visual_recipe.aspect_ratio.replace(':', 'x')}.png`;
+      path = `${directory}/${filename}`;
+      await FileSystem.cp(source, path);
+      check();
+      const assetHash = await pngIdentity(path, input.width, input.height, requireReceipt);
+      const receipt = requireReceipt ? Object.freeze({
+        receipt_version: 'piece.export_receipt.v1', piece_id: record.public_id,
+        expected_row_version: record.row_version, piece_text_hash: record.piece_text_hash,
+        visual_recipe_hash: record.visual_recipe_hash, visual_catalog_version: record.visual_recipe.visual_catalog_version,
+        layout_policy_version: record.visual_recipe.layout_policy_version,
+        renderer_family: 'rn_native', renderer_version: record.renderer_version,
+        export_contract_version: record.export_contract_version, mime_type: 'image/png',
+        output_profile: `png_${input.width}x${input.height}_srgb_v1`, width: input.width, height: input.height,
+        asset_sha256: assetHash, generated_at: new Date().toISOString(), persistent_server_asset: false, body_free: true,
+      }) : null;
+      check();
+      captured = true;
+      let consumed = false, disposed = false, nativeStatus = 'not_started';
+      const begin = () => {
+        current();
+        if (consumed || disposed) throw failed();
+        consumed = true; operating = true;
+      };
+      const verify = async () => {
+        check();
+        const { record: latest, receipt: receiptSupported } = await readExportRecord();
+        check();
+        if (receiptSupported !== requireReceipt || !['piece_id', 'row_version', 'piece_text_hash', 'content_payload_hash',
+          'visual_recipe_hash', 'renderer_version'].every(key => latest[key] === record[key])) throw failed();
+        if (await pngIdentity(path, input.width, input.height, requireReceipt) !== assetHash) throw failed();
+        check(); if (disposed) throw failed();
+        if (receipt) {
+          try {
+            await requestPieceOwner('exportReceipt', { piece_id: pieceId, receipt },
+              { expectedUserId, signal, idempotencyKey: token });
+          } catch (error) {
+            check(); if (disposed) throw failed();
+            if (error?.code === 'PIECE_TEMPORARILY_UNAVAILABLE') throw new PieceExportReceiptRetryError();
+            if (error?.code === 'PIECE_FEATURE_DISABLED') throw new PieceApiError('PIECE_FEATURE_DISABLED');
+            throw failed();
+          }
+          check(); if (disposed) throw failed();
+        }
+      };
+      return Object.freeze({
+        // Candidate metadata only. No body, local URI, recipient or formal receipt.
+        get nativeStatus() { return nativeStatus; },
+        candidate: Object.freeze({ piece_id: record.public_id, piece_text_hash: record.piece_text_hash,
+          visual_recipe_hash: record.visual_recipe_hash, renderer_version: record.renderer_version,
+          asset_sha256: assetHash, mime_type: 'image/png', width: input.width, height: input.height }),
+        async saveToPhotos() {
+          begin();
+          let saved = false, cleanupFailed = false, retryReceipt = false, featureStopped = false;
+          try {
+            check();
+            if (Platform.OS === 'android' && Number(Platform.Version) < 29) {
+              const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+              check();
+              if (status !== PermissionsAndroid.RESULTS.GRANTED) throw failed();
+            }
+            await verify();
+            check(); if (disposed) throw failed();
+            // No album/read permission: CameraRoll requests iOS add-only itself.
+            if (Platform.OS === 'ios') {
+              // Pinned 7.10.2 old-architecture opt-in avoids the public API's
+              // post-save PHAsset read; the patch returns no asset metadata.
+              const saving = NativeModules.RNCCameraRoll.saveToCameraRoll(`file://${path}`,
+                { type: 'photo', album: '', cocolonAddOnly: true });
+              nativeStatus = 'started';
+              const result = await saving;
+              if (result?.saved !== true) throw failed();
+            } else {
+              const saving = CameraRoll.saveAsset(`file://${path}`, { type: 'photo' });
+              nativeStatus = 'started';
+              await saving;
+            }
+            // The native operation has committed. Later owner/runtime loss or
+            // local copy cleanup cannot undo that photo or make it retryable.
+            // The host still owns whether this outcome belongs on its screen.
+            saved = true; nativeStatus = 'complete';
+          } catch (error) {
+            if (error instanceof PieceExportReceiptRetryError) {
+              retryReceipt = true; throw error;
+            }
+            if (nativeStatus === 'not_started' && error?.code === 'PIECE_FEATURE_DISABLED') {
+              featureStopped = true; throw new PieceApiError('PIECE_FEATURE_DISABLED');
+            }
+            throw failed();
+          } finally {
+            operating = false;
+            if (retryReceipt && !disposed) {
+              consumed = false;
+            } else {
+              disposed = true;
+              try { await cleanup(); }
+              catch {
+                if (!saved && !featureStopped) throw failed();
+                cleanupFailed = true;
+              }
+            }
+          }
+          return Object.freeze({ outcome: 'saved_to_photos', ...(cleanupFailed ? { cleanup_failed: true } : {}) });
+        },
+        async openShare() {
+          begin();
+          let outcome = null, cleanupFailed = false, retryReceipt = false, featureStopped = false;
+          try {
+            await verify();
+            check(); if (disposed) throw failed();
+            // Hand off conservatively until a platform's session-end result is
+            // known. Backgrounding, dispose and a rejected/unknown result do
+            // not establish that an external reader has finished.
+            if (typeof NativeModules.RNShare?.open !== 'function') throw failed();
+            const uri = `file://${path}`;
+            // This is always our checked, non-base64 file. The pinned Share
+            // wrapper awaits an Android isBase64File bridge query before
+            // native open, allowing a revoked attempt to open afterwards.
+            // Dispatch directly at this checked boundary, retaining its
+            // exact iOS option normalization and failOnCancel:false result.
+            const options = { type: 'image/png', filename, failOnCancel: false,
+              ...(Platform.OS === 'ios' ? { urls: [uri], filenames: [filename] } : { url: uri }) };
+            handedOff = true;
+            const sharing = NativeModules.RNShare.open(options);
+            nativeStatus = 'started';
+            const returned = await sharing;
+            const result = !returned.success ? { dismissedAction: true,
+              success: returned.success, message: returned.message } : returned;
+            const cancelled = result?.success === false && result.dismissedAction === true;
+            const completed = result?.success === true && result.dismissedAction === undefined;
+            // Pinned RNShare on iOS resolves from UIActivityViewController's
+            // completionWithItemsHandler after the service ends/dismisses.
+            // Android success resolves at target selection, so its copy stays.
+            if (Platform.OS === 'ios' && (completed || cancelled)) handedOff = false;
+            nativeStatus = cancelled || completed ? 'complete' : 'unknown';
+            outcome = cancelled ? 'cancelled' : 'share_result_returned';
+          } catch (error) {
+            if (error instanceof PieceExportReceiptRetryError) {
+              retryReceipt = true; throw error;
+            }
+            if (nativeStatus === 'not_started' && error?.code === 'PIECE_FEATURE_DISABLED') {
+              featureStopped = true; throw new PieceApiError('PIECE_FEATURE_DISABLED');
+            }
+            throw failed();
+          } finally {
+            operating = false;
+            if (retryReceipt && !disposed) {
+              consumed = false;
+            } else {
+              disposed = true;
+              try { await cleanup(); }
+              catch {
+                // An observed share result survives a cleanup failure.
+                if (!outcome && !featureStopped) throw failed();
+                cleanupFailed = true;
+              }
+            }
+          }
+          return Object.freeze({ outcome, ...(cleanupFailed ? { cleanup_failed: true } : {}) });
+        },
+        async dispose() { disposed = true; await cleanup(); },
+      });
+    } catch {
+      try { await cleanup(); } catch { /* Confined leftovers remain recoverable. */ }
+      throw failed();
+    } finally {
+      busy = false;
+      if (raw) {
+        // Never pass an arbitrary returned URI to library cleanup.
+        try { rawPath(raw, dirs.raw); releaseCapture(raw); } catch { /* Next-process cleanup. */ }
+      }
+    }
+  } });
+}

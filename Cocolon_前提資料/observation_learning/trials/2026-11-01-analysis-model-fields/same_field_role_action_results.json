@@ -1,0 +1,757 @@
+{
+  "api_commit": "f1048a8f8883791013786dc6da225dcf1e31ae61",
+  "predecessor": "b77c380e82f67881c319276beea4a2c56a33f431",
+  "new_responses": 4,
+  "training": 0,
+  "model_loads": 1,
+  "generation_seconds": 45.334194876253605,
+  "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "initial_unchanged": true,
+  "scope": "independent synthetic source4; actual4B; explicit ensure with mock RPC persistence; separate synthetic realSQL regression",
+  "normal_adoption": false,
+  "deployed": false,
+  "product_acceptance": false,
+  "cases": [
+    {
+      "id": "SF01",
+      "provenance": "Karen independently synthetic; no training target",
+      "original": {
+        "category": [
+          "生活"
+        ],
+        "created_at": "2026-11-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000001b59",
+        "memo": "僕の役割は案内係だった。僕は資料を調べた。",
+        "memo_action": ""
+      },
+      "before": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割）（1件の記録）\n未確定（選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:904488831e48447c997081669da248ca@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "90448883-1e48-447c-9970-81669da248ca",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n資料を調べる（実行済み）（1件の記録）\n未確定（選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割） ／ 選択カテゴリ：生活\n資料を調べる（実行済み））：段階同士のつながりは、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n僕の役割は案内係だった（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：生活\n資料を調べる（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:80f17d4f1ae54cc89a0e03427084d032@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "80f17d4f-1ae5-4cc8-9a0e-03427084d032",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      }
+    },
+    {
+      "id": "SF02",
+      "provenance": "Karen independently synthetic; no training target",
+      "original": {
+        "category": [
+          "生活"
+        ],
+        "created_at": "2026-11-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000001b5a",
+        "memo": "僕の役割は案内係ではなかった。僕は資料を調べなかった。",
+        "memo_action": ""
+      },
+      "before": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割）（1件の記録）\n未確定（選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:4f527a7d12d740d99062cfc49e71be03@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "4f527a7d-12d7-40d9-9062-cfc49e71be03",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n資料を調べる（行わなかった）（1件の記録）\n未確定（選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割） ／ 選択カテゴリ：生活\n資料を調べる（行わなかった））：段階同士のつながりは、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n僕の役割は案内係ではなかった（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：生活\n資料を調べる（行わなかった）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:0f472840b2c24ecc86d908b46cca9c13@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "0f472840-b2c2-4ecc-86d9-08b46cca9c13",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      }
+    },
+    {
+      "id": "SF03",
+      "provenance": "Karen independently synthetic; no training target",
+      "original": {
+        "category": [
+          "仕事"
+        ],
+        "created_at": "2026-11-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000001b5b",
+        "memo": "私の役割は記録係でした。私は費用を記録した。",
+        "memo_action": ""
+      },
+      "before": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割）（1件の記録）\n未確定（選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:1016ce0cc74e433882bd01f749a307e4@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "1016ce0c-c74e-4338-82bd-01f749a307e4",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n費用を記録する（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割） ／ 選択カテゴリ：仕事\n費用を記録する（実行済み））：段階同士のつながりは、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n私の役割は記録係でした（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n費用を記録する（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:4484edbe860d49bb82ce88cf6a8772ee@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "4484edbe-860d-49bb-82ce-88cf6a8772ee",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      }
+    },
+    {
+      "id": "SF04",
+      "provenance": "Karen independently synthetic; no training target",
+      "original": {
+        "category": [
+          "仕事"
+        ],
+        "created_at": "2026-11-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000001b5c",
+        "memo": "私の役割は記録係ではありませんでした。私は費用を記録しなかった。",
+        "memo_action": ""
+      },
+      "before": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割）（1件の記録）\n未確定（選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:375fc820cc234837ab01598fddbd64c1@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "375fc820-cc23-4837-ab01-598fddbd64c1",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      },
+      "after": {
+        "captured_at": null,
+        "content_text": "役割：選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n費用を記録する（行わなかった）（1件の記録）\n未確定（選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割） ／ 選択カテゴリ：仕事\n費用を記録する（行わなかった））：段階同士のつながりは、この記録からは確定していません。",
+        "generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "has_visible_content": true,
+        "history_saved": false,
+        "latest_generated_at": "2026-11-05T07:30:47.865182+00:00",
+        "map_context": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n私の役割は記録係ではありませんでした（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n費用を記録する（行わなかった）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T07:30:47.865182+00:00",
+          "projection_of": "artifact:7cb4aacfdaed427c898a8059a78f9c31@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "period": "all",
+        "period_end": "2026-11-05T07:30:47.865182+00:00",
+        "period_start": "2026-11-01T01:00:00+00:00",
+        "reason": "saved",
+        "refreshed": true,
+        "report_id": "7cb4aacf-daed-427c-898a-8059a78f9c31",
+        "report_mode": "standard",
+        "skip_reason": null,
+        "snapshot_month": null,
+        "source_profile": "cumulative.v1",
+        "status": "ok",
+        "title": "わたしマップ"
+      }
+    }
+  ],
+  "old22_summary": {
+    "bound_responses": 22,
+    "deployed": false,
+    "model_loads": 0,
+    "new_generation": 0,
+    "new_training": 0,
+    "non_generation_current_monthly_readonly": 16,
+    "normal_4b_enabled": false,
+    "product_credit": 0,
+    "rejected": 2,
+    "saved": 16,
+    "scope": "original 22 response bindings; real ensure/build/read validators; mock isolated RPC persistence",
+    "seconds": 1.6797811603173614,
+    "sql_evidence": "independent synthetic responses in test_analysis_cumulative_model_source",
+    "unsupported": 4
+  },
+  "jupyter": {
+    "passed": 1006,
+    "skipped": 1,
+    "subtests": 11176,
+    "seconds": 126.53,
+    "legacy_sql_remains_skipped": true,
+    "returncodes": {
+      "before_returncode": 0,
+      "live_returncode": 0,
+      "old22_returncode": 0,
+      "seconds": 183.2024296624586,
+      "tests_returncode": 0
+    }
+  },
+  "ci": {
+    "run_id": 41986905743,
+    "job_id": 127109677815,
+    "conclusion": "success",
+    "api_commit": "f1048a8f8883791013786dc6da225dcf1e31ae61",
+    "generation": {
+      "passed": 2172,
+      "skipped": 1,
+      "subtests": 12048,
+      "seconds": 292.74
+    },
+    "shared_owner": {
+      "passed": 1,
+      "deselected": 194,
+      "seconds": 22.26
+    },
+    "cumulative": {
+      "passed": 47,
+      "warnings": 1,
+      "subtests": 2,
+      "seconds": 29.02
+    },
+    "monthly_sql": {
+      "source_records": 201,
+      "monthly_references": 15,
+      "status": "passed"
+    }
+  },
+  "limitations": [
+    "ExplicitSELF role followed by independently explicitSELF finite past action in one memo only",
+    "No inferred role-to-action edge; omitted actor/report/hypothesis stays unread",
+    "Fullwidth stop remains roleonly/unparsed1",
+    "HTTP provider, general reading and cross-record relation remain unfinished"
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "schema": "cocolon.cmee.known_chair_untrained_service_identity.v1",
+  "scope": "One training-excluded service identity with already known fictional chair language. New real 4B max2 calls through existing offline service/isolated SQL; actual initial question/prior, interruption after meaning save, explicit resume and non-generating reads. Not unseen language, general quality, normal application/Auth/HTTP/RN/device or product acceptance.",
+  "status": "ACTUAL_CORRECTION_DID_NOT_REACH_AUTHOR_NO_RESUME",
+  "started_at": "2026-10-25T08:07:34.929106+00:00",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "adapter_revision": "adae463befe9c465fa6d3a465b29bdc66dafcf41f75328277aa90e2149eddf3d",
+  "max_seconds": 900,
+  "offline_model_attempt_seconds": 180,
+  "service_source_timeout_upper_seconds": 150,
+  "max_model_calls": 2,
+  "automatic_retry": 0,
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "candidate_source_calls": 2,
+  "receipts_returned": 2,
+  "isolated_rpc_calls": 18,
+  "model_calls": [
+    {
+      "case_id": "SERVICE-CHAIR-INITIAL",
+      "input_tokens": 2059,
+      "output_tokens": 1375,
+      "seconds": 70.5055697215721,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "raw_utf8_sha256": "e10461f7d5fcd9add8a5c4c7d801831718a1860420c3ae2f676aca181d7a0f91"
+    },
+    {
+      "case_id": "SERVICE-CHAIR-CORRECTION",
+      "input_tokens": 5027,
+      "output_tokens": 2227,
+      "seconds": 112.90049423929304,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "raw_utf8_sha256": "9192065492f0d2446b33b494227009948bc4f175648707d45b02a9c9e6860ddb"
+    }
+  ],
+  "forbidden_generation_calls": 0,
+  "forbidden_candidate_calls": 0,
+  "new_training_updates": 0,
+  "new_optimizer": false,
+  "service_saved_roundtrip": false,
+  "isolated_sql_persistence_tested": true,
+  "production_database_operations": 0,
+  "raw_substitution": false,
+  "raw_id_or_prior_repair": false,
+  "teacher_sent": false,
+  "normal_application_enabled": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "gpu_stop_restart_delete_operations": 0,
+  "source_hashes_before": {
+    "runner/run_service_roundtrip.py": "ea58009d635f44605177c37479cf2d1135620f21e5fa4d4acedfa04b36c44841",
+    "pack/run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "pack/verify_cmee.py": "6c042267eeaa9dace4a63abd2ae1ad42f2486c722947a08ed3d1daf571a7684b",
+    "pack/dataset_manifest.json": "189fcc3a424731ad4074ef2901a6c8b5546913ea6410bbdca4e800fc73d6c867",
+    "api/ai/tests/test_emlis_q2_application.py": "771bc98fe23eee41fdd10c86f91accb55863cb24fee77b2609686e7ba1a6d514",
+    "api/ai/tests/helpers/emlis_q2_postgres.cjs": "bc4fc9a7bb46512a12ebe2ee2da5307e6d9d0ba8bacd4b94d69f26d09bfde7a6",
+    "api/supabase/migrations/20260911020509_emlis_input_threads_q2.sql": "8ec3369d5377046d933daaccc39123b7e92b7c1c33339136fdbc1a56a379c88f",
+    "api/ai/services/ai_inference/emlis_thread_service.py": "3c5bdaf79885df0b3607dc5c925d738c5fb7ae717e1d4354ffc05d6f23022fb8",
+    "api/ai/services/ai_inference/emlis_thread_store.py": "5c6f74894d66dd375daef4e3d44696e9795e67a4a3bd7ac7cbc5459e6f04c54f",
+    "api/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "b3058e4cdff65465516056fc0af4c7452bad6a6960310ecdd69ac008da872297",
+    "api/ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py": "77f982df1d2776613432913f8e907bf4db68c4e072104f426adfd814cf928472",
+    "api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "4a57bb27d3c0e00bb52d399c662749962cac282d9ff33282c909b21874f4f9c3",
+    "identity_eval/runner": "713279f51a83be4f33876b01c7230da6df57313983bd1416cc8f6ca0517be323",
+    "identity_eval/fixture": "1812411b6b2cb8abb75c4f22c5a573fd1ed657094611f1a4734ac3d099c3c08a",
+    "identity_eval/plan": "4e4cb05747dde47ec0dccb73cbe8e17d6c04f3e4be74523d4c7bc2978c1348a6",
+    "identity_eval/training_manifest": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107",
+    "identity_eval/train_messages": "fa340592b8b208bca91ce83a3623dcc6b7f96e02b2ccdf9cca0c00e7cf0fcf50",
+    "identity_eval/training_identities": "7aaab80b17a387b0b297e51f0edaa56e95931fa9597f3803fe8d2546fee7b9b5"
+  },
+  "adapter_hashes_before": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "5bec6c1cb1a8a8181634fe49e24fd03937437711475b22d53fa0acf97c078ede",
+    "adapter_model.safetensors": "adae463befe9c465fa6d3a465b29bdc66dafcf41f75328277aa90e2149eddf3d"
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "seed": 20261024,
+  "context_tokens": 8192,
+  "max_new_tokens": 2560,
+  "do_sample": false,
+  "dtype": "bfloat16",
+  "attention": "sdpa",
+  "trainable_parameters": 0,
+  "adapter_tensor_count": 32,
+  "adapter_tensor_stats": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6892775297164917
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.4499273896217346
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.687922477722168
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.16138291358947754
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7198412418365479
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5112574696540833
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7049610614776611
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.17712979018688202
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7171669006347656
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5450262427330017
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6955862045288086
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.18621815741062164
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7442715167999268
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5710808038711548
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7138127088546753
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.20230524241924286
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7508635520935059
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6530670523643494
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7484779357910156
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.23157231509685516
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7585394382476807
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.71214359998703
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7632476091384888
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.2673220634460449
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7737542390823364
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7304735779762268
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7816463708877563
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.26182299852371216
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7799756526947021
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7681249976158142
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7984566688537598
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.2969745993614197
+    }
+  ],
+  "gpu_name": "NVIDIA RTX A4500",
+  "evaluation_id": "CHAIR_SERVICE_IDENTITY_HOLDOUT_01",
+  "held_out_service_identity_only": true,
+  "unseen_language_content": false,
+  "training_identity_overlap": false,
+  "identity_call_checks": [
+    {
+      "stage": "initial",
+      "uuid_count": 2,
+      "timestamp_count": 1,
+      "overlap": false,
+      "actual_prior_used": false
+    },
+    {
+      "stage": "correction",
+      "uuid_count": 3,
+      "timestamp_count": 3,
+      "overlap": false,
+      "actual_prior_used": true
+    }
+  ],
+  "max_input_tokens": 5632,
+  "fictional_user_id": "08048f07-0644-4c01-bdea-dc9c8fe70b5b",
+  "fictional_input_id": "301f49f8-6be5-4848-9c24-5442544eddf8",
+  "active_model_stage": null,
+  "initial_actual_state": "AWAITING_ANSWER",
+  "initial_actual_body_state": "PRE_QUESTION",
+  "initial_non_generating_reads": true,
+  "seconds": 204.71296324767172,
+  "adapter_hashes_after": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "5bec6c1cb1a8a8181634fe49e24fd03937437711475b22d53fa0acf97c078ede",
+    "adapter_model.safetensors": "adae463befe9c465fa6d3a465b29bdc66dafcf41f75328277aa90e2149eddf3d"
+  },
+  "adapter_files_unchanged": true,
+  "source_hashes_after": {
+    "runner/run_service_roundtrip.py": "ea58009d635f44605177c37479cf2d1135620f21e5fa4d4acedfa04b36c44841",
+    "pack/run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "pack/verify_cmee.py": "6c042267eeaa9dace4a63abd2ae1ad42f2486c722947a08ed3d1daf571a7684b",
+    "pack/dataset_manifest.json": "189fcc3a424731ad4074ef2901a6c8b5546913ea6410bbdca4e800fc73d6c867",
+    "api/ai/tests/test_emlis_q2_application.py": "771bc98fe23eee41fdd10c86f91accb55863cb24fee77b2609686e7ba1a6d514",
+    "api/ai/tests/helpers/emlis_q2_postgres.cjs": "bc4fc9a7bb46512a12ebe2ee2da5307e6d9d0ba8bacd4b94d69f26d09bfde7a6",
+    "api/supabase/migrations/20260911020509_emlis_input_threads_q2.sql": "8ec3369d5377046d933daaccc39123b7e92b7c1c33339136fdbc1a56a379c88f",
+    "api/ai/services/ai_inference/emlis_thread_service.py": "3c5bdaf79885df0b3607dc5c925d738c5fb7ae717e1d4354ffc05d6f23022fb8",
+    "api/ai/services/ai_inference/emlis_thread_store.py": "5c6f74894d66dd375daef4e3d44696e9795e67a4a3bd7ac7cbc5459e6f04c54f",
+    "api/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "b3058e4cdff65465516056fc0af4c7452bad6a6960310ecdd69ac008da872297",
+    "api/ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py": "77f982df1d2776613432913f8e907bf4db68c4e072104f426adfd814cf928472",
+    "api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "4a57bb27d3c0e00bb52d399c662749962cac282d9ff33282c909b21874f4f9c3",
+    "identity_eval/runner": "713279f51a83be4f33876b01c7230da6df57313983bd1416cc8f6ca0517be323",
+    "identity_eval/fixture": "1812411b6b2cb8abb75c4f22c5a573fd1ed657094611f1a4734ac3d099c3c08a",
+    "identity_eval/plan": "4e4cb05747dde47ec0dccb73cbe8e17d6c04f3e4be74523d4c7bc2978c1348a6",
+    "identity_eval/training_manifest": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107",
+    "identity_eval/train_messages": "fa340592b8b208bca91ce83a3623dcc6b7f96e02b2ccdf9cca0c00e7cf0fcf50",
+    "identity_eval/training_identities": "7aaab80b17a387b0b297e51f0edaa56e95931fa9597f3803fe8d2546fee7b9b5"
+  },
+  "source_files_unchanged": true,
+  "api_head_after": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "api_worktree_clean_after": true
+}

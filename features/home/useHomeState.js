@@ -3,24 +3,16 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getHomeState } from "../../lib/api/home/homeStateApi";
 import { PIECE_WIRE, readWireSectionObject } from "../../lib/compat/legacyWireContracts";
-import { resolveLocalTimezoneName } from "../../lib/api/home/todayQuestionApi";
-import { useAppRuntime } from "../../AppRuntimeContext";
 
 export const STARTUP_POPUP_KIND = Object.freeze({
   NOTICE: "notice",
   TUTORIAL: "tutorial",
-  TODAY_QUESTION: "todayQuestion",
 });
 
 const STARTUP_POPUP_PRIORITY = Object.freeze({
   [STARTUP_POPUP_KIND.NOTICE]: 300,
   [STARTUP_POPUP_KIND.TUTORIAL]: 200,
-  [STARTUP_POPUP_KIND.TODAY_QUESTION]: 100,
 });
-
-function getInputLocalTimezoneName() {
-  return resolveLocalTimezoneName("Asia/Tokyo");
-}
 
 function sortStartupPopupQueue(items = []) {
   return [...items]
@@ -51,10 +43,6 @@ function normalizeHomeSections(json) {
       sections?.notices_current && typeof sections.notices_current === "object"
         ? sections.notices_current
         : null,
-    todayQuestionCurrent:
-      sections?.today_question_current && typeof sections.today_question_current === "object"
-        ? sections.today_question_current
-        : null,
     pieceQuota: (() => {
       const section = readWireSectionObject(sections, PIECE_WIRE.startupSections.quota);
       return section.found && typeof section.value === "object" && !Array.isArray(section.value)
@@ -68,9 +56,6 @@ function toStartupPopupKind(rawKind) {
   const normalized = String(rawKind || "").trim().toLowerCase();
   if (normalized === "notice") return STARTUP_POPUP_KIND.NOTICE;
   if (normalized === "tutorial") return STARTUP_POPUP_KIND.TUTORIAL;
-  if (normalized === "today_question" || normalized === "todayquestion") {
-    return STARTUP_POPUP_KIND.TODAY_QUESTION;
-  }
   return null;
 }
 
@@ -81,18 +66,15 @@ export function useHomeState({
   navigation,
   buildTutorialStartupCandidate,
 }) {
-  const { isFeatureEnabled } = useAppRuntime();
-  const todayQuestionFeatureEnabled = isFeatureEnabled("today_question_enabled", true);
-  const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
+  const [initialHomeRead, setInitialHomeRead] = useState({ owner: null, settled: false, error: false });
+  const currentOwnerRef = useRef(currentUserId);
+  currentOwnerRef.current = currentUserId;
   const [homeTodayCount, setHomeTodayCount] = useState(null);
   const [homeMonthCount, setHomeMonthCount] = useState(null);
   const [homeWeekCount, setHomeWeekCount] = useState(null);
   const [homeStreakDays, setHomeStreakDays] = useState(null);
 
-  const [todayQuestionBundle, setTodayQuestionBundle] = useState(null);
-  const [todayQuestionLoading, setTodayQuestionLoading] = useState(false);
   const [noticeFeatureEnabled, setNoticeFeatureEnabled] = useState(true);
-  const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
   const [noticePopup, setNoticePopup] = useState(null);
   const [noticeLoading, setNoticeLoading] = useState(false);
   const [pieceQuota, setPieceQuota] = useState(null);
@@ -103,19 +85,12 @@ export function useHomeState({
   const appStateRef = useRef(AppState.currentState);
   const homeStateRequestIdRef = useRef(0);
   const dismissedNoticeIdRef = useRef(null);
-  const dismissedTodayQuestionDayRef = useRef(null);
   const startupCycleIdRef = useRef(0);
   const startupPrepareInFlightRef = useRef(null);
   const startupWindowClosedRef = useRef(false);
 
-  const clearTodayQuestionUi = useCallback(() => {
-    setTodayQuestionBundle(null);
-    setTodayQuestionLoading(false);
-  }, []);
-
   const clearNoticeUi = useCallback(() => {
     setNoticeFeatureEnabled(true);
-    setNoticeUnreadCount(0);
     setNoticePopup(null);
     setNoticeLoading(false);
   }, []);
@@ -125,18 +100,12 @@ export function useHomeState({
     dismissedNoticeIdRef.current = nextNoticeId || null;
   }, []);
 
-  const rememberDismissedTodayQuestionDay = useCallback((serviceDayKey) => {
-    const nextServiceDayKey = String(serviceDayKey || "").trim();
-    dismissedTodayQuestionDayRef.current = nextServiceDayKey || null;
-  }, []);
-
   const applyHomeStatePayload = useCallback(
     (json) => {
       const {
         inputSummary,
         globalSummary,
         noticesCurrent,
-        todayQuestionCurrent,
         pieceQuota: nextQuota,
       } = normalizeHomeSections(json);
 
@@ -152,30 +121,16 @@ export function useHomeState({
         setHomeStreakDays(Number.isFinite(streakDays) ? streakDays : 0);
       }
 
-      if (globalSummary) {
-        const nextEmotionUsers = Number(globalSummary?.emotion_users);
-        if (Number.isFinite(nextEmotionUsers)) {
-          setGlobalEmotionUsers(nextEmotionUsers);
-        }
-      }
-
       if (isTutorialMode) {
         clearNoticeUi();
-        clearTodayQuestionUi();
         setPieceQuota(null);
       } else {
         setNoticeFeatureEnabled(noticesCurrent?.feature_enabled !== false);
-        setNoticeUnreadCount(Math.max(0, Number(noticesCurrent?.unread_count) || 0));
         setNoticePopup(
           noticesCurrent?.popup_notice && typeof noticesCurrent.popup_notice === "object"
             ? noticesCurrent.popup_notice
             : null
         );
-        if (todayQuestionFeatureEnabled) {
-          setTodayQuestionBundle(todayQuestionCurrent || null);
-        } else {
-          clearTodayQuestionUi();
-        }
         setPieceQuota(nextQuota);
       }
 
@@ -183,11 +138,10 @@ export function useHomeState({
         inputSummary,
         globalSummary,
         noticesCurrent,
-        todayQuestionCurrent,
         pieceQuota: nextQuota,
       };
     },
-    [clearNoticeUi, clearTodayQuestionUi, isTutorialMode, todayQuestionFeatureEnabled]
+    [clearNoticeUi, isTutorialMode]
   );
 
   const loadHomeState = useCallback(
@@ -197,36 +151,25 @@ export function useHomeState({
 
       if (!currentUserId) {
         clearNoticeUi();
-        clearTodayQuestionUi();
         setPieceQuota(null);
-        return { noticeCandidate: null, todayQuestionCandidate: null, aborted: false };
+        return { noticeCandidate: null, aborted: false };
       }
 
+      const requestOwner = currentUserId;
+      const isCurrentRequest = () => homeStateRequestIdRef.current === requestId && currentOwnerRef.current === requestOwner;
       setNoticeLoading(true);
-      if (todayQuestionFeatureEnabled) {
-        setTodayQuestionLoading(true);
-      } else {
-        clearTodayQuestionUi();
-      }
       try {
-        const json = await getHomeState({
-          forceRefresh: force,
-          timezoneName: getInputLocalTimezoneName(),
-        });
-        if (homeStateRequestIdRef.current !== requestId) {
-          return { noticeCandidate: null, todayQuestionCandidate: null, aborted: true };
+        const json = await getHomeState({ forceRefresh: force });
+        if (!isCurrentRequest()) {
+          return { noticeCandidate: null, aborted: true };
         }
 
+        setInitialHomeRead({ owner: requestOwner, settled: true, error: false });
         const normalized = applyHomeStatePayload(json);
         const noticesCurrent = normalized?.noticesCurrent || null;
-        const todayQuestionCurrent = todayQuestionFeatureEnabled
-          ? normalized?.todayQuestionCurrent || null
-          : null;
-
         if (isTutorialMode) {
           return {
             noticeCandidate: null,
-            todayQuestionCandidate: null,
             aborted: false,
             payload: json,
           };
@@ -239,12 +182,6 @@ export function useHomeState({
         const popupNoticeId = String(
           json?.notice_popup_notice_id || popupNotice?.notice_id || ""
         ).trim();
-        const serviceDayKey = String(
-          json?.service_day_key || todayQuestionCurrent?.service_day_key || ""
-        ).trim();
-        const unanswered =
-          !!todayQuestionCurrent?.question &&
-          String(todayQuestionCurrent?.answer_status || "unanswered") !== "answered";
         const popupCandidates = Array.isArray(json?.popup_candidates)
           ? json.popup_candidates
           : [];
@@ -262,44 +199,31 @@ export function useHomeState({
           popupNoticeId &&
           dismissedNoticeIdRef.current !== popupNoticeId &&
           (!hasExplicitPopupCandidates || candidateKinds.has(STARTUP_POPUP_KIND.NOTICE));
-        const canShowTodayQuestionCandidate =
-          todayQuestionFeatureEnabled &&
-          includeStartupCandidate &&
-          unanswered &&
-          serviceDayKey &&
-          dismissedTodayQuestionDayRef.current !== serviceDayKey &&
-          (!hasExplicitPopupCandidates || candidateKinds.has(STARTUP_POPUP_KIND.TODAY_QUESTION));
-
         return {
           noticeCandidate: canShowNoticeCandidate
             ? { kind: STARTUP_POPUP_KIND.NOTICE }
-            : null,
-          todayQuestionCandidate: canShowTodayQuestionCandidate
-            ? { kind: STARTUP_POPUP_KIND.TODAY_QUESTION }
             : null,
           aborted: false,
           payload: json,
         };
       } catch (e) {
-        if (homeStateRequestIdRef.current !== requestId) {
-          return { noticeCandidate: null, todayQuestionCandidate: null, aborted: true };
+        if (!isCurrentRequest()) {
+          return { noticeCandidate: null, aborted: true };
         }
+        setInitialHomeRead({ owner: requestOwner, settled: true, error: true });
         console.warn("InputScreen: loadHomeState failed", e);
-        return { noticeCandidate: null, todayQuestionCandidate: null, aborted: false };
+        return { noticeCandidate: null, aborted: false };
       } finally {
-        if (homeStateRequestIdRef.current === requestId) {
+        if (isCurrentRequest()) {
           setNoticeLoading(false);
-          setTodayQuestionLoading(false);
         }
       }
     },
     [
       applyHomeStatePayload,
       clearNoticeUi,
-      clearTodayQuestionUi,
       currentUserId,
       isTutorialMode,
-      todayQuestionFeatureEnabled,
     ]
   );
 
@@ -322,9 +246,6 @@ export function useHomeState({
     activeStartupPopup?.kind === STARTUP_POPUP_KIND.NOTICE;
   const isTutorialStartupPopupVisible =
     activeStartupPopup?.kind === STARTUP_POPUP_KIND.TUTORIAL;
-  const isTodayQuestionStartupPopupVisible =
-    activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION;
-
   const prepareStartupPopupQueue = useCallback(
     async (cycleId) => {
       if (!cycleId) return;
@@ -351,7 +272,6 @@ export function useHomeState({
       const nextQueue = sortStartupPopupQueue([
         homeStateResult?.noticeCandidate,
         tutorialCandidate,
-        homeStateResult?.todayQuestionCandidate,
       ]);
 
       setStartupPopupQueue(nextQueue);
@@ -388,17 +308,11 @@ export function useHomeState({
     if (!currentUserId) {
       closeStartupPopupWindow();
       clearNoticeUi();
-      clearTodayQuestionUi();
       setPieceQuota(null);
       return;
     }
     void loadHomeState({ includeStartupCandidate: false });
-  }, [clearNoticeUi, clearTodayQuestionUi, closeStartupPopupWindow, currentUserId, isTutorialMode, loadHomeState]);
-
-  useEffect(() => {
-    if (todayQuestionFeatureEnabled) return;
-    clearTodayQuestionUi();
-  }, [clearTodayQuestionUi, todayQuestionFeatureEnabled]);
+  }, [clearNoticeUi, closeStartupPopupWindow, currentUserId, isTutorialMode, loadHomeState]);
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
@@ -476,69 +390,57 @@ export function useHomeState({
     if (!isTutorialMode) return;
     closeStartupPopupWindow();
     homeStateRequestIdRef.current += 1;
-    clearTodayQuestionUi();
     clearNoticeUi();
     setPieceQuota(null);
-  }, [clearNoticeUi, clearTodayQuestionUi, closeStartupPopupWindow, isTutorialMode]);
+  }, [clearNoticeUi, closeStartupPopupWindow, isTutorialMode]);
 
   return useMemo(
     () => ({
-      globalEmotionUsers,
+      initialHomeReadComplete: isTutorialMode || (initialHomeRead.owner === currentUserId && initialHomeRead.settled),
+      homeReadError: initialHomeRead.owner === currentUserId && initialHomeRead.error,
       homeTodayCount,
       homeMonthCount,
       homeWeekCount,
       homeStreakDays,
       noticeFeatureEnabled,
-      noticeUnreadCount,
-      setNoticeUnreadCount,
       noticePopup,
       setNoticePopup,
       noticeLoading,
-      todayQuestionBundle,
-      todayQuestionLoading,
       pieceQuota,
       setPieceQuota,
       loadHomeState,
       rememberDismissedNotice,
-      rememberDismissedTodayQuestionDay,
       startupQueuePreparing,
-      activeStartupPopup,
       startupModalVisible,
       isNoticeStartupPopupVisible,
       isTutorialStartupPopupVisible,
-      isTodayQuestionStartupPopupVisible,
       closeStartupPopupWindow,
       advanceStartupPopupQueue,
       registerInputInteraction,
     }),
     [
-      activeStartupPopup,
       advanceStartupPopupQueue,
       closeStartupPopupWindow,
-      globalEmotionUsers,
+      initialHomeRead,
+      currentUserId,
+      isTutorialMode,
       homeMonthCount,
       homeStreakDays,
       homeTodayCount,
       homeWeekCount,
       isNoticeStartupPopupVisible,
-      isTodayQuestionStartupPopupVisible,
       isTutorialStartupPopupVisible,
       loadHomeState,
       noticeFeatureEnabled,
       noticeLoading,
       noticePopup,
-      noticeUnreadCount,
       pieceQuota,
       registerInputInteraction,
       rememberDismissedNotice,
-      rememberDismissedTodayQuestionDay,
       setNoticePopup,
-      setNoticeUnreadCount,
       setPieceQuota,
       startupModalVisible,
       startupQueuePreparing,
-      todayQuestionBundle,
-      todayQuestionLoading,
     ]
   );
 }

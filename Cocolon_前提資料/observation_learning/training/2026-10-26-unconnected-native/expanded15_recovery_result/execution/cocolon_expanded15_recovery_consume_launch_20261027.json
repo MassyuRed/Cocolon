@@ -1,0 +1,22 @@
+{
+  "status": "CPU_CONSUMER_LAUNCHED_ONCE",
+  "cmd": [
+    "/usr/local/bin/python",
+    "-B",
+    "/workspace/cocolon_native15_expanded15_recovery_pack_20261027/consume_expanded15_recovery.py",
+    "--run",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027",
+    "--out",
+    "/workspace/cocolon_native15_expanded15_recovery_diagnosis_20261027",
+    "--api",
+    "/workspace/cocolon_afteronly_api_20261027",
+    "--expected-source-commit",
+    "d014e45c9a94f1ebc1e193ea7d6d1513280e8dc2"
+  ],
+  "started_unix": 1793080898.6949592,
+  "log": "/workspace/cocolon_expanded15_recovery_consume_20261027.log",
+  "model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0,
+  "pid": 149533
+}

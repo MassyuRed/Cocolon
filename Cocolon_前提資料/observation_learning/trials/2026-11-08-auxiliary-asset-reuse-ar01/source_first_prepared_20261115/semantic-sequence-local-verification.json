@@ -1,0 +1,47 @@
+{
+  "state": "LOCAL_VERIFIED_NOT_GENERATED_OR_PUBLISHED",
+  "files": [
+    {
+      "name": "semantic_output_schema.sequence.py",
+      "bytes": 5405,
+      "sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e"
+    },
+    {
+      "name": "semantic_admission.sequence.py",
+      "bytes": 192194,
+      "sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd"
+    }
+  ],
+  "tests": {
+    "passed": 215,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 19.33,
+    "log": "/workspace/scratch/8262f97b141c/preparation/semantic-evidence-overview-sequence-tests.log",
+    "suites": [
+      "test_analysis_semantic_generation_schema.py",
+      "test_analysis_semantic_history_core.py",
+      "test_analysis_semantic_map.py"
+    ]
+  },
+  "new_model_calls": 0,
+  "remote_operations": 0,
+  "source_guard_changes": 0,
+  "public_key_changes": 0,
+  "normal_deployment": 0,
+  "native_order": [
+    "schema_version",
+    "nodes(evidence first)",
+    "edges",
+    "overview"
+  ],
+  "native_profile_scope": [
+    "ordinary",
+    "LEAF",
+    "MERGE"
+  ],
+  "native_capacity_and_quote_options": "UNCHANGED_VS_PRIOR_FULL_CAPACITY_BASELINE",
+  "shared_prompt_changed": true,
+  "history_schema_bytes_changed": true,
+  "prior_raw_receiver_order_independent": true
+}

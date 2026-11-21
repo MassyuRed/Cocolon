@@ -1,0 +1,96 @@
+{
+  "observed_at_utc": "2026-11-15T20:42:40.643Z",
+  "repository": "MassyuRed/mashos-api",
+  "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+  "local_commit": "7e1dc7d6c6ec08710e2b4f43707d3685831dcf83",
+  "remote_commit": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+  "parent": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+  "tree": "bd6b27c9a3a3438a66d3ca714fc04df80cb3c03e",
+  "remote_commit_url": "https://github.com/MassyuRed/mashos-api/commit/f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+  "lease": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+  "force": false,
+  "whole_tree_sha_matches_local": true,
+  "tree_truncated": false,
+  "changed_blob_checks": [
+    {
+      "path": "ai/tests/fixtures/analysis_semantic_ordinary_record_coverage_received_20261116.json",
+      "bytes": 12474,
+      "mode": "100644",
+      "local_blob": "e44ee80b9cb361d88c10907a3cd908ba50ac3f12",
+      "remote_blob": "e44ee80b9cb361d88c10907a3cd908ba50ac3f12",
+      "match": true
+    },
+    {
+      "path": "ai/tests/test_analysis_semantic_generation_schema.py",
+      "bytes": 70760,
+      "mode": "100644",
+      "local_blob": "37322d81ed7dfaba40eef6165a01201726dd42d0",
+      "remote_blob": "37322d81ed7dfaba40eef6165a01201726dd42d0",
+      "match": true
+    },
+    {
+      "path": "ai/tools/serve_emlis_natural_reply.py",
+      "bytes": 72759,
+      "mode": "100644",
+      "local_blob": "94a2fb3a04f5b8246fac48aa76dab353674daf87",
+      "remote_blob": "94a2fb3a04f5b8246fac48aa76dab353674daf87",
+      "match": true
+    }
+  ],
+  "ci_runs": [
+    {
+      "id": 43759567810,
+      "name": "Analysis observed content",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43759567810",
+      "run_attempt": 1
+    },
+    {
+      "id": 43759567752,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43759567752",
+      "run_attempt": 1
+    }
+  ],
+  "tests": {
+    "passed": 287,
+    "elapsed_seconds": 20.91,
+    "warning_count": 1,
+    "dependency": "exact pinned LMFE",
+    "log": "/workspace/scratch/8262f97b141c/verification/ordinary_record_coverage_tests_20261116.log"
+  },
+  "fixture": {
+    "all_fictional": true,
+    "body_messages_and_raw_sha256_verified": true,
+    "raw_sha256": "027349625e534fb0e91dbbfb678dd0a40e9e6790988e7a0ae293dd6d94fda1e1",
+    "received_evidence_records": [
+      1
+    ],
+    "original_records": [
+      1,
+      2
+    ],
+    "quality_adopted": false
+  },
+  "shared_core_sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+  "schema_function_with_lf_sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e",
+  "production_changed_function_only": "semantic_json_parser",
+  "workflow_reruns": 0,
+  "merges": 0,
+  "deployments": 0,
+  "pod_operations": 0,
+  "model_calls": 0,
+  "production_db_calls": 0,
+  "fetched_ref": {
+    "ref": "refs/remotes/origin/approved-published-ordinary-record-coverage-20261116",
+    "sha": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+    "whole_tree_diff_empty": true,
+    "head_unchanged": "7e1dc7d6c6ec08710e2b4f43707d3685831dcf83",
+    "tracked_status": ""
+  }
+}

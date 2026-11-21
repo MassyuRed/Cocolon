@@ -1,0 +1,181 @@
+{
+  "schema_version": "analysis_plain_wish4_checkpoint.v1",
+  "status": "LIMITED_SOURCE_PROVED_WISH_CONSUMER_EXACT_REPLAY_NOT_ADOPTED",
+  "api_commit": "09b65013658c661cbc33a3857bd2e360e6f4c424",
+  "changed_product_and_test_paths": [
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+    "ai/tests/test_analysis_model_observed_actions.py"
+  ],
+  "source_scope": {
+    "original_record_count": 1,
+    "original_source_count": 1,
+    "field_path": "memo",
+    "actor": "SELF",
+    "polarity": "positive",
+    "existing_verb_lemma_count": 9,
+    "wish_times": [
+      "current_input",
+      "past"
+    ],
+    "mixed_past_actions_preserve_original_graph": true,
+    "pure_past_action_helper_unchanged": true,
+    "other_or_omitted_actor_admission_expanded": false,
+    "negative_wish_cognition_order_supplement_or_memo_action_admission_expanded": false
+  },
+  "targeted_tests": {
+    "new_focused": 27,
+    "total": 185,
+    "batch_tests_included": 55,
+    "seconds": 62.55
+  },
+  "ci": {
+    "run": 42095168200,
+    "job": 127483170773,
+    "conclusion": "success",
+    "generation_passed": 2339,
+    "generation_skipped": 1,
+    "generation_subtests": 12048,
+    "cumulative_passed": 302,
+    "cumulative_subtests": 2,
+    "sql_records": 201,
+    "sql_monthly": 15,
+    "generation_seconds": 389.73,
+    "owner_passed": 1,
+    "owner_seconds": 27.51,
+    "cumulative_seconds": 156.68,
+    "cumulative_warnings": 1
+  },
+  "original_generation": {
+    "api_commit": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "prompt_version": "selected_material.v7",
+    "new_generation": 4,
+    "stop_count": 4,
+    "model_loads": 1,
+    "new_training": 0,
+    "seconds": 32.76803073566407,
+    "syntax_admitted": 4,
+    "adapter_unchanged": true,
+    "source_hashes_unchanged": true
+  },
+  "same_response_replay": {
+    "old_api_commit": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+    "new_api_commit": "09b65013658c661cbc33a3857bd2e360e6f4c424",
+    "responses": 4,
+    "new_generation": 0,
+    "model_loads": 0,
+    "old_seconds": 1.3742120806127787,
+    "new_seconds": 1.3479267098009586,
+    "all_five_response_fields_exact": true,
+    "all_input_bindings_exact": true,
+    "raw_repaired": false,
+    "response_rebound": false,
+    "old_guard_violations": 0,
+    "new_guard_violations": 0,
+    "cases": [
+      {
+        "id": "WH01",
+        "old_status": "UNSUPPORTED",
+        "new_status": "UNSUPPORTED",
+        "old_mapped": 0,
+        "new_mapped": 0,
+        "new_unparsed": 1,
+        "model_issue": "WISH_ROOT_MISCLASSIFIED_AS_ACTION"
+      },
+      {
+        "id": "WH02",
+        "old_status": "UNSUPPORTED",
+        "new_status": "OBSERVED_MAP",
+        "old_mapped": 0,
+        "new_mapped": 1,
+        "new_unparsed": 0,
+        "model_issue": null
+      },
+      {
+        "id": "WH03",
+        "old_status": "UNSUPPORTED",
+        "new_status": "UNSUPPORTED",
+        "old_mapped": 0,
+        "new_mapped": 0,
+        "new_unparsed": 1,
+        "model_issue": null
+      },
+      {
+        "id": "WH04",
+        "old_status": "UNSUPPORTED",
+        "new_status": "UNSUPPORTED",
+        "old_mapped": 0,
+        "new_mapped": 0,
+        "new_unparsed": 1,
+        "model_issue": "NEGATION_ANNOTATION_MISSING_LITERAL_NEGATIVE_RETAINED"
+      }
+    ],
+    "changed_case": "WH02",
+    "changed_actor": "SELF",
+    "changed_modality": "wish",
+    "changed_temporal_scope": "past",
+    "changed_nodes": 1
+  },
+  "synthetic_batch20_replay": {
+    "original_api_commit": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+    "api_commit": "09b65013658c661cbc33a3857bd2e360e6f4c424",
+    "records": 20,
+    "child_record_counts": [
+      7,
+      7,
+      6
+    ],
+    "repeated_identical_two_clause_text": true,
+    "diverse_language_sample": false,
+    "new_generation": 0,
+    "model_loads": 0,
+    "new_training": 0,
+    "seconds": 3.6746810944750905,
+    "old_mapped": 0,
+    "old_unparsed": 20,
+    "new_mapped": 20,
+    "new_unparsed": 0,
+    "nodes": 2,
+    "edges": 0,
+    "node_record_ref_counts": [
+      20,
+      20
+    ],
+    "node_evidence_ref_counts": [
+      20,
+      20
+    ],
+    "connection_unknown_preserved": true,
+    "exact_original_input_and_responses": true,
+    "repaired_or_replayed_live_incomplete_responses": false
+  },
+  "api_calls": 0,
+  "database_access": 0,
+  "production_writes": 0,
+  "saved_maps": 0,
+  "builds": 0,
+  "deployments": 0,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_acceptance": false,
+  "general_quality_rate_claim": false,
+  "wire24": {
+    "cpu_preparation_complete": true,
+    "execution_results_included": false
+  },
+  "private_archive": {
+    "library_file_id": "libfile_78de85117ab48191ba102c0c2f42ccec",
+    "version": 4,
+    "saved": true,
+    "bytes": 16132669,
+    "sha256": "3ede2d9d6ae4da3fed70d3c32ea11e5b0b12ead56cd8e84f900dafc2e777dd18"
+  },
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "limitations": [
+    "Four constructed variants; not a blind held-out or general-language quality measurement.",
+    "Original responses were generated on the old API; the new consumer comparison used zero model calls.",
+    "Synthetic twenty-record composition is separate from the unresolved live three-child missing-field failure.",
+    "Offline construction is not normal full acquisition, output-2048 fit, total-60-second completion, saved-map or production proof."
+  ]
+}

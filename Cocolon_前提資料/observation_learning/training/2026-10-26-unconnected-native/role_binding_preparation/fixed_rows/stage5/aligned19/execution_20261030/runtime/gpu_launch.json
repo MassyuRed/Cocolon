@@ -1,0 +1,17 @@
+{
+  "source_commit": "105c08d231c3fb993f565197b200a5db8ff6c05e",
+  "timeout_pid": 391074,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "2690s",
+    "/usr/bin/python3.12",
+    "/workspace/cocolon_aligned19_pack_20261030/run_aligned19_once.py",
+    "--execute",
+    "--source-commit",
+    "105c08d231c3fb993f565197b200a5db8ff6c05e"
+  ],
+  "approval_sha256": "7bb865b90f024a0f8a6ad8082646471e8a56c9ebadc92f5b74c33d9bae5263bc",
+  "retry": false
+}

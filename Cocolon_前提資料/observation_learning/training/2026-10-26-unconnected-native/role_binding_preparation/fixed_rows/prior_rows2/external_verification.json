@@ -1,0 +1,15 @@
+{
+  "status": "ALL_CPU_ORIGINALS_RECOVERED_VERIFIED",
+  "archive_bytes": 102525,
+  "archive_sha256": "4f4013abcb55e983667f300dbcada844e0d9fb16249fbdfdbbc4095419dda683",
+  "members": 8,
+  "all_crc_member_set_size_sha_verified": true,
+  "source_matches_git_commit": "9b91ef7fb87862f2f7481351b15536a0bdbb3430",
+  "teacher11_bytes_unchanged": true,
+  "old9_entire_rows_unchanged": true,
+  "previous_cmee_teacher2_full_outcome_unchanged": true,
+  "download_attempts": 1,
+  "download_api_reported_failure": true,
+  "actual_file_arrived": true,
+  "additional_model_processing": 0
+}

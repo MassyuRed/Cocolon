@@ -1,0 +1,77 @@
+{
+  "schema": "cocolon.normal_state.read_only_verification.v2",
+  "verified_at_utc": "2026-11-15T20:14:47.939Z",
+  "scope": "Read-only deployment/service metadata, worker startup settings, public health endpoint and migration metadata; no user records or secret environment values.",
+  "expected_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "render": [
+    {
+      "name": "mashos-api",
+      "id": "srv-d4ppfpm3jp1c73952bj0",
+      "deploy_id": "dep-dbsgn8t6e07s739qfk50",
+      "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "status": "live",
+      "branch": "main",
+      "autoDeploy": "no",
+      "autoDeployTrigger": "off",
+      "suspended": "not_suspended",
+      "maintenanceMode": false,
+      "numInstances": 1
+    },
+    {
+      "name": "mashos-astor-worker",
+      "id": "srv-d6copljh46gs73cmeic0",
+      "deploy_id": "dep-dbsgnet6e07s739qg5a0",
+      "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "status": "live",
+      "branch": "main",
+      "autoDeploy": "no",
+      "autoDeployTrigger": "off",
+      "suspended": "not_suspended",
+      "numInstances": 1
+    }
+  ],
+  "worker_effective_startup": {
+    "timestamp": "2026-11-15T01:33:37.988702242Z",
+    "log_id": "ae15f9d1-08c6-44e4-a774-3dd330a2101f",
+    "stale_running_seconds": 900,
+    "maintenance_seconds": 60,
+    "poll_seconds": 1,
+    "source": "Fresh exact startup log query; active normal deployment unchanged."
+  },
+  "api_health": {
+    "url": "https://mashos-api.onrender.com/healthz",
+    "first_attempt": {
+      "state": "READ_TIMEOUT",
+      "elapsed_seconds": 26.125825633000204,
+      "transport_timeout_seconds": 20
+    },
+    "one_followup": {
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "app": "Cocolon MyModel"
+      },
+      "elapsed_seconds": 6.380634517000544,
+      "transport_timeout_seconds": 45
+    },
+    "cause_of_initial_timeout": "Unknown; no outage/cold-start cause inferred."
+  },
+  "supabase": {
+    "project_id": "oeahmpmigszggnkyiivq",
+    "name": "cocolon-project",
+    "status": "ACTIVE_HEALTHY",
+    "migration_count": 38,
+    "latest_migration": {
+      "version": "20261115011424",
+      "name": "piece_answer_and_interpretation_corrections"
+    }
+  },
+  "drift_detected": false,
+  "external_mutations": 0,
+  "new_model_calls": 0,
+  "user_records_read": 0,
+  "secret_environment_read": false,
+  "limits": [
+    "No new worker job executed; worker startup metadata and Live state do not prove a fresh full model workflow."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "pid": 604760,
+  "source_commit": "150cbcbfc95777b1d839c8d2418550573bbaa641",
+  "cmd": [
+    "python",
+    "-B",
+    "-u",
+    "/workspace/cocolon_4b_daily_calm_focus_pack_20261025/run_daily_calm_focus.py",
+    "--parent-pack",
+    "/workspace/cocolon_4b_daily_calm_pack_20261025",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--initial-adapter",
+    "/workspace/cocolon_4b_daily_calm_fit18_20261025/adapter",
+    "--source-commit",
+    "150cbcbfc95777b1d839c8d2418550573bbaa641"
+  ],
+  "started_unix": 1792926599.2029142,
+  "max_optimizer_steps": 12,
+  "max_fit_generations": 9,
+  "process_deadline_seconds": 1800,
+  "gpu_stop_restart_delete_operations": 0,
+  "retry": false
+}

@@ -118,7 +118,7 @@ sentences:
   1..6
 
 content envelope:
-  24..420 normalized characters
+  1..420 normalized characters (nonempty source-scaled text; no padding)
 
 title:
   null
@@ -484,3 +484,13 @@ POSTSAVE_FORMAT_CHANGE_NEW_RECORD
 PRODUCTION_EFFECT_EXACT0
 PCE4_COMPLETE_DESIGN_ONLY
 ```
+
+
+<a id="piece-user-text-only-20261101"></a>
+## 2026-11-01 — 画像本文はユーザーが書いた文章だけ
+
+Mashは7001で画像生成・一覧表示・スマホ写真フォルダへの保存成功を確認した。今回、感情選択から「記録時には〜」等の文章を付加しないよう明示し、新規ビルド不要と指定した。以後の新規作成は、ユーザー本文を必要に応じて整形した文章だけを画像へ載せる。本人が元から本文に書いた感情・否定・時点は保持する。
+
+API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し、可視graph/owner/planの命題にはしない。原recordへの束縛と変更検知を維持する。piece_v1c.pyの唯一作者は元memo/actionだけを整形し、metadataからの追加節を廃止。piece_v2_content_policy.pyの独立検査は余分な節/段落を拒否する。短い完成文もpaddingなしで扱うためshort_essay下限は非空（1..420正規化字/最大6文、1..3段落）。非表示選択だけで名詞断片を完成文へ昇格しない。quote/declarationの制約、既存安全/owner/source/枠/receiptは保持する。
+
+既存保存済みrecord/本文/hash/端末画像を移行・書換しない。RN製品source/公開wire/DB schema/依存変更0、7001を継続し署名build追加0。STRUCTURE_MAP_DELTA_PRESENT（private選択contextと可視本文の分離）。最新の検証・API配置結果はweekly第9回§41へ記録する。Share送信/Android/一般日本語品質/全機能受入れを本人の今回確認へ含めない。

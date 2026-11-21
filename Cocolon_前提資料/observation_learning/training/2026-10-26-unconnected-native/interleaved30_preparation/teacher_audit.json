@@ -1,0 +1,722 @@
+{
+  "schema": "cocolon.native15.teacher_static_audit.v1",
+  "review_date_jst": "2026-10-27",
+  "scope": "静的な原入力・プロンプト・教師・保存run payload・consumer束縛の照合。新model/GPU/SQL/外部writeなし。CMEE教師再実行や商品合格判定はしない。",
+  "model_calls": 0,
+  "training_updates": 0,
+  "gpu_operations": 0,
+  "external_write_operations": 0,
+  "source_files": [
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/sft_examples.jsonl",
+      "sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/afteronly_final/run/train_messages.jsonl",
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/afteronly_final/run/eval_inputs.jsonl",
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/consume_native15_afteronly.py",
+      "sha256": "6c07e54b4a8cf2b3de7c720a4408f656fb178aa01435a4d286bfd9a6b32f5a41"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/afteronly_final/evidence/consume_native15_afteronly.py",
+      "sha256": "6c07e54b4a8cf2b3de7c720a4408f656fb178aa01435a4d286bfd9a6b32f5a41"
+    }
+  ],
+  "payload_identity": {
+    "train_equal_to_actual_run": true,
+    "eval_equal_to_actual_run": true,
+    "consumer_equal_to_final_executed_source": true,
+    "all15_eval_equals_train_without_assistant": true
+  },
+  "static_checks": {
+    "cases": 15,
+    "cases_with_visible_structural_error": 0,
+    "checks_performed": [
+      "strict JSON duplicate-key rejection",
+      "every quote occurs exactly once in its bound unchanged source field",
+      "evidence index ranges",
+      "claim/relation/update reference ranges and ID kinds",
+      "relation endpoint presence",
+      "unique claim/relation IDs",
+      "new-six clause role order and kind/modality/polarity/time axes equal prompt role map",
+      "train/eval identity; no assistant teacher in evaluation prompt"
+    ],
+    "case_results": [
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "errors": [],
+        "quote_rows": 6,
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "errors": [],
+        "quote_rows": 12,
+        "claims": 6,
+        "relations": 2,
+        "updates": 3,
+        "question": null
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "errors": [],
+        "quote_rows": 6,
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "errors": [],
+        "quote_rows": 12,
+        "claims": 6,
+        "relations": 2,
+        "updates": 3,
+        "question": null
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "errors": [],
+        "quote_rows": 6,
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "errors": [],
+        "quote_rows": 12,
+        "claims": 6,
+        "relations": 2,
+        "updates": 3,
+        "question": null
+      },
+      {
+        "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "errors": [],
+        "quote_rows": 8,
+        "claims": 5,
+        "relations": 4,
+        "updates": 0,
+        "question": null
+      },
+      {
+        "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "errors": [],
+        "quote_rows": 8,
+        "claims": 5,
+        "relations": 4,
+        "updates": 0,
+        "question": null
+      },
+      {
+        "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "errors": [],
+        "quote_rows": 8,
+        "claims": 5,
+        "relations": 4,
+        "updates": 0,
+        "question": null
+      },
+      {
+        "case_id": "FT-BOOK-INITIAL",
+        "errors": [],
+        "quote_rows": 6,
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "question": "何が気になりますか？"
+      },
+      {
+        "case_id": "FT-BOOK-AFTER-ANSWER",
+        "errors": [],
+        "quote_rows": 17,
+        "claims": 10,
+        "relations": 7,
+        "updates": 7,
+        "question": null
+      },
+      {
+        "case_id": "FT-SHOP-INITIAL",
+        "errors": [],
+        "quote_rows": 6,
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "question": "「少し置いていかれた気がした」のはなぜですか？"
+      },
+      {
+        "case_id": "FT-SHOP-AFTER-ANSWER",
+        "errors": [],
+        "quote_rows": 18,
+        "claims": 11,
+        "relations": 6,
+        "updates": 8,
+        "question": null
+      },
+      {
+        "case_id": "FT-REPOT-INITIAL",
+        "errors": [],
+        "quote_rows": 6,
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "question": null
+      },
+      {
+        "case_id": "FT-KNIT-INITIAL",
+        "errors": [],
+        "quote_rows": 4,
+        "claims": 4,
+        "relations": 0,
+        "updates": 0,
+        "question": null
+      }
+    ],
+    "limit": "独立CMEE再採否ではありません。15教師CPU成功は既存記録であり、本静的確認を新しい15CMEE成功へ加算しません。"
+  },
+  "semantic_reading": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+        "line": 10,
+        "json_path": "messages[1].content.material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+        "line": 10,
+        "json_path": "messages[2].content"
+      },
+      "source_texts": [
+        {
+          "source_id": "FT-BOOK-O",
+          "text_fields": {
+            "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+            "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "late_return",
+              "apologize",
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "本を返すのが遅れて友人に謝り、「大丈夫」と言われても、まだ少し気がかりが残っているのですね。",
+        "reception": "「大丈夫」と言ってもらえたことも、まだ気になることも、聞いていたいです。",
+        "update_note": null
+      },
+      "target_clauses": 4,
+      "target_relations": 2,
+      "target_updates": 0,
+      "target_quote_rows": 6,
+      "meaning_conclusion": "原文の本返却遅延/友人への謝罪、大丈夫と言ってもらったこと、少し残る現在の気がかりを保持。相手の本心や未記載の気がかり対象を補っていません。",
+      "target_details": [
+        "remaining_concernはSTATE/WRITTEN_PRESENT、time expression=null。実rawのPRESENT/2026-10-26補完は教師由来ではありません。",
+        "NOT_STATEDはremaining_concern一対象。本人が分からないと言ったPERSON_STATEDへ変えていません。",
+        "何が気になりますか？はtargetと未記載gapに対応し、問い残数1と整合します。"
+      ],
+      "important_paths": [
+        "candidate.claims[3]",
+        "candidate.unknowns[0]",
+        "candidate.question_proposal",
+        "candidate.surface_proposal"
+      ],
+      "teacher_surface_judgment": "受け取りは本人の二面を聞く文で、AIが本人の気がかりを自分で持つ主語混同はありません。"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+        "line": 11,
+        "json_path": "messages[1].content.material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+        "line": 11,
+        "json_path": "messages[2].content"
+      },
+      "source_texts": [
+        {
+          "source_id": "FT-BOOK-O",
+          "text_fields": {
+            "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+            "memo_action": "借りていた本を返すのが遅れて、友人に謝った。"
+          }
+        },
+        {
+          "source_id": "sixrow-answer-book",
+          "text_fields": {
+            "answer_text_private": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "late_awareness",
+              "no_contact",
+              "continuing_concern"
+            ],
+            "relation_refs": [
+              "awareness_time"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "returned",
+              "counterfactual",
+              "continuing_concern",
+              "remaining_concern",
+              "no_contact"
+            ],
+            "relation_refs": [
+              "returned_concession",
+              "concern_content",
+              "answer_explains_target"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "remaining_concern",
+              "late_awareness",
+              "no_contact"
+            ],
+            "relation_refs": [
+              "answer_explains_target",
+              "awareness_time"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        ],
+        "observation": "遅くなると分かった時に連絡しなかったことが、今も気になっているのですね。",
+        "reception": "本を返しても、あの時に一言伝えておけば、という思いは残っているのですね。何が気になっているのか、話してくださってありがとうございます。",
+        "update_note": "気がかりの対象が、遅れると分かった時に連絡しなかったことだと説明されました。"
+      },
+      "target_clauses": 10,
+      "target_relations": 7,
+      "target_updates": 7,
+      "target_quote_rows": 17,
+      "meaning_conclusion": "自分の週末返却発言、遅延認識時の無連絡、返却済みという事実、当時伝えておけばという現在の反実的振返りと継続する気がかりを分けています。",
+      "target_details": [
+        "self_statementはREPORTED_STATEMENTで、発言を達成済みの返却や新しい約束eventへ昇格していません。",
+        "no_contactはNEGATED、時点expressionは原文の遅くなると分かった時点に束縛。",
+        "counterfactualはCOUNTERFACTUAL_APPRAISAL/ANSWER_TIME、continuing_concernもANSWER_TIME。気がかりの原claimと原関係4/2を保持。",
+        "新6claimへのADD6と最後のINVALIDATE_GAP1で7update。元claimをREVISE/撤回しません。",
+        "末尾update_refsは0..6を一度ずつ含み、実rawの96反復やJSON未閉鎖は教師にはありません。"
+      ],
+      "important_paths": [
+        "candidate.claims[4:10]",
+        "candidate.updates",
+        "candidate.surface_proposal.bindings[2].update_refs"
+      ],
+      "teacher_surface_judgment": "無連絡と現在の気がかり、返却しても残る振返りを自然文で保持。新しい質問はなく、残数0と整合します。"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+        "line": 12,
+        "json_path": "messages[1].content.material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+        "line": 12,
+        "json_path": "messages[2].content"
+      },
+      "source_texts": [
+        {
+          "source_id": "FT-SHOP-O",
+          "text_fields": {
+            "memo": "うれしかったけど、少し置いていかれた気がした。",
+            "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "友人の開店を知ってお祝いのメッセージを送り、うれしさと、少し置いていかれたような感覚があったのですね。",
+        "reception": "開店を喜ぶ気持ちと、少し置いていかれたような感覚を、どちらも聞いていたいです。",
+        "update_note": null
+      },
+      "target_clauses": 4,
+      "target_relations": 2,
+      "target_updates": 0,
+      "target_quote_rows": 6,
+      "meaning_conclusion": "開店を知って祝いを送ったこと、喜びと少し置いていかれたような本人感覚を保持。客観的に置き去りにされた事実や友人の意図へ変換していません。",
+      "target_details": [
+        "felt_left_behindのmodalityはPERSON_PERCEPTION。喜びも別claimで保持。",
+        "missing_explanationは理由のNOT_STATEDで、本人明示の不明と区別。",
+        "問いは「少し置いていかれた気がした」のはなぜですか？で、該当感覚と残数1に対応。"
+      ],
+      "important_paths": [
+        "candidate.claims[2:4]",
+        "candidate.unknowns[0]",
+        "candidate.question_proposal"
+      ],
+      "teacher_surface_judgment": "喜びと本人知覚を併存させ、友人が先へ進んだことの人格評価や相手意図を足しません。"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+        "line": 13,
+        "json_path": "messages[1].content.material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+        "line": 13,
+        "json_path": "messages[2].content"
+      },
+      "source_texts": [
+        {
+          "source_id": "FT-SHOP-O",
+          "text_fields": {
+            "memo": "うれしかったけど、少し置いていかれた気がした。",
+            "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。"
+          }
+        },
+        {
+          "source_id": "sixrow-answer-shop",
+          "text_fields": {
+            "answer_text_private": "以前、その友人と「いつか店をやれたらいいね」と話していたことがあるんです。具体的に一緒に準備をしていたわけでも、約束していたわけでもありません。\n\nでも、開店したと聞いたとき、二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました。うれしいのに、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったです。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "shared_talk",
+              "perceived_realization",
+              "felt_distance",
+              "answer_sadness"
+            ],
+            "relation_refs": [
+              "past_reference",
+              "distance_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "no_joint_preparation",
+              "no_promise",
+              "shared_talk",
+              "answer_joy",
+              "felt_distance",
+              "answer_sadness"
+            ],
+            "relation_refs": [
+              "answer_concession",
+              "distance_link"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "shared_talk",
+              "perceived_realization",
+              "felt_left_behind",
+              "felt_distance",
+              "answer_sadness",
+              "no_joint_preparation",
+              "no_promise"
+            ],
+            "relation_refs": [
+              "past_reference",
+              "answer_explains_target"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        ],
+        "observation": "二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。その一方で、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+        "reception": "一緒に準備したり約束したりしていたわけではなくても、二人で話した時間はあったのですね。開店のうれしさも、その頃から離れたような寂しさも、受け取りました。",
+        "update_note": "本人の説明で、二人で話していた未来と、あの頃からの距離が気持ちに関わっていたことが分かりました。共同準備や約束があったことにはしません。"
+      },
+      "target_clauses": 11,
+      "target_relations": 6,
+      "target_updates": 8,
+      "target_quote_rows": 18,
+      "meaning_conclusion": "共有した過去の会話、具体的共同準備/約束の明示否定、友人側で現実化していたという本人知覚、あの頃から離れたような感覚と喜び/寂しさを分離して保持しています。",
+      "target_details": [
+        "shared_talkはREPORTED_STATEMENT。二人の夢の会話を共同開店の約束へ変換していません。",
+        "no_joint_preparation/no_promiseは共にNEGATEDで、完全な共通否定文をpolarity根拠へ束縛。",
+        "perceived_realization/felt_distanceはPERSON_PERCEPTION。友人の方での実現とあの頃からの距離という方向を保持。",
+        "answer_joyはWRITTEN_PRESENT_IN_PAST_CONTEXT、時点は開店したと聞いたとき。原joyとfelt_left_behindを失効させません。",
+        "新7claimのADD7＋INVALIDATE_GAP1で8update、update_refs0..7。実rawの否定脱落/役割混線/不正JSONは教師にはありません。"
+      ],
+      "important_paths": [
+        "candidate.claims[4:11]",
+        "candidate.updates",
+        "candidate.surface_proposal"
+      ],
+      "teacher_surface_judgment": "説明する/されるの反転はなく、共同準備や約束があったことにしません。人間goldではなく華恋編集の教師という由来は維持します。"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+        "line": 14,
+        "json_path": "messages[1].content.material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+        "line": 14,
+        "json_path": "messages[2].content"
+      },
+      "source_texts": [
+        {
+          "source_id": "FT-REPOT-O",
+          "text_fields": {
+            "memo": "やり方が分かって安心した。",
+            "memo_action": "植え替えの手順を叔父に説明してもらい、最後まで聞いた。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "guidance_received",
+              "listened_to_end"
+            ],
+            "relation_refs": [
+              "action_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "understood_method",
+              "relief"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。",
+        "reception": "やり方が分かって、安心できてよかったです。",
+        "update_note": null
+      },
+      "target_clauses": 4,
+      "target_relations": 2,
+      "target_updates": 0,
+      "target_quote_rows": 6,
+      "meaning_conclusion": "叔父が説明し、本人が説明を受けて最後まで聞いた主客を、原文と教師本文が同じ向きで保持しています。",
+      "target_details": [
+        "guidance_receivedはEVENT、quote=植え替えの手順を叔父に説明してもらい。listened_to_endは別EVENT。",
+        "teacher observation=叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。実rawの「叔父に説明し」という反転は教師にありません。",
+        "understood_method/reliefはSTATEで、別fieldをまたぐ後先や新たな原因を加えません。",
+        "subject=OMITTEDは有限契約の原文主体省略表現。叔父/本人の受領関係自体は引用と文章から読めます。predicate.arguments=[]が主体反転を教えているわけではありません。"
+      ],
+      "important_paths": [
+        "candidate.claims[0:4]",
+        "candidate.relations",
+        "candidate.surface_proposal.observation"
+      ],
+      "teacher_surface_judgment": "やり方が分かって安心できたことへの短い受け取りで、内部の保持処理を利用者文へ露出していません。"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+        "line": 15,
+        "json_path": "messages[1].content.material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+        "line": 15,
+        "json_path": "messages[2].content"
+      },
+      "source_texts": [
+        {
+          "source_id": "FT-KNIT-O",
+          "text_fields": {
+            "memo": "ほどくのは面倒だった。さみしさも少しあった。二つがどうつながるかは、自分でも分からない。",
+            "memo_action": "今日は編みかけの見本をほどいた。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "unravelled",
+              "burden",
+              "sadness"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "stated_unknown",
+              "burden",
+              "sadness"
+            ],
+            "relation_refs": [],
+            "section": "reception"
+          }
+        ],
+        "observation": "編みかけの見本をほどいたのですね。面倒だったことと、少しさみしかったことが、どちらもあったのですね。",
+        "reception": "二つがどうつながるのかは、まだ分からないのですね。分からないところも含めて、今の言葉として聞いていたいです。",
+        "update_note": null
+      },
+      "target_clauses": 4,
+      "target_relations": 0,
+      "target_updates": 0,
+      "target_quote_rows": 4,
+      "meaning_conclusion": "ほどいた行動、面倒さ、少しの寂しさと、その二つの関係について本人が分からないと言った不明を保持しています。",
+      "target_details": [
+        "stated_unknownはEXPLICIT_UNKNOWN/WRITTEN_PRESENT、unknownはPERSON_STATED。NOT_STATEDへ変えていません。",
+        "unknown.target_claim_refsはburden/sadnessの二つだけ。編み物行動そのものとの関係へ対象を広げていません。",
+        "関係配列は空で、不明な二感情にcause/解消を捏造しません。",
+        "教師JSONには重複claims key/整数scope_refs/時点kind=EVENTなどの実rawの崩れはありません。"
+      ],
+      "important_paths": [
+        "candidate.claims[3]",
+        "candidate.unknowns[0]",
+        "candidate.relations",
+        "candidate.surface_proposal"
+      ],
+      "teacher_surface_judgment": "観測と受け取りは別文。能力不足という評価を加えず、問いなしENDと整合します。"
+    }
+  ],
+  "consumer_binding_review": {
+    "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/consume_native15_afteronly.py",
+    "functions": [
+      "frozen_cases",
+      "validate_inputs_only",
+      "main"
+    ],
+    "observed_bindings": [
+      "frozen_cases checks train/eval payload SHA and source original/answer/control/prior identity",
+      "validate_inputs_only and main reconstruct the same frozen request and require current build_model_messages(...QUOTE_CANDIDATE_SCHEMA) == actual evaluation messages",
+      "main uses unchanged raw_text with actual finish_reason and metadata; does not replace raw by teacher",
+      "after-answer prior is a frozen teacher-adopted snapshot, not the model initial response"
+    ],
+    "teaching_vs_runtime_prompt_mismatch_found": false
+  },
+  "important_interface_boundary": {
+    "old_sft_example_count": 9,
+    "chair6_old_shape": "candidate + numeric evidence",
+    "native15_chair6_shape": "schema_version + candidate + evidence_quotes",
+    "chair6_messages_and_targets_equal_old_sft": false,
+    "daily3_messages_and_targets_equal_old_sft": true,
+    "inference": "今回のchair6は旧numeric版をquote版へ投影した教師です。出典/意味は引き継ぎますが、保存45779がこのquote-chair6へ既に9/9だった前比較証拠はありません。今回3/9と旧run9/9から形式統一後の品質退行量やforgettingの因果を断定できません。"
+  },
+  "conclusion": {
+    "new6_teacher_missing_or_semantically_reversed": false,
+    "visible_target_source_contradiction_found": false,
+    "visible_target_prompt_role_axis_contradiction_found": false,
+    "runtime_train_eval_byte_mismatch_found": false,
+    "what_is_supported": "新6の原文意味と構造の正しい教師は既に存在し、今回rawの主客反転/否定・不明・参照の崩れを、教材に正解が無かったためとは説明できません。",
+    "what_is_not_supported": "一回の学習だけから、学習量/順序/LR/長い構造/旧numeric→quote移行のどれが主因か、4Bの能力上限、一般化、商品合格は確定できません。自然な完成応答の教師は華恋編集/架空補充であり、Mash完成goldとは別です。"
+  },
+  "minimum_next_opinion": {
+    "status": "READ_ONLY_RECOMMENDATION_NOT_EXECUTED",
+    "single_recommendation": "全文平均CEの同じ1passをそのまま繰り返す前に、既存のteacher_loss/measure_nllとjoint12の二目的重み付け方式を使い、型・原文束縛・参照・JSON終端を本文と同時に保持する一つの限定学習候補へまとめる。",
+    "evidence": [
+      "BOOK/SHOP回答の教師はそれぞれ3178/3561token、10/11claim・7/8updateで、短いREPOT/KNITでもrawの型と主客が崩れた。長さ上限だけが原因とは言えない。",
+      "正解teacherでは引用・参照・否定・時点・主客が全て明示され、静的参照エラー0。失敗rawは同じ基礎shape/参照の破綻を多題材で共有する。",
+      "joint12には全文とsurfaceを各0.5の平均損失で同時学習した既存実装があり、32tensor LoRA/AdamW/固定教材/既存CMEEを保つ学習側の小差分で比較できる。"
+    ],
+    "concrete_small_scope": [
+      "原teacherとruntime promptは不変にし、正解候補の全構造/本文を保持する。raw後処理・guard緩和・名詞ごとの特例を加えない。",
+      "新しい常設checkerを作らず、既存teacher-forced診断で参照/軸/閉鎖と本文の損失を同じ固定15行で区別する。新しい生成評価を増やす目的にしない。",
+      "学習候補はfull-assistant/EOS平均損失を残し、既存joint12方式の一つの意味/構造重み付けを併用する。対象はJSON keyと型・参照・否定/時点・主客を含む固定意味表現で、語彙に応じて正解を変えるmask探索にしない。",
+      "比較の起点は不採用278fdc26の無条件な継承ではなく、旧45779を保持して明示する。quote-chair6の前状態は旧numeric9/9と分離する。",
+      "同じ固定15のEOS・無補修CMEE意味/本文と旧9互換を一体で判定し、新6だけが改善して旧chairを落とす候補を採用しない。"
+    ],
+    "limits": "これは候補の意見で、上記重み付けのtoken区間/係数/更新数/費用はrootの新しい具体案で固定する必要があります。GPU診断や追加学習を本auditでは実行していません。手法差分の効果も未実証です。"
+  }
+}

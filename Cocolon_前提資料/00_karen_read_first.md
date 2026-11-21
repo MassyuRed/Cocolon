@@ -1,12 +1,19 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-08-10"
+revision_date: "2026-10-22"
+permanent_mandatory_incident:
+  path: "audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md"
+  read_requirement: "EVERY_COCOLON_WORK_READ_FULL_FROM_FIRST_BYTE_TO_EOF"
+  summary_or_link_only_is_sufficient: false
+  removal_requires: "MASH_EXPLICIT_APPROVAL"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_full_audit"
+whole_product_current_state_owner: "00_cocolon_current_product_and_state.md"
 current_authority_owner: "08_cycle001_current_state.md"
+current_authority_scope: "CYCLE001_ONLY"
 current_authority_effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
 milestone_evidence_owner: "07_latest_snapshot_diff.md"
 source_snapshot:
@@ -1475,6 +1482,21 @@ coverage:
   grounded_human_reception_p5_p6_p8_release_allowed: false
   grounded_human_reception_full_01_02_regeneration: false
 ---
+
+> **11/15最新：補足1ZIPを承認どおり隔離配置し、追加一回を実行。最初のLEAFで時間切れ、本文未受領。** 元98fileは無変更・再送0。1POST／0受領、210.305秒timeout、処理211.297秒・前後health200。同時刻の提供ログは生成位置3200後にcomplete_length。意味品質・統合・保存再読は未達。引用候補の短文追加と期限層／段階数に応じた有限総期限を候補bdf39198359f7e205b263657442f80215f6b0725へ修正し、非生成検証308 PASS（新13件・11file、FAIL／SKIP0。71＋140＋97、既存warning1の再表示）。新候補はPod未送付・通常未配置、稼働API／worker24bc228d、追加生成／学習／提供再起動0。この一回分の許可は消費済み。本単位／補助全体未完、build／TestFlight／本人実機保留。[実装・検証・具体的再開§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)。
+
+> **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
+# 恒久必読 — EmlisAI商品中核の後回しとCMEE Product Read失敗
+
+全てのCocolon作業で、行動前に次のincidentを先頭からEOFまで全文読む。
+
+- `audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`
+- normative owner: `work_attitude_rules_for_karen/CURRENT_RULES.md` R1.4
+
+リンク確認、見出し確認、要約、過去の読了またはmodel memoryで代用しない。この必読は、商品中核を
+後回しにして補助経路を精密化し、低品質なEmlisAI観測をMashへ提示した失敗を全作業の判断へ戻すための
+恒久拘束である。これを新しい補助systemまたはproduct creditへ変換しない。
+
 # これは何か
 
 この一式は、**華恋の作業精度を上げるための作業用地図**です。  

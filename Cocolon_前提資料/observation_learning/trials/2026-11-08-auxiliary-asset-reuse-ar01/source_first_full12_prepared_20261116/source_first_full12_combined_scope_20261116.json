@@ -1,0 +1,139 @@
+{
+  "state": "PREPARED_NOT_SENT_NOT_EXECUTED_EXPLICIT_APPROVAL_REQUIRED",
+  "date_jst": "2026-11-16",
+  "destination": "ExistingRunpod f1lle4xwq3wjln Jupyter /workspace/semantic-kernel-preparation-20261115",
+  "previous_approved_scope": {
+    "files": 3,
+    "bytes": 225975,
+    "model_calls_executed": 2,
+    "restored_pid": 126071,
+    "consumed": true
+  },
+  "automatic_review_block": "Attempted upload of new3files226769byte rejected before transfer because resume instruction did not explicitly approve different new payload. No alternate route used.",
+  "upload_files": [
+    {
+      "name": "semantic_admission.source_first.py",
+      "bytes": 192194,
+      "sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd"
+    },
+    {
+      "name": "semantic_output_schema.source_first.py",
+      "bytes": 5405,
+      "sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e"
+    },
+    {
+      "name": "semantic_reader_source_first_once.py",
+      "bytes": 29170,
+      "sha256": "50f3d5769359ea13211a54e37d2d4a04b59a9159d95ba7fd5743cf91c83f4193"
+    },
+    {
+      "name": "full12-sql.pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    {
+      "name": "full12_sql_source_first_once.py",
+      "bytes": 29826,
+      "sha256": "72f5cb7d6818cfcfd6147a2c945452da5e7742f1a3636f3bf2ffea8eef575344"
+    }
+  ],
+  "max_upload_file_count": 5,
+  "max_upload_bytes": 315741,
+  "phase_a": {
+    "files": [
+      {
+        "name": "semantic_admission.source_first.py",
+        "bytes": 192194,
+        "sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd"
+      },
+      {
+        "name": "semantic_output_schema.source_first.py",
+        "bytes": 5405,
+        "sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e"
+      },
+      {
+        "name": "semantic_reader_source_first_once.py",
+        "bytes": 29170,
+        "sha256": "50f3d5769359ea13211a54e37d2d4a04b59a9159d95ba7fd5743cf91c83f4193"
+      }
+    ],
+    "bytes": 226769,
+    "purpose": "Check fixed fictional bookclub2records and lighting2records with source-first/overview-last core.",
+    "new_root": "/workspace/semantic-reader-source-first-20261115-once",
+    "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+    "max_new_model_calls": 2,
+    "restore_inclusive_seconds": 420,
+    "run_count": 1,
+    "training": 0,
+    "retry": 0,
+    "sql_saves": 0
+  },
+  "phase_b": {
+    "files": [
+      {
+        "name": "full12-sql.pre_acquisition.input.json",
+        "bytes": 59146,
+        "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+      },
+      {
+        "name": "full12_sql_source_first_once.py",
+        "bytes": 29826,
+        "sha256": "72f5cb7d6818cfcfd6147a2c945452da5e7742f1a3636f3bf2ffea8eef575344"
+      }
+    ],
+    "bytes": 88972,
+    "purpose": "Fresh12LEAF plus1MERGE for exact12records from SQLpre-acquisition checkpoint.",
+    "launch_condition": "Run only if PhaseA actual original-to-raw independent review finds both targeted meaning transitions adequate. Structural completion alone is insufficient. This is not human/Mash product acceptance.",
+    "otherwise": "No PhaseB transfer/execution/modelcalls; return factual failure and preserve existingmaps.",
+    "new_root": "/workspace/full12-sql-source-first-20261116-once",
+    "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+    "max_new_model_calls": 13,
+    "leaf_count": 12,
+    "merge_count": 1,
+    "service_seconds": 840,
+    "driver_seconds": 850,
+    "acquisition_seconds": 900,
+    "restore_inclusive_seconds": 1020,
+    "run_count": 1,
+    "old_receipts_reused": 0,
+    "training": 0,
+    "retry": 0,
+    "sql_saves_on_pod": 0,
+    "input_bytes": 59146,
+    "input_sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d",
+    "source_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "predecessor": "Completed exactPhaseA 2HTTP200/stop/GENERATED +exactsource/native/driver; originalPID derivedfromitsrestored_pid; noPIDfallback."
+  },
+  "max_new_model_calls_all_phases": 15,
+  "max_combined_execution_restore_seconds": 1440,
+  "combined_execution_limit_excludes_independent_review_time": true,
+  "phase_a_copies_not_resent_in_phase_b": true,
+  "new_dependencies": 0,
+  "new_pod": 0,
+  "new_weights": 0,
+  "training": 0,
+  "retry": 0,
+  "credentials": "Existing authentication only within samePod. Originalenvironment retained only samePodRAM for exactrestore. No keyvalues/environment exported in payload orverificationraw.",
+  "local_sql_checkpoint": {
+    "bytes": 4835570,
+    "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485",
+    "uploaded_to_pod": false,
+    "guard_measured_before_any_future_model_request": true
+  },
+  "after_accepted_phase_b": "Independent fulloriginal/LEAF/finalmap review. Same raw/request/guard/as_of singleSQLcommit then separate-process non-generatingreread. Only then normaldecoder/API/workerreflection under originaltaskauthorization; preserveprivateboundaries andmonthlyhistory.",
+  "normal_reflection_preparation": {
+    "candidate_api": "144656a9f312b8b4dce39c03e05da84e190eaf74",
+    "current_normal_api_worker": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "db_latest_migration": "20261115011424",
+    "worker_current_stale_seconds": 900,
+    "existing_worker_stale_candidate_seconds": 1800,
+    "candidate_not_applied": true,
+    "no_total_job_guarantee_claim": true
+  },
+  "not_performed": {
+    "uploads": 0,
+    "new_model_calls": 0,
+    "actual_sql_save": 0,
+    "normal_rollout": 0
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "VERIFIED",
+  "members": 14,
+  "bytes": 91746,
+  "zip_sha256": "166155061c961ee318393623e7596d2a35bc8e1925f4b658e5af1e4879246a3d",
+  "all_crc_hash_size_exact": true,
+  "all_source5_bytes_exact": true,
+  "all15_original_line_bytes_exact": true,
+  "final_eval_bytes_exact": true,
+  "independent_host_projection_checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "all_original_meaning_updates_prose_exact": true,
+      "all_original_material_prior_exact": true,
+      "B_given_A_exact": true,
+      "final_target_prose_not_in_B_input": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "all_original_meaning_updates_prose_exact": true,
+      "all_original_material_prior_exact": true,
+      "B_given_A_exact": true,
+      "final_target_prose_not_in_B_input": true
+    }
+  ]
+}

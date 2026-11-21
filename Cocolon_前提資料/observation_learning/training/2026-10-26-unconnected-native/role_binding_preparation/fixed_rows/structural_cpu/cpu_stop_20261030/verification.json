@@ -1,0 +1,61 @@
+{
+  "status": "VERIFIED_CPU_STOP_NOT_A_MODEL_RESULT",
+  "source_commit": "e22f1101c730465f2362f734fe8cdfcc38f7f9f8",
+  "archive": {
+    "bytes": 15818,
+    "sha256": "5505d0749f18c5d01613c6077d5a66e463e378c95f263cf46cdf0e94bbb74c63",
+    "members": 7,
+    "payloads": 6,
+    "all_crc_match": true,
+    "all_recovered_bytes_match_archive": true,
+    "download_count": 1,
+    "retry": 0
+  },
+  "source_sha256": {
+    "syntax2.py": "cf33a3add37ba380c1a6e8c813404002045f740c8dc283933e0b8ae9bb515803",
+    "run_syntax2.py": "fb2bd88a0fce681309ce121649a898cc5e54ed91e810f71b5028473ba7649bd9",
+    "plan.json": "08533369bbb06484bf8cfa6ad1ff5e53dd39aec55be607765417afe2b6b001e4"
+  },
+  "executed_source_matches_published_and_root_source": true,
+  "input_sha256": {
+    "eval_inputs11.json": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
+    "train_messages11.jsonl": "ef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e"
+  },
+  "input_sha256_matches_github_originals": true,
+  "adapter_sha256_observed_on_pod": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "db3ed15f287924089bdcdc4b057f93f3173df8026bcf3aaaaf65557916bef519",
+    "adapter_model.safetensors": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+  },
+  "adapter_metadata_matches_approved_plan": true,
+  "adapter_scope": "Pod file hashes observed read-only and compared with approved plan; no new weight archive downloaded in this CPU trial",
+  "cpu_executions": 1,
+  "cpu_exit": 1,
+  "full_cpu_checks_passed": false,
+  "elapsed_seconds": null,
+  "elapsed_reason": "failure before success report; no full-CPU elapsed captured",
+  "not_reached": [
+    "teacher_token_prefix",
+    "raw_first_invalid_token",
+    "type_valid_variants",
+    "unicode_escape_eos",
+    "installed_logits_processor",
+    "cmee_positive_and_negative_controls",
+    "build_and_mask_performance"
+  ],
+  "effects": {
+    "model_loads": 0,
+    "model_forwards": 0,
+    "training_updates": 0,
+    "generations": 0,
+    "cmee_calls": 0
+  },
+  "retry": false,
+  "gpu_kept_running": true,
+  "no_new_model_denominator": true,
+  "primary": "BLOCKER_NARROWED",
+  "technical_credit": 0,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}

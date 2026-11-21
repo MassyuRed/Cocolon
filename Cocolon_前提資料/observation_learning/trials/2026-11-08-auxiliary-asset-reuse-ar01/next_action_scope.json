@@ -1,0 +1,44 @@
+{
+  "state": "PREPARED_NOT_SENT_AUTO_REVIEW_REJECTED",
+  "destination": "Runpod f1lle4xwq3wjln Jupyter /workspace/semantic-kernel-preparation-20261115",
+  "files": [
+    {
+      "name": "semantic_admission.compact.py",
+      "bytes": 191699,
+      "sha256": "398736519a1a560e4d2498f2131fb9b0432ba190e3343d6499dbaa2a1c838a69"
+    },
+    {
+      "name": "semantic_output_schema.compact.py",
+      "bytes": 5633,
+      "sha256": "75eb0aa9dcfdcd864f4ec23ea10005cb614f76cad3a494b28df03824536fdf05"
+    },
+    {
+      "name": "semantic_reader_positive_deadline_once.py",
+      "bytes": 28643,
+      "sha256": "1e69a1a5a3ed41fcb7bb86c3185235ecd7c854f8149674505f24da8da73e6b3e"
+    }
+  ],
+  "total_bytes": 225975,
+  "new_root": "/workspace/semantic-reader-positive-deadline-20261115-once",
+  "expected_original_provider_pid": 120737,
+  "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+  "max_posts": 2,
+  "conditions": [
+    "Same exact fictional book-club2 records",
+    "Exact existing fictional full12 members[3] and[8] lighting records"
+  ],
+  "driver_seconds": 220,
+  "acquisition_seconds": 300,
+  "restore_inclusive_seconds": 420,
+  "training": 0,
+  "retry": 0,
+  "sql_saves_in_probe": 0,
+  "normal_deploy_in_probe": 0,
+  "new_dependencies": 0,
+  "new_pod": 0,
+  "credentials": "Existing authentication only within same Pod; original environment retained only in same-Pod RAM to restore original provider; no values in payload or logs.",
+  "candidate_api_local_commit": "3ee95c9c8eab865cc0c74279eff0ff344e553e60",
+  "candidate_api_published": false,
+  "normal_api_worker_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "normal_db_latest_migration": "20261115011424"
+}

@@ -1,10 +1,11 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
-import { Modal, Text, View } from "react-native";
+import { Modal, ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../../components/CocolonButton";
 import NoticeModal from "../../components/NoticeModal";
-import TodayQuestionModal from "../../components/TodayQuestionModal";
 import { INPUT_DRAFT_TTL_HOURS } from "./inputDraftModel";
 
 export default function InputStartupModals({
@@ -20,14 +21,6 @@ export default function InputStartupModals({
   handlePressNoticeAction,
   isWelcomeNoticeStartupPopup,
   handlePrimaryNoticeModalAction,
-  shouldHideTodayQuestionForTutorial,
-  isTodayQuestionStartupPopupVisible,
-  todayQuestionBundle,
-  todayQuestionLoading,
-  todayQuestionSubmitting,
-  handleDismissTodayQuestionModal,
-  handleSubmitTodayQuestion,
-  handleOpenTodayQuestionHistory,
   draftRestoreModalVisible,
   draftRestoreSavedAtLabel,
   restorePendingInputDraft,
@@ -49,30 +42,16 @@ export default function InputStartupModals({
         onPrimaryClose={isWelcomeNoticeStartupPopup ? handlePrimaryNoticeModalAction : undefined}
       />
 
-      <TodayQuestionModal
-        visible={
-          !shouldHideTodayQuestionForTutorial &&
-          isTodayQuestionStartupPopupVisible &&
-          !!todayQuestionBundle?.question &&
-          todayQuestionBundle?.answer_status !== "answered"
-        }
-        question={todayQuestionBundle?.question}
-        answerSummary={todayQuestionBundle?.answer_summary || null}
-        loading={todayQuestionLoading}
-        submitting={todayQuestionSubmitting}
-        onClose={handleDismissTodayQuestionModal}
-        onSubmit={handleSubmitTodayQuestion}
-        onOpenHistory={handleOpenTodayQuestionHistory}
-      />
-
       <Modal
         visible={draftRestoreModalVisible}
         transparent
         animationType="fade"
         onRequestClose={() => {}}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
-        <View style={styles.draftRestoreBackdrop}>
+        <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.draftRestoreBackdrop}>
           <View style={styles.draftRestoreCard}>
+            <ScrollView style={{ flexShrink: 1 }}>
             <View style={styles.draftRestoreBadgeRow}>
               <View style={styles.draftRestoreBadge}>
                 <Ionicons
@@ -112,6 +91,7 @@ export default function InputStartupModals({
               </Text>
             </View>
 
+            </ScrollView>
             <View style={styles.draftRestoreActionColumn}>
               <CocolonButton
                 variant="primary"
@@ -131,7 +111,7 @@ export default function InputStartupModals({
               </View>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
     </>
   );

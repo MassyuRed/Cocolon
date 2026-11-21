@@ -1,0 +1,70 @@
+{
+  "source_commit": "a98c6e59cc9ab0d3e1691a969736651c2bf6a88f",
+  "initial_candidate_lineage": "saved72_plus_fresh_optimizer36",
+  "new_teacher_count": 8,
+  "additional_updates": 16,
+  "optimizer_resume": false,
+  "learning_rate": 5e-05,
+  "training_compute_seconds": 15.485606564907357,
+  "generation_count": 86,
+  "finish_reasons": {
+    "stop": 85,
+    "length": 1
+  },
+  "generations_by_phase": {
+    "before": 34,
+    "step8": 34,
+    "step16": 18
+  },
+  "generation_seconds_by_phase": {
+    "before": 45.82669996586628,
+    "step8": 59.090964258881286,
+    "step16": 49.1646838048473
+  },
+  "last_case_id": "AR01_NEW_ROLE02",
+  "last_finish": "length",
+  "last_token_count": 419,
+  "last_seconds": 23.03388604708016,
+  "planned_102_completed": false,
+  "missing_generation_count": 16,
+  "raw_bodies_public": false,
+  "production_adoption": false,
+  "source_model_and_original_analysis_unchanged": true,
+  "service_restored": "RESTORED_ORIGINAL_SERVICE",
+  "health_http_status": 200,
+  "model_loads_for_research": 2,
+  "model_loads_for_restoration": 1,
+  "checkpoints": {
+    "8": {
+      "identity": {
+        "adapter_model.safetensors": "d5b3a4466eb1ae513ed85777c5bc7d2e49bed2dfe01083667a9f91906b557f0c",
+        "adapter_config.json": "b53872aa612b87b0b4f2f09e8f85341843f61c4c56b44212d2c9de79569d2c05"
+      },
+      "updates": 8,
+      "tensor_count": 112,
+      "parameters": 3833856,
+      "finite_float32": true,
+      "all_saved_values_exact": true,
+      "changed_tensors": 112
+    },
+    "16": {
+      "identity": {
+        "adapter_model.safetensors": "9fd4dec82bddd259011e0495da76c7ee23b0a52b615402d5d0f572031b428337",
+        "adapter_config.json": "b53872aa612b87b0b4f2f09e8f85341843f61c4c56b44212d2c9de79569d2c05"
+      },
+      "updates": 16,
+      "tensor_count": 112,
+      "parameters": 3833856,
+      "finite_float32": true,
+      "all_saved_values_exact": true,
+      "changed_tensors": 112
+    }
+  },
+  "nll_teacher_mean": {
+    "before": 0.4157283715903759,
+    "step8": 0.263103106059134,
+    "step16": 0.11560373473912477
+  },
+  "semantic_quality_from_nll": false,
+  "retention_before_all_passed": false
+}

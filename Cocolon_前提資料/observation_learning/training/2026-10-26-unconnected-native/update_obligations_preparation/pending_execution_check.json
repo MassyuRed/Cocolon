@@ -1,0 +1,11 @@
+{
+  "status": "PENDING_PROBE_REFUSED_BEFORE_OUTPUT_AND_MODEL",
+  "plan_validation_returncode": 0,
+  "validation_stdout": "CPU_PROBE2_PLAN_VALIDATED_NO_MODEL 2\n",
+  "pending_returncode": 1,
+  "pending_stderr": "Traceback (most recent call last):\n  File \"/workspace/cocolon_update_obligations_20261028/run_update_probe2.py\", line 101, in <module>\n    if a.execute:execute(a.pack,a.source_commit)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cocolon_update_obligations_20261028/run_update_probe2.py\", line 47, in execute\n    plan,cases=validate(pack,execution=True)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cocolon_update_obligations_20261028/run_update_probe2.py\", line 24, in validate\n    if execution and not authorized:raise ValueError('new_update_probe2_mash_approval_required_before_output_or_model')\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: new_update_probe2_mash_approval_required_before_output_or_model\n",
+  "output_exists": false,
+  "model_loads": 0,
+  "training_updates": 0,
+  "generations": 0
+}

@@ -1,0 +1,22 @@
+{
+  "state": "PASS_OFFLINE_BINDING_AND_ROUTING_NOT_MODEL_QUALITY",
+  "A4_exact_A3_messages_material_guards_refs": true,
+  "B4_exact_existing_12leaf_messages_plan": true,
+  "native_semantic_schema_parser_piece_and_main_AST_unchanged": true,
+  "changed_native_functions": [
+    "make_handler",
+    "load_generator"
+  ],
+  "existing_base_context_restores_on_success_and_failure": true,
+  "loopback_http_routing_checks": 5,
+  "source_core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "A4_driver_sha256": "4ac84abde19881389525ba309e41a34505cddac949c3de5d01b425f46823c961",
+  "B4_driver_sha256": "ba2a2dbb2fad0447c72288cfdbb5b350b9b3e203fe2af886c45dc4228bdaee69",
+  "external_network": 0,
+  "tokenizer_calls": 0,
+  "new_model_calls": 0,
+  "training": 0,
+  "retry": 0,
+  "sql_writes": 0,
+  "pod_operations": 0
+}

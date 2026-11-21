@@ -1,0 +1,18 @@
+{
+  "status": "EXTERNALLY_VERIFIED",
+  "transfer_archive_bytes": 14745782,
+  "transfer_archive_sha256": "bf27a9159f0fc1eaa68116ab33420acd7a1de95e386678f13d02bf27d9c32307",
+  "transfer_payload_count": 79,
+  "transfer_members": 80,
+  "all_member_bytes_and_hashes_verified": true,
+  "weights_equal_training_109c": true,
+  "finite_f32_tensors": 112,
+  "parameters": 3833856,
+  "raw_calls_preserved": 15,
+  "diagnosis_bytes": 2929933,
+  "diagnosis_sha256": "e8a915474c979eddbec43aabf066494e959b7d269c711c107f03a955a5f4daf9",
+  "diagnosis_github_value_reassembly_equal": true,
+  "source_run_sha256": "c85d2066c50569cd0a988954419c9e177b6917acd2eab01594aa415e2abea122",
+  "gpu_workers_ended": true,
+  "gpu_state": "NVIDIA RTX A5000, 1 MiB, 24564 MiB"
+}

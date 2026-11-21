@@ -1,0 +1,42 @@
+{
+  "state": "PASS_OFFLINE_BOUNDED_REVIEW",
+  "reviewer": "review_probe_driver",
+  "blockers": [],
+  "files": [
+    {
+      "name": "semantic_admission.source_first.py",
+      "bytes": 192194,
+      "sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd"
+    },
+    {
+      "name": "semantic_output_schema.source_first.py",
+      "bytes": 5405,
+      "sha256": "29fe72a2d6adbbf8e9f1520cca3a39f021061445f3424f566f1fbc2a8b27421e"
+    },
+    {
+      "name": "semantic_reader_source_first_once.py",
+      "bytes": 29170,
+      "sha256": "50f3d5769359ea13211a54e37d2d4a04b59a9159d95ba7fd5743cf91c83f4193"
+    }
+  ],
+  "total_bytes": 226769,
+  "predecessor_launcher_sha256": "1e69a1a5a3ed41fcb7bb86c3185235ecd7c854f8149674505f24da8da73e6b3e",
+  "predecessor_actual_sha256": "c908122a1a4ec1c26c0ee1ee7bba89c88fd68a70bb3452470cbd7e0a4c4b8ef3",
+  "native_base_sha256": "583a10e8bc25d0bf50e35e53dcfd9407963dc9575e6faac1199c5e5ab30c0c8a",
+  "native_prior_function_sha256": "b302242ac4e9ea9eef413c5bb2bc29db525280a5006921b55bbde8b4362bdac0",
+  "native_patched_sha256": "ccb2b253cfcd2face6d175985012c4a92e5a3e3847580b39bc507116765e804a",
+  "checks": {
+    "only_expected_parameters_and_predecessor_guards_changed": true,
+    "exact_typed_source_no_timeout_wrapper": true,
+    "max_posts": 2,
+    "retry": 0,
+    "stop_before_next_post_on_unknown": true,
+    "restore_flow_unchanged": true,
+    "outer_restore_seconds": 420,
+    "credentials_not_exported_or_serialized": true,
+    "new_dependencies": 0,
+    "embedded_driver_compiles": true,
+    "native_transplant_compiles": true
+  },
+  "scope": "Local static review and compile only; no remote execution, uploads, provider changes, model calls, or edited probe files."
+}

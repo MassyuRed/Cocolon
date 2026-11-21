@@ -26,7 +26,7 @@ export default function AnalysisSelfStructureScreen({
 
       <AnalysisMediumCard
         title="今のわたしマップ"
-        description="場面ごとの役割と行動傾向を確認します"
+        description="これまでの入力全体から見えた構造とルートを確認します"
         onPress={onOpenLatestReport}
         badgeVisible={unreadLatest}
         chevron="forward"
@@ -36,7 +36,7 @@ export default function AnalysisSelfStructureScreen({
       <View style={{ marginTop: 12 }}>
         <AnalysisMediumCard
           title="わたしマップの履歴"
-          description="過去の詳しい自己分析レポートを振り返ります"
+          description="月を選んで、当時のわたしマップと現在を見比べます"
           onPress={onOpenHistory}
           badgeVisible={unreadHistory}
           chevron="forward"

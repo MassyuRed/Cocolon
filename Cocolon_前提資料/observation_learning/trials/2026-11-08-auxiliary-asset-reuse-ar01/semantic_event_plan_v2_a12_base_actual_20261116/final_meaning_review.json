@@ -1,0 +1,335 @@
+{
+  "actual": {
+    "bytes": 130479,
+    "controls_received": 2,
+    "failure_type": "AssertionError",
+    "map_calls": 2,
+    "model": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+    "new_model_calls": 4,
+    "path": "a12_actual/recovered/actual/after.result.json",
+    "profile": "semantic_map.event_plan.v2",
+    "received_map_cases": 2,
+    "sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04",
+    "state": "INCOMPLETE_NOT_ADOPTED"
+  },
+  "body_free": true,
+  "book_review": {
+    "admission": "GENERATED",
+    "all_partial_identity_tuple_fields_match_final": true,
+    "case_id": "book_club_two_day",
+    "confirmed_findings": [
+      {
+        "code": "CONFIRMED_LATER_EVENTS_MISSING",
+        "finding": "The later downstairs reservation, the author reading the venue reply and confirming room/start time, and the acknowledgment by one participant are not authored as events. The original first-day lack of an invitation send is not paired with a fully grounded later completed state. Uncertainty about all recipients reading the invitation and the future/unheld meeting state is also absent.",
+        "raw_refs": [
+          "e1",
+          "e2",
+          "r1",
+          "n1",
+          "n2",
+          "n3",
+          "overview"
+        ],
+        "severity": "material",
+        "source_fields": [
+          3,
+          4
+        ]
+      },
+      {
+        "code": "READING_EXCEEDS_SELECTED_EVENT_ROOTS",
+        "finding": "The reading asserts the revision-and-transmission transition, but neither selected event has evidence containing the later transmission. This action exists in the complete original source; the defect is missing selected support, not an assertion that the original never recorded it.",
+        "raw_refs": [
+          "r1",
+          "e1",
+          "e2",
+          "n1",
+          "overview"
+        ],
+        "severity": "material",
+        "source_fields": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "code": "EARLIER_WAIT_WITHOUT_RESOLVING_STATE",
+        "finding": "The first-day reply-waiting context is displayed without a clear historical qualifier or the later confirmation that resolves it. The wording also ambiguously treats waiting for a reply as waiting on the inquiry. The source already records the co-organizer sending the inquiry. This review does not claim a literal explicit assertion that the later reply is unknown.",
+        "raw_refs": [
+          "e1",
+          "n2",
+          "overview"
+        ],
+        "severity": "material",
+        "source_fields": [
+          1,
+          3
+        ]
+      },
+      {
+        "code": "INDEPENDENT_ACTORS_MERGED_AND_SCOPE_AMBIGUOUS",
+        "finding": "The author making the invitation and the co-organizer sending the venue inquiry are fused into one event. The chair-related statement lacks an explicit conveying actor in its fact and is reused under a SELF meeting-status node, making actor/object separation unreliable.",
+        "raw_refs": [
+          "e1",
+          "e2",
+          "n3"
+        ],
+        "severity": "material",
+        "source_fields": [
+          1,
+          3
+        ]
+      },
+      {
+        "code": "MEETING_STATUS_NODE_HAS_CHAIR_ONLY_SUPPORT",
+        "finding": "The meeting-status node contains only the chair wish/inquiry uncertainty, with no event establishing the meeting date or its not-yet-held status. The title and support do not describe the same matter.",
+        "raw_refs": [
+          "n3",
+          "e2"
+        ],
+        "severity": "material",
+        "source_fields": [
+          3
+        ]
+      },
+      {
+        "code": "ALL_PAIR_KIND_SLOTS_FILLED_WITH_REPEATED_SUPPORT",
+        "finding": "All twelve unordered node-pair/relation-kind slots for three nodes and four relation kinds are filled. Ten edges repeat only the chair event and two repeat the same pair of facts. Different relation labels do not supply distinct source-grounded relations. Preparation-completion labels, inner/outer gaps and criterion relations are unsupported by these units.",
+        "raw_refs": [
+          "edges[1:12]"
+        ],
+        "severity": "material"
+      },
+      {
+        "code": "VISIBLE_TEXT_REPETITION_AND_LOST_SPECIFICITY",
+        "finding": "The same chair sentence and qualification recur through all nodes, the overview and all relation explanations. The visible text loses the later room/time confirmation and participant acknowledgment while repeating generic meeting/preparation labels. Formal admission and two-record coverage do not make this a useful faithful map.",
+        "raw_refs": [
+          "projection",
+          "text"
+        ],
+        "severity": "material"
+      }
+    ],
+    "entire_first_call_object_equal_partial_snapshot": true,
+    "final_case_identity": {
+      "case_id": "book_club_two_day",
+      "messages_sha256": "1bc556cde0d071f86d82f5d338dcd934cb812cb732f7fa0222a163b6acc1be5d",
+      "projection_sha256_canonical": "ade111f9da4728ba9db0e8b33c27809c3ba5d890fc11a34c2c4e78bb6fd18d41",
+      "raw_sha256": "4ebb330ea484e3bbfca6469bf2688d2019f2c9d310e9c00b4ac763682b273bee",
+      "request_ref": "analysis-semantic-request:3e08ee3aea6315355f34ae21d3007c9ef1b7b4e37243ee60bfee3908baacee16",
+      "response_body_sha256": "04ce801ae70e8efbfaa2895f58d4d3596b935b89e2aa6f700917cce6ef05287b",
+      "text_sha256_utf8": "15330badfd30bf4f9ba6832ec27c6e5b9f091cd37a514b3da3eb78fe1cfa0aaf",
+      "wire_request_sha256": "c06636920f7311b779200a571ed7439ba476ad13cdd8872e624475dcaef19836"
+    },
+    "final_conclusion": "The previously partial book judgment is now confirmed against the identical final case. Later confirmed facts remain omitted or unsupported, and the repeated edge/text structure is not an adequate source-grounded map.",
+    "finish_reason": "stop",
+    "http_status": 200,
+    "meaning_adequate": false,
+    "prior_full_review": {
+      "all_three_nodes_twelve_edges_overview_unknowns_projection_and_text_review_carried_forward": true,
+      "bytes": 12669,
+      "path": "a12_actual/reviews/partial_book_meaning_review.json",
+      "sha256": "08031c8602f59bcdba9e72330198afe5effbbb1dda6b75ef98b4ba8944ef57c1"
+    },
+    "structural_improvement_only": {
+      "formal_generated_is_not_meaning_success": true,
+      "r1_selected_and_no_orphan": true
+    }
+  },
+  "final_gate": {
+    "all_five_new_cases_meaning_adequate": false,
+    "b12_approval_receipt_created": false,
+    "b12_condition_satisfied": false,
+    "b12_executed": false,
+    "book_complete_but_meaning_inadequate": true,
+    "lighting_incomplete_not_a_completed_candidate": true,
+    "new_retry_permission_created": false,
+    "non_generation_sql_reread": 0,
+    "normal_adoption": false,
+    "normal_reflection_unit_complete": false,
+    "prior_or_unused_authority_reusable": false,
+    "remaining_three_generated_or_certified": false,
+    "sql_save": 0
+  },
+  "final_result_received": true,
+  "frozen_source": {
+    "all_eight_fields_of_two_received_cases_equal_prepared_and_original": true,
+    "diagnostic_preparation_sha256": "0aa06bf49fa7c7fc2d22cffbc7e259c44b19966f6f163fc3e57024c6a707b49d",
+    "input_cases_path": "a12_payload/input_cases.json",
+    "input_cases_sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1",
+    "sources_read_in_full": true,
+    "supplement_count": 0
+  },
+  "lighting_review": {
+    "accepted_projection_exists": false,
+    "accepted_text_exists": false,
+    "all_four_original_fields_equal_actual_messages": true,
+    "bounded_preservation_observation": "Some visible units retain the later purchase and thirty-minute use. This partial retention does not establish completion, full semantic coverage, or adequate output.",
+    "case_id": "lighting_prior_and_later",
+    "comparison_possible_for_visible_prefix": true,
+    "complete_response": false,
+    "completed_output_meaning_rating": "NOT_ASSESSED_INCOMPLETE_RESPONSE",
+    "duplicate_event_pair_checks": [
+      {
+        "event_ids": [
+          "e3",
+          "e24"
+        ],
+        "evidence_equal": true,
+        "fact_equal": true
+      },
+      {
+        "event_ids": [
+          "e9",
+          "e22"
+        ],
+        "evidence_equal": true,
+        "fact_equal": true
+      },
+      {
+        "event_ids": [
+          "e5",
+          "e23"
+        ],
+        "evidence_equal": true,
+        "fact_equal": false
+      }
+    ],
+    "finish_reason": "length",
+    "http_status": 200,
+    "json_error": {
+      "column": 8743,
+      "line": 1,
+      "position": 8742,
+      "reason": "Unterminated string starting at"
+    },
+    "messages_and_request_ref_equal_preparation": true,
+    "messages_sha256": "e0cd802e20e0ae5add9f2fe2fc3621d12449a22c88c68cfe6b846424832fcc0e",
+    "prefix_findings": [
+      {
+        "code": "BEFORE_PURCHASE_BUDGET_CHECK_MOVED_AFTER_PURCHASE",
+        "finding": "The source checks that reserves will remain before deciding to buy. The visible facts/nodes instead call it an after-purchase money check.",
+        "raw_refs": [
+          "e3",
+          "e24",
+          "n10"
+        ],
+        "severity": "material",
+        "source_fields": [
+          3
+        ]
+      },
+      {
+        "code": "CLERK_INTENTION_REPLACED_BY_PRODUCT_FIT",
+        "finding": "The selected source leaves the clerk's reason for recommending another model unknown. The event/node replace that uncertainty with uncertainty about the product's suitability. Those are different questions and subjects.",
+        "raw_refs": [
+          "e6",
+          "n13"
+        ],
+        "severity": "material",
+        "source_fields": [
+          1
+        ]
+      },
+      {
+        "code": "COMPARISON_TIME_NECESSITY_REPLACED_BY_INCOMPLETENESS",
+        "finding": "The source is unsure whether all time spent comparing was needed. The visible event and title recast this as the completeness or incompleteness of the comparison itself.",
+        "raw_refs": [
+          "e9",
+          "e22",
+          "n11"
+        ],
+        "severity": "material",
+        "source_fields": [
+          3
+        ]
+      },
+      {
+        "code": "LATER_WARRANTY_RECORD_LABELED_PRE_PURCHASE",
+        "finding": "A post-purchase warranty-location note is attached to a node explicitly labeled as pre-purchase.",
+        "raw_refs": [
+          "e23",
+          "n19"
+        ],
+        "severity": "material",
+        "source_fields": [
+          3
+        ]
+      },
+      {
+        "code": "ARITHMETIC_DEDUCTION_BOUND_AS_LATER_ACTUAL_DEBIT",
+        "finding": "The nodes claim an after-debit state using the first-record household-table subtraction as their event root. The later actual debit is in the second source record but is not the selected event's evidence.",
+        "raw_refs": [
+          "e13",
+          "n1",
+          "n24"
+        ],
+        "severity": "material",
+        "source_fields": [
+          1,
+          3
+        ]
+      },
+      {
+        "code": "FIRST_VISIT_AND_POST_PURCHASE_ADJUSTMENT_CONFLATED",
+        "finding": "The reading/node combine returning empty-handed on the earlier visit with a later post-installation judgment that adjustments remain, without keeping those separate occasions and objects clear.",
+        "raw_refs": [
+          "r6",
+          "n7"
+        ],
+        "severity": "material",
+        "source_fields": [
+          1,
+          3
+        ]
+      },
+      {
+        "code": "REPEATED_EVENTS_AND_NODES_IN_INCOMPLETE_PREFIX",
+        "finding": "Two event pairs repeat identical evidence and facts; a further pair repeats the same warranty evidence. The visible graph reaches twenty-four nodes with repeated preparation/recording themes before truncation. This observation is limited to the received prefix.",
+        "raw_refs": [
+          "e3",
+          "e24",
+          "e9",
+          "e22",
+          "e5",
+          "e23",
+          "nodes"
+        ],
+        "severity": "material"
+      }
+    ],
+    "prefix_inspection_only": {
+      "compiler_not_run_on_repaired_packet": true,
+      "complete_edges_before_partial_edge": 10,
+      "complete_events": 24,
+      "complete_nodes": 24,
+      "complete_readings": 7,
+      "overview_received": false,
+      "raw_not_repaired_or_closed": true,
+      "reading_orphan_not_asserted_from_unfinished_packet": true,
+      "truncated_in_edge_ordinal": 11
+    },
+    "raw_bytes": 13111,
+    "raw_sha256": "15b1c36ac07e4dbfc46fa88e98b691e54e30fe365a7dd4e46bb942342efbbcd7",
+    "request_ref": "analysis-semantic-request:1c689755859dfb2f890743a581623f4e426dded17a7eae5ff731990bb075c3a6",
+    "termination_cause_limit": "The receipt proves finish_reason=length and incomplete JSON. This meaning review does not independently distinguish token-budget exhaustion from the native stopping deadline.",
+    "valid_complete_json": false
+  },
+  "reviewer": "independent_architecture_review",
+  "reviewer_actions": {
+    "gpu_operations": 0,
+    "model_calls": 0,
+    "new_judgment_rules": 0,
+    "product_code_edits": 0,
+    "raw_repairs": 0,
+    "sql_operations": 0
+  },
+  "schema": "cocolon.analysis.final_meaning_review.v1",
+  "state": "A12_NOT_ADOPTED_B12_CONDITION_NOT_SATISFIED",
+  "unreceived_cases": [
+    "U01_repair_report",
+    "U02_withdraw_submission",
+    "T01_manual10"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_commit": "943ee425ef7796b92ed9ee56f71fbb241ea2e45f",
+  "launcher_pid": 232075,
+  "started_unix": 1793267623.5736284,
+  "max_process_seconds": 600,
+  "max_processing_proration_usd": 0.047,
+  "model_load_limit": 1,
+  "training_updates": 0,
+  "generation_limit": 2,
+  "retry": false
+}

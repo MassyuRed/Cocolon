@@ -1,0 +1,19 @@
+{
+  "api_commit": "0df12bb15a937108ca01b72a09382f418c1f2a0e",
+  "state": "RECEIVED_RAW_REPLAY_REJECTION_LOCATED",
+  "new_model_calls": 0,
+  "schema_admission": "ADMITTED",
+  "stage_compilation": "REJECTED",
+  "reason": "analysis_semantic_map_invalid",
+  "location": "cores/analysis/intent_compiler.py:4135",
+  "cause": "unordered endpoints plus same relation kind repeated",
+  "raw_sha256": "4f3761cf3c04e446ed409410384f04ee97876758ff673a87f4352e6fbfcd7168",
+  "quoted_records": [
+    1,
+    2,
+    3
+  ],
+  "nodes": 2,
+  "edges": 2,
+  "semantic_adoption": false
+}

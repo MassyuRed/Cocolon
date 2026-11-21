@@ -1,0 +1,20 @@
+{
+  "pid": 380706,
+  "started_unix": 1793310224.5352163,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "590s",
+    "python3.12",
+    "-B",
+    "/workspace/cocolon_syntax2b_pack_20261030/run_syntax2b.py",
+    "--execute",
+    "--source-commit",
+    "8842ef2bb88d01a5ff946d1e01455941f23e225f"
+  ],
+  "source_commit": "8842ef2bb88d01a5ff946d1e01455941f23e225f",
+  "cpu_report_sha256": "3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563",
+  "retry": false,
+  "max_process_seconds": 600
+}

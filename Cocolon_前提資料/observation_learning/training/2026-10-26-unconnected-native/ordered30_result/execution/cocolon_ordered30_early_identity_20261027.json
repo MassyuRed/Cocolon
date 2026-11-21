@@ -1,0 +1,16 @@
+{
+  "path": "cocolon_ordered30_early_20261027.tar.gz",
+  "bytes": 3481783,
+  "sha256": "6b3ff9bebf268bdde437b49aa8e48bd0d81bbd713fd3b96957ee36d738e83f3d",
+  "archived_stage": "saved_before_reload",
+  "archived_seconds": 399.800995906,
+  "updates": 30,
+  "generations": 0,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "53b3c707e17717d1ff0dfdfac68c3340604af34e9abce47c368869fb879bba29",
+    "adapter_model.safetensors": "483d74b7d6796398b06f80b486228bec86658e8bcdc3d03c71cb5006d3b75de9"
+  },
+  "source_commit": "5b115939e2f05e47b0c3d8fef8ce54e9cf11068c",
+  "members": 17
+}

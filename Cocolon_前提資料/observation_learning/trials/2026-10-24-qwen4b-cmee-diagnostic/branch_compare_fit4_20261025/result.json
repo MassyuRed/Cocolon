@@ -1,0 +1,559 @@
+{
+  "status": "DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED",
+  "forward_attempts": 1,
+  "completed_forwards": 1,
+  "generated_responses": 0,
+  "training_updates": 0,
+  "optimizer_created": false,
+  "pod_lifecycle_operations": 0,
+  "source_commit": "c5eee230693229f2b438b1f40a3ab8394a090616",
+  "script_sha256": "50758bfe2db8e2a1e29a8ca9a57274bde1779cf632c2307ba512cd3d40adbc30",
+  "old_branch": {
+    "teacher": {
+      "id": 207727,
+      "text": "ようになって",
+      "logit": 16.125,
+      "log_probability": -1.4382736682891846,
+      "probability": 0.237337127327919,
+      "rank": 2
+    },
+    "actual": {
+      "id": 198697,
+      "text": "ようになった",
+      "logit": 16.875,
+      "log_probability": -0.6882736682891846,
+      "probability": 0.5024427175521851,
+      "rank": 1
+    },
+    "top10": [
+      {
+        "id": 198697,
+        "text": "ようになった",
+        "logit": 16.875,
+        "log_probability": -0.6882736682891846,
+        "probability": 0.5024427175521851,
+        "rank": 1
+      },
+      {
+        "id": 207727,
+        "text": "ようになって",
+        "logit": 16.125,
+        "log_probability": -1.4382736682891846,
+        "probability": 0.237337127327919,
+        "rank": 2
+      },
+      {
+        "id": 209962,
+        "text": "ようになる",
+        "logit": 14.6875,
+        "log_probability": -2.8757736682891846,
+        "probability": 0.0563725121319294,
+        "rank": 3
+      },
+      {
+        "id": 148564,
+        "text": "よう",
+        "logit": 14.5625,
+        "log_probability": -3.0007736682891846,
+        "probability": 0.04974856227636337,
+        "rank": 4
+      },
+      {
+        "id": 148408,
+        "text": "こと",
+        "logit": 13.875,
+        "log_probability": -3.6882736682891846,
+        "probability": 0.025015151128172874,
+        "rank": 5
+      },
+      {
+        "id": 155362,
+        "text": "になった",
+        "logit": 13.0,
+        "log_probability": -4.5632734298706055,
+        "probability": 0.010427867993712425,
+        "rank": 6
+      },
+      {
+        "id": 150579,
+        "text": "ように",
+        "logit": 12.5625,
+        "log_probability": -5.0007734298706055,
+        "probability": 0.006732738111168146,
+        "rank": 7
+      },
+      {
+        "id": 1495,
+        "text": " again",
+        "logit": 12.5,
+        "log_probability": -5.0632734298706055,
+        "probability": 0.00632482161745429,
+        "rank": 8
+      },
+      {
+        "id": 153253,
+        "text": "になって",
+        "logit": 12.375,
+        "log_probability": -5.1882734298706055,
+        "probability": 0.005581635516136885,
+        "rank": 9
+      },
+      {
+        "id": 96473,
+        "text": "又",
+        "logit": 12.25,
+        "log_probability": -5.3132734298706055,
+        "probability": 0.004925776273012161,
+        "rank": 10
+      }
+    ],
+    "recomputed_argmax_matches_recorded": true,
+    "top1_top2_logit_margin": 0.75,
+    "numerical_limit": "Full-prefix BF16/SDPA use_cache=False recomputation; original generation used cache."
+  },
+  "old_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "5a29d4b81a00f975c62a6d21864c41e321ab29901e20c4731118cf57662bd713",
+    "adapter_model.safetensors": "a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6"
+  },
+  "new_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "a13ed77e08b0a8d28f6e657315a85c612590590a2b00ca3f7868024bc6ea3137",
+    "adapter_model.safetensors": "e3743d6ba5dd715868a5e41d568a1bddb57b307f79a87fdd385eb90d03837d02"
+  },
+  "max_seconds": 900,
+  "interpretation": "Same recorded prefix; diagnostic scores are not new generated responses or CMEE acceptance.",
+  "prompt_tokens": 5018,
+  "branch_output_index": 1116,
+  "prefix_tokens": 6134,
+  "shared_prefix_tail": "vised\"],\"section\":\"update_note\",\"update_refs\":[0,1,2]}],\"observation\":\"友人に手順を教わり、一緒に椅子を直したのですね。\",\"reception\":\"捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れる",
+  "adapter_tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6857966184616089
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.4407394230365753
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6823903322219849
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.15751034021377563
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7161043882369995
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5035150051116943
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7034751176834106
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.17504441738128662
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.710418701171875
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5357249975204468
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6983023881912231
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.18576060235500336
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7404626607894897
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5651254653930664
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7118935585021973
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.20037662982940674
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7450059652328491
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6424187421798706
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.745384693145752
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.22945892810821533
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7505698204040527
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6977470517158508
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7536168098449707
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.2637067139148712
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7628048658370972
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7135472297668457
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7705738544464111
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.2574702203273773
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7687678337097168
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7480088472366333
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7861859798431396
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.28915736079216003
+    }
+  ],
+  "branch": {
+    "actual": {
+      "id": 198697,
+      "text": "ようになった",
+      "logit": 16.875,
+      "probability": 0.4538724720478058,
+      "log_probability": -0.7899390459060669,
+      "rank": 1
+    },
+    "teacher": {
+      "id": 207727,
+      "text": "ようになって",
+      "logit": 16.5,
+      "probability": 0.3119416832923889,
+      "log_probability": -1.164939045906067,
+      "rank": 2
+    },
+    "top10": [
+      {
+        "id": 198697,
+        "text": "ようになった",
+        "logit": 16.875,
+        "probability": 0.4538724720478058,
+        "log_probability": -0.7899390459060669,
+        "rank": 1
+      },
+      {
+        "id": 207727,
+        "text": "ようになって",
+        "logit": 16.5,
+        "probability": 0.3119416832923889,
+        "log_probability": -1.164939045906067,
+        "rank": 2
+      },
+      {
+        "id": 209962,
+        "text": "ようになる",
+        "logit": 14.6875,
+        "probability": 0.05092308297753334,
+        "log_probability": -2.9774389266967773,
+        "rank": 3
+      },
+      {
+        "id": 148564,
+        "text": "よう",
+        "logit": 14.5625,
+        "probability": 0.044939469546079636,
+        "log_probability": -3.1024389266967773,
+        "rank": 4
+      },
+      {
+        "id": 148408,
+        "text": "こと",
+        "logit": 13.5625,
+        "probability": 0.016532305628061295,
+        "log_probability": -4.102438926696777,
+        "rank": 5
+      },
+      {
+        "id": 155362,
+        "text": "になった",
+        "logit": 12.9375,
+        "probability": 0.00884910486638546,
+        "log_probability": -4.727438926696777,
+        "rank": 6
+      },
+      {
+        "id": 150579,
+        "text": "ように",
+        "logit": 12.625,
+        "probability": 0.006474143825471401,
+        "log_probability": -5.039938926696777,
+        "rank": 7
+      },
+      {
+        "id": 1495,
+        "text": " again",
+        "logit": 12.625,
+        "probability": 0.006474143825471401,
+        "log_probability": -5.039938926696777,
+        "rank": 7
+      },
+      {
+        "id": 153253,
+        "text": "になって",
+        "logit": 12.625,
+        "probability": 0.006474143825471401,
+        "log_probability": -5.039938926696777,
+        "rank": 7
+      },
+      {
+        "id": 96473,
+        "text": "又",
+        "logit": 12.4375,
+        "probability": 0.00536725390702486,
+        "log_probability": -5.227438926696777,
+        "rank": 10
+      }
+    ],
+    "actual_minus_teacher_logit": 0.375,
+    "old_actual_minus_teacher_logit": 0.75,
+    "delta_actual_minus_teacher_logit": -0.375,
+    "argmax_matches_recorded": true
+  },
+  "old_adapter_unchanged": true,
+  "new_adapter_unchanged": true,
+  "seconds": 10.057347936555743
+}

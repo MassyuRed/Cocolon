@@ -1,0 +1,110 @@
+{
+  "schema": "cocolon.instruction_pair4.content_diagnosis.v1",
+  "status": "PAIRED4_COMPLETE_REVISED_INSTRUCTION_NOT_ADOPTED",
+  "trial_closed": true,
+  "decision": "DO_NOT_ADOPT_REVISED_COMMON_INSTRUCTION_NO_PRODUCT_CONFIGURATION_CHANGED",
+  "scope": "TWO_KNOWN_INPUTS_ONE_PAIRED_COMPARISON_NOT_UNKNOWN_GENERALIZATION_OR_MODEL_LIMIT",
+  "reviewer": "root Karen with separate-context read-only corroboration; not formal Pro/Ultra/human Product Read",
+  "formal_human_product_read": false,
+  "product_credit": 0,
+  "cmee_adoption": false,
+  "training_updates": 0,
+  "model_calls": 4,
+  "retries": 0,
+  "source_commit": "2674108abf970dc9ee28f4a38b5a28d70b34a976",
+  "pid": 665996,
+  "gpu_phase_seconds": 33.75348511431366,
+  "seconds_including_final_record": 33.75884081609547,
+  "processing_usd_at_recorded_hourly_rate": 0.0024381385033846728,
+  "recorded_hourly_usd": 0.26,
+  "cost_excludes": [
+    "preparation",
+    "recovery",
+    "holding",
+    "storage",
+    "tax"
+  ],
+  "verification": {
+    "source_messages_token_ids_equal_cpu": true,
+    "only_pair_difference": "shared task_instruction",
+    "adapter_all_three_files_unchanged": true,
+    "finite_loaded_adapter_tensors": 32,
+    "all_parameters_nontrainable_checked": true,
+    "eos_completed": 4,
+    "deadline_triggered": 0,
+    "strict_json_required": false,
+    "parse_errors_metadata_only": 4,
+    "raw_changed_or_repaired": false,
+    "recovery_payloads_verified": 18,
+    "raw_hashes_and_output_token_counts_verified": 4
+  },
+  "pairs": [
+    {
+      "source_case_id": "FT-UDON-INITIAL",
+      "baseline_case": "FT-UDON-INITIAL-BASELINE",
+      "revised_case": "FT-UDON-INITIAL-REVISED",
+      "known_role": "KNOWN_TRAINING_FAMILY",
+      "baseline_findings": [
+        "Third-person record description and emotion analysis rather than a response to the person.",
+        "Adds ambiguous narrative sequencing with その後に; field order is not evidence of event chronology."
+      ],
+      "revised_local_change": "Moves toward direct address.",
+      "revised_regressions": [
+        "Introduces おにぎり although the source food is うどん.",
+        "Adds unrecorded bodily relief with 心も体もほっとした.",
+        "Says 本人の記述と一致 despite source-inconsistent body."
+      ],
+      "evidence": [
+        "reception: 帰ってからうどんを作って食べたのですね。あたたかいおにぎりが、心も体もほっとしたのよ。"
+      ],
+      "verdict": "CONTENT_FIDELITY_REGRESSION_NOT_ADOPTABLE"
+    },
+    {
+      "source_case_id": "EFREE-E05",
+      "baseline_case": "EFREE-E05-BASELINE",
+      "revised_case": "EFREE-E05-REVISED",
+      "known_role": "PREVIOUSLY_SEEN_DEVELOPMENT_EVALUATION_NOT_TRAINING",
+      "baseline_findings": [
+        "Keeps yesterday/today and undecided participation, but omits continued wish to attend.",
+        "Reception mostly repeats observation in third person."
+      ],
+      "revised_local_improvements": [
+        "Retains 出たい気持ち and keeps the decision undecided.",
+        "Moves toward directly addressing the person."
+      ],
+      "revised_limitations": [
+        "本当によかったね is praise-heavy and does not establish natural input-specific reception.",
+        "昨日の大会への申し込み and 今日の日程 leave temporal modification ambiguous; do not assert a definite hallucinated tournament date.",
+        "Both responses generalize cancellation uncertainty as participation uncertainty."
+      ],
+      "evidence": [
+        "reception: 昨日の大会への申し込み、本当によかったね。今日の日程を確認して、出たい気持ちもあれば迷っているのね。"
+      ],
+      "verdict": "LIMITED_LOCAL_IMPROVEMENT_INSUFFICIENT_FOR_ADOPTION"
+    }
+  ],
+  "shared_findings": [
+    "No question is permissible for both inputs.",
+    "Strict JSON parsing failures are not content-quality failures under the original output instruction.",
+    "unknowns:none is not independently treated as a failure; the explicitly stated hesitation is still read in the body.",
+    "Grounded-point lists and self-reported consistency do not establish body grounding.",
+    "No human Product Read or whole-model/generalization conclusion."
+  ],
+  "next_bounded_recommendation": "Return to the existing provenance-labelled generic teachers and actual native training inputs. Concretize one minimal way to teach directly addressed reception and source preservation together, without rewriting source-specific failures into gold or adding more instruction-only retries.",
+  "training_exclusions": [
+    "E01-0",
+    "E03-0",
+    "A03-SPARSE",
+    "EFREE-E05",
+    "this trial's generated outputs",
+    "withdrawn OBS-20261024-002"
+  ],
+  "new_observation_session_needed_for_this_basic_defect": false,
+  "automatic_progression": false,
+  "archive": {
+    "bytes": 22347,
+    "sha256": "f6bbea85ddba3ef29ae89bf04209617fc7aa653071da53e99fe2d9c21496af4e",
+    "payloads": 18,
+    "members": 19
+  }
+}

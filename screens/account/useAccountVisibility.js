@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
 
-import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../AuthContext";
 import { apiFetch } from "../../lib/apiClient";
 import {
   ACCOUNT_WIRE,
@@ -16,33 +16,33 @@ const DEFAULT_ACCOUNT_VISIBILITY = {
 };
 
 export function useAccountVisibility({ navigation, user, isSelf }) {
+  const { authOwnerGeneration } = useAuth();
+  const ownerRequestRef = useRef(null);
   const [accountSettingsOpen, setAccountSettingsOpen] = useState(false);
   const [visibilityLoading, setVisibilityLoading] = useState(false);
   const [visibilitySaving, setVisibilitySaving] = useState(false);
   const [accountVisibility, setAccountVisibility] = useState(DEFAULT_ACCOUNT_VISIBILITY);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    ownerRequestRef.current = { expectedUserId: user?.id, signal: controller.signal };
+    setAccountSettingsOpen(false);
+    setVisibilityLoading(false);
+    setVisibilitySaving(false);
+    setAccountVisibility(DEFAULT_ACCOUNT_VISIBILITY);
+    return () => controller.abort();
+  }, [user?.id, isSelf, authOwnerGeneration]);
+
   const loadAccountVisibilityMe = async () => {
     if (!user || !isSelf) return;
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
 
     setVisibilityLoading(true);
     try {
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error("アクセストークンが取得できませんでした");
-      }
-
       const res = await apiFetch(ACCOUNT_WIRE.routes.visibilityMe, {
+        ...request,
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
 
       if (!res.ok) {
@@ -55,6 +55,7 @@ export function useAccountVisibility({ navigation, user, isSelf }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (request.signal.aborted) return;
       if (json && typeof json === "object") {
         setAccountVisibility((prev) => ({
           ...prev,
@@ -65,15 +66,18 @@ export function useAccountVisibility({ navigation, user, isSelf }) {
         }));
       }
     } catch (e) {
+      if (request.signal.aborted || e?.name === "AccountChangedError") return;
       console.warn("loadAccountVisibilityMe error:", e);
       Alert.alert("取得に失敗しました", String(e?.message || e));
     } finally {
-      setVisibilityLoading(false);
+      if (!request.signal.aborted) setVisibilityLoading(false);
     }
   };
 
   const patchAccountVisibilityMe = async (patch) => {
     if (!user || !isSelf) return;
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     if (visibilitySaving) return;
 
     const body = patch && typeof patch === "object" ? patch : null;
@@ -81,24 +85,10 @@ export function useAccountVisibility({ navigation, user, isSelf }) {
 
     setVisibilitySaving(true);
     try {
-      let accessToken = null;
-      try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        accessToken = sessionData?.session?.access_token ?? null;
-      } catch {
-        accessToken = null;
-      }
-
-      if (!accessToken) {
-        throw new Error("アクセストークンが取得できませんでした");
-      }
-
       const res = await apiFetch(ACCOUNT_WIRE.routes.visibilityMe, {
+        ...request,
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
@@ -112,6 +102,7 @@ export function useAccountVisibility({ navigation, user, isSelf }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (request.signal.aborted) return;
       if (json && typeof json === "object") {
         setAccountVisibility((prev) => ({
           ...prev,
@@ -134,10 +125,11 @@ export function useAccountVisibility({ navigation, user, isSelf }) {
         }));
       }
     } catch (e) {
+      if (request.signal.aborted || e?.name === "AccountChangedError") return;
       console.warn("patchAccountVisibilityMe error:", e);
       Alert.alert("更新に失敗しました", String(e?.message || e));
     } finally {
-      setVisibilitySaving(false);
+      if (!request.signal.aborted) setVisibilitySaving(false);
     }
   };
 
@@ -163,9 +155,11 @@ export function useAccountVisibility({ navigation, user, isSelf }) {
 
   useEffect(() => {
     if (!user || !isSelf) return;
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     loadAccountVisibilityMe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, isSelf]);
+  }, [user, isSelf, authOwnerGeneration]);
 
   useEffect(() => {
     if (!navigation?.addListener) return undefined;

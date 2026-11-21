@@ -1,0 +1,78 @@
+{
+  "experiment": "material_v4_beam2_20261103",
+  "decision": "NOT_ADOPTED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "plan_commit": "564fe9cb5e6c885c1a77f66536ce94d1f546a9df",
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "change": {
+    "num_beams": [
+      1,
+      2
+    ]
+  },
+  "new_requests": 22,
+  "new_stop_responses": 22,
+  "model_loads": 1,
+  "training_updates": 0,
+  "seconds": 242.52666286565363,
+  "candidate_before_after": [
+    20,
+    20
+  ],
+  "typed_before_after": [
+    14,
+    14
+  ],
+  "raw_bytes_equal": 20,
+  "json_values_equal": 20,
+  "common_typed_saved_bytes_equal": 14,
+  "common_complete_graph_equal": 14,
+  "common_complete_projection_bytes_equal": 14,
+  "candidate_saved_replays": 40,
+  "typed_saved_replays": 28,
+  "new_typed_successes": [],
+  "lost_typed_successes": [],
+  "changed_ids": [
+    "SC01",
+    "YREASON01"
+  ],
+  "unresolved_ids": [
+    "X03",
+    "MD02",
+    "YREASON01"
+  ],
+  "cpu_seconds": 8.858909042552114,
+  "cpu_cache_state_tensors_swapped": 64,
+  "manifest_members_verified": 239,
+  "inner_archive": {
+    "bytes": 518561,
+    "members": 240,
+    "sha256": "4acd2b30bf278a99270963edf3551746d2d8079e7313b39f5584874e59fb4e4d"
+  },
+  "outer_archive": {
+    "bytes": 496392,
+    "members": 8,
+    "sha256": "c967973789cbc15dcdbe57ddd35be62fb8d4738729c5498bfabbae4bd7becbca"
+  },
+  "review_bundle": {
+    "library_file_id": "libfile_9cb5f63b4c248191b685349c38685ecc",
+    "url": "https://chatgpt.com/library?file_id=libfile_9cb5f63b4c248191b685349c38685ecc&account_id=personal",
+    "bytes": 501659,
+    "sha256": "82bdbe090270a6a2664931a322376c867782d4ed06d8433e1621b4d1659b8475"
+  },
+  "processing_cost_usd_at_last_displayed_rate": 0.01953687006417765,
+  "actual_total_bill_measured": false,
+  "final_gpu": {
+    "memory_mib": 2,
+    "utilization_percent": 0,
+    "compute_processes": 0,
+    "rental_maintained": true
+  },
+  "normal_adoption": false,
+  "production_changes": 0,
+  "structure_map_delta": "NONE",
+  "review_scope": "22 previously seen synthetic inputs; no general accuracy or product acceptance claim"
+}

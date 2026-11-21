@@ -1,0 +1,30 @@
+{
+  "pid": 384978,
+  "source_commit": "83be8d187f6095cd86f17e3362803b15bbabd519",
+  "command": [
+    "/usr/local/bin/python",
+    "/workspace/cocolon_4b_service_binding_pack_20261025/run_service_identity_holdout.py",
+    "--training-pack",
+    "/workspace/cocolon_4b_service_binding_pack_20261025",
+    "--plan",
+    "/workspace/cocolon_4b_service_binding_pack_20261025/eval_plan.json",
+    "--base-runner",
+    "/workspace/cocolon_4b_service_runtime_20261025/run_service_roundtrip.py",
+    "--pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--api-root",
+    "/workspace/cocolon_service_api_20261025",
+    "--api-commit",
+    "95d00b907f6d9c42944666269acc457c9af34f37",
+    "--adapter",
+    "/workspace/cocolon_4b_service_binding_fit12_20261025/adapter",
+    "--expected-adapter-sha256",
+    "adae463befe9c465fa6d3a465b29bdc66dafcf41f75328277aa90e2149eddf3d",
+    "--expected-training-manifest-sha256",
+    "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107"
+  ],
+  "max_model_calls": 2,
+  "max_seconds": 900,
+  "training_updates": 0,
+  "gpu_stop": false
+}

@@ -1,0 +1,155 @@
+diff --git a/Cocolon_Piece/00_read_first.md b/Cocolon_Piece/00_read_first.md
+--- a/Cocolon_Piece/00_read_first.md
++++ b/Cocolon_Piece/00_read_first.md
+@@ -1,7 +1,7 @@
+ ---
+ doc_id: cocolon_piece_read_first
+ title: "Cocolon Piece — Read First"
+-revision_date: "2026-10-07 JST"
++revision_date: "2026-10-08 JST"
+ decision_owner: "Mash"
+ workstream: "Cocolon / Piece"
+ document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
+@@ -9,6 +9,10 @@
+ ---
+ 
+ # Cocolon Piece — Read First
++
++**2026-10-08のコード確認位置はAPI `93c26f7c6f76963a10dc349dce2ef7b81654f96f`／RN `c78b0b1f8a7eee0cb7a7ef46f0500f93d121570d`です。前者には保存状態から7項目のsource_refを返す内部処理、後者には切り離された本文プレビュー部品があります。API `0c6cb565`の初回発行POSTは未登録router内の実装です。参照情報のHTTP受渡し・実効flag・InputScreen接続・native画像は未完成。新しい参照取得URLは別routerの非稼働候補としてのみ作成・検証しており、確定PCE-6契約の変更・既存appへの登録・有効化は未承認、未実施です。従来のB7等の検証と商品未合格は履歴として保持します。**
++
++以下の旧再開案内は10/07時点の履歴です。今回の現在地は末尾の10/08節を優先します。
+ 
+ **GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§22／current map §26）です。B7公開切替・削除HTTPの実装と隔離PostgreSQL接続確認を反映し、役割明記ひらがな名と旧676 PASSは§21／map §25へ分離します。前回B7 runのHTTP 152件・native SQL接続13件の成功は、実Auth／実PostgREST／実機・商品合格を意味しません。公開安全性の実判定→永続preview→開発画面の本線は未完了です。§20以前は各commitの履歴として保持します。**
+ 
+@@ -684,3 +688,12 @@
+ 次の本線は公開安全性実判定→永続preview発行→同じ本文と画像設定の開発画面である。既存detector成功や内部組立物の存在を安全性判定へ昇格せず、PCE-4 S0〜S8の不成立を残したまま発行しない。B7の確認済み実装・隔離検証を作り直さず、3資料の更新後全文と適用差分を作成・照合済み。GitHub反映と反映後の再取得は別に確認し、ZIPだけでremote同期済みにしない。
+ 
+ production未登録、共有DB・Render・RN・旧Q&A・Emlis/Analysis・merge/deploy変更0、`automatic_progression=false`。B7全体や10/07の画面接続・10/10完成を成立した扱いにしない。
++
++
++## 23. 2026-10-08 — 内部source_refとRN本文表示の現在地
++
++API `93c26f7c`／RN `c78b0b1f`。責務・反映済みpathはcurrent map §27。7項目の内部source_ref、未登録POST preview、切り離されたRN API/model/controller/host/modalを継承し、再実装しない。
++
++参照取得GETの新URLは未採用のtransport候補として既存handoffのpatchに保存するだけで、実装pathへ適用・既存APIへ登録済みとはしない。HTTP36件／RN198件は限定したローカル検査であり、実認証・実DB・実入力画面・native画像は未確認。詳細と代替依存、現行storeとの相違はmap §27.2。
++
++次は参照取得経路の採用判断と、保存済み入力・サーバー実効flagからInputScreenへの接続。default OFF・商品未受入れ・実機未確認を維持し、本文閲覧を画像生成・保存・共有の完成にしない。
+diff --git a/Cocolon_前提資料/current_structure/02_piece_current_structure.md b/Cocolon_前提資料/current_structure/02_piece_current_structure.md
+--- a/Cocolon_前提資料/current_structure/02_piece_current_structure.md
++++ b/Cocolon_前提資料/current_structure/02_piece_current_structure.md
+@@ -1,8 +1,8 @@
+ ---
+ doc_id: cocolon_piece_current_structure
+ title: "Piece構造 — Current Structure"
+-revision_date: "2026-10-07 JST"
+-latest_api_implementation: "0c1f69ed25d6e5bb7a887c125ae900ab61ee4996"
++revision_date: "2026-10-08 JST"
++latest_api_implementation: "93c26f7c6f76963a10dc349dce2ef7b81654f96f"
+ latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
+ document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
+ effective_when: "MERGED_TO_COCOLON_MAIN"
+@@ -15,6 +15,10 @@
+ # Piece構造 — Current Structure
+ 
+ ## 0. Current conclusion
++
++**2026-10-08のコード確認位置はAPI `93c26f7c6f76963a10dc349dce2ef7b81654f96f`／RN `c78b0b1f8a7eee0cb7a7ef46f0500f93d121570d`です。前者には保存状態から7項目のsource_refを返す内部処理、後者には切り離された本文プレビュー部品があります。API `0c6cb565`の初回発行POSTは未登録router内の実装です。参照情報のHTTP受渡し・実効flag・InputScreen接続・native画像は未完成。新しい参照取得URLは別routerの非稼働候補としてのみ作成・検証しており、確定PCE-6契約の変更・既存appへの登録・有効化は未承認、未実施です。従来のB7等の検証と商品未合格は履歴として保持します。**
++
++以下の旧再開案内は10/07時点の履歴です。今回の現在地は末尾の10/08節を優先します。
+ 
+ **GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§26）です。§25に役割明記ひらがな人名の修正と旧CI 676 PASSを分離して保持します。§26のB7公開切替・削除HTTPは反映済みで、2026-10-07の既存隔離PostgreSQL workflowにおいてB7 HTTP 152件とnative SQL接続13件が成功しています。実Auth／実PostgREST／実機の確認ではなく、B7全体・商品合格は未成立です。公開安全性の実判定→永続preview発行→開発画面という本線は未完了です。§24以前の結果は各commitの履歴として保持します。**
+ 
+@@ -848,3 +852,35 @@
+ 第三者への未確認断定、未証明の広い人名／参照境界、実安全性判定と永続preview発行・変更、HTTP/RN接続、許可されたrefined補足、Q3履歴選択集合とshared writer、Nexus/read-through非表示化、native保存共有・実機は残る。10/07の開発画面接続を本資料だけで成立扱いにせず、10/10完成も予定通りと断言しない。週次判断点の不足を残したまま、履歴拡張・画像微調整・別の周辺機能へ逸れない。
+ 
+ `automatic_progression=false`、Draft/default OFF、production router未登録を維持する。資料同期の準備と、remote適用・再取得の成功は別に記録する。共有DB・SQL migration・Render・RN・Emlis/Analysis・merge/deploy/activation・実ユーザーデータの変更0。B7／B8／Piece全体の完了や商品合格creditを付与しない。
++
++
++## 27. 2026-10-08 — 保存参照・未登録preview HTTP・切り離されたRN本文表示
++
++### 27.1 反映済みの実装と、未接続を分離する
++
++| Repository / path | 責務・状態 |
++|---|---|
++| API `ai/services/ai_inference/piece_v2_source_adapter.py` | `93c26f7c`で`resolve_original_source_ref`追加。既存の保存状態handoffと返却前の再照合から7項目を得る内部読取り。実運用HTTP callerはまだない。 |
++| API `ai/services/ai_inference/api_piece_v2.py` | `0c6cb565`でPOST previewの初回発行・同一キー再取得に接続。production未登録。TTL/rendererは専用test appの明示設定であり、実効flag/公開有効化の代わりではない。 |
++| RN `features/piece/pieceApi.js` | 閉じた要求・応答、本人sessionの前後確認、同一key・本文維持のPOST transport。既存InputScreenは未使用。 |
++| RN `features/piece/piecePreviewModel.js` | 応答状態、本文/payload/recipeの3hash再計算照合、期限と観測済み期限切れの確定。保存・export権限はfalse。 |
++| RN `features/piece/PieceCreateController.js` | 明示start/retry、古い要求の結果排除、close/dispose。自動生成なし。 |
++| RN `components/piece/PiecePreviewModal.js` | 正規本文全文の閲覧。画像preview、Piece保存、書出し、共有は未提供と表示。 |
++| RN `screens/input/InputPieceActionArea.js` | controller/modalを持つ切り離されたhost。アカウント/source変更、背景化、unmount、期限切れを扱う。InputScreen/navigationへ未組込み。 |
++| RN `tests/piece-v2-contracts.test.js`、`tests/piece-v2-state-models.test.js`、`tests/piece-v2-preview-display.test.js` | 既存162件のNode検査。React/RN・通信・session等は検査用代替で、端末画像検証ではない。 |
++
++元入力・Emlis本文・Analysis推論を新source_ref応答へ入れず、本文ScrollViewを画像完成へ換算しない。旧Q&Aのuser-visible経路は未切替。
++
++### 27.2 今回の非稼働transport候補
++
++候補URLは`GET /emotion/piece/source-ref/{saved_input_id}`。既存PCE-6の確定URL一覧にはないため、採用前に別判断する。既存7項目のデータ契約は維持する。候補の`piece_v2_source_ref_http.py::source_ref_router`は既存`api_piece_v2.router`から分離され、app.pyへのimport/includeは追加しない。RNの候補`requestPieceSourceRef`も既存画面には接続しない。
++
++候補差分は`Cocolon_Piece/handoff/Piece_SourceRef_HTTP_Candidate_20261008.patch`と`Piece_SourceRef_RN_Candidate_20261008.patch`。patchの保存を、対象コードpathへ適用・採用済みと扱わない。対応する説明は`Piece_SourceRef_Transport_Candidate_20261008.md`。
++
++ローカルのHTTP候補36件とRN198件（旧162＋新36）が成功。HTTPはFastAPI/Starlette ASGIとcandidate handlerを実行し、Bearer照会・保存adapter結果は代替。既存API全文とcontractは確認版と一致。importに使用したstoreは旧`80ab568`で現行`07cb82b`とは異なり、この検証でstore操作は呼ばない。全backend依存、実Auth/DB/CMEE/PostgREST、全repo、CI、端末画像を検証したものではない。最初のhelper抜粋環境36成功は補助記録として区別する。
++
++### 27.3 次に閉じる箇所
++
++参照取得URLの採用判断後、既存source_ref・同じPOST要求/key・実効flag・保存後のInputScreenから、既存host/modalへ接続する。source_refだけでeligibleやenabledを捏造しない。native画像preview/書出し、capabilities/quota、保存/履歴/共有、実認証・実機は残す。10/10目標の達成・商品受入れ・公開有効化は未成立。既存合意の最小動作を優先し、細かな文体や装飾の全面完成待ちへ戻さない。
++
++この同期差分は確認済み既存コードと非稼働候補を区別するもので、仕様承認、段階開始、実DB/環境/依存/課金/公開の許可を新設しない。全アプリ地図の全面再生成やfresh System Context prepare完了は主張しない。
+diff --git a/Cocolon_Piece/manifest.json b/Cocolon_Piece/manifest.json
+--- a/Cocolon_Piece/manifest.json
++++ b/Cocolon_Piece/manifest.json
+@@ -14,9 +14,9 @@
+   },
+   "current_entry": {
+     "path": "Cocolon_Piece/00_read_first.md",
+-    "git_blob_sha1": "5923b970b5bdfc2567a17b951ec393081b28c8ff",
+-    "raw_sha256": "941fc752f69e5c4c8edf33d91a37d5216ddd872935020d3082a2e65939ac3243",
+-    "utf8_bytes": 28098
++    "git_blob_sha1": "eb07d3c25262171ab707a71c776750e62e7fd6ec",
++    "raw_sha256": "a254d536de57fefa590da2a6ec396e9d2ac32e78f2537e5a471688d495a718d6",
++    "utf8_bytes": 29863
+   },
+   "current_premise": {
+     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
+@@ -232,9 +232,9 @@
+     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
+     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
+-    "git_blob_sha1": "e83b25d8b6ece7176cf411763470cb0535eace45",
+-    "raw_sha256": "1413d8184a26e8f2f3801b328de427440880fc0ad0fabb6a9fbb035e644525df",
+-    "utf8_bytes": 105776
++    "git_blob_sha1": "f23ab3c74c0d462dc4830237f120b751b9249cea",
++    "raw_sha256": "a4e4f74026788524ef4b0bcd71d1972f4eb3011f782a4e7fd4d0a4ec2590432c",
++    "utf8_bytes": 110732
+   },
+   "historical_actual_basis_before_b2a": {
+     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+@@ -850,5 +850,28 @@
+     "production_migration_apply_effect": 0,
+     "state": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
+     "automatic_progression": false
++  },
++  "observed_current_20261008": {
++    "api_head": "93c26f7c6f76963a10dc349dce2ef7b81654f96f",
++    "rn_head": "c78b0b1f8a7eee0cb7a7ef46f0500f93d121570d",
++    "source_ref_internal": "IMPLEMENTED_NO_PRODUCTION_CALLER",
++    "preview_post": "UNREGISTERED_ROUTER_IMPLEMENTED",
++    "rn_text_preview": "DETACHED_HOST_IMPLEMENTED_NOT_INPUTSCREEN",
++    "source_ref_http": "CANDIDATE_PATCH_ONLY_NOT_ADOPTED_OR_APPLIED",
++    "candidate_route": "GET /emotion/piece/source-ref/{saved_input_id}",
++    "candidate_note": "Cocolon_Piece/handoff/Piece_SourceRef_Transport_Candidate_20261008.md",
++    "effective_flags": false,
++    "input_screen_connection": false,
++    "native_image_export": false,
++    "candidate_http_tests": 36,
++    "candidate_rn_tests": 198,
++    "evidence_limits": [
++      "synthetic bearer and saved-adapter results",
++      "ASGI not live HTTP/Auth/DB",
++      "older unused store import",
++      "Node not real React/RN/device"
++    ],
++    "product_acceptance": false,
++    "automatic_progression": false
+   }
+ }

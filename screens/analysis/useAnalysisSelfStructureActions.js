@@ -54,7 +54,7 @@ export function useAnalysisSelfStructureActions({
 
         Alert.alert(
           "詳しい自己分析レポート",
-          "わたしマップの入口は無料で見られます。\n\n履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。",
+          "現在のわたしマップは全プラン共通です。月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。",
           [
             { text: "閉じる", style: "cancel" },
             { text: "プランを見る", onPress: goSubscription },

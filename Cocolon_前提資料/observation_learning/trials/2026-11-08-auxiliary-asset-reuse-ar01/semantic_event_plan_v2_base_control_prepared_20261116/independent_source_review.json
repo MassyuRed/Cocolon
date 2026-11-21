@@ -1,0 +1,94 @@
+{
+  "application_review": {
+    "exact_new_alias_selects_same_event_plan_v2_profile": true,
+    "if_factory_keeps_original_120u_model_identity": true,
+    "if_factory_keeps_original_four_setting_snapshot_guard": true,
+    "if_semantic_request_budget_preserved": 4096,
+    "map_source_settings_freshness_guard_preserved": true,
+    "natural_piece_profiles_unchanged": true,
+    "no_live_settings_deploy_or_database_change": true
+  },
+  "blockers": [],
+  "body_free": true,
+  "changed_files": {
+    "ai/services/ai_inference/analysis_if_model_source.py": {
+      "bytes": 5153,
+      "sha256": "92990dacd92debb68e1a452270ad271523fc8c067025eea42ded633a11ae2fa0"
+    },
+    "ai/services/ai_inference/analysis_model_source.py": {
+      "bytes": 15440,
+      "sha256": "d1a87be0b02afec43fc68e08fd0a7ea350d54f6b9ec8fe27c4eea4f8794cbfc7"
+    },
+    "ai/tests/test_analysis_semantic_event_plan_v2.py": {
+      "bytes": 21351,
+      "sha256": "347f343977c791cba723750eea4b02a0504848370dc17d810e632542455a77ad"
+    },
+    "ai/tests/test_emlis_natural_reply_probe_http.py": {
+      "bytes": 32966,
+      "sha256": "07e19673544b04167a6f7776a3e47dc51c68a1881afae4e51966c78f1d9097bd"
+    },
+    "ai/tools/serve_emlis_natural_reply.py": {
+      "bytes": 88747,
+      "sha256": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56"
+    }
+  },
+  "limitations": {
+    "candidate_gpu_runtime_observed": false,
+    "candidate_semantic_improvement_observed": false,
+    "full_five_future_actual_source_raw_projection_text_review_still_required": true,
+    "new_gpu_permission_created": false,
+    "normal_adoption_or_reflection_proven": false
+  },
+  "native_review": {
+    "adapter_and_nontraining_restoration_preserved": true,
+    "analysis_authentication_and_v2_marker_required": true,
+    "analysis_output_reservation_preserved": 4096,
+    "base_alias": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+    "base_generation_uses_existing_disable_adapter_context": true,
+    "changed_top_level_definitions": [
+      "load_generator",
+      "make_handler"
+    ],
+    "compiler_changes": 0,
+    "existing_event_adapter_remains_loaded_and_identity_checked": true,
+    "explicit_event_plan_model_configuration_required": true,
+    "explicit_trial_context_preserved": 32768,
+    "global_request_cap_and_loopback_wrapper_preserved": true,
+    "natural_piece_budget_branch_not_used_for_base_map": true,
+    "new_cli_arguments": 0,
+    "opposite_alias_not_silently_accepted": true,
+    "prompt_changes": 0,
+    "schema_changes": 0,
+    "semantic_json_and_parser_order_preserved": true,
+    "unchanged_definitions_by_ast": [
+      "_semantic_event_plan_v2_schema",
+      "semantic_output_schema",
+      "semantic_json_parser",
+      "semantic_free_text_tokens",
+      "base_inference_context",
+      "piece_inference_context",
+      "main"
+    ]
+  },
+  "parent_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "reviewer": "independent_architecture_review",
+  "schema": "cocolon.analysis.independent_source_review.v1",
+  "scope": "Full five-file published diff and relevant application/IF/native callers; read-only static review, no GPU or additional test execution.",
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "state": "NO_SOURCE_BLOCKER_FOUND_RUNTIME_AND_MEANING_UNPROVEN",
+  "test_diff_review": {
+    "coverage_read": [
+      "Explicit alias and authentication separation",
+      "V2 marker and opposite-alias rejection",
+      "Shared nine-response cap",
+      "CLI preserves event-adapter identity and Analysis budgets",
+      "Real serving/LMFE closure with synthetic CPU model",
+      "Success/failure adapter restoration",
+      "32768 context boundary",
+      "Application map wire identity and IF120u separation"
+    ],
+    "existing_test_files_modified": 2,
+    "synthetic_cpu_http_is_not_real_model_quality": true,
+    "tests_run_by_this_reviewer": 0
+  }
+}

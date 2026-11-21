@@ -1,0 +1,96 @@
+{
+  "schema": "cocolon.generalization_eval2.content_diagnosis.v1",
+  "scope": "TWO_ACTUAL_OUTPUTS_WITH_FIXED_GENERIC_PROMPT_NOT_GENERAL_MODEL_LIMIT",
+  "status": "RAW_RUN_COMPLETE_PRODUCT_QUALITY_NOT_CLEAR",
+  "reviewer": "root Karen; separate-context read-only corroboration, not formal Pro/Ultra/human Product Read",
+  "formal_human_product_read": false,
+  "cmee_adoption": false,
+  "product_credit": 0,
+  "generation_calls": 2,
+  "training_updates": 0,
+  "gpu_phase_seconds": 19.496807973831892,
+  "processing_seconds_including_final_record": 19.50164403952658,
+  "processing_usd_at_recorded_hourly_rate": 0.0014084520695213643,
+  "recorded_hourly_usd": 0.26,
+  "cost_excludes": [
+    "preparation",
+    "recovery",
+    "holding",
+    "storage",
+    "tax"
+  ],
+  "verification": {
+    "source_messages_and_token_ids_equal_cpu_preflight": true,
+    "actual_source_runner_sha256": "93f26cd5b9191168c21cee6b08f7cd7e171e4db653a62252815837a7805fff95",
+    "source_publication_commit": "4f62ca363062ce95b881aa2e6a09a82549d1dc3a",
+    "adapter_unchanged": true,
+    "finite_loaded_adapter_tensors": 32,
+    "eos_completed": 2,
+    "deadline_triggered": 0,
+    "strict_json_required_by_original_prompt": false,
+    "strict_json_parse_errors": 2,
+    "parse_errors_not_used_as_quality_failures": true,
+    "no_retry": true
+  },
+  "cases": [
+    {
+      "case_id": "E01-0",
+      "core_retained": [
+        "mail sorting/unneeded paper disposal",
+        "usable desk EDGE scope, no room-wide expansion"
+      ],
+      "quality_limitations": [
+        "observation uses quotation/report-label phrasing; brief factual observation is permissible, but this is administrative description",
+        "reception repeats the fact as third-person analysis rather than addressing the person"
+      ],
+      "evidence": [
+        "本人のメモ「やっと机の端が使える」および「いらない紙を捨てた」の記録。",
+        "郵便物の整理により、机の端が利用可能になったと捉える。"
+      ],
+      "not_scored_as_error": [
+        "local connection of sorting and usable edge is a reasonable same-record reading",
+        "no question is permissible",
+        "ordinary unstated motives do not require forced questions"
+      ],
+      "product_pre_screen_clear": false
+    },
+    {
+      "case_id": "E03-0",
+      "core_retained": [
+        "yesterday accepted; today declined",
+        "relief/calm after today"
+      ],
+      "quality_limitations": [
+        "drops the specific unable-to-refuse modality and same-request comparison",
+        "adds reduced psychological burden and restoration of prior calm not explicitly stated",
+        "reception repeats an analytical explanation rather than a human response"
+      ],
+      "evidence": [
+        "昨日の依頼は受諾し、今日の依頼は拒否することで、心理的負担が軽減され平穏を回復したと解釈できる。"
+      ],
+      "interpretation_note": "The burden explanation is plausible but unsupported; recovery adds an unrecorded earlier state. Hedging does not supply source grounding.",
+      "product_pre_screen_clear": false
+    }
+  ],
+  "shared_findings": [
+    "question:null is permissible in both",
+    "labelled prose supplies requested fields and existing source IDs; not strict JSON/API compatibility",
+    "unknowns:none does not prove every ordinary motive resolved",
+    "Short daily input does not require deep interpretation or discovery; the unmet requirement is natural addressed reception, not forced depth."
+  ],
+  "next_bounded_work_recommendation": "Use existing confirmed training materials, excluding these two evaluation inputs, to concretize one common instruction/target improvement for directly addressed reception, preservation of time/modality, and no unspoken causal/restoration explanation. Do not add story-specific regex or adopt general semantics on quote equality alone.",
+  "new_observation_session_needed_for_this_diagnosis": false,
+  "automatic_progression": false,
+  "trial_closed": true,
+  "raw_archive": {
+    "bytes": 15402,
+    "sha256": "be06bf6b6d4b807930c9beb873fdc4c923380ebb968e01f997d247d1a1c36592",
+    "member_files": 14
+  },
+  "remaining": [
+    "general-input CMEE source and surface admission",
+    "dynamic chair correction with this adapter",
+    "Piece/Analysis complete teachers and quality",
+    "device/production/formal acceptance"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "cocolon.emlis_thread.application.v1",
+  "thread_id": "e7bd846e-83a4-4738-956d-daf27ddc7472",
+  "revision": 10,
+  "state": "RESPONSE_FAILED",
+  "original": {
+    "id": "308176fc-2f30-4692-9d5f-bc2208c1d37d",
+    "created_at": "2026-10-25T06:49:23",
+    "memo": "全部一人で直せたことが、うれしかった。",
+    "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+  },
+  "timeline": [
+    {
+      "event_id": "7ec7b464-7383-4b1d-b2b3-fc44cde99609",
+      "kind": "OBSERVATION",
+      "recorded_at": "2026-10-25T08:49:02.933+00:00",
+      "round_index": 0,
+      "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "stage": "INITIAL",
+      "is_current": false
+    },
+    {
+      "event_id": "7d3b3a6b-b87d-4a86-96d3-f06ba1dda4f3",
+      "kind": "QUESTION",
+      "recorded_at": "2026-10-25T08:49:02.934+00:00",
+      "round_index": 1,
+      "question_id": "emlis-question-21a48b1efc2af69c667c1a81fe4df6abab688c474c9df59c9881eadd21ec135f",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    {
+      "event_id": "6757dc8c-90d7-4568-81fa-82605d420e29",
+      "kind": "ANSWER",
+      "recorded_at": "2026-10-25T08:49:03.038+00:00",
+      "round_index": 1,
+      "text": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+      "question_id": "emlis-question-21a48b1efc2af69c667c1a81fe4df6abab688c474c9df59c9881eadd21ec135f",
+      "authored_at": "2026-10-25T08:49:03.013049+00:00"
+    }
+  ],
+  "can_write": true,
+  "pending_question": null,
+  "current_observation": null,
+  "body_state": "MEANING_UPDATED_BODY_UNAVAILABLE",
+  "answer_saved": true,
+  "answer_assessment": "RESOLVED",
+  "meaning_updated": true,
+  "failure_code": "worker_interrupted",
+  "operation_id": "e6372cfc-0351-4d18-b8b6-e732cb20b28d",
+  "attempt_id": "a64633a8-ebe5-455f-813e-72f9528fe48e",
+  "requested_attempt_id": null,
+  "can_retry": true,
+  "can_continue": false,
+  "issued_count": 1,
+  "question_limit": 1,
+  "started_question_limit": 1,
+  "processing_deadline_at": null
+}

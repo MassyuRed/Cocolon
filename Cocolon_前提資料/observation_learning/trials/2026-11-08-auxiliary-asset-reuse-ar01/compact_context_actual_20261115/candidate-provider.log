@@ -1,0 +1,137 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   6%|▌         | 40/723 [00:00<00:01, 393.38it/s]
+Loading weights:  11%|█         | 80/723 [00:00<00:02, 297.89it/s]
+Loading weights:  15%|█▌        | 112/723 [00:00<00:02, 298.39it/s]
+Loading weights:  20%|█▉        | 143/723 [00:00<00:01, 293.34it/s]
+Loading weights:  24%|██▍       | 173/723 [00:00<00:01, 276.09it/s]
+Loading weights:  28%|██▊       | 205/723 [00:00<00:01, 281.79it/s]
+Loading weights:  33%|███▎      | 239/723 [00:00<00:01, 298.01it/s]
+Loading weights:  38%|███▊      | 273/723 [00:00<00:01, 305.86it/s]
+Loading weights:  42%|████▏     | 304/723 [00:01<00:01, 303.80it/s]
+Loading weights:  46%|████▋     | 335/723 [00:01<00:01, 299.46it/s]
+Loading weights:  51%|█████     | 366/723 [00:01<00:01, 294.22it/s]
+Loading weights:  55%|█████▌    | 399/723 [00:01<00:01, 301.78it/s]
+Loading weights:  60%|█████▉    | 432/723 [00:01<00:00, 307.66it/s]
+Loading weights:  85%|████████▍ | 614/723 [00:01<00:00, 745.71it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 450.78it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+analysis_generation_stage=admitted monotonic=2300127.35
+analysis_generation_stage=tokenize monotonic=2300127.35
+analysis_generation_stage=constraint monotonic=2300127.408
+analysis_generation_stage=decode monotonic=2300127.413
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_0 monotonic=2300128.842
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300128.85
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+analysis_generation_stage=prefix_enter_128 monotonic=2300143.624
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_1 monotonic=2300143.629
+analysis_generation_stage=prefix_enter_256 monotonic=2300157.483
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_4 monotonic=2300157.488
+analysis_generation_stage=prefix_enter_384 monotonic=2300169.463
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_245457 monotonic=2300169.484
+analysis_generation_stage=complete_stop monotonic=2300179.594
+analysis_generation_stage=special_count_1 monotonic=2300179.599
+analysis_generation_stage=admitted monotonic=2300181.636
+analysis_generation_stage=tokenize monotonic=2300181.636
+analysis_generation_stage=constraint monotonic=2300181.653
+analysis_generation_stage=decode monotonic=2300181.658
+analysis_generation_stage=prefix_enter_0 monotonic=2300182.416
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300182.485
+analysis_generation_stage=prefix_enter_128 monotonic=2300193.599
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_free_allowed_245458 monotonic=2300193.615
+analysis_generation_stage=complete_stop monotonic=2300201.366
+analysis_generation_stage=special_count_1 monotonic=2300201.368
+analysis_generation_stage=admitted monotonic=2300203.282
+analysis_generation_stage=tokenize monotonic=2300203.282
+analysis_generation_stage=constraint monotonic=2300203.3
+analysis_generation_stage=decode monotonic=2300203.305
+analysis_generation_stage=prefix_enter_0 monotonic=2300204.06
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300204.128
+analysis_generation_stage=prefix_enter_128 monotonic=2300217.762
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_2 monotonic=2300217.767
+analysis_generation_stage=prefix_enter_256 monotonic=2300230.971
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_4 monotonic=2300230.977
+analysis_generation_stage=prefix_enter_384 monotonic=2300242.786
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_245464 monotonic=2300242.807
+analysis_generation_stage=complete_stop monotonic=2300249.24
+analysis_generation_stage=special_count_1 monotonic=2300249.246
+analysis_generation_stage=admitted monotonic=2300251.366
+analysis_generation_stage=tokenize monotonic=2300251.366
+analysis_generation_stage=constraint monotonic=2300251.384
+analysis_generation_stage=decode monotonic=2300251.388
+analysis_generation_stage=prefix_enter_0 monotonic=2300252.162
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300252.231
+analysis_generation_stage=prefix_enter_128 monotonic=2300263.906
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_4 monotonic=2300263.912
+analysis_generation_stage=prefix_enter_256 monotonic=2300278.442
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_free_allowed_245460 monotonic=2300278.465
+analysis_generation_stage=prefix_enter_384 monotonic=2300290.252
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_245457 monotonic=2300290.274
+analysis_generation_stage=complete_stop monotonic=2300298.755
+analysis_generation_stage=special_count_1 monotonic=2300298.76
+analysis_generation_stage=admitted monotonic=2300301.019
+analysis_generation_stage=tokenize monotonic=2300301.019
+analysis_generation_stage=constraint monotonic=2300301.036
+analysis_generation_stage=decode monotonic=2300301.042
+analysis_generation_stage=prefix_enter_0 monotonic=2300301.819
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300301.888
+analysis_generation_stage=prefix_enter_128 monotonic=2300313.482
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_4 monotonic=2300313.487
+analysis_generation_stage=prefix_enter_256 monotonic=2300327.875
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_free_allowed_245469 monotonic=2300327.896
+analysis_generation_stage=prefix_enter_384 monotonic=2300339.397
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_245464 monotonic=2300339.418
+analysis_generation_stage=complete_stop monotonic=2300341.568
+analysis_generation_stage=special_count_1 monotonic=2300341.573
+analysis_generation_stage=admitted monotonic=2300343.729
+analysis_generation_stage=tokenize monotonic=2300343.729
+analysis_generation_stage=constraint monotonic=2300343.749
+analysis_generation_stage=decode monotonic=2300343.754
+analysis_generation_stage=prefix_enter_0 monotonic=2300344.515
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300344.587
+analysis_generation_stage=prefix_enter_128 monotonic=2300356.676
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_17 monotonic=2300356.684
+analysis_generation_stage=prefix_enter_256 monotonic=2300371.628
+analysis_generation_stage=prefix_exit_256_UnionParser_other_allowed_5 monotonic=2300371.634
+analysis_generation_stage=prefix_enter_384 monotonic=2300383.776
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_245464 monotonic=2300383.796
+analysis_generation_stage=complete_stop monotonic=2300387.493
+analysis_generation_stage=special_count_1 monotonic=2300387.5
+analysis_generation_stage=admitted monotonic=2300389.607
+analysis_generation_stage=tokenize monotonic=2300389.607
+analysis_generation_stage=constraint monotonic=2300389.623
+analysis_generation_stage=decode monotonic=2300389.628
+analysis_generation_stage=prefix_enter_0 monotonic=2300390.393
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300390.461
+analysis_generation_stage=prefix_enter_128 monotonic=2300403.009
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_2 monotonic=2300403.014
+analysis_generation_stage=prefix_enter_256 monotonic=2300416.27
+analysis_generation_stage=prefix_exit_256_JsonSchemaParser_other_allowed_2 monotonic=2300416.275
+analysis_generation_stage=prefix_enter_384 monotonic=2300429.291
+analysis_generation_stage=prefix_exit_384_JsonSchemaParser_free_allowed_245464 monotonic=2300429.316
+analysis_generation_stage=complete_stop monotonic=2300431.429
+analysis_generation_stage=special_count_1 monotonic=2300431.433
+analysis_generation_stage=admitted monotonic=2300433.52
+analysis_generation_stage=tokenize monotonic=2300433.521
+analysis_generation_stage=constraint monotonic=2300433.54
+analysis_generation_stage=decode monotonic=2300433.545
+analysis_generation_stage=prefix_enter_0 monotonic=2300434.308
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300434.376
+analysis_generation_stage=prefix_enter_128 monotonic=2300447.134
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_4 monotonic=2300447.139
+analysis_generation_stage=complete_stop monotonic=2300461.594
+analysis_generation_stage=special_count_1 monotonic=2300461.597
+analysis_generation_stage=admitted monotonic=2300463.502
+analysis_generation_stage=tokenize monotonic=2300463.502
+analysis_generation_stage=constraint monotonic=2300463.517
+analysis_generation_stage=decode monotonic=2300463.521
+analysis_generation_stage=prefix_enter_0 monotonic=2300464.296
+analysis_generation_stage=prefix_exit_0_JsonSchemaParser_other_allowed_16 monotonic=2300464.365
+analysis_generation_stage=prefix_enter_128 monotonic=2300475.652
+analysis_generation_stage=prefix_exit_128_JsonSchemaParser_other_allowed_2 monotonic=2300475.657
+analysis_generation_stage=complete_stop monotonic=2300485.586
+analysis_generation_stage=special_count_1 monotonic=2300485.589

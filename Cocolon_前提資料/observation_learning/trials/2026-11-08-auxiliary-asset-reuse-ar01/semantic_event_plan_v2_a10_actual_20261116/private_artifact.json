@@ -1,0 +1,13 @@
+{
+  "library_file_id": "libfile_fde3_f-bfc7a4ef5f3c81918b9b8092b19083a3_2f7470f963808191aaebf050935e72de",
+  "name": "Cocolon_CMEE_A10_Actual_20261116.zip",
+  "bytes": 75231,
+  "sha256": "bff9507c57614b9b572d6a257fc26d8be257e2a244a5dd89ee284cdc5a9cd8a2",
+  "members": 25,
+  "original_zip_bytes": 31359,
+  "original_zip_sha256": "563bc9bc2cb4fa191c84b5773f97f80cfaf832d5539082e5ab2c8624d0f9b18f",
+  "full_body_publication": false,
+  "credential_values_included": false,
+  "model_weights_included": false,
+  "browser_screenshots_included": false
+}

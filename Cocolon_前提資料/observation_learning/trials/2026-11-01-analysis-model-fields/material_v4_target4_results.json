@@ -1,0 +1,123 @@
+{
+  "status": "COMPLETED_REJECTED_NOT_ADOPTED",
+  "decision": "New d3d weights rejected for normal use and as further-training initial; previous research a2e preserved, normal routes unchanged.",
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "source_commit": "37af26e1a723afa50dab349ffbc657bd2e73992b",
+  "execution_script_sha256": "946101d4b03b34bfe641b8c3298500e16229b2b48dd7ba86e67d88529127932b",
+  "cpu_pack_sha256": "0da3ab47c753c71baa2c51478817009ea36d129330c6d15bc58c683e5802ee08",
+  "original_archive": {
+    "name": "cocolon-analysis-material-v4-target4-originals-20261103.zip",
+    "bytes": 15939126,
+    "sha256": "95becb8712dcc0a9bd181f1a6e13243a43aa66548d991279c5c559eb5b5a830b",
+    "members": 527,
+    "manifest_members": 526,
+    "all_sha_matched": true,
+    "crc_ok": true
+  },
+  "same22": {
+    "candidate_before": 20,
+    "candidate_after": 20,
+    "typed_before": 14,
+    "typed_after": 13,
+    "PV6_typed_before": 5,
+    "PV6_typed_after": 5,
+    "X8_typed_before": 7,
+    "X8_typed_after": 6,
+    "regression": [
+      "X01"
+    ],
+    "unfixed": [
+      "X03",
+      "MD02_negative_operator",
+      "YREASON01_reason_modifier_and_parent"
+    ],
+    "common13_graph_and_visible_text_equal": [
+      "PV01",
+      "PV02",
+      "PV03",
+      "PV04",
+      "PV05",
+      "T01",
+      "T02",
+      "X02",
+      "X04",
+      "X05",
+      "X06",
+      "X07",
+      "X08"
+    ],
+    "common_saved_full_bytes_equal_count": 6
+  },
+  "new4": {
+    "typed": 4,
+    "after_only": true,
+    "not_blind": true,
+    "no_improvement_rate": true
+  },
+  "raw_comparison": {
+    "historical22_vs_new_before_all_identical": true,
+    "same22_changed": 13,
+    "same22_unchanged": 9,
+    "fresh_raw_reviewed": 48,
+    "source_reviewed": 26,
+    "successful_projection_reviewed": 31
+  },
+  "saved_replays": {
+    "candidate": 44,
+    "typed": 31
+  },
+  "training": {
+    "updates": 16,
+    "measurement_forwards": 32,
+    "weights_sha256": "d3d5cd7327da15ffe8f31153d3c96cf27403590be3e65227c3eb2212766482cc",
+    "config_sha256": "c36e2ecec8012f2195ca3599c73e6ba04003cbd6f46b4f9c149b1327ef5eb2b3",
+    "peak_allocated_gib": 10.263035297393799,
+    "peak_reserved_gib": 12.359375,
+    "finite_tensor_count": 112,
+    "params": 3833856,
+    "initial_unchanged": true,
+    "source78_unchanged": true
+  },
+  "seconds": 680.2569356663153,
+  "displayed_usd_per_hour": 0.29,
+  "processing_cost_usd": 0.05479847537311983,
+  "processing_cost_excludes": "setup, collection, rental retention, storage, network, taxes",
+  "gpu_end": "2 MiB, 0 %",
+  "gpu_rental_maintained": true,
+  "raw_findings": {
+    "X01": "New duplicate field keys plus duplicated ROLE and false copula modifier; strict whole-response rejection is correct.",
+    "X03": "Out-of-source positive target remains, with new duplicate field key/ROLE; whole response rejected, no partial repair.",
+    "X05_to_X08": "Nominal ACTION target children restored, while graph/visible text/diagram labels remain identical to before.",
+    "PV01_X02_X04": "Extra source-exact ROLE target child; no added graph meaning or displayed content. Full projection bytes differ only in identity.",
+    "MD02": "Carrier/node-kind now well formed, but missing NEGATION and a spurious action-noun target remain. Structural admission is not semantic success.",
+    "YREASON01": "Raw unchanged. False inflection modifier, reason marker absence and wrong attributive parent persist. Short unique unknown root alone is not counted as failure."
+  },
+  "remaining": [
+    "source-exact target and unique structural output",
+    "other actor negative action and reason/unknown boundary",
+    "typed supplementation and inter-record relationships/comparison",
+    "normal cumulative model adoption",
+    "IF and SavedRouteIntent"
+  ],
+  "next_action": "Retain a2e research candidate and inspect generation-stage duplicate fields/ROLE and target quotation from existing originals; no rerun of completed 16/18/106-update runs, no gate loosening and no automatic new GPU trial.",
+  "review": {
+    "root": "all26 sources, all48 raw responses and successful31 displayed projections reviewed",
+    "assistant_read_only_review": "same source/raw/projections independently checked by helper agent; no Pro/Ultra or human Product Read claim",
+    "common13_diagram_full_values_equal_except_projection_of": true
+  },
+  "original_recovery": {
+    "route": "visible text byte pages after two binary download failures",
+    "exact_original_zip_bytes_preserved": true,
+    "no_additional_gpu_execution": true
+  },
+  "durable_result": {
+    "library_file_id": "libfile_42f62b72d2888191a3198abd1ec4ee65",
+    "file_name": "cocolon-analysis-material-v4-target4-result-20261103.zip",
+    "bytes": 15942612,
+    "sha256": "14f6a79f9098e5213bb39df6620d2ed4e8d39dcbfdbea7592b8e448a573b3249"
+  }
+}

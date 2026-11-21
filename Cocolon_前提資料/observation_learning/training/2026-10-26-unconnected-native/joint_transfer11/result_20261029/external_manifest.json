@@ -1,0 +1,1738 @@
+{
+  "schema": "cocolon-external-originals-v1",
+  "payload_files": [
+    {
+      "path": "run/adapter/README.md",
+      "bytes": 5184,
+      "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+    },
+    {
+      "path": "run/adapter/adapter_config.json",
+      "bytes": 1674,
+      "sha256": "dc73d4de2f1961655faf1555424703852a6b1990eb683019d0aac0c8deb07e94"
+    },
+    {
+      "path": "run/adapter/adapter_model.safetensors",
+      "bytes": 15351792,
+      "sha256": "4ee58bf9e7e16a1fc3e0104781fb800573b0db56e43bf715f51b610097b6abaf"
+    },
+    {
+      "path": "run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 39250,
+      "sha256": "f6f02373db621740ec0afb42931deae035c0f2c50db89586bc099053d54b28d4"
+    },
+    {
+      "path": "run/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 46685,
+      "sha256": "3b1ffcaa67c631ad76e165b7b2f603a8e7010c76a5cf8ed53327fab4686d370a"
+    },
+    {
+      "path": "run/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+      "bytes": 21210,
+      "sha256": "6012255d003adea5039f18090afaa5cbb134a41e02f0733dfb10ee8eaf030e17"
+    },
+    {
+      "path": "run/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+      "bytes": 21183,
+      "sha256": "aa9cc26eb53fcc63d0699ddb4807272d6658aca3c6f0f65e6e47ac7963bab323"
+    },
+    {
+      "path": "run/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+      "bytes": 21223,
+      "sha256": "76a810ff60dd86bdb4012a25255f33f12196d9244a311303cc7e45efe9146876"
+    },
+    {
+      "path": "run/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+      "bytes": 29342,
+      "sha256": "da8abe62a4df6b779cde1e6bbbacf6e4ce8fea6951fa77e319a3244cf981dea6"
+    },
+    {
+      "path": "run/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+      "bytes": 18583,
+      "sha256": "17b21db6d872cbc6117e17a715751e96ccff1f7a2f980abb5328a1702f59aafb"
+    },
+    {
+      "path": "run/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+      "bytes": 29347,
+      "sha256": "f2ace4ac6b8291370a2a99136e51f2351ae8696c1d7d0c05e1078331b0cd39c4"
+    },
+    {
+      "path": "run/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+      "bytes": 18583,
+      "sha256": "7cebbb145e1428f3037243faca913c0d258fd1dc458eb8ab349d045986c80c3f"
+    },
+    {
+      "path": "run/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+      "bytes": 29413,
+      "sha256": "cd938ed6cd56430fc026f42c2708c6b8af528ceabb101f68c7001e972da544eb"
+    },
+    {
+      "path": "run/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+      "bytes": 18583,
+      "sha256": "30bd8210e8a414b44af9f1f4ce7be4af7a01c60d4efe8a8610666caa41f20240"
+    },
+    {
+      "path": "run/initial_loaded_tensors.json",
+      "bytes": 26040,
+      "sha256": "f6a24b7ebb65eb516eb9670d839c296437d6f617ca30238ad73b324eabc9c79d"
+    },
+    {
+      "path": "run/reloaded_tensors.json",
+      "bytes": 26033,
+      "sha256": "094d7aca274cdb5de674bb18f9a6b2166bd6461d775d6c9e6fdfa8d86a2ff5a1"
+    },
+    {
+      "path": "run/run.json",
+      "bytes": 8637,
+      "sha256": "1583cdb55a89ba432873a9daa312515965ab42da10f8b21cd7dc39c93b1de3d4"
+    },
+    {
+      "path": "run/training.jsonl",
+      "bytes": 2030,
+      "sha256": "44f2a6dfee592939052e7aff19c9669f7be834e0eacbbe62afcd95fb08c853fc"
+    },
+    {
+      "path": "runtime_pack/cmee.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "runtime_pack/cmee.log",
+      "bytes": 457,
+      "sha256": "11e7bcfa4f4b3a2d636db8879f04adb8d10ded1824b0f38983dfd07639682737"
+    },
+    {
+      "path": "runtime_pack/cpu.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "runtime_pack/cpu.log",
+      "bytes": 966,
+      "sha256": "36428c61b4e76638c5891fe1afde47072ee0529c02cb4d7e3be3985adad28fe4"
+    },
+    {
+      "path": "runtime_pack/gpu.log",
+      "bytes": 4347,
+      "sha256": "95c135c3834aacc734362920c05defabc32e4ab0789c889817d30b73a32ad89e"
+    },
+    {
+      "path": "runtime_pack/gpu_launch.json",
+      "bytes": 185,
+      "sha256": "2ba4a8e82eeefeb4b4bbb473f3998d5b6cf6d82a83be2e28f80008c941868709"
+    },
+    {
+      "path": "runtime_pack/transfer11/README.md",
+      "bytes": 3196,
+      "sha256": "5134aa0ca206a924469a299847ddd19cf690b9c6bb48f0950b99803ffc41b510"
+    },
+    {
+      "path": "runtime_pack/transfer11/consume_transfer11.py",
+      "bytes": 8302,
+      "sha256": "07015f1530f232f4152841c45355d43faad68013a5740bdd22539a232ba8ecb1"
+    },
+    {
+      "path": "runtime_pack/transfer11/cpu_check.json",
+      "bytes": 1835003,
+      "sha256": "c51eed5701afa8a8dad95594eb151ad4889649eb515e71473d2f2792761f4e69"
+    },
+    {
+      "path": "runtime_pack/transfer11/cpu_preparation_failure_v1.json",
+      "bytes": 713,
+      "sha256": "9419d06f6d2f1958289440a5112df6686926c0cbb2430d39c7e76fd19dcf3550"
+    },
+    {
+      "path": "runtime_pack/transfer11/prepare_transfer11.py",
+      "bytes": 5629,
+      "sha256": "589f39b6a0eba281215a746cace9a493d3b5225be0d0dc7ffd0e97fbfb0a93ac"
+    },
+    {
+      "path": "runtime_pack/transfer11/run_transfer11.py",
+      "bytes": 19082,
+      "sha256": "5a94e2d04fcf59922c0cc1d28a2c491dfeca55521fb55e030573629dc19feccd"
+    },
+    {
+      "path": "runtime_pack/transfer11/static_cpu_check.json",
+      "bytes": 852,
+      "sha256": "22ef585e64772b786efa72dc1c831c0073057d755f48947b4e1e9268a2da1f54"
+    },
+    {
+      "path": "runtime_pack/transfer11/transfer11.plan.json",
+      "bytes": 3055,
+      "sha256": "13c16f65e9084a0103ed172823fdbe8d54318c2c852d17942dc983738edf0970"
+    },
+    {
+      "path": "failed_cpu_v1/cpu.exit",
+      "bytes": 1,
+      "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+    },
+    {
+      "path": "failed_cpu_v1/cpu.log",
+      "bytes": 1098,
+      "sha256": "0abdb6583460f7989d84c53ecc0906615606a716b93428649fce592cd277e444"
+    },
+    {
+      "path": "failed_cpu_v1/transfer11/README.md",
+      "bytes": 2676,
+      "sha256": "7b0c81ac576bf23afcf942a32bed8610185f48d59f79fd40a8f9a4ec190fdf08"
+    },
+    {
+      "path": "failed_cpu_v1/transfer11/consume_transfer11.py",
+      "bytes": 8325,
+      "sha256": "32d3394de504d23ea4c5547e3b7ff9b3d61a633d1b9210838cca428356bb35d7"
+    },
+    {
+      "path": "failed_cpu_v1/transfer11/prepare_transfer11.py",
+      "bytes": 5629,
+      "sha256": "589f39b6a0eba281215a746cace9a493d3b5225be0d0dc7ffd0e97fbfb0a93ac"
+    },
+    {
+      "path": "failed_cpu_v1/transfer11/run_transfer11.py",
+      "bytes": 19082,
+      "sha256": "5a94e2d04fcf59922c0cc1d28a2c491dfeca55521fb55e030573629dc19feccd"
+    },
+    {
+      "path": "failed_cpu_v1/transfer11/static_cpu_check.json",
+      "bytes": 852,
+      "sha256": "22ef585e64772b786efa72dc1c831c0073057d755f48947b4e1e9268a2da1f54"
+    },
+    {
+      "path": "failed_cpu_v1/transfer11/transfer11.plan.json",
+      "bytes": 2698,
+      "sha256": "a463f712ae57f328ac62023320deda2242ad4aad7f5479a03c240eb5a5631b9e"
+    },
+    {
+      "path": "cmee/TRAIN-DAILY-CALM-01-INITIAL_cold.json",
+      "bytes": 55656,
+      "sha256": "cf7369bfd87ef77cd531e8973458fcc4652bd4b7826aae872459fc5b2567b5b5"
+    },
+    {
+      "path": "cmee/TRAIN-DAILY-CALM-01-INITIAL_saved.json",
+      "bytes": 88436,
+      "sha256": "b831209ffbf8eb03a6194912069b71d291681c8608a20b5a21320b497dd762dd"
+    },
+    {
+      "path": "cmee/TRAIN-DAILY-CALM-02-INITIAL_cold.json",
+      "bytes": 55655,
+      "sha256": "8224b08b0b7ee88032bcbec1976163dfada1085d0b337de557aaa325e68b0690"
+    },
+    {
+      "path": "cmee/TRAIN-DAILY-CALM-02-INITIAL_saved.json",
+      "bytes": 88434,
+      "sha256": "4cd628096ed10183cc161bbc5785380811e929584108b0bdb9d175a9e1a1530c"
+    },
+    {
+      "path": "cmee/TRAIN-DAILY-CALM-03-INITIAL_cold.json",
+      "bytes": 55656,
+      "sha256": "668d6537aef5f629bc8a13a8cfa8cf78afa37a4f21a51abc8db82169afdbe3de"
+    },
+    {
+      "path": "cmee/TRAIN-DAILY-CALM-03-INITIAL_saved.json",
+      "bytes": 88436,
+      "sha256": "9766f82b69ae9e8e6491ef6fcc5bcc1fcbb34e4cabe29bb214a961160cf8baa5"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-01-INITIAL_cold.json",
+      "bytes": 48396,
+      "sha256": "68f1e948f8a6a96bf86477d454aa01a5c15f1d0ae04fe11328b4fdc792d39947"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-01-INITIAL_saved.json",
+      "bytes": 76461,
+      "sha256": "2e9f522affd6599479c4f1566b98a160ee123dc79375e2f4804b8b05ce4811de"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-02-CORRECTION_cold.json",
+      "bytes": 106495,
+      "sha256": "033deecea9169f813336012ce73c318620815f124dd3fe88496858bffb20095e"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-02-CORRECTION_saved.json",
+      "bytes": 209005,
+      "sha256": "c50a39b47874d1ecf9e785bcc836a2b4601c3f4b4ec60bd2ab45490d49c7b97b"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-02-INITIAL_cold.json",
+      "bytes": 48396,
+      "sha256": "56f5ed02b06d26b3338dc529e454237ebd8fc1537a15abcf69e37e115a6c8507"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-02-INITIAL_saved.json",
+      "bytes": 76461,
+      "sha256": "3ca4482369a0bb8a00d5cf6d20330391eac1eb225bb6a3591e79c4a8532ae615"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-03-CORRECTION_cold.json",
+      "bytes": 106495,
+      "sha256": "96e3c964a89b33fe9a41276b2815b1089505ed8150acc4782112033512073ae1"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-03-CORRECTION_saved.json",
+      "bytes": 209005,
+      "sha256": "8e1e15134a41b3b14ddcaf641e03175036902afde2add2766e4e5cb5dd090419"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-03-INITIAL_cold.json",
+      "bytes": 48396,
+      "sha256": "66246f5aa0608abff08643cae8a0370948e316c06e317861f5e9d4b3fb591616"
+    },
+    {
+      "path": "cmee/TRAIN-SERVICE-CHAIR-03-INITIAL_saved.json",
+      "bytes": 76461,
+      "sha256": "a8fa5878fe784e02593bb66dbda4e94ce2cd5e8bc8eeb098f2a59b19fb663a8e"
+    },
+    {
+      "path": "cmee/diagnosis.json",
+      "bytes": 1056694,
+      "sha256": "d18a639dfccd92293ff07fc3e34bf7ee817f166c26e4e890d6c594ba7047ba74"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_environment_state_output_frame.py",
+      "bytes": 17598,
+      "sha256": "1a27d8f07ecf95cf9d852dd8084a38b68d8127bab17f49d620e8584fe118c1a4"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py",
+      "bytes": 476,
+      "sha256": "46a6af9a0633cffec1cab545873d22d6d2c7fbab7cc2b90c8cd79e18cc20ce08"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py",
+      "bytes": 923310,
+      "sha256": "32b8ecd2dfe37b4e55cce9e78f6d441f6597994086c3b6555cea217e43495286"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/__init__.py",
+      "bytes": 36,
+      "sha256": "9bb6248dbf736ca74ffd50699e9818333c55dd0e9cf1b4e996512b60ec7eb7f0"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/__init__.py",
+      "bytes": 79,
+      "sha256": "50f5d7b93fac4c1da059cb77230f1ed106c4d8e0bc33202af9eb6d0b7ad9eebf"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+      "bytes": 141969,
+      "sha256": "b36371ea28f72e62440486c8f0b4434071796fc7994b2cddff5d6c14d0d1bb89"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py",
+      "bytes": 43654,
+      "sha256": "714b08d345772fece72fb1cc088afafc957606b8d10a5cd8520576c2ec0e372c"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+      "bytes": 28408,
+      "sha256": "7962f2c405284c94854b236448778c2ef996224f446f6ace1fa0b74fb75f244a"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py",
+      "bytes": 13266,
+      "sha256": "741962f0d64026dfe07f542852732247227d15408df61ee04a8a43b8a4188f62"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py",
+      "bytes": 136485,
+      "sha256": "3bc11654d45c12edb756f536bdf54ba71e47b8bb0520406fb75ac3e6edf25125"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+      "bytes": 228087,
+      "sha256": "e0cd30f5bc1bfb40baddf2d88a8005716a583993011cb2ca1b8617eafe1d1889"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py",
+      "bytes": 35068,
+      "sha256": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py",
+      "bytes": 115107,
+      "sha256": "793610d7bc1b2117409fddf356d745cd4a72b2cfaae9f63cd65156b9e4a9fd85"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py",
+      "bytes": 769786,
+      "sha256": "3af4c6ca2ab9d68ed22f4e7fee21aa30b7b9f3dc550bb3af90e28d0293780b05"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py",
+      "bytes": 566378,
+      "sha256": "326d7ff7f2f1963ff6cac86f3ace6c61732ef0826a6436b097fba840a9b5a499"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_contracts.py",
+      "bytes": 6920,
+      "sha256": "884213e878d91499c80ea5953e6742141a38cb71db2d06a5f2ccfc3206ca2f77"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py",
+      "bytes": 10962,
+      "sha256": "ac55caa1ef8d8ad5b07a33ed7a6181cd7c5a165434d7db1900109a1c8fe8bbf1"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_history.py",
+      "bytes": 8486,
+      "sha256": "d962af2dc28c0b5d129f914a03949de18a58cc52a337cffe969c3d817f0b3198"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py",
+      "bytes": 100321,
+      "sha256": "72d8e866ddba068a4e1c57c929657b977d9775cca1cdf87e9785bb7c9e4a1fdd"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py",
+      "bytes": 13882,
+      "sha256": "2b2c590d76fa72cac8ee559d5076254dd20fc29d12bbdb34ae65317e67400651"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py",
+      "bytes": 24030,
+      "sha256": "2b977dc27f1ae8cb6ba891e4cedec0dff3306b87b86a3ba6779cc132ccd7050f"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py",
+      "bytes": 320326,
+      "sha256": "85809cd8462011d708debe14df0940e8f159c20ccc409cd714001288c74cda19"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+      "bytes": 8099,
+      "sha256": "77f982df1d2776613432913f8e907bf4db68c4e072104f426adfd814cf928472"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py",
+      "bytes": 37203,
+      "sha256": "80ede9d87ec593f01a1623cfc4e204eaa914e8feebcc8b243e3cf48d3fc592fa"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/named_reference_wire.py",
+      "bytes": 6753,
+      "sha256": "c8109cd2fa3745ac32e7d2a72931f75a8e02e5acbc844933b376513464d9b6e3"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py",
+      "bytes": 24429,
+      "sha256": "1b15207149c784dc932697dc1ce1b0c774fcf42e8585afc6316a784f4f2a0ee1"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py",
+      "bytes": 74226,
+      "sha256": "0dae0111b70c0ce9b134d86f9f2d658285f2a1862b82b17b375e6c7b84cb8747"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py",
+      "bytes": 56784,
+      "sha256": "ccdda259f10c157b462cf559d05fd97a323169565ab9abfe946a7bfdfbed3cf9"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py",
+      "bytes": 15307,
+      "sha256": "a657b7d30ad3c23a5ae701844c0cf79a2dd1ac0b2e4e82dab1703e07986407d1"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py",
+      "bytes": 7850,
+      "sha256": "f60d644d6b1a3ddb744b007c93838195acc4f34c0d7cf7471a09ccf1cfb34ab9"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_meaning_experience_engine/source_kernel.py",
+      "bytes": 42405,
+      "sha256": "124ff95f9162ce9cca4470a3f4e9d02d864ac3e6f6f0ae877f95d1c5f69f5397"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+      "bytes": 13577,
+      "sha256": "ad19e38fdbf6ca78e4eadf82bb326b3af24fe9114df5d7b72102c513c82df6f2"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+      "bytes": 8499,
+      "sha256": "d01968dec068e68e019cfcfae512d480ab950685961c7e294f732d466d4a2f03"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "bytes": 28059,
+      "sha256": "35e2b5c4e0a1b693b0a5278d33f10af5c1e0f40efd4eace8381e866d5d378125"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+      "bytes": 32686,
+      "sha256": "24b77238933dba5726fec707791467654d4847f640a923b78a3d300adc0b46aa"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+      "bytes": 18611,
+      "sha256": "5182f6d3fef28d0a9677cc72a4cd8483c182bf4bae7b15b8375ad9fd7f8cf677"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+      "bytes": 1242,
+      "sha256": "ff7c4fe5fa8fc535d0824f17a25d53285a74330b98a1c164ae8b5bc64b1f7a9a"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+      "bytes": 6057,
+      "sha256": "3161be710c19be2537a17edb450181b8411d9e42f1a8cfb310c66282fc03b1ec"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+      "bytes": 25495,
+      "sha256": "3ca31fbcf0ad9c93bdd4d267a3ef2000ce79b8d702bd7188f020eb11d5bd593c"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+      "bytes": 24123,
+      "sha256": "09ea2b5812b882265848ae930e3d2725bfe0672802b7ea73b15029d831ec565f"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+      "bytes": 20720,
+      "sha256": "d3f14ea6a24dd2f2a86f3948579546f2a86696cbf909bd42d9174534960305fe"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py",
+      "bytes": 9187,
+      "sha256": "d99e5ef09d23c43ad40bbd75f4a7dbe54a18bfb118eb4e02909ca177ae884351"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+      "bytes": 1206,
+      "sha256": "c3260a26065c6baf8ec62359a1268f3e877a98ac3408c85694e2e45af6cb3960"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+      "bytes": 8179,
+      "sha256": "e524111597d75599b0550b271a3df464df4d468aec28e608ab4586b7840da1f0"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+      "bytes": 11810,
+      "sha256": "c70607e494558ed180adbd83d4d15cfef12d1a33ef69edb43d71681ee1a64c19"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+      "bytes": 2045,
+      "sha256": "6b9195bd1d154eb15ae9146b6bce450ca1d5e2d8c7a5568009a7900580cedcbc"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+      "bytes": 8324,
+      "sha256": "347d633411f0f838200b29385552777fc5acee48dc86a40d29d3b5ebabb5ca9d"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+      "bytes": 24690,
+      "sha256": "6530918f50120e3ca5ecde0f11af9b69e4481e78ee56331f9f4b1d360946ede9"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+      "bytes": 9728,
+      "sha256": "3f290b71566d99300a9b55c9bde3fe1df3518aa1aca6a033fcc1a487a882d682"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+      "bytes": 9495,
+      "sha256": "25f7ef5d62c39a15f76671f19ab7720bdc5f10b0a9cec6906172947c560af4ff"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+      "bytes": 7563,
+      "sha256": "8999ba422fa41f6ae528aa603ccc6b20cffecbc84ff597a36110799bba386969"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+      "bytes": 12892,
+      "sha256": "bf8278975adfaf43adf8a913c3167a41d2957eb5f7a753fb5b29c4a212b6aa82"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+      "bytes": 13096,
+      "sha256": "1734c73a210cf47fa2738b9cae79b506532d152cf7e1729cd48c0fa8b518a0fc"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+      "bytes": 2665,
+      "sha256": "4de732b2aa9d639fd2d4aaaf0cbd819109f5514f23781f50489ba5fcfd013390"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/result.py",
+      "bytes": 8943,
+      "sha256": "998c3b3f12401bc5989bae1fe1cf1c78cddad642969ff531bcb3b165eab1d7ab"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+      "bytes": 9562,
+      "sha256": "6a74ecfb2ceb3935f09b5693e1bdb300652a734836c454c1926b6fc1ab7d9538"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py",
+      "bytes": 13684,
+      "sha256": "d0bc23201d2a3ac0d87d71fcaa4c71fd70d54c6e238831012c51fb7720fa8cd3"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/cocolon_text_generation_core/types.py",
+      "bytes": 23229,
+      "sha256": "b8bd519b66e24cb64f50e73e0d71e96bb660c5d25489fb408a13e3e7ffe57080"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.schema.json",
+      "bytes": 18147,
+      "sha256": "58ead6f8a9ed361526dae6753972edea76283dfdb9141f593347dd4e61d1899e"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.v1.json",
+      "bytes": 55044,
+      "sha256": "5448d19bddb346d9fdc8cc4bc8403a4ee44b813b5063f842619c041c8a2d5c97"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.schema.json",
+      "bytes": 8653,
+      "sha256": "1ce2bf2f491210741ae00e75a2ef8ce4b55221a16ef05b7eafdbca0e05a59b0f"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json",
+      "bytes": 24689,
+      "sha256": "227326722e27d6fcd570ed25614205f8a9f9cb74cf78e93dcd22c4b56bf5b1b1"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "bytes": 39159,
+      "sha256": "de3d49d223cb16f5abf53eeaf426d11cb429e35b3bdb8d04618810baad27396c"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+      "bytes": 17551,
+      "sha256": "63ddb6bf3db472bdaddfd8c3fbef68034aeb3cf51188508c0ad8b8cd920271f8"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py",
+      "bytes": 21723,
+      "sha256": "c338364dee3e6d01914abf61e330430778366743a6befff1c36a4da0fb908c1d"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+      "bytes": 20401,
+      "sha256": "a4f593b0ce44bb6d7203389ad06b8739ebe747b8e63a8b7ff985c0beecb9f4c3"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_grounded_human_reception.py",
+      "bytes": 712909,
+      "sha256": "adadaa3702942a335dcfb8e0c8b9648c433cf6453c7bab6f65dea1d75357a662"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py",
+      "bytes": 632335,
+      "sha256": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+      "bytes": 1051001,
+      "sha256": "000e175609c10690ebf9d1227e2d906d9446ac5ec8c826bacf5f866081b302d9"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+      "bytes": 283355,
+      "sha256": "422c32240149e1a48a1a510b6e0681d04642d3d566158eb920a71e1130ca8110"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_human_follow_selector.py",
+      "bytes": 66642,
+      "sha256": "bede5fb2b0b089a7af6aa2e2f8960ab4dcdd93d6a49683e49e117c9e99a4b7a6"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py",
+      "bytes": 14299,
+      "sha256": "5b073f1653f4565b9a5e80c45786c33b111b002b83f12ac435824cceb8f16069"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+      "bytes": 12170,
+      "sha256": "20aa4f793054844904084ee72c4bdc3b3198a7ad849c8a29fe526a655ce1bf21"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_observation_reply_contract.py",
+      "bytes": 20707,
+      "sha256": "84c58c6b0cf23ade91609aedd88b22c8497898dda24dcf2657d4bedb6cd537c0"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_observation_structure_dictionary_loader.py",
+      "bytes": 42176,
+      "sha256": "bbda7d45ede010c68f175bfb8f925efc6c70d8fa5c092f6c88d8de7bd54bb805"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+      "bytes": 63435,
+      "sha256": "2897deadf2409757b8fc4c181d34c9a306629a1094f467aabf20a28e94c3b9ef"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_perspective_board.py",
+      "bytes": 6552,
+      "sha256": "c4eabe4403c1cf98f4c645ca94cdf8164f69408d9027f7996f18965dc9c34e93"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_perspective_observers.py",
+      "bytes": 23757,
+      "sha256": "cca669364efa7359bd08fcfe8bf5335519be76a81f6700254ed5d0be713ecb61"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_reception_assistance_dictionary_loader.py",
+      "bytes": 32705,
+      "sha256": "82e5dc4c28132f1e295afd6dfb6a389cac579c0324e011ff046f986618e555c2"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+      "bytes": 47838,
+      "sha256": "ec56f2eb0c0146ebc1e9cc8804e4a05001af049e826e9f9f73cfb8ab918de3e2"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_response_contract.py",
+      "bytes": 29032,
+      "sha256": "e2c0e7af36700865cb471ef598fa99afa0b775507172571d5a44946b2d71a4c7"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_safe_daily_metaphor_material.py",
+      "bytes": 49816,
+      "sha256": "4d8b9bc3ca097733aee040eed5268ad434e890ec6b94087e772739f0c3501447"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_safety_boundary_service.py",
+      "bytes": 10572,
+      "sha256": "77c0317a5bcdf2a71e932f6bd9b53cec2beceb80ddf69f0f5bcb18a22a1c66b7"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_safety_triage.py",
+      "bytes": 21619,
+      "sha256": "b9f0d39a252ab00ab7f4c9c882d9c8c3a6799593870506b0184d20b774c9c4e6"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+      "bytes": 32286,
+      "sha256": "ed2996d1629a951c16b6a667252ffa4fa5ad84ff1693949050c065174a505737"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_state_answer_composer_contract.py",
+      "bytes": 36764,
+      "sha256": "3d2a85ed3663666822b9a3af97b9d386a43d4f6d5f426a5b1743ed654722a77b"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+      "bytes": 57660,
+      "sha256": "6d2452a06bbba70d9ea78d171c6622c30eddfc23dc019ddd305b1c6c1ec6b09c"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_state_answer_special_cases.py",
+      "bytes": 42655,
+      "sha256": "a09b9ddecd72642681e840885c6e2457e3ec5e30ff5a3c26146a99a8c77ad4e7"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py",
+      "bytes": 101300,
+      "sha256": "ed7ff52e76dc7dcb49de131558f54cba58f1b1465300f4ab3dfe093e4bec3577"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+      "bytes": 40940,
+      "sha256": "5d059c3c1df52f75807a64500016489b5e9057ceeaa0453b5ecf0e4efcd166dc"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_types.py",
+      "bytes": 55000,
+      "sha256": "3a0cfc7ee9c49cb0dd2b014493357ccd84924f455b22cc483272bf1872d80b17"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_address_service.py",
+      "bytes": 2019,
+      "sha256": "eecc778d6fc58204801617a4531ffff268346e5f683d9bccfdb45ec382cd3913"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_fact_grounding_boundary.py",
+      "bytes": 30960,
+      "sha256": "6514f28b26ee6ddd604d2f0446734b5a25e17dc617cdb5cb106342c044215218"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_label_connection_candidate.py",
+      "bytes": 27910,
+      "sha256": "d4a20b32e6b4955930426587553fb33bce49291431352ded58e2bb4f6e3e830f"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_label_connection_gate.py",
+      "bytes": 51226,
+      "sha256": "e786889512a133c2d7bf5bf75bb09c76861ab054b55381fd43678047d85d609b"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_label_connection_material.py",
+      "bytes": 45334,
+      "sha256": "541d7e81e144f9cbb322a0feb827fc1e3431a6d7ccc80997d13aa68d017ef02a"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_label_connection_surface.py",
+      "bytes": 56469,
+      "sha256": "863525231938e8869f0b90e1420052232c598b34e9bda665bbf19568fb48eec4"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_ai_user_label_connection_types.py",
+      "bytes": 19070,
+      "sha256": "dfe48f23f38cc767ec79718ef87390210f35b891ccf1dd42e27fa30a72fb4891"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_thread_config.py",
+      "bytes": 1113,
+      "sha256": "94e0f44c0a4cd12bcbbffdb643dba0f183094b0476f29c055885dc1f0de2291b"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_thread_service.py",
+      "bytes": 45551,
+      "sha256": "3c5bdaf79885df0b3607dc5c925d738c5fb7ae717e1d4354ffc05d6f23022fb8"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/emlis_thread_store.py",
+      "bytes": 3046,
+      "sha256": "5c6f74894d66dd375daef4e3d44696e9795e67a4a3bd7ac7cbc5459e6f04c54f"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/piece_text_formatter.py",
+      "bytes": 14696,
+      "sha256": "74fc6fea0bb613a0fbec9cd59d602c8a02b1f40161f0000e5576f63e41ab85e9"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/piece_v2_content_policy.py",
+      "bytes": 19483,
+      "sha256": "59ebc8869140892d16ae99a031be0811ac212a5d31ca050e032b26f1c8e0d678"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/piece_v2_contract.py",
+      "bytes": 11682,
+      "sha256": "89700b8b1b1d776f39c61d6e8f8866596dcede7f4466892b3c9b643b9284cddf"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/piece_v2_expression.py",
+      "bytes": 4415,
+      "sha256": "158bb1fd6b26e5d27d3bf1c051d2f2a8013341d403e2e7f5afebd41856388361"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/piece_v2_generation.py",
+      "bytes": 9815,
+      "sha256": "b7e9b0fe23d679b89c226511904935f8da00beda69921c8bd71bd87afced8446"
+    },
+    {
+      "path": "cmee_sources/api/ai/services/ai_inference/publish_governance.py",
+      "bytes": 10813,
+      "sha256": "02009a8aa1a82f7d30ddd88dd9c85b989efd24d21b54d4d3ca2a41d5d15b6e9a"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/fixtures/cmee_emlis_model_daily_calm_v1.json",
+      "bytes": 311367,
+      "sha256": "6e63fc666bed8c7b44b29a90c4d5abc95c7c4e8c26dc617cfe718883d0b91f71"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/fixtures/cmee_emlis_sixrow_v3.json",
+      "bytes": 59031,
+      "sha256": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_emlis_model_daily_calm.py",
+      "bytes": 14850,
+      "sha256": "9371a84eab8b2f70937dc06d9752b9169735aace4ad036832b433eee06e1088d"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_emlis_model_meaning.py",
+      "bytes": 19449,
+      "sha256": "686d84fa75c67965b1e1048aad543eaf2275eeeb95f14f80b0d1428e37e1863e"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_emlis_model_proposal.py",
+      "bytes": 26491,
+      "sha256": "4e939e5773cd0e376cd3d1c314e2bf4d8397ceb8291200d81972e44ec6dfe139"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_emlis_sixrow.py",
+      "bytes": 24740,
+      "sha256": "e1525e6cec91c450c1094d843c46a106fde8b20c54cde96b21741ce793dfc1d3"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_model_candidate_source.py",
+      "bytes": 14397,
+      "sha256": "abbc715af76c20322ff3f3568ab660c4b44a0e6e66960de908853ec5bb9a1b90"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_named_reference_candidate.py",
+      "bytes": 16510,
+      "sha256": "fa07a3be3aaeb45919728110cf3836d5a295c8d34ee77d65a2f8239be662cc2b"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_preparation.py",
+      "bytes": 21387,
+      "sha256": "cdad610c707a5dc573fc462e1e2539488f1743a68fd94a0bf708bc57651fe24b"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_cmee_quote_candidate.py",
+      "bytes": 13276,
+      "sha256": "e481e2fa9c35d36855a950853ab4b485d979bcf51676e23f9d5a5adf74def8f4"
+    },
+    {
+      "path": "cmee_sources/api/ai/tests/test_emlis_q2_application.py",
+      "bytes": 20443,
+      "sha256": "771bc98fe23eee41fdd10c86f91accb55863cb24fee77b2609686e7ba1a6d514"
+    },
+    {
+      "path": "cmee_sources/api_source_manifest.json",
+      "bytes": 1087,
+      "sha256": "fcf83dcf42f290b24978090bb4207ed999cf24aa1d6a9b79852d74a90075cc98"
+    },
+    {
+      "path": "cmee_sources/check_cpu.py",
+      "bytes": 6568,
+      "sha256": "4e44d62cd9b66851c84a3bc2b8123d85b4e45838299f3aa3d5661cd29ede44ac"
+    },
+    {
+      "path": "cmee_sources/frozen/api_blobs.json",
+      "bytes": 688,
+      "sha256": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85"
+    },
+    {
+      "path": "cmee_sources/frozen/consume_expanded15_recovery.py",
+      "bytes": 18797,
+      "sha256": "981134897057ae1f4acaeaf340307fdd59965fe8c5808858d48caf4fe55feccf"
+    },
+    {
+      "path": "cmee_sources/frozen/cpu_preparation.json",
+      "bytes": 16296,
+      "sha256": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d"
+    },
+    {
+      "path": "cmee_sources/frozen/current_eval_inputs.json",
+      "bytes": 173280,
+      "sha256": "05d2e02f042b478dec28605d28f6dd9ae93c132aeb7a715f95a83bb4458d1774"
+    },
+    {
+      "path": "cmee_sources/frozen/current_train_messages.jsonl",
+      "bytes": 351979,
+      "sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396"
+    },
+    {
+      "path": "cmee_sources/frozen/eval_inputs.jsonl",
+      "bytes": 169628,
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+    },
+    {
+      "path": "cmee_sources/frozen/sft_examples.jsonl",
+      "bytes": 307770,
+      "sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5"
+    },
+    {
+      "path": "cmee_sources/frozen/train_messages.jsonl",
+      "bytes": 349174,
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+    },
+    {
+      "path": "cmee_sources/legacy/run_pilot.py",
+      "bytes": 28950,
+      "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+    },
+    {
+      "path": "cmee_sources/legacy/verify_cmee.py",
+      "bytes": 13043,
+      "sha256": "6c042267eeaa9dace4a63abd2ae1ad42f2486c722947a08ed3d1daf571a7684b"
+    },
+    {
+      "path": "cmee_sources/model_candidate_source.py",
+      "bytes": 29558,
+      "sha256": "a3d32c33529e9165c18efa42b2c3f3f6dd33b42bb3f4ecaef9e9cd9ccce46218"
+    },
+    {
+      "path": "cmee_sources/restore_payload.json",
+      "bytes": 37106,
+      "sha256": "419fe80988ef3738f6ac070e512cb9bd098074c6a29918b004a0a238318ad696"
+    },
+    {
+      "path": "support/run_expanded15_recovery.py",
+      "bytes": 14141,
+      "sha256": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54"
+    },
+    {
+      "path": "support/run_native15_expanded30.py",
+      "bytes": 29965,
+      "sha256": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d"
+    },
+    {
+      "path": "support/run_pilot.py",
+      "bytes": 28950,
+      "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+    },
+    {
+      "path": "diagnostic_inputs/auxiliary_train_messages.jsonl",
+      "bytes": 104198,
+      "sha256": "3c80fa6c1c9b47df8efc84aa9f899af4ffb6ef436c0403fdb1bb0646f88f1654"
+    },
+    {
+      "path": "diagnostic_inputs/prepared_auxiliary_diagnostic.json",
+      "bytes": 2905,
+      "sha256": "8c5b0d0184b03d50b3ef57a92953351958803fedb2a0be15fcacb2fcce7014c9"
+    },
+    {
+      "path": "diagnostic_inputs/run_auxiliary_diagnostic.py",
+      "bytes": 15389,
+      "sha256": "19f870c07115dbb8e7a11118a3060f76e618304a44f2d2660e745ad514e08dd3"
+    },
+    {
+      "path": "diagnostic_inputs/setup_auxiliary_diagnostic.py",
+      "bytes": 2110,
+      "sha256": "70d6de00dc990f9ecb868ecd5f442dd1bf7d5ec5040f8ddc691bc3d3142baba6"
+    },
+    {
+      "path": "prior_archive_without_weights/cpu/cpu_originals.zip",
+      "bytes": 91746,
+      "sha256": "166155061c961ee318393623e7596d2a35bc8e1925f4b658e5af1e4879246a3d"
+    },
+    {
+      "path": "prior_archive_without_weights/logs/cocolon_staged_pair9_cpu.log",
+      "bytes": 2377,
+      "sha256": "a61fa42696b2746561024fe8571774498c65157b2e138fb385874ce2743e30dd"
+    },
+    {
+      "path": "prior_archive_without_weights/logs/cocolon_staged_pair9_gpu.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "prior_archive_without_weights/logs/cocolon_staged_pair9_gpu.log",
+      "bytes": 4283,
+      "sha256": "8a2303ff00b5702dc74c19a97b2fbb2f9528e878e8ca88f0b48d35003110242d"
+    },
+    {
+      "path": "prior_archive_without_weights/manifest.json",
+      "bytes": 30312,
+      "sha256": "b9cff34a28e32a3e63ef47585b15ff3072ee36623e8afc0d0bfb1290d65d8878"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_environment_state_output_frame.py",
+      "bytes": 17598,
+      "sha256": "1a27d8f07ecf95cf9d852dd8084a38b68d8127bab17f49d620e8584fe118c1a4"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py",
+      "bytes": 476,
+      "sha256": "46a6af9a0633cffec1cab545873d22d6d2c7fbab7cc2b90c8cd79e18cc20ce08"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py",
+      "bytes": 923310,
+      "sha256": "32b8ecd2dfe37b4e55cce9e78f6d441f6597994086c3b6555cea217e43495286"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/__init__.py",
+      "bytes": 36,
+      "sha256": "9bb6248dbf736ca74ffd50699e9818333c55dd0e9cf1b4e996512b60ec7eb7f0"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/__init__.py",
+      "bytes": 79,
+      "sha256": "50f5d7b93fac4c1da059cb77230f1ed106c4d8e0bc33202af9eb6d0b7ad9eebf"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+      "bytes": 141969,
+      "sha256": "b36371ea28f72e62440486c8f0b4434071796fc7994b2cddff5d6c14d0d1bb89"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py",
+      "bytes": 43654,
+      "sha256": "714b08d345772fece72fb1cc088afafc957606b8d10a5cd8520576c2ec0e372c"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+      "bytes": 28408,
+      "sha256": "7962f2c405284c94854b236448778c2ef996224f446f6ace1fa0b74fb75f244a"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py",
+      "bytes": 13266,
+      "sha256": "741962f0d64026dfe07f542852732247227d15408df61ee04a8a43b8a4188f62"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py",
+      "bytes": 136485,
+      "sha256": "3bc11654d45c12edb756f536bdf54ba71e47b8bb0520406fb75ac3e6edf25125"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+      "bytes": 228087,
+      "sha256": "e0cd30f5bc1bfb40baddf2d88a8005716a583993011cb2ca1b8617eafe1d1889"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py",
+      "bytes": 35068,
+      "sha256": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py",
+      "bytes": 115107,
+      "sha256": "793610d7bc1b2117409fddf356d745cd4a72b2cfaae9f63cd65156b9e4a9fd85"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py",
+      "bytes": 769786,
+      "sha256": "3af4c6ca2ab9d68ed22f4e7fee21aa30b7b9f3dc550bb3af90e28d0293780b05"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py",
+      "bytes": 566378,
+      "sha256": "326d7ff7f2f1963ff6cac86f3ace6c61732ef0826a6436b097fba840a9b5a499"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_contracts.py",
+      "bytes": 6920,
+      "sha256": "884213e878d91499c80ea5953e6742141a38cb71db2d06a5f2ccfc3206ca2f77"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py",
+      "bytes": 10962,
+      "sha256": "ac55caa1ef8d8ad5b07a33ed7a6181cd7c5a165434d7db1900109a1c8fe8bbf1"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_history.py",
+      "bytes": 8486,
+      "sha256": "d962af2dc28c0b5d129f914a03949de18a58cc52a337cffe969c3d817f0b3198"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py",
+      "bytes": 100321,
+      "sha256": "72d8e866ddba068a4e1c57c929657b977d9775cca1cdf87e9785bb7c9e4a1fdd"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py",
+      "bytes": 13882,
+      "sha256": "2b2c590d76fa72cac8ee559d5076254dd20fc29d12bbdb34ae65317e67400651"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py",
+      "bytes": 24030,
+      "sha256": "2b977dc27f1ae8cb6ba891e4cedec0dff3306b87b86a3ba6779cc132ccd7050f"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py",
+      "bytes": 320326,
+      "sha256": "85809cd8462011d708debe14df0940e8f159c20ccc409cd714001288c74cda19"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+      "bytes": 8099,
+      "sha256": "77f982df1d2776613432913f8e907bf4db68c4e072104f426adfd814cf928472"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py",
+      "bytes": 37203,
+      "sha256": "80ede9d87ec593f01a1623cfc4e204eaa914e8feebcc8b243e3cf48d3fc592fa"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/named_reference_wire.py",
+      "bytes": 6753,
+      "sha256": "c8109cd2fa3745ac32e7d2a72931f75a8e02e5acbc844933b376513464d9b6e3"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py",
+      "bytes": 24429,
+      "sha256": "1b15207149c784dc932697dc1ce1b0c774fcf42e8585afc6316a784f4f2a0ee1"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py",
+      "bytes": 74226,
+      "sha256": "0dae0111b70c0ce9b134d86f9f2d658285f2a1862b82b17b375e6c7b84cb8747"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py",
+      "bytes": 56784,
+      "sha256": "ccdda259f10c157b462cf559d05fd97a323169565ab9abfe946a7bfdfbed3cf9"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py",
+      "bytes": 15307,
+      "sha256": "a657b7d30ad3c23a5ae701844c0cf79a2dd1ac0b2e4e82dab1703e07986407d1"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py",
+      "bytes": 7850,
+      "sha256": "f60d644d6b1a3ddb744b007c93838195acc4f34c0d7cf7471a09ccf1cfb34ab9"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_meaning_experience_engine/source_kernel.py",
+      "bytes": 42405,
+      "sha256": "124ff95f9162ce9cca4470a3f4e9d02d864ac3e6f6f0ae877f95d1c5f69f5397"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+      "bytes": 13577,
+      "sha256": "ad19e38fdbf6ca78e4eadf82bb326b3af24fe9114df5d7b72102c513c82df6f2"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+      "bytes": 8499,
+      "sha256": "d01968dec068e68e019cfcfae512d480ab950685961c7e294f732d466d4a2f03"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "bytes": 28059,
+      "sha256": "35e2b5c4e0a1b693b0a5278d33f10af5c1e0f40efd4eace8381e866d5d378125"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+      "bytes": 32686,
+      "sha256": "24b77238933dba5726fec707791467654d4847f640a923b78a3d300adc0b46aa"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+      "bytes": 18611,
+      "sha256": "5182f6d3fef28d0a9677cc72a4cd8483c182bf4bae7b15b8375ad9fd7f8cf677"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+      "bytes": 1242,
+      "sha256": "ff7c4fe5fa8fc535d0824f17a25d53285a74330b98a1c164ae8b5bc64b1f7a9a"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+      "bytes": 6057,
+      "sha256": "3161be710c19be2537a17edb450181b8411d9e42f1a8cfb310c66282fc03b1ec"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+      "bytes": 25495,
+      "sha256": "3ca31fbcf0ad9c93bdd4d267a3ef2000ce79b8d702bd7188f020eb11d5bd593c"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+      "bytes": 24123,
+      "sha256": "09ea2b5812b882265848ae930e3d2725bfe0672802b7ea73b15029d831ec565f"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+      "bytes": 20720,
+      "sha256": "d3f14ea6a24dd2f2a86f3948579546f2a86696cbf909bd42d9174534960305fe"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py",
+      "bytes": 9187,
+      "sha256": "d99e5ef09d23c43ad40bbd75f4a7dbe54a18bfb118eb4e02909ca177ae884351"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+      "bytes": 1206,
+      "sha256": "c3260a26065c6baf8ec62359a1268f3e877a98ac3408c85694e2e45af6cb3960"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+      "bytes": 8179,
+      "sha256": "e524111597d75599b0550b271a3df464df4d468aec28e608ab4586b7840da1f0"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+      "bytes": 11810,
+      "sha256": "c70607e494558ed180adbd83d4d15cfef12d1a33ef69edb43d71681ee1a64c19"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+      "bytes": 2045,
+      "sha256": "6b9195bd1d154eb15ae9146b6bce450ca1d5e2d8c7a5568009a7900580cedcbc"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+      "bytes": 8324,
+      "sha256": "347d633411f0f838200b29385552777fc5acee48dc86a40d29d3b5ebabb5ca9d"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+      "bytes": 24690,
+      "sha256": "6530918f50120e3ca5ecde0f11af9b69e4481e78ee56331f9f4b1d360946ede9"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+      "bytes": 9728,
+      "sha256": "3f290b71566d99300a9b55c9bde3fe1df3518aa1aca6a033fcc1a487a882d682"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+      "bytes": 9495,
+      "sha256": "25f7ef5d62c39a15f76671f19ab7720bdc5f10b0a9cec6906172947c560af4ff"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+      "bytes": 7563,
+      "sha256": "8999ba422fa41f6ae528aa603ccc6b20cffecbc84ff597a36110799bba386969"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+      "bytes": 12892,
+      "sha256": "bf8278975adfaf43adf8a913c3167a41d2957eb5f7a753fb5b29c4a212b6aa82"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+      "bytes": 13096,
+      "sha256": "1734c73a210cf47fa2738b9cae79b506532d152cf7e1729cd48c0fa8b518a0fc"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+      "bytes": 2665,
+      "sha256": "4de732b2aa9d639fd2d4aaaf0cbd819109f5514f23781f50489ba5fcfd013390"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/result.py",
+      "bytes": 8943,
+      "sha256": "998c3b3f12401bc5989bae1fe1cf1c78cddad642969ff531bcb3b165eab1d7ab"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+      "bytes": 9562,
+      "sha256": "6a74ecfb2ceb3935f09b5693e1bdb300652a734836c454c1926b6fc1ab7d9538"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py",
+      "bytes": 13684,
+      "sha256": "d0bc23201d2a3ac0d87d71fcaa4c71fd70d54c6e238831012c51fb7720fa8cd3"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/cocolon_text_generation_core/types.py",
+      "bytes": 23229,
+      "sha256": "b8bd519b66e24cb64f50e73e0d71e96bb660c5d25489fb408a13e3e7ffe57080"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.schema.json",
+      "bytes": 18147,
+      "sha256": "58ead6f8a9ed361526dae6753972edea76283dfdb9141f593347dd4e61d1899e"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.v1.json",
+      "bytes": 55044,
+      "sha256": "5448d19bddb346d9fdc8cc4bc8403a4ee44b813b5063f842619c041c8a2d5c97"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.schema.json",
+      "bytes": 8653,
+      "sha256": "1ce2bf2f491210741ae00e75a2ef8ce4b55221a16ef05b7eafdbca0e05a59b0f"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json",
+      "bytes": 24689,
+      "sha256": "227326722e27d6fcd570ed25614205f8a9f9cb74cf78e93dcd22c4b56bf5b1b1"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "bytes": 39159,
+      "sha256": "de3d49d223cb16f5abf53eeaf426d11cb429e35b3bdb8d04618810baad27396c"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+      "bytes": 17551,
+      "sha256": "63ddb6bf3db472bdaddfd8c3fbef68034aeb3cf51188508c0ad8b8cd920271f8"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py",
+      "bytes": 21723,
+      "sha256": "c338364dee3e6d01914abf61e330430778366743a6befff1c36a4da0fb908c1d"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+      "bytes": 20401,
+      "sha256": "a4f593b0ce44bb6d7203389ad06b8739ebe747b8e63a8b7ff985c0beecb9f4c3"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_grounded_human_reception.py",
+      "bytes": 712909,
+      "sha256": "adadaa3702942a335dcfb8e0c8b9648c433cf6453c7bab6f65dea1d75357a662"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py",
+      "bytes": 632335,
+      "sha256": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+      "bytes": 1051001,
+      "sha256": "000e175609c10690ebf9d1227e2d906d9446ac5ec8c826bacf5f866081b302d9"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+      "bytes": 283355,
+      "sha256": "422c32240149e1a48a1a510b6e0681d04642d3d566158eb920a71e1130ca8110"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_human_follow_selector.py",
+      "bytes": 66642,
+      "sha256": "bede5fb2b0b089a7af6aa2e2f8960ab4dcdd93d6a49683e49e117c9e99a4b7a6"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py",
+      "bytes": 14299,
+      "sha256": "5b073f1653f4565b9a5e80c45786c33b111b002b83f12ac435824cceb8f16069"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+      "bytes": 12170,
+      "sha256": "20aa4f793054844904084ee72c4bdc3b3198a7ad849c8a29fe526a655ce1bf21"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_observation_reply_contract.py",
+      "bytes": 20707,
+      "sha256": "84c58c6b0cf23ade91609aedd88b22c8497898dda24dcf2657d4bedb6cd537c0"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_observation_structure_dictionary_loader.py",
+      "bytes": 42176,
+      "sha256": "bbda7d45ede010c68f175bfb8f925efc6c70d8fa5c092f6c88d8de7bd54bb805"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+      "bytes": 63435,
+      "sha256": "2897deadf2409757b8fc4c181d34c9a306629a1094f467aabf20a28e94c3b9ef"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_perspective_board.py",
+      "bytes": 6552,
+      "sha256": "c4eabe4403c1cf98f4c645ca94cdf8164f69408d9027f7996f18965dc9c34e93"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_perspective_observers.py",
+      "bytes": 23757,
+      "sha256": "cca669364efa7359bd08fcfe8bf5335519be76a81f6700254ed5d0be713ecb61"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_reception_assistance_dictionary_loader.py",
+      "bytes": 32705,
+      "sha256": "82e5dc4c28132f1e295afd6dfb6a389cac579c0324e011ff046f986618e555c2"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+      "bytes": 47838,
+      "sha256": "ec56f2eb0c0146ebc1e9cc8804e4a05001af049e826e9f9f73cfb8ab918de3e2"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_response_contract.py",
+      "bytes": 29032,
+      "sha256": "e2c0e7af36700865cb471ef598fa99afa0b775507172571d5a44946b2d71a4c7"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_safe_daily_metaphor_material.py",
+      "bytes": 49816,
+      "sha256": "4d8b9bc3ca097733aee040eed5268ad434e890ec6b94087e772739f0c3501447"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_safety_boundary_service.py",
+      "bytes": 10572,
+      "sha256": "77c0317a5bcdf2a71e932f6bd9b53cec2beceb80ddf69f0f5bcb18a22a1c66b7"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_safety_triage.py",
+      "bytes": 21619,
+      "sha256": "b9f0d39a252ab00ab7f4c9c882d9c8c3a6799593870506b0184d20b774c9c4e6"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+      "bytes": 32286,
+      "sha256": "ed2996d1629a951c16b6a667252ffa4fa5ad84ff1693949050c065174a505737"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_state_answer_composer_contract.py",
+      "bytes": 36764,
+      "sha256": "3d2a85ed3663666822b9a3af97b9d386a43d4f6d5f426a5b1743ed654722a77b"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+      "bytes": 57660,
+      "sha256": "6d2452a06bbba70d9ea78d171c6622c30eddfc23dc019ddd305b1c6c1ec6b09c"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_state_answer_special_cases.py",
+      "bytes": 42655,
+      "sha256": "a09b9ddecd72642681e840885c6e2457e3ec5e30ff5a3c26146a99a8c77ad4e7"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py",
+      "bytes": 101300,
+      "sha256": "ed7ff52e76dc7dcb49de131558f54cba58f1b1465300f4ab3dfe093e4bec3577"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+      "bytes": 40940,
+      "sha256": "5d059c3c1df52f75807a64500016489b5e9057ceeaa0453b5ecf0e4efcd166dc"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_types.py",
+      "bytes": 55000,
+      "sha256": "3a0cfc7ee9c49cb0dd2b014493357ccd84924f455b22cc483272bf1872d80b17"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_address_service.py",
+      "bytes": 2019,
+      "sha256": "eecc778d6fc58204801617a4531ffff268346e5f683d9bccfdb45ec382cd3913"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_fact_grounding_boundary.py",
+      "bytes": 30960,
+      "sha256": "6514f28b26ee6ddd604d2f0446734b5a25e17dc617cdb5cb106342c044215218"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_label_connection_candidate.py",
+      "bytes": 27910,
+      "sha256": "d4a20b32e6b4955930426587553fb33bce49291431352ded58e2bb4f6e3e830f"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_label_connection_gate.py",
+      "bytes": 51226,
+      "sha256": "e786889512a133c2d7bf5bf75bb09c76861ab054b55381fd43678047d85d609b"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_label_connection_material.py",
+      "bytes": 45334,
+      "sha256": "541d7e81e144f9cbb322a0feb827fc1e3431a6d7ccc80997d13aa68d017ef02a"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_label_connection_surface.py",
+      "bytes": 56469,
+      "sha256": "863525231938e8869f0b90e1420052232c598b34e9bda665bbf19568fb48eec4"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_ai_user_label_connection_types.py",
+      "bytes": 19070,
+      "sha256": "dfe48f23f38cc767ec79718ef87390210f35b891ccf1dd42e27fa30a72fb4891"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_thread_config.py",
+      "bytes": 1113,
+      "sha256": "94e0f44c0a4cd12bcbbffdb643dba0f183094b0476f29c055885dc1f0de2291b"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_thread_service.py",
+      "bytes": 45551,
+      "sha256": "3c5bdaf79885df0b3607dc5c925d738c5fb7ae717e1d4354ffc05d6f23022fb8"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/emlis_thread_store.py",
+      "bytes": 3046,
+      "sha256": "5c6f74894d66dd375daef4e3d44696e9795e67a4a3bd7ac7cbc5459e6f04c54f"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/piece_text_formatter.py",
+      "bytes": 14696,
+      "sha256": "74fc6fea0bb613a0fbec9cd59d602c8a02b1f40161f0000e5576f63e41ab85e9"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/piece_v2_content_policy.py",
+      "bytes": 19483,
+      "sha256": "59ebc8869140892d16ae99a031be0811ac212a5d31ca050e032b26f1c8e0d678"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/piece_v2_contract.py",
+      "bytes": 11682,
+      "sha256": "89700b8b1b1d776f39c61d6e8f8866596dcede7f4466892b3c9b643b9284cddf"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/piece_v2_expression.py",
+      "bytes": 4415,
+      "sha256": "158bb1fd6b26e5d27d3bf1c051d2f2a8013341d403e2e7f5afebd41856388361"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/piece_v2_generation.py",
+      "bytes": 9815,
+      "sha256": "b7e9b0fe23d679b89c226511904935f8da00beda69921c8bd71bd87afced8446"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/services/ai_inference/publish_governance.py",
+      "bytes": 10813,
+      "sha256": "02009a8aa1a82f7d30ddd88dd9c85b989efd24d21b54d4d3ca2a41d5d15b6e9a"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/fixtures/cmee_emlis_model_daily_calm_v1.json",
+      "bytes": 311367,
+      "sha256": "6e63fc666bed8c7b44b29a90c4d5abc95c7c4e8c26dc617cfe718883d0b91f71"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/fixtures/cmee_emlis_sixrow_v3.json",
+      "bytes": 59031,
+      "sha256": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_emlis_model_daily_calm.py",
+      "bytes": 14850,
+      "sha256": "9371a84eab8b2f70937dc06d9752b9169735aace4ad036832b433eee06e1088d"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_emlis_model_meaning.py",
+      "bytes": 19449,
+      "sha256": "686d84fa75c67965b1e1048aad543eaf2275eeeb95f14f80b0d1428e37e1863e"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_emlis_model_proposal.py",
+      "bytes": 26491,
+      "sha256": "4e939e5773cd0e376cd3d1c314e2bf4d8397ceb8291200d81972e44ec6dfe139"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_emlis_sixrow.py",
+      "bytes": 24740,
+      "sha256": "e1525e6cec91c450c1094d843c46a106fde8b20c54cde96b21741ce793dfc1d3"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_model_candidate_source.py",
+      "bytes": 14397,
+      "sha256": "abbc715af76c20322ff3f3568ab660c4b44a0e6e66960de908853ec5bb9a1b90"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_named_reference_candidate.py",
+      "bytes": 16510,
+      "sha256": "fa07a3be3aaeb45919728110cf3836d5a295c8d34ee77d65a2f8239be662cc2b"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_preparation.py",
+      "bytes": 21387,
+      "sha256": "cdad610c707a5dc573fc462e1e2539488f1743a68fd94a0bf708bc57651fe24b"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_cmee_quote_candidate.py",
+      "bytes": 13276,
+      "sha256": "e481e2fa9c35d36855a950853ab4b485d979bcf51676e23f9d5a5adf74def8f4"
+    },
+    {
+      "path": "prior_archive_without_weights/result/source/api/ai/tests/test_emlis_q2_application.py",
+      "bytes": 20443,
+      "sha256": "771bc98fe23eee41fdd10c86f91accb55863cb24fee77b2609686e7ba1a6d514"
+    },
+    {
+      "path": "prior_archive_without_weights/result/weight_verification.json",
+      "bytes": 32179,
+      "sha256": "9ba03c8350cc01edbfefc02f50547b0d7cb113c7d24a2aa69874e31eb18fb14c"
+    },
+    {
+      "path": "prior_archive_without_weights/run/.ipynb_checkpoints/run-checkpoint.json",
+      "bytes": 4055,
+      "sha256": "7351643daa0c8d5f30ba987ec82893f9f74cf51161a406ff4c6c7ba2b93eda49"
+    },
+    {
+      "path": "prior_archive_without_weights/run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 50938,
+      "sha256": "51997a69b612e6db600f37fe94005bced91e6bbe62586e37e46d86863fd4fc72"
+    },
+    {
+      "path": "prior_archive_without_weights/run/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 39273,
+      "sha256": "80bf5ed27f31354161a9674f4b5dcdf3463b45c186558572ef5bb2fca6a68663"
+    },
+    {
+      "path": "prior_archive_without_weights/run/initial_loaded_tensors.json",
+      "bytes": 26060,
+      "sha256": "2383b25ada506a6a010afed6dc4da09b1bd1de2ea45ade8b59b9fa72d0abb735"
+    },
+    {
+      "path": "prior_archive_without_weights/run/reloaded_tensors.json",
+      "bytes": 26041,
+      "sha256": "61fcd038abb24037b874ba2afdb8e07796ff6323b09340dae8855f22e92e4af1"
+    },
+    {
+      "path": "prior_archive_without_weights/run/run.json",
+      "bytes": 5147,
+      "sha256": "e6b532ecf36526897185d91e36de4d4bc9ea7668e7d6be8722585140f9f42334"
+    },
+    {
+      "path": "prior_archive_without_weights/run/training.jsonl",
+      "bytes": 1544,
+      "sha256": "631cd2d8c1691f5d086a89f5a306d38d384dcc26a689bef347ab6a8a23f22559"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/actual_cpu_check.json",
+      "bytes": 8396,
+      "sha256": "2d605102cb30fb54c8e36ce7feb4179846e16db45618e7ffc5f61d6ac9045618"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/api_source_manifest.json",
+      "bytes": 1087,
+      "sha256": "fcf83dcf42f290b24978090bb4207ed999cf24aa1d6a9b79852d74a90075cc98"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/cmee/diagnosis.json",
+      "bytes": 50555,
+      "sha256": "77fa6ed1eb4603e6ce0531e1275eeb408f67a6cfc246cc06eee86ba0d3c4cc1f"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/cocolon_staged_pair9_launch.lock",
+      "bytes": 70,
+      "sha256": "ecb5eaf11c0d118cead1f66f36a25f7a024378a0ed14b9b088a7e5b8a4166ffc"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/cocolon_staged_pair9_launch.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/consume_named9.py",
+      "bytes": 6263,
+      "sha256": "5597700c11135410e2fa215e6424bed7edfc3e89230eba02223c8e85e10887ca"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/consumer.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/consumer.log",
+      "bytes": 321,
+      "sha256": "e71c00d8d1382a8ad64659c4aa92535728c39f16c51624e138016eb46a822d2e"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/eval_inputs.json",
+      "bytes": 173609,
+      "sha256": "0cce7b0601ad579e480f81ccafe211c3596b3b841ff97e45b851dde6bc2b2028"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/export_staged_pair9.py",
+      "bytes": 4417,
+      "sha256": "649172788a313c9361da235c25f3f9549fe218a6ded0738e141454357af78e69"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/launch.json",
+      "bytes": 372,
+      "sha256": "5dc0b653c8fa667cfcb82ce2fd8233337542e501672d61a6aeef6397b974c70b"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/launch_once.py",
+      "bytes": 1546,
+      "sha256": "bb33412993b3f7f7f3a3497ce510ac7e87fa15acd1beae2ad78eb44b7a9aaa14"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/prepare_staged_pair9.py",
+      "bytes": 13371,
+      "sha256": "fc304bcf96149f4b876568bacc7d587ced8eb5ee188b82f88789a7a344124936"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/prepared_plan.json",
+      "bytes": 2312,
+      "sha256": "f94b39cd900e11eae771f27bb463ca7e7689ada104fcbae77d7ec2e5f7d2aa1d"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/projection_proof.json",
+      "bytes": 1455,
+      "sha256": "ee89494ffa42fd54b430354b65094ba3ab170a8060b65a8d1dba121d943bbb77"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/restore_payload.json",
+      "bytes": 33569,
+      "sha256": "1573e92124f26971468404092ca13fcba68289c34b21237a73ecb1f6ef3439f4"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/run_staged_pair9.py",
+      "bytes": 13533,
+      "sha256": "1136119c12a5992c583f95e4ec80221004db832a88fccd3072d4556109a256a7"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/staged_pair9.plan.json",
+      "bytes": 3122,
+      "sha256": "303aa4a8bd098db8ce167f44e7548df1e2c173834d184697ef9093036b541d68"
+    },
+    {
+      "path": "prior_archive_without_weights/runtime/train_messages.jsonl",
+      "bytes": 453483,
+      "sha256": "10ec23b65f253fac6c49dc730725fbcf9c7849867515a2bca96098db036ac2ed"
+    }
+  ],
+  "base_weights_included": false,
+  "initial_afaa_adapter_library_file_id": "libfile_4df0fff22010819189901162df474e4f",
+  "prior_2dfd_library_file_id": "libfile_cf473b4d4d708191821345dd2db43674"
+}

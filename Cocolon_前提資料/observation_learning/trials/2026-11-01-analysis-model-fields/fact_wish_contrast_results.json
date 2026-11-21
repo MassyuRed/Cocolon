@@ -1,0 +1,417 @@
+{
+  "schema_version": "analysis_fact_wish_contrast_results.v1",
+  "runtime_api_commit": "5c9606507d296adfe69fe0350c84a5d5deab585b",
+  "trial_status": "FAILED_PARTIAL_NO_RETRY_NOT_ADOPTED",
+  "seconds": 559.7270124880597,
+  "limits": {
+    "context_tokens": 8192,
+    "max_measurement_forwards": 20,
+    "max_model_loads": 3,
+    "max_new_generation": 19,
+    "max_seconds": 900,
+    "max_train_updates": 23,
+    "output_tokens": 2048,
+    "per_generation_seconds": 23
+  },
+  "model_loads_started": 3,
+  "model_calls_started": 19,
+  "new_generation_returned": 18,
+  "updates": 23,
+  "measurement_forwards": 20,
+  "cached_before_responses": 7,
+  "reviewed_responses": 25,
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "candidate_weights_sha256": "d22c3d8b7500dc3a5b03de262a557e055bb7401e22be9ede2df2ee850c92f3c0",
+  "candidate_config_sha256": "fa04c2e3a17b8e7e9cf666dd0d74b54995d6dc73086a19e310279306ce83f342",
+  "teacher_counts": {
+    "old_v4_exact": 10,
+    "existing_wishes_v7": 5,
+    "independent_new_v7": 8
+  },
+  "nll_sample_count": 10,
+  "nll_means": {
+    "before": 0.13502808970442856,
+    "after": 0.020736937710171332
+  },
+  "nll_scope": "Fixed teacher diagnostic only; not independent semantic quality or full-old10 retention.",
+  "new_candidate_normal_adoption": false,
+  "new_candidate_next_initial_adoption": false,
+  "model_retry": false,
+  "after_incomplete_id": "N3",
+  "after_incomplete_reason": "23-second per-call SIGALRM (-14); no returned raw. Not a semantic rejection.",
+  "gpu_after_process": "4 MiB, 0 %",
+  "cases": [
+    {
+      "phase": "before",
+      "id": "E01",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": 4.38208612985909,
+      "raw_sha256": "29bb9b38261c139ef48dc3951bfdf1d5b6fe610bf111d106d6b941c0854f2ebf"
+    },
+    {
+      "phase": "before",
+      "id": "E02",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 3.540694891475141,
+      "raw_sha256": "77b8fd2d65014b4b208da04f156c09f6f7d4bedaba737bc14ecbd8bec3696c19"
+    },
+    {
+      "phase": "before",
+      "id": "E03",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 4.334100924432278,
+      "raw_sha256": "e67d512aee98e76f0da7616495a1223b28c8f5a1d5358bc509cb1cb8c825c99c"
+    },
+    {
+      "phase": "before",
+      "id": "E04",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 4.153877463191748,
+      "raw_sha256": "a185fd5b60800624cd99145fc743da65dcdafb14021a3be910586f5075ac4e9f"
+    },
+    {
+      "phase": "before",
+      "id": "E05",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 6.456887082196772,
+      "raw_sha256": "ec47091aa7d91dd1431d921a2599064c5a4e45379c221cbed57e88f052c067f8"
+    },
+    {
+      "phase": "before",
+      "id": "E06",
+      "expected_fields": 2,
+      "returned_field_ordinals": [
+        1,
+        2
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 7.784867260605097,
+      "raw_sha256": "758eb55f017443b4e8af081db5d7a08e1016370fc0d7d0f7fa02d2fde5494724"
+    },
+    {
+      "phase": "cached_before",
+      "id": "AE05",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": null,
+      "raw_sha256": "7e2b68e11add9df655e2cf43f53e49c97df77c34b911ecba4d6d2456995eefc6"
+    },
+    {
+      "phase": "cached_before",
+      "id": "AP07_v7",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": null,
+      "raw_sha256": "0e8af7675af743b2b5494c76aea419e49933021f4bd227477d62090fccf9a35b"
+    },
+    {
+      "phase": "cached_before",
+      "id": "AP08_v7",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": null,
+      "raw_sha256": "2b47e3e84d4134789642d03557ee093eae8012568f3e4b20ca066734824668d9"
+    },
+    {
+      "phase": "cached_before",
+      "id": "OP02_v7",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": null,
+      "raw_sha256": "685245d5ea1d55f45b5d5d05b56b02447274c5f1a5234f0541f89fd21250fd74"
+    },
+    {
+      "phase": "cached_before",
+      "id": "N1",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": null,
+      "raw_sha256": "136bb798e520e0fc2d297fd280434d9c728445d6104de9253b15909dfecf07bb"
+    },
+    {
+      "phase": "cached_before",
+      "id": "N2",
+      "expected_fields": 2,
+      "returned_field_ordinals": [
+        1,
+        2
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": null,
+      "raw_sha256": "e625bb993d737239b41866dddd3ecf43c690874f4b2f9f6e4852960f1fdc37d2"
+    },
+    {
+      "phase": "cached_before",
+      "id": "N3",
+      "expected_fields": 3,
+      "returned_field_ordinals": [
+        1,
+        2,
+        3
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": null,
+      "raw_sha256": "aec63d74721478f5167db831c0c4f8dced787b7709dcb6586b42d379c99f2c74"
+    },
+    {
+      "phase": "after",
+      "id": "E01",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": 5.861780257895589,
+      "raw_sha256": "1645e77840ed86d1560add47a9e4ea43779de720e681cc3aea871555c23bfedc"
+    },
+    {
+      "phase": "after",
+      "id": "E02",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 5.011838730424643,
+      "raw_sha256": "0c168275275bd4898342457a1cf9c1d3fcd85b950ce9e5ba1974789f3038c7e6"
+    },
+    {
+      "phase": "after",
+      "id": "E03",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 5.918565982021391,
+      "raw_sha256": "c82cc838b44dcf58d7c02f4493b2a645cfa7f2fb563adb18dedf9154ca4893a8"
+    },
+    {
+      "phase": "after",
+      "id": "E04",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 5.7697177873924375,
+      "raw_sha256": "ef33aa14febc80c4df9a17f19ddebb129d11710e5745a3d78269cb7afa0e0114"
+    },
+    {
+      "phase": "after",
+      "id": "E05",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 7.9625841258093715,
+      "raw_sha256": "3e34174303ebb722e4b60530d6f0cd876ee068041d52c79aab4341a80fe39926"
+    },
+    {
+      "phase": "after",
+      "id": "E06",
+      "expected_fields": 2,
+      "returned_field_ordinals": [
+        1,
+        2
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 7.743757912889123,
+      "raw_sha256": "758eb55f017443b4e8af081db5d7a08e1016370fc0d7d0f7fa02d2fde5494724"
+    },
+    {
+      "phase": "after",
+      "id": "AE05",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": 4.760091521777213,
+      "raw_sha256": "7446ca1d7f2ee855e8845d39e71512426894da3630c524d731aad39e73f3b435"
+    },
+    {
+      "phase": "after",
+      "id": "AP07_v7",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": 5.799849056638777,
+      "raw_sha256": "0e8af7675af743b2b5494c76aea419e49933021f4bd227477d62090fccf9a35b"
+    },
+    {
+      "phase": "after",
+      "id": "AP08_v7",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": 6.6648365231230855,
+      "raw_sha256": "2b47e3e84d4134789642d03557ee093eae8012568f3e4b20ca066734824668d9"
+    },
+    {
+      "phase": "after",
+      "id": "OP02_v7",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "GENERATED_PRIVATE_ONLY",
+      "generation_seconds": 5.048564363270998,
+      "raw_sha256": "685245d5ea1d55f45b5d5d05b56b02447274c5f1a5234f0541f89fd21250fd74"
+    },
+    {
+      "phase": "after",
+      "id": "N1",
+      "expected_fields": 1,
+      "returned_field_ordinals": [
+        1
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 7.828598693944514,
+      "raw_sha256": "1b150445c241517c03d3444ccc27b1c4f0c36665fdc8f09a6594739e9ac8dc57"
+    },
+    {
+      "phase": "after",
+      "id": "N2",
+      "expected_fields": 2,
+      "returned_field_ordinals": [
+        1,
+        2
+      ],
+      "finish_reason": "stop",
+      "strict_candidate": "PRESERVED",
+      "map_status": "UNSUPPORTED",
+      "generation_seconds": 17.666279405355453,
+      "raw_sha256": "e7ea49c2b797dffd909fec6bdfd6a9709cfbe513a9669ccfbeac23abd4b8f7ea"
+    }
+  ],
+  "consumer_replay": {
+    "model_loads": 0,
+    "new_generation": 0,
+    "updates": 0,
+    "input_responses": 25,
+    "changed": [
+      {
+        "phase": "before",
+        "id": "E06",
+        "previous": "UNSUPPORTED",
+        "current": "GENERATED_PRIVATE_ONLY",
+        "mock_saved_reader": true
+      },
+      {
+        "phase": "after",
+        "id": "E06",
+        "previous": "UNSUPPORTED",
+        "current": "GENERATED_PRIVATE_ONLY",
+        "mock_saved_reader": true
+      }
+    ],
+    "same_input_E06": true,
+    "scope": "Direct CPU original-response proof plus mocked saved reader; not live DB/HTTP/phone.",
+    "api_commit": "e8f026e0836ceca2b41c273bc9c793c7998d979d",
+    "compiler_sha256": "a452842ff0677d795b4db0a694060450d5234dd0b253a9abe6287fea015a9976",
+    "jupyter_verified": true,
+    "jupyter_report_sha256": "3dbed64ce357e9aa70c2dc1d6fe0ce5d8103fac19da6a7287650ddb6dfe3db4f"
+  },
+  "tests": {
+    "passed": 398,
+    "skipped": 1,
+    "skip_reason": "PostgreSQL WASM dependency not configured",
+    "warnings": 1,
+    "seconds": 45.06,
+    "scope": "Five affected analysis model/actions/roles/cumulative/saved-period modules"
+  },
+  "structure_map_delta": "PRESENT: original memo/memo_action wish proof; no new source route, node type, author or normal profile.",
+  "production_writes": 0,
+  "api_calls": 0,
+  "database_access": 0,
+  "meaning_quality_complete": false
+}

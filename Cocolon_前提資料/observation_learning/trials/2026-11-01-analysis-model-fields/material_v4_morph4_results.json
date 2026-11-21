@@ -1,0 +1,21 @@
+{
+  "verified_exact_utf8_files": 66,
+  "morph_seconds": 47.97281831968576,
+  "probe_seconds": 45.85469788964838,
+  "new_stop_responses": 8,
+  "diagnostic_forwards": 4,
+  "model_loads": 2,
+  "training_updates": 0,
+  "new_weights": 0,
+  "normal_adoption": false,
+  "quality_repair_adopted": false,
+  "gpu": "2 MiB, 0 %",
+  "compute_apps": "",
+  "processing_seconds": 93.82751620933414,
+  "processing_cost_usd_at_previous_029_per_hour": 0.007558327694640804,
+  "decision": "NO_TRAINING_PROMPT_PROBE_REJECTED",
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "library_file_id": "libfile_823dac8b7f208191b58a7beb4dc6d5d6",
+  "structure_map_delta": "NONE",
+  "product_credit": 0
+}

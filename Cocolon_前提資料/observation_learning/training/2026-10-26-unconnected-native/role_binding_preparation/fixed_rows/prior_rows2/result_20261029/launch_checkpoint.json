@@ -1,0 +1,26 @@
+{
+  "status": "STARTED_ONCE_PENDING_RAW_AND_CMEE",
+  "proposal_commit": "5c21326cf80be2c04c9ece3b9474bb0105a7532f",
+  "runtime_source_commit": "943ee425ef7796b92ed9ee56f71fbb241ea2e45f",
+  "launcher_pid": 232075,
+  "launch_started_unix": 1793267623.5736284,
+  "observed_run_elapsed_seconds": 10.922014707932249,
+  "model_loads_started": 1,
+  "model_loads_completed": 1,
+  "optimizer_steps_completed": 0,
+  "model_calls_started": 1,
+  "model_calls_completed": 0,
+  "max_process_seconds": 600,
+  "max_processing_proration_usd": 0.047,
+  "retry": false,
+  "automatic_progression": false,
+  "prelaunch_input_correction": {
+    "kind": "COMMAND_CONSTRUCTION_SYNTAX_ERROR",
+    "cause": "Root supplied an embedded newline in a Python string literal in the terminal launcher",
+    "stage": "Python parsing before directory creation, download, lock or model process",
+    "model_calls": 0,
+    "correction": "Only launcher text changed to chr(10); reviewed runner/plan/inputs unchanged",
+    "gpu_process_launches_after_correction": 1
+  },
+  "gpu_lifecycle_actions": 0
+}

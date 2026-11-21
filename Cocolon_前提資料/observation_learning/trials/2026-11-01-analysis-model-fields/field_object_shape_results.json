@@ -1,0 +1,127 @@
+{
+  "schema_version": "analysis_field_object_shape_results.v1",
+  "work_date": "2026-11-07",
+  "status": "COMPLETE_LOCAL_RECOVERY_RESEARCH_ONLY_NOT_ADOPTED",
+  "api_commit": "ff36d037fba5149e40a060eb37934ef414f46d22",
+  "runner_commit": "c989799427dcd6efeb0bce7915c922b271065c45",
+  "profile": "selected_material.v11",
+  "comparator": "Same v11 messages, source, API and fixed a2e as section239; added generation-time JSON shape restriction only.",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "source_records": 21,
+  "input_fields": 28,
+  "max_input_tokens": 4649,
+  "model_loads": 1,
+  "new_generation": 14,
+  "training_updates": 0,
+  "new_teachers": 0,
+  "evaluation_to_teacher_conversions": 0,
+  "generation_retries": 0,
+  "seconds": 171.42905565537512,
+  "before": {
+    "requests": 14,
+    "generated": 13,
+    "mapped": 18,
+    "nodes": 30,
+    "unparsed_in_generated": 1,
+    "rejected": 1
+  },
+  "after": {
+    "requests": 14,
+    "generated": 14,
+    "mapped": 20,
+    "nodes": 34,
+    "unparsed_in_generated": 1,
+    "rejected": 0
+  },
+  "partial_generated_requests": [
+    "HC01"
+  ],
+  "recovered_requests": [
+    "HC10"
+  ],
+  "rejected_requests": [],
+  "retained_json_units_candidate_diagram_graph_count_text_projection_requests": [
+    "HC01",
+    "HC02",
+    "HC03",
+    "HC04",
+    "HC05",
+    "HC06",
+    "HC07",
+    "HC08",
+    "HC09",
+    "AE05",
+    "AP07_v7",
+    "AP08_v7",
+    "OP02_v7"
+  ],
+  "raw_byte_identity_requests": [],
+  "raw_identity_except_one_trailing_lf_requests": [
+    "HC01",
+    "HC02",
+    "HC03",
+    "HC04",
+    "HC05",
+    "HC06",
+    "HC07",
+    "HC08",
+    "HC09",
+    "AE05",
+    "AP07_v7",
+    "AP08_v7",
+    "OP02_v7"
+  ],
+  "local_recovery": "HC10: two records and three fields now strictly parse without duplicate field keys; four typed nodes retain work/life ownership, supplemental answer belongs to the second record, each record count one, no inferred edges.",
+  "unresolved": {
+    "HC01": "Same invalid positive past-wish WRITTEN_MODIFIER; one whole record remains unparsed."
+  },
+  "evidence_checks": 159,
+  "evidence_check_scope": "Candidate field, unit, qualifier and typed graph evidence; not 159 independent records or typed nodes.",
+  "saved_candidate_non_generation_reload": 14,
+  "response_replays": 14,
+  "replay_scope": "Candidate saved-state reload and same-raw graph/text reconstruction; no current/monthly RPC or live DB persistence.",
+  "cpu": {
+    "token_mapping_checked": 248056,
+    "token_positions": 1962,
+    "valid_checks": 16,
+    "negative_checks": 7,
+    "actual_model_eos_ids": [
+      248044
+    ],
+    "tokenizer_eos_id": 248046,
+    "note": "13 baseline positives are canonical JSON token checks, not raw-format preservation evidence. Free arbitrary quotes, forward parent strings and invalid semantic carriers pass the grammar; unchanged CMEE rejects foreign source and invalid carrier controls."
+  },
+  "mask": {
+    "scope": "request field ordinals, exact keys/order, declared enum types, unit<=8 and qualifier<=6",
+    "quote_parent_and_qualifier_strings": "Free JSON strings; no source trie, phrase insertion, semantic label forcing or case-id branch.",
+    "total_mask_seconds": 14.169581233523786,
+    "max_mask_call_seconds": 0.36758056934922934
+  },
+  "gpu": {
+    "after": "2 MiB, 0 %; compute apps empty",
+    "fresh_ui_check": "2 MiB, 0 %; compute apps empty",
+    "proof": "analysis-field-object-shape-20261107.png"
+  },
+  "private_bundle": {
+    "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-69d28332aa44819198fa0560d3d40cbe_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "filename": "Cocolon_Analysis_FieldObjectShape_20261107.zip",
+    "bytes": 2229376,
+    "members": 67,
+    "sha256": "6ed6dc3fadfcbcff3c6dd1c5087d5d22d782bfd4ae92ab6fce93ebb2e74c4181",
+    "pod_original_sha256": "a20dfae84b93789499d448f9b11a25bcaaf3a87694bd89d6881d1bf46d85f99b"
+  },
+  "normal_adoption": false,
+  "deployed": false,
+  "db_writes": 0,
+  "structure_map_delta": "NONE",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "human_product_acceptance": false,
+  "limits": [
+    "Known fixtures and retention controls, not blind general-quality evidence.",
+    "14 generated requests include one partial request with one whole source record unparsed.",
+    "Shape restriction is a generation branch constraint; it does not establish implicit roles, personal criteria, judgment, choice or causal connections.",
+    "No raw repair, strict-reader relaxation, new training or normal API adoption."
+  ],
+  "next_work": "Fix positive past-wish misclassification as WRITTEN_MODIFIER while retaining the v11 field-shape recovery and all thirteen retention controls. Do not repeat rejected existing23 training."
+}

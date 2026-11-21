@@ -1,0 +1,37 @@
+{
+  "B11_executed": false,
+  "SQL_save": 0,
+  "after_controls": 0,
+  "after_result": {
+    "bytes": 40465,
+    "sha256": "d5b0103e5820530153fd408746aadb53a3e94dac43a6bf96f740b4e50ec7c266"
+  },
+  "before_controls": 2,
+  "internal_health": 200,
+  "new_model_calls": 3,
+  "normal_app_connection": "NOT_VERIFIED",
+  "normal_rollout": 0,
+  "original_remote_export": {
+    "bytes": 22927,
+    "crc_valid": true,
+    "members": 14,
+    "sha256": "79eda51294b4c37e23e7dd8b5cc325f3d003d18c4a54f70e30c940515b720cf6"
+  },
+  "pod": "8d6lpvzb35at8x",
+  "preexecution_cocolon_commit": "e625f7ac0c14a928bd5a06c2f6dc524231960c78",
+  "private_bundle": {
+    "bytes": 37263,
+    "filename": "Cocolon_CMEE_A11_NewPod_Actual_20261116.zip",
+    "library_file_id": "libfile_fde3_f-8c9e9efa7a548191b989841005df6cce_2f7470f963808191aaebf050935e72de",
+    "members": 24,
+    "sha256": "709e6b7d2f586829219aa09011bd4602f7eb5e2188cb788487c2d1a62a689a0f"
+  },
+  "private_raw_and_logs_in_public_git": false,
+  "received_map_cases": 1,
+  "remaining_cases": 4,
+  "restore_inclusive_seconds": 192.17056906805374,
+  "restored_pid": 4089,
+  "scope_sha256": "6317b2676984386c60716c7698abfe10072b284b06e988c18872749174aac29f",
+  "source_api_commit": "7bb605b25138e9b9fc70ad8abca10dcfb46cd60b",
+  "state": "A11_FAILED_CLOSED_B11_CONDITION_NOT_SATISFIED"
+}

@@ -1,0 +1,121 @@
+{
+  "schema": "cocolon.analysis.actual.independent_meaning_review.v1",
+  "state": "A3_MEANING_REJECTED_B3_CONDITION_NOT_SATISFIED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "actual_sha256": "e49505fbfec6cd97bba6510d11ab2f5c8761d699640251ab30add62c656eaabb",
+  "actual_bytes": 130017,
+  "original_archive_sha256": "9d968f1acbcc59f72fab4e5fbf2bcd74081371db80535df4cc790e7864d97a77",
+  "original_archive_bytes": 81045,
+  "original_archive_members": 13,
+  "actual_and_execution_exact_remote_byte_match": true,
+  "private_evidence_owner": "Cocolon_CMEE_ConcreteReading_20261115.zip",
+  "private_evidence_library_file_id": "libfile_fde3_f-0b6a62903bc08191a00a9efbe2f4250a_2f7470f963808191aaebf050935e72de",
+  "source_api_commit": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "source_core_sha256": "b489a2204dfe53aa0de30e3573d707af877c9eef62d410c710e706fafdcd80fa",
+  "reviewed_layers": [
+    "original_material_all_fields",
+    "acquisition_raw",
+    "projection_all_nodes_edges_overview_unknowns",
+    "text",
+    "private_source_bindings"
+  ],
+  "independent_read_only_review_completed": true,
+  "root_review_agrees": true,
+  "acquisition_seconds": 230.31278358772397,
+  "restore_inclusive_seconds": 282.18167749466375,
+  "max_model_calls": 2,
+  "new_model_calls": 2,
+  "training": 0,
+  "retry": 0,
+  "transferred_new_files": 4,
+  "transferred_new_bytes": 319749,
+  "conditions": [
+    {
+      "name": "book_club_two_day",
+      "state": "GENERATED",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 2,
+        "processed_count": 2,
+        "profile": "cumulative.v1",
+        "source_count": 2,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "http": 200,
+      "finish_reason": "stop",
+      "cumulative_received_seconds": 99.50943446392193
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "state": "GENERATED",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 2,
+        "processed_count": 2,
+        "profile": "cumulative.v1",
+        "source_count": 2,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "http": 200,
+      "finish_reason": "stop",
+      "cumulative_received_seconds": 230.00580656062812
+    }
+  ],
+  "findings": {
+    "book_club_two_day": [
+      {
+        "location": "n2.unknowns, edge n1->n2, overview.summary",
+        "code": "KNOWN_LATER_REPLY_REVERTED_TO_UNKNOWN_OR_NOT_RECEIVED"
+      },
+      {
+        "location": "n2.unknowns",
+        "code": "EXPLICIT_NONINVOLVEMENT_REVERTED_TO_UNKNOWN"
+      },
+      {
+        "location": "n1.explanation",
+        "code": "EARLIER_UNSENT_AND_LATER_SENT_NOT_COHERENTLY_SCOPED"
+      }
+    ],
+    "lighting_prior_and_later": [
+      {
+        "location": "n3.explanation",
+        "code": "DECIDED_EVENING_ACTION_CHANGED_TO_UNDECIDED"
+      },
+      {
+        "location": "n3, overview, edges n1->n3 and n2->n3",
+        "code": "EARLIER_PLAN_LEFT_OPEN_DESPITE_LATER_CONFIRMATION_AND_PURCHASE"
+      },
+      {
+        "location": "n4.explanation",
+        "code": "EARLIER_UNDECIDED_VISIT_UNSCOPED_NEXT_TO_LATER_PURCHASE"
+      }
+    ]
+  },
+  "improvements": [
+    "later_book_club_sending_retained_in_summary_and_overview",
+    "lighting_purchase_retained_in_n4",
+    "no_observed_A2_habit_or_exclusive_generalization"
+  ],
+  "causal_boundary": "Meaning errors are already in acquired model raw and remain in projection/text. Model-internal or adapter-versus-base cause is not established.",
+  "b3_files_transferred": true,
+  "b3_executed": false,
+  "b3_root_exists": false,
+  "b3_authorization_condition_satisfied": false,
+  "sql_save": 0,
+  "actual_non_generation_sql_reread": 0,
+  "normal_rollout": 0,
+  "current_provider_restored": true,
+  "current_provider_pid": 130379,
+  "current_health": 200,
+  "normal_api_worker_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "database_latest_migration": "20261115011424",
+  "build_testflight_device": "ON_HOLD",
+  "work_unit_closed": false,
+  "auxiliary_work_complete": false,
+  "product_acceptance": false,
+  "next_work": "Repair or validate temporal fact and unknown integration in the existing meaning author. Do not add redundant warnings or replay A3. No new remote execution scope is prepared or authorized by this result."
+}

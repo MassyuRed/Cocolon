@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 
@@ -116,60 +117,51 @@ export default function GuideRichText({ blocks = [], onPressTerm }) {
 function createStyles(colors, ui) {
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     paragraph: {
-      fontSize: 14,
-      lineHeight: 24,
       color: colors.TEXT_ON_LIGHT,
-      marginBottom: 14,
+      marginBottom: 16,
     },
     heading: {
-      fontSize: 16,
-      lineHeight: 22,
-      fontWeight: "800",
-      color: colors.TITLE_GOLD,
-      marginTop: 6,
-      marginBottom: 10,
+      color: colors.TEXT_ON_LIGHT,
+      marginTop: 12,
+      marginBottom: 12,
     },
     listBlock: {
-      marginBottom: 14,
+      marginBottom: 16,
     },
     listItemRow: {
       flexDirection: "row",
       alignItems: "flex-start",
-      marginBottom: 8,
+      marginBottom: 10,
+      gap: 8,
     },
     listBullet: {
-      width: 18,
-      fontSize: 14,
-      lineHeight: 24,
-      fontWeight: "700",
-      color: colors.TITLE_GOLD,
+      color: colors.TEXT_SUBTLE,
+      minWidth: 18,
+      flexShrink: 0,
     },
     listItemText: {
       flex: 1,
-      fontSize: 14,
-      lineHeight: 24,
       color: colors.TEXT_ON_LIGHT,
+      minWidth: 0,
     },
     noteCard: {
-      marginBottom: 14,
+      marginBottom: 16,
       borderRadius: 16,
       borderWidth: 1,
       borderColor: colors.CARD_BORDER,
-      backgroundColor: colors.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      backgroundColor: colors.SURFACE_TONAL,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
     noteText: {
-      fontSize: 13,
-      lineHeight: 22,
-      color: text.description ?? colors.TEXT_SUBTLE,
+      color: colors.TEXT_ON_LIGHT,
     },
     termLink: {
       color: colors.TITLE_GOLD,
       textDecorationLine: "underline",
-      fontWeight: "700",
+      fontWeight: '600',
     },
-  });
+  }, ui, {"paragraph":"body","heading":"sectionTitle","listBullet":"body","listItemText":"body","noteText":"body"}));
 }

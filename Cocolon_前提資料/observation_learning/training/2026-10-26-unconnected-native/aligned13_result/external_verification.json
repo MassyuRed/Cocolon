@@ -1,0 +1,22 @@
+[
+  {
+    "name": "cocolon_aligned13_weights_and_runtime_originals_20261028.zip",
+    "bytes": 14312508,
+    "sha256": "9f293788ab885e081ae39a14e23179700924a0d0b09eff4e995d8fd95975aee3",
+    "members": 35,
+    "payloads": 34,
+    "all_manifest_members_verified": true,
+    "tensors": 112,
+    "dtype": "F32",
+    "finite": true,
+    "adapter_sha256": "c7ba419cbfb8c2b1c83b4b27fcc59ab539c1f635515159a6cde6dbf41e23be3b"
+  },
+  {
+    "name": "cocolon_aligned13_runtime_originals_20261028.zip",
+    "bytes": 116134,
+    "sha256": "3159c5d2839bd37cdecdc65da74fc69e66329b219612680de11e99f4c418c04d",
+    "members": 35,
+    "payloads": 34,
+    "all_manifest_members_verified": true
+  }
+]

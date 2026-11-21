@@ -1,0 +1,8 @@
+{
+  "source_commit": "f0ec04e22df16e348f8da6621289c71b201d627e",
+  "exit_code": 0,
+  "outer_seconds": 6.956690767081454,
+  "model_loads": 0,
+  "gpu_execution": false,
+  "approval_present": false
+}

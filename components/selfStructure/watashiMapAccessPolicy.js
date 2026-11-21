@@ -5,9 +5,9 @@ export const WATASHI_MAP_TIERS = Object.freeze({
 });
 
 export const WATASHI_MAP_HISTORY_RETENTION_LABEL = Object.freeze({
-  free: "履歴の閲覧範囲：Freeは最新概要のみ",
-  plus: "履歴の閲覧範囲：直近1年分",
-  premium: "履歴の閲覧範囲：無制限",
+  free: "月次マップの閲覧範囲：直近2回分",
+  plus: "月次マップの閲覧範囲：直近12回分",
+  premium: "月次マップの閲覧範囲：全期間",
 });
 
 export function normalizeWatashiMapTier(rawTier) {
@@ -32,8 +32,17 @@ export function formatWatashiMapReportModeLabel(rawMode) {
 }
 
 export function canViewWatashiMapHistory(rawTier) {
-  const tier = normalizeWatashiMapTier(rawTier);
-  return tier === WATASHI_MAP_TIERS.PLUS || tier === WATASHI_MAP_TIERS.PREMIUM;
+  return true;
+}
+
+export function getWatashiMapHistoryLimit(rawTier) {
+  return { free: 2, plus: 12, premium: null }[normalizeWatashiMapTier(rawTier)];
+}
+
+export function canViewWatashiMapMode(rawTier, rawMode) {
+  if (!['light', 'standard', 'deep', 'structural'].includes(String(rawMode || '').trim().toLowerCase())) return false;
+  return normalizeWatashiMapReportMode(rawMode) === 'light'
+    || canViewWatashiMapDetailReport(rawTier, rawMode);
 }
 
 export function canViewWatashiMapDetailReport(rawTier, rawMode = "standard") {
@@ -49,7 +58,7 @@ export function canViewWatashiMapDeep(rawTier) {
 }
 
 export function canExportWatashiMapPdf(rawTier) {
-  return canViewWatashiMapHistory(rawTier);
+  return normalizeWatashiMapTier(rawTier) !== WATASHI_MAP_TIERS.FREE;
 }
 
 export function getWatashiMapHistoryRetentionLabel(rawTier) {

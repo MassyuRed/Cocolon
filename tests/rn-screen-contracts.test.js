@@ -102,7 +102,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'App.js Phase 9 provider shell');
 
   assertIncludes(constants, [
-    'export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "RankingTop", "Settings"]);',
+    'export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "Settings"]);',
     'export const PIECE_SUB_ROUTES = new Set',
     'export const ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY',
   ], 'navigationConstants.js');
@@ -120,7 +120,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'export function buildAnalysisNotificationParams',
     'export function resolveNotificationTargetRoute',
     'export function requestOpenRouteFromNotification',
-    'type === "today_question" || screen === "Input"',
+    'screen === "Input"',
     'type === "report_distribution"',
     'return { name: "Piece", params: { screen: "EmotionLog" } };',
   ], 'notificationRouting.js');
@@ -141,7 +141,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'syncPushTokenOnce({ userId })',
     'startPushTokenSync({ userId })',
     'tryOpenRouteIfPending();',
-    '<MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />',
+    '<MainTabs key={`main-tabs-${session.user.id}-${tutorialResetToken || 0}`} />',
   ], 'RootNavigator.js');
 
   assertIncludes(mainTabs, [
@@ -151,7 +151,6 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'InputStackNavigator',
     'AnalysisStackNavigator',
     'PieceStackNavigator',
-    'RankingStackNavigator',
     'SettingsStackNavigator',
     'GlobalFrameLayout',
     'buildAnalysisRootNavigationParams',
@@ -160,7 +159,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'setUnread("Piece", "piecesNew"',
   ], 'MainTabs.js');
 
-  assertRegex(inputStack, /<InputStack\.Screen\s+name="Input"\s+component=\{InputScreen\}/, 'Input stack registration');
+  assertRegex(inputStack, /<InputStack\.Screen\s+name="Input">/, 'Input stack registration');
   assertRegex(analysisStack, /<AnalysisStack\.Screen\s+name="Analysis">/, 'Analysis stack registration');
   assertRegex(pieceStack, /<PieceStack\.Screen\s+name="Piece">/, 'Piece stack registration');
   assertRegex(settingsStack, /<SettingsStack\.Screen\s+name="SubscriptionSelect"\s+component=\{SubscriptionSelectScreen\}/, 'Subscription route registration');
@@ -185,14 +184,14 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'AppRuntimeBlockingScreen.js');
 
   assertIncludes(globalFrame, [
-    'export const FRAME_BORDER_WIDTH = 2;',
+    'export const FRAME_BORDER_WIDTH = 0;',
     'export default function GlobalFrameLayout',
-    '～Emotion Limbic Internal Structure～',
+    'fontFamily: "CormorantGaramond-Bold"',
     'useSafeAreaInsets',
   ], 'GlobalFrameLayout.js');
 });
 
-test('InputScreen keeps the emotion input, Emlis reply, draft, today question, and Piece preview surfaces connected through split helpers', () => {
+test('InputScreen keeps the emotion input, Emlis reply, draft, DeepInsight, and Piece preview surfaces connected through split helpers', () => {
   const input = read('screens/InputScreen.js');
   const inputOptions = read('screens/input/inputOptions.js');
   const inputDraft = read('screens/input/inputDraftModel.js');
@@ -213,11 +212,10 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(input, [
     'import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";',
-    'previewEmotionPiece',
-    'publishEmotionPiece',
-    'cancelEmotionPiece',
     'InputPiecePreviewController',
-    'TodayQuestionCard',
+    'handleOpenDeepInsight',
+    'navigation?.navigate?.("DeepInsight")',
+    'わたしを知る問いを開く',
     'InputStartupModals',
     'InputFeedbackReplyModal',
     'InputActionArea',
@@ -340,7 +338,7 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(inputEmotionSection, [
     'export default function InputEmotionSection',
-    'EMOTION_ROWS.map',
+    'EMOTION_ROWS.flat()',
     'SELF_INSIGHT',
     'changeStrength',
     'strengthRowRefs.current[cat]',
@@ -356,7 +354,6 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   assertIncludes(inputStartupModals, [
     'export default function InputStartupModals',
     'NoticeModal',
-    'TodayQuestionModal',
     'draftRestoreModalVisible',
     'INPUT_DRAFT_TTL_HOURS',
   ], 'InputStartupModals.js');
@@ -393,8 +390,9 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   ], 'InputPiecePreviewController.js');
 
   assertRegex(input, /await\s+submitEmotionInput\(/, 'emotion submit call');
-  assertRegex(input, /await\s+previewEmotionPiece\(/, 'Piece preview call');
-  assertRegex(input, /await\s+publishEmotionPiece\(/, 'Piece publish call');
+  assertNotIncludes(input, ['previewEmotionPiece', 'publishEmotionPiece', 'cancelEmotionPiece',
+    '../lib/api/home/emotionPieceApi'], 'InputScreen must use the saved-input Piece v2 host, never raw legacy Piece HTTP');
+  assertIncludes(input, ['InputPieceActionArea', 'savedInput={savedPieceInput.savedInput}'], 'saved-input Piece route');
   assertIncludes(input, [
     'const openedObservation = openInputFeedbackModal',
     'if (!openedObservation)',
@@ -1190,39 +1188,37 @@ test('Observation Diagnostic Lockdown Step 6 RN frontend diagnostics keep debug 
   }
 });
 
-test('Home hooks preserve startup popup priority, today question, and Piece quota screen state', () => {
+test('Home routes DeepInsight separately from startup popups', () => {
   const state = read('features/home/useHomeState.js');
   const actions = read('features/home/useHomeActions.js');
+  const stack = read('navigation/InputStackNavigator.js');
 
   assertIncludes(state, [
     'getHomeState',
-    'today_question_enabled',
     'STARTUP_POPUP_KIND',
     '[STARTUP_POPUP_KIND.NOTICE]: 300',
     '[STARTUP_POPUP_KIND.TUTORIAL]: 200',
-    '[STARTUP_POPUP_KIND.TODAY_QUESTION]: 100',
-    'todayQuestionCurrent',
     'pieceQuota',
     'registerInputInteraction',
   ], 'useHomeState.js');
 
-  assertIncludes(actions, [
+  assertIncludes(actions, ['markNoticePopupSeen', 'markNoticesRead'], 'useHomeActions.js');
+  assertNotIncludes(state + actions + read('screens/input/InputStartupModals.js'), [
+    'TODAY_QUESTION',
     'submitTodayQuestionAnswer',
-    'markNoticesRead',
-    'question_origin',
-    'personal_question_id',
-    'source_anchor_hash',
-  ], 'useHomeActions.js');
+    'TodayQuestionModal',
+  ], 'Home startup');
+  assertIncludes(stack, ['name="DeepInsight" component={DeepInsightScreen}'], 'InputStackNavigator.js');
+  assertNotIncludes(stack, ['TodayQuestionHistory'], 'InputStackNavigator.js');
 });
 
-test('AnalysisScreen keeps report history, self-structure, today-question history, and Piece cross-link routes mounted through Phase 6 hooks', () => {
+test('AnalysisScreen redirects old emotion report links to the live graph and keeps map and input routes', () => {
   const analysis = read('screens/AnalysisScreen.js');
   const analysisRouteModel = read('screens/analysis/analysisRouteModel.js');
   const analysisRouteState = read('screens/analysis/useAnalysisRouteState.js');
   const analysisUnreadBadges = read('screens/analysis/useAnalysisUnreadBadges.js');
   const analysisReportActions = read('screens/analysis/useAnalysisReportActions.js');
   const analysisContentFirst = read('screens/AnalysisContentFirstScreen.js');
-  const analysisEmotion = read('screens/AnalysisEmotionScreen.js');
   const kokoroWeatherCurrentCard = read('screens/analysisReport/KokoroWeatherCurrentCard.js');
   const kokoroWeatherForecastStrip = read('screens/analysisReport/KokoroWeatherForecastStrip.js');
   const kokoroWeatherDetailModal = read('screens/analysisReport/KokoroWeatherDetailModal.js');
@@ -1236,104 +1232,68 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
 
   assertIncludes(analysis, [
     'AnalysisContentFirstScreen',
-    'AnalysisEmotionScreen',
     'AnalysisSelfStructureScreen',
-    'AnalysisInputHistoryMenuScreen',
-    'AnalysisReportHistoryScreen',
-    'AnalysisReportViewerScreen',
     'SelfStructureReportHistoryScreen',
     'SelfStructureReportViewerScreen',
-    'TodayQuestionHistoryScreen',
-    'onOpenPieceDeepDive',
-    'from "./analysis/analysisRouteModel";',
+    'setGraphOpenRequest({ period: { daily: "today", weekly: "week", monthly: "month" }[nextReportType] })',
+    'graphOpenRequest={graphOpenRequest}',
     'from "./analysis/useAnalysisRouteState";',
     'from "./analysis/useAnalysisUnreadBadges";',
     'from "./analysis/useAnalysisReportActions";',
     'from "./analysis/useAnalysisSelfStructureActions";',
-    'from "./analysisReport/kokoroWeatherFormatters";',
     'from "./analysis/useAnalysisTutorialOverlay";',
   ], 'AnalysisScreen.js');
+  assertNotIncludes(analysis + analysisContentFirst, [
+    '<AnalysisReportHistoryScreen', '<AnalysisReportViewerScreen', '<AnalysisEmotionScreen',
+  ], 'active Analysis routes avoid emotion report UI');
 
   assertIncludes(analysisRouteModel, [
     'export const ROUTE_HOME = "home";',
-    'export const ROUTE_EMOTION_ANALYSIS = "emotionAnalysis";',
     'export const ROUTE_SELF_STRUCTURE = "selfStructure";',
     'export const ROUTE_INPUT_HISTORY = "inputHistory";',
-    'export function normalizeAnalysisReportType',
     'export function isAnalysisReportType',
     'export function formatLatestUpdateLabel',
     'export function isAnalysisMenuRoute',
-    'daily: "こころ天気（日）"',
-    'weekly: "こころ天気（週）"',
-    'monthly: "こころ天気（月）"',
   ], 'analysisRouteModel.js');
 
   assertIncludes(analysisRouteState, [
     'export function useAnalysisRouteState',
     'const [route, setRoute] = useState(ROUTE_HOME);',
-    'const [reportType, setReportType] = useState("weekly");',
     'clearExternalOpenParams',
   ], 'useAnalysisRouteState.js');
 
   assertIncludes(analysisUnreadBadges, [
     'export function useAnalysisUnreadBadges',
-    'getFeatureUnread("Analysis", "daily")',
-    'getFeatureUnread("Analysis", "weekly")',
-    'getFeatureUnread("Analysis", "monthly")',
     'getFeatureUnread("Analysis", "selfStructure")',
     'refreshUnreadBadges',
     'markSelfStructureLatestSeen',
-    'apiPost("/report-reads/mark"',
   ], 'useAnalysisUnreadBadges.js');
+  assertNotIncludes(analysisUnreadBadges, [
+    'reportsUnreadStatus', 'apiPost("/report-reads/mark"',
+  ], 'old emotion report reads are no longer fetched or marked');
 
   assertIncludes(analysisReportActions, [
     'export function useAnalysisReportActions',
-    'fetchLatestReadyReport',
     'refreshHomeSummaries',
-    'refreshCurrentWeatherSummary',
-    'readCachedAnalysisLatestReport',
-    'writeCachedAnalysisLatestReport',
-    'cocolon:kokoroWeatherLatestReport:v1',
-    'isKokoroWeatherReportRecord',
-    'ANALYSIS_WIRE.routes.reportsReady',
-    'getTodayQuestionHistory',
-    'currentWeather',
-    'homeSummary.current_weather',
-    'applyHomeSummaryMeta',
-  ], 'useAnalysisReportActions.js');
-
-  assertIncludes(analysis, [
-    'currentWeather={entryMeta.currentWeather}',
-    'consumeAnalysisHomeSummaryDirty',
-    'refreshCurrentWeatherSummary',
-  ], 'AnalysisScreen.js current weather prop');
+    'SELF_STRUCTURE_WIRE.routes.latestStatus',
+  ], 'useAnalysisReportActions.js preserves map freshness');
+  assertNotIncludes(analysisReportActions, [
+    'reportsReady', 'kokoroWeatherLatestReport',
+  ], 'old report contents are no longer fetched or cached');
 
   assertIncludes(analysisContentFirst, [
-    'KokoroWeatherCurrentCard',
-    'こころ天気',
-    'currentWeather',
-    'isKokoroWeatherReportRecord',
-    'handleOpenPreviousKokoroWeather',
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-  ], 'AnalysisContentFirstScreen.js current weather card guard');
+    'KokoroWeatherTimeline',
+    'こころグラフ',
+    'sampleData={isTutorialMode',
+  ], 'AnalysisContentFirstScreen.js shares the graph with the tutorial');
 
   assertIncludes(kokoroWeatherCurrentCard, [
     'export default function KokoroWeatherCurrentCard',
     '今日はまだ観測がありません',
-    '前回のこころ天気を見る',
+    '前回のこころグラフを見る',
     '観測メモあり',
     'こころ温度',
   ], 'KokoroWeatherCurrentCard.js split guard');
-
-  assertIncludes(analysisEmotion, [
-    '感情分析のこころ天気を選んでください。',
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    '過去のこころ天気を振り返ります',
-  ], 'AnalysisEmotionScreen.js Phase 5 copy guard');
 
   assertIncludes(kokoroWeatherForecastStrip, [
     'export default function KokoroWeatherForecastStrip',
@@ -1350,8 +1310,8 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'export default function KokoroWeatherDetailModal',
     'Modal',
     'showsHorizontalScrollIndicator={false}',
-    '時間帯別こころ天気',
-    'こころ天気詳細を閉じる',
+    '時間帯別こころグラフ',
+    'こころグラフ詳細を閉じる',
   ], 'KokoroWeatherDetailModal.js split guard');
 
   assertIncludes(kokoroWeatherFormatters, [
@@ -1371,13 +1331,13 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'buildAnalysisReportDetailPath',
     'fetchKokoroWeatherReportDetail',
     'extractReadyItems(json).filter(isKokoroWeatherReportRecord)',
-    'このこころ天気は現在の表示対象外です。',
+    'このこころグラフは現在の表示対象外です。',
   ], 'AnalysisReportHistoryScreen.js kokoro weather fail-closed guard');
 
   assertIncludes(analysisReportViewer, [
     'isKokoroWeatherDisplayTarget',
-    'このこころ天気は現在の表示対象外です',
-    'こころ天気として成立していない旧レポートは表示しません。',
+    'このこころグラフは現在の表示対象外です',
+    'こころグラフとして成立していない旧レポートは表示しません。',
     '!isKokoroWeatherDisplayTarget || reportType !== "weekly"',
   ], 'AnalysisReportViewerScreen.js kokoro weather fail-closed guard');
 
@@ -1425,7 +1385,6 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
   const nexusTabBar = read('screens/nexus/NexusTabBar.js');
   const nexusPieceFeedSection = read('screens/nexus/NexusPieceFeedSection.js');
   const nexusEmotionLogSection = read('screens/nexus/NexusEmotionLogSection.js');
-  const nexusRecommendSection = read('screens/nexus/NexusRecommendSection.js');
   const nexusHistorySection = read('screens/nexus/NexusHistorySection.js');
   const nexusOwnerPickerModal = read('screens/nexus/NexusOwnerPickerModal.js');
   const nexusTodayEmotionSummary = read('screens/nexus/NexusTodayEmotionSummary.js');
@@ -1455,13 +1414,11 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
 
   assertIncludes(nexus, [
     'rankingState',
-    'recommendState',
     'historyState',
     'historyOrder',
     'getNexusResonancePieces',
     'setUnread("EmotionLog", "feed"',
     'activeTab === "history"',
-    'activeTab === "recommend"',
     'TUTORIAL_TOTAL_STEPS',
   ], 'NexusScreen.js split guard');
 
@@ -1545,11 +1502,9 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
   const piece = read('screens/PieceScreen.js');
   const pieceGlobalSummary = read('screens/piece/usePieceHomeGlobalSummary.js');
   const pieceTutorial = read('screens/piece/usePieceHomeTutorial.js');
-  const pieceRecommend = read('screens/piece/usePieceRecommendUsers.js');
   const pieceHomeActionCard = read('screens/piece/PieceHomeActionCard.js');
   const pieceHomeMainActions = read('screens/piece/PieceHomeMainActions.js');
   const pieceTutorialCreateModal = read('screens/piece/PieceTutorialCreateModal.js');
-  const pieceRecommendModal = read('screens/piece/PieceRecommendModal.js');
   const nexus = read('screens/NexusScreen.js');
   const library = read('screens/PieceLibraryScreen.js');
 
@@ -1561,10 +1516,8 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
   assertIncludes(piece, [
     'from "./piece/usePieceHomeGlobalSummary";',
     'from "./piece/usePieceHomeTutorial";',
-    'from "./piece/usePieceRecommendUsers";',
     'PieceHomeMainActions',
     'PieceTutorialCreateModal',
-    'PieceRecommendModal',
     'navigation.navigate("PieceHistory")',
     'navigation.navigate("EmotionLog")',
     'navigation.navigate("CocolonGuide", { screenId: "piece" })',
@@ -1592,16 +1545,6 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     'const routeName = resolvePieceLibraryRouteName(navigation)',
   ], 'usePieceHomeTutorial.js');
 
-  assertIncludes(pieceRecommend, [
-    'export function usePieceRecommendUsers',
-    'PIECE_WIRE.routes.recommendUsers',
-    'getPrefetchEntryFresh("Piece", "recoUsers"',
-    'setPrefetch("Piece", "recoUsers"',
-    'supabase.auth.getSession',
-    'resolveAccountRouteName',
-    'resetRecommendState',
-  ], 'usePieceRecommendUsers.js');
-
   assertIncludes(pieceHomeActionCard, [
     'export default function PieceHomeActionCard',
     'MenuActionCard',
@@ -1615,9 +1558,9 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     '今日の全体活動',
     'ピース一覧を開く',
     '感情ログを開く',
-    '新しいユーザーを探す',
     '履歴を確認する',
   ], 'PieceHomeMainActions.js');
+  assertNotIncludes(pieceHomeMainActions, ['新しいユーザーを探す', 'onOpenRecommend'], 'retired Piece recommendations');
 
   assertIncludes(pieceTutorialCreateModal, [
     'export default function PieceTutorialCreateModal',
@@ -1627,14 +1570,6 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     'onSave',
     'onStartShouldSetResponderCapture',
   ], 'PieceTutorialCreateModal.js');
-
-  assertIncludes(pieceRecommendModal, [
-    'export default function PieceRecommendModal',
-    'readShareCode',
-    'onRefresh',
-    'onOpenAccount(uid)',
-    'アクティブユーザー',
-  ], 'PieceRecommendModal.js');
 
   assertIncludes(nexus, [
     'getNexusPieces',
@@ -1684,8 +1619,8 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
     'TUTORIAL_FOLLOWED_USER_PIECE',
     'TUTORIAL_WATASHI_MAP',
     'TUTORIAL_WATASHI_MAP_PREVIEW',
-    'Emlisの観測',
-    'こころ天気',
+    'Emlisからの返答',
+    'こころグラフ',
     'わたしマップ',
     'ピース',
     '4つの形で受け取れます',
@@ -1693,7 +1628,7 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
 });
 
 
-test('AccountScreen keeps profile, follow, visibility, subscription, and ID search boundaries mounted through Phase 7 split modules', () => {
+test('AccountScreen keeps profile, follow, subscription, and ID search without public-settings controls', () => {
   const account = read('screens/AccountScreen.js');
   const accountModel = read('screens/account/accountModel.js');
   const accountProfileHook = read('screens/account/useAccountProfile.js');
@@ -1705,22 +1640,22 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
   const accountIdSearchSection = read('screens/account/AccountIdSearchSection.js');
   const accountStatusSection = read('screens/account/AccountStatusSection.js');
   const accountNameEditModal = read('screens/account/AccountNameEditModal.js');
-  const accountVisibilitySection = read('screens/account/AccountVisibilitySection.js');
 
   assertIncludes(account, [
     'from "./account/accountModel";',
     'from "./account/useAccountProfile";',
     'from "./account/useAccountFollowState";',
-    'from "./account/useAccountVisibility";',
     'from "./account/useAccountSubscription";',
     'from "./account/useAccountIdSearch";',
     'AccountProfileSection',
     'AccountIdSearchSection',
     'AccountStatusSection',
     'AccountNameEditModal',
-    'AccountVisibilitySection',
     'readShareCodePublic',
+    'const canShowShareCode = !user || isSelf || isShareCodePublic;',
   ], 'AccountScreen.js');
+  assertNotIncludes(account, ['useAccountVisibility', 'AccountVisibilitySection', 'openAccountSettings', 'isPrivateAccount'],
+    'The account screen has no visibility-settings control');
 
   assertIncludes(accountModel, [
     'export const PANEL_MIN_HEIGHT = 695;',
@@ -1736,15 +1671,16 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
 
   assertIncludes(accountProfileHook, [
     'export function useAccountProfile',
-    'apiGet("/account/profile/me")',
+    'apiGet("/account/profile/me", request)',
     '/account/display-name/availability',
     'apiPatch("/account/profile/me"',
-    'supabase.auth.updateUser',
+    'expectedUserId: user?.id',
     'Share.share({ message: code })',
     'https://emlis.app/u/${code}',
     'readShareCode',
     'readConnectCode',
   ], 'useAccountProfile.js');
+  assert.doesNotMatch(accountProfileHook, /supabase\.auth\.updateUser\(/, 'profile edits must not retarget a current-session metadata write');
 
   assertIncludes(accountFollowHook, [
     'export function useAccountFollowState',
@@ -1790,10 +1726,15 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
     'フォロー数',
     'フォロワー数',
     'ユーザーID',
+    'プロフィールURLを共有',
+    'ユーザーIDを共有',
+    '{canShowShareCode ? (',
     'onToggleFollow',
     'openFollowList("following")',
     'openFollowList("followers")',
   ], 'AccountProfileSection.js');
+  assertNotIncludes(accountProfileSection, ['アカウント設定', 'settings-outline', 'shield-outline', 'isPrivateAccount'],
+    'The account profile shows no settings button or private shield');
 
   assertIncludes(accountIdSearchSection, [
     'export default function AccountIdSearchSection',
@@ -1818,14 +1759,6 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
     'saveDisplayName',
   ], 'AccountNameEditModal.js');
 
-  assertIncludes(accountVisibilitySection, [
-    'export default function AccountVisibilitySection',
-    'VisibilitySettingRow',
-    'ピースの公開設定',
-    'ランキング表示設定',
-    'ユーザーID表示設定',
-    'ACCOUNT_WIRE.fields.shareCodePublic',
-  ], 'AccountVisibilitySection.js');
 });
 
 test('SubscriptionSelectScreen keeps revenue-critical IAP and sales flag guards mounted', () => {
@@ -1847,20 +1780,6 @@ test('SubscriptionSelectScreen keeps revenue-critical IAP and sales flag guards 
   ], 'SubscriptionSelectScreen.js');
 
   assertRegex(subscription, /Alert\.alert\([\s\S]*現在受付を停止しています/, 'sales-disabled alert guard');
-});
-
-test('TodayQuestionHistoryScreen keeps personal followup source-anchor display and answer editing paths', () => {
-  const history = read('screens/TodayQuestionHistoryScreen.js');
-
-  assertIncludes(history, [
-    'source_anchor_summary',
-    'question_origin',
-    'personal_followup',
-    '入力: 「',
-    'TextInput',
-    'optionalFreeTextInput',
-    'Analysisに戻る',
-  ], 'TodayQuestionHistoryScreen.js');
 });
 
 test('Production monitoring captures RN runtime and API failures without changing product routes', () => {
@@ -1970,7 +1889,6 @@ test('Phase 10 Emlis observation release gate keeps regression and release-ready
     'observationStatus: inputFeedbackAI?.observation_status',
     'if (!openedObservation)',
     'showToast(`記録しました',
-    'showToast("ピースを生成しました")',
     'completeTutorialAfterReply();',
   ], 'InputScreen.js non-passed observation fallback behavior');
 
@@ -2801,17 +2719,17 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
   assertIncludes(currentCard, [
     'status === "no_observation"',
     '今日はまだ観測がありません',
-    '前回のこころ天気を見る',
+    '前回のこころグラフを見る',
     'replace(/℃/g, "°")',
     '今日0:00から現在までの入力をもとに、こころの状態を観測します。',
   ], 'KokoroWeatherCurrentCard.js no-observation and degree display contract');
 
   assertIncludes(forecastStrip, [
     'export default function KokoroWeatherForecastStrip',
-    'こころ天気図',
+    'こころグラフ',
     '最高',
     '最低',
-    '対象をタップすると、時間帯別のこころ天気を横にスクロールして確認できます。',
+    '対象をタップすると、時間帯別のこころグラフを横にスクロールして確認できます。',
     '<ScrollView horizontal showsHorizontalScrollIndicator={false}>',
     'disabled={isDisabled}',
     '観測少なめ',
@@ -2819,19 +2737,19 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
 
   assertIncludes(detailModal, [
     'export default function KokoroWeatherDetailModal',
-    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose}>',
+    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>',
     'onPress={onClose}',
-    'accessibilityLabel="こころ天気の詳細を閉じる"',
-    '時間帯別こころ天気',
+    'accessibilityLabel="こころグラフの詳細を閉じる"',
+    '時間帯別こころグラフ',
     '<ScrollView horizontal showsHorizontalScrollIndicator={false}>',
-    '時間帯別のこころ天気はまだありません。',
+    '時間帯別のこころグラフはまだありません。',
   ], 'KokoroWeatherDetailModal.js modal and horizontal bucket contract');
 
   assertIncludes(formatters, [
     'export const KOKORO_WEATHER_VERSION = "kokoro.weather.v1";',
-    'daily: "こころ天気（日）"',
-    'weekly: "こころ天気（週）"',
-    'monthly: "こころ天気（月）"',
+    'daily: "こころグラフ（日）"',
+    'weekly: "こころグラフ（週）"',
+    'monthly: "こころグラフ（月）"',
     'text.endsWith("°")',
     'replace(/℃/g, "°")',
     'weather.status === "no_observation"',
@@ -2857,74 +2775,55 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
   ], 'kokoro weather frontend must keep observation wording non-warning and non-judgmental');
 });
 
-test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves plan/paywall boundaries', () => {
+test('Kokoro graph uses live periods for all plans and excludes the old report from guidance and paid plans', () => {
   const contentFirst = read('screens/AnalysisContentFirstScreen.js');
-  const emotionMenu = read('screens/AnalysisEmotionScreen.js');
-  const history = read('screens/AnalysisReportHistoryScreen.js');
-  const accessPolicy = read('screens/analysisReport/analysisReportAccessPolicy.js');
+  const graph = read('screens/analysisReport/KokoroWeatherTimeline.js');
+  const live = read('screens/analysis/useKokoroWeather.js');
   const guide = read('guide/guidesJa.js');
   const terms = read('guide/termsJa.js');
   const tutorialData = read('tutorial/tutorialScenarioData.js');
-  const tutorialFixtures = read('tutorial/generated/tutorialFixtures.generated.json');
+  const catalog = read('lib/iap/iapRuntimeCatalog.js');
+  const settings = read('screens/SettingsAppSettingsScreen.js');
+  const tabs = read('navigation/MainTabs.js');
 
   assertIncludes(contentFirst, [
-    'KokoroWeatherCurrentCard',
-    'currentWeather',
-    'isKokoroWeatherReportRecord',
-    'handleOpenPreviousKokoroWeather',
-    '{ key: "daily", label: "こころ天気（日）" }',
-    '{ key: "weekly", label: "こころ天気（週）" }',
-    '{ key: "monthly", label: "こころ天気（月）" }',
-  ], 'AnalysisContentFirstScreen.js top UI and tab label contract');
+    'KokoroWeatherTimeline',
+    'graphPeriod',
+    'sampleData={isTutorialMode',
+  ], 'live chart is the Analysis emotion screen');
 
-  assertIncludes(emotionMenu, [
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    '最新のこころ天気（日/週/月）を確認します',
-    '過去のこころ天気を振り返ります',
-  ], 'AnalysisEmotionScreen.js kokoro weather copy contract');
+  assertIncludes(graph, [
+    'key: "today", label: "今日"',
+    'key: "week", label: "週"',
+    'key: "month", label: "月"',
+    'useKokoroWeather',
+  ], 'live day, week and month tabs');
 
-  assertIncludes(history, [
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    'Freeプランの',
+  assertIncludes(live, ['ANALYSIS_WIRE.routes.kokoroWeather'], 'graph reads directly from its live endpoint');
+  assertNotIncludes(contentFirst + graph + live, [
+    'handleOpenCurrentEmotionHistory',
+    'AnalysisReportViewerScreen',
     'canViewAnalysisFullText',
-  ], 'AnalysisReportHistoryScreen.js history and plan boundary contract');
-
-  assertIncludes(accessPolicy, [
-    'canViewAnalysisFullText',
-    'tier === "plus" || tier === "premium"',
-    'canViewAnalysisDeep',
-    'tier === "premium"',
-    'isEmotionReportType',
-    'reportType === "daily" || reportType === "weekly" || reportType === "monthly"',
-  ], 'analysisReportAccessPolicy.js keeps existing Free/Plus/Premium boundaries');
+    'data.summary.description',
+    'selected.description',
+  ], 'live graphs have no report history, report body or paid tier gate');
 
   assertIncludes(guide, [
-    'こころ天気（日）・こころ天気（週）・こころ天気（月）',
-    '感情分析のこころ天気',
-    'わたしマップの入口はFreeプランでも見られます。Plusプラン以上では、役割スイッチの一覧、よく通るルート、詳しい自己分析レポートを読めます。',
-  ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
+    'こころグラフ（日）・こころグラフ（週）・こころグラフ（月）',
+    '今日の感情',
+    '日・週・月のグラフは全プランで見られます。',
+    '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
+  ], 'guide describes the Free graphs and retains the map');
 
   assertIncludes(terms, [
-    'こころ天気',
-    '感情入力をもとに、こころ天気（日/週/月）を見る分析です。',
-    '感情入力をもとに、こころ天気（日/週/月）を見る分析です。',
-  ], 'guide/termsJa.js kokoro weather terms contract');
+    'こころグラフ',
+    '感情入力をもとに、こころグラフ（日/週/月）を見る分析です。',
+  ], 'guide/termsJa.js graph terms');
 
-  assertIncludes(tutorialData, [
-    'こころ天気',
-    'こころ天気（日/週/月）',
-  ], 'tutorialScenarioData.js kokoro weather tutorial labels');
-
-  assertIncludes(tutorialFixtures, [
-    'kokoroWeather',
-    '"report_type": "daily"',
-    '"report_type": "weekly"',
-    '"report_type": "monthly"',
-  ], 'tutorialFixtures.generated.json contains kokoroWeather examples');
+  assertIncludes(tutorialData, ['export const TUTORIAL_KOKORO_WEATHER'], 'tutorial has illustrative graph data');
+  assertNotIncludes(catalog, ['こころグラフ（日/週/月）の本文', 'こころグラフ（日/週/月）の変化パターン'], 'the paid plans omit legacy report benefits');
+  assertNotIncludes(settings, ['レポート配布通知', 'getReportDistributionSettings'], 'old distribution settings are absent');
+  assertNotIncludes(tabs, ['ANALYSIS_WIRE.routes.reportsUnreadStatus'], 'old unseen reports are not fetched in the tab bar');
 
   const selfStructureFiles = [
     read('screens/AnalysisSelfStructureScreen.js'),
@@ -2934,10 +2833,10 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   ].join('\n');
 
   assertNotIncludes(selfStructureFiles, [
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    '今のこころ天気',
+    'こころグラフ（日）',
+    'こころグラフ（週）',
+    'こころグラフ（月）',
+    '今日の感情',
   ], 'Self Structure surfaces must not be kokoro-weatherized');
 });
 
@@ -2971,7 +2870,7 @@ test('Watashi Map Phase 3 updates top UI labels and keeps Free latest entry open
     'requiresPaid = false',
     'targetRoute: ROUTE_SELF_REPORT_GENERATE',
     'requiresPaid: false',
-    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+    '月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。',
   ], 'Self structure actions keep latest and history route open while screens gate detail');
 
   assertIncludes(generate, [
@@ -3069,9 +2968,9 @@ test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
     'export function canViewWatashiMapHistory',
     'export function canViewWatashiMapDetailReport',
     'export function canExportWatashiMapPdf',
-    '履歴の閲覧範囲：Freeは最新概要のみ',
-    '履歴の閲覧範囲：直近1年分',
-    '履歴の閲覧範囲：無制限',
+    '月次マップの閲覧範囲：直近2回分',
+    '月次マップの閲覧範囲：直近12回分',
+    '月次マップの閲覧範囲：全期間',
     'Freeプランでは今のわたしマップ概要を見られます。過去の詳しい自己分析レポートの履歴はPlusプラン以上で読めます。',
     '長期の変化と深い分かれ道はPremiumプランで見られます。',
   ], 'watashiMapAccessPolicy.js defines Phase 5 tier boundaries');
@@ -3079,7 +2978,7 @@ test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
   assertIncludes(actions, [
     'openSelfReportHistory',
     'requiresPaid: false',
-    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+    '月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。',
   ], 'useAnalysisSelfStructureActions.js lets history screen own Free/Plus/Premium gating');
 
   assertIncludes(analysis, [
@@ -3126,7 +3025,6 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
   const iap = read('lib/iap/iapRuntimeCatalog.js');
   const tutorialOverlay = read('screens/analysis/useAnalysisTutorialOverlay.js');
   const mainTabs = read('navigation/MainTabs.js');
-  const todayQuestionHistory = read('screens/TodayQuestionHistoryScreen.js');
   const crossLink = read('screens/AnalysisCrossLinkSection.js');
   const access = read('components/selfStructure/watashiMapAccessPolicy.js');
   const renderer = read('components/selfStructure/WatashiMapRenderer.js');
@@ -3164,10 +3062,8 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     '主要な4つの要素',
   ], 'Tutorial flow and Nexus handoff explain four tutorial experiences');
 
-  assertIncludes(todayQuestionHistory + mainTabs + crossLink, [
-    '今のわたしマップが更新されました',
-    '回答を更新しました。わたしマップに反映されます。',
-    '過去の回答を編集すると、わたしマップに反映されます。',
+  assertIncludes(mainTabs + crossLink, [
+    'わたしマップが更新されました',
     '【わたしマップの深掘り候補】',
     'ピースを開いて「わたしマップ」または「ピースライブラリ」',
     'わたしマップやピースで触れると良さそうな論点',
@@ -3178,14 +3074,14 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     'reading: "わたしマップ"',
     'これは性格タイプではなく、入力から見えた場面ごとの動き方です。',
     'わたしマップで役割スイッチ',
-    '履歴の閲覧範囲：Freeは最新概要のみ',
+    '月次マップの閲覧範囲：直近2回分',
     '長期の変化と深い分かれ道はPremiumプランで見られます。',
     'report_mode_label',
     'buildPalette(colors, isDark)',
     'lockCard',
   ], 'Copy, plan lock text, formatter payload, and visual hooks stay aligned');
 
-  assertNotIncludes(todayQuestionHistory + mainTabs + crossLink, [
+  assertNotIncludes(mainTabs + crossLink, [
     '自己構造分析レポートが更新されました',
     '自己構造分析に反映されます',
     '【自己構造トピック候補】',
@@ -4331,4 +4227,5 @@ test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed p
   assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
 });
+
 

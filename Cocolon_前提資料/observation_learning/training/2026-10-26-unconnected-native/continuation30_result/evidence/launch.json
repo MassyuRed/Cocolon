@@ -1,0 +1,21 @@
+{
+  "status": "LAUNCHED_ONCE",
+  "pid": 67437,
+  "started_unix": 1793065601.5190375,
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "command": [
+    "/usr/local/bin/python",
+    "-u",
+    "-B",
+    "/workspace/cocolon_native15_continuation30_pack_20261027/run_native15_continuation30.py",
+    "--pack",
+    "/workspace/cocolon_native15_continuation30_pack_20261027",
+    "--execute",
+    "--source-commit",
+    "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa"
+  ],
+  "plan_sha256": "58b0644880d9c9459b467bf55420ad2c10c0806ed8048a9289642438abdfbee7",
+  "retry": false,
+  "max_seconds": 2700,
+  "max_process_usd": 0.21
+}

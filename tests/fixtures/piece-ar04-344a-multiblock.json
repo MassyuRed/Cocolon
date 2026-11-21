@@ -1,0 +1,304 @@
+{
+  "schema_version": "piece.ar04.recorded_multiblock.v1",
+  "all_fictional": true,
+  "candidate_revision": "piece-lora:344a9defd0c890982d9718805d8b630b5d48719475c998aa9a57ed6df6bfc337",
+  "source_result_sha256": "46ac01f609fdad20b588665ea9625fcaca16f9247a8e24b9407ac06e64512824",
+  "cases": [
+    {
+      "source_case_id": "B53-051",
+      "source_type": "normal",
+      "tier": "premium",
+      "native_case_name": "ar04_344a_past_preference",
+      "expected_block_count": 2,
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "僕は隣人から収穫祭の準備を頼まれなかった。",
+            "僕は農作業が好きだった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-11T17:23:48.207+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
+        "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
+        "preview_id": "55729ab8-9a62-69e7-5239-b2933a14d184",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "1d7f0dece05de252e465044369c8c003d417334334cadf7921921d36c4ca4125"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
+        "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
+        "content_payload": {
+          "body_blocks": [
+            "僕は隣人から収穫祭の準備を頼まれなかった。",
+            "僕は農作業が好きだった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "1d7f0dece05de252e465044369c8c003d417334334cadf7921921d36c4ca4125",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "55729ab8-9a62-69e7-5239-b2933a14d184",
+        "public_id": "piece:55729ab8-9a62-69e7-5239-b2933a14d184",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 2,
+        "saved_at": "2026-11-11T17:13:48.245+09:00",
+        "content_status": "ready"
+      }
+    },
+    {
+      "source_case_id": "B53-007",
+      "source_type": "refined",
+      "tier": "premium",
+      "native_case_name": "ar04_344a_refined_three_blocks",
+      "expected_block_count": 3,
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "誘われたのに、嬉しくなかった。",
+            "私は司書に資料の確認を頼んだ。",
+            "今は、私は悲しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-11T17:24:04.13+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
+        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
+        "preview_id": "1e6d0bcb-b02a-a9b8-19e0-ebd038d9bfbb",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "1d7f0dece05de252e465044369c8c003d417334334cadf7921921d36c4ca4125"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
+        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
+        "content_payload": {
+          "body_blocks": [
+            "誘われたのに、嬉しくなかった。",
+            "私は司書に資料の確認を頼んだ。",
+            "今は、私は悲しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "1e6d0bcb-b02a-a9b8-19e0-ebd038d9bfbb",
+        "public_id": "piece:1e6d0bcb-b02a-a9b8-19e0-ebd038d9bfbb",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 3,
+        "saved_at": "2026-11-11T17:14:04.251+09:00",
+        "content_status": "ready"
+      },
+      "selected_preview": {
+        "content_payload": {
+          "body_blocks": [
+            "誘われたのに、嬉しくなかった。",
+            "私は司書に資料の確認を頼んだ。",
+            "今は、私は悲しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2026-11-11T17:24:04.13+09:00",
+        "format_type": "short_essay",
+        "idempotency_replayed": false,
+        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
+        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
+        "preview_id": "1e6d0bcb-b02a-a9b8-19e0-ebd038d9bfbb",
+        "preview_revision": 2,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "safety_state": "ready",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3"
+      }
+    }
+  ]
+}

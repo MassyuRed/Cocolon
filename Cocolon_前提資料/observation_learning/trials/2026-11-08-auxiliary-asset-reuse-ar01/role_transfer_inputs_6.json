@@ -1,0 +1,135 @@
+{
+  "schema_version": "cocolon.ar01.role_transfer_cases.v1",
+  "status": "FROZEN_ASSISTANT_SYNTHETIC_COMPARISON_INPUTS_NOT_TEACHERS",
+  "created_at_jst": "2026-11-08",
+  "purpose": "旧資産から回収した明示役割の補助が、別題材の本人宛応答で頼む側／頼まれる側、貸す側／借りる側、第三者間と主体省略を保つか比較する。",
+  "provenance": {
+    "author": "Karen",
+    "fictional": true,
+    "user_personal_records_used": false,
+    "prior_evaluation_inputs_rewritten_as_teachers": false,
+    "assistant_response_targets_included": false,
+    "training_use": false,
+    "evaluation_use": "実行後は既使用評価として扱い、未知入力成功へ繰り返し加算しない。"
+  },
+  "input_contract": {
+    "tier": "free",
+    "source_scope": "当回原入力のみ。本人回答・frame feedback・履歴なし。",
+    "created_at": "2026-11-08T18:00:00+09:00",
+    "available_categories": ["生活", "仕事", "趣味", "人間関係", "恋愛", "健康", "学習", "価値観", "人生"],
+    "ordinary_emotions": ["喜び", "悲しみ", "怒り", "不安", "平穏"],
+    "ordinary_strength_values": ["weak", "medium", "strong"],
+    "self_understanding": "自己理解は通常感情と排他的。強度UIなし。保存上のmediumは互換値で、強い／弱いという意味を持たない。",
+    "coverage_limit": "9カテゴリから本文に合うものを選択した6件。9カテゴリ・全感情強度・全入力組合せの網羅試験ではない。"
+  },
+  "review_contract": {
+    "facts_are_response_templates": false,
+    "allowed_omission": "短い受取り・自然な言換え・適切な省略を許す。本文全情報の列挙を要求しない。取り上げた役割・肯否・時点・未確定を変えない。",
+    "quality_judgment": "原入力と実応答を全文で読む。補助witnessや機械NO_CONFLICTを本人宛の自然さ・意味品質の合格へ変換しない。",
+    "actor_omission": "記載されていない経験主体を、記録の所有者や二人称から本人SELFへ確定しない。"
+  },
+  "cases": [
+    {
+      "id": "AR01_ROLE_TRANSFER01_REQUESTER_SELF",
+      "axis": "明示された本人が頼む側",
+      "memo": "返事はもらえたけれど、留守中のことが少し気になっている。",
+      "memo_action": "私は隣人に鉢植えの水やりを頼んだ。",
+      "category": ["生活", "人間関係"],
+      "emotions": ["不安"],
+      "emotion_details": [{"type": "不安", "strength": "weak"}],
+      "expected_meaning_facts": {
+        "requester": "本人（私）",
+        "requested_person": "隣人",
+        "requested_task": "鉢植えの水やり",
+        "written_event": "本人が隣人へ水やりを頼んだ。",
+        "current_state": "返事は得ているが、留守中のことが少し気になる。",
+        "not_established": ["隣人が本人へ水やりを頼んだこと", "水やりの実施・完了", "隣人の気持ちや具体的な返事内容"]
+      }
+    },
+    {
+      "id": "AR01_ROLE_TRANSFER02_REQUESTED_SELF",
+      "axis": "明示された本人が頼まれる側・引受け未決定",
+      "memo": "今は少し迷っている。引き受けるかは、当日の仕事の予定を確かめてから決めたい。",
+      "memo_action": "私は同僚に受付を頼まれた。",
+      "category": ["仕事", "人間関係"],
+      "emotions": ["不安"],
+      "emotion_details": [{"type": "不安", "strength": "weak"}],
+      "expected_meaning_facts": {
+        "requester": "同僚",
+        "requested_person": "本人（私）",
+        "requested_task": "受付",
+        "written_event": "同僚が本人へ受付を頼んだ。",
+        "current_state": "本人は少し迷い、当日の仕事の予定を確かめてから引受けを決めたい。",
+        "not_established": ["本人が同僚へ受付を頼んだこと", "本人が依頼を承諾・拒否したこと", "受付を実行・完了したこと", "断らなければならないという義務"]
+      }
+    },
+    {
+      "id": "AR01_ROLE_TRANSFER03_LENDER_SELF",
+      "axis": "貸した本人と借りた友人・喜びと気掛かりの併存",
+      "memo": "役に立てたのはうれしい。返してもらう日を決めていないことは、少し気になる。",
+      "memo_action": "私は友人に図鑑を貸した。",
+      "category": ["趣味", "人間関係"],
+      "emotions": ["喜び", "不安"],
+      "emotion_details": [{"type": "喜び", "strength": "medium"}, {"type": "不安", "strength": "weak"}],
+      "expected_meaning_facts": {
+        "lender": "本人（私）",
+        "borrower": "友人",
+        "lent_object": "図鑑",
+        "written_event": "本人から友人へ図鑑を貸した。",
+        "current_state": "本人は役に立てたことをうれしく感じ、返却日未決定が少し気になっている。",
+        "not_established": ["本人が友人から図鑑を借りたこと", "友人が図鑑を返したこと", "返却が遅れている・約束を破ったこと", "友人の喜びや困惑"]
+      }
+    },
+    {
+      "id": "AR01_ROLE_TRANSFER04_BORROWER_SELF",
+      "axis": "借りた本人と貸した先輩・返却は今後の意向",
+      "memo": "棚を直す道具がそろって、ほっとした。返すのは次に会うときのつもり。",
+      "memo_action": "私は先輩から工具を借りた。",
+      "category": ["生活", "人間関係"],
+      "emotions": ["平穏"],
+      "emotion_details": [{"type": "平穏", "strength": "medium"}],
+      "expected_meaning_facts": {
+        "lender": "先輩",
+        "borrower": "本人（私）",
+        "borrowed_object": "工具",
+        "written_event": "本人が先輩から工具を借りた。",
+        "current_state": "道具がそろって本人がほっとしている。次に会うときに返す意向がある。",
+        "not_established": ["本人が先輩へ工具を貸したこと", "返却の実施・完了", "棚の修理の実施・完了", "返却予定について先輩と合意したこと"]
+      }
+    },
+    {
+      "id": "AR01_ROLE_TRANSFER05_THIRD_PARTY_LOAN",
+      "axis": "第三者同士の貸借を本人の行為へ移さない",
+      "memo": "二人のやりとりを見ていただけで、私は借りていない。",
+      "memo_action": "管理人は隣人に脚立を貸した。私は近くにいた。",
+      "category": ["生活", "人間関係"],
+      "emotions": ["自己理解"],
+      "emotion_details": [{"type": "自己理解", "strength": "medium"}],
+      "expected_meaning_facts": {
+        "lender": "管理人",
+        "borrower": "隣人",
+        "lent_object": "脚立",
+        "written_event": "管理人が隣人へ脚立を貸した。",
+        "user_position": "本人は近くで二人のやりとりを見ていた。本人は借りていない。",
+        "not_established": ["本人が管理人から脚立を借りたこと", "本人が隣人へ脚立を貸したこと", "本人の感情・動機・固定的な性格", "自己理解のmediumを通常感情の強さとすること"]
+      }
+    },
+    {
+      "id": "AR01_ROLE_TRANSFER06_UNSTATED_RECIPIENT",
+      "axis": "省略された依頼の受け手を本人へ補完しない",
+      "memo": "誰が頼まれたのかや、引き受けたかどうかは、ここにはまだ書いていない。",
+      "memo_action": "先輩に資料の確認を頼まれた。",
+      "category": ["仕事", "人間関係"],
+      "emotions": ["自己理解"],
+      "emotion_details": [{"type": "自己理解", "strength": "medium"}],
+      "expected_meaning_facts": {
+        "requester": "先輩",
+        "requested_person": "本文では明記されていない（UNSTATED）。本人SELFとは未確定。",
+        "requested_task": "資料の確認",
+        "written_event": "先輩が誰かへ資料の確認を頼んだ。依頼の受け手は未記載。",
+        "current_state": "誰が頼まれたかと引受けの有無は、まだ書いていないと本人が明記している。",
+        "not_established": ["本人が先輩から頼まれたこと", "本人が先輩へ頼んだこと", "依頼を承諾・拒否したこと", "資料確認を実行・完了したこと", "未記載を記憶喪失・不可能・本人の迷いへ変えること"]
+      }
+    }
+  ]
+}

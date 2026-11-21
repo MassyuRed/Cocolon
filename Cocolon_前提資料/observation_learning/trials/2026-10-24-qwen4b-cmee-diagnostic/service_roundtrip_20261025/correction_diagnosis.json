@@ -1,0 +1,83 @@
+{
+  "actual_receipt_status": "INVALID_FORMAT",
+  "raw_sha256": "968552666476d4282e24ed385556a97cbfceac83ffddcb27671f182f96b85501",
+  "finish_reason": "stop",
+  "eos_reached": true,
+  "output_tokens": 1306,
+  "max_new_tokens": 2048,
+  "not_token_limit_truncation": true,
+  "strict_parse_error": "Expecting ',' delimiter: line 2 column 1 (char 4022)",
+  "diagnostic_only_single_closing_brace_parses": true,
+  "diagnostic_top_level_keys": [
+    "candidate"
+  ],
+  "evidence_misnested_under_candidate": true,
+  "updates_missing": true,
+  "unknowns_missing": true,
+  "evidence_slice_matches": 1,
+  "evidence_count": 6,
+  "evidence_checks": [
+    {
+      "index": 0,
+      "source_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+      "field_path": "answer_text_private",
+      "start": 0,
+      "end": 14,
+      "bounds_valid": true,
+      "source_slice_quote_matches": false
+    },
+    {
+      "index": 1,
+      "source_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+      "field_path": "answer_text_private",
+      "start": 15,
+      "end": 26,
+      "bounds_valid": true,
+      "source_slice_quote_matches": false
+    },
+    {
+      "index": 2,
+      "source_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+      "field_path": "answer_text_private",
+      "start": 50,
+      "end": 18,
+      "bounds_valid": false,
+      "source_slice_quote_matches": false
+    },
+    {
+      "index": 3,
+      "source_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+      "field_path": "answer_text_private",
+      "start": 72,
+      "end": 91,
+      "bounds_valid": true,
+      "source_slice_quote_matches": true
+    },
+    {
+      "index": 4,
+      "source_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+      "field_path": "answer_text_private",
+      "start": 38,
+      "end": 15,
+      "bounds_valid": false,
+      "source_slice_quote_matches": false
+    },
+    {
+      "index": 5,
+      "source_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+      "field_path": "answer_text_private",
+      "start": 50,
+      "end": 91,
+      "bounds_valid": true,
+      "source_slice_quote_matches": false
+    }
+  ],
+  "all_evidence_bound_to_answer_uuid": true,
+  "new_guidance_and_joint_repair_claims_missing": true,
+  "surface_bindings_use_integer_instead_of_string_refs": true,
+  "repaired_raw_saved_or_adopted": false,
+  "model_raw_bytes_unchanged": true,
+  "semantic_success_claim": false,
+  "next": "Compare fixed teaching messages/prior with real service messages; prepare existing chair teaching under multiple valid service IDs/times/prior refs and validate in existing CMEE on CPU before any new training plan. UUID alone is not established as the cause.",
+  "new_observation_session_required_for_this_failure": false
+}

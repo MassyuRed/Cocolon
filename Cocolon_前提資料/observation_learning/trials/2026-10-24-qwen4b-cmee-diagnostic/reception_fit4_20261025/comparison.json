@@ -1,0 +1,23 @@
+{
+  "candidate_accepted": false,
+  "reason": "No body improvement: correction reception still rejected",
+  "meaning_before": 2,
+  "meaning_after": 2,
+  "body_before": 1,
+  "body_after": 1,
+  "raw_text_unchanged": [
+    true,
+    true
+  ],
+  "parsed_packet_unchanged": [
+    true,
+    true
+  ],
+  "selected_adapter_revision": "a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6",
+  "rejected_candidate_adapter_revision": "e3743d6ba5dd715868a5e41d568a1bddb57b307f79a87fdd385eb90d03837d02",
+  "new_model_calls": 2,
+  "training_updates": 4,
+  "additional_retry": 0,
+  "database_operations": 0,
+  "pod_stopped": false
+}

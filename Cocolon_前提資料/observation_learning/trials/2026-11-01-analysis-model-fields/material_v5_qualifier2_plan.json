@@ -1,0 +1,61 @@
+{
+  "status": "BOUNDED_TWO_QUALIFIER_OBJECT_RESEARCH_PLAN",
+  "date_jst": "2026-11-05",
+  "parent_result_commit": "3b3e3dd2369a211772a7b2c9eaa769efd92774a9",
+  "parent_archive_id": "libfile_70c4e57dc7b881919451c025885fcdc5",
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "profile": "selected_material.v5",
+  "runner": "material_v5_qualifier2_trial.py",
+  "runner_sha256": "06b31fc677e247812ef0326325c0e3c797f06192089099b321269ba162eb8cea",
+  "research_initial_weights_sha256": "0587db632df33896d853191816106f13ef41e91440f19fdf08025f587ac3e99f",
+  "research_initial_config_sha256": "a36e96af06b79cf1b2b9b36b528ee06b05cf82d21b7b4872f25d2d07aa9d0269",
+  "explicit_research_initial_reselection_not_normal_or_automatic_adoption": true,
+  "fresh_adamw_not_optimizer_resume": true,
+  "all16_targets_messages_order_lr_seed_clip_unchanged": true,
+  "selected_row": "RU02",
+  "selected_qualifiers": [
+    "WRITTEN_REASON.REASON_MARKER",
+    "ATTRIBUTIVE_CONTENT.NEGATION"
+  ],
+  "include_preceding_comma": true,
+  "expected_assistant_character_spans": [
+    [
+      237,
+      275
+    ],
+    [
+      426,
+      461
+    ]
+  ],
+  "selection": "Full rendered IDs must equal inherited encoded IDs. Intersecting token positions are shifted by prompt length to causal CE indices. Deduplicated token union; boundary overlaps recorded.",
+  "objective": "All16 full-target mean CE plus coefficient1 mean CE on the union of both qualifier object spans, only for RU02. No new teacher or output repair.",
+  "coefficient": 1.0,
+  "already_matching_retain_full_ce_only": [
+    "AT04",
+    "AT11",
+    "AT17",
+    "AT24"
+  ],
+  "model_loads": 2,
+  "diagnostic_model_loads": 0,
+  "diagnostic_forwards": 0,
+  "updates": 16,
+  "measurement_forwards": 32,
+  "new_generations": 30,
+  "reused_before_responses": 30,
+  "max_seconds_from_run_start": 900,
+  "termination_allowance_seconds": 30,
+  "previous_display_usd_hour": 0.29,
+  "processing_reference_upper_usd": 0.074917,
+  "preparation_retrieval_rental_tax_separate": true,
+  "legacy_pack_execution_metadata_not_current": true,
+  "single_trial_no_retry_or_coefficient_search": true,
+  "acceptance": "Read all30 source/raw; reason marker and attributive negation correctly bound together, no wrong modifiers or lost time/unknown; retain AT4 matches and all19 graph/text/diagram. Loss alone is not success.",
+  "no_new_prompt_gold_decoder_gate_or_product_change": true,
+  "known_teacher_replay_not_unseen_transfer": true,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "typed_scope_or_normal_ensure_changed": false,
+  "cpu_metadata_repair": "Initial CPU-only pass overwrote elapsed-time start with a rendered-character offset. Rename only the character-offset variables, preserve first CPU report/runner, then reprepare once before any model execution. Token selection and gold unchanged."
+}

@@ -1,0 +1,120 @@
+{
+  "schema": "ar01.target_epistemic.actual_summary.v1",
+  "date_jst": "2026-11-09",
+  "status": "RESEARCH_IMPLEMENTED_ACTUAL_MODEL_NOT_ADOPTED_AR01_IN_PROGRESS",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "api_source_commit_unchanged": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+  "inputs": 8,
+  "new_source_rows": 0,
+  "source_subset_of_authorized16": true,
+  "max_unique_generations": 20,
+  "actual_unique_generations": 18,
+  "baseline_body_calls": 8,
+  "control_body_calls": 4,
+  "initial_semantic_calls": 4,
+  "flat_revision_semantic_calls": 2,
+  "supported_target_candidate_body_calls": 0,
+  "all_http200_stop": true,
+  "cumulative_comparison_processing_seconds": 83.68176182289608,
+  "comparison_seconds_excludes_transfer_CPU_packaging_recovery_and_human_read": true,
+  "semantic_admitted": 0,
+  "semantic_rejected": 6,
+  "initial_receipt_statuses": {
+    "INVALID_FORMAT": 4
+  },
+  "flat_receipt_statuses": {
+    "INVALID_EVIDENCE": 2
+  },
+  "actual_candidates_reaching_independent_target_status_validator": 0,
+  "normal_adoption": false,
+  "actual_target_status_to_author_success": false,
+  "source_silent_unknown_inference": false,
+  "normal_false_material_exact_prior_baseline_all": true,
+  "unchanged_control_message_and_body_pairs": 4,
+  "tokenizer_max_actual_input_tokens": 680,
+  "tokenizer_max_preflight_input_tokens": 680,
+  "truncation": false,
+  "training_updates": 0,
+  "new_model_loads": 0,
+  "provider_retries": 0,
+  "duplicate_model_requests": 0,
+  "shared_server_pid": 26784,
+  "server_sha256": "f95fc7ce13ce197916b753b7cebb3946243225a0139d40e528908d62e27b2371",
+  "shared_server_PID_source_Analysis_weights_unchanged": true,
+  "health_http_status": 200,
+  "cpu_tests_passed": 368,
+  "cpu_test_seconds": 17.46,
+  "warnings": 1,
+  "cpu_tests_are_not_product_quality_acceptance": true,
+  "mechanical_packaging_failure": {
+    "initial_missing_module": "emlis_semantic_admission",
+    "initial_generation_calls": 0,
+    "next_missing_module": "fixed_rows_reference_wire",
+    "captured_calls_before_stop": 9,
+    "failed_processing_seconds": 21.60096940281801,
+    "old9_preserved_and_replayed_without_model_calls": true,
+    "continuation_new_calls": 7,
+    "continuation_seconds": 41.984564403072,
+    "cumulative_limit_preserved": true
+  },
+  "actual_body_sql_replay": {
+    "baseline_saved_and_reopened": 8,
+    "control_saved_and_reopened": 4,
+    "target_candidate_absent": 4,
+    "all_actual_body_payloads_exact": true,
+    "same_and_new_service_GET_equal": true,
+    "wording_rewrites": 0,
+    "real_database_requests": 0,
+    "new_generations": 0,
+    "retries": 0,
+    "GET_provider_reader_engine_prepare_semantic_calls": 0,
+    "source_and_GET_SQL_unchanged": true,
+    "capture_SQL_source_ref_equal": 1,
+    "capture_user_id_SQL_projection_ref_differences": 11,
+    "actual_semantic_rebind_count": 0
+  },
+  "reader": {
+    "saved_reports": 12,
+    "verdicts": {
+      "UNASSESSED": 12
+    },
+    "total_reply_segments": 23,
+    "checked_reply_segments": 0,
+    "full_reply_semantic_coverage": false
+  },
+  "quality": {
+    "all8sources_12bodies_6semantic_raw_read_by_root_and_independent": true,
+    "blind_generalization": false,
+    "Mash_formal_acceptance": false,
+    "unchanged_controls_not_semantic_passes": true,
+    "observed_blocker": "Flat wire improved; actual model selected wrong core/source field/target/statement. Receipt rejects before new semantic validator. Source-grounded candidate generation remains unproven."
+  },
+  "source_identity": {
+    "base_commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+    "preimage_git_blob_sha1": {
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "26cb04f4c8dfb21397694eff91e52ed6cbe3d392",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "c27fab189fa4a3a19bd8ad6dcb0f281726bb5c61",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "18a4d08af70eff6c8f525204087327e02539dd60"
+    },
+    "source_files": {
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "d541736a4b46286ac214b8f5c71e624e538417ee5f2dd54c7d61b60c45a19f39",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "7378092656069b3104dd6a19488db318f6da8b4f415196c9f4704b2b6f5c3a2d",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "b01f06d10786b0e685135a436a297382807f6f4719cc27e1aa6904cb8403b76b",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_epistemic.py": "68df15c6c72435ab0aefdadc96458ff06c47e71ef52edf076c47cf8a911b2567"
+    },
+    "patch_sha256": "b4cdaf69e8ab955764e102912f331e1a91505d54303751e69a9d4ad47939a40d",
+    "tests_passed": 368,
+    "test_seconds": 17.46,
+    "warnings": 1,
+    "active_adoption": false,
+    "scope": "Research-only explicit target phrase/status; no general event/actor resolver"
+  },
+  "ordinary_API_Render_real_DB_RN_build_changes": 0,
+  "structure_map_delta": "NONE: source-only research patches retained; no active application module/profile/type/wire/persistence change",
+  "next": "Repair source-to-target/statement selection in existing model candidate generation, before current semantic admission and single natural author; do not repeat this prompt-only comparison or synthesize/repair actual model packets.",
+  "remaining": [
+    "AR-01 actual adopted model semantics and ordinary reply quality",
+    "AR-02 through AR-08 necessary asset reuse",
+    "Physical device and Mash formal acceptance"
+  ]
+}

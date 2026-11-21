@@ -1,0 +1,152 @@
+{
+  "status": "COMPLETE_REVIEWED_NOT_ADOPTED",
+  "date": "2026-11-03",
+  "api_commit": "58c47dd8d6512fdd7db5eb413a383925e8b31a87",
+  "prompt_before": "semantic_boundaries.v2",
+  "prompt_after": "semantic_boundaries.v3",
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "research_weights_sha256": "9dc4f947cda74e2c2befea39a978d3ca44295c7526a7ef2db8011a8c63947d4a",
+  "config_sha256": "4776a484561a82593d78f5e79f0e57a503c58d2a9fc54a69fff8890f885a75ce",
+  "training_updates": 0,
+  "nll_measurements": 0,
+  "new_generations": 53,
+  "before_saved_reused": 53,
+  "model_loads": 1,
+  "process_seconds": 474.55314160790294,
+  "all_finished_stop": true,
+  "prior_eighteen_adapter_files_unchanged": true,
+  "ending_compute_empty": true,
+  "raw_unchanged": 44,
+  "raw_changed": 9,
+  "changed_ids": [
+    "CQ04",
+    "HQ04",
+    "MD01",
+    "MD02",
+    "R01",
+    "R06",
+    "YREASON01",
+    "YREASON02",
+    "YREASON03"
+  ],
+  "explicit_reason_contrasts": {
+    "count": 4,
+    "improved_ids": [
+      "HQ04",
+      "YREASON02"
+    ],
+    "still_incomplete_ids": [
+      "YREASON01",
+      "YREASON03"
+    ],
+    "unique_cause_established": false
+  },
+  "new_retention_failures": [
+    "CQ04",
+    "MD01",
+    "MD02",
+    "R01"
+  ],
+  "legal_carrier_recovery": [
+    "R06"
+  ],
+  "candidate_admission": {
+    "before": 52,
+    "after": 51,
+    "count_each": 53,
+    "before_rejected": [
+      "R06"
+    ],
+    "after_rejected": [
+      "MD01",
+      "MD02"
+    ],
+    "admission_is_not_meaning_quality": true
+  },
+  "role_retention": {
+    "before_accepted": 10,
+    "after_accepted": 9,
+    "regressed": [
+      "R01"
+    ],
+    "unchanged_meaning_pairs": 9,
+    "scope_controls_rejected_before_and_after": 6,
+    "positive_negative_self_fact_past_preserved_for_retained": true,
+    "one_node_zero_edges_four_gaps_each_retained": true,
+    "text_diagram_equal_except_explicit_projection_identity": true
+  },
+  "teacher_source_reproduction": {
+    "old22_before": 22,
+    "old22_after": 22,
+    "including_original_RU02_count": 23,
+    "including_original_RU02_before": 22,
+    "including_original_RU02_after": 22,
+    "is_semantic_quality_rate": false
+  },
+  "saved_replay": {
+    "response_count": 106,
+    "candidate_restored": 103,
+    "candidate_rejected": 3,
+    "role_admissions": 32,
+    "role_restored": 19,
+    "role_rejected": 13,
+    "model_loads": 0,
+    "generations": 0,
+    "training_updates": 0,
+    "nll_measurements": 0,
+    "reader_engine_both_compilers_both_authors_prohibited": true,
+    "all_accepted_candidates_mapped": 0
+  },
+  "cpu_identity_shadow": {
+    "rows": 53,
+    "generations": 0,
+    "all_meanings_and_source_witnesses_equal": true,
+    "included_in_generation_or_teacher_counts": false
+  },
+  "api_validation": {
+    "passed": 683,
+    "skipped": 2,
+    "warnings": 1,
+    "seconds": 114.72,
+    "exit": 0,
+    "normal_deployment": false,
+    "sql_wasm_skips_not_counted_as_passed": true
+  },
+  "original_archive": {
+    "bytes": 1221559,
+    "members": 585,
+    "sha256": "5b30dd18d4a4ea351bc297621792c4b4c8f1b501b8b5db42af781d604caf2794",
+    "crc_and_safe_paths_verified": true,
+    "members_bytes_sha256_verified": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_selected": false,
+  "next_gpu_selected": false,
+  "product_credit": 0,
+  "structure_map_delta": "NONE_FOR_GENERATION_COMPARISON_PRIVATE_V3_PROFILE_STATE_ALREADY_PRESENT",
+  "ordinary_http_db_rn_deployment_changes": 0,
+  "gpu_rental_maintained": true,
+  "review_context": "CODEX_WORK_GPT6_ROOT_AND_SAME_ENVIRONMENT_REVIEWERS_NOT_PRO_ULTRA_OR_HUMAN_ACCEPTANCE",
+  "source_bodies_published": false,
+  "remaining": [
+    "reason_with_independent_unknown_composition",
+    "negation_and_unknown_carrier_retention",
+    "affirmative_role_copula_retention",
+    "person_grounded_role_judgment_choice",
+    "multiple_fields_supplements_comparison",
+    "cross_record_recurrence_change_and_ordinary_cumulative_connection"
+  ],
+  "restart": "Do not rerun completed53. Preserve failed9e and v3 outputs; audit unchanged source-authored78 targets with explicit v3 training-input compatibility before selecting another finite condition.",
+  "review_sha256": {
+    "ROOT_REVIEW.md": "4a5fffcf59bc6bf4d57e2ad861cb43aed55d773d56d7548e7ef33c8c9fcd6118",
+    "AGENT_REVIEW.md": "c584a8176666e9b429e7543012a03a4256760092acaa3bbd14758e957bbf94d9",
+    "INTEGRITY_REVIEW.md": "e03da9cafaa312adcf54717c75ae9533f078fb88ecc44e6ecf5be5a35b586fcc"
+  },
+  "result_artifact": {
+    "library_file_id": "libfile_c662389447a081918838ad0e02df0c53",
+    "bytes": 1144260,
+    "members": 8,
+    "sha256": "f9db844ee77add2a25ce0b37ac90148eb2488a69cc95676e300866876e52b9ed"
+  }
+}

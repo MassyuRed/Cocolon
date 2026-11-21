@@ -1,0 +1,28 @@
+{
+  "state": "OFFLINE_CURRICULUM_ADMISSION_NOT_MODEL_QUALITY",
+  "teacher_rows": 17,
+  "independent_new_training_episodes": 2,
+  "new_stage_rows": 8,
+  "old_source_rehearsal_rows": 9,
+  "novel_evaluation_episodes": 2,
+  "updates_proposed": 34,
+  "original9_unchanged": true,
+  "A3_A4_not_in_training": true,
+  "current_schema_and_exact_quotes_17": true,
+  "existing_application_or_stage_admission_17": true,
+  "full_assistant_EOS_tail_17": true,
+  "tokenizer_calibration_A4_counts": 2,
+  "max_input_tokens": 4047,
+  "max_training_tokens": 5076,
+  "plan_sha256": "58a1c90dab2f117c13d1dddb3ae58d5cc85ca1d446538858e0eea14d1cfd0363",
+  "new_model_calls": 0,
+  "training": 0,
+  "retry": 0,
+  "pod_model_or_provider_changes": 0,
+  "local_verification_only_dependencies": {
+    "tokenizers": "0.22.2",
+    "jinja2": "3.1.6",
+    "MarkupSafe": "3.0.3"
+  },
+  "remote_dependencies_changed": 0
+}

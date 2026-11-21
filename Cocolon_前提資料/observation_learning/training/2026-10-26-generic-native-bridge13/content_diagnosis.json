@@ -1,0 +1,421 @@
+{
+  "schema": "cocolon.bridge13.content_diagnosis.v1",
+  "status": "ONE_RUN_CLOSED_CANDIDATE_NOT_ADOPTED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "training_updates": 13,
+  "new_generations": 11,
+  "eos": 11,
+  "native_meaning": 8,
+  "native_body": 8,
+  "native_cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 0,
+      "question_disposition": "ASK",
+      "input_tokens": 2076,
+      "output_tokens": 1375,
+      "seconds": 68.86651944275945
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 3,
+      "question_disposition": "NONE",
+      "input_tokens": 5030,
+      "output_tokens": 2331,
+      "seconds": 116.72205144353211
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 0,
+      "question_disposition": "ASK",
+      "input_tokens": 2072,
+      "output_tokens": 1375,
+      "seconds": 68.72744642291218
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 3,
+      "question_disposition": "NONE",
+      "input_tokens": 5045,
+      "output_tokens": 2334,
+      "seconds": 117.82402192708105
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 0,
+      "question_disposition": "ASK",
+      "input_tokens": 2069,
+      "output_tokens": 1365,
+      "seconds": 68.4755404451862
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "packet_equal_teacher": false,
+      "candidate_equal_teacher": true,
+      "receipt_status": "INVALID_EVIDENCE",
+      "meaning_adopted": false,
+      "body_available": false,
+      "applied_updates": 0,
+      "question_disposition": "NONE",
+      "input_tokens": 5028,
+      "output_tokens": 2146,
+      "seconds": 107.80568931438029
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 0,
+      "question_disposition": "NONE",
+      "input_tokens": 1733,
+      "output_tokens": 1586,
+      "seconds": 80.14880896080285
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 0,
+      "question_disposition": "NONE",
+      "input_tokens": 1728,
+      "output_tokens": 1560,
+      "seconds": 78.55546831991524
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "packet_equal_teacher": true,
+      "candidate_equal_teacher": true,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "applied_updates": 0,
+      "question_disposition": "NONE",
+      "input_tokens": 1732,
+      "output_tokens": 1599,
+      "seconds": 80.04909890610725
+    }
+  ],
+  "native_failure": {
+    "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "receipt_status": "INVALID_EVIDENCE",
+    "candidate_equal_teacher": true,
+    "evidence_expected": 12,
+    "evidence_actual": 9,
+    "missing_expected_evidence_indexes": [
+      6,
+      10,
+      11
+    ],
+    "missing_quotes": [
+      "さっき「全部一人で」と書いたのは訂正します",
+      "一人でできたからではなく",
+      "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです"
+    ],
+    "bad_end_ranges": [
+      {
+        "quote": "友人に手順を教えてもらって",
+        "actual": [
+          25,
+          74
+        ],
+        "expected": [
+          25,
+          38
+        ]
+      },
+      {
+        "quote": "一緒に直しました",
+        "actual": [
+          39,
+          88
+        ],
+        "expected": [
+          39,
+          47
+        ]
+      }
+    ],
+    "out_of_range_reference_occurrences": [
+      {
+        "path": ".claims[5].about_time.evidence_indexes",
+        "index": 9
+      },
+      {
+        "path": ".claims[5].evidence_indexes",
+        "index": 9
+      },
+      {
+        "path": ".claims[5].modality.evidence_indexes",
+        "index": 9
+      },
+      {
+        "path": ".claims[5].polarity.evidence_indexes",
+        "index": 9
+      },
+      {
+        "path": ".relations[1].evidence_indexes",
+        "index": 11
+      },
+      {
+        "path": ".updates[1].evidence_indexes",
+        "index": 10
+      },
+      {
+        "path": ".updates[1].evidence_indexes",
+        "index": 11
+      },
+      {
+        "path": ".updates[2].evidence_indexes",
+        "index": 11
+      }
+    ],
+    "actual_evidence": [
+      {
+        "end": 14,
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 0
+      },
+      {
+        "end": 26,
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 15
+      },
+      {
+        "end": 18,
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 12
+      },
+      {
+        "end": 10,
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 0
+      },
+      {
+        "end": 15,
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 12
+      },
+      {
+        "end": 18,
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 0
+      },
+      {
+        "end": 74,
+        "field_path": "answer_text_private",
+        "quote": "友人に手順を教えてもらって",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 25
+      },
+      {
+        "end": 88,
+        "field_path": "answer_text_private",
+        "quote": "一緒に直しました",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 39
+      },
+      {
+        "end": 91,
+        "field_path": "answer_text_private",
+        "quote": "捨てずにまた使えるようになったからです",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 72
+      }
+    ],
+    "expected_evidence": [
+      {
+        "end": 14,
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 0
+      },
+      {
+        "end": 26,
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 15
+      },
+      {
+        "end": 18,
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 12
+      },
+      {
+        "end": 10,
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 0
+      },
+      {
+        "end": 15,
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 12
+      },
+      {
+        "end": 18,
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+        "start": 0
+      },
+      {
+        "end": 21,
+        "field_path": "answer_text_private",
+        "quote": "さっき「全部一人で」と書いたのは訂正します",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 0
+      },
+      {
+        "end": 38,
+        "field_path": "answer_text_private",
+        "quote": "友人に手順を教えてもらって",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 25
+      },
+      {
+        "end": 47,
+        "field_path": "answer_text_private",
+        "quote": "一緒に直しました",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 39
+      },
+      {
+        "end": 91,
+        "field_path": "answer_text_private",
+        "quote": "捨てずにまた使えるようになったからです",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 72
+      },
+      {
+        "end": 71,
+        "field_path": "answer_text_private",
+        "quote": "一人でできたからではなく",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 59
+      },
+      {
+        "end": 91,
+        "field_path": "answer_text_private",
+        "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+        "start": 50
+      }
+    ],
+    "semantic_admission_reached": false,
+    "body_generation_reached": false
+  },
+  "generic_pairs": [
+    {
+      "case_id": "FT-UDON-INITIAL",
+      "before_raw": "observation: 本人が「あったかいもの食べたら、ちょっと落ち着いた」と述べており、その後に「帰ってから、うどんを作って食べた」という行動を記録している。\nreception: 本人の平穏と弱めの喜びの感情が、うどんの自炊という行為と連動して現れたと受け取れる。\nquestion: null\nupdate_note: 補足・訂正・撤回なし。\ngrounded_points: [\"original.memo\", \"original.memo_action\", \"original.emotions\", \"original.emotion_details\"]\nunknowns: なし\n",
+      "after_raw": "observation: 温かいうどんを食べることで、少し落ち着きを感じた。\nreception: 帰ってから自分でうどんを作り、食べたことによる平穏と微かな喜びの体験。\nquestion: null\nupdate_note: 本人の記述と一致。訂正・撤回・補足なし。\ngrounded_points: [\"FT-UDON-O:memo\", \"FT-UDON-O:memo_action\", \"FT-UDON-O:emotion_details\"]\nunknowns: なし\n",
+      "before_raw_sha256": "48e0029fa1fa8fa0671f57a00d5f52d2df9fa736c49eabac453b8b6268656994",
+      "after_raw_sha256": "2d900a3bc86fcc8643f66202ed9438a0558b7461221fe9000b1d09ace4a255c6",
+      "input_tokens_before": 428,
+      "input_tokens_after": 428,
+      "before_new_generations": 0,
+      "after_new_generations": 1,
+      "strict_json_parse_error_is_metadata_only": true
+    },
+    {
+      "case_id": "EFREE-E05",
+      "before_raw": "observation: 本人は昨日の大会申込に喜び、今日はその参加を迷っている。本人は今日、その大会の日程を再確認したと述べている。\nreception: 本人は昨日の申込に喜んだが、今日、日程を確認した上で参加するか迷っている。\nquestion: null\nupdate_note: 補足・訂正・撤回なし。\ngrounded_points: [\"original.memo\", \"original.memo_action\"]\nunknowns: なし\n",
+      "after_raw": "observation: 昨日の大会への参加を喜び、今日はその出たい気持ちと日程確認による迷いがある。\nreception: 本人の心情と、今日改めて日程を確認したという事実のみが可視。\nquestion: null\nupdate_note: 訂正・撤回・不明点なし。\ngrounded_points: [\"EFREE-E05-O:memo\", \"EFREE-E05-O:memo_action\"]\n",
+      "before_raw_sha256": "fc3ac27d91be4bbc293934c6a37a8a5d03f4ce041ef8f4f531b68108f8869adf",
+      "after_raw_sha256": "e877038fa41d9e801ff9c6e4bdecc2d1eba4a47cfa0f1779ecd5039273efa993",
+      "input_tokens_before": 444,
+      "input_tokens_after": 444,
+      "before_new_generations": 0,
+      "after_new_generations": 1,
+      "strict_json_parse_error_is_metadata_only": true
+    }
+  ],
+  "generic_judgments": [
+    {
+      "case_id": "FT-UDON-INITIAL",
+      "local_improvements": [
+        "Shorter text; removed third-person attribution and unsupported statement ordering."
+      ],
+      "unresolved": [
+        "Reception remains an explanatory noun phrase, not a direct human response.",
+        "Warm food and udon/action are collapsed into one causal description."
+      ],
+      "not_claimed": [
+        "No onigiri/body invention in this run, but neither existed in the actual old baseline; do not count this as bridge improvement."
+      ]
+    },
+    {
+      "case_id": "EFREE-E05",
+      "local_improvements": [
+        "Current wish to participate is now stated."
+      ],
+      "unresolved": [
+        "Joy at successfully applying is changed to joy at participation.",
+        "Cancellation as the object of indecision is omitted.",
+        "Reception reports visibility of facts instead of responding to the person."
+      ],
+      "not_claimed": [
+        "Ambiguous yesterday modifier is not proof that model asserted the tournament occurred yesterday."
+      ]
+    }
+  ],
+  "question_absence_for_generic_is_reasonable": true,
+  "review": "root read all11; separate-context read-only reviewer independently confirmed raw/content findings; no Pro/Ultra/human Product Read claim",
+  "interpretation": "One existing generic teacher4 plus native9 rehearsal did not close direct reception/source retention. This does not prove interface mismatch is the sole cause, nor that all mixed training is impossible.",
+  "next_action": "Close current run. Preserve45779 and all current admission conditions. Reassess existing sourced natural response teaching and interface alignment on CPU before any new proposed paid run; no automatic extra updates, mask/LR search, model calls or reader relaxation.",
+  "new_observation_session_required_for_this_basic_defect": false,
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "automatic_progression": false,
+  "gpu_lifecycle_operations": 0
+}

@@ -1,0 +1,204 @@
+{
+  "schema": "cocolon.native15_afteronly.new4_reading_review.v1",
+  "review_date_jst": "2026-10-27",
+  "scope": "SHOP初回/回答後、REPOT、KNITの無補修rawを凍結入力/教師と照合。機械採否はroot測定原本から引用し、自然文/意味の読解と分離する。",
+  "sources": {
+    "final_run_directory": "/workspace/scratch/8b32a91611bc/afteronly_final/run",
+    "train_file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+    "train_sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "eval_file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+    "eval_sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "diagnosis_file": "/workspace/scratch/8b32a91611bc/afteronly_final/diagnosis/diagnosis.json",
+    "diagnosis_sha256": "3503b0d46942f9a0e0e9a3b7be04ea3893f910fabbda4f3f422fc2b68fcb2f77"
+  },
+  "measured_overall_cmee": {
+    "meaning_adopted_count": 3,
+    "body_available_count": 3,
+    "total_cases": 15,
+    "adopted_case_ids": [
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "reexecuted_by_this_review": false
+  },
+  "cases": [
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-SHOP-INITIAL.jsonl",
+      "raw_file_sha256": "fb3d2426b41a2781b6801e7230773c30c735daf424dfabb6ff7c07ba1d825359",
+      "raw_utf8_sha256": "42f400380bb21fca8b96a6edaa5f4e97ab3c948cca4a05bfd9d29c39b01d4b16",
+      "input_tokens": 2194,
+      "output_tokens": 1100,
+      "seconds": 43.41737112496048,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "parse_error": null,
+      "measured_cmee": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "decision": "UNSUPPORTED",
+        "reason_code": "model_evidence_out_of_scope",
+        "meaning_adopted": false,
+        "body_available": false
+      },
+      "quality_scope": "未採用raw中の自然文案と参照構造の独立読解。採用本文・本人端末表示として扱わない。",
+      "retained_content": [
+        "友人の開店を知る/お祝い送信/うれしさ/少し置いていかれた感覚という4要素を保持。",
+        "felt_left_behindのPERSON_PERCEPTIONと「気がした」を保持し、実際の置去りeventへ変えていない。",
+        "NOT_STATEDの未記載理由と、本人へ理由を尋ねる実問の文言を保持。未知をPERSON_STATEDへ変換していない。",
+        "全6 evidence_quotesは元field内に実在し、架空の共同準備や相手意図は追加していない。"
+      ],
+      "reference_or_shape_issues": [
+        "joyのclaim.text/predicateは「うれしかった」だが、対応evidence_quotes[2]は「うれしかったけど」。原子roleの根拠範囲が教師と一致しない。単なる文字列実在だけでは適格根拠にならない。",
+        "Observationに「少し置いていかれた気がした」と書く一方、Observation bindingのclaim_refsはopening_known/celebration_sent/joyだけでfelt_left_behindを含まない。",
+        "unknown_id/target_unknown_refを教師missing_explanationからfelt_left_behind_reasonへ変更。二つの参照自体は一致しており、それ単独を実拒否理由とは断定しない。"
+      ],
+      "reception_issues": [
+        "「お祝いのメッセージを送り、うれしかったのですね」とObservationの一部を繰り返す。",
+        "「置いていかれたように感じた理由は未記載ですが、その気持ち、受け取っています」は内部資料的な説明と一般的な受け取り宣言に寄り、二つの気持ちへの自然な応答は薄い。"
+      ],
+      "overall": "4意味と本人知覚は比較的保たれるが、範囲/表示参照/受け取りに残件。CMEE実測は意味不採用。",
+      "literal_evidence_review": {
+        "count": 6,
+        "all_quotes_present_in_original_field": true,
+        "does_not_imply_qualified_scope_or_meaning_acceptance": true
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_file_sha256": "5f4450aca98d06dc857bc34829e79d8f054076eeed26895fa951d816e8e106ad",
+      "raw_utf8_sha256": "90520f5fecca4597af3452b4838d6e3195a1eb3c08196cff7cd92a4bd073157a",
+      "input_tokens": 4374,
+      "output_tokens": 2669,
+      "seconds": 105.28876294603106,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "parse_error": "Expecting ',' delimiter: line 1 column 3394 (char 3393)",
+      "measured_cmee": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "receipt_status": "INVALID_FORMAT",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "meaning_adopted": false,
+        "body_available": false
+      },
+      "quality_scope": "未採用raw中の自然文案と参照構造の独立読解。採用本文・本人端末表示として扱わない。",
+      "retained_content_fragments": [
+        "冒頭の元4claimは保持しており、喜び/置いていかれた感覚も残る。",
+        "自然文断片には、昔二人で話したこと、共同準備/約束の明示否定、友人側の現実化、当時から離れたような寂しさが含まれる。",
+        "新claimのanchor_source_idには回答source sixrow-answer-shopを使う箇所があり、回答との区別を試みている。"
+      ],
+      "reference_or_shape_issues": [
+        "EOSには達したがJSON不正。「claim_id\":\"no_promise\":{ など、stringの後に余分なcolon/objectを継ぐ形が繰り返される。既存parse_errorは3393文字位置。",
+        "no_promiseラベルのtextは友人側の現実化を述べる文でNEGATED、perceived_realizationラベルのtextは過去から離れた感覚。役割と内容が取り違えられている。",
+        "shared_talkは「いつか店をやれたらいいね」だけへ縮み、「以前、その友人と話した」という両者/過去の発話の範囲が落ちる。",
+        "回答のquoteの一部をfield_path=memo_actionへ入れ、回答sourceが実際に持つanswer_text_privateへ束縛していない。memo_link/felt_distanceという実在しないfield_pathも作る。",
+        "末尾quoteには「と本人が説明されています」という生成した説明を含み、本人回答の逐語引用ではない。",
+        "answer_joy等の「開店したと聞いたとき」という過去時点とWRITTEN_PRESENT_IN_PAST_CONTEXTが落ち、全て一般の過去として扱う。",
+        "answer_explains_targetはfelt_distanceというclaimと同名のrelation IDに変わり、felt_left_behind→answer_sadnessと接続。教師のfelt_left_behind→felt_distanceを保たない。answer_concessionも欠ける。",
+        "updatesはADD1件だけで、7追加role+INVALIDATE_GAPの計8件を保持していない。replacement_refsもfelt_distanceを重複。",
+        "update_note bindingのupdate_refs=[12]は、rawにあるupdates1件の範囲外。unknowns=[]だけで未記載理由の明示解消処理が成立したとは言えない。"
+      ],
+      "reception_issues": [
+        "Receptionは本人回答をほぼ再掲し、末尾も「寂しかったです」と本人の語りの形を残す。本人に向けて受け取る声への変換が弱く、話者境界が曖昧。",
+        "共同準備/約束の否定と主観的距離は文章案に残るため、全意味が消えたとはしない。ただし参照構造/JSON不正のため使用可能な応答ではない。"
+      ],
+      "overall": "自然文断片に本人説明の材料は残るが、役割/引用field/時点/説明追加の構造が崩れ、EOSでもJSON不正。CMEE実測はINVALID_FORMAT由来の不採用。"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-REPOT-INITIAL.jsonl",
+      "raw_file_sha256": "67e66dcd2e4ea8abe971f8d1c728b39036e186c701a88b0569e76a91564127ac",
+      "raw_utf8_sha256": "c4815c9ca68970670dacd0fbe5dd4fbb48d5ae5136660951660b8e686ac90b28",
+      "input_tokens": 2045,
+      "output_tokens": 978,
+      "seconds": 38.59047474397812,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "parse_error": null,
+      "measured_cmee": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "decision": "HOLD",
+        "reason_code": "model_claim_axes_not_source_bound",
+        "meaning_adopted": false,
+        "body_available": false
+      },
+      "quality_scope": "未採用raw中の自然文案と参照構造の独立読解。採用本文・本人端末表示として扱わない。",
+      "retained_content": [
+        "4つのclaim引用は、説明を受けたこと/最後まで聞いたこと/やり方の理解/安心の原文を保持。",
+        "全6 evidence_quotesは元fieldに実在し、問いなし/unknownsなしは維持。"
+      ],
+      "reference_or_shape_issues": [
+        "claim.kindがEVENT/STATEではなくguidance_received/listened_to_end/understood_method/reliefというrole名そのもの。",
+        "action_linkのscope_refsがmemo_link、memo_linkのscope_refsがclaim ID reliefとなり、自身のrelation IDへ束縛されない。"
+      ],
+      "reception_issues": [
+        "Observationの「叔父に植え替えの手順を説明し」は、元の「叔父に説明してもらい」から説明する側と受ける側を逆転する重大な誤読。",
+        "「最後まで聞けてよかったです」という評価/達成の言い方を追加している。",
+        "Receptionの「やり方が分かって安心したのですね」は原情報に沿うが、「その出来事と結果を保持します」は内部処理説明で、本人に向けた自然な受け取りとして弱い。"
+      ],
+      "overall": "根拠引用は保持されても、本文の主客逆転と意味軸/参照不整合がある。CMEE実測はmodel_claim_axes_not_source_boundのHOLD。主客逆転は機械判定結果から独立に指摘する。",
+      "literal_evidence_review": {
+        "count": 6,
+        "all_quotes_present_in_original_field": true,
+        "does_not_imply_qualified_scope_or_meaning_acceptance": true
+      }
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-KNIT-INITIAL.jsonl",
+      "raw_file_sha256": "62c988fb1e50536245d8b92289277837e35000c0aabd1eff7c9813121f0098a9",
+      "raw_utf8_sha256": "d176378d9f3eb67cc236a1b2366167c85088954cb374007b16e26705689ea4eb",
+      "input_tokens": 2087,
+      "output_tokens": 1592,
+      "seconds": 62.90672790398821,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "parse_error": "Expecting ',' delimiter: line 1 column 775 (char 774)",
+      "measured_cmee": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "receipt_status": "INVALID_FORMAT",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "meaning_adopted": false,
+        "body_available": false
+      },
+      "quality_scope": "未採用raw中の自然文案と参照構造の独立読解。採用本文・本人端末表示として扱わない。",
+      "retained_content_fragments": [
+        "ほどいた行動、面倒さ、少しの寂しさ、本人の明示不明という原語はrawに残る。",
+        "unknownsのkind=PERSON_STATEDとtarget_claim_refs=[burden,sadness]、問いなしは断片として保持。",
+        "全10 evidence_quotesは元field内に実在し、解決/他者意図/能力不足の説明は加えていない。"
+      ],
+      "reference_or_shape_issues": [
+        "EOSには達したがJSON不正。about_timeの中へclaimのkind/modality等が混入し、claimsの配列途中にclaim_id等のobject属性を置く形が反復する。既存parse_errorは774文字位置。",
+        "polarity.scope_refsやrelation.scope_refsがclaim/relation ID文字列ではなく整数。",
+        "本来WRITTEN_PAST_UNRESOLVED_OCCASION/WRITTEN_PRESENTを使うabout_time.kindへEVENT/STATE/EXPLICIT_UNKNOWNを置き、意味種別と時点種別を混同。",
+        "教師のrelations=[]に対してwritten_link3件を追加。特にburden→sadnessを関係として置き、二つの関係が本人にも分からないという扱いと不整合。因果関係だとは断定しない。",
+        "PERSON_STATEDのevidence_indexes=[3,0,2]は不明文/ほどく行動/寂しさを指し、対象の面倒さの根拠index1を欠く。教師は[3,1,2]。"
+      ],
+      "reception_issues": [
+        "本文は不明の対象を「面倒さと寂しさの二つ」から「編み物とそれら」へ広げ、本人の不明対象を変えている。",
+        "ObservationとReceptionが同一の長文で、「…ことを受けとめた」と過去形の説明報告になっている。原情報の観測と、本人に向けた受け取りが分かれていない。"
+      ],
+      "overall": "不明を消してはいないが、本文で対象を変え、参照構造とJSONも崩れる。CMEE実測はINVALID_FORMAT由来の不採用。",
+      "literal_evidence_review": {
+        "count": 10,
+        "all_quotes_present_in_original_field": true,
+        "does_not_imply_qualified_scope_or_meaning_acceptance": true
+      }
+    }
+  ],
+  "summary": "新4件は全てEOSだが、SHOP回答後とKNITはJSON不正。SHOP初回は原意味を比較的保持しつつ根拠範囲/表示参照/受け取りに残件、REPOTは主客逆転が重大。引用が原文中に存在することと、意味/参照/本人向け品質の成立は別。",
+  "new_model_calls": 0,
+  "cmee_reexecution": 0,
+  "raw_repair": 0,
+  "teacher_changes": 0,
+  "evaluation_changes": 0,
+  "github_writes": 0,
+  "gpu_operations": 0,
+  "external_operations": 0,
+  "product_accepted": false
+}

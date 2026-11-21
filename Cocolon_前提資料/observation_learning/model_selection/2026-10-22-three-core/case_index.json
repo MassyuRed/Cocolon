@@ -1,0 +1,206 @@
+{
+  "fixture_status": "DRAFT_NOT_EXECUTED",
+  "author": "Karen",
+  "all_persons_fictitious": true,
+  "source_shape": "comparison fixture; native adapters must use their actual frozen contract",
+  "first_batch": [
+    "E02-0",
+    "E02-B",
+    "P01-N",
+    "A02-P1"
+  ],
+  "cases": [
+    {
+      "case_id": "E01-0",
+      "family": "desk-space",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "E02-0",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "E02-A",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "fixed_supplement_snapshot",
+      "native_note": "独立枝。実thread baselineはE02-0の実pending question/checkpointへ束縛できる場合だけ。END後へ仮回答を付けない。",
+      "review_only_expected_update_kind": "ADD"
+    },
+    {
+      "case_id": "E02-B",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "fixed_supplement_snapshot",
+      "native_note": "独立枝。実thread baselineはE02-0の実pending question/checkpointへ束縛できる場合だけ。END後へ仮回答を付けない。",
+      "review_only_expected_update_kind": "ADD"
+    },
+    {
+      "case_id": "E02-C",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "fixed_supplement_snapshot",
+      "native_note": "独立枝。実thread baselineはE02-0の実pending question/checkpointへ束縛できる場合だけ。END後へ仮回答を付けない。",
+      "review_only_expected_update_kind": "REVISE"
+    },
+    {
+      "case_id": "E02-W",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "fixed_supplement_snapshot",
+      "native_note": "独立枝。実thread baselineはE02-0の実pending question/checkpointへ束縛できる場合だけ。END後へ仮回答を付けない。",
+      "review_only_expected_update_kind": "WITHDRAW"
+    },
+    {
+      "case_id": "E03-0",
+      "family": "yesterday-today-request",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "free",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "E02-PLUS",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "plus",
+      "probe_kind": "tier_context",
+      "native_note": "Free対照はE02-0。Plus/Premiumは同じ2履歴。frameは暫定で根拠を示し、必須の断定にしない。"
+    },
+    {
+      "case_id": "E02-PREMIUM",
+      "family": "junior-explanation",
+      "split": "heldout_candidate",
+      "core": "emlis",
+      "tier": "premium",
+      "probe_kind": "tier_context",
+      "native_note": "Free対照はE02-0。Plus/Premiumは同じ2履歴。frameは暫定で根拠を示し、必須の断定にしない。"
+    },
+    {
+      "case_id": "P01-N",
+      "family": "helping-colleague",
+      "split": "heldout_candidate",
+      "core": "piece",
+      "tier": "free",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "P01-R",
+      "family": "helping-colleague",
+      "split": "heldout_candidate",
+      "core": "piece",
+      "tier": "free",
+      "probe_kind": "refined_source",
+      "native_note": "現V2はoriginal/normal/pre_questionのみ。refinedをoriginalへ連結して通さない。nativeは未対応。"
+    },
+    {
+      "case_id": "A01-P0",
+      "family": "schedule-consultation",
+      "split": "known_derived_transfer",
+      "core": "analysis",
+      "tier": "plus",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "A01-P1",
+      "family": "schedule-consultation",
+      "split": "known_derived_transfer",
+      "core": "analysis",
+      "tier": "plus",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "A01-C",
+      "family": "schedule-consultation",
+      "split": "known_derived_transfer",
+      "core": "comparison",
+      "tier": "plus",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "A01-IF",
+      "family": "schedule-consultation",
+      "split": "known_derived_transfer",
+      "core": "if",
+      "tier": "premium",
+      "probe_kind": "if_design_capability",
+      "native_note": "実IF ownerなし。原記録の再読は観測map足場の代用で、本統合では実観測mapのidentityも要る。"
+    },
+    {
+      "case_id": "A02-P0",
+      "family": "explicit-roles-information",
+      "split": "heldout_candidate",
+      "core": "analysis",
+      "tier": "plus",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "A02-P1",
+      "family": "explicit-roles-information",
+      "split": "heldout_candidate",
+      "core": "analysis",
+      "tier": "plus",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "A02-C",
+      "family": "explicit-roles-information",
+      "split": "heldout_candidate",
+      "core": "comparison",
+      "tier": "plus",
+      "probe_kind": "original",
+      "native_note": ""
+    },
+    {
+      "case_id": "A03-SPARSE",
+      "family": "desk-space",
+      "split": "heldout_candidate",
+      "core": "analysis",
+      "tier": "free",
+      "probe_kind": "insufficient_structure",
+      "native_note": ""
+    },
+    {
+      "case_id": "A04-TWO-ANSWERS",
+      "family": "schedule-consultation",
+      "split": "boundary_only",
+      "core": "analysis",
+      "tier": "premium",
+      "probe_kind": "unsupported_supplement_cardinality",
+      "native_note": "現pureはanalysis_supplement_cardinality、保存loaderはanalysis_multiple_answers_not_supported。別記録化/切捨て/原文連結をしない。"
+    }
+  ],
+  "saved_intent_probe": {
+    "parent_case": "A01-IF",
+    "operator": "fictitious_user_selection",
+    "candidate_selection": "実際に生成された候補のうち本人役が選んだIDを束縛。事前に架空IDを捏造しない。",
+    "user_note": "次はまず希望を伝える方を試してみたい。ただし、予定を変えられない日もあると思う。",
+    "not_an_observed_action": true,
+    "native_status": "DESIGNED_NOT_IMPLEMENTED"
+  }
+}

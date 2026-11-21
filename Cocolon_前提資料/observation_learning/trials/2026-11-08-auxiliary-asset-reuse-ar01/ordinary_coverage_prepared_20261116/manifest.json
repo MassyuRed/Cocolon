@@ -1,0 +1,46 @@
+{
+  "all_fictional": true,
+  "state": "FOUR_FILE_123621_PREPARED_REVIEWED_NOT_UPLOADED_NOT_EXECUTED",
+  "files": [
+    {
+      "path": "full12-sql.pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    {
+      "path": "full12_normal_rollout_plan_20261116.json",
+      "bytes": 7455,
+      "sha256": "c2c4cfdd7db0c22e6b420f43edeedc1586077db313f097406d1d663fce73f981"
+    },
+    {
+      "path": "full12_sql_ordinary_coverage_once.py",
+      "bytes": 31349,
+      "sha256": "78f615ed93c48de1c2de7d0742352fafa450b646dce5bb57eee307beffcbecde"
+    },
+    {
+      "path": "ordinary_coverage_payload_independent_review.json",
+      "bytes": 6046,
+      "sha256": "d6aca3b1ee28f069e2e537b65234478dcef9c182d247d41dc3eda227a024389b"
+    },
+    {
+      "path": "ordinary_coverage_payload_offline.json",
+      "bytes": 3870,
+      "sha256": "3207c112430e2929004fd1256f71da7ad4b88f7ef6e79c023e31c711b036cd46"
+    },
+    {
+      "path": "ordinary_coverage_payload_technical_review.json",
+      "bytes": 2229,
+      "sha256": "cfe8486d26b1298464b4ff62c4a6b70e99dfef2b2f773ab9d397b538878d2bb5"
+    },
+    {
+      "path": "semantic_json_parser.ordinary_coverage.py",
+      "bytes": 1450,
+      "sha256": "661fdf315738719a15a783839861bc8ed1431c750a63a87d5016dbb3ce620c54"
+    },
+    {
+      "path": "semantic_reader_ordinary_coverage_once.py",
+      "bytes": 31676,
+      "sha256": "83311b9a7e75d6dc582f6a38c8fbf1669d0f791d5425dbc543e518f391ff4b0c"
+    }
+  ]
+}

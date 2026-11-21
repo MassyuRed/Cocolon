@@ -1,0 +1,22 @@
+{
+  "run.json": {
+    "bytes": 2278,
+    "sha256": "e37823f40577d38d21fc6d562811188c39a7a4159f89331fe3b981f30d04e597"
+  },
+  "actual_inputs_and_token_ids.json": {
+    "bytes": 19588,
+    "sha256": "e472189c2f7a227fd82e71741149e09b9dd6e239c0c97651b57bf2d070f2fb5d"
+  },
+  "loaded_adapter_finite_tensors.json": {
+    "bytes": 7483,
+    "sha256": "070055c54b4e5db1e3753b8cc3b642d7c7d959c10d637fb080a565fbf8089e54"
+  },
+  "case1_raw.jsonl": {
+    "bytes": 1712,
+    "sha256": "3c89a690b05e73665f4b91766e113d44c4ee62d36a1a446a5b348fd1b627e820"
+  },
+  "case2_raw.jsonl": {
+    "bytes": 1925,
+    "sha256": "ba28b6343aa89910a348cc7bdcc8d2a0ec1c18560f9dba78f0ee406d67241100"
+  }
+}

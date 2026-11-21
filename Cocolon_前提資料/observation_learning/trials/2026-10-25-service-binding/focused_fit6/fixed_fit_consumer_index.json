@@ -1,0 +1,90 @@
+{
+  "scope": "LOSSLESS_SPLIT_OF_ACTUAL_CONSUMER_RESULT",
+  "original_bytes": 1239780,
+  "original_sha256": "babcddf216f9d4697683a5c6db6cfce67cf998a3e94ef9d8653bb75e32132827",
+  "original_key_order": [
+    "schema",
+    "scope",
+    "api_commit",
+    "api_source_hashes_verified",
+    "dataset_manifest_sha256",
+    "source_raw_sha256",
+    "expected_adapter_revision",
+    "consumer_sha256",
+    "new_model_calls",
+    "training_updates",
+    "database_operations",
+    "dynamic_roundtrip",
+    "service_saved_roundtrip",
+    "product_accepted",
+    "automatic_progression",
+    "raw_modified",
+    "cases",
+    "meaning_count",
+    "body_count",
+    "source_raw_unchanged",
+    "seconds"
+  ],
+  "original_non_case_fields": {
+    "schema": "cocolon.emlis_service_binding_fixed_fit_consumer.v1",
+    "scope": "TRAINING_FIT_FIXED_PRIOR_NOT_DYNAMIC",
+    "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+    "api_source_hashes_verified": true,
+    "dataset_manifest_sha256": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107",
+    "source_raw_sha256": "7534ce7c1dbd332777b86ca66ee05c067b695b9c828a1fef4e3f21f2fb4e280f",
+    "expected_adapter_revision": "76309b86c6a76ed61cf3600f4beb1f45c658fac3bb3e3add4284ef54259276c5",
+    "consumer_sha256": "ff8c59beed807a2c72e3df51f8ae9c4df40819e88ba437b68a1628f2eca97381",
+    "new_model_calls": 0,
+    "training_updates": 0,
+    "database_operations": 0,
+    "dynamic_roundtrip": false,
+    "service_saved_roundtrip": false,
+    "product_accepted": false,
+    "automatic_progression": false,
+    "raw_modified": false,
+    "meaning_count": 6,
+    "body_count": 6,
+    "source_raw_unchanged": true,
+    "seconds": 13.153457236003305
+  },
+  "case_files": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "path": "fixed_fit_cases/01_TRAIN-SERVICE-CHAIR-01-INITIAL.json",
+      "bytes": 125891,
+      "sha256": "27bff615897398de0bcfa6e36764a298542564a927bf789a2fea38ba69e61c09"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "path": "fixed_fit_cases/02_TRAIN-SERVICE-CHAIR-01-CORRECTION.json",
+      "bytes": 260118,
+      "sha256": "1984c9d9c42fb5e4dc898a96e132893ded5973827da2834a06fd2947f6f005b8"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "path": "fixed_fit_cases/03_TRAIN-SERVICE-CHAIR-02-INITIAL.json",
+      "bytes": 125891,
+      "sha256": "c925a8223f71f7aefcf94b3fef3da73a0fa14c5d38a90b7baf5b2b04a892f86c"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "path": "fixed_fit_cases/04_TRAIN-SERVICE-CHAIR-02-CORRECTION.json",
+      "bytes": 260154,
+      "sha256": "54906582c0d5ae6e8a4e1b72233cce8b4b721a6f65c6e0eb566848842a48c11a"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "path": "fixed_fit_cases/05_TRAIN-SERVICE-CHAIR-03-INITIAL.json",
+      "bytes": 125831,
+      "sha256": "9746753992cf0983251a2cef4ab7c95c297cc0eb21343d0bb9104d53f1ea80ae"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "path": "fixed_fit_cases/06_TRAIN-SERVICE-CHAIR-03-CORRECTION.json",
+      "bytes": 260256,
+      "sha256": "939f527ae9991cb273ce15102367384995c7b8a79104ebbdfe60370eb5e517b1"
+    }
+  ],
+  "exact_pretty_json_reconstruction_verified": true,
+  "reconstruction": "Build object in original_key_order, use ordered decoded case_files for cases, original_non_case_fields otherwise; JSON UTF8 ensure_ascii=false indent2 allow_nan=false plus final LF."
+}

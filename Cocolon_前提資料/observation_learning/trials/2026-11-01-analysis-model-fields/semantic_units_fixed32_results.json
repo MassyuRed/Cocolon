@@ -1,0 +1,1510 @@
+{
+  "status": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+  "plan_sha256": "6cff45d6f8cd57d3414777f94eb54078f14f893583f247d20ff9ba68a6522ab9",
+  "runner_sha256": "e3235f55d90b7c4f50628a6c0689d8e3c24d8c59da30a9f9fd0fcd148e6bd13b",
+  "plan": {
+    "max_updates": 128,
+    "epochs": 4,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.0,
+    "gradient_clip": 1.0,
+    "seed": 20261105,
+    "max_seconds": 900,
+    "max_new_generations": 12,
+    "request_seconds": 23,
+    "context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "initial": "SAVED_ISOLATED_ANALYSIS_TEACHING32_ADAPTER_FIXED_TARGET_FIT",
+    "normal_adoption": false,
+    "update_order": [
+      "AT01",
+      "AT17",
+      "AT02",
+      "AT18",
+      "AT03",
+      "AT19",
+      "AT04",
+      "AT20",
+      "AT05",
+      "AT21",
+      "AT06",
+      "AT22",
+      "AT07",
+      "AT23",
+      "AT08",
+      "AT24",
+      "AT09",
+      "AT25",
+      "AT10",
+      "AT26",
+      "AT11",
+      "AT27",
+      "AT12",
+      "AT28",
+      "AT13",
+      "AT29",
+      "AT14",
+      "AT30",
+      "AT15",
+      "AT31",
+      "AT16",
+      "AT32",
+      "AT32",
+      "AT16",
+      "AT31",
+      "AT15",
+      "AT30",
+      "AT14",
+      "AT29",
+      "AT13",
+      "AT28",
+      "AT12",
+      "AT27",
+      "AT11",
+      "AT26",
+      "AT10",
+      "AT25",
+      "AT09",
+      "AT24",
+      "AT08",
+      "AT23",
+      "AT07",
+      "AT22",
+      "AT06",
+      "AT21",
+      "AT05",
+      "AT20",
+      "AT04",
+      "AT19",
+      "AT03",
+      "AT18",
+      "AT02",
+      "AT17",
+      "AT01",
+      "AT01",
+      "AT17",
+      "AT02",
+      "AT18",
+      "AT03",
+      "AT19",
+      "AT04",
+      "AT20",
+      "AT05",
+      "AT21",
+      "AT06",
+      "AT22",
+      "AT07",
+      "AT23",
+      "AT08",
+      "AT24",
+      "AT09",
+      "AT25",
+      "AT10",
+      "AT26",
+      "AT11",
+      "AT27",
+      "AT12",
+      "AT28",
+      "AT13",
+      "AT29",
+      "AT14",
+      "AT30",
+      "AT15",
+      "AT31",
+      "AT16",
+      "AT32",
+      "AT32",
+      "AT16",
+      "AT31",
+      "AT15",
+      "AT30",
+      "AT14",
+      "AT29",
+      "AT13",
+      "AT28",
+      "AT12",
+      "AT27",
+      "AT11",
+      "AT26",
+      "AT10",
+      "AT25",
+      "AT09",
+      "AT24",
+      "AT08",
+      "AT23",
+      "AT07",
+      "AT22",
+      "AT06",
+      "AT21",
+      "AT05",
+      "AT20",
+      "AT04",
+      "AT19",
+      "AT03",
+      "AT18",
+      "AT02",
+      "AT17",
+      "AT01"
+    ],
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "max_model_loads": 2,
+    "trainable_tensors": 112,
+    "trainable_parameters": 3833856,
+    "base_config_sha256": "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145",
+    "gpu_hourly_usd_observed": 0.58,
+    "process_cost_upper_usd": 0.145,
+    "shared_demo_scope": "Three existing system demonstrations are masked prompt context; all 32 unchanged assistant targets are supervised, no new teachers",
+    "evaluation_scope": "Same eight development probes plus four trained rehearsals; fixed 32 targets unchanged, not independent blind/general-language acceptance",
+    "max_teacher_measurements": 64,
+    "max_training_forwards": 128,
+    "outer_timeout_term_seconds": 890,
+    "outer_kill_grace_seconds": 10,
+    "training_objective": "EXISTING_FULL_TARGET_DETACHED_ERROR_WEIGHTED_CE_V1",
+    "measurement_objective": "UNWEIGHTED_FULL_ASSISTANT_NLL",
+    "initial_weights_sha256": "02dfa43f0e848da2d3e2c9bf1e519e76a8e8dfa74e59c855dfee892259e911a7",
+    "initial_config_sha256": "ad2ff18a05a8b901db0f04a74cacaf3c1360cf342ae07b473b176885bdb3bba5",
+    "initial_private_library_file_id": "libfile_53338dfcb1a881919440812b7c9f7bd3",
+    "adaptive_loss_source": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/named_reference9_preparation/adaptive_loss.py",
+    "adaptive_loss_sha256": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141",
+    "rehearsal_stop_condition": "If any trained rehearsal fails or regresses, or DEV subject/negation/unknown scope worsens, do not adopt, repeat epochs automatically, or enlarge teacher count; read all twelve raw differences and reconsider target/objective/representation before another candidate",
+    "diagnosis_private_library_file_id": "libfile_4ed46a2a16948191857b075c6ae63414"
+  },
+  "updates_started": 128,
+  "updates_completed": 128,
+  "training_forwards": 128,
+  "measurement_forwards": 64,
+  "model_loads": 2,
+  "new_calls": 12,
+  "calls": [
+    {
+      "phase": "after",
+      "probe_id": "AF01",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 18.937990546924993,
+      "finish_reason": "stop",
+      "raw_sha256": "5dd323ed5260fea8fb4c9119336ecc930a54d9e529a44c3db6c93fc0187a9a51",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_quote_ambiguous_or_missing"
+    },
+    {
+      "phase": "after",
+      "probe_id": "AF02",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 7.501144407782704,
+      "finish_reason": "stop",
+      "raw_sha256": "8467f3bc7aebb16207a8367d1b7493715be1987aebf4dccade5d3f3a01a0fc1a",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:d5fae48f214d934d77115087e6bcfb0d6ffe28d099f554d9bdb4ecece663f1e8",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 3,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "UV03",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 9.114805747987702,
+      "finish_reason": "stop",
+      "raw_sha256": "4d2864b02b5ddb82427d8699168d503e4cee0290baca8bc7f06af0e2d298bbb0",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:52645568632d85a6a809bfa6103bb66bdf481f5f43ad279e0818efa567ba3e84",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 3,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "UV12",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 6.382246830035001,
+      "finish_reason": "stop",
+      "raw_sha256": "a3250fce97f223bfd5a6d0dca66bf9bffeb5c755996cf7ea761c9996c1a7d315",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:df874e4bcd910f5f4ec339db12fb161c78cde9df91f7549796d452b6d75eb4bb",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 2,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "NV01",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 9.464842008193955,
+      "finish_reason": "stop",
+      "raw_sha256": "898ad3e53aa37188121fd3ea6baa2bd129b22d2fb0095f1eaff944a615ac00cd",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_unknown_parent_invalid"
+    },
+    {
+      "phase": "after",
+      "probe_id": "NV02",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 8.248127044178545,
+      "finish_reason": "stop",
+      "raw_sha256": "e7453d7814710325fee02f0c33e05fabb40e89bc73e99c5f244877cbb211194b",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:e86aef9ce44a3699b467f31318f6218177c35bb167e533c295b21117d0f47890",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 3,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "NV03",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 7.215743305860087,
+      "finish_reason": "stop",
+      "raw_sha256": "1fb70a718b79e8bb19678f2211a10d468507d119785464e82430d39436d9fb09",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:5de48a6ae34a1e186fb1bee35c0f2ad6e900da490a45bd3c12ba9db5df26b0ba",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 2,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "NV04",
+      "status": "RETURNED",
+      "training_use": false,
+      "diagnostic_group": "DEVELOPMENT_PROBE",
+      "seconds": 11.537851517088711,
+      "finish_reason": "stop",
+      "raw_sha256": "c1cbed393c35c800e8940f166fcd1241b3c1d7bda59821851d319898d6386d64",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:e941fe5df9b99d3a03dd5c9d3c0092faacc30c753bb70752d0890af921e5464c",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 5,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "REHEARSAL_AT17",
+      "status": "RETURNED",
+      "training_use": true,
+      "diagnostic_group": "TRAINED_REHEARSAL",
+      "seconds": 9.710333057912067,
+      "finish_reason": "stop",
+      "raw_sha256": "311e309cd035a12b1c9f47af07ffa4a8834689c672d6a6b3050d7e90ac3b9ae3",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:7fa32827b0f9bfe5e79bc28bad1e895fbdb58212a7a80af57571c6710f7ec892",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 3,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "REHEARSAL_AT19",
+      "status": "RETURNED",
+      "training_use": true,
+      "diagnostic_group": "TRAINED_REHEARSAL",
+      "seconds": 6.723645579069853,
+      "finish_reason": "stop",
+      "raw_sha256": "2a9c865be50ab9d880f24b8d173602311f1f74d626096c84cf363610aa4aa9eb",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:5d3c55016fa63101f655a4b52447e22a055f7a4f843ae9a4f828525f719fc862",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 2,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "REHEARSAL_AT21",
+      "status": "RETURNED",
+      "training_use": true,
+      "diagnostic_group": "TRAINED_REHEARSAL",
+      "seconds": 6.020321354968473,
+      "finish_reason": "stop",
+      "raw_sha256": "52facbc2b191d58d9f1367ae8ba34063f225b1669ea825a1019749c2dd013d6b",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:28da1a32cb444eaed6838c5fc4fc982e052febf865d5124262bb35b6a169035d",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 3,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "REHEARSAL_AT29",
+      "status": "RETURNED",
+      "training_use": true,
+      "diagnostic_group": "TRAINED_REHEARSAL",
+      "seconds": 13.164928717073053,
+      "finish_reason": "stop",
+      "raw_sha256": "c07ff83779e69c39e5e6eddd0bdfbbaf64726c4d99f34aec19c8690c4df2b925",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:b313bfe5a75720bdad6e8e9f07d920986cdaf9d59c0cc2a3c6852cde9ecc6d7b",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 6,
+      "file_replay": "MATCHED"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "teacher": "AT01",
+      "loss": 0.017524702474474907,
+      "gradient_norm": 0.6639115810394287
+    },
+    {
+      "step": 2,
+      "teacher": "AT17",
+      "loss": 0.025583671405911446,
+      "gradient_norm": 0.7621474266052246
+    },
+    {
+      "step": 3,
+      "teacher": "AT02",
+      "loss": 0.05171515420079231,
+      "gradient_norm": 6.677227973937988
+    },
+    {
+      "step": 4,
+      "teacher": "AT18",
+      "loss": 0.020980361849069595,
+      "gradient_norm": 3.311490535736084
+    },
+    {
+      "step": 5,
+      "teacher": "AT03",
+      "loss": 0.0014171075308695436,
+      "gradient_norm": 0.06253094226121902
+    },
+    {
+      "step": 6,
+      "teacher": "AT19",
+      "loss": 0.06338120251893997,
+      "gradient_norm": 3.7115378379821777
+    },
+    {
+      "step": 7,
+      "teacher": "AT04",
+      "loss": 0.12548112869262695,
+      "gradient_norm": 5.736237525939941
+    },
+    {
+      "step": 8,
+      "teacher": "AT20",
+      "loss": 0.05499626323580742,
+      "gradient_norm": 2.0547330379486084
+    },
+    {
+      "step": 9,
+      "teacher": "AT05",
+      "loss": 0.03213557228446007,
+      "gradient_norm": 2.3244709968566895
+    },
+    {
+      "step": 10,
+      "teacher": "AT21",
+      "loss": 0.0014651527162641287,
+      "gradient_norm": 0.09630662202835083
+    },
+    {
+      "step": 11,
+      "teacher": "AT06",
+      "loss": 0.001526824664324522,
+      "gradient_norm": 0.08110389858484268
+    },
+    {
+      "step": 12,
+      "teacher": "AT22",
+      "loss": 0.530656099319458,
+      "gradient_norm": 24.61036491394043
+    },
+    {
+      "step": 13,
+      "teacher": "AT07",
+      "loss": 0.009033115580677986,
+      "gradient_norm": 0.9528293013572693
+    },
+    {
+      "step": 14,
+      "teacher": "AT23",
+      "loss": 0.008041679859161377,
+      "gradient_norm": 0.3607964813709259
+    },
+    {
+      "step": 15,
+      "teacher": "AT08",
+      "loss": 0.41349223256111145,
+      "gradient_norm": 15.246943473815918
+    },
+    {
+      "step": 16,
+      "teacher": "AT24",
+      "loss": 0.24303658306598663,
+      "gradient_norm": 20.115982055664062
+    },
+    {
+      "step": 17,
+      "teacher": "AT09",
+      "loss": 0.36854788661003113,
+      "gradient_norm": 21.177244186401367
+    },
+    {
+      "step": 18,
+      "teacher": "AT25",
+      "loss": 0.26036137342453003,
+      "gradient_norm": 9.996336936950684
+    },
+    {
+      "step": 19,
+      "teacher": "AT10",
+      "loss": 0.026500247418880463,
+      "gradient_norm": 5.4855570793151855
+    },
+    {
+      "step": 20,
+      "teacher": "AT26",
+      "loss": 0.3435262143611908,
+      "gradient_norm": 8.63577938079834
+    },
+    {
+      "step": 21,
+      "teacher": "AT11",
+      "loss": 0.1984621286392212,
+      "gradient_norm": 9.626017570495605
+    },
+    {
+      "step": 22,
+      "teacher": "AT27",
+      "loss": 0.15875962376594543,
+      "gradient_norm": 6.488949775695801
+    },
+    {
+      "step": 23,
+      "teacher": "AT12",
+      "loss": 0.18703162670135498,
+      "gradient_norm": 7.77147912979126
+    },
+    {
+      "step": 24,
+      "teacher": "AT28",
+      "loss": 0.11546427011489868,
+      "gradient_norm": 6.39712381362915
+    },
+    {
+      "step": 25,
+      "teacher": "AT13",
+      "loss": 0.00709884287789464,
+      "gradient_norm": 0.4104476273059845
+    },
+    {
+      "step": 26,
+      "teacher": "AT29",
+      "loss": 0.33141446113586426,
+      "gradient_norm": 9.970255851745605
+    },
+    {
+      "step": 27,
+      "teacher": "AT14",
+      "loss": 0.010214531794190407,
+      "gradient_norm": 0.787544846534729
+    },
+    {
+      "step": 28,
+      "teacher": "AT30",
+      "loss": 0.1967836618423462,
+      "gradient_norm": 7.061436653137207
+    },
+    {
+      "step": 29,
+      "teacher": "AT15",
+      "loss": 0.13508738577365875,
+      "gradient_norm": 17.342439651489258
+    },
+    {
+      "step": 30,
+      "teacher": "AT31",
+      "loss": 0.48301684856414795,
+      "gradient_norm": 21.766807556152344
+    },
+    {
+      "step": 31,
+      "teacher": "AT16",
+      "loss": 0.11786312609910965,
+      "gradient_norm": 10.446561813354492
+    },
+    {
+      "step": 32,
+      "teacher": "AT32",
+      "loss": 0.47998660802841187,
+      "gradient_norm": 12.746862411499023
+    },
+    {
+      "step": 33,
+      "teacher": "AT32",
+      "loss": 0.36249497532844543,
+      "gradient_norm": 9.987492561340332
+    },
+    {
+      "step": 34,
+      "teacher": "AT16",
+      "loss": 0.024872474372386932,
+      "gradient_norm": 1.518228530883789
+    },
+    {
+      "step": 35,
+      "teacher": "AT31",
+      "loss": 0.12988027930259705,
+      "gradient_norm": 5.249745845794678
+    },
+    {
+      "step": 36,
+      "teacher": "AT15",
+      "loss": 0.017418116331100464,
+      "gradient_norm": 0.9674490690231323
+    },
+    {
+      "step": 37,
+      "teacher": "AT30",
+      "loss": 0.04001125693321228,
+      "gradient_norm": 2.320531129837036
+    },
+    {
+      "step": 38,
+      "teacher": "AT14",
+      "loss": 0.004654737189412117,
+      "gradient_norm": 0.5198987126350403
+    },
+    {
+      "step": 39,
+      "teacher": "AT29",
+      "loss": 0.08023954927921295,
+      "gradient_norm": 3.8428077697753906
+    },
+    {
+      "step": 40,
+      "teacher": "AT13",
+      "loss": 0.005530861206352711,
+      "gradient_norm": 0.27718353271484375
+    },
+    {
+      "step": 41,
+      "teacher": "AT28",
+      "loss": 0.10467303544282913,
+      "gradient_norm": 13.825050354003906
+    },
+    {
+      "step": 42,
+      "teacher": "AT12",
+      "loss": 0.15428495407104492,
+      "gradient_norm": 6.289282321929932
+    },
+    {
+      "step": 43,
+      "teacher": "AT27",
+      "loss": 0.5046484470367432,
+      "gradient_norm": 18.01288414001465
+    },
+    {
+      "step": 44,
+      "teacher": "AT11",
+      "loss": 0.05303540825843811,
+      "gradient_norm": 6.53066349029541
+    },
+    {
+      "step": 45,
+      "teacher": "AT26",
+      "loss": 0.1415109932422638,
+      "gradient_norm": 7.74681282043457
+    },
+    {
+      "step": 46,
+      "teacher": "AT10",
+      "loss": 0.0036617217119783163,
+      "gradient_norm": 0.20555952191352844
+    },
+    {
+      "step": 47,
+      "teacher": "AT25",
+      "loss": 0.03199661150574684,
+      "gradient_norm": 1.4150701761245728
+    },
+    {
+      "step": 48,
+      "teacher": "AT09",
+      "loss": 0.06257393211126328,
+      "gradient_norm": 4.074260711669922
+    },
+    {
+      "step": 49,
+      "teacher": "AT24",
+      "loss": 0.049028925597667694,
+      "gradient_norm": 3.155106782913208
+    },
+    {
+      "step": 50,
+      "teacher": "AT08",
+      "loss": 0.13902470469474792,
+      "gradient_norm": 9.045145988464355
+    },
+    {
+      "step": 51,
+      "teacher": "AT23",
+      "loss": 0.016688285395503044,
+      "gradient_norm": 1.6727129220962524
+    },
+    {
+      "step": 52,
+      "teacher": "AT07",
+      "loss": 0.006283873692154884,
+      "gradient_norm": 0.5599843859672546
+    },
+    {
+      "step": 53,
+      "teacher": "AT22",
+      "loss": 0.6321975588798523,
+      "gradient_norm": 21.58644676208496
+    },
+    {
+      "step": 54,
+      "teacher": "AT06",
+      "loss": 0.0016189687885344028,
+      "gradient_norm": 0.1626557856798172
+    },
+    {
+      "step": 55,
+      "teacher": "AT21",
+      "loss": 0.0012069123331457376,
+      "gradient_norm": 0.06739609688520432
+    },
+    {
+      "step": 56,
+      "teacher": "AT05",
+      "loss": 0.01136727724224329,
+      "gradient_norm": 0.899182140827179
+    },
+    {
+      "step": 57,
+      "teacher": "AT20",
+      "loss": 0.01726134866476059,
+      "gradient_norm": 0.9232222437858582
+    },
+    {
+      "step": 58,
+      "teacher": "AT04",
+      "loss": 0.013454752042889595,
+      "gradient_norm": 0.7920787930488586
+    },
+    {
+      "step": 59,
+      "teacher": "AT19",
+      "loss": 0.3586690425872803,
+      "gradient_norm": 51.940311431884766
+    },
+    {
+      "step": 60,
+      "teacher": "AT03",
+      "loss": 0.0009085139026865363,
+      "gradient_norm": 0.04722967743873596
+    },
+    {
+      "step": 61,
+      "teacher": "AT18",
+      "loss": 0.01050772238522768,
+      "gradient_norm": 1.2855170965194702
+    },
+    {
+      "step": 62,
+      "teacher": "AT02",
+      "loss": 0.009908334352076054,
+      "gradient_norm": 2.464005947113037
+    },
+    {
+      "step": 63,
+      "teacher": "AT17",
+      "loss": 0.6525634527206421,
+      "gradient_norm": 44.56073760986328
+    },
+    {
+      "step": 64,
+      "teacher": "AT01",
+      "loss": 0.001301333773881197,
+      "gradient_norm": 0.05742131546139717
+    },
+    {
+      "step": 65,
+      "teacher": "AT01",
+      "loss": 0.0013535243924707174,
+      "gradient_norm": 0.06218893080949783
+    },
+    {
+      "step": 66,
+      "teacher": "AT17",
+      "loss": 0.00918558705598116,
+      "gradient_norm": 3.016828775405884
+    },
+    {
+      "step": 67,
+      "teacher": "AT02",
+      "loss": 0.0037130459677428007,
+      "gradient_norm": 0.580143392086029
+    },
+    {
+      "step": 68,
+      "teacher": "AT18",
+      "loss": 0.0016212089685723186,
+      "gradient_norm": 0.12520436942577362
+    },
+    {
+      "step": 69,
+      "teacher": "AT03",
+      "loss": 0.0007476983591914177,
+      "gradient_norm": 0.03159250691533089
+    },
+    {
+      "step": 70,
+      "teacher": "AT19",
+      "loss": 0.014985241927206516,
+      "gradient_norm": 0.8992365598678589
+    },
+    {
+      "step": 71,
+      "teacher": "AT04",
+      "loss": 0.0032954076305031776,
+      "gradient_norm": 0.3571595847606659
+    },
+    {
+      "step": 72,
+      "teacher": "AT20",
+      "loss": 0.006390378810465336,
+      "gradient_norm": 0.7306674122810364
+    },
+    {
+      "step": 73,
+      "teacher": "AT05",
+      "loss": 0.00236061355099082,
+      "gradient_norm": 0.22841130197048187
+    },
+    {
+      "step": 74,
+      "teacher": "AT21",
+      "loss": 0.0007179314270615578,
+      "gradient_norm": 0.07947631180286407
+    },
+    {
+      "step": 75,
+      "teacher": "AT06",
+      "loss": 0.0005458699888549745,
+      "gradient_norm": 0.04586902633309364
+    },
+    {
+      "step": 76,
+      "teacher": "AT22",
+      "loss": 0.34631800651550293,
+      "gradient_norm": 15.12884521484375
+    },
+    {
+      "step": 77,
+      "teacher": "AT07",
+      "loss": 0.000782179064117372,
+      "gradient_norm": 0.04543106630444527
+    },
+    {
+      "step": 78,
+      "teacher": "AT23",
+      "loss": 0.0017198720015585423,
+      "gradient_norm": 0.12089428305625916
+    },
+    {
+      "step": 79,
+      "teacher": "AT08",
+      "loss": 0.023518703877925873,
+      "gradient_norm": 2.2404606342315674
+    },
+    {
+      "step": 80,
+      "teacher": "AT24",
+      "loss": 0.0031513948924839497,
+      "gradient_norm": 0.6704660058021545
+    },
+    {
+      "step": 81,
+      "teacher": "AT09",
+      "loss": 0.007828813046216965,
+      "gradient_norm": 0.8704239726066589
+    },
+    {
+      "step": 82,
+      "teacher": "AT25",
+      "loss": 0.002720932010561228,
+      "gradient_norm": 0.2118264138698578
+    },
+    {
+      "step": 83,
+      "teacher": "AT10",
+      "loss": 0.0014509737957268953,
+      "gradient_norm": 0.09097651392221451
+    },
+    {
+      "step": 84,
+      "teacher": "AT26",
+      "loss": 0.06616025418043137,
+      "gradient_norm": 3.777052164077759
+    },
+    {
+      "step": 85,
+      "teacher": "AT11",
+      "loss": 0.020499136298894882,
+      "gradient_norm": 3.6345767974853516
+    },
+    {
+      "step": 86,
+      "teacher": "AT27",
+      "loss": 0.15020862221717834,
+      "gradient_norm": 21.501258850097656
+    },
+    {
+      "step": 87,
+      "teacher": "AT12",
+      "loss": 0.41636165976524353,
+      "gradient_norm": 61.14567565917969
+    },
+    {
+      "step": 88,
+      "teacher": "AT28",
+      "loss": 0.002627067267894745,
+      "gradient_norm": 0.2360541969537735
+    },
+    {
+      "step": 89,
+      "teacher": "AT13",
+      "loss": 0.000897767604328692,
+      "gradient_norm": 0.07035638391971588
+    },
+    {
+      "step": 90,
+      "teacher": "AT29",
+      "loss": 0.13847380876541138,
+      "gradient_norm": 11.350135803222656
+    },
+    {
+      "step": 91,
+      "teacher": "AT14",
+      "loss": 0.0006201626965776086,
+      "gradient_norm": 0.021318485960364342
+    },
+    {
+      "step": 92,
+      "teacher": "AT30",
+      "loss": 0.001852051354944706,
+      "gradient_norm": 0.1069740355014801
+    },
+    {
+      "step": 93,
+      "teacher": "AT15",
+      "loss": 0.0008138379780575633,
+      "gradient_norm": 0.23823922872543335
+    },
+    {
+      "step": 94,
+      "teacher": "AT31",
+      "loss": 0.006770446430891752,
+      "gradient_norm": 1.3055624961853027
+    },
+    {
+      "step": 95,
+      "teacher": "AT16",
+      "loss": 0.01100709568709135,
+      "gradient_norm": 2.9479310512542725
+    },
+    {
+      "step": 96,
+      "teacher": "AT32",
+      "loss": 0.03378896042704582,
+      "gradient_norm": 4.848751068115234
+    },
+    {
+      "step": 97,
+      "teacher": "AT32",
+      "loss": 0.00550274271517992,
+      "gradient_norm": 0.5725947022438049
+    },
+    {
+      "step": 98,
+      "teacher": "AT16",
+      "loss": 0.0012334962375462055,
+      "gradient_norm": 0.07902493327856064
+    },
+    {
+      "step": 99,
+      "teacher": "AT31",
+      "loss": 0.0014663820620626211,
+      "gradient_norm": 0.10637543350458145
+    },
+    {
+      "step": 100,
+      "teacher": "AT15",
+      "loss": 0.056333620101213455,
+      "gradient_norm": 14.40326976776123
+    },
+    {
+      "step": 101,
+      "teacher": "AT30",
+      "loss": 0.002091608475893736,
+      "gradient_norm": 0.2560390532016754
+    },
+    {
+      "step": 102,
+      "teacher": "AT14",
+      "loss": 0.008866957388818264,
+      "gradient_norm": 2.5635902881622314
+    },
+    {
+      "step": 103,
+      "teacher": "AT29",
+      "loss": 0.004266532137989998,
+      "gradient_norm": 0.6192160248756409
+    },
+    {
+      "step": 104,
+      "teacher": "AT13",
+      "loss": 0.0017730995314195752,
+      "gradient_norm": 0.3467808663845062
+    },
+    {
+      "step": 105,
+      "teacher": "AT28",
+      "loss": 0.001563476282171905,
+      "gradient_norm": 0.13582371175289154
+    },
+    {
+      "step": 106,
+      "teacher": "AT12",
+      "loss": 0.29263070225715637,
+      "gradient_norm": 16.035930633544922
+    },
+    {
+      "step": 107,
+      "teacher": "AT27",
+      "loss": 0.020354609936475754,
+      "gradient_norm": 4.594804763793945
+    },
+    {
+      "step": 108,
+      "teacher": "AT11",
+      "loss": 0.002460898831486702,
+      "gradient_norm": 0.1220497414469719
+    },
+    {
+      "step": 109,
+      "teacher": "AT26",
+      "loss": 0.0008393045864067972,
+      "gradient_norm": 0.07969692349433899
+    },
+    {
+      "step": 110,
+      "teacher": "AT10",
+      "loss": 0.0005004632985219359,
+      "gradient_norm": 0.02554422989487648
+    },
+    {
+      "step": 111,
+      "teacher": "AT25",
+      "loss": 0.002344344276934862,
+      "gradient_norm": 0.28727883100509644
+    },
+    {
+      "step": 112,
+      "teacher": "AT09",
+      "loss": 0.5524071455001831,
+      "gradient_norm": 57.96352767944336
+    },
+    {
+      "step": 113,
+      "teacher": "AT24",
+      "loss": 0.011585305444896221,
+      "gradient_norm": 5.135129928588867
+    },
+    {
+      "step": 114,
+      "teacher": "AT08",
+      "loss": 0.0688057541847229,
+      "gradient_norm": 32.48717498779297
+    },
+    {
+      "step": 115,
+      "teacher": "AT23",
+      "loss": 0.0012755868956446648,
+      "gradient_norm": 0.15451839566230774
+    },
+    {
+      "step": 116,
+      "teacher": "AT07",
+      "loss": 0.10603908449411392,
+      "gradient_norm": 22.138912200927734
+    },
+    {
+      "step": 117,
+      "teacher": "AT22",
+      "loss": 0.6932277083396912,
+      "gradient_norm": 63.365230560302734
+    },
+    {
+      "step": 118,
+      "teacher": "AT06",
+      "loss": 0.0004306900955270976,
+      "gradient_norm": 0.07338494807481766
+    },
+    {
+      "step": 119,
+      "teacher": "AT21",
+      "loss": 0.0006205334211699665,
+      "gradient_norm": 0.04823716729879379
+    },
+    {
+      "step": 120,
+      "teacher": "AT05",
+      "loss": 0.0004143255646340549,
+      "gradient_norm": 0.044300347566604614
+    },
+    {
+      "step": 121,
+      "teacher": "AT20",
+      "loss": 0.0010487559484317899,
+      "gradient_norm": 0.10235065966844559
+    },
+    {
+      "step": 122,
+      "teacher": "AT04",
+      "loss": 0.0014487623702734709,
+      "gradient_norm": 0.1920691579580307
+    },
+    {
+      "step": 123,
+      "teacher": "AT19",
+      "loss": 0.001364867202937603,
+      "gradient_norm": 0.09043785184621811
+    },
+    {
+      "step": 124,
+      "teacher": "AT03",
+      "loss": 0.00037427834467962384,
+      "gradient_norm": 0.024926604703068733
+    },
+    {
+      "step": 125,
+      "teacher": "AT18",
+      "loss": 0.0006079134764149785,
+      "gradient_norm": 0.05876897647976875
+    },
+    {
+      "step": 126,
+      "teacher": "AT02",
+      "loss": 0.0022243796847760677,
+      "gradient_norm": 0.5037923455238342
+    },
+    {
+      "step": 127,
+      "teacher": "AT17",
+      "loss": 0.0005314024747349322,
+      "gradient_norm": 0.029324321076273918
+    },
+    {
+      "step": 128,
+      "teacher": "AT01",
+      "loss": 0.0006373057840391994,
+      "gradient_norm": 0.034228235483169556
+    }
+  ],
+  "measurements": [
+    {
+      "phase": "before_updates",
+      "losses": {
+        "AT01": 0.00915596168488264,
+        "AT02": 0.01860077865421772,
+        "AT03": 0.002381614875048399,
+        "AT04": 0.023630423471331596,
+        "AT05": 0.02405235730111599,
+        "AT06": 0.0049093011766672134,
+        "AT07": 0.009409697726368904,
+        "AT08": 0.040125805884599686,
+        "AT09": 0.041985683143138885,
+        "AT10": 0.010293565690517426,
+        "AT11": 0.028588227927684784,
+        "AT12": 0.035041000694036484,
+        "AT13": 0.008222470059990883,
+        "AT14": 0.004367641173303127,
+        "AT15": 0.015241444110870361,
+        "AT16": 0.026773415505886078,
+        "AT17": 0.014566023834049702,
+        "AT18": 0.011903554201126099,
+        "AT19": 0.023731982335448265,
+        "AT20": 0.03686780110001564,
+        "AT21": 0.005433404818177223,
+        "AT22": 0.05167313292622566,
+        "AT23": 0.014604790136218071,
+        "AT24": 0.021233638748526573,
+        "AT25": 0.028014861047267914,
+        "AT26": 0.03411095589399338,
+        "AT27": 0.04961580038070679,
+        "AT28": 0.01952744461596012,
+        "AT29": 0.04610617086291313,
+        "AT30": 0.0327114500105381,
+        "AT31": 0.03689385578036308,
+        "AT32": 0.058113034814596176
+      },
+      "mean": 0.024621477830805816
+    },
+    {
+      "phase": "after_updates",
+      "losses": {
+        "AT01": 0.0006109554669819772,
+        "AT02": 0.00048556816182099283,
+        "AT03": 0.00036367675056681037,
+        "AT04": 0.0007241536513902247,
+        "AT05": 0.0004567064461298287,
+        "AT06": 0.00040081332554109395,
+        "AT07": 0.0005147582851350307,
+        "AT08": 0.029689602553844452,
+        "AT09": 0.0007150507299229503,
+        "AT10": 0.0007039165939204395,
+        "AT11": 0.028528962284326553,
+        "AT12": 0.003047539619728923,
+        "AT13": 0.00030659176991321146,
+        "AT14": 0.0005860528326593339,
+        "AT15": 0.02687489241361618,
+        "AT16": 0.015202426351606846,
+        "AT17": 0.0005380954826250672,
+        "AT18": 0.0006059298757463694,
+        "AT19": 0.0012456782860681415,
+        "AT20": 0.0006875193794257939,
+        "AT21": 0.003993642516434193,
+        "AT22": 0.013833899050951004,
+        "AT23": 0.0009659228380769491,
+        "AT24": 0.0027186893858015537,
+        "AT25": 0.0009190537384711206,
+        "AT26": 0.001738445134833455,
+        "AT27": 0.005485606379806995,
+        "AT28": 0.004965923726558685,
+        "AT29": 0.005390024743974209,
+        "AT30": 0.0016607247525826097,
+        "AT31": 0.0017971874913200736,
+        "AT32": 0.004648950416594744
+      },
+      "mean": 0.005012717513636744
+    }
+  ],
+  "training_initial": "PRIOR_ISOLATED_ANALYSIS_TEACHING32_ADAPTER_FIXED_TARGETS_NEW_OUTPUT_ONLY",
+  "initial_hashes": {
+    "adapter_config.json": "ad2ff18a05a8b901db0f04a74cacaf3c1360cf342ae07b473b176885bdb3bba5",
+    "adapter_model.safetensors": "02dfa43f0e848da2d3e2c9bf1e519e76a8e8dfa74e59c855dfee892259e911a7"
+  },
+  "training_objective": "EXISTING_FULL_TARGET_DETACHED_ERROR_WEIGHTED_CE_V1",
+  "measurement_objective": "UNWEIGHTED_FULL_ASSISTANT_NLL",
+  "model_adopted": false,
+  "retry": false,
+  "product_credit": 0,
+  "process_seconds": 324.174446281977,
+  "ce_window_cpu_validation": [
+    {
+      "weighted": false,
+      "loss": 2.9459385871887207,
+      "full_tail_loss_and_all_gradients_match": true,
+      "all_target_weights_positive": true
+    },
+    {
+      "weighted": true,
+      "loss": 2.9459593296051025,
+      "full_tail_loss_and_all_gradients_match": true,
+      "all_target_weights_positive": true
+    }
+  ],
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "seed": 20261105,
+  "token_counts": {
+    "AT01": {
+      "prompt_tokens": 903,
+      "target_tokens": 141
+    },
+    "AT02": {
+      "prompt_tokens": 902,
+      "target_tokens": 107
+    },
+    "AT03": {
+      "prompt_tokens": 905,
+      "target_tokens": 129
+    },
+    "AT04": {
+      "prompt_tokens": 907,
+      "target_tokens": 173
+    },
+    "AT05": {
+      "prompt_tokens": 898,
+      "target_tokens": 87
+    },
+    "AT06": {
+      "prompt_tokens": 899,
+      "target_tokens": 79
+    },
+    "AT07": {
+      "prompt_tokens": 903,
+      "target_tokens": 109
+    },
+    "AT08": {
+      "prompt_tokens": 905,
+      "target_tokens": 156
+    },
+    "AT09": {
+      "prompt_tokens": 898,
+      "target_tokens": 136
+    },
+    "AT10": {
+      "prompt_tokens": 901,
+      "target_tokens": 139
+    },
+    "AT11": {
+      "prompt_tokens": 902,
+      "target_tokens": 144
+    },
+    "AT12": {
+      "prompt_tokens": 899,
+      "target_tokens": 117
+    },
+    "AT13": {
+      "prompt_tokens": 903,
+      "target_tokens": 118
+    },
+    "AT14": {
+      "prompt_tokens": 898,
+      "target_tokens": 78
+    },
+    "AT15": {
+      "prompt_tokens": 903,
+      "target_tokens": 133
+    },
+    "AT16": {
+      "prompt_tokens": 901,
+      "target_tokens": 125
+    },
+    "AT17": {
+      "prompt_tokens": 903,
+      "target_tokens": 157
+    },
+    "AT18": {
+      "prompt_tokens": 900,
+      "target_tokens": 117
+    },
+    "AT19": {
+      "prompt_tokens": 904,
+      "target_tokens": 110
+    },
+    "AT20": {
+      "prompt_tokens": 900,
+      "target_tokens": 118
+    },
+    "AT21": {
+      "prompt_tokens": 898,
+      "target_tokens": 99
+    },
+    "AT22": {
+      "prompt_tokens": 897,
+      "target_tokens": 96
+    },
+    "AT23": {
+      "prompt_tokens": 899,
+      "target_tokens": 117
+    },
+    "AT24": {
+      "prompt_tokens": 904,
+      "target_tokens": 134
+    },
+    "AT25": {
+      "prompt_tokens": 899,
+      "target_tokens": 118
+    },
+    "AT26": {
+      "prompt_tokens": 902,
+      "target_tokens": 104
+    },
+    "AT27": {
+      "prompt_tokens": 902,
+      "target_tokens": 140
+    },
+    "AT28": {
+      "prompt_tokens": 902,
+      "target_tokens": 151
+    },
+    "AT29": {
+      "prompt_tokens": 923,
+      "target_tokens": 214
+    },
+    "AT30": {
+      "prompt_tokens": 911,
+      "target_tokens": 120
+    },
+    "AT31": {
+      "prompt_tokens": 902,
+      "target_tokens": 124
+    },
+    "AT32": {
+      "prompt_tokens": 901,
+      "target_tokens": 104
+    }
+  },
+  "training_initial_reload": "MATCHED_ALL_112_SAVED_TENSORS",
+  "changed_trainable_tensors": 112,
+  "peak_allocated_gib": 9.293182373046875,
+  "peak_reserved_gib": 10.244140625,
+  "adapter_sha256": "09b3a1f6beb825e07d82e9d23cce2e69c2099d18041537e38fe5eb8c0c0333f5",
+  "adapter_config_sha256": "047a624c7610132ebfa621642342760060446ed9360dab4ca8e1741ea016738b",
+  "saved_adapter_nontraining_reload": "MATCHED_112_TENSORS",
+  "initial_adapter_unchanged": true,
+  "root_raw_review": {
+    "AF01": "NOT_READY_REJECTED: negation te-inai is not literal te-wa-inai; aite-no modifier absent from source. REASON_MARKER now uses exact source quote ので, but whole response rejected",
+    "AF02": "UNCHANGED_BYTES_FROM_PREVIOUS: temporal/result decomposition retained, epistemic expression still coarsened to NEGATION",
+    "UV03": "UNCHANGED_BYTES_FROM_PREVIOUS: reported speech and own thought kept; ki-ni still extraneous modifier",
+    "UV12": "PARTIAL_WITH_COARSE_QUALIFIERS: separate wish/undecided thoughts retained, but wish-internal negation and full undecided phrase as modifier need scope review",
+    "NV01": "NOT_READY_REJECTED: object/actor confusion reduced, but unknown-content parent is thought unit3 rather than unknown root4; waiting is thought rather than taught action",
+    "NV02": "MEANINGFUL_LOCAL_IMPROVEMENT: father speech/content and own worry/actor/little are grounded; fake negation on da removed",
+    "NV03": "PARTIAL_WITH_EXTRA_MODIFIER: thought/wish/undecided/time/negation held; tai tagged modifier unnecessarily",
+    "NV04": "UNCHANGED_BYTES_FROM_PREVIOUS: temporal/result and unknown-content decomposition held",
+    "REHEARSAL_AT17": "JSON_TARGET_EXACT_MATCH_NOT_TRANSFER",
+    "REHEARSAL_AT19": "JSON_TARGET_EXACT_MATCH_NOT_TRANSFER",
+    "REHEARSAL_AT21": "JSON_TARGET_EXACT_MATCH_NOT_TRANSFER",
+    "REHEARSAL_AT29": "JSON_TARGET_EXACT_MATCH: independent wish and undecided plus unique room-object quote recovered; trained example only"
+  },
+  "root_adoption_decision": "NOT_ADOPTED: trained target fit recovered but development-seen inputs not used as exact training examples still have source/parent errors and coarse qualifiers; no automatic extra epochs or new batch",
+  "quality_acceptance": false,
+  "local_file_replay": {
+    "count": 10,
+    "engine_generate": "BANNED",
+    "compiler_entry": "BANNED",
+    "realizer_entry": "BANNED",
+    "candidate_id_and_coverage": "MATCHED",
+    "sql_commit_count": 0
+  },
+  "private_archive": {
+    "library_file_id": "libfile_609f1e617a688191aadbdb5e8f988a4f",
+    "filename": "cocolon-analysis-fixed32-result-20261102.zip",
+    "bytes": 14435522,
+    "sha256": "537b9880e120b9624cf9df38e4707be546433e0b479416f9dd40935895cc3d4a",
+    "members": 71,
+    "crc": "MATCHED",
+    "all_70_manifest_hashes": "MATCHED",
+    "pod_external_retrieval": "COMPLETE"
+  },
+  "transfer_recovery": {
+    "review_archive_library_file_id": "libfile_11ed9ed757a08191b7d9b58c7949707f",
+    "review_bytes": 63583,
+    "review_sha256": "0f75eb8cffe286b5ecc43ae74459fd4fc3539272054451bc00197483d079d341",
+    "all_12_raw_hashes": "MATCHED",
+    "result": "Download helper reported failures/timeouts; completed shared-directory files independently matched full expected bytes/SHA; CRC/manifest/report/12 raw then matched and full archive persisted. No training or generation rerun."
+  }
+}

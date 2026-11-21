@@ -1,0 +1,274 @@
+<div id="emlis-kokoro-weather-preview" class="viz-dotted-background">
+  <style>
+    #emlis-kokoro-weather-preview{padding:12px 0 20px;width:100%;background:transparent}
+    #emlis-kokoro-weather-preview .preview-label{text-align:center;font:12px/1.6 sans-serif;color:var(--muted-foreground);margin:0 0 12px}
+    #emlis-kokoro-weather-preview .emlis-phone{--emlis-bg:#F6F1E8;--emlis-panel:#FCFAF6;--emlis-burgundy:#5A1020;--emlis-title:#800020;--emlis-ink:#111827;--emlis-subtle:#6B625C;--emlis-tonal:#EFE1DD;--emlis-border:#DDD5CA;--mood-joy:#D4AA45;--mood-sad:#7F9FBA;--mood-anger:#CB8678;--mood-anxiety:#AA92B5;--mood-calm:#809D85;width:min(100%,390px);margin:auto;color:var(--emlis-ink);background:var(--emlis-bg);border:1px solid var(--emlis-border);border-radius:36px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans CJK JP",sans-serif;box-shadow:0 10px 30px #2F14200A}
+    #emlis-kokoro-weather-preview .emlis-phone{box-sizing:border-box}
+    #emlis-kokoro-weather-preview .emlis-phone *{box-sizing:border-box}
+    #emlis-kokoro-weather-preview [hidden]{display:none!important}
+    #emlis-kokoro-weather-preview .emlis-phone button{font-family:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+    #emlis-kokoro-weather-preview .emlis-icon{width:20px;height:20px;stroke-width:1.65;display:inline-block;vertical-align:middle;flex-shrink:0}
+    #emlis-kokoro-weather-preview .status-bar{display:flex;align-items:center;justify-content:space-between;padding:17px 24px 5px;font-size:14px;font-weight:600}
+    #emlis-kokoro-weather-preview .status-icons{display:flex;align-items:center;gap:5px}
+    #emlis-kokoro-weather-preview .status-icons .emlis-icon{width:17px;height:17px;stroke-width:2}
+    #emlis-kokoro-weather-preview .brand-row{display:flex;justify-content:space-between;align-items:center;padding:16px 22px 22px}
+    #emlis-kokoro-weather-preview .brand{font-family:Georgia,"Times New Roman",serif;font-size:30px;font-weight:700;color:var(--emlis-title);letter-spacing:.3px}
+    #emlis-kokoro-weather-preview .brand-history{color:var(--emlis-title);display:flex;align-items:center;gap:5px;font-size:12px}
+    #emlis-kokoro-weather-preview .feature-tabs{display:flex;gap:10px;margin:0 20px 24px}
+    #emlis-kokoro-weather-preview .feature-tab{flex:1;min-width:0;border-radius:26px;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 5px;font-size:14px;font-weight:600;background:var(--emlis-tonal);color:var(--emlis-title)}
+    #emlis-kokoro-weather-preview .feature-tab.current{background:var(--emlis-burgundy);color:var(--emlis-panel)}
+    #emlis-kokoro-weather-preview .feature-tab .emlis-icon{width:18px;height:18px}
+    #emlis-kokoro-weather-preview .mode-tabs{display:flex;gap:4px;background:var(--emlis-tonal);border-radius:28px;padding:4px;margin:0 20px 24px}
+    #emlis-kokoro-weather-preview .mode-tabs button{border:0;background:transparent;flex:1;min-height:40px;border-radius:24px;font-size:14px;font-weight:600}
+    #emlis-kokoro-weather-preview .mode-tabs button[aria-selected="true"]{background:var(--emlis-burgundy);color:var(--emlis-panel)}
+    #emlis-kokoro-weather-preview .period-heading{margin:0 22px 20px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    #emlis-kokoro-weather-preview .period-heading h1{font-size:23px;line-height:1.4;letter-spacing:.02em;margin:0 0 6px;font-weight:700}
+    #emlis-kokoro-weather-preview .period-caption{font-size:12px;color:var(--emlis-subtle);line-height:1.5}
+    #emlis-kokoro-weather-preview .period-arrows{display:flex;align-items:center;gap:2px}
+    #emlis-kokoro-weather-preview .period-arrows button{border:0;background:var(--emlis-panel);border-radius:50%;width:40px;height:40px;padding:0}
+    #emlis-kokoro-weather-preview .period-arrows button:disabled{opacity:.28}
+    #emlis-kokoro-weather-preview .weather-content{margin:0 20px;min-height:575px}
+    #emlis-kokoro-weather-preview .weather-card{background:var(--emlis-panel);border-radius:25px;padding:20px;margin-bottom:23px}
+    #emlis-kokoro-weather-preview .card-heading{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+    #emlis-kokoro-weather-preview .eyebrow{font-size:11.5px;color:var(--emlis-subtle);line-height:1.6;margin:0 0 7px}
+    #emlis-kokoro-weather-preview h2{font-size:18px;line-height:1.65;font-weight:700;letter-spacing:.01em;margin:0}
+    #emlis-kokoro-weather-preview h3{font-size:15px;line-height:1.6;font-weight:700;margin:0}
+    #emlis-kokoro-weather-preview .weather-seal{background:#F3E4B7;color:#8B6D28;border-radius:16px;width:45px;height:45px;display:grid;place-items:center;flex-shrink:0;margin-top:3px}
+    #emlis-kokoro-weather-preview .weather-seal .emlis-icon{width:27px;height:27px}
+    #emlis-kokoro-weather-preview .day-distribution{display:grid;grid-template-columns:148px 1fr;align-items:center;gap:15px;margin:20px 0 15px}
+    #emlis-kokoro-weather-preview .donut{position:relative;flex-shrink:0;display:grid;place-items:center}
+    #emlis-kokoro-weather-preview .donut svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+    #emlis-kokoro-weather-preview .donut-center{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.4}
+    #emlis-kokoro-weather-preview .donut-number{font-size:34px;font-weight:600;letter-spacing:-1px}
+    #emlis-kokoro-weather-preview .donut-unit{font-size:11px;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .empty-donut{background:var(--emlis-bg);border-radius:50%;color:#A79F96}
+    #emlis-kokoro-weather-preview .legend-vertical{display:grid;gap:10px;font-size:12px}
+    #emlis-kokoro-weather-preview .legend-entry{display:flex;align-items:center;gap:7px;min-width:0}
+    #emlis-kokoro-weather-preview .mood-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    #emlis-kokoro-weather-preview .legend-value{margin-left:auto;font-variant-numeric:tabular-nums;font-size:12px;font-weight:600}
+    #emlis-kokoro-weather-preview .description{font-size:12.5px;line-height:1.95;color:var(--emlis-subtle);margin:14px 0 0}
+    #emlis-kokoro-weather-preview .subheading{display:flex;align-items:center;justify-content:space-between;margin:0 1px 13px;gap:10px}
+    #emlis-kokoro-weather-preview .subheading span{font-size:11px;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .time-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:18px}
+    #emlis-kokoro-weather-preview .time-slot{padding:11px 2px 10px;border:0;border-radius:17px;background:var(--emlis-panel);min-width:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;min-height:124px}
+    #emlis-kokoro-weather-preview .time-slot[aria-pressed="true"]{background:var(--emlis-tonal);box-shadow:inset 0 0 0 1px #5A10202B}
+    #emlis-kokoro-weather-preview .time-title{font-weight:600;font-size:12px}
+    #emlis-kokoro-weather-preview .time-range{color:var(--emlis-subtle);font-size:11px}
+    #emlis-kokoro-weather-preview .time-dominant{line-height:1.5;min-height:17px;font-size:11px;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .time-slot .emlis-icon{width:19px;height:19px}
+    #emlis-kokoro-weather-preview .input-list{background:var(--emlis-panel);border-radius:20px;padding:15px 16px}
+    #emlis-kokoro-weather-preview .input-list-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px}
+    #emlis-kokoro-weather-preview .input-list-head span{font-size:11px;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .input-row{display:grid;grid-template-columns:43px 1fr;gap:10px;padding:12px 0;font-size:12px;line-height:1.65;align-items:start}
+    #emlis-kokoro-weather-preview .input-row+.input-row{border-top:1px solid #EAE3D9}
+    #emlis-kokoro-weather-preview .input-time{font-variant-numeric:tabular-nums;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .input-emotions{display:flex;gap:7px 12px;flex-wrap:wrap}
+    #emlis-kokoro-weather-preview .input-emotions span{display:inline-flex;gap:5px;align-items:center}
+    #emlis-kokoro-weather-preview .empty-note{font-size:12px;line-height:1.8;color:var(--emlis-subtle);margin:9px 0 4px}
+    #emlis-kokoro-weather-preview .method-note{font-size:11px;color:var(--emlis-subtle);line-height:1.8;margin:15px 1px 0}
+    #emlis-kokoro-weather-preview .plot-legend{display:flex;flex-wrap:wrap;gap:8px 12px;font-size:11px;margin:17px 0 15px;line-height:1.4}
+    #emlis-kokoro-weather-preview .plot-legend .legend-entry{gap:4px}
+    #emlis-kokoro-weather-preview .plot-wrapper{position:relative;margin:0 -3px}
+    #emlis-kokoro-weather-preview .plot-hit{padding:0;border:0;background:transparent;width:100%;display:block;text-align:left}
+    #emlis-kokoro-weather-preview .emotion-plot{display:block;width:100%;height:230px}
+    #emlis-kokoro-weather-preview .weather-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin-left:28px;margin-right:7px;gap:0;text-align:center}
+    #emlis-kokoro-weather-preview .weather-week .emlis-icon{width:18px;height:18px}
+    #emlis-kokoro-weather-preview .plot-help{display:flex;justify-content:space-between;gap:7px;font-size:11px;line-height:1.6;color:var(--emlis-subtle);margin-top:6px}
+    #emlis-kokoro-weather-preview .selected-day{background:var(--emlis-tonal);border-radius:22px;padding:17px;margin-bottom:18px}
+    #emlis-kokoro-weather-preview .selected-date{font-size:14px;font-weight:700;line-height:1.6;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:6px}
+    #emlis-kokoro-weather-preview .selected-date span{font-size:11px;font-weight:400;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .selected-composition{display:grid;grid-template-columns:70px 1fr;gap:15px;align-items:center}
+    #emlis-kokoro-weather-preview .selected-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 11px;font-size:11px}
+    #emlis-kokoro-weather-preview .selected-legend .legend-entry{gap:5px;justify-content:space-between}
+    #emlis-kokoro-weather-preview .selected-legend .legend-value{font-size:11px;font-weight:600}
+    #emlis-kokoro-weather-preview .selected-legend .mood-label{display:flex;gap:4px;align-items:center;min-width:0}
+    #emlis-kokoro-weather-preview .period-total{font-size:11px;color:var(--emlis-subtle);margin-top:5px;line-height:1.7}
+    #emlis-kokoro-weather-preview .bottom-nav{display:grid;grid-template-columns:repeat(4,1fr);background:#EFE3DE;padding:14px 14px 9px;margin-top:25px;gap:5px}
+    #emlis-kokoro-weather-preview .bottom-item{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;color:var(--emlis-subtle)}
+    #emlis-kokoro-weather-preview .bottom-icon{width:56px;height:29px;display:grid;place-items:center;border-radius:20px}
+    #emlis-kokoro-weather-preview .bottom-item.active{color:var(--emlis-title);font-weight:600}
+    #emlis-kokoro-weather-preview .bottom-item.active .bottom-icon{background:var(--emlis-burgundy);color:var(--emlis-panel)}
+    #emlis-kokoro-weather-preview .home-indicator-wrap{background:#EFE3DE;padding:11px 0 9px}
+    #emlis-kokoro-weather-preview .home-indicator{width:112px;height:4px;border-radius:4px;background:#352D2D;margin:auto}
+    @media(max-width:360px){#emlis-kokoro-weather-preview .weather-content{margin:0 15px}#emlis-kokoro-weather-preview .feature-tabs,#emlis-kokoro-weather-preview .mode-tabs{margin-left:15px;margin-right:15px}#emlis-kokoro-weather-preview .weather-card{padding:17px}#emlis-kokoro-weather-preview .day-distribution{grid-template-columns:130px 1fr;gap:11px}#emlis-kokoro-weather-preview .day-distribution>.donut{width:130px!important;height:130px!important}#emlis-kokoro-weather-preview .legend-vertical{font-size:11px;gap:9px}#emlis-kokoro-weather-preview h2{font-size:17px}#emlis-kokoro-weather-preview .selected-day{padding:14px}#emlis-kokoro-weather-preview .selected-composition{grid-template-columns:62px 1fr;gap:10px}#emlis-kokoro-weather-preview .selected-legend{gap:9px 7px}}
+  </style>
+  <div class="preview-label">画面案 · 架空の入力データ</div>
+  <section class="emlis-phone" aria-label="Emlis こころ天気の画面案">
+    <div class="status-bar" aria-hidden="true"><span>21:40</span><span class="status-icons"><i class="emlis-icon" data-lucide="signal"></i><i class="emlis-icon" data-lucide="wifi"></i><i class="emlis-icon" data-lucide="battery-full"></i></span></div>
+    <div class="brand-row"><div class="brand">Emlis</div><span class="brand-history"><i class="emlis-icon" data-lucide="history" aria-hidden="true"></i></span></div>
+    <div class="feature-tabs" aria-label="分析の種類"><div class="feature-tab current"><i class="emlis-icon" data-lucide="cloud-sun" aria-hidden="true"></i>こころ天気</div><div class="feature-tab"><i class="emlis-icon" data-lucide="git-branch" aria-hidden="true"></i>わたしマップ</div></div>
+    <div class="mode-tabs" role="tablist" aria-label="こころ天気の期間">
+      <button class="cursor-interaction" type="button" role="tab" id="emlis-weather-day-tab" aria-controls="emlis-weather-panel" aria-selected="true" data-mode="day">今日</button>
+      <button class="cursor-interaction" type="button" role="tab" id="emlis-weather-week-tab" aria-controls="emlis-weather-panel" aria-selected="false" data-mode="week">週</button>
+      <button class="cursor-interaction" type="button" role="tab" id="emlis-weather-month-tab" aria-controls="emlis-weather-panel" aria-selected="false" data-mode="month">月</button>
+    </div>
+    <div class="period-heading"><div><h1 id="emlis-weather-heading">今日の天気</h1><div class="period-caption" id="emlis-weather-period">11月8日（日）</div></div><div class="period-arrows" id="emlis-weather-arrows" hidden><button class="cursor-interaction" type="button" id="emlis-weather-prev" aria-label="前の期間"><i class="emlis-icon" data-lucide="chevron-left" aria-hidden="true"></i></button><button class="cursor-interaction" type="button" id="emlis-weather-next" aria-label="次の期間"><i class="emlis-icon" data-lucide="chevron-right" aria-hidden="true"></i></button></div></div>
+    <div class="weather-content" id="emlis-weather-panel" role="tabpanel" aria-labelledby="emlis-weather-day-tab"></div>
+    <div class="bottom-nav" aria-label="アプリのナビゲーション">
+      <div class="bottom-item"><span class="bottom-icon"><i class="emlis-icon" data-lucide="house" aria-hidden="true"></i></span>ホーム</div>
+      <div class="bottom-item active"><span class="bottom-icon"><i class="emlis-icon" data-lucide="globe" aria-hidden="true"></i></span>分析</div>
+      <div class="bottom-item"><span class="bottom-icon"><i class="emlis-icon" data-lucide="box" aria-hidden="true"></i></span>ピース</div>
+      <div class="bottom-item"><span class="bottom-icon"><i class="emlis-icon" data-lucide="settings" aria-hidden="true"></i></span>設定</div>
+    </div>
+    <div class="home-indicator-wrap" aria-hidden="true"><div class="home-indicator"></div></div>
+  </section>
+  <script>
+    (() => {
+      const root = document.getElementById('emlis-kokoro-weather-preview');
+      if (!root) return;
+      const TODAY = '2026-11-08';
+      const moods = [
+        {key:'joy',label:'喜び',color:'var(--mood-joy)',icon:'sun'},
+        {key:'sad',label:'悲しみ',color:'var(--mood-sad)',icon:'cloud-rain'},
+        {key:'anger',label:'怒り',color:'var(--mood-anger)',icon:'cloud-lightning'},
+        {key:'anxiety',label:'不安',color:'var(--mood-anxiety)',icon:'cloud'},
+        {key:'calm',label:'平穏',color:'var(--mood-calm)',icon:'cloud-sun'}
+      ];
+      const zero = () => ({joy:0,sad:0,anger:0,anxiety:0,calm:0});
+      const records = [
+        {time:'08:10',emotions:[['joy',2],['anxiety',1]]},
+        {time:'09:45',emotions:[['anxiety',2]]},
+        {time:'12:30',emotions:[['anger',1],['anxiety',2]]},
+        {time:'15:20',emotions:[['calm',2]]},
+        {time:'18:40',emotions:[['joy',2],['calm',3]]},
+        {time:'21:10',emotions:[['calm',2]]}
+      ];
+      const weightsOf = rows => rows.reduce((a,r) => {r.emotions.forEach(([k,v]) => a[k]+=v);return a;},zero());
+      const days = {};
+      for(let d=1;d<=31;d++){
+        const key='2026-10-'+String(d).padStart(2,'0');
+        const missing=[7,13,19,25,29].includes(d);
+        const w=missing?zero():{joy:1+d%2,sad:d%5===0?2:0,anger:d%6===0?2:0,anxiety:d<=10?5:1,calm:d>=21?6:2};
+        if(!missing && d>10 && d<21) w.joy=5;
+        days[key]={date:key,count:missing?0:2+d%4,weights:w};
+      }
+      [
+        [1,4,[2,0,2,5,1]],[2,4,[1,2,1,5,1]],[3,4,[3,1,0,3,3]],
+        [4,5,[0,1,2,4,3]],[5,0,[0,0,0,0,0]],[6,4,[2,0,1,2,5]],
+        [7,5,[3,1,0,1,5]]
+      ].forEach(([d,count,w])=>{const date='2026-11-'+String(d).padStart(2,'0');days[date]={date,count,weights:Object.fromEntries(moods.map((m,i)=>[m.key,w[i]]))};});
+      days[TODAY]={date:TODAY,count:records.length,weights:weightsOf(records)};
+      const state={mode:'day',time:3,shifts:{week:0,month:0},selected:{week:TODAY,month:TODAY}};
+      const body=root.querySelector('#emlis-weather-panel');
+      const sum=w=>moods.reduce((s,m)=>s+(w[m.key]||0),0);
+      const addDays=(iso,n)=>{const p=iso.split('-').map(Number);return new Date(Date.UTC(p[0],p[1]-1,p[2]+n)).toISOString().slice(0,10);};
+      const weekday=iso=>'日月火水木金土'[new Date(iso+'T00:00:00Z').getUTCDay()];
+      const dateLabel=iso=>`${Number(iso.slice(5,7))}月${Number(iso.slice(8))}日（${weekday(iso)}）`;
+      const shortDate=iso=>`${Number(iso.slice(5,7))}/${Number(iso.slice(8))}`;
+      const getDay=iso=>days[iso]||{date:iso,count:0,weights:zero()};
+      const aggregate=items=>items.reduce((a,d)=>{moods.forEach(m=>a[m.key]+=d.weights[m.key]||0);return a;},zero());
+      const shares=w=>{
+        const total=sum(w);if(!total)return moods.map(()=>0);
+        const raw=moods.map(m=>(w[m.key]||0)*100/total),out=raw.map(Math.floor);
+        const ordered=raw.map((v,i)=>({i,r:v-out[i]})).sort((a,b)=>b.r-a.r||a.i-b.i);
+        for(let left=100-out.reduce((a,b)=>a+b,0),i=0;i<left;i++)out[ordered[i].i]++;
+        return out;
+      };
+      const dominant=w=>{const max=Math.max(...moods.map(m=>w[m.key]||0));return max>0?moods.filter(m=>w[m.key]===max):[];};
+      const iconFor=w=>{const ds=dominant(w);return ds.length===1?ds[0].icon:ds.length?'cloud-sun':'minus';};
+      const moodNames=w=>dominant(w).map(m=>m.label).join('・')||'記録なし';
+      const icon=(name)=>`<i class="emlis-icon" data-lucide="${name}" aria-hidden="true"></i>`;
+      const dot=m=>`<span class="mood-dot" style="background:${m.color}"></span>`;
+      const legend=(w,selected=false)=>{const p=shares(w);return moods.map((m,i)=>`<div class="legend-entry">${selected?`<span class="mood-label">${dot(m)}${m.label}</span>`:`${dot(m)}<span>${m.label}</span>`}<span class="legend-value">${p[i]}%</span></div>`).join('');};
+      function donut(w,size,center=''){
+        const total=sum(w);
+        if(!total)return `<div class="donut empty-donut" style="width:${size}px;height:${size}px" role="img" aria-label="感情の記録なし"><span class="donut-center">${icon('minus')}</span></div>`;
+        const r=44,c=2*Math.PI*r,gap=size<80?1.2:2;let position=0;
+        const circles=moods.map(m=>{const amount=w[m.key]||0;if(!amount)return '';const length=amount/total*c;const circle=`<circle cx="50" cy="50" r="${r}" fill="none" stroke="${m.color}" stroke-width="10" stroke-dasharray="${Math.max(0,length-gap)} ${c}" stroke-dashoffset="${-position}" transform="rotate(-90 50 50)"/>`;position+=length;return circle;}).join('');
+        return `<div class="donut" style="width:${size}px;height:${size}px" role="img" aria-label="${moods.map((m,i)=>m.label+shares(w)[i]+'パーセント').join('、')}"><svg viewBox="0 0 100 100" aria-hidden="true">${circles}</svg><div class="donut-center">${center}</div></div>`;
+      }
+      function timeBands(){return [{name:'深夜',range:'0〜6時',start:0,end:6},{name:'朝',range:'6〜12時',start:6,end:12},{name:'昼',range:'12〜18時',start:12,end:18},{name:'夜',range:'18時〜いま',start:18,end:24}].map(b=>{const rows=records.filter(r=>Number(r.time.slice(0,2))>=b.start&&Number(r.time.slice(0,2))<b.end);return {...b,rows,weights:weightsOf(rows)};});}
+      function renderDay(){
+        const d=days[TODAY],bands=timeBands(),band=bands[state.time];
+        body.innerHTML=`<section class="weather-card"><div class="card-heading"><div><p class="eyebrow">今日の感情の割合</p><h2>夜は、平穏の割合が多め</h2></div><div class="weather-seal">${icon('cloud-sun')}</div></div><div class="day-distribution">${donut(d.weights,148,`<span class="donut-number">6</span><span class="donut-unit">件の入力</span>`)}<div class="legend-vertical">${legend(d.weights)}</div></div><p class="description">朝は不安、夜は平穏の割合が多く記録されています。複数の感情も、そのまま残っています。</p></section><div class="subheading"><h3>時間帯ごとの動き</h3><span>0時〜いま</span></div><div class="time-grid">${bands.map((b,i)=>`<button class="time-slot cursor-interaction" type="button" data-band="${i}" aria-pressed="${i===state.time}" aria-label="${b.name}、${b.range}、${b.rows.length}件の入力"><span class="time-title">${b.name}</span><span class="time-range">${b.range}</span>${donut(b.weights,43,icon(iconFor(b.weights)))}<span class="time-dominant">${moodNames(b.weights)}</span></button>`).join('')}</div><section class="input-list" aria-live="polite"><div class="input-list-head"><h3>${band.name}の入力</h3><span>${band.rows.length}件</span></div>${band.rows.length?band.rows.map(r=>`<div class="input-row"><span class="input-time">${r.time}</span><div class="input-emotions">${r.emotions.map(([key,strength])=>{const m=moods.find(m=>m.key===key);return `<span>${dot(m)}${m.label}・${['','弱','中','強'][strength]}</span>`;}).join('')}</div></div>`).join(''):'<p class="empty-note">この時間帯の入力はありません。</p>'}</section><p class="method-note">割合には、選んだ感情の強さも反映しています。</p>`;
+        body.querySelectorAll('[data-band]').forEach(button=>button.addEventListener('click',()=>{state.time=Number(button.dataset.band);renderDay();refreshIcons();}));
+      }
+      function periodDays(){
+        if(state.mode==='week'){
+          const monday=addDays(TODAY,-(new Date(TODAY+'T00:00:00Z').getUTCDay()+6)%7);
+          const first=addDays(monday,state.shifts.week*7);
+          return Array.from({length:7},(_,i)=>getDay(addDays(first,i))).filter(d=>d.date<=TODAY);
+        }
+        const [y,m]=TODAY.split('-').map(Number),start=new Date(Date.UTC(y,m-1+state.shifts.month,1));
+        const first=start.toISOString().slice(0,10),last=new Date(Date.UTC(start.getUTCFullYear(),start.getUTCMonth()+1,0)).getUTCDate();
+        const count=state.shifts.month===0?Number(TODAY.slice(8)):last;
+        return Array.from({length:count},(_,i)=>getDay(addDays(first,i)));
+      }
+      function periodDescription(items){
+        const mid=Math.ceil(items.length/2),a=dominant(aggregate(items.slice(0,mid))),b=dominant(aggregate(items.slice(mid)));
+        const first=a.map(m=>m.label).join('・'),last=b.map(m=>m.label).join('・');
+        if(!first&&!last)return 'この期間の感情入力はありません。';
+        if(first&&last&&first!==last)return `前半は${first}、後半は${last}の割合が多く記録されています。`;
+        return `${last||first}の割合が多く記録されています。`;
+      }
+      function selectedHTML(items){
+        const d=items.find(d=>d.date===state.selected[state.mode])||items[items.length-1];
+        if(!d)return '';
+        state.selected[state.mode]=d.date;
+        return `<section class="selected-day" aria-live="polite"><div class="selected-date">${dateLabel(d.date)}<span>${d.count}件の入力</span></div>${d.count?`<div class="selected-composition">${donut(d.weights,68,icon(iconFor(d.weights)))}<div class="selected-legend">${legend(d.weights,true)}</div></div>`:'<p class="empty-note">この日は感情の入力がありません。</p>'}</section>`;
+      }
+      function renderPeriod(){
+        const items=periodDays(),count=items.reduce((s,d)=>s+d.count,0),active=items.filter(d=>d.count>0).length;
+        const type=state.mode==='week'?'この週':'この月';
+        const title=count?'日ごとの、感情の移り変わり':'まだ記録がありません';
+        const overall=aggregate(items);
+        body.innerHTML=`<section class="weather-card"><div class="card-heading"><div><p class="eyebrow">${type}のこころ天気</p><h2>${title}</h2><div class="period-total">${count}件の入力 · ${active}日分の記録</div></div><div class="weather-seal">${icon(iconFor(overall))}</div></div><div class="plot-legend">${moods.map(m=>`<span class="legend-entry">${dot(m)}${m.label}</span>`).join('')}</div>${state.mode==='week'?`<div class="weather-week" aria-hidden="true">${items.map(d=>`<span>${icon(iconFor(d.weights))}</span>`).join('')}</div>`:''}<div class="plot-wrapper"><button class="plot-hit cursor-interaction" type="button" aria-label="日別の感情の割合。日をタップ、または左右の矢印キーで内訳を表示"><svg class="emotion-plot" role="img" aria-label="各日の感情の割合を色分けした積み上げ棒グラフ"></svg></button></div><div class="plot-help"><span>日をタップすると内訳を表示</span><span>記録なしは空欄</span></div><p class="description">${periodDescription(items)}</p></section><div id="emlis-selected-day">${selectedHTML(items)}</div><p class="method-note">入力のある日を集計。割合には感情の強さも反映しています。${state.mode==='month'&&state.shifts.month===0?'<br>今月は、今日までの入力を表示しています。':''}</p>`;
+        const hit=body.querySelector('.plot-hit');
+        hit.addEventListener('click',event=>{if(event.detail===0)return;const rect=hit.getBoundingClientRect(),usable=rect.width-35,index=Math.max(0,Math.min(items.length-1,Math.floor((event.clientX-rect.left-28)/usable*items.length)));selectDay(items[index].date,items);});
+        hit.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=items.findIndex(d=>d.date===state.selected[state.mode]);const next=event.key==='Home'?0:event.key==='End'?items.length-1:Math.max(0,Math.min(items.length-1,index+(event.key==='ArrowRight'?1:-1)));selectDay(items[next].date,items);});
+        renderPlot(items);
+      }
+      function selectDay(date,items){state.selected[state.mode]=date;body.querySelector('#emlis-selected-day').innerHTML=selectedHTML(items);renderPlot(items);refreshIcons();}
+      function renderPlot(items=periodDays()){
+        const svg=body.querySelector('.emotion-plot');if(!svg||state.mode==='day')return;
+        const width=Math.max(240,Math.round(svg.getBoundingClientRect().width)),height=230,left=28,right=7,top=20,bottom=175,plotWidth=width-left-right,plotHeight=bottom-top;
+        svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+        const step=plotWidth/items.length,barWidth=Math.min(state.mode==='week'?25:22,step*.67),selected=state.selected[state.mode];
+        const neutral='#D9D1C7',text='#6B625C',ink='#111827';
+        let markup=`<title>${state.mode==='week'?'週':'月'}の日ごとの感情の割合</title>`;
+        [0,50,100].forEach(t=>{const y=bottom-t/100*plotHeight;markup+=`<line x1="${left}" x2="${width-right}" y1="${y}" y2="${y}" stroke="${neutral}" stroke-width=".7"/><text x="${left-6}" y="${y+4}" text-anchor="end" font-size="11" fill="${text}">${t}</text>`;});
+        markup+=`<text x="2" y="10" font-size="11" fill="${text}">%</text>`;
+        const tickIndexes=state.mode==='week'?items.map((_,i)=>i):Array.from(new Set([0,Math.floor((items.length-1)/3),Math.floor((items.length-1)*2/3),items.length-1]));
+        items.forEach((d,i)=>{
+          const x=left+i*step+(step-barWidth)/2,total=sum(d.weights);let y=bottom;
+          if(total){moods.forEach(m=>{const h=(d.weights[m.key]||0)/total*plotHeight;if(h<=0)return;y-=h;markup+=`<rect x="${x}" y="${y}" width="${barWidth}" height="${h+.02}" fill="${m.color}" opacity="${d.date===selected?1:.86}"><title>${shortDate(d.date)} ${m.label} ${shares(d.weights)[moods.indexOf(m)]}%</title></rect>`;});}
+          else markup+=`<text x="${x+barWidth/2}" y="${bottom-8}" text-anchor="middle" font-size="13" fill="#B4AA9E">—</text>`;
+          if(tickIndexes.includes(i)){
+            const cx=left+(i+.5)*step,label=state.mode==='week'?`${Number(d.date.slice(8))}`:`${Number(d.date.slice(8))}日`;
+            const anchor=state.mode==='month'&&i===0?'start':state.mode==='month'&&i===items.length-1?'end':'middle';
+            markup+=`<text x="${cx}" y="${bottom+18}" text-anchor="${anchor}" font-size="11" fill="${ink}">${label}</text>`;
+            if(state.mode==='week')markup+=`<text x="${cx}" y="${bottom+33}" text-anchor="middle" font-size="11" fill="${text}">${weekday(d.date)}</text>`;
+          }
+          if(d.date===selected)markup+=`<circle cx="${left+(i+.5)*step}" cy="${bottom+(state.mode==='week'?45:31)}" r="2.4" fill="#800020"/>`;
+        });
+        svg.innerHTML=markup;
+      }
+      function refreshIcons(){if(typeof lucide!=='undefined')lucide.createIcons({attrs:{'stroke-width':1.65}});}
+      function render(){
+        root.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mode===state.mode)));
+        body.setAttribute('aria-labelledby',`emlis-weather-${state.mode}-tab`);
+        const arrows=root.querySelector('#emlis-weather-arrows');arrows.hidden=state.mode==='day';
+        if(state.mode==='day'){
+          root.querySelector('#emlis-weather-heading').textContent='今日の天気';root.querySelector('#emlis-weather-period').textContent=dateLabel(TODAY);renderDay();
+        }else{
+          const items=periodDays(),first=items[0].date,last=items[items.length-1].date;
+          if(!items.some(d=>d.date===state.selected[state.mode]))state.selected[state.mode]=last;
+          const current=state.shifts[state.mode]===0;
+          root.querySelector('#emlis-weather-heading').textContent=state.mode==='week'?(current?'今週の天気':'この週の天気'):(current?'今月の天気':Number(first.slice(5,7))+'月の天気');
+          root.querySelector('#emlis-weather-period').textContent=state.mode==='week'?`${shortDate(first)}〜${shortDate(last)}`:`${first.slice(0,4)}年${Number(first.slice(5,7))}月 · ${Number(first.slice(8))}〜${Number(last.slice(8))}日`;
+          root.querySelector('#emlis-weather-prev').setAttribute('aria-label',state.mode==='week'?'前の週':'前の月');
+          root.querySelector('#emlis-weather-next').setAttribute('aria-label',state.mode==='week'?'次の週':'次の月');
+          root.querySelector('#emlis-weather-next').disabled=current;renderPeriod();
+        }
+        refreshIcons();
+      }
+      root.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{state.mode=button.dataset.mode;render();}));
+      root.querySelector('#emlis-weather-prev').addEventListener('click',()=>{if(state.mode==='day')return;state.shifts[state.mode]--;render();});
+      root.querySelector('#emlis-weather-next').addEventListener('click',()=>{if(state.mode==='day'||state.shifts[state.mode]>=0)return;state.shifts[state.mode]++;render();});
+      let observedWidth=0;
+      const observer=new ResizeObserver(entries=>{const width=entries[0]?.contentRect.width||0;if(Math.abs(width-observedWidth)<.5)return;observedWidth=width;if(state.mode!=='day')renderPlot();});
+      observer.observe(root.querySelector('.emlis-phone'));
+      render();
+    })();
+  </script>
+</div>

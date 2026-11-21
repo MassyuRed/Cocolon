@@ -1,0 +1,104 @@
+{
+  "status": "TEACHER_COMPATIBILITY_NOT_4B_QUALITY",
+  "inputs": [
+    {
+      "id": "T01_manual10",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T02_music",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T03_chair",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T04_book",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T05_listening",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T06_unfinished",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T07_future",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T08_other",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "T09_time",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "H01_research",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "H02_mug",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "H03_boundary",
+      "messages_and_request_ref_unchanged": true
+    },
+    {
+      "id": "H04_garden",
+      "messages_and_request_ref_unchanged": true
+    }
+  ],
+  "teacher_artifacts": [
+    {
+      "id": "T01_manual10",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T02_music",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T03_chair",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T04_book",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T05_listening",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T06_unfinished",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T07_future",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T08_other",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    },
+    {
+      "id": "T09_time",
+      "public_graph_text_coverage_and_root_evidence_unchanged": true,
+      "private_graph_now_contains_all_visible_meaning": true
+    }
+  ]
+}

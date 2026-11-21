@@ -1,0 +1,17 @@
+# A9 repair1 — 起動通過後、最初の分析rawを不採用・復元（2026-11-16）
+
+Mashの個別承認を記録したd4aaf02bに基づき、scope75d8633dの一回だけを実行した。送付は新2file42,201byte、既送付7fileは同Pod内で同一byteのままcopyし、全9fileを照合した。起動guardは通過した。
+
+実model呼出しは前対照2＋読書会1の計3。全てHTTP200、読書会rawはstop・156.942805秒だが、CMEEのanalysis_semantic_event_plan_invalidで拒否され、図／本文は生成されていない。残り4件と後対照は未実行。全5件の適合条件が不成立のためB9も未実行。legacyのfresh_model_calls=0は実呼出し数ではなく、new_model_calls=3／map_calls=1を正とする。
+
+独立全文照合で、確認済みの招待送信・一人の了解、会場返信読了・部屋と時刻の確認がunknownへ分類された。2events／1readingに対し24nodes／21edgesへ反復し、同一title＋unit_refsの重複が6群ある。最初の拒否はedge7で、両端はe1だけなのにedgeがe2も参照した。同種の範囲外参照は11本、reading r1は未使用。会場／椅子の問い合わせ方向そのものは選択されておらず、正しく理解した証明にはならない。原入力4欄とraw全文を比較した結果であり、単なる形式拒否ではない。
+
+同じ原messagesとrawを現source80d94db7へCPU再演し、拒否を再現した。nativeのnode2／edge1完了地点では終了角括弧と続行カンマがともに許され、nativeが反復を強制したとは言えない。生成理由全体は未確定。raw修補・重複除去・guard緩和・追加model／tokenizer／Pod操作は行っていない。
+
+停止・復元込み287.516223秒。元120uを同argv／env／cwd・source／重み／設定へ復元し、PID139472／start237826333／healthz200、候補listener停止、B9root不存在を別読取で確認。元13fileの全byte／CRCとZIP SHA27aa266d21e4bcc144eacb24e30f3bc394b173d758d7cb2a7aff26c903cec52cを保持した。
+
+この承認scopeは失敗時終了条件により閉鎖。追加修正・自動再試行・次の実行scope準備は行わない。R10.3の自動修復には読み替えず、R10.2の同一原因二連続も主張しない。次に必要な修復対象は既存作者の確認済み／不明の区別、異なる出来事の分割、必要な項目と線の根拠への束縛と反復抑制であり、新helperや拒否緩和ではない。
+
+通常API／workerは24bc228dのままLive、DB38migration／最新20261115011424を読み取り確認。学習・retry・SQL保存・通常反映は0。source80d94db7と既存検証は保持するが、商品品質credit0。適切な全12実生成、同raw保存・別process非生成再読、通常反映、本単位／補助全体／正式受入れは未完。build／TestFlight／本人実機は保留。
+
+本folderは本文なしの受領・照合記録だけ。元raw／HTTP body／入力／提供logは既存非公開原本束へ追記し、旧原本を置換しない。

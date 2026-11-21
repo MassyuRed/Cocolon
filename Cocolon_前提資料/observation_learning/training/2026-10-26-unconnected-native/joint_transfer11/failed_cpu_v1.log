@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/cocolon_joint_transfer11_pack_20261029/transfer11/prepare_transfer11.py", line 95, in <module>
+    main(args.bundle_root.resolve(),args.initial_adapter.resolve(),args.cmee_root.resolve(),args.runtime_check)
+  File "/workspace/cocolon_joint_transfer11_pack_20261029/transfer11/prepare_transfer11.py", line 72, in main
+    outcome, _ = consumer.read_raw(v,native,Engine,semantic,prep,cid,raw)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_joint_transfer11_pack_20261029/transfer11/consume_transfer11.py", line 60, in read_raw
+    receipt = prep.receive_candidate(material, request_id=material.request_id,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_auxiliary_fit8_pack_20261029/cmee_current7b9_root_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py", line 266, in receive_candidate
+    raise ValueError("preparation_candidate_format_invalid")
+ValueError: preparation_candidate_format_invalid

@@ -1,0 +1,290 @@
+[
+  {
+    "path": "cocolon_meaning_experience_engine/engine.py",
+    "sha": "398a3a8b546d673646fe80805331dc22304a72b3"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/contracts.py",
+    "sha": "a6272fc99fcf74f901f72658239b03354cef693a"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/source_kernel.py",
+    "sha": "501ddd995ae491022d39b3c086161139938b6707"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_thread_contracts.py",
+    "sha": "89e8ac4cf47370c21eca952543ed95721f118b9c"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_thread_source.py",
+    "sha": "90beaa6003f2737cdf5dd621ac4da253f32a03f3"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_thread_engine.py",
+    "sha": "ee46b479c876307a75f43df9be43fb9389d017bd"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_answer_update.py",
+    "sha": "6cd44cf44850993a26bb964cb256a8a4843e4730"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_question.py",
+    "sha": "3137cdcd1d2a15ae47e8139fc6fc567528a4c88d"
+  },
+  {
+    "path": "emlis_ai_current_input_bundle.py",
+    "sha": "087798fcb8ebe7781d2769b43bad38fca8bc6128"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_thread_history.py",
+    "sha": "6dcbdf0fe1d7939f1c276f9d3daf19136d9e36dd"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_thread_surface.py",
+    "sha": "a29fc1db67f8457ad5b3b6c204d1f7d211e0fc18"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_v1a.py",
+    "sha": "9f5852e4f956c42db833ebecb928b4583ad36c26"
+  },
+  {
+    "path": "emlis_ai_evidence_ledger_service.py",
+    "sha": "f5a38e64a3c75d0c7699c073f4790ccb55f9e04d"
+  },
+  {
+    "path": "emlis_ai_grounded_human_reception.py",
+    "sha": "e8f2aead313f06b584dc5d2c03096fd0546fdcd0"
+  },
+  {
+    "path": "emlis_ai_grounded_observation_plan.py",
+    "sha": "48f679964ba78a4f209ed876d9217b5bffebc3d7"
+  },
+  {
+    "path": "emlis_ai_safety_triage.py",
+    "sha": "18b756a90d9f6c452566e88fc6d0d92541d1d318"
+  },
+  {
+    "path": "emlis_ai_types.py",
+    "sha": "22dd596a97d07bd53979d4d429a0b7d6f77b7e8a"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/__init__.py",
+    "sha": "3b88577d2d74a0cca3f97b566a2d63b0a5ebe881"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_stage1_response.py",
+    "sha": "eb6de19e9c257cece4cc577455fe648772884385"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_thread_projection.py",
+    "sha": "0826fdb6292cee60e58cdaa9a1051d59d20e1d0e"
+  },
+  {
+    "path": "cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+    "sha": "d232876cc8fdb1cc38847c2080e2636a42d2282d"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/base.py",
+    "sha": "b20bb298ecbea7626e9ac1f61dc437e8fb1be416"
+  },
+  {
+    "path": "emlis_ai_conversation_composer_service.py",
+    "sha": "f6de95940b244a921cfd102d985feeec22826827"
+  },
+  {
+    "path": "emlis_ai_grounded_observation_gate.py",
+    "sha": "13aff825df4c42cdc94ffaff6824b546775c7d7f"
+  },
+  {
+    "path": "emlis_ai_grounded_sentence_surface.py",
+    "sha": "673dad2f9ce949500f5e6c9c5f802e81f8699672"
+  },
+  {
+    "path": "emlis_ai_observation_integrator_service.py",
+    "sha": "3a601f819a3cee14db9ce4208f27d7ea7541ccb6"
+  },
+  {
+    "path": "emlis_ai_perspective_board.py",
+    "sha": "a31875eadfeed66784c19c685ddd263a8f4fc451"
+  },
+  {
+    "path": "emlis_ai_perspective_observers.py",
+    "sha": "7d0589ce3a141d3e988ea57e83e0a138e4d7fe78"
+  },
+  {
+    "path": "emlis_ai_response_contract.py",
+    "sha": "45deb845a23510dc7c971aeb7ebf87e83c31da52"
+  },
+  {
+    "path": "emlis_ai_user_label_connection_surface.py",
+    "sha": "0da15239a1fc388cd485618d3deeb79588f3dfbe"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+    "sha": "afebe316b18f0b79618a2a0f693a1a2cc7a78b42"
+  },
+  {
+    "path": "cocolon_meaning_experience_engine/emlis_stage1_composition.py",
+    "sha": "06241d4af21f3e6c7592c602725ca53b61e29f3c"
+  },
+  {
+    "path": "cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+    "sha": "171e6108524f77d8eeee20314ea6c90572c8a7d1"
+  },
+  {
+    "path": "cocolon_text_generation_core/composer.py",
+    "sha": "e1382c58ecbe920f12c4f3435b3a748838cdb3b4"
+  },
+  {
+    "path": "cocolon_text_generation_core/policies.py",
+    "sha": "1daa333e8e719307fee8225acb6fc05b8bf242be"
+  },
+  {
+    "path": "cocolon_text_generation_core/result.py",
+    "sha": "8aed161249a8c9b24c3fd680b321443d4afe7d57"
+  },
+  {
+    "path": "cocolon_text_generation_core/stabilization.py",
+    "sha": "5c2c81fac669496839391822505ed55ddf36050c"
+  },
+  {
+    "path": "cocolon_text_generation_core/types.py",
+    "sha": "0d2f3bd6f8dd577cef1dd8de0dd29833009f7c4e"
+  },
+  {
+    "path": "emlis_ai_environment_state_output_surface_contract_completion.py",
+    "sha": "3f4d5d42e37d30784cf2ef4dcd87b6d60cf4c79e"
+  },
+  {
+    "path": "emlis_ai_observation_structure_material_service.py",
+    "sha": "f8feeb5a36b8f1b6870804bf67695d6612fe4636"
+  },
+  {
+    "path": "emlis_ai_safety_boundary_service.py",
+    "sha": "cb9c618c257411409503e4773aaadb12c142b737"
+  },
+  {
+    "path": "emlis_ai_state_answer_composer_contract.py",
+    "sha": "a6e4b52f7a1ad325f0ba223d586f40b8c4d1adbe"
+  },
+  {
+    "path": "emlis_ai_user_address_service.py",
+    "sha": "9ef53faedbe24a227b78cb90c894d46a2dc533fc"
+  },
+  {
+    "path": "emlis_ai_user_label_connection_candidate.py",
+    "sha": "9986955f655445d0233fee5833267d69a36035a9"
+  },
+  {
+    "path": "emlis_ai_user_label_connection_gate.py",
+    "sha": "59b07852b91d33eb7738d0427c1af25deddb29d3"
+  },
+  {
+    "path": "cocolon_environment_state_output_frame.py",
+    "sha": "3c8ac9dd07a25cb8dfa197cbfc2ba633ab120187"
+  },
+  {
+    "path": "cocolon_text_generation_core/evidence.py",
+    "sha": "5714f385fec15a01891dc581bfe04aa31d0aeee6"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/__init__.py",
+    "sha": "eacbec5e3e54d0ab775c2616ef6ff40306bc5701"
+  },
+  {
+    "path": "emlis_ai_observation_structure_dictionary_loader.py",
+    "sha": "b06a40376567ac7a97a7682cfc40db58bff44d7f"
+  },
+  {
+    "path": "emlis_ai_state_answer_surface_contract.py",
+    "sha": "173415137035c1ba6919beb524941acf50e122ee"
+  },
+  {
+    "path": "emlis_ai_two_stage_section_surface_plan.py",
+    "sha": "9873ed95d4b17845184879579e3c67132164f19c"
+  },
+  {
+    "path": "emlis_ai_user_label_connection_material.py",
+    "sha": "74ad092e8bfe39cf4a2bd97e5e9eb0d8d6c67fa9"
+  },
+  {
+    "path": "emlis_ai_user_label_connection_types.py",
+    "sha": "51cf533d849296c8866376d716905d1e62793dbf"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/grounding.py",
+    "sha": "5ea76fd36e1242615b948dc47dea935ad02add67"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/japanese_coherence.py",
+    "sha": "9171514ad21c9bb55dcb2848087a5ea08b7c33a9"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/must_keep_coverage.py",
+    "sha": "7be48d0dc51ea273a8c719fb3376c4cf874ecd95"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+    "sha": "00af6e65cfed66ca77cdd63a432610e9b3d7234a"
+  },
+  {
+    "path": "cocolon_text_generation_core/guards/template_echo.py",
+    "sha": "7f701c9f1e6158348ffa4e333a953816750b8588"
+  },
+  {
+    "path": "emlis_ai_human_follow_selector.py",
+    "sha": "e504ffaa64395451d39d53f9786884c5f7b9f0f1"
+  },
+  {
+    "path": "emlis_ai_reception_assistance_dictionary_loader.py",
+    "sha": "09d58e4628e46b0ec1b71ced5a8ab3c03198fabf"
+  },
+  {
+    "path": "emlis_ai_safe_daily_metaphor_material.py",
+    "sha": "a88e1c954925cc4545369364ce4151c0ff5441a5"
+  },
+  {
+    "path": "emlis_ai_state_answer_ratio_policy.py",
+    "sha": "62de19335bcb05d92d8308a671950f9f2670d0ec"
+  },
+  {
+    "path": "emlis_ai_state_answer_special_cases.py",
+    "sha": "fc8b9f87f67e84cc67bdfd8c8ed50c2000b25e6d"
+  },
+  {
+    "path": "emlis_ai_user_fact_grounding_boundary.py",
+    "sha": "2712981ceeff814cca7a7db214954012b366b347"
+  },
+  {
+    "path": "emlis_ai_observation_reply_contract.py",
+    "sha": "65ebc8114ed53c823708c690a9c0a8e182bef3fa"
+  },
+  {
+    "path": "emlis_ai_reception_mode_resolver.py",
+    "sha": "741ab77314da2d27d2e5ccab07584b9c556b1fd1"
+  },
+  {
+    "path": "emlis_ai_shared_reception_evidence.py",
+    "sha": "1a01a69ae2438bb30201c3be065a92176641123b"
+  },
+  {
+    "path": "config/emlis_observation_structure_dictionary.schema.json",
+    "sha": "0c23704825d883c2f876dab18ef644fc69f1261f"
+  },
+  {
+    "path": "config/emlis_observation_structure_dictionary.v1.json",
+    "sha": "490d7c6de81d80e828e2fea71dcac6c308ef56e8"
+  },
+  {
+    "path": "config/emlis_reception_assistance_dictionary.schema.json",
+    "sha": "aeee3b50bf11608ddabc43e8167eb6f1628cf982"
+  },
+  {
+    "path": "config/emlis_reception_assistance_dictionary.v1.json",
+    "sha": "60ca5005630b88388e356e665624956b8cbd2997"
+  },
+  {
+    "path": "emlis_ai_input_meaning_block_service.py",
+    "sha": "36779eace1d53fe49efc33b3cae0c1a9f70ebabd"
+  }
+]

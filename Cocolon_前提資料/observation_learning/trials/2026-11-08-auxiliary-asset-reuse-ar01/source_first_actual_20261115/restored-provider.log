@@ -1,0 +1,18 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   6%|▌         | 42/723 [00:00<00:01, 410.14it/s]
+Loading weights:  12%|█▏        | 84/723 [00:00<00:01, 361.37it/s]
+Loading weights:  17%|█▋        | 121/723 [00:00<00:01, 333.62it/s]
+Loading weights:  21%|██▏       | 155/723 [00:00<00:01, 322.25it/s]
+Loading weights:  26%|██▌       | 188/723 [00:00<00:01, 323.97it/s]
+Loading weights:  31%|███       | 223/723 [00:00<00:01, 318.82it/s]
+Loading weights:  35%|███▌      | 255/723 [00:00<00:01, 312.29it/s]
+Loading weights:  40%|████      | 290/723 [00:00<00:01, 321.18it/s]
+Loading weights:  45%|████▍     | 323/723 [00:00<00:01, 311.63it/s]
+Loading weights:  49%|████▉     | 355/723 [00:01<00:01, 312.39it/s]
+Loading weights:  54%|█████▎    | 387/723 [00:01<00:01, 299.60it/s]
+Loading weights:  58%|█████▊    | 418/723 [00:01<00:01, 292.76it/s]
+Loading weights:  81%|████████▏ | 588/723 [00:01<00:00, 687.95it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 473.87it/s]
+/workspace/cocolon_venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(

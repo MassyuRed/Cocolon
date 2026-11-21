@@ -1,5 +1,6 @@
 import React from "react";
 import { Platform, Switch, View } from "react-native";
+import { useTheme } from "../theme/ThemeContext";
 
 /**
  * CocolonSwitch
@@ -17,11 +18,16 @@ export default function CocolonSwitch({
   containerStyle,
   ...switchProps
 }) {
+  const { colors } = useTheme();
   const extraRight = Platform.OS === "ios" ? Number(iosRightInset || 0) : 0;
 
   return (
     <View style={[{ marginRight: extraRight }, containerStyle]}>
-      <Switch {...switchProps} />
+      <Switch
+        trackColor={{ false: colors.CARD_BORDER, true: colors.GOLD_BUTTON }}
+        ios_backgroundColor={colors.CARD_BORDER}
+        {...switchProps}
+      />
     </View>
   );
 }

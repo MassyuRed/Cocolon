@@ -1,0 +1,1614 @@
+{
+  "status": "COMPLETE_9_LOCAL_FORWARDS_ZERO_TRAINING_ZERO_GENERATION_NOT_ADOPTED",
+  "runs": [
+    {
+      "report": {
+        "status": "COMPLETE_FIXED_PREFIX_DIAGNOSIS_NOT_ADOPTED",
+        "plan_sha256": "cf54659e41f4d2c0285cf3b66c1cda551eaaebfcacc31a703c561132ef0259cf",
+        "runner_sha256": "c2b457289ec80957fd4d05d75a4cad47fc196a9cd3b56a220ec4a9b1c48b2742",
+        "updates": 0,
+        "new_generations": 0,
+        "forwards": 7,
+        "model_loads": 1,
+        "branches": [
+          {
+            "id": "AF01_REQUIRED_SCOPE_KEY",
+            "probe_id": "AF01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "9b3e122abc5e3b09760fea4a0fee185b47ea00eb38de4624ddd18a18b311edce",
+            "prefix_token_ids_sha256": "9282720bc72711128504c72884abf4090e06013fd192bea49986e42b62b85699",
+            "prefix_tokens": 1148,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_close": {
+                "token_id": 8934,
+                "token": "\"}",
+                "rank": 6,
+                "log_probability": -7.68495512008667,
+                "probability": 0.0004596914513967931
+              },
+              "required_key_continuation": {
+                "token_id": 2129,
+                "token": "\",\"",
+                "rank": 2,
+                "log_probability": -3.184955358505249,
+                "probability": 0.04138009250164032
+              }
+            },
+            "top": [
+              {
+                "token_id": 35303,
+                "token": "\"},{\"",
+                "rank": 1,
+                "log_probability": -0.059955254197120667,
+                "probability": 0.9418066740036011
+              },
+              {
+                "token_id": 2129,
+                "token": "\",\"",
+                "rank": 2,
+                "log_probability": -3.184955358505249,
+                "probability": 0.04138009250164032
+              },
+              {
+                "token_id": 56658,
+                "token": "\"},\"",
+                "rank": 3,
+                "log_probability": -4.68495512008667,
+                "probability": 0.009233148768544197
+              },
+              {
+                "token_id": 13933,
+                "token": "\"},",
+                "rank": 4,
+                "log_probability": -5.43495512008667,
+                "probability": 0.004361430648714304
+              },
+              {
+                "token_id": 66550,
+                "token": "\"],\"",
+                "rank": 5,
+                "log_probability": -6.05995512008667,
+                "probability": 0.0023345057852566242
+              },
+              {
+                "token_id": 8934,
+                "token": "\"}",
+                "rank": 6,
+                "log_probability": -7.68495512008667,
+                "probability": 0.0004596914513967931
+              },
+              {
+                "token_id": 35607,
+                "token": "},{\"",
+                "rank": 7,
+                "log_probability": -9.059955596923828,
+                "probability": 0.00011622813326539472
+              },
+              {
+                "token_id": 1358,
+                "token": "\n\n\n",
+                "rank": 8,
+                "log_probability": -10.559955596923828,
+                "probability": 2.5934004952432588e-05
+              },
+              {
+                "token_id": 108150,
+                "token": "誘",
+                "rank": 9,
+                "log_probability": -10.809955596923828,
+                "probability": 2.019742169068195e-05
+              },
+              {
+                "token_id": 64331,
+                "token": "\":[{\"",
+                "rank": 9,
+                "log_probability": -10.809955596923828,
+                "probability": 2.019742169068195e-05
+              },
+              {
+                "token_id": 4754,
+                "token": "{\"",
+                "rank": 11,
+                "log_probability": -10.997455596923828,
+                "probability": 1.6744250388001092e-05
+              },
+              {
+                "token_id": 21624,
+                "token": "\":{\"",
+                "rank": 12,
+                "log_probability": -11.122455596923828,
+                "probability": 1.4776748685108032e-05
+              },
+              {
+                "token_id": 73345,
+                "token": "\"/><",
+                "rank": 12,
+                "log_probability": -11.122455596923828,
+                "probability": 1.4776748685108032e-05
+              },
+              {
+                "token_id": 93482,
+                "token": "\"],[\"",
+                "rank": 14,
+                "log_probability": -11.434955596923828,
+                "probability": 1.0810900676005986e-05
+              },
+              {
+                "token_id": 1,
+                "token": "\"",
+                "rank": 15,
+                "log_probability": -11.559955596923828,
+                "probability": 9.540586688672192e-06
+              },
+              {
+                "token_id": 57839,
+                "token": "\",\"\",\"",
+                "rank": 16,
+                "log_probability": -11.622455596923828,
+                "probability": 8.962551873992197e-06
+              },
+              {
+                "token_id": 29958,
+                "token": "\"}}",
+                "rank": 17,
+                "log_probability": -11.747455596923828,
+                "probability": 7.909423402452376e-06
+              },
+              {
+                "token_id": 15096,
+                "token": " \",\"",
+                "rank": 18,
+                "log_probability": -11.997455596923828,
+                "probability": 6.159865733934566e-06
+              },
+              {
+                "token_id": 95032,
+                "token": "\"),\"",
+                "rank": 19,
+                "log_probability": -12.372455596923828,
+                "probability": 4.233609615766909e-06
+              },
+              {
+                "token_id": 13724,
+                "token": "\"{",
+                "rank": 19,
+                "log_probability": -12.372455596923828,
+                "probability": 4.233609615766909e-06
+              }
+            ]
+          },
+          {
+            "id": "AF01_LITERAL_COPY",
+            "probe_id": "AF01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "3b42449104a32f5a839c20da3dc966e74fc7633b4f8a691009926e126c9ed76c",
+            "prefix_token_ids_sha256": "5151deb9e43bb67f6a5550e48ba82e3ec6d11a03ba5becf53d465c0d73bca240",
+            "prefix_tokens": 1217,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_repeat": {
+                "token_id": 148859,
+                "token": "れて",
+                "rank": 1,
+                "log_probability": -0.03125254064798355,
+                "probability": 0.9692307710647583
+              },
+              "source_literal": {
+                "token_id": 237474,
+                "token": "れていた",
+                "rank": 2,
+                "log_probability": -3.65625262260437,
+                "probability": 0.025829123333096504
+              }
+            },
+            "top": [
+              {
+                "token_id": 148859,
+                "token": "れて",
+                "rank": 1,
+                "log_probability": -0.03125254064798355,
+                "probability": 0.9692307710647583
+              },
+              {
+                "token_id": 237474,
+                "token": "れていた",
+                "rank": 2,
+                "log_probability": -3.65625262260437,
+                "probability": 0.025829123333096504
+              },
+              {
+                "token_id": 155291,
+                "token": "れている",
+                "rank": 3,
+                "log_probability": -6.281252384185791,
+                "probability": 0.0018710558069869876
+              },
+              {
+                "token_id": 149666,
+                "token": "れた",
+                "rank": 4,
+                "log_probability": -7.281252384185791,
+                "probability": 0.0006883229943923652
+              },
+              {
+                "token_id": 191421,
+                "token": "かれて",
+                "rank": 5,
+                "log_probability": -8.65625286102295,
+                "probability": 0.00017403523088432848
+              },
+              {
+                "token_id": 214156,
+                "token": "くれて",
+                "rank": 6,
+                "log_probability": -8.90625286102295,
+                "probability": 0.0001355387648800388
+              },
+              {
+                "token_id": 1561,
+                "token": "lete",
+                "rank": 6,
+                "log_probability": -8.90625286102295,
+                "probability": 0.0001355387648800388
+              },
+              {
+                "token_id": 227516,
+                "token": "まれて",
+                "rank": 8,
+                "log_probability": -9.03125286102295,
+                "probability": 0.00011961254494963214
+              },
+              {
+                "token_id": 954,
+                "token": "lement",
+                "rank": 9,
+                "log_probability": -9.28125286102295,
+                "probability": 9.31543399929069e-05
+              },
+              {
+                "token_id": 247816,
+                "token": "ていた",
+                "rank": 9,
+                "log_probability": -9.28125286102295,
+                "probability": 9.31543399929069e-05
+              },
+              {
+                "token_id": 7140,
+                "token": "LETE",
+                "rank": 11,
+                "log_probability": -9.34375286102295,
+                "probability": 8.751040877541527e-05
+              },
+              {
+                "token_id": 152782,
+                "token": "われて",
+                "rank": 12,
+                "log_probability": -9.59375286102295,
+                "probability": 6.815316737629473e-05
+              },
+              {
+                "token_id": 149657,
+                "token": "えて",
+                "rank": 12,
+                "log_probability": -9.59375286102295,
+                "probability": 6.815316737629473e-05
+              },
+              {
+                "token_id": 182184,
+                "token": "れています",
+                "rank": 14,
+                "log_probability": -9.71875286102295,
+                "probability": 6.014496102579869e-05
+              },
+              {
+                "token_id": 217741,
+                "token": "leter",
+                "rank": 15,
+                "log_probability": -9.78125286102295,
+                "probability": 5.650096500176005e-05
+              },
+              {
+                "token_id": 159711,
+                "token": "られて",
+                "rank": 15,
+                "log_probability": -9.78125286102295,
+                "probability": 5.650096500176005e-05
+              },
+              {
+                "token_id": 241311,
+                "token": "леб",
+                "rank": 17,
+                "log_probability": -9.84375286102295,
+                "probability": 5.307774699758738e-05
+              },
+              {
+                "token_id": 35814,
+                "token": "て",
+                "rank": 17,
+                "log_probability": -9.84375286102295,
+                "probability": 5.307774699758738e-05
+              },
+              {
+                "token_id": 58610,
+                "token": "ledo",
+                "rank": 19,
+                "log_probability": -10.09375286102295,
+                "probability": 4.1336988942930475e-05
+              },
+              {
+                "token_id": 149063,
+                "token": "れる",
+                "rank": 20,
+                "log_probability": -10.21875286102295,
+                "probability": 3.647976336651482e-05
+              }
+            ]
+          },
+          {
+            "id": "AF01_CARRIER_ENUM",
+            "probe_id": "AF01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "6d5c63e0d576bb236395106424b4b50c446a72fb0c210a2dd7533c6c7465cfd0",
+            "prefix_token_ids_sha256": "ee4331e445eb02f0c8ae0f39719759c1258a89882073c3839bef695f586fdefb",
+            "prefix_tokens": 1223,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_invalid_carrier": {
+                "token_id": 17389,
+                "token": "WR",
+                "rank": 1,
+                "log_probability": -0.23972372710704803,
+                "probability": 0.7868452668190002
+              },
+              "context_carrier_alternative": {
+                "token_id": 2366,
+                "token": "TE",
+                "rank": 12,
+                "log_probability": -7.3022236824035645,
+                "probability": 0.0006740382523275912
+              }
+            },
+            "top": [
+              {
+                "token_id": 17389,
+                "token": "WR",
+                "rank": 1,
+                "log_probability": -0.23972372710704803,
+                "probability": 0.7868452668190002
+              },
+              {
+                "token_id": 26975,
+                "token": "ATTR",
+                "rank": 2,
+                "log_probability": -1.7397236824035645,
+                "probability": 0.17556890845298767
+              },
+              {
+                "token_id": 65582,
+                "token": "CONTENT",
+                "rank": 3,
+                "log_probability": -4.9897236824035645,
+                "probability": 0.0068075451999902725
+              },
+              {
+                "token_id": 1728,
+                "token": "IM",
+                "rank": 4,
+                "log_probability": -5.2397236824035645,
+                "probability": 0.005301721394062042
+              },
+              {
+                "token_id": 49649,
+                "token": "UNKNOWN",
+                "rank": 5,
+                "log_probability": -5.7397236824035645,
+                "probability": 0.0032156568486243486
+              },
+              {
+                "token_id": 3152,
+                "token": "EX",
+                "rank": 6,
+                "log_probability": -5.8647236824035645,
+                "probability": 0.0028378069400787354
+              },
+              {
+                "token_id": 93778,
+                "token": "NEG",
+                "rank": 7,
+                "log_probability": -6.2397236824035645,
+                "probability": 0.0019503943622112274
+              },
+              {
+                "token_id": 2827,
+                "token": "null",
+                "rank": 7,
+                "log_probability": -6.2397236824035645,
+                "probability": 0.0019503943622112274
+              },
+              {
+                "token_id": 20951,
+                "token": "ATT",
+                "rank": 9,
+                "log_probability": -6.6147236824035645,
+                "probability": 0.0013404851779341698
+              },
+              {
+                "token_id": 43910,
+                "token": "NONE",
+                "rank": 9,
+                "log_probability": -6.6147236824035645,
+                "probability": 0.0013404851779341698
+              },
+              {
+                "token_id": 4427,
+                "token": "NULL",
+                "rank": 11,
+                "log_probability": -6.9897236824035645,
+                "probability": 0.0009213011362589896
+              },
+              {
+                "token_id": 2366,
+                "token": "TE",
+                "rank": 12,
+                "log_probability": -7.3022236824035645,
+                "probability": 0.0006740382523275912
+              },
+              {
+                "token_id": 36074,
+                "token": "SCR",
+                "rank": 13,
+                "log_probability": -7.5522236824035645,
+                "probability": 0.0005249415407888591
+              },
+              {
+                "token_id": 802,
+                "token": "AT",
+                "rank": 14,
+                "log_probability": -7.7397236824035645,
+                "probability": 0.00043519181781448424
+              },
+              {
+                "token_id": 13662,
+                "token": "NOT",
+                "rank": 15,
+                "log_probability": -7.8022236824035645,
+                "probability": 0.00040882485336624086
+              },
+              {
+                "token_id": 3423,
+                "token": "SC",
+                "rank": 16,
+                "log_probability": -8.114724159240723,
+                "probability": 0.00029910251032561064
+              },
+              {
+                "token_id": 12343,
+                "token": "TEXT",
+                "rank": 17,
+                "log_probability": -8.177224159240723,
+                "probability": 0.0002809808065649122
+              },
+              {
+                "token_id": 1825,
+                "token": "AG",
+                "rank": 18,
+                "log_probability": -8.489724159240723,
+                "probability": 0.00020556995877996087
+              },
+              {
+                "token_id": 13794,
+                "token": "QUAL",
+                "rank": 18,
+                "log_probability": -8.489724159240723,
+                "probability": 0.00020556995877996087
+              },
+              {
+                "token_id": 28091,
+                "token": "SUB",
+                "rank": 20,
+                "log_probability": -8.552224159240723,
+                "probability": 0.0001931150909513235
+              }
+            ]
+          },
+          {
+            "id": "AF01_REASON_KIND",
+            "probe_id": "AF01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "9248d2312b1526eb7e51ae1b04ffc3d9d1f263647acc3716e0621c15f6d24081",
+            "prefix_token_ids_sha256": "a13ca0a2677713143f5fa275ee66feddf5624c149291997a4b6f79731de73813",
+            "prefix_tokens": 1243,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_modifier_kind": {
+                "token_id": 17389,
+                "token": "WR",
+                "rank": 1,
+                "log_probability": -0.4292781949043274,
+                "probability": 0.6509788036346436
+              },
+              "reason_marker_alternative": {
+                "token_id": 762,
+                "token": "RE",
+                "rank": 3,
+                "log_probability": -2.4292781352996826,
+                "probability": 0.08810040354728699
+              }
+            },
+            "top": [
+              {
+                "token_id": 17389,
+                "token": "WR",
+                "rank": 1,
+                "log_probability": -0.4292781949043274,
+                "probability": 0.6509788036346436
+              },
+              {
+                "token_id": 93778,
+                "token": "NEG",
+                "rank": 2,
+                "log_probability": -1.4292781352996826,
+                "probability": 0.23948174715042114
+              },
+              {
+                "token_id": 762,
+                "token": "RE",
+                "rank": 3,
+                "log_probability": -2.4292781352996826,
+                "probability": 0.08810040354728699
+              },
+              {
+                "token_id": 47407,
+                "token": "REL",
+                "rank": 4,
+                "log_probability": -4.804278373718262,
+                "probability": 0.008194612339138985
+              },
+              {
+                "token_id": 3152,
+                "token": "EX",
+                "rank": 5,
+                "log_probability": -5.179278373718262,
+                "probability": 0.005632068961858749
+              },
+              {
+                "token_id": 36,
+                "token": "E",
+                "rank": 6,
+                "log_probability": -5.929278373718262,
+                "probability": 0.002660401165485382
+              },
+              {
+                "token_id": 3811,
+                "token": "NE",
+                "rank": 7,
+                "log_probability": -7.554278373718262,
+                "probability": 0.0005238640587776899
+              },
+              {
+                "token_id": 89945,
+                "token": "REW",
+                "rank": 8,
+                "log_probability": -7.679278373718262,
+                "probability": 0.0004623084096238017
+              },
+              {
+                "token_id": 27833,
+                "token": "neg",
+                "rank": 9,
+                "log_probability": -8.429278373718262,
+                "probability": 0.00021837902022525668
+              },
+              {
+                "token_id": 19285,
+                "token": "WH",
+                "rank": 10,
+                "log_probability": -8.491778373718262,
+                "probability": 0.00020514811330940574
+              },
+              {
+                "token_id": 2366,
+                "token": "TE",
+                "rank": 11,
+                "log_probability": -8.616778373718262,
+                "probability": 0.00018104256014339626
+              },
+              {
+                "token_id": 9097,
+                "token": "EG",
+                "rank": 12,
+                "log_probability": -9.054278373718262,
+                "probability": 0.00011688986705848947
+              },
+              {
+                "token_id": 31695,
+                "token": "WRITE",
+                "rank": 13,
+                "log_probability": -9.241778373718262,
+                "probability": 9.690510341897607e-05
+              },
+              {
+                "token_id": 19290,
+                "token": "reason",
+                "rank": 14,
+                "log_probability": -9.491778373718262,
+                "probability": 7.546976848971099e-05
+              },
+              {
+                "token_id": 87257,
+                "token": "WRAPPER",
+                "rank": 15,
+                "log_probability": -9.554278373718262,
+                "probability": 7.08972875145264e-05
+              },
+              {
+                "token_id": 46206,
+                "token": "Neg",
+                "rank": 16,
+                "log_probability": -9.866778373718262,
+                "probability": 5.1869563321815804e-05
+              },
+              {
+                "token_id": 65582,
+                "token": "CONTENT",
+                "rank": 17,
+                "log_probability": -9.991778373718262,
+                "probability": 4.577473009703681e-05
+              },
+              {
+                "token_id": 25478,
+                "token": "NR",
+                "rank": 17,
+                "log_probability": -9.991778373718262,
+                "probability": 4.577473009703681e-05
+              },
+              {
+                "token_id": 5609,
+                "token": "CON",
+                "rank": 17,
+                "log_probability": -9.991778373718262,
+                "probability": 4.577473009703681e-05
+              },
+              {
+                "token_id": 23141,
+                "token": "ROOT",
+                "rank": 17,
+                "log_probability": -9.991778373718262,
+                "probability": 4.577473009703681e-05
+              }
+            ]
+          },
+          {
+            "id": "NV01_REPLY_PARENT",
+            "probe_id": "NV01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "cf0509e55f4743e85505ec89c5284115601ce833bb5a60097c0da5d280378126",
+            "prefix_token_ids_sha256": "4f741e04a8c257c7b0f33d6433b905cf2f94fbdadd3ad4cc706507d01631e00a",
+            "prefix_tokens": 996,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_target_parent2": {
+                "token_id": 17,
+                "token": "2",
+                "rank": 1,
+                "log_probability": -0.0008948612376116216,
+                "probability": 0.9991055727005005
+              },
+              "waiting_action_parent3": {
+                "token_id": 18,
+                "token": "3",
+                "rank": 3,
+                "log_probability": -8.000894546508789,
+                "probability": 0.00033516265102662146
+              }
+            },
+            "top": [
+              {
+                "token_id": 17,
+                "token": "2",
+                "rank": 1,
+                "log_probability": -0.0008948612376116216,
+                "probability": 0.9991055727005005
+              },
+              {
+                "token_id": 16,
+                "token": "1",
+                "rank": 2,
+                "log_probability": -7.500895023345947,
+                "probability": 0.0005525895394384861
+              },
+              {
+                "token_id": 18,
+                "token": "3",
+                "rank": 3,
+                "log_probability": -8.000894546508789,
+                "probability": 0.00033516265102662146
+              },
+              {
+                "token_id": 19,
+                "token": "4",
+                "rank": 4,
+                "log_probability": -12.500894546508789,
+                "probability": 3.7233210150589002e-06
+              },
+              {
+                "token_id": 2827,
+                "token": "null",
+                "rank": 5,
+                "log_probability": -13.750894546508789,
+                "probability": 1.0667492915672483e-06
+              },
+              {
+                "token_id": 15,
+                "token": "0",
+                "rank": 6,
+                "log_probability": -13.875894546508789,
+                "probability": 9.414029591425788e-07
+              },
+              {
+                "token_id": 20,
+                "token": "5",
+                "rank": 7,
+                "log_probability": -14.625894546508789,
+                "probability": 4.446872594598972e-07
+              },
+              {
+                "token_id": 21,
+                "token": "6",
+                "rank": 8,
+                "log_probability": -15.500894546508789,
+                "probability": 1.8537325274792238e-07
+              },
+              {
+                "token_id": 22,
+                "token": "7",
+                "rank": 9,
+                "log_probability": -15.625894546508789,
+                "probability": 1.6359129517695692e-07
+              },
+              {
+                "token_id": 23,
+                "token": "8",
+                "rank": 10,
+                "log_probability": -16.25089454650879,
+                "probability": 8.756412483990061e-08
+              },
+              {
+                "token_id": 24,
+                "token": "9",
+                "rank": 11,
+                "log_probability": -16.81339454650879,
+                "probability": 4.9892530995521156e-08
+              },
+              {
+                "token_id": 220,
+                "token": " ",
+                "rank": 12,
+                "log_probability": -16.87589454650879,
+                "probability": 4.686969745648639e-08
+              },
+              {
+                "token_id": 24128,
+                "token": "２",
+                "rank": 13,
+                "log_probability": -18.68839454650879,
+                "probability": 7.65126717539033e-09
+              },
+              {
+                "token_id": 4754,
+                "token": "{\"",
+                "rank": 14,
+                "log_probability": -19.06339454650879,
+                "probability": 5.258633972715643e-09
+              },
+              {
+                "token_id": 1288,
+                "token": ",\"",
+                "rank": 15,
+                "log_probability": -19.12589454650879,
+                "probability": 4.940029274536073e-09
+              },
+              {
+                "token_id": 9327,
+                "token": "undefined",
+                "rank": 15,
+                "log_probability": -19.12589454650879,
+                "probability": 4.940029274536073e-09
+              },
+              {
+                "token_id": 917,
+                "token": "var",
+                "rank": 17,
+                "log_probability": -19.50089454650879,
+                "probability": 3.3952292088912372e-09
+              },
+              {
+                "token_id": 22121,
+                "token": "NaN",
+                "rank": 18,
+                "log_probability": -19.81339454650879,
+                "probability": 2.4840027812444987e-09
+              },
+              {
+                "token_id": 819,
+                "token": " null",
+                "rank": 19,
+                "log_probability": -19.93839454650879,
+                "probability": 2.19212492602594e-09
+              },
+              {
+                "token_id": 90,
+                "token": "{",
+                "rank": 20,
+                "log_probability": -20.00089454650879,
+                "probability": 2.059310499902267e-09
+              }
+            ]
+          },
+          {
+            "id": "NV01_UNKNOWN_PARENT",
+            "probe_id": "NV01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "f7a68aabae7841325e195859a80b1875c16d7bca89fc9a6e1543ba9032f45c83",
+            "prefix_token_ids_sha256": "f29303f7c816d641502423a2584efd082555d3446eda2b7d463b4a6e0b7788d9",
+            "prefix_tokens": 1070,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_action_parent3": {
+                "token_id": 18,
+                "token": "3",
+                "rank": 2,
+                "log_probability": -1.0543440580368042,
+                "probability": 0.3484208881855011
+              },
+              "unknown_root_parent5": {
+                "token_id": 20,
+                "token": "5",
+                "rank": 3,
+                "log_probability": -7.554344177246094,
+                "probability": 0.0005238295998424292
+              }
+            },
+            "top": [
+              {
+                "token_id": 19,
+                "token": "4",
+                "rank": 1,
+                "log_probability": -0.4293440580368042,
+                "probability": 0.65093594789505
+              },
+              {
+                "token_id": 18,
+                "token": "3",
+                "rank": 2,
+                "log_probability": -1.0543440580368042,
+                "probability": 0.3484208881855011
+              },
+              {
+                "token_id": 20,
+                "token": "5",
+                "rank": 3,
+                "log_probability": -7.554344177246094,
+                "probability": 0.0005238295998424292
+              },
+              {
+                "token_id": 2827,
+                "token": "null",
+                "rank": 4,
+                "log_probability": -9.554344177246094,
+                "probability": 7.08926236256957e-05
+              },
+              {
+                "token_id": 16,
+                "token": "1",
+                "rank": 5,
+                "log_probability": -11.054344177246094,
+                "probability": 1.581828109920025e-05
+              },
+              {
+                "token_id": 17,
+                "token": "2",
+                "rank": 5,
+                "log_probability": -11.054344177246094,
+                "probability": 1.581828109920025e-05
+              },
+              {
+                "token_id": 21,
+                "token": "6",
+                "rank": 7,
+                "log_probability": -11.429344177246094,
+                "probability": 1.0871735867112875e-05
+              },
+              {
+                "token_id": 15,
+                "token": "0",
+                "rank": 8,
+                "log_probability": -12.554344177246094,
+                "probability": 3.529535888446844e-06
+              },
+              {
+                "token_id": 22,
+                "token": "7",
+                "rank": 9,
+                "log_probability": -13.429344177246094,
+                "probability": 1.4713294831381063e-06
+              },
+              {
+                "token_id": 23,
+                "token": "8",
+                "rank": 10,
+                "log_probability": -15.054344177246094,
+                "probability": 2.897219530950679e-07
+              },
+              {
+                "token_id": 24,
+                "token": "9",
+                "rank": 11,
+                "log_probability": -15.366844177246094,
+                "probability": 2.1196511568177812e-07
+              },
+              {
+                "token_id": 819,
+                "token": " null",
+                "rank": 12,
+                "log_probability": -15.491844177246094,
+                "probability": 1.8705854643030762e-07
+              },
+              {
+                "token_id": 220,
+                "token": " ",
+                "rank": 13,
+                "log_probability": -16.554344177246094,
+                "probability": 6.464570390107838e-08
+              },
+              {
+                "token_id": 4427,
+                "token": "NULL",
+                "rank": 14,
+                "log_probability": -17.741844177246094,
+                "probability": 1.9715825416710686e-08
+              },
+              {
+                "token_id": 1288,
+                "token": ",\"",
+                "rank": 15,
+                "log_probability": -18.304344177246094,
+                "probability": 1.1233739272142884e-08
+              },
+              {
+                "token_id": 4806,
+                "token": "(null",
+                "rank": 16,
+                "log_probability": -18.741844177246094,
+                "probability": 7.253047051847261e-09
+              },
+              {
+                "token_id": 3928,
+                "token": "None",
+                "rank": 17,
+                "log_probability": -18.929344177246094,
+                "probability": 6.012987441295081e-09
+              },
+              {
+                "token_id": 9327,
+                "token": "undefined",
+                "rank": 18,
+                "log_probability": -19.241844177246094,
+                "probability": 4.399195230320174e-09
+              },
+              {
+                "token_id": 22121,
+                "token": "NaN",
+                "rank": 19,
+                "log_probability": -19.616844177246094,
+                "probability": 3.023519878908587e-09
+              },
+              {
+                "token_id": 8126,
+                "token": "nil",
+                "rank": 19,
+                "log_probability": -19.616844177246094,
+                "probability": 3.023519878908587e-09
+              }
+            ]
+          },
+          {
+            "id": "NV01_UNKNOWN_PARENT_WITH_PRIOR_PARENT3",
+            "probe_id": "NV01",
+            "raw_prefix_unchanged": false,
+            "counterfactual_previous_parent": true,
+            "prefix_text_sha256": "e1df947614d6900d58586cd1466218486922feadab359bccfcfedabf3e90b425",
+            "prefix_token_ids_sha256": "6c031ea37aaededb4431c9e1e3767fd28435d8fb018c3be4b17d9afb6c951b35",
+            "prefix_tokens": 1070,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_action_parent3": {
+                "token_id": 18,
+                "token": "3",
+                "rank": 3,
+                "log_probability": -3.6376302242279053,
+                "probability": 0.0263146311044693
+              },
+              "unknown_root_parent5": {
+                "token_id": 20,
+                "token": "5",
+                "rank": 2,
+                "log_probability": -1.0126302242279053,
+                "probability": 0.36326226592063904
+              }
+            },
+            "top": [
+              {
+                "token_id": 19,
+                "token": "4",
+                "rank": 1,
+                "log_probability": -0.51263028383255,
+                "probability": 0.5989181995391846
+              },
+              {
+                "token_id": 20,
+                "token": "5",
+                "rank": 2,
+                "log_probability": -1.0126302242279053,
+                "probability": 0.36326226592063904
+              },
+              {
+                "token_id": 18,
+                "token": "3",
+                "rank": 3,
+                "log_probability": -3.6376302242279053,
+                "probability": 0.0263146311044693
+              },
+              {
+                "token_id": 21,
+                "token": "6",
+                "rank": 4,
+                "log_probability": -5.137630462646484,
+                "probability": 0.005871586035937071
+              },
+              {
+                "token_id": 17,
+                "token": "2",
+                "rank": 5,
+                "log_probability": -5.887630462646484,
+                "probability": 0.0027735410258173943
+              },
+              {
+                "token_id": 2827,
+                "token": "null",
+                "rank": 6,
+                "log_probability": -6.637630462646484,
+                "probability": 0.0013101279037073255
+              },
+              {
+                "token_id": 16,
+                "token": "1",
+                "rank": 7,
+                "log_probability": -7.012630462646484,
+                "probability": 0.0009004368912428617
+              },
+              {
+                "token_id": 22,
+                "token": "7",
+                "rank": 8,
+                "log_probability": -7.887630462646484,
+                "probability": 0.0003753579512704164
+              },
+              {
+                "token_id": 15,
+                "token": "0",
+                "rank": 9,
+                "log_probability": -9.012630462646484,
+                "probability": 0.00012186088861199096
+              },
+              {
+                "token_id": 23,
+                "token": "8",
+                "rank": 10,
+                "log_probability": -10.262630462646484,
+                "probability": 3.491372990538366e-05
+              },
+              {
+                "token_id": 24,
+                "token": "9",
+                "rank": 11,
+                "log_probability": -10.825130462646484,
+                "probability": 1.9893243006663397e-05
+              },
+              {
+                "token_id": 1288,
+                "token": ",\"",
+                "rank": 12,
+                "log_probability": -11.387630462646484,
+                "probability": 1.1334827831888106e-05
+              },
+              {
+                "token_id": 819,
+                "token": " null",
+                "rank": 13,
+                "log_probability": -12.262630462646484,
+                "probability": 4.725059170596069e-06
+              },
+              {
+                "token_id": 4427,
+                "token": "NULL",
+                "rank": 14,
+                "log_probability": -13.137630462646484,
+                "probability": 1.969697905224166e-06
+              },
+              {
+                "token_id": 8126,
+                "token": "nil",
+                "rank": 15,
+                "log_probability": -13.512630462646484,
+                "probability": 1.3537521681428188e-06
+              },
+              {
+                "token_id": 1,
+                "token": "\"",
+                "rank": 16,
+                "log_probability": -13.637630462646484,
+                "probability": 1.1946821132369223e-06
+              },
+              {
+                "token_id": 3637,
+                "token": "parent",
+                "rank": 17,
+                "log_probability": -13.700130462646484,
+                "probability": 1.1222999773963238e-06
+              },
+              {
+                "token_id": 3928,
+                "token": "None",
+                "rank": 18,
+                "log_probability": -13.825130462646484,
+                "probability": 9.9042620149703e-07
+              },
+              {
+                "token_id": 3721,
+                "token": "false",
+                "rank": 19,
+                "log_probability": -13.887630462646484,
+                "probability": 9.304193895331991e-07
+              },
+              {
+                "token_id": 220,
+                "token": " ",
+                "rank": 19,
+                "log_probability": -13.887630462646484,
+                "probability": 9.304193895331991e-07
+              }
+            ]
+          }
+        ],
+        "normal_adoption": false,
+        "process_seconds": 11.247585721081123,
+        "torch": "2.8.0+cu128",
+        "pins": {
+          "transformers": "5.19.0",
+          "peft": "0.21.2",
+          "accelerate": "1.15.0",
+          "safetensors": "0.8.0"
+        },
+        "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+        "model": "Qwen/Qwen3.5-4B",
+        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "retokenized_text_not_original_generated_tokens": true,
+        "loaded_adapter": "MATCHED_ALL_112_TENSORS_NONTRAINING",
+        "adapter_unchanged": true,
+        "peak_allocated_gib": 8.770921230316162,
+        "peak_reserved_gib": 9.087890625
+      },
+      "supervisor": {
+        "process_seconds": 12.445977047784254,
+        "exit": 0,
+        "compute_apps": ""
+      },
+      "private_preservation": {
+        "status": "SAVED_ALL_13_MEMBERS_MANIFEST12_HASH_MATCH_CRC_VERIFIED",
+        "library_file_id": "libfile_a47af2edc63c8191a4ee426efe0ce3f9",
+        "archive": "cocolon-analysis-branch-diagnosis-20261102.zip",
+        "archive_bytes": 19787,
+        "archive_sha256": "192be86433bcc0c5c289d7213b997cd080cc931fe40b9522c6d8a59c03f35249"
+      }
+    },
+    {
+      "report": {
+        "status": "COMPLETE_FIXED_PREFIX_DIAGNOSIS_NOT_ADOPTED",
+        "plan_sha256": "3f68543a33f80dad8d6e3a30b0b5cca0dc479c648967e08661df23aa511f7733",
+        "runner_sha256": "7ae706c30866128e42d7596f15768d9c02270719cb42d4021e830bdc0e6f70ff",
+        "updates": 0,
+        "new_generations": 0,
+        "forwards": 2,
+        "model_loads": 1,
+        "branches": [
+          {
+            "id": "AF01_LITERAL_EXACT_TEXT_PREFIX",
+            "probe_id": "AF01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "aefb91cb5ef020df5a8610f994532892ad13148488d45868eaf8ee1cf8a731d7",
+            "prefix_token_ids_sha256": "1fe51d2960767507b46aff4f61bf5b30df7363f3c8015da059b43339a5282595",
+            "prefix_tokens": 1218,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_repeat_continuation": {
+                "token_id": 247816,
+                "token": "ていた",
+                "rank": 1,
+                "log_probability": -0.3250366449356079,
+                "probability": 0.7225008606910706
+              },
+              "source_literal_continuation": {
+                "token_id": 148850,
+                "token": "いた",
+                "rank": 5,
+                "log_probability": -5.512536525726318,
+                "probability": 0.004035857506096363
+              }
+            },
+            "top": [
+              {
+                "token_id": 247816,
+                "token": "ていた",
+                "rank": 1,
+                "log_probability": -0.3250366449356079,
+                "probability": 0.7225008606910706
+              },
+              {
+                "token_id": 207792,
+                "token": "いたので",
+                "rank": 2,
+                "log_probability": -1.825036644935608,
+                "probability": 0.16121172904968262
+              },
+              {
+                "token_id": 35814,
+                "token": "て",
+                "rank": 3,
+                "log_probability": -2.4500365257263184,
+                "probability": 0.08629043400287628
+              },
+              {
+                "token_id": 202360,
+                "token": "いていた",
+                "rank": 4,
+                "log_probability": -5.012536525726318,
+                "probability": 0.006654003635048866
+              },
+              {
+                "token_id": 148850,
+                "token": "いた",
+                "rank": 5,
+                "log_probability": -5.512536525726318,
+                "probability": 0.004035857506096363
+              },
+              {
+                "token_id": 159476,
+                "token": "っていた",
+                "rank": 6,
+                "log_probability": -6.075036525726318,
+                "probability": 0.002299562096595764
+              },
+              {
+                "token_id": 159462,
+                "token": "していた",
+                "rank": 7,
+                "log_probability": -6.450036525726318,
+                "probability": 0.0015804644208401442
+              },
+              {
+                "token_id": 212199,
+                "token": "んでいた",
+                "rank": 8,
+                "log_probability": -6.637536525726318,
+                "probability": 0.0013102510711178184
+              },
+              {
+                "token_id": 148814,
+                "token": "いて",
+                "rank": 9,
+                "log_probability": -6.700036525726318,
+                "probability": 0.0012308668810874224
+              },
+              {
+                "token_id": 217731,
+                "token": "ходил",
+                "rank": 10,
+                "log_probability": -6.950036525726318,
+                "probability": 0.0009586001397110522
+              },
+              {
+                "token_id": 186009,
+                "token": "だったので",
+                "rank": 11,
+                "log_probability": -7.262536525726318,
+                "probability": 0.0007013268768787384
+              },
+              {
+                "token_id": 237474,
+                "token": "れていた",
+                "rank": 12,
+                "log_probability": -7.450036525726318,
+                "probability": 0.0005814203759655356
+              },
+              {
+                "token_id": 221912,
+                "token": "したので",
+                "rank": 13,
+                "log_probability": -7.887536525726318,
+                "probability": 0.0003753931960090995
+              },
+              {
+                "token_id": 239401,
+                "token": " て",
+                "rank": 14,
+                "log_probability": -7.950036525726318,
+                "probability": 0.0003526492801029235
+              },
+              {
+                "token_id": 222200,
+                "token": "かったので",
+                "rank": 15,
+                "log_probability": -8.075037002563477,
+                "probability": 0.00031121174106374383
+              },
+              {
+                "token_id": 199878,
+                "token": "しているので",
+                "rank": 16,
+                "log_probability": -8.262537002563477,
+                "probability": 0.00025800359435379505
+              },
+              {
+                "token_id": 171774,
+                "token": "ている",
+                "rank": 17,
+                "log_probability": -8.512537002563477,
+                "probability": 0.00020093339844606817
+              },
+              {
+                "token_id": 148662,
+                "token": "ので",
+                "rank": 17,
+                "log_probability": -8.512537002563477,
+                "probability": 0.00020093339844606817
+              },
+              {
+                "token_id": 164613,
+                "token": "ছিল",
+                "rank": 17,
+                "log_probability": -8.512537002563477,
+                "probability": 0.00020093339844606817
+              },
+              {
+                "token_id": 232799,
+                "token": "いなかった",
+                "rank": 20,
+                "log_probability": -8.637537002563477,
+                "probability": 0.00017732310516294092
+              }
+            ]
+          },
+          {
+            "id": "AF01_CARRIER_WRITTEN_SUFFIX",
+            "probe_id": "AF01",
+            "raw_prefix_unchanged": true,
+            "counterfactual_previous_parent": false,
+            "prefix_text_sha256": "152b97213b8edc51022785ea2757114c19a5ebf7fe9991d71e41348ee3d847c5",
+            "prefix_token_ids_sha256": "4552b8fff8d8d8d6c97793e5f107950c908c3524c185605bc129430a14bc08ae",
+            "prefix_tokens": 1227,
+            "shared_token_labels_not_distinguishable": {},
+            "candidates": {
+              "observed_invalid_modifier_suffix": {
+                "token_id": 25613,
+                "token": "MOD",
+                "rank": 332,
+                "log_probability": -8.461688995361328,
+                "probability": 0.00021141469187568873
+              },
+              "valid_reason_suffix_alternative": {
+                "token_id": 762,
+                "token": "RE",
+                "rank": 1263,
+                "log_probability": -10.430438995361328,
+                "probability": 2.9520106181735173e-05
+              }
+            },
+            "top": [
+              {
+                "token_id": 45308,
+                "token": "ANNOT",
+                "rank": 1,
+                "log_probability": -2.274188756942749,
+                "probability": 0.1028803288936615
+              },
+              {
+                "token_id": 1076,
+                "token": "...",
+                "rank": 2,
+                "log_probability": -2.836688756942749,
+                "probability": 0.05861944705247879
+              },
+              {
+                "token_id": 20564,
+                "token": "...\"",
+                "rank": 3,
+                "log_probability": -2.899188756942749,
+                "probability": 0.05506787449121475
+              },
+              {
+                "token_id": 24342,
+                "token": "Reason",
+                "rank": 4,
+                "log_probability": -3.024188756942749,
+                "probability": 0.04859723150730133
+              },
+              {
+                "token_id": 5420,
+                "token": "QUE",
+                "rank": 4,
+                "log_probability": -3.024188756942749,
+                "probability": 0.04859723150730133
+              },
+              {
+                "token_id": 13394,
+                "token": "Unknown",
+                "rank": 6,
+                "log_probability": -3.399188756942749,
+                "probability": 0.03340035676956177
+              },
+              {
+                "token_id": 8955,
+                "token": "ILL",
+                "rank": 7,
+                "log_probability": -3.461688756942749,
+                "probability": 0.031376730650663376
+              },
+              {
+                "token_id": 11638,
+                "token": "QUI",
+                "rank": 8,
+                "log_probability": -3.711688756942749,
+                "probability": 0.02443622052669525
+              },
+              {
+                "token_id": 1457,
+                "token": "UR",
+                "rank": 9,
+                "log_probability": -4.024188995361328,
+                "probability": 0.017877917736768723
+              },
+              {
+                "token_id": 23852,
+                "token": "STATE",
+                "rank": 10,
+                "log_probability": -4.149188995361328,
+                "probability": 0.015777206048369408
+              },
+              {
+                "token_id": 49649,
+                "token": "UNKNOWN",
+                "rank": 10,
+                "log_probability": -4.149188995361328,
+                "probability": 0.015777206048369408
+              },
+              {
+                "token_id": 8934,
+                "token": "\"}",
+                "rank": 12,
+                "log_probability": -4.274188995361328,
+                "probability": 0.013923335820436478
+              },
+              {
+                "token_id": 13794,
+                "token": "QUAL",
+                "rank": 13,
+                "log_probability": -4.399188995361328,
+                "probability": 0.012287301011383533
+              },
+              {
+                "token_id": 11662,
+                "token": "ANN",
+                "rank": 13,
+                "log_probability": -4.399188995361328,
+                "probability": 0.012287301011383533
+              },
+              {
+                "token_id": 30,
+                "token": "?",
+                "rank": 15,
+                "log_probability": -4.461688995361328,
+                "probability": 0.011542851105332375
+              },
+              {
+                "token_id": 8180,
+                "token": "ANCE",
+                "rank": 16,
+                "log_probability": -4.586688995361328,
+                "probability": 0.010186530649662018
+              },
+              {
+                "token_id": 1745,
+                "token": "AD",
+                "rank": 17,
+                "log_probability": -4.836688995361328,
+                "probability": 0.007933277636766434
+              },
+              {
+                "token_id": 11862,
+                "token": "***",
+                "rank": 18,
+                "log_probability": -4.961688995361328,
+                "probability": 0.007001092657446861
+              },
+              {
+                "token_id": 22032,
+                "token": " modifier",
+                "rank": 18,
+                "log_probability": -4.961688995361328,
+                "probability": 0.007001092657446861
+              },
+              {
+                "token_id": 2129,
+                "token": "\",\"",
+                "rank": 20,
+                "log_probability": -5.211688995361328,
+                "probability": 0.005452456884086132
+              }
+            ]
+          }
+        ],
+        "normal_adoption": false,
+        "process_seconds": 10.234636439941823,
+        "torch": "2.8.0+cu128",
+        "pins": {
+          "transformers": "5.19.0",
+          "peft": "0.21.2",
+          "accelerate": "1.15.0",
+          "safetensors": "0.8.0"
+        },
+        "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+        "model": "Qwen/Qwen3.5-4B",
+        "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "retokenized_text_not_original_generated_tokens": true,
+        "loaded_adapter": "MATCHED_ALL_112_TENSORS_NONTRAINING",
+        "adapter_unchanged": true,
+        "peak_allocated_gib": 8.771547794342041,
+        "peak_reserved_gib": 9.029296875
+      },
+      "supervisor": {
+        "process_seconds": 11.507960736053064,
+        "exit": 0,
+        "compute_apps": ""
+      },
+      "private_preservation": {
+        "status": "SAVED_ALL_13_MEMBERS_MANIFEST12_HASH_MATCH_CRC_VERIFIED",
+        "library_file_id": "libfile_2a9e52f433ec8191aeb2551300955681",
+        "archive": "cocolon-analysis-branch-followup-20261102.zip",
+        "archive_bytes": 15721,
+        "archive_sha256": "e6ddff95b646b09cde61e477e48766987f1c09ab723c4843cc863e4c03872698"
+      }
+    }
+  ],
+  "root_read": {
+    "required_key": "Actual top token closes unit and starts next unit (0.941806674); required-key punctuation first token ranks2 (0.041380093). Truncated observed_close label token rank6 is not the complete observed continuation. No complete-key probability is claimed.",
+    "literal_lcp_limit": "LCP at fatigue character compares rete vs reteita tokenizations; short rete can still continue correctly. Not evidence of repetition alone.",
+    "literal_exact_text_followup": "Forced raw-text prefix ending tsukarete favors teita token0.722500861, source-continuation ita token0.004035858; another source-compatible itanode token0.161211729 exists. Local split-prefix repetition tendency, not full text probabilities or exact original KV-token replay.",
+    "carrier_limit": "WR token is shared with valid WRITTEN_REASON; initial carrier branch does not determine invalid MODIFIER over all valid roles. Forced WRITTEN_ suffix condition produces unnatural ANNOT top token, MOD rank332/RE1263. This does not resolve ordinary carrier selection causality.",
+    "reply_parent": "Original-prefix next token parent2 ranks1/prob0.999105573 vs correct all-unit action3 rank3/prob0.000335163.",
+    "unknown_parent": "Original-prefix prefill top4/prob0.650935948, raw generation was3. Correct all-unit unknown root5 ranks3/prob0.000523830; do not call prefill original generation reproduction.",
+    "counterfactual": "Changing only prior reply parent2 to3 increases root5 token to0.363262266/rank2, but top4 remains0.598918200. Neither a repaired accepted output nor solved root binding.",
+    "teaching_design_hypothesis": "Raw parent2/3 also fits counting independent roots instead of all units (actual indices3/5). BT03/04 prior actions have no child units, so root and unit ordinal coincide. This suggests a missing disambiguating contrast, not proven causality."
+  },
+  "normal_adoption": false,
+  "product_credit": 0,
+  "next_step": "Create separate synthetic contrasts whose root ranks differ from all-unit indices, and literal reason-copy/carrier contrasts. CPU bind all targets through unchanged receiver before a bounded training candidate; retain original40 and read old rehearsal plus new unseen-source diagnostic outputs. No frozen DEV full text becomes teaching."
+}

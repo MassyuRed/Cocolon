@@ -1,0 +1,16 @@
+{
+  "archive": "cocolon-source-index-probe-originals-20261030.zip",
+  "bytes": 70276,
+  "sha256": "8c62c3535dcef7d685d38ee6f0220500592c797c158007ed967d6c46ed86cf42",
+  "payload_files": 19,
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "processing_seconds": 47.40570553496946,
+  "process_cost_usd": 0.0036871104304976245,
+  "post_identity": {
+    "frozen_files": 207,
+    "all_frozen_bytes_unchanged": true,
+    "adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+    "gpu_read_only": "NVIDIA RTX A5000, 1 MiB, 0 %",
+    "model_rerun": false
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "status": "RESEARCH_CANDIDATE_PRESERVED_NO_NORMAL_ADOPTION",
+  "date_jst": "2026-11-05",
+  "trial": "material_v5_aligned16_trial.py",
+  "runner_sha256": "1fc65428f0772a017cfe71d2443ebf32d97e98137e851d2888eab4e645aa27e6",
+  "weekly_result_section": 175,
+  "trial_readme_result_section": 139,
+  "profile": "selected_material.v5",
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "api_overlay_only": true,
+  "hardware": {
+    "pod": "n1c0emcf17xs0u",
+    "gpu": "NVIDIA RTX 4000 Ada Generation",
+    "memory_mib": 20475,
+    "torch": "2.8.0+cu128",
+    "display_usd_hour": 0.29
+  },
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "updates": 16,
+  "measurement_forwards": 32,
+  "new_generations": 30,
+  "reused_before_responses": 30,
+  "model_loads_total": 3,
+  "before_candidate": 29,
+  "after_candidate": 30,
+  "before_typed": 18,
+  "after_typed": 19,
+  "prior_graph_and_visible_preserved": 18,
+  "new_typed": [
+    "PV01"
+  ],
+  "lost_typed": [],
+  "raw_identical": 18,
+  "raw_changed": 12,
+  "semantic_improvements_observed": [
+    "PV01",
+    "HQ04",
+    "AT04"
+  ],
+  "remaining_semantic_errors": [
+    "YREASON01",
+    "AT11",
+    "AT17",
+    "AT24"
+  ],
+  "new_semantic_regressions_detected_in_30": [],
+  "known_teacher_sources": [
+    "AT04",
+    "AT11",
+    "AT17",
+    "AT24",
+    "YREASON01=RU02"
+  ],
+  "historical_before_environment_confound": true,
+  "teacher_nll_before": 0.02881400517981092,
+  "teacher_nll_after": 0.006690068867101218,
+  "failure_and_recovery": {
+    "original_run_status": "FAILED_NO_RETRY_NOT_ADOPTED",
+    "original_seconds": 234.73496340867132,
+    "train_exit": 0,
+    "initial_after_exit": 1,
+    "initial_after_new_requests": 0,
+    "initial_after_generations": 0,
+    "cause": "EMPTY_AFTER_DIRECTORY_NOT_RESTORED_FROM_FILES_ONLY_CPU_ZIP",
+    "repair": "RESTORE_DIRECTORY_AND_EXECUTE_UNGENERATED_AFTER_PHASE",
+    "training_reruns": 0,
+    "full_run_restarts": 0,
+    "duplicate_generations": 0,
+    "additional_model_loads": 1,
+    "remaining_seconds_at_recovery": 593.3043310642242,
+    "deadline_extended": false,
+    "original_deadline_seconds": 900,
+    "termination_allowance_seconds": 30,
+    "all_completed_by_observed_elapsed_seconds": 627.5,
+    "after_status": "COMPLETE_PENDING_SEMANTIC_REVIEW",
+    "original_failure_record_preserved": true
+  },
+  "saved_replay": {
+    "responses": 60,
+    "candidates": 59,
+    "typed": 37,
+    "generator_compiler_author_calls_forbidden": true,
+    "projection_from_reloaded_artifact_matches": true
+  },
+  "original90_unchanged": true,
+  "initial_adapter_unchanged": true,
+  "new_weights_sha256": "419bcacf300ef370c358289e5cad1e55523aa693ddc35f0aff368efb845b1deb",
+  "new_config_sha256": "4ab4f399bbd7b5e6c894452d3385c7d0be1cad2de79bd2c0eb64c2b8dd422c33",
+  "archive": {
+    "library_file_id": "libfile_266a3eef2ce08191afb4d5e23d755419",
+    "file_name": "Cocolon_Analysis_v5_aligned16_20261105.zip",
+    "bytes": 15209194,
+    "sha256": "bf7b9fcd2d729977f5db65666e5b37146fa79f0d8cceaa8ddcdbcd87f46e3496",
+    "members": 376,
+    "manifest_entries": 375,
+    "crc_and_all_member_bytes_sha256_checked": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_credit": 0,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "structure_map_delta": "NONE",
+  "normal_product_code_changed": false,
+  "deployment": false,
+  "database_write": false,
+  "gpu_end": {
+    "memory_used": "2 MiB",
+    "utilization": "0 %",
+    "compute_processes": 0,
+    "pod_rental_maintained": true
+  },
+  "next_work": "Investigate existing teacher versus free generation divergences for RU02 and AT11/17/24 at reason/modifier/dependent-content boundaries; do not repeat completed run or instruction variants."
+}

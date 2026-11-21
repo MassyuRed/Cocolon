@@ -1,0 +1,828 @@
+{
+  "schema": "cocolon.4b_quote_surface_fit12_result.v1",
+  "status": "SURFACE12_COMPLETE_NOT_SERVICE_OR_PRODUCT_ACCEPTED",
+  "source_commit": "c86ef0cae18b2c2905a4e043c0d5e4010e7638af",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "plan": {
+    "affected_maps": "STRUCTURE_MAP_DELTA_NONE: finite training objective only; no production source/reader/schema/API/DB/RN changes.",
+    "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+    "approval_basis": "Mash explicit approval 2026-10-26 JST for dd3cabb4 surface12: 12 updates/save-reload/FIT9; only all9 pass then2 service saved rereads; maximum45min/process allocation USD0.195 excluding holding etc.",
+    "automatic_pod_stop": false,
+    "batch_size": 1,
+    "before_generations": 0,
+    "chair_passes": 1,
+    "clip_norm": 1,
+    "completion_condition": "12 updates once; save/reload; FIT9; all9 semantic/body/raw completion plus chair initial ASK3, correction3updates each/no question and daily END then2 actual service saved rereads",
+    "context_tokens": 8192,
+    "cost_scope": "Thirty-minute process allocation at the last shown GPU rate; continuing rental, preparation, recovery, storage and tax separate. No bill hard cap, new Pod, charge or automatic GPU stop.",
+    "cpu_diagnostic_sha256": "0396417dd2b89678eec7bf2f2a2ae82bb7757c380a56ac5fd718ec1ca0b22f25",
+    "current_incomplete_condition": "boundary12 daily02 omitted observation suffix and reception sentence ending; complete teacher exists but observation was not supervised",
+    "daily_passes": 2,
+    "dataset_manifest_sha256": "e183984bc4716ee0f7b3a0ca5af543fbd9e8ea957bced07dcdcdced1b36fefb3",
+    "execution_environment": "Codex Work / GPT-6; root Karen integrates, executes and publishes. Separate-context agents draft/read candidates; no claim of independent Pro/Ultra or human acceptance.",
+    "fit_generations": 9,
+    "gpu_hourly_usd": 0.26,
+    "gpu_run_authorized": true,
+    "gradient_accumulation": 1,
+    "holdout_generations_in_this_runner": 0,
+    "holdout_owner": "At most2 initial model calls, isolated SQL persistence, one interruption after meaning saved, explicit response resume; saved rereads forbid generation",
+    "identity_groups": 6,
+    "implementation_authorized": true,
+    "initial_adapter_sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+    "learning_rate": 5e-05,
+    "legacy_run_pilot_sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "loss_scope": "CHAIR_FULL_DAILY_OBSERVATION_RECEPTION_WINDOW",
+    "max_input_tokens": 5632,
+    "max_new_tokens": 2560,
+    "max_optimizer_steps": 12,
+    "max_process_usd": 0.13,
+    "max_seconds": 1800,
+    "minimum_free_gib": 14,
+    "model": "Qwen/Qwen3.5-4B",
+    "necessity_class": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "new_generation_budget_basis": "Approved fixed8192context/5632input/2560output. Legacychair six prompts/targets unchanged; dailyquote three have explicit newformat/prompt with unchanged native meaning and response targets. No truncation or budget search.",
+    "new_optimizer": true,
+    "optimizer": "AdamW",
+    "output_directory": "/workspace/cocolon_4b_quote_surface_fit12_20261026",
+    "permission_basis": "Mash: いいよ、進めて。 Authorizes this new surface12 finite trial and conditional2 within the fixed proposal. No reapproval between approved stages.",
+    "product_destination": "Initial daily meal and slight calm -> adopted meaning/natural response/END -> isolated SQL saved non-generating reread; preserve old chair correction.",
+    "prohibited": "No reader relaxation,old raw repair,model retry,extra updates,LR search,production/Supabase/Render/RN or GPU STOP/restart/delete.",
+    "retry": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "runner_sha256": "819456ce9bf6589fb91becf16852a955ce3540eca59b2e9b4d5a01efe3d39826",
+    "schema": "cocolon.4b_quote_surface_fit12.v1",
+    "scope": "chair6 full JSON+EOS once plus daily3 complete observation/reception values and connecting JSON tokens twice; same interleaved12",
+    "seed": 20261024,
+    "semantic_profile": "emlis_model_proposal.v1",
+    "status": "AUTHORIZED_ONCE_CURRENT_MASH_CONTINUATION",
+    "stop_condition": "Fixed process deadline/nonfinite/source or target mismatch; no extra updates, LR search or failed-model retry. GPU rental remains running.",
+    "strict_optimizer_resume": false,
+    "training_examples_sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5",
+    "training_messages_sha256": "1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022f",
+    "training_rows": 9,
+    "unique_language_story_count": 2,
+    "unique_stages": 2,
+    "validation_rows": 9,
+    "weight_decay": 0
+  },
+  "runner_sha256": "819456ce9bf6589fb91becf16852a955ce3540eca59b2e9b4d5a01efe3d39826",
+  "dataset_manifest_sha256": "e183984bc4716ee0f7b3a0ca5af543fbd9e8ea957bced07dcdcdced1b36fefb3",
+  "initial_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "4df29c5daa4e4e25273f9fa0e18268929d7cb2fa2993a6e6e8136628efb5adc7",
+    "adapter_model.safetensors": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102"
+  },
+  "runtime_versions": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "distinct_targets": 9,
+  "training_targets": 9,
+  "training_stories": 2,
+  "identity_groups": 6,
+  "independent_stories": 2,
+  "unique_stages": 2,
+  "new_optimizer": true,
+  "strict_optimizer_resume": false,
+  "optimizer_steps_completed": 12,
+  "generation_calls_started": 9,
+  "new_generations": 9,
+  "before_generations": 0,
+  "separate_service_holdout_read_or_generated_here": false,
+  "raw_repair": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "gpu_stop_restart_delete_operations": 0,
+  "retry": false,
+  "gpu": {
+    "name": "NVIDIA RTX A4500",
+    "free_bytes": 20818427904,
+    "total_bytes": 21018640384,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "token_stats": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 2076,
+      "assistant_eos_tokens": 1374,
+      "full_tokens": 3450
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 5030,
+      "assistant_eos_tokens": 2330,
+      "full_tokens": 7360
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 2072,
+      "assistant_eos_tokens": 1374,
+      "full_tokens": 3446
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 5045,
+      "assistant_eos_tokens": 2333,
+      "full_tokens": 7378
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 2069,
+      "assistant_eos_tokens": 1364,
+      "full_tokens": 3433
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 5028,
+      "assistant_eos_tokens": 2339,
+      "full_tokens": 7367
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1733,
+      "assistant_eos_tokens": 1585,
+      "full_tokens": 3318
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1728,
+      "assistant_eos_tokens": 1559,
+      "full_tokens": 3287
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1732,
+      "assistant_eos_tokens": 1598,
+      "full_tokens": 3330
+    }
+  ],
+  "surface_masks": [
+    {
+      "loss_start": 2866,
+      "logits_positions": 452,
+      "reception_tokens": 11,
+      "observation_tokens": 9,
+      "boundary_tokens": 5,
+      "loss_tokens": 25,
+      "surface_char_span": [
+        3912,
+        3977
+      ],
+      "surface_text": "帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"",
+      "value_loss_start": 2879,
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "full_context_tokens": 3318,
+      "prompt_tokens": 1733,
+      "teacher_eos_retained": true
+    },
+    {
+      "loss_start": 2851,
+      "logits_positions": 436,
+      "reception_tokens": 11,
+      "observation_tokens": 9,
+      "boundary_tokens": 5,
+      "loss_tokens": 25,
+      "surface_char_span": [
+        3912,
+        3977
+      ],
+      "surface_text": "帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"",
+      "value_loss_start": 2864,
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "full_context_tokens": 3287,
+      "prompt_tokens": 1728,
+      "teacher_eos_retained": true
+    },
+    {
+      "loss_start": 2870,
+      "logits_positions": 460,
+      "reception_tokens": 11,
+      "observation_tokens": 9,
+      "boundary_tokens": 5,
+      "loss_tokens": 25,
+      "surface_char_span": [
+        3912,
+        3977
+      ],
+      "surface_text": "帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"",
+      "value_loss_start": 2883,
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "full_context_tokens": 3330,
+      "prompt_tokens": 1732,
+      "teacher_eos_retained": true
+    }
+  ],
+  "training_order": [
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+  ],
+  "trainable_parameters": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32"
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32"
+    }
+  ],
+  "stage": "NON_TRAINABLE_RELOAD",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "65b3e98ba0e17b36fd934204b18a70f38c7906154095228c313f79c7aae452bc",
+    "adapter_model.safetensors": "e1db3df30b57b36b87187d54a4f75083bca5080396e8d1f758e1d8c1a44dfac5"
+  },
+  "reloaded_adapter_tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6958965063095093
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.47884678840637207
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6925415992736816
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.17044860124588013
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7326840162277222
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5380133986473083
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7144050598144531
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.18692538142204285
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7331383228302002
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5755199193954468
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7097448110580444
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.19601428508758545
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7646379470825195
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6045057773590088
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7187609672546387
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.2097526341676712
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.773724913597107
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6978772878646851
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7804313898086548
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.24725964665412903
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7844136953353882
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7627518773078918
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7823610305786133
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.27897515892982483
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.813641905784607
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7930733561515808
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.8278777599334717
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.28058719635009766
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.822970986366272
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.8350002765655518
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.8214858770370483
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.3142026364803314
+    }
+  ],
+  "seconds": 1014.356335981749,
+  "initial_adapter_unchanged": true,
+  "legacy_helpers_unchanged": true,
+  "saved_adapter_unchanged_during_inference": true,
+  "peak_allocated_gib": 16.17147445678711,
+  "peak_reserved_gib": 19.05859375
+}

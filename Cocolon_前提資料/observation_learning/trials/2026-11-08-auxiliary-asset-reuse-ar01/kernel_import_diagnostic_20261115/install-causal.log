@@ -1,0 +1,4 @@
+Processing ./semantic-kernel-preparation-20261115/causal_conv1d-1.7.0+cu12torch2.8cxx11abiTRUE-cp312-cp312-linux_x86_64.whl
+Installing collected packages: causal-conv1d
+Successfully installed causal-conv1d-1.7.0
+CAUSAL_WHEEL_HASH_VERIFIED_ISOLATED 196377090

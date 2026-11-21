@@ -1,0 +1,45 @@
+{
+  "scope": "CPU synthetic provider and actual isolated PGlite SQL/RPC, not real model inference",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "source_blobs": {
+    "ai/services/ai_inference/emlis_thread_service.py": "9adbb6e8c1f5571c0c6d7751bdcd3883552c1670",
+    "ai/tests/test_cmee_emlis_model_proposal.py": "ba1ff0e7622b0b93a961f77598323bea7cc77dd1"
+  },
+  "final_target_files": [
+    "ai/tests/test_cmee_emlis_model_proposal.py",
+    "ai/tests/test_cmee_model_candidate_source.py",
+    "ai/tests/test_emlis_q2_application.py"
+  ],
+  "final_result": {
+    "passed": 114,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 63.65,
+    "existing_warnings": 3
+  },
+  "initial_result": {
+    "passed": 113,
+    "failed": 1,
+    "cause": "Acquisition STARTED committed a newer revision but timeout HOLD used an older snapshot; fixed with fresh read and active-attempt check in the same service"
+  },
+  "intermediate_model_test_result": {
+    "passed": 46,
+    "failed": 0,
+    "seconds": 13.91
+  },
+  "counts_not_added": true,
+  "runner_harness_smoke": {
+    "synthetic": true,
+    "real_model_calls": 0,
+    "candidate_calls": 2,
+    "isolated_rpc_calls": 30,
+    "correction_updates": 3,
+    "explicit_resume_model_reacquisitions": 0,
+    "forbidden_generation_calls": 0,
+    "initial_and_final_non_generating_get_start": true,
+    "same_key_answer_replay": true,
+    "status": "PASS",
+    "stopping_criteria_runtime_tested": false,
+    "result_sha256": "3946deb602e503842f2b93383e42e9e300bfb1a4e99ac87fe25ebcae948f55ca"
+  }
+}

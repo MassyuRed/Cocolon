@@ -1,0 +1,2355 @@
+{
+  "schema_version": "cocolon.cmee.analysis_semantic_preparation_inspection.v1",
+  "api_ref": "4fd8db4f5ad24336368a63f09f9d88170ab41fa0",
+  "cocolon_ref": "967c7d49fb2b075d3b218998cbe616b5bb37eeee",
+  "origin": "HAND_AUTHORED_PROPOSED_NOT_ADOPTED",
+  "implementation_state": "PROPOSED_ONLY",
+  "source_p1_request_ref": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+  "operation_request_id": "offline-A02-P1-20261023",
+  "owner_scope": "offline-cocolon-four-case-owner-20261023",
+  "tier": "plus",
+  "period": {
+    "end_exclusive": "2026-10-14T15:00:00+00:00",
+    "start": "2026-10-07T15:00:00+00:00"
+  },
+  "source_set_ref": "analysis-set:7108340b2d886b44aa7ec1328a7723a059059ee4b122f783f35a69898cc67416",
+  "source_members": [
+    {
+      "saved_record_ref": "A02-4",
+      "saved_record_version": "sha256:2548497997817272799af54a7424b0bff1b899fca70e8cdc2c57628f024dffa6",
+      "member_role": "PERIOD_RECORD_IDENTITY",
+      "source_commitment": "sha256:86a89060e49b6dd12518c130f6387dae58bbbee4c59a3b0963d5aac176c02830",
+      "inclusion_status": "INCLUDED",
+      "inclusion_or_exclusion_reason": "IN_PERIOD",
+      "child_source_envelope_refs": [
+        "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d"
+      ]
+    },
+    {
+      "saved_record_ref": "A02-5",
+      "saved_record_version": "sha256:f797ed63b2ab868d777dda2ce5763364a43bd15e52565997ef918e7eed49426e",
+      "member_role": "PERIOD_RECORD_IDENTITY",
+      "source_commitment": "sha256:5aae77607270c499457c023ae538bdf5e6da2b6ab53238c1fb0ed91690cfd471",
+      "inclusion_status": "INCLUDED",
+      "inclusion_or_exclusion_reason": "IN_PERIOD",
+      "child_source_envelope_refs": [
+        "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff"
+      ]
+    },
+    {
+      "saved_record_ref": "A02-6",
+      "saved_record_version": "sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf",
+      "member_role": "PERIOD_RECORD_IDENTITY",
+      "source_commitment": "sha256:9b7fe22a7498b6ba5aebd65f16820235230f9902811495576cd67869320c2169",
+      "inclusion_status": "INCLUDED",
+      "inclusion_or_exclusion_reason": "IN_PERIOD",
+      "child_source_envelope_refs": [
+        "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67"
+      ]
+    }
+  ],
+  "originals": [
+    {
+      "category": [
+        "生活",
+        "人間関係"
+      ],
+      "created_at": "2026-10-09T18:10:00+09:00",
+      "emotion_details": [
+        {
+          "strength": "weak",
+          "type": "平穏"
+        }
+      ],
+      "emotions": [
+        "平穏"
+      ],
+      "id": "A02-4",
+      "memo": "今日も連絡係だった。まだ返事のない人がいることも残したかった。前より待つ時間は短かった。",
+      "memo_action": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。"
+    },
+    {
+      "category": [
+        "生活"
+      ],
+      "created_at": "2026-10-11T16:10:00+09:00",
+      "emotion_details": [
+        {
+          "strength": "medium",
+          "type": "平穏"
+        }
+      ],
+      "emotions": [
+        "平穏"
+      ],
+      "id": "A02-5",
+      "memo": "今日は道具係だった。数を照らし合わせられてほっとした。使いやすかったかは聞いていない。",
+      "memo_action": "道具を貸す時に数を記録し、返ってきた数と照合した。全て戻っていた。"
+    },
+    {
+      "category": [
+        "生活"
+      ],
+      "created_at": "2026-10-13T21:10:00+09:00",
+      "emotion_details": [
+        {
+          "strength": "weak",
+          "type": "平穏"
+        },
+        {
+          "strength": "weak",
+          "type": "不安"
+        }
+      ],
+      "emotions": [
+        "平穏",
+        "不安"
+      ],
+      "id": "A02-6",
+      "memo": "買う物は買えたけど、今日はメモを作るのが少し面倒だった。",
+      "memo_action": "買い物前にメモを作り、メモを見ながら買った。"
+    }
+  ],
+  "prior_p2_packet_sha256": "6f35bc5c0765a0d6c154b86d19a76f12a8ea8d60e181cd78d6c37fb1663d5420",
+  "proposed_packet": {
+    "candidate": {
+      "schema_version": "cocolon.cmee.analysis_semantic_proposal.v1",
+      "core": "analysis",
+      "units": [
+        {
+          "unit_ref": "a.role",
+          "source_id": "A02-4",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ROLE",
+          "kind": "ROLE",
+          "group_ref": "A02-4.memo.g0",
+          "evidence_indexes": [
+            0
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "連絡係だった",
+          "arguments": [],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_TODAY_RELATIVE",
+          "qualifiers": [
+            {
+              "kind": "RELATIVE_DAY",
+              "evidence_indexes": [
+                11
+              ]
+            },
+            {
+              "kind": "ADDITIVE_NO_REPEAT_COUNT",
+              "evidence_indexes": [
+                12
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.intention",
+          "source_id": "A02-4",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ATTENTION_OR_THOUGHT",
+          "kind": "RECORDED_INTENTION",
+          "group_ref": "A02-4.memo.g10",
+          "evidence_indexes": [
+            1
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "残したかった",
+          "arguments": [
+            {
+              "role": "WISH_CONTENT_NOT_INDEPENDENT_FACT",
+              "text": "まだ返事のない人がいること",
+              "evidence_indexes": [
+                13
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "WISH_REALIZATION_NOT_ASSERTED",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [
+            {
+              "kind": "ADDITIVE_WISH_CONTENT",
+              "evidence_indexes": [
+                14
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.relative_wait",
+          "source_id": "A02-4",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+          "kind": "PERSON_STATED_RELATIVE_COMPARISON",
+          "group_ref": "A02-4.memo.g31",
+          "evidence_indexes": [
+            2
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "短かった",
+          "arguments": [
+            {
+              "role": "WRITTEN_は",
+              "text": "待つ時間は",
+              "evidence_indexes": [
+                15
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "COMPARISON_BASELINE_UNRESOLVED",
+          "qualifiers": [
+            {
+              "kind": "UNRESOLVED_COMPARISON_BASELINE",
+              "evidence_indexes": [
+                16
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.classify",
+          "source_id": "A02-4",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-4.memo_action.g0",
+          "evidence_indexes": [
+            18
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "分けて",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "回答済みと未回答を",
+              "evidence_indexes": [
+                17
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.send",
+          "source_id": "A02-4",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-4.memo_action.g0",
+          "evidence_indexes": [
+            20
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "送り",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "途中の案内を",
+              "evidence_indexes": [
+                19
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.wait",
+          "source_id": "A02-4",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-4.memo_action.g0",
+          "evidence_indexes": [
+            22
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "待った",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "最終の返事を",
+              "evidence_indexes": [
+                21
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.tools_role",
+          "source_id": "A02-5",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ROLE",
+          "kind": "ROLE",
+          "group_ref": "A02-5.memo.g0",
+          "evidence_indexes": [
+            4
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "道具係だった",
+          "arguments": [],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_TODAY_RELATIVE",
+          "qualifiers": [
+            {
+              "kind": "RELATIVE_DAY",
+              "evidence_indexes": [
+                23
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.match_scope",
+          "source_id": "A02-5",
+          "field_path": "memo",
+          "carrier": "DEPENDENT_SCOPE",
+          "proposed_node_kind": null,
+          "kind": "WRITTEN_DEPENDENT_MATCH_SCOPE",
+          "group_ref": "A02-5.memo.g10",
+          "evidence_indexes": [
+            25
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "照らし合わせられて",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "数を",
+              "evidence_indexes": [
+                24
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "WRITTEN_RARERU_NOT_INDEPENDENTLY_DISAMBIGUATED",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": "a.relief"
+        },
+        {
+          "unit_ref": "a.relief",
+          "source_id": "A02-5",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+          "kind": "FEELING_WITH_WRITTEN_SCOPE",
+          "group_ref": "A02-5.memo.g10",
+          "evidence_indexes": [
+            26
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "ほっとした",
+          "arguments": [],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.non_action",
+          "source_id": "A02-5",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "EXPLICIT_NON_ACTION",
+          "group_ref": "A02-5.memo.g27",
+          "evidence_indexes": [
+            6
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "聞いていない",
+          "arguments": [
+            {
+              "role": "WRITTEN_は_QUESTION_CONTENT",
+              "text": "使いやすかったかは",
+              "evidence_indexes": [
+                27
+              ]
+            }
+          ],
+          "polarity": "NEGATED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "UP_TO_THIS_SOURCE_WRITING",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.record_count",
+          "source_id": "A02-5",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-5.memo_action.g0",
+          "evidence_indexes": [
+            30
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "記録し",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "数を",
+              "evidence_indexes": [
+                28
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [
+            {
+              "kind": "WHEN_CONTEXT_NOT_SEPARATE_LOAN_EVENT",
+              "evidence_indexes": [
+                29
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.compare_count",
+          "source_id": "A02-5",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-5.memo_action.g0",
+          "evidence_indexes": [
+            32
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "照合した",
+          "arguments": [
+            {
+              "role": "WRITTEN_と",
+              "text": "返ってきた数と",
+              "evidence_indexes": [
+                31
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.tools_result",
+          "source_id": "A02-5",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+          "kind": "RESULT_STATE",
+          "group_ref": "A02-5.memo_action.g25",
+          "evidence_indexes": [
+            8
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "戻っていた",
+          "arguments": [
+            {
+              "role": "WRITTEN_QUANTIFIED_ENTITY_UNRESOLVED",
+              "text": "全て",
+              "evidence_indexes": [
+                33
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.bought_result",
+          "source_id": "A02-6",
+          "field_path": "memo",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+          "kind": "RESULT_STATE",
+          "group_ref": "A02-6.memo.g0",
+          "evidence_indexes": [
+            35
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "買えた",
+          "arguments": [
+            {
+              "role": "WRITTEN_は",
+              "text": "買う物は",
+              "evidence_indexes": [
+                34
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.burden",
+          "source_id": "A02-6",
+          "field_path": "memo",
+          "carrier": "ANNOTATION",
+          "proposed_node_kind": null,
+          "kind": "WRITTEN_BURDEN",
+          "group_ref": "A02-6.memo.g0",
+          "evidence_indexes": [
+            39
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "面倒だった",
+          "arguments": [
+            {
+              "role": "WRITTEN_が_ACTION_TARGET",
+              "text": "メモを作るのが",
+              "evidence_indexes": [
+                36
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_TODAY_RELATIVE",
+          "qualifiers": [
+            {
+              "kind": "RELATIVE_DAY",
+              "evidence_indexes": [
+                37
+              ]
+            },
+            {
+              "kind": "DEGREE",
+              "evidence_indexes": [
+                38
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.make_memo",
+          "source_id": "A02-6",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-6.memo_action.g0",
+          "evidence_indexes": [
+            42
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "作り",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "メモを",
+              "evidence_indexes": [
+                40
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [
+            {
+              "kind": "WRITTEN_BEFORE_SHOPPING_CONTEXT",
+              "evidence_indexes": [
+                41
+              ]
+            }
+          ],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.read_memo",
+          "source_id": "A02-6",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-6.memo_action.g0",
+          "evidence_indexes": [
+            44
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "見ながら",
+          "arguments": [
+            {
+              "role": "WRITTEN_を",
+              "text": "メモを",
+              "evidence_indexes": [
+                43
+              ]
+            }
+          ],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        },
+        {
+          "unit_ref": "a.buy",
+          "source_id": "A02-6",
+          "field_path": "memo_action",
+          "carrier": "GRAPH_NODE",
+          "proposed_node_kind": "ACTION_OR_NONACTION",
+          "kind": "ACTION",
+          "group_ref": "A02-6.memo_action.g0",
+          "evidence_indexes": [
+            45
+          ],
+          "actor_binding": "OMITTED_NOT_OWNER_DERIVED",
+          "predicate_surface": "買った",
+          "arguments": [],
+          "polarity": "AFFIRMED",
+          "modality": "ASSERTED_AS_WRITTEN",
+          "temporal_scope": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+          "qualifiers": [],
+          "parent_unit_ref": null
+        }
+      ],
+      "sentence_groups": [
+        {
+          "group_ref": "A02-4.memo.g0",
+          "evidence_indexes": [
+            0
+          ]
+        },
+        {
+          "group_ref": "A02-4.memo.g10",
+          "evidence_indexes": [
+            1
+          ]
+        },
+        {
+          "group_ref": "A02-4.memo.g31",
+          "evidence_indexes": [
+            2
+          ]
+        },
+        {
+          "group_ref": "A02-4.memo_action.g0",
+          "evidence_indexes": [
+            3
+          ]
+        },
+        {
+          "group_ref": "A02-5.memo.g0",
+          "evidence_indexes": [
+            4
+          ]
+        },
+        {
+          "group_ref": "A02-5.memo.g10",
+          "evidence_indexes": [
+            5
+          ]
+        },
+        {
+          "group_ref": "A02-5.memo.g27",
+          "evidence_indexes": [
+            6
+          ]
+        },
+        {
+          "group_ref": "A02-5.memo_action.g0",
+          "evidence_indexes": [
+            7
+          ]
+        },
+        {
+          "group_ref": "A02-5.memo_action.g25",
+          "evidence_indexes": [
+            8
+          ]
+        },
+        {
+          "group_ref": "A02-6.memo.g0",
+          "evidence_indexes": [
+            9
+          ]
+        },
+        {
+          "group_ref": "A02-6.memo_action.g0",
+          "evidence_indexes": [
+            10
+          ]
+        }
+      ],
+      "scope_relations": [
+        {
+          "relation_ref": "a.classify_send",
+          "kind": "SOURCE_WRITTEN_TE_LINK",
+          "endpoint_unit_refs": [
+            "a.classify",
+            "a.send"
+          ],
+          "evidence_indexes": [
+            3
+          ],
+          "marker_evidence_indexes": [
+            46
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.send_wait",
+          "kind": "SOURCE_WRITTEN_COORDINATE_LINK",
+          "endpoint_unit_refs": [
+            "a.send",
+            "a.wait"
+          ],
+          "evidence_indexes": [
+            3
+          ],
+          "marker_evidence_indexes": [
+            47
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.match_relief",
+          "kind": "SOURCE_WRITTEN_FEELING_SCOPE",
+          "endpoint_unit_refs": [
+            "a.match_scope",
+            "a.relief"
+          ],
+          "evidence_indexes": [
+            5
+          ],
+          "marker_evidence_indexes": [
+            48
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.record_compare",
+          "kind": "SOURCE_WRITTEN_COORDINATE_LINK",
+          "endpoint_unit_refs": [
+            "a.record_count",
+            "a.compare_count"
+          ],
+          "evidence_indexes": [
+            7
+          ],
+          "marker_evidence_indexes": [
+            49
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.concession",
+          "kind": "SOURCE_WRITTEN_CONCESSION",
+          "endpoint_unit_refs": [
+            "a.bought_result",
+            "a.burden"
+          ],
+          "evidence_indexes": [
+            9
+          ],
+          "marker_evidence_indexes": [
+            50
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.make_read",
+          "kind": "SOURCE_WRITTEN_COORDINATE_LINK",
+          "endpoint_unit_refs": [
+            "a.make_memo",
+            "a.read_memo"
+          ],
+          "evidence_indexes": [
+            10
+          ],
+          "marker_evidence_indexes": [
+            51
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.before_context",
+          "kind": "SOURCE_WRITTEN_BEFORE_CONTEXT",
+          "endpoint_unit_refs": [
+            "a.make_memo",
+            "a.buy"
+          ],
+          "evidence_indexes": [
+            10
+          ],
+          "marker_evidence_indexes": [
+            41
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        },
+        {
+          "relation_ref": "a.nagara",
+          "kind": "SOURCE_WRITTEN_NAGARA_SCOPE",
+          "endpoint_unit_refs": [
+            "a.read_memo",
+            "a.buy"
+          ],
+          "evidence_indexes": [
+            52
+          ],
+          "marker_evidence_indexes": [
+            53
+          ],
+          "projection_role": "SOURCE_SCOPE_NOT_ROUTE_EDGE"
+        }
+      ],
+      "unknowns": [
+        {
+          "unknown_ref": "a.usability",
+          "target_unit_refs": [
+            "a.non_action"
+          ],
+          "target_dimension": "USABILITY_QUESTION_CONTENT",
+          "origin": "NOT_OBSERVED_IN_MATERIAL",
+          "resolution_state": "NO_USABILITY_ANSWER_IN_MATERIAL",
+          "evidence_indexes": [
+            6,
+            54
+          ],
+          "checked_source_set_ref": "analysis-set:7108340b2d886b44aa7ec1328a7723a059059ee4b122f783f35a69898cc67416",
+          "checked_text_fields": [
+            {
+              "source_id": "A02-4",
+              "field_path": "memo",
+              "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0"
+            },
+            {
+              "source_id": "A02-4",
+              "field_path": "memo_action",
+              "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095"
+            },
+            {
+              "source_id": "A02-5",
+              "field_path": "memo",
+              "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8"
+            },
+            {
+              "source_id": "A02-5",
+              "field_path": "memo_action",
+              "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d"
+            },
+            {
+              "source_id": "A02-6",
+              "field_path": "memo",
+              "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced"
+            },
+            {
+              "source_id": "A02-6",
+              "field_path": "memo_action",
+              "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c"
+            }
+          ],
+          "proposed_label": "今回の材料には、使いやすさについての回答が記されていない。",
+          "forbidden_promotions": [
+            "PERSON_STATED_UNKNOWN",
+            "POOR_USABILITY",
+            "AWAITING_REPLY",
+            "NEVER_RECEIVED_AN_ANSWER"
+          ]
+        }
+      ],
+      "annotations": [
+        {
+          "annotation_ref": "a.burden_annotation",
+          "unit_ref": "a.burden",
+          "target_unit_refs": [
+            "a.make_memo"
+          ],
+          "target_nominal_evidence_indexes": [
+            36
+          ],
+          "target_link_policy": "SAME_RECORD_EXACT_MEMO_CREATION_ONLY_NOT_GENERAL_COREFERENCE",
+          "evidence_indexes": [
+            39
+          ],
+          "degree_evidence_indexes": [
+            38
+          ],
+          "temporal_scope": "WRITTEN_TODAY_RELATIVE_PAST",
+          "forbidden_promotions": [
+            "CAUSE",
+            "TRAIT",
+            "DIAGNOSIS",
+            "BUYING_FAILURE",
+            "ROUTE_ORDER"
+          ]
+        }
+      ],
+      "source_selections": [
+        {
+          "selection_ref": "A02-4.selection.0",
+          "source_id": "A02-4",
+          "label": "平穏",
+          "strength": "weak",
+          "source_commitment": "sha256:2548497997817272799af54a7424b0bff1b899fca70e8cdc2c57628f024dffa6",
+          "alias_refs": [
+            [
+              "emotions",
+              0
+            ],
+            [
+              "emotion_details",
+              0
+            ]
+          ],
+          "coverage_state": "SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED"
+        },
+        {
+          "selection_ref": "A02-5.selection.0",
+          "source_id": "A02-5",
+          "label": "平穏",
+          "strength": "medium",
+          "source_commitment": "sha256:f797ed63b2ab868d777dda2ce5763364a43bd15e52565997ef918e7eed49426e",
+          "alias_refs": [
+            [
+              "emotions",
+              0
+            ],
+            [
+              "emotion_details",
+              0
+            ]
+          ],
+          "coverage_state": "SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED"
+        },
+        {
+          "selection_ref": "A02-6.selection.0",
+          "source_id": "A02-6",
+          "label": "平穏",
+          "strength": "weak",
+          "source_commitment": "sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf",
+          "alias_refs": [
+            [
+              "emotions",
+              0
+            ],
+            [
+              "emotion_details",
+              0
+            ]
+          ],
+          "coverage_state": "SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED"
+        },
+        {
+          "selection_ref": "A02-6.selection.1",
+          "source_id": "A02-6",
+          "label": "不安",
+          "strength": "weak",
+          "source_commitment": "sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf",
+          "alias_refs": [
+            [
+              "emotions",
+              1
+            ],
+            [
+              "emotion_details",
+              1
+            ]
+          ],
+          "coverage_state": "SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED"
+        }
+      ],
+      "route_edges": [],
+      "conflicts": [],
+      "updates": []
+    },
+    "evidence": [
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 0,
+        "end": 10,
+        "quote": "今日も連絡係だった。"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 10,
+        "end": 31,
+        "quote": "まだ返事のない人がいることも残したかった。"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 31,
+        "end": 44,
+        "quote": "前より待つ時間は短かった。"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 31,
+        "quote": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 0,
+        "end": 10,
+        "quote": "今日は道具係だった。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 10,
+        "end": 27,
+        "quote": "数を照らし合わせられてほっとした。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 27,
+        "end": 43,
+        "quote": "使いやすかったかは聞いていない。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 25,
+        "quote": "道具を貸す時に数を記録し、返ってきた数と照合した。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 25,
+        "end": 33,
+        "quote": "全て戻っていた。"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 0,
+        "end": 28,
+        "quote": "買う物は買えたけど、今日はメモを作るのが少し面倒だった。"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 22,
+        "quote": "買い物前にメモを作り、メモを見ながら買った。"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 0,
+        "end": 2,
+        "quote": "今日"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 2,
+        "end": 3,
+        "quote": "も"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 10,
+        "end": 23,
+        "quote": "まだ返事のない人がいること"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 23,
+        "end": 24,
+        "quote": "も"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 34,
+        "end": 39,
+        "quote": "待つ時間は"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo",
+        "start": 31,
+        "end": 34,
+        "quote": "前より"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 9,
+        "quote": "回答済みと未回答を"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 12,
+        "quote": "回答済みと未回答を分けて"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 12,
+        "end": 18,
+        "quote": "途中の案内を"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 12,
+        "end": 20,
+        "quote": "途中の案内を送り"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 21,
+        "end": 27,
+        "quote": "最終の返事を"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 21,
+        "end": 31,
+        "quote": "最終の返事を待った。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 0,
+        "end": 2,
+        "quote": "今日"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 10,
+        "end": 12,
+        "quote": "数を"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 10,
+        "end": 21,
+        "quote": "数を照らし合わせられて"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 21,
+        "end": 27,
+        "quote": "ほっとした。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 27,
+        "end": 36,
+        "quote": "使いやすかったかは"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 7,
+        "end": 9,
+        "quote": "数を"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 7,
+        "quote": "道具を貸す時に"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 12,
+        "quote": "道具を貸す時に数を記録し"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 13,
+        "end": 20,
+        "quote": "返ってきた数と"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 13,
+        "end": 25,
+        "quote": "返ってきた数と照合した。"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 25,
+        "end": 27,
+        "quote": "全て"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 0,
+        "end": 4,
+        "quote": "買う物は"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 0,
+        "end": 7,
+        "quote": "買う物は買えた"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 13,
+        "end": 20,
+        "quote": "メモを作るのが"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 10,
+        "end": 12,
+        "quote": "今日"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 20,
+        "end": 22,
+        "quote": "少し"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 10,
+        "end": 28,
+        "quote": "今日はメモを作るのが少し面倒だった。"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 5,
+        "end": 8,
+        "quote": "メモを"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 5,
+        "quote": "買い物前に"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 10,
+        "quote": "買い物前にメモを作り"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 11,
+        "end": 14,
+        "quote": "メモを"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 11,
+        "end": 18,
+        "quote": "メモを見ながら"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 18,
+        "end": 22,
+        "quote": "買った。"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 11,
+        "end": 12,
+        "quote": "て"
+      },
+      {
+        "source_id": "A02-4",
+        "field_path": "memo_action",
+        "start": 18,
+        "end": 21,
+        "quote": "送り、"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 19,
+        "end": 21,
+        "quote": "れて"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo_action",
+        "start": 10,
+        "end": 13,
+        "quote": "録し、"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo",
+        "start": 7,
+        "end": 9,
+        "quote": "けど"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 8,
+        "end": 11,
+        "quote": "作り、"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 11,
+        "end": 22,
+        "quote": "メモを見ながら買った。"
+      },
+      {
+        "source_id": "A02-6",
+        "field_path": "memo_action",
+        "start": 15,
+        "end": 18,
+        "quote": "ながら"
+      },
+      {
+        "source_id": "A02-5",
+        "field_path": "memo",
+        "start": 27,
+        "end": 35,
+        "quote": "使いやすかったか"
+      }
+    ]
+  },
+  "p1_location_only_receipt": {
+    "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+    "status": "CANDIDATE_UNREVIEWED",
+    "raw_output": "{\"candidate\":{\"annotations\":[{\"annotation_ref\":\"a.burden_annotation\",\"degree_evidence_indexes\":[38],\"evidence_indexes\":[39],\"forbidden_promotions\":[\"CAUSE\",\"TRAIT\",\"DIAGNOSIS\",\"BUYING_FAILURE\",\"ROUTE_ORDER\"],\"target_link_policy\":\"SAME_RECORD_EXACT_MEMO_CREATION_ONLY_NOT_GENERAL_COREFERENCE\",\"target_nominal_evidence_indexes\":[36],\"target_unit_refs\":[\"a.make_memo\"],\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE_PAST\",\"unit_ref\":\"a.burden\"}],\"conflicts\":[],\"core\":\"analysis\",\"route_edges\":[],\"schema_version\":\"cocolon.cmee.analysis_semantic_proposal.v1\",\"scope_relations\":[{\"endpoint_unit_refs\":[\"a.classify\",\"a.send\"],\"evidence_indexes\":[3],\"kind\":\"SOURCE_WRITTEN_TE_LINK\",\"marker_evidence_indexes\":[46],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.classify_send\"},{\"endpoint_unit_refs\":[\"a.send\",\"a.wait\"],\"evidence_indexes\":[3],\"kind\":\"SOURCE_WRITTEN_COORDINATE_LINK\",\"marker_evidence_indexes\":[47],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.send_wait\"},{\"endpoint_unit_refs\":[\"a.match_scope\",\"a.relief\"],\"evidence_indexes\":[5],\"kind\":\"SOURCE_WRITTEN_FEELING_SCOPE\",\"marker_evidence_indexes\":[48],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.match_relief\"},{\"endpoint_unit_refs\":[\"a.record_count\",\"a.compare_count\"],\"evidence_indexes\":[7],\"kind\":\"SOURCE_WRITTEN_COORDINATE_LINK\",\"marker_evidence_indexes\":[49],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.record_compare\"},{\"endpoint_unit_refs\":[\"a.bought_result\",\"a.burden\"],\"evidence_indexes\":[9],\"kind\":\"SOURCE_WRITTEN_CONCESSION\",\"marker_evidence_indexes\":[50],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.concession\"},{\"endpoint_unit_refs\":[\"a.make_memo\",\"a.read_memo\"],\"evidence_indexes\":[10],\"kind\":\"SOURCE_WRITTEN_COORDINATE_LINK\",\"marker_evidence_indexes\":[51],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.make_read\"},{\"endpoint_unit_refs\":[\"a.make_memo\",\"a.buy\"],\"evidence_indexes\":[10],\"kind\":\"SOURCE_WRITTEN_BEFORE_CONTEXT\",\"marker_evidence_indexes\":[41],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.before_context\"},{\"endpoint_unit_refs\":[\"a.read_memo\",\"a.buy\"],\"evidence_indexes\":[52],\"kind\":\"SOURCE_WRITTEN_NAGARA_SCOPE\",\"marker_evidence_indexes\":[53],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.nagara\"}],\"sentence_groups\":[{\"evidence_indexes\":[0],\"group_ref\":\"A02-4.memo.g0\"},{\"evidence_indexes\":[1],\"group_ref\":\"A02-4.memo.g10\"},{\"evidence_indexes\":[2],\"group_ref\":\"A02-4.memo.g31\"},{\"evidence_indexes\":[3],\"group_ref\":\"A02-4.memo_action.g0\"},{\"evidence_indexes\":[4],\"group_ref\":\"A02-5.memo.g0\"},{\"evidence_indexes\":[5],\"group_ref\":\"A02-5.memo.g10\"},{\"evidence_indexes\":[6],\"group_ref\":\"A02-5.memo.g27\"},{\"evidence_indexes\":[7],\"group_ref\":\"A02-5.memo_action.g0\"},{\"evidence_indexes\":[8],\"group_ref\":\"A02-5.memo_action.g25\"},{\"evidence_indexes\":[9],\"group_ref\":\"A02-6.memo.g0\"},{\"evidence_indexes\":[10],\"group_ref\":\"A02-6.memo_action.g0\"}],\"source_selections\":[{\"alias_refs\":[[\"emotions\",0],[\"emotion_details\",0]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"平穏\",\"selection_ref\":\"A02-4.selection.0\",\"source_commitment\":\"sha256:2548497997817272799af54a7424b0bff1b899fca70e8cdc2c57628f024dffa6\",\"source_id\":\"A02-4\",\"strength\":\"weak\"},{\"alias_refs\":[[\"emotions\",0],[\"emotion_details\",0]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"平穏\",\"selection_ref\":\"A02-5.selection.0\",\"source_commitment\":\"sha256:f797ed63b2ab868d777dda2ce5763364a43bd15e52565997ef918e7eed49426e\",\"source_id\":\"A02-5\",\"strength\":\"medium\"},{\"alias_refs\":[[\"emotions\",0],[\"emotion_details\",0]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"平穏\",\"selection_ref\":\"A02-6.selection.0\",\"source_commitment\":\"sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf\",\"source_id\":\"A02-6\",\"strength\":\"weak\"},{\"alias_refs\":[[\"emotions\",1],[\"emotion_details\",1]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"不安\",\"selection_ref\":\"A02-6.selection.1\",\"source_commitment\":\"sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf\",\"source_id\":\"A02-6\",\"strength\":\"weak\"}],\"units\":[{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[0],\"field_path\":\"memo\",\"group_ref\":\"A02-4.memo.g0\",\"kind\":\"ROLE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"連絡係だった\",\"proposed_node_kind\":\"ROLE\",\"qualifiers\":[{\"evidence_indexes\":[11],\"kind\":\"RELATIVE_DAY\"},{\"evidence_indexes\":[12],\"kind\":\"ADDITIVE_NO_REPEAT_COUNT\"}],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE\",\"unit_ref\":\"a.role\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[13],\"role\":\"WISH_CONTENT_NOT_INDEPENDENT_FACT\",\"text\":\"まだ返事のない人がいること\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[1],\"field_path\":\"memo\",\"group_ref\":\"A02-4.memo.g10\",\"kind\":\"RECORDED_INTENTION\",\"modality\":\"WISH_REALIZATION_NOT_ASSERTED\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"残したかった\",\"proposed_node_kind\":\"ATTENTION_OR_THOUGHT\",\"qualifiers\":[{\"evidence_indexes\":[14],\"kind\":\"ADDITIVE_WISH_CONTENT\"}],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.intention\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[15],\"role\":\"WRITTEN_は\",\"text\":\"待つ時間は\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[2],\"field_path\":\"memo\",\"group_ref\":\"A02-4.memo.g31\",\"kind\":\"PERSON_STATED_RELATIVE_COMPARISON\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"短かった\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[{\"evidence_indexes\":[16],\"kind\":\"UNRESOLVED_COMPARISON_BASELINE\"}],\"source_id\":\"A02-4\",\"temporal_scope\":\"COMPARISON_BASELINE_UNRESOLVED\",\"unit_ref\":\"a.relative_wait\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[17],\"role\":\"WRITTEN_を\",\"text\":\"回答済みと未回答を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[18],\"field_path\":\"memo_action\",\"group_ref\":\"A02-4.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"分けて\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.classify\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[19],\"role\":\"WRITTEN_を\",\"text\":\"途中の案内を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[20],\"field_path\":\"memo_action\",\"group_ref\":\"A02-4.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"送り\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.send\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[21],\"role\":\"WRITTEN_を\",\"text\":\"最終の返事を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[22],\"field_path\":\"memo_action\",\"group_ref\":\"A02-4.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"待った\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.wait\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[4],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g0\",\"kind\":\"ROLE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"道具係だった\",\"proposed_node_kind\":\"ROLE\",\"qualifiers\":[{\"evidence_indexes\":[23],\"kind\":\"RELATIVE_DAY\"}],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE\",\"unit_ref\":\"a.tools_role\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[24],\"role\":\"WRITTEN_を\",\"text\":\"数を\"}],\"carrier\":\"DEPENDENT_SCOPE\",\"evidence_indexes\":[25],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g10\",\"kind\":\"WRITTEN_DEPENDENT_MATCH_SCOPE\",\"modality\":\"WRITTEN_RARERU_NOT_INDEPENDENTLY_DISAMBIGUATED\",\"parent_unit_ref\":\"a.relief\",\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"照らし合わせられて\",\"proposed_node_kind\":null,\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.match_scope\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[26],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g10\",\"kind\":\"FEELING_WITH_WRITTEN_SCOPE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"ほっとした\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.relief\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[27],\"role\":\"WRITTEN_は_QUESTION_CONTENT\",\"text\":\"使いやすかったかは\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[6],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g27\",\"kind\":\"EXPLICIT_NON_ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"NEGATED\",\"predicate_surface\":\"聞いていない\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"UP_TO_THIS_SOURCE_WRITING\",\"unit_ref\":\"a.non_action\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[28],\"role\":\"WRITTEN_を\",\"text\":\"数を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[30],\"field_path\":\"memo_action\",\"group_ref\":\"A02-5.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"記録し\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[{\"evidence_indexes\":[29],\"kind\":\"WHEN_CONTEXT_NOT_SEPARATE_LOAN_EVENT\"}],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.record_count\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[31],\"role\":\"WRITTEN_と\",\"text\":\"返ってきた数と\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[32],\"field_path\":\"memo_action\",\"group_ref\":\"A02-5.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"照合した\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.compare_count\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[33],\"role\":\"WRITTEN_QUANTIFIED_ENTITY_UNRESOLVED\",\"text\":\"全て\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[8],\"field_path\":\"memo_action\",\"group_ref\":\"A02-5.memo_action.g25\",\"kind\":\"RESULT_STATE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"戻っていた\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.tools_result\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[34],\"role\":\"WRITTEN_は\",\"text\":\"買う物は\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[35],\"field_path\":\"memo\",\"group_ref\":\"A02-6.memo.g0\",\"kind\":\"RESULT_STATE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"買えた\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.bought_result\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[36],\"role\":\"WRITTEN_が_ACTION_TARGET\",\"text\":\"メモを作るのが\"}],\"carrier\":\"ANNOTATION\",\"evidence_indexes\":[39],\"field_path\":\"memo\",\"group_ref\":\"A02-6.memo.g0\",\"kind\":\"WRITTEN_BURDEN\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"面倒だった\",\"proposed_node_kind\":null,\"qualifiers\":[{\"evidence_indexes\":[37],\"kind\":\"RELATIVE_DAY\"},{\"evidence_indexes\":[38],\"kind\":\"DEGREE\"}],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE\",\"unit_ref\":\"a.burden\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[40],\"role\":\"WRITTEN_を\",\"text\":\"メモを\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[42],\"field_path\":\"memo_action\",\"group_ref\":\"A02-6.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"作り\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[{\"evidence_indexes\":[41],\"kind\":\"WRITTEN_BEFORE_SHOPPING_CONTEXT\"}],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.make_memo\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[43],\"role\":\"WRITTEN_を\",\"text\":\"メモを\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[44],\"field_path\":\"memo_action\",\"group_ref\":\"A02-6.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"見ながら\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.read_memo\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[45],\"field_path\":\"memo_action\",\"group_ref\":\"A02-6.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"買った\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.buy\"}],\"unknowns\":[{\"checked_source_set_ref\":\"analysis-set:7108340b2d886b44aa7ec1328a7723a059059ee4b122f783f35a69898cc67416\",\"checked_text_fields\":[{\"field_path\":\"memo\",\"field_sha256\":\"b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0\",\"source_id\":\"A02-4\"},{\"field_path\":\"memo_action\",\"field_sha256\":\"ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095\",\"source_id\":\"A02-4\"},{\"field_path\":\"memo\",\"field_sha256\":\"f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8\",\"source_id\":\"A02-5\"},{\"field_path\":\"memo_action\",\"field_sha256\":\"849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d\",\"source_id\":\"A02-5\"},{\"field_path\":\"memo\",\"field_sha256\":\"b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced\",\"source_id\":\"A02-6\"},{\"field_path\":\"memo_action\",\"field_sha256\":\"1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c\",\"source_id\":\"A02-6\"}],\"evidence_indexes\":[6,54],\"forbidden_promotions\":[\"PERSON_STATED_UNKNOWN\",\"POOR_USABILITY\",\"AWAITING_REPLY\",\"NEVER_RECEIVED_AN_ANSWER\"],\"origin\":\"NOT_OBSERVED_IN_MATERIAL\",\"proposed_label\":\"今回の材料には、使いやすさについての回答が記されていない。\",\"resolution_state\":\"NO_USABILITY_ANSWER_IN_MATERIAL\",\"target_dimension\":\"USABILITY_QUESTION_CONTENT\",\"target_unit_refs\":[\"a.non_action\"],\"unknown_ref\":\"a.usability\"}],\"updates\":[]},\"evidence\":[{\"end\":10,\"field_path\":\"memo\",\"quote\":\"今日も連絡係だった。\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":31,\"field_path\":\"memo\",\"quote\":\"まだ返事のない人がいることも残したかった。\",\"source_id\":\"A02-4\",\"start\":10},{\"end\":44,\"field_path\":\"memo\",\"quote\":\"前より待つ時間は短かった。\",\"source_id\":\"A02-4\",\"start\":31},{\"end\":31,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"今日は道具係だった。\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"数を照らし合わせられてほっとした。\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":43,\"field_path\":\"memo\",\"quote\":\"使いやすかったかは聞いていない。\",\"source_id\":\"A02-5\",\"start\":27},{\"end\":25,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に数を記録し、返ってきた数と照合した。\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":33,\"field_path\":\"memo_action\",\"quote\":\"全て戻っていた。\",\"source_id\":\"A02-5\",\"start\":25},{\"end\":28,\"field_path\":\"memo\",\"quote\":\"買う物は買えたけど、今日はメモを作るのが少し面倒だった。\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"買い物前にメモを作り、メモを見ながら買った。\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":2,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":3,\"field_path\":\"memo\",\"quote\":\"も\",\"source_id\":\"A02-4\",\"start\":2},{\"end\":23,\"field_path\":\"memo\",\"quote\":\"まだ返事のない人がいること\",\"source_id\":\"A02-4\",\"start\":10},{\"end\":24,\"field_path\":\"memo\",\"quote\":\"も\",\"source_id\":\"A02-4\",\"start\":23},{\"end\":39,\"field_path\":\"memo\",\"quote\":\"待つ時間は\",\"source_id\":\"A02-4\",\"start\":34},{\"end\":34,\"field_path\":\"memo\",\"quote\":\"前より\",\"source_id\":\"A02-4\",\"start\":31},{\"end\":9,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":12,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を分けて\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"途中の案内を\",\"source_id\":\"A02-4\",\"start\":12},{\"end\":20,\"field_path\":\"memo_action\",\"quote\":\"途中の案内を送り\",\"source_id\":\"A02-4\",\"start\":12},{\"end\":27,\"field_path\":\"memo_action\",\"quote\":\"最終の返事を\",\"source_id\":\"A02-4\",\"start\":21},{\"end\":31,\"field_path\":\"memo_action\",\"quote\":\"最終の返事を待った。\",\"source_id\":\"A02-4\",\"start\":21},{\"end\":2,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":12,\"field_path\":\"memo\",\"quote\":\"数を\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"数を照らし合わせられて\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"ほっとした。\",\"source_id\":\"A02-5\",\"start\":21},{\"end\":36,\"field_path\":\"memo\",\"quote\":\"使いやすかったかは\",\"source_id\":\"A02-5\",\"start\":27},{\"end\":9,\"field_path\":\"memo_action\",\"quote\":\"数を\",\"source_id\":\"A02-5\",\"start\":7},{\"end\":7,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":12,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に数を記録し\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":20,\"field_path\":\"memo_action\",\"quote\":\"返ってきた数と\",\"source_id\":\"A02-5\",\"start\":13},{\"end\":25,\"field_path\":\"memo_action\",\"quote\":\"返ってきた数と照合した。\",\"source_id\":\"A02-5\",\"start\":13},{\"end\":27,\"field_path\":\"memo_action\",\"quote\":\"全て\",\"source_id\":\"A02-5\",\"start\":25},{\"end\":4,\"field_path\":\"memo\",\"quote\":\"買う物は\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"買う物は買えた\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":20,\"field_path\":\"memo\",\"quote\":\"メモを作るのが\",\"source_id\":\"A02-6\",\"start\":13},{\"end\":12,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-6\",\"start\":10},{\"end\":22,\"field_path\":\"memo\",\"quote\":\"少し\",\"source_id\":\"A02-6\",\"start\":20},{\"end\":28,\"field_path\":\"memo\",\"quote\":\"今日はメモを作るのが少し面倒だった。\",\"source_id\":\"A02-6\",\"start\":10},{\"end\":8,\"field_path\":\"memo_action\",\"quote\":\"メモを\",\"source_id\":\"A02-6\",\"start\":5},{\"end\":5,\"field_path\":\"memo_action\",\"quote\":\"買い物前に\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":10,\"field_path\":\"memo_action\",\"quote\":\"買い物前にメモを作り\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"メモを\",\"source_id\":\"A02-6\",\"start\":11},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"メモを見ながら\",\"source_id\":\"A02-6\",\"start\":11},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"買った。\",\"source_id\":\"A02-6\",\"start\":18},{\"end\":12,\"field_path\":\"memo_action\",\"quote\":\"て\",\"source_id\":\"A02-4\",\"start\":11},{\"end\":21,\"field_path\":\"memo_action\",\"quote\":\"送り、\",\"source_id\":\"A02-4\",\"start\":18},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"れて\",\"source_id\":\"A02-5\",\"start\":19},{\"end\":13,\"field_path\":\"memo_action\",\"quote\":\"録し、\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":9,\"field_path\":\"memo\",\"quote\":\"けど\",\"source_id\":\"A02-6\",\"start\":7},{\"end\":11,\"field_path\":\"memo_action\",\"quote\":\"作り、\",\"source_id\":\"A02-6\",\"start\":8},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"メモを見ながら買った。\",\"source_id\":\"A02-6\",\"start\":11},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"ながら\",\"source_id\":\"A02-6\",\"start\":15},{\"end\":35,\"field_path\":\"memo\",\"quote\":\"使いやすかったか\",\"source_id\":\"A02-5\",\"start\":27}]}",
+    "candidate_json": "{\"candidate\":{\"annotations\":[{\"annotation_ref\":\"a.burden_annotation\",\"degree_evidence_indexes\":[38],\"evidence_indexes\":[39],\"forbidden_promotions\":[\"CAUSE\",\"TRAIT\",\"DIAGNOSIS\",\"BUYING_FAILURE\",\"ROUTE_ORDER\"],\"target_link_policy\":\"SAME_RECORD_EXACT_MEMO_CREATION_ONLY_NOT_GENERAL_COREFERENCE\",\"target_nominal_evidence_indexes\":[36],\"target_unit_refs\":[\"a.make_memo\"],\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE_PAST\",\"unit_ref\":\"a.burden\"}],\"conflicts\":[],\"core\":\"analysis\",\"route_edges\":[],\"schema_version\":\"cocolon.cmee.analysis_semantic_proposal.v1\",\"scope_relations\":[{\"endpoint_unit_refs\":[\"a.classify\",\"a.send\"],\"evidence_indexes\":[3],\"kind\":\"SOURCE_WRITTEN_TE_LINK\",\"marker_evidence_indexes\":[46],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.classify_send\"},{\"endpoint_unit_refs\":[\"a.send\",\"a.wait\"],\"evidence_indexes\":[3],\"kind\":\"SOURCE_WRITTEN_COORDINATE_LINK\",\"marker_evidence_indexes\":[47],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.send_wait\"},{\"endpoint_unit_refs\":[\"a.match_scope\",\"a.relief\"],\"evidence_indexes\":[5],\"kind\":\"SOURCE_WRITTEN_FEELING_SCOPE\",\"marker_evidence_indexes\":[48],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.match_relief\"},{\"endpoint_unit_refs\":[\"a.record_count\",\"a.compare_count\"],\"evidence_indexes\":[7],\"kind\":\"SOURCE_WRITTEN_COORDINATE_LINK\",\"marker_evidence_indexes\":[49],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.record_compare\"},{\"endpoint_unit_refs\":[\"a.bought_result\",\"a.burden\"],\"evidence_indexes\":[9],\"kind\":\"SOURCE_WRITTEN_CONCESSION\",\"marker_evidence_indexes\":[50],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.concession\"},{\"endpoint_unit_refs\":[\"a.make_memo\",\"a.read_memo\"],\"evidence_indexes\":[10],\"kind\":\"SOURCE_WRITTEN_COORDINATE_LINK\",\"marker_evidence_indexes\":[51],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.make_read\"},{\"endpoint_unit_refs\":[\"a.make_memo\",\"a.buy\"],\"evidence_indexes\":[10],\"kind\":\"SOURCE_WRITTEN_BEFORE_CONTEXT\",\"marker_evidence_indexes\":[41],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.before_context\"},{\"endpoint_unit_refs\":[\"a.read_memo\",\"a.buy\"],\"evidence_indexes\":[52],\"kind\":\"SOURCE_WRITTEN_NAGARA_SCOPE\",\"marker_evidence_indexes\":[53],\"projection_role\":\"SOURCE_SCOPE_NOT_ROUTE_EDGE\",\"relation_ref\":\"a.nagara\"}],\"sentence_groups\":[{\"evidence_indexes\":[0],\"group_ref\":\"A02-4.memo.g0\"},{\"evidence_indexes\":[1],\"group_ref\":\"A02-4.memo.g10\"},{\"evidence_indexes\":[2],\"group_ref\":\"A02-4.memo.g31\"},{\"evidence_indexes\":[3],\"group_ref\":\"A02-4.memo_action.g0\"},{\"evidence_indexes\":[4],\"group_ref\":\"A02-5.memo.g0\"},{\"evidence_indexes\":[5],\"group_ref\":\"A02-5.memo.g10\"},{\"evidence_indexes\":[6],\"group_ref\":\"A02-5.memo.g27\"},{\"evidence_indexes\":[7],\"group_ref\":\"A02-5.memo_action.g0\"},{\"evidence_indexes\":[8],\"group_ref\":\"A02-5.memo_action.g25\"},{\"evidence_indexes\":[9],\"group_ref\":\"A02-6.memo.g0\"},{\"evidence_indexes\":[10],\"group_ref\":\"A02-6.memo_action.g0\"}],\"source_selections\":[{\"alias_refs\":[[\"emotions\",0],[\"emotion_details\",0]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"平穏\",\"selection_ref\":\"A02-4.selection.0\",\"source_commitment\":\"sha256:2548497997817272799af54a7424b0bff1b899fca70e8cdc2c57628f024dffa6\",\"source_id\":\"A02-4\",\"strength\":\"weak\"},{\"alias_refs\":[[\"emotions\",0],[\"emotion_details\",0]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"平穏\",\"selection_ref\":\"A02-5.selection.0\",\"source_commitment\":\"sha256:f797ed63b2ab868d777dda2ce5763364a43bd15e52565997ef918e7eed49426e\",\"source_id\":\"A02-5\",\"strength\":\"medium\"},{\"alias_refs\":[[\"emotions\",0],[\"emotion_details\",0]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"平穏\",\"selection_ref\":\"A02-6.selection.0\",\"source_commitment\":\"sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf\",\"source_id\":\"A02-6\",\"strength\":\"weak\"},{\"alias_refs\":[[\"emotions\",1],[\"emotion_details\",1]],\"coverage_state\":\"SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED\",\"label\":\"不安\",\"selection_ref\":\"A02-6.selection.1\",\"source_commitment\":\"sha256:9bf75cb43af29dcc3ade09316d7e66ac7a36424a9934c256113a221cb23e45cf\",\"source_id\":\"A02-6\",\"strength\":\"weak\"}],\"units\":[{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[0],\"field_path\":\"memo\",\"group_ref\":\"A02-4.memo.g0\",\"kind\":\"ROLE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"連絡係だった\",\"proposed_node_kind\":\"ROLE\",\"qualifiers\":[{\"evidence_indexes\":[11],\"kind\":\"RELATIVE_DAY\"},{\"evidence_indexes\":[12],\"kind\":\"ADDITIVE_NO_REPEAT_COUNT\"}],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE\",\"unit_ref\":\"a.role\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[13],\"role\":\"WISH_CONTENT_NOT_INDEPENDENT_FACT\",\"text\":\"まだ返事のない人がいること\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[1],\"field_path\":\"memo\",\"group_ref\":\"A02-4.memo.g10\",\"kind\":\"RECORDED_INTENTION\",\"modality\":\"WISH_REALIZATION_NOT_ASSERTED\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"残したかった\",\"proposed_node_kind\":\"ATTENTION_OR_THOUGHT\",\"qualifiers\":[{\"evidence_indexes\":[14],\"kind\":\"ADDITIVE_WISH_CONTENT\"}],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.intention\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[15],\"role\":\"WRITTEN_は\",\"text\":\"待つ時間は\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[2],\"field_path\":\"memo\",\"group_ref\":\"A02-4.memo.g31\",\"kind\":\"PERSON_STATED_RELATIVE_COMPARISON\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"短かった\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[{\"evidence_indexes\":[16],\"kind\":\"UNRESOLVED_COMPARISON_BASELINE\"}],\"source_id\":\"A02-4\",\"temporal_scope\":\"COMPARISON_BASELINE_UNRESOLVED\",\"unit_ref\":\"a.relative_wait\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[17],\"role\":\"WRITTEN_を\",\"text\":\"回答済みと未回答を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[18],\"field_path\":\"memo_action\",\"group_ref\":\"A02-4.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"分けて\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.classify\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[19],\"role\":\"WRITTEN_を\",\"text\":\"途中の案内を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[20],\"field_path\":\"memo_action\",\"group_ref\":\"A02-4.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"送り\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.send\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[21],\"role\":\"WRITTEN_を\",\"text\":\"最終の返事を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[22],\"field_path\":\"memo_action\",\"group_ref\":\"A02-4.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"待った\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-4\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.wait\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[4],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g0\",\"kind\":\"ROLE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"道具係だった\",\"proposed_node_kind\":\"ROLE\",\"qualifiers\":[{\"evidence_indexes\":[23],\"kind\":\"RELATIVE_DAY\"}],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE\",\"unit_ref\":\"a.tools_role\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[24],\"role\":\"WRITTEN_を\",\"text\":\"数を\"}],\"carrier\":\"DEPENDENT_SCOPE\",\"evidence_indexes\":[25],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g10\",\"kind\":\"WRITTEN_DEPENDENT_MATCH_SCOPE\",\"modality\":\"WRITTEN_RARERU_NOT_INDEPENDENTLY_DISAMBIGUATED\",\"parent_unit_ref\":\"a.relief\",\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"照らし合わせられて\",\"proposed_node_kind\":null,\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.match_scope\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[26],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g10\",\"kind\":\"FEELING_WITH_WRITTEN_SCOPE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"ほっとした\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.relief\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[27],\"role\":\"WRITTEN_は_QUESTION_CONTENT\",\"text\":\"使いやすかったかは\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[6],\"field_path\":\"memo\",\"group_ref\":\"A02-5.memo.g27\",\"kind\":\"EXPLICIT_NON_ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"NEGATED\",\"predicate_surface\":\"聞いていない\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"UP_TO_THIS_SOURCE_WRITING\",\"unit_ref\":\"a.non_action\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[28],\"role\":\"WRITTEN_を\",\"text\":\"数を\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[30],\"field_path\":\"memo_action\",\"group_ref\":\"A02-5.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"記録し\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[{\"evidence_indexes\":[29],\"kind\":\"WHEN_CONTEXT_NOT_SEPARATE_LOAN_EVENT\"}],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.record_count\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[31],\"role\":\"WRITTEN_と\",\"text\":\"返ってきた数と\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[32],\"field_path\":\"memo_action\",\"group_ref\":\"A02-5.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"照合した\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.compare_count\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[33],\"role\":\"WRITTEN_QUANTIFIED_ENTITY_UNRESOLVED\",\"text\":\"全て\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[8],\"field_path\":\"memo_action\",\"group_ref\":\"A02-5.memo_action.g25\",\"kind\":\"RESULT_STATE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"戻っていた\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[],\"source_id\":\"A02-5\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.tools_result\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[34],\"role\":\"WRITTEN_は\",\"text\":\"買う物は\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[35],\"field_path\":\"memo\",\"group_ref\":\"A02-6.memo.g0\",\"kind\":\"RESULT_STATE\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"買えた\",\"proposed_node_kind\":\"IMMEDIATE_RESULT_OR_AFTERMATH\",\"qualifiers\":[],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.bought_result\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[36],\"role\":\"WRITTEN_が_ACTION_TARGET\",\"text\":\"メモを作るのが\"}],\"carrier\":\"ANNOTATION\",\"evidence_indexes\":[39],\"field_path\":\"memo\",\"group_ref\":\"A02-6.memo.g0\",\"kind\":\"WRITTEN_BURDEN\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"面倒だった\",\"proposed_node_kind\":null,\"qualifiers\":[{\"evidence_indexes\":[37],\"kind\":\"RELATIVE_DAY\"},{\"evidence_indexes\":[38],\"kind\":\"DEGREE\"}],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_TODAY_RELATIVE\",\"unit_ref\":\"a.burden\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[40],\"role\":\"WRITTEN_を\",\"text\":\"メモを\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[42],\"field_path\":\"memo_action\",\"group_ref\":\"A02-6.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"作り\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[{\"evidence_indexes\":[41],\"kind\":\"WRITTEN_BEFORE_SHOPPING_CONTEXT\"}],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.make_memo\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[{\"evidence_indexes\":[43],\"role\":\"WRITTEN_を\",\"text\":\"メモを\"}],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[44],\"field_path\":\"memo_action\",\"group_ref\":\"A02-6.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"見ながら\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.read_memo\"},{\"actor_binding\":\"OMITTED_NOT_OWNER_DERIVED\",\"arguments\":[],\"carrier\":\"GRAPH_NODE\",\"evidence_indexes\":[45],\"field_path\":\"memo_action\",\"group_ref\":\"A02-6.memo_action.g0\",\"kind\":\"ACTION\",\"modality\":\"ASSERTED_AS_WRITTEN\",\"parent_unit_ref\":null,\"polarity\":\"AFFIRMED\",\"predicate_surface\":\"買った\",\"proposed_node_kind\":\"ACTION_OR_NONACTION\",\"qualifiers\":[],\"source_id\":\"A02-6\",\"temporal_scope\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\",\"unit_ref\":\"a.buy\"}],\"unknowns\":[{\"checked_source_set_ref\":\"analysis-set:7108340b2d886b44aa7ec1328a7723a059059ee4b122f783f35a69898cc67416\",\"checked_text_fields\":[{\"field_path\":\"memo\",\"field_sha256\":\"b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0\",\"source_id\":\"A02-4\"},{\"field_path\":\"memo_action\",\"field_sha256\":\"ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095\",\"source_id\":\"A02-4\"},{\"field_path\":\"memo\",\"field_sha256\":\"f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8\",\"source_id\":\"A02-5\"},{\"field_path\":\"memo_action\",\"field_sha256\":\"849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d\",\"source_id\":\"A02-5\"},{\"field_path\":\"memo\",\"field_sha256\":\"b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced\",\"source_id\":\"A02-6\"},{\"field_path\":\"memo_action\",\"field_sha256\":\"1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c\",\"source_id\":\"A02-6\"}],\"evidence_indexes\":[6,54],\"forbidden_promotions\":[\"PERSON_STATED_UNKNOWN\",\"POOR_USABILITY\",\"AWAITING_REPLY\",\"NEVER_RECEIVED_AN_ANSWER\"],\"origin\":\"NOT_OBSERVED_IN_MATERIAL\",\"proposed_label\":\"今回の材料には、使いやすさについての回答が記されていない。\",\"resolution_state\":\"NO_USABILITY_ANSWER_IN_MATERIAL\",\"target_dimension\":\"USABILITY_QUESTION_CONTENT\",\"target_unit_refs\":[\"a.non_action\"],\"unknown_ref\":\"a.usability\"}],\"updates\":[]},\"evidence\":[{\"end\":10,\"field_path\":\"memo\",\"quote\":\"今日も連絡係だった。\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":31,\"field_path\":\"memo\",\"quote\":\"まだ返事のない人がいることも残したかった。\",\"source_id\":\"A02-4\",\"start\":10},{\"end\":44,\"field_path\":\"memo\",\"quote\":\"前より待つ時間は短かった。\",\"source_id\":\"A02-4\",\"start\":31},{\"end\":31,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"今日は道具係だった。\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"数を照らし合わせられてほっとした。\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":43,\"field_path\":\"memo\",\"quote\":\"使いやすかったかは聞いていない。\",\"source_id\":\"A02-5\",\"start\":27},{\"end\":25,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に数を記録し、返ってきた数と照合した。\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":33,\"field_path\":\"memo_action\",\"quote\":\"全て戻っていた。\",\"source_id\":\"A02-5\",\"start\":25},{\"end\":28,\"field_path\":\"memo\",\"quote\":\"買う物は買えたけど、今日はメモを作るのが少し面倒だった。\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"買い物前にメモを作り、メモを見ながら買った。\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":2,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":3,\"field_path\":\"memo\",\"quote\":\"も\",\"source_id\":\"A02-4\",\"start\":2},{\"end\":23,\"field_path\":\"memo\",\"quote\":\"まだ返事のない人がいること\",\"source_id\":\"A02-4\",\"start\":10},{\"end\":24,\"field_path\":\"memo\",\"quote\":\"も\",\"source_id\":\"A02-4\",\"start\":23},{\"end\":39,\"field_path\":\"memo\",\"quote\":\"待つ時間は\",\"source_id\":\"A02-4\",\"start\":34},{\"end\":34,\"field_path\":\"memo\",\"quote\":\"前より\",\"source_id\":\"A02-4\",\"start\":31},{\"end\":9,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":12,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を分けて\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"途中の案内を\",\"source_id\":\"A02-4\",\"start\":12},{\"end\":20,\"field_path\":\"memo_action\",\"quote\":\"途中の案内を送り\",\"source_id\":\"A02-4\",\"start\":12},{\"end\":27,\"field_path\":\"memo_action\",\"quote\":\"最終の返事を\",\"source_id\":\"A02-4\",\"start\":21},{\"end\":31,\"field_path\":\"memo_action\",\"quote\":\"最終の返事を待った。\",\"source_id\":\"A02-4\",\"start\":21},{\"end\":2,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":12,\"field_path\":\"memo\",\"quote\":\"数を\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"数を照らし合わせられて\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"ほっとした。\",\"source_id\":\"A02-5\",\"start\":21},{\"end\":36,\"field_path\":\"memo\",\"quote\":\"使いやすかったかは\",\"source_id\":\"A02-5\",\"start\":27},{\"end\":9,\"field_path\":\"memo_action\",\"quote\":\"数を\",\"source_id\":\"A02-5\",\"start\":7},{\"end\":7,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":12,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に数を記録し\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":20,\"field_path\":\"memo_action\",\"quote\":\"返ってきた数と\",\"source_id\":\"A02-5\",\"start\":13},{\"end\":25,\"field_path\":\"memo_action\",\"quote\":\"返ってきた数と照合した。\",\"source_id\":\"A02-5\",\"start\":13},{\"end\":27,\"field_path\":\"memo_action\",\"quote\":\"全て\",\"source_id\":\"A02-5\",\"start\":25},{\"end\":4,\"field_path\":\"memo\",\"quote\":\"買う物は\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"買う物は買えた\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":20,\"field_path\":\"memo\",\"quote\":\"メモを作るのが\",\"source_id\":\"A02-6\",\"start\":13},{\"end\":12,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-6\",\"start\":10},{\"end\":22,\"field_path\":\"memo\",\"quote\":\"少し\",\"source_id\":\"A02-6\",\"start\":20},{\"end\":28,\"field_path\":\"memo\",\"quote\":\"今日はメモを作るのが少し面倒だった。\",\"source_id\":\"A02-6\",\"start\":10},{\"end\":8,\"field_path\":\"memo_action\",\"quote\":\"メモを\",\"source_id\":\"A02-6\",\"start\":5},{\"end\":5,\"field_path\":\"memo_action\",\"quote\":\"買い物前に\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":10,\"field_path\":\"memo_action\",\"quote\":\"買い物前にメモを作り\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"メモを\",\"source_id\":\"A02-6\",\"start\":11},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"メモを見ながら\",\"source_id\":\"A02-6\",\"start\":11},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"買った。\",\"source_id\":\"A02-6\",\"start\":18},{\"end\":12,\"field_path\":\"memo_action\",\"quote\":\"て\",\"source_id\":\"A02-4\",\"start\":11},{\"end\":21,\"field_path\":\"memo_action\",\"quote\":\"送り、\",\"source_id\":\"A02-4\",\"start\":18},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"れて\",\"source_id\":\"A02-5\",\"start\":19},{\"end\":13,\"field_path\":\"memo_action\",\"quote\":\"録し、\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":9,\"field_path\":\"memo\",\"quote\":\"けど\",\"source_id\":\"A02-6\",\"start\":7},{\"end\":11,\"field_path\":\"memo_action\",\"quote\":\"作り、\",\"source_id\":\"A02-6\",\"start\":8},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"メモを見ながら買った。\",\"source_id\":\"A02-6\",\"start\":11},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"ながら\",\"source_id\":\"A02-6\",\"start\":15},{\"end\":35,\"field_path\":\"memo\",\"quote\":\"使いやすかったか\",\"source_id\":\"A02-5\",\"start\":27}]}",
+    "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"HAND_AUTHORED_P5_DESIGN_SAMPLE\",\"revision\":null,\"usage\":null}"
+  },
+  "native_coordinate_inspection": [
+    {
+      "evidence_index": 0,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 0,
+      "scalar_end": 10,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 9,
+      "utf8_end": 39,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "fd08c2c254430f69b43f9dceb2bfdd49e14ba6628d4d36ba90c9f0f963397a48",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:750c4a40f28a72cd6914ca1ce3d3f60f3bc77c027173aae1a3ba2948ad816574"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 1,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 10,
+      "scalar_end": 31,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 39,
+      "utf8_end": 102,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "63a59f58c1660806756206f148455381bb6247b77e871cfdac7bc1e8e67758bd",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:5edd6a2887772751a5c96e6578939e4e6180919481d0d7ea28c661fc3c999227"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 2,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 31,
+      "scalar_end": 44,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 102,
+      "utf8_end": 141,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "b67ff45fd983c049025674ec048eda3d15aa10a07761dcd1a608fe7fcc8f5d2e",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:5380c6929f7bb216c7e5e7fcc781c2bcf8d91aeb5173d3a52a20bdf2a8e8e13d"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 3,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 0,
+      "scalar_end": 31,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 156,
+      "utf8_end": 249,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 4,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 0,
+      "scalar_end": 10,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 9,
+      "utf8_end": 39,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "57b00ec5548425d73cc9b818dcde92220928cf9f68e97c1b687e30e6535d87eb",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:376e4ae164508163b156db747677f72c6446338a7fc2bf07b0ce6ce228157d64"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 5,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 10,
+      "scalar_end": 27,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 39,
+      "utf8_end": 90,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "5b7551c9496b134a13e5986a0a4064808746636ced060ad40e6ba0352213fa2d",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:d18d37e7e04851dd795a84bf5057880badcc80b34410aee2a8986a27557b7af0"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 6,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 27,
+      "scalar_end": 43,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 90,
+      "utf8_end": 138,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "19ea1d561349f936d774697bbbef4481cf5ba4e51b9d3ade5b59ec00da96f42d",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:43806a950c0418a08e35743877c2fcedba0c0cf39b8423c649a32341072c993a"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 7,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 0,
+      "scalar_end": 25,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 153,
+      "utf8_end": 228,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "c88395a9f49290f94278ea988cf88558ffae2a001c9df1344800fa541564aa4b",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 8,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 25,
+      "scalar_end": 33,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 228,
+      "utf8_end": 252,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "e33d008d64ae9cf91258193713693ea583d1d1232fae4704e4a3197141f1a0e2",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:bee1e1b620004dadeda43528609e5f953fdc4bcba747e1589dafdbb158790aef"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 9,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 0,
+      "scalar_end": 28,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 8,
+      "utf8_end": 92,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 10,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 0,
+      "scalar_end": 22,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 107,
+      "utf8_end": 173,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 11,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 0,
+      "scalar_end": 2,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 9,
+      "utf8_end": 15,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "5c9cf5e0dd47dc80ac046d84c26886ec532668448d339ab524ddb876103b26e4",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:750c4a40f28a72cd6914ca1ce3d3f60f3bc77c027173aae1a3ba2948ad816574"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 12,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 2,
+      "scalar_end": 3,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 15,
+      "utf8_end": 18,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "06ccdf06d7529eb8ab462d5628f9b0cdd5d3cee7ca2b1522ef47f21fdd8f14d2",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:750c4a40f28a72cd6914ca1ce3d3f60f3bc77c027173aae1a3ba2948ad816574"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 13,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 10,
+      "scalar_end": 23,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 39,
+      "utf8_end": 78,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "983559c1c38954990335adda34b63b3573a8a462dda0e4096273405121d2288b",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:5edd6a2887772751a5c96e6578939e4e6180919481d0d7ea28c661fc3c999227"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 14,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 23,
+      "scalar_end": 24,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 78,
+      "utf8_end": 81,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "06ccdf06d7529eb8ab462d5628f9b0cdd5d3cee7ca2b1522ef47f21fdd8f14d2",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:5edd6a2887772751a5c96e6578939e4e6180919481d0d7ea28c661fc3c999227"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 15,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 34,
+      "scalar_end": 39,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 111,
+      "utf8_end": 126,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "467b9f9eb9eb119b0cb748aee1811168fb4065dffb2c2944659721907e4e2b14",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:5380c6929f7bb216c7e5e7fcc781c2bcf8d91aeb5173d3a52a20bdf2a8e8e13d"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 16,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 31,
+      "scalar_end": 34,
+      "field_utf8_start": 9,
+      "field_utf8_end": 141,
+      "utf8_start": 102,
+      "utf8_end": 111,
+      "field_sha256": "b0d50749c1b8fec76d8fb81a65d32736dda5a79aaee7d1195a2367e5509d01f0",
+      "literal_sha256": "c260d3b2ecd64dba2a2dfde59cca33a6ae8131c28db2fffdbd30951bdc85f3f1",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:5380c6929f7bb216c7e5e7fcc781c2bcf8d91aeb5173d3a52a20bdf2a8e8e13d"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 17,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 0,
+      "scalar_end": 9,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 156,
+      "utf8_end": 183,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "14f193a1af91d85937eaab0bf0a729b777af7b0c4a5eeaf7e480191488a7c497",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 18,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 0,
+      "scalar_end": 12,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 156,
+      "utf8_end": 192,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "6463429ba438475fa04e5384905ea19e583af2bd826aa333dbe3a65eb17e9b29",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 19,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 12,
+      "scalar_end": 18,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 192,
+      "utf8_end": 210,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "acb348aa3c276067610712533e716ef7759f730bca48d5a768aaf931bef20a82",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 20,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 12,
+      "scalar_end": 20,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 192,
+      "utf8_end": 216,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "ca95719645f9520bd6fb631dbe7ef3c28aed8966f3d4dd7e42b15aa5192d55aa",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 21,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 21,
+      "scalar_end": 27,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 219,
+      "utf8_end": 237,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "5daa2632208e2f5d191cf476633fdba04da4b4a48148789e6436716503375eb7",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 22,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 21,
+      "scalar_end": 31,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 219,
+      "utf8_end": 249,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "6a2c8af37e11cd6f8b09e480dc88e5f9b3e0a5fae44ea4a1703f0b06426937ed",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 23,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 0,
+      "scalar_end": 2,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 9,
+      "utf8_end": 15,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "5c9cf5e0dd47dc80ac046d84c26886ec532668448d339ab524ddb876103b26e4",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:376e4ae164508163b156db747677f72c6446338a7fc2bf07b0ce6ce228157d64"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 24,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 10,
+      "scalar_end": 12,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 39,
+      "utf8_end": 45,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "8990bec71822ca0aa5cf236cd6f6cac9bcf17c66e1cd54fa26680c2de7519e26",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:d18d37e7e04851dd795a84bf5057880badcc80b34410aee2a8986a27557b7af0"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 25,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 10,
+      "scalar_end": 21,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 39,
+      "utf8_end": 72,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "919b1cc0a3c02390cbc99d3656204bc827615293e39afa31838da3a6895095d5",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:d18d37e7e04851dd795a84bf5057880badcc80b34410aee2a8986a27557b7af0"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 26,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 21,
+      "scalar_end": 27,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 72,
+      "utf8_end": 90,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "efb3adde13197a99c75e8db4ead5cfd719ec3135b593409e3ff5e9898cf6271d",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:d18d37e7e04851dd795a84bf5057880badcc80b34410aee2a8986a27557b7af0"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 27,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 27,
+      "scalar_end": 36,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 90,
+      "utf8_end": 117,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "82aae266485eeaa7e8afd03ac360f2ec469fd0c92d0abf0352aa0939997b21fb",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:43806a950c0418a08e35743877c2fcedba0c0cf39b8423c649a32341072c993a"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 28,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 7,
+      "scalar_end": 9,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 174,
+      "utf8_end": 180,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "8990bec71822ca0aa5cf236cd6f6cac9bcf17c66e1cd54fa26680c2de7519e26",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 29,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 0,
+      "scalar_end": 7,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 153,
+      "utf8_end": 174,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "317989f210791da0171e3a23cca68c88f4b9f9bfe96e396aa0f58e735f1dae0b",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 30,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 0,
+      "scalar_end": 12,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 153,
+      "utf8_end": 189,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "ed1d175386d8d4cba75b3979d214610a67309532452e2bdf505d038dad22fb67",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 31,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 13,
+      "scalar_end": 20,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 192,
+      "utf8_end": 213,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "4d199fd45473cb0160ff8efda8c83fb9a4ed71a810ce5beda2a94133a7551244",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 32,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 13,
+      "scalar_end": 25,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 192,
+      "utf8_end": 228,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "f61797452719e2f36d9f14197f1c869095829221ea6f3bb1e4d867e7e0abea72",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 33,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 25,
+      "scalar_end": 27,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 228,
+      "utf8_end": 234,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "bb7d147bc03734f4ab4788d685337c62f721bec2fb09c14876af605a7c2dd619",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:bee1e1b620004dadeda43528609e5f953fdc4bcba747e1589dafdbb158790aef"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 34,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 0,
+      "scalar_end": 4,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 8,
+      "utf8_end": 20,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "7e8b3a2554e7a433c5edafad6e409589bccca0d16f55f4ee447220fb907c4a73",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 35,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 0,
+      "scalar_end": 7,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 8,
+      "utf8_end": 29,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "ae50f7f5fad1089da9bc54e32d0aba057b10fffa91e6edbda1f3f3d2bedb95f3",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 36,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 13,
+      "scalar_end": 20,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 47,
+      "utf8_end": 68,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "5f33d072fa12cab3ff6e16f875f4058d9f5ed9522b520209dc50bff35d9a1f7d",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 37,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 10,
+      "scalar_end": 12,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 38,
+      "utf8_end": 44,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "5c9cf5e0dd47dc80ac046d84c26886ec532668448d339ab524ddb876103b26e4",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 38,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 20,
+      "scalar_end": 22,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 68,
+      "utf8_end": 74,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "7b6eba65f98736bdbffaa46a754eb0d732dbbfd7fddf6ffc7ec18116c3065aa0",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 39,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 10,
+      "scalar_end": 28,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 38,
+      "utf8_end": 92,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "436908114f585e20169e089e5e52869867c2b6de739a93db96fd6cd2c80adf0f",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 40,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 5,
+      "scalar_end": 8,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 122,
+      "utf8_end": 131,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "1eff3bff9129b82f1d2891d74616d5208a99e1621b452ea8cb2df50c0199c026",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 41,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 0,
+      "scalar_end": 5,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 107,
+      "utf8_end": 122,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "332dc1b1b9ca01013e0bdaaeb868ffcd99cb2bf7c744c2d23f34bff74a7324c5",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 42,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 0,
+      "scalar_end": 10,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 107,
+      "utf8_end": 137,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "6594b0239ec1289de1afe6fed4f1a86e27ba514ae42f8e19979d2b2a347f7d07",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 43,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 11,
+      "scalar_end": 14,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 140,
+      "utf8_end": 149,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "1eff3bff9129b82f1d2891d74616d5208a99e1621b452ea8cb2df50c0199c026",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 44,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 11,
+      "scalar_end": 18,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 140,
+      "utf8_end": 161,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "433732840c2ae86325399581afde50c2d7a0654705abe92b50d97d41a66c7f58",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 45,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 18,
+      "scalar_end": 22,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 161,
+      "utf8_end": 173,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "147e1f55b40b0008b7b06a0758341272b14c238b2981effd7be9816c2e5d8e72",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 46,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 11,
+      "scalar_end": 12,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 189,
+      "utf8_end": 192,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "afafbae591c156ee7f019d48ea7a74beb639f38112cda9fa29c06bd5dd77f5c8",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 47,
+      "source_envelope_id": "analysis-source:a2dc7f64b8f436f016b182c6fb63d13f480c199873c1dba200e8ac865380f99d",
+      "scalar_start": 18,
+      "scalar_end": 21,
+      "field_utf8_start": 156,
+      "field_utf8_end": 249,
+      "utf8_start": 210,
+      "utf8_end": 219,
+      "field_sha256": "ef9c4be493a24e4c48937f40e9ccd778ce09dfce7c1d29ec07428a9750dc1095",
+      "literal_sha256": "8f71396039f9d6b10c02ff1d9eca7944bc91e0760c7f29697e58a755ec04f8de",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:fd57e60ea5eccacb75458f0f66d26fb8d4c8ccaea78ab86fbf2d4ac8e47875fa"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 48,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 19,
+      "scalar_end": 21,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 66,
+      "utf8_end": 72,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "855f2940d5c1429f7c705d017d54610df7d21bb57875cedc01dfe8180ed17f78",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:d18d37e7e04851dd795a84bf5057880badcc80b34410aee2a8986a27557b7af0"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 49,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 10,
+      "scalar_end": 13,
+      "field_utf8_start": 153,
+      "field_utf8_end": 252,
+      "utf8_start": 183,
+      "utf8_end": 192,
+      "field_sha256": "849041d10c8096595ef9487b28430e0ba9036624f4fd92875f371ac6592aa85d",
+      "literal_sha256": "3c7ea90ca49b60754cf5f13f3a80b02b38fb6dbf13a1c6bfde730391a13b8db2",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:acefbc310835bfcb1976064c522280ecde48d2a4f05486ddd618f35994a4fab2"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 50,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 7,
+      "scalar_end": 9,
+      "field_utf8_start": 8,
+      "field_utf8_end": 92,
+      "utf8_start": 29,
+      "utf8_end": 35,
+      "field_sha256": "b04dd1d39edf9d86d53a3fd9f744fc7aafc9e979c09be6c1d88f9f1d104efced",
+      "literal_sha256": "166841271b0fc390616247f7cf5551cfc41280aeaff84dd4f6d6dc6934eb6936",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:f46b32fb44a434723a1aa7cc51d5331d76fb2c2dbf2a1287077d663841aefacb"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 51,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 8,
+      "scalar_end": 11,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 131,
+      "utf8_end": 140,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "85ff093e750d57139cd1b2b472b72e0618400188b41ae5f7e27c4027bbeca090",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 52,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 11,
+      "scalar_end": 22,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 140,
+      "utf8_end": 173,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "3e186b94897fbda6677a5dbfda727f8d3ed5c2be0a0504c51e2eb9bac7c75c23",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 53,
+      "source_envelope_id": "analysis-source:2d6d695913f8b27d9b0719f1ba5624b9b5bd49887df2d1d9405b4baf23598e67",
+      "scalar_start": 15,
+      "scalar_end": 18,
+      "field_utf8_start": 107,
+      "field_utf8_end": 173,
+      "utf8_start": 152,
+      "utf8_end": 161,
+      "field_sha256": "1a28967501e87a8b4054d14c51e7c4402e50aa41181436ba11388ee59e88031c",
+      "literal_sha256": "74e81139ebd44e11ad61b606910461cc9d642559c8d21dadecbca83c5b826a6c",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:e9bc553cb9ca372610ea9b694f9104154654b38d4ecedf65af665ca65dfdddb6"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    },
+    {
+      "evidence_index": 54,
+      "source_envelope_id": "analysis-source:0a7ba4d288d85a6c98c26d0f1f6ff5b5494d1e1c8e9c455c7480a6ccce6f2cff",
+      "scalar_start": 27,
+      "scalar_end": 35,
+      "field_utf8_start": 9,
+      "field_utf8_end": 138,
+      "utf8_start": 90,
+      "utf8_end": 114,
+      "field_sha256": "f64dfe68dde8e3df9f72d4f5c55517e669ef3c99a375a164476e180f41af54a8",
+      "literal_sha256": "417051bc8355c891651209b0c565afac3f7bda4b013f6145d2d754ceb54498a9",
+      "native_overlapping_evidence_ids": [
+        "analysis-evidence:43806a950c0418a08e35743877c2fcedba0c0cf39b8423c649a32341072c993a"
+      ],
+      "locator_status": "PROPOSED_RANGE_PROVED_FROM_RAW_FIELD_NOT_NATIVE_SPAN_ID"
+    }
+  ],
+  "source_blobs": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py": "dc2b9b364cc867764f50d41e162a72d807938411",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py": "be1922de0e2e88d2ed50908a0b433507265935bf",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py": "60049e458e0c7c660576781f459751fcb679e5dd",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py": "9fb6a26a3f9eab0bc140a25a15e63d111a921cc1",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "673c5777d2954567cf4b6bc661903fec85bc3194",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "5081e2d6e803c2b4fed9ca71a2b739f7474a86f5",
+    "ai/services/ai_inference/analysis_observed_service.py": "4864821ed1e48045591a607da206408f128f36e0",
+    "supabase/migrations/20261004041627_analysis_period_comparison.sql": "b5d34590f8f1ef3632f86a14e6bffb8eed0ee867"
+  },
+  "checks": {
+    "p1_payload_and_request_exact_match": true,
+    "source_set_and_members_exact_match": true,
+    "raw_scalar_utf8_quotes_checked": 55,
+    "unique_units": 18,
+    "proposed_graph_nodes": 16,
+    "dependent_scopes": 1,
+    "burden_annotations": 1,
+    "sentence_groups": 11,
+    "scope_relations": 8,
+    "route_edges": 0,
+    "material_unknowns": 1,
+    "logical_source_selections": 4,
+    "relation_endpoints_same_source_and_scope": true,
+    "all_units_in_original_sentence_group": true
+  },
+  "execution": {
+    "source_freeze_calls": 2,
+    "new_p1_receipts": 1,
+    "semantic_admissions": 0,
+    "native_graphs_instantiated": 0,
+    "generated_artifacts": 0,
+    "model_requests": 0,
+    "c0_runs": 0,
+    "db_calls": 0,
+    "render_calls": 0,
+    "test_runs": 0,
+    "authoring_runs": 2,
+    "source_freeze_calls_all_authoring_runs": 4,
+    "stopped_authoring_runs_before_packet_creation": 1
+  },
+  "limitations": [
+    "Quote/index inspection proves source location, not interpretation, typed graph adoption, or product acceptance.",
+    "18 is this proposal segmentation: 16 node candidates, 1 dependent scope, 1 annotation; not 18 independently asserted events.",
+    "All outer actors remain omitted. Explicit written nouns/nominal targets remain arguments, not owner-derived SELF.",
+    "The dependent rareru form remains written scope; no independent potential/passive claim or enduring ability is asserted.",
+    "All eight relations are private source scopes, never old ObservedEdge kinds; no cross-record route/order/causal/repetition inference.",
+    "The before-context binds the shopping context inside one original sentence, not a generic chronology or cross-record event identity.",
+    "The burden-to-action target is a narrow same-record memo-creation binding, not general coreference.",
+    "The material unknown scans exactly the six eligible original text fields; non-asking alone never proves absence of received answers.",
+    "Original sentence groups retain dependent forms, punctuation, wish content, concession, and uncertainty. No generated prose or rendered graph exists.",
+    "Native evidence spans often exclude final punctuation. Proposed raw-field ranges may include it; overlapping IDs are not exact-span identities.",
+    "The serialized JSON is a reviewable proposal, not an adopted Analysis snapshot or a DB/public schema."
+  ],
+  "execution_history": [
+    {
+      "stage": "INITIAL_AUTHORING",
+      "status": "STOPPED_BEFORE_PACKET_CREATION",
+      "reason": "Dataclass member child refs are tuples; prior JSON uses lists. Direct Python equality was unsuitable. No source mismatch."
+    },
+    {
+      "stage": "FINAL_INSPECTION",
+      "status": "LOCATION_ONLY_CANDIDATE_UNREVIEWED",
+      "change": "Compared canonical JSON member shapes; original source and P1 expectations unchanged."
+    }
+  ],
+  "read_only_reviews": {
+    "meaning_review": "No material mismatch identified; not semantic adoption.",
+    "boundary_review_constraints": [
+      "Six field hashes alone do not prove answer absence; inspect reviewed source-bound finite meaning constraints.",
+      "Burden attachment identifies the written memo-creation action, not a new same-event or same-time assertion.",
+      "Reject renamed duplicate meaning units, preserving legitimate parent-child and distinct-claim source sharing."
+    ],
+    "formal_pro_ultra_review": false
+  }
+}

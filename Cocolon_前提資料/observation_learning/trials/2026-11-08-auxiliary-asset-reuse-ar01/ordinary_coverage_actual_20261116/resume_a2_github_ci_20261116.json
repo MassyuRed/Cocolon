@@ -1,0 +1,131 @@
+{
+  "observed_at_utc": "2026-11-15T21:05:26.390Z",
+  "scope": "Read-only GitHub head/CI and local fixed-source comparison during the separately owned approved A2 one-shot.",
+  "repositories": [
+    {
+      "repository": "MassyuRed/mashos-api",
+      "branch": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+      "expected_head": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+      "observed_head": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+      "expected_tree": "bd6b27c9a3a3438a66d3ca714fc04df80cb3c03e",
+      "observed_tree": "bd6b27c9a3a3438a66d3ca714fc04df80cb3c03e",
+      "head_matches": true,
+      "tree_matches": true,
+      "commit_url": "https://github.com/MassyuRed/mashos-api/commit/f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+      "ci_runs": [
+        {
+          "id": 43759567810,
+          "name": "Analysis observed content",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+          "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43759567810",
+          "run_attempt": 1
+        },
+        {
+          "id": 43759567752,
+          "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "f1ffa8a67699d7b68ac6365f8c86093b070b90ca",
+          "url": "https://github.com/MassyuRed/mashos-api/actions/runs/43759567752",
+          "run_attempt": 1
+        }
+      ],
+      "all_ci_completed": true,
+      "all_ci_success": true
+    },
+    {
+      "repository": "MassyuRed/Cocolon",
+      "branch": "agent/three-core-cmee-current-structure-20260815",
+      "expected_head": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+      "observed_head": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+      "expected_tree": "176e3d2bffc4ebb56707c73d371a8705f8b9010f",
+      "observed_tree": "176e3d2bffc4ebb56707c73d371a8705f8b9010f",
+      "head_matches": true,
+      "tree_matches": true,
+      "commit_url": "https://github.com/MassyuRed/Cocolon/commit/6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+      "ci_runs": [
+        {
+          "id": 43760444869,
+          "name": "Verify read-only workflow policy @ 6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43760444869",
+          "run_attempt": 1
+        },
+        {
+          "id": 43760444887,
+          "name": "Verify pytest at exact Draft head @ 6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43760444887",
+          "run_attempt": 1
+        },
+        {
+          "id": 43760444881,
+          "name": "phase6-contract-guards",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43760444881",
+          "run_attempt": 1
+        },
+        {
+          "id": 43760444937,
+          "name": "Verify terminal Step 7 candidate @ 6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43760444937",
+          "run_attempt": 1
+        },
+        {
+          "id": 43760429265,
+          "name": "phase6-contract-guards",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "6f681dbbfa2bcd65b68a4f018001001aa9e033e3",
+          "url": "https://github.com/MassyuRed/Cocolon/actions/runs/43760429265",
+          "run_attempt": 1
+        }
+      ],
+      "all_ci_completed": true,
+      "all_ci_success": true
+    }
+  ],
+  "local_source_checks": [
+    {
+      "repository": "api",
+      "path": "/workspace/scratch/8262f97b141c/api",
+      "local_head": "7e1dc7d6c6ec08710e2b4f43707d3685831dcf83",
+      "local_tree": "bd6b27c9a3a3438a66d3ca714fc04df80cb3c03e",
+      "published_object_tree": "bd6b27c9a3a3438a66d3ca714fc04df80cb3c03e",
+      "expected_tree": "bd6b27c9a3a3438a66d3ca714fc04df80cb3c03e",
+      "whole_tree_diff_empty": true,
+      "tree_matches": true,
+      "tracked_status": ""
+    },
+    {
+      "repository": "cocolon",
+      "path": "/workspace/scratch/8262f97b141c/cocolon",
+      "local_head": "e1fb791d2ef81d91bf3df7a510e6b21f3e552bc3",
+      "local_tree": "176e3d2bffc4ebb56707c73d371a8705f8b9010f",
+      "published_object_tree": "176e3d2bffc4ebb56707c73d371a8705f8b9010f",
+      "expected_tree": "176e3d2bffc4ebb56707c73d371a8705f8b9010f",
+      "whole_tree_diff_empty": true,
+      "tree_matches": true,
+      "tracked_status": ""
+    }
+  ],
+  "effects": {
+    "remote_writes": 0,
+    "workflow_reruns": 0,
+    "deployments": 0,
+    "pod_operations": 0,
+    "model_calls": 0,
+    "db_operations": 0
+  }
+}

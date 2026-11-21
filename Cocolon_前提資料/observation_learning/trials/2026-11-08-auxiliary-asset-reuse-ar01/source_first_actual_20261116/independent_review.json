@@ -1,0 +1,133 @@
+{
+  "state": "PHASE_A_NOT_ADEQUATE_PHASE_B_CONDITION_NOT_SATISFIED",
+  "all_fictional": true,
+  "review_kind": "Independent complete original-source, raw, visible projection, overview and edge review.",
+  "result_file_sha256": "8d01fcbe28f3e7da2db395218c238ffb4a4dc2dbc3ad3800790bb5cfa7f259ba",
+  "source_files": {
+    "original_fixed_two_input.json": "bb642569f2a1920735426905a6c1b5b9168af981770c4362d59a12dc6cf2ae0c",
+    "source_full_twelve_input.json": "5f362414c7aaba8249862f53892d62951329874474cc8c56a27a3f58a6c3b91c"
+  },
+  "source_core_sha256": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+  "new_model_calls": 2,
+  "training": 0,
+  "retry": 0,
+  "acquisition_observations": [
+    {
+      "name": "book_club_two_day",
+      "http_status": 200,
+      "finish_reason": "stop",
+      "raw_sha256": "027349625e534fb0e91dbbfb678dd0a40e9e6790988e7a0ae293dd6d94fda1e1",
+      "raw_scalars": 1036,
+      "request_duration_seconds": 48.623080836143345
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "http_status": 200,
+      "finish_reason": "length",
+      "raw_sha256": "4a1bd6f0f9de8d56263752b90cf1b8939bbc7ed7515b30a6bbd884f77b930659",
+      "raw_scalars": 2153,
+      "request_duration_seconds": 90.58061680803075
+    }
+  ],
+  "conditions": [
+    {
+      "name": "book_club_two_day",
+      "structural_state": "GENERATED_STOP",
+      "meaning_state": "REJECTED",
+      "blocking_errors": [
+        {
+          "kind": "KNOWN_PARTICIPANT_RECEIPT_GENERALIZED_TO_UNKNOWN",
+          "location": "nodes[0].unknowns[0]",
+          "model_quote": "参加者が案内を受け取ったか、参加希望を伝えたかは未確認です。",
+          "basis": "The later record explicitly confirms one participant reply after sending. Receipt by at least that participant is known; only all participants having read it remains unknown. This output does not limit its uncertainty to all or other participants.",
+          "source_record": 2,
+          "source_quotes": [
+            "案内を直して参加者へ送り、一人から「了解」と返信を受け取った。",
+            "全員が読んだかは分からない。"
+          ]
+        },
+        {
+          "kind": "UNSUPPORTED_COMMUNICATION_PURPOSE",
+          "location": "nodes[0].title/explanation",
+          "model_quotes": [
+            "読書会への参加を伝えるもの",
+            "この下書きが参加者の参加を伝える対象の草案であるという読みが立ちます。"
+          ],
+          "basis": "The source identifies an announcement whose room/start information is corrected and sent. It does not identify this draft as communicating participants participation or participation wishes. The extra participation-wish uncertainty is an unsupported topic, not evidence that a wish or refusal actually occurred."
+        }
+      ],
+      "targeted_transition_omission": {
+        "evidence_fields_used": [
+          1,
+          2
+        ],
+        "basis": "All actual node quotations use only the first original record. No node evidence uses the later confirmed room/start, corrected sending or participant reply. A brief unquoted mention of later sending in n2 does not make the whole reading preserve the confirmation-before-sending transition.",
+        "model_later_mention": "後で確認した参加者への送信は、この関わりを置き換えるものではありません。",
+        "omission_is_not_itself_a_fabricated_event": true
+      },
+      "supported_parts": [
+        {
+          "model_quote": "共同担当者が会場の返信を待っていた時点で、本人は関わっていないと述べています。",
+          "basis": "This accurately preserves the historical inquiry actor and the users noninvolvement; it does not invent a refusal."
+        },
+        {
+          "model_quote": "本人は読書会の案内の下書きを作っています。",
+          "basis": "Draft creation is supported by the first record."
+        }
+      ],
+      "relation_review": {
+        "model_quote": "参加者へ送ったか、会場の返信が来たかは別の点です。",
+        "basis": "The distinction is broadly true, but the edge leaves the already-confirmed later actions unresolved and does not describe the targeted source-grounded transition."
+      },
+      "baseline_comparison": "The prior explicit overview statement that sending remained unperformed is absent. The new output still turns known partial participant receipt into general uncertainty and leaves the later confirmation/sending transition out of node evidence. These changes do not establish adequate reading."
+    },
+    {
+      "name": "lighting_prior_and_later",
+      "structural_state": "NOT_GENERATED_HTTP503_AFTER_HTTP200_LENGTH",
+      "meaning_state": "FINAL_WHOLE_ARTIFACT_UNASSESSED",
+      "blocking_noncompletion": {
+        "finish_reason": "length",
+        "basis": "Raw stops while generating an edge from key and has no JSON closure or final overview. Existing consumer returns HTTPException503 and no artifact/projection. It is not adopted or repaired."
+      },
+      "visible_prefix_observations": [
+        {
+          "kind": "LATER_PURCHASE_AND_USE_TRANSITION_NOT_YET_REPRESENTED",
+          "basis": "The received prefix contains four nodes whose evidence all refers to field1 of the earlier record. Later purchase, installation, cable adjustment and thirty-minute use do not appear as completed actions in the received nodes. This is a prefix observation, not a claim about an unseen completed continuation.",
+          "source_original_record": 9,
+          "source_field": "memo_action",
+          "source_quote": "予備のお金と設置条件を確認して照明を購入した。帰宅後に取り付けと配線を調整し、三十分ほど下書きを描いた。"
+        },
+        {
+          "kind": "POLICY_LANGUAGE_IN_UNKNOWN_SLOT",
+          "model_quote": "後で実際に購入した型とは、店員が勧めた別の型とは区別して確認しています。",
+          "basis": "This describes a reading or checking stance rather than a concrete remaining unknown. No complete final artifact was produced, so it is recorded only as an observed prefix issue."
+        }
+      ],
+      "assessment_limit": "The whole final map quality cannot be assessed because it was not completed. The prefix is neither a successful chronological synthesis nor proof that all source meanings would be omitted in an unseen completion."
+    }
+  ],
+  "phase_a_adequate_for_phase_b": false,
+  "phase_b_condition": "NOT_SATISFIED",
+  "phase_b_required_action": "DO_NOT_TRANSFER_OR_EXECUTE_CONDITIONAL_FULL12_RUN",
+  "normal_rollout_recommended": false,
+  "save_or_rebind_raw_recommended": false,
+  "adopted": false,
+  "product_acceptance": false,
+  "run_observations": {
+    "driver_elapsed_seconds": 139.290247221943,
+    "restore_inclusive_elapsed_seconds": 191.244379428681,
+    "original_provider_restored": true,
+    "restored_pid": 127974
+  },
+  "review_effects": {
+    "model_calls": 0,
+    "pod_calls": 0,
+    "sql_calls": 0,
+    "source_edits": 0
+  },
+  "limits": [
+    "No missing irrelevant detail is treated as an error merely for being omitted.",
+    "No fixed personality, refusal or participant intent is inferred by this review.",
+    "SQL save, all12 generation and normal rollout are not established by these two diagnostic outputs."
+  ]
+}

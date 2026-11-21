@@ -1,0 +1,54 @@
+{
+  "conditions": [
+    {
+      "condition": "book_club_two_day",
+      "current_parser": {
+        "accepted": true,
+        "can_end": true,
+        "index": 1036
+      },
+      "existing_parser_with_all_quoteable_record_mapping": {
+        "accepted": false,
+        "can_end": false,
+        "character": "朝",
+        "index": 427
+      },
+      "finish_reason": "stop",
+      "history_stage": null,
+      "quoteable_field_records": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 2
+      }
+    },
+    {
+      "condition": "lighting_prior_and_later",
+      "current_parser": {
+        "accepted": false,
+        "can_end": false,
+        "index": 2153
+      },
+      "existing_parser_with_all_quoteable_record_mapping": {
+        "accepted": false,
+        "can_end": false,
+        "character": "ま",
+        "index": 509
+      },
+      "finish_reason": "length",
+      "history_stage": null,
+      "quoteable_field_records": {
+        "1": 1,
+        "2": 1,
+        "3": 2,
+        "4": 2
+      }
+    }
+  ],
+  "native_file_sha256": "efaeba2b35a7dc750bf31d0f9a211ae12a920005a4d8de625fed82ab7da28710",
+  "no_model_calls": true,
+  "no_source_edits": true,
+  "raw_file_sha256": "8d01fcbe28f3e7da2db395218c238ffb4a4dc2dbc3ad3800790bb5cfa7f259ba",
+  "scope": "Pure replay of received raw through the existing parser only; no new source/model output or semantic quality proof.",
+  "state": "PURE_EXISTING_PARSER_COVERAGE_GAP_REPRODUCED"
+}

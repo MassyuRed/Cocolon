@@ -1,0 +1,709 @@
+{
+  "all_fictional": true,
+  "files": [
+    {
+      "path": "ai/data/processed/structure_dictionary.json",
+      "bytes": 162484,
+      "sha256": "5e10f8162728223c30585f7c498710e18b10a59c0febf6c1e9d672b3fb9bb5d2"
+    },
+    {
+      "path": "ai/services/ai_inference/analysis_cumulative_service.py",
+      "bytes": 62416,
+      "sha256": "6d43f9b59ded12386d5bc3df895bd6a58e71de267e8086053403c1127a609754"
+    },
+    {
+      "path": "ai/services/ai_inference/analysis_model_source.py",
+      "bytes": 12938,
+      "sha256": "e0aad0c2abf389c22b973ebe562c5f82cb553ac15729e189b0fa80c2b22c4cd9"
+    },
+    {
+      "path": "ai/services/ai_inference/analysis_observed_service.py",
+      "bytes": 22718,
+      "sha256": "dcb4da62bf7a2b923e7c7699229c457fdacf3e3f77e55ceac7c025265665976e"
+    },
+    {
+      "path": "ai/services/ai_inference/analysis_semantic_map.py",
+      "bytes": 2753,
+      "sha256": "c03cdd391b24d2ee19d68a7d93eaf59ffa26b558a83b1cd585900ab2462d7395"
+    },
+    {
+      "path": "ai/services/ai_inference/astor_job_queue.py",
+      "bytes": 21852,
+      "sha256": "3151f8d3d274d31916605c31764cfc33c4b9aa335d48ca30e5409c5b308e7321"
+    },
+    {
+      "path": "ai/services/ai_inference/astor_material_snapshots.py",
+      "bytes": 100477,
+      "sha256": "92f195e0a765b83fb79bf6f00bf2007d3c7da2ffe9869504c5293774789a188f"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_environment_state_output_frame.py",
+      "bytes": 17598,
+      "sha256": "1a27d8f07ecf95cf9d852dd8084a38b68d8127bab17f49d620e8584fe118c1a4"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py",
+      "bytes": 476,
+      "sha256": "46a6af9a0633cffec1cab545873d22d6d2c7fbab7cc2b90c8cd79e18cc20ce08"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py",
+      "bytes": 923310,
+      "sha256": "32b8ecd2dfe37b4e55cce9e78f6d441f6597994086c3b6555cea217e43495286"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/__init__.py",
+      "bytes": 36,
+      "sha256": "9bb6248dbf736ca74ffd50699e9818333c55dd0e9cf1b4e996512b60ec7eb7f0"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/__init__.py",
+      "bytes": 79,
+      "sha256": "50f5d7b93fac4c1da059cb77230f1ed106c4d8e0bc33202af9eb6d0b7ad9eebf"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_contracts.py",
+      "bytes": 1971,
+      "sha256": "9fcd462eed05f233c2402760e48b3f5dc70aaf7a7807a96f36b8c5e57078e6a3"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+      "bytes": 239995,
+      "sha256": "ca43f8313b342c49078f1714fc6495d15705382ed187a05919175a11fead3f19"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/map_interpretation_correction.py",
+      "bytes": 6992,
+      "sha256": "ae4954a2dc53ba19974941fb2f9488bcb880115b37ceb36862c41dcf2d1a0559"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py",
+      "bytes": 72012,
+      "sha256": "8f39bd56a145cbb23065e49b9961ddf76127b85be50b7da2211314859126126e"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+      "bytes": 188344,
+      "sha256": "09a300821d2ddfcb0db89aff210e5513b2970dbc29ff727a34489fb755365a7e"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py",
+      "bytes": 23236,
+      "sha256": "cd090c9339cec4df7f9ceabf7d8571e92b20584b73d60bd1e7df6d9c2b13dd7c"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py",
+      "bytes": 136485,
+      "sha256": "3bc11654d45c12edb756f536bdf54ba71e47b8bb0520406fb75ac3e6edf25125"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+      "bytes": 228087,
+      "sha256": "e0cd30f5bc1bfb40baddf2d88a8005716a583993011cb2ca1b8617eafe1d1889"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py",
+      "bytes": 35068,
+      "sha256": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py",
+      "bytes": 566378,
+      "sha256": "326d7ff7f2f1963ff6cac86f3ace6c61732ef0826a6436b097fba840a9b5a499"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_contracts.py",
+      "bytes": 7303,
+      "sha256": "ed15d90eb686cbd41706f957087988d9e04b252b5c543481048d2badc78ea0a9"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py",
+      "bytes": 15080,
+      "sha256": "6a593455e971a8675de3e7de2754a0fe8c3f98a46c4541420d8787c742a885cc"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py",
+      "bytes": 320326,
+      "sha256": "85809cd8462011d708debe14df0940e8f159c20ccc409cd714001288c74cda19"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+      "bytes": 10903,
+      "sha256": "1b2e38c5082685c31c1fe72900cf81d38156360e1a223e72676a78ebf730969c"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py",
+      "bytes": 55318,
+      "sha256": "015696b5d98bf5c8f6e14164a76b87b8c5046e7e497f5de94f20ba0d4b665de2"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py",
+      "bytes": 96912,
+      "sha256": "1c8c893a43aeaa16a6f188df7b5c226a10f2e93f65c75f794466879cd90c3cad"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py",
+      "bytes": 80429,
+      "sha256": "29d5a3957ac555786af4b6d5d5bf8ce4636eb31c0d35f5c8485c51cef229007c"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py",
+      "bytes": 15686,
+      "sha256": "7390686ce77915808ab376286e0174d586c5a86384798de5e808dcafe82260ab"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/source_kernel.py",
+      "bytes": 42405,
+      "sha256": "124ff95f9162ce9cca4470a3f4e9d02d864ac3e6f6f0ae877f95d1c5f69f5397"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+      "bytes": 13577,
+      "sha256": "ad19e38fdbf6ca78e4eadf82bb326b3af24fe9114df5d7b72102c513c82df6f2"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+      "bytes": 8499,
+      "sha256": "d01968dec068e68e019cfcfae512d480ab950685961c7e294f732d466d4a2f03"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+      "bytes": 31668,
+      "sha256": "54b2016dd428d76cb2c49c358932547d2e8e0491ad4ba62c525b406fe821d363"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+      "bytes": 32686,
+      "sha256": "24b77238933dba5726fec707791467654d4847f640a923b78a3d300adc0b46aa"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+      "bytes": 18611,
+      "sha256": "5182f6d3fef28d0a9677cc72a4cd8483c182bf4bae7b15b8375ad9fd7f8cf677"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+      "bytes": 1242,
+      "sha256": "ff7c4fe5fa8fc535d0824f17a25d53285a74330b98a1c164ae8b5bc64b1f7a9a"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+      "bytes": 6057,
+      "sha256": "3161be710c19be2537a17edb450181b8411d9e42f1a8cfb310c66282fc03b1ec"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+      "bytes": 25495,
+      "sha256": "3ca31fbcf0ad9c93bdd4d267a3ef2000ce79b8d702bd7188f020eb11d5bd593c"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+      "bytes": 24123,
+      "sha256": "09ea2b5812b882265848ae930e3d2725bfe0672802b7ea73b15029d831ec565f"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+      "bytes": 20720,
+      "sha256": "d3f14ea6a24dd2f2a86f3948579546f2a86696cbf909bd42d9174534960305fe"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py",
+      "bytes": 9187,
+      "sha256": "d99e5ef09d23c43ad40bbd75f4a7dbe54a18bfb118eb4e02909ca177ae884351"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+      "bytes": 1206,
+      "sha256": "c3260a26065c6baf8ec62359a1268f3e877a98ac3408c85694e2e45af6cb3960"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+      "bytes": 8179,
+      "sha256": "e524111597d75599b0550b271a3df464df4d468aec28e608ab4586b7840da1f0"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+      "bytes": 11810,
+      "sha256": "c70607e494558ed180adbd83d4d15cfef12d1a33ef69edb43d71681ee1a64c19"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+      "bytes": 2045,
+      "sha256": "6b9195bd1d154eb15ae9146b6bce450ca1d5e2d8c7a5568009a7900580cedcbc"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+      "bytes": 8324,
+      "sha256": "347d633411f0f838200b29385552777fc5acee48dc86a40d29d3b5ebabb5ca9d"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+      "bytes": 24690,
+      "sha256": "6530918f50120e3ca5ecde0f11af9b69e4481e78ee56331f9f4b1d360946ede9"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+      "bytes": 9728,
+      "sha256": "3f290b71566d99300a9b55c9bde3fe1df3518aa1aca6a033fcc1a487a882d682"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+      "bytes": 9495,
+      "sha256": "25f7ef5d62c39a15f76671f19ab7720bdc5f10b0a9cec6906172947c560af4ff"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+      "bytes": 7563,
+      "sha256": "8999ba422fa41f6ae528aa603ccc6b20cffecbc84ff597a36110799bba386969"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+      "bytes": 12892,
+      "sha256": "bf8278975adfaf43adf8a913c3167a41d2957eb5f7a753fb5b29c4a212b6aa82"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+      "bytes": 13096,
+      "sha256": "1734c73a210cf47fa2738b9cae79b506532d152cf7e1729cd48c0fa8b518a0fc"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+      "bytes": 2665,
+      "sha256": "4de732b2aa9d639fd2d4aaaf0cbd819109f5514f23781f50489ba5fcfd013390"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/result.py",
+      "bytes": 8943,
+      "sha256": "998c3b3f12401bc5989bae1fe1cf1c78cddad642969ff531bcb3b165eab1d7ab"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+      "bytes": 9562,
+      "sha256": "6a74ecfb2ceb3935f09b5693e1bdb300652a734836c454c1926b6fc1ab7d9538"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/stabilization.py",
+      "bytes": 13684,
+      "sha256": "d0bc23201d2a3ac0d87d71fcaa4c71fd70d54c6e238831012c51fb7720fa8cd3"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_text_generation_core/types.py",
+      "bytes": 23229,
+      "sha256": "b8bd519b66e24cb64f50e73e0d71e96bb660c5d25489fb408a13e3e7ffe57080"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+      "bytes": 39159,
+      "sha256": "de3d49d223cb16f5abf53eeaf426d11cb429e35b3bdb8d04618810baad27396c"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+      "bytes": 17551,
+      "sha256": "63ddb6bf3db472bdaddfd8c3fbef68034aeb3cf51188508c0ad8b8cd920271f8"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py",
+      "bytes": 21723,
+      "sha256": "c338364dee3e6d01914abf61e330430778366743a6befff1c36a4da0fb908c1d"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+      "bytes": 20401,
+      "sha256": "a4f593b0ce44bb6d7203389ad06b8739ebe747b8e63a8b7ff985c0beecb9f4c3"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_human_reception.py",
+      "bytes": 712909,
+      "sha256": "adadaa3702942a335dcfb8e0c8b9648c433cf6453c7bab6f65dea1d75357a662"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py",
+      "bytes": 632335,
+      "sha256": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+      "bytes": 1054480,
+      "sha256": "f0e784029bf262751ce43b0df65de11d698426924783b8a8612457fc7e887c3a"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+      "bytes": 283355,
+      "sha256": "422c32240149e1a48a1a510b6e0681d04642d3d566158eb920a71e1130ca8110"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_human_follow_selector.py",
+      "bytes": 66642,
+      "sha256": "bede5fb2b0b089a7af6aa2e2f8960ab4dcdd93d6a49683e49e117c9e99a4b7a6"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_input_meaning_block_service.py",
+      "bytes": 14299,
+      "sha256": "5b073f1653f4565b9a5e80c45786c33b111b002b83f12ac435824cceb8f16069"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+      "bytes": 12170,
+      "sha256": "20aa4f793054844904084ee72c4bdc3b3198a7ad849c8a29fe526a655ce1bf21"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_perspective_board.py",
+      "bytes": 6552,
+      "sha256": "c4eabe4403c1cf98f4c645ca94cdf8164f69408d9027f7996f18965dc9c34e93"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_perspective_observers.py",
+      "bytes": 23757,
+      "sha256": "cca669364efa7359bd08fcfe8bf5335519be76a81f6700254ed5d0be713ecb61"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_reception_assistance_dictionary_loader.py",
+      "bytes": 32705,
+      "sha256": "82e5dc4c28132f1e295afd6dfb6a389cac579c0324e011ff046f986618e555c2"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+      "bytes": 47838,
+      "sha256": "ec56f2eb0c0146ebc1e9cc8804e4a05001af049e826e9f9f73cfb8ab918de3e2"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_response_contract.py",
+      "bytes": 29032,
+      "sha256": "e2c0e7af36700865cb471ef598fa99afa0b775507172571d5a44946b2d71a4c7"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_safe_daily_metaphor_material.py",
+      "bytes": 49816,
+      "sha256": "4d8b9bc3ca097733aee040eed5268ad434e890ec6b94087e772739f0c3501447"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_safety_boundary_service.py",
+      "bytes": 10572,
+      "sha256": "77c0317a5bcdf2a71e932f6bd9b53cec2beceb80ddf69f0f5bcb18a22a1c66b7"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_safety_triage.py",
+      "bytes": 21887,
+      "sha256": "11c0c8d00137c5ffc826eab0a91d04b1cbdb1976465337f918a4ff8558e24b56"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+      "bytes": 32286,
+      "sha256": "ed2996d1629a951c16b6a667252ffa4fa5ad84ff1693949050c065174a505737"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_state_answer_composer_contract.py",
+      "bytes": 36764,
+      "sha256": "3d2a85ed3663666822b9a3af97b9d386a43d4f6d5f426a5b1743ed654722a77b"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+      "bytes": 57660,
+      "sha256": "6d2452a06bbba70d9ea78d171c6622c30eddfc23dc019ddd305b1c6c1ec6b09c"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_state_answer_special_cases.py",
+      "bytes": 42655,
+      "sha256": "a09b9ddecd72642681e840885c6e2457e3ec5e30ff5a3c26146a99a8c77ad4e7"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py",
+      "bytes": 101300,
+      "sha256": "ed7ff52e76dc7dcb49de131558f54cba58f1b1465300f4ab3dfe093e4bec3577"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+      "bytes": 40940,
+      "sha256": "5d059c3c1df52f75807a64500016489b5e9057ceeaa0453b5ecf0e4efcd166dc"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_types.py",
+      "bytes": 55000,
+      "sha256": "3a0cfc7ee9c49cb0dd2b014493357ccd84924f455b22cc483272bf1872d80b17"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_ai_user_address_service.py",
+      "bytes": 2019,
+      "sha256": "eecc778d6fc58204801617a4531ffff268346e5f683d9bccfdb45ec382cd3913"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_thread_config.py",
+      "bytes": 1113,
+      "sha256": "94e0f44c0a4cd12bcbbffdb643dba0f183094b0476f29c055885dc1f0de2291b"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_thread_service.py",
+      "bytes": 81206,
+      "sha256": "324665c293c2693039b8a546bc792fd9ff3c337ae89f63796106f7d6d4c16949"
+    },
+    {
+      "path": "ai/services/ai_inference/emlis_thread_store.py",
+      "bytes": 3414,
+      "sha256": "e391826bae8a643aa2ce2406ec2186705028b0f2f73939788da6260891398cf7"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_text_formatter.py",
+      "bytes": 14696,
+      "sha256": "74fc6fea0bb613a0fbec9cd59d602c8a02b1f40161f0000e5576f63e41ab85e9"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_v2_content_policy.py",
+      "bytes": 78465,
+      "sha256": "f5a7ee1c932c786ed1509e645e7decd1e5e40f5a82aa32983651b6ddc04f3302"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_v2_contract.py",
+      "bytes": 11885,
+      "sha256": "55efc07fc4c22313cd0c92b00a85c8a2e9a831446c8f508e619a3c0e28188352"
+    },
+    {
+      "path": "ai/services/ai_inference/piece_v2_expression.py",
+      "bytes": 4415,
+      "sha256": "158bb1fd6b26e5d27d3bf1c051d2f2a8013341d403e2e7f5afebd41856388361"
+    },
+    {
+      "path": "ai/services/ai_inference/publish_governance.py",
+      "bytes": 10813,
+      "sha256": "02009a8aa1a82f7d30ddd88dd9c85b989efd24d21b54d4d3ca2a41d5d15b6e9a"
+    },
+    {
+      "path": "ai/services/ai_inference/request_metrics.py",
+      "bytes": 3079,
+      "sha256": "bef416af4e3aa7870db1401755a6abd24b320a6e71c8a0d507c314f8edf30ff2"
+    },
+    {
+      "path": "ai/services/ai_inference/structure_dict.py",
+      "bytes": 5195,
+      "sha256": "2c8bb152502ecc87360b64d24ded90dae2f8f85320cda417f749904b9d7eccac"
+    },
+    {
+      "path": "ai/services/ai_inference/supabase_client.py",
+      "bytes": 11182,
+      "sha256": "59a4344858ed34984a5a458c51a2b746a160a4a6d12952e2db3131476e79241e"
+    },
+    {
+      "path": "semantic_history_actual_once.py",
+      "bytes": 6428,
+      "sha256": "de461a25279aaa99bb473a383d3214381754e0c7dd2b5d4c65b64393252491bc"
+    },
+    {
+      "path": "semantic-history.actual.input.json",
+      "bytes": 59027,
+      "sha256": "5f362414c7aaba8249862f53892d62951329874474cc8c56a27a3f58a6c3b91c"
+    }
+  ],
+  "zip_bytes": 1520025,
+  "zip_sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
+  "runtime_source_files": 96,
+  "upload_performed": true,
+  "gpu_requests": 1,
+  "normal_api_deployed": false,
+  "bytes": 1520025,
+  "sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
+  "backend_commit": "f5d8967eb804a6930378b390e6e6e9485e4d01e4",
+  "state": "EXTRA_ATTEMPT_CONSUMED_FAILED_OR_ACK_UNKNOWN",
+  "max_model_calls": 3,
+  "health_gets": 2,
+  "maximum_minutes_including_provider_cancellation": 8,
+  "training": 0,
+  "retry": 0,
+  "restarts": 0,
+  "new_rental": 0,
+  "credential_scope": "one named Analysis key; same existing pod authentication only",
+  "target_pod": "f1lle4xwq3wjln",
+  "prior_archive_sha256": "b65352e0f67b35b274fbff8661a669391fe005af74aed8d2abd0327f1b5457ac",
+  "archive_note": "Original98 file bytes retained and not resent; dependency supplement added under separate explicit approval.",
+  "file_count": 98,
+  "archive_layout": {
+    "date_time": [
+      2026,
+      11,
+      15,
+      0,
+      0,
+      0
+    ],
+    "compression": "ZIP_DEFLATED",
+    "compresslevel": 9,
+    "mode_octal": "0600",
+    "path_order": "files array order",
+    "zip_comment": ""
+  },
+  "ci": {
+    "source_commit": "f5d8967eb804a6930378b390e6e6e9485e4d01e4",
+    "piece": {
+      "run_id": 43668190569,
+      "state": "success",
+      "job_id": 132672165201,
+      "pytest_invocations": 27,
+      "passed_sum": 5749,
+      "failed": 0,
+      "skipped": 0,
+      "deselected_sum": 420,
+      "unique_test_count_claimed": false
+    },
+    "analysis": {
+      "run_id": 43668190490,
+      "state": "cancelled_at_25_minutes",
+      "job_id": 132672165283,
+      "changed_scope_step13": "success:1513passed+21subtests",
+      "monthly_sql_step14": "success:201records/15monthlyRefs",
+      "final_step15": "cancelled_partway;no_partial_credit",
+      "completed_invocation_passes": 4514,
+      "completed_subtests": 12257,
+      "deselected": 194,
+      "assertion_failure_summary": false,
+      "local_final_group": {
+        "passed": 408,
+        "subtests": 738,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 40.08,
+        "pytest_asyncio": "1.5.0 vs CI1.2.0",
+        "no_install": true,
+        "external_calls": 0
+      }
+    }
+  },
+  "pod_uploaded_bytes": 1520025,
+  "pod_uploaded_sha256": "394458914b5aeaa63902e05ce5aa3a6367978f473fb5d7e0f2475211dd5189f6",
+  "user_approved": true,
+  "process_launches": 2,
+  "model_attempt_marker_created": true,
+  "bootstrap_error": "ModuleNotFoundError: No module named fastapi",
+  "launch_pid": 111894,
+  "restart_count": 0,
+  "current_client_launch_pid": 112311,
+  "responses_received": 0,
+  "generated_artifacts": 0,
+  "raw_driver_state": "NOT_GENERATED",
+  "raw_driver_state_meaning": "No artifact, not zero inference",
+  "supplement": {
+    "user_approved": true,
+    "uploaded": true,
+    "bytes": 3203073,
+    "sha256": "d85f85b2044f3107a91d9eee37e5d632b8e114244d2382eccf297821f578bd0e",
+    "distributions": 13,
+    "file_count": 408,
+    "install_into_existing_environment": false
+  },
+  "extra_attempt": {
+    "user_approved": true,
+    "consumed": true,
+    "max_model_calls": 3,
+    "max_seconds": 480,
+    "posts_sent": 1,
+    "received": 0,
+    "status": 504,
+    "state": "FAILED_OR_ACK_UNKNOWN",
+    "elapsed_seconds": 211.29745450010523,
+    "first_acquisition_elapsed_seconds": 210.30546553386375,
+    "leaf_record_counts": [
+      8,
+      4
+    ],
+    "leaf2_and_merge_sent": false,
+    "same_window_provider_finish": "complete_length",
+    "model_quality": "UNASSESSED",
+    "partial_map_saved": false
+  },
+  "corrective_candidate": {
+    "commit": "bdf39198359f7e205b263657442f80215f6b0725",
+    "pod_upload": false,
+    "normal_deployment": false,
+    "model_requests": 0,
+    "original98_modified": false,
+    "semantic_http_seconds": 220,
+    "semantic_request_seconds": 225,
+    "pipeline_seconds_by_call_count": {
+      "1": 225,
+      "3": 675,
+      "4": 840
+    },
+    "pipeline_clock_includes_planning": true,
+    "worker_stale_end_to_end_verified": false,
+    "old_quote_options_preserved": 96,
+    "unique_sentence_options_added": 560,
+    "runtime_preflight": "53passed/16skipped/1dependency-import failure; superseded by final focused run",
+    "final_tests": {
+      "passed": 308,
+      "new": 13,
+      "files": 11,
+      "failed": 0,
+      "skipped": 0,
+      "focused": 71,
+      "related": 140,
+      "shared_server": 97,
+      "warning": "one existing deprecation repeated across3invocations",
+      "installs": 0,
+      "external_model_or_db_calls": 0
+    },
+    "changed_paths": [
+      "ai/services/ai_inference/analysis_cumulative_service.py",
+      "ai/services/ai_inference/analysis_model_source.py",
+      "ai/tests/test_analysis_semantic_generation_schema.py",
+      "ai/tests/test_analysis_semantic_history_service.py",
+      "ai/tests/test_analysis_semantic_integration.py",
+      "ai/tools/serve_emlis_natural_reply.py"
+    ],
+    "ci": {
+      "analysis": {
+        "run_id": 43674876139,
+        "state": "in_progress_at_observation"
+      },
+      "piece": {
+        "run_id": 43674876107,
+        "state": "in_progress_at_observation"
+      },
+      "old_commit_ci_not_recredited": true,
+      "manual_reruns": 0
+    }
+  },
+  "execution_artifacts": [
+    {
+      "path": "semantic-history.actual.result.json",
+      "bytes": 47064,
+      "sha256": "20a83a39802076218c02d1cf1cc4ced73e44be921091622da828901b6b2326f9"
+    },
+    {
+      "path": "launch-with-client-deps.log",
+      "bytes": 351,
+      "sha256": "de194ff368401f4af3ec20d03bdb55c8bb9cd6b3e716718f62913ba546f666a8"
+    },
+    {
+      "path": "runtime-observed.json",
+      "bytes": 604,
+      "sha256": "21b4180116ceaa819c564a559e2fdc1428081b2b3fe12b15b3cbcdfda4393cc3"
+    },
+    {
+      "path": "provider-deadline-observed.json",
+      "bytes": 6246,
+      "sha256": "9c059ddae4641c5b172e063f12c3a30b38cea6da5d9ecded09eefc01a2e86356"
+    },
+    {
+      "path": "semantic-history-corrective-pytest.log",
+      "bytes": 786,
+      "sha256": "038dcd40b6c08fb59c4217d6e1005cfe22b7f1df2d4468f71fc360aeee5a8ff9"
+    },
+    {
+      "path": "semantic-history-corrective-related.log",
+      "bytes": 857,
+      "sha256": "f6fe44e547798569fdb58ae143224506808f589e1d555ea9b986cbaee6c60b74"
+    },
+    {
+      "path": "semantic-history-corrective-shared-server.log",
+      "bytes": 855,
+      "sha256": "2ccf39c5ef41cdf38172bdf5e5cd73cbf00a9d9e7c801458776daa99c23bb020"
+    },
+    {
+      "path": "semantic-history-corrective-summary.json",
+      "bytes": 819,
+      "sha256": "1c1e28c54cb1128a5ef4cc3540931d0b1e2421109b2750325cc29ef21d2ffffe"
+    },
+    {
+      "path": "semantic-history-corrective-runtime-preflight.log",
+      "bytes": 2113,
+      "sha256": "cf9321318da82f59ad6b6c9e9d7ea7f88066a2f9c91098a2ef83f0ef7ab4a512"
+    }
+  ]
+}

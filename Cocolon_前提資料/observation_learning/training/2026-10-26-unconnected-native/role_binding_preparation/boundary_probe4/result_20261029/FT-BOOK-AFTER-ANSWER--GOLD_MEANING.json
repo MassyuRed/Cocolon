@@ -1,0 +1,1459 @@
+{
+  "probe_id": "FT-BOOK-AFTER-ANSWER--GOLD_MEANING",
+  "case_id": "FT-BOOK-AFTER-ANSWER",
+  "condition": "GOLD_MEANING",
+  "raw_text": "{\"v\":\"cocolon.cmee.named_reference_candidate.v1\",\"a\":{\"s0\":\"FT-BOOK-O\",\"s1\":\"sixrow-answer-book\",\"p0\":\"semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15\"},\"q\":[{\"id\":\"q_late_return\",\"s\":\"@s0\",\"f\":\"memo_action\",\"t\":\"借りていた本を返すのが遅れて\"},{\"id\":\"q_apologize\",\"s\":\"@s0\",\"f\":\"memo_action\",\"t\":\"友人に謝った\"},{\"id\":\"q_reassurance_received\",\"s\":\"@s0\",\"f\":\"memo\",\"t\":\"大丈夫って言ってくれた\"},{\"id\":\"q_remaining_concern\",\"s\":\"@s0\",\"f\":\"memo\",\"t\":\"まだちょっと気になる\"},{\"id\":\"q_action_link\",\"s\":\"@s0\",\"f\":\"memo_action\",\"t\":\"借りていた本を返すのが遅れて、友人に謝った\"},{\"id\":\"q_memo_link\",\"s\":\"@s0\",\"f\":\"memo\",\"t\":\"大丈夫って言ってくれたけど、まだちょっと気になる\"},{\"id\":\"q_self_statement\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"自分から「週末に返すね」と言っていた\"},{\"id\":\"q_late_awareness\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"遅くなると分かった\"},{\"id\":\"q_no_contact\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"連絡しなかった\"},{\"id\":\"q_extra_9\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"遅くなると分かった時点\"},{\"id\":\"q_returned\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"本は返した\"},{\"id\":\"q_counterfactual\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"一言、遅くなるって伝えておけばよかったな\"},{\"id\":\"q_continuing_concern\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"まだ気になっています\"},{\"id\":\"q_statement_concession\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです\"},{\"id\":\"q_awareness_time\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"遅くなると分かった時点で連絡しなかったことです\"},{\"id\":\"q_returned_concession\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\"},{\"id\":\"q_concern_content\",\"s\":\"@s1\",\"f\":\"answer_text_private\",\"t\":\"「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています\"}],\"c\":{\"claims\":[{\"time\":{\"at_source\":\"@s0\",\"ev\":[\"q_late_return\"],\"expr\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"late_return\",\"ev\":[\"q_late_return\"],\"kind\":\"EVENT\",\"mode\":{\"ev\":[\"q_late_return\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_late_return\"],\"scope\":[\"late_return\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"借りていた本を返すのが遅れて\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"借りていた本を返すのが遅れて\"},{\"time\":{\"at_source\":\"@s0\",\"ev\":[\"q_apologize\"],\"expr\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"apologize\",\"ev\":[\"q_apologize\"],\"kind\":\"EVENT\",\"mode\":{\"ev\":[\"q_apologize\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_apologize\"],\"scope\":[\"apologize\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"友人に謝った\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"友人に謝った\"},{\"time\":{\"at_source\":\"@s0\",\"ev\":[\"q_reassurance_received\"],\"expr\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"reassurance_received\",\"ev\":[\"q_reassurance_received\"],\"kind\":\"EVENT\",\"mode\":{\"ev\":[\"q_reassurance_received\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_reassurance_received\"],\"scope\":[\"reassurance_received\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"大丈夫って言ってくれた\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"大丈夫って言ってくれた\"},{\"time\":{\"at_source\":\"@s0\",\"ev\":[\"q_remaining_concern\"],\"expr\":null,\"kind\":\"WRITTEN_PRESENT\"},\"cid\":\"remaining_concern\",\"ev\":[\"q_remaining_concern\"],\"kind\":\"STATE\",\"mode\":{\"ev\":[\"q_remaining_concern\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_remaining_concern\"],\"scope\":[\"remaining_concern\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"まだちょっと気になる\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"まだちょっと気になる\"},{\"time\":{\"at_source\":\"@s1\",\"ev\":[\"q_self_statement\"],\"expr\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"self_statement\",\"ev\":[\"q_self_statement\"],\"kind\":\"REPORTED_STATEMENT\",\"mode\":{\"ev\":[\"q_self_statement\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_self_statement\"],\"scope\":[\"self_statement\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"自分から「週末に返すね」と言っていた\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"自分から「週末に返すね」と言っていた\"},{\"time\":{\"at_source\":\"@s1\",\"ev\":[\"q_late_awareness\"],\"expr\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"late_awareness\",\"ev\":[\"q_late_awareness\"],\"kind\":\"STATE\",\"mode\":{\"ev\":[\"q_late_awareness\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_late_awareness\"],\"scope\":[\"late_awareness\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"遅くなると分かった\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"遅くなると分かった\"},{\"time\":{\"at_source\":\"@s1\",\"ev\":[\"q_extra_9\"],\"expr\":\"遅くなると分かった時点\",\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"no_contact\",\"ev\":[\"q_no_contact\"],\"kind\":\"EVENT\",\"mode\":{\"ev\":[\"q_no_contact\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_no_contact\"],\"scope\":[\"no_contact\"],\"value\":\"NEGATED\"},\"pred\":{\"args\":[],\"surface\":\"連絡しなかった\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"連絡しなかった\"},{\"time\":{\"at_source\":\"@s1\",\"ev\":[\"q_returned\"],\"expr\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"cid\":\"returned\",\"ev\":[\"q_returned\"],\"kind\":\"EVENT\",\"mode\":{\"ev\":[\"q_returned\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_returned\"],\"scope\":[\"returned\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"本は返した\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"本は返した\"},{\"time\":{\"at_source\":\"@s1\",\"ev\":[\"q_counterfactual\"],\"expr\":null,\"kind\":\"ANSWER_TIME\"},\"cid\":\"counterfactual\",\"ev\":[\"q_counterfactual\"],\"kind\":\"STATE\",\"mode\":{\"ev\":[\"q_counterfactual\"],\"value\":\"COUNTERFACTUAL_APPRAISAL\"},\"polarity\":{\"ev\":[\"q_counterfactual\"],\"scope\":[\"counterfactual\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"一言、遅くなるって伝えておけばよかったな\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"一言、遅くなるって伝えておけばよかったな\"},{\"time\":{\"at_source\":\"@s1\",\"ev\":[\"q_continuing_concern\"],\"expr\":null,\"kind\":\"ANSWER_TIME\"},\"cid\":\"continuing_concern\",\"ev\":[\"q_continuing_concern\"],\"kind\":\"STATE\",\"mode\":{\"ev\":[\"q_continuing_concern\"],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"ev\":[\"q_continuing_concern\"],\"scope\":[\"continuing_concern\"],\"value\":\"AFFIRMED\"},\"pred\":{\"args\":[],\"surface\":\"まだ気になっています\"},\"qual\":[],\"subject\":{\"bind\":\"OMITTED\",\"ev\":[],\"entity\":null},\"text\":\"まだ気になっています\"}],\"conflicts\":[],\"core\":\"emlis\",\"question\":null,\"relations\":[{\"ev\":[\"q_action_link\"],\"from\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"action_link\",\"scope\":[\"action_link\"],\"to\":\"apologize\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"ev\":[\"q_memo_link\"],\"from\":\"reassurance_received\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"memo_link\",\"scope\":[\"memo_link\"],\"to\":\"remaining_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"ev\":[\"q_statement_concession\"],\"from\":\"self_statement\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"statement_concession\",\"scope\":[\"statement_concession\"],\"to\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"ev\":[\"q_awareness_time\"],\"from\":\"late_awareness\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"awareness_time\",\"scope\":[\"awareness_time\"],\"to\":\"no_contact\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_AT_LINK\"},{\"ev\":[\"q_returned_concession\"],\"from\":\"returned\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"returned_concession\",\"scope\":[\"returned_concession\"],\"to\":\"continuing_concern\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"ev\":[\"q_concern_content\"],\"from\":\"counterfactual\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"concern_content\",\"scope\":[\"concern_content\"],\"to\":\"continuing_concern\",\"type\":\"SOURCE_QUOTED_CONCERN_CONTENT\"},{\"ev\":[\"q_statement_concession\"],\"from\":\"remaining_concern\",\"polarity\":\"AFFIRMED\",\"qual\":[],\"rid\":\"answer_explains_target\",\"scope\":[\"answer_explains_target\"],\"to\":\"no_contact\",\"type\":\"ANSWER_EXPLAINS_TARGET\"}],\"schema\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"unknowns\":[],\"updates\":[{\"ev\":[\"q_self_statement\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"self_statement\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_self_statement\"},{\"ev\":[\"q_late_awareness\",\"q_extra_9\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"late_awareness\",\"no_contact\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_late_awareness\"},{\"ev\":[\"q_returned\",\"q_counterfactual\",\"q_continuing_concern\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"returned\",\"counterfactual\",\"continuing_concern\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_returned\"},{\"ev\":[\"q_statement_concession\",\"q_awareness_time\",\"q_returned_concession\",\"q_concern_content\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_statement_concession\"},{\"ev\":[\"q_action_link\",\"q_memo_link\",\"q_statement_concession\",\"q_awareness_time\",\"q_returned_concession\",\"q_concern_content\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"action_link\",\"memo_link\",\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_written_links\"},{\"ev\":[\"q_statement_concession\"],\"op\":\"INVALIDATE_GAP\",\"prior\":\"@p0\",\"replace\":[],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_invalidate_gap\"}],\"prose\":{\"binds\":[{\"cr\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\"],\"rr\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"cr\":[\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"rr\":[\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"section\":\"reception\"},{\"cr\":[\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"rr\":[\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"section\":\"update_note\",\"ur\":[\"u_add_self_statement\",\"u_add_late_awareness\",\"u_add_returned\",\"u_add_statement_concession\",\"u_add_written_links\",\"u_invalidate_gap\"]}],\"observation\":\"遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、本人の原入力として保持します。\",\"reception\":\"本人の新しい発言で、遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、追加された意味として受け取ります。\",\"update_note\":\"本人の新しい発言で、遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、追加された意味として更新されました。\"}}}\n",
+  "continuation_text": "],\"updates\":[{\"ev\":[\"q_self_statement\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"self_statement\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_self_statement\"},{\"ev\":[\"q_late_awareness\",\"q_extra_9\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"late_awareness\",\"no_contact\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_late_awareness\"},{\"ev\":[\"q_returned\",\"q_counterfactual\",\"q_continuing_concern\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"returned\",\"counterfactual\",\"continuing_concern\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_returned\"},{\"ev\":[\"q_statement_concession\",\"q_awareness_time\",\"q_returned_concession\",\"q_concern_content\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_statement_concession\"},{\"ev\":[\"q_action_link\",\"q_memo_link\",\"q_statement_concession\",\"q_awareness_time\",\"q_returned_concession\",\"q_concern_content\"],\"op\":\"ADD\",\"prior\":\"@p0\",\"replace\":[\"action_link\",\"memo_link\",\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_add_written_links\"},{\"ev\":[\"q_statement_concession\"],\"op\":\"INVALIDATE_GAP\",\"prior\":\"@p0\",\"replace\":[],\"target_kind\":\"UNKNOWN\",\"target\":\"missing_explanation\",\"$id\":\"u_invalidate_gap\"}],\"prose\":{\"binds\":[{\"cr\":[\"late_return\",\"apologize\",\"reassurance_received\",\"remaining_concern\"],\"rr\":[\"action_link\",\"memo_link\"],\"section\":\"observation\"},{\"cr\":[\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"rr\":[\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"section\":\"reception\"},{\"cr\":[\"self_statement\",\"late_awareness\",\"no_contact\",\"returned\",\"counterfactual\",\"continuing_concern\"],\"rr\":[\"statement_concession\",\"awareness_time\",\"returned_concession\",\"concern_content\"],\"section\":\"update_note\",\"ur\":[\"u_add_self_statement\",\"u_add_late_awareness\",\"u_add_returned\",\"u_add_statement_concession\",\"u_add_written_links\",\"u_invalidate_gap\"]}],\"observation\":\"遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、本人の原入力として保持します。\",\"reception\":\"本人の新しい発言で、遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、追加された意味として受け取ります。\",\"update_note\":\"本人の新しい発言で、遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、追加された意味として更新されました。\"}}}\n",
+  "raw_utf8_sha256": "9f64ff6b1a91175a201a6cf5baebfb2c9417fd670f135690f70f1b142259e4ba",
+  "continuation_utf8_sha256": "43dba230bb7cfb4100b5200bb4d7445a1b24e26e774c2873a97a0cdd457c78fc",
+  "given_prefix_sha256": "93122e128c2bedf75587d0a714dd170d50633c3520cd42767dc488d288ebc646",
+  "output_token_ids": [
+    27573,
+    47989,
+    64331,
+    4958,
+    35580,
+    80,
+    24821,
+    36166,
+    66550,
+    445,
+    3147,
+    15206,
+    2129,
+    62065,
+    3147,
+    31,
+    79,
+    15,
+    2129,
+    7899,
+    35580,
+    701,
+    36166,
+    66550,
+    5480,
+    32061,
+    3147,
+    49649,
+    2129,
+    5480,
+    3147,
+    29617,
+    2615,
+    34700,
+    2129,
+    3,
+    306,
+    3147,
+    84,
+    2797,
+    24821,
+    36166,
+    35303,
+    4958,
+    35580,
+    80,
+    879,
+    344,
+    62,
+    18946,
+    2022,
+    2129,
+    80,
+    30812,
+    62,
+    24,
+    66550,
+    445,
+    3147,
+    15206,
+    2129,
+    62065,
+    3147,
+    31,
+    79,
+    15,
+    2129,
+    7899,
+    35580,
+    4913,
+    62,
+    18946,
+    2022,
+    2129,
+    2083,
+    19972,
+    66550,
+    5480,
+    32061,
+    3147,
+    49649,
+    2129,
+    5480,
+    3147,
+    29617,
+    2615,
+    34700,
+    2129,
+    3,
+    306,
+    3147,
+    84,
+    2797,
+    879,
+    344,
+    62,
+    18946,
+    2022,
+    35303,
+    4958,
+    35580,
+    80,
+    12153,
+    290,
+    2129,
+    80,
+    15269,
+    69,
+    11605,
+    2129,
+    80,
+    66615,
+    7236,
+    3273,
+    27612,
+    66550,
+    445,
+    3147,
+    15206,
+    2129,
+    62065,
+    3147,
+    31,
+    79,
+    15,
+    2129,
+    7899,
+    35580,
+    74936,
+    2129,
+    8034,
+    69,
+    11605,
+    2129,
+    20663,
+    7236,
+    3273,
+    27612,
+    66550,
+    5480,
+    32061,
+    3147,
+    49649,
+    2129,
+    5480,
+    3147,
+    29617,
+    2615,
+    34700,
+    2129,
+    3,
+    306,
+    3147,
+    84,
+    2797,
+    12153,
+    290,
+    35303,
+    4958,
+    35580,
+    80,
+    36166,
+    3273,
+    24654,
+    2129,
+    80,
+    62,
+    18946,
+    2022,
+    2914,
+    2129,
+    80,
+    12153,
+    290,
+    3273,
+    24654,
+    2129,
+    80,
+    3273,
+    27612,
+    7260,
+    66550,
+    445,
+    3147,
+    15206,
+    2129,
+    62065,
+    3147,
+    31,
+    79,
+    15,
+    2129,
+    7899,
+    35580,
+    23425,
+    3273,
+    24654,
+    2129,
+    18946,
+    2022,
+    2914,
+    2129,
+    74936,
+    3273,
+    24654,
+    2129,
+    435,
+    27612,
+    7260,
+    66550,
+    5480,
+    32061,
+    3147,
+    49649,
+    2129,
+    5480,
+    3147,
+    29617,
+    2615,
+    34700,
+    2129,
+    3,
+    306,
+    3147,
+    84,
+    2797,
+    36166,
+    3273,
+    24654,
+    35303,
+    4958,
+    35580,
+    80,
+    7681,
+    7006,
+    2129,
+    80,
+    697,
+    6515,
+    7006,
+    2129,
+    80,
+    36166,
+    3273,
+    24654,
+    2129,
+    80,
+    62,
+    18946,
+    2022,
+    2914,
+    2129,
+    80,
+    12153,
+    290,
+    3273,
+    24654,
+    2129,
+    80,
+    3273,
+    27612,
+    7260,
+    66550,
+    445,
+    3147,
+    15206,
+    2129,
+    62065,
+    3147,
+    31,
+    79,
+    15,
+    2129,
+    7899,
+    35580,
+    1265,
+    7006,
+    2129,
+    53549,
+    7006,
+    2129,
+    23425,
+    3273,
+    24654,
+    2129,
+    18946,
+    2022,
+    2914,
+    2129,
+    74936,
+    3273,
+    24654,
+    2129,
+    435,
+    27612,
+    7260,
+    66550,
+    5480,
+    32061,
+    3147,
+    49649,
+    2129,
+    5480,
+    3147,
+    29617,
+    2615,
+    34700,
+    2129,
+    3,
+    306,
+    3147,
+    84,
+    2797,
+    69945,
+    24456,
+    35303,
+    4958,
+    35580,
+    80,
+    36166,
+    3273,
+    24654,
+    66550,
+    445,
+    3147,
+    45294,
+    2260,
+    81797,
+    2129,
+    62065,
+    3147,
+    31,
+    79,
+    15,
+    2129,
+    7899,
+    8631,
+    27573,
+    5480,
+    32061,
+    3147,
+    49649,
+    2129,
+    5480,
+    3147,
+    29617,
+    2615,
+    34700,
+    2129,
+    3,
+    306,
+    3147,
+    84,
+    30399,
+    344,
+    50046,
+    8934,
+    27573,
+    751,
+    323,
+    21624,
+    7423,
+    82,
+    64331,
+    4920,
+    35580,
+    4913,
+    12153,
+    2129,
+    385,
+    1553,
+    537,
+    2129,
+    265,
+    183114,
+    39437,
+    2129,
+    42000,
+    3273,
+    27612,
+    66550,
+    616,
+    35580,
+    1265,
+    7006,
+    2129,
+    53549,
+    7006,
+    66550,
+    2720,
+    3147,
+    75290,
+    35303,
+    4920,
+    35580,
+    701,
+    36166,
+    2129,
+    4913,
+    62,
+    18946,
+    2022,
+    2129,
+    2083,
+    19972,
+    2129,
+    74936,
+    2129,
+    8034,
+    69,
+    11605,
+    2129,
+    20663,
+    7236,
+    3273,
+    27612,
+    66550,
+    616,
+    35580,
+    23425,
+    3273,
+    24654,
+    2129,
+    18946,
+    2022,
+    2914,
+    2129,
+    74936,
+    3273,
+    24654,
+    2129,
+    435,
+    27612,
+    7260,
+    66550,
+    2720,
+    3147,
+    265,
+    963,
+    35303,
+    4920,
+    35580,
+    701,
+    36166,
+    2129,
+    4913,
+    62,
+    18946,
+    2022,
+    2129,
+    2083,
+    19972,
+    2129,
+    74936,
+    2129,
+    8034,
+    69,
+    11605,
+    2129,
+    20663,
+    7236,
+    3273,
+    27612,
+    66550,
+    616,
+    35580,
+    23425,
+    3273,
+    24654,
+    2129,
+    18946,
+    2022,
+    2914,
+    2129,
+    74936,
+    3273,
+    24654,
+    2129,
+    435,
+    27612,
+    7260,
+    66550,
+    2720,
+    3147,
+    2309,
+    26331,
+    2129,
+    322,
+    35580,
+    84,
+    2797,
+    24821,
+    36166,
+    2129,
+    84,
+    2797,
+    879,
+    344,
+    62,
+    18946,
+    2022,
+    2129,
+    84,
+    2797,
+    12153,
+    290,
+    2129,
+    84,
+    2797,
+    36166,
+    3273,
+    24654,
+    2129,
+    84,
+    2797,
+    69945,
+    24456,
+    2129,
+    84,
+    30399,
+    344,
+    50046,
+    89254,
+    27573,
+    75290,
+    3147,
+    246853,
+    149666,
+    95879,
+    18602,
+    99794,
+    148368,
+    148408,
+    5205,
+    96393,
+    158132,
+    149666,
+    109879,
+    96111,
+    5205,
+    98069,
+    28310,
+    148921,
+    96256,
+    82561,
+    5205,
+    101695,
+    15303,
+    96138,
+    247368,
+    151393,
+    97559,
+    74688,
+    1710,
+    2129,
+    265,
+    963,
+    3147,
+    101695,
+    15303,
+    160306,
+    247534,
+    15685,
+    5205,
+    246853,
+    149666,
+    95879,
+    18602,
+    99794,
+    148368,
+    148408,
+    5205,
+    96393,
+    158132,
+    149666,
+    109879,
+    96111,
+    5205,
+    98069,
+    28310,
+    148921,
+    96256,
+    82561,
+    5205,
+    117861,
+    170521,
+    98942,
+    151393,
+    171298,
+    96284,
+    148857,
+    1710,
+    2129,
+    2309,
+    26331,
+    3147,
+    101695,
+    15303,
+    160306,
+    247534,
+    15685,
+    5205,
+    246853,
+    149666,
+    95879,
+    18602,
+    99794,
+    148368,
+    148408,
+    5205,
+    96393,
+    158132,
+    149666,
+    109879,
+    96111,
+    5205,
+    98069,
+    28310,
+    148921,
+    96256,
+    82561,
+    5205,
+    117861,
+    170521,
+    98942,
+    151393,
+    98134,
+    175852,
+    1710,
+    29958,
+    92,
+    248046,
+    198,
+    248044
+  ],
+  "input_tokens": 6699,
+  "output_tokens": 634,
+  "usage": {
+    "prompt_tokens": 6699,
+    "completion_tokens": 634
+  },
+  "seconds": 29.986660056980327,
+  "finish_reason": "stop",
+  "eos_reached": true,
+  "timeout_triggered": false,
+  "parsed": {
+    "v": "cocolon.cmee.named_reference_candidate.v1",
+    "a": {
+      "s0": "FT-BOOK-O",
+      "s1": "sixrow-answer-book",
+      "p0": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15"
+    },
+    "q": [
+      {
+        "id": "q_late_return",
+        "s": "@s0",
+        "f": "memo_action",
+        "t": "借りていた本を返すのが遅れて"
+      },
+      {
+        "id": "q_apologize",
+        "s": "@s0",
+        "f": "memo_action",
+        "t": "友人に謝った"
+      },
+      {
+        "id": "q_reassurance_received",
+        "s": "@s0",
+        "f": "memo",
+        "t": "大丈夫って言ってくれた"
+      },
+      {
+        "id": "q_remaining_concern",
+        "s": "@s0",
+        "f": "memo",
+        "t": "まだちょっと気になる"
+      },
+      {
+        "id": "q_action_link",
+        "s": "@s0",
+        "f": "memo_action",
+        "t": "借りていた本を返すのが遅れて、友人に謝った"
+      },
+      {
+        "id": "q_memo_link",
+        "s": "@s0",
+        "f": "memo",
+        "t": "大丈夫って言ってくれたけど、まだちょっと気になる"
+      },
+      {
+        "id": "q_self_statement",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "自分から「週末に返すね」と言っていた"
+      },
+      {
+        "id": "q_late_awareness",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "遅くなると分かった"
+      },
+      {
+        "id": "q_no_contact",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "連絡しなかった"
+      },
+      {
+        "id": "q_extra_9",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "遅くなると分かった時点"
+      },
+      {
+        "id": "q_returned",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "本は返した"
+      },
+      {
+        "id": "q_counterfactual",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "一言、遅くなるって伝えておけばよかったな"
+      },
+      {
+        "id": "q_continuing_concern",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "まだ気になっています"
+      },
+      {
+        "id": "q_statement_concession",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです"
+      },
+      {
+        "id": "q_awareness_time",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "遅くなると分かった時点で連絡しなかったことです"
+      },
+      {
+        "id": "q_returned_concession",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています"
+      },
+      {
+        "id": "q_concern_content",
+        "s": "@s1",
+        "f": "answer_text_private",
+        "t": "「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています"
+      }
+    ],
+    "c": {
+      "claims": [
+        {
+          "time": {
+            "at_source": "@s0",
+            "ev": [
+              "q_late_return"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "late_return",
+          "ev": [
+            "q_late_return"
+          ],
+          "kind": "EVENT",
+          "mode": {
+            "ev": [
+              "q_late_return"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_late_return"
+            ],
+            "scope": [
+              "late_return"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "借りていた本を返すのが遅れて"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "借りていた本を返すのが遅れて"
+        },
+        {
+          "time": {
+            "at_source": "@s0",
+            "ev": [
+              "q_apologize"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "apologize",
+          "ev": [
+            "q_apologize"
+          ],
+          "kind": "EVENT",
+          "mode": {
+            "ev": [
+              "q_apologize"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_apologize"
+            ],
+            "scope": [
+              "apologize"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "友人に謝った"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "友人に謝った"
+        },
+        {
+          "time": {
+            "at_source": "@s0",
+            "ev": [
+              "q_reassurance_received"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "reassurance_received",
+          "ev": [
+            "q_reassurance_received"
+          ],
+          "kind": "EVENT",
+          "mode": {
+            "ev": [
+              "q_reassurance_received"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_reassurance_received"
+            ],
+            "scope": [
+              "reassurance_received"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "大丈夫って言ってくれた"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "大丈夫って言ってくれた"
+        },
+        {
+          "time": {
+            "at_source": "@s0",
+            "ev": [
+              "q_remaining_concern"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PRESENT"
+          },
+          "cid": "remaining_concern",
+          "ev": [
+            "q_remaining_concern"
+          ],
+          "kind": "STATE",
+          "mode": {
+            "ev": [
+              "q_remaining_concern"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_remaining_concern"
+            ],
+            "scope": [
+              "remaining_concern"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "まだちょっと気になる"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "まだちょっと気になる"
+        },
+        {
+          "time": {
+            "at_source": "@s1",
+            "ev": [
+              "q_self_statement"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "self_statement",
+          "ev": [
+            "q_self_statement"
+          ],
+          "kind": "REPORTED_STATEMENT",
+          "mode": {
+            "ev": [
+              "q_self_statement"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_self_statement"
+            ],
+            "scope": [
+              "self_statement"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "自分から「週末に返すね」と言っていた"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "自分から「週末に返すね」と言っていた"
+        },
+        {
+          "time": {
+            "at_source": "@s1",
+            "ev": [
+              "q_late_awareness"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "late_awareness",
+          "ev": [
+            "q_late_awareness"
+          ],
+          "kind": "STATE",
+          "mode": {
+            "ev": [
+              "q_late_awareness"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_late_awareness"
+            ],
+            "scope": [
+              "late_awareness"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "遅くなると分かった"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "遅くなると分かった"
+        },
+        {
+          "time": {
+            "at_source": "@s1",
+            "ev": [
+              "q_extra_9"
+            ],
+            "expr": "遅くなると分かった時点",
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "no_contact",
+          "ev": [
+            "q_no_contact"
+          ],
+          "kind": "EVENT",
+          "mode": {
+            "ev": [
+              "q_no_contact"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_no_contact"
+            ],
+            "scope": [
+              "no_contact"
+            ],
+            "value": "NEGATED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "連絡しなかった"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "連絡しなかった"
+        },
+        {
+          "time": {
+            "at_source": "@s1",
+            "ev": [
+              "q_returned"
+            ],
+            "expr": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "cid": "returned",
+          "ev": [
+            "q_returned"
+          ],
+          "kind": "EVENT",
+          "mode": {
+            "ev": [
+              "q_returned"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_returned"
+            ],
+            "scope": [
+              "returned"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "本は返した"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "本は返した"
+        },
+        {
+          "time": {
+            "at_source": "@s1",
+            "ev": [
+              "q_counterfactual"
+            ],
+            "expr": null,
+            "kind": "ANSWER_TIME"
+          },
+          "cid": "counterfactual",
+          "ev": [
+            "q_counterfactual"
+          ],
+          "kind": "STATE",
+          "mode": {
+            "ev": [
+              "q_counterfactual"
+            ],
+            "value": "COUNTERFACTUAL_APPRAISAL"
+          },
+          "polarity": {
+            "ev": [
+              "q_counterfactual"
+            ],
+            "scope": [
+              "counterfactual"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "一言、遅くなるって伝えておけばよかったな"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "一言、遅くなるって伝えておけばよかったな"
+        },
+        {
+          "time": {
+            "at_source": "@s1",
+            "ev": [
+              "q_continuing_concern"
+            ],
+            "expr": null,
+            "kind": "ANSWER_TIME"
+          },
+          "cid": "continuing_concern",
+          "ev": [
+            "q_continuing_concern"
+          ],
+          "kind": "STATE",
+          "mode": {
+            "ev": [
+              "q_continuing_concern"
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "ev": [
+              "q_continuing_concern"
+            ],
+            "scope": [
+              "continuing_concern"
+            ],
+            "value": "AFFIRMED"
+          },
+          "pred": {
+            "args": [],
+            "surface": "まだ気になっています"
+          },
+          "qual": [],
+          "subject": {
+            "bind": "OMITTED",
+            "ev": [],
+            "entity": null
+          },
+          "text": "まだ気になっています"
+        }
+      ],
+      "conflicts": [],
+      "core": "emlis",
+      "question": null,
+      "relations": [
+        {
+          "ev": [
+            "q_action_link"
+          ],
+          "from": "late_return",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "action_link",
+          "scope": [
+            "action_link"
+          ],
+          "to": "apologize",
+          "type": "SOURCE_WRITTEN_TE_LINK"
+        },
+        {
+          "ev": [
+            "q_memo_link"
+          ],
+          "from": "reassurance_received",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "memo_link",
+          "scope": [
+            "memo_link"
+          ],
+          "to": "remaining_concern",
+          "type": "SOURCE_WRITTEN_CONCESSION"
+        },
+        {
+          "ev": [
+            "q_statement_concession"
+          ],
+          "from": "self_statement",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "statement_concession",
+          "scope": [
+            "statement_concession"
+          ],
+          "to": "no_contact",
+          "type": "SOURCE_WRITTEN_CONCESSION"
+        },
+        {
+          "ev": [
+            "q_awareness_time"
+          ],
+          "from": "late_awareness",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "awareness_time",
+          "scope": [
+            "awareness_time"
+          ],
+          "to": "no_contact",
+          "type": "SOURCE_WRITTEN_TEMPORAL_AT_LINK"
+        },
+        {
+          "ev": [
+            "q_returned_concession"
+          ],
+          "from": "returned",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "returned_concession",
+          "scope": [
+            "returned_concession"
+          ],
+          "to": "continuing_concern",
+          "type": "SOURCE_WRITTEN_CONCESSION"
+        },
+        {
+          "ev": [
+            "q_concern_content"
+          ],
+          "from": "counterfactual",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "concern_content",
+          "scope": [
+            "concern_content"
+          ],
+          "to": "continuing_concern",
+          "type": "SOURCE_QUOTED_CONCERN_CONTENT"
+        },
+        {
+          "ev": [
+            "q_statement_concession"
+          ],
+          "from": "remaining_concern",
+          "polarity": "AFFIRMED",
+          "qual": [],
+          "rid": "answer_explains_target",
+          "scope": [
+            "answer_explains_target"
+          ],
+          "to": "no_contact",
+          "type": "ANSWER_EXPLAINS_TARGET"
+        }
+      ],
+      "schema": "cocolon.cmee.semantic_and_surface_proposal.v1",
+      "unknowns": [],
+      "updates": [
+        {
+          "ev": [
+            "q_self_statement"
+          ],
+          "op": "ADD",
+          "prior": "@p0",
+          "replace": [
+            "self_statement"
+          ],
+          "target_kind": "UNKNOWN",
+          "target": "missing_explanation",
+          "$id": "u_add_self_statement"
+        },
+        {
+          "ev": [
+            "q_late_awareness",
+            "q_extra_9"
+          ],
+          "op": "ADD",
+          "prior": "@p0",
+          "replace": [
+            "late_awareness",
+            "no_contact"
+          ],
+          "target_kind": "UNKNOWN",
+          "target": "missing_explanation",
+          "$id": "u_add_late_awareness"
+        },
+        {
+          "ev": [
+            "q_returned",
+            "q_counterfactual",
+            "q_continuing_concern"
+          ],
+          "op": "ADD",
+          "prior": "@p0",
+          "replace": [
+            "returned",
+            "counterfactual",
+            "continuing_concern"
+          ],
+          "target_kind": "UNKNOWN",
+          "target": "missing_explanation",
+          "$id": "u_add_returned"
+        },
+        {
+          "ev": [
+            "q_statement_concession",
+            "q_awareness_time",
+            "q_returned_concession",
+            "q_concern_content"
+          ],
+          "op": "ADD",
+          "prior": "@p0",
+          "replace": [
+            "statement_concession",
+            "awareness_time",
+            "returned_concession",
+            "concern_content"
+          ],
+          "target_kind": "UNKNOWN",
+          "target": "missing_explanation",
+          "$id": "u_add_statement_concession"
+        },
+        {
+          "ev": [
+            "q_action_link",
+            "q_memo_link",
+            "q_statement_concession",
+            "q_awareness_time",
+            "q_returned_concession",
+            "q_concern_content"
+          ],
+          "op": "ADD",
+          "prior": "@p0",
+          "replace": [
+            "action_link",
+            "memo_link",
+            "statement_concession",
+            "awareness_time",
+            "returned_concession",
+            "concern_content"
+          ],
+          "target_kind": "UNKNOWN",
+          "target": "missing_explanation",
+          "$id": "u_add_written_links"
+        },
+        {
+          "ev": [
+            "q_statement_concession"
+          ],
+          "op": "INVALIDATE_GAP",
+          "prior": "@p0",
+          "replace": [],
+          "target_kind": "UNKNOWN",
+          "target": "missing_explanation",
+          "$id": "u_invalidate_gap"
+        }
+      ],
+      "prose": {
+        "binds": [
+          {
+            "cr": [
+              "late_return",
+              "apologize",
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "rr": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "cr": [
+              "self_statement",
+              "late_awareness",
+              "no_contact",
+              "returned",
+              "counterfactual",
+              "continuing_concern"
+            ],
+            "rr": [
+              "statement_concession",
+              "awareness_time",
+              "returned_concession",
+              "concern_content"
+            ],
+            "section": "reception"
+          },
+          {
+            "cr": [
+              "self_statement",
+              "late_awareness",
+              "no_contact",
+              "returned",
+              "counterfactual",
+              "continuing_concern"
+            ],
+            "rr": [
+              "statement_concession",
+              "awareness_time",
+              "returned_concession",
+              "concern_content"
+            ],
+            "section": "update_note",
+            "ur": [
+              "u_add_self_statement",
+              "u_add_late_awareness",
+              "u_add_returned",
+              "u_add_statement_concession",
+              "u_add_written_links",
+              "u_invalidate_gap"
+            ]
+          }
+        ],
+        "observation": "遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、本人の原入力として保持します。",
+        "reception": "本人の新しい発言で、遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、追加された意味として受け取ります。",
+        "update_note": "本人の新しい発言で、遅れた本と謝ったこと、言ってくれた安心感、残る気持ちは、追加された意味として更新されました。"
+      }
+    }
+  },
+  "parse_error": null,
+  "provider": "local_transformers",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "adapter_revision": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+  "adoption_state": "NOT_ADOPTED",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "gold_assisted": true,
+  "eligible_for_full_generation_credit": false,
+  "expected_suffix_exact": false
+}

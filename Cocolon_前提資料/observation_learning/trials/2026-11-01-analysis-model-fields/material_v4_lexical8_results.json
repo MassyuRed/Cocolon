@@ -1,0 +1,57 @@
+{
+  "experiment": "material_v4_lexical8_20261103",
+  "decision": "NO_TRAINING_NO_NEW_ADOPTION",
+  "status": "TEACHERS_ALREADY_REACHED_NO_TRAINING",
+  "plan_commit": "d99c510adc9dc4f5dd6a17c6982f2d1c17d76171",
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "new_stop_responses": 8,
+  "model_loads": 1,
+  "training_updates": 0,
+  "measurement_forwards": 0,
+  "after_generations": 0,
+  "new_weights": false,
+  "seconds": 73.32091996259987,
+  "typed_reached": 8,
+  "explicit_target_children": 4,
+  "omitted_target_children": 4,
+  "teacher_json_values_equal": 4,
+  "graph_equal_to_teacher": 8,
+  "visible_equal_to_teacher": 8,
+  "saved_candidate_replays": 30,
+  "saved_typed_replays": 22,
+  "reused_before": 26,
+  "quality_repair_this_turn": false,
+  "this_turn_actual_totals": {
+    "new_stop_responses": 12,
+    "model_loads": 3,
+    "training_updates": 0,
+    "measurement_forwards": 16,
+    "seconds": 150.66323886159807,
+    "new_weights": 0
+  },
+  "initial_unchanged": true,
+  "original_zip": {
+    "bytes": 1019365,
+    "members": 213,
+    "sha256": "fa4eb2d3ca92ca9ab1ec9d1c9869689c5a8ce1e06c2491e726c7abf6973de1a0",
+    "manifest_hashes_verified": 212
+  },
+  "review_bundle": {
+    "library_file_id": "libfile_775a95523be8819184d779a8592bc819",
+    "bytes": 836906,
+    "sha256": "feb1d5444c165e7b0f4eb78be53157fdbbc95e4054f4742ce20c0afd99ae7231"
+  },
+  "combined_processing_cost_usd_at_previous_029_per_hour": 0.012136760908295399,
+  "actual_total_bill_measured": false,
+  "final_gpu": {
+    "memory_mib": 2,
+    "utilization_percent": 0,
+    "compute_apps": 0,
+    "rental_maintained": true
+  },
+  "normal_adoption": false,
+  "production_changes": 0,
+  "structure_map_delta": "NONE",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0
+}

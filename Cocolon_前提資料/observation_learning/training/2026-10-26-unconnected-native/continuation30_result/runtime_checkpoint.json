@@ -1,0 +1,15 @@
+{
+  "status": "RUN_CLOSED_REJECTED_CANDIDATE",
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "pid": 67437,
+  "optimizer_steps_completed": 30,
+  "model_calls_completed": 15,
+  "meaning": 11,
+  "body": 9,
+  "new6_body": 0,
+  "processing_seconds": 1578.9513461459428,
+  "retry": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "next_action": "Do not repeat this closed trial or authorize another LR/step-only trial automatically. Revisit the learning representation for long updates, source roles and natural text using existing originals; no additional observation session required now."
+}

@@ -17,14 +17,13 @@ export const ROUTE_REPORT_VIEW = "reportView";
 export const ROUTE_SELF_REPORT_HISTORY = "selfReportHistory";
 export const ROUTE_SELF_REPORT_VIEW = "selfReportView";
 export const ROUTE_SELF_REPORT_GENERATE = "selfReportGenerate";
-export const ROUTE_TODAY_QUESTION_HISTORY = "todayQuestionHistory";
 
 export const ANALYSIS_READY_LIMIT = 1;
 export const INITIAL_VISIBLE_REPORT_TYPE = "daily";
 export const REPORT_TYPE_LABEL = Object.freeze({
-  daily: "こころ天気（日）",
-  weekly: "こころ天気（週）",
-  monthly: "こころ天気（月）",
+  daily: "こころグラフ（日）",
+  weekly: "こころグラフ（週）",
+  monthly: "こころグラフ（月）",
 });
 export const ANALYSIS_READY_REPORT_TYPES = Object.freeze(["daily", "weekly", "monthly"]);
 
@@ -95,11 +94,6 @@ export function resolveAnalysisReportUpdatedAt(item) {
 export function resolveSelfStructureUpdatedAt(item) {
   if (!item || typeof item !== "object") return null;
   return item.generated_at || item.updated_at || item.period_end || item.created_at || null;
-}
-
-export function resolveTodayQuestionUpdatedAt(item) {
-  if (!item || typeof item !== "object") return null;
-  return item.edited_at || item.answered_at || item.updated_at || item.created_at || null;
 }
 
 export function formatLatestUpdateLabel(value) {

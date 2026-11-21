@@ -1,0 +1,10 @@
+{
+  "first_validate_only": "legacy_dataset_changed",
+  "different_file": "dataset_manifest.json",
+  "original_pod_manifest_sha256": "727fde1474c86c497e79ee3e6c8110dc8194b546f63fa8f238842701d848d69b",
+  "expected_manifest_sha256": "189fcc3a424731ad4074ef2901a6c8b5546913ea6410bbdca4e800fc73d6c867",
+  "training_steps_before_fix": 0,
+  "model_calls_before_fix": 0,
+  "training_output_existed": false,
+  "fix": "exact reference copy, old pack unchanged; runner/plan/targets unchanged"
+}

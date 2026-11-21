@@ -1,0 +1,36 @@
+{
+  "api_commit": "ccdd0a6cc955efa806929943e0e3d4845a44336c",
+  "all_fictional": true,
+  "state": "NOT_GENERATED",
+  "calls": [
+    {
+      "status": 200,
+      "elapsed_seconds": 31.11902506975457
+    },
+    {
+      "status": 503,
+      "elapsed_seconds": 61.09725120384246
+    }
+  ],
+  "first_leaf_finish": "stop",
+  "first_leaf_nodes": 1,
+  "first_leaf_evidence_fields": [
+    1,
+    1
+  ],
+  "merge_calls": 0,
+  "saved_artifacts": 0,
+  "normal_rollout": 0,
+  "original_provider_restored": true,
+  "restored_pid": 113612,
+  "full_seconds": 102.06631276709959,
+  "meaning_admitted": false,
+  "findings": [
+    "R1 long original draft, short sent version, and separately saved deleted explanation are conflated",
+    "The demonstrative following retained-example-number changes the target of the undecided next-distribution explanation",
+    "Only R1 supports the one node; independent remaining seven records not represented"
+  ],
+  "second_failure_cause": "UNCONFIRMED: native failed_ValueError only; local and real-tokenizer legal-field CPU replays passed",
+  "proven_separate_bug": "TokenEnforcer constructor resets force_json_field_order to false",
+  "next_direct_change": "restore intended order before first token; all-leaf topics and target/version preservation; code-location-only failure log"
+}

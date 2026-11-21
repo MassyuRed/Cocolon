@@ -1,0 +1,177 @@
+{
+  "schema_version": "analysis_negative_wish_results.v1",
+  "status": "LIMITED_CONSUMER_CONNECTION_VERIFIED",
+  "api_commit": "5c9606507d296adfe69fe0350c84a5d5deab585b",
+  "old_api_commit": "100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4",
+  "original_generation_api": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+  "runner_sha256": "991f7082643666eb89230aedf3d574d0618a588d425cdf79d2d1052ef3e64b70",
+  "runner_commit": "28c7345d4395bb68b0c7a866345f78288794ed3d",
+  "source_scope": {
+    "original_record_count": 1,
+    "original_source_count": 1,
+    "field_path": "MEMO",
+    "actor": "SELF",
+    "wish_polarities": [
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "wish_times": [
+      "CURRENT_INPUT",
+      "PAST"
+    ],
+    "complete_source_proof_required": true,
+    "full_root_negation_required_for_negative_wish": true,
+    "negation_qualifier_required": false,
+    "existing_verb_lemmas": 9,
+    "coexisting_action_scope": "POSITIVE_PAST_FACT_ONLY",
+    "shared_checker_unchanged": true,
+    "finite_grammar_unchanged": true,
+    "author_unchanged": true
+  },
+  "jupyter": {
+    "passed": 241,
+    "seconds": 67.0
+  },
+  "ci": {
+    "run": 42109915846,
+    "job": 127534442954,
+    "conclusion": "SUCCESS",
+    "generation_passed": 2386,
+    "generation_existing_skipped": 1,
+    "generation_subtests": 12048,
+    "generation_seconds": 379.76,
+    "owner_passed": 1,
+    "owner_seconds": 25.35,
+    "cumulative_passed": 302,
+    "cumulative_warnings": 1,
+    "cumulative_subtests": 2,
+    "cumulative_seconds": 155.08,
+    "isolated_sql_records": 201,
+    "isolated_sql_monthly": 15
+  },
+  "first_harness": {
+    "old_status": "COMPLETE_CPU_REPLAY_NOT_ADOPTED",
+    "new_status": "FAILED_CPU_REPLAY",
+    "new_guard_violations": 1,
+    "classification": "TUPLE_LIST_REPRESENTATION_COMPARISON_ARTIFACT",
+    "failed_roots_retained": true,
+    "raw_unchanged": true,
+    "product_source_changed_for_comparison": false,
+    "fix": "CANONICAL_JSON_COMPARISON_ONLY",
+    "model_calls": 0
+  },
+  "fresh_canonical_replay": {
+    "responses_each": 4,
+    "old_seconds": 1.2956920014694333,
+    "new_seconds": 1.3430801378563046,
+    "old_guard_violations": 0,
+    "new_guard_violations": 0,
+    "new_generation": 0,
+    "model_loads": 0,
+    "new_training": 0,
+    "original_inputs_and_responses_exact": true,
+    "raw_repaired": false,
+    "response_rebound": false,
+    "negation_qualifiers_added": 0,
+    "cases": [
+      {
+        "id": "WH01",
+        "old_status": "UNSUPPORTED",
+        "new_status": "UNSUPPORTED",
+        "original_response_and_binding_exact": true,
+        "old_mapped": 0,
+        "new_mapped": 0,
+        "new_unparsed": 1,
+        "raw_sha256": "136bb798e520e0fc2d297fd280434d9c728445d6104de9253b15909dfecf07bb"
+      },
+      {
+        "id": "WH02",
+        "old_status": "OBSERVED_MAP",
+        "new_status": "OBSERVED_MAP",
+        "original_response_and_binding_exact": true,
+        "old_mapped": 1,
+        "new_mapped": 1,
+        "new_unparsed": 0,
+        "raw_sha256": "44e281a38d7791c41697c1fd70357bbe5c3452ec1a937d63f7d056899245fe5b"
+      },
+      {
+        "id": "WH03",
+        "old_status": "UNSUPPORTED",
+        "new_status": "UNSUPPORTED",
+        "original_response_and_binding_exact": true,
+        "old_mapped": 0,
+        "new_mapped": 0,
+        "new_unparsed": 1,
+        "raw_sha256": "f69441007e6d915a2b04b8806fbc73eb17f44662b527eb76a30677c1c6ec89f4"
+      },
+      {
+        "id": "WH04",
+        "old_status": "UNSUPPORTED",
+        "new_status": "OBSERVED_MAP",
+        "original_response_and_binding_exact": true,
+        "old_mapped": 0,
+        "new_mapped": 1,
+        "new_unparsed": 0,
+        "raw_sha256": "c589c2bfdbc9a764d2b6066aab302d4ed07a5573cc7ce0dbadeb981d8391b94b"
+      }
+    ],
+    "changed_case": "WH04",
+    "changed_actor": "SELF",
+    "changed_polarity": "NEGATIVE",
+    "changed_modality": "WISH",
+    "changed_time": "CURRENT_INPUT",
+    "changed_nodes": 1,
+    "positive_past_WH02_full_canonical_map_and_coverage_equal": true,
+    "equality_excluded_runtime_value": "ARTIFACT_PROJECTION_OF_ONLY"
+  },
+  "recovered_replay_archives": [
+    {
+      "label": "OLD_INITIAL_HARNESS",
+      "bytes": 52840,
+      "sha256": "21e9c93250cd96176e93f6375ad5d2b1266b978d0088a885f5fecf0fb7bb1079",
+      "members": 22,
+      "manifest_verified": 21,
+      "crc_verified": true
+    },
+    {
+      "label": "NEW_INITIAL_HARNESS",
+      "bytes": 54643,
+      "sha256": "e7839b531e1aee0f29603daae84677f3044fd06487364123c269f2136692f1fd",
+      "members": 22,
+      "manifest_verified": 21,
+      "crc_verified": true
+    },
+    {
+      "label": "OLD_CANONICAL_HARNESS",
+      "bytes": 52948,
+      "sha256": "ced47a6f03f189b49f6c42c744e16fce0507e5003936085eef9c696e5ec63230",
+      "members": 22,
+      "manifest_verified": 21,
+      "crc_verified": true
+    },
+    {
+      "label": "NEW_CANONICAL_HARNESS",
+      "bytes": 54553,
+      "sha256": "9a4a0d5eb495e98b99c9be3a8e175f0a193ce0625cc6f7b1b8ca166e4776069f",
+      "members": 22,
+      "manifest_verified": 21,
+      "crc_verified": true
+    }
+  ],
+  "private_archive": {
+    "version": 7,
+    "saved": true,
+    "bytes": 31822535,
+    "sha256": "d7dd58732f847f40d16e9274b0c14ad5721be874030443270c6425b1bdff0b11"
+  },
+  "api_calls": 0,
+  "database_access": 0,
+  "saved_maps": 0,
+  "production_writes": 0,
+  "builds": 0,
+  "deployments": 0,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "general_quality_claim": false,
+  "structure_map_delta": "NONE_EXISTING_CONSUMER_PROOF_ONLY"
+}

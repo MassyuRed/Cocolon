@@ -1,0 +1,927 @@
+{
+  "reviewer": "Karen/root",
+  "scope": "all15 actual raw bodies/questions/updates, teacher and previous comparison, actual CMEE outcomes",
+  "formal_human_or_independent_Pro_Ultra_acceptance": false,
+  "product_accepted": false,
+  "old9_observation": "全raw_textは前回と同一、全packetは教師と一致。chair初回のsolo喜びと実問い、訂正の友人指導/共同修理・再利用喜び・3更新、dailyの温かい食事と少し落ち着く/問いなしを維持。九つの独立題材ではなくchair二段階×3IDとdaily×3ID。繰り返しのある受容表現の自然さを新規改善としない。",
+  "new6_observation": "4題材6stageの既知FIT。意味採用2/6・本文0/6。BOOK初回unknown_id衝突、回答後根拠参照/1対7更新、SHOP回答後duplicate keyとtarget欠落、REPOT本文主客反転、KNIT scope未採用と同文反復が残る。",
+  "limits": [
+    "回答後priorは凍結教師由来。実初回の生成snapshotからの動的一往復ではない。",
+    "cold11は本文なし2件を含む。通常service/SQL保存や端末成功ではない。",
+    "loss低下・全EOS・教師FITを未知一般化や商品品質に換算しない。"
+  ],
+  "conclusion": "Same11/9; candidate d431a07c not promoted; no new observation session currently justified.",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "raw_record_sha256": "e2a5bc96927d1252c1a6322486038834783faffbebe32c6f5b218debafd98cf9",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "question_proposal": {
+        "claim_refs": [
+          "solo_appraisal_object",
+          "joy"
+        ],
+        "focus": "PERSONAL_JOY_SIGNIFICANCE",
+        "target_unknown_ref": "personal_significance",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "raw_record_sha256": "e4936e81b4c0b9e68c99d9276442697591caeacae914d82af30349254c919120",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            6,
+            7,
+            8
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+          "replacement_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "target_kind": "CLAIM",
+          "target_ref": "solo_appraisal_object"
+        },
+        {
+          "evidence_indexes": [
+            10,
+            11
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+          "replacement_refs": [
+            "joy_ground_revised"
+          ],
+          "target_kind": "RELATION",
+          "target_ref": "joy_ground"
+        },
+        {
+          "evidence_indexes": [
+            6,
+            11
+          ],
+          "operation": "INVALIDATE_GAP",
+          "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+          "replacement_refs": [],
+          "target_kind": "UNKNOWN",
+          "target_ref": "personal_significance"
+        }
+      ],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "raw_record_sha256": "70b8771d63cc5a215ec9d1472bdc7211fce77cf500b36228f4d9cb778ac1afbd",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "question_proposal": {
+        "claim_refs": [
+          "solo_appraisal_object",
+          "joy"
+        ],
+        "focus": "PERSONAL_JOY_SIGNIFICANCE",
+        "target_unknown_ref": "personal_significance",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "raw_record_sha256": "1fc0475f60b79dfac008e3311dc7289a3ded987f3466fcc63d0b9e00b406b3f3",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            6,
+            7,
+            8
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-953d22eba916b63075bee3c744d5a36c36c270b36efc5d334e79e5a3daf11628",
+          "replacement_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "target_kind": "CLAIM",
+          "target_ref": "solo_appraisal_object"
+        },
+        {
+          "evidence_indexes": [
+            10,
+            11
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-953d22eba916b63075bee3c744d5a36c36c270b36efc5d334e79e5a3daf11628",
+          "replacement_refs": [
+            "joy_ground_revised"
+          ],
+          "target_kind": "RELATION",
+          "target_ref": "joy_ground"
+        },
+        {
+          "evidence_indexes": [
+            6,
+            11
+          ],
+          "operation": "INVALIDATE_GAP",
+          "prior_snapshot_ref": "semantic-953d22eba916b63075bee3c744d5a36c36c270b36efc5d334e79e5a3daf11628",
+          "replacement_refs": [],
+          "target_kind": "UNKNOWN",
+          "target_ref": "personal_significance"
+        }
+      ],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "raw_record_sha256": "d378bfd82491a8d77c9062e30e5e50d0d4217f71dc7aaf9efc7f8410767115aa",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "question_proposal": {
+        "claim_refs": [
+          "solo_appraisal_object",
+          "joy"
+        ],
+        "focus": "PERSONAL_JOY_SIGNIFICANCE",
+        "target_unknown_ref": "personal_significance",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "raw_record_sha256": "365b4bbdaaa9a7041d4faab5151e5875e920cfc2bb6cb9f2cab51e38baf10ba3",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            6,
+            7,
+            8
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-322c10bb6e50aca32c6f5e3d428a995fa754b17e9f90528a71204e189475ee8d",
+          "replacement_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "target_kind": "CLAIM",
+          "target_ref": "solo_appraisal_object"
+        },
+        {
+          "evidence_indexes": [
+            10,
+            11
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-322c10bb6e50aca32c6f5e3d428a995fa754b17e9f90528a71204e189475ee8d",
+          "replacement_refs": [
+            "joy_ground_revised"
+          ],
+          "target_kind": "RELATION",
+          "target_ref": "joy_ground"
+        },
+        {
+          "evidence_indexes": [
+            6,
+            11
+          ],
+          "operation": "INVALIDATE_GAP",
+          "prior_snapshot_ref": "semantic-322c10bb6e50aca32c6f5e3d428a995fa754b17e9f90528a71204e189475ee8d",
+          "replacement_refs": [],
+          "target_kind": "UNKNOWN",
+          "target_ref": "personal_significance"
+        }
+      ],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "raw_record_sha256": "528f6bcfa217e911987a419d6ec3d3683b4368898e52b124b7ccdd8406060d70",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "question_proposal": null,
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "raw_record_sha256": "3679c0f9943c8bb769ee123acb45dae8ffd071d203b008ba596631f845c72e2c",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "question_proposal": null,
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "raw_record_sha256": "e0b3e94fb6fc9656ea3a349d304137117c3c947476e1ea208642973913b8c71a",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "question_proposal": null,
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": true
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "raw_record_sha256": "1278dd0e533fc29d59373c68710c320a379e20cc030adc535d25bc20d9241c18",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "late_return",
+              "apologize",
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reassurance_received",
+              "remaining_concern"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "遅れた本の返却と謝罪、そして「大丈夫」という安心感を受け取り、その後に残る気持ちは自分自身のものとして認識します。",
+        "reception": "返した本と、その後の会話の記憶は、その場での出来事として受け止め、現在の気持ちはそれとは別物として保持します。",
+        "update_note": null
+      },
+      "question_proposal": {
+        "claim_refs": [
+          "remaining_concern"
+        ],
+        "focus": "PERSONAL_CONCERN_TARGET",
+        "target_unknown_ref": "remaining_concern",
+        "text": "何が気になりますか？"
+      },
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": false,
+      "actual_body_available": false
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "raw_record_sha256": "3f055d9c94da3adad2b3d0ac177b87539d4ab108a797f1a37ccb6ff224006eaf",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "returned",
+              "late_return",
+              "apologize",
+              "reassurance_received"
+            ],
+            "relation_refs": [
+              "returned_concession",
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "late_awareness",
+              "no_contact",
+              "self_statement",
+              "returned",
+              "counterfactual",
+              "continuing_concern"
+            ],
+            "relation_refs": [
+              "awareness_time",
+              "statement_concession",
+              "returned_concession",
+              "concern_content"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "late_return",
+              "apologize",
+              "reassurance_received",
+              "remaining_concern",
+              "self_statement",
+              "late_awareness",
+              "no_contact",
+              "returned",
+              "counterfactual",
+              "continuing_concern"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link",
+              "statement_concession",
+              "awareness_time",
+              "answer_explains_target",
+              "returned_concession",
+              "concern_content"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        ],
+        "observation": "遅くてごめんね。友人に謝ったし、本も返したし、大丈夫って言ってくれたのよ。",
+        "reception": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったこと、そして「一言、遅くなるって伝えておけばよかったな」と、まだ気になっていますのよ。",
+        "update_note": "気がかりの対象は未記載です。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            13
+          ],
+          "operation": "ADD",
+          "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+          "replacement_refs": [
+            "remaining_concern",
+            "answer_explains_target"
+          ],
+          "target_kind": "UNKNOWN",
+          "target_ref": "missing_explanation"
+        }
+      ],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": false,
+      "actual_body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "raw_record_sha256": "87d6bba7bb58082df8a31c97aca2293b6ea9ca45c3e110873f8ed873a641759a",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。",
+        "reception": "お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれたように感じたのですか。",
+        "update_note": null
+      },
+      "question_proposal": {
+        "claim_refs": [
+          "felt_left_behind"
+        ],
+        "focus": "PERSONAL_FEELING_REASON",
+        "target_unknown_ref": "missing_reason",
+        "text": "「少し置いていかれた気がした」のはなぜですか？"
+      },
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "raw_record_sha256": "c7ad3b8aab2a0ac0bdc61c13fbedbe2a505365795a4312fb0107c2051440d2a4",
+      "strict_json": false,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "shared_talk",
+              "perceived_realization",
+              "answer_joy",
+              "felt_distance",
+              "answer_sadness"
+            ],
+            "relation_refs": [
+              "past_reference",
+              "answer_concession",
+              "answer_explains_target",
+              "distance_link"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "no_joint_preparation",
+              "no_promise"
+            ],
+            "relation_refs": [
+              "no_promise"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1
+            ]
+          }
+        ],
+        "observation": "昔からの友人が店を開いたと知って、お祝いのメッセージを送ったのですね。うれしかったのですね。少し置いていかれた気がしたのですね。",
+        "reception": "「いつか店をやれたらいいね」と話していたのですね。一緒に準備をしていたわけでも、約束していたわけでもありません。二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+        "update_note": "一緒に準備をしていたわけでも、約束していたわけでもありません。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            6,
+            7,
+            8
+          ],
+          "operation": "ADD",
+          "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+          "replacement_refs": [
+            "shared_talk",
+            "no_joint_preparation",
+            "no_promise"
+          ]
+        },
+        {
+          "evidence_indexes": [
+            11,
+            12,
+            13,
+            14
+          ],
+          "operation": "ADD",
+          "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+          "replacement_refs": [
+            "answer_concession",
+            "answer_explains_target",
+            "distance_link",
+            "past_reference"
+          ]
+        },
+        {
+          "evidence_indexes": [
+            15
+          ],
+          "operation": "INVALIDATE_GAP",
+          "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+          "replacement_refs": [
+            "answer_explains_target"
+          ]
+        },
+        {
+          "evidence_indexes": [
+            16,
+            17,
+            18
+          ],
+          "operation": "INVALIDATE_GAP",
+          "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+          "replacement_refs": [
+            0,
+            1
+          ]
+        }
+      ],
+      "static_parse_only_for_duplicate_key_case": true,
+      "actual_meaning_adopted": false,
+      "actual_body_available": false
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "raw_record_sha256": "e330a9ff65d63f8a09eddeb5332916c5a81a12574181ef5558f82ae65efbf809",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "guidance_received",
+              "listened_to_end"
+            ],
+            "relation_refs": [
+              "action_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "understood_method",
+              "relief"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "叔父に植え替えの手順を説明し、最後まで聞かせてください。",
+        "reception": "やり方が分かって安心しました。",
+        "update_note": null
+      },
+      "question_proposal": null,
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": true,
+      "actual_body_available": false
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "raw_record_sha256": "85c4e8272379514b0bd4f0a10c499aa280624d89f768aaf27583317307a9be4f",
+      "strict_json": true,
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "unravelled",
+              "burden",
+              "sadness",
+              "stated_unknown"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "unravelled",
+              "burden",
+              "sadness",
+              "stated_unknown"
+            ],
+            "relation_refs": [],
+            "section": "reception"
+          }
+        ],
+        "observation": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒で、さみしさも少しあったと聞けて、少し安心しました。二つがどうつながるかは、自分でも分からないと明言して、そのままでいいと受け止めます。",
+        "reception": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒で、さみしさも少しあったと聞けて、少し安心しました。二つがどうつながるかは、自分でも分からないと明言して、そのままでいいと受け止めます。",
+        "update_note": null
+      },
+      "question_proposal": null,
+      "updates": [],
+      "static_parse_only_for_duplicate_key_case": false,
+      "actual_meaning_adopted": false,
+      "actual_body_available": false
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "cocolon.auxiliary_reuse.focus_cognition_results.v1",
+  "date": "2026-11-08",
+  "status": "AR01_IN_PROGRESS_NOT_NORMAL_ADOPTION",
+  "api_commit": "e14d4fec18394e5257508f3e92100f9cc1bf536e",
+  "api_changed_paths": 8,
+  "normal_meaning_support": false,
+  "live_render_commit": "497f7008fec8935885d09d2e430499892189b5bb",
+  "canonical_private_prototype_not_in_api": true,
+  "source_constructs_known_during_development": true,
+  "unseen_blind_evaluation": false,
+  "mash_formal_acceptance": false,
+  "local_targeted_tests": {
+    "meaning": 111,
+    "cognition": 47,
+    "budget": 21,
+    "application_real_pglite": 58,
+    "total": 237
+  },
+  "ci": [
+    {
+      "id": 42480572923,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42480572923"
+    },
+    {
+      "id": 42480572924,
+      "name": "Analysis observed content",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42480572924"
+    }
+  ],
+  "source_identities": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "ba42229e0a4d5e815eddce0046aa51a2cae9d3cf35dc74bc5717b651cd3a02b5",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py": "66356c9dcbb0533bf0421ff36e4b0c79a4f205d0f0971905d61f4653cc777889",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_cognition.py": "6d0a9f61527d61f3e71dd12b5f1546612b023ebc139038d583be216c89dd947e"
+  },
+  "new_generations": 38,
+  "comparison32": {
+    "sources": 16,
+    "baseline": 16,
+    "structured_candidate": 16,
+    "new_generations": 32,
+    "seconds": 49.554327251855284,
+    "http200_stop": 32,
+    "hint_sources": 11,
+    "no_hint_sources": 5,
+    "no_hint_messages_and_bodies_identical": 5,
+    "adopted": false
+  },
+  "canonical6": {
+    "new_generations": 6,
+    "seconds": 9.090524642029777,
+    "http200_stop": 6,
+    "joint_representation_and_system_change": true,
+    "single_factor_causal_claim": false,
+    "adopted": false,
+    "sql_replay_executed": false
+  },
+  "new_training_updates": 0,
+  "new_model_loads": 0,
+  "provider_retry": 0,
+  "source_pid_weights_unchanged": true,
+  "final_health_http_status": 200,
+  "sql_replay": {
+    "captured_replies": 32,
+    "final_saved_same_and_new_service_reopened": 32,
+    "captured_messages_exact": 32,
+    "normal_preparation": 16,
+    "research_opt_in_preparation": 16,
+    "capture_user_id_projection_source_ref_differences": 32,
+    "both_refs_retained_privately": true,
+    "get_provider_reader_engine_calls": 0,
+    "private_report_not_in_public": true,
+    "analysis_state": "NOT_GENERATED",
+    "new_generations": 0,
+    "real_database_requests": 0
+  },
+  "limited_comparison": {
+    "reply_reports": 32,
+    "no_conflict_in_checked_scope": 4,
+    "unassessed": 28,
+    "conflict": 0,
+    "clauses": 52,
+    "parsed": 5,
+    "checked": 4,
+    "unassessed_clauses": 48,
+    "full_reply_coverage": false,
+    "general_cognition_comparison": false
+  },
+  "render_db_rn_build_changes": 0,
+  "all_auxiliary_assets_complete": false
+}

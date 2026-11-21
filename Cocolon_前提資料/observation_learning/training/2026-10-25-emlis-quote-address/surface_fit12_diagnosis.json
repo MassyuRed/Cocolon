@@ -1,0 +1,140 @@
+{
+  "schema": "cocolon.quote_surface_fit12_diagnosis.v1",
+  "source_commit": "1d5b971ffbf01b4594c1860c1f4b0bf25bf3b989",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "source_raw_sha256": "bbc7e04ce9148b0a75f2a07d70dd0c7615edab55d90507bf37f54ec84e4e687a",
+  "source_raw_unchanged": true,
+  "previous_meaning_count": 9,
+  "previous_body_count": 8,
+  "rows": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 1375
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 2331
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 1375
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 2334
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 1365
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 2340
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 1586
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "parsed_teacher_equal": false,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 1557,
+      "actual_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べた。",
+        "reception": "あったかいものを食べて、少し落ち着けてよ。",
+        "update_note": null
+      },
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "parsed_teacher_equal": true,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "completion_tokens": 1599
+    }
+  ],
+  "hypothesis_not_causally_proven": "Daily objective did not supervise the complete observation; free generation diverged from the teacher prefix while local teacher-forced NLL decreased. Train observation/reception and their connectors together.",
+  "new_observation_session_required_for_this_fix": false,
+  "independent_language_stories": 2,
+  "piece_analysis_complete_teachers": 0,
+  "new_gpu_or_model_calls": 0,
+  "gpu_run_authorized": false
+}

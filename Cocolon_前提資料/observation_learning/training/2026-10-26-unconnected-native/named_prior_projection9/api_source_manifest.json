@@ -1,0 +1,26 @@
+{
+  "api_commit": "c4e1ccb2768425d150c5848e9232e849dd3dc964",
+  "base_api_commit": "64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4",
+  "files": [
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py",
+      "sha256": "a657b7d30ad3c23a5ae701844c0cf79a2dd1ac0b2e4e82dab1703e07986407d1"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py",
+      "sha256": "d181b4e7d578b7a29ff8e458c8df5aea09690c2fc118e07acb4780e9f8841eca"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py",
+      "sha256": "793610d7bc1b2117409fddf356d745cd4a72b2cfaae9f63cd65156b9e4a9fd85"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/named_reference_wire.py",
+      "sha256": "c8109cd2fa3745ac32e7d2a72931f75a8e02e5acbc844933b376513464d9b6e3"
+    },
+    {
+      "path": "ai/tests/test_cmee_named_reference_candidate.py",
+      "sha256": "2cf8a445699556fb77a62badcca8f001e88b85c432c8d6be5e489c2453fccd37"
+    }
+  ]
+}

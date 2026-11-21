@@ -1,0 +1,23 @@
+{
+  "pid": 421923,
+  "source_commit": "11fe849e924c1a05d0f117917c807a1dbf73a7fa",
+  "command": [
+    "/usr/local/bin/python",
+    "/workspace/cocolon_4b_evidence_binding_pack_20261025/run_evidence_end_fit.py",
+    "--directory",
+    "/workspace/cocolon_4b_evidence_binding_pack_20261025",
+    "--parent-pack",
+    "/workspace/cocolon_4b_service_binding_pack_20261025",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--initial-adapter",
+    "/workspace/cocolon_4b_service_binding_fit12_20261025/adapter",
+    "--source-commit",
+    "11fe849e924c1a05d0f117917c807a1dbf73a7fa"
+  ],
+  "max_updates": 6,
+  "max_fit_generations": 6,
+  "max_seconds": 1800,
+  "scope": "EVIDENCE_TABLE_AND_REFERENCES",
+  "gpu_stop": false
+}

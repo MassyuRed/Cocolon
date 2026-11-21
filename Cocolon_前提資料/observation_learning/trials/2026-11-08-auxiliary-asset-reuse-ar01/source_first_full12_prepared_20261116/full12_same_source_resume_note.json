@@ -1,0 +1,178 @@
+{
+  "state": "OFFLINE_SQL_PREACQUISITION_AND_RESTART_VERIFIED__MODEL_AND_COMMIT_NOT_RUN",
+  "script": {
+    "path": "/workspace/scratch/8262f97b141c/preparation/full12_same_source_checkpoint.py",
+    "bytes": 11427,
+    "sha256": "5c2fa4111d64a5e2f3a8d462d8500f4d2c834bb93c411eb9de4bfeb087b83578"
+  },
+  "root": "/workspace/scratch/8262f97b141c/preparation/full12_sql_preacquisition_20261116",
+  "existing_runtime": {
+    "python": "/workspace/scratch/ee70446ad6c2/testvenv/bin/python",
+    "dependency_path": "/workspace/scratch/de51a43af552/qa_dependencies",
+    "pglite_module": "/workspace/scratch/ee70446ad6c2/testdeps/node_modules/@electric-sql/pglite",
+    "node_observed": "v24.22.1",
+    "new_dependencies": 0
+  },
+  "artifacts": {
+    "pre_acquisition.input.json": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_preacquisition_20261116/pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "pre_acquisition.plan.json": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_preacquisition_20261116/pre_acquisition.plan.json",
+      "bytes": 162040,
+      "sha256": "f3bf5357ca01be6acf127beea4297857369cf1d4c4fbdaa40a87de75ca2949d4"
+    },
+    "pre_acquisition.pglite.gz": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_preacquisition_20261116/pre_acquisition.pglite.gz",
+      "bytes": 4835570,
+      "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485"
+    },
+    "pre_acquisition.receipt.json": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_preacquisition_20261116/pre_acquisition.receipt.json",
+      "bytes": 2480,
+      "sha256": "424e364517529de78960faa9d9f8895641a7eaf71a6d5631b4e4adab358e9ff9"
+    },
+    "pre_acquisition.restart_verified.json": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_preacquisition_20261116/pre_acquisition.restart_verified.json",
+      "bytes": 620,
+      "sha256": "9eb1f06995dd130875ec7c355d1a693fcdf5824ec8b57545799d9f735c5e2dd1"
+    }
+  },
+  "completed": {
+    "sql_snapshot_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "archived_input_guard": "analysis-db-cumulative-v1:a000deb9eb2e8bd23f8e4f91661d8b374f4853b691cdfad941e11f5eb211cb07",
+    "archived_guard_equals_new_sql_guard": true,
+    "guard_origin": "Fresh actual isolated PostgreSQL RPC; do not infer archived guard provenance.",
+    "clock_after_restart_changed": true,
+    "frozen_sql_snapshot_and_exact_leaf_messages_reproduced": true,
+    "fictional_original_count": 12,
+    "artifact_rows": 0,
+    "monthly_rows": 0,
+    "model_calls": 0,
+    "hosted_database_calls": 0,
+    "api_edits": 0
+  },
+  "current_plan": {
+    "parent_request_ref": "analysis-semantic-request:4654ca3faa2276e6173027b46713c568ded2ccfcc794b030606acc2c895a4964",
+    "prompt_version": "semantic_map.v1",
+    "leaf_count": 12,
+    "fresh_model_calls_required": 13,
+    "records_per_leaf": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "leaf_message_bytes": [
+      13166,
+      13129,
+      13165,
+      13141,
+      13145,
+      13191,
+      13135,
+      13109,
+      13203,
+      13255,
+      13219,
+      13323
+    ],
+    "old_receipt_reuse": 0,
+    "tokenizer_capacity_measurement": "NOT_RUN_IN_THIS_OFFLINE_SQL_PREPARATION"
+  },
+  "reuse_exact_helpers": [
+    "ai/tests/test_emlis_q2_application.py:Database.dump_checkpoint/Database(checkpoint_path=...)",
+    "ai/tests/helpers/emlis_q2_postgres.cjs:dumpDataDir(gzip)/loadDataDir",
+    "ai/tests/test_analysis_cumulative_model_source.py:sql_source migration/RPC pattern",
+    "ai/tests/test_analysis_semantic_history_service.py:history_db/source->LEAF->MERGE->one atomic commit/non-generating reads",
+    "ai/tests/test_analysis_interpretation_correction_sources.py:sql_script"
+  ],
+  "frozen_source_hashes": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "9e6eb77154ace9fb5b20fdd4630d5ab4b44c9d55e91cfd7512a11de67edda49e",
+    "ai/services/ai_inference/analysis_model_source.py": "c1106527165bfd6fd67e3ed1506178ba56c6ec16948f207f06c5816ec842cd35",
+    "ai/services/ai_inference/analysis_semantic_map.py": "c03cdd391b24d2ee19d68a7d93eaf59ffa26b558a83b1cd585900ab2462d7395",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "138f54c9c8800e970bae69a81e2a696c45f7515687636daae0e5fa8085512f10",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "8f39bd56a145cbb23065e49b9961ddf76127b85be50b7da2211314859126126e",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "8193bdf778b41563e3b4970b064d59d92323698257be85e6394e7bc6d5094ddd",
+    "ai/tests/helpers/emlis_q2_postgres.cjs": "7d4c6dc48f6b08c10e68fef74b79f6aa34985e96135624c23e4056a05ff6b079"
+  },
+  "future_sequence": [
+    "First complete the independently prepared small same-source probe and assess whether its targeted two conditions are adequate in bounded independent source/raw review. This is not human/Mash product acceptance or general quality. The actual upload auto-review rejection is not bypassed by this offline harness.",
+    "Before any full12 model acquisition, verify checkpoint/input/plan/source hashes and explicit scope for 12 fresh LEAF calls plus 1 fresh MERGE call; this is separate from any max2 diagnostic authority.",
+    "Use exact frozen SQL snapshot including original now/period_end. A fresh SQL read is only a current guard/source check, never replacement model material. Do not derive a new Python guard or edit acquired raw.",
+    "Use direct exact-type SelfHostedSemanticAnalysisModelSource; capture wire/raw at MockTransport without wrapping the callable. Stop on unknown acknowledgement; no stale LEAF receipts, retries or fallback.",
+    "Retain all fresh request/message/response hashes and raw; review original full inputs, all LEAF outputs and final map before any write. Completion/record coverage alone is not meaning acceptance.",
+    "In a separately restored pre-acquisition DB, verify current SQL guard and replay only those exact approved new wire/response bodies through the same source/core. Pin the realizer UUID only to the approved actual artifact identity when comparing exact projection, never mutate source/raw.",
+    "After exact artifact/coverage/text/private comparison, call analysis_cumulative_commit exactly once with original guard, frozen period_start/end and normal projection/private/coverage/source_record_refs. Do not run the old replay_saved_history.py.",
+    "Require one artifact and monthly reference, dump a new postcommit checkpoint, then restore it in another process and use read_maps for current/detail/month non-generating rereads. Avoid ensure_map because reuse may commit another monthly capture."
+  ],
+  "deadlines": {
+    "native_default_seconds": 210,
+    "http_timeout_seconds": 220,
+    "typed_request_seconds": 225,
+    "shared_semantic_pipeline_seconds": 840,
+    "worker_default_stale_seconds": 900,
+    "worker_age_basis": "started_at before updated_at; no heartbeat extension",
+    "outside_semantic_clock": [
+      "source SQL load",
+      "surrounding preparation",
+      "atomic commit",
+      "saved reread",
+      "notification"
+    ],
+    "normal_rollout_requirement": "Measure full job and confirm configured stale threshold; existing1800 setting is a candidate, not applied here. 840<900 does not prove lease safety.",
+    "gpu_trial_requirement": "Separate finite acquisition deadline and reserved restoration; 900 total is not840 acquisition plus unbounded cleanup.",
+    "thirteen_requests_at_per_call_cap": "Cannot guarantee every request its full225s inside shared840. A deadline/failure must leave zero saved partial artifacts."
+  },
+  "not_done": [
+    "No GPU/HTTP/model execution",
+    "No actual raw replay or save",
+    "No production DB/API/worker/deploy",
+    "No fresh-tokenizer capacity measurement",
+    "No completion claim for full12 work unit or auxiliary work",
+    "No new full13-call authority or automatic meaning acceptance"
+  ],
+  "local_helper_portability": {
+    "repo_selection": "COCOLON_WORK_API_REPO optional; default priorlocal checkout",
+    "receipt_paths": "Historical metadata only; actual input/plan/checkpoint resolved from supplied --root filenames and checked by bytes+SHA, never rewritten",
+    "relocated_root_verified": true,
+    "verification_receipt": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_relocation_verified.json",
+      "bytes": 620,
+      "sha256": "853275deb1e9b99d936e05ce5b86ed1c99cfadfe9faa44f98f1df5bee909dbad"
+    }
+  },
+  "conditional_pod_runner": {
+    "state": "PREPARED_LOCAL_NOT_UPLOADED_NOT_EXECUTED",
+    "launcher": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_source_first_once.py",
+      "bytes": 29826,
+      "sha256": "72f5cb7d6818cfcfd6147a2c945452da5e7742f1a3636f3bf2ffea8eef575344"
+    },
+    "input": {
+      "path": "/workspace/shared/cocolon-full12-sql-source-first-20261116/full12-sql.pre_acquisition.input.json",
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "total_upload_bytes": 88972,
+    "scope": {
+      "path": "/workspace/scratch/8262f97b141c/preparation/full12_sql_source_first_action_scope.json",
+      "bytes": 2899,
+      "sha256": "492b0faad6b2cb35dc5c0a612d11d65d70eca6387a6c45eb87d1e71b6864af86"
+    },
+    "predecessor": "Completed 2condition source-first probe with exact identities and stop/GENERATED; its targeted meanings must first be adequate on bounded independent review. This does not equal human/Mash product acceptance or general quality.",
+    "model_call_maximum": 13,
+    "source_model_calls": 0,
+    "restore_inclusive_seconds": 1020
+  }
+}

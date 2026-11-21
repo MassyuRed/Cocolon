@@ -1,0 +1,69 @@
+{
+  "schema": "cocolon.daily_focus12_static_comparison.v1",
+  "static_only": true,
+  "new_model_calls": 0,
+  "raw_repaired": false,
+  "downstream_gate_reexecuted": false,
+  "source_raw_sha256": "6eff35d6042764f8437af8dbb11b82441d2c9fc5818095a670fb68feb3ce96cb",
+  "prior_raw_sha256": "bdf4f684517a351c2cd13b8ce13cdbfc5df0c90e33f92db1a6cd017b3aa59da6",
+  "chair_raw_exactly_unchanged": true,
+  "cases": [
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "old_valid_evidence": 2,
+      "old_evidence_count": 8,
+      "new_valid_evidence": 7,
+      "new_evidence_count": 8,
+      "teacher_differences": [
+        {
+          "path": "/candidate/surface_proposal/reception",
+          "actual": "あったかいものを食べて、少し落ち着いたのですね。",
+          "teacher": "あったかいものを食べて、少し落ち着けてよかったです。"
+        },
+        {
+          "path": "/evidence/1/start",
+          "actual": 7,
+          "teacher": 6
+        }
+      ]
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "old_valid_evidence": 2,
+      "old_evidence_count": 8,
+      "new_valid_evidence": 8,
+      "new_evidence_count": 8,
+      "teacher_differences": [
+        {
+          "path": "/candidate/surface_proposal/reception",
+          "actual": "あったかいものを食べて、少し落ち着いたのですね。",
+          "teacher": "あったかいものを食べて、少し落ち着けてよかったです。"
+        }
+      ]
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "old_valid_evidence": 1,
+      "old_evidence_count": 11,
+      "new_valid_evidence": 6,
+      "new_evidence_count": 8,
+      "teacher_differences": [
+        {
+          "path": "/candidate/surface_proposal/reception",
+          "actual": "あったかいものを食べて、少し落ち着いたのですね。",
+          "teacher": "あったかいものを食べて、少し落ち着けてよかったです。"
+        },
+        {
+          "path": "/evidence/1/start",
+          "actual": 5,
+          "teacher": 6
+        },
+        {
+          "path": "/evidence/6/start",
+          "actual": 11,
+          "teacher": 10
+        }
+      ]
+    }
+  ]
+}

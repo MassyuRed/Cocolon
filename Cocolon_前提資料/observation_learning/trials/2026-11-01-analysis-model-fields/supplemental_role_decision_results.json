@@ -1,0 +1,1163 @@
+{
+  "schema_version": "cocolon.analysis.supplemental_role_decision.public_results.v1",
+  "date": "2026-11-05",
+  "scope": "Four new synthetic saved-source contexts for complete ordinary supplemental SELF past responsibility ROLE and decision ACTION; same received v6 responses on old and new consumers, not a language-quality comparison.",
+  "provenance": "Karen synthetic; AC01/AC02 reuse previously tested CP01/CP02 clauses in new parent-answer contexts; no training target, held-out quality sample, or private user record; raw/request/messages are private evidence.",
+  "api_commit": "bb121484d9c9f0d0fb52b1e666d21fd4dab81be9",
+  "before_api_commit": "8efd07e6ce76bfdb594a2d2a3b521e87b9889596",
+  "runner_commit": "6ad7c0f57a36488ff0d4a0b1066e77a536a6a31f",
+  "runner_sha256": "c57a06f05ccd9f1f2c34dea934b12df7ececab85b89be644486d1387c03b1fad",
+  "status": "COMPLETE_LIMITED_PRODUCT_PATH",
+  "prompt_version": "selected_material.v6",
+  "new_prompt_profile_state": false,
+  "normal_default": "selected_material.v4",
+  "normal_model_adoption": false,
+  "deployed": false,
+  "model": {
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "pins": {
+      "accelerate": "1.15.0",
+      "peft": "0.21.2",
+      "safetensors": "0.8.0",
+      "transformers": "5.19.0"
+    },
+    "max_context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "max_seconds": 600,
+    "per_call_seconds": 45,
+    "initial_unchanged": true
+  },
+  "execution": {
+    "new_saved_source_contexts": 4,
+    "input_record_instances": 5,
+    "held_out_language_quality_samples": 0,
+    "new_generation": 4,
+    "stop_responses": 4,
+    "model_loads": 1,
+    "new_training": 0,
+    "seconds": 53.89120776299387,
+    "saved": 4,
+    "unsupported": 0,
+    "rejected": 0,
+    "mapped_records": 5,
+    "unparsed_records": 0,
+    "nodes": [
+      3,
+      3,
+      2,
+      4
+    ],
+    "edges": [
+      1,
+      0,
+      0,
+      1
+    ]
+  },
+  "before": {
+    "api_commit": "8efd07e6ce76bfdb594a2d2a3b521e87b9889596",
+    "new_generation": 0,
+    "model_loads": 0,
+    "seconds": 0.9234010456129909,
+    "same_requests_messages_responses_raw_all4": true,
+    "received_response_replay_count": 4,
+    "saved": 1,
+    "unsupported": 3,
+    "rejected": 0,
+    "mapped_records": 1,
+    "unparsed_records": 4,
+    "qualification": "AC01-03 unsupported; AC04 already saved its independent second record only. The old consumer did not produce no output for every case."
+  },
+  "prepare": {
+    "seconds": 5.403826122172177,
+    "model_loads": 0,
+    "new_generation": 0,
+    "token_budgets": [
+      {
+        "id": "AC01",
+        "input_tokens": 3283,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      },
+      {
+        "id": "AC02",
+        "input_tokens": 3284,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      },
+      {
+        "id": "AC03",
+        "input_tokens": 3287,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      },
+      {
+        "id": "AC04",
+        "input_tokens": 3387,
+        "reserved_new_tokens": 2048,
+        "max_context_tokens": 8192
+      }
+    ],
+    "all_below_budget": true,
+    "truncation": false
+  },
+  "replay": {
+    "seconds": 1.0199088640511036,
+    "new_generation": 0,
+    "model_loads": 0,
+    "same_requests_messages_responses_raw_all4": true,
+    "same_text_coverage_status_all4": true,
+    "projection_equal_except_fresh_artifact_uuid_all4": true,
+    "within_each_saved_artifact_current_monthly_readonly_exact_id_text_meta_coverage": true
+  },
+  "verification": {
+    "jupyter": {
+      "passed": 316,
+      "skipped": 13,
+      "warnings": 1,
+      "seconds": 30.25,
+      "sql": "NOT_EXECUTED_POSTGRESQL_WASM_UNCONFIGURED",
+      "runtime": {
+        "packages": {
+          "accelerate": "1.15.0",
+          "fastapi": "0.162.0",
+          "peft": "0.21.2",
+          "pydantic": "2.14.1",
+          "safetensors": "0.8.0",
+          "torch": "2.8.0+cu128",
+          "transformers": "5.19.0"
+        },
+        "python": "3.12.3"
+      }
+    },
+    "ci": {
+      "run_id": 42015033971,
+      "job_id": 127203334866,
+      "status": "ALL_STEPS_SUCCESS",
+      "api_commit": "bb121484d9c9f0d0fb52b1e666d21fd4dab81be9",
+      "generation_storage": {
+        "passed": 2240,
+        "skipped": 1,
+        "skip_scope": "existing old SQL dependency test, not a newly counted pass",
+        "subtests": 12048,
+        "seconds": 538.61
+      },
+      "shared_owner": {
+        "passed": 1,
+        "deselected": 194,
+        "seconds": 32.27
+      },
+      "cumulative_api_q3_jobs": {
+        "passed": 124,
+        "warnings": 1,
+        "subtests": 2,
+        "seconds": 83.83
+      },
+      "cumulative_sql": {
+        "status": "PASSED",
+        "source_records": 201,
+        "monthly_references": 15,
+        "scope": [
+          "owner",
+          "rank",
+          "immutability",
+          "deletion"
+        ]
+      },
+      "runtime": {
+        "python": "3.12.15",
+        "fastapi": "0.142.2",
+        "pydantic": "2.13.5"
+      },
+      "remote_source_three_blob_sha_exact_verified": true,
+      "ci_head_matches_api_commit": true
+    },
+    "source_scope": {
+      "changed_api_files": [
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+        "ai/tests/test_analysis_cumulative_model_source.py"
+      ],
+      "source_adapter_changed": false,
+      "public_api_dto_db_rn_changed": false,
+      "private_prompt_profile_state_changed": false,
+      "finite_grammar_changed": false,
+      "realizer_changed": false,
+      "normal_default_changed": false,
+      "full_field_kind_actor_negation_binding_retained": true,
+      "no_raw_repair_or_finite_fallback": true
+    }
+  },
+  "cases": [
+    {
+      "id": "AC01",
+      "provenance": "Karen synthetic new saved-source context; some wording previously tested; not held-out language-quality data; no training target; no private user records",
+      "prompt_version": "selected_material.v6",
+      "inputs": [
+        {
+          "record": 1,
+          "original": {
+            "memo": "私は資料を見た。",
+            "memo_action": "",
+            "category": [
+              "仕事"
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "created_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            {
+              "source_role": "SUPPLEMENTAL_ANSWER",
+              "text": "私は会場の準備を担当しました。その後、私は手順を決めました。",
+              "round_index": 1
+            }
+          ]
+        }
+      ],
+      "expected_nonempty_fields": 2,
+      "returned_field_count": 2,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "record": 1,
+          "source_role": "ORIGINAL_INPUT",
+          "field_path": "memo",
+          "unit_count": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        },
+        {
+          "field": 2,
+          "record": 1,
+          "source_role": "SUPPLEMENTAL_ANSWER",
+          "field_path": "memo",
+          "unit_count": 2,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ],
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "UNSUPPORTED",
+        "reason": "insufficient_input",
+        "has_visible_content": false,
+        "content_text": null,
+        "meta": null,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "source_calls": 1,
+        "commit_count": 0
+      },
+      "after": {
+        "status": "SAVED",
+        "reason": "saved",
+        "has_visible_content": true,
+        "content_text": "行動・非行動：選択カテゴリ：仕事\n資料を見る（実行済み）（1件の記録）\n役割：選択カテゴリ：仕事\n会場の準備を担当した（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\nその後：手順を決める（実行済み）（1件の記録）\n記録内の順序：選択カテゴリ：仕事\n会場の準備を担当した（記録された担当） → 選択カテゴリ：仕事\nその後：手順を決める（実行済み）。原因を示す線ではありません。\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み） ／ 選択カテゴリ：仕事\n会場の準備を担当した（記録された担当））：段階同士のつながりは、この記録からは確定していません。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [
+            {
+              "edge_kind": "OBSERVED_ORDER",
+              "edge_ref": "e1",
+              "from_ref": "n2",
+              "to_ref": "n3",
+              "visible_label": "記録内に書かれた順序"
+            }
+          ],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n資料を見る（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n会場の準備を担当した（記録された担当）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n3",
+              "visible_label": "選択カテゴリ：仕事\nその後：手順を決める（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:58:47.932311+00:00",
+          "projection_of": "artifact:6e0aa3e892a2447088200d686e36e557@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "source_calls": 1,
+        "commit_count": 2
+      },
+      "graph_evidence_summary": [
+        {
+          "node_ref": "n1",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n2",
+          "node_kind": "ROLE",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n3",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        }
+      ],
+      "saved_reader_equality": {
+        "current_monthly_readonly_exact_id_text_meta_coverage": true,
+        "no_generation": true
+      },
+      "reading": "Parent ACTION plus the answer own responsibility ROLE and decision ACTION; the only edge is the answer written order, not a causal or parent-to-answer relation."
+    },
+    {
+      "id": "AC02",
+      "provenance": "Karen synthetic new saved-source context; some wording previously tested; not held-out language-quality data; no training target; no private user records",
+      "prompt_version": "selected_material.v6",
+      "inputs": [
+        {
+          "record": 1,
+          "original": {
+            "memo": "僕の役割は受付係だった。",
+            "memo_action": "",
+            "category": [
+              "生活"
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "created_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            {
+              "source_role": "SUPPLEMENTAL_ANSWER",
+              "text": "僕は連絡を担当しなかった。僕は日程を決めなかった。",
+              "round_index": 1
+            }
+          ]
+        }
+      ],
+      "expected_nonempty_fields": 2,
+      "returned_field_count": 2,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "record": 1,
+          "source_role": "ORIGINAL_INPUT",
+          "field_path": "memo",
+          "unit_count": 1,
+          "root_node_kinds": [
+            "ROLE"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        },
+        {
+          "field": 2,
+          "record": 1,
+          "source_role": "SUPPLEMENTAL_ANSWER",
+          "field_path": "memo",
+          "unit_count": 2,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ],
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "UNSUPPORTED",
+        "reason": "insufficient_input",
+        "has_visible_content": false,
+        "content_text": null,
+        "meta": null,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "source_calls": 1,
+        "commit_count": 0
+      },
+      "after": {
+        "status": "SAVED",
+        "reason": "saved",
+        "has_visible_content": true,
+        "content_text": "役割：選択カテゴリ：生活\n僕の役割は受付係だった（記録された役割）（1件の記録）\n役割：選択カテゴリ：生活\n連絡を担当しなかった（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n日程を決める（行わなかった）（1件の記録）\n未確定（選択カテゴリ：生活\n僕の役割は受付係だった（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：生活\n僕の役割は受付係だった（記録された役割） ／ 選択カテゴリ：生活\n連絡を担当しなかった（記録された担当））：段階同士のつながりは、この記録からは確定していません。\n未確定（選択カテゴリ：生活\n連絡を担当しなかった（記録された担当） ／ 選択カテゴリ：生活\n日程を決める（行わなかった））：段階同士のつながりは、この記録からは確定していません。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n僕の役割は受付係だった（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：生活\n連絡を担当しなかった（記録された担当）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n3",
+              "visible_label": "選択カテゴリ：生活\n日程を決める（行わなかった）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:58:47.932311+00:00",
+          "projection_of": "artifact:db34f2aacaf34f0da6b19783ccc7992c@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            },
+            {
+              "between_node_refs": [
+                "n2",
+                "n3"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "source_calls": 1,
+        "commit_count": 2
+      },
+      "graph_evidence_summary": [
+        {
+          "node_ref": "n1",
+          "node_kind": "ROLE",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n2",
+          "node_kind": "ROLE",
+          "polarity": "negative",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n3",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "negative",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        }
+      ],
+      "saved_reader_equality": {
+        "current_monthly_readonly_exact_id_text_meta_coverage": true,
+        "no_generation": true
+      },
+      "reading": "Parent written role retained; answer responsibility and decision are each negative; no edge is established and route connections remain unknown."
+    },
+    {
+      "id": "AC03",
+      "provenance": "Karen synthetic new saved-source context; some wording previously tested; not held-out language-quality data; no training target; no private user records",
+      "prompt_version": "selected_material.v6",
+      "inputs": [
+        {
+          "record": 1,
+          "original": {
+            "memo": "私は案内を担当した。私は集合時刻を決めた。",
+            "memo_action": "",
+            "category": [
+              "仕事"
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "created_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            {
+              "source_role": "SUPPLEMENTAL_ANSWER",
+              "text": "私は案内を担当した。私は集合時刻を決めた。",
+              "round_index": 1
+            }
+          ]
+        }
+      ],
+      "expected_nonempty_fields": 2,
+      "returned_field_count": 2,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "record": 1,
+          "source_role": "ORIGINAL_INPUT",
+          "field_path": "memo",
+          "unit_count": 2,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ],
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        },
+        {
+          "field": 2,
+          "record": 1,
+          "source_role": "SUPPLEMENTAL_ANSWER",
+          "field_path": "memo",
+          "unit_count": 2,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ],
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "UNSUPPORTED",
+        "reason": "insufficient_input",
+        "has_visible_content": false,
+        "content_text": null,
+        "meta": null,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "source_calls": 1,
+        "commit_count": 0
+      },
+      "after": {
+        "status": "SAVED",
+        "reason": "saved",
+        "has_visible_content": true,
+        "content_text": "役割：選択カテゴリ：仕事\n案内を担当した（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n集合時刻を決める（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n案内を担当した（記録された担当））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n案内を担当した（記録された担当） ／ 選択カテゴリ：仕事\n集合時刻を決める（実行済み））：段階同士のつながりは、この記録からは確定していません。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n案内を担当した（記録された担当）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n集合時刻を決める（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:58:47.932311+00:00",
+          "projection_of": "artifact:e220b75509314130b96214d2c2228690@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "source_calls": 1,
+        "commit_count": 2
+      },
+      "graph_evidence_summary": [
+        {
+          "node_ref": "n1",
+          "node_kind": "ROLE",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 2,
+          "source_envelope_count": 2
+        },
+        {
+          "node_ref": "n2",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 2,
+          "source_envelope_count": 2
+        }
+      ],
+      "saved_reader_equality": {
+        "current_monthly_readonly_exact_id_text_meta_coverage": true,
+        "no_generation": true
+      },
+      "reading": "Original and answer state the same unordered responsibility/decision; canonical graph has two nodes with two source-envelope evidence refs each, one parent record and badge/count one."
+    },
+    {
+      "id": "AC04",
+      "provenance": "Karen synthetic new saved-source context; some wording previously tested; not held-out language-quality data; no training target; no private user records",
+      "prompt_version": "selected_material.v6",
+      "inputs": [
+        {
+          "record": 1,
+          "original": {
+            "memo": "私は資料を見た。",
+            "memo_action": "",
+            "category": [
+              "仕事"
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "created_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            {
+              "source_role": "SUPPLEMENTAL_ANSWER",
+              "text": "私は会合の進行を担当した。その後、私は分担を決めた。",
+              "round_index": 1
+            }
+          ]
+        },
+        {
+          "record": 2,
+          "original": {
+            "memo": "僕は費用を記録しなかった。",
+            "memo_action": "",
+            "category": [
+              "生活"
+            ],
+            "emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "created_at": "2026-11-01T01:00:00"
+          },
+          "answers": []
+        }
+      ],
+      "expected_nonempty_fields": 3,
+      "returned_field_count": 3,
+      "returned_field_kinds": [
+        {
+          "field": 1,
+          "record": 1,
+          "source_role": "ORIGINAL_INPUT",
+          "field_path": "memo",
+          "unit_count": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        },
+        {
+          "field": 2,
+          "record": 1,
+          "source_role": "SUPPLEMENTAL_ANSWER",
+          "field_path": "memo",
+          "unit_count": 2,
+          "root_node_kinds": [
+            "ROLE",
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR"
+            ],
+            [
+              "EXPLICIT_ACTOR"
+            ]
+          ]
+        },
+        {
+          "field": 3,
+          "record": 2,
+          "source_role": "ORIGINAL_INPUT",
+          "field_path": "memo",
+          "unit_count": 2,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "child_scope_roles": [
+            "CONTENT_TARGET"
+          ],
+          "qualifier_kinds": [
+            [
+              "EXPLICIT_ACTOR",
+              "NEGATION"
+            ],
+            []
+          ]
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "SAVED",
+        "reason": "saved",
+        "has_visible_content": true,
+        "content_text": "行動・非行動：選択カテゴリ：生活\n費用を記録する（行わなかった）（1件の記録）\n未確定（選択カテゴリ：生活\n費用を記録する（行わなかった））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：生活\n費用を記録する（行わなかった））：まだ読み取れていない内容は、この記録からは確定していません。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n費用を記録する（行わなかった）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:58:47.932311+00:00",
+          "projection_of": "artifact:c12ba3bdd00d4f35ada5cb7d20909483@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "source_calls": 1,
+        "commit_count": 2
+      },
+      "after": {
+        "status": "SAVED",
+        "reason": "saved",
+        "has_visible_content": true,
+        "content_text": "行動・非行動：選択カテゴリ：仕事\n資料を見る（実行済み）（1件の記録）\n役割：選択カテゴリ：仕事\n会合の進行を担当した（記録された担当）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\nその後：分担を決める（実行済み）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n費用を記録する（行わなかった）（1件の記録）\n記録内の順序：選択カテゴリ：仕事\n会合の進行を担当した（記録された担当） → 選択カテゴリ：仕事\nその後：分担を決める（実行済み）。原因を示す線ではありません。\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み） ／ 選択カテゴリ：仕事\n会合の進行を担当した（記録された担当））：段階同士のつながりは、この記録からは確定していません。\n未確定（選択カテゴリ：生活\n費用を記録する（行わなかった））：確定していない項目：場面、役割、考え・注意、結果・余韻。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [
+            {
+              "edge_kind": "OBSERVED_ORDER",
+              "edge_ref": "e1",
+              "from_ref": "n2",
+              "to_ref": "n3",
+              "visible_label": "記録内に書かれた順序"
+            }
+          ],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n資料を見る（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n会合の進行を担当した（記録された担当）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n3",
+              "visible_label": "選択カテゴリ：仕事\nその後：分担を決める（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n4",
+              "visible_label": "選択カテゴリ：生活\n費用を記録する（行わなかった）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T10:58:47.932311+00:00",
+          "projection_of": "artifact:03d8750f3ace408b9cfdbd26be523733@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            },
+            {
+              "between_node_refs": [
+                "n4"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "source_calls": 1,
+        "commit_count": 2
+      },
+      "graph_evidence_summary": [
+        {
+          "node_ref": "n1",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n2",
+          "node_kind": "ROLE",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n3",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "positive",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        },
+        {
+          "node_ref": "n4",
+          "node_kind": "ACTION_OR_NONACTION",
+          "polarity": "negative",
+          "modality": "fact",
+          "temporal_scope": "past",
+          "record_count": 1,
+          "evidence_ref_count": 1,
+          "source_envelope_count": 1
+        }
+      ],
+      "saved_reader_equality": {
+        "current_monthly_readonly_exact_id_text_meta_coverage": true,
+        "no_generation": true
+      },
+      "reading": "Both original records and the answer are retained with work/life categories. Only the first record answer has an internal order edge. Old consumer saved the independent second record, leaving first unread."
+    }
+  ],
+  "limits": [
+    "Four synthetic source contexts, including two reused CP clauses, are not four independent held-out natural-language cases or a general correctness rate.",
+    "The new capability is limited to complete explicit SELF past responsibility plus decision in one ordinary answer; omitted/other actor, unread answer remainder, invalid fields or model units, correction, withdrawal, unresolved opposition and comparison remain rejected or unsupported.",
+    "The parent private WRITTEN_PAST_ROLE_CLAUSE plus answer remains unsupported. A parent unread remainder remains SOURCE_SCOPE.",
+    "Answers preserve their own envelopes, literal evidence, parent version, owner, existing round qualification and selected categories; they do not add parent-record occasions.",
+    "Only explicit within-answer order is an edge. Parent-to-answer, answer-to-answer, cross-record order, causation and repeated co-occurrence are not inferred.",
+    "AC03 retains original and answer evidence while record count and visible badge stay one; this is not a second occurrence.",
+    "Responsibility is not completion of its assigned work, and deciding is not execution or fulfilment of the decided object. Criteria, reasons, motives, personality and implicit role are not inferred.",
+    "Actual saves use ensure/build/commit/read with isolated mock RPC; Jupyter SQL skips are not SQL passes or a production DB/device result.",
+    "No new prompt/profile/state, finite grammar, semantic type or author; old messages and normal default v4 unchanged. v6 remains opt-in and model weights unadopted for normal service.",
+    "General analysis quality, HTTP model transport/adoption, personal criteria, cross-record meaning, IF/Saved, observation gathering, device acceptance and deployment remain unresolved."
+  ],
+  "private_evidence": {
+    "pod_bundle_bytes": 839409,
+    "pod_bundle_sha256": "029ad64811d8049708944025108c864b42a5eb13f17f4422fd63ab80d4bbfe06",
+    "inner_files_verified": 23,
+    "reference": "https://chatgpt.com/library?file_id=libfile_db296c04dcd481918c4d9607d4a07b2d&account_id=personal",
+    "runner_evidence": "commit/bytes/SHA metadata only; runner source body is in Git, not this bundle",
+    "compute_apps_after_run": "",
+    "api_worktree_status": "",
+    "durable_bundle_bytes": 892229,
+    "durable_bundle_sha256": "6209d93e295624dfdd4427937992f27e40faa5ab14e5162b8015b283544c85d7",
+    "durable_bundle_contents": "original Pod bundle, final decoded CI log and exact three source blob SHA metadata; source and runner code bodies are in fixed Git commits, not this bundle"
+  }
+}

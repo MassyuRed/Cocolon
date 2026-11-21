@@ -1,0 +1,1152 @@
+{
+  "after": {
+    "bound_responses": 22,
+    "cases": [
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "T01",
+        "raw_sha256": "6188e620373dceb2c121b894aaafd641498ee4d78879fd8b6c4c00a1e1ec431b",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "T02",
+        "raw_sha256": "91c3fd603ee6985483fa7da8bdcbe7dba86dc54d2170bb2f6786c5a9ffc0b16d",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "R08",
+        "raw_sha256": "46350c2c4cddad8077590367a30c7dc4cf7ad28666e8901b37947d1e967fc577",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "SC01",
+        "raw_sha256": "cca4f730d6b679ecde7e608417213a123f82533263c19ba4b0ee6ac28120f84d",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "OA01",
+        "raw_sha256": "db88760107e71fde3159e2a95f4fe000bc606c9273bd15ada5f555259af1cbbb",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "code": "analysis_model_units_carrier_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "MD02",
+        "raw_sha256": "b04bef7ca435fac75a5434d096e00d4e03c8d474a0133c2e2be5ae1af107ebf9",
+        "status": "REJECTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "HQ04",
+        "raw_sha256": "b8e5f75e6397c1e01a741f2d2d00711f24fd0909e5a5541b80fef09a14ec9148",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "YREASON01",
+        "raw_sha256": "74482b5abebca1225f5232d404cbddd8bed3fab0cff8110f89614c9c39b4322d",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "PV01",
+        "nodes": 1,
+        "raw_sha256": "a3d5b919ebf4ddf0ee677a98ddce6236ae4c9e9f1e2cd5cb1b2971f8520e53f0",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "PV02",
+        "nodes": 1,
+        "raw_sha256": "b9fa612260c8d4f621823acef8295b7b06728d3ed8ad8dcd02cc5678d9bff021",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "PV03",
+        "raw_sha256": "17fe9d4ce2c7881a3fbc7bf179132272ff8dd0cf0f4ff5fb70be2532c653107d",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "PV04",
+        "raw_sha256": "f9eb53a0004b946833835021b624bf6237d14f7bbc4b9de960fbe92a0efc948b",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "PV05",
+        "raw_sha256": "4df02b580ffd38c27aeff8248c8439fb94527f70040ae18933d25ccc4f2fe750",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "PV06",
+        "nodes": 1,
+        "raw_sha256": "7abd65101515f97573a2ddae9d33dbc1247700dd217f3289d7ba06c3dd55ce37",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "X01",
+        "raw_sha256": "c7b5bccfb046a142393c997d09a6938e9f8c6678c43ec773582cbc9d551dfa27",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "X02",
+        "nodes": 1,
+        "raw_sha256": "9af9d7fe2188435bb1cd1aea5b8189060ee1f0deef6fac23700e99479039c396",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      },
+      {
+        "code": "analysis_model_units_quote_ambiguous_or_missing",
+        "error_type": "AnalysisSemanticError",
+        "id": "X03",
+        "raw_sha256": "116d366890ea62c8fb4cc85beeea11c0c4f88b79c4b1ac0e84cb2ae8773ca98d",
+        "status": "REJECTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "X04",
+        "nodes": 1,
+        "raw_sha256": "0cf62514d5875495b7441f3d9e859c7ec947a998936bd8258bbacbcffdf47e87",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "X05",
+        "raw_sha256": "7ee9c878299012705fd8590c112642dc3fcbd5f54bc749d2365b2c6bf77c485b",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "X06",
+        "nodes": 1,
+        "raw_sha256": "7a8255892ad05c315ab6217a5eadc925f786716dc977bccff78b3ad9295eb320",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "id": "X07",
+        "raw_sha256": "b8e996b3975ad4aa5f852f0d74ce8c567b44ea089d4911b8b3bb294bedb2ebf8",
+        "status": "UNSUPPORTED"
+      },
+      {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "id": "X08",
+        "nodes": 1,
+        "raw_sha256": "a2fea73bfd2ac6d44fbaf0d817a68fa50aff4c124d1131e89336eca84ab0b3e3",
+        "saved_wire_equal": true,
+        "status": "MAPPED"
+      }
+    ],
+    "deployment": false,
+    "graphs_equal_to_normal": 7,
+    "legacy_non_generating_reads": 35,
+    "mapped": 7,
+    "mode": "after",
+    "model_loads": 0,
+    "new_generation": 0,
+    "new_training": 0,
+    "normal_4b_enabled": false,
+    "old_candidate_values_retained": 20,
+    "old_clause_retained": 1,
+    "old_typed_values_retained": 14,
+    "ordinary_saved_reads": 7,
+    "product_credit": 0,
+    "rejected": 2,
+    "seconds": 3.2848953250795603,
+    "unsupported": 13
+  },
+  "api_commit": "51d94862c5fd081516e6427795bc52e673b9c241",
+  "baseline_api": "c033bd4eee35b81157d781501cb1ea41dd9f848c",
+  "before": {
+    "bound_responses": 22,
+    "cases": [
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "T01",
+        "raw_sha256": "6188e620373dceb2c121b894aaafd641498ee4d78879fd8b6c4c00a1e1ec431b",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "T02",
+        "raw_sha256": "91c3fd603ee6985483fa7da8bdcbe7dba86dc54d2170bb2f6786c5a9ffc0b16d",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "R08",
+        "raw_sha256": "46350c2c4cddad8077590367a30c7dc4cf7ad28666e8901b37947d1e967fc577",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "SC01",
+        "raw_sha256": "cca4f730d6b679ecde7e608417213a123f82533263c19ba4b0ee6ac28120f84d",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "OA01",
+        "raw_sha256": "db88760107e71fde3159e2a95f4fe000bc606c9273bd15ada5f555259af1cbbb",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "MD02",
+        "raw_sha256": "b04bef7ca435fac75a5434d096e00d4e03c8d474a0133c2e2be5ae1af107ebf9",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "HQ04",
+        "raw_sha256": "b8e5f75e6397c1e01a741f2d2d00711f24fd0909e5a5541b80fef09a14ec9148",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "YREASON01",
+        "raw_sha256": "74482b5abebca1225f5232d404cbddd8bed3fab0cff8110f89614c9c39b4322d",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "PV01",
+        "raw_sha256": "a3d5b919ebf4ddf0ee677a98ddce6236ae4c9e9f1e2cd5cb1b2971f8520e53f0",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "PV02",
+        "raw_sha256": "b9fa612260c8d4f621823acef8295b7b06728d3ed8ad8dcd02cc5678d9bff021",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "PV03",
+        "raw_sha256": "17fe9d4ce2c7881a3fbc7bf179132272ff8dd0cf0f4ff5fb70be2532c653107d",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "PV04",
+        "raw_sha256": "f9eb53a0004b946833835021b624bf6237d14f7bbc4b9de960fbe92a0efc948b",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "PV05",
+        "raw_sha256": "4df02b580ffd38c27aeff8248c8439fb94527f70040ae18933d25ccc4f2fe750",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "PV06",
+        "raw_sha256": "7abd65101515f97573a2ddae9d33dbc1247700dd217f3289d7ba06c3dd55ce37",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X01",
+        "raw_sha256": "c7b5bccfb046a142393c997d09a6938e9f8c6678c43ec773582cbc9d551dfa27",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X02",
+        "raw_sha256": "9af9d7fe2188435bb1cd1aea5b8189060ee1f0deef6fac23700e99479039c396",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X03",
+        "raw_sha256": "116d366890ea62c8fb4cc85beeea11c0c4f88b79c4b1ac0e84cb2ae8773ca98d",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X04",
+        "raw_sha256": "0cf62514d5875495b7441f3d9e859c7ec947a998936bd8258bbacbcffdf47e87",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X05",
+        "raw_sha256": "7ee9c878299012705fd8590c112642dc3fcbd5f54bc749d2365b2c6bf77c485b",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X06",
+        "raw_sha256": "7a8255892ad05c315ab6217a5eadc925f786716dc977bccff78b3ad9295eb320",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X07",
+        "raw_sha256": "b8e996b3975ad4aa5f852f0d74ce8c567b44ea089d4911b8b3bb294bedb2ebf8",
+        "status": "REJECTED"
+      },
+      {
+        "code": "analysis_model_input_binding_invalid",
+        "error_type": "AnalysisSemanticError",
+        "id": "X08",
+        "raw_sha256": "a2fea73bfd2ac6d44fbaf0d817a68fa50aff4c124d1131e89336eca84ab0b3e3",
+        "status": "REJECTED"
+      }
+    ],
+    "deployment": false,
+    "graphs_equal_to_normal": 0,
+    "legacy_non_generating_reads": 0,
+    "mapped": 0,
+    "mode": "before",
+    "model_loads": 0,
+    "new_generation": 0,
+    "new_training": 0,
+    "normal_4b_enabled": false,
+    "old_candidate_values_retained": 0,
+    "old_clause_retained": 0,
+    "old_typed_values_retained": 0,
+    "ordinary_saved_reads": 0,
+    "product_credit": 0,
+    "rejected": 22,
+    "seconds": 0.6178093440830708,
+    "unsupported": 0
+  },
+  "deployment": false,
+  "normal_4b_enabled": false,
+  "normal_source_parser_changed": false,
+  "product_credit": 0,
+  "saved_read_scope": "ORDINARY_STORED_DTO_TEXT_COVERAGE_NON_GENERATING_EQUALITY",
+  "source_sha256": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "34e7d757a531bfb80edb7fae0db9778d6e11d32939f1cce146336d963a843d56",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "762fc69476f3601fe5eaa8fd391eaaa2c9b213732e5ae2e56cd5a8ece0664b66",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "4b631cb1b5d4acbffc5d9c81c91cdd2e7d914bd8ce31642e07544cd82f3831ee",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "32987372ba793caac076ba47638a645aac02d1b4e32ec8b639c2f1bc7bee9dd8"
+  },
+  "status": "PASS",
+  "synthetic_examples": [
+    {
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "diagram": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n費用を記録する（実行済み）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+        "projection_of": "artifact:0abc0d064255471d8a2c2463ca4f95e3@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "graph": {
+        "annotations": [],
+        "conflicts": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_refs": [
+              {
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:93f91abcbcd9a940edd45421b54322d9fdd063a227e4ba6415ea6e975d5bd2f0",
+                "field_path": "memo_action",
+                "field_sha256": "4656a80e98a33eda2e53383f940e703e67f0bbabbcadbbc8ed08d90816ebeec2",
+                "field_utf8_end": 107,
+                "field_utf8_start": 77,
+                "literal_sha256": "fb88c390d1f320ba60904dceb2286f933dc647cec6ec14749b3a54b7c1854f94",
+                "scalar_end": 9,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:c17988622749e5e8c0c80755f859ec734d07d6692fc68449c252adb24a329427",
+                "source_span_id": "s2",
+                "utf8_end": 104,
+                "utf8_start": 77
+              }
+            ],
+            "modality": "fact",
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n1",
+            "polarity": "positive",
+            "proposition": {
+              "actor": "SELF",
+              "arguments": [
+                [
+                  "を",
+                  "費用"
+                ]
+              ],
+              "dependent_form": "",
+              "modality": "fact",
+              "polarity": "positive",
+              "possible_content": null,
+              "predicate_lemma": "記録する",
+              "relative_day": "",
+              "result_state": "",
+              "role_state": "",
+              "scene_state": "",
+              "sequence_marker": "",
+              "source_parts": [
+                [
+                  "SELF_TOPIC",
+                  0,
+                  2
+                ],
+                [
+                  "CASE_を",
+                  2,
+                  5
+                ],
+                [
+                  "FINITE_PREDICATE",
+                  5,
+                  9
+                ]
+              ],
+              "temporal_scope": "past",
+              "written_modifiers": []
+            },
+            "quoted_field": null,
+            "record_refs": [
+              "00000000-0000-0000-0000-000000000065"
+            ],
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_category_context": true,
+            "temporal_scope": "past",
+            "update_refs": [],
+            "visible_label": "僕は費用を記録した"
+          }
+        ],
+        "source_updates": [],
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "missing_scope": "SCENE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g2",
+            "missing_scope": "ROLE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g3",
+            "missing_scope": "ATTENTION_OR_THOUGHT",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g4",
+            "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "missing_scope": "SOURCE_SCOPE",
+            "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+          }
+        ]
+      },
+      "id": "uncertain_role_positive_action",
+      "source": {
+        "category": [
+          "仕事"
+        ],
+        "created_at": "2025-01-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000000065",
+        "memo": "僕の役割は案内係だったかもしれない。",
+        "memo_action": "僕は費用を記録した。"
+      },
+      "text": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "projection_of": "artifact:0abc0d064255471d8a2c2463ca4f95e3@1",
+        "text": "行動・非行動：選択カテゴリ：仕事\n費用を記録する（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n費用を記録する（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n費用を記録する（実行済み））：まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    },
+    {
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "diagram": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n費用を記録する（行わなかった）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+        "projection_of": "artifact:3db02f188fd240c0a0077d6c154acc06@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "graph": {
+        "annotations": [],
+        "conflicts": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_refs": [
+              {
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:0803fe7b80853496ba9b0fc62880710831f7c211e201d3e12d798354a964997e",
+                "field_path": "memo",
+                "field_sha256": "629249114f263e819dd6b4b078ea74e8d9afab248cc5a02b2827a42cfe1df4e7",
+                "field_utf8_end": 47,
+                "field_utf8_start": 8,
+                "literal_sha256": "ed226d634a5611351367684e96b91d4f43eaf0df59ee7f499962630ff6edd8fe",
+                "scalar_end": 12,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:6d70b8428fdc756220da721b1c1173041b2fa00f4ccd4abba69f8bfa979dd2f3",
+                "source_span_id": "s1",
+                "utf8_end": 44,
+                "utf8_start": 8
+              }
+            ],
+            "modality": "fact",
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n1",
+            "polarity": "negative",
+            "proposition": {
+              "actor": "SELF",
+              "arguments": [
+                [
+                  "を",
+                  "費用"
+                ]
+              ],
+              "dependent_form": "",
+              "modality": "fact",
+              "polarity": "negative",
+              "possible_content": null,
+              "predicate_lemma": "記録する",
+              "relative_day": "",
+              "result_state": "",
+              "role_state": "",
+              "scene_state": "",
+              "sequence_marker": "",
+              "source_parts": [
+                [
+                  "SELF_TOPIC",
+                  0,
+                  2
+                ],
+                [
+                  "CASE_を",
+                  2,
+                  5
+                ],
+                [
+                  "FINITE_PREDICATE",
+                  5,
+                  12
+                ]
+              ],
+              "temporal_scope": "past",
+              "written_modifiers": []
+            },
+            "quoted_field": null,
+            "record_refs": [
+              "00000000-0000-0000-0000-000000000065"
+            ],
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_category_context": true,
+            "temporal_scope": "past",
+            "update_refs": [],
+            "visible_label": "僕は費用を記録しなかった"
+          }
+        ],
+        "source_updates": [],
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "missing_scope": "SCENE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g2",
+            "missing_scope": "ROLE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g3",
+            "missing_scope": "ATTENTION_OR_THOUGHT",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g4",
+            "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "missing_scope": "SOURCE_SCOPE",
+            "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+          }
+        ]
+      },
+      "id": "negative_action_swapped_fields",
+      "source": {
+        "category": [
+          "仕事"
+        ],
+        "created_at": "2025-01-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000000065",
+        "memo": "僕は費用を記録しなかった。",
+        "memo_action": "僕の役割は案内係だったかもしれない。"
+      },
+      "text": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "projection_of": "artifact:3db02f188fd240c0a0077d6c154acc06@1",
+        "text": "行動・非行動：選択カテゴリ：仕事\n費用を記録する（行わなかった）（1件の記録）\n未確定（選択カテゴリ：仕事\n費用を記録する（行わなかった））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n費用を記録する（行わなかった））：まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    },
+    {
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "diagram": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n費用を記録する（実行済み）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+        "projection_of": "artifact:5687354df21148c1968755db1ac6658e@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "graph": {
+        "annotations": [],
+        "conflicts": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_refs": [
+              {
+                "element_index": 0,
+                "evidence_id": "analysis-evidence:1216ab66048168e7ff6fd3b892fb3b3a9fa4fd09b55be978ba81200eee1c19b8",
+                "field_path": "memo_action",
+                "field_sha256": "4656a80e98a33eda2e53383f940e703e67f0bbabbcadbbc8ed08d90816ebeec2",
+                "field_utf8_end": 74,
+                "field_utf8_start": 44,
+                "literal_sha256": "fb88c390d1f320ba60904dceb2286f933dc647cec6ec14749b3a54b7c1854f94",
+                "scalar_end": 9,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:a8952ba9c217de0ec6a258379685cd886827998318539a6382f3b4910fbc01c2",
+                "source_span_id": "s2",
+                "utf8_end": 71,
+                "utf8_start": 44
+              }
+            ],
+            "modality": "fact",
+            "node_kind": "ACTION_OR_NONACTION",
+            "node_ref": "n1",
+            "polarity": "positive",
+            "proposition": {
+              "actor": "SELF",
+              "arguments": [
+                [
+                  "を",
+                  "費用"
+                ]
+              ],
+              "dependent_form": "",
+              "modality": "fact",
+              "polarity": "positive",
+              "possible_content": null,
+              "predicate_lemma": "記録する",
+              "relative_day": "",
+              "result_state": "",
+              "role_state": "",
+              "scene_state": "",
+              "sequence_marker": "",
+              "source_parts": [
+                [
+                  "SELF_TOPIC",
+                  0,
+                  2
+                ],
+                [
+                  "CASE_を",
+                  2,
+                  5
+                ],
+                [
+                  "FINITE_PREDICATE",
+                  5,
+                  9
+                ]
+              ],
+              "temporal_scope": "past",
+              "written_modifiers": []
+            },
+            "quoted_field": null,
+            "record_refs": [
+              "00000000-0000-0000-0000-000000000065"
+            ],
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_category_context": true,
+            "temporal_scope": "past",
+            "update_refs": [],
+            "visible_label": "僕は費用を記録した"
+          }
+        ],
+        "source_updates": [],
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "missing_scope": "SCENE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g2",
+            "missing_scope": "ROLE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g3",
+            "missing_scope": "ATTENTION_OR_THOUGHT",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g4",
+            "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "missing_scope": "SOURCE_SCOPE",
+            "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+          }
+        ]
+      },
+      "id": "unsupported_other_field",
+      "source": {
+        "category": [
+          "仕事"
+        ],
+        "created_at": "2025-01-01T01:00:00",
+        "emotion_details": [],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "00000000-0000-0000-0000-000000000065",
+        "memo": "雨宿りのメモ。",
+        "memo_action": "僕は費用を記録した。"
+      },
+      "text": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "projection_of": "artifact:5687354df21148c1968755db1ac6658e@1",
+        "text": "行動・非行動：選択カテゴリ：仕事\n費用を記録する（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n費用を記録する（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n費用を記録する（実行済み））：まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    }
+  ],
+  "test_sha256": "72391857cb25211a12170da0c39ebd46bb246725260f4d33e08f5cd8a32bfca5",
+  "tests": {
+    "deselected": 1,
+    "new_cases": 49,
+    "parent_seconds": 134.54784970358014,
+    "passed": 888,
+    "pytest_seconds": 133.77,
+    "skipped": 1,
+    "subtests_passed": 11176
+  }
+}

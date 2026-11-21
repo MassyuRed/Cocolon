@@ -1,0 +1,25 @@
+{
+  "schema_version": "cocolon.event_plan.a8.normal_readonly_state.v1",
+  "api": {
+    "service_id": "srv-d4ppfpm3jp1c73952bj0",
+    "deploy_id": "dep-dbsgn8t6e07s739qfk50",
+    "state": "live",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+  },
+  "worker": {
+    "service_id": "srv-d6copljh46gs73cmeic0",
+    "deploy_id": "dep-dbsgnet6e07s739qg5a0",
+    "state": "live",
+    "commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6"
+  },
+  "supabase": {
+    "project_id": "oeahmpmigszggnkyiivq",
+    "latest_migration": "20261115011424",
+    "migration_count": 38
+  },
+  "render_config_changes": 0,
+  "render_deploys_triggered": 0,
+  "hosted_database_writes": 0,
+  "worker_lease_change_applied": false,
+  "candidate_model_alias_adopted": false
+}

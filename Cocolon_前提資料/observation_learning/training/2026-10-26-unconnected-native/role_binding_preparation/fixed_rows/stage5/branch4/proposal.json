@@ -1,0 +1,98 @@
+{
+  "status": "PROPOSED_NEEDS_NEW_MASH_APPROVAL",
+  "purpose": "Separate sparse fit error from full-teacher versus prefix-only numerical difference at first divergence; not cached generation reproduction",
+  "source_predecessor": "81284665b5680d0d76725f34c9804938c49409f0",
+  "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+  "cpu_report_sha256": "3bee403589c03ae3591aab26bb08fe27879c6cb8c62f7bd55c4bfd4d4fbcdcda",
+  "source_sha256": {
+    "run_branch4_once.py": "7473ab634fbbbb8d3f1adb1b32df2368a32c61945ae80ace74321fa1d126f1ec",
+    "launch_branch4_once.py": "23fed4fe0e3ae7f6ed0c53d97f8282ad2d28085262cfa43fdcaedae9053249c5",
+    "prepare_branch4.py": "00bd2fabc8ad187aaced9491b938de5033d9fbff30bb788396290facbf52d69b"
+  },
+  "targets": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "teacher_messages_equal_actual": true,
+      "teacher_prompt_tokens": 5686,
+      "actual_prompt_tokens": 5686,
+      "gold_label_tokens": 283,
+      "actual_output_tokens": 326,
+      "first_different_token_index0": 264,
+      "gold_token_id": 1293,
+      "historical_token_id": 7664,
+      "first_different_character_index0": 978,
+      "common_text_tail": "plains_target\",[\"answer_explains_target\"],\"no_contact\",\"ANSWER_EXPLAINS_TARGET\"]",
+      "gold_text_next": "],\"cocolon.cmee.semantic_and_surface_proposal.v1\",[]]",
+      "actual_text_next": ",[[\"q_awareness_time\"],\"late_awareness\",\"AFFIRMED\",[],\"returned_concession\",[\"returned_concession\"],",
+      "prediction_position0": 5949,
+      "prefix_input_tokens": 5950,
+      "full_input_tokens": 5969,
+      "common_token_prefix_sha256": "5cb70ed9858cf2edf4cd3706df356c89e9a82019c98bab3e153ad174203d8e2a"
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "teacher_messages_equal_actual": true,
+      "teacher_prompt_tokens": 5027,
+      "actual_prompt_tokens": 5027,
+      "gold_label_tokens": 1094,
+      "actual_output_tokens": 1079,
+      "first_different_token_index0": 555,
+      "gold_token_id": 30812,
+      "historical_token_id": 6333,
+      "first_different_character_index0": 1550,
+      "common_text_tail": "t_preparation\"],\"EVENT\",[[\"q_no_joint_preparation\"],\"ASSERTED_AS_WRITTEN\"],[[\"q_",
+      "gold_text_next": "extra_8\"],[\"no_joint_preparation\"],\"NEGATED\"],[[],\"具体的に一緒に準備をしていたわけでも\"],[],[\"OMITTED\",[],null],\"具体的に",
+      "actual_text_next": "no_joint_preparation\"],[\"no_joint_preparation\"],\"NEGATED\"],[[],\"具体的に一緒に準備をしていたわけでも\"],[],[\"OMITTED\",[",
+      "prediction_position0": 5581,
+      "prefix_input_tokens": 5582,
+      "full_input_tokens": 6121,
+      "common_token_prefix_sha256": "7d271e02c105d8b29339c8cf8f4c6e4f7be13590bf5497fcf9c0e24d0ce1be49"
+    }
+  ],
+  "limits": {
+    "model_loads": 1,
+    "model_forwards": 4,
+    "updates": 0,
+    "generations": 0,
+    "new_cmee_calls": 0,
+    "process_seconds": 600
+  },
+  "order": [
+    "BOOK/stage3 teacher_full",
+    "BOOK/stage3 common_prefix",
+    "SHOP/stage2 teacher_full",
+    "SHOP/stage2 common_prefix"
+  ],
+  "eval": true,
+  "use_cache": false,
+  "teacher_full": "same helper loss window, labels, logits_to_keep count; select first-divergence predecessor logit",
+  "prefix": "same actual/gold common token prefix; logits_to_keep=1",
+  "evidence": [
+    "gold/historical token rank, logit, logprob",
+    "top10 and top1/top2 margin",
+    "teacher full NLL",
+    "full-minus-prefix competing-token and max-logit delta",
+    "explicit argmax token and top-logit tie count; rank1 ties are not greedy decisions"
+  ],
+  "prior_hourly_rate_usd": 0.28,
+  "process_prorated_max_usd": 0.04666666666666667,
+  "extra": "preparation, collection, holding, storage, transfer, tax excluded; current rate not queried",
+  "success": "four finite observations plus unchanged frozen sources/weights; no product or CMEE success",
+  "stop": "any source/state mismatch, model/forward failure, nonfinite values or timeout: preserve partial report; no retry",
+  "prohibited": [
+    "training",
+    "free generation",
+    "CMEE call",
+    "output repair",
+    "new teacher/prompt",
+    "receiver or acceptance changes",
+    "weight adoption",
+    "GPU stop/restart/delete",
+    "Runpod management console/API",
+    "Render/Supabase mutation",
+    "merge/deploy"
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0
+}

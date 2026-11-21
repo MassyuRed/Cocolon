@@ -1,0 +1,42 @@
+{
+  "schema": "cocolon.instruction_pair4.plan.v1",
+  "status": "AUTHORIZED_ONCE",
+  "gpu_run_authorized": true,
+  "source_cocolon_commit": "92283c1f37e5211f08e241b79fbb4dfa80b3fb2c",
+  "api_commit_unchanged": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "selected_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "runner_sha256": "546c5f9e6e7ca97cc576445ae361a22ce8d3129d4c55fbf6e8ff5844555c9077",
+  "cases_sha256": "937eb2137f11542a0048f044eea057edfa3f90e8a4ea5aba3a40e91928dc04b0",
+  "common_instruction_suffix": "\n観測では、本人が書いた出来事・感じ方・その関係を、本人に伝わる言葉で示してください。主体・時点・肯否・程度・迷い・未完了・訂正の範囲を落としたり、別の意味へ強めたりしません。\nreceptionは記録の第三者向け分析ではなく、Emlisから今の本人へ返す言葉にしてください。observationの言い換えだけを重ねず、その入力を受け取った応答として自然な言葉を選びます。一律の称賛・励まし・同じ締めの句は不要です。\n感情の理由、以前の心理状態、回復・成長・性格・他人の意図は、本人が述べていなければ説明として加えません。「〜と解釈できる」と留保しても、未記載の説明を加える根拠にはしません。本人が書いた因果関係は保ちます。\n短い日常は短く受け取って終えられます。深読みや発見を作る必要はありません。単に理由が書かれていないことを本人にも不明と決めず、理解に必要な一点がある場合だけ予算内で問います。本人が不明・迷いとして書いた点は勝手に解消しません。",
+  "max_model_calls": 4,
+  "max_seconds": 600,
+  "context_tokens": 8192,
+  "max_new_tokens": 2560,
+  "gpu_hourly_usd": 0.26,
+  "max_process_usd": 0.043334,
+  "training_updates": 0,
+  "cmee_adoption": false,
+  "automatic_progression": false,
+  "retry": false,
+  "case_ids": [
+    "FT-UDON-INITIAL-BASELINE",
+    "EFREE-E05-BASELINE",
+    "FT-UDON-INITIAL-REVISED",
+    "EFREE-E05-REVISED"
+  ],
+  "scope": "PAIRED_COMMON_INSTRUCTION_TWO_KNOWN_INPUTS_NO_TRAINING",
+  "limits": [
+    "No unknown-generalization or whole-model-limit claim",
+    "No CMEE semantic/body adoption, SQL, or service persistence",
+    "No E01-0/E03-0/A03-SPARSE input or teacher reuse",
+    "Only shared task_instruction differs within each pair; independent generation messages",
+    "Strict JSON is not a new requirement; parse errors metadata only",
+    "Preparation/recovery/holding/storage/tax excluded from processing allocation"
+  ],
+  "stop": [
+    "whole GPU phase 600 seconds",
+    "per call 180 seconds or whole remaining deadline",
+    "OOM/nonfinite/exception/input or weight mismatch",
+    "non-EOS or deadline stops remaining calls; no retries"
+  ]
+}

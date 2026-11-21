@@ -1,0 +1,29 @@
+{
+  "pid": 380602,
+  "started_unix": 1793309913.5430143,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "290s",
+    "python3.12",
+    "-B",
+    "/workspace/cocolon_syntax2b_pack_20261030/syntax2b.py",
+    "--cpu",
+    "/workspace/cocolon_prior_rows2_cpu_20261029",
+    "--raw",
+    "/workspace/cocolon_prior_rows2_run_20261029",
+    "--api",
+    "/workspace/cocolon_fixedrows5_cmee_20261029",
+    "--out",
+    "/workspace/cocolon_syntax2b_cpu_20261030"
+  ],
+  "source_commit": "d87fd8ecf1a20cba9152827a92387550b4b18328",
+  "source_sha256": {
+    "syntax2b.py": "28e78eb120f07aef0806ddb1159e8257fb83e4972515eed63ec48b33cf205dc5",
+    "run_syntax2b.py": "8dd2286850cb978d8fe2c5df59a39d1d1420db61391fafe054d56ccc6e31fb9d",
+    "plan2b.json": "b85826de08860703629a01e8943400163d577686e66ca9c157f8cbde492c9f5e"
+  },
+  "cpu_attempt": 1,
+  "retry": false
+}

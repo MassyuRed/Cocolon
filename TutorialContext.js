@@ -4,6 +4,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -101,7 +102,8 @@ function cloneTutorialPieceItems(items = []) {
 
 
 export function TutorialProvider({ children }) {
-  const { session, recoveryMode } = useAuth();
+  const { session, recoveryMode, authOwnerGeneration } = useAuth();
+  const ownerRequestRef = useRef(null);
   const [isTutorialMode, setIsTutorialMode] = useState(
     INITIAL_TUTORIAL_STATE.isTutorialMode
   );
@@ -134,9 +136,10 @@ export function TutorialProvider({ children }) {
     INITIAL_TUTORIAL_STATE.tutorialCompletionInProgress
   );
 
-  const syncTutorialFlagsToProfile = useCallback(async (patch) => {
+  const syncTutorialFlagsToProfile = useCallback(async (patch, request) => {
+    if (!request?.expectedUserId || request.signal.aborted) return false;
     try {
-      await patchAccountProfileMe(patch);
+      await patchAccountProfileMe(patch, request);
       return true;
     } catch (e) {
       console.warn("TutorialContext: failed to sync tutorial flags", e);
@@ -146,6 +149,18 @@ export function TutorialProvider({ children }) {
 
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
+    const request = {
+      expectedUserId: session?.user?.id ?? null,
+      signal: controller.signal,
+    };
+    ownerRequestRef.current = request;
+    setIsTutorialMode(false);
+    setTutorialCompletionInProgress(false);
+    setTutorialEmotions([]);
+    setTutorialPieces([]);
+    setTutorialEmotionLogFeed([]);
+    setTutorialStep(0);
 
     if (!session || recoveryMode) {
       setTutorialCompleted(false);
@@ -154,6 +169,7 @@ export function TutorialProvider({ children }) {
       setTutorialCompletionInProgress(false);
       return () => {
         cancelled = true;
+        controller.abort();
       };
     }
 
@@ -174,19 +190,21 @@ export function TutorialProvider({ children }) {
         readTutorialLocalFlag(TUTORIAL_COMPLETED_STORAGE_PREFIX, userId),
         readTutorialLocalFlag(TUTORIAL_SKIPPED_STORAGE_PREFIX, userId),
       ]);
+      if (cancelled || request.signal.aborted) return;
 
       let remoteCompleted = false;
       let remoteSkipped = false;
       let remoteLoaded = false;
 
       try {
-        const json = await getAccountProfileMe();
+        const json = await getAccountProfileMe(request);
         remoteCompleted = json?.tutorial_completed === true;
         remoteSkipped = json?.tutorial_skipped === true;
         remoteLoaded = true;
       } catch (e) {
         console.warn("TutorialContext: failed to load tutorial flags", e);
       }
+      if (cancelled || request.signal.aborted) return;
 
       const nextCompleted = localCompleted || remoteCompleted;
       const nextSkipped = !nextCompleted && (localSkipped || remoteSkipped);
@@ -207,21 +225,22 @@ export function TutorialProvider({ children }) {
             tutorial_completed: true,
             tutorial_skipped: false,
             tutorial_completed_at: new Date().toISOString(),
-          });
+          }, request);
         } else if (localSkipped && !remoteSkipped && !nextCompleted) {
           void syncTutorialFlagsToProfile({
             tutorial_completed: false,
             tutorial_skipped: true,
             tutorial_completed_at: null,
-          });
+          }, request);
         }
       }
     })();
 
     return () => {
       cancelled = true;
+      controller.abort();
     };
-  }, [session?.user?.id, recoveryMode, syncTutorialFlagsToProfile]);
+  }, [session?.user?.id, authOwnerGeneration, recoveryMode, syncTutorialFlagsToProfile]);
 
   const clearTutorialData = useCallback(() => {
     setTutorialEmotions([]);
@@ -244,6 +263,8 @@ export function TutorialProvider({ children }) {
 
   const endTutorial = useCallback(async () => {
     const userId = session?.user?.id ?? null;
+    const request = ownerRequestRef.current;
+    if (!userId || request?.expectedUserId !== userId || request.signal.aborted) return false;
     const completedAt = new Date().toISOString();
     const payload = {
       tutorial_completed: true,
@@ -254,16 +275,17 @@ export function TutorialProvider({ children }) {
     setTutorialCompletionInProgress(true);
     try {
       await writeTutorialLocalFlags(userId, { completed: true, skipped: false });
+      if (request.signal.aborted) return false;
       setTutorialCompleted(true);
       setTutorialSkipped(false);
       clearTutorialData();
       setTutorialResetToken((prev) => prev + 1);
       setIsTutorialMode(false);
     } finally {
-      setTutorialCompletionInProgress(false);
+      if (!request.signal.aborted) setTutorialCompletionInProgress(false);
     }
 
-    void syncTutorialFlagsToProfile(payload).then((synced) => {
+    void syncTutorialFlagsToProfile(payload, request).then((synced) => {
       if (!synced) {
         console.warn("TutorialContext: failed to sync tutorial completion flags");
       }
@@ -272,6 +294,8 @@ export function TutorialProvider({ children }) {
 
   const skipTutorial = useCallback(async () => {
     const userId = session?.user?.id ?? null;
+    const request = ownerRequestRef.current;
+    if (!userId || request?.expectedUserId !== userId || request.signal.aborted) return false;
     const payload = {
       tutorial_completed: false,
       tutorial_skipped: true,
@@ -284,7 +308,8 @@ export function TutorialProvider({ children }) {
     clearTutorialData();
     setTutorialResetToken((prev) => prev + 1);
     await writeTutorialLocalFlags(userId, { completed: false, skipped: true });
-    void syncTutorialFlagsToProfile(payload);
+    if (request.signal.aborted) return false;
+    void syncTutorialFlagsToProfile(payload, request);
   }, [clearTutorialData, session?.user?.id, syncTutorialFlagsToProfile]);
 
   const resetTutorial = useCallback(() => {

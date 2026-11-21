@@ -1,0 +1,49 @@
+{
+  "status": "DAILY2_REAL_MODEL_ISOLATED_SQL_SAVED_REREADS_COMPLETE_NOT_PRODUCT_ACCEPTED",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "source_commit": "6e6ae549a03988142324958d672a0b130fb09c40",
+  "plan": {
+    "schema": "cocolon.4b_quote_joint_fit12_service_eval.v1",
+    "status": "AUTHORIZED_CONDITIONAL_ALL9_SUCCESS",
+    "gpu_run_authorized": true,
+    "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+    "max_model_calls": 2,
+    "max_seconds": 900,
+    "runner_sha256": "7efa6fdfb9d80f4d53efa694fc161399c49f22c5a106f8aa71578ab337e4989f",
+    "fixture_sha256": "583fbe2ea3d0fab4a09b9a69b5fdacd453715914a650463473be1d5bef4776a8",
+    "gpu_hourly_usd": 0.26,
+    "max_process_usd": 0.065,
+    "fit_result_sha256": "145027595ee37255c065e994791d085dbec6caeb51153d90bad35f1d6817268f",
+    "fit_run_sha256": "18820713155c81f39a0b4efa756095c00db1bd6b2ef768efe2b75516c77641b4",
+    "fit_training_source_commit": "fe3f0f9a01968bd283b73d22d91d77f516c661ae",
+    "selected_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+    "all9_meaning_body_passed": true,
+    "root_all9_raw_surface_question_update_read": true,
+    "approval_basis": "Mash approved joint12 plus conditional2 together. All9 passed; no additional approval needed.",
+    "scope": "Two initial-only daily fixed-family inputs with separate service identities; actual model to isolated SQL save and non-generating reread, one meaning interruption/resume. Not independent unseen-language or production validation.",
+    "retry": false,
+    "training_updates": 0,
+    "product_accepted": false
+  },
+  "fit_run_sha256": "18820713155c81f39a0b4efa756095c00db1bd6b2ef768efe2b75516c77641b4",
+  "fit_training_source_commit": "fe3f0f9a01968bd283b73d22d91d77f516c661ae",
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "source_calls": 2,
+  "sql_rpc_calls": 30,
+  "saved_reread_cases": [
+    "HOLDOUT-DAILY-FOCUS12-01",
+    "HOLDOUT-DAILY-FOCUS12-02"
+  ],
+  "meaning_interruption_resume_cases": [
+    "HOLDOUT-DAILY-FOCUS12-02"
+  ],
+  "forbidden_source_calls": 0,
+  "forbidden_generation_calls": 0,
+  "training_updates": 0,
+  "gpu_stop_restart_delete_operations": 0,
+  "product_accepted": false,
+  "retry": false,
+  "adapter_unchanged": true,
+  "seconds": 186.2474336028099
+}

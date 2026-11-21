@@ -1,0 +1,42 @@
+{
+  "status": "NONTRAINING_ALIGNMENT_DIAGNOSTIC_NOT_QUALITY_ACCEPTANCE",
+  "teacher_ids": [
+    "AT17",
+    "AT19",
+    "AT21",
+    "AT29"
+  ],
+  "max_forwards": 6,
+  "max_seconds": 300,
+  "outer_timeout_term_seconds": 290,
+  "outer_kill_grace_seconds": 10,
+  "training_updates": 0,
+  "new_generations": 0,
+  "weights_sha256": "02dfa43f0e848da2d3e2c9bf1e519e76a8e8dfa74e59c855dfee892259e911a7",
+  "config_sha256": "ad2ff18a05a8b901db0f04a74cacaf3c1360cf342ae07b473b176885bdb3bba5",
+  "private_input_library_file_id": "libfile_53338dfcb1a881919440812b7c9f7bd3",
+  "input_file_sha256": {
+    "semantic_units_teaching32_plan.json": "02308ac57013e8716e3a89dc22dfde1c54f1e4d895440254df4c7637384c23cd",
+    "result/report.json": "0263618d3ff93b02c130fcc05bbb9bd520b2ee2c455da1415c00ac0d91885084",
+    "result/encoded_training.json": "9b92541f4ce1b44b15b653f11fda685b7368a8ee6a850019a964f08f13235fcd",
+    "result/after_REHEARSAL_AT17.raw.txt": "311e309cd035a12b1c9f47af07ffa4a8834689c672d6a6b3050d7e90ac3b9ae3",
+    "result/after_REHEARSAL_AT17.request.json": "8aebb11a6e1a15d4c945230aa123769fc6e26595e45004fb51f3056c92c7a0e6",
+    "result/after_REHEARSAL_AT19.raw.txt": "2a9c865be50ab9d880f24b8d173602311f1f74d626096c84cf363610aa4aa9eb",
+    "result/after_REHEARSAL_AT19.request.json": "e7e2f993e50831ecfc603d942a75efd24ab228f5007ee501229204c783ef42ea",
+    "result/after_REHEARSAL_AT21.raw.txt": "52facbc2b191d58d9f1367ae8ba34063f225b1669ea825a1019749c2dd013d6b",
+    "result/after_REHEARSAL_AT21.request.json": "4042a5252ad4a05651e75fc5e56d218af52c24d6d51f5040ad950d5c6cbb5f87",
+    "result/after_REHEARSAL_AT29.raw.txt": "b85b985ffc290fd7cff4528bf52c638bc604d8991edce9bd9247539fdeeb5342",
+    "result/after_REHEARSAL_AT29.request.json": "6b05b9d37f7e8e1fec3caa53b417dad76f8645c98358cadeb636b77d624a4d38"
+  },
+  "api_source_blobs": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "b2b80c3d22b3094b03300dc6a407dcc38d96d700",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py": "26f4271c146cb1eba512d2f3df81f5c99c994e64",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "8b9ebf179880aa10a894536e7ab54136db060bbc",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "957ec79c3e69f8eaceafe26767cc3c8e82406d3e",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "f04514cbd2f9b95b5650351408dc9c2e628dd294"
+  },
+  "source_loader_git_blob": "722525c2a1f1afe0a5f0902e0bddf5b602db8a1a",
+  "raw_token_scope": "Retokenized saved raw for teacher-prefix diagnostics, not original generation token IDs",
+  "gpu_hourly_usd_observed": 0.58,
+  "process_cost_upper_usd": 0.04833333333333333
+}

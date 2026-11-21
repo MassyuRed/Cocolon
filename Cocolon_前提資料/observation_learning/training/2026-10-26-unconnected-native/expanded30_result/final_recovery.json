@@ -1,0 +1,25 @@
+{
+  "status": "FINAL_ARCHIVE_EXTERNALLY_VERIFIED",
+  "archive_bytes": 26078179,
+  "archive_sha256": "6bb5da2dabdfea49173a0697a5d17460d1419e55ff6c7d1d53d1f5dcdef6c5fc",
+  "payload_count": 55,
+  "members": 56,
+  "all_members_verified": true,
+  "training_stop_archive_sha256": "7648c31cca15bb7082d50baf70d554136ea1828e1c969e5911f8ba4ad423c369",
+  "training_stop_payload_count": 35,
+  "cpu_archive_sha256": "7a87f2b471cf9d0e84d0a17a99dcf0f8e34190e51e287ae231f9a9ca29b6a2c6",
+  "cpu_payload_count": 16,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e",
+    "adapter_model.safetensors": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a"
+  },
+  "final_finite_f32_tensors": 112,
+  "final_parameters": 3833856,
+  "origin_updates": 30,
+  "eval_generations": 0,
+  "real_reload_tested": false,
+  "library_file_id": "libfile_d93ea0ff6e7c819185b62a0e25725850",
+  "library_version": 0,
+  "library_preservation": "COMPLETE"
+}

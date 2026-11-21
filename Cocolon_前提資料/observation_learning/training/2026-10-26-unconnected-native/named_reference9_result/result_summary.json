@@ -1,0 +1,189 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "source_commit": "bc8d3c471aefb960d81c8a692873ce183dd2d789",
+  "api_commit": "a8be7a9bceed35a9f3cb843f22de05bbd5bc6e18",
+  "new_user_instruction_unit": true,
+  "old_named13_authority_reused": false,
+  "training_updates": 9,
+  "model_loads": 2,
+  "generations": 2,
+  "changed_tensors": 112,
+  "saved_adapter_sha256": "9ba8dccb37953000d7b2f2700f796dd89bc75a6e1b9d664199f6dafd024449d8",
+  "inference_reload_112_exact_no_grad": true,
+  "original_284f_d431_and_sources_unchanged": true,
+  "processing_seconds": 537.5754943919601,
+  "process_cost_usd": 0.0418114273415969,
+  "excluded_costs": [
+    "preparation",
+    "CPU",
+    "recovery",
+    "holding",
+    "storage",
+    "communications",
+    "taxes"
+  ],
+  "cpu_preparation_seconds": 6.691307849949226,
+  "cpu347_reused_not_rerun": true,
+  "cmee_consumer_seconds": 1.7194548960542306,
+  "meaning_adopted_count": 0,
+  "body_available_count": 0,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4422,
+      "output_tokens": 3712,
+      "seconds": 165.33552807208616,
+      "eos_reached": false,
+      "finish_reason": "length",
+      "plain_json_parse_success": false,
+      "receipt_status": "TOKEN_LIMIT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4586,
+      "output_tokens": 3014,
+      "seconds": 132.53276132501196,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "plain_json_parse_success": true,
+      "receipt_status": "INVALID_FORMAT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    }
+  ],
+  "training_rows": [
+    {
+      "step": 1,
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "loss": 0.0015879335114732385,
+      "adaptive": false,
+      "target_tokens": 1331,
+      "gradient_norm": 0.05095183104276657
+    },
+    {
+      "step": 2,
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "loss": 1.5092207193374634,
+      "adaptive": true,
+      "target_tokens": 2913,
+      "gradient_norm": 7.159942626953125
+    },
+    {
+      "step": 3,
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "loss": 1.5704691410064697,
+      "adaptive": true,
+      "target_tokens": 3238,
+      "gradient_norm": 8.287618637084961
+    },
+    {
+      "step": 4,
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "loss": 0.0019110088469460607,
+      "adaptive": false,
+      "target_tokens": 2228,
+      "gradient_norm": 0.18601232767105103
+    },
+    {
+      "step": 5,
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "loss": 1.19744873046875,
+      "adaptive": true,
+      "target_tokens": 2913,
+      "gradient_norm": 5.5477705001831055
+    },
+    {
+      "step": 6,
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "loss": 1.277841329574585,
+      "adaptive": true,
+      "target_tokens": 3238,
+      "gradient_norm": 5.506811141967773
+    },
+    {
+      "step": 7,
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "loss": 0.0014965086011216044,
+      "adaptive": false,
+      "target_tokens": 1585,
+      "gradient_norm": 0.07771490514278412
+    },
+    {
+      "step": 8,
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "loss": 0.9300139546394348,
+      "adaptive": true,
+      "target_tokens": 2913,
+      "gradient_norm": 4.705724716186523
+    },
+    {
+      "step": 9,
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "loss": 1.0426104068756104,
+      "adaptive": true,
+      "target_tokens": 3238,
+      "gradient_norm": 4.406223297119141
+    }
+  ],
+  "external_verification": {
+    "runtime": {
+      "bytes": 108328,
+      "sha256": "3f5f28e3585ae835e0f86b72b1ad08b09fedcb08d39efc12dabf2d4ad8ccb9b1",
+      "payloads": 24,
+      "members": 25,
+      "crc": true,
+      "all_hash_sizes": true
+    },
+    "weights_and_originals": {
+      "bytes": 14374039,
+      "sha256": "ff812e0708e2bd831796070cdeba4090476d67dfb7e2a200c83ae0ca5939407e",
+      "payloads": 28,
+      "members": 29,
+      "crc": true,
+      "all_hash_sizes": true
+    },
+    "weights": [
+      {
+        "path": "run/adapter/adapter_model.safetensors",
+        "sha256": "9ba8dccb37953000d7b2f2700f796dd89bc75a6e1b9d664199f6dafd024449d8",
+        "bytes": 15351792,
+        "tensors": 112,
+        "parameters": 3833856,
+        "dtype": "F32",
+        "all_finite": true,
+        "contiguous": true
+      }
+    ],
+    "runtime_full_payloads_identical": true,
+    "cpu_originals_identical": true,
+    "saved_weight_matches_run": true,
+    "initial_284f_shapes_identical": true,
+    "plan_identical": true,
+    "raw_hashes_match_run": true,
+    "model_loads": 0,
+    "generations": 0,
+    "sql_operations": 0
+  },
+  "weights_library_file_id": "libfile_52309bdfc88881918095f167afe8f12d",
+  "weights_library_version": 0,
+  "product_credit": 0,
+  "formal_product_read": "0/3",
+  "overall_progress_percent": 54.5,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "retry": false,
+  "raw_repairs": 0,
+  "reader_changes": 0,
+  "sql_operations": 0,
+  "gpu_lifecycle_operations": 0,
+  "structure_map_delta": "NONE",
+  "observational_session_needed_for_current_failure": false
+}

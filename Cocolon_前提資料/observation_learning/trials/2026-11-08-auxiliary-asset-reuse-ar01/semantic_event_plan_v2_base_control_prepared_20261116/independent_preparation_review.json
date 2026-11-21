@@ -1,0 +1,139 @@
+{
+  "authorization_and_ci": {
+    "a12_scope_requires_new_exact_approval_before_transfer_or_responses": true,
+    "ci_success_independently_queried_by_this_reviewer": false,
+    "exact_ci_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+    "fresh_approval_ci_and_runtime_checks_are_still_required": true,
+    "fresh_exact_approval_received": false,
+    "old_a11_authority_consumed": true,
+    "required_ci_conclusion": "success",
+    "required_ci_runs": {
+      "Analysis": 43846424667,
+      "Piece": 43846424124
+    },
+    "unmet_b11_authority_reused": false
+  },
+  "baseline_readiness": {
+    "baseline_helper_proof_files_verified_locally": true,
+    "baseline_native_sha256": "d678fe2c9721b91a371746980465fc0fb07eb5f8c950ce983fb6e4562a6a02be",
+    "fresh_pod_readiness_observed_by_reviewer": false,
+    "helper_sha256": "3e5153601958f83f1dd49f56e212c75357957e56903f61d5b4c6913002de2f5f",
+    "kernel_proof_sha256": "d759203ab51d7efbb0d82736d574fca47822ce40d19cc81651b5d340e0760820",
+    "last_restored_provider_pid": 4089,
+    "last_restored_start_ticks": "99099105",
+    "pid_identity_is_historical_not_new_fresh_observation": true,
+    "proof_remains_bound_to_baseline_native_not_new_candidate": true,
+    "runner_requires_current_pid_start_argv_env_cwd_native_adapter_client_and_kernel_proof_checks_before_stop": true
+  },
+  "blockers": [],
+  "body_free": true,
+  "candidate_native_sha256": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56",
+  "controlled_material": {
+    "all_diagnostic_other_top_level_values_equal_a11": true,
+    "changed_diagnostic_hash_paths": [
+      "ai/services/ai_inference/analysis_if_model_source.py",
+      "ai/services/ai_inference/analysis_model_source.py",
+      "ai/tools/serve_emlis_natural_reply.py"
+    ],
+    "complete_12_record_input_equal_a11": true,
+    "copy_files_unchanged_from_a11": [
+      "controls.json",
+      "full12.input.json",
+      "input_cases.json"
+    ],
+    "diagnostic_changes_limited_to_source_hashes": true,
+    "five_complete_messages_and_case_bindings_equal_a11": true,
+    "full12_plan_bytes_equal_a11": true,
+    "no_old_raw_rebinding": true,
+    "six_leaf_groups_and_complete_messages_equal_a11": true
+  },
+  "driver_review": {
+    "a11_ast_identical_except": [
+      "ROOTS",
+      "MODEL"
+    ],
+    "a11_failed_actual_cannot_satisfy_b12_gate": true,
+    "a12_max_responses": 9,
+    "automatic_retry": false,
+    "b12_requires_five_new_complete_actuals_and_exact_independent_review_hashes": true,
+    "conditional_b12_max_responses": 11,
+    "driver_sha256": "619739b07365e6bb7fdbf121d535c6fc8c4a818f2552a0631488b6bc99e2ed01",
+    "finally_restoration_and_hard_budget_checks_preserved": true,
+    "loopback_child_argv_pid_socket_ownership_checks_preserved": true,
+    "same_raw_sql_save_and_separate_process_reread_remain_later_work": true,
+    "single_use_root_absence_required": true,
+    "sql_auto_save": false,
+    "sql_finalizer_invoked": false,
+    "training": 0
+  },
+  "payload_files_verified": {
+    "controls.json": {
+      "bytes": 17840,
+      "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+    },
+    "current_api_sources.zip": {
+      "bytes": 2584579,
+      "sha256": "dabed616b974628b94743d629f89d7024dfa5e1cf20e33cd2f6f14fa02d156a5"
+    },
+    "diagnostic_preparation.json": {
+      "bytes": 56350,
+      "sha256": "0aa06bf49fa7c7fc2d22cffbc7e259c44b19966f6f163fc3e57024c6a707b49d"
+    },
+    "event_plan_execution.py": {
+      "bytes": 32210,
+      "sha256": "619739b07365e6bb7fdbf121d535c6fc8c4a818f2552a0631488b6bc99e2ed01"
+    },
+    "full12.input.json": {
+      "bytes": 59146,
+      "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+    },
+    "full12_pre_acquisition.plan.json": {
+      "bytes": 166199,
+      "sha256": "c4b36f8d3e23be096bd021e72adf070af648129854b1b165664a7f6deca39d83"
+    },
+    "input_cases.json": {
+      "bytes": 22769,
+      "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+    },
+    "source_manifest.json": {
+      "bytes": 191064,
+      "sha256": "6920fca25e18d62bca6f25ccb1aee02c6e11c3dde644590d4d9d90719dc4b8b7"
+    }
+  },
+  "quality_and_actions": {
+    "b12_authorized_to_execute_by_this_review": false,
+    "future_five_actual_case_meaning_adequacy_known": false,
+    "normal_adoption": false,
+    "reviewer_external_writes": 0,
+    "reviewer_extra_tests": 0,
+    "reviewer_gpu_operations": 0,
+    "reviewer_model_calls": 0,
+    "reviewer_product_source_edits": 0,
+    "runtime_or_quality_success_inferred_from_cpu_tests": false
+  },
+  "reviewer": "independent_architecture_review",
+  "schema": "cocolon.analysis.independent_preparation_review.v1",
+  "scope": {
+    "bytes": 9957,
+    "path": "a12_payload/execution_scope.json",
+    "sha256": "c9aa3d15ea273e02f2de5f9432e171297bdb24c29954bffe01f95711b5ad4624"
+  },
+  "source_commit": "46fff73fe685b6c46d7f4b03c0bdeb003424a5e3",
+  "source_package": {
+    "all_247_members_equal_published_git_blob_bytes": true,
+    "manifest_commit_tree_matches_git": true,
+    "manifest_tree": "ca5fc05965d47cac8b5a7e2b0a0093c10797d1a2",
+    "uncompressed_bytes": 12594242,
+    "unique_file_count": 247,
+    "zip_crc_valid": true
+  },
+  "state": "OFFLINE_PREPARATION_PASS_NOT_APPROVED_OR_EXECUTED",
+  "transfer_totals": {
+    "all_prepared_bytes": 3140114,
+    "all_prepared_files": 9,
+    "new_upload_bytes": 3040359,
+    "new_upload_files": 6,
+    "same_pod_copy_files": 3,
+    "verification_reports_excluded_from_transfer_set": true
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "status": "ACTUAL_GPU_COMPLETE_QUALITY_NOT_ACCEPTED",
+  "calls": [
+    {
+      "condition": "base",
+      "probe_id": "AF01",
+      "status": "RETURNED",
+      "finish_reason": "stop",
+      "seconds": 17.830905459122732,
+      "raw_sha256": "f7263e57f96707d639e4336743cead74f2cd35dd8f1e029a32265eb756b22416",
+      "admission": "REJECTED",
+      "reason": "analysis_semantic_json_invalid",
+      "artifact_created": false
+    },
+    {
+      "condition": "base",
+      "probe_id": "AF02",
+      "status": "RETURNED",
+      "finish_reason": "stop",
+      "seconds": 4.074274009093642,
+      "raw_sha256": "65b4e68c68f280f3e49b8c85da6c7a2cfd6654566a25f415623e47236a1923d3",
+      "admission": "RETURNED",
+      "artifact_created": true,
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 1,
+      "file_replay": "MATCHED",
+      "candidate_id": "analysis-unit-candidate:1383d4351e85abf5ce455c6f0fa766f3287fce2104e288b5f355eb970927c76a",
+      "sql_commit_count": 0
+    },
+    {
+      "condition": "fit38",
+      "probe_id": "AF01",
+      "status": "RETURNED",
+      "finish_reason": "length",
+      "seconds": 23.02245692210272,
+      "raw_sha256": "7879ad7c6a99c8e8d03a5705481591480cf67b61357107a0b7fdce0c47b9132e",
+      "admission": "REJECTED",
+      "reason": "analysis_model_generation_incomplete",
+      "artifact_created": false
+    },
+    {
+      "condition": "fit38",
+      "probe_id": "AF02",
+      "status": "RETURNED",
+      "finish_reason": "length",
+      "seconds": 23.02601236384362,
+      "raw_sha256": "04b936a0faa07f88032504cf02ae4fd3cd8ff4a4d5fc6f2a3ef42a3639502943",
+      "admission": "REJECTED",
+      "reason": "analysis_model_generation_incomplete",
+      "artifact_created": false
+    }
+  ],
+  "synthetic_only": true,
+  "training": false,
+  "retry": false,
+  "max_calls": 4,
+  "max_process_seconds": 600,
+  "max_request_seconds": 23,
+  "requests_sha256": "96e809ddf8d58cafa509cea0645650bff5fa92b9532ae87d8cd771d0b07695d1",
+  "runner_sha256": "fccacd316509bd0148493aae3dc059320cdac979266bc668e05d623e1431bb28",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "input_tokens": {
+    "AF01": 462,
+    "AF02": 432
+  },
+  "process_seconds": 82.5324463751167,
+  "private_archive": {
+    "library_file_id": "libfile_759a1028cb2c819199cf421a84a82aba",
+    "filename": "cocolon-analysis-units-gpu4-20261102.zip",
+    "bytes": 133342,
+    "sha256": "cbbad3afbc98d6bf28e07fe91e61e4ee05de538d3154532e0cc8ed00a7fdd8d4",
+    "members": 24
+  },
+  "pre_generation_launch_failure": {
+    "model_calls": 0,
+    "seconds": 6.697189169004559,
+    "reason": "adapter directory argument one level too shallow; corrected to actual existing directory; original failure preserved"
+  },
+  "source_check": {
+    "text_source_files": 2134,
+    "mismatches": 0,
+    "one_preexisting_test_copy_synchronized": true
+  },
+  "semantic_read": {
+    "base_AF01": "Markdown fence and carrier/category confusion; not admitted",
+    "base_AF02": "One whole-field SCENE, yesterday/today and negation on same unit; decomposition quality not established",
+    "fit38": "Both outputs enumerate kinds repeatedly until deadline; cause not established"
+  },
+  "normal_enablement": false,
+  "training_updates": 0,
+  "new_candidate_sql_commits": 0,
+  "gpu_compute_apps_after": 0,
+  "clarification_cpu": {
+    "api_commit": "cddf185594b5eeffcf72a92dcc2a2c5a44ff8b4c",
+    "passed": 113,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 15.87,
+    "old_actual_file_replay": "MATCHED, Engine.generate forbidden; no new model call"
+  }
+}

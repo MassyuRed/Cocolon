@@ -1,0 +1,46 @@
+{
+  "state": "REJECTED_UNCLOSED_AND_SEMANTIC_MISMATCH",
+  "api_commit": "dca20231ad1791c07a5011d6905340c78d4de0b3",
+  "new_model_calls": 1,
+  "reused_exact_responses": 12,
+  "finish_reason": "length",
+  "raw_scalars": 4834,
+  "raw_sha256": "c9d3a2250581d2c1606169b38892ef78bff001feed5bebc5fc3aab445b7e459c",
+  "driver_seconds": 258.17974476423115,
+  "restored_provider_pid": 117766,
+  "total_seconds": 334.64427521498874,
+  "saved": 0,
+  "schema_repaired": false,
+  "semantic_failures": [
+    {
+      "node": "n2",
+      "issue": "Later contact name confirmation and sent revised draft are not retained; unconfirmed at meeting is stated as undetermined fact."
+    },
+    {
+      "node": "n3",
+      "issue": "Field1 colleague nod is combined with field3 family reaction; actor and record scopes cross."
+    },
+    {
+      "node": "n7",
+      "issue": "Current completed book reading and unread next book are not clearly distinguished; conditions for speaking become conditions for reading."
+    },
+    {
+      "node": "n10",
+      "issue": "Did not change limited participation into staying until completion is inverted into did not change plan to stay until completion."
+    },
+    {
+      "node": "n11",
+      "issue": "Actual tidying of draft is restated as undecided."
+    }
+  ],
+  "boundary_fix_tests": {
+    "core_service": 58,
+    "consumers": 109,
+    "total_pass": 167,
+    "ci_analysis": "success",
+    "ci_piece": "success"
+  },
+  "normal_api_worker": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "db_migration": "20261115011424",
+  "next": "Finite same-message base/adapter diagnostic after isolated kernel import/parity proof; no full12 retry until a meaningful change is validated."
+}

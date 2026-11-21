@@ -1,0 +1,4 @@
+{"step": 1, "id": "FT-CHAIR-INITIAL", "loss": 0.05817059427499771, "gradient_norm": 1.511232614517212}
+{"step": 2, "id": "FT-CHAIR-AFTER-CORRECTION", "loss": 0.09442088007926941, "gradient_norm": 4.373565196990967}
+{"step": 3, "id": "FT-CHAIR-INITIAL", "loss": 0.026535330340266228, "gradient_norm": 0.7632303237915039}
+{"step": 4, "id": "FT-CHAIR-AFTER-CORRECTION", "loss": 0.05628957971930504, "gradient_norm": 2.5958244800567627}

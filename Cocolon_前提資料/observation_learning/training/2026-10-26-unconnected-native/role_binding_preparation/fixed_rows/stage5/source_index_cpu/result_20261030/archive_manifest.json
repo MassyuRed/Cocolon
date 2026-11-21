@@ -1,0 +1,100 @@
+{
+  "source_commit": "2e3a607199b79d8cf0bde92bece8abf3a3630e99",
+  "files": {
+    "run/run.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/run.json",
+      "bytes": 9825,
+      "sha256": "fc92e763d1d88b4647b27ab34ea2489c3e0376e8048f41eca6365a3a9999330a"
+    },
+    "run/loaded_tensors.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/loaded_tensors.json",
+      "bytes": 26033,
+      "sha256": "0b78ca6242771c68a99f9309be2f3189e0941d06ac89ce2a44efc158b420c1de"
+    },
+    "run/extra_frozen.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/extra_frozen.json",
+      "bytes": 35213,
+      "sha256": "8f8d3f24da983e969036bdbac1d6da90049f61415868b7928dcd55fbfa57e9fc"
+    },
+    "run/stage1_FT-BOOK-AFTER-ANSWER.jsonl.messages.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/stage1_FT-BOOK-AFTER-ANSWER.jsonl.messages.json",
+      "bytes": 20514,
+      "sha256": "2654cff95c05d625861e744ac2821bd40edc15da5786e7570a376c0fd00f29da"
+    },
+    "run/stage1_FT-BOOK-AFTER-ANSWER.jsonl": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 3765,
+      "sha256": "657c475b3b2508da74254dc08a241e3fd0571ec454f6f198537c5ddb46cff90f"
+    },
+    "run/FT-BOOK-AFTER-ANSWER_stages.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/FT-BOOK-AFTER-ANSWER_stages.json",
+      "bytes": 27135,
+      "sha256": "b970a40f69bb2e1a65333b425322e89574cd0765512e1f6a11a235879b837036"
+    },
+    "run/stage1_FT-SHOP-AFTER-ANSWER.jsonl.messages.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/stage1_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+      "bytes": 21110,
+      "sha256": "93fb26afe6372e093cfcc1af869b8ea8c52df44cbf3f3a60a46616416f026d19"
+    },
+    "run/stage1_FT-SHOP-AFTER-ANSWER.jsonl": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 5064,
+      "sha256": "d2ed0ec798ec119cae7830498e3adee40b4f9ae83aaa82b72a3deabba473f047"
+    },
+    "run/FT-SHOP-AFTER-ANSWER_stages.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/FT-SHOP-AFTER-ANSWER_stages.json",
+      "bytes": 29958,
+      "sha256": "0e1156fbfe9c6fdbcde9a2271b81221c37ac425090e2322a894401db0cd54f54"
+    },
+    "run/cmee/diagnosis.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_run_20261030/cmee/diagnosis.json",
+      "bytes": 800,
+      "sha256": "9a91d124e671b95b93c7507f4de95490cfdf67c2e3e269d8048d6c3a919382e6"
+    },
+    "runtime/plan.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/plan.json",
+      "bytes": 6170,
+      "sha256": "dda1bf8a9f495c0968b4c174160047c9b742423d2a53bf924dd92faeede0050b"
+    },
+    "runtime/run_source_index_once.py": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/run_source_index_once.py",
+      "bytes": 16678,
+      "sha256": "ba5862ae731f7bfc6caf05d65453bb67d6022f10deb333eb8d95d269ed75b432"
+    },
+    "runtime/prompt_source_index.py": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/prompt_source_index.py",
+      "bytes": 11806,
+      "sha256": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96"
+    },
+    "runtime/execute_once.lock": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/execute_once.lock",
+      "bytes": 41,
+      "sha256": "16936eb05e3775127a322fc872d67f6bcd90bff30ab7163f8903d51b02aca752"
+    },
+    "runtime/gpu_launch.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/gpu_launch.json",
+      "bytes": 421,
+      "sha256": "56da577b43fe733dfc33d8bdcf922317f0d2bf12c33d4e8327a4a8b214e904d4"
+    },
+    "runtime/gpu.log": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/gpu.log",
+      "bytes": 2879,
+      "sha256": "14c6b1046e7de3b959a91fdc58fe50aec784c03ef6fbec16a7f4080278a1b269"
+    },
+    "runtime/gpu.exit": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/gpu.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "runtime/gpu_elapsed.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/gpu_elapsed.json",
+      "bytes": 54,
+      "sha256": "908449f3024eedf115981b7feab08bbe9ae465156c5ca0d06124786bc54ffb71"
+    },
+    "runtime/post_identity.json": {
+      "original_path": "/workspace/cocolon_source_index_probe_pack_20261030/post_identity.json",
+      "bytes": 227,
+      "sha256": "96ae0cd867236d88526bdb822a125f6320a163c56fb6d91153d907af10e2ff5d"
+    }
+  }
+}

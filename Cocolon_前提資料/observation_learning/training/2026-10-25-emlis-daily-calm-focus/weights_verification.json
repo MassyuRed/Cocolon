@@ -1,0 +1,14 @@
+{
+  "schema": "cocolon.daily_focus12_offpod_weights.v1",
+  "archive_sha256": "9969861eded94c328c4d0ae720634d69fa185080a280c8bc59103a394bdb0dcf",
+  "archive_bytes": 3517892,
+  "members_verified": 18,
+  "pod_hash_match": true,
+  "optimizer_updates": 12,
+  "adapter_sha256": "affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3",
+  "tensor_count": 32,
+  "all_finite": true,
+  "stage": "ADAPTER_SAVED_BEFORE_GENERATION",
+  "includes_base_weights": false,
+  "includes_optimizer_rng": false
+}

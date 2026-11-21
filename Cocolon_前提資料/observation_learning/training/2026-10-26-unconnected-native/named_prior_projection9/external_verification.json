@@ -1,0 +1,21 @@
+{
+  "status": "POD_EXTERNAL_FULL_ARCHIVE_AND_WEIGHTS_VERIFIED",
+  "archive_bytes": 16176277,
+  "archive_sha256": "ccf8352a5451559b4279e1ae2bdbdbd3c309b6818ed19bb9fe13904056fb6f04",
+  "payloads": 150,
+  "members": 151,
+  "all_crc_hashes_sizes_verified": true,
+  "cpu_original_bundle_identical": true,
+  "weight_tensor_count": 112,
+  "weight_parameters": 3833856,
+  "dtype": "F32",
+  "all_finite": true,
+  "all_initial_reload_shapes_equal": true,
+  "adapter_sha256": "b8bcb6f9cc539c28c2412f0d0810dcae29dd1f225cea176682f3fc7a5772d9b3",
+  "initial_284f_and_sources_unchanged": true,
+  "model_loads": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "automatic_progression": false
+}

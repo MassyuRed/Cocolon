@@ -1,0 +1,6 @@
+{
+  "pid": 195464,
+  "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout --signal=TERM --kill-after=10s 590s /workspace/cocolon_venv/bin/python -B /workspace/cocolon_jointfocus9_pack_20261028/run_jointfocus9.py --pack /workspace/cocolon_jointfocus9_pack_20261028 --execute --source-commit 998f24b881167d2b47dce8fd6e4c66d7caca07e7 > /workspace/cocolon_jointfocus9_gpu.log 2>&1; gpu_status=$?; printf %s \"$gpu_status\" > /workspace/cocolon_jointfocus9_gpu.exit",
+  "source_commit": "998f24b881167d2b47dce8fd6e4c66d7caca07e7",
+  "retry": false
+}

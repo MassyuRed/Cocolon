@@ -1,0 +1,119 @@
+{
+  "state": "REJECTED",
+  "scope": "Same-message two-fictional-record adapter/base comparison; independent source-to-raw review, not product acceptance.",
+  "all_fictional": true,
+  "result_file_sha256": "144ca8da3db0c2008381e7e0e42a221b5992d9cb2aa189c6f4216638bfeb97d6",
+  "messages_sha256": "722924e92f50be6a9d55014fb35cfdaf736727b231a8e8ea6b5e0d9e666be931",
+  "input_sha256": "b5baf28e26764512e996274b1607dbef6a78138e4c7bd40199f091d514fa5bf0",
+  "new_model_calls": 2,
+  "training": 0,
+  "retry": 0,
+  "conditions": [
+    {
+      "condition": "adapter_120u",
+      "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+      "finish_reason": "stop",
+      "raw_sha256": "54f2d6d0a71c13795f77dde983b6e11757171d3d9b686d2c37849517151acff0",
+      "raw_scalars": 536,
+      "duration_seconds": 22.098984356969595
+    },
+    {
+      "condition": "base_disabled_adapter",
+      "model": "cocolon-qwen3.5-4b-analysis-base-851bf6e-candidate",
+      "finish_reason": "length",
+      "raw_sha256": "8640148c335eaa803c69cb3b7f5341670452e4e1dab85b480e9193aae4612c8f",
+      "raw_scalars": 2274,
+      "duration_seconds": 90.9054769850336
+    }
+  ],
+  "errors": [
+    {
+      "condition": "adapter_120u",
+      "location": "overview.summary",
+      "model_quote": "参加者へ送った未完了の段階",
+      "issue": "Unfinished action is attributed to the announcement sent to participants; the second record explicitly confirms correction and sending. The book club itself remains future, which is a different event.",
+      "source_record": 2,
+      "source_field": "memo",
+      "source_quote": "案内を直して参加者へ送り、一人から「了解」と返信を受け取った。"
+    },
+    {
+      "condition": "adapter_120u",
+      "location": "nodes[0].unknowns[0]",
+      "model_quote": "共同担当者の問い合わせへ返事が来たかは未定",
+      "issue": "Known absence in the first record and known received venue reply in the later record are replaced by undetermined receipt.",
+      "basis": [
+        {
+          "record": 1,
+          "field": "memo",
+          "quote": "共同担当者は朝のうちに会場へ問い合わせのメールを送っていたが、返事はまだ来ていなかった。"
+        },
+        {
+          "record": 2,
+          "field": "memo",
+          "quote": "私も会場からの返信の写しを読み、部屋と開始時刻を確認した。"
+        }
+      ]
+    },
+    {
+      "condition": "adapter_120u",
+      "location": "nodes[0].explanation",
+      "model_quote": "その判断が、共同担当者の問い合わせが返事をする前だったかを、この記述だけでは確認できません。",
+      "issue": "Unnecessary uncertainty ignores the first record statement that the venue reply had not yet arrived; the Japanese also makes an inquiry the subject of replying.",
+      "source_record": 1,
+      "source_field": "memo",
+      "source_quote": "共同担当者は朝のうちに会場へ問い合わせのメールを送っていたが、返事はまだ来ていなかった。"
+    },
+    {
+      "condition": "base_disabled_adapter",
+      "location": "nodes[4].title/summary/explanation",
+      "model_quote": "本人は会場の問い合わせに対して関与を拒否し、他者の領域と自らの領域を分けている。",
+      "issue": "Nonparticipation becomes refusal and an invented intention to exclude responsibility. The source reports only that the user was not involved.",
+      "source_record": 1,
+      "source_field": "memo",
+      "source_quote": "私は会場への問い合わせには関わっていない。"
+    },
+    {
+      "condition": "base_disabled_adapter",
+      "location": "nodes[0].summary",
+      "model_quote": "本人は読書会の案内作成の主導権を握り",
+      "issue": "Control or leadership of the announcement process is not stated by the record; performing editing does not establish it.",
+      "source_record": 1,
+      "source_field": "memo",
+      "source_quote": "地域の読書会の案内を作った。"
+    },
+    {
+      "condition": "base_disabled_adapter",
+      "location": "nodes[3].title",
+      "model_quote": "未完了の事項：椅子数確認",
+      "issue": "The source says inquiry sending is unknown, which does not establish noncompletion.",
+      "source_record": 2,
+      "source_field": "memo",
+      "source_quote": "共同担当者は椅子の数も確認したいと言っているが、その問い合わせを送ったかは聞いていない。"
+    },
+    {
+      "condition": "base_disabled_adapter",
+      "location": "finish_reason/raw end",
+      "issue": "finish_reason=length; JSON ends during the first edge explanation and is unclosed. Existing consumer rejects it with 503. No schema repair or partial adoption."
+    }
+  ],
+  "correctly_preserved_checks": [
+    {
+      "condition": "adapter_120u",
+      "fact": "The upstairs photo reference remains 二階 in the actual raw. No upstairs/downstairs substitution is present in this quotation.",
+      "model_quote": "本人は写真にあった二階の部屋が使えると思い、案内に部屋名を書きかけて消しています。"
+    }
+  ],
+  "machine_outcomes": {
+    "adapter_120u": "GENERATED is structural admission only; meaning rejected.",
+    "base_disabled_adapter": "NOT_GENERATED/503 after length result."
+  },
+  "adopted": false,
+  "saved_actual_output": 0,
+  "normal_rollout": 0,
+  "limits": [
+    "Two original records only; no person answers or corrections.",
+    "No conclusion about general model capability or causal superiority follows from two conditions.",
+    "No product acceptance awarded."
+  ],
+  "next_scope": "Compare source-reading prompt hierarchy on the same existing model/decoder before any full-12 history rerun; do not reuse this consumed comparison as an additional execution permission."
+}

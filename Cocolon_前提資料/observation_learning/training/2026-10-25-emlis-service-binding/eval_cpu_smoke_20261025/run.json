@@ -1,0 +1,73 @@
+{
+  "scope": "One training-excluded service identity with already known fictional chair language. New real 4B max2 calls through existing offline service/isolated SQL; actual initial question/prior, interruption after meaning save, explicit resume and non-generating reads. Not unseen language, general quality, normal application/Auth/HTTP/RN/device or product acceptance.",
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "candidate_source_calls": 2,
+  "receipts_returned": 2,
+  "isolated_rpc_calls": 30,
+  "model_calls": [
+    {
+      "case_id": "SERVICE-CHAIR-INITIAL",
+      "input_tokens": 1,
+      "output_tokens": 1,
+      "seconds": 0.0,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "raw_utf8_sha256": "c922f4659bfda47d0070426fe3c85563b2a359252b9b3689405a8e2b5c4d7a5a"
+    },
+    {
+      "case_id": "SERVICE-CHAIR-CORRECTION",
+      "input_tokens": 1,
+      "output_tokens": 1,
+      "seconds": 0.0,
+      "finish_reason": "stop",
+      "eos_reached": true,
+      "raw_utf8_sha256": "3001cae9de0f3a14e656dc9fb7d6dc4142813e03f7712f43951b3a2ecd8d8168"
+    }
+  ],
+  "forbidden_candidate_calls": 0,
+  "forbidden_generation_calls": 0,
+  "service_saved_roundtrip": true,
+  "isolated_sql_persistence_tested": true,
+  "schema": "cocolon.cmee.known_chair_untrained_service_identity.v1",
+  "evaluation_id": "CHAIR_SERVICE_IDENTITY_HOLDOUT_01",
+  "held_out_service_identity_only": true,
+  "unseen_language_content": false,
+  "training_identity_overlap": false,
+  "identity_call_checks": [
+    {
+      "stage": "initial",
+      "uuid_count": 2,
+      "timestamp_count": 1,
+      "overlap": false,
+      "actual_prior_used": false
+    },
+    {
+      "stage": "correction",
+      "uuid_count": 3,
+      "timestamp_count": 3,
+      "overlap": false,
+      "actual_prior_used": true
+    }
+  ],
+  "context_tokens": 8192,
+  "max_input_tokens": 5632,
+  "max_new_tokens": 2560,
+  "fictional_user_id": "08048f07-0644-4c01-bdea-dc9c8fe70b5b",
+  "fictional_input_id": "301f49f8-6be5-4848-9c24-5442544eddf8",
+  "active_model_stage": null,
+  "initial_actual_state": "AWAITING_ANSWER",
+  "initial_actual_body_state": "PRE_QUESTION",
+  "initial_non_generating_reads": true,
+  "meaning_after_save_interruption_observed": true,
+  "actual_initial_snapshot_used": true,
+  "explicit_retry_count": 1,
+  "final_non_generating_reads": true,
+  "status": "KNOWN_REAL_MODEL_OFFLINE_SERVICE_SQL_ROUNDTRIP_COMPLETE_NOT_PRODUCT_ACCEPTED",
+  "correction_updates": 3,
+  "initial_and_final_saved_body_count": 2,
+  "initial_ask": true,
+  "final_end": true,
+  "source_reacquisitions_during_explicit_retry": 0,
+  "final_meaning_event_id": "71bff464-9560-47a1-9640-1f060323ce28"
+}

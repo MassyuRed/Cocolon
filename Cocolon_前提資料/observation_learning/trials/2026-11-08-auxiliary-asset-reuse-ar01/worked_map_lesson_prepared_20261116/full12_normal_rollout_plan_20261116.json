@@ -1,0 +1,93 @@
+{
+  "schema": "cocolon.full12.normal_rollout.preparation.v1",
+  "prepared_at_utc": "2026-11-15T20:14:47.939Z",
+  "state": "PREPARED_NOT_EXECUTED_WAIT_ROOT_QUALITY_SIGNAL",
+  "workspace_id": "tea-d4pp61idbo4c73bf4hkg",
+  "target_commit": "5108a10f38e9e1da641dc8956d582df9eb245e9a",
+  "target_tree": "b2e1413bcbd88489bfab3e66eafd53e8c971d460",
+  "source_of_target": "Published positive worked-map author, exact6paths/tree/blob verified; actual meaning and same-raw save/reread required before normal rollout.",
+  "dependency_order": [
+    "Root verifies new A3 actual meaning before conditional B3 transfer/execution; consumed A2 and unmet B2 are not reused.",
+    "Root verifies fresh complete B3 LEAF+MERGE meaning and identical-raw single SQL save/separate-process non-generation reread before normal rollout.",
+    "Root owns native runtime alignment: source-first semantic decoder/context/kernel exactly consistent with accepted raw and target API; retain original Emlis/Piece natural profiles and original restore metadata.",
+    "Existing worker only: save ASTOR_WORKER_STALE_RUNNING_SECONDS=1800 without deploying the linked main branch.",
+    "Deploy existing worker to the exact full target SHA; wait for that deploy Live and read new startup stale_after=1800.",
+    "Deploy existing API to the same exact full target SHA; wait for that deploy Live.",
+    "Verify both actual deploy SHA identities, API health/bootstrap/private owner guards and worker operational behavior appropriate to the accepted normal scope; retain non-generation reread. Record limits separately from successful metadata."
+  ],
+  "named_setting": {
+    "service_id": "srv-d6copljh46gs73cmeic0",
+    "key": "ASTOR_WORKER_STALE_RUNNING_SECONDS",
+    "current_effective": 900,
+    "target": "1800",
+    "only_changed_key": true,
+    "api_env_change": false,
+    "replace_all_environment": false,
+    "method": "Existing Render Environment UI: edit/add named key -> Save only. Fresh UI must be observed by root at action time. No entire secret-value read.",
+    "reason": "840-second semantic inner pipeline excludes source acquisition/preparation and commit/readback/push reservation/mark_done;1800 supplies existing lease alignment without a new controller.",
+    "deadline_note": "7 outside-pipeline HTTP calls on ordinary successful refresh; explicit timeout values sum54seconds, not a total walltime bound. See full12_normal_deadline_alignment.json. Arbitrary all-history end-to-end completion within1800 is not guaranteed."
+  },
+  "deploy_method": {
+    "existing_worker_dashboard": "https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0",
+    "existing_api_dashboard": "https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0",
+    "action": "Manual Deploy -> Deploy a specific commit -> full5108a10f38e9e1da641dc8956d582df9eb245e9a",
+    "connector_limitation": "Current trigger_deploy exposes serviceId and clearCache only, no commit SHA. update_environment_variables exposes no Save-only/deploy-source control. Do not use either to incidentally deploy linked main. Use existing supported specific-commit flow after fresh UI inspection, or an authenticated CLI whose current help explicitly supports commit selection.",
+    "linked_branch_unchanged": "main",
+    "auto_deploy_unchanged": "no/off",
+    "no_new_service_or_plan": true
+  },
+  "preserve": {
+    "api_start_command": "python -c 'import logging, os, uvicorn; from app import create_application; logging.getLogger(\"httpx\").setLevel(logging.WARNING); uvicorn.run(create_application(piece_preview_configuration={\"preview_requested\":True,\"preview_ready\":True,\"preview_runtime\":{\"ttl_seconds\":600,\"renderer_version\":\"piece.rn_bitmap_renderer.ios.v1\"},\"save_requested\":True,\"save_ready\":True,\"owner_read_requested\":True,\"owner_read_ready\":True,\"export_requested\":True,\"export_ready\":True,\"owner_delete_requested\":True,\"owner_delete_ready\":True}), host=\"0.0.0.0\", port=int(os.environ[\"PORT\"]), access_log=False)'",
+    "worker_start_command": "python ai/services/ai_inference/astor_worker.py",
+    "piece_preview": {
+      "renderer": "piece.rn_bitmap_renderer.ios.v1",
+      "ttl_seconds": 600,
+      "preview_requested": true,
+      "preview_ready": true,
+      "save_requested": true,
+      "save_ready": true,
+      "owner_read_requested": true,
+      "owner_read_ready": true,
+      "export_requested": true,
+      "export_ready": true,
+      "owner_delete_requested": true,
+      "owner_delete_ready": true
+    },
+    "pod_runtime": "No Pod inspection or calls in this preparation. Root must preserve existing natural Emlis/Piece profile settings, authentication separation, model/weights, startup argv/env/cwd and restore metadata. Analysis context32768/source-first decoder must match accepted run; no natural profile tuning is part of this Render change.",
+    "db_migration": "20261115011424",
+    "new_schema": false,
+    "subscription_or_publication_policy_change": false,
+    "build_TestFlight_device": "on hold"
+  },
+  "rollback": {
+    "api": {
+      "service_id": "srv-d4ppfpm3jp1c73952bj0",
+      "known_live_deploy_id": "dep-dbsgn8t6e07s739qfk50",
+      "known_live_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "finished_at": "2026-11-15T01:34:04.956553Z",
+      "start_command": "python -c 'import logging, os, uvicorn; from app import create_application; logging.getLogger(\"httpx\").setLevel(logging.WARNING); uvicorn.run(create_application(piece_preview_configuration={\"preview_requested\":True,\"preview_ready\":True,\"preview_runtime\":{\"ttl_seconds\":600,\"renderer_version\":\"piece.rn_bitmap_renderer.ios.v1\"},\"save_requested\":True,\"save_ready\":True,\"owner_read_requested\":True,\"owner_read_ready\":True,\"export_requested\":True,\"export_ready\":True,\"owner_delete_requested\":True,\"owner_delete_ready\":True}), host=\"0.0.0.0\", port=int(os.environ[\"PORT\"]), access_log=False)'",
+      "branch": "main",
+      "auto_deploy": "no/off"
+    },
+    "worker": {
+      "service_id": "srv-d6copljh46gs73cmeic0",
+      "known_live_deploy_id": "dep-dbsgnet6e07s739qg5a0",
+      "known_live_commit": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "finished_at": "2026-11-15T01:33:28.94317Z",
+      "start_command": "python ai/services/ai_inference/astor_worker.py",
+      "named_setting_restore": "ASTOR_WORKER_STALE_RUNNING_SECONDS=900",
+      "branch": "main",
+      "auto_deploy": "no/off"
+    },
+    "order_if_target_rollout_fails": [
+      "If worker target deploy fails while API remains24bc228d, keep API on that known version; restore worker named setting900 with Save only and redeploy exact24bc228dbf54abc983906323c0ae7d937fae1fd6 if necessary.",
+      "If API already moved, first return API to exact24bc228dbf54abc983906323c0ae7d937fae1fd6; then worker named setting900 and exact24bc228d. Root restores original native provider only when compatibility requires and under preserved exact restore metadata.",
+      "After restoration verify actual Live SHA, worker startup900 and API health. Do not roll back DB migration or rewrite/delete saved accepted maps or immutable monthly artifacts."
+    ],
+    "method_note": "Historical deploy IDs are references, not proof rollback API capability is exposed. Exact-source redeploy may be needed; verify current product controls. No rollback is executed now."
+  },
+  "external_mutations": 0,
+  "pod_access": false,
+  "model_calls": 0,
+  "user_records_read": 0
+}

@@ -1,0 +1,167 @@
+[
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_late_return",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_apologize",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_reassurance_received",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_remaining_concern",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_action_link",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_memo_link",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_self_statement",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_late_awareness",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_no_contact",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_extra_9",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_returned",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_counterfactual",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_continuing_concern",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_statement_concession",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_awareness_time",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_returned_concession",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-BOOK-AFTER-ANSWER",
+    "quote_id": "q_concern_content",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_opening_known",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_celebration_sent",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_joy",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_felt_left_behind",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_action_link",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_memo_link",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_shared_talk",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_no_joint_preparation",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_extra_9",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_no_promise",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_perceived_realization",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_extra_12",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_felt_distance",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_answer_explains_target",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_answer_concession",
+    "literal_source_match": true
+  },
+  {
+    "case": "FT-SHOP-AFTER-ANSWER",
+    "quote_id": "q_distance_link",
+    "literal_source_match": true
+  }
+]

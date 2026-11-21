@@ -1,0 +1,19 @@
+{
+  "counts": {
+    "focused": 71,
+    "related": 140,
+    "shared_server": 97,
+    "total": 308,
+    "new": 13,
+    "failed": 0,
+    "skipped": 0
+  },
+  "files": 11,
+  "warnings": "one existing Pydantic deprecation repeated across the3 invocations",
+  "external_db_or_model_calls": 0,
+  "installs": 0,
+  "parser_module": "/workspace/scratch/de51a43af552/qa_dependencies/lmformatenforcer",
+  "parser_source_sha256": "6bc4a8a10621c6d38d70ebb5ae1dc21aaa98c0454a2e80be1896586f10dccf94",
+  "runtime": "Python3.12 / pytest8.4.1 / fastapi0.116.1 / httpx0.28.1 / existing PGlite0.5.8; existing-only import bridge for parser/interegular/PyYAML/pytest_asyncio",
+  "preflight_log": "semantic-history-corrective-runtime-preflight.log retained separately; missing parser YAML and test Tornado import corrected before final runs"
+}

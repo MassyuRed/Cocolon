@@ -1,0 +1,543 @@
+{
+  "status": "ALL84_MESSAGES_56_FULL_TARGETS_FIT_NO_TRUNCATION_OR_MODEL_LOAD",
+  "plan_sha256": "c578bb3c0b6485612bb57bd1667799de2fbc40672eacb52de5352a596cbc19e2",
+  "rows": [
+    {
+      "id": "AT01",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048,
+      "target_tokens": 147,
+      "full_tokens": 1147
+    },
+    {
+      "id": "AT02",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 110,
+      "full_tokens": 1109
+    },
+    {
+      "id": "AT03",
+      "prompt_tokens": 1002,
+      "generation_context_limit": 3050,
+      "target_tokens": 137,
+      "full_tokens": 1139
+    },
+    {
+      "id": "AT04",
+      "prompt_tokens": 1004,
+      "generation_context_limit": 3052,
+      "target_tokens": 184,
+      "full_tokens": 1188
+    },
+    {
+      "id": "AT05",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043,
+      "target_tokens": 89,
+      "full_tokens": 1084
+    },
+    {
+      "id": "AT06",
+      "prompt_tokens": 996,
+      "generation_context_limit": 3044,
+      "target_tokens": 81,
+      "full_tokens": 1077
+    },
+    {
+      "id": "AT07",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048,
+      "target_tokens": 112,
+      "full_tokens": 1112
+    },
+    {
+      "id": "AT08",
+      "prompt_tokens": 1002,
+      "generation_context_limit": 3050,
+      "target_tokens": 162,
+      "full_tokens": 1164
+    },
+    {
+      "id": "AT09",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043,
+      "target_tokens": 142,
+      "full_tokens": 1137
+    },
+    {
+      "id": "AT10",
+      "prompt_tokens": 998,
+      "generation_context_limit": 3046,
+      "target_tokens": 144,
+      "full_tokens": 1142
+    },
+    {
+      "id": "AT11",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 153,
+      "full_tokens": 1152
+    },
+    {
+      "id": "AT12",
+      "prompt_tokens": 996,
+      "generation_context_limit": 3044,
+      "target_tokens": 119,
+      "full_tokens": 1115
+    },
+    {
+      "id": "AT13",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048,
+      "target_tokens": 120,
+      "full_tokens": 1120
+    },
+    {
+      "id": "AT14",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043,
+      "target_tokens": 82,
+      "full_tokens": 1077
+    },
+    {
+      "id": "AT15",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048,
+      "target_tokens": 139,
+      "full_tokens": 1139
+    },
+    {
+      "id": "AT16",
+      "prompt_tokens": 998,
+      "generation_context_limit": 3046,
+      "target_tokens": 129,
+      "full_tokens": 1127
+    },
+    {
+      "id": "AT17",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048,
+      "target_tokens": 168,
+      "full_tokens": 1168
+    },
+    {
+      "id": "AT18",
+      "prompt_tokens": 997,
+      "generation_context_limit": 3045,
+      "target_tokens": 120,
+      "full_tokens": 1117
+    },
+    {
+      "id": "AT19",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049,
+      "target_tokens": 112,
+      "full_tokens": 1113
+    },
+    {
+      "id": "AT20",
+      "prompt_tokens": 997,
+      "generation_context_limit": 3045,
+      "target_tokens": 120,
+      "full_tokens": 1117
+    },
+    {
+      "id": "AT21",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043,
+      "target_tokens": 104,
+      "full_tokens": 1099
+    },
+    {
+      "id": "AT22",
+      "prompt_tokens": 994,
+      "generation_context_limit": 3042,
+      "target_tokens": 100,
+      "full_tokens": 1094
+    },
+    {
+      "id": "AT23",
+      "prompt_tokens": 996,
+      "generation_context_limit": 3044,
+      "target_tokens": 122,
+      "full_tokens": 1118
+    },
+    {
+      "id": "AT24",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049,
+      "target_tokens": 144,
+      "full_tokens": 1145
+    },
+    {
+      "id": "AT25",
+      "prompt_tokens": 996,
+      "generation_context_limit": 3044,
+      "target_tokens": 120,
+      "full_tokens": 1116
+    },
+    {
+      "id": "AT26",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 107,
+      "full_tokens": 1106
+    },
+    {
+      "id": "AT27",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 146,
+      "full_tokens": 1145
+    },
+    {
+      "id": "AT28",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 159,
+      "full_tokens": 1158
+    },
+    {
+      "id": "AT29",
+      "prompt_tokens": 1020,
+      "generation_context_limit": 3068,
+      "target_tokens": 221,
+      "full_tokens": 1241
+    },
+    {
+      "id": "AT30",
+      "prompt_tokens": 1008,
+      "generation_context_limit": 3056,
+      "target_tokens": 123,
+      "full_tokens": 1131
+    },
+    {
+      "id": "AT31",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 130,
+      "full_tokens": 1129
+    },
+    {
+      "id": "AT32",
+      "prompt_tokens": 998,
+      "generation_context_limit": 3046,
+      "target_tokens": 109,
+      "full_tokens": 1107
+    },
+    {
+      "id": "BT01",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048,
+      "target_tokens": 121,
+      "full_tokens": 1121
+    },
+    {
+      "id": "BT02",
+      "prompt_tokens": 998,
+      "generation_context_limit": 3046,
+      "target_tokens": 118,
+      "full_tokens": 1116
+    },
+    {
+      "id": "BT03",
+      "prompt_tokens": 1007,
+      "generation_context_limit": 3055,
+      "target_tokens": 165,
+      "full_tokens": 1172
+    },
+    {
+      "id": "BT04",
+      "prompt_tokens": 1003,
+      "generation_context_limit": 3051,
+      "target_tokens": 137,
+      "full_tokens": 1140
+    },
+    {
+      "id": "BT05",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 145,
+      "full_tokens": 1144
+    },
+    {
+      "id": "BT06",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047,
+      "target_tokens": 124,
+      "full_tokens": 1123
+    },
+    {
+      "id": "BT07",
+      "prompt_tokens": 1002,
+      "generation_context_limit": 3050,
+      "target_tokens": 169,
+      "full_tokens": 1171
+    },
+    {
+      "id": "BT08",
+      "prompt_tokens": 998,
+      "generation_context_limit": 3046,
+      "target_tokens": 108,
+      "full_tokens": 1106
+    },
+    {
+      "id": "NT01",
+      "prompt_tokens": 1003,
+      "generation_context_limit": 3051,
+      "target_tokens": 183,
+      "full_tokens": 1186
+    },
+    {
+      "id": "NT02",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049,
+      "target_tokens": 158,
+      "full_tokens": 1159
+    },
+    {
+      "id": "NT03",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049,
+      "target_tokens": 181,
+      "full_tokens": 1182
+    },
+    {
+      "id": "NT04",
+      "prompt_tokens": 1007,
+      "generation_context_limit": 3055,
+      "target_tokens": 235,
+      "full_tokens": 1242
+    },
+    {
+      "id": "NT05",
+      "prompt_tokens": 1017,
+      "generation_context_limit": 3065,
+      "target_tokens": 183,
+      "full_tokens": 1200
+    },
+    {
+      "id": "NT06",
+      "prompt_tokens": 1028,
+      "generation_context_limit": 3076,
+      "target_tokens": 240,
+      "full_tokens": 1268
+    },
+    {
+      "id": "NT07",
+      "prompt_tokens": 1024,
+      "generation_context_limit": 3072,
+      "target_tokens": 246,
+      "full_tokens": 1270
+    },
+    {
+      "id": "NT08",
+      "prompt_tokens": 1021,
+      "generation_context_limit": 3069,
+      "target_tokens": 231,
+      "full_tokens": 1252
+    },
+    {
+      "id": "ST01",
+      "prompt_tokens": 1018,
+      "generation_context_limit": 3066,
+      "target_tokens": 182,
+      "full_tokens": 1200
+    },
+    {
+      "id": "ST02",
+      "prompt_tokens": 1019,
+      "generation_context_limit": 3067,
+      "target_tokens": 185,
+      "full_tokens": 1204
+    },
+    {
+      "id": "ST03",
+      "prompt_tokens": 1023,
+      "generation_context_limit": 3071,
+      "target_tokens": 239,
+      "full_tokens": 1262
+    },
+    {
+      "id": "ST04",
+      "prompt_tokens": 1016,
+      "generation_context_limit": 3064,
+      "target_tokens": 170,
+      "full_tokens": 1186
+    },
+    {
+      "id": "ST05",
+      "prompt_tokens": 994,
+      "generation_context_limit": 3042,
+      "target_tokens": 82,
+      "full_tokens": 1076
+    },
+    {
+      "id": "ST06",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043,
+      "target_tokens": 84,
+      "full_tokens": 1079
+    },
+    {
+      "id": "ST07",
+      "prompt_tokens": 993,
+      "generation_context_limit": 3041,
+      "target_tokens": 91,
+      "full_tokens": 1084
+    },
+    {
+      "id": "ST08",
+      "prompt_tokens": 992,
+      "generation_context_limit": 3040,
+      "target_tokens": 92,
+      "full_tokens": 1084
+    },
+    {
+      "id": "AF01",
+      "prompt_tokens": 1029,
+      "generation_context_limit": 3077
+    },
+    {
+      "id": "AF02",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047
+    },
+    {
+      "id": "UV03",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047
+    },
+    {
+      "id": "UV12",
+      "prompt_tokens": 997,
+      "generation_context_limit": 3045
+    },
+    {
+      "id": "NV01",
+      "prompt_tokens": 1002,
+      "generation_context_limit": 3050
+    },
+    {
+      "id": "NV02",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048
+    },
+    {
+      "id": "NV03",
+      "prompt_tokens": 997,
+      "generation_context_limit": 3045
+    },
+    {
+      "id": "NV04",
+      "prompt_tokens": 1007,
+      "generation_context_limit": 3055
+    },
+    {
+      "id": "REHEARSAL_AT17",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048
+    },
+    {
+      "id": "REHEARSAL_AT19",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049
+    },
+    {
+      "id": "REHEARSAL_AT21",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043
+    },
+    {
+      "id": "REHEARSAL_AT29",
+      "prompt_tokens": 1020,
+      "generation_context_limit": 3068
+    },
+    {
+      "id": "CQ01",
+      "prompt_tokens": 1000,
+      "generation_context_limit": 3048
+    },
+    {
+      "id": "CQ02",
+      "prompt_tokens": 1007,
+      "generation_context_limit": 3055
+    },
+    {
+      "id": "CQ03",
+      "prompt_tokens": 998,
+      "generation_context_limit": 3046
+    },
+    {
+      "id": "CQ04",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049
+    },
+    {
+      "id": "DQ01",
+      "prompt_tokens": 1005,
+      "generation_context_limit": 3053
+    },
+    {
+      "id": "DQ02",
+      "prompt_tokens": 1006,
+      "generation_context_limit": 3054
+    },
+    {
+      "id": "DQ03",
+      "prompt_tokens": 1022,
+      "generation_context_limit": 3070
+    },
+    {
+      "id": "DQ04",
+      "prompt_tokens": 1018,
+      "generation_context_limit": 3066
+    },
+    {
+      "id": "REHEARSAL_NT03",
+      "prompt_tokens": 1001,
+      "generation_context_limit": 3049
+    },
+    {
+      "id": "REHEARSAL_NT05",
+      "prompt_tokens": 1017,
+      "generation_context_limit": 3065
+    },
+    {
+      "id": "SQ01",
+      "prompt_tokens": 1018,
+      "generation_context_limit": 3066
+    },
+    {
+      "id": "SQ02",
+      "prompt_tokens": 1020,
+      "generation_context_limit": 3068
+    },
+    {
+      "id": "SQ03",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043
+    },
+    {
+      "id": "SQ04",
+      "prompt_tokens": 995,
+      "generation_context_limit": 3043
+    },
+    {
+      "id": "PQ01",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047
+    },
+    {
+      "id": "PQ02",
+      "prompt_tokens": 999,
+      "generation_context_limit": 3047
+    }
+  ],
+  "model_loads": 0,
+  "training_updates": 0,
+  "new_generations": 0,
+  "seconds": 5.601359522901475,
+  "compute_apps": ""
+}

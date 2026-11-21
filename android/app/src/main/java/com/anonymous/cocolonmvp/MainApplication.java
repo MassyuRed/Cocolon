@@ -27,7 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected java.util.List<com.facebook.react.ReactPackage> getPackages() {
-          return new PackageList(this).getPackages();
+          java.util.List<com.facebook.react.ReactPackage> packages = new PackageList(this).getPackages();
+          packages.add(new com.anonymous.cocolonmvp.piece.PieceTextMetricsModule.Package());
+          return packages;
         }
 
         @Override

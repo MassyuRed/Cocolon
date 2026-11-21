@@ -1,0 +1,57 @@
+{
+  "new_model_calls": 0,
+  "teacher_or_prompt_changes": 0,
+  "cases": [
+    {
+      "stage": "initial",
+      "system_message_equal": true,
+      "output_spec_equal": true,
+      "text_fields_equal_per_source": [
+        true
+      ],
+      "material_different_keys": [
+        "control",
+        "sources"
+      ],
+      "source_different_keys": [
+        [
+          "original",
+          "recorded_at",
+          "source_id"
+        ]
+      ],
+      "request_ref_equal": false,
+      "prior_adopted_interpretation_equal": true,
+      "real_messages_sha256": "3bf2216c9057bd9ea23f0c418f8be89e88f5a281ffc35af0b14b1960824e3f9d"
+    },
+    {
+      "stage": "correction",
+      "system_message_equal": true,
+      "output_spec_equal": true,
+      "text_fields_equal_per_source": [
+        true,
+        true
+      ],
+      "material_different_keys": [
+        "control",
+        "sources"
+      ],
+      "source_different_keys": [
+        [
+          "original",
+          "recorded_at",
+          "source_id"
+        ],
+        [
+          "parent_record_id",
+          "recorded_at",
+          "source_id"
+        ]
+      ],
+      "request_ref_equal": false,
+      "prior_adopted_interpretation_equal": false,
+      "real_messages_sha256": "3a300b09bddaba964a443159e36344f73744d0f9c57a620934cb3f47bd2c261e"
+    }
+  ],
+  "interpretation": "Same instructions/output spec and source text; IDs, timestamps/control/request/prior change together. This comparison does not isolate a single causal variable."
+}

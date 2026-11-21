@@ -1,0 +1,97 @@
+[
+  {
+    "path": "TRAIN-DAILY-CALM-01-INITIAL_cold.json",
+    "bytes": 55657,
+    "sha256": "fe36ce51f8b50c0707bff7fee04cd1914b2a81aabaf57e4ffb394b44768e91fe"
+  },
+  {
+    "path": "TRAIN-DAILY-CALM-01-INITIAL_saved.json",
+    "bytes": 88436,
+    "sha256": "bf7c44bcd8ef16b680dedcd0aea96f06405048cd3c9236e1c7caa23f62926db7"
+  },
+  {
+    "path": "TRAIN-DAILY-CALM-02-INITIAL_cold.json",
+    "bytes": 55657,
+    "sha256": "1ea0c7ec989639ad0d0a8e70608df418f3d10537172d52e1f8e166db0e923df6"
+  },
+  {
+    "path": "TRAIN-DAILY-CALM-02-INITIAL_saved.json",
+    "bytes": 88436,
+    "sha256": "f190934de8f18a3b5145fa42cd07ada06e2a27dd8462277d34b8d529354161a3"
+  },
+  {
+    "path": "TRAIN-DAILY-CALM-03-INITIAL_cold.json",
+    "bytes": 55657,
+    "sha256": "8fc6fd310e2f54fbbaeea05d7d22d9d3aaf908810f32566ce20bf18bac371f1a"
+  },
+  {
+    "path": "TRAIN-DAILY-CALM-03-INITIAL_saved.json",
+    "bytes": 88436,
+    "sha256": "93631d0ae199bcd17fe4661df46b1b5e24e1d65989467230cc62abfca4b6543c"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-01-CORRECTION_cold.json",
+    "bytes": 106495,
+    "sha256": "806f999fd0f20559dc273e54790a3d41d31c8cf5f0665c61c9853c2368687c5f"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-01-CORRECTION_saved.json",
+    "bytes": 209003,
+    "sha256": "5ccf752ff1c6a824c9060674213a9c24e3926ea8b982cfbb620df32d10df43cd"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-01-INITIAL_cold.json",
+    "bytes": 48397,
+    "sha256": "287acbb08065e919bf0d6a66977eddc4f4b173168cc77ea2fab39571006cba48"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-01-INITIAL_saved.json",
+    "bytes": 76461,
+    "sha256": "b69534d3a702acab4ffb137b6454c2cf291559648c14c9a5883e42a0d3cd0efc"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-02-CORRECTION_cold.json",
+    "bytes": 106494,
+    "sha256": "94017565da1154e66f44378541541407a34d905b1b0b57feb26d99d0383bb9a6"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-02-CORRECTION_saved.json",
+    "bytes": 209001,
+    "sha256": "e16921c3c956eebe1d7c811b58f4bee7614bb1239c6ca2ad2d142bb85d963569"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-02-INITIAL_cold.json",
+    "bytes": 48398,
+    "sha256": "4e8fec7146d9c5bca26add00dd6cc64b96016c1af649c81512ea71b81ad7f739"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-02-INITIAL_saved.json",
+    "bytes": 76463,
+    "sha256": "7155de6b7abfa080cf8d291b807a40630e3784015761e35179c128cea8654261"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-03-CORRECTION_cold.json",
+    "bytes": 106495,
+    "sha256": "8678b468841b53a5b7557e6927a9e0b9b3fa12f26d8165816a3369069ebe3d3e"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-03-CORRECTION_saved.json",
+    "bytes": 209003,
+    "sha256": "635ef6f171c0895142df5fee035d22b62b1ff34a3abc1f4dd606906a462760ad"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-03-INITIAL_cold.json",
+    "bytes": 48398,
+    "sha256": "df11392e47b694eed7b8fd0c9533226ae48fa95832c5ef78a7035bdec25ee3c0"
+  },
+  {
+    "path": "TRAIN-SERVICE-CHAIR-03-INITIAL_saved.json",
+    "bytes": 76463,
+    "sha256": "7d3fc5c5dc6d51aaf9f75d6bb67c277476845c89171bccedf0e770708c62cf11"
+  },
+  {
+    "path": "diagnosis.json",
+    "bytes": 1225336,
+    "sha256": "ba9ad1f0435374ed6d72a9a724aa3af5d6036e5193b25cc68f29329cc362864a"
+  }
+]

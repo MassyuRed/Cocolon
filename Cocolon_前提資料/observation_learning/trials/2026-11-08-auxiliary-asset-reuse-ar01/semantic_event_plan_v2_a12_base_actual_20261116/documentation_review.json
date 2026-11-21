@@ -1,0 +1,175 @@
+{
+  "actions": {
+    "gpu_operations": 0,
+    "model_calls": 0,
+    "new_acceptance_rules": 0,
+    "product_or_document_source_edits_by_reviewer": 0,
+    "sql_operations": 0
+  },
+  "additional_unit_correction_copy": {
+    "historical_private_prepared_zip_immutable_policy_preserved": true,
+    "matches_corrected_c689_diagnosis": true,
+    "path": "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_event_plan_v2_base_control_prepared_20261116/adapter_conditioning_diagnosis.json",
+    "sha256": "c6891fd4ecbaac1d49d540e3bf51a081cb88ec9eb36d85916433e3e090d11f2e"
+  },
+  "blockers": [],
+  "body_free": true,
+  "evidence": {
+    "call_results": {
+      "path": "a12_actual/public_receipts/call_results.json",
+      "sha256": "211658a7d9024422798ef79440a2cf84b71f7ce26b003518b19d0649c908f047"
+    },
+    "edge_parser_inspection": {
+      "path": "a12_actual/reviews/edge_prefix_parser_inspection.json",
+      "sha256": "25ccc8fd43c6b5c03c98ae495ba5bbbfc3f18f9a41138c376a64762ed1d3f0cb"
+    },
+    "execution_receipt": {
+      "path": "a12_actual/public_receipts/execution_receipt.json",
+      "sha256": "e9b701701162c9765d90393213ff31178b30c5e874a52fd6d1d0d277ba403eae"
+    },
+    "final_actual": {
+      "path": "a12_actual/recovered/actual/after.result.json",
+      "sha256": "83b4fdb06b9ff6cf3a61da1d8d11fff9af08d78030940061d1b5fafd5f8dbd04"
+    },
+    "final_meaning_review": {
+      "path": "a12_actual/reviews/final_meaning_review.json",
+      "sha256": "3a30cb631fa9b66ac5623dfd4622950236e9f30b2699245fd6d77d121e44be2e"
+    },
+    "restoration_receipt": {
+      "path": "a12_actual/public_receipts/restoration_receipt.json",
+      "sha256": "95696e8e42a9dac69dffd8eb35933fbea170c4867f4e9ad3763af0ff464f5bda"
+    }
+  },
+  "facts_consistent": [
+    "Actual A12 authority is described as directed resumption of the presented scope, without inventing an explicit approval quote or reusing consumed A11 authority.",
+    "Four responses are two before controls and two map responses; three cases and after controls are unreceived.",
+    "Book formal GENERATED and exact partial/final identity do not become meaning success; all twelve repetitive edges and missing source support remain failures.",
+    "Lighting is HTTP200/length and incomplete JSON, with no accepted projection/text; prefix errors are separate from a completed-response rating.",
+    "Native tokenize-to-complete timing supports the 210-second deadline judgment; CPU reencoded raw tokens are not claimed to be actual generated IDs, and 4096 exhaustion is not claimed.",
+    "Character-parser closing permission is not represented as a model-logit or tokenizer-mask replay or a unique semantic cause.",
+    "B12 was not run, no all-five adequacy receipt exists, and remaining time/responses create no retry permission.",
+    "PID5433/start99553630, restored baseline d678 and original adapter identities are kept distinct from candidate native569042 and baseline-bound A5000 proofd759.",
+    "Major asset recovery does not imply all old volume data survived; new-Pod internal health is not normal Render/API/worker connection proof.",
+    "SQL save/non-generating reread, normal adoption/reflection and formal acceptance remain uncompleted; no new GPU/training authority is authored."
+  ],
+  "native_lighting_tokenize_to_complete_seconds": 210.021,
+  "navigation_and_scope": {
+    "11.2_and_12_replace_stale_a11_authentication_pending_state": true,
+    "9.106_marked_historical_preparation": true,
+    "AR06_keeps_full_source_semantic_coverage_false_and_monthly_saved_version": true,
+    "AR08_old_live_state_historical_new_normal_connection_unverified": true,
+    "STRUCTURE_MAP_DELTA_NONE_consistent_no_new_owner_public_or_saved_type": true,
+    "actual_and_prepared_anchors_at_their_own_sections": true,
+    "latest_result_restart_owner": "9.107",
+    "same_original_meaning_save_reread_normal_reflection_unit_incomplete": true
+  },
+  "publication_followup": {
+    "actual_trial_files_count": 13,
+    "actual_trial_readme_exists": true,
+    "actual_trial_readme_read_in_full": true,
+    "additional_files_manually_read": [
+      "README.md",
+      "private_actual_receipt.json"
+    ],
+    "copied_evidence_files_byte_identical_to_reviewed_local_sources": 11,
+    "corrected_diagnosis_and_separate_erratum_present": true,
+    "files": {
+      "README.md": {
+        "bytes": 2880,
+        "sha256": "21aa8d0ff1b826eab57e613604a8b4c118ce77cf54ec09ecd4896cce586869d8"
+      },
+      "adapter_conditioning_diagnosis_unit_erratum.json": {
+        "bytes": 2144,
+        "sha256": "81d30d163fb97851c12de7583eccb63529e6277e93dce183bc17edd7321217f7"
+      },
+      "authorization_and_terminal.json": {
+        "bytes": 2654,
+        "sha256": "423e73487413c3df8bd2adec0050070adfb53671299ac691a3cf3528780b02e6"
+      },
+      "call_results.json": {
+        "bytes": 4222,
+        "sha256": "211658a7d9024422798ef79440a2cf84b71f7ce26b003518b19d0649c908f047"
+      },
+      "ci_verification.json": {
+        "bytes": 1381,
+        "sha256": "6a6e27fb0c362ca9dc25361b44d95a30644c90063759a0ea40297f6f45fe25c6"
+      },
+      "edge_prefix_parser_inspection.json": {
+        "bytes": 7215,
+        "sha256": "25ccc8fd43c6b5c03c98ae495ba5bbbfc3f18f9a41138c376a64762ed1d3f0cb"
+      },
+      "execution_receipt.json": {
+        "bytes": 1939,
+        "sha256": "e9b701701162c9765d90393213ff31178b30c5e874a52fd6d1d0d277ba403eae"
+      },
+      "final_execution_review.json": {
+        "bytes": 14154,
+        "sha256": "e0a2988cc0aeedfc1a88303d72189672f47a33fb9ec15837d44921d1c7b8e8e0"
+      },
+      "final_meaning_review.json": {
+        "bytes": 13259,
+        "sha256": "3a30cb631fa9b66ac5623dfd4622950236e9f30b2699245fd6d77d121e44be2e"
+      },
+      "original_identity_manifest.json": {
+        "bytes": 2913,
+        "sha256": "0a36e8d03e802b87ca0e602712a0b7ef3da4c27c1c52ea55db7f012fbdf1daa8"
+      },
+      "private_actual_receipt.json": {
+        "bytes": 505,
+        "sha256": "3387071efc355af7d9d8b8079c3f37b48f65390862e3d94632a99a0231bee232"
+      },
+      "restoration_receipt.json": {
+        "bytes": 1436,
+        "sha256": "95696e8e42a9dac69dffd8eb35933fbea170c4867f4e9ad3763af0ff464f5bda"
+      },
+      "root_final_review.json": {
+        "bytes": 1635,
+        "sha256": "721f33ce98d4c0ab6f30e79e922a08dca503fe0280c1bd68648def92ce4c43df"
+      }
+    },
+    "private_library_identity_record_seen_not_independently_download_verified_in_this_documentation_review": true,
+    "readme_keeps_failed_closed_incomplete_unit_and_no_retry_boundary": true,
+    "remote_publication_not_performed_or_independently_postverified_by_this_reviewer": true,
+    "state": "LOCAL_LINK_TARGET_AND_PUBLIC_RECEIPT_COPY_VERIFIED"
+  },
+  "resolved_findings": [
+    {
+      "id": "PREPARED_ANCHOR_ATTACHED_TO_ACTUAL_SECTION",
+      "resolution": "Prepared anchor precedes 9.106; actual anchor alone precedes 9.107.",
+      "severity": "minor_navigation",
+      "state": "FIXED_BY_ROOT_AND_FRESHLY_VERIFIED"
+    }
+  ],
+  "reviewed_base_commit": "f217e2fa304cd86d861d0f1891782068fb3a3c7d",
+  "reviewed_changed_documents": {
+    "Cocolon_前提資料/00_cocolon_current_product_and_state.md": {
+      "bytes": 276155,
+      "sha256": "7fcaa41f777633f321795bb9b03c691a9afea9a7f1ee4bf013ff71c9641c91a2"
+    },
+    "Cocolon_前提資料/07_latest_snapshot_diff.md": {
+      "bytes": 2781392,
+      "sha256": "8ea569c21a91512f8058b7f6f24bab46146016d675a2d333e0ee239e4f819e72"
+    },
+    "Cocolon_前提資料/current_structure/03_analysis_current_structure.md": {
+      "bytes": 369602,
+      "sha256": "b944d1fea7a0e0ac09e6c8722fea0afc0a556be9f12f45718d0a1c72e4fd9ce0"
+    },
+    "Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md": {
+      "bytes": 1013566,
+      "sha256": "b30a9638000e6d12563f615969e09edf50d1350fc86933ad4013b4f86b029245"
+    },
+    "Cocolon_前提資料/observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/semantic_event_plan_v2_base_control_prepared_20261116/README.md": {
+      "bytes": 4768,
+      "sha256": "05a8d19aa7871736a9cae59f775a2f4c34ec0a12f052642c3f089609e73aee48"
+    },
+    "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261114.md": {
+      "bytes": 217694,
+      "sha256": "960518b0c8ea50a3f23071f6f8b6616d9503f2a355164f8ba3ebeb642dbf8fc4"
+    }
+  },
+  "reviewed_six_document_diff_sha256": "cbdc93c0d67578a0df4727f98f7f070e6ddd7579149cda4ede0592a3f14d6071",
+  "reviewer": "independent_architecture_review",
+  "schema": "cocolon.analysis.independent_documentation_review.v1",
+  "scope": "Full six-current-document diff, especially 9.107/11.2/12 and AR-06/08; compared against final actual, execution/restoration/meaning receipts and native timing log.",
+  "state": "NO_FACT_OR_COMPLETION_INFLATION_BLOCKER_FOUND"
+}

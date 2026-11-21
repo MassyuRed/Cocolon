@@ -1,0 +1,1591 @@
+{
+  "schema": "cocolon.public_fictional_piece_answer_correction_rollout.v1",
+  "date": "2026-11-15",
+  "status": "COMPLETED_LIMITED_NORMAL_DB_API_WORKER_AND_RN_SOURCE_UNIT",
+  "api_source": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "rn_source": "70527711e92821c0ae6f8704be5331f6c8011147",
+  "scope": "Explicit latest real ANSWER after 1–3 completed rounds plus subsequent proper corrections to distinct original clauses.",
+  "qualification": "Synthetic bearer and Emlis provider, real application/CMEE/author/S7/disposable SQL; no new GPU, real-person write or native image.",
+  "application_cases": 29,
+  "latest_migration_fresh_fixture_cycle": 1,
+  "legacy_and_core_regression_cases": 197,
+  "sql_cases": 7,
+  "sql_actual_history_mutation_transactions": 81,
+  "sql_no_answer_forged_mixed_lineage_rejections": 3,
+  "rn_local": {
+    "piece_suites": 1511,
+    "react_related_four_suites": 172,
+    "overlapping_targeted_suites": 266,
+    "add_overlapping_targeted_to_total": false
+  },
+  "migration": {
+    "source_file": "20261115005742_piece_answer_and_interpretation_corrections.sql",
+    "sha256": "b539a571c5d3f2bce417aba8a2bfcc0c6eddb9ed43ef11c93f74cbe68cace139",
+    "hosted_version": "20261115011424",
+    "name": "piece_answer_and_interpretation_corrections",
+    "allowed_three_patch_reverse_md5_matches_before": true,
+    "writer_md5_after": {
+      "preview": "c4dd33b628df9cf6e2672a7d3edfd6bc",
+      "visual": "c3b5eda55f876864351d6dc8bb029628",
+      "save": "d2fbb93975391cbe6f954a8299c51c46"
+    },
+    "old_5arg_preview_md5": "01a97bb7999bf18e6f4b7032ca3b871d",
+    "signatures_acl_rls_columns_and_quota_unchanged": true,
+    "security_advisor_groups_before": 7,
+    "security_advisor_groups_after": 7,
+    "new_security_advisor_groups": 0
+  },
+  "failures_resolved": [
+    {
+      "kind": "fixture_expectation",
+      "detail": "Expected original clause did not allow the existing author comma; assertions now check the preserved or removed predicate."
+    },
+    {
+      "kind": "migration_precondition_syntax",
+      "detail": "Fresh-fixture apply failed before case execution at unparenthesized CASE; parentheses fixed, final migration fresh apply and normal cycle passed."
+    },
+    {
+      "kind": "RN_test_setup",
+      "detail": "14 initial failures from missing TypeScript, then CI-pinned 5.2.2 scratch dependency supplied; 1511 cases passed. Metro bundle test not counted as local success."
+    }
+  ],
+  "cases": [
+    {
+      "tier": "free",
+      "rounds": 1,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:17.007",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "plus",
+      "rounds": 1,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:26.06",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "plus",
+      "rounds": 1,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:28.294",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "premium",
+      "rounds": 1,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:34.158",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "free",
+      "rounds": 2,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:39.94",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "plus",
+      "rounds": 2,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:44.112",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "premium",
+      "rounds": 2,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:48.308",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "free",
+      "rounds": 3,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:52.587",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "plus",
+      "rounds": 3,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:57.511",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "premium",
+      "rounds": 3,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:09:02.347",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "premium",
+      "rounds": 1,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:34.832",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "free",
+      "rounds": 2,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:43.097",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "plus",
+      "rounds": 2,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:48.607",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "premium",
+      "rounds": 2,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:53.951",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "free",
+      "rounds": 3,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:07:59.438",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "plus",
+      "rounds": 3,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:06.503",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "premium",
+      "rounds": 3,
+      "proper_operation": "REVISE",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:14.817",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」ではなく「私は約束を守りたい」です。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。\n\n私は約束を守りたい",
+        "piece_text_hash": "22454542c07771c78a1ba68633292d869d9dd47811bce3d73f4564280f143e0e",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。",
+            "私は約束を守りたい"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "4ba5c7e7da878ea2a0036c7d47d658ca325b0b4299dd9e39263a2a229a835f5b",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_subtle"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "50c49a8d02e9ebef3b7e16fce4e310a915a869ba66b33b955a9c268839715ca3",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    },
+    {
+      "tier": "free",
+      "rounds": 1,
+      "proper_operation": "WITHDRAW",
+      "original": {
+        "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は仕事を続けたい。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "created_at": "2026-11-15T00:08:22.598",
+        "memo_action": "私は資料を調べた。",
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ]
+      },
+      "selected_answer": "私は嬉しかった。",
+      "proper_explanation": "「私は資料を調べた」は取り消します。",
+      "artifact": {
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。\n\n私は嬉しかった。",
+        "piece_text_hash": "138a09f344ea091cf725e29eb9d0f31b36f4315619aa9e308629e1a176e8e6a9",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。私は、仕事を続けたい。",
+            "私は嬉しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d8cb17d6418676a20e2a44bf8844c08e00a8b1492d289cd2e0e7e96e327a8d7c",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "quiet_night",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2"
+      },
+      "preview_to_visual_body_and_payload_equal": true,
+      "saved_and_new_reader_artifact_equal": true,
+      "original_and_emlis_unchanged": true,
+      "quota_consumptions": 1
+    }
+  ],
+  "limitations": [
+    "Selected opaque ADD is rejected; unselected opaque prior ADD remains history control only. Readable prior ADDs remain in shared compatibility checks, never automatically become authored material.",
+    "Only distinct original complete clauses can be revised/withdrawn; answer/replacement targets and ambiguous overlap remain unsupported.",
+    "Nonempty effective original, at most 3 body blocks, short_essay and tier permissions remain.",
+    "New real 4B, native bitmap, live authenticated person lifecycle, build/TestFlight/device acceptance and auxiliary-wide completion are not claimed.",
+    "WholeCanvas 4Mi cap and retained-card A candidate refusal remain unresolved."
+  ],
+  "rn_ci": {
+    "run": 43661799495,
+    "source": "70527711e92821c0ae6f8704be5331f6c8011147",
+    "attempt1": {
+      "conclusion": "cancelled",
+      "successful_jobs": 5,
+      "failed_job": 132652535782,
+      "reason": "10-minute job limit after simctl_launch_begin with no main_entered output",
+      "artifact_upload_failure": "No bitmap files produced before launch cancellation"
+    },
+    "one_job_rerun": {
+      "requested": true,
+      "attempt": 2,
+      "job": 132655920101,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-11-15T01:24:02Z",
+      "completed_at": "2026-11-15T01:29:11Z",
+      "other_five_job_results_retained": true
+    },
+    "javascript_tests": {
+      "piece": 1511,
+      "react": 365,
+      "total": 1876,
+      "failures": 0,
+      "skips": 0
+    },
+    "native_workflow_harness_source_unchanged_from_prior_success": true,
+    "final_all_six_jobs": "success",
+    "native_checks": {
+      "unique_main_checks": 195,
+      "base": 129,
+      "v9": 46,
+      "v4": 20,
+      "ar04_bitmap": 4,
+      "fractional": 24,
+      "failed": 0,
+      "skipped": 0,
+      "not_new_mixed_piece_native_images": true
+    }
+  },
+  "supplementary_prior_revision_cycle": {
+    "kind": "fictional_actual_prior_answer_revision_plus_latest_add_proper_withdrawal",
+    "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n私は家族を守りたい\n\n私は嬉しかった。",
+    "piece_text_hash": "0794bb41545db60fa77f579466ade03108543b78f8a75514fb2f1d7939e224ad",
+    "content_payload_hash": "6220e9d27bf9fa7dad69ef68bd8f4c3963cd650c2059422f7e1d9c31aee07035",
+    "visual_recipe_hash": "fd2418d4dc9d741ac727a6b59c374bf3b728c86e1dcc99c7cb9eaa4ae4417854",
+    "new_reader_artifact_equal": true,
+    "original_and_emlis_unchanged": true,
+    "quota_consumptions": 1,
+    "local_passes": 1,
+    "seconds": 17.43,
+    "included_in_29_case_matrix": false
+  },
+  "analysis_ci": {
+    "run": 43662053793,
+    "job": 132653307125,
+    "attempt": 1,
+    "conclusion": "success",
+    "pytest_invocations": 6,
+    "passes": 4865,
+    "subtests": 12995,
+    "deselected": 194,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "piece_ci": {
+    "run": 43662053792,
+    "job": 132653307233,
+    "attempt": 1,
+    "source": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+    "all_steps_success": 41,
+    "pytest_invocations": 27,
+    "passes_including_repeated_suites": 5749,
+    "passes_by_invocation": [
+      46,
+      4,
+      61,
+      48,
+      9,
+      36,
+      57,
+      39,
+      94,
+      47,
+      33,
+      87,
+      26,
+      54,
+      166,
+      13,
+      1202,
+      67,
+      36,
+      136,
+      173,
+      13,
+      172,
+      307,
+      2699,
+      78,
+      46
+    ],
+    "failed": 0,
+    "errors": 0,
+    "skips": 0,
+    "deselected": 420,
+    "longest_invocation_seconds": 724.56
+  },
+  "deployments": {
+    "api": {
+      "id": "dep-dbsgn8t6e07s739qfk50",
+      "source": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "status": "live",
+      "finished_at": "2026-11-15T01:34:04.956553Z"
+    },
+    "worker": {
+      "id": "dep-dbsgnet6e07s739qg5a0",
+      "source": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+      "status": "live",
+      "finished_at": "2026-11-15T01:33:28.94317Z"
+    }
+  },
+  "post_live_smoke": {
+    "started_at": "2026-11-15T01:34:39.358283+00:00",
+    "finished_at": "2026-11-15T01:34:46.392049+00:00",
+    "rows": [
+      {
+        "path": "/healthz",
+        "status": 200,
+        "cache_control": null,
+        "body": {
+          "status": "ok",
+          "app": "Cocolon MyModel"
+        }
+      },
+      {
+        "path": "/app/bootstrap",
+        "status": 200,
+        "cache_control": null,
+        "body": {
+          "minimum_supported_version": null,
+          "recommended_version": null,
+          "maintenance_message": null,
+          "feature_flags": {
+            "piece_v2_preview_enabled": true,
+            "piece_v2_save_enabled": true,
+            "piece_v2_owner_read_enabled": true,
+            "piece_v2_public_write_enabled": false,
+            "piece_v2_public_read_enabled": false,
+            "piece_v2_visibility_toggle_enabled": false,
+            "piece_v2_export_enabled": true,
+            "piece_v2_delete_enabled": true,
+            "account_delete_enabled": true,
+            "emlis_threads_enabled": true,
+            "myweb_mock_enabled": false,
+            "today_question_enabled": true,
+            "today_question_history_enabled": true,
+            "subscription_sales_enabled": true
+          },
+          "client_meta": {
+            "app_version": null,
+            "app_build": null,
+            "platform": null
+          }
+        }
+      },
+      {
+        "path": "/analysis/if-route/scenario-sets",
+        "status": 401,
+        "cache_control": "private, no-store",
+        "body": {
+          "detail": "Missing bearer token"
+        }
+      },
+      {
+        "path": "/analysis/saved-route-intents",
+        "status": 401,
+        "cache_control": "private, no-store",
+        "body": {
+          "detail": "Missing bearer token"
+        }
+      },
+      {
+        "path": "/emotion/piece/source-ref/00000000-0000-4000-8000-000000000001",
+        "status": 401,
+        "cache_control": "no-store",
+        "body": {
+          "code": "PIECE_AUTH_REQUIRED"
+        }
+      },
+      {
+        "path": "/emotion/piece/history",
+        "status": 401,
+        "cache_control": "no-store",
+        "body": {
+          "code": "PIECE_AUTH_REQUIRED"
+        }
+      }
+    ]
+  },
+  "post_live_worker": {
+    "instance": "ndnvr",
+    "startup_observed": true,
+    "database_poll_status": 200,
+    "ready": 0,
+    "running": 0,
+    "stale_running": 0,
+    "preexisting_failed": 171,
+    "job_execution_not_tested": true
+  },
+  "post_live_logs": {
+    "start": "2026-11-15T01:34:05Z",
+    "end": "2026-11-15T01:36:07.901Z",
+    "error_level_logs": 0,
+    "pagination_has_more": false
+  },
+  "configuration_unchanged": {
+    "branch": "main",
+    "auto_deploy": "off",
+    "root_directory": true,
+    "runtime": true,
+    "build_and_start_commands": true
+  }
+}

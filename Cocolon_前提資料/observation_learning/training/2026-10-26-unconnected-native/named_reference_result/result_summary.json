@@ -1,0 +1,57 @@
+{
+  "status": "ONCE_COMPLETED_NOT_ADOPTED_NO_RETRY",
+  "source_cocolon": "3786df216a0d5183de31356734d6109f52f22927",
+  "source_api": "a8be7a9bceed35a9f3cb843f22de05bbd5bc6e18",
+  "optimizer_steps_completed": 13,
+  "model_loads_completed": 2,
+  "model_calls_completed": 2,
+  "processing_seconds": 556.8467515330995,
+  "process_cost_usd": 0.04331030289701885,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "980b5794d253451322f76fd8a5316d4ab2773bcf990adfd5422be2b6a64a71be",
+    "adapter_model.safetensors": "284f1df77c828982bdb7c2480f3f269b71dc9d69a29ea36b48dc6d25ab807d23"
+  },
+  "initial_d431_and_sources_unchanged": true,
+  "meaning_adopted_count": 0,
+  "body_available_count": 0,
+  "adopted_snapshot_count": 0,
+  "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+  "eos_count": 0,
+  "strict_json_complete_count": 0,
+  "token_limit_count": 2,
+  "timeout_count": 0,
+  "cpu_pytest_passed": 347,
+  "sql_tests_deselected": 12,
+  "sql_operations": 0,
+  "retry": false,
+  "gpu_lifecycle_operations": 0,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "weights_library": {
+    "library_file_id": "libfile_14be2da0d6588191b85c397de5baad0a",
+    "version": 0,
+    "filename": "weights_and_originals.zip",
+    "bytes": 14781111
+  },
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    }
+  ],
+  "cmee_cpu_seconds": 1.7936204969882965
+}

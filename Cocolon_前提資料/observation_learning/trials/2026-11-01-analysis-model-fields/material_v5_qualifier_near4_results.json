@@ -1,0 +1,122 @@
+{
+  "status": "KNOWN_REPAIR_RETAINED_NEAR_TRANSFER_LIMITS_OBSERVED_NOT_ADOPTED",
+  "date_jst": "2026-11-05",
+  "plan_commit": "bd4e73776f4e38abba916180b628d25434298b8d",
+  "parent_result_commit": "21a293e3a566656bddf1c92d1eb0a36be975db89",
+  "parent_archive_id": "libfile_52b7b011dd948191be9aaf39947e97a8",
+  "weekly_section": 179,
+  "trial_readme_section": 143,
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "profile": "selected_material.v5",
+  "runner_sha256": "cfd7dc37c8b22d76f48676079c9cb1b63bce3e8096f0ca85864afb1c98693c29",
+  "input_sha256": "d164bad983fc12e03159a88c30cd7ab745546ddd7e8896b7d294074fd9a82b40",
+  "new_untrained_sources": 4,
+  "not_blind_or_general_quality": true,
+  "exact_json_gold": false,
+  "criteria_not_in_model_messages": true,
+  "duplicate_check_against_original90_current16_current30": true,
+  "models": {
+    "before": {
+      "path": "/workspace/analysis-material-v5-residual2-20261105/train/adapter",
+      "weights_sha256": "0587db632df33896d853191816106f13ef41e91440f19fdf08025f587ac3e99f",
+      "config_sha256": "a36e96af06b79cf1b2b9b36b528ee06b05cf82d21b7b4872f25d2d07aa9d0269"
+    },
+    "after": {
+      "path": "/workspace/analysis-material-v5-qualifier2-20261105/train/adapter",
+      "weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
+      "config_sha256": "933c124413a8486d79a5da3c151321cf8d0e1622165b6241ddde38939933721c"
+    }
+  },
+  "updates": 0,
+  "diagnostic_forwards": 0,
+  "model_loads": 2,
+  "new_generations": 8,
+  "reused_responses": 0,
+  "seconds": 119.11264991760254,
+  "stage_exits": [
+    {
+      "phase": "before",
+      "exit": 0
+    },
+    {
+      "phase": "after",
+      "exit": 0
+    }
+  ],
+  "cpu_seconds": 7.242044744081795,
+  "raw_same": 2,
+  "raw_changed_ids": [
+    "QF01",
+    "QF04"
+  ],
+  "before_candidate": 4,
+  "after_candidate": 4,
+  "before_typed": 0,
+  "after_typed": 0,
+  "all_typed_rejection_reason": "analysis_written_role_scope_unsupported",
+  "all_records_unparsed": true,
+  "saved_replay": {
+    "responses": 8,
+    "candidate": 8,
+    "typed": 0,
+    "generation_compiler_author_forbidden": true
+  },
+  "findings": {
+    "QF01": {
+      "change": "Optional UNKNOWN_CONTENT child added; previous full unknown quote already retained its content.",
+      "remaining": [
+        "REASON_MARKER qualifier missing",
+        "ATTRIBUTIVE NEGATION qualifier missing",
+        "past RELATIVE_TIME qualifier missing"
+      ],
+      "original_words_preserved_in_quotes": true
+    },
+    "QF02": {
+      "change": "RAW_UNCHANGED",
+      "remaining": [
+        "REASON_MARKER qualifier missing"
+      ],
+      "negative_and_times_preserved": true,
+      "short_unknown_root_with_content_outside_parent_quote_is_allowed": true
+    },
+    "QF03": {
+      "change": "RAW_UNCHANGED",
+      "remaining": [
+        "Independent written action wrongly attached as CONTENT_TARGET of thought"
+      ],
+      "speech_duration_range_and_speculation_preserved_in_quote": true,
+      "thought_not_turned_into_decision": true
+    },
+    "QF04": {
+      "change": "Local semantic improvement: remove duplicated oversized reaction target and retain explicit SELF reaction as result root.",
+      "signature_action_independent_before_and_after": true,
+      "omitted_location_child_not_a_new_regression_or_repair": true,
+      "source_words_preserved": true
+    }
+  },
+  "previous_ru02_teacher_repair_not_retracted": true,
+  "new_semantic_regressions_in_four": [],
+  "both_adapters_unchanged": true,
+  "archive": {
+    "library_file_id": "libfile_4e0846a2387c8191b8f0bd470f2c71a9",
+    "file_name": "Cocolon_Analysis_v5_qualifier_near4_20261105.zip",
+    "bytes": 88207,
+    "sha256": "4399a8fcb5091b65b211933c7907da7aa3e252059152c89b5f85a0a0fde96310",
+    "members": 46,
+    "manifest_members": 45,
+    "crc_all_bytes_sha_verified": true,
+    "parent_adapters_retrieved_separately": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_code_change": false,
+  "deployment": false,
+  "db_write": false,
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "gpu_end": "2 MiB, 0 %",
+  "compute_apps": "",
+  "pod_rental_maintained": true,
+  "next_work": "Do not repeat the fixed RU02 trial or train these four checking texts automatically. Address general reason/negative/time annotation retention and thought-to-independent-action binding using existing material owners and independently sourced teaching, then reevaluate held checking inputs. Existing mixed-source proof, normal cumulative connection and user criteria remain unfinished."
+}

@@ -4,7 +4,6 @@ import {
   Alert,
   FlatList,
   RefreshControl,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,12 +12,13 @@ import {
   Linking,
   Share,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
-import { supabase } from "../lib/supabase";
-import { apiGet, apiPost, apiFetch } from "../lib/apiClient";
+import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
+import { apiGet } from "../lib/apiClient";
 import {
-  ANALYSIS_WIRE,
   buildAnalysisReportDetailPath,
   buildAnalysisReportsReadyPath,
 } from "../lib/compat/legacyWireContracts";
@@ -27,20 +27,11 @@ import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
-import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
+import { formatKokoroGraphText, formatKokoroGraphTitle, isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 // Subscription (Analysis paywall)
 // - free: weekly/monthly are chart-only (no text / no PDF)
 // - plus/premium: can view full text + PDF
 const READY_PAGE_LIMIT = 50;
-
-async function getAccessToken() {
-  try {
-    const { data: sessionData } = await supabase.auth.getSession();
-    return sessionData?.session?.access_token ?? null;
-  } catch {
-    return null;
-  }
-}
 
 function extractReadyItems(payload) {
   if (Array.isArray(payload?.items)) return payload.items;
@@ -51,22 +42,9 @@ function extractReadyItems(payload) {
   return [];
 }
 
-async function fetchReadyReports(accessToken, reportType, { limit = READY_PAGE_LIMIT, offset = 0 } = {}) {
-  const readyPath = buildAnalysisReportsReadyPath({ reportType, limit, offset });
-  const res = await apiFetch(readyPath, {
-    method: "GET",
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    const err = new Error(`ready failed: ${res.status}`);
-    err.status = res.status;
-    err.body = text;
-    throw err;
-  }
-
-  const json = await res.json();
+async function fetchReadyReports(reportType, { limit = READY_PAGE_LIMIT, offset = 0, options } = {}) {
+  const readyPath = buildAnalysisReportsReadyPath({ reportType, limit, offset, includeBody: false });
+  const json = await apiGet(readyPath, options);
   return {
     json,
     items: extractReadyItems(json).filter(isKokoroWeatherReportRecord),
@@ -89,8 +67,8 @@ function extractReportDetailItem(payload) {
   return null;
 }
 
-async function fetchKokoroWeatherReportDetail(reportId) {
-  const payload = await apiGet(buildAnalysisReportDetailPath(reportId));
+async function fetchKokoroWeatherReportDetail(reportId, options) {
+  const payload = await apiGet(buildAnalysisReportDetailPath(reportId), options);
   const item = extractReportDetailItem(payload);
   if (!isKokoroWeatherReportRecord(item)) return null;
   return {
@@ -133,9 +111,9 @@ const TYPE_LABEL = Object.freeze({
 });
 
 const TYPE_JP = Object.freeze({
-  daily: "こころ天気（日）",
-  weekly: "こころ天気（週）",
-  monthly: "こころ天気（月）",
+  daily: "こころグラフ（日）",
+  weekly: "こころグラフ（週）",
+  monthly: "こころグラフ（月）",
 });
 
 function normalizeReportType(raw) {
@@ -287,18 +265,25 @@ export default function AnalysisReportHistoryScreen({
   onOpenReport,
   onGenerateLatest,
   onOpenSubscription, // ✅ Analysis paywall CTA（SubscriptionSelectへ）
+  reportReadRevision = 0,
 }) {
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope, isCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
+  const [rowsLifetime, setRowsLifetime] = useState(null);
   const [rows, setRows] = useState([]);
   const [readIdSet, setReadIdSet] = useState(() => new Set()); // report_id string
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState(false);
   const [hasMore, setHasMore] = useState(false);
   const [nextOffset, setNextOffset] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
   const normalizedReportType = useMemo(() => normalizeReportType(reportType), [reportType]);
   const loadSeqRef = useRef(0);
+  const loadingMoreRef = useRef(false);
+  const visibleRows = rowsLifetime?.scope === scope && rowsLifetime?.reportType === normalizedReportType && isCurrent(scope) ? rows : [];
 
   const { themeName, colors } = useTheme();
   const { tier: ctxSubscriptionTier, loading: subscriptionContextLoading } = useSubscription();
@@ -346,59 +331,15 @@ export default function AnalysisReportHistoryScreen({
     return false;
   }, [normalizedReportType]);
 
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
-      header: {
-        backgroundColor: colors.BG_SILVER,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      backText: { color: colors.TEXT_ON_LIGHT },
-      headerTitle: { color: colors.TEXT_ON_LIGHT },
+  const themed = {};
 
-      scheduleCard: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      scheduleTitle: { color: colors.TEXT_ON_LIGHT },
-      scheduleLine: { color: colors.TEXT_ON_LIGHT },
-      scheduleHint: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      generateBtn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      generateText: { color: colors.ACCENT_TEXT },
-
-      // paywall CTA
-      paywallBtn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      paywallBtnText: { color: colors.ACCENT_TEXT },
-
-      row: {
-        backgroundColor: colors.PANEL_BG,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      rowTitle: { color: colors.TEXT_ON_LIGHT },
-      rowSub: { color: colors.TEXT_ON_LIGHT },
-      rowMeta: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      iconBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      iconBtnText: { color: colors.TEXT_ON_LIGHT },
-      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
-
-  const title = `${TYPE_JP[normalizedReportType] || "こころ天気"}の履歴`;
+  const title = `${TYPE_JP[normalizedReportType] || "こころグラフ"}の履歴`;
   const load = useCallback(async () => {
     const loadSeq = ++loadSeqRef.current;
-    const isStale = () => loadSeq !== loadSeqRef.current;
+    const isStale = () => loadSeq !== loadSeqRef.current || !isCurrent(scope);
+    loadingMoreRef.current = false;
+    setLoadingMore(false);
+    if (!isCurrent(scope)) return;
 
     console.log("HISTORY load start =", {
       loadSeq,
@@ -407,24 +348,14 @@ export default function AnalysisReportHistoryScreen({
     });
 
     setErrorMsg("");
+    setReadIdSet(new Set());
+    setLoadMoreError(false);
     setLoading(true);
     try {
-      const accessToken = await getAccessToken();
-
-      if (!accessToken) {
-        if (isStale()) return;
-        setRows([]);
-        setReadIdSet(new Set());
-        setHasMore(false);
-        setNextOffset(null);
-        setErrorMsg("ログイン情報を取得できませんでした（ログインしてください）");
-        return;
-      }
-
       // ✅ Phase2: 履歴は Analysis ready reports から取得（READY/PUBLISHED + retention/tier はAPIで統一）
       let ready;
       try {
-        ready = await fetchReadyReports(accessToken, normalizedReportType, { limit: READY_PAGE_LIMIT, offset: 0 });
+        ready = await fetchReadyReports(normalizedReportType, { limit: READY_PAGE_LIMIT, offset: 0, options: scope.options });
       } catch (err) {
         if (isStale()) return;
         setRows([]);
@@ -446,6 +377,7 @@ export default function AnalysisReportHistoryScreen({
         Array.isArray(ready?.items) ? ready.items.length : "no-items"
       );
 
+      if (isStale()) return;
       if (typeof ready?.viewerTier === "string") {
         setSubscriptionTier(normalizeSubscriptionTier(ready.viewerTier));
       }
@@ -462,8 +394,10 @@ export default function AnalysisReportHistoryScreen({
       }
 
       setRows(list);
+      setRowsLifetime({ scope, reportType: normalizedReportType });
       setHasMore(Boolean(activeReady?.hasMore));
       setNextOffset(activeReady?.nextOffset ?? null);
+      setLoading(false);
       console.log("rows set:", list.length, "reportType =", normalizedReportType);
 
       // 既読状態は report-reads API から取得
@@ -473,12 +407,13 @@ export default function AnalysisReportHistoryScreen({
           setReadIdSet(new Set());
         } else {
           const query = ids.map((id) => `report_ids=${encodeURIComponent(id)}`).join("&");
-          const json = await apiGet(`/report-reads/status?${query}`);
+          const json = await apiGet(`/report-reads/status?${query}`, scope.options);
+          if (isStale()) return;
           const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
-          setReadIdSet(new Set(readIds.map((x) => String(x || "")).filter(Boolean)));
+          setReadIdSet(previous => new Set([...previous, ...readIds.map((x) => String(x || "")).filter(Boolean)]));
         }
       } catch {
-        setReadIdSet(new Set());
+        // Keep confirmed reads from a page that completed in this same lifetime.
       }
     } catch (e) {
       if (isStale()) return;
@@ -492,7 +427,7 @@ export default function AnalysisReportHistoryScreen({
         setLoading(false);
       }
     }
-  }, [normalizedReportType, reportType]);
+  }, [normalizedReportType, reportType, scope, isCurrent, reportReadRevision]);
 
   useEffect(() => {
     load();
@@ -508,15 +443,19 @@ export default function AnalysisReportHistoryScreen({
   }, [load]);
 
   const loadMore = useCallback(async () => {
-    if (loading || refreshing || loadingMore || !hasMore || nextOffset == null) return;
+    if (loading || refreshing || loadingMoreRef.current || !hasMore || nextOffset == null || !isCurrent(scope)) return;
+    const loadSeq = loadSeqRef.current;
+    const isStale = () => loadSeq !== loadSeqRef.current || !isCurrent(scope);
+    loadingMoreRef.current = true;
     setLoadingMore(true);
+    setLoadMoreError(false);
     try {
-      const accessToken = await getAccessToken();
-      if (!accessToken) return;
-      const ready = await fetchReadyReports(accessToken, normalizedReportType, {
+      const ready = await fetchReadyReports(normalizedReportType, {
         limit: READY_PAGE_LIMIT,
         offset: nextOffset,
+        options: scope.options,
       });
+      if (isStale()) return;
       if (typeof ready?.viewerTier === "string") {
         setSubscriptionTier(normalizeSubscriptionTier(ready.viewerTier));
       }
@@ -538,7 +477,8 @@ export default function AnalysisReportHistoryScreen({
         const ids = list.map((r) => String(r?.id || "")).filter(Boolean);
         if (ids.length > 0) {
           const query = ids.map((id) => `report_ids=${encodeURIComponent(id)}`).join("&");
-          const json = await apiGet(`/report-reads/status?${query}`);
+          const json = await apiGet(`/report-reads/status?${query}`, scope.options);
+          if (isStale()) return;
           const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
           setReadIdSet((prev) => {
             const next = new Set(prev);
@@ -550,70 +490,38 @@ export default function AnalysisReportHistoryScreen({
         // ignore incremental read-status failure
       }
     } catch (e) {
+      if (isStale()) return;
       console.warn("AnalysisReportHistoryScreen: loadMore failed", e);
+      setLoadMoreError(true);
     } finally {
-      setLoadingMore(false);
-    }
-  }, [loading, refreshing, loadingMore, hasMore, nextOffset, normalizedReportType]);
-
-  const handleOpen = useCallback(
-    async (id) => {
-      try {
-        const rid = String(id);
-
-        // ✅ レポート本体は Analysis ready reports 由来の rows から取得（表示ロジックをAPIに統一）
-        let data = rows.find((r) => String(r?.id || "") === rid) || null;
-
-        // 念のため: rows に見つからない場合は ready を再取得（best-effort）
-        if (!data) {
-          const accessToken = await getAccessToken();
-          if (accessToken) {
-            try {
-              const ready = await fetchReadyReports(accessToken, normalizedReportType, { limit: Math.max(rows.length, READY_PAGE_LIMIT), offset: 0 });
-              const list = Array.isArray(ready?.items) ? ready.items : [];
-              data = list.find((r) => String(r?.id || "") === rid) || null;
-            } catch {
-              data = null;
-            }
-          }
-        }
-
-        if (!data || !isKokoroWeatherReportRecord(data)) {
-          Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
-          return;
-        }
-
-        const detail = await fetchKokoroWeatherReportDetail(rid);
-        if (!detail?.item) {
-          Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
-          return;
-        }
-        const viewerTier = detail.viewerTier || subscriptionTier;
-
-        // 既読を記録（失敗しても閲覧は継続）
-        try {
-          await apiPost("/report-reads/mark", {
-            report_id: String(id),
-            report_table: ANALYSIS_WIRE.reportFamily.table,
-            report_scope: ANALYSIS_WIRE.reportFamily.scope,
-          });
-          setReadIdSet((prev) => {
-            const next = new Set(prev);
-            next.add(String(id));
-            return next;
-          });
-        } catch {
-          // ignore
-        }
-
-        // viewer_tier を渡して Viewer 側で追加の subscription/me を省略できるようにする（後方互換）
-        if (onOpenReport) onOpenReport({ ...detail.item, viewer_tier: viewerTier });
-      } catch (e) {
-        Alert.alert("エラー", String(e?.message || e));
+      if (!isStale()) {
+        loadingMoreRef.current = false;
+        setLoadingMore(false);
       }
-    },
-    [onOpenReport, rows, normalizedReportType, subscriptionTier]
-  );
+    }
+  }, [loading, refreshing, hasMore, nextOffset, normalizedReportType, scope, isCurrent]);
+
+  const handleOpen = useCallback(async (id) => {
+    const loadSeq = loadSeqRef.current;
+    const fresh = () => loadSeq === loadSeqRef.current && isCurrent(scope);
+    if (!fresh()) return;
+    const rid = String(id || "");
+    const row = visibleRows.find(item => String(item.id) === rid);
+    if (!row || !isKokoroWeatherReportRecord(row)) return;
+    try {
+      // The list is metadata only. Reauthorize and fetch the selected artifact once.
+      const detail = await fetchKokoroWeatherReportDetail(rid, scope.options);
+      if (!fresh()) return;
+      if (!detail?.item) {
+        Alert.alert("取得エラー", "このこころグラフは現在の表示対象外です。");
+        return;
+      }
+      // The parent records the read after opening; no write blocks navigation here.
+      onOpenReport?.({ ...detail.item, viewer_tier: detail.viewerTier || subscriptionTier });
+    } catch (e) {
+      if (fresh()) Alert.alert("取得エラー", String(e?.message || e));
+    }
+  }, [onOpenReport, visibleRows, subscriptionTier, scope, isCurrent]);
 
   const handleExport = useCallback(async (id) => {
     try {
@@ -646,31 +554,16 @@ export default function AnalysisReportHistoryScreen({
 
       const rid = String(id);
 
-      // ✅ export対象も Analysis ready reports 由来の rows から解決（表示ロジックをAPIに統一）
-      let data = rows.find((r) => String(r?.id || "") === rid) || null;
+      const loadSeq = loadSeqRef.current;
+      const fresh = () => loadSeq === loadSeqRef.current && isCurrent(scope);
+      if (!fresh()) return;
+      let data = visibleRows.find(item => String(item.id) === rid) || null;
+      if (!data || !isKokoroWeatherReportRecord(data)) return;
 
-      // 念のため: rows に見つからない場合は ready を再取得（best-effort）
-      if (!data) {
-        const accessToken = await getAccessToken();
-        if (accessToken) {
-          try {
-            const ready = await fetchReadyReports(accessToken, normalizedReportType, { limit: Math.max(rows.length, READY_PAGE_LIMIT), offset: 0 });
-            const list = Array.isArray(ready?.items) ? ready.items : [];
-            data = list.find((r) => String(r?.id || "") === rid) || null;
-          } catch {
-            data = null;
-          }
-        }
-      }
-
-      if (!data || !isKokoroWeatherReportRecord(data)) {
-        Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
-        return;
-      }
-
-      const detail = await fetchKokoroWeatherReportDetail(rid);
+      const detail = await fetchKokoroWeatherReportDetail(rid, scope.options);
+      if (!fresh()) return;
       if (!detail?.item) {
-        Alert.alert("取得エラー", "このこころ天気は現在の表示対象外です。");
+        Alert.alert("取得エラー", "このこころグラフは現在の表示対象外です。");
         return;
       }
       data = detail.item;
@@ -697,11 +590,11 @@ export default function AnalysisReportHistoryScreen({
         return;
       }
 
-      await exportTextToPdf(data?.title || title, text);
+      await exportTextToPdf(formatKokoroGraphTitle(data?.title, title), formatKokoroGraphText(text));
     } catch (e) {
       Alert.alert("PDF保存エラー", String(e?.message || e));
     }
-  }, [title, isTextLocked, tierLoading, normalizedReportType, onOpenSubscription, rows]);
+  }, [title, isTextLocked, tierLoading, normalizedReportType, onOpenSubscription, visibleRows, scope, isCurrent]);
 
   const headerLabel = useMemo(() => {
     const jp = TYPE_JP[normalizedReportType] || "レポート";
@@ -713,17 +606,7 @@ export default function AnalysisReportHistoryScreen({
   );
   const showHistoryRetentionLabel = !tierLoading && !!historyRetentionLabel;
 
-  return (
-    <SafeAreaView style={[styles.container, themed.container]}>
-      {/* ヘッダー */}
-      <View style={[styles.header, themed.header]}>
-        <CocolonBackButton onPress={onBack} style={[styles.backBtn, { width: 70 }]} />
-
-        <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{headerLabel}</Text>
-
-        <View style={{ width: 70 }} />
-      </View>
-
+  const listHeader = (<View>
       {/* 操作 */}
       <View style={styles.topActions}>
         <View style={[styles.scheduleCard, themed.scheduleCard]}
@@ -790,14 +673,23 @@ export default function AnalysisReportHistoryScreen({
       {/* エラー */}
       {errorMsg ? <Text style={styles.error}>取得エラー: {errorMsg}</Text> : null}
 
+  </View>);
+
+  return (
+    <SafeAreaView edges={["left", "right"]} style={[styles.container, themed.container]}>
+      {/* ヘッダー */}
+      <View style={[styles.header, themed.header]}>
+        <CocolonBackButton onPress={onBack} style={styles.backBtn} />
+
+        <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{headerLabel}</Text>
+
+        <View style={{ width: 44 }} />
+      </View>
+
       {/* リスト */}
-      {loading && rows.length === 0 ? (
-        <View style={styles.center}>
-          <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
-        </View>
-      ) : (
-        <FlatList
-          data={rows}
+      <FlatList
+          ListHeaderComponent={listHeader}
+          data={visibleRows}
           keyExtractor={(item) => String(item.id)}
           refreshControl={
             <RefreshControl
@@ -807,10 +699,10 @@ export default function AnalysisReportHistoryScreen({
               colors={[colors.TEXT_ON_LIGHT]}
             />
           }
-          contentContainerStyle={{ paddingVertical: 8 }}
+          contentContainerStyle={styles.listContent}
           ListEmptyComponent={
-            !errorMsg ? (
-              <Text style={[{ padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE }, themed.listEmptyText]}>
+            loading ? <ActivityIndicator accessibilityLabel="履歴を読み込み中" color={colors.TITLE_GOLD} style={{ padding: 24 }} /> : !errorMsg ? (
+              <Text style={[{ ...ui.typography.description, padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE }, themed.listEmptyText]}>
                 まだ履歴がありません（配布タイミングになると自動で追加されます）\n次回配布: {nextJstLabel}
               </Text>
             ) : null
@@ -822,17 +714,19 @@ export default function AnalysisReportHistoryScreen({
                 themed.row,
                 readIdSet.has(String(item.id)) && styles.rowRead,
               ]}
+              accessibilityRole="button"
               onPress={() => handleOpen(item.id)}
               activeOpacity={0.85}
             >
               <View style={{ flex: 1 }}>
-                <Text style={[styles.rowTitle, themed.rowTitle]} numberOfLines={1}>
-                  {item.title || title}
+                {readIdSet.has(String(item.id)) ? <Text style={[styles.rowMeta, { color: colors.TITLE_GOLD }]}>既読</Text> : null}
+                <Text style={[styles.rowTitle, themed.rowTitle]}>
+                  {formatKokoroGraphTitle(item.title, title)}
                 </Text>
-                <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
+                <Text style={[styles.rowSub, themed.rowSub]}>
                   {formatRangeJP(item.period_start, item.period_end, normalizedReportType)}
                 </Text>
-                <Text style={[styles.rowMeta, themed.rowMeta]} numberOfLines={1}>
+                <Text style={[styles.rowMeta, themed.rowMeta]}>
                   作成: {formatDateJP(item.generated_at || item.updated_at || item.period_end)}
                 </Text>
               </View>
@@ -846,17 +740,20 @@ export default function AnalysisReportHistoryScreen({
                 <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
               </View>
             ) : hasMore ? (
+              <View>
+                {loadMoreError ? <Text accessibilityLiveRegion="polite" style={styles.error}>続きの履歴を取得できませんでした。表示中の履歴を保ったまま再試行できます。</Text> : null}
               <TouchableOpacity
                 style={styles.loadMoreBtn}
                 onPress={loadMore}
+                accessibilityRole="button" accessibilityLabel="さらに履歴を読み込む"
                 activeOpacity={0.85}
               >
-                <Text style={[styles.loadMoreText, themed.rowMeta]}>さらに表示</Text>
+                <Text style={[styles.loadMoreText, themed.rowMeta]}>{loadMoreError ? "もう一度読み込む" : "さらに表示"}</Text>
               </TouchableOpacity>
+              </View>
             ) : <View style={styles.listFooterSpacer} />
           }
         />
-      )}
     </SafeAreaView>
   );
 }
@@ -864,106 +761,206 @@ export default function AnalysisReportHistoryScreen({
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-  container: { flex: 1, backgroundColor: "#fff" },
+  listContent: { width: "100%", maxWidth: 680, alignSelf: "center", paddingHorizontal: 20, paddingBottom: 24 },
+  container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
   header: {
-    paddingTop: 10,
-    paddingHorizontal: 12,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  backBtn: { flexDirection: "row", alignItems: "center", width: 70 },
-  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
-  headerTitle: { fontSize: 20, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+      paddingTop: 10,
+      paddingHorizontal: 20,
+      paddingBottom: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
+  backBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: 44,
+      minWidth: 44,
+      minHeight: 44,
+      flexShrink: 0,
+      justifyContent: "center",
+    },
+  backText: {
+      marginLeft: 2,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+  headerTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      flex: 1,
+      flexShrink: 1,
+      minWidth: 0,
+      marginHorizontal: 8,
+      letterSpacing: 0,
+      textAlign: "center",
+    },
 
-  topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
+  topActions: {
+      paddingHorizontal: 0,
+      paddingTop: 16,
+      paddingBottom: 12,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
   historyRetentionText: {
-    marginTop: 8,
-    fontSize: 12,
-    fontWeight: "600",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      marginTop: 8,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
 
   scheduleCard: {
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#F9FAFB",
-    padding: 12,
-  },
-  scheduleTitle: { fontSize: 12, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 6 },
-  scheduleLine: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE, marginBottom: 2 },
-  scheduleHint: { fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 6 },
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.PANEL_BG,
+      padding: 20,
+    },
+  scheduleTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
+  scheduleLine: {
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 4,
+    },
+  scheduleHint: {
+      color: COLORS.TEXT_SUBTLE,
+      marginTop: 6,
+    },
 
   generateBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
-  generateText: { fontSize: 13, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 12,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 44,
+      maxWidth: 520,
+      paddingHorizontal: 16,
+    },
+  generateText: {
+      color: COLORS.ACCENT_TEXT,
+      flexShrink: 1,
+      textAlign: "center",
+    },
 
   // paywall CTA
   paywallBtn: {
-    marginTop: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
+      marginTop: 10,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 12,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 44,
+      maxWidth: 520,
+      paddingHorizontal: 16,
+    },
   paywallBtnText: {
-    fontSize: 13,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    fontWeight: "800",
-    marginRight: 2,
-  },
+      color: COLORS.ACCENT_TEXT,
+      marginRight: 8,
+      flexShrink: 1,
+      textAlign: "center",
+    },
 
-  error: { paddingHorizontal: 12, paddingTop: 6, paddingBottom: 6, color: "#B91C1C" },
+  error: {
+      paddingHorizontal: 0,
+      color: COLORS.ERROR,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      paddingVertical: 12,
+    },
   center: { flex: 1, alignItems: "center", justifyContent: "center" },
 
   row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F3F4F6",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      minHeight: 44,
+      backgroundColor: COLORS.PANEL_BG,
+      gap: 12,
+      borderWidth: 1, borderColor: COLORS.CARD_BORDER, borderRadius: 24, marginBottom: 12,
+    },
   // ✅ 既読の行は少し暗めに（未読が目立つ）
   rowRead: {
-    opacity: 0.55,
-  },
-  rowTitle: { fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  rowMeta: { marginTop: 2, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
+
+    },
+  rowTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
+    },
+  rowSub: {
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
+    },
+  rowMeta: {
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
+    },
   listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
   listFooterSpacer: { height: 12 },
-  loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
-  loadMoreText: { fontSize: 13, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
+  loadMoreBtn: {
+      marginHorizontal: 0,
+      marginTop: 8,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      paddingVertical: 12,
+      alignItems: "center",
+      justifyContent: "center",
+      width: "90%",
+      maxWidth: 520,
+      alignSelf: "center",
+      minHeight: 44,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+    },
+  loadMoreText: {
+      color: COLORS.ON_SURFACE_TONAL,
+      textAlign: "center",
+      flexShrink: 1,
+    },
 
   iconBtn: {
-    marginLeft: 10,
-    marginRight: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  iconBtnText: { marginTop: 2, fontSize: 10, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
-  }, ui));
+      marginLeft: 10,
+      marginRight: 10,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 44,
+      minHeight: 44,
+    },
+  iconBtnText: {
+      marginTop: 2,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
+  }, ui, {"backText":"button","headerTitle":"screenTitle","historyRetentionText":"description","scheduleTitle":"sectionTitle","scheduleLine":"description","scheduleHint":"description","generateText":"button","paywallBtnText":"button","error":"body","rowTitle":"body","rowSub":"description","rowMeta":"meta","loadMoreText":"button","iconBtnText":"button"}));
 }

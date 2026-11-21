@@ -1,66 +1,29 @@
 import React from "react";
 import { Text, View } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
+import PieceScreenIntro from "../piece/PieceScreenIntro";
 import CocolonPressable from "../../components/CocolonPressable";
 
 export default function NexusHeader({
   titleRef,
   styles,
   colors,
-  isTutorialMode,
-  viewerUserId,
-  handleOpenFollowList,
-  handlePressGuide,
-  onRefresh,
+  ui,
+  canReadOwnPieces,
+  handleOpenOwnerHistory,
 }) {
   return (
-    <View style={styles.panelHeader}>
-      <View ref={titleRef} collapsable={false} style={styles.panelTitleRow}>
-        <Text style={styles.panelTitle}>ピース</Text>
+    <View>
+      <PieceScreenIntro titleRef={titleRef} colors={colors} ui={ui} />
+      {canReadOwnPieces ? (
         <CocolonPressable
-          style={styles.guideTitleButton}
-          onPress={handlePressGuide}
-          accessibilityLabel="ピースのガイドを開く"
+          style={styles.ownerHistoryButton}
+          onPress={handleOpenOwnerHistory}
+          accessibilityLabel="自分のピースを開く"
         >
-          <Ionicons
-            name="help-circle-outline"
-            size={20}
-            color={colors.TEXT_ON_LIGHT}
-          />
+          <Text style={styles.ownerHistoryButtonText}>自分のピースを開く</Text>
         </CocolonPressable>
-      </View>
-      <View style={styles.panelHeaderActions}>
-        {!isTutorialMode ? (
-          <CocolonPressable
-            style={[
-              styles.refreshButton,
-              styles.followListButton,
-              !viewerUserId && styles.headerButtonDisabled,
-            ]}
-            onPress={handleOpenFollowList}
-            disabled={!viewerUserId}
-            accessibilityLabel="自分のフォローリストを開く"
-          >
-            <Ionicons
-              name="people-outline"
-              size={18}
-              color={colors.TEXT_ON_LIGHT}
-            />
-          </CocolonPressable>
-        ) : null}
-        <CocolonPressable
-          style={styles.refreshButton}
-          onPress={onRefresh}
-          accessibilityLabel="ピースを再読み込みする"
-        >
-          <Ionicons
-            name="refresh-outline"
-            size={18}
-            color={colors.TEXT_ON_LIGHT}
-          />
-        </CocolonPressable>
-      </View>
+      ) : null}
     </View>
   );
 }

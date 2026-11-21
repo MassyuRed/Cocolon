@@ -1,0 +1,2517 @@
+{
+  "schema_version": "cocolon.cmee.p2_semantic_mapping_inspection.v1",
+  "api_ref": "b7eb534d44658549896baf449e7c319d49d14396",
+  "cocolon_ref": "141973b4eb35428b50e09cb5c74e9a0f7e2aa208",
+  "origin": "DESIGN_PROPOSAL_ONLY",
+  "source_p1_result_sha256": "7ccb7b83872efd854cb24a152bca771db83a8ede8b385fd2087c2c0083768a3c",
+  "examples": [
+    {
+      "case_id": "E02-0",
+      "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+      "origin": "HAND_AUTHORED_DESIGN_SAMPLE_NOT_MODEL_OUTPUT",
+      "packet": {
+        "candidate": {
+          "schema_version": "cocolon.cmee.semantic_mapping_proposal.v1",
+          "core": "emlis",
+          "claims": [
+            {
+              "claim_id": "e0.joy",
+              "kind": "STATE",
+              "text": "うれしかった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "うれしかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "e0.joy"
+                ],
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                0
+              ]
+            },
+            {
+              "claim_id": "e0.unclear",
+              "kind": "EXPLICIT_UNKNOWN",
+              "text": "どこがうれしかったかはまだ曖昧",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "曖昧",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "e0.unclear"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_STILL_UNKNOWN",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "claim_id": "e0.delegate",
+              "kind": "ACTION",
+              "text": "打合せで後輩に説明を任せて",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "任せて",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_で",
+                    "text": "打合せ",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      6
+                    ]
+                  },
+                  {
+                    "role": "WRITTEN_に",
+                    "text": "後輩",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      7
+                    ]
+                  },
+                  {
+                    "role": "WRITTEN_を",
+                    "text": "説明",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      8
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "e0.delegate"
+                ],
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                2
+              ]
+            },
+            {
+              "claim_id": "e0.listen",
+              "kind": "ACTION",
+              "text": "最後まで聞いた。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "聞いた",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_まで",
+                    "text": "最後",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      9
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "e0.listen"
+                ],
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                3
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "relation_id": "e0.written_link",
+              "type": "SOURCE_WRITTEN_TE_LINK",
+              "from_claim_id": "e0.delegate",
+              "to_claim_id": "e0.listen",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "e0.written_link"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                4
+              ]
+            },
+            {
+              "relation_id": "e0.concession",
+              "type": "SOURCE_WRITTEN_CONCESSION",
+              "from_claim_id": "e0.joy",
+              "to_claim_id": "e0.unclear",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "e0.concession"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                5
+              ]
+            }
+          ],
+          "unknowns": [
+            {
+              "unknown_id": "e0.u1",
+              "target_claim_refs": [
+                "e0.joy"
+              ],
+              "dimension": "JOY_ASPECT",
+              "description": "喜びのどの部分なのかは本人の記述上も曖昧。理由や信頼・成長を補わない。",
+              "origin": "PERSON_STATED",
+              "resolution_state": "SOURCE_STATEMENT_RETAINED",
+              "evidence_indexes": [
+                1
+              ]
+            }
+          ],
+          "conflicts": [],
+          "updates": []
+        },
+        "evidence": [
+          {
+            "source_id": "E02-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 6,
+            "quote": "うれしかった"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo",
+            "start": 9,
+            "end": 24,
+            "quote": "どこがうれしかったかはまだ曖昧"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 13,
+            "quote": "打合せで後輩に説明を任せて"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 14,
+            "end": 22,
+            "quote": "最後まで聞いた。"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 10,
+            "end": 22,
+            "quote": "任せて、最後まで聞いた。"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 24,
+            "quote": "うれしかったけど、どこがうれしかったかはまだ曖昧"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 4,
+            "quote": "打合せで"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 4,
+            "end": 7,
+            "quote": "後輩に"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 7,
+            "end": 10,
+            "quote": "説明を"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 14,
+            "end": 18,
+            "quote": "最後まで"
+          }
+        ]
+      },
+      "actual_p1_receipt": {
+        "request_id": "prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763",
+        "status": "CANDIDATE_UNREVIEWED",
+        "raw_output": "{\"candidate\": {\"schema_version\": \"cocolon.cmee.semantic_mapping_proposal.v1\", \"core\": \"emlis\", \"claims\": [{\"claim_id\": \"e0.joy\", \"kind\": \"STATE\", \"text\": \"うれしかった\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"うれしかった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"e0.joy\"], \"evidence_indexes\": [0]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [0]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [0]}, \"qualifiers\": [], \"evidence_indexes\": [0]}, {\"claim_id\": \"e0.unclear\", \"kind\": \"EXPLICIT_UNKNOWN\", \"text\": \"どこがうれしかったかはまだ曖昧\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"曖昧\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"e0.unclear\"], \"evidence_indexes\": [1]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [1]}, \"about_time\": {\"kind\": \"WRITTEN_STILL_UNKNOWN\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [1]}, \"qualifiers\": [], \"evidence_indexes\": [1]}, {\"claim_id\": \"e0.delegate\", \"kind\": \"ACTION\", \"text\": \"打合せで後輩に説明を任せて\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"任せて\", \"arguments\": [{\"role\": \"WRITTEN_で\", \"text\": \"打合せ\", \"claim_ref\": null, \"evidence_indexes\": [6]}, {\"role\": \"WRITTEN_に\", \"text\": \"後輩\", \"claim_ref\": null, \"evidence_indexes\": [7]}, {\"role\": \"WRITTEN_を\", \"text\": \"説明\", \"claim_ref\": null, \"evidence_indexes\": [8]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"e0.delegate\"], \"evidence_indexes\": [2]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [2]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [2]}, \"qualifiers\": [], \"evidence_indexes\": [2]}, {\"claim_id\": \"e0.listen\", \"kind\": \"ACTION\", \"text\": \"最後まで聞いた。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"聞いた\", \"arguments\": [{\"role\": \"WRITTEN_まで\", \"text\": \"最後\", \"claim_ref\": null, \"evidence_indexes\": [9]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"e0.listen\"], \"evidence_indexes\": [3]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [3]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [3]}, \"qualifiers\": [], \"evidence_indexes\": [3]}], \"relations\": [{\"relation_id\": \"e0.written_link\", \"type\": \"SOURCE_WRITTEN_TE_LINK\", \"from_claim_id\": \"e0.delegate\", \"to_claim_id\": \"e0.listen\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"e0.written_link\"], \"qualifiers\": [], \"evidence_indexes\": [4]}, {\"relation_id\": \"e0.concession\", \"type\": \"SOURCE_WRITTEN_CONCESSION\", \"from_claim_id\": \"e0.joy\", \"to_claim_id\": \"e0.unclear\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"e0.concession\"], \"qualifiers\": [], \"evidence_indexes\": [5]}], \"unknowns\": [{\"unknown_id\": \"e0.u1\", \"target_claim_refs\": [\"e0.joy\"], \"dimension\": \"JOY_ASPECT\", \"description\": \"喜びのどの部分なのかは本人の記述上も曖昧。理由や信頼・成長を補わない。\", \"origin\": \"PERSON_STATED\", \"resolution_state\": \"SOURCE_STATEMENT_RETAINED\", \"evidence_indexes\": [1]}], \"conflicts\": [], \"updates\": []}, \"evidence\": [{\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 6, \"quote\": \"うれしかった\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 9, \"end\": 24, \"quote\": \"どこがうれしかったかはまだ曖昧\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 13, \"quote\": \"打合せで後輩に説明を任せて\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 14, \"end\": 22, \"quote\": \"最後まで聞いた。\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 10, \"end\": 22, \"quote\": \"任せて、最後まで聞いた。\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 24, \"quote\": \"うれしかったけど、どこがうれしかったかはまだ曖昧\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 4, \"quote\": \"打合せで\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 4, \"end\": 7, \"quote\": \"後輩に\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 7, \"end\": 10, \"quote\": \"説明を\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 14, \"end\": 18, \"quote\": \"最後まで\"}]}",
+        "candidate_json": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"e0.joy\",\"evidence_indexes\":[0],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"e0.joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_STILL_UNKNOWN\"},\"claim_id\":\"e0.unclear\",\"evidence_indexes\":[1],\"kind\":\"EXPLICIT_UNKNOWN\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"e0.unclear\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"曖昧\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"どこがうれしかったかはまだ曖昧\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"e0.delegate\",\"evidence_indexes\":[2],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"e0.delegate\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[6],\"role\":\"WRITTEN_で\",\"text\":\"打合せ\"},{\"claim_ref\":null,\"evidence_indexes\":[7],\"role\":\"WRITTEN_に\",\"text\":\"後輩\"},{\"claim_ref\":null,\"evidence_indexes\":[8],\"role\":\"WRITTEN_を\",\"text\":\"説明\"}],\"surface\":\"任せて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"打合せで後輩に説明を任せて\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"e0.listen\",\"evidence_indexes\":[3],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"e0.listen\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[9],\"role\":\"WRITTEN_まで\",\"text\":\"最後\"}],\"surface\":\"聞いた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"最後まで聞いた。\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"e0.delegate\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"e0.written_link\",\"scope_refs\":[\"e0.written_link\"],\"to_claim_id\":\"e0.listen\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"e0.joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"e0.concession\",\"scope_refs\":[\"e0.concession\"],\"to_claim_id\":\"e0.unclear\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[{\"description\":\"喜びのどの部分なのかは本人の記述上も曖昧。理由や信頼・成長を補わない。\",\"dimension\":\"JOY_ASPECT\",\"evidence_indexes\":[1],\"origin\":\"PERSON_STATED\",\"resolution_state\":\"SOURCE_STATEMENT_RETAINED\",\"target_claim_refs\":[\"e0.joy\"],\"unknown_id\":\"e0.u1\"}],\"updates\":[]},\"evidence\":[{\"end\":6,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":24,\"field_path\":\"memo\",\"quote\":\"どこがうれしかったかはまだ曖昧\",\"source_id\":\"E02-O\",\"start\":9},{\"end\":13,\"field_path\":\"memo_action\",\"quote\":\"打合せで後輩に説明を任せて\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"最後まで聞いた。\",\"source_id\":\"E02-O\",\"start\":14},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"任せて、最後まで聞いた。\",\"source_id\":\"E02-O\",\"start\":10},{\"end\":24,\"field_path\":\"memo\",\"quote\":\"うれしかったけど、どこがうれしかったかはまだ曖昧\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":4,\"field_path\":\"memo_action\",\"quote\":\"打合せで\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":7,\"field_path\":\"memo_action\",\"quote\":\"後輩に\",\"source_id\":\"E02-O\",\"start\":4},{\"end\":10,\"field_path\":\"memo_action\",\"quote\":\"説明を\",\"source_id\":\"E02-O\",\"start\":7},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"最後まで\",\"source_id\":\"E02-O\",\"start\":14}]}",
+        "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"HAND_AUTHORED_P2_DESIGN_SAMPLE\",\"revision\":null,\"usage\":null}"
+      },
+      "adoption_state": "NOT_ADOPTED",
+      "reference_index_checks": 27,
+      "proposed_mapping_decision": "HOLD_FOR_PROFILE_MAPPING",
+      "mapping_reasons": [
+        "source引用位置は一致。省略主体をSELFへ自動確定しない。",
+        "concessionをTENSION_WITHやcauseへ自動変換しない。",
+        "現在のfinite plan/pool等との同一性から新profileの採用責任を分離する必要がある。"
+      ]
+    },
+    {
+      "case_id": "E02-B",
+      "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+      "origin": "HAND_AUTHORED_DESIGN_SAMPLE_NOT_MODEL_OUTPUT",
+      "packet": {
+        "candidate": {
+          "schema_version": "cocolon.cmee.semantic_mapping_proposal.v1",
+          "core": "emlis",
+          "claims": [
+            {
+              "claim_id": "eb.joy",
+              "kind": "STATE",
+              "text": "うれしかった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "うれしかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "eb.joy"
+                ],
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                0
+              ]
+            },
+            {
+              "claim_id": "eb.rejected_reason",
+              "kind": "MENTIONED_REASON_ARGUMENT",
+              "text": "自分が口を挟まずに済んだ",
+              "subject": {
+                "binding": "EXPLICIT",
+                "source_entity": "自分",
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "predicate": {
+                "surface": "口を挟まずに済んだ",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "eb.rejected_reason"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "modality": {
+                "value": "MENTIONED_IN_DENIED_REASON_NOT_ASSERTED_FACT",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "about_time": {
+                "kind": "PAST_INSIDE_DENIED_REASON",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "claim_id": "eb.new_explanation",
+              "kind": "PERSON_STATED_EXPLANATION",
+              "text": "後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "嬉しかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "eb.new_explanation"
+                ],
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "qualifiers": [
+                {
+                  "kind": "EMBEDDED_SUBJECT_AND_NEGATION",
+                  "text": "私が思いつかなかった",
+                  "scope_refs": [
+                    "eb.new_explanation"
+                  ],
+                  "evidence_indexes": [
+                    2
+                  ]
+                }
+              ],
+              "evidence_indexes": [
+                3
+              ]
+            },
+            {
+              "claim_id": "eb.original_unknown",
+              "kind": "EXPLICIT_UNKNOWN",
+              "text": "どこがうれしかったかはまだ曖昧",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "曖昧",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "eb.original_unknown"
+                ],
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "about_time": {
+                "kind": "UNKNOWN_AT_ORIGINAL_WRITING",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                5
+              ]
+            },
+            {
+              "claim_id": "eb.delegate",
+              "kind": "ACTION",
+              "text": "打合せで後輩に説明を任せて",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "任せて",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_で",
+                    "text": "打合せ",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      10
+                    ]
+                  },
+                  {
+                    "role": "WRITTEN_に",
+                    "text": "後輩",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      11
+                    ]
+                  },
+                  {
+                    "role": "WRITTEN_を",
+                    "text": "説明",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      12
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "eb.delegate"
+                ],
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                6
+              ]
+            },
+            {
+              "claim_id": "eb.listen",
+              "kind": "ACTION",
+              "text": "最後まで聞いた。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "聞いた",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_まで",
+                    "text": "最後",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      13
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "eb.listen"
+                ],
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                7
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "relation_id": "eb.cause_rejected",
+              "type": "PERSON_DENIED_REASON",
+              "from_claim_id": "eb.rejected_reason",
+              "to_claim_id": "eb.joy",
+              "polarity": "NEGATED",
+              "scope_refs": [
+                "eb.cause_rejected"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                4
+              ]
+            },
+            {
+              "relation_id": "eb.cause_stated",
+              "type": "PERSON_STATED_JOY_TARGET",
+              "from_claim_id": "eb.new_explanation",
+              "to_claim_id": "eb.joy",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "eb.cause_stated"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                3
+              ]
+            },
+            {
+              "relation_id": "eb.written_link",
+              "type": "SOURCE_WRITTEN_TE_LINK",
+              "from_claim_id": "eb.delegate",
+              "to_claim_id": "eb.listen",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "eb.written_link"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                8
+              ]
+            }
+          ],
+          "unknowns": [
+            {
+              "unknown_id": "eb.original_unknown_state",
+              "target_claim_refs": [
+                "eb.joy"
+              ],
+              "dimension": "JOY_ASPECT",
+              "description": "元の不明は保持。補足に説明候補はあるが、実更新未実施のため解決済みとはしない。",
+              "origin": "PERSON_STATED",
+              "resolution_state": "CANDIDATE_EXPLANATION_NOT_APPLIED",
+              "evidence_indexes": [
+                5
+              ]
+            }
+          ],
+          "conflicts": [],
+          "updates": []
+        },
+        "evidence": [
+          {
+            "source_id": "E02-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 6,
+            "quote": "うれしかった"
+          },
+          {
+            "source_id": "E02-S2",
+            "field_path": "answer_text_private",
+            "start": 0,
+            "end": 12,
+            "quote": "自分が口を挟まずに済んだ"
+          },
+          {
+            "source_id": "E02-S2",
+            "field_path": "answer_text_private",
+            "start": 34,
+            "end": 44,
+            "quote": "私が思いつかなかった"
+          },
+          {
+            "source_id": "E02-S2",
+            "field_path": "answer_text_private",
+            "start": 27,
+            "end": 61,
+            "quote": "後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。"
+          },
+          {
+            "source_id": "E02-S2",
+            "field_path": "answer_text_private",
+            "start": 0,
+            "end": 27,
+            "quote": "自分が口を挟まずに済んだから嬉しかったのではないです。"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo",
+            "start": 9,
+            "end": 24,
+            "quote": "どこがうれしかったかはまだ曖昧"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 13,
+            "quote": "打合せで後輩に説明を任せて"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 14,
+            "end": 22,
+            "quote": "最後まで聞いた。"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 10,
+            "end": 22,
+            "quote": "任せて、最後まで聞いた。"
+          },
+          {
+            "source_id": "E02-S2",
+            "field_path": "answer_text_private",
+            "start": 0,
+            "end": 2,
+            "quote": "自分"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 4,
+            "quote": "打合せで"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 4,
+            "end": 7,
+            "quote": "後輩に"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 7,
+            "end": 10,
+            "quote": "説明を"
+          },
+          {
+            "source_id": "E02-O",
+            "field_path": "memo_action",
+            "start": 14,
+            "end": 18,
+            "quote": "最後まで"
+          }
+        ]
+      },
+      "actual_p1_receipt": {
+        "request_id": "prep-e067616c9d9aee122324edc047765790530a082b41cfb36279407b11bce494be",
+        "status": "CANDIDATE_UNREVIEWED",
+        "raw_output": "{\"candidate\": {\"schema_version\": \"cocolon.cmee.semantic_mapping_proposal.v1\", \"core\": \"emlis\", \"claims\": [{\"claim_id\": \"eb.joy\", \"kind\": \"STATE\", \"text\": \"うれしかった\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"うれしかった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"eb.joy\"], \"evidence_indexes\": [0]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [0]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [0]}, \"qualifiers\": [], \"evidence_indexes\": [0]}, {\"claim_id\": \"eb.rejected_reason\", \"kind\": \"MENTIONED_REASON_ARGUMENT\", \"text\": \"自分が口を挟まずに済んだ\", \"subject\": {\"binding\": \"EXPLICIT\", \"source_entity\": \"自分\", \"evidence_indexes\": [9]}, \"predicate\": {\"surface\": \"口を挟まずに済んだ\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"eb.rejected_reason\"], \"evidence_indexes\": [1]}, \"modality\": {\"value\": \"MENTIONED_IN_DENIED_REASON_NOT_ASSERTED_FACT\", \"evidence_indexes\": [1]}, \"about_time\": {\"kind\": \"PAST_INSIDE_DENIED_REASON\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [1]}, \"qualifiers\": [], \"evidence_indexes\": [1]}, {\"claim_id\": \"eb.new_explanation\", \"kind\": \"PERSON_STATED_EXPLANATION\", \"text\": \"後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"嬉しかった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"eb.new_explanation\"], \"evidence_indexes\": [3]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [3]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [3]}, \"qualifiers\": [{\"kind\": \"EMBEDDED_SUBJECT_AND_NEGATION\", \"text\": \"私が思いつかなかった\", \"scope_refs\": [\"eb.new_explanation\"], \"evidence_indexes\": [2]}], \"evidence_indexes\": [3]}, {\"claim_id\": \"eb.original_unknown\", \"kind\": \"EXPLICIT_UNKNOWN\", \"text\": \"どこがうれしかったかはまだ曖昧\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"曖昧\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"eb.original_unknown\"], \"evidence_indexes\": [5]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [5]}, \"about_time\": {\"kind\": \"UNKNOWN_AT_ORIGINAL_WRITING\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [5]}, \"qualifiers\": [], \"evidence_indexes\": [5]}, {\"claim_id\": \"eb.delegate\", \"kind\": \"ACTION\", \"text\": \"打合せで後輩に説明を任せて\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"任せて\", \"arguments\": [{\"role\": \"WRITTEN_で\", \"text\": \"打合せ\", \"claim_ref\": null, \"evidence_indexes\": [10]}, {\"role\": \"WRITTEN_に\", \"text\": \"後輩\", \"claim_ref\": null, \"evidence_indexes\": [11]}, {\"role\": \"WRITTEN_を\", \"text\": \"説明\", \"claim_ref\": null, \"evidence_indexes\": [12]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"eb.delegate\"], \"evidence_indexes\": [6]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [6]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [6]}, \"qualifiers\": [], \"evidence_indexes\": [6]}, {\"claim_id\": \"eb.listen\", \"kind\": \"ACTION\", \"text\": \"最後まで聞いた。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"聞いた\", \"arguments\": [{\"role\": \"WRITTEN_まで\", \"text\": \"最後\", \"claim_ref\": null, \"evidence_indexes\": [13]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"eb.listen\"], \"evidence_indexes\": [7]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [7]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [7]}, \"qualifiers\": [], \"evidence_indexes\": [7]}], \"relations\": [{\"relation_id\": \"eb.cause_rejected\", \"type\": \"PERSON_DENIED_REASON\", \"from_claim_id\": \"eb.rejected_reason\", \"to_claim_id\": \"eb.joy\", \"polarity\": \"NEGATED\", \"scope_refs\": [\"eb.cause_rejected\"], \"qualifiers\": [], \"evidence_indexes\": [4]}, {\"relation_id\": \"eb.cause_stated\", \"type\": \"PERSON_STATED_JOY_TARGET\", \"from_claim_id\": \"eb.new_explanation\", \"to_claim_id\": \"eb.joy\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"eb.cause_stated\"], \"qualifiers\": [], \"evidence_indexes\": [3]}, {\"relation_id\": \"eb.written_link\", \"type\": \"SOURCE_WRITTEN_TE_LINK\", \"from_claim_id\": \"eb.delegate\", \"to_claim_id\": \"eb.listen\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"eb.written_link\"], \"qualifiers\": [], \"evidence_indexes\": [8]}], \"unknowns\": [{\"unknown_id\": \"eb.original_unknown_state\", \"target_claim_refs\": [\"eb.joy\"], \"dimension\": \"JOY_ASPECT\", \"description\": \"元の不明は保持。補足に説明候補はあるが、実更新未実施のため解決済みとはしない。\", \"origin\": \"PERSON_STATED\", \"resolution_state\": \"CANDIDATE_EXPLANATION_NOT_APPLIED\", \"evidence_indexes\": [5]}], \"conflicts\": [], \"updates\": []}, \"evidence\": [{\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 6, \"quote\": \"うれしかった\"}, {\"source_id\": \"E02-S2\", \"field_path\": \"answer_text_private\", \"start\": 0, \"end\": 12, \"quote\": \"自分が口を挟まずに済んだ\"}, {\"source_id\": \"E02-S2\", \"field_path\": \"answer_text_private\", \"start\": 34, \"end\": 44, \"quote\": \"私が思いつかなかった\"}, {\"source_id\": \"E02-S2\", \"field_path\": \"answer_text_private\", \"start\": 27, \"end\": 61, \"quote\": \"後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。\"}, {\"source_id\": \"E02-S2\", \"field_path\": \"answer_text_private\", \"start\": 0, \"end\": 27, \"quote\": \"自分が口を挟まずに済んだから嬉しかったのではないです。\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo\", \"start\": 9, \"end\": 24, \"quote\": \"どこがうれしかったかはまだ曖昧\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 13, \"quote\": \"打合せで後輩に説明を任せて\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 14, \"end\": 22, \"quote\": \"最後まで聞いた。\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 10, \"end\": 22, \"quote\": \"任せて、最後まで聞いた。\"}, {\"source_id\": \"E02-S2\", \"field_path\": \"answer_text_private\", \"start\": 0, \"end\": 2, \"quote\": \"自分\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 4, \"quote\": \"打合せで\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 4, \"end\": 7, \"quote\": \"後輩に\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 7, \"end\": 10, \"quote\": \"説明を\"}, {\"source_id\": \"E02-O\", \"field_path\": \"memo_action\", \"start\": 14, \"end\": 18, \"quote\": \"最後まで\"}]}",
+        "candidate_json": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"eb.joy\",\"evidence_indexes\":[0],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"eb.joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"PAST_INSIDE_DENIED_REASON\"},\"claim_id\":\"eb.rejected_reason\",\"evidence_indexes\":[1],\"kind\":\"MENTIONED_REASON_ARGUMENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"MENTIONED_IN_DENIED_REASON_NOT_ASSERTED_FACT\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"eb.rejected_reason\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"口を挟まずに済んだ\"},\"qualifiers\":[],\"subject\":{\"binding\":\"EXPLICIT\",\"evidence_indexes\":[9],\"source_entity\":\"自分\"},\"text\":\"自分が口を挟まずに済んだ\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"eb.new_explanation\",\"evidence_indexes\":[3],\"kind\":\"PERSON_STATED_EXPLANATION\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"eb.new_explanation\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しかった\"},\"qualifiers\":[{\"evidence_indexes\":[2],\"kind\":\"EMBEDDED_SUBJECT_AND_NEGATION\",\"scope_refs\":[\"eb.new_explanation\"],\"text\":\"私が思いつかなかった\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"UNKNOWN_AT_ORIGINAL_WRITING\"},\"claim_id\":\"eb.original_unknown\",\"evidence_indexes\":[5],\"kind\":\"EXPLICIT_UNKNOWN\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"eb.original_unknown\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"曖昧\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"どこがうれしかったかはまだ曖昧\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"eb.delegate\",\"evidence_indexes\":[6],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"eb.delegate\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[10],\"role\":\"WRITTEN_で\",\"text\":\"打合せ\"},{\"claim_ref\":null,\"evidence_indexes\":[11],\"role\":\"WRITTEN_に\",\"text\":\"後輩\"},{\"claim_ref\":null,\"evidence_indexes\":[12],\"role\":\"WRITTEN_を\",\"text\":\"説明\"}],\"surface\":\"任せて\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"打合せで後輩に説明を任せて\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"eb.listen\",\"evidence_indexes\":[7],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"eb.listen\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[13],\"role\":\"WRITTEN_まで\",\"text\":\"最後\"}],\"surface\":\"聞いた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"最後まで聞いた。\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"eb.rejected_reason\",\"polarity\":\"NEGATED\",\"qualifiers\":[],\"relation_id\":\"eb.cause_rejected\",\"scope_refs\":[\"eb.cause_rejected\"],\"to_claim_id\":\"eb.joy\",\"type\":\"PERSON_DENIED_REASON\"},{\"evidence_indexes\":[3],\"from_claim_id\":\"eb.new_explanation\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"eb.cause_stated\",\"scope_refs\":[\"eb.cause_stated\"],\"to_claim_id\":\"eb.joy\",\"type\":\"PERSON_STATED_JOY_TARGET\"},{\"evidence_indexes\":[8],\"from_claim_id\":\"eb.delegate\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"eb.written_link\",\"scope_refs\":[\"eb.written_link\"],\"to_claim_id\":\"eb.listen\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[{\"description\":\"元の不明は保持。補足に説明候補はあるが、実更新未実施のため解決済みとはしない。\",\"dimension\":\"JOY_ASPECT\",\"evidence_indexes\":[5],\"origin\":\"PERSON_STATED\",\"resolution_state\":\"CANDIDATE_EXPLANATION_NOT_APPLIED\",\"target_claim_refs\":[\"eb.joy\"],\"unknown_id\":\"eb.original_unknown_state\"}],\"updates\":[]},\"evidence\":[{\"end\":6,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":12,\"field_path\":\"answer_text_private\",\"quote\":\"自分が口を挟まずに済んだ\",\"source_id\":\"E02-S2\",\"start\":0},{\"end\":44,\"field_path\":\"answer_text_private\",\"quote\":\"私が思いつかなかった\",\"source_id\":\"E02-S2\",\"start\":34},{\"end\":61,\"field_path\":\"answer_text_private\",\"quote\":\"後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。\",\"source_id\":\"E02-S2\",\"start\":27},{\"end\":27,\"field_path\":\"answer_text_private\",\"quote\":\"自分が口を挟まずに済んだから嬉しかったのではないです。\",\"source_id\":\"E02-S2\",\"start\":0},{\"end\":24,\"field_path\":\"memo\",\"quote\":\"どこがうれしかったかはまだ曖昧\",\"source_id\":\"E02-O\",\"start\":9},{\"end\":13,\"field_path\":\"memo_action\",\"quote\":\"打合せで後輩に説明を任せて\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"最後まで聞いた。\",\"source_id\":\"E02-O\",\"start\":14},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"任せて、最後まで聞いた。\",\"source_id\":\"E02-O\",\"start\":10},{\"end\":2,\"field_path\":\"answer_text_private\",\"quote\":\"自分\",\"source_id\":\"E02-S2\",\"start\":0},{\"end\":4,\"field_path\":\"memo_action\",\"quote\":\"打合せで\",\"source_id\":\"E02-O\",\"start\":0},{\"end\":7,\"field_path\":\"memo_action\",\"quote\":\"後輩に\",\"source_id\":\"E02-O\",\"start\":4},{\"end\":10,\"field_path\":\"memo_action\",\"quote\":\"説明を\",\"source_id\":\"E02-O\",\"start\":7},{\"end\":18,\"field_path\":\"memo_action\",\"quote\":\"最後まで\",\"source_id\":\"E02-O\",\"start\":14}]}",
+        "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"HAND_AUTHORED_P2_DESIGN_SAMPLE\",\"revision\":null,\"usage\":null}"
+      },
+      "adoption_state": "NOT_ADOPTED",
+      "reference_index_checks": 39,
+      "proposed_mapping_decision": "UNSUPPORTED_ACTUAL_UPDATE_NO_PENDING",
+      "mapping_reasons": [
+        "補足はSUPPLEMENTAL_PROBEのまま。実pending無し、native回答更新はN/A。",
+        "否定scopeは嬉しさそのものではなく、嬉しさの理由の命題。",
+        "旧採用理由claimが無いので架空REVISE/WITHDRAWを作らない。意味説明は候補として保持し、実更新とは別。"
+      ]
+    },
+    {
+      "case_id": "P01-N",
+      "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+      "origin": "HAND_AUTHORED_DESIGN_SAMPLE_NOT_MODEL_OUTPUT",
+      "packet": {
+        "candidate": {
+          "schema_version": "cocolon.cmee.semantic_mapping_proposal.v1",
+          "core": "piece",
+          "claims": [
+            {
+              "claim_id": "p.joy",
+              "kind": "STATE",
+              "text": "助かったと言ってもらえてうれしかった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "うれしかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "p.joy"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [
+                {
+                  "kind": "REPORTED_SPEECH_SCOPE",
+                  "text": "助かったと言ってもらえて",
+                  "scope_refs": [
+                    "p.joy"
+                  ],
+                  "evidence_indexes": [
+                    0
+                  ]
+                }
+              ],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "claim_id": "p.work_left",
+              "kind": "RESULT_STATE",
+              "text": "自分の仕事が残って",
+              "subject": {
+                "binding": "EXPLICIT",
+                "source_entity": "自分の仕事",
+                "evidence_indexes": [
+                  11
+                ]
+              },
+              "predicate": {
+                "surface": "残って",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_が",
+                    "text": "自分の仕事",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      10
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "p.work_left"
+                ],
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                2
+              ]
+            },
+            {
+              "claim_id": "p.late",
+              "kind": "RESULT_STATE",
+              "text": "帰るのが遅くなった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "遅くなった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "p.late"
+                ],
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                3
+              ]
+            },
+            {
+              "claim_id": "p.no_regret",
+              "kind": "SCOPED_EVALUATION",
+              "text": "手伝ったことを後悔しているわけではない。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "後悔しているわけではない",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_を",
+                    "text": "手伝ったこと",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      12
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "SCOPED_NEGATION",
+                "scope_refs": [
+                  "p.no_regret"
+                ],
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_CURRENT_EVALUATION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "qualifiers": [
+                {
+                  "kind": "NEGATION_SCOPE",
+                  "text": "わけではない",
+                  "scope_refs": [
+                    "p.no_regret"
+                  ],
+                  "evidence_indexes": [
+                    4
+                  ]
+                }
+              ],
+              "evidence_indexes": [
+                5
+              ]
+            },
+            {
+              "claim_id": "p.next",
+              "kind": "CONDITIONAL_INTENTION",
+              "text": "次も引き受けるかは、そのときの余裕で決めたい。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "決めたい",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_で",
+                    "text": "そのときの余裕",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      13
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "p.next"
+                ],
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "modality": {
+                "value": "WISH_OR_INTENTION_NOT_ACTION",
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_FUTURE_RELATIVE",
+                "expression": "次",
+                "anchor_source_id": "P01-O",
+                "evidence_indexes": [
+                  14
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                6
+              ]
+            },
+            {
+              "claim_id": "p.help",
+              "kind": "ACTION",
+              "text": "頼まれて同僚の発表資料を一緒に直した。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "直した",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "p.help"
+                ],
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  7
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                7
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "relation_id": "p.contrast",
+              "type": "SOURCE_WRITTEN_CONCESSION",
+              "from_claim_id": "p.joy",
+              "to_claim_id": "p.work_left",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "p.contrast"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                8
+              ]
+            },
+            {
+              "relation_id": "p.cooccur",
+              "type": "WRITTEN_TE_LINK_CAUSALITY_UNRESOLVED",
+              "from_claim_id": "p.work_left",
+              "to_claim_id": "p.late",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "p.cooccur"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                9
+              ]
+            }
+          ],
+          "unknowns": [],
+          "conflicts": [],
+          "updates": []
+        },
+        "evidence": [
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 12,
+            "quote": "助かったと言ってもらえて"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 0,
+            "end": 19,
+            "quote": "助かったと言ってもらえてうれしかった。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 21,
+            "end": 30,
+            "quote": "自分の仕事が残って"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 31,
+            "end": 41,
+            "quote": "帰るのが遅くなった。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 54,
+            "end": 60,
+            "quote": "わけではない"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 41,
+            "end": 61,
+            "quote": "手伝ったことを後悔しているわけではない。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 61,
+            "end": 84,
+            "quote": "次も引き受けるかは、そのときの余裕で決めたい。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 19,
+            "quote": "頼まれて同僚の発表資料を一緒に直した。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 19,
+            "end": 41,
+            "quote": "でも自分の仕事が残って、帰るのが遅くなった。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 21,
+            "end": 41,
+            "quote": "自分の仕事が残って、帰るのが遅くなった。"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 21,
+            "end": 27,
+            "quote": "自分の仕事が"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 21,
+            "end": 26,
+            "quote": "自分の仕事"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 41,
+            "end": 48,
+            "quote": "手伝ったことを"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 71,
+            "end": 79,
+            "quote": "そのときの余裕で"
+          },
+          {
+            "source_id": "P01-O",
+            "field_path": "memo",
+            "start": 61,
+            "end": 62,
+            "quote": "次"
+          }
+        ]
+      },
+      "actual_p1_receipt": {
+        "request_id": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+        "status": "CANDIDATE_UNREVIEWED",
+        "raw_output": "{\"candidate\": {\"schema_version\": \"cocolon.cmee.semantic_mapping_proposal.v1\", \"core\": \"piece\", \"claims\": [{\"claim_id\": \"p.joy\", \"kind\": \"STATE\", \"text\": \"助かったと言ってもらえてうれしかった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"うれしかった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"p.joy\"], \"evidence_indexes\": [1]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [1]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [1]}, \"qualifiers\": [{\"kind\": \"REPORTED_SPEECH_SCOPE\", \"text\": \"助かったと言ってもらえて\", \"scope_refs\": [\"p.joy\"], \"evidence_indexes\": [0]}], \"evidence_indexes\": [1]}, {\"claim_id\": \"p.work_left\", \"kind\": \"RESULT_STATE\", \"text\": \"自分の仕事が残って\", \"subject\": {\"binding\": \"EXPLICIT\", \"source_entity\": \"自分の仕事\", \"evidence_indexes\": [11]}, \"predicate\": {\"surface\": \"残って\", \"arguments\": [{\"role\": \"WRITTEN_が\", \"text\": \"自分の仕事\", \"claim_ref\": null, \"evidence_indexes\": [10]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"p.work_left\"], \"evidence_indexes\": [2]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [2]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [2]}, \"qualifiers\": [], \"evidence_indexes\": [2]}, {\"claim_id\": \"p.late\", \"kind\": \"RESULT_STATE\", \"text\": \"帰るのが遅くなった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"遅くなった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"p.late\"], \"evidence_indexes\": [3]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [3]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [3]}, \"qualifiers\": [], \"evidence_indexes\": [3]}, {\"claim_id\": \"p.no_regret\", \"kind\": \"SCOPED_EVALUATION\", \"text\": \"手伝ったことを後悔しているわけではない。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"後悔しているわけではない\", \"arguments\": [{\"role\": \"WRITTEN_を\", \"text\": \"手伝ったこと\", \"claim_ref\": null, \"evidence_indexes\": [12]}]}, \"polarity\": {\"value\": \"SCOPED_NEGATION\", \"scope_refs\": [\"p.no_regret\"], \"evidence_indexes\": [5]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [5]}, \"about_time\": {\"kind\": \"WRITTEN_CURRENT_EVALUATION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [5]}, \"qualifiers\": [{\"kind\": \"NEGATION_SCOPE\", \"text\": \"わけではない\", \"scope_refs\": [\"p.no_regret\"], \"evidence_indexes\": [4]}], \"evidence_indexes\": [5]}, {\"claim_id\": \"p.next\", \"kind\": \"CONDITIONAL_INTENTION\", \"text\": \"次も引き受けるかは、そのときの余裕で決めたい。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"決めたい\", \"arguments\": [{\"role\": \"WRITTEN_で\", \"text\": \"そのときの余裕\", \"claim_ref\": null, \"evidence_indexes\": [13]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"p.next\"], \"evidence_indexes\": [6]}, \"modality\": {\"value\": \"WISH_OR_INTENTION_NOT_ACTION\", \"evidence_indexes\": [6]}, \"about_time\": {\"kind\": \"WRITTEN_FUTURE_RELATIVE\", \"expression\": \"次\", \"anchor_source_id\": \"P01-O\", \"evidence_indexes\": [14]}, \"qualifiers\": [], \"evidence_indexes\": [6]}, {\"claim_id\": \"p.help\", \"kind\": \"ACTION\", \"text\": \"頼まれて同僚の発表資料を一緒に直した。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"直した\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"p.help\"], \"evidence_indexes\": [7]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [7]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [7]}, \"qualifiers\": [], \"evidence_indexes\": [7]}], \"relations\": [{\"relation_id\": \"p.contrast\", \"type\": \"SOURCE_WRITTEN_CONCESSION\", \"from_claim_id\": \"p.joy\", \"to_claim_id\": \"p.work_left\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"p.contrast\"], \"qualifiers\": [], \"evidence_indexes\": [8]}, {\"relation_id\": \"p.cooccur\", \"type\": \"WRITTEN_TE_LINK_CAUSALITY_UNRESOLVED\", \"from_claim_id\": \"p.work_left\", \"to_claim_id\": \"p.late\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"p.cooccur\"], \"qualifiers\": [], \"evidence_indexes\": [9]}], \"unknowns\": [], \"conflicts\": [], \"updates\": []}, \"evidence\": [{\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 12, \"quote\": \"助かったと言ってもらえて\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 0, \"end\": 19, \"quote\": \"助かったと言ってもらえてうれしかった。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 21, \"end\": 30, \"quote\": \"自分の仕事が残って\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 31, \"end\": 41, \"quote\": \"帰るのが遅くなった。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 54, \"end\": 60, \"quote\": \"わけではない\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 41, \"end\": 61, \"quote\": \"手伝ったことを後悔しているわけではない。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 61, \"end\": 84, \"quote\": \"次も引き受けるかは、そのときの余裕で決めたい。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 19, \"quote\": \"頼まれて同僚の発表資料を一緒に直した。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 19, \"end\": 41, \"quote\": \"でも自分の仕事が残って、帰るのが遅くなった。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 21, \"end\": 41, \"quote\": \"自分の仕事が残って、帰るのが遅くなった。\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 21, \"end\": 27, \"quote\": \"自分の仕事が\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 21, \"end\": 26, \"quote\": \"自分の仕事\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 41, \"end\": 48, \"quote\": \"手伝ったことを\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 71, \"end\": 79, \"quote\": \"そのときの余裕で\"}, {\"source_id\": \"P01-O\", \"field_path\": \"memo\", \"start\": 61, \"end\": 62, \"quote\": \"次\"}]}",
+        "candidate_json": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.joy\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"p.joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[{\"evidence_indexes\":[0],\"kind\":\"REPORTED_SPEECH_SCOPE\",\"scope_refs\":[\"p.joy\"],\"text\":\"助かったと言ってもらえて\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"助かったと言ってもらえてうれしかった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.work_left\",\"evidence_indexes\":[2],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"p.work_left\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[10],\"role\":\"WRITTEN_が\",\"text\":\"自分の仕事\"}],\"surface\":\"残って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"EXPLICIT\",\"evidence_indexes\":[11],\"source_entity\":\"自分の仕事\"},\"text\":\"自分の仕事が残って\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.late\",\"evidence_indexes\":[3],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"p.late\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"帰るのが遅くなった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_CURRENT_EVALUATION\"},\"claim_id\":\"p.no_regret\",\"evidence_indexes\":[5],\"kind\":\"SCOPED_EVALUATION\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"p.no_regret\"],\"value\":\"SCOPED_NEGATION\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[12],\"role\":\"WRITTEN_を\",\"text\":\"手伝ったこと\"}],\"surface\":\"後悔しているわけではない\"},\"qualifiers\":[{\"evidence_indexes\":[4],\"kind\":\"NEGATION_SCOPE\",\"scope_refs\":[\"p.no_regret\"],\"text\":\"わけではない\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"手伝ったことを後悔しているわけではない。\"},{\"about_time\":{\"anchor_source_id\":\"P01-O\",\"evidence_indexes\":[14],\"expression\":\"次\",\"kind\":\"WRITTEN_FUTURE_RELATIVE\"},\"claim_id\":\"p.next\",\"evidence_indexes\":[6],\"kind\":\"CONDITIONAL_INTENTION\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"WISH_OR_INTENTION_NOT_ACTION\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"p.next\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[13],\"role\":\"WRITTEN_で\",\"text\":\"そのときの余裕\"}],\"surface\":\"決めたい\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"次も引き受けるかは、そのときの余裕で決めたい。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.help\",\"evidence_indexes\":[7],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"p.help\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"直した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"頼まれて同僚の発表資料を一緒に直した。\"}],\"conflicts\":[],\"core\":\"piece\",\"relations\":[{\"evidence_indexes\":[8],\"from_claim_id\":\"p.joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"p.contrast\",\"scope_refs\":[\"p.contrast\"],\"to_claim_id\":\"p.work_left\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[9],\"from_claim_id\":\"p.work_left\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"p.cooccur\",\"scope_refs\":[\"p.cooccur\"],\"to_claim_id\":\"p.late\",\"type\":\"WRITTEN_TE_LINK_CAUSALITY_UNRESOLVED\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":12,\"field_path\":\"memo\",\"quote\":\"助かったと言ってもらえて\",\"source_id\":\"P01-O\",\"start\":0},{\"end\":19,\"field_path\":\"memo\",\"quote\":\"助かったと言ってもらえてうれしかった。\",\"source_id\":\"P01-O\",\"start\":0},{\"end\":30,\"field_path\":\"memo\",\"quote\":\"自分の仕事が残って\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":41,\"field_path\":\"memo\",\"quote\":\"帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":31},{\"end\":60,\"field_path\":\"memo\",\"quote\":\"わけではない\",\"source_id\":\"P01-O\",\"start\":54},{\"end\":61,\"field_path\":\"memo\",\"quote\":\"手伝ったことを後悔しているわけではない。\",\"source_id\":\"P01-O\",\"start\":41},{\"end\":84,\"field_path\":\"memo\",\"quote\":\"次も引き受けるかは、そのときの余裕で決めたい。\",\"source_id\":\"P01-O\",\"start\":61},{\"end\":19,\"field_path\":\"memo_action\",\"quote\":\"頼まれて同僚の発表資料を一緒に直した。\",\"source_id\":\"P01-O\",\"start\":0},{\"end\":41,\"field_path\":\"memo\",\"quote\":\"でも自分の仕事が残って、帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":19},{\"end\":41,\"field_path\":\"memo\",\"quote\":\"自分の仕事が残って、帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"自分の仕事が\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":26,\"field_path\":\"memo\",\"quote\":\"自分の仕事\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":48,\"field_path\":\"memo\",\"quote\":\"手伝ったことを\",\"source_id\":\"P01-O\",\"start\":41},{\"end\":79,\"field_path\":\"memo\",\"quote\":\"そのときの余裕で\",\"source_id\":\"P01-O\",\"start\":71},{\"end\":62,\"field_path\":\"memo\",\"quote\":\"次\",\"source_id\":\"P01-O\",\"start\":61}]}",
+        "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"HAND_AUTHORED_P2_DESIGN_SAMPLE\",\"revision\":null,\"usage\":null}"
+      },
+      "adoption_state": "NOT_ADOPTED",
+      "reference_index_checks": 37,
+      "proposed_mapping_decision": "UNSUPPORTED_CURRENT_PIECE_MEANING_PROFILE",
+      "mapping_reasons": [
+        "sourceの元7fieldと肯否・報告・条件は保持。既存selected-feeling coverage不成立を黙って無視しない。",
+        "MeaningNodeのgeneric valueだけでは一般negation_scope/time/actorを保持できない。",
+        "現Piece全再導出／原文slice一致／有限編集検査に新候補を通すためには新profileの責任が必要。"
+      ]
+    },
+    {
+      "case_id": "A02-P1",
+      "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+      "origin": "HAND_AUTHORED_DESIGN_SAMPLE_NOT_MODEL_OUTPUT",
+      "packet": {
+        "candidate": {
+          "schema_version": "cocolon.cmee.semantic_mapping_proposal.v1",
+          "core": "analysis",
+          "claims": [
+            {
+              "claim_id": "a.role",
+              "kind": "ROLE",
+              "text": "今日も連絡係だった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "連絡係だった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.role"
+                ],
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_TODAY_RELATIVE",
+                "expression": "今日",
+                "anchor_source_id": "A02-4",
+                "evidence_indexes": [
+                  14
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                0
+              ]
+            },
+            {
+              "claim_id": "a.waiting",
+              "kind": "RECORDED_INTENTION",
+              "text": "まだ返事のない人がいることも残したかった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "残したかった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.waiting"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "modality": {
+                "value": "WISH_REALIZATION_NOT_ASSERTED",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "claim_id": "a.notice",
+              "kind": "ACTION",
+              "text": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "待った",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.notice"
+                ],
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                2
+              ]
+            },
+            {
+              "claim_id": "a.tools_role",
+              "kind": "ROLE",
+              "text": "今日は道具係だった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "道具係だった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.tools_role"
+                ],
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_TODAY_RELATIVE",
+                "expression": "今日",
+                "anchor_source_id": "A02-5",
+                "evidence_indexes": [
+                  15
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                3
+              ]
+            },
+            {
+              "claim_id": "a.non_action",
+              "kind": "EXPLICIT_NON_ACTION",
+              "text": "使いやすかったかは聞いていない。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "聞いていない",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_は",
+                    "text": "使いやすかったか",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      16
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "NEGATED",
+                "scope_refs": [
+                  "a.non_action"
+                ],
+                "evidence_indexes": [
+                  4
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  4
+                ]
+              },
+              "about_time": {
+                "kind": "UP_TO_THIS_SOURCE_WRITING",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  4
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                4
+              ]
+            },
+            {
+              "claim_id": "a.tools_action",
+              "kind": "ACTION",
+              "text": "道具を貸す時に数を記録し、返ってきた数と照合した。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "照合した",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_と",
+                    "text": "返ってきた数",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      17
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.tools_action"
+                ],
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  5
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                5
+              ]
+            },
+            {
+              "claim_id": "a.tools_result",
+              "kind": "RESULT_STATE",
+              "text": "全て戻っていた。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "戻っていた",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.tools_result"
+                ],
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  6
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                6
+              ]
+            },
+            {
+              "claim_id": "a.burden",
+              "kind": "WRITTEN_BURDEN",
+              "text": "今日はメモを作るのが少し面倒だった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "面倒だった",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_が",
+                    "text": "メモを作るの",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      18
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.burden"
+                ],
+                "evidence_indexes": [
+                  8
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  8
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_TODAY_RELATIVE",
+                "expression": "今日",
+                "anchor_source_id": "A02-6",
+                "evidence_indexes": [
+                  19
+                ]
+              },
+              "qualifiers": [
+                {
+                  "kind": "DEGREE",
+                  "text": "少し",
+                  "scope_refs": [
+                    "a.burden"
+                  ],
+                  "evidence_indexes": [
+                    7
+                  ]
+                }
+              ],
+              "evidence_indexes": [
+                8
+              ]
+            },
+            {
+              "claim_id": "a.buying",
+              "kind": "ACTION",
+              "text": "買い物前にメモを作り、メモを見ながら買った。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "買った",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.buying"
+                ],
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  9
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                9
+              ]
+            },
+            {
+              "claim_id": "a.relative_wait",
+              "kind": "PERSON_STATED_RELATIVE_COMPARISON",
+              "text": "前より待つ時間は短かった。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "短かった",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.relative_wait"
+                ],
+                "evidence_indexes": [
+                  10
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  10
+                ]
+              },
+              "about_time": {
+                "kind": "COMPARISON_BASELINE_UNRESOLVED",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  10
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                10
+              ]
+            },
+            {
+              "claim_id": "a.relief",
+              "kind": "FEELING_WITH_WRITTEN_SCOPE",
+              "text": "数を照らし合わせられてほっとした。",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "ほっとした",
+                "arguments": []
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.relief"
+                ],
+                "evidence_indexes": [
+                  11
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  11
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  11
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                11
+              ]
+            },
+            {
+              "claim_id": "a.bought_result",
+              "kind": "RESULT_STATE",
+              "text": "買う物は買えた",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "predicate": {
+                "surface": "買えた",
+                "arguments": [
+                  {
+                    "role": "WRITTEN_は",
+                    "text": "買う物",
+                    "claim_ref": null,
+                    "evidence_indexes": [
+                      20
+                    ]
+                  }
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "a.bought_result"
+                ],
+                "evidence_indexes": [
+                  12
+                ]
+              },
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  12
+                ]
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": null,
+                "evidence_indexes": [
+                  12
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                12
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "relation_id": "a.concession",
+              "type": "SOURCE_WRITTEN_CONCESSION",
+              "from_claim_id": "a.bought_result",
+              "to_claim_id": "a.burden",
+              "polarity": "AFFIRMED",
+              "scope_refs": [
+                "a.concession"
+              ],
+              "qualifiers": [],
+              "evidence_indexes": [
+                13
+              ]
+            }
+          ],
+          "unknowns": [
+            {
+              "unknown_id": "a.usability",
+              "target_claim_refs": [
+                "a.non_action"
+              ],
+              "dimension": "USABILITY_NOT_CONFIRMED",
+              "description": "今回の記録に使いやすさの回答は観測できない。本人が絶対に知らない、使いにくかった、との断定ではない。",
+              "origin": "NOT_OBSERVED_IN_MATERIAL",
+              "resolution_state": "NO_USABILITY_ANSWER_IN_MATERIAL",
+              "evidence_indexes": [
+                4
+              ]
+            }
+          ],
+          "conflicts": [],
+          "updates": []
+        },
+        "evidence": [
+          {
+            "source_id": "A02-4",
+            "field_path": "memo",
+            "start": 0,
+            "end": 10,
+            "quote": "今日も連絡係だった。"
+          },
+          {
+            "source_id": "A02-4",
+            "field_path": "memo",
+            "start": 10,
+            "end": 31,
+            "quote": "まだ返事のない人がいることも残したかった。"
+          },
+          {
+            "source_id": "A02-4",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 31,
+            "quote": "回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo",
+            "start": 0,
+            "end": 10,
+            "quote": "今日は道具係だった。"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo",
+            "start": 27,
+            "end": 43,
+            "quote": "使いやすかったかは聞いていない。"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 25,
+            "quote": "道具を貸す時に数を記録し、返ってきた数と照合した。"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo_action",
+            "start": 25,
+            "end": 33,
+            "quote": "全て戻っていた。"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 20,
+            "end": 22,
+            "quote": "少し"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 10,
+            "end": 28,
+            "quote": "今日はメモを作るのが少し面倒だった。"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo_action",
+            "start": 0,
+            "end": 22,
+            "quote": "買い物前にメモを作り、メモを見ながら買った。"
+          },
+          {
+            "source_id": "A02-4",
+            "field_path": "memo",
+            "start": 31,
+            "end": 44,
+            "quote": "前より待つ時間は短かった。"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo",
+            "start": 10,
+            "end": 27,
+            "quote": "数を照らし合わせられてほっとした。"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 0,
+            "end": 7,
+            "quote": "買う物は買えた"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 0,
+            "end": 28,
+            "quote": "買う物は買えたけど、今日はメモを作るのが少し面倒だった。"
+          },
+          {
+            "source_id": "A02-4",
+            "field_path": "memo",
+            "start": 0,
+            "end": 2,
+            "quote": "今日"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo",
+            "start": 0,
+            "end": 2,
+            "quote": "今日"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo",
+            "start": 27,
+            "end": 36,
+            "quote": "使いやすかったかは"
+          },
+          {
+            "source_id": "A02-5",
+            "field_path": "memo_action",
+            "start": 13,
+            "end": 20,
+            "quote": "返ってきた数と"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 13,
+            "end": 20,
+            "quote": "メモを作るのが"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 10,
+            "end": 12,
+            "quote": "今日"
+          },
+          {
+            "source_id": "A02-6",
+            "field_path": "memo",
+            "start": 0,
+            "end": 4,
+            "quote": "買う物は"
+          }
+        ]
+      },
+      "actual_p1_receipt": {
+        "request_id": "prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251",
+        "status": "CANDIDATE_UNREVIEWED",
+        "raw_output": "{\"candidate\": {\"schema_version\": \"cocolon.cmee.semantic_mapping_proposal.v1\", \"core\": \"analysis\", \"claims\": [{\"claim_id\": \"a.role\", \"kind\": \"ROLE\", \"text\": \"今日も連絡係だった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"連絡係だった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.role\"], \"evidence_indexes\": [0]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [0]}, \"about_time\": {\"kind\": \"WRITTEN_TODAY_RELATIVE\", \"expression\": \"今日\", \"anchor_source_id\": \"A02-4\", \"evidence_indexes\": [14]}, \"qualifiers\": [], \"evidence_indexes\": [0]}, {\"claim_id\": \"a.waiting\", \"kind\": \"RECORDED_INTENTION\", \"text\": \"まだ返事のない人がいることも残したかった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"残したかった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.waiting\"], \"evidence_indexes\": [1]}, \"modality\": {\"value\": \"WISH_REALIZATION_NOT_ASSERTED\", \"evidence_indexes\": [1]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [1]}, \"qualifiers\": [], \"evidence_indexes\": [1]}, {\"claim_id\": \"a.notice\", \"kind\": \"ACTION\", \"text\": \"回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"待った\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.notice\"], \"evidence_indexes\": [2]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [2]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [2]}, \"qualifiers\": [], \"evidence_indexes\": [2]}, {\"claim_id\": \"a.tools_role\", \"kind\": \"ROLE\", \"text\": \"今日は道具係だった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"道具係だった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.tools_role\"], \"evidence_indexes\": [3]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [3]}, \"about_time\": {\"kind\": \"WRITTEN_TODAY_RELATIVE\", \"expression\": \"今日\", \"anchor_source_id\": \"A02-5\", \"evidence_indexes\": [15]}, \"qualifiers\": [], \"evidence_indexes\": [3]}, {\"claim_id\": \"a.non_action\", \"kind\": \"EXPLICIT_NON_ACTION\", \"text\": \"使いやすかったかは聞いていない。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"聞いていない\", \"arguments\": [{\"role\": \"WRITTEN_は\", \"text\": \"使いやすかったか\", \"claim_ref\": null, \"evidence_indexes\": [16]}]}, \"polarity\": {\"value\": \"NEGATED\", \"scope_refs\": [\"a.non_action\"], \"evidence_indexes\": [4]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [4]}, \"about_time\": {\"kind\": \"UP_TO_THIS_SOURCE_WRITING\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [4]}, \"qualifiers\": [], \"evidence_indexes\": [4]}, {\"claim_id\": \"a.tools_action\", \"kind\": \"ACTION\", \"text\": \"道具を貸す時に数を記録し、返ってきた数と照合した。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"照合した\", \"arguments\": [{\"role\": \"WRITTEN_と\", \"text\": \"返ってきた数\", \"claim_ref\": null, \"evidence_indexes\": [17]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.tools_action\"], \"evidence_indexes\": [5]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [5]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [5]}, \"qualifiers\": [], \"evidence_indexes\": [5]}, {\"claim_id\": \"a.tools_result\", \"kind\": \"RESULT_STATE\", \"text\": \"全て戻っていた。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"戻っていた\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.tools_result\"], \"evidence_indexes\": [6]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [6]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [6]}, \"qualifiers\": [], \"evidence_indexes\": [6]}, {\"claim_id\": \"a.burden\", \"kind\": \"WRITTEN_BURDEN\", \"text\": \"今日はメモを作るのが少し面倒だった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"面倒だった\", \"arguments\": [{\"role\": \"WRITTEN_が\", \"text\": \"メモを作るの\", \"claim_ref\": null, \"evidence_indexes\": [18]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.burden\"], \"evidence_indexes\": [8]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [8]}, \"about_time\": {\"kind\": \"WRITTEN_TODAY_RELATIVE\", \"expression\": \"今日\", \"anchor_source_id\": \"A02-6\", \"evidence_indexes\": [19]}, \"qualifiers\": [{\"kind\": \"DEGREE\", \"text\": \"少し\", \"scope_refs\": [\"a.burden\"], \"evidence_indexes\": [7]}], \"evidence_indexes\": [8]}, {\"claim_id\": \"a.buying\", \"kind\": \"ACTION\", \"text\": \"買い物前にメモを作り、メモを見ながら買った。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"買った\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.buying\"], \"evidence_indexes\": [9]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [9]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [9]}, \"qualifiers\": [], \"evidence_indexes\": [9]}, {\"claim_id\": \"a.relative_wait\", \"kind\": \"PERSON_STATED_RELATIVE_COMPARISON\", \"text\": \"前より待つ時間は短かった。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"短かった\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.relative_wait\"], \"evidence_indexes\": [10]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [10]}, \"about_time\": {\"kind\": \"COMPARISON_BASELINE_UNRESOLVED\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [10]}, \"qualifiers\": [], \"evidence_indexes\": [10]}, {\"claim_id\": \"a.relief\", \"kind\": \"FEELING_WITH_WRITTEN_SCOPE\", \"text\": \"数を照らし合わせられてほっとした。\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"ほっとした\", \"arguments\": []}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.relief\"], \"evidence_indexes\": [11]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [11]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [11]}, \"qualifiers\": [], \"evidence_indexes\": [11]}, {\"claim_id\": \"a.bought_result\", \"kind\": \"RESULT_STATE\", \"text\": \"買う物は買えた\", \"subject\": {\"binding\": \"OMITTED\", \"source_entity\": null, \"evidence_indexes\": []}, \"predicate\": {\"surface\": \"買えた\", \"arguments\": [{\"role\": \"WRITTEN_は\", \"text\": \"買う物\", \"claim_ref\": null, \"evidence_indexes\": [20]}]}, \"polarity\": {\"value\": \"AFFIRMED\", \"scope_refs\": [\"a.bought_result\"], \"evidence_indexes\": [12]}, \"modality\": {\"value\": \"ASSERTED_AS_WRITTEN\", \"evidence_indexes\": [12]}, \"about_time\": {\"kind\": \"WRITTEN_PAST_UNRESOLVED_OCCASION\", \"expression\": null, \"anchor_source_id\": null, \"evidence_indexes\": [12]}, \"qualifiers\": [], \"evidence_indexes\": [12]}], \"relations\": [{\"relation_id\": \"a.concession\", \"type\": \"SOURCE_WRITTEN_CONCESSION\", \"from_claim_id\": \"a.bought_result\", \"to_claim_id\": \"a.burden\", \"polarity\": \"AFFIRMED\", \"scope_refs\": [\"a.concession\"], \"qualifiers\": [], \"evidence_indexes\": [13]}], \"unknowns\": [{\"unknown_id\": \"a.usability\", \"target_claim_refs\": [\"a.non_action\"], \"dimension\": \"USABILITY_NOT_CONFIRMED\", \"description\": \"今回の記録に使いやすさの回答は観測できない。本人が絶対に知らない、使いにくかった、との断定ではない。\", \"origin\": \"NOT_OBSERVED_IN_MATERIAL\", \"resolution_state\": \"NO_USABILITY_ANSWER_IN_MATERIAL\", \"evidence_indexes\": [4]}], \"conflicts\": [], \"updates\": []}, \"evidence\": [{\"source_id\": \"A02-4\", \"field_path\": \"memo\", \"start\": 0, \"end\": 10, \"quote\": \"今日も連絡係だった。\"}, {\"source_id\": \"A02-4\", \"field_path\": \"memo\", \"start\": 10, \"end\": 31, \"quote\": \"まだ返事のない人がいることも残したかった。\"}, {\"source_id\": \"A02-4\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 31, \"quote\": \"回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo\", \"start\": 0, \"end\": 10, \"quote\": \"今日は道具係だった。\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo\", \"start\": 27, \"end\": 43, \"quote\": \"使いやすかったかは聞いていない。\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 25, \"quote\": \"道具を貸す時に数を記録し、返ってきた数と照合した。\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo_action\", \"start\": 25, \"end\": 33, \"quote\": \"全て戻っていた。\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 20, \"end\": 22, \"quote\": \"少し\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 10, \"end\": 28, \"quote\": \"今日はメモを作るのが少し面倒だった。\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo_action\", \"start\": 0, \"end\": 22, \"quote\": \"買い物前にメモを作り、メモを見ながら買った。\"}, {\"source_id\": \"A02-4\", \"field_path\": \"memo\", \"start\": 31, \"end\": 44, \"quote\": \"前より待つ時間は短かった。\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo\", \"start\": 10, \"end\": 27, \"quote\": \"数を照らし合わせられてほっとした。\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 0, \"end\": 7, \"quote\": \"買う物は買えた\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 0, \"end\": 28, \"quote\": \"買う物は買えたけど、今日はメモを作るのが少し面倒だった。\"}, {\"source_id\": \"A02-4\", \"field_path\": \"memo\", \"start\": 0, \"end\": 2, \"quote\": \"今日\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo\", \"start\": 0, \"end\": 2, \"quote\": \"今日\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo\", \"start\": 27, \"end\": 36, \"quote\": \"使いやすかったかは\"}, {\"source_id\": \"A02-5\", \"field_path\": \"memo_action\", \"start\": 13, \"end\": 20, \"quote\": \"返ってきた数と\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 13, \"end\": 20, \"quote\": \"メモを作るのが\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 10, \"end\": 12, \"quote\": \"今日\"}, {\"source_id\": \"A02-6\", \"field_path\": \"memo\", \"start\": 0, \"end\": 4, \"quote\": \"買う物は\"}]}",
+        "candidate_json": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"A02-4\",\"evidence_indexes\":[14],\"expression\":\"今日\",\"kind\":\"WRITTEN_TODAY_RELATIVE\"},\"claim_id\":\"a.role\",\"evidence_indexes\":[0],\"kind\":\"ROLE\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"a.role\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"連絡係だった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日も連絡係だった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.waiting\",\"evidence_indexes\":[1],\"kind\":\"RECORDED_INTENTION\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"WISH_REALIZATION_NOT_ASSERTED\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"a.waiting\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"残したかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"まだ返事のない人がいることも残したかった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.notice\",\"evidence_indexes\":[2],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"a.notice\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"待った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。\"},{\"about_time\":{\"anchor_source_id\":\"A02-5\",\"evidence_indexes\":[15],\"expression\":\"今日\",\"kind\":\"WRITTEN_TODAY_RELATIVE\"},\"claim_id\":\"a.tools_role\",\"evidence_indexes\":[3],\"kind\":\"ROLE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"a.tools_role\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"道具係だった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日は道具係だった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"UP_TO_THIS_SOURCE_WRITING\"},\"claim_id\":\"a.non_action\",\"evidence_indexes\":[4],\"kind\":\"EXPLICIT_NON_ACTION\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"a.non_action\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[16],\"role\":\"WRITTEN_は\",\"text\":\"使いやすかったか\"}],\"surface\":\"聞いていない\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"使いやすかったかは聞いていない。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.tools_action\",\"evidence_indexes\":[5],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"a.tools_action\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[17],\"role\":\"WRITTEN_と\",\"text\":\"返ってきた数\"}],\"surface\":\"照合した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"道具を貸す時に数を記録し、返ってきた数と照合した。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[6],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.tools_result\",\"evidence_indexes\":[6],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"a.tools_result\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"戻っていた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全て戻っていた。\"},{\"about_time\":{\"anchor_source_id\":\"A02-6\",\"evidence_indexes\":[19],\"expression\":\"今日\",\"kind\":\"WRITTEN_TODAY_RELATIVE\"},\"claim_id\":\"a.burden\",\"evidence_indexes\":[8],\"kind\":\"WRITTEN_BURDEN\",\"modality\":{\"evidence_indexes\":[8],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[8],\"scope_refs\":[\"a.burden\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[18],\"role\":\"WRITTEN_が\",\"text\":\"メモを作るの\"}],\"surface\":\"面倒だった\"},\"qualifiers\":[{\"evidence_indexes\":[7],\"kind\":\"DEGREE\",\"scope_refs\":[\"a.burden\"],\"text\":\"少し\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日はメモを作るのが少し面倒だった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[9],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.buying\",\"evidence_indexes\":[9],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[9],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[9],\"scope_refs\":[\"a.buying\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"買った\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"買い物前にメモを作り、メモを見ながら買った。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[10],\"expression\":null,\"kind\":\"COMPARISON_BASELINE_UNRESOLVED\"},\"claim_id\":\"a.relative_wait\",\"evidence_indexes\":[10],\"kind\":\"PERSON_STATED_RELATIVE_COMPARISON\",\"modality\":{\"evidence_indexes\":[10],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[10],\"scope_refs\":[\"a.relative_wait\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"短かった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"前より待つ時間は短かった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[11],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.relief\",\"evidence_indexes\":[11],\"kind\":\"FEELING_WITH_WRITTEN_SCOPE\",\"modality\":{\"evidence_indexes\":[11],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[11],\"scope_refs\":[\"a.relief\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ほっとした\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"数を照らし合わせられてほっとした。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[12],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"a.bought_result\",\"evidence_indexes\":[12],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[12],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[12],\"scope_refs\":[\"a.bought_result\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[20],\"role\":\"WRITTEN_は\",\"text\":\"買う物\"}],\"surface\":\"買えた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"買う物は買えた\"}],\"conflicts\":[],\"core\":\"analysis\",\"relations\":[{\"evidence_indexes\":[13],\"from_claim_id\":\"a.bought_result\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"a.concession\",\"scope_refs\":[\"a.concession\"],\"to_claim_id\":\"a.burden\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[{\"description\":\"今回の記録に使いやすさの回答は観測できない。本人が絶対に知らない、使いにくかった、との断定ではない。\",\"dimension\":\"USABILITY_NOT_CONFIRMED\",\"evidence_indexes\":[4],\"origin\":\"NOT_OBSERVED_IN_MATERIAL\",\"resolution_state\":\"NO_USABILITY_ANSWER_IN_MATERIAL\",\"target_claim_refs\":[\"a.non_action\"],\"unknown_id\":\"a.usability\"}],\"updates\":[]},\"evidence\":[{\"end\":10,\"field_path\":\"memo\",\"quote\":\"今日も連絡係だった。\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":31,\"field_path\":\"memo\",\"quote\":\"まだ返事のない人がいることも残したかった。\",\"source_id\":\"A02-4\",\"start\":10},{\"end\":31,\"field_path\":\"memo_action\",\"quote\":\"回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"今日は道具係だった。\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":43,\"field_path\":\"memo\",\"quote\":\"使いやすかったかは聞いていない。\",\"source_id\":\"A02-5\",\"start\":27},{\"end\":25,\"field_path\":\"memo_action\",\"quote\":\"道具を貸す時に数を記録し、返ってきた数と照合した。\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":33,\"field_path\":\"memo_action\",\"quote\":\"全て戻っていた。\",\"source_id\":\"A02-5\",\"start\":25},{\"end\":22,\"field_path\":\"memo\",\"quote\":\"少し\",\"source_id\":\"A02-6\",\"start\":20},{\"end\":28,\"field_path\":\"memo\",\"quote\":\"今日はメモを作るのが少し面倒だった。\",\"source_id\":\"A02-6\",\"start\":10},{\"end\":22,\"field_path\":\"memo_action\",\"quote\":\"買い物前にメモを作り、メモを見ながら買った。\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":44,\"field_path\":\"memo\",\"quote\":\"前より待つ時間は短かった。\",\"source_id\":\"A02-4\",\"start\":31},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"数を照らし合わせられてほっとした。\",\"source_id\":\"A02-5\",\"start\":10},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"買う物は買えた\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":28,\"field_path\":\"memo\",\"quote\":\"買う物は買えたけど、今日はメモを作るのが少し面倒だった。\",\"source_id\":\"A02-6\",\"start\":0},{\"end\":2,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-4\",\"start\":0},{\"end\":2,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-5\",\"start\":0},{\"end\":36,\"field_path\":\"memo\",\"quote\":\"使いやすかったかは\",\"source_id\":\"A02-5\",\"start\":27},{\"end\":20,\"field_path\":\"memo_action\",\"quote\":\"返ってきた数と\",\"source_id\":\"A02-5\",\"start\":13},{\"end\":20,\"field_path\":\"memo\",\"quote\":\"メモを作るのが\",\"source_id\":\"A02-6\",\"start\":13},{\"end\":12,\"field_path\":\"memo\",\"quote\":\"今日\",\"source_id\":\"A02-6\",\"start\":10},{\"end\":4,\"field_path\":\"memo\",\"quote\":\"買う物は\",\"source_id\":\"A02-6\",\"start\":0}]}",
+        "metadata_json": "{\"elapsed_seconds\":null,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":null,\"provider\":\"HAND_AUTHORED_P2_DESIGN_SAMPLE\",\"revision\":null,\"usage\":null}"
+      },
+      "adoption_state": "NOT_ADOPTED",
+      "reference_index_checks": 67,
+      "proposed_mapping_decision": "PARTIAL_FIELD_MAPPING_HOLD_FOR_PROFILE",
+      "mapping_reasons": [
+        "ObservedPropositionのactor等へ対応するfieldはあるが、_safe_labelのfinite全再導出一致がある。",
+        "役割から架空場面を補完せず、必要なnodeが無ければ空白を保持。",
+        "UnknownGapに候補unknownの根拠欄が無いので、参照を落として収納しない。",
+        "メモ作成の少し面倒というaction targetを、wish限定BURDEN annotationへ偽装しない。"
+      ]
+    }
+  ],
+  "native_schema_inventory": [
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "SourceEnvelope",
+      "fields": [
+        "envelope_id",
+        "source_record_id",
+        "source_role",
+        "source_schema_version",
+        "source_contract_version",
+        "source_encoding",
+        "label_contract_id",
+        "label_contract_digest",
+        "raw_utf8",
+        "raw_sha256"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "EvidenceRef",
+      "fields": [
+        "evidence_id",
+        "source_span_id",
+        "source_envelope_id",
+        "field_path",
+        "element_index",
+        "field_utf8_start",
+        "field_utf8_end",
+        "scalar_start",
+        "scalar_end",
+        "utf8_start",
+        "utf8_end",
+        "field_sha256",
+        "literal_sha256"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "MeaningNode",
+      "fields": [
+        "node_id",
+        "owner_id",
+        "node_kind",
+        "grounding_kind",
+        "value",
+        "epistemic_state",
+        "evidence_ids"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "MeaningEdge",
+      "fields": [
+        "edge_id",
+        "owner_id",
+        "relation",
+        "source_node_id",
+        "target_node_id",
+        "grounding_kind",
+        "epistemic_state",
+        "evidence_ids"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "GroundedMeaningGraph",
+      "fields": [
+        "graph_id",
+        "source_envelope_id",
+        "nodes",
+        "edges",
+        "owner_dispositions",
+        "required_owner_refs",
+        "active_optional_owner_refs",
+        "source_version",
+        "obligation_version",
+        "owner_universe_digest"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "GroundedSemanticComponentProjection",
+      "fields": [
+        "schema_version",
+        "source_object_ref",
+        "source_declaration_rank",
+        "typed_predicate_key",
+        "semantic_kind_key",
+        "owner_key",
+        "scope_key",
+        "role_key",
+        "epistemic_state_key",
+        "temporal_state_key",
+        "modality_key",
+        "polarity_key",
+        "qualifier_refs",
+        "source_evidence_refs",
+        "material_unknown_refs"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "SourceQualifierBinding",
+      "fields": [
+        "projection_preimage_ref",
+        "source_qualifier_binding_ref",
+        "basis_binding_ref",
+        "source_candidate_ref",
+        "source_argument_role",
+        "canonical_qualifier_codes",
+        "polarity",
+        "modality",
+        "time_scope"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "EmlisInterpretationCandidate",
+      "fields": [
+        "schema_version",
+        "candidate_id",
+        "candidate_kind",
+        "claim_domain",
+        "semantic_operator",
+        "argument_bindings",
+        "relation_operator",
+        "relation_basis_refs",
+        "derivation_rule_id",
+        "semantic_refs",
+        "evidence_refs",
+        "basis_candidate_refs",
+        "epistemic_state",
+        "required_qualifiers",
+        "forbidden_promotions"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.contracts",
+      "type": "ArgumentBinding",
+      "fields": [
+        "role",
+        "semantic_ref"
+      ]
+    },
+    {
+      "module": "emlis_ai_grounded_observation_plan",
+      "type": "GroundedSemanticFrame",
+      "fields": [
+        "actor",
+        "predicate_kind",
+        "polarity",
+        "modality",
+        "target_anchor_ids",
+        "time_scope",
+        "degree",
+        "attribute_codes"
+      ]
+    },
+    {
+      "module": "emlis_ai_grounded_observation_plan",
+      "type": "GroundedSemanticNucleus",
+      "fields": [
+        "nucleus_id",
+        "kind",
+        "source_span_ids",
+        "source_fields",
+        "surface_anchor_ids",
+        "semantic_frame",
+        "grounding_kind",
+        "certainty",
+        "priority",
+        "retention",
+        "allowed_claim_scope",
+        "forbidden_inference_codes",
+        "source_claim_ids",
+        "source_meaning_block_keys"
+      ]
+    },
+    {
+      "module": "emlis_ai_grounded_observation_plan",
+      "type": "GroundedSemanticRelation",
+      "fields": [
+        "relation_id",
+        "type",
+        "from_nucleus_id",
+        "to_nucleus_id",
+        "source_span_ids",
+        "grounding_kind",
+        "certainty",
+        "retention",
+        "source_relation_ids",
+        "source_meaning_arc_keys"
+      ]
+    },
+    {
+      "module": "emlis_ai_grounded_observation_plan",
+      "type": "GroundedUnknownBoundary",
+      "fields": [
+        "unknown_id",
+        "dimension",
+        "affected_nucleus_ids",
+        "evidence_span_ids",
+        "surface_policy"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.emlis_thread_contracts",
+      "type": "AnswerMeaningUpdateV1",
+      "fields": [
+        "answer_source_ref",
+        "question_ref",
+        "prior_meaning_ref",
+        "updates",
+        "unresolved_parts",
+        "disposition",
+        "new_meaning_ref"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.emlis_thread_contracts",
+      "type": "EmlisMeaningCheckpointV1",
+      "fields": [
+        "checkpoint_id",
+        "source_prefix_ref",
+        "base_meaning_ref",
+        "answer_update",
+        "assessment_status",
+        "accepted_update_refs",
+        "inactive_claim_refs",
+        "unresolved_parts",
+        "semantic_schema_version"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.emlis_thread_contracts",
+      "type": "AnswerTemporalBindingV1",
+      "fields": [
+        "about_time",
+        "anchor_source_ref",
+        "time_expression_evidence_refs",
+        "relative_relation",
+        "resolved_interval",
+        "timezone_basis"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.piece_source",
+      "type": "PieceSourceMeaning",
+      "fields": [
+        "envelope",
+        "graph",
+        "evidence",
+        "sentences",
+        "role_bindings",
+        "nominal_references",
+        "personal_evaluations",
+        "expression_scopes",
+        "saved_snapshot",
+        "selected_feelings"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.piece_source",
+      "type": "PiecePersonalEvaluation",
+      "fields": [
+        "node_id",
+        "construction",
+        "kind",
+        "scalar_parts",
+        "utf8_parts",
+        "copula",
+        "polarity",
+        "temporal_scope",
+        "commitment"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.piece_source",
+      "type": "PieceExpressionScope",
+      "fields": [
+        "node_id",
+        "relation",
+        "marker",
+        "scope_scalar_span",
+        "scope_utf8_span",
+        "expression_scalar_span",
+        "expression_utf8_span"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "ObservedProposition",
+      "fields": [
+        "actor",
+        "arguments",
+        "predicate_lemma",
+        "polarity",
+        "modality",
+        "temporal_scope",
+        "source_parts",
+        "sequence_marker",
+        "relative_day",
+        "possible_content",
+        "result_state",
+        "dependent_form",
+        "scene_state",
+        "role_state",
+        "written_modifiers"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "ObservedNode",
+      "fields": [
+        "node_ref",
+        "node_kind",
+        "visible_label",
+        "record_refs",
+        "evidence_refs",
+        "polarity",
+        "modality",
+        "temporal_scope",
+        "proposition",
+        "update_refs"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "ObservedEdge",
+      "fields": [
+        "edge_ref",
+        "edge_kind",
+        "endpoint_refs",
+        "evidence_refs"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "UnknownGap",
+      "fields": [
+        "gap_ref",
+        "between_node_refs",
+        "missing_scope",
+        "reason_code"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "ObservedConflict",
+      "fields": [
+        "conflict_ref",
+        "target_refs",
+        "evidence_refs",
+        "reason_code"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "ObservedAnnotation",
+      "fields": [
+        "annotation_ref",
+        "target_ref",
+        "predicate_lemma",
+        "source_labels",
+        "evidence_refs",
+        "update_refs",
+        "kind",
+        "annotation_state",
+        "uncertainty",
+        "alternative_explanations",
+        "forbidden_promotions"
+      ]
+    },
+    {
+      "module": "cocolon_meaning_experience_engine.cores.analysis.intent_compiler",
+      "type": "ObservedGraph",
+      "fields": [
+        "nodes",
+        "edges",
+        "unknown_gaps",
+        "source_updates",
+        "conflicts",
+        "annotations"
+      ]
+    }
+  ],
+  "guard_source_locations": [
+    {
+      "path": "cocolon_meaning_experience_engine/emlis_stage1_response.py",
+      "function": "_validate_canonical_semantic_inputs",
+      "line": 1396
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/emlis_stage1_response.py",
+      "function": "validate_interpretation_candidate_pool",
+      "line": 2501
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/emlis_v1a.py",
+      "function": "validate_positive_realization_trace",
+      "line": 7084
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/emlis_thread_projection.py",
+      "function": "_project_thread_meaning_aggregate",
+      "line": 471
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/emlis_question.py",
+      "function": "validate_question_binding",
+      "line": 387
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/piece_source.py",
+      "function": "validate_piece_saved_fields",
+      "line": 1174
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/piece_v1c.py",
+      "function": "realize_piece_artifact",
+      "line": 695
+    },
+    {
+      "path": "piece_v2_content_policy.py",
+      "function": "validate_source_meaning_preservation",
+      "line": 91
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py",
+      "function": "_safe_label",
+      "line": 157
+    }
+  ],
+  "source_blobs": {
+    "cocolon_meaning_experience_engine/contracts.py": "a6272fc99fcf74f901f72658239b03354cef693a",
+    "cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "673c5777d2954567cf4b6bc661903fec85bc3194",
+    "cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "5081e2d6e803c2b4fed9ca71a2b739f7474a86f5",
+    "cocolon_meaning_experience_engine/emlis_question.py": "3137cdcd1d2a15ae47e8139fc6fc567528a4c88d",
+    "cocolon_meaning_experience_engine/emlis_stage1_response.py": "eb6de19e9c257cece4cc577455fe648772884385",
+    "cocolon_meaning_experience_engine/emlis_thread_contracts.py": "89e8ac4cf47370c21eca952543ed95721f118b9c",
+    "cocolon_meaning_experience_engine/emlis_thread_projection.py": "0826fdb6292cee60e58cdaa9a1051d59d20e1d0e",
+    "cocolon_meaning_experience_engine/emlis_v1a.py": "9f5852e4f956c42db833ebecb928b4583ad36c26",
+    "cocolon_meaning_experience_engine/piece_source.py": "9420b855858d36a53d7814b8ee51ba09bbe653e2",
+    "cocolon_meaning_experience_engine/piece_v1c.py": "c8223642822b613f29f16e92580bb5bdf2334f78",
+    "emlis_ai_grounded_observation_plan.py": "48f679964ba78a4f209ed876d9217b5bffebc3d7",
+    "piece_v2_content_policy.py": "ff03637c701e8253523667dc7c429fe0df6f2f66"
+  },
+  "counts": {
+    "design_examples": 4,
+    "claims": 28,
+    "evidence_quotes": 60,
+    "native_dataclasses": 26,
+    "guard_functions_found": 9,
+    "semantic_adoptions": 0,
+    "product_artifacts_generated": 0,
+    "external_inference": 0
+  },
+  "limitations": [
+    "P1 receipt validates only shape and located quotation, not P2 schema or claim semantics.",
+    "Type inventory is field inspection, not an instantiated/admitted graph.",
+    "Mapping decisions are hand-authored technical classifications, not runtime admission outcomes.",
+    "Predicate arguments and every native normalization remain uncompleted example semantics; do not equate empty example arguments with an assertion that no arguments exist."
+  ],
+  "inspection_runs_during_authoring": 3,
+  "distinct_final_p1_receipts": 4,
+  "native_graphs_instantiated": 0
+}

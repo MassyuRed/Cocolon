@@ -1,0 +1,220 @@
+{
+  "schema": "cocolon.auxiliary.node_local.bound_roots.candidate.bodyfree.v1",
+  "state": "CANDIDATE_REMOTE_CI_CPU_CAPACITY_AND_SYNTHETIC_SQL_VERIFIED_ACTUAL_GPU_NOT_STARTED",
+  "source_parent": "809e933265718bd08260ef0728d7761f7f206554",
+  "source_commit": "e9046dee62eecc3e0b121dd20029892d3a95d1e2",
+  "source_remote_verification": "EXACT_8_PATH_BYTES_HEAD_AND_PARENT_VERIFIED",
+  "ci": {
+    "state": "REQUIRED_CI_SUCCESS",
+    "source_commit": "e9046dee62eecc3e0b121dd20029892d3a95d1e2",
+    "analysis_run": 44058384005,
+    "piece_run": 44058384077,
+    "run_attempt": 1,
+    "both_completed_success": true,
+    "observed_at_utc": "2026-11-17T10:03:11.064Z",
+    "dispatch_rerun": 0,
+    "model_quality_credit": 0
+  },
+  "prompt_profile": "semantic_map.node_local.v4.bound_roots.v1",
+  "model_alias": "cocolon-qwen3.5-4b-analysis-node-local-v4-bound-roots",
+  "outer_artifact_schema": "cocolon.analysis.semantic_map.node_local.model.v4.bound_roots.v1",
+  "inner_phase_schema_family": "cocolon.analysis.semantic_map.node_local.model.v4",
+  "phases": [
+    "PLAN",
+    "NODES",
+    "RELATIONS"
+  ],
+  "assigned_evidence": {
+    "scope": "NODES_EACH_UNIT_BEFORE_SOURCE_MODE_AND_FACT",
+    "fields": [
+      "source_quote",
+      "source_field"
+    ],
+    "native_schema_fixed_values": true,
+    "admission_exact_equality_to_plan": true,
+    "projection_uses_unchanged_plan_roots": true,
+    "echo_metadata_excluded_from_public_projection": true,
+    "all_phase_raws_preserved": true,
+    "semantic_correctness_proven": false
+  },
+  "cpu_regression": {
+    "passed": 727,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "seconds": 209.96,
+    "old_A23_five_messages_and_request_refs_exact": true,
+    "old_A23_five_raws_still_structurally_admit": true,
+    "old_A23_meaning_reclassified": false
+  },
+  "cpu_capacity": {
+    "state": "SYNTHETIC_EXAMPLE_ONLY_NOT_NEW_MODEL_RESULT",
+    "logical_examples": 18,
+    "same_five_input_shapes": 5,
+    "full12_leaf_count": 12,
+    "merge_count": 1,
+    "all_message_bytes_and_context_fit": true,
+    "maximum_example_input_tokens": 30200,
+    "merge_example_total_completion_tokens": 3549,
+    "tokenizer_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "transformers": "5.19.0",
+    "actual_emitted_token_reconstruction": false,
+    "new_model_calls": 0,
+    "weights_loaded": 0,
+    "maximum_example_input_phase": "RELATIONS",
+    "maximum_input_phase_remaining_output_tokens": 674,
+    "maximum_input_phase_input_plus_remaining_tokens": 30874
+  },
+  "limits": {
+    "shared_three_phase_completion_tokens": 4096,
+    "shared_source_deadline_seconds": 220,
+    "outer_deadline_seconds": 225,
+    "history_pipeline_deadline_seconds": 840,
+    "context_tokens": 32768,
+    "failure_retry_fallback": 0
+  },
+  "synthetic_SQL_replay": {
+    "state": "CPU_SEALED_SYNTHETIC_RUNNER_SQL_FRESH_READ_PASS_NOT_MODEL_QUALITY",
+    "source_commit": "e9046dee62eecc3e0b121dd20029892d3a95d1e2",
+    "prompt_profile": "semantic_map.node_local.v4.bound_roots.v1",
+    "scope_sha256": "5c6aa9619d9d3b5ab3d525340f7b738888e68bb4f5f13d4fc9ed483af5c53067",
+    "replayed_synthetic_phase_HTTP": 39,
+    "aggregate_raws": 13,
+    "commit_calls": 1,
+    "saved_artifacts": 1,
+    "monthly_references": 1,
+    "exact_original_SQL_source_records": 12,
+    "final_private_raw_exact": true,
+    "fresh_process": true,
+    "service_current_detail_history_exact": true,
+    "normal_saved_HTTP_status": 200,
+    "http_path": "/self-structure/latest",
+    "ID_private_raw_projection_text_coverage_equal": true,
+    "fresh_read_SQL_writes": 0,
+    "immutable_original_SQL_files": {
+      "pre_acquisition.input.json": {
+        "bytes": 59146,
+        "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+      },
+      "pre_acquisition.plan.json": {
+        "bytes": 162040,
+        "sha256": "f3bf5357ca01be6acf127beea4297857369cf1d4c4fbdaa40a87de75ca2949d4"
+      },
+      "pre_acquisition.pglite.gz": {
+        "bytes": 4835570,
+        "sha256": "801ba0683d2aed9a7ba46a8e7eb630b7cc810e1279aee6612cd1a0933e374485"
+      },
+      "pre_acquisition.receipt.json": {
+        "bytes": 2480,
+        "sha256": "424e364517529de78960faa9d9f8895641a7eaf71a6d5631b4e4adab358e9ff9"
+      }
+    },
+    "immutable_original_SQL_files_unchanged": true,
+    "final_receipt_sha256": "72987610ac9bee5085c847689927b0b9a051c6f1defcfc96396ab4f77fe2723b",
+    "reread_receipt_sha256": "595322c9123267c01168aeeee356f382b3389a705e63c5f4a085748d816493dc",
+    "actual_model_raw_save": false,
+    "model_calls": 0,
+    "Pod_calls": 0,
+    "hosted_database_calls": 0,
+    "normal_changes": 0,
+    "product_acceptance": false
+  },
+  "A24_B24_packet": {
+    "state": "FROZEN_PREPARED_NOT_APPROVED_NOT_SENT_NOT_EXECUTED",
+    "pod": "xrplcoeb5ec77f",
+    "source_commit": "e9046dee62eecc3e0b121dd20029892d3a95d1e2",
+    "source_tree": "0521abb6b5be89dcd4e3f1296d52268c8e11d058",
+    "upload_count": 6,
+    "upload_bytes": 3214698,
+    "upload_files": {
+      "current_api_sources.zip": {
+        "bytes": 2623862,
+        "sha256": "9e12cf3c30565e36113176e0f3e87d1873fca4f9ecfb26331145cfa59fe5649e"
+      },
+      "diagnostic_preparation.json": {
+        "bytes": 84742,
+        "sha256": "b02db38a2a86206390e8972aeaac59dc6f96855def0b2eaf024801331195dead"
+      },
+      "event_plan_execution.py": {
+        "bytes": 33837,
+        "sha256": "2897579899f9620d7dae0210afff553a8de1cd6ae5ee28737e4cdb623dfaf997"
+      },
+      "execution_scope.json": {
+        "bytes": 14047,
+        "sha256": "5c6aa9619d9d3b5ab3d525340f7b738888e68bb4f5f13d4fc9ed483af5c53067"
+      },
+      "full12_pre_acquisition.plan.json": {
+        "bytes": 248507,
+        "sha256": "6ccae4100a5fe7dda7080d464217de440bd8a878c83e39dc43422e43eda52928"
+      },
+      "source_manifest.json": {
+        "bytes": 209703,
+        "sha256": "65ca181b562d918f77fa347da2992b497e486c06d8146d04a6e6e811ce083664"
+      }
+    },
+    "same_pod_copy_count": 3,
+    "same_pod_copy_bytes": 99755,
+    "same_pod_copy_files": {
+      "controls.json": {
+        "bytes": 17840,
+        "sha256": "29fc6271f0e62166328e3be54c619ae46655eca776f15c741ab605d771feb362"
+      },
+      "full12.input.json": {
+        "bytes": 59146,
+        "sha256": "bdb872a588c42206f664e175a8c918c780da57a52353de378e738c7d0e72916d"
+      },
+      "input_cases.json": {
+        "bytes": 22769,
+        "sha256": "abf97a901194c152c3ec0b5bc3453900eb73e7856c07e0aea6f2bbc4d5e3a3a1"
+      }
+    },
+    "A_max_responses": 19,
+    "A_restore_inclusive_seconds": 1800,
+    "B_max_responses": 43,
+    "B_restore_inclusive_seconds": 1020,
+    "B_condition": "ALL_FIVE_ACTUAL_SOURCE_THREE_RAWS_PUBLIC_GRAPH_AND_TEXT_ROOT_AND_INDEPENDENT_REVIEWS_ADEQUATE",
+    "later_conditional_review_max_bytes": 4096,
+    "scope_sha256": "5c6aa9619d9d3b5ab3d525340f7b738888e68bb4f5f13d4fc9ed483af5c53067",
+    "runner_sha256": "2897579899f9620d7dae0210afff553a8de1cd6ae5ee28737e4cdb623dfaf997",
+    "A23_restored_baseline_not_fresh_live_pid": 19109,
+    "A23_restored_baseline_not_fresh_live_start_ticks": "97486258"
+  },
+  "A24_B24_approval": "NOT_APPROVED",
+  "A24_B24_execution": "NOT_SENT_NOT_STARTED",
+  "A23": "CONSUMED_ALL_FIVE_NOT_ADEQUATE",
+  "B23": "CONDITION_FALSE_NOT_STARTED",
+  "new_model_calls": 0,
+  "training": 0,
+  "actual_model_raw_SQL_save": 0,
+  "normal_changes": 0,
+  "normal_api_worker": "24bc228dbf54abc983906323c0ae7d937fae1fd6",
+  "normal_DB_latest_migration": "20261115011424",
+  "normal_worker_seconds": 900,
+  "device_build_TestFlight": "DEFERRED",
+  "structure_map_delta": "PRIVATE_AUTHOR_OPT_IN_BOUND_ROOT_PREFIX_ONLY",
+  "product_credit": 0,
+  "whole_work_unit_complete": false,
+  "auxiliary_reuse_complete": false,
+  "automatic_progression": false,
+  "remaining": [
+    "Independent new actual model whole-text and graph reading for all five inputs.",
+    "PLAN mixed events and omitted meanings remain separate unresolved causes.",
+    "Actual full12 semantic adequacy, same-raw SQL save and separate-process non-generating reread.",
+    "Normal native identity, map/IF and natural/Piece boundaries, API/worker adoption."
+  ],
+  "sealed_packet_CPU_loopback": {
+    "state": "CPU_SYNTHETIC_PREPARED_RUNNER_PROTOCOL_PASS_NOT_MODEL_QUALITY",
+    "scope_sha256": "5c6aa9619d9d3b5ab3d525340f7b738888e68bb4f5f13d4fc9ed483af5c53067",
+    "A_HTTP": 19,
+    "A_logical": 5,
+    "A_phases": 15,
+    "B_HTTP": 43,
+    "B_logical": 13,
+    "B_phases": 39,
+    "model_calls": 0,
+    "Pod_calls": 0,
+    "SQL_calls": 0,
+    "source_or_meaning_acceptance": false
+  },
+  "primary_outcome": "TECHNICAL_CREDIT"
+}

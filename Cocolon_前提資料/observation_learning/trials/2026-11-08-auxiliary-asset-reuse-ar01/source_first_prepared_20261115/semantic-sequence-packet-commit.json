@@ -1,0 +1,23 @@
+{
+  "local_commit": "834a9cf3f67d510d0dcc39231fade3bb6dced1d2",
+  "parent": "ef329983723a15cb87d893242b83216b826c4749",
+  "tree": "b8eeb6c37fe1935031421adba51c2c53f24d1aef",
+  "paths": [
+    "ai/tests/fixtures/cmee_current_4b_packet_20261114.json",
+    "ai/tests/test_cmee_current_4b_packet.py"
+  ],
+  "test_only": true,
+  "production_payload_unchanged": true,
+  "final_source_tests": {
+    "passed": 278,
+    "failed": 0,
+    "skipped": 0,
+    "groups": [
+      215,
+      37,
+      26
+    ]
+  },
+  "packet_group_seconds": 6.34,
+  "remote_actions": 0
+}

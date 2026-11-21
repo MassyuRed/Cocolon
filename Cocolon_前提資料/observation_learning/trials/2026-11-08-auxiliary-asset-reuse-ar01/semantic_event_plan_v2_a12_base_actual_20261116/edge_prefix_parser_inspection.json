@@ -1,0 +1,185 @@
+{
+  "schema": "cocolon.analysis.actual_edge_prefix_parser_inspection.v1",
+  "state": "ORIGINAL_FIRST_EDGE_PREFIX_PERMITS_ARRAY_CLOSE_AND_CONTINUATION",
+  "body_free": true,
+  "partial_snapshot": {
+    "path": "/workspace/scratch/56cfe0a372d7/a12_actual/partial_book/after.partial.result.json",
+    "bytes": 98083,
+    "sha256": "389b65b7585af7a4fe9e531ef34b2339b91ec11086e87476e1720dd79f490cbf"
+  },
+  "original_case_id": "book_club_two_day",
+  "original_raw_sha256": "4ebb330ea484e3bbfca6469bf2688d2019f2c9d310e9c00b4ac763682b273bee",
+  "original_native_sha256": "569042c2c0237cca8824fed5f06beeea11bbb2288fedf8ab9c233d52a3942f56",
+  "model_alias": "cocolon-qwen3.5-4b-analysis-event-plan-v2-base-851bf6e",
+  "counts": {
+    "events": 2,
+    "readings": 1,
+    "nodes": 3,
+    "edges": 12
+  },
+  "parser_owner": "Existing semantic_json_parser from published API46fff73 native source; fixed LMFE817f944fcc8851917c40300a47f62d1defc3ffc3.",
+  "inspection": "Feed exact original characters in order; inspect allowed characters after array opener and each complete original edge. No original raw mutation, response rebind, model execution, test, guard or source modification.",
+  "alphabet": "All ASCII printable characters plus every character present in the original raw; punctuation availability is inspected at character-parser level.",
+  "all_original_raw_characters_accepted": true,
+  "original_complete_parser_can_end": true,
+  "observations": [
+    {
+      "point": "after_edges_array_opener",
+      "completed_edges": 0,
+      "prefix_char_count": 995,
+      "prefix_utf8_bytes": 1541,
+      "prefix_sha256": "01707b5f3d09ad0476665b2cbf6263aa6d6b15bf6261bda005a0636bd685434e",
+      "allowed_characters": "{]\r\t\n ",
+      "closing_bracket_allowed": true,
+      "comma_allowed": false,
+      "original_next_character": "{"
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 1,
+      "prefix_char_count": 1103,
+      "prefix_utf8_bytes": 1679,
+      "prefix_sha256": "ca42106507aea83aa4f8c79ad800d8f3560f7237cd2dd1cdeeee692026484efc",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 2,
+      "prefix_char_count": 1202,
+      "prefix_utf8_bytes": 1798,
+      "prefix_sha256": "8f8558678094989d0452744c1bcf353a92eef71cdde9d026d8720244d3a29543",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 3,
+      "prefix_char_count": 1297,
+      "prefix_utf8_bytes": 1909,
+      "prefix_sha256": "1026774469ad7cd3ab5fef0844a0288eeb0d02b058e285636d59a61f79aa6d57",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 4,
+      "prefix_char_count": 1398,
+      "prefix_utf8_bytes": 2026,
+      "prefix_sha256": "3c05b06970a2115d691d818769d725f72abca8cb199502d8b0367708f4d6fecb",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 5,
+      "prefix_char_count": 1497,
+      "prefix_utf8_bytes": 2145,
+      "prefix_sha256": "6fc2f1f4b80a3b8082e3e125baf98fe22fc52999630683f07fce4698e3f6052e",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 6,
+      "prefix_char_count": 1592,
+      "prefix_utf8_bytes": 2256,
+      "prefix_sha256": "13b77b61d8b17b27b214619e1bb42d8a30399f170d1d3318ee7262411e732b12",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 7,
+      "prefix_char_count": 1695,
+      "prefix_utf8_bytes": 2379,
+      "prefix_sha256": "36ecc9b46a450a1dd62e2fdbaa9bae5f500d25199e899f4e927f298812d932fd",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 8,
+      "prefix_char_count": 1790,
+      "prefix_utf8_bytes": 2490,
+      "prefix_sha256": "7cc4be8a1d682eb6041f5ee36942895c0cbb9631d13a1b46e923d46ac663bec0",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 9,
+      "prefix_char_count": 1893,
+      "prefix_utf8_bytes": 2613,
+      "prefix_sha256": "8564cecf076515193ea9e7cca294367a0ccafb8415f484d5df573187f9919823",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 10,
+      "prefix_char_count": 2002,
+      "prefix_utf8_bytes": 2752,
+      "prefix_sha256": "d6b7cecf352abc5033e16791937426a58ac666b7977a706ad944a864f8b5c203",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 11,
+      "prefix_char_count": 2099,
+      "prefix_utf8_bytes": 2865,
+      "prefix_sha256": "547f397ecb171f8455008fcd1a1d62fa3c1935bd231547682a3873eee7590a89",
+      "allowed_characters": " \t\n\r,] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": true,
+      "original_next_character": ","
+    },
+    {
+      "point": "after_original_edge",
+      "completed_edges": 12,
+      "prefix_char_count": 2198,
+      "prefix_utf8_bytes": 2984,
+      "prefix_sha256": "da6cf4b5e173d1902c4df0fb88114578c7b419edd1417b53d35930d307dab72f",
+      "allowed_characters": " \t\n\r] \t\n\r",
+      "closing_bracket_allowed": true,
+      "comma_allowed": false,
+      "original_next_character": "]"
+    }
+  ],
+  "conclusion": "The existing character parser permits ] immediately after the first complete original edge; it does not require exhausting the 12 unique pair/relation combinations. The original raw instead continues with a comma.",
+  "limits": [
+    "This is a character-parser inspection, not a tokenizer-token-mask or model-logit replay.",
+    "Greedy model preference and the semantic cause of excessive relations are not established by this inspection.",
+    "No semantic adequacy, adoption or B12 eligibility is inferred."
+  ],
+  "actions": {
+    "model_calls": 0,
+    "GPU": 0,
+    "pod_operations": 0,
+    "tests": 0,
+    "source_changes": 0,
+    "raw_changes": 0,
+    "response_rebinds": 0
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "validation_returncode": 0,
+  "validation_stdout": "ALIGNED13_VALIDATED_NO_MODEL 13\n",
+  "pending_returncode": 1,
+  "pending_stderr": "Traceback (most recent call last):\n  File \"/workspace/cocolon_aligned13_pack_20261028/run_aligned13.py\", line 118, in <module>\n    if a.execute:execute(a.pack.resolve(),a.source_commit)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cocolon_aligned13_pack_20261028/run_aligned13.py\", line 38, in execute\n    plan,cpu=validate(pack,True);assert len(source)==40 and all(c in '0123456789abcdef' for c in source)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cocolon_aligned13_pack_20261028/run_aligned13.py\", line 26, in validate\n    if execution and not authorized:raise ValueError('aligned13_authorization_required_before_output_or_model')\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: aligned13_authorization_required_before_output_or_model\n",
+  "output_exists": false,
+  "model_loads": 0,
+  "training_updates": 0,
+  "generations": 0
+}

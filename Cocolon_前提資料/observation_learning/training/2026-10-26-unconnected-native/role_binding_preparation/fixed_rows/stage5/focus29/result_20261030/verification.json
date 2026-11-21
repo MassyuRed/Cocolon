@@ -1,0 +1,99 @@
+{
+  "status": "CPU_ORIGINALS_VERIFIED_GPU_NOT_APPROVED_NOT_EXECUTED",
+  "source_commit": "dc21b2d4fe6f33566c0cf1176fc3452b814f0ca5",
+  "archive_bytes": 197471,
+  "archive_sha256": "08b4b1025103e9123ae861f023da37016aba492569a0f154ff15c6241db45606",
+  "archive_members": 14,
+  "payload_files": 13,
+  "crc_all_passed": true,
+  "all_member_bytes_sha256_match": true,
+  "all_runtime_source_and_proposal_match": true,
+  "all_five_python_sources_ast_parse": true,
+  "train19_exact_prior_github_bytes": true,
+  "installed_loss_source_exact_prior_github_bytes": true,
+  "encoded19_masks_counts_context_windows_checked": true,
+  "allocation_new2_old1": true,
+  "scheduled_updates": 29,
+  "cpu_summary_records_encoded19_unchanged": true,
+  "frozen_files_checked_in_jupyter": 298,
+  "frozen_files_post_unchanged": 298,
+  "prior_finite112_evidence_retained_no_new_tensor_model_test": true,
+  "actual_model_loads": 0,
+  "actual_model_forwards": 0,
+  "actual_updates": 0,
+  "actual_generations": 0,
+  "actual_new_cmee_calls": 0,
+  "torch_imported": false,
+  "gpu_stop_restart_delete_operations": 0,
+  "retry": false,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "members": [
+    {
+      "path": "runtime/cpu.log",
+      "bytes": 1073,
+      "sha256": "f1f5abec742e85106088557fd4f3f353e79a84e9268d847c543e904facc3bf19"
+    },
+    {
+      "path": "runtime/cpu_execution.json",
+      "bytes": 162,
+      "sha256": "a26b39576da499394d06796549125bf9f4d90d6e93422fbe18e549463197573d"
+    },
+    {
+      "path": "runtime/export_focus29.py",
+      "bytes": 3907,
+      "sha256": "308dd6ddd895d2eeb267a28335d28cf89a7a88abf564cb0588de0ae5eda6ad66"
+    },
+    {
+      "path": "runtime/launch_focus29_once.py",
+      "bytes": 3164,
+      "sha256": "c3e68e172d44275cd134611e70919df53d3db2ff7ca2b1756d1f1a005b362872"
+    },
+    {
+      "path": "runtime/post_identity.json",
+      "bytes": 334,
+      "sha256": "019e303720c011af40769737e0a925faa1d7d5574ebf7c3bfca4c4068535274f"
+    },
+    {
+      "path": "runtime/prepare_focus29.py",
+      "bytes": 6811,
+      "sha256": "ce3ba5fb511ac59bdb160ed39af87bda06280a84777e49ad2858b31d03beedc4"
+    },
+    {
+      "path": "runtime/prompt_source_index.py",
+      "bytes": 11806,
+      "sha256": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96"
+    },
+    {
+      "path": "runtime/proposal.json",
+      "bytes": 7922,
+      "sha256": "da02cbbaa0054be415c0da4db5f2f4f7e60977946df05575ff2ab8d11249e6ea"
+    },
+    {
+      "path": "runtime/run_focus29_once.py",
+      "bytes": 21833,
+      "sha256": "aec2ab08c3b470a5bd355ce8eaa9b1f5a82e75ed2c8d9262223dbe8ff9c1bc55"
+    },
+    {
+      "path": "cpu/cpu_summary.json",
+      "bytes": 7036,
+      "sha256": "c45deb39b8f1881c537fe379e8a99bb42c2786ce580d805ef181255664ed157f"
+    },
+    {
+      "path": "cpu/installed_loss_source.json",
+      "bytes": 7941,
+      "sha256": "5553482b4f1652cda5fa30b28be0181d34310d68e2436711faf9848d4953fa34"
+    },
+    {
+      "path": "cpu/prepared_cpu.json.gz",
+      "bytes": 153941,
+      "sha256": "b5b44e26344e010734720290dd370df38cf1821a3593df3e39d3224be2b084e1"
+    },
+    {
+      "path": "cpu/train19.jsonl",
+      "bytes": 411959,
+      "sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7"
+    }
+  ]
+}

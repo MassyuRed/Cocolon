@@ -1,0 +1,67 @@
+{
+  "status": "RECOVERED_AND_CLOSED_NO_RETRY",
+  "gpu_archive_bytes": 70698,
+  "gpu_archive_sha256": "33a5750890d2aed8bc7246abc5a8fd4af479da37321539c9260f639a0397d20e",
+  "gpu_manifest_members_verified": 10,
+  "closed_archive_bytes": 76922,
+  "closed_archive_sha256": "e1418d4f481800fe0581942481213afa30479c4ecdbf0bf7184ccd5e97e4b451",
+  "closed_archive_members_verified": 6,
+  "gpu_archive_in_closed_archive_byte_equal": true,
+  "consumer_source_byte_equal": true,
+  "durable_archive_saved": true,
+  "execution_count": 1,
+  "pid": 693855,
+  "process_observed_absent_in_jupyter": true,
+  "weights_created": false,
+  "training_jsonl_created": false,
+  "reloaded_tensors_created": false,
+  "after_raw_created": false,
+  "cold_file_checked_count": 0,
+  "cold_file_applicability": "NO_ADOPTED_MEANING_OR_BODY",
+  "gpu_lifecycle_operations": 0,
+  "render_mutations": 0,
+  "supabase_mutations": 0,
+  "new_dependency_installs": 0,
+  "merged": false,
+  "deployed": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "recovered_files": {
+    "before_FT-BOOK-AFTER-ANSWER.jsonl": {
+      "bytes": 39953,
+      "sha256": "8c8b4ec73d657e22d3ba94ec9d197f4007b5d85862864362cbe5e0ce15598731"
+    },
+    "before_FT-BOOK-INITIAL.jsonl": {
+      "bytes": 19924,
+      "sha256": "66fe021ce1e3d874b30c54de6d6f26b09a2b1280d4759832ec3a7df9ebafd20c"
+    },
+    "consume_native15.py": {
+      "bytes": 5228,
+      "sha256": "e64e4923b9a79bbe35d5649c947ae7f88ee043046c1c1854abddc8a2f94b6195"
+    },
+    "diagnosis.json": {
+      "bytes": 26427,
+      "sha256": "2dc9dbdd3a6bdcd43ef84d6a230161667b5184dcee1a29e05a3c1f3cb79dee42"
+    },
+    "diagnosis.log": {
+      "bytes": 1112,
+      "sha256": "05c78af5c8e49a1c3ea2e779e936dbf59c02582d543aca635197b0041a24f90f"
+    },
+    "gpu.log": {
+      "bytes": 2254,
+      "sha256": "9d59eff4ec0a42c0f0a3182dfb62acfb6f16d0578bcca532f9197b60664c15c5"
+    },
+    "gpu_file_manifest.json": {
+      "bytes": 1330,
+      "sha256": "bde396e2e9ecde617731418f38c7a2e778f1173fac77c5100d2878f8ef643ae1"
+    },
+    "launch.json": {
+      "bytes": 149,
+      "sha256": "2876a6e7237faa966dda9af2b24bcc7a94fb00fe4b2ca15652be53e5650786c4"
+    },
+    "run.json": {
+      "bytes": 13587,
+      "sha256": "373e42c56692d3ab2463e099e5b5fd5997e5719e4d5d147cdf50f740e6a01176"
+    }
+  }
+}
