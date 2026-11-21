@@ -54,6 +54,7 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 6. `09_work_start_checklist.txt`を今回の作業について埋める。
 7. 全体の現在地は`../00_cocolon_current_product_and_state.md`から確認し、関連する最新作業記録・handoffを読む。`../07_latest_snapshot_diff.md`は関連する節目の履歴として参照し、EOFを全体currentの代用にしない。Cycle001の次作業だけはfreshな`08_cycle001_current_state.md`から選ぶ。
 8. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
+   - `CURRENT_RULES.md` R2.1に従い、全体設計図・全ファイルの地図・最新議事録・詳細設計書から、最後に確認した通常構成と中断点を特定する。中断やGPUの借り替えで失われた構成を復元し、その通常経路の動作を確認してから、作業ブランチの続きに入る。
 9. Cocolonについて設計・実装・診断・監査・前提資料更新・仕様判断を行う前に、`../system_context/00_read_first.md`を読み、次を実行する。
    - 実装はPR37 checkout、商品原本はfresh PR30とAPI PR3の別checkoutとする。実行引数・固定環境・cacheは上記technical入口のcurrent手順に従う。商品branch内の旧CLIを現行実装として実行しない。
    - same-refなら保存済みmanifest／output hashの検証結果を使う。
