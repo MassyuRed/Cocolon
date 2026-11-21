@@ -306,6 +306,8 @@ Mashの指示により、次週中に進めることを優先順と11/28の確�
 <a id="deep-insight-decisions-20261121"></a>
 ## 7. わたしを知る問い（DeepInsight）の採用方針
 
+利用プランと出題間隔は、報告会後の[§11.8の決定](#deep-insight-release-candidate-interruption-20261121)を適用する。
+
 ### 7.1 目的と位置づけ
 
 「今日の問い」を定型の日替わり出題から、本人の自己理解とわたしマップに必要な情報を集める機能へ変更する。ユーザーが自分から感情を記録するタイミングに加え、Emlisから届いた問いを見たり、自分が今知りたいテーマについて考えたりするためにアプリを開けるようにする。
@@ -483,3 +485,26 @@ Mashが8401で「今日の問い」から「わたしを知る問い」への画
 10問は現行の自然応答用4Bに架空材料を渡し、完成文が発行前の検査を通った結果。人間関係の再出題は、初回の距離に対応する架空回答を入れて再照合した。本番のユーザーデータを試験に使用せず、試験のための本番DB書き込みなし。API・DB・三中核の関連テスト190件を確認した。正式テーマ一覧と長期間の出題の多様性は別途確認する。
 
 Renderの本番API `dep-dc0lkj97lnhs739215pg` は17:47:48 JSTにLive。テーマの修正はサーバー側で、配布済み8401が同じAPIを利用する。この10件の合格は架空の初回・回答後各1件の比較で、本人端末での生成と長期間の出題は別途確認する。
+
+<a id="deep-insight-release-candidate-interruption-20261121"></a>
+### 11.8 わたしを知る問いの採用候補と実4B連続評価の中断（11/21 JST）
+
+§7で決めた二つの入口に対して、その後に利用プランと出題間隔を決めた。「テーマから考える」は全プランで初回から利用でき、次の新規出題までFreeは7日、Plus・Premiumは24時間。「記録をふりかえる」はPremium向けで、必要な日に新規1問までとし、未回答なら同じ問いを表示する。 [最新の採用・受入基準](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-acceptance-criteria-20261121)
+
+テーマの出題改修、Premiumふりかえりの発行・通知を[API検証版 `148afba6`](https://github.com/MassyuRed/mashos-api/commit/148afba69916674f01d5969525189f3fa52e9ecf)に、画面と通知から開く導線を[アプリ検証版 `704ef82c`](https://github.com/MassyuRed/Cocolon/commit/704ef82ca24c38dd3afc7f20ec430badb885af80)に保存した。実4Bの事前試行で18件が発行前の検査を通過した。250件の連続評価は126件の処理を観測した時点でワーカーのメモリ不足終了により中断した。再起動で一時結果を回収できず、250件評価の本文照合は未完。ワーカーは2 GiBへ変更後、既存版 `eeae89c8` でLive。この時点で候補の本番反映と新規配布は行っていない。
+
+旧「今日の問い」の通知ジョブは19:32:43に手動停止し、次回予定時刻を過ぎた19:37:57まで新たなジョブ実行と旧通知送信成功が0件だったことを確認した。 [連続評価、稼働版、停止の詳細](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-theme-batch-interruption-20261121)
+
+<a id="deep-insight-theme-intent-and-notification-20261121"></a>
+### 11.9 テーマ出題の再比較と通知から開く画面（11/21 JST）
+
+[API検証版 `73b5dc74`](https://github.com/MassyuRed/mashos-api/commit/73b5dc749fde05d69e16b01c4a79d672f6af0078)と前版で、通常の4B接続を使い同じ5テーマ各2件を順に比較した。発行前の自動検査を通ったのは前版4件、修正版7件。残り3件の見送りに加え、通過した文にも判断対象が曖昧な例と手順・結果を混同した例があった。5テーマ各50件の品質確認は未完。
+
+[アプリ検証版 `84d9eaf0`](https://github.com/MassyuRed/Cocolon/commit/84d9eaf0259dc789022a5e0749dae39ecdf3ccda)は、通知から本人向けのテーマ入口、または発行IDに対応するふりかえりの問いを開く。通常のAPI・ワーカーの稼働と旧通知ジョブの停止を確認した。候補に必要なSupabaseの5移行、本番反映、配布は未実施。 [比較した本文と稼働版](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-theme-intent-and-notification-recheck-20261121)
+
+<a id="deep-insight-premium-answer-map-20261121"></a>
+### 11.10 Premiumの発行から回答・わたしマップの再読まで（11/21 JST）
+
+架空の2記録を実4Bへ渡し、理由が書かれていない記録で発行できた。理由が書かれている対照は見送った。隔離DBのAPIで発行、回答保存、再送、同じIDの履歴を確認。保存した回答を含む実v24のマップは、最新と詳細で同じ版・図・本文を返し、根拠から同じ発行IDの問いと回答を確認した。
+
+最新のAPI検証版は `b7c1d8a8`。ふりかえりの発行修正を残し、テーマは5テーマ各2件で7件が発行前の検査を通過した版を採用候補として保持した。テーマ250件の受入れ、Supabaseの5移行、本番の配備・発行・通知、新規配布は未完。 [実4Bの文と保存再読の記録](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-premium-answer-map-replay-20261121)
