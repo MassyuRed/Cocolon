@@ -255,7 +255,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     style={[embedded ? styles.embeddedRoot : styles.root, { backgroundColor: paper }]}>
     {!hideHeader ? <View style={styles.header}>
       <CocolonBackButton onPress={onBack} accessibilityLabel="わたしマップから戻る" />
-      <Text style={[styles.title, { color: ink }]}>{reportId ? `${monthLabel(month)}のわたしマップ` : '今のわたしマップ'}</Text>
+      <Text style={[styles.title, { color: colors.TITLE_GOLD }]}>{reportId ? `${monthLabel(month)}のわたしマップ` : '今のわたしマップ'}</Text>
       <View style={{ width: 44 }} />
     </View> : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>

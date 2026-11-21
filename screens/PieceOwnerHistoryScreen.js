@@ -354,7 +354,7 @@ export class PieceOwnerHistoryHost extends React.Component {
       this.stamp() === this.exportMessage?.stamp && this.exportMessage?.needsReread === true;
     return h(SafeAreaView, { edges: ['left', 'right'], style: { flex: 1, backgroundColor: colors.BG_SILVER } },
       h(View, { style: { flex: 1, padding: 20, width: '100%', maxWidth: 680, alignSelf: 'center' } },
-        h(Text, { accessibilityRole: 'header', style: { ...ui?.typography?.screenTitle, color: colors.TEXT_ON_LIGHT, marginBottom: 12 } }, '自分のPiece'),
+        h(Text, { accessibilityRole: 'header', style: { ...ui?.typography?.screenTitle, color: colors.TITLE_GOLD, marginBottom: 12 } }, '自分のPiece'),
         h(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingBottom: 20 } },
           !available ? h(Text, { accessibilityRole: 'alert', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, '現在、自分のPieceを確認できません。') : null,
           available && view.message ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT, marginBottom: 12 } }, view.message) : null,

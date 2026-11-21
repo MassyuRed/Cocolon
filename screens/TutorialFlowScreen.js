@@ -478,7 +478,7 @@ function createStyles(COLORS, ui) {
       alignSelf: 'center',
     },
     screenTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
       textAlign: 'left',
       marginBottom: 20,
     },

@@ -5,6 +5,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import SettingsAppSettingsScreen from "../screens/SettingsAppSettingsScreen";
 import SettingsOtherScreen from "../screens/SettingsOtherScreen";
 import AccountScreen from "../screens/AccountScreen";
+import NoticeHistoryScreen from "../screens/NoticeHistoryScreen";
 import CocolonGuideScreen from "../screens/CocolonGuideScreen";
 import SubscriptionSelectScreen from "../screens/SubscriptionSelectScreen";
 import FollowListScreen from "../screens/FollowListScreen";
@@ -26,6 +27,9 @@ export default function SettingsStackNavigator() {
       <SettingsStack.Screen name="SettingsAppSettings" component={SettingsAppSettingsScreen} />
       <SettingsStack.Screen name="SettingsOther" component={SettingsOtherScreen} />
       <SettingsStack.Screen name="Account" component={AccountScreen} />
+      <SettingsStack.Screen name="NoticeHistory">
+        {(props) => <NoticeHistoryScreen {...props} fromSettings />}
+      </SettingsStack.Screen>
       <SettingsStack.Screen name="CocolonGuide" component={CocolonGuideScreen} />
       <SettingsStack.Screen name="SubscriptionSelect" component={SubscriptionSelectScreen} />
       <SettingsStack.Screen name="FollowListScreen" component={FollowListScreen} />

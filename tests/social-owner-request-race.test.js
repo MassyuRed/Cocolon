@@ -33,6 +33,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   });
   const navigationListeners = new Map();
   const navigation = { navigate: (...args) => routes.push(args), goBack: noop, isFocused: () => true,
+    ...options.noticeNavigation,
     addListener(name, listener) {
       if (!navigationListeners.has(name)) navigationListeners.set(name, new Set());
       navigationListeners.get(name).add(listener);
@@ -126,7 +127,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
         isFeatureEnabled: name => name === 'follower_sharing_enabled' && !!control.followerSharingEnabled,
       }) };
       if (target === 'tutorial/tutorialScenarioData.js') return { TUTORIAL_TOTAL_STEPS: 16, TUTORIAL_PIECES: [] };
-      if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors: {}, themeName: 'light' }) };
+      if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors: options.colors ?? {}, themeName: 'light' }) };
       if (target === 'lib/supabase.js') return { supabase: { auth } };
       if (target === 'lib/user.js') return { getCurrentUserId: async () => control.owner };
       if (target === 'lib/monitoring.js') return { captureApiError: noop };
@@ -134,7 +135,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (target === 'components/GlobalFrameLayout.js') return { __esModule: true, FRAME_BORDER_WIDTH: 0,
         default: props => React.createElement('GlobalFrameLayout', props, props.headerBottomSlot, props.children) };
       if (target === 'lib/noticeActionRuntime.js') return { getNoticeButtonActions: () => [{ label: 'リンクを開く' }],
-        openNoticeAction: async (_action, { openInternalRoute }) => openInternalRoute('Account') };
+        openNoticeAction: async (_action, { openInternalRoute }) => openInternalRoute(control.noticeActionRoute || 'Account') };
       if (target === 'components/TutorialOverlay.js') return { __esModule: true, default: 'TutorialOverlay',
         syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
       if (target === 'components/UnreadBadge.js') return { __esModule: true, default: 'UnreadBadge', BottomTabUnreadBadge: 'UnreadBadge', ScreenUnreadBadge: 'UnreadBadge' };
@@ -150,7 +151,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   }
   const Screen = load(file).default;
   let root;
-  const element = () => React.createElement(Screen, { navigation, route: { params: { initialTab, ...options.screenParams } } });
+  const element = () => React.createElement(Screen, { navigation, route: { params: { initialTab, ...options.screenParams } }, ...options.screenProps });
   await act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await act(async () => root.unmount()); });
   const h = { control, calls, events, alerts, routes, root,
@@ -230,6 +231,27 @@ test('follower permission reads cannot reopen an obsolete owner menu', async t =
   await h.resolve(old, { items: [{ follower_user_id: 'C', can_view_pieces: true, can_receive_emotion_notifications: true }] });
   assert.equal(h.root.root.findAllByType('CocolonSwitch').length, 0);
   assert.equal(h.mutations().length, 0);
+});
+
+test('FollowList centers its themed title beside the back button and reloads on focus', async t => {
+  const titleColor = '#8A6D1D';
+  const h = await harness(t, 'screens/FollowListScreen.js', 'following', { colors: { TITLE_GOLD: titleColor } });
+  const title = h.root.root.findAllByType('Text').find(node => node.props.children === 'フォローリスト');
+  assert.ok(title);
+  const [backButton, titleNode, spacer] = title.parent.children;
+  assert.equal(backButton.type, 'CocolonBackButton');
+  assert.equal(backButton.props.accessibilityLabel, '前の画面に戻る');
+  assert.equal(titleNode, title);
+  assert.equal(title.parent.props.style.flexDirection, 'row');
+  assert.equal(title.props.style.textAlign, 'center');
+  assert.equal(title.props.style.color, titleColor);
+  assert.equal(backButton.props.style.width, spacer.props.style.width);
+  assert.equal(h.root.root.findAllByProps({ accessibilityLabel: 'フォローリストを更新する' }).length, 0);
+
+  const count = path => h.calls.filter(call => call.path === path).length;
+  const initialReads = ['/follow/list', '/follow/stats'].map(count);
+  await h.navigationEvent('focus');
+  assert.deepEqual(['/follow/list', '/follow/stats'].map(count), initialReads.map(reads => reads + 1));
 });
 
 for (const [tab, label] of [['following', 'フォロー中'], ['followers', 'フォロワー']]) {
@@ -496,6 +518,25 @@ test('notice read is confirmed only by a same-owner receipt and a valid link sti
   assert.equal(h.find('List').props.data[0].is_read, true);
   assert.deepEqual(h.routes, [['Account', {}]]);
   assert.ok(h.mutations().every(call => call.owner === 'A'));
+});
+
+test('notices reached from Settings return there and can still link into the Home stack', async t => {
+  const parentRoutes = [];
+  let wentBack = false;
+  const h = await harness(t, 'screens/NoticeHistoryScreen.js', undefined, {
+    screenProps: { fromSettings: true },
+    noticeActionRoute: 'InputHistory',
+    noticeNavigation: {
+      goBack: () => { wentBack = true; },
+      getParent: () => ({ navigate: (...args) => parentRoutes.push(args) }),
+    },
+  });
+  h.root.root.findByProps({ accessibilityLabel: '設定に戻る' }).props.onPress();
+  assert.equal(wentBack, true);
+  await act(async () => h.root.root.findByProps({ accessibilityLabel: 'お知らせ詳細を開く' }).props.onPress());
+  await act(async () => h.root.root.findByProps({ accessibilityLabel: 'リンクを開く' }).props.onPress());
+  assert.deepEqual(parentRoutes, [['Input', { screen: 'InputHistory', params: {}, initial: false }]]);
+  assert.deepEqual(h.routes, []);
 });
 
 test('Nexus automatic feed read stops on background and resumes only from a fresh foreground load', async t => {

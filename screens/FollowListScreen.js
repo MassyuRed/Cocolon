@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
 import UnreadBadge from "../components/UnreadBadge";
 import { useTheme } from "../theme/ThemeContext";
@@ -498,6 +499,11 @@ export default function FollowListScreen({ navigation, route }) {
   useEffect(() => {
     loadList();
   }, [loadList]);
+
+  useEffect(() => navigation?.addListener?.("focus", () => {
+    void refreshCounts();
+    void loadList();
+  }), [navigation, refreshCounts, loadList]);
 
   const loadEmotionNotificationSettings = useCallback(async () => {
     if (!isOwnerCurrent(ownerRequest)) return;
@@ -1100,34 +1106,18 @@ export default function FollowListScreen({ navigation, route }) {
 
       {/* ヘッダー */}
       <View style={styles.header}>
-        <TouchableOpacity
-          accessibilityRole="button" accessibilityLabel="前の画面に戻る"
-          onPress={() => navigation?.goBack?.()}
+        <CocolonBackButton
+          navigation={navigation}
+          accessibilityLabel="前の画面に戻る"
           style={styles.backButton}
-          activeOpacity={0.7}
-        >
-          <Ionicons name="chevron-back" size={22} color={colors.TITLE_GOLD} />
-        </TouchableOpacity>
-
-
-
-        <TouchableOpacity
-          onPress={() => {
-            refreshCounts();
-            loadList();
-          }}
-          accessibilityRole="button" accessibilityLabel="フォローリストを更新する"
-          style={styles.refreshButton}
-          activeOpacity={0.7}
-        >
-          <Ionicons name="refresh" size={18} color={colors.TITLE_GOLD} />
-        </TouchableOpacity>
+        />
+        <Text accessibilityRole="header" style={styles.headerTitle}>フォローリスト</Text>
+        <View style={styles.headerSpacer} />
       </View>
 
       {/* リスト */}
       <FlatList
           ListHeaderComponent={<View>
-      <Text style={styles.headerTitle}>フォローリスト</Text>
       {/* タブ */}
       <View style={styles.tabBar}>
         {visibleTabs.map((tabItem) => {
@@ -1221,34 +1211,26 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      gap: 8,
       paddingHorizontal: 20,
-      paddingTop: 8,
-      paddingBottom: 8,
+      paddingTop: 16,
+      marginBottom: 16,
       width: "100%",
       maxWidth: 680,
       alignSelf: "center",
     },
     backButton: {
-      padding: 10,
       width: 44,
-      minHeight: 44,
-      alignItems: "center",
-      justifyContent: "center",
-      borderRadius: 22,
     },
-    refreshButton: {
-      padding: 10,
+    headerSpacer: {
       width: 44,
-      alignItems: "center",
-      minHeight: 44,
-      justifyContent: "center",
-      borderRadius: 22,
     },
     headerTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
+      flex: 1,
       flexShrink: 1,
       minWidth: 0,
-      marginBottom: 16,
+      textAlign: "center",
     },
 
     tabBar: {

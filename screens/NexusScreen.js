@@ -413,7 +413,7 @@ export default function NexusScreen({ navigation }) {
     } catch (e) {
       if (!isFresh()) return;
       console.warn("NexusScreen: loadRanking failed", e);
-      setRankingState({ loading: false, items: [], error: "全体感情を取得できませんでした。更新から再試行できます。" });
+      setRankingState({ loading: false, items: [], error: "全体感情を取得できませんでした。画面を開き直すと再試行できます。" });
     }
   }, [isTutorialMode, ownerRequest, isOwnerCurrent]);
 
@@ -696,6 +696,8 @@ export default function NexusScreen({ navigation }) {
     if (!navigation?.addListener) return undefined;
     const unsubscribe = navigation.addListener("focus", () => {
       void refreshNexusUnreadState();
+      void loadRanking();
+      void loadOwnerOptions();
       if (activeTab === "piece") void loadPieces();
       if (activeTab === "emotion_log") void loadEmotionLog();
       if (activeTab === "history") void loadHistory();
@@ -713,7 +715,8 @@ export default function NexusScreen({ navigation }) {
       unsubscribe?.();
       unsubscribeBlur?.();
     };
-  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadPieces, loadEmotionLog, loadHistory]);
+  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadRanking, loadOwnerOptions,
+      loadPieces, loadEmotionLog, loadHistory]);
 
   useEffect(() => {
     if (activeTab !== "emotion_log") return undefined;
@@ -748,44 +751,6 @@ export default function NexusScreen({ navigation }) {
 
     Alert.alert("ガイド", "ガイド画面を開けませんでした。");
   }, [navigation]);
-
-  const handleOpenFollowList = useCallback(() => {
-    if (isTutorialMode) return;
-
-    const selfUserId = String(viewerUserId || "").trim();
-    if (!selfUserId) {
-      Alert.alert("フォローリストを開けません", "ログイン情報を取得できませんでした。");
-      return;
-    }
-
-    const params = {
-      viewedUserId: selfUserId,
-      targetUserId: selfUserId,
-      initialTab: "following",
-    };
-
-    try {
-      if (navigation?.navigate) {
-        navigation.navigate("FollowListScreen", params);
-        return;
-      }
-    } catch (e) {
-      console.warn("NexusScreen: navigate FollowListScreen failed", e);
-    }
-
-    try {
-      const parent =
-        typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-      if (parent && typeof parent.navigate === "function") {
-        parent.navigate("FollowListScreen", params);
-        return;
-      }
-    } catch (e) {
-      console.warn("NexusScreen: parent navigate FollowListScreen failed", e);
-    }
-
-    Alert.alert("フォローリストを開けません", "フォローリスト画面を開けませんでした。");
-  }, [isTutorialMode, navigation, viewerUserId]);
 
   const handleOpenOwner = useCallback(
     (userId) => {
@@ -1314,21 +1279,9 @@ export default function NexusScreen({ navigation }) {
           styles={styles}
           colors={colors}
           ui={ui}
-          isTutorialMode={isTutorialMode}
-          viewerUserId={viewerUserId}
           canReadOwnPieces={canReadOwnPieces}
           handleOpenOwnerHistory={handleOpenOwnerHistory}
-          handleOpenFollowList={handleOpenFollowList}
-          onRefresh={() => {
-            void refreshNexusUnreadState();
-            void loadRanking();
-            void loadOwnerOptions();
-            if (activeTab === "piece") void loadPieces();
-            if (activeTab === "emotion_log") void loadEmotionLog();
-            if (activeTab === "history") void loadHistory();
-          }}
         />
-
 
         <NexusTodayEmotionSummary
           visible={!isTutorialMode}
@@ -1404,30 +1357,6 @@ function createStyles(COLORS, ui) {
       alignSelf: 'center',
     },
         guideFooter: { marginTop: 16 },
-        panelHeaderActions: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      flexWrap: "wrap",
-      gap: 8,
-      marginBottom: 8,
-    },
-        refreshButton: {
-          width: 44,
-          height: 44,
-          borderRadius: 22,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: COLORS.FIELD_BG,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-        },
-        followListButton: {
-      marginRight: 0,
-    },
-        headerButtonDisabled: {
-      backgroundColor: COLORS.FIELD_BG,
-    },
         ownerHistoryButton: {
       minHeight: 48,
       paddingHorizontal: 14,

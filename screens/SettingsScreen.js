@@ -1,9 +1,14 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useAuth } from "../AuthContext";
+import { useTutorial } from "../TutorialContext";
 import CocolonScreenIntro from "../components/CocolonScreenIntro";
 import CocolonPressable from "../components/CocolonPressable";
+import { ScreenUnreadBadge } from "../components/UnreadBadge";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
+import { getNoticesCurrent } from "../lib/noticeApi";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { AnalysisMenuScroll, useAnalysisMenuStyles } from "./AnalysisMenuCommon";
 import SettingsAppSettingsScreen from "./SettingsAppSettingsScreen";
@@ -62,12 +67,14 @@ function SettingsMenuRow({ item, styles, colors, first, last }) {
       accessibilityRole="button"
       accessibilityLabel={item.accessibilityLabel || item.label}
       accessibilityState={{ disabled: !!item.disabled }}
+      accessibilityValue={item.unread ? { text: "未読あり" } : undefined}
       style={[styles.row, first && styles.first, last && styles.last, item.disabled && styles.disabled]}
     >
       <View style={styles.icon} accessible={false} importantForAccessibility="no-hide-descendants">
         <Ionicons name={item.icon} size={18} color={colors.ON_SURFACE_TONAL} />
       </View>
       <Text style={styles.label}>{item.label}</Text>
+      {item.unread ? <ScreenUnreadBadge /> : null}
       <Ionicons name={item.external ? "open-outline" : "chevron-forward"} size={16} color={colors.TEXT_SUBTLE} />
     </CocolonPressable>
   );
@@ -76,6 +83,27 @@ function SettingsMenuRow({ item, styles, colors, first, last }) {
 export function SettingsHomeContent({ navigation, subscription }) {
   const { colors, ui } = useAnalysisMenuStyles();
   const styles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
+  const { user, authOwnerGeneration } = useAuth();
+  const { isTutorialMode } = useTutorial();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
+  const [unreadNoticeScope, setUnreadNoticeScope] = useState(null);
+
+  useFocusEffect(useCallback(() => {
+    if (isTutorialMode || !isOwnerCurrent(ownerRequest)) return;
+    let focused = true;
+    getNoticesCurrent({}, ownerRequest.options).then((notices) => {
+      if (!focused || !isOwnerCurrent(ownerRequest)) return;
+      const hasUnread = notices?.feature_enabled !== false && Number(notices?.unread_count) > 0;
+      setUnreadNoticeScope(hasUnread ? ownerRequest : null);
+    }).catch((error) => {
+      if (focused && isOwnerCurrent(ownerRequest)) {
+        console.warn("SettingsScreen: notice status load failed", error);
+      }
+    });
+    return () => { focused = false; };
+  }, [isTutorialMode, isOwnerCurrent, ownerRequest]));
+
+  const hasUnreadNotice = !isTutorialMode && unreadNoticeScope === ownerRequest;
   const openPlans = () => { if (!subscription.actionBusy) navigation.navigate("SubscriptionSelect"); };
   const rows = [
     { label: "プランを選ぶ", icon: "diamond-outline", onPress: openPlans, disabled: subscription.actionBusy },
@@ -99,8 +127,12 @@ export function SettingsHomeContent({ navigation, subscription }) {
     />
     <View style={[styles.group, styles.rows]}>
       <SettingsMenuRow
-        item={{ label: "アカウント", accessibilityLabel: "アカウントを開く", icon: "person-outline", onPress: () => navigation.navigate("Account") }}
+        item={{ label: "お知らせ", accessibilityLabel: "お知らせを開く", icon: "notifications-outline", unread: hasUnreadNotice, onPress: () => navigation.navigate("NoticeHistory") }}
         styles={styles} colors={colors} first
+      />
+      <SettingsMenuRow
+        item={{ label: "アカウント", accessibilityLabel: "アカウントを開く", icon: "person-outline", onPress: () => navigation.navigate("Account") }}
+        styles={styles} colors={colors}
       />
       <SettingsMenuRow
         item={{ label: "アプリの使い方", icon: "book-outline", onPress: () => navigation.navigate("CocolonGuide") }}

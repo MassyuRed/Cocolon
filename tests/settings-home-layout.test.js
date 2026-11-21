@@ -35,6 +35,9 @@ function assertIntroText(root, expected) {
   const intro = textNodes.slice(0, 3);
   assert.deepEqual(intro.map(node => node.props.children), expected);
   assert.deepEqual(intro.map(node => node.props.accessibilityRole), [undefined, 'header', undefined]);
+  assert.equal(intro[1].props.style.at(-1).color, colors.TITLE_GOLD);
+  assert.equal(intro[0].props.style.at(-1).color, colors.TEXT_SUBTLE);
+  assert.equal(intro[2].props.style.at(-1).color, colors.TEXT_SUBTLE);
   assert.ok(intro.every(node => !node.props.numberOfLines));
 }
 test('Home shows the Japanese weekday and refreshes the date at local midnight and on app return', t => {
@@ -74,13 +77,12 @@ test('Home shows the Japanese weekday and refreshes the date at local midnight a
   assertIntroText(root, ['11月10日 火曜日', ...textBelowDate]);
 });
 
-test('the Piece heading shows three intro lines without hiding its existing actions', t => {
+test('the Piece heading comes before the owner history without header shortcuts', t => {
   const actions = [];
   const native = { Text: 'Text', View: 'View', StyleSheet: { create: value => value } };
   const dependencies = name => {
     if (name === 'react') return React;
     if (name === 'react-native') return native;
-    if (name.endsWith('/Ionicons')) return 'Icon';
     if (name.endsWith('/CocolonPressable')) return 'Pressable';
     if (name.endsWith('/CocolonScreenIntro')) return loadSource('components/CocolonScreenIntro.js', dependencies);
     if (name.endsWith('/PieceScreenIntro')) return loadSource('screens/piece/PieceScreenIntro.js', dependencies);
@@ -90,24 +92,26 @@ test('the Piece heading shows three intro lines without hiding its existing acti
   let root;
   Renderer.act(() => {
     root = Renderer.create(React.createElement(NexusHeader, {
-      styles: {}, colors, ui, canReadOwnPieces: true, viewerUserId: 'viewer', titleRef: React.createRef(),
-      onRefresh: () => actions.push('refresh'),
-      handleOpenFollowList: () => actions.push('follow'),
+      styles: {}, colors, ui, canReadOwnPieces: true, titleRef: React.createRef(),
       handleOpenOwnerHistory: () => actions.push('history'),
     }));
   });
   t.after(() => Renderer.act(() => root.unmount()));
   assertIntroText(root, ['ひとりひとりの記録から', 'ことばを、分け合う。', '言葉や気持ちにふれて、共鳴を届ける。']);
-  for (const action of ['自分のフォローリストを開く', 'ピースを再読み込みする', '自分のピースを開く']) {
-    const button = root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === action);
-    assert.ok(button, action);
-    button.props.onPress();
-  }
-  assert.deepEqual(actions, ['follow', 'refresh', 'history']);
+  const buttons = root.root.findAllByType('Pressable');
+  assert.deepEqual(buttons.map(button => button.props.accessibilityLabel), ['自分のピースを開く']);
+  assert.equal(root.toJSON().children[0].children[1].children[0], 'ことばを、分け合う。');
+  buttons[0].props.onPress();
+  assert.deepEqual(actions, ['history']);
 });
 
-function mount(t, changes = {}) {
+function mount(t, changes = {}, initialUnreadCount = 0) {
   const navigated = [], actions = [];
+  let unreadCount = initialUnreadCount;
+  let focusGeneration = 0;
+  const requests = [];
+  const noticeScope = { options: { expectedUserId: 'owner' } };
+  const isCurrent = (candidate) => candidate === noticeScope;
   const subscription = { loading:false, tier:'free', currentLabel:'Freeプラン', currentPriceLabel:'無料', actionBusy:false,
     restoreLoading:false, restoreEnabled:true, manageEnabled:false, links:{ terms_url:'https://test/terms', privacy_url:'https://test/privacy', support_url:'https://test/support' },
     onRestorePurchases:()=>actions.push('restore'), onOpenManageSubscription:()=>actions.push('manage'), openExternalPage:(url)=>actions.push(url), ...changes };
@@ -115,7 +119,17 @@ function mount(t, changes = {}) {
   const dependencies = name => {
     if(name==='react') return React;
     if(name==='react-native') return native;
-    if(name==='@react-navigation/native') return {};
+    if(name==='@react-navigation/native') return {
+      useFocusEffect: effect => React.useEffect(effect, [effect, focusGeneration]),
+    };
+    if(name==='../AuthContext') return {useAuth:()=>({user:{id:'owner'},authOwnerGeneration:0})};
+    if(name==='../TutorialContext') return {useTutorial:()=>({isTutorialMode:false})};
+    if(name==='../hooks/useOwnerRequestScope') return {useOwnerRequestScope:()=>({scope:noticeScope,isCurrent})};
+    if(name==='../lib/noticeApi') return {getNoticesCurrent:async (_params, options) => {
+      requests.push(options.expectedUserId);
+      return { feature_enabled: true, unread_count: unreadCount };
+    }};
+    if(name==='../components/UnreadBadge') return {ScreenUnreadBadge:'UnreadBadge'};
     if(name.includes('Ionicons')) return 'Icon';
     if(name.includes('CocolonPressable')) return {__esModule:true,default:'Pressable'};
     if(name.includes('applyTypographyTokens')) return {applyTypographyTokens:x=>x};
@@ -124,9 +138,16 @@ function mount(t, changes = {}) {
     return {__esModule:true,default:name};
   };
   const { SettingsHomeContent } = loadSource('screens/SettingsScreen.js', dependencies);
-  let root; Renderer.act(()=>{root=Renderer.create(React.createElement(SettingsHomeContent,{subscription,navigation:{navigate:r=>navigated.push(r)}}));});
+  const navigation = { navigate: route => navigated.push(route) };
+  const render = () => React.createElement(SettingsHomeContent, { subscription, navigation });
+  let root; Renderer.act(()=>{root=Renderer.create(render());});
   t.after(()=>Renderer.act(()=>root.unmount()));
-  return {root,actions,navigated, subscription, button:label=>root.root.findAllByType('Pressable').find(x=>x.props.accessibilityLabel===label)};
+  return {root,actions,navigated,subscription,requests,button:label=>root.root.findAllByType('Pressable').find(x=>x.props.accessibilityLabel===label),
+    async refocus(nextUnreadCount) {
+      unreadCount = nextUnreadCount;
+      focusGeneration += 1;
+      await Renderer.act(async () => root.update(render()));
+    }};
 }
 test('settings shows live plan and direct preview groups with existing embedded controls', t=>{
   const h=mount(t,{tier:'plus',currentLabel:'Plusプラン',currentPriceLabel:'月額680円',manageEnabled:true});
@@ -140,27 +161,37 @@ test('settings shows live plan and direct preview groups with existing embedded 
   assert.deepEqual(h.actions,['restore','manage']);
   h.button('プランを選ぶ').props.onPress(); assert.deepEqual(h.navigated,['SubscriptionSelect']);
 });
-test('settings restores the preview intro and keeps Account in the settings body', t=>{
-  const h = mount(t);
+test('settings opens notices from the first row above the existing account access', async t=>{
+  const h = mount(t, {}, 2);
+  await Renderer.act(async () => {});
   assertIntroText(h.root, ['YOUR SPACE', '設定', 'あなたに合う使い方で。']);
   const labels = h.root.root.findAllByType('Text').map(node => node.props.children);
-  assert.ok(labels.indexOf('あなたに合う使い方で。') < labels.indexOf('アカウント'));
+  assert.ok(labels.indexOf('あなたに合う使い方で。') < labels.indexOf('お知らせ'));
+  assert.ok(labels.indexOf('お知らせ') < labels.indexOf('アカウント'));
   assert.ok(labels.indexOf('アカウント') < labels.indexOf('アプリの使い方'));
   assert.ok(labels.indexOf('アプリの使い方') < labels.indexOf('アプリ設定'));
   assert.ok(labels.indexOf('サブスク加入状況') < labels.indexOf('現在のプラン'));
-  for (const label of ['アカウントを開く', '現在のプランと加入状況を開く']) {
+  for (const label of ['お知らせを開く', 'アカウントを開く', '現在のプランと加入状況を開く']) {
     const surface = h.button(label).props.style[0];
     assert.equal(surface.backgroundColor, colors.FIELD_BG);
     assert.equal(surface.borderColor, colors.CARD_BORDER);
   }
+  assert.deepEqual(h.button('お知らせを開く').props.accessibilityValue, { text: '未読あり' });
+  assert.equal(h.root.root.findAllByType('UnreadBadge').length, 1);
+  h.button('お知らせを開く').props.onPress();
   h.button('アカウントを開く').props.onPress();
   h.button('アプリの使い方').props.onPress();
-  assert.deepEqual(h.navigated, ['Account', 'CocolonGuide']);
+  assert.deepEqual(h.navigated, ['NoticeHistory', 'Account', 'CocolonGuide']);
+  await h.refocus(0);
+  assert.deepEqual(h.requests, ['owner', 'owner']);
+  assert.equal(h.root.root.findAllByType('UnreadBadge').length, 0);
 
   const read = file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
   assert.doesNotMatch(read('navigation/MainTabs.js'), /settingsAccountAvatar|headerRightSlot/);
   assert.doesNotMatch(read('components/GlobalFrameLayout.js'), /headerRightSlot/);
   assert.match(read('navigation/SettingsStackNavigator.js'), /contentStyle: \{ backgroundColor: colors\.BG_SILVER \}/);
+  assert.match(read('navigation/SettingsStackNavigator.js'), /<SettingsStack\.Screen name="NoticeHistory">\s*\{\(props\) => <NoticeHistoryScreen \{\.\.\.props\} fromSettings \/>\}/);
+  assert.match(read('navigation/InputStackNavigator.js'), /<InputStack\.Screen name="NoticeHistory" component=\{NoticeHistoryScreen\}/);
 });
 test('settings prevents plan navigation during restore and keeps Free management disabled',t=>{
   const h=mount(t,{actionBusy:true});

@@ -94,7 +94,6 @@ export function useHomeState({
   const [todayQuestionBundle, setTodayQuestionBundle] = useState(null);
   const [todayQuestionLoading, setTodayQuestionLoading] = useState(false);
   const [noticeFeatureEnabled, setNoticeFeatureEnabled] = useState(true);
-  const [noticeUnreadCount, setNoticeUnreadCount] = useState(0);
   const [noticePopup, setNoticePopup] = useState(null);
   const [noticeLoading, setNoticeLoading] = useState(false);
   const [pieceQuota, setPieceQuota] = useState(null);
@@ -117,7 +116,6 @@ export function useHomeState({
 
   const clearNoticeUi = useCallback(() => {
     setNoticeFeatureEnabled(true);
-    setNoticeUnreadCount(0);
     setNoticePopup(null);
     setNoticeLoading(false);
   }, []);
@@ -160,7 +158,6 @@ export function useHomeState({
         setPieceQuota(null);
       } else {
         setNoticeFeatureEnabled(noticesCurrent?.feature_enabled !== false);
-        setNoticeUnreadCount(Math.max(0, Number(noticesCurrent?.unread_count) || 0));
         setNoticePopup(
           noticesCurrent?.popup_notice && typeof noticesCurrent.popup_notice === "object"
             ? noticesCurrent.popup_notice
@@ -489,8 +486,6 @@ export function useHomeState({
       homeWeekCount,
       homeStreakDays,
       noticeFeatureEnabled,
-      noticeUnreadCount,
-      setNoticeUnreadCount,
       noticePopup,
       setNoticePopup,
       noticeLoading,
@@ -529,13 +524,11 @@ export function useHomeState({
       noticeFeatureEnabled,
       noticeLoading,
       noticePopup,
-      noticeUnreadCount,
       pieceQuota,
       registerInputInteraction,
       rememberDismissedNotice,
       rememberDismissedTodayQuestionDay,
       setNoticePopup,
-      setNoticeUnreadCount,
       setPieceQuota,
       startupModalVisible,
       startupQueuePreparing,

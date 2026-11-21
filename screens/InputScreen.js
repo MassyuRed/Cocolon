@@ -44,7 +44,6 @@ import TutorialOverlay, {
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
 import TodayQuestionCard from "../components/TodayQuestionCard";
-import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import {
   getTutorialEmlisReplyText,
   TUTORIAL_EMLIS_REPLY,
@@ -371,12 +370,10 @@ const homeState = useHomeState({
     noticeFeatureEnabled,
     noticeLoading,
     noticePopup,
-    noticeUnreadCount,
     registerInputInteraction,
     rememberDismissedNotice,
     rememberDismissedTodayQuestionDay,
     setNoticePopup,
-    setNoticeUnreadCount,
     startupModalVisible,
     startupQueuePreparing,
     todayQuestionBundle,
@@ -398,7 +395,6 @@ const {
   advanceStartupPopupQueue,
   rememberDismissedNotice,
   rememberDismissedTodayQuestionDay,
-  setNoticeUnreadCount,
   setNoticePopup,
   showToast,
 });
@@ -1231,18 +1227,6 @@ ${String(error?.message || error)}`
     markCurrentNoticeRead,
   ]);
 
-  const handlePressNotifications = useCallback(() => {
-    closeStartupPopupWindow();
-    try {
-      navigation?.navigate?.("NoticeHistory", {
-        open_notice_id: null,
-        open_notice_at: Date.now(),
-      });
-    } catch {
-      // noop
-    }
-  }, [closeStartupPopupWindow, navigation]);
-
   const handlePressGuide = () => {
     closeStartupPopupWindow();
     if (navigation && navigation.navigate) {
@@ -1252,17 +1236,6 @@ ${String(error?.message || error)}`
     }
   };
 
-  const handlePressAccount = () => {
-    closeStartupPopupWindow();
-    if (navigation && navigation.navigate) {
-      navigation.navigate("Account");
-    } else {
-      Alert.alert(
-        "アカウント",
-        "アカウント画面へのナビゲーションがまだ設定されていません。"
-      );
-    }
-  };
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.safeArea}>
       <StatusBar
@@ -1290,45 +1263,6 @@ ${String(error?.message || error)}`
                 e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
             }}
           >
-              <View style={styles.headerRight}>
-                {!shouldHideInputHistoryForTutorial ? (
-                  <CocolonPressable
-                    style={styles.historyIconButton}
-                    onPress={handleOpenEmotionHistory}
-                    accessibilityLabel="入力履歴を開く"
-                  >
-                    <Ionicons name="time-outline" size={20} color={colors.TEXT_ON_LIGHT} />
-                  </CocolonPressable>
-                ) : null}
-                <CocolonPressable
-                  style={styles.accountIconButton}
-                  onPress={handlePressAccount}
-                  accessibilityLabel="アカウントページを開く"
-                >
-                  <Ionicons
-                    name="person-circle-outline"
-                    size={20}
-                    color={colors.TEXT_ON_LIGHT}
-                  />
-                </CocolonPressable>
-                <CocolonPressable
-                  style={styles.noticePill}
-                  onPress={handlePressNotifications}
-                  accessibilityLabel="お知らせを開く"
-                >
-                  <Ionicons
-                    name="notifications-outline"
-                    size={20}
-                    color={colors.TEXT_ON_LIGHT}
-                  />
-                  {noticeFeatureEnabled && noticeUnreadCount > 0 ? (
-                    <ScreenUnreadBadge
-                      visible
-                      style={styles.noticeBadgeDot}
-                    />
-                  ) : null}
-                </CocolonPressable>
-              </View>
               <HomeScreenIntro colors={colors} ui={ui} />
 
               <View style={styles.homeOverviewBlock}>
@@ -1465,7 +1399,16 @@ ${String(error?.message || error)}`
                 </View>
               ) : null}
 
-              <CocolonButton variant="secondary" style={styles.guideFooter} title="ホームについて" onPress={handlePressGuide} />
+              {!shouldHideInputHistoryForTutorial ? (
+                <CocolonButton
+                  variant="secondary"
+                  style={styles.footerButton}
+                  title="入力履歴"
+                  accessibilityLabel="入力履歴を開く"
+                  onPress={handleOpenEmotionHistory}
+                />
+              ) : null}
+              <CocolonButton variant="secondary" style={styles.footerButton} title="ホームについて" onPress={handlePressGuide} />
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -1610,23 +1553,7 @@ function createStyles(COLORS, ui) {
       shadowOffset: {width:0,height:2},
       elevation: 1,
     },
-    guideFooter: { marginTop: 16 },
-    headerRight: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "flex-end",
-      alignItems: "center",
-      gap: 6,
-      marginBottom: 8,
-    },
-    historyIconButton: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-    },
+    footerButton: { marginTop: 16 },
     homeQuestionButton: {
       width: "100%",
       minHeight: 68,
@@ -1700,30 +1627,6 @@ function createStyles(COLORS, ui) {
       fontSize: 12,
       fontWeight: "800",
       color: COLORS.ACCENT_TEXT,
-    },
-
-    accountIconButton: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-    },
-    noticePill: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      position: "relative",
-      overflow: "visible",
-    },
-    noticeBadgeDot: {
-      position: "absolute",
-      top: 8,
-      right: 8,
     },
 
     /** 今日の観測（常設） */

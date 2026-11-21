@@ -236,18 +236,21 @@ test('input harness uses the actual nine categories, five emotions and three str
   assert.deepEqual(Array.from(inputOptions.VALID_STRENGTHS), ['weak', 'medium', 'strong']);
 });
 
-test('Home opens the home chapter from the last control in its scroll', () => {
+test('Home starts with its heading and opens input history below the input actions', () => {
   const h = harness();
   const routes = [];
   h.navigation.navigate = (...args) => routes.push(clone(args));
   const scroll = h.find('ScrollView');
   const guide = scroll.children.at(-1);
+  const history = scroll.children.at(-2);
+  assert.equal(scroll.children[0].type, 'HomeScreenIntro');
+  assert.equal(history.props.title, '入力履歴');
   assert.equal(guide.props.title, 'ホームについて');
-  assert.equal(scroll.children[1].type, 'HomeScreenIntro');
-  assert.deepEqual(scroll.children[0].children.filter(node => node?.props?.accessibilityLabel)
-    .map(node => node.props.accessibilityLabel), ['入力履歴を開く', 'アカウントページを開く', 'お知らせを開く']);
+  const actionArea = scroll.children.findIndex(node => node?.type === 'InputActionArea');
+  assert.ok(actionArea > 0 && actionArea < scroll.children.length - 2);
+  history.props.onPress();
   guide.props.onPress();
-  assert.deepEqual(routes, [['CocolonGuide', { screenId: 'home' }]]);
+  assert.deepEqual(routes, [['InputHistory'], ['CocolonGuide', { screenId: 'home' }]]);
   h.dispose();
 });
 

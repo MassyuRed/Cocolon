@@ -6,7 +6,7 @@ export default function CocolonScreenIntro({ eyebrow, title, description, colors
   return (
     <View ref={titleRef} collapsable={false} style={styles.intro}>
       <Text style={supportingText}>{eyebrow}</Text>
-      <Text accessibilityRole="header" style={[ui.typography.screenTitle, { color: colors.TEXT_ON_LIGHT }]}>
+      <Text accessibilityRole="header" style={[ui.typography.screenTitle, { color: colors.TITLE_GOLD }]}>
         {title}
       </Text>
       <Text style={supportingText}>{description}</Text>

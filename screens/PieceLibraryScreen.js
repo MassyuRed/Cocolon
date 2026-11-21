@@ -2639,7 +2639,7 @@ function createStyles(COLORS, ui) {
       columnGap: 12,
     },
     panelTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
       letterSpacing: 0,
       flexShrink: 1,
       minWidth: 0,

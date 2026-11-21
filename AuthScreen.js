@@ -440,7 +440,7 @@ function createStyles(COLORS, ui) {
       fontFamily: "CormorantGaramond-Bold", fontSize: 38, textAlign: "center",
       marginBottom: 8, color: COLORS.BRAND_GOLD,
     },
-    subtitle: { ...ui.typography.screenTitle, textAlign: "center", marginBottom: 24, color: COLORS.TEXT_ON_LIGHT },
+    subtitle: { ...ui.typography.screenTitle, textAlign: "center", marginBottom: 24, color: COLORS.TITLE_GOLD },
     helpText: { ...ui.typography.description, marginBottom: 16, color: COLORS.TEXT_SUBTLE },
     fieldLabel: { ...ui.typography.description, color: COLORS.TEXT_ON_LIGHT, marginBottom: 6 },
     input: {

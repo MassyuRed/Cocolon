@@ -32,6 +32,7 @@ import {
 } from "../lib/noticeApi";
 
 const HISTORY_PAGE_LIMIT = 50;
+const INPUT_STACK_ROUTES = new Set(["Input", "InputHistory", "TodayQuestionHistory", "TutorialIntro"]);
 
 function formatNoticeDateLabel(value) {
   const raw = String(value || "").trim();
@@ -65,7 +66,7 @@ function formatNoticeDateTimeLabel(value) {
   }
 }
 
-export default function NoticeHistoryScreen({ navigation, route }) {
+export default function NoticeHistoryScreen({ navigation, route, fromSettings = false }) {
   const { user, authOwnerGeneration } = useAuth();
   const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { colors, themeName } = useTheme();
@@ -234,6 +235,12 @@ export default function NoticeHistoryScreen({ navigation, route }) {
     if (!isOwnerCurrent(ownerRequest)) return false;
     const safeRouteName = String(routeName || "").trim();
     if (!safeRouteName) return false;
+    if (fromSettings && INPUT_STACK_ROUTES.has(safeRouteName)) {
+      const parent = navigation?.getParent?.();
+      if (!parent?.navigate) return false;
+      parent.navigate("Input", { screen: safeRouteName, params, initial: false });
+      return true;
+    }
     try {
       navigation?.navigate?.(safeRouteName, params);
       return true;
@@ -248,7 +255,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       // noop
     }
     return false;
-  }, [navigation, ownerRequest, isOwnerCurrent]);
+  }, [fromSettings, navigation, ownerRequest, isOwnerCurrent]);
 
   const handlePressAction = useCallback(async (item, action) => {
     if (!action || !isOwnerCurrent(ownerRequest)) return;
@@ -357,7 +364,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
         <CocolonBackButton
           onPress={() => navigation?.goBack?.()}
           style={styles.backButton}
-          accessibilityLabel="Homeに戻る"
+          accessibilityLabel={fromSettings ? "設定に戻る" : "ホームに戻る"}
         />
         <Text style={styles.headerTitle}>お知らせ</Text>
         <View style={styles.headerSpacer} />
@@ -372,7 +379,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
         </View>
       ) : null}
     </View>
-  ), [navigation, styles, unreadCount]);
+  ), [fromSettings, navigation, styles, unreadCount]);
 
   const empty = useMemo(() => {
     if (loading) {
@@ -491,7 +498,7 @@ function createStyles(COLORS, ui) {
       flexShrink: 0,
     },
     headerTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
       flex: 1,
       flexShrink: 1,
       minWidth: 0,

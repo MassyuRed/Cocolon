@@ -2249,7 +2249,7 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 | Cocolon/navigation/PieceStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
 | Cocolon/navigation/RankingStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
 | Cocolon/navigation/RootNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
-| Cocolon/navigation/SettingsStackNavigator.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
+| Cocolon/navigation/SettingsStackNavigator.js | 設定、お知らせ履歴、アカウント、ガイド、購読、フォローリストの遷移先を登録する。ホームから直接開く既存のお知らせポップアップにはInputStackを使う |
 | Cocolon/navigation/linkingRuntime.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
 | Cocolon/navigation/navigationConstants.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |
 | Cocolon/navigation/navigationRef.js | RN巨大画面分割または本番運用監視のcurrent追加path。entry shell / section / hook / model / navigation / runtime / monitoringとして読む |

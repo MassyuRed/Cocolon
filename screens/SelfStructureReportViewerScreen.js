@@ -403,7 +403,7 @@ function createStyles(COLORS, ui) {
   headerTitle: {
       flex: 1,
       marginHorizontal: 8,
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
       textAlign: "center",
     },
 

@@ -13,7 +13,6 @@ export function useHomeActions({
   advanceStartupPopupQueue,
   rememberDismissedNotice,
   rememberDismissedTodayQuestionDay,
-  setNoticeUnreadCount,
   setNoticePopup,
   showToast,
 }) {
@@ -34,9 +33,7 @@ export function useHomeActions({
     const noticeId = String(noticePopup?.notice_id || "").trim();
     if (!noticeId) return;
     try {
-      const res = await markNoticesRead({ notice_ids: [noticeId] });
-      const nextUnreadCount = Math.max(0, Number(res?.unread_count) || 0);
-      setNoticeUnreadCount(nextUnreadCount);
+      await markNoticesRead({ notice_ids: [noticeId] });
       setNoticePopup((prev) => {
         if (String(prev?.notice_id || "").trim() !== noticeId) return prev;
         return {
@@ -48,7 +45,7 @@ export function useHomeActions({
     } catch (e) {
       console.warn("InputScreen: markNoticesRead failed", e);
     }
-  }, [noticePopup?.notice_id, setNoticePopup, setNoticeUnreadCount]);
+  }, [noticePopup?.notice_id, setNoticePopup]);
 
   const handleSubmitTodayQuestion = useCallback(async (payload) => {
     if (!todayQuestionBundle?.question?.question_id) return;
