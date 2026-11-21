@@ -271,6 +271,7 @@ export default function MainTabs() {
           getFeatureUnread("EmotionLog", "feed")
         );
       }
+      if (routeName === "Analysis") return !!getFeatureUnread("Analysis", "selfStructure");
       return !!getScopeUnread(routeName);
     },
     [getFeatureUnread, getScopeUnread, isTutorialMode]
@@ -334,9 +335,9 @@ export default function MainTabs() {
 
   useEffect(() => {
     analysisUnreadStateRef.current = {
-      daily: !!getFeatureUnread("Analysis", "daily"),
-      weekly: !!getFeatureUnread("Analysis", "weekly"),
-      monthly: !!getFeatureUnread("Analysis", "monthly"),
+      daily: false,
+      weekly: false,
+      monthly: false,
       selfStructure: !!getFeatureUnread("Analysis", "selfStructure"),
     };
   }, [getFeatureUnread]);
@@ -407,9 +408,9 @@ export default function MainTabs() {
     if (!unreadByType) return null;
 
     return {
-      daily: !!unreadByType.daily,
-      weekly: !!unreadByType.weekly,
-      monthly: !!unreadByType.monthly,
+      daily: false,
+      weekly: false,
+      monthly: false,
       selfStructure: !!unreadByType.selfStructure,
     };
   }, []);
@@ -577,21 +578,6 @@ export default function MainTabs() {
     const isStale = () => !isOwnerCurrent(ownerRequest) || refreshSeq !== analysisUnreadRefreshSeqRef.current;
     const canResolveSelfStructureUnread = !subscriptionLoading;
 
-    const applyBaseUnread = (unread) => {
-      if (isStale()) return;
-      applyAnalysisUnreadPatch(
-        {
-          daily: !!unread?.daily,
-          weekly: !!unread?.weekly,
-          monthly: !!unread?.monthly,
-        },
-        {
-          preserveTruthyKeys,
-          keys: ["daily", "weekly", "monthly"],
-        }
-      );
-    };
-
     const applySelfStructureUnread = (value) => {
       if (isStale()) return;
       applyAnalysisUnreadPatch(
@@ -602,8 +588,6 @@ export default function MainTabs() {
         }
       );
     };
-
-    const baseQuery = new URLSearchParams({ limit: "1", include_self_structure: "false" }).toString();
 
     const selfStructurePromise = !canResolveSelfStructureUnread
       ? Promise.resolve(undefined)
@@ -619,15 +603,6 @@ export default function MainTabs() {
           }),
         ]).then(([latestUnread, historyUnread]) => !!latestUnread || !!historyUnread)
       : Promise.resolve(false);
-
-    try {
-      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${baseQuery}`, ownerRequest.options);
-      const unread = json?.unread_by_type || {};
-      applyBaseUnread(unread);
-    } catch (e) {
-      if (isStale()) return;
-      console.warn("MainTabs: failed to refresh Analysis unread badges", e);
-    }
 
     const selfStructureUnread = await selfStructurePromise;
     if (selfStructureUnread === undefined) return;

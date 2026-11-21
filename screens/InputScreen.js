@@ -23,7 +23,6 @@ import { useEmlisQuestionPreference } from "./input/useEmlisQuestionPreference";
 import { useAppRuntime } from "../AppRuntimeContext";
 import EmlisThreadModal from "./input/EmlisThreadModal";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
-import { markAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
 import { useHomeActions } from "../features/home/useHomeActions";
 
@@ -1101,8 +1100,6 @@ const safeInsets = useSafeAreaInsets();
       Keyboard.dismiss();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
-      if (!ownsResponse()) return;
-      await markAnalysisHomeSummaryDirty();
       if (!ownsResponse()) return;
 
       const replyPending = Array.isArray(inputFeedbackAI?.rejection_reasons)

@@ -32,9 +32,8 @@ function harness(file, exportName, args = {}) {
     fetch, AbortController, setTimeout: (fn, ms) => { const t = setTimeout(fn, ms); t.unref(); return t; }, clearTimeout, process: { env: {} } };
   const client = Function(...Object.keys(cb), strip(read('lib/apiClient.js')) + '\nreturn {apiGet,apiPatch,apiPost,apiFetch};')(...Object.values(cb));
   const model = Function(strip(read('screens/account/accountModel.js')) + '\nreturn {normalizeDisplayName,DISPLAY_NAME_MAX_LENGTH,DISPLAY_NAME_TAKEN_MESSAGE,mapDisplayNameConflictMessage,readAccountStatusValue};')();
-  const settings = Function('apiGet','apiPatch',strip(read('lib/reportDistributionApi.js'))+'\nreturn {getReportDistributionSettings,patchReportDistributionSettings};')(client.apiGet,client.apiPatch);
   const today = Function('apiGet','apiPatch','apiPost',strip(read('lib/api/home/todayQuestionApi.js'))+'\nreturn {getTodayQuestionSettings,patchTodayQuestionSettings,resolveLocalTimezoneName};')(client.apiGet,client.apiPatch,client.apiPost);
-  const bindings = { ...client, ...model, ...settings, ...today, AbortController,
+  const bindings = { ...client, ...model, ...today, AbortController,
     useAuth: () => ({ user: currentUser(), authOwnerGeneration: generation, authLoading: false, signOut: async opts => signouts.push(opts) }),
     useTheme: () => ({ colors: {}, themeName: 'default' }), useAnalysisMenuStyles: () => ({ ui: {} }),
     createLocalStyles: () => ({}), THEME_VARIANTS: {},
@@ -59,7 +58,7 @@ function harness(file, exportName, args = {}) {
   if (exportName.startsWith('Settings')) {
     source = source.slice(source.indexOf('export default function ' + exportName));
     source = source.slice(0, source.indexOf('  const Container = embedded ? View : AnalysisMenuScroll;')) +
-      (exportName === 'SettingsAppSettingsScreen' ? 'return {updatePushEnabled,updateTodayQuestionNotificationEnabled,updateReportDistributionNotificationEnabled,updateEmotionNotificationEnabled};\n}' : 'return {handleDeleteAccount,executeDeleteAccount};\n}');
+      (exportName === 'SettingsAppSettingsScreen' ? 'return {updatePushEnabled,updateTodayQuestionNotificationEnabled,updateEmotionNotificationEnabled};\n}' : 'return {handleDeleteAccount,executeDeleteAccount};\n}');
   }
   const Component = Function(...Object.keys(bindings), strip(source) + '\nreturn ' + exportName + ';')(...Object.values(bindings));
   const render = () => { cursor = 0; dirty = false; value = Component({ user: currentUser(), targetUserId: owner, isSelf: true, navigation: {}, ...args }); while (effects.length) effects.shift()(); return value; };
@@ -106,10 +105,11 @@ test('notification all-off cannot cascade from A into B after the first pending 
   assert.equal(p.writes.length,0);
 });
 
-test('same-owner notification all-off retains all four settings writes', async () => {
+test('same-owner notification all-off keeps the active setting writes and omits retired report settings', async () => {
   const p = harness('screens/SettingsAppSettingsScreen.js','SettingsAppSettingsScreen'); await p.settle(); await p.resolveAllGets({});
   await p.value.updatePushEnabled(false); await p.settle();
-  assert.equal(p.writes.length,4); assert.deepEqual(p.writes.map(x => x.owner),['A','A','A','A']);
+  assert.deepEqual(p.writes.map(x => x.owner),['A','A','A']);
+  assert.ok(p.writes.every(({ url }) => !url.includes('report-distribution')));
 });
 
 test('notification all-off stops after its A profile response when B is active', async () => {

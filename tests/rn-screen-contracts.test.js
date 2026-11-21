@@ -1212,14 +1212,13 @@ test('Home hooks preserve startup popup priority, today question, and Piece quot
   ], 'useHomeActions.js');
 });
 
-test('AnalysisScreen keeps report history, self-structure, today-question history, and Piece cross-link routes mounted through Phase 6 hooks', () => {
+test('AnalysisScreen redirects old emotion report links to the live graph and keeps map and input routes', () => {
   const analysis = read('screens/AnalysisScreen.js');
   const analysisRouteModel = read('screens/analysis/analysisRouteModel.js');
   const analysisRouteState = read('screens/analysis/useAnalysisRouteState.js');
   const analysisUnreadBadges = read('screens/analysis/useAnalysisUnreadBadges.js');
   const analysisReportActions = read('screens/analysis/useAnalysisReportActions.js');
   const analysisContentFirst = read('screens/AnalysisContentFirstScreen.js');
-  const analysisEmotion = read('screens/AnalysisEmotionScreen.js');
   const kokoroWeatherCurrentCard = read('screens/analysisReport/KokoroWeatherCurrentCard.js');
   const kokoroWeatherForecastStrip = read('screens/analysisReport/KokoroWeatherForecastStrip.js');
   const kokoroWeatherDetailModal = read('screens/analysisReport/KokoroWeatherDetailModal.js');
@@ -1233,86 +1232,62 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
 
   assertIncludes(analysis, [
     'AnalysisContentFirstScreen',
-    'AnalysisEmotionScreen',
     'AnalysisSelfStructureScreen',
     'AnalysisInputHistoryMenuScreen',
-    'AnalysisReportHistoryScreen',
-    'AnalysisReportViewerScreen',
     'SelfStructureReportHistoryScreen',
     'SelfStructureReportViewerScreen',
     'TodayQuestionHistoryScreen',
-    'onOpenPieceDeepDive',
-    'from "./analysis/analysisRouteModel";',
+    'setGraphOpenRequest({ period: { daily: "today", weekly: "week", monthly: "month" }[nextReportType] })',
+    'graphOpenRequest={graphOpenRequest}',
     'from "./analysis/useAnalysisRouteState";',
     'from "./analysis/useAnalysisUnreadBadges";',
     'from "./analysis/useAnalysisReportActions";',
     'from "./analysis/useAnalysisSelfStructureActions";',
-    'from "./analysisReport/kokoroWeatherFormatters";',
     'from "./analysis/useAnalysisTutorialOverlay";',
   ], 'AnalysisScreen.js');
+  assertNotIncludes(analysis + analysisContentFirst, [
+    '<AnalysisReportHistoryScreen', '<AnalysisReportViewerScreen', '<AnalysisEmotionScreen',
+  ], 'active Analysis routes avoid emotion report UI');
 
   assertIncludes(analysisRouteModel, [
     'export const ROUTE_HOME = "home";',
-    'export const ROUTE_EMOTION_ANALYSIS = "emotionAnalysis";',
     'export const ROUTE_SELF_STRUCTURE = "selfStructure";',
     'export const ROUTE_INPUT_HISTORY = "inputHistory";',
-    'export function normalizeAnalysisReportType',
     'export function isAnalysisReportType',
     'export function formatLatestUpdateLabel',
     'export function isAnalysisMenuRoute',
-    'daily: "こころグラフ（日）"',
-    'weekly: "こころグラフ（週）"',
-    'monthly: "こころグラフ（月）"',
   ], 'analysisRouteModel.js');
 
   assertIncludes(analysisRouteState, [
     'export function useAnalysisRouteState',
     'const [route, setRoute] = useState(ROUTE_HOME);',
-    'const [reportType, setReportType] = useState("weekly");',
     'clearExternalOpenParams',
   ], 'useAnalysisRouteState.js');
 
   assertIncludes(analysisUnreadBadges, [
     'export function useAnalysisUnreadBadges',
-    'getFeatureUnread("Analysis", "daily")',
-    'getFeatureUnread("Analysis", "weekly")',
-    'getFeatureUnread("Analysis", "monthly")',
     'getFeatureUnread("Analysis", "selfStructure")',
     'refreshUnreadBadges',
     'markSelfStructureLatestSeen',
-    'apiPost("/report-reads/mark"',
   ], 'useAnalysisUnreadBadges.js');
+  assertNotIncludes(analysisUnreadBadges, [
+    'reportsUnreadStatus', 'apiPost("/report-reads/mark"',
+  ], 'old emotion report reads are no longer fetched or marked');
 
   assertIncludes(analysisReportActions, [
     'export function useAnalysisReportActions',
-    'fetchLatestReadyReport',
     'refreshHomeSummaries',
-    'refreshCurrentWeatherSummary',
-    'readCachedAnalysisLatestReport',
-    'writeCachedAnalysisLatestReport',
-    'cocolon:kokoroWeatherLatestReport:v1',
-    'isKokoroWeatherReportRecord',
-    'ANALYSIS_WIRE.routes.reportsReady',
-    'getTodayQuestionHistory',
-    'currentWeather',
-    'homeSummary.current_weather',
-    'applyHomeSummaryMeta',
-  ], 'useAnalysisReportActions.js');
-
-  assertIncludes(analysis, [
-    'consumeAnalysisHomeSummaryDirty',
-    'refreshCurrentWeatherSummary',
-  ], 'AnalysisScreen.js current weather prop');
+    'SELF_STRUCTURE_WIRE.routes.latestStatus',
+  ], 'useAnalysisReportActions.js preserves map freshness');
+  assertNotIncludes(analysisReportActions, [
+    'reportsReady', 'kokoroWeatherLatestReport',
+  ], 'old report contents are no longer fetched or cached');
 
   assertIncludes(analysisContentFirst, [
     'KokoroWeatherTimeline',
     'こころグラフ',
-    'isKokoroWeatherReportRecord',
-    'handleOpenCurrentEmotionHistory',
-    'こころグラフ（日）',
-    'こころグラフ（週）',
-    'こころグラフ（月）',
-  ], 'AnalysisContentFirstScreen.js current weather card guard');
+    'sampleData={isTutorialMode',
+  ], 'AnalysisContentFirstScreen.js shares the graph with the tutorial');
 
   assertIncludes(kokoroWeatherCurrentCard, [
     'export default function KokoroWeatherCurrentCard',
@@ -1321,14 +1296,6 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     '観測メモあり',
     'こころ温度',
   ], 'KokoroWeatherCurrentCard.js split guard');
-
-  assertIncludes(analysisEmotion, [
-    '感情分析のこころグラフを選んでください。',
-    'こころグラフ（日）',
-    'こころグラフ（週）',
-    'こころグラフ（月）',
-    '過去のこころグラフを振り返ります',
-  ], 'AnalysisEmotionScreen.js Phase 5 copy guard');
 
   assertIncludes(kokoroWeatherForecastStrip, [
     'export default function KokoroWeatherForecastStrip',
@@ -2851,73 +2818,55 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
   ], 'kokoro weather frontend must keep observation wording non-warning and non-judgmental');
 });
 
-test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves plan/paywall boundaries', () => {
+test('Kokoro graph uses live periods for all plans and excludes the old report from guidance and paid plans', () => {
   const contentFirst = read('screens/AnalysisContentFirstScreen.js');
-  const emotionMenu = read('screens/AnalysisEmotionScreen.js');
-  const history = read('screens/AnalysisReportHistoryScreen.js');
-  const accessPolicy = read('screens/analysisReport/analysisReportAccessPolicy.js');
+  const graph = read('screens/analysisReport/KokoroWeatherTimeline.js');
+  const live = read('screens/analysis/useKokoroWeather.js');
   const guide = read('guide/guidesJa.js');
   const terms = read('guide/termsJa.js');
   const tutorialData = read('tutorial/tutorialScenarioData.js');
-  const tutorialFixtures = read('tutorial/generated/tutorialFixtures.generated.json');
+  const catalog = read('lib/iap/iapRuntimeCatalog.js');
+  const settings = read('screens/SettingsAppSettingsScreen.js');
+  const tabs = read('navigation/MainTabs.js');
 
   assertIncludes(contentFirst, [
     'KokoroWeatherTimeline',
-    'isKokoroWeatherReportRecord',
+    'graphPeriod',
+    'sampleData={isTutorialMode',
+  ], 'live chart is the Analysis emotion screen');
+
+  assertIncludes(graph, [
+    'key: "today", label: "今日"',
+    'key: "week", label: "週"',
+    'key: "month", label: "月"',
+    'useKokoroWeather',
+  ], 'live day, week and month tabs');
+
+  assertIncludes(live, ['ANALYSIS_WIRE.routes.kokoroWeather'], 'graph reads directly from its live endpoint');
+  assertNotIncludes(contentFirst + graph + live, [
     'handleOpenCurrentEmotionHistory',
-    '{ key: "daily", label: "こころグラフ（日）" }',
-    '{ key: "weekly", label: "こころグラフ（週）" }',
-    '{ key: "monthly", label: "こころグラフ（月）" }',
-  ], 'AnalysisContentFirstScreen.js top UI and tab label contract');
-
-  assertIncludes(emotionMenu, [
-    'こころグラフ（日）',
-    'こころグラフ（週）',
-    'こころグラフ（月）',
-    '最新のこころグラフ（日/週/月）を確認します',
-    '過去のこころグラフを振り返ります',
-  ], 'AnalysisEmotionScreen.js kokoro weather copy contract');
-
-  assertIncludes(history, [
-    'こころグラフ（日）',
-    'こころグラフ（週）',
-    'こころグラフ（月）',
-    'Freeプランの',
+    'AnalysisReportViewerScreen',
     'canViewAnalysisFullText',
-  ], 'AnalysisReportHistoryScreen.js history and plan boundary contract');
-
-  assertIncludes(accessPolicy, [
-    'canViewAnalysisFullText',
-    'tier === "plus" || tier === "premium"',
-    'canViewAnalysisDeep',
-    'tier === "premium"',
-    'isEmotionReportType',
-    'reportType === "daily" || reportType === "weekly" || reportType === "monthly"',
-  ], 'analysisReportAccessPolicy.js keeps existing Free/Plus/Premium boundaries');
+    'data.summary.description',
+    'selected.description',
+  ], 'live graphs have no report history, report body or paid tier gate');
 
   assertIncludes(guide, [
     'こころグラフ（日）・こころグラフ（週）・こころグラフ（月）',
     '今日の感情',
+    '日・週・月のグラフは全プランで見られます。',
     '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
-  ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
+  ], 'guide describes the Free graphs and retains the map');
 
   assertIncludes(terms, [
     'こころグラフ',
     '感情入力をもとに、こころグラフ（日/週/月）を見る分析です。',
-    '感情入力をもとに、こころグラフ（日/週/月）を見る分析です。',
-  ], 'guide/termsJa.js kokoro weather terms contract');
+  ], 'guide/termsJa.js graph terms');
 
-  assertIncludes(tutorialData, [
-    'こころグラフ',
-    'こころグラフ（日/週/月）',
-  ], 'tutorialScenarioData.js kokoro weather tutorial labels');
-
-  assertIncludes(tutorialFixtures, [
-    'kokoroWeather',
-    '"report_type": "daily"',
-    '"report_type": "weekly"',
-    '"report_type": "monthly"',
-  ], 'tutorialFixtures.generated.json contains kokoroWeather examples');
+  assertIncludes(tutorialData, ['export const TUTORIAL_KOKORO_WEATHER'], 'tutorial has illustrative graph data');
+  assertNotIncludes(catalog, ['こころグラフ（日/週/月）の本文', 'こころグラフ（日/週/月）の変化パターン'], 'the paid plans omit legacy report benefits');
+  assertNotIncludes(settings, ['レポート配布通知', 'getReportDistributionSettings'], 'old distribution settings are absent');
+  assertNotIncludes(tabs, ['ANALYSIS_WIRE.routes.reportsUnreadStatus'], 'old unseen reports are not fetched in the tab bar');
 
   const selfStructureFiles = [
     read('screens/AnalysisSelfStructureScreen.js'),

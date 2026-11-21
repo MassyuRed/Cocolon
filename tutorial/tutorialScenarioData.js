@@ -56,16 +56,6 @@ function parseJsonObject(value) {
   return parseMaybeJsonObject(value);
 }
 
-function normalizeReport(report, reportType) {
-  const safe = readFirstObject(report);
-  return Object.freeze({
-    ...safe,
-    report_type: compact(safe.report_type) || reportType,
-    title: compact(safe.title),
-    content_text: compact(safe.content_text),
-  });
-}
-
 function normalizeWatashiMapReport(report) {
   const safe = readFirstObject(report);
   const contentJson = parseJsonObject(safe.content_json || safe.contentJson);
@@ -190,16 +180,62 @@ export const TUTORIAL_PIECES = Object.freeze([
   TUTORIAL_FOLLOWED_USER_PIECE,
 ]);
 
-export const TUTORIAL_ANALYSIS_COUNTS = Object.freeze({
-  today: Number(FIXTURE_ANALYSIS?.counts?.today || 0) || 4,
-  week: Number(FIXTURE_ANALYSIS?.counts?.week || 0) || 21,
-  month: Number(FIXTURE_ANALYSIS?.counts?.month || 0) || 72,
-});
+const GRAPH_EMOTIONS = ["joy", "sadness", "anger", "anxiety", "calm"];
 
-export const TUTORIAL_ANALYSIS_REPORTS = Object.freeze({
-  daily: normalizeReport(FIXTURE_ANALYSIS?.reports?.daily, "daily"),
-  weekly: normalizeReport(FIXTURE_ANALYSIS?.reports?.weekly, "weekly"),
-  monthly: normalizeReport(FIXTURE_ANALYSIS?.reports?.monthly, "monthly"),
+function graphExampleAggregate(emotions) {
+  const inputCount = emotions.length;
+  const weights = Object.fromEntries(GRAPH_EMOTIONS.map(key => [key, emotions.filter(value => value === key).length]));
+  const shares = Object.fromEntries(GRAPH_EMOTIONS.map(key => [key, inputCount ? Math.round(weights[key] * 100 / inputCount) : 0]));
+  return {
+    input_count: inputCount,
+    emotion_weights: weights,
+    emotion_share_pct: shares,
+    status: inputCount ? "ok" : "no_observation",
+  };
+}
+
+const GRAPH_EXAMPLE_BANDS = [
+  { key: "early", label: "深夜", hours: "0:00–6:00", emotions: [] },
+  { key: "morning", label: "朝", hours: "6:00–12:00", emotions: ["joy", "anxiety"] },
+  { key: "afternoon", label: "昼", hours: "12:00–18:00", emotions: ["joy", "calm"] },
+  { key: "night", label: "夜", hours: "18:00–24:00", emotions: ["calm"] },
+];
+const GRAPH_EXAMPLE_RECORDS = {
+  2: ["anxiety", "calm"],
+  3: ["sadness"],
+  5: ["anger", "anxiety", "calm", "calm"],
+  7: ["joy", "joy", "calm", "calm"],
+  8: GRAPH_EXAMPLE_BANDS.flatMap(band => band.emotions),
+  10: ["anxiety", "calm", "calm", "calm"],
+  14: ["joy", "calm"],
+  17: ["joy", "anxiety"],
+  22: ["sadness", "calm"],
+  25: ["joy", "calm", "calm", "calm"],
+  30: ["joy", "calm"],
+};
+
+function graphExamplePeriod(firstDay, lastDay) {
+  const date = day => `2026-11-${String(day).padStart(2, "0")}`;
+  const days = Array.from({ length: lastDay - firstDay + 1 }, (_, offset) => firstDay + offset);
+  const items = days.map(day => ({ date: date(day), ...graphExampleAggregate(GRAPH_EXAMPLE_RECORDS[day] || []) }));
+  return {
+    start_date: date(firstDay),
+    end_date: date(lastDay),
+    items,
+    summary: {
+      ...graphExampleAggregate(days.flatMap(day => GRAPH_EXAMPLE_RECORDS[day] || [])),
+      recorded_days: items.filter(item => item.input_count).length,
+    },
+  };
+}
+
+export const TUTORIAL_KOKORO_WEATHER = Object.freeze({
+  today: {
+    ...graphExamplePeriod(8, 8),
+    time_buckets: GRAPH_EXAMPLE_BANDS.map(({ emotions, ...band }) => ({ ...band, ...graphExampleAggregate(emotions) })),
+  },
+  week: graphExamplePeriod(2, 8),
+  month: graphExamplePeriod(1, 30),
 });
 
 const fixtureWatashiMapLatest = normalizeWatashiMapReport(

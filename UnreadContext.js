@@ -205,9 +205,9 @@ function buildStartupHydrationData(rawStartup, options = {}) {
     const analysisUnread = pickObject(analysisUnreadSection.value);
     const unreadByType = pickObject(analysisUnread?.unread_by_type);
     unreadPatch.Analysis = {
-      daily: !!unreadByType.daily,
-      weekly: !!unreadByType.weekly,
-      monthly: !!unreadByType.monthly,
+      daily: false,
+      weekly: false,
+      monthly: false,
       selfStructure: !!unreadByType.selfStructure,
     };
     prefetchPatch.Analysis = {

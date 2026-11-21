@@ -245,6 +245,10 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   </View>;
 
   const visible = state.key === key && !planLoading;
+  const refreshing = pendingRefresh(state.refreshStatus);
+  const refreshFailed = state.refreshStatus === 'failed';
+  const retryUpdate = !reportId && refreshFailed;
+  const canRetry = refreshFailed || state.refreshError || state.error || state.comparisonFailed;
   const Container = embedded ? View : SafeAreaView;
   const Body = embedded ? View : ScrollView;
   return <Container {...(!embedded ? { edges: ['left', 'right'] } : {})}
@@ -259,17 +263,19 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="保存したマップを取得しています" />
         <Text style={[styles.meta, { color: ink }]}>保存したマップを取得しています。</Text>
       </View> : null}
-      {visible && pendingRefresh(state.refreshStatus) ? <Text style={[styles.meta, { color: ink }]} accessibilityLiveRegion="polite">
+      {visible && refreshing ? <Text style={[styles.meta, { color: ink }]} accessibilityLiveRegion="polite">
         わたしマップを更新中です。{state.row ? '保存したマップを先に表示しています。' : '更新が終わると表示されます。'}
       </Text> : null}
-      {visible && (state.refreshStatus === 'failed' || state.refreshError) ? <Text style={styles.error} accessibilityRole="alert">
-        更新結果を取得できませんでした。再取得で確認できます。
+      {visible && (refreshFailed || state.refreshError) ? <Text style={styles.error} accessibilityRole="alert">
+        {retryUpdate ? '更新結果を取得できませんでした。更新を再試行できます。'
+          : refreshing ? '更新状況を取得できませんでした。引き続き確認します。'
+            : '更新結果を取得できませんでした。再取得で確認できます。'}
       </Text> : null}
       {visible && state.error ? <Text style={styles.error} accessibilityRole="alert">{state.error}</Text> : null}
       {correctionNotice?.key === key ? <Text style={[styles.bodyText, { color: ink }]} accessibilityLiveRegion="polite">
         {correctionNotice.text}
       </Text> : null}
-      {visible && state.empty && !pendingRefresh(state.refreshStatus) ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
+      {visible && state.empty && !refreshing ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
       {visible && state.row ? <>
         {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
         {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
@@ -277,7 +283,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}
         {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
-        {compare && state.comparisonUnavailable && !pendingRefresh(state.refreshStatus) ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
+        {compare && state.comparisonUnavailable && !refreshing ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
           {state.comparisonFailed
             ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
             : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
@@ -285,9 +291,9 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       </> : null}
       {visible && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
       {visible && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text> : null}
-      {visible && !state.loading && !pendingRefresh(state.refreshStatus) ? <CocolonButton variant="secondary"
-        onPress={() => load(compare, !reportId && (!!state.row || state.refreshStatus === 'failed'))}
-        title={!reportId && (state.row || state.refreshStatus === 'failed') ? '分析を更新' : '再取得'} /> : null}
+      {visible && !state.loading && !refreshing && canRetry ? <CocolonButton variant="secondary"
+        onPress={() => load(compare, retryUpdate)}
+        title={retryUpdate ? '更新を再試行' : '再取得'} /> : null}
       {!!owner && !planLoading && !reportId && tier === 'premium' ? <CocolonButton variant="secondary"
         testID="analysis-if-saved-open" title="保存した関心の方向" onPress={() => setIfDialog({ key, visible: true, mode: 'saved' })} /> : null}
     </Body>
@@ -332,7 +338,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         setCorrectionNotice({ key, text: result.source_state === 'STALE'
           ? '訂正を保存しました。当時の読み取りへの説明として保持されています。'
           : result.refresh_status === 'failed'
-            ? '訂正を保存しました。分析の更新結果は、再取得して確認してください。'
+            ? '訂正を保存しました。分析の更新結果を確認できませんでした。'
             : '訂正を保存しました。分析の更新が完了してから、読み直した結果を確認できます。' });
         load(compareRef.current, false, true);
       }}

@@ -9,10 +9,6 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiGet, apiPatch, apiPost } from "../lib/apiClient";
 import { EMOTION_NOTIFICATION_WIRE, readEmotionNotificationOwnerId } from "../lib/compat/legacyWireContracts";
 import {
-  getReportDistributionSettings,
-  patchReportDistributionSettings,
-} from "../lib/reportDistributionApi";
-import {
   getTodayQuestionSettings,
   patchTodayQuestionSettings,
   resolveLocalTimezoneName,
@@ -268,10 +264,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
   const [todayQuestionDeliveryTime, setTodayQuestionDeliveryTime] = useState("18:00");
   const [todayQuestionTimezone, setTodayQuestionTimezone] = useState(fallbackTimezone);
   const [todayQuestionLoading, setTodayQuestionLoading] = useState(true);
-  const [reportDistributionNotificationEnabled, setReportDistributionNotificationEnabled] = useState(true);
-  const [reportDistributionDeliveryTime, setReportDistributionDeliveryTime] = useState("00:00");
-  const [reportDistributionTimezone, setReportDistributionTimezone] = useState(fallbackTimezone);
-  const [reportDistributionLoading, setReportDistributionLoading] = useState(true);
   const [emotionNotificationEnabled, setEmotionNotificationEnabled] = useState(true);
   const [emotionNotificationLoading, setEmotionNotificationLoading] = useState(true);
 
@@ -279,10 +271,9 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
   const notificationSettingsLoading =
     pushLoading ||
     todayQuestionLoading ||
-    reportDistributionLoading ||
     emotionNotificationLoading;
 
-  const failedNotificationLabels = Object.entries({ push: '全ての通知', question: '今日の問い通知', report: 'レポート配布通知', emotion: '感情通知' })
+  const failedNotificationLabels = Object.entries({ push: '全ての通知', question: '今日の問い通知', emotion: '感情通知' })
     .filter(([key]) => !!user?.id && notificationReadFailures[key] === user.id).map(([, label]) => label);
 
   const themeOptions = [
@@ -383,52 +374,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
     let cancelled = false;
     const request = ownerRequestRef.current;
 
-    const loadReportDistribution = async () => {
-      setNotificationReadFailures(previous => ({ ...previous, report: null }));
-      if (!user?.id) {
-        if (!cancelled) {
-          setReportDistributionNotificationEnabled(true);
-          setReportDistributionDeliveryTime("00:00");
-          setReportDistributionTimezone(fallbackTimezone);
-          setReportDistributionLoading(false);
-        }
-        return;
-      }
-
-      setReportDistributionLoading(true);
-      try {
-        const json = await getReportDistributionSettings({
-          timezone_name: fallbackTimezone,
-        }, request);
-        const settings = json?.settings ?? json ?? {};
-        if (!cancelled) {
-          setReportDistributionNotificationEnabled(settings?.notification_enabled !== false);
-          setReportDistributionDeliveryTime(String(settings?.delivery_time_local || "00:00"));
-          setReportDistributionTimezone(String(settings?.timezone_name || fallbackTimezone));
-        }
-      } catch (error) {
-        console.warn("SettingsAppSettingsScreen: load report distribution settings failed", error);
-        if (!cancelled) setNotificationReadFailures(previous => ({ ...previous, report: user.id }));
-        if (!cancelled) {
-          setReportDistributionNotificationEnabled(true);
-          setReportDistributionDeliveryTime("00:00");
-          setReportDistributionTimezone(fallbackTimezone);
-        }
-      } finally {
-        if (!cancelled) setReportDistributionLoading(false);
-      }
-    };
-
-    loadReportDistribution();
-    return () => {
-      cancelled = true;
-    };
-  }, [fallbackTimezone, user?.id, authOwnerGeneration]);
-
-  useEffect(() => {
-    let cancelled = false;
-    const request = ownerRequestRef.current;
-
     const loadEmotionNotification = async () => {
       setNotificationReadFailures(previous => ({ ...previous, emotion: null }));
       if (!user?.id) {
@@ -487,14 +432,12 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
     const previous = {
       pushEnabled,
       todayQuestionNotificationEnabled,
-      reportDistributionNotificationEnabled,
       emotionNotificationEnabled,
     };
 
     setPushEnabled(nextEnabled);
     if (!nextEnabled) {
       setTodayQuestionNotificationEnabled(false);
-      setReportDistributionNotificationEnabled(false);
       setEmotionNotificationEnabled(false);
     }
 
@@ -509,11 +452,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
             notification_enabled: false,
             delivery_time_local: String(todayQuestionDeliveryTime || "18:00"),
             timezone_name: String(todayQuestionTimezone || fallbackTimezone),
-          }, request),
-          patchReportDistributionSettings({
-            notification_enabled: false,
-            delivery_time_local: String(reportDistributionDeliveryTime || "00:00"),
-            timezone_name: String(reportDistributionTimezone || fallbackTimezone),
           }, request),
           persistEmotionNotificationEnabled(false, request),
         ]);
@@ -536,7 +474,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
       console.warn("SettingsAppSettingsScreen: update push_enabled failed", error);
       setPushEnabled(previous.pushEnabled);
       setTodayQuestionNotificationEnabled(previous.todayQuestionNotificationEnabled);
-      setReportDistributionNotificationEnabled(previous.reportDistributionNotificationEnabled);
       setEmotionNotificationEnabled(previous.emotionNotificationEnabled);
       Alert.alert("通知設定の更新に失敗しました", String(error?.message || error));
     } finally {
@@ -569,36 +506,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
       console.warn("SettingsAppSettingsScreen: update today question failed", error);
       setTodayQuestionNotificationEnabled(previous);
       Alert.alert("今日の問い通知", String(error?.message || "通知設定の更新に失敗しました。"));
-    } finally {
-      if (!request.signal.aborted) setLocalProcessing(false);
-    }
-  };
-
-  const updateReportDistributionNotificationEnabled = async (next) => {
-    if (isBusy || reportDistributionLoading || !pushEnabled) return;
-
-    if (!user?.id) {
-      Alert.alert("レポート配布通知", "ログイン情報が取得できませんでした。");
-      return;
-    }
-
-    const request = ownerRequestRef.current;
-    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
-    const previous = reportDistributionNotificationEnabled;
-    setReportDistributionNotificationEnabled(next);
-
-    setLocalProcessing(true);
-    try {
-      await patchReportDistributionSettings({
-        notification_enabled: !!next,
-        delivery_time_local: String(reportDistributionDeliveryTime || "00:00"),
-        timezone_name: String(reportDistributionTimezone || fallbackTimezone),
-      }, request);
-    } catch (error) {
-      if (request.signal.aborted || error?.name === "AccountChangedError") return;
-      console.warn("SettingsAppSettingsScreen: update report distribution failed", error);
-      setReportDistributionNotificationEnabled(previous);
-      Alert.alert("レポート配布通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
       if (!request.signal.aborted) setLocalProcessing(false);
     }
@@ -688,13 +595,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
             value={todayQuestionNotificationEnabled}
             onValueChange={updateTodayQuestionNotificationEnabled}
             disabled={todayQuestionLoading || isBusy || !pushEnabled}
-          />
-
-          <SettingSwitchRow
-            label="レポート配布通知"
-            value={reportDistributionNotificationEnabled}
-            onValueChange={updateReportDistributionNotificationEnabled}
-            disabled={reportDistributionLoading || isBusy || !pushEnabled}
           />
 
           <SettingSwitchRow

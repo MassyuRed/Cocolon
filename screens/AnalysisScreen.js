@@ -3,6 +3,7 @@ import React, {
   useMemo,
   useCallback,
   useRef,
+  useState,
 } from "react";
 import {
   ActivityIndicator,
@@ -21,14 +22,11 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 // 既存
 import AnalysisHistoryScreen from "./AnalysisHistoryScreen";
-import AnalysisReportHistoryScreen from "./AnalysisReportHistoryScreen";
-import AnalysisReportViewerScreen from "./AnalysisReportViewerScreen";
 import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen";
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import TodayQuestionHistoryScreen from "./TodayQuestionHistoryScreen";
 import AnalysisContentFirstScreen from "./AnalysisContentFirstScreen";
-import AnalysisEmotionScreen from "./AnalysisEmotionScreen";
 import AnalysisSelfStructureScreen from "./AnalysisSelfStructureScreen";
 import AnalysisInputHistoryMenuScreen from "./AnalysisInputHistoryMenuScreen";
 
@@ -47,8 +45,7 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TutorialOverlay from "../components/TutorialOverlay";
 import {
-  TUTORIAL_ANALYSIS_COUNTS,
-  TUTORIAL_ANALYSIS_REPORTS,
+  TUTORIAL_KOKORO_WEATHER,
   TUTORIAL_SELF_ANALYSIS_GUIDE,
   TUTORIAL_TOTAL_STEPS,
   TUTORIAL_WATASHI_MAP_REPORT,
@@ -59,8 +56,6 @@ import {
   isAnalysisReportType,
   normalizeSelfStructureMode,
   PANEL_MIN_HEIGHT,
-  REPORT_TYPE_LABEL,
-  ROUTE_EMOTION_ANALYSIS,
   ROUTE_HOME,
   ROUTE_INPUT_HISTORY,
   ROUTE_SELF_STRUCTURE,
@@ -69,9 +64,7 @@ import { useAnalysisRouteState } from "./analysis/useAnalysisRouteState";
 import { useAnalysisUnreadBadges } from "./analysis/useAnalysisUnreadBadges";
 import { useAnalysisReportActions } from "./analysis/useAnalysisReportActions";
 import { useAnalysisSelfStructureActions } from "./analysis/useAnalysisSelfStructureActions";
-import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 import { useAnalysisTutorialOverlay } from "./analysis/useAnalysisTutorialOverlay";
-import { consumeAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 
 function useThemedStyles() {
   const { colors, themeName } = useTheme();
@@ -81,10 +74,11 @@ function useThemedStyles() {
   return { styles, colors, themeName, isDark, ui };
 }
 
-export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
+export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
   const { ensurePaid, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
+  const [graphOpenRequest, setGraphOpenRequest] = useState(null);
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
   const { styles, colors, isDark } = useThemedStyles();
@@ -92,16 +86,8 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   const {
     route,
     setRoute,
-    reportType,
-    setReportType,
-    selectedReport,
-    setSelectedReport,
     selectedSelfReport,
     setSelectedSelfReport,
-    reportHistoryBackRoute,
-    setReportHistoryBackRoute,
-    reportViewBackRoute,
-    setReportViewBackRoute,
     historyBackRoute,
     setHistoryBackRoute,
     todayQuestionHistoryBackRoute,
@@ -117,25 +103,16 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
 
   const {
     entryMeta,
-    homeSummariesLoading,
-    fetchLatestReadyReport,
     refreshHomeSummaries,
-    refreshCurrentWeatherSummary,
   } = useAnalysisReportActions();
 
   const {
-    unreadByType,
-    unreadResolved,
     selfStructureUnreadResolved,
     selfStructureLatestUnread,
     selfStructureHistoryUnread,
-    prefetchedUnreadByType,
-    emotionAnalysisUnread,
     selfStructureUnread,
     refreshUnreadBadges,
     markSelfStructureLatestSeen,
-    markReportRead,
-    reportReadRevision,
   } = useAnalysisUnreadBadges({
     isPaid,
     subscriptionLoading,
@@ -157,10 +134,9 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   });
 
   const resetAnalysisTutorialRoute = useCallback(() => {
-    setSelectedReport(null);
     setSelectedSelfReport(null);
     setRoute(ROUTE_HOME);
-  }, [setRoute, setSelectedReport, setSelectedSelfReport]);
+  }, [setRoute, setSelectedSelfReport]);
 
   const {
     isAnalysisTutorialStep,
@@ -229,8 +205,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
         } catch {
           // noop
         }
-        // 選択状態もクリアしておく（homeへ戻ったときの混入を防ぐ）
-        setSelectedReport(null);
         setSelectedSelfReport(null);
         setRoute("home");
       }
@@ -240,31 +214,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
   }, [navigation]);
 
   useEffect(() => {
-    if (!navigation?.addListener) return undefined;
-
-    let disposed = false;
-    const unsubscribe = navigation.addListener("focus", () => {
-      (async () => {
-        const shouldRefresh = await consumeAnalysisHomeSummaryDirty();
-        if (!shouldRefresh || disposed) return;
-        await refreshCurrentWeatherSummary();
-      })();
-    });
-
-    return () => {
-      disposed = true;
-      unsubscribe?.();
-    };
-  }, [navigation, refreshCurrentWeatherSummary]);
-
-  const openReportHistory = (type, backRoute = ROUTE_EMOTION_ANALYSIS) => {
-    setReportHistoryBackRoute(backRoute);
-    setReportType(type);
-    setSelectedReport(null);
-    setRoute("reportHistory");
-  };
-
-  useEffect(() => {
     const shouldOpenReportHistory = !!(
       tabRoute?.params?.openReportHistory || screenRoute?.params?.openReportHistory
     );
@@ -272,11 +221,10 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       tabRoute?.params?.openReportHistoryType || screenRoute?.params?.openReportHistoryType || ""
     ).trim().toLowerCase();
 
+    // Older notifications use report-history params. Open the corresponding live graph.
     if (shouldOpenReportHistory && isAnalysisReportType(nextReportType)) {
-      setSelectedReport(null);
-      setReportHistoryBackRoute(ROUTE_EMOTION_ANALYSIS);
-      setReportType(nextReportType);
-      setRoute("reportHistory");
+      setGraphOpenRequest({ period: { daily: "today", weekly: "week", monthly: "month" }[nextReportType] });
+      setRoute(ROUTE_HOME);
       clearExternalOpenParams({
         openReportHistory: false,
         openReportHistoryType: null,
@@ -317,6 +265,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       tabRoute?.params?.openDistributionHome || screenRoute?.params?.openDistributionHome
     );
     if (shouldOpenDistributionHome) {
+      setGraphOpenRequest({ period: "today" });
       setRoute(ROUTE_HOME);
       clearExternalOpenParams({
         openDistributionHome: false,
@@ -348,40 +297,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     tabRoute?.params?.openSelfReportHistory,
     tabRoute?.params?.openSelfReportHistoryAt,
   ]);
-
-  const openReportView = useCallback(
-    async (report, backRoute = "reportHistory") => {
-      setSelectedReport(report || null);
-      setReportViewBackRoute(backRoute);
-      setRoute("reportView");
-      if (await markReportRead(report)) refreshUnreadBadges();
-    },
-    [markReportRead, refreshUnreadBadges]
-  );
-
-  const openLatestEmotionReport = useCallback(
-    async (type) => {
-      const normalizedType = String(type || "").trim().toLowerCase();
-      const label = REPORT_TYPE_LABEL[normalizedType] || "レポート";
-
-      try {
-        const cachedReport = entryMeta?.latestReports?.[normalizedType] || null;
-        const usableCachedReport = isKokoroWeatherReportRecord(cachedReport) ? cachedReport : null;
-        const latestReport = usableCachedReport || (await fetchLatestReadyReport(normalizedType));
-
-        if (!latestReport) {
-          Alert.alert("最新レポート", `最新の${label}はまだありません。`);
-          return;
-        }
-
-        await openReportView(latestReport, ROUTE_EMOTION_ANALYSIS);
-      } catch (e) {
-        console.warn("AnalysisScreen: failed to open latest emotion report", normalizedType, e);
-        Alert.alert("取得エラー", `${label}の取得に失敗しました。`);
-      }
-    },
-    [entryMeta?.latestReports, fetchLatestReadyReport, openReportView]
-  );
 
   // ✅ Paywall CTA: SubscriptionSelect へ遷移（ナビが無い場合も落とさない）
   const openSubscriptionSelect = useCallback(() => {
@@ -453,7 +368,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     let cancelled = false;
     (async () => {
       try {
-        await refreshHomeSummaries({ prioritizeVisibleReport: route === ROUTE_HOME });
+        await refreshHomeSummaries();
         if (!cancelled) {
           await refreshUnreadBadges();
         }
@@ -467,7 +382,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     };
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
-  const emotionUpdateLabel = formatLatestUpdateLabel(entryMeta.emotionLatestDate);
   const selfStructureUpdateLabel = formatLatestUpdateLabel(entryMeta.selfStructureLatestDate);
 
   return (
@@ -484,46 +398,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             refreshHomeSummaries();
           }}
         />
-      ) : route === "reportHistory" ? (
-        <AnalysisReportHistoryScreen
-          reportType={reportType}
-          reportReadRevision={reportReadRevision}
-          onBack={() => {
-            setRoute(reportHistoryBackRoute);
-            refreshUnreadBadges();
-            refreshHomeSummaries();
-          }}
-          onOpenReport={(report) => openReportView(report, "reportHistory")}
-          onGenerateLatest={() => openLatestEmotionReport(reportType)}
-          onOpenSubscription={openSubscriptionSelect}
-        />
-      ) : route === "reportView" ? (
-        <AnalysisReportViewerScreen
-          report={selectedReport}
-          markReadOnOpen={false}
-          onBack={() => {
-            setRoute(reportViewBackRoute);
-            refreshUnreadBadges();
-            refreshHomeSummaries();
-          }}
-          onOpenPieceDeepDive={onOpenPieceDeepDive}
-          onOpenSubscription={openSubscriptionSelect}
-        />
-      ) : route === ROUTE_EMOTION_ANALYSIS ? (
-        <View style={styles.safeContent}>
-          <AnalysisEmotionScreen
-            onBack={() => setRoute(ROUTE_HOME)}
-            onOpenLatestDaily={() => openLatestEmotionReport("daily")}
-            onOpenLatestWeekly={() => openLatestEmotionReport("weekly")}
-            onOpenLatestMonthly={() => openLatestEmotionReport("monthly")}
-            onOpenDailyHistory={() => openReportHistory("daily", ROUTE_EMOTION_ANALYSIS)}
-            onOpenWeeklyHistory={() => openReportHistory("weekly", ROUTE_EMOTION_ANALYSIS)}
-            onOpenMonthlyHistory={() => openReportHistory("monthly", ROUTE_EMOTION_ANALYSIS)}
-            unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
-            unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
-            unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
-          />
-        </View>
       ) : route === ROUTE_SELF_STRUCTURE ? (
         <View style={styles.safeContent}>
           <AnalysisSelfStructureScreen
@@ -601,40 +475,20 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             onTutorialScroll={handleTutorialScroll}
             tutorialRefs={tutorialRefs}
             onOpenGuide={openGuide}
-            emotionUpdateLabel={emotionUpdateLabel}
+            graphOpenRequest={graphOpenRequest}
             selfStructureUpdateLabel={selfStructureUpdateLabel}
-            todayCount={entryMeta.todayCount}
-            weekCount={entryMeta.weekCount}
-            monthCount={entryMeta.monthCount}
-            unreadEmotion={emotionAnalysisUnread}
             unreadSelfStructure={selfStructureUnread}
-            unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}
-            unreadWeekly={unreadResolved ? unreadByType.weekly : prefetchedUnreadByType.weekly}
-            unreadMonthly={unreadResolved ? unreadByType.monthly : prefetchedUnreadByType.monthly}
-            unreadSelfStructureLatest={
-              selfStructureUnreadResolved && !subscriptionLoading
-                ? selfStructureLatestUnread
-                : false
-            }
             unreadSelfStructureHistory={
               selfStructureUnreadResolved && !subscriptionLoading && isPaid
                 ? selfStructureHistoryUnread
                 : false
             }
-            latestReports={entryMeta.latestReports}
-            homeSummariesLoading={homeSummariesLoading}
-            onOpenDailyHistory={() => openReportHistory("daily", ROUTE_HOME)}
-            onOpenWeeklyHistory={() => openReportHistory("weekly", ROUTE_HOME)}
-            onOpenMonthlyHistory={() => openReportHistory("monthly", ROUTE_HOME)}
             onOpenSelfHistory={() => openSelfReportHistory(ROUTE_HOME)}
             onOpenSubscription={openSubscriptionSelect}
-            onRefreshEmotionUnread={refreshUnreadBadges}
             onLatestSeenVersion={markSelfStructureLatestSeen}
-            isPaid={!subscriptionLoading && isPaid}
             isTutorialMode={isAnalysisTutorialStep}
             tutorialStep={tutorialStep}
-            tutorialReports={TUTORIAL_ANALYSIS_REPORTS}
-            tutorialCounts={TUTORIAL_ANALYSIS_COUNTS}
+            tutorialGraphData={TUTORIAL_KOKORO_WEATHER}
             tutorialSelfAnalysisGuide={TUTORIAL_SELF_ANALYSIS_GUIDE}
             tutorialWatashiMapReport={TUTORIAL_WATASHI_MAP_REPORT}
           />

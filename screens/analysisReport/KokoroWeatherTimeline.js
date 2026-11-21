@@ -53,13 +53,15 @@ function Legend({ item, styles }) {
   </View>;
 }
 
-export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0, period: controlledPeriod, onPeriodChange }) {
+export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0, period: controlledPeriod, onPeriodChange, sampleData }) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const [localPeriod, setPeriod] = useState("today");
   const period = controlledPeriod || localPeriod;
   const [anchor, setAnchor] = useState(null);
   const [selection, setSelection] = useState(null);
-  const { data, loading, error, retry } = useKokoroWeather(period, anchor, refreshRevision);
+  const isSample = sampleData !== undefined;
+  const live = useKokoroWeather(period, anchor, refreshRevision, !isSample);
+  const { data, loading, error, retry } = isSample ? { data: sampleData } : live;
   const selectPeriod = next => { setPeriod(next); setAnchor(null); setSelection(null); onPeriodChange?.(next); };
   const move = next => { if (next) { setAnchor(next); setSelection(null); } };
   const items = period === "today" ? data?.time_buckets || [] : data?.items || [];
@@ -73,7 +75,7 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
         style={[styles.tab, item.key === period && styles.activeTab]} accessibilityRole="tab" accessibilityLabel={item.label} accessibilityState={{ selected: item.key === period }}>
         <Text style={[styles.tabText, item.key === period && styles.activeText]}>{item.label}</Text>
       </CocolonPressable>)}</View>
-      {data ? <View style={styles.rangeRow}>
+      {data && !isSample ? <View style={styles.rangeRow}>
         <CocolonPressable onPress={() => move(data.previous_anchor)} disabled={!data.previous_anchor} style={styles.arrow} accessibilityLabel="前の期間" accessibilityState={{ disabled: !data.previous_anchor }}>
           <Ionicons name="chevron-back" size={19} color={data.previous_anchor ? colors.TITLE_GOLD : colors.TEXT_SUBTLE} />
         </CocolonPressable>
@@ -86,7 +88,7 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
     {loading ? <View style={styles.card}><ActivityIndicator color={colors.TITLE_GOLD} /><Text style={styles.note}>感情の記録を読み込んでいます</Text></View> : error ?
       <View style={styles.card}><Text style={styles.body}>こころグラフを読み込めませんでした。</Text><CocolonPressable onPress={retry} style={styles.retry} accessibilityRole="button"><Text style={styles.link}>もう一度読み込む</Text></CocolonPressable></View> : data ? <>
         <View style={styles.card}>
-          <View style={styles.heading}><View style={styles.headingText}><Text style={styles.meta}>{periodTitle}</Text>
+          <View style={styles.heading}><View style={styles.headingText}><Text style={styles.meta}>{isSample ? "表示例 · " : ""}{periodTitle}</Text>
             <Text style={styles.title}>{data.summary.input_count ? `${data.summary.input_count}件の入力から見える気持ち` : "感情の記録はまだありません"}</Text></View>
           </View>
           {period === "today" ? <View style={styles.composition}><WeatherRing item={data.summary} colors={colors} styles={styles} /><Legend item={data.summary} styles={styles} /></View> :
@@ -105,7 +107,6 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
                 })}
               </View>
               <Text style={styles.meta}>日をタップすると、その日の内訳が見られます。</Text></>}
-          <Text style={styles.note}>{data.summary.description}</Text>
           <Text style={styles.meta}>割合は、選んだ感情と強さ（弱1・中2・強3）から集計しています。</Text>
           {data.partial_history ? <Text style={styles.note}>閲覧できる期間の記録を表示しています。</Text> : null}
         </View>
@@ -123,7 +124,7 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
               <CocolonPressable style={styles.arrow} disabled={selectedIndex <= 0} accessibilityLabel="前の日の内訳" onPress={() => setSelection(items[selectedIndex - 1].date)}><Ionicons name="chevron-back" size={18} color={colors.TITLE_GOLD} /></CocolonPressable>
               <CocolonPressable style={styles.arrow} disabled={selectedIndex >= items.length - 1} accessibilityLabel="次の日の内訳" onPress={() => setSelection(items[selectedIndex + 1].date)}><Ionicons name="chevron-forward" size={18} color={colors.TITLE_GOLD} /></CocolonPressable>
             </View> : null}</View>
-          <Text style={styles.body}>{selected.input_count ? `${selected.input_count}件の入力。${selected.description}` : emptyLabel(selected)}</Text>
+          <Text style={styles.body}>{selected.input_count ? `${selected.input_count}件の入力` : emptyLabel(selected)}</Text>
           {selected.input_count ? <Legend item={selected} styles={styles} /> : null}
           {(selected.records || []).map((record, index) => <View key={`${record.created_at}:${index}`} style={styles.record}>
             <Text style={styles.meta}>{record.created_at.slice(11, 16)}</Text>

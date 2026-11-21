@@ -70,7 +70,7 @@ export function useAnalysisTutorialOverlay({
           mode: "info",
           title: "分析画面",
           message:
-            "分析画面の説明をします。\n\nここでは分析レポートを閲覧することができます。",
+            "分析画面の説明をします。\n\nこころグラフで感情の推移を見たり、わたしマップで自分の行動を振り返ったりできます。",
           nextLabel: "こころグラフ（日）へ",
           onNext: () => setTutorialStep(9),
           disableSpotlight: true,
@@ -233,8 +233,6 @@ export function useAnalysisTutorialOverlay({
       cancelled = true;
     };
   }, [
-    entryMeta?.emotionLatestDate,
-    entryMeta?.inputHistoryLatestDate,
     entryMeta?.selfStructureLatestDate,
     isAnalysisTutorialVisible,
     tutorialStep,

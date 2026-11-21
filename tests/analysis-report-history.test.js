@@ -12,7 +12,7 @@ const metadata = (id = 'r1', type = 'daily') => ({ id, report_type: type, title:
   period_start: '2026-11-07T15:00:00Z', period_end: '2026-11-08T14:59:59Z', kokoro_weather_version: 'kokoro.weather.v1' });
 const page = (items = [metadata()], extra = {}) => ({ items, viewer_tier: 'plus', has_more: false, next_offset: null, ...extra });
 
-async function mount(t, { hookOnly = false, viewer = false, parentOwnsRead = true } = {}) {
+async function mount(t, { viewer = false, parentOwnsRead = true } = {}) {
   const control = { owner: 'A', generation: 0, reportType: 'daily', revision: 0, parentOwnsRead };
   const calls = [], opened = [], listeners = new Set(), modules = new Map();
   const colors = new Proxy({}, { get: () => '#800020' });
@@ -69,18 +69,15 @@ async function mount(t, { hookOnly = false, viewer = false, parentOwnsRead = tru
     modules.set(relative, module.exports); return module.exports;
   }
   const History = load('screens/AnalysisReportHistoryScreen.js').default;
-  const useBadges = hookOnly ? load('screens/analysis/useAnalysisUnreadBadges.js').useAnalysisUnreadBadges : null;
   const Viewer = viewer ? load('screens/AnalysisReportViewerScreen.js').default : null;
-  let output;
-  function Hook() { output = useBadges({ isPaid: false, subscriptionLoading: false }); return null; }
-  const element = () => hookOnly ? React.createElement(Hook) : viewer ? React.createElement(Viewer, {
+  const element = () => viewer ? React.createElement(Viewer, {
     report: { ...metadata(), content_json: { kokoroWeather: { version: 'kokoro.weather.v1', summary: { input_count: 1 } } } },
     markReadOnOpen: !control.parentOwnsRead,
   }) : React.createElement(History, { reportType: control.reportType, reportReadRevision: control.revision, onOpenReport: item => opened.push(item) });
   let root;
   await Renderer.act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await Renderer.act(async () => root.unmount()); });
-  return { root, calls, opened, control, get output() { return output; },
+  return { root, calls, opened, control,
     async update(values) { Object.assign(control, values); await Renderer.act(async () => { root.update(element()); await tick(); }); },
     async answer(index, value) { await Renderer.act(async () => { calls[index].resolve(value); await tick(); }); },
     async fail(index) { await Renderer.act(async () => { calls[index].reject(new Error('synthetic failure')); await tick(); }); },
@@ -157,31 +154,6 @@ test('owner change hides old rows and cancels a delayed selected detail', async 
   const before = h.calls.length;
   await Renderer.act(async () => { await stalePress(); });
   assert.equal(h.calls.length, before);
-});
-
-test('read revision advances only after the server confirms the matching report', async t => {
-  const h = await mount(t, { hookOnly: true });
-  let success;
-  await Renderer.act(async () => { success = h.output.markReportRead(metadata()); await tick(); });
-  assert.equal(h.output.reportReadRevision, 0);
-  await h.answer(0, { marked: true, report_id: 'r1' });
-  assert.equal(await success, true);
-  assert.equal(h.output.reportReadRevision, 1);
-  let failure;
-  await Renderer.act(async () => { failure = h.output.markReportRead(metadata('r2')); await tick(); });
-  await h.fail(1);
-  assert.equal(await failure, false);
-  assert.equal(h.output.reportReadRevision, 1);
-});
-
-test('a late mark confirmation cannot mutate a later authentication lifetime', async t => {
-  const h = await mount(t, { hookOnly: true });
-  let pending;
-  await Renderer.act(async () => { pending = h.output.markReportRead(metadata()); await tick(); });
-  await h.update({ generation: 1 });
-  await h.answer(0, { marked: true, report_id: 'r1' });
-  assert.equal(await pending, false);
-  assert.equal(h.output.reportReadRevision, 0);
 });
 
 test('viewer delegates its mark when the parent owns it, while retaining standalone compatibility', async t => {

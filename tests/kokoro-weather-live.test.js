@@ -73,7 +73,8 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
   const Timeline = load('screens/analysisReport/KokoroWeatherTimeline.js').default;
   const Content = parent ? load('screens/AnalysisContentFirstScreen.js').default : null;
   const element = () => React.createElement(parent ? Content : hookOnly ? Host : Timeline, { colors, ui: {}, period: control.timelinePeriod,
-    onPeriodChange: value => events.push(value), onOpenMonthlyHistory: () => events.push('monthly-history') });
+    onPeriodChange: value => events.push(value), graphOpenRequest: control.graphOpenRequest,
+    isTutorialMode: control.isTutorialMode, tutorialStep: control.tutorialStep, tutorialGraphData: fixtures });
   let root;
   await Renderer.act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await Renderer.act(async () => root.unmount()); });
@@ -178,15 +179,32 @@ test('backgrounding fences old response and foregrounding requests current data'
   assert.equal(h.output.data.summary.input_count, 6);
 });
 
-test('month remains synchronized with its history link after opening and closing the map tab', async t => {
+test('month remains selected after the map tab and the chart exposes no legacy report links', async t => {
   const h = await mount(t, { parent: true });
   await h.press('月');
   await h.press('わたしマップ');
   await h.press('こころグラフ');
   assert.match(h.calls.at(-1).url, /period=month/);
   assert.match(h.text(), /この月のこころグラフ/);
-  await h.press('こころグラフ（月）の履歴を見る');
-  assert.equal(h.events.at(-1), 'monthly-history');
+  assert.doesNotMatch(h.text(), /の履歴を見る|観測理由/);
+  assert.ok(h.calls.every(({ url }) => url.startsWith('/analysis/kokoro-weather?')));
+});
+
+test('old report notification targets change the graph tab and period', async t => {
+  const h = await mount(t, { parent: true });
+  await h.press('わたしマップ');
+  await h.update({ graphOpenRequest: { period: 'week' } });
+  assert.match(h.calls.at(-1).url, /period=week/);
+  assert.match(h.text(), /この週のこころグラフ/);
+});
+
+test('the tutorial renders the graph from samples without reading private rows', async t => {
+  const h = await mount(t, { parent: true });
+  const requestCount = h.calls.length;
+  await h.update({ isTutorialMode: true, tutorialStep: 11 });
+  assert.match(h.text(), /表示例.*この月のこころグラフ/);
+  assert.equal(h.calls.length, requestCount);
+  assert.doesNotMatch(h.text(), /の履歴を見る/);
 });
 
 test('same-version malformed payloads fail closed instead of reaching the chart renderer', async t => {

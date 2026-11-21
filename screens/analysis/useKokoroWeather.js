@@ -27,7 +27,7 @@ function isWeather(data, period) {
         Array.isArray(record.emotions) && record.emotions.every(emotion => EMOTIONS.includes(emotion.key) && isCount(emotion.weight) && emotion.weight > 0)));
 }
 
-export function useKokoroWeather(period, anchor, refreshRevision = 0) {
+export function useKokoroWeather(period, anchor, refreshRevision = 0, enabled = true) {
   const { user, authOwnerGeneration } = useAuth();
   const { scope, isCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const focused = useIsFocused();
@@ -37,16 +37,17 @@ export function useKokoroWeather(period, anchor, refreshRevision = 0) {
   const key = `${period}:${anchor || "current"}`;
   const [day, setDay] = useState(() => new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10));
   useEffect(() => {
+    if (!enabled) return undefined;
     // Refresh at JST midnight even if this screen stays open overnight.
     const nextMidnight = Date.parse(`${day}T00:00:00+09:00`) + 86400000;
     const timer = setTimeout(() => setDay(new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10)), Math.max(1000, nextMidnight - Date.now()));
     return () => clearTimeout(timer);
-  }, [day]);
+  }, [day, enabled]);
   useEffect(() => {
     const currentSequence = ++sequence.current;
     let disposed = false;
     const fresh = () => !disposed && sequence.current === currentSequence && isCurrent(scope);
-    if (!focused || !isCurrent(scope)) return undefined;
+    if (!enabled || !focused || !isCurrent(scope)) return undefined;
     // A previous successful response must not mask a failed refresh or deletion.
     setResult({ scope, key, loading: true, data: null, error: false });
     (async () => {
@@ -63,11 +64,11 @@ export function useKokoroWeather(period, anchor, refreshRevision = 0) {
       }
     })();
     return () => { disposed = true; };
-  }, [scope, isCurrent, focused, period, anchor, key, attempt, refreshRevision, day]);
-  const visible = result?.scope === scope && result?.key === key && isCurrent(scope) ? result : null;
+  }, [scope, isCurrent, focused, period, anchor, key, attempt, refreshRevision, day, enabled]);
+  const visible = enabled && result?.scope === scope && result?.key === key && isCurrent(scope) ? result : null;
   return {
     data: visible?.data || null,
-    loading: !!user?.id && (!visible || visible.loading),
+    loading: enabled && !!user?.id && (!visible || visible.loading),
     error: !!visible?.error,
     retry: useCallback(() => setAttempt(value => value + 1), []),
   };

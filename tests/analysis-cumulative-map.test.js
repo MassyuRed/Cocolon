@@ -88,8 +88,8 @@ test('month comparison fetches current separately and preserves the captured pro
   assert.equal(JSON.stringify(stored),before);
   assert(h.calls.some(c=>c[1].includes('month=2026-10-01')));
   assert(h.calls.some(c=>c[1].includes('/latest?ensure=true')));
-  await act(async()=>button(view,'再取得').props.onPress());
-  assert(h.calls.every(c=>!c[1].includes('force=true')),'monthly comparison and retry never force a fresh analysis');
+  assert(!button(view,'再取得'),'a successful comparison does not need a retry');
+  assert(h.calls.every(c=>!c[1].includes('force=true')),'monthly comparison never forces a fresh analysis');
   assert.equal(JSON.stringify(stored),before);
   await act(async()=>view.unmount());
 });
@@ -252,19 +252,51 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   await act(async()=>view.unmount());
 });
 
-test('current analysis is forced only by the explicit update action, with the authenticated owner bound',async()=>{
-  const semantic=require('./fixtures/analysis-semantic-map-v3-synthetic.json');
-  const h=harness(async()=>latest(semantic));
+test('current analysis opens automatically and has no routine update button',async()=>{
+  const empty={...latest(),report_id:null,has_visible_content:false,meta:null,map_context:null};
+  for(const data of [latest(),empty]) {
+    const h=harness(async()=>data);
+    const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true}));});
+    assert(!button(view,'分析を更新'));
+    assert(!button(view,'更新を再試行'));
+    assert(!button(view,'再取得'));
+    assert.equal(h.calls.length,1);
+    assert(h.calls[0][1].endsWith('?ensure=true&background=true'));
+    assert.equal(h.calls[0][2].expectedUserId,owner);
+    assert.equal(h.calls[0][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+    await act(async()=>view.unmount());
+  }
+});
+
+test('a failed update can be retried while a previously saved map remains visible',async()=>{
+  let currentCalls=0;
+  const h=harness(async()=>++currentCalls===1?{...latest(),refresh_status:'failed'}:latest());
   const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
-  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true}));});
-  const updates=()=>h.calls.filter(c=>c[1].includes('/latest?ensure=true'));
-  assert.equal(updates().length,1);
-  assert(!updates()[0][1].includes('force=true'),'opening a saved map must not acquire a paid model update');
-  await act(async()=>button(view,'分析を更新').props.onPress());
-  assert.equal(updates().length,2);
-  assert(updates()[1][1].endsWith('?ensure=true&background=true&force=true'));
-  assert.equal(updates()[1][2].expectedUserId,owner);
-  assert.equal(updates()[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  assert(JSON.stringify(view.toJSON()).includes(projection.nodes[0].visible_label));
+  await act(async()=>button(view,'更新を再試行').props.onPress());
+  assert.equal(h.calls.length,2);
+  assert(h.calls[1][1].endsWith('?ensure=true&background=true&force=true'));
+  assert.equal(h.calls[1][2].expectedUserId,owner);
+  assert.equal(h.calls[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  assert(!button(view,'更新を再試行'));
+  await act(async()=>view.unmount());
+});
+
+test('a transport error can be retried without forcing an update',async()=>{
+  let currentCalls=0;
+  const h=harness(async()=>{
+    if(++currentCalls===1)throw new TypeError('Network request failed');
+    return latest();
+  });
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  assert(!button(view,'更新を再試行'));
+  await act(async()=>button(view,'再取得').props.onPress());
+  assert.equal(h.calls.length,2);
+  assert(h.calls[1][1].endsWith('?ensure=true&background=true'));
+  assert(!button(view,'再取得'));
   await act(async()=>view.unmount());
 });
 
@@ -303,8 +335,8 @@ test('an empty queued map waits without a blank-result error and offers explicit
   assert(!JSON.stringify(view.toJSON()).includes('現在表示できるわたしマップはありません。'));
   await act(async()=>{t.mock.timers.tick(3000);});
   assert(JSON.stringify(view.toJSON()).includes('更新結果を取得できませんでした。'));
-  assert(button(view,'分析を更新'));
-  await act(async()=>button(view,'分析を更新').props.onPress());
+  assert(button(view,'更新を再試行'));
+  await act(async()=>button(view,'更新を再試行').props.onPress());
   assert(h.calls.at(-1)[1].endsWith('?ensure=true&background=true&force=true'));
   await act(async()=>view.unmount());
 });
