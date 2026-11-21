@@ -447,3 +447,18 @@ MashからiPhoneで8201を確認できたとの報告を受けた。ホームと
 ### 11.5 iOS 8301のビルドとTestFlight内部配布
 
 修正版 `03e0543` のGitHub Actions #83で、署名済みアーカイブ、写真アクセス目的文の確認、IPAの書き出し、TestFlightへのアップロードを含む19工程が成功した。Appleは13:03 JSTに1.0（8301）を受領し、処理完了後に既存の内部グループ「Emlis テスト版配布」で13:07 JSTにTestingを確認した。8301の実機確認は未実施。 [ビルド結果](https://github.com/MassyuRed/Cocolon/actions/runs/44862886322/job/136719998107) · [TestFlightの8301](https://appstoreconnect.apple.com/teams/74023f34-b77e-4e39-92fd-618d60dc7904/apps/6757227422/testflight/ios/e88baf32-77ee-4cde-a4c8-c1d8fef11ca7)
+
+<a id="deep-insight-normal-rollout-20261121"></a>
+### 11.6 わたしを知る問いの本番反映とiOS 8401の内部配布（11/21 JST）
+
+[補助設計§9.208](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-restored-4b-issuance-20261121)の確認を継承した。本番Supabaseに発行・回答、わたしマップの連携、発行根拠の保存の3件を順に適用した。本番移行履歴は `20261121073512`、`20261121073532`、`20261121073537`。新規テーブルのRLS、匿名・一般認証ロールからの直接読取不可、サーバー専用RPCの権限、発行根拠の列と削除時の連携トリガーを確認した。
+
+[API `eeae89c8`](https://github.com/MassyuRed/mashos-api/commit/eeae89c8d0be0a5354a9bc4d616727e1d6aa0442) をSHA指定で配備した。ワーカー `dep-dc0kk46k1f9s739f236g` は16:37、API `dep-dc0kkmh42hec73bnchc0` は16:39にLive。ヘルスと起動情報は200。DeepInsightの状態・発行・回答の3経路は未認証で401、旧「今日の問い」の本人向け・cron向けの7経路は404。関連するAPI・DB・回帰テスト188件、アプリの関連テスト58件が成功した。
+
+Mashの承認を受け、感情記録のない架空の試験アカウント1件で検証した。Freeではテーマを選べず、記録と回答が空ならふりかえりを出さない。試験用Plusで「人間関係」の一問を発行し、同日中の別テーマ選択は同じ発行IDを返した。Freeへ戻してテーマの回答を保存すると、その回答からふりかえりの一問を発行できた。未回答時の再訪、回答の再送、履歴の読み直しで同じID・問い・回答を確認した。メール、プッシュ、課金は発生させていない。
+
+わたしマップの初回更新では、GPU側の旧共有判定が本人回答2件に対し1件分の計画も許可し、ワーカーが拒否した。現行Podの `ai/services/ai_inference/analysis_plan_source_choices.py` をAPI版の同じ原本に揃え、`SHA256SUMS` を同期した。差分は `USER_DEEP_INSIGHT_ANSWER` を計画の根拠として認める箇所1件。ファイルは呼び出し時に読み込まれるため、重み・接続設定・稼働プロセスを保った。同じ更新ジョブの7回目で保存に成功し、認証付きで最新画面と詳細の同じレポートID・図・本文を再読した。図2ノードの根拠に、両方の発行IDと本人回答が一致することを確認した。新PodにB61復元一式を展開する場合も、稼働APIと同じ共有判定を揃える。現行ファイルのSHA-256は `9b5ac81b631b516b48038910fcd93e09f60f94f7384c297142e1533f09da7fa0`。
+
+アプリ `f7f34356` を[GitHub Actions #84](https://github.com/MassyuRed/Cocolon/actions/runs/44880877474/job/136775672176)で署名し、IPAをTestFlightへ送信した。iOSネイティブと依存関係を8301と照合し、同じ暗号化情報を保存した。1.0（8401）が既存の「Emlis テスト版配布」でTestingになったことを確認した。 [TestFlightの8401](https://appstoreconnect.apple.com/teams/74023f34-b77e-4e39-92fd-618d60dc7904/apps/6757227422/testflight/ios/a7fb9f66-e34b-4e85-a111-0a670ef52e8e)
+
+8401での本人実機確認は未実施。旧通知ジョブ `today-question-push` は停止時の自動審査で保留になり、稼働が残る。DeepInsightの通知運用と正式テーマ一覧は§7の状態を引き継ぐ。
