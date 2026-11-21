@@ -11,9 +11,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useAppRuntime } from "../AppRuntimeContext";
 import { useAuth } from "../AuthContext";
+import { useSubscription } from "../SubscriptionContext";
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
+import CocolonSwitch from "../components/CocolonSwitch";
 import useDeepInsight, { isUnanswered } from "../features/home/useDeepInsight";
 import { useTheme } from "../theme/ThemeContext";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -24,6 +27,9 @@ const TITLE = "わたしを知る問い";
 const THEMES = ["人間関係", "自分の価値観", "仕事・学び", "日々の過ごし方", "これからのこと"];
 const LANE_LABELS = { records: "記録をふりかえる", theme: "テーマから考える" };
 const MAX_ANSWER_LENGTH = 2000;
+const THEME_TIME_FORMAT = new Intl.DateTimeFormat("ja-JP", {
+  month: "long", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Asia/Tokyo",
+});
 
 export default function DeepInsightScreen({ navigation }) {
   const { user, authOwnerGeneration } = useAuth();
@@ -51,9 +57,36 @@ export default function DeepInsightScreen({ navigation }) {
 }
 
 function DeepInsightContent({ ownerId, navigation, styles, colors }) {
-  const { data, loadError, questionLoads, questionErrors, reload, issueRecords, issueTheme, answer } =
-    useDeepInsight(ownerId);
+  const { data, loadError, questionLoads, questionErrors, reload, issueRecords, issueTheme, answer,
+    notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId);
+  const { isFeatureEnabled } = useAppRuntime();
+  const { subscriptionBootstrap } = useSubscription();
   const [theme, setTheme] = useState(null);
+  const [drafts, setDrafts] = useState({});
+  const inFlightAnswers = useRef(new Set());
+
+  const updateDraft = (id, fields) => setDrafts((prev) => ({ ...prev, [id]: { ...prev[id], ...fields } }));
+
+  const saveAnswer = async (question) => {
+    const id = question.id;
+    const text = drafts[id]?.text?.trim();
+    if (!text || inFlightAnswers.current.has(id)) return;
+    inFlightAnswers.current.add(id);
+    updateDraft(id, { saving: true, error: false });
+    try {
+      if (await answer(question, text)) updateDraft(id, { text: "" });
+    } catch (error) {
+      if (error?.name !== "AbortError" && error?.name !== "AccountChangedError") updateDraft(id, { error: true });
+    } finally {
+      inFlightAnswers.current.delete(id);
+      updateDraft(id, { saving: false });
+    }
+  };
+
+  const renderAnswer = (question, showTheme = true) => (
+    <AnswerForm key={question.id} question={question} draft={drafts[question.id]} styles={styles} colors={colors}
+      showTheme={showTheme} onChangeText={(text) => updateDraft(question.id, { text })} onSave={() => saveAnswer(question)} />
+  );
 
   if (loadError) {
     return (
@@ -67,29 +100,43 @@ function DeepInsightContent({ ownerId, navigation, styles, colors }) {
   if (!data) return <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="問いを読み込み中" />;
 
   const recordPending = isUnanswered(data.records);
+  const premiumPlan = subscriptionBootstrap?.plans?.premium;
+  const canOfferPremium = premiumPlan?.visible === true && premiumPlan?.purchasable === true
+    && subscriptionBootstrap.sales_enabled !== false && subscriptionBootstrap.client_sales_enabled !== false
+    && isFeatureEnabled("subscription_sales_enabled", true);
+  const showRecords = recordPending || data.can_use_records !== false || canOfferPremium;
   const themePending = isUnanswered(data.theme);
+  const nextThemeAt = Date.parse(data.theme_next_available_at);
+  const nextThemeLabel = Number.isFinite(nextThemeAt) ? THEME_TIME_FORMAT.format(nextThemeAt) : null;
   const history = (data.history || []).filter((item) =>
     !(recordPending && item.id === data.records.id) && !(themePending && item.id === data.theme.id));
 
   return (
     <>
-      <View style={styles.card}>
-        <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.records}</Text>
-        {recordPending ? (
-          <AnswerForm key={data.records.id} question={data.records} answer={answer} styles={styles} colors={colors} />
-        ) : questionLoads.records ? (
-          <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="ふりかえりの問いを確認中" />
-        ) : questionErrors.records ? (
-          <>
-            <Text style={styles.error} accessibilityRole="alert">ふりかえりの問いを確認できませんでした。</Text>
-            <CocolonButton variant="secondary" onPress={issueRecords}>もう一度確認する</CocolonButton>
-          </>
-        ) : (
-          <Text style={styles.body}>
-            {data.records?.answered_at ? "回答を保存しました。回答の履歴から見返せます。" : "今は新しいふりかえりの問いがありません。"}
-          </Text>
-        )}
-      </View>
+      {showRecords && (
+        <View style={styles.card}>
+          <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.records}</Text>
+          {recordPending ? (
+            renderAnswer(data.records)
+          ) : data.can_use_records === false ? (
+            <>
+              <Text style={styles.body}>記録やこれまでの回答から、考えを深める問いを受け取れます。Premiumで利用できます。</Text>
+              <CocolonButton variant="secondary" onPress={() => navigation.navigate("SubscriptionSelect")}>プランを見る</CocolonButton>
+            </>
+          ) : questionLoads.records ? (
+            <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="ふりかえりの問いを確認中" />
+          ) : questionErrors.records ? (
+            <>
+              <Text style={styles.error} accessibilityRole="alert">ふりかえりの問いを確認できませんでした。</Text>
+              <CocolonButton variant="secondary" onPress={issueRecords}>もう一度確認する</CocolonButton>
+            </>
+          ) : (
+            <Text style={styles.body}>
+              {data.records?.answered_at ? "回答を保存しました。回答の履歴から見返せます。" : "今は新しいふりかえりの問いがありません。"}
+            </Text>
+          )}
+        </View>
+      )}
 
       <View style={styles.card}>
         <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.theme}</Text>
@@ -100,10 +147,10 @@ function DeepInsightContent({ ownerId, navigation, styles, colors }) {
           </>
         )}
         {themePending ? (
-          <AnswerForm key={data.theme.id} question={data.theme} answer={answer} styles={styles} colors={colors} />
+          renderAnswer(data.theme)
         ) : data.can_use_theme && (data.theme_available_today ? (
           <>
-            <Text style={styles.body}>今日考えたいテーマを選んでください。</Text>
+            <Text style={styles.body}>考えたいテーマを選んでください。</Text>
             <View style={styles.themes}>
               {THEMES.map((item) => (
                 <CocolonPressable
@@ -124,8 +171,23 @@ function DeepInsightContent({ ownerId, navigation, styles, colors }) {
             </CocolonButton>
           </>
         ) : (
-          <Text style={styles.body}>{data.theme?.answered_at ? "回答を保存しました。回答の履歴から見返せます。" : "今日のテーマから考える問いは発行済みです。"}</Text>
+          data.theme?.answered_at ? <Text style={styles.body}>回答を保存しました。回答の履歴から見返せます。</Text>
+            : !nextThemeLabel && <Text style={styles.body}>テーマの問いは発行済みです。</Text>
         ))}
+        {data.can_use_theme && !data.theme_available_today && nextThemeLabel && (
+          <Text style={styles.detail}>次の問いは{nextThemeLabel}（日本時間）から受け取れます。</Text>
+        )}
+        {data.can_use_theme && typeof data.theme_notification_enabled === "boolean" && (
+          <>
+            <View style={styles.notificationRow}>
+              <Text style={styles.notificationLabel}>次の問いを受け取れるときに通知する</Text>
+              <CocolonSwitch accessibilityLabel="次の問いを受け取れるときに通知する"
+                value={data.theme_notification_enabled} onValueChange={setThemeNotification}
+                disabled={notificationSaving} iosRightInset={0} />
+            </View>
+            {notificationError && <Text accessibilityRole="alert" style={styles.error}>通知設定を保存できませんでした。</Text>}
+          </>
+        )}
       </View>
 
       <View style={styles.card}>
@@ -135,7 +197,7 @@ function DeepInsightContent({ ownerId, navigation, styles, colors }) {
           <View key={question.id} style={styles.historyItem}>
             <Text style={styles.detail}>{question.issued_on} · {question.theme || LANE_LABELS[question.lane]}</Text>
             {isUnanswered(question) ? (
-              <AnswerForm question={question} answer={answer} styles={styles} colors={colors} showTheme={false} />
+              renderAnswer(question, false)
             ) : (
               <>
                 <Text style={styles.question}>{question.question_text}</Text>
@@ -149,28 +211,8 @@ function DeepInsightContent({ ownerId, navigation, styles, colors }) {
   );
 }
 
-function AnswerForm({ question, answer, styles, colors, showTheme = true }) {
-  const [draft, setDraft] = useState("");
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState(false);
-  const inFlight = useRef(false);
-
-  const save = async () => {
-    const text = draft.trim();
-    if (!text || inFlight.current) return;
-    inFlight.current = true;
-    setSaving(true);
-    setError(false);
-    try {
-      await answer(question, text);
-    } catch (requestError) {
-      if (requestError?.name !== "AbortError" && requestError?.name !== "AccountChangedError") setError(true);
-    } finally {
-      inFlight.current = false;
-      setSaving(false);
-    }
-  };
-
+function AnswerForm({ question, draft, styles, colors, showTheme, onChangeText, onSave }) {
+  const { text = "", saving = false, error = false } = draft || {};
   return (
     <View style={styles.form}>
       {showTheme && question.theme && <Text style={styles.detail}>{question.theme}</Text>}
@@ -179,15 +221,15 @@ function AnswerForm({ question, answer, styles, colors, showTheme = true }) {
         accessibilityLabel={`${LANE_LABELS[question.lane]}への回答`}
         placeholder="わたしの言葉で答える"
         placeholderTextColor={colors.TEXT_SUBTLE}
-        value={draft}
-        onChangeText={setDraft}
+        value={text}
+        onChangeText={onChangeText}
         editable={!saving}
         maxLength={MAX_ANSWER_LENGTH}
         multiline
         style={styles.input}
       />
       {error && <Text accessibilityRole="alert" style={styles.error}>回答を保存できませんでした。もう一度お試しください。</Text>}
-      <CocolonButton disabled={!draft.trim()} loading={saving} onPress={save}>回答を保存する</CocolonButton>
+      <CocolonButton disabled={!text.trim()} loading={saving} onPress={onSave}>回答を保存する</CocolonButton>
     </View>
   );
 }
@@ -210,6 +252,8 @@ function createStyles(colors, themeName) {
     themeSelected: { backgroundColor: colors.SURFACE_TONAL, borderColor: colors.TITLE_GOLD },
     themeLabel: { fontSize: ui.font.body, color: colors.TEXT_ON_LIGHT },
     themeSelectedLabel: { color: colors.ON_SURFACE_TONAL, fontWeight: "600" },
+    notificationRow: { flexDirection: "row", alignItems: "center", gap: 12 },
+    notificationLabel: { flex: 1, fontSize: ui.font.body, color: colors.TEXT_ON_LIGHT, lineHeight: 24 },
     historyItem: { paddingVertical: 12, gap: 6, borderBottomWidth: StyleSheet.hairlineWidth, borderColor: colors.CARD_BORDER },
   }, ui));
 }
