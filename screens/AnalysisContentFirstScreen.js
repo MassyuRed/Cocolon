@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import CocolonScreenIntro from "../components/CocolonScreenIntro";
 import CocolonPressable from "../components/CocolonPressable";
 import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
@@ -165,7 +166,7 @@ export default function AnalysisContentFirstScreen({
   tutorialSelfAnalysisGuide = null,
   tutorialWatashiMapReport = null,
 }) {
-  const { styles, colors, ui, themeName } = useAnalysisMenuStyles();
+  const { colors, ui, themeName } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
 
@@ -253,11 +254,14 @@ export default function AnalysisContentFirstScreen({
 
   return (
     <AnalysisMenuScroll scrollRef={tutorialScrollRef} onScroll={onTutorialScroll}>
-      <View style={styles.homeHeaderRow}>
-        <View ref={tutorialRefs?.titleRef} collapsable={false} style={styles.homeTitleRow}>
-          <Text style={styles.homeTitle}>分析</Text>
-        </View>
-      </View>
+      <CocolonScreenIntro
+        eyebrow="あなたの記録から"
+        title="わたしを、振り返る。"
+        description="気持ちと、日々の選択を少しずつ。"
+        titleRef={tutorialRefs?.titleRef}
+        colors={colors}
+        ui={ui}
+      />
 
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>

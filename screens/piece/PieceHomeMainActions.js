@@ -3,12 +3,14 @@ import { ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../../components/CocolonButton";
+import PieceScreenIntro from "./PieceScreenIntro";
 import PieceHomeActionCard from "./PieceHomeActionCard";
 import { TUTORIAL_PIECE_QUESTION } from "./usePieceHomeTutorial";
 
 export default function PieceHomeMainActions({
   styles,
   colors,
+  ui,
   tutorialSurfaceEnabled,
   isTutorialMode,
   tutorialHasSelfPiece,
@@ -32,12 +34,7 @@ export default function PieceHomeMainActions({
       onScroll={onScroll}
       scrollEventThrottle={16}
     >
-      <View style={styles.panelHeader}>
-        <View ref={refs.pieceTitleRef} collapsable={false} style={styles.panelTitleRow}>
-          <Text style={styles.panelTitle}>ピース</Text>
-        </View>
-        <View style={styles.headerRight} />
-      </View>
+      <PieceScreenIntro titleRef={refs.pieceTitleRef} colors={colors} ui={ui} />
 
       {tutorialSurfaceEnabled && isTutorialMode ? (
         <View style={styles.recoCard}>

@@ -243,7 +243,9 @@ test('Home opens the home chapter from the last control in its scroll', () => {
   const scroll = h.find('ScrollView');
   const guide = scroll.children.at(-1);
   assert.equal(guide.props.title, 'ホームについて');
-  assert.deepEqual(scroll.children[0].children[0].children.map(node => node.type), ['Text']);
+  assert.equal(scroll.children[1].type, 'HomeScreenIntro');
+  assert.deepEqual(scroll.children[0].children.filter(node => node?.props?.accessibilityLabel)
+    .map(node => node.props.accessibilityLabel), ['入力履歴を開く', 'アカウントページを開く', 'お知らせを開く']);
   guide.props.onPress();
   assert.deepEqual(routes, [['CocolonGuide', { screenId: 'home' }]]);
   h.dispose();

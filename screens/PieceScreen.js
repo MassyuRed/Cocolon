@@ -165,6 +165,7 @@ export default function PieceScreen({ route } = {}) {
         <PieceHomeMainActions
           styles={styles}
           colors={colors}
+          ui={ui}
           tutorialSurfaceEnabled={tutorialSurfaceEnabled}
           isTutorialMode={isTutorialMode}
           tutorialHasSelfPiece={tutorial.tutorialHasSelfPiece}
@@ -261,32 +262,7 @@ function createStyles(COLORS, ui) {
       alignSelf: 'center',
     },
 
-    // Header
-    panelHeader: {
-      flexDirection: "row",
-      alignItems: 'flex-start',
-      justifyContent: "space-between",
-      marginBottom: 20,
-      columnGap: 12,
-    },
-    panelTitle: {
-      color: COLORS.TEXT_ON_LIGHT,
-      letterSpacing: 0,
-      flexShrink: 1,
-      minWidth: 0,
-    },
-    panelTitleRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      flex: 1,
-      minWidth: 0,
-    },
     guideFooter: { marginTop: 16 },
-    headerRight: {
-      flexDirection: "row",
-      alignItems: "center",
-      flexShrink: 0,
-    },
     globalSummaryBlock: {
       marginBottom: 20,
     },
@@ -668,6 +644,6 @@ function createStyles(COLORS, ui) {
       color: COLORS.ERROR,
       textAlign: "center",
     },
-  }, ui, {"panelTitle":"screenTitle","globalSummaryLabel":"button","globalSummaryText":"description","homeActionCardTitle":"sectionTitle","homeActionCardDescription":"description","homeActionButtonText":"button","recoTitle":"sectionTitle","recoSummaryText":"description","recoSectionLabel":"sectionTitle","qnaIntroTitle":"sectionTitle","qnaIntroText":"description","targetLabel":"button","targetName":"button","goldButtonText":"button","neutralButtonText":"button","historyCardTitle":"sectionTitle","historyEntryText":"button","modalTitle":"modalTitle","modalLoadingText":"description","modalEmptyText":"description","rowTitle":"button","activeBadgeText":"meta","tutorialQuestionLabel":"button","tutorialTextArea":"body","tutorialHelperText":"description","modeErrorText":"description"}));
+  }, ui, {"globalSummaryLabel":"button","globalSummaryText":"description","homeActionCardTitle":"sectionTitle","homeActionCardDescription":"description","homeActionButtonText":"button","recoTitle":"sectionTitle","recoSummaryText":"description","recoSectionLabel":"sectionTitle","qnaIntroTitle":"sectionTitle","qnaIntroText":"description","targetLabel":"button","targetName":"button","goldButtonText":"button","neutralButtonText":"button","historyCardTitle":"sectionTitle","historyEntryText":"button","modalTitle":"modalTitle","modalLoadingText":"description","modalEmptyText":"description","rowTitle":"button","activeBadgeText":"meta","tutorialQuestionLabel":"button","tutorialTextArea":"body","tutorialHelperText":"description","modeErrorText":"description"}));
 }
 

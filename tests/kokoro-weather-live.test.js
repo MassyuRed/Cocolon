@@ -43,7 +43,7 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
       if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors, themeName: 'light' }) };
       if (target === 'ui/uiTokens.js') return { makeUiTokens: () => ({ motion: {} }) };
       if (target === 'components/UnreadBadge.js') return { ScreenUnreadBadge: 'Badge' };
-      if (target === 'screens/AnalysisMenuCommon.js') return { AnalysisMenuScroll: 'Scroll', useAnalysisMenuStyles: () => ({ styles: {}, colors, ui: {}, themeName: 'light' }) };
+      if (target === 'screens/AnalysisMenuCommon.js') return { AnalysisMenuScroll: 'Scroll', useAnalysisMenuStyles: () => ({ colors, ui: load('ui/uiTokens.js').makeUiTokens(colors, 'light'), themeName: 'light' }) };
       if (['screens/AnalysisReportViewerScreen.js', 'screens/SelfStructureReportGenerateScreen.js', 'components/selfStructure/WatashiMapRenderer.js'].includes(target)) return { __esModule: true, default: 'SavedViewer' };
       if (target === 'screens/analysisReport/kokoroWeatherFormatters.js') return { isKokoroWeatherReportRecord: () => false };
       if (target === 'lib/apiClient.js') return { apiGet: (url, options) => {
@@ -181,6 +181,11 @@ test('backgrounding fences old response and foregrounding requests current data'
 
 test('month remains selected after the map tab and the chart exposes no legacy report links', async t => {
   const h = await mount(t, { parent: true });
+  const intro = h.root.root.findAllByType('Text').slice(0, 3);
+  assert.deepEqual(intro.map(node => node.props.children), [
+    'あなたの記録から', 'わたしを、振り返る。', '気持ちと、日々の選択を少しずつ。',
+  ]);
+  assert.equal(intro[1].props.accessibilityRole, 'header');
   await h.press('月');
   await h.press('わたしマップ');
   await h.press('こころグラフ');

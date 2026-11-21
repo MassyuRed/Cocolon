@@ -2365,6 +2365,7 @@ repo は分かれていても、理解の単位は **system / feature / flow** �
 | group | current files | 読み方 |
 |---|---|---|
 | App root / navigation | `App.js`, `navigation/*`, `runtime/*`, `components/GlobalFrameLayout.js` | provider / route / push / linking / runtime gate を分離したApp root構造 |
+| 主画面の見出し | `components/CocolonScreenIntro.js`、`screens/input/HomeScreenIntro.js`、`screens/piece/PieceScreenIntro.js` | 主4画面の補助文・見出し・説明の共通表示。ホームは端末日付の更新、ピースは通常とリンク経由の表示文言を担当する。 |
 | Home/Input | `screens/InputScreen.js`, `screens/input/*`, `features/home/*` | Home entry shell + input-specific hook/section/model。Home gatewayは従来ownerのまま |
 | Analysis / report | `screens/AnalysisScreen.js`, `screens/analysis/*`, `screens/AnalysisReportViewerScreen.js`, `screens/analysisReport/*` | Analysis entry shell + report / unread / self-structure / tutorial / export / chart 分割 |
 | Piece / Nexus | `screens/PieceScreen.js`, `screens/piece/*`, `screens/NexusScreen.js`, `screens/nexus/*`, `screens/PieceLibraryScreen.js` | Piece home / Nexus surfaceは分割済み。PieceLibraryScreenは今回時点で未分割entry ownerとして残る |

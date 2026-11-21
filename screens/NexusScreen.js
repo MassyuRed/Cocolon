@@ -1313,6 +1313,7 @@ export default function NexusScreen({ navigation }) {
           titleRef={titleRef}
           styles={styles}
           colors={colors}
+          ui={ui}
           isTutorialMode={isTutorialMode}
           viewerUserId={viewerUserId}
           canReadOwnPieces={canReadOwnPieces}
@@ -1402,31 +1403,14 @@ function createStyles(COLORS, ui) {
       maxWidth: 680,
       alignSelf: 'center',
     },
-        panelHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 16,
-      flexWrap: 'wrap',
-      gap: 12,
-    },
-        panelTitle: {
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0,
-    },
-        panelTitleRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      flexWrap: 'wrap',
-      minWidth: 0,
-    },
         guideFooter: { marginTop: 16 },
         panelHeaderActions: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "flex-end",
-      flexWrap: 'wrap',
+      flexWrap: "wrap",
       gap: 8,
+      marginBottom: 8,
     },
         refreshButton: {
           width: 44,
@@ -1837,7 +1821,7 @@ function createStyles(COLORS, ui) {
       width: "100%",
     },
       },
-      ui, {"panelTitle":"screenTitle","ownerHistoryButtonText":"button","todayOverallEmotionTitle":"description","todayOverallEmotionText":"description","todayOverallEmotionPlaceholder":"description","tabLabelText":"button","ownerFilterButtonText":"button","pieceSortButtonText":"button","emptyText":"description","errorText":"description","subsectionTitle":"sectionTitle","emotionLogName":"body","emotionLogNoEmotion":"description","emotionLogBadgeText":"description","emotionLogTime":"meta","simpleCardTitle":"body","simpleCardMeta":"meta","historySortButtonText":"button","pickerTitle":"modalTitle","pickerOptionText":"body","pickerOptionMeta":"meta"}
+      ui, {"ownerHistoryButtonText":"button","todayOverallEmotionTitle":"description","todayOverallEmotionText":"description","todayOverallEmotionPlaceholder":"description","tabLabelText":"button","ownerFilterButtonText":"button","pieceSortButtonText":"button","emptyText":"description","errorText":"description","subsectionTitle":"sectionTitle","emotionLogName":"body","emotionLogNoEmotion":"description","emotionLogBadgeText":"description","emotionLogTime":"meta","simpleCardTitle":"body","simpleCardMeta":"meta","historySortButtonText":"button","pickerTitle":"modalTitle","pickerOptionText":"body","pickerOptionMeta":"meta"}
     )
   );
 }

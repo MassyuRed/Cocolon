@@ -357,6 +357,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
 | UI採用方針（11/7候補・11/6配布記録） | **全画面Material、defaultは元のバーガンディ／アイボリー。11/7は共通大ボタンの右下12指定を除去し、共通radius999と局所overrideを修正。Piece設定の新権利とロック案内は後続7501へ反映し、大ボタン・Piece関係の今回修正を本人確認済み（第10回§13–14）。** 実機指摘を受けた配色・構成の修正`b64cfa76`を一回の統合buildへまとめ、iOS7401のTestFlight送信が成功。[結果§28](designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106) | 当時の4画面HTML／sourceを保持。製品21file修正、12入口673 PASS＋最終関連80 PASS、全26file再読込一致。run42176982238／#74 attempt1、16:06:27 JST成功。署名Archive／写真目的文／IPA／Upload・job全19step success、途中群別build／rerun0。7401時点ではApple処理・内部配布・実機表示と原本一致は未確認だった。後続7501のApple処理・内部Testingと今回の大ボタン・Piece修正の本人確認は記録済み。全画面・全状態の原本一致確認は残る。機能／保存／本人／公開／AI不変、built sourceと資料commitを区別 |
+| 主4画面の見出し | ホーム・分析・ピース・設定では、Emlisロゴに続けて補助文・画面タイトル・説明文を縦に表示する。ホーム「今のあなたを、言葉に。」の上は端末の日付と曜日。分析は「わたしを、振り返る。」、ピースは「ことばを、分け合う。」、設定は「設定」の上下にプレビューの文言を表示する | 11/21の次回ビルド候補。文字拡大時もタイトルを省略しない。端末表示は次回ビルドで確認する。 [UI設計§3〜9](designs/ui/material-ui-design.md#3-共通レイアウト) |
 | 設定画面の配色とヘッダー | 共通の背景・見出し・カードの配色とEmlisヘッダーへ統一し、アカウントを本文先頭の行に移動。現在のプラン、テーマ、通知など既存操作は通常導線から利用する。 | 11/21に新ビルド前のアプリ変更として検証。関連テスト295件、iOSビルド・実機確認は後日。 [設計§9](designs/ui/material-ui-design.md#9-設定) |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |

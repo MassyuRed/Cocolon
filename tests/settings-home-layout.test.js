@@ -18,8 +18,94 @@ function loadSource(file, dependencies) {
   Function('require', 'module', 'exports', compiledSources.get(file))(dependencies, module, module.exports);
   return module.exports;
 }
-const colors = { FIELD_BG: '#FFFFFF', CARD_BORDER: '#D7D2C9', TITLE_GOLD: '#800020', GOLD_BUTTON: '#5A1020' };
-const menuStyles = { homeHeaderRow: { marginBottom: 16 }, homeTitle: { color: colors.TITLE_GOLD } };
+const colors = {
+  FIELD_BG: '#FFFFFF', CARD_BORDER: '#D7D2C9', TITLE_GOLD: '#800020', GOLD_BUTTON: '#5A1020',
+  TEXT_ON_LIGHT: '#272123', TEXT_SUBTLE: '#6B625C',
+};
+const ui = {
+  typography: {
+    screenTitle: { fontSize: 26, lineHeight: 34, fontWeight: '600' },
+    description: { fontSize: 14, lineHeight: 22, fontWeight: '400' },
+    meta: { fontSize: 12, lineHeight: 18, fontWeight: '400' },
+  },
+  spacing: { xs: 4, sm: 8, md: 12, lg: 16, xl: 24 },
+};
+function assertIntroText(root, expected) {
+  const textNodes = root.root.findAllByType('Text');
+  const intro = textNodes.slice(0, 3);
+  assert.deepEqual(intro.map(node => node.props.children), expected);
+  assert.deepEqual(intro.map(node => node.props.accessibilityRole), [undefined, 'header', undefined]);
+  assert.ok(intro.every(node => !node.props.numberOfLines));
+}
+test('Home shows the Japanese weekday and refreshes the date at local midnight and on app return', t => {
+  t.mock.timers.enable({ apis: ['Date', 'setTimeout'], now: new Date(2026, 10, 6, 23, 59, 59, 750) });
+  let appStateListener;
+  const AppState = {
+    currentState: 'active',
+    addEventListener(event, listener) {
+      assert.equal(event, 'change');
+      appStateListener = listener;
+      return { remove: () => { appStateListener = null; } };
+    },
+  };
+  const native = { AppState, View: 'View', Text: 'Text', StyleSheet: { create: value => value } };
+  const dependencies = name => {
+    if (name === 'react') return React;
+    if (name === 'react-native') return native;
+    if (name.endsWith('/CocolonScreenIntro')) return loadSource('components/CocolonScreenIntro.js', dependencies);
+    assert.fail(`Unexpected Home intro import ${name}`);
+  };
+  const HomeScreenIntro = loadSource('screens/input/HomeScreenIntro.js', dependencies).default;
+  let root;
+  Renderer.act(() => { root = Renderer.create(React.createElement(HomeScreenIntro, { colors, ui })); });
+  t.after(() => {
+    Renderer.act(() => root.unmount());
+    assert.equal(appStateListener, null);
+  });
+  const textBelowDate = ['今のあなたを、言葉に。', 'まとまっていなくても、そのままで。'];
+  assertIntroText(root, ['11月6日 金曜日', ...textBelowDate]);
+
+  Renderer.act(() => t.mock.timers.tick(500));
+  assertIntroText(root, ['11月7日 土曜日', ...textBelowDate]);
+
+  Renderer.act(() => appStateListener('background'));
+  t.mock.timers.setTime(new Date(2026, 10, 10, 11).getTime());
+  Renderer.act(() => appStateListener('active'));
+  assertIntroText(root, ['11月10日 火曜日', ...textBelowDate]);
+});
+
+test('the Piece heading shows three intro lines without hiding its existing actions', t => {
+  const actions = [];
+  const native = { Text: 'Text', View: 'View', StyleSheet: { create: value => value } };
+  const dependencies = name => {
+    if (name === 'react') return React;
+    if (name === 'react-native') return native;
+    if (name.endsWith('/Ionicons')) return 'Icon';
+    if (name.endsWith('/CocolonPressable')) return 'Pressable';
+    if (name.endsWith('/CocolonScreenIntro')) return loadSource('components/CocolonScreenIntro.js', dependencies);
+    if (name.endsWith('/PieceScreenIntro')) return loadSource('screens/piece/PieceScreenIntro.js', dependencies);
+    assert.fail(`Unexpected Piece header import ${name}`);
+  };
+  const NexusHeader = loadSource('screens/nexus/NexusHeader.js', dependencies).default;
+  let root;
+  Renderer.act(() => {
+    root = Renderer.create(React.createElement(NexusHeader, {
+      styles: {}, colors, ui, canReadOwnPieces: true, viewerUserId: 'viewer', titleRef: React.createRef(),
+      onRefresh: () => actions.push('refresh'),
+      handleOpenFollowList: () => actions.push('follow'),
+      handleOpenOwnerHistory: () => actions.push('history'),
+    }));
+  });
+  t.after(() => Renderer.act(() => root.unmount()));
+  assertIntroText(root, ['ひとりひとりの記録から', 'ことばを、分け合う。', '言葉や気持ちにふれて、共鳴を届ける。']);
+  for (const action of ['自分のフォローリストを開く', 'ピースを再読み込みする', '自分のPieceを開く']) {
+    const button = root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === action);
+    assert.ok(button, action);
+    button.props.onPress();
+  }
+  assert.deepEqual(actions, ['follow', 'refresh', 'history']);
+});
+
 function mount(t, changes = {}) {
   const navigated = [], actions = [];
   const subscription = { loading:false, tier:'free', currentLabel:'Freeプラン', currentPriceLabel:'無料', actionBusy:false,
@@ -33,7 +119,8 @@ function mount(t, changes = {}) {
     if(name.includes('Ionicons')) return 'Icon';
     if(name.includes('CocolonPressable')) return {__esModule:true,default:'Pressable'};
     if(name.includes('applyTypographyTokens')) return {applyTypographyTokens:x=>x};
-    if(name==='./AnalysisMenuCommon') return {AnalysisMenuScroll:'Scroll',useAnalysisMenuStyles:()=>({styles:menuStyles,colors,ui:{}})};
+    if(name==='./AnalysisMenuCommon') return {AnalysisMenuScroll:'Scroll',useAnalysisMenuStyles:()=>({colors,ui})};
+    if(name==='../components/CocolonScreenIntro') return loadSource('components/CocolonScreenIntro.js', dependencies);
     return {__esModule:true,default:name};
   };
   const { SettingsHomeContent } = loadSource('screens/SettingsScreen.js', dependencies);
@@ -53,17 +140,14 @@ test('settings shows live plan and direct preview groups with existing embedded 
   assert.deepEqual(h.actions,['restore','manage']);
   h.button('プランを選ぶ').props.onPress(); assert.deepEqual(h.navigated,['SubscriptionSelect']);
 });
-test('settings shares the title and card styles and keeps Account in the settings body', t=>{
+test('settings restores the preview intro and keeps Account in the settings body', t=>{
   const h = mount(t);
+  assertIntroText(h.root, ['YOUR SPACE', '設定', 'あなたに合う使い方で。']);
   const labels = h.root.root.findAllByType('Text').map(node => node.props.children);
-  const title = h.root.root.findAllByType('Text').find(node => node.props.children === '設定');
-  assert.equal(title.props.style, menuStyles.homeTitle);
-  assert.ok(labels.indexOf('設定') < labels.indexOf('アカウント'));
+  assert.ok(labels.indexOf('あなたに合う使い方で。') < labels.indexOf('アカウント'));
   assert.ok(labels.indexOf('アカウント') < labels.indexOf('アプリの使い方'));
   assert.ok(labels.indexOf('アプリの使い方') < labels.indexOf('アプリ設定'));
   assert.ok(labels.indexOf('サブスク加入状況') < labels.indexOf('現在のプラン'));
-  assert.ok(!labels.includes('YOUR SPACE'));
-
   for (const label of ['アカウントを開く', '現在のプランと加入状況を開く']) {
     const surface = h.button(label).props.style[0];
     assert.equal(surface.backgroundColor, colors.FIELD_BG);

@@ -72,6 +72,7 @@ import { isPieceBitmapSaveAdmitted, supportsPieceBitmapCreation } from "../featu
 import InputCategorySection from "./input/InputCategorySection";
 import InputEmotionSection from "./input/InputEmotionSection";
 import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
+import HomeScreenIntro from "./input/HomeScreenIntro";
 import InputMemoSection from "./input/InputMemoSection";
 import InputPiecePreviewController from "./input/InputPiecePreviewController";
 import InputStartupModals from "./input/InputStartupModals";
@@ -1289,52 +1290,46 @@ ${String(error?.message || error)}`
                 e?.nativeEvent?.contentOffset?.y ?? currentScrollYRef.current;
             }}
           >
-{/* パネルヘッダー */}
-              <View style={styles.panelHeader}>
-                <View style={styles.panelTitleRow}>
-                  <Text style={styles.panelTitle}>ホーム</Text>
-                </View>
-
-                <View style={styles.headerRight}>
-                  {!shouldHideInputHistoryForTutorial ? (
-                    <CocolonPressable
-                      style={styles.historyIconButton}
-                      onPress={handleOpenEmotionHistory}
-                      accessibilityLabel="入力履歴を開く"
-                    >
-                      <Ionicons name="time-outline" size={20} color={colors.TEXT_ON_LIGHT} />
-                    </CocolonPressable>
+              <View style={styles.headerRight}>
+                {!shouldHideInputHistoryForTutorial ? (
+                  <CocolonPressable
+                    style={styles.historyIconButton}
+                    onPress={handleOpenEmotionHistory}
+                    accessibilityLabel="入力履歴を開く"
+                  >
+                    <Ionicons name="time-outline" size={20} color={colors.TEXT_ON_LIGHT} />
+                  </CocolonPressable>
+                ) : null}
+                <CocolonPressable
+                  style={styles.accountIconButton}
+                  onPress={handlePressAccount}
+                  accessibilityLabel="アカウントページを開く"
+                >
+                  <Ionicons
+                    name="person-circle-outline"
+                    size={20}
+                    color={colors.TEXT_ON_LIGHT}
+                  />
+                </CocolonPressable>
+                <CocolonPressable
+                  style={styles.noticePill}
+                  onPress={handlePressNotifications}
+                  accessibilityLabel="お知らせを開く"
+                >
+                  <Ionicons
+                    name="notifications-outline"
+                    size={20}
+                    color={colors.TEXT_ON_LIGHT}
+                  />
+                  {noticeFeatureEnabled && noticeUnreadCount > 0 ? (
+                    <ScreenUnreadBadge
+                      visible
+                      style={styles.noticeBadgeDot}
+                    />
                   ) : null}
-                  <CocolonPressable
-                    style={styles.accountIconButton}
-                    onPress={handlePressAccount}
-                    accessibilityLabel="アカウントページを開く"
-                  >
-                    <Ionicons
-                      name="person-circle-outline"
-                      size={20}
-                      color={colors.TEXT_ON_LIGHT}
-                    />
-                  </CocolonPressable>
-                  <CocolonPressable
-                    style={styles.noticePill}
-                    onPress={handlePressNotifications}
-                    accessibilityLabel="お知らせを開く"
-                  >
-                    <Ionicons
-                      name="notifications-outline"
-                      size={20}
-                      color={colors.TEXT_ON_LIGHT}
-                    />
-                    {noticeFeatureEnabled && noticeUnreadCount > 0 ? (
-                      <ScreenUnreadBadge
-                        visible
-                        style={styles.noticeBadgeDot}
-                      />
-                    ) : null}
-                  </CocolonPressable>
-                </View>
+                </CocolonPressable>
               </View>
+              <HomeScreenIntro colors={colors} ui={ui} />
 
               <View style={styles.homeOverviewBlock}>
                 {homeReadError ? (
@@ -1615,30 +1610,14 @@ function createStyles(COLORS, ui) {
       shadowOffset: {width:0,height:2},
       elevation: 1,
     },
-    panelHeader: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "space-between",
-      alignItems: "center",
-      gap: 8,
-      marginBottom: 16,
-    },
-    panelTitle: {
-      fontSize: 26,
-      lineHeight: 32,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
-    },
-    panelTitleRow: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
     guideFooter: { marginTop: 16 },
     headerRight: {
       flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "flex-end",
       alignItems: "center",
       gap: 6,
+      marginBottom: 8,
     },
     historyIconButton: {
       width: 44,
@@ -2673,7 +2652,6 @@ toastText: {
   color: COLORS.TEXT_ON_LIGHT,
 },
   }, ui, {
-  "panelTitle": "screenTitle",
   "strengthText": "button",
   "collapsedText": "body",
   "homeQuestionLabel": "meta",

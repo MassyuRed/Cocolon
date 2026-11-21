@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import CocolonScreenIntro from "../components/CocolonScreenIntro";
 import CocolonPressable from "../components/CocolonPressable";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { AnalysisMenuScroll, useAnalysisMenuStyles } from "./AnalysisMenuCommon";
@@ -73,7 +74,7 @@ function SettingsMenuRow({ item, styles, colors, first, last }) {
 }
 
 export function SettingsHomeContent({ navigation, subscription }) {
-  const { styles: menuStyles, colors, ui } = useAnalysisMenuStyles();
+  const { colors, ui } = useAnalysisMenuStyles();
   const styles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
   const openPlans = () => { if (!subscription.actionBusy) navigation.navigate("SubscriptionSelect"); };
   const rows = [
@@ -89,9 +90,13 @@ export function SettingsHomeContent({ navigation, subscription }) {
     { label: "サポート", url: subscription.links.support_url },
   ].filter(item => !!item.url);
   return <AnalysisMenuScroll>
-    <View style={menuStyles.homeHeaderRow}>
-      <Text accessibilityRole="header" style={menuStyles.homeTitle}>設定</Text>
-    </View>
+    <CocolonScreenIntro
+      eyebrow="YOUR SPACE"
+      title="設定"
+      description="あなたに合う使い方で。"
+      colors={colors}
+      ui={ui}
+    />
     <View style={[styles.group, styles.rows]}>
       <SettingsMenuRow
         item={{ label: "アカウント", accessibilityLabel: "アカウントを開く", icon: "person-outline", onPress: () => navigation.navigate("Account") }}
