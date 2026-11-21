@@ -51,8 +51,14 @@ export function resolveNotificationTargetRoute(remoteMessage) {
 
   if (type === "deep_insight_theme_ready" || type === "deep_insight_record_ready") {
     const expectedUserId = String(data?.user_id || "").trim();
-    if (data.target !== "deep_insight" || !expectedUserId || !String(data?.question_id || "").trim()) return null;
-    return { name: "Input", expectedUserId, params: { screen: "DeepInsight", initial: false } };
+    const questionId = String(data?.question_id || "").trim();
+    if (data.target !== "deep_insight" || !expectedUserId || !questionId) return null;
+    const notification = type === "deep_insight_record_ready" ? { lane: "records", questionId } : { lane: "theme" };
+    return {
+      name: "Input",
+      expectedUserId,
+      params: { screen: "DeepInsight", initial: false, params: { notification } },
+    };
   }
 
   if (type === "watashi_map_updated") {

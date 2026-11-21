@@ -804,3 +804,20 @@ test('warm map taps require their owner while generic Home and report notificati
   h.routing.requestOpenRouteFromNotification({ data: { type: 'report_distribution' } });
   assert.equal(h.routes.at(-1)[1].params.openDistributionHome, true);
 });
+
+test('DeepInsight notifications open the right entry only for the intended owner', () => {
+  const h = notificationNavigationHarness();
+  const data = { type: 'deep_insight_record_ready', target: 'deep_insight', user_id: 'A', question_id: 'record-4' };
+  h.routing.requestOpenRouteFromNotification({ data });
+  h.ready(true); h.nav.setNotificationNavigationOwner('B', true);
+  assert.deepEqual(h.routes, []);
+  h.nav.setNotificationNavigationOwner('A', true);
+  h.routing.requestOpenRouteFromNotification({ data: { ...data, question_id: '' } });
+  assert.deepEqual(h.routes, []);
+  h.routing.requestOpenRouteFromNotification({ data });
+  h.routing.requestOpenRouteFromNotification({ data: { ...data, type: 'deep_insight_theme_ready' } });
+  assert.deepEqual(h.routes, [
+    ['Input', { screen: 'DeepInsight', initial: false, params: { notification: { lane: 'records', questionId: 'record-4' } } }],
+    ['Input', { screen: 'DeepInsight', initial: false, params: { notification: { lane: 'theme' } } }],
+  ]);
+});

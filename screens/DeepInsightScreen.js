@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -31,20 +31,27 @@ const THEME_TIME_FORMAT = new Intl.DateTimeFormat("ja-JP", {
   month: "long", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Asia/Tokyo",
 });
 
-export default function DeepInsightScreen({ navigation }) {
+export default function DeepInsightScreen({ navigation, route }) {
   const { user, authOwnerGeneration } = useAuth();
   const { colors, themeName } = useTheme();
   const styles = useMemo(() => createStyles(colors, themeName), [colors, themeName]);
+  const notification = route?.params?.notification;
+  const scroll = useRef(null);
+
+  useEffect(() => {
+    if (notification) scroll.current?.scrollTo({ y: 0, animated: false });
+  }, [notification]);
 
   return (
     <SafeAreaView style={styles.screen}>
       <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.content}>
+        <ScrollView ref={scroll} keyboardShouldPersistTaps="handled" contentContainerStyle={styles.content}>
           <AnalysisSubHeader title={TITLE} onBack={() => navigation.goBack()} />
           {user?.id ? (
             <DeepInsightContent
               key={`${user.id}:${authOwnerGeneration}`}
               ownerId={user.id}
+              notification={notification}
               navigation={navigation}
               styles={styles}
               colors={colors}
@@ -56,9 +63,9 @@ export default function DeepInsightScreen({ navigation }) {
   );
 }
 
-function DeepInsightContent({ ownerId, navigation, styles, colors }) {
+function DeepInsightContent({ ownerId, notification, navigation, styles, colors }) {
   const { data, loadError, questionLoads, questionErrors, reload, issueRecords, issueTheme, answer,
-    notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId);
+    notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId, notification);
   const { isFeatureEnabled } = useAppRuntime();
   const { subscriptionBootstrap } = useSubscription();
   const [theme, setTheme] = useState(null);
@@ -110,105 +117,115 @@ function DeepInsightContent({ ownerId, navigation, styles, colors }) {
   const nextThemeLabel = Number.isFinite(nextThemeAt) ? THEME_TIME_FORMAT.format(nextThemeAt) : null;
   const history = (data.history || []).filter((item) =>
     !(recordPending && item.id === data.records.id) && !(themePending && item.id === data.theme.id));
+  const notifiedHistoryQuestion = notification?.lane === "records"
+    ? history.find((item) => item.lane === "records" && item.id === notification.questionId)
+    : null;
+  const displayedHistory = notifiedHistoryQuestion
+    ? [notifiedHistoryQuestion, ...history.filter((item) => item !== notifiedHistoryQuestion)]
+    : history;
 
-  return (
-    <>
-      {showRecords && (
-        <View style={styles.card}>
-          <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.records}</Text>
-          {recordPending ? (
-            renderAnswer(data.records)
-          ) : data.can_use_records === false ? (
-            <>
-              <Text style={styles.body}>記録やこれまでの回答から、考えを深める問いを受け取れます。Premiumで利用できます。</Text>
-              <CocolonButton variant="secondary" onPress={() => navigation.navigate("SubscriptionSelect")}>プランを見る</CocolonButton>
-            </>
-          ) : questionLoads.records ? (
-            <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="ふりかえりの問いを確認中" />
-          ) : questionErrors.records ? (
-            <>
-              <Text style={styles.error} accessibilityRole="alert">ふりかえりの問いを確認できませんでした。</Text>
-              <CocolonButton variant="secondary" onPress={issueRecords}>もう一度確認する</CocolonButton>
-            </>
+  const recordsCard = showRecords && (
+    <View key="records" style={styles.card}>
+      <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.records}</Text>
+      {recordPending ? (
+        renderAnswer(data.records)
+      ) : data.can_use_records === false ? (
+        <>
+          <Text style={styles.body}>記録やこれまでの回答から、考えを深める問いを受け取れます。Premiumで利用できます。</Text>
+          <CocolonButton variant="secondary" onPress={() => navigation.navigate("SubscriptionSelect")}>プランを見る</CocolonButton>
+        </>
+      ) : questionLoads.records ? (
+        <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="ふりかえりの問いを確認中" />
+      ) : questionErrors.records ? (
+        <>
+          <Text style={styles.error} accessibilityRole="alert">ふりかえりの問いを確認できませんでした。</Text>
+          <CocolonButton variant="secondary" onPress={issueRecords}>もう一度確認する</CocolonButton>
+        </>
+      ) : (
+        <Text style={styles.body}>
+          {data.records?.answered_at ? "回答を保存しました。回答の履歴から見返せます。" : "今は新しいふりかえりの問いがありません。"}
+        </Text>
+      )}
+    </View>
+  );
+
+  const themeCard = (
+    <View key="theme" style={styles.card}>
+      <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.theme}</Text>
+      {!data.can_use_theme && (
+        <>
+          <Text style={styles.body}>気になるテーマを選ぶと、Emlisからそのテーマに沿った問いを受け取れます。Plus・Premiumで利用できます。</Text>
+          <CocolonButton variant="secondary" onPress={() => navigation.navigate("SubscriptionSelect")}>プランを見る</CocolonButton>
+        </>
+      )}
+      {themePending ? (
+        renderAnswer(data.theme)
+      ) : data.can_use_theme && (data.theme_available_today ? (
+        <>
+          <Text style={styles.body}>考えたいテーマを選んでください。</Text>
+          <View style={styles.themes}>
+            {THEMES.map((item) => (
+              <CocolonPressable
+                key={item}
+                onPress={() => setTheme(item)}
+                disabled={questionLoads.theme}
+                accessibilityLabel={item}
+                accessibilityState={{ selected: theme === item }}
+                style={[styles.theme, theme === item && styles.themeSelected]}
+              >
+                <Text style={[styles.themeLabel, theme === item && styles.themeSelectedLabel]}>{item}</Text>
+              </CocolonPressable>
+            ))}
+          </View>
+          {questionErrors.theme && <Text style={styles.error} accessibilityRole="alert">テーマの問いを受け取れませんでした。もう一度お試しください。</Text>}
+          <CocolonButton disabled={!theme} loading={questionLoads.theme} onPress={() => issueTheme(theme)}>
+            問いを受け取る
+          </CocolonButton>
+        </>
+      ) : (
+        data.theme?.answered_at ? <Text style={styles.body}>回答を保存しました。回答の履歴から見返せます。</Text>
+          : !nextThemeLabel && <Text style={styles.body}>テーマの問いは発行済みです。</Text>
+      ))}
+      {data.can_use_theme && !data.theme_available_today && nextThemeLabel && (
+        <Text style={styles.detail}>次の問いは{nextThemeLabel}（日本時間）から受け取れます。</Text>
+      )}
+      {data.can_use_theme && typeof data.theme_notification_enabled === "boolean" && (
+        <>
+          <View style={styles.notificationRow}>
+            <Text style={styles.notificationLabel}>次の問いを受け取れるときに通知する</Text>
+            <CocolonSwitch accessibilityLabel="次の問いを受け取れるときに通知する"
+              value={data.theme_notification_enabled} onValueChange={setThemeNotification}
+              disabled={notificationSaving} iosRightInset={0} />
+          </View>
+          {notificationError && <Text accessibilityRole="alert" style={styles.error}>通知設定を保存できませんでした。</Text>}
+        </>
+      )}
+    </View>
+  );
+
+  const historyCard = (
+    <View key="history" style={styles.card}>
+      <Text accessibilityRole="header" style={styles.heading}>回答の履歴</Text>
+      {history.length === 0 && <Text style={styles.body}>まだ履歴はありません。</Text>}
+      {displayedHistory.map((question) => (
+        <View key={question.id} style={styles.historyItem}>
+          <Text style={styles.detail}>{question.issued_on} · {question.theme || LANE_LABELS[question.lane]}</Text>
+          {isUnanswered(question) ? (
+            renderAnswer(question, false)
           ) : (
-            <Text style={styles.body}>
-              {data.records?.answered_at ? "回答を保存しました。回答の履歴から見返せます。" : "今は新しいふりかえりの問いがありません。"}
-            </Text>
+            <>
+              <Text style={styles.question}>{question.question_text}</Text>
+              <Text style={styles.body} selectable>{question.answer_text}</Text>
+            </>
           )}
         </View>
-      )}
-
-      <View style={styles.card}>
-        <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.theme}</Text>
-        {!data.can_use_theme && (
-          <>
-            <Text style={styles.body}>気になるテーマを選ぶと、Emlisからそのテーマに沿った問いを受け取れます。Plus・Premiumで利用できます。</Text>
-            <CocolonButton variant="secondary" onPress={() => navigation.navigate("SubscriptionSelect")}>プランを見る</CocolonButton>
-          </>
-        )}
-        {themePending ? (
-          renderAnswer(data.theme)
-        ) : data.can_use_theme && (data.theme_available_today ? (
-          <>
-            <Text style={styles.body}>考えたいテーマを選んでください。</Text>
-            <View style={styles.themes}>
-              {THEMES.map((item) => (
-                <CocolonPressable
-                  key={item}
-                  onPress={() => setTheme(item)}
-                  disabled={questionLoads.theme}
-                  accessibilityLabel={item}
-                  accessibilityState={{ selected: theme === item }}
-                  style={[styles.theme, theme === item && styles.themeSelected]}
-                >
-                  <Text style={[styles.themeLabel, theme === item && styles.themeSelectedLabel]}>{item}</Text>
-                </CocolonPressable>
-              ))}
-            </View>
-            {questionErrors.theme && <Text style={styles.error} accessibilityRole="alert">テーマの問いを受け取れませんでした。もう一度お試しください。</Text>}
-            <CocolonButton disabled={!theme} loading={questionLoads.theme} onPress={() => issueTheme(theme)}>
-              問いを受け取る
-            </CocolonButton>
-          </>
-        ) : (
-          data.theme?.answered_at ? <Text style={styles.body}>回答を保存しました。回答の履歴から見返せます。</Text>
-            : !nextThemeLabel && <Text style={styles.body}>テーマの問いは発行済みです。</Text>
-        ))}
-        {data.can_use_theme && !data.theme_available_today && nextThemeLabel && (
-          <Text style={styles.detail}>次の問いは{nextThemeLabel}（日本時間）から受け取れます。</Text>
-        )}
-        {data.can_use_theme && typeof data.theme_notification_enabled === "boolean" && (
-          <>
-            <View style={styles.notificationRow}>
-              <Text style={styles.notificationLabel}>次の問いを受け取れるときに通知する</Text>
-              <CocolonSwitch accessibilityLabel="次の問いを受け取れるときに通知する"
-                value={data.theme_notification_enabled} onValueChange={setThemeNotification}
-                disabled={notificationSaving} iosRightInset={0} />
-            </View>
-            {notificationError && <Text accessibilityRole="alert" style={styles.error}>通知設定を保存できませんでした。</Text>}
-          </>
-        )}
-      </View>
-
-      <View style={styles.card}>
-        <Text accessibilityRole="header" style={styles.heading}>回答の履歴</Text>
-        {history.length === 0 && <Text style={styles.body}>まだ履歴はありません。</Text>}
-        {history.map((question) => (
-          <View key={question.id} style={styles.historyItem}>
-            <Text style={styles.detail}>{question.issued_on} · {question.theme || LANE_LABELS[question.lane]}</Text>
-            {isUnanswered(question) ? (
-              renderAnswer(question, false)
-            ) : (
-              <>
-                <Text style={styles.question}>{question.question_text}</Text>
-                <Text style={styles.body} selectable>{question.answer_text}</Text>
-              </>
-            )}
-          </View>
-        ))}
-      </View>
-    </>
+      ))}
+    </View>
   );
+
+  if (notification?.lane === "theme") return [themeCard, recordsCard, historyCard];
+  if (notifiedHistoryQuestion) return [historyCard, recordsCard, themeCard];
+  return [recordsCard, themeCard, historyCard];
 }
 
 function AnswerForm({ question, draft, styles, colors, showTheme, onChangeText, onSave }) {

@@ -11,7 +11,7 @@ export function isUnanswered(question) {
   return Boolean(question && question.answered_at == null);
 }
 
-export default function useDeepInsight(ownerId) {
+export default function useDeepInsight(ownerId, notification) {
   const current = useRef(null);
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState(false);
@@ -86,6 +86,7 @@ export default function useDeepInsight(ownerId) {
     }
   }, [issue]);
 
+  // Reopen a fresh read when a notification is tapped on the focused screen.
   useFocusEffect(useCallback(() => {
     const controller = new AbortController();
     const request = {
@@ -103,7 +104,7 @@ export default function useDeepInsight(ownerId) {
     setNotificationError(false);
     void load(request);
     return () => controller.abort();
-  }, [load, ownerId]));
+  }, [load, ownerId, notification]));
 
   const nextThemeAt = data?.theme_next_available_at;
   const themeAvailable = data?.theme_available_today;
