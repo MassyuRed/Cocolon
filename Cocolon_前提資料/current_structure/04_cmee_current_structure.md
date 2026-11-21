@@ -1,3 +1,7 @@
+### 11/21 — わたしを知る問いの候補検査
+
+開発差分では、既存の4B提供で一問の候補を生成し、`cocolon_meaning_experience_engine/deep_insight_question.py` が記録の引用との一致、候補の形式、既出の問いとの重複を検査する。わたしマップとEmlisで確認した点は次の問いを選ぶ材料にし、本人が書いた原文と回答を根拠に扱う。`api_deep_insight.py` が本人の発行・回答・再読を接続する。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)
+
 ### 11/20　三中核が参照する4Bと保存経路
 
 Emlisは本人が回答した時とスキップした時に自然応答を確定する。Pieceは選んだ入力と問い・回答の対応を検査し、本文と画像の描画情報を同じ版で非公開保存する。わたしマップは保存後の通知ジョブから本人の保存版を開く。通常の実測、各経路の到達点、GPUの2つの推論URLと認証キーの対応は [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
@@ -2426,5 +2430,4 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 
 
 > **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速なPyTorch代替処理も確認し、高速部品を候補専用に隔離準備中。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
-
 

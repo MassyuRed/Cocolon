@@ -98,18 +98,18 @@ export const guideTermsJa = Object.freeze({
 ],
     relatedTerms: ["emotion_input", "analysis_report"],
   },
-  today_question: {
-    termId: "today_question",
-    display: "今日の問い",
-    reading: "きょうのとい",
-    shortDef: "その日ごとに表示される問いです。",
+  deep_insight: {
+    termId: "deep_insight",
+    display: "わたしを知る問い",
+    reading: "わたしをしるとい",
+    shortDef: "Emlisの問いを通じて、自分の考えや判断をふりかえる機能です。",
     longDef:
-      "Home や Analysis から扱える、その日ごとの問いです。感情入力とは別に、問いに答えることで、その時の考え方や状態を残していけます。",
+      "「記録をふりかえる」では、Emlisが記録や過去の回答から確かめたいことを見つけると問いが届きます。回答するまで同じ問いが残ります。「テーマから考える」では、Plus・Premiumで気になるテーマに沿った問いを受け取れます。回答は今後の問いやわたしマップに使われます。",
     examples: [
-      "その日のテーマに沿って短く答えを残す",
-      "あとから履歴で見返して、その時期の思考を追う",
+      "出来事を見返して、そのとき何を大事にしたかを書く",
+      "気になるテーマを選び、普段の考え方を言葉にする",
     ],
-    relatedTerms: ["today_question_history", "analysis"],
+    relatedTerms: ["analysis"],
   },
   emotion_input_history: {
     termId: "emotion_input_history",
@@ -123,19 +123,6 @@ export const guideTermsJa = Object.freeze({
       "特定の時期に書いた内容を探す",
     ],
     relatedTerms: ["emotion_input", "analysis", "analysis_report"],
-  },
-  today_question_history: {
-    termId: "today_question_history",
-    display: "今日の問い履歴",
-    reading: "きょうのといりれき",
-    shortDef: "これまで答えた「今日の問い」を見返す履歴です。",
-    longDef:
-      "日ごとに答えた問いと答えを振り返るための履歴です。感情入力の履歴とは違い、その日の考え方やテーマに対する答えの変化を追うのに向いています。",
-    examples: [
-      "以前の自分が同じテーマにどう答えていたかを見る",
-      "数週間前の考え方との差を比較する",
-    ],
-    relatedTerms: ["today_question", "analysis"],
   },
   analysis_report: {
     termId: "analysis_report",

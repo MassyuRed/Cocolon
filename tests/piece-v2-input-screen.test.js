@@ -97,7 +97,7 @@ function harness(options = {}) {
   const colors = {}, ref = { current: null };
   const home = { loadHomeState: async () => { if (control.refresh) await control.refresh(); },
     registerInputInteraction: noop, closeStartupPopupWindow: noop, pieceQuota: null,
-    setPieceQuota: noop, todayQuestionBundle: null };
+    setPieceQuota: noop };
   const dependency = name => {
     if (name === 'react') return { __esModule: true, default: React, ...React };
     if (name === 'react-native') return { ActivityIndicator: 'ActivityIndicator', Alert: { alert: (...a) => notices.push(a) },

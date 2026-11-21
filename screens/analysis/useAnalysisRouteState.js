@@ -2,15 +2,12 @@ import { useCallback, useState } from "react";
 
 import {
   ROUTE_HOME,
-  ROUTE_INPUT_HISTORY,
   ROUTE_SELF_STRUCTURE,
 } from "./analysisRouteModel";
 
 export function useAnalysisRouteState({ navigation }) {
   const [route, setRoute] = useState(ROUTE_HOME);
   const [selectedSelfReport, setSelectedSelfReport] = useState(null);
-  const [historyBackRoute, setHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
-  const [todayQuestionHistoryBackRoute, setTodayQuestionHistoryBackRoute] = useState(ROUTE_INPUT_HISTORY);
   const [selfReportGenerateBackRoute, setSelfReportGenerateBackRoute] = useState(ROUTE_SELF_STRUCTURE);
   const [selfReportHistoryBackRoute, setSelfReportHistoryBackRoute] = useState(ROUTE_SELF_STRUCTURE);
   const [selfReportGenerateMode, setSelfReportGenerateMode] = useState("standard");
@@ -38,10 +35,6 @@ export function useAnalysisRouteState({ navigation }) {
     setRoute,
     selectedSelfReport,
     setSelectedSelfReport,
-    historyBackRoute,
-    setHistoryBackRoute,
-    todayQuestionHistoryBackRoute,
-    setTodayQuestionHistoryBackRoute,
     selfReportGenerateBackRoute,
     setSelfReportGenerateBackRoute,
     selfReportHistoryBackRoute,

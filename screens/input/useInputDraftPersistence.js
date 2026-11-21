@@ -18,7 +18,6 @@ export function useInputDraftPersistence({
   startupQueuePreparing,
   startupModalVisible,
   noticeLoading,
-  todayQuestionLoading,
   inputFeedbackModalVisible,
   applyInputDraft,
   showToast,
@@ -41,7 +40,7 @@ export function useInputDraftPersistence({
     if (!pendingInputDraft) return false;
     if (isTutorialMode) return false;
     if (startupQueuePreparing || startupModalVisible) return false;
-    if (noticeLoading || todayQuestionLoading) return false;
+    if (noticeLoading) return false;
     if (inputFeedbackModalVisible) return false;
     if (hasCurrentDraftContent) return false;
     return true;
@@ -53,7 +52,6 @@ export function useInputDraftPersistence({
     pendingInputDraft,
     startupModalVisible,
     startupQueuePreparing,
-    todayQuestionLoading,
   ]);
 
   const draftPersistenceBlocked =

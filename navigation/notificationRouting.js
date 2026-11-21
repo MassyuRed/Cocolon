@@ -59,7 +59,7 @@ export function resolveNotificationTargetRoute(remoteMessage) {
     };
   }
 
-  if (type === "today_question" || screen === "Input") {
+  if (screen === "Input") {
     return { name: "Input" };
   }
   if (type === "report_distribution") {

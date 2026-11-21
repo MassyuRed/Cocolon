@@ -1,3 +1,7 @@
+### 11/21 — わたしを知る問いの本人回答
+
+開発差分で、`deep_insight_questions` に保存した本人の回答をわたしマップの累積材料へ追加する。根拠には実際に発行した問いと本人の回答を別々に渡し、問いの仮説を本人の経験として扱わない。`analysis_cumulative_service.py` から既存のバックグラウンド更新へ接続し、新しい回答を現在版の次回更新に使う。根拠表示は `components/selfStructure/CumulativeWatashiMapView.js` が担当する。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)
+
 ### 11/20 — 通常ワーカーでB61を保存し、本人の再読と更新通知を確認
 
 通常MAPの長い履歴をワーカーで処理し、専用の試験所有者の架空入力12件から1回で通常保存しました。本人の最新・詳細で同じID、図12項目・2本の線、本文4,251字が一致しました。更新通知は本人・保存版と一致する1件を処理し、登録端末0件につきFCM送信0件でした。 [補助設計§9.204](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-b61-normal-background-map-20261120)
@@ -1864,5 +1868,4 @@ scope75d8633dは失敗時終了条件で閉鎖。追加修正／retry／次scope
 全体主枠は§9.54／第11回§5。最新実績は§9.102。両CI成功後に承認済みA10を一回実行し、前対照2＋分析2の計4応答で停止。読書会はGENERATEDだが意味不適合、照明は未使用r1/r2によるorphan拒否。残3件・後対照・B10は未実行。復元込み276.144289秒、元120u PID141466/start238372709・health200へ復元し候補listener停止を確認。scopef68618f0のA10は消費済み／失敗閉鎖、B10の全5件適合条件は不成立・枠転用なし。追加修正／retry／次試行準備0。通常API／worker24bc228d Live・DB38migration／20261115011424・worker900をfresh確認。全12実意味→同raw保存再読→通常反映の元単位／補助全体／正式受入れ未完、配布保留。
 
 原本とroot／独立全文照合は補助設計§9.102と同trial semantic_event_plan_v2_a10_actual_20261116/。既存作者source b14960eは候補のまま、今回商品source／route／schema／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。先行準備と旧失敗原本はGit historyおよび§9.100〜101に保持する。
-
 

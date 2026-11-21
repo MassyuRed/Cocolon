@@ -435,10 +435,6 @@ export default function MainTabs() {
         // Keep startup focused on app-level seed / badge / prefetch concerns.
         delete startupRoot.sections.notice_current;
         delete startupRoot.sections.notices_current;
-        delete startupRoot.sections.today_question;
-        delete startupRoot.sections.today_question_light;
-        delete startupRoot.sections.today_question_status;
-        delete startupRoot.sections.today_question_popup;
       }
 
       return cloned;

@@ -7345,3 +7345,8 @@ API f5d8967の変更11pathを復元manifestと全文一致で照合。新しい�
 
 
 > **11/15最新：MERGE v2の原文境界を修復、実統合は意味不一致のため不採用。** dca20231はLEAF自然文・AIunknownを最終作者と公開nodeへ自動継承せず、本人原文24欄全文＋41完全一致引用＋12受領hashから再統合する。関連167件とAnalysis／Pieceの両CI成功。実1MERGEは200／length・4834字を受領したが、主体の混同、否定の反転、後続確認の消失を原文照合で確認し保存0。driver258.180秒、復元込み334.644秒で元提供PID117766へ戻した。低速なPyTorch代替処理も確認し、高速部品を候補専用に隔離準備中。次は同じ新規架空2記録で既存4Bのadapter有無を各1回比較し、改善未確認の全12再試行はしない。通常API／worker24bc228d・DB20261115011424、保存済み当時版、build保留を維持する。詳細§9.83。
+## 2026-11-21 — わたしを知る問いの入口
+
+ホームの `screens/InputScreen.js` → `navigation/InputStackNavigator.js` → `screens/DeepInsightScreen.js`。`features/home/useDeepInsight.js` は本人の認証と画面フォーカスに応じて問い・回答履歴を取得し、発行したIDに回答を送る。`lib/api/home/deepInsightApi.js` は `/deep-insight` の読み取り、発行、回答保存へのクライアント境界。日次上限、未回答の保持、プラン権利はサーバー側で判定する。
+
+旧「今日の問い」はホーム／起動時の出題、回答履歴、設定、通知の通常導線から廃止する。Emlisの感情記録中に出る問いは入力に付随する既存機能。 [最新議事録§7](weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)

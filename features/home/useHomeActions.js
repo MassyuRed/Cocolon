@@ -1,23 +1,12 @@
-import { Alert } from "react-native";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 import { markNoticePopupSeen, markNoticesRead } from "../../lib/api/home/noticeApi";
-import { submitTodayQuestionAnswer } from "../../lib/api/home/todayQuestionApi";
-import { STARTUP_POPUP_KIND } from "./useHomeState";
 
 export function useHomeActions({
   noticePopup,
-  todayQuestionBundle,
-  activeStartupPopupKind,
-  loadHomeState,
-  advanceStartupPopupQueue,
   rememberDismissedNotice,
-  rememberDismissedTodayQuestionDay,
   setNoticePopup,
-  showToast,
 }) {
-  const [todayQuestionSubmitting, setTodayQuestionSubmitting] = useState(false);
-
   const markCurrentNoticePopupSeen = useCallback(async () => {
     const noticeId = String(noticePopup?.notice_id || "").trim();
     if (!noticeId) return;
@@ -47,55 +36,7 @@ export function useHomeActions({
     }
   }, [noticePopup?.notice_id, setNoticePopup]);
 
-  const handleSubmitTodayQuestion = useCallback(async (payload) => {
-    if (!todayQuestionBundle?.question?.question_id) return;
-
-    setTodayQuestionSubmitting(true);
-    try {
-      await submitTodayQuestionAnswer({
-        service_day_key: todayQuestionBundle?.service_day_key,
-        question_id: todayQuestionBundle?.question?.question_id,
-        sequence_no: todayQuestionBundle?.progress?.sequence_no,
-        question_origin:
-          todayQuestionBundle?.question_origin ||
-          todayQuestionBundle?.question?.question_origin ||
-          undefined,
-        personal_question_id:
-          todayQuestionBundle?.personal_question_id ||
-          todayQuestionBundle?.question?.personal_question_id ||
-          undefined,
-        source_anchor_hash:
-          todayQuestionBundle?.source_anchor?.source_hash ||
-          todayQuestionBundle?.question?.source_anchor?.source_hash ||
-          undefined,
-        ...payload,
-      });
-      showToast("今日の問いを保存しました");
-      rememberDismissedTodayQuestionDay(
-        String(todayQuestionBundle?.service_day_key || "")
-      );
-      if (activeStartupPopupKind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
-        advanceStartupPopupQueue();
-      }
-      await loadHomeState({ force: true, includeStartupCandidate: false });
-    } catch (e) {
-      console.warn("InputScreen: submitTodayQuestion failed", e);
-      Alert.alert("今日の問い", String(e?.message || "保存に失敗しました。"));
-    } finally {
-      setTodayQuestionSubmitting(false);
-    }
-  }, [
-    activeStartupPopupKind,
-    advanceStartupPopupQueue,
-    loadHomeState,
-    rememberDismissedTodayQuestionDay,
-    showToast,
-    todayQuestionBundle,
-  ]);
-
   return {
-    todayQuestionSubmitting,
-    handleSubmitTodayQuestion,
     markCurrentNoticePopupSeen,
     markCurrentNoticeRead,
   };

@@ -117,9 +117,8 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
 test('home initial read settles on failure, can retry, and ignores requests from a previous owner', async t => {
   const reads=[];const navigation={addListener:()=>()=>{}};let value,root;
   const hook=load('features/home/useHomeState.js',{
-    'react-native':native,'../../AppRuntimeContext':{useAppRuntime:()=>({isFeatureEnabled:()=>true})},
+    'react-native':native,
     '../../lib/api/home/homeStateApi':{getHomeState:()=>{const d=deferred();reads.push(d);return d.promise;}},
-    '../../lib/api/home/todayQuestionApi':{resolveLocalTimezoneName:()=> 'Asia/Tokyo'},
   }).useHomeState;
   const candidate=()=>null;
   function Home({owner}){value=hook({currentUserId:owner,isTutorialMode:false,tutorialFlagsLoaded:true,navigation,buildTutorialStartupCandidate:candidate});return null;}

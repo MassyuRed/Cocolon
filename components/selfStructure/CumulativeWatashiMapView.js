@@ -308,7 +308,12 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             {item.evidence_scope === 'MAP_CORRECTION_CONTEXT' ? <Text style={styles.label}>訂正対象の分析で参照した記録</Text> : null}
             <Text style={[styles.meta, { color: ink }]}>{dateLabel(item.created_at)}</Text>
             {item.version_state !== 'CURRENT' ? <Text style={[styles.bodyText, { color: ink }]}>この記録は分析後に編集されています。以下は現在の内容です。</Text> : null}
-            {item.memo ? <><Text style={styles.label}>思考内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo}</Text></> : null}
+            {item.deep_insight ? <>
+              <Text style={styles.label}>わたしを知る問い</Text>
+              <Text style={[styles.record, { color: ink }]}>{item.deep_insight.question_text}</Text>
+              <Text style={styles.label}>本人の回答</Text>
+              <Text style={[styles.record, { color: ink }]}>{item.deep_insight.answer_text}</Text>
+            </> : item.memo ? <><Text style={styles.label}>思考内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo}</Text></> : null}
             {item.memo_action ? <><Text style={styles.label}>行動内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo_action}</Text></> : null}
             {item.answers?.length ? <Text style={styles.label}>本人補足</Text> : null}
             {item.answers?.map((answer, index) => <Text key={index} style={[styles.record, { color: ink }]}>補足：{answer}</Text>)}

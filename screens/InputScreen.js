@@ -1,12 +1,10 @@
 import Ionicons from "react-native-vector-icons/Ionicons";
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState, useMemo } from "react";
 import {
-  ActivityIndicator,
   Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -23,7 +21,7 @@ import { useEmlisQuestionPreference } from "./input/useEmlisQuestionPreference";
 import { useAppRuntime } from "../AppRuntimeContext";
 import EmlisThreadModal from "./input/EmlisThreadModal";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
-import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
+import { useHomeState } from "../features/home/useHomeState";
 import { useHomeActions } from "../features/home/useHomeActions";
 
 // テーマ
@@ -43,7 +41,6 @@ import TutorialOverlay, {
   syncTutorialSpotlightTarget,
   waitForTutorialFrames,
 } from "../components/TutorialOverlay";
-import TodayQuestionCard from "../components/TodayQuestionCard";
 import {
   getTutorialEmlisReplyText,
   TUTORIAL_EMLIS_REPLY,
@@ -339,7 +336,6 @@ useEffect(() => {
   }
 }, [navigation, resetLocalInputState, route?.params?.tutorialFinishedAt]);
 
-const [isTodayQuestionExpanded, setIsTodayQuestionExpanded] = useState(false);
 const [tutorialPromptDismissedThisSession, setTutorialPromptDismissedThisSession] =
   useState(false);
 
@@ -358,13 +354,11 @@ const homeState = useHomeState({
 });
 
   const {
-    activeStartupPopup,
     advanceStartupPopupQueue,
     closeStartupPopupWindow,
     initialHomeReadComplete,
     homeReadError,
     isNoticeStartupPopupVisible,
-    isTodayQuestionStartupPopupVisible,
     isTutorialStartupPopupVisible,
     loadHomeState,
     noticeFeatureEnabled,
@@ -372,63 +366,26 @@ const homeState = useHomeState({
     noticePopup,
     registerInputInteraction,
     rememberDismissedNotice,
-    rememberDismissedTodayQuestionDay,
     setNoticePopup,
     startupModalVisible,
     startupQueuePreparing,
-    todayQuestionBundle,
-    todayQuestionLoading,
   } = homeState;
 
 
 
 const {
-  todayQuestionSubmitting,
-  handleSubmitTodayQuestion,
   markCurrentNoticePopupSeen,
   markCurrentNoticeRead,
 } = useHomeActions({
   noticePopup,
-  todayQuestionBundle,
-  activeStartupPopupKind: activeStartupPopup?.kind,
-  loadHomeState,
-  advanceStartupPopupQueue,
   rememberDismissedNotice,
-  rememberDismissedTodayQuestionDay,
   setNoticePopup,
-  showToast,
 });
-
-useEffect(() => {
-  setIsTodayQuestionExpanded(false);
-}, [todayQuestionBundle?.service_day_key, todayQuestionBundle?.question?.question_id]);
 
 const isWelcomeNoticeStartupPopup = useMemo(
   () => isWelcomeNoticePopupCandidate(noticePopup),
   [noticePopup],
 );
-const isTodayQuestionAnswered = todayQuestionBundle?.answer_status === "answered";
-const todayQuestionReleaseStatus = String(todayQuestionBundle?.release_status || "");
-const isTodayQuestionLockedUntilDelivery =
-  todayQuestionReleaseStatus === "locked_until_delivery" && !todayQuestionBundle?.question;
-const hasTodayQuestionSlot =
-  !!todayQuestionBundle?.question ||
-  !!todayQuestionBundle?.has_current_question ||
-  isTodayQuestionLockedUntilDelivery;
-const todayQuestionStatusLabel = isTodayQuestionLockedUntilDelivery
-  ? "配信待ち"
-  : isTodayQuestionAnswered
-    ? "回答済み"
-    : "未回答";
-
-const handleDismissTodayQuestionModal = useCallback(() => {
-  const serviceDayKey = String(todayQuestionBundle?.service_day_key || "");
-  if (serviceDayKey) {
-    rememberDismissedTodayQuestionDay(serviceDayKey);
-  }
-  advanceStartupPopupQueue();
-}, [advanceStartupPopupQueue, rememberDismissedTodayQuestionDay, todayQuestionBundle?.service_day_key]);
-
 const handleOpenEmotionHistory = useCallback(() => {
   closeStartupPopupWindow();
 
@@ -452,54 +409,10 @@ const handleOpenEmotionHistory = useCallback(() => {
   }
 }, [closeStartupPopupWindow, navigation]);
 
-const handleOpenTodayQuestionHistory = useCallback(() => {
-  if (activeStartupPopup?.kind === STARTUP_POPUP_KIND.TODAY_QUESTION) {
-    closeStartupPopupWindow();
-  }
-
-  try {
-    navigation?.navigate?.("TodayQuestionHistory");
-    return;
-  } catch {
-    // noop
-  }
-
-  try {
-    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-    if (parent && typeof parent.navigate === "function") {
-      parent.navigate("Input", {
-        screen: "TodayQuestionHistory",
-      });
-      return;
-    }
-  } catch {
-    // noop
-  }
-
-  try {
-    const parent = typeof navigation?.getParent === "function" ? navigation.getParent() : null;
-    if (parent && typeof parent.navigate === "function") {
-      parent.navigate("Analysis", {
-        openTodayQuestionHistory: true,
-        openTodayQuestionHistoryAt: Date.now(),
-      });
-      return;
-    }
-  } catch {
-    // noop
-  }
-
-  try {
-    navigation?.navigate?.("Analysis", {
-      openTodayQuestionHistory: true,
-      openTodayQuestionHistoryAt: Date.now(),
-    });
-  } catch {
-    // noop
-  }
-}, [activeStartupPopup?.kind, closeStartupPopupWindow, navigation]);
-
-
+const handleOpenDeepInsight = useCallback(() => {
+  closeStartupPopupWindow();
+  navigation?.navigate?.("DeepInsight");
+}, [closeStartupPopupWindow, navigation]);
 
 const safeInsets = useSafeAreaInsets();
 
@@ -519,7 +432,6 @@ const safeInsets = useSafeAreaInsets();
     isTutorialMode &&
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
-  const shouldHideTodayQuestionForTutorial = isTutorialMode;
   const shouldHideInputHistoryForTutorial =
     isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
 
@@ -604,7 +516,6 @@ const safeInsets = useSafeAreaInsets();
     startupQueuePreparing,
     startupModalVisible,
     noticeLoading,
-    todayQuestionLoading,
     inputFeedbackModalVisible: inputFeedbackModalVisible || emlisThread.visible,
     applyInputDraft,
     showToast,
@@ -850,9 +761,6 @@ const safeInsets = useSafeAreaInsets();
     memo,
     memoAction,
     keyboardInset,
-    shouldHideTodayQuestionForTutorial,
-    hasTodayQuestionSlot,
-    todayQuestionLoading,
     noticeLoading,
     tutorialOverlayMetrics,
     syncTutorialTargetRect,
@@ -1272,53 +1180,19 @@ ${String(error?.message || error)}`
                     <CocolonPressable accessibilityRole="button" accessibilityLabel="ホームをもう一度読み込む" style={{ minHeight: 44, justifyContent: "center" }} onPress={() => loadHomeState({ force: true, includeStartupCandidate: false })} disabled={noticeLoading}><Text style={{ color: colors.TITLE_GOLD }}>もう一度読み込む</Text></CocolonPressable>
                   </View>
                 ) : null}
-                {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
-                  <Pressable
+                {!isTutorialMode ? (
+                  <CocolonPressable
                     style={styles.homeQuestionButton}
-                    onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
+                    onPress={handleOpenDeepInsight}
                     accessibilityRole="button"
-                    accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
-                    accessibilityState={{ expanded: isTodayQuestionExpanded }}
+                    accessibilityLabel="わたしを知る問いを開く"
                   >
                     <View style={styles.homeQuestionIcon}>
                       <Ionicons name="sparkles-outline" size={20} color={colors.ON_SURFACE_HIGHLIGHT} />
                     </View>
-                    <View style={styles.homeQuickActionTextWrap}>
-                      <Text style={styles.homeQuestionLabel}>今日の問い · {todayQuestionStatusLabel}</Text>
-                      <Text style={styles.homeQuestionText}>
-                        {todayQuestionBundle?.question?.text || todayQuestionBundle?.release_message || "今日の問いを開く"}
-                      </Text>
-                    </View>
-                    {todayQuestionLoading ? (
-                      <ActivityIndicator size="small" color={colors.ON_SURFACE_HIGHLIGHT} />
-                    ) : null}
-                    <Ionicons
-                      name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
-                      size={18}
-                      color={colors.ON_SURFACE_HIGHLIGHT}
-                    />
-                  </Pressable>
-                ) : null}
-
-                {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot && isTodayQuestionExpanded ? (
-                  <View style={styles.todayQuestionInlineContent}>
-                    <TodayQuestionCard
-                      question={todayQuestionBundle?.question}
-                      answerSummary={todayQuestionBundle?.answer_summary || null}
-                      loading={todayQuestionLoading}
-                      submitting={todayQuestionSubmitting}
-                      compact
-                      hideHeader
-                      embedded
-                      showHistoryButton
-                      releaseStatus={todayQuestionBundle?.release_status}
-                      releaseTimeLocal={todayQuestionBundle?.release_time_local}
-                      releaseMessage={todayQuestionBundle?.release_message}
-                      delivery={todayQuestionBundle?.delivery}
-                      onSubmit={handleSubmitTodayQuestion}
-                      onOpenHistory={handleOpenTodayQuestionHistory}
-                    />
-                  </View>
+                    <Text style={styles.homeQuestionText}>わたしを知る問い</Text>
+                    <Ionicons name="chevron-forward" size={18} color={colors.ON_SURFACE_HIGHLIGHT} />
+                  </CocolonPressable>
                 ) : null}
               </View>
 
@@ -1425,14 +1299,6 @@ ${String(error?.message || error)}`
   handlePressNoticeAction={handlePressNoticeAction}
   isWelcomeNoticeStartupPopup={isWelcomeNoticeStartupPopup}
   handlePrimaryNoticeModalAction={handlePrimaryNoticeModalAction}
-  shouldHideTodayQuestionForTutorial={shouldHideTodayQuestionForTutorial}
-  isTodayQuestionStartupPopupVisible={appStartupReady && isTodayQuestionStartupPopupVisible}
-  todayQuestionBundle={todayQuestionBundle}
-  todayQuestionLoading={todayQuestionLoading}
-  todayQuestionSubmitting={todayQuestionSubmitting}
-  handleDismissTodayQuestionModal={handleDismissTodayQuestionModal}
-  handleSubmitTodayQuestion={handleSubmitTodayQuestion}
-  handleOpenTodayQuestionHistory={handleOpenTodayQuestionHistory}
   draftRestoreModalVisible={appStartupReady && draftRestoreModalVisible}
   draftRestoreSavedAtLabel={draftRestoreSavedAtLabel}
   restorePendingInputDraft={restorePendingInputDraft}
@@ -1572,14 +1438,8 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
       justifyContent: "center",
     },
-    homeQuestionLabel: {
-      fontSize: 12,
-      lineHeight: 18,
-      fontWeight: "400",
-      color: COLORS.ON_SURFACE_HIGHLIGHT,
-      marginBottom: 2,
-    },
     homeQuestionText: {
+      flex: 1,
       fontSize: 15,
       lineHeight: 22,
       fontWeight: "600",
@@ -1728,61 +1588,6 @@ function createStyles(COLORS, ui) {
     homeQuickActionSpinner: {
       marginRight: 4,
     },
-    todayQuestionInlineContent: {
-      marginTop: 8,
-      borderRadius: 18,
-      borderWidth: 0,
-      backgroundColor: COLORS.FIELD_BG,
-      padding: 16,
-    },
-    todayQuestionAccordionCard: {
-      marginBottom: 10,
-      borderRadius: 24,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      overflow: "hidden",
-    },
-    todayQuestionAccordionHeader: {
-      minHeight: 52,
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      flexWrap: "wrap",
-      gap: 8,
-    },
-    todayQuestionAccordionTitle: {
-      fontSize: 12,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    todayQuestionAccordionHeaderRight: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginLeft: 12,
-    },
-    todayQuestionAccordionStatus: {
-      fontSize: 12,
-      fontWeight: "800",
-      color: COLORS.TEXT_ON_LIGHT,
-      marginRight: 8,
-    },
-    todayQuestionAccordionStatusAnswered: {
-      color: COLORS.TITLE_GOLD,
-    },
-    todayQuestionAccordionSpinner: {
-      marginRight: 6,
-    },
-    todayQuestionAccordionContent: {
-      borderTopWidth: 1,
-      borderTopColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingTop: 12,
-      paddingBottom: 12,
-    },
-
     inputHistoryQuickCard: {
       marginBottom: 0,
       borderRadius: 24,
@@ -2557,7 +2362,6 @@ toastText: {
   }, ui, {
   "strengthText": "button",
   "collapsedText": "body",
-  "homeQuestionLabel": "meta",
   "homeQuestionText": "button",
   "memoFieldLabel": "description",
   "emotionSectionMeta": "meta",
@@ -2569,8 +2373,6 @@ toastText: {
   "inputTrialPromoButtonText": "button",
   "homeQuickActionTitle": "description",
   "homeQuickActionMeta": "meta",
-  "todayQuestionAccordionTitle": "sectionTitle",
-  "todayQuestionAccordionStatus": "meta",
   "inputHistoryQuickTitle": "sectionTitle",
   "inputHistoryQuickSubtitle": "description",
   "heroEyebrow": "meta",

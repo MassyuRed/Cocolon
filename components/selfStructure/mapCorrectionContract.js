@@ -57,6 +57,12 @@ function checkedMapCorrectionEvidenceItems(items) {
         || (item.evidence_scope !== undefined && item.evidence_scope !== 'MAP_CORRECTION_CONTEXT')) {
       throw new Error('analysis_map_correction_evidence_invalid');
     }
+    const deepInsight = item.deep_insight;
+    if (deepInsight !== undefined && (!deepInsight || Object.keys(deepInsight).length !== 2
+        || !nonblank(deepInsight.question_text) || !nonblank(deepInsight.answer_text)
+        || deepInsight.answer_text !== item.memo)) {
+      throw new Error('analysis_deep_insight_evidence_invalid');
+    }
     if (item.map_corrections === undefined) continue;
     if (!Array.isArray(item.map_corrections)) throw new Error('analysis_map_correction_evidence_invalid');
     for (const correction of item.map_corrections) {

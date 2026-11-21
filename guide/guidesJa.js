@@ -48,7 +48,7 @@ export const guidesJa = Object.freeze({
       "self_insight_mode",
       "emotion_notifications",
       "piece",
-      "today_question",
+      "deep_insight",
       "emlis_reply",
     ],
     blocks: [
@@ -99,7 +99,7 @@ export const guidesJa = Object.freeze({
   },
   {
     "type": "note",
-    "text": "長文でなくても構いません。[[term:today_question|今日の問い]] や入力履歴もホームから開けます。"
+    "text": "[[term:deep_insight|わたしを知る問い]] や入力履歴もホームから開けます。"
   }
 ],
   },
@@ -113,7 +113,6 @@ export const guidesJa = Object.freeze({
       "analysis_report",
       "self_analysis",
       "emotion_input_history",
-      "today_question_history",
     ],
     blocks: [
       {
@@ -152,7 +151,7 @@ export const guidesJa = Object.freeze({
       {
         type: "note",
         text:
-          "[[term:today_question_history|今日の問い履歴]] や [[term:emotion_input_history|入力履歴]] も、振り返りに使えます。",
+          "[[term:emotion_input_history|入力履歴]] も、振り返りに使えます。",
       },
     ],
   },

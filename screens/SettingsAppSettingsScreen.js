@@ -9,11 +9,6 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiGet, apiPatch, apiPost } from "../lib/apiClient";
 import { EMOTION_NOTIFICATION_WIRE, readEmotionNotificationOwnerId } from "../lib/compat/legacyWireContracts";
 import {
-  getTodayQuestionSettings,
-  patchTodayQuestionSettings,
-  resolveLocalTimezoneName,
-} from "../lib/todayQuestionApi";
-import {
   THEME_LABELS_JA,
   THEME_PALETTES,
   THEME_VARIANTS,
@@ -252,30 +247,20 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
   const ownerRequestRef = useRef(null);
   const { ui } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
-  const fallbackTimezone = useMemo(
-    () => resolveLocalTimezoneName("Asia/Tokyo"),
-    []
-  );
-
   const [expandedSection, setExpandedSection] = useState(null);
   const [notificationReadFailures, setNotificationReadFailures] = useState({});
   const [localProcessing, setLocalProcessing] = useState(false);
   const [pushEnabled, setPushEnabled] = useState(true);
   const [pushLoading, setPushLoading] = useState(true);
-  const [todayQuestionNotificationEnabled, setTodayQuestionNotificationEnabled] = useState(true);
-  const [todayQuestionDeliveryTime, setTodayQuestionDeliveryTime] = useState("18:00");
-  const [todayQuestionTimezone, setTodayQuestionTimezone] = useState(fallbackTimezone);
-  const [todayQuestionLoading, setTodayQuestionLoading] = useState(true);
   const [emotionNotificationEnabled, setEmotionNotificationEnabled] = useState(true);
   const [emotionNotificationLoading, setEmotionNotificationLoading] = useState(true);
 
   const isBusy = authLoading || localProcessing;
   const notificationSettingsLoading =
     pushLoading ||
-    todayQuestionLoading ||
     emotionNotificationLoading;
 
-  const failedNotificationLabels = Object.entries({ push: '全ての通知', question: '今日の問い通知', emotion: '感情通知' })
+  const failedNotificationLabels = Object.entries({ push: '全ての通知', emotion: '感情通知' })
     .filter(([key]) => !!user?.id && notificationReadFailures[key] === user.id).map(([, label]) => label);
 
   const themeOptions = [
@@ -325,52 +310,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
       cancelled = true;
     };
   }, [user?.id, authOwnerGeneration]);
-
-  useEffect(() => {
-    let cancelled = false;
-    const request = ownerRequestRef.current;
-
-    const loadTodayQuestion = async () => {
-      setNotificationReadFailures(previous => ({ ...previous, question: null }));
-      if (!user?.id) {
-        if (!cancelled) {
-          setTodayQuestionNotificationEnabled(true);
-          setTodayQuestionDeliveryTime("18:00");
-          setTodayQuestionTimezone(fallbackTimezone);
-          setTodayQuestionLoading(false);
-        }
-        return;
-      }
-
-      setTodayQuestionLoading(true);
-      try {
-        const json = await getTodayQuestionSettings({
-          timezone_name: fallbackTimezone,
-        }, request);
-        const settings = json?.settings ?? json ?? {};
-        if (!cancelled) {
-          setTodayQuestionNotificationEnabled(settings?.notification_enabled !== false);
-          setTodayQuestionDeliveryTime(String(settings?.delivery_time_local || "18:00"));
-          setTodayQuestionTimezone(String(settings?.timezone_name || fallbackTimezone));
-        }
-      } catch (error) {
-        console.warn("SettingsAppSettingsScreen: load today question settings failed", error);
-        if (!cancelled) setNotificationReadFailures(previous => ({ ...previous, question: user.id }));
-        if (!cancelled) {
-          setTodayQuestionNotificationEnabled(true);
-          setTodayQuestionDeliveryTime("18:00");
-          setTodayQuestionTimezone(fallbackTimezone);
-        }
-      } finally {
-        if (!cancelled) setTodayQuestionLoading(false);
-      }
-    };
-
-    loadTodayQuestion();
-    return () => {
-      cancelled = true;
-    };
-  }, [fallbackTimezone, user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     let cancelled = false;
@@ -433,13 +372,11 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
     const nextEnabled = !!next;
     const previous = {
       pushEnabled,
-      todayQuestionNotificationEnabled,
       emotionNotificationEnabled,
     };
 
     setPushEnabled(nextEnabled);
     if (!nextEnabled) {
-      setTodayQuestionNotificationEnabled(false);
       setEmotionNotificationEnabled(false);
     }
 
@@ -449,65 +386,20 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
       if (request.signal.aborted) return;
 
       if (!nextEnabled) {
-        const results = await Promise.allSettled([
-          patchTodayQuestionSettings({
-            notification_enabled: false,
-            delivery_time_local: String(todayQuestionDeliveryTime || "18:00"),
-            timezone_name: String(todayQuestionTimezone || fallbackTimezone),
-          }, request),
-          persistEmotionNotificationEnabled(false, request),
-        ]);
-
-        if (request.signal.aborted) return;
-        const failed = results.find((result) => result.status === "rejected");
-        if (failed) {
-          console.warn(
-            "SettingsAppSettingsScreen: partial notification sync failed after push off",
-            failed.reason
-          );
-          Alert.alert(
-            "通知設定",
-            "全ての通知はオフになりましたが、一部の個別設定の保存に失敗しました。"
-          );
+        try {
+          await persistEmotionNotificationEnabled(false, request);
+        } catch (error) {
+          if (request.signal.aborted || error?.name === "AccountChangedError") return;
+          console.warn("SettingsAppSettingsScreen: emotion notification sync failed after push off", error);
+          Alert.alert("通知設定", "全ての通知はオフになりましたが、感情通知の設定を保存できませんでした。");
         }
       }
     } catch (error) {
       if (request.signal.aborted || error?.name === "AccountChangedError") return;
       console.warn("SettingsAppSettingsScreen: update push_enabled failed", error);
       setPushEnabled(previous.pushEnabled);
-      setTodayQuestionNotificationEnabled(previous.todayQuestionNotificationEnabled);
       setEmotionNotificationEnabled(previous.emotionNotificationEnabled);
       Alert.alert("通知設定の更新に失敗しました", String(error?.message || error));
-    } finally {
-      if (!request.signal.aborted) setLocalProcessing(false);
-    }
-  };
-
-  const updateTodayQuestionNotificationEnabled = async (next) => {
-    if (isBusy || todayQuestionLoading || !pushEnabled) return;
-
-    if (!user?.id) {
-      Alert.alert("今日の問い通知", "ログイン情報が取得できませんでした。");
-      return;
-    }
-
-    const request = ownerRequestRef.current;
-    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
-    const previous = todayQuestionNotificationEnabled;
-    setTodayQuestionNotificationEnabled(next);
-
-    setLocalProcessing(true);
-    try {
-      await patchTodayQuestionSettings({
-        notification_enabled: !!next,
-        delivery_time_local: String(todayQuestionDeliveryTime || "18:00"),
-        timezone_name: String(todayQuestionTimezone || fallbackTimezone),
-      }, request);
-    } catch (error) {
-      if (request.signal.aborted || error?.name === "AccountChangedError") return;
-      console.warn("SettingsAppSettingsScreen: update today question failed", error);
-      setTodayQuestionNotificationEnabled(previous);
-      Alert.alert("今日の問い通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
       if (!request.signal.aborted) setLocalProcessing(false);
     }
@@ -590,13 +482,6 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
             value={pushEnabled}
             onValueChange={updatePushEnabled}
             disabled={notificationSettingsLoading || isBusy}
-          />
-
-          <SettingSwitchRow
-            label="今日の問い通知"
-            value={todayQuestionNotificationEnabled}
-            onValueChange={updateTodayQuestionNotificationEnabled}
-            disabled={todayQuestionLoading || isBusy || !pushEnabled}
           />
 
           <SettingSwitchRow

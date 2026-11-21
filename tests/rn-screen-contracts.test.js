@@ -120,7 +120,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'export function buildAnalysisNotificationParams',
     'export function resolveNotificationTargetRoute',
     'export function requestOpenRouteFromNotification',
-    'type === "today_question" || screen === "Input"',
+    'screen === "Input"',
     'type === "report_distribution"',
     'return { name: "Piece", params: { screen: "EmotionLog" } };',
   ], 'notificationRouting.js');
@@ -191,7 +191,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'GlobalFrameLayout.js');
 });
 
-test('InputScreen keeps the emotion input, Emlis reply, draft, today question, and Piece preview surfaces connected through split helpers', () => {
+test('InputScreen keeps the emotion input, Emlis reply, draft, DeepInsight, and Piece preview surfaces connected through split helpers', () => {
   const input = read('screens/InputScreen.js');
   const inputOptions = read('screens/input/inputOptions.js');
   const inputDraft = read('screens/input/inputDraftModel.js');
@@ -213,7 +213,9 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   assertIncludes(input, [
     'import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";',
     'InputPiecePreviewController',
-    'TodayQuestionCard',
+    'handleOpenDeepInsight',
+    'navigation?.navigate?.("DeepInsight")',
+    'わたしを知る問いを開く',
     'InputStartupModals',
     'InputFeedbackReplyModal',
     'InputActionArea',
@@ -352,7 +354,6 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   assertIncludes(inputStartupModals, [
     'export default function InputStartupModals',
     'NoticeModal',
-    'TodayQuestionModal',
     'draftRestoreModalVisible',
     'INPUT_DRAFT_TTL_HOURS',
   ], 'InputStartupModals.js');
@@ -1187,29 +1188,28 @@ test('Observation Diagnostic Lockdown Step 6 RN frontend diagnostics keep debug 
   }
 });
 
-test('Home hooks preserve startup popup priority, today question, and Piece quota screen state', () => {
+test('Home routes DeepInsight separately from startup popups', () => {
   const state = read('features/home/useHomeState.js');
   const actions = read('features/home/useHomeActions.js');
+  const stack = read('navigation/InputStackNavigator.js');
 
   assertIncludes(state, [
     'getHomeState',
-    'today_question_enabled',
     'STARTUP_POPUP_KIND',
     '[STARTUP_POPUP_KIND.NOTICE]: 300',
     '[STARTUP_POPUP_KIND.TUTORIAL]: 200',
-    '[STARTUP_POPUP_KIND.TODAY_QUESTION]: 100',
-    'todayQuestionCurrent',
     'pieceQuota',
     'registerInputInteraction',
   ], 'useHomeState.js');
 
-  assertIncludes(actions, [
+  assertIncludes(actions, ['markNoticePopupSeen', 'markNoticesRead'], 'useHomeActions.js');
+  assertNotIncludes(state + actions + read('screens/input/InputStartupModals.js'), [
+    'TODAY_QUESTION',
     'submitTodayQuestionAnswer',
-    'markNoticesRead',
-    'question_origin',
-    'personal_question_id',
-    'source_anchor_hash',
-  ], 'useHomeActions.js');
+    'TodayQuestionModal',
+  ], 'Home startup');
+  assertIncludes(stack, ['name="DeepInsight" component={DeepInsightScreen}'], 'InputStackNavigator.js');
+  assertNotIncludes(stack, ['TodayQuestionHistory'], 'InputStackNavigator.js');
 });
 
 test('AnalysisScreen redirects old emotion report links to the live graph and keeps map and input routes', () => {
@@ -1233,10 +1233,8 @@ test('AnalysisScreen redirects old emotion report links to the live graph and ke
   assertIncludes(analysis, [
     'AnalysisContentFirstScreen',
     'AnalysisSelfStructureScreen',
-    'AnalysisInputHistoryMenuScreen',
     'SelfStructureReportHistoryScreen',
     'SelfStructureReportViewerScreen',
-    'TodayQuestionHistoryScreen',
     'setGraphOpenRequest({ period: { daily: "today", weekly: "week", monthly: "month" }[nextReportType] })',
     'graphOpenRequest={graphOpenRequest}',
     'from "./analysis/useAnalysisRouteState";',
@@ -1782,20 +1780,6 @@ test('SubscriptionSelectScreen keeps revenue-critical IAP and sales flag guards 
   ], 'SubscriptionSelectScreen.js');
 
   assertRegex(subscription, /Alert\.alert\([\s\S]*現在受付を停止しています/, 'sales-disabled alert guard');
-});
-
-test('TodayQuestionHistoryScreen keeps personal followup source-anchor display and answer editing paths', () => {
-  const history = read('screens/TodayQuestionHistoryScreen.js');
-
-  assertIncludes(history, [
-    'source_anchor_summary',
-    'question_origin',
-    'personal_followup',
-    '入力: 「',
-    'TextInput',
-    'optionalFreeTextInput',
-    '前の画面に戻る',
-  ], 'TodayQuestionHistoryScreen.js');
 });
 
 test('Production monitoring captures RN runtime and API failures without changing product routes', () => {
@@ -3041,7 +3025,6 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
   const iap = read('lib/iap/iapRuntimeCatalog.js');
   const tutorialOverlay = read('screens/analysis/useAnalysisTutorialOverlay.js');
   const mainTabs = read('navigation/MainTabs.js');
-  const todayQuestionHistory = read('screens/TodayQuestionHistoryScreen.js');
   const crossLink = read('screens/AnalysisCrossLinkSection.js');
   const access = read('components/selfStructure/watashiMapAccessPolicy.js');
   const renderer = read('components/selfStructure/WatashiMapRenderer.js');
@@ -3079,10 +3062,8 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     '主要な4つの要素',
   ], 'Tutorial flow and Nexus handoff explain four tutorial experiences');
 
-  assertIncludes(todayQuestionHistory + mainTabs + crossLink, [
+  assertIncludes(mainTabs + crossLink, [
     'わたしマップが更新されました',
-    '回答を更新しました。',
-    '過去の回答を確認・編集できます。',
     '【わたしマップの深掘り候補】',
     'ピースを開いて「わたしマップ」または「ピースライブラリ」',
     'わたしマップやピースで触れると良さそうな論点',
@@ -3100,7 +3081,7 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     'lockCard',
   ], 'Copy, plan lock text, formatter payload, and visual hooks stay aligned');
 
-  assertNotIncludes(todayQuestionHistory + mainTabs + crossLink, [
+  assertNotIncludes(mainTabs + crossLink, [
     '自己構造分析レポートが更新されました',
     '自己構造分析に反映されます',
     '【自己構造トピック候補】',

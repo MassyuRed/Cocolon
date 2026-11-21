@@ -162,8 +162,8 @@ for (const raw of [undefined, null, true, 'true', [], { [PREVIEW]: 'true' }, { [
     h.pending[0].resolve({ feature_flags: raw }); await p;
     assert.deepEqual(clone(h.render().featureFlags), {
       ...all(false), account_delete_enabled: true, emlis_threads_enabled: false,
-      myweb_mock_enabled: false, today_question_enabled: true,
-      today_question_history_enabled: true, subscription_sales_enabled: true,
+      myweb_mock_enabled: false,
+      subscription_sales_enabled: true,
     });
   });
 }
@@ -178,7 +178,7 @@ test('Piece names are not normalized from aliases or inherited authority', async
 test('rechecking and failure remove cached Piece true while retaining unrelated configuration', async () => {
   const h = harness();
   let r = h.render(), p = r.refreshAppRuntime();
-  h.pending[0].resolve({ feature_flags: { ...all(true), subscription_sales_enabled: false, today_question_enabled: false },
+  h.pending[0].resolve({ feature_flags: { ...all(true), subscription_sales_enabled: false, account_delete_enabled: false },
     minimum_supported_version: '0.9.0', recommended_version: '1.1.0', maintenance_message: 'existing notice' });
   await p; r = h.render(); assert.equal(r.isFeatureEnabled(PREVIEW), true);
   p = r.refreshAppRuntime(); const error = new Error('synthetic bootstrap failure');
@@ -191,7 +191,7 @@ test('rechecking and failure remove cached Piece true while retaining unrelated 
   h.pending[1].reject(error); await assert.rejects(p, e => e === error);
   r = h.render(); assert.equal(r.runtime.error, error); assert.equal(r.runtime.loading, false);
   for (const flag of FLAGS) { assert.equal(r.isFeatureEnabled(flag, true), false); assert.equal(r.featureFlags[flag], false); }
-  assert.equal(r.isFeatureEnabled('today_question_enabled'), false);
+  assert.equal(r.isFeatureEnabled('account_delete_enabled'), false);
   assert.equal(r.isFeatureEnabled('unknown_non_piece_feature', true), true);
 });
 

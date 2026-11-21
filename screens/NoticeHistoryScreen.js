@@ -32,7 +32,7 @@ import {
 } from "../lib/noticeApi";
 
 const HISTORY_PAGE_LIMIT = 50;
-const INPUT_STACK_ROUTES = new Set(["Input", "InputHistory", "TodayQuestionHistory", "TutorialIntro"]);
+const INPUT_STACK_ROUTES = new Set(["Input", "InputHistory", "DeepInsight", "TutorialIntro"]);
 
 function formatNoticeDateLabel(value) {
   const raw = String(value || "").trim();

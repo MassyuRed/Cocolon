@@ -258,6 +258,27 @@ test('evidence dialog labels original cohort as context and person correction un
   await act(async () => view.unmount());
 });
 
+test('evidence dialog shows the actual DeepInsight question and its owner answer separately', async () => {
+  const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  const answer = '最後まで話を聞いてくれるときです。';
+  const question = 'どんな反応だと本音を話しやすいですか？';
+  const item = { id: 'deep-insight-answer', created_at: '2026-11-21T10:00:00+00:00', memo: answer,
+    memo_action: '', answers: [], version_state: 'CURRENT',
+    deep_insight: { question_text: question, answer_text: answer } };
+  h.api.apiGet = async url => url.includes('/evidence?') ? { items: [item] } : latest();
+  let view; await act(async () => { view = Renderer.create(React.createElement(View)); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
+  const button = view.root.findAllByType('TouchableOpacity').find(node => node.findAllByType('Text').some(text => text.props.children === '根拠の記録を見る'));
+  await act(async () => button.props.onPress());
+  const body = JSON.stringify(view.toJSON());
+  assert(body.includes('わたしを知る問い') && body.includes(question));
+  assert(body.includes('本人の回答') && body.includes(answer));
+  assert.equal(body.split(answer).length - 1, 1);
+  assert(!body.includes('思考内容'));
+  assert.throws(() => checkedMapCorrectionEvidenceItems([{ ...item, memo: question }]), /analysis_deep_insight_evidence_invalid/);
+  await act(async () => view.unmount());
+});
+
 test('refresh queue failure preserves confirmed correction save without offering a duplicate submission', async () => {
   const h = harness(async (url, options) => ({ ...result(JSON.parse(options.body)), refresh_status: 'failed' }));
   const Dialog = h.load('components/selfStructure/MapInterpretationCorrectionDialog.js').default, saved = []; let view;

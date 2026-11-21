@@ -6,7 +6,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../../components/CocolonButton";
 import NoticeModal from "../../components/NoticeModal";
-import TodayQuestionModal from "../../components/TodayQuestionModal";
 import { INPUT_DRAFT_TTL_HOURS } from "./inputDraftModel";
 
 export default function InputStartupModals({
@@ -22,14 +21,6 @@ export default function InputStartupModals({
   handlePressNoticeAction,
   isWelcomeNoticeStartupPopup,
   handlePrimaryNoticeModalAction,
-  shouldHideTodayQuestionForTutorial,
-  isTodayQuestionStartupPopupVisible,
-  todayQuestionBundle,
-  todayQuestionLoading,
-  todayQuestionSubmitting,
-  handleDismissTodayQuestionModal,
-  handleSubmitTodayQuestion,
-  handleOpenTodayQuestionHistory,
   draftRestoreModalVisible,
   draftRestoreSavedAtLabel,
   restorePendingInputDraft,
@@ -49,22 +40,6 @@ export default function InputStartupModals({
         showHistoryButton={!isWelcomeNoticeStartupPopup}
         primaryCloseLabel={isWelcomeNoticeStartupPopup ? "はじめる" : null}
         onPrimaryClose={isWelcomeNoticeStartupPopup ? handlePrimaryNoticeModalAction : undefined}
-      />
-
-      <TodayQuestionModal
-        visible={
-          !shouldHideTodayQuestionForTutorial &&
-          isTodayQuestionStartupPopupVisible &&
-          !!todayQuestionBundle?.question &&
-          todayQuestionBundle?.answer_status !== "answered"
-        }
-        question={todayQuestionBundle?.question}
-        answerSummary={todayQuestionBundle?.answer_summary || null}
-        loading={todayQuestionLoading}
-        submitting={todayQuestionSubmitting}
-        onClose={handleDismissTodayQuestionModal}
-        onSubmit={handleSubmitTodayQuestion}
-        onOpenHistory={handleOpenTodayQuestionHistory}
       />
 
       <Modal

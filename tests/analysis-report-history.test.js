@@ -58,7 +58,6 @@ async function mount(t, { viewer = false, parentOwnsRead = true } = {}) {
       };
       if (target === 'lib/supabase.js') return { supabase: { auth: { getSession: async () => ({ data: { session: { user: { id: control.owner } } } }) } } };
       if (target === 'lib/historyRetentionLabel.js') return { getHistoryRetentionLabel: () => '' };
-      if (target === 'lib/todayQuestionApi.js') return {};
       if (target === 'screens/analysisReport/analysisReportHtmlExport.js') return { exportTextToPdf: async () => {} };
       if (target === 'screens/analysisReport/AnalysisReportCharts.js') return { PieRingChart: 'Chart' };
       if (target.startsWith('components/') || /screens\/analysisReport\/(AnalysisReportUpgradeCard|KokoroWeatherForecastStrip|KokoroWeatherDetailModal)\.js/.test(target)) return { __esModule: true, default: 'Child' };

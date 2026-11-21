@@ -792,14 +792,14 @@ test('signed-out, switched-owner and superseded-generation pending map taps neve
   assert.equal(h.routes.length, 0);
 });
 
-test('warm map taps require their owner while existing question and report notification routes are unchanged', () => {
+test('warm map taps require their owner while generic Home and report notification routes are unchanged', () => {
   const h = notificationNavigationHarness(); h.ready(true); h.nav.setNotificationNavigationOwner('B', true);
   h.routing.requestOpenRouteFromNotification({ data: mapPush() });
   assert.equal(h.routes.length, 0);
   h.routing.requestOpenRouteFromNotification({ data: mapPush('B') });
   assert.equal(h.routes.length, 1);
   h.nav.setNotificationNavigationOwner(null, true);
-  h.routing.requestOpenRouteFromNotification({ data: { type: 'today_question' } });
+  h.routing.requestOpenRouteFromNotification({ data: { screen: 'Input' } });
   assert.equal(h.routes.at(-1)[0], 'Input');
   h.routing.requestOpenRouteFromNotification({ data: { type: 'report_distribution' } });
   assert.equal(h.routes.at(-1)[1].params.openDistributionHome, true);

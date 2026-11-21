@@ -25,10 +25,8 @@ import AnalysisHistoryScreen from "./AnalysisHistoryScreen";
 import SelfStructureReportHistoryScreen from "./SelfStructureReportHistoryScreen";
 import SelfStructureReportViewerScreen from "./SelfStructureReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
-import TodayQuestionHistoryScreen from "./TodayQuestionHistoryScreen";
 import AnalysisContentFirstScreen from "./AnalysisContentFirstScreen";
 import AnalysisSelfStructureScreen from "./AnalysisSelfStructureScreen";
-import AnalysisInputHistoryMenuScreen from "./AnalysisInputHistoryMenuScreen";
 
 // 🎨 テーマコンテキスト
 import { useTheme } from "../theme/ThemeContext";
@@ -88,10 +86,6 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
     setRoute,
     selectedSelfReport,
     setSelectedSelfReport,
-    historyBackRoute,
-    setHistoryBackRoute,
-    todayQuestionHistoryBackRoute,
-    setTodayQuestionHistoryBackRoute,
     selfReportGenerateBackRoute,
     setSelfReportGenerateBackRoute,
     selfReportHistoryBackRoute,
@@ -160,25 +154,6 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
     resetSelectedReports: resetAnalysisTutorialRoute,
     onResetToHome: resetAnalysisTutorialRoute,
   });
-
-  useEffect(() => {
-    const shouldOpen = !!(tabRoute?.params?.openTodayQuestionHistory || screenRoute?.params?.openTodayQuestionHistory);
-    if (!shouldOpen) return;
-    setTodayQuestionHistoryBackRoute(ROUTE_INPUT_HISTORY);
-    setRoute("todayQuestionHistory");
-    clearExternalOpenParams({
-      openTodayQuestionHistory: false,
-      openTodayQuestionHistoryAt: null,
-    });
-  }, [
-    clearExternalOpenParams,
-    screenRoute?.params?.openTodayQuestionHistory,
-    screenRoute?.params?.openTodayQuestionHistoryAt,
-    setRoute,
-    setTodayQuestionHistoryBackRoute,
-    tabRoute?.params?.openTodayQuestionHistory,
-    tabRoute?.params?.openTodayQuestionHistoryAt,
-  ]);
 
   // ------------------------------------------------------------
   // Tab reselect → Analysis "home" に戻す
@@ -390,11 +365,11 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      {route === "history" ? (
+      {route === ROUTE_INPUT_HISTORY ? (
         <AnalysisHistoryScreen
           navigation={navigation}
           onBack={() => {
-            setRoute(historyBackRoute);
+            setRoute(ROUTE_HOME);
             refreshHomeSummaries();
           }}
         />
@@ -414,20 +389,6 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
                 ? selfStructureHistoryUnread
                 : false
             }
-          />
-        </View>
-      ) : route === ROUTE_INPUT_HISTORY ? (
-        <View style={styles.safeContent}>
-          <AnalysisInputHistoryMenuScreen
-            onBack={() => setRoute(ROUTE_HOME)}
-            onOpenEmotionHistory={() => {
-              setHistoryBackRoute(ROUTE_INPUT_HISTORY);
-              setRoute("history");
-            }}
-            onOpenTodayQuestionHistory={() => {
-              setTodayQuestionHistoryBackRoute(ROUTE_INPUT_HISTORY);
-              setRoute("todayQuestionHistory");
-            }}
           />
         </View>
       ) : route === "selfReportHistory" ? (
@@ -460,13 +421,6 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
             refreshHomeSummaries();
           }}
           onLatestSeenVersion={markSelfStructureLatestSeen}
-        />
-      ) : route === "todayQuestionHistory" ? (
-        <TodayQuestionHistoryScreen
-          onBack={() => {
-            setRoute(todayQuestionHistoryBackRoute);
-            refreshHomeSummaries();
-          }}
         />
       ) : (
         <View style={styles.safeContent}>
@@ -532,7 +486,6 @@ function AnalysisHome({
   onOpenSelfReportLatest,
   onOpenSelfReportHistory,
   onOpenPieceSurface,
-  onOpenTodayQuestionHistory,
   unreadDaily,
   unreadWeekly,
   unreadMonthly,
@@ -753,18 +706,6 @@ function AnalysisHome({
             />
           </CocolonPressable>
 
-          <CocolonPressable
-            style={[styles.historyInlineLink, { marginTop: 8 }]}
-            onPress={onOpenTodayQuestionHistory}
-            accessibilityLabel="今日の問い履歴を見る"
-          >
-            <Text style={styles.historyInlineText}>今日の問い履歴を見る</Text>
-            <Ionicons
-              name="chevron-forward"
-              size={16}
-              color={colors.TEXT_SUBTLE}
-            />
-          </CocolonPressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -32,8 +32,7 @@ function harness(file, exportName, args = {}) {
   const client = Function(...Object.keys(cb), strip(read('lib/apiClient.js')) + '\nreturn {apiGet,apiPatch,apiPost,apiFetch};')(...Object.values(cb));
   const model = Function(strip(read('screens/account/accountModel.js')) + '\nreturn {normalizeDisplayName,DISPLAY_NAME_MAX_LENGTH,DISPLAY_NAME_TAKEN_MESSAGE,mapDisplayNameConflictMessage,readAccountStatusValue};')();
   const settings = Function('apiGet','apiPatch',strip(read('lib/reportDistributionApi.js'))+'\nreturn {getReportDistributionSettings,patchReportDistributionSettings};')(client.apiGet,client.apiPatch);
-  const today = Function('apiGet','apiPatch','apiPost',strip(read('lib/api/home/todayQuestionApi.js'))+'\nreturn {getTodayQuestionSettings,patchTodayQuestionSettings,resolveLocalTimezoneName,getTodayQuestionHistory,patchTodayQuestionAnswer};')(client.apiGet,client.apiPatch,client.apiPost);
-  const bindings = { ...client, ...model, ...settings, ...today, AbortController, Platform: { OS: 'android' },
+  const bindings = { ...client, ...model, ...settings, AbortController, Platform: { OS: 'android' },
     AppState: { currentState: 'active', addEventListener: () => ({ remove() {} }) },
     useAuth: () => ({ user: currentUser(), authOwnerGeneration: generation, authLoading: false, signOut: async opts => signouts.push(opts) }),
     useSubscription: () => ({ isPaid: true, tier: 'plus', loading: false }),
@@ -67,14 +66,14 @@ function harness(file, exportName, args = {}) {
   let source = read(file);
   if (exportName.endsWith('HistoryScreen') || exportName === 'ResonanceHistoryListScreen') {
     source=source.slice(source.indexOf('export default function '+exportName));
-    const at=exportName==='TodayQuestionHistoryScreen' ? source.indexOf('  if (!todayQuestionHistoryEnabled) {\n    return') : source.indexOf('  const renderItem =');
+    const at=source.indexOf('  const renderItem =');
     assert.ok(at>0);
-    source=source.slice(0,at)+(exportName==='TodayQuestionHistoryScreen' ? 'return {items,load,saveEdit,openItem,updateLocalEdit,editState,loading,loadingMore};\n}' : 'return {items,fetchPage,fetchInitial,order,errorText,loading};\n}');
+    source=source.slice(0,at)+'return {items,fetchPage,fetchInitial,order,errorText,loading};\n}';
   }
   if (exportName.startsWith('Settings')) {
     source = source.slice(source.indexOf('export default function ' + exportName));
     source = source.slice(0, source.indexOf('  const Container = embedded ? View : AnalysisMenuScroll;')) +
-      (exportName === 'SettingsAppSettingsScreen' ? 'return {updatePushEnabled,updateTodayQuestionNotificationEnabled,updateReportDistributionNotificationEnabled,updateEmotionNotificationEnabled};\n}' : 'return {handleDeleteAccount,executeDeleteAccount};\n}');
+      (exportName === 'SettingsAppSettingsScreen' ? 'return {updatePushEnabled,updateEmotionNotificationEnabled};\n}' : 'return {handleDeleteAccount,executeDeleteAccount};\n}');
   }
   const Component = Function(...Object.keys(bindings), strip(source) + '\nreturn ' + exportName + ';')(...Object.values(bindings));
   const render = () => { cursor = 0; dirty = false; value = Component({ user: currentUser(), targetUserId: owner, isSelf: true, navigation: {}, ...args }); while (effects.length) effects.shift()(); return value; };
@@ -88,7 +87,8 @@ function harness(file, exportName, args = {}) {
 }
 
 
-for (const screen of ['TodayQuestionHistoryScreen','ResonanceHistoryListScreen']) {
+{
+  const screen = 'ResonanceHistoryListScreen';
   for (const next of ['B',null]) test(`${screen} late A records cannot replace ${next || 'signed-out'} history`,async()=>{
     const p=harness('screens/'+screen+'.js',screen);await p.settle();const old=p.gets[0];
     p.switchTo(next);await p.settle();old.resolve({items:[{answer_id:'a-private',q_instance_id:'a-private',free_text:'A-only'}]});await p.settle();
@@ -96,23 +96,6 @@ for (const screen of ['TodayQuestionHistoryScreen','ResonanceHistoryListScreen']
     if(next){p.gets.at(-1).resolve({items:[{answer_id:'b-own',q_instance_id:'b-own'}]});await p.settle();assert.equal(p.value.items[0].answer_id,'b-own');}
   });
 }
-
-test('today-question history edit cannot send A text under B after delayed auth',async()=>{
-  const p=harness('screens/TodayQuestionHistoryScreen.js','TodayQuestionHistoryScreen');await p.settle();
-  const item={answer_id:'A-answer',answer_mode:'free_text',free_text:'A-source'};await p.resolveAllGets({items:[item]});
-  p.value.openItem(item);p.render();p.value.updateLocalEdit(item.answer_id,{freeText:'A-edited'});p.render();
-  const held=p.holdSession(),work=p.value.saveEdit(item);await tick();p.switchTo('B');held.resolve();await work;await p.settle();
-  assert.equal(p.writes.length,0);assert.deepEqual(p.value.editState,{});assert.deepEqual(p.value.items,[]);
-});
-
-test('same-owner today-question edit keeps its answer ID and text payload',async()=>{
-  const p=harness('screens/TodayQuestionHistoryScreen.js','TodayQuestionHistoryScreen');await p.settle();
-  const item={answer_id:'A-answer',answer_mode:'free_text',free_text:'A-source'};await p.resolveAllGets({items:[item]});
-  p.value.openItem(item);p.render();p.value.updateLocalEdit(item.answer_id,{freeText:'A-edited'});p.render();
-  const work=p.value.saveEdit(item);await p.settle();p.gets.at(-1).resolve({items:[{...item,free_text:'A-edited'}]});await work;await p.settle();
-  assert.equal(p.writes.length,1);assert.equal(p.writes[0].owner,'A');assert.match(p.writes[0].url,/A-answer$/);
-  assert.deepEqual(p.writes[0].body,{answer_mode:'free_text',free_text:'A-edited'});
-});
 
 test('resonance history ignores a superseded sort response even if transport resolves after abort',async()=>{
   const p=harness('screens/ResonanceHistoryListScreen.js','ResonanceHistoryListScreen');await p.settle();await p.resolveAllGets({items:[]});

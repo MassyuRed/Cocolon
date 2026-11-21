@@ -10,8 +10,6 @@ const DEFAULT_FEATURE_FLAGS = Object.freeze({
   account_delete_enabled: true,
   emlis_threads_enabled: false,
   myweb_mock_enabled: false,
-  today_question_enabled: true,
-  today_question_history_enabled: true,
   subscription_sales_enabled: true,
 });
 
