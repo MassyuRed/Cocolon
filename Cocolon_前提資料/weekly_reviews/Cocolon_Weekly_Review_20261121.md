@@ -331,11 +331,11 @@ Mashの指示により、次週中に進めることを優先順と11/28の確�
 
 問いは4Bが自然な候補を作り、CMEEで参照した記録との整合や既回答との重複を確かめる。本人回答と発行した問いを対応付けて保存・再読し、わたしマップと次の問いへ渡す。問いの中に置いた仮説は未確認として扱い、本人の回答から確認できた内容を根拠にする。既存の[4BとCMEEの役割](../observation_learning/README.md#4bとcmeeの役割)に沿って接続する。
 
-### 7.4 「今日の問い」からの実装方針
+### 7.4 「わたしを知る問い」への切り替え
 
-Mashは、**既存の「今日の問い」の構造を活用して改修する方法**と、**現行の「今日の問い」を廃止し、「わたしを知る問い」を新規に作る方法**のどちらも選べるとした。既存機能には問い取得、回答・履歴、設定の接続がある。採用した二つの出題方法、未回答の保持、回答の再利用をどの構成で実現するかは、既存の接続と移行への影響を確認して実装時に決める。 [現行の「今日の問い」](../00_cocolon_current_product_and_state.md#7-その他の全機能共通基盤)
+報告会では、既存の「今日の問い」を改修する方法と、新規に作る方法の両方を検討した。**11/21の実装時にMashが「旧構造は残さなくていい。新構造のみで作れ」と明示し、「わたしを知る問い」へ一本化する方針を確定した。** 旧「今日の問い」の画面、回答履歴への入口、出題・通知・設定の経路は廃止する。保存済みの旧回答は新機能の回答やマップの根拠に引き継がない。既存データの物理削除はこの決定の範囲外とする。
 
-**どちらの実装方法でも、CMEEにある問いの既存技術を確認し、使える部分を優先して活用する。** 参照・活用の候補は、原文に基づいて問いが必要かを判定する処理、確認済みの論点を再質問しないための照合、発行した問いのIDと本人回答の対応付け、重複送信を避ける保存と再読、回答から意味を更新して分析の材料へ渡す仕組み。既存の処理が感情入力一件に結び付く箇所では、その設計を参照し、複数の記録や過去回答を使うふりかえり、記録なしでも始められるテーマ出題、日次上限・未回答の保持・プラン別の利用条件に必要な構造を追加する。本人回答が次のふりかえりとわたしマップの双方へ渡るところまで確認する。 [既存の問いの判定](https://github.com/MassyuRed/mashos-api/blob/ac9978a9486dfb2e9c91be021fd2bfed37bc6d60/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py#L305-L388) · [問いと回答の対応・保存](https://github.com/MassyuRed/mashos-api/blob/ac9978a9486dfb2e9c91be021fd2bfed37bc6d60/ai/services/ai_inference/emlis_thread_service.py#L539-L578) · [現行の分析材料の取得](https://github.com/MassyuRed/mashos-api/blob/ac9978a9486dfb2e9c91be021fd2bfed37bc6d60/supabase/migrations/20261114133000_analysis_map_correction_handoff.sql#L7-L67)
+**CMEEにある問いの既存技術を確認し、使える部分を優先して活用する。** 参照・活用の候補は、原文に基づいて問いが必要かを判定する処理、確認済みの論点を再質問しないための照合、発行した問いのIDと本人回答の対応付け、重複送信を避ける保存と再読、回答から意味を更新して分析の材料へ渡す仕組み。既存の処理が感情入力一件に結び付く箇所では、その設計を参照し、複数の記録や過去回答を使うふりかえり、記録なしでも始められるテーマ出題、日次上限・未回答の保持・プラン別の利用条件に必要な構造を追加する。本人回答が次のふりかえりとわたしマップの双方へ渡るところまで確認する。 [既存の問いの判定](https://github.com/MassyuRed/mashos-api/blob/ac9978a9486dfb2e9c91be021fd2bfed37bc6d60/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py#L305-L388) · [問いと回答の対応・保存](https://github.com/MassyuRed/mashos-api/blob/ac9978a9486dfb2e9c91be021fd2bfed37bc6d60/ai/services/ai_inference/emlis_thread_service.py#L539-L578) · [現行の分析材料の取得](https://github.com/MassyuRed/mashos-api/blob/ac9978a9486dfb2e9c91be021fd2bfed37bc6d60/supabase/migrations/20261114133000_analysis_map_correction_handoff.sql#L7-L67)
 
 以上は11/21の採用方針。テーマ一覧、通知の具体的な運用、実装と提供の時期は後続の仕様検討で扱う。
 
