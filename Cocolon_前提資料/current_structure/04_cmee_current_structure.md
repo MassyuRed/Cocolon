@@ -6,6 +6,8 @@
 
 テーマの読み直しは、表示する場面と質問本文を個別に渡し、求める答えの種類と判断対象を照合する。Premiumのふりかえりで理由が既知の案から別の条件を選び直した場合は、原文にある途中の別作業を文章化にも渡す。表示引用の出典と範囲はコードで原文に照合し、読み直しは本文の条件・前提・新規性を独立に確認する。発行時にSQLが本人・原文の版・引用根拠を再検証する。 [補助設計§9.221](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-theme-reading-and-grounded-alternative-20261122)
 
+後続のテーマ候補では、5テーマの具体例と答えの対象を調整した。4Bの最初の読み直しで採否の形式が崩れた場合は、確定表示予定の一文を保って一度確認し、判定に応じて発行候補の検査を続ける。範囲と結果の二つを聞く文は、読み直しの前に既存の書き直しへ渡す。 [補助設計§9.222](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#deep-insight-theme-dimensions-20261122)
+
 ### 11/20　三中核が参照する4Bと保存経路
 
 Emlisは本人が回答した時とスキップした時に自然応答を確定する。Pieceは選んだ入力と問い・回答の対応を検査し、本文と画像の描画情報を同じ版で非公開保存する。わたしマップは保存後の通知ジョブから本人の保存版を開く。通常の実測、各経路の到達点、GPUの2つの推論URLと認証キーの対応は [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
