@@ -1121,7 +1121,9 @@ export default function FollowListScreen({ navigation, route }) {
 
       {/* リスト */}
       <FlatList
-          ListHeaderComponent={<View><Text style={styles.headerTitle}>フォローリスト</Text>      {/* タブ */}
+          ListHeaderComponent={<View>
+      <Text style={styles.headerTitle}>フォローリスト</Text>
+      {/* タブ */}
       <View style={styles.tabBar}>
         {visibleTabs.map((tabItem) => {
           const isActive = tab === tabItem.key;

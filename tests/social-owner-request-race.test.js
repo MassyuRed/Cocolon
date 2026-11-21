@@ -156,6 +156,25 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   await h.flush(); return h;
 }
 
+for (const [tab, label] of [['following', 'フォロー中'], ['followers', 'フォロワー']]) {
+  test(`opening the account's ${tab} list renders the selected tab with valid native text`, async t => {
+    const h = await harness(t, 'screens/FollowListScreen.js', tab);
+    const list = h.find('List');
+    const selected = list.findAllByProps({ accessibilityRole: 'tab' })
+      .filter(node => node.props.accessibilityState.selected);
+    assert.equal(selected.length, 1);
+    assert.ok(selected[0].props.accessibilityLabel.startsWith(label + ' '));
+    const request = h.calls.find(call => call.path === '/follow/list');
+    assert.equal(new URL(request.url).searchParams.get('tab'), tab);
+    assert.deepEqual(list.props.data.map(item => item.id), ['C', 'D']);
+
+    // React Native rejects raw text nodes, including whitespace, inside a View.
+    const rawText = list.findAllByType('View').flatMap(view =>
+      view.children.filter(child => typeof child === 'string'));
+    assert.deepEqual(rawText, []);
+  });
+}
+
 const followActions = [
   ['following', 'C-nameからの感情通知をオフにする'],
   ['following', 'C-name：フォロー関係を削除'],
