@@ -7,7 +7,7 @@ import { useTheme } from "../theme/ThemeContext";
 // 囲み装飾は外し、safe areaと既存layout契約は維持する。
 export const FRAME_BORDER_WIDTH = 0;
 
-export default function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null, headerRightSlot = null }) {
+export default function GlobalFrameLayout({ children, frameEnabled, headerBottomSlot = null }) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const androidExtraTop =
@@ -29,7 +29,6 @@ export default function GlobalFrameLayout({ children, frameEnabled, headerBottom
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "space-between",
               paddingTop: 8,
               paddingBottom: 4,
               paddingHorizontal: 20,
@@ -47,7 +46,6 @@ export default function GlobalFrameLayout({ children, frameEnabled, headerBottom
             >
               Emlis
             </Text>
-            {headerRightSlot}
           </View>
         </SafeAreaView>
       ) : null}

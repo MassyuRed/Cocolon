@@ -19,7 +19,7 @@ export default function SettingsStackNavigator() {
       initialRouteName="Settings"
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: colors.PANEL_BG },
+        contentStyle: { backgroundColor: colors.BG_SILVER },
       }}
     >
       <SettingsStack.Screen name="Settings" component={SettingsScreen} />
