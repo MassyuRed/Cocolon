@@ -195,6 +195,8 @@ test('visibility request sends exact version/scope and confirms with fresh saved
     return url.includes('/history') ? packet(page([record()])) : packet(record(changed ? { visibility_scope: 'public', row_version: 3 } : {}));
   } }); await open(h); await h.controller.setVisibility('public');
   assert.deepEqual(JSON.parse(h.calls[2][1].body), { expected_row_version: 2, visibility_scope: 'public' });
+  assert.equal(h.calls[2][1].headers['X-Piece-Publication'], '1');
+  assert.equal(h.calls[3][1].headers['X-Piece-Publication'], undefined);
   assert.equal(h.calls[3][1].method, 'GET'); assert.equal(h.controller.getView().record.visibility_scope, 'public');
 });
 test('visibility conflict refetches once without silent overwrite', async () => {
@@ -719,6 +721,55 @@ const ownerHost = (h, savedPiece = savedEntry(), extra = {}) => new h.PieceOwner
   owner: OWNER, enabled: true, flags: { piece_v2_owner_read_enabled: true }, savedPiece, ...extra,
 });
 const button = (host, title) => nodes(host.render()).find(n => n.type === 'Button' && n.props.title === title);
+
+test('post confirmation explains followers and keeps the same saved image available after posting and withdrawal', async () => {
+  let saved = record(), pendingDetail;
+  const h = harness({ send: (_url, init) => {
+    if (init.method === 'PATCH') {
+      const { visibility_scope } = JSON.parse(init.body);
+      saved = { ...saved, visibility_scope, row_version: saved.row_version + 1 };
+      return packet({ piece_id: PID, visibility_scope, row_version: saved.row_version });
+    }
+    if (saved.row_version === 3) return new Promise(resolve => { pendingDetail = resolve; });
+    return packet(saved);
+  } });
+  const host = ownerHost(h, { ...savedEntry(), initialAction: 'post' }, { flags: { ...flags, piece_v2_export_enabled: true } });
+  host.componentDidMount(); await tick();
+  assert.equal(h.calls.length, 1, 'opening a preview action cannot publish');
+  assert.equal(h.alerts[0][0], 'アプリ内に投稿しますか？');
+  assert.match(h.alerts[0][1], /あなたをフォローしている人/);
+  assert.ok(button(host, 'アプリ内に投稿する')); assert.ok(button(host, '画像を保存'));
+  h.alerts[0][2][1].onPress(); await tick();
+  assert.ok(pendingDetail);
+  assert.equal(h.alerts.filter(([title]) => title === '投稿完了').length, 0);
+  pendingDetail(packet(saved)); await tick();
+  assert.deepEqual(h.alerts.map(([title]) => title), ['アプリ内に投稿しますか？', '投稿完了']);
+  assert.equal(host.controller.getView().record.piece_id, PID);
+  assert.ok(button(host, '画像を保存'));
+  button(host, '投稿を取り下げる').props.onPress();
+  h.alerts[2][2][1].onPress(); await tick();
+  assert.equal(h.alerts.filter(([title]) => title === '投稿完了').length, 1);
+  assert.equal(host.controller.getView().record.visibility_scope, 'private');
+  assert.equal(host.controller.getView().record.piece_id, PID);
+  host.componentWillUnmount();
+});
+
+test('a private reread or a definitive publication refusal cannot show 投稿完了', async () => {
+  for (const refused of [false, true]) {
+    const h = harness({ send: (_url, init) => init.method !== 'PATCH' ? packet(record()) : refused
+      ? packet({ code: 'PIECE_PUBLICATION_NOT_ALLOWED' }, 422)
+      : packet({ piece_id: PID, visibility_scope: 'public', row_version: 3 }) });
+    const host = ownerHost(h, savedEntry(), { flags: { ...flags, piece_v2_export_enabled: true } });
+    host.componentDidMount(); await tick();
+    button(host, 'アプリ内に投稿する').props.onPress();
+    h.alerts[0][2][1].onPress(); await tick();
+    assert.equal(h.alerts.length, 1);
+    assert.equal(host.controller.getView().record.visibility_scope, 'private');
+    assert.ok(button(host, '画像を保存'));
+    assert.match(host.controller.getView().message, refused ? /このピースは投稿できません/ : /最新のPieceを取得/);
+    host.componentWillUnmount();
+  }
+});
 
 test('saved entry directly fetches the exact owner detail without source, quota or history requests', async () => {
   const h = harness(); const host = ownerHost(h); host.componentDidMount(); await tick();
@@ -1257,9 +1308,9 @@ function exportHost({prepareWait, fresh, captureWait, send=ownerSend, result={ou
 }
 test('normal detail export is explicit, defaults OFF, fetches a fresh record and waits for current canvas',async()=>{
   const h=harness(),host=ownerHost(h);host.componentDidMount();await tick();
-  assert.equal(button(host,'画像の保存・共有を準備'),undefined);host.componentWillUnmount();
+  assert.equal(button(host,'画像を保存'),undefined);host.componentWillUnmount();
   const u=exportHost();u.host.componentDidMount();await tick();assert.equal(u.events.length,0);
-  const displayed=u.host.controller.getView().record;await button(u.host,'画像の保存・共有を準備').props.onPress();
+  const displayed=u.host.controller.getView().record;await button(u.host,'画像を保存').props.onPress();
   assert.equal(u.events.length,1);assert.equal(u.events[0][1].pieceId,PID);assert.equal(u.events[0][1].expectedUserId,OWNER);
   assert.equal(button(u.host,'写真に保存').props.disabled,true);
   await button(u.host,'写真に保存').props.onPress();assert.equal(u.events.length,1);
@@ -1289,7 +1340,7 @@ test('saved detail only offers image preparation on devices that support the sav
     assert.ok(texts(tree).includes(saved.piece_text));
     assert.ok(button(host, 'このPieceを削除'));
     assert.equal(nodes(tree).some(n => n.type === 'PieceVisualCard'), supported);
-    assert.equal(!!button(host, '画像の保存・共有を準備'), supported);
+    assert.equal(!!button(host, '画像を保存'), supported);
     assert.equal(texts(tree).includes('この端末では、このPieceの画像を表示・保存・共有できません。'), !supported);
     await host.prepareExport(host.controller.getView().record);
     assert.equal(preparations, supported ? 1 : 0);
@@ -1326,7 +1377,7 @@ for (const ordinary of [false, true]) {
   test('changed export record waits for explicit fresh detail from ' + (ordinary ? 'history' : 'saved entry'), async () => {
     const u = await changedExportRecordHost(ordinary);
     assert.equal(u.host.controller.getView().record, u.displayed);
-    assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, true);
+    assert.equal(button(u.host, '画像を保存').props.disabled, true);
     await u.host.prepareExport(u.displayed);
     assert.equal(u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length, 1);
     const reread = button(u.host, '同じPieceを読み込み直す');
@@ -1337,7 +1388,7 @@ for (const ordinary of [false, true]) {
     reread.props.onPress(); await tick();
     assert.equal(u.h.calls.length, count, 'the old record cannot issue another detail read');
     assert.equal(button(u.host, '同じPieceを読み込み直す'), undefined);
-    assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, false);
+    assert.equal(button(u.host, '画像を保存').props.disabled, false);
     await u.host.prepareExport(u.host.controller.getView().record);
     u.host.exportAttempt.onTarget(u.target, null);
     await u.host.exportImage(u.host.exportAttempt, 'saveToPhotos');
@@ -1350,7 +1401,7 @@ for (const ordinary of [false, true]) {
     await button(u.host, '同じPieceを読み込み直す').props.onPress();
     assert.equal(u.host.controller.getView().record, null);
     assert.equal(u.host.exportAttempt, null);
-    assert.equal(button(u.host, '画像の保存・共有を準備'), undefined);
+    assert.equal(button(u.host, '画像を保存'), undefined);
     const retry = button(u.host, ordinary ? '同じPieceを読み込み直す' : '保存したPieceを読み込む');
     await retry.props.onPress();
     assert.equal(u.host.controller.getView().record.row_version, 3);
@@ -1394,7 +1445,7 @@ for (const [code, status] of [['PIECE_NOT_FOUND', 404], ['PIECE_AUTH_REQUIRED', 
     await button(u.host, '同じPieceを読み込み直す').props.onPress();
     assert.equal(u.host.controller.getView().record, null);
     assert.equal(u.host.exportAttempt, null);
-    assert.equal(button(u.host, '画像の保存・共有を準備'), undefined);
+    assert.equal(button(u.host, '画像を保存'), undefined);
     assert.ok(!texts(u.host.render()).includes(record().piece_text));
     assert.equal(u.h.calls.length, 2);
     u.host.componentWillUnmount();
@@ -1426,7 +1477,7 @@ test('share cancellation is shown as cancellation, and failed canvas offers expl
   const u=exportHost({result:{outcome:'cancelled'}}),attempt=await u.ready();await u.host.exportImage(attempt,'openShare');
   assert.ok(texts(u.host.render()).includes('共有をキャンセルしました。'));
   await u.host.prepareExport(u.host.controller.getView().record);const next=u.host.exportAttempt;next.onUnavailable();
-  assert.equal(u.host.exportAttempt,null);assert.ok(button(u.host,'画像の保存・共有を準備'));u.host.componentWillUnmount();
+  assert.equal(u.host.exportAttempt,null);assert.ok(button(u.host,'画像を保存'));u.host.componentWillUnmount();
 });
 
 for(const boundary of ['history','owner','target','flag'])test(`terminal export result stays bound to its record across ${boundary}`,async()=>{
@@ -1533,7 +1584,7 @@ for (const ordinary of [false, true]) {
     restoreRuntime();
     await rereadOperatedPiece(u, ordinary);
     const count = u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length;
-    assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, true);
+    assert.equal(button(u.host, '画像を保存').props.disabled, true);
     await u.host.prepareExport(u.host.controller.getView().record);
     assert.equal(u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length, count);
     assert.ok(texts(u.host.render()).includes('写真への保存結果を待っています。'));
@@ -1867,6 +1918,6 @@ test('late known export stop during suspension clears a pre-OS operation without
   assert.equal(refreshes, 0);
   restore(); await rereadOperatedPiece(u, false);
   assert.ok(!texts(u.host.render()).some(value => /写真への保存結果|写真に保存しました/.test(value)));
-  assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, false);
+  assert.equal(button(u.host, '画像を保存').props.disabled, false);
   u.host.componentWillUnmount();
 });

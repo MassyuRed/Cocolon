@@ -1,6 +1,10 @@
 import { readShareCode } from "../../lib/compat/legacyWireContracts";
 import { HISTORY_ORDER_OLDEST } from "./nexusRouteModel";
 
+export function isPieceV2Post(item) {
+  return item?.source_type === "piece_v2";
+}
+
 export function resolvePieceQInstanceId(item) {
   return String(item?.q_instance_id || item?.qInstanceId || "").trim();
 }

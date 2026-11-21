@@ -87,6 +87,7 @@ function harness(initialAppState = 'active') {
     apiGet: async (url, options) => {
       assert.equal(insideAuthCallback, false, 'bootstrap runs after the auth callback returns');
       assert.equal(url, '/app/bootstrap'); assert.equal(options.auth, false);
+      assert.equal(options.headers['X-Piece-Publication'], '1');
       const d = deferred(); pending.push(d); return d.promise;
     },
   });

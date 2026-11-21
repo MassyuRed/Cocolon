@@ -70,6 +70,7 @@ import {
 import {
   resolvePieceQInstanceId,
   resolvePieceQKey,
+  isPieceV2Post,
   resolvePieceOwnerUserId,
   buildResonanceHistoryItemFromPiece,
   sortHistoryItems,
@@ -439,6 +440,7 @@ export default function NexusScreen({ navigation }) {
     const params = {
       sort: pieceOrder,
       limit: 20,
+      include_piece_v2: true,
     };
 
     if (ownerFilterMode === OWNER_FILTER_SELF) {
@@ -458,16 +460,17 @@ export default function NexusScreen({ navigation }) {
       params.following_only = false;
     }
 
-    setPieceState((prev) => ({ ...prev, loading: true, error: "" }));
+    setPieceState({ scope: pieceReadScope, loading: true, items: [], error: "" });
     try {
       const json = await getNexusPieces(params, ownerRequest.options);
       if (!isFresh()) return;
       const items = Array.isArray(json?.items) ? json.items : [];
-      setPieceState({ loading: false, items, error: "" });
+      setPieceState({ scope: pieceReadScope, loading: false, items, error: "" });
     } catch (e) {
       if (!isFresh()) return;
       console.warn("NexusScreen: loadPieces failed", e);
       setPieceState({
+        scope: pieceReadScope,
         loading: false,
         items: [],
         error: String(e?.message || "ピースを読み込めませんでした。"),
@@ -575,8 +578,11 @@ export default function NexusScreen({ navigation }) {
 
   useEffect(() => {
     void loadRanking();
-    void loadPieces();
-  }, [loadRanking, loadPieces]);
+  }, [loadRanking]);
+
+  useEffect(() => {
+    if (activeTab === "piece") void loadPieces();
+  }, [activeTab, loadPieces]);
 
   useEffect(() => {
     void loadOwnerOptions();
@@ -697,9 +703,18 @@ export default function NexusScreen({ navigation }) {
     if (!navigation?.addListener) return undefined;
     const unsubscribe = navigation.addListener("focus", () => {
       void refreshNexusUnreadState();
+      if (activeTab === "piece") void loadPieces();
     });
-    return unsubscribe;
-  }, [navigation, refreshNexusUnreadState]);
+    const unsubscribeBlur = navigation.addListener("blur", () => {
+      if (isTutorialMode) return;
+      readSequences.current.pieces += 1;
+      setPieceState({ loading: true, items: [], error: "" });
+    });
+    return () => {
+      unsubscribe?.();
+      unsubscribeBlur?.();
+    };
+  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadPieces]);
 
   useEffect(() => {
     if (activeTab === "emotion_log") {
@@ -849,7 +864,7 @@ export default function NexusScreen({ navigation }) {
 
   const canResonatePiece = useCallback(
     (item) => {
-      if (isTutorialMode) return false;
+      if (isTutorialMode || isPieceV2Post(item)) return false;
       const ownerUserId = resolvePieceOwnerUserId(item);
       if (!viewerUserId || !ownerUserId || ownerUserId === viewerUserId) {
         return false;
@@ -1031,7 +1046,7 @@ export default function NexusScreen({ navigation }) {
 
   const handlePressPieceDelete = useCallback(
     (item) => {
-      if (isTutorialMode || !isOwnerCurrent(ownerRequest)) return;
+      if (isTutorialMode || isPieceV2Post(item) || !isOwnerCurrent(ownerRequest)) return;
 
       const qInstanceId = resolvePieceQInstanceId(item);
       const ownerUserId = resolvePieceOwnerUserId(item);
@@ -1278,7 +1293,9 @@ export default function NexusScreen({ navigation }) {
             setOwnerPickerVisible={setOwnerPickerVisible}
             pieceOrder={pieceOrder}
             handleSetPieceOrder={handleSetPieceOrder}
-            pieceState={pieceState}
+            pieceState={pieceState.scope === pieceReadScope
+              ? pieceState
+              : { loading: authInitializing || !!viewerUserId, items: [], error: "" }}
             pieceEmptyText={pieceEmptyText}
             viewerUserId={viewerUserId}
             canResonatePiece={canResonatePiece}

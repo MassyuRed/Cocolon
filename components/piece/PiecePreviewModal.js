@@ -19,7 +19,7 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: 'あり', required_subtle: 'あり', off: 'なし' };
 const themes = PIECE_THEME_LABELS;
 
-export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
+export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
   const ui = makeUiTokens(colors, themeName);
   if (visible !== true || !display || display.phase === 'hidden') {
@@ -126,6 +126,10 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
     !!display.visualToken && typeof onSave === 'function';
   const saveIdentity = canSave ? Object.freeze({ preview_id: preview.preview_id,
     preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }) : null;
+  const nextActions = canSave ? [
+    { title: 'アプリ内に投稿する', press: onPost },
+    { title: '画像を保存', press: onSaveImage },
+  ].filter(action => typeof action.press === 'function') : [];
   const saveToken = display.visualToken;
   const loading = display.loadingKind === 'save' ? 'Pieceを保存しています。' : display.loadingKind === 'cancel' ? '候補を取り消しています。' :
     display.loadingKind === 'visual' ? '画像設定を更新しています。' :
@@ -219,7 +223,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
         ) : null,
         (canSave || saving || display.phase === 'saved') ? element(Text,
           { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE, marginBottom: 16 } },
-          '画像の書き出し・共有は、保存したPieceの詳細画面から行えます。') : null,
+          nextActions.length > 0 ? '投稿や画像保存を選ぶと、このピースを自分用に保存してから、選んだ操作に進みます。'
+            : '画像の書き出し・共有は、保存したPieceの詳細画面から行えます。') : null,
         recoveryActions.length ? element(View, { testID: 'piece-recovery-actions', style: recoveryActions.length > 1
           ? { padding: 16, borderRadius: 24, backgroundColor: colors.FIELD_BG, marginBottom: 16 }
           : { marginBottom: 16 } },
@@ -234,7 +239,11 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
         ) : null,
       ),
       element(View, { style: { paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.CARD_BORDER } },
-        canSave ? element(Button, { variant: 'primary', style: { minHeight: 54,
+        nextActions.length > 0 ? element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 8 } },
+          ...nextActions.map(({ title, press }) => element(View, { key: title, style: { flexGrow: 1, flexBasis: 130 } },
+            element(Button, { variant: 'primary', title, accessibilityLabel: title, onPress: () => press(saveIdentity, saveToken) }))),
+        ) : null,
+        canSave ? element(Button, { variant: nextActions.length > 0 ? 'secondary' : 'primary', style: { minHeight: 54,
           shadowOpacity: 0, elevation: 0 },
           testID: 'piece-initial-save', title: 'Pieceを保存',
           accessibilityLabel: 'このPieceを自分用に保存',

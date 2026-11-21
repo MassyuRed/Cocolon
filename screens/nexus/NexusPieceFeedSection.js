@@ -10,6 +10,7 @@ import {
 } from "./nexusRouteModel";
 import {
   resolvePieceQInstanceId,
+  isPieceV2Post,
   resolvePieceOwnerUserId,
 } from "./nexusHistoryModel";
 
@@ -158,7 +159,7 @@ export default function NexusPieceFeedSection({
     content = pieceState.items.map((item) => {
       const qInstanceId = resolvePieceQInstanceId(item);
       const ownerUserId = resolvePieceOwnerUserId(item);
-      const canDeletePiece = !!qInstanceId && !!viewerUserId && ownerUserId === viewerUserId;
+      const canDeletePiece = !isPieceV2Post(item) && !!qInstanceId && !!viewerUserId && ownerUserId === viewerUserId;
       return (
         <NexusPieceCard
           key={String(qInstanceId || Math.random())}

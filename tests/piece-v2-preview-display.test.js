@@ -888,6 +888,37 @@ async function savedNavigationFixture(platform = 'ios', savedMode = false) {
   u.host.start(); await pieceTick(); await startSyntheticSave(u);
   return { ...u, navigations, allowRead: value => { canRead = value; } };
 }
+for (const [title, initialAction] of [['アプリ内に投稿する', 'post'], ['画像を保存', 'image']]) {
+  test(`preview ${initialAction} privately saves once and hands off the exact same Piece`, async () => {
+    const navigations = [], source = request().source_ref;
+    const candidate = { ...response(), renderer_version: 'piece.rn_bitmap_renderer.ios.v2' };
+    const u = previewUiHarness({ admitSave: true, send: async (url, init) => pieceHttp(
+      init.method === 'GET' ? source : url.endsWith('/save') ? uiSaveReceipt() : candidate) });
+    u.host.props = { savedInput: { savedInputId: source.source_input_id, expectedUserId: OWNER,
+      idempotencyKey: 'saved-preview-action-key' }, isSaveAdmitted: () => true,
+      navigation: { getParent: () => ({ navigate: (...args) => navigations.push(args) }) } };
+    u.host.context = { runtime: {}, isFeatureEnabled: name => ['piece_v2_preview_enabled', 'piece_v2_save_enabled',
+      'piece_v2_owner_read_enabled', 'piece_v2_visibility_toggle_enabled', 'piece_v2_public_write_enabled',
+      'piece_v2_export_enabled'].includes(name) };
+    u.mount(); await u.host.resolveSavedInput(); u.host.start(); await pieceTick();
+    const displayToken = u.host.controller.getView().visualToken;
+    u.host.receiveSaveFit({ isCurrent: (_preview, token) => token === displayToken }, null);
+    assert.ok(uiButton(u, 'アプリ内に投稿する'));
+    assert.ok(uiButton(u, '画像を保存'));
+    const press = uiButton(u, title).props.onPress;
+    press(); press(); await pieceTick();
+    assert.deepEqual(u.calls.map(([url]) => url), ['/emotion/piece/source-ref/' + source.source_input_id,
+      '/emotion/piece/preview', '/emotion/piece/save']);
+    assert.equal(JSON.parse(u.calls[2][1].body).visibility_scope, 'private');
+    assert.equal(navigations.length, 0);
+    dismissPiecePreview(u);
+    assert.deepEqual(clone(navigations), [['Piece', { screen: 'PieceOwnerHistory', params: {
+      savedPiece: { pieceId: response().preview_id, expectedUserId: OWNER, initialAction },
+    }, initial: false }]]);
+    assert.equal(u.host.controller.getView().phase, 'saved');
+    u.host.componentWillUnmount();
+  });
+}
 test('saved confirmation opens the existing owner screen with only piece ID and expected owner, including after close', async () => {
   const u = await savedNavigationFixture();
   const first = uiButton(u, '保存したPieceを確認'); assert.ok(first);

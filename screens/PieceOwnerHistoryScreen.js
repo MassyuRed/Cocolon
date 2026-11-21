@@ -25,16 +25,20 @@ export class PieceOwnerHistoryHost extends React.Component {
     this.mounted = false; this.foreground = false; this.controller = null; this.binding = null;
     this.requestedSavedTarget = null; this.deletedSavedTarget = null; this.exportAttempt = null; this.exportMessage = null; this.exportSerial = 0;
     this.exportOperation = null; this.exportStopStamp = null;
+    this.pendingSavedAction = null; this.lastPublicationConfirmation = null;
   }
   savedTarget() {
     const value = this.props.savedPiece;
+    const keys = value && Object.keys(value).sort().join();
     if (!value || typeof value !== 'object' || Array.isArray(value) ||
-        Object.keys(value).sort().join() !== 'expectedUserId,pieceId' ||
+        (keys !== 'expectedUserId,pieceId' &&
+          (keys !== 'expectedUserId,initialAction,pieceId' || !['post', 'image'].includes(value.initialAction))) ||
         typeof value.pieceId !== 'string' ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.pieceId) ||
         value.pieceId === '00000000-0000-0000-0000-000000000000' ||
         typeof value.expectedUserId !== 'string' || !value.expectedUserId.trim()) return null;
-    return { pieceId: value.pieceId, expectedUserId: value.expectedUserId };
+    return { pieceId: value.pieceId, expectedUserId: value.expectedUserId,
+      ...(keys === 'expectedUserId,initialAction,pieceId' ? { initialAction: value.initialAction } : {}) };
   }
   targetKey() {
     return this.props.savedPiece == null ? null : JSON.stringify(this.savedTarget() || 'invalid');
@@ -54,12 +58,14 @@ export class PieceOwnerHistoryHost extends React.Component {
       if (this.current()) return this.props.refreshRuntime?.();
     } });
     this.unsubscribe = this.controller.subscribe(() => {
-      const deleted = this.controller.getView().deletedPieceId;
+      const view = this.controller.getView();
+      const deleted = view.deletedPieceId;
       if (deleted && this.current() && deleted === this.savedTarget()?.pieceId) {
         this.deletedSavedTarget = this.targetKey();
       }
       this.syncExportContext();
       if (this.mounted) this.setState(s => ({ revision: s.revision + 1 }));
+      if (this.current() && view.phase === 'detail') this.onDetailReady(view);
     });
     this.appSubscription = AppState.addEventListener('change', state => {
       this.foreground = state === 'active';
@@ -77,6 +83,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     this.syncExportContext();
     const next = this.stamp();
     if (next === this.binding) return;
+    this.pendingSavedAction = null;
     this.binding = next;
     const target = this.savedTarget(), targetKey = this.targetKey();
     if (targetKey === null) this.requestedSavedTarget = null;
@@ -91,6 +98,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (target && this.current() && this.controller.getView().phase !== 'hidden' &&
         this.requestedSavedTarget !== targetKey && this.deletedSavedTarget !== targetKey) {
       this.requestedSavedTarget = targetKey;
+      if (target.initialAction) this.pendingSavedAction = target;
       void this.controller.openDetail(target.pieceId);
     }
     this.setState(s => ({ revision: s.revision + 1 }));
@@ -99,6 +107,21 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (this.current() && targetKey === this.targetKey() && targetKey !== this.deletedSavedTarget &&
         pieceId === this.savedTarget()?.pieceId) {
       return this.act('openDetail', pieceId);
+    }
+  }
+  onDetailReady(view) {
+    const confirmation = view.visibilityConfirmation;
+    if (confirmation?.visibility_scope === 'public' && confirmation !== this.lastPublicationConfirmation) {
+      this.lastPublicationConfirmation = confirmation;
+      Alert.alert('投稿完了', 'ピース画面の「投稿」に掲載されました。', [{ text: '閉じる' }]);
+    }
+    const target = this.pendingSavedAction;
+    if (!target || target.pieceId !== view.record.piece_id || target.expectedUserId !== this.props.owner) return;
+    this.pendingSavedAction = null;
+    if (target.initialAction === 'post' && view.permissions.publish && view.record.visibility_scope === 'private') {
+      this.confirmVisibility(view.record);
+    } else if (target.initialAction === 'image') {
+      void this.prepareExport(view.record);
     }
   }
   act(action, ...args) {
@@ -290,10 +313,15 @@ export class PieceOwnerHistoryHost extends React.Component {
     }
   }
   confirmVisibility(record) {
-    const scope = record.visibility_scope === 'public' ? 'private' : 'public';
-    Alert.alert(scope === 'public' ? 'Pieceを公開しますか？' : 'Pieceを非公開にしますか？',
-      scope === 'public' ? 'このPieceが公開範囲の利用者に表示されます。' : 'Cocolonでは自分だけが見られます。すでに外部に保存・共有された画像は回収できません。',
-      [{ text: 'キャンセル', style: 'cancel' }, { text: scope === 'public' ? '公開する' : '非公開にする', onPress: () => {
+    const view = this.controller?.getView();
+    if (!this.current() || view.record !== record || !view.permissions.visibility) return;
+    const posting = record.visibility_scope === 'private';
+    if (posting && !view.permissions.publish) return;
+    const scope = posting ? 'public' : 'private';
+    Alert.alert(posting ? 'アプリ内に投稿しますか？' : '投稿を取り下げますか？',
+      posting ? 'あなたと、あなたをフォローしている人が「投稿」からピースの本文を読めます。'
+        : '「投稿」から消え、自分のピースには残ります。',
+      [{ text: 'キャンセル', style: 'cancel' }, { text: posting ? '投稿する' : '取り下げる', onPress: () => {
         if (this.current() && this.controller.getView().record === record) this.act('setVisibility', scope);
       } }]);
   }
@@ -310,6 +338,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     const record = available ? view.record : null;
     const imageSupported = record && supportsPieceSavedImage(record.renderer_version);
     const exportEnabled = imageSupported && this.props.flags?.piece_v2_export_enabled === true;
+    const canChangeVisibility = record && view.permissions.visibility && (record.visibility_scope === 'public' || view.permissions.publish);
     const targetKey = this.targetKey();
     const target = targetKey === this.deletedSavedTarget ? null : this.savedTarget();
     const attempt = this.exportCurrent(this.exportAttempt) ? this.exportAttempt : null;
@@ -340,9 +369,15 @@ export class PieceOwnerHistoryHost extends React.Component {
           exportEnabled ? h(Text,
             { style: { ...ui?.typography?.description, color: colors.TEXT_SUBTLE, marginBottom: 8 } },
             '保存・共有した画像は、Cocolonで削除・非公開にしても回収できません。') : null,
-          exportEnabled ? h(Button, { variant: 'secondary', style: { marginTop: 12 },
-            title: attempt ? '画像を準備し直す' : '画像の保存・共有を準備', disabled: exporting || needsReread,
-            onPress: () => this.prepareExport(record) }) : null,
+          canChangeVisibility || exportEnabled ? h(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 12 } },
+            canChangeVisibility ? h(View, { style: { flexGrow: 1, flexBasis: 130 } },
+              h(Button, { variant: 'secondary', disabled: exporting,
+                title: record.visibility_scope === 'public' ? '投稿を取り下げる' : 'アプリ内に投稿する',
+                onPress: () => this.confirmVisibility(record) })) : null,
+            exportEnabled ? h(View, { style: { flexGrow: 1, flexBasis: 130 } },
+              h(Button, { variant: 'secondary', title: attempt ? '画像を準備し直す' : '画像を保存',
+                disabled: exporting || needsReread, onPress: () => this.prepareExport(record) })) : null,
+          ) : null,
           needsReread ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '同じPieceを読み込み直す',
             onPress: () => this.rereadExportRecord(record) }) : null,
           attempt?.job ? h(View, { pointerEvents: 'none', accessible: false,
@@ -356,8 +391,6 @@ export class PieceOwnerHistoryHost extends React.Component {
           pendingOperation ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } },
             operation.action === 'saveToPhotos' ? '写真への保存結果を待っています。' : '共有画面の終了を待っています。') : null,
           exportMessage ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, exportMessage) : null,
-          record && view.permissions.visibility && (record.visibility_scope === 'public' || view.permissions.publish)
-            ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
           record && view.permissions.delete ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, textStyle: { color: colors.ERROR }, title: 'このPieceを削除', onPress: () => this.confirmDelete(record) }) : null,
           available && view.canRetryDelete ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete', view.deleteRetryToken) }) : null,
           available && view.canRetryDetail ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: target ? '保存したPieceを読み込む' : '同じPieceを読み込み直す',

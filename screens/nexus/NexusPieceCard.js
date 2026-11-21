@@ -8,6 +8,7 @@ import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
 import { readShareCode } from "../../lib/compat/legacyWireContracts";
+import { isPieceV2Post } from "./nexusHistoryModel";
 
 function formatDateLabel(value) {
   const raw = String(value || "").trim();
@@ -53,6 +54,7 @@ export default function NexusPieceCard({
   const createdAt = formatDateLabel(item?.created_at);
   const body = String(item?.body || "").trim();
   const title = String(item?.question?.title || "").trim();
+  const publishedPiece = isPieceV2Post(item);
   const viewerState = readViewerState(item);
   const isNew = viewerState?.is_new === true || viewerState?.isNew === true;
   const isResonated =
@@ -61,8 +63,8 @@ export default function NexusPieceCard({
     item?.is_resonated === true ||
     item?.isResonated === true;
   const resonances = Number(item?.metrics?.resonances ?? item?.resonances ?? 0) || 0;
-  const showResonanceButton = !!canResonate;
-  const showDeleteMenu = !!canDelete;
+  const showResonanceButton = !publishedPiece && !!canResonate;
+  const showDeleteMenu = !publishedPiece && !!canDelete;
   const buttonDisabled = !!isResonated || !!resonanceSubmitting;
   const buttonLabel = isResonated ? "共鳴済み" : "共鳴";
 
@@ -115,57 +117,62 @@ export default function NexusPieceCard({
         </View>
       </View>
 
-      <View
-        key={menuVisible ? "question-menu-open" : "question-menu-closed"}
-        style={styles.questionBlock}
-        collapsable={false}
-      >
-        <Text style={styles.questionLabel}>問い</Text>
-        <Text style={styles.questionText}>{title || "—"}</Text>
-      </View>
-
-      <Text style={styles.bodyLabel}>答え</Text>
+      {publishedPiece ? null : (
+        <>
+          <View
+            key={menuVisible ? "question-menu-open" : "question-menu-closed"}
+            style={styles.questionBlock}
+            collapsable={false}
+          >
+            <Text style={styles.questionLabel}>問い</Text>
+            <Text style={styles.questionText}>{title || "—"}</Text>
+          </View>
+          <Text style={styles.bodyLabel}>答え</Text>
+        </>
+      )}
       <Text style={styles.bodyText}>{body || "—"}</Text>
 
-      <View style={styles.metricsRow}>
-        <View style={styles.metricChip}>
-          <Ionicons
-            name={isResonated ? "heart" : "heart-outline"}
-            size={14}
-            color={colors.TEXT_SUBTLE}
-            style={styles.metricIcon}
-          />
-          <Text style={styles.metricText}>{resonances}</Text>
-        </View>
+      {publishedPiece ? null : (
+        <View style={styles.metricsRow}>
+          <View style={styles.metricChip}>
+            <Ionicons
+              name={isResonated ? "heart" : "heart-outline"}
+              size={14}
+              color={colors.TEXT_SUBTLE}
+              style={styles.metricIcon}
+            />
+            <Text style={styles.metricText}>{resonances}</Text>
+          </View>
 
-        {showResonanceButton ? (
-          <CocolonPressable
-            style={[
-              styles.resonanceButton,
-              isResonated && styles.resonanceButtonDone,
-              buttonDisabled && styles.resonanceButtonDisabled,
-            ]}
-            onPress={onPressResonance}
-            disabled={buttonDisabled}
-            accessibilityLabel={buttonLabel}
-            accessibilityState={{ selected: isResonated, busy: resonanceSubmitting }}
-            hitSlop={8}
-          >
-            {resonanceSubmitting ? (
-              <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
-            ) : (
-              <Text
-                style={[
-                  styles.resonanceButtonText,
-                  isResonated && styles.resonanceButtonTextDone,
-                ]}
-              >
-                {buttonLabel}
-              </Text>
-            )}
-          </CocolonPressable>
-        ) : null}
-      </View>
+          {showResonanceButton ? (
+            <CocolonPressable
+              style={[
+                styles.resonanceButton,
+                isResonated && styles.resonanceButtonDone,
+                buttonDisabled && styles.resonanceButtonDisabled,
+              ]}
+              onPress={onPressResonance}
+              disabled={buttonDisabled}
+              accessibilityLabel={buttonLabel}
+              accessibilityState={{ selected: isResonated, busy: resonanceSubmitting }}
+              hitSlop={8}
+            >
+              {resonanceSubmitting ? (
+                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
+              ) : (
+                <Text
+                  style={[
+                    styles.resonanceButtonText,
+                    isResonated && styles.resonanceButtonTextDone,
+                  ]}
+                >
+                  {buttonLabel}
+                </Text>
+              )}
+            </CocolonPressable>
+          ) : null}
+        </View>
+      )}
 
       {menuVisible && showDeleteMenu ? (
         <View style={styles.actionMenu} collapsable={false}>

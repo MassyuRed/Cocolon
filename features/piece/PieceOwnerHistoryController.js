@@ -22,7 +22,7 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     else if (retry) state = { ...empty(), phase: 'unavailable',
       code: 'PIECE_TEMPORARILY_UNAVAILABLE',
       message: retry.message || 'Pieceを読み込めませんでした。もう一度読み込んでください。',
-      detailRetry: { pieceId: retry.pieceId, notice: retry.notice, message: retry.message,
+      detailRetry: { pieceId: retry.pieceId, notice: retry.notice, message: retry.message, visibilityReceipt: retry.visibilityReceipt,
         token: Object.freeze({}) } };
     // Abort listeners can synchronously change the owner/context. Finish all
     // state writes first so that a nested clear cannot be overwritten.
@@ -72,17 +72,19 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     globalThis.crypto.getRandomValues(bytes);
     return 'piece-delete-' + Array.from(bytes, n => n.toString(16).padStart(2, '0')).join('');
   }
-  async function run(action, value, key = null, notice = '') {
+  async function run(action, value, key = null, notice = '', visibilityReceipt = null) {
     if (!enabled() || active) return;
     let abort;
     try { abort = new AbortController(); } catch { return; }
     const ticket = { abort, context,
       ...(action === 'detail' || action === 'visibility' ? {
         detailRetry: { pieceId: value.piece_id, notice: action === 'detail' ? notice : '',
+          visibilityReceipt,
           ...(action === 'visibility' ? { message: visibilityUncertainMessage } : {}) },
       } : {}) };
     active = ticket;
     const previousPage = action === 'history' && value.cursor !== null ? state : null;
+    const previousRecord = action === 'visibility' ? state.record : null;
     // Hide stale data while reading/mutating; never display a write as done
     // until the closed server acknowledgement has passed validation.
     state = { ...empty(), phase: 'loading' }; emit();
@@ -102,7 +104,12 @@ export function createPieceOwnerHistoryController(configuration = {}) {
         if (new Set(items.map(item => item.piece_id)).size !== items.length) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
         state = { ...empty(), phase: 'history', items, nextCursor: result.next_cursor };
       } else if (action === 'detail') {
-        state = { ...empty(), phase: 'detail', record: readPieceOwnerDisplay(result), message: notice };
+        const record = readPieceOwnerDisplay(result);
+        const confirmed = visibilityReceipt && record.piece_id === visibilityReceipt.piece_id &&
+          record.visibility_scope === visibilityReceipt.visibility_scope && record.row_version === visibilityReceipt.row_version;
+        state = { ...empty(), phase: 'detail', record,
+          message: visibilityReceipt && !confirmed ? '状態が変わったため、最新のPieceを取得しました。' : notice,
+          visibilityConfirmation: confirmed ? visibilityReceipt : null };
       } else if (action === 'delete') {
         deletion = null;
         state = { ...empty(), phase: 'idle', deletedPieceId: result.piece_id,
@@ -110,7 +117,7 @@ export function createPieceOwnerHistoryController(configuration = {}) {
       } else {
         // Fetch the current saved record after visibility acknowledgement.
         active = null;
-        await run('detail', { piece_id: value.piece_id }, null, '公開範囲を変更しました。');
+        await run('detail', { piece_id: value.piece_id }, null, '公開範囲を変更しました。', result);
         return;
       }
     } catch (error) {
@@ -118,6 +125,10 @@ export function createPieceOwnerHistoryController(configuration = {}) {
       const code = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
       if (previousPage && error instanceof PieceApiError && error.ownerHistoryTransportUncertain === true) {
         state = { ...previousPage, message: '続きを読み込めませんでした。もう一度お試しください。' };
+        active = null; emit(); return;
+      }
+      if (previousRecord && code === 'PIECE_PUBLICATION_NOT_ALLOWED') {
+        state = { ...empty(), phase: 'detail', record: previousRecord, message: error.message };
         active = null; emit(); return;
       }
       state = { ...empty(), phase: 'unavailable', code, message: new PieceApiError(code).message };
@@ -170,8 +181,8 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   }
   function retryDetail(token) {
     if (!getView().canRetryDetail || token !== state.detailRetry.token) return;
-    const { pieceId, notice } = state.detailRetry;
-    return run('detail', { piece_id: pieceId }, null, notice);
+    const { pieceId, notice, visibilityReceipt } = state.detailRetry;
+    return run('detail', { piece_id: pieceId }, null, notice, visibilityReceipt);
   }
   // The UI must pass the exact record the user confirmed, not a later record.
   function deleteConfirmed(record) {

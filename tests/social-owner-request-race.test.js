@@ -30,7 +30,13 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       props.data.length ? props.data.map((item, index) => React.createElement(React.Fragment, { key: item.id || item.notice_id || index }, props.renderItem({ item }))) : props.ListEmptyComponent,
       props.ListFooterComponent),
   });
-  const navigation = { navigate: (...args) => routes.push(args), goBack: noop, addListener: () => noop, isFocused: () => true };
+  const navigationListeners = new Map();
+  const navigation = { navigate: (...args) => routes.push(args), goBack: noop, isFocused: () => true,
+    addListener(name, listener) {
+      if (!navigationListeners.has(name)) navigationListeners.set(name, new Set());
+      navigationListeners.get(name).add(listener);
+      return () => navigationListeners.get(name).delete(listener);
+    } };
   const unread = { getScopeUnread: () => false, getFeatureUnread: (_scope, key) => key === 'feed',
     setUnread: (...args) => events.push(['unread', ...args]), setUnreadGroup: (...args) => events.push(['unreadGroup', ...args]),
     setPrefetch: (...args) => events.push(['prefetch', ...args]), getPrefetchEntryFresh: () => null,
@@ -44,6 +50,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     if (options.method !== 'GET') return { unread_count: 0, resonated: true, resonances: 1 };
     const p = new URL(url).pathname;
     if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
+    if (p === '/nexus/pieces') return { items: control.pieceFeedItems || [] };
     if (p === '/notices/history') return { items: [notice], unread_count: 1 };
     if (p === '/follow/list') return { rows: [{ id: 'C', display_name: 'C-name' }, { id: 'D', display_name: 'D-name' }] };
     if (p === '/follow/stats') return { following_count: 2, follower_count: 0 };
@@ -109,6 +116,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
         openNoticeAction: async (_action, { openInternalRoute }) => openInternalRoute('Account') };
       if (target === 'components/TutorialOverlay.js') return { __esModule: true, default: 'TutorialOverlay',
         syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
+      if (target === 'components/UnreadBadge.js') return { __esModule: true, default: 'UnreadBadge', BottomTabUnreadBadge: 'UnreadBadge', ScreenUnreadBadge: 'UnreadBadge' };
+      if (control.realFeedCards && ['screens/nexus/NexusPieceFeedSection.js', 'screens/nexus/NexusPieceCard.js'].includes(target)) return load(target);
       if (target.startsWith('components/') || target.startsWith('runtime/') || /navigation\/.*StackNavigator\.js$/.test(target) ||
           /screens\/nexus\/Nexus/.test(target)) return { __esModule: true, default: path.basename(target, '.js'), BottomTabUnreadBadge: 'UnreadBadge' };
       if (name.startsWith('.')) return load(target);
@@ -126,6 +135,10 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   const h = { control, calls, events, alerts, routes, root,
     find: type => root.root.findByType(type),
     async flush() { await act(async () => { await tick(); }); },
+    async navigationEvent(name) { await act(async () => {
+      for (const listener of [...(navigationListeners.get(name) || [])]) listener();
+      await tick();
+    }); },
     async switchTo(owner, generationDelta = 1) { control.owner = owner; control.generation += generationDelta;
       control.session = owner ? { user: { id: owner }, access_token: 'synthetic-' + owner } : null;
       await act(async () => { root.update(element()); await tick(); }); },
@@ -351,6 +364,27 @@ test('MainTabs never labels an obsolete feed prefetch as the new owner', async t
   await h.switchTo('B');
   await h.resolve(old, { items: [{ id: 'obsolete-A-feed', owner_name: 'obsolete-A-feed' }] });
   assert.ok(!JSON.stringify(h.events).includes('obsolete-A-feed'));
+});
+
+test('the opt-in post feed renders new Piece text, preserves old Q&A, and refreshes after withdrawal', async t => {
+  const nativePiece = { source_type: 'piece_v2', q_instance_id: 'piece:posted', owner: { user_id: 'A', display_name: '自分' },
+    body: '保存した同じピースの本文', created_at: '2026-11-21T00:00:00Z' };
+  const legacyPiece = { source_type: 'emotion_generated', q_instance_id: 'legacy', owner: { user_id: 'C', display_name: 'C-name' },
+    question: { title: '既存投稿の問い' }, body: '既存投稿の答え', created_at: '2026-11-20T00:00:00Z' };
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, { realFeedCards: true, pieceFeedItems: [nativePiece, legacyPiece] });
+  const text = () => h.root.root.findAllByType('Text').map(node => node.props.children);
+  assert.equal(new URL(h.calls.find(call => call.path === '/nexus/pieces').url).searchParams.get('include_piece_v2'), 'true');
+  assert.ok(text().includes(nativePiece.body));
+  assert.ok(text().includes('既存投稿の問い'));
+  assert.equal(text().filter(label => label === '問い').length, 1);
+  assert.equal(text().filter(label => label === '答え').length, 1);
+
+  await h.navigationEvent('blur');
+  assert.ok(!text().includes(nativePiece.body));
+  h.control.pieceFeedItems = [legacyPiece];
+  await h.navigationEvent('focus');
+  assert.ok(!text().includes(nativePiece.body));
+  assert.ok(text().includes(legacyPiece.body));
 });
 
 test('MainTabs prefetches existing Piece data without requesting recommended users', async t => {

@@ -41,6 +41,7 @@ const STATUS = Object.freeze({
   PIECE_PREVIEW_STALE: 409, PIECE_PREVIEW_EXPIRED: 409,
   PIECE_CONFLICT: 409, PIECE_HASH_MISMATCH: 409, PIECE_QUOTA_EXHAUSTED: 409,
   PIECE_SOURCE_NOT_ELIGIBLE: 422, PIECE_FORMAT_NOT_ELIGIBLE: 422,
+  PIECE_PUBLICATION_NOT_ALLOWED: 422,
   PIECE_VISUAL_SELECTION_NOT_ALLOWED: 422, PIECE_SAFETY_UNAVAILABLE: 422,
   PIECE_TEMPORARILY_UNAVAILABLE: 503, PIECE_FEATURE_DISABLED: 503,
 });
@@ -56,6 +57,7 @@ const MESSAGES = Object.freeze({
   PIECE_HASH_MISMATCH: 'プレビューの内容を確認できませんでした。',
   PIECE_QUOTA_EXHAUSTED: '今月のPiece保存回数の上限に達しています。',
   PIECE_SOURCE_NOT_ELIGIBLE: 'この入力からは現在Pieceを作成できません。',
+  PIECE_PUBLICATION_NOT_ALLOWED: 'このピースは投稿できません。自分のピースには保存されています。',
   PIECE_FORMAT_NOT_ELIGIBLE: 'この形式は現在選択できません。',
   PIECE_VISUAL_SELECTION_NOT_ALLOWED: 'この画像設定は現在選択できません。',
   PIECE_SAFETY_UNAVAILABLE: '伝えたい内容を保ったPieceを作成できませんでした。',
@@ -603,6 +605,7 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
         if (!exact(input, ['piece_id', 'expected_row_version', 'visibility_scope']) ||
             !positive(input.expected_row_version) || !['private', 'public'].includes(input.visibility_scope)) reject('PIECE_REQUEST_INVALID');
         method = 'PATCH'; endpoint += '/visibility';
+        headers['X-Piece-Publication'] = '1';
         body = JSON.stringify({ expected_row_version: input.expected_row_version, visibility_scope: input.visibility_scope });
       } else if (action === 'delete') {
         if (!exact(input, ['piece_id', 'expected_row_version']) || !positive(input.expected_row_version) ||
@@ -647,6 +650,7 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
           result.code === 'PIECE_TEMPORARILY_UNAVAILABLE') throw ownerHistoryTransportUncertain();
       const codes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_NOT_FOUND',
         'PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED', ...(method === 'GET' ? [] : ['PIECE_CONFLICT'])];
+      if (action === 'visibility' && input.visibility_scope === 'public') codes.push('PIECE_PUBLICATION_NOT_ALLOWED');
       reject(exact(result, ['code']) && codes.includes(result.code) && STATUS[result.code] === response.status
         ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
     }

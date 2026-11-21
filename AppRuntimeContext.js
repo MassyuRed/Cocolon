@@ -151,7 +151,10 @@ export function AppRuntimeProvider({ children }) {
     setRuntime(pending);
 
     try {
-      const payload = await apiGet("/app/bootstrap", { auth: false });
+      const payload = await apiGet("/app/bootstrap", {
+        auth: false,
+        headers: { "X-Piece-Publication": "1" },
+      });
       // A late success cannot undo a newer failure/OFF response. Return the
       // current snapshot, not a stale true value for this promise's caller.
       if (sequence !== refreshSequence.current) return latestRuntime.current;

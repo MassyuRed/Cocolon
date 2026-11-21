@@ -18,6 +18,7 @@ import Button from '../../components/CocolonButton';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
 import { PieceApiError, preparePiecePreviewRequest, requestPieceSourceRef } from '../../features/piece/pieceApi';
 import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel';
+import { supportsPieceSavedImage } from '../../features/piece/pieceLayout';
 import PiecePreviewModal from '../../components/piece/PiecePreviewModal';
 
 const element = React.createElement;
@@ -565,7 +566,7 @@ export default class InputPieceActionArea extends React.Component {
     } catch { return false; }
   }
 
-  savePreview(identity, displayToken, provider, handle) {
+  savePreview(identity, displayToken, provider, handle, initialAction) {
     if (this.saveDispatching || !this.isCurrent() || !this.state.open ||
         provider !== this.props.isSaveAdmitted || handle !== this.saveFitHandle) return;
     this.saveDispatching = true;
@@ -586,7 +587,18 @@ export default class InputPieceActionArea extends React.Component {
       // selection. The controller independently rechecks admission immediately
       // before retaining the body-free request and issuing the private save.
       if (provider !== this.props.isSaveAdmitted || handle !== this.saveFitHandle || !this.isSaveAdmitted(preview, displayToken)) return;
-      void this.controller.savePreview(identity, displayToken, key);
+      const rendererVersion = preview.renderer_version, navigation = this.props.navigation;
+      if (initialAction && !this.canOpenSavedAction(initialAction, rendererVersion)) return;
+      const controller = this.controller;
+      const syncToken = this.contextSyncToken, modalEpoch = this.state.modalEpoch;
+      const pending = controller.savePreview(identity, displayToken, key);
+      if (!initialAction) return;
+      void pending.then(() => {
+        if (!this.isCurrent() || this.controller !== controller || this.contextSyncToken !== syncToken ||
+            !this.state.open || this.state.modalEpoch !== modalEpoch || this.props.navigation !== navigation ||
+            !this.canOpenSavedAction(initialAction, rendererVersion)) return;
+        this.openSavedPiece(controller.getView().savedReceipt, initialAction);
+      });
     } finally { this.saveDispatching = false; }
   }
 
@@ -595,6 +607,16 @@ export default class InputPieceActionArea extends React.Component {
       return this.context?.runtime != null &&
         this.context?.isFeatureEnabled?.('piece_v2_owner_read_enabled', false) === true &&
         typeof this.props.navigation?.getParent?.()?.navigate === 'function';
+    } catch { return false; }
+  }
+
+  canOpenSavedAction(action, rendererVersion) {
+    if (!this.canOpenSavedPiece()) return false;
+    try {
+      if (action === 'post') return this.context.isFeatureEnabled('piece_v2_visibility_toggle_enabled', false) === true &&
+        this.context.isFeatureEnabled('piece_v2_public_write_enabled', false) === true;
+      return action === 'image' && this.context.isFeatureEnabled('piece_v2_export_enabled', false) === true &&
+        supportsPieceSavedImage(rendererVersion);
     } catch { return false; }
   }
 
@@ -622,7 +644,7 @@ export default class InputPieceActionArea extends React.Component {
     if (pending?.epoch === epoch) this.navigateSavedPiece(pending);
   }
 
-  openSavedPiece(receipt) {
+  openSavedPiece(receipt, initialAction) {
     if (this.pendingSavedNavigation || !this.isCurrent() || !this.canOpenSavedPiece()) return;
     const controller = this.controller, view = controller.getView();
     if (view.phase !== 'saved' || !receipt || view.savedReceipt !== receipt) return;
@@ -633,7 +655,7 @@ export default class InputPieceActionArea extends React.Component {
     const pending = { controller, receipt, stamp: this.boundStamp, runtime: this.boundRuntime,
       sourceStamp: this.boundSavedInputStamp, runtimePublication: this.context?.runtime,
       navigation: this.props.navigation, epoch: this.state.modalEpoch,
-      target: Object.freeze({ pieceId: receipt.piece_id, expectedUserId }) };
+      target: Object.freeze({ pieceId: receipt.piece_id, expectedUserId, ...(initialAction ? { initialAction } : {}) }) };
     const waitForDismiss = Platform?.OS === 'ios' && this.state.modalRetained === true;
     this.close();
     pending.syncToken = this.contextSyncToken;
@@ -681,6 +703,10 @@ export default class InputPieceActionArea extends React.Component {
     const display = canSave ? Object.freeze({ ...checked, canSave: true }) : checked;
     if (!this.isCurrent() || view.visualToken !== this.controller.getView().visualToken) return null;
     const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider, handle) : null;
+    const onPost = canSave && this.canOpenSavedAction('post', display.preview.renderer_version)
+      ? (identity, token) => this.savePreview(identity, token, provider, handle, 'post') : null;
+    const onSaveImage = canSave && this.canOpenSavedAction('image', display.preview.renderer_version)
+      ? (identity, token) => this.savePreview(identity, token, provider, handle, 'image') : null;
     const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
       ? () => this.openSavedPiece(view.savedReceipt) : null;
     const saveRetryLabel = display.saveQuotaRejected === true ? '保存枠を確認して再試行' : '同じ保存要求で結果を確認';
@@ -726,7 +752,7 @@ export default class InputPieceActionArea extends React.Component {
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
       element(PiecePreviewModal, { key: this.state.modalEpoch, visible: this.state.open,
         retainDismiss: this.state.modalRetained, onDismiss: () => this.previewDismissed(modalEpoch),
-        display, onClose: this.close, onOpenSaved,
+        display, onClose: this.close, onOpenSaved, onPost, onSaveImage,
         onRetry: this.retry, onRefreshSource: this.savedMode ? this.refreshSavedInput : null,
         onRestartExpired: this.restartExpired, onVisualChange: this.changeVisual, onFormatChange: this.changeFormat, onReturnToFormat: this.returnToFormat, onCancel: this.cancelPreview, onSave,
         onSaveFitChange: this.receiveSaveFit }),
