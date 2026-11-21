@@ -7349,4 +7349,6 @@ API f5d8967の変更11pathを復元manifestと全文一致で照合。新しい�
 
 ホームの `screens/InputScreen.js` → `navigation/InputStackNavigator.js` → `screens/DeepInsightScreen.js`。`features/home/useDeepInsight.js` は本人の認証と画面フォーカスに応じて問い・回答履歴を取得し、発行したIDに回答を送る。`lib/api/home/deepInsightApi.js` は `/deep-insight` の読み取り、発行、回答保存へのクライアント境界。日次上限、未回答の保持、プラン権利はサーバー側で判定する。
 
+新しいDeepInsight通知を開けるアプリ候補は、`lib/pushToken.js` と `lib/api/account/profileApi.js` から本人の端末トークンと対応情報を同時に登録する。通知は `navigation/notificationRouting.js` から対象の入口・発行IDを開く。配備候補のSQLとワーカーは対応情報が現在のトークンに結び付いていると確認できた場合に送信する。
+
 旧「今日の問い」はホーム／起動時の出題、回答履歴、設定、通知の通常導線から廃止する。Emlisの感情記録中に出る問いは入力に付随する既存機能。 [最新議事録§7](weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)

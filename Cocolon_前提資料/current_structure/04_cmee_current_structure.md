@@ -2,6 +2,8 @@
 
 開発差分では、既存の4B提供で一問の候補を生成し、`cocolon_meaning_experience_engine/deep_insight_question.py` が記録の引用との一致、候補の形式、既出の問いとの重複を検査する。わたしマップとEmlisで確認した点は次の問いを選ぶ材料にし、本人が書いた原文と回答を根拠に扱う。`api_deep_insight.py` が本人の発行・回答・再読を接続する。 通知が指すふりかえりの問いは、直近履歴にない場合に `GET /deep-insight/questions/{question_id}` から取得する。Supabaseの `deep_insight_question_by_id` が本人IDと発行IDを照合し、`features/home/useDeepInsight.js` が同じ問い・回答を画面に渡す。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)
 
+11/22のテーマ候補では、`deep_insight_theme.py` が場面・答えの対象に合う例文を4Bへ渡す。`deep_insight_theme_candidate_context` は本人の同じテーマで発行済みのキーと本文を取得する。`deep_insight_question.py` は同じキー・正規化した本文を発行前に止め、意味の照合は32件ずつ行う。重複とされた文が別の答えを求めると一対一で確認できたら、その文だけを除いて照合を続ける。本人の記録・過去の回答・マップはテーマの出題に渡さない。
+
 ### 11/20　三中核が参照する4Bと保存経路
 
 Emlisは本人が回答した時とスキップした時に自然応答を確定する。Pieceは選んだ入力と問い・回答の対応を検査し、本文と画像の描画情報を同じ版で非公開保存する。わたしマップは保存後の通知ジョブから本人の保存版を開く。通常の実測、各経路の到達点、GPUの2つの推論URLと認証キーの対応は [補助設計§9.205](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。
