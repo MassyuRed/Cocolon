@@ -676,3 +676,8 @@ Emlis本文を同じ操作の再試行で保存できた場合、元の回答と
 発行済みの一問への本人回答を確認し、今回の返事に必要な原文と補足を4Bへ渡す。Plus・Premiumで問いの場面と一致する過去の原文を確認した場合は、CMEEが日付付きで表示する。Premiumの過去の解釈への本人訂正は既存のフレーム欄に残る。同じ架空入力の実4Bを三プランで確認し、どの返事も当回の「怖かった」を受け取った。過去に感じた「重かった」や過去フレームの訂正は今回の返事に含まれなかった。 [API統合検証版](https://github.com/MassyuRed/mashos-api/commit/f96c62486832c3784ed913fe3071ebe571434d58) · [詳細設計§9.233](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-paid-received-answer-context-20261122)
 
 隔離DBで、Plusの本文を一度保存し損ねた場合も、同じ応答で再試行してPieceへ本人が選んだ補足を渡せることを確認した。 Premiumでも過去フレームの初回訂正を挟んで、今回の回答を選んだPieceのプレビュー、見た目変更、保存、同版再読を確認した。 通常のAPI・ワーカーは `cfeeecf4`。用途別重みの採否、この候補での本番認証付きの四機能の往復、実端末の画像・通知が残る。本番配備・Supabase移行・iOSビルドと配布は未実施。
+
+<a id="cmee-production-rollout-20261122"></a>
+### 11.31 統合版の通常反映（11/22 JST）
+
+`f96c624` のPiece・Analysis両CIの通過後、Mashが承認した三移行を本番Supabaseへ順に適用し、定義と書き込み三関数の権限を照合した。Renderは同じ版のワーカーを先に配備し、18:43:27 JSTにLive、18:43:35 JSTにASTOR起動を確認した。APIは同じ `f96c624` で18:46:01 JSTにLiveとなった。 本番の専用アカウントでEmlisAI、Piece、DeepInsightの保存・同版再読を確認した。わたしマップv24は同じ図・本文・DeepInsight回答を再読でき、元入力とEmlisAIへの補足は分析で保留された。 [詳細設計§9.234](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-rollout-20261122)
