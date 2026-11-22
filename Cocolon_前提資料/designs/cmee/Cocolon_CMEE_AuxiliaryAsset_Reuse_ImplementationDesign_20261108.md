@@ -9057,4 +9057,6 @@ v24は、同じ持ち主と元入力の版、発行済みの問いのID、本人
 
 同じ資料で候補版を実4Bへ各段階一度実行し、PLAN 11.054秒、NODES 22.607秒、RELATIONS 7.456秒で通過した。元の思考と本人補足一回、DeepInsight回答二文、独立した行動を三節点で表示し、記録2件・除外0件・未解析0件・関係線0本を照合した。質問文は回答を読むための背景にだけ使われた。DeepInsightの本文は条件付き判断を保ち、4Bの内部分類値は `RECORDED` だった。実4Bの受領記録のSHA-256は `498006c2904c9cc916d947abd2c1f84b453514dd51f9da5ce269ccabaee41599`。
 
-この記録の時点で、本番API・ワーカーは `f96c624`。候補 `1070072` に対するCIと、本番配備後の認証付き再生成は確認中。実端末の画像と通知、有料版EmlisAIの文脈更新は別途確認する。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45014151602) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45014151615)
+`1070072` はAnalysisとPieceの両CIに合格した。Renderのワーカーは20:09、APIは20:11 JSTに同じSHAで稼働し、ワーカーのMap購読とAPIの `/healthz` HTTP 200を確認した。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45014151602) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45014151615) · [ワーカーの配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1cqerl550s73e4vsd0) · [APIの配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1cr656e07s73d11sm0)
+
+20:13 JSTに既存の専用試験アカウントから通常更新を一度受け付け、20:15に新レポート `4f883651-2d69-418a-afbb-8810ceae8e88` を最新と詳細の両方から同じID・図・本文で読み戻した。投入2、処理2、表示2、除外0、未解析0、関係線0。三節点の根拠は思考とEmlisAI補足一回、DeepInsight回答二文、独立した行動で、記録にない時系列は表示されなかった。旧版は履歴で読めた。 有料版EmlisAIの文脈更新は本番で無効。実端末での画像保存と通知受信は未確認。 [更新後のCocolon契約検査](https://github.com/MassyuRed/Cocolon/actions/runs/45014549068/job/137183942304)
