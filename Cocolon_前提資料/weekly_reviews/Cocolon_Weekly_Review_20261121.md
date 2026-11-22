@@ -760,3 +760,5 @@ Analysis・Pieceの両CIを通過した `c640b8c` を本番APIとワーカーに
 統合候補 `6c26351` で、採用検査に通った思考・補足・行動・訂正の配置を4B提供側の制約に渡す。関連254件と共有言語オーナーの検査1件が通過した。通常試験には、統合候補の両CIの照合とGPUの提供コードを含む配備が必要。 [統合候補](https://github.com/MassyuRed/mashos-api/commit/6c26351b594cf1cdd4b6e5750b44f7df3a935053)
 
 Pieceは前回の本番非公開保存と同版再読を引き継ぐ。失敗通知が出ていたCocolonの契約テストは既存修正後の最新実行で119件が通過した。 [契約テスト](https://github.com/MassyuRed/Cocolon/actions/runs/45070632498)
+
+11/23 JST追記。統合候補 `6c26351` のAnalysis・Pieceの両CIが成功し、隔離回帰439件と提供接続15件が通過した。失敗通知の対象だったCocolonの契約テストは、この議事録の直前の版でも119件通過した。本番は `c640b8c` で、GPU提供コードと原文選択処理の2ファイルを更新対象として特定した。同じ訂正操作からの生成再開に必要な受領がなかったため、EmlisAIの訂正後の保存とDeepInsightへの連携は新規の架空入力が必要。Pieceは非公開で保存済みの版を対照とし、わたしマップの新規保存は通常経路で確認する。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45075069522) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45075069533) · [契約テスト](https://github.com/MassyuRed/Cocolon/actions/runs/45075259001) · [補助設計§9.248](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-v24-live-plan-and-correction-writer-20261123)
