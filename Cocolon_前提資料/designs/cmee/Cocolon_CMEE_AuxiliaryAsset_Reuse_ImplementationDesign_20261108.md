@@ -8956,6 +8956,8 @@ Piece・DeepInsightの修正、v24の原文範囲の修正と時刻境界試験�
 
 ### 検証と反映状態
 
-統合候補の関連試験は初回465件通過。別プロセスにアプリのモジュールパスがなかったPieceの再読試験一件は、同じ候補でパスを揃えた追試に通過した。前候補 `ef3258c` でPieceとAnalysisのGitHub CIが成功している。 [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/44994234528) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/44994234542)
+統合候補の関連試験は466件通過した。初回に子プロセスでモジュールを参照できなかったPieceの再読試験は、同じ候補でモジュールパスを揃え、全件を再実行して確認した。 [最新候補のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/44996988208) · [最新候補のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/44996988220)
+
+切替と巻き戻しを隔離DBで確認した。候補の資料抽出を旧APIで読むと例外は起きないが、訂正後も有効な独立したEmlis回答を出題資料から落とす。候補が発行したDeepInsightの問いには、旧APIでも同じIDで回答を保存・再読できた。EmlisAIでは、候補が新方式で発行した問いは旧APIで読めても、旧APIで回答すると本文が未反映になった。候補が受領済みの訂正の応答を旧APIに戻した場合も、その本文を再開できなかった。候補のAPIを `COCOLON_EMLIS_CONTEXT_UPDATE=false` にすると新方式の開始を止めつつ、既発行の問いと受領済み本文を処理できた。通常切替はワーカーを先に揃え、APIは新方式を無効にして配備・照合し、有効化を別に判断する。いったん新方式を使った後に止める場合は、処理できる候補APIで無効へ戻す。旧APIに戻す場合は対象の未完了の問いと受領記録を確認し、必要な間は回答と再試行の書き込みを止める。
 
 Renderの通常APIとワーカーは `cfeeecf4` で稼働。Supabaseは適用済み50件、最新 `20261122015129`。候補の `20261122142000` は未適用。従来ワーカーが新しい資料で保存した古い図を最新版が再利用する対照を確認したため、通常切替の際はAPI・ワーカーの版と実行中ジョブを照合する。旧月別版はその時点の保存版として扱う。本番配備、Supabase移行、iOSビルドと配布は未実施。残る通常反映の判定は、EmlisAI二欄の本文とプラン境界、用途別重みの採否、統合版での認証付き四機能往復、実端末のPiece画像と通知で行う。
