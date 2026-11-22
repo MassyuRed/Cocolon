@@ -669,3 +669,10 @@ Emlis本文の保存失敗から同じ操作で復旧した場合だけ、回答
 Emlis本文を同じ操作の再試行で保存できた場合、元の回答と受領の版を確認し、Pieceのプレビュー・見た目変更・保存・同版再読へ渡すようAPIとSQLを修正した。本文保存の失敗1回・2回と通常保存の対照で確認した。別操作、改変された受領、失敗記録の欠落を拒否した。 [API統合検証版 `c3e895e`](https://github.com/MassyuRed/mashos-api/commit/c3e895e86bf3b408887a3a94246c73cd62251daf) · [詳細設計§9.232](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-piece-naturally-recovered-answer-20261122)
 
 同じ架空入力の実4B比較ではFreeが今回の「怖かった」を保持した。Plus・Premiumには「重かった」を別の記録から今回へ取り込む出力が残った。今回の資料を先に渡す試作でもPremiumが過去の訂正を今回の理由にしたため、試作の統合は未実施。本番のAPI・ワーカーは `cfeeecf4`、候補移行二件は未適用。
+
+<a id="cmee-paid-received-answer-context-20261122"></a>
+### 11.30 有料プランで今回の回答と過去の記録を照合（11/22 JST）
+
+発行済みの一問への本人回答を確認し、今回の返事に必要な原文と補足を4Bへ渡す。Plus・Premiumで問いの場面と一致する過去の原文を確認した場合は、CMEEが日付付きで表示する。Premiumの過去の解釈への本人訂正は既存のフレーム欄に残る。同じ架空入力の実4Bを三プランで確認し、どの返事も当回の「怖かった」を受け取った。過去に感じた「重かった」や過去フレームの訂正は今回の返事に含まれなかった。 [API統合検証版](https://github.com/MassyuRed/mashos-api/commit/f96c62486832c3784ed913fe3071ebe571434d58) · [詳細設計§9.233](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-paid-received-answer-context-20261122)
+
+隔離DBで、Plusの本文を一度保存し損ねた場合も、同じ応答で再試行してPieceへ本人が選んだ補足を渡せることを確認した。 Premiumでも過去フレームの初回訂正を挟んで、今回の回答を選んだPieceのプレビュー、見た目変更、保存、同版再読を確認した。 通常のAPI・ワーカーは `cfeeecf4`。用途別重みの採否、この候補での本番認証付きの四機能の往復、実端末の画像・通知が残る。本番配備・Supabase移行・iOSビルドと配布は未実施。
