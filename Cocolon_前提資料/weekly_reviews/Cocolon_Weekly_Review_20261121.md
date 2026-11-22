@@ -700,4 +700,11 @@ Emlis本文を同じ操作の再試行で保存できた場合、元の回答と
 <a id="cmee-effective-corrections-and-frame-feedback-20261122"></a>
 ### 11.35 EmlisAIの訂正と本人判断を使う統合検証（11/22 JST）
 
-Premiumの過去フレームに対する初回の「合っています」「使わない」の後も、当回の回答を選んでPieceを作成・保存できるよう修正した。わたしマップv24に届く有効な本人訂正もDeepInsightの出題資料へ渡し、以前の表現を戻さず、隔離DBで発行・回答・同じ根拠の再読を確認した。稼働中の4Bに新しい出題処理を通し、「私は不安だった」の訂正範囲を根拠とした問いを採用した。 現行の共有4Bは架空のPlus・Premium各1件で当回の怖さを保持した。Pieceの履歴・画像書き出しのアプリ試験482件が通過した。検証版の本番DB移行・Render配備は承認待ち。有料版の文脈更新、端末での写真保存・通知は引き続き確認が残る。 [統合検証版 `3ec02f1`](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce) · [補助設計§9.237](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-effective-corrections-and-frame-feedback-20261122)
+Premiumの過去フレームに対する初回の「合っています」「使わない」の後も、当回の回答を選んでPieceを作成・保存できるよう修正した。わたしマップv24に届く有効な本人訂正もDeepInsightの出題資料へ渡し、以前の表現を戻さず、隔離DBで発行・回答・同じ根拠の再読を確認した。稼働中の4Bに新しい出題処理を通し、「私は不安だった」の訂正範囲を根拠とした問いを採用した。 現行の共有4Bは架空のPlus・Premium各1件で当回の怖さを保持した。Pieceの履歴・画像書き出しのアプリ試験482件が通過した。本番反映の結果は[§11.36](#cmee-production-frame-feedback-corrections-20261122)に記録した。有料版の文脈更新、端末での写真保存・通知は引き続き確認が残る。 [統合検証版 `3ec02f1`](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce) · [補助設計§9.237](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-effective-corrections-and-frame-feedback-20261122)
+
+<a id="cmee-production-frame-feedback-corrections-20261122"></a>
+### 11.36 CMEE統合版の本番反映と残件（11/22 JST）
+
+Mashの承認後、PieceとDeepInsightの移行2件を本番に適用し、RenderのワーカーとAPIを `3ec02f1` に揃えた。既存の架空アカウントでEmlisAI、Piece、DeepInsight、わたしマップの同じ保存版を再読した。新しい非公開入力でEmlisの訂正を一度行い、同じ訂正版を取得した。Emlisで質問を出さず閉じた短文の訂正は、共有材料の根拠確定で保留された。DeepInsightは訂正前の文言を候補へ戻さなかった。修正対象のPremiumの新規往復と、新しい訂正文を使った本番発行は未確認。 [補助設計§9.238](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-frame-feedback-corrections-20261122)
+
+Plus・Premiumに限る文脈更新候補 `4829e92` は隔離DBで139件が通過し、架空のPlusの実4B応答でも今回の恐怖を過去から分けた。Pieceは思考・行動・明示選択した補足を実4Bで取得し、隔離DBで同じ作品を保存・再読した。補足の「その時」が別の行動に続く配置が残った。 [有料文脈§9.239](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-paid-only-context-20261122) · [Piece実測§9.240](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-piece-long-fields-real-4b-20261122)

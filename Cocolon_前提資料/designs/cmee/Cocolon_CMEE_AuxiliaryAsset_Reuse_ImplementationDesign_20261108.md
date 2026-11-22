@@ -9079,4 +9079,31 @@ v24は、同じ持ち主と元入力の版、発行済みの問いのID、本人
 
 統合検証版のGitHub ActionsでAnalysisとPieceが通過した。アプリ側の契約検査も通過した。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45021562285) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45021562310) · [Phase 6](https://github.com/MassyuRed/Cocolon/actions/runs/45021801164)
 
-今回の本番反映は承認待ち。切り替え順はPieceの移行、RenderワーカーとAPIを同じ検証版に揃える、DeepInsightの移行、認証付きの発行・保存と同じ版の再読。新しい訂正だけの記録を旧DeepInsightの読み取りが見落とす時間を作らないよう、DeepInsightの資料拡張は両サービスの稼働確認後に行う。
+本番の反映は[§9.238](#cmee-production-frame-feedback-corrections-20261122)を参照。切り替えはPieceの移行、Render両サービスの配備、DeepInsightの移行の順で行った。
+
+<a id="cmee-production-frame-feedback-corrections-20261122"></a>
+## 9.238 本人判断と訂正の本番配備（11/22 JST）
+
+Mashの承認を受け、Pieceの移行を先に適用した。Renderワーカーは 21:55:50、APIは 21:57:27 に `3ec02f1` で稼働した。両サービスのSHAを確認してからDeepInsightの移行を適用した。 [ワーカーの配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1ec4ijnfac738hq31g) · [APIの配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1ecomtlv9c73bsjgog) · [稼働版](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce)
+
+| 本番に適用した内容 | GitHubのSQL版 | Supabaseの履歴番号 |
+|---|---|---|
+| 過去の解釈に対する初回判断後も、当回の回答をPieceへ渡す | `20261122145100` | `20261122125313` |
+| CMEEが確定した本人訂正の範囲をDeepInsightの材料と発行へ渡す | `20261122145000` | `20261122125756` |
+
+対象5関数が新定義を持ち、実行は引き続きサーバー専用であることを確認した。APIヘルスはHTTP 200、未認証の `/deep-insight` は401、旧「今日の問い」は404。ワーカーはわたしマップ更新、DeepInsightの判定、通知を処理対象として起動した。
+
+既存の架空試験アカウントで、Emlisの応答・回答、Pieceの履歴・詳細・書き出し用データ、DeepInsightの問い・回答、わたしマップの図・本文・三節点の原文根拠を、同じ保存IDと版で読み戻した。Pieceは書き出し用の本文・描画設定とハッシュも一致した。新しい非公開の架空記録1件では、現行設定のEmlisは質問を出さず初回応答を確定した。既存の本人訂正から「つらかったんです」を「私は不安だった」へ一度訂正し、リビジョン8の同じ表示本文を認証付きで読み戻した。共有材料では原文範囲を照合できても、訂正対象を本人の確定済みの感情として束縛できず、`analysis_correction_target_unresolved` で保留となった。同じ短文と訂正文は隔離した原文処理でも再現した。DeepInsightの本番資料から訂正前の文言は除外された。今回の短文の訂正後の出題・回答の保存と、過去フレームを初めて判断した後にPieceを新規保存するPremiumの本番確認は残る。
+
+<a id="cmee-paid-only-context-20261122"></a>
+## 9.239 Plus・Premiumに限ってEmlisの文脈を更新する候補（11/22 JST）
+
+`COCOLON_EMLIS_CONTEXT_UPDATE=paid` を追加し、サーバー側で確認したPlus・Premiumの新規スレッドに絞って開始時に設定を記録する。Freeはこれまでの出題と本文生成を使う。従来の `true` は全プラン、未設定と `false` は無効。既に出した問い、受領済み本文、再試行には開始時の設定を使う。DBの移行は不要。隔離DBで関連139件が通り、新規のプラン境界、設定を無効に戻した後の回答、保存に失敗した本文の非再生成再読、Pieceへの接続を確認した。 [有料文脈の候補](https://github.com/MassyuRed/mashos-api/commit/4829e9255a076fd5673e0449513f94b4c7e660b6)
+
+今回の架空例は「頼まれたのに、嬉しくなかった。」への回答「その時は怖かった。」。現行ワーカーから、候補が組んだPlus用の送信を共有4Bへ1回渡した。受領本文は「頼まれたのに嬉しくなかったんですね。その時は怖かったことも伝わってきました。」だった。過去の「重かった」と別の行動欄の返却は混ざらなかった。隔離DBでは適格な過去記録が別段落となり、Freeでは候補を選んでも有料文脈が付かないことを確認した。有料文脈の本番有効化と有料試験アカウントでの一往復、実機の画像保存と通知着信は未確認。
+<a id="cmee-piece-long-fields-real-4b-20261122"></a>
+## 9.240 Pieceの思考・行動・選んだ補足を通常4Bで確認（11/22 JST）
+
+隔離DBで架空の思考59字・行動35字を保存し、Emlisの発行した問いに「その時は重かった。」と答えた。本人がこの回答を選んだ状態から、通常のPieceの指示を共有4Bへ1回送った。18.589秒、HTTP 200、正常終了。モデルの三欄は原文どおりで、誰に何を頼まなかったか、説明前にメモを見返したいこと、考えを整理する時間を大切にしたいことが残った。現行の文章化は欄内の重複した主語を2箇所省いた。受領本文を改変せず、現行SQLでプレビュー・見た目変更・非公開保存・同じ操作の再試行・詳細再読まで通過した。利用枠の消費は1回、本文と描画設定のハッシュは一致した。
+
+本人が答えたのは思考欄の「褒められた」についての問いだった。完成したPieceでは補足が行動欄の後ろに出るため、「その時」が直前に記された旅程の相談や資料確認の話を指すように読める。文章品質は保留。次は、既存の問い・回答が保持する出来事の対応を、Pieceの補足と文章配置に渡す。通常提供の4Bは共有ベース。保存済みの追加重みは本番未採用。
