@@ -715,3 +715,10 @@ Plus・Premiumに限る文脈更新候補 `4829e92` は、有料文脈の隔離D
 質問のない短い感情記録で元の文全体を一意に訂正した場合に、訂正後の本人の言葉だけをDeepInsightとわたしマップv24へ渡す候補を確認した。隔離DBで訂正の応答保存を一度失敗させ、同じ受領を再利用した。DeepInsightは修正後の範囲を根拠に発行・回答・同じIDの再読まで通り、v24の生成材料は同じ範囲を保持した。以前の保留結果は当時の結果を読み戻した。 [API候補 04eb54b](https://github.com/MassyuRed/mashos-api/commit/04eb54b90bdb15fc9f23d5f903eeb0a6568d562a) · [補助設計§9.242](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-direct-feeling-correction-20261122)
 
 有料文脈を有効にしたPremiumで、過去フレームへの初回確定・不使用から今回の回答を選んだPieceを非公開保存し、同じ作品を再読した。別の長めの架空例は新しい実4B試験1件に固定し、隔離の対照でプレビュー・同じ保存版・書き出しの描画入力を照合した。EmlisAI用とPiece用の重みは保管原本の復元と照合に通り、用途別の本番採用は残る。 [補助設計§9.243](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-premium-piece-and-adapter-readiness-20261122)
+
+<a id="cmee-paid-production-and-real-piece-20261122"></a>
+### 11.38 有料文脈の本番配備とPieceの実4B検証（11/22 JST）
+
+Analysis・Pieceの両CIが成功した 04eb54b を、ワーカーとAPIへ同じ版で配備した。APIで有料文脈を有効にし、専用の架空アカウントの新規Premiumスレッドに適用されたことを確認した。過去フレームの初回確定と今回の回答を保存し、試験後はFreeへ戻して再読した。短文の初回と有料入力の回答後で4Bの受領が保存されず、短文訂正・Pieceの本番作成・DeepInsight出題・わたしマップの手動更新は行えなかった。 入力から自動で起動したわたしマップの2ジョブは各8回で失敗終了し、新規レポートは0件だった。
+
+別の凍結済みPiece入力は共有4Bに1回送り、同じ応答を配備版の隔離DBで保存した。補足は「誘われた時は寂しかった。」となり、行動欄との誤った関係を足さず、同じ版の詳細と書き出しで描画入力が一致した。実機の写真と通知は未確認。 [詳細設計§9.244](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-paid-production-and-real-piece-20261122)
