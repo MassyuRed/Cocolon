@@ -731,3 +731,12 @@ Analysis・Pieceの両CIが成功した 04eb54b を、ワーカーとAPIへ同�
 候補 `f52a248` では、EmlisAIとわたしマップの既存処理に、失敗した段階とHTTP状態を記録するログを追加した。わたしマップでは固定の検査理由も確認できる。原入力・応答本文・認証情報をログへ含めず、公開エラー・保存・再試行の契約を維持する。関連317件の隔離試験が通過した。 [API候補](https://github.com/MassyuRed/mashos-api/commit/f52a248e845c5b9677dd63334fa125a28ab6a733) · [補助設計§9.245](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-normal-path-failure-diagnostics-20261123)
 
 隔離DBで別の2条件を再現した。思考と一緒に独立した相談行動を保存すると、EmlisAIは行動を読む段階で4B呼び出し前に停止した。また、関連履歴のないPremiumの初回資料をFreeへ戻した後に読み込むと、わたしマップの資料再照合が422で止まった。候補 `287f199` で相談行動を保持して応答を保存・再読し、新旧の保存資料から現在の権利で利用できる本人の原文を引き続き渡せることを確認した。回帰433件が通過し、本番確認は残る。 [API修正候補](https://github.com/MassyuRed/mashos-api/commit/287f1998c5ae1d1ece187ce5b370858a2ff9bdb3)
+
+<a id="cmee-production-reply-and-multi-map-20261123"></a>
+### 11.40 EmlisAIの通常保存再読とわたしマップの計画検査（11/23 JST）
+
+承認を受け、両CIが通過した `f52a248` を本番APIとワーカーに固定配備した。短文は問いをオフにし、生成1回の応答を保存して同じ本文を再読した。Premiumは思考欄を一つの場面に揃え、問いの初回応答と回答後の応答を実4Bから各1件保存した。当回の「怖かった」を本文へ返し、過去履歴は別段落で再読した。試験は非公開2件で、アカウントをFreeに戻した。
+
+わたしマップは、Premium中の試行で保存材料の422、Free復元後の試行でv24のPLAN採用検査の503を記録した。後者は4BのHTTP 200後に、思考・補足・独立した行動の対応を検査する `analysis_semantic_plan_received_answer_scope_invalid` で止まった。自動更新2件は各8回で失敗終了し、新規保存・通知予約は0件。同じ試験用資料を再生し、5記録から2組の本人補足を含む9欄を確定した。二つの補足はそれぞれ自分の思考に結び、二つの独立した行動は別項目にする計画を既存検査で確認した。 [詳細設計§9.246](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-reply-and-multi-map-20261123)
+
+複数の補足を扱う配置を、先に修正したEmlisAIの例外・わたしマップのプラン変更時の再照合と合わせて `7124250` に保存した。関連121件が通過。新しい計画では、別の思考へ回答を入れ替えた対照を採用前に拒否した。 [統合候補](https://github.com/MassyuRed/mashos-api/commit/7124250d23b1d1941a9ec9abe71d5683c4a69360)
