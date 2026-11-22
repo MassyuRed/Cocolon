@@ -662,3 +662,10 @@ EmlisAIの二欄応答は元の例と行動だけを差し替えた例で改善�
 通常のAPIとワーカーは `cfeeecf4`。通常切替で同じ資料を旧ワーカーが処理済みなら、候補ワーカーで既存の強制更新を行い、最新マップと既存月別版の両方を照合する。プラン別の実4B応答、用途別重みの採否、本番認証付きの四機能往復、実端末の画像と通知が残る。本番配備・SQL適用・iOSビルドと配布は未実施。
 
 Emlis本文の保存失敗から同じ操作で復旧した場合だけ、回答を選ぶPieceが保存された資料を拒否することを隔離DBで確認した。通常どおり保存した対照では回答を選べた。APIと本番SQLの両方に試行IDの一致条件が残るため、本人回答からPieceまでの復旧を通常切替の確認に加えた。
+
+<a id="cmee-piece-naturally-recovered-answer-20261122"></a>
+### 11.29 EmlisAIからPieceへの復旧連携と3プランの比較（11/22 JST）
+
+Emlis本文を同じ操作の再試行で保存できた場合、元の回答と受領の版を確認し、Pieceのプレビュー・見た目変更・保存・同版再読へ渡すようAPIとSQLを修正した。本文保存の失敗1回・2回と通常保存の対照で確認した。別操作、改変された受領、失敗記録の欠落を拒否した。 [API統合検証版 `c3e895e`](https://github.com/MassyuRed/mashos-api/commit/c3e895e86bf3b408887a3a94246c73cd62251daf) · [詳細設計§9.232](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-piece-naturally-recovered-answer-20261122)
+
+同じ架空入力の実4B比較ではFreeが今回の「怖かった」を保持した。Plus・Premiumには「重かった」を別の記録から今回へ取り込む出力が残った。今回の資料を先に渡す試作でもPremiumが過去の訂正を今回の理由にしたため、試作の統合は未実施。本番のAPI・ワーカーは `cfeeecf4`、候補移行二件は未適用。
