@@ -749,3 +749,14 @@ Analysis・Pieceの両CIが成功した 04eb54b を、ワーカーとAPIへ同�
 同じアカウントでPieceを1件非公開保存し、思考・独立した行動・本人補足の3段落と描画データを同じ保存版の詳細・書き出しから再読した。短文の本人訂正は保存したが、4Bの返答本文がEmlisの検査を通らず、対応する確定本文とDeepInsight資料は0件。問いの発行・回答は行われなかった。アカウントはFreeに復元した。
 
 次の候補 `c640b8c` には、採用済みの計画から複数の補足に対応する見出し候補を渡す修正と、保存済みの短い本人訂正を独立項目として扱う修正を合わせた。隔離再生では訂正前後とも7項目を組み立て、関連39件のテストを通過した。候補のCI・本番保存、訂正後の応答とDeepInsightへの往復、端末での画像・通知の確認を残す。 [最新候補](https://github.com/MassyuRed/mashos-api/commit/c640b8c157fab880e9a4fe5a2922a623d7b05b22) · [補助設計§9.247](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-followthrough-20261123)
+
+<a id="cmee-v24-live-plan-and-correction-writer-20261123"></a>
+### 11.42 わたしマップv24の計画検査とEmlisAIの短文訂正候補（11/23 JST）
+
+Analysis・Pieceの両CIを通過した `c640b8c` を本番APIとワーカーに固定配備した。架空アカウントをFreeのまま使い、短文訂正を含むわたしマップv24の通常更新を1件受け付けた。自動試行8回とも、4Bの応答後に思考と本人補足を結ぶ計画の検査で停止した。新規保存と完了通知予約は各0件。隔離再生では、採用できない配置でも提供側のJSON形式検査を通る対照を再現した。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1m0uhksfps7399efkg) · [詳細設計§9.248](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-v24-live-plan-and-correction-writer-20261123)
+
+短文訂正用の `2d748b2` は、本人が確定した訂正を中心に4Bへ渡し、利用可能な過去の原文と本人の判断を保持する。隔離DBで、訂正後の本文、同じ訂正範囲からDeepInsightの発行・回答・同じIDの再読を確認した。関連196件が通過。 [Emlis候補のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45073855432)は実行中。[Emlis候補のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45073855425)は実行中。 本番での訂正後の実4BとDeepInsightの往復は残る。 [Emlis候補](https://github.com/MassyuRed/mashos-api/commit/2d748b2ee61df4108b44eec6f5ff706bccdf2559)
+
+統合候補 `6c26351` で、採用検査に通った思考・補足・行動・訂正の配置を4B提供側の制約に渡す。関連254件と共有言語オーナーの検査1件が通過した。通常試験には、統合候補の両CIの照合とGPUの提供コードを含む配備が必要。 [統合候補](https://github.com/MassyuRed/mashos-api/commit/6c26351b594cf1cdd4b6e5750b44f7df3a935053)
+
+Pieceは前回の本番非公開保存と同版再読を引き継ぐ。失敗通知が出ていたCocolonの契約テストは既存修正後の最新実行で119件が通過した。 [契約テスト](https://github.com/MassyuRed/Cocolon/actions/runs/45070632498)

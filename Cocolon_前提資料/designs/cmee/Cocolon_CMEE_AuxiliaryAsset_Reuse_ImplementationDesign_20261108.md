@@ -9199,3 +9199,22 @@ Mashの承認を受けて同版を固定配備し、11/23 05:42:54 JSTにワー�
 NODESでは、本人補足を複数含む資料にも、採用済みPLANの該当項目ごとに原文から選べる見出しと空欄にする意味記述の指定を渡す修正を `05044d4` に追加した。項目の採用条件は維持した。短文の訂正保存により、次回のわたしマップの資料には本人の訂正文が既に入る。最新候補 `c640b8c` では、本人と元記録との対応が既存の検査で確定し、原文を全文引用できる短い訂正に限り、独立した項目へ割り当てる。訂正前後の架空資料はそれぞれPLAN・NODES・RELATIONSの隔離再生で5記録、7項目、関係線0件を組み立てた。訂正後の項目には本人の訂正文が入り、置き換えた文はその項目に含まれなかった。関連39件のテストが成功。最終候補の両CIと実4Bによる新規保存は確認中で、本番稼働は `2c589ae`。 [最新候補](https://github.com/MassyuRed/mashos-api/commit/c640b8c157fab880e9a4fe5a2922a623d7b05b22)
 
 短文訂正の次作業は、本人の訂正を保存し直さず、返答本文の検査で止まる具体的な理由と既存の復旧条件を確認する。現行の復旧が再利用する受領済みの生成結果は今回残っていない。DeepInsightの同一訂正操作と確定資料の検査を保ったまま、訂正後の応答から発行・回答・同じ問いIDの再読まで確認する。端末の画像、通知受信、補助経路全体の受入れは未確認。
+
+<a id="cmee-v24-live-plan-and-correction-writer-20261123"></a>
+## 9.248 訂正済みの資料を使ったv24の本番計画検査とEmlisの訂正後本文（11/23 JST）
+
+Mashの承認を受け、AnalysisとPieceの両CIを通過した `c640b8c` を固定配備した。ワーカーは06:37:53 JST、APIは06:38:31 JSTに同じSHAでLiveとなり、APIのヘルスはHTTP 200。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1m0uhksfps7399efkg) · [ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1m0uutlv9c73cfegm0) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45070501462) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45070501456)
+
+同じ架空アカウントをFreeのまま使い、保存済みの短文訂正を保持した資料で、わたしマップv24の通常更新1件を06:43:52 JSTに受け付けた。全8回の自動試行で4BのHTTP 200を受け、PLANの採用検査 `analysis_semantic_plan_received_answer_scope_invalid` で終了した。06:53:57 JSTに失敗が確定し、最新レポートと完了通知予約は各0件。前回 `2c589ae` は短文訂正の保存前に更新を受け付け、PLANの後のNODESで停止した。今回は項目・関係の生成と新規保存に進まなかった。DeepInsightの新規発行と回答は各0件。 [配備版](https://github.com/MassyuRed/mashos-api/commit/c640b8c157fab880e9a4fe5a2922a623d7b05b22)
+
+同じ資料の隔離再生では、5記録・9欄の一括PLANに本人補足2組と有効な短文訂正1件が入り、既存の指示に送った7項目の配置例は、提供側の形式検査とAPIの採用検査をどちらも通過した。思考と補足を一つのunitにまとめる対照や、独立した行動を落とす対照は、提供側の形式検査を通過し、APIで今回と同じ理由により拒否された。失敗した本番応答の原文は保存されないため、配置違いの内訳は特定できない。
+
+EmlisAIの前回の本番訂正は、本人の訂正文と当回・過去の文脈を持つ既存の初回用指示で4Bに届き、本文の検査で停止した。受領が残っている場合に同じ応答を再利用する既存の復旧条件は満たしていない。候補 `2d748b2` は、問いへの回答が0件で、元の短い感情の文全体を置き換えた有効な本人訂正が1件に確定した場合に、訂正後の言葉を中心に短く返す指示を使う。利用可能な過去の原文と本人の判断も受け渡し、今回の感情や時点と区別する。以前の受領は保存時の指示・識別値で復旧する。今回の候補は、返答を拒否した固定の検査理由を本文なしでログに記録する。 [Emlis候補](https://github.com/MassyuRed/mashos-api/commit/2d748b2ee61df4108b44eec6f5ff706bccdf2559)
+
+合成応答を使った隔離DBで、本人訂正、訂正後本文と根拠の保存・再読、受領後の再開、同じ訂正範囲を根拠にするDeepInsightの発行・回答と同じIDの再読を確認した。関連196件が通過した。 [Emlis候補のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45073855432)は実行中。[Emlis候補のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45073855425)は実行中。 Emlis候補の本番での実4B応答からDeepInsightへの往復と、複数補足を伴うv24の新規保存は未確認。
+
+通知画像の失敗はCocolonの `phase6-contract-guards / contract-guards`。API mainの既存修正 `375f86a` で変更後の問いとPieceの契約を検査側が参照し、最新の実行で119件が通過した。 [修正済みの検査](https://github.com/MassyuRed/mashos-api/commit/375f86a1fa05b9a56918b4d849d67eefa29c006d) · [通過した実行](https://github.com/MassyuRed/Cocolon/actions/runs/45070632498)
+
+統合候補 `6c26351` は、短い原文の一括v24で本人補足が複数あり、APIが配置案を既存の採用検査で確認できた場合に、配置を4B提供側の生成制約へ渡す。思考・対応する補足・独立した行動・有効な訂正の配置と原文の対応を保つ。他の記録では同じ欄の引用候補を4Bが選ぶ。PLAN・NODES・RELATIONSの受領と採用検査は別々に行う。固定の提供パーサーと隔離DBを用いた関連254件、共有言語オーナーの検査1件を確認した。従来の提供コードでも新しい資料を受け取れることを隔離再生で確認した。統合候補を通常運用で確認するには、両CIを照合し、RenderのAPI・ワーカーとGPUの提供コードを同じ候補に揃える必要がある。候補の配備と実4Bの再試験は未実施。 [統合候補](https://github.com/MassyuRed/mashos-api/commit/6c26351b594cf1cdd4b6e5750b44f7df3a935053)
+
+Pieceの非公開保存・同版の詳細と書き出しは§9.247の本番結果を引き継ぐ。EmlisAI・Pieceの用途別重みは比較採用と通常提供への反映、端末の画像保存と通知受信は実機確認を残す。
