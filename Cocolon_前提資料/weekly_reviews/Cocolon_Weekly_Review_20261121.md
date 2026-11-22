@@ -601,3 +601,10 @@ Renderの本番ワーカーは検証用の作業ツリーで一時容量2 GBの�
 Renderのワーカー `cfeeecf4` で通知処理が有効であることと、旧「今日の問い」の通知ジョブ停止を確認した。集計で対象版の登録端末、テーマ通知の設定オン、対象の通知処理はいずれも0件。実端末への受信とタップは未確認。
 
 iOS 1.0（8501）は `41047974` から署名付きでビルドし、アーカイブ、IPAの書き出し、書き出したファイル1件の検証が14分47秒で完了した。署名に使用したプロファイルのAPNs環境は `production`。`build/tempCocolon.ipa` のSHA-256は `b834823c4e494bfbd4c8862aa110d8aedb8b53e6cbc766db33f9a51afeae8be0`。`upload_to_testflight=false` で実行し、TestFlightへのアップロード工程はスキップされた。Actionsに配布用のIPAは登録されていない。 [iOSビルド #85](https://github.com/MassyuRed/Cocolon/actions/runs/44975309675/job/137063764692)
+
+<a id="deep-insight-testflight-delivery-20261122"></a>
+### 11.23 DeepInsightのTestFlight送信（11/22 JST）
+
+8501は前節の署名付きビルドで、TestFlightへは送信されなかった。署名したビルドをTestFlightへ送る手順を作業ルールに明記し、通常のiOSワークフローではIPAを書き出した後に送信する設定へ戻した。 [iOSビルドとTestFlight内部配布の規則](../work_attitude_rules_for_karen/CURRENT_RULES.md#ios-build-and-testflight-internal-distribution)
+
+[GitHub Actions #86](https://github.com/MassyuRed/Cocolon/actions/runs/44977352430/job/137070105593)は、画面実装を保持した `3b8a9f47` からiOS 1.0（8601）を署名し、アーカイブ、IPAの書き出し、Appleへのアップロードが14分35秒で成功した。Appleの送信結果はエラー0件・警告1件で、受領番号は `a1d54c58-ceb6-42af-96c9-5e7dab3a3353`。App Store Connectの操作はMash様が担当する。Apple側の処理完了、ビルド一覧への表示、既存の内部テストグループでのTestingは未確認。
