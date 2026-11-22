@@ -708,3 +708,10 @@ Premiumの過去フレームに対する初回の「合っています」「使�
 Mashの承認後、PieceとDeepInsightの移行2件を本番に適用し、RenderのワーカーとAPIを `3ec02f1` に揃えた。既存の架空アカウントでEmlisAI、Piece、DeepInsight、わたしマップの同じ保存版を再読した。新しい非公開入力でEmlisの訂正を一度行い、同じ訂正版を取得した。Emlisで質問を出さず閉じた短文の訂正は、共有材料の根拠確定で保留された。DeepInsightは訂正前の文言を候補へ戻さなかった。修正対象のPremiumの新規往復と、新しい訂正文を使った本番発行は未確認。 [補助設計§9.238](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-frame-feedback-corrections-20261122)
 
 Plus・Premiumに限る文脈更新候補 `4829e92` は、有料文脈の隔離DB試験を含む横断回帰766件とAnalysis・Pieceの両CIが通過した。架空のPlusの実4B応答も今回の恐怖と過去の感情を分けた。本番での有効化と有料の試験アカウントでの一往復は残る。Pieceは思考・行動・明示選択した補足を実4Bで取得し、隔離DBで同じ作品を保存・再読した。補足の「その時」が別の行動を指す誤読を、元の思考欄の出来事を明示する統合候補 `ac17a35` で修正した。同じ実4B応答を隔離DBで再演し、保存・再試行・同じ版の再読を確認した。旧プレビューも保存できた。新規実生成と本番反映は未確認。 [Piece修正候補](https://github.com/MassyuRed/mashos-api/commit/ac17a35b98ca86a0cb75ddc9c1c7ebad7502fdfd) [有料文脈§9.239](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-paid-only-context-20261122) · [Piece実測§9.240](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-piece-long-fields-real-4b-20261122)
+
+<a id="cmee-direct-feeling-correction-20261122"></a>
+### 11.37 短文の本人訂正とPremiumのPieceを再接続（11/22 JST）
+
+質問のない短い感情記録で元の文全体を一意に訂正した場合に、訂正後の本人の言葉だけをDeepInsightとわたしマップv24へ渡す候補を確認した。隔離DBで訂正の応答保存を一度失敗させ、同じ受領を再利用した。DeepInsightは修正後の範囲を根拠に発行・回答・同じIDの再読まで通り、v24の生成材料は同じ範囲を保持した。以前の保留結果は当時の結果を読み戻した。 [API候補 04eb54b](https://github.com/MassyuRed/mashos-api/commit/04eb54b90bdb15fc9f23d5f903eeb0a6568d562a) · [補助設計§9.242](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-direct-feeling-correction-20261122)
+
+有料文脈を有効にしたPremiumで、過去フレームへの初回確定・不使用から今回の回答を選んだPieceを非公開保存し、同じ作品を再読した。別の長めの架空例は新しい実4B試験1件に固定し、隔離の対照でプレビュー・同じ保存版・書き出しの描画入力を照合した。EmlisAI用とPiece用の重みは保管原本の復元と照合に通り、用途別の本番採用は残る。 [補助設計§9.243](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-premium-piece-and-adapter-readiness-20261122)
