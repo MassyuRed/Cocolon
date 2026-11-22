@@ -165,7 +165,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   const Screen = load(file).default;
   let root;
   const element = () => React.createElement(Screen, { navigation, route: { params: { initialTab, ...options.screenParams } }, ...options.screenProps });
-  await act(async () => { root = Renderer.create(element()); await tick(); });
+  await act(async () => { root = Renderer.create(element(), { createNodeMock: options.createNodeMock }); await tick(); });
   t.after(async () => { await act(async () => root.unmount()); });
   const h = { control, calls, events, alerts, routes, root,
     find: type => root.root.findByType(type),
@@ -912,25 +912,52 @@ test('returning to an open DeepInsight screen checks a cooldown that elapsed in 
   assert.deepEqual(h.mutations(), []);
 });
 
+test('DeepInsight keeps themes first and scrolls to a current reflection when a notification opens it', async t => {
+  const current = { id: 'current-record', lane: 'records', question_text: '本日のふりかえり',
+    issued_on: '2026-11-22', answered_at: null };
+  const scrolls = [];
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    deepInsightState: { can_use_theme: true, can_use_records: true, record_available_today: false,
+      theme_available_today: true, records: current, theme: null, history: [] },
+    screenParams: { notification: { lane: 'records', questionId: current.id } },
+    createNodeMock: element => element.type === 'ScrollView' ? { scrollTo: value => scrolls.push(value) } : null,
+  });
+  const headers = h.root.root.findAllByType('Text').filter(node => node.props.accessibilityRole === 'header');
+  assert.deepEqual(headers.map(node => node.props.children), ['テーマから考える', '記録をふりかえる', '回答の履歴']);
+  assert.equal(headers[0].parent.props.onLayout, undefined);
+  await act(async () => {
+    headers[1].parent.props.onLayout({ nativeEvent: { layout: { y: 310 } } });
+    headers[1].parent.props.onLayout({ nativeEvent: { layout: { y: 355 } } });
+  });
+  assert.deepEqual(scrolls, [{ y: 310, animated: false }]);
+  assert.deepEqual(h.mutations(), []);
+});
+
 test('an old reflection notification opens its own question and answer outside recent history', async t => {
   const deepInsightState = { can_use_theme: true, can_use_records: true, record_available_today: true,
     theme_available_today: true, records: null, theme: null, history: [] };
   const notifiedQuestion = { id: 'older-record', lane: 'records', question_text: '前の通知の問い',
     answer_text: 'その問いに保存した回答', issued_on: '2026-09-10', answered_at: '2026-09-11T00:00:00Z' };
   const questionPath = '/deep-insight/questions/older-record';
+  const scrolls = [];
   const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
     deepInsightState, notifiedQuestion,
     screenParams: { notification: { lane: 'records', questionId: notifiedQuestion.id } },
     failRead: (call) => call.path === questionPath,
+    createNodeMock: element => element.type === 'ScrollView' ? { scrollTo: value => scrolls.push(value) } : null,
   });
   const text = () => JSON.stringify(h.root.toJSON());
+  const card = heading => h.root.root.findAllByType('Text').find(node => node.props.children === heading).parent;
   assert.match(text(), /通知に対応する問いを読み込めませんでした/);
+  act(() => card('記録をふりかえる').props.onLayout({ nativeEvent: { layout: { y: 310 } } }));
   h.control.failRead = null;
   const retry = h.root.root.findAllByType('CocolonButton').find(node => node.props.children === 'もう一度確認する');
   await act(async () => { await retry.props.onPress(); });
   assert.match(text(), /前の通知の問い/);
   assert.match(text(), /その問いに保存した回答/);
   assert.doesNotMatch(text(), /通知に対応する問いを読み込めませんでした/);
+  act(() => card('回答の履歴').props.onLayout({ nativeEvent: { layout: { y: 540 } } }));
+  assert.deepEqual(scrolls, [{ y: 310, animated: false }, { y: 540, animated: false }]);
   assert.deepEqual(h.calls.filter(call => call.path === questionPath).map(call => call.owner), ['A', 'A']);
   assert.deepEqual(h.mutations(), []);
 });

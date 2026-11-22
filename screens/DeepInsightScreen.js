@@ -39,7 +39,7 @@ export default function DeepInsightScreen({ navigation, route }) {
   const scroll = useRef(null);
 
   useEffect(() => {
-    if (notification) scroll.current?.scrollTo({ y: 0, animated: false });
+    if (notification?.lane === "theme") scroll.current?.scrollTo({ y: 0, animated: false });
   }, [notification]);
 
   return (
@@ -52,6 +52,7 @@ export default function DeepInsightScreen({ navigation, route }) {
               key={`${user.id}:${authOwnerGeneration}`}
               ownerId={user.id}
               notification={notification}
+              scroll={scroll}
               navigation={navigation}
               styles={styles}
               colors={colors}
@@ -63,7 +64,7 @@ export default function DeepInsightScreen({ navigation, route }) {
   );
 }
 
-function DeepInsightContent({ ownerId, notification, navigation, styles, colors }) {
+function DeepInsightContent({ ownerId, notification, scroll, navigation, styles, colors }) {
   const { data, loadError, notifiedQuestion, notificationReadFailed, themeRefreshError, questionLoads, questionErrors,
     reload, refreshTheme, issueRecords, issueTheme, answer,
     notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId, notification);
@@ -72,6 +73,7 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   const [theme, setTheme] = useState(null);
   const [drafts, setDrafts] = useState({});
   const inFlightAnswers = useRef(new Set());
+  const scrolledNotification = useRef(null);
 
   const updateDraft = (id, fields) => setDrafts((prev) => ({ ...prev, [id]: { ...prev[id], ...fields } }));
 
@@ -112,7 +114,7 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   const canOfferPremium = premiumPlan?.visible === true && premiumPlan?.purchasable === true
     && subscriptionBootstrap.sales_enabled !== false && subscriptionBootstrap.client_sales_enabled !== false
     && isFeatureEnabled("subscription_sales_enabled", true);
-  const showRecords = recordPending || data.can_use_records !== false || canOfferPremium;
+  const showRecords = notificationReadFailed || recordPending || data.can_use_records !== false || canOfferPremium;
   const themePending = isUnanswered(data.theme);
   const nextThemeAt = Date.parse(data.theme_next_available_at);
   const nextThemeLabel = Number.isFinite(nextThemeAt) ? THEME_TIME_FORMAT.format(nextThemeAt) : null;
@@ -123,10 +125,32 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   const displayedHistory = notifiedHistoryQuestion
     ? [notifiedHistoryQuestion, ...history.filter((item) => item.id !== notifiedHistoryQuestion.id)]
     : history;
+  let notificationTarget = null;
+  if (notification?.lane === "records") {
+    if (notificationReadFailed) notificationTarget = "records";
+    else if (notifiedQuestion?.id === notification.questionId) {
+      notificationTarget = notifiedHistoryQuestion ? "history" : "records";
+    }
+  }
+  const scrollToNotification = (section) => section === notificationTarget
+    ? ({ nativeEvent: { layout: { y } } }) => {
+      const previous = scrolledNotification.current;
+      if (!scroll.current || (previous?.notification === notification && !previous.readFailed)) return;
+      if (previous?.notification !== notification || previous.section !== section) {
+        scroll.current.scrollTo({ y, animated: false });
+      }
+      scrolledNotification.current = { notification, section, readFailed: notificationReadFailed };
+    } : undefined;
 
   const recordsCard = showRecords && (
-    <View key="records" style={styles.card}>
+    <View key="records" style={styles.card} onLayout={scrollToNotification("records")}>
       <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.records}</Text>
+      {notificationReadFailed && (
+        <>
+          <Text style={styles.error} accessibilityRole="alert">通知に対応する問いを読み込めませんでした。</Text>
+          <CocolonButton variant="secondary" onPress={reload}>もう一度確認する</CocolonButton>
+        </>
+      )}
       {recordPending ? (
         renderAnswer(data.records)
       ) : data.can_use_records === false ? (
@@ -153,10 +177,7 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
     <View key="theme" style={styles.card}>
       <Text accessibilityRole="header" style={styles.heading}>{LANE_LABELS.theme}</Text>
       {!data.can_use_theme && (
-        <>
-          <Text style={styles.body}>気になるテーマを選ぶと、Emlisからそのテーマに沿った問いを受け取れます。Plus・Premiumで利用できます。</Text>
-          <CocolonButton variant="secondary" onPress={() => navigation.navigate("SubscriptionSelect")}>プランを見る</CocolonButton>
-        </>
+        <Text style={styles.body}>今はテーマの問いを受け取れません。</Text>
       )}
       {themePending ? (
         renderAnswer(data.theme)
@@ -210,7 +231,7 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
   );
 
   const historyCard = (
-    <View key="history" style={styles.card}>
+    <View key="history" style={styles.card} onLayout={scrollToNotification("history")}>
       <Text accessibilityRole="header" style={styles.heading}>回答の履歴</Text>
       {displayedHistory.length === 0 && <Text style={styles.body}>まだ履歴はありません。</Text>}
       {displayedHistory.map((question) => (
@@ -229,16 +250,7 @@ function DeepInsightContent({ ownerId, notification, navigation, styles, colors 
     </View>
   );
 
-  if (notification?.lane === "theme") return [themeCard, recordsCard, historyCard];
-  if (notificationReadFailed) return [
-    <View key="notification-unavailable" style={styles.card}>
-      <Text style={styles.error} accessibilityRole="alert">通知に対応する問いを読み込めませんでした。</Text>
-      <CocolonButton variant="secondary" onPress={reload}>もう一度確認する</CocolonButton>
-    </View>,
-    recordsCard, themeCard, historyCard,
-  ];
-  if (notifiedHistoryQuestion) return [historyCard, recordsCard, themeCard];
-  return [recordsCard, themeCard, historyCard];
+  return [themeCard, recordsCard, historyCard];
 }
 
 function AnswerForm({ question, draft, styles, colors, showTheme, onChangeText, onSave }) {
