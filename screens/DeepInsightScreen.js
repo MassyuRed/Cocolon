@@ -43,7 +43,7 @@ export default function DeepInsightScreen({ navigation, route }) {
   }, [notification]);
 
   return (
-    <SafeAreaView style={styles.screen}>
+    <SafeAreaView edges={["left", "right"]} style={styles.screen}>
       <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <ScrollView ref={scroll} keyboardShouldPersistTaps="handled" contentContainerStyle={styles.content}>
           <AnalysisSubHeader title={TITLE} onBack={() => navigation.goBack()} />
