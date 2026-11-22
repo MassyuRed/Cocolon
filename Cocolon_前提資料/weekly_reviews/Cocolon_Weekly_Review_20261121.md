@@ -691,3 +691,8 @@ Emlis本文を同じ操作の再試行で保存できた場合、元の回答と
 ### 11.33 GitHub Actionsの契約検査を修復（11/22 JST）
 
 `phase6-contract-guards` は、APIの契約テスト3件で繰り返し失敗していた。EmlisAIの問いの受信設定、公開Q&Aの別名、問いの識別キーを現行仕様に合わせた。公開応答に受信設定が出ないことや、別の問いのキーによる反応が拒否されることも検査する。APIの `main` にテスト修正を反映し、通知元の実行を再試行した。修正版の取得、React NativeアプリからのSupabase直接利用の検査、API契約テスト119件の通過をログで確認した。 [API修正](https://github.com/MassyuRed/mashos-api/commit/375f86a1fa05b9a56918b4d849d67eefa29c006d) · [GitHub Actionsの結果](https://github.com/MassyuRed/Cocolon/actions/runs/45010870511/job/137175309739)
+
+<a id="cmee-map-v24-independent-action-20261122"></a>
+### 11.34 わたしマップv24で思考への補足と独立した行動の配置を修正（11/22 JST）
+
+実4Bで、`0af967d` は原文にない時系列を補い、`d1f39f3` は三節点に分かれず採用しなかった。`1070072` は四つの原文を三節点に保持し、独立した行動への補足の誤結合を解消した。隔離DBで保存と同じ版の再読に通過した。この記録の時点で、本番API・ワーカーは `f96c624`。候補 `1070072` に対するCIと、本番配備後の認証付き再生成は確認中。実端末の画像と通知、有料版EmlisAIの文脈更新は別途確認する。 [詳細設計§9.236](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-map-v24-independent-action-20261122)
