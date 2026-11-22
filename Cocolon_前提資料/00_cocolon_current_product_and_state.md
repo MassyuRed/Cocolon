@@ -358,6 +358,8 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 7. その他の全機能・共通基盤
 
+**11/22 JSTの契約検査。** Cocolonの `phase6-contract-guards` が参照するAPIの契約テストを現行仕様に合わせ、同じ実行の再試行で119件の通過を確認した。 [GitHub Actionsの結果](https://github.com/MassyuRed/Cocolon/actions/runs/45010870511/job/137175309739)
+
 以下は2026-10-22に入口・RN／API sourceを照合した機能一覧。接続ありはcodeの状態。今回、live・本人端末・通知配送・実課金・実削除の成功確認はしていない。
 
 現在のフォロワー公開範囲を管理する画面は `screens/FollowListScreen.js` と `screens/follow/FollowerVisibilityMenu.js`。APIの `api_follow_graph.py` が本人の設定を保存し、ピースの閲覧経路、感情ログ、通知キューでそれぞれ現在のフォロー関係と保存済み設定を確認する。Supabaseでは `20261121021933`、RenderのAPIとワーカーでは `e140427` を11/21 JSTに反映した。

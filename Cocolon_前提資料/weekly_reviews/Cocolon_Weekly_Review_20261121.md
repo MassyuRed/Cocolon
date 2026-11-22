@@ -686,3 +686,8 @@ Emlis本文を同じ操作の再試行で保存できた場合、元の回答と
 ### 11.32 わたしマップv24へのEmlisAI補足の連携を修正（11/22 JST）
 
 本番試験で保留された元入力について、v24の累積資料が発行済みの問いと本人補足を元の場面へ結び付ける修正を検証版に保存した。隔離DBで思考・行動・EmlisAI補足・DeepInsight回答の四つを使い、図・本文・原文根拠を同版で再読した。本番で同じ資料からの再生成は未実施。 [API検証版 `0af967d`](https://github.com/MassyuRed/mashos-api/commit/0af967d3c07cb49f2d52d7ff1ce9cc66ea6b9b1f) · [詳細設計§9.235](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-received-answer-map-20261122)
+
+<a id="phase6-contract-guards-20261122"></a>
+### 11.33 GitHub Actionsの契約検査を修復（11/22 JST）
+
+`phase6-contract-guards` は、APIの契約テスト3件で繰り返し失敗していた。EmlisAIの問いの受信設定、公開Q&Aの別名、問いの識別キーを現行仕様に合わせた。公開応答に受信設定が出ないことや、別の問いのキーによる反応が拒否されることも検査する。APIの `main` にテスト修正を反映し、通知元の実行を再試行した。修正版の取得、React NativeアプリからのSupabase直接利用の検査、API契約テスト119件の通過をログで確認した。 [API修正](https://github.com/MassyuRed/mashos-api/commit/375f86a1fa05b9a56918b4d849d67eefa29c006d) · [GitHub Actionsの結果](https://github.com/MassyuRed/Cocolon/actions/runs/45010870511/job/137175309739)
