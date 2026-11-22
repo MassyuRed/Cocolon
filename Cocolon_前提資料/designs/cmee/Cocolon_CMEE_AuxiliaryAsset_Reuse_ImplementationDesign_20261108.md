@@ -9060,3 +9060,19 @@ v24は、同じ持ち主と元入力の版、発行済みの問いのID、本人
 `1070072` はAnalysisとPieceの両CIに合格した。Renderのワーカーは20:09、APIは20:11 JSTに同じSHAで稼働し、ワーカーのMap購読とAPIの `/healthz` HTTP 200を確認した。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45014151602) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45014151615) · [ワーカーの配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1cqerl550s73e4vsd0) · [APIの配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1cr656e07s73d11sm0)
 
 20:13 JSTに既存の専用試験アカウントから通常更新を一度受け付け、20:15に新レポート `4f883651-2d69-418a-afbb-8810ceae8e88` を最新と詳細の両方から同じID・図・本文で読み戻した。投入2、処理2、表示2、除外0、未解析0、関係線0。三節点の根拠は思考とEmlisAI補足一回、DeepInsight回答二文、独立した行動で、記録にない時系列は表示されなかった。旧版は履歴で読めた。 有料版EmlisAIの文脈更新は本番で無効。実端末での画像保存と通知受信は未確認。 [更新後のCocolon契約検査](https://github.com/MassyuRed/Cocolon/actions/runs/45014549068/job/137183942304)
+
+<a id="cmee-effective-corrections-and-frame-feedback-20261122"></a>
+## 9.237 EmlisAIの本人訂正と判断をPiece・DeepInsightへ渡す（11/22 JST）
+
+通常の `1070072` と、全体設計・ファイル地図・第12回議事録§11.24〜34を起点とした。現在の本番APIとワーカーは同じ版で、わたしマップv24の最新保存にDeepInsightの本人回答二文と独立した行動の根拠があることをRenderとSupabaseで確認した。以下の [統合検証版 `3ec02f1`](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce) はこの稼働版から進めた。
+
+| 経路 | 修正と確認 |
+|---|---|
+| EmlisAI → Piece | Premiumで過去のフレームに初めて「この理解で合っています」「この理解は使わない」を選び、次に当回の問いに答えると、Pieceがその回答を使えなかった。既存の訂正に加え、確定・不使用も当該本人の操作、対象版、保存済み応答の順序と照合する。プレビュー、見た目変更、保存の各SQLで同じ判断を検証し、当回の回答だけが作品に届く。隔離PostgreSQLで初回保存・保存再試行に通し、利用枠は一度、同じ作品を再読した。 |
+| EmlisAI → DeepInsight・わたしマップv24 | v24が使える本人の有効な訂正がDeepInsightの資料から落ちていた。現在のCMEE資料に残る、本人の訂正の置換部分を元の範囲付きで渡す。既存の独立した回答は引き継ぎ、古い表現と元の問いの前提を取り除いたまま発行する。発行時に本人・資料の版・引用位置をDBでも再照合し、合成モデル応答を使う隔離DBで同じ発行ID・回答・根拠を再読した。 |
+
+現行のワーカーから稼働中の共有4Bへ、§9.233と同じ架空のPlus・Premium送信各1件を確認した。両方で「褒められた時に嬉しくなかったんですね。その時は怖さを感じていたことも伝わってきました。」を得た。当回の怖さが残り、過去の「重かった」と独立した行動は本文に入らなかった。Plus・Premiumの本番保存では文脈更新が無効のため、本試験はモデルの返事まで。全プランの新規スレッドへ影響するスイッチの有効化には、初回・訂正も含めた比較が残る。隔離DBを含む統合候補の回帰719件（契約119件を含む）と、Pieceの履歴・画像書き出しのアプリ試験482件が通過した。依存不足で最初に未実行だったv24の3件は、必要な依存を持つ実行環境で成功した。端末での写真保存・通知着信は未確認。
+
+変更したAPIの既存箇所は、DeepInsightの `deep_insight_question.py`、Pieceの `piece_v2_source_adapter.py`、関連回帰と既存両CI。追加したファイルは移行 `20261122145000_deep_insight_effective_emlis_corrections.sql` と `20261122145100_piece_natural_initial_frame_feedback.sql` の2件。Cocolonのファイル数は5,969、APIの候補は2,767。適用前の本番Supabaseで、両移行の対象5関数がサーバー専用で、Pieceの三関数に前版の判定があることを確認した。
+
+今回の本番反映は承認待ち。切り替え順はPieceの移行、RenderワーカーとAPIを同じ検証版に揃える、DeepInsightの移行、認証付きの発行・保存と同じ版の再読。新しい訂正だけの記録を旧DeepInsightの読み取りが見落とす時間を作らないよう、DeepInsightの資料拡張は両サービスの稼働確認後に行う。

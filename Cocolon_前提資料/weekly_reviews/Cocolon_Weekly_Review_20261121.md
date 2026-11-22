@@ -696,3 +696,8 @@ Emlis本文を同じ操作の再試行で保存できた場合、元の回答と
 ### 11.34 わたしマップv24で思考への補足と独立した行動の配置を修正（11/22 JST）
 
 実4Bで、`0af967d` は原文にない時系列を補い、`d1f39f3` は三節点に分かれず採用しなかった。`1070072` は四つの原文を三節点に保持し、独立した行動への補足の誤結合を解消した。隔離DBで保存と同じ版の再読に通過した。`1070072` はAnalysisとPieceの両CIに合格した。Renderのワーカーは20:09、APIは20:11 JSTに同じSHAで稼働し、ワーカーのMap購読とAPIの `/healthz` HTTP 200を確認した。 20:13 JSTに既存の専用試験アカウントから通常更新を一度受け付け、20:15に新レポート `4f883651-2d69-418a-afbb-8810ceae8e88` を最新と詳細の両方から同じID・図・本文で読み戻した。投入2、処理2、表示2、除外0、未解析0、関係線0。三節点の根拠は思考とEmlisAI補足一回、DeepInsight回答二文、独立した行動で、記録にない時系列は表示されなかった。旧版は履歴で読めた。 有料版EmlisAIの文脈更新は本番で無効。実端末での画像保存と通知受信は未確認。 [詳細設計§9.236](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-map-v24-independent-action-20261122)
+
+<a id="cmee-effective-corrections-and-frame-feedback-20261122"></a>
+### 11.35 EmlisAIの訂正と本人判断を使う統合検証（11/22 JST）
+
+Premiumの過去フレームに対する初回の「合っています」「使わない」の後も、当回の回答を選んでPieceを作成・保存できるよう修正した。わたしマップv24に届く有効な本人訂正もDeepInsightの出題資料へ渡し、以前の表現を戻さず、隔離DBで発行・回答・同じ根拠の再読を確認した。現行の共有4Bは架空のPlus・Premium各1件で当回の怖さを保持した。Pieceの履歴・画像書き出しのアプリ試験482件が通過した。検証版の本番DB移行・Render配備は承認待ち。有料版の文脈更新、端末での写真保存・通知は引き続き確認が残る。 [統合検証版 `3ec02f1`](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce) · [補助設計§9.237](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-effective-corrections-and-frame-feedback-20261122)

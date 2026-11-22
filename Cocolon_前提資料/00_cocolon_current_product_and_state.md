@@ -254,6 +254,8 @@
 
 **11/22 JSTのわたしマップv24の通常反映。** `1070072` を本番API・ワーカーに配備した。既存の架空2記録で認証付き通常更新を一度実行し、思考とEmlisAI補足、DeepInsight回答二文、独立した行動を同じ新レポートIDの図・本文・根拠から再読した。除外・未解析・関係線は0件。 [補助設計§9.236](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-map-v24-independent-action-20261122)
 
+**11/22 JSTのCMEE統合検証。** `3ec02f1` はPremiumの過去フレームの初回判断後に当回の回答をPieceへ渡し、v24に届く本人の有効な訂正をDeepInsightにも原文範囲付きで渡す。隔離DBで保存・発行・回答と同じ版の再読を確認した。現行4Bの架空Plus・Premium各一件では当回の反応を保持した。本番のAPI・ワーカーは `1070072`。候補のDB移行と配備は承認待ち。有料版の文脈更新と端末の画像保存・通知着信は未確認。 [統合検証版](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce) · [補助設計§9.237](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-effective-corrections-and-frame-feedback-20261122)
+
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
 Cocolonは、本人と他者の人間情報を観測できる形として外側へ出し、自己理解・他者理解・発信を支えるサービスである。一回のEmlis応答だけで、アプリ全体の需要・商品価値を完結して評価しない。

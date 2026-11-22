@@ -1,3 +1,5 @@
+> **11/22 JSTのCMEE統合検証版。** `3ec02f1` では `deep_insight_question.py` と `20261122145000_deep_insight_effective_emlis_corrections.sql` が本人訂正の有効範囲を発行時に照合する。`piece_v2_source_adapter.py` と `20261122145100_piece_natural_initial_frame_feedback.sql` は、Premiumの過去フレームへの初回判断と当回のPiece資料を保存記録で照合する。わたしマップv24の原文根拠・保存版との回帰を確認した。稼働版は `1070072`。 [統合検証版](https://github.com/MassyuRed/mashos-api/commit/3ec02f1f882165b21bc932c336bd70b8fc7e96ce) · [補助設計§9.237](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-effective-corrections-and-frame-feedback-20261122)
+
 ### 11/21 — わたしを知る問いの候補検査
 
 開発差分では、既存の4B提供で一問の候補を生成し、`cocolon_meaning_experience_engine/deep_insight_question.py` が記録の引用との一致、候補の形式、既出の問いとの重複を検査する。わたしマップとEmlisで確認した点は次の問いを選ぶ材料にし、本人が書いた原文と回答を根拠に扱う。`api_deep_insight.py` が本人の発行・回答・再読を接続する。 通知が指すふりかえりの問いは、直近履歴にない場合に `GET /deep-insight/questions/{question_id}` から取得する。Supabaseの `deep_insight_question_by_id` が本人IDと発行IDを照合し、`features/home/useDeepInsight.js` が同じ問い・回答を画面に渡す。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)
