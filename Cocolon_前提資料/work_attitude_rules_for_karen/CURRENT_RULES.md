@@ -1,6 +1,6 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-11-13
+revision_date: 2026-11-22
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -356,6 +356,13 @@ GitHub reflectionの唯一の技術正本は`../11_cocolon_github_transport_and_
 6. write応答だけで成功扱いしません。
 7. 結果不明targetを自動retryしません。
 8. GitHub反映成功時はZIPを作らず、実反映不能時だけ変更・新規file限定fallbackを使います。
+
+<a id="ios-build-and-testflight-internal-distribution"></a>
+### iOSビルドとTestFlight内部配布（2026-11-22 Mash決定）
+
+- Cocolonで「ビルドして」「ビルドしろ」「ビルドまで進めて」と指示された場合は、対象コミットの署名付きiOSビルド、同じビルドのTestFlightへの送信、Appleの処理完了、既存の内部テストグループ「Emlis テスト版配布」での配布まで一続きで行います。
+- 通常のiOSワークフローは署名とIPAの書き出しに続けてTestFlightへ送信します。IPAで止める実行は行いません。
+- GitHub Actionsの成功後も、App Store Connectで対象バージョンとビルド番号を照合し、既存の内部テストグループで「テスト中（Testing）」を確認して完了とします。Appleの処理中、認証や契約の手続きなどで止まった場合は、到達した段階とその障害を記録します。端末上の受入れと一般公開はそれぞれ別の作業です。
 
 ## R8. durable recording / session continuity
 

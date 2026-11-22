@@ -2,11 +2,6 @@ name: iOS TestFlight Build
 
 on:
   workflow_dispatch:
-    inputs:
-      upload_to_testflight:
-        description: Upload the signed IPA to TestFlight
-        type: boolean
-        default: false
 
 jobs:
   build:
@@ -299,21 +294,7 @@ jobs:
 
           xcodebuild             -exportArchive             -archivePath build/Cocolon.xcarchive             -exportOptionsPlist "$EXPORT_PLIST"             -exportPath build
 
-      - name: Verify exported IPA
-        if: ${{ inputs.upload_to_testflight == false }}
-        working-directory: ios
-        run: |
-          set -euo pipefail
-
-          ipa_files=(build/*.ipa)
-          if [ "${#ipa_files[@]}" -ne 1 ] || [ ! -s "${ipa_files[0]}" ]; then
-            echo "::error::Expected exactly one nonempty exported IPA"
-            exit 1
-          fi
-          shasum -a 256 "${ipa_files[0]}"
-
       - name: Upload to TestFlight
-        if: ${{ inputs.upload_to_testflight == true }}
         working-directory: ios
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}

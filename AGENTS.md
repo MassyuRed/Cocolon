@@ -4,4 +4,6 @@ Cocolonの全作業（仕様相談・観測会・AI選定・実装・監査・�
 
 作業ごとに最新情報への関連差分を確認し、変化した機能・決定・状態・残件・根拠だけを、当該作業と同じ変更単位で置換更新する。差分なしは既存作業記録／PR説明に理由を一行残す。現在地を履歴追記で膨らませない。
 
+iOSの「ビルド」指示は、署名ビルドからTestFlight内部配布までを含む。既存グループ「Emlis テスト版配布」で対象ビルドの「テスト中」を確認して完了とする。 [iOSビルド・内部配布ルール](Cocolon_前提資料/work_attitude_rules_for_karen/CURRENT_RULES.md#ios-build-and-testflight-internal-distribution)
+
 全体現在地、決定済み方針、設計・コード・稼働・本人端末・商品受入れを区別する。System Contextがstale／未選択でもfresh ownerの原本を直接読む。旧資料や固定snapshotで最新のMash明示決定を取り消さない。08はCycle001専用、07はmilestone履歴。詳細規則は既存ownerに従い、この入口から新しいcheckerや自動writerを作らない。
