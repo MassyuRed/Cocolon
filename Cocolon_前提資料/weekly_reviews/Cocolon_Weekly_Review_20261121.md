@@ -646,3 +646,10 @@ RenderのAPIとワーカーは `cfeeecf4` でLive。通常4Bで架空の会議�
 - EmlisAIの二欄の実返事では、書かれていない両欄の関係を足す例、実際の出来事を本人の認識として言い換える例が残った。わたしマップv24は、独立した二つの短い原文を残す修正後に、実4Bの図と本文から根拠のない時系列を外せた。隔離DBでは、同じレポートIDから図・本文・原文根拠を再読した。
 
 Piece・DeepInsight・わたしマップv24の修正をAPI検証ブランチに保存した。本番配備とSupabase移行は未実施。 [実4Bと隔離DBの検証結果](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-corrected-source-real-4b-20261122)
+
+<a id="cmee-post-answer-map-reread-20261122"></a>
+### 11.27 DeepInsight回答後のわたしマップを保存・再読（11/22 JST）
+
+DeepInsightの発行済みの問いへの本人回答を加えた2記録と、無関係な記録を加えた3記録を、わたしマップv24の実4Bで確認した。訂正前の気持ちや原文にない因果を加えず、三項目／四項目を図・本文・根拠に保持した。両ケースで実応答を隔離DBに保存し、別プロセスで同じレポートIDを再読した。旧月別版と他人の取得拒否も確認した。2記録の全体見出しには既存の件数表記を用いた。 [統合検証版 `302fe1f`](https://github.com/MassyuRed/mashos-api/commit/302fe1f411fb59a47077144e677dd88ca08ed20c) · [検証詳細](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-post-answer-map-reread-20261122)
+
+EmlisAIの二欄応答は元の例と行動だけを差し替えた例で改善した。別の二例では書かれていない否定の強さや関係を補ったため、試作を統合検証版へ入れなかった。Renderの通常API・ワーカーは `cfeeecf4` で稼働中。Supabaseの候補移行は未適用。統合版の本番認証付き往復、実端末のPiece画像・通知、EmlisAIの本文と用途別重みの採否を残す。今回のiOSビルドと配布は未実施。
