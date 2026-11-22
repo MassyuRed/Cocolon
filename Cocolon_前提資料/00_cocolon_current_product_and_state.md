@@ -244,7 +244,9 @@
 
 ## 2. 商品全体と、取り落としてはいけない決定
 
-**現在の主線は補助経路活用全体の完了。** 本人更新・意味／内容選択の能力を三中核へ適用し、通常利用まで同じ単位で閉じる。現行計画は第11回§5と本資料§8。補助設計の§9.67は標準自動3案の限定接続完了、現在の実装・残件は同書current_next／§9.126（先行通常反映は§9.72）へ戻る。以下の日付付き方針のうち、現在と異なる作業順は履歴として扱う。
+**現在の主線はCMEE＋4Bの通常反映。** EmlisAI、Piece、わたしマップv24、DeepInsightを一つの作業単位として進める。本人の原文・問い・回答・訂正に基づき、必要な修正と検証を四機能で並行する。[第12回議事録§11.24](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-feature-work-decision-20261122)と[補助設計§9.227](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-normal-adoption-20261122)に作業方針と受入条件を記載した。以下の日付付き方針と個々の成果は当時の記録として参照する。
+
+**11/22 JSTの接続確認。** 通常API・ワーカーの稼働版は `cfeeecf4`。検証版 `cd593df` は、隔離DBでEmlisAIとわたしマップv24に渡す根拠から訂正された気持ちと関係を外し、別に答えた会議の出来事を残した。長い二欄のPieceは実4Bが返した本文を試験の提供口から再生し、隔離DBで同じ本文を再読した。訂正後の会議の回答を選んだPieceは見送り。DeepInsightは全文が有効な回答を利用する。実4Bが作った会議の問いは既回答として見送り、合成応答の対照で同じ発行IDの回答・再読とv24への資料連携を確認した。EmlisAIの二欄の本文には追加質問と読み違いが残る。実4Bの用途別重みの採否・同じ訂正後入力でのv24の実出力・最新候補の通常経路での保存と再読・実機は未確認。 [API検証版 `cd593df`](https://github.com/MassyuRed/mashos-api/commit/cd593df087945f2ace34f760bd2d9c45454a324c)・[補助設計§9.228](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-continuation-20261122)
 
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
@@ -395,7 +397,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-**当面の主枠は補助経路活用全体の完了：[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)、補助設計の現行作業・残件は[current_next／§9.126](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-node-local-bound-roots-v2-fit25-a25-actual-20261117)。§9.54は全体方針の決定根拠として保持する。** 公開日未定・12/6提出可能候補は維持する。対象週11/14〜11/21は日別割当なし、以下の四作業と最小共通枠へ集約。旧W1〜15は改訂前commitの履歴として保持し、個別の失敗文を次々に修復する進行を全体の再開先へ戻さない。
+**当面の主枠はCMEE＋4Bの通常反映。** [補助設計§9.227](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-normal-adoption-20261122)に沿い、四機能で本人の原文・回答・訂正を揃え、実際の出力と同じ版の保存・再読を照合する。公開日は未定で、12/6は提出可能候補の目標。以下の表は[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)で合意した11/14〜11/21の計画を記録している。
 
 | 優先・領域 | 対象週に閉じる工事と、Cocolon全体への接続 |
 |---|---|
