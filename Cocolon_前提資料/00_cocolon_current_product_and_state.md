@@ -252,6 +252,8 @@
 
 **11/22 JSTの通常反映。** `f96c624` はPiece・Analysis両CIを通過し、承認済みのSupabase三移行を適用した。ワーカーは18:43:27 JSTにLiveとなり、18:43:35 JSTにASTOR起動を確認した。APIは同じ `f96c624` で18:46:01 JSTにLiveとなった。 本番の専用アカウントでEmlisAI、Piece、DeepInsightの保存・同版再読を確認した。わたしマップv24は同じ図・本文・DeepInsight回答を再読でき、元入力とEmlisAIへの補足は分析で保留された。 [補助設計§9.234](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-rollout-20261122) · [第12回議事録§11.31](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-production-rollout-20261122)
 
+**11/22 JSTのわたしマップv24の修正候補。** 発行済みの一問への本人補足を元の場面と照合し、元入力二欄と合わせてv24へ渡す修正を検証した。隔離DBで元の二欄、EmlisAIの補足、DeepInsightの回答を同じ版の根拠から再読した。本番での採用と同じ記録からの再生成は未実施。 [API検証版 `0af967d`](https://github.com/MassyuRed/mashos-api/commit/0af967d3c07cb49f2d52d7ff1ce9cc66ea6b9b1f) · [補助設計§9.235](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-received-answer-map-20261122)
+
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
 Cocolonは、本人と他者の人間情報を観測できる形として外側へ出し、自己理解・他者理解・発信を支えるサービスである。一回のEmlis応答だけで、アプリ全体の需要・商品価値を完結して評価しない。

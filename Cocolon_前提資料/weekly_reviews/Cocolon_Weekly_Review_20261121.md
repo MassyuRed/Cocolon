@@ -681,3 +681,8 @@ Emlis本文を同じ操作の再試行で保存できた場合、元の回答と
 ### 11.31 統合版の通常反映（11/22 JST）
 
 `f96c624` のPiece・Analysis両CIの通過後、Mashが承認した三移行を本番Supabaseへ順に適用し、定義と書き込み三関数の権限を照合した。Renderは同じ版のワーカーを先に配備し、18:43:27 JSTにLive、18:43:35 JSTにASTOR起動を確認した。APIは同じ `f96c624` で18:46:01 JSTにLiveとなった。 本番の専用アカウントでEmlisAI、Piece、DeepInsightの保存・同版再読を確認した。わたしマップv24は同じ図・本文・DeepInsight回答を再読でき、元入力とEmlisAIへの補足は分析で保留された。 [詳細設計§9.234](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-rollout-20261122)
+
+<a id="cmee-received-answer-map-20261122"></a>
+### 11.32 わたしマップv24へのEmlisAI補足の連携を修正（11/22 JST）
+
+本番試験で保留された元入力について、v24の累積資料が発行済みの問いと本人補足を元の場面へ結び付ける修正を検証版に保存した。隔離DBで思考・行動・EmlisAI補足・DeepInsight回答の四つを使い、図・本文・原文根拠を同版で再読した。本番で同じ資料からの再生成は未実施。 [API検証版 `0af967d`](https://github.com/MassyuRed/mashos-api/commit/0af967d3c07cb49f2d52d7ff1ce9cc66ea6b9b1f) · [詳細設計§9.235](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-received-answer-map-20261122)
