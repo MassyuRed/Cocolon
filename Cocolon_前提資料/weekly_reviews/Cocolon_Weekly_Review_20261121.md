@@ -762,3 +762,12 @@ Analysis・Pieceの両CIを通過した `c640b8c` を本番APIとワーカーに
 Pieceは前回の本番非公開保存と同版再読を引き継ぐ。失敗通知が出ていたCocolonの契約テストは既存修正後の最新実行で119件が通過した。 [契約テスト](https://github.com/MassyuRed/Cocolon/actions/runs/45070632498)
 
 11/23 JST追記。統合候補 `6c26351` のAnalysis・Pieceの両CIが成功し、隔離回帰439件と提供接続15件が通過した。失敗通知の対象だったCocolonの契約テストは、この議事録の直前の版でも119件通過した。本番は `c640b8c` で、GPU提供コードと原文選択処理の2ファイルを更新対象として特定した。同じ訂正操作からの生成再開に必要な受領がなかったため、EmlisAIの訂正後の保存とDeepInsightへの連携は新規の架空入力が必要。Pieceは非公開で保存済みの版を対照とし、わたしマップの新規保存は通常経路で確認する。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45075069522) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45075069533) · [契約テスト](https://github.com/MassyuRed/Cocolon/actions/runs/45075259001) · [補助設計§9.248](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-v24-live-plan-and-correction-writer-20261123)
+
+<a id="cmee-live-integrated-candidate-20261123"></a>
+### 11.43 CMEE統合版の本番再試験と次の修正版（11/23 JST）
+
+GPU提供と本番API・ワーカーを `6c26351` に揃えた。わたしマップv24の手動更新1件では、前回止まった計画の検査を通過した後、項目生成の検査で自動試行8回が停止した。新規保存と完了通知予約は各0件。Pieceは保存済み非公開版の詳細・本文・描画データ・書き出しを同じ版で再読した。対象作品の利用枠消費は1件で、今回の新規消費は0件。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1nci2jnfac73982ok0) · [ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1nci3l550s73f09i2g)
+
+EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領して同じ版で再読した。本文「私は不安でした。」は訂正後の感情を反映したが、本人の一人称で書かれていた。DeepInsightは同じ訂正を出題資料で確認した後、わたしマップとGPUの利用時間が重なった試行でHTTP 503となり、発行・回答は各0件。試験アカウントをFreeに戻した。入力保存に伴うマップの自動更新も8回で終了し、新規保存・完了通知予約は各0件。 [詳細設計§9.249](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-live-integrated-candidate-20261123)
+
+統合修正版 `96c8be6` に、マップの項目見出しを根拠に束縛する修正、短文訂正後のEmlisAIの話者修正、DeepInsightの既存96秒枠内でのGPU待ちを揃えた。四機能を含む隔離回帰483件と共有言語オーナーの検査1件に成功した。統合版の両CIは実行中で、GPU・Renderの本番配備と新しい実4Bでの確認が残る。 [統合修正版](https://github.com/MassyuRed/mashos-api/commit/96c8be6ad1b933dbf954d37f7b103d9c02d14b5d) · [統合版Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114225) · [統合版Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114305)
