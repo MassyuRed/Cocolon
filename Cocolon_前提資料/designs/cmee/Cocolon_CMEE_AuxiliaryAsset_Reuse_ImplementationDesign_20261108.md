@@ -9180,3 +9180,22 @@ Mashの承認後、両CIが通過した `f52a248` を配備。ワーカーは00:
 短く全文を引用できるv24の一括PLANに限り、既存の配置指定で複数の本人補足を扱う候補を作った。元の記録順に最初の項目を確保し、各思考とその記録の補足をそれぞれ同じ項目の別unitへ配置し、二つの独立した行動を別項目に置く。再生した5記録は、提案した7項目の計画が既存の出典・割り当て検査を通過した。文章化と関係の採否は既存の検査へ渡す。実4Bによる候補の採用・図と本文の新規保存、Piece・DeepInsightの本番往復と端末確認は残る。
 
 この差分を `287f199` の2修正と合わせて `7124250` に保存した。隔離DBでは本人が別々に答えた2件の思考・補足を結び、各行動を分ける計画を通常の採用検査へ通した。答えを別の思考へ付け替えた対照は拒否された。関連121件が通過し、AnalysisとPieceのCIを開始した。 [統合候補](https://github.com/MassyuRed/mashos-api/commit/7124250d23b1d1941a9ec9abe71d5683c4a69360) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45039513583) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45039513515)
+
+<a id="cmee-production-followthrough-20261123"></a>
+## 9.247 わたしマップの項目生成とPiece・短文訂正の本番確認（11/23 JST）
+
+候補 `7124250` のPiece CIは成功した。Analysis CIでは、独立行動の保持修正に伴い共有言語オーナーの識別値が変わり、既存の検証用スナップショットだけが旧値だった。変更対象のASTから識別値を再計算して6行を更新した。過去の確定スナップショットはそのまま使用し、`b8ffce7` のAnalysis CIは成功した。 [最初のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45039513583) · [検証値更新後](https://github.com/MassyuRed/mashos-api/actions/runs/45064489045) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45039513515)
+
+同じ架空資料を最終コンパイルまで再生し、別日に記録された同文の行動2件が重複検査で止まることを確認した。本人補足が対応する思考と同じ記録に属する場合、その記録の日時を既存の項目の日付表示に渡した。原文と根拠の割り当てを保ち、既存の検査で5記録・7項目を組み立てた。関連7テストと最終版 `2c589ae` のAnalysis CIが成功した。Piece CIの対象処理と検証手順は、成功済みの `7124250` と同じ。 [配備版](https://github.com/MassyuRed/mashos-api/commit/2c589aeceed09f057f142738692ed435002f5fa2) · [最終版のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45065615593)
+
+Mashの承認を受けて同版を固定配備し、11/23 05:42:54 JSTにワーカー、05:43:30 JSTにAPIがLiveとなった。APIのヘルスはHTTP 200。今回の配備にDB移行は含まれない。 [API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1l754s728c73co5phg) · [ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1l75d9fdbs73b5mc3g)
+
+架空の専用アカウントから05:44:42 JSTに、わたしマップv24の通常の更新を1件受け付けた。8回の自動試行はすべてPLANを通過した。NODESの4B応答はHTTP 200で、項目の採用検査 `analysis_semantic_node_received_answer_scope_invalid` で停止した。06:02:41 JSTにジョブは失敗終了し、新しいレポートと完了通知予約は各0件だった。
+
+同じアカウントを一時Premiumに変更し、回答済みのEmlisスレッドから通常のPieceを1件作成した。プレビューは23.688秒、非公開保存は2.095秒でともにHTTP 200。保存版 `0609f55b-ca2b-dd20-f914-191be84ddc55` の版2を、同じ本人の詳細と書き出しから再読した。思考・独立した行動・思考に対応する補足の3段落、本文・描画レシピのハッシュ、4:5・iOS renderer版が一致した。本人用識別子が非公開行にも付くことを試験の初回判定が考慮していなかった。同じ保存物を再読し、非公開状態と保存枠1件をDBでも確認した。実機での画像表示・画像保存は残る。
+
+短文の本人訂正 `acd340d5-86f9-4c3e-bb0f-60ba699183fb` は、対象の引用と本人の訂正を一度保存した。訂正APIは13.111秒でHTTP 200。4BもHTTP 200を返したが、Emlisの `reply_validation` で本文を採用できず、受領記録は0件、スレッドは版7の `RESPONSE_FAILED`、分析資料は `NOT_GENERATED`。検査の個別理由は既存ログから特定できない。DeepInsightの資料取得条件では、同じ訂正操作に対応する確定本文と解決済み資料が必要で、該当資料は0件だった。問いの発行・回答は各0件。アカウントのFree復元を通常APIとDBで確認した。
+
+NODESでは、本人補足を複数含む資料にも、採用済みPLANの該当項目ごとに原文から選べる見出しと空欄にする意味記述の指定を渡す修正を `05044d4` に追加した。項目の採用条件は維持した。短文の訂正保存により、次回のわたしマップの資料には本人の訂正文が既に入る。最新候補 `c640b8c` では、本人と元記録との対応が既存の検査で確定し、原文を全文引用できる短い訂正に限り、独立した項目へ割り当てる。訂正前後の架空資料はそれぞれPLAN・NODES・RELATIONSの隔離再生で5記録、7項目、関係線0件を組み立てた。訂正後の項目には本人の訂正文が入り、置き換えた文はその項目に含まれなかった。関連39件のテストが成功。最終候補の両CIと実4Bによる新規保存は確認中で、本番稼働は `2c589ae`。 [最新候補](https://github.com/MassyuRed/mashos-api/commit/c640b8c157fab880e9a4fe5a2922a623d7b05b22)
+
+短文訂正の次作業は、本人の訂正を保存し直さず、返答本文の検査で止まる具体的な理由と既存の復旧条件を確認する。現行の復旧が再利用する受領済みの生成結果は今回残っていない。DeepInsightの同一訂正操作と確定資料の検査を保ったまま、訂正後の応答から発行・回答・同じ問いIDの再読まで確認する。端末の画像、通知受信、補助経路全体の受入れは未確認。

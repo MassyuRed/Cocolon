@@ -740,3 +740,12 @@ Analysis・Pieceの両CIが成功した 04eb54b を、ワーカーとAPIへ同�
 わたしマップは、Premium中の試行で保存材料の422、Free復元後の試行でv24のPLAN採用検査の503を記録した。後者は4BのHTTP 200後に、思考・補足・独立した行動の対応を検査する `analysis_semantic_plan_received_answer_scope_invalid` で止まった。自動更新2件は各8回で失敗終了し、新規保存・通知予約は0件。同じ試験用資料を再生し、5記録から2組の本人補足を含む9欄を確定した。二つの補足はそれぞれ自分の思考に結び、二つの独立した行動は別項目にする計画を既存検査で確認した。 [詳細設計§9.246](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-reply-and-multi-map-20261123)
 
 複数の補足を扱う配置を、先に修正したEmlisAIの例外・わたしマップのプラン変更時の再照合と合わせて `7124250` に保存した。関連121件が通過。新しい計画では、別の思考へ回答を入れ替えた対照を採用前に拒否した。 [統合候補](https://github.com/MassyuRed/mashos-api/commit/7124250d23b1d1941a9ec9abe71d5683c4a69360)
+
+<a id="cmee-production-followthrough-20261123"></a>
+### 11.41 CMEE通常配備後のわたしマップ・Piece・短文訂正（11/23 JST）
+
+`2c589ae` を本番APIとワーカーへ固定配備した。わたしマップでは、別々に記録された同文の行動を、原文と根拠を保って記録日時で区別する修正を入れた。専用の架空アカウントで通常更新を一度受け付け、8回の自動試行はPLANを通過してNODESの採用検査で終了した。新規保存・完了通知予約は各0件。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1l754s728c73co5phg)
+
+同じアカウントでPieceを1件非公開保存し、思考・独立した行動・本人補足の3段落と描画データを同じ保存版の詳細・書き出しから再読した。短文の本人訂正は保存したが、4Bの返答本文がEmlisの検査を通らず、対応する確定本文とDeepInsight資料は0件。問いの発行・回答は行われなかった。アカウントはFreeに復元した。
+
+次の候補 `c640b8c` には、採用済みの計画から複数の補足に対応する見出し候補を渡す修正と、保存済みの短い本人訂正を独立項目として扱う修正を合わせた。隔離再生では訂正前後とも7項目を組み立て、関連39件のテストを通過した。候補のCI・本番保存、訂正後の応答とDeepInsightへの往復、端末での画像・通知の確認を残す。 [最新候補](https://github.com/MassyuRed/mashos-api/commit/c640b8c157fab880e9a4fe5a2922a623d7b05b22) · [補助設計§9.247](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-followthrough-20261123)
