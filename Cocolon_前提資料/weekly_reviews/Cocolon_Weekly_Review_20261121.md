@@ -653,3 +653,10 @@ Piece・DeepInsight・わたしマップv24の修正をAPI検証ブランチに�
 DeepInsightの発行済みの問いへの本人回答を加えた2記録と、無関係な記録を加えた3記録を、わたしマップv24の実4Bで確認した。訂正前の気持ちや原文にない因果を加えず、三項目／四項目を図・本文・根拠に保持した。両ケースで実応答を隔離DBに保存し、別プロセスで同じレポートIDを再読した。旧月別版と他人の取得拒否も確認した。2記録の全体見出しには既存の件数表記を用いた。 [統合検証版 `302fe1f`](https://github.com/MassyuRed/mashos-api/commit/302fe1f411fb59a47077144e677dd88ca08ed20c) · [検証詳細](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-post-answer-map-reread-20261122)
 
 EmlisAIの二欄応答は元の例と行動だけを差し替えた例で改善した。別の二例では書かれていない否定の強さや関係を補ったため、試作を統合検証版へ入れなかった。Renderの通常API・ワーカーは `cfeeecf4` で稼働中。Supabaseの候補移行は未適用。統合版の本番認証付き往復、実端末のPiece画像・通知、EmlisAIの本文と用途別重みの採否を残す。今回のiOSビルドと配布は未実施。
+
+<a id="cmee-bound-emlis-reply-20261122"></a>
+### 11.28 EmlisAIの二欄と本人補足を通常4Bで比較（11/22 JST）
+
+問いが確かめた出来事・反応・回答を4Bへ渡し、独立した行動欄は原入力・保存・分析へ保持する修正を候補に入れた。最終の送信文では、架空の五例すべてで出来事・否定の強さ・本人補足が残った。隔離DBで問いが実際に出る三例と行動欄だけを替えた対照は、実応答を保存・同版再読し、最初の保存失敗後も追加生成せず再開した。残る二例は初回の本文経路を維持した。四機能の関連589件と実応答再生・対照6件、候補のSQL試験が通過した。 [API統合検証版 `4e49dbc`](https://github.com/MassyuRed/mashos-api/commit/4e49dbce95b486da76c994d9f37c296f74feac9a) · [詳細設計§9.231](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-bound-emlis-reply-20261122)
+
+通常のAPIとワーカーは `cfeeecf4`。通常切替で同じ資料を旧ワーカーが処理済みなら、候補ワーカーで既存の強制更新を行い、最新マップと既存月別版の両方を照合する。プラン別の実4B応答、用途別重みの採否、本番認証付きの四機能往復、実端末の画像と通知が残る。本番配備・SQL適用・iOSビルドと配布は未実施。
