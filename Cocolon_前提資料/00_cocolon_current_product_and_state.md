@@ -278,6 +278,8 @@
 
 **11/23 JSTの観測応答・問いの合意。** 感情強度は共感の言葉の温度、カテゴリは話題の理解に使い、自然な箇所で本人の表示名に「さん」を付ける。問いを通常応答と一体で扱う。EmlisAIの通常応答を最優先に、Piece・わたしマップ・DeepInsightの整合を並行確認する。Premiumのこころグラフ参照は、本人の実記録と今回とのつながりをフォローに生かす設計案。 [決定と検証の引継ぎ](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
 
+**11/23 JSTの自己理解の合意。** 「自己理解」は本人が自分について気づいたことを残す選択。Emlisは今回の気づきを受け取り、Plusでは関係する過去の体験、Premiumではさらに本人のわたしマップを踏まえる。問いは本人がまだ考えている点に役立つ場合に使う。生成には保存互換の強度を渡さない方向で、初回・回答・スキップと他の中核機能の接続を確認する。 [合意した応答と修正順](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-self-understanding-reply-20261123)
+
 **11/23 JSTの名前表示と問いの候補。** Cocolon `b6268c4` に初回の表示名での呼びかけを追加。API候補 `c106937` は基本的な確認の問いを本人設定で制御し、未回答の初回スキップは当回だけで返す。実4BでPlusの履歴のつなぎ方を試したが、強度・否定の誤りが残った本文案は見送り。Freeの好例を基準にPlusのフォローを改善し、各コアと合わせて同版を検証する。 [実測・再開点](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
 
 **11/23 JSTの最新本番配備と再試験。** RenderのAPI・ワーカーは同じ `f91bba8` でLive。本番 `f91bba8` で本人認証付きの再試験を実行。EmlisAIは訂正「僕は嬉しかった」からv9の返答を非公開で保存し、同じ返答を再読した。感情の言い換えで、直接引用は未検証。DeepInsightは記録由来の発行1回を独立検査で見送り、発行・回答は各0件。架空アカウントはFreeに戻した。 わたしマップは自動更新の初回で新規保存した。 [補助設計§9.256](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-authenticated-retest-20261123) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1qpgetlv9c73crnbsg)

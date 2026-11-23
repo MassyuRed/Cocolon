@@ -828,3 +828,9 @@ Mashが三プランの体験とフォローの合格基準を確認した。感�
 Premiumでは履歴とわたしマップに加え、こころグラフの先行記録や昨日からの違いを今日のフォローに生かす案を検討する。記録が十分な場合の最近の傾向も対象。グラフ閲覧は全プラン共通。初版必須はFreeとPlus。 [決定と検証の引継ぎ](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
 
 アプリ開発版 `b6268c4` に初回の「表示名＋さん」の呼びかけを追加。アプリCI成功、端末配布前。実4BではPlusが以前の安堵も踏まえた一方、気持ちの強さの根拠なし比較や、問いオンでの否定の取り違えがあったため、その本文候補は見送った。API候補 `c106937` は初回の確認の問いを有料履歴の設定から分離し、初回の未回答スキップを元入力だけでフォローする経路へ接続した。本番反映前。 [実測・再開点](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
+
+### 11.54 自己理解を選んだときの応答（11/23 JST）
+
+「自己理解」は、本人が自分について気づいたことや、自分の見方を残すための選択。Emlisは本人の気づきと、条件・変化・両立を受け取り、本人をもう少し知れたことを返す。Freeは今回、Plusは関連する以前の体験、Premiumはさらに根拠のあるわたしマップを使う。今回の本人の見方を優先する。問いは本人がまだ考えている一点を扱う場合に限り、既存の設定に従う。カテゴリの入力条件は従来どおり。
+
+自己理解を生成指示で別扱いにし、保存互換の `medium` を感情の強さとして渡さない。Freeの初回から整え、Plusの履歴、問いの設定・回答・スキップ、Piece・わたしマップ・DeepInsightの根拠と再読を並行して確認する。 [合意した応答・修正順・確認項目](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-self-understanding-reply-20261123)
