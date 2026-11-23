@@ -1,3 +1,15 @@
+<a id="analysis-v24-dated-identical-source-files-20261123"></a>
+### 11/23　わたしマップv24の同文と出典記録を扱うファイル地図
+
+| 既存ファイル | 修正候補の差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 短い資料を一括処理するv24の項目生成で、別々の出典記録が日付表示で区別できる場合に同文を許可する。 |
+| `ai/services/ai_inference/analysis_plan_source_choices.py` | 根拠と元記録を照合し、同文の項目に使う元記録の日付を4Bの提供側とCMEEの表示側で共有する。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 同じ訂正文を持つ別々の出典記録を、図と本文の表示で区別する。 |
+| `ai/tests/test_analysis_deep_insight_handoff.py` | 同文の行動と短文訂正を別々の元記録で保持し、根拠ID、図、本文を照合する。 |
+
+`STRUCTURE_MAP_DELTA_PRESENT`。GPUでは提供コードと日付判定モジュールを同じ版で反映する。 [分析の現在構造](current_structure/03_analysis_current_structure.md#analysis-v24-dated-identical-sources-20261123)
+
 ### 11/20　通常Pieceに渡す問いと本人回答のファイル地図
 
 APIの `ai/services/ai_inference/piece_v2_source_adapter.py` は、問いをスキップ・終了した履歴で、最後の確定した観測を本人の元入力に対応付ける。回答を使う場合は、実際に発行した問いと選ばれた本人回答を確かめて `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` に渡す。これにより「その時は重かった。」のように問いを受けて意味が定まる感情を、原文のまま採用できる。

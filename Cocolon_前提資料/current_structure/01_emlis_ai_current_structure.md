@@ -1,3 +1,12 @@
+<a id="paid-initial-feeling-scope-20261123"></a>
+### 11/23 — 有料プランの短い初回返答と本人の訂正範囲
+
+`ai/services/ai_inference/emlis_thread_service.py` は、有料プランで既存の参照履歴があり、問い・回答・訂正を伴わない当回の単独の気持ちだけを対象に、初回の文章化を `bound_field_and_answer_context.v7` で受領する。
+
+`ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` は、当回の本人の言葉と当回の選択情報だけを4Bへ渡す。本人の原文がかぎ括弧内に一度含まれることを照合し、当回の原文の範囲を選んで訂正できる。元入力、履歴の権利と既存の参照範囲、質問・回答後の返答、以前の保存識別子を保つ。
+
+`ai/tests/test_analysis_emlis_direct_feeling_correction.py` で、先行記録に同名の本人訂正がある新規入力と、受領済みの初回返答を同じ版で保存し直す経路を隔離DBで確認した。本番 `96c8be6` で生じた取り違えへの修正候補は `ffa4185`。 [詳細設計§9.250](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-96c8be6-retest-and-dated-map-20261123)
+
 > **11/15最新：応答への二入力本人訂正からPiece作成・保存再読、通常DB／API反映までの限定単位を完了。** 初回訂正1件・ANSWER0の完全引用REVISE／WITHDRAWを既存source更新能力から導出し、未変更原節と本人の有効置換だけを既存作者・独立S7へ渡す。原文七項目と本人説明を別sourceで保持し、AI対象文を作者材料へ混ぜない。RNは表示していた同CORRECTED OBSを明示選択し、別訂正への取得・結果不明保存復元を拒否。API／worker e5a1dc6双方Live、7作品の隔離保存再読と検証範囲・失敗履歴は§9.69。一般自由文・複数訂正／回答併存、一般本文品質・native画像・本人利用・補助全体は未完。build／TestFlight／本人実機保留、model selector OFF・新GPU／学習0を維持。 [今回の実装・通常反映§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)。
 
 > **11/14・既存の問い設定／二入力訂正履歴／frame対象と失効を通常DB・APIへ反映：** 必要な既存9migrationを依存順に適用し、対象8関数の本文とACL／RLSを照合。API99dbdaabは11:52 JSTにLive。統合PR30のRNは既存sourceに含まれるが、iOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行、最新配布8001。DB／API反映単位は完了。Mash明示により配布用アプリbuild・TestFlight送信・実機確認は後回しとし、同版本人一巡・実返答品質は別の未確認項目で保持する。配布／実機待ちで補助作業を止めない。研究hint・重み・selectorは未採用／OFF、モデル呼出し0。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。owner path・core責務は不変、稼働状態のみ更新。

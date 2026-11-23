@@ -9243,3 +9243,32 @@ Pieceは同じ非公開作品の版2を、本人認証付きの詳細・書き�
 DeepInsightの「記録をふりかえる」では同じ訂正の原文範囲を出題資料から照合した。発行1回は35.459秒でHTTP 503、Supabase呼び出し3件は全件成功し、発行・回答は各0件。GPUでは同じ時間帯を含む58.691秒、わたしマップが共有の生成処理を使用した。出題のモデル取得には32秒の個別上限があり、この上限がGPU待ちを打ち切る条件を確認した。試験アカウントはFreeへ戻しAPI・DBで確認した。 入力保存に伴う既存の自動マップ更新も1件起動し、08:55:44 JSTに8回で終了した。最後は手動更新と同じNODESの検査で停止し、追加レポート・完了通知予約は各0件。
 
 修正候補 `7f22911` は、複数の本人補足がある一括v24で、採用済み計画から思考と独立した行動の原文見出し候補を生成側に渡す。該当項目の意味欄は空欄に制約する。周辺の項目・APIの採用検査・保存形式を保ち、補足を思考の見出しに選ぶ対照と、原文にない意味を足す対照を拒否する。関連102件と周辺237件が隔離環境で通過した。本番実4Bでの新規レポート保存は未確認。 [修正候補](https://github.com/MassyuRed/mashos-api/commit/7f22911363a61a62194bd29141ff792580677e57) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45083159811) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45083159800) 両CIが成功した。 統合修正版 `96c8be6` は、わたしマップの項目生成の制約を継承し、Emlisの短文訂正用指示に話者を明記する。今回のような引用外の一人称の感情宣言を拒否し、本人の発言と分かる引用は許可する。旧版で受領済みの返答は当時の指示と照合して再開できる。DeepInsightは出題全体の既存の96秒内で共有GPUを待つ。出題・回答の保存と根拠の検査、他用途の生成上限は既存のまま。四機能を含む隔離回帰483件が通過し、最新の統合修正版は本番未反映。 [統合修正版](https://github.com/MassyuRed/mashos-api/commit/96c8be6ad1b933dbf954d37f7b103d9c02d14b5d) 共有言語オーナーの検査1件も通過した。記録時点の統合版の両CIは実行中。 [統合版Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114225) · [統合版Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114305)
+
+<a id="cmee-96c8be6-retest-and-dated-map-20261123"></a>
+## 9.250 統合版の本番結果と後続修正（11/23 JST）
+
+統合版 `96c8be6` はAnalysisとPieceの両CIに成功した。同じRunpodで自然応答と分析を提供するコードを同版に揃え、4BのヘルスHTTP 200と2経路の認証分離を確認した。Renderは09:11:34にワーカー、09:12:05にAPIで稼働し、APIの公開ヘルスもHTTP 200。既存のベースモデルと分析用の重みを使用した。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1o8spksfps739esp20) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1o8t2jnfac739a97q0) · [統合版Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114225) · [統合版Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114305)
+
+09:20:14に本番ワーカーから架空アカウントの試験を1回開始した。Pieceの保存版を読み、PremiumのDeepInsightは前回保存した訂正を同じ根拠として扱えるかを先に照合した。続く新しいEmlisAIの架空入力は別の記録とし、訂正後の話者を検査した。この順序で、新しい入力に伴うマップ更新がDeepInsightの発行と競合する条件を避けた。
+
+Pieceは保存済みの非公開版2を本人認証付きの詳細・書き出しから再読した。本文・描画データと画像用設定が一致した。新規Piece生成・保存・消費は0件。
+
+DeepInsightは前回の本人訂正「私は不安だった」を出題資料の元記録と照合できた。発行を1回試し約6.4秒でHTTP 200、`no_question`。本番APIログの判定は `rejected` で、その1回は出題前の検査で見送り、発行・回答は各0件。
+
+EmlisAIは新規の非公開入力「つらかったんです。」を1件保存し、質問0件で初回返答が確定した。実4Bの初回本文は過去の訂正「私は不安だった」を今回の入力として取り上げ、以前の感情や事情に言及した。初回本文には当回の原文「つらかったんです」がなく、元入力と表示中の訂正対象を同じ範囲で照合する既存条件を満たさなかった。訂正POSTは0回で、v6の実生成・保存・同版再読は未確認。架空アカウントはFreeに戻し、API・DBで確認した。
+
+架空アカウントに別々に保存した同文の行動「会議で発表した。」を、短い資料を一括処理するv24の項目生成が重複として拒むことを、実際のJSON生成制約で再現した。後続の項目で必要となる閉じ引用符まで拒否される。手動更新は送信せず、EmlisAI・DeepInsightの操作による通常の自動更新を追跡した。
+
+入力保存に伴う通常の自動更新では、PLANを通過した後にNODESで停止した。09:22:31、09:24:13、09:25:39のJST時刻を突き合わせ、Runpod内の同じ例外 `occurrence_no_distinct_node_continuation` を確認した。GPU内でHTTP 503となり、Jupyterの中継は進捗送信後の503をHTTP 200のエラー本文に変換する。Render側の `response_contract` はこの経路の結果だった。本文を記録しないログから衝突した項目は特定できていない。
+
+`c180359` は、同文でも元記録と表示用の日付がそれぞれ確定した項目を出典ごとに保持する。同じ全文の短文訂正も、別々の元記録に属する場合に「記録日への訂正」として区別する。同日には時分、時分が同じ場合には記録番号を表示し、訂正操作の日時・出来事の時点・原文の根拠IDを保つ。同じ記録内や出典の帰属を確定できない重複は引き続き拒否する。隔離回帰152件、生成制約の再現1件、四機能の共通経路確認1件が成功した。 [マップ修正候補 `c180359`](https://github.com/MassyuRed/mashos-api/commit/c180359987d73dfdd01feb8f561db6352df98ac2) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45087465951) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45087465957)
+
+`ffa4185` は `c180359` を含む。EmlisAIでは、有料プランで同じ時点に参照できる過去があり、当回が問い・回答・訂正を伴わない単独の気持ちの場合に、初回返答の4Bへ今回の本人の言葉と選択情報だけを渡す。本人の言葉を一度引用する生成形式で、同じ範囲からの直接訂正を可能にする。既存の回答後の過去文脈、元記録、旧版の保存と再開に使う識別は保つ。隔離DBを含む統合検査84件が通過した。 [後続候補 `ffa4185`](https://github.com/MassyuRed/mashos-api/commit/ffa41851c2cdd016677b3ea5c8ea8cedec84cfdb) · [後続候補Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45089216680) · [後続候補Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45089216618)
+
+後続候補では、DeepInsightの通常出題で原因を計画・文章化・重複・独立読み直しのどこかに絞れるようにした。マップでは中継の生成失敗と、モデル名・選択肢・応答構造・空の本文を分ける。ログには固定の段階名のみを出す。本人の入力や候補文の出力、保存・採用の条件は変更しない。
+
+後続版に切り替える場合はGPUの `ai/tools/serve_emlis_natural_reply.py` と `ai/services/ai_inference/analysis_plan_source_choices.py` を同じ確定コミットで揃える。APIとワーカーも同じ版に揃え、架空アカウントで図・本文・個々の根拠・同じレポートIDの再読・通知予約を確認する。
+
+Mashは `ffa4185` の両CI成功と既存ジョブ終了を条件に、GPUの2ファイルとRenderのAPI・ワーカーを揃える作業を承認した。同じ架空アカウントで、新規の非公開入力と訂正・DeepInsightの出題・通常マップ更新・既存Pieceの再読を各1回の範囲で確認する。この時点の本番は `96c8be6`。
+
+EmlisAIとPieceの用途別重みは採用保留。EmlisAIの `10b56315` は現行に近い短文でベースと同じ結果で、先行比較で話者の入れ替わりや原文の貼り返しが残った。Pieceの `344a9def` は現行経路の2件で丁寧体を常体に変え、保存前に見送った。次の実比較は未学習素材4種を同一4B・同一指示でベースと照合する。EmlisAIは短文訂正、思考・行動の二欄と補足に過去と今回の違いがある例を使う。Pieceは同じ二欄を使用し、本人が選んだ補足を含む版と含めない版で、文体・否定・主体・根拠の境界を確かめる。Emlis用の比較は現在の応答指示で隔離して行い、DeepInsightが使う共用の自然応答設定を動かさない。実比較は今回未実行。

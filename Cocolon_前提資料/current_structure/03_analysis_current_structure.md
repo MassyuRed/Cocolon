@@ -1,3 +1,10 @@
+<a id="analysis-v24-dated-identical-sources-20261123"></a>
+### 11/23 — わたしマップv24で同文の行動と訂正を元記録ごとに表示
+
+短い資料を一括処理するv24では、別々の記録から同じ行動文を採用すると、項目の生成制約が重複と判定して停止することを隔離環境で再現した。修正候補は、本人補足から独立した行動と、同じ訂正文を全文で引用した項目について、出典が異なる元記録に確定し、表示で区別できる場合に各項目を保持する。同一記録内や出典を確定できない重複は引き続き拒否する。
+
+図と本文には元記録の日本時間の日付を表示する。同日なら時分、時分まで一致する場合は記録番号を添える。訂正には「への訂正」と添え、日付が訂正日時や出来事の時点を表すように読めるのを防ぐ。別々の記録IDと根拠ID、同文2件の図・本文を隔離試験で確認した。 [ファイル地図](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#analysis-v24-dated-identical-source-files-20261123)
+
 ### 11/21 — わたしを知る問いの本人回答
 
 開発差分で、`deep_insight_questions` に保存した本人の回答をわたしマップの累積材料へ追加する。根拠には実際に発行した問いと本人の回答を別々に渡し、問いの仮説を本人の経験として扱わない。`analysis_cumulative_service.py` から既存のバックグラウンド更新へ接続し、新しい回答を現在版の次回更新に使う。根拠表示は `components/selfStructure/CumulativeWatashiMapView.js` が担当する。 [最新議事録§7](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)

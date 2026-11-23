@@ -771,3 +771,10 @@ GPU提供と本番API・ワーカーを `6c26351` に揃えた。わたしマッ
 EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領して同じ版で再読した。本文「私は不安でした。」は訂正後の感情を反映したが、本人の一人称で書かれていた。DeepInsightは同じ訂正を出題資料で確認した後、わたしマップとGPUの利用時間が重なった試行でHTTP 503となり、発行・回答は各0件。試験アカウントをFreeに戻した。入力保存に伴うマップの自動更新も8回で終了し、新規保存・完了通知予約は各0件。 [詳細設計§9.249](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-live-integrated-candidate-20261123)
 
 統合修正版 `96c8be6` に、マップの項目見出しを根拠に束縛する修正、短文訂正後のEmlisAIの話者修正、DeepInsightの既存96秒枠内でのGPU待ちを揃えた。四機能を含む隔離回帰483件と共有言語オーナーの検査1件に成功した。統合版の両CIは実行中で、GPU・Renderの本番配備と新しい実4Bでの確認が残る。 [統合修正版](https://github.com/MassyuRed/mashos-api/commit/96c8be6ad1b933dbf954d37f7b103d9c02d14b5d) · [統合版Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114225) · [統合版Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45085114305)
+
+<a id="cmee-96c8be6-retest-and-dated-map-20261123"></a>
+### 11.44 CMEE通常経路の再試験と後続修正（11/23 JST）
+
+`96c8be6` の両CIが成功し、GPU、RenderのAPI・ワーカーを揃えた。Pieceの既存非公開版を同じ本文・描画データで再読した。DeepInsightは6.4秒でHTTP 200を返したが出題前に拒否され、発行・回答は各0件。EmlisAIは初回の本文に過去の訂正が混ざり、今回の短文の訂正操作には進めなかった。架空アカウントはFreeに復元した。通常マップのGPUログは、項目生成中の重複判定を示した。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1o8spksfps739esp20) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1o8t2jnfac739a97q0)
+
+`ffa4185` に同文を別の元記録として保存するマップ修正、EmlisAIの当回単独感情の生成範囲、DeepInsightとマップの拒否段階のログを揃えた。統合検査84件が成功し、両CIと既存ジョブの終了後の配備・再試験を承認済み。用途別重みはベースとの実比較と採用が残る。 [詳細設計§9.250](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-96c8be6-retest-and-dated-map-20261123) · [後続候補 `ffa4185`](https://github.com/MassyuRed/mashos-api/commit/ffa41851c2cdd016677b3ea5c8ea8cedec84cfdb) · [後続候補Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45089216680) · [後続候補Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45089216618)
