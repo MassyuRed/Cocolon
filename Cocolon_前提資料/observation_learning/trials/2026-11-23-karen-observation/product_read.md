@@ -4,6 +4,8 @@
 
 **直近の比較**は[ラジオの三プラン・回答後・スキップの全文](#emlis-final)と、[わたしマップ追加試験の見出し・本文](#map-final)から読める。前の候補の生成文は下に版ごとに残した。実装の採否と次の検証は[補助経路の詳細設計](../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#karen-observation-theory-20261123)、読み方の基準は[観測理論と構造分析理論](../../../designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md)を参照する。
 
+ここに掲載する31件は今回の開発候補の生成文。本番稼働版 `f91bba8` は、しおり・仕事の褒め言葉・宅配の3題材を三プランで比較しており、[そのときの実応答全文](../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-current-initial-quality-20261123)に分けて記録している。
+
 | 架空の題材 | 選択したカテゴリ | 感情・強さ、または自己理解 |
 | --- | --- | --- |
 | 期限に間に合わせた資料と、直したかった図 | 仕事 | 平穏・中、不安・弱 |

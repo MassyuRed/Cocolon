@@ -7633,3 +7633,5 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 [華恋の観測理論と構造分析理論](designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md)は、両機能の設計判断、出典、本人に届く文章の確認に使う。三中核の[現在地](00_cocolon_current_product_and_state.md)と[通常経路の実装・確認範囲](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#karen-observation-theory-20261123)からも参照できる。
 
 実装箇所は、Emlisの通常スレッドと回答生成・問い、分析v24の最終生成・根拠照合・配信用投影、アプリの `CumulativeWatashiMapView` と `SemanticWatashiMap`。追加した回帰試験はAPIの `ai/tests/test_analysis_primary_structures.py`。実4Bで読んだ文章は[架空入力と応答全文](observation_learning/trials/2026-11-23-karen-observation/product_read.md)に残す。
+
+11月23日のGitツリーを照合した。アプリと前提資料は5,971ファイル（`9c6da4c`）、APIは2,769ファイル（`f4dd79f`）。この作業で新しく追加したのは、上記の理論本文、架空入力と応答全文、API側の回帰試験の3ファイル。
