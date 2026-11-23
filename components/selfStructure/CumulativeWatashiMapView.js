@@ -1,20 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, AppState, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, AppState, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../AuthContext';
 import { useSubscription } from '../../SubscriptionContext';
 import { useTheme } from '../../theme/ThemeContext';
 import { apiGet, apiPost } from '../../lib/apiClient';
-import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath, buildSelfStructureEvidencePath } from '../../lib/compat/legacyWireContracts';
+import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath } from '../../lib/compat/legacyWireContracts';
 import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
 import WatashiMapV2Renderer from './WatashiMapV2Renderer';
 import SemanticWatashiMap from './SemanticWatashiMap';
 import AnalysisIfRouteDialog from './AnalysisIfRouteDialog';
 import MapInterpretationCorrectionDialog from './MapInterpretationCorrectionDialog';
-import { checkedMapCorrectionEvidenceItems, mapCorrectionEvidence } from './mapCorrectionContract';
 import { checkedMapRow, checkedCurrentResult } from './cumulativeMapContract';
-import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
+import { makeUiTokens } from '../../ui/uiTokens';
 import CocolonButton from '../CocolonButton';
 import CocolonBackButton from '../CocolonBackButton';
 
@@ -46,11 +45,9 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const currentKey = useRef(key);
   currentKey.current = key;
   const request = useRef(0);
-  const evidenceRequest = useRef(0);
   const seenCallback = useRef(onLatestSeenVersion);
   seenCallback.current = onLatestSeenVersion;
   const [state, setState] = useState({ key: null, loading: true });
-  const [evidence, setEvidence] = useState(null);
   const [compare, setCompare] = useState(false);
   const [about, setAbout] = useState(false);
   const [ifDialog, setIfDialog] = useState(null);
@@ -65,22 +62,20 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
 
   const load = useCallback(async (withCurrent = false, force = false, readOnly = false) => {
     const seq = ++request.current;
-    evidenceRequest.current += 1;
     setState(previous => previous.key === key ? { ...previous, loading: true, error: null, refreshError: false } : { key, loading: true });
-    setEvidence(null);
     if (!owner) { setState({ key, error: 'ログインしてから、もう一度開いてください。' }); return; }
     const active = () => currentKey.current === key && request.current === seq;
     try {
       let row, now = null, comparisonFailed = false, refreshStatus = null;
       if (reportId) {
         const data = await apiGet(buildSelfStructureReportDetailPath(reportId, month), {
-          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 15000 });
+          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v2' }, timeoutMs: 15000 });
         if (!active()) return;
         row = checkedMapRow(data?.item);
         if (row.id !== reportId || (month && row.snapshot_month !== month)) throw new Error('analysis_month_mismatch');
       } else {
         const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : `ensure=true&background=true${force ? '&force=true' : ''}`}`, {
-          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 15000 });
+          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v2' }, timeoutMs: 15000 });
         if (!active()) return;
         row = checkedCurrentResult(data);
         refreshStatus = readRefreshStatus(data);
@@ -92,7 +87,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       if (withCurrent && reportId) {
         try {
           const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : 'ensure=true&background=true'}`, {
-            expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 15000 });
+            expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v2' }, timeoutMs: 15000 });
           if (!active()) return;
           now = checkedCurrentResult(data);
           refreshStatus = readRefreshStatus(data);
@@ -121,7 +116,6 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     compareRef.current = false;
     setCompare(false);
     setAbout(false);
-    setEvidence(null);
     setIfDialog(null);
     setMapCorrection(null);
     setCorrectionNotice(null);
@@ -136,9 +130,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   }, [state.row?.content_json?.watashiMap?.projection_of]);
 
   useEffect(() => {
-    setEvidence(null);
     if (!planLoading && focused && appActive) load(compareRef.current);
-    return () => { request.current += 1; evidenceRequest.current += 1; };
+    return () => { request.current += 1; };
   }, [load, planLoading, focused, appActive]);
 
   useEffect(() => {
@@ -169,8 +162,6 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         if (!active()) return;
         if (!temporarilyUnavailable(error)) {
           request.current += 1;
-          evidenceRequest.current += 1;
-          setEvidence(null);
           setState({ key, error: 'マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。' });
           return;
         }
@@ -193,19 +184,6 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     }
   }, [state.key, state.row, key, reportId, owner, planLoading, focused, appActive]);
 
-  const showEvidence = useCallback(async (row, nodeRef) => {
-    const seq = ++evidenceRequest.current;
-    setEvidence({ key, loading: true });
-    try {
-      const data = await apiGet(buildSelfStructureEvidencePath(row.id, nodeRef, row.snapshot_month), { expectedUserId: owner });
-      const items = checkedMapCorrectionEvidenceItems(data?.items || []);
-      if (currentKey.current === key && evidenceRequest.current === seq) setEvidence({ key, items });
-    } catch {
-      if (currentKey.current === key && evidenceRequest.current === seq) setEvidence({ key, error: true });
-    }
-  }, [key, owner]);
-  const closeEvidence = () => { evidenceRequest.current += 1; setEvidence(null); };
-
   const coverage = (value, isSemantic = false) => value ? <View style={styles.notice}>
     <Text style={[styles.bodyText, { color: ink }]}>{isSemantic
       ? `対象の記録${value.source_count}件／根拠として結び付いた記録${value.mapped_count}件。`
@@ -221,7 +199,6 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const renderMap = row => <View>
     {row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3'
       ? <SemanticWatashiMap key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
-          onOpenEvidence={node => showEvidence(row, node)}
           onExploreIf={!reportId && tier === 'premium' ? branchRef => {
             const map = row.content_json.watashiMap;
             if (currentKey.current !== key || stateRef.current.row?.content_json?.watashiMap?.projection_of !== map.projection_of) return;
@@ -235,8 +212,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             setCorrectionNotice(null);
             setMapCorrection({ key, visible: true, projection: map, kind, targetRef });
           } : undefined} />
-      : <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
-          onOpenEvidence={node => showEvidence(row, node)} />}
+      : <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'} />}
     {about ? <View style={{ marginTop: 16 }}>
       <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
       {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
@@ -298,38 +274,6 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       {!!owner && !planLoading && !reportId && tier === 'premium' ? <CocolonButton variant="secondary"
         testID="analysis-if-saved-open" title="保存した関心の方向" onPress={() => setIfDialog({ key, visible: true, mode: 'saved' })} /> : null}
     </Body>
-    <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence} supportedOrientations={MODAL_ORIENTATIONS}>
-      <SafeAreaProvider><SafeAreaView edges={['top', 'bottom', 'left', 'right']} style={styles.overlay}><View style={styles.dialog}>
-        <Text style={[styles.modalTitle, { color: ink }]}>根拠の記録</Text>
-        <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ gap: 16 }}>
-          {evidence?.loading ? <ActivityIndicator color={colors.TITLE_GOLD} /> : null}
-          {evidence?.error ? <Text style={styles.error}>記録を取得できませんでした。</Text> : null}
-          {evidence?.items?.map(item => <View key={item.id} style={styles.notice}>
-            {item.evidence_scope === 'MAP_CORRECTION_CONTEXT' ? <Text style={styles.label}>訂正対象の分析で参照した記録</Text> : null}
-            <Text style={[styles.meta, { color: ink }]}>{dateLabel(item.created_at)}</Text>
-            {item.version_state !== 'CURRENT' ? <Text style={[styles.bodyText, { color: ink }]}>この記録は分析後に編集されています。以下は現在の内容です。</Text> : null}
-            {item.deep_insight ? <>
-              <Text style={styles.label}>わたしを知る問い</Text>
-              <Text style={[styles.record, { color: ink }]}>{item.deep_insight.question_text}</Text>
-              <Text style={styles.label}>本人の回答</Text>
-              <Text style={[styles.record, { color: ink }]}>{item.deep_insight.answer_text}</Text>
-            </> : item.memo ? <><Text style={styles.label}>思考内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo}</Text></> : null}
-            {item.memo_action ? <><Text style={styles.label}>行動内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo_action}</Text></> : null}
-            {item.answers?.length ? <Text style={styles.label}>本人補足</Text> : null}
-            {item.answers?.map((answer, index) => <Text key={index} style={[styles.record, { color: ink }]}>補足：{answer}</Text>)}
-          </View>)}
-          {mapCorrectionEvidence(evidence?.items).length ? <View style={styles.notice}>
-            <Text style={styles.label}>本人によるマップ訂正</Text>
-            {mapCorrectionEvidence(evidence?.items).map(correction => <View key={correction.correction_id} style={{ gap: 8 }}>
-              <Text style={[styles.meta, { color: ink }]}>{dateLabel(correction.recorded_at)}</Text>
-              {correction.version_state !== 'CURRENT' ? <Text style={[styles.bodyText, { color: ink }]}>訂正の対象となる記録やマップの状態が変わっています。以下は当時保存した本人の説明です。</Text> : null}
-              <Text style={[styles.record, { color: ink }]}>{correction.text}</Text>
-            </View>)}
-          </View> : null}
-        </ScrollView>
-        <CocolonButton variant="secondary" onPress={closeEvidence} title="閉じる" />
-      </View></SafeAreaView></SafeAreaProvider>
-    </Modal>
     <AnalysisIfRouteDialog visible={!!ifDialog?.visible && ifDialog.key === key && !planLoading && focused && appActive
         && (ifDialog.mode === 'saved' || ifDialog.baseMapRef === state.row?.content_json?.watashiMap?.projection_of)}
       onClose={() => setIfDialog(previous => previous ? { ...previous, visible: false } : null)}
@@ -358,15 +302,11 @@ function makeStyles(colors, ui) {
     root: { flex: 1 }, embeddedRoot: { alignSelf: 'stretch' },
     header: { padding: 20, gap: 8, flexDirection: 'row', alignItems: 'center' },
     title: { ...ui.typography.screenTitle, flex: 1, textAlign: 'center' },
-    sectionTitle: { ...ui.typography.sectionTitle }, modalTitle: { ...ui.typography.modalTitle },
+    sectionTitle: { ...ui.typography.sectionTitle },
     body: { padding: 20, gap: 16, paddingBottom: 24, width: '100%', maxWidth: 680, alignSelf: 'center' },
     embeddedBody: { padding: 0, paddingBottom: 8 },
     meta: { ...ui.typography.meta }, bodyText: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT },
     error: { ...ui.typography.description, color: colors.ERROR },
-    label: { ...ui.typography.description, fontWeight: '600', color: colors.TEXT_SUBTLE },
     notice: { padding: 16, gap: 8, borderWidth: 1, borderRadius: 16, borderColor: colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL },
-    record: { ...ui.typography.body },
-    overlay: { flex: 1, backgroundColor: '#0008', padding: 20, justifyContent: 'center', alignItems: 'center' },
-    dialog: { width: '100%', maxWidth: 640, maxHeight: '100%', flexShrink: 1, padding: 20, borderRadius: 24, gap: 16, backgroundColor: colors.FIELD_BG, borderWidth: 1, borderColor: colors.CARD_BORDER },
   });
 }

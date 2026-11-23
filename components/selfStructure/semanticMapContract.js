@@ -14,7 +14,8 @@ function readSemanticMapProjection(content) {
     'overview', 'nodes', 'edges', 'accessibility_linear_order']) || p.schema_version !== SCHEMA
     || p.wire_kind !== 'watashi.map.v3' || p.artifact_version !== 1
     || !/^artifact:[0-9a-f]{32}@1$/.test(p.projection_of) || !text(p.period_label)
-    || !exact(p.overview, ['title', 'summary']) || !text(p.overview.title) || !text(p.overview.summary)
+    || !(exact(p.overview, ['title', 'summary']) || exact(p.overview, ['title', 'summary', 'primary_structures']))
+    || !text(p.overview.title) || !text(p.overview.summary)
     || !Array.isArray(p.nodes) || !p.nodes.length || p.nodes.length > 24
     || !Array.isArray(p.edges) || p.edges.length > 48) return null;
   if (!p.nodes.every(n => exact(n, ['node_ref', 'node_kind', 'title', 'summary', 'explanation',
@@ -26,6 +27,14 @@ function readSemanticMapProjection(content) {
   if (!unique(refs) || !texts(p.accessibility_linear_order) || !unique(p.accessibility_linear_order)
     || p.accessibility_linear_order.length !== refs.length
     || !p.accessibility_linear_order.every(ref => refs.includes(ref))) return null;
+  if ('primary_structures' in p.overview) {
+    const structures = p.overview.primary_structures;
+    if (!Array.isArray(structures) || structures.length > 3 || !structures.every(s =>
+      exact(s, ['title', 'description', 'scope', 'node_refs']) && text(s.title) && text(s.description)
+      && ['across_records', 'self_report', 'in_this_record'].includes(s.scope)
+      && Array.isArray(s.node_refs) && s.node_refs.length > 0 && s.node_refs.length <= 4 && unique(s.node_refs)
+      && s.node_refs.every(ref => refs.includes(ref))) || !unique(structures.map(s => s.title.trim()))) return null;
+  }
   if (!p.edges.every(e => exact(e, ['edge_ref', 'from_ref', 'to_ref', 'relation_kind', 'label', 'explanation'])
     && /^e[1-9]\d*$/.test(e.edge_ref) && refs.includes(e.from_ref) && refs.includes(e.to_ref)
     && e.from_ref !== e.to_ref && RELATION_KINDS.includes(e.relation_kind) && text(e.label) && text(e.explanation))

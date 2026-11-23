@@ -5,78 +5,25 @@ import Svg, { Path } from 'react-native-svg';
 import { buildSemanticMapLayout, readSemanticMapProjection } from './semanticMapContract';
 import { MODAL_ORIENTATIONS } from '../../ui/uiTokens';
 
-export default function SemanticWatashiMap({ contentJson, colors, isDark = false, onOpenEvidence, onExploreIf, onCorrectMap }) {
-  const projection = useMemo(() => readSemanticMapProjection(contentJson), [contentJson]);
+const scopeLabels = {
+  across_records: 'いくつかの場面に共通すること',
+  self_report: 'ご自身が気づいたこと',
+  in_this_record: 'この場面から見えること',
+};
+
+function SemanticMapDiagram({ projection, nodeRefs, colors, styles, choose }) {
   const [width, setWidth] = useState(340);
-  const [selection, setSelection] = useState(null);
-  const [linear, setLinear] = useState(false);
-  const pendingEvidence = useRef(null);
-  const currentProjection = useRef(projection?.projection_of);
-  const evidenceCallback = useRef(onOpenEvidence);
-  const ifCallback = useRef(onExploreIf), correctionCallback = useRef(onCorrectMap);
-  const mounted = useRef(true);
-  currentProjection.current = projection?.projection_of;
-  evidenceCallback.current = onOpenEvidence;
-  ifCallback.current = onExploreIf;
-  correctionCallback.current = onCorrectMap;
-  const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
-  const layout = useMemo(() => projection ? buildSemanticMapLayout(projection, width) : null, [projection, width]);
-  useEffect(() => { pendingEvidence.current = null; setSelection(null); setLinear(false); }, [projection?.projection_of]);
-  useEffect(() => {
-    mounted.current = true;
-    return () => { mounted.current = false; pendingEvidence.current = null; };
-  }, []);
-  if (!projection || !layout) return null;
-  const chosen = selection?.projectionOf === projection.projection_of
-    ? (selection.kind === 'overview' ? projection.overview
-      : selection.kind === 'node' ? projection.nodes.find(n => n.node_ref === selection.ref)
-      : projection.edges.find(e => e.edge_ref === selection.ref)) : null;
-  const choose = (kind, ref) => {
-    pendingEvidence.current = null;
-    setSelection({ projectionOf: projection.projection_of, kind, ref });
-  };
-  const nodeName = ref => projection.nodes.find(n => n.node_ref === ref)?.title || '';
+  const layout = useMemo(() => {
+    const portion = nodeRefs ? {
+      nodes: projection.nodes.filter(node => nodeRefs.includes(node.node_ref)),
+      edges: projection.edges.filter(edge => nodeRefs.includes(edge.from_ref) && nodeRefs.includes(edge.to_ref)),
+      accessibility_linear_order: projection.accessibility_linear_order.filter(ref => nodeRefs.includes(ref)),
+    } : projection;
+    return buildSemanticMapLayout(portion, width);
+  }, [projection, nodeRefs, width]);
+  const nodeName = ref => projection.nodes.find(node => node.node_ref === ref)?.title || '';
   const accent = colors?.TITLE_GOLD || '#800020';
-  const dismissDetail = () => { pendingEvidence.current = null; setSelection(null); };
-  const detailDismissed = () => {
-    const pending = pendingEvidence.current;
-    pendingEvidence.current = null;
-    if (mounted.current && pending && pending.projectionOf === currentProjection.current) {
-      if (pending.action === 'if') ifCallback.current?.(pending.targetRef);
-      else if (pending.action === 'correction') correctionCallback.current?.(pending.kind, pending.targetRef);
-      else evidenceCallback.current?.(pending.nodeRef);
-    }
-  };
-  const openEvidence = ref => {
-    // UIKit cannot present the parent's evidence modal during this modal's
-    // dismissal. iOS provides onDismiss after that native transition finishes.
-    pendingEvidence.current = Platform?.OS === 'ios'
-      ? { projectionOf: projection.projection_of, nodeRef: ref } : null;
-    setSelection(null);
-    // Android has no onDismiss contract, so preserve its direct handoff.
-    if (Platform?.OS !== 'ios') evidenceCallback.current?.(ref);
-  };
-  const openParentAction = (action, kind, ref) => {
-    pendingEvidence.current = Platform?.OS === 'ios'
-      ? { projectionOf: projection.projection_of, action, kind, targetRef: ref } : null;
-    setSelection(null);
-    if (Platform?.OS !== 'ios') {
-      if (action === 'if') ifCallback.current?.(ref);
-      else correctionCallback.current?.(kind, ref);
-    }
-  };
-  return <View testID="watashi-map-v3" style={styles.root}>
-    <View style={styles.intro}>
-      <Text style={styles.eyebrow}>記録をつないで見えること</Text>
-      <Text style={styles.title} accessibilityRole="header">{projection.overview.title}</Text>
-      <Text style={styles.overview} numberOfLines={3}>{projection.overview.summary}</Text>
-      <TouchableOpacity testID="semantic-overview-open" accessibilityRole="button"
-        style={styles.secondaryAction} onPress={() => choose('overview', 'overview')}>
-        <Text style={styles.actionLabel}>全体の読みを開く</Text>
-      </TouchableOpacity>
-    </View>
-    <Text style={styles.hint}>気になるところや線のことばをタップすると、詳しく読めます。</Text>
-    <View testID="semantic-map-graph" style={styles.canvasShell} onLayout={event => {
+  return <View testID="semantic-map-graph" style={styles.canvasShell} onLayout={event => {
       const next = event.nativeEvent.layout.width;
       if (Number.isFinite(next) && next >= 280 && Math.abs(next - width) >= 1) setWidth(next);
     }}>
@@ -102,7 +49,84 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
           <Text style={styles.relationText} numberOfLines={2} maxFontSizeMultiplier={1.2}>{edge.label}</Text>
         </TouchableOpacity>)}
       </View>
+    </View>;
+}
+
+export default function SemanticWatashiMap({ contentJson, colors, isDark = false, onExploreIf, onCorrectMap }) {
+  const projection = useMemo(() => readSemanticMapProjection(contentJson), [contentJson]);
+  const [expandedStructure, setExpandedStructure] = useState(null);
+  const [selection, setSelection] = useState(null);
+  const [linear, setLinear] = useState(false);
+  const pendingAction = useRef(null);
+  const currentProjection = useRef(projection?.projection_of);
+  const ifCallback = useRef(onExploreIf), correctionCallback = useRef(onCorrectMap);
+  const mounted = useRef(true);
+  currentProjection.current = projection?.projection_of;
+  ifCallback.current = onExploreIf;
+  correctionCallback.current = onCorrectMap;
+  const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
+  useEffect(() => { pendingAction.current = null; setSelection(null); setExpandedStructure(null); setLinear(false); }, [projection?.projection_of]);
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; pendingAction.current = null; };
+  }, []);
+  if (!projection) return null;
+  const structures = projection.overview.primary_structures;
+  const chosen = selection?.projectionOf === projection.projection_of
+    ? (selection.kind === 'overview' ? projection.overview
+      : selection.kind === 'node' ? projection.nodes.find(n => n.node_ref === selection.ref)
+      : projection.edges.find(e => e.edge_ref === selection.ref)) : null;
+  const choose = (kind, ref) => {
+    pendingAction.current = null;
+    setSelection({ projectionOf: projection.projection_of, kind, ref });
+  };
+  const nodeName = ref => projection.nodes.find(n => n.node_ref === ref)?.title || '';
+  const dismissDetail = () => { pendingAction.current = null; setSelection(null); };
+  const detailDismissed = () => {
+    const pending = pendingAction.current;
+    pendingAction.current = null;
+    if (mounted.current && pending && pending.projectionOf === currentProjection.current) {
+      if (pending.action === 'if') ifCallback.current?.(pending.targetRef);
+      else if (pending.action === 'correction') correctionCallback.current?.(pending.kind, pending.targetRef);
+    }
+  };
+  const openParentAction = (action, kind, ref) => {
+    pendingAction.current = Platform?.OS === 'ios'
+      ? { projectionOf: projection.projection_of, action, kind, targetRef: ref } : null;
+    setSelection(null);
+    if (Platform?.OS !== 'ios') {
+      if (action === 'if') ifCallback.current?.(ref);
+      else correctionCallback.current?.(kind, ref);
+    }
+  };
+  return <View testID="watashi-map-v3" style={styles.root}>
+    <View style={styles.intro}>
+      <Text style={styles.eyebrow}>記録をつないで見えること</Text>
+      <Text style={styles.title} accessibilityRole="header">{projection.overview.title}</Text>
+      <Text style={styles.overview} numberOfLines={structures ? undefined : 3}>{projection.overview.summary}</Text>
+      <TouchableOpacity testID="semantic-overview-open" accessibilityRole="button"
+        style={styles.secondaryAction} onPress={() => choose('overview', 'overview')}>
+        <Text style={styles.actionLabel}>全体の読みを開く</Text>
+      </TouchableOpacity>
     </View>
+    {structures?.map((structure, index) => {
+      const expanded = expandedStructure?.projectionOf === projection.projection_of && expandedStructure.index === index;
+      return <View key={index} style={styles.structure}>
+        <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
+        <Text accessibilityRole="header" style={styles.sectionTitle}>{structure.title}</Text>
+        <Text style={styles.body}>{structure.description}</Text>
+        <TouchableOpacity testID={`semantic-structure-toggle-${index}`} accessibilityRole="button"
+          accessibilityLabel={`${structure.title}の図を${expanded ? '閉じる' : '見る'}`}
+          accessibilityState={{ expanded }} style={styles.secondaryAction}
+          onPress={() => setExpandedStructure(expanded ? null : { projectionOf: projection.projection_of, index })}>
+          <Text style={styles.actionLabel}>{expanded ? '図を閉じる' : '関係する部分を図で見る'}</Text>
+        </TouchableOpacity>
+        {expanded ? <SemanticMapDiagram projection={projection} nodeRefs={structure.node_refs}
+          styles={styles} colors={colors} choose={choose} /> : null}
+      </View>;
+    })}
+    {!structures ? <Text style={styles.hint}>気になるところや線のことばをタップすると、詳しく読めます。</Text> : null}
+    {!structures ? <SemanticMapDiagram projection={projection} colors={colors} styles={styles} choose={choose} /> : null}
     <TouchableOpacity accessibilityRole="button" accessibilityState={{ expanded: linear }}
       style={styles.secondaryAction} onPress={() => setLinear(!linear)}>
       <Text style={styles.actionLabel}>{linear ? '一覧を閉じる' : '項目を一覧で読む'}</Text>
@@ -138,28 +162,21 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
             {selection?.kind === 'overview' ? <View style={styles.relatedNodes}>
               <Text style={styles.sectionTitle}>地図の項目</Text>
               {projection.accessibility_linear_order.map(ref => <TouchableOpacity key={ref}
-                testID={`semantic-overview-node-${ref}`} accessibilityRole="button" style={styles.evidenceButton}
-                onPress={() => choose('node', ref)}><Text style={styles.evidenceText}>{nodeName(ref)}</Text></TouchableOpacity>)}
+                testID={`semantic-overview-node-${ref}`} accessibilityRole="button" style={styles.detailAction}
+                onPress={() => choose('node', ref)}><Text style={styles.detailActionText}>{nodeName(ref)}</Text></TouchableOpacity>)}
             </View> : null}
             {selection?.kind === 'node' && chosen?.unknowns.length ? <View style={styles.unknown}>
               <Text style={styles.sectionTitle}>この記録では決められないこと</Text>
               {chosen.unknowns.map((item, index) => <Text key={index} style={styles.body}>{item}</Text>)}
             </View> : null}
-            {selection?.kind === 'node' && chosen && onOpenEvidence ? <TouchableOpacity accessibilityRole="button"
-              style={styles.evidenceButton} onPress={() => openEvidence(chosen.node_ref)}>
-              <Text style={styles.evidenceText}>根拠の記録を見る</Text>
-            </TouchableOpacity> : null}
-            {selection?.kind === 'edge' && chosen && onOpenEvidence ? [chosen.from_ref, chosen.to_ref].map(ref =>
-              <TouchableOpacity key={ref} accessibilityRole="button" style={styles.evidenceButton}
-                onPress={() => openEvidence(ref)}><Text style={styles.evidenceText}>{nodeName(ref)}の根拠を見る</Text></TouchableOpacity>) : null}
             {chosen && ['node', 'edge'].includes(selection?.kind) && onExploreIf ? <TouchableOpacity
-              testID="semantic-if-open" accessibilityRole="button" style={styles.evidenceButton}
+              testID="semantic-if-open" accessibilityRole="button" style={styles.detailAction}
               onPress={() => openParentAction('if', selection.kind, selection.ref)}>
-              <Text style={styles.evidenceText}>この分岐を考える</Text>
+              <Text style={styles.detailActionText}>この分岐を考える</Text>
             </TouchableOpacity> : null}
             {chosen && onCorrectMap ? <TouchableOpacity testID="semantic-correction-open" accessibilityRole="button"
-              style={styles.evidenceButton} onPress={() => openParentAction('correction', selection.kind, selection.ref)}>
-              <Text style={styles.evidenceText}>この読み取りを訂正する</Text>
+              style={styles.detailAction} onPress={() => openParentAction('correction', selection.kind, selection.ref)}>
+              <Text style={styles.detailActionText}>この読み取りを訂正する</Text>
             </TouchableOpacity> : null}
           </ScrollView>
         </View>
@@ -194,6 +211,7 @@ function makeStyles(colors, dark) {
     actionLabel: { color: accent, fontSize: 14, lineHeight: 23, fontWeight: '600' },
     linear: { gap: 8 }, linearItem: { minHeight: 44, paddingVertical: 12, borderBottomWidth: 1, borderColor: border, gap: 5 },
     sectionTitle: { color: ink, fontSize: 17, lineHeight: 27, fontWeight: '600' },
+    structure: { gap: 7, paddingVertical: 12, borderTopWidth: 1, borderColor: border },
     body: { color: ink, fontSize: 16, lineHeight: 28 }, summary: { color: ink, fontSize: 17, lineHeight: 29, fontWeight: '500' },
     context: { color: muted, fontSize: 13, lineHeight: 23 },
     overlay: { flex: 1, backgroundColor: 'rgba(20,12,15,0.48)', justifyContent: 'center', padding: 20 },
@@ -204,7 +222,7 @@ function makeStyles(colors, dark) {
     detailBody: { gap: 18, paddingBottom: 8 },
     relatedNodes: { gap: 10 },
     unknown: { backgroundColor: tonal, padding: 16, borderRadius: 18, gap: 10 },
-    evidenceButton: { minHeight: 48, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: tonal, borderRadius: 24, justifyContent: 'center' },
-    evidenceText: { color: accent, fontSize: 15, lineHeight: 24, fontWeight: '600', textAlign: 'center' },
+    detailAction: { minHeight: 48, paddingHorizontal: 16, paddingVertical: 12, backgroundColor: tonal, borderRadius: 24, justifyContent: 'center' },
+    detailActionText: { color: accent, fontSize: 15, lineHeight: 24, fontWeight: '600', textAlign: 'center' },
   });
 }

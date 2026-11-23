@@ -3070,7 +3070,7 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
   ], 'Late copy surfaces use watashi map naming');
 
   assertIncludes(guide + terms + iap + tutorialOverlay + access + formatters + renderer, [
-    'わたしマップは性格タイプを決めるものではなく、入力から見えた場面ごとの役割と行動パターンを整理する場所です。',
+    'わたしマップでは、あなたが何を大切にし、相手や状況によってそれがどんな選択に表れたかを読み解きます。',
     'reading: "わたしマップ"',
     'これは性格タイプではなく、入力から見えた場面ごとの動き方です。',
     'わたしマップで役割スイッチ',

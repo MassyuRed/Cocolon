@@ -180,31 +180,19 @@ test('owner/tier change hides old map and rejects its delayed response',async()=
   await act(async()=>view.unmount());
 });
 
-test('evidence close and newer node selection reject late earlier evidence',async()=>{
-  const a=deferred(),b=deferred();let n=0;const h=harness(url=>url.includes('/evidence')?(++n===1?a.promise:b.promise):latest());
-  const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
-  await act(async()=>{view=Renderer.create(React.createElement(View));});
-  const evidenceButtons=()=>view.root.findAllByType('TouchableOpacity').filter(x=>x.findAllByType('Text').some(t=>t.props.children==='根拠の記録を見る'));
-  await act(async()=>{evidenceButtons()[0].props.onPress();});
-  await act(async()=>{evidenceButtons()[1].props.onPress();});
-  await act(async()=>b.resolve({items:[{id:'B',memo:'LATEST_NODE_EVIDENCE',version_state:'CURRENT'}]}));
-  await act(async()=>a.resolve({items:[{id:'A',memo:'OBSOLETE_NODE_EVIDENCE',version_state:'CURRENT'}]}));
-  assert(JSON.stringify(view.toJSON()).includes('LATEST_NODE_EVIDENCE'));
-  assert(!JSON.stringify(view.toJSON()).includes('OBSOLETE_NODE_EVIDENCE'));
-  await act(async()=>view.root.findByType('ModalContent').findAllByType('TouchableOpacity').at(-1).props.onPress());
-  assert.equal(view.root.findAllByType('ModalContent').length,0);
-  await act(async()=>view.unmount());
-});
-
-test('closing pending evidence does not reopen its modal on arrival',async()=>{
-  const pending=deferred();const h=harness(url=>url.includes('/evidence')?pending.promise:latest());
-  const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
-  await act(async()=>{view=Renderer.create(React.createElement(View));});
-  await act(async()=>{button(view,'根拠の記録を見る').props.onPress();});
-  await act(async()=>view.root.findByType('ModalContent').findAllByType('TouchableOpacity').at(-1).props.onPress());
-  await act(async()=>pending.resolve({items:[{id:'A',memo:'LATE_AFTER_CLOSE',version_state:'CURRENT'}]}));
-  assert.equal(view.root.findAllByType('ModalContent').length,0);
-  await act(async()=>view.unmount());
+test('current and monthly readers retain the saved analysis without an original-record entrance or fetch', async () => {
+  for (const historical of [false, true]) {
+    const stored = row();
+    const h = harness(async url => url.includes('/reports/') ? { item: stored } : latest());
+    const View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    const props = historical ? { reportId: stored.id, month: stored.snapshot_month } : {};
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(View, props)); });
+    assert(JSON.stringify(view.toJSON()).includes(projection.nodes[0].visible_label));
+    assert.equal(button(view, '根拠の記録を見る'), undefined);
+    assert(h.calls.every(call => !call[1].includes('/evidence')));
+    await act(async () => view.unmount());
+  }
 });
 
 test('history opens only the most recently selected month',async()=>{
@@ -240,7 +228,7 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   assert(!JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
   assert(!JSON.stringify(view.toJSON()).includes('根拠として結び付いた記録'));
   const latestCall=h.calls.find(c=>c[1].includes('/latest?ensure=true'));
-  assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v2');
   assert.equal(latestCall[2].timeoutMs,15000);
   assert(latestCall[1].includes('background=true'));
   assert.equal(latestCall[2].expectedUserId,owner);
@@ -268,7 +256,7 @@ test('current analysis opens automatically and has no routine update button',asy
     assert.equal(h.calls.length,1);
     assert(h.calls[0][1].endsWith('?ensure=true&background=true'));
     assert.equal(h.calls[0][2].expectedUserId,owner);
-    assert.equal(h.calls[0][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+    assert.equal(h.calls[0][2].headers['X-Watashi-Map-Renderer'],'semantic.v2');
     await act(async()=>view.unmount());
   }
 });
@@ -283,7 +271,7 @@ test('a failed update can be retried while a previously saved map remains visibl
   assert.equal(h.calls.length,2);
   assert(h.calls[1][1].endsWith('?ensure=true&background=true&force=true'));
   assert.equal(h.calls[1][2].expectedUserId,owner);
-  assert.equal(h.calls[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  assert.equal(h.calls[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v2');
   assert(!button(view,'更新を再試行'));
   await act(async()=>view.unmount());
 });

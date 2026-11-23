@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { buildWatashiMapV2ViewModel, NODE_LABELS } from './watashiMapV2Contract';
 import { readSemanticMapProjection } from './semanticMapContract';
 
@@ -11,7 +11,7 @@ export default function WatashiMapV2Renderer(props) {
   return <LegacyWatashiMapV2Renderer {...props} />;
 }
 
-function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false, onOpenEvidence }) {
+function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false }) {
   const model = useMemo(() => buildWatashiMapV2ViewModel(contentJson), [contentJson]);
   const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
   if (!model) return (
@@ -31,9 +31,6 @@ function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false, onOpe
             <Text style={styles.kind}>{NODE_LABELS[node.node_kind]}</Text>
             <Text style={styles.body}>{node.visible_label}</Text>
             <Text style={styles.subtle}>{node.evidence_badge_count}件の記録</Text>
-            {onOpenEvidence ? <TouchableOpacity accessibilityRole="button" style={styles.evidenceAction} onPress={() => onOpenEvidence(node.node_ref)}>
-              <Text style={styles.evidenceLabel}>根拠の記録を見る</Text>
-            </TouchableOpacity> : null}
           </View>
         ))}
       </View>
@@ -101,8 +98,6 @@ function makeStyles(colors, dark) {
     lane: { gap: 12 },
     card: { backgroundColor: paper, borderColor: border, borderWidth: 1, borderRadius: 24, padding: 20, gap: 8 },
     unknown: { backgroundColor: colors?.SURFACE_TONAL || paper },
-    evidenceAction: { minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start' },
-    evidenceLabel: { color: colors?.TITLE_GOLD || ink, fontSize: 15, lineHeight: 24, fontWeight: '600' },
     gap: { borderTopWidth: 1, borderColor: border, borderStyle: 'dashed', paddingTop: 8, marginTop: 8 },
     connection: { alignItems: 'stretch', paddingVertical: 6 },
     endpoint: { borderWidth: 1, borderColor: border, borderRadius: 8, padding: 10 },
