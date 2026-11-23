@@ -882,3 +882,7 @@ EmlisAIは補足として、根拠・観測・フォローを分ける案も実4
 EmlisAIは実4Bで応答14件を原文から読み直し、別の11件を対照例付きの一度の生成で比較した。故障と紛失を分ける例は得たが、原文にない強さや原因が残ったため、通常作者は保留。DeepInsightは前提と回答済みの根拠を分け、訂正を使う4条件を実4Bで期待どおりに判定した。わたしマップは、旧APIが関係線を欠く形式に変換した時だけ、同じ保存版の図を既存詳細から復元する互換修正を入れた。Pieceの通常経路は隔離回帰で確認した。本番配備・本番DB書き込み・アプリビルドは行っていない。 [設計と検証範囲](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-reader-and-map-compat-20261124)
 
 EmlisAIの保存済み観測用重み `10b56315` を、他の4B経路と分けて選ぶ[提供コード候補 `d16c5c7`](https://github.com/MassyuRed/mashos-api/commit/d16c5c73bd7f50e787c2ab01f4648bed47a50ffa)を追加した。採用前のベースとの実GPU比較と、通常の応答・保存・再読は残る。わたしマップの互換は本番変換コードから同じ保存版の関係線6本を再取得するところまで隔離で確認した。
+
+### 11.61 観測用の重みとベース4Bの対照準備（11/24 JST）
+
+通常のFree初回経路から架空4件の要求を作り、感情の強さと、本人が理由を明記したかの違いを同じ指示で比較できるようにした。4件の模擬本文を隔離DBで同版再読。観測用の重み `10b56315` と分析120uは、現在のPod上で保存原本との一致を確認した。EmlisAI・Piece・わたしマップ・DeepInsightに関わる隔離回帰581件が成功。本番API・ワーカーは `f91bba8` がLive、既存GPUのヘルスはHTTP 200。ベースと観測用の重みを使った実GPU比較は実行承認待ち。 [比較条件と判定する本文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v19-adapter-paired-trial-20261124)
