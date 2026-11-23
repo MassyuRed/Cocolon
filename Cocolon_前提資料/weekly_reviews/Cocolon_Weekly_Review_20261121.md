@@ -798,3 +798,7 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.48 本番で残った引用と出題の修正候補（11/23 JST）
 
 `f91bba8` に、EmlisAIの直接訂正v9と、DeepInsightの一意な訂正引用を既存の照合処理で確定してから独立検査へ渡す修正を揃えた。隔離環境の統合286件が通過した。次回は本人の一人称が実際の返答でも保持されるか、独立検査が出題・回答の保存まで進むかを確認する。 [詳細設計§9.254](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-quotation-and-reading-20261123) · [API検証候補 `f91bba8`](https://github.com/MassyuRed/mashos-api/commit/f91bba8e72d19de29d0294ded5b4f0c57636598f)
+
+11/23 JSTの配備前照合では、本番API・ワーカーは `6c409f4`、待機・実行中のDBジョブと未回答の記録由来DeepInsightは各0件。前回の架空アカウントはFreeを確認した。`f91bba8` の差分は実装2ファイルと対応テスト2ファイルで、既存GPUを使う。切り戻す場合は、新版で開始済みの未確定v9を旧版で再開できない点を確認する。 [詳細設計§9.254](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-quotation-and-reading-20261123)
+
+両CIが成功した。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45099186489) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45099186493)
