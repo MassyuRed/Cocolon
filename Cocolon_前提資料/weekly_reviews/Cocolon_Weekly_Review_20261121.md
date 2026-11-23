@@ -806,3 +806,7 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.49 `f91bba8` の本番配備（11/23 JST）
 
 本番ワーカー12:03:19・API12:04:05 JSTに同じ `f91bba8` がLive。公開ヘルスと新ワーカーのキュー照会はHTTP 200。許可済みの架空アカウントの既存セッションがなかったため、新しい試験は未送信。アカウントはFreeで、前回の非公開Pieceとマップの保存がDBに残ることを照合した。本人引用とDeepInsightの発行・回答の実4B確認は残る。 [補助設計§9.255](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-production-rollout-20261123)
+
+### 11.50 `f91bba8` の実4B再試験（11/23 JST）
+
+本番 `f91bba8` で本人認証付きの再試験を実行。EmlisAIは訂正「僕は嬉しかった」からv9の返答を非公開で保存し、同じ返答を再読した。感情の言い換えで、直接引用は未検証。DeepInsightは記録由来の発行1回を独立検査で見送り、発行・回答は各0件。架空アカウントはFreeに戻した。 わたしマップは自動更新の初回で新規保存し、本文・表示データ・根拠を確認した。 [補助設計§9.256](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-authenticated-retest-20261123)

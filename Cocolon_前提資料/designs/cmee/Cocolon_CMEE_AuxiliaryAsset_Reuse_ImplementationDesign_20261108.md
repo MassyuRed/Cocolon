@@ -9353,3 +9353,12 @@ DeepInsightは、本人訂正を引用する理由質問で、その引用が全
 Mashの承認後、両CIに成功した `f91bba8` をRenderのAPI・ワーカーに各1回、同じ完全SHAを指定して配備した。ワーカーは12:03:19、APIは12:04:05 JSTにLive。APIの `/healthz` と新ワーカーのSupabaseキュー照会はHTTP 200。GPUとDBスキーマの操作はなかった。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1qpgetlv9c73crnbsg) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1qpgcs728c73d654l0)
 
 認証付き再試験は、許可された既存の架空アカウントのセッションが新ワーカーになかったため、通常APIへの試験送信前で停止した。12:04:39 JSTの読み取りでは、架空アカウントはFree、有料権限0。今回の新規入力、訂正、Piece・利用枠消費、マップ、DeepInsight発行・回答は各0件。前回Pieceの非公開保存版2、本文と描画のハッシュ、対応する利用枠消費1件、および前回マップの本文・表示データ・根拠がDBにあることを照合した。新版の本人認証付き再読や、新しい実4Bの返答・出題を確認した結果ではない。
+
+<a id="cmee-f91-authenticated-retest-20261123"></a>
+## 9.256 本人認証付きの実4B再試験（11/23 JST）
+
+Mashの承認で、専用の架空アカウントにSupabase Authでメールを送らず1回ログインし、本人認証付きの通常APIを実行した。記録由来のDeepInsightは、Premiumで過去の本人訂正に重複がないことを照合して発行を1回送った。12:12:27 JSTにHTTP 200 `no_question`、本番ログは `rejected stage=reader`。発行・回答は各0件。ログから、独立検査で使われた出典・プロンプト分岐・不合格条件までは確定できない。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1qpgetlv9c73crnbsg)
+
+EmlisAIは一時Plusで新規非公開入力1件を作成した。初回の質問は0件。本人の訂正「僕は嬉しかった」を1回保存し、実4Bのv9は「嬉しかったとのこと、ありがとうございます。」と返した。受領1件と同じ確定本文の再読を確認した。感情は保持され、前回の一人称の差し替えは現れなかった。今回は引用を使わない返答のため、字面を保つ引用の本番確認は残る。試験アカウントはFreeへ復元し、今回のセッションからサインアウトした。
+
+わたしマップは非公開入力に伴う通常の自動更新が初回試行で完了し、12:15:12 JSTにFreeの新しいレポートを保存した。Supabaseで同じ保存対象の本文・図の表示データ・根拠を再読した。新規Pieceと利用枠消費は各0件で、前回の非公開版を保持している。
