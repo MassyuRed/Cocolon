@@ -272,6 +272,8 @@
 
 **11/23 JSTの通常初回の品質確認。** 現行 `f91bba8` の実4Bで架空3題材×三プランを比較した。8件はメモリ上で同じ本文を再読し、1件は本文内の問いで採用を見送った。関連履歴がある題材ではPlusは本文なし、Premiumは過去を今回の感情の原因として補った。通常の観測・フォローと、根拠のあるプラン差を最優先にする。 [出力全文と試験範囲](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-current-initial-quality-20261123)
 
+**11/23 JSTの初版条件と通常初回の候補。** Emlisの敬語での観測と具体的な共感を最優先。Freeは今回、Plusは関連履歴を含む本人への理解、Premiumは加えてわたしマップを踏まえる。Free・Plusを初版の必須とし、Premiumは日程と品質が揃う場合に含める。候補 `043eb61` の実4Bは12件の本文取得とメモリ再読が一致し、一題材でPlusの履歴言及を確認。自然さ、原文にない事情の混入、有料のフォローの深さに改善が必要で、本番配備前。 [全出力と評価](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-initial-reply-release-priority-20261123)
+
 **11/23 JSTの最新本番配備と再試験。** RenderのAPI・ワーカーは同じ `f91bba8` でLive。本番 `f91bba8` で本人認証付きの再試験を実行。EmlisAIは訂正「僕は嬉しかった」からv9の返答を非公開で保存し、同じ返答を再読した。感情の言い換えで、直接引用は未検証。DeepInsightは記録由来の発行1回を独立検査で見送り、発行・回答は各0件。架空アカウントはFreeに戻した。 わたしマップは自動更新の初回で新規保存した。 [補助設計§9.256](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-authenticated-retest-20261123) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1qpgetlv9c73crnbsg)
 
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
