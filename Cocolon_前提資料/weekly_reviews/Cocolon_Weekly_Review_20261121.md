@@ -818,3 +818,5 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.52 観測応答の段階差と初版の条件（11/23 JST）
 
 通常の初回で、短い観測からEmlis自身の具体的な共感へ進む。敬語と「Emlis」の一人称を揃える。Freeは今回、Plusは今回と関連履歴、Premiumはさらにわたしマップを参照する。Free・Plusを初版の必須とし、Premiumは品質と日程が揃い次第。訂正の初版表示は完成度を見て判断する。候補 `043eb61` は架空4題材・12件で本文の取得とメモリ再読一致。Plusは一題材で履歴に言及したが、当回へのフォローの深さは同文。宅配の題材では原文にない事情が混ざった。初回本文をMashと合わせてから回答後・スキップ時、三中核を確認して通常反映する。 [全出力と評価](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-initial-reply-release-priority-20261123)
+
+Mashは期限の題材DのFree全文を品質の見本にし、Plus・Premiumの履歴に触れる一文も了承した。有料プランは、その参照を今日かける具体的な共感の言葉に生かして初めて合格とする。Plusは関係する履歴、Premiumはさらにわたしマップを使ってフォローの深さを出す。 [三プランの定義と合格基準](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-three-plan-support-quality-20261123)
