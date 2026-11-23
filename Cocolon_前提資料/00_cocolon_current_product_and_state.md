@@ -270,6 +270,8 @@
 
 **11/23 JSTの最新稼働。** RenderのAPI・ワーカーは `6c409f4`。既存GPUで本番再試験を実行した。訂正済み原文から非公開Pieceを1件新規保存し、Freeに戻した後も同じ版の本文・描画データを再読。マップは通常の初回自動試行で11件中9件を反映し、図と本文に内部参照がなく、別の訂正を根拠ごとに保持した。EmlisAIのv8は生成指示を出さなかったが、訂正後の引用で「僕」を「私」に変えた。DeepInsightは出題前の独立検査で見送り、発行・回答0件。 [詳細設計§9.253](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-6c409f4-direct-correction-live-20261123) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1po07f3r2c73dd69rg) · [ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1po0ajnfac739e2s30)
 
+**11/23 JSTの後続候補。** EmlisAIの直接訂正で今回の原文を引用どおりに保つv9と、DeepInsightの一意な訂正引用を独立検査前に照合する修正を `f91bba8` にまとめた。両機能と連携先を含む隔離検査286件が通過した。実4Bでの確認と配備は未実施。 [詳細設計§9.254](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-quotation-and-reading-20261123) · [API検証候補 `f91bba8`](https://github.com/MassyuRed/mashos-api/commit/f91bba8e72d19de29d0294ded5b4f0c57636598f)
+
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
 Cocolonは、本人と他者の人間情報を観測できる形として外側へ出し、自己理解・他者理解・発信を支えるサービスである。一回のEmlis応答だけで、アプリ全体の需要・商品価値を完結して評価しない。

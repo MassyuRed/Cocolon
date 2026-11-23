@@ -793,3 +793,8 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.47 訂正後のPiece新規保存と通常マップの確認（11/23 JST）
 
 両CI成功と稼働中ジョブがないことを確認し、`6c409f4` を既存GPUのままRenderのAPI・ワーカーへ反映した。同じ架空アカウントで、以前の訂正からPieceを1件新規非公開保存し、Freeに戻した後の同一ID・同版再読と新規消費1件を確認。マップは最初の自動試行で図と本文を保存し、11件中9件を反映した。前回の内部参照は現れず、別々の原文の訂正を分けて保持した。EmlisAIのv8では引用内の「僕」が「私」に変わった。DeepInsightは出題計画を通過した後の独立検査で止まり、発行・回答は各0件。 [詳細設計§9.253](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-6c409f4-direct-correction-live-20261123) · [候補](https://github.com/MassyuRed/mashos-api/commit/6c409f4edc08682f8b3ef3d431fd66d9b998b4ce)
+
+<a id="cmee-f91-quotation-and-reading-20261123"></a>
+### 11.48 本番で残った引用と出題の修正候補（11/23 JST）
+
+`f91bba8` に、EmlisAIの直接訂正v9と、DeepInsightの一意な訂正引用を既存の照合処理で確定してから独立検査へ渡す修正を揃えた。隔離環境の統合286件が通過した。次回は本人の一人称が実際の返答でも保持されるか、独立検査が出題・回答の保存まで進むかを確認する。 [詳細設計§9.254](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-quotation-and-reading-20261123) · [API検証候補 `f91bba8`](https://github.com/MassyuRed/mashos-api/commit/f91bba8e72d19de29d0294ded5b4f0c57636598f)
