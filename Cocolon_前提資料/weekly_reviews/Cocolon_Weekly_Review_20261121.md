@@ -850,3 +850,5 @@ Mashが実在の相手に問いを重ねると、答えに応じて次の問い�
 ### 11.56 EmlisAIとわたしマップを華恋の理論で作る（11/23 JST）
 
 Mashの観測能力のトレースは終了。過去の自己分析・観測の設計、構造辞書、Karen-Diary、Mash提供の六編と過去の対話、実際に二人に渡した分析の文章を基に、華恋の観測理論・構造分析理論を整理した。Emlisは本人が今日何を大切にしたかを読んで自分の言葉で共感を返す。わたしマップは場面別の役割・思考・行動を足場として、その人が選ぶ際に重く見る基準を最大三つ、条件と結論で返す。構造の観測、比喩を使った伝え方、過去の材料の採否、今後の確認箇所は[理論本文](../designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md)と[補助経路の詳細設計§9.262](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#karen-observation-theory-20261123)へ引き継いだ。
+
+この理論をEmlisの通常スレッド用の生成候補と、わたしマップの主要構造の生成・表示に実装した。Emlisは実4Bを5候補・計31件で比較。ラジオの例ではFreeは今日の喜び、Plusは前回は雑音しか聞こえなかったことと、今日初めて音楽が流れた喜びを結んだ。同じ参照材料のPremiumはPlusと全文一致した。スキップ時の内面の補完と、回答後の不自然な重複が残る。わたしマップの実4Bは同じ架空2記録で最終分析を2回。修正版は判断に関わる違いを拾ったものの、本人が重視したことを結論にできず、不合格。原本を修正後の受領処理に通し、同じ見出しと結論を公開しないことまで確認した。両回とも通常GPUを復元し、停止前と同じ通常応答を確認した。本番の継続設定・配布は変更していない。[比較した全入力・全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md)・[設計・実装箇所・残件](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#karen-observation-theory-20261123)
