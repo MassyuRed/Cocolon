@@ -1,3 +1,8 @@
+<a id="cmee-follow-up-live-quality-20261123"></a>
+### 11/23 — 直接訂正の返答から生成指示を除く
+
+`cocolon_meaning_experience_engine/natural_reply.py` の後続候補は、当回の直接訂正を本人に話しかける文として返す指示をv8で使う。実4Bのv6が返した指示文の一節を、新しいv8では保存前に検出する。本人の気持ちとしての引用と自然な言い換えは受け付ける。既存のv5・v6の受領済み本文は当時の指示と照合し、同じ本文で再読できる。 [補助経路の詳細設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-follow-up-live-quality-20261123)
+
 <a id="paid-initial-feeling-scope-20261123"></a>
 ### 11/23 — 有料プランの短い初回返答と本人の訂正範囲
 

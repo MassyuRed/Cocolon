@@ -783,3 +783,8 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.45 CMEE通常経路の本番確認（11/23 JST）
 
 `ffa4185` は両CI成功後にGPU・Renderの本番APIとワーカーへ配備した。わたしマップは最初の自動試行で新規保存。10件中8件を反映し、図・本文・訂正後の根拠を同じIDで読み戻した。通知予約1件のジョブは完了した。別々の出典を持つ同文の行動と訂正は、日付を付けて区別した。図の2項目と本文に `n3.u1`、`n7.u1` が残った。EmlisAIは今回の原文から直接訂正し、同じ版で再読した。訂正返信の後半には生成指示が残った。Pieceは同じ非公開版の詳細と書き出しを読み戻した。DeepInsightは出題計画の検査で停止し、発行・回答は各0件。架空アカウントはFreeに復元した。 [詳細設計§9.251](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-ffa4185-normal-live-verification-20261123) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1p2uifngtc7388r4qg) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1p2uqfngtc7388r5ug) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45089216680) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45089216618)
+
+<a id="cmee-follow-up-live-quality-20261123"></a>
+### 11.46 CMEE通常経路の後続候補（11/23 JST）
+
+`6c409f4` に、EmlisAIの返答中の生成指示、わたしマップの要約に残る内部参照、Pieceへの確定済み直接訂正の引き継ぎ、DeepInsightの出典計画と拒否理由をまとめた。統合検査341件と主要経路の検査1件に成功した。次の実4Bでは、返答の自然さ、Pieceの新規非公開保存・画像用データの再読、出題・回答、マップの保存版を照合する。 [詳細設計§9.252](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-follow-up-live-quality-20261123) · [検証候補 `6c409f4`](https://github.com/MassyuRed/mashos-api/commit/6c409f4edc08682f8b3ef3d431fd66d9b998b4ce) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45094834336) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45094834373)

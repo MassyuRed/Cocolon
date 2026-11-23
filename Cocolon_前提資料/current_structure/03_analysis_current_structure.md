@@ -1,3 +1,10 @@
+<a id="cmee-follow-up-live-quality-20261123"></a>
+### 11/23 — 項目の内部参照とDeepInsightの出典計画
+
+通常のv24は同文の別記録を日付付きで保存できた。図・本文の要約に現れた `n3.u1`、`n7.u1` について、候補の表示処理は本人の根拠に存在しない単独の参照を省き、同じ項目の確認済み事実を使う。持っている原文の引用や受領記録は保持する。
+
+DeepInsightの記録からの出題は、本人訂正の正確な出典キー・引用範囲を計画の指示で明示する。別々の元記録が同文の訂正だけで区別できないときは見送る。通常の保存に進むには従来の根拠照合と読み直しも必要。 [ファイル地図](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#cmee-follow-up-live-quality-20261123)
+
 <a id="analysis-v24-dated-identical-sources-20261123"></a>
 ### 11/23 — わたしマップv24で同文の行動と訂正を元記録ごとに表示
 

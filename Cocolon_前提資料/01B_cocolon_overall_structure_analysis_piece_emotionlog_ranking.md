@@ -1,3 +1,14 @@
+<a id="cmee-follow-up-live-quality-20261123"></a>
+### 11/23　通常の訂正が図・Piece・問いに渡るファイル地図
+
+| 既存ファイル | 検証候補の差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 単独v24の要約に現れた根拠外の単独内部参照を省き、同じ根拠の確認済み事実を表示する。 |
+| `ai/services/ai_inference/piece_v2_source_adapter.py`、`cocolon_meaning_experience_engine/piece_refined.py`、`cocolon_meaning_experience_engine/preparation_sources.py` | 保存済みの直接訂正を、同じ訂正IDと原文範囲を照合して通常Pieceの文章化・保存へ渡す。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/deep_insight_question.py`、`api_deep_insight.py` | 本人訂正を使う出題計画の出典・引用を照合する。本文や識別子を含めず拒否理由を記録する。 |
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存の図・Piece・問いの入り口に接続する。 [補助経路の詳細設計](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-follow-up-live-quality-20261123)
+
 <a id="analysis-v24-dated-identical-source-files-20261123"></a>
 ### 11/23　わたしマップv24の同文と出典記録を扱うファイル地図
 
