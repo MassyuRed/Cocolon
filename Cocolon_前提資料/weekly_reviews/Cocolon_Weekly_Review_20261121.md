@@ -898,3 +898,15 @@ RTX A5000の新Pod `i9owv8jwfldd6w` で、固定Qwen3.5-4B `851bf6e` の11ファ
 既存の分析用・自然応答用キーはMashの承認を受け、暗号化したまま旧Podから新Podへ移した。公開HTTPSの各経路で無資格・別経路のキーは401、対応するキーでGETは405。既存のJupyter認証も確認した。Renderでは接続先2項目だけを更新し、ワーカーは07:44:26、APIは07:47:09 JSTに同じ `f91bba8` でLive。ワーカーの稼働環境からA5000の両経路に認証付きGETを送って405、公開APIのヘルスも正常。旧RTX 4000 Adaは従来プロセスのヘルスHTTP 200を確認し、切り戻し用に稼働を維持した。切替に使った新PodのWeb Terminalは停止済み。本番DBへの新規試験保存は行っていない。
 
 前回送付したEmlisAI比較コードはRTX 4000 Adaの総メモリを前提とする。A5000での比較には同じ架空4件・生成条件を維持した機種判定の更新が必要。観測用重みとベース4Bの実比較は未実行。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc2c41t6e07s73c4m3tg) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc2c3559fdbs73b5mosg)
+
+<a id="cmee-a5000-ordinary-recheck-20261124"></a>
+
+### 11.63 A5000切替後の本番保存・同版再読（11/24 JST）
+
+Mashの承認を受け、既存の架空試験所有者で通常経路を1回確認した。EmlisAIは本人認証付き通常APIから非公開入力1件と返答を保存し、同じスレッド・版・本文を再読した。Pieceは同じ入力から非公開で1件保存し、詳細・書き出し・履歴の本文、描画データ、版が一致し、利用枠は1件だけ増えた。DeepInsightは既存の問いと回答を通常APIで再読した。試験所有者はFree。メール送信・プラン変更・新規出題は行っていない。 EmlisAIが保存した返答の受領情報は `cocolon-qwen35-4b-base-851bf6e`、再読は版4。Pieceは版2。
+
+切替済み本番ワーカーからA5000のわたしマップv24のPLANはHTTP 200で受信した。CMEEの過去回答と元記録の根拠照合 `analysis_semantic_plan_received_answer_scope_invalid` で失敗した。08:14:44 JSTに同一ジョブの自動8回目が失敗で終わり、新規保存0件。関連の待機・実行中ジョブは0件。旧RTX 4000 Adaで同じ所有者を試した際にも同じ判定を記録している。 [補助設計§9.247](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-production-followthrough-20261123)
+
+保存済みEmlisAI観測用 `10b56315` とPiece用 `344a9def` の重み・構成4ファイルをA5000に置き、保存原本のバイト数とSHA-256を照合した。同じ架空4件、最大8応答、5分のA5000用比較コードを配置した。比較は未実行で、候補重みは本番提供に適用していない。Runpod上のA5000に永続ボリュームはなく、停止・再初期化時は保管した通常復元と作業用資材で復元する。
+
+本番API・ワーカーの両方でA5000の接続先を確認した。旧RTX 4000 Adaは稼働中で、検証中に旧モデル窓口への接続は0件だった。
