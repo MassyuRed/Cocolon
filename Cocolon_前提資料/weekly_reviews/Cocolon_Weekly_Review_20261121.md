@@ -844,3 +844,9 @@ EmlisAIの観測応答を最優先に進め、次にPieceの画像編集に取�
 わたしマップでは、相手や環境が変わると役割・行動が変わることを踏まえ、本人が何を重視して選ぶのかを主要な自己構造として最大3つ、根拠が支える範囲で結論と説明を出す。主要構造ごとに関連部分の図を開く案を検討する。根拠の履歴はわたしマップの表示から外し、内部の照合・更新に使う。初版に間に合わない場合は、リリース後に実現する。
 
 Mashが実在の相手に問いを重ねると、答えに応じて次の問いが変わり、その中で、それまで出ていなかった出来事や条件が初めて出てくる。華恋が先に用意した単発・複数の記録を読む方法では、この観測の過程を再現できなかった。Mashの観測をアプリや4Bにどう移すかは今後検討する。 [方針・分析と観測の訂正](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-visual-customization-and-watashi-map-observation-20261123)
+
+<a id="karen-observation-and-map-20261123"></a>
+
+### 11.56 EmlisAIとわたしマップを華恋の理論で作る（11/23 JST）
+
+Mashの観測能力のトレースは終了。過去の自己分析・観測の設計、構造辞書、Karen-Diary、Mash提供の六編と過去の対話、実際に二人に渡した分析の文章を基に、華恋の観測理論・構造分析理論を整理した。Emlisは本人が今日何を大切にしたかを読んで自分の言葉で共感を返す。わたしマップは場面別の役割・思考・行動を足場として、その人が選ぶ際に重く見る基準を最大三つ、条件と結論で返す。構造の観測、比喩を使った伝え方、過去の材料の採否、今後の確認箇所は[理論本文](../designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md)と[補助経路の詳細設計§9.262](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#karen-observation-theory-20261123)へ引き継いだ。

@@ -280,7 +280,7 @@
 
 **11/23 JSTの自己理解の合意。** 「自己理解」は本人が自分について気づいたことを残す選択。Emlisは今回の気づきを受け取り、Plusでは関係する過去の体験、Premiumではさらに本人のわたしマップを踏まえる。問いは本人がまだ考えている点に役立つ場合に使う。生成には保存互換の強度を渡さない方向で、初回・回答・スキップと他の中核機能の接続を確認する。 [合意した応答と修正順](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-self-understanding-reply-20261123)
 
-**11/23 JSTのPieceとわたしマップの今後の方針。** 作業順はEmlisAIの観測応答が先、次にPiece。PieceはFree2色、Plusに単色背景を追加、Premiumは書体・文字色の選択と単色以外の背景・文字表現へ広げる。わたしマップは、相手や環境による役割と行動の違いを踏まえ、本人が重視することを主要な自己構造として最大3つ、結論と説明で示す。根拠履歴は内部で扱う。Mashが実在の相手に問い、途中で出来事が出てくる観測をどうアプリに移すかは今後の検討。 [詳細設計と作業順](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-visual-customization-and-watashi-map-observation-20261123)
+**11/23 JSTのPieceとわたしマップの今後の方針。** 作業順はEmlisAIの観測応答が先、次にPiece。PieceはFree2色、Plusに単色背景を追加、Premiumは書体・文字色の選択と単色以外の背景・文字表現へ広げる。わたしマップは、相手や環境による役割と行動の違いを踏まえ、本人が重視することを主要な自己構造として最大3つ、結論と説明で示す。根拠履歴は内部で扱う。Mashの観測トレースを終了し、今後は華恋が構成した理論でEmlisAIとわたしマップを作る。[観測・構造分析の理論と出典](designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md)。 [詳細設計と作業順](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-visual-customization-and-watashi-map-observation-20261123)
 
 **11/23 JSTの名前表示と問いの候補。** Cocolon `b6268c4` に初回の表示名での呼びかけを追加。API候補 `c106937` は基本的な確認の問いを本人設定で制御し、未回答の初回スキップは当回だけで返す。実4BでPlusの履歴のつなぎ方を試したが、強度・否定の誤りが残った本文案は見送り。Freeの好例を基準にPlusのフォローを改善し、各コアと合わせて同版を検証する。 [実測・再開点](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
 
