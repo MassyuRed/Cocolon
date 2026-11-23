@@ -1,4 +1,4 @@
-> **11/24 JST・A5000でEmlisAIの観測用の重みを実比較。** 架空4件のベース4Bと観測用重みの実応答8件を隔離DBで保存し、同版・同本文を非生成で再読。本人の好みと明記した安堵の理由が両系統で変わる例があり、観測用重みは通常採用を見送った。直前の本番再確認ではEmlisAI・Pieceの新規保存と同版再読、DeepInsightの既存の問いと回答の再読を確認。わたしマップは新規保存0件。本番API・ワーカーはA5000に接続する `f91bba8`。 [議事録§11.63–64](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-ordinary-recheck-20261124)
+> **11/24 JST・A5000でEmlisAIの観測応答を2回比較。** 架空4件のベース4Bと観測用重みの実応答8件、改稿指示の4件は隔離DBで同版再読。改稿指示は明記された安堵の理由を保った例がある一方、理由のない場合の補完と好みの誇張が残り、今回の両候補は通常採用を見送った。わたしマップとDeepInsightの修正候補はGitHubへ保存済み。本番API・ワーカーはA5000に接続する `f91bba8`。 [議事録§11.64–65](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-reply-quality-20261124)
 
 > **11/21 JST・第12回報告会を終了。** [11/21〜11/28の議事録](weekly_reviews/Cocolon_Weekly_Review_20261121.md)に成果、課題、次週の優先順位、全体評価63.375％、公開見通し、[わたしを知る問い](weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)などの採用方針を記録。公開日未定・12/6提出可能候補を継承。Mashの指示で、こころグラフの文章レポート廃止から作業を再開した。
 
