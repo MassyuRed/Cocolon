@@ -278,6 +278,8 @@
 
 **11/23 JSTの観測応答・問いの合意。** 感情強度は共感の言葉の温度、カテゴリは話題の理解に使い、自然な箇所で本人の表示名に「さん」を付ける。問いを通常応答と一体で扱う。EmlisAIの通常応答を最優先に、Piece・わたしマップ・DeepInsightの整合を並行確認する。Premiumのこころグラフ参照は、本人の実記録と今回とのつながりをフォローに生かす設計案。 [決定と検証の引継ぎ](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
 
+**11/23 JSTの名前表示と問いの候補。** Cocolon `b6268c4` に初回の表示名での呼びかけを追加。API候補 `c106937` は基本的な確認の問いを本人設定で制御し、未回答の初回スキップは当回だけで返す。実4BでPlusの履歴のつなぎ方を試したが、強度・否定の誤りが残った本文案は見送り。Freeの好例を基準にPlusのフォローを改善し、各コアと合わせて同版を検証する。 [実測・再開点](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
+
 **11/23 JSTの最新本番配備と再試験。** RenderのAPI・ワーカーは同じ `f91bba8` でLive。本番 `f91bba8` で本人認証付きの再試験を実行。EmlisAIは訂正「僕は嬉しかった」からv9の返答を非公開で保存し、同じ返答を再読した。感情の言い換えで、直接引用は未検証。DeepInsightは記録由来の発行1回を独立検査で見送り、発行・回答は各0件。架空アカウントはFreeに戻した。 わたしマップは自動更新の初回で新規保存した。 [補助設計§9.256](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-authenticated-retest-20261123) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1qpgetlv9c73crnbsg)
 
 **11/7報告会の方針（履歴、分析の初回本人表示は後続で成立済み）：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。

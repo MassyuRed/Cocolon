@@ -826,3 +826,5 @@ Mashは期限の題材DのFree全文を品質の見本にし、Plus・Premiumの
 Mashが三プランの体験とフォローの合格基準を確認した。感情の強度は言葉の温度、カテゴリは話題の理解に使い、自然な場面で本人の表示名に「さん」を添える。観測応答と問いを一体として扱い、オン・オフ、回答後、スキップまで確認する。EmlisAIを最優先に進めながら、Piece・わたしマップ・DeepInsightの根拠、保存・再読を並行して確かめる。
 
 Premiumでは履歴とわたしマップに加え、こころグラフの先行記録や昨日からの違いを今日のフォローに生かす案を検討する。記録が十分な場合の最近の傾向も対象。グラフ閲覧は全プラン共通。初版必須はFreeとPlus。 [決定と検証の引継ぎ](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
+
+アプリ開発版 `b6268c4` に初回の「表示名＋さん」の呼びかけを追加。アプリCI成功、端末配布前。実4BではPlusが以前の安堵も踏まえた一方、気持ちの強さの根拠なし比較や、問いオンでの否定の取り違えがあったため、その本文候補は見送った。API候補 `c106937` は初回の確認の問いを有料履歴の設定から分離し、初回の未回答スキップを元入力だけでフォローする経路へ接続した。本番反映前。 [実測・再開点](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-reply-question-intensity-and-graph-20261123)
