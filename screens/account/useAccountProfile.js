@@ -30,7 +30,7 @@ async function checkDisplayNameAvailability(candidate, options) {
 }
 
 export function useAccountProfile({ user, targetUserId, isSelf }) {
-  const { authOwnerGeneration } = useAuth();
+  const { authOwnerGeneration, rememberOwnDisplayName } = useAuth();
   const ownerRequestRef = useRef(null);
   const [displayName, setDisplayName] = useState("");
   const [shareCode, setShareCode] = useState("");
@@ -162,6 +162,9 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
       // current-session metadata write could target an account switched to
       // while this profile request was pending.
       const resolvedDisplayName = normalizeDisplayName(json?.display_name || nextName);
+      if (json?.user_id === user.id) {
+        rememberOwnDisplayName?.(user.id, authOwnerGeneration, json.display_name);
+      }
       setDisplayName(resolvedDisplayName || nextName);
       setNameDraft(resolvedDisplayName || nextName);
       setNameEditOpen(false);

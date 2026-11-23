@@ -405,6 +405,32 @@ test('refinement failure shows old observation as historical and retry only when
   await act(async () => root.unmount());
 });
 
+test('the current first reply uses a separate salutation and preserves the selectable reply', async () => {
+  const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
+  Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x } });
+  const { default: Modal, initialObservationSalutation } = load('screens/input/EmlisThreadModal.js', {
+    'react-native': native,
+    '../../components/CocolonButton': props => React.createElement('Button', props, props.children),
+  });
+  const dto = correctionDTO();
+  const original = { ...dto.current_observation, kind: 'OBSERVATION', stage: 'INITIAL', round_index: 0, is_current: true };
+  dto.timeline = [original];
+  assert.equal(initialObservationSalutation(dto, 'ゲスト'), '');
+  assert.equal(initialObservationSalutation(dto, 'ミナ'), 'ミナさん、');
+  let root;
+  const thread = { visible: true, dto, draft: '' };
+  await act(async () => { root = Renderer.create(React.createElement(Modal, { thread, colors: {}, displayName: 'ミナさん' })); });
+  const name = root.root.findAllByType('Text').filter(x => x.props.children === 'ミナさん、');
+  assert.equal(name.length, 1);
+  assert.equal(name[0].props.selectable, undefined);
+  assert.ok(root.root.findAllByType('Text').some(x => x.props.selectable && x.props.children === original.text));
+  for (const [stage, round] of [['REFINED', 1], ['CORRECTED', 0], ['INITIAL', 1]]) {
+    const event = { ...original, stage, round_index: round };
+    assert.equal(initialObservationSalutation({ ...dto, timeline: [event] }, 'ミナ'), '');
+  }
+  await act(async () => root.unmount());
+});
+
 test('original record fallback keeps thought and action labels paired with their exact source text', async () => {
   const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
   Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x } });

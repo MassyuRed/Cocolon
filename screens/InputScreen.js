@@ -141,7 +141,7 @@ function buildSavedPieceInput(savedInputId, expectedUserId) {
 export default function InputScreen({ navigation, route, onInitialInputSettled, appStartupReady = true, saveRecovery }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
-  const { session } = useAuth();
+  const { session, accountDisplayName } = useAuth();
   const {
     isTutorialMode,
     tutorialFlagsLoaded,
@@ -1306,7 +1306,7 @@ ${String(error?.message || error)}`
 />
 
       <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation} userId={currentUserId}
-        pieceEnabled={piecePreviewEnabled} />
+        pieceEnabled={piecePreviewEnabled} displayName={accountDisplayName} />
       <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}

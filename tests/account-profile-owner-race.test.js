@@ -12,6 +12,7 @@ const strip = source => source.replace(/^import\s[\s\S]*?;\r?\n/gm, '').replace(
 // session, fetch and native hooks are substituted; no real account/IO is used.
 function transport(owner = 'A') {
   const gets = [], writes = [];
+  const profileNames = new Map();
   let current = owner;
   const session = id => id ? { user: { id }, access_token: 'synthetic-' + id } : null;
   const auth = { getSession: async () => ({ data: { session: session(current) } }) };
@@ -20,12 +21,15 @@ function transport(owner = 'A') {
     const owner = String(options.headers.Authorization || '').replace('Bearer synthetic-', '');
     if (options.method === 'GET') {
       const pending = deferred(); gets.push({ ...pending, owner, signal: options.signal });
-      return pending.promise.then(response);
+      return pending.promise.then(profile => {
+        profileNames.set(owner, profile.display_name);
+        return response(profile);
+      });
     }
     const body = JSON.parse(options.body);
     writes.push({ owner, body });
     if (body.push_token === null && api.holdClear) return api.holdClear.promise.then(response);
-    return response(body);
+    return response({ ...body, user_id: owner, display_name: body.display_name ?? profileNames.get(owner) });
   };
   const bindings = { Platform: { OS: 'android' }, supabase: { auth }, readRuntimeApiBaseUrl: () => 'https://example.test',
     captureApiError() {}, fetch, AbortController,
@@ -109,6 +113,30 @@ test('signout aborts the in-flight profile initialization', async () => {
   p.switchTo(null); old.resolve({ display_name: null }); await p.settle();
   assert.equal(old.signal.aborted, true); assert.equal(p.api.writes.length, 0);
   assert.equal(p.value.session, null);
+});
+
+test('the canonical display name follows the current owner and same-owner rename', async () => {
+  const p = authProvider('A'); await p.settle();
+  const oldGeneration = p.value.authOwnerGeneration;
+  p.api.gets[0].resolve({ display_name: 'A-name' }); await p.settle();
+  assert.equal(p.value.accountDisplayName, 'A-name');
+  p.value.rememberOwnDisplayName('A', oldGeneration, 'A-renamed'); await p.settle();
+  assert.equal(p.value.accountDisplayName, 'A-renamed');
+
+  p.switchTo('B'); await p.settle();
+  assert.equal(p.value.accountDisplayName, '');
+  p.switchTo('A'); await p.settle();
+  p.value.rememberOwnDisplayName('A', oldGeneration, 'old name'); await p.settle();
+  assert.equal(p.value.accountDisplayName, '');
+  p.api.gets.at(-1).resolve({ display_name: 'A-current' }); await p.settle();
+  assert.equal(p.value.accountDisplayName, 'A-current');
+});
+
+test('a slow profile initialization cannot overwrite a completed rename', async () => {
+  const p = authProvider('A'); await p.settle();
+  p.value.rememberOwnDisplayName('A', p.value.authOwnerGeneration, 'Renamed-A');
+  p.api.gets[0].resolve({ display_name: 'Stale-A' }); await p.settle();
+  assert.equal(p.value.accountDisplayName, 'Renamed-A');
 });
 
 for (const failed of [false, true]) test(`late initial session ${failed ? 'failure' : 'success'} cannot undo a newer auth event`, async () => {
