@@ -788,3 +788,8 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.46 CMEE通常経路の後続候補（11/23 JST）
 
 `6c409f4` に、EmlisAIの返答中の生成指示、わたしマップの要約に残る内部参照、Pieceへの確定済み直接訂正の引き継ぎ、DeepInsightの出典計画と拒否理由をまとめた。統合検査341件と主要経路の検査1件に成功した。次の実4Bでは、返答の自然さ、Pieceの新規非公開保存・画像用データの再読、出題・回答、マップの保存版を照合する。 [詳細設計§9.252](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-follow-up-live-quality-20261123) · [検証候補 `6c409f4`](https://github.com/MassyuRed/mashos-api/commit/6c409f4edc08682f8b3ef3d431fd66d9b998b4ce) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45094834336) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45094834373)
+
+<a id="cmee-6c409f4-direct-correction-live-20261123"></a>
+### 11.47 訂正後のPiece新規保存と通常マップの確認（11/23 JST）
+
+両CI成功と稼働中ジョブがないことを確認し、`6c409f4` を既存GPUのままRenderのAPI・ワーカーへ反映した。同じ架空アカウントで、以前の訂正からPieceを1件新規非公開保存し、Freeに戻した後の同一ID・同版再読と新規消費1件を確認。マップは最初の自動試行で図と本文を保存し、11件中9件を反映した。前回の内部参照は現れず、別々の原文の訂正を分けて保持した。EmlisAIのv8では引用内の「僕」が「私」に変わった。DeepInsightは出題計画を通過した後の独立検査で止まり、発行・回答は各0件。 [詳細設計§9.253](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-6c409f4-direct-correction-live-20261123) · [候補](https://github.com/MassyuRed/mashos-api/commit/6c409f4edc08682f8b3ef3d431fd66d9b998b4ce)
