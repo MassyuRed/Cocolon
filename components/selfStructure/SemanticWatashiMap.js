@@ -100,15 +100,6 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
     }
   };
   return <View testID="watashi-map-v3" style={styles.root}>
-    <View style={styles.intro}>
-      <Text style={styles.eyebrow}>記録をつないで見えること</Text>
-      <Text style={styles.title} accessibilityRole="header">{projection.overview.title}</Text>
-      <Text style={styles.overview} numberOfLines={structures ? undefined : 3}>{projection.overview.summary}</Text>
-      <TouchableOpacity testID="semantic-overview-open" accessibilityRole="button"
-        style={styles.secondaryAction} onPress={() => choose('overview', 'overview')}>
-        <Text style={styles.actionLabel}>全体の読みを開く</Text>
-      </TouchableOpacity>
-    </View>
     {structures?.map((structure, index) => {
       const expanded = expandedStructure?.projectionOf === projection.projection_of && expandedStructure.index === index;
       return <View key={index} style={styles.structure}>
@@ -125,6 +116,15 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
           styles={styles} colors={colors} choose={choose} /> : null}
       </View>;
     })}
+    <View style={styles.intro}>
+      <Text style={styles.eyebrow}>記録をつないで見えること</Text>
+      <Text style={styles.title} accessibilityRole="header">{projection.overview.title}</Text>
+      <Text style={styles.overview} numberOfLines={3}>{projection.overview.summary}</Text>
+      <TouchableOpacity testID="semantic-overview-open" accessibilityRole="button"
+        style={styles.secondaryAction} onPress={() => choose('overview', 'overview')}>
+        <Text style={styles.actionLabel}>全体の読みを開く</Text>
+      </TouchableOpacity>
+    </View>
     {!structures ? <Text style={styles.hint}>気になるところや線のことばをタップすると、詳しく読めます。</Text> : null}
     {!structures ? <SemanticMapDiagram projection={projection} colors={colors} styles={styles} choose={choose} /> : null}
     <TouchableOpacity accessibilityRole="button" accessibilityState={{ expanded: linear }}

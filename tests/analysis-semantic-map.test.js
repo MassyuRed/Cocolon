@@ -150,6 +150,10 @@ test('primary structures show the analysis and expand only the selected, explici
   const Map = loadRenderer();
   let view;
   await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: map })); });
+  const headings = view.root.findAllByType('Text').filter(node => node.props.accessibilityRole === 'header');
+  assert.deepEqual(headings.map(node => node.props.children), [...map.overview.primary_structures.map(s => s.title), map.overview.title]);
+  const overview = view.root.findAllByType('Text').find(node => node.props.children === map.overview.summary);
+  assert.equal(overview.props.numberOfLines, 3);
   for (const structure of map.overview.primary_structures) {
     assert(JSON.stringify(view.toJSON()).includes(structure.title));
     assert(JSON.stringify(view.toJSON()).includes(structure.description));
