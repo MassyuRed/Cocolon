@@ -854,3 +854,9 @@ Mashの観測能力のトレースは終了。過去の自己分析・観測の�
 この理論をEmlisの通常スレッド用の生成候補と、わたしマップの主要構造の生成・表示に実装した。Emlisは実4Bを5候補・計31件で比較。ラジオの例ではFreeは今日の喜び、Plusは前回は雑音しか聞こえなかったことと、今日初めて音楽が流れた喜びを結んだ。同じ参照材料のPremiumはPlusと全文一致した。スキップ時の内面の補完と、回答後の不自然な重複が残る。わたしマップの実4Bは同じ架空2記録で最終分析を2回。修正版は判断に関わる違いを拾ったものの、本人が重視したことを結論にできず、不合格。原本を修正後の受領処理に通し、同じ見出しと結論を公開しないことまで確認した。両回とも通常GPUを復元し、停止前と同じ通常応答を確認した。本番の継続設定・配布は変更していない。[比較した全入力・全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md)・[設計・実装箇所・残件](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#karen-observation-theory-20261123)
 
 製品コード `f4dd79f` で[PieceのGitHub Actions](https://github.com/MassyuRed/mashos-api/actions/runs/45127294629)が成功した。分析の初回CIでは試験時計の端数により上限比較が2件失敗した。模擬時計の起点だけを正確な秒数にそろえた `4f3677b` で、該当ファイルの30件と[分析のGitHub Actions](https://github.com/MassyuRed/mashos-api/actions/runs/45131169789)が成功した。アプリの[表示契約の検査](https://github.com/MassyuRed/Cocolon/actions/runs/45123752687)も成功した。
+
+<a id="emlis-v17-live-retest-20261123"></a>
+
+### 11.57 EmlisAIの問いの前・スキップ・回答後の実4B比較（11/23 JST）
+
+[API検証版 `e715856`](https://github.com/MassyuRed/mashos-api/commit/e715856aecb3c439ad5a89ef6f0eba3c3ae2b079)に、Free・Plusで選択できるv17の生成処理を保存した。同じ架空7条件を3回比較。最終版では未回答スキップ時の理由の補完が消え、回答後は本人の「その時は重かった」に沿った文が出た。Plusはラジオの以前の雑音と今日の音楽を返事に含めた。押し付けに聞こえる助言、自己理解への人物評価、問いの前に選択感情を内面の説明に加える返事が残り、本番採用は保留。最終7本文の受領検査と隔離DBでの同版再読を確認した。本番API・ワーカーは `f91bba8`。 [詳細設計と検証範囲](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-v17-live-retest-20261123) · [実際の応答全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v17-live-retest)
