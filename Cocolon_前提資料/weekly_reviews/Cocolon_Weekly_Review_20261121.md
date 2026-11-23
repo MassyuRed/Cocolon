@@ -872,3 +872,5 @@ Mashの観測能力のトレースは終了。過去の自己分析・観測の�
 ### 11.59 観測応答の出来事と訂正根拠の実4B比較（11/24 JST）
 
 [EmlisAI検証版 `b25f028`](https://github.com/MassyuRed/mashos-api/commit/b25f0287803aedf0102e9f0fa46f18d0434fee4d)は、問いを出さず最初の返事を結ぶ場合に本人の原文を欄と文ごとに渡す。架空7件を3回比較し、開けない録音と消した録音を区別できた。腕時計の「喪失感」とマグカップの「大好き」が残り、通常採用は保留。最終7本文は隔離DBで保存・同版再読した。DeepInsightでは訂正を正しく選ぶ計画と質問本文を得たが、現行の独立検査が根拠不足として棄却することを再現した。修正候補では、訂正だけの問いと回答済みの問いを同時に正しく判定できず、通常採用は保留。Pieceの保存・再読とわたしマップ・DeepInsightの隔離回帰も確認した。本番API・ワーカーは `f91bba8`。 [設計と判定](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-v19-live-retest-20261124) · [実応答全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v19-live-retest)
+
+EmlisAIは補足として、根拠・観測・フォローを分ける案も実4Bで確認した。対照を含む9件すべてでJSONを読めたが、出力した欄名を元記録と照合できた例は0件。問いを足す、選択強度を本文で述べる、同僚へ話しかける返事もあり、通常作者への導入は保留。 [架空9件の判定](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-separated-reply-20261124)
