@@ -1,4 +1,4 @@
-> **11/24 JST・A5000への本番接続切替と通常経路の再確認。** Renderの本番API・ワーカーは同じ `f91bba8` でA5000 `i9owv8jwfldd6w` に接続。架空試験1回でEmlisAIとPieceの新規保存・同版再読、DeepInsightの既存の問いと回答の再読を確認した。わたしマップはA5000から生成結果を受け取った後、旧GPUでも起きた過去回答と元記録の根拠照合で自動8回とも失敗し、新規保存は0件。EmlisAI・Pieceの候補重みはA5000へ配置・照合済みで、実比較は未実行。旧RTX 4000 Adaは稼働中。 [議事録§11.63](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-ordinary-recheck-20261124)
+> **11/24 JST・A5000でEmlisAIの観測用の重みを実比較。** 架空4件のベース4Bと観測用重みの実応答8件を隔離DBで保存し、同版・同本文を非生成で再読。本人の好みと明記した安堵の理由が両系統で変わる例があり、観測用重みは通常採用を見送った。直前の本番再確認ではEmlisAI・Pieceの新規保存と同版再読、DeepInsightの既存の問いと回答の再読を確認。わたしマップは新規保存0件。本番API・ワーカーはA5000に接続する `f91bba8`。 [議事録§11.63–64](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-ordinary-recheck-20261124)
 
 > **11/21 JST・第12回報告会を終了。** [11/21〜11/28の議事録](weekly_reviews/Cocolon_Weekly_Review_20261121.md)に成果、課題、次週の優先順位、全体評価63.375％、公開見通し、[わたしを知る問い](weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)などの採用方針を記録。公開日未定・12/6提出可能候補を継承。Mashの指示で、こころグラフの文章レポート廃止から作業を再開した。
 
