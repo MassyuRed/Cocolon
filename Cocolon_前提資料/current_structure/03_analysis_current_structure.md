@@ -1883,3 +1883,8 @@ scope75d8633dは失敗時終了条件で閉鎖。追加修正／retry／次scope
 
 原本とroot／独立全文照合は補助設計§9.102と同trial semantic_event_plan_v2_a10_actual_20261116/。既存作者source b14960eは候補のまま、今回商品source／route／schema／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。先行準備と旧失敗原本はGit historyおよび§9.100〜101に保持する。
 
+<a id="map-renderer-interop-20261124"></a>
+
+## 11/24　既存APIと次のわたしマップ画面の表示互換
+
+`components/selfStructure/CumulativeWatashiMapView.js` は `semantic.v2` を先に要求する。本番 `f91bba8` の変換が作る関係線なしの旧データを `cumulativeMapContract.js` が識別した場合のみ、既存詳細APIを `semantic.v1` で一度読み直す。最初の結果と同じ認証所有者・保存IDを指定し、月次は同じ月も確認する。最新取得の更新状態は引き継ぐ。比較中の最新と月次は個別に照合する。所有者変更、画面移動、新しい取得で旧結果を破棄する。追加モデル生成、DB・配信用の型の変更はない。該当テストは `tests/analysis-cumulative-map.test.js`。実機配布前の変更候補。

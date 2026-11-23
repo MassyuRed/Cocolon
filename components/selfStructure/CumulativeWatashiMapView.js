@@ -12,7 +12,7 @@ import WatashiMapV2Renderer from './WatashiMapV2Renderer';
 import SemanticWatashiMap from './SemanticWatashiMap';
 import AnalysisIfRouteDialog from './AnalysisIfRouteDialog';
 import MapInterpretationCorrectionDialog from './MapInterpretationCorrectionDialog';
-import { checkedMapRow, checkedCurrentResult } from './cumulativeMapContract';
+import { checkedMapRow, checkedCurrentResult, isLegacySemanticDowngrade } from './cumulativeMapContract';
 import { makeUiTokens } from '../../ui/uiTokens';
 import CocolonButton from '../CocolonButton';
 import CocolonBackButton from '../CocolonBackButton';
@@ -45,6 +45,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const currentKey = useRef(key);
   currentKey.current = key;
   const request = useRef(0);
+  const mapLoad = useRef(null);
   const seenCallback = useRef(onLatestSeenVersion);
   seenCallback.current = onLatestSeenVersion;
   const [state, setState] = useState({ key: null, loading: true });
@@ -62,20 +63,43 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
 
   const load = useCallback(async (withCurrent = false, force = false, readOnly = false) => {
     const seq = ++request.current;
+    mapLoad.current?.abort();
     setState(previous => previous.key === key ? { ...previous, loading: true, error: null, refreshError: false } : { key, loading: true });
     if (!owner) { setState({ key, error: 'ログインしてから、もう一度開いてください。' }); return; }
+    const controller = typeof AbortController === 'function' ? new AbortController() : null;
+    mapLoad.current = controller;
     const active = () => currentKey.current === key && request.current === seq;
+    const readMap = (path, renderer = 'semantic.v2') => apiGet(path, {
+      expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': renderer },
+      signal: controller?.signal, timeoutMs: 15000,
+    });
+    const readDetail = async (id, snapshotMonth, renderer) => {
+      const data = await readMap(buildSelfStructureReportDetailPath(id, snapshotMonth), renderer);
+      const result = checkedMapRow(data?.item);
+      if (result.id !== id || (snapshotMonth && result.snapshot_month !== snapshotMonth)) throw new Error('analysis_month_mismatch');
+      return result;
+    };
+    const restoreSemanticMap = async (saved, snapshotMonth = null) => {
+      if (!active() || !isLegacySemanticDowngrade(saved)) return saved;
+      try {
+        const detail = await readDetail(saved.id, snapshotMonth, 'semantic.v1');
+        const map = detail.content_json.watashiMap;
+        if (!active() || map.wire_kind !== 'watashi.map.v3') return saved;
+        return { ...saved, content_text: detail.content_text,
+          content_json: { ...saved.content_json, watashiMap: map } };
+      } catch (error) {
+        if (temporarilyUnavailable(error)) return saved;
+        throw error;
+      }
+    };
     try {
       let row, now = null, comparisonFailed = false, refreshStatus = null;
       if (reportId) {
-        const data = await apiGet(buildSelfStructureReportDetailPath(reportId, month), {
-          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v2' }, timeoutMs: 15000 });
+        row = await readDetail(reportId, month);
         if (!active()) return;
-        row = checkedMapRow(data?.item);
-        if (row.id !== reportId || (month && row.snapshot_month !== month)) throw new Error('analysis_month_mismatch');
+        row = await restoreSemanticMap(row, month);
       } else {
-        const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : `ensure=true&background=true${force ? '&force=true' : ''}`}`, {
-          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v2' }, timeoutMs: 15000 });
+        const data = await readMap(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : `ensure=true&background=true${force ? '&force=true' : ''}`}`);
         if (!active()) return;
         row = checkedCurrentResult(data);
         refreshStatus = readRefreshStatus(data);
@@ -83,14 +107,16 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
           if (active()) setState({ key, empty: true, insufficient: data.reason === 'insufficient_input', coverage: data?.map_context, refreshStatus });
           return;
         }
+        row = await restoreSemanticMap(row);
       }
       if (withCurrent && reportId) {
+        if (!active()) return;
         try {
-          const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : 'ensure=true&background=true'}`, {
-            expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v2' }, timeoutMs: 15000 });
+          const data = await readMap(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : 'ensure=true&background=true'}`);
           if (!active()) return;
-          now = checkedCurrentResult(data);
+          const current = checkedCurrentResult(data);
           refreshStatus = readRefreshStatus(data);
+          now = await restoreSemanticMap(current);
         } catch (error) {
           if (!active()) return;
           if (!temporarilyUnavailable(error)) throw error;
@@ -104,6 +130,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       if (active()) setState(previous => previous.key === key && previous.row && temporarilyUnavailable(error)
         ? { ...previous, loading: false, refreshStatus: null, refreshError: true }
         : { key, error: 'マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。' });
+    } finally {
+      if (mapLoad.current === controller) mapLoad.current = null;
     }
   }, [key, owner, reportId, month]);
 
@@ -131,7 +159,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
 
   useEffect(() => {
     if (!planLoading && focused && appActive) load(compareRef.current);
-    return () => { request.current += 1; };
+    return () => { request.current += 1; mapLoad.current?.abort(); };
   }, [load, planLoading, focused, appActive]);
 
   useEffect(() => {

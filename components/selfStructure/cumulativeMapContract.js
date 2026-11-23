@@ -32,4 +32,15 @@ function checkedCurrentResult(data) {
     source_profile: data.source_profile, snapshot_month: null });
 }
 
-module.exports = { checkCoverage, checkedMapRow, checkedCurrentResult };
+function isLegacySemanticDowngrade(row) {
+  const map = row?.content_json?.watashiMap;
+  // The older server's renderer conversion flattens semantic maps into this legacy shape.
+  return map?.wire_kind === 'watashi.map.v2'
+    && map.period_comparison.state === 'NO_PREVIOUS' && !map.period_comparison.reason_codes.length
+    && [map.edges, map.annotation_badges, map.unknown_gaps, map.conflict_badges].every(items => !items.length)
+    && map.nodes.length > 0
+    && map.nodes.every(node => node.node_kind === 'ATTENTION_OR_THOUGHT'
+      && node.visible_label.startsWith('読み取り：') && node.visible_label.includes('\n'));
+}
+
+module.exports = { checkCoverage, checkedMapRow, checkedCurrentResult, isLegacySemanticDowngrade };
