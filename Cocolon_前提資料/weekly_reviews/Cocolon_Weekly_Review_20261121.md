@@ -866,3 +866,9 @@ Mashの観測能力のトレースは終了。過去の自己分析・観測の�
 ### 11.58 問いの前の選択感情とPlusのフォローを修正（11/23 JST）
 
 [検証版 `0dc8cfe`](https://github.com/MassyuRed/mashos-api/commit/0dc8cfecc826f92e49cbee701b0c9a2001e20f4d)のv18では、問いの前に本人が書いた内容だけを受け止める。実4B計18応答を比較し、最終候補11本文を隔離DBで保存・同版再読した。前回の「不安」の読み足しと自己理解への人物評価は同じ題材で解消。Plusはラジオ2条件とパン作りで、過去を今日のフォローに使った。初見の腕時計では「動かなくなった」を「思い出を失った」に広げたため、通常採用は保留。本番APIとワーカーは `f91bba8`。 [補助設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-v18-live-retest-20261123) · [実応答全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v18-live-retest)
+
+<a id="emlis-v19-live-retest-20261124"></a>
+
+### 11.59 観測応答の出来事と訂正根拠の実4B比較（11/24 JST）
+
+[EmlisAI検証版 `b25f028`](https://github.com/MassyuRed/mashos-api/commit/b25f0287803aedf0102e9f0fa46f18d0434fee4d)は、問いを出さず最初の返事を結ぶ場合に本人の原文を欄と文ごとに渡す。架空7件を3回比較し、開けない録音と消した録音を区別できた。腕時計の「喪失感」とマグカップの「大好き」が残り、通常採用は保留。最終7本文は隔離DBで保存・同版再読した。DeepInsightでは訂正を正しく選ぶ計画と質問本文を得たが、現行の独立検査が根拠不足として棄却することを再現した。修正候補では、訂正だけの問いと回答済みの問いを同時に正しく判定できず、通常採用は保留。Pieceの保存・再読とわたしマップ・DeepInsightの隔離回帰も確認した。本番API・ワーカーは `f91bba8`。 [設計と判定](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-v19-live-retest-20261124) · [実応答全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v19-live-retest)
