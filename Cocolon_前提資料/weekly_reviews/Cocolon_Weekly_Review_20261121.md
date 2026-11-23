@@ -802,3 +802,7 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 11/23 JSTの配備前照合では、本番API・ワーカーは `6c409f4`、待機・実行中のDBジョブと未回答の記録由来DeepInsightは各0件。前回の架空アカウントはFreeを確認した。`f91bba8` の差分は実装2ファイルと対応テスト2ファイルで、既存GPUを使う。切り戻す場合は、新版で開始済みの未確定v9を旧版で再開できない点を確認する。 [詳細設計§9.254](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-quotation-and-reading-20261123)
 
 両CIが成功した。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45099186489) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45099186493)
+
+### 11.49 `f91bba8` の本番配備（11/23 JST）
+
+本番ワーカー12:03:19・API12:04:05 JSTに同じ `f91bba8` がLive。公開ヘルスと新ワーカーのキュー照会はHTTP 200。許可済みの架空アカウントの既存セッションがなかったため、新しい試験は未送信。アカウントはFreeで、前回の非公開Pieceとマップの保存がDBに残ることを照合した。本人引用とDeepInsightの発行・回答の実4B確認は残る。 [補助設計§9.255](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-production-rollout-20261123)

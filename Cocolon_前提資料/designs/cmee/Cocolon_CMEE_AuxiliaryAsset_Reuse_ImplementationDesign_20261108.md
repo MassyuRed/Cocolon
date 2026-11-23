@@ -9346,3 +9346,10 @@ DeepInsightは、本人訂正を引用する理由質問で、その引用が全
 新しい版はv8までの受領済み応答を当時の指示で再開できる。旧版 `6c409f4` は、新版で生成を開始または受領したv9の未確定操作を再開できない。切り戻し前に処理中と再開待ちのv9を照会し、残っている場合は旧版による再開を避ける。確定済み応答や作品・レポートの再読は、各保存版から確認する。
 
 両CIが成功した。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45099186489) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45099186493)
+
+<a id="cmee-f91-production-rollout-20261123"></a>
+## 9.255 本番配備と試験アカウントの確認（11/23 JST）
+
+Mashの承認後、両CIに成功した `f91bba8` をRenderのAPI・ワーカーに各1回、同じ完全SHAを指定して配備した。ワーカーは12:03:19、APIは12:04:05 JSTにLive。APIの `/healthz` と新ワーカーのSupabaseキュー照会はHTTP 200。GPUとDBスキーマの操作はなかった。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc1qpgetlv9c73crnbsg) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc1qpgcs728c73d654l0)
+
+認証付き再試験は、許可された既存の架空アカウントのセッションが新ワーカーになかったため、通常APIへの試験送信前で停止した。12:04:39 JSTの読み取りでは、架空アカウントはFree、有料権限0。今回の新規入力、訂正、Piece・利用枠消費、マップ、DeepInsight発行・回答は各0件。前回Pieceの非公開保存版2、本文と描画のハッシュ、対応する利用枠消費1件、および前回マップの本文・表示データ・根拠がDBにあることを照合した。新版の本人認証付き再読や、新しい実4Bの返答・出題を確認した結果ではない。
