@@ -860,3 +860,9 @@ Mashの観測能力のトレースは終了。過去の自己分析・観測の�
 ### 11.57 EmlisAIの問いの前・スキップ・回答後の実4B比較（11/23 JST）
 
 [API検証版 `e715856`](https://github.com/MassyuRed/mashos-api/commit/e715856aecb3c439ad5a89ef6f0eba3c3ae2b079)に、Free・Plusで選択できるv17の生成処理を保存した。同じ架空7条件を3回比較。最終版では未回答スキップ時の理由の補完が消え、回答後は本人の「その時は重かった」に沿った文が出た。Plusはラジオの以前の雑音と今日の音楽を返事に含めた。押し付けに聞こえる助言、自己理解への人物評価、問いの前に選択感情を内面の説明に加える返事が残り、本番採用は保留。最終7本文の受領検査と隔離DBでの同版再読を確認した。本番API・ワーカーは `f91bba8`。 [詳細設計と検証範囲](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-v17-live-retest-20261123) · [実際の応答全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v17-live-retest)
+
+<a id="emlis-v18-live-retest-20261123"></a>
+
+### 11.58 問いの前の選択感情とPlusのフォローを修正（11/23 JST）
+
+[検証版 `0dc8cfe`](https://github.com/MassyuRed/mashos-api/commit/0dc8cfecc826f92e49cbee701b0c9a2001e20f4d)のv18では、問いの前に本人が書いた内容だけを受け止める。実4B計18応答を比較し、最終候補11本文を隔離DBで保存・同版再読した。前回の「不安」の読み足しと自己理解への人物評価は同じ題材で解消。Plusはラジオ2条件とパン作りで、過去を今日のフォローに使った。初見の腕時計では「動かなくなった」を「思い出を失った」に広げたため、通常採用は保留。本番APIとワーカーは `f91bba8`。 [補助設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-v18-live-retest-20261123) · [実応答全文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v18-live-retest)
