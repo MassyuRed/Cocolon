@@ -810,3 +810,7 @@ EmlisAIの短文訂正を保存し、その後の本文を実4Bから1回受領�
 ### 11.50 `f91bba8` の実4B再試験（11/23 JST）
 
 本番 `f91bba8` で本人認証付きの再試験を実行。EmlisAIは訂正「僕は嬉しかった」からv9の返答を非公開で保存し、同じ返答を再読した。感情の言い換えで、直接引用は未検証。DeepInsightは記録由来の発行1回を独立検査で見送り、発行・回答は各0件。架空アカウントはFreeに戻した。 わたしマップは自動更新の初回で新規保存し、本文・表示データ・根拠を確認した。 [補助設計§9.256](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-f91-authenticated-retest-20261123)
+
+### 11.51 通常初回の実4B比較と優先順位（11/23 JST）
+
+現行版で架空3題材×三プランを比較した。関連履歴のある題材でPlusは返答なし、Premiumは過去を今回の感情の原因として補った。通常の観測とフォロー、根拠のあるプラン差を優先する。 [実出力全文と確認範囲](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-current-initial-quality-20261123)
