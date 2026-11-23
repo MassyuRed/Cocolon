@@ -1,3 +1,5 @@
+> **11/24 JST・通常4BをRTX A5000へ移行。** Renderの本番API・ワーカーは同じ `f91bba8` で稼働。新Pod `i9owv8jwfldd6w` で自然応答・分析IF 120u・わたしマップv24のPLANを実4Bで確認し、試験後の実空きは14,518 MiB。旧RTX 4000 Adaは切り戻し用に稼働を維持。EmlisAIの観測用重みの比較と、切替後の本番新規保存・同版再読は未確認。 [議事録§11.62](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-production-a5000-cutover-20261124)
+
 > **11/21 JST・第12回報告会を終了。** [11/21〜11/28の議事録](weekly_reviews/Cocolon_Weekly_Review_20261121.md)に成果、課題、次週の優先順位、全体評価63.375％、公開見通し、[わたしを知る問い](weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)などの採用方針を記録。公開日未定・12/6提出可能候補を継承。Mashの指示で、こころグラフの文章レポート廃止から作業を再開した。
 
 > **11/20 JST**　本番の通常4BをPieceで有効にした。問いに答えた作品は3段落、スキップした作品は1段落で非公開保存し、詳細・履歴・書き出し用データが一致した。Emlisの回答・スキップと、わたしマップの自動更新・保存再読も本番で確認した。iPhone版1.0（8102）はAppleで処理完了し、内部グループ「Emlis テスト版配布」のiOS欄でTestingを確認。本人端末での起動・画像保存・通知受信は未確認。 [補助設計§9.205](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#three-core-device-and-pod-20261120)。

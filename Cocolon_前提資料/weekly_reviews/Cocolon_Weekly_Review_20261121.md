@@ -886,3 +886,15 @@ EmlisAIの保存済み観測用重み `10b56315` を、他の4B経路と分け�
 ### 11.61 観測用の重みとベース4Bの対照準備（11/24 JST）
 
 通常のFree初回経路から架空4件の要求を作り、感情の強さと、本人が理由を明記したかの違いを同じ指示で比較できるようにした。4件の模擬本文を隔離DBで同版再読。観測用の重み `10b56315` と分析120uは、現在のPod上で保存原本との一致を確認した。EmlisAI・Piece・わたしマップ・DeepInsightに関わる隔離回帰581件が成功。本番API・ワーカーは `f91bba8` がLive、既存GPUのヘルスはHTTP 200。Mashの承認後にZIPを既存Podへ送付し、バイト数と完全SHA-256が一致した。GPUの実空き10,841 MiBは開始条件11,000 MiBを下回ったため、実GPU比較は生成0件。本番の4B提供はヘルスHTTP 200。 [比較条件と判定する本文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v19-adapter-paired-trial-20261124)
+
+<a id="cmee-production-a5000-cutover-20261124"></a>
+
+### 11.62 通常4BをRTX A5000へ移行（11/24 JST）
+
+RTX A5000の新Pod `i9owv8jwfldd6w` で、固定Qwen3.5-4B `851bf6e` の11ファイル、分析IF用120u、わたしマップv24用FIT36と、通常自然応答を復元した。Python 3.12.3と既存CUDA 12.8の環境を使い、モデルのファイル・重みは同一ハッシュを確認した。GPUメモリ総量は24,564 MiB、起動前の空きは24,114 MiB。通常4B起動後は15,154 MiB、確認3件の後も14,518 MiBが空いていた。前回の比較開始条件11,000 MiBを3,518 MiB上回る。
+
+架空の自然応答は初回起動直後に56.348秒で `length` になった。同じプロセスで再試験すると、自然応答1.648秒、分析IF 66.829秒、わたしマップv24のPLAN 15.543秒で、3件ともHTTP 200・`stop`。わたしマップの結果はPLANまでの確認で、通常保存と同版再読は別に残す。
+
+既存の分析用・自然応答用キーはMashの承認を受け、暗号化したまま旧Podから新Podへ移した。公開HTTPSの各経路で無資格・別経路のキーは401、対応するキーでGETは405。既存のJupyter認証も確認した。Renderでは接続先2項目だけを更新し、ワーカーは07:44:26、APIは07:47:09 JSTに同じ `f91bba8` でLive。ワーカーの稼働環境からA5000の両経路に認証付きGETを送って405、公開APIのヘルスも正常。旧RTX 4000 Adaは従来プロセスのヘルスHTTP 200を確認し、切り戻し用に稼働を維持した。切替に使った新PodのWeb Terminalは停止済み。本番DBへの新規試験保存は行っていない。
+
+前回送付したEmlisAI比較コードはRTX 4000 Adaの総メモリを前提とする。A5000での比較には同じ架空4件・生成条件を維持した機種判定の更新が必要。観測用重みとベース4Bの実比較は未実行。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc2c41t6e07s73c4m3tg) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc2c3559fdbs73b5mosg)
