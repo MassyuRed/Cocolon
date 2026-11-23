@@ -885,4 +885,4 @@ EmlisAIの保存済み観測用重み `10b56315` を、他の4B経路と分け�
 
 ### 11.61 観測用の重みとベース4Bの対照準備（11/24 JST）
 
-通常のFree初回経路から架空4件の要求を作り、感情の強さと、本人が理由を明記したかの違いを同じ指示で比較できるようにした。4件の模擬本文を隔離DBで同版再読。観測用の重み `10b56315` と分析120uは、現在のPod上で保存原本との一致を確認した。EmlisAI・Piece・わたしマップ・DeepInsightに関わる隔離回帰581件が成功。本番API・ワーカーは `f91bba8` がLive、既存GPUのヘルスはHTTP 200。ベースと観測用の重みを使った実GPU比較は実行承認待ち。 [比較条件と判定する本文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v19-adapter-paired-trial-20261124)
+通常のFree初回経路から架空4件の要求を作り、感情の強さと、本人が理由を明記したかの違いを同じ指示で比較できるようにした。4件の模擬本文を隔離DBで同版再読。観測用の重み `10b56315` と分析120uは、現在のPod上で保存原本との一致を確認した。EmlisAI・Piece・わたしマップ・DeepInsightに関わる隔離回帰581件が成功。本番API・ワーカーは `f91bba8` がLive、既存GPUのヘルスはHTTP 200。Mashの承認後にZIPを既存Podへ送付し、バイト数と完全SHA-256が一致した。GPUの実空き10,841 MiBは開始条件11,000 MiBを下回ったため、実GPU比較は生成0件。本番の4B提供はヘルスHTTP 200。 [比較条件と判定する本文](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-v19-adapter-paired-trial-20261124)
