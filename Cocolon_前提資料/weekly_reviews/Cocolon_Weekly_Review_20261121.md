@@ -932,3 +932,15 @@ EmlisAIで、本人の好みと言葉にした理由を優先する指示に変�
 DeepInsightは、訂正を理由の回答と混同せず、問いの前提とすでに書かれた理由を別々に照合する修正だけを、本番と同じ `f91bba8` から分けた。隔離459件と、そのうち対象を絞ったCI同等の主要依存による332件が成功。GPU提供コードとDB移行の差分は0件。新規出題・回答・同じ版の本番再読と所要時間は未計測。 [出題修正候補 `5d4d332`](https://github.com/MassyuRed/mashos-api/commit/5d4d332475d4c8460164de8034926cd9cc66eeff)
 
 本番API・ワーカーはA5000に接続する `f91bba8`。今回の新候補の本番配備は未実施。
+
+<a id="cmee-a5000-deep-insight-and-isolated-checks-20261124"></a>
+
+### 11.66 DeepInsightの出題判定を本番配備し、観測と分析・PieceをA5000で試験（11/24 JST）
+
+DeepInsightの出題判定修正版 `5d4d332` を、Mashの承認後に本番ワーカー・APIへ各1回配備した。ワーカー08:54:41 JST、API08:56:45 JSTにLive。公開APIヘルスは正常、ワーカーの起動ログを確認。09:01:26 JSTに稼働中の関連DBジョブと配備開始後の新規出題・回答は各0件。今回の承認範囲は配備で、本番での記録由来の新規出題・回答・同版再読は残る。 [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc2d4obncjis73cjgfs0) · [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc2d42mk1f9s73fjnhag)
+
+EmlisAIは架空4件で、本人の一文を選ぶ4応答と、その一文に返す4応答を取得した。選択と安堵の理由の有無は期待どおりだった。好みを落とす・本人の文を復唱する・抽象的なフォローが残り、通常採用は見送った。隔離DBで3本文を同版再読し、問いを追加した1本文は棄却した。 [実応答と元記録の照合](../observation_learning/trials/2026-11-23-karen-observation/product_read.md#emlis-a5000-source-passage-comparison-20261124)
+
+わたしマップ `7ba8f05` のAnalysis CIとPiece CIが成功。A5000の新しい隔離プロセスで対象3分割の計画を試すと、最初の1リクエストがHTTP 503で停止した。生成中のTriton計測用キャッシュ確保で `OutOfMemoryError`。試験プロセスの割り当て上限は9,216 MiB。応答0件、全履歴の統合・保存・同版再読は未確認。候補を本番に適用していない。 [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45289768192) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45289767998)
+
+Pieceは学習済み48件と全文重複しない架空記録を使い、回答前と回答選択後の通常要求2件を固定した。同じPiece生成制約で対照する試験は、ベース側の最初のリクエストがHTTP 503で停止。応答0件、候補重み側のリクエスト0件、例外型はログから確定できなかった。通常採用の判断は未了。両試験に再試行はなく、終了後に通常モデルのヘルスHTTP 200と実空き12,430 MiBを確認した。
