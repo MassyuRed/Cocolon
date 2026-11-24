@@ -1,4 +1,4 @@
-> **11/24 JST・DeepInsightの出題判定を本番反映。** API・ワーカーはA5000に接続する `5d4d332`。新規出題・回答の通常確認は残る。EmlisAIの原文一文を選ぶ試験は安堵の理由の区別を改善したが、好みの取り落としとフォローの不足が残り通常採用を見送った。わたしマップとPieceはA5000の隔離試験で初回生成が503、実本文0件。 [議事録§11.66](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-deep-insight-and-isolated-checks-20261124)
+> **11/24 JST・A5000でわたしマップの3計画とPieceの4応答を実確認。** 試験用GPU上限を10,240 MiBにすると、マップは対象3件の根拠照合を通過し、Pieceは4件を隔離DBで非公開保存・再読。Piece候補重みは本人の丁寧体を変えるため不採用。EmlisAIのフォロー一文の別生成も通常採用は見送り。DeepInsightの本番は `5d4d332`、記録由来の新規出題・回答は未確認。 [議事録§11.67](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-cap-and-product-checks-20261124)
 
 > **11/21 JST・第12回報告会を終了。** [11/21〜11/28の議事録](weekly_reviews/Cocolon_Weekly_Review_20261121.md)に成果、課題、次週の優先順位、全体評価63.375％、公開見通し、[わたしを知る問い](weekly_reviews/Cocolon_Weekly_Review_20261121.md#deep-insight-decisions-20261121)などの採用方針を記録。公開日未定・12/6提出可能候補を継承。Mashの指示で、こころグラフの文章レポート廃止から作業を再開した。
 
