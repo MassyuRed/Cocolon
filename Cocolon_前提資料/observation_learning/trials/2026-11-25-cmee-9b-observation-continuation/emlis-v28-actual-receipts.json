@@ -1,0 +1,114 @@
+{
+  "all_fictional": true,
+  "count": 18,
+  "receipts": [
+    {
+      "case": "preference-literal",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが好きでした。」\n\n工房で作った琥珀色のしおりが、とても素敵だったと伺えて光栄です。"
+    },
+    {
+      "case": "preference-explicit-strong",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが大好きでした。」\n\n琥珀色のしおりが大好きだったと、その温もりを今も感じながら喜んでおりました。"
+    },
+    {
+      "case": "relief-cause-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "relief-cause-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「紙の小舟を無事にケースに並べられたので、私はほっとしました。」\n\n無事に並べられた小舟を見て、ほっとされたお気持ち、とても嬉しく思います。"
+    },
+    {
+      "case": "fresh-stamp-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「図書室の蔵書印にある鳥の模様が好きでした。」\n\n鳥の模様が描かれた蔵書印を、昔はそれほど好きだったのですね。その温かさが、今も私の心に響いています。"
+    },
+    {
+      "case": "fresh-stamp-love",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「図書室の蔵書印にある鳥の模様が大好きでした。」\n\n鳥の模様が大好きだったと教えていただき、心から嬉しく思います。"
+    },
+    {
+      "case": "fresh-letter-sadness-unwritten",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は寂しかったです。」\n\n寂しかったその気持ちを、ここに置いてくれて本当にありがとう。\n今はもう大丈夫で、その重荷をゆっくりと下ろして休んでくださいね。"
+    },
+    {
+      "case": "fresh-letter-sadness-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「毎週届く手紙が今月で終わると知ったので、私は寂しかったです。」\n\n毎週届く手紙が今月で終わると知って、寂しかったんですね。\nその気持ち、とてもよく分かります。"
+    },
+    {
+      "case": "fresh-blue-line-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「白い湯のみの縁の青い線が好きでした。」\n\n白い湯のみの縁の青い線が、とても好きだったと伺えて、心が温かくなりました。"
+    },
+    {
+      "case": "fresh-exhibition-future",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「明日の展示には参加できないと今日分かったので、私は悲しかったです。」\n\n明日の展示に参加できないと知って、悲しんでおられたのですね。\nその気持ちを大切に、どうかお身体を休めてください。"
+    },
+    {
+      "case": "fresh-frustrated-bare",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は悔しかったです。」\n\n悔しい気持ち、ここに置いてくださったこと、心から感謝します。\nその重さを背負ってこられたあなたの強さを感じています。"
+    },
+    {
+      "case": "fresh-walk-uncertain",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は帰り道にいろいろ思い返すと寂しかったです。」\n\n帰り道に思い返される中で寂しさを感じておられたのですね。その気持ちを、今はただ受け止めておきます。"
+    },
+    {
+      "case": "wind-vane-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が好きでした。」\n\n資料館の屋上にあった青い風見を、その時だけ好きだったと書いてくださったこと、とても嬉しく思います。"
+    },
+    {
+      "case": "wind-vane-love",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が大好きでした。」\n\n資料館の屋上にあった青い風見を、その時だけ大好きだったと書いてくださったこと、とても嬉しく思います。"
+    },
+    {
+      "case": "score-cause-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "score-cause-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「返却箱に楽譜を間に合うように戻せたので、私はほっとしました。」\n\n楽譜を間に合うように戻せたことで、ほっとされたのですね。その安堵の気持ち、とてもよく分かります。"
+    },
+    {
+      "case": "fresh-umbrella-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "fresh-umbrella-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「貸した傘を返してもらえたので、私はほっとしました。」\n\n貸した傘を返してもらえて、ほっとされたのですね。その安堵の気持ち、とてもよく分かります。"
+    }
+  ]
+}

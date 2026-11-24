@@ -1214,3 +1214,17 @@ EmlisAI v27を同じ稼働中の9Bで架空18件、一度実行した。全18件
 隔離DBの既存の意味照合も再確認した。保存できた14件はいずれも検査対象になった文節が0で、判定はすべて `UNASSESSED`。傘を貸した側が変わった本文も同じ結果だった。今回の本文3/18は本人の原文との全文照合で得た結果。
 
 [わたしマップ画面候補](https://github.com/MassyuRed/Cocolon/commit/53764c42d0524206ab397d04a29f4ed3ea6ecfc0) · [統合の項目生成候補](https://github.com/MassyuRed/mashos-api/commit/7c732042a709bd2ed432ee9b65796118801f27e5)。
+
+<a id="cmee-observation-v28-piece-rollout-map-primary-20261125"></a>
+
+### 11.85 観測応答v28の実比較・Piece反映前検証・主要構造を読む順序（11/25 JST）
+
+**EmlisAI。** Mash承認の範囲で、通常の9Bに候補v28の架空18件を一度送った。開始直前のASTOR実行中・実行時刻到達済み・3分以内の予約は各0件で、9Bの実行プロセスは比較の前後で同じだった。全18件がHTTP 200・終了理由stopで、所要約19秒。隔離DBでは15件の応答を受領・保存し、同じ版・本文を読み戻した。残る3件は、理由のない安堵にEmlisの同時体験を加え、受領検査で止まった。
+
+原文と全18件の独立本文照合では、鳥の模様が大好きだった記録と、帰り道に思い返した時の寂しさの2件が通過した（v27は3/18）。展示に参加できないと知った事実と、傘を貸した側は正しく表現できた。展示には根拠のない休息の助言が残り、傘・楽譜・手紙は事実を保ちながら、同じ一般的な理解表明で終わった。好みの強弱の対照は3組とも両方が成立せず、風見では強さの語以外が同文だった。v28の通常採用は保留した。候補APIで新規v28は明示設定でのみ有効で、隔離・関連テスト218件が通過した。 [実応答](../observation_learning/trials/2026-11-25-cmee-9b-observation-continuation/emlis-v28-actual.jsonl) · [隔離DBの保存と再読](../observation_learning/trials/2026-11-25-cmee-9b-observation-continuation/emlis-v28-actual-receipts.json) · [API候補](https://github.com/MassyuRed/mashos-api/commit/791dc28b6b4b155753f9df5bb25a10c0acbef7b9)
+
+**Piece。** 現行Renderの描画設定でアプリがiOS v2・パレットv7を利用できる候補経路を、隔離PostgreSQL 17.4で確認した。画像設定を変更して非公開保存した作品は、プラン変更後に同じ作品ID・本文・描画レシピで詳細表示と書き出しが成立した。隔離API 319件、アプリの通信・画面操作335件が通過した。本番DBの移行4件は未適用。旧APIに戻すと新旧レシピが混在する所有者履歴がHTTP 503になる事象を隔離再現し、候補以降の読取互換を維持する条件を詳細設計に記録した。
+
+**わたしマップ。** 主要構造の見出しと本文を読み上げ順の先頭に置き、小図に開閉専用のボタンを設けた。本文は図の開閉ボタンに含まれず、読み上げでボタンの対象と開閉状態を識別できる。アプリ回帰88件が通過した。実機の読み上げは未確認。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/2e842e4682f8982310b280fd975e7964eb72eea5)
+
+架空13件の第8試行は11月24日19:00:55 JST、39回のHTTP 200に続く40回目の統合計画でHTTP 503となり、自動再試行上限に到達した。保存と通知予約は各0件。第8試行の提供側の原因は未特定。統合計画の入力を保持し出力枠を文脈の空きに収める候補は、Map関連220件のCPU回帰を通過した。DeepInsightを含む通常処理と同じ提供を使うため、API・ワーカー・9B提供側の整合を通常反映前に確認する。 [詳細設計§9.279](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-observation-v28-piece-rollout-map-primary-20261125)
