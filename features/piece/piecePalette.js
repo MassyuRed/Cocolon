@@ -50,8 +50,13 @@ export const PIECE_THEME_IDS = Object.freeze(Object.keys(PIECE_THEME_COLORS).fil
 export const PIECE_STYLE_THEME_IDS = Object.freeze([...PIECE_THEME_IDS, ...extraThemeIds]);
 export const PIECE_FONT_STYLE_IDS = Object.freeze(['system_readable', 'serif_readable']);
 export const PIECE_TEXT_COLOR_IDS = Object.freeze(['neutral_ink']);
+export const PIECE_TEXT_ALIGNMENTS = Object.freeze(['left', 'center']);
 export const PIECE_SERIF_FONT = 'HiraMinProN-W3';
 
 export function pieceNeutralInk(themeId) {
   return ['quiet_night', 'forest_mint', 'ocean_ice'].includes(themeId) ? '#F1F5F9' : '#334155';
+}
+
+export function pieceDefaultTextAlignment(formatType) {
+  return formatType === 'quote' ? 'center' : 'left';
 }

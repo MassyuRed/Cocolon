@@ -819,12 +819,14 @@ test('compiled iOS style bridge negotiates and round-trips the extended visual r
     'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'];
   data.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
   data.plan_capabilities.text_color_ids = ['neutral_ink'];
+  data.plan_capabilities.text_alignments = ['left', 'center'];
   data.visual_recipe.theme.theme_id = 'sage_paper';
-  data.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1, text_color_id: 'neutral_ink' };
+  data.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1,
+    text_color_id: 'neutral_ink', text_alignment: 'left' };
   data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
   const input = request();
   input.visual_selection = { theme_id: 'sage_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle',
-    font_style_id: 'serif_readable', text_color_id: 'neutral_ink' };
+    font_style_id: 'serif_readable', text_color_id: 'neutral_ink', text_alignment: 'left' };
   const h = load({
     native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: {
       bitmapRendererVersion: 'piece.rn_bitmap_renderer.ios.v2', visualStyleVersion: 'piece.visual_style.v1',
@@ -833,17 +835,25 @@ test('compiled iOS style bridge negotiates and round-trips the extended visual r
   });
   const received = await h.requestPiecePreview(input, options());
   assert.deepEqual(copy(received), data);
-  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '4');
+  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '5');
   assert.deepEqual(JSON.parse(h.calls[0][1].body).visual_selection, input.visual_selection);
   input.visual_selection.text_color_id = null;
+  input.visual_selection.text_alignment = null;
   const patch = { ...visualRequest(), visual_selection: input.visual_selection };
   delete data.visual_recipe.font_style.text_color_id;
+  delete data.visual_recipe.font_style.text_alignment;
   data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
   data.preview_revision++;
   data.row_version++;
   await h.requestPiecePreviewVisualChange(patch, visualOptions());
-  assert.equal(h.calls[1][1].headers['X-Piece-Palette'], '4');
+  assert.equal(h.calls[1][1].headers['X-Piece-Palette'], '5');
   assert.equal(JSON.parse(h.calls[1][1].body).visual_selection.text_color_id, null);
+  assert.equal(JSON.parse(h.calls[1][1].body).visual_selection.text_alignment, null);
+  data.visual_recipe.font_style.text_alignment = 'center';
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  delete data.visual_recipe.font_style.text_alignment;
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
   data.renderer_version = 'piece.rn_bitmap_renderer.ios.v1';
   await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
   data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';

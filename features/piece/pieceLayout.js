@@ -7,7 +7,7 @@
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
 import { Platform } from 'react-native';
-import { PIECE_SERIF_FONT, PIECE_THEME_COLORS, pieceNeutralInk } from './piecePalette';
+import { PIECE_SERIF_FONT, PIECE_THEME_COLORS, pieceDefaultTextAlignment, pieceNeutralInk } from './piecePalette';
 import { supportsPieceVisualStyle } from './pieceApi';
 
 export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
@@ -113,7 +113,7 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
     blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
     brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION || androidPrototype ? 'Emlis' : 'Cocolon',
-    alignment: p.format_type === 'quote' ? 'center' : 'left',
+    alignment: recipe.font_style.text_alignment ?? pieceDefaultTextAlignment(p.format_type),
     ...(serif ? { fontFamily: PIECE_SERIF_FONT } : {}),
     colors, brandingMode: recipe.branding.branding_mode });
 }

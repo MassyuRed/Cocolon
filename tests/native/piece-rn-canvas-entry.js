@@ -25,10 +25,10 @@ const cmeeStyleSource = cmeeLongArtifacts.find(artifact => artifact.case_id === 
 const cmeeStyleRecord = { ...cmeeStyleSource, row_version: 3,
   visual_recipe: { ...cmeeStyleSource.visual_recipe,
     theme: { ...cmeeStyleSource.visual_recipe.theme, theme_id: 'sage_paper' },
-    font_style: { font_style_id: 'serif_readable', font_style_version: 1, text_color_id: 'neutral_ink' },
+    font_style: { font_style_id: 'serif_readable', font_style_version: 1, text_color_id: 'neutral_ink', text_alignment: 'center' },
     branding: { ...cmeeStyleSource.visual_recipe.branding, branding_mode: 'required_subtle' },
   },
-  visual_recipe_hash: '786f5e30d5349156a538cf637a6409cfa1dc3692f4336663221cc2dceca33d86',
+  visual_recipe_hash: 'bf851697336e748a6295350397665b6448f116850169a49fb71a1c60fa87213b',
 };
 const cmeeLongFixtures = [...cmeeLongArtifacts, { case_id: 'style-candidate', saved_record: cmeeStyleRecord }]
   .flatMap(({ case_id, saved_record }) => [
@@ -353,6 +353,7 @@ class CanvasCases extends React.Component {
           [key, fixture.props.savedRecord[key]])),
       } : {}),
       ...(input?.candidateProfile === BITMAP_PROFILE ? { bitmap_canvas: m?.bitmapCanvas ?? null, colors: input.colors,
+        alignment: input.alignment,
         ...(input.fontFamily ? { font_family: input.fontFamily } : {}),
         branding_mode: input.brandingMode, crop_result: this.cropResult, crop_before_fit: this.cropBeforeFit } : {}),
     };

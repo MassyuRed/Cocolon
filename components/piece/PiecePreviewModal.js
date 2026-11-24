@@ -11,7 +11,7 @@ import PieceVisualCard from './PieceVisualCard';
 import Button from '../CocolonButton';
 import { useTheme } from '../../theme/ThemeContext';
 import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
-import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS } from '../../features/piece/piecePalette';
+import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment } from '../../features/piece/piecePalette';
 
 const element = React.createElement;
 const formats = { short_essay: 'エッセイ', quote: '引用', declaration: '宣言' };
@@ -20,6 +20,7 @@ const branding = { required_small: 'あり', required_subtle: 'あり', off: '�
 const themes = PIECE_THEME_LABELS;
 const fontStyles = { system_readable: 'ゴシック', serif_readable: '明朝' };
 const textColors = { null: 'テーマに合わせる', neutral_ink: 'ニュートラル' };
+const alignments = { left: '左揃え', center: '中央揃え' };
 
 export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
@@ -37,7 +38,9 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
     aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode,
     ...(caps.font_style_ids?.length ? { font_style_id: preview.visual_recipe.font_style.font_style_id } : {}),
-    ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}) } : null;
+    ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}),
+    ...(caps.text_alignments?.length ? { text_alignment: preview.visual_recipe.font_style.text_alignment ??
+      pieceDefaultTextAlignment(preview.format_type) } : {}) } : null;
   const candidateIdentity = preview ? {
     preview_id: preview.preview_id, preview_revision: preview.preview_revision,
     visual_recipe_hash: preview.visual_recipe_hash,
@@ -129,6 +132,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
     caps.font_style_ids, caps.font_style_ids, fontStyles) : null;
   const textColorPicker = caps?.text_color_ids?.length ? choices('文字色', 'text_color_id',
     [null, ...caps.text_color_ids], [null, ...caps.text_color_ids], textColors) : null;
+  const alignmentPicker = caps?.text_alignments?.length ? choices('文字の配置', 'text_alignment',
+    caps.text_alignments, caps.text_alignments, alignments) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
@@ -223,6 +228,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
           palettePicker,
           fontPicker,
           textColorPicker,
+          alignmentPicker,
           aspectPicker,
           brandingPicker,
         ) : null,

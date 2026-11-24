@@ -34,6 +34,7 @@
  * The display reader and native renderer own their separate checks.
  */
 import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave } from './pieceApi';
+import { pieceDefaultTextAlignment } from './piecePalette';
 import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
@@ -265,9 +266,11 @@ export function createPieceCreateController(configuration = {}) {
     expectedRecipe.aspect_ratio = result.visual_recipe.aspect_ratio;
     expectedRecipe.branding.branding_mode = result.visual_recipe.branding.branding_mode;
     expectedRecipe.font_style.font_style_id = result.visual_recipe.font_style.font_style_id;
-    delete expectedRecipe.font_style.text_color_id;
-    if (result.visual_recipe.font_style.text_color_id !== undefined) {
-      expectedRecipe.font_style.text_color_id = result.visual_recipe.font_style.text_color_id;
+    for (const key of ['text_color_id', 'text_alignment']) {
+      delete expectedRecipe.font_style[key];
+      if (result.visual_recipe.font_style[key] !== undefined) {
+        expectedRecipe.font_style[key] = result.visual_recipe.font_style[key];
+      }
     }
     if (!equivalent(expectedRecipe, result.visual_recipe)) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
     if (mutation && !matchesVisualSelection(result.visual_recipe, {
@@ -281,14 +284,18 @@ export function createPieceCreateController(configuration = {}) {
     return { theme_id: recipe.theme.theme_id, aspect_ratio: recipe.aspect_ratio,
       branding_mode: recipe.branding.branding_mode,
       ...(caps?.font_style_ids?.length ? { font_style_id: recipe.font_style.font_style_id } : {}),
-      ...(caps?.text_color_ids?.length ? { text_color_id: recipe.font_style.text_color_id ?? null } : {}) };
+      ...(caps?.text_color_ids?.length ? { text_color_id: recipe.font_style.text_color_id ?? null } : {}),
+      ...(caps?.text_alignments?.length ? { text_alignment: recipe.font_style.text_alignment ?? null } : {}) };
   }
 
   function matchesVisualSelection(recipe, selection) {
+    const defaultAlignment = pieceDefaultTextAlignment(recipe.format_type);
     return recipe.theme.theme_id === selection.theme_id && recipe.aspect_ratio === selection.aspect_ratio &&
       recipe.branding.branding_mode === selection.branding_mode &&
       (selection.font_style_id === undefined || recipe.font_style.font_style_id === (selection.font_style_id ?? 'system_readable')) &&
-      (selection.text_color_id === undefined || (recipe.font_style.text_color_id ?? null) === selection.text_color_id);
+      (selection.text_color_id === undefined || (recipe.font_style.text_color_id ?? null) === selection.text_color_id) &&
+      (selection.text_alignment === undefined ||
+        (recipe.font_style.text_alignment ?? defaultAlignment) === (selection.text_alignment ?? defaultAlignment));
   }
 
   function rememberDisplaySettings() {
@@ -527,7 +534,9 @@ export function createPieceCreateController(configuration = {}) {
           !caps.branding_modes.includes(choice.branding_mode) ||
           (choice.font_style_id !== undefined && !caps.font_style_ids?.includes(choice.font_style_id ?? 'system_readable')) ||
           (choice.text_color_id !== undefined && (!caps.text_color_ids?.length ||
-            (choice.text_color_id !== null && !caps.text_color_ids.includes(choice.text_color_id))))) return;
+            (choice.text_color_id !== null && !caps.text_color_ids.includes(choice.text_color_id)))) ||
+          (choice.text_alignment !== undefined && (!caps.text_alignments?.length ||
+            (choice.text_alignment !== null && !caps.text_alignments.includes(choice.text_alignment))))) return;
       if (matchesVisualSelection(preview.visual_recipe, choice)) return;
     } catch { return; }
     visualRecovery = preview;
@@ -628,7 +637,7 @@ export function createPieceCreateController(configuration = {}) {
     const store = configuration.getSaveRecovery?.();
     if (store) {
       const entry = Object.freeze({ operation: captured, intent,
-        visualSelection: Object.freeze(selectedVisual(preview.visual_recipe)) });
+        visualSelection: Object.freeze(selectedVisual(preview.visual_recipe, preview.plan_capabilities)) });
       if (!store.remember(entry)) {
         const restored = restoreSaveRecovery({ expectedUserId: captured.expectedUserId,
           savedInputId: captured.request.source_ref.source_input_id,

@@ -8,7 +8,7 @@
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
 import { NativeModules, Platform } from 'react-native';
-import { PIECE_FONT_STYLE_IDS, PIECE_LEGACY_THEME_IDS, PIECE_STYLE_THEME_IDS, PIECE_TEXT_COLOR_IDS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1 } from './piecePalette';
+import { PIECE_FONT_STYLE_IDS, PIECE_LEGACY_THEME_IDS, PIECE_STYLE_THEME_IDS, PIECE_TEXT_ALIGNMENTS, PIECE_TEXT_COLOR_IDS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1, pieceDefaultTextAlignment } from './piecePalette';
 
 export function supportsPieceVisualStyle() {
   return typeof Platform !== 'undefined' && Platform.OS === 'ios' && typeof NativeModules !== 'undefined' &&
@@ -17,7 +17,7 @@ export function supportsPieceVisualStyle() {
 }
 
 function paletteHeaders() {
-  return { 'X-Piece-Palette': supportsPieceVisualStyle() ? '4' : '3' };
+  return { 'X-Piece-Palette': supportsPieceVisualStyle() ? '5' : '3' };
 }
 
 // Only advertise the compiled bridge's explicit brand/renderer capability.
@@ -88,7 +88,7 @@ const exact = (value, keys) => object(value) && Object.keys(value).length === ke
 const optionalExact = (value, fields, optional) => exact(value, [...fields,
   ...optional.filter(key => Object.prototype.hasOwnProperty.call(value || {}, key))]);
 const visualFields = ['theme_id', 'aspect_ratio', 'branding_mode'];
-const styleFields = { font_style_id: PIECE_FONT_STYLE_IDS, text_color_id: PIECE_TEXT_COLOR_IDS };
+const styleFields = { font_style_id: PIECE_FONT_STYLE_IDS, text_color_id: PIECE_TEXT_COLOR_IDS, text_alignment: PIECE_TEXT_ALIGNMENTS };
 const visualSelectionShape = value => optionalExact(value, visualFields, Object.keys(styleFields));
 const validStyleSelection = value => Object.entries(styleFields).every(([key, values]) =>
   value[key] === undefined || value[key] === null || values.includes(value[key]));
@@ -181,7 +181,8 @@ function validatePreviewPlan(value) {
   const style = { ...current, theme_ids: tier === 'free' ? PIECE_LEGACY_THEME_IDS : PIECE_STYLE_THEME_IDS,
     font_style_ids: tier === 'premium' ? PIECE_FONT_STYLE_IDS : [],
     text_color_ids: tier === 'premium' ? PIECE_TEXT_COLOR_IDS : [] };
-  const allowed = [legacy, current, style].find(policy => exact(caps, Object.keys(policy)) &&
+  const layout = { ...style, text_alignments: tier === 'free' ? [] : PIECE_TEXT_ALIGNMENTS };
+  const allowed = [legacy, current, style, layout].find(policy => exact(caps, Object.keys(policy)) &&
     caps.format_selection === policy.format_selection &&
     Object.keys(policy).filter(key => key !== 'format_selection').every(key => Array.isArray(caps[key]) &&
       caps[key].length === policy[key].length && caps[key].every((item, i) => item === policy[key][i])));
@@ -194,7 +195,8 @@ function validatePreviewPlan(value) {
       !allowed.aspect_ratios.includes(recipe.aspect_ratio) ||
       !allowed.branding_modes.includes(recipe.branding.branding_mode) ||
       (recipe.font_style.font_style_id !== 'system_readable' && !allowed.font_style_ids?.includes(recipe.font_style.font_style_id)) ||
-      (recipe.font_style.text_color_id !== undefined && !allowed.text_color_ids?.includes(recipe.font_style.text_color_id))) {
+      (recipe.font_style.text_color_id !== undefined && !allowed.text_color_ids?.includes(recipe.font_style.text_color_id)) ||
+      (recipe.font_style.text_alignment !== undefined && !allowed.text_alignments?.includes(recipe.font_style.text_alignment))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
 }
@@ -249,22 +251,26 @@ function validatePieceArtifact(value) {
       !['4:5', '9:16'].includes(recipe.aspect_ratio) ||
       !exact(recipe.template, ['template_id', 'template_version']) ||
       !exact(recipe.theme, ['theme_id', 'theme_version']) ||
-      !optionalExact(recipe.font_style, ['font_style_id', 'font_style_version'], ['text_color_id']) ||
+      !optionalExact(recipe.font_style, ['font_style_id', 'font_style_version'], ['text_color_id', 'text_alignment']) ||
       !exact(recipe.branding, ['branding_mode', 'branding_mark_id', 'branding_mark_version']) ||
       recipe.template.template_id !== { short_essay: 'essay_frame', quote: 'focus_frame', declaration: 'stance_frame' }[value.format_type] ||
       recipe.template.template_version !== 1 || !PIECE_STYLE_THEME_IDS.includes(recipe.theme.theme_id) ||
       recipe.theme.theme_version !== 1 || !PIECE_FONT_STYLE_IDS.includes(recipe.font_style.font_style_id) ||
       recipe.font_style.font_style_version !== 1 ||
       (recipe.font_style.text_color_id !== undefined && !PIECE_TEXT_COLOR_IDS.includes(recipe.font_style.text_color_id)) ||
+      (recipe.font_style.text_alignment !== undefined && (!PIECE_TEXT_ALIGNMENTS.includes(recipe.font_style.text_alignment) ||
+        recipe.font_style.text_alignment === pieceDefaultTextAlignment(recipe.format_type))) ||
       !['required_small', 'required_subtle', 'off'].includes(recipe.branding.branding_mode) ||
       recipe.branding.branding_mark_id !== 'cocolon_text_mark' || recipe.branding.branding_mark_version !== 1 ||
       (recipe.branding.branding_mode === 'required_small' &&
         (recipe.aspect_ratio !== '4:5' || !PIECE_LEGACY_THEME_IDS.includes(recipe.theme.theme_id) ||
-          recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined))) {
+          recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined ||
+          recipe.font_style.text_alignment !== undefined))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
   const styled = !PIECE_THEME_IDS.includes(recipe.theme.theme_id) ||
-    recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined;
+    recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined ||
+    recipe.font_style.text_alignment !== undefined;
   if (styled && value.renderer_version !== 'piece.rn_bitmap_renderer.ios.v2') reject('PIECE_TEMPORARILY_UNAVAILABLE');
 }
 

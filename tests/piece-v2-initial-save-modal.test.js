@@ -29,7 +29,7 @@ const renderPromise = Promise.resolve((() => {
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
     "import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';",
-    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS } from '../../features/piece/piecePalette';",
+    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
@@ -296,6 +296,7 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   preview.visual_recipe.font_style = { font_style_id: 'system_readable', font_style_version: 1 };
   preview.plan_capabilities.font_style_ids = [];
   preview.plan_capabilities.text_color_ids = [];
+  preview.plan_capabilities.text_alignments = ['left', 'center'];
   preview.plan_capabilities.theme_ids.push('sage_paper', 'peach_paper', 'slate_paper');
   const options = { onVisualChange: (...args) => calls.push(args) };
   const plus = nodes(await render(display, options));
@@ -304,13 +305,15 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   plus.find(node => node.props.testID === 'piece-theme-option-sage_paper').props.onPress();
   assert.equal(calls[0][0].theme_id, 'sage_paper');
   assert.ok(!Object.hasOwn(calls[0][0], 'text_color_id'));
+  plus.find(node => node.props.testID === 'piece-option-text_alignment-center').props.onPress();
+  assert.equal(calls[1][0].text_alignment, 'center');
   preview.quota.subscription_tier = 'premium';
   preview.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
   preview.plan_capabilities.text_color_ids = ['neutral_ink'];
   const premium = nodes(await render(display, options));
   premium.find(node => node.props.testID === 'piece-option-font_style_id-serif_readable').props.onPress();
   premium.find(node => node.props.testID === 'piece-option-text_color_id-neutral_ink').props.onPress();
-  assert.deepEqual(calls.slice(1).map(args => [args[0].font_style_id, args[0].text_color_id]),
+  assert.deepEqual(calls.slice(2).map(args => [args[0].font_style_id, args[0].text_color_id]),
     [['serif_readable', null], ['system_readable', 'neutral_ink']]);
   assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
 });
