@@ -1,3 +1,5 @@
+> **11/24 JST・Pieceの長い二欄と選択回答を実4Bで確認。** 2条件を隔離保存し、詳細と書き出しで同じ本文を確認。EmlisAIは架空8件の16更新後に引用・再読が6/8→4/8となり、通常採用を見送った。DeepInsightは訂正から同じ質問IDで出題・回答を再読。わたしマップは13件の全段階実4B試験を準備。 [議事録§11.77](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-fit16-piece-20261124)
+
 > **11/24 JST・マップの見出しを反映記録数13件に修正。** 隔離DBで同じID・本文・図を再読。EmlisAIは実4Bで14件比較、11件を同版再読し、本文品質のため通常採用は見送り。Pieceは新しい架空二欄・選択回答の模擬保存を確認。 [議事録§11.76](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-conversation-map-count-20261124)
 
 > **11/24 JST・観測応答10件が原文を保持し、マップの同文訂正を修正。** EmlisAIは実4Bで隔離保存・同版再読10件。見本の繰り返しと記載外の描写が残り通常採用は見送り。わたしマップは同じ33応答で13記録を隔離保存し、同じID・本文・図を再読。実4Bの全工程と本番反映が残る。 [議事録§11.75](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-quoted-feeling-and-map-merge-20261124)
