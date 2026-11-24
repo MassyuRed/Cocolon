@@ -265,7 +265,7 @@ export async function apiFetch(path, options = {}) {
   const selection = fixture.preview_b.visual_recipe;
   const expectedBody = post ? context.request : { expected_preview_revision: fixture.preview_a.preview_revision,
     visual_selection: { theme_id: selection.theme.theme_id, aspect_ratio: selection.aspect_ratio, branding_mode: selection.branding.branding_mode } };
-  const headers = { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', 'X-Piece-Palette': '3',
+  const headers = { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', 'X-Piece-Palette': '7',
     ...(post ? { 'Idempotency-Key': context.idempotencyKey } : { 'Cache-Control': 'no-store' }) };
   let body; try { body = JSON.parse(options.body); } catch { forbidden(); }
   const expectedKeys = ['method', 'auth', 'expectedUserId', 'headers', 'body', 'signal', ...(post ? ['timeoutMs'] : [])];
