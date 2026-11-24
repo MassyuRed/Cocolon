@@ -9756,3 +9756,21 @@ DeepInsightは本番と同じ `5d4d332` の通常HTTPと隔離PostgreSQLで、�
 EmlisAIの教師8件には好み2件、理由未記載2件、理由明記4件を採用した。学習では入力を損失の対象から除き、応答と終了トークンを学習した。学習32.912秒、重みSHA-256は `a1bac5943300dc60c22eaf377dadd381619f43c502067d2872f9265b1f29953a`。実測結果は、名前を表記することだけでは、Emlisが聞き手として本人の言葉を受け止める文にならず、引用も崩れることを示した。引用とフォローの両方をモデルが書く現行候補について、次の比較で確認するのは本人の原文を確実に保ちつつ、その場面をEmlisの体験として補わずに言葉を返せるかである。
 
 [EmlisAI実4B 8本文](../../observation_learning/trials/2026-11-24-cmee-emlis-fit16-piece/emlis-results.jsonl) · [Piece実4B 2本文](../../observation_learning/trials/2026-11-24-cmee-emlis-fit16-piece/piece-results.jsonl) · [議事録§11.77](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-fit16-piece-20261124)。
+
+<a id="cmee-observation-follow-and-piece-editor-20261124"></a>
+
+### 9.272 EmlisAIのフォロー分離とPiece画像編集の並行実装（11/24 JST）
+
+EmlisAIは初回に本人の気持ち一文を確定できる範囲で、同じ架空8件を2方式で比較した。v23は4Bが本文に一つの目印を出し、APIがその位置に原文を挿入する方式。生成は8/8件、目印は2/8件、原文を正確に表示し隔離DBで同版・同本文を再読できたのは1/8件、公開品質は0/8件。v24はAPIが原文を表示し、4Bは本人に返すフォローを書く方式。生成・正確な引用・同版再読は8/8件、独立した二者が公開品質を認めたのは、理由未記載の寂しさへの短い声かけ1/8件。しおりは記載外の温かみや作り手の想いを足し、蔵書印では好みを強め、理由を明記した例では原文を言い換えるフォローが残った。v24の通常採用は保留。
+
+Pieceの画像編集はFree既存2色、PlusとPremiumに単色背景3色を追加し、Premiumにゴシック／明朝とテーマ既定色／ニュートラルインクの候補を実装した。今回の追加色はセージペーパー・ピーチペーパー・スレートペーパー。新しい選択項目を表示できるiOSアプリとAPIは `X-Piece-Palette: 4` を使う。選択をプレビューの版とレシピに結び、プレビュー・非公開保存・詳細・書き出しで本文・設定・ハッシュを照合した。旧保存作品のレシピは既存のまま読める。契約更新で現在のプランが下がっても、対応クライアントは保存済みの画像設定を読み出せる。既存アプリは、従来の範囲内の設定と作品を読む。
+
+Pieceは隔離PostgreSQLを使うHTTP試験8件とアプリ回帰1,609件を通過した。Free・Plus・Premiumの許可・拒否、設定変更と初期値への復帰、保存後の再読と書き出し、旧クライアントとプラン変更後の再読を確認した。APIとアプリの15配色・文字色30組の解決結果が一致した。iOSの画像比較試験には既存の架空2作品と新設定1作品を追加した。iOSの実描画と端末での保存・共有、DB変更・API配備・対応アプリの配布が残る。文字サイズ・配置・グラデーション等は§9.261の候補として残す。
+
+既存A5000の通常4Bに架空入力を順に送り、v23は8.676秒、v24は6.720秒。通常4Bの停止や追加学習・本番DB書き込みを伴わず、終了時のヘルス200と認証付き自然応答GET 405を確認した。開始時の待機・実行中・直近予約は0件、試験後の新規ASTORジョブは0件。
+
+わたしマップは候補 eaae14b の架空13件・33段階の固定ZIPに、単独試験と通常4B復元の手順を追加し、ローカルで正常終了・中断・期限超過・復元を検査した。DeepInsightは、架空Premiumの訂正を起点に通常APIの計画・質問本文・前提・既回答の判定を既存4Bで取得する試験を固定し、模擬4段階を隔離DBへ通して出題・回答・再読を確認した。両機能の新規実4B生成は残る。
+
+Pieceの設定は既存レシピの配色・書体に結び、APIのプラン境界、保存SQL、表示と描画を同じ定義で照合した。SQL候補は `20261124040800_piece_v2_visual_editor.sql`。適用・配備する場合はDB、対応API、アプリの順とする。書体は新しいネイティブ描画で確認できる端末に限って提示する。候補APIの広い試験では506件通過し、失敗した36件は変更前の `5d4d332` でも同じ試験で再現した。EmlisAI v23の横断試験では693件通過し、失敗したQ4の17件は親のv22でも同じ試験で再現した。v24の引用・応答の対象試験24件は通過した。
+
+[EmlisAI v23](https://github.com/MassyuRed/mashos-api/commit/6d84d0ffa2dbce1553cd2246a8465dff9b179ab3) · [EmlisAI v24](https://github.com/MassyuRed/mashos-api/commit/12a10697433a506a1ea925d8cd2689de9e212854) · [Piece API・SQL](https://github.com/MassyuRed/mashos-api/commit/2f12fc655a7a69698d28988382eb90fbf8ed2089) · [Pieceアプリ](https://github.com/MassyuRed/Cocolon/commit/b8c9f356bfb5d9a4aa8d1c733a12515b5dbb018d) · [議事録§11.78](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-observation-follow-and-piece-editor-20261124) · [v23実応答](../../observation_learning/trials/2026-11-24-emlis-follow-piece-editor/v23-results.jsonl) · [v24実応答](../../observation_learning/trials/2026-11-24-emlis-follow-piece-editor/v24-results.jsonl)。
