@@ -4,6 +4,7 @@ name: Piece RN preview and owner contracts
   push:
     branches:
       - agent/three-core-cmee-current-structure-20260815
+      - 'agent/cmee-continuation-*'
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -406,7 +407,7 @@ jobs:
         env:
           BEFORE: ${{ github.event.before }}
         run: |
-          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- components/piece/PieceVisualCard.js features/piece/pieceLayout.js features/piece/pieceMeasuredWrap.js features/piece/pieceRenderer.js ios/tempCocolon/PieceTextMetrics.mm tests/native package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- components/piece features/piece ios/tempCocolon/PieceTextMetrics.mm tests/native package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
             echo 'changed=true' >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/setup-node@v6

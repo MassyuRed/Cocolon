@@ -50,7 +50,8 @@ function intersects(a, b, margin = 6) {
 // A static layout keeps the same relationships in the same place after a tap.
 // Links are deliberately undirected: a model reading is not a causal arrow.
 function buildSemanticMapLayout(p, availableWidth = 340) {
-  const width = Math.max(280, Math.round(availableWidth));
+  // Keep both node touch targets at least 44 points wide when placed side by side.
+  const width = Math.max(136, Math.floor(availableWidth));
   const nodeWidth = Math.min(166, (width - 48) / 2);
   const nodeHeight = 112;
   const rowPitch = 216;

@@ -270,6 +270,7 @@ test('period comparison renders the same limited differences in cards and text',
     const view = contract.buildWatashiMapV2ViewModel(projection);
     let render;
     await act(async () => { render = TestRenderer.create(React.createElement(Renderer, { contentJson: projection })); });
+    await act(async () => render.root.findByProps({ testID: 'watashi-map-v2-items-toggle' }).props.onPress());
     const body = JSON.stringify(render.toJSON());
     assert.ok(body.includes('前の期間との比較'));
     for (const line of view.comparisonText) {
@@ -292,6 +293,7 @@ test('protective intention renders a neutral heading and keeps target and uncert
   const Renderer = moduleLoader()('components/selfStructure/WatashiMapV2Renderer.js').default;
   let render;
   await act(async () => { render = TestRenderer.create(React.createElement(Renderer, { contentJson: projection })); });
+  await act(async () => render.root.findByProps({ testID: 'watashi-map-v2-items-toggle' }).props.onPress());
   const body = JSON.stringify(render.toJSON());
   assert.ok(body.includes('守る対象'));
   assert.ok(!body.includes('守っているもの'));
@@ -431,9 +433,17 @@ test('private, future and malformed v2 never enter legacy normalization', () => 
     .version, 'watashi.map.v1');
 });
 
-test('renderer shows actual graph, uncertainty and matching text without making cooccurrence directional', () => {
+test('renderer starts with matching text and opens the actual graph and uncertainty on demand', async () => {
   const Renderer = moduleLoader()('components/selfStructure/WatashiMapV2Renderer.js').default;
-  const render = TestRenderer.create(React.createElement(Renderer, { contentJson: fixtures[0].projection }));
+  let render;
+  await act(async () => { render = TestRenderer.create(React.createElement(Renderer, { contentJson: fixtures[0].projection })); });
+  const toggle = render.root.findByProps({ testID: 'watashi-map-v2-items-toggle' });
+  const initialLabels = render.root.findAllByType('Text').map(n => n.props.children);
+  assert.ok(initialLabels.includes(fixtures[0].text_projection.text));
+  assert.ok(!initialLabels.includes('まだ確定していない部分'));
+  assert.equal(toggle.props.accessibilityState.expanded, false);
+  await act(async () => toggle.props.onPress());
+  assert.equal(toggle.props.accessibilityState.expanded, true);
   const labels = render.root.findAllByType('Text').map((n) => n.props.children);
   assert.ok(labels.includes(fixtures[0].text_projection.text));
   assert.ok(labels.includes('まだ確定していない部分'));
@@ -443,7 +453,9 @@ test('renderer shows actual graph, uncertainty and matching text without making 
   assert.match(edge[0].props.accessibilityLabel, /順序や原因は確定していません/);
   assert.ok(!JSON.stringify(render.toJSON()).includes('LEGACY_RENDERER'));
   assert.ok(!labels.includes('根拠の記録を見る'));
-  render.unmount();
+  await act(async () => toggle.props.onPress());
+  assert.equal(toggle.props.accessibilityState.expanded, false);
+  await act(async () => render.unmount());
 });
 
 test('history viewer dispatches v2 and never exposes a mismatched legacy content_text', async () => {

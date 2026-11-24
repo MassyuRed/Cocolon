@@ -20,11 +20,7 @@ function SemanticMapDiagram({ projection, nodeRefs, colors, styles, choose }) {
   }, width), [projection, nodeRefs, width]);
   const nodeName = ref => projection.nodes.find(node => node.node_ref === ref)?.title || '';
   const accent = colors?.TITLE_GOLD || '#800020';
-  return <View testID="semantic-map-graph" style={styles.canvasShell} onLayout={event => {
-      const next = event.nativeEvent.layout.width;
-      if (Number.isFinite(next) && next >= 280 && Math.abs(next - width) >= 1) setWidth(next);
-    }}>
-      <View style={{ width: '100%', height: layout.height }}>
+  const canvas = <View style={{ width: layout.width, height: layout.height }}>
         <Svg width="100%" height={layout.height} viewBox={`0 0 ${layout.width} ${layout.height}`}
           style={StyleSheet.absoluteFill} accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
           {layout.edges.map(edge => <Path key={edge.edge_ref} d={edge.path} fill="none"
@@ -45,7 +41,12 @@ function SemanticMapDiagram({ projection, nodeRefs, colors, styles, choose }) {
             left: edge.labelBox.x, top: edge.labelBox.y, width: edge.labelBox.width, height: edge.labelBox.height }]}>
           <Text style={styles.relationText} numberOfLines={2} maxFontSizeMultiplier={1.2}>{edge.label}</Text>
         </TouchableOpacity>)}
-      </View>
+      </View>;
+  return <View testID="semantic-map-graph" style={styles.canvasShell} onLayout={event => {
+      const next = Math.floor(event.nativeEvent.layout.width);
+      if (Number.isFinite(next) && next > 0) setWidth(next);
+    }}>
+      {width < layout.width ? <ScrollView horizontal>{canvas}</ScrollView> : canvas}
     </View>;
 }
 

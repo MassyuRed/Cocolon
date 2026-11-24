@@ -3,6 +3,8 @@ import React from 'react';
 import { AppRegistry, View, Text, NativeModules, findNodeHandle } from 'react-native';
 import PieceVisualCard from '../../components/piece/PieceVisualCard';
 import { preparePieceNativeCard } from '../../features/piece/pieceLayout';
+import { PIECE_BACKGROUND_STYLES, PIECE_FONT_STYLE_IDS, PIECE_STYLE_THEME_IDS, PIECE_TEXT_ALIGNMENTS,
+  PIECE_TEXT_COLOR_IDS, PIECE_TEXT_SIZES } from '../../features/piece/piecePalette';
 import fixtures from './piece-rn-canvas-fixtures.json';
 import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 import admittedFixtures from './piece-rn-admitted-fixtures.json';
@@ -31,6 +33,17 @@ const cmeeStyleRecord = { ...cmeeStyleSource, row_version: 3,
   },
   visual_recipe_hash: '4a8db6358e116b25387f89ff813dce8ebebbb7b5a54c217d049067d3a1fa0ee8',
 };
+const artifactFields = ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+  'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'];
+const cmeeStylePreview = {
+  ...model73Fixtures.find(fixture => fixture.evidence_set === 'model73_preview').props.display.preview,
+  ...Object.fromEntries(artifactFields.map(key => [key, cmeeStyleRecord[key]])),
+  preview_revision: 2, row_version: 2, eligible_formats: ['short_essay'],
+  plan_capabilities: { format_selection: 'eligible_choice', theme_ids: PIECE_STYLE_THEME_IDS,
+    aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'],
+    font_style_ids: PIECE_FONT_STYLE_IDS, text_color_ids: PIECE_TEXT_COLOR_IDS,
+    text_alignments: PIECE_TEXT_ALIGNMENTS, text_sizes: PIECE_TEXT_SIZES, background_styles: PIECE_BACKGROUND_STYLES },
+};
 const cmeeLongFixtures = [...cmeeLongArtifacts, { case_id: 'style-candidate', saved_record: cmeeStyleRecord }]
   .flatMap(({ case_id, saved_record }) => [
   { name: `cmee_long_saved_${case_id}`, source_case_id: case_id, evidence_set: 'admitted_saved',
@@ -38,6 +51,10 @@ const cmeeLongFixtures = [...cmeeLongArtifacts, { case_id: 'style-candidate', sa
   { name: `cmee_long_export_${case_id}`, source_case_id: case_id, evidence_set: 'export_saved',
     test_profile: 'bitmap-v1', props: { savedRecord: saved_record, exportCanvas: true } },
 ]);
+cmeeLongFixtures.push({
+  name: 'cmee_long_preview_style-candidate', source_case_id: 'style-candidate', evidence_set: 'admitted_preview',
+  test_profile: 'bitmap-v1', props: { display: { phase: 'received', preview: cmeeStylePreview, hashVerified: true } },
+});
 let activeTrace;
 // Keep adapter decoding and B9 time separate from the raw native call. These
 // wrappers observe the real functions; no candidate, plan or deadline changes.
@@ -346,10 +363,9 @@ class CanvasCases extends React.Component {
       save_fit_handle_keys: fit ? Object.keys(fit) : [],
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
       ...(fixture.evidence_set.startsWith('model73_') || this.props.pieceGroup === 'cmee-long' ? { source_case_id: fixture.source_case_id,
-        recorded_artifact: Object.fromEntries(['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
-          'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'].map(key =>
+        recorded_artifact: Object.fromEntries(artifactFields.map(key =>
           [key, (display?.preview || fixture.props.savedRecord)[key]])) } : {}),
-      ...(this.props.pieceGroup === 'cmee-long' ? {
+      ...(this.props.pieceGroup === 'cmee-long' && fixture.props.savedRecord ? {
         saved_identity: Object.fromEntries(['piece_id', 'public_id', 'row_version', 'saved_at'].map(key =>
           [key, fixture.props.savedRecord[key]])),
       } : {}),

@@ -62,8 +62,9 @@ test('narrow graph keeps distinct node and relationship targets inside the canva
   crowded.edges=Array.from({length:11},(_,i)=>({...fixture.edges[i%3],edge_ref:`e${i+1}`,from_ref:'n1',to_ref:`n${i+2}`}));
   crowded.edges.push({...fixture.edges[0],edge_ref:'e12',from_ref:'n3',to_ref:'n10'});
   const disconnected=copy(crowded);disconnected.edges=[];
-  for (const candidate of [fixture,crowded,disconnected]) for (const width of [280, 320, 350, 600]) {
+  for (const candidate of [fixture,crowded,disconnected]) for (const width of [136, 240, 280, 320, 350, 600]) {
     const layout = buildSemanticMapLayout(candidate, width);
+    assert.equal(layout.width, width);
     const targets = [...layout.nodes.map(n => n.box), ...layout.edges.map(e => e.labelBox)];
     for (const box of targets) {
       assert(box.width >= 44 && box.height >= 44);
@@ -168,10 +169,14 @@ test('primary structures show the analysis and expand only the selected, explici
   assert(view.root.findByProps({ testID: `semantic-edge-${edge.edge_ref}` }));
   const graph = view.root.findByProps({ testID: 'semantic-map-graph' });
   assert.equal(graph.props.style.maxWidth, 440);
+  await act(async () => graph.props.onLayout({ nativeEvent: { layout: { width: 240.5 } } }));
+  const [, , width] = graph.findByType('Svg').props.viewBox.split(' ');
+  assert.equal(Number(width), 240);
   const renderedNode = graph.findByProps({ testID: `semantic-node-${edge.from_ref}` });
   const renderedStyle = Object.assign({}, ...renderedNode.props.style.filter(Boolean));
   assert.equal(renderedStyle.position, 'absolute');
   assert(Number.isFinite(renderedStyle.left) && Number.isFinite(renderedStyle.top));
+  assert(renderedStyle.left + renderedStyle.width <= Number(width));
   assert.equal(renderedStyle.x, undefined);
   assert.equal(view.root.findAllByProps({ testID: 'semantic-node-n4' }).length, 0);
   await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-1' }).props.onPress());

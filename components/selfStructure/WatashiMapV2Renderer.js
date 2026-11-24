@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { buildWatashiMapV2ViewModel, NODE_LABELS } from './watashiMapV2Contract';
 import { readSemanticMapProjection } from './semanticMapContract';
 
@@ -14,16 +14,33 @@ export default function WatashiMapV2Renderer(props) {
 function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false }) {
   const model = useMemo(() => buildWatashiMapV2ViewModel(contentJson), [contentJson]);
   const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
+  const [expandedProjection, setExpandedProjection] = useState(null);
   if (!model) return (
     <View style={styles.card} accessibilityRole="alert">
       <Text style={styles.body}>この分析結果は表示できません。もう一度取得してください。</Text>
     </View>
   );
+  const expanded = expandedProjection === model.projectionOf;
   return (
     <View style={styles.root} testID="watashi-map-v2">
       <Text style={styles.title} accessibilityRole="header">記録から見えるわたし</Text>
       <Text style={styles.subtle}>{model.periodLabel}</Text>
       <Text style={styles.subtle}>記録に書かれた内容をもとにしています。原因や未来の予測ではありません。</Text>
+      <Text style={styles.body}>{model.text}</Text>
+      <TouchableOpacity testID="watashi-map-v2-items-toggle" accessibilityRole="button"
+        accessibilityState={{ expanded }} style={styles.itemsToggle}
+        onPress={() => setExpandedProjection(expanded ? null : model.projectionOf)}>
+        <Text style={styles.actionLabel}>{expanded ? '一覧を閉じる' : '項目を一覧で読む'}</Text>
+      </TouchableOpacity>
+      {expanded ? <LegacyWatashiMapV2Items model={model} styles={styles}
+        showPeriodComparison={contentJson?.map_context?.profile !== 'cumulative.v1'} /> : null}
+    </View>
+  );
+}
+
+function LegacyWatashiMapV2Items({ model, styles, showPeriodComparison }) {
+  return (
+    <View style={styles.root}>
       <View style={styles.lane}>
         <Text style={styles.section} accessibilityRole="header">観測された内容</Text>
         {model.nodes.map((node) => (
@@ -69,16 +86,12 @@ function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false }) {
         <Text style={styles.subtle}>関連する観測：{badge.targetLabels.join(' ／ ')}</Text>
         <Text style={styles.body}>{badge.visible_label}</Text>
       </View>)}
-      {contentJson?.map_context?.profile === 'cumulative.v1' ? null : model.comparisonState === 'NO_PREVIOUS'
+      {!showPeriodComparison ? null : model.comparisonState === 'NO_PREVIOUS'
         ? <Text style={styles.subtle}>前の期間との比較はありません。</Text>
         : <View style={styles.card}>
           <Text style={styles.section} accessibilityRole="header">前の期間との比較</Text>
           {model.comparisonText.map((line, index) => <Text style={styles.body} key={index}>{line}</Text>)}
         </View>}
-      <View style={styles.card}>
-        <Text style={styles.section} accessibilityRole="header">文章で読む</Text>
-        <Text style={styles.body}>{model.text}</Text>
-      </View>
     </View>
   );
 }
@@ -94,6 +107,8 @@ function makeStyles(colors, dark) {
     section: { color: ink, fontSize: 18, lineHeight: 26, fontWeight: '600', marginBottom: 8 },
     body: { color: ink, fontSize: 16, lineHeight: 27, fontWeight: '400' },
     subtle: { color: muted, fontSize: 14, lineHeight: 22, fontWeight: '400' },
+    itemsToggle: { minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start', paddingHorizontal: 4 },
+    actionLabel: { color: colors?.TITLE_GOLD || ink, fontSize: 14, lineHeight: 23, fontWeight: '600' },
     kind: { color: muted, fontSize: 14, lineHeight: 22, fontWeight: '600', marginBottom: 5 },
     lane: { gap: 12 },
     card: { backgroundColor: paper, borderColor: border, borderWidth: 1, borderRadius: 24, padding: 20, gap: 8 },

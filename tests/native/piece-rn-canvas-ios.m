@@ -1358,7 +1358,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   self.resultModule = [PieceCanvasTest new];
   self.resultModule.reports = [NSMutableArray new];
   self.resultModule.reportFilename = @"cmee-long-results.json";
-  XCTestExpectation *done = [self expectationWithDescription:@"CMEE saved and export pairs with a styled case"];
+  XCTestExpectation *done = [self expectationWithDescription:@"CMEE saved and export pairs and the styled preview"];
   self.resultModule.completed = ^{ [done fulfill]; };
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
   @try {
@@ -1372,7 +1372,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     NSArray<NSDictionary *> *reports = self.resultModule.reports;
     NSArray<NSString *> *expectedNames = @[@"cmee_long_saved_original-only", @"cmee_long_export_original-only",
       @"cmee_long_saved_with-answer", @"cmee_long_export_with-answer",
-      @"cmee_long_saved_style-candidate", @"cmee_long_export_style-candidate"];
+      @"cmee_long_saved_style-candidate", @"cmee_long_export_style-candidate", @"cmee_long_preview_style-candidate"];
     XCTAssertEqual(reports.count, expectedNames.count);
     if (reports.count != expectedNames.count) return;
     XCTAssertEqualObjects([reports valueForKey:@"name"], expectedNames);
@@ -1392,6 +1392,13 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       return [filename isKindOfClass:NSString.class] ?
         [UIImage imageWithContentsOfFile:[evidenceDirectory stringByAppendingPathComponent:filename]] : nil;
     };
+    NSDictionary *styledPreview = reports.lastObject;
+    XCTAssertEqualObjects(styledPreview[@"phase"], @"native_checked", @"%@", styledPreview);
+    XCTAssertEqualObjects(styledPreview[@"save_fit_current"], @YES);
+    XCTAssertEqualObjects(styledPreview[@"save_fit_wrong_token_current"], @NO);
+    XCTAssertEqualObjects(styledPreview[@"native_canvas_valid"], @YES);
+    XCTAssertEqualObjects(styledPreview[@"bitmap_all_cells_equal"], @YES);
+    XCTAssertEqualObjects(styledPreview[@"capture_error"], @NO);
     for (NSUInteger i = 0; i < sourceCases.count; i++) {
       NSDictionary *saved = reports[2 * i], *exported = reports[2 * i + 1];
       NSDictionary *artifact = saved[@"recorded_artifact"], *identity = saved[@"saved_identity"];
@@ -1444,6 +1451,14 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertNotNil(exportFilePixels);
       XCTAssertEqualObjects(savedPixels, exportCanvasPixels, @"%@", sourceCases[i]);
       XCTAssertEqualObjects(savedPixels, exportFilePixels, @"%@", sourceCases[i]);
+      if (styled) {
+        for (NSString *key in @[@"recorded_artifact", @"blocks", @"rows", @"width", @"height"]) {
+          XCTAssertEqualObjects(styledPreview[key], saved[key], @"%@", key);
+        }
+        NSData *previewPixels = PieceExportRGBA(imageForReport(styledPreview, @"png"));
+        XCTAssertNotNil(previewPixels);
+        XCTAssertEqualObjects(previewPixels, savedPixels);
+      }
       if (styled && savedPixels.length == 1080 * 1350 * 4) {
         const UInt8 *rgba = savedPixels.bytes;
         const UInt8 *top = rgba + (54 * 1080 + 54) * 4;
