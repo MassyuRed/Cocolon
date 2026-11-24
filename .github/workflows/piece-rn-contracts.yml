@@ -4,6 +4,7 @@ name: Piece RN preview and owner contracts
   push:
     branches:
       - agent/three-core-cmee-current-structure-20260815
+      - agent/cmee-9b-piece-ios-check-20261124
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
