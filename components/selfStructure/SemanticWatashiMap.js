@@ -107,16 +107,16 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
   return <View testID="watashi-map-v3" style={styles.root}>
     {structures?.map((structure, index) => {
       const expanded = activeStructure === structure;
+      const diagramAction = expanded ? '図を閉じる' : '関係する部分を図で見る';
       return <View key={structure.title} style={styles.structure}>
+        <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
+        <Text accessibilityRole="header" style={styles.sectionTitle}>{structure.title}</Text>
+        <Text style={styles.body}>{structure.description}</Text>
         <TouchableOpacity testID={`semantic-structure-toggle-${index}`} accessibilityRole="button"
-          accessibilityLabel={`${scopeLabels[structure.scope]}。${structure.title}。${structure.description}`}
-          accessibilityHint={expanded ? '図を閉じます' : '関係する部分の図を表示します'}
+          accessibilityLabel={`${diagramAction}。${structure.title}`}
           accessibilityState={{ expanded }} style={styles.structureButton}
           onPress={() => toggleStructure(index, expanded)}>
-          <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
-          <Text accessibilityRole="header" style={styles.sectionTitle}>{structure.title}</Text>
-          <Text style={styles.body}>{structure.description}</Text>
-          <Text style={styles.actionLabel}>{expanded ? '図を閉じる' : '関係する部分を図で見る'}</Text>
+          <Text style={styles.actionLabel}>{diagramAction}</Text>
         </TouchableOpacity>
         {expanded ? <SemanticMapDiagram projection={projection} nodeRefs={structure.node_refs}
           styles={styles} colors={colors} choose={choose} /> : null}
@@ -219,7 +219,7 @@ function makeStyles(colors, dark) {
     linear: { gap: 8 }, linearItem: { minHeight: 44, paddingVertical: 12, borderBottomWidth: 1, borderColor: border, gap: 5 },
     sectionTitle: { color: ink, fontSize: 17, lineHeight: 27, fontWeight: '600' },
     structure: { gap: 7, paddingVertical: 12, borderTopWidth: 1, borderColor: border },
-    structureButton: { minHeight: 44, gap: 7 },
+    structureButton: { minHeight: 44, alignSelf: 'flex-start', justifyContent: 'center' },
     body: { color: ink, fontSize: 16, lineHeight: 28 }, summary: { color: ink, fontSize: 17, lineHeight: 29, fontWeight: '500' },
     context: { color: muted, fontSize: 13, lineHeight: 23 },
     overlay: { flex: 1, backgroundColor: 'rgba(20,12,15,0.48)', justifyContent: 'center', padding: 20 },

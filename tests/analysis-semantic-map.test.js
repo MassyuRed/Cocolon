@@ -158,14 +158,22 @@ test('primary structures show the analysis and expand only the selected, explici
   assert(!JSON.stringify(view.toJSON()).includes('項目を一覧で読む'));
   for (const [index, structure] of map.overview.primary_structures.entries()) {
     const toggle = view.root.findByProps({ testID: `semantic-structure-toggle-${index}` });
+    const paragraph = view.root.findAllByType('Text').find(node => node.props.children === structure.description);
+    for (const narrative of [headings[index], paragraph]) {
+      assert(narrative.parent === toggle.parent, 'the prose is separate from the diagram button');
+      assert(toggle.parent.children.indexOf(narrative) < toggle.parent.children.indexOf(toggle));
+      assert.equal(narrative.props.onPress, undefined);
+    }
+    assert.equal(toggle.props.accessibilityRole, 'button');
     assert.equal(toggle.props.accessibilityState.expanded, false);
-    const labels = toggle.findAllByType('Text').map(node => node.props.children);
-    assert(labels.includes(structure.title) && labels.includes(structure.description));
-    assert(toggle.props.accessibilityLabel.includes(structure.description));
+    assert.equal(toggle.props.accessibilityLabel, `関係する部分を図で見る。${structure.title}`);
+    assert.deepEqual(toggle.findAllByType('Text').map(node => node.props.children), ['関係する部分を図で見る']);
   }
   assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
   await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
   assert.equal(view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.accessibilityState.expanded, true);
+  assert.equal(view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.accessibilityLabel,
+    `図を閉じる。${map.overview.primary_structures[0].title}`);
   assert(view.root.findByProps({ testID: `semantic-edge-${edge.edge_ref}` }));
   const graph = view.root.findByProps({ testID: 'semantic-map-graph' });
   assert.equal(graph.props.style.maxWidth, 440);
