@@ -1892,3 +1892,5 @@ scope75d8633dは失敗時終了条件で閉鎖。追加修正／retry／次scope
 ## 11/24　主要構造の文章と選択した小図（候補）
 
 `SemanticWatashiMap.js` は保存済み主要構造の文章を先に表示し、一つ選ぶと関連項目と関係のみの小図を開く。`semanticMapContract.js` は実測幅をレイアウトに使う。最低幅に届かない場合は横に移動できる。`WatashiMapV2Renderer.js` の旧保存形式も最初に本文を読み、操作したときに項目・関係・不確定箇所を展開する。現行と月次の保存・読み戻し、本人資料の内部参照を引き継ぐ。APIは `cores/analysis/semantic_admission.py` の主要構造候補で独立した原記録を照合し、内部の項目番号を出した構造を表示から除外する。 [詳細設計§9.277](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-9b-observation-piece-map-continuation-20261124)
+
+`CumulativeWatashiMapView.js` では、旧APIの最初の認証済み応答に含まれる本文を表示した状態で、同じ保存ID・月の小図を取得する。本文が表示されても復元処理が終わるまで既読を付けない。権限エラー・版の不一致・所有者切り替えでは先行本文を破棄する。 [詳細設計§9.278](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-observation-v27-and-map-read-continuation-20261124)

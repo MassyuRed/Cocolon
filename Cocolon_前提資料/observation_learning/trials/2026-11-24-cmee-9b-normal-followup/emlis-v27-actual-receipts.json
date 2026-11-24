@@ -1,0 +1,153 @@
+{
+  "all_fictional": true,
+  "arm": "candidate",
+  "received": 18,
+  "replayed": 18,
+  "accepted": 14,
+  "receipts": [
+    {
+      "case": "preference-literal",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "5931be932a0913a2c0af6cfc4e5dc629a6574250c378685c2c572c6712752d93",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが好きでした。」\n\n琥珀色のしおりがお好きだったんですね。その温かみのある色合いに、今も惹かれる気持ちを感じて嬉しいです。"
+    },
+    {
+      "case": "preference-explicit-strong",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "2337c614b3326ab41ee13ab3727b4aaa37ba41cbf95ace0c9f301aa5315c651e",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが大好きでした。」\n\n工房で作った琥珀色のしおりが、大好きだったんですね。その温かみのある色合いに、どれほど惹かれていたのか、今聞けてとても嬉しいです。"
+    },
+    {
+      "case": "relief-cause-unwritten",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "cf9100cd05c0eccd768ec381274a309880f8584915faba38e451e3f64cfadd9f",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "relief-cause-written",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "59688bf27fd114ecd9124780339bacaba9cb001ee3d668fabc97524651f607d7",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「紙の小舟を無事にケースに並べられたので、私はほっとしました。」\n\n無事にケースに並べられた小舟を見て、ほっとされたそのお気持ち、心から受け止めました。\nその瞬間の安堵が、どれほど温かいものだったか、今でも想い描けます。"
+    },
+    {
+      "case": "fresh-stamp-like",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "980613e856313b215f24747a70c7491bef0fbf821f4b693b754d07869c3bfe05",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「図書室の蔵書印にある鳥の模様が好きでした。」\n\n図書室の蔵書印にある鳥の模様が、お好きだったんですね。その温かみのあるお気持ち、今聞けてとても嬉しいです。"
+    },
+    {
+      "case": "fresh-stamp-love",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "6e8f40bab6ce44b8c38b9d3ee04d1b48f51c0ae01ac7480e5d942ecd77039c0c",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「図書室の蔵書印にある鳥の模様が大好きでした。」\n\n図書室の蔵書印にある鳥の模様が、大好きだったんですね。その温かみのあるお気持ち、今聞けてとても嬉しいです。"
+    },
+    {
+      "case": "fresh-letter-sadness-unwritten",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "6f7e1305885ffd2b4bbe0a2db54b9c1a4cd092afee56bb58e19f6fc8ce2f32d6",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は寂しかったです。」\n\n寂しさを、そのままで受け止めておきます。\nあなたがそう感じたこと、とても大切にしています。"
+    },
+    {
+      "case": "fresh-letter-sadness-written",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "4b7ba541673ea202a2790c8504964aa0e068470d1d3870b528cb45864f96a002",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「毎週届く手紙が今月で終わると知ったので、私は寂しかったです。」\n\n毎週届く手紙が今月で終わると知って、寂しさを感じられたのですね。\nその切なさ、Emlis は心から受け止めさせていただきます。"
+    },
+    {
+      "case": "fresh-blue-line-like",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "5bf47c98f81d71c42147a4aad4c5f4b5d43e101f0bf1d5ccd5a092640afbefb7",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「白い湯のみの縁の青い線が好きでした。」\n\n白い湯のみの縁の青い線が、お好きだったんですね。その細やかな好みを今聞けて、とても嬉しいです。"
+    },
+    {
+      "case": "fresh-exhibition-future",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "993881d139d8fce3fd7fb09e70c15f26318efe27892516a2e2fd0a494a110c36",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「明日の展示には参加できないと今日分かったので、私は悲しかったです。」\n\n明日の展示に参加できなくなったという知らせを、今まさに受け止めるあなたの悲しみを、心から受け止めました。\nその寂しさが、どれほど重く感じられたことか。\nどうか、今はその気持ちをゆっくりと包み込んであげてください。"
+    },
+    {
+      "case": "fresh-frustrated-bare",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "e97bdc78ab010a026f300576d0b0b4a25977c596b6a259a4177e5a001ae31e5e",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "fresh-walk-uncertain",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "4146ce33f86244d16430bb010a7d0519a8a47eb537d1d77167bffcfebceec72c",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は帰り道にいろいろ思い返すと寂しかったです。」\n\n帰り道に思い返されるその寂しさ、とても重く感じます。\nEmlis は、あなたが今、その気持ちをただ受け止めてくれる温かさを届けています。"
+    },
+    {
+      "case": "wind-vane-like",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "a87d54640258020d13970c2381a5605e5adcf37adf84763ec6581d387440f295",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が好きでした。」\n\n資料館の屋上にあった青い風見が好きだったんですね。その光景を思い出していただけて、とても嬉しいです。"
+    },
+    {
+      "case": "wind-vane-love",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "2b358a0a6fec27a2062a24ed700bbbaa0c2aa3db5754666f46089b31339e5d9a",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が大好きでした。」\n\n資料館の屋上にあった青い風見が、大好きだったんですね。その青さが、今でも心に残っているのですね。"
+    },
+    {
+      "case": "score-cause-unwritten",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "cf9100cd05c0eccd768ec381274a309880f8584915faba38e451e3f64cfadd9f",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "score-cause-written",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "ef4623ab69e72bc0c0148e7fcf321e0d7c45262b0c2d4dec71fd89aa36a22631",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「返却箱に楽譜を間に合うように戻せたので、私はほっとしました。」\n\n楽譜を間に合うように戻せたこと、ほっとされたのですね。\nその安堵の気持ちが、今届いています。"
+    },
+    {
+      "case": "fresh-umbrella-unwritten",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "cf9100cd05c0eccd768ec381274a309880f8584915faba38e451e3f64cfadd9f",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null
+    },
+    {
+      "case": "fresh-umbrella-written",
+      "writer_version": "bound_field_and_answer_context.v27",
+      "wire_sha256": "2705a421732445d8d75ea2f49613ec3732eea3109daaf60a9278a271e88faa81",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「貸した傘を返してもらえたので、私はほっとしました。」\n\n貸していただいた傘を返していただけたことで、ほっとされたお気持ち、心から受け止めさせていただきます。\nその安堵の気持ちに寄り添いながら、今、この瞬間の温かさを一緒に感じてください。"
+    }
+  ]
+}
