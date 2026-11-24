@@ -1888,3 +1888,7 @@ scope75d8633dは失敗時終了条件で閉鎖。追加修正／retry／次scope
 ## 11/24　既存APIと次のわたしマップ画面の表示互換
 
 `components/selfStructure/CumulativeWatashiMapView.js` は `semantic.v2` を先に要求する。本番 `f91bba8` の変換が作る関係線なしの旧データを `cumulativeMapContract.js` が識別した場合のみ、既存詳細APIを `semantic.v1` で一度読み直す。最初の結果と同じ認証所有者・保存IDを指定し、月次は同じ月も確認する。最新取得の更新状態は引き継ぐ。比較中の最新と月次は個別に照合する。所有者変更、画面移動、新しい取得で旧結果を破棄する。追加モデル生成、DB・配信用の型の変更はない。該当テストは `tests/analysis-cumulative-map.test.js`。実機配布前の変更候補。
+
+## 11/24　主要構造の文章と選択した小図（候補）
+
+`SemanticWatashiMap.js` は保存済み主要構造の文章を先に表示し、一つ選ぶと関連項目と関係のみの小図を開く。`semanticMapContract.js` は実測幅をレイアウトに使う。最低幅に届かない場合は横に移動できる。`WatashiMapV2Renderer.js` の旧保存形式も最初に本文を読み、操作したときに項目・関係・不確定箇所を展開する。現行と月次の保存・読み戻し、本人資料の内部参照を引き継ぐ。APIは `cores/analysis/semantic_admission.py` の主要構造候補で独立した原記録を照合し、内部の項目番号を出した構造を表示から除外する。 [詳細設計§9.277](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-9b-observation-piece-map-continuation-20261124)
