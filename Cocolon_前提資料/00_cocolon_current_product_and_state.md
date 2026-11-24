@@ -1,3 +1,5 @@
+> **11/24 JST・マップの見出しを反映記録数13件に修正。** 隔離DBで同じID・本文・図を再読。EmlisAIは実4Bで14件比較、11件を同版再読し、本文品質のため通常採用は見送り。Pieceは新しい架空二欄・選択回答の模擬保存を確認。 [議事録§11.76](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-conversation-map-count-20261124)
+
 > **11/24 JST・観測応答10件が原文を保持し、マップの同文訂正を修正。** EmlisAIは実4Bで隔離保存・同版再読10件。見本の繰り返しと記載外の描写が残り通常採用は見送り。わたしマップは同じ33応答で13記録を隔離保存し、同じID・本文・図を再読。実4Bの全工程と本番反映が残る。 [議事録§11.75](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-quoted-feeling-and-map-merge-20261124)
 
 > **11/24 JST・A5000は通常4Bの単独稼働を前提に運用。** 比較時に通常と試験を交互に起動し、4分18秒で通常を復元。観測応答は5題材・15本文で公開品質0件。わたしマップは隔離で33段階を確認し、最終本文の重複判定で保存を保留。 [議事録§11.74](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-a5000-exclusive-comparison-20261124)
