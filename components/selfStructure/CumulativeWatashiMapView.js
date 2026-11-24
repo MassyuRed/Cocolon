@@ -97,7 +97,6 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       if (reportId) {
         row = await readDetail(reportId, month);
         if (!active()) return;
-        row = await restoreSemanticMap(row, month);
       } else {
         const data = await readMap(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : `ensure=true&background=true${force ? '&force=true' : ''}`}`);
         if (!active()) return;
@@ -107,7 +106,15 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
           if (active()) setState({ key, empty: true, insufficient: data.reason === 'insufficient_input', coverage: data?.map_context, refreshStatus });
           return;
         }
-        row = await restoreSemanticMap(row);
+      }
+      if (isLegacySemanticDowngrade(row)) {
+        // The authenticated first read has a complete, validated text view.
+        // Keep that report readable while its compatible graph is fetched.
+        const saved = row;
+        setState(previous => previous.key === key && previous.row?.id === saved.id
+          ? { ...previous, refreshStatus }
+          : { key, row: saved, loading: true, semanticRestorePending: true, refreshStatus });
+        row = await restoreSemanticMap(saved, reportId ? month : null);
       }
       if (withCurrent && reportId) {
         if (!active()) return;
@@ -202,7 +209,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   }, [focused, appActive, planLoading, state.key, state.loading, state.refreshStatus, key, owner, reportId, compare, load]);
 
   useEffect(() => {
-    if (state.key !== key || !state.row || planLoading || !focused || !appActive) return;
+    if (state.key !== key || state.semanticRestorePending || !state.row || planLoading || !focused || !appActive) return;
     if (reportId) {
       apiPost('/report-reads/mark', { report_id: state.row.id,
         report_table: 'analysis_observed_artifacts', report_scope: 'myprofile' },
@@ -210,7 +217,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     } else if (typeof seenCallback.current === 'function') {
       try { Promise.resolve(seenCallback.current(state.row.content_json.watashiMap.projection_of)).catch(() => {}); } catch {}
     }
-  }, [state.key, state.row, key, reportId, owner, planLoading, focused, appActive]);
+  }, [state.key, state.semanticRestorePending, state.row, key, reportId, owner, planLoading, focused, appActive]);
 
   const coverage = (value, isSemantic = false) => value ? <View style={styles.notice}>
     <Text style={[styles.bodyText, { color: ink }]}>{isSemantic
@@ -263,7 +270,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       <View style={{ width: 44 }} />
     </View> : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
-      {!visible || state.loading ? <View style={{ gap: 12 }}>
+      {!visible || (state.loading && (!state.semanticRestorePending || compare)) ? <View style={{ gap: 12 }}>
         <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="保存したマップを取得しています" />
         <Text style={[styles.meta, { color: ink }]}>保存したマップを取得しています。</Text>
       </View> : null}

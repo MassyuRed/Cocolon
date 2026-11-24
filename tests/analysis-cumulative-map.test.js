@@ -319,6 +319,41 @@ test('an older renderer restores relationships by reading the same current repor
   await act(async()=>view.unmount());
 });
 
+test('current and monthly maps show a validated legacy body while the same saved report restores its graph', async () => {
+  for (const month of [null, '2026-10-01']) {
+    const pending = deferred();
+    const legacy = downgrade(semantic);
+    const stored = row(month, legacy);
+    const h = harness(async (url, opts) => {
+      assert.equal(opts.expectedUserId, owner);
+      if (requestedRenderer(opts) === 'semantic.v1') {
+        assert(url.endsWith(`/reports/${stored.id}${month ? `?month=${month}` : ''}`));
+        return pending.promise;
+      }
+      return month ? { item: stored } : { ...latest(legacy), refresh_status: 'queued' };
+    });
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    const seen = [];
+    const props = month ? { reportId: stored.id, month } : { onLatestSeenVersion: version => seen.push(version) };
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(Screen, props)); });
+    assert.equal(view.root.findAllByProps({ testID: 'watashi-map-v2' }).length, 1);
+    assert(JSON.stringify(view.toJSON()).includes(JSON.stringify(legacy.nodes[0].visible_label).slice(1, -1)));
+    assert(!JSON.stringify(view.toJSON()).includes('semantic-map-graph'));
+    assert.equal(view.root.findAllByType('ActivityIndicator').length, 0);
+    assert.equal(h.calls.filter(([verb]) => verb === 'POST').length, 0);
+    assert.deepEqual(seen, []);
+    if (!month) assert(JSON.stringify(view.toJSON()).includes('保存したマップを先に表示しています。'));
+    await act(async () => pending.resolve({ item: row(month, semantic) }));
+    assert.equal(view.root.findAllByProps({ testID: 'watashi-map-v3' }).length, 1);
+    assert.equal(view.root.findAllByProps({ testID: 'watashi-map-v2' }).length, 0);
+    assert.equal(h.calls.filter(([verb]) => verb === 'GET').length, 2);
+    assert.equal(h.calls.filter(([verb]) => verb === 'POST').length, month ? 1 : 0);
+    assert.deepEqual(seen, month ? [] : [semantic.projection_of]);
+    await act(async () => view.unmount());
+  }
+});
+
 test('semantic fallback keeps the selected history month separate from its current comparison',async()=>{
   const month = '2026-10-01';
   const archive = copy(semantic);
@@ -347,18 +382,26 @@ test('semantic fallback keeps the selected history month separate from its curre
   await act(async()=>view.unmount());
 });
 
-test('semantic fallback keeps a transiently unavailable legacy map and rejects a different report',async()=>{
-  for (const transient of [true,false]) {
+test('semantic fallback keeps a transiently unavailable legacy map and clears it on access or identity failure',async()=>{
+  for (const failure of ['transient', 'unauthorized', 'identity']) {
+    const pending = deferred();
     const h = harness(async (url, opts) => {
       if (requestedRenderer(opts)==='semantic.v2') return latest(downgrade(semantic));
-      if (transient) throw Object.assign(new Error('temporarily unavailable'),{status:503});
-      const different=copy(semantic);
-      different.projection_of='artifact:00000000000000000000000000000066@1';
-      return {item:row(null,different)};
+      return pending.promise;
     });
     const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
     let view;
     await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+    assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,1);
+    const transient = failure === 'transient';
+    if (failure === 'identity') {
+      const different=copy(semantic);
+      different.projection_of='artifact:00000000000000000000000000000066@1';
+      await act(async () => pending.resolve({item:row(null,different)}));
+    } else {
+      const status = transient ? 503 : 403;
+      await act(async () => pending.reject(Object.assign(new Error(failure), {status})));
+    }
     assert.equal(h.calls.filter(c=>c[0]==='GET').length,2);
     assert.equal(view.root.findAllByProps({testID:'watashi-map-v3'}).length,0);
     assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,transient?1:0);
@@ -414,6 +457,8 @@ test('an ownership change aborts the old renderer fallback and ignores its late 
   const element=()=>React.createElement(Screen,{onLatestSeenVersion:x=>seen.push(x)});
   let view;
   await act(async()=>{view=Renderer.create(element());});
+  assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,1);
+  assert.deepEqual(seen,[]);
   const previousFallback=h.calls.find(c=>requestedRenderer(c[2])==='semantic.v1')[2];
   assert.equal(previousFallback.signal.aborted,false);
   h.auth.session={user:{id:nextOwner}};
