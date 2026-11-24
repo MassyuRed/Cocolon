@@ -254,6 +254,46 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   await act(async()=>view.unmount());
 });
 
+test('current and monthly maps open with the saved structure text and keep detail inside its graph', async () => {
+  const map = copy(semantic);
+  const selected = map.nodes[0];
+  map.overview.primary_structures = [{ title: '確かめる時間', description: '自分で一度確かめてから選んでいます。',
+    scope: 'in_this_record', node_refs: [selected.node_ref] }];
+  const structure = map.overview.primary_structures[0];
+  for (const month of [null, '2026-10-01']) {
+    const stored = row(month, map);
+    const h = harness(async (url, opts) => {
+      assert.equal(opts.expectedUserId, owner);
+      assert.equal(requestedRenderer(opts), 'semantic.v2');
+      if (month) {
+        assert(url.endsWith(`/reports/${stored.id}?month=${month}`));
+        return { item: stored };
+      }
+      assert(url.endsWith('/latest?ensure=true&background=true'));
+      return latest(map);
+    });
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(Screen, month ? { reportId: stored.id, month } : {})); });
+    const visibleTexts = view.root.findAllByType('Text').map(node => node.props.children);
+    assert(visibleTexts.indexOf(structure.title) >= 0);
+    assert(visibleTexts.includes(structure.description));
+    if (month) assert(visibleTexts.indexOf(structure.description) < visibleTexts.indexOf('現在のマップと見比べる'));
+    assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
+    await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
+    const visibleGraph = view.root.findByProps({ testID: 'semantic-map-graph' });
+    assert.deepEqual(visibleGraph.findAllByType('TouchableOpacity').map(node => node.props.testID),
+      [`semantic-node-${selected.node_ref}`]);
+    await act(async () => visibleGraph.findByProps({ testID: `semantic-node-${selected.node_ref}` }).props.onPress());
+    const modal = view.root.findByType('ModalContent');
+    assert(modal.findAllByType('Text').some(node => node.props.children === selected.explanation));
+    assert(!JSON.stringify(view.toJSON()).includes('根拠の記録を見る'));
+    assert.deepEqual(h.calls.map(([verb, url]) => [verb, url.includes('/evidence')]),
+      month ? [['GET', false], ['POST', false]] : [['GET', false]]);
+    await act(async () => view.unmount());
+  }
+});
+
 test('an older renderer restores relationships by reading the same current report without another ensure',async()=>{
   const saved = downgrade(semantic);
   const h = harness(async (url, opts) => {
@@ -267,6 +307,8 @@ test('an older renderer restores relationships by reading the same current repor
   let view;
   await act(async()=>{view=Renderer.create(React.createElement(Screen,{onLatestSeenVersion:x=>seen.push(x)}));});
   assert.equal(view.root.findAllByProps({testID:'watashi-map-v3'}).length,1);
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   assert(JSON.stringify(view.toJSON()).includes(semantic.edges[0].label));
   await act(async()=>button(view,'分析について').props.onPress());
   assert(!JSON.stringify(view.toJSON()).includes('月次保存日時'));

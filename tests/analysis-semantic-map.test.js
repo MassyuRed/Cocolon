@@ -80,20 +80,18 @@ test('narrow graph keeps distinct node and relationship targets inside the canva
   }
 });
 
-test('legacy semantic map opens explanations without a link to original records', async () => {
+test('a semantic map without structures opens with an overview and lists explanations without source links', async () => {
   const Map = loadRenderer();
   let view;
   await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: fixture })); });
   let body = JSON.stringify(view.toJSON());
   assert(body.includes(fixture.overview.summary));
-  assert(body.includes('semantic-map-graph'));
+  assert(!body.includes('semantic-map-graph'));
   assert(!body.includes(fixture.nodes[0].explanation));
   assert(!body.includes('evidence_badge_count'));
-  const renderedNode=view.root.findByProps({testID:'semantic-node-n1'});
-  const renderedStyle=Object.assign({},...renderedNode.props.style.filter(Boolean));
-  const expectedBox=buildSemanticMapLayout(fixture,340).nodes.find(n=>n.node_ref==='n1').box;
-  assert.equal(renderedStyle.left,expectedBox.x);assert.equal(renderedStyle.top,expectedBox.y);
-  assert.equal(renderedStyle.position,'absolute');assert.equal(renderedStyle.x,undefined);
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-node-n1' }).length, 0);
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
+  assert(!JSON.stringify(view.toJSON()).includes('semantic-map-graph'));
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   body = JSON.stringify(view.toJSON());
   assert(body.includes(fixture.nodes[0].explanation));
@@ -109,6 +107,7 @@ test('legacy semantic map opens explanations without a link to original records'
 test('a different artifact cannot keep the previous node explanation open', async () => {
   const Map = loadRenderer(); let view;
   await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: fixture })); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   const next = copy(fixture); next.projection_of = 'artifact:00000000000000000000000000000066@1';
   next.nodes[0].explanation = 'NEXT_ARTIFACT_EXPLANATION';
@@ -118,13 +117,13 @@ test('a different artifact cannot keep the previous node explanation open', asyn
   await act(async () => view.unmount());
 });
 
-test('a long overview stays three lines above the graph and opens fully in the same detail modal', async () => {
+test('a long overview stays three lines and opens fully in the same detail modal', async () => {
   const Map=loadRenderer('android'),p=copy(fixture);
   p.overview.summary='長い全体の読みを省略せずに保存します。'.repeat(60);
   let view;await act(async()=>{view=Renderer.create(React.createElement(Map,{contentJson:p}));});
   const initialSummary=view.root.findAllByType('Text').find(n=>n.props.children===p.overview.summary);
-  assert.equal(initialSummary.props.numberOfLines,3,'the graph must not follow an unrestricted text wall');
-  assert(view.root.findByProps({testID:'semantic-map-graph'}));
+  assert.equal(initialSummary.props.numberOfLines,3,'the overview preview is limited to three lines');
+  assert.equal(view.root.findAllByProps({testID:'semantic-map-graph'}).length,0);
   await act(async()=>view.root.findByProps({testID:'semantic-overview-open'}).props.onPress());
   let modal=view.root.findByType('ModalContent');
   const fullSummary=modal.findAllByType('Text').find(n=>n.props.children===p.overview.summary);
@@ -146,31 +145,56 @@ test('primary structures show the analysis and expand only the selected, explici
       scope: 'across_records', node_refs: [edge.from_ref, edge.to_ref] },
     { title: '残しておきたいもの', description: '風景を自分の目で選べたことが嬉しかったのですね。',
       scope: 'in_this_record', node_refs: ['n3'] },
+    { title: '一人で考える時間', description: '返事を急がないときに、自分の考えを言葉にしやすいと感じています。',
+      scope: 'self_report', node_refs: ['n4'] },
   ];
   const Map = loadRenderer();
   let view;
   await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: map })); });
   const headings = view.root.findAllByType('Text').filter(node => node.props.accessibilityRole === 'header');
-  assert.deepEqual(headings.map(node => node.props.children), [...map.overview.primary_structures.map(s => s.title), map.overview.title]);
-  const overview = view.root.findAllByType('Text').find(node => node.props.children === map.overview.summary);
-  assert.equal(overview.props.numberOfLines, 3);
-  for (const structure of map.overview.primary_structures) {
-    assert(JSON.stringify(view.toJSON()).includes(structure.title));
-    assert(JSON.stringify(view.toJSON()).includes(structure.description));
+  assert.deepEqual(headings.map(node => node.props.children), map.overview.primary_structures.map(s => s.title));
+  assert(!JSON.stringify(view.toJSON()).includes(map.overview.summary));
+  assert(!JSON.stringify(view.toJSON()).includes('項目を一覧で読む'));
+  for (const [index, structure] of map.overview.primary_structures.entries()) {
+    const toggle = view.root.findByProps({ testID: `semantic-structure-toggle-${index}` });
+    assert.equal(toggle.props.accessibilityState.expanded, false);
+    const labels = toggle.findAllByType('Text').map(node => node.props.children);
+    assert(labels.includes(structure.title) && labels.includes(structure.description));
+    assert(toggle.props.accessibilityLabel.includes(structure.description));
   }
   assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
   await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
+  assert.equal(view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.accessibilityState.expanded, true);
   assert(view.root.findByProps({ testID: `semantic-edge-${edge.edge_ref}` }));
+  const graph = view.root.findByProps({ testID: 'semantic-map-graph' });
+  assert.equal(graph.props.style.maxWidth, 440);
+  const renderedNode = graph.findByProps({ testID: `semantic-node-${edge.from_ref}` });
+  const renderedStyle = Object.assign({}, ...renderedNode.props.style.filter(Boolean));
+  assert.equal(renderedStyle.position, 'absolute');
+  assert(Number.isFinite(renderedStyle.left) && Number.isFinite(renderedStyle.top));
+  assert.equal(renderedStyle.x, undefined);
   assert.equal(view.root.findAllByProps({ testID: 'semantic-node-n4' }).length, 0);
   await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-1' }).props.onPress());
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 1);
   assert(view.root.findByProps({ testID: 'semantic-node-n3' }));
   assert.equal(view.root.findAllByProps({ testID: `semantic-edge-${edge.edge_ref}` }).length, 0);
+  await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-1' }).props.onPress());
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
+  await act(async () => view.root.findByProps({ testID: 'semantic-overview-open' }).props.onPress());
+  const modal = view.root.findByType('ModalContent');
+  assert(modal.findAllByType('Text').some(node => node.props.children === map.overview.summary));
+  assert.equal(modal.findAllByType('TouchableOpacity').length, 1, 'overview only offers its close action');
   const thin = copy(map);
   thin.projection_of = 'artifact:00000000000000000000000000000066@1';
   thin.overview.primary_structures = [];
   await act(async () => view.update(React.createElement(Map, { contentJson: thin })));
   assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
+  assert.equal(view.root.findAllByType('ModalContent').length, 0);
   assert(JSON.stringify(view.toJSON()).includes(thin.overview.summary));
+  assert(JSON.stringify(view.toJSON()).includes('項目を一覧で読む'));
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
+  assert(view.root.findByProps({ testID: 'semantic-node-n1' }));
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
   await act(async () => view.unmount());
 });
 

@@ -21,6 +21,7 @@ const themes = PIECE_THEME_LABELS;
 const fontStyles = { system_readable: 'ゴシック', serif_readable: '明朝' };
 const textColors = { null: 'テーマに合わせる', neutral_ink: 'ニュートラル' };
 const alignments = { left: '左揃え', center: '中央揃え' };
+const textSizes = { small: '小さめ', standard: '標準', large: '大きめ' };
 
 export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
@@ -40,7 +41,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
     ...(caps.font_style_ids?.length ? { font_style_id: preview.visual_recipe.font_style.font_style_id } : {}),
     ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}),
     ...(caps.text_alignments?.length ? { text_alignment: preview.visual_recipe.font_style.text_alignment ??
-      pieceDefaultTextAlignment(preview.format_type) } : {}) } : null;
+      pieceDefaultTextAlignment(preview.format_type) } : {}),
+    ...(caps.text_sizes?.length ? { text_size: preview.visual_recipe.font_style.text_size ?? 'standard' } : {}) } : null;
   const candidateIdentity = preview ? {
     preview_id: preview.preview_id, preview_revision: preview.preview_revision,
     visual_recipe_hash: preview.visual_recipe_hash,
@@ -70,10 +72,11 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
           element(Text, { style: { ...ui.typography.button, color: selected ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT } },
             `${selected ? '✓ ' : ''}${formats[format]}`));
       }))) : null;
-  const choices = (label, field, values, allowed, labels) =>
+  const choices = (label, field, values, allowed, labels, description) =>
     element(View, { key: field, testID: `piece-visual-${field}`, style: { marginTop: 12,
       paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.CARD_BORDER } },
       element(Text, { style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT, marginBottom: 8 } }, label),
+      description ? element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE, marginBottom: 8 } }, description) : null,
       element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 } }, ...values.map(value => {
         const selected = selection[field] === value;
         const locked = freePlan || !allowed.includes(value);
@@ -134,6 +137,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
     [null, ...caps.text_color_ids], [null, ...caps.text_color_ids], textColors) : null;
   const alignmentPicker = caps?.text_alignments?.length ? choices('文字の配置', 'text_alignment',
     caps.text_alignments, caps.text_alignments, alignments) : null;
+  const textSizePicker = caps?.text_sizes?.length ? choices('文字サイズ', 'text_size', caps.text_sizes, caps.text_sizes,
+    textSizes, '本文が収まるように文字サイズを調整します。') : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
@@ -228,6 +233,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
           palettePicker,
           fontPicker,
           textColorPicker,
+          textSizePicker,
           alignmentPicker,
           aspectPicker,
           brandingPicker,

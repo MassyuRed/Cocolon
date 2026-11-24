@@ -266,7 +266,7 @@ export function createPieceCreateController(configuration = {}) {
     expectedRecipe.aspect_ratio = result.visual_recipe.aspect_ratio;
     expectedRecipe.branding.branding_mode = result.visual_recipe.branding.branding_mode;
     expectedRecipe.font_style.font_style_id = result.visual_recipe.font_style.font_style_id;
-    for (const key of ['text_color_id', 'text_alignment']) {
+    for (const key of ['text_color_id', 'text_alignment', 'text_size']) {
       delete expectedRecipe.font_style[key];
       if (result.visual_recipe.font_style[key] !== undefined) {
         expectedRecipe.font_style[key] = result.visual_recipe.font_style[key];
@@ -285,7 +285,8 @@ export function createPieceCreateController(configuration = {}) {
       branding_mode: recipe.branding.branding_mode,
       ...(caps?.font_style_ids?.length ? { font_style_id: recipe.font_style.font_style_id } : {}),
       ...(caps?.text_color_ids?.length ? { text_color_id: recipe.font_style.text_color_id ?? null } : {}),
-      ...(caps?.text_alignments?.length ? { text_alignment: recipe.font_style.text_alignment ?? null } : {}) };
+      ...(caps?.text_alignments?.length ? { text_alignment: recipe.font_style.text_alignment ?? null } : {}),
+      ...(caps?.text_sizes?.length ? { text_size: recipe.font_style.text_size ?? 'standard' } : {}) };
   }
 
   function matchesVisualSelection(recipe, selection) {
@@ -295,7 +296,8 @@ export function createPieceCreateController(configuration = {}) {
       (selection.font_style_id === undefined || recipe.font_style.font_style_id === (selection.font_style_id ?? 'system_readable')) &&
       (selection.text_color_id === undefined || (recipe.font_style.text_color_id ?? null) === selection.text_color_id) &&
       (selection.text_alignment === undefined ||
-        (recipe.font_style.text_alignment ?? defaultAlignment) === (selection.text_alignment ?? defaultAlignment));
+        (recipe.font_style.text_alignment ?? defaultAlignment) === (selection.text_alignment ?? defaultAlignment)) &&
+      (selection.text_size === undefined || (recipe.font_style.text_size ?? 'standard') === (selection.text_size ?? 'standard'));
   }
 
   function rememberDisplaySettings() {
@@ -536,7 +538,8 @@ export function createPieceCreateController(configuration = {}) {
           (choice.text_color_id !== undefined && (!caps.text_color_ids?.length ||
             (choice.text_color_id !== null && !caps.text_color_ids.includes(choice.text_color_id)))) ||
           (choice.text_alignment !== undefined && (!caps.text_alignments?.length ||
-            (choice.text_alignment !== null && !caps.text_alignments.includes(choice.text_alignment))))) return;
+            (choice.text_alignment !== null && !caps.text_alignments.includes(choice.text_alignment)))) ||
+          (choice.text_size !== undefined && !caps.text_sizes?.includes(choice.text_size ?? 'standard'))) return;
       if (matchesVisualSelection(preview.visual_recipe, choice)) return;
     } catch { return; }
     visualRecovery = preview;

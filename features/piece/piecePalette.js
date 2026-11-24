@@ -51,6 +51,7 @@ export const PIECE_STYLE_THEME_IDS = Object.freeze([...PIECE_THEME_IDS, ...extra
 export const PIECE_FONT_STYLE_IDS = Object.freeze(['system_readable', 'serif_readable']);
 export const PIECE_TEXT_COLOR_IDS = Object.freeze(['neutral_ink']);
 export const PIECE_TEXT_ALIGNMENTS = Object.freeze(['left', 'center']);
+export const PIECE_TEXT_SIZES = Object.freeze(['small', 'standard', 'large']);
 export const PIECE_SERIF_FONT = 'HiraMinProN-W3';
 
 export function pieceNeutralInk(themeId) {

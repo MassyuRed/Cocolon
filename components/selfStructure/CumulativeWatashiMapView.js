@@ -281,11 +281,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       </Text> : null}
       {visible && state.empty && !refreshing ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
       {visible && state.row ? <>
+        {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
+        {renderMap(state.row)}
         {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
         {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
           title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} /> : null}
-        {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
-        {renderMap(state.row)}
         {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
         {compare && state.comparisonUnavailable && !refreshing ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
           {state.comparisonFailed

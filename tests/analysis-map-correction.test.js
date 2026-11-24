@@ -187,6 +187,7 @@ test('iOS overview, node and edge correction handoff waits for native dismissal 
   for (const [kind, ref, button] of [['overview', 'overview', 'semantic-overview-open'], ['node', 'n1', 'semantic-node-n1'], ['edge', 'e1', 'semantic-edge-e1']]) {
     const h = harness(undefined, 'ios'), Map = h.load('components/selfStructure/SemanticWatashiMap.js').default, calls = [];
     let view; await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: fixture, onCorrectMap: (...args) => calls.push(args) })); });
+    if (kind !== 'overview') await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
     await act(async () => view.root.findByProps({ testID: button }).props.onPress());
     const dismissed = view.root.findByType('ModalContent').props.onDismiss;
     await act(async () => view.root.findByProps({ testID: 'semantic-correction-open' }).props.onPress());
@@ -206,6 +207,7 @@ test('iOS overview, node and edge correction handoff waits for native dismissal 
 test('ordinary Free current map saves a correction and only rereads existing background state', async () => {
   const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default; let view;
   await act(async () => { view = Renderer.create(React.createElement(View)); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-correction-open' }).props.onPress());
   assert(view.root.findAllByProps({ testID: 'analysis-map-correction-dialog' }).length);
@@ -239,6 +241,7 @@ test('correction evidence remains distinct from original context and deduplicate
 test('semantic node detail still opens correction and keeps the original record and DeepInsight answer private', async () => {
   const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
   let view; await act(async () => { view = Renderer.create(React.createElement(View)); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   const body = JSON.stringify(view.toJSON());
   assert(body.includes(fixture.nodes[0].explanation));
@@ -268,6 +271,7 @@ test('captured monthly map remains read-only and never exposes a correction subm
   h.api.apiGet = async () => ({ item: { id: identity, snapshot_month: '2026-10-01', source_profile: 'cumulative.v1',
     content_json: { watashiMap: fixture, map_context: latest().map_context }, generated_at: '2026-10-10T00:00:00Z' } });
   let view; await act(async () => { view = Renderer.create(React.createElement(View, { reportId: identity, month: '2026-10-01' })); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   assert.equal(view.root.findAllByProps({ testID: 'semantic-correction-open' }).length, 0);
   assert.equal(h.calls.length, 0);

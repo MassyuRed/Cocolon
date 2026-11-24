@@ -13,14 +13,11 @@ const scopeLabels = {
 
 function SemanticMapDiagram({ projection, nodeRefs, colors, styles, choose }) {
   const [width, setWidth] = useState(340);
-  const layout = useMemo(() => {
-    const portion = nodeRefs ? {
-      nodes: projection.nodes.filter(node => nodeRefs.includes(node.node_ref)),
-      edges: projection.edges.filter(edge => nodeRefs.includes(edge.from_ref) && nodeRefs.includes(edge.to_ref)),
-      accessibility_linear_order: projection.accessibility_linear_order.filter(ref => nodeRefs.includes(ref)),
-    } : projection;
-    return buildSemanticMapLayout(portion, width);
-  }, [projection, nodeRefs, width]);
+  const layout = useMemo(() => buildSemanticMapLayout({
+    nodes: projection.nodes.filter(node => nodeRefs.includes(node.node_ref)),
+    edges: projection.edges.filter(edge => nodeRefs.includes(edge.from_ref) && nodeRefs.includes(edge.to_ref)),
+    accessibility_linear_order: projection.accessibility_linear_order.filter(ref => nodeRefs.includes(ref)),
+  }, width), [projection, nodeRefs, width]);
   const nodeName = ref => projection.nodes.find(node => node.node_ref === ref)?.title || '';
   const accent = colors?.TITLE_GOLD || '#800020';
   return <View testID="semantic-map-graph" style={styles.canvasShell} onLayout={event => {
@@ -72,6 +69,9 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
   }, []);
   if (!projection) return null;
   const structures = projection.overview.primary_structures;
+  const hasStructures = !!structures?.length;
+  const activeStructure = expandedStructure?.projectionOf === projection.projection_of
+    ? structures?.[expandedStructure.index] : null;
   const chosen = selection?.projectionOf === projection.projection_of
     ? (selection.kind === 'overview' ? projection.overview
       : selection.kind === 'node' ? projection.nodes.find(n => n.node_ref === selection.ref)
@@ -82,6 +82,10 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
   };
   const nodeName = ref => projection.nodes.find(n => n.node_ref === ref)?.title || '';
   const dismissDetail = () => { pendingAction.current = null; setSelection(null); };
+  const toggleStructure = (index, expanded) => {
+    dismissDetail();
+    setExpandedStructure(expanded ? null : { projectionOf: projection.projection_of, index });
+  };
   const detailDismissed = () => {
     const pending = pendingAction.current;
     pendingAction.current = null;
@@ -101,44 +105,46 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
   };
   return <View testID="watashi-map-v3" style={styles.root}>
     {structures?.map((structure, index) => {
-      const expanded = expandedStructure?.projectionOf === projection.projection_of && expandedStructure.index === index;
-      return <View key={index} style={styles.structure}>
-        <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
-        <Text accessibilityRole="header" style={styles.sectionTitle}>{structure.title}</Text>
-        <Text style={styles.body}>{structure.description}</Text>
+      const expanded = activeStructure === structure;
+      return <View key={structure.title} style={styles.structure}>
         <TouchableOpacity testID={`semantic-structure-toggle-${index}`} accessibilityRole="button"
-          accessibilityLabel={`${structure.title}の図を${expanded ? '閉じる' : '見る'}`}
-          accessibilityState={{ expanded }} style={styles.secondaryAction}
-          onPress={() => setExpandedStructure(expanded ? null : { projectionOf: projection.projection_of, index })}>
+          accessibilityLabel={`${scopeLabels[structure.scope]}。${structure.title}。${structure.description}`}
+          accessibilityHint={expanded ? '図を閉じます' : '関係する部分の図を表示します'}
+          accessibilityState={{ expanded }} style={styles.structureButton}
+          onPress={() => toggleStructure(index, expanded)}>
+          <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
+          <Text accessibilityRole="header" style={styles.sectionTitle}>{structure.title}</Text>
+          <Text style={styles.body}>{structure.description}</Text>
           <Text style={styles.actionLabel}>{expanded ? '図を閉じる' : '関係する部分を図で見る'}</Text>
         </TouchableOpacity>
         {expanded ? <SemanticMapDiagram projection={projection} nodeRefs={structure.node_refs}
           styles={styles} colors={colors} choose={choose} /> : null}
       </View>;
     })}
-    <View style={styles.intro}>
-      <Text style={styles.eyebrow}>記録をつないで見えること</Text>
-      <Text style={styles.title} accessibilityRole="header">{projection.overview.title}</Text>
-      <Text style={styles.overview} numberOfLines={3}>{projection.overview.summary}</Text>
+    <View style={hasStructures ? null : styles.intro}>
+      {!hasStructures ? <>
+        <Text style={styles.eyebrow}>記録をつないで見えること</Text>
+        <Text style={styles.title} accessibilityRole="header">{projection.overview.title}</Text>
+        <Text style={styles.overview} numberOfLines={3}>{projection.overview.summary}</Text>
+      </> : null}
       <TouchableOpacity testID="semantic-overview-open" accessibilityRole="button"
         style={styles.secondaryAction} onPress={() => choose('overview', 'overview')}>
         <Text style={styles.actionLabel}>全体の読みを開く</Text>
       </TouchableOpacity>
     </View>
-    {!structures ? <Text style={styles.hint}>気になるところや線のことばをタップすると、詳しく読めます。</Text> : null}
-    {!structures ? <SemanticMapDiagram projection={projection} colors={colors} styles={styles} choose={choose} /> : null}
-    <TouchableOpacity accessibilityRole="button" accessibilityState={{ expanded: linear }}
+    {!hasStructures ? <TouchableOpacity testID="semantic-items-toggle" accessibilityRole="button" accessibilityState={{ expanded: linear }}
       style={styles.secondaryAction} onPress={() => setLinear(!linear)}>
       <Text style={styles.actionLabel}>{linear ? '一覧を閉じる' : '項目を一覧で読む'}</Text>
-    </TouchableOpacity>
-    {linear ? <View style={styles.linear}>
+    </TouchableOpacity> : null}
+    {!hasStructures && linear ? <View style={styles.linear}>
       {projection.accessibility_linear_order.map(ref => {
         const node = projection.nodes.find(n => n.node_ref === ref);
-        return <TouchableOpacity key={ref} accessibilityRole="button" style={styles.linearItem} onPress={() => choose('node', ref)}>
+        return <TouchableOpacity key={ref} testID={`semantic-node-${ref}`} accessibilityRole="button"
+          style={styles.linearItem} onPress={() => choose('node', ref)}>
           <Text style={styles.sectionTitle}>{node.title}</Text><Text style={styles.body}>{node.summary}</Text>
         </TouchableOpacity>;
       })}
-      {projection.edges.map(edge => <TouchableOpacity key={edge.edge_ref} accessibilityRole="button"
+      {projection.edges.map(edge => <TouchableOpacity key={edge.edge_ref} testID={`semantic-edge-${edge.edge_ref}`} accessibilityRole="button"
         style={styles.linearItem} onPress={() => choose('edge', edge.edge_ref)}>
         <Text style={styles.sectionTitle}>{edge.label}</Text>
         <Text style={styles.body}>{nodeName(edge.from_ref)} ／ {nodeName(edge.to_ref)}</Text>
@@ -159,7 +165,7 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
               <Text style={styles.summary}>{chosen.summary}</Text>
             </> : null}
             <Text style={styles.body}>{selection?.kind === 'overview' ? chosen?.summary : chosen?.explanation}</Text>
-            {selection?.kind === 'overview' ? <View style={styles.relatedNodes}>
+            {selection?.kind === 'overview' && !hasStructures ? <View style={styles.relatedNodes}>
               <Text style={styles.sectionTitle}>地図の項目</Text>
               {projection.accessibility_linear_order.map(ref => <TouchableOpacity key={ref}
                 testID={`semantic-overview-node-${ref}`} accessibilityRole="button" style={styles.detailAction}
@@ -197,8 +203,8 @@ function makeStyles(colors, dark) {
     eyebrow: { color: muted, fontSize: 13, lineHeight: 21 },
     title: { color: ink, fontSize: 23, lineHeight: 34, fontWeight: '600' },
     overview: { color: ink, fontSize: 16, lineHeight: 28 },
-    hint: { color: muted, fontSize: 13, lineHeight: 22 },
-    canvasShell: { backgroundColor: tonal, borderRadius: 28, overflow: 'hidden' },
+    canvasShell: { width: '100%', maxWidth: 440, alignSelf: 'center',
+      backgroundColor: tonal, borderRadius: 28, overflow: 'hidden' },
     node: { position: 'absolute', borderWidth: 1.5, borderColor: accent, borderRadius: 20,
       backgroundColor: paper, paddingHorizontal: 12, paddingVertical: 10, alignItems: 'center', justifyContent: 'center', gap: 3 },
     outsideNode: { borderStyle: 'dashed' },
@@ -212,6 +218,7 @@ function makeStyles(colors, dark) {
     linear: { gap: 8 }, linearItem: { minHeight: 44, paddingVertical: 12, borderBottomWidth: 1, borderColor: border, gap: 5 },
     sectionTitle: { color: ink, fontSize: 17, lineHeight: 27, fontWeight: '600' },
     structure: { gap: 7, paddingVertical: 12, borderTopWidth: 1, borderColor: border },
+    structureButton: { minHeight: 44, gap: 7 },
     body: { color: ink, fontSize: 16, lineHeight: 28 }, summary: { color: ink, fontSize: 17, lineHeight: 29, fontWeight: '500' },
     context: { color: muted, fontSize: 13, lineHeight: 23 },
     overlay: { flex: 1, backgroundColor: 'rgba(20,12,15,0.48)', justifyContent: 'center', padding: 20 },

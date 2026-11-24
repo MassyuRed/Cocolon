@@ -297,6 +297,7 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   preview.plan_capabilities.font_style_ids = [];
   preview.plan_capabilities.text_color_ids = [];
   preview.plan_capabilities.text_alignments = ['left', 'center'];
+  preview.plan_capabilities.text_sizes = ['small', 'standard', 'large'];
   preview.plan_capabilities.theme_ids.push('sage_paper', 'peach_paper', 'slate_paper');
   const options = { onVisualChange: (...args) => calls.push(args) };
   const plus = nodes(await render(display, options));
@@ -307,13 +308,16 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   assert.ok(!Object.hasOwn(calls[0][0], 'text_color_id'));
   plus.find(node => node.props.testID === 'piece-option-text_alignment-center').props.onPress();
   assert.equal(calls[1][0].text_alignment, 'center');
+  assert.equal(plus.find(node => node.props.testID === 'piece-option-text_size-standard').props.accessibilityState.selected, true);
+  plus.find(node => node.props.testID === 'piece-option-text_size-large').props.onPress();
+  assert.equal(calls[2][0].text_size, 'large');
   preview.quota.subscription_tier = 'premium';
   preview.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
   preview.plan_capabilities.text_color_ids = ['neutral_ink'];
   const premium = nodes(await render(display, options));
   premium.find(node => node.props.testID === 'piece-option-font_style_id-serif_readable').props.onPress();
   premium.find(node => node.props.testID === 'piece-option-text_color_id-neutral_ink').props.onPress();
-  assert.deepEqual(calls.slice(2).map(args => [args[0].font_style_id, args[0].text_color_id]),
+  assert.deepEqual(calls.slice(3).map(args => [args[0].font_style_id, args[0].text_color_id]),
     [['serif_readable', null], ['system_readable', 'neutral_ink']]);
   assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
 });

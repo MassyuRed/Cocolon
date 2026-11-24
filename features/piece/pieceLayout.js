@@ -30,6 +30,13 @@ const nativeScales = {
   declaration: { '4:5': [64, 56, 48], '9:16': [72, 64, 56] },
 };
 const nativeLineRatios = { short_essay: 1.55, quote: 1.35, declaration: 1.42 };
+
+function pieceFitSizes(format, ratio, preference) {
+  const standard = nativeScales[format][ratio];
+  if (preference === 'small') return standard.slice(1);
+  if (preference === 'large') return [standard[0] + (standard[0] - standard[1]), ...standard];
+  return [...standard];
+}
 const frozenNative = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(frozenNative); Object.freeze(value); }
   return value;
@@ -110,7 +117,7 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
     ...(candidateProfile === PIECE_BITMAP_PREVIEW_VERSION || androidPrototype ? { rendererVersion: p.renderer_version } : {}),
     width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
-    blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
+    blocks: [...p.content_payload.body_blocks], sizes: pieceFitSizes(p.format_type, ratio, recipe.font_style.text_size),
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
     brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION || androidPrototype ? 'Emlis' : 'Cocolon',
     alignment: recipe.font_style.text_alignment ?? pieceDefaultTextAlignment(p.format_type),

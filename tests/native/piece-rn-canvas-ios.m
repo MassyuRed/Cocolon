@@ -1387,7 +1387,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertEqualObjects(artifact[@"piece_text_hash"], pieceTextHashes[i]);
       XCTAssertEqualObjects(artifact[@"content_payload_hash"], contentPayloadHashes[i]);
       XCTAssertEqualObjects(artifact[@"visual_recipe_hash"], styled ?
-        @"bf851697336e748a6295350397665b6448f116850169a49fb71a1c60fa87213b" :
+        @"bd6281366c7b3674c4cd43b395e34d484c1f5043cbbbce5e011199eb18e3f5ff" :
         @"25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924");
       XCTAssertEqualObjects(identity[@"piece_id"], @"b1b3a6f8-b0db-9b0f-a43c-2b2b5e0c3c61");
       XCTAssertEqualObjects(identity[@"row_version"], styled ? @3 : @2);
@@ -1407,6 +1407,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
         if (styled) {
           XCTAssertEqualObjects(report[@"font_family"], @"HiraMinProN-W3");
           XCTAssertEqualObjects(report[@"alignment"], @"center");
+          XCTAssertEqualObjects(report[@"font_sizes"], (@[@52, @48, @44, @40, @36]));
           XCTAssertEqualObjects(report[@"colors"][@"canvas"], @"#E5EEE0");
           XCTAssertEqualObjects(report[@"colors"][@"text"], @"#334155");
         }
