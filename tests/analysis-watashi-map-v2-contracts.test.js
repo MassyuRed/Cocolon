@@ -439,7 +439,7 @@ test('renderer starts with matching text and opens the actual graph and uncertai
   await act(async () => { render = TestRenderer.create(React.createElement(Renderer, { contentJson: fixtures[0].projection })); });
   const toggle = render.root.findByProps({ testID: 'watashi-map-v2-items-toggle' });
   const initialLabels = render.root.findAllByType('Text').map(n => n.props.children);
-  assert.ok(initialLabels.includes(fixtures[0].text_projection.text));
+  assert.deepEqual(initialLabels.slice(0, 2), ['記録から見えるわたし', fixtures[0].text_projection.text]);
   assert.ok(!initialLabels.includes('まだ確定していない部分'));
   assert.equal(toggle.props.accessibilityState.expanded, false);
   await act(async () => toggle.props.onPress());

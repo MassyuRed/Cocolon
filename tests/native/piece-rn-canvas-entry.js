@@ -3,8 +3,8 @@ import React from 'react';
 import { AppRegistry, View, Text, NativeModules, findNodeHandle } from 'react-native';
 import PieceVisualCard from '../../components/piece/PieceVisualCard';
 import { preparePieceNativeCard } from '../../features/piece/pieceLayout';
-import { PIECE_BACKGROUND_STYLES, PIECE_FONT_STYLE_IDS, PIECE_STYLE_THEME_IDS, PIECE_TEXT_ALIGNMENTS,
-  PIECE_TEXT_COLOR_IDS, PIECE_TEXT_SIZES } from '../../features/piece/piecePalette';
+import { PIECE_ACCENT_STYLES, PIECE_APPEARANCE_BACKGROUND_STYLES, PIECE_BACKGROUND_STYLES, PIECE_FONT_STYLE_IDS,
+  PIECE_FRAME_STYLES, PIECE_STYLE_THEME_IDS, PIECE_TEXT_ALIGNMENTS, PIECE_TEXT_COLOR_IDS, PIECE_TEXT_SIZES } from '../../features/piece/piecePalette';
 import fixtures from './piece-rn-canvas-fixtures.json';
 import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 import admittedFixtures from './piece-rn-admitted-fixtures.json';
@@ -54,6 +54,26 @@ const cmeeLongFixtures = [...cmeeLongArtifacts, { case_id: 'style-candidate', sa
 cmeeLongFixtures.push({
   name: 'cmee_long_preview_style-candidate', source_case_id: 'style-candidate', evidence_set: 'admitted_preview',
   test_profile: 'bitmap-v1', props: { display: { phase: 'received', preview: cmeeStylePreview, hashVerified: true } },
+});
+const appearanceFixtures = [
+  { name: 'bands', background: 'color_bands', frame: 'double_line', accent: 'corner_marks',
+    hash: 'fac35bbbc05b79dc48b75a39f568f73c7187034fa1341fa375b6f288afec8b9a' },
+  { name: 'pattern', background: 'stripe_pattern', frame: 'line', accent: 'top_rule', aspectRatio: '9:16',
+    hash: 'd2eb4f82ba05e776999d6f9f2c4db32b725dc79c1f7864c5862fede629bc838e' },
+].flatMap(({ name, background, frame, accent, hash, aspectRatio = '4:5' }) => {
+  const record = { ...cmeeStyleRecord, row_version: 4, visual_recipe_hash: hash,
+    visual_recipe: { ...cmeeStyleRecord.visual_recipe, aspect_ratio: aspectRatio, theme: { ...cmeeStyleRecord.visual_recipe.theme,
+      background_style: background, frame_style: frame, accent_style: accent } } };
+  const preview = { ...cmeeStylePreview, preview_revision: 3, row_version: 3,
+    ...Object.fromEntries(artifactFields.map(key => [key, record[key]])),
+    plan_capabilities: { ...cmeeStylePreview.plan_capabilities, background_styles: PIECE_APPEARANCE_BACKGROUND_STYLES,
+      frame_styles: PIECE_FRAME_STYLES, accent_styles: PIECE_ACCENT_STYLES } };
+  return [
+    { name: `appearance_preview_${name}`, evidence_set: 'admitted_preview',
+      props: { display: { phase: 'received', preview, hashVerified: true } } },
+    { name: `appearance_saved_${name}`, evidence_set: 'admitted_saved', props: { savedRecord: record } },
+    { name: `appearance_export_${name}`, evidence_set: 'export_saved', props: { savedRecord: record, exportCanvas: true } },
+  ].map(fixture => ({ ...fixture, source_case_id: name, test_profile: 'bitmap-v1' }));
 });
 let activeTrace;
 // Keep adapter decoding and B9 time separate from the raw native call. These
@@ -254,6 +274,7 @@ renderer.inspectPieceSelectedLineV4 = async (...args) => {
 
 class CanvasCases extends React.Component {
   caseFixtures = (this.props.pieceGroup === 'cmee-long' ? cmeeLongFixtures :
+    this.props.pieceGroup === 'appearance' ? appearanceFixtures :
     this.props.pieceGroup === 'model73' ? model73Fixtures : this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
@@ -344,6 +365,7 @@ class CanvasCases extends React.Component {
     const rejectedInspection = m?.phase === 'unavailable' && rejected?.snapshot.key === m.key &&
       rejected.snapshot.generation === m.generation && rejected.snapshot.sizeIndex === m.sizeIndex &&
       rejected.snapshot.plan === m.plan ? { inspection: rejected.evidence ?? [], blocks: rejected.snapshot.blocks } : null;
+    const savedIdentityGroup = ['cmee-long', 'appearance'].includes(this.props.pieceGroup);
     const report = { name: fixture.name, evidence_set: fixture.evidence_set, phase: m?.phase ?? 'missing', reason: m?.reason ?? null,
       renderer_version: display?.preview?.renderer_version ?? fixture.props.savedRecord?.renderer_version,
       candidate_profile: input?.candidateProfile,
@@ -362,16 +384,17 @@ class CanvasCases extends React.Component {
       save_fit_current: saveFitCurrent, save_fit_wrong_token_current: saveFitWrongTokenCurrent,
       save_fit_handle_keys: fit ? Object.keys(fit) : [],
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
-      ...(fixture.evidence_set.startsWith('model73_') || this.props.pieceGroup === 'cmee-long' ? { source_case_id: fixture.source_case_id,
+      ...(fixture.evidence_set.startsWith('model73_') || savedIdentityGroup ? { source_case_id: fixture.source_case_id,
         recorded_artifact: Object.fromEntries(artifactFields.map(key =>
           [key, (display?.preview || fixture.props.savedRecord)[key]])) } : {}),
-      ...(this.props.pieceGroup === 'cmee-long' && fixture.props.savedRecord ? {
+      ...(savedIdentityGroup && fixture.props.savedRecord ? {
         saved_identity: Object.fromEntries(['piece_id', 'public_id', 'row_version', 'saved_at'].map(key =>
           [key, fixture.props.savedRecord[key]])),
       } : {}),
       ...(input?.candidateProfile === BITMAP_PROFILE ? { bitmap_canvas: m?.bitmapCanvas ?? null, colors: input.colors,
         alignment: input.alignment, font_sizes: input.sizes,
         ...(input.backgroundGradient ? { background_gradient: input.backgroundGradient } : {}),
+        ...(input.appearanceBackdrop ? { appearance_backdrop: input.appearanceBackdrop } : {}),
         ...(input.fontFamily ? { font_family: input.fontFamily } : {}),
         branding_mode: input.brandingMode, crop_result: this.cropResult, crop_before_fit: this.cropBeforeFit } : {}),
     };

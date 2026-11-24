@@ -11,7 +11,7 @@ import PieceVisualCard from './PieceVisualCard';
 import Button from '../CocolonButton';
 import { useTheme } from '../../theme/ThemeContext';
 import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
-import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment } from '../../features/piece/piecePalette';
+import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment, pieceThemeVisualSelection } from '../../features/piece/piecePalette';
 
 const element = React.createElement;
 const formats = { short_essay: 'エッセイ', quote: '引用', declaration: '宣言' };
@@ -22,7 +22,10 @@ const fontStyles = { system_readable: 'ゴシック', serif_readable: '明朝' }
 const textColors = { null: 'テーマに合わせる', neutral_ink: 'ニュートラル' };
 const alignments = { left: '左揃え', center: '中央揃え' };
 const textSizes = { small: '小さめ', standard: '標準', large: '大きめ' };
-const backgrounds = { solid: '単色', gradient: 'グラデーション' };
+const backgrounds = { solid: '単色', gradient: 'グラデーション', color_bands: '3色の帯',
+  color_wash: '3色のぼかし', dot_pattern: 'ドット', stripe_pattern: '斜めストライプ' };
+const frames = { none: '追加なし', line: '一重線', double_line: '二重線' };
+const accents = { none: '追加なし', top_rule: '上部の飾り線', corner_marks: '四隅の飾り' };
 
 export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
@@ -39,7 +42,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const caps = preview?.plan_capabilities;
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
     aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode,
-    ...(caps.background_styles?.length ? { background_style: preview.visual_recipe.theme.background_style ?? 'solid' } : {}),
+    ...pieceThemeVisualSelection(preview.visual_recipe.theme, caps),
     ...(caps.font_style_ids?.length ? { font_style_id: preview.visual_recipe.font_style.font_style_id } : {}),
     ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}),
     ...(caps.text_alignments?.length ? { text_alignment: preview.visual_recipe.font_style.text_alignment ??
@@ -143,6 +146,10 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
     textSizes, '本文が収まるように文字サイズを調整します。') : null;
   const backgroundPicker = caps?.background_styles?.length ? choices('背景の表現', 'background_style',
     caps.background_styles, caps.background_styles, backgrounds) : null;
+  const framePicker = caps?.frame_styles?.length ? choices('飾り枠', 'frame_style',
+    caps.frame_styles, caps.frame_styles, frames) : null;
+  const accentPicker = caps?.accent_styles?.length ? choices('ワンポイント', 'accent_style',
+    caps.accent_styles, caps.accent_styles, accents) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
@@ -236,6 +243,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
           formatPicker,
           palettePicker,
           backgroundPicker,
+          framePicker,
+          accentPicker,
           fontPicker,
           textColorPicker,
           textSizePicker,

@@ -109,9 +109,9 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
       const expanded = activeStructure === structure;
       const diagramAction = expanded ? '図を閉じる' : '関係する部分を図で見る';
       return <View key={structure.title} style={styles.structure}>
-        <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
         <Text accessibilityRole="header" style={styles.sectionTitle}>{structure.title}</Text>
         <Text style={styles.body}>{structure.description}</Text>
+        <Text style={styles.eyebrow}>{scopeLabels[structure.scope]}</Text>
         <TouchableOpacity testID={`semantic-structure-toggle-${index}`} accessibilityRole="button"
           accessibilityLabel={`${diagramAction}。${structure.title}`}
           accessibilityState={{ expanded }} style={styles.structureButton}

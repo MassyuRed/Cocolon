@@ -10,6 +10,7 @@ import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 let pieceBitmapBindingSerial = 0;
 const fixedRaster = profile => profile === PIECE_BITMAP_PREVIEW_VERSION || profile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
+const needsBackdrop = input => !!(input.backgroundGradient || input.appearanceBackdrop);
 
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
@@ -175,7 +176,7 @@ export default class PieceVisualCard extends React.Component {
         if (!record.valid || this.props.onSaveFitChange !== listener || !this.bindingCurrent(binding) ||
             this.state.measurement !== snapshot || this.inspection !== operation || this.bitmapArtifact !== artifact ||
             this.bitmapNode !== artifact.node || this.canvasNode !== operation.canvas ||
-            (input.backgroundGradient && this.backdropNode !== operation.backdropNode) ||
+            (needsBackdrop(input) && this.backdropNode !== operation.backdropNode) ||
             this.deadline !== deadline || !lifetimeCurrent() || visualToken !== token ||
             this.props.display?.visualToken !== token || this.props.exportCanvas === true || this.props.savedRecord ||
             operation.nodes.some((node, i) => this.textNodes.get(i)?.value !== node || this.textNodes.get(i)?.generation !== snapshot.generation)) return false;
@@ -416,7 +417,7 @@ export default class PieceVisualCard extends React.Component {
     const current = () => this.bindingCurrent(binding) && this.inspection === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline === deadline && pieceBitmapDeadlineCurrent(deadline) &&
       this.canvasNode === operation.canvas && this.bitmapNode === operation.bitmapNode &&
-      (!input.backgroundGradient || this.backdropNode === operation.backdropNode) &&
+      (!needsBackdrop(input) || this.backdropNode === operation.backdropNode) &&
       (!operation.nodes || operation.nodes.every((node, index) => this.textNodes.get(index)?.value === node &&
         this.textNodes.get(index)?.generation === snapshot.generation));
     try {
@@ -583,7 +584,7 @@ export default class PieceVisualCard extends React.Component {
           this.canvasNode !== node || this.state.measurement !== snapshot ||
           preparePieceNativeCard(this.props)?.key !== input.key ||
           !operation?.nodes || this.inspection !== operation || operation.canvas !== node ||
-          (input.backgroundGradient && this.backdropNode !== operation.backdropNode) ||
+          (needsBackdrop(input) && this.backdropNode !== operation.backdropNode) ||
           operation.evidence !== snapshot.inspection || operation.snapshot.generation !== snapshot.generation ||
           operation.nodes.some((value, i) => this.textNodes.get(i)?.value !== value ||
             this.textNodes.get(i)?.generation !== snapshot.generation)) return false;
@@ -637,7 +638,7 @@ export default class PieceVisualCard extends React.Component {
     const androidBitmap = input.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
     const bitmap = fixedRaster(input.candidateProfile);
     const BitmapCanvas = androidBitmap ? pieceAndroidBitmapNativeView() : bitmap ? pieceBitmapNativeView() : null;
-    const GradientBackdrop = input.backgroundGradient ? pieceGradientNativeView() : null;
+    const Backdrop = needsBackdrop(input) ? pieceGradientNativeView() : null;
     // Reinspection revokes visibility, not this generation's existing placement.
     // Moving the rows back to zero would trigger another layout/inspection cycle.
     const positioned = !!measurement.rowOffsets, pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile);
@@ -723,9 +724,10 @@ export default class PieceVisualCard extends React.Component {
         element(View, { pointerEvents: 'none', collapsable: false,
           style: { position: 'absolute', left: input.margin / 2, top: input.margin / 2,
             right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.border } },
-          GradientBackdrop ? element(GradientBackdrop, { testID: 'piece-gradient-backdrop', ref: this.setBackdropNode,
+          Backdrop ? element(Backdrop, { testID: input.appearanceBackdrop ? 'piece-appearance-backdrop' : 'piece-gradient-backdrop', ref: this.setBackdropNode,
             pointerEvents: 'none', collapsable: false, accessible: false,
-            gradientStops: [input.backgroundGradient.start, input.backgroundGradient.end],
+            ...(input.appearanceBackdrop ? { appearance: input.appearanceBackdrop }
+              : { gradientStops: [input.backgroundGradient.start, input.backgroundGradient.end] }),
             style: { position: 'absolute', left: 2, top: 2, right: 2, bottom: 2 } }) :
             element(View, { pointerEvents: 'none', collapsable: false,
             style: { position: 'absolute', left: 2, top: 2, right: 2, bottom: 2,

@@ -7,6 +7,7 @@ import { useAppRuntime } from '../AppRuntimeContext';
 import { useTutorial } from '../TutorialContext';
 import { createPieceOwnerHistoryController } from '../features/piece/PieceOwnerHistoryController';
 import { supportsPieceSavedImage } from '../features/piece/pieceLayout';
+import { isPieceExpandedAppearance } from '../features/piece/piecePalette';
 import Button from '../components/CocolonButton';
 import { useTheme } from '../theme/ThemeContext';
 import { makeUiTokens } from '../ui/uiTokens';
@@ -346,6 +347,10 @@ export class PieceOwnerHistoryHost extends React.Component {
     const pendingOperation = operation?.phase === 'running';
     const exportStopped = this.current() && this.exportStopStamp === this.stamp();
     const exporting = !!attempt?.busy || pendingOperation || exportStopped, exportReady = !!attempt?.target?.isCurrent();
+    // A tall styled backdrop and the exporter share the native raster budget.
+    // Keep one artwork canvas mounted while preparing and using the export.
+    const exportOwnsArtwork = !!attempt?.job && record.visual_recipe.aspect_ratio === '9:16' &&
+      isPieceExpandedAppearance(record.visual_recipe.theme);
     const exportMessage = operation?.phase === 'complete' ? this.exportOutcomeMessage(operation.outcome, operation.action)
       : exportStopped ? '画像の保存・共有は現在利用できません。'
       : this.current() && record === this.exportMessage?.displayed && this.stamp() === this.exportMessage?.stamp
@@ -361,7 +366,8 @@ export class PieceOwnerHistoryHost extends React.Component {
           available && view.phase === 'loading' ? h(ActivityIndicator, { accessibilityLabel: 'Pieceを確認中' }) : null,
           available && view.phase === 'history' && view.items.length === 0 ? h(Text, { style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, '保存済みのPieceはありません。') : null,
           ...(available ? view.items.map(item => h(PieceOwnerCard, { colors, ui, key: item.piece_id, record: item, onOpen: () => this.act('openDetail', item.piece_id) })) : []),
-          imageSupported ? h(PieceVisualCard, { savedRecord: record, colors, ui }) : null,
+          imageSupported && !exportOwnsArtwork ? h(PieceVisualCard, { savedRecord: record, colors, ui }) : null,
+          exportOwnsArtwork && !exportReady ? h(ActivityIndicator, { accessibilityLabel: '画像を準備中' }) : null,
           record ? h(PieceOwnerCard, { record, colors, ui, detail: true }) : null,
           record && !imageSupported ? h(Text,
             { style: { ...ui?.typography?.description, color: colors.TEXT_SUBTLE, marginBottom: 8 } },
@@ -388,6 +394,12 @@ export class PieceOwnerHistoryHost extends React.Component {
             onPress: () => this.exportImage(attempt, 'saveToPhotos') }) : null,
           attempt?.job ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '画像を共有', disabled: exporting || !exportReady,
             onPress: () => this.exportImage(attempt, 'openShare') }) : null,
+          exportOwnsArtwork ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '画像の準備をやめる', disabled: exporting,
+            onPress: () => {
+              if (this.exportCurrent(attempt) && !attempt.busy) {
+                this.cancelExport(); this.setState(s => ({ revision: s.revision + 1 }));
+              }
+            } }) : null,
           pendingOperation ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } },
             operation.action === 'saveToPhotos' ? '写真への保存結果を待っています。' : '共有画面の終了を待っています。') : null,
           exportMessage ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, exportMessage) : null,

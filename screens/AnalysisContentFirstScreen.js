@@ -290,8 +290,6 @@ export default function AnalysisContentFirstScreen({
         </View>
       ) : (
         <>
-          <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
-
           <View ref={tutorialRefs?.selfReportRef} collapsable={false}>
             {isTutorialMode ? (
               <>
@@ -331,6 +329,8 @@ export default function AnalysisContentFirstScreen({
               </>
             )}
           </View>
+
+          <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
 
           {!isTutorialMode ? (
           <CocolonPressable

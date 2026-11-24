@@ -159,6 +159,7 @@ test('primary structures show the analysis and expand only the selected, explici
   for (const [index, structure] of map.overview.primary_structures.entries()) {
     const toggle = view.root.findByProps({ testID: `semantic-structure-toggle-${index}` });
     const paragraph = view.root.findAllByType('Text').find(node => node.props.children === structure.description);
+    assert.deepEqual(toggle.parent.children.slice(0, 2), [headings[index], paragraph]);
     for (const narrative of [headings[index], paragraph]) {
       assert(narrative.parent === toggle.parent, 'the prose is separate from the diagram button');
       assert(toggle.parent.children.indexOf(narrative) < toggle.parent.children.indexOf(toggle));

@@ -74,7 +74,8 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
   const Content = parent ? load('screens/AnalysisContentFirstScreen.js').default : null;
   const element = () => React.createElement(parent ? Content : hookOnly ? Host : Timeline, { colors, ui: {}, period: control.timelinePeriod,
     onPeriodChange: value => events.push(value), graphOpenRequest: control.graphOpenRequest,
-    isTutorialMode: control.isTutorialMode, tutorialStep: control.tutorialStep, tutorialGraphData: fixtures });
+    isTutorialMode: control.isTutorialMode, tutorialStep: control.tutorialStep, tutorialGraphData: fixtures,
+    selfStructureUpdateLabel: control.selfStructureUpdateLabel });
   let root;
   await Renderer.act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await Renderer.act(async () => root.unmount()); });
@@ -197,7 +198,12 @@ test('month remains selected after the map tab and the chart exposes no legacy r
 
 test('old report notification targets change the graph tab and period', async t => {
   const h = await mount(t, { parent: true });
+  const updateLabel = '最終更新 11月25日 8:00';
+  await h.update({ selfStructureUpdateLabel: updateLabel });
   await h.press('わたしマップ');
+  const content = JSON.stringify(h.root.toJSON());
+  assert(content.includes('SavedViewer') && content.includes(updateLabel));
+  assert(content.indexOf('SavedViewer') < content.indexOf(updateLabel));
   await h.update({ graphOpenRequest: { period: 'week' } });
   assert.match(h.calls.at(-1).url, /period=week/);
   assert.match(h.text(), /この週のこころグラフ/);

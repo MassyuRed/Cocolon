@@ -28,14 +28,14 @@ function record(extra = {}) {
     lifecycle_status: 'saved', saved_at: '2026-10-10T01:00:00+00:00', row_version: 2,
     renderer_version: 'piece.rn_native_preview.prototype.v3', ...extra };
 }
-function harness({ send, session, random, exportPrepare, os = 'ios' } = {}) {
+function harness({ send, session, random, exportPrepare, os = 'ios', pieceTextMetrics } = {}) {
   const calls = [], sessions = [], alerts = [], appListeners = new Set();
   const React = { Component: class {
     constructor(props) { this.props = props; this.state = {}; }
     setState(v) { this.state = { ...this.state, ...(typeof v === 'function' ? v(this.state) : v) }; }
   }, createElement: (type, props, ...children) => typeof type === 'function' ? type(props || {}) : { type, props: props || {}, children } };
   const context = vm.createContext({ React, AbortController, Uint8Array, Date, Object, JSON,
-    Platform: { OS: os },
+    Platform: { OS: os }, NativeModules: { PieceTextMetrics: pieceTextMetrics },
     crypto: { getRandomValues: random || (bytes => crypto.randomFillSync(bytes)) },
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : packet(record()); },
     getAccessToken: async owner => { sessions.push(owner); return session ? session(owner, sessions.length) : 'synthetic'; },
@@ -46,7 +46,7 @@ function harness({ send, session, random, exportPrepare, os = 'ios' } = {}) {
   });
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
-    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_APPEARANCE_BACKGROUND_STYLES', 'PIECE_THEME_APPEARANCE_DEFAULTS', 'PIECE_FRAME_STYLES', 'PIECE_ACCENT_STYLES', 'isPieceExpandedAppearance', 'pieceAppearanceBackdrop', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot', 'isPieceHistoryRecordOlder']],
     ['features/piece/piecePreviewModel.js', ['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay', 'pieceOwnerPermissions']],
@@ -1314,11 +1314,11 @@ test('owner entry remains available independently of public and resonance loadin
   n.dispose();
 });
 
-function exportHost({prepareWait, fresh, captureWait, send=ownerSend, result={outcome:'saved_to_photos'}}={}) {
+function exportHost({prepareWait, fresh, captureWait, send=ownerSend, result={outcome:'saved_to_photos'}, pieceTextMetrics}={}) {
   const events=[];
   const asset={dispose:async()=>events.push('dispose'),saveToPhotos:async()=>{events.push('photos');return result;},
     openShare:async()=>{events.push('share');return result;}};
-  const h=harness({send,exportPrepare:async options=>{events.push(['prepare',options]);if(prepareWait)await prepareWait;
+  const h=harness({send,pieceTextMetrics,exportPrepare:async options=>{events.push(['prepare',options]);if(prepareWait)await prepareWait;
     return {record:fresh||record(),capture:async target=>{events.push(['capture',target]);if(captureWait)await captureWait;return asset;}};}});
   const host=ownerHost(h,savedEntry(),{flags:{piece_v2_owner_read_enabled:true,piece_v2_export_enabled:true}});
   const target={isCurrent:()=>true};
@@ -1337,6 +1337,31 @@ test('normal detail export is explicit, defaults OFF, fetches a fresh record and
   u.host.exportAttempt.onTarget(u.target,null);assert.equal(button(u.host,'写真に保存').props.disabled,false);
   await button(u.host,'写真に保存').props.onPress();assert.equal(u.events.filter(x=>x==='photos').length,1);
   assert.ok(texts(u.host.render()).includes('写真に保存しました。'));assert.equal(u.host.controller.getView().record,displayed);
+  u.host.componentWillUnmount();
+});
+test('a tall patterned Piece mounts one capture canvas at a time and keeps its saved text visible', async () => {
+  const saved = record({ renderer_version: 'piece.rn_bitmap_renderer.ios.v2' });
+  saved.visual_recipe.aspect_ratio = '9:16';
+  saved.visual_recipe.theme.background_style = 'stripe_pattern';
+  const canonical = value => value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort()
+    .map(key => [key, canonical(value[key])])) : value;
+  saved.visual_recipe_hash = crypto.createHash('sha256').update(JSON.stringify(canonical(saved.visual_recipe))).digest('hex');
+  const u = exportHost({ fresh: saved, send: (_url, opt) => {
+    assert.equal(opt.headers['X-Piece-Palette'], '7');
+    assert.equal(opt.headers['X-Piece-Decoration-Palette'], '8');
+    return packet(saved);
+  }, pieceTextMetrics: { bitmapRendererVersion: saved.renderer_version, visualStyleVersion: 'piece.visual_style.v1',
+    gradientBackdropVersion: 'piece.gradient_backdrop.v1', appearanceBackdropVersion: 'piece.appearance_backdrop.v1' } });
+  const canvases = () => nodes(u.host.render()).filter(n => ['PieceVisualCard', 'PieceExportCanvas'].includes(n.type)).map(n => n.type);
+  u.host.componentDidMount(); await tick();
+  assert.deepEqual(canvases(), ['PieceVisualCard']);
+  await button(u.host, '画像を保存').props.onPress();
+  assert.deepEqual(canvases(), ['PieceExportCanvas']);
+  assert.ok(texts(u.host.render()).includes(saved.piece_text));
+  const attempt = u.host.exportAttempt;
+  button(u.host, '画像の準備をやめる').props.onPress();
+  assert.equal(attempt.abort.signal.aborted, true);
+  assert.deepEqual(canvases(), ['PieceVisualCard']);
   u.host.componentWillUnmount();
 });
 test('saved detail only offers image preparation on devices that support the saved renderer', async () => {

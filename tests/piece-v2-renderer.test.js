@@ -414,8 +414,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     performance: { now: () => monotonic },
     Date: class extends Date { static now() { return now; } } });
   const modules = [
-    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
-    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle', 'supportsPieceGradientBackdrop']],
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_APPEARANCE_BACKGROUND_STYLES', 'PIECE_THEME_APPEARANCE_DEFAULTS', 'PIECE_FRAME_STYLES', 'PIECE_ACCENT_STYLES', 'isPieceExpandedAppearance', 'pieceAppearanceBackdrop', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
+    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle', 'supportsPieceGradientBackdrop', 'supportsPieceAppearanceBackdrop']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
     ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
@@ -436,7 +436,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       // React retains a mounted native node when only the callback identity
       // changes; a replacement canvas binding remounts all descendants.
       const key = card.state.bindingSerial + ':' + node.props.testID + ':' + (node.props.key ?? '');
-      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : node.props.testID === 'piece-gradient-backdrop' ? 10003 : Number(node.props.testID.split('-').pop()) + 1 });
+      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : ['piece-gradient-backdrop', 'piece-appearance-backdrop'].includes(node.props.testID) ? 10003 : Number(node.props.testID.split('-').pop()) + 1 });
       node.props.ref(mountedNodes.get(key));
     }
     return tree;
@@ -2835,6 +2835,44 @@ test('a saved Piece uses the same gradient, typography, and placement in preview
     assert.ok(rows.filter(row => row.kind === 'body').every(row => row.font_family === 'HiraMinProN-W3'));
     assert.equal(rows.at(-1).kind, 'branding');
     assert.ok(!Object.hasOwn(rows.at(-1), 'font_family'));
+  } finally { h.card.componentWillUnmount(); }
+});
+test('the expanded appearance reaches the same native inputs for preview, saved detail and PNG export', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const p = sample('short_essay', '9:16', 'sage_paper');
+  p.renderer_version = version;
+  const h = bitmapHarness(value => value, { version });
+  Object.assign(p.plan_capabilities, { theme_ids: copy(h.context.PIECE_STYLE_THEME_IDS),
+    font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'],
+    background_styles: ['solid', 'gradient', 'color_bands', 'color_wash', 'dot_pattern', 'stripe_pattern'],
+    frame_styles: ['none', 'line', 'double_line'], accent_styles: ['none', 'top_rule', 'corner_marks'] });
+  Object.assign(p.visual_recipe.theme, { background_style: 'dot_pattern', frame_style: 'double_line', accent_style: 'corner_marks' });
+  p.visual_recipe_hash = hash(JSON.stringify(canonical(p.visual_recipe)));
+  const saved = { ...savedSample(p), renderer_version: version };
+  const bridge = h.context.NativeModules.PieceTextMetrics;
+  Object.assign(bridge, { bitmapRendererVersion: version, visualStyleVersion: 'piece.visual_style.v1',
+    gradientBackdropVersion: 'piece.gradient_backdrop.v1' });
+  try {
+    assert.equal(h.preparePieceNativePreview(display(p)), null, 'only the new native bridge can draw a patterned recipe');
+    assert.equal(h.preparePieceNativeSavedDisplay(saved), null);
+    bridge.appearanceBackdropVersion = 'piece.appearance_backdrop.v1';
+    const preview = h.preparePieceNativePreview(display(p));
+    const detail = h.preparePieceNativeSavedDisplay(saved);
+    const exported = h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true });
+    const withoutKey = value => { const result = copy(value); delete result.key; return result; };
+    assert.deepEqual(withoutKey(preview), withoutKey(detail));
+    assert.deepEqual(copy(detail), copy(exported));
+    const appearance = { background_style: 'dot_pattern', colors: ['#E5EEE0', '#D2DCCE'],
+      ink: '#4C674B', frame_style: 'double_line', accent_style: 'corner_marks' };
+    assert.deepEqual(copy(preview.appearanceBackdrop), appearance);
+    assert.equal(preview.backgroundGradient, undefined);
+    h.card.props = { ...h.card.props, display: display(p) };
+    h.bind(h.token);
+    await finishBitmap(h);
+    assert.equal(h.card.state.measurement.phase, 'native_checked');
+    assert.deepEqual(copy(h.bitmapCalls.at(-1).appearance_backdrop), { tag: 10003, ...appearance });
+    assert.equal(h.bitmapCalls.at(-1).gradient_backdrop, undefined);
   } finally { h.card.componentWillUnmount(); }
 });
 test('the selected Piece text sizes keep the existing fit floor for a 420-grapheme body', () => {

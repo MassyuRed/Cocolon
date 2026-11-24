@@ -53,10 +53,18 @@ export const PIECE_TEXT_COLOR_IDS = Object.freeze(['neutral_ink']);
 export const PIECE_TEXT_ALIGNMENTS = Object.freeze(['left', 'center']);
 export const PIECE_TEXT_SIZES = Object.freeze(['small', 'standard', 'large']);
 export const PIECE_BACKGROUND_STYLES = Object.freeze(['solid', 'gradient']);
+export const PIECE_APPEARANCE_BACKGROUND_STYLES = Object.freeze([...PIECE_BACKGROUND_STYLES,
+  'color_bands', 'color_wash', 'dot_pattern', 'stripe_pattern']);
+export const PIECE_FRAME_STYLES = Object.freeze(['none', 'line', 'double_line']);
+export const PIECE_ACCENT_STYLES = Object.freeze(['none', 'top_rule', 'corner_marks']);
+export const PIECE_THEME_APPEARANCE_DEFAULTS = Object.freeze({ background_style: 'solid',
+  frame_style: 'none', accent_style: 'none' });
 export const PIECE_SERIF_FONT = 'HiraMinProN-W3';
 
+const darkThemes = ['quiet_night', 'forest_mint', 'ocean_ice'];
+
 export function pieceNeutralInk(themeId) {
-  return ['quiet_night', 'forest_mint', 'ocean_ice'].includes(themeId) ? '#F1F5F9' : '#334155';
+  return darkThemes.includes(themeId) ? '#F1F5F9' : '#334155';
 }
 
 export function pieceDefaultTextAlignment(formatType) {
@@ -68,4 +76,46 @@ const gradientEnds = { sage_paper: '#F5F8F0', peach_paper: '#FFF2EC', slate_pape
 export function pieceBackgroundGradient(themeId) {
   const theme = PIECE_THEME_COLORS[themeId];
   return { start: theme.surface, end: gradientEnds[themeId] ?? theme.vector_end };
+}
+
+export function isPieceExpandedAppearance(theme) {
+  return theme.frame_style !== undefined || theme.accent_style !== undefined ||
+    (theme.background_style !== undefined && !PIECE_BACKGROUND_STYLES.includes(theme.background_style));
+}
+
+export function pieceThemeVisualSelection(theme, capabilities) {
+  return Object.fromEntries(Object.entries(PIECE_THEME_APPEARANCE_DEFAULTS)
+    .filter(([key]) => capabilities?.[`${key}s`]?.length)
+    .map(([key, fallback]) => [key, theme[key] ?? fallback]));
+}
+
+const multicolor = {
+  color_bands: { light: ['#F8E7DB', '#E6F1EC', '#EEE8F7'], dark: ['#242A39', '#253836', '#35273E'] },
+  color_wash: { light: ['#FFECE1', '#F1F3DB', '#DFF1F7'], dark: ['#34263E', '#1F3745', '#253B31'] },
+};
+
+function patternInk(surface, ink) {
+  const components = [1, 3, 5].map(start => {
+    const base = parseInt(surface.slice(start, start + 2), 16);
+    const tone = parseInt(ink.slice(start, start + 2), 16);
+    return Math.round((base * 9 + tone) / 10).toString(16).padStart(2, '0');
+  });
+  return '#' + components.join('').toUpperCase();
+}
+
+export function pieceAppearanceBackdrop(theme) {
+  const { theme_id: themeId, background_style: backgroundStyle = 'solid',
+    frame_style: frameStyle = 'none', accent_style: accentStyle = 'none' } = theme;
+  const themeColors = PIECE_THEME_COLORS[themeId];
+  let colors = [themeColors.surface];
+  if (backgroundStyle === 'gradient') {
+    const { start, end } = pieceBackgroundGradient(themeId);
+    colors = [start, end];
+  } else if (multicolor[backgroundStyle]) {
+    colors = [...multicolor[backgroundStyle][darkThemes.includes(themeId) ? 'dark' : 'light']];
+  } else if (backgroundStyle === 'dot_pattern' || backgroundStyle === 'stripe_pattern') {
+    colors = [themeColors.surface, patternInk(themeColors.surface, themeColors.text)];
+  }
+  return { background_style: backgroundStyle, colors, ink: themeColors.accent,
+    frame_style: frameStyle, accent_style: accentStyle };
 }

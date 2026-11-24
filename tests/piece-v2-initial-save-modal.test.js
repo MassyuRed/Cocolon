@@ -29,7 +29,7 @@ const renderPromise = Promise.resolve((() => {
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
     "import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';",
-    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment } from '../../features/piece/piecePalette';",
+    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment, pieceThemeVisualSelection } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
@@ -325,6 +325,33 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   premium.find(node => node.props.testID === 'piece-option-background_style-gradient').props.onPress();
   assert.equal(calls.at(-1)[0].background_style, 'gradient');
   assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
+});
+test('Premium appearance choices keep the other selected styles and stay absent for Plus', async () => {
+  const display = fixture(), calls = [];
+  const { preview } = display;
+  preview.quota.subscription_tier = 'premium';
+  preview.visual_recipe.theme.background_style = 'dot_pattern';
+  preview.visual_recipe.theme.frame_style = 'double_line';
+  preview.visual_recipe.theme.accent_style = 'corner_marks';
+  Object.assign(preview.plan_capabilities, { background_styles: ['solid', 'gradient', 'color_bands', 'color_wash',
+    'dot_pattern', 'stripe_pattern'], frame_styles: ['none', 'line', 'double_line'],
+  accent_styles: ['none', 'top_rule', 'corner_marks'] });
+  const options = { onVisualChange: (...args) => calls.push(args) };
+  const premium = nodes(await render(display, options));
+  const pick = (field, value) => premium.find(node => node.props.testID === `piece-option-${field}-${value}`);
+  assert.equal(pick('background_style', 'dot_pattern').props.accessibilityState.selected, true);
+  assert.equal(pick('frame_style', 'double_line').props.accessibilityState.selected, true);
+  assert.equal(pick('accent_style', 'corner_marks').props.accessibilityState.selected, true);
+  pick('background_style', 'color_wash').props.onPress();
+  pick('frame_style', 'none').props.onPress();
+  pick('accent_style', 'top_rule').props.onPress();
+  assert.deepEqual(calls.map(([selection]) => [selection.background_style, selection.frame_style, selection.accent_style]),
+    [['color_wash', 'double_line', 'corner_marks'], ['dot_pattern', 'none', 'corner_marks'], ['dot_pattern', 'double_line', 'top_rule']]);
+  assert.ok(calls.every(([, identity, token]) => identity.visual_recipe_hash === preview.visual_recipe_hash && token === display.visualToken));
+  preview.quota.subscription_tier = 'plus';
+  Object.assign(preview.plan_capabilities, { background_styles: [], frame_styles: [], accent_styles: [] });
+  assert.ok(nodes(await render(display, options)).every(node => !['background_style', 'frame_style', 'accent_style']
+    .some(field => node.props.testID === `piece-visual-${field}`)));
 });
 test('close remains independent of save and retry', async () => {
   let close = 0, save = 0, retry = 0;

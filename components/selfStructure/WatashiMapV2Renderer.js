@@ -24,9 +24,9 @@ function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false }) {
   return (
     <View style={styles.root} testID="watashi-map-v2">
       <Text style={styles.title} accessibilityRole="header">記録から見えるわたし</Text>
+      <Text style={styles.body}>{model.text}</Text>
       <Text style={styles.subtle}>{model.periodLabel}</Text>
       <Text style={styles.subtle}>記録に書かれた内容をもとにしています。原因や未来の予測ではありません。</Text>
-      <Text style={styles.body}>{model.text}</Text>
       <TouchableOpacity testID="watashi-map-v2-items-toggle" accessibilityRole="button"
         accessibilityState={{ expanded }} style={styles.itemsToggle}
         onPress={() => setExpandedProjection(expanded ? null : model.projectionOf)}>

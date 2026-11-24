@@ -940,7 +940,8 @@ RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport {
   if ([UIFont fontWithName:@"HiraMinProN-W3" size:36]) {
     return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2", @"visualStyleVersion": @"piece.visual_style.v1",
-      @"gradientBackdropVersion": @"piece.gradient_backdrop.v1" };
+      @"gradientBackdropVersion": @"piece.gradient_backdrop.v1",
+      @"appearanceBackdropVersion": @"piece.appearance_backdrop.v1" };
   }
   return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2" };
 }
@@ -1550,27 +1551,178 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
 - (void)replaceSublayer:(CALayer *)old with:(CALayer *)layer { [self invalidateBitmap]; [super replaceSublayer:old with:layer]; }
 @end
 
+enum class PieceBackdropFill { Solid, Gradient, Bands, Wash, Dots, Stripes };
+enum class PieceBackdropFrame { None, Line, DoubleLine };
+enum class PieceBackdropAccent { None, TopRule, CornerMarks };
+struct PieceBackdropAppearance {
+  PieceBackdropFill fill;
+  PieceBackdropFrame frame;
+  PieceBackdropAccent accent;
+  unsigned int colors[3];
+  unsigned int ink;
+};
+
+static BOOL PieceAppearanceColor(id value, unsigned int *rgb) {
+  if (![value isKindOfClass:NSString.class] || [value length] != 7 || [value characterAtIndex:0] != '#') return NO;
+  *rgb = 0;
+  for (NSUInteger i = 1; i < 7; i++) {
+    unichar c = [value characterAtIndex:i];
+    unsigned int digit;
+    if (c >= '0' && c <= '9') digit = c - '0';
+    else if (c >= 'a' && c <= 'f') digit = c - 'a' + 10;
+    else if (c >= 'A' && c <= 'F') digit = c - 'A' + 10;
+    else return NO;
+    *rgb = (*rgb << 4) | digit;
+  }
+  return YES;
+}
+
+static BOOL PieceReadBackdropAppearance(NSDictionary *value, PieceBackdropAppearance *appearance) {
+  if (!PieceBitmapFields(value, @[@"background_style", @"colors", @"ink", @"frame_style", @"accent_style"])) return NO;
+  NSUInteger fill = [@[@"solid", @"gradient", @"color_bands", @"color_wash", @"dot_pattern", @"stripe_pattern"]
+    indexOfObject:value[@"background_style"]];
+  NSUInteger frame = [@[@"none", @"line", @"double_line"] indexOfObject:value[@"frame_style"]];
+  NSUInteger accent = [@[@"none", @"top_rule", @"corner_marks"] indexOfObject:value[@"accent_style"]];
+  if (fill == NSNotFound || frame == NSNotFound || accent == NSNotFound ||
+      !PieceAppearanceColor(value[@"ink"], &appearance->ink)) return NO;
+  appearance->fill = static_cast<PieceBackdropFill>(fill);
+  appearance->frame = static_cast<PieceBackdropFrame>(frame);
+  appearance->accent = static_cast<PieceBackdropAccent>(accent);
+  if (appearance->fill == PieceBackdropFill::Solid && !frame && !accent) return NO;
+  NSArray *colors = value[@"colors"];
+  const NSUInteger count = appearance->fill == PieceBackdropFill::Solid ? 1 :
+    (appearance->fill == PieceBackdropFill::Bands || appearance->fill == PieceBackdropFill::Wash) ? 3 : 2;
+  if (![colors isKindOfClass:NSArray.class] || colors.count != count) return NO;
+  for (NSUInteger i = 0; i < count; i++) {
+    if (!PieceAppearanceColor(colors[i], &appearance->colors[i])) return NO;
+    for (NSUInteger j = 0; j < i; j++) if (appearance->colors[i] == appearance->colors[j]) return NO;
+  }
+  return YES;
+}
+
+static unsigned int PieceBackdropBlend(unsigned int a, unsigned int b, size_t step, size_t steps) {
+  unsigned int value = 0;
+  for (int shift = 16; shift >= 0; shift -= 8) {
+    const size_t from = (a >> shift) & 255, to = (b >> shift) & 255;
+    value |= (unsigned int)((from * (steps - step) + to * step + steps / 2) / steps) << shift;
+  }
+  return value;
+}
+
+static void PiecePaintBackdropAppearance(PieceOwnedPixels &pixels, const PieceBackdropAppearance &appearance) {
+  const bool dots = appearance.fill == PieceBackdropFill::Dots;
+  const bool stripes = appearance.fill == PieceBackdropFill::Stripes;
+  const size_t steps = pixels.height - 1;
+  for (size_t y = 0; y < pixels.height; y++) {
+    unsigned int base = appearance.colors[0];
+    if (appearance.fill == PieceBackdropFill::Gradient) {
+      base = PieceBackdropBlend(base, appearance.colors[1], y, steps);
+    } else if (appearance.fill == PieceBackdropFill::Bands) {
+      base = appearance.colors[y * 3 / pixels.height];
+    } else if (appearance.fill == PieceBackdropFill::Wash) {
+      const size_t segment = y * 2 > steps ? 1 : 0;
+      base = PieceBackdropBlend(appearance.colors[segment], appearance.colors[segment + 1], y * 2 - segment * steps, steps);
+    }
+    UInt8 *row = pixels.data + y * pixels.stride;
+    const size_t topBottom = MIN(y, pixels.height - y - 1);
+    const int dotY = (int)(y % 28) - 14;
+    for (size_t x = 0; x < pixels.width; x++) {
+      unsigned int rgb = base;
+      if (dots) {
+        const int dotX = (int)((x + ((y / 28) % 2) * 14) % 28) - 14;
+        if (dotX * dotX + dotY * dotY <= 9) rgb = appearance.colors[1];
+      } else if (stripes && (x + y) % 32 < 5) {
+        rgb = appearance.colors[1];
+      }
+      const size_t leftRight = MIN(x, pixels.width - x - 1);
+      const size_t edge = MIN(topBottom, leftRight);
+      const bool framed = (appearance.frame == PieceBackdropFrame::Line && edge >= 9 && edge < 12) ||
+        (appearance.frame == PieceBackdropFrame::DoubleLine && ((edge >= 8 && edge < 10) || (edge >= 16 && edge < 18)));
+      const bool ruled = appearance.accent == PieceBackdropAccent::TopRule && y >= 24 && y < 27 &&
+        x >= pixels.width / 2 - 58 && x < pixels.width / 2 + 58;
+      const bool marked = appearance.accent == PieceBackdropAccent::CornerMarks &&
+        ((topBottom >= 23 && topBottom < 26 && leftRight >= 23 && leftRight < 43) ||
+         (leftRight >= 23 && leftRight < 26 && topBottom >= 23 && topBottom < 43));
+      if (framed || ruled || marked) rgb = appearance.ink;
+      UInt8 *pixel = row + x * 4;
+      pixel[0] = (UInt8)(rgb >> 16);
+      pixel[1] = (UInt8)(rgb >> 8);
+      pixel[2] = (UInt8)rgb;
+      pixel[3] = 255;
+    }
+  }
+}
+
 @interface PieceGradientBackdropView : UIView
 @property(nonatomic, copy) NSArray<NSString *> *gradientStops;
+@property(nonatomic, copy) NSDictionary *appearance;
 - (BOOL)hasGradientStops:(NSArray<NSString *> *)stops;
+- (BOOL)hasAppearance:(NSDictionary *)appearance;
 @end
 
 @implementation PieceGradientBackdropView {
   id _gradientImage;
   CGFloat _gradientHeight;
+  CGSize _appearanceSize;
 }
 @synthesize gradientStops = _gradientStops;
+@synthesize appearance = _appearance;
 
-- (void)setGradientStops:(NSArray<NSString *> *)stops {
-  if ([_gradientStops isEqual:stops]) return;
-  _gradientStops = [stops copy];
+- (void)resetBackdrop {
   _gradientImage = nil;
   self.layer.contents = nil;
   [self setNeedsLayout];
 }
 
+- (void)setGradientStops:(NSArray<NSString *> *)stops {
+  if (_gradientStops == stops || [_gradientStops isEqual:stops]) return;
+  _gradientStops = [stops copy];
+  [self resetBackdrop];
+}
+
+- (void)setAppearance:(NSDictionary *)appearance {
+  if (_appearance == appearance || [_appearance isEqual:appearance]) return;
+  _appearance = [appearance copy];
+  [self resetBackdrop];
+}
+
+- (void)installBackdropImage:(CGImageRef)image {
+  _gradientImage = (__bridge id)image;
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
+  self.layer.contentsScale = 1;
+  self.layer.contentsGravity = kCAGravityResize;
+  self.layer.magnificationFilter = kCAFilterNearest;
+  self.layer.contents = _gradientImage;
+  [CATransaction commit];
+}
+
+- (void)layoutAppearance {
+  const CGSize size = self.bounds.size;
+  if (_gradientImage && CGSizeEqualToSize(_appearanceSize, size)) return;
+  _gradientImage = nil;
+  self.layer.contents = nil;
+  if (_gradientStops || !((size.width == 980 && size.height == 1250) ||
+                            (size.width == 968 && size.height == 1808))) return;
+  PieceBackdropAppearance appearance{};
+  if (!PieceReadBackdropAppearance(_appearance, &appearance)) return;
+  const bool needsFullWidth = appearance.fill == PieceBackdropFill::Dots || appearance.fill == PieceBackdropFill::Stripes ||
+    appearance.frame != PieceBackdropFrame::None || appearance.accent != PieceBackdropAccent::None;
+  try {
+    PieceOwnedPixels pixels;
+    if (!pixels.makeExact(needsFullWidth ? (size_t)size.width : 1, (size_t)size.height, 1, PieceV4RasterBudget())) return;
+    PiecePaintBackdropAppearance(pixels, appearance);
+    CGImageRef image = PiecePixelsImage(pixels);
+    if (!image) return;
+    _appearanceSize = size;
+    @try { [self installBackdropImage:image]; }
+    @finally { CGImageRelease(image); }
+  } catch (const std::bad_alloc &) { return; }
+}
+
 - (void)layoutSubviews {
   [super layoutSubviews];
+  if (_appearance) { [self layoutAppearance]; return; }
   const CGFloat height = self.bounds.size.height;
   if (_gradientImage && _gradientHeight == height) return;
   _gradientImage = nil;
@@ -1601,20 +1753,25 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
   CGImageRef image = PiecePixelsImage(strip);
   if (!image) return;
   _gradientHeight = height;
-  _gradientImage = (__bridge id)image;
-  [CATransaction begin];
-  [CATransaction setDisableActions:YES];
-  self.layer.contentsScale = 1;
-  self.layer.contentsGravity = kCAGravityResize;
-  self.layer.magnificationFilter = kCAFilterNearest;
-  self.layer.contents = _gradientImage;
-  [CATransaction commit];
-  CGImageRelease(image);
+  @try { [self installBackdropImage:image]; }
+  @finally { CGImageRelease(image); }
 }
 
 - (BOOL)hasGradientStops:(NSArray<NSString *> *)stops {
-  return _gradientImage && self.layer.contents == _gradientImage && _gradientHeight == self.bounds.size.height &&
+  return !_appearance && _gradientImage && self.layer.contents == _gradientImage && _gradientHeight == self.bounds.size.height &&
     !self.hidden && self.alpha == 1 && !self.layer.hidden && self.layer.opacity == 1 && [_gradientStops isEqual:stops];
+}
+
+- (BOOL)hasAppearance:(NSDictionary *)appearance {
+  CALayer *layer = self.layer;
+  return !_gradientStops && _gradientImage && layer.contents == _gradientImage &&
+    CGRectEqualToRect(self.bounds, (CGRect){CGPointZero, _appearanceSize}) && CGRectEqualToRect(layer.bounds, self.bounds) &&
+    !self.hidden && self.alpha == 1 && !layer.hidden && layer.opacity == 1 && [_appearance isEqual:appearance] &&
+    layer.contentsScale == 1 && [layer.contentsGravity isEqual:kCAGravityResize] &&
+    [layer.magnificationFilter isEqual:kCAFilterNearest] && CGRectEqualToRect(layer.contentsRect, CGRectMake(0, 0, 1, 1)) &&
+    CGRectEqualToRect(layer.contentsCenter, CGRectMake(0, 0, 1, 1)) && PieceIdentityTransform(layer.transform) &&
+    PieceIdentityTransform(layer.sublayerTransform) && !layer.mask && !layer.sublayers.count && !layer.animationKeys.count &&
+    layer.borderWidth == 0 && layer.cornerRadius == 0 && layer.shadowOpacity == 0;
 }
 @end
 
@@ -1623,19 +1780,26 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
 @implementation PieceGradientBackdropManager
 RCT_EXPORT_MODULE(PieceGradientBackdrop)
 RCT_EXPORT_VIEW_PROPERTY(gradientStops, NSArray)
+RCT_EXPORT_VIEW_PROPERTY(appearance, NSDictionary)
 + (BOOL)requiresMainQueueSetup { return YES; }
 - (UIView *)view { return [PieceGradientBackdropView new]; }
 @end
 
-static BOOL PieceGradientOnCanvas(PieceGradientBackdropView *backdrop, UIView *canvas, CGSize size, NSArray *stops) {
-  if (![backdrop isKindOfClass:PieceGradientBackdropView.class] || backdrop.window != canvas.window ||
-      ![backdrop hasGradientStops:stops]) return NO;
+static BOOL PieceBackdropOnCanvas(PieceGradientBackdropView *backdrop, UIView *canvas, CGSize size) {
+  if (![backdrop isKindOfClass:PieceGradientBackdropView.class] || backdrop.window != canvas.window) return NO;
   UIView *border = backdrop.superview, *parent = canvas.superview;
   const CGFloat inset = size.height == 1920 ? 54 : 48;
   CGRect outer = CGRectInset((CGRect){CGPointZero, size}, inset, inset);
   return parent && border.superview == parent && [parent.subviews indexOfObjectIdenticalTo:border] <
     [parent.subviews indexOfObjectIdenticalTo:canvas] && CGRectEqualToRect(border.frame, outer) &&
     CGRectEqualToRect(backdrop.frame, CGRectInset((CGRect){CGPointZero, outer.size}, 2, 2));
+}
+
+static BOOL PieceAppearanceOnCanvas(PieceGradientBackdropView *backdrop, NSDictionary *appearance) {
+  UIView *border = backdrop.superview;
+  return [backdrop hasAppearance:appearance] && !border.hidden && border.alpha == 1 &&
+    !border.layer.hidden && border.layer.opacity == 1 && PieceIdentityTransform(border.layer.transform) &&
+    PieceIdentityTransform(border.layer.sublayerTransform) && !border.layer.mask && !border.layer.animationKeys.count;
 }
 
 @interface PieceBitmapCanvasView : UIView
@@ -1646,6 +1810,7 @@ static BOOL PieceGradientOnCanvas(PieceGradientBackdropView *backdrop, UIView *c
 @property(nonatomic) CGSize bitmapSize;
 @property(nonatomic, weak) PieceGradientBackdropView *gradientBackdrop;
 @property(nonatomic, copy) NSArray<NSString *> *gradientStops;
+@property(nonatomic, copy) NSDictionary *backdropAppearance;
 - (void)clearBitmap;
 - (BOOL)bitmapConfigurationCurrent;
 @end
@@ -1674,7 +1839,7 @@ static BOOL PieceGradientOnCanvas(PieceGradientBackdropView *backdrop, UIView *c
   [CATransaction begin]; [CATransaction setDisableActions:YES]; layer.contents = nil; [CATransaction commit];
   layer.bitmapMutationAllowed=NO;
   _bitmapImage = nil; _bitmapSize = CGSizeZero;
-  _gradientBackdrop = nil; _gradientStops = nil;
+  _gradientBackdrop = nil; _gradientStops = nil; _backdropAppearance = nil;
   if (oldToken && _onBitmapInvalidated) _onBitmapInvalidated(@{@"artifact_token":oldToken,@"binding_token":_bitmapBinding ?: @""});
 }
 - (void)setBitmapBinding:(NSString *)value {
@@ -1699,8 +1864,10 @@ static BOOL PieceGradientOnCanvas(PieceGradientBackdropView *backdrop, UIView *c
 - (void)setContentScaleFactor:(CGFloat)value { if (_bitmapImage && value!=self.contentScaleFactor) [self clearBitmap]; [super setContentScaleFactor:value]; }
 - (BOOL)bitmapConfigurationCurrent {
   CALayer *layer = self.layer;
+  if ((_gradientStops || _backdropAppearance) && !PieceBackdropOnCanvas(_gradientBackdrop, self, _bitmapSize)) return NO;
   return self.window && !self.hidden && self.alpha == 1 && !self.opaque &&
-    (!_gradientStops || PieceGradientOnCanvas(_gradientBackdrop, self, _bitmapSize, _gradientStops)) &&
+    (!_gradientStops || [_gradientBackdrop hasGradientStops:_gradientStops]) &&
+    (!_backdropAppearance || PieceAppearanceOnCanvas(_gradientBackdrop, _backdropAppearance)) &&
     CGPointEqualToPoint(self.bounds.origin, CGPointZero) && CGSizeEqualToSize(self.bounds.size, _bitmapSize) &&
     self.contentScaleFactor == 1 && layer.contentsScale == 1 && !layer.hidden && !layer.opaque && layer.opacity == 1 &&
     CGRectEqualToRect(layer.bounds, self.bounds) && CGPointEqualToPoint(layer.anchorPoint,CGPointMake(0.5,0.5)) &&
@@ -1857,8 +2024,11 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
   NSArray *keys=@[@"version",@"profile",@"canvas_tag",@"preview_key",@"binding_token",@"expires_at_ms",@"remaining_ms",
     @"width",@"height",@"margin",@"branding_zone",@"content_width",@"content_height",@"line_height",@"total_height",@"alignment",@"branding_mode",@"rows"];
   id gradient = request[@"gradient_backdrop"];
+  id appearanceBackdrop = request[@"appearance_backdrop"];
   if (gradient) keys = [keys arrayByAddingObject:@"gradient_backdrop"];
-  if (!PieceBitmapFields(request,keys) || ![request[@"version"] isEqual:PieceBitmapVersion] || ![request[@"profile"] isEqual:PieceBitmapProfile] ||
+  if (appearanceBackdrop) keys = [keys arrayByAddingObject:@"appearance_backdrop"];
+  if ((gradient && appearanceBackdrop) || !PieceBitmapFields(request,keys) || ![request[@"version"] isEqual:PieceBitmapVersion] ||
+      ![request[@"profile"] isEqual:PieceBitmapProfile] ||
       !PieceBitmapTag(request[@"canvas_tag"]) || !PieceBitmapString(request[@"preview_key"],4096) || !PieceBitmapString(request[@"binding_token"],128) || !self.bridge.uiManager) {
     reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",@"Bitmap unavailable",nil); return;
   }
@@ -1893,6 +2063,16 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
       host.gradientBackdrop = (PieceGradientBackdropView *)views[gradient[@"tag"]];
       host.gradientStops = @[gradient[@"start"], gradient[@"end"]];
     }
+    if (appearanceBackdrop) {
+      if (!PieceBitmapFields(appearanceBackdrop, @[@"tag", @"background_style", @"colors", @"ink", @"frame_style", @"accent_style"]) ||
+          !PieceBitmapTag(appearanceBackdrop[@"tag"]) || [appearanceBackdrop[@"tag"] isEqual:request[@"canvas_tag"]]) {fail();return;}
+      NSMutableDictionary *appearance = [appearanceBackdrop mutableCopy];
+      [appearance removeObjectForKey:@"tag"];
+      PieceBackdropAppearance parsed{};
+      if (!PieceReadBackdropAppearance(appearance, &parsed)) {fail();return;}
+      host.gradientBackdrop = (PieceGradientBackdropView *)views[appearanceBackdrop[@"tag"]];
+      host.backdropAppearance = appearance;
+    }
     if(![host bitmapConfigurationCurrent]){fail();return;}
     NSArray *rows=request[@"rows"]; BOOL branded=![mode isEqual:@"off"];
     if(![rows isKindOfClass:NSArray.class] || rows.count<(branded?2:1) || rows.count>513){fail();return;}
@@ -1906,7 +2086,8 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
       NSArray *requiredKeys = hasFontFamily ? [rowKeys arrayByAddingObject:@"font_family"] : rowKeys;
       if(!PieceBitmapFields(row,requiredKeys) || (hasFontFamily && (brand || ![row[@"font_family"] isEqual:@"HiraMinProN-W3"])) ||
          !PieceBitmapTag(row[@"tag"]) || [tags containsObject:row[@"tag"]] ||
-         [row[@"tag"] isEqual:request[@"canvas_tag"]] || !PieceBitmapString(row[@"text"],4096) ||
+         [row[@"tag"] isEqual:request[@"canvas_tag"]] || (appearanceBackdrop && [row[@"tag"] isEqual:appearanceBackdrop[@"tag"]]) ||
+         !PieceBitmapString(row[@"text"],4096) ||
          ![row[@"kind"] isEqual:(brand?@"branding":@"body")]){fail();return;}
       for(NSString *key in @[@"font_size",@"width",@"height",@"line_width",@"gap_after"])
         if(!PieceBitmapNumber(row[key]) || [row[key] doubleValue]<0){fail();return;}

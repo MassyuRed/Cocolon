@@ -270,7 +270,7 @@ test('current and monthly maps open with the saved structure text and keep detai
         return { item: stored };
       }
       assert(url.endsWith('/latest?ensure=true&background=true'));
-      return latest(map);
+      return { ...latest(map), refresh_status: 'failed' };
     });
     const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
     let view;
@@ -279,6 +279,11 @@ test('current and monthly maps open with the saved structure text and keep detai
     assert(visibleTexts.indexOf(structure.title) >= 0);
     assert(visibleTexts.includes(structure.description));
     if (month) assert(visibleTexts.indexOf(structure.description) < visibleTexts.indexOf('現在のマップと見比べる'));
+    else {
+      const refreshError = visibleTexts.indexOf('更新結果を取得できませんでした。更新を再試行できます。');
+      assert(refreshError > visibleTexts.indexOf(structure.description));
+      assert(button(view, '更新を再試行'));
+    }
     assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
     await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
     const visibleGraph = view.root.findByProps({ testID: 'semantic-map-graph' });

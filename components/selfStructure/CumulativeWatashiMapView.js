@@ -270,6 +270,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       <View style={{ width: 44 }} />
     </View> : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
+      {visible && state.row ? <>
+        {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時：{monthLabel(month)}</Text> : null}
+        {renderMap(state.row)}
+        {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
+      </> : null}
       {!visible || (state.loading && (!state.semanticRestorePending || compare)) ? <View style={{ gap: 12 }}>
         <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="保存したマップを取得しています" />
         <Text style={[styles.meta, { color: ink }]}>保存したマップを取得しています。</Text>
@@ -287,13 +292,10 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         {correctionNotice.text}
       </Text> : null}
       {visible && state.empty && !refreshing ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
-      {visible && state.row ? <>
-        {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
-        {renderMap(state.row)}
-        {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
-        {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
-          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} /> : null}
-        {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
+      {visible && state.row && reportId ? <>
+        <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
+          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} />
+        {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">現在</Text>{renderMap(state.now)}</> : null}
         {compare && state.comparisonUnavailable && !refreshing ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
           {state.comparisonFailed
             ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
