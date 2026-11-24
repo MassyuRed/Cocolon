@@ -9794,3 +9794,21 @@ Pieceは11月23日の§9.261に挙がった配置を、Plus・Premiumの左揃�
 Pieceの配置用SQLは `20261124052500_piece_v2_visual_alignment.sql`。既存の画像設定用SQLを先に適用する順を維持する。わたしマップの実生成は最終段階3件。EmlisAIの学習候補の重みSHA-256は `14734be6016c7c3a02a9ef9bb5d16a280b12fe33ce58a3f2f9e19022a22ee58c`。
 
 [EmlisAI候補](https://github.com/MassyuRed/mashos-api/commit/a0becd45f3ac14029083a0bb83b2d4368b2f68ef) · [Pieceアプリ候補](https://github.com/MassyuRed/Cocolon/commit/a1df95f96e532267513a4d13203b27ea5e5bafd5) · [Piece API候補](https://github.com/MassyuRed/mashos-api/commit/b2ec4a7ab74f075e615b72c9c3a543b27ebaeae2) · [わたしマップ候補](https://github.com/MassyuRed/mashos-api/commit/ecbeae0eaf097ec2d325ccfda93320f29f890378) · [議事録§11.79](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-follow-only-piece-alignment-primary-structures-20261124) · [v25実応答](../../observation_learning/trials/2026-11-24-cmee-recipient-alignment-map/v25-results.jsonl) · [学習後の実応答](../../observation_learning/trials/2026-11-24-cmee-recipient-alignment-map/follow-fit-results.jsonl) · [マップの最終応答](../../observation_learning/trials/2026-11-24-cmee-recipient-alignment-map/map-final-results.jsonl)。
+
+<a id="cmee-reply-decoding-piece-text-size-map-text-first-20261124"></a>
+
+### 9.274 観測の4B・9B実比較、Piece文字サイズ、わたしマップの文章先行表示（11/24 JST）
+
+**EmlisAI。** 当回原文をAPI側で表示するv24と同じ架空12要求で、4Bの生成方法と既存Qwen3.5-9B BF16を単独比較した。初回4Bは、異なる長さの文脈を使う二つ目の計算に、全文分の位置が渡り、最初の応答を確定できなかった。対象の位置をその文脈の未処理トークンだけにそろえ、承認を受けて4Bだけ再比較した。修正版4Bと9Bは各12件が生成完了。同じ隔離アプリ経路で原文が一致し、同版・同本文を読み戻した件数は基礎4B 12件、修正版4B 11件、9B 12件。比較中に追加学習は行っていない。
+
+公開品質は基礎4B 1/12、修正版4B 0/12、9B 2/12。9Bは理由を書いていない寂しさのいたわりを維持し、帰り道で思い返した寂しさにも、何を思い返したかを補わず本人へ声をかけた。しおりと蔵書印は「好き／大好き」の組で同文になり、作り手や大切にしていた事実を補った。4B修正版では「終わると知った」を「終わった」に変え、しおりの1件は問いを返したため受領されなかった。通常採用は両候補とも見送った。
+
+**Piece。** §9.261の文字サイズをPlus・Premiumの「小さめ・標準・大きめ」としてアプリ、API、保存に追加した。既存配置とFreeの既定を保ち、「標準」に戻すと従来と同じ保存レシピになる。実際に収まる文字サイズを既存の計測で選び、表示・保存・詳細・書き出しは同じ保存版を使う。420字を使った模擬計測でも本文を省略せず収容。隔離DBの対象25件を含む関連524件が通過し、APIとアプリは144条件でサイズ・配置・寸法が一致した。本番は読み取りのみで既存14件を新SQLに照合し、違反0件。iOSの実描画・所要時間・端末保存、配備・配布は残る。
+
+**わたしマップ。** 現行・月次とも、確認済みの主要構造があれば保存された見出しと説明を最大3件、最初に表示する。見出しと説明全体をタップすると、その構造に含まれる項目と、両端がその項目に属する関係線だけの小さな図を開く。一度に一構造だけ開く。主要構造が空、または定義されていない旧保存版は概要から読め、項目の文章は必要なとき一覧で開く。全体図は自動表示しない。旧形式の静的なマップも原記録への遷移は出さない。画面に原記録への導線・取得を置かず、分析・更新用の根拠は内部で保持する。主要構造の実生成は§11.79の品質判定を引き継ぎ、今回の画面検証で成立とは扱わない。
+
+Pieceとわたしマップは同じアプリ候補に統合し、1,710件の関連検査が通過した。通常4Bは二つの比較でそれぞれ69.238秒と50.553秒で元の設定へ復元し、内部ヘルス200と認証付き分析／自然応答GET 405／405を確認した。既存RTX A5000を単独使用し、VRAMの割当率上限は設定しない。試験開始時と復元後の待機・処理・直近予約は0件。本番DBへの書き込み・新しいモデルの採用・アプリ配布は行っていない。
+
+今回選んだPieceの文字サイズは有料プラン向けの3段階。保存条件の追加は `20261124055500_piece_v2_visual_text_size.sql`。対応アプリは `X-Piece-Palette: 6` を使う。わたしマップの画面では、原記録の参照と内部照合に使う契約・保存を維持する。比較時のQwen3.5-9Bは保存済み `c202236235762e1c871ad0ccb60c8ee5ba337b9a`、PyTorch予約ピーク18,078 MiB。4B修正版のピークは8,814 MiB。
+
+[統合アプリ候補](https://github.com/MassyuRed/Cocolon/commit/dccbe9e7960d68e241e86a4b2beb802b94a284df) · [Piece API・DB候補](https://github.com/MassyuRed/mashos-api/commit/8ef7205eeb8079db37f672d92faa8c41b81cdcdf) · [議事録§11.80](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-reply-decoding-piece-text-size-map-text-first-20261124) · [4B修正版実応答](../../observation_learning/trials/2026-11-24-cmee-decoding-piece-map-display/4b-guidance-results.jsonl) · [9B実応答](../../observation_learning/trials/2026-11-24-cmee-decoding-piece-map-display/9b-results.jsonl)。
