@@ -291,7 +291,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       assert.equal(name, 'react-native-file-access');
       return { Dirs: context.Dirs, FileSystem: context.FileSystem };
     },
-    UIManager: { getViewManagerConfig: name => name === 'PieceBitmapCanvas' ? {} : null },
+    UIManager: { getViewManagerConfig: name => ['PieceBitmapCanvas', 'PieceGradientBackdrop'].includes(name) ? {} : null },
     requireNativeComponent: name => name,
     NativeModules: { PieceTextMetrics: { measureCandidates: async (tag, text, fontSize) => {
       const result = { ...candidateTable(text, fontSize), platform: os }; candidateCalls.push({ tag, text, fontSize });
@@ -414,12 +414,12 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     performance: { now: () => monotonic },
     Date: class extends Date { static now() { return now; } } });
   const modules = [
-    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
-    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle']],
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
+    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle', 'supportsPieceGradientBackdrop']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
     ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'pieceAndroidBitmapNativeView', 'readPieceAndroidBitmapCanvas',
+    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceGradientNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'pieceAndroidBitmapNativeView', 'readPieceAndroidBitmapCanvas',
       'renderPieceAndroidBitmapCanvas', 'releasePieceAndroidBitmapCanvas', 'capturePieceAndroidBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -436,7 +436,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       // React retains a mounted native node when only the callback identity
       // changes; a replacement canvas binding remounts all descendants.
       const key = card.state.bindingSerial + ':' + node.props.testID + ':' + (node.props.key ?? '');
-      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : Number(node.props.testID.split('-').pop()) + 1 });
+      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : node.props.testID === 'piece-gradient-backdrop' ? 10003 : Number(node.props.testID.split('-').pop()) + 1 });
       node.props.ref(mountedNodes.get(key));
     }
     return tree;
@@ -2789,7 +2789,7 @@ test('explicit iOS bitmap identity shares preview/saved/export drawing while pre
     assert.equal(h.isPieceBitmapSaveAdmitted(p, h.token), false); h.card.componentWillUnmount();
   }
 });
-test('a saved Piece applies selected size, Mincho, ink, and placement to preview, detail and export drawing', async () => {
+test('a saved Piece uses the same gradient, typography, and placement in preview, detail and export drawing', async () => {
   const version = 'piece.rn_bitmap_renderer.ios.v2';
   const h = bitmapHarness(v => v, { version });
   const p = sample('short_essay', '4:5', 'sage_paper');
@@ -2799,6 +2799,8 @@ test('a saved Piece applies selected size, Mincho, ink, and placement to preview
   p.plan_capabilities.text_color_ids = ['neutral_ink'];
   p.plan_capabilities.text_alignments = ['left', 'center'];
   p.plan_capabilities.text_sizes = ['small', 'standard', 'large'];
+  p.plan_capabilities.background_styles = ['solid', 'gradient'];
+  p.visual_recipe.theme.background_style = 'gradient';
   p.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1,
     text_color_id: 'neutral_ink', text_alignment: 'center', text_size: 'large' };
   p.visual_recipe_hash = hash(JSON.stringify(canonical(p.visual_recipe)));
@@ -2808,6 +2810,8 @@ test('a saved Piece applies selected size, Mincho, ink, and placement to preview
     assert.equal(h.preparePieceNativeSavedDisplay(saved), null, 'a bridge without Mincho cannot substitute a system font');
     bridge.bitmapRendererVersion = version;
     bridge.visualStyleVersion = 'piece.visual_style.v1';
+    assert.equal(h.preparePieceNativeSavedDisplay(saved), null, 'an older bridge cannot substitute a solid backdrop');
+    bridge.gradientBackdropVersion = 'piece.gradient_backdrop.v1';
     const input = h.preparePieceNativePreview(display(p));
     const detail = h.preparePieceNativeSavedDisplay(saved);
     const exported = h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true });
@@ -2815,6 +2819,7 @@ test('a saved Piece applies selected size, Mincho, ink, and placement to preview
     assert.equal(input.colors.canvas, '#E5EEE0');
     assert.equal(input.colors.text, '#334155');
     assert.equal(input.alignment, 'center');
+    assert.deepEqual(copy(input.backgroundGradient), { start: '#E5EEE0', end: '#F5F8F0' });
     assert.deepEqual(copy(input.sizes), [52, 48, 44, 40, 36]);
     const withoutKey = value => { const result = copy(value); delete result.key; return result; };
     assert.deepEqual(withoutKey(detail), withoutKey(input));
@@ -2823,6 +2828,7 @@ test('a saved Piece applies selected size, Mincho, ink, and placement to preview
     h.bind(h.token);
     await finishBitmap(h);
     assert.equal(h.card.state.measurement.phase, 'native_checked');
+    assert.deepEqual(copy(h.bitmapCalls.at(-1).gradient_backdrop), { tag: 10003, start: '#E5EEE0', end: '#F5F8F0' });
     const rows = h.bitmapCalls.at(-1).rows;
     assert.equal(h.bitmapCalls.at(-1).alignment, 'center');
     assert.ok(rows.filter(row => row.kind === 'body').every(row => row.font_size === 52));

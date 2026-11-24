@@ -7,8 +7,8 @@
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
 import { Platform } from 'react-native';
-import { PIECE_SERIF_FONT, PIECE_THEME_COLORS, pieceDefaultTextAlignment, pieceNeutralInk } from './piecePalette';
-import { supportsPieceVisualStyle } from './pieceApi';
+import { PIECE_SERIF_FONT, PIECE_THEME_COLORS, pieceBackgroundGradient, pieceDefaultTextAlignment, pieceNeutralInk } from './piecePalette';
+import { supportsPieceGradientBackdrop, supportsPieceVisualStyle } from './pieceApi';
 
 export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
 export const PIECE_NATIVE_PREVIEW_V4_VERSION = 'piece.rn_native_preview.prototype.v4';
@@ -110,7 +110,9 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
   const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
   const androidPrototype = candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
   const serif = recipe.font_style.font_style_id === 'serif_readable';
+  const gradient = recipe.theme.background_style === 'gradient';
   if (serif && !supportsPieceVisualStyle()) return null;
+  if (gradient && !supportsPieceGradientBackdrop()) return null;
   const colors = { ...PIECE_THEME_COLORS[recipe.theme.theme_id] };
   if (recipe.font_style.text_color_id === 'neutral_ink') colors.text = pieceNeutralInk(recipe.theme.theme_id);
   return frozenNative({ key, candidateProfile,
@@ -122,6 +124,7 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
     brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION || androidPrototype ? 'Emlis' : 'Cocolon',
     alignment: recipe.font_style.text_alignment ?? pieceDefaultTextAlignment(p.format_type),
     ...(serif ? { fontFamily: PIECE_SERIF_FONT } : {}),
+    ...(gradient ? { backgroundGradient: pieceBackgroundGradient(recipe.theme.theme_id) } : {}),
     colors, brandingMode: recipe.branding.branding_mode });
 }
 

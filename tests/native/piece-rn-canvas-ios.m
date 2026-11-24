@@ -872,7 +872,21 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
       UIImage *reference=[renderer imageWithActions:^(UIGraphicsImageRendererContext *ctx){
         [color(colors[@"canvas"])setFill];UIRectFill(canvas.bounds);
         CGFloat margin=[raw[@"margin"]doubleValue];CGRect panel=CGRectInset(canvas.bounds,margin/2,margin/2);
-        [color(colors[@"border"])setFill];UIRectFill(panel);[color(colors[@"surface"])setFill];UIRectFill(CGRectInset(panel,2,2));
+        [color(colors[@"border"])setFill];UIRectFill(panel);
+        CGRect interior=CGRectInset(panel,2,2);
+        NSDictionary *stops=raw[@"background_gradient"];
+        if (stops) {
+          CGContextRef cg=ctx.CGContext;
+          CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+          NSArray *colors=@[(__bridge id)color(stops[@"start"]).CGColor, (__bridge id)color(stops[@"end"]).CGColor];
+          CGGradientRef gradient=CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
+          CGContextSaveGState(cg); CGContextClipToRect(cg, interior);
+          if (gradient) CGContextDrawLinearGradient(cg, gradient, interior.origin,
+            CGPointMake(CGRectGetMinX(interior), CGRectGetMaxY(interior)), 0);
+          CGContextRestoreGState(cg); if (gradient) CGGradientRelease(gradient); CGColorSpaceRelease(space);
+        } else {
+          [color(colors[@"surface"])setFill]; UIRectFill(interior);
+        }
         for(NSUInteger i=0;i<texts.count;i++){
           RCTTextView *view=texts[i];NSArray *p=inspection[i][@"origin"];CGFloat alpha=view.alpha;
           [CATransaction begin];[CATransaction setDisableActions:YES];
@@ -1387,7 +1401,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertEqualObjects(artifact[@"piece_text_hash"], pieceTextHashes[i]);
       XCTAssertEqualObjects(artifact[@"content_payload_hash"], contentPayloadHashes[i]);
       XCTAssertEqualObjects(artifact[@"visual_recipe_hash"], styled ?
-        @"bd6281366c7b3674c4cd43b395e34d484c1f5043cbbbce5e011199eb18e3f5ff" :
+        @"4a8db6358e116b25387f89ff813dce8ebebbb7b5a54c217d049067d3a1fa0ee8" :
         @"25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924");
       XCTAssertEqualObjects(identity[@"piece_id"], @"b1b3a6f8-b0db-9b0f-a43c-2b2b5e0c3c61");
       XCTAssertEqualObjects(identity[@"row_version"], styled ? @3 : @2);
@@ -1410,6 +1424,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
           XCTAssertEqualObjects(report[@"font_sizes"], (@[@52, @48, @44, @40, @36]));
           XCTAssertEqualObjects(report[@"colors"][@"canvas"], @"#E5EEE0");
           XCTAssertEqualObjects(report[@"colors"][@"text"], @"#334155");
+          XCTAssertEqualObjects(report[@"background_gradient"], (@{@"start": @"#E5EEE0", @"end": @"#F5F8F0"}));
         }
       }
       for (NSString *key in @[@"saved_identity", @"recorded_artifact", @"blocks", @"rows", @"width", @"height"]) {
@@ -1429,6 +1444,17 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertNotNil(exportFilePixels);
       XCTAssertEqualObjects(savedPixels, exportCanvasPixels, @"%@", sourceCases[i]);
       XCTAssertEqualObjects(savedPixels, exportFilePixels, @"%@", sourceCases[i]);
+      if (styled && savedPixels.length == 1080 * 1350 * 4) {
+        const UInt8 *rgba = savedPixels.bytes;
+        const UInt8 *top = rgba + (54 * 1080 + 54) * 4;
+        const UInt8 *bottom = rgba + (1295 * 1080 + 54) * 4;
+        const int expectedTop[] = { 0xE5, 0xEE, 0xE0, 0xFF };
+        const int expectedBottom[] = { 0xF5, 0xF8, 0xF0, 0xFF };
+        for (int channel = 0; channel < 4; channel++) {
+          XCTAssertLessThanOrEqual(abs(top[channel] - expectedTop[channel]), 1);
+          XCTAssertLessThanOrEqual(abs(bottom[channel] - expectedBottom[channel]), 1);
+        }
+      }
     }
   } @finally {
     [bridge invalidate];

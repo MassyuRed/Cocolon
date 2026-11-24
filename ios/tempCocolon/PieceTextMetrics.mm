@@ -939,7 +939,8 @@ static NSDictionary *PieceContainmentV4Pixels(RCTTextView *view, UIView *canvas,
 RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport {
   if ([UIFont fontWithName:@"HiraMinProN-W3" size:36]) {
-    return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2", @"visualStyleVersion": @"piece.visual_style.v1" };
+    return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2", @"visualStyleVersion": @"piece.visual_style.v1",
+      @"gradientBackdropVersion": @"piece.gradient_backdrop.v1" };
   }
   return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2" };
 }
@@ -1549,12 +1550,102 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
 - (void)replaceSublayer:(CALayer *)old with:(CALayer *)layer { [self invalidateBitmap]; [super replaceSublayer:old with:layer]; }
 @end
 
+@interface PieceGradientBackdropView : UIView
+@property(nonatomic, copy) NSArray<NSString *> *gradientStops;
+- (BOOL)hasGradientStops:(NSArray<NSString *> *)stops;
+@end
+
+@implementation PieceGradientBackdropView {
+  id _gradientImage;
+  CGFloat _gradientHeight;
+}
+@synthesize gradientStops = _gradientStops;
+
+- (void)setGradientStops:(NSArray<NSString *> *)stops {
+  if ([_gradientStops isEqual:stops]) return;
+  _gradientStops = [stops copy];
+  _gradientImage = nil;
+  self.layer.contents = nil;
+  [self setNeedsLayout];
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  const CGFloat height = self.bounds.size.height;
+  if (_gradientImage && _gradientHeight == height) return;
+  _gradientImage = nil;
+  self.layer.contents = nil;
+  if ((height != 1250 && height != 1808) || _gradientStops.count != 2) return;
+  unsigned int rgb[2];
+  for (NSUInteger i = 0; i < 2; i++) {
+    NSString *hex = _gradientStops[i];
+    if (![hex isKindOfClass:NSString.class] || hex.length != 7 || ![hex hasPrefix:@"#"]) return;
+    NSScanner *scanner = [NSScanner scannerWithString:[hex substringFromIndex:1]];
+    if (![scanner scanHexInt:&rgb[i]] || !scanner.isAtEnd || rgb[i] > 0xFFFFFF) return;
+  }
+  if (rgb[0] == rgb[1]) return;
+  PieceOwnedPixels strip;
+  if (!strip.makeExact(1, (size_t)height, 1, PieceV4RasterBudget())) return;
+  // One opaque sRGB pixel per row is enough for a vertical gradient. Core
+  // Animation stretches the strip horizontally in both display and capture.
+  const size_t steps = strip.height - 1;
+  for (size_t y = 0; y < strip.height; y++) {
+    UInt8 *row = strip.data + y * strip.stride;
+    for (int channel = 0; channel < 3; channel++) {
+      int shift = (2 - channel) * 8;
+      size_t start = (rgb[0] >> shift) & 255, end = (rgb[1] >> shift) & 255;
+      row[channel] = (UInt8)((start * (steps - y) + end * y + steps / 2) / steps);
+    }
+    row[3] = 255;
+  }
+  CGImageRef image = PiecePixelsImage(strip);
+  if (!image) return;
+  _gradientHeight = height;
+  _gradientImage = (__bridge id)image;
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
+  self.layer.contentsScale = 1;
+  self.layer.contentsGravity = kCAGravityResize;
+  self.layer.magnificationFilter = kCAFilterNearest;
+  self.layer.contents = _gradientImage;
+  [CATransaction commit];
+  CGImageRelease(image);
+}
+
+- (BOOL)hasGradientStops:(NSArray<NSString *> *)stops {
+  return _gradientImage && self.layer.contents == _gradientImage && _gradientHeight == self.bounds.size.height &&
+    !self.hidden && self.alpha == 1 && !self.layer.hidden && self.layer.opacity == 1 && [_gradientStops isEqual:stops];
+}
+@end
+
+@interface PieceGradientBackdropManager : RCTViewManager
+@end
+@implementation PieceGradientBackdropManager
+RCT_EXPORT_MODULE(PieceGradientBackdrop)
+RCT_EXPORT_VIEW_PROPERTY(gradientStops, NSArray)
++ (BOOL)requiresMainQueueSetup { return YES; }
+- (UIView *)view { return [PieceGradientBackdropView new]; }
+@end
+
+static BOOL PieceGradientOnCanvas(PieceGradientBackdropView *backdrop, UIView *canvas, CGSize size, NSArray *stops) {
+  if (![backdrop isKindOfClass:PieceGradientBackdropView.class] || backdrop.window != canvas.window ||
+      ![backdrop hasGradientStops:stops]) return NO;
+  UIView *border = backdrop.superview, *parent = canvas.superview;
+  const CGFloat inset = size.height == 1920 ? 54 : 48;
+  CGRect outer = CGRectInset((CGRect){CGPointZero, size}, inset, inset);
+  return parent && border.superview == parent && [parent.subviews indexOfObjectIdenticalTo:border] <
+    [parent.subviews indexOfObjectIdenticalTo:canvas] && CGRectEqualToRect(border.frame, outer) &&
+    CGRectEqualToRect(backdrop.frame, CGRectInset((CGRect){CGPointZero, outer.size}, 2, 2));
+}
+
 @interface PieceBitmapCanvasView : UIView
 @property(nonatomic, copy) NSString *bitmapBinding;
 @property(nonatomic, copy) RCTDirectEventBlock onBitmapInvalidated;
 @property(nonatomic, strong) id bitmapImage;
 @property(nonatomic, copy) NSString *bitmapToken;
 @property(nonatomic) CGSize bitmapSize;
+@property(nonatomic, weak) PieceGradientBackdropView *gradientBackdrop;
+@property(nonatomic, copy) NSArray<NSString *> *gradientStops;
 - (void)clearBitmap;
 - (BOOL)bitmapConfigurationCurrent;
 @end
@@ -1583,6 +1674,7 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
   [CATransaction begin]; [CATransaction setDisableActions:YES]; layer.contents = nil; [CATransaction commit];
   layer.bitmapMutationAllowed=NO;
   _bitmapImage = nil; _bitmapSize = CGSizeZero;
+  _gradientBackdrop = nil; _gradientStops = nil;
   if (oldToken && _onBitmapInvalidated) _onBitmapInvalidated(@{@"artifact_token":oldToken,@"binding_token":_bitmapBinding ?: @""});
 }
 - (void)setBitmapBinding:(NSString *)value {
@@ -1608,6 +1700,7 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
 - (BOOL)bitmapConfigurationCurrent {
   CALayer *layer = self.layer;
   return self.window && !self.hidden && self.alpha == 1 && !self.opaque &&
+    (!_gradientStops || PieceGradientOnCanvas(_gradientBackdrop, self, _bitmapSize, _gradientStops)) &&
     CGPointEqualToPoint(self.bounds.origin, CGPointZero) && CGSizeEqualToSize(self.bounds.size, _bitmapSize) &&
     self.contentScaleFactor == 1 && layer.contentsScale == 1 && !layer.hidden && !layer.opaque && layer.opacity == 1 &&
     CGRectEqualToRect(layer.bounds, self.bounds) && CGPointEqualToPoint(layer.anchorPoint,CGPointMake(0.5,0.5)) &&
@@ -1763,6 +1856,8 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
 {
   NSArray *keys=@[@"version",@"profile",@"canvas_tag",@"preview_key",@"binding_token",@"expires_at_ms",@"remaining_ms",
     @"width",@"height",@"margin",@"branding_zone",@"content_width",@"content_height",@"line_height",@"total_height",@"alignment",@"branding_mode",@"rows"];
+  id gradient = request[@"gradient_backdrop"];
+  if (gradient) keys = [keys arrayByAddingObject:@"gradient_backdrop"];
   if (!PieceBitmapFields(request,keys) || ![request[@"version"] isEqual:PieceBitmapVersion] || ![request[@"profile"] isEqual:PieceBitmapProfile] ||
       !PieceBitmapTag(request[@"canvas_tag"]) || !PieceBitmapString(request[@"preview_key"],4096) || !PieceBitmapString(request[@"binding_token"],128) || !self.bridge.uiManager) {
     reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",@"Bitmap unavailable",nil); return;
@@ -1792,6 +1887,12 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
        total>ch || ![@[@"left",@"center"] containsObject:request[@"alignment"]] ||
        ![@[@"required_small",@"required_subtle",@"off"] containsObject:mode] || !current()) {fail();return;}
     host.bitmapSize=CGSizeMake(w,h);
+    if (gradient) {
+      if (!PieceBitmapFields(gradient, @[@"tag", @"start", @"end"]) || !PieceBitmapTag(gradient[@"tag"]) ||
+          !PieceBitmapString(gradient[@"start"], 7) || !PieceBitmapString(gradient[@"end"], 7)) {fail();return;}
+      host.gradientBackdrop = (PieceGradientBackdropView *)views[gradient[@"tag"]];
+      host.gradientStops = @[gradient[@"start"], gradient[@"end"]];
+    }
     if(![host bitmapConfigurationCurrent]){fail();return;}
     NSArray *rows=request[@"rows"]; BOOL branded=![mode isEqual:@"off"];
     if(![rows isKindOfClass:NSArray.class] || rows.count<(branded?2:1) || rows.count>513){fail();return;}

@@ -22,6 +22,7 @@ const fontStyles = { system_readable: 'ゴシック', serif_readable: '明朝' }
 const textColors = { null: 'テーマに合わせる', neutral_ink: 'ニュートラル' };
 const alignments = { left: '左揃え', center: '中央揃え' };
 const textSizes = { small: '小さめ', standard: '標準', large: '大きめ' };
+const backgrounds = { solid: '単色', gradient: 'グラデーション' };
 
 export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
@@ -38,6 +39,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const caps = preview?.plan_capabilities;
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
     aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode,
+    ...(caps.background_styles?.length ? { background_style: preview.visual_recipe.theme.background_style ?? 'solid' } : {}),
     ...(caps.font_style_ids?.length ? { font_style_id: preview.visual_recipe.font_style.font_style_id } : {}),
     ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}),
     ...(caps.text_alignments?.length ? { text_alignment: preview.visual_recipe.font_style.text_alignment ??
@@ -139,6 +141,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
     caps.text_alignments, caps.text_alignments, alignments) : null;
   const textSizePicker = caps?.text_sizes?.length ? choices('文字サイズ', 'text_size', caps.text_sizes, caps.text_sizes,
     textSizes, '本文が収まるように文字サイズを調整します。') : null;
+  const backgroundPicker = caps?.background_styles?.length ? choices('背景の表現', 'background_style',
+    caps.background_styles, caps.background_styles, backgrounds) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
@@ -231,6 +235,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
                 `選択できる形式：${preview.eligible_formats.map(format => formats[format]).join(' / ')}`),
           formatPicker,
           palettePicker,
+          backgroundPicker,
           fontPicker,
           textColorPicker,
           textSizePicker,

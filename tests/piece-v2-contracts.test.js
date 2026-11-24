@@ -868,3 +868,28 @@ test('compiled iOS style bridge negotiates and round-trips the extended visual r
   data.plan_capabilities.font_style_ids = [];
   await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
 });
+
+test('compiled iOS gradient requests preserve the canonical recipe and reject stored solid or unentitled styling', async () => {
+  const data = preview('quote');
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  data.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+    'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'];
+  Object.assign(data.plan_capabilities, { font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'], background_styles: ['solid', 'gradient'] });
+  data.visual_recipe.theme.background_style = 'gradient';
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  const input = request();
+  input.visual_selection.background_style = 'gradient';
+  const h = load({ native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: {
+    bitmapRendererVersion: 'piece.rn_bitmap_renderer.ios.v2', visualStyleVersion: 'piece.visual_style.v1',
+    gradientBackdropVersion: 'piece.gradient_backdrop.v1',
+  } } }, send: async () => ({ status: 200, json: async () => data }) });
+  assert.deepEqual(copy(await h.requestPiecePreview(input, options())), data);
+  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '7');
+  assert.equal(JSON.parse(h.calls[0][1].body).visual_selection.background_style, 'gradient');
+  data.visual_recipe.theme.background_style = 'solid';
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  data.visual_recipe.theme.background_style = 'gradient';
+  delete data.plan_capabilities.background_styles;
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});

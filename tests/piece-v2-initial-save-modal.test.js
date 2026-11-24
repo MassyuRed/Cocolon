@@ -298,11 +298,13 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   preview.plan_capabilities.text_color_ids = [];
   preview.plan_capabilities.text_alignments = ['left', 'center'];
   preview.plan_capabilities.text_sizes = ['small', 'standard', 'large'];
+  preview.plan_capabilities.background_styles = [];
   preview.plan_capabilities.theme_ids.push('sage_paper', 'peach_paper', 'slate_paper');
   const options = { onVisualChange: (...args) => calls.push(args) };
   const plus = nodes(await render(display, options));
   assert.equal(plus.filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 15);
   assert.ok(!plus.some(node => node.props.testID === 'piece-visual-font_style_id'));
+  assert.ok(!plus.some(node => node.props.testID === 'piece-visual-background_style'));
   plus.find(node => node.props.testID === 'piece-theme-option-sage_paper').props.onPress();
   assert.equal(calls[0][0].theme_id, 'sage_paper');
   assert.ok(!Object.hasOwn(calls[0][0], 'text_color_id'));
@@ -314,11 +316,14 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   preview.quota.subscription_tier = 'premium';
   preview.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
   preview.plan_capabilities.text_color_ids = ['neutral_ink'];
+  preview.plan_capabilities.background_styles = ['solid', 'gradient'];
   const premium = nodes(await render(display, options));
   premium.find(node => node.props.testID === 'piece-option-font_style_id-serif_readable').props.onPress();
   premium.find(node => node.props.testID === 'piece-option-text_color_id-neutral_ink').props.onPress();
   assert.deepEqual(calls.slice(3).map(args => [args[0].font_style_id, args[0].text_color_id]),
     [['serif_readable', null], ['system_readable', 'neutral_ink']]);
+  premium.find(node => node.props.testID === 'piece-option-background_style-gradient').props.onPress();
+  assert.equal(calls.at(-1)[0].background_style, 'gradient');
   assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
 });
 test('close remains independent of save and retry', async () => {

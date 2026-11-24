@@ -44,6 +44,15 @@ export function pieceBitmapNativeView() {
     return bitmapNativeView;
   } catch { return null; }
 }
+
+let gradientNativeView;
+export function pieceGradientNativeView() {
+  try {
+    if (Platform.OS !== 'ios' || !UIManager?.getViewManagerConfig?.('PieceGradientBackdrop')) return null;
+    if (!gradientNativeView) gradientNativeView = requireNativeComponent('PieceGradientBackdrop');
+    return gradientNativeView;
+  } catch { return null; }
+}
 export function pieceBitmapDeadlineCurrent(deadline) {
   try {
     const wall = Date.now(), mono = globalThis.performance?.now();
@@ -113,12 +122,16 @@ export async function renderPieceBitmapCanvas(node, expected) {
       !Array.isArray(row.lineEnds) || row.lineEnds.length !== 1 || row.lineEnds[0] !== row.text.length) ||
       new Set(rows.map(row => row.tag)).size !== rows.length) throw measurementError();
   const remaining = Math.min(deadline.expiresAt - Date.now(), 8000 - (globalThis.performance.now() - deadline.monotonicStartedAt));
+  const backdropTag = input.backgroundGradient ? findNodeHandle(expected.backdropNode) : null;
+  if (input.backgroundGradient && (!Number.isInteger(backdropTag) || backdropTag <= 0 || backdropTag === canvasTag ||
+      rows.some(row => row.tag === backdropTag))) throw measurementError();
   let value;
   try { value = await module.renderBitmapCanvas({ version: BITMAP_WIRE, profile: input.candidateProfile, canvas_tag: canvasTag,
     preview_key: input.key, binding_token: bindingToken, expires_at_ms: deadline.expiresAt, remaining_ms: remaining,
     width: input.width, height: input.height, margin: input.margin, branding_zone: input.brandingZone,
     content_width: input.contentWidth, content_height: input.contentHeight, line_height: lineHeight, total_height: totalHeight,
     alignment: input.alignment, branding_mode: input.brandingMode,
+    ...(input.backgroundGradient ? { gradient_backdrop: { tag: backdropTag, ...input.backgroundGradient } } : {}),
     rows: rows.map(row => ({ tag: row.tag, text: row.text, font_size: row.fontSize, width: row.box.width,
       height: row.box.height, line_width: row.lineWidth, gap_after: row.gapAfter, kind: row.kind,
       ...(row.kind === 'body' && input.fontFamily ? { font_family: input.fontFamily } : {}) })) });

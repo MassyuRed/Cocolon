@@ -52,6 +52,7 @@ export const PIECE_FONT_STYLE_IDS = Object.freeze(['system_readable', 'serif_rea
 export const PIECE_TEXT_COLOR_IDS = Object.freeze(['neutral_ink']);
 export const PIECE_TEXT_ALIGNMENTS = Object.freeze(['left', 'center']);
 export const PIECE_TEXT_SIZES = Object.freeze(['small', 'standard', 'large']);
+export const PIECE_BACKGROUND_STYLES = Object.freeze(['solid', 'gradient']);
 export const PIECE_SERIF_FONT = 'HiraMinProN-W3';
 
 export function pieceNeutralInk(themeId) {
@@ -60,4 +61,11 @@ export function pieceNeutralInk(themeId) {
 
 export function pieceDefaultTextAlignment(formatType) {
   return formatType === 'quote' ? 'center' : 'left';
+}
+
+const gradientEnds = { sage_paper: '#F5F8F0', peach_paper: '#FFF2EC', slate_paper: '#F3F5FA' };
+
+export function pieceBackgroundGradient(themeId) {
+  const theme = PIECE_THEME_COLORS[themeId];
+  return { start: theme.surface, end: gradientEnds[themeId] ?? theme.vector_end };
 }

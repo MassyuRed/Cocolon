@@ -4,7 +4,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
-import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, inspectPieceSelectedLineV4, pieceContainmentV2DeadlineCurrent, measurePieceCandidates, pieceBitmapNativeView, pieceBitmapDeadlineCurrent, renderPieceBitmapCanvas, releasePieceBitmapCanvas, pieceAndroidBitmapNativeView, renderPieceAndroidBitmapCanvas, releasePieceAndroidBitmapCanvas, capturePieceAndroidBitmapCanvas } from '../../features/piece/pieceRenderer';
+import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, inspectPieceSelectedLineV4, pieceContainmentV2DeadlineCurrent, measurePieceCandidates, pieceBitmapNativeView, pieceGradientNativeView, pieceBitmapDeadlineCurrent, renderPieceBitmapCanvas, releasePieceBitmapCanvas, pieceAndroidBitmapNativeView, renderPieceAndroidBitmapCanvas, releasePieceAndroidBitmapCanvas, capturePieceAndroidBitmapCanvas } from '../../features/piece/pieceRenderer';
 import { PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from '../../features/piece/pieceLayout';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
@@ -175,6 +175,7 @@ export default class PieceVisualCard extends React.Component {
         if (!record.valid || this.props.onSaveFitChange !== listener || !this.bindingCurrent(binding) ||
             this.state.measurement !== snapshot || this.inspection !== operation || this.bitmapArtifact !== artifact ||
             this.bitmapNode !== artifact.node || this.canvasNode !== operation.canvas ||
+            (input.backgroundGradient && this.backdropNode !== operation.backdropNode) ||
             this.deadline !== deadline || !lifetimeCurrent() || visualToken !== token ||
             this.props.display?.visualToken !== token || this.props.exportCanvas === true || this.props.savedRecord ||
             operation.nodes.some((node, i) => this.textNodes.get(i)?.value !== node || this.textNodes.get(i)?.generation !== snapshot.generation)) return false;
@@ -409,12 +410,13 @@ export default class PieceVisualCard extends React.Component {
     const render = android ? renderPieceAndroidBitmapCanvas : renderPieceBitmapCanvas;
     const release = android ? releasePieceAndroidBitmapCanvas : releasePieceBitmapCanvas;
     const operation = { bitmap: true, snapshot, canvas: this.canvasNode, bitmapNode: this.bitmapNode,
-      bindingToken: this.bitmapBindingFor(snapshot.generation) };
+      backdropNode: this.backdropNode, bindingToken: this.bitmapBindingFor(snapshot.generation) };
     this.inspection = operation;
     const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
     const current = () => this.bindingCurrent(binding) && this.inspection === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline === deadline && pieceBitmapDeadlineCurrent(deadline) &&
       this.canvasNode === operation.canvas && this.bitmapNode === operation.bitmapNode &&
+      (!input.backgroundGradient || this.backdropNode === operation.backdropNode) &&
       (!operation.nodes || operation.nodes.every((node, index) => this.textNodes.get(index)?.value === node &&
         this.textNodes.get(index)?.generation === snapshot.generation));
     try {
@@ -430,6 +432,7 @@ export default class PieceVisualCard extends React.Component {
       });
       operation.nodes = Object.freeze(rows.map(row => row.node));
       const result = await render(operation.bitmapNode, { input, rows, deadline,
+        backdropNode: operation.backdropNode,
         bindingToken: operation.bindingToken, totalHeight: snapshot.plan.totalHeight, lineHeight: snapshot.plan.lineHeight });
       if (!current()) { release(operation.bitmapNode, result.artifactToken); return; }
       operation.evidence = result.rows; operation.result = result;
@@ -580,6 +583,7 @@ export default class PieceVisualCard extends React.Component {
           this.canvasNode !== node || this.state.measurement !== snapshot ||
           preparePieceNativeCard(this.props)?.key !== input.key ||
           !operation?.nodes || this.inspection !== operation || operation.canvas !== node ||
+          (input.backgroundGradient && this.backdropNode !== operation.backdropNode) ||
           operation.evidence !== snapshot.inspection || operation.snapshot.generation !== snapshot.generation ||
           operation.nodes.some((value, i) => this.textNodes.get(i)?.value !== value ||
             this.textNodes.get(i)?.generation !== snapshot.generation)) return false;
@@ -615,6 +619,13 @@ export default class PieceVisualCard extends React.Component {
     try { listener(target, null); } catch { this.captureNotice = null; }
   };
 
+  setBackdropNode = node => {
+    if (node === this.backdropNode) return;
+    const changed = !!this.backdropNode;
+    this.backdropNode = node;
+    if (changed && this.active && this.state.measurement.phase === 'native_checked') this.invalidatePlacement();
+  };
+
   render() {
     const raw = preparePieceNativeCard(this.props), measurement = this.state.measurement;
     const input = raw && this.drawingInput(raw, measurement);
@@ -626,6 +637,7 @@ export default class PieceVisualCard extends React.Component {
     const androidBitmap = input.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
     const bitmap = fixedRaster(input.candidateProfile);
     const BitmapCanvas = androidBitmap ? pieceAndroidBitmapNativeView() : bitmap ? pieceBitmapNativeView() : null;
+    const GradientBackdrop = input.backgroundGradient ? pieceGradientNativeView() : null;
     // Reinspection revokes visibility, not this generation's existing placement.
     // Moving the rows back to zero would trigger another layout/inspection cycle.
     const positioned = !!measurement.rowOffsets, pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile);
@@ -711,7 +723,11 @@ export default class PieceVisualCard extends React.Component {
         element(View, { pointerEvents: 'none', collapsable: false,
           style: { position: 'absolute', left: input.margin / 2, top: input.margin / 2,
             right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.border } },
-          element(View, { pointerEvents: 'none', collapsable: false,
+          GradientBackdrop ? element(GradientBackdrop, { testID: 'piece-gradient-backdrop', ref: this.setBackdropNode,
+            pointerEvents: 'none', collapsable: false, accessible: false,
+            gradientStops: [input.backgroundGradient.start, input.backgroundGradient.end],
+            style: { position: 'absolute', left: 2, top: 2, right: 2, bottom: 2 } }) :
+            element(View, { pointerEvents: 'none', collapsable: false,
             style: { position: 'absolute', left: 2, top: 2, right: 2, bottom: 2,
               backgroundColor: input.colors.surface } })),
         bitmap && BitmapCanvas ? element(BitmapCanvas, { testID: 'piece-bitmap-canvas', ref: this.bitmapRefFor(this.state.binding),
