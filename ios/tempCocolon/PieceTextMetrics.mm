@@ -938,6 +938,9 @@ static NSDictionary *PieceContainmentV4Pixels(RCTTextView *view, UIView *canvas,
 @implementation PieceTextMetrics
 RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport {
+  if ([UIFont fontWithName:@"HiraMinProN-W3" size:36]) {
+    return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2", @"visualStyleVersion": @"piece.visual_style.v1" };
+  }
   return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2" };
 }
 @synthesize bridge = _bridge;
@@ -1660,7 +1663,8 @@ static NSDictionary *PieceBitmapSource(RCTTextView *view, NSDictionary *row, UIV
   NSTextStorage *storage = view.cocolonPieceTextStorage;
   NSLayoutManager *layout = storage.layoutManagers.firstObject;
   NSTextContainer *container = layout.textContainers.firstObject;
-  NSString *text = row[@"text"]; double fontSize = [row[@"font_size"] doubleValue];
+  NSString *text = row[@"text"], *fontFamily = row[@"font_family"];
+  double fontSize = [row[@"font_size"] doubleValue];
   CGRect frame = view.cocolonPieceContentFrame;
   if (![storage.string isEqual:text] || !layout || !container || container.maximumNumberOfLines != 0 ||
       !PiecePixelRect(view.bounds) || !PiecePixelRect(frame) || view.bounds.size.width > 1080 || view.bounds.size.height > 1920 ||
@@ -1672,7 +1676,8 @@ static NSDictionary *PieceBitmapSource(RCTTextView *view, NSDictionary *row, UIV
   if (glyphs.location != 0 || NSMaxRange(glyphs) != layout.numberOfGlyphs || chars.location != 0 || chars.length != text.length) return nil;
   __block BOOL valid = YES; __block NSUInteger lines = 0;
   [storage enumerateAttribute:NSFontAttributeName inRange:chars options:0 usingBlock:^(UIFont *font, NSRange range, BOOL *stop) {
-    if (![font isKindOfClass:UIFont.class] || fabs(font.pointSize - fontSize) > 0.5) { valid = NO; *stop = YES; }
+    if (![font isKindOfClass:UIFont.class] || fabs(font.pointSize - fontSize) > 0.5 ||
+        (fontFamily && ![font.fontName isEqualToString:fontFamily])) { valid = NO; *stop = YES; }
   }];
   for (NSUInteger i = 0; valid && i < layout.numberOfGlyphs; i++) {
     NSGlyphProperty property = [layout propertyForGlyphAtIndex:i];
@@ -1796,7 +1801,10 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
     NSArray *rowKeys=@[@"tag",@"text",@"font_size",@"width",@"height",@"line_width",@"gap_after",@"kind"];
     for(NSUInteger i=0;i<rows.count;i++) {
       NSDictionary *row=rows[i]; BOOL brand=i==bodyCount;
-      if(!PieceBitmapFields(row,rowKeys) || !PieceBitmapTag(row[@"tag"]) || [tags containsObject:row[@"tag"]] ||
+      BOOL hasFontFamily = [row isKindOfClass:NSDictionary.class] && row[@"font_family"] != nil;
+      NSArray *requiredKeys = hasFontFamily ? [rowKeys arrayByAddingObject:@"font_family"] : rowKeys;
+      if(!PieceBitmapFields(row,requiredKeys) || (hasFontFamily && (brand || ![row[@"font_family"] isEqual:@"HiraMinProN-W3"])) ||
+         !PieceBitmapTag(row[@"tag"]) || [tags containsObject:row[@"tag"]] ||
          [row[@"tag"] isEqual:request[@"canvas_tag"]] || !PieceBitmapString(row[@"text"],4096) ||
          ![row[@"kind"] isEqual:(brand?@"branding":@"body")]){fail();return;}
       for(NSString *key in @[@"font_size",@"width",@"height",@"line_width",@"gap_after"])

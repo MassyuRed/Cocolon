@@ -46,7 +46,7 @@ function harness({ send, session, random, exportPrepare, os = 'ios' } = {}) {
   });
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
-    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_SERIF_FONT', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot', 'isPieceHistoryRecordOlder']],
     ['features/piece/piecePreviewModel.js', ['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay', 'pieceOwnerPermissions']],

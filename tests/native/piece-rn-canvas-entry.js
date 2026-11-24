@@ -8,6 +8,7 @@ import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 import admittedFixtures from './piece-rn-admitted-fixtures.json';
 import exportFixtures from './piece-rn-export-fixtures.json';
 import model73Fixtures from './piece-rn-model73-fixtures.json';
+import cmeeLongArtifacts from './piece-rn-canvas-cmee-long.json';
 import transitionFixtures from './piece-rn-visual-transition-fixtures.json';
 import PiecePreviewModal from '../../components/piece/PiecePreviewModal';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
@@ -19,6 +20,23 @@ import { captureRef, releaseCapture } from 'react-native-view-shot';
 // distinguish a pending candidate table from planner/render/inspection work.
 const OUTPUT_GRID_PROFILE = 'piece.rn_native_preview.containment.prototype.v2';
 const BITMAP_PROFILE = 'piece.rn_bitmap_preview.prototype.v1';
+// Two exact saved records and one synthetic style choice on the same body.
+const cmeeStyleSource = cmeeLongArtifacts.find(artifact => artifact.case_id === 'with-answer').saved_record;
+const cmeeStyleRecord = { ...cmeeStyleSource, row_version: 3,
+  visual_recipe: { ...cmeeStyleSource.visual_recipe,
+    theme: { ...cmeeStyleSource.visual_recipe.theme, theme_id: 'sage_paper' },
+    font_style: { font_style_id: 'serif_readable', font_style_version: 1, text_color_id: 'neutral_ink' },
+    branding: { ...cmeeStyleSource.visual_recipe.branding, branding_mode: 'required_subtle' },
+  },
+  visual_recipe_hash: '786f5e30d5349156a538cf637a6409cfa1dc3692f4336663221cc2dceca33d86',
+};
+const cmeeLongFixtures = [...cmeeLongArtifacts, { case_id: 'style-candidate', saved_record: cmeeStyleRecord }]
+  .flatMap(({ case_id, saved_record }) => [
+  { name: `cmee_long_saved_${case_id}`, source_case_id: case_id, evidence_set: 'admitted_saved',
+    test_profile: 'bitmap-v1', props: { savedRecord: saved_record } },
+  { name: `cmee_long_export_${case_id}`, source_case_id: case_id, evidence_set: 'export_saved',
+    test_profile: 'bitmap-v1', props: { savedRecord: saved_record, exportCanvas: true } },
+]);
 let activeTrace;
 // Keep adapter decoding and B9 time separate from the raw native call. These
 // wrappers observe the real functions; no candidate, plan or deadline changes.
@@ -217,7 +235,8 @@ renderer.inspectPieceSelectedLineV4 = async (...args) => {
 };
 
 class CanvasCases extends React.Component {
-  caseFixtures = (this.props.pieceGroup === 'model73' ? model73Fixtures : this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
+  caseFixtures = (this.props.pieceGroup === 'cmee-long' ? cmeeLongFixtures :
+    this.props.pieceGroup === 'model73' ? model73Fixtures : this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
   observedGeometryCards = new WeakSet();
@@ -325,11 +344,16 @@ class CanvasCases extends React.Component {
       save_fit_current: saveFitCurrent, save_fit_wrong_token_current: saveFitWrongTokenCurrent,
       save_fit_handle_keys: fit ? Object.keys(fit) : [],
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
-      ...(fixture.evidence_set.startsWith('model73_') ? { source_case_id: fixture.source_case_id,
+      ...(fixture.evidence_set.startsWith('model73_') || this.props.pieceGroup === 'cmee-long' ? { source_case_id: fixture.source_case_id,
         recorded_artifact: Object.fromEntries(['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
           'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'].map(key =>
           [key, (display?.preview || fixture.props.savedRecord)[key]])) } : {}),
+      ...(this.props.pieceGroup === 'cmee-long' ? {
+        saved_identity: Object.fromEntries(['piece_id', 'public_id', 'row_version', 'saved_at'].map(key =>
+          [key, fixture.props.savedRecord[key]])),
+      } : {}),
       ...(input?.candidateProfile === BITMAP_PROFILE ? { bitmap_canvas: m?.bitmapCanvas ?? null, colors: input.colors,
+        ...(input.fontFamily ? { font_family: input.fontFamily } : {}),
         branding_mode: input.brandingMode, crop_result: this.cropResult, crop_before_fit: this.cropBeforeFit } : {}),
     };
     if (fixture.retain_after_deadline) {
@@ -526,7 +550,9 @@ class CanvasCases extends React.Component {
         </View>
       </View>
     </View>;
-    return <View style={this.props.pieceGroup==='export'||fixture.evidence_set==='model73_export'?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={this.observeGeometryCard}
+    const offscreen = this.props.pieceGroup === 'export' ||
+      ['export_saved', 'model73_export'].includes(fixture.evidence_set);
+    return <View style={offscreen?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={this.observeGeometryCard}
       {...fixture.props} onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }

@@ -264,24 +264,38 @@ export function createPieceCreateController(configuration = {}) {
     expectedRecipe.theme.theme_id = result.visual_recipe.theme.theme_id;
     expectedRecipe.aspect_ratio = result.visual_recipe.aspect_ratio;
     expectedRecipe.branding.branding_mode = result.visual_recipe.branding.branding_mode;
+    expectedRecipe.font_style.font_style_id = result.visual_recipe.font_style.font_style_id;
+    delete expectedRecipe.font_style.text_color_id;
+    if (result.visual_recipe.font_style.text_color_id !== undefined) {
+      expectedRecipe.font_style.text_color_id = result.visual_recipe.font_style.text_color_id;
+    }
     if (!equivalent(expectedRecipe, result.visual_recipe)) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
-    if (mutation && (result.visual_recipe.theme.theme_id !== mutation.visual_selection.theme_id ||
-        result.visual_recipe.aspect_ratio !== mutation.visual_selection.aspect_ratio ||
-        result.visual_recipe.branding.branding_mode !== mutation.visual_selection.branding_mode)) {
+    if (mutation && !matchesVisualSelection(result.visual_recipe, {
+      ...selectedVisual(visualRecovery.visual_recipe, visualRecovery.plan_capabilities), ...mutation.visual_selection,
+    })) {
       throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
     }
   }
 
-  function selectedVisual(recipe) {
+  function selectedVisual(recipe, caps) {
     return { theme_id: recipe.theme.theme_id, aspect_ratio: recipe.aspect_ratio,
-      branding_mode: recipe.branding.branding_mode };
+      branding_mode: recipe.branding.branding_mode,
+      ...(caps?.font_style_ids?.length ? { font_style_id: recipe.font_style.font_style_id } : {}),
+      ...(caps?.text_color_ids?.length ? { text_color_id: recipe.font_style.text_color_id ?? null } : {}) };
+  }
+
+  function matchesVisualSelection(recipe, selection) {
+    return recipe.theme.theme_id === selection.theme_id && recipe.aspect_ratio === selection.aspect_ratio &&
+      recipe.branding.branding_mode === selection.branding_mode &&
+      (selection.font_style_id === undefined || recipe.font_style.font_style_id === (selection.font_style_id ?? 'system_readable')) &&
+      (selection.text_color_id === undefined || (recipe.font_style.text_color_id ?? null) === selection.text_color_id);
   }
 
   function rememberDisplaySettings() {
     if (state.phase !== 'received') return;
     try {
       verifyPieceArtifactHashes(state.preview);
-      lastDisplaySettings = { operation, selection: selectedVisual(state.preview.visual_recipe) };
+      lastDisplaySettings = { operation, selection: selectedVisual(state.preview.visual_recipe, state.preview.plan_capabilities) };
     } catch { lastDisplaySettings = null; }
   }
 
@@ -319,8 +333,7 @@ export function createPieceCreateController(configuration = {}) {
         if (result.preview_id === formatIntent.previousId || result.preview_revision !== 1 ||
             result.row_version !== 1 || result.renderer_version !== formatIntent.renderer ||
             result.quota.subscription_tier !== 'premium' || result.format_type !== captured.request.requested_format ||
-            recipe.theme.theme_id !== selection.theme_id || recipe.aspect_ratio !== selection.aspect_ratio ||
-            recipe.branding.branding_mode !== selection.branding_mode) {
+            !matchesVisualSelection(recipe, selection)) {
           throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
         }
         try { verifyPieceArtifactHashes(result); }
@@ -488,7 +501,7 @@ export function createPieceCreateController(configuration = {}) {
     try {
       next = preparePiecePreviewRequest({
         source_ref: operation.request.source_ref, requested_format: format,
-        visual_selection: selectedVisual(recipe),
+        visual_selection: selectedVisual(recipe, preview.plan_capabilities),
       }, { expectedUserId: operation.expectedUserId, idempotencyKey });
     } catch { return; }
     // A format change reauthors the same source into a distinct draft. The
@@ -511,9 +524,11 @@ export function createPieceCreateController(configuration = {}) {
         expected_preview_revision: preview.preview_revision, visual_selection: selection });
       const choice = mutation.visual_selection, caps = preview.plan_capabilities;
       if (!caps.theme_ids.includes(choice.theme_id) || !caps.aspect_ratios.includes(choice.aspect_ratio) ||
-          !caps.branding_modes.includes(choice.branding_mode)) return;
-      if (choice.theme_id === preview.visual_recipe.theme.theme_id && choice.aspect_ratio === preview.visual_recipe.aspect_ratio &&
-          choice.branding_mode === preview.visual_recipe.branding.branding_mode) return;
+          !caps.branding_modes.includes(choice.branding_mode) ||
+          (choice.font_style_id !== undefined && !caps.font_style_ids?.includes(choice.font_style_id ?? 'system_readable')) ||
+          (choice.text_color_id !== undefined && (!caps.text_color_ids?.length ||
+            (choice.text_color_id !== null && !caps.text_color_ids.includes(choice.text_color_id))))) return;
+      if (matchesVisualSelection(preview.visual_recipe, choice)) return;
     } catch { return; }
     visualRecovery = preview;
     formatNotice = null;

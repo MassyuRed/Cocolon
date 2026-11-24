@@ -29,7 +29,7 @@ const renderPromise = Promise.resolve((() => {
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
     "import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';",
-    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS } from '../../features/piece/piecePalette';",
+    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
@@ -287,6 +287,32 @@ for (const tier of ['plus', 'premium']) test(`${tier} can select paid colors, as
     [['ocean_ice', '4:5', 'required_subtle'], ['soft_paper', '9:16', 'required_subtle'], ['soft_paper', '4:5', 'off']]);
   assert.ok(calls.every(args => args[2] === display.visualToken));
   assert.equal(JSON.stringify(display.preview), original);
+});
+test('negotiated Piece options keep Plus on background colors and bind Premium style changes to the visible preview', async () => {
+  const display = fixture(), calls = [];
+  const preview = display.preview;
+  preview.quota.subscription_tier = 'plus';
+  preview.visual_recipe.branding.branding_mode = 'required_subtle';
+  preview.visual_recipe.font_style = { font_style_id: 'system_readable', font_style_version: 1 };
+  preview.plan_capabilities.font_style_ids = [];
+  preview.plan_capabilities.text_color_ids = [];
+  preview.plan_capabilities.theme_ids.push('sage_paper', 'peach_paper', 'slate_paper');
+  const options = { onVisualChange: (...args) => calls.push(args) };
+  const plus = nodes(await render(display, options));
+  assert.equal(plus.filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 15);
+  assert.ok(!plus.some(node => node.props.testID === 'piece-visual-font_style_id'));
+  plus.find(node => node.props.testID === 'piece-theme-option-sage_paper').props.onPress();
+  assert.equal(calls[0][0].theme_id, 'sage_paper');
+  assert.ok(!Object.hasOwn(calls[0][0], 'text_color_id'));
+  preview.quota.subscription_tier = 'premium';
+  preview.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
+  preview.plan_capabilities.text_color_ids = ['neutral_ink'];
+  const premium = nodes(await render(display, options));
+  premium.find(node => node.props.testID === 'piece-option-font_style_id-serif_readable').props.onPress();
+  premium.find(node => node.props.testID === 'piece-option-text_color_id-neutral_ink').props.onPress();
+  assert.deepEqual(calls.slice(1).map(args => [args[0].font_style_id, args[0].text_color_id]),
+    [['serif_readable', null], ['system_readable', 'neutral_ink']]);
+  assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
 });
 test('close remains independent of save and retry', async () => {
   let close = 0, save = 0, retry = 0;

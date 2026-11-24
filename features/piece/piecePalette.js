@@ -20,6 +20,9 @@ export const PIECE_THEME_COLORS = Object.freeze({
   lavender_plum: palette('#E8E3F4', '#FAF6FF', '#632D58', '#70536D', '#7A3B6B', '#CDC0DF', '#F4ECFF'),
   forest_mint: palette('#102821', '#19372D', '#E3F7ED', '#B9D9C9', '#9ADBB8', '#3A6252', '#24463C'),
   ocean_ice: palette('#102336', '#182F47', '#E3F3FC', '#B9D4E6', '#9CD7F5', '#3A5973', '#23435E'),
+  sage_paper: palette('#E5EEE0', '#E5EEE0', '#273727', '#4A5D48', '#4C674B', '#B4C6AC', '#E5EEE0'),
+  peach_paper: palette('#F8E4D8', '#F8E4D8', '#462D27', '#654941', '#884834', '#D7B4A3', '#F8E4D8'),
+  slate_paper: palette('#E3E7EF', '#E3E7EF', '#293447', '#4B586C', '#4C5F7A', '#B8C2D2', '#E3E7EF'),
 });
 Object.values(PIECE_THEME_COLORS).forEach(Object.freeze);
 
@@ -36,7 +39,19 @@ export const PIECE_THEME_LABELS = Object.freeze({
   lavender_plum: 'ラベンダー × プラム',
   forest_mint: '深緑 × ミント',
   ocean_ice: '深海 × アイスブルー',
+  sage_paper: 'セージペーパー',
+  peach_paper: 'ピーチペーパー',
+  slate_paper: 'スレートペーパー',
 });
 
 export const PIECE_LEGACY_THEME_IDS = Object.freeze(['soft_paper', 'quiet_night']);
-export const PIECE_THEME_IDS = Object.freeze(Object.keys(PIECE_THEME_COLORS));
+const extraThemeIds = ['sage_paper', 'peach_paper', 'slate_paper'];
+export const PIECE_THEME_IDS = Object.freeze(Object.keys(PIECE_THEME_COLORS).filter(id => !extraThemeIds.includes(id)));
+export const PIECE_STYLE_THEME_IDS = Object.freeze([...PIECE_THEME_IDS, ...extraThemeIds]);
+export const PIECE_FONT_STYLE_IDS = Object.freeze(['system_readable', 'serif_readable']);
+export const PIECE_TEXT_COLOR_IDS = Object.freeze(['neutral_ink']);
+export const PIECE_SERIF_FONT = 'HiraMinProN-W3';
+
+export function pieceNeutralInk(themeId) {
+  return ['quiet_night', 'forest_mint', 'ocean_ice'].includes(themeId) ? '#F1F5F9' : '#334155';
+}

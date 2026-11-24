@@ -811,3 +811,42 @@ for (const [os, rendererVersion, supported] of [
     assert.equal(sent.headers['X-Piece-Palette'], supported ? '3' : undefined);
   }
 });
+
+test('compiled iOS style bridge negotiates and round-trips the extended visual recipe', async () => {
+  const data = preview('quote');
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  data.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+    'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'];
+  data.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
+  data.plan_capabilities.text_color_ids = ['neutral_ink'];
+  data.visual_recipe.theme.theme_id = 'sage_paper';
+  data.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1, text_color_id: 'neutral_ink' };
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  const input = request();
+  input.visual_selection = { theme_id: 'sage_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle',
+    font_style_id: 'serif_readable', text_color_id: 'neutral_ink' };
+  const h = load({
+    native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: {
+      bitmapRendererVersion: 'piece.rn_bitmap_renderer.ios.v2', visualStyleVersion: 'piece.visual_style.v1',
+    } } },
+    send: async () => ({ status: 200, json: async () => data }),
+  });
+  const received = await h.requestPiecePreview(input, options());
+  assert.deepEqual(copy(received), data);
+  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '4');
+  assert.deepEqual(JSON.parse(h.calls[0][1].body).visual_selection, input.visual_selection);
+  input.visual_selection.text_color_id = null;
+  const patch = { ...visualRequest(), visual_selection: input.visual_selection };
+  delete data.visual_recipe.font_style.text_color_id;
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  data.preview_revision++;
+  data.row_version++;
+  await h.requestPiecePreviewVisualChange(patch, visualOptions());
+  assert.equal(h.calls[1][1].headers['X-Piece-Palette'], '4');
+  assert.equal(JSON.parse(h.calls[1][1].body).visual_selection.text_color_id, null);
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v1';
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  data.plan_capabilities.font_style_ids = [];
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});
