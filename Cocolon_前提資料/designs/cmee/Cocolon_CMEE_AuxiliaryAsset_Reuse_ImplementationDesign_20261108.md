@@ -9812,3 +9812,19 @@ Pieceとわたしマップは同じアプリ候補に統合し、1,710件の関�
 今回選んだPieceの文字サイズは有料プラン向けの3段階。保存条件の追加は `20261124055500_piece_v2_visual_text_size.sql`。対応アプリは `X-Piece-Palette: 6` を使う。わたしマップの画面では、原記録の参照と内部照合に使う契約・保存を維持する。比較時のQwen3.5-9Bは保存済み `c202236235762e1c871ad0ccb60c8ee5ba337b9a`、PyTorch予約ピーク18,078 MiB。4B修正版のピークは8,814 MiB。
 
 [統合アプリ候補](https://github.com/MassyuRed/Cocolon/commit/dccbe9e7960d68e241e86a4b2beb802b94a284df) · [Piece API・DB候補](https://github.com/MassyuRed/mashos-api/commit/8ef7205eeb8079db37f672d92faa8c41b81cdcdf) · [議事録§11.80](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-reply-decoding-piece-text-size-map-text-first-20261124) · [4B修正版実応答](../../observation_learning/trials/2026-11-24-cmee-decoding-piece-map-display/4b-guidance-results.jsonl) · [9B実応答](../../observation_learning/trials/2026-11-24-cmee-decoding-piece-map-display/9b-results.jsonl)。
+
+<a id="cmee-qwen35-9b-normal-provider-migration-20261124"></a>
+
+### 9.275 CMEEの通常モデルをQwen3.5-9Bへ全面移行（11/24 JST）
+
+Mashの決定により、EmlisAI・Piece・わたしマップ・DeepInsightで共用する通常の生成をQwen3.5-9Bへ切り替える。4B向けの新規学習・品質改善は終了する。EmlisAIの観測応答を最優先とし、4機能の本人資料と同じ保存版を照合する。§9.274の実比較は決定前の測定値として参照する。
+
+既存RTX A5000を9B単独提供に使う。提供候補は事前比較と同じ基礎モデルの固定版 `c202236235762e1c871ad0ccb60c8ee5ba337b9a`、BF16。EmlisAIとPieceの自然応答、わたしマップの分割と統合、DeepInsightの出題前検査、共有の分析・もしもルートの生成について、通常API・ワーカー・モデル提供で参照する版を照合する。4B向けの追加重みは互換性のある元モデルで得た比較記録として保持し、9Bはこの基礎版と9B用に確認した重みだけで提供する。
+
+CMEEは本人の原文・有効な実回答・訂正の資格、生成候補の採否、保存と再読を担当する。9Bは既存の各機能の要求に沿って生成する。保存済み結果はその版のまま、再生成せずに読み出す。
+
+EmlisAIはFree・Plusの初回、問いの前、回答後、未回答スキップの本文と再読を確認する。Pieceは思考と行動の二欄、選んだ本人補足、非公開保存から書き出しまで同じ版の本文・描画設定を読む。わたしマップは通常ワーカーで根拠、本文・図、保存、同じIDでの再読と更新通知を確認する。DeepInsightは本人の訂正に基づく記録由来の出題、回答と同じ質問IDでの再読を確認する。公開品質と複数人の同時利用は、[第12回議事録§11.68](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-mixed-user-load-release-20261124)の順で実測する。 [第12回議事録§11.81](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-qwen35-9b-normal-provider-migration-20261124)
+
+9Bの通常接続は自然応答 `cocolon-qwen3.5-9b-natural`、分析・もしもルート `cocolon-qwen3.5-9b-analysis`、わたしマップv24 `cocolon-qwen3.5-9b-analysis-node-local-v4-occurrence-v24` を使用する。Pieceは `shared_9b.cmee.v2` で自然応答の接続先を使い、9B名を検査する。提供側は9B基礎モデルを1プロセスに読み込み、わたしマップのPLAN・NODES・RELATIONSの制約を既存v24のまま適用する。4Bの追加重みを混載しない。 [API候補](https://github.com/MassyuRed/mashos-api/commit/259b8b1a08137ca4a137b8298665ff9be5e86751)
+
+既存A5000で9Bを単独起動し、架空19件が実HTTPで成功した。EmlisAIの観測要求12件、Pieceの二欄と選択補足つき2件、DeepInsightの根拠つき出題計画1件、わたしマップv24のPLAN・NODES・RELATIONS各1件、もしもルート1件。19件の生成要求に139.316秒。GPUの使用量は19,639 MiBまで確認した。わたしマップは固定した前段を使った各段階の検査で、長履歴を起点にした一連の保存・通知はこの試験に含めていない。DeepInsightは出題計画まで。

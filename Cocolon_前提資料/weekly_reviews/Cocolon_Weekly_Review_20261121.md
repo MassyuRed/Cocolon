@@ -1124,3 +1124,19 @@ Pieceは11月23日の§9.261に挙がった配置を、Plus・Premiumの左揃�
 Pieceとわたしマップは同じアプリ候補に統合し、1,710件の関連検査が通過した。通常4Bは二つの比較でそれぞれ69.238秒と50.553秒で元の設定へ復元し、内部ヘルス200と認証付き分析／自然応答GET 405／405を確認した。既存RTX A5000を単独使用し、VRAMの割当率上限は設定しない。試験開始時と復元後の待機・処理・直近予約は0件。本番DBへの書き込み・新しいモデルの採用・アプリ配布は行っていない。
 
 [統合アプリ候補](https://github.com/MassyuRed/Cocolon/commit/dccbe9e7960d68e241e86a4b2beb802b94a284df) · [Piece API・DB候補](https://github.com/MassyuRed/mashos-api/commit/8ef7205eeb8079db37f672d92faa8c41b81cdcdf) · [詳細設計§9.274](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-reply-decoding-piece-text-size-map-text-first-20261124)。
+
+<a id="cmee-qwen35-9b-normal-provider-migration-20261124"></a>
+
+### 11.81 CMEEの通常モデルをQwen3.5-9Bへ移行する決定（11/24 JST）
+
+MashはQwen3.5-4Bでの改善を終了し、CMEEの通常生成をQwen3.5-9Bへ全面移行するよう指示した。EmlisAIの観測応答を最優先に、Piece、わたしマップ、DeepInsightまで同じ移行で扱う。既存の本人資料、権限、保存と同版再読の契約を用いる。移行完了後の通常生成と学習は9Bを使用する。
+
+移行候補の提供には、既存のRTX A5000を1台使い、先に検証したQwen3.5-9B BF16の固定版を単独で起動する。直前の同一12要求の比較では、9Bの隔離保存・同版再読が12/12件、公開品質が2/12件だった。好みの強さ・理由・話者を保った観測とフォローの品質改善を、移行後も続ける。 [詳細設計§9.275](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-qwen35-9b-normal-provider-migration-20261124)
+
+通常API・ワーカーの9B移行候補を作成した。隔離の関連回帰291件が通り、既存の保存版の読出しと、9B名を使った新しい受領を照合した。わたしマップの過去の大規模デコーダ2条件はローカルの実行資源により今回の集計から除いた。 [API候補](https://github.com/MassyuRed/mashos-api/commit/259b8b1a08137ca4a137b8298665ff9be5e86751)
+
+既存A5000で9Bを単独起動し、架空19件が実HTTPで成功した。EmlisAIの観測要求12件、Pieceの二欄と選択補足つき2件、DeepInsightの根拠つき出題計画1件、わたしマップv24のPLAN・NODES・RELATIONS各1件、もしもルート1件。19件の生成要求に139.316秒。GPUの使用量は19,639 MiBまで確認した。わたしマップは固定した前段を使った各段階の検査で、長履歴を起点にした一連の保存・通知はこの試験に含めていない。DeepInsightは出題計画まで。
+
+本番GPUの4Bを停止し、通常のポート `8000` に9Bを単独で起動した。認証付きの本番GPUゲートウェイで同じ架空19件すべてHTTP 200。生成要求は合計123.053秒、切り替えと検証は146.794秒、本番で確認したGPU使用量は19,383 MiB。長い履歴からの一連の生成、複数利用者の負荷、EmlisAIの公開品質は個別に測る。
+
+Renderの初回配備では5項目のキー欄と値欄を取り違えた。設定の再照合で発見し、正しいキーと9Bの値を保存した。設定更新で一時的に既定ブランチが自動配備されたため、両サービスを指定コミット `259b8b1` で再配備した。ワーカーは14:55:42、APIは14:56:58 JSTにLiveを確認した。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc2idgmc6qcc73f50kog) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc2id7rncjis73d2n9dg)

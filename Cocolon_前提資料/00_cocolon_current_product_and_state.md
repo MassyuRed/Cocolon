@@ -1,3 +1,5 @@
+> **11/24 JST・CMEEの本番API・ワーカー・GPUをQwen3.5-9Bへ切り替え。** Mashの決定を受け、EmlisAI・Piece・わたしマップ・DeepInsightの通常接続を、既存A5000の9B単独提供に揃えた。観測応答の実文の品質改善を最優先とする。 [第12回議事録§11.81](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-qwen35-9b-normal-provider-migration-20261124) · [補助設計§9.275](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-qwen35-9b-normal-provider-migration-20261124)
+
 > **11/24 JST・観測の4B・9B比較、Piece文字サイズ、わたしマップの順序を更新。** EmlisAIの公開品質は基礎4B 1件、生成方法を変えた4B 0件、9B 2件。Pieceは有料の文字サイズ3段階を候補実装。わたしマップは最大3件の見出しと本文から開き、選んだ構造だけを図で展開する候補を統合。 [議事録§11.80](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-reply-decoding-piece-text-size-map-text-first-20261124)
 
 > **11/24 JST・観測フォロー学習、Piece配置、マップ主要構造を並行検証。** EmlisAIの公開品質は基礎・学習後とも1/12。PieceはPlus・Premiumの左揃えと中央揃えを保存版へ反映する候補を検証。マップは実4Bの最終応答3件で同版再読し、主要構造の通常採用は保留。 [議事録§11.79](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-follow-only-piece-alignment-primary-structures-20261124)
@@ -262,7 +264,7 @@
 
 ## 2. 商品全体と、取り落としてはいけない決定
 
-**現在の主線はCMEE＋4Bの通常反映。** EmlisAI、Piece、わたしマップv24、DeepInsightを一つの作業単位として進める。本人の原文・問い・回答・訂正に基づき、必要な修正と検証を四機能で並行する。[第12回議事録§11.24](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-feature-work-decision-20261122)と[補助設計§9.227](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-normal-adoption-20261122)に作業方針と受入条件を記載した。以下の日付付き方針と個々の成果は当時の記録として参照する。
+**現在の主線はCMEE＋Qwen3.5-9Bへの通常移行。** EmlisAI、Piece、わたしマップv24、DeepInsightを一つの作業単位として進める。本人の原文・問い・回答・訂正に基づき、必要な修正と検証を四機能で並行する。[第12回議事録§11.24](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-feature-work-decision-20261122)と[補助設計§9.227](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-normal-adoption-20261122)に作業方針と受入条件を記載した。以下の日付付き方針と個々の成果は当時の記録として参照する。
 
 **11/22 JSTの接続確認。** 通常API・ワーカーは `cfeeecf4`。統合検証版 `c3e895e` は、Emlisの一回答への本文を同じ操作で復旧した場合、元の受領と再試行の履歴を確かめ、Pieceのプレビュー・見た目変更・保存・同版再読へ渡す。訂正後のPiece・DeepInsight・わたしマップv24の保存と再読の確認を引き継ぐ。架空の同一入力を通常4Bで比較し、Freeは当回の補足を保持した。Plus・Premiumの本文には過去と今回の取り違えが残った。候補のSQL二件、用途別重みの採否、本番認証付き往復、実端末の画像・通知は未確認。 [API統合検証版 `c3e895e`](https://github.com/MassyuRed/mashos-api/commit/c3e895e86bf3b408887a3a94246c73cd62251daf) · [補助設計§9.232](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-piece-naturally-recovered-answer-20261122)
 
@@ -457,7 +459,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-**当面の主枠はCMEE＋4Bの通常反映。** [補助設計§9.227](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-normal-adoption-20261122)に沿い、四機能で本人の原文・回答・訂正を揃え、実際の出力と同じ版の保存・再読を照合する。公開日は未定で、12/6は提出可能候補の目標。以下の表は[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)で合意した11/14〜11/21の計画を記録している。
+**当面の主枠はCMEE＋Qwen3.5-9Bへの通常移行。** [補助設計§9.275](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-qwen35-9b-normal-provider-migration-20261124)と[四機能の共通受入条件§9.227](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-four-feature-normal-adoption-20261122)に沿い、四機能で本人の原文・回答・訂正を揃え、実際の出力と同じ版の保存・再読を照合する。公開日は未定で、12/6は提出可能候補の目標。以下の表は[第11回§5](weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)で合意した11/14〜11/21の計画を記録している。
 
 | 優先・領域 | 対象週に閉じる工事と、Cocolon全体への接続 |
 |---|---|
