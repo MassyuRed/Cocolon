@@ -1340,6 +1340,100 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   }@finally{[bridge invalidate];}
 }
 
+- (void)testCMEELongSourceSavedAndExportKeepExactNativeImage {
+  self.resultModule = [PieceCanvasTest new];
+  self.resultModule.reports = [NSMutableArray new];
+  self.resultModule.reportFilename = @"cmee-long-results.json";
+  XCTestExpectation *done = [self expectationWithDescription:@"CMEE saved and export pairs with a styled case"];
+  self.resultModule.completed = ^{ [done fulfill]; };
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+  @try {
+    RCTRootView *root = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"PieceCanvasCases"
+                                       initialProperties:@{@"pieceGroup": @"cmee-long"}];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    window.rootViewController.view = root;
+    [window makeKeyAndVisible];
+    [self waitForExpectations:@[done] timeout:65];
+    XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray<NSDictionary *> *reports = self.resultModule.reports;
+    NSArray<NSString *> *expectedNames = @[@"cmee_long_saved_original-only", @"cmee_long_export_original-only",
+      @"cmee_long_saved_with-answer", @"cmee_long_export_with-answer",
+      @"cmee_long_saved_style-candidate", @"cmee_long_export_style-candidate"];
+    XCTAssertEqual(reports.count, expectedNames.count);
+    if (reports.count != expectedNames.count) return;
+    XCTAssertEqualObjects([reports valueForKey:@"name"], expectedNames);
+
+    NSArray<NSString *> *sourceCases = @[@"original-only", @"with-answer", @"style-candidate"];
+    NSArray<NSString *> *pieceTextHashes = @[
+      @"3e4f96e54b848a105f49a4e9434ce4ef3d4072f384644baa8853d1c6ef374268",
+      @"622d8b4b11c05e1532cc5e1a0a358a42998f9a967442318db62e2d2a8e1399bb",
+      @"622d8b4b11c05e1532cc5e1a0a358a42998f9a967442318db62e2d2a8e1399bb"];
+    NSArray<NSString *> *contentPayloadHashes = @[
+      @"959089195a7e93d3d64cb361235ae44b138c79efa64cd163ca69ccfc53d2be6d",
+      @"0e81e4edecbb29dabb3194ef22e11e6818a001c36a1f678cc9a642e7a6922385",
+      @"0e81e4edecbb29dabb3194ef22e11e6818a001c36a1f678cc9a642e7a6922385"];
+    NSString *evidenceDirectory = PieceEvidenceDirectory();
+    UIImage *(^imageForReport)(NSDictionary *, NSString *) = ^UIImage *(NSDictionary *report, NSString *key) {
+      id filename = report[key];
+      return [filename isKindOfClass:NSString.class] ?
+        [UIImage imageWithContentsOfFile:[evidenceDirectory stringByAppendingPathComponent:filename]] : nil;
+    };
+    for (NSUInteger i = 0; i < sourceCases.count; i++) {
+      NSDictionary *saved = reports[2 * i], *exported = reports[2 * i + 1];
+      NSDictionary *artifact = saved[@"recorded_artifact"], *identity = saved[@"saved_identity"];
+      NSArray<NSString *> *blocks = saved[@"blocks"];
+      BOOL styled = [sourceCases[i] isEqual:@"style-candidate"];
+      XCTAssertEqualObjects(artifact[@"format_type"], @"short_essay");
+      XCTAssertEqualObjects(artifact[@"piece_text_hash"], pieceTextHashes[i]);
+      XCTAssertEqualObjects(artifact[@"content_payload_hash"], contentPayloadHashes[i]);
+      XCTAssertEqualObjects(artifact[@"visual_recipe_hash"], styled ?
+        @"bf851697336e748a6295350397665b6448f116850169a49fb71a1c60fa87213b" :
+        @"25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924");
+      XCTAssertEqualObjects(identity[@"piece_id"], @"b1b3a6f8-b0db-9b0f-a43c-2b2b5e0c3c61");
+      XCTAssertEqualObjects(identity[@"row_version"], styled ? @3 : @2);
+      XCTAssertEqual(blocks.count, i == 0 ? 2 : 3);
+      XCTAssertEqualObjects(blocks, artifact[@"content_payload"][@"body_blocks"]);
+      XCTAssertEqualObjects([blocks componentsJoinedByString:@"\n\n"], artifact[@"piece_text"]);
+      for (NSDictionary *report in @[saved, exported]) {
+        XCTAssertEqualObjects(report[@"source_case_id"], sourceCases[i]);
+        XCTAssertEqualObjects(report[@"renderer_version"], @"piece.rn_bitmap_renderer.ios.v2");
+        XCTAssertEqualObjects(report[@"phase"], @"native_checked", @"%@", report);
+        XCTAssertEqualObjects(report[@"body_preserved"], @YES);
+        XCTAssertEqualObjects(report[@"native_canvas_valid"], @YES);
+        XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"], @YES);
+        XCTAssertEqualObjects(report[@"capture_error"], @NO);
+        XCTAssertEqualObjects(report[@"save_fit_current"], @NO);
+        XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[]);
+        if (styled) {
+          XCTAssertEqualObjects(report[@"font_family"], @"HiraMinProN-W3");
+          XCTAssertEqualObjects(report[@"alignment"], @"center");
+          XCTAssertEqualObjects(report[@"colors"][@"canvas"], @"#E5EEE0");
+          XCTAssertEqualObjects(report[@"colors"][@"text"], @"#334155");
+        }
+      }
+      for (NSString *key in @[@"saved_identity", @"recorded_artifact", @"blocks", @"rows", @"width", @"height"]) {
+        XCTAssertEqualObjects(saved[key], exported[key], @"%@ %@", sourceCases[i], key);
+      }
+      XCTAssertEqualObjects(exported[@"export_target_current"], @YES);
+      XCTAssertEqualObjects(exported[@"export_rejected"], @NO);
+      XCTAssertEqualObjects(exported[@"export_target_after"], @YES);
+      XCTAssertEqualObjects(exported[@"export_pixels_equal"], @YES);
+      XCTAssertEqualObjects(exported[@"export_file_saved"], @YES);
+
+      NSData *savedPixels = PieceExportRGBA(imageForReport(saved, @"png"));
+      NSData *exportCanvasPixels = PieceExportRGBA(imageForReport(exported, @"png"));
+      NSData *exportFilePixels = PieceExportRGBA(imageForReport(exported, @"export_png"));
+      XCTAssertNotNil(savedPixels);
+      XCTAssertNotNil(exportCanvasPixels);
+      XCTAssertNotNil(exportFilePixels);
+      XCTAssertEqualObjects(savedPixels, exportCanvasPixels, @"%@", sourceCases[i]);
+      XCTAssertEqualObjects(savedPixels, exportFilePixels, @"%@", sourceCases[i]);
+    }
+  } @finally {
+    [bridge invalidate];
+  }
+}
+
 - (void)testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative {
   self.resultModule=[PieceCanvasTest new];self.resultModule.reports=[NSMutableArray new];self.resultModule.reportFilename=@"visual-transition-results.json";
   XCTestExpectation *done=[self expectationWithDescription:@"Recorded007 waiting parent and retained Card transitions"];

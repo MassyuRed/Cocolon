@@ -703,6 +703,7 @@ export default class PieceVisualCard extends React.Component {
               nextEntry.ready.add(index); this.prefetchCandidates();
             },
             style: { width: raw.contentWidth, fontSize: nextTypography.fontSize, lineHeight: nextTypography.lineHeight,
+              ...(raw.fontFamily ? { fontFamily: raw.fontFamily } : {}),
               fontWeight: '400', fontStyle: 'normal', letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: raw.colors.text },
           }, body))) : null,
         // Paint the same two rectangles in display and layer-based capture.
@@ -746,6 +747,7 @@ export default class PieceVisualCard extends React.Component {
             // Logical row height and strict ink-height checks remain unchanged.
             ...(drawingInset && input.candidateProfile === PIECE_NATIVE_PREVIEW_V6_VERSION ? { height: lineHeight } : {}),
             fontSize, lineHeight, fontWeight: '400', fontStyle: 'normal',
+            ...(input.fontFamily ? { fontFamily: input.fontFamily } : {}),
             letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: input.colors.text,
             position: planning ? 'relative' : 'absolute', left: (!pixels && positioned ? measurement.rowOffsets[index].x : 0) - drawingInset,
             // v9 moves only existing ancestor Views. Changing Text props here

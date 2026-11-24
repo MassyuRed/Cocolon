@@ -8,16 +8,24 @@
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
 import { NativeModules, Platform } from 'react-native';
-import { PIECE_LEGACY_THEME_IDS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1 } from './piecePalette';
+import { PIECE_FONT_STYLE_IDS, PIECE_LEGACY_THEME_IDS, PIECE_STYLE_THEME_IDS, PIECE_TEXT_ALIGNMENTS, PIECE_TEXT_COLOR_IDS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1, pieceDefaultTextAlignment } from './piecePalette';
 
-const PALETTE_HEADER = { 'X-Piece-Palette': '3' };
+export function supportsPieceVisualStyle() {
+  return typeof Platform !== 'undefined' && Platform.OS === 'ios' && typeof NativeModules !== 'undefined' &&
+    NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2' &&
+    NativeModules.PieceTextMetrics?.visualStyleVersion === 'piece.visual_style.v1';
+}
+
+function paletteHeaders() {
+  return { 'X-Piece-Palette': supportsPieceVisualStyle() ? '5' : '3' };
+}
 
 // Only advertise the compiled bridge's explicit brand/renderer capability.
 // No import from layout/renderer: those modules depend on this transport.
 function rendererHeaders() {
   return typeof Platform !== 'undefined' && Platform.OS === 'ios' &&
     typeof NativeModules !== 'undefined' && NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2'
-    ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', ...PALETTE_HEADER } : {};
+    ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', ...paletteHeaders() } : {};
 }
 
 
@@ -77,6 +85,13 @@ export class PieceApiError extends Error {
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const exact = (value, keys) => object(value) && Object.keys(value).length === keys.length &&
   keys.every(key => Object.prototype.hasOwnProperty.call(value, key));
+const optionalExact = (value, fields, optional) => exact(value, [...fields,
+  ...optional.filter(key => Object.prototype.hasOwnProperty.call(value || {}, key))]);
+const visualFields = ['theme_id', 'aspect_ratio', 'branding_mode'];
+const styleFields = { font_style_id: PIECE_FONT_STYLE_IDS, text_color_id: PIECE_TEXT_COLOR_IDS, text_alignment: PIECE_TEXT_ALIGNMENTS };
+const visualSelectionShape = value => optionalExact(value, visualFields, Object.keys(styleFields));
+const validStyleSelection = value => Object.entries(styleFields).every(([key, values]) =>
+  value[key] === undefined || value[key] === null || values.includes(value[key]));
 const text = value => typeof value === 'string' && value.trim().length > 0 &&
   !/[\uD800-\uDFFF]/u.test(value);
 const hash = value => typeof value === 'string' && /^[0-9a-f]{64}$/.test(value);
@@ -86,7 +101,7 @@ const reject = code => { throw new PieceApiError(code); };
 function requestBody(value) {
   if (!exact(value, ['source_ref', 'requested_format', 'visual_selection']) ||
       !exact(value.source_ref, SOURCE_FIELDS) ||
-      !exact(value.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) {
+      !visualSelectionShape(value.visual_selection)) {
     reject('PIECE_REQUEST_INVALID');
   }
   // Capture before the first await. Never retain mutable caller-owned fields.
@@ -95,7 +110,7 @@ function requestBody(value) {
   catch { reject('PIECE_REQUEST_INVALID'); }
   if (!exact(snapshot, ['source_ref', 'requested_format', 'visual_selection']) ||
       !exact(snapshot.source_ref, SOURCE_FIELDS) ||
-      !exact(snapshot.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) {
+      !visualSelectionShape(snapshot.visual_selection)) {
     reject('PIECE_REQUEST_INVALID');
   }
   const source = snapshot.source_ref;
@@ -119,7 +134,8 @@ function requestBody(value) {
   if (snapshot.requested_format !== null && !FORMATS.includes(snapshot.requested_format)) {
     reject('PIECE_FORMAT_NOT_ELIGIBLE');
   }
-  if (!Object.values(snapshot.visual_selection).every(value => value === null || text(value))) {
+  if (!Object.values(snapshot.visual_selection).every(value => value === null || text(value)) ||
+      !validStyleSelection(snapshot.visual_selection)) {
     reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
   }
   return JSON.stringify(snapshot);
@@ -162,9 +178,13 @@ function validatePreviewPlan(value) {
     aspect_ratios: tier === 'free' ? ['4:5'] : ['4:5', '9:16'],
     branding_modes: tier === 'free' ? ['required_small'] : ['required_subtle', 'off'],
   };
-  const allowed = [legacy, current].find(policy => exact(caps, Object.keys(policy)) &&
+  const style = { ...current, theme_ids: tier === 'free' ? PIECE_LEGACY_THEME_IDS : PIECE_STYLE_THEME_IDS,
+    font_style_ids: tier === 'premium' ? PIECE_FONT_STYLE_IDS : [],
+    text_color_ids: tier === 'premium' ? PIECE_TEXT_COLOR_IDS : [] };
+  const layout = { ...style, text_alignments: tier === 'free' ? [] : PIECE_TEXT_ALIGNMENTS };
+  const allowed = [legacy, current, style, layout].find(policy => exact(caps, Object.keys(policy)) &&
     caps.format_selection === policy.format_selection &&
-    ['theme_ids', 'aspect_ratios', 'branding_modes'].every(key => Array.isArray(caps[key]) &&
+    Object.keys(policy).filter(key => key !== 'format_selection').every(key => Array.isArray(caps[key]) &&
       caps[key].length === policy[key].length && caps[key].every((item, i) => item === policy[key][i])));
   if (quota.save_limit !== limit ||
       quota.remaining_count !== (limit === null ? null : Math.max(0, limit - quota.saved_count)) ||
@@ -173,7 +193,10 @@ function validatePreviewPlan(value) {
       (tier === 'free' && value.format_type !== 'short_essay') ||
       !allowed.theme_ids.includes(recipe.theme.theme_id) ||
       !allowed.aspect_ratios.includes(recipe.aspect_ratio) ||
-      !allowed.branding_modes.includes(recipe.branding.branding_mode)) {
+      !allowed.branding_modes.includes(recipe.branding.branding_mode) ||
+      (recipe.font_style.font_style_id !== 'system_readable' && !allowed.font_style_ids?.includes(recipe.font_style.font_style_id)) ||
+      (recipe.font_style.text_color_id !== undefined && !allowed.text_color_ids?.includes(recipe.font_style.text_color_id)) ||
+      (recipe.font_style.text_alignment !== undefined && !allowed.text_alignments?.includes(recipe.font_style.text_alignment))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
 }
@@ -228,18 +251,27 @@ function validatePieceArtifact(value) {
       !['4:5', '9:16'].includes(recipe.aspect_ratio) ||
       !exact(recipe.template, ['template_id', 'template_version']) ||
       !exact(recipe.theme, ['theme_id', 'theme_version']) ||
-      !exact(recipe.font_style, ['font_style_id', 'font_style_version']) ||
+      !optionalExact(recipe.font_style, ['font_style_id', 'font_style_version'], ['text_color_id', 'text_alignment']) ||
       !exact(recipe.branding, ['branding_mode', 'branding_mark_id', 'branding_mark_version']) ||
       recipe.template.template_id !== { short_essay: 'essay_frame', quote: 'focus_frame', declaration: 'stance_frame' }[value.format_type] ||
-      recipe.template.template_version !== 1 || !PIECE_THEME_IDS.includes(recipe.theme.theme_id) ||
-      recipe.theme.theme_version !== 1 || recipe.font_style.font_style_id !== 'system_readable' ||
+      recipe.template.template_version !== 1 || !PIECE_STYLE_THEME_IDS.includes(recipe.theme.theme_id) ||
+      recipe.theme.theme_version !== 1 || !PIECE_FONT_STYLE_IDS.includes(recipe.font_style.font_style_id) ||
       recipe.font_style.font_style_version !== 1 ||
+      (recipe.font_style.text_color_id !== undefined && !PIECE_TEXT_COLOR_IDS.includes(recipe.font_style.text_color_id)) ||
+      (recipe.font_style.text_alignment !== undefined && (!PIECE_TEXT_ALIGNMENTS.includes(recipe.font_style.text_alignment) ||
+        recipe.font_style.text_alignment === pieceDefaultTextAlignment(recipe.format_type))) ||
       !['required_small', 'required_subtle', 'off'].includes(recipe.branding.branding_mode) ||
       recipe.branding.branding_mark_id !== 'cocolon_text_mark' || recipe.branding.branding_mark_version !== 1 ||
       (recipe.branding.branding_mode === 'required_small' &&
-        (recipe.aspect_ratio !== '4:5' || !PIECE_LEGACY_THEME_IDS.includes(recipe.theme.theme_id)))) {
+        (recipe.aspect_ratio !== '4:5' || !PIECE_LEGACY_THEME_IDS.includes(recipe.theme.theme_id) ||
+          recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined ||
+          recipe.font_style.text_alignment !== undefined))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
+  const styled = !PIECE_THEME_IDS.includes(recipe.theme.theme_id) ||
+    recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined ||
+    recipe.font_style.text_alignment !== undefined;
+  if (styled && value.renderer_version !== 'piece.rn_bitmap_renderer.ios.v2') reject('PIECE_TEMPORARILY_UNAVAILABLE');
 }
 
 function checkAbort(signal) {
@@ -260,11 +292,12 @@ async function requireSession(expectedUserId) {
 
 export function preparePieceVisualChange(value) {
   if (!exact(value, ['preview_id', 'expected_preview_revision', 'visual_selection']) ||
-      !exact(value.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) reject('PIECE_REQUEST_INVALID');
+      !visualSelectionShape(value.visual_selection)) reject('PIECE_REQUEST_INVALID');
   const input = JSON.parse(JSON.stringify(value));
   if (!pieceUuid(input.preview_id) || !positive(input.expected_preview_revision) ||
-      !exact(input.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) reject('PIECE_REQUEST_INVALID');
-  for (const [key, allowed] of Object.entries({ theme_id: PIECE_THEME_IDS,
+      !visualSelectionShape(input.visual_selection)) reject('PIECE_REQUEST_INVALID');
+  if (!validStyleSelection(input.visual_selection)) reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
+  for (const [key, allowed] of Object.entries({ theme_id: PIECE_STYLE_THEME_IDS,
     aspect_ratio: ['4:5', '9:16'], branding_mode: ['required_small', 'required_subtle', 'off'] })) {
     if (input.visual_selection[key] !== null && !allowed.includes(input.visual_selection[key])) reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
   }
@@ -578,7 +611,7 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
     checkAbort(signal);
     if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
     const input = JSON.parse(JSON.stringify(value));
-    const headers = { 'Cache-Control': 'no-store', ...PALETTE_HEADER };
+    const headers = { 'Cache-Control': 'no-store', ...paletteHeaders() };
     let endpoint, method = 'GET', body;
     const receiptHeader = 'X-Piece-Export-Receipt';
     if (action === 'history') {

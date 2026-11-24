@@ -120,7 +120,8 @@ export async function renderPieceBitmapCanvas(node, expected) {
     content_width: input.contentWidth, content_height: input.contentHeight, line_height: lineHeight, total_height: totalHeight,
     alignment: input.alignment, branding_mode: input.brandingMode,
     rows: rows.map(row => ({ tag: row.tag, text: row.text, font_size: row.fontSize, width: row.box.width,
-      height: row.box.height, line_width: row.lineWidth, gap_after: row.gapAfter, kind: row.kind })) });
+      height: row.box.height, line_width: row.lineWidth, gap_after: row.gapAfter, kind: row.kind,
+      ...(row.kind === 'body' && input.fontFamily ? { font_family: input.fontFamily } : {}) })) });
     const result = readPieceBitmapCanvas(value, { ...expected, rows, canvasTag });
     if (!pieceBitmapDeadlineCurrent(deadline)) throw measurementError();
     return result;

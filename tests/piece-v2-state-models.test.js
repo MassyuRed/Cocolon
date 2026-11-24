@@ -306,6 +306,45 @@ test('save binds the displayed identity and explicit key; sends no body/recipe/a
   u.controller.close(); await u.controller.start(); assert.equal(u.calls.length, 2);
 });
 
+test('paid Piece alignment change binds the saved hash and retains the layout in save recovery', async () => {
+  const before = response();
+  before.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  Object.assign(before.quota, { subscription_tier: 'plus', save_limit: 30, remaining_count: 28 });
+  before.plan_capabilities = { format_selection: 'automatic',
+    theme_ids: ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+      'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'],
+    aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'],
+    font_style_ids: [], text_color_ids: [], text_alignments: ['left', 'center'] };
+  before.visual_recipe.branding.branding_mode = 'required_subtle';
+  before.visual_recipe_hash = hash(JSON.stringify(canonical(before.visual_recipe)));
+  const after = clone(before);
+  after.preview_revision++;
+  after.row_version++;
+  after.visual_recipe.font_style.text_alignment = 'center';
+  after.visual_recipe_hash = hash(JSON.stringify(canonical(after.visual_recipe)));
+  let intent;
+  const { controller: c, calls } = controllerHarness({
+    configuration: { isSaveAdmitted: () => true, getSaveRecovery: () => ({
+      remember(entry) { intent = entry; return true; }, canResume: () => true,
+    }) },
+    send: async (url, init) => {
+      if (url.endsWith('/save')) throw Error('synthetic save response lost');
+      return pieceHttp(init.method === 'PATCH' ? after : before);
+    },
+  });
+  c.setContext(controllerInput({ saveEnabled: true }));
+  await c.start();
+  await c.changeVisual({ theme_id: 'soft_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle',
+    text_alignment: 'center' }, saveIdentity(before), c.getView().visualToken);
+  const latest = c.getView();
+  assert.equal(latest.preview.visual_recipe.font_style.text_alignment, 'center');
+  assert.equal(JSON.parse(calls[1][1].body).visual_selection.text_alignment, 'center');
+  assert.equal(latest.preview.piece_text_hash, before.piece_text_hash);
+  await c.savePreview(saveIdentity(after), latest.visualToken, 'explicit-save-key');
+  assert.equal(JSON.parse(calls[2][1].body).visual_recipe_hash, after.visual_recipe_hash);
+  assert.equal(intent.visualSelection.text_alignment, 'center');
+});
+
 test('save rejects stale display tokens, identities, expired candidates, invalid keys and hash damage', async () => {
   for (const type of ['token', 'id', 'revision', 'hash', 'key', 'expiry', 'body']) {
     let now = NOW;

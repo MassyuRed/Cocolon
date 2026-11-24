@@ -11,13 +11,16 @@ import PieceVisualCard from './PieceVisualCard';
 import Button from '../CocolonButton';
 import { useTheme } from '../../theme/ThemeContext';
 import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
-import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS } from '../../features/piece/piecePalette';
+import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment } from '../../features/piece/piecePalette';
 
 const element = React.createElement;
 const formats = { short_essay: 'エッセイ', quote: '引用', declaration: '宣言' };
 const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: 'あり', required_subtle: 'あり', off: 'なし' };
 const themes = PIECE_THEME_LABELS;
+const fontStyles = { system_readable: 'ゴシック', serif_readable: '明朝' };
+const textColors = { null: 'テーマに合わせる', neutral_ink: 'ニュートラル' };
+const alignments = { left: '左揃え', center: '中央揃え' };
 
 export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
@@ -31,8 +34,13 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   }
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
+  const caps = preview?.plan_capabilities;
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
-    aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode } : null;
+    aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode,
+    ...(caps.font_style_ids?.length ? { font_style_id: preview.visual_recipe.font_style.font_style_id } : {}),
+    ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}),
+    ...(caps.text_alignments?.length ? { text_alignment: preview.visual_recipe.font_style.text_alignment ??
+      pieceDefaultTextAlignment(preview.format_type) } : {}) } : null;
   const candidateIdentity = preview ? {
     preview_id: preview.preview_id, preview_revision: preview.preview_revision,
     visual_recipe_hash: preview.visual_recipe_hash,
@@ -71,7 +79,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
         const locked = freePlan || !allowed.includes(value);
         const disabled = !locked && (selected || typeof onVisualChange !== 'function');
         return element(Pressable, { style: { ...optionStyle(selected && !locked),
-          ...(locked ? { backgroundColor: colors.CARD_BORDER, opacity: 0.65 } : {}) }, key: value,
+          ...(locked ? { backgroundColor: colors.CARD_BORDER, opacity: 0.65 } : {}) }, key: String(value),
           testID: `piece-option-${field}-${value}`, accessibilityRole: 'button',
           accessibilityLabel: `${label}：${labels?.[value] || value}${locked ? '、変更できません' : ''}`,
           accessibilityHint: locked ? 'タップすると利用条件の案内を表示します。' : undefined,
@@ -81,14 +89,15 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
           color: locked ? colors.TEXT_SUBTLE : selected ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT } },
           `${selected ? '✓ ' : ''}${labels?.[value] || value}`));
       })));
-  const paletteOptions = preview?.plan_capabilities.theme_ids;
+  const paletteOptions = caps?.theme_ids;
+  const visibleThemes = caps?.font_style_ids ? PIECE_STYLE_THEME_IDS : PIECE_THEME_IDS;
   const palettePicker = preview
     ? element(View, { testID: 'piece-visual-theme_id', style: { marginTop: 12 } },
       element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', gap: 8, marginBottom: 10 } },
         element(Text, { style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT } }, '背景と文字色'),
         element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE } }, `${paletteOptions.length}色を選択できます`)),
       element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 } },
-        ...PIECE_THEME_IDS.map(value => {
+        ...visibleThemes.map(value => {
           const { canvas, surface, text, border } = PIECE_THEME_COLORS[value];
           const selected = selection.theme_id === value;
           const locked = !paletteOptions.includes(value);
@@ -119,6 +128,12 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const brandingPicker = preview ? choices('Emlisロゴ', 'branding_mode',
     [selection.branding_mode === 'required_small' ? 'required_small' : 'required_subtle', 'off'],
     preview.plan_capabilities.branding_modes, branding) : null;
+  const fontPicker = caps?.font_style_ids?.length ? choices('書体', 'font_style_id',
+    caps.font_style_ids, caps.font_style_ids, fontStyles) : null;
+  const textColorPicker = caps?.text_color_ids?.length ? choices('文字色', 'text_color_id',
+    [null, ...caps.text_color_ids], [null, ...caps.text_color_ids], textColors) : null;
+  const alignmentPicker = caps?.text_alignments?.length ? choices('文字の配置', 'text_alignment',
+    caps.text_alignments, caps.text_alignments, alignments) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
@@ -211,6 +226,9 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
                 `選択できる形式：${preview.eligible_formats.map(format => formats[format]).join(' / ')}`),
           formatPicker,
           palettePicker,
+          fontPicker,
+          textColorPicker,
+          alignmentPicker,
           aspectPicker,
           brandingPicker,
         ) : null,

@@ -34,6 +34,7 @@
  * The display reader and native renderer own their separate checks.
  */
 import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave } from './pieceApi';
+import { pieceDefaultTextAlignment } from './piecePalette';
 import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
@@ -264,24 +265,44 @@ export function createPieceCreateController(configuration = {}) {
     expectedRecipe.theme.theme_id = result.visual_recipe.theme.theme_id;
     expectedRecipe.aspect_ratio = result.visual_recipe.aspect_ratio;
     expectedRecipe.branding.branding_mode = result.visual_recipe.branding.branding_mode;
+    expectedRecipe.font_style.font_style_id = result.visual_recipe.font_style.font_style_id;
+    for (const key of ['text_color_id', 'text_alignment']) {
+      delete expectedRecipe.font_style[key];
+      if (result.visual_recipe.font_style[key] !== undefined) {
+        expectedRecipe.font_style[key] = result.visual_recipe.font_style[key];
+      }
+    }
     if (!equivalent(expectedRecipe, result.visual_recipe)) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
-    if (mutation && (result.visual_recipe.theme.theme_id !== mutation.visual_selection.theme_id ||
-        result.visual_recipe.aspect_ratio !== mutation.visual_selection.aspect_ratio ||
-        result.visual_recipe.branding.branding_mode !== mutation.visual_selection.branding_mode)) {
+    if (mutation && !matchesVisualSelection(result.visual_recipe, {
+      ...selectedVisual(visualRecovery.visual_recipe, visualRecovery.plan_capabilities), ...mutation.visual_selection,
+    })) {
       throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
     }
   }
 
-  function selectedVisual(recipe) {
+  function selectedVisual(recipe, caps) {
     return { theme_id: recipe.theme.theme_id, aspect_ratio: recipe.aspect_ratio,
-      branding_mode: recipe.branding.branding_mode };
+      branding_mode: recipe.branding.branding_mode,
+      ...(caps?.font_style_ids?.length ? { font_style_id: recipe.font_style.font_style_id } : {}),
+      ...(caps?.text_color_ids?.length ? { text_color_id: recipe.font_style.text_color_id ?? null } : {}),
+      ...(caps?.text_alignments?.length ? { text_alignment: recipe.font_style.text_alignment ?? null } : {}) };
+  }
+
+  function matchesVisualSelection(recipe, selection) {
+    const defaultAlignment = pieceDefaultTextAlignment(recipe.format_type);
+    return recipe.theme.theme_id === selection.theme_id && recipe.aspect_ratio === selection.aspect_ratio &&
+      recipe.branding.branding_mode === selection.branding_mode &&
+      (selection.font_style_id === undefined || recipe.font_style.font_style_id === (selection.font_style_id ?? 'system_readable')) &&
+      (selection.text_color_id === undefined || (recipe.font_style.text_color_id ?? null) === selection.text_color_id) &&
+      (selection.text_alignment === undefined ||
+        (recipe.font_style.text_alignment ?? defaultAlignment) === (selection.text_alignment ?? defaultAlignment));
   }
 
   function rememberDisplaySettings() {
     if (state.phase !== 'received') return;
     try {
       verifyPieceArtifactHashes(state.preview);
-      lastDisplaySettings = { operation, selection: selectedVisual(state.preview.visual_recipe) };
+      lastDisplaySettings = { operation, selection: selectedVisual(state.preview.visual_recipe, state.preview.plan_capabilities) };
     } catch { lastDisplaySettings = null; }
   }
 
@@ -319,8 +340,7 @@ export function createPieceCreateController(configuration = {}) {
         if (result.preview_id === formatIntent.previousId || result.preview_revision !== 1 ||
             result.row_version !== 1 || result.renderer_version !== formatIntent.renderer ||
             result.quota.subscription_tier !== 'premium' || result.format_type !== captured.request.requested_format ||
-            recipe.theme.theme_id !== selection.theme_id || recipe.aspect_ratio !== selection.aspect_ratio ||
-            recipe.branding.branding_mode !== selection.branding_mode) {
+            !matchesVisualSelection(recipe, selection)) {
           throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
         }
         try { verifyPieceArtifactHashes(result); }
@@ -488,7 +508,7 @@ export function createPieceCreateController(configuration = {}) {
     try {
       next = preparePiecePreviewRequest({
         source_ref: operation.request.source_ref, requested_format: format,
-        visual_selection: selectedVisual(recipe),
+        visual_selection: selectedVisual(recipe, preview.plan_capabilities),
       }, { expectedUserId: operation.expectedUserId, idempotencyKey });
     } catch { return; }
     // A format change reauthors the same source into a distinct draft. The
@@ -511,9 +531,13 @@ export function createPieceCreateController(configuration = {}) {
         expected_preview_revision: preview.preview_revision, visual_selection: selection });
       const choice = mutation.visual_selection, caps = preview.plan_capabilities;
       if (!caps.theme_ids.includes(choice.theme_id) || !caps.aspect_ratios.includes(choice.aspect_ratio) ||
-          !caps.branding_modes.includes(choice.branding_mode)) return;
-      if (choice.theme_id === preview.visual_recipe.theme.theme_id && choice.aspect_ratio === preview.visual_recipe.aspect_ratio &&
-          choice.branding_mode === preview.visual_recipe.branding.branding_mode) return;
+          !caps.branding_modes.includes(choice.branding_mode) ||
+          (choice.font_style_id !== undefined && !caps.font_style_ids?.includes(choice.font_style_id ?? 'system_readable')) ||
+          (choice.text_color_id !== undefined && (!caps.text_color_ids?.length ||
+            (choice.text_color_id !== null && !caps.text_color_ids.includes(choice.text_color_id)))) ||
+          (choice.text_alignment !== undefined && (!caps.text_alignments?.length ||
+            (choice.text_alignment !== null && !caps.text_alignments.includes(choice.text_alignment))))) return;
+      if (matchesVisualSelection(preview.visual_recipe, choice)) return;
     } catch { return; }
     visualRecovery = preview;
     formatNotice = null;
@@ -613,7 +637,7 @@ export function createPieceCreateController(configuration = {}) {
     const store = configuration.getSaveRecovery?.();
     if (store) {
       const entry = Object.freeze({ operation: captured, intent,
-        visualSelection: Object.freeze(selectedVisual(preview.visual_recipe)) });
+        visualSelection: Object.freeze(selectedVisual(preview.visual_recipe, preview.plan_capabilities)) });
       if (!store.remember(entry)) {
         const restored = restoreSaveRecovery({ expectedUserId: captured.expectedUserId,
           savedInputId: captured.request.source_ref.source_input_id,

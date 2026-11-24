@@ -414,8 +414,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     performance: { now: () => monotonic },
     Date: class extends Date { static now() { return now; } } });
   const modules = [
-    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
-    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_SERIF_FONT', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
+    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
     ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
@@ -2788,6 +2788,45 @@ test('explicit iOS bitmap identity shares preview/saved/export drawing while pre
     assert.equal(h.preparePieceNativePreview(display(p)), null);
     assert.equal(h.isPieceBitmapSaveAdmitted(p, h.token), false); h.card.componentWillUnmount();
   }
+});
+test('a saved Piece applies the exact chosen Mincho, ink, and centered placement to preview, detail and export drawing', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const h = bitmapHarness(v => v, { version });
+  const p = sample('short_essay', '4:5', 'sage_paper');
+  p.renderer_version = version;
+  p.plan_capabilities.theme_ids = copy(h.context.PIECE_STYLE_THEME_IDS);
+  p.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
+  p.plan_capabilities.text_color_ids = ['neutral_ink'];
+  p.plan_capabilities.text_alignments = ['left', 'center'];
+  p.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1,
+    text_color_id: 'neutral_ink', text_alignment: 'center' };
+  p.visual_recipe_hash = hash(JSON.stringify(canonical(p.visual_recipe)));
+  const saved = { ...savedSample(p), renderer_version: version };
+  const bridge = h.context.NativeModules.PieceTextMetrics;
+  try {
+    assert.equal(h.preparePieceNativeSavedDisplay(saved), null, 'a bridge without Mincho cannot substitute a system font');
+    bridge.bitmapRendererVersion = version;
+    bridge.visualStyleVersion = 'piece.visual_style.v1';
+    const input = h.preparePieceNativePreview(display(p));
+    const detail = h.preparePieceNativeSavedDisplay(saved);
+    const exported = h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true });
+    assert.equal(input.fontFamily, 'HiraMinProN-W3');
+    assert.equal(input.colors.canvas, '#E5EEE0');
+    assert.equal(input.colors.text, '#334155');
+    assert.equal(input.alignment, 'center');
+    const withoutKey = value => { const result = copy(value); delete result.key; return result; };
+    assert.deepEqual(withoutKey(detail), withoutKey(input));
+    assert.deepEqual(copy(exported), copy(detail));
+    h.card.props = { ...h.card.props, display: display(p) };
+    h.bind(h.token);
+    await finishBitmap(h);
+    assert.equal(h.card.state.measurement.phase, 'native_checked');
+    const rows = h.bitmapCalls.at(-1).rows;
+    assert.equal(h.bitmapCalls.at(-1).alignment, 'center');
+    assert.ok(rows.filter(row => row.kind === 'body').every(row => row.font_family === 'HiraMinProN-W3'));
+    assert.equal(rows.at(-1).kind, 'branding');
+    assert.ok(!Object.hasOwn(rows.at(-1), 'font_family'));
+  } finally { h.card.componentWillUnmount(); }
 });
 test('explicit bitmap admission verifies current closed artifact and bridge without drawing or replacing live fit', async () => {
   const h = bitmapHarness(v => v, { version: 'piece.rn_bitmap_renderer.ios.v1' });
