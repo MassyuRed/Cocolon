@@ -1,3 +1,5 @@
+> **11/24 JST・観測フォロー学習、Piece配置、マップ主要構造を並行検証。** EmlisAIの公開品質は基礎・学習後とも1/12。PieceはPlus・Premiumの左揃えと中央揃えを保存版へ反映する候補を検証。マップは実4Bの最終応答3件で同版再読し、主要構造の通常採用は保留。 [議事録§11.79](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-follow-only-piece-alignment-primary-structures-20261124)
+
 > **11/24 JST・EmlisAIのフォロー分離とPiece画像編集を並行実装。** EmlisAIは実4B 8件すべて原文を保って同版再読、公開品質は1件。Pieceは有料の単色背景3色とPremiumの書体・文字色を候補実装し、隔離DBで保存・再読・書き出しを照合。 [議事録§11.78](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-observation-follow-and-piece-editor-20261124)
 
 > **11/24 JST・Pieceの長い二欄と選択回答を実4Bで確認。** 2条件を隔離保存し、詳細と書き出しで同じ本文を確認。EmlisAIは架空8件の16更新後に引用・再読が6/8→4/8となり、通常採用を見送った。DeepInsightは訂正から同じ質問IDで出題・回答を再読。わたしマップは13件の全段階実4B試験を準備。 [議事録§11.77](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-fit16-piece-20261124)

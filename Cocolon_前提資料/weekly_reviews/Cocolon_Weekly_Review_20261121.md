@@ -1090,3 +1090,21 @@ Pieceは隔離PostgreSQLを使うHTTP試験8件とアプリ回帰1,609件を通�
 わたしマップは候補 eaae14b の架空13件・33段階の固定ZIPに、単独試験と通常4B復元の手順を追加し、ローカルで正常終了・中断・期限超過・復元を検査した。DeepInsightは、架空Premiumの訂正を起点に通常APIの計画・質問本文・前提・既回答の判定を既存4Bで取得する試験を固定し、模擬4段階を隔離DBへ通して出題・回答・再読を確認した。両機能の新規実4B生成は残る。
 
 [EmlisAI v23](https://github.com/MassyuRed/mashos-api/commit/6d84d0ffa2dbce1553cd2246a8465dff9b179ab3) · [EmlisAI v24](https://github.com/MassyuRed/mashos-api/commit/12a10697433a506a1ea925d8cd2689de9e212854) · [Piece API・SQL](https://github.com/MassyuRed/mashos-api/commit/2f12fc655a7a69698d28988382eb90fbf8ed2089) · [Pieceアプリ](https://github.com/MassyuRed/Cocolon/commit/b8c9f356bfb5d9a4aa8d1c733a12515b5dbb018d) · [補助設計§9.272](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-observation-follow-and-piece-editor-20261124)。
+
+<a id="cmee-follow-only-piece-alignment-primary-structures-20261124"></a>
+
+### 11.79 観測フォローの単独学習・Piece本文の配置・わたしマップの主要構造（11/24 JST）
+
+EmlisAIは議事録§11.78・詳細設計§9.272で残ったフォローの品質を扱った。候補 `a0becd4` は、好みの対象と明記された理由を当回の同一文から照合できた場合だけ4Bへ渡す。同じ架空8件と新4件は12件すべて実生成・隔離DB再読を通過。公開品質は0件。温もり・持続・強度や「参加できないと分かった」を「参加できなくなった」にする変化が出た。通常採用は見送り。対象回帰36件が通過した。
+
+v24の同じ要求と引用処理を用い、引用を含まないフォローだけを新規LoRAに学習させた。評価と重複しない架空12件（好み、明記された理由、気持ちだけを各4件）で24更新し、112テンソルの保存・再読一致を確認した。基礎4Bは既存8応答と新規4応答、学習後は同じ12要求で、両方12件が生成を完了した。隔離DBで同じ応答を再読できた件数は基礎12件、学習後11件。公開品質は各1件で、基礎は理由未記載の寂しさ、学習後は聞いたEmlisがほっとしたと返した安堵だった。学習後はEmlisが蔵書印を見た、本人と同じ時に寂しさを経験したという表現も出た。展示の1件は原文の再掲で拒否した。重みの通常採用は見送る。
+
+Pieceは11月23日の§9.261に挙がった配置を、Plus・Premiumの左揃えと中央揃えとして候補実装した。Freeと旧作品は従来の形式別配置。既定に戻すと従来と同じレシピ・ハッシュになる。対応アプリは `X-Piece-Palette: 5` で設定でき、プレビュー変更・非公開保存・詳細・書き出しは同じ保存版を使う。隔離PostgreSQLの対象HTTP11件、API関連513件が通過。APIとアプリは36条件で配置・寸法が一致した。最新アプリの版にはわたしマップの表示を含めて統合し、1,617件が通過した。本番既存14件を新SQL条件で読み取り照合したところ、違反は0件。iOSの画素と端末の確認、DB変更・配備・配布が残る。文字サイズとグラデーションは候補のまま。
+
+わたしマップでは、11月23日の§9.261〜262に沿い、複数記録にまたがる主要構造に二つの独立した本人の判断根拠を求める。共通条件を結論・説明に結び、疑問、見出しの反復、原文の列挙だけの軸は表示から外す。主要構造は最大3件、根拠参照は内部で保持する。対象106件と通常v24の既存33段階の再生が通過した。
+
+11月23日の2記録、反例を加えた3記録、別題材2記録の主要構造を実4Bで比較した。計画と項目は固定し、最終段階3件を実生成した。既知2条件は主要構造が空だった。別題材は「相談できる相手」と独立した根拠2件を拾ったが、結論と説明で原文を繰り返し、`heading:` が混入した。表示に採用できた主要構造は0件。3条件とも隔離DBへ1回保存し、再起動後に同じID・図・本文と非公開の生成原文を再読した。再読時のモデル呼び出し0回。主要構造の通常採用、別に用意した13記録の全段階実4B試験は残る。
+
+既存RTX A5000 24 GBを単独で使い、通常4Bと比較を交互に起動した。学習35.362秒、主要構造の比較83.452秒。VRAMの割当率は設定しなかった。開始・復元確認時の待機・処理中・直近予約は0件。試験中のASTOR新規ジョブは0件。187.102秒で通常4Bを同じ設定へ復元し、ヘルス200、分析／自然応答の認証付きGET 405／405を確認した。API・ワーカーは `5d4d332` がLive。DeepInsightは前回用意した実試験を引き継ぎ、今回は新規生成を行っていない。
+
+[EmlisAI候補](https://github.com/MassyuRed/mashos-api/commit/a0becd45f3ac14029083a0bb83b2d4368b2f68ef) · [Pieceアプリ候補](https://github.com/MassyuRed/Cocolon/commit/a1df95f96e532267513a4d13203b27ea5e5bafd5) · [Piece API候補](https://github.com/MassyuRed/mashos-api/commit/b2ec4a7ab74f075e615b72c9c3a543b27ebaeae2) · [わたしマップ候補](https://github.com/MassyuRed/mashos-api/commit/ecbeae0eaf097ec2d325ccfda93320f29f890378) · [詳細設計§9.273](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-follow-only-piece-alignment-primary-structures-20261124)。
