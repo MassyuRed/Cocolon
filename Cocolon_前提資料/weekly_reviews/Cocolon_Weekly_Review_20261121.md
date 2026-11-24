@@ -1187,4 +1187,10 @@ Pieceは、グラデーションと文字設定を変更したプレビューか
 
 架空13件の第4試行は39回のHTTP 200の後、40回目が17:25:20 JSTに503。新規保存・通知予約は各0件。第5試行は17:26:01に自動で始まった。EmlisAIの架空18件比較はMash承認済み。わたしマップの実行と直近予約が空いた場合に一度だけ行う。第5試行開始時点では未実行。
 
+候補の累積ジョブ、DeepInsight回答の受け渡し、ワーカー進捗の統合回帰は343件通過。APIの分析・EmlisAIとPiece隔離PostgreSQLのCIも成功した。架空18件の比較は `Cocolon_EmlisAI_9B_V27_Comparison_20261124.zip` の `candidate-v27.json`（SHA-256 `9341383bfaf7f4cb85dc10a395c2c7eb06ef4aa957c20f5bd8531966cfd8752a`）に固定した。 [分析・EmlisAI CI](https://github.com/MassyuRed/mashos-api/actions/runs/45355188023) · [Piece API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45355187835)
+
+iOSシミュレーターは7試験中6試験が通過した。通常のiOSビットマップ描画で書体・文字色・文字サイズ・配置・背景グラデーションを変更したプレビュー、非公開保存画像、書き出しPNGの画素が一致した。パレットv7の画面遷移試験も通過した。全体の試験は実験用の描画経路のUnicode入力1試験で失敗した。 [iOSシミュレーター結果](https://github.com/MassyuRed/Cocolon/actions/runs/45355010438/job/138310545056)
+
+第5試行は前回止まった40回目を通過し、確認できた最初の41応答がHTTP 200だった。17:50:11 JSTにワーカー側の503と第6試行の予約（17:51:24 JST）を確認した。新規マップ保存・通知予約は各0件。EmlisAI比較は直近予約があるため開始条件が成立せず、候補・入力を保持した。
+
 [詳細設計§9.277](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-9b-observation-piece-map-continuation-20261124) · [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/86ed8e1927992eeb2e0776f6d7f8cb657552f3f8) · [API候補](https://github.com/MassyuRed/mashos-api/commit/86897d39038e266fb521669210cd6077f26c1842)。
