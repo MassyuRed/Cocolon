@@ -9952,3 +9952,5 @@ API両CIが通過し、iOSの新仕様の実画素検査も通過した時点で
 **わたしマップ。** 現行と月次の画面は主要構造の見出しと本文から読み始める。最大3つの小図に含まれない項目や構造をまたぐ関係は、本文の後の「ほかの項目・関係を読む」から開ける。現在版の訂正、月次の閲覧範囲、所有者と保存IDを照合した。関連91件が通過した。実機の読み上げと、9B提供側の更新後に実生成から同版保存・通知まで進む確認は残る。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/9f969de343e0c636d12f5a3a047ee9f24c2c0547)
 
 Renderの本番API・ワーカーは同じ `3379338` が稼働し、APIの正常応答を確認した。SupabaseではPiece装飾用の移行 `20261125001943` が適用済みで、既存14作品を含む保存条件が検証済み。今回の作業に伴う本番配備・DB更新・TestFlight配布は各0件。
+
+候補の実iOSでは420字の2例が5.39秒と4.42秒で、8秒の条件を通過した。通常のビットマップのUnicodeとPremium装飾2組のプレビュー・保存詳細・PNG書き出しの画素照合も通過した。iOS画面試験は7/8件。実験用描画のUnicodeは、国旗行の参照画像が3,481×1,285画素となり、4,194,304画素の上限を超えた。iOS計測単体とAPI両CIは通過。対応アプリは配布前。 [iOS画面](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886986166) · [iOS計測単体](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886985963) · [分析・観測API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480949) · [Piece API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480826)

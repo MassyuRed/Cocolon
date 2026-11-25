@@ -1258,3 +1258,5 @@ Mashの承認により、iOS配布を保留したうえでサーバー側を先�
 **わたしマップ。** 現在版・月次とも主要構造の見出しと本文を先に表示し、各小図に含まれない項目や構造をまたぐ関係を本文の後から開けるようにした。分析関連91件が通過。実機の読み上げと実9Bの長履歴の保存・通知は未確認。
 
 統合後のアプリ回帰は分析91件、Piece 1,619件の計1,710件が通過した。候補アプリは配布前。本番API・ワーカーは `3379338` で稼働し、今回の試験は本番DBへ書き込んでいない。
+
+候補の実iOSでは420字の2例が5.39秒と4.42秒で、8秒の条件を通過した。通常のビットマップのUnicodeとPremium装飾2組のプレビュー・保存詳細・PNG書き出しの画素照合も通過した。iOS画面試験は7/8件。実験用描画のUnicodeは、国旗行の参照画像が3,481×1,285画素となり、4,194,304画素の上限を超えた。iOS計測単体とAPI両CIは通過。対応アプリは配布前。 [iOS画面](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886986166) · [iOS計測単体](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886985963) · [分析・観測API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480949) · [Piece API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480826)
