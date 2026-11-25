@@ -1330,6 +1330,12 @@ static BOOL runTiledV4ReferenceChecks(void) {
     CGRectGetMinX(tiledCells), CGRectGetMinY(tiledCells), CGRectGetWidth(tiledCells), CGRectGetHeight(tiledCells),
     compact.width, compact.height, offset.x, offset.y);
   if (!CGRectEqualToRect(fullCells, tiledCells) || compact.length >= full.length) return fail("native_ink_or_crop");
+  const auto retainsOutputGrid = [=](size_t fullWidth, size_t fullHeight, const PieceOwnedPixels &crop, CGPoint start) {
+    const size_t pixelsPerPoint = (size_t)scale;
+    return fmod(start.x, scale) == 0 && fmod(start.y, scale) == 0 &&
+      crop.width % pixelsPerPoint == fullWidth % pixelsPerPoint && crop.height % pixelsPerPoint == fullHeight % pixelsPerPoint;
+  };
+  if (!retainsOutputGrid(width, height, compact, offset)) return fail("compact_output_grid");
   for (size_t y = 0; y < compact.height; y++) {
     const UInt8 *expected = full.data + ((size_t)offset.y + y) * full.stride + (size_t)offset.x * 4;
     const UInt8 *actual = compact.data + y * compact.stride;
@@ -1377,6 +1383,7 @@ static BOOL runTiledV4ReferenceChecks(void) {
   PieceOwnedPixels wide;
   CGRect wideCells, expectedWideCells = CGRectOffset(fullCells, 0, hTall - height - (hTall / 2 - height / 2));
   if (!PiecePaintTiledV4Reference(view, glyphs, wWide, hTall, wideCTM, budget, current, wide, &wideCells, &offset)) return fail("oversized_paint");
+  if (!retainsOutputGrid(wWide, hTall, wide, offset)) return fail("oversized_output_grid");
   if (!CGRectEqualToRect(wideCells, expectedWideCells)) {
     printf("V4_TILED_REFERENCE_DIFFERENCE grid=oversized expected=%g,%g,%g,%g actual=%g,%g,%g,%g\n",
       CGRectGetMinX(expectedWideCells), CGRectGetMinY(expectedWideCells), CGRectGetWidth(expectedWideCells), CGRectGetHeight(expectedWideCells),

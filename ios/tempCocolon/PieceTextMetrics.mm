@@ -786,8 +786,8 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
     if (!expandedImage) return NO;
     // This mapping is the declared reference extent, never a backing->bounds guess.
     const CGSize referenceSize = tiled ? CGSizeMake(native.width / scale, native.height / scale) : nativeExtent.size;
-    const CGPoint referenceOrigin = tiled ? CGPointMake((x0 + nativeImageOffset.x - tx) / scale,
-      (y0 + nativeImageOffset.y + ty) / scale) : nativeExtent.origin;
+    const CGPoint referenceOrigin = CGPointMake(nativeExtent.origin.x + nativeImageOffset.x / scale,
+      nativeExtent.origin.y + nativeImageOffset.y / scale);
     reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, referenceSize}, view.layer);
     CGRect filtered;
     if (!reference || !PieceCompositePixels(reference, logicalExtent, 1,
@@ -1527,7 +1527,7 @@ static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t
     CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
     PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset) {
   const CGFloat scale = paintCTM.a;
-  if (!PieceV4ReferenceStripsFit(width, height) || !isfinite(scale) || scale < 1 || scale > 4) return NO;
+  if (!PieceV4ReferenceStripsFit(width, height) || !isfinite(scale) || scale < 1 || scale > 4 || scale != floor(scale)) return NO;
   const size_t middle = height / 2;
   const size_t start[] = {0, middle - PieceV4ReferenceHalo};
   const size_t end[] = {middle + PieceV4ReferenceHalo, height};
@@ -1563,11 +1563,16 @@ static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t
     }
   }
   if (right <= left || bottom <= top) return NO;
-  // The full scan proved the omitted cells transparent. Retain the linear
-  // filter's surroundings and place this patch at its original pixel origin.
-  const size_t pad = (size_t)ceil(scale) + 2;
-  const size_t cropLeft = left > pad ? left - pad : 0, cropTop = top > pad ? top - pad : 0;
-  const size_t cropRight = MIN(width, right + pad), cropBottom = MIN(height, bottom + pad);
+  // After the whole-grid scan, trim only transparent surroundings. The
+  // compositor must see the original fractional origin and bounds: in its
+  // logical coordinate system, each of the four margins moves by whole points.
+  const size_t pixelsPerPoint = (size_t)scale;
+  const size_t pad = pixelsPerPoint + 2;
+  const auto trim = [=](size_t space) -> size_t {
+    return space > pad ? ((space - pad) / pixelsPerPoint) * pixelsPerPoint : 0;
+  };
+  const size_t cropLeft = trim(left), cropTop = trim(top);
+  const size_t cropRight = width - trim(width - right), cropBottom = height - trim(height - bottom);
   if (!withinDeadline() || !reference.makeExact(cropRight - cropLeft, cropBottom - cropTop, scale, budget)) return NO;
   for (size_t y = cropTop; y < cropBottom; y++) {
     if (!withinDeadline()) return NO;
