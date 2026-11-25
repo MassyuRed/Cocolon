@@ -1449,3 +1449,9 @@ Mashは、後続版で改善した部分を採用して開発の起点を前進�
 過去に「部屋を使えない」という通知が「利用制限が解除された」と返されて保存された。今回、同じ架空の可・不可2入力で作業版と生成資料を変えた版を実9Bで比較。作業版は両方の肯否を保って同版再読した。生成資料を変えた版は2件とも原文の復唱により保存されなかった。通常9Bの提供と認証付き接続は58.251秒で復元した。 [固定入力と4実応答](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/initial-availability-ab-and-admission.json)
 
 発生済みの反転と同じ本文を初回受領で止める修正だけを、作業版 `4167595` に反映した。過去の反転した実応答を現行v4の模擬通信で返して保存を拒否することを確認し、本人原文は保持した。今回の実9B応答2件と過去の対照6件は、修正後も同じ本文・版で再読した。関連557件が通過し、本番APIは `3340141`。 [反映コード](https://github.com/MassyuRed/mashos-api/commit/4167595ef64dce3c9bb06e0d38e142e656a0205b) · [詳細設計§9.294](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-initial-notice-inversion-admission-20261125)
+
+<a id="cmee-emlis-initial-past-preference-ab-20261125"></a>
+
+### 11.103 11/25 JST　EmlisAI初回の過去の好み
+
+切符、しおり、蔵書印、湯のみ、風見の架空9入力を同じ9Bで比較した。修正版9件と旧版7件を生成し、残る旧版2件には同一要求の実測を使用した。切符の「好きでした／大好きでした」は旧版の復唱で本文が保存されず、修正版では強さを分けた本文が保存され、同じ版で再読できた。ただし修正版9件すべての返事が「のですね。」で終わり、対象に触れても本人の記述を言い直す形が残った。しおり2件では原文にない「丁寧に」が加わった。今回は生成差分の採用なし。作業版 `4167595`、本番API `3340141`。通常9Bのヘルスチェックと認証付き接続は98.804秒で復元を確認した。 [前後の実応答と保存結果](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/initial-past-preference-ab.json) · [詳細設計§9.295](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-initial-past-preference-ab-20261125)
