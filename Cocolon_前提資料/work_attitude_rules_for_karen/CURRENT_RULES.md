@@ -151,6 +151,10 @@ structural completenessはこのpre-screeningを代替しません。
 accepted、candidate-readyまたはproduct creditを華恋・model・subagentが生成することではありません。
 最終human Product Readは、別の明示authorityとactual human reviewerによってのみ成立します。
 
+<a id="emlis-observation-full-route-every-change"></a>
+
+**EmlisAIの観測応答は毎回、入力保存から全ての分岐を通して確認します。** 修正が一段階だけの場合も、華恋は同じ候補版で、問いオフまたは問いなしで完結する初回応答、問いを表示する前の返事、本人の回答後、問いを未回答のまま閉じた後の本文を読みます。二問目以降で閉じた場合は、それまでに本人が答えた内容も確認します。各分岐で本人が書いた主体・時点・理由・肯否・気持ちの強さを照合し、理由や強さが書かれていない場合も含め、記録ごとの違いがEmlisの返事に出ることを確かめます。通常採用は各分岐で利用者に届く本文と、保存後に同じ版・本文を読み戻せることを確認して判断します。確認範囲が一部の比較は、その分岐の結果として記録します。
+
 checker、controller、scanner、Inspector、Receipt、Handoff、proof、identity、authorityまたは新しい
 安全補助経路は、observed blockerの因果箇所を最小修正して直後のactual product outputを改善・判定
 するために不可欠でない限り開始しません。成功してもdamage-prevention / technical creditに限定し、

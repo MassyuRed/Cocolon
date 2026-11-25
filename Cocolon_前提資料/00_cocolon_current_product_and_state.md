@@ -1,4 +1,4 @@
-> **11/25 JST・EmlisAI実9B比較。** v5の隔離DB同版再読は15/20。問いの前6/6、回答後0/3、全文適合0/7組。v7は回答と問いを一度ずつ渡し、回答後3件を再比較した。3件とも直接引用と、原文にない感情の強さや意味が残り、同版再読は0/3。通常採用は保留。各試験後に通常9Bを復元し、ヘルスと認証を確認した。 [第12回議事録§11.92](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-v5-answer-grounding-20261125)
+> **11/25 JST・EmlisAI実9B比較。** v5の隔離DB同版再読は15/20。問いの前6/6、回答後0/3、全文適合0/7組。v7は回答と問いを一度ずつ渡し、回答後3件を再比較した。3件とも直接引用と、原文にない感情の強さや意味が残り、同版再読は0/3。通常採用は保留。各試験後に通常9Bを復元し、ヘルスと認証を確認した。 [第12回議事録§11.92](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-v5-answer-grounding-20261125) EmlisAIの観測応答は修正箇所にかかわらず、同じ候補版で入力保存から全分岐の本文を毎回照合する。 [通常採用の確認範囲](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-full-observation-route-review-20261125)
 
 > **11/25 JST・EmlisAI v31・PieceのUnicode・わたしマップ比較。** 観測は実9Bで架空18件をすべて同版再読し、見本と重なった1件を除く全文判定は1/17件。通常採用は保留。Pieceは実験用Unicodeを二つの帯で描画できた。描画直後のRGBAは一致し、合成後の全画素の一致が残る。対応アプリは配布前。月次マップは当時と現在の主要構造を更新状況より先に表示する。本番API・ワーカー・9B提供コードを `3379338` に揃え、ヘルスと認証を確認した。試験所有者の認証を確認できず、長履歴の実生成・同版保存・通知は残る。 [第12回議事録§11.88](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-grounded-examples-piece-unicode-map-comparison-20261125)
 
