@@ -1294,3 +1294,19 @@ PieceのiOS画面試験は8件すべて成功。分割した参照画像につ�
 後続候補も承認の範囲内で、同じケースと9Bに一回ずつ実行した。20件がHTTP 200・終了理由stop、要求時間合計106.476秒。提供のプロセスと本番設定は変更していない。隔離経路で同じスレッドID・版・本文を再読できたのは2/20で、初回2/8、問いの前0/6、回答後・スキップ各0/3。問いの前の本文を受領できないと、通常経路ではその先の問い・回答・スキップにも進めない。モデル側では回答後3件とも本文を返した。生成文の引用符は1/20から18/20に増え、240字を超えた文は0/20から7/20に増えた。文の形式、生成指示、渡す資料を同時に変えたため、この差を一つの要因だけには帰属させない。自然応答の関連API試験403件が通過した。
 
 理由のない安堵の例では、別欄の区役所の行動を送らず、生成文からもその因果が消えた。別の例では、過去の準備を今回の気持ちの原因にした。Premiumの回答後では、本人が書いていない「準備が間に合わなかった」を加えた。保存できた二つの好みの対照では強さの差がフォローから落ち、鳥の姿や紙の質感を補った。7組のいずれも、対照の両方を通常採用できる本文として確かめられなかった。出典をCMEEで固定する処理と未回答時の範囲制御には実装上の成果があり、自由文の生成と受領、アプリで問いが先へ進む条件には未解決の問題がある。通常反映は保留し、本番API・ワーカー・Supabaseを変更していない。 [後続候補の生応答](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/emlis-paired-observation-v2-actual.jsonl) · [隔離保存・再読](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/v2-actual-receipts.json) · [7組の全文判定](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/paired-product-read.md)
+
+<a id="cmee-bound-listener-json-piece-pixels-map-reading-20261125"></a>
+
+### 11.90 観測応答の受領と問いの進行・PieceのiOS合成・月次マップの読み順（11/25 JST）
+
+**EmlisAI。** 出典が一つの場合はCMEEが引用を確定し、9Bは `follow` 一項目のJSONで本人に返す言葉を出す。複数候補では引用するIDも返す。問いの前と未回答スキップでは当回の材料だけを送る。引用可能な箇所がなく従来の生成経路へ進むときも、本人原文は保持して同じ範囲を守る。回答後は全プランで本人の回答と対応する発行済みの問いを渡し、問いはEmlisの発言として扱う。候補は明示設定でのみ選ばれる。隔離PostgreSQLで同じ架空20段階の模擬応答を再読し、API回帰484件が通過した。 [API候補](https://github.com/MassyuRed/mashos-api/commit/ad2db3763a80f166fd1346196856f11c6a28e3f8)
+
+Mash承認の一回分で、前回と同じ架空14記録・7組から、実9Bの20応答を取得した。全件HTTP 200・終了理由stop、要求時間合計55.903秒。マップ処理中・実行時刻到達済み・3分以内の予約は前後各0件。9Bの提供プロセスは同一。生応答を隔離PostgreSQLで受領し、同じスレッド、版、本文を読めたのは9/20件。内訳は初回3/8、問いの前6/6、回答後0/3、未回答スキップ0/3。JSONを返さなかった10件と、返事内に引用を入れた1件を受領しなかった。結果を変更したり再生成したりせず再読した。
+
+7組を原文と照らした全文判定で、両方が適合した組は0/7。問いは全6件で表示できたが、先に表示した返事に気持ちを抱き続けるよう促す助言が入った。Premiumの回答後は、過去の準備を当回の原因へ広げた。理由が書かれていない安堵に別欄の行動をつなげない点は再確認した。実際の返事が本人の書いた違いに沿うこと、回答・スキップ後の保存まで成立することを通常採用の残件とする。 [凍結した入力](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/candidate-paired-observation-v3.json) · [生応答](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/emlis-paired-observation-v3-actual.jsonl) · [隔離DBの再読](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/actual-replay-v3.json) · [7組の全文判定](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/paired-product-read-v3.md)
+
+**Piece。** 旧候補では、分割と合成前のTextKit画像は一致したが、Core Animationの合成後に透過画素がずれた。候補では透明な周囲を元寸法の画像に実画素として戻し、合成時に元の画素格子を使う。実験用Unicodeを含む校正で、描画ごとの上限と合成用の32 MiB上限を引き継いだ。ローカルで関連1,921件が通過。iOS計測単体で、3,481×1,285画素の元寸法と、整数・小数位置の両方で合成後の全RGBAが一致した。 [候補](https://github.com/MassyuRed/Cocolon/commit/9790dddf3933c1a4a3c525f91f9440cc23922390) · [iOS・アプリCI](https://github.com/MassyuRed/Cocolon/actions/runs/45535750554)
+
+**わたしマップ。** 「分析について」を開いてから月次比較へ進んだ場合も、保存済みの当時と現在の主要構造を先に配置する。比較の開閉、期間・記録範囲、更新状況はその後に読む。現在版がない場合は、当時の本文に続いて状態を案内する。分析関連92件と画面遷移5件が通過。実機読み上げは未確認。既存の架空13件の通常更新は試験用アカウントの認証済みクライアントを確認できず、新しい予約は作成していない。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/9790dddf3933c1a4a3c525f91f9440cc23922390)
+
+**通常環境。** 本番APIとワーカーは `3379338` で稼働し、公開ヘルス応答とPiece画像編集用のSupabase移行を確認した。今回の新規配備・DB更新・TestFlight配布は各0件。既存の機能や保存形式へ新しい責務を追加していないため、構造地図の差分はない。
