@@ -1487,3 +1487,27 @@ EmlisAIは、履歴や訂正を併用しないPlus・Premiumの単一回答で�
 **EmlisAI。** しおりを「好き」と書いた架空のFree初回で、稼働9Bが前回と同じ「とても好きだった」を返した。受領時に同じ対象・過去の好みと確認できた場合だけ、本人の原文の強さにそろえる。隔離DBで18段階すべての同版再読を確認し、変わった本文はこの1件。Analysis CIで出た220秒の試験の丸め誤差は現行本番ベースにも再現し、CIが省略した検査は配備対象で別途通過を確認した。本番API `98a6155` は08:05:30 JSTにLiveとなり、公開ヘルスはHTTP 200。 [Render配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3min6q1p3s73bltj10) · [修正版](https://github.com/MassyuRed/mashos-api/commit/98a6155052f7fac3564a4b2f94dcf299ba8bae10) · [実応答と再読](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#cmee-retention-and-plan-map-20261126)
 
 **わたしマップ。** 実9Bの三段階を通したノート題材で、原文にある条件と二つの実際の行動を主要構造にできた。Freeの短い結論と小図、Plusの二場面の説明を、同じ現在版・月次版IDで読み戻した。Premium用の五記録では、9Bが二つの判断基準を「唯一の基準」とまとめ、主要構造と横断説明を採用できなかった。本番有効化は未実施。 [API検証版](https://github.com/MassyuRed/mashos-api/commit/c3fa31419371f9dbc5b22ca2e7bb89de5e1cb1e6) · [マップのみのiOS候補](https://github.com/MassyuRed/Cocolon/commit/dd98073e06ae0a77bab8114a51a117b793dd4ecc)
+
+<a id="cmee-map-first-free-plus-20261126"></a>
+
+### 11.107 Free・Plusのわたしマップを先行する（11/26 JST）
+
+Mash決定。Free・Plusは確認できた範囲から通常反映する。Premiumも分析本文と図を原文に照合し、改善が確認できた部分を反映する。配布済み8601で読めることを考慮し、同じ保存版の扱いを確認する。 [プラン別仕様](../designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md#watashi-map-plan-graphs-20261125)
+
+わたしマップは、実9Bの鍵の題材から、机で照合できるため書いた場面と、廊下で照合できないため書かなかった場面を、一つの判断条件として返せるよう修正した。Freeの短い結論と2項目・1本の小図、Plusの選択を分けた二場面の説明を、同じ実応答の再生で確認した。ノートの実応答も同じ手順で読み、本文・図が一致した。本人、条件、対象、肯否を変えた対照も含め、主要構造と三段階応答の104検査が通過した。 [実応答と読み合わせ](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#watashi-map-key-ability-replay-20261126)
+
+EmlisAIは、問いをオフにしたFree初回で、本人が「姉が直した」と書いた理由を「姉が直してくれた」と返す箇所を補正した。同じ行動と気持ちを返す一文に限った。実9Bの8応答を照合し、通常の4応答の本文変更は1件。前回18段階は同じ版で再読した。新しいフォローの指示は質問や感情の強さを加えるため見送った。 [実応答と保存・再読](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#emlis-initial-mirrored-action-20261126)
+
+統合版 `7968529` で関連283件が通過した。隔離SQL・もしもルート・DeepInsightは23件通過。ノートと鍵の未加工の実応答を隔離DBへ保存し、現在版・月次版・詳細のAPIで同じIDを再読し、配布済み8601の図・概要の受け取りを照合した。8601のFreeは根拠ボタンが残り、対象外の根拠の取得は404になる。まとめて読む分析全文は既存の概要から開ける。認証した本人としての本番再読と、端末表示は未確認。 [先行した統合API](https://github.com/MassyuRed/mashos-api/commit/79685292a2be73b4bed059fa0addd39e8bd2d472)
+
+本番Supabaseへ、本人訂正と閲覧範囲を照合する移行、およびプラン共通のマップIDを維持する移行の2件を適用した。対象RPCの権限、RLS、既存8件を確認。Render APIは08:31:17 JSTにLive、公開ヘルスはHTTP 200。同版ワーカーは08:34:18 JSTにLive。Premiumの構造間関係は次の変更単位で扱う。 [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3mupjl550s73eupqe0) · [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3n0hei0phs73fufb50)
+
+<a id="cmee-map-premium-grounded-20261126"></a>
+
+### 11.108 Premiumで本人が書いた優先と両立を表示（11/26 JST）
+
+五記録ずつの実9Bを読み合わせた。提出期限と手伝いの時間の題材では本人が優先したものとその結果、印刷費と準備時間の題材では二つを両立するために本人が実際に選んだこととその結果を確認した。別の各二記録に基づく分析本文と小図を組み、同じ本人の選択に両方が現れた関係をPremiumの分析全文へ添える。根拠照合後の二題材を隔離DBに保存し、プラン変更を含む現在版・月次版・詳細を再読した。配布済み8601の表示処理では図に4項目・2本の線を配置し、分析全文に構造間の関係を含む。構造間を結ぶ専用表示は対応アプリの機能。 [実応答と内容の照合](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#watashi-map-premium-witnessed-replay-20261126)
+
+Premiumの適用版 `aa04a86` で二題材の実応答の再生を含む91件が通過した。本番Supabaseへ構造間関係の移行1件を適用し、先行2件を含む移行の適用、対象RPCの権限、RLS、既存8件を確認した。Render APIは08:39:26 JST、同版ワーカーは08:40:53 JSTにLive。公開ヘルスはHTTP 200で、未認証の現在・月次一覧・詳細はすべてHTTP 401。配備中のエラーと致命的ログは確認範囲で0件だった。GitHub ActionsのAnalysis・Pieceは配備確認時点で実行中。 [PremiumのAPI版](https://github.com/MassyuRed/mashos-api/commit/aa04a86749015f860f2c414786f09efb6978f367) · [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3n2mvf3r2c73932a10) · [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3n3h6q1p3s73bng4eg) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531837) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531869)
+
+認証した架空所有者での本番再読と本人端末での表示確認は未実施。構造ごとの図を開く表示と、Premiumで構造間を結ぶ専用表示を含む対応アプリは候補のまま。今回の署名ビルドとTestFlight配布は行っていない。 [対応アプリ](https://github.com/MassyuRed/Cocolon/commit/dd98073e06ae0a77bab8114a51a117b793dd4ecc)

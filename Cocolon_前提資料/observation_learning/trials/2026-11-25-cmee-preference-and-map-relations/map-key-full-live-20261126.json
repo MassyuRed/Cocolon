@@ -1,0 +1,29 @@
+{
+  "phases": [
+    {
+      "completion_tokens": 180,
+      "finish_reason": "stop",
+      "messages_sha256": "3651300a4ddc47e7c3725e245b9f4303ddcba1d20a7f9b83e21cef051019ad53",
+      "phase": "PLAN",
+      "raw": "{ \"schema_version\": \"cocolon.analysis.semantic_map.node_local.model.v4.plan\", \"source_choices_sha256\": \"0419b65d632d428b34342d9867595fb1fb8230ebcd25513f6a05edde57a262ea\", \"nodes\": [ { \"node_id\": \"n1\", \"units\": [ { \"evidence\": [ { \"quote\": \"私は鍵の番号を手帳に書いた\", \"field\": 1 } ] } ] }, { \"node_id\": \"n2\", \"units\": [ { \"evidence\": [ { \"quote\": \"私は鍵の番号を手帳に書かなかった\", \"field\": 2 } ] } ] } ] }",
+      "raw_sha256": "3e4dc8d68c3bf60b7902e3d5e11fae47383c8b331c410c77a2cd5cdf014ab4f5"
+    },
+    {
+      "completion_tokens": 295,
+      "finish_reason": "stop",
+      "messages_sha256": "81f372ebc36f514df44138079ca6f90760a15673327dcbc61ab4db4dbfe59d92",
+      "phase": "NODES",
+      "raw": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.nodes\",\"plan_sha256\":\"16792bcaf0c9e321fd70dbe844150415ceb8510b2dc832293d9bc39da2e82045\",\"nodes\":{\"n1\":{\"units\":{\"u1\":{\"evidence_ref\":\"n1.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/机で照合できるの\":1},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"机で照合できるので、私は鍵の番号を手帳に書いた。\",\"meaning\":\"机という場所での照合が可能だったため、鍵の番号を手帳に記録する行動をとった。\"},\"n2\":{\"units\":{\"u1\":{\"evidence_ref\":\"n2.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/廊下で照合できな\":2},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"廊下で照合できないので、私は鍵の番号を手帳に書かなかった。\",\"meaning\":\"廊下という場所では照合ができなかったため、鍵の番号を手帳に記録する行動を控えた。\"}}}",
+      "raw_sha256": "53a3b6a5f1f9a012e28917741cf94dedb4001e730f69e6d751377d0c0a50eee6"
+    },
+    {
+      "completion_tokens": 360,
+      "finish_reason": "stop",
+      "messages_sha256": "f5153a4a8c9de510f8cd4131e26008e1760640d9cbb5a33ba166b5bfe5a79e29",
+      "phase": "RELATIONS",
+      "raw": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"4c5e80585a22c863cd9d2d6589b0f63568ec81275b920b5df67ed480dfb3a3e9\",\"qualification_review\":{},\"edges\":[{\"from\":\"n1\",\"to\":\"n2\",\"from_unit\":\"n1.u1\",\"to_unit\":\"n2.u1\",\"from_source\":\"机で照合できるので、私は鍵の番号\",\"to_source\":\"廊下で照合できないので、私は鍵の\",\"label\":\"2025-01-01T01:00:00 vs.2026-10-01T01:00:00\",\"relation_kind\":\"CONTEXT_CONTRAST\"}],\"overview\":{\"node_refs\":[\"n1\",\"n2\"],\"title_proposal\":\"場所による照合可能性の違いが、鍵の番号を記録する行動の有無を分けた\",\"title\":\"2件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"場所の制約（照合可否）\",\"criterion\":\"照合が可能な環境であれば記録し、不可能であれば記録しない\",\"case_reading\":\"机という環境では照合が可能だったため、鍵の番号を手帳に書いたが、廊下では照合ができなかったため、同じ鍵の番号も手帳に書かなかった。\",\"heading\":\"場所による行動の分岐\"}]}",
+      "raw_sha256": "40d9cd364637b1c363eda5ad0db9a536a1d9cfae345b058a3226c23d0bf1209b"
+    }
+  ],
+  "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.occurrence.v24"
+}

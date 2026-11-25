@@ -4189,10 +4189,12 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 | `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 複数記録の短い結論と説明を原文で検査する。両方の条件と実際の選択を確認できた場合に、Free・Plusの図に使う関係を組み立てる |
 | `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/structure_relations.py` | 既存の採用済み主要構造を使い、独立した本人原文と同じ選択を照合する。両立、優先、明記された結果の根拠を同じ保存版の内部に記録する |
 | `mashos-api/ai/services/ai_inference/analysis_cumulative_service.py`、`api_self_structure.py`、`api_self_structure_reports.py` | 現在版、月次版、詳細の表示を読み出し時の権限で組み立て、対応アプリが求めた場合にPremiumの構造間関係を返す |
+| `mashos-api/ai/services/ai_inference/analysis_model_source.py`、`analysis_cumulative_service.py` | Free・Plusの先行設定をv24の通常9Bへ接続する。配布済み8601には権限内の図と概要を読み出せる既存形式で返し、先行設定を解除しても既に保存した版の閲覧範囲を適用する |
+| `mashos-api/supabase/migrations/20261125184500_analysis_scoped_map_correction.sql`、`20261125191500_analysis_plan_independent_map_identity.sql` | 本人訂正の対象を公開図の権限に照合し、プランが変わっても同じ保存版を再読できるようにする。旧版・月次・もしもルート・DeepInsightは既存の参照を引き継ぐ |
 | `mashos-api/supabase/migrations/20261125205000_analysis_premium_structure_relations.sql` | 保存版のIDを保ち、Premiumの読み出しで構造間関係の表示用データだけを返す候補移行 |
 | `Cocolon/components/selfStructure/cumulativeMapContract.js`、`semanticMapContract.js`、`SemanticWatashiMap.js`、`CumulativeWatashiMapView.js` | 同じ保存IDで現在・月次・比較を表示する。図がない保存版の本文と、根拠のあるPremiumの構造間関係を扱う |
 
-本番受け入れには、実9BのFree・Plusの本文と図、Premiumの構造間の本文と図、対応アプリでの同じ版の読み出しをそろえる。 [変更と実測](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md)
+11/26のMash決定に従い、Free・Plusは実9Bの本文と図、対応アプリでの同じ版の読み出しを確認できた範囲から先に通常反映する。Premiumは構造間の本文と図が原文に照合できた部分を追加する。 [変更と実測](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md)
 
 11/26の版では、同じ原入力と選択に照合できる場合に、関係生成が分けて返した肯定・否定の説明を一つの主要構造にまとめる。処理は上記の `semantic_admission.py` 内にあり、`ai/tests/test_analysis_primary_structures.py` が片側の根拠欠落や肯否の反転を検査する。実9Bの未加工の三段階の受領記録2件は、同じ試験の [ノート](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/map-notebook-full-live-20261126.json) と [Premiumの優先](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/map-premium-full-live-20261126.json) に置いた。これらは架空入力の検証記録で、実装時の生成指示や教材としては読み込まれない。
 
