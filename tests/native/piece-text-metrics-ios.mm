@@ -1349,19 +1349,20 @@ static BOOL runTiledV4ReferenceChecks(void) {
   }
 
   CGSize fullSize = CGSizeMake(width / scale, height / scale);
-  CGSize compactSize = CGSizeMake(compact.width / scale, compact.height / scale);
   CGImageRef fullImage = PiecePixelsImage(full, true), compactImage = PiecePixelsImage(compact, true);
   CALayer *fullLayer = fullImage ? PieceReferenceLayer(fullImage, (CGRect){CGPointZero, fullSize}, view.layer) : nil;
-  CALayer *compactLayer = compactImage ? PieceReferenceLayer(compactImage, (CGRect){CGPointZero, compactSize}, view.layer) : nil;
+  CALayer *compactLayer = PieceV4TiledReferenceLayer(compactImage, CGSizeMake(width, height), offset, scale, view.layer);
   if (fullImage) CGImageRelease(fullImage);
   if (compactImage) CGImageRelease(compactImage);
   if (!fullLayer || !compactLayer) return fail("reference_layers");
+  if (!CGRectEqualToRect(fullLayer.bounds, compactLayer.bounds) || !CGPointEqualToPoint(fullLayer.position, compactLayer.position))
+    return fail("reference_layer_geometry");
   for (CGPoint phase : {CGPointZero, CGPointMake(.375, -.625)}) {
     PieceOwnedPixels fullOutput, compactOutput;
     const CGSize outputSize = CGSizeMake(fullSize.width + 8, fullSize.height + 8);
     if (!fullOutput.make(outputSize, 1, budget) || !compactOutput.make(outputSize, 1, budget)) return fail("output_allocate");
     CGContextTranslateCTM(fullOutput.context, 4 + phase.x, 4 + phase.y);
-    CGContextTranslateCTM(compactOutput.context, 4 + phase.x + offset.x / scale, 4 + phase.y + offset.y / scale);
+    CGContextTranslateCTM(compactOutput.context, 4 + phase.x, 4 + phase.y);
     [fullLayer renderInContext:fullOutput.context];
     [compactLayer renderInContext:compactOutput.context];
     CGRect filtered;

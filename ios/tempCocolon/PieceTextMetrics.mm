@@ -721,6 +721,8 @@ static BOOL PieceCanTileV4Reference(double width, double height);
 static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t width, size_t height,
     CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
     PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset);
+static CALayer *PieceV4TiledReferenceLayer(CGImageRef image, CGSize gridSize, CGPoint imageOffset,
+    CGFloat scale, CALayer *original);
 static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState, NSRange glyphs, CGRect textKitInk, double fontSize,
     CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
   const CGFloat scale = [layerState[@"scale"] doubleValue];
@@ -785,13 +787,11 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   @try {
     if (!expandedImage) return NO;
     // This mapping is the declared reference extent, never a backing->bounds guess.
-    const CGSize referenceSize = tiled ? CGSizeMake(native.width / scale, native.height / scale) : nativeExtent.size;
-    const CGPoint referenceOrigin = CGPointMake(nativeExtent.origin.x + nativeImageOffset.x / scale,
-      nativeExtent.origin.y + nativeImageOffset.y / scale);
-    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, referenceSize}, view.layer);
+    reference = tiled ? PieceV4TiledReferenceLayer(expandedImage, CGSizeMake(nw, nh), nativeImageOffset, scale, view.layer)
+      : PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
     CGRect filtered;
     if (!reference || !PieceCompositePixels(reference, logicalExtent, 1,
-        CGPointMake(phase.x + referenceOrigin.x, phase.y + referenceOrigin.y), phase,
+        CGPointMake(phase.x + nativeExtent.origin.x, phase.y + nativeExtent.origin.y), phase,
         budget, withinDeadline, &filtered)) return NO;
     *nativeInk = CGRectUnion(projected, filtered);
     reference.contents = nil; reference = nil;
@@ -1581,6 +1581,21 @@ static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t
   *nativeCells = CGRectMake(left, top, right - left, bottom - top);
   *referenceOffset = CGPointMake(cropLeft, cropTop);
   return withinDeadline();
+}
+
+static CALayer *PieceV4TiledReferenceLayer(CGImageRef image, CGSize gridSize, CGPoint imageOffset,
+    CGFloat scale, CALayer *original) {
+  if (!image || !isfinite(scale) || scale < 1) return nil;
+  const CGFloat width = CGImageGetWidth(image), height = CGImageGetHeight(image);
+  if (width <= 0 || height <= 0 || imageOffset.x < 0 || imageOffset.y < 0 ||
+      imageOffset.x + width > gridSize.width || imageOffset.y + height > gridSize.height) return nil;
+  const CGSize size = CGSizeMake(gridSize.width / scale, gridSize.height / scale);
+  CALayer *layer = PieceReferenceLayer(image, (CGRect){CGPointZero, size}, original);
+  // Full logical bounds and origin remain the same. Core Animation extends
+  // the edge samples outside the unit rect, so excluded margins remain clear.
+  layer.contentsRect = CGRectMake(-imageOffset.x / width, -imageOffset.y / height,
+    gridSize.width / width, gridSize.height / height);
+  return layer;
 }
 
 // §99 bitmap preview. This owns its pixels; natural UIView backing is never
