@@ -1,0 +1,276 @@
+{
+  "prior": {
+    "notes": [
+      "会議では、自分で選んだ仕事なので私から引き受けた。",
+      "家では手伝うと決められてしまい、自分で決めたかったので断った。"
+    ],
+    "source_dates": [
+      "2025-01-01T01:00:00",
+      "2026-10-01T01:00:00"
+    ],
+    "supports_choice": true,
+    "choice_roots": [
+      {
+        "anchor": "n1.u1.e1",
+        "condition": "自分で選んだ仕事",
+        "recorded_choice": "私から引き受けた"
+      },
+      {
+        "anchor": "n2.u1.e1",
+        "condition": "家では手伝うと決められてしまい、自分で決めたかった",
+        "recorded_choice": "断った"
+      }
+    ],
+    "bytes": 5930,
+    "sha256": "e112bca938d98ae4ff98b27b70a24d11f714ea0440b75ac92c311ab1b4b653ca",
+    "plan_wire": {
+      "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.plan",
+      "source_choices_sha256": "6ea6e4882f2813f5d6b653091294ec6ee32182d4cf605a9949e9da9fbfbdf498",
+      "nodes": [
+        {
+          "node_id": "n1",
+          "units": [
+            {
+              "evidence": [
+                {
+                  "quote": "自分で選んだ仕事なので私から引き受けた",
+                  "field": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node_id": "n2",
+          "units": [
+            {
+              "evidence": [
+                {
+                  "quote": "自分で決めたかったので断った",
+                  "field": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "nodes_wire": {
+      "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.nodes",
+      "plan_sha256": "b25db5dcbdf20654677b831fbe994f29cb8e2a54a3f0e60e6dde3ef13045822a",
+      "nodes": {
+        "n1": {
+          "units": {
+            "u1": {
+              "evidence_ref": "n1.u1",
+              "source_mode": "RECORDED",
+              "fact_parts": {
+                "e1/会議では、自分で": 1
+              },
+              "unknowns": []
+            }
+          },
+          "node_kind": "STATE_CONTEXT",
+          "perspective": "SELF",
+          "title": "会議では、自分で選んだ仕事なので私から引き受けた。",
+          "meaning": ""
+        },
+        "n2": {
+          "units": {
+            "u1": {
+              "evidence_ref": "n2.u1",
+              "source_mode": "RECORDED",
+              "fact_parts": {
+                "e1/家では手伝うと決": 2
+              },
+              "unknowns": []
+            }
+          },
+          "node_kind": "STATE_CONTEXT",
+          "perspective": "SELF",
+          "title": "家では手伝うと決められてしまい、自分で決めたかったので断った。",
+          "meaning": ""
+        }
+      }
+    }
+  },
+  "notes": {
+    "notes": [
+      "机で見返せるので、私は作業手順をノートに書いた。",
+      "作業場所で見返せないので、私は作業手順をノートに書かなかった。"
+    ],
+    "source_dates": [
+      "2025-01-01T01:00:00",
+      "2026-10-01T01:00:00"
+    ],
+    "supports_choice": true,
+    "choice_roots": [
+      {
+        "anchor": "n1.u1.e1",
+        "condition": "机で見返せる",
+        "recorded_choice": "私は作業手順をノートに書いた"
+      },
+      {
+        "anchor": "n2.u1.e1",
+        "condition": "作業場所で見返せない",
+        "recorded_choice": "私は作業手順をノートに書かなかった"
+      }
+    ],
+    "bytes": 5921,
+    "sha256": "5da84a907bfe9d4ac97539d9392b4110ac0b6c46bd2a3f19a1d94c742b257082",
+    "plan_wire": {
+      "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.plan",
+      "source_choices_sha256": "4436a3d02cfc219cbfe3675424e2d8bf31c98adecacd3461acf35e21546f43e0",
+      "nodes": [
+        {
+          "node_id": "n1",
+          "units": [
+            {
+              "evidence": [
+                {
+                  "quote": "私は作業手順をノートに書いた",
+                  "field": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node_id": "n2",
+          "units": [
+            {
+              "evidence": [
+                {
+                  "quote": "私は作業手順をノートに書かなかった",
+                  "field": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "nodes_wire": {
+      "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.nodes",
+      "plan_sha256": "613e530966ac01ada2dabae30ddb9e2e798dc5de8aab024765da3752bd015bf4",
+      "nodes": {
+        "n1": {
+          "units": {
+            "u1": {
+              "evidence_ref": "n1.u1",
+              "source_mode": "RECORDED",
+              "fact_parts": {
+                "e1/机で見返せるので": 1
+              },
+              "unknowns": []
+            }
+          },
+          "node_kind": "STATE_CONTEXT",
+          "perspective": "SELF",
+          "title": "机で見返せるので、私は作業手順をノートに書いた。",
+          "meaning": ""
+        },
+        "n2": {
+          "units": {
+            "u1": {
+              "evidence_ref": "n2.u1",
+              "source_mode": "RECORDED",
+              "fact_parts": {
+                "e1/作業場所で見返せ": 2
+              },
+              "unknowns": []
+            }
+          },
+          "node_kind": "STATE_CONTEXT",
+          "perspective": "SELF",
+          "title": "作業場所で見返せないので、私は作業手順をノートに書かなかった。",
+          "meaning": ""
+        }
+      }
+    }
+  },
+  "thin": {
+    "notes": [
+      "川を見た。",
+      "紅茶を飲んだ。"
+    ],
+    "source_dates": [
+      "2025-01-01T01:00:00",
+      "2026-10-01T01:00:00"
+    ],
+    "supports_choice": false,
+    "choice_roots": null,
+    "bytes": 16784,
+    "sha256": "1780b265d2b89562fe9015e66177152354749d57d676f17840af657ab31731c6",
+    "plan_wire": {
+      "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.plan",
+      "source_choices_sha256": "99947c8997f7897920f8749a1a942c552b4000e3a541012e028bca13a1e26c6f",
+      "nodes": [
+        {
+          "node_id": "n1",
+          "units": [
+            {
+              "evidence": [
+                {
+                  "quote": "川を見た",
+                  "field": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "node_id": "n2",
+          "units": [
+            {
+              "evidence": [
+                {
+                  "quote": "紅茶を飲んだ",
+                  "field": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "nodes_wire": {
+      "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.nodes",
+      "plan_sha256": "ed76b14ec8a879bc65abd37b8dc799a35efa32ed110fd2ba7c5683927b3a9e6b",
+      "nodes": {
+        "n1": {
+          "units": {
+            "u1": {
+              "evidence_ref": "n1.u1",
+              "source_mode": "RECORDED",
+              "fact_parts": {
+                "e1/川を見た。": 1
+              },
+              "unknowns": []
+            }
+          },
+          "node_kind": "STATE_CONTEXT",
+          "perspective": "SELF",
+          "title": "川を見た。",
+          "meaning": ""
+        },
+        "n2": {
+          "units": {
+            "u1": {
+              "evidence_ref": "n2.u1",
+              "source_mode": "RECORDED",
+              "fact_parts": {
+                "e1/紅茶を飲んだ。": 2
+              },
+              "unknowns": []
+            }
+          },
+          "node_kind": "STATE_CONTEXT",
+          "perspective": "SELF",
+          "title": "紅茶を飲んだ。",
+          "meaning": ""
+        }
+      }
+    }
+  }
+}
