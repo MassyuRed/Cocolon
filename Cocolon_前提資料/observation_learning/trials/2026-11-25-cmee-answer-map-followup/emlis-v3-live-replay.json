@@ -1,0 +1,219 @@
+{
+  "real_9b_replies_replayed": [
+    "initial-skip",
+    "later-skip",
+    "later-skip-answer",
+    "later-skip-control",
+    "later-skip-control-answer",
+    "notice-initial",
+    "pre-question",
+    "written-answer",
+    "written-answer-positive"
+  ],
+  "cases": [
+    {
+      "case": "notice-initial",
+      "source": "11/25 initial availability comparison",
+      "memo": "明日は隣の部屋を使えないと今朝知らされ、私はほっとしました。",
+      "answers": [],
+      "stages": [
+        {
+          "stage": "initial",
+          "state": "COMPLETED",
+          "revision": 4,
+          "body": "明日は隣の部屋を使えないと今朝知らされ、あなたはほっとしました。",
+          "observation_id": "00000000-0000-0000-0000-000000000009",
+          "pending_question_absent": true,
+          "question": null
+        }
+      ],
+      "provider_calls": 1,
+      "later_skip_reused_refined": false
+    },
+    {
+      "case": "pre-question",
+      "source": "One actual issued question SQL fixture",
+      "memo": "褒められたのに、嬉しくなかった。",
+      "answers": [],
+      "stages": [
+        {
+          "stage": "pre_question",
+          "state": "AWAITING_ANSWER",
+          "revision": 4,
+          "body": "褒められたのに嬉しくなかった、という気持ちを受け止めました。",
+          "observation_id": "00000000-0000-0000-0000-000000000013",
+          "pending_question_absent": false,
+          "question": "「褒められた」は、あなたにはどんな意味として届きましたか。"
+        }
+      ],
+      "provider_calls": 1,
+      "later_skip_reused_refined": false
+    },
+    {
+      "case": "written-answer",
+      "source": "Explicit latest-answer polarity SQL fixture",
+      "memo": "褒められたのに、嬉しくなかった。",
+      "answers": [
+        "私は資料を書かなかった。"
+      ],
+      "stages": [
+        {
+          "stage": "pre_question",
+          "state": "AWAITING_ANSWER",
+          "revision": 4,
+          "body": "言葉を受け取ったときの気持ちは、単純ではなかったのですね。",
+          "observation_id": "00000000-0000-0000-0000-00000000001e",
+          "pending_question_absent": false,
+          "question": "「褒められた」は、あなたにはどんな意味として届きましたか。"
+        },
+        {
+          "stage": "answer",
+          "state": "COMPLETED",
+          "revision": 9,
+          "body": "資料を書かなかったことも、教えてくださったんですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000028",
+          "pending_question_absent": true,
+          "question": null
+        }
+      ],
+      "provider_calls": 2,
+      "later_skip_reused_refined": false
+    },
+    {
+      "case": "initial-skip",
+      "source": "Unanswered feeling question fixture",
+      "memo": "つらかったんです",
+      "answers": [],
+      "stages": [
+        {
+          "stage": "pre_question",
+          "state": "AWAITING_ANSWER",
+          "revision": 4,
+          "body": "つらかったことを、ここに書いてくださったのですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000032",
+          "pending_question_absent": false,
+          "question": "なにがつらかったんですか？"
+        },
+        {
+          "stage": "skip",
+          "state": "COMPLETED",
+          "revision": 8,
+          "body": "つらかったという気持ち、Emlis は確かに受け止めました。その重さが、あなたの今の生活の中でどう響いているのか、一緒に感じたいと思います。",
+          "observation_id": "00000000-0000-0000-0000-00000000003a",
+          "pending_question_absent": true,
+          "question": null
+        }
+      ],
+      "provider_calls": 2,
+      "later_skip_reused_refined": false
+    },
+    {
+      "case": "later-skip",
+      "source": "Skipped later question with the actual earlier answer SQL fixture",
+      "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+      "answers": [
+        "その時は重かった。"
+      ],
+      "stages": [
+        {
+          "stage": "pre_question",
+          "state": "AWAITING_ANSWER",
+          "revision": 4,
+          "body": "言葉を受け取ったときの気持ちは、単純ではなかったのですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000044",
+          "pending_question_absent": false,
+          "question": "「褒められた」は、あなたにはどんな意味として届きましたか。"
+        },
+        {
+          "stage": "answer",
+          "state": "AWAITING_CONTINUE",
+          "revision": 9,
+          "body": "褒められたその時は、重かったのですね。",
+          "observation_id": "00000000-0000-0000-0000-00000000004e",
+          "pending_question_absent": true,
+          "question": null
+        },
+        {
+          "stage": "later_skip",
+          "state": "COMPLETED",
+          "revision": 14,
+          "body": "褒められたその時は、重かったのですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000057",
+          "pending_question_absent": true,
+          "question": null
+        }
+      ],
+      "provider_calls": 3,
+      "later_skip_reused_refined": false
+    },
+    {
+      "case": "written-answer-positive",
+      "source": "Same question with affirmative authored activity",
+      "memo": "褒められたのに、嬉しくなかった。",
+      "answers": [
+        "私は資料を書きました。"
+      ],
+      "stages": [
+        {
+          "stage": "pre_question",
+          "state": "AWAITING_ANSWER",
+          "revision": 4,
+          "body": "言葉を受け取ったときの気持ちは、単純ではなかったのですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000061",
+          "pending_question_absent": false,
+          "question": "「褒められた」は、あなたにはどんな意味として届きましたか。"
+        },
+        {
+          "stage": "answer",
+          "state": "COMPLETED",
+          "revision": 9,
+          "body": "資料を書かれたんですね。",
+          "observation_id": "00000000-0000-0000-0000-00000000006b",
+          "pending_question_absent": true,
+          "question": null
+        }
+      ],
+      "provider_calls": 2,
+      "later_skip_reused_refined": false
+    },
+    {
+      "case": "later-skip-control",
+      "source": "Same multi-scene input, answering only the first question with fear",
+      "memo": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+      "answers": [
+        "その時は怖かった。"
+      ],
+      "stages": [
+        {
+          "stage": "pre_question",
+          "state": "AWAITING_ANSWER",
+          "revision": 4,
+          "body": "言葉を受け取ったときの気持ちは、単純ではなかったのですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000075",
+          "pending_question_absent": false,
+          "question": "「褒められた」は、あなたにはどんな意味として届きましたか。"
+        },
+        {
+          "stage": "answer",
+          "state": "AWAITING_CONTINUE",
+          "revision": 9,
+          "body": "褒められたその時は、怖かったんですね。",
+          "observation_id": "00000000-0000-0000-0000-00000000007f",
+          "pending_question_absent": true,
+          "question": null
+        },
+        {
+          "stage": "later_skip",
+          "state": "COMPLETED",
+          "revision": 14,
+          "body": "褒められたその時は、怖かったんですね。",
+          "observation_id": "00000000-0000-0000-0000-000000000088",
+          "pending_question_absent": true,
+          "question": null
+        }
+      ],
+      "provider_calls": 3,
+      "later_skip_reused_refined": false
+    }
+  ]
+}
