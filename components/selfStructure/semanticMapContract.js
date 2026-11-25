@@ -8,14 +8,20 @@ const exact = (x, names) => object(x) && Object.keys(x).length === names.length
 const unique = xs => new Set(xs).size === xs.length;
 const texts = xs => Array.isArray(xs) && xs.every(text);
 
-function readSemanticMapProjection(content) {
+function readSemanticMapProjection(content, mapSubscriptionTier = null) {
   const p = object(content?.watashiMap) ? content.watashiMap : content;
+  const scoped = ['free', 'plus', 'premium'].includes(mapSubscriptionTier);
+  const hasStructureRelations = object(p?.overview)
+    && Object.prototype.hasOwnProperty.call(p.overview, 'structure_relations');
   if (!exact(p, ['schema_version', 'wire_kind', 'projection_of', 'artifact_version', 'period_label',
     'overview', 'nodes', 'edges', 'accessibility_linear_order']) || p.schema_version !== SCHEMA
     || p.wire_kind !== 'watashi.map.v3' || p.artifact_version !== 1
     || !/^artifact:[0-9a-f]{32}@1$/.test(p.projection_of) || !text(p.period_label)
-    || !exact(p.overview, ['title', 'summary']) || !text(p.overview.title) || !text(p.overview.summary)
-    || !Array.isArray(p.nodes) || !p.nodes.length || p.nodes.length > 24
+    || !(hasStructureRelations && mapSubscriptionTier === 'premium'
+      ? exact(p.overview, ['title', 'summary', 'primary_structures', 'structure_relations'])
+      : exact(p.overview, ['title', 'summary']) || exact(p.overview, ['title', 'summary', 'primary_structures']))
+    || !text(p.overview.title) || !text(p.overview.summary)
+    || !Array.isArray(p.nodes) || (!scoped && !p.nodes.length) || p.nodes.length > 24
     || !Array.isArray(p.edges) || p.edges.length > 48) return null;
   if (!p.nodes.every(n => exact(n, ['node_ref', 'node_kind', 'title', 'summary', 'explanation',
     'perspective', 'context', 'unknowns', 'evidence_badge_count']) && /^n[1-9]\d*$/.test(n.node_ref)
@@ -26,10 +32,34 @@ function readSemanticMapProjection(content) {
   if (!unique(refs) || !texts(p.accessibility_linear_order) || !unique(p.accessibility_linear_order)
     || p.accessibility_linear_order.length !== refs.length
     || !p.accessibility_linear_order.every(ref => refs.includes(ref))) return null;
+  if (scoped || 'primary_structures' in p.overview) {
+    const structures = p.overview.primary_structures;
+    if (!Array.isArray(structures) || (scoped && !structures.length && refs.length) || structures.length > 3 || !structures.every(s =>
+      exact(s, ['title', 'description', 'scope', 'node_refs']) && text(s.title) && text(s.description)
+      && ['across_records', 'self_report', 'in_this_record'].includes(s.scope)
+      && Array.isArray(s.node_refs) && (scoped || s.node_refs.length > 0) && s.node_refs.length <= 4 && unique(s.node_refs)
+      && s.node_refs.every(ref => refs.includes(ref))) || !unique(structures.map(s => s.title.trim()))) return null;
+  }
   if (!p.edges.every(e => exact(e, ['edge_ref', 'from_ref', 'to_ref', 'relation_kind', 'label', 'explanation'])
     && /^e[1-9]\d*$/.test(e.edge_ref) && refs.includes(e.from_ref) && refs.includes(e.to_ref)
     && e.from_ref !== e.to_ref && RELATION_KINDS.includes(e.relation_kind) && text(e.label) && text(e.explanation))
     || !unique(p.edges.map(e => e.edge_ref))) return null;
+  if (hasStructureRelations) {
+    const relations = p.overview.structure_relations;
+    const structureCount = p.overview.primary_structures.length;
+    const knownIndex = index => Number.isInteger(index) && index >= 0 && index < structureCount;
+    if (!Array.isArray(relations) || !relations.length || !relations.every(r =>
+      exact(r, ['kind', 'first_index', 'second_index', 'description'])
+      && ['COEXISTENCE', 'PRIORITY'].includes(r.kind) && text(r.description)
+      && knownIndex(r.first_index) && knownIndex(r.second_index) && r.first_index !== r.second_index)) return null;
+  }
+  if (mapSubscriptionTier === 'free') {
+    const figures = p.overview.primary_structures.filter(structure => structure.node_refs.length);
+    if (figures.length > 1) return null;
+    if (!figures.length && refs.length) return null;
+    if (figures.length && (refs.length < 2 || refs.length > 3 || figures[0].node_refs.length !== refs.length
+      || !refs.every(ref => p.edges.some(edge => edge.from_ref === ref || edge.to_ref === ref)))) return null;
+  }
   return JSON.parse(JSON.stringify(p));
 }
 
@@ -41,7 +71,8 @@ function intersects(a, b, margin = 6) {
 // A static layout keeps the same relationships in the same place after a tap.
 // Links are deliberately undirected: a model reading is not a causal arrow.
 function buildSemanticMapLayout(p, availableWidth = 340) {
-  const width = Math.max(280, Math.round(availableWidth));
+  // Keep both node touch targets at least 44 points wide when placed side by side.
+  const width = Math.max(136, Math.floor(availableWidth));
   const nodeWidth = Math.min(166, (width - 48) / 2);
   const nodeHeight = 112;
   const rowPitch = 216;

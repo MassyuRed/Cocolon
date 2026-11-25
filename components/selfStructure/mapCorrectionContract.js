@@ -1,8 +1,8 @@
 const { readSemanticMapProjection } = require('./semanticMapContract');
 const nonblank = value => typeof value === 'string' && !!value.trim();
 
-function mapCorrectionTargets(content, kind, ref) {
-  const map = readSemanticMapProjection(content);
+function mapCorrectionTargets(content, kind, ref, mapSubscriptionTier = null) {
+  const map = readSemanticMapProjection(content, mapSubscriptionTier);
   if (!map) return [];
   let target, definitions;
   if (kind === 'overview' && ref === 'overview') {
@@ -15,9 +15,12 @@ function mapCorrectionTargets(content, kind, ref) {
     definitions = [['label', '関係の見出し'], ['explanation', '関係の説明']];
   }
   if (!target) return [];
+  if ((mapSubscriptionTier && kind === 'overview') || mapSubscriptionTier === 'free') {
+    definitions = definitions.slice(0, 1);
+  }
   const result = definitions.filter(([field]) => nonblank(target[field]))
     .map(([field, label]) => ({ field, label, text: target[field] }));
-  if (kind === 'node' && Array.isArray(target.unknowns)) {
+  if (kind === 'node' && mapSubscriptionTier !== 'free' && Array.isArray(target.unknowns)) {
     target.unknowns.forEach((text, index) => {
       if (nonblank(text)) result.push({ field: `unknowns.${index}`, label: `まだ分からないこと ${index + 1}`, text });
     });

@@ -187,6 +187,7 @@ test('iOS overview, node and edge correction handoff waits for native dismissal 
   for (const [kind, ref, button] of [['overview', 'overview', 'semantic-overview-open'], ['node', 'n1', 'semantic-node-n1'], ['edge', 'e1', 'semantic-edge-e1']]) {
     const h = harness(undefined, 'ios'), Map = h.load('components/selfStructure/SemanticWatashiMap.js').default, calls = [];
     let view; await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: fixture, onCorrectMap: (...args) => calls.push(args) })); });
+    if (kind !== 'overview') await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
     await act(async () => view.root.findByProps({ testID: button }).props.onPress());
     const dismissed = view.root.findByType('ModalContent').props.onDismiss;
     await act(async () => view.root.findByProps({ testID: 'semantic-correction-open' }).props.onPress());
@@ -206,6 +207,7 @@ test('iOS overview, node and edge correction handoff waits for native dismissal 
 test('ordinary Free current map saves a correction and only rereads existing background state', async () => {
   const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default; let view;
   await act(async () => { view = Renderer.create(React.createElement(View)); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-correction-open' }).props.onPress());
   assert(view.root.findAllByProps({ testID: 'analysis-map-correction-dialog' }).length);
@@ -236,46 +238,16 @@ test('correction evidence remains distinct from original context and deduplicate
   assert.throws(() => checkedMapCorrectionEvidenceItems(fabricated));
 });
 
-test('evidence dialog labels original cohort as context and person correction under its own heading', async () => {
+test('semantic node detail still opens correction and keeps the original record and DeepInsight answer private', async () => {
   const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
-  h.api.apiGet = async url => url.includes('/evidence?') ? { items: [1, 2].map(index => ({
-    id: `original-${index}`, created_at: '2026-11-13T10:00:00+00:00', memo: `訂正対象の元記録${index}。`, memo_action: '',
-    answers: ['通常の本人補足。'], version_state: 'CURRENT', evidence_scope: 'MAP_CORRECTION_CONTEXT',
-    map_corrections: [{ ...correctionEvidence(), version_state: 'EDITED_SINCE_ANALYSIS' }],
-  })) } : latest();
   let view; await act(async () => { view = Renderer.create(React.createElement(View)); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
-  const button = view.root.findAllByType('TouchableOpacity').find(node => node.findAllByType('Text').some(text => text.props.children === '根拠の記録を見る'));
-  await act(async () => button.props.onPress());
   const body = JSON.stringify(view.toJSON());
-  assert(body.includes('訂正対象の分析で参照した記録'));
-  assert(body.includes('本人によるマップ訂正'));
-  assert(body.includes('以下は当時保存した本人の説明です。'));
-  assert(!body.includes('この訂正は分析後に変更されています。'));
-  assert(body.includes('通常の本人補足。'));
-  assert.equal(body.split(correctionEvidence().text).length - 1, 1);
-  assert(!body.includes(correctionEvidence().correction_id));
-  await act(async () => view.unmount());
-});
-
-test('evidence dialog shows the actual DeepInsight question and its owner answer separately', async () => {
-  const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
-  const answer = '最後まで話を聞いてくれるときです。';
-  const question = 'どんな反応だと本音を話しやすいですか？';
-  const item = { id: 'deep-insight-answer', created_at: '2026-11-21T10:00:00+00:00', memo: answer,
-    memo_action: '', answers: [], version_state: 'CURRENT',
-    deep_insight: { question_text: question, answer_text: answer } };
-  h.api.apiGet = async url => url.includes('/evidence?') ? { items: [item] } : latest();
-  let view; await act(async () => { view = Renderer.create(React.createElement(View)); });
-  await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
-  const button = view.root.findAllByType('TouchableOpacity').find(node => node.findAllByType('Text').some(text => text.props.children === '根拠の記録を見る'));
-  await act(async () => button.props.onPress());
-  const body = JSON.stringify(view.toJSON());
-  assert(body.includes('わたしを知る問い') && body.includes(question));
-  assert(body.includes('本人の回答') && body.includes(answer));
-  assert.equal(body.split(answer).length - 1, 1);
-  assert(!body.includes('思考内容'));
-  assert.throws(() => checkedMapCorrectionEvidenceItems([{ ...item, memo: question }]), /analysis_deep_insight_evidence_invalid/);
+  assert(body.includes(fixture.nodes[0].explanation));
+  assert(!body.includes('根拠の記録を見る'));
+  assert(h.reads.every(read => !read.url.includes('/evidence')));
+  assert(view.root.findByProps({ testID: 'semantic-correction-open' }));
   await act(async () => view.unmount());
 });
 
@@ -299,6 +271,7 @@ test('captured monthly map remains read-only and never exposes a correction subm
   h.api.apiGet = async () => ({ item: { id: identity, snapshot_month: '2026-10-01', source_profile: 'cumulative.v1',
     content_json: { watashiMap: fixture, map_context: latest().map_context }, generated_at: '2026-10-10T00:00:00Z' } });
   let view; await act(async () => { view = Renderer.create(React.createElement(View, { reportId: identity, month: '2026-10-01' })); });
+  await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
   assert.equal(view.root.findAllByProps({ testID: 'semantic-correction-open' }).length, 0);
   assert.equal(h.calls.length, 0);
