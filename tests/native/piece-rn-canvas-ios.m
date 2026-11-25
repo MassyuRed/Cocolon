@@ -1233,14 +1233,20 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertLessThanOrEqual(fmax([m[0]doubleValue],[m[3]doubleValue])-fmin(0,[m[1]doubleValue]),[report[@"content_width"]doubleValue]);
     XCTAssertLessThanOrEqual([m[4]doubleValue]-[m[2]doubleValue],i<rows.count?[report[@"plan_line_height"]doubleValue]:40);
   }
+  // Raw-text diagnostics call the full exploration bridge directly; normal
+  // cards must still prove that the width-bound bridge was used.
+  BOOL rawTextDiagnostic = [report[@"evidence_set"] isEqual:@"raw_text_diagnostic"];
+  NSString *expectedVersion = rawTextDiagnostic ? @"piece.native_candidates.v5" : @"piece.native_candidates.v6";
+  id expectedWidth = rawTextDiagnostic ? NSNull.null : report[@"content_width"];
   BOOL observed=NO;
   for (NSDictionary *a in report[@"trace"][@"adapters"]) {
     if ([a[@"status"] isEqual:@"resolved"] && [a[@"font_size"] isEqual:report[@"font_size"]] &&
         [a[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v5"] &&
-        [a[@"version"] isEqual:@"piece.native_candidates.v6"] &&
-        [a[@"returned_content_width"] isEqual:report[@"content_width"]]) observed = YES;
+        [a[@"version"] isEqual:expectedVersion] &&
+        [a[@"returned_content_width"] isEqual:expectedWidth]) observed = YES;
   }
-  XCTAssertTrue(observed);XCTAssertGreaterThan([report[@"plan_line_height"]doubleValue],0);
+  XCTAssertTrue(observed, @"%@ requires %@", report[@"name"], expectedVersion);
+  XCTAssertGreaterThan([report[@"plan_line_height"]doubleValue],0);
   NSArray *contexts=report[@"natural_and_reference_paint_contexts"];
   XCTAssertGreaterThan(contexts.count,0u);
   NSMutableDictionary *byView=[NSMutableDictionary new];
