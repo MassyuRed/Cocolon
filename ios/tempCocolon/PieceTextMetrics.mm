@@ -294,13 +294,8 @@ struct PieceOwnedPixels {
   }
   bool makeExact(size_t w, size_t h, CGFloat scale, const PieceRasterBudgetOwner &owner,
       const CGAffineTransform *paintTransform = nullptr) {
-    if (!w || !h || w > 4096 || h > 4096 || w > (4 * 1024 * 1024) / h ||
-        w > SIZE_MAX / 4 || h > SIZE_MAX / (w * 4)) return false;
-    size_t n = w * 4 * h;
-    if (!owner->reserve(n)) return false;
-    budget = owner; width = w; height = h; stride = w * 4; length = n;
-    data = (UInt8 *)calloc(height, stride);
-    CGColorSpaceRef space = data ? CGColorSpaceCreateWithName(kCGColorSpaceSRGB) : NULL;
+    if (!h || w > (4 * 1024 * 1024) / h || !makeStorage(w, h, owner)) return false;
+    CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
     context = space ? CGBitmapContextCreate(data, width, height, 8, stride, space,
       kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
     if (space) CGColorSpaceRelease(space);
@@ -311,6 +306,16 @@ struct PieceOwnedPixels {
       CGContextScaleCTM(context, scale, -scale);
     }
     return true;
+  }
+  bool makeStorage(size_t w, size_t h, const PieceRasterBudgetOwner &owner) {
+    if (!w || !h || w > 4096 || h > 4096 || w > SIZE_MAX / 4 || h > SIZE_MAX / (w * 4)) return false;
+    const size_t n = w * 4 * h;
+    if (!owner->reserve(n)) return false;
+    budget = owner; width = w; height = h; stride = w * 4; length = n;
+    data = (UInt8 *)calloc(height, stride);
+    if (data) return true;
+    reset();
+    return false;
   }
 };
 // Provider ownership follows the last CGImage/CA reference. A detached layer
@@ -721,8 +726,8 @@ static BOOL PieceCanTileV4Reference(double width, double height);
 static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t width, size_t height,
     CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
     PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset);
-static CALayer *PieceV4TiledReferenceLayer(CGImageRef image, CGSize gridSize, CGPoint imageOffset,
-    CGFloat scale, CALayer *original);
+static CGImageRef PieceV4TiledReferenceImage(PieceOwnedPixels &crop, size_t width, size_t height,
+    CGPoint offset, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void));
 static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState, NSRange glyphs, CGRect textKitInk, double fontSize,
     CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
   const CGFloat scale = [layerState[@"scale"] doubleValue];
@@ -780,15 +785,16 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   const double right = ceil((CGRectGetMaxX(nativeCells) + x0 - tx) / scale + phase.x) - phase.x;
   const double bottom = ceil((CGRectGetMaxY(nativeCells) + y0 + ty) / scale + phase.y) - phase.y;
   CGRect projected = CGRectMake(left, top, right - left, bottom - top);
-  CGImageRef expandedImage = PiecePixelsImage(native, true), clippedImage = NULL;
+  CGImageRef expandedImage = tiled ? PieceV4TiledReferenceImage(native, nw, nh, nativeImageOffset, budget, withinDeadline)
+    : PiecePixelsImage(native, true);
+  CGImageRef clippedImage = NULL;
   CALayer *reference = nil;
   UInt8 *bits = nullptr;
   BOOL reservedBits = NO;
   @try {
     if (!expandedImage) return NO;
     // This mapping is the declared reference extent, never a backing->bounds guess.
-    reference = tiled ? PieceV4TiledReferenceLayer(expandedImage, CGSizeMake(nw, nh), nativeImageOffset, scale, view.layer)
-      : PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
+    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
     CGRect filtered;
     if (!reference || !PieceCompositePixels(reference, logicalExtent, 1,
         CGPointMake(phase.x + nativeExtent.origin.x, phase.y + nativeExtent.origin.y), phase,
@@ -1583,19 +1589,22 @@ static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t
   return withinDeadline();
 }
 
-static CALayer *PieceV4TiledReferenceLayer(CGImageRef image, CGSize gridSize, CGPoint imageOffset,
-    CGFloat scale, CALayer *original) {
-  if (!image || !isfinite(scale) || scale < 1) return nil;
-  const CGFloat width = CGImageGetWidth(image), height = CGImageGetHeight(image);
-  if (width <= 0 || height <= 0 || imageOffset.x < 0 || imageOffset.y < 0 ||
-      imageOffset.x + width > gridSize.width || imageOffset.y + height > gridSize.height) return nil;
-  const CGSize size = CGSizeMake(gridSize.width / scale, gridSize.height / scale);
-  CALayer *layer = PieceReferenceLayer(image, (CGRect){CGPointZero, size}, original);
-  // Full logical bounds and origin remain the same. Core Animation extends
-  // the edge samples outside the unit rect, so excluded margins remain clear.
-  layer.contentsRect = CGRectMake(-imageOffset.x / width, -imageOffset.y / height,
-    gridSize.width / width, gridSize.height / height);
-  return layer;
+static CGImageRef PieceV4TiledReferenceImage(PieceOwnedPixels &crop, size_t width, size_t height,
+    CGPoint offset, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void)) {
+  if (!crop.data || !crop.owns || !isfinite(offset.x) || !isfinite(offset.y) ||
+      offset.x < 0 || offset.y < 0 || offset.x != floor(offset.x) || offset.y != floor(offset.y) ||
+      offset.x + crop.width > width || offset.y + crop.height > height) return NULL;
+  // Render both references with the same image dimensions and unit contentsRect.
+  // The wide reference needs only byte storage; the drawing contexts remain tiled.
+  PieceOwnedPixels full;
+  if (!withinDeadline() || !full.makeStorage(width, height, budget)) return NULL;
+  const size_t x = (size_t)offset.x, y = (size_t)offset.y;
+  for (size_t row = 0; row < crop.height; row++) {
+    if (!withinDeadline()) return NULL;
+    memcpy(full.data + (y + row) * full.stride + x * 4, crop.data + row * crop.stride, crop.stride);
+  }
+  crop.reset();
+  return withinDeadline() ? PiecePixelsImage(full, true) : NULL;
 }
 
 // §99 bitmap preview. This owns its pixels; natural UIView backing is never

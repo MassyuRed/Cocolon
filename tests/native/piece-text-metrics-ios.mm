@@ -1349,13 +1349,20 @@ static BOOL runTiledV4ReferenceChecks(void) {
   }
 
   CGSize fullSize = CGSizeMake(width / scale, height / scale);
-  CGImageRef fullImage = PiecePixelsImage(full, true), compactImage = PiecePixelsImage(compact, true);
+  CGImageRef fullImage = PiecePixelsImage(full, true);
+  CGImageRef tiledImage = PieceV4TiledReferenceImage(compact, width, height, offset, budget, current);
+  if (!tiledImage || CGImageGetWidth(tiledImage) != width || CGImageGetHeight(tiledImage) != height) {
+    if (fullImage) CGImageRelease(fullImage);
+    if (tiledImage) CGImageRelease(tiledImage);
+    return fail("original_image_grid");
+  }
   CALayer *fullLayer = fullImage ? PieceReferenceLayer(fullImage, (CGRect){CGPointZero, fullSize}, view.layer) : nil;
-  CALayer *compactLayer = PieceV4TiledReferenceLayer(compactImage, CGSizeMake(width, height), offset, scale, view.layer);
+  CALayer *compactLayer = PieceReferenceLayer(tiledImage, (CGRect){CGPointZero, fullSize}, view.layer);
   if (fullImage) CGImageRelease(fullImage);
-  if (compactImage) CGImageRelease(compactImage);
+  CGImageRelease(tiledImage);
   if (!fullLayer || !compactLayer) return fail("reference_layers");
-  if (!CGRectEqualToRect(fullLayer.bounds, compactLayer.bounds) || !CGPointEqualToPoint(fullLayer.position, compactLayer.position))
+  if (!CGRectEqualToRect(fullLayer.bounds, compactLayer.bounds) || !CGPointEqualToPoint(fullLayer.position, compactLayer.position) ||
+      !CGRectEqualToRect(fullLayer.contentsRect, compactLayer.contentsRect))
     return fail("reference_layer_geometry");
   for (CGPoint phase : {CGPointZero, CGPointMake(.375, -.625)}) {
     PieceOwnedPixels fullOutput, compactOutput;
@@ -1391,7 +1398,11 @@ static BOOL runTiledV4ReferenceChecks(void) {
       CGRectGetMinX(wideCells), CGRectGetMinY(wideCells), CGRectGetWidth(wideCells), CGRectGetHeight(wideCells));
     return fail("oversized_ink");
   }
-  wide.reset();
+  CGImageRef wideImage = PieceV4TiledReferenceImage(wide, wWide, hTall, offset, budget, current);
+  if (!wideImage) return fail("oversized_image");
+  BOOL onWideGrid = CGImageGetWidth(wideImage) == wWide && CGImageGetHeight(wideImage) == hTall;
+  CGImageRelease(wideImage);
+  if (!onWideGrid) return fail("oversized_image_grid");
 
   // Paint a different pixel in the second strip's overlap, away from any
   // glyph. The disagreement must invalidate the whole reference.

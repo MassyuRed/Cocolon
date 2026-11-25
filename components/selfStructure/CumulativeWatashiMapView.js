@@ -231,8 +231,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     {value.stale_supplement_count ? <Text style={[styles.bodyText, { color: ink }]}>編集前の入力に結び付いた補足は、現在の入力の説明には使用していません（{value.stale_supplement_count}件）。</Text> : null}
   </View> : null;
 
-  const renderMap = row => <View>
-    {row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3'
+  const renderMap = row => row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3'
       ? <SemanticWatashiMap key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
           onExploreIf={!reportId && tier === 'premium' ? branchRef => {
             const map = row.content_json.watashiMap;
@@ -247,12 +246,12 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             setCorrectionNotice(null);
             setMapCorrection({ key, visible: true, projection: map, kind, targetRef });
           } : undefined} />
-      : <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'} />}
-    {about ? <View style={{ marginTop: 16 }}>
-      <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
-      {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
-      {coverage(row.content_json?.map_context, row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3')}
-    </View> : null}
+      : <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'} />;
+
+  const renderMapDetails = row => <View>
+    <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
+    {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
+    {coverage(row.content_json?.map_context, row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3')}
   </View>;
 
   const visible = state.key === key && !planLoading;
@@ -275,12 +274,18 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       {visible && state.row ? <>
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}
-        {reportId && !compare ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
-      </> : null}
-      {visible && state.row && reportId ? <>
-        <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
-          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} />
         {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">現在</Text>{renderMap(state.now)}</> : null}
+        {reportId && !compare ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
+        {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
+          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} /> : null}
+        {about ? <>
+          {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時の分析について</Text> : null}
+          {renderMapDetails(state.row)}
+          {compare && state.now ? <>
+            <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">現在の分析について</Text>
+            {renderMapDetails(state.now)}
+          </> : null}
+        </> : null}
       </> : null}
       {!visible || (state.loading && (!state.semanticRestorePending || compare)) ? <View style={{ gap: 12 }}>
         <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="保存したマップを取得しています" />

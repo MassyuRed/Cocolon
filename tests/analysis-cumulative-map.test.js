@@ -104,7 +104,7 @@ test('month comparison fetches current separately and preserves the captured pro
   await act(async()=>view.unmount());
 });
 
-test('month comparison shows both saved readings before the current update status', async t => {
+test('month comparison puts both saved readings before the comparison controls, metadata and update status', async t => {
   const past = copy(semantic);
   past.overview.primary_structures = [{ title: '当時の選び方', description: 'その頃は返事を急いでいました。',
     scope: 'in_this_record', node_refs: [past.nodes[0].node_ref] }];
@@ -120,14 +120,22 @@ test('month comparison shows both saved readings before the current update statu
     let view;
     await act(async () => { view = Renderer.create(React.createElement(View, { reportId: stored.id, month: stored.snapshot_month })); });
     t.after(async () => act(async () => view.unmount()));
+    await act(async () => button(view, '分析について').props.onPress());
     await act(async () => button(view, '現在のマップと見比べる').props.onPress());
     const nodes = view.root.findAllByType('Text');
     const messages = nodes.map(node => [node.props.children].flat().join(''));
     const [pastText, currentText] = [past, current].map(map => map.overview.primary_structures[0].description);
     const updateStatus = messages.findIndex(message => message.includes('更新中です。'));
-    assert(messages.indexOf(pastText) >= 0 && messages.indexOf(pastText) < updateStatus);
+    const compareControl = messages.indexOf('当時のマップだけを見る');
+    const firstDate = messages.findIndex(message => message.startsWith('分析日時：'));
+    assert(messages.indexOf(pastText) >= 0 && messages.indexOf(pastText) < compareControl);
+    assert(compareControl < firstDate && firstDate < updateStatus);
     assert.equal(messages.includes(currentText), hasCurrent);
-    if (hasCurrent) assert(messages.indexOf(currentText) < updateStatus);
+    assert.equal(messages.includes('現在の分析について'), hasCurrent);
+    if (hasCurrent) {
+      assert(messages.indexOf(pastText) < messages.indexOf(currentText));
+      assert(messages.indexOf(currentText) < compareControl);
+    }
     assert.equal(messages[updateStatus], `現在のわたしマップを更新中です。${hasCurrent
       ? '保存したマップを先に表示しています。' : '更新が終わると表示されます。'}`);
     assert.equal(messages.includes('2026年10月に保存した当時のマップ'), false);
