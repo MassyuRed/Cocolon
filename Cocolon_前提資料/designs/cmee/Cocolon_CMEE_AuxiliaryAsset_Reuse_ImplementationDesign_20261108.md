@@ -10020,3 +10020,11 @@ v8は、既存の `bound_passage_listener` で初回・問い前・回答後・�
 作成者に渡す記録本文と、選択感情・選択強度を区別し、本文に強度や感情を持ち込んだ箇所を修正する。聞き手の返事は、話者・時点・肯否・理由・強さが原文に明記された一点を保ち、そこに対するEmlis自身の一言にする。通常採用は全分岐の実本文、同版保存・再読と既存の本人訂正・有料履歴の境界を通して判断する。 [v8の全文比較](../../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/whole-product-read-v8.md)
 
 v9では、筆者の文章がある記録について、選択感情と選択強度を自然文の作成者に渡す資料から除いた。本文中の感情・強さ、日付、カテゴリと出典の照合は維持する。本人が書いた一点へのEmlis自身の受け止めを一文で求め、問いの前、回答後、初回・後続のスキップで用いる目的を同じ版で与える。本文を引用候補にできない場合の扱い、本人訂正と有料履歴、提供側のJSON形式、受領検査は既存の経路。隔離DBで全47段階を模擬応答で確認し、実9Bによる本文品質は未確認。 [v9候補](https://github.com/MassyuRed/mashos-api/commit/1b3d4d7a70a9fa45cdc8fcd97b2eb5eaa82c15a5)
+
+<a id="cmee-emlis-v4-development-baseline-20261125"></a>
+
+### 9.287 EmlisAIの改修に使う起点（11/25 JST）
+
+現時点の作業起点は実9B比較済みの[v4 `13deabb`](https://github.com/MassyuRed/mashos-api/commit/13deabbed5ed3f6556511b7bf153ae1e9a44edee)。同じ架空14記録・20段階で同版本文を再読した数はv4が16/20、v5が15/20、v8が12/20。対照7組の全文適合は各0組。v7の実測は回答後3件、v9は模擬検証の結果として記録する。後続版の差分と失敗結果は既存の資料とGitHubで参照できるよう保つ。
+
+以降の改修は、同じ入力と条件で確認できる最良版から始め、必要な差分を個別に採否判断する。入力直後・問いの前・回答後・初回と後続のスキップまで、本人が書いた意味、Emlisの返事、保存と同じ版の再読を実応答で比較する。改善が確認できた版を次の起点にする。 [議事録§11.95](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-v4-baseline-20261125) · [v4作業ブランチ](https://github.com/MassyuRed/mashos-api/tree/agent/emlis-observation-v4-baseline-20261125)
