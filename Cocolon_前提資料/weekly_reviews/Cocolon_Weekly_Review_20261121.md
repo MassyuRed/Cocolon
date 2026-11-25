@@ -1441,3 +1441,11 @@ Mashは、後続版で改善した部分を採用して開発の起点を前進�
 発行した問いが指した本人原文を渡す版と、その範囲から出来事だけを使う版で、同じ架空3応答を実9Bで各1回比較した。前者は復唱が消え、Plusの回答後4ケースを保存・同版再読。うち2応答に、本人が書いていない喜びや理由の読み込みがあった。後者ではその追加が消えたが、「怖かった」の返事が回答を復唱して2ケースとも保存されなかった。「重かった」の2ケースは保存・再読したが、返事に場面が出なかった。
 
 既存のFree・Premiumの回答後本文は同版再読した。通常9Bの提供と認証付き接続は各回54.192秒、49.983秒で復元した。現行作業版は `cc0fb8b`、本番APIは `3340141`。 [詳細設計§9.293](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-plus-reply-original-scene-vs-event-20261125) · [両比較の実応答・再読](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/plus-scene-event-comparison.json)
+
+<a id="cmee-emlis-initial-notice-inversion-admission-20261125"></a>
+
+### 11.102 初回観測の利用可否を受領時に照合（11/25 JST）
+
+過去に「部屋を使えない」という通知が「利用制限が解除された」と返されて保存された。今回、同じ架空の可・不可2入力で作業版と生成資料を変えた版を実9Bで比較。作業版は両方の肯否を保って同版再読した。生成資料を変えた版は2件とも原文の復唱により保存されなかった。通常9Bの提供と認証付き接続は58.251秒で復元した。 [固定入力と4実応答](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/initial-availability-ab-and-admission.json)
+
+発生済みの反転と同じ本文を初回受領で止める修正だけを、作業版 `4167595` に反映した。過去の反転した実応答を現行v4の模擬通信で返して保存を拒否することを確認し、本人原文は保持した。今回の実9B応答2件と過去の対照6件は、修正後も同じ本文・版で再読した。関連557件が通過し、本番APIは `3340141`。 [反映コード](https://github.com/MassyuRed/mashos-api/commit/4167595ef64dce3c9bb06e0d38e142e656a0205b) · [詳細設計§9.294](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-initial-notice-inversion-admission-20261125)
