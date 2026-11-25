@@ -1,3 +1,5 @@
+> **11/25 JST・観測応答、Piece画像編集、わたしマップを並行検証。** EmlisAIのv30は実9Bで架空18件を比較し、隔離DBで7件を同版再読した。全文判定は0件で、通常採用は見送り。PieceのiOS候補は420字の画像描画で幅を超える改行候補の計測を減らした。わたしマップは主要構造の本文の後から、小図に含まれない項目と関係を開ける。両画面の対応アプリは配布前。Renderの本番API・ワーカーは `3379338`、Pieceの装飾用DB移行は適用済み。 [第12回議事録§11.87](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-reader-response-piece-wrap-map-details-20261125)
+
 > **11/24 JST・CMEEの本番API・ワーカー・GPUをQwen3.5-9Bへ切り替え。** Mashの決定を受け、EmlisAI・Piece・わたしマップ・DeepInsightの通常接続を、既存A5000の9B単独提供に揃えた。観測応答の実文の品質改善を最優先とする。 [第12回議事録§11.81](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-qwen35-9b-normal-provider-migration-20261124) · [補助設計§9.275](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-qwen35-9b-normal-provider-migration-20261124)
 
 > **11/24 JST・観測の4B・9B比較、Piece文字サイズ、わたしマップの順序を更新。** EmlisAIの公開品質は基礎4B 1件、生成方法を変えた4B 0件、9B 2件。Pieceは有料の文字サイズ3段階を候補実装。わたしマップは最大3件の見出しと本文から開き、選んだ構造だけを図で展開する候補を統合。 [議事録§11.80](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-reply-decoding-piece-text-size-map-text-first-20261124)

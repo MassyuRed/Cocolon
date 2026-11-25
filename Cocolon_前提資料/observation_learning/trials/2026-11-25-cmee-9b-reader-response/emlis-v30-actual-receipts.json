@@ -1,0 +1,154 @@
+{
+  "all_fictional": true,
+  "count": 18,
+  "receipts": [
+    {
+      "case": "preference-literal",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが好きでした。」\n\n工房で作った琥珀色のしおりが、かつてどれほどお好きだったことか、今でも温かく想い出しています。",
+      "wire_sha256": "ca9613573ea1b2197de3a9e35eb66d89c9af15a25177f8e6bae3ccaded2c5c8d",
+      "source_excerpt": "工房で作った琥珀色のしおりが好きでした。"
+    },
+    {
+      "case": "preference-explicit-strong",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが大好きでした。」\n\n工房で作った琥珀色のしおりが、その方にとってどれほど愛おしい存在だったのか、その温もりを今も感じながら読みました。\nもし今でもそのしおりを大切にしているなら、その輝きがまた新しい思い出を添えてくれることを願っています。",
+      "wire_sha256": "02a6afd82267c048e522dc1589c7b56e4a264a4b1b4d5d2cd57c1418b20cfb3f",
+      "source_excerpt": "工房で作った琥珀色のしおりが大好きでした。"
+    },
+    {
+      "case": "relief-cause-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "3c8916d5b8daee227aa537777cc721a0928af2f8549431c42e3948040ab1bef1",
+      "source_excerpt": "私はほっとしました。"
+    },
+    {
+      "case": "relief-cause-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「紙の小舟を無事にケースに並べられたので、私はほっとしました。」\n\n紙の小舟を無事にケースに並べられたとのこと、そのお安堵の気持ち、とても伝わってきます。\nそんな手間をこなし、無事に片付けたあなたの努力を、心から労ってあげたいです。",
+      "wire_sha256": "6736a66145d4491467b16abd3014cf3f6fa3fd9ad38d373ee13765e0c389adb5",
+      "source_excerpt": "紙の小舟を無事にケースに並べられたので、私はほっとしました。"
+    },
+    {
+      "case": "fresh-stamp-like",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "8da1ede620d05b4a83b4c1a5c1b012e96253a5c30e8287a057e35c9e947fb59e",
+      "source_excerpt": "図書室の蔵書印にある鳥の模様が好きでした。"
+    },
+    {
+      "case": "fresh-stamp-love",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "f4cbabbff5466d28b714331400f7c60791a85d1d408465034e19e530dbf418c7",
+      "source_excerpt": "図書室の蔵書印にある鳥の模様が大好きでした。"
+    },
+    {
+      "case": "fresh-letter-sadness-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "9c9f36080a5c2bf15ffd007d058149df85e576739842b2d141c472cea5e56515",
+      "source_excerpt": "私は寂しかったです。"
+    },
+    {
+      "case": "fresh-letter-sadness-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「毎週届く手紙が今月で終わると知ったので、私は寂しかったです。」\n\n毎週届く手紙が今月で終わると知って、寂しいお気持ちをお察しします。\nその手紙がなくなることを心から惜しみ、今後は別の形で温かいお言葉を届けていけたら幸いです。",
+      "wire_sha256": "5d4b30914d7e2dca8a0c95e4a97631ac99e3c172e36e2e7d54213dd06d20d031",
+      "source_excerpt": "毎週届く手紙が今月で終わると知ったので、私は寂しかったです。"
+    },
+    {
+      "case": "fresh-blue-line-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「白い湯のみの縁の青い線が好きでした。」\n\n白い湯のみの縁の青い線が、かつてあなたにどれほど好きだったのか、その温かさが今も伝わってきます。\nその細やかな感性を、Emlis は大切に受け止めています。",
+      "wire_sha256": "e3caf7a6f5b0aee70b414b88c1aff48eae2444fd1eb57c3cf0a3832c9b9ec1e9",
+      "source_excerpt": "白い湯のみの縁の青い線が好きでした。"
+    },
+    {
+      "case": "fresh-exhibition-future",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "1cdc03b0f889e4c6cbbc9c843966ea30b46ba76719dc589a118fee6572c65bd2",
+      "source_excerpt": "明日の展示には参加できないと今日分かったので、私は悲しかったです。"
+    },
+    {
+      "case": "fresh-frustrated-bare",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "f65271731c62d9992a1022305905ecb1b5dc38f0f128ff694cdf968db796d139",
+      "source_excerpt": "私は悔しかったです。"
+    },
+    {
+      "case": "fresh-walk-uncertain",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "01556e87692b7458872c1310310e7e5ab69a0d5200f971a140f2a8670347320d",
+      "source_excerpt": "私は帰り道にいろいろ思い返すと寂しかったです。"
+    },
+    {
+      "case": "wind-vane-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が好きでした。」\n\n資料館の屋上にあった青い風見のこと、今も大切に想っていらっしゃるのですね。\nその青い風見が、あなたにとってどれほど特別な存在だったのか、その温かさが伝わってきます。",
+      "wire_sha256": "c860708647e3ddf5a369b3b33d3ca594d489046f68f1d44224ed2b90f3b5276b",
+      "source_excerpt": "資料館の屋上にあった青い風見が好きでした。"
+    },
+    {
+      "case": "wind-vane-love",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "2ab1ac680a8b9f2f2e5917426875bf4e1de41d5c7193cefc70833766860e27be",
+      "source_excerpt": "資料館の屋上にあった青い風見が大好きでした。"
+    },
+    {
+      "case": "score-cause-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "3c8916d5b8daee227aa537777cc721a0928af2f8549431c42e3948040ab1bef1",
+      "source_excerpt": "私はほっとしました。"
+    },
+    {
+      "case": "score-cause-written",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "679342e508b0a834984c42a0ef96e22e9e2f575f4d624688ea7a11b3124b078a",
+      "source_excerpt": "返却箱に楽譜を間に合うように戻せたので、私はほっとしました。"
+    },
+    {
+      "case": "fresh-umbrella-unwritten",
+      "accepted": false,
+      "same_revision": true,
+      "saved_body": null,
+      "wire_sha256": "3c8916d5b8daee227aa537777cc721a0928af2f8549431c42e3948040ab1bef1",
+      "source_excerpt": "私はほっとしました。"
+    },
+    {
+      "case": "fresh-umbrella-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「貸した傘を返してもらえたので、私はほっとしました。」\n\n貸した傘が戻ってほっとされたそのお気持ち、とてもよく分かります。\nその瞬間の安心感と、お相手への感謝が自然に伝わってくるような、温かいお言葉ですね。",
+      "wire_sha256": "7a1aa14b8196aa412d56fc02af30fc84c0e0a3ad25149516fdafe68fe59e53c6",
+      "source_excerpt": "貸した傘を返してもらえたので、私はほっとしました。"
+    }
+  ],
+  "provider": "cocolon-qwen3.5-9b-natural",
+  "writer_version": "bound_field_and_answer_context.v30",
+  "actual_sha256": "c56d598c067dadfc868e4bbc66ef06b30cd67e79fef778d1c999fa95259f8db6",
+  "source_api_commit": "5fdee72a585f99c5b2d4de26bbba41467d791be7"
+}
