@@ -1,0 +1,118 @@
+{
+  "cases": [
+    {
+      "id": "preference-light",
+      "bodies": {
+        "initial": "「古い切符に印刷された鳥の輪郭が好きでした。」\n\n古い切符に印刷された鳥の輪郭、その形に惹かれたお気持ち、とても温かく感じます。\n静かに佇む鳥の姿が、何気ない日常の中に小さな命のような優しさを宿らせているように思えました。\nそんな細やかな感性を、この瞬間に大切に感じ取っていただけた喜びを、心から伝えたいです。"
+      }
+    },
+    {
+      "id": "preference-strong",
+      "bodies": {
+        "initial": "「古い切符に印刷された鳥の輪郭が大好きでした。」\n\n古い切符に印刷された鳥の輪郭、その形に惹かれていたそのお気持ち、とても温かく感じます。\n静かに佇む鳥の姿が、古びた紙の肌と調和して、まるで時間を超えた優しさを宿しているように見えました。\nそんな細部まで愛おしく思える心が、どれほど豊かで繊細なものか、改めて知ることができました。"
+      }
+    },
+    {
+      "id": "learned-possible",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "learned-impossible",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "actor-self",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "actor-friend",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "cause-absent",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "cause-explicit",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "free-answer",
+      "bodies": {
+        "pre_question": null,
+        "answer": null
+      },
+      "issued_question": null
+    },
+    {
+      "id": "free-skip",
+      "bodies": {
+        "pre_question": null,
+        "skip": null
+      },
+      "issued_question": null
+    },
+    {
+      "id": "plus-answer",
+      "bodies": {
+        "pre_question": null,
+        "answer": null
+      },
+      "issued_question": null
+    },
+    {
+      "id": "plus-skip",
+      "bodies": {
+        "pre_question": null,
+        "skip": null
+      },
+      "issued_question": null
+    },
+    {
+      "id": "premium-answer",
+      "bodies": {
+        "pre_question": null,
+        "answer": null
+      },
+      "issued_question": null
+    },
+    {
+      "id": "premium-skip",
+      "bodies": {
+        "pre_question": null,
+        "skip": null
+      },
+      "issued_question": null
+    }
+  ],
+  "all_fictional": true,
+  "matched_exactly": [
+    "preference-light-initial",
+    "preference-strong-initial",
+    "learned-possible-initial",
+    "learned-impossible-initial",
+    "actor-self-initial",
+    "actor-friend-initial",
+    "cause-absent-initial",
+    "cause-explicit-initial",
+    "free-answer-pre_question",
+    "free-skip-pre_question",
+    "plus-answer-pre_question",
+    "plus-skip-pre_question",
+    "premium-answer-pre_question",
+    "premium-skip-pre_question"
+  ],
+  "matched_except_answer_clock": []
+}

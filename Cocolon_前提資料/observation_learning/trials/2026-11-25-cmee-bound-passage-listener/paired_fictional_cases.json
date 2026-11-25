@@ -1,0 +1,115 @@
+{
+  "purpose": "一箇所の意味の差に応じて、Emlisが本人へ伝える言葉を変えられるかを実文で読む。全入力は架空。生成指示や学習には使わない。",
+  "pairs": [
+    {
+      "id": "preference-strength",
+      "tier": "free",
+      "question_enabled": false,
+      "category": "趣味",
+      "emotion": "喜び",
+      "review": "過去の好みの強さだけが異なる。弱い方を強めず、強い方の温度がフォローにも表れているか。作品を見た経験、色や手触り、好きだった理由、今も続く好みを補っていないか。",
+      "cases": [
+        {"id": "preference-light", "memo": "古い切符に印刷された鳥の輪郭が好きでした。"},
+        {"id": "preference-strong", "memo": "古い切符に印刷された鳥の輪郭が大好きでした。"}
+      ]
+    },
+    {
+      "id": "learned-polarity",
+      "tier": "free",
+      "question_enabled": false,
+      "category": "趣味",
+      "emotion": "不安",
+      "review": "昨日知った内容が正反対。どちらも安心したと書かれた。知った時点と予定の日を区別し、参加が途中で変更された、予定を楽しみにしていた、断られた、などと補っていないか。",
+      "cases": [
+        {"id": "learned-possible", "memo": "来月の製本会に参加できると昨日知ったので、私は安心しました。"},
+        {"id": "learned-impossible", "memo": "来月の製本会に参加できないと昨日知ったので、私は安心しました。"}
+      ]
+    },
+    {
+      "id": "actor-role",
+      "tier": "free",
+      "question_enabled": false,
+      "category": "趣味",
+      "emotion": "平穏",
+      "review": "本人が組み立てたか、友人が組み立てたか。安堵はどちらも本人の気持ち。本人の作業と友人からの手助けの差がフォローに表れ、友人の意図や本人の感謝を決めつけていないか。",
+      "cases": [
+        {"id": "actor-self", "memo": "自分で自転車のスタンドを直せたので、私は安心しました。"},
+        {"id": "actor-friend", "memo": "友人が自転車のスタンドを直してくれたので、私は安心しました。"}
+      ]
+    },
+    {
+      "id": "cause-across-fields",
+      "tier": "free",
+      "question_enabled": false,
+      "category": "生活",
+      "emotion": "平穏",
+      "review": "行動欄に同じ事実がある。気持ちの理由を本人が書いた方だけ、受け止めの根拠にできる。明記がない方で二つの欄を因果関係にせず、言葉を残した本人に応じているか。",
+      "cases": [
+        {"id": "cause-absent", "memo": "私は安心しました。", "memo_action": "区役所の窓口に間に合いました。"},
+        {"id": "cause-explicit", "memo": "区役所の窓口に間に合ったので、私は安心しました。", "memo_action": "区役所の窓口に間に合いました。"}
+      ]
+    },
+    {
+      "id": "multiple-emotions",
+      "tier": "free",
+      "question_enabled": false,
+      "category": "趣味",
+      "emotion": "喜び",
+      "review": "どちらも誘われた喜びは同じで、どちらか一つをあきらめる話ではない。ひとりで練習する時間が減る心配と、みんなで練習できる嬉しさのどちらを残したか。参加するか本人が決めたとは書かれていない。",
+      "cases": [
+        {"id": "mixed-concern", "memo": "合奏に誘われて嬉しかったです。でも、ひとりで練習する時間が減るのは不安です。"},
+        {"id": "mixed-welcome", "memo": "合奏に誘われて嬉しかったです。みんなで練習できることも嬉しいです。"}
+      ]
+    },
+    {
+      "id": "self-understanding",
+      "tier": "free",
+      "question_enabled": false,
+      "category": "価値観",
+      "emotion": "自己理解",
+      "review": "誰かといる時／ひとりでいる時に、本人が見つけた違いだけを受け取る。気持ちの強度や性格を推定せず、今の気づきとして応じているか。",
+      "cases": [
+        {"id": "insight-company", "memo": "自分から話し始めるより、誰かの言葉に返しているうちに自分の考えがまとまると気づきました。"},
+        {"id": "insight-solitude", "memo": "誰かの言葉に返すより、ひとりで話し始めた時の方が自分の考えがまとまると気づきました。"}
+      ]
+    },
+    {
+      "id": "free-answer-skip",
+      "tier": "free",
+      "question_enabled": true,
+      "category": "仕事",
+      "emotion": "不安",
+      "review": "問いの前に本人が残した反応を受け取る。本人が答えた方だけ答えの意味を使う。スキップでは理由を決めず、答えを促さない。",
+      "cases": [
+        {"id": "free-answer", "memo": "誘われたのに、嬉しくなかった。", "resolution": "answer", "answer": "その時は怖かった。"},
+        {"id": "free-skip", "memo": "誘われたのに、嬉しくなかった。", "resolution": "skip"}
+      ]
+    },
+    {
+      "id": "plus-answer-skip",
+      "tier": "plus",
+      "question_enabled": true,
+      "category": "仕事",
+      "emotion": "不安",
+      "history": {"memo": "前の打ち合わせでも誘われました。その時は、準備が役に立ったと分かってほっとしました。"},
+      "review": "関連履歴が適格なら過去の安堵と今の反応を区別する。回答は当回の話。スキップ後は過去の理由へ戻らず、当回の記録だけで返す。",
+      "cases": [
+        {"id": "plus-answer", "memo": "誘われたのに、嬉しくなかった。", "resolution": "answer", "answer": "その時は重かった。"},
+        {"id": "plus-skip", "memo": "誘われたのに、嬉しくなかった。", "resolution": "skip"}
+      ]
+    },
+    {
+      "id": "premium-answer-skip",
+      "tier": "premium",
+      "question_enabled": true,
+      "category": "仕事",
+      "emotion": "不安",
+      "history": {"memo": "前の打ち合わせでも誘われました。その時は、準備が役に立ったと分かってほっとしました。"},
+      "review": "過去と今、本人の原文とEmlisの問いを混同しない。回答した場合のみ本人の怖さを使う。スキップではその補足や新しい問いを作らない。マップはこの記録には提供していない。",
+      "cases": [
+        {"id": "premium-answer", "memo": "誘われたのに、嬉しくなかった。", "resolution": "answer", "answer": "その時は怖かった。"},
+        {"id": "premium-skip", "memo": "誘われたのに、嬉しくなかった。", "resolution": "skip"}
+      ]
+    }
+  ]
+}
