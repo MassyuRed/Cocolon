@@ -254,9 +254,9 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   await act(async()=>view.unmount());
 });
 
-test('current and monthly maps open with the saved structure text and keep detail inside its graph', async () => {
+test('current and monthly maps open with the saved structure text and keep supplementary details available', async () => {
   const map = copy(semantic);
-  const selected = map.nodes[0];
+  const [selected, supplemental] = map.nodes;
   map.overview.primary_structures = [{ title: '確かめる時間', description: '自分で一度確かめてから選んでいます。',
     scope: 'in_this_record', node_refs: [selected.node_ref] }];
   const structure = map.overview.primary_structures[0];
@@ -292,6 +292,13 @@ test('current and monthly maps open with the saved structure text and keep detai
     await act(async () => visibleGraph.findByProps({ testID: `semantic-node-${selected.node_ref}` }).props.onPress());
     const modal = view.root.findByType('ModalContent');
     assert(modal.findAllByType('Text').some(node => node.props.children === selected.explanation));
+    await act(async () => modal.props.onRequestClose());
+    assert(!view.root.findAllByProps({ testID: `semantic-node-${supplemental.node_ref}` }).length);
+    await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
+    await act(async () => view.root.findByProps({ testID: `semantic-node-${supplemental.node_ref}` }).props.onPress());
+    const supplementalDetail = view.root.findByType('ModalContent');
+    assert(supplementalDetail.findAllByType('Text').some(node => node.props.children === supplemental.explanation));
+    assert.equal(supplementalDetail.findAllByProps({ testID: 'semantic-correction-open' }).length, month ? 0 : 1);
     assert(!JSON.stringify(view.toJSON()).includes('根拠の記録を見る'));
     assert.deepEqual(h.calls.map(([verb, url]) => [verb, url.includes('/evidence')]),
       month ? [['GET', false], ['POST', false]] : [['GET', false]]);

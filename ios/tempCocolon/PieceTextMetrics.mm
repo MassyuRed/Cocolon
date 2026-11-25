@@ -976,6 +976,14 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
     deadline:deadline resolver:resolve rejecter:reject];
 }
 
+RCT_EXPORT_METHOD(measureExplorationCandidatesForWidth:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  contentWidth:(double)contentWidth resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:YES contentWidth:contentWidth exploration:YES
+    deadline:deadline resolver:resolve rejecter:reject];
+}
+
 - (void)measureCandidateSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
                    boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth exploration:(BOOL)exploration
                        deadline:(NSTimeInterval)deadline
@@ -1206,13 +1214,17 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
                   if (boundedWidth) {
                     if (!isfinite(advance) || advance < 0) {
-                      CFRelease(line); failure->store(true, std::memory_order_relaxed); return;
+                      CFRelease(line);
+                      explorationLine = NULL;
+                      failure->store(true, std::memory_order_relaxed);
+                      return;
                     }
-                    // Width is always at least advance. Keep independent shaping
-                    // and this exact advance for EVERY range; omit only ink that
-                    // cannot be selected at this exact width. Equality is full5.
+                    // Width is always at least advance. Keep this exact advance
+                    // for every shaped range; omit only ink that cannot affect
+                    // selection at this exact width. Equality keeps full ink.
                     if (advance > contentWidth) {
                       CFRelease(line);
+                      explorationLine = NULL;
                       jobData[index].values[0] = advance;
                       jobData[index].widthOverflow = true;
                       continue;
@@ -1275,7 +1287,8 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
               }
             }
             NSData *recordBytes = [NSData dataWithBytes:records.data() length:records.size()];
-            resolve(@{ @"version": @"piece.native_candidates.v4", @"platform": @"ios", @"font_size": @(fontSize),
+            resolve(@{ @"version": exploration ? @"piece.native_candidates.v6" : @"piece.native_candidates.v4",
+              @"platform": @"ios", @"font_size": @(fontSize),
               @"utf16_length": @(expected.length), @"boundaries": boundaries, @"content_width": @(contentWidth),
               @"metric_count": @(jobCount), @"full_metric_count": @(fullCount),
               @"metric_records_le": [recordBytes base64EncodedStringWithOptions:0],

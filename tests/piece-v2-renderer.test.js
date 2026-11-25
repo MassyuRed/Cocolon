@@ -1665,9 +1665,9 @@ test('v5 full indexed transport preserves all ranges and all five double bits wi
   }
 });
 
-test('v5 requires its exact iOS options and separate method, with no legacy or width fallback', async () => {
+test('v5 requires exact iOS options and never uses the legacy independent methods', async () => {
   const h = rawHarness();
-  for (const options of [{ ...v5Options(), contentWidth: 888 }, { ...v5Options(), extra: true }]) {
+  for (const options of [{ ...v5Options(), contentWidth: 0 }, { ...v5Options(), contentWidth: '888' }, { ...v5Options(), extra: true }]) {
     await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, options), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
   }
   h.Platform.OS = 'android';
@@ -1684,6 +1684,32 @@ test('v5 requires its exact iOS options and separate method, with no legacy or w
   h.NativeModules.PieceTextMetrics.measureCandidatesForWidth = async () => wire;
   await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
   await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v4Options(888)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
+
+test('bounded exploration binds the same width, preserves advances, and reads old iOS bridges', async () => {
+  const h = rawHarness(), metrics = candidateTable('abc', 48, 16), width = 32;
+  const module = h.NativeModules.PieceTextMetrics, options = { ...v5Options(), contentWidth: width };
+  module.measureExplorationCandidates = async () => explorationCandidates(metrics);
+  const old = await h.measurePieceCandidates({ tag: 1 }, 'abc', 48, options);
+  assert.equal(old.version, 'piece.native_candidates.v5');
+  assert.deepEqual(copy(old.rows), metrics.rows);
+
+  const wire = { ...widthCandidates(metrics, width), version: 'piece.native_candidates.v6' };
+  module.measureExplorationCandidatesForWidth = async (tag, text, font, contentWidth) => {
+    assert.deepEqual([tag, text, font, contentWidth], [1, 'abc', 48, width]);
+    return wire;
+  };
+  const bounded = await h.measurePieceCandidates({ tag: 1 }, 'abc', 48, options);
+  assert.equal(bounded.version, wire.version);
+  assert.equal(bounded.contentWidth, width);
+  assert.ok(bounded.rows.some(row => row[3] === 'width_overflow'));
+  assert.deepEqual(copy(bounded.rows), metrics.rows.map(row => row[2] > width
+    ? [row[0], row[1], row[2], 'width_overflow'] : row));
+
+  for (const bad of [{ ...wire, content_width: width + 1 }, { ...wire, version: 'piece.native_candidates.v4' }]) {
+    module.measureExplorationCandidatesForWidth = async () => bad;
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'abc', 48, options), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
 });
 
 test('v5 rejects broken exact9 records and references before B9', async () => {

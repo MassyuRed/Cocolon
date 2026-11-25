@@ -349,7 +349,9 @@ export default class PieceVisualCard extends React.Component {
       ? measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])
       : measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex],
         [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile)
-          ? { candidateProfile: PIECE_NATIVE_PREVIEW_V5_VERSION }
+          ? { candidateProfile: PIECE_NATIVE_PREVIEW_V5_VERSION,
+            ...([PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile)
+              ? { contentWidth: input.contentWidth } : {}) }
           : { candidateProfile: input.candidateProfile, contentWidth: input.contentWidth })))
     // Speculation may fail after a larger font has already succeeded. Handle
     // it immediately; only adoption of this font may make the card unavailable.

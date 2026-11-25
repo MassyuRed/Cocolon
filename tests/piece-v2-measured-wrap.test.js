@@ -63,6 +63,20 @@ for (const c of fixture.cases) test('explicit v4 retains the unchanged Python B9
   assert.deepEqual(copy(plan(input, c.sizeIndex, measurements)), c.expected);
 });
 
+test('bounded suffix exploration produces the same layouts as full suffix measurements', () => {
+  let overflowRows = 0;
+  for (const c of fixture.cases) {
+    const input = { ...copy(c.input), candidateProfile: 'piece.rn_bitmap_preview.prototype.v1' };
+    const full = c.measurements.map(table => ({ ...copy(table), version: 'piece.native_candidates.v5' }));
+    const bounded = c.measurements.map(table => ({ ...widthTable(table, input.contentWidth), version: 'piece.native_candidates.v6' }));
+    overflowRows += bounded.reduce((count, table) => count + table.rows.filter(row => row[3] === 'width_overflow').length, 0);
+    assert.deepEqual(copy(plan(input, c.sizeIndex, bounded)), copy(plan(input, c.sizeIndex, full)), c.id);
+    const wrongWidth = bounded.map(table => ({ ...table, contentWidth: input.contentWidth + 1 }));
+    assert.throws(() => plan(input, c.sizeIndex, wrongWidth), unavailable, c.id);
+  }
+  assert.ok(overflowRows > 0);
+});
+
 test('v4 overflow cannot reach viewpoint protection or become a selected row', () => {
   const text = '私にとってその日。', input = { blocks: [text], contentWidth: 192, contentHeight: 1000,
     sizes: [48], lineRatio: 1.55, paragraphRatio: 0.65, alignment: 'left' };

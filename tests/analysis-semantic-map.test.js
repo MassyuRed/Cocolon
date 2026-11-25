@@ -155,7 +155,12 @@ test('primary structures show the analysis and expand only the selected, explici
   const headings = view.root.findAllByType('Text').filter(node => node.props.accessibilityRole === 'header');
   assert.deepEqual(headings.map(node => node.props.children), map.overview.primary_structures.map(s => s.title));
   assert(!JSON.stringify(view.toJSON()).includes(map.overview.summary));
-  assert(!JSON.stringify(view.toJSON()).includes('項目を一覧で読む'));
+  const remainingToggle = view.root.findByProps({ testID: 'semantic-items-toggle' });
+  const paragraphs = map.overview.primary_structures.map(structure => structure.description);
+  const initialTexts = view.root.findAllByType('Text').map(node => node.props.children);
+  assert(paragraphs.every(paragraph => initialTexts.indexOf(paragraph) < initialTexts.indexOf('ほかの項目・関係を読む')));
+  assert.equal(remainingToggle.props.accessibilityState.expanded, false);
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-node-n5' }).length, 0);
   for (const [index, structure] of map.overview.primary_structures.entries()) {
     const toggle = view.root.findByProps({ testID: `semantic-structure-toggle-${index}` });
     const paragraph = view.root.findAllByType('Text').find(node => node.props.children === structure.description);
@@ -194,6 +199,18 @@ test('primary structures show the analysis and expand only the selected, explici
   assert.equal(view.root.findAllByProps({ testID: `semantic-edge-${edge.edge_ref}` }).length, 0);
   await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-1' }).props.onPress());
   assert.equal(view.root.findAllByProps({ testID: 'semantic-map-graph' }).length, 0);
+  await act(async () => remainingToggle.props.onPress());
+  assert.equal(remainingToggle.props.accessibilityState.expanded, true);
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-node-n1' }).length, 0, 'nodes in a small graph are listed there');
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-edge-e1' }).length, 0, 'relationships in a small graph are listed there');
+  assert(view.root.findByProps({ testID: 'semantic-node-n5' }));
+  await act(async () => view.root.findByProps({ testID: 'semantic-edge-e2' }).props.onPress());
+  const crossStructureEdge = map.edges[1];
+  assert(view.root.findByType('ModalContent').findAllByType('Text')
+    .some(node => node.props.children === crossStructureEdge.explanation));
+  await act(async () => view.root.findByType('ModalContent').props.onRequestClose());
+  await act(async () => remainingToggle.props.onPress());
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-node-n5' }).length, 0);
   await act(async () => view.root.findByProps({ testID: 'semantic-overview-open' }).props.onPress());
   const modal = view.root.findByType('ModalContent');
   assert(modal.findAllByType('Text').some(node => node.props.children === map.overview.summary));

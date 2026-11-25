@@ -1234,7 +1234,12 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertLessThanOrEqual([m[4]doubleValue]-[m[2]doubleValue],i<rows.count?[report[@"plan_line_height"]doubleValue]:40);
   }
   BOOL observed=NO;
-  for(NSDictionary *a in report[@"trace"][@"adapters"])if([a[@"status"]isEqual:@"resolved"]&&[a[@"font_size"]isEqual:report[@"font_size"]]&&[a[@"candidate_profile"]isEqual:@"piece.rn_native_preview.prototype.v5"]&&[a[@"version"]isEqual:@"piece.native_candidates.v5"])observed=YES;
+  for (NSDictionary *a in report[@"trace"][@"adapters"]) {
+    if ([a[@"status"] isEqual:@"resolved"] && [a[@"font_size"] isEqual:report[@"font_size"]] &&
+        [a[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v5"] &&
+        [a[@"version"] isEqual:@"piece.native_candidates.v6"] &&
+        [a[@"returned_content_width"] isEqual:report[@"content_width"]]) observed = YES;
+  }
   XCTAssertTrue(observed);XCTAssertGreaterThan([report[@"plan_line_height"]doubleValue],0);
   NSArray *contexts=report[@"natural_and_reference_paint_contexts"];
   XCTAssertGreaterThan(contexts.count,0u);
@@ -1676,6 +1681,18 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
         NSMutableArray *expected=[report[@"rows"]mutableCopy];if([report[@"branding"]boolValue])[expected addObject:@"Cocolon"];
         XCTAssertEqualObjects(report[@"native_texts"],expected);
         if(preview){XCTAssertEqualObjects(report[@"save_fit_current"],@YES);XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],@[@"isCurrent"]);}
+        if ([report[@"name"] isEqual:@"bitmap_essay_max420"]) {
+          BOOL omittedOverwideInk = NO;
+          for (NSDictionary *candidate in report[@"trace"][@"candidates"]) {
+            if ([candidate[@"version"] isEqual:@"piece.native_candidates.v6"] &&
+                [candidate[@"utf16_length"] isEqual:@420] &&
+                [candidate[@"returned_content_width"] isEqual:report[@"content_width"]] &&
+                [candidate[@"full_metric_count"] unsignedIntegerValue] < [candidate[@"metric_count"] unsignedIntegerValue]) {
+              omittedOverwideInk = YES;
+            }
+          }
+          XCTAssertTrue(omittedOverwideInk);
+        }
         for(NSString *key in @[@"png",@"natural_reference_png"]){
           NSString *filename=report[key];XCTAssertNotNil(filename);
           if(filename){UIImage *image=[UIImage imageWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:filename]];XCTAssertNotNil(image);

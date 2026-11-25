@@ -69,10 +69,16 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
     return () => { mounted.current = false; pendingAction.current = null; };
   }, []);
   if (!projection) return null;
-  const structures = projection.overview.primary_structures;
-  const hasStructures = !!structures?.length;
+  const structures = projection.overview.primary_structures || [];
+  const hasStructures = structures.length > 0;
   const activeStructure = expandedStructure?.projectionOf === projection.projection_of
-    ? structures?.[expandedStructure.index] : null;
+    ? structures[expandedStructure.index] : null;
+  const listedNodeRefs = projection.accessibility_linear_order.filter(ref =>
+    !structures.some(structure => structure.node_refs.includes(ref)));
+  const listedEdges = projection.edges.filter(edge => !structures.some(structure =>
+    structure.node_refs.includes(edge.from_ref) && structure.node_refs.includes(edge.to_ref)));
+  const hasListedItems = listedNodeRefs.length > 0 || listedEdges.length > 0;
+  const listLabel = hasStructures ? 'ほかの項目・関係を読む' : '項目を一覧で読む';
   const chosen = selection?.projectionOf === projection.projection_of
     ? (selection.kind === 'overview' ? projection.overview
       : selection.kind === 'node' ? projection.nodes.find(n => n.node_ref === selection.ref)
@@ -105,7 +111,7 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
     }
   };
   return <View testID="watashi-map-v3" style={styles.root}>
-    {structures?.map((structure, index) => {
+    {structures.map((structure, index) => {
       const expanded = activeStructure === structure;
       const diagramAction = expanded ? '図を閉じる' : '関係する部分を図で見る';
       return <View key={structure.title} style={styles.structure}>
@@ -133,19 +139,19 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
         <Text style={styles.actionLabel}>全体の読みを開く</Text>
       </TouchableOpacity>
     </View>
-    {!hasStructures ? <TouchableOpacity testID="semantic-items-toggle" accessibilityRole="button" accessibilityState={{ expanded: linear }}
+    {hasListedItems ? <TouchableOpacity testID="semantic-items-toggle" accessibilityRole="button" accessibilityState={{ expanded: linear }}
       style={styles.secondaryAction} onPress={() => setLinear(!linear)}>
-      <Text style={styles.actionLabel}>{linear ? '一覧を閉じる' : '項目を一覧で読む'}</Text>
+      <Text style={styles.actionLabel}>{linear ? '一覧を閉じる' : listLabel}</Text>
     </TouchableOpacity> : null}
-    {!hasStructures && linear ? <View style={styles.linear}>
-      {projection.accessibility_linear_order.map(ref => {
+    {hasListedItems && linear ? <View style={styles.linear}>
+      {listedNodeRefs.map(ref => {
         const node = projection.nodes.find(n => n.node_ref === ref);
         return <TouchableOpacity key={ref} testID={`semantic-node-${ref}`} accessibilityRole="button"
           style={styles.linearItem} onPress={() => choose('node', ref)}>
           <Text style={styles.sectionTitle}>{node.title}</Text><Text style={styles.body}>{node.summary}</Text>
         </TouchableOpacity>;
       })}
-      {projection.edges.map(edge => <TouchableOpacity key={edge.edge_ref} testID={`semantic-edge-${edge.edge_ref}`} accessibilityRole="button"
+      {listedEdges.map(edge => <TouchableOpacity key={edge.edge_ref} testID={`semantic-edge-${edge.edge_ref}`} accessibilityRole="button"
         style={styles.linearItem} onPress={() => choose('edge', edge.edge_ref)}>
         <Text style={styles.sectionTitle}>{edge.label}</Text>
         <Text style={styles.body}>{nodeName(edge.from_ref)} ／ {nodeName(edge.to_ref)}</Text>

@@ -115,7 +115,7 @@ measuredWrap.planPieceMeasuredRows = (...args) => {
 
   return plan;
 };
-for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measureExplorationCandidates']) {
+for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measureExplorationCandidates', 'measureExplorationCandidatesForWidth']) {
   const nativeCandidates = NativeModules.PieceTextMetrics[method];
   if (typeof nativeCandidates !== 'function') continue;
   NativeModules.PieceTextMetrics[method] = (...args) => {
@@ -126,7 +126,7 @@ for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measure
       const packedBytes = typeof value.rows_f64le === 'string'
         ? value.rows_f64le.length / 4 * 3 - (value.rows_f64le.endsWith('==') ? 2 : value.rows_f64le.endsWith('=') ? 1 : 0) : null;
       Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started,
-        rows: value.rows?.length ?? (['piece.native_candidates.v3', 'piece.native_candidates.v4', 'piece.native_candidates.v5'].includes(value.version)
+        rows: value.rows?.length ?? (['piece.native_candidates.v3', 'piece.native_candidates.v4', 'piece.native_candidates.v5', 'piece.native_candidates.v6'].includes(value.version)
           ? value.boundaries.length * (value.boundaries.length - 1) / 2 : packedBytes === null ? null : packedBytes / 56),
         metric_count: value.metric_count ?? null, full_metric_count: value.full_metric_count ?? null,
         returned_content_width: value.content_width ?? null, version: value.version });

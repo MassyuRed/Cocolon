@@ -611,12 +611,17 @@ function unpackWidthCandidateRows(value, width) {
 export async function measurePieceCandidates(node, text, fontSize, options) {
   const tag = findNodeHandle(node), module = NativeModules.PieceTextMetrics;
   const exploration = options?.candidateProfile === PIECE_NATIVE_PREVIEW_V5_VERSION;
-  const bounded = options !== undefined && !exploration, width = options?.contentWidth;
+  const width = options?.contentWidth;
+  const optionKeys = options && Object.keys(options).sort().join();
+  const widthRequested = optionKeys === 'candidateProfile,contentWidth' && finite(width) && width > 0;
   if (options !== undefined && (Platform.OS !== 'ios' || (exploration
-    ? Object.keys(options).join() !== 'candidateProfile'
-    : !options || Object.keys(options).sort().join() !== 'candidateProfile,contentWidth' ||
-      options.candidateProfile !== PIECE_NATIVE_PREVIEW_V4_VERSION || !finite(width) || width <= 0))) throw measurementError();
-  const method = exploration ? 'measureExplorationCandidates' : bounded ? 'measureCandidatesForWidth' : 'measureCandidates';
+    ? optionKeys !== 'candidateProfile' && !widthRequested
+    : options?.candidateProfile !== PIECE_NATIVE_PREVIEW_V4_VERSION || !widthRequested))) throw measurementError();
+  // Existing iOS bridges can still return full exploration metrics.
+  const boundedExploration = exploration && widthRequested && typeof module?.measureExplorationCandidatesForWidth === 'function';
+  const bounded = boundedExploration || widthRequested && !exploration;
+  const method = exploration ? boundedExploration ? 'measureExplorationCandidatesForWidth' : 'measureExplorationCandidates'
+    : bounded ? 'measureCandidatesForWidth' : 'measureCandidates';
   if (!Number.isInteger(tag) || tag <= 0 || typeof module?.[method] !== 'function') throw measurementError();
   let value;
   try { value = bounded ? await module[method](tag, text, fontSize, width) : await module[method](tag, text, fontSize); }
@@ -627,13 +632,13 @@ export async function measurePieceCandidates(node, text, fontSize, options) {
     ...(bounded ? ['content_width', 'metric_count', 'full_metric_count', 'metric_records_le', 'row_indices_u32le']
       : indexed ? ['metric_count', 'metrics_f64le', 'row_indices_u32le'] : [packed ? 'rows_f64le' : 'rows'])];
   if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
-      (exploration ? value.version !== 'piece.native_candidates.v5'
-        : bounded ? value.version !== 'piece.native_candidates.v4' || value.content_width !== width
+      (bounded ? value.version !== (boundedExploration ? 'piece.native_candidates.v6' : 'piece.native_candidates.v4') || value.content_width !== width
+        : exploration ? value.version !== 'piece.native_candidates.v5'
         : !['piece.native_candidates.v1', 'piece.native_candidates.v2', 'piece.native_candidates.v3'].includes(value.version)) ||
       value.platform !== Platform.OS || !['ios', 'android'].includes(Platform.OS) ||
       value.glyph_check !== 'no_missing_observed' || value.utf16_length !== text.length ||
       !finite(value.font_size) || Math.abs(value.font_size - fontSize) > 0.5) throw measurementError();
-  // v4 carries its exact width and version through the planner boundary.
+  // The bounded wire carries its exact width through the planner boundary.
   // An overflow row has no ink slots and can never become a drawable row.
   if (bounded) return { version: value.version, contentWidth: width, boundaries: value.boundaries,
     rows: unpackWidthCandidateRows(value, width) };
