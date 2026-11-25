@@ -1,0 +1,42 @@
+PLAN request d0a5fa1df9036d6540d06498bb65e7edac81dd54e6bf4b8a4a3935957090b22c
+PLAN response db878c038f96c57fedff4f856a60b416c82f74d56f2709c3745d509588edbfab
+NODES request e7ceb156c22170f081e2ec1000694594aaffe80745a1843bed173b1b388a898f
+NODES response 352929b70fd844516f10a5db43b06773d3d3c1bb75b02829eb1711b1e7dcb696
+RELATIONS request bcb82ec4dbf6521b30e2a98d0fb274c517031add643a20c847891c6503f4f08d
+RELATIONS response a0c83887660ea72ded875d31ea04de6461a22dfa788dcca39a3b7611be5a25e4
+{
+  "save": "isolated RPC stand-in",
+  "mapped": 2,
+  "base_nodes": [
+    [
+      "通路に置ける幅だったので、私は小さい棚を買った。",
+      "通路に置ける幅だったので、私は小さい棚を買った。"
+    ],
+    [
+      "通路をふさぐ幅だと確かめたので、私は大きい棚を買わなかった。",
+      "通路をふさぐ幅だと確かめたので、私は大きい棚を買わなかった。"
+    ]
+  ],
+  "base_edges": [],
+  "axes": [],
+  "plan_reads": {
+    "free": {
+      "id": "c834aa88-97a9-4aef-9217-d0483f25129f",
+      "text": "現時点の記録からは、選び方を支える条件をまだ確かめられていません。",
+      "nodes": 0,
+      "edges": 0
+    },
+    "plus": {
+      "id": "c834aa88-97a9-4aef-9217-d0483f25129f",
+      "text": "現時点の記録からは、選び方を支える条件をまだ確かめられていません。",
+      "nodes": 0,
+      "edges": 0
+    },
+    "premium": {
+      "id": "c834aa88-97a9-4aef-9217-d0483f25129f",
+      "text": "現時点の記録からは、選び方を支える条件をまだ確かめられていません。",
+      "nodes": 0,
+      "edges": 0
+    }
+  }
+}
