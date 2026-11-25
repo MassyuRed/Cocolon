@@ -1,0 +1,319 @@
+{
+  "app_stages": 47,
+  "old20_same_saved": 17,
+  "old20_model_outputs": {
+    "v4": 16,
+    "v10": 4
+  },
+  "all_stage_results": {
+    "initial": {
+      "v4_unavailable": 2,
+      "v4_saved": 6,
+      "mock_saved": 4
+    },
+    "pre_question": {
+      "v4_saved": 6,
+      "mock_saved": 11
+    },
+    "answer": {
+      "v10_saved": 9,
+      "v4_unavailable": 1,
+      "v4_saved": 1
+    },
+    "skip": {
+      "v10_saved": 6
+    },
+    "later_skip": {
+      "v10_saved": 1
+    }
+  },
+  "matches": {
+    "exact": 20,
+    "unmeasured": 15,
+    "isolated_answer_clock_only": 12
+  },
+  "by_stage": {
+    "preference-light-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": false
+    },
+    "preference-strong-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": false
+    },
+    "learned-possible-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "learned-impossible-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "actor-self-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "actor-friend-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "cause-absent-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "cause-explicit-initial": {
+      "model_output": "v4",
+      "stage": "initial",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "mixed-concern-initial": {
+      "model_output": "mock",
+      "stage": "initial",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "mixed-welcome-initial": {
+      "model_output": "mock",
+      "stage": "initial",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "insight-company-initial": {
+      "model_output": "mock",
+      "stage": "initial",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "insight-solitude-initial": {
+      "model_output": "mock",
+      "stage": "initial",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "free-answer-pre_question": {
+      "model_output": "v4",
+      "stage": "pre_question",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "free-answer-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "free-skip-pre_question": {
+      "model_output": "v4",
+      "stage": "pre_question",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "free-skip-skip": {
+      "model_output": "v10",
+      "stage": "skip",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "plus-answer-pre_question": {
+      "model_output": "v4",
+      "stage": "pre_question",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "plus-answer-answer": {
+      "model_output": "v4",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": false
+    },
+    "plus-skip-pre_question": {
+      "model_output": "v4",
+      "stage": "pre_question",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "plus-skip-skip": {
+      "model_output": "v10",
+      "stage": "skip",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "premium-answer-pre_question": {
+      "model_output": "v4",
+      "stage": "pre_question",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "premium-answer-answer": {
+      "model_output": "v4",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "premium-skip-pre_question": {
+      "model_output": "v4",
+      "stage": "pre_question",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "premium-skip-skip": {
+      "model_output": "v10",
+      "stage": "skip",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "free-praise-fear-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "free-praise-fear-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "free-praise-burden-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "free-praise-burden-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "free-praise-skip-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "free-praise-skip-skip": {
+      "model_output": "v10",
+      "stage": "skip",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "plus-praise-fear-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "plus-praise-fear-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "plus-praise-burden-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "plus-praise-burden-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "plus-praise-skip-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "plus-praise-skip-skip": {
+      "model_output": "v10",
+      "stage": "skip",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "premium-praise-fear-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "premium-praise-fear-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "premium-praise-burden-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "premium-praise-burden-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "premium-praise-skip-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "premium-praise-skip-skip": {
+      "model_output": "v10",
+      "stage": "skip",
+      "request": "exact",
+      "same_saved_reply": true
+    },
+    "premium-continuation-stop-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "premium-continuation-stop-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "premium-continuation-skip-pre_question": {
+      "model_output": "mock",
+      "stage": "pre_question",
+      "request": "unmeasured",
+      "same_saved_reply": true
+    },
+    "premium-continuation-skip-answer": {
+      "model_output": "v10",
+      "stage": "answer",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    },
+    "premium-continuation-skip-later_skip": {
+      "model_output": "v10",
+      "stage": "later_skip",
+      "request": "isolated_answer_clock_only",
+      "same_saved_reply": true
+    }
+  }
+}
