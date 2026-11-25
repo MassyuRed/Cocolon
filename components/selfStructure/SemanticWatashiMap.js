@@ -76,6 +76,11 @@ export default function SemanticWatashiMap({ contentJson, mapSubscriptionTier = 
   const compact = mapSubscriptionTier === 'free';
   const structures = projection.overview.primary_structures || [];
   const hasStructures = structures.length > 0;
+  if (mapSubscriptionTier && !hasStructures) {
+    return <View testID="watashi-map-v3" style={styles.root}>
+      <Text style={styles.body}>{projection.overview.summary}</Text>
+    </View>;
+  }
   const activeStructure = expandedStructure?.projectionOf === projection.projection_of
     ? structures[expandedStructure.index] : null;
   const listedNodeRefs = projection.accessibility_linear_order.filter(ref =>

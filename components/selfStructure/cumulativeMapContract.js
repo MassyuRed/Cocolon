@@ -4,7 +4,7 @@ const { readSemanticMapProjection } = require('./semanticMapContract');
 function checkedMapAccess(data) {
   const tier = data?.map_subscription_tier;
   const scoped = data?.map_plan_scoped;
-  if ((tier !== undefined && !['free', 'plus', 'premium'].includes(tier))
+  if ((tier != null && !['free', 'plus', 'premium'].includes(tier))
       || (scoped !== undefined && typeof scoped !== 'boolean') || (scoped && !tier)) {
     throw new Error('analysis_map_access_invalid');
   }

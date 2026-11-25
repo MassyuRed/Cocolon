@@ -89,6 +89,8 @@ test('cumulative admission binds profile, counts, artifact id and projection',()
     {...latest(),map_context:{...counts,source_count:NaN}}, {...latest(),map_context:{...counts,source_count:4}} ]) {
     assert.throws(()=>contract.checkedCurrentResult(bad));
   }
+  assert.equal(contract.checkedCurrentResult({ ...latest(), map_subscription_tier: null }).id, id(projection));
+  assert.throws(() => contract.checkedCurrentResult({ ...latest(), map_subscription_tier: null, map_plan_scoped: true }));
 });
 
 test('Free reads the common full map and acknowledges only its displayed identity',async()=>{
@@ -123,6 +125,32 @@ test('scoped Free renders the conclusion and at most one label-only figure for t
       await act(async () => graph.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
       assert(view.root.findAllByProps({ testID: 'map-correction-field-title' }).length);
       assert.equal(view.root.findAllByProps({ testID: 'map-correction-field-explanation' }).length, 0);
+    }
+    await act(async () => view.unmount());
+  }
+});
+
+test('scoped current and monthly reads keep identity when no primary structure is supported', async () => {
+  const message = '現時点の記録からは、選び方を支える条件をまだ確かめられていません。';
+  const map = planMap('free', false);
+  map.overview.primary_structures = [];
+  map.overview.summary = message;
+  const month = '2026-10-01';
+  const stored = row(month, map);
+  for (const tier of ['free', 'plus', 'premium']) {
+    const current = { ...latest(map), ...scopedPlan(tier) };
+    assert.equal(contract.checkedCurrentResult(current).id, stored.id);
+    assert.throws(() => contract.checkedCurrentResult({ ...current, meta: { ...map,
+      nodes: semantic.nodes, accessibility_linear_order: semantic.accessibility_linear_order } }));
+    const h = harness(async url => url.includes('/reports/') ? { item: stored, ...scopedPlan(tier) } : current);
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(Screen, { reportId: stored.id, month })); });
+    assert(view.root.findAllByType('Text').some(node => node.props.children === message));
+    await act(async () => button(view, '現在のマップと見比べる').props.onPress());
+    assert.equal(view.root.findAllByType('Text').filter(node => node.props.children === message).length, 2);
+    for (const testID of ['semantic-overview-open', 'semantic-overview-correction', 'semantic-map-graph', 'semantic-items-toggle']) {
+      assert.equal(view.root.findAllByProps({ testID }).length, 0);
     }
     await act(async () => view.unmount());
   }

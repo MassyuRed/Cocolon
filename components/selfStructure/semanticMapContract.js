@@ -30,7 +30,7 @@ function readSemanticMapProjection(content, mapSubscriptionTier = null) {
     || !p.accessibility_linear_order.every(ref => refs.includes(ref))) return null;
   if (scoped || 'primary_structures' in p.overview) {
     const structures = p.overview.primary_structures;
-    if (!Array.isArray(structures) || (scoped && !structures.length) || structures.length > 3 || !structures.every(s =>
+    if (!Array.isArray(structures) || (scoped && !structures.length && refs.length) || structures.length > 3 || !structures.every(s =>
       exact(s, ['title', 'description', 'scope', 'node_refs']) && text(s.title) && text(s.description)
       && ['across_records', 'self_report', 'in_this_record'].includes(s.scope)
       && Array.isArray(s.node_refs) && (scoped || s.node_refs.length > 0) && s.node_refs.length <= 4 && unique(s.node_refs)
