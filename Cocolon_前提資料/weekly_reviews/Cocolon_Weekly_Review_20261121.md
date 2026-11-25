@@ -1415,3 +1415,13 @@ Mashは、後続版で改善した部分を採用して開発の起点を前進�
 以前からの20段階は17件の同版再読を維持した。拡張した47段階は、要求に一致する実9B応答34件のうち31件を同版・同本文で再読し、13段階は模擬応答で確認した。関連503件が通過した。 [開発版](https://github.com/MassyuRed/mashos-api/commit/afcb13415084f25c6f8267360b254526e1767d4f) · [実応答の再生結果](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/inheritance-audit-replay.json)
 
 有料履歴の別段落化、初回の時点・貸借・好みの構造化情報、過去の適合した初回本文は、現行の生成経路への接続が残る。本番APIは `3340141` が稼働している。 [本番稼働記録](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc37v8flot8c739cg2og)
+
+<a id="cmee-emlis-inheritance-integrated-20261125"></a>
+
+### 11.99 過去の観測改善を接続して実9Bで比較（11/25 JST）
+
+初回の原文に沿った時点・貸借・好み、発行済みの問いと回答の根拠、有料履歴の照合・日付付き付記、例文を使わない受け止めを、通常APIと同じ観測入口に接続した。統合した比較版 `c58115d` は隔離テスト527件が通過した。 [統合比較版](https://github.com/MassyuRed/mashos-api/commit/c58115dabc8549759b61be9934b0994e96232064) · [詳細設計§9.291](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-inheritance-integrated-20261125)
+
+架空52応答を実9Bで一回生成し、通常の提供と認証付き接続を3分12秒で復元した。隔離アプリの81段階中66段階で同じ本文・版を読み戻した。元の20段階では初回の好み2段階が保存へ進み、Free・Premiumの回答後2段階が従来の保存結果から退行した。初回では貸借の両方向を保った一方、部屋を使えないという本人の記録を反転した応答も保存された。有料履歴の日付と根拠は照合できたが、実9Bの回答後本文が受領検査を通らず、日付付き本文の保存・再読には到達しなかった。 [架空入力と実応答、保存の内訳](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/inheritance-integrated-comparison.json)
+
+現行作業版 `cc0fb8b` へは、受領済みのFree回答が保存中断後も同じ本文で再開する修正を反映した。元の20段階の実応答は同版保存17件を維持した。生成版は比較ブランチに保存し、本番APIは `3340141` が稼働している。 [現行作業版](https://github.com/MassyuRed/mashos-api/commit/cc0fb8b6c430d3d62febbf04e897a4e97029fdbf) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc37v8flot8c739cg2og)
