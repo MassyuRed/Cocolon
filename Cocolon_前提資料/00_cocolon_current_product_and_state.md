@@ -1,6 +1,6 @@
-> **11/25 JST・初回観測で利用可否が反転した返事を止める修正を作業版に反映。** 作業版 `4167595` は本人の単一の通知原文に照らし、反対の可否や書かれていない状態変化を述べた返事を保存しない。実9B比較で肯否を保った現行の2件と以前の対照6件を、修正後も同じ本文・版で再読した。本番APIは `3340141`。 [議事録§11.102](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-initial-notice-inversion-admission-20261125) · [詳細設計§9.294](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-initial-notice-inversion-admission-20261125)
+> **11/25 JST・EmlisAIの利用可否と本人回答の肯否を照合。** 本番API `6419958` は、本人の単一の通知と確定した補足回答に反する返事を保存前に止め、本人の記録と回答は保持する。通常9Bの架空5分岐を配備前後のコードで同版・同本文と照合し、両CIを確認。Mashの承認で18:52 JSTに本番APIへ配備した。 [変更と実応答](observation_learning/trials/2026-11-25-watashi-map-plan-views/README.md#emlisai)
 
-> **11/25 JST・EmlisAIの過去の改善を照合し、開発版へ追加。** 問い前の短い返事6件、確定した本人回答の肯否を照合する処理、自己理解の初回2件を取り込んだ。元の20段階の同版再読17件は維持。本番APIは第2・第3問の見送り修正を配備した `3340141`。 [議事録§11.98](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-inheritance-audit-20261125) · [詳細設計§9.290](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-emlis-inheritance-audit-20261125)
+> **11/25 JST・わたしマップのプラン別表示と権限を隔離検証。** 同じ保存版からFreeの短い結論・小図とPlusの条件比較を返し、出典・訂正にも現在の閲覧権限を使う。Plusの実9B最終段階は三つの指示で比較し、採用0件。Premiumの構造間分析・プラン変更後も同じ現在版IDを保持する処理・対応アプリ配布を残す。 [プラン別の実装と実測](observation_learning/trials/2026-11-25-watashi-map-plan-views/README.md#watashi-map)
 
 > **11/25 JST・EmlisAI v31・PieceのUnicode・わたしマップ比較。** 観測は実9Bで架空18件をすべて同版再読し、見本と重なった1件を除く全文判定は1/17件。通常採用は保留。Pieceは実験用Unicodeを二つの帯で描画できた。描画直後のRGBAは一致し、合成後の全画素の一致が残る。対応アプリは配布前。月次マップは当時と現在の主要構造を更新状況より先に表示する。本番API・ワーカー・9B提供コードを `3379338` に揃え、ヘルスと認証を確認した。試験所有者の認証を確認できず、長履歴の実生成・同版保存・通知は残る。 [第12回議事録§11.88](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-grounded-examples-piece-unicode-map-comparison-20261125)
 

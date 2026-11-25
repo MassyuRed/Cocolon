@@ -1,0 +1,65 @@
+[
+  {
+    "variant": "before",
+    "response": {
+      "model": "cocolon-qwen3.5-9b-analysis-node-local-v4-occurrence-v24",
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"524ce37a44d89df597c5f50857efe1138364c666ed6f8e5ea73752bbe66de078\",\"qualification_review\":{},\"edges\":[],\"overview\":{\"node_refs\":[\"n1\",\"n2\"],\"title_proposal\":\"自分で選んだ仕事を引き受けた場合と、決められた手伝いを断った場合の対比\",\"title\":\"2件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"自己決定権の行使状況\",\"criterion\":\"自分で選んだ場合は引き受け、決められた場合は拒否する。\",\"case_reading\":\"n1.u1では「自分で選んだ仕事」であるため、主体性に基づき引き受けた。n2.u1では「決められてしまい」主体性が奪われたため、自分で決めたかったという意図から断った。どちらも「自分で決めるか」が行動の分岐点となった。\",\"heading\":\"自己決定権の有無が行動を分ける\"}]}"
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 3870,
+        "completion_tokens": 279,
+        "total_tokens": 4149
+      }
+    }
+  },
+  {
+    "variant": "after",
+    "response": {
+      "model": "cocolon-qwen3.5-9b-analysis-node-local-v4-occurrence-v24",
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"524ce37a44d89df597c5f50857efe1138364c666ed6f8e5ea73752bbe66de078\",\"qualification_review\":{},\"edges\":[],\"overview\":{\"node_refs\":[\"n1\",\"n2\"],\"title_proposal\":\"会議で自発的に引き受けた仕事と、家で決められた手伝いを断った選択の対比\",\"title\":\"2件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"主体性（自分で決めるか決められるか）\",\"criterion\":\"自分で決めたかった場合、他者の決定や強制には従わず、拒否を選択する。\",\"case_reading\":\"会議では「自分で選んだ仕事」という条件が満たされたため、自発的に引き受けた。一方、家では「決められてしまい」という条件により、自分で決める機会が奪われたため、自分で決めたかったという動機から断った。\",\"heading\":\"主体性による選択の分岐\"},{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"決定の源泉（自発 vs強制）\",\"criterion\":\"決定の源泉が自発的であれば引き受けるが、外部から決定が下された場合は拒否する。\",\"case_reading\":\"会議での仕事は「自分で選んだ」ため引き受けたが、家の手伝いは「決められてしまい」たため断った。どちらも「手伝う/引き受ける」という行為自体ではなく、その行為が「自発的か強制か」によって結果が逆転している。\",\"heading\":\"決定の源泉が行動を規定する\"}] }"
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 3847,
+        "completion_tokens": 423,
+        "total_tokens": 4270
+      }
+    }
+  },
+  {
+    "variant": "example",
+    "response": {
+      "model": "cocolon-qwen3.5-9b-analysis-node-local-v4-occurrence-v24",
+      "choices": [
+        {
+          "index": 0,
+          "finish_reason": "stop",
+          "message": {
+            "role": "assistant",
+            "content": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"524ce37a44d89df597c5f50857efe1138364c666ed6f8e5ea73752bbe66de078\",\"qualification_review\":{},\"edges\":[],\"overview\":{\"node_refs\":[\"n1\",\"n2\"],\"title_proposal\":\"自分で選んだ仕事を引き受けた日と、決められた手伝いを断った日の対比\",\"title\":\"2件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\"],\"scope\":\"self_report\",\"decision_factor\":\"自分で決めるかどうか\",\"criterion\":\"自分で選んだ仕事は引き受け、決められた手伝いは断る。\",\"case_reading\":\"会議では自分で選んだ仕事なので引き受けたが、家では手伝うと決められていたので断った。\",\"heading\":\"自分で決めるかどうか\"}]}"
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 3822,
+        "completion_tokens": 231,
+        "total_tokens": 4053
+      }
+    }
+  }
+]
