@@ -4180,3 +4180,17 @@ API `24bc228dbf54abc983906323c0ae7d937fae1fd6`／RN `70527711e92821c0ae6f8704be5
 
 API f5d8967は既存累積service・model source・semantic adapterからEngineへLEAF／MERGEを渡し、既存admission／compiler／唯一realizerへ接続する。完全親sourceと原記録／本人更新cohort、実提示原根拠、未知、全量guardを保ち、最終artifactだけを既存SQLへ一回保存する。旧quoted-only plannerの通常化とは区別する。公開v3／既存RN／月次を保持、新migrationなし。旧f5dの承認追加一回は1POST・0受領で終了。後続bdf3919の追加実4B・Pod送付と通常反映は未実施、通常API／worker24bc228d。実装・実行原本・修正候補と次工程は[補助設計§9.73](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-semantic-history-candidate-20261115)、全11pathは01A同日地図。STRUCTURE_MAP_DELTA_PRESENT、実モデル品質・本単位／補助全体は未完。
 
+<a id="watashi-map-plan-relations-files-20261125"></a>
+
+### 11/25 わたしマップのプラン別本文・図を扱うファイル地図
+
+| ファイル | 担当する処理 |
+| --- | --- |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 複数記録の短い結論と説明を原文で検査する。両方の条件と実際の選択を確認できた場合に、Free・Plusの図に使う関係を組み立てる |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/structure_relations.py` | 既存の採用済み主要構造を使い、独立した本人原文と同じ選択を照合する。両立、優先、明記された結果の根拠を同じ保存版の内部に記録する |
+| `mashos-api/ai/services/ai_inference/analysis_cumulative_service.py`、`api_self_structure.py`、`api_self_structure_reports.py` | 現在版、月次版、詳細の表示を読み出し時の権限で組み立て、対応アプリが求めた場合にPremiumの構造間関係を返す |
+| `mashos-api/supabase/migrations/20261125205000_analysis_premium_structure_relations.sql` | 保存版のIDを保ち、Premiumの読み出しで構造間関係の表示用データだけを返す候補移行 |
+| `Cocolon/components/selfStructure/cumulativeMapContract.js`、`semanticMapContract.js`、`SemanticWatashiMap.js`、`CumulativeWatashiMapView.js` | 同じ保存IDで現在・月次・比較を表示する。図がない保存版の本文と、根拠のあるPremiumの構造間関係を扱う |
+
+本番受け入れには、実9BのFree・Plusの本文と図、Premiumの構造間の本文と図、対応アプリでの同じ版の読み出しをそろえる。 [変更と実測](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md)
+

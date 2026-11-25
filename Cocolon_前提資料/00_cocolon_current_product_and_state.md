@@ -1,6 +1,6 @@
-> **11/25 JST・EmlisAIの補足回答を本人が答えた範囲に絞る。** 本番API `a9f1da6` は利用可否と補足回答の肯否を照合し、Plus・Premiumで履歴や訂正を併用しない単一の補足を受けた際に、本人が答えた事実や場面だけに沿って返す。実9Bの4条件と隔離DBの7経路を確認。APIの両CIが成功し、Mashの承認で19:52 JSTに本番APIへ反映した。 [変更と実応答](observation_learning/trials/2026-11-25-cmee-answer-map-followup/README.md#emlisai)
+> **11/25 JST・EmlisAIの補足回答を本人が答えた範囲に絞る。** 本番API `a9f1da6` は、Plus・Premiumで履歴や訂正を併用しない補足に、本人が答えた事実と場面に沿って返す。過去の好みへの初回観測は3案を実9Bで比較し、最後の案で原文と強さを保った。別の題材でも返事が定型化したため、初回観測の追加採用は0件。 [本番の補足回答](observation_learning/trials/2026-11-25-cmee-answer-map-followup/README.md#emlisai) · [初回の再比較](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#emlisai)
 
-> **11/25 JST・わたしマップのプラン別表示、権限、保存版IDを隔離検証。** Free・Plus・Premiumの切り替え前後で同じ現在版IDを再読し、出典・訂正・月次版にも現在の閲覧権限を適用した。実9Bでは原入力に根拠のある2項目を保持した。主要構造の説明と選択を結ぶ図の関係線は採用0件。Free／Plusの同版での本文と図、Premiumの構造間分析、対応アプリの配布が本番有効化に残る。 [プラン別の実装と実測](observation_learning/trials/2026-11-25-cmee-answer-map-followup/README.md#わたしマップ)
+> **11/25 JST・わたしマップのプラン別表示を隔離検証。** 図がない保存版も対応アプリで同じIDの本文を読めるよう修正した。現在版・月次版のIDを3プランで照合し、両立や優先の根拠がそろったときの構造間表示をPremiumに限る処理を候補APIとアプリに反映した。実9Bで本文と図が同じ判断条件を表す組はまだ採用できていない。プラン別の有効化は本番前。 [実装と実測](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#わたしマップ)
 
 > **11/25 JST・EmlisAI v31・PieceのUnicode・わたしマップ比較。** 観測は実9Bで架空18件をすべて同版再読し、見本と重なった1件を除く全文判定は1/17件。通常採用は保留。Pieceは実験用Unicodeを二つの帯で描画できた。描画直後のRGBAは一致し、合成後の全画素の一致が残る。対応アプリは配布前。月次マップは当時と現在の主要構造を更新状況より先に表示する。本番API・ワーカー・9B提供コードを `3379338` に揃え、ヘルスと認証を確認した。試験所有者の認証を確認できず、長履歴の実生成・同版保存・通知は残る。 [第12回議事録§11.88](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-grounded-examples-piece-unicode-map-comparison-20261125)
 
