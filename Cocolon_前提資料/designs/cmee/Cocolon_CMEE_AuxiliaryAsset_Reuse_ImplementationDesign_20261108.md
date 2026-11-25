@@ -9968,3 +9968,5 @@ Renderの本番API・ワーカーは同じ `3379338` が稼働し、APIの正常
 **わたしマップ。** 月次の見比べで、当時と現在の保存済み主要構造を更新状況より先に置いた。現在版がまだない場合は、月次の読みの後で現在版の更新を案内する。同じ月・保存ID、閲覧資格と更新取得を引き継ぐ。分析92件・画面88件、Pieceと分析の統合1,711件が通過。実機の読み上げは未確認。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/e9b790a8e686a63c96ca18e1ed8e613c57af76f6)
 
 通常の9B提供コードを稼働Podで読み取り照合した。RenderのAPIとワーカーは同じ `3379338` で稼働中。9B提供側の `serve_emlis_natural_reply.py`、`analysis_merge_wire.py`、`analysis_merge_response_parser.py` はその版と不一致、`analysis_plan_source_choices.py` は一致した。長履歴の本番生成に必要なのは、この提供側3件の同版化と、架空13件での42段階・同版保存・通知予約の確認。現在のSupabaseにPiece装飾用の移行は適用済み。今回の本番配備・ジョブ作成・TestFlight配布は各0件。
+
+Mashの承認で、ASTORの実行中・即時実行・3分以内の予約が空であることを確認し、既存A5000の9B提供側3ファイルを本番API・ワーカーと同じ `3379338` に揃えた。同じモデル・起動引数・32,768トークン枠で、開始から24.033秒でヘルス正常と自然応答用・分析用の認証を確認した。認証を確認した要求は生成に入る前に止め、3ファイルは起動後にGitの版と一致した。架空13件の前回のジョブは一意に確認できたが、今回の作業環境で当該所有者の有効な認証を確認できなかった。新規更新予約・レポート・通知予約は各0件。本番API・ワーカーは同じ版で稼働を確認した。 [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc32jeqfngtc73cm8ru0) · [本番ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc32jfc0916s73ffuteg)
