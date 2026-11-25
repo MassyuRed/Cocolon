@@ -1425,3 +1425,11 @@ Mashは、後続版で改善した部分を採用して開発の起点を前進�
 架空52応答を実9Bで一回生成し、通常の提供と認証付き接続を3分12秒で復元した。隔離アプリの81段階中66段階で同じ本文・版を読み戻した。元の20段階では初回の好み2段階が保存へ進み、Free・Premiumの回答後2段階が従来の保存結果から退行した。初回では貸借の両方向を保った一方、部屋を使えないという本人の記録を反転した応答も保存された。有料履歴の日付と根拠は照合できたが、実9Bの回答後本文が受領検査を通らず、日付付き本文の保存・再読には到達しなかった。 [架空入力と実応答、保存の内訳](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/inheritance-integrated-comparison.json)
 
 現行作業版 `cc0fb8b` へは、受領済みのFree回答が保存中断後も同じ本文で再開する修正を反映した。元の20段階の実応答は同版保存17件を維持した。生成版は比較ブランチに保存し、本番APIは `3340141` が稼働している。 [現行作業版](https://github.com/MassyuRed/mashos-api/commit/cc0fb8b6c430d3d62febbf04e897a4e97029fdbf) · [本番API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc37v8flot8c739cg2og)
+
+<a id="cmee-plus-answer-reply-focused-20261125"></a>
+
+### 11.100 履歴付きPlusの回答を保存・再読し、返事の復唱を確認（11/25 JST）
+
+回答の原文を一度だけ9Bへ渡し、返事の欄に引用符が入るのを生成時に防ぐ変更を、履歴付きPlusの初回回答後に限って比較した。引用と照合済みの日付付き履歴はCMEEが組み立てる。実9Bの3応答でPlus回答後4段階を隔離保存・同版再読した。関連履歴があるケースにだけ日付が付き、旧実応答を使ったFree・Premiumの対照も同じ本文で再読した。比較後に通常9Bの提供と認証付き接続を51.421秒で復元した。 [実応答と再読](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/plus-answer-focused-comparison.json)
+
+前回の本文で起きた引用符の重複や、回答にない責任感・不安への読み替えは消えた。新しい3応答はいずれも本人の回答を言い直して始まり、2応答は同じ文型だった。比較版 `480a796` に結果を保存し、作業版 `cc0fb8b` と本番API `3340141` を起点とする。 [比較コード](https://github.com/MassyuRed/mashos-api/commit/480a7967ad5e1e671a8e3380c3b5dfb8a44c9804) · [詳細設計§9.292](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-plus-answer-reply-focused-20261125)
