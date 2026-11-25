@@ -1260,3 +1260,13 @@ Mashの承認により、iOS配布を保留したうえでサーバー側を先�
 統合後のアプリ回帰は分析91件、Piece 1,619件の計1,710件が通過した。候補アプリは配布前。本番API・ワーカーは `3379338` で稼働し、今回の試験は本番DBへ書き込んでいない。
 
 候補の実iOSでは420字の2例が5.39秒と4.42秒で、8秒の条件を通過した。通常のビットマップのUnicodeとPremium装飾2組のプレビュー・保存詳細・PNG書き出しの画素照合も通過した。iOS画面試験は7/8件。実験用描画のUnicodeは、国旗行の参照画像が3,481×1,285画素となり、4,194,304画素の上限を超えた。iOS計測単体とAPI両CIは通過。対応アプリは配布前。 [iOS画面](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886986166) · [iOS計測単体](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886985963) · [分析・観測API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480949) · [Piece API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480826)
+
+<a id="cmee-grounded-examples-piece-unicode-map-comparison-20261125"></a>
+
+### 11.88 EmlisAI v31の実比較・PieceのUnicode・月次マップの見比べ（11/25 JST）
+
+**EmlisAI。** 同じ架空18件・同じ9Bで1回比較し、18件すべてを隔離DBで同版再読した。展示の不参加と手紙が終わる時期を保てた。好みの強さを上げた例が2件あり、試験入力と見本が重複した1件を除いた全文判定は1/17件。v31の通常採用は見送った。 [比較と詳細設計§9.282](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-grounded-examples-piece-unicode-map-comparison-20261125)
+
+**Piece。** 国旗を含む行の参照画像を元の格子のまま二つの帯に分けて描き、重複帯と外周を検査する候補を実装。画素とメモリの上限を維持し、iOS用の同等性試験を追加した。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/e9b790a8e686a63c96ca18e1ed8e613c57af76f6) · [iOS検証](https://github.com/MassyuRed/Cocolon/actions/runs/45523652476)
+
+**わたしマップ。** 月次の見比べで当時と現在の主要構造を先に置き、更新状況を本文の後へ移した。画面88件、分析とPieceの統合1,711件が通過。本番API・ワーカーは `3379338`、実9Bの長履歴確認に必要な提供側3ファイルに版差を確認した。端末の読み上げと、実生成・保存・通知は残る。

@@ -9954,3 +9954,17 @@ API両CIが通過し、iOSの新仕様の実画素検査も通過した時点で
 Renderの本番API・ワーカーは同じ `3379338` が稼働し、APIの正常応答を確認した。SupabaseではPiece装飾用の移行 `20261125001943` が適用済みで、既存14作品を含む保存条件が検証済み。今回の作業に伴う本番配備・DB更新・TestFlight配布は各0件。
 
 候補の実iOSでは420字の2例が5.39秒と4.42秒で、8秒の条件を通過した。通常のビットマップのUnicodeとPremium装飾2組のプレビュー・保存詳細・PNG書き出しの画素照合も通過した。iOS画面試験は7/8件。実験用描画のUnicodeは、国旗行の参照画像が3,481×1,285画素となり、4,194,304画素の上限を超えた。iOS計測単体とAPI両CIは通過。対応アプリは配布前。 [iOS画面](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886986166) · [iOS計測単体](https://github.com/MassyuRed/Cocolon/actions/runs/45519360052/job/138886985963) · [分析・観測API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480949) · [Piece API CI](https://github.com/MassyuRed/mashos-api/actions/runs/45519480826)
+
+<a id="cmee-grounded-examples-piece-unicode-map-comparison-20261125"></a>
+
+### 9.282 観測フォローv31・PieceのUnicode描画・月次マップ比較の順序（11/25 JST）
+
+**EmlisAI。** v31は、v29と同じ本人資料とv30までの受領照合を使い、誰が何をしたか、できる・できないと知った違い、好みの強さに応じた返し方を、架空の例でモデルに示す。モデルに送る例は生成指示に置き、本人資料と保存する引用は既存のCMEEが扱う。保存済みv26〜v30の要求を元の版で再構成する。問い・回答後・スキップと、本人材料をPiece・わたしマップ・DeepInsightへ渡す範囲は既存の経路を使う。 [API候補](https://github.com/MassyuRed/mashos-api/commit/381a2a65f403b656243a9ed660087b1431d69b03)
+
+承認された架空18件を、実行・即時予約・3分以内予約が空いている間に同じ9Bへ1回送った。18件がHTTP 200・終了理由stop、20.571秒。前後の提供プロセスは同一。隔離DBで18件を保存し、同じ版・本文を再生成なしで読み戻した。作者が例に使った悔しさの一文が試験入力1件と重複し、出力もほぼ同文となった。この例を除いた独立の全文判定では小舟の1/17件が適合した。展示で参加できないと今日知ったこと、手紙が今月で終わると知ったこと、傘を貸した側を保持した。好みが「好き」の2件を「大好き」に強め、しおりの強弱は同文だった。四つの短い感情の返事でも例の文型が繰り返された。v31の通常採用は見送った。観測・Pieceの本人材料・DeepInsight・分析の関連回帰502件が通過した。 [実応答](../../observation_learning/trials/2026-11-25-cmee-9b-grounded-examples/emlis-v31-actual.jsonl) · [架空原文と隔離保存・再読](../../observation_learning/trials/2026-11-25-cmee-9b-grounded-examples/emlis-v31-actual-receipts.json)
+
+**Piece。** 実験用iOS検査の参照画像が1枚あたり4,194,304画素を超えた場合、同じ文字範囲を、元の画素格子を保つ二つの帯で描く。重複する8行の全RGBA、元の外周、全体の画素を検査する。透明と確認した部分を除いた画像に周囲の透明画素を残し、元の位置に置いて従来の合成照合へ渡す。実際のUnicodeケースの3,481×1,285画素に対し、帯を3,481×646と3,481×647画素に分ける。32 MiBの共通上限、各描画の上限、8秒条件を維持する。改行と通常画像の設定・保存・書き出しは既存の経路。TextKitのRGBAと合成結果が従来と一致するか、重複帯と元外周の異常を検出できるかを専用のiOS検査に追加した。Piece関連1,619件がローカルで通過した。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/e9b790a8e686a63c96ca18e1ed8e613c57af76f6) · [iOS検証](https://github.com/MassyuRed/Cocolon/actions/runs/45523652476)
+
+**わたしマップ。** 月次の見比べで、当時と現在の保存済み主要構造を更新状況より先に置いた。現在版がまだない場合は、月次の読みの後で現在版の更新を案内する。同じ月・保存ID、閲覧資格と更新取得を引き継ぐ。分析92件・画面88件、Pieceと分析の統合1,711件が通過。実機の読み上げは未確認。 [アプリ候補](https://github.com/MassyuRed/Cocolon/commit/e9b790a8e686a63c96ca18e1ed8e613c57af76f6)
+
+通常の9B提供コードを稼働Podで読み取り照合した。RenderのAPIとワーカーは同じ `3379338` で稼働中。9B提供側の `serve_emlis_natural_reply.py`、`analysis_merge_wire.py`、`analysis_merge_response_parser.py` はその版と不一致、`analysis_plan_source_choices.py` は一致した。長履歴の本番生成に必要なのは、この提供側3件の同版化と、架空13件での42段階・同版保存・通知予約の確認。現在のSupabaseにPiece装飾用の移行は適用済み。今回の本番配備・ジョブ作成・TestFlight配布は各0件。

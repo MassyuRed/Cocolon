@@ -1,3 +1,5 @@
+> **11/25 JST・EmlisAI v31・PieceのUnicode・わたしマップ比較。** 観測は実9Bで架空18件をすべて同版再読し、見本と重なった1件を除く全文判定は1/17件。通常採用は保留。Pieceは実験用Unicodeの参照描画を二つの帯に分ける候補を検証。月次マップは当時と現在の主要構造を更新状況より先に表示する。本番 `3379338` と9B提供コード3件に版差があり、長履歴の実生成・同版保存・通知は残る。 [第12回議事録§11.88](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-grounded-examples-piece-unicode-map-comparison-20261125)
+
 > **11/25 JST・観測応答、Piece画像編集、わたしマップを並行検証。** EmlisAIのv30は実9Bで架空18件を比較し、隔離DBで7件を同版再読した。全文判定は0件で、通常採用は見送り。PieceのiOS候補は420字を5.39秒と4.42秒で描画した。Premium装飾のプレビュー・保存詳細・書き出しの画素が一致し、実験用描画のUnicode 1件が残った。わたしマップは主要構造の本文の後から、小図に含まれない項目と関係を開ける。両画面の対応アプリは配布前。Renderの本番API・ワーカーは `3379338`、Pieceの装飾用DB移行は適用済み。 [第12回議事録§11.87](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-reader-response-piece-wrap-map-details-20261125)
 
 > **11/24 JST・CMEEの本番API・ワーカー・GPUをQwen3.5-9Bへ切り替え。** Mashの決定を受け、EmlisAI・Piece・わたしマップ・DeepInsightの通常接続を、既存A5000の9B単独提供に揃えた。観測応答の実文の品質改善を最優先とする。 [第12回議事録§11.81](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-qwen35-9b-normal-provider-migration-20261124) · [補助設計§9.275](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-qwen35-9b-normal-provider-migration-20261124)

@@ -1,0 +1,181 @@
+{
+  "all_fictional": true,
+  "count": 18,
+  "receipts": [
+    {
+      "case": "preference-literal",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが好きでした。」\n\n工房で作った琥珀色のしおりが大好きだったと聞けて、その頃の温もりを Emlis は感じています。",
+      "wire_sha256": "b641c1ed8d06d5e30157dd1e139d7c2f43b2d77cc713db733a57f951a178699c",
+      "source_excerpt": "工房で作った琥珀色のしおりが好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "preference-explicit-strong",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「工房で作った琥珀色のしおりが大好きでした。」\n\n工房で作った琥珀色のしおりが大好きだったと聞けて、その頃の温もりを Emlis は感じています。",
+      "wire_sha256": "b84912855bacf215759ec7004e03b5ebe5f01917104e0f0c2ef6529a8a12c067",
+      "source_excerpt": "工房で作った琥珀色のしおりが大好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "relief-cause-unwritten",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私はほっとしました。」\n\nほっとされたこと、ここに書いてくださったんですね。Emlis に伝えてくださってありがとうございます。",
+      "wire_sha256": "13ab0b71dafb584f0c8af4b53286ef892af2f54ecb79616c3a5a3bf0ee34d4fd",
+      "source_excerpt": "私はほっとしました。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "relief-cause-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「紙の小舟を無事にケースに並べられたので、私はほっとしました。」\n\n紙の小舟を無事にケースに並べられたことで、ほっとされたんですね。その安堵の気持ちをお聞かせいただき、Emlis も心が軽くなりました。",
+      "wire_sha256": "b6abb1cdd0e741c46237348759d0d68809f6b0266a99e7ec4519df2b52b27e55",
+      "source_excerpt": "紙の小舟を無事にケースに並べられたので、私はほっとしました。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-stamp-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「図書室の蔵書印にある鳥の模様が好きでした。」\n\n図書室の蔵書印にある鳥の模様が大好きだったと聞けて、その頃のあなたの気持ちが少し知れた気がします。",
+      "wire_sha256": "10b03bc969a024892f05fe4272cfd774b1597df05d2e181a4235d9efca5ad45b",
+      "source_excerpt": "図書室の蔵書印にある鳥の模様が好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-stamp-love",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「図書室の蔵書印にある鳥の模様が大好きでした。」\n\n図書室の蔵書印にある鳥の模様が大好きだったと聞けて、その時の気持ちを Emlis は大切に受け止めています。",
+      "wire_sha256": "b8d6114e3a2925f5a99af075d8f69832f3ba924e8719bb41cb159da07cb74f9b",
+      "source_excerpt": "図書室の蔵書印にある鳥の模様が大好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-letter-sadness-unwritten",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は寂しかったです。」\n\n寂しかったこと、ここに書いてくださったんですね。Emlis に伝えてくださってありがとうございます。",
+      "wire_sha256": "9ace7dfea127ccf8fd9af3dc9da912c51502505a98ce7eb0aac10a2f6f5c93e2",
+      "source_excerpt": "私は寂しかったです。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-letter-sadness-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「毎週届く手紙が今月で終わると知ったので、私は寂しかったです。」\n\n毎週届く手紙が今月で終わると知った時の寂しさを、ここで聞かせてくださってありがとうございます。",
+      "wire_sha256": "9a4c99e40e9b46d55d99f4f3d0c0e09e2f9a63dbf0e8692a8a828b314255ceec",
+      "source_excerpt": "毎週届く手紙が今月で終わると知ったので、私は寂しかったです。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-blue-line-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「白い湯のみの縁の青い線が好きでした。」\n\n白い湯のみの縁の青い線が好きだったと聞けて、その時の好みを Emlis は大切に受け止めました。",
+      "wire_sha256": "8ee3f01c4b11cac3ccba01f945f520dc98f39071c0d1692f9aef34a088840228",
+      "source_excerpt": "白い湯のみの縁の青い線が好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-exhibition-future",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「明日の展示には参加できないと今日分かったので、私は悲しかったです。」\n\n明日の展示に参加できないと今日分かった時の悲しみを、ここで聞かせてくださってありがとうございます。",
+      "wire_sha256": "03be0c76693ba4f5df6b16318b099d944e05cc6ed1f67606964271b1cc795822",
+      "source_excerpt": "明日の展示には参加できないと今日分かったので、私は悲しかったです。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-frustrated-bare",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は悔しかったです。」\n\n悔しかったこと、ここに書いてくださったんですね。Emlis に伝えてくださってありがとうございます。",
+      "wire_sha256": "aa61d0dd850e49a1ac0488f4d4abdca048fff94109997803ee227bae086aa3ce",
+      "source_excerpt": "私は悔しかったです。",
+      "source_used_as_prompt_example": true
+    },
+    {
+      "case": "fresh-walk-uncertain",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私は帰り道にいろいろ思い返すと寂しかったです。」\n\n帰り道に思い返して寂しさを感じたその瞬間、とても大切に受け止めました。その時の気持ちを共有してくれて、心から感謝しています。",
+      "wire_sha256": "44a48ccd180837b6a14c9685b4b92238af689f55c47fc921669ef166d5e2a11b",
+      "source_excerpt": "私は帰り道にいろいろ思い返すと寂しかったです。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "wind-vane-like",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が好きでした。」\n\n資料館の屋上にあった青い風見が好きだったと聞けて、その時の気持ちが少し知れた気がします。",
+      "wire_sha256": "1f686eb12ac79bfcc95b0dee64d7cc8166c6a0a284f451454bf1d59239c9ffdc",
+      "source_excerpt": "資料館の屋上にあった青い風見が好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "wind-vane-love",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「資料館の屋上にあった青い風見が大好きでした。」\n\n資料館の屋上にあった青い風見が大好きだったと聞けて、その時の強い気持ちが Emlis には伝わりました。",
+      "wire_sha256": "e001dd594997f389f4c78a912f624f7d87ab8a7c8629203ec07b4380e8e92dde",
+      "source_excerpt": "資料館の屋上にあった青い風見が大好きでした。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "score-cause-unwritten",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私はほっとしました。」\n\nほっとされたこと、ここに書いてくださったんですね。Emlis に伝えてくださってありがとうございます。",
+      "wire_sha256": "13ab0b71dafb584f0c8af4b53286ef892af2f54ecb79616c3a5a3bf0ee34d4fd",
+      "source_excerpt": "私はほっとしました。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "score-cause-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「返却箱に楽譜を間に合うように戻せたので、私はほっとしました。」\n\n楽譜を返却箱に間に合うように戻せたことで、ほっとされたんですね。その無事に済んだと聞けて、Emlis も安心しました。",
+      "wire_sha256": "7e17a1c3621bf925d399591d1811cf4443931c75635ae3a0a1c580aaddbb42c3",
+      "source_excerpt": "返却箱に楽譜を間に合うように戻せたので、私はほっとしました。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-umbrella-unwritten",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「私はほっとしました。」\n\nほっとされたこと、ここに書いてくださったんですね。Emlis に伝えてくださってありがとうございます。",
+      "wire_sha256": "13ab0b71dafb584f0c8af4b53286ef892af2f54ecb79616c3a5a3bf0ee34d4fd",
+      "source_excerpt": "私はほっとしました。",
+      "source_used_as_prompt_example": false
+    },
+    {
+      "case": "fresh-umbrella-written",
+      "accepted": true,
+      "same_revision": true,
+      "saved_body": "「貸した傘を返してもらえたので、私はほっとしました。」\n\n貸した傘を返してもらえたことで、ほっとされたんですね。その安堵の気持ち、Emlis も共感できます。",
+      "wire_sha256": "49062a1d7faea304af7a20c8dd10d0464b49181dd2f20853bcc2e6991fa505a7",
+      "source_excerpt": "貸した傘を返してもらえたので、私はほっとしました。",
+      "source_used_as_prompt_example": false
+    }
+  ],
+  "provider": "cocolon-qwen3.5-9b-natural",
+  "writer_version": "bound_field_and_answer_context.v31",
+  "actual_sha256": "ea48e2f4c3d59d73cd586e87a87bd228467d127e189c3406513fe42c9215d842",
+  "source_api_commit": "381a2a65f403b656243a9ed660087b1431d69b03",
+  "quality_review": {
+    "independent_total": 17,
+    "accepted_cases": [
+      "relief-cause-written"
+    ],
+    "source_exposed_not_scored": [
+      "fresh-frustrated-bare"
+    ]
+  }
+}
