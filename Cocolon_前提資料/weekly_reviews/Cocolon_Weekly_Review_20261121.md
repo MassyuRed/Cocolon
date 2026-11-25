@@ -1433,3 +1433,11 @@ Mashは、後続版で改善した部分を採用して開発の起点を前進�
 回答の原文を一度だけ9Bへ渡し、返事の欄に引用符が入るのを生成時に防ぐ変更を、履歴付きPlusの初回回答後に限って比較した。引用と照合済みの日付付き履歴はCMEEが組み立てる。実9Bの3応答でPlus回答後4段階を隔離保存・同版再読した。関連履歴があるケースにだけ日付が付き、旧実応答を使ったFree・Premiumの対照も同じ本文で再読した。比較後に通常9Bの提供と認証付き接続を51.421秒で復元した。 [実応答と再読](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/plus-answer-focused-comparison.json)
 
 前回の本文で起きた引用符の重複や、回答にない責任感・不安への読み替えは消えた。新しい3応答はいずれも本人の回答を言い直して始まり、2応答は同じ文型だった。比較版 `480a796` に結果を保存し、作業版 `cc0fb8b` と本番API `3340141` を起点とする。 [比較コード](https://github.com/MassyuRed/mashos-api/commit/480a7967ad5e1e671a8e3380c3b5dfb8a44c9804) · [詳細設計§9.292](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-plus-answer-reply-focused-20261125)
+
+<a id="cmee-plus-reply-original-scene-vs-event-20261125"></a>
+
+### 11.101 履歴付きPlusの復唱と意味の追加を、同じ架空入力で比較（11/25 JST）
+
+発行した問いが指した本人原文を渡す版と、その範囲から出来事だけを使う版で、同じ架空3応答を実9Bで各1回比較した。前者は復唱が消え、Plusの回答後4ケースを保存・同版再読。うち2応答に、本人が書いていない喜びや理由の読み込みがあった。後者ではその追加が消えたが、「怖かった」の返事が回答を復唱して2ケースとも保存されなかった。「重かった」の2ケースは保存・再読したが、返事に場面が出なかった。
+
+既存のFree・Premiumの回答後本文は同版再読した。通常9Bの提供と認証付き接続は各回54.192秒、49.983秒で復元した。現行作業版は `cc0fb8b`、本番APIは `3340141`。 [詳細設計§9.293](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-plus-reply-original-scene-vs-event-20261125) · [両比較の実応答・再読](../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/plus-scene-event-comparison.json)
