@@ -11,11 +11,15 @@ const texts = xs => Array.isArray(xs) && xs.every(text);
 function readSemanticMapProjection(content, mapSubscriptionTier = null) {
   const p = object(content?.watashiMap) ? content.watashiMap : content;
   const scoped = ['free', 'plus', 'premium'].includes(mapSubscriptionTier);
+  const hasStructureRelations = object(p?.overview)
+    && Object.prototype.hasOwnProperty.call(p.overview, 'structure_relations');
   if (!exact(p, ['schema_version', 'wire_kind', 'projection_of', 'artifact_version', 'period_label',
     'overview', 'nodes', 'edges', 'accessibility_linear_order']) || p.schema_version !== SCHEMA
     || p.wire_kind !== 'watashi.map.v3' || p.artifact_version !== 1
     || !/^artifact:[0-9a-f]{32}@1$/.test(p.projection_of) || !text(p.period_label)
-    || !(exact(p.overview, ['title', 'summary']) || exact(p.overview, ['title', 'summary', 'primary_structures']))
+    || !(hasStructureRelations && mapSubscriptionTier === 'premium'
+      ? exact(p.overview, ['title', 'summary', 'primary_structures', 'structure_relations'])
+      : exact(p.overview, ['title', 'summary']) || exact(p.overview, ['title', 'summary', 'primary_structures']))
     || !text(p.overview.title) || !text(p.overview.summary)
     || !Array.isArray(p.nodes) || (!scoped && !p.nodes.length) || p.nodes.length > 24
     || !Array.isArray(p.edges) || p.edges.length > 48) return null;
@@ -40,6 +44,15 @@ function readSemanticMapProjection(content, mapSubscriptionTier = null) {
     && /^e[1-9]\d*$/.test(e.edge_ref) && refs.includes(e.from_ref) && refs.includes(e.to_ref)
     && e.from_ref !== e.to_ref && RELATION_KINDS.includes(e.relation_kind) && text(e.label) && text(e.explanation))
     || !unique(p.edges.map(e => e.edge_ref))) return null;
+  if (hasStructureRelations) {
+    const relations = p.overview.structure_relations;
+    const structureCount = p.overview.primary_structures.length;
+    const knownIndex = index => Number.isInteger(index) && index >= 0 && index < structureCount;
+    if (!Array.isArray(relations) || !relations.length || !relations.every(r =>
+      exact(r, ['kind', 'first_index', 'second_index', 'description'])
+      && ['COEXISTENCE', 'PRIORITY'].includes(r.kind) && text(r.description)
+      && knownIndex(r.first_index) && knownIndex(r.second_index) && r.first_index !== r.second_index)) return null;
+  }
   if (mapSubscriptionTier === 'free') {
     const figures = p.overview.primary_structures.filter(structure => structure.node_refs.length);
     if (figures.length > 1) return null;

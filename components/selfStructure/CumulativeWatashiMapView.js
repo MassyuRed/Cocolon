@@ -72,7 +72,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     mapLoad.current = controller;
     const active = () => currentKey.current === key && request.current === seq;
     const readMap = (path, renderer = 'semantic.v3') => apiGet(path, {
-      expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': renderer, 'Cache-Control': 'no-store' },
+      expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': renderer, 'Cache-Control': 'no-store',
+        ...(renderer === 'semantic.v3' ? { 'X-Watashi-Map-Structure-Relations': 'v1' } : {}) },
       signal: controller?.signal, timeoutMs: 15000,
     });
     const observeAccess = value => {

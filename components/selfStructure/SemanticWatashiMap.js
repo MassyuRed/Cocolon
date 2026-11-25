@@ -11,6 +11,31 @@ const scopeLabels = {
   in_this_record: 'この場面から見えること',
 };
 
+function StructureRelations({ structures, relations, styles }) {
+  if (!relations?.length) return null;
+  return <View testID="semantic-structure-relations" style={styles.structure}>
+    <Text accessibilityRole="header" style={styles.sectionTitle}>選び方のつながり</Text>
+    {relations.map(({ kind, first_index, second_index, description }, index) => {
+      const first = structures[first_index].title;
+      const second = structures[second_index].title;
+      const priority = kind === 'PRIORITY';
+      const label = priority ? '優先' : '両立';
+      return <View key={`${kind}:${first_index}:${second_index}:${index}`} style={styles.structureRelation}>
+        <Text style={styles.body}>{description}</Text>
+        <View style={styles.structureDiagram} accessible accessibilityLabel={priority
+          ? `${first}を${second}より優先した関係` : `${first}と${second}が両立した関係`}>
+          <View style={styles.structureNode}>
+            {priority ? <Text style={styles.eyebrow}>優先したこと</Text> : null}
+            <Text style={styles.structureNodeTitle}>{first}</Text>
+          </View>
+          <View style={styles.structureLink}><Text style={styles.actionLabel}>{label}</Text></View>
+          <View style={styles.structureNode}><Text style={styles.structureNodeTitle}>{second}</Text></View>
+        </View>
+      </View>;
+    })}
+  </View>;
+}
+
 function SemanticMapDiagram({ projection, nodeRefs, colors, styles, choose, compact = false }) {
   const [width, setWidth] = useState(340);
   const layout = useMemo(() => buildSemanticMapLayout({
@@ -138,6 +163,7 @@ export default function SemanticWatashiMap({ contentJson, mapSubscriptionTier = 
           styles={styles} colors={colors} compact={compact} choose={compact ? onCorrectMap : choose} /> : null}
       </View>;
     })}
+    <StructureRelations structures={structures} relations={projection.overview.structure_relations} styles={styles} />
     {compact && onCorrectMap ? <TouchableOpacity testID="semantic-overview-correction" accessibilityRole="button"
       style={styles.secondaryAction} onPress={() => onCorrectMap('overview', 'overview')}>
       <Text style={styles.actionLabel}>読み取りを訂正する</Text>
@@ -239,6 +265,14 @@ function makeStyles(colors, dark) {
     linear: { gap: 8 }, linearItem: { minHeight: 44, paddingVertical: 12, borderBottomWidth: 1, borderColor: border, gap: 5 },
     sectionTitle: { color: ink, fontSize: 17, lineHeight: 27, fontWeight: '600' },
     structure: { gap: 7, paddingVertical: 12, borderTopWidth: 1, borderColor: border },
+    structureRelation: { gap: 8, paddingVertical: 6 },
+    structureDiagram: { maxWidth: 440, width: '100%', alignSelf: 'center', padding: 12,
+      backgroundColor: tonal, borderRadius: 20 },
+    structureNode: { alignItems: 'center', padding: 10, backgroundColor: paper,
+      borderRadius: 12, borderWidth: 1, borderColor: border },
+    structureNodeTitle: { color: ink, fontSize: 15, lineHeight: 23, fontWeight: '600', textAlign: 'center' },
+    structureLink: { minHeight: 34, marginLeft: '50%', borderLeftWidth: 1, borderColor: accent,
+      paddingLeft: 9, justifyContent: 'center' },
     structureButton: { minHeight: 44, alignSelf: 'flex-start', justifyContent: 'center' },
     body: { color: ink, fontSize: 16, lineHeight: 28 }, summary: { color: ink, fontSize: 17, lineHeight: 29, fontWeight: '500' },
     context: { color: muted, fontSize: 13, lineHeight: 23 },

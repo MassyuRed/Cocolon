@@ -156,6 +156,39 @@ test('scoped current and monthly reads keep identity when no primary structure i
   }
 });
 
+test('only Premium scope can open a grounded structure relationship in current and monthly maps', async () => {
+  const map = planMap('premium');
+  const first = map.overview.primary_structures[0].title;
+  const second = '力を貸したいこと';
+  const description = '資料の確認を引き受け、先に約束した提出を優先しました。';
+  map.overview.primary_structures.push({ title: second, description: '資料の確認で力を貸しました。',
+    scope: 'in_this_record', node_refs: ['n3'] });
+  const relation = { kind: 'PRIORITY', first_index: 0, second_index: 1, description };
+  map.overview.structure_relations = [relation];
+  const current = { ...latest(map), ...scopedPlan('premium') };
+  for (const tier of ['free', 'plus']) {
+    assert.throws(() => contract.checkedCurrentResult({ ...current, ...scopedPlan(tier) }));
+  }
+  assert.throws(() => contract.checkedCurrentResult({ ...current, meta: { ...map,
+    overview: { ...map.overview, structure_relations: [{ ...relation, second_index: 2 }] } } }));
+  const month = '2026-10-01';
+  const stored = row(month, map);
+  const h = harness(async (url, options) => {
+    assert.equal(options.headers['X-Watashi-Map-Structure-Relations'], 'v1');
+    return url.includes('/reports/') ? { item: stored, ...scopedPlan('premium') } : current;
+  });
+  h.plan.tier = 'premium';
+  const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Screen, { reportId: stored.id, month })); });
+  const relations = view.root.findByProps({ testID: 'semantic-structure-relations' });
+  assert(relations.findAllByType('Text').some(node => node.props.children === description));
+  assert(relations.findByProps({ accessibilityLabel: `${first}を${second}より優先した関係` }));
+  await act(async () => button(view, '現在のマップと見比べる').props.onPress());
+  assert.equal(view.root.findAllByProps({ testID: 'semantic-structure-relations' }).length, 2);
+  await act(async () => view.unmount());
+});
+
 test('the same report id is reread when the server observes a downgrade during a pending refresh', async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });
   const premium = planMap('premium');
