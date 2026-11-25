@@ -10028,3 +10028,14 @@ v9では、筆者の文章がある記録について、選択感情と選択強
 現時点の作業起点は実9B比較済みの[v4 `13deabb`](https://github.com/MassyuRed/mashos-api/commit/13deabbed5ed3f6556511b7bf153ae1e9a44edee)。同じ架空14記録・20段階で同版本文を再読した数はv4が16/20、v5が15/20、v8が12/20。対照7組の全文適合は各0組。v7の実測は回答後3件、v9は模擬検証の結果として記録する。後続版の差分と失敗結果は既存の資料とGitHubで参照できるよう保つ。
 
 以降の改修は、同じ入力と条件で確認できる最良版から始め、必要な差分を個別に採否判断する。入力直後・問いの前・回答後・初回と後続のスキップまで、本人が書いた意味、Emlisの返事、保存と同じ版の再読を実応答で比較する。改善が確認できた版を次の起点にする。 [議事録§11.95](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-v4-baseline-20261125) · [v4作業ブランチ](https://github.com/MassyuRed/mashos-api/tree/agent/emlis-observation-v4-baseline-20261125)
+
+
+<a id="cmee-emlis-v10-specific-reception-20261125"></a>
+
+### 9.288 EmlisAI v4と同じ本人資料で生成指示を変えた比較（11/25 JST）
+
+v4の当回・有料履歴・本人回答・問いと回答の対応、表示する原文、生成時のJSON制約を使い、本人の記録の違いに応じる一文を9Bに求めた。従来の保存応答は保存時の指示版で検証する。固定20段階の生成指示以外の要求は同じ。追加の架空対照を含む36件は全件HTTP 200・終了理由stop。隔離DBでは同じ20段階で18/20、拡張した47段階で45/47を同版・同本文で再読した。 [検証に使ったAPIのソース](https://github.com/MassyuRed/mashos-api/commit/0013eac84e5e47f93adf774fb01fc616da0de110) · [実応答](../../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/emlis-paired-observation-v10-actual.jsonl) · [議事録§11.96](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-emlis-v10-specific-reception-20261125)
+
+第2問以降を見送る場合の照合は、実際に回答した発行済みの問いの範囲に合わせた。架空のPremiumで第2問を見送った後に第1問の回答を使った本文を保存し、同じ版を再読。第3問を見送った場合は、それ以前の回答と対応する問いの保持を隔離DBの回帰で確認した。Piece・わたしマップ・DeepInsightの共有材料は、実際の本人回答と対応する問いを参照する。
+
+同じ7組の両側で全文の条件を満たしたと読めたのは、Freeの回答とスキップの1組。Plus・Premiumの回答後は引用符で受領できず、v4で届いていたPremiumの回答後が退行した。例文をなぞる表現、好みの強さの差の欠落、書かれていない不安の継続も残った。次の改修の起点は v4 `13deabb`。今回の比較で新たに読めた実文と、悪化した分岐を同じ条件で再現できるよう記録する。
