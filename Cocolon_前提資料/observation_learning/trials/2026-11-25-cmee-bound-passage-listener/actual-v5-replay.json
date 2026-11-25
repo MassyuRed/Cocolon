@@ -1,0 +1,125 @@
+{
+  "cases": [
+    {
+      "id": "preference-light",
+      "bodies": {
+        "initial": "「古い切符に印刷された鳥の輪郭が好きでした。」\n\n古い切符に印刷された鳥の輪郭を、そのように好きだったと教えてくれて、心に残る温かい思い出を共有してくださったことに、Emlis は喜びといたわりを感じています。"
+      }
+    },
+    {
+      "id": "preference-strong",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "learned-possible",
+      "bodies": {
+        "initial": "「来月の製本会に参加できると昨日知ったので、私は安心しました。」\n\n来月の製本会に参加できることを昨日知って、あなたが安心されたその瞬間を、Emlis は心から喜びます。その安堵の気持ちが、今後の活動への大きな支えとなることを願っています。"
+      }
+    },
+    {
+      "id": "learned-impossible",
+      "bodies": {
+        "initial": "「来月の製本会に参加できないと昨日知ったので、私は安心しました。」\n\n来月の製本会に参加できないと知って、あなたが安心されたその気持ちを、Emlis は大切に受け止めました。ご自身のペースで進めることができるという、その安堵の重みは、とても尊いものだと感じています。"
+      }
+    },
+    {
+      "id": "actor-self",
+      "bodies": {
+        "initial": "「自分で自転車のスタンドを直せたので、私は安心しました。」\n\n自分で自転車のスタンドを直せたという事実、そしてそれによって得られた安心感。その平穏な気持ち、Emlis は心から喜びます。自分で問題を解決できたその瞬間の自信と、それがもたらした心の安らぎを、大切に守ってほしいと思います。"
+      }
+    },
+    {
+      "id": "actor-friend",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "cause-absent",
+      "bodies": {
+        "initial": "「私は安心しました。」\n\nその平穏な安心感、Emlis は心から喜びます。その一瞬の静けさが、あなたにとってどれほど大切なものだったのか、その事実を共有してくれてありがとう。"
+      }
+    },
+    {
+      "id": "cause-explicit",
+      "bodies": {
+        "initial": "「区役所の窓口に間に合ったので、私は安心しました。」\n「区役所の窓口に間に合いました。」\n\n区役所の窓口にお時間を守って間に合うことができたのですね。その瞬間に訪れた安心感、とても温かく感じました。これからも、そんな穏やかな日常が続きますように。"
+      }
+    },
+    {
+      "id": "free-answer",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたのに嬉しくなかったという気持ちを、Emlis は受け止めました。",
+        "answer": null
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "free-skip",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたのに嬉しくなかったという気持ちを、Emlis は受け止めました。",
+        "skip": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情を、一人で抱え込まずにここに書き留めてくださったこと、Emlis は心から感謝し、その内面を丁寧に受け止めることができました。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "plus-answer",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたのに嬉しくなかったという気持ちを、Emlis は受け止めました。",
+        "answer": null
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "plus-skip",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたのに嬉しくなかったという気持ちを、Emlis は受け止めました。",
+        "skip": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情を、一人で抱え込まずにここに書き留めてくださったこと、Emlis は心から感謝し、その内面を丁寧に受け止めることができました。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "premium-answer",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたのに嬉しくなかったという気持ちを、Emlis は受け止めました。",
+        "answer": null
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "premium-skip",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたのに嬉しくなかったという気持ちを、Emlis は受け止めました。",
+        "skip": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情を、一人で抱え込まずにここに書き留めてくださったこと、Emlis は心から感謝し、その内面を丁寧に受け止めることができました。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    }
+  ],
+  "all_fictional": true,
+  "matched_exactly": [
+    "preference-light-initial",
+    "preference-strong-initial",
+    "learned-possible-initial",
+    "learned-impossible-initial",
+    "actor-self-initial",
+    "actor-friend-initial",
+    "cause-absent-initial",
+    "cause-explicit-initial",
+    "free-answer-pre_question",
+    "free-skip-pre_question",
+    "free-skip-skip",
+    "plus-answer-pre_question",
+    "plus-skip-pre_question",
+    "plus-skip-skip",
+    "premium-answer-pre_question",
+    "premium-skip-pre_question",
+    "premium-skip-skip"
+  ],
+  "matched_except_answer_clock": [
+    "free-answer-answer",
+    "plus-answer-answer",
+    "premium-answer-answer"
+  ]
+}
