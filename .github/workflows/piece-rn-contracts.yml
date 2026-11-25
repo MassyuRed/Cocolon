@@ -317,6 +317,7 @@ jobs:
           legacy_summaries = [line for line in lines if line.startswith('LEGACY_NATIVE_CHECKS=')]
           v9 = [line for line in lines if line.startswith('V9_NATIVE_CHECKS=')]
           v4 = [line for line in lines if line.startswith('V4_NATIVE_CHECKS=')]
+          v4_tiled = [line for line in lines if line.startswith('V4_TILED_REFERENCE=')]
           ar04 = [line for line in lines if line.startswith('AR04_BITMAP_CHECKS=')]
           old_v3 = [line for line in lines if line.startswith('V3_NATIVE_CHECKS=')]
           unexecuted_v3 = [line for line in lines if line.startswith('UNEXECUTED_V3_NATIVE_CHECKS=')]
@@ -326,6 +327,7 @@ jobs:
           if (int(sys.argv[2]) != 0 or summaries != [expected] or legacy_summaries != [legacy]
                   or v9 != ['V9_NATIVE_CHECKS=46 PASS=46 FAIL=0 SKIP=0 EXPECTED=46']
                   or v4 != ['V4_NATIVE_CHECKS=20 PASS=20 FAIL=0 SKIP=0 EXPECTED=20']
+                  or v4_tiled != ['V4_TILED_REFERENCE=PASS']
                   or ar04 != ['AR04_BITMAP_CHECKS=4 PASS=4 FAIL=0 SKIP=0']
                   or len(ar04_passed) != 4 or len(set(ar04_passed)) != 4
                   or old_v3 != []

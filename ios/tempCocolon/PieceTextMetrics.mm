@@ -717,6 +717,10 @@ static NSArray *PieceDirectV4PixelInk(NSLayoutManager *layout, NSRange glyphs, C
   if (!PieceScanPixels(pixels, withinDeadline, YES, &cells)) return nil;
   return PieceInkEdges(CGRectOffset(cells, extent.origin.x - phase.x, extent.origin.y - phase.y));
 }
+static BOOL PieceCanTileV4Reference(double width, double height);
+static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t width, size_t height,
+    CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
+    PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset);
 static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState, NSRange glyphs, CGRect textKitInk, double fontSize,
     CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
   const CGFloat scale = [layerState[@"scale"] doubleValue];
@@ -742,13 +746,15 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   const double cy1 = ceil(CGRectGetMaxY(clippedSourceClip) * scale - ty);
   const CGRect clippedReferenceExtent = CGRectMake((cx0 - tx) / scale, (cy0 + ty) / scale,
     (cx1 - cx0) / scale, (cy1 - cy0) / scale);
-  size_t nw, nh, nb, lw, lh, lb, cw, ch, cb;
+  const BOOL tiled = PieceCanTileV4Reference(x1 - x0, y1 - y0);
+  size_t nw = (size_t)(tiled ? x1 - x0 : 0), nh = (size_t)(tiled ? y1 - y0 : 0);
+  size_t nb = 0, lw, lh, lb, cw, ch, cb;
   if (!isfinite(cx0) || !isfinite(cy0) || !isfinite(cx1) || !isfinite(cy1) ||
       fabs(cx0) > 0x1p52 || fabs(cy0) > 0x1p52 || fabs(cx1) > 0x1p52 || fabs(cy1) > 0x1p52 ||
       !PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) || !PiecePixelRect(clippedReferenceBounds) ||
       !PiecePixelRect(clippedSourceClip) || !PiecePixelRect(clippedReferenceExtent) ||
       !CGRectContainsRect(logicalExtent, CGRectOffset(clippedReferenceExtent, phase.x, phase.y)) ||
-      !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb) ||
+      (!tiled && !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb)) ||
       !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb) ||
       !PieceRasterPlan(CGSizeMake(cx1 - cx0, cy1 - cy0), 1, &cw, &ch, &cb)) return NO;
   const size_t bitBytes = (lw * lh + 7) / 8;
@@ -757,12 +763,16 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   CGAffineTransform paintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - x0, (double)nh + y0 + ty);
   CGAffineTransform clippedPaintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - cx0, (double)ch + cy0 + ty);
   PieceOwnedPixels native, clipped;
-  if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget, &paintCTM) || !withinDeadline()) return NO;
-  UIGraphicsPushContext(native.context);
-  @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
-  @finally { UIGraphicsPopContext(); }
   CGRect nativeCells;
-  if (!PieceScanPixels(native, withinDeadline, YES, &nativeCells)) return NO;
+  CGPoint nativeImageOffset = CGPointZero;
+  if (!withinDeadline() || !(tiled ? PiecePaintTiledV4Reference(view, glyphs, nw, nh, paintCTM, budget, withinDeadline,
+      native, &nativeCells, &nativeImageOffset) : native.makeExact(nw, nh, scale, budget, &paintCTM)) || !withinDeadline()) return NO;
+  if (!tiled) {
+    UIGraphicsPushContext(native.context);
+    @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+    @finally { UIGraphicsPopContext(); }
+  }
+  if (!tiled && !PieceScanPixels(native, withinDeadline, YES, &nativeCells)) return NO;
   const double left = floor((CGRectGetMinX(nativeCells) + x0 - tx) / scale + phase.x) - phase.x;
   const double top = floor((CGRectGetMinY(nativeCells) + y0 + ty) / scale + phase.y) - phase.y;
   const double right = ceil((CGRectGetMaxX(nativeCells) + x0 - tx) / scale + phase.x) - phase.x;
@@ -775,10 +785,13 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   @try {
     if (!expandedImage) return NO;
     // This mapping is the declared reference extent, never a backing->bounds guess.
-    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
+    const CGSize referenceSize = tiled ? CGSizeMake(native.width / scale, native.height / scale) : nativeExtent.size;
+    const CGPoint referenceOrigin = tiled ? CGPointMake((x0 + nativeImageOffset.x - tx) / scale,
+      (y0 + nativeImageOffset.y + ty) / scale) : nativeExtent.origin;
+    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, referenceSize}, view.layer);
     CGRect filtered;
     if (!reference || !PieceCompositePixels(reference, logicalExtent, 1,
-        CGPointMake(phase.x + nativeExtent.origin.x, phase.y + nativeExtent.origin.y), phase,
+        CGPointMake(phase.x + referenceOrigin.x, phase.y + referenceOrigin.y), phase,
         budget, withinDeadline, &filtered)) return NO;
     *nativeInk = CGRectUnion(projected, filtered);
     reference.contents = nil; reference = nil;
@@ -1496,6 +1509,74 @@ RCT_EXPORT_METHOD(inspectSelectedLineV4:(nonnull NSNumber *)tag text:(NSString *
   }];
 }
 @end
+
+static constexpr size_t PieceV4ReferenceHalo = 4;
+
+static BOOL PieceV4ReferenceStripsFit(size_t width, size_t height) {
+  if (!width || width > 4096 || height <= 2 * PieceV4ReferenceHalo || height > 4096) return NO;
+  size_t w, h, n;
+  return PieceRasterPlan(CGSizeMake(width, (height + 1) / 2 + PieceV4ReferenceHalo), 1, &w, &h, &n);
+}
+
+static BOOL PieceCanTileV4Reference(double width, double height) {
+  if (width < 1 || height < 1 || width > 4096 || height > 4096 || width != floor(width) || height != floor(height)) return NO;
+  return width * height > 4 * 1024 * 1024 && PieceV4ReferenceStripsFit((size_t)width, (size_t)height);
+}
+
+static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t width, size_t height,
+    CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
+    PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset) {
+  const CGFloat scale = paintCTM.a;
+  if (!PieceV4ReferenceStripsFit(width, height) || !isfinite(scale) || scale < 1 || scale > 4) return NO;
+  const size_t middle = height / 2;
+  const size_t start[] = {0, middle - PieceV4ReferenceHalo};
+  const size_t end[] = {middle + PieceV4ReferenceHalo, height};
+  PieceOwnedPixels strips[2];
+  for (size_t i = 0; i < 2; i++) {
+    // Preserve the full reference's native q lattice and paint the same range
+    // in both strips. Only the integer device-space origin changes.
+    CGAffineTransform stripCTM = paintCTM;
+    stripCTM.ty -= (double)(height - end[i]);
+    if (!withinDeadline() || !strips[i].makeExact(width, end[i] - start[i], scale, budget, &stripCTM) || !withinDeadline()) return NO;
+    UIGraphicsPushContext(strips[i].context);
+    @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+    @finally { UIGraphicsPopContext(); }
+  }
+  // Refuse paint changes caused by clipping at a strip boundary or by layout
+  // changes between the draws. Compare color as well as occupied alpha.
+  for (size_t y = start[1]; y < end[0]; y++) {
+    if (!withinDeadline() || memcmp(strips[0].data + y * strips[0].stride,
+        strips[1].data + (y - start[1]) * strips[1].stride, strips[0].stride) != 0) return NO;
+  }
+  const auto rowAt = [&](size_t y) -> const UInt8 * {
+    const size_t strip = y < middle ? 0 : 1;
+    return strips[strip].data + (y - start[strip]) * strips[strip].stride;
+  };
+  size_t left = width, top = height, right = 0, bottom = 0;
+  for (size_t y = 0; y < height; y++) {
+    if (!withinDeadline()) return NO;
+    const UInt8 *row = rowAt(y);
+    for (size_t x = 0; x < width; x++) {
+      if (!row[x * 4 + 3]) continue;
+      if (!x || !y || x + 1 == width || y + 1 == height) return NO;
+      left = MIN(left, x); top = MIN(top, y); right = MAX(right, x + 1); bottom = MAX(bottom, y + 1);
+    }
+  }
+  if (right <= left || bottom <= top) return NO;
+  // The full scan proved the omitted cells transparent. Retain the linear
+  // filter's surroundings and place this patch at its original pixel origin.
+  const size_t pad = (size_t)ceil(scale) + 2;
+  const size_t cropLeft = left > pad ? left - pad : 0, cropTop = top > pad ? top - pad : 0;
+  const size_t cropRight = MIN(width, right + pad), cropBottom = MIN(height, bottom + pad);
+  if (!withinDeadline() || !reference.makeExact(cropRight - cropLeft, cropBottom - cropTop, scale, budget)) return NO;
+  for (size_t y = cropTop; y < cropBottom; y++) {
+    if (!withinDeadline()) return NO;
+    memcpy(reference.data + (y - cropTop) * reference.stride, rowAt(y) + cropLeft * 4, reference.stride);
+  }
+  *nativeCells = CGRectMake(left, top, right - left, bottom - top);
+  *referenceOffset = CGPointMake(cropLeft, cropTop);
+  return withinDeadline();
+}
 
 // §99 bitmap preview. This owns its pixels; natural UIView backing is never
 // read. The old inspectors and their comparison contracts above stay intact.

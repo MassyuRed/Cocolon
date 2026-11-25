@@ -256,8 +256,10 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   </View>;
 
   const visible = state.key === key && !planLoading;
-  const refreshing = pendingRefresh(state.refreshStatus);
-  const refreshFailed = state.refreshStatus === 'failed';
+  const showCurrentStatus = !reportId || compare;
+  const displayedCurrent = reportId ? state.now : state.row;
+  const refreshing = showCurrentStatus && pendingRefresh(state.refreshStatus);
+  const refreshFailed = showCurrentStatus && state.refreshStatus === 'failed';
   const retryUpdate = !reportId && refreshFailed;
   const canRetry = refreshFailed || state.refreshError || state.error || state.comparisonFailed;
   const Container = embedded ? View : SafeAreaView;
@@ -273,14 +275,19 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       {visible && state.row ? <>
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}
-        {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
+        {reportId && !compare ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
+      </> : null}
+      {visible && state.row && reportId ? <>
+        <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
+          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} />
+        {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">現在</Text>{renderMap(state.now)}</> : null}
       </> : null}
       {!visible || (state.loading && (!state.semanticRestorePending || compare)) ? <View style={{ gap: 12 }}>
         <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="保存したマップを取得しています" />
         <Text style={[styles.meta, { color: ink }]}>保存したマップを取得しています。</Text>
       </View> : null}
       {visible && refreshing ? <Text style={[styles.meta, { color: ink }]} accessibilityLiveRegion="polite">
-        わたしマップを更新中です。{state.row ? '保存したマップを先に表示しています。' : '更新が終わると表示されます。'}
+        {reportId ? '現在の' : ''}わたしマップを更新中です。{displayedCurrent ? '保存したマップを先に表示しています。' : '更新が終わると表示されます。'}
       </Text> : null}
       {visible && (refreshFailed || state.refreshError) ? <Text style={styles.error} accessibilityRole="alert">
         {retryUpdate ? '更新結果を取得できませんでした。更新を再試行できます。'
@@ -292,16 +299,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         {correctionNotice.text}
       </Text> : null}
       {visible && state.empty && !refreshing ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
-      {visible && state.row && reportId ? <>
-        <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
-          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} />
-        {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">現在</Text>{renderMap(state.now)}</> : null}
-        {compare && state.comparisonUnavailable && !refreshing ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
-          {state.comparisonFailed
-            ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
-            : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
-        </Text> : null}
-      </> : null}
+      {visible && compare && state.comparisonUnavailable && !refreshing ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
+        {state.comparisonFailed
+          ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
+          : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
+      </Text> : null}
       {visible && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
       {visible && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text> : null}
       {visible && about && onOpenGuide ? <CocolonButton variant="secondary" title="分析の使い方を見る" onPress={onOpenGuide} /> : null}

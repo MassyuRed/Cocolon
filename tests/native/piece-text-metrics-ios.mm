@@ -1260,6 +1260,112 @@ static PieceOutputV4FixtureTextView *outputV4View(NSString *text, CGFloat font, 
   view.fixtureNativeClipTrap = trap;
   return view;
 }
+
+@interface PieceTiledReferenceFixtureTextView : PieceOutputV4FixtureTextView
+@property(nonatomic) NSUInteger paintCount;
+@property(nonatomic) CGPoint secondPaintFault;
+@property(nonatomic) BOOL injectSecondPaintFault;
+@end
+@implementation PieceTiledReferenceFixtureTextView
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs {
+  [super cocolonPiecePaintGlyphRange:glyphs];
+  if (++_paintCount == 2 && _injectSecondPaintFault) {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+    CGContextFillRect(context, CGRectMake(_secondPaintFault.x, _secondPaintFault.y, 0.5, 0.5));
+  }
+}
+@end
+
+static BOOL runTiledV4ReferenceChecks(void) {
+  const size_t width = 3000, height = 540;
+  const CGFloat scale = 3;
+  const size_t wWide = 3481, hTall = 1285;
+  size_t ignoredWidth, ignoredHeight, ignoredLength;
+  if (PieceRasterPlan(CGSizeMake(wWide, hTall), 1, &ignoredWidth, &ignoredHeight, &ignoredLength) ||
+      !PieceCanTileV4Reference(wWide, hTall) || PieceCanTileV4Reference(4097, 1) ||
+      PieceCanTileV4Reference(4096, 4096) || PieceCanTileV4Reference(width, height)) return NO;
+
+  NSString *text = @"🇯🇵。違いを大切にして、";
+  RCTTextView *source = makeView(text, 80);
+  PieceTiledReferenceFixtureTextView *view = [[PieceTiledReferenceFixtureTextView alloc] initWithFrame:CGRectMake(0, 0, 1080, 110)];
+  view.fixtureStorage = source.fixtureStorage;
+  view.fixtureContentFrame = view.bounds;
+  view.layer.contentsScale = scale;
+  NSLayoutManager *layout = view.fixtureStorage.layoutManagers.firstObject;
+  NSTextContainer *container = layout.textContainers.firstObject;
+  container.size = view.bounds.size;
+  NSRange glyphs = [layout glyphRangeForTextContainer:container];
+  CGRect textKitInk = [layout boundingRectForGlyphRange:glyphs inTextContainer:container];
+  if (!PiecePixelRect(textKitInk)) return NO;
+
+  CGAffineTransform ctm = CGAffineTransformMake(scale, 0, 0, -scale,
+    80.25 - CGRectGetMinX(textKitInk) * scale, height / 2 + CGRectGetMidY(textKitInk) * scale + .375);
+  auto budget = std::make_shared<PieceRasterBudget>();
+  BOOL (^current)(void) = ^BOOL{ return YES; };
+  PieceOwnedPixels full, compact;
+  if (!full.makeExact(width, height, scale, budget, &ctm)) return NO;
+  UIGraphicsPushContext(full.context);
+  @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+  @finally { UIGraphicsPopContext(); }
+  CGRect fullCells, tiledCells;
+  CGPoint offset;
+  if (!PieceScanPixels(full, current, YES, &fullCells) || CGRectGetMinY(fullCells) >= height / 2 || CGRectGetMaxY(fullCells) <= height / 2 ||
+      !PiecePaintTiledV4Reference(view, glyphs, width, height, ctm, budget, current, compact, &tiledCells, &offset) ||
+      !CGRectEqualToRect(fullCells, tiledCells) || compact.length >= full.length) return NO;
+  for (size_t y = 0; y < compact.height; y++) {
+    if (memcmp(compact.data + y * compact.stride, full.data + ((size_t)offset.y + y) * full.stride + (size_t)offset.x * 4, compact.stride)) return NO;
+  }
+
+  CGSize fullSize = CGSizeMake(width / scale, height / scale);
+  CGSize compactSize = CGSizeMake(compact.width / scale, compact.height / scale);
+  CGImageRef fullImage = PiecePixelsImage(full, true), compactImage = PiecePixelsImage(compact, true);
+  CALayer *fullLayer = fullImage ? PieceReferenceLayer(fullImage, (CGRect){CGPointZero, fullSize}, view.layer) : nil;
+  CALayer *compactLayer = compactImage ? PieceReferenceLayer(compactImage, (CGRect){CGPointZero, compactSize}, view.layer) : nil;
+  if (fullImage) CGImageRelease(fullImage);
+  if (compactImage) CGImageRelease(compactImage);
+  BOOL equal = fullLayer && compactLayer;
+  for (CGPoint phase : {CGPointZero, CGPointMake(.375, -.625)}) {
+    PieceOwnedPixels fullOutput, compactOutput;
+    const CGSize outputSize = CGSizeMake(fullSize.width + 8, fullSize.height + 8);
+    if (!equal || !fullOutput.make(outputSize, 1, budget) || !compactOutput.make(outputSize, 1, budget)) return NO;
+    CGContextTranslateCTM(fullOutput.context, 4 + phase.x, 4 + phase.y);
+    CGContextTranslateCTM(compactOutput.context, 4 + phase.x + offset.x / scale, 4 + phase.y + offset.y / scale);
+    [fullLayer renderInContext:fullOutput.context];
+    [compactLayer renderInContext:compactOutput.context];
+    CGRect filtered;
+    equal = PieceScanPixels(fullOutput, current, YES, &filtered) &&
+      !memcmp(fullOutput.data, compactOutput.data, fullOutput.length);
+    if (!equal) return NO;
+  }
+  fullLayer.contents = nil; compactLayer.contents = nil;
+  full.reset(); compact.reset();
+
+  CGAffineTransform wideCTM = ctm;
+  wideCTM.ty += hTall / 2 - height / 2;
+  PieceOwnedPixels wide;
+  CGRect wideCells, expectedWideCells = CGRectOffset(fullCells, 0, hTall - height - (hTall / 2 - height / 2));
+  if (!PiecePaintTiledV4Reference(view, glyphs, wWide, hTall, wideCTM, budget, current, wide, &wideCells, &offset) ||
+      !CGRectEqualToRect(wideCells, expectedWideCells)) return NO;
+  wide.reset();
+
+  // Paint a different pixel in the second strip's overlap, away from any
+  // glyph. The disagreement must invalidate the whole reference.
+  view.paintCount = 0;
+  view.injectSecondPaintFault = YES;
+  view.secondPaintFault = CGPointApplyAffineTransform(CGPointMake(4, height / 2), CGAffineTransformInvert(ctm));
+  PieceOwnedPixels refused;
+  auto faultBudget = std::make_shared<PieceRasterBudget>();
+  if (PiecePaintTiledV4Reference(view, glyphs, width, height, ctm, faultBudget, current, refused, &tiledCells, &offset) ||
+      view.paintCount != 2 || refused.context) return NO;
+  view.injectSecondPaintFault = NO;
+  const NSUInteger faultCount = outputV4FaultReached;
+  v3FixtureBufferFault = 2;
+  BOOL edgeRefused = !PiecePaintTiledV4Reference(view, glyphs, width, height, ctm, faultBudget, current, refused, &tiledCells, &offset);
+  v3FixtureBufferFault = 0;
+  return edgeRefused && outputV4FaultReached - faultCount == 2 && !refused.context && faultBudget->live.load() == 0;
+}
+
 // Test-only per-call evidence; no result or assertion is replaced.
 #if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
 @interface PieceTextMetrics (CocolonPieceStandaloneDiagnostics)
@@ -2139,6 +2245,9 @@ static int runNativeMetricsChecks(void) {
     if ([profile isEqual:@"output-grid-v4"]) {
       printf("UNEXECUTED_V3_NATIVE_CHECKS=20 PRIOR_RUN=39565918631 PRIOR_FAIL=10\n");
       candidatePassed=runOutputV4Checks(module,bridge);
+      BOOL tiledPassed = runTiledV4ReferenceChecks();
+      printf("V4_TILED_REFERENCE=%s\n", tiledPassed ? "PASS" : "FAIL");
+      candidatePassed = candidatePassed && tiledPassed;
     } else if (!profile || [profile isEqual:@"legacy-v3"]) {
       candidatePassed=runV3Checks(module,bridge);
     } else printf("FAIL unsupported_native_candidate_profile\n");

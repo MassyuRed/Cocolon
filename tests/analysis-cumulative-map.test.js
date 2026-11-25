@@ -104,6 +104,36 @@ test('month comparison fetches current separately and preserves the captured pro
   await act(async()=>view.unmount());
 });
 
+test('month comparison shows both saved readings before the current update status', async t => {
+  const past = copy(semantic);
+  past.overview.primary_structures = [{ title: '当時の選び方', description: 'その頃は返事を急いでいました。',
+    scope: 'in_this_record', node_refs: [past.nodes[0].node_ref] }];
+  const current = copy(past);
+  current.projection_of = 'artifact:00000000000000000000000000000066@1';
+  current.overview.primary_structures[0].title = '今の選び方';
+  current.overview.primary_structures[0].description = '今は時間をおいてから返事をしています。';
+  const stored = row('2026-10-01', past);
+  for (const hasCurrent of [true, false]) {
+    const result = hasCurrent ? latest(current) : { status: 'ok', source_profile: 'cumulative.v1', has_visible_content: false };
+    const h = harness(async url => url.includes('/reports/') ? { item: stored } : { ...result, refresh_status: 'queued' });
+    const View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(View, { reportId: stored.id, month: stored.snapshot_month })); });
+    t.after(async () => act(async () => view.unmount()));
+    await act(async () => button(view, '現在のマップと見比べる').props.onPress());
+    const nodes = view.root.findAllByType('Text');
+    const messages = nodes.map(node => [node.props.children].flat().join(''));
+    const [pastText, currentText] = [past, current].map(map => map.overview.primary_structures[0].description);
+    const updateStatus = messages.findIndex(message => message.includes('更新中です。'));
+    assert(messages.indexOf(pastText) >= 0 && messages.indexOf(pastText) < updateStatus);
+    assert.equal(messages.includes(currentText), hasCurrent);
+    if (hasCurrent) assert(messages.indexOf(currentText) < updateStatus);
+    assert.equal(messages[updateStatus], `現在のわたしマップを更新中です。${hasCurrent
+      ? '保存したマップを先に表示しています。' : '更新が終わると表示されます。'}`);
+    assert.equal(messages.includes('2026年10月に保存した当時のマップ'), false);
+  }
+});
+
 test('a temporary current comparison failure keeps the captured month and retries only on request',async()=>{
   const unavailable=[Object.assign(new Error('model unavailable'),{status:503}),
     Object.assign(new Error('model deadline'),{status:504}),
