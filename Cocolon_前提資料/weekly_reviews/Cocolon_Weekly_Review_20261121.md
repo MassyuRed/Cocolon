@@ -1479,3 +1479,11 @@ EmlisAIは、履歴や訂正を併用しないPlus・Premiumの単一回答で�
 過去の好みを思考欄の一文に書いた4入力を、本番コード `a9f1da6` と三つの候補で実9B比較した。前半二案は本人が記していない温かみ、感触、好みの強さを加えた。最後の案は原文を観測に表示し、Emlisの返事を別に生成することで、4件の過去の時点と好みの強さを保って隔離DBへ保存・再読した。同じ強さの別題材で返事が同じ形になったため、初回応答の通常採用は0件。対象外の14要求、既存の実9Bによる7経路は最後の案でも一致した。
 
 わたしマップは、図がない場合にも対応アプリで同じ保存IDを開けるよう修正した。Premiumでは、二つの独立した判断軸の両立や優先が同じ本人の選択に明記された場合に、同じ保存版を根拠として構造間の本文と図を返す。隔離DBでプラン別の権限と保存IDを照合した。Free・Plusの図は、採用済みの本文と同じ原入力から条件と選択を組み立てる。最終段階を実9Bで7回比較したうち、ノートの最後の本文は選択の肯否を保持したが、結論が根拠の届く範囲に収まらず、主要構造の採用は0件。前回の本番EmlisAIを含む統合API候補の関連74件が通過した。プラン別の本番有効化と対応アプリの配布は未実施。 [実応答・再読・対応版](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md)
+
+<a id="cmee-retention-and-plan-map-20261126"></a>
+
+### 11.106 EmlisAIの好みの強さとわたしマップの実9B確認（11/26 JST）
+
+**EmlisAI。** しおりを「好き」と書いた架空のFree初回で、稼働9Bが前回と同じ「とても好きだった」を返した。受領時に同じ対象・過去の好みと確認できた場合だけ、本人の原文の強さにそろえる。隔離DBで18段階すべての同版再読を確認し、変わった本文はこの1件。Analysis CIで出た220秒の試験の丸め誤差は現行本番ベースにも再現し、CIが省略した検査は配備対象で別途通過を確認した。本番API `98a6155` は08:05:30 JSTにLiveとなり、公開ヘルスはHTTP 200。 [Render配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3min6q1p3s73bltj10) · [修正版](https://github.com/MassyuRed/mashos-api/commit/98a6155052f7fac3564a4b2f94dcf299ba8bae10) · [実応答と再読](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#cmee-retention-and-plan-map-20261126)
+
+**わたしマップ。** 実9Bの三段階を通したノート題材で、原文にある条件と二つの実際の行動を主要構造にできた。Freeの短い結論と小図、Plusの二場面の説明を、同じ現在版・月次版IDで読み戻した。Premium用の五記録では、9Bが二つの判断基準を「唯一の基準」とまとめ、主要構造と横断説明を採用できなかった。本番有効化は未実施。 [API検証版](https://github.com/MassyuRed/mashos-api/commit/c3fa31419371f9dbc5b22ca2e7bb89de5e1cb1e6) · [マップのみのiOS候補](https://github.com/MassyuRed/Cocolon/commit/dd98073e06ae0a77bab8114a51a117b793dd4ecc)

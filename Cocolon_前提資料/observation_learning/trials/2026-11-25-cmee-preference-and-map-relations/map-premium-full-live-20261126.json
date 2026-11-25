@@ -1,0 +1,29 @@
+{
+  "phases": [
+    {
+      "completion_tokens": 300,
+      "finish_reason": "stop",
+      "messages_sha256": "c9d9483f512670317712e6e80456479f3effe070300f50a3b4a26a8bb1a0af25",
+      "phase": "PLAN",
+      "raw": "{ \"schema_version\": \"cocolon.analysis.semantic_map.node_local.model.v4.plan\", \"source_choices_sha256\": \"2407fc12b229fdff785a4125e8867228cfcdf15234120bc0e49bde1e9a60fa42\", \"nodes\": [ { \"node_id\": \"n1\", \"units\": [ { \"evidence\": [ { \"quote\": \"提出期限に余裕があったので\", \"field\": 1 } ] } ] }, { \"node_id\": \"n2\", \"units\": [ { \"evidence\": [ { \"quote\": \"提出期限に間に合わないので\", \"field\": 2 } ] } ] }, { \"node_id\": \"n3\", \"units\": [ { \"evidence\": [ { \"quote\": \"手伝いの時間が取れたので\", \"field\": 3 } ] } ] }, { \"node_id\": \"n4\", \"units\": [ { \"evidence\": [ { \"quote\": \"手伝いの時間が取れなかったので\", \"field\": 4 } ] } ] }, { \"node_id\": \"n5\", \"units\": [ { \"evidence\": [ { \"quote\": \"手伝いの時間より提出期限を優先して\", \"field\": 5 } ] } ] } ] }",
+      "raw_sha256": "8080c5f6ea217db104eeadc95fc5a90ef83ec4ddfbe0282a964a08ecb155131b"
+    },
+    {
+      "completion_tokens": 601,
+      "finish_reason": "stop",
+      "messages_sha256": "7fabd3d5aec9099f69e5b4104eaa9d39c99902406d0b6b928c70c6d32d413a94",
+      "phase": "NODES",
+      "raw": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.nodes\",\"plan_sha256\":\"5aa836f4b79cc7a1f063cb787424bab2df2972b7b4dc142a7a38d1a2bdd232ba\",\"nodes\":{\"n1\":{\"units\":{\"u1\":{\"evidence_ref\":\"n1.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/提出期限に余裕が\":1},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"提出期限に余裕があったので、私は資料の確認を引き受けた。\",\"meaning\":\"余裕という条件が、資料確認という行動を引き受けるという選択の根拠となっています。\"},\"n2\":{\"units\":{\"u1\":{\"evidence_ref\":\"n2.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/提出期限に間に合\":2},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"提出期限に間に合わないので、私は取引先への連絡を断った。\",\"meaning\":\"期限の不足という条件が、取引先への連絡を断つという選択の根拠となっています。\"},\"n3\":{\"units\":{\"u1\":{\"evidence_ref\":\"n3.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/手伝いの時間が取\":3},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"手伝いの時間が取れたので、私は見積もりを引き受けた。\",\"meaning\":\"時間的余裕という条件が、見積もりを引き受けるという選択の根拠となっています。\"},\"n4\":{\"units\":{\"u1\":{\"evidence_ref\":\"n4.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/手伝いの時間が取\":4},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"手伝いの時間が取れなかったので、私は会議への同席を断った。\",\"meaning\":\"時間の不足という条件が、会議への同席を断つという選択の根拠となっています。\"},\"n5\":{\"units\":{\"u1\":{\"evidence_ref\":\"n5.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/私は、手伝いの時\":5},\"unknowns\":[]}},\"node_kind\":\"SELF_POSITION\",\"perspective\":\"SELF\",\"title\":\"私は、手伝いの時間より提出期限を優先して、取引先への連絡を断る方法を選び、実際に手伝いの時間を確保できませんでした。\",\"meaning\":\"優先順位（提出期限＞手伝い）に基づき、連絡断りを選択し、結果として手伝いの時間が確保されなかったという因果関係と結果が記述されています。\"}}}",
+      "raw_sha256": "b9072098b47d4537e2d97609801ae7ec0b4a0766a8cbe77e8de4df421bb7dead"
+    },
+    {
+      "completion_tokens": 431,
+      "finish_reason": "stop",
+      "messages_sha256": "b4f83441d44a4d125b1969ea4c667cb0723317f593ad5696b9c61f4d68f529f3",
+      "phase": "RELATIONS",
+      "raw": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"5b6923b13223d5b2f6af15df5ba812079bcde042cfb8c27a6a7b9c81f559d137\",\"qualification_review\":{},\"edges\":[],\"overview\":{\"node_refs\":[\"n1\",\"n2\",\"n3\",\"n4\",\"n5\"],\"title_proposal\":\"期限の有無と時間の有無が、引き受けるか断るかの選択基準となり、n5 で優先順位の明確化\",\"title\":\"5件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\",\"n3.u1.e1\",\"n4.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"条件（期限・時間）の有無\",\"criterion\":\"提出期限に余裕があるか、手伝いの時間が取れるかが、行動の可否を決定する唯一の基準です。\",\"case_reading\":\"n1 では期限に余裕があったため資料確認を引き受け、n2 では期限が間に合わなかったため連絡を断り、n3 では時間が取れたため見積もりを引き受け、n4 では時間が取れなかったため会議同席を断りました。\",\"heading\":\"条件による選択の一貫性\"},{\"anchors\":[\"n5.u1.e1\"],\"scope\":\"self_report\",\"decision_factor\":\"優先順位の明確化\",\"criterion\":\"手伝いの時間よりも提出期限を優先し、その結果として手伝いの時間を確保できなかったと自覚しています。\",\"case_reading\":\"n5 では、n2 と同様に取引先への連絡を断る選択をした際、その動機を「手伝いの時間より提出期限を優先したから」と明確に定義し、結果として手伝いの時間が確保されなかったことを認めています。\",\"heading\":\"優先順位と結果の自覚\"}]}",
+      "raw_sha256": "66e7aa96e62ee173ef31b437bb9cf3abe610d8a536ac4b39747070aca4ad3f67"
+    }
+  ],
+  "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.occurrence.v24"
+}

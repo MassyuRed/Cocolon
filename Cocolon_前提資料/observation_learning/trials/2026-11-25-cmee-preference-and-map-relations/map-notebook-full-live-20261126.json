@@ -1,0 +1,29 @@
+{
+  "phases": [
+    {
+      "completion_tokens": 171,
+      "finish_reason": "stop",
+      "messages_sha256": "a07b06514401989ee5d51d172db4b8540ba63264ad03158a3ef8cd9e497d158e",
+      "phase": "PLAN",
+      "raw": "{ \"schema_version\": \"cocolon.analysis.semantic_map.node_local.model.v4.plan\", \"source_choices_sha256\": \"4436a3d02cfc219cbfe3675424e2d8bf31c98adecacd3461acf35e21546f43e0\", \"nodes\": [ { \"node_id\": \"n1\", \"units\": [ { \"evidence\": [ { \"quote\": \"机で見返せるので\", \"field\": 1 } ] } ] }, { \"node_id\": \"n2\", \"units\": [ { \"evidence\": [ { \"quote\": \"作業場所で見返せないので\", \"field\": 2 } ] } ] } ] }",
+      "raw_sha256": "592ff397f9ea9f84e1cec570396070ce1e092be26ef31945fcab11985165ddd8"
+    },
+    {
+      "completion_tokens": 285,
+      "finish_reason": "stop",
+      "messages_sha256": "b677e92354b78c203bd268e9cb20b2ee3b4efff21b94d1fc24a25b6aa802ee07",
+      "phase": "NODES",
+      "raw": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.nodes\",\"plan_sha256\":\"613e530966ac01ada2dabae30ddb9e2e798dc5de8aab024765da3752bd015bf4\",\"nodes\":{\"n1\":{\"units\":{\"u1\":{\"evidence_ref\":\"n1.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/机で見返せるので\":1},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"机で見返せるので、私は作業手順をノートに書いた。\",\"meaning\":\"作業場所の条件（見返せる）が、ノートに手順を記録する行動の理由となった。\"},\"n2\":{\"units\":{\"u1\":{\"evidence_ref\":\"n2.u1\",\"source_mode\":\"RECORDED\",\"fact_parts\":{\"e1/作業場所で見返せ\":2},\"unknowns\":[]}},\"node_kind\":\"CHOICE_OUTPUT\",\"perspective\":\"SELF\",\"title\":\"作業場所で見返せないので、私は作業手順をノートに書かなかった。\",\"meaning\":\"作業場所の条件（見返せない）が、ノートに手順を記録しない行動の理由となった。\"}}}",
+      "raw_sha256": "60231c1bc7e039d0d75ac309c581f1fcf32df777331d2f610e88a6f035b0ed02"
+    },
+    {
+      "completion_tokens": 368,
+      "finish_reason": "stop",
+      "messages_sha256": "1b7d57b64c533705d54ea16387934c05d56d4d797dc0126c7cb211655c6fa293",
+      "phase": "RELATIONS",
+      "raw": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"78b56426742288c4138b48f864fb9a26ef58ba832bc471befe9560978e4e33b3\",\"qualification_review\":{},\"edges\":[],\"overview\":{\"node_refs\":[\"n1\",\"n2\"],\"title_proposal\":\"見返せるか見返せないかの条件差が、ノートへの記録行動の有無を分けた\",\"title\":\"2件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"作業場所の視認性（見返せるか見返せないか）\",\"criterion\":\"作業手順を後で確認できる環境がある場合、それを理由にノートに記録する。\",\"case_reading\":\"2025-01-01の記録では、机という場所で作業手順を後で見返せる条件があったため、本人はそれを理由に手順をノートに書いた。\",\"heading\":\"視認性による記録の選択\"},{\"anchors\":[\"n2.u1.e1\"],\"scope\":\"in_this_record\",\"decision_factor\":\"作業場所の視認性（見返せない）\",\"criterion\":\"作業手順を後で確認できない環境では、ノートに記録しない。\",\"case_reading\":\"2026-10-01の記録では、作業場所で見返せない条件があったため、本人は手順をノートに書かなかった。\",\"heading\":\"視認性欠如による記録の回避\"}]}",
+      "raw_sha256": "1cecb04fb6c4d60add179d995297c5e020e3826bb889fca7170b5c246fe85c0b"
+    }
+  ],
+  "schema_version": "cocolon.analysis.semantic_map.node_local.model.v4.occurrence.v24"
+}

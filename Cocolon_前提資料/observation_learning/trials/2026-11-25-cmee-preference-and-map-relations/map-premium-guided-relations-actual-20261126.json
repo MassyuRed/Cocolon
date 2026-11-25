@@ -1,0 +1,18 @@
+{
+  "model": "cocolon-qwen3.5-9b-analysis-node-local-v4-occurrence-v24",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "{\"schema_version\":\"cocolon.analysis.semantic_map.node_local.model.v4.relations\",\"nodes_sha256\":\"5b6923b13223d5b2f6af15df5ba812079bcde042cfb8c27a6a7b9c81f559d137\",\"qualification_review\":{},\"edges\":[],\"overview\":{\"node_refs\":[\"n1\",\"n2\",\"n3\",\"n4\",\"n5\"],\"title_proposal\":\"提出期限と手伝いの時間という二つの条件が、引き受けるか断つかの選択を分ける場面\",\"title\":\"5件の記録を振り返って\"},\"primary_structures\":[{\"anchors\":[\"n1.u1.e1\",\"n2.u1.e1\",\"n3.u1.e1\",\"n4.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"提出期限\",\"criterion\":\"提出期限が余裕があるか、間に合うかが判断の軸となる。\",\"case_reading\":\"提出期限に余裕がある場合（n1）や、間に合う場合（n2）は、その期限の状況が行動の可否を決定づける。\",\"heading\":\"提出期限の状況による選択の分岐\"},{\"anchors\":[\"n3.u1.e1\",\"n4.u1.e1\",\"n5.u1.e1\"],\"scope\":\"across_records\",\"decision_factor\":\"手伝いの時間\",\"criterion\":\"手伝いの時間が取れるか、取れないかが判断の軸となる。\",\"case_reading\":\"手伝いの時間が取れる場合（n3）は引き受けるが、取れない場合（n4）は断る。n5 ではこの時間の確保が優先順位によって阻まれた。\",\"heading\":\"手伝いの時間の確保と優先順位\"}] }"
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 5140,
+    "completion_tokens": 384,
+    "total_tokens": 5524
+  }
+}
