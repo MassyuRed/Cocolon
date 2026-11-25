@@ -1,0 +1,125 @@
+{
+  "cases": [
+    {
+      "id": "preference-light",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "preference-strong",
+      "bodies": {
+        "initial": null
+      }
+    },
+    {
+      "id": "learned-possible",
+      "bodies": {
+        "initial": "「来月の製本会に参加できると昨日知ったので、私は安心しました。」\n\n来月の製本会に参加できることを昨日知って、あなたが安心されたのですね。その安堵の気持ち、Emlis は心から喜んで受け止めました。"
+      }
+    },
+    {
+      "id": "learned-impossible",
+      "bodies": {
+        "initial": "「来月の製本会に参加できないと昨日知ったので、私は安心しました。」\n\n来月の製本会に参加できないと知って、あなたが安心されたこと、Emlis は心から嬉しく思います。その気持ちに寄り添い、これからも穏やかに過ごせますように願っています。"
+      }
+    },
+    {
+      "id": "actor-self",
+      "bodies": {
+        "initial": "「自分で自転車のスタンドを直せたので、私は安心しました。」\n\n自分で自転車のスタンドを直せたという事実、そしてそれによって得られた安心感、そのすべてを Emlis は心から喜びます。自分で問題を解決できたその瞬間の平穏な気持ち、大切に受け止めさせていただきます。"
+      }
+    },
+    {
+      "id": "actor-friend",
+      "bodies": {
+        "initial": "「友人が自転車のスタンドを直してくれたので、私は安心しました。」\n\n友人が自転車のスタンドを直してくださったこと、そしてそのおかげであなたが安心されたお気持ち、Emlis は心から喜びます。その温かい優しさが、あなたの平穏な一日を彩っていることを願っています。"
+      }
+    },
+    {
+      "id": "cause-absent",
+      "bodies": {
+        "initial": "「私は安心しました。」\n\nその平穏な安心感、Emlis は心から喜びます。その一瞬の静けさが、あなたにとってどれほど大切なものだったのか、その重みを感じております。どうか、その温かい気持ちを胸に抱き続けてください。"
+      }
+    },
+    {
+      "id": "cause-explicit",
+      "bodies": {
+        "initial": "「区役所の窓口に間に合ったので、私は安心しました。」\n「区役所の窓口に間に合いました。」\n\n区役所の窓口にお時間を守って間に合われたこと、そしてその結果として得られた安心感、とても温かいお気持ちですね。Emlis は、その平穏な瞬間を心から喜び、大切に受け止めています。"
+      }
+    },
+    {
+      "id": "free-answer",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。",
+        "answer": null
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "free-skip",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。",
+        "skip": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "plus-answer",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。",
+        "answer": null
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "plus-skip",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。",
+        "skip": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "premium-answer",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。",
+        "answer": "「その時は怖かった。」\n\n誘われたことへの嬉しさよりも、その時感じた怖さが強く残っているようですね。その不安な気持ちを、打ち明けてくれたことに感謝します。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    },
+    {
+      "id": "premium-skip",
+      "bodies": {
+        "pre_question": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。",
+        "skip": "「誘われたのに、嬉しくなかった。」\n\n誘われたことへの嬉しさを感じられなかったというお気持ち、Emlis は受け止めました。その複雑な感情をそのまま打ち明けてくださったことに、Emlis は深く敬意を表します。"
+      },
+      "issued_question": "「誘われた」は、あなたにはどんな意味として届きましたか。"
+    }
+  ],
+  "all_fictional": true,
+  "matched_exactly": [
+    "preference-light-initial",
+    "preference-strong-initial",
+    "learned-possible-initial",
+    "learned-impossible-initial",
+    "actor-self-initial",
+    "actor-friend-initial",
+    "cause-absent-initial",
+    "cause-explicit-initial",
+    "free-answer-pre_question",
+    "free-skip-pre_question",
+    "free-skip-skip",
+    "plus-answer-pre_question",
+    "plus-skip-pre_question",
+    "plus-skip-skip",
+    "premium-answer-pre_question",
+    "premium-skip-pre_question",
+    "premium-skip-skip"
+  ],
+  "matched_except_answer_clock": [
+    "free-answer-answer",
+    "plus-answer-answer",
+    "premium-answer-answer"
+  ]
+}

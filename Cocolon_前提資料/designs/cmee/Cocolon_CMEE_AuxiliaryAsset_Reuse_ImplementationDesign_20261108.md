@@ -9976,3 +9976,15 @@ PieceのiOS単体試験の初回は、試験が124ポイントの行に高さ110
 分析APIのCIで、220秒の待機枠が差分の丸めで220.0000000000001秒になる既存の問題を再現した。HTTPへ渡す上限を既存の220秒以下に固定し、同じ時刻で再試験した。関連78件が通過。本番のAPI・ワーカー・9B提供側は3379338で稼働中。 [API候補](https://github.com/MassyuRed/mashos-api/commit/c22079c484ff58d8dc2bd60cf2e8726e278485b7) · [分析CI再実行](https://github.com/MassyuRed/mashos-api/actions/runs/45525954200)
 
 最初の分割候補のiOS画面試験で、国旗を含むUnicodeが0.818秒で描画された。420字の2件は5.649秒・4.262秒。通常のアプリ画面は測定幅付きの経路を、単独文字列の試験は元の全計測経路を使うが、試験の判定が後者にも前者を要求していた。実際の呼び出し別にその判定を修正し、通常カードの測定幅と判定は保持した。合成の単体試験では、整数ポイント単位で切り出しを揃えた後も元画像との最初のアルファ差（7と0）が残った。全画素が一致する状態を確認できていないため、分割描画候補の配布は保留した。 [画面試験](https://github.com/MassyuRed/Cocolon/actions/runs/45523652476/job/138901506392) · [合成の単体試験](https://github.com/MassyuRed/Cocolon/actions/runs/45526573058/job/138911316533) · [最新アプリ候補](https://github.com/MassyuRed/Cocolon/commit/f0f65bb1085076f18340d5946dc858d2eb802fa9)
+
+<a id="cmee-bound-listener-constrained-answers-design-20261125"></a>
+
+### 9.283 EmlisAIの引用・返事・回答後の履歴の扱い（11/25 JST）
+
+[華恋の観測理論 §§1–4](Cocolon_Karen_Observation_and_Structural_Analysis.md)と[第12回議事録 §§11.89–11.91](../../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-bound-listener-constrained-answers-20261125)に対応する。本人の原文や実回答が引用の出典。CMEEは当回の引用箇所と、回答に対応する発行済みの問いを結び付ける。9Bには引用に添える聞き手の言葉を求める。問いの前と未回答で閉じた場合は当回の材料を使う。本人の原記録、回答と訂正の資格は既存の入口で扱う。
+
+v4の提供側は、EmlisAI専用の候補指定を持つ認証済み9B要求だけで返事のJSON形式を制約する。引用が一つなら `follow` 一項目、複数なら引用のIDと `follow` を返す。本文の受領検査は、原文の再掲、返事内の引用、出典の照合を続ける。同じ実9B・架空20段階でJSONは20件、隔離DBで同版再読は16件、全文が両側で適合した組は0/7。 [v4実測・段階別内訳](../../observation_learning/trials/2026-11-25-cmee-bound-passage-listener/paired-product-read-v4.md)
+
+v5はv4と同じ提供側の形式を使う。回答後は当回材料と問いの対応を生成に渡す。有料履歴は本人の今回の回答と同じ論点を出典で照合できたときに、別段落としてCMEEが添える。照合できない履歴から理由、相手の評価、気持ちの強さや継続を補わない。問いの前の助言や、回答後・スキップ後の原文にない継続や未開示を検出する。v3・v4の保存済み受領はそれぞれの版で扱う。旧版の問いから新しい回答を受けた場合も、Piece・わたしマップ・DeepInsightに渡す本人資料は従来の権限、出典、保存版で照合する。 [v5実装と回帰](https://github.com/MassyuRed/mashos-api/commit/f734d30d83f228a1a825b49b4e383e0f2e9d9582)
+
+通常採用は、実9Bで回答後と未回答スキップの本文が保存され、本人の主体・時点・否定・強さを保ち、本人が書いた違いに沿って返事も変わるところまで確認してから判断する。v5は隔離DBとCPUの確認段階。比較後の本番API・ワーカー・9B提供は `3379338` を確認した。Pieceとわたしマップの次の端末候補は `9790ddd`。
