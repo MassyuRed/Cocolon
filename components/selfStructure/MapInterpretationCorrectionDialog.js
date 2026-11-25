@@ -12,8 +12,9 @@ const operationKey = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/
 });
 
 export default function MapInterpretationCorrectionDialog({ visible, onClose, onSaved, ownerId,
-  projection, kind, targetRef, colors = {}, themeName = 'light' }) {
-  const targets = useMemo(() => mapCorrectionTargets(projection, kind, targetRef), [projection, kind, targetRef]);
+  projection, kind, targetRef, mapSubscriptionTier, colors = {}, themeName = 'light' }) {
+  const targets = useMemo(() => mapCorrectionTargets(projection, kind, targetRef, mapSubscriptionTier),
+    [projection, kind, targetRef, mapSubscriptionTier]);
   const preferred = targets.find(target => target.field === 'explanation') || targets.find(target => target.field === 'summary') || targets[0];
   const scope = `${ownerId}:${projection?.projection_of || ''}:${kind}:${targetRef}`;
   const current = useRef({ scope, visible: !!visible });

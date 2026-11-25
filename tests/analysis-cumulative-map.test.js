@@ -19,6 +19,18 @@ function latest(p=projection) { return { status:'ok', reason:'up_to_date', has_v
   report_id:id(p), generated_at:'2026-11-01T00:00:00Z', meta:p, map_context:counts }; }
 function row(month='2026-10-01', p=projection) { return { id:id(p), snapshot_month:month, source_profile:'cumulative.v1',
   content_json:{watashiMap:p,map_context:counts}, generated_at:'2026-10-10T00:00:00Z',captured_at:'2026-10-10T00:00:00Z' }; }
+function planMap(tier, withFigure = true) {
+  const map = copy(semantic);
+  const refs = withFigure ? ['n1', 'n3'] : [];
+  map.overview.primary_structures = [{ title: '先に約束したこと',
+    description: tier === 'free' ? '先に約束したことを守れる範囲を選びます。' : '提出が先の日は、資料の確認だけを引き受けました。',
+    scope: 'in_this_record', node_refs: refs }];
+  map.nodes = map.nodes.filter(node => refs.includes(node.node_ref));
+  map.edges = map.edges.filter(edge => refs.includes(edge.from_ref) && refs.includes(edge.to_ref));
+  map.accessibility_linear_order = refs;
+  return map;
+}
+const scopedPlan = tier => ({ map_subscription_tier: tier, map_plan_scoped: true });
 function downgrade(p) {
   return { ...copy(projection), projection_of:p.projection_of, period_label:p.period_label,
     period_comparison:{state:'NO_PREVIOUS',reason_codes:[],safe_change_kinds:[]},
@@ -34,7 +46,7 @@ function harness(get) {
   const auth={session:{user:{id:owner}}}, plan={tier:'free',loading:false}, calls=[];
   const modules=new Map(), focus={value:true}, appListeners=new Set();
   const appState={currentState:'active',addEventListener:(event,listener)=>{appListeners.add(listener);return {remove:()=>appListeners.delete(listener)};}};
-  const native={AppState:appState,View:'View',Text:'Text',ScrollView:'ScrollView',TouchableOpacity:'TouchableOpacity',ActivityIndicator:'ActivityIndicator',SafeAreaView:'SafeAreaView',
+  const native={AppState:appState,View:'View',Text:'Text',TextInput:'TextInput',ScrollView:'ScrollView',TouchableOpacity:'TouchableOpacity',ActivityIndicator:'ActivityIndicator',SafeAreaView:'SafeAreaView',
     Modal: props=>props.visible ? React.createElement('ModalContent',props,props.children) : null,
     FlatList: props=>React.createElement('FlatList',props,props.data.map(item=>React.createElement(React.Fragment,{key:props.keyExtractor(item)},props.renderItem({item})))),
     StyleSheet:{create:x=>x},Alert:{alert(){}},NativeModules:{},Linking:{},Share:{},RefreshControl:'RefreshControl'};
@@ -87,6 +99,98 @@ test('Free reads the common full map and acknowledges only its displayed identit
   assert.deepEqual(seen,[projection.projection_of]);
   assert(h.calls.every(c=>c[2].expectedUserId===owner));
   await act(async()=>view.unmount());
+});
+
+test('scoped Free renders the conclusion and at most one label-only figure for the same saved identity', async () => {
+  for (const withFigure of [true, false]) {
+    const free = planMap('free', withFigure);
+    const h = harness(async () => ({ ...latest(free), ...scopedPlan('free') }));
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    const seen = [];
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(Screen, { onLatestSeenVersion: version => seen.push(version) })); });
+    assert.equal(seen[0], free.projection_of);
+    assert.equal(h.calls[0][2].headers['Cache-Control'], 'no-store');
+    assert(JSON.stringify(view.toJSON()).includes(free.overview.primary_structures[0].description));
+    assert.equal(view.root.findAllByProps({ testID: 'semantic-overview-open' }).length, 0);
+    assert.equal(view.root.findAllByProps({ testID: 'semantic-items-toggle' }).length, 0);
+    assert.equal(view.root.findAllByProps({ testID: 'semantic-structure-toggle-0' }).length, withFigure ? 1 : 0);
+    if (withFigure) {
+      await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
+      const graph = view.root.findByProps({ testID: 'semantic-map-graph' });
+      assert.equal(graph.findAllByType('TouchableOpacity').length, 3);
+      assert(!JSON.stringify(view.toJSON()).includes(free.nodes[0].summary));
+      await act(async () => graph.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
+      assert(view.root.findAllByProps({ testID: 'map-correction-field-title' }).length);
+      assert.equal(view.root.findAllByProps({ testID: 'map-correction-field-explanation' }).length, 0);
+    }
+    await act(async () => view.unmount());
+  }
+});
+
+test('the same report id is reread when the server observes a downgrade during a pending refresh', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const premium = planMap('premium');
+  const free = planMap('free', false);
+  const reread = deferred();
+  const h = harness(async url => {
+    if (url.endsWith('/latest/status')) return { status: 'ok', has_visible_content: true,
+      version_key: free.projection_of, refresh_status: 'running', map_subscription_tier: 'free' };
+    if (url.includes('ensure=false')) return reread.promise;
+    return { ...latest(premium), ...scopedPlan('premium'), refresh_status: 'queued' };
+  });
+  h.plan.tier = 'premium';
+  const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Screen)); });
+  assert(JSON.stringify(view.toJSON()).includes(premium.overview.primary_structures[0].description));
+  assert(view.root.findAllByProps({ testID: 'analysis-if-saved-open' }).length);
+  await act(async () => { t.mock.timers.tick(3000); });
+  assert(!JSON.stringify(view.toJSON()).includes(premium.overview.primary_structures[0].description));
+  assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-open' }).length, 0);
+  await act(async () => reread.resolve({ ...latest(free), ...scopedPlan('free') }));
+  assert.equal(id(premium), id(free));
+  assert(JSON.stringify(view.toJSON()).includes(free.overview.primary_structures[0].description));
+  await act(async () => view.unmount());
+});
+
+test('a monthly comparison can never display reports authorized at different tiers', async () => {
+  const premium = planMap('premium');
+  const free = planMap('free', false);
+  const month = '2026-10-01';
+  const stored = row(month, premium);
+  const h = harness(async url => url.includes('/reports/')
+    ? { item: stored, ...scopedPlan('premium') }
+    : { ...latest(free), ...scopedPlan('free') });
+  const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Screen, { reportId: stored.id, month })); });
+  assert(JSON.stringify(view.toJSON()).includes(premium.overview.primary_structures[0].description));
+  await act(async () => button(view,'現在のマップと見比べる').props.onPress());
+  const displayed = JSON.stringify(view.toJSON());
+  assert(!displayed.includes(premium.overview.primary_structures[0].description));
+  assert(!displayed.includes(free.overview.primary_structures[0].description));
+  assert(button(view, '再取得'));
+  await act(async () => view.unmount());
+});
+
+test('a scoped paid reading returns from the background under a fresh entitlement check', async () => {
+  const plus = planMap('plus');
+  const free = planMap('free', false);
+  const reread = deferred();
+  let reads = 0;
+  const h = harness(async () => ++reads === 1 ? { ...latest(plus), ...scopedPlan('plus') } : reread.promise);
+  h.plan.tier = 'plus';
+  const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Screen)); });
+  assert(JSON.stringify(view.toJSON()).includes(plus.overview.primary_structures[0].description));
+  await act(async () => h.setAppState('background'));
+  await act(async () => h.setAppState('active'));
+  assert(!JSON.stringify(view.toJSON()).includes(plus.overview.primary_structures[0].description));
+  await act(async () => reread.resolve({ ...latest(free), ...scopedPlan('free') }));
+  assert(JSON.stringify(view.toJSON()).includes(free.overview.primary_structures[0].description));
+  await act(async () => view.unmount());
 });
 
 test('month comparison fetches current separately and preserves the captured projection',async()=>{
@@ -252,8 +356,31 @@ test('history opens only the most recently selected month',async()=>{
   await act(async()=>{button(view,'2026年9月').props.onPress();});
   await act(async()=>b.resolve({item:rows[1]}));await act(async()=>a.resolve({item:rows[0]}));
   assert.deepEqual(opened.map(x=>x.snapshot_month),['2026-09-01']);
+  assert.equal(opened[0].content_json, undefined);
   assert(h.calls.every(c=>c[2].expectedUserId===owner));
   await act(async()=>view.unmount());
+});
+
+test('history pagination replaces the list when the server changes membership tier', async () => {
+  const before = row('2026-02-01');
+  const after = row('2026-10-01');
+  let originReads = 0;
+  const h = harness(async url => {
+    if (url.includes('offset=1')) return { items: [], has_more: false, subscription_tier: 'free' };
+    if (++originReads === 1) return { items: [before], has_more: true, next_offset: 1, subscription_tier: 'premium' };
+    return { items: [after], has_more: false, subscription_tier: 'free' };
+  });
+  h.plan.tier = 'premium';
+  const History = h.load('screens/SelfStructureReportHistoryScreen.js').default;
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(History)); });
+  assert(button(view, '2026年2月'));
+  const footer = view.root.findByType('FlatList').props.ListFooterComponent;
+  await act(async () => footer.props.onPress());
+  assert(!button(view, '2026年2月'));
+  assert(button(view, '2026年10月'));
+  assert.equal(originReads, 2);
+  await act(async () => view.unmount());
 });
 
 test('Free monthly access does not unlock the existing paid PDF export',()=>{
@@ -275,7 +402,7 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   assert(!JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
   assert(!JSON.stringify(view.toJSON()).includes('根拠として結び付いた記録'));
   const latestCall=h.calls.find(c=>c[1].includes('/latest?ensure=true'));
-  assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v2');
+  assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v3');
   assert.equal(latestCall[2].timeoutMs,15000);
   assert(latestCall[1].includes('background=true'));
   assert.equal(latestCall[2].expectedUserId,owner);
@@ -302,7 +429,7 @@ test('current and monthly maps open with the saved structure text and keep suppl
     const stored = row(month, map);
     const h = harness(async (url, opts) => {
       assert.equal(opts.expectedUserId, owner);
-      assert.equal(requestedRenderer(opts), 'semantic.v2');
+      assert.equal(requestedRenderer(opts), 'semantic.v3');
       if (month) {
         assert(url.endsWith(`/reports/${stored.id}?month=${month}`));
         return { item: stored };
@@ -347,7 +474,7 @@ test('current and monthly maps open with the saved structure text and keep suppl
 test('an older renderer restores relationships by reading the same current report without another ensure',async()=>{
   const saved = downgrade(semantic);
   const h = harness(async (url, opts) => {
-    if (requestedRenderer(opts) === 'semantic.v2') return latest(saved);
+    if (requestedRenderer(opts) === 'semantic.v3') return latest(saved);
     assert(url.endsWith(`/reports/${id(saved)}`));
     // An ID can be both the latest and the month's snapshot. Keep latest metadata.
     return { item: row('2026-11-01', semantic) };
@@ -362,7 +489,7 @@ test('an older renderer restores relationships by reading the same current repor
   assert(JSON.stringify(view.toJSON()).includes(semantic.edges[0].label));
   await act(async()=>button(view,'分析について').props.onPress());
   assert(!JSON.stringify(view.toJSON()).includes('月次保存日時'));
-  assert.deepEqual(h.calls.map(c=>requestedRenderer(c[2])),['semantic.v2','semantic.v1']);
+  assert.deepEqual(h.calls.map(c=>requestedRenderer(c[2])),['semantic.v3','semantic.v2']);
   assert.equal(h.calls.filter(c=>c[1].includes('ensure=true')).length,1);
   assert(h.calls.every(c=>c[2].expectedUserId===owner));
   assert.deepEqual(seen,[saved.projection_of]);
@@ -380,7 +507,8 @@ test('current and monthly maps show a validated legacy body while the same saved
         assert(url.endsWith(`/reports/${stored.id}${month ? `?month=${month}` : ''}`));
         return pending.promise;
       }
-      return month ? { item: stored } : { ...latest(legacy), refresh_status: 'queued' };
+      return month || requestedRenderer(opts) === 'semantic.v2'
+        ? { item: stored } : { ...latest(legacy), refresh_status: 'queued' };
     });
     const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
     const seen = [];
@@ -397,7 +525,7 @@ test('current and monthly maps show a validated legacy body while the same saved
     await act(async () => pending.resolve({ item: row(month, semantic) }));
     assert.equal(view.root.findAllByProps({ testID: 'watashi-map-v3' }).length, 1);
     assert.equal(view.root.findAllByProps({ testID: 'watashi-map-v2' }).length, 0);
-    assert.equal(h.calls.filter(([verb]) => verb === 'GET').length, 2);
+    assert.equal(h.calls.filter(([verb]) => verb === 'GET').length, 3);
     assert.equal(h.calls.filter(([verb]) => verb === 'POST').length, month ? 1 : 0);
     assert.deepEqual(seen, month ? [] : [semantic.projection_of]);
     await act(async () => view.unmount());
@@ -410,14 +538,13 @@ test('semantic fallback keeps the selected history month separate from its curre
   archive.projection_of = 'artifact:00000000000000000000000000000066@1';
   archive.overview.title = '保存月の分析';
   const h = harness(async (url, opts) => {
-    const old = requestedRenderer(opts) === 'semantic.v2';
+    const old = requestedRenderer(opts) !== 'semantic.v1';
     if (url.includes('/latest?')) return latest(downgrade(semantic));
     if (url.endsWith(`/reports/${id(archive)}?month=${month}`)) {
       return { item: row(month, old ? downgrade(archive) : archive) };
     }
     assert(url.endsWith(`/reports/${id(semantic)}`));
-    assert(!old);
-    return { item: row(null, semantic) };
+    return { item: row(null, old ? downgrade(semantic) : semantic) };
   });
   const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
   let view;
@@ -436,7 +563,7 @@ test('semantic fallback keeps a transiently unavailable legacy map and clears it
   for (const failure of ['transient', 'unauthorized', 'identity']) {
     const pending = deferred();
     const h = harness(async (url, opts) => {
-      if (requestedRenderer(opts)==='semantic.v2') return latest(downgrade(semantic));
+      if (requestedRenderer(opts)==='semantic.v3') return latest(downgrade(semantic));
       return pending.promise;
     });
     const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
@@ -475,6 +602,9 @@ test('status polling negotiates an older renderer only when reading a newly save
     if (requestedRenderer(opts)==='semantic.v1') {
       return {item:row(null,url.endsWith(id(next))?next:semantic)};
     }
+    if (requestedRenderer(opts)==='semantic.v2') {
+      return {item:row(null,downgrade(url.endsWith(id(next))?next:semantic))};
+    }
     return url.endsWith('?ensure=false&background=true')?latest(downgrade(next)):
       {...latest(downgrade(semantic)),refresh_status:'queued'};
   });
@@ -499,7 +629,7 @@ test('an ownership change aborts the old renderer fallback and ignores its late 
   next.projection_of='artifact:00000000000000000000000000000066@1';
   next.overview.title='新しい所有者の分析';
   const h=harness(async (url, opts)=>{
-    if (requestedRenderer(opts)==='semantic.v1') return pending.promise;
+    if (requestedRenderer(opts)==='semantic.v2') return pending.promise;
     return opts.expectedUserId===owner?latest(downgrade(semantic)):latest(next);
   });
   const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
@@ -509,7 +639,7 @@ test('an ownership change aborts the old renderer fallback and ignores its late 
   await act(async()=>{view=Renderer.create(element());});
   assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,1);
   assert.deepEqual(seen,[]);
-  const previousFallback=h.calls.find(c=>requestedRenderer(c[2])==='semantic.v1')[2];
+  const previousFallback=h.calls.find(c=>requestedRenderer(c[2])==='semantic.v2')[2];
   assert.equal(previousFallback.signal.aborted,false);
   h.auth.session={user:{id:nextOwner}};
   await act(async()=>view.update(element()));
@@ -534,7 +664,7 @@ test('current analysis opens automatically and has no routine update button',asy
     assert.equal(h.calls.length,1);
     assert(h.calls[0][1].endsWith('?ensure=true&background=true'));
     assert.equal(h.calls[0][2].expectedUserId,owner);
-    assert.equal(h.calls[0][2].headers['X-Watashi-Map-Renderer'],'semantic.v2');
+    assert.equal(h.calls[0][2].headers['X-Watashi-Map-Renderer'],'semantic.v3');
     await act(async()=>view.unmount());
   }
 });
@@ -549,7 +679,7 @@ test('a failed update can be retried while a previously saved map remains visibl
   assert.equal(h.calls.length,2);
   assert(h.calls[1][1].endsWith('?ensure=true&background=true&force=true'));
   assert.equal(h.calls[1][2].expectedUserId,owner);
-  assert.equal(h.calls[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v2');
+  assert.equal(h.calls[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v3');
   assert(!button(view,'更新を再試行'));
   await act(async()=>view.unmount());
 });

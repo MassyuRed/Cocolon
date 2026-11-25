@@ -249,11 +249,14 @@ export default function SelfStructureReportHistoryScreen({
   scopeRef.current = scopeKey;
   const requestRef = useRef(0);
   const openRequestRef = useRef(0);
-  const [loadedScope, setLoadedScope] = useState(null);
+  const [loadedAccess, setLoadedAccess] = useState(null);
+  const loadedAccessRef = useRef(loadedAccess);
+  loadedAccessRef.current = loadedAccess;
+  const historyTier = loadedAccess?.key === scopeKey ? loadedAccess.tier : viewerTier;
   const historyAccessible = canViewWatashiMapHistory(viewerTier);
   const historyRetentionLabel = useMemo(
-    () => getWatashiMapHistoryRetentionLabel(viewerTier),
-    [viewerTier]
+    () => getWatashiMapHistoryRetentionLabel(historyTier),
+    [historyTier]
   );
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
@@ -282,11 +285,24 @@ export default function SelfStructureReportHistoryScreen({
     try {
       if (!append) await apiPost('/self-structure/monthly/ensure', {}, { expectedUserId: session.user.id, timeoutMs: 60000 });
       if (!active()) return;
-      const json = await apiGet(
-        buildSelfStructureReportHistoryPath({ reportType, limit: HISTORY_PAGE_LIMIT, offset }),
-        { expectedUserId: session.user.id }
+      const readPage = pageOffset => apiGet(
+        buildSelfStructureReportHistoryPath({ reportType, limit: HISTORY_PAGE_LIMIT, offset: pageOffset }),
+        { expectedUserId: session.user.id, headers: { 'Cache-Control': 'no-store' } }
       );
+      let json = await readPage(offset);
       if (!active()) return;
+      let resultTier = normalizeWatashiMapTier(json?.subscription_tier || viewerTier);
+      let appendPage = append;
+      if (append && loadedAccessRef.current?.key === scopeKey && loadedAccessRef.current.tier !== resultTier) {
+        setLoadedAccess(null);
+        setRows([]);
+        setHasMore(false);
+        setNextOffset(null);
+        json = await readPage(0);
+        if (!active()) return;
+        resultTier = normalizeWatashiMapTier(json?.subscription_tier || viewerTier);
+        appendPage = false;
+      }
       const baseRows = Array.isArray(json?.items) ? json.items : [];
       const readSet = await fetchReadReportIdSet(baseRows.filter(r => r.source_profile !== 'cumulative.v1').map((r) => r.id));
       if (!active()) return;
@@ -297,7 +313,7 @@ export default function SelfStructureReportHistoryScreen({
         isRead: readSet.has(r.id),
       }));
       setRows((prev) => {
-        if (!append) return mapped;
+        if (!appendPage) return mapped;
         const rowKey = r => `${r.snapshot_month || ''}:${r.id}`;
         const existing = new Set((prev || []).map(rowKey));
         const merged = [...(prev || [])];
@@ -309,7 +325,7 @@ export default function SelfStructureReportHistoryScreen({
         }
         return merged;
       });
-      setLoadedScope(scopeKey);
+      setLoadedAccess({ key: scopeKey, tier: resultTier });
       setHasMore(Boolean(json?.has_more));
       setNextOffset(
         typeof json?.next_offset === "number"
@@ -330,11 +346,11 @@ export default function SelfStructureReportHistoryScreen({
         else setLoading(false);
       }
     }
-  }, [historyAccessible, reportType, scopeKey, session?.user?.id]);
+  }, [historyAccessible, reportType, scopeKey, session?.user?.id, viewerTier]);
 
   useEffect(() => {
     setRows([]);
-    setLoadedScope(null);
+    setLoadedAccess(null);
     setHasMore(false);
     setNextOffset(null);
     if (subscriptionLoading) return;
@@ -365,7 +381,8 @@ export default function SelfStructureReportHistoryScreen({
         return;
       }
       try {
-        const json = await apiGet(buildSelfStructureReportDetailPath(id, item.snapshot_month), { expectedUserId: session?.user?.id });
+        const json = await apiGet(buildSelfStructureReportDetailPath(id, item.snapshot_month),
+          { expectedUserId: session?.user?.id, headers: { 'Cache-Control': 'no-store' } });
         if (!stillSelected()) return;
         const data = json?.item;
         if (!data) {
@@ -373,7 +390,8 @@ export default function SelfStructureReportHistoryScreen({
           return;
         }
 
-        const sanitizedData = data.source_profile === 'cumulative.v1' ? data : {
+        const sanitizedData = data.source_profile === 'cumulative.v1'
+          ? { id: data.id, source_profile: data.source_profile, snapshot_month: data.snapshot_month } : {
           ...data,
           title: sanitizeSelfStructureHistoryTitle(data?.title, data?.report_mode),
           content_text: sanitizeSelfStructureReportText(data?.content_text),
@@ -402,7 +420,7 @@ export default function SelfStructureReportHistoryScreen({
 
   const handleExport = useCallback(
     async (id) => {
-      if (!canExportWatashiMapPdf(viewerTier)) {
+      if (!canExportWatashiMapPdf(historyTier)) {
         Alert.alert(
           "PDF保存",
           "PDF保存はPlusプラン以上で利用できます。わたしマップ概要はFreeプランでも見られます。",
@@ -414,7 +432,8 @@ export default function SelfStructureReportHistoryScreen({
         return;
       }
       try {
-        const json = await apiGet(buildSelfStructureReportDetailPath(id));
+        const json = await apiGet(buildSelfStructureReportDetailPath(id),
+          { expectedUserId: session?.user?.id, headers: { 'Cache-Control': 'no-store' } });
         const data = json?.item;
         if (!data) {
           Alert.alert("取得エラー", "レポートの取得に失敗しました");
@@ -429,7 +448,7 @@ export default function SelfStructureReportHistoryScreen({
         Alert.alert("PDF保存エラー", String(e?.message || e));
       }
     },
-    [onOpenSubscription, title, viewerTier]
+    [historyTier, onOpenSubscription, session?.user?.id, title]
   );
 
   const headerLabel = useMemo(() => {
@@ -505,7 +524,7 @@ export default function SelfStructureReportHistoryScreen({
       {/* リスト */}
       <FlatList
           ListHeaderComponent={listHeader}
-          data={!subscriptionLoading && historyAccessible && loadedScope === scopeKey ? rows : []}
+          data={!subscriptionLoading && historyAccessible && loadedAccess?.key === scopeKey ? rows : []}
           keyExtractor={(item) => `${item.snapshot_month || ''}:${item.id}`}
           refreshControl={
             !subscriptionLoading && historyAccessible ? <RefreshControl
