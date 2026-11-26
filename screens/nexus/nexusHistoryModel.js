@@ -1,8 +1,17 @@
-import { readShareCode } from "../../lib/compat/legacyWireContracts";
 import { HISTORY_ORDER_OLDEST } from "./nexusRouteModel";
 
 export function isPieceV2Post(item) {
-  return item?.source_type === "piece_v2";
+  return (item?.source_type ?? item?.sourceType) === "piece_v2";
+}
+
+export function readPieceViewerState(item) {
+  const state = item?.viewer_state ?? item?.viewerState;
+  return state && typeof state === "object" ? state : {};
+}
+
+export function isPieceResonated(item) {
+  const viewer = readPieceViewerState(item);
+  return (viewer.is_resonated ?? viewer.isResonated ?? item?.is_resonated ?? item?.isResonated) === true;
 }
 
 export function resolvePieceQInstanceId(item) {
@@ -27,81 +36,22 @@ export function resolvePieceOwnerUserId(item) {
   );
 }
 
-export function buildResonanceHistoryItemFromPiece(item, savedAtValue = null) {
-  const qInstanceId = resolvePieceQInstanceId(item);
-  if (!qInstanceId) return null;
-
-  const owner = item?.owner && typeof item.owner === "object" ? item.owner : {};
-  const question =
-    item?.question && typeof item.question === "object" ? item.question : {};
-  const metrics = item?.metrics && typeof item.metrics === "object" ? item.metrics : {};
-  const viewerState =
-    item?.viewer_state && typeof item.viewer_state === "object"
-      ? item.viewer_state
-      : item?.viewerState && typeof item.viewerState === "object"
-      ? item.viewerState
-      : {};
-  const title = String(question?.title || item?.title || "—").trim() || "—";
-  const qKey = resolvePieceQKey(item) || String(item?.q_key || "").trim() || "";
-  const ownerUserId = resolvePieceOwnerUserId(item);
-  const ownerDisplayName =
-    String(
-      owner?.display_name ||
-        owner?.displayName ||
-        item?.owner_display_name ||
-        item?.ownerDisplayName ||
-        item?.display_name ||
-        readShareCode(owner, readShareCode(item, "")) ||
-        "ユーザー"
-    ).trim() || "ユーザー";
-  const savedAt = String(savedAtValue || new Date().toISOString()).trim();
-  const createdAt =
-    String(item?.created_at || item?.createdAt || item?.generated_at || savedAt || "").trim() ||
-    null;
-  const body = String(item?.body || item?.piece_body || item?.answer || "").trim();
-  const views = Number(metrics?.views ?? item?.views ?? 0) || 0;
-  const resonances = Number(metrics?.resonances ?? item?.resonances ?? 0) || 0;
-
+export function applyPieceResonanceReceipt(row, { resonated, resonances, views }) {
   return {
-    ...item,
-    qInstanceId,
-    q_instance_id: qInstanceId,
-    q_key: qKey,
-    title,
-    ownerDisplayName,
-    ownerUserId,
-    owner_user_id: ownerUserId,
-    savedAt,
-    saved_at: savedAt,
-    source_type:
-      String(item?.source_type || item?.sourceType || "emotion_generated").trim() ||
-      "emotion_generated",
-    owner: {
-      ...owner,
-      user_id: ownerUserId,
-      display_name: ownerDisplayName,
-    },
-    question: {
-      ...question,
-      q_key: qKey,
-      title,
-    },
-    body,
-    created_at: createdAt,
-    metrics: {
-      ...metrics,
-      views,
-      resonances,
-    },
-    viewer_state: {
-      ...viewerState,
-      is_resonated: true,
-      can_resonate:
-        viewerState?.can_resonate === false || viewerState?.canResonate === false
-          ? false
-          : true,
-    },
+    ...row,
+    viewer_state: { ...readPieceViewerState(row), is_resonated: resonated },
+    metrics: { ...row?.metrics, resonances, ...(views == null ? {} : { views }) },
   };
+}
+
+export function reconcileResonanceHistory(rows, receipts, order, limit) {
+  const remaining = rows.flatMap((row) => {
+    const receipt = receipts.get(resolvePieceQInstanceId(row));
+    if (!receipt) return [row];
+    if (!receipt.resonated) return [];
+    return [applyPieceResonanceReceipt(row, receipt)];
+  });
+  return sortHistoryItems(remaining, order).slice(0, limit);
 }
 
 export function resolveHistorySavedAt(item) {

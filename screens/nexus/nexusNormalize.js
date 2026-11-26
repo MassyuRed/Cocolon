@@ -1,4 +1,5 @@
 import { readShareCode } from "../../lib/compat/legacyWireContracts";
+import { isPieceV2Post, readPieceViewerState } from "./nexusHistoryModel";
 
 export const STRENGTH_LABEL = {
   weak: "弱",
@@ -111,12 +112,7 @@ export function normalizeSavedPieces(json) {
     const question =
       item?.question && typeof item.question === "object" ? item.question : {};
     const metrics = item?.metrics && typeof item.metrics === "object" ? item.metrics : {};
-    const viewerState =
-      item?.viewer_state && typeof item.viewer_state === "object"
-        ? item.viewer_state
-        : item?.viewerState && typeof item.viewerState === "object"
-        ? item.viewerState
-        : {};
+    const viewerState = readPieceViewerState(item);
 
     const qInstanceId =
       String(item?.q_instance_id || item?.qInstanceId || "").trim() ||
@@ -168,10 +164,7 @@ export function normalizeSavedPieces(json) {
       ).trim() || "";
     const views = Number(metrics?.views ?? item?.views ?? 0) || 0;
     const resonances = Number(metrics?.resonances ?? item?.resonances ?? 0) || 0;
-    const canResonate =
-      viewerState?.can_resonate === false || viewerState?.canResonate === false
-        ? false
-        : true;
+    const canResonate = viewerState.can_resonate ?? viewerState.canResonate ?? !isPieceV2Post(item);
 
     return {
       ...item,

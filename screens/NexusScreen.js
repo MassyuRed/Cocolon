@@ -39,6 +39,7 @@ import {
   getNexusPiecesUnreadStatus,
   markNexusEmotionLogFeedRead,
   postNexusPieceResonance,
+  setPublishedPieceResonance,
 } from "../lib/nexusApi";
 import NexusHeader from "./nexus/NexusHeader";
 import NexusTabBar from "./nexus/NexusTabBar";
@@ -68,15 +69,18 @@ import {
   resolvePieceQInstanceId,
   resolvePieceQKey,
   isPieceV2Post,
+  isPieceResonated,
+  readPieceViewerState,
   resolvePieceOwnerUserId,
-  buildResonanceHistoryItemFromPiece,
-  sortHistoryItems,
+  applyPieceResonanceReceipt,
+  reconcileResonanceHistory,
 } from "./nexus/nexusHistoryModel";
 import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
 const EMPTY_EMOTION_LOG = { loading: false, loaded: false, items: [], error: "" };
 const LOADING_EMOTION_LOG = { ...EMPTY_EMOTION_LOG, loading: true };
 const LOADING_HISTORY = { loading: true, loadedModes: {}, order: null, resonances: [], error: "" };
+const HISTORY_LIMIT = 20;
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -167,6 +171,7 @@ export default function NexusScreen({ navigation }) {
     [ownerRequest, activeTab, isTutorialMode]);
   const readSequences = useRef({ pieces: 0, history: 0, owners: 0, emotions: 0 });
   const unreadRead = useRef(null);
+  const resonanceActivity = useMemo(() => ({ feedRead: null, historyRead: null, submitting: new Set() }), [ownerRequest]);
 
   const tutorialPieceItems = useMemo(
     () => normalizeTutorialPieceItems(tutorialPieces),
@@ -187,6 +192,7 @@ export default function NexusScreen({ navigation }) {
     ? emotionLogResult
     : !isTutorialMode && (authInitializing || viewerUserId) ? LOADING_EMOTION_LOG : EMPTY_EMOTION_LOG;
   const [historyResult, setHistoryState] = useState(null);
+  const [historyRefresh, setHistoryRefresh] = useState(0);
   const historyState = historyResult?.scope === historyReadScope ? historyResult : LOADING_HISTORY;
 
   const [resonanceSubmittingIds, setResonanceSubmittingIds] = useState({});
@@ -417,6 +423,7 @@ export default function NexusScreen({ navigation }) {
       sort: pieceOrder,
       limit: 20,
       include_piece_v2: true,
+      include_piece_v2_resonance: true,
     };
 
     if (ownerFilterMode === OWNER_FILTER_SELF) {
@@ -436,11 +443,16 @@ export default function NexusScreen({ navigation }) {
       params.following_only = false;
     }
 
+    const receipts = new Map();
+    resonanceActivity.feedRead = receipts;
     setPieceState({ scope: pieceReadScope, loading: true, items: [], error: "" });
     try {
       const json = await getNexusPieces(params, ownerRequest.options);
       if (!isFresh()) return;
-      const items = Array.isArray(json?.items) ? json.items : [];
+      const items = (Array.isArray(json?.items) ? json.items : []).map((row) => {
+        const receipt = receipts.get(resolvePieceQInstanceId(row));
+        return receipt ? applyPieceResonanceReceipt(row, receipt) : row;
+      });
       setPieceState({ scope: pieceReadScope, loading: false, items, error: "" });
     } catch (e) {
       if (!isFresh()) return;
@@ -451,6 +463,8 @@ export default function NexusScreen({ navigation }) {
         items: [],
         error: String(e?.message || "ピースを読み込めませんでした。"),
       });
+    } finally {
+      if (resonanceActivity.feedRead === receipts) resonanceActivity.feedRead = null;
     }
   }, [
     authInitializing,
@@ -460,7 +474,7 @@ export default function NexusScreen({ navigation }) {
     pieceOrder,
     tutorialPieceItems,
     viewerUserId,
-    ownerRequest, isOwnerCurrent, pieceReadScope, navigation,
+    ownerRequest, isOwnerCurrent, pieceReadScope, navigation, resonanceActivity,
   ]);
 
   const loadEmotionLog = useCallback(async () => {
@@ -517,17 +531,32 @@ export default function NexusScreen({ navigation }) {
         return;
       }
 
+      const receipts = new Map();
+      resonanceActivity.historyRead = receipts;
+      const readRows = async () => normalizeSavedPieces(await getNexusResonancePieces(HISTORY_LIMIT, historyOrder, {
+        ...ownerRequest.options,
+        includePieceV2: true,
+      }));
       setHistoryState({ ...LOADING_HISTORY, scope: historyReadScope });
       try {
-        const json = await getNexusResonancePieces(20, historyOrder, ownerRequest.options);
+        const missedConfirmedWrite = (rows) => {
+          const loadedIds = new Set(rows.map(resolvePieceQInstanceId));
+          return [...receipts].some(([id, receipt]) => receipt.resonated && !loadedIds.has(id));
+        };
+        let rows = await readRows();
         if (!isFresh()) return;
-        const normalized = sortHistoryItems(normalizeSavedPieces(json), historyOrder);
+        while (missedConfirmedWrite(rows)) {
+          // A save completed during the read. Recheck access before displaying it in history.
+          receipts.clear();
+          rows = await readRows();
+          if (!isFresh()) return;
+        }
         setHistoryState({
           scope: historyReadScope,
           loading: false,
           loadedModes: { [safeMode]: true },
           order: historyOrder,
-          resonances: normalized,
+          resonances: reconcileResonanceHistory(rows, receipts, historyOrder, HISTORY_LIMIT),
           error: "",
         });
       } catch (e) {
@@ -541,9 +570,11 @@ export default function NexusScreen({ navigation }) {
           resonances: [],
           error: String(e?.message || "履歴を読み込めませんでした。"),
         });
+      } finally {
+        if (resonanceActivity.historyRead === receipts) resonanceActivity.historyRead = null;
       }
     },
-    [historyOrder, isTutorialMode, ownerRequest, isOwnerCurrent, historyReadScope, navigation]
+    [historyOrder, isTutorialMode, ownerRequest, isOwnerCurrent, historyReadScope, navigation, resonanceActivity]
   );
 
   useEffect(() => {
@@ -698,7 +729,7 @@ export default function NexusScreen({ navigation }) {
 
   useEffect(() => {
     if (activeTab === "history") void loadHistory();
-  }, [activeTab, loadHistory]);
+  }, [activeTab, historyRefresh, loadHistory]);
 
   const handlePressGuide = useCallback(() => {
     try {
@@ -760,50 +791,20 @@ export default function NexusScreen({ navigation }) {
     [ownerFilterMode, ownerFilterUserId, ownerPickerOptions, viewerUserId]
   );
 
-  const readPieceViewerState = useCallback((item) => {
-    return (
-      (item?.viewer_state && typeof item.viewer_state === "object"
-        ? item.viewer_state
-        : null) ||
-      (item?.viewerState && typeof item.viewerState === "object"
-        ? item.viewerState
-        : null) ||
-      {}
-    );
-  }, []);
-
-  const isPieceResonated = useCallback(
-    (item) => {
-      const viewerState = readPieceViewerState(item);
-      return (
-        viewerState?.is_resonated === true ||
-        viewerState?.isResonated === true ||
-        item?.is_resonated === true ||
-        item?.isResonated === true
-      );
-    },
-    [readPieceViewerState]
-  );
-
   const canResonatePiece = useCallback(
     (item) => {
-      if (isTutorialMode || isPieceV2Post(item)) return false;
+      if (isTutorialMode) return false;
       const ownerUserId = resolvePieceOwnerUserId(item);
       if (!viewerUserId || !ownerUserId || ownerUserId === viewerUserId) {
         return false;
       }
 
       const viewerState = readPieceViewerState(item);
-      if (viewerState?.can_resonate === true || viewerState?.canResonate === true) {
-        return true;
-      }
-      if (viewerState?.can_resonate === false || viewerState?.canResonate === false) {
-        return false;
-      }
-
-      return canResonatePieceOwner(ownerUserId);
+      const serverAllows = viewerState.can_resonate ?? viewerState.canResonate;
+      if (typeof serverAllows === "boolean") return serverAllows;
+      return !isPieceV2Post(item) && canResonatePieceOwner(ownerUserId);
     },
-    [canResonatePieceOwner, isTutorialMode, readPieceViewerState, viewerUserId]
+    [canResonatePieceOwner, isTutorialMode, viewerUserId]
   );
 
   const handleSelectOwnerOption = useCallback(
@@ -854,87 +855,62 @@ export default function NexusScreen({ navigation }) {
 
   const handlePressPieceResonance = useCallback(
     async (item) => {
-      if (!item || !isOwnerCurrent(ownerRequest) || isPieceResonated(item) || !canResonatePiece(item)) return;
+      if (!item || !isOwnerCurrent(ownerRequest) || !canResonatePiece(item)) return;
 
       const qInstanceId = resolvePieceQInstanceId(item);
-      if (!qInstanceId || resonanceSubmittingIds[qInstanceId]) return;
+      if (!qInstanceId || resonanceActivity.submitting.has(qInstanceId)) return;
 
-      setResonanceSubmittingIds((prev) => ({
-        ...(prev || {}),
-        [qInstanceId]: true,
-      }));
+      const requestedResonance = !isPieceResonated(item);
+      resonanceActivity.submitting.add(qInstanceId);
+      setResonanceSubmittingIds((previous) => ({ ...previous, [qInstanceId]: true }));
 
       try {
-        const result = await postNexusPieceResonance({
-          qInstanceId,
-          qKey: resolvePieceQKey(item),
-        }, ownerRequest.options);
+        const published = isPieceV2Post(item);
+        const result = published
+          ? await setPublishedPieceResonance({ qInstanceId, resonated: requestedResonance }, ownerRequest.options)
+          : await postNexusPieceResonance({
+            qInstanceId,
+            qKey: resolvePieceQKey(item),
+            resonated: requestedResonance,
+          }, ownerRequest.options);
         if (!isOwnerCurrent(ownerRequest)) return;
-        const hasResultResonances =
-          result?.resonances !== undefined && result?.resonances !== null;
-        const currentResonances =
-          Number(item?.metrics?.resonances ?? item?.resonances ?? 0) || 0;
-        const nextResonances = hasResultResonances
-          ? normalizeDetailResonanceCount(result?.resonances)
-          : currentResonances + 1;
-        const hasResultViews = result?.views !== undefined && result?.views !== null;
-        const nextViews = hasResultViews
-          ? normalizeDetailResonanceCount(result?.views)
-          : Number(item?.metrics?.views ?? item?.views ?? 0) || 0;
-        const nextIsResonated = result?.resonated !== false;
+        if (published && (result?.q_instance_id !== qInstanceId ||
+            typeof result.resonated !== "boolean" || !Number.isInteger(result.resonances) || result.resonances < 0)) {
+          throw new Error("共鳴の更新結果を確認できませんでした。");
+        }
 
-        setPieceState((prev) => ({
-          ...prev,
-          items: Array.isArray(prev.items)
-            ? prev.items.map((row) => {
-                if (String(row?.q_instance_id || "") !== qInstanceId) return row;
-                return {
-                  ...row,
-                  viewer_state: {
-                    ...(row?.viewer_state || {}),
-                    is_resonated: nextIsResonated,
-                    can_resonate: true,
-                  },
-                  metrics: {
-                    ...(row?.metrics || {}),
-                    views: nextViews,
-                    resonances: nextResonances,
-                  },
-                };
-              })
-            : prev.items,
+        const resonated = typeof result?.resonated === "boolean" ? result.resonated : requestedResonance;
+        const currentCount = normalizeDetailResonanceCount(item?.metrics?.resonances ?? item?.resonances);
+        const countChange = Number(resonated) - Number(!requestedResonance);
+        const receipt = {
+          resonated,
+          resonances: result?.resonances == null
+            ? Math.max(0, currentCount + countChange)
+            : normalizeDetailResonanceCount(result.resonances),
+          views: result?.views == null ? null : normalizeDetailResonanceCount(result.views),
+        };
+        resonanceActivity.feedRead?.set(qInstanceId, receipt);
+        resonanceActivity.historyRead?.set(qInstanceId, receipt);
+
+        setPieceState((previous) => ({
+          ...previous,
+          items: previous.items.map((row) => resolvePieceQInstanceId(row) === qInstanceId
+            ? applyPieceResonanceReceipt(row, receipt)
+            : row),
         }));
-        const nextHistoryItem = buildResonanceHistoryItemFromPiece({
-          ...item,
-          metrics: {
-            ...(item?.metrics || {}),
-            views: nextViews,
-            resonances: nextResonances,
-          },
-          viewer_state: {
-            ...(item?.viewer_state || {}),
-            is_resonated: nextIsResonated,
-            can_resonate: true,
-          },
-        });
-        if (historyReadScopeRef.current === historyReadScope) setHistoryState((prev) => {
-          if (prev?.scope !== historyReadScope || prev.loading) return prev;
-          const currentRows = Array.isArray(prev.resonances) ? prev.resonances : [];
-          const rowsWithoutCurrent = currentRows.filter(
-            (row) => String(row?.qInstanceId || "") !== qInstanceId
-          );
-          const nextRows = nextHistoryItem
-            ? [nextHistoryItem, ...rowsWithoutCurrent]
-            : rowsWithoutCurrent;
+        if (resonated && !resonanceActivity.historyRead && historyReadScopeRef.current?.tab === "history") {
+          setHistoryRefresh((previous) => previous + 1);
+        }
+        setHistoryState((previous) => {
+          if (previous?.scope !== historyReadScopeRef.current || previous.loading) return previous;
           return {
-            ...prev,
-            resonances: sortHistoryItems(nextRows, historyOrder),
-            loadedModes: {
-              ...(prev.loadedModes || {}),
-              [historyLoadedModeKey]: true,
-            },
-            order: historyOrder,
-            error: "",
+            ...previous,
+            resonances: reconcileResonanceHistory(
+              previous.resonances,
+              new Map([[qInstanceId, receipt]]),
+              previous.order,
+              HISTORY_LIMIT
+            ),
           };
         });
       } catch (e) {
@@ -947,25 +923,20 @@ export default function NexusScreen({ navigation }) {
             ? "フォローしているユーザーのピースにのみ共鳴できます。"
             : statusCode === 400 && rawMessage.toLowerCase().includes("self")
               ? "自分のピースには共鳴できません。"
-              : rawMessage || "共鳴できませんでした。";
-        Alert.alert("共鳴できません", message);
+              : rawMessage || "共鳴を更新できませんでした。";
+        Alert.alert("共鳴を更新できません", message);
       } finally {
-        if (!isOwnerCurrent(ownerRequest)) return;
-        setResonanceSubmittingIds((prev) => {
-          const next = { ...(prev || {}) };
-          delete next[qInstanceId];
-          return next;
-        });
+        resonanceActivity.submitting.delete(qInstanceId);
+        if (isOwnerCurrent(ownerRequest)) {
+          setResonanceSubmittingIds((previous) => {
+            const next = { ...previous };
+            delete next[qInstanceId];
+            return next;
+          });
+        }
       }
     },
-    [
-      canResonatePiece,
-      historyLoadedModeKey,
-      historyOrder,
-      isPieceResonated,
-      resonanceSubmittingIds,
-      ownerRequest, isOwnerCurrent, historyReadScope,
-    ]
+    [canResonatePiece, ownerRequest, isOwnerCurrent, resonanceActivity]
   );
 
   const handlePressPieceDelete = useCallback(

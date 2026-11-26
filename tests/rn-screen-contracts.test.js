@@ -1578,7 +1578,7 @@ test('Piece RN surfaces preserve entry routing, read-side feed, tutorial pieces,
     'tutorialPieces',
     'ensureTutorialPiecesSeed',
     'setUnread("Piece", "piecesNew"',
-    'buildResonanceHistoryItemFromPiece',
+    'reconcileResonanceHistory',
     'activeTab === "history"',
   ], 'NexusScreen.js');
 

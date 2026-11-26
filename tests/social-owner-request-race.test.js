@@ -64,7 +64,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     if (p.startsWith('/deep-insight/questions/')) return control.notifiedQuestion;
     if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
     if (p === '/nexus/pieces') return { items: control.pieceFeedItems || [] };
-    if (p === '/piece/resonances/pieces') return { items: control.resonanceHistoryItems || [] };
+    if (p === '/piece/resonances/pieces' || p === '/nexus/history/resonances') return { items: control.resonanceHistoryItems || [] };
     if (p.startsWith('/nexus/pieces/')) return control.legacyPieceDetail || {};
     if (p === '/notices/history') return control.noticesHistory?.(new URL(url)) ?? { items: [notice], unread_count: 1 };
     if (p === '/follow/list') return { rows: [{ id: 'C', display_name: 'C-name' }, { id: 'D', display_name: 'D-name' }] };
@@ -80,7 +80,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     assert.equal(options.signal?.aborted, false, 'an obsolete operation must stop before the transport');
     const call = { url, path: new URL(url).pathname, options, owner: options.headers.Authorization?.replace('Bearer synthetic-', '') };
     calls.push(call);
-    if (options.method === 'GET' && control.holdRead?.(call)) {
+    const hold = options.method === 'GET' ? control.holdRead : control.holdWrite;
+    if (hold?.(call)) {
       Object.assign(call, deferred());
       return call.promise.then(body => packet(body));
     }
@@ -153,7 +154,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (target === 'components/TutorialOverlay.js') return { __esModule: true, default: 'TutorialOverlay',
         syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
       if (target === 'components/UnreadBadge.js') return { __esModule: true, default: 'UnreadBadge', BottomTabUnreadBadge: 'UnreadBadge', ScreenUnreadBadge: 'UnreadBadge' };
-      if (control.realFeedCards && ['screens/nexus/NexusPieceFeedSection.js', 'screens/nexus/NexusPieceCard.js'].includes(target)) return load(target);
+      if (control.realFeedCards && ['screens/nexus/NexusPieceFeedSection.js', 'screens/nexus/NexusPieceCard.js',
+        'screens/nexus/NexusHistorySection.js'].includes(target)) return load(target);
       if (target.startsWith('components/') || target.startsWith('runtime/') || /navigation\/.*StackNavigator\.js$/.test(target) ||
           /screens\/nexus\/Nexus/.test(target)) return { __esModule: true, default: path.basename(target, '.js'), BottomTabUnreadBadge: 'UnreadBadge' };
       if (name.startsWith('.')) return load(target);
@@ -537,6 +539,109 @@ test('the opt-in post feed renders new Piece text, preserves old Q&A, and refres
   await h.navigationEvent('focus');
   assert.ok(!text().includes(nativePiece.body));
   assert.ok(text().includes(legacyPiece.body));
+});
+
+test('public Piece hearts show zero for the writer and persist a followed post in the resonance list until removed', async t => {
+  const own = { source_type: 'piece_v2', q_instance_id: 'piece:own', owner: { user_id: 'A', display_name: '自分' },
+    body: '自分のピース本文', created_at: '2026-11-26T01:00:00Z', viewer_state: { can_resonate: true } };
+  let followed = { source_type: 'piece_v2', q_instance_id: 'piece:followed', owner: { user_id: 'C', display_name: 'かれん' },
+    body: '相手のピース本文', created_at: '2026-11-26T00:00:00Z', metrics: { resonances: 0 },
+    viewer_state: { can_resonate: true, is_resonated: false } };
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    realFeedCards: true, pieceFeedItems: [own, followed], colors: { TITLE_GOLD: '#800020', SECTION_BORDER: '#D7D2C9' },
+  });
+  const mutationPath = '/nexus/pieces/piece%3Afollowed/resonance';
+  h.control.writeResponse = (path, options) => {
+    assert.equal(path, mutationPath);
+    assert.equal(options.method, 'PUT');
+    const { resonated } = JSON.parse(options.body);
+    const resonances = resonated ? 1 : 0;
+    followed = { ...followed, metrics: { resonances }, viewer_state: { ...followed.viewer_state, is_resonated: resonated } };
+    h.control.pieceFeedItems = [own, followed];
+    h.control.resonanceHistoryItems = resonated ? [{ ...followed, saved_at: '2026-11-26T02:00:00Z' }] : [];
+    return { q_instance_id: followed.q_instance_id, resonated, resonances };
+  };
+  const findCount = () => h.root.root.findAllByProps({ testID: 'nexus-piece-resonance-count' }).map(node => node.props.children);
+  const findToggle = () => h.root.root.findByProps({ testID: 'nexus-piece-resonance-toggle' });
+  const text = () => h.root.root.findAllByType('Text').map(node => node.props.children);
+  const switchTab = tab => act(async () => { h.find('NexusTabBar').props.setActiveTab(tab); await tick(); });
+  const initialFeed = h.calls.find(call => call.path === '/nexus/pieces');
+  assert.equal(new URL(initialFeed.url).searchParams.get('include_piece_v2_resonance'), 'true');
+  const headers = h.root.root.findAllByProps({ testID: 'nexus-piece-card-header' });
+  assert.equal(headers.length, 2);
+  for (const row of headers) {
+    assert.equal(row.props.style.flexDirection, 'row');
+    assert.ok(row.props.style.borderBottomWidth > 0);
+    const [name, date] = row.findAllByType('Text');
+    assert.equal(name.props.style.color, '#800020');
+    assert.equal(name.props.style.fontWeight, '700');
+    assert.equal(date.props.style.textAlign, 'right');
+  }
+  assert.ok(!h.root.root.findAllByType('Icon').some(node => /person-circle|ellipsis/.test(node.props.name)));
+  assert.deepEqual(findCount(), [0, 0]);
+  assert.ok(h.root.root.findByProps({ accessibilityLabel: '共鳴 0件' }));
+  assert.equal(findToggle().props.accessibilityState.selected, false);
+  await act(async () => { await findToggle().props.onPress(); });
+  assert.deepEqual(findCount(), [0, 1]);
+  assert.equal(findToggle().props.accessibilityState.selected, true);
+  assert.ok(h.root.root.findAllByType('Icon').some(node => node.props.name === 'heart' && node.props.color === '#800020'));
+
+  await switchTab('history');
+  const history = h.calls.findLast(call => call.path === '/nexus/history/resonances');
+  assert.equal(new URL(history.url).searchParams.get('include_piece_v2'), 'true');
+  assert.ok(text().includes(followed.body));
+  await act(async () => { await findToggle().props.onPress(); });
+  assert.ok(!text().includes(followed.body));
+  assert.deepEqual(h.mutations().map(call => JSON.parse(call.options.body).resonated), [true, false]);
+  await switchTab('piece');
+  assert.deepEqual(findCount(), [0, 0]);
+  assert.equal(findToggle().props.accessibilityState.selected, false);
+});
+
+test('legacy followed Q&A heart can be removed using the established removal route', async t => {
+  const piece = { q_instance_id: 'legacy', q_key: 'question', owner: { user_id: 'C' },
+    viewer_state: { is_resonated: true, can_resonate: true }, metrics: { resonances: 1 } };
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, { realFeedCards: true, pieceFeedItems: [piece],
+    writeResponse: () => ({ resonated: false, resonances: 0 }), });
+  await act(async () => { await h.root.root.findByProps({ testID: 'nexus-piece-resonance-toggle' }).props.onPress(); });
+  const [remove] = h.mutations();
+  assert.equal(remove.path, '/piece/resonances/delete');
+  assert.equal(remove.options.method, 'POST');
+  assert.deepEqual(JSON.parse(remove.options.body), { q_instance_id: 'legacy', q_key: 'question' });
+  assert.equal(h.root.root.findByProps({ testID: 'nexus-piece-resonance-count' }).props.children, 0);
+  assert.equal(h.root.root.findByProps({ testID: 'nexus-piece-resonance-toggle' }).props.accessibilityState.selected, false);
+});
+
+test('each earlier Nexus history read rechecks for resonances confirmed during it', async t => {
+  const piece = { source_type: 'piece_v2', q_instance_id: 'piece:recent', owner: { user_id: 'C' },
+    viewer_state: { can_resonate: true, is_resonated: false }, metrics: { resonances: 0 } };
+  const other = { ...piece, q_instance_id: 'piece:other' };
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    pieceFeedItems: [piece, other], holdWrite: call => call.options.method === 'PUT',
+    holdRead: call => call.path === '/nexus/history/resonances',
+  });
+  const press = h.find('NexusPieceFeedSection').props.handlePressPieceResonance;
+  let mutation, otherMutation;
+  await act(async () => { mutation = press(piece); void press(piece); await tick(); });
+  assert.equal(h.mutations().length, 1, 'double tap with the same view state sends only one receipt request');
+  await act(async () => { otherMutation = press(other); await tick(); });
+  await act(async () => { h.find('NexusTabBar').props.setActiveTab('history'); await tick(); });
+  const history = h.calls.findLast(call => call.path === '/nexus/history/resonances');
+  await h.resolve(h.mutations()[0], { q_instance_id: piece.q_instance_id, resonated: true, resonances: 1 });
+  await mutation;
+  await h.resolve(history, { items: [] });
+  const refreshed = h.calls.findLast(call => call.path === '/nexus/history/resonances');
+  assert.notEqual(refreshed, history);
+  await h.resolve(h.mutations()[1], { q_instance_id: other.q_instance_id, resonated: true, resonances: 1 });
+  await otherMutation;
+  h.control.holdRead = null;
+  const saved = h.control.resonanceHistoryItems = [piece, other].map((item) => ({
+    ...item, metrics: { resonances: 1 }, saved_at: '2026-11-26T02:00:00Z',
+  }));
+  await h.resolve(refreshed, { items: [saved[0]] });
+  assert.equal(h.calls.filter(call => call.path === '/nexus/history/resonances').length, 3);
+  assert.deepEqual(h.find('NexusHistorySection').props.historyState.resonances.map(row => row.q_instance_id),
+    [piece.q_instance_id, other.q_instance_id]);
 });
 
 test('Nexus no longer loads the public emotion aggregate and still rechecks shared posts on return', async t => {

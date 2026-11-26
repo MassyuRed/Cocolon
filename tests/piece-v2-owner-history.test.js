@@ -1171,7 +1171,7 @@ function nexusEntryHarness(options = {}) {
       if (name.endsWith('/TutorialContext')) return { useTutorial: () => ({ isTutorialMode: control.tutorial,
         tutorialStep: 0, tutorialPieces, setTutorialStep: noop, ensureTutorialPiecesSeed: noop }) };
       if (name.endsWith('/ThemeContext')) return { useTheme: () => ({ colors, themeName: 'light' }) };
-      if (name.endsWith('/uiTokens')) return { makeUiTokens: () => ({}) };
+      if (name.endsWith('/uiTokens')) return load(path.resolve(path.dirname(file), name + '.js'));
       if (name.endsWith('/applyTypographyTokens')) return { applyTypographyTokens: x => x };
       if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({}) };
       if (name.endsWith('/nexusApi')) return new Proxy({}, { get: (_, key) => async (...args) => {

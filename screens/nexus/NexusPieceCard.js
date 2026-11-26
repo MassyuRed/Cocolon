@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -8,32 +8,8 @@ import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
 import { readShareCode } from "../../lib/compat/legacyWireContracts";
-import { isPieceV2Post } from "./nexusHistoryModel";
-
-function formatDateLabel(value) {
-  const raw = String(value || "").trim();
-  if (!raw) return "";
-  const d = new Date(raw);
-  if (Number.isNaN(d.getTime())) return "";
-  try {
-    return d.toLocaleString("ja-JP", {
-      month: "numeric",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  } catch {
-    return "";
-  }
-}
-
-function readViewerState(item) {
-  return (
-    (item?.viewer_state && typeof item.viewer_state === "object" ? item.viewer_state : null) ||
-    (item?.viewerState && typeof item.viewerState === "object" ? item.viewerState : null) ||
-    {}
-  );
-}
+import { isPieceResonated, isPieceV2Post, readPieceViewerState } from "./nexusHistoryModel";
+import { formatDateLabel } from "./nexusNormalize";
 
 export default function NexusPieceCard({
   item,
@@ -48,169 +24,100 @@ export default function NexusPieceCard({
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
-  const [menuVisible, setMenuVisible] = useState(false);
 
   const ownerName = String(item?.owner?.display_name || readShareCode(item?.owner, "") || "ユーザー").trim();
   const createdAt = formatDateLabel(item?.created_at);
   const body = String(item?.body || "").trim();
   const title = String(item?.question?.title || "").trim();
   const publishedPiece = isPieceV2Post(item);
-  const viewerState = readViewerState(item);
+  const viewerState = readPieceViewerState(item);
   const isNew = viewerState?.is_new === true || viewerState?.isNew === true;
-  const isResonated =
-    viewerState?.is_resonated === true ||
-    viewerState?.isResonated === true ||
-    item?.is_resonated === true ||
-    item?.isResonated === true;
+  const isResonated = isPieceResonated(item);
   const resonances = Number(item?.metrics?.resonances ?? item?.resonances ?? 0) || 0;
-  const showResonanceButton = !publishedPiece && !!canResonate;
-  const showDeleteMenu = !publishedPiece && !!canDelete;
-  const buttonDisabled = !!isResonated || !!resonanceSubmitting;
-  const buttonLabel = isResonated ? "共鳴済み" : "共鳴";
+  const countLabel = `${resonances}件`;
+  const heart = (
+    <>
+      <Ionicons
+        name={isResonated ? "heart" : "heart-outline"}
+        size={18}
+        color={isResonated ? colors.TITLE_GOLD : colors.TEXT_SUBTLE}
+        accessible={false}
+      />
+      <Text style={styles.metricText} testID="nexus-piece-resonance-count">{resonances}</Text>
+    </>
+  );
 
   return (
     <View style={styles.card}>
-      <View style={styles.headerRow}>
+      <View style={styles.headerRow} testID="nexus-piece-card-header">
         <CocolonPressable
+          containerStyle={styles.ownerTarget}
           style={styles.ownerChip}
           onPress={onPressOwner}
           accessibilityLabel={`${ownerName}のアカウントを開く`}
         >
-          <Ionicons
-            name="person-circle-outline"
-            size={16}
-            color={colors.TEXT_ON_LIGHT}
-            style={styles.ownerIcon}
-          />
-          <Text style={styles.ownerText}>
-            {ownerName}
-          </Text>
+          <Text style={styles.ownerText}>{ownerName}</Text>
         </CocolonPressable>
-
-        <View style={styles.headerRight}>
-          {showDeleteMenu ? (
-            <CocolonPressable
-              style={[styles.moreButton, deleteSubmitting && styles.moreButtonDisabled]}
-              onPress={() => setMenuVisible((current) => !current)}
-              disabled={deleteSubmitting}
-              accessibilityLabel="ピースのメニューを開く"
-              accessibilityState={{ expanded: menuVisible, busy: deleteSubmitting }}
-              hitSlop={8}
-            >
-              {deleteSubmitting ? (
-                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
-              ) : (
-                <Ionicons
-                  name="ellipsis-horizontal"
-                  size={18}
-                  color={colors.TEXT_SUBTLE}
-                />
-              )}
-            </CocolonPressable>
-          ) : (
-            <View style={styles.moreButtonSpacer} accessibilityElementsHidden importantForAccessibility="no" />
-          )}
-          <View style={styles.timeRow}>
-            {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
-            <ScreenUnreadBadge visible={isNew} style={styles.newBadge} />
-          </View>
+        <View style={styles.timeRow}>
+          {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
+          <ScreenUnreadBadge visible={isNew} />
         </View>
       </View>
 
       {publishedPiece ? null : (
         <>
-          <View
-            key={menuVisible ? "question-menu-open" : "question-menu-closed"}
-            style={styles.questionBlock}
-            collapsable={false}
-          >
-            <Text style={styles.questionLabel}>問い</Text>
-            <Text style={styles.questionText}>{title || "—"}</Text>
-          </View>
+          <Text style={styles.questionLabel}>問い</Text>
+          <Text style={styles.questionText}>{title || "—"}</Text>
           <Text style={styles.bodyLabel}>答え</Text>
         </>
       )}
       <Text style={styles.bodyText}>{body || "—"}</Text>
 
-      {publishedPiece ? null : (
-        <View style={styles.metricsRow}>
-          <View style={styles.metricChip}>
-            <Ionicons
-              name={isResonated ? "heart" : "heart-outline"}
-              size={14}
-              color={colors.TEXT_SUBTLE}
-              style={styles.metricIcon}
-            />
-            <Text style={styles.metricText}>{resonances}</Text>
-          </View>
-
-          {showResonanceButton ? (
-            <CocolonPressable
-              style={[
-                styles.resonanceButton,
-                isResonated && styles.resonanceButtonDone,
-                buttonDisabled && styles.resonanceButtonDisabled,
-              ]}
-              onPress={onPressResonance}
-              disabled={buttonDisabled}
-              accessibilityLabel={buttonLabel}
-              accessibilityState={{ selected: isResonated, busy: resonanceSubmitting }}
-              hitSlop={8}
-            >
-              {resonanceSubmitting ? (
-                <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
-              ) : (
-                <Text
-                  style={[
-                    styles.resonanceButtonText,
-                    isResonated && styles.resonanceButtonTextDone,
-                  ]}
-                >
-                  {buttonLabel}
-                </Text>
-              )}
-            </CocolonPressable>
-          ) : null}
-        </View>
-      )}
-
-      {menuVisible && showDeleteMenu ? (
-        <View style={styles.actionMenu} collapsable={false}>
+      <View style={styles.metricsRow}>
+        {canResonate ? (
           <CocolonPressable
-            style={styles.actionMenuItem}
-            onPress={() => {
-              setMenuVisible(false);
-              onPressDelete?.();
-            }}
+            style={[styles.metricChip, resonanceSubmitting && styles.metricPending]}
+            onPress={onPressResonance}
+            disabled={resonanceSubmitting}
+            accessibilityLabel={isResonated ? "共鳴を取り消す" : "共鳴する"}
+            accessibilityState={{ selected: isResonated, busy: resonanceSubmitting }}
+            accessibilityValue={{ text: countLabel }}
+            testID="nexus-piece-resonance-toggle"
+          >
+            {heart}
+          </CocolonPressable>
+        ) : (
+          <View style={styles.metricChip} accessible accessibilityLabel={`共鳴 ${countLabel}`}>
+            {heart}
+          </View>
+        )}
+        {canDelete ? (
+          <CocolonPressable
+            style={styles.deleteButton}
+            onPress={onPressDelete}
             disabled={deleteSubmitting}
             accessibilityLabel="ピースを削除する"
           >
-            <Ionicons
-              name="trash-outline"
-              size={16}
-              color={colors.ERROR}
-              style={styles.actionMenuIcon}
-            />
-            <Text style={styles.actionMenuDeleteText}>削除</Text>
+            {deleteSubmitting ? <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} /> : (
+              <Text style={styles.deleteText}>削除</Text>
+            )}
           </CocolonPressable>
-        </View>
-      ) : null}
+        ) : null}
+      </View>
     </View>
   );
 }
 
-function createStyles(COLORS, ui) {
-  const font = ui?.font || {};
-  const text = ui?.text || {};
+function createStyles(colors, ui) {
   return StyleSheet.create(applyTypographyTokens({
     card: {
-      position: "relative",
       borderRadius: 24,
       borderWidth: 1,
       borderColor: ui.sectionFrame.borderColor,
-      backgroundColor: COLORS.FIELD_BG,
+      backgroundColor: colors.FIELD_BG,
       paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingTop: 12,
+      paddingBottom: 20,
       marginBottom: 16,
       shadowColor: "#000",
       shadowOpacity: 0.06,
@@ -219,164 +126,66 @@ function createStyles(COLORS, ui) {
       elevation: 1,
     },
     headerRow: {
-      flexDirection: 'column',
-      alignItems: 'stretch',
-      justifyContent: "space-between",
-      marginBottom: 16,
-      gap: 8,
-    },
-    ownerChip: {
       flexDirection: "row",
       alignItems: "center",
-      flexShrink: 1,
-      paddingRight: 0,
-      width: '100%',
-      minHeight: 44,
+      justifyContent: "space-between",
+      gap: 12,
+      marginBottom: 16,
+      borderBottomWidth: StyleSheet.hairlineWidth || 1,
+      borderBottomColor: ui.sectionFrame.borderColor,
     },
-    ownerIcon: {
-      marginRight: 6,
-    },
+    ownerTarget: { flex: 1, minWidth: 0 },
+    ownerChip: { justifyContent: "center", minHeight: 44 },
     ownerText: {
-      color: COLORS.TEXT_ON_LIGHT,
-      flex: 1,
-      minWidth: 0,
-    },
-    headerRight: {
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      minWidth: 0,
-      flexDirection: 'row',
-      gap: 8,
-    },
-    moreButton: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      marginBottom: 0,
-    },
-    moreButtonDisabled: {
-
-    },
-    moreButtonSpacer: {
-      width: 44,
-      height: 44,
-      marginBottom: 0,
+      ...ui.typography.button,
+      color: colors.TITLE_GOLD,
+      fontWeight: "700",
     },
     timeRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "flex-end",
-      flexWrap: 'wrap',
-      flexShrink: 1,
+      flexWrap: "wrap",
+      maxWidth: "55%",
       gap: 6,
     },
     timeText: {
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: ui.text.description ?? colors.TEXT_SUBTLE,
       flexShrink: 1,
+      textAlign: "right",
     },
-    newBadge: {
-      marginLeft: 0,
-    },
-    actionMenu: {
-      position: 'relative',
-      elevation: 1,
-      minWidth: 0,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      shadowColor: "#000",
-      shadowOpacity: 0.06,
-      shadowRadius: 4,
-      shadowOffset: { width: 0, height: 2 },
-      paddingVertical: 4,
-      width: '100%',
-      marginTop: 12,
-    },
-    actionMenuItem: {
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      minHeight: 44,
-    },
-    actionMenuIcon: {
-      marginRight: 8,
-    },
-    actionMenuDeleteText: {
-      color: COLORS.ERROR,
-    },
-    questionBlock: {
-      position: "relative",
-      zIndex: 1,
-    },
-    questionLabel: {
-      color: COLORS.TEXT_SUBTLE,
-      marginBottom: 6,
-    },
-    questionText: {
-      color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 16,
-    },
-    bodyLabel: {
-      color: COLORS.TEXT_SUBTLE,
-      marginBottom: 6,
-    },
-    bodyText: {
-      color: COLORS.TEXT_ON_LIGHT,
-    },
+    questionLabel: { color: colors.TEXT_SUBTLE, marginBottom: 6 },
+    questionText: { color: colors.TEXT_ON_LIGHT, marginBottom: 16 },
+    bodyLabel: { color: colors.TEXT_SUBTLE, marginBottom: 6 },
+    bodyText: { color: colors.TEXT_ON_LIGHT },
     metricsRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      flexWrap: "wrap",
       marginTop: 16,
-      flexWrap: 'wrap',
       gap: 8,
     },
     metricChip: {
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: "center",
+      minHeight: 44,
+      minWidth: 44,
       borderRadius: 999,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: colors.CARD_BORDER,
       paddingHorizontal: 12,
       paddingVertical: 8,
-      backgroundColor: COLORS.PANEL_BG,
-      marginRight: 0,
+      backgroundColor: colors.PANEL_BG,
+      gap: 6,
     },
-    metricIcon: {
-      marginRight: 4,
-    },
-    metricText: {
-      color: text.description ?? COLORS.TEXT_SUBTLE,
-    },
-    resonanceButton: {
-      minWidth: 74,
-      minHeight: 44,
-      borderRadius: 24,
-      borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    resonanceButtonDone: {
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-    },
-    resonanceButtonDisabled: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderColor: COLORS.CARD_BORDER,
-    },
-    resonanceButtonText: {
-      color: COLORS.ACCENT_TEXT,
-    },
-    resonanceButtonTextDone: {
-      color: COLORS.TEXT_SUBTLE,
-    },
-  }, ui, {"ownerText":"button","timeText":"meta","actionMenuDeleteText":"button","questionLabel":"meta","questionText":"description","bodyLabel":"description","bodyText":"body","metricText":"meta","resonanceButtonText":"button"}));
+    metricPending: { opacity: 0.65 },
+    metricText: { color: ui.text.description ?? colors.TEXT_SUBTLE },
+    deleteButton: { justifyContent: "center", minHeight: 44, paddingHorizontal: 8 },
+    deleteText: { color: colors.ERROR },
+  }, ui, {
+    timeText: "meta", questionLabel: "meta", questionText: "description",
+    bodyLabel: "description", bodyText: "body", metricText: "meta", deleteText: "button",
+  }));
 }
