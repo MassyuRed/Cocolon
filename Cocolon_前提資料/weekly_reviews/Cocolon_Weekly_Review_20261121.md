@@ -1527,3 +1527,24 @@ Plusで本人が「つらかった」とだけ書き、最初の問いをスキ�
 **統合確認。** EmlisAIの問い・Piece連携を含む466件が通過。最終版 `77cec9b` でマップとEmlisAIの270件とサブテスト2件が通過し、Plusで最初の問いを閉じた実応答も同じ版で再読した。前回版 `aa04a86` のGitHub ActionsはAnalysis・Pieceとも成功。中間版 `aa6e376` のCIは取り消した。最終版はPiece CIが実行中で、最後に修正したテストパスはAnalysis CIの起動条件外だった。 [最終API版](https://github.com/MassyuRed/mashos-api/commit/77cec9b8c538dce872be132469655b46b7fd4fe5) · [前回のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531837) · [前回のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531869) · [最終版のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45725665616)
 
 Renderで同じ版のワーカーは09:05:54 JST、APIは09:06:51 JSTにLiveとなった。公開ヘルスはHTTP 200、未認証のわたしマップの取得はHTTP 401。既存のSupabase移行と設定を使い、RLS、既存マップ8件、構造間の関係を持つ本番保存版0件、ASTORの実行・待機0件を照合した。 [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3ndtlg1s2s73c54rpg) · [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3nf7dg1s2s73c58ao0)
+
+<a id="cmee-four-features-integrated-ios-20261126"></a>
+
+### 11.110 EmlisAI・Piece・わたしマップ・DeepInsightの統合iOS版（11/26 JST）
+
+Mashの指示で、EmlisAIの観測応答と問い、Piece画像編集、わたしマップ、DeepInsightを同じ署名ビルドにそろえる。8801はわたしマップの変更を収録し、Pieceはパレット3のコードだった。Pieceの画像編集は本番APIとSupabaseで受けられる一方、対応アプリの先行候補 `9790ddd` は未配布だった。同候補は旧試験で残った420字の時間超過と実験用Unicodeの合成差を解消し、iOSシミュレーター8件とPieceの全6ジョブに合格した。 [8801の記録](#cmee-map-reread-and-listener-20261126) · [Piece先行候補](https://github.com/MassyuRed/Cocolon/commit/9790dddf3933c1a4a3c525f91f9440cc23922390) · [Piece先行検証](https://github.com/MassyuRed/Cocolon/actions/runs/45535750554)
+
+| 機能 | 統合するアプリ側の変更 |
+| --- | --- |
+| EmlisAI | 当回の観測・問い・回答・スキップの画面を引き継ぐ。アカウントの表示名が使える場合、最初の観測にだけ「さん」を付けて呼びかける。保存済みの観測本文はそのまま表示する |
+| Piece | 画像のプレビュー、所有者の詳細、書き出しに対応する編集を収録する。Plus・Premiumで配置と文字サイズを選べ、Premiumでは書体・文字色・背景・枠・飾りを選べる。対応するiOS描画が、パレット7と装飾8をAPIへ通知する |
+| わたしマップ | 8801で収録した、Freeの短い結論と小図、Plusの構造ごとに開ける図、Premiumの構造間の専用図を引き継ぐ。現在・月次・詳細は同じ保存版と権利を使う |
+| DeepInsight | 「わたしを知る問い」のヘッダーに重なっていた上側余白を外す。発行された問いと回答、通知から対象の問いを開く操作を引き継ぐ |
+
+「分析について」とPieceの案内は、プラン別の図と画像編集の操作に合わせた。
+
+統合アプリは `a4ce916`。先行のローカル確認ではPiece・分析1,673件、EmlisAI・DeepInsightはMetroのバンドル検査を含む274件が通過した。統合後はマップ・もしもルート99件、所有者・通知・画面390件を確認した。検査範囲が重なるため件数は合算しない。統合版のアプリ契約CIとPiece CI全6ジョブは成功し、iOSのTextKit・CoreText計測も通過した。最後の変更がもしもルートの試験ファイルだったため、同版のシミュレーター画像描画工程はスキップされた。画像描画8件の実績は、Pieceの実装・試験データが一致する先行版 `9790ddd` に基づく。署名ワークフロー #89 は09:43:21 JSTに統合版を指定して起動した。本番APIとワーカーは `77cec9b`、Supabaseは既存の移行を使用した。 [統合版](https://github.com/MassyuRed/Cocolon/commit/a4ce9167f6426b932d4fdb25c7f88f0741862836) · [Piece CI](https://github.com/MassyuRed/Cocolon/actions/runs/45730585003) · [アプリ契約CI](https://github.com/MassyuRed/Cocolon/actions/runs/45730585048) · [署名ビルド #89](https://github.com/MassyuRed/Cocolon/actions/runs/45730743149)
+
+本番で四機能のアプリとAPIの受け渡し、対応するSupabase移行、公開ヘルスHTTP 200を確認した。未認証の取得は各機能でHTTP 401だった。本人としての認証付き生成、保存版の再読、端末での表示は今回の本番確認に含まれない。
+
+`a4ce916` のiOS 1.0 (8901) は、署名付きArchiveが10:02:00、IPA書き出しが10:02:08、TestFlight送信が10:03:42 JSTに成功した。写真ライブラリ用途文言の検査も通過した。App Store Connectでの処理・内部配布はMash様が担当。Appleの処理完了、既存グループ「Emlis テスト版配布」での「テスト中」、本人端末の表示は未確認。 [署名とTestFlight送信](https://github.com/MassyuRed/Cocolon/actions/runs/45730743149)

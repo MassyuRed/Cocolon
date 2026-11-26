@@ -1,3 +1,5 @@
+> **11/26 JST・EmlisAI・Piece・わたしマップ・DeepInsightをiOS 1.0 (8901) に統合。** `a4ce916` は8801のプラン別わたしマップに、Piece画像編集、EmlisAI初回の呼びかけ、DeepInsightのヘッダー余白修正を加えた。署名付き8901は10:03:42 JSTにTestFlight送信成功。本番API・ワーカーは `77cec9b`。App Store Connectでの処理・内部配布はMash様が担当し、Appleの処理完了、「テスト中」、端末表示は未確認。 [四機能の統合記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-features-integrated-ios-20261126)
+
 > **11/26 JST・EmlisAIの初回と、最初の問いをスキップした後の返事を通常反映。** Free初回では本人と同じ出来事・気持ちを返した一文を、記録確認の口調から本人への返事に修正。Plusで「つらかった」とだけ書いて最初の問いをスキップした場合は、本人が書いた気持ちを受け止める短い返事にする。先に配備した「姉が直した」の保持を継承。実応答と隔離DBで同じ版の再読を確認し、統合版 `77cec9b` を本番APIとワーカーに配備した。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-reread-and-listener-20261126)
 
 > **11/26 JST・わたしマップのFree・Plusを通常反映。** 実9Bのノートと鍵の二題材から、Freeの短い結論と小図、Plusの二場面の説明を確かめた。隔離DBでは同じ保存IDの現在・月次・詳細を配布済み8601の表示処理で再読した。Supabaseの先行移行2件を適用し、`7968529` を本番API・ワーカーへ先行配備した。本人端末での表示確認は残る。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-first-free-plus-20261126)
