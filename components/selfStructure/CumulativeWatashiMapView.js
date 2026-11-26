@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../AuthContext';
 import { useSubscription } from '../../SubscriptionContext';
 import { useTheme } from '../../theme/ThemeContext';
+import { SHOW_INTERPRETATION_CORRECTION } from '../../runtime/interpretationCorrectionUi';
 import { apiGet, apiPost } from '../../lib/apiClient';
 import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath } from '../../lib/compat/legacyWireContracts';
 import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
@@ -262,6 +263,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   </View> : null;
 
   const viewerTier = (state.key === key && state.mapSubscriptionTier) || tier;
+  const showMapCorrection = SHOW_INTERPRETATION_CORRECTION && !reportId;
   const renderMap = row => row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3'
       ? <SemanticWatashiMap key={`${key}:${mapScope(row)}`} contentJson={row.content_json}
           mapSubscriptionTier={row.map_plan_scoped ? row.map_subscription_tier : null} colors={colors} isDark={themeName === 'dark'}
@@ -272,7 +274,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             if (target) setIfDialog({ key, scope: mapScope(row), visible: true, mode: 'create', baseMapRef: map.projection_of,
               branchPointId: branchRef, branchLabel: target.title || target.label });
           } : undefined}
-          onCorrectMap={!reportId ? (kind, targetRef) => {
+          onCorrectMap={showMapCorrection ? (kind, targetRef) => {
             const map = row.content_json.watashiMap;
             if (currentKey.current !== key || mapScope(stateRef.current.row) !== mapScope(row)) return;
             setCorrectionNotice(null);
@@ -333,7 +335,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             : '更新結果を取得できませんでした。再取得で確認できます。'}
       </Text> : null}
       {visible && state.error ? <Text style={styles.error} accessibilityRole="alert">{state.error}</Text> : null}
-      {correctionNotice?.key === key ? <Text style={[styles.bodyText, { color: ink }]} accessibilityLiveRegion="polite">
+      {showMapCorrection && correctionNotice?.key === key ? <Text style={[styles.bodyText, { color: ink }]} accessibilityLiveRegion="polite">
         {correctionNotice.text}
       </Text> : null}
       {visible && state.empty && !refreshing ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
@@ -356,7 +358,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       onClose={() => setIfDialog(previous => previous ? { ...previous, visible: false } : null)}
       ownerId={owner} tier={viewerTier} baseMapRef={ifDialog?.baseMapRef} branchPointId={ifDialog?.branchPointId}
       branchLabel={ifDialog?.branchLabel} mode={ifDialog?.mode} colors={colors} themeName={themeName} />
-    <MapInterpretationCorrectionDialog
+    {showMapCorrection ? <MapInterpretationCorrectionDialog
       visible={!!mapCorrection?.visible && mapCorrection.key === key && !planLoading && focused && appActive
         && mapCorrection.scope === mapScope(state.row)}
       onClose={() => setMapCorrection(previous => previous ? { ...previous, visible: false } : null)}
@@ -370,7 +372,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         load(compareRef.current, false, true);
       }}
       ownerId={owner} projection={mapCorrection?.projection} kind={mapCorrection?.kind} mapSubscriptionTier={mapCorrection?.mapSubscriptionTier}
-      targetRef={mapCorrection?.targetRef} colors={colors} themeName={themeName} />
+      targetRef={mapCorrection?.targetRef} colors={colors} themeName={themeName} /> : null}
   </Container>;
 }
 

@@ -8,6 +8,7 @@ const Renderer = require('react-test-renderer');
 const babel = require('@babel/core');
 const { act } = Renderer;
 const ROOT = path.resolve(__dirname, '..');
+const correctionUiEnabled = { '../../runtime/interpretationCorrectionUi': { SHOW_INTERPRETATION_CORRECTION: true } };
 
 function correctionDTO() {
   return { schema_version: 'cocolon.emlis_thread.application.v1', thread_id: 'correction-thread', revision: 1,
@@ -22,7 +23,7 @@ test('completed reply offers two required correction inputs and binds submission
     sent = args;
     return { ...dto, revision: 2, correction_saved: true, correction_assessment: 'UNASSESSED',
       current_observation: { event_id: 'reply-2', text: '終わっても、まだ心配は残っているのですね。' } };
-  } });
+  } }, undefined, { modalMocks: correctionUiEnabled });
   await act(async () => h.value.open('correction-input'));
   const button = label => h.root.root.findAllByType('Button').find(x => x.props.children === label);
   await act(async () => button('違うと感じた内容を伝える').props.onPress());
@@ -47,7 +48,8 @@ test('completed reply offers two required correction inputs and binds submission
 test('correction target must match one exact occurrence and old revision cannot submit', async t => {
   const dto = { ...correctionDTO(), current_observation: { event_id: 'reply-1', text: '安心。安心。' } };
   let calls = 0;
-  const h = await mountPollingReader(t, { get: async () => dto, correction: async () => { calls++; } });
+  const h = await mountPollingReader(t, { get: async () => dto, correction: async () => { calls++; } },
+    undefined, { modalMocks: correctionUiEnabled });
   await act(async () => h.value.open('correction-input'));
   const old = h.value.correctInterpretation;
   await act(async () => old(dto.current_observation, '安心', '心配です。', 0));
@@ -61,6 +63,38 @@ test('correction target must match one exact occurrence and old revision cannot 
   await h.user('another-owner');
   await act(async () => old(dto.current_observation, '安心。安心。', '心配です。', 1));
   assert.equal(calls, 0);
+});
+
+test('normal reader hides correction controls and requests for detail while keeping saved explanations and questions', async t => {
+  const original = correctionDTO();
+  const savedExplanation = 'まだ心配は残っていました。';
+  const frames = [
+    { frame_ref: 'tentative', trigger: '会議', received_meaning: 'ほっとした', status: 'TENTATIVE' },
+    { frame_ref: 'saved-revision', trigger: '翌朝', received_meaning: '古い理解', status: 'REVISED', correction_text: '自分では怖かった。' },
+  ];
+  let dto = { ...original, interpretive_frames: frames };
+  const h = await mountPollingReader(t, { get: async () => dto });
+  await act(async () => h.value.open(dto.original.id));
+  let out = JSON.stringify(h.root.toJSON());
+  assert.doesNotMatch(out, /違うと感じた内容を伝える|理解を直す|この理解は使わない|違うところは直せます/);
+  assert.match(out, /自分では怖かった。/);
+  assert.match(out, /この理解で合っています/);
+
+  dto = { ...original, body_state: 'CORRECTION_UNREFLECTED', correction_saved: true,
+    correction_assessment: 'NEEDS_DETAIL', current_observation: null, correction_target: original.current_observation,
+    timeline: [{ event_id: 'saved-explanation', kind: 'CORRECTION', text: savedExplanation, target_text: '安心できた' }] };
+  await act(async () => h.value.refresh());
+  out = JSON.stringify(h.root.toJSON());
+  assert.match(out, /まだ心配は残っていました。/);
+  assert.match(out, /違うと感じた内容は保存されています。/);
+  assert.doesNotMatch(out, /もう少し教えてください|どう違いましたか|説明を送って読み直す/);
+
+  dto = { ...original, state: 'AWAITING_ANSWER', pending_question: { question_id: 'next', text: 'どの部分が心配でしたか？' } };
+  await act(async () => h.value.refresh());
+  out = JSON.stringify(h.root.toJSON());
+  assert.match(out, /どの部分が心配でしたか/);
+  assert.match(out, /Emlisへの回答/);
+  assert.match(out, /今回はスキップ/);
 });
 
 test('unknown correction ACK is reconciled by the same operation key without another POST', async t => {
@@ -119,18 +153,18 @@ for (const rounds of [2, 3]) {
 }
 
 // Natural replies keep the existing saved DTO and read-only hook boundary.
-async function mountPollingReader(t, api, initialUser = 'owner') {
+async function mountPollingReader(t, api, initialUser = 'owner', { subscriptionTier, modalMocks = {} } = {}) {
   const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
   const listeners = new Set();
   Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x },
     AppState: { currentState: 'active', addEventListener(_name, fn) { listeners.add(fn); return { remove: () => listeners.delete(fn) }; } } });
   const Modal = load('screens/input/EmlisThreadModal.js', { 'react-native': native,
-    '../../components/CocolonButton': props => React.createElement('Button', props, props.children) }).default;
+    '../../components/CocolonButton': props => React.createElement('Button', props, props.children), ...modalMocks }).default;
   const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
     '../../lib/api/emlisThreadApi': { emlisThreadApi: api },
     '../../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => false }) } });
   let value, root;
-  function Harness({ userId }) { value = useEmlisThread({ userId, api, enabled: true }); return React.createElement(Modal, { thread: value, colors: {} }); }
+  function Harness({ userId }) { value = useEmlisThread({ userId, api, enabled: true }); return React.createElement(Modal, { thread: value, colors: {}, subscriptionTier }); }
   await act(async () => { root = Renderer.create(React.createElement(Harness, { userId: initialUser })); });
   t.after(async () => { await act(async () => root.unmount()); });
   return { root, get value() { return value; },
@@ -162,6 +196,77 @@ test('natural reply waits with GET only, preserves paragraphs and reopens saved 
   await act(async () => h.value.open('input'));
   assert.equal(gets.length, 4);
   assert.equal(h.value.dto.current_observation.text, body);
+});
+
+const replyWaitNotice = '応答には数分かかる場合があります。';
+function displaysReplyWaitNotice(reader) {
+  return reader.root.root.findAllByType('Text').some(node => node.props.children === replyWaitNotice);
+}
+
+for (const subscriptionTier of ['free', 'plus', 'premium', 'unknown']) {
+  test(`initial reply waiting notice follows the current subscription tier (${subscriptionTier})`, async t => {
+    t.mock.timers.enable({ apis: ['setTimeout', 'Date'], now: 1000 });
+    const notCreated = { state: 'NOT_CREATED', original: { id: 'input' }, can_write: true, timeline: [] };
+    const running = { ...notCreated, state: 'INITIALIZING', attempt_id: 'attempt' };
+    const completed = { ...running, state: 'COMPLETED', current_observation: { event_id: 'reply', text: '保存済みの応答' } };
+    let resolveGet, opening, dto;
+    const h = await mountPollingReader(t, { get: () => dto ?? new Promise(resolve => { resolveGet = resolve; }) },
+      undefined, { subscriptionTier });
+    const paid = subscriptionTier === 'plus' || subscriptionTier === 'premium';
+    await act(async () => { opening = h.value.open('input', { showNotCreated: true, waitForInitial: true }); });
+    assert.equal(displaysReplyWaitNotice(h), paid);
+    await act(async () => { resolveGet(notCreated); await opening; });
+    assert.equal(displaysReplyWaitNotice(h), paid);
+    dto = running;
+    await act(async () => h.value.refresh());
+    assert.equal(displaysReplyWaitNotice(h), paid);
+    dto = completed;
+    await act(async () => h.value.refresh());
+    assert.equal(displaysReplyWaitNotice(h), false);
+    dto = notCreated;
+    await act(async () => h.value.open('input', { showNotCreated: true }));
+    assert.equal(displaysReplyWaitNotice(h), false, 'ordinary history lookup is not response generation');
+  });
+}
+
+test('paid answer shows the waiting notice during submission and saved refinement only', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout', 'Date'], now: 1000 });
+  const waiting = { state: 'AWAITING_ANSWER', thread_id: 'thread', revision: 1, can_write: true,
+    pending_question: { question_id: 'question', text: 'どう思いましたか？' }, original: { id: 'input' }, timeline: [] };
+  let dto = waiting, resolveAnswer, sending;
+  const h = await mountPollingReader(t, { get: async () => dto,
+    answer: () => new Promise(resolve => { resolveAnswer = resolve; }) }, undefined, { subscriptionTier: 'premium' });
+  await act(async () => h.value.open('input'));
+  assert.equal(displaysReplyWaitNotice(h), false);
+  await act(async () => h.value.setDraft('安心しました。'));
+  await act(async () => { sending = h.value.sendAnswer(); });
+  assert.equal(displaysReplyWaitNotice(h), true);
+  dto = { ...waiting, state: 'REFINING', pending_question: null, attempt_id: 'attempt' };
+  await act(async () => { resolveAnswer(dto); await sending; });
+  assert.equal(displaysReplyWaitNotice(h), true);
+  dto = { ...dto, state: 'RESPONSE_FAILED', failure_code: 'save_result_unknown' };
+  await act(async () => h.value.refresh());
+  assert.equal(displaysReplyWaitNotice(h), false);
+});
+
+test('paid action shows the waiting notice for skip and retry only', async t => {
+  const active = { state: 'AWAITING_ANSWER', thread_id: 'thread', revision: 1, can_write: true,
+    original: { id: 'input' }, timeline: [] };
+  for (const [action, dto, shouldWait] of [
+    ['skip', { ...active, pending_question: { question_id: 'question', text: 'どう思いましたか？' } }, true],
+    ['retry_response', { ...active, state: 'RESPONSE_FAILED', operation_id: 'operation', can_retry: true }, true],
+    ['continue', { ...active, state: 'AWAITING_CONTINUE', can_continue: true }, false],
+    ['stop', { ...active, state: 'AWAITING_CONTINUE', can_continue: true }, false],
+  ]) {
+    let resolveAction, sending;
+    const h = await mountPollingReader(t, { get: async () => dto,
+      action: () => new Promise(resolve => { resolveAction = resolve; }) }, undefined, { subscriptionTier: 'plus' });
+    await act(async () => h.value.open('input'));
+    await act(async () => { sending = h.value.action(action); });
+    assert.equal(displaysReplyWaitNotice(h), shouldWait, action);
+    await act(async () => { resolveAction({ ...active, state: 'COMPLETED' }); await sending; });
+    assert.equal(displaysReplyWaitNotice(h), false, action);
+  }
 });
 
 test('pending reader stops new GETs on background, close and owner change without extending budget', async t => {
@@ -216,6 +321,7 @@ function load(relative, mocks = {}, dev = true) {
   Function('require', 'module', 'exports', '__DEV__', transformed)(name => {
     if (Object.hasOwn(mocks, name)) return mocks[name];
     if (name === '../../ui/uiTokens') return load('ui/uiTokens.js');
+    if (name === '../../runtime/interpretationCorrectionUi') return require('../runtime/interpretationCorrectionUi');
     if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
     return require(name);
   }, module, module.exports, dev);
@@ -598,7 +704,7 @@ test('frame editor submits an explicit revision and keeps continuation separate'
   const native=Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x=>[x,x]));
   Object.assign(native,{Platform:{OS:'ios'},StyleSheet:{create:x=>x}});
   const {default:Modal,threadStatus}=load('screens/input/EmlisThreadModal.js',{'react-native':native,
-    '../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
+    '../../components/CocolonButton':p=>React.createElement('Button',p,p.children), ...correctionUiEnabled });
   const calls=[];const frame={frame_key:'frame',frame_ref:'version',recorded_at:'2026-09-10T00:00:00Z',trigger:'褒められた',received_meaning:'重かった',status:'TENTATIVE'};
   const thread={visible:true,dto:{...completed,interpretive_frames:[frame]},draft:'',updateFrame:async(...args)=>{calls.push(args);return true;}};
   let root;await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});

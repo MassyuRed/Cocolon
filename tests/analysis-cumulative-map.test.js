@@ -115,18 +115,46 @@ test('scoped Free renders the conclusion and at most one label-only figure for t
     assert.equal(h.calls[0][2].headers['Cache-Control'], 'no-store');
     assert(JSON.stringify(view.toJSON()).includes(free.overview.primary_structures[0].description));
     assert.equal(view.root.findAllByProps({ testID: 'semantic-overview-open' }).length, 0);
+    assert.equal(view.root.findAllByProps({ testID: 'semantic-overview-correction' }).length, 0);
     assert.equal(view.root.findAllByProps({ testID: 'semantic-items-toggle' }).length, 0);
     assert.equal(view.root.findAllByProps({ testID: 'semantic-structure-toggle-0' }).length, withFigure ? 1 : 0);
     if (withFigure) {
       await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
       const graph = view.root.findByProps({ testID: 'semantic-map-graph' });
-      assert.equal(graph.findAllByType('TouchableOpacity').length, 3);
+      assert.equal(graph.findAllByType('TouchableOpacity').length, 0);
       assert(!JSON.stringify(view.toJSON()).includes(free.nodes[0].summary));
-      await act(async () => graph.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
-      assert(view.root.findAllByProps({ testID: 'map-correction-field-title' }).length);
-      assert.equal(view.root.findAllByProps({ testID: 'map-correction-field-explanation' }).length, 0);
+      const node = graph.findByProps({ testID: 'semantic-node-n1' });
+      assert.equal(node.props.accessibilityLabel, free.nodes[0].title);
+      assert.equal(node.props.onPress, undefined);
+      assert.equal(node.props.onLongPress, undefined);
     }
     await act(async () => view.unmount());
+  }
+});
+
+test('scoped paid maps keep node details without correction actions on current and monthly views', async () => {
+  for (const tier of ['plus', 'premium']) {
+    const map = planMap(tier);
+    const stored = row('2026-10-01', map);
+    const h = harness(async url => url.includes('/reports/')
+      ? { item: stored, ...scopedPlan(tier) } : { ...latest(map), ...scopedPlan(tier) });
+    h.plan.tier = tier;
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    for (const props of [{}, { reportId: stored.id, month: stored.snapshot_month }]) {
+      let view;
+      await act(async () => { view = Renderer.create(React.createElement(Screen, props)); });
+      await act(async () => view.root.findByProps({ testID: 'semantic-structure-toggle-0' }).props.onPress());
+      const node = view.root.findByProps({ testID: 'semantic-node-n1' });
+      assert.match(node.props.accessibilityLabel, /詳しい説明を開く/);
+      assert.doesNotMatch(node.props.accessibilityLabel, /訂正/);
+      assert.equal(node.props.onLongPress, undefined);
+      await act(async () => node.props.onPress());
+      assert(JSON.stringify(view.toJSON()).includes(map.nodes[0].explanation));
+      assert.equal(view.root.findAllByProps({ testID: 'semantic-correction-open' }).length, 0);
+      assert.equal(view.root.findAllByProps({ testID: 'analysis-map-correction-dialog' }).length, 0);
+      assert.equal(view.root.findAllByProps({ testID: 'semantic-if-open' }).length, tier === 'premium' && !props.reportId ? 1 : 0);
+      await act(async () => view.unmount());
+    }
   }
 });
 
@@ -524,7 +552,7 @@ test('current and monthly maps open with the saved structure text and keep suppl
     await act(async () => view.root.findByProps({ testID: `semantic-node-${supplemental.node_ref}` }).props.onPress());
     const supplementalDetail = view.root.findByType('ModalContent');
     assert(supplementalDetail.findAllByType('Text').some(node => node.props.children === supplemental.explanation));
-    assert.equal(supplementalDetail.findAllByProps({ testID: 'semantic-correction-open' }).length, month ? 0 : 1);
+    assert.equal(supplementalDetail.findAllByProps({ testID: 'semantic-correction-open' }).length, 0);
     assert(!JSON.stringify(view.toJSON()).includes('根拠の記録を見る'));
     assert.deepEqual(h.calls.map(([verb, url]) => [verb, url.includes('/evidence')]),
       month ? [['GET', false], ['POST', false]] : [['GET', false]]);

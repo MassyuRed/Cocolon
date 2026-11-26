@@ -145,8 +145,12 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
     return perform("correction", c.pending);
   }
   const safeState = context.current.userId === userId && enabled ? state : empty();
+  const pending = context.current.pending;
+  const awaitingReplySubmission = safeState.busy && (pending?.method === "answer" ||
+    (pending?.method === "action" && ["skip", "retry_response"].includes(pending.payload.action)));
   return { ...safeState, enabled, open, close: reset, reset, refresh: () => perform("get"), sendAnswer, action, updateFrame, correctInterpretation,
-    pendingAction: Boolean(context.current.pending && context.current.pending.method !== "answer"),
+    awaitingReplySubmission,
+    pendingAction: Boolean(pending && pending.method !== "answer"),
     replayPending: () => {
       const pending = context.current.pending;
       if (context.current.userId === userId && owner.current === userId && pending && state.reconciled && state.dto?.can_write !== false) return perform(pending.method, pending);

@@ -26,7 +26,7 @@ function latest(map = fixture) {
     map_context: { profile: 'cumulative.v1', source_count: 4, processed_count: 4, mapped_count: 4,
       unparsed_count: 0, excluded_count: 0, stale_supplement_count: 0 } };
 }
-function harness(fetchResult = async (url, options) => result(JSON.parse(options.body)), platform = 'android') {
+function harness(fetchResult = async (url, options) => result(JSON.parse(options.body)), platform = 'android', showCorrection = false) {
   const calls = [], reads = [], modules = new Map();
   const auth = { session: { user: { id: owner } } }, plan = { tier: 'free', loading: false };
   const native = { Platform: { OS: platform }, AppState: { currentState: 'active', addEventListener: () => ({ remove() {} }) },
@@ -58,6 +58,7 @@ function harness(fetchResult = async (url, options) => result(JSON.parse(options
         if (target.endsWith('/AuthContext.js')) return { useAuth: () => auth };
         if (target.endsWith('/SubscriptionContext.js')) return { useSubscription: () => plan };
         if (target.endsWith('/theme/ThemeContext.js')) return { useTheme: () => ({ colors: {}, themeName: 'light' }) };
+        if (showCorrection && target.endsWith('/runtime/interpretationCorrectionUi.js')) return { SHOW_INTERPRETATION_CORRECTION: true };
         if (target.endsWith('/components/CocolonBackButton.js')) return () => null;
         if (target.endsWith('/components/CocolonButton.js')) return props => React.createElement('Button',
           { ...props, disabled: !!props.disabled || !!props.loading }, React.createElement('Text', null, props.title));
@@ -204,8 +205,8 @@ test('iOS overview, node and edge correction handoff waits for native dismissal 
   }
 });
 
-test('ordinary Free current map saves a correction and only rereads existing background state', async () => {
-  const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default; let view;
+test('reenabling correction lets the current map save and only reread existing background state', async () => {
+  const h = harness(undefined, 'android', true), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default; let view;
   await act(async () => { view = Renderer.create(React.createElement(View)); });
   await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
@@ -238,8 +239,8 @@ test('correction evidence remains distinct from original context and deduplicate
   assert.throws(() => checkedMapCorrectionEvidenceItems(fabricated));
 });
 
-test('semantic node detail still opens correction and keeps the original record and DeepInsight answer private', async () => {
-  const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+test('reenabled correction in semantic node details keeps the original record and DeepInsight answer private', async () => {
+  const h = harness(undefined, 'android', true), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
   let view; await act(async () => { view = Renderer.create(React.createElement(View)); });
   await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
   await act(async () => view.root.findByProps({ testID: 'semantic-node-n1' }).props.onPress());
@@ -266,7 +267,7 @@ test('refresh queue failure preserves confirmed correction save without offering
 });
 
 test('captured monthly map remains read-only and never exposes a correction submit entrance', async () => {
-  const h = harness(), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  const h = harness(undefined, 'android', true), View = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
   const identity = latest().report_id;
   h.api.apiGet = async () => ({ item: { id: identity, snapshot_month: '2026-10-01', source_profile: 'cumulative.v1',
     content_json: { watashiMap: fixture, map_context: latest().map_context }, generated_at: '2026-10-10T00:00:00Z' } });

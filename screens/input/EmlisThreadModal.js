@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, AppState, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CocolonButton from "../../components/CocolonButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SHOW_INTERPRETATION_CORRECTION } from "../../runtime/interpretationCorrectionUi";
 
 export function threadStatus(dto) {
   if (dto?.state === "NOT_CREATED") return dto.can_write === false ? "この記録への返事はまだ用意されていません。現在は返事の更新を一時停止しています。" : "この記録への返事はまだ用意されていません。";
@@ -12,7 +13,9 @@ export function threadStatus(dto) {
   if (dto.can_write === false && (!dto.current_observation || dto.pending_question || dto.can_continue)) return "応答の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (dto.failure_code === "safe_state_answer_owner_required") return "この内容への専用の返事はまだ用意できていません。記録は保存されています。";
   if (dto.failure_code === "separate_safety_owner_required") return "この内容は通常の返事とは別の対応が必要です。";
-  if (dto.correction_assessment === "NEEDS_DETAIL") return "違うと感じた内容を保存しました。どう違ったのか、ご自身の考えや実際の状況をもう少し教えてください。";
+  if (dto.correction_assessment === "NEEDS_DETAIL") return SHOW_INTERPRETATION_CORRECTION
+    ? "違うと感じた内容を保存しました。どう違ったのか、ご自身の考えや実際の状況をもう少し教えてください。"
+    : "違うと感じた内容は保存されています。";
   if (dto.body_state === "CORRECTION_UNREFLECTED") return "説明は保存されています。読み直した返事はまだ用意できていません。";
   if (dto.body_state === "MEANING_UPDATED_BODY_UNAVAILABLE") return "回答と意味の訂正は保存されています。更新後の本文はまだ用意できていません。";
   if (dto.state === "INITIALIZING") return "記録をもとにEmlisの返事を準備しています。";
@@ -137,21 +140,24 @@ function FrameEditor({ frame, thread, textStyle, borderColor }) {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(frame.correction_text || "");
   const disabled = thread.busy || thread.uncertain || thread.rejected || thread.dto?.can_write === false;
+  const tentativeNotice = "今回も同じ受け止めとは決めません。" + (SHOW_INTERPRETATION_CORRECTION ? "違うところは直せます。" : "");
   return <View style={[s.section, { borderColor }]}>
     <Text style={[s.label, textStyle]}>あなたの言葉からの仮の理解</Text>
     <Text style={[s.description, textStyle]}>{dateLabel(frame.recorded_at)}の「{frame.trigger}」について</Text>
     <Text selectable style={[s.body, textStyle]}>{frame.status === "REVISED" ? frame.correction_text : frame.received_meaning}</Text>
-    <Text style={[s.body, textStyle]}>{frame.status === "REJECTED" ? "この理解は今後使いません。" : frame.status === "REVISED" ? "あなたの訂正を保存しました。次の観測から参照します。" : "今回も同じ受け止めとは決めません。違うところは直せます。"}</Text>
+    <Text style={[s.body, textStyle]}>{frame.status === "REJECTED" ? "この理解は今後使いません。" : frame.status === "REVISED" ? "あなたの訂正を保存しました。次の観測から参照します。" : tentativeNotice}</Text>
     {frame.status === "TENTATIVE" && <CocolonButton disabled={disabled} onPress={() => thread.updateFrame(frame, "CONFIRMED")}>この理解で合っています</CocolonButton>}
-    <CocolonButton variant="secondary" disabled={disabled} onPress={() => setEditing(!editing)}>理解を直す</CocolonButton>
-    {editing && <>
-      <TextInput value={value} onChangeText={setValue} multiline editable={!disabled} maxLength={2000}
-        accessibilityLabel="解釈の訂正" style={[s.input, textStyle, { borderColor }]} />
-      <CocolonButton disabled={disabled || !value.trim()} onPress={async () => {
-        if (await thread.updateFrame(frame, "REVISED", value)) setEditing(false);
-      }}>訂正を保存</CocolonButton>
+    {SHOW_INTERPRETATION_CORRECTION && <>
+      <CocolonButton variant="secondary" disabled={disabled} onPress={() => setEditing(!editing)}>理解を直す</CocolonButton>
+      {editing && <>
+        <TextInput value={value} onChangeText={setValue} multiline editable={!disabled} maxLength={2000}
+          accessibilityLabel="解釈の訂正" style={[s.input, textStyle, { borderColor }]} />
+        <CocolonButton disabled={disabled || !value.trim()} onPress={async () => {
+          if (await thread.updateFrame(frame, "REVISED", value)) setEditing(false);
+        }}>訂正を保存</CocolonButton>
+      </>}
+      {frame.status !== "REJECTED" && <CocolonButton variant="secondary" disabled={disabled} onPress={() => thread.updateFrame(frame, "REJECTED")}>この理解は使わない</CocolonButton>}
     </>}
-    {frame.status !== "REJECTED" && <CocolonButton variant="secondary" disabled={disabled} onPress={() => thread.updateFrame(frame, "REJECTED")}>この理解は使わない</CocolonButton>}
   </View>;
 }
 
@@ -196,7 +202,7 @@ export function initialObservationSalutation(dto, displayName) {
   return name.endsWith("さん") ? `${name}、` : `${name}さん、`;
 }
 
-export default function EmlisThreadModal({ thread, colors, navigation, userId = "", pieceEnabled = false, displayName = "" }) {
+export default function EmlisThreadModal({ thread, colors, navigation, userId = "", pieceEnabled = false, displayName = "", subscriptionTier }) {
   const { dto, busy, error, draft, uncertain } = thread;
   const textStyle = { color: colors.TEXT_ON_LIGHT };
   const salutation = initialObservationSalutation(dto, displayName);
@@ -300,6 +306,11 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
   useEffect(() => {
     if (Platform.OS !== "ios" && !thread.visible) openPiece();
   }, [thread.visible]);
+  const waitingForInitial = thread.waitForInitial && (dto?.state === "NOT_CREATED" || (!dto && busy));
+  const waitingForReply = thread.awaitingReplySubmission || (!readStopped &&
+    (waitingForInitial || ["INITIALIZING", "REFINING"].includes(dto?.state)));
+  const showReplyWaitNotice = thread.visible && (subscriptionTier === "plus" || subscriptionTier === "premium") &&
+    waitingForReply && !blocked && !error && !uncertain;
   const status = error || (readStopped && ["NOT_CREATED", "INITIALIZING", "REFINING"].includes(dto?.state)
     ? "応答の準備が続いています。「応答を確認する」から保存状態を確認できます。" : threadStatus(dto));
   const supplementalAnswer = selectedPieceSupplementalAnswer(dto);
@@ -318,7 +329,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
             {!!salutation && <Text style={[s.body, textStyle]}>{salutation}</Text>}
             <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
           </View>}
-          {thread.visible && dto?.can_correct && <InterpretationCorrectionEditor
+          {SHOW_INTERPRETATION_CORRECTION && thread.visible && dto?.can_correct && <InterpretationCorrectionEditor
             key={`${userId}:${dto.thread_id}:${dto.revision}:${(dto.current_observation || dto.correction_target)?.event_id}`}
             thread={thread} active={appState === "active"} textStyle={textStyle} borderColor={colors.CARD_BORDER} />}
           {dto?.pending_question && <View style={[s.section, { borderColor: colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL }]}>
@@ -326,6 +337,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
             <Text selectable style={[s.body, textStyle]}>{dto.pending_question.text}</Text>
           </View>}
           {!!status && <Text accessibilityLiveRegion="polite" style={[s.body, textStyle]}>{status}</Text>}
+          {showReplyWaitNotice && <Text accessibilityLiveRegion="polite" style={[s.body, textStyle]}>応答には数分かかる場合があります。</Text>}
           {busy && <ActivityIndicator accessibilityLabel="保存状態を確認中" color={colors.TITLE_GOLD} />}
           {(!dto?.current_observation || readStopped || error || uncertain || thread.rejected
             || ["INITIALIZING", "REFINING"].includes(dto?.state)) &&

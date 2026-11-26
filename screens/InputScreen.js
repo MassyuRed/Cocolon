@@ -15,6 +15,7 @@ import {
 } from "react-native";
 // Supabase Auth
 import { useAuth } from "../AuthContext";
+import { useSubscription } from "../SubscriptionContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
 import { useEmlisThread } from "./input/useEmlisThread";
 import { useEmlisQuestionPreference } from "./input/useEmlisQuestionPreference";
@@ -142,6 +143,7 @@ export default function InputScreen({ navigation, route, onInitialInputSettled, 
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
   const { session, accountDisplayName } = useAuth();
+  const { tier: subscriptionTier } = useSubscription();
   const {
     isTutorialMode,
     tutorialFlagsLoaded,
@@ -1306,7 +1308,7 @@ ${String(error?.message || error)}`
 />
 
       <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation} userId={currentUserId}
-        pieceEnabled={piecePreviewEnabled} displayName={accountDisplayName} />
+        pieceEnabled={piecePreviewEnabled} displayName={accountDisplayName} subscriptionTier={subscriptionTier} />
       <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}

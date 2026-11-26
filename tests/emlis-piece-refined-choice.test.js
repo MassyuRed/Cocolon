@@ -27,6 +27,7 @@ function loadModal(native = {}) {
   Function('require', 'module', 'exports', code)(name => {
     if (name === 'react-native') return { StyleSheet: { create: x => x }, ...native };
     if (name === '../../ui/uiTokens') return { MODAL_ORIENTATIONS: ['portrait'] };
+    if (name === '../../runtime/interpretationCorrectionUi') return require('../runtime/interpretationCorrectionUi');
     if (name === '../../components/CocolonButton') return p => React.createElement('Button', p, p.children);
     if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView' };
     return require(name);

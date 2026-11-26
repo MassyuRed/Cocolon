@@ -842,7 +842,8 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
   return (
     <SafeAreaView edges={["left", "right"]} style={[styles.container, themed.container]}>
       <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation}
-        userId={session?.user?.id || ""} pieceEnabled={isFeatureEnabled("piece_v2_preview_enabled", false) === true && supportsPieceBitmapCreation()} />
+        userId={session?.user?.id || ""} subscriptionTier={subscriptionTier}
+        pieceEnabled={isFeatureEnabled("piece_v2_preview_enabled", false) === true && supportsPieceBitmapCreation()} />
       {/* ヘッダー（上段：戻る＋検索、右にソート） */}
       <View style={[styles.header, themed.header]}>
         <View style={styles.headerRow}>
