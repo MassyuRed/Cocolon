@@ -13,12 +13,13 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
-import { supabase } from "../lib/supabase";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { apiJson, apiFetch } from "../lib/apiClient";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
+import { getEmotionRecordRevision, notifyEmotionRecordsChanged } from "../lib/emotionRecordChanges";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useAuth } from "../AuthContext";
 import { useEmlisThread } from "./input/useEmlisThread";
 import EmlisThreadModal from "./input/EmlisThreadModal";
@@ -30,6 +31,8 @@ const EMOTION_HISTORY_SEARCH_URL = "/emotion/history/search";
 
 // Phase2: no infinite scroll yet (Phase3). Keep this modest.
 const PAGE_LIMIT = 50;
+const HISTORY_SNAPSHOT_MS = 60_000;
+const PLUS_HISTORY_RETENTION_MS = 365 * 24 * 60 * 60 * 1000;
 
 function getDeviceTimeZone() {
   try {
@@ -198,8 +201,36 @@ function renderHighlightedText(text, rx, highlightStyle) {
     .filter(Boolean);
 }
 
-export default function AnalysisHistoryScreen({ onBack, navigation }) {
-  const { session } = useAuth();
+function historySnapshotExpiry(tier, retention, rows, requestedAt) {
+  const expiry = requestedAt + HISTORY_SNAPSHOT_MS;
+  if (retention?.tier !== tier) return 0;
+  if (tier === "premium" && retention.mode === "unlimited") return expiry;
+  if (tier === "free" && retention.mode === "current_and_previous_month_jst") {
+    return Math.min(expiry, parseIsoToDate(retention.lt_iso)?.getTime() || 0);
+  }
+  if (tier === "plus" && retention.mode === "rolling_365d") {
+    return rows.reduce((until, row) => {
+      const created = parseIsoToDate(row.createdAt);
+      return created ? Math.min(until, created.getTime() + PLUS_HISTORY_RETENTION_MS) : 0;
+    }, expiry);
+  }
+  return 0;
+}
+
+export default function AnalysisHistoryScreen({ onBack, navigation, historyReadSnapshot }) {
+  const { session, authOwnerGeneration } = useAuth();
+  const ownerId = session?.user?.id;
+  const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(ownerId, authOwnerGeneration);
+  const readScope = useMemo(() => ({ ownerRequest, subscriptionTier, historyReadSnapshot }),
+    [ownerRequest, subscriptionTier, historyReadSnapshot]);
+  const currentReadScope = useRef(readScope);
+  currentReadScope.current = readScope;
+  const initialReadScope = useRef(null);
+  const latestRead = useRef(null);
+  const [confirmedReadScope, setConfirmedReadScope] = useState(null);
+  const canApply = useCallback(() => currentReadScope.current === readScope && isOwnerCurrent(ownerRequest),
+    [readScope, ownerRequest, isOwnerCurrent]);
   const { isFeatureEnabled } = useAppRuntime();
   const emlisThread = useEmlisThread({ userId: session?.user?.id || "" });
   const [query, setQuery] = useState(""); // 入力中（未実行でも変わる）
@@ -214,7 +245,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
   const loadingMoreRef = useRef(false);
 
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [updatingId, setUpdatingId] = useState(null);
@@ -223,7 +254,6 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
   const { themeName, colors } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
-  const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
   const historyRetentionLabel = useMemo(
     () => getHistoryRetentionLabel(subscriptionTier),
@@ -308,7 +338,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
   }, []);
 
   const load = useCallback(
-    async ({
+    async function readPage({
       q,
       secretFilter: secretOverride,
       order: orderOverride,
@@ -316,7 +346,12 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
       limit = PAGE_LIMIT,
       showLoading = true,
       append = false,
-    } = {}) => {
+      reuseSnapshot = false,
+    } = {}) {
+      if (!canApply()) return;
+      const request = {};
+      latestRead.current = request;
+      const isLatest = () => latestRead.current === request && canApply();
       setErrorMsg("");
       if (showLoading) setLoading(true);
 
@@ -326,18 +361,30 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
         typeof secretOverride === "string" ? secretOverride : secretFilter;
       const effectiveOrder = typeof orderOverride === "string" ? orderOverride : order;
 
+      const timezone = getDeviceTimeZone();
+      const requestedAt = Date.now();
+      const revision = getEmotionRecordRevision(ownerId);
+      const rereadChangedPage = () => append ? undefined : readPage({
+        q: effectiveQuery, secretFilter: effectiveSecretFilter, order: effectiveOrder,
+        offset: offsetArg, limit, showLoading,
+      });
+      const isDefaultPage = !effectiveQuery && effectiveSecretFilter === "all" && effectiveOrder === "desc"
+        && offsetArg === 0 && limit === PAGE_LIMIT && !append;
+      const snapshotKey = historyReadSnapshot && !subscriptionLoading && isDefaultPage
+        ? JSON.stringify([ownerId, authOwnerGeneration, subscriptionTier, timezone, revision])
+        : null;
+      const snapshot = historyReadSnapshot?.current;
+      if (isDefaultPage && historyReadSnapshot) historyReadSnapshot.current = null;
       try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        const accessToken = sessionData?.session?.access_token ?? null;
-        if (!accessToken) {
-          setErrorMsg("認証情報がありません（ログインしてください）");
-          setRows([]);
-          setHasMore(false);
-          setOffset(0);
+        if (reuseSnapshot && snapshotKey && snapshot?.key === snapshotKey
+          && requestedAt >= snapshot.requestedAt && requestedAt < snapshot.expiresAt) {
+          historyReadSnapshot.current = snapshot;
+          setRows(snapshot.rows);
+          setHasMore(snapshot.hasMore);
+          setOffset(snapshot.offset);
+          setConfirmedReadScope(readScope);
           return;
         }
-
-        const timezone = getDeviceTimeZone();
 
         // API: POST /emotion/history/search
         const basePayload = {
@@ -349,16 +396,11 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
           limit: Number(limit) || PAGE_LIMIT,
         };
 
-        const doFetch = async (payload) => {
-          return await apiFetch(EMOTION_HISTORY_SEARCH_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify(payload),
-          });
-        };
+        const doFetch = (payload) => apiFetch(EMOTION_HISTORY_SEARCH_URL, {
+          ...ownerRequest.options,
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
 
         let res = await doFetch(basePayload);
         let textIfError = "";
@@ -366,6 +408,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
           textIfError = await res.text().catch(() => "");
           // Backward-compat: server側が timezone フィールド未対応の場合に備えてリトライ
           if (res.status === 422 && /timezone/i.test(textIfError || "")) {
+            if (!isLatest()) return;
             const retryPayload = { ...basePayload };
             delete retryPayload.timezone;
             res = await doFetch(retryPayload);
@@ -385,6 +428,11 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
         }
 
         const json = await res.json().catch(() => null);
+        if (!isLatest()) return;
+        if (getEmotionRecordRevision(ownerId) !== revision) return rereadChangedPage();
+        if (json?.user_id && json.user_id !== ownerId) {
+          throw new Error("アカウントが変わったため履歴を表示できませんでした。");
+        }
 
         const items = Array.isArray(json?.items) ? json.items : [];
         const meta = json?.meta || {};
@@ -400,8 +448,20 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
               )
             : Number(offsetArg || 0) + mapped.length;
 
+        const safeOffset = Number.isFinite(nextOffset) ? nextOffset : 0;
         setHasMore(nextHasMore);
-        setOffset(Number.isFinite(nextOffset) ? nextOffset : 0);
+        setOffset(safeOffset);
+        setConfirmedReadScope(readScope);
+        if (snapshotKey && json?.user_id === ownerId && Array.isArray(json.items)
+          && typeof meta.has_more === "boolean" && meta.applied?.subscription_tier === subscriptionTier
+          && mapped.length === items.length) {
+          const expiresAt = historySnapshotExpiry(subscriptionTier, meta.applied.retention, mapped, requestedAt);
+          if (expiresAt > Date.now()) {
+            historyReadSnapshot.current = {
+              key: snapshotKey, requestedAt, expiresAt, rows: mapped, hasMore: nextHasMore, offset: safeOffset,
+            };
+          }
+        }
 
         if (!append || Number(offsetArg || 0) === 0) {
           setRows(mapped);
@@ -425,6 +485,8 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
         // UIの「現在条件」を保存（refreshや並び替えに使う）
         setExecutedQuery(effectiveQuery);
       } catch (e) {
+        if (!isLatest()) return;
+        if (getEmotionRecordRevision(ownerId) !== revision) return rereadChangedPage();
         setErrorMsg(String(e?.message || e));
 
         // If this was a "load more" request, preserve current rows and paging state.
@@ -434,23 +496,37 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
           setOffset(0);
         }
       } finally {
-        if (showLoading) setLoading(false);
+        if (isLatest()) setLoading(false);
       }
     },
-    [executedQuery, secretFilter, order, mapApiRow]
+    [authOwnerGeneration, canApply, executedQuery, historyReadSnapshot, mapApiRow, order, ownerId,
+      ownerRequest, readScope, secretFilter, subscriptionLoading, subscriptionTier]
   );
 
-  // 初回は最新を読む（クエリ無し / all / desc）
   useEffect(() => {
-    load({ q: "", offset: 0, showLoading: true });
+    const previousScope = initialReadScope.current;
+    initialReadScope.current = readScope;
+    if (previousScope && historyReadSnapshot) historyReadSnapshot.current = null;
+    if (!ownerRequest.owner || !ownerRequest.foreground) return;
+    setRows([]);
+    setHasMore(false);
+    setOffset(0);
+    setRefreshing(false);
+    setUpdatingId(null);
+    setDeletingId(null);
+    setLoadingMore(false);
+    loadingMoreRef.current = false;
+    load({ offset: 0, reuseSnapshot: !previousScope });
+    // Search, filtering, order and paging initiate their own reads.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [readScope]);
 
   const onRefresh = useCallback(async () => {
+    if (historyReadSnapshot) historyReadSnapshot.current = null;
     setRefreshing(true);
     await load({ offset: 0, showLoading: false });
-    setRefreshing(false);
-  }, [load]);
+    if (canApply()) setRefreshing(false);
+  }, [canApply, historyReadSnapshot, load]);
 
   const handleSearch = useCallback(async () => {
     await load({ q: query, offset: 0, showLoading: true });
@@ -476,23 +552,14 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
 
   const updateSecret = useCallback(
     async (row) => {
+      if (!canApply()) return;
       const nextVal = !row.isSecret;
       setUpdatingId(row.id);
       setErrorMsg("");
       try {
-        const { data: sessionData } = await supabase.auth.getSession();
-        const accessToken = sessionData?.session?.access_token ?? null;
-        if (!accessToken) {
-          setErrorMsg("認証情報がありません（ログインしてください）");
-          return;
-        }
-
         const res = await apiFetch(EMOTION_SECRET_URL, {
+          ...ownerRequest.options,
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
           body: JSON.stringify({
             emotion_id: row.id,
             is_secret: nextVal,
@@ -502,9 +569,12 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
 
         if (!res.ok) {
           const t = await res.text();
-          setErrorMsg(`更新に失敗しました: ${t || res.status}`);
+          if (canApply()) setErrorMsg(`更新に失敗しました: ${t || res.status}`);
           return;
         }
+        if (historyReadSnapshot) historyReadSnapshot.current = null;
+        notifyEmotionRecordsChanged(ownerId);
+        if (!canApply()) return;
 
         // フィルタに合わなくなった場合は除外（Phase2: 再検索まではしない）
         if (secretFilter === "public" && nextVal === true) {
@@ -520,29 +590,34 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
           prev.map((r) => (r.id === row.id ? { ...r, isSecret: nextVal } : r))
         );
       } catch (e) {
-        setErrorMsg(String(e?.message || e));
+        if (canApply()) setErrorMsg(String(e?.message || e));
       } finally {
-        setUpdatingId(null);
+        if (canApply()) setUpdatingId(null);
       }
     },
-    [secretFilter]
+    [canApply, historyReadSnapshot, ownerId, ownerRequest, secretFilter]
   );
 
   const deleteRow = useCallback(async (row) => {
+    if (!canApply()) return;
     setDeletingId(row.id);
     setErrorMsg("");
     try {
       await apiJson(`/emotion/history/${encodeURIComponent(String(row.id))}`, {
         method: "DELETE",
+        expectedUserId: ownerId,
       });
+      if (historyReadSnapshot) historyReadSnapshot.current = null;
+      notifyEmotionRecordsChanged(ownerId);
+      if (!canApply()) return;
       setRows((prev) => prev.filter((r) => r.id !== row.id));
       emlisThread.reset();
     } catch (e) {
-      setErrorMsg(String(e?.message || e));
+      if (canApply()) setErrorMsg(String(e?.message || e));
     } finally {
-      setDeletingId(null);
+      if (canApply()) setDeletingId(null);
     }
-  }, []);
+  }, [canApply, emlisThread, historyReadSnapshot, ownerId]);
 
   const confirmDelete = useCallback(
     (row) => {
@@ -583,10 +658,12 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
         showLoading: false,
       });
     } finally {
-      setLoadingMore(false);
-      loadingMoreRef.current = false;
+      if (canApply()) {
+        setLoadingMore(false);
+        loadingMoreRef.current = false;
+      }
     }
-  }, [hasMore, loading, refreshing, loadingMore, load, offset]);
+  }, [canApply, hasMore, loading, refreshing, loadingMore, load, offset]);
 
   const listHeader = (
     <View style={styles.controls}>
@@ -869,7 +946,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
       <FlatList
           keyboardShouldPersistTaps="handled"
           ListHeaderComponent={listHeader}
-          data={rows}
+          data={confirmedReadScope === readScope ? rows : []}
           keyExtractor={(item) => String(item.id)}
           refreshControl={
             <RefreshControl

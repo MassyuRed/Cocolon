@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -30,9 +30,13 @@ const MAX_ANSWER_LENGTH = 2000;
 const THEME_TIME_FORMAT = new Intl.DateTimeFormat("ja-JP", {
   month: "long", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Asia/Tokyo",
 });
+export const DeepInsightReturnCacheContext = createContext(null);
 
 export default function DeepInsightScreen({ navigation, route }) {
   const { user, authOwnerGeneration } = useAuth();
+  const { tier, planCode, entitlementStatus, expiresAt } = useSubscription();
+  const returnCache = useContext(DeepInsightReturnCacheContext);
+  const accessKey = JSON.stringify([user?.id, authOwnerGeneration, tier, planCode, entitlementStatus, expiresAt]);
   const { colors, themeName } = useTheme();
   const styles = useMemo(() => createStyles(colors, themeName), [colors, themeName]);
   const notification = route?.params?.notification;
@@ -49,8 +53,11 @@ export default function DeepInsightScreen({ navigation, route }) {
           <AnalysisSubHeader title={TITLE} onBack={() => navigation.goBack()} />
           {user?.id ? (
             <DeepInsightContent
-              key={`${user.id}:${authOwnerGeneration}`}
+              key={accessKey}
               ownerId={user.id}
+              accessKey={accessKey}
+              returnCache={returnCache}
+              expiresAt={expiresAt}
               notification={notification}
               scroll={scroll}
               navigation={navigation}
@@ -64,10 +71,10 @@ export default function DeepInsightScreen({ navigation, route }) {
   );
 }
 
-function DeepInsightContent({ ownerId, notification, scroll, navigation, styles, colors }) {
+function DeepInsightContent({ ownerId, accessKey, returnCache, expiresAt, notification, scroll, navigation, styles, colors }) {
   const { data, loadError, notifiedQuestion, notificationReadFailed, themeRefreshError, questionLoads, questionErrors,
     reload, refreshTheme, issueRecords, issueTheme, answer,
-    notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId, notification);
+    notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId, notification, { accessKey, returnCache, expiresAt });
   const { isFeatureEnabled } = useAppRuntime();
   const { subscriptionBootstrap } = useSubscription();
   const [theme, setTheme] = useState(null);

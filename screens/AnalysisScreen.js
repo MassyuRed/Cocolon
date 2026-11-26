@@ -72,7 +72,8 @@ function useThemedStyles() {
   return { styles, colors, themeName, isDark, ui };
 }
 
-export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: screenRoute, tabRoute }) {
+export default function AnalysisScreen({ navigation, onRefreshTabUnread, mapReadSnapshot, currentMapStatus,
+  route: screenRoute, tabRoute }) {
   const { ensurePaid, isPaid, loading: subscriptionLoading } = useSubscription();
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
@@ -98,7 +99,7 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
   const {
     entryMeta,
     refreshHomeSummaries,
-  } = useAnalysisReportActions();
+  } = useAnalysisReportActions(isTutorialMode);
 
   const {
     selfStructureUnreadResolved,
@@ -421,6 +422,8 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
             refreshHomeSummaries();
           }}
           onLatestSeenVersion={markSelfStructureLatestSeen}
+          mapReadSnapshot={mapReadSnapshot}
+          currentMapStatus={currentMapStatus}
         />
       ) : (
         <View style={styles.safeContent}>
@@ -440,6 +443,8 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, route: 
             onOpenSelfHistory={() => openSelfReportHistory(ROUTE_HOME)}
             onOpenSubscription={openSubscriptionSelect}
             onLatestSeenVersion={markSelfStructureLatestSeen}
+            mapReadSnapshot={mapReadSnapshot}
+            currentMapStatus={currentMapStatus}
             isTutorialMode={isAnalysisTutorialStep}
             tutorialStep={tutorialStep}
             tutorialGraphData={TUTORIAL_KOKORO_WEATHER}

@@ -1688,9 +1688,10 @@ test('AccountScreen keeps profile, follow, subscription, and ID search without p
     'ACCOUNT_WIRE.routes.status',
     'FOLLOW_WIRE.routes.create',
     'FOLLOW_WIRE.routes.delete',
-    'navigation.addListener("focus"',
+    'subscribeToFollowChanges',
     'navigation.navigate("FollowListScreen"',
   ], 'useAccountFollowState.js');
+  assert.doesNotMatch(accountFollowHook, /addListener\("focus"/);
 
   assertIncludes(accountVisibilityHook, [
     'export function useAccountVisibility',

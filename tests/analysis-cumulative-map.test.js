@@ -285,6 +285,60 @@ test('a scoped paid reading returns from the background under a fresh entitlemen
   await act(async () => view.unmount());
 });
 
+test('returning to a settled current map in the same foreground reuses the verified report', async () => {
+  const plus = planMap('plus');
+  const response = { ...latest(plus), ...scopedPlan('plus') };
+  const h = harness(async () => response);
+  h.plan.tier = 'plus';
+  const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  const snapshot = { current: null };
+  const seen = [];
+  const element = () => React.createElement(Screen, {
+    mapReadSnapshot: snapshot, onLatestSeenVersion: version => seen.push(version),
+  });
+  let view;
+  await act(async () => { view = Renderer.create(element()); });
+  h.focus.value = false;
+  await act(async () => view.update(element()));
+  h.focus.value = true;
+  await act(async () => view.update(element()));
+  assert.equal(h.calls.length, 1);
+  assert(JSON.stringify(view.toJSON()).includes(plus.overview.primary_structures[0].description));
+  await act(async () => view.unmount());
+  await act(async () => { view = Renderer.create(element()); });
+  assert.equal(h.calls.length, 1, 'reopening after switching analysis sections keeps the same report');
+  assert.deepEqual(seen, [plus.projection_of]);
+  await act(async () => view.unmount());
+});
+
+test('a newer shared status or a confirmed edit invalidates a verified current map', async () => {
+  const previous = copy(projection);
+  const next = copy(projection);
+  next.projection_of = 'artifact:00000000000000000000000000000066@1';
+  next.nodes[0].visible_label = '更新後の表示';
+  let response = latest(previous);
+  const h = harness(async () => response);
+  const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  const snapshot = { current: null };
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Screen, { mapReadSnapshot: snapshot })); });
+  response = latest(next);
+  const currentMapStatus = { checkedAt: snapshot.current.startedAt + 1, versionKey: next.projection_of,
+    hasContent: true, refreshStatus: null, skipReason: null };
+  await act(async () => view.update(React.createElement(Screen, { mapReadSnapshot: snapshot, currentMapStatus })));
+  assert.equal(h.calls.length, 2);
+  assert(h.calls[1][1].includes('ensure=false'));
+  assert(JSON.stringify(view.toJSON()).includes('更新後の表示'));
+  response = { ...latest(), has_visible_content: false, report_id: null, meta: null, reason: 'insufficient_input' };
+  await act(async () => h.load('lib/emotionRecordChanges.js').notifyEmotionRecordsChanged(owner));
+  assert.equal(h.calls.length, 3);
+  assert(!JSON.stringify(view.toJSON()).includes('更新後の表示'));
+  assert(JSON.stringify(view.toJSON()).includes('分析に必要な情報が足りていません。'));
+  await act(async () => h.load('lib/emotionRecordChanges.js').notifyEmotionRecordsChanged('other-owner'));
+  assert.equal(h.calls.length, 3);
+  await act(async () => view.unmount());
+});
+
 test('month comparison fetches current separately and preserves the captured projection',async()=>{
   const stored=row();const before=JSON.stringify(stored);const h=harness(async url=>url.includes('/reports/')?{item:stored}:latest());
   const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
@@ -439,18 +493,44 @@ test('current and monthly readers retain the saved analysis without an original-
   }
 });
 
-test('history opens only the most recently selected month',async()=>{
-  const a=deferred(),b=deferred();const rows=[row('2026-10-01'),row('2026-09-01')];
-  const h=harness(url=>url.includes('/history')?{items:rows,has_more:false}:url.includes('2026-10-01')?a.promise:b.promise);
+test('legacy history opens only the most recently selected month',async()=>{
+  const a=deferred(),b=deferred();
+  const rows = [{ ...row('2026-10-01'), source_profile: 'legacy', title: '10月の保存版' },
+    { ...row('2026-09-01'), source_profile: 'legacy', title: '9月の保存版' }];
+  const h=harness(url=>url.includes('/history')?{items:rows,has_more:false}
+    :url.includes('/report-reads/status')?{read_ids:[]}:url.includes('2026-10-01')?a.promise:b.promise);
   const History=h.load('screens/SelfStructureReportHistoryScreen.js').default;let view;const opened=[];
   await act(async()=>{view=Renderer.create(React.createElement(History,{onOpenReport:x=>opened.push(x)}));});
   await act(async()=>{button(view,'2026年10月').props.onPress();});
   await act(async()=>{button(view,'2026年9月').props.onPress();});
   await act(async()=>b.resolve({item:rows[1]}));await act(async()=>a.resolve({item:rows[0]}));
   assert.deepEqual(opened.map(x=>x.snapshot_month),['2026-09-01']);
-  assert.equal(opened[0].content_json, undefined);
-  assert(h.calls.every(c=>c[2].expectedUserId===owner));
+  assert(h.calls.filter(([, url]) => url.includes('month=')).every(([, , options]) => options.expectedUserId === owner));
   await act(async()=>view.unmount());
+});
+
+test('opening cumulative history performs one owner-bound detail read in the viewer', async () => {
+  const stored = row('2026-10-01');
+  const h = harness(async url => url.includes('/history') ? { items: [stored], has_more: false } : { item: stored });
+  const History = h.load('screens/SelfStructureReportHistoryScreen.js').default;
+  const Viewer = h.load('screens/SelfStructureReportViewerScreen.js').default;
+  const opened = [];
+  function Host() {
+    const [report, setReport] = React.useState(null);
+    return report ? React.createElement(Viewer, { report })
+      : React.createElement(History, { onOpenReport: item => { opened.push(item); setReport(item); } });
+  }
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Host)); });
+  await act(async () => button(view, '2026年10月').props.onPress());
+  assert.deepEqual(opened, [{ id: stored.id, source_profile: 'cumulative.v1', snapshot_month: stored.snapshot_month }]);
+  const detailReads = h.calls.filter(([method, url]) => method === 'GET' && url.includes('/reports/') && url.includes('month='));
+  assert.equal(detailReads.length, 1);
+  assert(detailReads[0][1].includes('month=2026-10-01'));
+  assert.equal(detailReads[0][2].expectedUserId, owner);
+  assert.equal(requestedRenderer(detailReads[0][2]), 'semantic.v3');
+  assert(JSON.stringify(view.toJSON()).includes(projection.nodes[0].visible_label));
+  await act(async () => view.unmount());
 });
 
 test('history pagination replaces the list when the server changes membership tier', async () => {

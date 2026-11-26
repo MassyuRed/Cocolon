@@ -207,6 +207,7 @@ export default function MainTabs() {
   } = useTutorial();
   const [isAppActive, setIsAppActive] = useState(() => (AppState?.currentState || "active") === "active");
   const [selfStructureBanner, setSelfStructureBanner] = useState({ visible: false, reportMode: "standard" });
+  const [selfStructureStatus, setSelfStructureStatus] = useState(null);
   const [deepInsightBanners, setDeepInsightBanners] = useState([]);
   const deepInsightNotifiedRef = useRef(new Set());
   const selfStructureBannerHideTimerRef = useRef(null);
@@ -233,6 +234,8 @@ export default function MainTabs() {
   const [startupComplete, setStartupComplete] = useState(false);
   const currentOwner = session?.user?.id || null;
   const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(currentOwner, authOwnerGeneration);
+  const mapReadSnapshot = React.useMemo(() => ({ current: null }), [ownerRequest, subscriptionLoading, tier, isAppActive]);
+  const currentMapStatus = selfStructureStatus?.scope === ownerRequest ? selfStructureStatus : null;
   const [pieceSaveScope, setPieceSaveScope] = useState(() => ({ owner: currentOwner,
     recovery: createPieceSaveRecovery(currentOwner) }));
   if (pieceSaveScope.owner !== currentOwner) {
@@ -1001,12 +1004,26 @@ export default function MainTabs() {
   const refreshSelfStructureLatestStatus = React.useCallback(async () => {
     if (!isAppActive || !isOwnerCurrent(ownerRequest)) return;
     const sequence = ++selfStructureStatusSequenceRef.current;
+    const checkedAt = Date.now();
     try {
       const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, ownerRequest.options);
       if (!isOwnerCurrent(ownerRequest) || AppState.currentState !== "active"
         || sequence !== selfStructureStatusSequenceRef.current) return;
       const hasVisibleContent = json?.has_visible_content === true;
       const nextVersionKey = hasVisibleContent ? String(json?.version_key || "").trim() || null : null;
+      if (json?.status === "ok" && typeof json.has_visible_content === "boolean" &&
+          [null, undefined, "queued", "running", "failed"].includes(json.refresh_status)) {
+        const serverTier = json.map_subscription_tier || null;
+        const refreshStatus = json.refresh_status || null;
+        const skipReason = json.skip_reason || null;
+        setSelfStructureStatus(previous => previous?.scope === ownerRequest && !previous.accessDenied &&
+          previous.versionKey === nextVersionKey && previous.hasContent === hasVisibleContent &&
+          previous.tier === serverTier && previous.refreshStatus === refreshStatus &&
+          previous.skipReason === skipReason ? previous : {
+            scope: ownerRequest, checkedAt, versionKey: nextVersionKey, hasContent: hasVisibleContent,
+            tier: serverTier, refreshStatus, skipReason,
+          });
+      }
       const reportMode = String(json?.saved_report_mode || "").trim().toLowerCase() === "deep" ? "deep" : "standard";
       const initialized = selfStructureLatestInitializedRef.current;
       const changed = (selfStructureLatestVersionRef.current || null) !== nextVersionKey;
@@ -1017,7 +1034,12 @@ export default function MainTabs() {
       if (nextVersionKey && hasVisibleContent && ((initialized && changed) || pushMatches)) {
         showSelfStructureBanner(reportMode, nextVersionKey);
       }
-    } catch {}
+    } catch (error) {
+      if ([401, 403].includes(Number(error?.status)) && isOwnerCurrent(ownerRequest) &&
+          sequence === selfStructureStatusSequenceRef.current) {
+        setSelfStructureStatus({ scope: ownerRequest, checkedAt, accessDenied: true });
+      }
+    }
   }, [isAppActive, showSelfStructureBanner, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
@@ -1090,11 +1112,6 @@ export default function MainTabs() {
       try { if (intervalId) clearInterval(intervalId); } catch {}
     };
   }, [refreshEmotionLogUnreadState]);
-
-  useEffect(() => {
-    if (activeRouteName !== "Piece") return;
-    (async () => { await refreshEmotionLogUnreadState(); })();
-  }, [activeRouteName, refreshEmotionLogUnreadState]);
 
   const visibleDeepInsightBanners = deepInsightBanners.filter(({ scope }) => isOwnerCurrent(scope));
   const notificationBanners = (selfStructureBanner.visible || visibleDeepInsightBanners.length > 0) ? (
@@ -1215,6 +1232,8 @@ export default function MainTabs() {
               {...tabProps}
               onSetPieceLinkPayload={setPieceLinkPayload}
               onRefreshTabUnread={refreshAnalysisReportsUnreadBadge}
+              mapReadSnapshot={mapReadSnapshot}
+              currentMapStatus={currentMapStatus}
             />
           )}
         </Tab.Screen>

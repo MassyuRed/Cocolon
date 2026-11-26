@@ -46,7 +46,10 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
   function loadStack(file, screen) {
     const screenMocks = Object.fromEntries(Array.from(fs.readFileSync(path.join(ROOT, file), 'utf8')
       .matchAll(/from ["'](\.\.\/screens\/[^"']+)["']/g), match => [match[1], () => null]));
-    return load(file, { ...screenMocks, ...screen, '@react-navigation/native-stack': { createNativeStackNavigator: () => ({
+    return load(file, { ...screenMocks, ...screen, 'react-native': native,
+      '../AuthContext': { useAuth: () => ({ user: { id: owner }, authOwnerGeneration: owner }) },
+      '../screens/DeepInsightScreen': { default: () => null, DeepInsightReturnCacheContext: React.createContext(null) },
+      '@react-navigation/native-stack': { createNativeStackNavigator: () => ({
       Navigator: ({ children }) => React.Children.toArray(children).find(child => ['Input', 'PieceCreate'].includes(child.props.name)),
       Screen,
     }) } }).default;
@@ -67,6 +70,7 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
     '../SubscriptionContext':{useSubscription:()=>subscription},'../TutorialContext':{useTutorial:()=>tutorial},
     '../theme/ThemeContext':{useTheme:()=>theme},'../lib/supabase':{supabase:{auth:{getUser:forever,getSession:forever}}},
     '../lib/user':{getCurrentUserId:forever},'../lib/apiClient':{apiFetch:forever,apiGet:forever,apiPost:forever},
+    '../lib/pushToken':{hasPushNotificationPermission:async()=>false},
     '../lib/nexusApi':{getNexusPiecesAsQnaList:forever},'../components/UnreadBadge':{BottomTabUnreadBadge:()=>null},
     '../components/GlobalFrameLayout':({children})=>React.createElement('Frame',null,children),
     './navigationRef':{navigationRef:{isReady:()=>false},buildAnalysisRootNavigationParams:no},
@@ -133,6 +137,42 @@ test('home initial read settles on failure, can retry, and ignores requests from
   let retry;await act(async()=>{retry=value.loadHomeState({force:true,includeStartupCandidate:false});});
   await act(async()=>{reads.at(-1).resolve({sections:{input_summary:{today_count:2}}});await retry;});
   assert.equal(value.homeReadError,false);assert.equal(value.homeTodayCount,2);assert.equal(value.initialHomeReadComplete,true);
+});
+
+test('home navigation reuses the successful read until the source or access changes', async t => {
+  const listeners = new Map(), reads = [];
+  const navigation = { addListener: (event, listener) => {
+    listeners.set(event, listener);
+    return () => listeners.delete(event);
+  } };
+  const changes = load('lib/emotionRecordChanges.js');
+  const { useHomeState } = load('features/home/useHomeState.js', {
+    'react-native': native,
+    '../../lib/emotionRecordChanges': changes,
+    '../../lib/api/home/homeStateApi': { getHomeState: async options => {
+      reads.push(options);
+      return { sections: { input_summary: { today_count: 2 } } };
+    } },
+  });
+  const candidate = () => null;
+  function Home({ generation }) {
+    const data = useHomeState({ currentUserId: 'A', authOwnerGeneration: generation,
+      isTutorialMode: false, tutorialFlagsLoaded: true, navigation, buildTutorialStartupCandidate: candidate });
+    return React.createElement('Home', { count: data.homeTodayCount });
+  }
+  let root;
+  await act(async () => { root = Renderer.create(React.createElement(Home, { generation: 1 })); });
+  t.after(() => act(async () => root.unmount()));
+  assert.equal(root.root.findByType('Home').props.count, 2);
+  const initial = reads.length;
+  await act(async () => { listeners.get('blur')(); listeners.get('focus')(); });
+  assert.equal(reads.length, initial);
+  changes.notifyEmotionRecordsChanged('A');
+  await act(async () => { listeners.get('blur')(); listeners.get('focus')(); });
+  assert.equal(reads.length, initial + 1);
+  assert.equal(reads.at(-1).expectedUserId, 'A');
+  await act(async () => root.update(React.createElement(Home, { generation: 2 })));
+  assert(reads.length > initial + 1);
 });
 
 function loadTutorialOverlay({ width = 844, height = 390, insets } = {}) {

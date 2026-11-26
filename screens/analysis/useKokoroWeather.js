@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { useAuth } from "../../AuthContext";
+import { useSubscription } from "../../SubscriptionContext";
 import { useOwnerRequestScope } from "../../hooks/useOwnerRequestScope";
 import { apiGet } from "../../lib/apiClient";
 import { ANALYSIS_WIRE } from "../../lib/compat/legacyWireContracts";
+import { getEmotionRecordRevision, subscribeEmotionRecordChanges } from "../../lib/emotionRecordChanges";
 
 const EMOTIONS = ["joy", "sadness", "anger", "anxiety", "calm"];
 const isDate = value => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
@@ -27,15 +29,23 @@ function isWeather(data, period) {
         Array.isArray(record.emotions) && record.emotions.every(emotion => EMOTIONS.includes(emotion.key) && isCount(emotion.weight) && emotion.weight > 0)));
 }
 
-export function useKokoroWeather(period, anchor, refreshRevision = 0, enabled = true) {
+export function useKokoroWeather(period, anchor, refreshRevision = 0, enabled = true, active = true) {
   const { user, authOwnerGeneration } = useAuth();
   const { scope, isCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
+  const { tier } = useSubscription();
   const focused = useIsFocused();
   const sequence = useRef(0);
   const [attempt, setAttempt] = useState(0);
   const [result, setResult] = useState(null);
-  const key = `${period}:${anchor || "current"}`;
+  const recordsRevision = useSyncExternalStore(subscribeEmotionRecordChanges, () => getEmotionRecordRevision(scope.owner));
   const [day, setDay] = useState(() => new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10));
+  const read = useMemo(() => ({ period, anchor }), [scope, tier, period, anchor, day, recordsRevision, refreshRevision, attempt, enabled]);
+  const current = result?.read === read && isCurrent(scope) ? result : null;
+  const visible = enabled && active && focused ? current : null;
+  const hasCachedData = !!current?.data;
+  useEffect(() => {
+    setResult(previous => previous?.read === read ? previous : null);
+  }, [read]);
   useEffect(() => {
     if (!enabled) return undefined;
     // Refresh at JST midnight even if this screen stays open overnight.
@@ -47,28 +57,27 @@ export function useKokoroWeather(period, anchor, refreshRevision = 0, enabled = 
     const currentSequence = ++sequence.current;
     let disposed = false;
     const fresh = () => !disposed && sequence.current === currentSequence && isCurrent(scope);
-    if (!enabled || !focused || !isCurrent(scope)) return undefined;
+    if (!enabled || !active || !focused || !isCurrent(scope) || hasCachedData) return undefined;
     // A previous successful response must not mask a failed refresh or deletion.
-    setResult({ scope, key, loading: true, data: null, error: false });
+    setResult({ read, loading: true, data: null, error: false });
     (async () => {
       try {
-        const query = `?period=${encodeURIComponent(period)}${anchor ? `&anchor=${encodeURIComponent(anchor)}` : ""}`;
+        const query = `?period=${encodeURIComponent(read.period)}${read.anchor ? `&anchor=${encodeURIComponent(read.anchor)}` : ""}`;
         const data = await apiGet(`${ANALYSIS_WIRE.routes.kokoroWeather}${query}`, scope.options);
         if (!fresh()) return;
-        if (!isWeather(data, period)) {
+        if (!isWeather(data, read.period)) {
           throw new Error("Invalid weather response");
         }
-        setResult({ scope, key, loading: false, data, error: false });
+        setResult({ read, loading: false, data, error: false });
       } catch {
-        if (fresh()) setResult({ scope, key, loading: false, data: null, error: true });
+        if (fresh()) setResult({ read, loading: false, data: null, error: true });
       }
     })();
     return () => { disposed = true; };
-  }, [scope, isCurrent, focused, period, anchor, key, attempt, refreshRevision, day, enabled]);
-  const visible = enabled && result?.scope === scope && result?.key === key && isCurrent(scope) ? result : null;
+  }, [scope, isCurrent, focused, read, enabled, active, hasCachedData]);
   return {
     data: visible?.data || null,
-    loading: enabled && !!user?.id && (!visible || visible.loading),
+    loading: enabled && active && focused && !!user?.id && (!visible || visible.loading),
     error: !!visible?.error,
     retry: useCallback(() => setAttempt(value => value + 1), []),
   };

@@ -17,6 +17,7 @@ import {
 import { useAuth } from "../AuthContext";
 import { useSubscription } from "../SubscriptionContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
+import { notifyEmotionRecordsChanged } from "../lib/emotionRecordChanges";
 import { useEmlisThread } from "./input/useEmlisThread";
 import { useEmlisQuestionPreference } from "./input/useEmlisQuestionPreference";
 import { useAppRuntime } from "../AppRuntimeContext";
@@ -142,7 +143,7 @@ function buildSavedPieceInput(savedInputId, expectedUserId) {
 export default function InputScreen({ navigation, route, onInitialInputSettled, appStartupReady = true, saveRecovery }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
-  const { session, accountDisplayName } = useAuth();
+  const { session, accountDisplayName, authOwnerGeneration } = useAuth();
   const { tier: subscriptionTier } = useSubscription();
   const {
     isTutorialMode,
@@ -349,6 +350,8 @@ const buildTutorialStartupCandidate = useCallback(() => null, []);
 
 const homeState = useHomeState({
   currentUserId,
+  authOwnerGeneration,
+  subscriptionTier,
   isTutorialMode,
   tutorialFlagsLoaded,
   navigation,
@@ -980,6 +983,7 @@ const safeInsets = useSafeAreaInsets();
       }
 
       const submitResult = await submitEmotionInput(payload, { expectedUserId: requestOwner.id });
+      if (submitResult?.id) notifyEmotionRecordsChanged(requestOwner.id);
       if (!ownsResponse()) return;
       const savedInputIdForPiece = submitResult?.id;
       const inputFeedback = submitResult?.input_feedback || null;

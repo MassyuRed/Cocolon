@@ -57,15 +57,17 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       Object.assign(target, JSON.parse(options.body));
       return target;
     }
-    if (options.method !== 'GET') return { unread_count: 0, resonated: true, resonances: 1 };
+    if (options.method !== 'GET') return control.writeResponse?.(sharingPath, options)
+      ?? { unread_count: 0, resonated: true, resonances: 1 };
     const p = new URL(url).pathname;
     if (p === '/deep-insight') return control.deepInsightState;
     if (p.startsWith('/deep-insight/questions/')) return control.notifiedQuestion;
     if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
     if (p === '/nexus/pieces') return { items: control.pieceFeedItems || [] };
+    if (p === '/nexus/emotion-ranking') return { items: control.emotionRankingItems || [] };
     if (p === '/piece/resonances/pieces') return { items: control.resonanceHistoryItems || [] };
     if (p.startsWith('/nexus/pieces/')) return control.legacyPieceDetail || {};
-    if (p === '/notices/history') return { items: [notice], unread_count: 1 };
+    if (p === '/notices/history') return control.noticesHistory?.(new URL(url)) ?? { items: [notice], unread_count: 1 };
     if (p === '/follow/list') return { rows: [{ id: 'C', display_name: 'C-name' }, { id: 'D', display_name: 'D-name' }] };
     if (p === '/follow/stats') return { following_count: 2, follower_count: 0 };
     if (p.includes('/follow/requests')) return { requests: [{ request_id: 'request', requester_user_id: 'C', requester_display_name: 'C-name',
@@ -128,7 +130,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
         recoveryMode: false, authOwnerGeneration: control.generation }) };
       if (target === 'UnreadContext.js') return { useUnread: () => unread };
       if (target === 'SubscriptionContext.js') return { useSubscription: () => ({ isPaid: false, loading: false,
-        tier: 'free', subscriptionBootstrapLoaded: true, subscriptionBootstrapLoading: false }) };
+        tier: control.tier ?? 'free', subscriptionBootstrapLoaded: true, subscriptionBootstrapLoading: false }) };
       if (target === 'TutorialContext.js') return { useTutorial: () => ({ isTutorialMode: false, tutorialStep: 0, tutorialPieces,
         tutorialFlagsLoaded: true, tutorialCompleted: true, ensureTutorialPiecesSeed: noop, setTutorialStep: noop }) };
       if (target === 'AppRuntimeContext.js') return { useAppRuntime: () => ({
@@ -162,16 +164,32 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       requireLocal, module, module.exports, fetch, timer, clear, timer, clear, { warn: noop });
     modules.set(relative, module.exports); return module.exports;
   }
-  const Screen = load(file).default;
+  const { default: Screen, DeepInsightReturnCacheContext } = load(file);
   let root;
-  const element = () => React.createElement(Screen, { navigation, route: { params: { initialTab, ...options.screenParams } }, ...options.screenProps });
+  let routeKey = 0;
+  const element = () => {
+    const screen = React.createElement(Screen, { key: routeKey, navigation,
+      route: { params: { initialTab, ...control.screenParams } }, ...options.screenProps });
+    return DeepInsightReturnCacheContext && control.returnCache
+      ? React.createElement(DeepInsightReturnCacheContext.Provider, { value: control.returnCache }, screen) : screen;
+  };
   await act(async () => { root = Renderer.create(element(), { createNodeMock: options.createNodeMock }); await tick(); });
   t.after(async () => { await act(async () => root.unmount()); });
   const h = { control, calls, events, alerts, routes, root,
     find: type => root.root.findByType(type),
     async flush() { await act(async () => { await tick(); }); },
+    async reopen() { routeKey += 1; await act(async () => { root.update(element()); await tick(); }); },
+    async update() { await act(async () => { root.update(element()); await tick(); }); },
+    async changeRecords(owner) { await act(async () => {
+      load('lib/emotionRecordChanges.js').notifyEmotionRecordsChanged(owner); await tick();
+    }); },
     async navigationEvent(name) { await act(async () => {
       for (const listener of [...(navigationListeners.get(name) || [])]) listener();
+      await tick();
+    }); },
+    async updateParams(params) { control.screenParams = params; await act(async () => { root.update(element()); await tick(); }); },
+    async publishFollowChange(change) { await act(async () => {
+      load('screens/account/followChanges.js').publishFollowChange(change);
       await tick();
     }); },
     async switchTo(owner, generationDelta = 1) { control.owner = owner; control.generation += generationDelta;
@@ -246,7 +264,7 @@ test('follower permission reads cannot reopen an obsolete owner menu', async t =
   assert.equal(h.mutations().length, 0);
 });
 
-test('FollowList centers its themed title beside the back button and reloads on focus', async t => {
+test('FollowList centers its themed title and reuses the visible list on focus', async t => {
   const titleColor = '#8A6D1D';
   const h = await harness(t, 'screens/FollowListScreen.js', 'following', { colors: { TITLE_GOLD: titleColor } });
   const title = h.root.root.findAllByType('Text').find(node => node.props.children === 'フォローリスト');
@@ -263,8 +281,27 @@ test('FollowList centers its themed title beside the back button and reloads on 
 
   const count = path => h.calls.filter(call => call.path === path).length;
   const initialReads = ['/follow/list', '/follow/stats'].map(count);
+  const initialRows = h.find('List').props.data;
+  await h.navigationEvent('blur');
   await h.navigationEvent('focus');
-  assert.deepEqual(['/follow/list', '/follow/stats'].map(count), initialReads.map(reads => reads + 1));
+  assert.deepEqual(['/follow/list', '/follow/stats'].map(count), initialReads);
+  assert.equal(h.find('List').props.data, initialRows);
+});
+
+test('a confirmed same-session follow change refreshes the affected list without blanking it', async t => {
+  const h = await harness(t, 'screens/FollowListScreen.js', 'following');
+  const initialRows = h.find('List').props.data;
+  const count = () => h.calls.filter(call => call.path === '/follow/list').length;
+  const initialReads = count();
+  h.control.holdRead = call => call.path === '/follow/list';
+  await h.publishFollowChange({ owner: 'A', generation: -1, target: 'C' });
+  await h.publishFollowChange({ owner: 'B', generation: 0, target: 'C' });
+  assert.equal(count(), initialReads);
+  await h.publishFollowChange({ owner: 'A', generation: 0, target: 'C' });
+  assert.equal(count(), initialReads + 1);
+  assert.equal(h.find('List').props.data, initialRows);
+  await h.resolve(h.calls.findLast(call => call.path === '/follow/list'), { rows: [initialRows[1]] });
+  assert.deepEqual(h.find('List').props.data.map(row => row.id), ['D']);
 });
 
 for (const [tab, label] of [['following', 'フォロー中'], ['followers', 'フォロワー']]) {
@@ -503,6 +540,70 @@ test('the opt-in post feed renders new Piece text, preserves old Q&A, and refres
   assert.ok(text().includes(legacyPiece.body));
 });
 
+test('Nexus reuses recent public aggregate data and still rechecks shared posts on return', async t => {
+  const endpoint = '/nexus/emotion-ranking';
+  let now = Date.parse('2026-11-26T14:59:00Z');
+  t.mock.method(Date, 'now', () => now);
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    holdRead: call => call.path === endpoint,
+  });
+  const count = path => h.calls.filter(call => call.path === path).length;
+  const ranking = () => h.find('NexusTodayEmotionSummary').props.rankingState;
+  const aggregate = h.calls.find(call => call.path === endpoint);
+
+  await h.navigationEvent('focus');
+  assert.equal(count(endpoint), 1, 'initial focus shares the outstanding aggregate request');
+  await h.resolve(aggregate, { items: [{ emotion: '平穏', count: 2 }] });
+  const posts = count('/nexus/pieces');
+  await h.navigationEvent('blur');
+  await h.navigationEvent('focus');
+  assert.equal(count(endpoint), 1);
+  assert.equal(count('/nexus/pieces'), posts + 1);
+
+  now += 31_000;
+  h.control.holdRead = null;
+  h.control.failRead = call => call.path === endpoint;
+  await h.navigationEvent('focus');
+  assert.equal(count(endpoint), 2);
+  assert.deepEqual(ranking().items, [{ label: '平穏', value: 2 }]);
+  assert.equal(ranking().error, '');
+
+  h.control.failRead = null;
+  h.control.emotionRankingItems = [{ emotion: '喜び', count: 3 }];
+  await h.navigationEvent('focus');
+  assert.equal(count(endpoint), 3, 'a failed refresh leaves the existing reopen retry available');
+  assert.deepEqual(ranking().items, [{ label: '喜び', value: 3 }]);
+
+  now += 28_000; // 23:59:59 JST, still within the recent read window.
+  await h.navigationEvent('focus');
+  assert.equal(count(endpoint), 3);
+  now += 2000;
+  h.control.emotionRankingItems = [];
+  await h.navigationEvent('focus');
+  assert.equal(count(endpoint), 4, 'a new JST day needs a fresh daily aggregate');
+  assert.deepEqual(ranking().items, []);
+});
+
+test('Nexus shares only outstanding unread requests within the current owner scope', async t => {
+  const endpoints = ['/nexus/pieces/unread-status', '/emotion-log/unread-status'];
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    holdRead: call => endpoints.includes(call.path),
+  });
+  const pending = h.calls.filter(call => endpoints.includes(call.path));
+  await h.navigationEvent('focus');
+  assert.equal(h.calls.filter(call => endpoints.includes(call.path)).length, 2);
+  await h.switchTo('B');
+  const next = h.calls.filter(call => endpoints.includes(call.path) && call.owner === 'B');
+  assert.equal(next.length, 2);
+  const previousEffects = h.events.filter(event => event[0] === 'unread').length;
+  for (const old of pending) await h.resolve(old, { feed_unread: true, has_unread: true });
+  assert.equal(h.events.filter(event => event[0] === 'unread').length, previousEffects);
+  for (const current of next) await h.resolve(current, { feed_unread: false, has_unread: false });
+  h.control.holdRead = null;
+  await h.navigationEvent('focus');
+  assert.equal(h.calls.filter(call => endpoints.includes(call.path) && call.owner === 'B').length, 4);
+});
+
 test('MainTabs prefetches existing Piece data without requesting recommended users', async t => {
   const h = await harness(t, 'navigation/MainTabs.js');
   await h.fireTimers();
@@ -531,6 +632,31 @@ test('notice read is confirmed only by a same-owner receipt and a valid link sti
   assert.equal(h.find('List').props.data[0].is_read, true);
   assert.deepEqual(h.routes, [['Account', {}]]);
   assert.ok(h.mutations().every(call => call.owner === 'A'));
+});
+
+test('notice history keeps added pages on return and loads a new Home notice only when it is missing', async t => {
+  const notice = id => ({ notice_id: id, title: id, body: '確認本文', is_read: true });
+  const h = await harness(t, 'screens/NoticeHistoryScreen.js', undefined, {
+    noticesHistory: url => url.searchParams.get('offset') === '1'
+      ? { items: [notice('older')], has_more: false }
+      : { items: [notice('latest')], has_more: true, next_offset: 1 },
+  });
+  const readCount = () => h.calls.filter(call => call.path === '/notices/history').length;
+  await act(async () => { await h.root.root.findByProps({ accessibilityLabel: 'さらにお知らせを読み込む' }).props.onPress(); });
+  assert.equal(readCount(), 2);
+  const pages = h.find('List').props.data;
+  assert.deepEqual(pages.map(row => row.notice_id), ['latest', 'older']);
+  await h.navigationEvent('blur');
+  await h.navigationEvent('focus');
+  await h.updateParams({ open_notice_id: 'older', open_notice_at: '1' });
+  assert.equal(readCount(), 2);
+  assert.equal(h.find('List').props.data, pages);
+  assert.equal(h.root.root.findByProps({ accessibilityLabel: 'お知らせ詳細を閉じる' }).props.accessibilityState.expanded, true);
+  h.control.noticesHistory = () => ({ items: [notice('new')] });
+  await h.updateParams({ open_notice_id: 'new', open_notice_at: '2' });
+  assert.equal(readCount(), 3);
+  assert.deepEqual(h.find('List').props.data.map(row => row.notice_id), ['new']);
+  assert.equal(h.root.root.findByProps({ accessibilityLabel: 'お知らせ詳細を閉じる' }).props.accessibilityState.expanded, true);
 });
 
 test('notices reached from Settings return there and can still link into the Home stack', async t => {
@@ -961,4 +1087,98 @@ test('an old reflection notification opens its own question and answer outside r
   assert.deepEqual(scrolls, [{ y: 310, animated: false }, { y: 540, animated: false }]);
   assert.deepEqual(h.calls.filter(call => call.path === questionPath).map(call => call.owner), ['A', 'A']);
   assert.deepEqual(h.mutations(), []);
+});
+
+const deepInsightReturnData = (answer) => ({ can_use_theme: true, can_use_records: true,
+  record_available_today: false, theme_available_today: true, records: null, theme: null,
+  history: [{ id: 'saved-answer', lane: 'theme', question_text: '質問', answer_text: answer, answered_at: '2026-11-26' }] });
+
+test('DeepInsight reuses a successful read on ordinary focus and across stack reopen', async t => {
+  const cache = { snapshot: null, foregroundRevision: 0 };
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    returnCache: cache, deepInsightState: deepInsightReturnData('表示済みの本人回答'),
+  });
+  const reads = () => h.calls.filter(call => call.path === '/deep-insight');
+  await h.navigationEvent('blur');
+  await h.navigationEvent('focus');
+  await h.reopen();
+  assert.equal(reads().length, 1);
+  assert.match(JSON.stringify(h.root.toJSON()), /表示済みの本人回答/);
+  h.control.deepInsightState = deepInsightReturnData('復帰時に確認した回答');
+  cache.foregroundRevision += 1;
+  await h.reopen();
+  assert.equal(reads().length, 2);
+  assert.match(JSON.stringify(h.root.toJSON()), /復帰時に確認した回答/);
+});
+
+test('DeepInsight refreshes on a confirmed owner input update and fences plan, owner, and notification changes', async t => {
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    returnCache: { snapshot: null, foregroundRevision: 0 }, tier: 'premium',
+    deepInsightState: deepInsightReturnData('有料状態の本人回答'),
+  });
+  const reads = () => h.calls.filter(call => call.path === '/deep-insight');
+  const display = () => JSON.stringify(h.root.toJSON());
+  await h.changeRecords('somebody-else');
+  assert.equal(reads().length, 1);
+  h.control.deepInsightState = deepInsightReturnData('新しい記録のあとに取得した回答');
+  await h.changeRecords('A');
+  assert.equal(reads().length, 2);
+  assert.match(display(), /新しい記録のあとに取得した回答/);
+
+  h.control.tier = 'free';
+  h.control.holdRead = call => call.path === '/deep-insight';
+  await h.update();
+  assert.doesNotMatch(display(), /新しい記録のあとに取得した回答/);
+  await h.resolve(reads().at(-1), deepInsightReturnData('参照権更新後の回答'));
+  assert.match(display(), /参照権更新後の回答/);
+
+  h.control.screenParams = { notification: { lane: 'records', questionId: 'older' } };
+  h.control.notifiedQuestion = { id: 'older', lane: 'records', question_text: '通知の固有質問', answered_at: null };
+  await h.update();
+  assert.doesNotMatch(display(), /参照権更新後の回答/);
+  await h.resolve(reads().at(-1), deepInsightReturnData('参照権更新後の回答'));
+  assert.match(display(), /通知の固有質問/);
+
+  await h.switchTo('B');
+  assert.doesNotMatch(display(), /通知の固有質問|参照権更新後の回答/);
+  assert.equal(reads().at(-1).owner, 'B');
+});
+
+test('DeepInsight preserves a saved answer when a concurrent older fetch completes', async t => {
+  const pending = { id: 'pending', lane: 'theme', question_text: 'お題', answered_at: null };
+  const saved = { ...pending, answer_text: '保存できた回答', answered_at: '2026-11-26' };
+  const stale = { ...deepInsightReturnData('先に取得した回答'), theme: pending };
+  const ready = { ...stale, theme: saved, history: [saved, ...stale.history] };
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    deepInsightState: stale, writeResponse: path => path === '/deep-insight/answers' ? { question: saved } : null,
+  });
+  h.control.holdRead = call => call.path === '/deep-insight';
+  await h.backgroundCycle();
+  const oldRead = h.calls.filter(call => call.path === '/deep-insight').at(-1);
+  assert.equal(typeof oldRead.resolve, 'function');
+  await act(async () => { h.root.root.findByType('TextInput').props.onChangeText(saved.answer_text); });
+  const save = h.root.root.findAllByType('CocolonButton').find(node => node.props.children === '回答を保存する');
+  await act(async () => { await save.props.onPress(); });
+  h.control.deepInsightState = ready;
+  h.control.holdRead = null;
+  await h.resolve(oldRead, stale);
+  assert.match(JSON.stringify(h.root.toJSON()), /保存できた回答/);
+  assert.equal(h.root.root.findAllByType('TextInput').length, 0);
+  assert.equal(h.calls.filter(call => call.path === '/deep-insight').length, 3);
+});
+
+test('DeepInsight first record auto-issue is preserved without repeating it on return', async t => {
+  const question = { id: 'new-record', lane: 'records', question_text: '記録からの問い', answered_at: null };
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    returnCache: { snapshot: null, foregroundRevision: 0 },
+    deepInsightState: { ...deepInsightReturnData('以前の回答'), record_available_today: true },
+    writeResponse: path => path === '/deep-insight/questions' ? { question, status: 'issued' } : null,
+  });
+  assert.match(JSON.stringify(h.root.toJSON()), /記録からの問い/);
+  await h.navigationEvent('blur');
+  await h.navigationEvent('focus');
+  await h.reopen();
+  assert.equal(h.calls.filter(call => call.path === '/deep-insight').length, 1);
+  assert.equal(h.mutations().filter(call => call.path === '/deep-insight/questions').length, 1);
+  assert.match(JSON.stringify(h.root.toJSON()), /記録からの問い/);
 });

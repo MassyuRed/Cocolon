@@ -161,6 +161,8 @@ export default function AnalysisContentFirstScreen({
   onOpenSelfHistory,
   onOpenSubscription,
   onLatestSeenVersion,
+  mapReadSnapshot,
+  currentMapStatus,
   isTutorialMode = false,
   tutorialStep = 0,
   tutorialGraphData = null,
@@ -174,6 +176,7 @@ export default function AnalysisContentFirstScreen({
   const [activeAnalysisTab, setActiveAnalysisTab] = useState("emotion");
   const [graphPeriod, setGraphPeriod] = useState("today");
   const [graphRevision, setGraphRevision] = useState(0);
+  const showGraph = activeAnalysisTab === "emotion";
 
   useEffect(() => {
     if (!graphOpenRequest || isTutorialMode) return;
@@ -278,18 +281,18 @@ export default function AnalysisContentFirstScreen({
         )}
       </View>
 
-      {activeAnalysisTab === "emotion" ? (
-        <View ref={tutorialRefs?.reportRef} collapsable={false}>
-          <KokoroWeatherTimeline
-            key={graphRevision}
-            colors={colors}
-            ui={ui}
-            period={graphPeriod}
-            onPeriodChange={setGraphPeriod}
-            sampleData={isTutorialMode ? (tutorialGraphData?.[graphPeriod] ?? null) : undefined}
-          />
-        </View>
-      ) : (
+      <View ref={tutorialRefs?.reportRef} collapsable={false} style={showGraph ? undefined : { display: "none" }}>
+        <KokoroWeatherTimeline
+          key={graphRevision}
+          colors={colors}
+          ui={ui}
+          period={graphPeriod}
+          onPeriodChange={setGraphPeriod}
+          sampleData={isTutorialMode ? (tutorialGraphData?.[graphPeriod] ?? null) : undefined}
+          active={showGraph}
+        />
+      </View>
+      {!showGraph ? (
         <>
           {isTutorialMode ? (
             <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
@@ -334,6 +337,8 @@ export default function AnalysisContentFirstScreen({
                     </Text>
                   )}
                   onLatestSeenVersion={onLatestSeenVersion}
+                  mapReadSnapshot={mapReadSnapshot}
+                  currentMapStatus={currentMapStatus}
                   onOpenGuide={onOpenGuide}
                 />
               </>
@@ -359,7 +364,7 @@ export default function AnalysisContentFirstScreen({
           </CocolonPressable>
           ) : null}
         </>
-      )}
+      ) : null}
     </AnalysisMenuScroll>
   );
 }

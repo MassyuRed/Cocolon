@@ -9,7 +9,8 @@ import FollowListScreen from "../screens/FollowListScreen";
 
 const AnalysisStack = createNativeStackNavigator();
 
-export default function AnalysisStackNavigator({ onSetPieceLinkPayload, onRefreshTabUnread, route: tabRoute }) {
+export default function AnalysisStackNavigator({ onSetPieceLinkPayload, onRefreshTabUnread, mapReadSnapshot,
+  currentMapStatus, route: tabRoute }) {
   return (
     <AnalysisStack.Navigator initialRouteName="Analysis" screenOptions={{ headerShown: false }}>
       <AnalysisStack.Screen name="Analysis">
@@ -18,6 +19,8 @@ export default function AnalysisStackNavigator({ onSetPieceLinkPayload, onRefres
             {...navProps}
             tabRoute={tabRoute}
             onRefreshTabUnread={onRefreshTabUnread}
+            mapReadSnapshot={mapReadSnapshot}
+            currentMapStatus={currentMapStatus}
             onOpenPieceDeepDive={(payload) => {
               try {
                 onSetPieceLinkPayload?.(payload || null);

@@ -3,12 +3,13 @@ import { apiGet } from "../../lib/apiClient";
 import { SELF_STRUCTURE_WIRE } from "../../lib/compat/legacyWireContracts";
 import { resolveSelfStructureUpdatedAt } from "./analysisRouteModel";
 
-export function useAnalysisReportActions() {
+export function useAnalysisReportActions(enabled) {
   const refreshSequence = useRef(0);
   const [entryMeta, setEntryMeta] = useState({ selfStructureLatestDate: null });
 
   const refreshHomeSummaries = useCallback(async () => {
     const sequence = ++refreshSequence.current;
+    if (!enabled) return;
     try {
       const status = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
       if (sequence !== refreshSequence.current) return;
@@ -20,7 +21,7 @@ export function useAnalysisReportActions() {
         console.warn("AnalysisScreen: failed to refresh self-structure latest status", error);
       }
     }
-  }, []);
+  }, [enabled]);
 
   return { entryMeta, refreshHomeSummaries };
 }

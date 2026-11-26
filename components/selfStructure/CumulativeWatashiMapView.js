@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { ActivityIndicator, AppState, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,6 +7,7 @@ import { useSubscription } from '../../SubscriptionContext';
 import { useTheme } from '../../theme/ThemeContext';
 import { SHOW_INTERPRETATION_CORRECTION } from '../../runtime/interpretationCorrectionUi';
 import { apiGet, apiPost } from '../../lib/apiClient';
+import { getEmotionRecordRevision, subscribeEmotionRecordChanges } from '../../lib/emotionRecordChanges';
 import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath } from '../../lib/compat/legacyWireContracts';
 import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
 import WatashiMapV2Renderer from './WatashiMapV2Renderer';
@@ -38,9 +39,22 @@ const temporarilyUnavailable = error => {
     || error?.name === 'TimeoutError'
     || (error?.name === 'TypeError' && /network|fetch/i.test(String(error?.message || '')));
 };
+function canReuseCurrentMap(saved, key, recordRevision, status) {
+  if (!saved || saved.state.key !== key || saved.state.recordRevision !== recordRevision) return false;
+  if (!status || status.checkedAt <= saved.startedAt) return true;
+  if (status.accessDenied) return false;
+  const { state } = saved;
+  const refreshStatus = readRefreshStatus({ refresh_status: status.refreshStatus, skip_reason: status.skipReason });
+  return status.hasContent === Boolean(state.row) &&
+    status.versionKey === (state.row?.content_json?.watashiMap?.projection_of || null) &&
+    (!status.tier || status.tier === state.mapSubscriptionTier) &&
+    refreshStatus === state.refreshStatus &&
+    (!!state.row || insufficientAnalysis({ skip_reason: status.skipReason }) === state.insufficient);
+}
+
 export default function CumulativeWatashiMapView({ reportId = null, month = null, onBack, onLatestSeenVersion,
-  renderLatestUpdateLabel, embedded = false, hideHeader = false, onOpenGuide }) {
-  const { session } = useAuth();
+  renderLatestUpdateLabel, mapReadSnapshot, currentMapStatus, embedded = false, hideHeader = false, onOpenGuide }) {
+  const { session, authOwnerGeneration } = useAuth();
   const { tier, loading: planLoading } = useSubscription();
   const focused = useIsFocused();
   const [appActive, setAppActive] = useState(!['background', 'inactive'].includes(AppState.currentState));
@@ -48,14 +62,23 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => makeStyles(colors, ui), [colors, ui]);
   const owner = session?.user?.id || '';
-  const key = `${owner}:${tier}:${reportId || 'current'}:${month || ''}`;
+  const recordRevision = useSyncExternalStore(subscribeEmotionRecordChanges,
+    () => reportId ? 0 : getEmotionRecordRevision(owner));
+  const key = `${owner}:${authOwnerGeneration ?? 0}:${tier}:${reportId || 'current'}:${month || ''}`;
   const currentKey = useRef(key);
   currentKey.current = key;
   const request = useRef(0);
   const mapLoad = useRef(null);
   const seenCallback = useRef(onLatestSeenVersion);
   seenCallback.current = onLatestSeenVersion;
-  const [state, setState] = useState({ key: null, loading: true });
+  const lastSeen = useRef(null);
+  const localSnapshot = useRef(null);
+  const snapshot = mapReadSnapshot || localSnapshot;
+  const statusRef = useRef(currentMapStatus);
+  statusRef.current = currentMapStatus;
+  const [state, setState] = useState(() => !reportId && appActive && !planLoading &&
+    canReuseCurrentMap(snapshot.current, key, recordRevision, currentMapStatus)
+    ? snapshot.current.state : { key: null, loading: true });
   const [compare, setCompare] = useState(false);
   const [about, setAbout] = useState(false);
   const [ifDialog, setIfDialog] = useState(null);
@@ -71,12 +94,21 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
 
   const load = useCallback(async (withCurrent = false, force = false, readOnly = false) => {
     const seq = ++request.current;
+    const startedAt = Date.now();
     mapLoad.current?.abort();
+    if (!reportId) snapshot.current = null;
     setState(previous => previous.key === key ? { ...previous, loading: true, error: null, refreshError: false } : { key, loading: true });
     if (!owner) { setState({ key, error: 'ログインしてから、もう一度開いてください。' }); return; }
     const controller = typeof AbortController === 'function' ? new AbortController() : null;
     mapLoad.current = controller;
     const active = () => currentKey.current === key && request.current === seq;
+    const present = result => {
+      const next = { ...result, recordRevision };
+      if (!reportId && !pendingRefresh(next.refreshStatus) && next.refreshStatus !== 'failed') {
+        snapshot.current = { state: next, startedAt };
+      }
+      setState(next);
+    };
     const readMap = (path, renderer = 'semantic.v3') => apiGet(path, {
       expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': renderer, 'Cache-Control': 'no-store',
         ...(renderer === 'semantic.v3' ? { 'X-Watashi-Map-Structure-Relations': 'v1' } : {}) },
@@ -123,7 +155,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         row = checkedCurrentResult(data);
         refreshStatus = readRefreshStatus(data);
         if (!row) {
-          if (active()) setState({ key, empty: true, insufficient: insufficientAnalysis(data), coverage: data?.map_context, refreshStatus, mapSubscriptionTier });
+          if (active()) present({ key, empty: true, insufficient: insufficientAnalysis(data), coverage: data?.map_context, refreshStatus, mapSubscriptionTier });
           return;
         }
       }
@@ -133,7 +165,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         const saved = row;
         setState(previous => previous.key === key && previous.row?.id === saved.id
           ? { ...previous, refreshStatus }
-          : { key, row: saved, loading: true, semanticRestorePending: true, refreshStatus, mapSubscriptionTier });
+          : { key, row: saved, loading: true, semanticRestorePending: true, refreshStatus, mapSubscriptionTier, recordRevision });
         row = await restoreSemanticMap(saved, reportId ? month : null);
       }
       if (withCurrent && reportId) {
@@ -154,7 +186,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         }
       }
       if (active()) {
-        setState({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed, insufficient, refreshStatus, mapSubscriptionTier });
+        present({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed, insufficient, refreshStatus, mapSubscriptionTier });
       }
     } catch (error) {
       if (active()) setState(previous => previous.key === key && previous.row && temporarilyUnavailable(error)
@@ -164,12 +196,15 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     } finally {
       if (mapLoad.current === controller) mapLoad.current = null;
     }
-  }, [key, owner, reportId, month]);
+  }, [key, owner, reportId, month, recordRevision, snapshot]);
 
   useEffect(() => {
-    const listener = AppState.addEventListener('change', next => setAppActive(next === 'active'));
+    const listener = AppState.addEventListener('change', next => {
+      if (next !== 'active' && !reportId) snapshot.current = null;
+      setAppActive(next === 'active');
+    });
     return () => listener.remove();
-  }, []);
+  }, [reportId, snapshot]);
 
   useEffect(() => {
     compareRef.current = false;
@@ -188,15 +223,30 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   }, [displayedMapScope]);
 
   useEffect(() => {
-    if (!planLoading && focused && appActive) load(compareRef.current);
+    if (!planLoading && focused && appActive) {
+      if (!reportId && canReuseCurrentMap(snapshot.current, key, recordRevision, statusRef.current)) {
+        setState(snapshot.current.state);
+      } else {
+        if (!reportId && snapshot.current) setState({ key, loading: true });
+        load(compareRef.current);
+      }
+    }
     return () => { request.current += 1; mapLoad.current?.abort(); };
-  }, [load, planLoading, focused, appActive]);
+  }, [load, planLoading, focused, appActive, reportId, snapshot, key, recordRevision]);
 
   useEffect(() => {
-    if (!focused || !appActive) setState(previous => (previous.row?.map_plan_scoped || previous.now?.map_plan_scoped)
+    if (reportId || planLoading || !focused || !appActive || !snapshot.current || mapLoad.current) return;
+    if (canReuseCurrentMap(snapshot.current, key, recordRevision, currentMapStatus)) return;
+    snapshot.current = null;
+    setState({ key, loading: true });
+    load(false, false, currentMapStatus?.hasContent === true);
+  }, [currentMapStatus, reportId, planLoading, focused, appActive, snapshot, key, recordRevision, load]);
+
+  useEffect(() => {
+    if ((!focused && reportId) || !appActive) setState(previous => (previous.row?.map_plan_scoped || previous.now?.map_plan_scoped)
       && ['plus', 'premium'].includes(previous.mapSubscriptionTier)
       ? { key: previous.key, loading: true, mapSubscriptionTier: previous.mapSubscriptionTier } : previous);
-  }, [focused, appActive]);
+  }, [focused, appActive, reportId]);
 
   useEffect(() => {
     if (!focused || !appActive || planLoading || state.key !== key || state.loading
@@ -206,6 +256,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     const active = () => !disposed && currentKey.current === key && request.current === seq;
     const schedule = () => { timer = setTimeout(poll, REFRESH_POLL_MS); };
     const poll = async () => {
+      const startedAt = Date.now();
       try {
         const data = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, {
           expectedUserId: owner, headers: { 'Cache-Control': 'no-store' }, timeoutMs: 15000 });
@@ -227,7 +278,13 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         }
         const insufficient = !displayed && insufficientAnalysis(data);
         if (stateRef.current.refreshStatus !== refreshStatus || stateRef.current.insufficient !== insufficient || stateRef.current.refreshError) {
-          setState(previous => previous.key === key ? { ...previous, insufficient, refreshStatus, refreshError: false } : previous);
+          const previous = stateRef.current;
+          if (previous.key !== key) return;
+          const next = { ...previous, insufficient, refreshStatus, refreshError: false };
+          if (!reportId && !pendingRefresh(refreshStatus) && refreshStatus !== 'failed') {
+            snapshot.current = { state: next, startedAt };
+          }
+          setState(next);
         }
         if (pendingRefresh(refreshStatus)) schedule();
       } catch (error) {
@@ -244,7 +301,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     };
     schedule();
     return () => { disposed = true; clearTimeout(timer); };
-  }, [focused, appActive, planLoading, state.key, state.loading, state.refreshStatus, key, owner, reportId, compare, load]);
+  }, [focused, appActive, planLoading, state.key, state.loading, state.refreshStatus, key, owner, reportId, compare, load, snapshot]);
 
   useEffect(() => {
     if (state.key !== key || state.semanticRestorePending || !state.row || planLoading || !focused || !appActive) return;
@@ -253,9 +310,17 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         report_table: 'analysis_observed_artifacts', report_scope: 'myprofile' },
       { expectedUserId: owner }).catch(() => {});
     } else if (typeof seenCallback.current === 'function') {
-      try { Promise.resolve(seenCallback.current(state.row.content_json.watashiMap.projection_of)).catch(() => {}); } catch {}
+      const version = state.row.content_json.watashiMap.projection_of;
+      const saved = snapshot.current;
+      const sameSavedRow = saved?.state.key === key && saved.state.row?.id === state.row.id;
+      if (state.recordRevision !== recordRevision || (sameSavedRow && saved.seen) ||
+          (lastSeen.current?.key === key && lastSeen.current.version === version)) return;
+      lastSeen.current = { key, version };
+      if (sameSavedRow) saved.seen = true;
+      try { Promise.resolve(seenCallback.current(version)).catch(() => {}); } catch {}
     }
-  }, [state.key, state.semanticRestorePending, state.row, key, reportId, owner, planLoading, focused, appActive]);
+  }, [state.key, state.semanticRestorePending, state.row, state.recordRevision, key, reportId, owner, planLoading,
+    focused, appActive, snapshot, recordRevision]);
 
   const coverage = (value, isSemantic = false) => value ? <View style={styles.notice}>
     <Text style={[styles.bodyText, { color: ink }]}>{isSemantic
@@ -296,7 +361,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     {coverage(row.content_json?.map_context, row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3')}
   </View>;
 
-  const visible = state.key === key && !planLoading;
+  const savedCurrent = !reportId && snapshot.current;
+  const superseded = savedCurrent && savedCurrent.state === state &&
+    !canReuseCurrentMap(savedCurrent, key, recordRevision, currentMapStatus);
+  const visible = state.key === key && !planLoading && appActive && !superseded &&
+    (Boolean(reportId) || !state.row || state.recordRevision === recordRevision);
   const showCurrentStatus = !reportId || compare;
   const displayedCurrent = reportId ? state.now : state.row;
   const refreshing = showCurrentStatus && pendingRefresh(state.refreshStatus);

@@ -9,6 +9,7 @@ import {
   buildFollowStatsPath,
 } from "../../lib/compat/legacyWireContracts";
 import { readAccountStatusValue } from "./accountModel";
+import { publishFollowChange, subscribeToFollowChanges } from "./followChanges";
 
 export function useAccountFollowState({
   navigation,
@@ -18,6 +19,9 @@ export function useAccountFollowState({
 }) {
   const { authOwnerGeneration } = useAuth();
   const ownerRequestRef = useRef(null);
+  const followReadSequence = useRef(0);
+  const statusReadSequence = useRef(0);
+  const followChangeSource = useRef(null);
   const [followingCount, setFollowingCount] = useState(0);
   const [followerCount, setFollowerCount] = useState(0);
   const [followCountLoading, setFollowCountLoading] = useState(false);
@@ -25,7 +29,10 @@ export function useAccountFollowState({
   const [isFollowRequested, setIsFollowRequested] = useState(false);
   const [followActionLoading, setFollowActionLoading] = useState(false);
 
-  const [accountStatus, setAccountStatus] = useState(null);
+  const [statusSnapshot, setStatusSnapshot] = useState(null);
+  const accountStatus = statusSnapshot?.owner === user?.id &&
+    statusSnapshot?.generation === authOwnerGeneration && statusSnapshot?.target === targetUserId
+    ? statusSnapshot.value : null;
   const [statusLoading, setStatusLoading] = useState(false);
   const [statusError, setStatusError] = useState("");
 
@@ -38,18 +45,20 @@ export function useAccountFollowState({
     setIsFollowing(false);
     setIsFollowRequested(false);
     setFollowActionLoading(false);
-    setAccountStatus(null);
+    setStatusSnapshot(null);
     setStatusLoading(false);
     setStatusError("");
     return () => controller.abort();
   }, [user?.id, targetUserId, authOwnerGeneration]);
 
-  const refreshFollowState = async () => {
+  const refreshFollowState = async ({ quiet = false } = {}) => {
     if (!user?.id || !targetUserId) return;
     const request = ownerRequestRef.current;
     if (request?.expectedUserId !== user.id || request.signal.aborted) return;
 
-    setFollowCountLoading(true);
+    const sequence = ++followReadSequence.current;
+    const isCurrent = () => !request.signal.aborted && sequence === followReadSequence.current;
+    if (!quiet) setFollowCountLoading(true);
     try {
       const res = await apiFetch(buildFollowStatsPath(targetUserId), {
         ...request,
@@ -66,7 +75,7 @@ export function useAccountFollowState({
       }
 
       const json = await res.json().catch(() => ({}));
-      if (request.signal.aborted) return;
+      if (!isCurrent()) return;
 
       const followingCnt = Number(json?.following_count ?? 0) || 0;
       const followerCnt = Number(json?.follower_count ?? 0) || 0;
@@ -85,19 +94,23 @@ export function useAccountFollowState({
         setIsFollowRequested(false);
       }
     } catch (e) {
-      if (request.signal.aborted || e?.name === "AccountChangedError") return;
+      if (!isCurrent() || e?.name === "AccountChangedError") return;
       console.warn("refreshFollowState error:", e);
     } finally {
-      if (!request.signal.aborted) setFollowCountLoading(false);
+      if (isCurrent()) setFollowCountLoading(false);
     }
   };
 
-  const refreshAccountStatus = async () => {
+  const refreshAccountStatus = async ({ quiet = false } = {}) => {
     if (!user?.id || !targetUserId) return;
     const request = ownerRequestRef.current;
     if (request?.expectedUserId !== user.id || request.signal.aborted) return;
 
-    setStatusLoading(true);
+    const sequence = ++statusReadSequence.current;
+    const isCurrent = () => !request.signal.aborted && sequence === statusReadSequence.current;
+    if (!quiet) setStatusLoading(true);
+    // A changed relation can remove access to the other account's public share code.
+    if (targetUserId !== user.id) setStatusSnapshot(null);
     setStatusError("");
     try {
       const qs = `target_user_id=${encodeURIComponent(String(targetUserId))}`;
@@ -116,15 +129,16 @@ export function useAccountFollowState({
       }
 
       const json = await res.json().catch(() => ({}));
-      if (request.signal.aborted) return;
-      setAccountStatus(json && typeof json === "object" ? json : {});
+      if (!isCurrent()) return;
+      setStatusSnapshot({ owner: user.id, generation: authOwnerGeneration, target: targetUserId,
+        value: json && typeof json === "object" ? json : {} });
     } catch (e) {
-      if (request.signal.aborted || e?.name === "AccountChangedError") return;
+      if (!isCurrent() || e?.name === "AccountChangedError") return;
       console.warn("refreshAccountStatus error:", e);
-      setAccountStatus(null);
+      setStatusSnapshot(null);
       setStatusError(String(e?.message || e));
     } finally {
-      if (!request.signal.aborted) setStatusLoading(false);
+      if (isCurrent()) setStatusLoading(false);
     }
   };
 
@@ -132,19 +146,16 @@ export function useAccountFollowState({
     refreshFollowState();
     refreshAccountStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, targetUserId, authOwnerGeneration]);
+  }, [user?.id, targetUserId, authOwnerGeneration]);
 
   useEffect(() => {
-    if (!navigation?.addListener) return undefined;
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      refreshFollowState();
-      refreshAccountStatus();
+    if (!user?.id || !targetUserId) return undefined;
+    return subscribeToFollowChanges(user.id, authOwnerGeneration, targetUserId, followChangeSource, () => {
+      void refreshFollowState({ quiet: true });
+      void refreshAccountStatus({ quiet: true });
     });
-
-    return unsubscribe;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigation, user, targetUserId]);
+  }, [user?.id, targetUserId, authOwnerGeneration]);
 
   const onToggleFollow = async () => {
     if (followActionLoading) return;
@@ -179,7 +190,9 @@ export function useAccountFollowState({
       setIsFollowing(nextFollowing);
       setIsFollowRequested(nextRequested);
 
-      await refreshFollowState();
+      publishFollowChange({ owner: user.id, generation: authOwnerGeneration, target: targetUserId,
+        source: followChangeSource });
+      await Promise.all([refreshFollowState({ quiet: true }), refreshAccountStatus({ quiet: true })]);
     } catch (e) {
       if (request.signal.aborted || e?.name === "AccountChangedError") return;
       console.warn("toggle follow error:", e);

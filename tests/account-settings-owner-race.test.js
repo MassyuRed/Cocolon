@@ -10,6 +10,11 @@ const strip = source => source.replace(/^import\s[\s\S]*?;\r?\n/gm, '').replace(
 function harness(file, exportName, args = {}) {
   let owner = 'A', generation = 0, cursor = 0, dirty = false, value, sessionWait = null, writeWait = null;
   const slots = [], effects = [], gets = [], writes = [], alerts = [], signouts = [], users = new Map();
+  const navigationListeners = new Map();
+  const navigation = { addListener(name, listener) {
+    navigationListeners.set(name, listener);
+    return () => { navigationListeners.delete(name); };
+  } };
   const currentUser = () => { if (!owner) return null; if (!users.has(owner)) users.set(owner, {id:owner}); return users.get(owner); };
   const slot = fn => { const i = cursor++; if (!(i in slots)) slots[i] = fn(); return i; };
   const response = body => ({ ok: true, status: 200, text: async () => JSON.stringify(body), json: async () => body });
@@ -32,7 +37,8 @@ function harness(file, exportName, args = {}) {
     fetch, AbortController, setTimeout: (fn, ms) => { const t = setTimeout(fn, ms); t.unref(); return t; }, clearTimeout, process: { env: {} } };
   const client = Function(...Object.keys(cb), strip(read('lib/apiClient.js')) + '\nreturn {apiGet,apiPatch,apiPost,apiFetch};')(...Object.values(cb));
   const model = Function(strip(read('screens/account/accountModel.js')) + '\nreturn {normalizeDisplayName,DISPLAY_NAME_MAX_LENGTH,DISPLAY_NAME_TAKEN_MESSAGE,mapDisplayNameConflictMessage,readAccountStatusValue};')();
-  const bindings = { ...client, ...model, AbortController,
+  const followChanges = Function(strip(read('screens/account/followChanges.js')) + '\nreturn {subscribeToFollowChanges,publishFollowChange};')();
+  const bindings = { ...client, ...model, ...followChanges, AbortController,
     useAuth: () => ({ user: currentUser(), authOwnerGeneration: generation, authLoading: false, signOut: async opts => signouts.push(opts) }),
     useTheme: () => ({ colors: {}, themeName: 'default' }), useAnalysisMenuStyles: () => ({ ui: {} }),
     createLocalStyles: () => ({}), THEME_VARIANTS: {},
@@ -60,9 +66,11 @@ function harness(file, exportName, args = {}) {
       (exportName === 'SettingsAppSettingsScreen' ? 'return {updatePushEnabled,updateEmotionNotificationEnabled};\n}' : 'return {handleDeleteAccount,executeDeleteAccount};\n}');
   }
   const Component = Function(...Object.keys(bindings), strip(source) + '\nreturn ' + exportName + ';')(...Object.values(bindings));
-  const render = () => { cursor = 0; dirty = false; value = Component({ user: currentUser(), targetUserId: owner, isSelf: true, navigation: {}, ...args }); while (effects.length) effects.shift()(); return value; };
+  const render = () => { cursor = 0; dirty = false; value = Component({ user: currentUser(), targetUserId: owner, isSelf: true, navigation, ...args }); while (effects.length) effects.shift()(); return value; };
   render();
   return { gets, writes, alerts, signouts, render, get value() { return value; },
+    emitNavigation(name) { navigationListeners.get(name)?.(); },
+    publishFollowChange: followChanges.publishFollowChange,
     holdSession() { sessionWait = deferred(); return sessionWait; },
     holdWrite() { writeWait = deferred(); return writeWait; },
     switchTo(id) { if (owner !== id) generation++; owner = id; render(); },
@@ -134,9 +142,32 @@ test('normal follow state keeps both counts and sends the selected connect code'
   await p.resolveAllGets({following_count:2,follower_count:4,is_following:false});
   assert.equal(p.value.followingCount,2); assert.equal(p.value.followerCount,4);
   const work=p.value.onToggleFollow(); await p.settle();
-  p.gets.at(-1).resolve({following_count:3,follower_count:4,is_following:true}); await work; await p.settle();
+  await p.resolveAllGets({following_count:3,follower_count:4,is_following:true}); await work; await p.settle();
   assert.equal(p.value.isFollowing,true); assert.equal(p.value.followingCount,3);
   assert.equal(p.writes[0].owner,'A'); assert.deepEqual(p.writes[0].body,{connect_code:'C-code'});
+});
+
+test('account return preserves loaded status and counts until its session changes a follow relation', async () => {
+  const p = harness('screens/account/useAccountFollowState.js','useAccountFollowState',{targetUserId:'C'});
+  await p.settle();
+  await p.resolveAllGets({following_count:2,follower_count:4});
+  const initialReads = p.gets.length;
+  assert.equal(initialReads, 2);
+  p.emitNavigation('blur');
+  p.emitNavigation('focus');
+  p.publishFollowChange({ owner: 'A', generation: -1, target: 'C' });
+  p.publishFollowChange({ owner: 'A', generation: 0, target: 'D' });
+  p.publishFollowChange({ owner: 'B', generation: 0, target: 'C' });
+  await p.settle();
+  assert.equal(p.gets.length, initialReads);
+  assert.equal(p.value.followingCount, 2);
+  p.publishFollowChange({ owner: 'A', generation: 0, target: 'C' });
+  await p.settle();
+  assert.equal(p.gets.length, initialReads + 2);
+  assert.equal(p.value.followCountLoading, false);
+  assert.equal(p.value.statusLoading, false);
+  await p.resolveAllGets({following_count:3, follower_count:4});
+  assert.equal(p.value.followingCount, 3);
 });
 
 test('account deletion binds its API mutation and later signout to the confirmed owner', async () => {

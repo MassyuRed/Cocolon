@@ -321,6 +321,7 @@ function load(relative, mocks = {}, dev = true) {
   Function('require', 'module', 'exports', '__DEV__', transformed)(name => {
     if (Object.hasOwn(mocks, name)) return mocks[name];
     if (name === '../../ui/uiTokens') return load('ui/uiTokens.js');
+    if (name === '../hooks/useOwnerRequestScope') return load('hooks/useOwnerRequestScope.js', { 'react-native': mocks['react-native'] });
     if (name === '../../runtime/interpretationCorrectionUi') return require('../runtime/interpretationCorrectionUi');
     if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
     return require(name);
@@ -933,6 +934,152 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     assert.deepEqual(JSON.parse(calls[6].options.body), { emotion_id: row.id, is_secret: true, created_at: row.created_at });
   });
 }
+
+test('Home emotion history reuses only its still-authorized initial page across navigation', async t => {
+  let now = new Date('2026-11-26T02:00:00Z').getTime();
+  t.mock.method(Date, 'now', () => now);
+  let owner = 'sample-owner';
+  let generation = 1;
+  let tier = 'premium';
+  let currentState = 'active';
+  let serverValidOwner = null;
+  let firstCreatedAt = new Date(now - 1000).toISOString();
+  let freeBoundary = now + 50_000;
+  let snapshot = { current: null };
+  const calls = [];
+  let releaseResponse;
+  let holdNextResponse = false;
+  const listeners = new Set();
+  const AppState = {
+    get currentState() { return currentState; },
+    addEventListener(_event, fn) {
+      listeners.add(fn);
+      return { remove: () => listeners.delete(fn) };
+    },
+  };
+  const changeAppState = state => {
+    currentState = state;
+    for (const fn of [...listeners]) fn(state);
+  };
+  const changes = load('lib/emotionRecordChanges.js');
+  const native = Object.fromEntries(['ActivityIndicator', 'FlatList', 'Modal', 'RefreshControl',
+    'Text', 'TextInput', 'TouchableOpacity', 'View'].map(name => [name, name]));
+  Object.assign(native, { AppState, StyleSheet: { create: styles => styles },
+    FlatList: props => React.createElement('List', props, props.ListHeaderComponent),
+  });
+  const row = (id, created_at = firstCreatedAt) => ({ id, created_at, memo: id });
+  const apiFetch = async (route, options) => {
+    assert.equal(route, '/emotion/history/search');
+    assert.equal(options.expectedUserId, owner);
+    assert.equal(options.signal.aborted, false);
+    const payload = JSON.parse(options.body);
+    calls.push(payload);
+    const held = holdNextResponse;
+    if (held) {
+      holdNextResponse = false;
+      await new Promise(resolve => { releaseResponse = resolve; });
+    }
+    const mode = { free: 'current_and_previous_month_jst', plus: 'rolling_365d', premium: 'unlimited' }[tier];
+    return { ok: true, json: async () => ({
+      user_id: serverValidOwner ?? owner,
+      items: [row(payload.query || (payload.offset ? 'next-page' : held ? 'stale-page' : 'initial-page'))],
+      meta: { has_more: !payload.offset, next_offset: 50,
+        applied: { subscription_tier: tier, retention: { tier, mode, lt_iso: new Date(freeBoundary).toISOString() } } },
+    }) };
+  };
+  const Screen = load('screens/AnalysisHistoryScreen.js', {
+    'react-native': native, 'react-native-vector-icons/Ionicons': 'Icon',
+    '../components/CocolonBackButton': () => null,
+    '../theme/ThemeContext': { useTheme: () => ({ themeName: 'light', colors: {} }) },
+    '../ui/uiTokens': load('ui/uiTokens.js'), '../ui/applyTypographyTokens': { applyTypographyTokens: styles => styles },
+    '../SubscriptionContext': { useSubscription: () => ({ tier, loading: false }) },
+    '../lib/apiClient': { apiFetch }, '../lib/historyRetentionLabel': { getHistoryRetentionLabel: () => '' },
+    '../lib/emotionRecordChanges': changes,
+    '../AuthContext': { useAuth: () => ({ session: { user: { id: owner } }, authOwnerGeneration: generation }) },
+    './input/useEmlisThread': { useEmlisThread: () => ({ enabled: false }) }, './input/EmlisThreadModal': () => null,
+    '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => false }) },
+    '../features/piece/pieceRenderer': pieceRendererFor('android', {}),
+  }).default;
+  let root;
+  const close = async () => {
+    if (root) await act(async () => root.unmount());
+    root = undefined;
+  };
+  t.after(close);
+  const reopen = async () => {
+    await close();
+    await act(async () => { root = Renderer.create(React.createElement(Screen, { historyReadSnapshot: snapshot })); });
+  };
+  const list = () => root.root.findByType('List');
+  const ids = () => list().props.data.map(item => item.id);
+  const search = () => root.root.findByType('TextInput');
+  await reopen();
+  assert.deepEqual(ids(), ['initial-page']);
+  assert.equal(calls.length, 1);
+  await reopen();
+  assert.deepEqual(ids(), ['initial-page']);
+  assert.equal(calls.length, 1);
+  await act(async () => list().props.onEndReached());
+  assert.deepEqual(ids(), ['initial-page', 'next-page']);
+  assert.equal(calls.at(-1).offset, 50);
+  await act(async () => search().props.onChangeText('検索語'));
+  await act(async () => search().props.onSubmitEditing());
+  assert.deepEqual(ids(), ['検索語']);
+  await act(async () => list().props.refreshControl.props.onRefresh());
+  assert.deepEqual(calls.slice(-2).map(request => request.query), ['検索語', '検索語']);
+  await reopen();
+  assert.deepEqual(ids(), ['initial-page']);
+  assert.equal(calls.length, 5, 'explicit filtered refresh drops the separately retained default');
+  changes.notifyEmotionRecordsChanged(owner);
+  await reopen();
+  assert.equal(calls.length, 6);
+  tier = 'free';
+  await reopen();
+  assert.equal(calls.length, 7);
+  now = freeBoundary;
+  freeBoundary += 60_000;
+  await reopen();
+  assert.equal(calls.length, 8, 'Free calendar boundary takes precedence over the snapshot lifetime');
+  tier = 'plus';
+  firstCreatedAt = new Date(now - 365 * 24 * 60 * 60 * 1000 + 10).toISOString();
+  await reopen();
+  assert.equal(calls.length, 9);
+  now += 10;
+  await reopen();
+  assert.equal(calls.length, 10, 'a Plus row expiry cannot be postponed until the snapshot TTL');
+  tier = 'premium';
+  firstCreatedAt = new Date(now).toISOString();
+  await reopen();
+  assert.equal(calls.length, 11);
+  await act(async () => changeAppState('background'));
+  assert.deepEqual(ids(), []);
+  await act(async () => changeAppState('active'));
+  assert.equal(calls.length, 12, 'foreground restoration reauthorizes');
+  owner = 'new-owner';
+  generation += 1;
+  serverValidOwner = 'sample-owner';
+  await reopen();
+  assert.equal(calls.length, 13);
+  assert.deepEqual(ids(), []);
+  assert.equal(snapshot.current, null);
+  serverValidOwner = null;
+  await reopen();
+  assert.equal(calls.length, 14);
+  assert.deepEqual(ids(), ['initial-page']);
+  snapshot = { current: null };
+  await reopen();
+  assert.equal(calls.length, 15);
+  now += 60_000;
+  holdNextResponse = true;
+  await reopen();
+  assert.equal(calls.length, 16);
+  await act(async () => {
+    changes.notifyEmotionRecordsChanged(owner);
+    releaseResponse();
+  });
+  assert.equal(calls.length, 17, 'a write racing the first page causes a fresh read of the same conditions');
+  assert.deepEqual(ids(), ['initial-page']);
+});
 
 // This build regression also uses the app's existing RN / Metro dependencies.
 test('RN bundle embeds only public API URLs and invalidates cached transforms on rebuild', t => {

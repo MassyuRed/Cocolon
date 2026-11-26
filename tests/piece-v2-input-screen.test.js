@@ -122,6 +122,7 @@ function harness(options = {}) {
       submits.push({ payload: clone(payload), options: clone(opts) });
       return control.submit ? control.submit(submits.length) : clone(control.result);
     } };
+    if (name === '../lib/emotionRecordChanges') return { notifyEmotionRecordsChanged: noop };
     if (name === '../lib/api/home/emotionPieceApi') return Object.fromEntries(
       ['previewEmotionPiece','publishEmotionPiece','cancelEmotionPiece'].map(name => [name, async (...args) => {
         legacyCalls.push({ name, args }); return { preview_id: 'old-preview' };

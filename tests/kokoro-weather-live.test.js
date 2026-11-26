@@ -15,7 +15,7 @@ const colors = { TEXT_ON_LIGHT: '#111827', TEXT_SUBTLE: '#6B625C', TITLE_GOLD: '
   CARD_BORDER: '#DAD4CB', FIELD_BG: '#FFFFFF', SURFACE_TONAL: '#EFE1DD', GOLD_BUTTON: '#5A1020', ACCENT_TEXT: '#FFFFFF' };
 
 async function mount(t, { hold = false, hookOnly = false, parent = false } = {}) {
-  const control = { owner: 'A', generation: 0, focused: true, period: 'today', anchor: null, revision: 0, hold };
+  const control = { owner: 'A', generation: 0, tier: 'free', focused: true, period: 'today', anchor: null, revision: 0, hold };
   const calls = [], listeners = new Set(), modules = new Map(), events = [];
   const native = Object.fromEntries(['View', 'Text', 'ActivityIndicator', 'Pressable'].map(name => [name, name]));
   const flatten = value => Array.isArray(value) ? Object.assign({}, ...value.map(flatten)) : value || {};
@@ -40,6 +40,7 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
       if (name === '@react-navigation/native') return { useIsFocused: () => control.focused };
       const target = path.relative(ROOT, path.resolve(path.dirname(filename), name)) + '.js';
       if (target === 'AuthContext.js') return { useAuth: () => ({ user: control.owner ? { id: control.owner } : null, authOwnerGeneration: control.generation }) };
+      if (target === 'SubscriptionContext.js') return { useSubscription: () => ({ tier: control.tier }) };
       if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors, themeName: 'light' }) };
       if (target === 'ui/uiTokens.js') return { makeUiTokens: () => ({ motion: {} }) };
       if (target === 'components/UnreadBadge.js') return { ScreenUnreadBadge: 'Badge' };
@@ -84,6 +85,7 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
     async fail(index) { await Renderer.act(async () => { calls[index].reject(new Error('synthetic failure')); await tick(); }); },
     async press(label) { await Renderer.act(async () => { root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === label).props.onPress(); await tick(); }); },
     async background(state) { native.AppState.currentState = state; await Renderer.act(async () => { for (const listener of [...listeners]) listener(state); await tick(); }); },
+    async recordsChanged(owner) { await Renderer.act(async () => { load('lib/emotionRecordChanges.js').notifyEmotionRecordsChanged(owner); await tick(); }); },
     text() { return root.root.findAllByType('Text').map(node => node.props.children).flat(Infinity).filter(value => value != null).join(''); },
   };
   return h;
@@ -148,10 +150,18 @@ test('account change and same-account auth generation hide old data and suppress
   assert.equal(h.output.data, null);
 });
 
-test('saving input then refocusing rereads live rows; failed or invalid refresh never reuses old weather', async t => {
+test('unchanged focus reuses the chart, and a saved input or failed refresh invalidates it', async t => {
   const h = await mount(t, { hold: true, hookOnly: true });
   await h.answer(0, fixtures.today);
   await h.update({ focused: false });
+  await h.update({ focused: true });
+  assert.equal(h.calls.length, 1);
+  assert.equal(h.output.data.summary.input_count, 6);
+  await h.recordsChanged('B');
+  assert.equal(h.calls.length, 1);
+  await h.update({ focused: false });
+  await h.recordsChanged('A');
+  assert.equal(h.calls.length, 1);
   await h.update({ focused: true });
   assert.equal(h.calls.length, 2);
   assert.equal(h.output.data, null);
@@ -165,6 +175,18 @@ test('saving input then refocusing rereads live rows; failed or invalid refresh 
   await Renderer.act(async () => { h.output.retry(); await tick(); });
   await h.answer(3, { ...fixtures.today, version: 'old' });
   assert.equal(h.output.error, true);
+});
+
+test('subscription downgrade clears the validated chart across a hidden return', async t => {
+  const h = await mount(t, { hold: true, hookOnly: true });
+  await h.update({ tier: 'premium' });
+  await h.answer(1, fixtures.today);
+  await h.update({ focused: false, tier: 'free' });
+  await h.update({ focused: true });
+  assert.equal(h.output.data, null);
+  assert.equal(h.calls.length, 3);
+  await h.answer(2, fixtures.today);
+  assert.equal(h.output.data.summary.input_count, 6);
 });
 
 test('backgrounding fences old response and foregrounding requests current data', async t => {
@@ -187,9 +209,14 @@ test('month remains selected after the map tab and the chart exposes no legacy r
   ]);
   assert.equal(intro[1].props.accessibilityRole, 'header');
   await h.press('月');
+  await h.press('前の期間');
+  const callCount = h.calls.length;
   await h.press('わたしマップ');
+  assert.doesNotMatch(h.text(), /この月のこころグラフ/);
   await h.press('こころグラフ');
   assert.match(h.calls.at(-1).url, /period=month/);
+  assert.equal(h.calls.length, callCount);
+  assert.match(h.text(), /2026年10月/);
   assert.match(h.text(), /この月のこころグラフ/);
   assert.doesNotMatch(h.text(), /の履歴を見る|観測理由/);
   assert.ok(h.calls.every(({ url }) => url.startsWith('/analysis/kokoro-weather?')));

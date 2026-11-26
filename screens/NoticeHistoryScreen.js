@@ -78,18 +78,22 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadError, setLoadError] = useState(null);
-  const [items, setItems] = useState([]);
+  const [fetchedItems, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   const [nextOffset, setNextOffset] = useState(null);
   const [expandedId, setExpandedId] = useState(null);
   const [unreadCount, setUnreadCount] = useState(0);
   const handledOpenKeyRef = useRef("");
+  const historyRequestRef = useRef(null);
+  const loadedHistoryOwnerRef = useRef(null);
   const loadSequenceRef = useRef(0);
-  useEffect(() => { setLoadingMore(false); }, [ownerRequest]);
+  const hasCurrentHistory = loadedHistoryOwnerRef.current?.owner === ownerRequest.owner &&
+    loadedHistoryOwnerRef.current?.generation === ownerRequest.generation;
+  const items = hasCurrentHistory ? fetchedItems : [];
 
   const requestedOpenId = String(route?.params?.open_notice_id || "").trim();
   const requestedOpenAt = String(route?.params?.open_notice_at || "").trim();
-  const requestedOpenKey = `${requestedOpenId}:${requestedOpenAt}`;
+  const requestedOpenKey = requestedOpenId ? `${requestedOpenId}:${requestedOpenAt}` : "";
 
   const mergeRows = useCallback((prevRows, nextRows, append) => {
     if (!append) return nextRows;
@@ -110,7 +114,10 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
     const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === loadSequenceRef.current;
     setLoadError(null);
     if (append) setLoadingMore(true);
-    else setLoading(true);
+    else {
+      setLoadingMore(false);
+      setLoading(true);
+    }
     try {
       const json = await getNoticesHistory({
         limit: HISTORY_PAGE_LIMIT,
@@ -118,6 +125,7 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
       }, ownerRequest.options);
       if (!isFresh()) return;
       const rows = Array.isArray(json?.items) ? json.items : [];
+      loadedHistoryOwnerRef.current = ownerRequest;
       setItems((prev) => mergeRows(prev, rows, append));
       setHasMore(Boolean(json?.has_more));
       setNextOffset(
@@ -140,25 +148,22 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
   }, [mergeRows, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
-    load({ append: false, offset: 0 });
-
-    let unsubscribe = null;
-    try {
-      unsubscribe = navigation?.addListener?.("focus", () => {
-        load({ append: false, offset: 0 });
-      });
-    } catch {
-      // noop
+    const previous = historyRequestRef.current;
+    const newScope = previous?.scope !== ownerRequest;
+    historyRequestRef.current = { scope: ownerRequest, openKey: requestedOpenKey };
+    if (newScope && (previous?.scope.owner !== ownerRequest.owner ||
+        previous?.scope.generation !== ownerRequest.generation)) {
+      setItems([]);
+      setHasMore(false);
+      setNextOffset(null);
+      setExpandedId(null);
+      setUnreadCount(0);
+      handledOpenKeyRef.current = "";
     }
-
-    return () => {
-      try {
-        if (typeof unsubscribe === "function") unsubscribe();
-      } catch {
-        // noop
-      }
-    };
-  }, [load, navigation]);
+    const missingRequestedNotice = requestedOpenKey && previous?.openKey !== requestedOpenKey &&
+      !items.some(item => String(item?.notice_id || "") === requestedOpenId);
+    if (newScope || missingRequestedNotice) void load();
+  }, [items, load, ownerRequest, requestedOpenId, requestedOpenKey]);
 
   const markReadLocally = useCallback((noticeIds, readAt) => {
     const ids = new Set((noticeIds || []).map((value) => String(value || "")).filter(Boolean));
@@ -372,14 +377,14 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
       <Text style={styles.helpText}>
         タイトルをタップすると本文を開けます。最新のお知らせから順に確認できます。
       </Text>
-      {unreadCount > 0 ? (
+      {hasCurrentHistory && unreadCount > 0 ? (
         <View style={styles.unreadSummaryRow}>
           <UnreadBadge variant="new" label="NEW" />
           <Text style={styles.unreadSummaryText}>未読 {unreadCount} 件</Text>
         </View>
       ) : null}
     </View>
-  ), [fromSettings, navigation, styles, unreadCount]);
+  ), [fromSettings, hasCurrentHistory, navigation, styles, unreadCount]);
 
   const empty = useMemo(() => {
     if (loading) {
@@ -448,6 +453,8 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
       <View style={styles.container}>
         <FlatList
           data={items}
+          refreshing={loading && items.length > 0}
+          onRefresh={() => void load()}
           keyExtractor={(item, index) => String(item?.notice_id || index)}
           renderItem={renderItem}
           contentContainerStyle={styles.listContent}

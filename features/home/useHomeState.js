@@ -2,6 +2,7 @@ import { AppState } from "react-native";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getHomeState } from "../../lib/api/home/homeStateApi";
+import { getEmotionRecordRevision } from "../../lib/emotionRecordChanges";
 import { PIECE_WIRE, readWireSectionObject } from "../../lib/compat/legacyWireContracts";
 
 export const STARTUP_POPUP_KIND = Object.freeze({
@@ -61,14 +62,18 @@ function toStartupPopupKind(rawKind) {
 
 export function useHomeState({
   currentUserId,
+  authOwnerGeneration,
+  subscriptionTier,
   isTutorialMode,
   tutorialFlagsLoaded,
   navigation,
   buildTutorialStartupCandidate,
 }) {
   const [initialHomeRead, setInitialHomeRead] = useState({ owner: null, settled: false, error: false });
-  const currentOwnerRef = useRef(currentUserId);
-  currentOwnerRef.current = currentUserId;
+  const accessKey = JSON.stringify([currentUserId, authOwnerGeneration, subscriptionTier, isTutorialMode]);
+  const currentAccessRef = useRef(accessKey);
+  currentAccessRef.current = accessKey;
+  const lastHomeRead = useRef(null);
   const [homeTodayCount, setHomeTodayCount] = useState(null);
   const [homeMonthCount, setHomeMonthCount] = useState(null);
   const [homeWeekCount, setHomeWeekCount] = useState(null);
@@ -146,26 +151,33 @@ export function useHomeState({
 
   const loadHomeState = useCallback(
     async ({ force = false, includeStartupCandidate = true } = {}) => {
-      const requestId = homeStateRequestIdRef.current + 1;
-      homeStateRequestIdRef.current = requestId;
-
       if (!currentUserId) {
+        lastHomeRead.current = null;
         clearNoticeUi();
         setPieceQuota(null);
         return { noticeCandidate: null, aborted: false };
       }
 
       const requestOwner = currentUserId;
-      const isCurrentRequest = () => homeStateRequestIdRef.current === requestId && currentOwnerRef.current === requestOwner;
-      setNoticeLoading(true);
+      const day = new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10);
+      const recordRevision = getEmotionRecordRevision(requestOwner);
+      const saved = lastHomeRead.current;
+      const reuse = !force && includeStartupCandidate && saved?.accessKey === accessKey &&
+        saved.day === day && saved.recordRevision === recordRevision;
+      const requestId = reuse ? homeStateRequestIdRef.current : ++homeStateRequestIdRef.current;
+      const isCurrentRequest = () => homeStateRequestIdRef.current === requestId && currentAccessRef.current === accessKey;
+      if (!reuse) setNoticeLoading(true);
       try {
-        const json = await getHomeState({ forceRefresh: force });
+        const json = reuse ? saved.payload : await getHomeState({ forceRefresh: force, expectedUserId: requestOwner });
         if (!isCurrentRequest()) {
           return { noticeCandidate: null, aborted: true };
         }
 
-        setInitialHomeRead({ owner: requestOwner, settled: true, error: false });
-        const normalized = applyHomeStatePayload(json);
+        if (!reuse) {
+          lastHomeRead.current = { accessKey, day, recordRevision, payload: json };
+          setInitialHomeRead({ owner: requestOwner, settled: true, error: false });
+        }
+        const normalized = reuse ? normalizeHomeSections(json) : applyHomeStatePayload(json);
         const noticesCurrent = normalized?.noticesCurrent || null;
         if (isTutorialMode) {
           return {
@@ -214,12 +226,13 @@ export function useHomeState({
         console.warn("InputScreen: loadHomeState failed", e);
         return { noticeCandidate: null, aborted: false };
       } finally {
-        if (isCurrentRequest()) {
+        if (!reuse && isCurrentRequest()) {
           setNoticeLoading(false);
         }
       }
     },
     [
+      accessKey,
       applyHomeStatePayload,
       clearNoticeUi,
       currentUserId,
@@ -316,6 +329,10 @@ export function useHomeState({
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (nextAppState !== "active") {
+        lastHomeRead.current = null;
+        homeStateRequestIdRef.current += 1;
+      }
       if (/inactive|background/.test(appStateRef.current) && nextAppState === "active") {
         void loadHomeState({ includeStartupCandidate: false });
       }

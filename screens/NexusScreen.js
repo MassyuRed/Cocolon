@@ -80,6 +80,9 @@ import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 const EMPTY_EMOTION_LOG = { loading: false, loaded: false, items: [], error: "" };
 const LOADING_EMOTION_LOG = { ...EMPTY_EMOTION_LOG, loading: true };
 const LOADING_HISTORY = { loading: true, loadedModes: {}, order: null, resonances: [], error: "" };
+const LOADING_RANKING = { loading: true, items: [], error: "" };
+const RANKING_MIN_REFRESH_MS = 30_000;
+const rankingDay = new Intl.DateTimeFormat("en", { timeZone: "Asia/Tokyo", year: "numeric", month: "numeric", day: "numeric" });
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -168,7 +171,9 @@ export default function NexusScreen({ navigation }) {
   const historyReadScope = historyReadScopeRef.current;
   const emotionLogReadScope = useMemo(() => ({ ownerRequest, activeTab, isTutorialMode }),
     [ownerRequest, activeTab, isTutorialMode]);
-  const readSequences = useRef({ pieces: 0, history: 0, ranking: 0, owners: 0, emotions: 0 });
+  const readSequences = useRef({ pieces: 0, history: 0, owners: 0, emotions: 0 });
+  const rankingRead = useRef(null);
+  const unreadRead = useRef(null);
 
   const tutorialPieceItems = useMemo(
     () => normalizeTutorialPieceItems(tutorialPieces),
@@ -179,7 +184,9 @@ export default function NexusScreen({ navigation }) {
     tutorialStep >= PIECE_TUTORIAL_STEP_START &&
     tutorialStep <= PIECE_TUTORIAL_STEP_END;
 
-  const [rankingState, setRankingState] = useState({ loading: true, items: [], error: "" });
+  const [rankingResult, setRankingState] = useState(null);
+  const rankingState = rankingResult?.scope === ownerRequest && rankingResult.day === rankingDay.format(Date.now())
+    ? rankingResult : LOADING_RANKING;
   const [pieceState, setPieceState] = useState({
     loading: true,
     items: [],
@@ -350,11 +357,16 @@ export default function NexusScreen({ navigation }) {
   }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
 
   const refreshNexusUnreadState = useCallback(async () => {
-    await Promise.all([
-      refreshPieceUnreadState(),
-      refreshEmotionLogUnreadState(),
-    ]);
-  }, [refreshEmotionLogUnreadState, refreshPieceUnreadState]);
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const current = unreadRead.current;
+    if (current?.scope === ownerRequest && current.isTutorialMode === isTutorialMode) return current.promise;
+    const request = { scope: ownerRequest, isTutorialMode, promise: Promise.all([
+      refreshPieceUnreadState(), refreshEmotionLogUnreadState(),
+    ]) };
+    unreadRead.current = request;
+    try { await request.promise; }
+    finally { if (unreadRead.current === request) unreadRead.current = null; }
+  }, [isOwnerCurrent, ownerRequest, isTutorialMode, refreshEmotionLogUnreadState, refreshPieceUnreadState]);
 
   const loadOwnerOptions = useCallback(async () => {
     if (!isOwnerCurrent(ownerRequest)) return;
@@ -395,25 +407,45 @@ export default function NexusScreen({ navigation }) {
 
   const loadRanking = useCallback(async () => {
     if (!isOwnerCurrent(ownerRequest)) return;
-    const sequence = ++readSequences.current.ranking;
-    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.ranking;
     if (isTutorialMode) {
-      setRankingState({ loading: false, items: [] });
+      rankingRead.current = null;
+      setRankingState(null);
       return;
     }
 
+    const now = Date.now();
+    const day = rankingDay.format(now);
+    const current = rankingRead.current;
+    if (current?.scope === ownerRequest && current.day === day &&
+        (current.loading || (current.succeededAt !== null && now >= current.succeededAt &&
+          now - current.succeededAt < RANKING_MIN_REFRESH_MS))) return;
+    const request = { scope: ownerRequest, day, loading: true, succeededAt: null };
+    rankingRead.current = request;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && rankingRead.current === request;
     try {
       const json = await getNexusEmotionRanking(3, "day", ownerRequest.options);
       if (!isFresh()) return;
+      const items = normalizeEmotionRankingItems(json);
+      request.succeededAt = Date.now();
       setRankingState({
+        scope: ownerRequest,
+        day,
         loading: false,
-        items: normalizeEmotionRankingItems(json),
+        items,
         error: "",
       });
     } catch (e) {
       if (!isFresh()) return;
       console.warn("NexusScreen: loadRanking failed", e);
-      setRankingState({ loading: false, items: [], error: "全体感情を取得できませんでした。画面を開き直すと再試行できます。" });
+      setRankingState((previous) => {
+        const status = Number(e?.status);
+        if (status !== 401 && status !== 403 && previous?.scope === ownerRequest && previous.day === day && !previous.error) {
+          return previous;
+        }
+        return { scope: ownerRequest, day, loading: false, items: [], error: "全体感情を取得できませんでした。画面を開き直すと再試行できます。" };
+      });
+    } finally {
+      request.loading = false;
     }
   }, [isTutorialMode, ownerRequest, isOwnerCurrent]);
 

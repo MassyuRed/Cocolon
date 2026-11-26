@@ -23,6 +23,7 @@ import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useUnread } from "../UnreadContext";
 import { useAppRuntime } from "../AppRuntimeContext";
 import FollowerVisibilityMenu from "./follow/FollowerVisibilityMenu";
+import { publishFollowChange, subscribeToFollowChanges } from "./account/followChanges";
 import { apiFetch, apiPost } from "../lib/apiClient";
 import { CONNECT_WIRE, EMOTION_NOTIFICATION_WIRE, FOLLOW_WIRE, buildFollowListPath, buildFollowRequestsPath, buildFollowStatsPath, readEmotionNotificationOwnerId, readRelatedConnectCode } from "../lib/compat/legacyWireContracts";
 
@@ -171,7 +172,9 @@ export default function FollowListScreen({ navigation, route }) {
     selectionRef.current = { owner: ownerRequest, target: viewedUserId, tab };
   }
   const selection = selectionRef.current;
-  const followerRowsScope = useRef(null);
+  const shownRowsScope = useRef(null);
+  const shownRows = shownRowsScope.current === selection ? rows : [];
+  const followChangeSource = useRef(null);
   const canManageSharing = isSelfList && tab === TAB_FOLLOWERS &&
     isFeatureEnabled("follower_sharing_enabled", false) === true && ownerRequest.foreground;
   const activeSharingTarget = canManageSharing && sharingTarget?.selection === selection ? sharingTarget : null;
@@ -243,13 +246,13 @@ export default function FollowListScreen({ navigation, route }) {
     };
   }, [isSelfList, setUnread, tab, ownerRequest, isOwnerCurrent]);
 
-  const refreshCounts = useCallback(async () => {
+  const refreshCounts = useCallback(async ({ quiet = false } = {}) => {
     if (!viewedUserId || !isOwnerCurrent(ownerRequest)) return;
     const sequence = ++countRequestSeq.current;
     const isFresh = () => isOwnerCurrent(ownerRequest) && countScopeRef.current === countScope &&
       countRequestSeq.current === sequence;
 
-    setCountLoading(true);
+    if (!quiet) setCountLoading(true);
     try {
       // Supabase RLS の影響を避けるため、count は MashOS API 経由で取得する
       let accessToken = null;
@@ -424,6 +427,7 @@ export default function FollowListScreen({ navigation, route }) {
           })
           .filter(Boolean);
 
+        shownRowsScope.current = selection;
         setRows(list);
         return;
       }
@@ -475,10 +479,11 @@ export default function FollowListScreen({ navigation, route }) {
           })
           .filter(Boolean);
 
+        shownRowsScope.current = selection;
         setRows(list);
       } else {
         const list = Array.isArray(json?.rows) ? json.rows : [];
-        if (isSelfList && tab === TAB_FOLLOWERS) followerRowsScope.current = selection;
+        shownRowsScope.current = selection;
         setRows(list);
       }
     } catch (e) {
@@ -500,10 +505,15 @@ export default function FollowListScreen({ navigation, route }) {
     loadList();
   }, [loadList]);
 
-  useEffect(() => navigation?.addListener?.("focus", () => {
-    void refreshCounts();
-    void loadList();
-  }), [navigation, refreshCounts, loadList]);
+  useEffect(() => {
+    if (!ownerRequest.owner || !viewedUserId) return undefined;
+    return subscribeToFollowChanges(ownerRequest.owner, authOwnerGeneration, viewedUserId, followChangeSource, () => {
+      // A follow/unfollow can change eligibility to see another user's list.
+      if (!isSelfList) shownRowsScope.current = null;
+      void refreshCounts({ quiet: true });
+      void loadList();
+    });
+  }, [ownerRequest.owner, authOwnerGeneration, viewedUserId, isSelfList, refreshCounts, loadList]);
 
   const loadEmotionNotificationSettings = useCallback(async () => {
     if (!isOwnerCurrent(ownerRequest)) return;
@@ -571,6 +581,11 @@ export default function FollowListScreen({ navigation, route }) {
 
     const routeName = resolveAccountRouteName(navigation);
     navigation.navigate(routeName, { viewedUserId: targetId });
+  };
+
+  const notifyFollowChange = (targetUserId) => {
+    publishFollowChange({ owner: ownerRequest.owner, generation: authOwnerGeneration, target: String(targetUserId || ""),
+      source: selectionRef.current === selection ? followChangeSource : null });
   };
 
   const removeFollowLink = async (targetId) => {
@@ -655,7 +670,11 @@ export default function FollowListScreen({ navigation, route }) {
         }
       }
 
-      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
+      if (!isOwnerCurrent(ownerRequest)) return;
+      notifyFollowChange(targetId);
+      if (selectionRef.current !== selection) return;
+      ++listRequestSeq.current;
+      setLoading(false);
       setRows((prev) =>
         prev.filter((r) => String(r?.id || "") !== String(targetId))
       );
@@ -720,7 +739,11 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
 
-      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
+      if (!isOwnerCurrent(ownerRequest)) return;
+      notifyFollowChange(rows.find(row => row?._follow_request_id === reqId)?.id);
+      if (selectionRef.current !== selection) return;
+      ++listRequestSeq.current;
+      setLoading(false);
       // 一覧から除去
       setRows((prev) =>
         prev.filter((r) => String(r?._follow_request_id || "") !== String(reqId))
@@ -791,7 +814,11 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
 
-      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
+      if (!isOwnerCurrent(ownerRequest)) return;
+      notifyFollowChange(tgt);
+      if (selectionRef.current !== selection) return;
+      ++listRequestSeq.current;
+      setLoading(false);
       // 一覧から除去
       setRows((prev) => prev.filter((r) => String(r?.id || "") !== String(tgt)));
       setRequestedCount((prev) => {
@@ -1059,7 +1086,7 @@ export default function FollowListScreen({ navigation, route }) {
                   accessibilityRole="button"
                   accessibilityLabel={`${name}への公開範囲を設定`}
                   onPress={() => {
-                    if (followerRowsScope.current !== selection || selectionRef.current !== selection ||
+                    if (shownRowsScope.current !== selection || selectionRef.current !== selection ||
                         !isOwnerCurrent(ownerRequest)) return;
                     setSharingTarget({ id: String(item.id), name, selection });
                   }}
@@ -1173,7 +1200,9 @@ export default function FollowListScreen({ navigation, route }) {
       ) : null}
 
 </View>}
-          data={loading ? [] : rows}
+          data={shownRows}
+          refreshing={loading && shownRows.length > 0}
+          onRefresh={() => { void refreshCounts({ quiet: true }); void loadList(); }}
           keyExtractor={(item) => String(item?.id)}
           renderItem={renderItem}
           contentContainerStyle={[

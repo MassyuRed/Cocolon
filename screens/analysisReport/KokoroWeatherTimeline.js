@@ -53,14 +53,15 @@ function Legend({ item, styles }) {
   </View>;
 }
 
-export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0, period: controlledPeriod, onPeriodChange, sampleData }) {
+export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0, period: controlledPeriod, onPeriodChange, sampleData, active = true }) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const [localPeriod, setPeriod] = useState("today");
   const period = controlledPeriod || localPeriod;
   const [anchor, setAnchor] = useState(null);
   const [selection, setSelection] = useState(null);
   const isSample = sampleData !== undefined;
-  const live = useKokoroWeather(period, anchor, refreshRevision, !isSample);
+  const live = useKokoroWeather(period, anchor, refreshRevision, !isSample, active);
+  if (!active) return null;
   const { data, loading, error, retry } = isSample ? { data: sampleData } : live;
   const selectPeriod = next => { setPeriod(next); setAnchor(null); setSelection(null); onPeriodChange?.(next); };
   const move = next => { if (next) { setAnchor(next); setSelection(null); } };

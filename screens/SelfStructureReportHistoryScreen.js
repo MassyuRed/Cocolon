@@ -380,6 +380,11 @@ export default function SelfStructureReportHistoryScreen({
         if (typeof onOpenLatest === "function") onOpenLatest();
         return;
       }
+      if (item.source_profile === 'cumulative.v1' && item.snapshot_month) {
+        // The cumulative viewer performs the authorized month-specific detail read.
+        if (stillSelected()) onOpenReport?.({ id, source_profile: item.source_profile, snapshot_month: item.snapshot_month });
+        return;
+      }
       try {
         const json = await apiGet(buildSelfStructureReportDetailPath(id, item.snapshot_month),
           { expectedUserId: session?.user?.id, headers: { 'Cache-Control': 'no-store' } });
