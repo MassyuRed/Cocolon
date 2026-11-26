@@ -60,6 +60,17 @@ export function AuthProvider({ children }) {
   const authOwnerGenerationRef = useRef(0);
   const profileRequestAbortRef = useRef(null);
   const [authOwnerGeneration, setAuthOwnerGeneration] = useState(0);
+  const [ownDisplayName, setOwnDisplayName] = useState(null);
+  const rememberOwnDisplayName = useRef((userId, generation, value, initial = false) => {
+    if (!userId || authOwnerUserIdRef.current !== userId
+        || authOwnerGenerationRef.current !== generation || typeof value !== "string") return;
+    const name = value.trim();
+    setOwnDisplayName(current => {
+      if (current?.userId === userId && current.generation === generation
+          && (initial || current.name === name)) return current;
+      return { userId, generation, name };
+    });
+  }).current;
 
 
   const clearAuthError = () => setAuthError("");
@@ -97,6 +108,7 @@ export function AuthProvider({ children }) {
         ensuredProfileUserIdRef.current = null;
         authOwnerGenerationRef.current += 1;
         setAuthOwnerGeneration(authOwnerGenerationRef.current);
+        setOwnDisplayName(null);
       }
       setSession(newSession ?? null);
       setInitializing(false);
@@ -133,12 +145,15 @@ export function AuthProvider({ children }) {
 
     (async () => {
       try {
-        await ensureAccountProfile({
+        const profile = await ensureAccountProfile({
           displayName,
           pushPlatform: Platform?.OS || null,
           expectedUserId: userId,
           signal: controller.signal,
         });
+        if (!controller.signal.aborted && profile?.user_id === userId) {
+          rememberOwnDisplayName(userId, authOwnerGeneration, profile.display_name, true);
+        }
       } catch (e) {
         console.warn("profiles ensure exception:", e);
       }
@@ -149,7 +164,7 @@ export function AuthProvider({ children }) {
       if (profileRequestAbortRef.current === controller) profileRequestAbortRef.current = null;
       if (ensuredProfileUserIdRef.current === userId) ensuredProfileUserIdRef.current = null;
     };
-  }, [session?.user?.id, authOwnerGeneration]);
+  }, [session?.user?.id, authOwnerGeneration, rememberOwnDisplayName]);
 
 
   // Deep Link（Auth callback: signup / magiclink / recovery）を拾う
@@ -454,6 +469,9 @@ export function AuthProvider({ children }) {
       session,
       authOwnerGeneration,
       user: session?.user ?? null,
+      accountDisplayName: ownDisplayName?.userId === session?.user?.id
+        && ownDisplayName?.generation === authOwnerGeneration ? ownDisplayName.name : "",
+      rememberOwnDisplayName,
       initializing,
       authLoading,
       authError,
@@ -473,6 +491,8 @@ export function AuthProvider({ children }) {
     [
       session,
       authOwnerGeneration,
+      ownDisplayName,
+      rememberOwnDisplayName,
       initializing,
       authLoading,
       authError,

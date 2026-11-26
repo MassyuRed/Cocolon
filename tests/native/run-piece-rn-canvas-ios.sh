@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = "8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b"
+EXPECTED_SHA256 = "7705573fd24a4525bbc8922e269d4d9ccdded18cf92ae5256069c51a4cc9e2ee"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -265,7 +265,8 @@ export async function apiFetch(path, options = {}) {
   const selection = fixture.preview_b.visual_recipe;
   const expectedBody = post ? context.request : { expected_preview_revision: fixture.preview_a.preview_revision,
     visual_selection: { theme_id: selection.theme.theme_id, aspect_ratio: selection.aspect_ratio, branding_mode: selection.branding.branding_mode } };
-  const headers = { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', 'X-Piece-Palette': '3',
+  const headers = { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', 'X-Piece-Palette': '7',
+    'X-Piece-Decoration-Palette': '8',
     ...(post ? { 'Idempotency-Key': context.idempotencyKey } : { 'Cache-Control': 'no-store' }) };
   let body; try { body = JSON.parse(options.body); } catch { forbidden(); }
   const expectedKeys = ['method', 'auth', 'expectedUserId', 'headers', 'body', 'signal', ...(post ? ['timeoutMs'] : [])];

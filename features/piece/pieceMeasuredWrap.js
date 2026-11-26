@@ -54,9 +54,10 @@ const widthOverflow = row => row[3] === 'width_overflow';
 function blockContext(text, table, width, candidateProfile) {
   if (typeof text !== 'string' || !text.length || !table || !Array.isArray(table.boundaries) ||
       !Array.isArray(table.rows)) unavailable();
-  const bounded = table.version === 'piece.native_candidates.v4';
-  const exploration = table.version === 'piece.native_candidates.v5';
-  if (bounded !== (candidateProfile === 'piece.rn_native_preview.prototype.v4') ||
+  const independentBounded = table.version === 'piece.native_candidates.v4';
+  const bounded = independentBounded || table.version === 'piece.native_candidates.v6';
+  const exploration = table.version === 'piece.native_candidates.v5' || table.version === 'piece.native_candidates.v6';
+  if (independentBounded !== (candidateProfile === 'piece.rn_native_preview.prototype.v4') ||
       exploration !== (candidateProfile === 'piece.rn_bitmap_preview.prototype.v1' || candidateProfile === 'piece.rn_native_preview.prototype.v5' || candidateProfile === 'piece.rn_native_preview.prototype.v6' || candidateProfile === 'piece.rn_native_preview.prototype.v7' || candidateProfile === 'piece.rn_native_preview.prototype.v8' || candidateProfile === 'piece.rn_native_preview.prototype.v9' || candidateProfile === 'piece.rn_native_preview.containment.prototype.v1' || candidateProfile === 'piece.rn_native_preview.containment.prototype.v2') ||
       bounded && (!finite(table.contentWidth) || table.contentWidth !== width)) unavailable();
   const boundaries = table.boundaries, n = boundaries.length - 1;
@@ -325,7 +326,7 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
 }
 
 // A shortest path only rejects layouts within this supplied metric table.
-// For v5, suffix-context exploration does not prove independent-line
+// Suffix-context exploration does not prove independent-line
 // impossibility. It never supplies rows or changes the ordered B9 scoring.
 function minimumMeasuredLineCount(ctx, lineHeight) {
   const { n } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
@@ -379,7 +380,7 @@ function fitGroups(contexts, lineHeight, gap, availableHeight) {
  * {boundaries:[UTF16 offsets including 0/end], rows:[[startIndex,endIndex,
  * advance,left,top,right,bottom],...]}. Missing/duplicate/nonfinite metrics
  * throw; a measured font that cannot fit returns null for the next size.
- * Explicit v4 tables additionally bind contentWidth and may have tagged
+ * Bounded tables additionally bind contentWidth and may have tagged
  * [start,end,advance,'width_overflow'] rows; those contain no measured ink.
  */
 export function planPieceMeasuredRows(input, sizeIndex, measurements) {

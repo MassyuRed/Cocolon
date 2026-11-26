@@ -29,7 +29,7 @@ const renderPromise = Promise.resolve((() => {
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
     "import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';",
-    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS } from '../../features/piece/piecePalette';",
+    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS, PIECE_STYLE_THEME_IDS, pieceDefaultTextAlignment, pieceThemeVisualSelection } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
@@ -287,6 +287,71 @@ for (const tier of ['plus', 'premium']) test(`${tier} can select paid colors, as
     [['ocean_ice', '4:5', 'required_subtle'], ['soft_paper', '9:16', 'required_subtle'], ['soft_paper', '4:5', 'off']]);
   assert.ok(calls.every(args => args[2] === display.visualToken));
   assert.equal(JSON.stringify(display.preview), original);
+});
+test('negotiated Piece options keep Plus on background colors and bind Premium style changes to the visible preview', async () => {
+  const display = fixture(), calls = [];
+  const preview = display.preview;
+  preview.quota.subscription_tier = 'plus';
+  preview.visual_recipe.branding.branding_mode = 'required_subtle';
+  preview.visual_recipe.font_style = { font_style_id: 'system_readable', font_style_version: 1 };
+  preview.plan_capabilities.font_style_ids = [];
+  preview.plan_capabilities.text_color_ids = [];
+  preview.plan_capabilities.text_alignments = ['left', 'center'];
+  preview.plan_capabilities.text_sizes = ['small', 'standard', 'large'];
+  preview.plan_capabilities.background_styles = [];
+  preview.plan_capabilities.theme_ids.push('sage_paper', 'peach_paper', 'slate_paper');
+  const options = { onVisualChange: (...args) => calls.push(args) };
+  const plus = nodes(await render(display, options));
+  assert.equal(plus.filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 15);
+  assert.ok(!plus.some(node => node.props.testID === 'piece-visual-font_style_id'));
+  assert.ok(!plus.some(node => node.props.testID === 'piece-visual-background_style'));
+  plus.find(node => node.props.testID === 'piece-theme-option-sage_paper').props.onPress();
+  assert.equal(calls[0][0].theme_id, 'sage_paper');
+  assert.ok(!Object.hasOwn(calls[0][0], 'text_color_id'));
+  plus.find(node => node.props.testID === 'piece-option-text_alignment-center').props.onPress();
+  assert.equal(calls[1][0].text_alignment, 'center');
+  assert.equal(plus.find(node => node.props.testID === 'piece-option-text_size-standard').props.accessibilityState.selected, true);
+  plus.find(node => node.props.testID === 'piece-option-text_size-large').props.onPress();
+  assert.equal(calls[2][0].text_size, 'large');
+  preview.quota.subscription_tier = 'premium';
+  preview.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
+  preview.plan_capabilities.text_color_ids = ['neutral_ink'];
+  preview.plan_capabilities.background_styles = ['solid', 'gradient'];
+  const premium = nodes(await render(display, options));
+  premium.find(node => node.props.testID === 'piece-option-font_style_id-serif_readable').props.onPress();
+  premium.find(node => node.props.testID === 'piece-option-text_color_id-neutral_ink').props.onPress();
+  assert.deepEqual(calls.slice(3).map(args => [args[0].font_style_id, args[0].text_color_id]),
+    [['serif_readable', null], ['system_readable', 'neutral_ink']]);
+  premium.find(node => node.props.testID === 'piece-option-background_style-gradient').props.onPress();
+  assert.equal(calls.at(-1)[0].background_style, 'gradient');
+  assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
+});
+test('Premium appearance choices keep the other selected styles and stay absent for Plus', async () => {
+  const display = fixture(), calls = [];
+  const { preview } = display;
+  preview.quota.subscription_tier = 'premium';
+  preview.visual_recipe.theme.background_style = 'dot_pattern';
+  preview.visual_recipe.theme.frame_style = 'double_line';
+  preview.visual_recipe.theme.accent_style = 'corner_marks';
+  Object.assign(preview.plan_capabilities, { background_styles: ['solid', 'gradient', 'color_bands', 'color_wash',
+    'dot_pattern', 'stripe_pattern'], frame_styles: ['none', 'line', 'double_line'],
+  accent_styles: ['none', 'top_rule', 'corner_marks'] });
+  const options = { onVisualChange: (...args) => calls.push(args) };
+  const premium = nodes(await render(display, options));
+  const pick = (field, value) => premium.find(node => node.props.testID === `piece-option-${field}-${value}`);
+  assert.equal(pick('background_style', 'dot_pattern').props.accessibilityState.selected, true);
+  assert.equal(pick('frame_style', 'double_line').props.accessibilityState.selected, true);
+  assert.equal(pick('accent_style', 'corner_marks').props.accessibilityState.selected, true);
+  pick('background_style', 'color_wash').props.onPress();
+  pick('frame_style', 'none').props.onPress();
+  pick('accent_style', 'top_rule').props.onPress();
+  assert.deepEqual(calls.map(([selection]) => [selection.background_style, selection.frame_style, selection.accent_style]),
+    [['color_wash', 'double_line', 'corner_marks'], ['dot_pattern', 'none', 'corner_marks'], ['dot_pattern', 'double_line', 'top_rule']]);
+  assert.ok(calls.every(([, identity, token]) => identity.visual_recipe_hash === preview.visual_recipe_hash && token === display.visualToken));
+  preview.quota.subscription_tier = 'plus';
+  Object.assign(preview.plan_capabilities, { background_styles: [], frame_styles: [], accent_styles: [] });
+  assert.ok(nodes(await render(display, options)).every(node => !['background_style', 'frame_style', 'accent_style']
+    .some(field => node.props.testID === `piece-visual-${field}`)));
 });
 test('close remains independent of save and retry', async () => {
   let close = 0, save = 0, retry = 0;

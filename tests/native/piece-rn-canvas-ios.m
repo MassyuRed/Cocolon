@@ -869,10 +869,26 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
       NSDictionary *colors=raw[@"colors"];
       UIColor *(^color)(NSString *)=^UIColor *(NSString *hex){unsigned int rgb=0;[[NSScanner scannerWithString:[hex substringFromIndex:1]]scanHexInt:&rgb];
         return [UIColor colorWithRed:((rgb>>16)&255)/255.0 green:((rgb>>8)&255)/255.0 blue:(rgb&255)/255.0 alpha:1];};
-      UIImage *reference=[renderer imageWithActions:^(UIGraphicsImageRendererContext *ctx){
+      // This reconstruction covers the legacy solid and gradient. The Premium
+      // appearance test reads independent samples from the approved PNG.
+      UIImage *reference=raw[@"appearance_backdrop"] ? nil : [renderer imageWithActions:^(UIGraphicsImageRendererContext *ctx){
         [color(colors[@"canvas"])setFill];UIRectFill(canvas.bounds);
         CGFloat margin=[raw[@"margin"]doubleValue];CGRect panel=CGRectInset(canvas.bounds,margin/2,margin/2);
-        [color(colors[@"border"])setFill];UIRectFill(panel);[color(colors[@"surface"])setFill];UIRectFill(CGRectInset(panel,2,2));
+        [color(colors[@"border"])setFill];UIRectFill(panel);
+        CGRect interior=CGRectInset(panel,2,2);
+        NSDictionary *stops=raw[@"background_gradient"];
+        if (stops) {
+          CGContextRef cg=ctx.CGContext;
+          CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+          NSArray *colors=@[(__bridge id)color(stops[@"start"]).CGColor, (__bridge id)color(stops[@"end"]).CGColor];
+          CGGradientRef gradient=CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
+          CGContextSaveGState(cg); CGContextClipToRect(cg, interior);
+          if (gradient) CGContextDrawLinearGradient(cg, gradient, interior.origin,
+            CGPointMake(CGRectGetMinX(interior), CGRectGetMaxY(interior)), 0);
+          CGContextRestoreGState(cg); if (gradient) CGGradientRelease(gradient); CGColorSpaceRelease(space);
+        } else {
+          [color(colors[@"surface"])setFill]; UIRectFill(interior);
+        }
         for(NSUInteger i=0;i<texts.count;i++){
           RCTTextView *view=texts[i];NSArray *p=inspection[i][@"origin"];CGFloat alpha=view.alpha;
           [CATransaction begin];[CATransaction setDisableActions:YES];
@@ -881,9 +897,11 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
           view.alpha=alpha;[CATransaction commit];
         }
       }];
-      NSString *refName=[raw[@"name"]stringByAppendingString:@"_natural-reference.png"];
-      if([UIImagePNGRepresentation(reference)writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:refName]atomically:YES])report[@"natural_reference_png"]=refName;
-      else valid=NO;
+      if (!raw[@"appearance_backdrop"]) {
+        NSString *refName=[raw[@"name"]stringByAppendingString:@"_natural-reference.png"];
+        if(reference && [UIImagePNGRepresentation(reference)writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:refName]atomically:YES])report[@"natural_reference_png"]=refName;
+        else valid=NO;
+      }
       report[@"native_canvas_valid"]=@(valid);report[@"capture_error"]=@(!written);
     }else report[@"capture_error"]=@YES;
     [self saveReport:report];resolve(@YES);
@@ -1215,9 +1233,20 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertLessThanOrEqual(fmax([m[0]doubleValue],[m[3]doubleValue])-fmin(0,[m[1]doubleValue]),[report[@"content_width"]doubleValue]);
     XCTAssertLessThanOrEqual([m[4]doubleValue]-[m[2]doubleValue],i<rows.count?[report[@"plan_line_height"]doubleValue]:40);
   }
+  // Raw-text diagnostics call the full exploration bridge directly; normal
+  // cards must still prove that the width-bound bridge was used.
+  BOOL rawTextDiagnostic = [report[@"evidence_set"] isEqual:@"raw_text_diagnostic"];
+  NSString *expectedVersion = rawTextDiagnostic ? @"piece.native_candidates.v5" : @"piece.native_candidates.v6";
+  id expectedWidth = rawTextDiagnostic ? NSNull.null : report[@"content_width"];
   BOOL observed=NO;
-  for(NSDictionary *a in report[@"trace"][@"adapters"])if([a[@"status"]isEqual:@"resolved"]&&[a[@"font_size"]isEqual:report[@"font_size"]]&&[a[@"candidate_profile"]isEqual:@"piece.rn_native_preview.prototype.v5"]&&[a[@"version"]isEqual:@"piece.native_candidates.v5"])observed=YES;
-  XCTAssertTrue(observed);XCTAssertGreaterThan([report[@"plan_line_height"]doubleValue],0);
+  for (NSDictionary *a in report[@"trace"][@"adapters"]) {
+    if ([a[@"status"] isEqual:@"resolved"] && [a[@"font_size"] isEqual:report[@"font_size"]] &&
+        [a[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v5"] &&
+        [a[@"version"] isEqual:expectedVersion] &&
+        [a[@"returned_content_width"] isEqual:expectedWidth]) observed = YES;
+  }
+  XCTAssertTrue(observed, @"%@ requires %@", report[@"name"], expectedVersion);
+  XCTAssertGreaterThan([report[@"plan_line_height"]doubleValue],0);
   NSArray *contexts=report[@"natural_and_reference_paint_contexts"];
   XCTAssertGreaterThan(contexts.count,0u);
   NSMutableDictionary *byView=[NSMutableDictionary new];
@@ -1340,6 +1369,234 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   }@finally{[bridge invalidate];}
 }
 
+- (void)testCMEELongSourceSavedAndExportKeepExactNativeImage {
+  self.resultModule = [PieceCanvasTest new];
+  self.resultModule.reports = [NSMutableArray new];
+  self.resultModule.reportFilename = @"cmee-long-results.json";
+  XCTestExpectation *done = [self expectationWithDescription:@"CMEE saved and export pairs and the styled preview"];
+  self.resultModule.completed = ^{ [done fulfill]; };
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+  @try {
+    RCTRootView *root = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"PieceCanvasCases"
+                                       initialProperties:@{@"pieceGroup": @"cmee-long"}];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    window.rootViewController.view = root;
+    [window makeKeyAndVisible];
+    [self waitForExpectations:@[done] timeout:65];
+    XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray<NSDictionary *> *reports = self.resultModule.reports;
+    NSArray<NSString *> *expectedNames = @[@"cmee_long_saved_original-only", @"cmee_long_export_original-only",
+      @"cmee_long_saved_with-answer", @"cmee_long_export_with-answer",
+      @"cmee_long_saved_style-candidate", @"cmee_long_export_style-candidate", @"cmee_long_preview_style-candidate"];
+    XCTAssertEqual(reports.count, expectedNames.count);
+    if (reports.count != expectedNames.count) return;
+    XCTAssertEqualObjects([reports valueForKey:@"name"], expectedNames);
+
+    NSArray<NSString *> *sourceCases = @[@"original-only", @"with-answer", @"style-candidate"];
+    NSArray<NSString *> *pieceTextHashes = @[
+      @"3e4f96e54b848a105f49a4e9434ce4ef3d4072f384644baa8853d1c6ef374268",
+      @"622d8b4b11c05e1532cc5e1a0a358a42998f9a967442318db62e2d2a8e1399bb",
+      @"622d8b4b11c05e1532cc5e1a0a358a42998f9a967442318db62e2d2a8e1399bb"];
+    NSArray<NSString *> *contentPayloadHashes = @[
+      @"959089195a7e93d3d64cb361235ae44b138c79efa64cd163ca69ccfc53d2be6d",
+      @"0e81e4edecbb29dabb3194ef22e11e6818a001c36a1f678cc9a642e7a6922385",
+      @"0e81e4edecbb29dabb3194ef22e11e6818a001c36a1f678cc9a642e7a6922385"];
+    NSString *evidenceDirectory = PieceEvidenceDirectory();
+    UIImage *(^imageForReport)(NSDictionary *, NSString *) = ^UIImage *(NSDictionary *report, NSString *key) {
+      id filename = report[key];
+      return [filename isKindOfClass:NSString.class] ?
+        [UIImage imageWithContentsOfFile:[evidenceDirectory stringByAppendingPathComponent:filename]] : nil;
+    };
+    NSDictionary *styledPreview = reports.lastObject;
+    XCTAssertEqualObjects(styledPreview[@"phase"], @"native_checked", @"%@", styledPreview);
+    XCTAssertEqualObjects(styledPreview[@"save_fit_current"], @YES);
+    XCTAssertEqualObjects(styledPreview[@"save_fit_wrong_token_current"], @NO);
+    XCTAssertEqualObjects(styledPreview[@"native_canvas_valid"], @YES);
+    XCTAssertEqualObjects(styledPreview[@"bitmap_all_cells_equal"], @YES);
+    XCTAssertEqualObjects(styledPreview[@"capture_error"], @NO);
+    for (NSUInteger i = 0; i < sourceCases.count; i++) {
+      NSDictionary *saved = reports[2 * i], *exported = reports[2 * i + 1];
+      NSDictionary *artifact = saved[@"recorded_artifact"], *identity = saved[@"saved_identity"];
+      NSArray<NSString *> *blocks = saved[@"blocks"];
+      BOOL styled = [sourceCases[i] isEqual:@"style-candidate"];
+      XCTAssertEqualObjects(artifact[@"format_type"], @"short_essay");
+      XCTAssertEqualObjects(artifact[@"piece_text_hash"], pieceTextHashes[i]);
+      XCTAssertEqualObjects(artifact[@"content_payload_hash"], contentPayloadHashes[i]);
+      XCTAssertEqualObjects(artifact[@"visual_recipe_hash"], styled ?
+        @"4a8db6358e116b25387f89ff813dce8ebebbb7b5a54c217d049067d3a1fa0ee8" :
+        @"25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924");
+      XCTAssertEqualObjects(identity[@"piece_id"], @"b1b3a6f8-b0db-9b0f-a43c-2b2b5e0c3c61");
+      XCTAssertEqualObjects(identity[@"row_version"], styled ? @3 : @2);
+      XCTAssertEqual(blocks.count, i == 0 ? 2 : 3);
+      XCTAssertEqualObjects(blocks, artifact[@"content_payload"][@"body_blocks"]);
+      XCTAssertEqualObjects([blocks componentsJoinedByString:@"\n\n"], artifact[@"piece_text"]);
+      for (NSDictionary *report in @[saved, exported]) {
+        XCTAssertEqualObjects(report[@"source_case_id"], sourceCases[i]);
+        XCTAssertEqualObjects(report[@"renderer_version"], @"piece.rn_bitmap_renderer.ios.v2");
+        XCTAssertEqualObjects(report[@"phase"], @"native_checked", @"%@", report);
+        XCTAssertEqualObjects(report[@"body_preserved"], @YES);
+        XCTAssertEqualObjects(report[@"native_canvas_valid"], @YES);
+        XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"], @YES);
+        XCTAssertEqualObjects(report[@"capture_error"], @NO);
+        XCTAssertEqualObjects(report[@"save_fit_current"], @NO);
+        XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[]);
+        if (styled) {
+          XCTAssertEqualObjects(report[@"font_family"], @"HiraMinProN-W3");
+          XCTAssertEqualObjects(report[@"alignment"], @"center");
+          XCTAssertEqualObjects(report[@"font_sizes"], (@[@52, @48, @44, @40, @36]));
+          XCTAssertEqualObjects(report[@"colors"][@"canvas"], @"#E5EEE0");
+          XCTAssertEqualObjects(report[@"colors"][@"text"], @"#334155");
+          XCTAssertEqualObjects(report[@"background_gradient"], (@{@"start": @"#E5EEE0", @"end": @"#F5F8F0"}));
+        }
+      }
+      for (NSString *key in @[@"saved_identity", @"recorded_artifact", @"blocks", @"rows", @"width", @"height"]) {
+        XCTAssertEqualObjects(saved[key], exported[key], @"%@ %@", sourceCases[i], key);
+      }
+      XCTAssertEqualObjects(exported[@"export_target_current"], @YES);
+      XCTAssertEqualObjects(exported[@"export_rejected"], @NO);
+      XCTAssertEqualObjects(exported[@"export_target_after"], @YES);
+      XCTAssertEqualObjects(exported[@"export_pixels_equal"], @YES);
+      XCTAssertEqualObjects(exported[@"export_file_saved"], @YES);
+
+      NSData *savedPixels = PieceExportRGBA(imageForReport(saved, @"png"));
+      NSData *exportCanvasPixels = PieceExportRGBA(imageForReport(exported, @"png"));
+      NSData *exportFilePixels = PieceExportRGBA(imageForReport(exported, @"export_png"));
+      XCTAssertNotNil(savedPixels);
+      XCTAssertNotNil(exportCanvasPixels);
+      XCTAssertNotNil(exportFilePixels);
+      XCTAssertEqualObjects(savedPixels, exportCanvasPixels, @"%@", sourceCases[i]);
+      XCTAssertEqualObjects(savedPixels, exportFilePixels, @"%@", sourceCases[i]);
+      if (styled) {
+        for (NSString *key in @[@"recorded_artifact", @"blocks", @"rows", @"width", @"height"]) {
+          XCTAssertEqualObjects(styledPreview[key], saved[key], @"%@", key);
+        }
+        NSData *previewPixels = PieceExportRGBA(imageForReport(styledPreview, @"png"));
+        XCTAssertNotNil(previewPixels);
+        XCTAssertEqualObjects(previewPixels, savedPixels);
+      }
+      if (styled && savedPixels.length == 1080 * 1350 * 4) {
+        const UInt8 *rgba = savedPixels.bytes;
+        const UInt8 *top = rgba + (54 * 1080 + 54) * 4;
+        const UInt8 *bottom = rgba + (1295 * 1080 + 54) * 4;
+        const int expectedTop[] = { 0xE5, 0xEE, 0xE0, 0xFF };
+        const int expectedBottom[] = { 0xF5, 0xF8, 0xF0, 0xFF };
+        for (int channel = 0; channel < 4; channel++) {
+          XCTAssertLessThanOrEqual(abs(top[channel] - expectedTop[channel]), 1);
+          XCTAssertLessThanOrEqual(abs(bottom[channel] - expectedBottom[channel]), 1);
+        }
+      }
+    }
+  } @finally {
+    [bridge invalidate];
+  }
+}
+
+- (void)testPremiumPieceAppearancePreviewSavedAndExportWithRealReactNative {
+  self.resultModule = [PieceCanvasTest new];
+  self.resultModule.reports = [NSMutableArray new];
+  self.resultModule.reportFilename = @"appearance-results.json";
+  XCTestExpectation *done = [self expectationWithDescription:@"Premium appearance preview, owner detail and PNG output"];
+  self.resultModule.completed = ^{ [done fulfill]; };
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+  @try {
+    RCTRootView *root = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"PieceCanvasCases"
+                                       initialProperties:@{@"pieceGroup": @"appearance"}];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    window.rootViewController.view = root;
+    [window makeKeyAndVisible];
+    [self waitForExpectations:@[done] timeout:65];
+    XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray<NSDictionary *> *reports = self.resultModule.reports;
+    NSArray<NSString *> *expectedNames = @[@"appearance_preview_bands", @"appearance_saved_bands", @"appearance_export_bands",
+      @"appearance_preview_pattern", @"appearance_saved_pattern", @"appearance_export_pattern"];
+    XCTAssertEqual(reports.count, expectedNames.count);
+    if (reports.count != expectedNames.count) return;
+    XCTAssertEqualObjects([reports valueForKey:@"name"], expectedNames);
+
+    NSString *evidenceDirectory = PieceEvidenceDirectory();
+    NSData *(^pngPixels)(NSDictionary *, NSString *) = ^NSData *(NSDictionary *report, NSString *key) {
+      id filename = report[key];
+      if (![filename isKindOfClass:NSString.class]) return nil;
+      return PieceExportRGBA([UIImage imageWithContentsOfFile:[evidenceDirectory stringByAppendingPathComponent:filename]]);
+    };
+    void (^verifyPixel)(NSData *, NSUInteger, NSUInteger, unsigned int) =
+      ^(NSData *rgba, NSUInteger x, NSUInteger y, unsigned int rgb) {
+        if (rgba.length < (y * 1080 + x + 1) * 4) { XCTFail(@"missing output pixel"); return; }
+        const UInt8 *pixel = (const UInt8 *)rgba.bytes + (y * 1080 + x) * 4;
+        const int expected[] = { (int)((rgb >> 16) & 255), (int)((rgb >> 8) & 255), (int)(rgb & 255), 255 };
+        for (NSUInteger channel = 0; channel < 4; channel++) {
+          XCTAssertLessThanOrEqual(abs((int)pixel[channel] - expected[channel]), 1, @"x=%lu y=%lu channel=%lu",
+            (unsigned long)x, (unsigned long)y, (unsigned long)channel);
+        }
+      };
+    NSData *bandsPixels = nil;
+    for (NSUInteger i = 0; i < reports.count; i += 3) {
+      NSDictionary *preview = reports[i], *saved = reports[i + 1], *exported = reports[i + 2];
+      BOOL bands = i == 0;
+      NSDictionary *appearance = @{@"background_style": bands ? @"color_bands" : @"stripe_pattern",
+        @"colors": bands ? @[@"#F8E7DB", @"#E6F1EC", @"#EEE8F7"] : @[@"#E5EEE0", @"#D2DCCE"],
+        @"ink": @"#4C674B", @"frame_style": bands ? @"double_line" : @"line",
+        @"accent_style": bands ? @"corner_marks" : @"top_rule"};
+      NSDictionary *artifact = saved[@"recorded_artifact"];
+      XCTAssertNotNil(artifact);
+      XCTAssertEqualObjects(artifact[@"visual_recipe"][@"theme"], (@{@"theme_id": @"sage_paper", @"theme_version": @1,
+        @"background_style": appearance[@"background_style"], @"frame_style": appearance[@"frame_style"],
+        @"accent_style": appearance[@"accent_style"]}));
+      XCTAssertEqualObjects(artifact[@"content_payload"][@"body_blocks"], saved[@"blocks"]);
+      XCTAssertEqualObjects(artifact[@"piece_text"], [saved[@"blocks"] componentsJoinedByString:@"\n\n"]);
+      XCTAssertEqualObjects(preview[@"save_fit_current"], @YES);
+      XCTAssertEqualObjects(saved[@"save_fit_current"], @NO);
+      XCTAssertEqualObjects(exported[@"save_fit_current"], @NO);
+      for (NSDictionary *report in @[preview, saved, exported]) {
+        XCTAssertEqualObjects(report[@"phase"], @"native_checked", @"%@", report);
+        XCTAssertEqualObjects(report[@"renderer_version"], @"piece.rn_bitmap_renderer.ios.v2");
+        XCTAssertEqualObjects(report[@"width"], @1080);
+        XCTAssertEqualObjects(report[@"height"], bands ? @1350 : @1920);
+        XCTAssertEqualObjects(report[@"body_preserved"], @YES);
+        XCTAssertEqualObjects(report[@"native_canvas_valid"], @YES);
+        XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"], @YES);
+        XCTAssertEqualObjects(report[@"capture_error"], @NO);
+        XCTAssertEqualObjects(report[@"appearance_backdrop"], appearance);
+        XCTAssertEqualObjects(report[@"recorded_artifact"], artifact);
+      }
+      XCTAssertNotNil(saved[@"saved_identity"]);
+      XCTAssertEqualObjects(saved[@"saved_identity"], exported[@"saved_identity"]);
+      XCTAssertEqualObjects(exported[@"export_target_current"], @YES);
+      XCTAssertEqualObjects(exported[@"export_target_after"], @YES);
+      XCTAssertEqualObjects(exported[@"export_rejected"], @NO);
+      XCTAssertEqualObjects(exported[@"export_pixels_equal"], @YES);
+      XCTAssertEqualObjects(exported[@"export_file_saved"], @YES);
+      NSData *previewRGBA = pngPixels(preview, @"png"), *savedRGBA = pngPixels(saved, @"png");
+      NSData *exportRGBA = pngPixels(exported, @"png"), *fileRGBA = pngPixels(exported, @"export_png");
+      XCTAssertNotNil(previewRGBA);
+      XCTAssertNotNil(savedRGBA);
+      XCTAssertEqual(savedRGBA.length, 1080u * (bands ? 1350u : 1920u) * 4u);
+      XCTAssertNotNil(exportRGBA);
+      XCTAssertNotNil(fileRGBA);
+      XCTAssertEqualObjects(previewRGBA, savedRGBA);
+      XCTAssertEqualObjects(savedRGBA, exportRGBA);
+      XCTAssertEqualObjects(savedRGBA, fileRGBA);
+      if (bands) {
+        bandsPixels = savedRGBA;
+        verifyPixel(savedRGBA, 80, 150, 0xF8E7DB);
+        verifyPixel(savedRGBA, 80, 600, 0xE6F1EC);
+        verifyPixel(savedRGBA, 80, 1150, 0xEEE8F7);
+        verifyPixel(savedRGBA, 59, 150, 0x4C674B);
+        verifyPixel(savedRGBA, 67, 150, 0x4C674B);
+        verifyPixel(savedRGBA, 90, 74, 0x4C674B);
+      } else {
+        XCTAssertNotEqualObjects(bandsPixels, savedRGBA);
+        verifyPixel(savedRGBA, 88, 120, 0xD2DCCE);
+        verifyPixel(savedRGBA, 98, 120, 0xE5EEE0);
+        verifyPixel(savedRGBA, 66, 150, 0x4C674B);
+        verifyPixel(savedRGBA, 540, 81, 0x4C674B);
+      }
+    }
+  } @finally {
+    [bridge invalidate];
+  }
+}
+
 - (void)testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative {
   self.resultModule=[PieceCanvasTest new];self.resultModule.reports=[NSMutableArray new];self.resultModule.reportFilename=@"visual-transition-results.json";
   XCTestExpectation *done=[self expectationWithDescription:@"Recorded007 waiting parent and retained Card transitions"];
@@ -1430,6 +1687,18 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
         NSMutableArray *expected=[report[@"rows"]mutableCopy];if([report[@"branding"]boolValue])[expected addObject:@"Cocolon"];
         XCTAssertEqualObjects(report[@"native_texts"],expected);
         if(preview){XCTAssertEqualObjects(report[@"save_fit_current"],@YES);XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],@[@"isCurrent"]);}
+        if ([report[@"name"] isEqual:@"bitmap_essay_max420"]) {
+          BOOL omittedOverwideInk = NO;
+          for (NSDictionary *candidate in report[@"trace"][@"candidates"]) {
+            if ([candidate[@"version"] isEqual:@"piece.native_candidates.v6"] &&
+                [candidate[@"utf16_length"] isEqual:@420] &&
+                [candidate[@"returned_content_width"] isEqual:report[@"content_width"]] &&
+                [candidate[@"full_metric_count"] unsignedIntegerValue] < [candidate[@"metric_count"] unsignedIntegerValue]) {
+              omittedOverwideInk = YES;
+            }
+          }
+          XCTAssertTrue(omittedOverwideInk);
+        }
         for(NSString *key in @[@"png",@"natural_reference_png"]){
           NSString *filename=report[key];XCTAssertNotNil(filename);
           if(filename){UIImage *image=[UIImage imageWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:filename]];XCTAssertNotNil(image);

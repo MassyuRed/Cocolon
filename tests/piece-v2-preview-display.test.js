@@ -66,7 +66,7 @@ const pieceHttp = value => ({ status: 200, json: async () => value });
 // below are test doubles, NOT a React renderer or a device/image acceptance test.
 const modalPath = path.join(__dirname, '../components/piece/PiecePreviewModal.js');
 const hostPath = path.join(__dirname, '../screens/input/InputPieceActionArea.js');
-function previewUiHarness({ send, currentState = 'active', admitSave = false, platform = 'ios' } = {}) {
+function previewUiHarness({ send, currentState = 'active', admitSave = false, platform = 'ios', pieceTextMetrics } = {}) {
   let now = NOW, serial = 0, keySerial = 0;
   const calls = [], timers = new Map(), appListeners = new Set();
   const React = {
@@ -89,7 +89,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
     ActivityIndicator: 'ActivityIndicator', SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView',
-    NativeModules: {}, Platform: { OS: platform }, findNodeHandle: () => null,
+    NativeModules: { PieceTextMetrics: pieceTextMetrics }, Platform: { OS: platform }, findNodeHandle: () => null,
     setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, at: now + delay }); return id; },
     clearTimeout: id => timers.delete(id),
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
@@ -444,6 +444,48 @@ test('visual controls send current values, replace only recipe/revisions, and an
     visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'required_subtle' } });
   uiButton(u, 'Emlisロゴ：なし').props.onPress(); await pieceTick();
   assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.branding.branding_mode, 'off');
+  u.host.componentWillUnmount();
+});
+
+test('Premium appearance edits preserve the displayed combination and refuse a different server combination', async () => {
+  const original = response('quote');
+  original.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  Object.assign(original.plan_capabilities, {
+    theme_ids: ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+      'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'],
+    font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'],
+    background_styles: ['solid', 'gradient', 'color_bands', 'color_wash', 'dot_pattern', 'stripe_pattern'],
+    frame_styles: ['none', 'line', 'double_line'], accent_styles: ['none', 'top_rule', 'corner_marks'],
+  });
+  Object.assign(original.visual_recipe.theme, { background_style: 'color_bands', frame_style: 'line', accent_style: 'corner_marks' });
+  original.visual_recipe_hash = hash(JSON.stringify(canonical(original.visual_recipe)));
+  let current = original;
+  const sent = [];
+  const u = previewUiHarness({ pieceTextMetrics: { bitmapRendererVersion: original.renderer_version,
+    visualStyleVersion: 'piece.visual_style.v1', gradientBackdropVersion: 'piece.gradient_backdrop.v1',
+    appearanceBackdropVersion: 'piece.appearance_backdrop.v1' }, send: async (_url, opt) => {
+    if (opt.method !== 'PATCH') return pieceHttp(current);
+    assert.equal(opt.headers['X-Piece-Palette'], '7');
+    assert.equal(opt.headers['X-Piece-Decoration-Palette'], '8');
+    const choice = JSON.parse(opt.body).visual_selection;
+    sent.push(choice);
+    current = changedVisual(current, choice);
+    Object.assign(current.visual_recipe.theme, { background_style: choice.background_style, frame_style: choice.frame_style,
+      accent_style: sent.length === 1 ? choice.accent_style : 'corner_marks' });
+    current.visual_recipe_hash = hash(JSON.stringify(canonical(current.visual_recipe)));
+    return pieceHttp(current);
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, '背景の表現：斜めストライプ').props.onPress(); await pieceTick();
+  assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.theme.background_style, 'stripe_pattern');
+  assert.equal(current.piece_text_hash, original.piece_text_hash);
+  assert.equal(current.content_payload_hash, original.content_payload_hash);
+  uiButton(u, 'ワンポイント：上部の飾り線').props.onPress(); await pieceTick();
+  assert.deepEqual(sent.map(choice => [choice.background_style, choice.frame_style, choice.accent_style]),
+    [['stripe_pattern', 'line', 'corner_marks'], ['stripe_pattern', 'line', 'top_rule']]);
+  assert.equal(u.host.controller.getView().phase, 'unavailable');
+  assert.equal(u.host.controller.getView().preview, null);
   u.host.componentWillUnmount();
 });
 

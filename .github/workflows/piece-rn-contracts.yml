@@ -4,6 +4,7 @@ name: Piece RN preview and owner contracts
   push:
     branches:
       - agent/three-core-cmee-current-structure-20260815
+      - 'agent/cmee-continuation-*'
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -316,6 +317,7 @@ jobs:
           legacy_summaries = [line for line in lines if line.startswith('LEGACY_NATIVE_CHECKS=')]
           v9 = [line for line in lines if line.startswith('V9_NATIVE_CHECKS=')]
           v4 = [line for line in lines if line.startswith('V4_NATIVE_CHECKS=')]
+          v4_tiled = [line for line in lines if line.startswith('V4_TILED_REFERENCE=')]
           ar04 = [line for line in lines if line.startswith('AR04_BITMAP_CHECKS=')]
           old_v3 = [line for line in lines if line.startswith('V3_NATIVE_CHECKS=')]
           unexecuted_v3 = [line for line in lines if line.startswith('UNEXECUTED_V3_NATIVE_CHECKS=')]
@@ -325,6 +327,7 @@ jobs:
           if (int(sys.argv[2]) != 0 or summaries != [expected] or legacy_summaries != [legacy]
                   or v9 != ['V9_NATIVE_CHECKS=46 PASS=46 FAIL=0 SKIP=0 EXPECTED=46']
                   or v4 != ['V4_NATIVE_CHECKS=20 PASS=20 FAIL=0 SKIP=0 EXPECTED=20']
+                  or v4_tiled != ['V4_TILED_REFERENCE=PASS']
                   or ar04 != ['AR04_BITMAP_CHECKS=4 PASS=4 FAIL=0 SKIP=0']
                   or len(ar04_passed) != 4 or len(set(ar04_passed)) != 4
                   or old_v3 != []
@@ -406,7 +409,7 @@ jobs:
         env:
           BEFORE: ${{ github.event.before }}
         run: |
-          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- components/piece/PieceVisualCard.js features/piece/pieceLayout.js features/piece/pieceMeasuredWrap.js features/piece/pieceRenderer.js ios/tempCocolon/PieceTextMetrics.mm tests/native package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- components/piece features/piece ios/tempCocolon/PieceTextMetrics.mm tests/native package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
             echo 'changed=true' >> "$GITHUB_OUTPUT"
           fi
       - uses: actions/setup-node@v6

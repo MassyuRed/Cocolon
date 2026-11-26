@@ -294,13 +294,8 @@ struct PieceOwnedPixels {
   }
   bool makeExact(size_t w, size_t h, CGFloat scale, const PieceRasterBudgetOwner &owner,
       const CGAffineTransform *paintTransform = nullptr) {
-    if (!w || !h || w > 4096 || h > 4096 || w > (4 * 1024 * 1024) / h ||
-        w > SIZE_MAX / 4 || h > SIZE_MAX / (w * 4)) return false;
-    size_t n = w * 4 * h;
-    if (!owner->reserve(n)) return false;
-    budget = owner; width = w; height = h; stride = w * 4; length = n;
-    data = (UInt8 *)calloc(height, stride);
-    CGColorSpaceRef space = data ? CGColorSpaceCreateWithName(kCGColorSpaceSRGB) : NULL;
+    if (!h || w > (4 * 1024 * 1024) / h || !makeStorage(w, h, owner)) return false;
+    CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
     context = space ? CGBitmapContextCreate(data, width, height, 8, stride, space,
       kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
     if (space) CGColorSpaceRelease(space);
@@ -311,6 +306,16 @@ struct PieceOwnedPixels {
       CGContextScaleCTM(context, scale, -scale);
     }
     return true;
+  }
+  bool makeStorage(size_t w, size_t h, const PieceRasterBudgetOwner &owner) {
+    if (!w || !h || w > 4096 || h > 4096 || w > SIZE_MAX / 4 || h > SIZE_MAX / (w * 4)) return false;
+    const size_t n = w * 4 * h;
+    if (!owner->reserve(n)) return false;
+    budget = owner; width = w; height = h; stride = w * 4; length = n;
+    data = (UInt8 *)calloc(height, stride);
+    if (data) return true;
+    reset();
+    return false;
   }
 };
 // Provider ownership follows the last CGImage/CA reference. A detached layer
@@ -717,6 +722,12 @@ static NSArray *PieceDirectV4PixelInk(NSLayoutManager *layout, NSRange glyphs, C
   if (!PieceScanPixels(pixels, withinDeadline, YES, &cells)) return nil;
   return PieceInkEdges(CGRectOffset(cells, extent.origin.x - phase.x, extent.origin.y - phase.y));
 }
+static BOOL PieceCanTileV4Reference(double width, double height);
+static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t width, size_t height,
+    CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
+    PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset);
+static CGImageRef PieceV4TiledReferenceImage(PieceOwnedPixels &crop, size_t width, size_t height,
+    CGPoint offset, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void));
 static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState, NSRange glyphs, CGRect textKitInk, double fontSize,
     CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
   const CGFloat scale = [layerState[@"scale"] doubleValue];
@@ -742,13 +753,15 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   const double cy1 = ceil(CGRectGetMaxY(clippedSourceClip) * scale - ty);
   const CGRect clippedReferenceExtent = CGRectMake((cx0 - tx) / scale, (cy0 + ty) / scale,
     (cx1 - cx0) / scale, (cy1 - cy0) / scale);
-  size_t nw, nh, nb, lw, lh, lb, cw, ch, cb;
+  const BOOL tiled = PieceCanTileV4Reference(x1 - x0, y1 - y0);
+  size_t nw = (size_t)(tiled ? x1 - x0 : 0), nh = (size_t)(tiled ? y1 - y0 : 0);
+  size_t nb = 0, lw, lh, lb, cw, ch, cb;
   if (!isfinite(cx0) || !isfinite(cy0) || !isfinite(cx1) || !isfinite(cy1) ||
       fabs(cx0) > 0x1p52 || fabs(cy0) > 0x1p52 || fabs(cx1) > 0x1p52 || fabs(cy1) > 0x1p52 ||
       !PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) || !PiecePixelRect(clippedReferenceBounds) ||
       !PiecePixelRect(clippedSourceClip) || !PiecePixelRect(clippedReferenceExtent) ||
       !CGRectContainsRect(logicalExtent, CGRectOffset(clippedReferenceExtent, phase.x, phase.y)) ||
-      !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb) ||
+      (!tiled && !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb)) ||
       !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb) ||
       !PieceRasterPlan(CGSizeMake(cx1 - cx0, cy1 - cy0), 1, &cw, &ch, &cb)) return NO;
   const size_t bitBytes = (lw * lh + 7) / 8;
@@ -757,18 +770,24 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   CGAffineTransform paintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - x0, (double)nh + y0 + ty);
   CGAffineTransform clippedPaintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - cx0, (double)ch + cy0 + ty);
   PieceOwnedPixels native, clipped;
-  if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget, &paintCTM) || !withinDeadline()) return NO;
-  UIGraphicsPushContext(native.context);
-  @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
-  @finally { UIGraphicsPopContext(); }
   CGRect nativeCells;
-  if (!PieceScanPixels(native, withinDeadline, YES, &nativeCells)) return NO;
+  CGPoint nativeImageOffset = CGPointZero;
+  if (!withinDeadline() || !(tiled ? PiecePaintTiledV4Reference(view, glyphs, nw, nh, paintCTM, budget, withinDeadline,
+      native, &nativeCells, &nativeImageOffset) : native.makeExact(nw, nh, scale, budget, &paintCTM)) || !withinDeadline()) return NO;
+  if (!tiled) {
+    UIGraphicsPushContext(native.context);
+    @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+    @finally { UIGraphicsPopContext(); }
+  }
+  if (!tiled && !PieceScanPixels(native, withinDeadline, YES, &nativeCells)) return NO;
   const double left = floor((CGRectGetMinX(nativeCells) + x0 - tx) / scale + phase.x) - phase.x;
   const double top = floor((CGRectGetMinY(nativeCells) + y0 + ty) / scale + phase.y) - phase.y;
   const double right = ceil((CGRectGetMaxX(nativeCells) + x0 - tx) / scale + phase.x) - phase.x;
   const double bottom = ceil((CGRectGetMaxY(nativeCells) + y0 + ty) / scale + phase.y) - phase.y;
   CGRect projected = CGRectMake(left, top, right - left, bottom - top);
-  CGImageRef expandedImage = PiecePixelsImage(native, true), clippedImage = NULL;
+  CGImageRef expandedImage = tiled ? PieceV4TiledReferenceImage(native, nw, nh, nativeImageOffset, budget, withinDeadline)
+    : PiecePixelsImage(native, true);
+  CGImageRef clippedImage = NULL;
   CALayer *reference = nil;
   UInt8 *bits = nullptr;
   BOOL reservedBits = NO;
@@ -938,6 +957,11 @@ static NSDictionary *PieceContainmentV4Pixels(RCTTextView *view, UIView *canvas,
 @implementation PieceTextMetrics
 RCT_EXPORT_MODULE();
 - (NSDictionary *)constantsToExport {
+  if ([UIFont fontWithName:@"HiraMinProN-W3" size:36]) {
+    return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2", @"visualStyleVersion": @"piece.visual_style.v1",
+      @"gradientBackdropVersion": @"piece.gradient_backdrop.v1",
+      @"appearanceBackdropVersion": @"piece.appearance_backdrop.v1" };
+  }
   return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2" };
 }
 @synthesize bridge = _bridge;
@@ -968,6 +992,14 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
 {
   const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
   [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:NO contentWidth:0 exploration:YES
+    deadline:deadline resolver:resolve rejecter:reject];
+}
+
+RCT_EXPORT_METHOD(measureExplorationCandidatesForWidth:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  contentWidth:(double)contentWidth resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:YES contentWidth:contentWidth exploration:YES
     deadline:deadline resolver:resolve rejecter:reject];
 }
 
@@ -1201,13 +1233,17 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
                   if (boundedWidth) {
                     if (!isfinite(advance) || advance < 0) {
-                      CFRelease(line); failure->store(true, std::memory_order_relaxed); return;
+                      CFRelease(line);
+                      explorationLine = NULL;
+                      failure->store(true, std::memory_order_relaxed);
+                      return;
                     }
-                    // Width is always at least advance. Keep independent shaping
-                    // and this exact advance for EVERY range; omit only ink that
-                    // cannot be selected at this exact width. Equality is full5.
+                    // Width is always at least advance. Keep this exact advance
+                    // for every shaped range; omit only ink that cannot affect
+                    // selection at this exact width. Equality keeps full ink.
                     if (advance > contentWidth) {
                       CFRelease(line);
+                      explorationLine = NULL;
                       jobData[index].values[0] = advance;
                       jobData[index].widthOverflow = true;
                       continue;
@@ -1270,7 +1306,8 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
               }
             }
             NSData *recordBytes = [NSData dataWithBytes:records.data() length:records.size()];
-            resolve(@{ @"version": @"piece.native_candidates.v4", @"platform": @"ios", @"font_size": @(fontSize),
+            resolve(@{ @"version": exploration ? @"piece.native_candidates.v6" : @"piece.native_candidates.v4",
+              @"platform": @"ios", @"font_size": @(fontSize),
               @"utf16_length": @(expected.length), @"boundaries": boundaries, @"content_width": @(contentWidth),
               @"metric_count": @(jobCount), @"full_metric_count": @(fullCount),
               @"metric_records_le": [recordBytes base64EncodedStringWithOptions:0],
@@ -1479,6 +1516,97 @@ RCT_EXPORT_METHOD(inspectSelectedLineV4:(nonnull NSNumber *)tag text:(NSString *
 }
 @end
 
+static constexpr size_t PieceV4ReferenceHalo = 4;
+
+static BOOL PieceV4ReferenceStripsFit(size_t width, size_t height) {
+  if (!width || width > 4096 || height <= 2 * PieceV4ReferenceHalo || height > 4096) return NO;
+  size_t w, h, n;
+  return PieceRasterPlan(CGSizeMake(width, (height + 1) / 2 + PieceV4ReferenceHalo), 1, &w, &h, &n);
+}
+
+static BOOL PieceCanTileV4Reference(double width, double height) {
+  if (width < 1 || height < 1 || width > 4096 || height > 4096 || width != floor(width) || height != floor(height)) return NO;
+  return width * height > 4 * 1024 * 1024 && PieceV4ReferenceStripsFit((size_t)width, (size_t)height);
+}
+
+static BOOL PiecePaintTiledV4Reference(RCTTextView *view, NSRange glyphs, size_t width, size_t height,
+    CGAffineTransform paintCTM, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void),
+    PieceOwnedPixels &reference, CGRect *nativeCells, CGPoint *referenceOffset) {
+  const CGFloat scale = paintCTM.a;
+  if (!PieceV4ReferenceStripsFit(width, height) || !isfinite(scale) || scale < 1 || scale > 4 || scale != floor(scale)) return NO;
+  const size_t middle = height / 2;
+  const size_t start[] = {0, middle - PieceV4ReferenceHalo};
+  const size_t end[] = {middle + PieceV4ReferenceHalo, height};
+  PieceOwnedPixels strips[2];
+  for (size_t i = 0; i < 2; i++) {
+    // Preserve the full reference's native q lattice and paint the same range
+    // in both strips. Only the integer device-space origin changes.
+    CGAffineTransform stripCTM = paintCTM;
+    stripCTM.ty -= (double)(height - end[i]);
+    if (!withinDeadline() || !strips[i].makeExact(width, end[i] - start[i], scale, budget, &stripCTM) || !withinDeadline()) return NO;
+    UIGraphicsPushContext(strips[i].context);
+    @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+    @finally { UIGraphicsPopContext(); }
+  }
+  // Refuse paint changes caused by clipping at a strip boundary or by layout
+  // changes between the draws. Compare color as well as occupied alpha.
+  for (size_t y = start[1]; y < end[0]; y++) {
+    if (!withinDeadline() || memcmp(strips[0].data + y * strips[0].stride,
+        strips[1].data + (y - start[1]) * strips[1].stride, strips[0].stride) != 0) return NO;
+  }
+  const auto rowAt = [&](size_t y) -> const UInt8 * {
+    const size_t strip = y < middle ? 0 : 1;
+    return strips[strip].data + (y - start[strip]) * strips[strip].stride;
+  };
+  size_t left = width, top = height, right = 0, bottom = 0;
+  for (size_t y = 0; y < height; y++) {
+    if (!withinDeadline()) return NO;
+    const UInt8 *row = rowAt(y);
+    for (size_t x = 0; x < width; x++) {
+      if (!row[x * 4 + 3]) continue;
+      if (!x || !y || x + 1 == width || y + 1 == height) return NO;
+      left = MIN(left, x); top = MIN(top, y); right = MAX(right, x + 1); bottom = MAX(bottom, y + 1);
+    }
+  }
+  if (right <= left || bottom <= top) return NO;
+  // After the whole-grid scan, trim only transparent surroundings. The
+  // compositor must see the original fractional origin and bounds: in its
+  // logical coordinate system, each of the four margins moves by whole points.
+  const size_t pixelsPerPoint = (size_t)scale;
+  const size_t pad = pixelsPerPoint + 2;
+  const auto trim = [=](size_t space) -> size_t {
+    return space > pad ? ((space - pad) / pixelsPerPoint) * pixelsPerPoint : 0;
+  };
+  const size_t cropLeft = trim(left), cropTop = trim(top);
+  const size_t cropRight = width - trim(width - right), cropBottom = height - trim(height - bottom);
+  if (!withinDeadline() || !reference.makeExact(cropRight - cropLeft, cropBottom - cropTop, scale, budget)) return NO;
+  for (size_t y = cropTop; y < cropBottom; y++) {
+    if (!withinDeadline()) return NO;
+    memcpy(reference.data + (y - cropTop) * reference.stride, rowAt(y) + cropLeft * 4, reference.stride);
+  }
+  *nativeCells = CGRectMake(left, top, right - left, bottom - top);
+  *referenceOffset = CGPointMake(cropLeft, cropTop);
+  return withinDeadline();
+}
+
+static CGImageRef PieceV4TiledReferenceImage(PieceOwnedPixels &crop, size_t width, size_t height,
+    CGPoint offset, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void)) {
+  if (!crop.data || !crop.owns || !isfinite(offset.x) || !isfinite(offset.y) ||
+      offset.x < 0 || offset.y < 0 || offset.x != floor(offset.x) || offset.y != floor(offset.y) ||
+      offset.x + crop.width > width || offset.y + crop.height > height) return NULL;
+  // Render both references with the same image dimensions and unit contentsRect.
+  // The wide reference needs only byte storage; the drawing contexts remain tiled.
+  PieceOwnedPixels full;
+  if (!withinDeadline() || !full.makeStorage(width, height, budget)) return NULL;
+  const size_t x = (size_t)offset.x, y = (size_t)offset.y;
+  for (size_t row = 0; row < crop.height; row++) {
+    if (!withinDeadline()) return NULL;
+    memcpy(full.data + (y + row) * full.stride + x * 4, crop.data + row * crop.stride, crop.stride);
+  }
+  crop.reset();
+  return withinDeadline() ? PiecePixelsImage(full, true) : NULL;
+}
+
 // §99 bitmap preview. This owns its pixels; natural UIView backing is never
 // read. The old inspectors and their comparison contracts above stay intact.
 static NSString *const PieceBitmapProfile = @"piece.rn_bitmap_preview.prototype.v1";
@@ -1546,12 +1674,266 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
 - (void)replaceSublayer:(CALayer *)old with:(CALayer *)layer { [self invalidateBitmap]; [super replaceSublayer:old with:layer]; }
 @end
 
+enum class PieceBackdropFill { Solid, Gradient, Bands, Wash, Dots, Stripes };
+enum class PieceBackdropFrame { None, Line, DoubleLine };
+enum class PieceBackdropAccent { None, TopRule, CornerMarks };
+struct PieceBackdropAppearance {
+  PieceBackdropFill fill;
+  PieceBackdropFrame frame;
+  PieceBackdropAccent accent;
+  unsigned int colors[3];
+  unsigned int ink;
+};
+
+static BOOL PieceAppearanceColor(id value, unsigned int *rgb) {
+  if (![value isKindOfClass:NSString.class] || [value length] != 7 || [value characterAtIndex:0] != '#') return NO;
+  *rgb = 0;
+  for (NSUInteger i = 1; i < 7; i++) {
+    unichar c = [value characterAtIndex:i];
+    unsigned int digit;
+    if (c >= '0' && c <= '9') digit = c - '0';
+    else if (c >= 'a' && c <= 'f') digit = c - 'a' + 10;
+    else if (c >= 'A' && c <= 'F') digit = c - 'A' + 10;
+    else return NO;
+    *rgb = (*rgb << 4) | digit;
+  }
+  return YES;
+}
+
+static BOOL PieceReadBackdropAppearance(NSDictionary *value, PieceBackdropAppearance *appearance) {
+  if (!PieceBitmapFields(value, @[@"background_style", @"colors", @"ink", @"frame_style", @"accent_style"])) return NO;
+  NSUInteger fill = [@[@"solid", @"gradient", @"color_bands", @"color_wash", @"dot_pattern", @"stripe_pattern"]
+    indexOfObject:value[@"background_style"]];
+  NSUInteger frame = [@[@"none", @"line", @"double_line"] indexOfObject:value[@"frame_style"]];
+  NSUInteger accent = [@[@"none", @"top_rule", @"corner_marks"] indexOfObject:value[@"accent_style"]];
+  if (fill == NSNotFound || frame == NSNotFound || accent == NSNotFound ||
+      !PieceAppearanceColor(value[@"ink"], &appearance->ink)) return NO;
+  appearance->fill = static_cast<PieceBackdropFill>(fill);
+  appearance->frame = static_cast<PieceBackdropFrame>(frame);
+  appearance->accent = static_cast<PieceBackdropAccent>(accent);
+  if (appearance->fill == PieceBackdropFill::Solid && !frame && !accent) return NO;
+  NSArray *colors = value[@"colors"];
+  const NSUInteger count = appearance->fill == PieceBackdropFill::Solid ? 1 :
+    (appearance->fill == PieceBackdropFill::Bands || appearance->fill == PieceBackdropFill::Wash) ? 3 : 2;
+  if (![colors isKindOfClass:NSArray.class] || colors.count != count) return NO;
+  for (NSUInteger i = 0; i < count; i++) {
+    if (!PieceAppearanceColor(colors[i], &appearance->colors[i])) return NO;
+    for (NSUInteger j = 0; j < i; j++) if (appearance->colors[i] == appearance->colors[j]) return NO;
+  }
+  return YES;
+}
+
+static unsigned int PieceBackdropBlend(unsigned int a, unsigned int b, size_t step, size_t steps) {
+  unsigned int value = 0;
+  for (int shift = 16; shift >= 0; shift -= 8) {
+    const size_t from = (a >> shift) & 255, to = (b >> shift) & 255;
+    value |= (unsigned int)((from * (steps - step) + to * step + steps / 2) / steps) << shift;
+  }
+  return value;
+}
+
+static void PiecePaintBackdropAppearance(PieceOwnedPixels &pixels, const PieceBackdropAppearance &appearance) {
+  const bool dots = appearance.fill == PieceBackdropFill::Dots;
+  const bool stripes = appearance.fill == PieceBackdropFill::Stripes;
+  const size_t steps = pixels.height - 1;
+  for (size_t y = 0; y < pixels.height; y++) {
+    unsigned int base = appearance.colors[0];
+    if (appearance.fill == PieceBackdropFill::Gradient) {
+      base = PieceBackdropBlend(base, appearance.colors[1], y, steps);
+    } else if (appearance.fill == PieceBackdropFill::Bands) {
+      base = appearance.colors[y * 3 / pixels.height];
+    } else if (appearance.fill == PieceBackdropFill::Wash) {
+      const size_t segment = y * 2 > steps ? 1 : 0;
+      base = PieceBackdropBlend(appearance.colors[segment], appearance.colors[segment + 1], y * 2 - segment * steps, steps);
+    }
+    UInt8 *row = pixels.data + y * pixels.stride;
+    const size_t topBottom = MIN(y, pixels.height - y - 1);
+    const int dotY = (int)(y % 28) - 14;
+    for (size_t x = 0; x < pixels.width; x++) {
+      unsigned int rgb = base;
+      if (dots) {
+        const int dotX = (int)((x + ((y / 28) % 2) * 14) % 28) - 14;
+        if (dotX * dotX + dotY * dotY <= 9) rgb = appearance.colors[1];
+      } else if (stripes && (x + y) % 32 < 5) {
+        rgb = appearance.colors[1];
+      }
+      const size_t leftRight = MIN(x, pixels.width - x - 1);
+      const size_t edge = MIN(topBottom, leftRight);
+      const bool framed = (appearance.frame == PieceBackdropFrame::Line && edge >= 9 && edge < 12) ||
+        (appearance.frame == PieceBackdropFrame::DoubleLine && ((edge >= 8 && edge < 10) || (edge >= 16 && edge < 18)));
+      const bool ruled = appearance.accent == PieceBackdropAccent::TopRule && y >= 24 && y < 27 &&
+        x >= pixels.width / 2 - 58 && x < pixels.width / 2 + 58;
+      const bool marked = appearance.accent == PieceBackdropAccent::CornerMarks &&
+        ((topBottom >= 23 && topBottom < 26 && leftRight >= 23 && leftRight < 43) ||
+         (leftRight >= 23 && leftRight < 26 && topBottom >= 23 && topBottom < 43));
+      if (framed || ruled || marked) rgb = appearance.ink;
+      UInt8 *pixel = row + x * 4;
+      pixel[0] = (UInt8)(rgb >> 16);
+      pixel[1] = (UInt8)(rgb >> 8);
+      pixel[2] = (UInt8)rgb;
+      pixel[3] = 255;
+    }
+  }
+}
+
+@interface PieceGradientBackdropView : UIView
+@property(nonatomic, copy) NSArray<NSString *> *gradientStops;
+@property(nonatomic, copy) NSDictionary *appearance;
+- (BOOL)hasGradientStops:(NSArray<NSString *> *)stops;
+- (BOOL)hasAppearance:(NSDictionary *)appearance;
+@end
+
+@implementation PieceGradientBackdropView {
+  id _gradientImage;
+  CGFloat _gradientHeight;
+  CGSize _appearanceSize;
+}
+@synthesize gradientStops = _gradientStops;
+@synthesize appearance = _appearance;
+
+- (void)resetBackdrop {
+  _gradientImage = nil;
+  self.layer.contents = nil;
+  [self setNeedsLayout];
+}
+
+- (void)setGradientStops:(NSArray<NSString *> *)stops {
+  if (_gradientStops == stops || [_gradientStops isEqual:stops]) return;
+  _gradientStops = [stops copy];
+  [self resetBackdrop];
+}
+
+- (void)setAppearance:(NSDictionary *)appearance {
+  if (_appearance == appearance || [_appearance isEqual:appearance]) return;
+  _appearance = [appearance copy];
+  [self resetBackdrop];
+}
+
+- (void)installBackdropImage:(CGImageRef)image {
+  _gradientImage = (__bridge id)image;
+  [CATransaction begin];
+  [CATransaction setDisableActions:YES];
+  self.layer.contentsScale = 1;
+  self.layer.contentsGravity = kCAGravityResize;
+  self.layer.magnificationFilter = kCAFilterNearest;
+  self.layer.contents = _gradientImage;
+  [CATransaction commit];
+}
+
+- (void)layoutAppearance {
+  const CGSize size = self.bounds.size;
+  if (_gradientImage && CGSizeEqualToSize(_appearanceSize, size)) return;
+  _gradientImage = nil;
+  self.layer.contents = nil;
+  if (_gradientStops || !((size.width == 980 && size.height == 1250) ||
+                            (size.width == 968 && size.height == 1808))) return;
+  PieceBackdropAppearance appearance{};
+  if (!PieceReadBackdropAppearance(_appearance, &appearance)) return;
+  const bool needsFullWidth = appearance.fill == PieceBackdropFill::Dots || appearance.fill == PieceBackdropFill::Stripes ||
+    appearance.frame != PieceBackdropFrame::None || appearance.accent != PieceBackdropAccent::None;
+  try {
+    PieceOwnedPixels pixels;
+    if (!pixels.makeExact(needsFullWidth ? (size_t)size.width : 1, (size_t)size.height, 1, PieceV4RasterBudget())) return;
+    PiecePaintBackdropAppearance(pixels, appearance);
+    CGImageRef image = PiecePixelsImage(pixels);
+    if (!image) return;
+    _appearanceSize = size;
+    @try { [self installBackdropImage:image]; }
+    @finally { CGImageRelease(image); }
+  } catch (const std::bad_alloc &) { return; }
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  if (_appearance) { [self layoutAppearance]; return; }
+  const CGFloat height = self.bounds.size.height;
+  if (_gradientImage && _gradientHeight == height) return;
+  _gradientImage = nil;
+  self.layer.contents = nil;
+  if ((height != 1250 && height != 1808) || _gradientStops.count != 2) return;
+  unsigned int rgb[2];
+  for (NSUInteger i = 0; i < 2; i++) {
+    NSString *hex = _gradientStops[i];
+    if (![hex isKindOfClass:NSString.class] || hex.length != 7 || ![hex hasPrefix:@"#"]) return;
+    NSScanner *scanner = [NSScanner scannerWithString:[hex substringFromIndex:1]];
+    if (![scanner scanHexInt:&rgb[i]] || !scanner.isAtEnd || rgb[i] > 0xFFFFFF) return;
+  }
+  if (rgb[0] == rgb[1]) return;
+  PieceOwnedPixels strip;
+  if (!strip.makeExact(1, (size_t)height, 1, PieceV4RasterBudget())) return;
+  // One opaque sRGB pixel per row is enough for a vertical gradient. Core
+  // Animation stretches the strip horizontally in both display and capture.
+  const size_t steps = strip.height - 1;
+  for (size_t y = 0; y < strip.height; y++) {
+    UInt8 *row = strip.data + y * strip.stride;
+    for (int channel = 0; channel < 3; channel++) {
+      int shift = (2 - channel) * 8;
+      size_t start = (rgb[0] >> shift) & 255, end = (rgb[1] >> shift) & 255;
+      row[channel] = (UInt8)((start * (steps - y) + end * y + steps / 2) / steps);
+    }
+    row[3] = 255;
+  }
+  CGImageRef image = PiecePixelsImage(strip);
+  if (!image) return;
+  _gradientHeight = height;
+  @try { [self installBackdropImage:image]; }
+  @finally { CGImageRelease(image); }
+}
+
+- (BOOL)hasGradientStops:(NSArray<NSString *> *)stops {
+  return !_appearance && _gradientImage && self.layer.contents == _gradientImage && _gradientHeight == self.bounds.size.height &&
+    !self.hidden && self.alpha == 1 && !self.layer.hidden && self.layer.opacity == 1 && [_gradientStops isEqual:stops];
+}
+
+- (BOOL)hasAppearance:(NSDictionary *)appearance {
+  CALayer *layer = self.layer;
+  return !_gradientStops && _gradientImage && layer.contents == _gradientImage &&
+    CGRectEqualToRect(self.bounds, (CGRect){CGPointZero, _appearanceSize}) && CGRectEqualToRect(layer.bounds, self.bounds) &&
+    !self.hidden && self.alpha == 1 && !layer.hidden && layer.opacity == 1 && [_appearance isEqual:appearance] &&
+    layer.contentsScale == 1 && [layer.contentsGravity isEqual:kCAGravityResize] &&
+    [layer.magnificationFilter isEqual:kCAFilterNearest] && CGRectEqualToRect(layer.contentsRect, CGRectMake(0, 0, 1, 1)) &&
+    CGRectEqualToRect(layer.contentsCenter, CGRectMake(0, 0, 1, 1)) && PieceIdentityTransform(layer.transform) &&
+    PieceIdentityTransform(layer.sublayerTransform) && !layer.mask && !layer.sublayers.count && !layer.animationKeys.count &&
+    layer.borderWidth == 0 && layer.cornerRadius == 0 && layer.shadowOpacity == 0;
+}
+@end
+
+@interface PieceGradientBackdropManager : RCTViewManager
+@end
+@implementation PieceGradientBackdropManager
+RCT_EXPORT_MODULE(PieceGradientBackdrop)
+RCT_EXPORT_VIEW_PROPERTY(gradientStops, NSArray)
+RCT_EXPORT_VIEW_PROPERTY(appearance, NSDictionary)
++ (BOOL)requiresMainQueueSetup { return YES; }
+- (UIView *)view { return [PieceGradientBackdropView new]; }
+@end
+
+static BOOL PieceBackdropOnCanvas(PieceGradientBackdropView *backdrop, UIView *canvas, CGSize size) {
+  if (![backdrop isKindOfClass:PieceGradientBackdropView.class] || backdrop.window != canvas.window) return NO;
+  UIView *border = backdrop.superview, *parent = canvas.superview;
+  const CGFloat inset = size.height == 1920 ? 54 : 48;
+  CGRect outer = CGRectInset((CGRect){CGPointZero, size}, inset, inset);
+  return parent && border.superview == parent && [parent.subviews indexOfObjectIdenticalTo:border] <
+    [parent.subviews indexOfObjectIdenticalTo:canvas] && CGRectEqualToRect(border.frame, outer) &&
+    CGRectEqualToRect(backdrop.frame, CGRectInset((CGRect){CGPointZero, outer.size}, 2, 2));
+}
+
+static BOOL PieceAppearanceOnCanvas(PieceGradientBackdropView *backdrop, NSDictionary *appearance) {
+  UIView *border = backdrop.superview;
+  return [backdrop hasAppearance:appearance] && !border.hidden && border.alpha == 1 &&
+    !border.layer.hidden && border.layer.opacity == 1 && PieceIdentityTransform(border.layer.transform) &&
+    PieceIdentityTransform(border.layer.sublayerTransform) && !border.layer.mask && !border.layer.animationKeys.count;
+}
+
 @interface PieceBitmapCanvasView : UIView
 @property(nonatomic, copy) NSString *bitmapBinding;
 @property(nonatomic, copy) RCTDirectEventBlock onBitmapInvalidated;
 @property(nonatomic, strong) id bitmapImage;
 @property(nonatomic, copy) NSString *bitmapToken;
 @property(nonatomic) CGSize bitmapSize;
+@property(nonatomic, weak) PieceGradientBackdropView *gradientBackdrop;
+@property(nonatomic, copy) NSArray<NSString *> *gradientStops;
+@property(nonatomic, copy) NSDictionary *backdropAppearance;
 - (void)clearBitmap;
 - (BOOL)bitmapConfigurationCurrent;
 @end
@@ -1580,6 +1962,7 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
   [CATransaction begin]; [CATransaction setDisableActions:YES]; layer.contents = nil; [CATransaction commit];
   layer.bitmapMutationAllowed=NO;
   _bitmapImage = nil; _bitmapSize = CGSizeZero;
+  _gradientBackdrop = nil; _gradientStops = nil; _backdropAppearance = nil;
   if (oldToken && _onBitmapInvalidated) _onBitmapInvalidated(@{@"artifact_token":oldToken,@"binding_token":_bitmapBinding ?: @""});
 }
 - (void)setBitmapBinding:(NSString *)value {
@@ -1604,7 +1987,10 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
 - (void)setContentScaleFactor:(CGFloat)value { if (_bitmapImage && value!=self.contentScaleFactor) [self clearBitmap]; [super setContentScaleFactor:value]; }
 - (BOOL)bitmapConfigurationCurrent {
   CALayer *layer = self.layer;
+  if ((_gradientStops || _backdropAppearance) && !PieceBackdropOnCanvas(_gradientBackdrop, self, _bitmapSize)) return NO;
   return self.window && !self.hidden && self.alpha == 1 && !self.opaque &&
+    (!_gradientStops || [_gradientBackdrop hasGradientStops:_gradientStops]) &&
+    (!_backdropAppearance || PieceAppearanceOnCanvas(_gradientBackdrop, _backdropAppearance)) &&
     CGPointEqualToPoint(self.bounds.origin, CGPointZero) && CGSizeEqualToSize(self.bounds.size, _bitmapSize) &&
     self.contentScaleFactor == 1 && layer.contentsScale == 1 && !layer.hidden && !layer.opaque && layer.opacity == 1 &&
     CGRectEqualToRect(layer.bounds, self.bounds) && CGPointEqualToPoint(layer.anchorPoint,CGPointMake(0.5,0.5)) &&
@@ -1660,7 +2046,8 @@ static NSDictionary *PieceBitmapSource(RCTTextView *view, NSDictionary *row, UIV
   NSTextStorage *storage = view.cocolonPieceTextStorage;
   NSLayoutManager *layout = storage.layoutManagers.firstObject;
   NSTextContainer *container = layout.textContainers.firstObject;
-  NSString *text = row[@"text"]; double fontSize = [row[@"font_size"] doubleValue];
+  NSString *text = row[@"text"], *fontFamily = row[@"font_family"];
+  double fontSize = [row[@"font_size"] doubleValue];
   CGRect frame = view.cocolonPieceContentFrame;
   if (![storage.string isEqual:text] || !layout || !container || container.maximumNumberOfLines != 0 ||
       !PiecePixelRect(view.bounds) || !PiecePixelRect(frame) || view.bounds.size.width > 1080 || view.bounds.size.height > 1920 ||
@@ -1672,7 +2059,8 @@ static NSDictionary *PieceBitmapSource(RCTTextView *view, NSDictionary *row, UIV
   if (glyphs.location != 0 || NSMaxRange(glyphs) != layout.numberOfGlyphs || chars.location != 0 || chars.length != text.length) return nil;
   __block BOOL valid = YES; __block NSUInteger lines = 0;
   [storage enumerateAttribute:NSFontAttributeName inRange:chars options:0 usingBlock:^(UIFont *font, NSRange range, BOOL *stop) {
-    if (![font isKindOfClass:UIFont.class] || fabs(font.pointSize - fontSize) > 0.5) { valid = NO; *stop = YES; }
+    if (![font isKindOfClass:UIFont.class] || fabs(font.pointSize - fontSize) > 0.5 ||
+        (fontFamily && ![font.fontName isEqualToString:fontFamily])) { valid = NO; *stop = YES; }
   }];
   for (NSUInteger i = 0; valid && i < layout.numberOfGlyphs; i++) {
     NSGlyphProperty property = [layout propertyForGlyphAtIndex:i];
@@ -1758,7 +2146,12 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
 {
   NSArray *keys=@[@"version",@"profile",@"canvas_tag",@"preview_key",@"binding_token",@"expires_at_ms",@"remaining_ms",
     @"width",@"height",@"margin",@"branding_zone",@"content_width",@"content_height",@"line_height",@"total_height",@"alignment",@"branding_mode",@"rows"];
-  if (!PieceBitmapFields(request,keys) || ![request[@"version"] isEqual:PieceBitmapVersion] || ![request[@"profile"] isEqual:PieceBitmapProfile] ||
+  id gradient = request[@"gradient_backdrop"];
+  id appearanceBackdrop = request[@"appearance_backdrop"];
+  if (gradient) keys = [keys arrayByAddingObject:@"gradient_backdrop"];
+  if (appearanceBackdrop) keys = [keys arrayByAddingObject:@"appearance_backdrop"];
+  if ((gradient && appearanceBackdrop) || !PieceBitmapFields(request,keys) || ![request[@"version"] isEqual:PieceBitmapVersion] ||
+      ![request[@"profile"] isEqual:PieceBitmapProfile] ||
       !PieceBitmapTag(request[@"canvas_tag"]) || !PieceBitmapString(request[@"preview_key"],4096) || !PieceBitmapString(request[@"binding_token"],128) || !self.bridge.uiManager) {
     reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",@"Bitmap unavailable",nil); return;
   }
@@ -1787,6 +2180,22 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
        total>ch || ![@[@"left",@"center"] containsObject:request[@"alignment"]] ||
        ![@[@"required_small",@"required_subtle",@"off"] containsObject:mode] || !current()) {fail();return;}
     host.bitmapSize=CGSizeMake(w,h);
+    if (gradient) {
+      if (!PieceBitmapFields(gradient, @[@"tag", @"start", @"end"]) || !PieceBitmapTag(gradient[@"tag"]) ||
+          !PieceBitmapString(gradient[@"start"], 7) || !PieceBitmapString(gradient[@"end"], 7)) {fail();return;}
+      host.gradientBackdrop = (PieceGradientBackdropView *)views[gradient[@"tag"]];
+      host.gradientStops = @[gradient[@"start"], gradient[@"end"]];
+    }
+    if (appearanceBackdrop) {
+      if (!PieceBitmapFields(appearanceBackdrop, @[@"tag", @"background_style", @"colors", @"ink", @"frame_style", @"accent_style"]) ||
+          !PieceBitmapTag(appearanceBackdrop[@"tag"]) || [appearanceBackdrop[@"tag"] isEqual:request[@"canvas_tag"]]) {fail();return;}
+      NSMutableDictionary *appearance = [appearanceBackdrop mutableCopy];
+      [appearance removeObjectForKey:@"tag"];
+      PieceBackdropAppearance parsed{};
+      if (!PieceReadBackdropAppearance(appearance, &parsed)) {fail();return;}
+      host.gradientBackdrop = (PieceGradientBackdropView *)views[appearanceBackdrop[@"tag"]];
+      host.backdropAppearance = appearance;
+    }
     if(![host bitmapConfigurationCurrent]){fail();return;}
     NSArray *rows=request[@"rows"]; BOOL branded=![mode isEqual:@"off"];
     if(![rows isKindOfClass:NSArray.class] || rows.count<(branded?2:1) || rows.count>513){fail();return;}
@@ -1796,8 +2205,12 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
     NSArray *rowKeys=@[@"tag",@"text",@"font_size",@"width",@"height",@"line_width",@"gap_after",@"kind"];
     for(NSUInteger i=0;i<rows.count;i++) {
       NSDictionary *row=rows[i]; BOOL brand=i==bodyCount;
-      if(!PieceBitmapFields(row,rowKeys) || !PieceBitmapTag(row[@"tag"]) || [tags containsObject:row[@"tag"]] ||
-         [row[@"tag"] isEqual:request[@"canvas_tag"]] || !PieceBitmapString(row[@"text"],4096) ||
+      BOOL hasFontFamily = [row isKindOfClass:NSDictionary.class] && row[@"font_family"] != nil;
+      NSArray *requiredKeys = hasFontFamily ? [rowKeys arrayByAddingObject:@"font_family"] : rowKeys;
+      if(!PieceBitmapFields(row,requiredKeys) || (hasFontFamily && (brand || ![row[@"font_family"] isEqual:@"HiraMinProN-W3"])) ||
+         !PieceBitmapTag(row[@"tag"]) || [tags containsObject:row[@"tag"]] ||
+         [row[@"tag"] isEqual:request[@"canvas_tag"]] || (appearanceBackdrop && [row[@"tag"] isEqual:appearanceBackdrop[@"tag"]]) ||
+         !PieceBitmapString(row[@"text"],4096) ||
          ![row[@"kind"] isEqual:(brand?@"branding":@"body")]){fail();return;}
       for(NSString *key in @[@"font_size",@"width",@"height",@"line_width",@"gap_after"])
         if(!PieceBitmapNumber(row[key]) || [row[key] doubleValue]<0){fail();return;}

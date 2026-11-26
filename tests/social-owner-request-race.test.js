@@ -922,6 +922,7 @@ test('DeepInsight keeps themes first and scrolls to a current reflection when a 
     screenParams: { notification: { lane: 'records', questionId: current.id } },
     createNodeMock: element => element.type === 'ScrollView' ? { scrollTo: value => scrolls.push(value) } : null,
   });
+  assert.deepEqual(h.root.root.findByType('SafeAreaView').props.edges, ['left', 'right']);
   const headers = h.root.root.findAllByType('Text').filter(node => node.props.accessibilityRole === 'header');
   assert.deepEqual(headers.map(node => node.props.children), ['テーマから考える', '記録をふりかえる', '回答の履歴']);
   assert.equal(headers[0].parent.props.onLayout, undefined);

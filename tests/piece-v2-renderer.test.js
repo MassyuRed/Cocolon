@@ -291,7 +291,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       assert.equal(name, 'react-native-file-access');
       return { Dirs: context.Dirs, FileSystem: context.FileSystem };
     },
-    UIManager: { getViewManagerConfig: name => name === 'PieceBitmapCanvas' ? {} : null },
+    UIManager: { getViewManagerConfig: name => ['PieceBitmapCanvas', 'PieceGradientBackdrop'].includes(name) ? {} : null },
     requireNativeComponent: name => name,
     NativeModules: { PieceTextMetrics: { measureCandidates: async (tag, text, fontSize) => {
       const result = { ...candidateTable(text, fontSize), platform: os }; candidateCalls.push({ tag, text, fontSize });
@@ -414,12 +414,12 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     performance: { now: () => monotonic },
     Date: class extends Date { static now() { return now; } } });
   const modules = [
-    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
-    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_APPEARANCE_BACKGROUND_STYLES', 'PIECE_THEME_APPEARANCE_DEFAULTS', 'PIECE_FRAME_STYLES', 'PIECE_ACCENT_STYLES', 'isPieceExpandedAppearance', 'pieceAppearanceBackdrop', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
+    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle', 'supportsPieceGradientBackdrop', 'supportsPieceAppearanceBackdrop']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
     ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'pieceAndroidBitmapNativeView', 'readPieceAndroidBitmapCanvas',
+    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceGradientNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'pieceAndroidBitmapNativeView', 'readPieceAndroidBitmapCanvas',
       'renderPieceAndroidBitmapCanvas', 'releasePieceAndroidBitmapCanvas', 'capturePieceAndroidBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -436,7 +436,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       // React retains a mounted native node when only the callback identity
       // changes; a replacement canvas binding remounts all descendants.
       const key = card.state.bindingSerial + ':' + node.props.testID + ':' + (node.props.key ?? '');
-      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : Number(node.props.testID.split('-').pop()) + 1 });
+      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : ['piece-gradient-backdrop', 'piece-appearance-backdrop'].includes(node.props.testID) ? 10003 : Number(node.props.testID.split('-').pop()) + 1 });
       node.props.ref(mountedNodes.get(key));
     }
     return tree;
@@ -1665,9 +1665,9 @@ test('v5 full indexed transport preserves all ranges and all five double bits wi
   }
 });
 
-test('v5 requires its exact iOS options and separate method, with no legacy or width fallback', async () => {
+test('v5 requires exact iOS options and never uses the legacy independent methods', async () => {
   const h = rawHarness();
-  for (const options of [{ ...v5Options(), contentWidth: 888 }, { ...v5Options(), extra: true }]) {
+  for (const options of [{ ...v5Options(), contentWidth: 0 }, { ...v5Options(), contentWidth: '888' }, { ...v5Options(), extra: true }]) {
     await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, options), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
   }
   h.Platform.OS = 'android';
@@ -1684,6 +1684,32 @@ test('v5 requires its exact iOS options and separate method, with no legacy or w
   h.NativeModules.PieceTextMetrics.measureCandidatesForWidth = async () => wire;
   await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
   await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v4Options(888)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
+
+test('bounded exploration binds the same width, preserves advances, and reads old iOS bridges', async () => {
+  const h = rawHarness(), metrics = candidateTable('abc', 48, 16), width = 32;
+  const module = h.NativeModules.PieceTextMetrics, options = { ...v5Options(), contentWidth: width };
+  module.measureExplorationCandidates = async () => explorationCandidates(metrics);
+  const old = await h.measurePieceCandidates({ tag: 1 }, 'abc', 48, options);
+  assert.equal(old.version, 'piece.native_candidates.v5');
+  assert.deepEqual(copy(old.rows), metrics.rows);
+
+  const wire = { ...widthCandidates(metrics, width), version: 'piece.native_candidates.v6' };
+  module.measureExplorationCandidatesForWidth = async (tag, text, font, contentWidth) => {
+    assert.deepEqual([tag, text, font, contentWidth], [1, 'abc', 48, width]);
+    return wire;
+  };
+  const bounded = await h.measurePieceCandidates({ tag: 1 }, 'abc', 48, options);
+  assert.equal(bounded.version, wire.version);
+  assert.equal(bounded.contentWidth, width);
+  assert.ok(bounded.rows.some(row => row[3] === 'width_overflow'));
+  assert.deepEqual(copy(bounded.rows), metrics.rows.map(row => row[2] > width
+    ? [row[0], row[1], row[2], 'width_overflow'] : row));
+
+  for (const bad of [{ ...wire, content_width: width + 1 }, { ...wire, version: 'piece.native_candidates.v4' }]) {
+    module.measureExplorationCandidatesForWidth = async () => bad;
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'abc', 48, options), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
 });
 
 test('v5 rejects broken exact9 records and references before B9', async () => {
@@ -2788,6 +2814,124 @@ test('explicit iOS bitmap identity shares preview/saved/export drawing while pre
     assert.equal(h.preparePieceNativePreview(display(p)), null);
     assert.equal(h.isPieceBitmapSaveAdmitted(p, h.token), false); h.card.componentWillUnmount();
   }
+});
+test('a saved Piece uses the same gradient, typography, and placement in preview, detail and export drawing', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const h = bitmapHarness(v => v, { version });
+  const p = sample('short_essay', '4:5', 'sage_paper');
+  p.renderer_version = version;
+  p.plan_capabilities.theme_ids = copy(h.context.PIECE_STYLE_THEME_IDS);
+  p.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
+  p.plan_capabilities.text_color_ids = ['neutral_ink'];
+  p.plan_capabilities.text_alignments = ['left', 'center'];
+  p.plan_capabilities.text_sizes = ['small', 'standard', 'large'];
+  p.plan_capabilities.background_styles = ['solid', 'gradient'];
+  p.visual_recipe.theme.background_style = 'gradient';
+  p.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1,
+    text_color_id: 'neutral_ink', text_alignment: 'center', text_size: 'large' };
+  p.visual_recipe_hash = hash(JSON.stringify(canonical(p.visual_recipe)));
+  const saved = { ...savedSample(p), renderer_version: version };
+  const bridge = h.context.NativeModules.PieceTextMetrics;
+  try {
+    assert.equal(h.preparePieceNativeSavedDisplay(saved), null, 'a bridge without Mincho cannot substitute a system font');
+    bridge.bitmapRendererVersion = version;
+    bridge.visualStyleVersion = 'piece.visual_style.v1';
+    assert.equal(h.preparePieceNativeSavedDisplay(saved), null, 'an older bridge cannot substitute a solid backdrop');
+    bridge.gradientBackdropVersion = 'piece.gradient_backdrop.v1';
+    const input = h.preparePieceNativePreview(display(p));
+    const detail = h.preparePieceNativeSavedDisplay(saved);
+    const exported = h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true });
+    assert.equal(input.fontFamily, 'HiraMinProN-W3');
+    assert.equal(input.colors.canvas, '#E5EEE0');
+    assert.equal(input.colors.text, '#334155');
+    assert.equal(input.alignment, 'center');
+    assert.deepEqual(copy(input.backgroundGradient), { start: '#E5EEE0', end: '#F5F8F0' });
+    assert.deepEqual(copy(input.sizes), [52, 48, 44, 40, 36]);
+    const withoutKey = value => { const result = copy(value); delete result.key; return result; };
+    assert.deepEqual(withoutKey(detail), withoutKey(input));
+    assert.deepEqual(copy(exported), copy(detail));
+    h.card.props = { ...h.card.props, display: display(p) };
+    h.bind(h.token);
+    await finishBitmap(h);
+    assert.equal(h.card.state.measurement.phase, 'native_checked');
+    assert.deepEqual(copy(h.bitmapCalls.at(-1).gradient_backdrop), { tag: 10003, start: '#E5EEE0', end: '#F5F8F0' });
+    const rows = h.bitmapCalls.at(-1).rows;
+    assert.equal(h.bitmapCalls.at(-1).alignment, 'center');
+    assert.ok(rows.filter(row => row.kind === 'body').every(row => row.font_size === 52));
+    assert.ok(rows.filter(row => row.kind === 'body').every(row => row.font_family === 'HiraMinProN-W3'));
+    assert.equal(rows.at(-1).kind, 'branding');
+    assert.ok(!Object.hasOwn(rows.at(-1), 'font_family'));
+  } finally { h.card.componentWillUnmount(); }
+});
+test('the expanded appearance reaches the same native inputs for preview, saved detail and PNG export', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const p = sample('short_essay', '9:16', 'sage_paper');
+  p.renderer_version = version;
+  const h = bitmapHarness(value => value, { version });
+  Object.assign(p.plan_capabilities, { theme_ids: copy(h.context.PIECE_STYLE_THEME_IDS),
+    font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'],
+    background_styles: ['solid', 'gradient', 'color_bands', 'color_wash', 'dot_pattern', 'stripe_pattern'],
+    frame_styles: ['none', 'line', 'double_line'], accent_styles: ['none', 'top_rule', 'corner_marks'] });
+  Object.assign(p.visual_recipe.theme, { background_style: 'dot_pattern', frame_style: 'double_line', accent_style: 'corner_marks' });
+  p.visual_recipe_hash = hash(JSON.stringify(canonical(p.visual_recipe)));
+  const saved = { ...savedSample(p), renderer_version: version };
+  const bridge = h.context.NativeModules.PieceTextMetrics;
+  Object.assign(bridge, { bitmapRendererVersion: version, visualStyleVersion: 'piece.visual_style.v1',
+    gradientBackdropVersion: 'piece.gradient_backdrop.v1' });
+  try {
+    assert.equal(h.preparePieceNativePreview(display(p)), null, 'only the new native bridge can draw a patterned recipe');
+    assert.equal(h.preparePieceNativeSavedDisplay(saved), null);
+    bridge.appearanceBackdropVersion = 'piece.appearance_backdrop.v1';
+    const preview = h.preparePieceNativePreview(display(p));
+    const detail = h.preparePieceNativeSavedDisplay(saved);
+    const exported = h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true });
+    const withoutKey = value => { const result = copy(value); delete result.key; return result; };
+    assert.deepEqual(withoutKey(preview), withoutKey(detail));
+    assert.deepEqual(copy(detail), copy(exported));
+    const appearance = { background_style: 'dot_pattern', colors: ['#E5EEE0', '#D2DCCE'],
+      ink: '#4C674B', frame_style: 'double_line', accent_style: 'corner_marks' };
+    assert.deepEqual(copy(preview.appearanceBackdrop), appearance);
+    assert.equal(preview.backgroundGradient, undefined);
+    h.card.props = { ...h.card.props, display: display(p) };
+    h.bind(h.token);
+    await finishBitmap(h);
+    assert.equal(h.card.state.measurement.phase, 'native_checked');
+    assert.deepEqual(copy(h.bitmapCalls.at(-1).appearance_backdrop), { tag: 10003, ...appearance });
+    assert.equal(h.bitmapCalls.at(-1).gradient_backdrop, undefined);
+  } finally { h.card.componentWillUnmount(); }
+});
+test('the selected Piece text sizes keep the existing fit floor for a 420-grapheme body', () => {
+  const { preview } = require('./native/piece-rn-canvas-fixtures.cjs')
+    .find(value => value.name === 'essay_max420').props.display;
+  const body = preview.content_payload.body_blocks[0];
+  assert.equal([...new Intl.Segmenter('ja', { granularity: 'grapheme' }).segment(body)].length, 420);
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const h = bitmapHarness(value => value, { version });
+  const styles = { small: [44, 40, 36], standard: [48, 44, 40, 36], large: [52, 48, 44, 40, 36] };
+  const results = new Map();
+  try {
+    for (const [style, sizes] of Object.entries(styles)) {
+      const record = { ...savedSample(preview), renderer_version: version };
+      record.visual_recipe.branding.branding_mode = 'required_subtle';
+      if (style !== 'standard') record.visual_recipe.font_style.text_size = style;
+      record.visual_recipe_hash = hash(JSON.stringify(canonical(record.visual_recipe)));
+      const input = h.preparePieceNativeSavedDisplay(record);
+      assert.deepEqual(copy(input.sizes), sizes);
+      for (const [index, points] of input.sizes.entries()) {
+        if (!results.has(points)) {
+          const metrics = { ...candidateTable(body, points, points * .95), version: 'piece.native_candidates.v5' };
+          results.set(points, h.planPieceMeasuredRows(input, index, [metrics]));
+        }
+        const plan = results.get(points);
+        if (points > 36) assert.equal(plan, null);
+        else {
+          assert.equal(plan.groups[0].join(''), body);
+          assert.ok(plan.totalHeight <= input.contentHeight);
+        }
+      }
+    }
+  } finally { h.card.componentWillUnmount(); }
 });
 test('explicit bitmap admission verifies current closed artifact and bridge without drawing or replacing live fit', async () => {
   const h = bitmapHarness(v => v, { version: 'piece.rn_bitmap_renderer.ios.v1' });

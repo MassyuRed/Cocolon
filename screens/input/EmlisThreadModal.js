@@ -186,9 +186,20 @@ function InterpretationCorrectionEditor({ thread, textStyle, borderColor, active
   </View>;
 }
 
-export default function EmlisThreadModal({ thread, colors, navigation, userId = "", pieceEnabled = false }) {
+export function initialObservationSalutation(dto, displayName) {
+  const name = typeof displayName === "string" ? displayName.trim() : "";
+  if (!name || ["user", "ユーザー", "ゲスト"].includes(name.toLowerCase()) || /[\r\n\u2028\u2029]/u.test(name)) return "";
+  if (!dto?.current_observation || !Array.isArray(dto.timeline)) return "";
+  const first = dto.timeline.find(event => event.kind === "OBSERVATION");
+  if (!first || first.event_id !== dto.current_observation.event_id
+      || first.stage !== "INITIAL" || first.round_index !== 0) return "";
+  return name.endsWith("さん") ? `${name}、` : `${name}さん、`;
+}
+
+export default function EmlisThreadModal({ thread, colors, navigation, userId = "", pieceEnabled = false, displayName = "" }) {
   const { dto, busy, error, draft, uncertain } = thread;
   const textStyle = { color: colors.TEXT_ON_LIGHT };
+  const salutation = initialObservationSalutation(dto, displayName);
   const pendingPiece = useRef(null);
   const live = useRef(null);
   live.current = { thread, navigation, userId, pieceEnabled };
@@ -304,6 +315,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
           {dto?.current_observation && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
             <Text style={[s.label, textStyle]}>応答内容</Text>
             {(busy || error || uncertain || thread.rejected) && <Text style={[s.body, textStyle]}>前回確認した内容です。反映状況はまだ確認できていません。</Text>}
+            {!!salutation && <Text style={[s.body, textStyle]}>{salutation}</Text>}
             <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
           </View>}
           {thread.visible && dto?.can_correct && <InterpretationCorrectionEditor

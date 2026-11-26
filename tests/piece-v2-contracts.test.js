@@ -811,3 +811,129 @@ for (const [os, rendererVersion, supported] of [
     assert.equal(sent.headers['X-Piece-Palette'], supported ? '3' : undefined);
   }
 });
+
+test('compiled iOS style bridge negotiates and round-trips the extended visual recipe', async () => {
+  const data = preview('quote');
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  data.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+    'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'];
+  data.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
+  data.plan_capabilities.text_color_ids = ['neutral_ink'];
+  data.plan_capabilities.text_alignments = ['left', 'center'];
+  data.plan_capabilities.text_sizes = ['small', 'standard', 'large'];
+  data.visual_recipe.theme.theme_id = 'sage_paper';
+  data.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1,
+    text_color_id: 'neutral_ink', text_alignment: 'left', text_size: 'large' };
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  const input = request();
+  input.visual_selection = { theme_id: 'sage_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle',
+    font_style_id: 'serif_readable', text_color_id: 'neutral_ink', text_alignment: 'left', text_size: 'large' };
+  const h = load({
+    native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: {
+      bitmapRendererVersion: 'piece.rn_bitmap_renderer.ios.v2', visualStyleVersion: 'piece.visual_style.v1',
+    } } },
+    send: async () => ({ status: 200, json: async () => data }),
+  });
+  const received = await h.requestPiecePreview(input, options());
+  assert.deepEqual(copy(received), data);
+  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '6');
+  assert.deepEqual(JSON.parse(h.calls[0][1].body).visual_selection, input.visual_selection);
+  input.visual_selection.text_color_id = null;
+  input.visual_selection.text_alignment = null;
+  input.visual_selection.text_size = 'standard';
+  const patch = { ...visualRequest(), visual_selection: input.visual_selection };
+  delete data.visual_recipe.font_style.text_color_id;
+  delete data.visual_recipe.font_style.text_alignment;
+  delete data.visual_recipe.font_style.text_size;
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  data.preview_revision++;
+  data.row_version++;
+  await h.requestPiecePreviewVisualChange(patch, visualOptions());
+  assert.equal(h.calls[1][1].headers['X-Piece-Palette'], '6');
+  assert.equal(JSON.parse(h.calls[1][1].body).visual_selection.text_color_id, null);
+  assert.equal(JSON.parse(h.calls[1][1].body).visual_selection.text_alignment, null);
+  assert.equal(JSON.parse(h.calls[1][1].body).visual_selection.text_size, 'standard');
+  data.visual_recipe.font_style.text_size = 'standard';
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  delete data.visual_recipe.font_style.text_size;
+  data.visual_recipe.font_style.text_alignment = 'center';
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  delete data.visual_recipe.font_style.text_alignment;
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v1';
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  data.plan_capabilities.font_style_ids = [];
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});
+
+test('compiled iOS gradient requests preserve the canonical recipe and reject stored solid or unentitled styling', async () => {
+  const data = preview('quote');
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  data.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+    'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'];
+  Object.assign(data.plan_capabilities, { font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'], background_styles: ['solid', 'gradient'] });
+  data.visual_recipe.theme.background_style = 'gradient';
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  const input = request();
+  input.visual_selection.background_style = 'gradient';
+  const h = load({ native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: {
+    bitmapRendererVersion: 'piece.rn_bitmap_renderer.ios.v2', visualStyleVersion: 'piece.visual_style.v1',
+    gradientBackdropVersion: 'piece.gradient_backdrop.v1',
+  } } }, send: async () => ({ status: 200, json: async () => data }) });
+  assert.deepEqual(copy(await h.requestPiecePreview(input, options())), data);
+  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '7');
+  assert.equal(JSON.parse(h.calls[0][1].body).visual_selection.background_style, 'gradient');
+  data.visual_recipe.theme.background_style = 'solid';
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  data.visual_recipe.theme.background_style = 'gradient';
+  delete data.plan_capabilities.background_styles;
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});
+
+test('iOS appearance negotiation sends v8 and validates independent Premium options and omitted stored defaults', async () => {
+  const data = preview('quote');
+  data.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  const bands = ['solid', 'gradient', 'color_bands', 'color_wash', 'dot_pattern', 'stripe_pattern'];
+  const frames = ['none', 'line', 'double_line'], accents = ['none', 'top_rule', 'corner_marks'];
+  Object.assign(data.plan_capabilities, {
+    theme_ids: ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+      'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice', 'sage_paper', 'peach_paper', 'slate_paper'],
+    font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'],
+    background_styles: bands, frame_styles: frames, accent_styles: accents,
+  });
+  const visual = { background_style: 'color_bands', frame_style: 'double_line', accent_style: 'corner_marks' };
+  Object.assign(data.visual_recipe.theme, visual);
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  const input = request();
+  Object.assign(input.visual_selection, visual);
+  const bridge = { bitmapRendererVersion: data.renderer_version, visualStyleVersion: 'piece.visual_style.v1',
+    gradientBackdropVersion: 'piece.gradient_backdrop.v1' };
+  const h = load({ native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: bridge } },
+    send: async () => ({ status: 200, json: async () => data }) });
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  assert.equal(h.calls[0][1].headers['X-Piece-Palette'], '7');
+  assert.equal(h.calls[0][1].headers['X-Piece-Decoration-Palette'], undefined);
+  bridge.appearanceBackdropVersion = 'piece.appearance_backdrop.v1';
+  assert.deepEqual(copy(await h.requestPiecePreview(input, options())), data);
+  assert.equal(h.calls[1][1].headers['X-Piece-Palette'], '7');
+  assert.equal(h.calls[1][1].headers['X-Piece-Decoration-Palette'], '8');
+  assert.deepEqual(JSON.parse(h.calls[1][1].body).visual_selection, input.visual_selection);
+  data.visual_recipe.theme.accent_style = 'none';
+  await assert.rejects(h.requestPiecePreview(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  delete data.visual_recipe.theme.accent_style;
+  delete data.visual_recipe.theme.frame_style;
+  data.visual_recipe.theme.background_style = 'gradient';
+  data.plan_capabilities.background_styles = ['solid', 'gradient'];
+  delete data.plan_capabilities.accent_styles;
+  delete data.plan_capabilities.frame_styles;
+  data.visual_recipe_hash = digest(JSON.stringify(canonical(data.visual_recipe)));
+  const legacy = load({ native: { Platform: { OS: 'ios' }, NativeModules: { PieceTextMetrics: bridge } },
+    send: async (_url, opt) => ({ status: 200, json: async () =>
+      opt.headers['X-Piece-Palette'] === '7' ? data : preview('quote') }) });
+  assert.deepEqual(copy(await legacy.requestPiecePreview(request(), options())), data, 'deployed v7 stays available on the newer app');
+});

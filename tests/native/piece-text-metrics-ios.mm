@@ -1260,6 +1260,169 @@ static PieceOutputV4FixtureTextView *outputV4View(NSString *text, CGFloat font, 
   view.fixtureNativeClipTrap = trap;
   return view;
 }
+
+@interface PieceTiledReferenceFixtureTextView : PieceOutputV4FixtureTextView
+@property(nonatomic) NSUInteger paintCount;
+@property(nonatomic) CGPoint secondPaintFault;
+@property(nonatomic) BOOL injectSecondPaintFault;
+@end
+@implementation PieceTiledReferenceFixtureTextView
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs {
+  [super cocolonPiecePaintGlyphRange:glyphs];
+  if (++_paintCount == 2 && _injectSecondPaintFault) {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+    CGContextFillRect(context, CGRectMake(_secondPaintFault.x, _secondPaintFault.y, 0.5, 0.5));
+  }
+}
+@end
+
+static BOOL runTiledV4ReferenceChecks(void) {
+  const auto fail = [](const char *stage) -> BOOL {
+    printf("V4_TILED_REFERENCE_FAILURE stage=%s\n", stage);
+    return NO;
+  };
+  const size_t width = 3000, height = 540;
+  const CGFloat scale = 3;
+  const size_t wWide = 3481, hTall = 1285;
+  size_t ignoredWidth, ignoredHeight, ignoredLength;
+  if (PieceRasterPlan(CGSizeMake(wWide, hTall), 1, &ignoredWidth, &ignoredHeight, &ignoredLength) ||
+      !PieceCanTileV4Reference(wWide, hTall) || PieceCanTileV4Reference(4097, 1) ||
+      PieceCanTileV4Reference(4096, 4096) || PieceCanTileV4Reference(width, height)) return fail("raster_plan");
+
+  NSString *text = @"🇯🇵。違いを大切にして、";
+  RCTTextView *source = makeView(text, 80);
+  // Keep the fixture's 140-point height. Its paragraph has a 124-point
+  // minimum line height at 80 pt, unlike the hosted RN quote's typography.
+  PieceTiledReferenceFixtureTextView *view = [[PieceTiledReferenceFixtureTextView alloc]
+    initWithFrame:CGRectMake(0, 0, 1080, CGRectGetHeight(source.bounds))];
+  view.fixtureStorage = source.fixtureStorage;
+  view.fixtureContentFrame = view.bounds;
+  view.layer.contentsScale = scale;
+  NSLayoutManager *layout = view.fixtureStorage.layoutManagers.firstObject;
+  NSTextContainer *container = layout.textContainers.firstObject;
+  container.size = view.bounds.size;
+  [layout ensureLayoutForTextContainer:container];
+  NSRange glyphs = [layout glyphRangeForTextContainer:container];
+  if (!NSEqualRanges([layout characterRangeForGlyphRange:glyphs actualGlyphRange:NULL], NSMakeRange(0, text.length)))
+    return fail("textkit_full_line");
+  CGRect textKitInk = [layout boundingRectForGlyphRange:glyphs inTextContainer:container];
+  if (!PiecePixelRect(textKitInk)) return fail("textkit_geometry");
+
+  CGAffineTransform ctm = CGAffineTransformMake(scale, 0, 0, -scale,
+    80.25 - CGRectGetMinX(textKitInk) * scale, height / 2 + CGRectGetMidY(textKitInk) * scale + .375);
+  auto budget = std::make_shared<PieceRasterBudget>();
+  BOOL (^current)(void) = ^BOOL{ return YES; };
+  PieceOwnedPixels full, compact;
+  if (!full.makeExact(width, height, scale, budget, &ctm)) return fail("full_allocate");
+  UIGraphicsPushContext(full.context);
+  @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+  @finally { UIGraphicsPopContext(); }
+  CGRect fullCells, tiledCells;
+  CGPoint offset;
+  if (!PieceScanPixels(full, current, YES, &fullCells)) return fail("full_scan");
+  printf("V4_TILED_REFERENCE_GEOMETRY textkit=%g,%g,%g,%g full=%g,%g,%g,%g seam=%zu ctm=%g,%g\n",
+    CGRectGetMinX(textKitInk), CGRectGetMinY(textKitInk), CGRectGetWidth(textKitInk), CGRectGetHeight(textKitInk),
+    CGRectGetMinX(fullCells), CGRectGetMinY(fullCells), CGRectGetWidth(fullCells), CGRectGetHeight(fullCells), height / 2, ctm.tx, ctm.ty);
+  if (CGRectGetMinY(fullCells) >= height / 2 || CGRectGetMaxY(fullCells) <= height / 2) return fail("seam_not_in_ink");
+  if (!PiecePaintTiledV4Reference(view, glyphs, width, height, ctm, budget, current, compact, &tiledCells, &offset)) return fail("tiled_paint");
+  printf("V4_TILED_REFERENCE_COMPACT ink=%g,%g,%g,%g dimensions=%zu,%zu offset=%g,%g\n",
+    CGRectGetMinX(tiledCells), CGRectGetMinY(tiledCells), CGRectGetWidth(tiledCells), CGRectGetHeight(tiledCells),
+    compact.width, compact.height, offset.x, offset.y);
+  if (!CGRectEqualToRect(fullCells, tiledCells) || compact.length >= full.length) return fail("native_ink_or_crop");
+  const auto retainsOutputGrid = [=](size_t fullWidth, size_t fullHeight, const PieceOwnedPixels &crop, CGPoint start) {
+    const size_t pixelsPerPoint = (size_t)scale;
+    return fmod(start.x, scale) == 0 && fmod(start.y, scale) == 0 &&
+      crop.width % pixelsPerPoint == fullWidth % pixelsPerPoint && crop.height % pixelsPerPoint == fullHeight % pixelsPerPoint;
+  };
+  if (!retainsOutputGrid(width, height, compact, offset)) return fail("compact_output_grid");
+  for (size_t y = 0; y < compact.height; y++) {
+    const UInt8 *expected = full.data + ((size_t)offset.y + y) * full.stride + (size_t)offset.x * 4;
+    const UInt8 *actual = compact.data + y * compact.stride;
+    if (memcmp(actual, expected, compact.stride)) {
+      size_t first = 0;
+      while (actual[first] == expected[first]) first++;
+      printf("V4_TILED_REFERENCE_DIFFERENCE grid=native x=%zu y=%zu channel=%zu expected=%u actual=%u\n",
+        first / 4, y, first % 4, (unsigned int)expected[first], (unsigned int)actual[first]);
+      return fail("native_rgba");
+    }
+  }
+
+  CGSize fullSize = CGSizeMake(width / scale, height / scale);
+  CGImageRef fullImage = PiecePixelsImage(full, true);
+  CGImageRef tiledImage = PieceV4TiledReferenceImage(compact, width, height, offset, budget, current);
+  if (!tiledImage || CGImageGetWidth(tiledImage) != width || CGImageGetHeight(tiledImage) != height) {
+    if (fullImage) CGImageRelease(fullImage);
+    if (tiledImage) CGImageRelease(tiledImage);
+    return fail("original_image_grid");
+  }
+  CALayer *fullLayer = fullImage ? PieceReferenceLayer(fullImage, (CGRect){CGPointZero, fullSize}, view.layer) : nil;
+  CALayer *compactLayer = PieceReferenceLayer(tiledImage, (CGRect){CGPointZero, fullSize}, view.layer);
+  if (fullImage) CGImageRelease(fullImage);
+  CGImageRelease(tiledImage);
+  if (!fullLayer || !compactLayer) return fail("reference_layers");
+  if (!CGRectEqualToRect(fullLayer.bounds, compactLayer.bounds) || !CGPointEqualToPoint(fullLayer.position, compactLayer.position) ||
+      !CGRectEqualToRect(fullLayer.contentsRect, compactLayer.contentsRect))
+    return fail("reference_layer_geometry");
+  for (CGPoint phase : {CGPointZero, CGPointMake(.375, -.625)}) {
+    PieceOwnedPixels fullOutput, compactOutput;
+    const CGSize outputSize = CGSizeMake(fullSize.width + 8, fullSize.height + 8);
+    if (!fullOutput.make(outputSize, 1, budget) || !compactOutput.make(outputSize, 1, budget)) return fail("output_allocate");
+    CGContextTranslateCTM(fullOutput.context, 4 + phase.x, 4 + phase.y);
+    CGContextTranslateCTM(compactOutput.context, 4 + phase.x, 4 + phase.y);
+    [fullLayer renderInContext:fullOutput.context];
+    [compactLayer renderInContext:compactOutput.context];
+    CGRect filtered;
+    if (!PieceScanPixels(fullOutput, current, YES, &filtered)) return fail("output_scan");
+    if (memcmp(fullOutput.data, compactOutput.data, fullOutput.length)) {
+      size_t first = 0;
+      while (fullOutput.data[first] == compactOutput.data[first]) first++;
+      printf("V4_TILED_REFERENCE_DIFFERENCE grid=output phase=%g,%g x=%zu y=%zu channel=%zu expected=%u actual=%u\n",
+        phase.x, phase.y, (first % fullOutput.stride) / 4, first / fullOutput.stride, first % 4,
+        (unsigned int)fullOutput.data[first], (unsigned int)compactOutput.data[first]);
+      return fail("output_rgba");
+    }
+  }
+  fullLayer.contents = nil; compactLayer.contents = nil;
+  full.reset(); compact.reset();
+
+  CGAffineTransform wideCTM = ctm;
+  wideCTM.ty += hTall / 2 - height / 2;
+  PieceOwnedPixels wide;
+  CGRect wideCells, expectedWideCells = CGRectOffset(fullCells, 0, hTall - height - (hTall / 2 - height / 2));
+  if (!PiecePaintTiledV4Reference(view, glyphs, wWide, hTall, wideCTM, budget, current, wide, &wideCells, &offset)) return fail("oversized_paint");
+  if (!retainsOutputGrid(wWide, hTall, wide, offset)) return fail("oversized_output_grid");
+  if (!CGRectEqualToRect(wideCells, expectedWideCells)) {
+    printf("V4_TILED_REFERENCE_DIFFERENCE grid=oversized expected=%g,%g,%g,%g actual=%g,%g,%g,%g\n",
+      CGRectGetMinX(expectedWideCells), CGRectGetMinY(expectedWideCells), CGRectGetWidth(expectedWideCells), CGRectGetHeight(expectedWideCells),
+      CGRectGetMinX(wideCells), CGRectGetMinY(wideCells), CGRectGetWidth(wideCells), CGRectGetHeight(wideCells));
+    return fail("oversized_ink");
+  }
+  CGImageRef wideImage = PieceV4TiledReferenceImage(wide, wWide, hTall, offset, budget, current);
+  if (!wideImage) return fail("oversized_image");
+  BOOL onWideGrid = CGImageGetWidth(wideImage) == wWide && CGImageGetHeight(wideImage) == hTall;
+  CGImageRelease(wideImage);
+  if (!onWideGrid) return fail("oversized_image_grid");
+
+  // Paint a different pixel in the second strip's overlap, away from any
+  // glyph. The disagreement must invalidate the whole reference.
+  view.paintCount = 0;
+  view.injectSecondPaintFault = YES;
+  view.secondPaintFault = CGPointApplyAffineTransform(CGPointMake(4, height / 2), CGAffineTransformInvert(ctm));
+  PieceOwnedPixels refused;
+  auto faultBudget = std::make_shared<PieceRasterBudget>();
+  if (PiecePaintTiledV4Reference(view, glyphs, width, height, ctm, faultBudget, current, refused, &tiledCells, &offset) ||
+      view.paintCount != 2 || refused.context) return fail("overlap_fault");
+  view.injectSecondPaintFault = NO;
+  const NSUInteger faultCount = outputV4FaultReached;
+  v3FixtureBufferFault = 2;
+  BOOL edgeRefused = !PiecePaintTiledV4Reference(view, glyphs, width, height, ctm, faultBudget, current, refused, &tiledCells, &offset);
+  v3FixtureBufferFault = 0;
+  if (!edgeRefused || outputV4FaultReached - faultCount != 2 || refused.context) return fail("outer_edge_fault");
+  if (faultBudget->live.load() != 0) return fail("fault_allocation_cleanup");
+  return YES;
+}
+
 // Test-only per-call evidence; no result or assertion is replaced.
 #if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
 @interface PieceTextMetrics (CocolonPieceStandaloneDiagnostics)
@@ -2139,6 +2302,9 @@ static int runNativeMetricsChecks(void) {
     if ([profile isEqual:@"output-grid-v4"]) {
       printf("UNEXECUTED_V3_NATIVE_CHECKS=20 PRIOR_RUN=39565918631 PRIOR_FAIL=10\n");
       candidatePassed=runOutputV4Checks(module,bridge);
+      BOOL tiledPassed = runTiledV4ReferenceChecks();
+      printf("V4_TILED_REFERENCE=%s\n", tiledPassed ? "PASS" : "FAIL");
+      candidatePassed = candidatePassed && tiledPassed;
     } else if (!profile || [profile isEqual:@"legacy-v3"]) {
       candidatePassed=runV3Checks(module,bridge);
     } else printf("FAIL unsupported_native_candidate_profile\n");

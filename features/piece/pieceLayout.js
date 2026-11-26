@@ -7,7 +7,8 @@
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
 import { Platform } from 'react-native';
-import { PIECE_THEME_COLORS } from './piecePalette';
+import { PIECE_SERIF_FONT, PIECE_THEME_COLORS, isPieceExpandedAppearance, pieceAppearanceBackdrop, pieceBackgroundGradient, pieceDefaultTextAlignment, pieceNeutralInk } from './piecePalette';
+import { supportsPieceAppearanceBackdrop, supportsPieceGradientBackdrop, supportsPieceVisualStyle } from './pieceApi';
 
 export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
 export const PIECE_NATIVE_PREVIEW_V4_VERSION = 'piece.rn_native_preview.prototype.v4';
@@ -29,6 +30,13 @@ const nativeScales = {
   declaration: { '4:5': [64, 56, 48], '9:16': [72, 64, 56] },
 };
 const nativeLineRatios = { short_essay: 1.55, quote: 1.35, declaration: 1.42 };
+
+function pieceFitSizes(format, ratio, preference) {
+  const standard = nativeScales[format][ratio];
+  if (preference === 'small') return standard.slice(1);
+  if (preference === 'large') return [standard[0] + (standard[0] - standard[1]), ...standard];
+  return [...standard];
+}
 const frozenNative = value => {
   if (value && typeof value === 'object') { Object.values(value).forEach(frozenNative); Object.freeze(value); }
   return value;
@@ -101,15 +109,26 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
   const recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
   const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
   const androidPrototype = candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
+  const serif = recipe.font_style.font_style_id === 'serif_readable';
+  const gradient = recipe.theme.background_style === 'gradient';
+  const appearance = isPieceExpandedAppearance(recipe.theme);
+  if (serif && !supportsPieceVisualStyle()) return null;
+  if (gradient && !supportsPieceGradientBackdrop()) return null;
+  if (appearance && !supportsPieceAppearanceBackdrop()) return null;
+  const colors = { ...PIECE_THEME_COLORS[recipe.theme.theme_id] };
+  if (recipe.font_style.text_color_id === 'neutral_ink') colors.text = pieceNeutralInk(recipe.theme.theme_id);
   return frozenNative({ key, candidateProfile,
     ...(candidateProfile === PIECE_BITMAP_PREVIEW_VERSION || androidPrototype ? { rendererVersion: p.renderer_version } : {}),
     width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
-    blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
+    blocks: [...p.content_payload.body_blocks], sizes: pieceFitSizes(p.format_type, ratio, recipe.font_style.text_size),
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
     brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION || androidPrototype ? 'Emlis' : 'Cocolon',
-    alignment: p.format_type === 'quote' ? 'center' : 'left',
-    colors: { ...PIECE_THEME_COLORS[recipe.theme.theme_id] }, brandingMode: recipe.branding.branding_mode });
+    alignment: recipe.font_style.text_alignment ?? pieceDefaultTextAlignment(p.format_type),
+    ...(serif ? { fontFamily: PIECE_SERIF_FONT } : {}),
+    ...(appearance ? { appearanceBackdrop: pieceAppearanceBackdrop(recipe.theme) }
+      : gradient ? { backgroundGradient: pieceBackgroundGradient(recipe.theme.theme_id) } : {}),
+    colors, brandingMode: recipe.branding.branding_mode });
 }
 
 export function createPieceNativeMeasurement(input) {
