@@ -38,16 +38,19 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
       onRequestClose: onClose, onDismiss }) : null;
   }
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
-  const preview = received ? display.preview : null;
+  const baseDisplay = received ? display : display.visualEdit?.base;
+  const preview = baseDisplay?.preview;
+  const picture = display.visualEdit?.draftDisplay ?? baseDisplay;
+  const recipe = picture?.preview?.visual_recipe;
   const caps = preview?.plan_capabilities;
-  const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
-    aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode,
-    ...pieceThemeVisualSelection(preview.visual_recipe.theme, caps),
-    ...(caps.font_style_ids?.length ? { font_style_id: preview.visual_recipe.font_style.font_style_id } : {}),
-    ...(caps.text_color_ids?.length ? { text_color_id: preview.visual_recipe.font_style.text_color_id ?? null } : {}),
-    ...(caps.text_alignments?.length ? { text_alignment: preview.visual_recipe.font_style.text_alignment ??
+  const selection = preview ? { theme_id: recipe.theme.theme_id,
+    aspect_ratio: recipe.aspect_ratio, branding_mode: recipe.branding.branding_mode,
+    ...pieceThemeVisualSelection(recipe.theme, caps),
+    ...(caps.font_style_ids?.length ? { font_style_id: recipe.font_style.font_style_id } : {}),
+    ...(caps.text_color_ids?.length ? { text_color_id: recipe.font_style.text_color_id ?? null } : {}),
+    ...(caps.text_alignments?.length ? { text_alignment: recipe.font_style.text_alignment ??
       pieceDefaultTextAlignment(preview.format_type) } : {}),
-    ...(caps.text_sizes?.length ? { text_size: preview.visual_recipe.font_style.text_size ?? 'standard' } : {}) } : null;
+    ...(caps.text_sizes?.length ? { text_size: recipe.font_style.text_size ?? 'standard' } : {}) } : null;
   const candidateIdentity = preview ? {
     preview_id: preview.preview_id, preview_revision: preview.preview_revision,
     visual_recipe_hash: preview.visual_recipe_hash,
@@ -58,7 +61,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
       : '現在、この画像設定は利用できません。時間をおいて、もう一度お試しください。');
   const changeVisual = (field, value) => {
     if (typeof onVisualChange === 'function') {
-      onVisualChange({ ...selection, [field]: value }, candidateIdentity, display.visualToken);
+      onVisualChange({ ...selection, [field]: value }, candidateIdentity, baseDisplay.visualToken, { field, value });
     }
   };
   const optionStyle = selected => ({ minHeight: 44, paddingHorizontal: 12, paddingVertical: 8,
@@ -71,9 +74,10 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
       element(Text, { style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT, marginBottom: 8 } }, '文章の形式'),
       element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 } }, ...preview.eligible_formats.map(format => {
         const selected = preview.format_type === format;
+        const disabled = selected || !!display.visualEdit;
         return element(Pressable, { style: optionStyle(selected), key: format, accessibilityRole: 'button',
-          accessibilityLabel: `形式：${formats[format]}`, accessibilityState: { selected, disabled: selected },
-          disabled: selected, onPress: () => onFormatChange(format, candidateIdentity, display.visualToken) },
+          accessibilityLabel: `形式：${formats[format]}`, accessibilityState: { selected, disabled },
+          disabled, onPress: () => onFormatChange(format, candidateIdentity, display.visualToken) },
           element(Text, { style: { ...ui.typography.button, color: selected ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT } },
             `${selected ? '✓ ' : ''}${formats[format]}`));
       }))) : null;
@@ -153,7 +157,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
-  const canSave = !!preview && !saving && display.canSave === true &&
+  const canSave = !!received && !display.visualEdit && !saving && display.canSave === true &&
     !!display.visualToken && typeof onSave === 'function';
   const saveIdentity = canSave ? Object.freeze({ preview_id: preview.preview_id,
     preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }) : null;
@@ -187,7 +191,7 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
       title: '前のプレビューに戻る', onPress: () => onReturnToFormat(display.formatRecoveryToken),
       accessibilityLabel: '前のプレビューに戻る',
     }) : null,
-    preview && typeof onCancel === 'function' ? element(Button, { variant: 'secondary', style: { marginTop: 8,
+    received && typeof onCancel === 'function' ? element(Button, { variant: 'secondary', style: { marginTop: 8,
       minHeight: 44, paddingVertical: 10, borderWidth: 0, backgroundColor: colors.FIELD_BG, shadowOpacity: 0, elevation: 0 },
       title: '候補を取り消す', accessibilityLabel: 'このPiece候補を取り消す',
       onPress: () => onCancel({ preview_id: preview.preview_id,
@@ -226,10 +230,11 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
         preview ? element(View, { testID: 'piece-artwork-stage', style: { width: '100%', maxWidth: 350,
           alignSelf: 'center', paddingHorizontal: 39, paddingTop: 17,
           borderRadius: 28, backgroundColor: colors.SURFACE_TONAL } },
-          element(PieceVisualCard, { display, onSaveFitChange, colors, ui, showInspectionLabels: false })) : null,
+          element(PieceVisualCard, { display: picture, onSaveFitChange: picture === baseDisplay ? onSaveFitChange : null,
+            colors, ui, showInspectionLabels: false })) : null,
         preview ? element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE,
           textAlign: 'center', marginTop: 11, marginBottom: 15 } },
-          `${formats[preview.format_type]} · ${preview.visual_recipe.aspect_ratio}`) : null,
+          `${formats[preview.format_type]} · ${recipe.aspect_ratio}`) : null,
         preview ? element(View, { testID: 'piece-plan-details', style: { padding: 16, borderRadius: 24,
           backgroundColor: colors.FIELD_BG, marginBottom: 16 } },
           element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center',

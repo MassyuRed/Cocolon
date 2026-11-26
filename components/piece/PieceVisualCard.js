@@ -12,10 +12,18 @@ let pieceBitmapBindingSerial = 0;
 const fixedRaster = profile => profile === PIECE_BITMAP_PREVIEW_VERSION || profile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
 const needsBackdrop = input => !!(input.backgroundGradient || input.appearanceBackdrop);
 
+function wrapIdentity(input, preview) {
+  if (input?.rendererVersion !== PIECE_BITMAP_RENDERER_V2_VERSION || !preview) return null;
+  return JSON.stringify([preview.preview_id, preview.piece_text_hash, preview.content_payload_hash,
+    input.width, input.height, input.contentWidth, input.contentHeight, input.sizes, input.lineRatio,
+    input.paragraphRatio, input.fontFamily, input.alignment, input.brandingMode]);
+}
+
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)),
+    const input = preparePieceNativeCard(props);
+    this.state = { measurement: createPieceNativeMeasurement(input), wrapKey: wrapIdentity(input, props.display?.preview),
       width: props.exportCanvas === true ? 1080 : 0, visualToken: props.display?.visualToken,
       binding: Object.freeze({}), bindingSerial: 0 };
     this.active = true;
@@ -31,9 +39,18 @@ export default class PieceVisualCard extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     const input = preparePieceNativeCard(props);
-    return state.measurement.key === (input?.key ?? null) && state.visualToken === props.display?.visualToken
-      ? null : { measurement: createPieceNativeMeasurement(input), visualToken: props.display?.visualToken,
-        binding: Object.freeze({}), bindingSerial: state.bindingSerial + 1 };
+    const previous = state.measurement;
+    if (previous.key === (input?.key ?? null) && state.visualToken === props.display?.visualToken) return null;
+    const measurement = createPieceNativeMeasurement(input), wrapKey = wrapIdentity(input, props.display?.preview);
+    if (wrapKey && wrapKey === state.wrapKey && previous.key !== input.key &&
+        previous.phase === 'native_checked' && previous.plan) {
+      // An appearance-only edit can reuse line breaks. Its newly mounted
+      // rows and bitmap still have to pass the ordinary native checks.
+      Object.assign(measurement, { phase: 'measuring', sizeIndex: previous.sizeIndex,
+        plan: previous.plan, reusedWrap: true });
+    }
+    return { measurement, wrapKey, visualToken: props.display?.visualToken,
+      binding: Object.freeze({}), bindingSerial: state.bindingSerial + 1 };
   }
 
   componentDidMount() { this.active = true; this.syncDeadline(); this.syncSaveFit(); this.syncCaptureTarget(); }
@@ -442,7 +459,8 @@ export default class PieceVisualCard extends React.Component {
       if (!result.overflow) this.bitmapArtifact = { node: operation.bitmapNode, token: result.artifactToken,
         binding, generation: snapshot.generation, key: input.key, result, android };
       this.setState(previous => current() && previous.measurement === snapshot ? { measurement: result.overflow
-        ? snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(raw), sizeIndex: snapshot.sizeIndex + 1 }
+        ? snapshot.reusedWrap ? createPieceNativeMeasurement(raw)
+          : snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(raw), sizeIndex: snapshot.sizeIndex + 1 }
           : { ...snapshot, phase: 'unavailable', reason: 'native_ink_overflow', inspection: null }
         : { ...snapshot, phase: 'native_checked', inspection: result.rows, bitmapCanvas: result } } : null);
     } catch {
@@ -562,6 +580,9 @@ export default class PieceVisualCard extends React.Component {
     }
     this.setState(previous => {
       const measurement = recordPieceNativeMeasurement(input, previous.measurement, ticket, index, kind, value);
+      if (measurement !== previous.measurement && measurement.phase === 'unavailable' && previous.measurement.reusedWrap) {
+        return { measurement: createPieceNativeMeasurement(raw) };
+      }
       return measurement === previous.measurement ? null : { measurement };
     });
   };

@@ -171,11 +171,15 @@ function pieceCanonicalValue(value) {
   return value;
 }
 
+export function pieceVisualRecipeHash(recipe) {
+  return pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(recipe)));
+}
+
 // Shared by preview and saved-owner display. No expiry or current-plan rules.
 export function verifyPieceArtifactHashes(value) {
   if (pieceUtf8Digest(value.piece_text) !== value.piece_text_hash ||
       pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(value.content_payload))) !== value.content_payload_hash ||
-      pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(value.visual_recipe))) !== value.visual_recipe_hash) {
+      pieceVisualRecipeHash(value.visual_recipe) !== value.visual_recipe_hash) {
     throw new PieceApiError('PIECE_HASH_MISMATCH');
   }
 }

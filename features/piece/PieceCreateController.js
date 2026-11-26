@@ -35,12 +35,13 @@
  */
 import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave } from './pieceApi';
 import { PIECE_THEME_APPEARANCE_DEFAULTS, pieceDefaultTextAlignment, pieceThemeVisualSelection } from './piecePalette';
-import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview } from './piecePreviewModel';
+import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview, pieceVisualRecipeHash } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
   const now = typeof configuration?.now === 'function' ? configuration.now : Date.now;
   const onFeatureDisabled = typeof configuration?.onFeatureDisabled === 'function'
     ? configuration.onFeatureDisabled : null;
+  const scheduleVisualEdit = configuration?.scheduleVisualEdit;
   const listeners = new Set();
   let state = createPiecePreviewState();
   // The host binding stays fixed while explicit draft replacements change
@@ -52,6 +53,10 @@ export function createPieceCreateController(configuration = {}) {
   let active = null;
   let disposed = false;
   let visualRecovery = null;
+  let visualPreviousState = null;
+  let visualDraft = null;
+  let cancelVisualTimer = null;
+  let visualEditProjection = null;
   let visualUpdated = false;
   let lastDisplaySettings = null;
   let formatIntent = null;
@@ -99,6 +104,8 @@ export function createPieceCreateController(configuration = {}) {
     const previous = active;
     active = null;
     visualRecovery = null;
+    visualPreviousState = null;
+    clearVisualDraft();
     visualUpdated = false;
     if (!keepPreviewRequest) lastDisplaySettings = null;
     formatIntent = keepPreviewRequest && formatIntent ? { ...formatIntent, previous: null } : null;
@@ -317,6 +324,82 @@ export function createPieceCreateController(configuration = {}) {
     } catch { lastDisplaySettings = null; }
   }
 
+  function clearVisualDraft() {
+    cancelVisualTimer?.();
+    cancelVisualTimer = null;
+    visualDraft = null;
+    visualEditProjection = null;
+  }
+
+  function visualEditBase() {
+    const base = visualPreviousState || state;
+    const nowMs = clock();
+    return readPiecePreviewDisplay({
+      ...readPiecePreviewView(base, { enabled: enabled && !disposed && !boundaryCode,
+        expectedUserId: operation?.expectedUserId, nowMs }),
+      visualToken: base.ticket,
+    }, nowMs);
+  }
+
+  function getVisualEdit() {
+    if ((!visualDraft && !visualPreviousState) || cancelIntent || saveIntent || formatIntent) return null;
+    const baseState = visualPreviousState || state;
+    if (visualEditProjection?.baseState === baseState && visualEditProjection.draft === visualDraft &&
+        clock() < visualEditProjection.value.base.expiresAtMs) return visualEditProjection.value;
+    const base = visualEditBase();
+    if (!base.preview || !base.hashVerified) return null;
+    if (!visualDraft) return { base, draftDisplay: null };
+    const old = base.preview.visual_recipe, selection = visualDraft.selection;
+    const recipe = { ...old, aspect_ratio: selection.aspect_ratio,
+      theme: { ...old.theme, theme_id: selection.theme_id },
+      font_style: { ...old.font_style },
+      branding: { ...old.branding, branding_mode: selection.branding_mode } };
+    for (const [field, fallback] of Object.entries(PIECE_THEME_APPEARANCE_DEFAULTS)) {
+      if (selection[field] === undefined) continue;
+      delete recipe.theme[field];
+      if (selection[field] != null && selection[field] !== fallback) recipe.theme[field] = selection[field];
+    }
+    if (selection.font_style_id !== undefined) {
+      recipe.font_style.font_style_id = selection.font_style_id ?? 'system_readable';
+    }
+    for (const [field, fallback] of Object.entries({ text_color_id: null,
+      text_alignment: pieceDefaultTextAlignment(old.format_type), text_size: 'standard' })) {
+      if (selection[field] === undefined) continue;
+      delete recipe.font_style[field];
+      if (selection[field] != null && selection[field] !== fallback) recipe.font_style[field] = selection[field];
+    }
+    // This is a separate local drawing input, never a server receipt. Only
+    // getView() returns a persistable candidate; native fit for this draw is
+    // never delivered to the save host.
+    const draftDisplay = readPiecePreviewDisplay({ phase: 'received',
+      preview: { ...base.preview, visual_recipe: recipe, visual_recipe_hash: pieceVisualRecipeHash(recipe) },
+      visualToken: visualDraft.token,
+    }, clock());
+    const value = Object.freeze({ base, draftDisplay: draftDisplay.hashVerified ? draftDisplay : null });
+    visualEditProjection = { baseState, draft: visualDraft, value };
+    return value;
+  }
+
+  function scheduleVisualDraft() {
+    cancelVisualTimer?.();
+    cancelVisualTimer = null;
+    if (active || !visualDraft) return;
+    const draft = visualDraft;
+    cancelVisualTimer = scheduleVisualEdit(() => {
+      cancelVisualTimer = null;
+      if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery ||
+          cancelIntent || saveIntent || formatIntent || visualDraft !== draft) return;
+      const { preview } = visualEditBase();
+      const mutation = preview && allowedVisualMutation(draft.selection, preview);
+      if (!mutation || matchesVisualSelection(preview.visual_recipe, mutation.visual_selection)) {
+        clearVisualDraft();
+        notify();
+        return;
+      }
+      void applyVisualMutation(preview, mutation);
+    });
+  }
+
   async function run(begun, mutation = null) {
     if (!begun.ticket) return;
     state = begun.state;
@@ -324,6 +407,8 @@ export function createPieceCreateController(configuration = {}) {
     try { abort = new AbortController(); }
     catch (error) {
       state = failPiecePreview(state, begun.ticket, error, { expectedUserId: operation?.expectedUserId });
+      visualPreviousState = null;
+      clearVisualDraft();
       notify();
       return;
     }
@@ -374,6 +459,13 @@ export function createPieceCreateController(configuration = {}) {
       state = failPiecePreview(state, attempt.ticket, error, { expectedUserId: operation?.expectedUserId });
     }
     expirePreviousFormat();
+    if (mutation) {
+      visualPreviousState = null;
+      // A declined or unknown commit is recovered by the explicit original
+      // POST flow, never by applying a queued edit to an unverified revision.
+      if (state.phase !== 'received' || !visualDraft ||
+          matchesVisualSelection(state.preview.visual_recipe, visualDraft.selection)) clearVisualDraft();
+    }
     if (state.code === 'PIECE_FORMAT_NOT_ELIGIBLE') {
       restorePreviousFormat(new PieceApiError('PIECE_FORMAT_NOT_ELIGIBLE').message);
     }
@@ -381,6 +473,7 @@ export function createPieceCreateController(configuration = {}) {
     // Clear BEFORE notification. A subscriber may start a new intent here;
     // there is deliberately no old finally block that could clear that intent.
     active = null;
+    if (mutation && visualDraft) scheduleVisualDraft();
     if (state.code === 'PIECE_AUTH_REQUIRED') {
       operation = null;
       boundaryCode = 'PIECE_AUTH_REQUIRED';
@@ -507,7 +600,7 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function changeFormat(format, identity, displayToken, idempotencyKey) {
-    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || formatIntent ||
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || visualDraft || formatIntent ||
         cancelIntent || saveIntent || idempotencyKey === operation.idempotencyKey ||
         idempotencyKey === contextOperation?.idempotencyKey) return;
     const preview = selectedPreview(identity, displayToken);
@@ -533,12 +626,17 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function changeVisual(selection, identity, visualToken) {
-    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent || saveIntent) return;
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || visualDraft || cancelIntent || saveIntent) return;
     const preview = selectedPreview(identity, visualToken);
     if (!preview) return;
-    let mutation;
+    const mutation = allowedVisualMutation(selection, preview);
+    if (!mutation || matchesVisualSelection(preview.visual_recipe, mutation.visual_selection)) return;
+    await applyVisualMutation(preview, mutation);
+  }
+
+  function allowedVisualMutation(selection, preview) {
     try {
-      mutation = preparePieceVisualChange({ preview_id: preview.preview_id,
+      const mutation = preparePieceVisualChange({ preview_id: preview.preview_id,
         expected_preview_revision: preview.preview_revision, visual_selection: selection });
       const choice = mutation.visual_selection, caps = preview.plan_capabilities;
       if (!caps.theme_ids.includes(choice.theme_id) || !caps.aspect_ratios.includes(choice.aspect_ratio) ||
@@ -551,9 +649,39 @@ export function createPieceCreateController(configuration = {}) {
           (choice.text_alignment !== undefined && (!caps.text_alignments?.length ||
             (choice.text_alignment !== null && !caps.text_alignments.includes(choice.text_alignment)))) ||
           (choice.text_size !== undefined && !caps.text_sizes?.includes(choice.text_size ?? 'standard'))) return;
-      if (matchesVisualSelection(preview.visual_recipe, choice)) return;
+      return mutation;
     } catch { return; }
+  }
+
+  function stageVisual(selection, identity, visualToken, edit) {
+    if (typeof scheduleVisualEdit !== 'function' || disposed || !enabled || !operation ||
+        boundaryCode || cancelIntent || saveIntent || formatIntent ||
+        (visualRecovery && !active?.mutation) || (active && !active.mutation)) return;
+    const base = visualEditBase(), preview = base.preview;
+    if (!visualToken || visualToken !== base.visualToken || !preview ||
+        identity?.preview_id !== preview.preview_id || identity.preview_revision !== preview.preview_revision ||
+        identity.visual_recipe_hash !== preview.visual_recipe_hash) return;
+    if (edit) {
+      const choices = visualDraft?.selection ?? selectedVisual(preview.visual_recipe, preview.plan_capabilities);
+      if (!Object.prototype.hasOwnProperty.call(choices, edit.field)) return;
+      selection = { ...choices, [edit.field]: edit.value };
+    }
+    const mutation = allowedVisualMutation(selection, preview);
+    if (!mutation || equivalent(visualDraft?.selection, mutation.visual_selection)) return;
+    if (!active && matchesVisualSelection(preview.visual_recipe, mutation.visual_selection)) {
+      if (!visualDraft) return;
+      clearVisualDraft();
+    } else {
+      visualDraft = { selection: mutation.visual_selection, token: Object.freeze({}) };
+      scheduleVisualDraft();
+    }
+    visualUpdated = false;
+    notify();
+  }
+
+  async function applyVisualMutation(preview, mutation) {
     visualRecovery = preview;
+    visualPreviousState = state;
     formatNotice = null;
     visualUpdated = false;
     await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }), mutation);
@@ -617,6 +745,7 @@ export function createPieceCreateController(configuration = {}) {
     if (!identity || identity.preview_id !== preview.preview_id ||
         identity.preview_revision !== preview.preview_revision ||
         identity.visual_recipe_hash !== preview.visual_recipe_hash) return;
+    clearVisualDraft();
     cancelIntent = Object.freeze({ request: Object.freeze({ preview_id: preview.preview_id,
       expected_preview_revision: preview.preview_revision }), rowVersion: preview.row_version });
     await runCancellation();
@@ -627,7 +756,7 @@ export function createPieceCreateController(configuration = {}) {
   // are not admission. This controller does not promote canSave/canExport.
   async function savePreview(identity, displayToken, idempotencyKey) {
     if (disposed || !enabled || !saveEnabled || !operation || boundaryCode || active ||
-        visualRecovery || cancelIntent || saveIntent || !displayToken || displayToken !== state.ticket ||
+        visualRecovery || visualDraft || cancelIntent || saveIntent || !displayToken || displayToken !== state.ticket ||
         typeof idempotencyKey !== 'string' || !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) return;
     const display = readPiecePreviewDisplay(getView(), clock()), captured = operation;
     if (display.phase !== 'received' || !display.hashVerified) return;
@@ -641,7 +770,7 @@ export function createPieceCreateController(configuration = {}) {
     } catch { return; }
     // Admission code can synchronously close, revoke, or change the context.
     if (disposed || !enabled || !saveEnabled || operation !== captured || boundaryCode || active ||
-        saveIntent || cancelIntent || visualRecovery || state.ticket !== displayToken ||
+        saveIntent || cancelIntent || visualRecovery || visualDraft || state.ticket !== displayToken ||
         readPiecePreviewDisplay(getView(), clock()).phase !== 'received') return;
     const intent = Object.freeze({ idempotencyKey, request: Object.freeze({
       preview_id: preview.preview_id, expected_preview_revision: preview.preview_revision,
@@ -896,6 +1025,7 @@ export function createPieceCreateController(configuration = {}) {
   function refresh() {
     if (disposed) return;
     state = expirePiecePreview(state, clock());
+    if (!active && state.phase !== 'received') clearVisualDraft();
     expirePreviousFormat();
     notify();
   }
@@ -911,6 +1041,6 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, restartExpired, changeVisual, changeFormat, returnToFormat, cancelPreview, savePreview, restoreSaveRecovery, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, getVisualEdit, start, retry, restartExpired, changeVisual, stageVisual, changeFormat, returnToFormat, cancelPreview, savePreview, restoreSaveRecovery, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
 }
 

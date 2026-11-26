@@ -90,7 +90,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
     ActivityIndicator: 'ActivityIndicator', SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView',
     NativeModules: { PieceTextMetrics: pieceTextMetrics }, Platform: { OS: platform }, findNodeHandle: () => null,
-    setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, at: now + delay }); return id; },
+    setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, delay, at: now + delay }); return id; },
     clearTimeout: id => timers.delete(id),
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
     getAccessToken: async () => 'synthetic-ui-session',
@@ -125,6 +125,10 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
   return { host, calls, timers, appListeners, read: context.displayReader, digest: context.digestUnderTest,
     mount: () => host.componentDidMount(), tree: () => expand(host.render()), nodes,
     background: state => { AppState.currentState = state; [...appListeners].forEach(fn => fn(state)); },
+    settleVisual: async () => {
+      for (const [id, timer] of [...timers]) if (timer.delay === 750) { timers.delete(id); timer.callback(); }
+      await pieceTick();
+    },
     advance: ms => {
       now += ms;
       let iterations = 0;
@@ -405,7 +409,7 @@ test('an expanded paid preview exposes all twelve themes and a selection changes
   const choices = u.nodes(u.tree()).filter(node => node.props.accessibilityLabel?.startsWith('テーマ：'));
   assert.equal(choices.length, 12);
   assert.ok(choices.every(node => typeof node.props.onPress === 'function'));
-  choices.at(-1).props.onPress(); await pieceTick();
+  choices.at(-1).props.onPress(); await u.settleVisual();
   const updated = u.read(u.host.controller.getView(), NOW).preview;
   assert.equal(updated.visual_recipe.theme.theme_id, chosen);
   assert.equal(updated.piece_text_hash, original.piece_text_hash);
@@ -425,8 +429,10 @@ test('visual controls send current values, replace only recipe/revisions, and an
   const staleControl = uiButton(u, 'テーマ：静かな夜');
   assert.equal(uiButton(u, 'テーマ：ソフトペーパー').props.accessibilityState.selected, true);
   staleControl.props.onPress(); staleControl.props.onPress();
-  assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), false);
-  await pieceTick();
+  assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), true);
+  assert.equal(uiButton(u, 'テーマ：静かな夜').props.accessibilityState.selected, true);
+  assert.equal(u.calls.length, 1);
+  await u.settleVisual();
   assert.equal(u.calls.length, 2);
   const [url, sent] = u.calls[1];
   assert.equal(url, '/emotion/piece/preview/' + original.preview_id); assert.equal(sent.method, 'PATCH');
@@ -439,11 +445,79 @@ test('visual controls send current values, replace only recipe/revisions, and an
   assert.equal(view.canSave, false); assert.equal(view.canExport, false);
   assert.ok(u.nodes(u.tree()).some(n => n.children.includes('画像設定を更新しました。')));
   staleControl.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2, 'obsolete controls cannot mutate a new revision');
-  uiButton(u, '画像の比率：9:16').props.onPress(); await pieceTick();
+  uiButton(u, '画像の比率：9:16').props.onPress(); await u.settleVisual();
   assert.deepEqual(JSON.parse(u.calls[2][1].body), { expected_preview_revision: 2,
     visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'required_subtle' } });
-  uiButton(u, 'Emlisロゴ：なし').props.onPress(); await pieceTick();
+  uiButton(u, 'Emlisロゴ：なし').props.onPress(); await u.settleVisual();
   assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.branding.branding_mode, 'off');
+  u.host.componentWillUnmount();
+});
+
+test('visual edits stay interactive and reconcile only the newest pending selection', async () => {
+  const initial = response('quote');
+  initial.expires_at = '2026-10-08T10:00:10Z';
+  const first = deferredPieceResponse(), second = deferredPieceResponse();
+  let patches = 0, current = initial;
+  const u = previewUiHarness({ admitSave: true, send: async (_url, opt) => {
+    if (opt.method !== 'PATCH') return pieceHttp(initial);
+    current = changedVisual(current, JSON.parse(opt.body).visual_selection);
+    return (++patches === 1 ? first : second).promise;
+  } });
+  u.mount();
+  u.host.start();
+  await pieceTick();
+  const night = uiButton(u, 'テーマ：静かな夜');
+  const tall = uiButton(u, '画像の比率：9:16');
+  night.props.onPress();
+  tall.props.onPress();
+  const controller = u.host.controller, verified = controller.getView();
+  const staged = controller.getVisualEdit().draftDisplay;
+  assert.equal(staged.preview.visual_recipe.theme.theme_id, 'quiet_night');
+  assert.equal(staged.preview.visual_recipe.aspect_ratio, '9:16');
+  assert.notEqual(staged.visualToken, verified.visualToken);
+  await controller.savePreview(visualIdentity(verified.preview), verified.visualToken, 'cannot-save-draft');
+  await controller.savePreview(visualIdentity(staged.preview), staged.visualToken, 'cannot-save-local-render');
+  u.advance(749);
+  await pieceTick();
+  assert.equal(u.calls.length, 1);
+  u.advance(1);
+  await pieceTick();
+  assert.equal(u.calls.length, 2);
+  assert.deepEqual(JSON.parse(u.calls[1][1].body), { expected_preview_revision: 1,
+    visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'required_subtle' } });
+  assert.equal(controller.getVisualEdit().draftDisplay, staged, 'retain the mounted draft while applying it');
+  uiButton(u, 'Emlisロゴ：なし').props.onPress();
+  assert.equal(controller.getVisualEdit().draftDisplay.preview.visual_recipe.branding.branding_mode, 'off');
+  assert.equal(u.calls.length, 2);
+  first.resolve(pieceHttp(current));
+  await pieceTick();
+  assert.equal(controller.getView().preview.preview_revision, 2);
+  assert.equal(controller.getVisualEdit().draftDisplay.preview.visual_recipe.branding.branding_mode, 'off');
+  u.advance(750);
+  await pieceTick();
+  assert.equal(u.calls.length, 3);
+  assert.deepEqual(JSON.parse(u.calls[2][1].body), { expected_preview_revision: 2,
+    visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'off' } });
+  second.resolve(pieceHttp(current));
+  await pieceTick();
+  assert.equal(controller.getVisualEdit(), null);
+  assert.equal(controller.getView().preview.preview_revision, 3);
+  assert.equal(controller.getView().preview.visual_recipe.branding.branding_mode, 'off');
+  u.host.componentWillUnmount();
+});
+
+test('closing during the visual debounce discards the local drawing and issues no PATCH', async () => {
+  const u = previewUiHarness({ send: async () => pieceHttp(response('quote')) });
+  u.mount();
+  u.host.start();
+  await pieceTick();
+  uiButton(u, 'テーマ：静かな夜').props.onPress();
+  assert.ok(u.host.controller.getVisualEdit().draftDisplay);
+  u.host.close();
+  u.advance(750);
+  await pieceTick();
+  assert.equal(u.calls.length, 1);
+  assert.equal(u.host.controller.getVisualEdit(), null);
   u.host.componentWillUnmount();
 });
 
@@ -477,11 +551,11 @@ test('Premium appearance edits preserve the displayed combination and refuse a d
     return pieceHttp(current);
   } });
   u.mount(); u.host.start(); await pieceTick();
-  uiButton(u, '背景の表現：斜めストライプ').props.onPress(); await pieceTick();
+  uiButton(u, '背景の表現：斜めストライプ').props.onPress(); await u.settleVisual();
   assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.theme.background_style, 'stripe_pattern');
   assert.equal(current.piece_text_hash, original.piece_text_hash);
   assert.equal(current.content_payload_hash, original.content_payload_hash);
-  uiButton(u, 'ワンポイント：上部の飾り線').props.onPress(); await pieceTick();
+  uiButton(u, 'ワンポイント：上部の飾り線').props.onPress(); await u.settleVisual();
   assert.deepEqual(sent.map(choice => [choice.background_style, choice.frame_style, choice.accent_style]),
     [['stripe_pattern', 'line', 'corner_marks'], ['stripe_pattern', 'line', 'top_rule']]);
   assert.equal(u.host.controller.getView().phase, 'unavailable');
@@ -508,7 +582,7 @@ for (const outcome of ['lost_after_commit', 'lost_before_commit', 'stale', 'conf
       return pieceHttp(bad);
     } });
     u.mount(); u.host.start(); await pieceTick();
-    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
     assert.equal(u.host.controller.getView().preview, null);
     assert.ok(uiButton(u, '最新のプレビューを取得'));
     assert.equal(u.calls.length, 2, 'no automatic retry');
@@ -528,7 +602,7 @@ for (const boundary of ['close', 'background', 'account', 'source', 'disable', '
     const d = deferredPieceResponse(), original = response('quote');
     const u = previewUiHarness({ send: async (url, opt) => opt.method === 'PATCH' ? d.promise : pieceHttp(original) });
     u.mount(); u.host.start(); await pieceTick();
-    const control = uiButton(u, 'テーマ：静かな夜'); control.props.onPress(); await pieceTick();
+    const control = uiButton(u, 'テーマ：静かな夜'); control.props.onPress(); await u.settleVisual();
     if (boundary === 'close') u.host.close();
     if (boundary === 'background') u.background('background');
     if (boundary === 'unmount') u.host.componentWillUnmount();
@@ -544,7 +618,7 @@ for (const boundary of ['close', 'background', 'account', 'source', 'disable', '
     assert.equal(u.calls[1][1].signal.aborted, true);
     d.resolve(pieceHttp(changedVisual(original))); await pieceTick();
     assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), false);
-    control.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+    control.props.onPress(); await u.settleVisual(); assert.equal(u.calls.length, 2);
     if (boundary !== 'unmount') u.host.componentWillUnmount();
   });
 }
@@ -552,7 +626,7 @@ for (const boundary of ['close', 'background', 'account', 'source', 'disable', '
 test('late visual success at expiry is rejected without reviving the previous text or retry', async () => {
   const original = response('quote'), d = deferredPieceResponse();
   const u = previewUiHarness({ send: async (url, opt) => opt.method === 'PATCH' ? d.promise : pieceHttp(original) });
-  u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+  u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
   u.advance(1123); d.resolve(pieceHttp(changedVisual(original))); await pieceTick();
   assert.equal(u.host.controller.getView().preview, null); assert.equal(u.host.controller.getView().canRetry, false);
   assert.equal(u.calls.length, 2); u.host.componentWillUnmount();
@@ -563,7 +637,7 @@ for (const code of ['PIECE_AUTH_REQUIRED', 'PIECE_FEATURE_DISABLED', 'PIECE_PREV
     const status = { PIECE_AUTH_REQUIRED: 401, PIECE_FEATURE_DISABLED: 503, PIECE_PREVIEW_EXPIRED: 409, PIECE_NOT_FOUND: 404 }[code];
     const u = previewUiHarness({ send: async (url, opt) => opt.method === 'PATCH'
       ? { status, json: async () => ({ code }) } : pieceHttp(response('quote')) });
-    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
     assert.equal(u.host.controller.getView().preview, null); assert.equal(u.host.controller.getView().canRetry, false);
     u.host.retry(); await pieceTick(); assert.equal(u.calls.length, 2); u.host.componentWillUnmount();
   });
@@ -595,7 +669,7 @@ for (const boundary of ['close_reopen', 'source_a_b_a']) {
     }
     u.host.start(); await pieceTick(); assert.equal(u.calls.length, 2);
     stale.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
-    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
     assert.equal(u.calls.length, 3); assert.equal(u.calls[2][1].method, 'PATCH');
     u.host.componentWillUnmount();
   });
@@ -616,7 +690,7 @@ for (const replay of ['older_revision', 'changed_body', 'different_id', 'advance
       if (opt.method === 'PATCH') throw new Error('lost');
       return pieceHttp(u.calls.length === 1 ? original : recovered);
     } });
-    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
     u.host.retry(); await pieceTick();
     assert.equal(u.host.controller.getView().phase, replay === 'advanced_revision' ? 'received' : 'unavailable');
     assert.equal(u.calls.length, 3); assert.equal(u.calls.filter(c => c[1].method === 'PATCH').length, 1);
@@ -681,7 +755,7 @@ for (const boundary of ['close', 'background', 'account', 'source', 'disable', '
     assert.equal(u.calls[1][1].signal.aborted, true);
     d.resolve(cancelledReply(original)); await pieceTick();
     assert.notEqual(u.host.controller?.getView().phase, 'cancelled');
-    control.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+    control.props.onPress(); await u.settleVisual(); assert.equal(u.calls.length, 2);
     if (boundary !== 'unmount') u.host.componentWillUnmount();
   });
 }
@@ -1401,7 +1475,7 @@ for (const boundary of ['background', 'runtime', 'focus']) {
     const selected = u.calls[2][1];
     const view = u.host.controller.getView();
     u.host.changeVisual({ theme_id: 'soft_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle' },
-      visualIdentity(view.preview), view.visualToken); await pieceTick();
+      visualIdentity(view.preview), view.visualToken); await u.settleVisual();
     assert.equal(u.host.controller.getView().preview.preview_revision, 2);
     if (boundary === 'background') u.background('inactive');
     else if (boundary === 'runtime') { u.host.context = { ...u.host.context, runtime: {} }; u.host.componentDidUpdate(); }
@@ -1439,7 +1513,7 @@ test('received selected format expiry rebuild uses the last acknowledged image s
   uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
   const selected = u.calls[2][1], view = u.host.controller.getView();
   u.host.changeVisual({ theme_id: 'soft_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle' },
-    visualIdentity(view.preview), view.visualToken); await pieceTick();
+    visualIdentity(view.preview), view.visualToken); await u.settleVisual();
   u.background('inactive'); u.background('active');
   await u.host.createFromSavedInput(); await pieceTick();
   assert.equal(u.calls.length, 5);
@@ -1510,7 +1584,7 @@ test('selected-format uncertain visual conflict still recovers its original POST
   bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
   uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
   const originalPost = u.calls[2][1];
-  uiButton(u, 'テーマ：ソフトペーパー').props.onPress(); await pieceTick();
+  uiButton(u, 'テーマ：ソフトペーパー').props.onPress(); await u.settleVisual();
   assert.equal(u.host.controller.getView().retryKind, 'recover');
   u.background('inactive'); u.background('active');
   await u.host.createFromSavedInput(); await pieceTick();
@@ -1871,7 +1945,7 @@ test('rebuilding an expired Premium format keeps its most recently applied image
   const u = previewUiHarness({ send: async () => pieceHttp([original, replacement, recolored, fresh][u.calls.length - 1]) });
   u.mount(); u.host.start(); await pieceTick();
   uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
-  uiButton(u, 'テーマ：ソフトペーパー').props.onPress(); await pieceTick();
+  uiButton(u, 'テーマ：ソフトペーパー').props.onPress(); await u.settleVisual();
   assert.equal(u.host.controller.getView().preview.visual_recipe.theme.theme_id, 'soft_paper');
   u.advance(1123);
   uiButton(u, '同じ記録から作り直す').props.onPress(); await pieceTick();
@@ -1981,7 +2055,7 @@ test('unknown visual outcome recovers the original preview rather than replacing
   const u = previewUiHarness({ send: async (url, init) => init.method === 'GET'
     ? pieceHttp(request().source_ref) : init.method === 'PATCH' ? sourceConflict() : pieceHttp(original) });
   bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
-  uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+  uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
   assert.equal(u.host.controller.getView().retryKind, 'recover');
   assert.equal(u.host.controller.getView().sourceRefreshToken, undefined);
   assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
@@ -2007,7 +2081,7 @@ for (const closeFirst of [false, true]) {
     } });
     bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
     const oldVisual = uiButton(u, 'テーマ：静かな夜');
-    oldVisual.props.onPress(); await pieceTick();
+    oldVisual.props.onPress(); await u.settleVisual();
     assert.equal(u.calls.length, 3);
     assert.equal(uiButton(u, '保存入力を確認し直す'), undefined, 'uncertain PATCH keeps original recovery');
     uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
@@ -2045,7 +2119,7 @@ for (const [code, status] of [['PIECE_CONFLICT', 409], ['PIECE_SOURCE_NOT_ELIGIB
       return ++previews === 1 ? pieceHttp(response('quote')) : sourceConflict();
     } });
     bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
-    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
     uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
     const reread = uiButton(u, '保存入力を確認し直す');
     reread.props.onPress(); await pieceTick();
@@ -2112,7 +2186,7 @@ for (const closeFirst of [false, true]) {
     } });
     bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
     const oldVisual = uiButton(u, '画像の比率：9:16');
-    oldVisual.props.onPress(); await pieceTick();
+    oldVisual.props.onPress(); await u.settleVisual();
     assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
     uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
     assert.equal(u.calls[3][1].body, u.calls[1][1].body);
@@ -2144,7 +2218,7 @@ for (const code of ['PIECE_FORMAT_NOT_ELIGIBLE', 'PIECE_VISUAL_SELECTION_NOT_ALL
       return pieceHttp(response('quote'));
     } });
     bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
-    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await u.settleVisual();
     assert.equal(u.host.controller.getView().retryKind, 'recover');
     assert.equal(u.host.controller.getView().sourceRefreshToken, undefined);
     assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
@@ -2207,7 +2281,7 @@ async function closedRejectedPostHost(kind) {
     u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
     uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
   } else {
-    uiButton(u, '画像の比率：9:16').props.onPress(); await pieceTick();
+    uiButton(u, '画像の比率：9:16').props.onPress(); await u.settleVisual();
     uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
   }
   const beforeClose = uiButton(u, '保存入力を確認し直す'); assert.ok(beforeClose);
@@ -2324,7 +2398,7 @@ for (const kind of ['unknown-post', 'patch-rejection']) {
     bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
     if (kind === 'unknown-post') uiButton(u, '形式：宣言').props.onPress();
     else uiButton(u, 'テーマ：ソフトペーパー').props.onPress();
-    await pieceTick();
+    await u.settleVisual();
     const originalPost = u.calls[kind === 'unknown-post' ? 2 : 1][1];
     assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
     uiButton(u, 'Pieceの画面を閉じる').props.onPress();

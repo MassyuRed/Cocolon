@@ -127,6 +127,10 @@ export default class InputPieceActionArea extends React.Component {
     this.clearSource();
     this.controller = createPieceCreateController({
       isSaveAdmitted: (preview, token) => this.isSaveAdmitted(preview, token),
+      scheduleVisualEdit: callback => {
+        const timer = setTimeout(callback, 750);
+        return () => clearTimeout(timer);
+      },
       getSaveRecovery: () => this.props.saveRecovery,
       getRuntimePublication: () => this.boundRuntime,
       onFeatureDisabled: () => {
@@ -441,8 +445,9 @@ export default class InputPieceActionArea extends React.Component {
       if (display.phase === 'hidden' || this.savedMode && this.sourcePhase !== 'ready' &&
           !display.previewRestartToken && !['cancel', 'save'].includes(display.retryKind))
         this.abandonPreviewPresentation();
-      if (display.expiresAtMs !== null) {
-        const delay = Math.min(2147483647, Math.max(0, display.expiresAtMs - Date.now()));
+      const expiresAtMs = display.expiresAtMs ?? this.controller.getVisualEdit?.()?.base.expiresAtMs;
+      if (Number.isFinite(expiresAtMs) && expiresAtMs > Date.now()) {
+        const delay = Math.min(2147483647, expiresAtMs - Date.now());
         this.expiryTimer = setTimeout(() => {
           this.expiryTimer = null;
           if (this.mounted && this.foreground) this.controller?.refresh();
@@ -504,9 +509,9 @@ export default class InputPieceActionArea extends React.Component {
     void this.controller.restartExpired(token, key);
   }
 
-  changeVisual(selection, identity, visualToken) {
+  changeVisual(selection, identity, visualToken, edit) {
     if (!this.isCurrent() || !this.state.open) return;
-    void this.controller.changeVisual(selection, identity, visualToken);
+    this.controller.stageVisual(selection, identity, visualToken, edit);
   }
 
   changeFormat(format, identity, displayToken) {
@@ -552,7 +557,7 @@ export default class InputPieceActionArea extends React.Component {
     if (typeof provider !== 'function' || typeof handle?.isCurrent !== 'function' || !preview || !displayToken) return false;
     const current = () => {
       if (!this.isCurrent() || !this.state.open || !this.saveEnabled() ||
-          this.savedMode && this.sourcePhase !== 'ready') return false;
+          this.savedMode && this.sourcePhase !== 'ready' || this.controller.getVisualEdit?.()) return false;
       const display = readPiecePreviewDisplay(this.controller.getView());
       return display.phase === 'received' && display.hashVerified === true &&
         display.visualToken === displayToken && display.preview != null &&
@@ -700,7 +705,9 @@ export default class InputPieceActionArea extends React.Component {
     const canSave = this.isSaveAdmitted(checked.preview, checked.visualToken);
     // Only this host projection can expose initial-save controls. The shared
     // display reader and native card retain their independent canSave:false.
-    const display = canSave ? Object.freeze({ ...checked, canSave: true }) : checked;
+    const visualEdit = this.controller.getVisualEdit?.();
+    const display = visualEdit ? Object.freeze({ ...checked, visualEdit }) :
+      canSave ? Object.freeze({ ...checked, canSave: true }) : checked;
     if (!this.isCurrent() || view.visualToken !== this.controller.getView().visualToken) return null;
     const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider, handle) : null;
     const onPost = canSave && this.canOpenSavedAction('post', display.preview.renderer_version)

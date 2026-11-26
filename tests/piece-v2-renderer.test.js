@@ -1139,9 +1139,9 @@ test('immutable v1 geometry, colors and discrete type scales cover all formats/r
     assert.equal(input.quota, undefined); assert.equal(input.renderer_version, undefined);
   }
 });
-test('actual modal integration passes the checked display and retains selectable canonical text', async () => {
+test('actual modal integration only accepts save fit for the checked display and retains selectable canonical text', async () => {
   const source = fs.readFileSync(path.join(ROOT, 'components/piece/PiecePreviewModal.js'), 'utf8');
-  assert.match(source, /element\(PieceVisualCard, \{ display, onSaveFitChange, colors, ui, showInspectionLabels: false \}\)/);
+  assert.match(source, /element\(PieceVisualCard, \{ display: picture, onSaveFitChange: picture === baseDisplay \? onSaveFitChange : null,/);
   assert.match(source, /testID: 'piece-canonical-text', selectable: true/);
 });
 test('same native Text instances stay hidden until every paragraph and branding supplies both events', async () => {
@@ -3071,6 +3071,69 @@ test('bitmap preview has its own native wholecanvas, hidden source Texts and loc
   assert.ok(h.find('piece-bitmap-canvas')); assert.equal(h.input().candidateProfile, bitmapProfile);
   assert.ok(h.nodes(h.render()).some(n => n.props.style?.left === h.input().margin &&
     n.props.style?.width === h.input().contentWidth && n.props.style?.opacity === 0));
+});
+test('an appearance-only iOS edit reuses line breaks and validates a fresh bitmap before saving', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const before = { ...sample(), renderer_version: version };
+  const h = bitmapHarness(v => v, { packet: copy(before), version });
+  await finishBitmap(h);
+  const oldFit = h.fit(), oldPlan = h.card.state.measurement.plan;
+  const candidateCalls = h.candidateCalls.length, oldNative = h.bitmapCalls[0];
+  const after = copy(before), nextToken = Object.freeze({});
+  after.preview_revision++;
+  after.row_version++;
+  after.visual_recipe.theme.theme_id = 'quiet_night';
+  after.visual_recipe_hash = hash(JSON.stringify(canonical(after.visual_recipe)));
+  h.card.props = { ...h.card.props, display: { ...display(after), visualToken: nextToken } };
+  h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+  assert.equal(h.card.state.measurement.phase, 'measuring');
+  assert.equal(h.card.state.measurement.plan, oldPlan);
+  assert.equal(h.fit(), undefined);
+  assert.equal(oldFit.isCurrent(before, h.token), false);
+  await finishBitmap(h);
+  const newNative = h.bitmapCalls.at(-1);
+  assert.equal(h.candidateCalls.length, candidateCalls);
+  assert.equal(h.bitmapCalls.length, 2);
+  assert.notEqual(newNative.preview_key, oldNative.preview_key);
+  assert.notEqual(newNative.binding_token, oldNative.binding_token);
+  assert.equal(h.fit().isCurrent(after, nextToken), true);
+  assert.equal(h.fit().isCurrent(before, h.token), false);
+  const fresh = bitmapHarness(v => v, { packet: copy(after), version });
+  await finishBitmap(fresh);
+  assert.deepEqual(copy(newNative.rows), copy(fresh.bitmapCalls[0].rows));
+  assert.deepEqual(copy(h.input().colors), copy(fresh.input().colors));
+  h.card.componentWillUnmount();
+  fresh.card.componentWillUnmount();
+});
+test('a changed layout or rejected reused rows starts the ordinary candidate measurement', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const replace = (h, packet, ratio) => {
+    const latest = copy(packet);
+    latest.preview_revision++;
+    latest.row_version++;
+    latest.visual_recipe.aspect_ratio = ratio;
+    latest.visual_recipe.theme.theme_id = 'quiet_night';
+    latest.visual_recipe_hash = hash(JSON.stringify(canonical(latest.visual_recipe)));
+    h.card.props = { ...h.card.props, display: { ...display(latest), visualToken: Object.freeze({}) } };
+    h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+  };
+  for (const ratio of ['4:5', '9:16']) {
+    const packet = { ...sample(), renderer_version: version };
+    const h = bitmapHarness(v => v, { packet: copy(packet), version });
+    await finishBitmap(h);
+    replace(h, packet, ratio);
+    if (ratio === '4:5') {
+      assert.equal(h.card.state.measurement.phase, 'measuring');
+      sendBlock(h, 0, { lines: [{ text: 'Wrong native row', x: 0, y: 0, width: 1, height: 1 }] });
+    }
+    assert.equal(h.card.state.measurement.phase, 'planning');
+    assert.equal(h.fit(), undefined);
+    const count = h.candidateCalls.length;
+    await finishBitmap(h);
+    assert.ok(h.candidateCalls.length > count);
+    assert.ok(h.fit());
+    h.card.componentWillUnmount();
+  }
 });
 test('bitmap closed decoder rejects unknown, missing, nonfinite, wrong identity and fabricated overflow', async () => {
   for (const mutate of [v => ({ ...v, extra: 1 }), v => { delete v.checked; return v; },
