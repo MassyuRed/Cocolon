@@ -23,9 +23,13 @@ const monthLabel = value => value ? `${value.slice(0, 4)}年${Number(value.slice
 const REFRESH_POLL_MS = 3000;
 const pendingRefresh = value => value === 'queued' || value === 'running';
 const mapScope = row => row ? `${row.id}:${row.map_subscription_tier || ''}:${!!row.map_plan_scoped}` : null;
+const insufficientAnalysis = data => data.reason === 'insufficient_input'
+  || ['analysis_insufficient_input', 'analysis_primary_structure_unavailable'].includes(data.skip_reason);
 function readRefreshStatus(data) {
   const value = data?.refresh_status;
-  if (value == null || ['queued', 'running', 'failed'].includes(value)) return value || null;
+  if (value == null || ['queued', 'running', 'failed'].includes(value)) {
+    return value === 'failed' && insufficientAnalysis(data) ? null : value || null;
+  }
   throw new Error('analysis_refresh_status_invalid');
 }
 const temporarilyUnavailable = error => {
@@ -107,7 +111,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       }
     };
     try {
-      let row, now = null, comparisonFailed = false, refreshStatus = null, mapSubscriptionTier;
+      let row, now = null, comparisonFailed = false, insufficient = false, refreshStatus = null, mapSubscriptionTier;
       if (reportId) {
         row = await readDetail(reportId, month);
         if (!active()) return;
@@ -119,7 +123,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         row = checkedCurrentResult(data);
         refreshStatus = readRefreshStatus(data);
         if (!row) {
-          if (active()) setState({ key, empty: true, insufficient: data.reason === 'insufficient_input', coverage: data?.map_context, refreshStatus, mapSubscriptionTier });
+          if (active()) setState({ key, empty: true, insufficient: insufficientAnalysis(data), coverage: data?.map_context, refreshStatus, mapSubscriptionTier });
           return;
         }
       }
@@ -141,6 +145,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
           if (currentTier !== mapSubscriptionTier) throw new Error('analysis_map_access_changed');
           const current = checkedCurrentResult(data);
           refreshStatus = readRefreshStatus(data);
+          insufficient = !current && insufficientAnalysis(data);
           now = await restoreSemanticMap(current);
         } catch (error) {
           if (!active()) return;
@@ -149,7 +154,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         }
       }
       if (active()) {
-        setState({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed, refreshStatus, mapSubscriptionTier });
+        setState({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed, insufficient, refreshStatus, mapSubscriptionTier });
       }
     } catch (error) {
       if (active()) setState(previous => previous.key === key && previous.row && temporarilyUnavailable(error)
@@ -220,8 +225,9 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
           await load(compareRef.current, false, true);
           return;
         }
-        if (stateRef.current.refreshStatus !== refreshStatus || stateRef.current.refreshError) {
-          setState(previous => previous.key === key ? { ...previous, refreshStatus, refreshError: false } : previous);
+        const insufficient = !displayed && insufficientAnalysis(data);
+        if (stateRef.current.refreshStatus !== refreshStatus || stateRef.current.insufficient !== insufficient || stateRef.current.refreshError) {
+          setState(previous => previous.key === key ? { ...previous, insufficient, refreshStatus, refreshError: false } : previous);
         }
         if (pendingRefresh(refreshStatus)) schedule();
       } catch (error) {
@@ -294,6 +300,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const showCurrentStatus = !reportId || compare;
   const displayedCurrent = reportId ? state.now : state.row;
   const refreshing = showCurrentStatus && pendingRefresh(state.refreshStatus);
+  const noAnalysis = showCurrentStatus && !displayedCurrent && state.insufficient && !state.loading && !refreshing;
+  const emptyCurrentAnalysis = noAnalysis && !reportId;
   const refreshFailed = showCurrentStatus && state.refreshStatus === 'failed';
   const retryUpdate = !reportId && refreshFailed;
   const canRetry = refreshFailed || state.refreshError || state.error || state.comparisonFailed;
@@ -306,7 +314,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       <Text style={[styles.title, { color: colors.TITLE_GOLD }]}>{reportId ? `${monthLabel(month)}のわたしマップ` : '今のわたしマップ'}</Text>
       <View style={{ width: 44 }} />
     </View> : null}
-    {!reportId ? renderLatestUpdateLabel?.(visible ? displayedCurrent?.generated_at : null) : null}
+    {!reportId && !(visible && emptyCurrentAnalysis) ? renderLatestUpdateLabel?.(visible ? displayedCurrent?.generated_at : null) : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
       {visible && state.row ? <>
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時：{monthLabel(month)}</Text> : null}
@@ -340,15 +348,16 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       {showMapCorrection && correctionNotice?.key === key ? <Text style={[styles.bodyText, { color: ink }]} accessibilityLiveRegion="polite">
         {correctionNotice.text}
       </Text> : null}
-      {visible && state.empty && !refreshing ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
-      {visible && compare && state.comparisonUnavailable && !refreshing ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
+      {visible && noAnalysis ? <Text style={[styles.bodyText, { color: ink }]}>分析に必要な情報が足りていません。</Text> : null}
+      {visible && state.empty && !state.loading && !refreshing && !emptyCurrentAnalysis ? <><Text style={[styles.bodyText, { color: ink }]}>現在表示できるわたしマップはありません。</Text>{about ? coverage(state.coverage) : null}</> : null}
+      {visible && compare && state.comparisonUnavailable && !refreshing && !noAnalysis ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
         {state.comparisonFailed
           ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
           : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
       </Text> : null}
-      {visible && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
-      {visible && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(viewerTier)}</Text> : null}
-      {visible && about && onOpenGuide ? <CocolonButton variant="secondary" title="分析の使い方を見る" onPress={onOpenGuide} /> : null}
+      {visible && !emptyCurrentAnalysis && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
+      {visible && !emptyCurrentAnalysis && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(viewerTier)}</Text> : null}
+      {visible && !emptyCurrentAnalysis && about && onOpenGuide ? <CocolonButton variant="secondary" title="分析の使い方を見る" onPress={onOpenGuide} /> : null}
       {visible && !state.loading && !refreshing && canRetry ? <CocolonButton variant="secondary"
         onPress={() => load(compare, retryUpdate)}
         title={retryUpdate ? '更新を再試行' : '再取得'} /> : null}

@@ -833,6 +833,48 @@ test('an empty queued map waits without a blank-result error and offers explicit
   await act(async()=>view.unmount());
 });
 
+test('an empty current map with insufficient information renders only the requested analysis message', async () => {
+  for (const skip_reason of ['analysis_primary_structure_unavailable', 'analysis_insufficient_input']) {
+    const empty = { ...latest(), report_id: null, has_visible_content: false, meta: null, content_text: null,
+      map_context: null, refresh_status: 'failed', skip_reason };
+    const h = harness(async () => empty);
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    let view;
+    await act(async () => {
+      view = Renderer.create(React.createElement(Screen, { embedded: true, hideHeader: true,
+        renderLatestUpdateLabel: () => React.createElement('Text', null, '最新更新日：--') }));
+    });
+    assert.deepEqual(view.root.findAllByType('Text').map(node => node.props.children), ['分析に必要な情報が足りていません。']);
+    assert.equal(view.root.findAllByType('TouchableOpacity').length, 0);
+    await act(async () => view.unmount());
+  }
+});
+
+test('polling presents insufficient analysis without retry and preserves a retained current map', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  for (const hasVisible of [false, true]) {
+    const noReport = { ...latest(), report_id: null, has_visible_content: false, meta: null,
+      content_text: null, map_context: null };
+    const h = harness(async url => url.endsWith('/latest/status')
+      ? { status: 'ok', version_key: hasVisible ? projection.projection_of : null, has_visible_content: hasVisible,
+        refresh_status: 'failed', skip_reason: 'analysis_primary_structure_unavailable' }
+      : { ...(hasVisible ? latest() : noReport), refresh_status: 'queued' });
+    const Screen = h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+    let view;
+    await act(async () => { view = Renderer.create(React.createElement(Screen)); });
+    assert(JSON.stringify(view.toJSON()).includes('わたしマップを更新中です。'));
+    await act(async () => t.mock.timers.tick(3000));
+    const json = JSON.stringify(view.toJSON());
+    assert.equal(json.includes(projection.nodes[0].visible_label), hasVisible);
+    assert.equal(json.includes('分析に必要な情報が足りていません。'), !hasVisible);
+    assert(!json.includes('わたしマップを更新中です。'));
+    assert(!json.includes('更新結果を取得できませんでした。'));
+    assert(!button(view, '更新を再試行'));
+    assert.equal(h.calls.length, 2);
+    await act(async () => view.unmount());
+  }
+});
+
 test('analysis tab displays the update date from its newly retrieved current map', async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });
   const map = copy(semantic);
