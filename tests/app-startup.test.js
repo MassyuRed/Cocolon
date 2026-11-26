@@ -73,7 +73,7 @@ function renderTutorial(entry, calls) {
   return Renderer.create(React.createElement(Screen, { navigation, route: { params: { entry } } }));
 }
 
-test('Emlis tutorial carries a sample reply, saved image and practice post through the analysis and returns Home', async () => {
+test('Emlis tutorial carries a sample reply, saved image, practice post and emotion notification through the analysis', async () => {
   const calls = [];
   let view;
   await act(async () => { view = renderTutorial('first', calls); });
@@ -110,10 +110,30 @@ test('Emlis tutorial carries a sample reply, saved image and practice post throu
   await press(byId('emlis-tutorial-open-library-piece'));
   assert.equal(color(), selectedColor);
   await press(byId('emlis-tutorial-open-post'));
-  assert.ok(includesText('フォロー'));
+  assert.ok(includesText('フォローした相手があなたに公開している投稿や感情通知'));
+  assert.equal(byId('emlis-tutorial-tab-posts').props.accessibilityState.selected, true);
+  assert.ok(!byId('emlis-tutorial-notification-feed'));
+  assert.ok(includesText('かれん'));
+  assert.ok(includesText('少しだけ早く起きて'));
+  assert.ok(includesText('自分が投稿したピースと、フォロー中の人があなたに公開したピース'));
   assert.ok(!includesText('自分の投稿（練習）'));
   await press(byId('emlis-tutorial-practice-post'));
   assert.ok(includesText('自分の投稿（練習）'));
+  assert.ok(includesText('かれん'));
+  assert.ok(byId('emlis-tutorial-open-chart').props.disabled);
+  await press(byId('emlis-tutorial-tab-notifications'));
+  assert.equal(byId('emlis-tutorial-tab-notifications').props.accessibilityState.selected, true);
+  assert.ok(byId('emlis-tutorial-notification-feed'));
+  assert.ok(includesText('あなたに公開した感情入力の通知が届きます'));
+  assert.ok(includesText('かれん'));
+  assert.ok(includesText('11/26 08:10'));
+  assert.ok(includesText('平穏（中）'));
+  assert.ok(!includesText('少しだけ早く起きて'));
+  assert.deepEqual(calls, []);
+  await press(byId('emlis-tutorial-tab-posts'));
+  assert.ok(includesText('自分の投稿（練習）'));
+  assert.ok(includesText('かれん'));
+  await press(byId('emlis-tutorial-tab-notifications'));
   await press(button('分析を見てみる'));
 
   assert.ok(byId('emlis-tutorial-open-map').props.disabled);
@@ -125,7 +145,7 @@ test('Emlis tutorial carries a sample reply, saved image and practice post throu
   assert.ok(byId('emlis-tutorial-map-diagram'));
   await press(byId('emlis-tutorial-open-summary'));
   assert.ok(includesText('Emlisの使い方'));
-  assert.ok(includesText('投稿するとフォロワーに届けられる'));
+  assert.ok(includesText('投稿や感情通知を見る'));
   assert.deepEqual(calls, []);
   await press(button('自分の記録をはじめる'));
   assert.deepEqual(calls, ['complete', 'home']);

@@ -11,10 +11,24 @@ import {
 } from "../../features/piece/piecePalette";
 import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
+import NexusEmotionLogSection from "../nexus/NexusEmotionLogSection";
 
 const DEFAULT_PIECE_THEME = PIECE_LEGACY_THEME_IDS[0];
 const PIECE_TEXT = "先の約束を守れる範囲で、同僚の資料の確認だけを引き受けました。手伝うこともできて、少しほっとしました。";
 const FOLLOWED_POST_TEXT = "朝に窓を開けると、空気がひんやりしていました。少しだけ早く起きて、ゆっくりお茶を飲みました。";
+const FOLLOWED_PERSON = "かれん";
+const TUTORIAL_FEED_TABS = [
+  { id: "posts", label: "投稿" },
+  { id: "notifications", label: "感情通知" },
+];
+const SAMPLE_EMOTION_LOG = {
+  items: [{
+    id: "tutorial-followed-emotion",
+    ownerName: FOLLOWED_PERSON,
+    timeLabel: "11/26 08:10",
+    items: [{ type: "平穏", strength: "medium" }],
+  }],
+};
 
 const CHART_EMOTIONS = {
   joy: { label: "喜び", color: "#D4AA45" },
@@ -121,14 +135,17 @@ function TutorialChart({ styles, selectedDay, setSelectedDay }) {
 
 export default function EmlisTutorialResults({ stage, onAdvance }) {
   const { colors, themeName } = useTheme();
-  const styles = useMemo(() => makeStyles(colors, makeUiTokens(colors, themeName)), [colors, themeName]);
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => makeStyles(colors, ui), [colors, ui]);
   const [pieceTheme, setPieceTheme] = useState(DEFAULT_PIECE_THEME);
   const [savedPieceTheme, setSavedPieceTheme] = useState(DEFAULT_PIECE_THEME);
   const [libraryPreview, setLibraryPreview] = useState("unopened");
   const [practicePost, setPracticePost] = useState(false);
+  const [notificationPreview, setNotificationPreview] = useState("unopened");
   const [selectedDay, setSelectedDay] = useState(null);
   const [mapDiagram, setMapDiagram] = useState("unopened");
   const libraryOpen = libraryPreview === "open";
+  const notificationsOpen = notificationPreview === "open";
   const mapOpen = mapDiagram === "open";
 
   if (stage === "piece") {
@@ -201,26 +218,68 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
   if (stage === "post") {
     return (
       <View style={styles.stage}>
-        <Text accessibilityRole="header" style={styles.title}>ピースの投稿</Text>
-        <Text style={styles.body}>
-          投稿した本文は、あなたと、あなたが公開を許可したフォロワーに表示されます。
-        </Text>
-        <Text style={styles.caption}>気になる人をフォローすると、その人があなたに公開している投稿をここで読めます。</Text>
-        {!practicePost ? (
-          <CocolonButton variant="secondary" testID="emlis-tutorial-practice-post" onPress={() => setPracticePost(true)}>
-            練習で投稿する
-          </CocolonButton>
-        ) : (
-          <Text accessibilityLiveRegion="polite" style={styles.caption}>
-            練習のピースが、この見本の一覧に加わりました。
-          </Text>
-        )}
-        <View style={styles.card} testID="emlis-tutorial-post-feed">
-          <Text accessibilityRole="header" style={styles.heading}>投稿の見本</Text>
-          {practicePost ? <ExamplePost name="自分の投稿（練習）" text={PIECE_TEXT} styles={styles} color={colors.TITLE_GOLD} /> : null}
-          <ExamplePost name="フォロー中の人（見本）" text={FOLLOWED_POST_TEXT} styles={styles} color={colors.TITLE_GOLD} />
+        <Text accessibilityRole="header" style={styles.title}>ピース</Text>
+        <Text style={styles.body}>フォローした相手があなたに公開している投稿や感情通知を、ピース画面で見られます。</Text>
+        <View style={styles.feedTabs}>
+          {TUTORIAL_FEED_TABS.map(({ id, label }) => {
+            const opensNotifications = id === "notifications";
+            const selected = opensNotifications === notificationsOpen;
+            return (
+              <CocolonPressable
+                key={id}
+                containerStyle={styles.feedTabContainer}
+                style={[styles.feedTab, selected && styles.feedTabSelected]}
+                accessibilityRole="tab"
+                accessibilityState={{ selected }}
+                testID={`emlis-tutorial-tab-${id}`}
+                onPress={() => setNotificationPreview((current) => (
+                  opensNotifications ? "open" : current === "open" ? "seen" : current
+                ))}
+              >
+                <Text style={[styles.label, styles.feedTabText, selected && styles.feedTabTextSelected]}>{label}</Text>
+              </CocolonPressable>
+            );
+          })}
         </View>
-        <CocolonButton testID="emlis-tutorial-open-chart" disabled={!practicePost} onPress={onAdvance}>
+        {notificationsOpen ? (
+          <>
+            <Text style={styles.caption}>
+              受信をオンにしていると、フォロー中の人があなたに公開した感情入力の通知が届きます。ここで感情・強さ・時刻を確認できます。
+            </Text>
+            <View style={styles.card} testID="emlis-tutorial-notification-feed">
+              <Text accessibilityRole="header" style={styles.heading}>感情通知の見本</Text>
+              <NexusEmotionLogSection emotionLogState={SAMPLE_EMOTION_LOG} styles={styles} colors={colors} ui={ui} />
+            </View>
+            {!practicePost ? <Text style={styles.caption}>「投稿」で、練習のピースを一覧に加えてみましょう。</Text> : null}
+          </>
+        ) : (
+          <>
+            <Text style={styles.caption}>
+              自分が投稿したピースと、フォロー中の人があなたに公開したピースを読めます。自分が投稿すると、公開を許可したフォロワーにも届きます。
+            </Text>
+            {!practicePost ? (
+              <CocolonButton variant="secondary" testID="emlis-tutorial-practice-post" onPress={() => setPracticePost(true)}>
+                練習で投稿する
+              </CocolonButton>
+            ) : (
+              <Text accessibilityLiveRegion="polite" style={styles.caption}>
+                {notificationPreview === "unopened"
+                  ? "練習のピースが一覧に加わりました。次は「感情通知」を開いてみましょう。"
+                  : "練習のピースが、この見本の一覧に加わりました。"}
+              </Text>
+            )}
+            <View style={styles.card} testID="emlis-tutorial-post-feed">
+              <Text accessibilityRole="header" style={styles.heading}>投稿の見本</Text>
+              {practicePost ? <ExamplePost name="自分の投稿（練習）" text={PIECE_TEXT} styles={styles} color={colors.TITLE_GOLD} /> : null}
+              <ExamplePost name={FOLLOWED_PERSON} text={FOLLOWED_POST_TEXT} styles={styles} color={colors.TITLE_GOLD} />
+            </View>
+          </>
+        )}
+        <CocolonButton
+          testID="emlis-tutorial-open-chart"
+          disabled={!practicePost || notificationPreview === "unopened"}
+          onPress={onAdvance}
+        >
           分析を見てみる
         </CocolonButton>
       </View>
@@ -314,6 +373,22 @@ function makeStyles(colors, ui) {
       backgroundColor: colors.FIELD_BG,
     },
     post: { gap: 6, borderTopWidth: 1, borderColor: colors.CARD_BORDER, paddingTop: 12 },
+    feedTabs: {
+      flexDirection: "row", gap: 4, padding: 4, borderWidth: 1,
+      borderColor: colors.CARD_BORDER, borderRadius: ui.radius.card, backgroundColor: colors.FIELD_BG,
+    },
+    feedTabContainer: { flex: 1, minWidth: 0 },
+    feedTab: { alignItems: "center", justifyContent: "center", minHeight: 48, padding: 8, borderRadius: ui.radius.xl },
+    feedTabSelected: { backgroundColor: colors.GOLD_BUTTON },
+    feedTabText: { textAlign: "center" },
+    feedTabTextSelected: { color: colors.ACCENT_TEXT },
+    emotionLogRow: { gap: 10, paddingTop: 12, borderTopWidth: 1, borderColor: colors.CARD_BORDER },
+    emotionLogHeaderRow: { gap: 4 },
+    emotionLogName: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT },
+    emotionLogTime: { ...ui.typography.meta, color: colors.TEXT_SUBTLE },
+    emotionLogBadgeRow: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
+    emotionLogBadge: { paddingVertical: 8, paddingHorizontal: 12, borderRadius: ui.radius.pill },
+    emotionLogBadgeText: { ...ui.typography.description },
     plot: { flexDirection: "row", alignItems: "flex-end" },
     dayContainer: { flex: 1, minWidth: 0 },
     day: { alignItems: "center", paddingVertical: 8, borderRadius: ui.radius.sm, gap: 4 },

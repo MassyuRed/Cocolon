@@ -71,7 +71,7 @@ export default function GuideRichText({ blocks = [], onPressTerm }) {
 
         if (type === "h2") {
           return (
-            <Text key={`block-${index}`} style={styles.heading}>
+            <Text key={`block-${index}`} accessibilityRole="header" style={styles.heading}>
               {buildInlineNodes(block?.text, onPressTerm, styles, `heading-${index}`)}
             </Text>
           );

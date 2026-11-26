@@ -46,10 +46,6 @@ export default function GuideTermModal({
       <SafeAreaView edges={["top", "bottom", "left", "right"]} style={[styles.backdrop, { backgroundColor: "transparent" }]}>
         <View style={styles.card}>
           <View style={styles.headerRow}>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>TIP</Text>
-            </View>
-
             <Pressable
               accessibilityRole="button"
               accessibilityLabel="用語説明を閉じる"
@@ -73,7 +69,7 @@ export default function GuideTermModal({
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
-            <Text style={styles.termTitle}>{term?.display || ""}</Text>
+            <Text accessibilityRole="header" style={styles.termTitle}>{term?.display || ""}</Text>
             {term?.reading ? (
               <Text style={styles.readingText}>{term.reading}</Text>
             ) : null}
@@ -84,7 +80,6 @@ export default function GuideTermModal({
 
             {term?.longDef ? (
               <View style={styles.sectionBlock}>
-                <Text style={styles.sectionTitle}>説明</Text>
                 <Text style={styles.bodyText}>{term.longDef}</Text>
               </View>
             ) : null}
@@ -169,22 +164,9 @@ function createStyles(colors, ui) {
     headerRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
       marginBottom: 12,
       gap: 8,
-    },
-    badge: {
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
-      backgroundColor: colors.SURFACE_TONAL,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      maxWidth: '100%',
-    },
-    badgeText: {
-      color: colors.ON_SURFACE_TONAL,
-      letterSpacing: 0,
     },
     closeIconButton: {
       width: 44,
@@ -287,5 +269,5 @@ function createStyles(colors, ui) {
       color: colors.TEXT_ON_LIGHT,
       textAlign: 'center',
     },
-  }, ui, {"badgeText":"meta","termTitle":"modalTitle","readingText":"description","shortDefText":"body","sectionTitle":"sectionTitle","bodyText":"body","exampleBullet":"body","exampleText":"body","relatedTermChipText":"button","closeButtonText":"button"}));
+  }, ui, {"termTitle":"modalTitle","readingText":"description","shortDefText":"body","sectionTitle":"sectionTitle","bodyText":"body","exampleBullet":"body","exampleText":"body","relatedTermChipText":"button","closeButtonText":"button"}));
 }

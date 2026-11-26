@@ -2810,15 +2810,15 @@ test('Kokoro graph uses live periods for all plans and excludes the old report f
   ], 'live graphs have no report history, report body or paid tier gate');
 
   assertIncludes(guide, [
-    'こころグラフ（日）・こころグラフ（週）・こころグラフ（月）',
+    '「今日・週・月」で切り替えます',
     '今日の感情',
     '日・週・月のグラフは全プランで見られます。',
-    '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
+    '[[term:self_analysis|わたしマップ]]',
   ], 'guide describes the Free graphs and retains the map');
 
   assertIncludes(terms, [
-    'こころグラフ',
-    '感情入力をもとに、こころグラフ（日/週/月）を見る分析です。',
+    'display: "こころグラフ"',
+    '「今日・週・月」を切り替えて、記録した感情とその強さの集計を全プランで見られます。',
   ], 'guide/termsJa.js graph terms');
 
   assertIncludes(tutorialData, ['export const TUTORIAL_KOKORO_WEATHER'], 'tutorial has illustrative graph data');
@@ -3070,8 +3070,12 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     'わたしマップやピースで触れると良さそうな論点',
   ], 'Late copy surfaces use watashi map naming');
 
-  assertIncludes(guide + terms + iap + tutorialOverlay + access + formatters + renderer, [
-    'わたしマップは性格タイプを決めるものではなく、入力から見えた場面ごとの役割と行動パターンを整理する場所です。',
+  assertIncludes(guide, [
+    '自分が何を大切にして場面ごとにどう選んできたか',
+    'もしもルートはPremiumプラン限定です。',
+  ], 'Current Map guide describes observed choices and the IF plan limit');
+
+  assertIncludes(terms + iap + tutorialOverlay + access + formatters + renderer, [
     'reading: "わたしマップ"',
     'これは性格タイプではなく、入力から見えた場面ごとの動き方です。',
     'わたしマップで役割スイッチ',

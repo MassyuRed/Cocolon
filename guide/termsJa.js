@@ -7,7 +7,7 @@ export const guideTermsJa = Object.freeze({
     reading: "かんじょうにゅうりょく",
     shortDef: "今の思考・行動・感情をまとめて記録する入力です。",
     longDef:
-      "Cocolon の基本的な記録方法です。思考内容と行動内容を別の欄に記録し、本文はどちらか一方だけでも入力できます。通常の感情は喜び・悲しみ・怒り・不安・平穏から複数選び、選んだ感情ごとに弱・中・強を選びます。内容カテゴリも1つ以上選んで、今の状態を残します。保存した入力は、Emlisの応答、分析、ピース作成につながります。",
+      "「考えたこと・感じたこと」「出来事・行動」のどちらか一方、または両方を書き、感情と内容カテゴリを選んで保存します。",
     examples: [
       "感じたことを書き、感情と強さを選んで保存する",
       "実際に起きた出来事を書き、近い内容カテゴリを選ぶ",
@@ -57,7 +57,7 @@ export const guideTermsJa = Object.freeze({
       "仕事の出来事なら「仕事」を選ぶ",
       "体調や睡眠の話なら「健康」を選ぶ",
     ],
-    relatedTerms: ["emotion_input", "analysis_report"],
+    relatedTerms: ["emotion_input"],
   },
   self_insight_mode: {
     termId: "self_insight_mode",
@@ -65,23 +65,22 @@ export const guideTermsJa = Object.freeze({
     reading: "じこりかい",
     shortDef: "自分についての気づきを残したいときに使う感情項目です。",
     longDef:
-      "自己理解は、喜び・悲しみなどの感情とは別に、自分について分かったことや気づきを残したいときに使います。Home では他の感情と同時に選ばず、単体で選択します。自己理解には強さを選ぶ操作はありません。",
+      "自分について分かったことを残すときに選びます。「自己理解」を一つだけ選び、本文に気づいたことを書きます。",
     examples: [
       "自分の考え方の癖に気づいたときに選ぶ",
       "同じ反応を繰り返す理由が見えたときに残す",
     ],
-    relatedTerms: ["emotion_input", "analysis_report"],
+    relatedTerms: ["emotion_input", "self_analysis"],
   },
   emotion_notifications: {
     termId: "emotion_notifications",
     display: "今回だけ感情通知を送らない",
     reading: "かんじょうつうちをおくらない",
-    shortDef: "その入力をフォロー中ユーザーへ通知しないための設定です。",
+    shortDef: "この記録の感情通知を止める設定です。",
     longDef:
-      "この設定をオンにすると、その入力はフォロー中ユーザー側へ感情通知として送られません。普段は共有しつつ、一部の入力だけ静かに保存したいときに使えます。",
+      "今回の感情入力をフォロワーに知らせずに残したいときは、保存する前にオンにします。",
     examples: [
       "今回は自分の中だけで整理したいときにオンにする",
-      "感情は記録したいが、フォロー中ユーザーへ知らせたくないときに使う",
     ],
     relatedTerms: ["follow", "emotion_log", "emotion_input"],
   },
@@ -96,7 +95,7 @@ export const guideTermsJa = Object.freeze({
   "入力後にEmlisの応答を読む",
   "入力履歴から保存済みの応答を開く"
 ],
-    relatedTerms: ["emotion_input", "analysis_report"],
+    relatedTerms: ["emotion_input", "emotion_input_history"],
   },
   deep_insight: {
     termId: "deep_insight",
@@ -122,7 +121,7 @@ export const guideTermsJa = Object.freeze({
       "最近どんな入力をしていたかを見返す",
       "特定の時期に書いた内容を探す",
     ],
-    relatedTerms: ["emotion_input", "analysis", "analysis_report"],
+    relatedTerms: ["emotion_input", "emlis_reply"],
   },
   analysis_report: {
     termId: "analysis_report",
@@ -143,38 +142,38 @@ export const guideTermsJa = Object.freeze({
     reading: "ぶんせき",
     shortDef: "入力状況、感情分析、わたしマップを振り返る画面です。",
     longDef:
-      "Homeで行った入力から、こころグラフで感情の推移を確認し、わたしマップで場面ごとの役割や行動を振り返る場所です。",
+      "こころグラフで気持ちの変化を、わたしマップで記録から見えた自分の選び方を振り返ります。",
     examples: [
       "今週の感情の推移を見る",
       "わたしマップの履歴を確認する",
     ],
-    relatedTerms: ["emotion_analysis", "self_analysis", "analysis_report"],
+    relatedTerms: ["emotion_analysis", "self_analysis"],
   },
   emotion_analysis: {
     termId: "emotion_analysis",
-    display: "感情分析",
-    reading: "かんじょうぶんせき",
-    shortDef: "感情入力をもとに、こころグラフ（日/週/月）を見る分析です。",
+    display: "こころグラフ",
+    reading: "こころグラフ",
+    shortDef: "記録した感情の変化を見るグラフです。",
     longDef:
-      "感情分析では、Home の入力をもとにこころグラフ（日）・こころグラフ（週）・こころグラフ（月）を切り替えて確認できます。日・週・月のグラフは全プランで見られます。",
+      "「今日・週・月」を切り替えて、記録した感情とその強さの集計を全プランで見られます。",
     examples: [
       "こころグラフ（日）を見る",
       "こころグラフ（週）で1週間の感情の流れを見る",
     ],
-    relatedTerms: ["analysis", "analysis_report", "emotion_input"],
+    relatedTerms: ["analysis", "emotion_input"],
   },
   self_analysis: {
     termId: "self_analysis",
     display: "わたしマップ",
     reading: "わたしマップ",
-    shortDef: "場面ごとの役割と行動パターンを見る分析です。",
+    shortDef: "記録から、自分がどんなことを大切にして選んできたかを振り返る分析です。",
     longDef:
-      "蓄積した入力全体から確認できた場面・役割・考え・行動・結果の構造とルートを見返す場所です。現在の内容は全プラン共通です。月次履歴は当時保存した文章と図を保ち、現在と見比べられます。閲覧範囲はFreeが直近2回分、Plusが12回分、Premiumが全期間です。性格タイプを決めるものではなく、未解析の範囲も表示します。",
+      "蓄積した記録から確認できた選び方を文章や図で見られます。保存された月のマップは、そのときの内容を今のマップと見比べられます。",
     examples: [
   "今のわたしマップを見る",
   "保存されたわたしマップを見返す"
 ],
-    relatedTerms: ["analysis", "analysis_report"],
+    relatedTerms: ["analysis", "emotion_input"],
   },
   piece_screen: {
     termId: "piece_screen",
@@ -195,12 +194,12 @@ export const guideTermsJa = Object.freeze({
     reading: "ピース",
     shortDef: "保存した感情入力から作り、自分で残したり共有したりできる言葉の断片です。",
     longDef:
-      "保存した入力の本文をもとに、必要に応じて読みやすく整えて作るピースです。選択した感情の説明文は追加しません。内容とデザインを確認して非公開で保存し、自分の一覧から見返せます。対応端末では画像として保存・共有できます。外部に保存・共有した画像は、アプリ内で削除・非公開にしても回収できません。",
+      "保存した記録の文章を整えて画像にできます。プレビューで内容やデザインを確認し、非公開で保存できます。",
     examples: [
   "Emlisの応答画面からピースを作る",
-  "自分のPieceを開いて写真に保存する"
+  "「自分のピースを開く」から見返す"
 ],
-    relatedTerms: ["piece_screen", "kyomei", "reaction_history"],
+    relatedTerms: ["piece_screen", "follow"],
   },
   profile_create: {
     termId: "profile_create",
@@ -245,22 +244,22 @@ export const guideTermsJa = Object.freeze({
     termId: "follow",
     display: "フォロー機能",
     reading: "フォローきのう",
-    shortDef: "他ユーザーのピースや感情通知を見やすくするつながりです。",
+    shortDef: "気になる人の投稿や感情通知を受け取るためのつながりです。",
     longDef:
-      "Cocolon では、人とのつながりをフォロー機能で扱います。フォローすると相手のピースを見やすくなり、必要に応じて感情通知も受け取れます。自分のアカウントは非公開にすることもでき、その場合はフォロー時に承認が必要になります。",
+      "相手のアカウント画面からフォローできます。相手があなたに公開したピースの投稿や感情通知は、ピース画面で見られます。",
     examples: [
       "気になるユーザーをフォローしてピースを読む",
       "感情の流れも受け取りたい相手だけ通知をオンにする",
     ],
-    relatedTerms: ["emotion_log", "emotion_notifications", "private_account", "piece"],
+    relatedTerms: ["emotion_log", "emotion_notifications", "piece"],
   },
   emotion_log: {
     termId: "emotion_log",
     display: "感情通知",
     reading: "かんじょうつうち",
-    shortDef: "フォロー中ユーザーの感情入力の流れを確認するための通知です。",
+    shortDef: "フォロー中の人が公開した感情入力を知らせる通知です。",
     longDef:
-      "感情通知では、フォロー中ユーザーがどんな感情を入力していたかを時系列で確認できます。感情通知の画面には感情・強さ・時刻を表示し、メモ本文は表示しません。",
+      "フォロー中の人があなたに感情通知を送ると、ピース画面の「感情通知」で感情・強さ・時刻を確認できます。受け取る相手はフォローリストのベルで選べます。メモ本文は本人の記録に残ります。",
     examples: [
       "最近の相手の気持ちの流れを見る",
       "フォロー中ユーザーごとに通知のON/OFFを切り替える",

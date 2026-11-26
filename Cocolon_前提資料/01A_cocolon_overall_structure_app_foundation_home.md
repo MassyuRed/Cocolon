@@ -349,7 +349,7 @@ revision_date: "2026-06-05"
 ### `Cocolon/screens/EmlisTutorialScreen.js` / `Cocolon/screens/tutorial/EmlisTutorialResults.js`
 - system: 初回体験と設定からの再体験
 - `navigation/MainTabs.js` と `screens/SettingsOtherScreen.js` から、`navigation/InputStackNavigator.js` の `TutorialIntro` を開く。
-- 入力・Emlisの問いと応答・終了時の表は `EmlisTutorialScreen.js`、ピースの保存と投稿の見本・分析は `EmlisTutorialResults.js` が表示する。練習操作は通常の下書き・保存・投稿につながらない。
+- 入力・Emlisの問いと応答・終了時の表は `EmlisTutorialScreen.js`、ピースの保存・投稿と感情通知の見本・分析は `EmlisTutorialResults.js` が表示する。感情通知の表示に `screens/nexus/NexusEmotionLogSection.js` を使う。練習操作は通常の下書き・保存・投稿・通知につながらない。
 - 関連確認: `tests/app-startup.test.js`、`tests/tutorial-owner-race.test.js`、[再設計](designs/ui/Emlis_Tutorial_Redesign_20261126.md)
 
 ### `Cocolon/UnreadContext.js`

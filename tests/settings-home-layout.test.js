@@ -205,7 +205,7 @@ test('loading plan never presents a fabricated Plus subscription',t=>{
   assert.ok(!h.root.root.findAllByType('Text').some(x=>x.props.children==='Plus'));
 });
 
-function mountGuide(t, params) {
+function mountGuide(t, params, viewport = { width: 390, fontScale: 1 }) {
   const actions = [];
   const navigation = { canGoBack: () => true, goBack: () => actions.push('back') };
   const modules = new Map();
@@ -213,13 +213,17 @@ function mountGuide(t, params) {
     Modal: ({ visible, children }) => visible ? React.createElement('Modal', null, children) : null,
     Pressable: 'Pressable', ScrollView: 'ScrollView', StatusBar: 'StatusBar', StyleSheet: { create: x => x },
     Text: 'Text', TouchableOpacity: 'Pressable', View: 'View',
+    useWindowDimensions: () => viewport,
   };
   function load(file) {
     if (!modules.has(file)) {
       modules.set(file, loadSource(file, name => {
         if (name === 'react') return React;
         if (name === 'react-native') return native;
-        if (name === 'react-native-safe-area-context') return { SafeAreaProvider: 'View', SafeAreaView: 'View' };
+        if (name === 'react-native-safe-area-context') return {
+          SafeAreaProvider: 'View', SafeAreaView: 'View',
+          useSafeAreaInsets: () => ({ left: 0, right: 0 }),
+        };
         if (name === '@react-navigation/native') return { useNavigation: () => navigation };
         if (name.endsWith('/Ionicons')) return 'Icon';
         if (name.endsWith('/ThemeContext')) return { useTheme: () => ({ colors, themeName: 'light' }) };
@@ -244,19 +248,27 @@ function mountGuide(t, params) {
 
 test('the manual switches between all four chapters and resets the chapter scroll', t => {
   const h = mountGuide(t);
-  assert.deepEqual(h.tabs().map(tab => tab.props.accessibilityLabel), ['ホーム', '分析', 'ピース', '感情通知']);
-  assert.deepEqual(h.selected(), ['ホーム']);
-  for (const [label, excerpt] of [
-    ['分析', '今日・週・月'],
-    ['ピース', 'ピース'],
-    ['感情通知', 'フォロー中'],
+  assert.deepEqual(h.tabs().map(tab => tab.props.accessibilityLabel), ['感情入力', '分析', 'ピース', 'フォロー機能']);
+  assert.deepEqual(h.selected(), ['感情入力']);
+  for (const [label, excerpts] of [
+    ['感情入力', ['Emlisからの応答と問い', 'Emlisからの問いを受け取る']],
+    ['分析', ['今日・週・月', 'わたしマップ', 'もしもルートはPremiumプラン限定']],
+    ['ピース', ['画像を編集する', 'ロゴの変更はPlus・Premiumプラン限定', '飾りの変更はPremiumプラン限定']],
+    ['フォロー機能', ['フォローする', '自分が投稿したピースと、フォロー中の人があなたに公開したピース', '感情・強さ・時刻']],
   ]) {
     const previousBody = h.root.root.findByType('ScrollView');
     h.press(h.tabs().find(tab => tab.props.accessibilityLabel === label));
     assert.deepEqual(h.selected(), [label]);
-    assert.notEqual(h.root.root.findByType('ScrollView'), previousBody);
-    assert.ok(h.root.root.findByType('ScrollView').findAllByType('Text')
-      .some(node => typeof node.props.children === 'string' && node.props.children.includes(excerpt)));
+    const activeBody = h.root.root.findByType('ScrollView');
+    if (label !== '感情入力') assert.notEqual(activeBody, previousBody);
+    const visibleText = activeBody.findAllByType('Text').map(({ props }) => (
+      React.Children.toArray(props.children).map(child => (
+        typeof child === 'string' ? child : child.props.children
+      )).join('')
+    )).join('\n');
+    for (const excerpt of excerpts) assert.ok(visibleText.includes(excerpt), excerpt);
+    assert.ok(!visibleText.includes('画面の見方'));
+    assert.ok(!visibleText.includes('よく出てくる用語'));
   }
   h.press(h.root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === '戻る'));
   assert.deepEqual(h.actions, ['back']);
@@ -264,7 +276,7 @@ test('the manual switches between all four chapters and resets the chapter scrol
 
 test('manual shortcuts select the requested chapter and the original inline definitions still open', t => {
   const home = mountGuide(t, { screenId: 'home' });
-  assert.deepEqual(home.selected(), ['ホーム']);
+  assert.deepEqual(home.selected(), ['感情入力']);
   const term = home.root.root.findAllByType('Text').find(node => node.props.accessibilityRole === 'link' && node.props.children === '感情入力');
   home.press(term);
   assert.ok(home.text().includes('今の思考・行動・感情をまとめて記録する入力です。'));
@@ -274,8 +286,21 @@ test('manual shortcuts select the requested chapter and the original inline defi
   for (const [params, title] of [
     [{ screenId: 'piece' }, 'ピース'],
     [{ screenId: 'analysis' }, '分析'],
-    [{ screen_id: 'emotion_log' }, '感情通知'],
+    [{ screen_id: 'emotion_log' }, 'フォロー機能'],
   ]) {
     assert.deepEqual(mountGuide(t, params).selected(), [title]);
   }
+});
+
+test('the four chapter tabs make room for Japanese labels at large text sizes', t => {
+  const regular = mountGuide(t);
+  const large = mountGuide(t, undefined, { width: 320, fontScale: 1.6 });
+  for (const tab of regular.tabs()) {
+    assert.ok(tab.props.style({ pressed: false }).some(style => typeof style?.flexBasis === 'number'));
+  }
+  for (const tab of large.tabs()) {
+    assert.ok(tab.props.style({ pressed: false }).some(style => style?.flexBasis === '46%'));
+  }
+  large.press(large.tabs().find(tab => tab.props.accessibilityLabel === 'フォロー機能'));
+  assert.deepEqual(large.selected(), ['フォロー機能']);
 });
