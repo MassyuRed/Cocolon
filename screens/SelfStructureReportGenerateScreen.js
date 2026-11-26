@@ -34,7 +34,8 @@ import CumulativeWatashiMapView from '../components/selfStructure/CumulativeWata
 
 export default function SelfStructureReportGenerateScreen(props) {
   return <CumulativeWatashiMapView onBack={props.onBack} onLatestSeenVersion={props.onLatestSeenVersion}
-    embedded={props.embedded} hideHeader={props.hideHeader} onOpenGuide={props.onOpenGuide} />;
+    renderLatestUpdateLabel={props.renderLatestUpdateLabel} embedded={props.embedded} hideHeader={props.hideHeader}
+    onOpenGuide={props.onOpenGuide} />;
 }
 
 // わたしマップ（Self Structure latest）: latest viewer

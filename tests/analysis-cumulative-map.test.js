@@ -62,7 +62,7 @@ function harness(get) {
       if(name==='react-native')return native;
       if(name==='@react-navigation/native')return {useIsFocused:()=>focus.value};
       if(name==='react-native-svg')return {__esModule:true,default:'Svg',Path:'Path'};
-      if(name==='react-native-safe-area-context')return {SafeAreaView:'SafeAreaView',SafeAreaProvider:'SafeAreaProvider'};
+      if(name==='react-native-safe-area-context')return {SafeAreaView:'SafeAreaView',SafeAreaProvider:'SafeAreaProvider',useSafeAreaInsets:()=>({})};
       if(name.includes('react-native-vector-icons'))return ()=>null;
       if(name.startsWith('.')) {
         let target=path.resolve(path.dirname(f),name);if(!target.endsWith('.js'))target+='.js';
@@ -70,8 +70,11 @@ function harness(get) {
         if(target.endsWith('/SubscriptionContext.js'))return {useSubscription:()=>plan};
         if(target.endsWith('/theme/ThemeContext.js'))return {useTheme:()=>({colors:{},themeName:'light'})};
         if(target.endsWith('/lib/apiClient.js'))return api;
+        if(target.endsWith('/lib/supabase.js')||target.endsWith('/lib/user.js'))return {};
         if(target.endsWith('/ui/applyTypographyTokens.js'))return {applyTypographyTokens:x=>x};
+        if(target.endsWith('/screens/analysisReport/KokoroWeatherTimeline.js'))return ()=>null;
         if(target.endsWith('/components/CocolonBackButton.js'))return ()=>null;
+        if(target.endsWith('/components/CocolonPressable.js'))return 'Pressable';
         if(target.endsWith('/components/CocolonButton.js'))return props=>React.createElement('TouchableOpacity',
           {...props,disabled:!!props.disabled||!!props.loading},React.createElement('Text',null,props.children??props.title));
         return load(path.relative(root,target));
@@ -828,6 +831,44 @@ test('an empty queued map waits without a blank-result error and offers explicit
   await act(async()=>button(view,'更新を再試行').props.onPress());
   assert(h.calls.at(-1)[1].endsWith('?ensure=true&background=true&force=true'));
   await act(async()=>view.unmount());
+});
+
+test('analysis tab displays the update date from its newly retrieved current map', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const map = copy(semantic);
+  const reread = deferred();
+  const empty = { ...latest(), report_id: null, has_visible_content: false, meta: null,
+    content_text: null, map_context: null, refresh_status: 'queued' };
+  const saved = { ...latest(map), generated_at: '2026-11-26T12:00:00Z' };
+  const h = harness(async url => {
+    if (url.endsWith('/latest/status')) {
+      return { status: 'ok', version_key: map.projection_of, has_visible_content: true,
+        generated_at: '2026-10-01T12:00:00Z', refresh_status: null };
+    }
+    return url.includes('ensure=false') ? reread.promise : empty;
+  });
+  const Screen = h.load('screens/AnalysisContentFirstScreen.js').default;
+  const screen = () => React.createElement(Screen, { selfStructureUpdateLabel: '最新更新日：2026/10/01' });
+  let view;
+  await act(async () => { view = Renderer.create(screen()); });
+  await act(async () => view.root.findAllByType('Pressable')
+    .find(node => node.props.accessibilityLabel === 'わたしマップ').props.onPress());
+  const texts = () => view.root.findAllByType('Text').map(node => node.props.children);
+  assert(texts().includes('最新更新日：--'));
+  assert(!texts().includes('最新更新日：2026/10/01'));
+  await act(async () => t.mock.timers.tick(3000));
+  assert(texts().includes('最新更新日：--'));
+  assert(!texts().includes(map.overview.summary));
+  await act(async () => reread.resolve(saved));
+  assert(texts().includes('最新更新日：2026/11/26'));
+  assert(texts().includes(map.overview.summary));
+  assert(!texts().includes('最新更新日：--'));
+  h.plan.loading = true;
+  await act(async () => view.update(screen()));
+  assert(texts().includes('最新更新日：--'));
+  assert(!texts().includes('最新更新日：2026/11/26'));
+  assert(!texts().includes(map.overview.summary));
+  await act(async () => view.unmount());
 });
 
 test('refresh polling stops off-screen and in the background and checks saved state again on return',async t=>{

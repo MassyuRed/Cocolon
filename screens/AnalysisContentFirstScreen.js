@@ -13,6 +13,7 @@ import {
   useAnalysisMenuStyles,
 } from "./AnalysisMenuCommon";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
+import { formatLatestUpdateLabel } from "./analysis/analysisRouteModel";
 
 const ANALYSIS_TABS = [
   { key: "emotion", label: "こころグラフ" },
@@ -290,7 +291,9 @@ export default function AnalysisContentFirstScreen({
         </View>
       ) : (
         <>
-          <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
+          {isTutorialMode ? (
+            <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
+          ) : null}
 
           <View ref={tutorialRefs?.selfReportRef} collapsable={false}>
             {isTutorialMode ? (
@@ -325,6 +328,11 @@ export default function AnalysisContentFirstScreen({
                   showTitle={false}
                   titleOverride="今のわたしマップ"
                   useServerDefaultMode
+                  renderLatestUpdateLabel={generatedAt => (
+                    <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>
+                      {formatLatestUpdateLabel(generatedAt)}
+                    </Text>
+                  )}
                   onLatestSeenVersion={onLatestSeenVersion}
                   onOpenGuide={onOpenGuide}
                 />

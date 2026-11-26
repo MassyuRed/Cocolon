@@ -34,7 +34,8 @@ const temporarilyUnavailable = error => {
     || error?.name === 'TimeoutError'
     || (error?.name === 'TypeError' && /network|fetch/i.test(String(error?.message || '')));
 };
-export default function CumulativeWatashiMapView({ reportId = null, month = null, onBack, onLatestSeenVersion, embedded = false, hideHeader = false, onOpenGuide }) {
+export default function CumulativeWatashiMapView({ reportId = null, month = null, onBack, onLatestSeenVersion,
+  renderLatestUpdateLabel, embedded = false, hideHeader = false, onOpenGuide }) {
   const { session } = useAuth();
   const { tier, loading: planLoading } = useSubscription();
   const focused = useIsFocused();
@@ -305,6 +306,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       <Text style={[styles.title, { color: colors.TITLE_GOLD }]}>{reportId ? `${monthLabel(month)}のわたしマップ` : '今のわたしマップ'}</Text>
       <View style={{ width: 44 }} />
     </View> : null}
+    {!reportId ? renderLatestUpdateLabel?.(visible ? displayedCurrent?.generated_at : null) : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
       {visible && state.row ? <>
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時：{monthLabel(month)}</Text> : null}
