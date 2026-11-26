@@ -1612,3 +1612,11 @@ Piece CIで旧コードの呼び出し位置に依存した試験3件が失敗�
 **わたしマップ。** 既存のv24で、全履歴を一度に処理した際に計画後の送信指示のバイト数が上限を超えたと測定できる場合は、同じ資料を既存の分割・統合経路で一度扱い直す。分割に切り替える前にジョブの実行権を判定し、各元記録と本人の補足・訂正のつながり、保存前の版照合を保つ。記録本文を出さずに、要求準備の段階、残りトークン数、要求のバイト数と上限をログへ残す。従来の本番失敗がこの分割条件に当てはまったかは、前節のログからは区別できない。最終API版の隔離PGlite検査122件とGitHubのAnalysis CIが通過した。項目・関係線の各準備で容量超過になる合成例を保存し、同じレポートIDを再読した。モデル側の503、出力枠の消費、要求組み立ての例外では分割へ切り替えないことも確認した。 [API版](https://github.com/MassyuRed/mashos-api/commit/88aedc7c653733cbf7e7b3750ec43fc0da13ca1f) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45748463790) Renderの同じ版はワーカーが12:52:57 JST、APIが12:54:52にLiveとなった。12:53:03にASTORの起動を確認した。 Renderのリクエストログで公開ヘルスのHTTP 200と未認証のマップ状態取得のHTTP 401を確認した。新ワーカー起動後に対象の更新はまだ始まっておらず、24記録の再生成と保存は未確認。 [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3qpqmc6qcc73bkv5i0) · [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3qqdjl550s73faes30)
 
 **iOS。** Mashの承認で統合版 `7f632b1` の署名・TestFlight送信ワークフロー #90 を12:58:25 JSTに起動した。App Store Connectでの処理と内部配布はMashが担当する。 iOS 1.0（9001）の署名付きArchiveは13:09:33 JST、IPA書き出しは13:09:42、TestFlight送信は13:11:05に成功した。写真ライブラリ用途文言の検査も通過した。Appleでの処理完了、内部配布、本人端末での確認は残る。 [iOSワークフロー](https://github.com/MassyuRed/Cocolon/actions/runs/45752236694)
+
+<a id="watashi-map-production-capacity-recovery-20261126"></a>
+
+### 11.116 わたしマップの本番更新と通知（11/26 JST）
+
+本番 `88aedc7` の数値ログで、13:26:07 JSTに最終関係線の生成指示が51,186バイトとなり、上限49,152バイトを超えた。残りの出力枠は711トークン。分割経路へ切り替えた後、最初の計画要求がHTTP 429を受けた。2回目の試行では13:29:02に同じ段階が51,768バイトとなり、出力枠が627トークン残った状態で再び上限を超えた。分割・統合へ進み、13:38:20に現在版を保存した。
+
+13:38:21に更新ジョブが完了し、24／24記録、12項目、関係線0本の保存版を確認した。現在・詳細・月次の本番読取で同じ保存版を確認し、13:38:23の現在版取得はHTTP 200だった。13:38:25にFCMへの通知1件が成功した。13:38:23の取得ログのアプリ版は8901。本人端末でマップの表示を確認したが、「全体の読み」には日付付きの元記録が重複し、分析の結論と図が出ていなかった。統合時に出た主要構造の候補は採用0件で、通常項目だけでも保存する現行分岐がこの結果を保存した。保存版に主要構造 (`primary_structures`) と構造間の関係 (`structure_relations`) はない。画面は保存された概要を表示する。本文の読み戻し後に見出しの更新日が反映されず、`--` が残ることも確認した。 [ワーカーログ](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/logs) · [APIログ](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/logs)
