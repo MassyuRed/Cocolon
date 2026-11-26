@@ -11,10 +11,7 @@ const ROOT = path.resolve(__dirname, '..');
 const compiled = new Map();
 const tick = async () => { for (let i = 0; i < 20; i++) await Promise.resolve(); };
 const clone = value => JSON.parse(JSON.stringify(value));
-const colors = { TEXT_ON_LIGHT: '#111827', TEXT_SUBTLE: '#6B625C', TITLE_GOLD: '#800020',
-  CARD_BORDER: '#DAD4CB', FIELD_BG: '#FFFFFF', SURFACE_TONAL: '#EFE1DD', GOLD_BUTTON: '#5A1020', ACCENT_TEXT: '#FFFFFF' };
-
-async function mount(t, { hold = false, hookOnly = false, parent = false } = {}) {
+async function mount(t, { hold = false, hookOnly = false, parent = false, themeName = 'light' } = {}) {
   const control = { owner: 'A', generation: 0, tier: 'free', focused: true, period: 'today', anchor: null, revision: 0, hold };
   const calls = [], listeners = new Set(), modules = new Map(), events = [];
   const native = Object.fromEntries(['View', 'Text', 'ActivityIndicator', 'Pressable'].map(name => [name, name]));
@@ -36,15 +33,15 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
       if (name === 'react') return React;
       if (name === 'react-native') return native;
       if (name === 'react-native-svg') return { __esModule: true, default: 'Svg', Circle: 'Circle', G: 'G' };
+      if (name === '@react-native-async-storage/async-storage') return {};
       if (name.includes('Ionicons')) return 'Icon';
       if (name === '@react-navigation/native') return { useIsFocused: () => control.focused };
       const target = path.relative(ROOT, path.resolve(path.dirname(filename), name)) + '.js';
       if (target === 'AuthContext.js') return { useAuth: () => ({ user: control.owner ? { id: control.owner } : null, authOwnerGeneration: control.generation }) };
       if (target === 'SubscriptionContext.js') return { useSubscription: () => ({ tier: control.tier }) };
-      if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors, themeName: 'light' }) };
-      if (target === 'ui/uiTokens.js') return { makeUiTokens: () => ({ motion: {} }) };
+      if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors, themeName }) };
       if (target === 'components/UnreadBadge.js') return { ScreenUnreadBadge: 'Badge' };
-      if (target === 'screens/AnalysisMenuCommon.js') return { AnalysisMenuScroll: 'Scroll', useAnalysisMenuStyles: () => ({ colors, ui: load('ui/uiTokens.js').makeUiTokens(colors, 'light'), themeName: 'light' }) };
+      if (target === 'screens/AnalysisMenuCommon.js') return { AnalysisMenuScroll: 'Scroll', useAnalysisMenuStyles: () => ({ colors, ui, themeName }) };
       if (['screens/AnalysisReportViewerScreen.js', 'screens/SelfStructureReportGenerateScreen.js', 'components/selfStructure/WatashiMapRenderer.js'].includes(target)) return { __esModule: true, default: 'SavedViewer' };
       if (target === 'screens/analysisReport/kokoroWeatherFormatters.js') return { isKokoroWeatherReportRecord: () => false };
       if (target === 'lib/apiClient.js') return { apiGet: (url, options) => {
@@ -68,18 +65,20 @@ async function mount(t, { hold = false, hookOnly = false, parent = false } = {})
     Function('require', 'module', 'exports', 'setTimeout', 'clearTimeout', compiled.get(relative))(requireLocal, module, module.exports, () => 1, () => {});
     modules.set(relative, module.exports); return module.exports;
   }
+  const colors = load('theme/ThemeContext.js').THEME_PALETTES[themeName];
+  const ui = load('ui/uiTokens.js').makeUiTokens(colors, themeName);
   const { useKokoroWeather } = load('screens/analysis/useKokoroWeather.js');
   let output;
   function Host() { output = useKokoroWeather(control.period, control.anchor, control.revision); return null; }
   const Timeline = load('screens/analysisReport/KokoroWeatherTimeline.js').default;
   const Content = parent ? load('screens/AnalysisContentFirstScreen.js').default : null;
-  const element = () => React.createElement(parent ? Content : hookOnly ? Host : Timeline, { colors, ui: {}, period: control.timelinePeriod,
+  const element = () => React.createElement(parent ? Content : hookOnly ? Host : Timeline, { colors, ui, period: control.timelinePeriod,
     onPeriodChange: value => events.push(value), graphOpenRequest: control.graphOpenRequest,
     isTutorialMode: control.isTutorialMode, tutorialStep: control.tutorialStep, tutorialGraphData: fixtures });
   let root;
   await Renderer.act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await Renderer.act(async () => root.unmount()); });
-  const h = { root, calls, control, events, get output() { return output; },
+  const h = { root, calls, control, events, colors, flatten, get output() { return output; },
     async update(values) { Object.assign(control, values); await Renderer.act(async () => { root.update(element()); await tick(); }); },
     async answer(index, data) { await Renderer.act(async () => { calls[index].resolve(clone(data)); await tick(); }); },
     async fail(index) { await Renderer.act(async () => { calls[index].reject(new Error('synthetic failure')); await tick(); }); },
@@ -122,6 +121,38 @@ test('today uses actual API fixture, weighted donut and time-band records; week/
   assert.deepEqual(ticks.filter(node => node.props.children !== ' ').map(node => node.props.children), [1, 8, 15, 22, 31]);
   assert.ok(ticks.every(node => node.props.numberOfLines === 1));
   assert.doesNotMatch(h.text(), /こころ温度|原因|性格|アドバイス/);
+});
+
+test('graph cards and unselected time tiles use visible section borders in light and dark', async t => {
+  for (const themeName of ['default', 'light', 'dark']) {
+    const h = await mount(t, { themeName });
+    const borderWidth = themeName === 'default' ? 0 : 1;
+    const sectionColor = h.colors.SECTION_BORDER;
+    const assertCardBorders = () => {
+      const cards = h.root.root.findAllByType('View').map(node => node.props.style)
+        .filter(style => style?.borderRadius === 26);
+      assert.equal(cards.length, 2);
+      for (const card of cards) {
+        assert.equal(card.borderWidth, borderWidth, themeName);
+        assert.equal(card.borderColor, sectionColor, themeName);
+      }
+    };
+    assertCardBorders();
+    await h.press('朝、6:00–12:00、2件');
+    const bands = h.root.root.findAllByType('Pressable')
+      .filter(node => /、\d+:00–\d+:00、/.test(node.props.accessibilityLabel || ''));
+    assert.equal(bands.length, 4);
+    for (const band of bands) {
+      const style = h.flatten(band.findByType('AnimatedView').props.style);
+      assert.equal(style.borderWidth, 1, themeName);
+      assert.equal(style.borderColor, band.props.accessibilityState.selected
+        ? h.colors.TITLE_GOLD : borderWidth ? sectionColor : 'transparent', themeName);
+    }
+    await h.press('週');
+    assertCardBorders();
+    await h.press('月');
+    assertCardBorders();
+  }
 });
 
 test('a later period response wins when an earlier period completes last', async t => {

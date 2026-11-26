@@ -79,7 +79,7 @@ function SemanticMapDiagram({ projection, nodeRefs, colors, styles, choose, comp
     </View>;
 }
 
-export default function SemanticWatashiMap({ contentJson, mapSubscriptionTier = null, colors, isDark = false, onExploreIf, onCorrectMap }) {
+export default function SemanticWatashiMap({ contentJson, mapSubscriptionTier = null, colors, isDark = false, sectionFrame, onExploreIf, onCorrectMap }) {
   const projection = useMemo(() => readSemanticMapProjection(contentJson, mapSubscriptionTier), [contentJson, mapSubscriptionTier]);
   const [expandedStructure, setExpandedStructure] = useState(null);
   const [selection, setSelection] = useState(null);
@@ -91,7 +91,7 @@ export default function SemanticWatashiMap({ contentJson, mapSubscriptionTier = 
   currentProjection.current = projection?.projection_of;
   ifCallback.current = onExploreIf;
   correctionCallback.current = onCorrectMap;
-  const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
+  const styles = useMemo(() => makeStyles(colors, isDark, sectionFrame), [colors, isDark, sectionFrame]);
   useEffect(() => { pendingAction.current = null; setSelection(null); setExpandedStructure(null); setLinear(false); }, [projection?.projection_of, mapSubscriptionTier]);
   useEffect(() => {
     mounted.current = true;
@@ -238,13 +238,13 @@ export default function SemanticWatashiMap({ contentJson, mapSubscriptionTier = 
   </View>;
 }
 
-function makeStyles(colors, dark) {
+function makeStyles(colors, dark, sectionFrame) {
   const ink = colors?.TEXT_ON_LIGHT || (dark ? '#F9F5EC' : '#17212B');
   const muted = colors?.TEXT_SUBTLE || (dark ? '#D2C7C2' : '#756C66');
   const paper = colors?.PANEL_BG || (dark ? '#20232A' : '#FFFFFF');
   const accent = colors?.TITLE_GOLD || '#800020';
   const tonal = colors?.SURFACE_TONAL || (dark ? '#39232C' : '#EFE1DD');
-  const border = colors?.CARD_BORDER || '#D7D2C9';
+  const border = sectionFrame?.borderColor ?? colors?.CARD_BORDER ?? '#D7D2C9';
   return StyleSheet.create({
     root: { gap: 14 }, intro: { gap: 12, paddingTop: 8 },
     eyebrow: { color: muted, fontSize: 13, lineHeight: 21 },

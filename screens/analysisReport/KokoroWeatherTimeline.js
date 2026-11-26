@@ -138,14 +138,15 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
 }
 
 function createStyles(colors, ui) {
+  const frame = ui?.sectionFrame;
   return StyleSheet.create(applyTypographyTokens({
     root: { width: "100%", maxWidth: 640, alignSelf: "center", marginBottom: 14 },
     periodRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", marginBottom: 16, gap: 4 },
-    tabs: { flexDirection: "row", borderRadius: 24, padding: 3, backgroundColor: colors.FIELD_BG },
+    tabs: { flexDirection: "row", borderRadius: 24, padding: 3, backgroundColor: colors.FIELD_BG, ...frame },
     tab: { minWidth: 44, minHeight: 44, alignItems: "center", justifyContent: "center", paddingHorizontal: 10, borderRadius: 22 },
     activeTab: { backgroundColor: colors.GOLD_BUTTON }, tabText: { color: colors.TEXT_ON_LIGHT }, activeText: { color: colors.ACCENT_TEXT },
     rangeRow: { flexDirection: "row", alignItems: "center" }, arrow: { width: 44, minHeight: 44, alignItems: "center", justifyContent: "center" },
-    card: { backgroundColor: colors.FIELD_BG, borderRadius: 26, padding: 18, marginBottom: 16 },
+    card: { backgroundColor: colors.FIELD_BG, borderRadius: 26, padding: 18, marginBottom: 16, ...frame },
     heading: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 12 }, headingText: { flex: 1 },
     title: { color: colors.TEXT_ON_LIGHT, marginTop: 8 }, body: { color: colors.TEXT_ON_LIGHT, flexShrink: 1 },
     meta: { color: colors.TEXT_SUBTLE }, note: { color: colors.TEXT_SUBTLE, marginVertical: 12 },
@@ -160,7 +161,7 @@ function createStyles(colors, ui) {
     tick: { width: 24, fontSize: 9, color: colors.TEXT_SUBTLE, textAlign: "center", marginTop: 8 },
     section: { color: colors.TEXT_ON_LIGHT, marginBottom: 10, flexShrink: 1 },
     bands: { flexDirection: "row", gap: 5, marginBottom: 16 },
-    bandSlot: { flex: 1, minWidth: 0 }, band: { width: "100%", alignItems: "center", borderRadius: 20, paddingVertical: 12, borderWidth: 1, borderColor: "transparent", backgroundColor: colors.FIELD_BG },
+    bandSlot: { flex: 1, minWidth: 0 }, band: { width: "100%", alignItems: "center", borderRadius: 20, paddingVertical: 12, borderWidth: 1, borderColor: frame?.borderWidth ? frame.borderColor : "transparent", backgroundColor: colors.FIELD_BG },
     selectedBand: { borderColor: colors.TITLE_GOLD, backgroundColor: colors.SURFACE_TONAL },
     bandTitle: { color: colors.TEXT_ON_LIGHT, marginBottom: 8 }, bandCount: { fontSize: 17, color: colors.TEXT_ON_LIGHT },
     bandMeta: { color: colors.TEXT_SUBTLE, fontSize: 10, marginTop: 8, textAlign: "center" },

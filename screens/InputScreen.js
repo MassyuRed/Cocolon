@@ -1368,6 +1368,7 @@ ${String(error?.message || error)}`
 function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
+  const sectionFrame = ui?.sectionFrame?.borderWidth ? ui.sectionFrame : null;
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
@@ -1640,6 +1641,7 @@ function createStyles(COLORS, ui) {
       borderRadius: 24,
       backgroundColor: COLORS.FIELD_BG,
       padding: 16,
+      ...sectionFrame,
     },
     heroCardHeader: {
       flexDirection: "row",
@@ -1674,7 +1676,7 @@ function createStyles(COLORS, ui) {
     heroFieldBlock: {
       paddingVertical: 11,
       borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
+      borderBottomColor: sectionFrame?.borderColor ?? COLORS.CARD_BORDER,
     },
     heroFieldBlockLast: {
       borderBottomWidth: 0,
@@ -1759,6 +1761,7 @@ function createStyles(COLORS, ui) {
     preferenceCardInActionArea: {
       marginTop: 0,
       marginBottom: 8,
+      ...(sectionFrame ? { ...sectionFrame, borderRadius: 16, paddingHorizontal: 12, paddingVertical: 4 } : {}),
     },
 
     /** セクション共通 */
@@ -1900,6 +1903,7 @@ function createStyles(COLORS, ui) {
 
     categorySection: {
       marginBottom: 17,
+      ...(sectionFrame ? { ...sectionFrame, borderRadius: 24, padding: 12 } : {}),
     },
     categoryHeader: {
       flexDirection: "row",
@@ -1931,20 +1935,22 @@ function createStyles(COLORS, ui) {
     },
     categoryChip: {
       paddingVertical: 8,
-      paddingHorizontal: 13,
+      paddingHorizontal: sectionFrame ? 10 : 13,
       borderRadius: 9,
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
       minHeight: 44,
+      ...sectionFrame,
     },
     categoryChipOn: {
       backgroundColor: COLORS.GOLD_BUTTON,
       borderRadius: 20,
+      ...(sectionFrame ? { borderColor: COLORS.TITLE_GOLD } : {}),
     },
     categoryChipDisabled: {
       backgroundColor: COLORS.FIELD_BG,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: sectionFrame?.borderColor ?? COLORS.CARD_BORDER,
     },
     categoryChipText: {
       fontSize: 14,

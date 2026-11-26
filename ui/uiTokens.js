@@ -10,7 +10,8 @@ export const MAX_BUTTON_WIDTH = 520;
 export const DARK_GRAY_DESC = "#4B5563";
 
 export function makeUiTokens(colors, themeName) {
-  const isDark = String(themeName || "").toLowerCase() === "dark";
+  const theme = String(themeName || "").toLowerCase();
+  const isDark = theme === "dark";
 
   return {
     layout: {
@@ -34,6 +35,11 @@ export function makeUiTokens(colors, themeName) {
       card: 24,
       button: 999,
       pill: 999,
+    },
+
+    sectionFrame: {
+      borderWidth: theme === "light" || isDark ? 1 : 0,
+      borderColor: colors.SECTION_BORDER ?? colors.CARD_BORDER,
     },
 
     font: {

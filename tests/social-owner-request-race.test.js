@@ -64,7 +64,6 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     if (p.startsWith('/deep-insight/questions/')) return control.notifiedQuestion;
     if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
     if (p === '/nexus/pieces') return { items: control.pieceFeedItems || [] };
-    if (p === '/nexus/emotion-ranking') return { items: control.emotionRankingItems || [] };
     if (p === '/piece/resonances/pieces') return { items: control.resonanceHistoryItems || [] };
     if (p.startsWith('/nexus/pieces/')) return control.legacyPieceDetail || {};
     if (p === '/notices/history') return control.noticesHistory?.(new URL(url)) ?? { items: [notice], unread_count: 1 };
@@ -137,7 +136,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
         isFeatureEnabled: name => name === 'follower_sharing_enabled' && !!control.followerSharingEnabled,
       }) };
       if (target === 'tutorial/tutorialScenarioData.js') return { TUTORIAL_TOTAL_STEPS: 16, TUTORIAL_PIECES: [] };
-      if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors: options.colors ?? {}, themeName: 'light' }) };
+      if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors: options.colors ?? {}, themeName: options.themeName ?? 'light' }) };
       if (target === 'lib/supabase.js') return { supabase: { auth } };
       if (target === 'lib/user.js') return { getCurrentUserId: async () => control.owner };
       if (target === 'lib/monitoring.js') return { captureApiError: noop };
@@ -540,48 +539,34 @@ test('the opt-in post feed renders new Piece text, preserves old Q&A, and refres
   assert.ok(text().includes(legacyPiece.body));
 });
 
-test('Nexus reuses recent public aggregate data and still rechecks shared posts on return', async t => {
-  const endpoint = '/nexus/emotion-ranking';
-  let now = Date.parse('2026-11-26T14:59:00Z');
-  t.mock.method(Date, 'now', () => now);
-  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
-    holdRead: call => call.path === endpoint,
-  });
-  const count = path => h.calls.filter(call => call.path === path).length;
-  const ranking = () => h.find('NexusTodayEmotionSummary').props.rankingState;
-  const aggregate = h.calls.find(call => call.path === endpoint);
+test('Nexus no longer loads the public emotion aggregate and still rechecks shared posts on return', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js');
+  const countPosts = () => h.calls.filter(call => call.path === '/nexus/pieces').length;
+  const posts = countPosts();
+  assert.ok(posts > 0);
+  assert.equal(h.root.root.findAllByType('NexusTodayEmotionSummary').length, 0);
 
-  await h.navigationEvent('focus');
-  assert.equal(count(endpoint), 1, 'initial focus shares the outstanding aggregate request');
-  await h.resolve(aggregate, { items: [{ emotion: '平穏', count: 2 }] });
-  const posts = count('/nexus/pieces');
   await h.navigationEvent('blur');
   await h.navigationEvent('focus');
-  assert.equal(count(endpoint), 1);
-  assert.equal(count('/nexus/pieces'), posts + 1);
+  assert.equal(countPosts(), posts + 1);
+  assert.ok(!h.calls.some(call => call.path === '/nexus/emotion-ranking'));
+});
 
-  now += 31_000;
-  h.control.holdRead = null;
-  h.control.failRead = call => call.path === endpoint;
-  await h.navigationEvent('focus');
-  assert.equal(count(endpoint), 2);
-  assert.deepEqual(ranking().items, [{ label: '平穏', value: 2 }]);
-  assert.equal(ranking().error, '');
-
-  h.control.failRead = null;
-  h.control.emotionRankingItems = [{ emotion: '喜び', count: 3 }];
-  await h.navigationEvent('focus');
-  assert.equal(count(endpoint), 3, 'a failed refresh leaves the existing reopen retry available');
-  assert.deepEqual(ranking().items, [{ label: '喜び', value: 3 }]);
-
-  now += 28_000; // 23:59:59 JST, still within the recent read window.
-  await h.navigationEvent('focus');
-  assert.equal(count(endpoint), 3);
-  now += 2000;
-  h.control.emotionRankingItems = [];
-  await h.navigationEvent('focus');
-  assert.equal(count(endpoint), 4, 'a new JST day needs a fresh daily aggregate');
-  assert.deepEqual(ranking().items, []);
+test('Nexus tab group uses a full frame in each theme', async t => {
+  for (const [themeName, sectionBorder] of [
+    ['default', '#D7D2C9'], ['light', '#927C4D'], ['dark', '#7084AE'],
+  ]) {
+    const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+      themeName, colors: { SECTION_BORDER: sectionBorder },
+    });
+    const { tabBar, emotionLogCard, simpleCard } = h.find('NexusTabBar').props.styles;
+    for (const edge of ['Top', 'Right', 'Bottom', 'Left']) {
+      assert.equal(tabBar[`border${edge}Width`] ?? tabBar.borderWidth, 1, `${themeName} ${edge}`);
+      assert.equal(tabBar[`border${edge}Color`] ?? tabBar.borderColor, sectionBorder, `${themeName} ${edge}`);
+    }
+    assert.equal(emotionLogCard.borderColor, sectionBorder);
+    assert.equal(simpleCard.borderColor, sectionBorder);
+  }
 });
 
 test('Nexus shares only outstanding unread requests within the current owner scope', async t => {

@@ -608,6 +608,7 @@ export default function SelfStructureReportHistoryScreen({
 }
 
 function createStyles(COLORS, ui) {
+  const sectionBorder = ui.sectionFrame?.borderColor ?? COLORS.CARD_BORDER;
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
   listContent: { width: "100%", maxWidth: 680, alignSelf: "center", paddingHorizontal: 20, paddingBottom: 24 },
@@ -681,7 +682,7 @@ function createStyles(COLORS, ui) {
       marginTop: 10,
       marginBottom: 8,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: sectionBorder,
       borderRadius: 24,
       backgroundColor: COLORS.PANEL_BG,
       padding: 20,
@@ -746,14 +747,14 @@ function createStyles(COLORS, ui) {
       paddingHorizontal: 20,
       paddingVertical: 16,
       borderBottomWidth: 1,
-      borderBottomColor: COLORS.CARD_BORDER,
+      borderBottomColor: sectionBorder,
       width: "100%",
       maxWidth: 640,
       alignSelf: "center",
       minHeight: 44,
       backgroundColor: COLORS.PANEL_BG,
       gap: 12,
-      borderWidth: 1, borderColor: COLORS.CARD_BORDER, borderRadius: 24, marginBottom: 12,
+      borderWidth: 1, borderColor: sectionBorder, borderRadius: 24, marginBottom: 12,
     },
   rowRead: {
 

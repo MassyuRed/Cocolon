@@ -33,7 +33,6 @@ import {
   getNexusResonancePieces,
   getNexusEmotionLog,
   getNexusEmotionLogUnreadStatus,
-  getNexusEmotionRanking,
   getNexusFollowingUsers,
   deleteNexusPiece,
   getNexusPieces,
@@ -42,7 +41,6 @@ import {
   postNexusPieceResonance,
 } from "../lib/nexusApi";
 import NexusHeader from "./nexus/NexusHeader";
-import NexusTodayEmotionSummary from "./nexus/NexusTodayEmotionSummary";
 import NexusTabBar from "./nexus/NexusTabBar";
 import NexusPieceFeedSection from "./nexus/NexusPieceFeedSection";
 import NexusEmotionLogSection from "./nexus/NexusEmotionLogSection";
@@ -60,7 +58,6 @@ import {
   HISTORY_ORDER_OLDEST,
 } from "./nexus/nexusRouteModel";
 import {
-  normalizeEmotionRankingItems,
   normalizeEmotionLogItems,
   normalizeFollowListUsers,
   normalizeSavedPieces,
@@ -80,9 +77,6 @@ import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 const EMPTY_EMOTION_LOG = { loading: false, loaded: false, items: [], error: "" };
 const LOADING_EMOTION_LOG = { ...EMPTY_EMOTION_LOG, loading: true };
 const LOADING_HISTORY = { loading: true, loadedModes: {}, order: null, resonances: [], error: "" };
-const LOADING_RANKING = { loading: true, items: [], error: "" };
-const RANKING_MIN_REFRESH_MS = 30_000;
-const rankingDay = new Intl.DateTimeFormat("en", { timeZone: "Asia/Tokyo", year: "numeric", month: "numeric", day: "numeric" });
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -172,7 +166,6 @@ export default function NexusScreen({ navigation }) {
   const emotionLogReadScope = useMemo(() => ({ ownerRequest, activeTab, isTutorialMode }),
     [ownerRequest, activeTab, isTutorialMode]);
   const readSequences = useRef({ pieces: 0, history: 0, owners: 0, emotions: 0 });
-  const rankingRead = useRef(null);
   const unreadRead = useRef(null);
 
   const tutorialPieceItems = useMemo(
@@ -184,9 +177,6 @@ export default function NexusScreen({ navigation }) {
     tutorialStep >= PIECE_TUTORIAL_STEP_START &&
     tutorialStep <= PIECE_TUTORIAL_STEP_END;
 
-  const [rankingResult, setRankingState] = useState(null);
-  const rankingState = rankingResult?.scope === ownerRequest && rankingResult.day === rankingDay.format(Date.now())
-    ? rankingResult : LOADING_RANKING;
   const [pieceState, setPieceState] = useState({
     loading: true,
     items: [],
@@ -404,51 +394,6 @@ export default function NexusScreen({ navigation }) {
     }
   }, [authInitializing, baseOwnerOptions, isTutorialMode, viewerUserId, ownerRequest, isOwnerCurrent]);
 
-
-  const loadRanking = useCallback(async () => {
-    if (!isOwnerCurrent(ownerRequest)) return;
-    if (isTutorialMode) {
-      rankingRead.current = null;
-      setRankingState(null);
-      return;
-    }
-
-    const now = Date.now();
-    const day = rankingDay.format(now);
-    const current = rankingRead.current;
-    if (current?.scope === ownerRequest && current.day === day &&
-        (current.loading || (current.succeededAt !== null && now >= current.succeededAt &&
-          now - current.succeededAt < RANKING_MIN_REFRESH_MS))) return;
-    const request = { scope: ownerRequest, day, loading: true, succeededAt: null };
-    rankingRead.current = request;
-    const isFresh = () => isOwnerCurrent(ownerRequest) && rankingRead.current === request;
-    try {
-      const json = await getNexusEmotionRanking(3, "day", ownerRequest.options);
-      if (!isFresh()) return;
-      const items = normalizeEmotionRankingItems(json);
-      request.succeededAt = Date.now();
-      setRankingState({
-        scope: ownerRequest,
-        day,
-        loading: false,
-        items,
-        error: "",
-      });
-    } catch (e) {
-      if (!isFresh()) return;
-      console.warn("NexusScreen: loadRanking failed", e);
-      setRankingState((previous) => {
-        const status = Number(e?.status);
-        if (status !== 401 && status !== 403 && previous?.scope === ownerRequest && previous.day === day && !previous.error) {
-          return previous;
-        }
-        return { scope: ownerRequest, day, loading: false, items: [], error: "全体感情を取得できませんでした。画面を開き直すと再試行できます。" };
-      });
-    } finally {
-      request.loading = false;
-    }
-  }, [isTutorialMode, ownerRequest, isOwnerCurrent]);
-
   const loadPieces = useCallback(async () => {
     if (isTutorialMode) {
       setPieceState({
@@ -602,10 +547,6 @@ export default function NexusScreen({ navigation }) {
   );
 
   useEffect(() => {
-    void loadRanking();
-  }, [loadRanking]);
-
-  useEffect(() => {
     if (activeTab === "piece") void loadPieces();
   }, [activeTab, loadPieces]);
 
@@ -728,7 +669,6 @@ export default function NexusScreen({ navigation }) {
     if (!navigation?.addListener) return undefined;
     const unsubscribe = navigation.addListener("focus", () => {
       void refreshNexusUnreadState();
-      void loadRanking();
       void loadOwnerOptions();
       if (activeTab === "piece") void loadPieces();
       if (activeTab === "emotion_log") void loadEmotionLog();
@@ -747,7 +687,7 @@ export default function NexusScreen({ navigation }) {
       unsubscribe?.();
       unsubscribeBlur?.();
     };
-  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadRanking, loadOwnerOptions,
+  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadOwnerOptions,
       loadPieces, loadEmotionLog, loadHistory]);
 
   useEffect(() => {
@@ -1315,13 +1255,6 @@ export default function NexusScreen({ navigation }) {
           handleOpenOwnerHistory={handleOpenOwnerHistory}
         />
 
-        <NexusTodayEmotionSummary
-          visible={!isTutorialMode}
-          rankingState={rankingState}
-          styles={styles}
-          colors={colors}
-        />
-
         <NexusTabBar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -1403,51 +1336,17 @@ function createStyles(COLORS, ui) {
         ownerHistoryButtonText: {
       color: COLORS.ACCENT_TEXT,
     },
-        todayOverallEmotionSummary: {
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
-      borderTopColor: COLORS.CARD_BORDER,
-      borderBottomColor: COLORS.CARD_BORDER,
-      marginBottom: 16,
-      padding: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      borderRadius: 16,
-      backgroundColor: COLORS.FIELD_BG,
-    },
-        todayOverallEmotionHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 8,
-      flexWrap: 'wrap',
-    },
-        todayOverallEmotionIcon: {
-          marginRight: 6,
-        },
-        todayOverallEmotionTitle: {
-      letterSpacing: 0,
-      color: COLORS.TEXT_ON_LIGHT,
-      flexShrink: 1,
-    },
-        todayOverallEmotionText: {
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-        todayOverallEmotionPlaceholder: {
-      color: COLORS.TEXT_SUBTLE,
-    },
         tabBar: {
       flexDirection: "row",
       alignItems: 'stretch',
       justifyContent: "space-between",
-      borderBottomWidth: 0,
-      borderBottomColor: COLORS.CARD_BORDER,
       marginBottom: 16,
       backgroundColor: COLORS.FIELD_BG,
       borderRadius: 24,
       padding: 4,
       gap: 4,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: ui.sectionFrame.borderColor,
     },
         tabItemWrap: {
       flex: 1,
@@ -1466,8 +1365,6 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
       justifyContent: "center",
       paddingBottom: 10,
-      borderBottomWidth: 0,
-      borderBottomColor: "transparent",
       width: "100%",
       minHeight: 48,
       paddingVertical: 10,
@@ -1482,7 +1379,6 @@ function createStyles(COLORS, ui) {
       gap: 4,
     },
         tabLabelWrapActive: {
-      borderBottomColor: 'transparent',
       backgroundColor: COLORS.GOLD_BUTTON,
     },
         tabLabelText: {
@@ -1579,7 +1475,7 @@ function createStyles(COLORS, ui) {
       backgroundColor: COLORS.FIELD_BG,
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: ui.sectionFrame.borderColor,
       paddingVertical: 0,
       shadowColor: "#000",
       shadowOpacity: 0.06,
@@ -1640,7 +1536,7 @@ function createStyles(COLORS, ui) {
         simpleCard: {
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: ui.sectionFrame.borderColor,
       backgroundColor: COLORS.FIELD_BG,
       paddingHorizontal: 20,
       paddingVertical: 16,
@@ -1782,7 +1678,7 @@ function createStyles(COLORS, ui) {
       width: "100%",
     },
       },
-      ui, {"ownerHistoryButtonText":"button","todayOverallEmotionTitle":"description","todayOverallEmotionText":"description","todayOverallEmotionPlaceholder":"description","tabLabelText":"button","ownerFilterButtonText":"button","pieceSortButtonText":"button","emptyText":"description","errorText":"description","subsectionTitle":"sectionTitle","emotionLogName":"body","emotionLogNoEmotion":"description","emotionLogBadgeText":"description","emotionLogTime":"meta","simpleCardTitle":"body","simpleCardMeta":"meta","historySortButtonText":"button","pickerTitle":"modalTitle","pickerOptionText":"body","pickerOptionMeta":"meta"}
+      ui, {"ownerHistoryButtonText":"button","tabLabelText":"button","ownerFilterButtonText":"button","pieceSortButtonText":"button","emptyText":"description","errorText":"description","subsectionTitle":"sectionTitle","emotionLogName":"body","emotionLogNoEmotion":"description","emotionLogBadgeText":"description","emotionLogTime":"meta","simpleCardTitle":"body","simpleCardMeta":"meta","historySortButtonText":"button","pickerTitle":"modalTitle","pickerOptionText":"body","pickerOptionMeta":"meta"}
     )
   );
 }

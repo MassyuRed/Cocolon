@@ -23,28 +23,6 @@ export function emotionTint(emotion, defaultTextColor) {
   }
 }
 
-export function normalizeEmotionRankingItems(json) {
-  const items = Array.isArray(json?.items)
-    ? json.items
-    : Array.isArray(json?.rows)
-    ? json.rows
-    : Array.isArray(json)
-    ? json
-    : [];
-  return items.slice(0, 5).map((item, index) => ({
-    label:
-      String(
-        item?.emotion_label ||
-          item?.emotion ||
-          item?.emotion_type ||
-          item?.label ||
-          item?.name ||
-          `感情 ${index + 1}`
-      ).trim() || `感情 ${index + 1}`,
-    value: Number(item?.count ?? item?.total ?? item?.value ?? item?.score ?? 0) || 0,
-  }));
-}
-
 export function normalizeEmotionLogItems(json) {
   const rows = Array.isArray(json?.items)
     ? json.items

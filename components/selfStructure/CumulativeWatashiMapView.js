@@ -339,6 +339,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const renderMap = row => row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3'
       ? <SemanticWatashiMap key={`${key}:${mapScope(row)}`} contentJson={row.content_json}
           mapSubscriptionTier={row.map_plan_scoped ? row.map_subscription_tier : null} colors={colors} isDark={themeName === 'dark'}
+          sectionFrame={ui.sectionFrame}
           onExploreIf={!reportId && viewerTier === 'premium' ? branchRef => {
             const map = row.content_json.watashiMap;
             if (currentKey.current !== key || mapScope(stateRef.current.row) !== mapScope(row)) return;
@@ -466,6 +467,6 @@ function makeStyles(colors, ui) {
     embeddedBody: { padding: 0, paddingBottom: 8 },
     meta: { ...ui.typography.meta }, bodyText: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT },
     error: { ...ui.typography.description, color: colors.ERROR },
-    notice: { padding: 16, gap: 8, borderWidth: 1, borderRadius: 16, borderColor: colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL },
+    notice: { padding: 16, gap: 8, borderWidth: 1, borderRadius: 16, borderColor: ui.sectionFrame?.borderColor ?? colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL },
   });
 }

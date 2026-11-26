@@ -273,6 +273,7 @@ function createStyles(colors, ui) {
         largeCard: {
       borderRadius: 24,
       backgroundColor: colors.PANEL_BG,
+      ...ui.sectionFrame,
       paddingHorizontal: 16,
       paddingVertical: 16,
     },
@@ -312,6 +313,7 @@ function createStyles(colors, ui) {
       minHeight: 56,
       borderRadius: 24,
       backgroundColor: colors.PANEL_BG,
+      ...ui.sectionFrame,
       paddingHorizontal: 16,
       paddingVertical: 14,
     },
@@ -342,6 +344,7 @@ function createStyles(colors, ui) {
       minHeight: 44,
       borderRadius: 16,
       backgroundColor: colors.FIELD_BG,
+      ...ui.sectionFrame,
       paddingHorizontal: 16,
       paddingVertical: 12,
     },

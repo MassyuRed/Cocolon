@@ -1,3 +1,7 @@
+### 11/26　ピース画面と分析画面の区切り
+
+通常のピース画面の `screens/NexusScreen.js` から「今日の全体感情」とその取得を外す。投稿・感情通知・共鳴の切り替えは、下辺も含む枠で囲む。分析の日・週・月のカードと時間帯欄は `screens/analysisReport/KokoroWeatherTimeline.js`、わたしマップの表示は `components/selfStructure/` が受け持ち、白・黒テーマの区切りに `ui/uiTokens.js` の枠線を使う。 [UI設計](designs/ui/material-ui-design.md#theme-section-boundaries-20261126)
+
 ### 11/20　通常Pieceに渡す問いと本人回答のファイル地図
 
 APIの `ai/services/ai_inference/piece_v2_source_adapter.py` は、問いをスキップ・終了した履歴で、最後の確定した観測を本人の元入力に対応付ける。回答を使う場合は、実際に発行した問いと選ばれた本人回答を確かめて `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` に渡す。これにより「その時は重かった。」のように問いを受けて意味が定まる感情を、原文のまま採用できる。

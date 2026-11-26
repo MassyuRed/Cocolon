@@ -248,7 +248,7 @@ function createStyles(colors, ui) {
       padding: 16, gap: 12, borderRadius: ui.radius.card, borderWidth: 1,
       borderColor: colors.CARD_BORDER, backgroundColor: colors.PANEL_BG,
     },
-    field: { gap: 4, borderRadius: ui.radius.lg, padding: 12, backgroundColor: colors.FIELD_BG },
+    field: { gap: 4, borderRadius: ui.radius.lg, padding: 12, backgroundColor: colors.FIELD_BG, ...ui.sectionFrame },
     tags: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
     tag: {
       ...ui.typography.description, backgroundColor: colors.SURFACE_TONAL,

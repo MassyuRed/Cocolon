@@ -207,7 +207,7 @@ function createStyles(COLORS, ui) {
       position: "relative",
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderColor: ui.sectionFrame.borderColor,
       backgroundColor: COLORS.FIELD_BG,
       paddingHorizontal: 20,
       paddingVertical: 20,

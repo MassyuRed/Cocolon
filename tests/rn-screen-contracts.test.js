@@ -1387,7 +1387,6 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
   const nexusEmotionLogSection = read('screens/nexus/NexusEmotionLogSection.js');
   const nexusHistorySection = read('screens/nexus/NexusHistorySection.js');
   const nexusOwnerPickerModal = read('screens/nexus/NexusOwnerPickerModal.js');
-  const nexusTodayEmotionSummary = read('screens/nexus/NexusTodayEmotionSummary.js');
   const viewer = read('screens/AnalysisReportViewerScreen.js');
   const analysisReportAccessPolicy = read('screens/analysisReport/analysisReportAccessPolicy.js');
   const analysisReportFormatters = read('screens/analysisReport/analysisReportFormatters.js');
@@ -1413,7 +1412,7 @@ test('Giant screen pre-split guards cover PieceLibrary, Nexus, and AnalysisRepor
   ], 'PieceLibraryScreen.js split guard');
 
   assertIncludes(nexus, [
-    'rankingState',
+    'NexusTabBar',
     'historyState',
     'historyOrder',
     'getNexusResonancePieces',

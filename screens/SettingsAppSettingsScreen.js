@@ -61,7 +61,7 @@ function createLocalStyles(colors, ui) {
       borderRadius: 10,
       backgroundColor: colors.FIELD_BG,
       borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
+      borderColor: ui.sectionFrame?.borderColor ?? colors.CARD_BORDER,
     },
     firstRow: { borderTopLeftRadius: 24, borderTopRightRadius: 24 },
     lastRow: { borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
@@ -83,6 +83,7 @@ function createLocalStyles(colors, ui) {
       paddingVertical: 8,
       borderRadius: 12,
       backgroundColor: colors.PANEL_BG,
+      ...ui.sectionFrame,
     },
     optionRow: {
       marginLeft: 0,
@@ -92,7 +93,7 @@ function createLocalStyles(colors, ui) {
       paddingHorizontal: 12,
       paddingVertical: 10,
     },
-    themeChoice: { borderRadius: 20, backgroundColor: colors.BG_SILVER },
+    themeChoice: { borderRadius: 20, backgroundColor: colors.BG_SILVER, ...ui.sectionFrame },
     optionRowSelected: {
       backgroundColor: colors.SURFACE_TONAL,
     },

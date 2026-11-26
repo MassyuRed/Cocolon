@@ -66,6 +66,7 @@ function createLocalStyles(colors, ui) {
       borderRadius: 24,
       backgroundColor: colors.SURFACE_TONAL,
       minWidth: 0,
+      ...ui?.sectionFrame,
     },
         tabLabelWrapActive: {
       backgroundColor: colors.GOLD_BUTTON,
@@ -112,6 +113,7 @@ function createLocalStyles(colors, ui) {
       width: "100%",
       maxWidth: 640,
       alignSelf: "center",
+      ...ui?.sectionFrame,
     },
         emptyTitle: {
       color: text.primary ?? colors.TEXT_ON_LIGHT,
@@ -131,6 +133,7 @@ function createLocalStyles(colors, ui) {
       marginTop: 4,
       minHeight: 44,
       maxWidth: "100%",
+      ...ui?.sectionFrame,
     },
         historyInlineText: {
       color: colors.TITLE_GOLD,

@@ -42,7 +42,7 @@ const SURFACES = ['BG_SILVER', 'PANEL_BG', 'FIELD_BG'];
 const COLOR_KEYS = [
   ...SURFACES, 'BORDER_GOLD', 'GOLD_BUTTON', 'GOLD_BUTTON_BORDER',
   'TITLE_GOLD', 'BRAND_GOLD', 'TEXT_ON_LIGHT', 'TEXT_ON_DARK',
-  'TEXT_SUBTLE', 'CARD_BORDER', 'ACCENT_TEXT',
+  'TEXT_SUBTLE', 'CARD_BORDER', 'SECTION_BORDER', 'ACCENT_TEXT',
   'SURFACE_TONAL', 'ON_SURFACE_TONAL',
   'SURFACE_HIGHLIGHT', 'ON_SURFACE_HIGHLIGHT',
   'ERROR', 'ERROR_BG',
@@ -84,7 +84,7 @@ test('light/dark backgrounds and decorative color families stay compatible', () 
     },
   };
   for (const theme of ['light', 'dark']) {
-    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, SURFACE_HIGHLIGHT, ON_SURFACE_HIGHLIGHT, ERROR, ERROR_BG, ...unchanged } = palettes[theme];
+    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, SURFACE_HIGHLIGHT, ON_SURFACE_HIGHLIGHT, ERROR, ERROR_BG, SECTION_BORDER, ...unchanged } = palettes[theme];
     assert.deepEqual(unchanged, expected[theme]);
   }
 });
@@ -229,6 +229,13 @@ test('shared UI tokens keep body text, spacing, type sizes, and press motion', (
     assert.ok(ui.typography.body.lineHeight >= ui.typography.body.fontSize * 1.6);
     assert.ok(ui.typography.screenTitle.fontSize > ui.typography.body.fontSize);
     assert.deepEqual(ui.motion, { pressScale: 0.97, pressDurationMs: 100 });
+    assert.equal(ui.sectionFrame.borderWidth, theme === 'default' ? 0 : 1);
+    assert.equal(ui.sectionFrame.borderColor, palette.SECTION_BORDER);
+    if (theme !== 'default') {
+      for (const surface of [...SURFACES, 'SURFACE_TONAL']) {
+        assert.ok(contrast(ui.sectionFrame.borderColor, palette[surface]) >= 3, `${theme} section boundary/${surface}`);
+      }
+    }
   }
 });
 
