@@ -7,12 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export function threadStatus(dto) {
   if (dto?.state === "NOT_CREATED") return dto.can_write === false ? "この記録への返事はまだ用意されていません。現在は返事の更新を一時停止しています。" : "この記録への返事はまだ用意されていません。";
   if (!dto || dto.state === "NOT_CREATED") return "この記録への返事はまだ用意されていません。";
-  if (dto.body_state === "CONTEXT_CHANGED") {
-    const hasHistoricalObservation = dto.timeline?.some(event => event.kind === "OBSERVATION" && !!event.text?.trim());
-    return hasHistoricalObservation
-      ? "応答を作成したときの参照条件が変わっています。以前の返事を履歴に表示しています。"
-      : "応答を作成したときの参照条件が変わったため、以前の返事を表示できません。";
-  }
+  if (dto.body_state === "CONTEXT_CHANGED") return "";
   if (dto.failure_code === "save_result_unknown") return "処理の完了を確認できません。「応答を確認する」から保存状態を確認できます。";
   if (dto.can_write === false && (!dto.current_observation || dto.pending_question || dto.can_continue)) return "応答の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (dto.failure_code === "safe_state_answer_owner_required") return "この内容への専用の返事はまだ用意できていません。記録は保存されています。";

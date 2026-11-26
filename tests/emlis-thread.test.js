@@ -610,14 +610,23 @@ test('frame editor submits an explicit revision and keeps continuation separate'
   await act(async()=>root.unmount());
 });
 
-test('context change notice reflects whether an earlier observation is visible', () => {
-  const { threadStatus } = load('screens/input/EmlisThreadModal.js', {
-    'react-native': { StyleSheet: { create: styles => styles } },
+test('context changes show saved history without a status notice', async () => {
+  const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView', 'Text', 'TextInput', 'View'].map(name => [name, name]));
+  Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: styles => styles } });
+  const { default: Modal, threadStatus } = load('screens/input/EmlisThreadModal.js', {
+    'react-native': native,
     '../../components/CocolonButton': () => null,
   });
   const changed = { ...completed, body_state: 'CONTEXT_CHANGED', current_observation: null };
-  assert.match(threadStatus({ ...changed, timeline: [{ kind: 'ANSWER', text: '回答' }] }), /表示できません/);
-  assert.match(threadStatus({ ...changed, timeline: [{ kind: 'OBSERVATION', text: '保存された返事' }] }), /履歴に表示しています/);
+  const saved = { ...changed, timeline: [{ event_id: 'observation', kind: 'OBSERVATION', text: '保存された返事' }] };
+  assert.equal(threadStatus({ ...changed, timeline: [] }), '');
+  assert.equal(threadStatus(saved), '');
+  let root;
+  await act(async () => { root = Renderer.create(React.createElement(Modal, { thread: { visible: true, dto: saved }, colors: {} })); });
+  const labels = root.root.findAllByType('Text').map(node => node.props.children);
+  assert.ok(labels.includes('以前の返事'));
+  assert.ok(labels.includes('保存された返事'));
+  await act(async () => root.unmount());
 });
 
 test('NOT_CREATED falls back, unknown GET retains reconciliation, and saved thread opens', async () => {
