@@ -1,3 +1,5 @@
+> **11/26 JST・Pieceプレビューの出典確認と画像編集を短縮。** 本番API `fc01a08` は重複していた出典の読み出しを減らした。隔離試験では初回5→3回、画像設定の変更4→2回。アプリ版 `113bc02` は画像設定を先に端末で描き、連続変更をまとめて送る。このアプリ変更は次のビルドから。認証付き本番操作と実機の所要時間は未計測。 [配備と検証](weekly_reviews/Cocolon_Weekly_Review_20261121.md#piece-preview-performance-20261126)
+
 > **11/26 JST・統合iOS 1.0 (8901) を内部配布。** `a4ce916` は8801のプラン別わたしマップに、Piece画像編集、EmlisAI初回の呼びかけ、DeepInsightのヘッダー余白修正を加えた。10:03:42 JSTにTestFlight送信に成功し、その後Mashから内部配布を確認した。 [四機能の統合記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-features-integrated-ios-20261126) · [配布後の記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-question-history-and-legacy-inputs-20261126)
 
 > **11/26 JST・EmlisAIの問いと履歴、旧入力の整理。** 本番API `a4893a3` は、将来の不安や解決した問題について本人が詳細を書いていないときに、話題を一問に絞る。Freeで当回原文だけを使った保存済み応答をPlus・Premiumへの変更後も履歴に残す。アプリ版 `15d4ca5` は参照条件が変わった旨の案内を省き、閲覧できる以前の応答は履歴に表示する。適用は次のビルドから。本番では該当した旧カテゴリなし入力575件を削除した。残った24記録のわたしマップ更新はHTTP 503で終了し、新しい現在版はまだ保存されていない。 [問いと履歴](weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-question-history-and-legacy-inputs-20261126) · [案内の変更](weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-context-notice-and-piece-latency-20261126)

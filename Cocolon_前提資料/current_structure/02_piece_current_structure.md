@@ -4,6 +4,8 @@
 
 プレビューと編集操作は `components/piece/PiecePreviewModal.js`、作成中の変更と再試行は `features/piece/PieceCreateController.js` が受け持つ。対応iOSの `PieceTextMetrics.mm` が画像編集に必要な描画機能を通知し、`features/piece/pieceApi.js` は描画機能に合わせてパレット7と装飾8を送る。 `PieceVisualCard.js`、`pieceRenderer.js`、所有者の履歴は同じ保存版の描画情報を表示と書き出しに使う。提供中のAPI／Supabaseに接続するための署名ビルドと検証の状態は議事録へ記録する。 [統合iOSと検証](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-features-integrated-ios-20261126)
 
+APIの `piece_v2_preview_service.py` は同じ要求内で確認済みの出典を使って初回候補と見た目変更を組み立てる。見た目を変更する前に読んだ保存版と、書き込み直前の出典・権利・版を照合する。アプリの `PieceCreateController.js` が画面内の仮設定と確定版を管理し、連続した設定をまとめて送る。`PieceVisualCard.js` は同じ文字の配置を使えるときに改行を再利用し、描画と保存の適格性は変更後の画像で確認する。 [待ち時間の検証と本番反映](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#piece-preview-performance-20261126)
+
 <a id="cmee-follow-up-live-quality-20261123"></a>
 ### 11/23 — 保存済みの直接訂正を通常Pieceに引き継ぐ
 
