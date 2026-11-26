@@ -67,7 +67,7 @@ const pieceHttp = value => ({ status: 200, json: async () => value });
 const modalPath = path.join(__dirname, '../components/piece/PiecePreviewModal.js');
 const hostPath = path.join(__dirname, '../screens/input/InputPieceActionArea.js');
 function previewUiHarness({ send, currentState = 'active', admitSave = false, platform = 'ios', pieceTextMetrics } = {}) {
-  let now = NOW, serial = 0, keySerial = 0;
+  let now = NOW, serial = 0, keySerial = 0, modalKey, hookIndex, modalState = [];
   const calls = [], timers = new Map(), appListeners = new Set();
   const React = {
     Component: class {
@@ -77,6 +77,18 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
         this.state = { ...this.state, ...(typeof change === 'function' ? change(this.state) : change) };
       }
     },
+    useState(initial) {
+      const index = hookIndex++;
+      if (!(index in modalState)) modalState[index] = initial;
+      return [modalState[index], update => {
+        modalState[index] = typeof update === 'function' ? update(modalState[index]) : update;
+      }];
+    },
+    useRef(initial) {
+      const index = hookIndex++;
+      if (!(index in modalState)) modalState[index] = { current: initial };
+      return modalState[index];
+    },
     createElement: (type, props, ...children) => ({ type, props: props || {}, children }),
   };
   const AppState = { currentState, addEventListener: (event, listener) => {
@@ -85,6 +97,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
   } };
   const context = vm.createContext({ React, AppState, AbortController, AppRuntimeContext: {},
     Alert: { alert() {} },
+    useWindowDimensions: () => ({ width: 390, height: 844, fontScale: 1 }),
     useTheme: () => ({ colors: { BG_SILVER: '#F7F1F8', TEXT_ON_LIGHT: '#312436', TEXT_SUBTLE: '#6B5D6E' } }),
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
@@ -113,6 +126,18 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
   function expand(node) {
     if (node === null || node === undefined || node === false) return null;
     if (typeof node !== 'object') return node;
+    if (node.type === context.PiecePreviewModal) {
+      if (modalKey !== node.props.key) { modalKey = node.props.key; modalState = []; }
+      hookIndex = 0;
+      const modal = node.type(node.props);
+      const stage = nodes(modal).find(child => child.props.testID === 'piece-artwork-viewport');
+      if (stage && !modalState[1]) {
+        stage.props.onLayout({ nativeEvent: { layout: { width: 366, height: 500 } } });
+        hookIndex = 0;
+        return expand(node.type(node.props));
+      }
+      return expand(modal);
+    }
     if (typeof node.type === 'function') return expand(node.type.prototype?.render
       ? new node.type(node.props).render() : node.type(node.props));
     return { ...node, children: node.children.flat(Infinity).map(expand).filter(x => x !== null) };
@@ -122,8 +147,17 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false, pl
     return [node, ...node.children.flatMap(nodes)];
   }
   const host = new context.InputPieceActionArea({ context: controllerInput() });
+  const tree = () => expand(host.render());
+  function openPicker(key) {
+    let all = nodes(tree());
+    if (all.some(node => node.props.testID === `piece-editor-panel-${key}`)) return all;
+    const back = all.find(node => node.props.testID === 'piece-editor-return');
+    if (back) { back.props.onPress(); all = nodes(tree()); }
+    all.find(node => node.props.testID === `piece-editor-tab-${key}`)?.props.onPress();
+    return nodes(tree());
+  }
   return { host, calls, timers, appListeners, read: context.displayReader, digest: context.digestUnderTest,
-    mount: () => host.componentDidMount(), tree: () => expand(host.render()), nodes,
+    mount: () => host.componentDidMount(), tree, nodes, openPicker,
     background: state => { AppState.currentState = state; [...appListeners].forEach(fn => fn(state)); },
     settleVisual: async () => {
       for (const [id, timer] of [...timers]) if (timer.delay === 750) { timers.delete(id); timer.callback(); }
@@ -223,7 +257,7 @@ for (const format of ['short_essay', 'quote', 'declaration']) {
     const expected = response(format), u = previewUiHarness({ send: async () => pieceHttp(expected) });
     u.mount(); assert.equal(u.calls.length, 0);
     u.host.start(); u.host.start(); await pieceTick();
-    const all = u.nodes(u.tree()), body = all.find(n => n.props.testID === 'piece-canonical-text');
+    const all = u.openPicker('details'), body = all.find(n => n.props.testID === 'piece-canonical-text');
     assert.ok(body); assert.equal(body.children.join(''), expected.piece_text);
     assert.equal(body.props.numberOfLines, undefined); assert.equal(body.props.ellipsizeMode, undefined);
     assert.ok(all.some(n => n.type === 'ScrollView')); assert.ok(all.some(n => n.type === 'Modal'));
@@ -238,7 +272,7 @@ for (const format of ['short_essay', 'quote', 'declaration']) {
 for (const change of ['account', 'source', 'key', 'selection', 'disabled']) {
   test(`native host conceals an old received result before ${change} componentDidUpdate`, async () => {
     const u = previewUiHarness(); u.mount(); u.host.start(); await pieceTick();
-    assert.ok(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+    assert.ok(u.openPicker('details').some(n => n.props.testID === 'piece-canonical-text'));
     const next = controllerInput();
     if (change === 'account') next.expectedUserId = 'another-owner';
     if (change === 'source') { next.request.source_ref.source_input_id = 'different'; next.idempotencyKey = 'new-source'; }
@@ -343,13 +377,13 @@ for (const tier of ['free', 'plus', 'premium']) {
     if (tier === 'free') raw.quota = { ...raw.quota, saved_count: 5, remaining_count: 0, can_save: false };
     const u = previewUiHarness({ send: async () => pieceHttp(raw) });
     u.mount(); u.host.start(); await pieceTick();
-    const nodes = u.nodes(u.tree());
+    let nodes = u.openPicker('details');
     const labels = nodes.filter(n => n.type === 'Text').map(n => n.children.join('')).join('\n');
     assert.match(labels, /2026-10（日本時間）の保存枠/);
     assert.ok(labels.includes({ free: '残り0回 / 5回', plus: '残り28回 / 30回', premium: '回数制限なし' }[tier]));
     assert.ok(labels.includes({ free: '形式：エッセイ（固定）', plus: '形式：入力に合う形式を自動選択', premium: '選択できる形式：引用' }[tier]));
-    assert.equal(labels.includes('静かな夜'), true, 'paid choices remain visible when locked');
-    assert.equal(labels.includes('9:16'), true);
+    nodes = u.openPicker('theme_id');
+    assert.ok(nodes.some(n => n.type === 'Text' && n.children.join('').includes('静かな夜')), 'paid choices remain visible when locked');
     assert.equal(nodes.some(n => n.props.testID === 'piece-visual-theme_id'), true);
     const swatches = nodes.filter(n => n.props.testID?.startsWith('piece-theme-swatch-'));
     assert.equal(swatches.length, 12);
@@ -361,8 +395,8 @@ for (const tier of ['free', 'plus', 'premium']) {
     assert.ok(swatches.every(n => n.props.accessibilityElementsHidden && n.props.importantForAccessibility === 'no-hide-descendants'));
     assert.equal(nodes.filter(n => n.props.testID?.startsWith('piece-theme-lock-')).length,
       12 - raw.plan_capabilities.theme_ids.length);
-    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-aspect_ratio'), true);
-    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-branding_mode'), true);
+    assert.ok(u.openPicker('aspect_ratio').some(n => n.props.testID === 'piece-option-aspect_ratio-9:16'));
+    assert.ok(u.openPicker('branding_mode').some(n => n.props.testID === 'piece-option-branding_mode-off'));
     assert.equal(nodes.some(n => n.type === 'Button' && /保存|書き出し|共有/.test(n.props.title)), false);
     const display = u.read(receivedView(raw), NOW);
     assert.equal(display.canSave, false); assert.equal(display.canExport, false);
@@ -386,7 +420,13 @@ function changedVisual(p, choice = { theme_id: 'quiet_night' }, delta = 1) {
   next.visual_recipe_hash = hash(JSON.stringify(canonical(next.visual_recipe)));
   return next;
 }
-const uiButton = (u, name) => u.nodes(u.tree()).find(n => ['Button', 'Pressable'].includes(n.type) && n.props.accessibilityLabel === name);
+function uiButton(u, name) {
+  const picker = { 'テーマ': 'theme_id', '画像の比率': 'aspect_ratio', 'Emlisロゴ': 'branding_mode',
+    '背景の表現': 'background_style', '飾り枠': 'frame_style', 'ワンポイント': 'accent_style',
+    '形式': 'format', 'このPiece候補を取り消す': 'details' }[name.split('：')[0]];
+  const isButton = node => ['Button', 'Pressable'].includes(node.type) && node.props.accessibilityLabel === name;
+  return u.nodes(u.tree()).find(isButton) ?? (picker ? u.openPicker(picker).find(isButton) : undefined);
+}
 
 test('an expanded paid preview exposes all twelve themes and a selection changes only the recipe', async () => {
   const original = response('quote');
@@ -401,7 +441,7 @@ test('an expanded paid preview exposes all twelve themes and a selection changes
     return pieceHttp(changedVisual(original, { theme_id: chosen }));
   } });
   u.mount(); u.host.start(); await pieceTick();
-  const swatches = u.nodes(u.tree()).filter(node => node.props.testID?.startsWith('piece-theme-swatch-'));
+  const swatches = u.openPicker('theme_id').filter(node => node.props.testID?.startsWith('piece-theme-swatch-'));
   assert.deepEqual(swatches.map(node => node.props.testID), original.plan_capabilities.theme_ids.map(id => 'piece-theme-swatch-' + id));
   const roseSwatches = swatches.slice(2, 4).map(node => node.children[0].props.style);
   assert.equal(roseSwatches[0].backgroundColor, roseSwatches[1].backgroundColor);
@@ -429,7 +469,7 @@ test('visual controls send current values, replace only recipe/revisions, and an
   const staleControl = uiButton(u, 'テーマ：静かな夜');
   assert.equal(uiButton(u, 'テーマ：ソフトペーパー').props.accessibilityState.selected, true);
   staleControl.props.onPress(); staleControl.props.onPress();
-  assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), true);
+  assert.equal(u.openPicker('details').some(n => n.props.testID === 'piece-canonical-text'), true);
   assert.equal(uiButton(u, 'テーマ：静かな夜').props.accessibilityState.selected, true);
   assert.equal(u.calls.length, 1);
   await u.settleVisual();
@@ -443,6 +483,7 @@ test('visual controls send current values, replace only recipe/revisions, and an
   assert.equal(view.preview.piece_text, original.piece_text); assert.equal(view.preview.expires_at, original.expires_at);
   assert.equal(view.preview.preview_revision, 2); assert.equal(view.hashVerified, true);
   assert.equal(view.canSave, false); assert.equal(view.canExport, false);
+  u.nodes(u.tree()).find(n => n.props.testID === 'piece-editor-return')?.props.onPress();
   assert.ok(u.nodes(u.tree()).some(n => n.children.includes('画像設定を更新しました。')));
   staleControl.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2, 'obsolete controls cannot mutate a new revision');
   uiButton(u, '画像の比率：9:16').props.onPress(); await u.settleVisual();
@@ -503,6 +544,27 @@ test('visual edits stay interactive and reconcile only the newest pending select
   assert.equal(controller.getVisualEdit(), null);
   assert.equal(controller.getView().preview.preview_revision, 3);
   assert.equal(controller.getView().preview.visual_recipe.branding.branding_mode, 'off');
+  u.host.componentWillUnmount();
+});
+
+test('closing and reopening the actual input host starts with the setting list and does not resize on picker changes', async () => {
+  const u = previewUiHarness();
+  u.mount(); u.host.start(); await pieceTick();
+  const byId = id => u.nodes(u.tree()).find(node => node.props.testID === id);
+  const width = byId('piece-artwork-stage').props.style.width;
+  u.openPicker('theme_id');
+  assert.ok(byId('piece-editor-panel-theme_id'));
+  assert.equal(byId('piece-artwork-stage').props.style.width, width);
+  byId('piece-editor-return').props.onPress();
+  assert.equal(byId('piece-artwork-stage').props.style.width, width);
+  assert.equal(u.calls.length, 1, 'opening and closing settings does not make a request');
+  u.openPicker('theme_id');
+  uiButton(u, 'Pieceの画面を閉じる').props.onPress();
+  dismissPiecePreview(u);
+  u.host.start(); await pieceTick();
+  assert.ok(byId('piece-editor-toolbar'));
+  assert.equal(byId('piece-editor-panel-theme_id'), undefined);
+  assert.equal(byId('piece-artwork-stage').props.style.width, width);
   u.host.componentWillUnmount();
 });
 

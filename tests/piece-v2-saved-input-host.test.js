@@ -50,7 +50,7 @@ function fixture({ send, enabled = true, currentState = 'active', pre = false, a
     publish: value => { allowed = value; u.host.context = runtime(); },
     immediateOff: () => { allowed = false; },
     names: () => copy(u.nodes(u.tree()).filter(n => n.type === 'Button').map(n => n.props.title)),
-    body: () => u.nodes(u.tree()).find(n => n.props.testID === 'piece-canonical-text') };
+    body: () => u.openPicker('details').find(n => n.props.testID === 'piece-canonical-text') };
 }
 function resolver(u) {
   assert.equal(typeof u.host.resolveSavedInput, 'function', 'B10_SAVED_INPUT_HOST_CALLER_ABSENT');
@@ -706,7 +706,7 @@ for (const completed of [false, true]) {
       return ++deletes === 1 && !completed ? d.promise : packet(receipt);
     } });
     u.mount(); await resolver(u); u.host.start(); await tick();
-    const cancel = u.nodes(u.tree()).find(n => n.props.title === '候補を取り消す');
+    const cancel = u.openPicker('details').find(n => n.props.title === '候補を取り消す');
     cancel.props.onPress(); await tick();
     u.background('inactive'); u.publish(false); u.host.componentDidUpdate();
     assert.equal(u.tree(), null); assert.equal(u.body(), undefined);
@@ -734,7 +734,7 @@ for (const changed of ['owner', 'input', 'key']) {
     const u = fixture({ send: async (_url, opt) => opt.method === 'GET' ? packet(ref()) :
       opt.method === 'POST' ? packet(f.expected) : d.promise });
     u.mount(); await resolver(u); u.host.start(); await tick();
-    u.nodes(u.tree()).find(n => n.props.title === '候補を取り消す').props.onPress(); await tick();
+    u.openPicker('details').find(n => n.props.title === '候補を取り消す').props.onPress(); await tick();
     u.background('inactive'); u.publish(false); u.host.componentDidUpdate();
     const original = { ...u.host.props.savedInput }, next = { ...original };
     next[{ owner: 'expectedUserId', input: 'savedInputId', key: 'idempotencyKey' }[changed]] = OTHER;

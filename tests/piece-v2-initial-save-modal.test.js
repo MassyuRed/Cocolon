@@ -14,7 +14,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const root = process.env.PIECE_TEST_ROOT || path.resolve(__dirname, '..');
-const alerts = [];
+const alerts = [], focusEvents = [];
 const source = fs.readFileSync(path.join(root, 'components/piece/PiecePreviewModal.js'), 'utf8');
 // Follow the existing Piece source-test harness: strip only the known
 // single-line imports and the default export. Do not need experimental VM
@@ -23,7 +23,7 @@ const renderPromise = Promise.resolve((() => {
   const imports = source.match(/^import .*;$/gm) || [];
   assert.deepEqual(imports, [
     "import React from 'react';",
-    "import { Alert, Modal, View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';",
+    "import { AccessibilityInfo, Alert, Modal, View, Text, ScrollView, Pressable, ActivityIndicator, findNodeHandle, useWindowDimensions } from 'react-native';",
     "import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';",
     "import PieceVisualCard from './PieceVisualCard';",
     "import Button from '../CocolonButton';",
@@ -34,6 +34,8 @@ const renderPromise = Promise.resolve((() => {
   const marker = name => ({ component: name });
   const context = vm.createContext({
     Alert: { alert: (...args) => alerts.push(args) },
+    AccessibilityInfo: { isScreenReaderEnabled: async () => true, setAccessibilityFocus: handle => focusEvents.push(handle) },
+    findNodeHandle: node => node?.tag,
     useTheme: () => ({ colors: { BG_SILVER: '#F7F1F8', TEXT_ON_LIGHT: '#312436', TEXT_SUBTLE: '#6B5D6E' } }),
     React: { createElement: (type, props, ...children) => ({ type, props: props || {}, children }) },
     ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'Pressable', 'ActivityIndicator',
@@ -45,7 +47,7 @@ const renderPromise = Promise.resolve((() => {
   const uiTokens = fs.readFileSync(path.join(root, 'ui/uiTokens.js'), 'utf8').replace(/^export /gm, '');
   vm.runInContext(uiTokens + '\n' + palette + '\n' + executable + '\nglobalThis.renderModal = PiecePreviewModal;', context,
     { filename: 'components/piece/PiecePreviewModal.js' });
-  return context.renderModal;
+  return context;
 })());
 
 function fixture(overrides = {}) {
@@ -74,9 +76,39 @@ function text(tree) {
 }
 function initial(tree) { return nodes(tree).filter(node => node.props?.testID === 'piece-initial-save'); }
 function button(tree, title) { return nodes(tree).find(node => node.type?.component === 'Button' && node.props.title === title); }
-async function render(display, props = {}) {
-  const component = await renderPromise;
-  return component({ visible: true, display, onSave() {}, ...props });
+async function editor(display, props = {}, viewport = { width: 366, height: 420 }, window = { width: 390, height: 844, fontScale: 1 }) {
+  const context = await renderPromise;
+  const states = [];
+  const componentProps = { visible: true, display, onSave() {}, ...props };
+  function draw() {
+    let index = 0;
+    context.useWindowDimensions = () => window;
+    context.React.useState = initial => {
+      const slot = index++;
+      if (!(slot in states)) states[slot] = initial;
+      return [states[slot], change => { states[slot] = typeof change === 'function' ? change(states[slot]) : change; }];
+    };
+    context.React.useRef = initial => {
+      const slot = index++;
+      if (!(slot in states)) states[slot] = { current: initial };
+      return states[slot];
+    };
+    return context.renderModal(componentProps);
+  }
+  const lookup = (tree, id) => nodes(tree).find(node => node.props.testID === id);
+  lookup(draw(), 'piece-artwork-viewport')?.props.onLayout({ nativeEvent: { layout: viewport } });
+  function panel(key) {
+    const previous = draw();
+    if (lookup(previous, `piece-editor-panel-${key}`)) return previous;
+    lookup(previous, 'piece-editor-return')?.props.onPress();
+    lookup(draw(), `piece-editor-tab-${key}`)?.props.onPress();
+    return draw();
+  }
+  return { draw, panel, update: next => Object.assign(componentProps, next) };
+}
+async function render(display, props = {}, picker) {
+  const surface = await editor(display, props);
+  return picker ? surface.panel(picker) : surface.draw();
 }
 
 test('every visible state uses its own modal safe area for both the header and fixed close control', async () => {
@@ -93,7 +125,12 @@ test('every visible state uses its own modal safe area for both the header and f
     assert.equal(safe.props.mode, 'padding');
     assert.equal(safe.props.style.flex, 1);
     const body = safe.children[0], scroll = body.children.find(n => n?.type?.component === 'ScrollView');
-    assert.equal(scroll.props.style.flex, 1, 'long content scrolls within the available safe height');
+    if (phase === 'received') {
+      assert.ok(nodes(body).some(n => n.props.testID === 'piece-artwork-viewport'));
+      assert.ok(nodes(body).some(n => n.props.testID === 'piece-editor-toolbar' && n.props.horizontal));
+    } else {
+      assert.equal(scroll.props.style.flex, 1, 'long content scrolls within the available safe height');
+    }
     assert.ok(body.children.some(n => n?.props?.accessibilityRole === 'header'));
     assert.ok(button(body, '閉じる'));
     assert.equal(button(scroll, '閉じる'), undefined, 'close remains outside the long scrolling content');
@@ -149,7 +186,7 @@ test('the rendered save callback retains its original identity/token, not later 
   // Rejection of stale identities remains the controller/host's responsibility.
 });
 test('ready save presentation does not simultaneously say Piece saving is unavailable', async () => {
-  const tree = await render(fixture());
+  const tree = await render(fixture(), {}, 'details');
   assert.equal(initial(tree).length, 1);
   assert.ok(text(tree).includes('画像の書き出し・共有は、保存したPieceの詳細画面から行えます。'));
   assert.ok(!text(tree).includes('Pieceの保存・画像の書き出し・共有は、まだ利用できません。'));
@@ -206,7 +243,7 @@ test('a candidate without save permission does not claim the whole Piece feature
 // Existing modal responsibilities are retained. No host/controller/renderer
 // behavior is inferred from these element and callback checks.
 test('canonical text and the existing visual-card input remain unchanged', async () => {
-  const display = fixture(), tree = await render(display);
+  const display = fixture(), tree = await render(display, {}, 'details');
   const canonical = nodes(tree).find(node => node.props?.testID === 'piece-canonical-text');
   const card = nodes(tree).find(node => node.type?.component === 'PieceVisualCard');
   assert.equal(canonical.children[0], display.preview.piece_text);
@@ -226,7 +263,7 @@ test('the modal forwards local fit evidence without turning it into save admissi
 test('cancel uses the existing identity/token callback without saving', async () => {
   const display = fixture(), calls = [];
   let saves = 0;
-  const tree = await render(display, { onSave() { saves++; }, onCancel(...args) { calls.push(args); } });
+  const tree = await render(display, { onSave() { saves++; }, onCancel(...args) { calls.push(args); } }, 'details');
   button(tree, '候補を取り消す').props.onPress();
   assert.equal(saves, 0);
   assert.equal(calls.length, 1);
@@ -235,7 +272,7 @@ test('cancel uses the existing identity/token callback without saving', async ()
 });
 test('visual setting changes preserve the existing callback', async () => {
   const display = fixture(), calls = [];
-  const tree = await render(display, { onVisualChange(...args) { calls.push(args); } });
+  const tree = await render(display, { onVisualChange(...args) { calls.push(args); } }, 'theme_id');
   nodes(tree).find(node => node.type?.component === 'Pressable' &&
     node.props.accessibilityLabel === 'テーマ：静かな夜').props.onPress();
   assert.equal(calls.length, 1);
@@ -245,8 +282,8 @@ test('visual setting changes preserve the existing callback', async () => {
 });
 test('Free shows all twelve colors and locked controls explain access without changing the candidate', async () => {
   const display = fixture(), original = JSON.stringify(display.preview), changes = [];
-  const tree = await render(display, { onVisualChange: (...args) => changes.push(args) });
-  const all = nodes(tree);
+  const surface = await editor(display, { onVisualChange: (...args) => changes.push(args) });
+  const all = nodes(surface.panel('theme_id'));
   assert.equal(all.filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 12);
   assert.equal(all.filter(node => node.props.testID?.startsWith('piece-theme-lock-')).length, 10);
   const night = all.find(node => node.props.testID === 'piece-theme-option-quiet_night');
@@ -255,7 +292,8 @@ test('Free shows all twelve colors and locked controls explain access without ch
   const locked = ['piece-theme-option-rose_paper', 'piece-option-aspect_ratio-4:5',
     'piece-option-aspect_ratio-9:16', 'piece-option-branding_mode-required_small', 'piece-option-branding_mode-off'];
   for (const id of locked) {
-    const option = all.find(node => node.props.testID === id);
+    const panel = id.includes('aspect_ratio') ? 'aspect_ratio' : id.includes('branding_mode') ? 'branding_mode' : 'theme_id';
+    const option = nodes(surface.panel(panel)).find(node => node.props.testID === id);
     assert.equal(option.props.disabled, false, 'locked settings remain tappable for an explanation');
     option.props.onPress();
   }
@@ -275,11 +313,12 @@ for (const tier of ['plus', 'premium']) test(`${tier} can select paid colors, as
     aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'],
   };
   const original = JSON.stringify(display.preview);
-  const all = nodes(await render(display, { onVisualChange: (...args) => calls.push(args) }));
-  assert.equal(all.filter(node => node.props.testID?.startsWith('piece-theme-lock-')).length, 0);
+  const surface = await editor(display, { onVisualChange: (...args) => calls.push(args) });
+  assert.equal(nodes(surface.panel('theme_id')).filter(node => node.props.testID?.startsWith('piece-theme-lock-')).length, 0);
   alerts.length = 0;
   for (const id of ['piece-theme-option-ocean_ice', 'piece-option-aspect_ratio-9:16', 'piece-option-branding_mode-off']) {
-    all.find(node => node.props.testID === id).props.onPress();
+    const panel = id.includes('aspect_ratio') ? 'aspect_ratio' : id.includes('branding_mode') ? 'branding_mode' : 'theme_id';
+    nodes(surface.panel(panel)).find(node => node.props.testID === id).props.onPress();
   }
   assert.equal(alerts.length, 0);
   assert.equal(calls.length, 3);
@@ -301,28 +340,30 @@ test('negotiated Piece options keep Plus on background colors and bind Premium s
   preview.plan_capabilities.background_styles = [];
   preview.plan_capabilities.theme_ids.push('sage_paper', 'peach_paper', 'slate_paper');
   const options = { onVisualChange: (...args) => calls.push(args) };
-  const plus = nodes(await render(display, options));
-  assert.equal(plus.filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 15);
-  assert.ok(!plus.some(node => node.props.testID === 'piece-visual-font_style_id'));
-  assert.ok(!plus.some(node => node.props.testID === 'piece-visual-background_style'));
-  plus.find(node => node.props.testID === 'piece-theme-option-sage_paper').props.onPress();
+  const surface = await editor(display, options);
+  const has = (tree, id) => nodes(tree).find(node => node.props.testID === id);
+  const plus = surface.draw();
+  assert.ok(!has(plus, 'piece-editor-tab-font_style_id'));
+  assert.ok(!has(plus, 'piece-editor-tab-background_style'));
+  const palette = surface.panel('theme_id');
+  assert.equal(nodes(palette).filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 15);
+  has(palette, 'piece-theme-option-sage_paper').props.onPress();
   assert.equal(calls[0][0].theme_id, 'sage_paper');
   assert.ok(!Object.hasOwn(calls[0][0], 'text_color_id'));
-  plus.find(node => node.props.testID === 'piece-option-text_alignment-center').props.onPress();
+  has(surface.panel('text_alignment'), 'piece-option-text_alignment-center').props.onPress();
   assert.equal(calls[1][0].text_alignment, 'center');
-  assert.equal(plus.find(node => node.props.testID === 'piece-option-text_size-standard').props.accessibilityState.selected, true);
-  plus.find(node => node.props.testID === 'piece-option-text_size-large').props.onPress();
+  assert.equal(has(surface.panel('text_size'), 'piece-option-text_size-standard').props.accessibilityState.selected, true);
+  has(surface.panel('text_size'), 'piece-option-text_size-large').props.onPress();
   assert.equal(calls[2][0].text_size, 'large');
   preview.quota.subscription_tier = 'premium';
   preview.plan_capabilities.font_style_ids = ['system_readable', 'serif_readable'];
   preview.plan_capabilities.text_color_ids = ['neutral_ink'];
   preview.plan_capabilities.background_styles = ['solid', 'gradient'];
-  const premium = nodes(await render(display, options));
-  premium.find(node => node.props.testID === 'piece-option-font_style_id-serif_readable').props.onPress();
-  premium.find(node => node.props.testID === 'piece-option-text_color_id-neutral_ink').props.onPress();
+  has(surface.panel('font_style_id'), 'piece-option-font_style_id-serif_readable').props.onPress();
+  has(surface.panel('text_color_id'), 'piece-option-text_color_id-neutral_ink').props.onPress();
   assert.deepEqual(calls.slice(3).map(args => [args[0].font_style_id, args[0].text_color_id]),
     [['serif_readable', null], ['system_readable', 'neutral_ink']]);
-  premium.find(node => node.props.testID === 'piece-option-background_style-gradient').props.onPress();
+  has(surface.panel('background_style'), 'piece-option-background_style-gradient').props.onPress();
   assert.equal(calls.at(-1)[0].background_style, 'gradient');
   assert.ok(calls.every(args => args[1].visual_recipe_hash === preview.visual_recipe_hash && args[2] === display.visualToken));
 });
@@ -337,8 +378,8 @@ test('Premium appearance choices keep the other selected styles and stay absent 
     'dot_pattern', 'stripe_pattern'], frame_styles: ['none', 'line', 'double_line'],
   accent_styles: ['none', 'top_rule', 'corner_marks'] });
   const options = { onVisualChange: (...args) => calls.push(args) };
-  const premium = nodes(await render(display, options));
-  const pick = (field, value) => premium.find(node => node.props.testID === `piece-option-${field}-${value}`);
+  const surface = await editor(display, options);
+  const pick = (field, value) => nodes(surface.panel(field)).find(node => node.props.testID === `piece-option-${field}-${value}`);
   assert.equal(pick('background_style', 'dot_pattern').props.accessibilityState.selected, true);
   assert.equal(pick('frame_style', 'double_line').props.accessibilityState.selected, true);
   assert.equal(pick('accent_style', 'corner_marks').props.accessibilityState.selected, true);
@@ -351,8 +392,70 @@ test('Premium appearance choices keep the other selected styles and stay absent 
   preview.quota.subscription_tier = 'plus';
   Object.assign(preview.plan_capabilities, { background_styles: [], frame_styles: [], accent_styles: [] });
   assert.ok(nodes(await render(display, options)).every(node => !['background_style', 'frame_style', 'accent_style']
-    .some(field => node.props.testID === `piece-visual-${field}`)));
+    .some(field => node.props.testID === `piece-editor-tab-${field}`)));
 });
+test('one compact picker shares a fixed dock with the toolbar and keeps the same artwork and fit input', async () => {
+  const display = fixture(), edits = [], onSaveFitChange = () => {};
+  const surface = await editor(display, { onVisualChange: (...args) => edits.push(args), onSaveFitChange },
+    { width: 296, height: 228 }, { width: 320, height: 568, fontScale: 2.2 });
+  const lookup = (tree, id) => nodes(tree).find(node => node.props.testID === id);
+  const artwork = tree => lookup(tree, 'piece-artwork-stage');
+  const before = surface.draw(), canvasWidth = artwork(before).props.style.width;
+  assert.ok(canvasWidth >= 90 && canvasWidth / (4 / 5) < 228);
+  assert.equal(artwork(before).children[0].props.onSaveFitChange, onSaveFitChange);
+  assert.ok(lookup(before, 'piece-editor-toolbar'));
+  assert.equal(lookup(before, 'piece-visual-theme_id'), undefined);
+
+  const open = surface.panel('theme_id');
+  assert.equal(artwork(open).props.style.width, canvasWidth);
+  assert.equal(artwork(open).children[0].props.display, display);
+  assert.equal(artwork(open).children[0].props.onSaveFitChange, onSaveFitChange);
+  assert.equal(lookup(open, 'piece-editor-controls').props.accessibilityElementsHidden, true);
+  assert.equal(lookup(open, 'piece-editor-controls').props.pointerEvents, 'none');
+  assert.equal(lookup(open, 'piece-editor-panel-slot').props.style.height,
+    lookup(before, 'piece-editor-panel-slot').props.style.height);
+  assert.equal(lookup(open, 'piece-editor-tab-theme_id').props.accessibilityState.expanded, true);
+  assert.equal(lookup(open, 'piece-visual-aspect_ratio'), undefined);
+  lookup(open, 'piece-theme-option-quiet_night').props.onPress();
+
+  const closed = surface.draw();
+  assert.equal(lookup(closed, 'piece-editor-panel-theme_id'), undefined);
+  assert.equal(lookup(closed, 'piece-editor-controls').props.accessibilityElementsHidden, false);
+  assert.equal(artwork(closed).props.style.width, canvasWidth);
+  assert.equal(edits.length, 1);
+  assert.deepEqual(edits[0].slice(2, 3), [display.visualToken]);
+});
+
+test('the small editor fits the tall artwork, and a replaced preview opens with its pickers collapsed', async () => {
+  const display = fixture(), compact = { width: 272, height: 186 };
+  display.preview.visual_recipe.aspect_ratio = '9:16';
+  const surface = await editor(display, {}, compact, { width: 320, height: 568, fontScale: 2.4 });
+  const lookup = (tree, id) => nodes(tree).find(node => node.props.testID === id);
+  const width = lookup(surface.panel('aspect_ratio'), 'piece-artwork-stage').props.style.width;
+  assert.ok(width > 40 && width / (9 / 16) < compact.height);
+  const next = fixture();
+  next.preview.preview_id = '22222222-2222-4222-8222-222222222222';
+  surface.update({ display: next });
+  const replaced = surface.draw();
+  assert.equal(lookup(replaced, 'piece-editor-panel-aspect_ratio'), undefined);
+  assert.equal(lookup(replaced, 'piece-editor-controls').props.accessibilityElementsHidden, false);
+  lookup(replaced, 'piece-artwork-viewport').props.onLayout({ nativeEvent: { layout: { width: 510, height: 342 } } });
+  assert.ok(lookup(surface.draw(), 'piece-artwork-stage').props.style.width > width);
+});
+
+test('screen-reader focus enters the open panel and returns to the same setting on selection', async () => {
+  focusEvents.length = 0;
+  const surface = await editor(fixture(), { onVisualChange() {} });
+  const lookup = (tree, id) => nodes(tree).find(node => node.props.testID === id);
+  const opened = surface.panel('theme_id');
+  lookup(opened, 'piece-editor-return').props.ref({ tag: 101 });
+  await new Promise(resolve => setImmediate(resolve));
+  lookup(opened, 'piece-theme-option-quiet_night').props.onPress();
+  lookup(surface.draw(), 'piece-editor-tab-theme_id').props.ref({ tag: 102 });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(focusEvents, [101, 102]);
+});
+
 test('close remains independent of save and retry', async () => {
   let close = 0, save = 0, retry = 0;
   const tree = await render(fixture(), { onClose() { close++; }, onSave() { save++; }, onRetry() { retry++; } });

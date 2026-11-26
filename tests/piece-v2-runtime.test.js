@@ -278,7 +278,7 @@ test('runtime OFF/refresh/failure hides the existing Piece host; true alone send
   u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
   assert.ok(u.nodes(u.tree()).some(n => n.type === 'Button')); assert.equal(u.calls.length, 0);
   u.host.start(); await new Promise(resolve => setImmediate(resolve));
-  assert.ok(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  assert.ok(u.openPicker('details').some(n => n.props.testID === 'piece-canonical-text'));
   p = h.render().refreshAppRuntime(); u.host.props = { context: contextFor() };
   assert.equal(u.tree(), null, 'hide before lifecycle cleanup when presentation becomes unavailable');
   u.host.componentDidUpdate(); h.pending[1].reject(new Error('bootstrap unavailable')); await assert.rejects(p);
@@ -423,7 +423,7 @@ test('foreground refresh composes with the existing preview host without resendi
   const p = h.render().refreshAppRuntime(); h.pending[0].resolve({ feature_flags: all(true) }); await p;
   u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
   u.host.start(); await settleForeground();
-  assert.ok(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  assert.ok(u.openPicker('details').some(n => n.props.testID === 'piece-canonical-text'));
   h.emit('background'); u.host.props = { context: contextFor() };
   assert.equal(u.tree(), null); u.host.componentDidUpdate();
   h.emit('active'); u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
@@ -591,7 +591,7 @@ test('auth refresh hides an already displayed Piece and never revives or automat
   await loadedRuntime(h);
   const contextFor = () => fixture.input({ enabled: h.render().isFeatureEnabled(PREVIEW, false) });
   u.host.props = { context: contextFor() }; u.mount(); u.host.start(); await settleForeground();
-  assert.ok(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  assert.ok(u.openPicker('details').some(n => n.props.testID === 'piece-canonical-text'));
   h.emitAuth('SIGNED_OUT', null); u.host.props = { context: contextFor() };
   assert.equal(u.tree(), null); u.host.componentDidUpdate();
   h.emitAuth('SIGNED_IN'); h.flushAuthTimers();

@@ -5,7 +5,7 @@
  * or creates a save key. The current host/admission supplier remains separate.
  */
 import React from 'react';
-import { Alert, Modal, View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
+import { AccessibilityInfo, Alert, Modal, View, Text, ScrollView, Pressable, ActivityIndicator, findNodeHandle, useWindowDimensions } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import PieceVisualCard from './PieceVisualCard';
 import Button from '../CocolonButton';
@@ -30,6 +30,10 @@ const accents = { none: '追加なし', top_rule: '上部の飾り線', corner_m
 export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onPost, onSaveImage, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
   const ui = makeUiTokens(colors, themeName);
+  const window = useWindowDimensions();
+  const [pickerState, setPickerState] = React.useState(null);
+  const [stageBounds, setStageBounds] = React.useState(null);
+  const focusTarget = React.useRef(null);
   if (visible !== true || !display || display.phase === 'hidden') {
     // Keep the same native iOS Modal until its dismissal ACK, with no private
     // body or child tree after close. The host owns any body-free handoff.
@@ -43,6 +47,32 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const picture = display.visualEdit?.draftDisplay ?? baseDisplay;
   const recipe = picture?.preview?.visual_recipe;
   const caps = preview?.plan_capabilities;
+  const activePicker = pickerState?.previewId === preview?.preview_id ? pickerState?.key : null;
+  const openPicker = key => {
+    focusTarget.current = { key: key ? 'return' : activePicker, handled: false };
+    setPickerState(key ? { previewId: preview.preview_id, key } : null);
+  };
+  const focusControl = key => node => {
+    const request = focusTarget.current;
+    if (!node || request?.key !== key || request.handled) return;
+    request.handled = true;
+    AccessibilityInfo.isScreenReaderEnabled().then(enabled => {
+      const handle = enabled && focusTarget.current === request ? findNodeHandle(node) : null;
+      if (handle != null) AccessibilityInfo.setAccessibilityFocus(handle);
+    }).catch(() => {});
+  };
+  const sideBySide = window.width >= 540 && window.width > window.height;
+  const textScale = Math.max(1, window.fontScale || 1);
+  const controlHeight = Math.max(44, Math.ceil(ui.typography.button.lineHeight * textScale + 16));
+  const optionHeight = Math.max(82, Math.ceil((ui.typography.meta.lineHeight + 24) * textScale + 20));
+  const ratio = recipe?.aspect_ratio === '9:16' ? 9 / 16 : 4 / 5;
+  // Viewport size is independent of which picker is open. Resizing the mounted
+  // drawing would invalidate its native verification even for a UI-only change.
+  const previewWidth = stageBounds ? Math.max(1, Math.floor(Math.min(350, stageBounds.width - 16,
+    (stageBounds.height - 26 - Math.ceil(24 * textScale)) * ratio))) : null;
+  const updateStageBounds = ({ nativeEvent: { layout: { width, height } } }) => {
+    setStageBounds(current => current?.width === width && current?.height === height ? current : { width, height });
+  };
   const selection = preview ? { theme_id: recipe.theme.theme_id,
     aspect_ratio: recipe.aspect_ratio, branding_mode: recipe.branding.branding_mode,
     ...pieceThemeVisualSelection(recipe.theme, caps),
@@ -62,31 +92,32 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const changeVisual = (field, value) => {
     if (typeof onVisualChange === 'function') {
       onVisualChange({ ...selection, [field]: value }, candidateIdentity, baseDisplay.visualToken, { field, value });
+      openPicker(null);
     }
   };
   const optionStyle = selected => ({ minHeight: 44, paddingHorizontal: 12, paddingVertical: 8,
     borderRadius: 18, borderWidth: 1, borderColor: selected ? colors.ON_SURFACE_TONAL : colors.CARD_BORDER,
-    backgroundColor: selected ? colors.SURFACE_TONAL : colors.FIELD_BG, maxWidth: '100%',
+    backgroundColor: selected ? colors.SURFACE_TONAL : colors.FIELD_BG,
     justifyContent: 'center' });
   const formatPicker = preview?.plan_capabilities.format_selection === 'eligible_choice' &&
     preview.eligible_formats.length > 1 && typeof onFormatChange === 'function'
-    ? element(View, { testID: 'piece-format-options', style: { marginTop: 12 } },
-      element(Text, { style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT, marginBottom: 8 } }, '文章の形式'),
-      element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 } }, ...preview.eligible_formats.map(format => {
+    ? element(ScrollView, { testID: 'piece-format-options', horizontal: true, style: { flex: 1 }, contentContainerStyle: { gap: 6, alignItems: 'center' } },
+      ...preview.eligible_formats.map(format => {
         const selected = preview.format_type === format;
         const disabled = selected || !!display.visualEdit;
         return element(Pressable, { style: optionStyle(selected), key: format, accessibilityRole: 'button',
           accessibilityLabel: `形式：${formats[format]}`, accessibilityState: { selected, disabled },
-          disabled, onPress: () => onFormatChange(format, candidateIdentity, display.visualToken) },
+          disabled, onPress: () => {
+            openPicker(null);
+            onFormatChange(format, candidateIdentity, display.visualToken);
+          } },
           element(Text, { style: { ...ui.typography.button, color: selected ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT } },
             `${selected ? '✓ ' : ''}${formats[format]}`));
-      }))) : null;
+      })) : null;
   const choices = (label, field, values, allowed, labels, description) =>
-    element(View, { key: field, testID: `piece-visual-${field}`, style: { marginTop: 12,
-      paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.CARD_BORDER } },
-      element(Text, { style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT, marginBottom: 8 } }, label),
-      description ? element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE, marginBottom: 8 } }, description) : null,
-      element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 } }, ...values.map(value => {
+    element(ScrollView, { key: field, testID: `piece-visual-${field}`, horizontal: true, style: { flex: 1 },
+      accessibilityLabel: label, accessibilityHint: description, contentContainerStyle: { gap: 6, alignItems: 'center' } },
+      ...values.map(value => {
         const selected = selection[field] === value;
         const locked = freePlan || !allowed.includes(value);
         const disabled = !locked && (selected || typeof onVisualChange !== 'function');
@@ -100,16 +131,13 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
         }, element(Text, { style: { ...ui.typography.button,
           color: locked ? colors.TEXT_SUBTLE : selected ? colors.ON_SURFACE_TONAL : colors.TEXT_ON_LIGHT } },
           `${selected ? '✓ ' : ''}${labels?.[value] || value}`));
-      })));
+      }));
   const paletteOptions = caps?.theme_ids;
   const visibleThemes = caps?.font_style_ids ? PIECE_STYLE_THEME_IDS : PIECE_THEME_IDS;
   const palettePicker = preview
-    ? element(View, { testID: 'piece-visual-theme_id', style: { marginTop: 12 } },
-      element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', gap: 8, marginBottom: 10 } },
-        element(Text, { style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT } }, '背景と文字色'),
-        element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE } }, `${paletteOptions.length}色を選択できます`)),
-      element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 } },
-        ...visibleThemes.map(value => {
+    ? element(ScrollView, { testID: 'piece-visual-theme_id', horizontal: true, style: { flex: 1 }, accessibilityLabel: '配色',
+      contentContainerStyle: { gap: 8, alignItems: 'center' } },
+      ...visibleThemes.map(value => {
           const { canvas, surface, text, border } = PIECE_THEME_COLORS[value];
           const selected = selection.theme_id === value;
           const locked = !paletteOptions.includes(value);
@@ -120,21 +148,21 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
             accessibilityHint: locked ? 'タップすると利用条件の案内を表示します。' : undefined,
             accessibilityState: { selected, disabled }, disabled,
             onPress: () => locked ? showLockedSetting() : changeVisual('theme_id', value),
-            style: { flexBasis: '22%', flexGrow: 1, minWidth: 64, maxWidth: '100%', minHeight: 44,
+            style: { minWidth: 64, minHeight: 44,
               padding: 4, borderRadius: 18, borderWidth: 2, opacity: locked ? 0.65 : 1,
               borderColor: selected ? colors.TITLE_GOLD : colors.FIELD_BG, backgroundColor: colors.FIELD_BG } },
             element(View, { testID: `piece-theme-swatch-${value}`, accessible: false,
               accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants',
-              style: { padding: 4, backgroundColor: canvas, borderColor: border, borderWidth: 1,
+              style: { paddingHorizontal: 4, backgroundColor: canvas, borderColor: border, borderWidth: 1,
                 borderRadius: 17 } },
-              element(Text, { style: { padding: 4, fontSize: 18, lineHeight: 24,
+              element(Text, { allowFontScaling: false, style: { paddingVertical: 1, fontSize: 16, lineHeight: 22,
                 textAlign: 'center', backgroundColor: surface, color: text } }, 'Aa')),
             element(Text, { style: { ...ui.typography.meta, marginTop: 6, textAlign: 'center',
               color: selected ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE } }, `${selected ? '✓ ' : ''}${themes[value]}`),
             locked ? element(Text, { testID: `piece-theme-lock-${value}`, accessible: false,
               style: { position: 'absolute', top: 2, right: 2, fontSize: 12, lineHeight: 20,
                 paddingHorizontal: 3, borderRadius: 10, backgroundColor: colors.FIELD_BG } }, '🔒') : null);
-        }))) : null;
+        })) : null;
   const aspectPicker = preview ? choices('画像の比率', 'aspect_ratio', ['4:5', '9:16'],
     preview.plan_capabilities.aspect_ratios) : null;
   const brandingPicker = preview ? choices('Emlisロゴ', 'branding_mode',
@@ -162,8 +190,8 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
   const saveIdentity = canSave ? Object.freeze({ preview_id: preview.preview_id,
     preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }) : null;
   const nextActions = canSave ? [
-    { title: 'アプリ内に投稿する', press: onPost },
-    { title: '画像を保存', press: onSaveImage },
+    { title: 'アプリ内に投稿する', label: '投稿', press: onPost },
+    { title: '画像を保存', label: '画像保存', press: onSaveImage },
   ].filter(action => typeof action.press === 'function') : [];
   const saveToken = display.visualToken;
   const loading = display.loadingKind === 'save' ? 'Pieceを保存しています。' : display.loadingKind === 'cancel' ? '候補を取り消しています。' :
@@ -198,106 +226,118 @@ export default function PiecePreviewModal({ visible = false, retainDismiss = fal
         preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }, display.visualToken),
     }) : null,
   ].filter(Boolean);
+  const status = display.phase === 'loading' || display.visualUpdated === true || display.formatNotice ||
+    display.phase === 'saved' || ['unavailable', 'cancelled'].includes(display.phase)
+    ? element(View, { style: { padding: 12, borderRadius: 16, backgroundColor: colors.SURFACE_TONAL,
+      gap: 4 } },
+      display.phase === 'loading' ? element(ActivityIndicator, { accessibilityLabel: loading, color: colors.TITLE_GOLD }) : null,
+      display.phase === 'loading' ? element(Text, { style: { ...ui.typography.description, color: colors.ON_SURFACE_TONAL }, accessibilityLiveRegion: 'polite' }, loading) : null,
+      display.visualUpdated === true ? element(Text, { accessibilityRole: 'alert', accessibilityLiveRegion: 'polite',
+        style: { ...ui.typography.description, color: colors.ON_SURFACE_TONAL } }, '画像設定を更新しました。') : null,
+      display.formatNotice ? element(Text, { accessibilityLiveRegion: 'polite',
+        style: { ...ui.typography.description, color: colors.ON_SURFACE_TONAL } }, display.formatNotice) : null,
+      display.phase === 'saved' ? element(Text, { accessibilityLiveRegion: 'polite',
+        style: { ...ui.typography.sectionTitle, color: colors.ON_SURFACE_TONAL } }, 'Pieceを保存しました。') : null,
+      ['unavailable', 'cancelled'].includes(display.phase) ? element(Text, { accessibilityRole: 'alert',
+        style: { ...ui.typography.body, color: colors.ON_SURFACE_TONAL } }, display.message) : null,
+    ) : null;
+  const recovery = recoveryActions.length ? element(View, { testID: 'piece-recovery-actions',
+    style: recoveryActions.length > 1 ? { padding: 16, borderRadius: 24, backgroundColor: colors.FIELD_BG } : undefined },
+    recoveryActions.length > 1 ? element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE } }, '候補と保存の操作') : null,
+    ...recoveryActions) : null;
+  const saveHint = canSave || saving || display.phase === 'saved' ? element(Text,
+    { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE } },
+    nextActions.length > 0 ? '投稿や画像保存を選ぶと、このピースを自分用に保存してから、選んだ操作に進みます。'
+      : '画像の書き出し・共有は、保存したPieceの詳細画面から行えます。') : null;
+  const details = preview ? element(ScrollView, { testID: 'piece-plan-details', style: { flex: 1, alignSelf: 'stretch' },
+    contentContainerStyle: { gap: 8, paddingBottom: 8 } },
+    element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE } },
+      `${plans[preview.quota.subscription_tier]}プラン · ${formats[preview.format_type]} · ${recipe.aspect_ratio}`),
+    element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE } },
+      caps.format_selection === 'fixed' ? '形式：エッセイ（固定）' :
+        caps.format_selection === 'automatic' ? '形式：入力に合う形式を自動選択' :
+          `選択できる形式：${preview.eligible_formats.map(format => formats[format]).join(' / ')}`),
+    element(Text, { testID: 'piece-save-quota', style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT } },
+      `${preview.quota.month_key}（日本時間）の保存枠：${preview.quota.remaining_count === null
+        ? '回数制限なし' : `残り${preview.quota.remaining_count}回 / ${preview.quota.save_limit}回`}`),
+    element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE } },
+      '取得時点の情報です。保存時に残り回数を確認します。'),
+    saveHint, recovery,
+    element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE } }, '本文（全文）'),
+    element(Text, { testID: 'piece-canonical-text', selectable: true,
+      style: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT } }, preview.piece_text),
+    preview.content_status === 'adjusted' ? element(Text, { style: { ...ui.typography.description,
+      color: colors.TEXT_SUBTLE } }, '伝えたい内容を保ちながら、共有に向けた調整がされています。') : null) : null;
+  const pickerItems = [
+    ['theme_id', '配色', palettePicker], ['background_style', '背景', backgroundPicker], ['frame_style', '枠', framePicker],
+    ['accent_style', '飾り', accentPicker], ['font_style_id', '書体', fontPicker], ['text_color_id', '文字色', textColorPicker],
+    ['text_size', '文字サイズ', textSizePicker], ['text_alignment', '文字の配置', alignmentPicker],
+    ['aspect_ratio', '比率', aspectPicker], ['branding_mode', 'ロゴ', brandingPicker], ['format', '文章の形式', formatPicker],
+    ['details', '詳細', details],
+  ].filter(([, , picker]) => picker);
+  const currentPicker = pickerItems.find(([key]) => key === activePicker);
+  const actionSize = { minHeight: controlHeight, paddingHorizontal: 12, paddingVertical: 6, shadowOpacity: 0, elevation: 0 };
+  // Each CocolonButton press target fills its parent. Bound its item in the
+  // horizontal row so the close button and all save actions stay reachable.
+  const actionItem = (label, child, width = Math.ceil(30 + Array.from(label).length * ui.typography.button.fontSize * textScale)) =>
+    element(View, { key: label, style: { width: Math.max(44, width) } }, child);
+  const close = element(Button, { variant: 'secondary', style: { ...actionSize, borderWidth: 0, backgroundColor: colors.BG_SILVER },
+    title: '閉じる', onPress: () => { focusTarget.current = null; onClose?.(); }, accessibilityLabel: 'Pieceの画面を閉じる' },
+    element(Text, { allowFontScaling: false, accessible: false,
+      style: { fontSize: 26, lineHeight: 26, color: colors.TEXT_ON_LIGHT } }, '×'));
+  const save = canSave ? element(Button, { variant: 'primary', style: actionSize,
+    testID: 'piece-initial-save', title: 'Pieceを保存', accessibilityLabel: 'このPieceを自分用に保存',
+    onPress: () => onSave(saveIdentity, saveToken), children: '保存' }) : null;
   return element(Modal, {
     supportedOrientations: MODAL_ORIENTATIONS,
     visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose, onDismiss,
   }, element(SafeAreaProvider, { style: { flex: 1, backgroundColor: colors.BG_SILVER } },
     element(SafeAreaView, { edges: ['top', 'right', 'bottom', 'left'], mode: 'padding',
       style: { flex: 1, backgroundColor: colors.BG_SILVER } },
-    element(View, { style: { flex: 1, padding: 20, width: '100%', maxWidth: 680, alignSelf: 'center' }, accessibilityViewIsModal: true },
-      element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE,
-        textAlign: 'center', letterSpacing: 1.8, marginBottom: 2 } }, 'PIECE'),
+    element(View, { style: { flex: 1, padding: 12, width: '100%', maxWidth: 680, alignSelf: 'center' }, accessibilityViewIsModal: true },
       element(Text, { accessibilityRole: 'header', accessibilityLabel: saving ? 'Pieceの保存' : 'Pieceのプレビュー',
-        style: { ...ui.typography.sectionTitle, color: colors.TEXT_ON_LIGHT, textAlign: 'center', marginBottom: 14 } },
-        saving ? 'Pieceの保存' : 'ことばを、一枚に。'),
-      element(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingBottom: 24 } },
-        display.phase === 'loading' || display.visualUpdated === true || display.formatNotice ||
-          display.phase === 'saved' || ['unavailable', 'cancelled'].includes(display.phase)
-          ? element(View, { style: { padding: 16, borderRadius: 24, backgroundColor: colors.SURFACE_TONAL,
-            gap: 8, marginBottom: 16 } },
-            display.phase === 'loading' ? element(ActivityIndicator, { accessibilityLabel: loading, color: colors.TITLE_GOLD }) : null,
-            display.phase === 'loading' ? element(Text, { style: { ...ui.typography.body, color: colors.ON_SURFACE_TONAL }, accessibilityLiveRegion: 'polite' }, loading) : null,
-            display.visualUpdated === true ? element(Text, { accessibilityRole: 'alert', accessibilityLiveRegion: 'polite',
-              style: { ...ui.typography.description, color: colors.ON_SURFACE_TONAL } }, '画像設定を更新しました。') : null,
-            display.formatNotice ? element(Text, { accessibilityLiveRegion: 'polite',
-              style: { ...ui.typography.description, color: colors.ON_SURFACE_TONAL } }, display.formatNotice) : null,
-            display.phase === 'saved' ? element(Text, { accessibilityLiveRegion: 'polite',
-              style: { ...ui.typography.sectionTitle, color: colors.ON_SURFACE_TONAL } }, 'Pieceを保存しました。') : null,
-            ['unavailable', 'cancelled'].includes(display.phase) ? element(Text, { accessibilityRole: 'alert',
-              style: { ...ui.typography.body, color: colors.ON_SURFACE_TONAL } }, display.message) : null,
+        style: { ...ui.typography.sectionTitle, color: colors.TEXT_ON_LIGHT, textAlign: 'center', marginBottom: 8 } },
+        saving ? 'Pieceの保存' : 'Pieceのプレビュー'),
+      preview ? element(View, { style: { flex: 1, minHeight: 0, flexDirection: sideBySide ? 'row' : 'column' } },
+        element(View, { testID: 'piece-artwork-viewport', onLayout: updateStageBounds,
+          style: { flex: 1, minHeight: 0, minWidth: 0, justifyContent: 'center', alignItems: 'center' } },
+          previewWidth !== null ? element(View, { testID: 'piece-artwork-stage', style: { width: previewWidth } },
+            element(PieceVisualCard, { display: picture, onSaveFitChange: picture === baseDisplay ? onSaveFitChange : null,
+              colors, ui, showInspectionLabels: false })) : null),
+        element(View, { testID: 'piece-editor-panel-slot',
+          style: { minWidth: 0, height: optionHeight, maxHeight: '100%', ...(sideBySide ? { flex: 1 } : {}) } },
+          element(View, { testID: 'piece-editor-controls', pointerEvents: currentPicker ? 'none' : 'auto',
+            accessibilityElementsHidden: !!currentPicker, importantForAccessibility: currentPicker ? 'no-hide-descendants' : 'auto',
+            style: { position: 'absolute', top: 0, bottom: 0, left: 0, right: 0,
+              justifyContent: 'center', opacity: currentPicker ? 0 : 1 } },
+            element(View, { style: { height: controlHeight + 4, maxHeight: '100%' } },
+              element(ScrollView, { testID: 'piece-editor-toolbar', horizontal: true,
+                accessibilityLabel: 'Pieceの画像設定', contentContainerStyle: { gap: 6, alignItems: 'center' } },
+                ...pickerItems.map(([key, label]) => element(Pressable, { key,
+                  ref: focusControl(key), testID: `piece-editor-tab-${key}`, accessibilityRole: 'button', accessibilityLabel: label,
+                  accessibilityState: { expanded: currentPicker?.[0] === key }, style: optionStyle(false), onPress: () => openPicker(key) },
+                  element(Text, { style: { ...ui.typography.button, color: colors.TEXT_ON_LIGHT } }, label))))),
+            status ? element(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingVertical: 4 } }, status) : null),
+          currentPicker ? element(View, { testID: `piece-editor-panel-${currentPicker[0]}`,
+            style: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6 } },
+            element(Pressable, { ref: focusControl('return'), testID: 'piece-editor-return', accessibilityRole: 'button',
+              accessibilityLabel: `${currentPicker[1]}を閉じて設定一覧に戻る`,
+              onPress: () => openPicker(null), style: optionStyle(false) },
+              element(Text, { style: { ...ui.typography.button, color: colors.TEXT_ON_LIGHT } }, '‹')),
+            currentPicker[2],
           ) : null,
-        // The fixed pedestal affects preview scale; the logical canvas stays 1080 wide.
-        preview ? element(View, { testID: 'piece-artwork-stage', style: { width: '100%', maxWidth: 350,
-          alignSelf: 'center', paddingHorizontal: 39, paddingTop: 17,
-          borderRadius: 28, backgroundColor: colors.SURFACE_TONAL } },
-          element(PieceVisualCard, { display: picture, onSaveFitChange: picture === baseDisplay ? onSaveFitChange : null,
-            colors, ui, showInspectionLabels: false })) : null,
-        preview ? element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE,
-          textAlign: 'center', marginTop: 11, marginBottom: 15 } },
-          `${formats[preview.format_type]} · ${recipe.aspect_ratio}`) : null,
-        preview ? element(View, { testID: 'piece-plan-details', style: { padding: 16, borderRadius: 24,
-          backgroundColor: colors.FIELD_BG, marginBottom: 16 } },
-          element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center',
-            justifyContent: 'space-between', gap: 8, marginBottom: 8 } },
-            element(Text, { style: { ...ui.typography.sectionTitle, color: colors.TEXT_ON_LIGHT } }, '画像の設定'),
-            element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE } }, `${plans[preview.quota.subscription_tier]}プラン`)),
-          element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE } },
-            preview.plan_capabilities.format_selection === 'fixed' ? '形式：エッセイ（固定）' :
-              preview.plan_capabilities.format_selection === 'automatic' ? '形式：入力に合う形式を自動選択' :
-                `選択できる形式：${preview.eligible_formats.map(format => formats[format]).join(' / ')}`),
-          formatPicker,
-          palettePicker,
-          backgroundPicker,
-          framePicker,
-          accentPicker,
-          fontPicker,
-          textColorPicker,
-          textSizePicker,
-          alignmentPicker,
-          aspectPicker,
-          brandingPicker,
-        ) : null,
-        preview ? element(View, { style: { paddingHorizontal: 4, paddingBottom: 16, gap: 6 } },
-          element(Text, { testID: 'piece-save-quota', style: { ...ui.typography.description, color: colors.TEXT_ON_LIGHT } },
-            `${preview.quota.month_key}（日本時間）の保存枠：${preview.quota.remaining_count === null
-              ? '回数制限なし' : `残り${preview.quota.remaining_count}回 / ${preview.quota.save_limit}回`}`),
-          element(Text, { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE } },
-            '取得時点の情報です。保存時に残り回数を確認します。'),
-        ) : null,
-        (canSave || saving || display.phase === 'saved') ? element(Text,
-          { style: { ...ui.typography.meta, color: colors.TEXT_SUBTLE, marginBottom: 16 } },
-          nextActions.length > 0 ? '投稿や画像保存を選ぶと、このピースを自分用に保存してから、選んだ操作に進みます。'
-            : '画像の書き出し・共有は、保存したPieceの詳細画面から行えます。') : null,
-        recoveryActions.length ? element(View, { testID: 'piece-recovery-actions', style: recoveryActions.length > 1
-          ? { padding: 16, borderRadius: 24, backgroundColor: colors.FIELD_BG, marginBottom: 16 }
-          : { marginBottom: 16 } },
-          recoveryActions.length > 1 ? element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE } }, '候補と保存の操作') : null,
-          ...recoveryActions) : null,
-        preview ? element(View, { style: { padding: 16, borderRadius: 24, backgroundColor: colors.FIELD_BG } },
-          element(Text, { style: { ...ui.typography.description, color: colors.TEXT_SUBTLE, marginBottom: 8 } }, '本文（全文）'),
-          element(Text, { testID: 'piece-canonical-text', selectable: true,
-            style: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT } }, preview.piece_text),
-          preview?.content_status === 'adjusted' ? element(Text, { style: { ...ui.typography.description,
-            color: colors.TEXT_SUBTLE, marginTop: 12 } }, '伝えたい内容を保ちながら、共有に向けた調整がされています。') : null,
-        ) : null,
-      ),
-      element(View, { style: { paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.CARD_BORDER } },
-        nextActions.length > 0 ? element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 8 } },
-          ...nextActions.map(({ title, press }) => element(View, { key: title, style: { flexGrow: 1, flexBasis: 130 } },
-            element(Button, { variant: 'primary', title, accessibilityLabel: title, onPress: () => press(saveIdentity, saveToken) }))),
-        ) : null,
-        canSave ? element(Button, { variant: nextActions.length > 0 ? 'secondary' : 'primary', style: { minHeight: 54,
-          shadowOpacity: 0, elevation: 0 },
-          testID: 'piece-initial-save', title: 'Pieceを保存',
-          accessibilityLabel: 'このPieceを自分用に保存',
-          onPress: () => onSave(saveIdentity, saveToken),
-        }) : null,
-        element(Button, { variant: 'secondary', style: { marginTop: 4, minHeight: 44, paddingVertical: 10,
-          borderWidth: 0, backgroundColor: colors.BG_SILVER, shadowOpacity: 0, elevation: 0 },
-          title: '閉じる', onPress: onClose, accessibilityLabel: 'Pieceの画面を閉じる' }),
+        ),
+      ) : element(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingBottom: 24, gap: 8 } },
+        status, saveHint, recovery),
+      element(View, { style: { paddingTop: 6, borderTopWidth: 1, borderTopColor: colors.CARD_BORDER,
+        flexDirection: 'row', alignItems: 'center', gap: 6, height: controlHeight + 8 } },
+        actionItem('閉じる', close, 50),
+        preview ? element(ScrollView, { horizontal: true, style: { flex: 1 },
+          contentContainerStyle: { gap: 8, alignItems: 'center' } },
+          save ? actionItem('保存', save) : null,
+          ...nextActions.map(({ title, label, press }) => actionItem(label, element(Button, { variant: 'secondary', style: actionSize,
+            title, children: label, accessibilityLabel: title, onPress: () => press(saveIdentity, saveToken) })))) : null,
       ),
     ),
   )));
 }
-
-

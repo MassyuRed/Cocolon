@@ -996,7 +996,7 @@ const safeInsets = useSafeAreaInsets();
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
-      // 送信が成功したら、入力状態をリセットし、表示用データを更新する
+      // 送信が成功したら、入力状態をリセットする
       setSelectedEmotions([]);
       setMemo("");
       setMemoAction("");
@@ -1007,12 +1007,13 @@ const safeInsets = useSafeAreaInsets();
       setIsSecret(false);
       Keyboard.dismiss();
 
-      await loadHomeState({ force: true, includeStartupCandidate: false });
-      if (!ownsResponse()) return;
-
       const replyPending = Array.isArray(inputFeedbackAI?.rejection_reasons)
         && inputFeedbackAI.rejection_reasons.includes("thread_reply_pending");
-      const openedThread = await emlisThread.open(submitResult?.id, { showNotCreated: replyPending, waitForInitial: replyPending });
+      const openingThread = emlisThread.open(submitResult?.id, { showNotCreated: replyPending, waitForInitial: replyPending });
+      void loadHomeState({ force: true, includeStartupCandidate: false }).catch((error) => {
+        if (ownsResponse()) console.warn("InputScreen: home refresh after emotion submit failed", error);
+      });
+      const openedThread = await openingThread;
       if (!ownsResponse()) return;
       // Opening a reader is not terminal eligibility. The Piece host performs
       // the existing authoritative source-ref GET only on a separate action.

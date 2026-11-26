@@ -521,6 +521,48 @@ test('thread reader visibility also defers the saved-input action without using 
   assert.equal(h.u.calls.length, 0); h.dispose();
 });
 
+test('observation opens after draft cleanup while the Home refresh is still pending', async () => {
+  const refresh = deferred();
+  const order = [];
+  const h = harness({
+    threadMode: true,
+    clearDraft: () => order.push('draft cleared'),
+    refresh: () => { order.push('Home refresh'); return refresh.promise; },
+  });
+  h.fill();
+  let finished = false;
+  const submitted = h.submit().then(() => { finished = true; });
+  try {
+    await tick();
+    assert.deepEqual(order, ['draft cleared', 'Home refresh']);
+    assert.deepEqual(h.threadIds, [INPUT]);
+    assert.equal(finished, true);
+    h.render();
+    assert.equal(h.find('EmlisThreadModal').props.thread.visible, true);
+    assert.equal(h.slot(), undefined);
+  } finally {
+    refresh.resolve();
+    await submitted;
+    h.dispose();
+  }
+});
+
+test('failing the Home refresh after a confirmed save does not report input failure', async () => {
+  const h = harness({ threadMode: true, refresh: async () => { throw Error('synthetic Home read failure'); } });
+  h.fill();
+  await h.submit();
+  await tick();
+  h.render();
+  assert.equal(h.submits.length, 1);
+  assert.deepEqual(h.threadIds, [INPUT]);
+  assert.deepEqual(h.notices, []);
+  assert.equal(h.find('EmlisThreadModal').props.thread.visible, true);
+  h.finishObservation();
+  assert.equal(h.slot().props.savedInput.savedInputId, INPUT);
+  assert.equal(h.u.calls.length, 0);
+  h.dispose();
+});
+
 test('closing an unsuccessful observation reader never makes a source eligible', async () => {
   const h = await saved({ threadMode: true, send: async () => packet({ code: 'PIECE_SOURCE_NOT_ELIGIBLE' }, 422) });
   assert.ok(h.slot(), 'saved source checking action must be connected');
@@ -664,7 +706,7 @@ test('InputScreen keeps the same cancellation host through background runtime OF
   } });
   await h.u.host.resolveSavedInput(); h.u.host.start(); await tick();
   const controller = h.u.host.controller, key = h.slot().props.savedInput.idempotencyKey;
-  h.u.nodes(h.u.tree()).find(n => n.props.title === '候補を取り消す').props.onPress(); await tick();
+  h.u.openPicker('details').find(n => n.props.title === '候補を取り消す').props.onPress(); await tick();
   h.u.background('inactive'); h.control.enabled = false;
   h.u.host.context.runtime = { loaded: true, loading: true }; h.render();
   assert.ok(h.slot()); assert.equal(h.u.host.controller, controller);
