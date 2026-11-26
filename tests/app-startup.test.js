@@ -29,6 +29,124 @@ const theme={colors:{}};
 const no = () => {};
 const forever = () => new Promise(()=>{});
 
+function renderTutorial(entry, calls) {
+  class AnimationValue {
+    interpolate({ outputRange }) { return outputRange[1]; }
+    setValue() {}
+  }
+  const ScrollView = React.forwardRef(({ children }, ref) => {
+    React.useImperativeHandle(ref, () => ({ scrollTo: no }), []);
+    return React.createElement('ScrollView', null, children);
+  });
+  const Screen = load('screens/EmlisTutorialScreen.js', {
+    'react-native': {
+      ...native,
+      ScrollView,
+      StyleSheet: { create: (styles) => styles, hairlineWidth: 1 },
+      AccessibilityInfo: {
+        addEventListener: () => ({ remove: no }),
+        isReduceMotionEnabled: async () => true,
+      },
+      Animated: { View: 'AnimatedView', Value: AnimationValue },
+    },
+    'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' },
+    'react-native-vector-icons/Ionicons': () => null,
+    '../components/CocolonBackButton': (props) => React.createElement('TutorialBack', props),
+    '../components/CocolonButton': (props) => React.createElement('TutorialButton', props),
+    '../../components/CocolonButton': (props) => React.createElement('TutorialButton', props),
+    '../../components/CocolonPressable': (props) => React.createElement('TutorialPressable', props),
+    '../theme/ThemeContext': { useTheme: () => theme },
+    '../../theme/ThemeContext': { useTheme: () => theme },
+    '../TutorialContext': {
+      useTutorial: () => ({
+        endTutorial: async () => calls.push('complete'),
+        skipTutorial: async () => calls.push('skip'),
+      }),
+    },
+  }).default;
+  const navigation = {
+    isFocused: () => true,
+    goBack: () => calls.push('back'),
+    popToTop: () => calls.push('home'),
+    getParent: () => ({ navigate: (destination) => calls.push(destination) }),
+  };
+  return Renderer.create(React.createElement(Screen, { navigation, route: { params: { entry } } }));
+}
+
+test('Emlis tutorial carries a sample reply, saved image and practice post through the analysis and returns Home', async () => {
+  const calls = [];
+  let view;
+  await act(async () => { view = renderTutorial('first', calls); });
+  const includesText = (value) => view.root.findAllByType('Text').some(({ props }) => (
+    React.Children.toArray(props.children).join('').includes(value)
+  ));
+  const button = (title) => view.root.findAllByType('TutorialButton').find(({ props }) => (
+    (props.title ?? props.children) === title
+  ));
+  const byId = (id) => view.root.findAll((element) => element.props.testID === id).at(-1);
+  const press = async (element) => {
+    assert.ok(element);
+    assert.ok(!element.props.disabled);
+    await act(async () => { await element.props.onPress(); });
+  };
+
+  assert.ok(includesText('Emlis(エムリス)'));
+  await press(button('はじめる'));
+  assert.ok(!includesText('Emlis(エムリス)'));
+  assert.ok(includesText('資料の確認だけ引き受けた。'));
+  await press(button('この内容でOK'));
+  assert.ok(includesText('どんなところに、いちばんほっとしましたか？'));
+  assert.ok(!button('ピースの作成'));
+  await press(button('先の約束を守りながら、同僚の手伝いもできたことです。'));
+  assert.ok(includesText('先の約束も、同僚を手伝いたい気持ちも、どちらも大切にできたんですね。'));
+  await press(button('ピースの作成'));
+
+  const color = () => byId('emlis-tutorial-piece-preview').props.style[1].backgroundColor;
+  const startingColor = color();
+  await press(byId('emlis-tutorial-piece-theme-quiet_night'));
+  const selectedColor = color();
+  assert.notEqual(startingColor, selectedColor);
+  await press(byId('emlis-tutorial-save-piece'));
+  await press(byId('emlis-tutorial-open-library-piece'));
+  assert.equal(color(), selectedColor);
+  await press(byId('emlis-tutorial-open-post'));
+  assert.ok(includesText('フォロー'));
+  assert.ok(!includesText('自分の投稿（練習）'));
+  await press(byId('emlis-tutorial-practice-post'));
+  assert.ok(includesText('自分の投稿（練習）'));
+  await press(button('分析を見てみる'));
+
+  assert.ok(byId('emlis-tutorial-open-map').props.disabled);
+  await press(byId('emlis-tutorial-chart-day-26'));
+  assert.ok(includesText('平穏・中'));
+  await press(byId('emlis-tutorial-open-map'));
+  assert.ok(!byId('emlis-tutorial-map-diagram'));
+  await press(byId('emlis-tutorial-map-toggle'));
+  assert.ok(byId('emlis-tutorial-map-diagram'));
+  await press(byId('emlis-tutorial-open-summary'));
+  assert.ok(includesText('Emlisの使い方'));
+  assert.ok(includesText('投稿するとフォロワーに届けられる'));
+  assert.deepEqual(calls, []);
+  await press(button('自分の記録をはじめる'));
+  assert.deepEqual(calls, ['complete', 'home']);
+  await act(async () => view.unmount());
+});
+
+test('dismissing the first Emlis tutorial records a skip and closing replay returns to Settings', async () => {
+  for (const [entry, title, expected] of [
+    ['first', 'あとで', ['skip', 'home']],
+    ['replay', '閉じる', ['back', 'Settings']],
+  ]) {
+    const calls = [];
+    let view;
+    await act(async () => { view = renderTutorial(entry, calls); });
+    const button = view.root.findAllByType('TutorialButton').find(({ props }) => props.title === title);
+    await act(async () => { await button.props.onPress(); });
+    assert.deepEqual(calls, expected);
+    await act(async () => view.unmount());
+  }
+});
+
 test('startup covers the mounted home until subscription I/O and home/draft settle, then preserves drafts on refresh', async t => {
   let mounts=0, readyHome, setDraft, owner='A', navLayoutScale=1, navLayoutWidth=390;
   function Input(props) {

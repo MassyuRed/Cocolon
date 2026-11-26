@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AppState, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StackActions } from "@react-navigation/native";
+import { CommonActions, StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -202,9 +202,8 @@ export default function MainTabs() {
     tutorialCompleted,
     tutorialSkipped,
     tutorialCompletionInProgress,
-    startTutorial,
-    setTutorialStep,
   } = useTutorial();
+  const tutorialOfferGenerationRef = useRef(null);
   const [isAppActive, setIsAppActive] = useState(() => (AppState?.currentState || "active") === "active");
   const [selfStructureBanner, setSelfStructureBanner] = useState({ visible: false, reportMode: "standard" });
   const [selfStructureStatus, setSelfStructureStatus] = useState(null);
@@ -255,37 +254,51 @@ export default function MainTabs() {
   useEffect(() => {
     if (appStartupReady) setStartupComplete(true);
   }, [appStartupReady]);
-  const frameEnabled = !HIDDEN_SCREENS.has(activeRouteName);
+  const tutorialScreenFocused = activeRouteName === "Input" && activeLeafName === "TutorialIntro";
+  const frameEnabled = !tutorialScreenFocused && !HIDDEN_SCREENS.has(activeRouteName);
   const [pieceLinkPayload, setPieceLinkPayload] = useState(null);
 
-
   useEffect(() => {
-    if (!session || recoveryMode) return;
     if (
+      !currentOwner ||
+      recoveryMode ||
+      !isAppActive ||
+      activeRouteName !== "Input" ||
+      activeLeafName !== "Input" ||
       !tutorialFlagsLoaded ||
       tutorialCompleted ||
       tutorialSkipped ||
       isTutorialMode ||
-      tutorialCompletionInProgress
+      tutorialCompletionInProgress ||
+      tutorialOfferGenerationRef.current === authOwnerGeneration
     ) return;
 
-    const started = startTutorial();
-    if (started === false) return;
-
-    setTutorialStep(1);
-    requestAnimationFrame(() => {
-      try {
-        if (navigationRef.isReady()) {
-          navigationRef.navigate("Input", { screen: "TutorialIntro" });
-        }
-      } catch {}
+    const frame = requestAnimationFrame(() => {
+      if (!isOwnerCurrent(ownerRequest) || !navigationRef.isReady() ||
+          navigationRef.getCurrentRoute()?.name !== "Input") return;
+      const tabNavigatorKey = navigationRef.getRootState()?.key;
+      if (!tabNavigatorKey) return;
+      tutorialOfferGenerationRef.current = authOwnerGeneration;
+      navigationRef.dispatch({
+        ...CommonActions.navigate("Input", {
+          screen: "TutorialIntro",
+          initial: false,
+          params: { entry: "first" },
+        }),
+        target: tabNavigatorKey,
+      });
     });
+    return () => cancelAnimationFrame(frame);
   }, [
+    activeLeafName,
+    activeRouteName,
+    authOwnerGeneration,
+    currentOwner,
+    isAppActive,
+    isOwnerCurrent,
     isTutorialMode,
+    ownerRequest,
     recoveryMode,
-    session,
-    setTutorialStep,
-    startTutorial,
     tutorialCompleted,
     tutorialSkipped,
     tutorialCompletionInProgress,
@@ -1139,11 +1152,11 @@ export default function MainTabs() {
   return (
     <View style={{ flex: 1 }}>
     <View style={{ flex: 1 }} accessibilityElementsHidden={!appStartupReady} importantForAccessibility={appStartupReady ? "auto" : "no-hide-descendants"}>
-    <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={notificationBanners}>
+    <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={tutorialScreenFocused ? null : notificationBanners}>
       <Tab.Navigator
         backBehavior="history"
         initialRouteName="Input"
-        tabBar={(props) => (isTutorialMode ? null : <CocolonTabBar {...props} />)}
+        tabBar={(props) => (isTutorialMode || tutorialScreenFocused ? null : <CocolonTabBar {...props} />)}
         screenListeners={{
           state: (e) => {
             const st = e?.data?.state;

@@ -3,8 +3,6 @@ import { Alert, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useAuth } from "../AuthContext";
-import { useTutorial } from "../TutorialContext";
-import { useUnread } from "../UnreadContext";
 import { useAppRuntime } from "../AppRuntimeContext";
 import { apiPost } from "../lib/apiClient";
 import { clearDeletedAccountLocalState } from "../lib/accountLocalCleanup";
@@ -76,8 +74,6 @@ function SettingActionRow({ title, description, icon, onPress, disabled, destruc
 
 export default function SettingsOtherScreen({ navigation, embedded = false }) {
   const { signOut, authLoading, user } = useAuth();
-  const { startTutorial, setTutorialStep } = useTutorial();
-  const { setUnread } = useUnread();
   const { isFeatureEnabled } = useAppRuntime();
   const [localProcessing, setLocalProcessing] = useState(false);
   const isBusy = authLoading || localProcessing;
@@ -87,59 +83,11 @@ export default function SettingsOtherScreen({ navigation, embedded = false }) {
 
   const openTutorialRestart = () => {
     if (isBusy) return;
-
-    Alert.alert(
-      "チュートリアル",
-      "チュートリアルを最初から再体験しますか？\n\n現在の入力や記録はそのままです。",
-      [
-        { text: "キャンセル", style: "cancel" },
-        {
-          text: "開始する",
-          onPress: () => {
-            try {
-              const started = startTutorial();
-              if (started === false) return;
-              setTutorialStep(1);
-            } catch {
-              // noop
-            }
-
-            try {
-              setUnread("EmotionLog", "tutorial", false);
-            } catch {
-              // noop
-            }
-
-            try {
-              const parent =
-                typeof navigation?.getParent === "function"
-                  ? navigation.getParent()
-                  : null;
-              if (parent && typeof parent.navigate === "function") {
-                parent.navigate("Input", { screen: "TutorialIntro" });
-                return;
-              }
-            } catch {
-              // noop
-            }
-
-            try {
-              if (navigation?.navigate) {
-                navigation.navigate("Input", { screen: "TutorialIntro" });
-                return;
-              }
-            } catch {
-              // noop
-            }
-
-            Alert.alert(
-              "チュートリアル",
-              "チュートリアルを開始状態にしました。"
-            );
-          },
-        },
-      ]
-    );
+    navigation?.getParent()?.navigate("Input", {
+      screen: "TutorialIntro",
+      initial: false,
+      params: { entry: "replay" },
+    });
   };
 
   const handleLogout = () => {

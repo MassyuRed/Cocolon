@@ -279,7 +279,8 @@ export function TutorialProvider({ children }) {
       setTutorialCompleted(true);
       setTutorialSkipped(false);
       clearTutorialData();
-      setTutorialResetToken((prev) => prev + 1);
+      // Only the legacy flow uses shared screens for its sample data.
+      if (isTutorialMode) setTutorialResetToken((prev) => prev + 1);
       setIsTutorialMode(false);
     } finally {
       if (!request.signal.aborted) setTutorialCompletionInProgress(false);
@@ -290,7 +291,7 @@ export function TutorialProvider({ children }) {
         console.warn("TutorialContext: failed to sync tutorial completion flags");
       }
     });
-  }, [clearTutorialData, session?.user?.id, syncTutorialFlagsToProfile]);
+  }, [clearTutorialData, isTutorialMode, session?.user?.id, syncTutorialFlagsToProfile]);
 
   const skipTutorial = useCallback(async () => {
     const userId = session?.user?.id ?? null;
@@ -306,11 +307,11 @@ export function TutorialProvider({ children }) {
     setTutorialCompleted(false);
     setTutorialSkipped(true);
     clearTutorialData();
-    setTutorialResetToken((prev) => prev + 1);
+    if (isTutorialMode) setTutorialResetToken((prev) => prev + 1);
     await writeTutorialLocalFlags(userId, { completed: false, skipped: true });
     if (request.signal.aborted) return false;
     void syncTutorialFlagsToProfile(payload, request);
-  }, [clearTutorialData, session?.user?.id, syncTutorialFlagsToProfile]);
+  }, [clearTutorialData, isTutorialMode, session?.user?.id, syncTutorialFlagsToProfile]);
 
   const resetTutorial = useCallback(() => {
     setIsTutorialMode(INITIAL_TUTORIAL_STATE.isTutorialMode);

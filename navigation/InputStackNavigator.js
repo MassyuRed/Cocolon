@@ -3,7 +3,7 @@ import { AppState } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import InputScreen from "../screens/InputScreen";
-import TutorialFlowScreen from "../screens/TutorialFlowScreen";
+import EmlisTutorialScreen from "../screens/EmlisTutorialScreen";
 import AnalysisHistoryScreen from "../screens/AnalysisHistoryScreen";
 import DeepInsightScreen, { DeepInsightReturnCacheContext } from "../screens/DeepInsightScreen";
 import { useAuth } from "../AuthContext";
@@ -37,7 +37,7 @@ export default function InputStackNavigator({ onInitialInputSettled, appStartupR
           appStartupReady={appStartupReady} saveRecovery={saveRecovery} />}
       </InputStack.Screen>
       <InputStack.Screen name="DeepInsight" component={DeepInsightScreen} />
-      <InputStack.Screen name="TutorialIntro" component={TutorialFlowScreen} />
+      <InputStack.Screen name="TutorialIntro" component={EmlisTutorialScreen} />
       <InputStack.Screen
         name="InputHistory"
         options={{ headerShown: false }}

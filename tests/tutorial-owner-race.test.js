@@ -101,7 +101,7 @@ test('tutorial A to B to A invalidates an older profile read', async () => {
 });
 
 for (const action of ['endTutorial', 'skipTutorial']) {
-  test(`${action} persists normal owner and keeps completion semantics`, async () => {
+  test(`${action} persists the tutorial flag without resetting existing screens`, async () => {
     const p = tutorialProvider('A'); p.render(); await p.settle();
     p.api.gets[0].resolve({ tutorial_completed: false }); await p.settle();
     await p.value[action](); await p.settle();
@@ -110,6 +110,16 @@ for (const action of ['endTutorial', 'skipTutorial']) {
     assert.equal(p.api.writes[0].body.tutorial_completed, completed);
     assert.equal(p.api.writes[0].body.tutorial_skipped, !completed);
     assert.equal(p.value.tutorialCompleted, completed); assert.equal(p.value.tutorialSkipped, !completed);
+    assert.equal(p.value.tutorialResetToken, 0);
+  });
+  test(`${action} still resets shared screens after the legacy flow`, async () => {
+    const p = tutorialProvider('A'); p.render(); await p.settle();
+    p.api.gets[0].resolve({ tutorial_completed: false }); await p.settle();
+    assert.equal(p.value.startTutorial(), true); await p.settle();
+    assert.equal(p.value.isTutorialMode, true);
+    await p.value[action](); await p.settle();
+    assert.equal(p.value.isTutorialMode, false);
+    assert.equal(p.value.tutorialResetToken, 1);
   });
   for (const next of ['B', null]) test(`${action} delayed A storage cannot patch ${next || 'signed-out session'}`, async () => {
     const p = tutorialProvider('A'); p.render(); await p.settle();

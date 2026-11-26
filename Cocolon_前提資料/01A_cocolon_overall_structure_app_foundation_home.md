@@ -318,7 +318,7 @@ revision_date: "2026-06-05"
 - repo: `Cocolon`
 - system: `app provider / context boundary`
 - 現行状態: `shared`
-- 役割: App support file. Current system: app provider / context boundary.
+- 役割: チュートリアルの完了・見送りを本人別に保存する。専用画面からの完了・見送りでは、旧練習が共有画面を初期化するために使っていたリセット番号を変更しない。
 - 直接関係ファイル:
   - `Cocolon/lib/api/account/profileApi.js` — import
 - このファイルを直接参照するファイル:
@@ -330,7 +330,8 @@ revision_date: "2026-06-05"
   - `Cocolon/screens/MyModelScreen.js` — import
   - `Cocolon/screens/MyWebScreen.js` — import
   - `Cocolon/screens/NexusScreen.js` — import
-  - `Cocolon/screens/SettingsOtherScreen.js` — import
+  - `Cocolon/screens/EmlisTutorialScreen.js` — 完了・見送り
+  - `Cocolon/navigation/MainTabs.js` — 初回表示条件
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
   - `Cocolon/lib/api/account/profileApi.js`
@@ -344,6 +345,12 @@ revision_date: "2026-06-05"
   - `Cocolon/screens/SettingsOtherScreen.js`
 - 修正対象になりうる変更:
   - auth, unread, tutorial, plan gating, global state propagation
+
+### `Cocolon/screens/EmlisTutorialScreen.js` / `Cocolon/screens/tutorial/EmlisTutorialResults.js`
+- system: 初回体験と設定からの再体験
+- `navigation/MainTabs.js` と `screens/SettingsOtherScreen.js` から、`navigation/InputStackNavigator.js` の `TutorialIntro` を開く。
+- 入力・Emlisの問いと応答・終了時の表は `EmlisTutorialScreen.js`、ピースの保存と投稿の見本・分析は `EmlisTutorialResults.js` が表示する。練習操作は通常の下書き・保存・投稿につながらない。
+- 関連確認: `tests/app-startup.test.js`、`tests/tutorial-owner-race.test.js`、[再設計](designs/ui/Emlis_Tutorial_Redesign_20261126.md)
 
 ### `Cocolon/UnreadContext.js`
 - repo: `Cocolon`

@@ -372,7 +372,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | ランキング・感情集計 | §43の次RN候補でRankingタブ/stack入口/表示設定/guideを撤去。保存データ・APIは削除しない。Pieceの全体感情集計は別経路として維持 | 7101で依頼UI修正完了を本人確認。全体感情TOP3はアプリ内集計で、社会全体の代表値ではない |
 | 通知・未読 | push token同期、未読状態、問い・report・感情更新から対応画面へ戻るrouting | token登録と配送成功を分ける。ログアウト／account切替時の本人境界、全cold／warm動作は別確認 |
 | アプリ設定・購読 | theme、全体／個別通知、プラン購入・復元・管理、entitlement。11/1にfinish両失敗の伝播/同一購入の結果共有とowner世代ごとの旧応答遮断を修正 | RN6701内部配布・本人起動済み。実storeのfinish／失効／account切替／復元・release判定は残る。料金表示だけで有料品質成立としない |
-| ガイド・tutorial・お知らせ | 設定上部の「アプリの使い方」にホーム・分析・ピース・感情通知の4章を集約。ホームとピースの末尾から該当章を開き、わたしマップの「分析について」内から分析章へも移動できる。本文・用語解説、チュートリアル再体験とお知らせ導線を維持 | 4章の切替、関連入口と用語解説をRNテストで確認。iOS 8201へ収録し、端末表示は未確認。チュートリアルの模擬体験は通常の入力や保存と別 |
+| ガイド・チュートリアル・お知らせ | 「アプリの使い方」はホーム・分析・ピース・感情通知の4章。新しい初回チュートリアルは、サンプルの記録、Emlisの問いと回答後の応答、ピースの画像・非公開保存・投稿とフォロー、こころグラフ、わたしマップを体験し、使い方の表からホームへ戻る。設定から再体験できる。 [再設計](designs/ui/Emlis_Tutorial_Redesign_20261126.md) | サンプルは専用画面で扱い、通常の下書き・保存・投稿から分離する。初回の完了と見送りに既存の本人別状態を使用。新チュートリアルの実機表示・配布は未確認。 |
 | ログアウト・退会 | feature flag・二段確認・account削除API後local cleanup／signOutは実装あり。累積map月参照にはauth.users CASCADE、単体Piece削除RPCあり | 11/14 source照合ではaccount_delete_serviceに新Piece familyの明示削除がなく、foundation owner UUIDにもauth/profiles FKを確認できない。preview／export／quota等のlive別trigger・消去経路を確認し不足時修復する要調査。実データ残存を観測したとはしない。退会と購読解約、外部保存済み画像の境界を分ける |
 | ProfileCreate旧資産 | `ProfileCreateScreen.js`・`api_profile_create.py`は現存 | fresh Root＋4 Stackに通常route／importを確認できず。通常入口接続済みへ昇格しない |
 | 国家システム・非同期処理 | 原入力保存・event dispatch、分析素材／queue、通知・集計・保持期限、API／DB／認証・公開governanceが各ownerを持つ | 原入力の保存を生成成功に従属させない。Emlis補足・続行を入力件数／課金eventへ再加算しない。queue・job・retryの存在をlive稼働／全処理成功へ換算しない |
