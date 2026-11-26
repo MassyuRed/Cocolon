@@ -610,6 +610,16 @@ test('frame editor submits an explicit revision and keeps continuation separate'
   await act(async()=>root.unmount());
 });
 
+test('context change notice reflects whether an earlier observation is visible', () => {
+  const { threadStatus } = load('screens/input/EmlisThreadModal.js', {
+    'react-native': { StyleSheet: { create: styles => styles } },
+    '../../components/CocolonButton': () => null,
+  });
+  const changed = { ...completed, body_state: 'CONTEXT_CHANGED', current_observation: null };
+  assert.match(threadStatus({ ...changed, timeline: [{ kind: 'ANSWER', text: '回答' }] }), /表示できません/);
+  assert.match(threadStatus({ ...changed, timeline: [{ kind: 'OBSERVATION', text: '保存された返事' }] }), /履歴に表示しています/);
+});
+
 test('NOT_CREATED falls back, unknown GET retains reconciliation, and saved thread opens', async () => {
   let result={...initial,state:'NOT_CREATED',thread_id:null};let fail=false;
   const h=await mount({get:async()=>{if(fail)throw Error('timeout');return result;}});
