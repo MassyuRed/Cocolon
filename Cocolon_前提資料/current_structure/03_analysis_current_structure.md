@@ -1,3 +1,9 @@
+<a id="watashi-map-prompt-capacity-recovery-20261126"></a>
+
+### 11/26 — わたしマップの要求容量と分割・統合
+
+`analysis_model_source.py` はv24前半の計画から作る要求の容量を測り、準備段階と文字列のバイト数、残りトークン数を記録する。全履歴を一度に扱うv24で後続の要求が上限を超えた場合に限り、`analysis_cumulative_service.py` がジョブの実行権を確認し、同じ全資料を既存の分割・統合経路へ一回だけ渡す。各元記録・補足・訂正と最終公開版の関係を保つ。 [検証と配備状況](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-opening-piece-editor-map-recovery-20261126)
+
 <a id="cmee-follow-up-live-quality-20261123"></a>
 ### 11/23 — 項目の内部参照とDeepInsightの出典計画
 

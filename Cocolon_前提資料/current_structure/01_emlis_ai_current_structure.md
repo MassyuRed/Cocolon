@@ -6,6 +6,8 @@
 
 アプリの最新ソースは、ホームと入力履歴で共通の応答画面を使い、Plus・Premiumで観測応答を待つ間に「応答には数分かかる場合があります。」と表示する。わたしマップと共通の `runtime/interpretationCorrectionUi.js` で、新規訂正とPremiumの仮の理解を直す操作を一時的に非表示にする。既存の訂正処理・保存内容、問いへの回答とスキップは維持する。適用は次回ビルドから。 [アプリ変更と待ち時間の調査](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-wait-map-failure-and-editor-20261126)
 
+`screens/InputScreen.js` は入力保存を確認して下書きを片づけた後、ホームの集計再取得と独立して `useEmlisThread` で応答を開く。一方の取得失敗を他方の結果にしない。モデルの順番待ちと応答を作る処理は既存の経路を使う。 [検証と配布状況](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-opening-piece-editor-map-recovery-20261126)
+
 <a id="cmee-follow-up-live-quality-20261123"></a>
 ### 11/23 — 直接訂正の返答から生成指示を除く
 

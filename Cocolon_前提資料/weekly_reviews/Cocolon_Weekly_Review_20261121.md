@@ -1600,3 +1600,15 @@ Piece CIで旧コードの呼び出し位置に依存した試験3件が失敗�
 **Piece画像編集の提案。** プレビューを上部に固定し、下の横一列から選んだ設定の候補だけを開く。選択後は閉じ、同じ位置で変更後の画像を確認する。小さい画面は画像全体の表示幅をあらかじめ確保し、候補欄だけを必要に応じてスクロールする。欄の開閉では表示幅と描画部品を保ち、再描画やAPI更新を発生させない。保存は従来の確定版を使う。配置は検討まで。 [現行のプレビューと編集](https://github.com/MassyuRed/Cocolon/blob/113bc02fb9c45f72b5bda5dafdee8c847f48147f/components/piece/PiecePreviewModal.js#L213-L259) · [表示幅と描画](https://github.com/MassyuRed/Cocolon/blob/113bc02fb9c45f72b5bda5dafdee8c847f48147f/components/piece/PieceVisualCard.js#L699-L725)
 
 **わたしマップ更新。** 対象の24記録では、直近の更新が11:43:13に8回目の試行で503となって終了した。実行・待機中の対象ジョブと新しい現在版の保存は照会時点で0件だった。最後の試行では計画と項目の各要求がそれぞれ11:40:46、11:42:04にHTTP 200を受け、最後の関係線を作る要求は送信前のワーカー側の準備で停止した。稼働版のログには準備時の内訳が残らず、入力のバイト上限、共用の出力トークン枠の消費、要求の組み立て時の例外を区別できない。合成入力でバイト上限を再現した候補 `7a242c42` は未配備。認証付きの再試行と新規GPU実行は行っていない。 [稼働ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3nf7dg1s2s73c58ao0) · [準備時の検査](https://github.com/MassyuRed/mashos-api/blob/77cec9b8c538dce872be132469655b46b7fd4fe5/ai/services/ai_inference/analysis_model_source.py#L222-L244)
+
+<a id="emlis-opening-piece-editor-map-recovery-20261126"></a>
+
+### 11.115 観測応答の開始・Piece画像編集の配置・マップの容量回復（11/26 JST）
+
+**観測応答。** 保存を確認して入力案を片づけた後、ホームの集計再取得と独立して応答画面を開く。集計取得が遅い場合や失敗した場合にも、保存済みの入力への観測応答を開ける。Plus・Premiumの待機案内、Emlisとわたしマップの訂正操作の一時非表示を引き継ぐ。待ち時間対策は、入力保存から応答を開くまでの画面経路に適用する。モデル待ちの内訳と実機の短縮時間は未計測。入力画面・観測応答・Pieceの接続を含む個別検査146件と、統合版の観測応答・分析・所有者等の検査251件とGitHubのアプリ契約CIが通過した。 [アプリ統合版](https://github.com/MassyuRed/Cocolon/commit/7f632b18602b9eddee962753c424b9cb5fc43cad) · [アプリの契約検査](https://github.com/MassyuRed/Cocolon/actions/runs/45749185320)
+
+**Piece画像編集。** 画面内の固定領域に画像を表示し、横一列の設定から選んだ項目だけを開く。設定を変更すると一覧に戻り、プレビューの位置で結果を確認できる。候補を開閉しただけでは画像の幅を変えず、再計測やAPI更新が発生しない。確定した同じ版を検査して保存する。関連1,630件が通過し、小型画面相当の320×568、拡大文字、9:16の画像、開き直し、保存条件を確認した。iOSシミュレーターの実描画を含むPieceのGitHub CIも通過した。 [Pieceの検査](https://github.com/MassyuRed/Cocolon/actions/runs/45749185323)
+
+**わたしマップ。** 既存のv24で、全履歴を一度に処理した際に計画後の送信指示のバイト数が上限を超えたと測定できる場合は、同じ資料を既存の分割・統合経路で一度扱い直す。分割に切り替える前にジョブの実行権を判定し、各元記録と本人の補足・訂正のつながり、保存前の版照合を保つ。記録本文を出さずに、要求準備の段階、残りトークン数、要求のバイト数と上限をログへ残す。従来の本番失敗がこの分割条件に当てはまったかは、前節のログからは区別できない。最終API版の隔離PGlite検査122件とGitHubのAnalysis CIが通過した。項目・関係線の各準備で容量超過になる合成例を保存し、同じレポートIDを再読した。モデル側の503、出力枠の消費、要求組み立ての例外では分割へ切り替えないことも確認した。 [API版](https://github.com/MassyuRed/mashos-api/commit/88aedc7c653733cbf7e7b3750ec43fc0da13ca1f) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45748463790) Renderの同じ版はワーカーが12:52:57 JST、APIが12:54:52にLiveとなった。12:53:03にASTORの起動を確認した。 Renderのリクエストログで公開ヘルスのHTTP 200と未認証のマップ状態取得のHTTP 401を確認した。新ワーカー起動後に対象の更新はまだ始まっておらず、24記録の再生成と保存は未確認。 [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3qpqmc6qcc73bkv5i0) · [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3qqdjl550s73faes30)
+
+**iOS。** Mashの承認で統合版 `7f632b1` の署名・TestFlight送信ワークフロー #90 を12:58:25 JSTに起動した。App Store Connectでの処理と内部配布はMashが担当する。 iOS 1.0（9001）の署名付きArchiveは13:09:33 JST、IPA書き出しは13:09:42、TestFlight送信は13:11:05に成功した。写真ライブラリ用途文言の検査も通過した。Appleでの処理完了、内部配布、本人端末での確認は残る。 [iOSワークフロー](https://github.com/MassyuRed/Cocolon/actions/runs/45752236694)

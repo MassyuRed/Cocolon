@@ -6,6 +6,8 @@
 
 APIの `piece_v2_preview_service.py` は同じ要求内で確認済みの出典を使って初回候補と見た目変更を組み立てる。見た目を変更する前に読んだ保存版と、書き込み直前の出典・権利・版を照合する。アプリの `PieceCreateController.js` が画面内の仮設定と確定版を管理し、連続した設定をまとめて送る。`PieceVisualCard.js` は同じ文字の配置を使えるときに改行を再利用し、描画と保存の適格性は変更後の画像で確認する。 [待ち時間の検証と本番反映](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#piece-preview-performance-20261126)
 
+`PiecePreviewModal.js` は画面内に画像の領域を確保し、縦画面では画像の下、広い横画面では隣に編集項目を置く。横一列の設定から選んだ候補だけを開き、設定の変更後は項目一覧に戻る。候補の開閉と画像の寸法を独立させ、確定版を使う保存判定は既存のまま使う。 [編集画面と検証](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-opening-piece-editor-map-recovery-20261126)
+
 <a id="cmee-follow-up-live-quality-20261123"></a>
 ### 11/23 — 保存済みの直接訂正を通常Pieceに引き継ぐ
 
