@@ -105,6 +105,7 @@ function harness(options = {}) {
       Pressable: 'Pressable', ScrollView: 'ScrollView', StatusBar: 'StatusBar', StyleSheet: { create: x => x },
       Text: 'Text', TouchableWithoutFeedback: 'TouchableWithoutFeedback', View: 'View', useWindowDimensions: () => ({ height: 800 }) };
     if (name === '../AuthContext') return { useAuth: () => ({ session: { user: { id: control.owner } } }) };
+    if (name === '../SubscriptionContext') return { useSubscription: () => ({ tier: control.subscriptionTier ?? 'free' }) };
     if (name === '../AppRuntimeContext') return { useAppRuntime: () => screenRuntime };
     if (name === '../UnreadContext') return { useUnread: () => ({ setUnread: noop }) };
     if (name === '../TutorialContext') return { useTutorial: () => ({ isTutorialMode: control.tutorial,
@@ -251,6 +252,15 @@ test('Home starts with its heading and opens input history below the input actio
   history.props.onPress();
   guide.props.onPress();
   assert.deepEqual(routes, [['InputHistory'], ['CocolonGuide', { screenId: 'home' }]]);
+  h.dispose();
+});
+
+test('Home passes the current subscription tier to the Emlis reader', () => {
+  const h = harness({ subscriptionTier: 'premium' });
+  assert.equal(h.find('EmlisThreadModal').props.subscriptionTier, 'premium');
+  h.control.subscriptionTier = 'free';
+  h.render();
+  assert.equal(h.find('EmlisThreadModal').props.subscriptionTier, 'free');
   h.dispose();
 });
 
