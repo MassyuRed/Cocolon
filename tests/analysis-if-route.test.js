@@ -371,6 +371,7 @@ test('iOS hands a node or edge to IF only after the detail dismissal acknowledge
     const h = harness(undefined, 'ios'), Map = h.load('components/selfStructure/SemanticWatashiMap.js').default;
     const opened = []; let view;
     await act(async () => { view = Renderer.create(React.createElement(Map, { contentJson: map, onExploreIf: ref => opened.push(ref) })); });
+    await act(async () => view.root.findByProps({ testID: 'semantic-items-toggle' }).props.onPress());
     await act(async () => view.root.findByProps({ testID: `semantic-${branch[0] === 'n' ? 'node' : 'edge'}-${branch}` }).props.onPress());
     const dismiss = view.root.findByType('ModalContent').props.onDismiss;
     await act(async () => view.root.findByProps({ testID: 'semantic-if-open' }).props.onPress());
