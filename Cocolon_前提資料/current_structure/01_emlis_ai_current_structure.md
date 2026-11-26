@@ -2,7 +2,7 @@
 
 ### 11/26 — 当回の問いとFree保存応答の再読
 
-`emlis_question.py` が当回の本人原文から将来の不安と解決した問題の話題を照合し、詳細が欠ける場合の一問を確定する。`natural_reply.py` は本人の当回原文と当回回答を使い、過去の資料で詳細を埋めない。`emlis_thread_service.py` はFreeで当回原文だけを使った保存版の出典を照合し、Plus・Premiumに変更した後の履歴へ返す。`screens/input/EmlisThreadModal.js` は、履歴に以前の応答が表示される場合と、参照条件の変更で表示できない場合の案内を出し分ける。 [配備・配布と検証](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-question-history-and-legacy-inputs-20261126)
+`emlis_question.py` が当回の本人原文から将来の不安と解決した問題の話題を照合し、詳細が欠ける場合の一問を確定する。`natural_reply.py` は本人の当回原文と当回回答を使い、過去の資料で詳細を埋めない。`emlis_thread_service.py` はFreeで当回原文だけを使った保存版の出典を照合し、Plus・Premiumに変更した後の履歴へ返す。`screens/input/EmlisThreadModal.js` は閲覧できる以前の応答を履歴に表示し、参照条件の変更を知らせる案内を省く。 [配備・配布と検証](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-context-notice-and-piece-latency-20261126)
 
 <a id="cmee-follow-up-live-quality-20261123"></a>
 ### 11/23 — 直接訂正の返答から生成指示を除く
