@@ -4,6 +4,8 @@
 
 `emlis_question.py` が当回の本人原文から将来の不安と解決した問題の話題を照合し、詳細が欠ける場合の一問を確定する。`natural_reply.py` は本人の当回原文と当回回答を使い、過去の資料で詳細を埋めない。`emlis_thread_service.py` はFreeで当回原文だけを使った保存版の出典を照合し、Plus・Premiumに変更した後の履歴へ返す。`screens/input/EmlisThreadModal.js` は閲覧できる以前の応答を履歴に表示し、参照条件の変更を知らせる案内を省く。 [配備・配布と検証](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-context-notice-and-piece-latency-20261126)
 
+アプリの最新ソースは、ホームと入力履歴で共通の応答画面を使い、Plus・Premiumで観測応答を待つ間に「応答には数分かかる場合があります。」と表示する。わたしマップと共通の `runtime/interpretationCorrectionUi.js` で、新規訂正とPremiumの仮の理解を直す操作を一時的に非表示にする。既存の訂正処理・保存内容、問いへの回答とスキップは維持する。適用は次回ビルドから。 [アプリ変更と待ち時間の調査](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-wait-map-failure-and-editor-20261126)
+
 <a id="cmee-follow-up-live-quality-20261123"></a>
 ### 11/23 — 直接訂正の返答から生成指示を除く
 

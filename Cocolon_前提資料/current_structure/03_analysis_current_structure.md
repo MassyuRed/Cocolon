@@ -1738,7 +1738,7 @@ Mashとの対話で、根拠と対象範囲を示せる仮説は保持し、項�
 | 現行API | `api_self_structure.py`→`analysis_map_correction_service.py`→`analysis_map_correction_submit/read/sources` RPC。対象map／source guard／所有者／二入力を検査し、保存・再入場と既存更新queueへ接続。プロフィール閲覧のaccept/rejectとは別 |
 | 既存の訂正資産 | 原入力に束縛した本人補足のREVISE／WITHDRAW等は、元の記述を扱う資産。元記述のREVISE／WITHDRAWとは出所・対象を区別し、現在mapの本人訂正も専用UI／API／RPCと次回分析材料へ接続した |
 | 今回採用した方針 | 「どの内容ですか？」と「どう違いましたか？」を分け、どの読みの何がどう違うかという対象と本人の説明を必須にする。根拠を見る操作・原入力の編集・分析更新と区別する |
-| 現在残る確認 | 訂正のUI／API／DB、対象版束縛・原根拠・本人説明の別source、更新・次回分析接続は実装・通常反映済み。説明不足は保留しAIで補わない。一般意味品質、IF実候補の採用・保存一巡、build／配布／本人利用は未完 |
+| 現在残る確認 | 訂正のUI／API／DB、対象版束縛・原根拠・本人説明の別source、更新・次回分析接続は実装済み。次回ビルドは `CumulativeWatashiMapView.js` がEmlisと共通の `runtime/interpretationCorrectionUi.js` に従い、通常画面の新しい訂正入口と入力画面を一時的に非表示にする。既存の訂正と次回分析への引き継ぎを維持し、説明不足は保留する。一般意味品質、IF実候補の採用・保存一巡、配布／本人利用は未完。 [11/26の調査とアプリ変更](../weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-wait-map-failure-and-editor-20261126) |
 
 「違う」だけ、単なるnonnullや文字数の充足を訂正完了としない。不足は未確定にして確認し、AIが本人説明を補完しない。本人が否定した読みは、説明が未確定でも確定した本人特徴として使い続けない。無反応も同意としない。
 
