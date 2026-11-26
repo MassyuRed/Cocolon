@@ -1548,3 +1548,17 @@ Mashの指示で、EmlisAIの観測応答と問い、Piece画像編集、わた�
 本番で四機能のアプリとAPIの受け渡し、対応するSupabase移行、公開ヘルスHTTP 200を確認した。未認証の取得は各機能でHTTP 401だった。本人としての認証付き生成、保存版の再読、端末での表示は今回の本番確認に含まれない。
 
 `a4ce916` のiOS 1.0 (8901) は、署名付きArchiveが10:02:00、IPA書き出しが10:02:08、TestFlight送信が10:03:42 JSTに成功した。写真ライブラリ用途文言の検査も通過した。App Store Connectでの処理・内部配布はMash様が担当。Appleの処理完了、既存グループ「Emlis テスト版配布」での「テスト中」、本人端末の表示は未確認。 [署名とTestFlight送信](https://github.com/MassyuRed/Cocolon/actions/runs/45730743149)
+
+<a id="emlis-question-history-and-legacy-inputs-20261126"></a>
+
+### 11.111 EmlisAIの問いと履歴、旧入力の整理（11/26 JST）
+
+**問いと保存済み応答。** 将来が不安だとだけ書いた場合や、問題の解決後の安堵を書いて問題の詳細を記していない場合は、本人の言葉で確かめられる話題を一問に絞る。問いのオン・オフに従い、応答の材料には当回の原入力と、回答があれば本人の回答を使う。プラン変更では、Freeで当回の原入力だけを使って保存した応答を、Plus・Premiumへの変更後も履歴から読める。過去資料を参照した応答には既存の権利を適用する。API `a4893a3` で関連321件が通過した。新しい問いを伴う実9B応答の文章品質は未確認。 [API版](https://github.com/MassyuRed/mashos-api/commit/a4893a3efda57f89e6f82d4b11a32e87231d3f2a) · [APIの検証](https://github.com/MassyuRed/mashos-api/actions/runs/45738874735) · [関連CI](https://github.com/MassyuRed/mashos-api/actions/runs/45738874778)
+
+**アプリ。** Mashから8901の内部配布完了を受領した。履歴に以前の応答があるかに応じて案内を変えるアプリ版 `1fb2647` は、関連125件とアプリ契約・Pieceの両CIに合格した。配布済み8901は既存の表示文言を使う。 [案内の修正版](https://github.com/MassyuRed/Cocolon/commit/1fb264784cff90bd0cc941f2f6e846f43b49a280) · [アプリ契約CI](https://github.com/MassyuRed/Cocolon/actions/runs/45738633882) · [Piece CI](https://github.com/MassyuRed/Cocolon/actions/runs/45738633023)
+
+**旧入力。** 本番Supabaseで、カテゴリがNULLで思考または行動が残っていた旧形式の入力575件を、該当した9アカウントから削除した。対象期間は2025年12月30日から2026年3月8日（JST）。削除対象を参照する保存成果物は0件。削除後に1,086件が残り、現行の有効な感情のみの記録132件を含むことを確認した。
+
+**わたしマップ。** 残った24記録を使う更新は、8回目の試行でHTTP 503となり終了した。新しい現在版の保存は0件。提供側の処理容量についてローカルで診断を進めた。本番での更新復旧、保存、通知は未確認。
+
+EmlisAIのAPI `a4893a3` は11:01:21 JSTにLive。公開ヘルスは正常で、未認証のEmlisAI取得は拒否された。ワーカーは `77cec9b` が稼働を継続。GitHub Actionsの両CIは本番確認時点で実行中だった。 [Render配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3p4rei0phs7384jt80)

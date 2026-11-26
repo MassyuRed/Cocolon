@@ -1,4 +1,6 @@
-> **11/26 JST・EmlisAI・Piece・わたしマップ・DeepInsightをiOS 1.0 (8901) に統合。** `a4ce916` は8801のプラン別わたしマップに、Piece画像編集、EmlisAI初回の呼びかけ、DeepInsightのヘッダー余白修正を加えた。署名付き8901は10:03:42 JSTにTestFlight送信成功。本番API・ワーカーは `77cec9b`。App Store Connectでの処理・内部配布はMash様が担当し、Appleの処理完了、「テスト中」、端末表示は未確認。 [四機能の統合記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-features-integrated-ios-20261126)
+> **11/26 JST・統合iOS 1.0 (8901) を内部配布。** `a4ce916` は8801のプラン別わたしマップに、Piece画像編集、EmlisAI初回の呼びかけ、DeepInsightのヘッダー余白修正を加えた。10:03:42 JSTにTestFlight送信に成功し、その後Mashから内部配布を確認した。 [四機能の統合記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-four-features-integrated-ios-20261126) · [配布後の記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-question-history-and-legacy-inputs-20261126)
+
+> **11/26 JST・EmlisAIの問いと履歴、旧入力の整理。** 本番API `a4893a3` は、将来の不安や解決した問題について本人が詳細を書いていないときに、話題を一問に絞る。Freeで当回原文だけを使った保存済み応答をPlus・Premiumへの変更後も履歴に残す。履歴の有無と案内をそろえるアプリ版 `1fb2647` は配布前。本番では該当した旧カテゴリなし入力575件を削除した。残った24記録のわたしマップ更新はHTTP 503で終了し、新しい現在版はまだ保存されていない。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-question-history-and-legacy-inputs-20261126)
 
 > **11/26 JST・EmlisAIの初回と、最初の問いをスキップした後の返事を通常反映。** Free初回では本人と同じ出来事・気持ちを返した一文を、記録確認の口調から本人への返事に修正。Plusで「つらかった」とだけ書いて最初の問いをスキップした場合は、本人が書いた気持ちを受け止める短い返事にする。先に配備した「姉が直した」の保持を継承。実応答と隔離DBで同じ版の再読を確認し、統合版 `77cec9b` を本番APIとワーカーに配備した。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-reread-and-listener-20261126)
 
