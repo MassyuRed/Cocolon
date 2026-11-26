@@ -1511,3 +1511,19 @@ EmlisAIは、問いをオフにしたFree初回で、本人が「姉が直した
 Premiumの適用版 `aa04a86` で二題材の実応答の再生を含む91件が通過した。本番Supabaseへ構造間関係の移行1件を適用し、先行2件を含む移行の適用、対象RPCの権限、RLS、既存8件を確認した。Render APIは08:39:26 JST、同版ワーカーは08:40:53 JSTにLive。公開ヘルスはHTTP 200で、未認証の現在・月次一覧・詳細はすべてHTTP 401。配備中のエラーと致命的ログは確認範囲で0件だった。GitHub ActionsのAnalysis・Pieceは配備確認時点で実行中。 [PremiumのAPI版](https://github.com/MassyuRed/mashos-api/commit/aa04a86749015f860f2c414786f09efb6978f367) · [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3n2mvf3r2c73932a10) · [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3n3h6q1p3s73bng4eg) · [Analysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531837) · [Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531869)
 
 認証した架空所有者での本番再読と本人端末での表示確認は未実施。構造ごとの図を開く表示と、Premiumで構造間を結ぶ専用表示を含む対応アプリは候補のまま。今回の署名ビルドとTestFlight配布は行っていない。 [対応アプリ](https://github.com/MassyuRed/Cocolon/commit/dd98073e06ae0a77bab8114a51a117b793dd4ecc)
+
+<a id="cmee-map-reread-and-listener-20261126"></a>
+
+### 11.109 わたしマップの現在版・月次版とEmlisAIの初回応答を修正（11/26 JST）
+
+**わたしマップ。** 現在版と同じ保存IDで月次版がある場合に、更新確認の応答が月次版を返す問題を修正した。保存の直後に本人の記録が変わったときは、現在版の読み出しを再試行できる。分析全文を開くと、現在のプランで読める各構造の説明と、条件を満たすPremiumでは構造間の説明まで表示する。提出期限を優先した当時版と、印刷費と準備時間を両立した現在版を別のIDで保存し、プラン切り替え後も当時の本文・図と現在の本文・図を読み分けることを確認した。関連123件とサブテスト23件が通過した。
+
+**iOS。** 対応版 `dd98073` で、Freeはプラン対象外の根拠ボタンを省き、Plusは構造ごとに図を開ける。Premiumでは本人原文に裏付けられた構造間の関係を専用図で表示する。優先と両立の実応答を隔離DBに保存し、同版アプリの表示処理18検査を確認した。ワークフロー #87 は対象外の `main` で起動したため中止した。ビルド番号設定、Archive、TestFlight送信はいずれも実行されなかった。対応版を指定した #88 はiOS 1.0 (8801) の署名付きArchiveが09:09:36、IPA書き出しが09:09:44、TestFlight送信が09:11:18 JSTに成功した。Mash様がApp Store Connectで処理する。Appleの処理完了、既存グループでの「テスト中」、本人端末の表示は未確認。 [対応アプリ](https://github.com/MassyuRed/Cocolon/commit/dd98073e06ae0a77bab8114a51a117b793dd4ecc) · [中止した #87](https://github.com/MassyuRed/Cocolon/actions/runs/45724211724) · [署名・送信 #88](https://github.com/MassyuRed/Cocolon/actions/runs/45724619161)
+
+**EmlisAI。** 問いをオフにしたFree初回の苗の題材で、「あなたは嬉しかったと記録されていますね。」という記録確認の言い回しを「嬉しかったんですね。」へ修正した。本人が書いた出来事・時点・気持ちをそのまま受け取る一文に限る。既取得の8応答のうち本文が変わったのは1件で、前回18段階の保存後の再読は一致した。本人の文をモデルへ直接渡して返事を作る比較では、4件とも原文に沿う個別のフォローとして通常採用できなかった。 [実応答と再読](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#emlis-listener-voice-reread-20261126)
+
+Plusで本人が「つらかった」とだけ書き、最初の問いをスキップして終えた場合の結びを修正した。実9Bの旧応答は、気持ちを書いた目的まで推し量った。修正版の実9Bは「お辛い思いをされましたね。」と返し、発行した問い、本人原文、Pieceへの引き渡しを照合した。隔離DBで同じ版を再読した。 [最初の問いを閉じる実応答](../observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#emlis-first-plus-question-skip-20261126)
+
+**統合確認。** EmlisAIの問い・Piece連携を含む466件が通過。最終版 `77cec9b` でマップとEmlisAIの270件とサブテスト2件が通過し、Plusで最初の問いを閉じた実応答も同じ版で再読した。前回版 `aa04a86` のGitHub ActionsはAnalysis・Pieceとも成功。中間版 `aa6e376` のCIは取り消した。最終版はPiece CIが実行中で、最後に修正したテストパスはAnalysis CIの起動条件外だった。 [最終API版](https://github.com/MassyuRed/mashos-api/commit/77cec9b8c538dce872be132469655b46b7fd4fe5) · [前回のAnalysis CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531837) · [前回のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45722531869) · [最終版のPiece CI](https://github.com/MassyuRed/mashos-api/actions/runs/45725665616)
+
+Renderで同じ版のワーカーは09:05:54 JST、APIは09:06:51 JSTにLiveとなった。公開ヘルスはHTTP 200、未認証のわたしマップの取得はHTTP 401。既存のSupabase移行と設定を使い、RLS、既存マップ8件、構造間の関係を持つ本番保存版0件、ASTORの実行・待機0件を照合した。 [API配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3ndtlg1s2s73c54rpg) · [ワーカー配備](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc3nf7dg1s2s73c58ao0)

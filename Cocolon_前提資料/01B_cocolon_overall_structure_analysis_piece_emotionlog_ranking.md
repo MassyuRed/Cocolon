@@ -4199,3 +4199,5 @@ API f5d8967は既存累積service・model source・semantic adapterからEngine�
 11/26の版では、同じ原入力と選択に照合できる場合に、関係生成が分けて返した肯定・否定の説明を一つの主要構造にまとめる。処理は上記の `semantic_admission.py` 内にあり、`ai/tests/test_analysis_primary_structures.py` が片側の根拠欠落や肯否の反転を検査する。実9Bの未加工の三段階の受領記録2件は、同じ試験の [ノート](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/map-notebook-full-live-20261126.json) と [Premiumの優先](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/map-premium-full-live-20261126.json) に置いた。これらは架空入力の検証記録で、実装時の生成指示や教材としては読み込まれない。
 
 Premiumの最終段階で条件を別々に明示した比較の結果は [実応答](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/map-premium-guided-relations-actual-20261126.json) に記録した。
+
+現在版の更新後は `analysis_cumulative_service.py` が所有者の現在枠を読み、保存した版と一致することを照合する。月次版は記録された月とIDで開く。同じ読み出しで「分析全文」の概要と本文へ、閲覧時のプランで許可された構造と本文を返す。既存の図と保存IDを使い、対応iOSの構造ごとの図とPremiumの専用図へ引き渡す。 [当時版と現在版の検証](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-reread-and-listener-20261126)

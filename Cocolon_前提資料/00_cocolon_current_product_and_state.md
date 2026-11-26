@@ -1,8 +1,8 @@
-> **11/26 JST・EmlisAIの初回で、本人が書いた理由の行動を保持。** 本番API `7968529` は08:31:17 JSTにLiveとなり、公開ヘルスはHTTP 200。Free初回で「姉が直した」に付け足された「くれた」だけを、同じ理由と感情を返す一文で補正する。先に反映した好みの強さと、Plus・Premiumの補足回答の修正を継承。題材に合わせたフォローの自然さは継続課題。 [Render配備](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc3mupjl550s73eupqe0) · [実応答と修正](observation_learning/trials/2026-11-25-cmee-preference-and-map-relations/README.md#emlis-initial-mirrored-action-20261126)
+> **11/26 JST・EmlisAIの初回と、最初の問いをスキップした後の返事を通常反映。** Free初回では本人と同じ出来事・気持ちを返した一文を、記録確認の口調から本人への返事に修正。Plusで「つらかった」とだけ書いて最初の問いをスキップした場合は、本人が書いた気持ちを受け止める短い返事にする。先に配備した「姉が直した」の保持を継承。実応答と隔離DBで同じ版の再読を確認し、統合版 `77cec9b` を本番APIとワーカーに配備した。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-reread-and-listener-20261126)
 
 > **11/26 JST・わたしマップのFree・Plusを通常反映。** 実9Bのノートと鍵の二題材から、Freeの短い結論と小図、Plusの二場面の説明を確かめた。隔離DBでは同じ保存IDの現在・月次・詳細を配布済み8601の表示処理で再読した。Supabaseの先行移行2件を適用し、`7968529` を本番API・ワーカーへ先行配備した。本人端末での表示確認は残る。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-first-free-plus-20261126)
 
-> **11/26 JST・Premiumで本人が書いた優先・両立を通常反映。** 実9Bの二題材で、別々の原記録が支える二つの構造を分析本文と図にし、同じ本人の選択に関わった優先・両立と結果をPremiumの分析全文へ添えた。構造間関係の本番Supabase移行を適用し、現在の本番APIとワーカーは `aa04a86`。配布済み8601の表示処理と隔離DBで再読を確認した。認証した本人としての本番再読、端末表示、構造間を結ぶ専用表示の対応アプリ配布は残る。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-premium-grounded-20261126)
+> **11/26 JST・Premiumの優先・両立と、わたしマップの現在・月次の読み分け。** 本人が書いた優先・両立と結果をPremiumの分析全文に反映済み。本番 `77cec9b` は現在版の更新確認と月次版の読み出しを修正し、「分析全文」に閲覧時のプランで読めるすべての説明を返す。構造ごとの図とPremiumの専用図に対応するiOS 1.0 (8801) を署名し、TestFlight送信に成功した。App Store Connectでの処理・内部配布はMash様が担当。認証した本人としての本番再読と端末表示は残る。 [議事録と検証範囲](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-map-reread-and-listener-20261126)
 
 > **11/25 JST・EmlisAI v31・PieceのUnicode・わたしマップ比較。** 観測は実9Bで架空18件をすべて同版再読し、見本と重なった1件を除く全文判定は1/17件。通常採用は保留。Pieceは実験用Unicodeを二つの帯で描画できた。描画直後のRGBAは一致し、合成後の全画素の一致が残る。対応アプリは配布前。月次マップは当時と現在の主要構造を更新状況より先に表示する。本番API・ワーカー・9B提供コードを `3379338` に揃え、ヘルスと認証を確認した。試験所有者の認証を確認できず、長履歴の実生成・同版保存・通知は残る。 [第12回議事録§11.88](weekly_reviews/Cocolon_Weekly_Review_20261121.md#cmee-grounded-examples-piece-unicode-map-comparison-20261125)
 

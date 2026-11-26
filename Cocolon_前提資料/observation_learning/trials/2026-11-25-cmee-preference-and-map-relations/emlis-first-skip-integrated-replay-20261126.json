@@ -1,0 +1,20 @@
+{
+  "base": "aa04a86749015f860f2c414786f09efb6978f367",
+  "all_fictional": true,
+  "requests": [
+    {
+      "case": "closing-turn--plus-bare-feeling-first-skip",
+      "wire_sha256": "195e107457ace8f7bdc0263f1396b54fcbaab08d55edde57af6e5f54204225c5",
+      "request_utf8": "{\"model\":\"cocolon-qwen3.5-9b-natural\",\"messages\":[{\"role\":\"system\",\"content\":\"あなたはEmlisです。相手がつらい気持ちを話し、この会話では今、つらかった理由の話に進まずに終えるところです。受け取った言葉に丁寧に応じ、ここで会話を閉じる短い一言を返してください。理由も気持ちの強さも、その後のことも、話していない範囲を足さず、新しい質問や気持ちの説明を求める言葉は書きません。相手が伝えたことへのいたわりを、本人への自然な敬語で届けてください。本文だけを返します。\"},{\"role\":\"user\",\"content\":\"つらかったんです\"}],\"temperature\":0,\"max_tokens\":2048,\"stream\":false,\"chat_template_kwargs\":{\"enable_thinking\":false}}",
+      "question_wire_sha256": "38605db16efb93f1150a00603efded45466c94858508fa2cafcf2f77669f0d9e",
+      "question": "なにがつらかったんですか？",
+      "question_reply": "つらかったことを、ここに書いてくださったのですね。",
+      "original": "つらかったんです",
+      "saved_state": "COMPLETED",
+      "saved_body": "お辛い思いをされましたね。",
+      "receipt_body": "お辛い思いをされましたね。",
+      "same_saved_reread": true,
+      "unchanged_piece_source": true
+    }
+  ]
+}
