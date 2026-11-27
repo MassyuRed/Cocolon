@@ -50,14 +50,20 @@ export default function NexusPieceCard({
   return (
     <View style={styles.card}>
       <View style={styles.headerRow} testID="nexus-piece-card-header">
-        <CocolonPressable
-          containerStyle={styles.ownerTarget}
-          style={styles.ownerChip}
-          onPress={onPressOwner}
-          accessibilityLabel={`${ownerName}のアカウントを開く`}
-        >
-          <Text style={styles.ownerText}>{ownerName}</Text>
-        </CocolonPressable>
+        {onPressOwner ? (
+          <CocolonPressable
+            containerStyle={styles.ownerTarget}
+            style={styles.ownerChip}
+            onPress={onPressOwner}
+            accessibilityLabel={`${ownerName}のアカウントを開く`}
+          >
+            <Text style={styles.ownerText}>{ownerName}</Text>
+          </CocolonPressable>
+        ) : (
+          <View style={[styles.ownerTarget, styles.ownerChip]}>
+            <Text style={styles.ownerText}>{ownerName}</Text>
+          </View>
+        )}
         <View style={styles.timeRow}>
           {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
           <ScreenUnreadBadge visible={isNew} />

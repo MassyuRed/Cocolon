@@ -37,7 +37,7 @@ export default function InputStackNavigator({ onInitialInputSettled, appStartupR
           appStartupReady={appStartupReady} saveRecovery={saveRecovery} />}
       </InputStack.Screen>
       <InputStack.Screen name="DeepInsight" component={DeepInsightScreen} />
-      <InputStack.Screen name="TutorialIntro" component={EmlisTutorialScreen} />
+      <InputStack.Screen name="TutorialIntro" component={EmlisTutorialScreen} options={{ gestureEnabled: false }} />
       <InputStack.Screen
         name="InputHistory"
         options={{ headerShown: false }}

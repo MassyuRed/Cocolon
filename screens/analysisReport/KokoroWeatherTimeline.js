@@ -53,27 +53,38 @@ function Legend({ item, styles }) {
   </View>;
 }
 
-export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0, period: controlledPeriod, onPeriodChange, sampleData, active = true }) {
+export default function KokoroWeatherTimeline({
+  colors, ui, refreshRevision = 0, period: controlledPeriod, onPeriodChange, sampleData, active = true,
+  selectedDate, onDateSelect, requireDateSelection = false, testIDPrefix,
+}) {
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const [localPeriod, setPeriod] = useState("today");
   const period = controlledPeriod || localPeriod;
   const [anchor, setAnchor] = useState(null);
-  const [selection, setSelection] = useState(null);
+  const [localSelection, setSelection] = useState(null);
+  const selection = period !== "today" && selectedDate !== undefined ? selectedDate : localSelection;
   const isSample = sampleData !== undefined;
   const live = useKokoroWeather(period, anchor, refreshRevision, !isSample, active);
   if (!active) return null;
   const { data, loading, error, retry } = isSample ? { data: sampleData } : live;
   const selectPeriod = next => { setPeriod(next); setAnchor(null); setSelection(null); onPeriodChange?.(next); };
+  const selectDate = date => {
+    setSelection(date);
+    onDateSelect?.(date);
+  };
   const move = next => { if (next) { setAnchor(next); setSelection(null); } };
   const items = period === "today" ? data?.time_buckets || [] : data?.items || [];
-  const selected = items.find(item => (item.key || item.date) === selection) || [...items].reverse().find(item => item.status !== "future" && item.status !== "outside_history");
+  const selected = items.find(item => (item.key || item.date) === selection) || (
+    requireDateSelection && period !== "today" ? undefined : [...items].reverse().find(item => item.status !== "future" && item.status !== "outside_history")
+  );
   const selectedIndex = items.indexOf(selected);
   const periodTitle = period === "today" ? (anchor ? "この日の感情" : "今日の感情") : period === "week" ? "この週のこころグラフ" : "この月のこころグラフ";
   const range = data ? (period === "month" ? `${data.start_date.slice(0, 4)}年${Number(data.start_date.slice(5, 7))}月` : `${data.start_date.slice(0, 4)}年 ${shortDate(data.start_date)}${period === "week" ? `–${shortDate(data.end_date)}` : ""}`) : "";
   return <View style={styles.root}>
     <View style={styles.periodRow}>
       <View style={styles.tabs}>{PERIODS.map(item => <CocolonPressable key={item.key} onPress={() => selectPeriod(item.key)}
-        style={[styles.tab, item.key === period && styles.activeTab]} accessibilityRole="tab" accessibilityLabel={item.label} accessibilityState={{ selected: item.key === period }}>
+        style={[styles.tab, item.key === period && styles.activeTab]} accessibilityRole="tab" accessibilityLabel={item.label} accessibilityState={{ selected: item.key === period }}
+        testID={testIDPrefix ? `${testIDPrefix}-period-${item.key}` : undefined}>
         <Text style={[styles.tabText, item.key === period && styles.activeText]}>{item.label}</Text>
       </CocolonPressable>)}</View>
       {data && !isSample ? <View style={styles.rangeRow}>
@@ -98,7 +109,8 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
                 {items.map((item, index) => {
                   const key = item.date;
                   const tick = period === "week" || index === 0 || index === items.length - 1 || ((Number(key.slice(8)) - 1) % 7 === 0 && items.length - 1 - index >= 4);
-                  return <CocolonPressable key={key} containerStyle={styles.barSlot} style={styles.barButton} onPress={() => setSelection(key)} accessibilityRole="button"
+                  return <CocolonPressable key={key} containerStyle={styles.barSlot} style={styles.barButton} onPress={() => selectDate(key)} accessibilityRole="button"
+                    testID={testIDPrefix ? `${testIDPrefix}-day-${Number(key.slice(8))}` : undefined}
                     accessibilityLabel={`${shortDate(key)}、${item.input_count}件${item.input_count ? "" : `、${emptyLabel(item)}`}`} accessibilityState={{ selected: selected?.date === key }}>
                     <View style={[styles.bar, !item.input_count && styles.emptyBar, selected?.date === key && styles.selectedBar]}>
                       {item.input_count ? WEATHER_EMOTIONS.map(emotion => <View key={emotion.key} style={{ height: `${item.emotion_share_pct[emotion.key]}%`, backgroundColor: emotion.color, width: "100%" }} />) : null}
@@ -119,11 +131,11 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
             <Text style={styles.bandMeta}>{item.input_count ? `${item.input_count}件` : emptyLabel(item)}</Text>
           </CocolonPressable>)}</View>
         </> : null}
-        {selected ? <View style={styles.card}>
+        {selected ? <View style={styles.card} testID={testIDPrefix ? `${testIDPrefix}-detail` : undefined}>
           <View style={styles.heading}><Text style={styles.section}>{period === "today" ? `${selected.label} ${selected.hours}` : `${shortDate(selected.date)}の記録`}</Text>
             {period !== "today" ? <View style={styles.rangeRow}>
-              <CocolonPressable style={styles.arrow} disabled={selectedIndex <= 0} accessibilityLabel="前の日の内訳" onPress={() => setSelection(items[selectedIndex - 1].date)}><Ionicons name="chevron-back" size={18} color={colors.TITLE_GOLD} /></CocolonPressable>
-              <CocolonPressable style={styles.arrow} disabled={selectedIndex >= items.length - 1} accessibilityLabel="次の日の内訳" onPress={() => setSelection(items[selectedIndex + 1].date)}><Ionicons name="chevron-forward" size={18} color={colors.TITLE_GOLD} /></CocolonPressable>
+              <CocolonPressable style={styles.arrow} disabled={selectedIndex <= 0} accessibilityLabel="前の日の内訳" onPress={() => selectDate(items[selectedIndex - 1].date)}><Ionicons name="chevron-back" size={18} color={colors.TITLE_GOLD} /></CocolonPressable>
+              <CocolonPressable style={styles.arrow} disabled={selectedIndex >= items.length - 1} accessibilityLabel="次の日の内訳" onPress={() => selectDate(items[selectedIndex + 1].date)}><Ionicons name="chevron-forward" size={18} color={colors.TITLE_GOLD} /></CocolonPressable>
             </View> : null}</View>
           <Text style={styles.body}>{selected.input_count ? `${selected.input_count}件の入力` : emptyLabel(selected)}</Text>
           {selected.input_count ? <Legend item={selected} styles={styles} /> : null}

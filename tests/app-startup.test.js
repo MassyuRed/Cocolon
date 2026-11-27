@@ -29,7 +29,7 @@ const theme={colors:{}};
 const no = () => {};
 const forever = () => new Promise(()=>{});
 
-function renderTutorial(entry, calls) {
+function renderTutorial(entry, calls, dimensions = { width: 390, height: 844, fontScale: 1 }, input = {}) {
   class AnimationValue {
     interpolate({ outputRange }) { return outputRange[1]; }
     setValue() {}
@@ -41,22 +41,39 @@ function renderTutorial(entry, calls) {
   const Screen = load('screens/EmlisTutorialScreen.js', {
     'react-native': {
       ...native,
+      useWindowDimensions: () => dimensions,
       ScrollView,
-      StyleSheet: { create: (styles) => styles, hairlineWidth: 1 },
+      TextInput: 'TextInput',
+      StyleSheet: { create: (styles) => styles, hairlineWidth: 1, flatten: (style) => (
+        Array.isArray(style) ? Object.assign({}, ...style.filter(Boolean)) : style
+      ) },
       AccessibilityInfo: {
         addEventListener: () => ({ remove: no }),
         isReduceMotionEnabled: async () => true,
       },
+      BackHandler: {
+        addEventListener: (event, handler) => {
+          assert.equal(event, 'hardwareBackPress');
+          input.back = handler;
+          return { remove: () => { if (input.back === handler) delete input.back; } };
+        },
+      },
       Animated: { View: 'AnimatedView', Value: AnimationValue },
     },
     'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' },
+    'react-native-svg': { __esModule: true, default: 'Svg', Circle: 'Circle', G: 'G' },
     'react-native-vector-icons/Ionicons': () => null,
     '../components/CocolonBackButton': (props) => React.createElement('TutorialBack', props),
     '../components/CocolonButton': (props) => React.createElement('TutorialButton', props),
+    '../components/CocolonPressable': (props) => React.createElement('TutorialPressable', props),
     '../../components/CocolonButton': (props) => React.createElement('TutorialButton', props),
     '../../components/CocolonPressable': (props) => React.createElement('TutorialPressable', props),
     '../theme/ThemeContext': { useTheme: () => theme },
     '../../theme/ThemeContext': { useTheme: () => theme },
+    '../analysis/useKokoroWeather': { useKokoroWeather: (_period, _anchor, _revision, enabled) => {
+      assert.equal(enabled, false, 'tutorial passes sample data and cannot request real emotion records');
+      return {};
+    } },
     '../TutorialContext': {
       useTutorial: () => ({
         endTutorial: async () => calls.push('complete'),
@@ -84,6 +101,9 @@ test('Emlis tutorial carries a sample reply, saved image, practice post and emot
     (props.title ?? props.children) === title
   ));
   const byId = (id) => view.root.findAll((element) => element.props.testID === id).at(-1);
+  const choice = (label) => view.root.findAllByType('TutorialPressable').find(({ props }) => (
+    props.accessibilityLabel === label
+  ));
   const press = async (element) => {
     assert.ok(element);
     assert.ok(!element.props.disabled);
@@ -93,59 +113,102 @@ test('Emlis tutorial carries a sample reply, saved image, practice post and emot
   assert.ok(includesText('Emlis(エムリス)'));
   await press(button('はじめる'));
   assert.ok(!includesText('Emlis(エムリス)'));
+  assert.ok(button('この内容でOK').props.disabled);
+  assert.ok(!includesText('資料の確認だけ引き受けた。'));
+  await press(byId('emlis-tutorial-record-action'));
   assert.ok(includesText('資料の確認だけ引き受けた。'));
+  assert.ok(includesText('「今の気持ち」で「平穏」'));
+  await press(choice('喜び'));
+  assert.ok(choice('喜び').props.accessibilityState.selected);
+  assert.ok(button('この内容でOK').props.disabled);
+  await press(choice('喜び'));
+  await press(choice('平穏'));
+  assert.ok(choice('平穏の強さ：中').props.accessibilityState.selected);
+  assert.ok(!choice('仕事カテゴリを選択する'));
+  await press(choice('平穏の強さ：弱'));
+  assert.ok(choice('平穏の強さ：弱').props.accessibilityState.selected);
+  assert.ok(button('この内容でOK').props.disabled);
+  await press(choice('仕事カテゴリを選択する'));
+  assert.ok(choice('仕事カテゴリを選択する').props.accessibilityState.selected);
   await press(button('この内容でOK'));
   assert.ok(includesText('どんなところに、いちばんほっとしましたか？'));
-  assert.ok(!button('ピースの作成'));
-  await press(button('先の約束を守りながら、同僚の手伝いもできたことです。'));
+  assert.equal(byId('emlis-tutorial-answer-field').props.value, '');
+  assert.ok(button('回答を送る').props.disabled);
+  await press(button('回答例を入力'));
+  assert.equal(byId('emlis-tutorial-answer-field').props.value, '先の約束を守りながら、同僚の手伝いもできたことです。');
+  assert.ok(!includesText('回答後の応答'));
+  await press(button('回答を送る'));
   assert.ok(includesText('先の約束も、同僚を手伝いたい気持ちも、どちらも大切にできたんですね。'));
-  await press(button('ピースの作成'));
+  await press(button('この回答を含めてピースを作成'));
 
   const color = () => byId('emlis-tutorial-piece-preview').props.style[1].backgroundColor;
   const startingColor = color();
+  assert.ok(byId('emlis-tutorial-save-piece').props.disabled);
+  assert.ok(!byId('emlis-tutorial-piece-theme-quiet_night'));
+  await press(byId('emlis-tutorial-open-palette'));
   await press(byId('emlis-tutorial-piece-theme-quiet_night'));
   const selectedColor = color();
   assert.notEqual(startingColor, selectedColor);
   await press(byId('emlis-tutorial-save-piece'));
+  await press(byId('emlis-tutorial-open-library'));
   await press(byId('emlis-tutorial-open-library-piece'));
   assert.equal(color(), selectedColor);
+  await press(byId('emlis-tutorial-image-preview'));
+  assert.ok(includesText('練習では写真に保存されません。'));
   await press(byId('emlis-tutorial-open-post'));
-  assert.ok(includesText('フォローした相手があなたに公開している投稿や感情通知'));
+  assert.ok(byId('emlis-tutorial-post-confirmation'));
+  assert.ok(!byId('emlis-tutorial-post-feed'));
+  await press(button('キャンセル'));
+  assert.ok(!byId('emlis-tutorial-post-confirmation'));
+  await press(byId('emlis-tutorial-open-post'));
+  await press(byId('emlis-tutorial-practice-post'));
   assert.equal(byId('emlis-tutorial-tab-posts').props.accessibilityState.selected, true);
   assert.ok(!byId('emlis-tutorial-notification-feed'));
   assert.ok(includesText('かれん'));
   assert.ok(includesText('少しだけ早く起きて'));
   assert.ok(includesText('自分が投稿したピースと、フォロー中の人があなたに公開したピース'));
-  assert.ok(!includesText('自分の投稿（練習）'));
-  await press(byId('emlis-tutorial-practice-post'));
-  assert.ok(includesText('自分の投稿（練習）'));
+  assert.ok(includesText('自分'));
   assert.ok(includesText('かれん'));
+  assert.equal(view.root.findAllByType('Text').filter((node) => node.props.testID === 'nexus-piece-resonance-count').length, 2);
   assert.ok(byId('emlis-tutorial-open-chart').props.disabled);
   await press(byId('emlis-tutorial-tab-notifications'));
   assert.equal(byId('emlis-tutorial-tab-notifications').props.accessibilityState.selected, true);
   assert.ok(byId('emlis-tutorial-notification-feed'));
-  assert.ok(includesText('あなたに公開した感情入力の通知が届きます'));
+  assert.ok(includesText('あなたに公開した感情通知が届きます'));
   assert.ok(includesText('かれん'));
   assert.ok(includesText('11/26 08:10'));
   assert.ok(includesText('平穏（中）'));
   assert.ok(!includesText('少しだけ早く起きて'));
   assert.deepEqual(calls, []);
   await press(byId('emlis-tutorial-tab-posts'));
-  assert.ok(includesText('自分の投稿（練習）'));
+  assert.ok(includesText('自分'));
   assert.ok(includesText('かれん'));
   await press(byId('emlis-tutorial-tab-notifications'));
-  await press(button('分析を見てみる'));
+  await press(byId('emlis-tutorial-open-chart'));
 
   assert.ok(byId('emlis-tutorial-open-map').props.disabled);
+  assert.ok(!byId('emlis-tutorial-chart-day-26'));
+  await press(byId('emlis-tutorial-chart-period-week'));
+  const chartHeights = byId('emlis-tutorial-chart-day-26').findAllByType('View')
+    .map(({ props }) => props.style?.height)
+    .filter((height) => typeof height === 'string');
+  assert.equal(chartHeights.length, 5);
+  assert.ok(chartHeights.every((height) => /^\d+%$/.test(height)));
+  await press(byId('emlis-tutorial-chart-day-25'));
+  assert.ok(byId('emlis-tutorial-open-map').props.disabled);
   await press(byId('emlis-tutorial-chart-day-26'));
-  assert.ok(includesText('平穏・中'));
+  assert.ok(includesText('平穏・弱'));
+  await press(byId('emlis-tutorial-open-map'));
+  await press(view.root.findByType('TutorialBack'));
+  assert.ok(byId('emlis-tutorial-chart-detail'));
+  assert.ok(includesText('平穏・弱'));
   await press(byId('emlis-tutorial-open-map'));
   assert.ok(!byId('emlis-tutorial-map-diagram'));
   await press(byId('emlis-tutorial-map-toggle'));
   assert.ok(byId('emlis-tutorial-map-diagram'));
   await press(byId('emlis-tutorial-open-summary'));
   assert.ok(includesText('Emlisの使い方'));
-  assert.ok(includesText('投稿や感情通知を見る'));
+  assert.ok(includesText('「ピース」→「投稿」「感情通知」'));
   assert.deepEqual(calls, []);
   await press(button('自分の記録をはじめる'));
   assert.deepEqual(calls, ['complete', 'home']);
@@ -165,6 +228,39 @@ test('dismissing the first Emlis tutorial records a skip and closing replay retu
     assert.deepEqual(calls, expected);
     await act(async () => view.unmount());
   }
+});
+
+test('replaying Emlis can backtrack at large text, skip the sample answer and open a record-only Piece', async () => {
+  const calls = [];
+  const input = {};
+  let view;
+  await act(async () => { view = renderTutorial('replay', calls, { width: 320, height: 568, fontScale: 1.6 }, input); });
+  const button = (title) => view.root.findAllByType('TutorialButton').find(({ props }) => ((props.title ?? props.children) === title));
+  const control = (label) => view.root.findAllByType('TutorialPressable').find(({ props }) => props.accessibilityLabel === label);
+  const press = async (node) => {
+    assert.ok(node && !node.props.disabled);
+    await act(async () => { await node.props.onPress(); });
+  };
+  await press(button('はじめる'));
+  await press(control('考えたこと・感じたこと'));
+  await press(control('平穏'));
+  await press(control('平穏の強さ：弱'));
+  await press(control('仕事カテゴリを選択する'));
+  await press(button('この内容でOK'));
+  await act(async () => { assert.equal(input.back(), true); });
+  assert.ok(control('仕事カテゴリを選択する').props.accessibilityState.selected);
+  await press(button('この内容でOK'));
+  await press(button('今回はスキップ'));
+  assert.ok(!button('この回答を含めてピースを作成'));
+  await press(button('ピースの作成'));
+  assert.ok(view.root.findAllByType('Text').some(({ props }) => (
+    typeof props.children === 'string' && props.children.includes('先に約束していた提出に間に合うよう')
+  )));
+  assert.ok(view.root.findAllByType('Text').every(({ props }) => (
+    typeof props.children !== 'string' || !props.children.includes('先の約束も、同僚を手伝いたい気持ちも')
+  )));
+  assert.deepEqual(calls, []);
+  await act(async () => view.unmount());
 });
 
 test('startup covers the mounted home until subscription I/O and home/draft settle, then preserves drafts on refresh', async t => {

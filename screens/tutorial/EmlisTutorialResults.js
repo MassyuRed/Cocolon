@@ -11,12 +11,29 @@ import {
 } from "../../features/piece/piecePalette";
 import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
+import KokoroWeatherTimeline, { WEATHER_EMOTIONS } from "../analysisReport/KokoroWeatherTimeline";
 import NexusEmotionLogSection from "../nexus/NexusEmotionLogSection";
+import NexusPieceCard from "../nexus/NexusPieceCard";
 
 const DEFAULT_PIECE_THEME = PIECE_LEGACY_THEME_IDS[0];
-const PIECE_TEXT = "先の約束を守れる範囲で、同僚の資料の確認だけを引き受けました。手伝うこともできて、少しほっとしました。";
+const ANSWERED_PIECE_TEXT = "先の約束を守れる範囲で、同僚の資料の確認だけを引き受けました。手伝うこともできて、少しほっとしました。";
+const RECORD_PIECE_TEXT = "先に約束していた提出に間に合うよう、同僚の資料の確認だけ引き受けた。少しほっとした。";
 const FOLLOWED_POST_TEXT = "朝に窓を開けると、空気がひんやりしていました。少しだけ早く起きて、ゆっくりお茶を飲みました。";
 const FOLLOWED_PERSON = "かれん";
+const PIECE_LABEL = "資料の確認だけを引き受けた日";
+const OWN_POST = {
+  source_type: "piece_v2",
+  owner: { display_name: "自分" },
+  created_at: "2026-11-26T10:00:00+09:00",
+  metrics: { resonances: 0 },
+};
+const FOLLOWED_POST = {
+  source_type: "piece_v2",
+  owner: { display_name: FOLLOWED_PERSON },
+  body: FOLLOWED_POST_TEXT,
+  created_at: "2026-11-26T08:15:00+09:00",
+  metrics: { resonances: 0 },
+};
 const TUTORIAL_FEED_TABS = [
   { id: "posts", label: "投稿" },
   { id: "notifications", label: "感情通知" },
@@ -30,23 +47,65 @@ const SAMPLE_EMOTION_LOG = {
   }],
 };
 
-const CHART_EMOTIONS = {
-  joy: { label: "喜び", color: "#D4AA45" },
-  anxiety: { label: "不安", color: "#AA92B5" },
-  calm: { label: "平穏", color: "#809D85" },
-};
-const CHART_DAYS = [
-  { day: 23, weekday: "月", emotions: [{ key: "joy", weight: 2 }] },
-  { day: 24, weekday: "火", emotions: [] },
-  { day: 25, weekday: "水", emotions: [{ key: "anxiety", weight: 2 }, { key: "calm", weight: 1 }] },
-  { day: 26, weekday: "木", emotions: [{ key: "calm", weight: 2 }] },
-  { day: 27, weekday: "金", emotions: [] },
-  { day: 28, weekday: "土", emotions: [] },
-  { day: 29, weekday: "日", emotions: [] },
+const SAMPLE_DATE = "2026-11-26";
+const SAMPLE_RECORD = { created_at: `${SAMPLE_DATE}T10:00:00+09:00`, emotions: [{ key: "calm", weight: 1 }] };
+const SAMPLE_CHART_RECORDS = [
+  { created_at: "2026-11-23T08:40:00+09:00", emotions: [{ key: "joy", weight: 2 }] },
+  { created_at: "2026-11-25T17:20:00+09:00", emotions: [{ key: "anxiety", weight: 2 }, { key: "calm", weight: 1 }] },
+  SAMPLE_RECORD,
 ];
-const STRENGTH_LABELS = { 1: "弱", 2: "中", 3: "強" };
 
-function PieceImagePreview({ themeId, styles }) {
+function sampleChartAggregate(records) {
+  const weights = Object.fromEntries(WEATHER_EMOTIONS.map(({ key }) => [key, 0]));
+  for (const record of records) {
+    for (const { key, weight } of record.emotions) {
+      weights[key] += weight;
+    }
+  }
+  const totalWeight = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
+  return {
+    input_count: records.length,
+    records,
+    emotion_weights: weights,
+    emotion_share_pct: Object.fromEntries(
+      Object.entries(weights).map(([key, weight]) => [key, totalWeight ? Math.round(weight * 100 / totalWeight) : 0])
+    ),
+    status: records.length ? "ok" : "no_observation",
+  };
+}
+
+function sampleChartPeriod(firstDay, lastDay) {
+  const items = Array.from({ length: lastDay - firstDay + 1 }, (_, offset) => {
+    const day = firstDay + offset;
+    const date = `2026-11-${String(day).padStart(2, "0")}`;
+    return { date, ...sampleChartAggregate(SAMPLE_CHART_RECORDS.filter(record => record.created_at.startsWith(date))) };
+  });
+  return {
+    start_date: items[0].date,
+    end_date: items[items.length - 1].date,
+    items,
+    summary: {
+      ...sampleChartAggregate(items.flatMap(item => item.records)),
+      recorded_days: items.filter(item => item.input_count).length,
+    },
+  };
+}
+
+const SAMPLE_CHART = {
+  today: {
+    ...sampleChartPeriod(26, 26),
+    time_buckets: [
+      { key: "early", label: "深夜", hours: "0:00–6:00", ...sampleChartAggregate([]) },
+      { key: "morning", label: "朝", hours: "6:00–12:00", ...sampleChartAggregate([SAMPLE_RECORD]) },
+      { key: "afternoon", label: "昼", hours: "12:00–18:00", ...sampleChartAggregate([]) },
+      { key: "night", label: "夜", hours: "18:00–24:00", ...sampleChartAggregate([]) },
+    ],
+  },
+  week: sampleChartPeriod(23, 29),
+  month: sampleChartPeriod(1, 30),
+};
+
+function PieceImagePreview({ themeId, text, styles }) {
   const palette = PIECE_THEME_COLORS[themeId];
   return (
     <View
@@ -54,135 +113,91 @@ function PieceImagePreview({ themeId, styles }) {
       style={[styles.pieceCanvas, { backgroundColor: palette.canvas, borderColor: palette.border }]}
     >
       <View style={[styles.pieceSheet, { backgroundColor: palette.surface, borderColor: palette.border }]}>
-        <Text style={[styles.pieceText, { color: palette.text }]}>{PIECE_TEXT}</Text>
+        <Text style={[styles.pieceText, { color: palette.text }]}>{text}</Text>
         <Text style={[styles.pieceBrand, { color: palette.branding }]}>Emlis</Text>
       </View>
     </View>
   );
 }
 
-function ExamplePost({ name, text, styles, color }) {
-  return (
-    <View style={styles.post}>
-      <View style={styles.row}>
-        <Ionicons name="person-circle-outline" size={22} color={color} accessible={false} />
-        <Text style={styles.label}>{name}</Text>
-      </View>
-      <Text style={styles.body}>{text}</Text>
-    </View>
-  );
-}
-
-function TutorialChart({ styles, selectedDay, setSelectedDay }) {
-  return (
-    <View style={styles.card}>
-      <Text accessibilityRole="header" style={styles.heading}>この週の感情</Text>
-      <Text style={styles.caption}>練習用の記録です。日をタップして、その日の内訳を開いてみましょう。</Text>
-      <View style={styles.plot}>
-        {CHART_DAYS.map((entry) => {
-          const { day, weekday, emotions } = entry;
-          const selected = selectedDay?.day === day;
-          const weights = emotions.reduce((sum, emotion) => sum + emotion.weight, 0);
-          return (
-            <CocolonPressable
-              key={day}
-              containerStyle={styles.dayContainer}
-              style={[styles.day, selected && styles.daySelected]}
-              onPress={() => setSelectedDay(entry)}
-              accessibilityLabel={`11月${day}日、${emotions.length ? "1件の入力" : "記録なし"}`}
-              accessibilityState={{ selected }}
-              testID={`emlis-tutorial-chart-day-${day}`}
-            >
-              <View style={[styles.bar, !weights && styles.emptyBar]}>
-                {emotions.map(({ key, weight }) => (
-                  <View
-                    key={key}
-                    style={{
-                      height: `${(weight / weights) * 100}%`,
-                      backgroundColor: CHART_EMOTIONS[key].color,
-                    }}
-                  />
-                ))}
-              </View>
-              <Text accessible={false} style={styles.weekday}>{weekday}</Text>
-              <Text accessible={false} style={[styles.date, selected && styles.selectedDate]}>{day}</Text>
-            </CocolonPressable>
-          );
-        })}
-      </View>
-      <View style={styles.legend}>
-        {Object.entries(CHART_EMOTIONS).map(([key, { label, color }]) => (
-          <View key={key} style={styles.row}>
-            <View style={[styles.dot, { backgroundColor: color }]} />
-            <Text style={styles.caption}>{label}</Text>
-          </View>
-        ))}
-      </View>
-      {selectedDay ? (
-        <View style={styles.inlineCard} accessibilityLiveRegion="polite" testID="emlis-tutorial-chart-detail">
-          <Text accessibilityRole="header" style={styles.label}>{`11月${selectedDay.day}日の記録`}</Text>
-          <Text style={styles.body}>
-            {selectedDay.emotions.length
-              ? selectedDay.emotions.map(({ key, weight }) => `${CHART_EMOTIONS[key].label}・${STRENGTH_LABELS[weight]}`).join("　")
-              : "記録なし"}
-          </Text>
-        </View>
-      ) : null}
-      <Text style={styles.caption}>色の割合は、記録した感情とその強さから集計します。</Text>
-    </View>
-  );
-}
-
-export default function EmlisTutorialResults({ stage, onAdvance }) {
+export default function EmlisTutorialResults({ stage, onAdvance, includeAnswer }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => makeStyles(colors, ui), [colors, ui]);
   const [pieceTheme, setPieceTheme] = useState(DEFAULT_PIECE_THEME);
-  const [savedPieceTheme, setSavedPieceTheme] = useState(DEFAULT_PIECE_THEME);
-  const [libraryPreview, setLibraryPreview] = useState("unopened");
-  const [practicePost, setPracticePost] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [savedPiece, setSavedPiece] = useState(null);
+  const [libraryScreen, setLibraryScreen] = useState("entry");
+  const [imagePreviewed, setImagePreviewed] = useState(false);
+  const [postConfirmationOpen, setPostConfirmationOpen] = useState(false);
   const [notificationPreview, setNotificationPreview] = useState("unopened");
+  const [chartPeriod, setChartPeriod] = useState("today");
   const [selectedDay, setSelectedDay] = useState(null);
   const [mapDiagram, setMapDiagram] = useState("unopened");
-  const libraryOpen = libraryPreview === "open";
+  const pieceText = includeAnswer ? ANSWERED_PIECE_TEXT : RECORD_PIECE_TEXT;
+  const differentTheme = pieceTheme !== DEFAULT_PIECE_THEME;
   const notificationsOpen = notificationPreview === "open";
+  const weekOpen = chartPeriod === "week";
+  const sampleDayOpened = selectedDay === SAMPLE_DATE;
   const mapOpen = mapDiagram === "open";
 
   if (stage === "piece") {
     return (
       <View style={styles.stage}>
         <Text accessibilityRole="header" style={styles.title}>ピースの作成</Text>
-        <Text style={styles.body}>練習の記録を、読み返せる一枚に整えました。背景を選ぶと、その場で見た目が変わります。</Text>
-        <PieceImagePreview themeId={pieceTheme} styles={styles} />
-        <Text style={styles.label}>背景</Text>
-        <View style={styles.swatchRow}>
-          {PIECE_LEGACY_THEME_IDS.map((themeId) => {
-            const selected = pieceTheme === themeId;
-            return (
-              <CocolonPressable
-                key={themeId}
-                containerStyle={styles.swatchContainer}
-                style={[styles.swatch, selected && styles.selectedSwatch]}
-                accessibilityRole="radio"
-                accessibilityLabel={PIECE_THEME_LABELS[themeId]}
-                accessibilityState={{ checked: selected }}
-                onPress={() => setPieceTheme(themeId)}
-                testID={`emlis-tutorial-piece-theme-${themeId}`}
-              >
-                <View style={[
-                  styles.swatchDot,
-                  { backgroundColor: PIECE_THEME_COLORS[themeId].surface, borderColor: colors.CARD_BORDER },
-                ]} />
-                <Text style={styles.label}>{PIECE_THEME_LABELS[themeId]}</Text>
-              </CocolonPressable>
-            );
-          })}
-        </View>
-        <CocolonButton testID="emlis-tutorial-save-piece" onPress={() => {
-          setSavedPieceTheme(pieceTheme);
+        <Text accessibilityLiveRegion="polite" style={styles.instruction}>
+          {differentTheme
+            ? `「${PIECE_THEME_LABELS[pieceTheme]}」に変わりました。「保存」を押すと、自分のピースに残せます。`
+            : paletteOpen
+              ? "別の配色を選んで、プレビューの変化を見てみましょう。"
+              : "「配色」を押して、記録を残す一枚の見た目を変えてみましょう。"}
+        </Text>
+        <CocolonButton
+          variant="secondary"
+          onPress={() => setPaletteOpen(!paletteOpen)}
+          accessibilityState={{ expanded: paletteOpen }}
+          testID="emlis-tutorial-open-palette"
+        >
+          配色
+        </CocolonButton>
+        {paletteOpen ? (
+          <View style={styles.swatchRow}>
+            {PIECE_LEGACY_THEME_IDS.map((themeId) => {
+              const selected = pieceTheme === themeId;
+              return (
+                <CocolonPressable
+                  key={themeId}
+                  containerStyle={styles.swatchContainer}
+                  style={[styles.swatch, selected && styles.selectedSwatch]}
+                  accessibilityRole="radio"
+                  accessibilityLabel={PIECE_THEME_LABELS[themeId]}
+                  accessibilityState={{ checked: selected }}
+                  onPress={() => setPieceTheme(themeId)}
+                  testID={`emlis-tutorial-piece-theme-${themeId}`}
+                >
+                  <View style={[
+                    styles.swatchDot,
+                    { backgroundColor: PIECE_THEME_COLORS[themeId].surface, borderColor: colors.CARD_BORDER },
+                  ]} />
+                  <Text style={styles.label}>{PIECE_THEME_LABELS[themeId]}</Text>
+                </CocolonPressable>
+              );
+            })}
+          </View>
+        ) : null}
+        <PieceImagePreview themeId={pieceTheme} text={pieceText} styles={styles} />
+        <CocolonButton testID="emlis-tutorial-save-piece" disabled={!differentTheme} onPress={() => {
+          setSavedPiece({ themeId: pieceTheme, text: pieceText });
+          setLibraryScreen("entry");
+          setImagePreviewed(false);
+          setPostConfirmationOpen(false);
+          setNotificationPreview("unopened");
+          setChartPeriod("today");
+          setSelectedDay(null);
+          setMapDiagram("unopened");
           onAdvance();
         }}>
-          非公開で保存する
+          保存
         </CocolonButton>
       </View>
     );
@@ -192,25 +207,62 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
     return (
       <View style={styles.stage}>
         <Text accessibilityRole="header" style={styles.title}>保存したピース</Text>
-        <Text style={styles.body}>非公開で保存したピースは、自分だけが読めます。</Text>
-        <CocolonPressable
-          style={styles.savedRow}
-          onPress={() => setLibraryPreview(libraryOpen ? "seen" : "open")}
-          accessibilityLabel={libraryOpen ? "練習のピースを閉じる" : "練習のピースを開く"}
-          accessibilityState={{ expanded: libraryOpen }}
-          testID="emlis-tutorial-open-library-piece"
-        >
-          <Ionicons name="image-outline" size={26} color={colors.TITLE_GOLD} accessible={false} />
-          <View style={styles.rowText}>
-            <Text style={styles.heading}>自分のピースを開く</Text>
-            <Text style={styles.caption}>練習のピース・非公開</Text>
-          </View>
-          <Ionicons name={libraryOpen ? "chevron-up" : "chevron-down"} size={20} color={colors.TITLE_GOLD} accessible={false} />
-        </CocolonPressable>
-        {libraryOpen ? <PieceImagePreview themeId={savedPieceTheme} styles={styles} /> : null}
-        <CocolonButton testID="emlis-tutorial-open-post" disabled={libraryPreview === "unopened"} onPress={onAdvance}>
-          投稿の見え方を試す
-        </CocolonButton>
+        {libraryScreen === "entry" ? (
+          <>
+            <Text style={styles.instruction}>保存できました。「ピース」→「自分のピースを開く」で見返せます。</Text>
+            <CocolonButton testID="emlis-tutorial-open-library" onPress={() => setLibraryScreen("list")}>
+              自分のピースを開く
+            </CocolonButton>
+          </>
+        ) : libraryScreen === "list" ? (
+          <>
+            <Text style={styles.instruction}>いま保存したピースを押して開きましょう。</Text>
+            <CocolonPressable
+              style={styles.savedRow}
+              onPress={() => setLibraryScreen("detail")}
+              testID="emlis-tutorial-open-library-piece"
+            >
+              <Ionicons name="image-outline" size={24} color={colors.TITLE_GOLD} accessible={false} />
+              <View style={styles.rowText}>
+                <Text style={styles.heading}>{PIECE_LABEL}</Text>
+                <Text style={styles.caption}>非公開</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color={colors.TITLE_GOLD} accessible={false} />
+            </CocolonPressable>
+          </>
+        ) : (
+          <>
+            <Text style={styles.instruction}>対応端末では「画像を保存」で写真に残せます。Emlisで分け合うときは「アプリ内に投稿する」を押します。</Text>
+            <PieceImagePreview themeId={savedPiece.themeId} text={savedPiece.text} styles={styles} />
+            <CocolonButton
+              variant="secondary"
+              testID="emlis-tutorial-image-preview"
+              onPress={() => setImagePreviewed(true)}
+            >
+              画像を保存
+            </CocolonButton>
+            {imagePreviewed ? (
+              <Text accessibilityLiveRegion="polite" style={styles.caption}>練習では写真に保存されません。</Text>
+            ) : null}
+            {postConfirmationOpen ? (
+              <View style={styles.card} testID="emlis-tutorial-post-confirmation">
+                <Text accessibilityRole="header" style={styles.heading}>アプリ内に投稿しますか？</Text>
+                <Text style={styles.body}>実際の投稿は、ピースの公開を許可したフォロワーが見られます。</Text>
+                <CocolonButton testID="emlis-tutorial-practice-post" onPress={() => {
+                  setPostConfirmationOpen(false);
+                  onAdvance();
+                }}>
+                  投稿する
+                </CocolonButton>
+                <CocolonButton variant="secondary" onPress={() => setPostConfirmationOpen(false)}>キャンセル</CocolonButton>
+              </View>
+            ) : (
+              <CocolonButton testID="emlis-tutorial-open-post" onPress={() => setPostConfirmationOpen(true)}>
+                アプリ内に投稿する
+              </CocolonButton>
+            )}
+          </>
+        )}
       </View>
     );
   }
@@ -219,7 +271,13 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
     return (
       <View style={styles.stage}>
         <Text accessibilityRole="header" style={styles.title}>ピース</Text>
-        <Text style={styles.body}>フォローした相手があなたに公開している投稿や感情通知を、ピース画面で見られます。</Text>
+        <Text accessibilityLiveRegion="polite" style={styles.instruction}>
+          {notificationsOpen
+            ? "相手の感情通知をオンにすると、フォロー中の人が感情を記録したときに、あなたに公開した感情通知が届きます。"
+            : notificationPreview === "unopened"
+              ? "練習の投稿が加わりました。次は「感情通知」を押してみましょう。"
+              : "投稿と感情通知を見られました。次は「分析」を開きましょう。"}
+        </Text>
         <View style={styles.feedTabs}>
           {TUTORIAL_FEED_TABS.map(({ id, label }) => {
             const opensNotifications = id === "notifications";
@@ -243,44 +301,25 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
         </View>
         {notificationsOpen ? (
           <>
-            <Text style={styles.caption}>
-              受信をオンにしていると、フォロー中の人があなたに公開した感情入力の通知が届きます。ここで感情・強さ・時刻を確認できます。
-            </Text>
             <View style={styles.card} testID="emlis-tutorial-notification-feed">
-              <Text accessibilityRole="header" style={styles.heading}>感情通知の見本</Text>
               <NexusEmotionLogSection emotionLogState={SAMPLE_EMOTION_LOG} styles={styles} colors={colors} ui={ui} />
             </View>
-            {!practicePost ? <Text style={styles.caption}>「投稿」で、練習のピースを一覧に加えてみましょう。</Text> : null}
+            <Text style={styles.caption}>ホームの「今回だけ感情通知を送らない」で、その記録の通知を止められます。</Text>
+            <Text style={styles.instruction}>ここで、かれんが記録した感情・強さ・時刻を確認できます。「分析」を押して、自分の記録を振り返りましょう。</Text>
           </>
         ) : (
-          <>
-            <Text style={styles.caption}>
-              自分が投稿したピースと、フォロー中の人があなたに公開したピースを読めます。自分が投稿すると、公開を許可したフォロワーにも届きます。
-            </Text>
-            {!practicePost ? (
-              <CocolonButton variant="secondary" testID="emlis-tutorial-practice-post" onPress={() => setPracticePost(true)}>
-                練習で投稿する
-              </CocolonButton>
-            ) : (
-              <Text accessibilityLiveRegion="polite" style={styles.caption}>
-                {notificationPreview === "unopened"
-                  ? "練習のピースが一覧に加わりました。次は「感情通知」を開いてみましょう。"
-                  : "練習のピースが、この見本の一覧に加わりました。"}
-              </Text>
-            )}
-            <View style={styles.card} testID="emlis-tutorial-post-feed">
-              <Text accessibilityRole="header" style={styles.heading}>投稿の見本</Text>
-              {practicePost ? <ExamplePost name="自分の投稿（練習）" text={PIECE_TEXT} styles={styles} color={colors.TITLE_GOLD} /> : null}
-              <ExamplePost name={FOLLOWED_PERSON} text={FOLLOWED_POST_TEXT} styles={styles} color={colors.TITLE_GOLD} />
-            </View>
-          </>
+          <View testID="emlis-tutorial-post-feed">
+            <Text style={[styles.caption, styles.feedExplanation]}>自分が投稿したピースと、フォロー中の人があなたに公開したピースを読めます。</Text>
+            {savedPiece ? <NexusPieceCard item={{ ...OWN_POST, body: savedPiece.text }} /> : null}
+            <NexusPieceCard item={FOLLOWED_POST} />
+          </View>
         )}
         <CocolonButton
           testID="emlis-tutorial-open-chart"
-          disabled={!practicePost || notificationPreview === "unopened"}
+          disabled={notificationPreview === "unopened"}
           onPress={onAdvance}
         >
-          分析を見てみる
+          分析
         </CocolonButton>
       </View>
     );
@@ -290,9 +329,29 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
     return (
       <View style={styles.stage}>
         <Text accessibilityRole="header" style={styles.title}>こころグラフ</Text>
-        <TutorialChart styles={styles} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
-        <CocolonButton testID="emlis-tutorial-open-map" disabled={!selectedDay} onPress={onAdvance}>
-          わたしマップを見る
+        <Text accessibilityLiveRegion="polite" style={styles.instruction}>
+          {weekOpen
+            ? sampleDayOpened
+              ? "練習で選んだ「平穏・弱」が見つかりました。次は「わたしマップ」を開きましょう。"
+              : "「26」を押して、練習で記録した気持ちを見つけましょう。"
+            : "「週」を押すと、その週の気持ちを日ごとに比べられます。"}
+        </Text>
+        <KokoroWeatherTimeline
+          colors={colors}
+          ui={ui}
+          period={chartPeriod}
+          onPeriodChange={(period) => {
+            setChartPeriod(period);
+            setSelectedDay(null);
+          }}
+          selectedDate={selectedDay}
+          onDateSelect={setSelectedDay}
+          requireDateSelection
+          sampleData={SAMPLE_CHART[chartPeriod]}
+          testIDPrefix="emlis-tutorial-chart"
+        />
+        <CocolonButton testID="emlis-tutorial-open-map" disabled={!weekOpen || !sampleDayOpened} onPress={onAdvance}>
+          わたしマップ
         </CocolonButton>
       </View>
     );
@@ -302,8 +361,11 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
     return (
       <View style={styles.stage}>
         <Text accessibilityRole="header" style={styles.title}>わたしマップ</Text>
-        <Text style={styles.body}>記録から見えてきた、自分の選び方を振り返れます。</Text>
-        <Text style={styles.caption}>別の日の記録「提出に間に合わなくなるので、連絡は断り、資料の確認だけ申し出た。」</Text>
+        <Text accessibilityLiveRegion="polite" style={styles.instruction}>
+          {mapDiagram === "unopened"
+            ? "わたしマップは、記録をつないで自分の選び方を振り返れます。「関係する部分を図で見る」を押してみましょう。"
+            : "ふたつの記録に共通する選び方が見えました。「まとめを見る」で、練習した操作を振り返りましょう。"}
+        </Text>
         <View style={styles.card}>
           <Text accessibilityRole="header" style={styles.heading}>先の約束を守れる範囲</Text>
           <Text style={styles.body}>同僚を手伝うときは、先の約束を守れる範囲を選んでいます。</Text>
@@ -317,16 +379,19 @@ export default function EmlisTutorialResults({ stage, onAdvance }) {
             <Text style={styles.action}>{mapOpen ? "図を閉じる" : "関係する部分を図で見る"}</Text>
           </CocolonPressable>
           {mapOpen ? (
-            <View
-              accessible
-              accessibilityLabel="先の約束を守れるかを確かめ、引き受ける範囲を選ぶ"
-              testID="emlis-tutorial-map-diagram"
-              style={styles.mapPath}
-            >
-              <View style={styles.mapNode}><Text style={styles.label}>先の約束を守る</Text></View>
-              <Ionicons name="arrow-down" size={20} color={colors.TITLE_GOLD} accessible={false} />
-              <View style={styles.mapNode}><Text style={styles.label}>手伝う範囲を選ぶ</Text></View>
-            </View>
+            <>
+              <View
+                accessible
+                accessibilityLabel="先の約束を守れるかを確かめ、引き受ける範囲を選ぶ"
+                testID="emlis-tutorial-map-diagram"
+                style={styles.mapPath}
+              >
+                <View style={styles.mapNode}><Text style={styles.label}>先の約束を守る</Text></View>
+                <Ionicons name="arrow-down" size={20} color={colors.TITLE_GOLD} accessible={false} />
+                <View style={styles.mapNode}><Text style={styles.label}>手伝う範囲を選ぶ</Text></View>
+              </View>
+              <Text style={styles.caption}>別の日も、締め切りに間に合うよう連絡は断り、資料の確認だけを申し出ていました。</Text>
+            </>
           ) : null}
         </View>
         <CocolonButton testID="emlis-tutorial-open-summary" disabled={mapDiagram === "unopened"} onPress={onAdvance}>
@@ -344,6 +409,10 @@ function makeStyles(colors, ui) {
     stage: { gap: 14 },
     title: { ...ui.typography.screenTitle, color: colors.TITLE_GOLD },
     body: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT, flexShrink: 1 },
+    instruction: {
+      ...ui.typography.body, color: ui.text.primary, borderLeftWidth: 3,
+      borderLeftColor: colors.TITLE_GOLD, paddingVertical: 6, paddingLeft: 12,
+    },
     caption: { ...ui.typography.description, color: colors.TEXT_SUBTLE, flexShrink: 1 },
     heading: { ...ui.typography.sectionTitle, color: colors.TITLE_GOLD, flexShrink: 1 },
     label: { ...ui.typography.button, color: colors.TEXT_ON_LIGHT, flexShrink: 1 },
@@ -365,14 +434,13 @@ function makeStyles(colors, ui) {
     },
     selectedSwatch: { borderColor: colors.TITLE_GOLD, backgroundColor: colors.SURFACE_TONAL },
     swatchDot: { width: 18, height: 18, borderRadius: 9, borderWidth: 1 },
-    row: { flexDirection: "row", alignItems: "center", gap: 8 },
     rowText: { flex: 1 },
     savedRow: {
       flexDirection: "row", alignItems: "center", gap: 10, minHeight: 56, padding: 14,
       borderWidth: 1, borderColor: colors.CARD_BORDER, borderRadius: ui.radius.lg,
       backgroundColor: colors.FIELD_BG,
     },
-    post: { gap: 6, borderTopWidth: 1, borderColor: colors.CARD_BORDER, paddingTop: 12 },
+    feedExplanation: { marginBottom: 12 },
     feedTabs: {
       flexDirection: "row", gap: 4, padding: 4, borderWidth: 1,
       borderColor: colors.CARD_BORDER, borderRadius: ui.radius.card, backgroundColor: colors.FIELD_BG,
@@ -389,18 +457,6 @@ function makeStyles(colors, ui) {
     emotionLogBadgeRow: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
     emotionLogBadge: { paddingVertical: 8, paddingHorizontal: 12, borderRadius: ui.radius.pill },
     emotionLogBadgeText: { ...ui.typography.description },
-    plot: { flexDirection: "row", alignItems: "flex-end" },
-    dayContainer: { flex: 1, minWidth: 0 },
-    day: { alignItems: "center", paddingVertical: 8, borderRadius: ui.radius.sm, gap: 4 },
-    daySelected: { backgroundColor: colors.SURFACE_TONAL },
-    bar: { width: "55%", maxWidth: 24, height: 72, borderRadius: 4, overflow: "hidden", flexDirection: "column-reverse" },
-    emptyBar: { borderWidth: 1, borderColor: colors.CARD_BORDER, borderStyle: "dashed" },
-    weekday: { ...ui.typography.meta, color: colors.TEXT_SUBTLE },
-    date: { ...ui.typography.meta, color: colors.TEXT_SUBTLE },
-    selectedDate: { color: colors.ON_SURFACE_TONAL, fontWeight: "700" },
-    legend: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
-    dot: { width: 9, height: 9, borderRadius: 5 },
-    inlineCard: { backgroundColor: colors.SURFACE_TONAL, borderRadius: ui.radius.md, padding: 10, gap: 3 },
     mapToggle: { flexDirection: "row", alignItems: "center", gap: 8, minHeight: 44 },
     mapPath: { gap: 4, alignItems: "center" },
     mapNode: { paddingVertical: 8, paddingHorizontal: 14, borderRadius: ui.radius.md, backgroundColor: colors.SURFACE_TONAL },
