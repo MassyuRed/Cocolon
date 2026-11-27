@@ -29,7 +29,7 @@ function record(extra = {}) {
     renderer_version: 'piece.rn_native_preview.prototype.v3', ...extra };
 }
 function harness({ send, session, random, exportPrepare, os = 'ios', pieceTextMetrics } = {}) {
-  const calls = [], sessions = [], alerts = [], appListeners = new Set();
+  const calls = [], sessions = [], alerts = [], feedChanges = [], appListeners = new Set();
   const React = { Component: class {
     constructor(props) { this.props = props; this.state = {}; }
     setState(v) { this.state = { ...this.state, ...(typeof v === 'function' ? v(this.state) : v) }; }
@@ -46,6 +46,7 @@ function harness({ send, session, random, exportPrepare, os = 'ios', pieceTextMe
   });
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
+    ['lib/nexusFeedChanges.js', ['subscribeNexusFeedChanges', 'notifyNexusFeedChange']],
     ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_STYLE_THEME_IDS', 'PIECE_BACKGROUND_STYLES', 'PIECE_APPEARANCE_BACKGROUND_STYLES', 'PIECE_THEME_APPEARANCE_DEFAULTS', 'PIECE_FRAME_STYLES', 'PIECE_ACCENT_STYLES', 'isPieceExpandedAppearance', 'pieceAppearanceBackdrop', 'PIECE_FONT_STYLE_IDS', 'PIECE_TEXT_ALIGNMENTS', 'PIECE_TEXT_COLOR_IDS', 'PIECE_TEXT_SIZES', 'PIECE_SERIF_FONT', 'pieceBackgroundGradient', 'pieceDefaultTextAlignment', 'pieceNeutralInk', 'PIECE_VISUAL_CATALOG_V1']],
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot', 'isPieceHistoryRecordOlder']],
     ['features/piece/piecePreviewModel.js', ['verifyPieceArtifactHashes']],
@@ -59,9 +60,10 @@ function harness({ send, session, random, exportPrepare, os = 'ios', pieceTextMe
     const source = fs.readFileSync(path.join(ROOT, file), 'utf8').replace(/^import .*;$/gm, '').replace(/^export default /gm, '').replace(/^export /gm, '');
     vm.runInContext(`{\n${source}\n${names.map(n => `globalThis.${n} = ${n};`).join('\n')}\n}`, context, { filename: file });
   }
+  context.subscribeNexusFeedChanges((ownerId, tabs) => feedChanges.push([ownerId, [...tabs]]));
   const controller = context.createPieceOwnerHistoryController();
   controller.setContext({ enabled: true, expectedUserId: OWNER, flags });
-  return { ...context, controller, calls, sessions, alerts,
+  return { ...context, controller, calls, sessions, alerts, feedChanges,
     background: value => { for (const fn of appListeners) fn(value); } };
 }
 const detailInput = { piece_id: PID };
@@ -198,12 +200,14 @@ test('visibility request sends exact version/scope and confirms with fresh saved
   assert.equal(h.calls[2][1].headers['X-Piece-Publication'], '1');
   assert.equal(h.calls[3][1].headers['X-Piece-Publication'], undefined);
   assert.equal(h.calls[3][1].method, 'GET'); assert.equal(h.controller.getView().record.visibility_scope, 'public');
+  assert.deepEqual(h.feedChanges, [[OWNER, ['piece']]]);
 });
 test('visibility conflict refetches once without silent overwrite', async () => {
   const h = harness({ send: (url, init) => init.method === 'PATCH' ? packet({ code: 'PIECE_CONFLICT' }, 409) : ownerSend(url, init) });
   await open(h); await h.controller.setVisibility('public');
   assert.equal(h.calls.length, 4); assert.match(h.controller.getView().message, /状態が変わって/);
   assert.equal(h.controller.getView().record.visibility_scope, 'private');
+  assert.deepEqual(h.feedChanges, []);
 });
 
 for (const direct of [false, true]) for (const changed of [false, true]) {
@@ -226,6 +230,7 @@ for (const direct of [false, true]) for (const changed of [false, true]) {
     else { await host.act('loadHistory'); await host.act('openDetail', PID); }
     if (changed) await host.act('setVisibility', 'public');
     const view = host.controller.getView(), before = h.calls.length;
+    assert.deepEqual(h.feedChanges, changed ? [[OWNER, ['piece']]] : []);
     assert.equal(view.phase, 'unavailable'); assert.equal(view.canRetryDetail, true);
     assert.equal(view.record, null); assert.equal(view.items.length, 0);
     assert.equal(nodes(host.render()).filter(n => n.type === 'PieceVisualCard').length, 0);
@@ -246,6 +251,7 @@ for (const direct of [false, true]) for (const changed of [false, true]) {
     assert.equal(host.controller.getView().canRetryDetail, false);
     await retry.props.onPress(); assert.equal(h.calls.length, before + 1, 'the consumed callback cannot read again');
     assert.equal(h.calls.filter(([, item]) => item.method === 'PATCH').length, changed ? 1 : 0);
+    assert.deepEqual(h.feedChanges, changed ? [[OWNER, ['piece']]] : []);
     host.componentWillUnmount();
   });
 }
@@ -469,6 +475,35 @@ test('delete response loss waits for explicit retry using identical key/version'
   assert.equal(h.calls[2][1].headers['Idempotency-Key'], h.calls[3][1].headers['Idempotency-Key']);
   assert.deepEqual(JSON.parse(h.calls[3][1].body), { expected_row_version: 2 });
   assert.equal(h.controller.getView().record, null); assert.match(h.controller.getView().message, /削除しました/);
+  assert.deepEqual(h.feedChanges, [], 'a private record was never in the feed');
+});
+test('unpublishing and confirmed deletion of a public Piece invalidate only the current owner feed', async () => {
+  for (const removing of [false, true]) {
+    let changed = false;
+    const publicRecord = record({ visibility_scope: 'public' });
+    const h = harness({ send: (url, init) => {
+      if (url.includes('/history')) return packet(page([publicRecord]));
+      if (init.method === 'PATCH') {
+        changed = true;
+        return packet({ piece_id: PID, visibility_scope: 'private', row_version: 3 });
+      }
+      if (init.method === 'DELETE') {
+        if (!changed) { changed = true; throw Error('delete response lost'); }
+        return packet({ piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: true });
+      }
+      return packet(changed ? record({ row_version: 3 }) : publicRecord);
+    } });
+    await open(h);
+    assert.deepEqual(h.feedChanges, []);
+    if (removing) {
+      await h.controller.deleteConfirmed(h.controller.getView().record);
+      assert.deepEqual(h.feedChanges, []);
+      await h.controller.retryDelete();
+    } else {
+      await h.controller.setVisibility('private');
+    }
+    assert.deepEqual(h.feedChanges, [[OWNER, ['piece']]]);
+  }
 });
 test('stale deletion confirmation and repeated tap cannot delete a new record', async () => {
   const h = harness({ send: ownerSend }); await open(h); const before = h.controller.getView().record;
@@ -1184,7 +1219,7 @@ function nexusEntryHarness(options = {}) {
       if (name.endsWith('/TutorialOverlay')) return { __esModule: true, default: 'TutorialOverlay',
         syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
       if (name.endsWith('/UnreadBadge')) return { ScreenUnreadBadge: 'ScreenUnreadBadge' };
-      if (/\/(NexusHeader|NexusTabBar|nexusRouteModel|nexusNormalize|nexusHistoryModel|useOwnerRequestScope)$/.test(name)) {
+      if (/\/(NexusHeader|NexusTabBar|nexusRouteModel|nexusNormalize|nexusHistoryModel|nexusFeedChanges|followChanges|useOwnerRequestScope)$/.test(name)) {
         return load(path.resolve(path.dirname(file), name + '.js'));
       }
       return { __esModule: true, default: name.split('/').pop() };

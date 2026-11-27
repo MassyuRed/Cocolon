@@ -39,7 +39,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       navigationListeners.get(name).add(listener);
       return () => navigationListeners.get(name).delete(listener);
     } };
-  const unread = { getScopeUnread: () => false, getFeatureUnread: (_scope, key) => key === 'feed',
+  const unread = { getScopeUnread: () => false, getFeatureUnread: (scope, key) =>
+      control.featureUnread?.[scope]?.[key] ?? key === 'feed',
     setUnread: (...args) => events.push(['unread', ...args]), setUnreadGroup: (...args) => events.push(['unreadGroup', ...args]),
     setPrefetch: (...args) => events.push(['prefetch', ...args]), getPrefetchEntryFresh: () => null,
     applyStartupSnapshot: value => events.push(['startup', value]) };
@@ -72,7 +73,9 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     if (p.includes('/follow/requests')) return { requests: [{ request_id: 'request', requester_user_id: 'C', requester_display_name: 'C-name',
       target_user_id: 'C', target_display_name: 'C-name' }], total_items: 1 };
     if (p.includes('emotion-notification')) return { settings: [] };
-    if (p === '/nexus/emotion-log') return { items: [{ id: 'notification', owner_user_id: 'C', created_at: '2026-11-07T00:00:00Z', emotions: ['不安'] }] };
+    if (p === '/nexus/emotion-log') return { items: control.emotionLogItems || [
+      { id: 'notification', owner_user_id: 'C', created_at: '2026-11-07T00:00:00Z', emotions: ['不安'] },
+    ] };
     if (p.endsWith('/unread-status')) return { feed_unread: true, has_unread: false };
     return { items: [] };
   }
@@ -191,6 +194,10 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     async updateParams(params) { control.screenParams = params; await act(async () => { root.update(element()); await tick(); }); },
     async publishFollowChange(change) { await act(async () => {
       load('screens/account/followChanges.js').publishFollowChange(change);
+      await tick();
+    }); },
+    async publishNexusFeedChange(owner, tabs) { await act(async () => {
+      load('lib/nexusFeedChanges.js').notifyNexusFeedChange(owner, tabs);
       await tick();
     }); },
     async switchTo(owner, generationDelta = 1) { control.owner = owner; control.generation += generationDelta;
@@ -525,7 +532,11 @@ test('the opt-in post feed renders new Piece text, preserves old Q&A, and refres
     body: '保存した同じピースの本文', created_at: '2026-11-21T00:00:00Z' };
   const legacyPiece = { source_type: 'emotion_generated', q_instance_id: 'legacy', owner: { user_id: 'C', display_name: 'C-name' },
     question: { title: '既存投稿の問い' }, body: '既存投稿の答え', created_at: '2026-11-20T00:00:00Z' };
-  const h = await harness(t, 'screens/NexusScreen.js', undefined, { realFeedCards: true, pieceFeedItems: [nativePiece, legacyPiece] });
+  let focused = true;
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    realFeedCards: true, pieceFeedItems: [nativePiece, legacyPiece],
+    noticeNavigation: { isFocused: () => focused },
+  });
   const text = () => h.root.root.findAllByType('Text').map(node => node.props.children);
   assert.equal(new URL(h.calls.find(call => call.path === '/nexus/pieces').url).searchParams.get('include_piece_v2'), 'true');
   assert.ok(text().includes(nativePiece.body));
@@ -533,12 +544,18 @@ test('the opt-in post feed renders new Piece text, preserves old Q&A, and refres
   assert.equal(text().filter(label => label === '問い').length, 1);
   assert.equal(text().filter(label => label === '答え').length, 1);
 
+  focused = false;
   await h.navigationEvent('blur');
-  assert.ok(!text().includes(nativePiece.body));
+  assert.ok(text().includes(nativePiece.body));
   h.control.pieceFeedItems = [legacyPiece];
+  await h.publishNexusFeedChange('A', ['piece']);
+  assert.ok(!text().includes(nativePiece.body));
+  assert.deepEqual(nexusReadCounts(h), [1, 0, 0]);
+  focused = true;
   await h.navigationEvent('focus');
   assert.ok(!text().includes(nativePiece.body));
   assert.ok(text().includes(legacyPiece.body));
+  assert.deepEqual(nexusReadCounts(h), [2, 0, 0]);
 });
 
 test('public Piece hearts show zero for the writer and persist a followed post in the resonance list until removed', async t => {
@@ -644,17 +661,160 @@ test('each earlier Nexus history read rechecks for resonances confirmed during i
     [piece.q_instance_id, other.q_instance_id]);
 });
 
-test('Nexus no longer loads the public emotion aggregate and still rechecks shared posts on return', async t => {
-  const h = await harness(t, 'screens/NexusScreen.js');
-  const countPosts = () => h.calls.filter(call => call.path === '/nexus/pieces').length;
-  const posts = countPosts();
-  assert.ok(posts > 0);
+const nexusLists = {
+  piece: { path: '/nexus/pieces', section: 'NexusPieceFeedSection', state: 'pieceState', rows: 'items', fixture: 'pieceFeedItems' },
+  emotion_log: { path: '/nexus/emotion-log', section: 'NexusEmotionLogSection', state: 'emotionLogState', rows: 'items', fixture: 'emotionLogItems' },
+  history: { path: '/nexus/history/resonances', section: 'NexusHistorySection', state: 'historyState', rows: 'resonances', fixture: 'resonanceHistoryItems' },
+};
+const selectNexusTab = (h, tab) => act(async () => { h.find('NexusTabBar').props.setActiveTab(tab); await tick(); });
+const nexusReadCounts = (h) => Object.values(nexusLists).map(({ path }) =>
+  h.calls.filter(call => call.path === path && call.options.method === 'GET').length);
+const nexusItem = (id) => ({ id, q_instance_id: id, owner_user_id: 'C', owner: { user_id: 'C' },
+  created_at: '2026-11-07T00:00:00Z', emotions: ['不安'] });
+const nexusRowIds = (h, tab) => {
+  const { section, state, rows } = nexusLists[tab];
+  return h.find(section).props[state][rows].map(row => row.q_instance_id ?? row.qInstanceId ?? row.id);
+};
+
+test('Nexus keeps each settled list on return and tab switching without reading the public aggregate', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    pieceFeedItems: [nexusItem('post')],
+    emotionLogItems: [nexusItem('emotion')],
+    resonanceHistoryItems: [nexusItem('resonance')],
+  });
+  assert.deepEqual(nexusReadCounts(h), [1, 0, 0]);
   assert.equal(h.root.root.findAllByType('NexusTodayEmotionSummary').length, 0);
 
+  const sections = [['piece', 'post'], ['emotion_log', 'emotion'], ['history', 'resonance']];
+  for (const [tab, id] of sections) {
+    await selectNexusTab(h, tab);
+    assert.deepEqual(nexusRowIds(h, tab), [id]);
+    await h.navigationEvent('blur');
+    await h.navigationEvent('focus');
+    assert.deepEqual(nexusRowIds(h, tab), [id]);
+  }
+  for (const [tab, id] of sections) {
+    await selectNexusTab(h, tab);
+    assert.deepEqual(nexusRowIds(h, tab), [id]);
+  }
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+  assert.ok(!h.calls.some(call => call.path === '/nexus/emotion-ranking'));
+});
+
+test('Nexus explicit refresh reloads only the current list, and saves the new result for return', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js');
+  const tabs = Object.keys(nexusLists);
+  for (const tab of tabs) await selectNexusTab(h, tab);
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+
+  for (const [index, [tab, { fixture }]] of Object.entries(nexusLists).entries()) {
+    await selectNexusTab(h, tab);
+    h.control[fixture] = [nexusItem(tab + '-refreshed')];
+    const expectedReads = nexusReadCounts(h);
+    const refresh = h.find('ScrollView').props.refreshControl;
+    assert.equal(refresh.type, 'RefreshControl');
+    await act(async () => { await refresh.props.onRefresh(); await tick(); });
+    expectedReads[index] += 1;
+    assert.deepEqual(nexusReadCounts(h), expectedReads);
+    assert.deepEqual(nexusRowIds(h, tab), [tab + '-refreshed']);
+    await h.navigationEvent('blur');
+    await h.navigationEvent('focus');
+    assert.deepEqual(nexusReadCounts(h), expectedReads);
+  }
+});
+
+test('Nexus reads again on entry after the settled list reaches the freshness limit', async t => {
+  t.mock.timers.enable({ apis: ['Date'], now: new Date('2026-11-07T00:00:00Z') });
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, { pieceFeedItems: [nexusItem('original')] });
+  h.control.pieceFeedItems = [];
+  t.mock.timers.tick(119999);
   await h.navigationEvent('blur');
   await h.navigationEvent('focus');
-  assert.equal(countPosts(), posts + 1);
-  assert.ok(!h.calls.some(call => call.path === '/nexus/emotion-ranking'));
+  assert.deepEqual(nexusReadCounts(h), [1, 0, 0]);
+  assert.deepEqual(nexusRowIds(h, 'piece'), ['original']);
+
+  t.mock.timers.tick(1);
+  await h.navigationEvent('blur');
+  await h.navigationEvent('focus');
+  assert.deepEqual(nexusReadCounts(h), [2, 0, 0]);
+  assert.deepEqual(nexusRowIds(h, 'piece'), []);
+});
+
+test('Nexus reopens only the list changed by a confirmed same-owner update on another screen', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js');
+  await selectNexusTab(h, 'history');
+  await selectNexusTab(h, 'emotion_log');
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+  h.control.pieceFeedItems = [nexusItem('published')];
+  await h.publishNexusFeedChange('B', ['piece']);
+  await selectNexusTab(h, 'piece');
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+  assert.deepEqual(nexusRowIds(h, 'piece'), []);
+
+  await selectNexusTab(h, 'emotion_log');
+  await h.publishNexusFeedChange('A', ['piece']);
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+  await selectNexusTab(h, 'piece');
+  assert.deepEqual(nexusReadCounts(h), [2, 1, 1]);
+  assert.deepEqual(nexusRowIds(h, 'piece'), ['published']);
+  await selectNexusTab(h, 'history');
+  assert.deepEqual(nexusReadCounts(h), [2, 1, 1]);
+});
+
+test('Nexus refreshes lists signaled by new unread items and only marks the newly displayed notification', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    featureUnread: { EmotionLog: { feed: false } },
+    emotionLogItems: [nexusItem('older')],
+  });
+  await selectNexusTab(h, 'history');
+  await selectNexusTab(h, 'emotion_log');
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+  const createdAt = '2026-11-07T01:30:00Z';
+  h.control.emotionLogItems = [{ ...nexusItem('new'), created_at: createdAt }];
+  h.control.featureUnread.EmotionLog.feed = true;
+  await h.update();
+  assert.deepEqual(nexusReadCounts(h), [1, 2, 1]);
+  assert.deepEqual(nexusRowIds(h, 'emotion_log'), ['new']);
+  const marks = h.mutations().filter(call => call.path === '/emotion-log/unread/read-feed');
+  assert.deepEqual(marks.map(call => JSON.parse(call.options.body).last_seen_created_at), [createdAt]);
+
+  h.control.pieceFeedItems = [{ ...nexusItem('new-post'), viewer_state: { is_new: true } }];
+  h.control.featureUnread.Piece = { piecesNew: true };
+  await h.update();
+  assert.deepEqual(nexusReadCounts(h), [1, 2, 1]);
+  await selectNexusTab(h, 'piece');
+  assert.deepEqual(nexusReadCounts(h), [2, 2, 1]);
+  assert.deepEqual(nexusRowIds(h, 'piece'), ['new-post']);
+});
+
+test('Nexus confirmed resonance invalidates only the settled resonance list', async t => {
+  const post = { ...nexusItem('piece:followed'), source_type: 'piece_v2',
+    viewer_state: { can_resonate: true, is_resonated: false }, metrics: { resonances: 0 } };
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, {
+    pieceFeedItems: [post], writeResponse: (path, options) => {
+      if (path !== '/nexus/pieces/piece%3Afollowed/resonance' || options.method !== 'PUT') return undefined;
+      h.control.resonanceHistoryItems = [{ ...post, saved_at: '2026-11-07T00:00:00Z' }];
+      return { q_instance_id: post.q_instance_id, resonated: true, resonances: 1 };
+    },
+  });
+  await selectNexusTab(h, 'emotion_log');
+  await selectNexusTab(h, 'history');
+  assert.deepEqual(nexusRowIds(h, 'history'), []);
+  await selectNexusTab(h, 'piece');
+  await act(async () => {
+    await h.find('NexusPieceFeedSection').props.handlePressPieceResonance(post);
+    await tick();
+  });
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 1]);
+  assert.equal(h.find('NexusPieceFeedSection').props.pieceState.items[0].viewer_state.is_resonated, true);
+
+  await selectNexusTab(h, 'history');
+  assert.deepEqual(nexusRowIds(h, 'history'), [post.q_instance_id]);
+  await selectNexusTab(h, 'emotion_log');
+  assert.deepEqual(nexusRowIds(h, 'emotion_log'), ['notification']);
+  await selectNexusTab(h, 'piece');
+  assert.equal(h.find('NexusPieceFeedSection').props.pieceState.items[0].viewer_state.is_resonated, true);
+  assert.deepEqual(nexusReadCounts(h), [1, 1, 2]);
 });
 
 test('Nexus tab group uses a full frame in each theme', async t => {
@@ -674,7 +834,7 @@ test('Nexus tab group uses a full frame in each theme', async t => {
   }
 });
 
-test('Nexus shares only outstanding unread requests within the current owner scope', async t => {
+test('Nexus shares outstanding and settled unread requests within the current owner scope', async t => {
   const endpoints = ['/nexus/pieces/unread-status', '/emotion-log/unread-status'];
   const h = await harness(t, 'screens/NexusScreen.js', undefined, {
     holdRead: call => endpoints.includes(call.path),
@@ -691,7 +851,7 @@ test('Nexus shares only outstanding unread requests within the current owner sco
   for (const current of next) await h.resolve(current, { feed_unread: false, has_unread: false });
   h.control.holdRead = null;
   await h.navigationEvent('focus');
-  assert.equal(h.calls.filter(call => endpoints.includes(call.path) && call.owner === 'B').length, 4);
+  assert.equal(h.calls.filter(call => endpoints.includes(call.path) && call.owner === 'B').length, 2);
 });
 
 test('MainTabs prefetches existing Piece data without requesting recommended users', async t => {
@@ -785,37 +945,37 @@ test('Nexus automatic feed read stops on background and resumes only from a fres
   assert.deepEqual(JSON.parse(reads[0].options.body), { last_seen_created_at: '2026-11-07T00:00:00Z' });
 });
 
-for (const { tab, endpoint, section, stateProp, itemsProp, itemId } of [
-  { tab: 'emotion_log', endpoint: '/nexus/emotion-log', section: 'NexusEmotionLogSection',
-    stateProp: 'emotionLogState', itemsProp: 'items', itemId: 'id' },
-  { tab: 'history', endpoint: '/nexus/history/resonances', section: 'NexusHistorySection',
-    stateProp: 'historyState', itemsProp: 'resonances', itemId: 'qInstanceId' },
-]) test(`Nexus ${tab} clears previously shared rows before rechecking access`, async t => {
-  const h = await harness(t, 'screens/NexusScreen.js', undefined, { holdRead: call => call.path === endpoint });
-  const select = async key => act(async () => { h.find('NexusTabBar').props.setActiveTab(key); await tick(); });
-  const request = () => h.calls.findLast(call => call.path === endpoint);
-  const rows = () => h.find(section).props[stateProp][itemsProp].map(row => row[itemId]);
-  const payload = { items: [{ id: 'previously-shared', q_instance_id: 'previously-shared' }] };
+for (const [index, [tab, { path, fixture }]] of Object.entries(nexusLists).entries()) {
+  test(`Nexus ${tab} clears shared rows on confirmed access changes and rejects older receipts`, async t => {
+    const previous = nexusItem('previously-shared');
+    const h = await harness(t, 'screens/NexusScreen.js', undefined, { [fixture]: [previous] });
+    await selectNexusTab(h, tab);
+    assert.deepEqual(nexusRowIds(h, tab), ['previously-shared']);
+    h.control.holdRead = call => call.path === path;
+    const readCounts = nexusReadCounts(h);
+    const request = () => h.calls.findLast(call => call.path === path);
 
-  await select(tab);
-  await h.resolve(request(), payload);
-  assert.deepEqual(rows(), ['previously-shared']);
+    await h.publishFollowChange({ owner: 'A', generation: -1, target: 'C' });
+    await h.publishFollowChange({ owner: 'B', generation: 0, target: 'C' });
+    assert.deepEqual(nexusReadCounts(h), readCounts);
+    assert.deepEqual(nexusRowIds(h, tab), ['previously-shared']);
 
-  await h.navigationEvent('blur');
-  assert.deepEqual(rows(), []);
-  await h.navigationEvent('focus');
-  const staleRequest = request();
-  assert.deepEqual(rows(), []);
+    await h.publishFollowChange({ owner: 'A', generation: 0, target: 'C' });
+    const staleRequest = request();
+    assert.equal(typeof staleRequest.resolve, 'function');
+    assert.deepEqual(nexusRowIds(h, tab), []);
 
-  await select('piece');
-  await select(tab);
-  const currentRequest = request();
-  assert.notEqual(currentRequest, staleRequest);
-  assert.deepEqual(rows(), []);
-  await h.resolve(currentRequest, { items: [] });
-  await h.resolve(staleRequest, payload);
-  assert.deepEqual(rows(), []);
-});
+    await h.publishFollowChange({ owner: 'A', generation: 0, target: 'D' });
+    const currentRequest = request();
+    assert.notEqual(currentRequest, staleRequest);
+    readCounts[index] += 2;
+    assert.deepEqual(nexusReadCounts(h), readCounts);
+    assert.deepEqual(nexusRowIds(h, tab), []);
+    await h.resolve(currentRequest, { items: [] });
+    await h.resolve(staleRequest, { items: [previous] });
+    assert.deepEqual(nexusRowIds(h, tab), []);
+  });
+}
 
 test('same-owner MainTabs feed read retains its displayed timestamp', async t => {
   const h = await harness(t, 'navigation/MainTabs.js');

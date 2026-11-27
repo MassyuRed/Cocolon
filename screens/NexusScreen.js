@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import {
   Alert,
+  RefreshControl,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -26,6 +27,7 @@ import { useAuth } from "../AuthContext";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useAppRuntime } from "../AppRuntimeContext";
 import { useUnread } from "../UnreadContext";
+import { subscribeNexusFeedChanges } from "../lib/nexusFeedChanges";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -75,12 +77,21 @@ import {
   applyPieceResonanceReceipt,
   reconcileResonanceHistory,
 } from "./nexus/nexusHistoryModel";
+import { subscribeToFollowChanges } from "./account/followChanges";
 import { TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
+const EMPTY_PIECES = { loading: false, items: [], error: "" };
+const LOADING_PIECES = { ...EMPTY_PIECES, loading: true };
 const EMPTY_EMOTION_LOG = { loading: false, loaded: false, items: [], error: "" };
 const LOADING_EMOTION_LOG = { ...EMPTY_EMOTION_LOG, loading: true };
 const LOADING_HISTORY = { loading: true, loadedModes: {}, order: null, resonances: [], error: "" };
 const HISTORY_LIMIT = 20;
+const NEXUS_FRESHNESS_MS = 2 * 60 * 1000;
+const FOLLOW_DEPENDENT_READS = ["piece", "emotion_log", "history", "owners"];
+
+function isFreshRead(read) {
+  return read.settledAt != null && Date.now() - read.settledAt < NEXUS_FRESHNESS_MS;
+}
 
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
@@ -147,30 +158,54 @@ export default function NexusScreen({ navigation }) {
   const [ownerFilterMode, setOwnerFilterMode] = useState(OWNER_FILTER_ALL);
   const [ownerFilterUserId, setOwnerFilterUserId] = useState(null);
   const [ownerPickerVisible, setOwnerPickerVisible] = useState(false);
-  const [ownerOptionsLoading, setOwnerOptionsLoading] = useState(false);
-  const [ownerOptions, setOwnerOptions] = useState([]);
   const [pieceOrder, setPieceOrder] = useState(PIECE_ORDER_LATEST);
   const [historyOrder, setHistoryOrder] = useState(HISTORY_ORDER_LATEST);
+  const [revisions, setRevisions] = useState({ piece: 0, emotion_log: 0, history: 0, owners: 0 });
+  const invalidateReads = useCallback((tabs) => {
+    setRevisions((previous) => {
+      const next = { ...previous };
+      for (const tab of tabs) next[tab] += 1;
+      return next;
+    });
+  }, []);
+  useEffect(() => {
+    if (!viewerUserId || isTutorialMode) return undefined;
+    const unsubscribeFollow = subscribeToFollowChanges(viewerUserId, authOwnerGeneration, viewerUserId, null,
+      () => invalidateReads(FOLLOW_DEPENDENT_READS));
+    const unsubscribeNexus = subscribeNexusFeedChanges((ownerId, tabs) => {
+      if (ownerId === viewerUserId) invalidateReads(tabs);
+    });
+    return () => {
+      unsubscribeFollow();
+      unsubscribeNexus();
+    };
+  }, [viewerUserId, authOwnerGeneration, isTutorialMode, invalidateReads]);
+
   const pieceReadScopeRef = useRef(null);
   if (!pieceReadScopeRef.current || pieceReadScopeRef.current.owner !== ownerRequest ||
       pieceReadScopeRef.current.filter !== ownerFilterMode || pieceReadScopeRef.current.target !== ownerFilterUserId ||
       pieceReadScopeRef.current.order !== pieceOrder || pieceReadScopeRef.current.tutorial !== isTutorialMode ||
-      pieceReadScopeRef.current.tab !== activeTab) {
+      pieceReadScopeRef.current.revision !== revisions.piece) {
     pieceReadScopeRef.current = { owner: ownerRequest, filter: ownerFilterMode, target: ownerFilterUserId,
-      order: pieceOrder, tutorial: isTutorialMode, tab: activeTab };
+      order: pieceOrder, tutorial: isTutorialMode, revision: revisions.piece };
   }
   const pieceReadScope = pieceReadScopeRef.current;
   const historyReadScopeRef = useRef(null);
   if (!historyReadScopeRef.current || historyReadScopeRef.current.owner !== ownerRequest ||
       historyReadScopeRef.current.order !== historyOrder || historyReadScopeRef.current.tutorial !== isTutorialMode ||
-      historyReadScopeRef.current.tab !== activeTab) {
-    historyReadScopeRef.current = { owner: ownerRequest, order: historyOrder, tutorial: isTutorialMode, tab: activeTab };
+      historyReadScopeRef.current.revision !== revisions.history) {
+    historyReadScopeRef.current = { owner: ownerRequest, order: historyOrder, tutorial: isTutorialMode, revision: revisions.history };
   }
   const historyReadScope = historyReadScopeRef.current;
-  const emotionLogReadScope = useMemo(() => ({ ownerRequest, activeTab, isTutorialMode }),
-    [ownerRequest, activeTab, isTutorialMode]);
-  const readSequences = useRef({ pieces: 0, history: 0, owners: 0, emotions: 0 });
-  const unreadRead = useRef(null);
+  const emotionLogReadScope = useMemo(() => ({}), [ownerRequest, isTutorialMode, revisions.emotion_log]);
+  const ownerOptionsScope = useMemo(() => ({}), [ownerRequest, isTutorialMode, revisions.owners]);
+  const unreadRead = useMemo(() => ({}), [ownerRequest, isTutorialMode, revisions.owners]);
+  const emotionLogScopeRef = useRef(emotionLogReadScope);
+  emotionLogScopeRef.current = emotionLogReadScope;
+  const ownerOptionsScopeRef = useRef(ownerOptionsScope);
+  ownerOptionsScopeRef.current = ownerOptionsScope;
+  const unreadReadScopeRef = useRef(unreadRead);
+  unreadReadScopeRef.current = unreadRead;
   const resonanceActivity = useMemo(() => ({ feedRead: null, historyRead: null, submitting: new Set() }), [ownerRequest]);
 
   const tutorialPieceItems = useMemo(
@@ -182,18 +217,21 @@ export default function NexusScreen({ navigation }) {
     tutorialStep >= PIECE_TUTORIAL_STEP_START &&
     tutorialStep <= PIECE_TUTORIAL_STEP_END;
 
-  const [pieceState, setPieceState] = useState({
-    loading: true,
-    items: [],
-    error: "",
-  });
+  const [pieceResult, setPieceState] = useState(null);
+  const pieceState = pieceResult?.scope === pieceReadScope ? pieceResult
+    : authInitializing || viewerUserId ? LOADING_PIECES : EMPTY_PIECES;
   const [emotionLogResult, setEmotionLogState] = useState(null);
   const emotionLogState = emotionLogResult?.scope === emotionLogReadScope
     ? emotionLogResult
     : !isTutorialMode && (authInitializing || viewerUserId) ? LOADING_EMOTION_LOG : EMPTY_EMOTION_LOG;
   const [historyResult, setHistoryState] = useState(null);
-  const [historyRefresh, setHistoryRefresh] = useState(0);
   const historyState = historyResult?.scope === historyReadScope ? historyResult : LOADING_HISTORY;
+  const [ownerOptionsResult, setOwnerOptionsState] = useState(null);
+  const ownerOptionsLoaded = ownerOptionsResult?.scope === ownerOptionsScope;
+  const ownerOptionsLoading = !isTutorialMode && !!viewerUserId && !ownerOptionsLoaded;
+  const ownerOptions = ownerOptionsLoaded ? ownerOptionsResult.items : [];
+  const [refreshing, setRefreshing] = useState(false);
+  const [focusRevision, setFocusRevision] = useState(0);
 
   const [resonanceSubmittingIds, setResonanceSubmittingIds] = useState({});
   const [pieceDeleteSubmittingIds, setPieceDeleteSubmittingIds] = useState({});
@@ -277,7 +315,8 @@ export default function NexusScreen({ navigation }) {
   const pieceHasUnread = Array.isArray(pieceState.items)
     ? pieceState.items.some((item) => item?.viewer_state?.is_new === true)
     : false;
-  const pieceUnreadResolved = !pieceState.loading && !pieceState.error;
+  const pieceUnreadResolved = ownerFilterMode === OWNER_FILTER_ALL && pieceState.scope === pieceReadScope &&
+    !pieceState.loading && !pieceState.error;
   const pieceTabUnread = pieceUnreadResolved
     ? pieceHasUnread
     : prefetchedPieceUnread || pieceHasUnread;
@@ -315,7 +354,7 @@ export default function NexusScreen({ navigation }) {
 
     try {
       const json = await getNexusPiecesUnreadStatus(ownerRequest.options);
-      if (!isOwnerCurrent(ownerRequest)) return null;
+      if (!isOwnerCurrent(ownerRequest) || unreadReadScopeRef.current !== unreadRead) return null;
       const hasUnread =
         typeof json?.has_unread === "boolean"
           ? json.has_unread
@@ -328,7 +367,7 @@ export default function NexusScreen({ navigation }) {
       console.warn("NexusScreen: refreshPieceUnreadState failed", e);
       return null;
     }
-  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
+  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent, unreadRead]);
 
   const refreshEmotionLogUnreadState = useCallback(async () => {
     if (!isOwnerCurrent(ownerRequest)) return null;
@@ -340,7 +379,7 @@ export default function NexusScreen({ navigation }) {
 
     try {
       const json = await getNexusEmotionLogUnreadStatus(ownerRequest.options);
-      if (!isOwnerCurrent(ownerRequest)) return null;
+      if (!isOwnerCurrent(ownerRequest) || unreadReadScopeRef.current !== unreadRead) return null;
       const nextFeed = !!json?.feed_unread;
       const nextRequests = !!json?.requests_unread;
       setUnread("EmotionLog", "feed", nextFeed);
@@ -350,35 +389,27 @@ export default function NexusScreen({ navigation }) {
       console.warn("NexusScreen: refreshEmotionLogUnreadState failed", e);
       return null;
     }
-  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
+  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent, unreadRead]);
 
   const refreshNexusUnreadState = useCallback(async () => {
-    if (!isOwnerCurrent(ownerRequest)) return;
-    const current = unreadRead.current;
-    if (current?.scope === ownerRequest && current.isTutorialMode === isTutorialMode) return current.promise;
-    const request = { scope: ownerRequest, isTutorialMode, promise: Promise.all([
-      refreshPieceUnreadState(), refreshEmotionLogUnreadState(),
-    ]) };
-    unreadRead.current = request;
-    try { await request.promise; }
-    finally { if (unreadRead.current === request) unreadRead.current = null; }
-  }, [isOwnerCurrent, ownerRequest, isTutorialMode, refreshEmotionLogUnreadState, refreshPieceUnreadState]);
+    if (!isOwnerCurrent(ownerRequest) || authInitializing || unreadRead.pending || isFreshRead(unreadRead)) return;
+    unreadRead.pending = true;
+    try {
+      const results = await Promise.all([refreshPieceUnreadState(), refreshEmotionLogUnreadState()]);
+      if (results.every((result) => result != null)) unreadRead.settledAt = Date.now();
+    } finally {
+      unreadRead.pending = false;
+    }
+  }, [isOwnerCurrent, ownerRequest, authInitializing, unreadRead, refreshEmotionLogUnreadState, refreshPieceUnreadState]);
 
   const loadOwnerOptions = useCallback(async () => {
-    if (!isOwnerCurrent(ownerRequest)) return;
-    const sequence = ++readSequences.current.owners;
-    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.owners;
-    if (isTutorialMode || authInitializing || !viewerUserId) {
-      setOwnerOptions([]);
-      setOwnerOptionsLoading(false);
-      return;
-    }
-
-    setOwnerOptions(baseOwnerOptions);
-    setOwnerOptionsLoading(true);
+    if (!isOwnerCurrent(ownerRequest) || isTutorialMode || authInitializing ||
+        ownerOptionsScope.pending || isFreshRead(ownerOptionsScope)) return;
+    const isCurrentRead = () => isOwnerCurrent(ownerRequest) && ownerOptionsScopeRef.current === ownerOptionsScope;
+    ownerOptionsScope.pending = true;
     try {
       const json = await getNexusFollowingUsers(viewerUserId, 1000, ownerRequest.options);
-      if (!isFresh()) return;
+      if (!isCurrentRead()) return;
       const followUsers = normalizeFollowListUsers(json);
       const followOptions = followUsers
         .filter((followUser) => followUser.id !== viewerUserId)
@@ -390,34 +421,21 @@ export default function NexusScreen({ navigation }) {
           meta: followUser.friendCode,
         }));
 
-      setOwnerOptions([...baseOwnerOptions, ...followOptions]);
+      ownerOptionsScope.settledAt = Date.now();
+      setOwnerOptionsState({ scope: ownerOptionsScope, items: [...baseOwnerOptions, ...followOptions] });
     } catch (e) {
-      if (!isFresh()) return;
+      if (!isCurrentRead()) return;
       console.warn("NexusScreen: loadOwnerOptions failed", e);
-      setOwnerOptions(baseOwnerOptions);
+      setOwnerOptionsState({ scope: ownerOptionsScope, items: baseOwnerOptions });
     } finally {
-      if (isFresh()) setOwnerOptionsLoading(false);
+      ownerOptionsScope.pending = false;
     }
-  }, [authInitializing, baseOwnerOptions, isTutorialMode, viewerUserId, ownerRequest, isOwnerCurrent]);
+  }, [authInitializing, baseOwnerOptions, isTutorialMode, viewerUserId, ownerRequest, isOwnerCurrent, ownerOptionsScope]);
 
-  const loadPieces = useCallback(async () => {
-    if (isTutorialMode) {
-      setPieceState({
-        loading: false,
-        items: tutorialPieceItems,
-        error: "",
-      });
-      return;
-    }
-    if (navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
-    const sequence = ++readSequences.current.pieces;
-    const isFresh = () => isOwnerCurrent(ownerRequest) && pieceReadScopeRef.current === pieceReadScope &&
-      sequence === readSequences.current.pieces;
-
-    if (authInitializing) {
-      setPieceState((prev) => ({ ...prev, loading: true, error: "" }));
-      return;
-    }
+  const loadPieces = useCallback(async (force = false) => {
+    if (!isOwnerCurrent(ownerRequest) || isTutorialMode || authInitializing ||
+        pieceReadScope.pending || (!force && isFreshRead(pieceReadScope))) return;
+    const isCurrentRead = () => isOwnerCurrent(ownerRequest) && pieceReadScopeRef.current === pieceReadScope;
 
     const params = {
       sort: pieceOrder,
@@ -427,15 +445,11 @@ export default function NexusScreen({ navigation }) {
     };
 
     if (ownerFilterMode === OWNER_FILTER_SELF) {
-      if (!viewerUserId) {
-        setPieceState({ loading: false, items: [], error: "" });
-        return;
-      }
       params.user_id = viewerUserId;
     } else if (ownerFilterMode === OWNER_FILTER_USER) {
       const selectedUserId = String(ownerFilterUserId || "").trim();
       if (!selectedUserId) {
-        setPieceState({ loading: false, items: [], error: "" });
+        setPieceState({ ...EMPTY_PIECES, scope: pieceReadScope });
         return;
       }
       params.user_id = selectedUserId;
@@ -445,17 +459,20 @@ export default function NexusScreen({ navigation }) {
 
     const receipts = new Map();
     resonanceActivity.feedRead = receipts;
-    setPieceState({ scope: pieceReadScope, loading: true, items: [], error: "" });
+    pieceReadScope.pending = true;
+    pieceReadScope.settledAt = null;
+    setPieceState({ ...LOADING_PIECES, scope: pieceReadScope });
     try {
       const json = await getNexusPieces(params, ownerRequest.options);
-      if (!isFresh()) return;
+      if (!isCurrentRead()) return;
       const items = (Array.isArray(json?.items) ? json.items : []).map((row) => {
         const receipt = receipts.get(resolvePieceQInstanceId(row));
         return receipt ? applyPieceResonanceReceipt(row, receipt) : row;
       });
-      setPieceState({ scope: pieceReadScope, loading: false, items, error: "" });
+      pieceReadScope.settledAt = Date.now();
+      setPieceState({ ...EMPTY_PIECES, scope: pieceReadScope, items });
     } catch (e) {
-      if (!isFresh()) return;
+      if (!isCurrentRead()) return;
       console.warn("NexusScreen: loadPieces failed", e);
       setPieceState({
         scope: pieceReadScope,
@@ -464,6 +481,7 @@ export default function NexusScreen({ navigation }) {
         error: String(e?.message || "ピースを読み込めませんでした。"),
       });
     } finally {
+      pieceReadScope.pending = false;
       if (resonanceActivity.feedRead === receipts) resonanceActivity.feedRead = null;
     }
   }, [
@@ -472,28 +490,22 @@ export default function NexusScreen({ navigation }) {
     ownerFilterMode,
     ownerFilterUserId,
     pieceOrder,
-    tutorialPieceItems,
     viewerUserId,
-    ownerRequest, isOwnerCurrent, pieceReadScope, navigation, resonanceActivity,
+    ownerRequest, isOwnerCurrent, pieceReadScope, resonanceActivity,
   ]);
 
-  const loadEmotionLog = useCallback(async () => {
-    if (isTutorialMode) {
-      setEmotionLogState({
-        ...EMPTY_EMOTION_LOG,
-        scope: emotionLogReadScope,
-        loaded: true,
-      });
-      return;
-    }
-    if (navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
-    const sequence = ++readSequences.current.emotions;
-    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === readSequences.current.emotions;
+  const loadEmotionLog = useCallback(async (force = false) => {
+    if (!isOwnerCurrent(ownerRequest) || isTutorialMode || authInitializing ||
+        emotionLogReadScope.pending || (!force && isFreshRead(emotionLogReadScope))) return;
+    const isCurrentRead = () => isOwnerCurrent(ownerRequest) && emotionLogScopeRef.current === emotionLogReadScope;
 
+    emotionLogReadScope.pending = true;
+    emotionLogReadScope.settledAt = null;
     setEmotionLogState({ ...LOADING_EMOTION_LOG, scope: emotionLogReadScope });
     try {
       const json = await getNexusEmotionLog(20, ownerRequest.options);
-      if (!isFresh()) return;
+      if (!isCurrentRead()) return;
+      emotionLogReadScope.settledAt = Date.now();
       setEmotionLogState({
         ...EMPTY_EMOTION_LOG,
         scope: emotionLogReadScope,
@@ -501,7 +513,7 @@ export default function NexusScreen({ navigation }) {
         items: normalizeEmotionLogItems(json),
       });
     } catch (e) {
-      if (!isFresh()) return;
+      if (!isCurrentRead()) return;
       console.warn("NexusScreen: loadEmotionLog failed", e);
       setEmotionLogState({
         ...EMPTY_EMOTION_LOG,
@@ -509,27 +521,17 @@ export default function NexusScreen({ navigation }) {
         loaded: true,
         error: String(e?.message || "感情通知を読み込めませんでした。"),
       });
+    } finally {
+      emotionLogReadScope.pending = false;
     }
-  }, [isTutorialMode, ownerRequest, isOwnerCurrent, navigation, emotionLogReadScope]);
+  }, [authInitializing, isTutorialMode, ownerRequest, isOwnerCurrent, emotionLogReadScope]);
 
   const loadHistory = useCallback(
-    async () => {
-      if (navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
-      const sequence = ++readSequences.current.history;
-      const isFresh = () => isOwnerCurrent(ownerRequest) && historyReadScopeRef.current === historyReadScope &&
-        sequence === readSequences.current.history;
+    async (force = false) => {
+      if (!isOwnerCurrent(ownerRequest) || authInitializing || isTutorialMode ||
+          historyReadScope.pending || (!force && isFreshRead(historyReadScope))) return;
+      const isCurrentRead = () => isOwnerCurrent(ownerRequest) && historyReadScopeRef.current === historyReadScope;
       const safeMode = `resonances:${historyOrder}`;
-      if (isTutorialMode) {
-        setHistoryState({
-          scope: historyReadScope,
-          loading: false,
-          loadedModes: { [safeMode]: true },
-          order: historyOrder,
-          resonances: [],
-          error: "",
-        });
-        return;
-      }
 
       const receipts = new Map();
       resonanceActivity.historyRead = receipts;
@@ -537,6 +539,8 @@ export default function NexusScreen({ navigation }) {
         ...ownerRequest.options,
         includePieceV2: true,
       }));
+      historyReadScope.pending = true;
+      historyReadScope.settledAt = null;
       setHistoryState({ ...LOADING_HISTORY, scope: historyReadScope });
       try {
         const missedConfirmedWrite = (rows) => {
@@ -544,13 +548,14 @@ export default function NexusScreen({ navigation }) {
           return [...receipts].some(([id, receipt]) => receipt.resonated && !loadedIds.has(id));
         };
         let rows = await readRows();
-        if (!isFresh()) return;
+        if (!isCurrentRead()) return;
         while (missedConfirmedWrite(rows)) {
           // A save completed during the read. Recheck access before displaying it in history.
           receipts.clear();
           rows = await readRows();
-          if (!isFresh()) return;
+          if (!isCurrentRead()) return;
         }
+        historyReadScope.settledAt = Date.now();
         setHistoryState({
           scope: historyReadScope,
           loading: false,
@@ -560,7 +565,7 @@ export default function NexusScreen({ navigation }) {
           error: "",
         });
       } catch (e) {
-        if (!isFresh()) return;
+        if (!isCurrentRead()) return;
         console.warn("NexusScreen: loadHistory failed", e);
         setHistoryState({
           scope: historyReadScope,
@@ -571,26 +576,18 @@ export default function NexusScreen({ navigation }) {
           error: String(e?.message || "履歴を読み込めませんでした。"),
         });
       } finally {
+        historyReadScope.pending = false;
         if (resonanceActivity.historyRead === receipts) resonanceActivity.historyRead = null;
       }
     },
-    [historyOrder, isTutorialMode, ownerRequest, isOwnerCurrent, historyReadScope, navigation, resonanceActivity]
+    [authInitializing, historyOrder, isTutorialMode, ownerRequest, isOwnerCurrent, historyReadScope, resonanceActivity]
   );
-
-  useEffect(() => {
-    if (activeTab === "piece") void loadPieces();
-  }, [activeTab, loadPieces]);
-
-  useEffect(() => {
-    void loadOwnerOptions();
-  }, [loadOwnerOptions]);
 
   useEffect(() => {
     if (!isTutorialMode) return;
     setOwnerFilterMode(OWNER_FILTER_ALL);
     setOwnerFilterUserId(null);
     setOwnerPickerVisible(false);
-    setOwnerOptions([]);
     void ensureTutorialPiecesSeed();
     if (activeTab !== "piece") {
       setActiveTab("piece");
@@ -638,40 +635,67 @@ export default function NexusScreen({ navigation }) {
 
   useEffect(() => {
     if (isTutorialMode) {
-      setPieceState({
-        loading: false,
-        items: tutorialPieceItems,
-        error: "",
-      });
-    }
-  }, [isTutorialMode, tutorialPieceItems]);
-
-  useEffect(() => {
-    if (isTutorialMode) {
       setUnread("Piece", "piecesNew", false);
       return;
     }
-    if (pieceState.loading || pieceState.error) return;
+    if (!pieceUnreadResolved) return;
 
     setUnread("Piece", "piecesNew", pieceHasUnread);
   }, [
     isTutorialMode,
     pieceHasUnread,
-    pieceState.error,
-    pieceState.loading,
+    pieceUnreadResolved,
     setUnread,
   ]);
 
   useEffect(() => {
+    if (!navigation?.addListener) return undefined;
+    return navigation.addListener("focus", () => setFocusRevision((revision) => revision + 1));
+  }, [navigation]);
+
+  const loadActiveTab = activeTab === "emotion_log" ? loadEmotionLog
+    : activeTab === "history" ? loadHistory : loadPieces;
+  useEffect(() => {
+    if (navigation?.isFocused?.() !== false) void loadActiveTab();
+  }, [focusRevision, loadActiveTab, navigation]);
+
+  useEffect(() => {
+    if (navigation?.isFocused?.() === false) return;
+    void refreshNexusUnreadState();
+    void loadOwnerOptions();
+  }, [focusRevision, loadOwnerOptions, navigation, refreshNexusUnreadState]);
+
+  const unreadSignal = useMemo(() => ({}), [ownerRequest, isTutorialMode]);
+  useEffect(() => {
+    const previousPieceUnread = unreadSignal.pieces;
+    const previousEmotionUnread = unreadSignal.emotions;
+    unreadSignal.pieces = prefetchedPieceUnread;
+    unreadSignal.emotions = prefetchedEmotionLogUnread;
+    const changedTabs = [];
+    if (previousPieceUnread === false && prefetchedPieceUnread && !pieceHasUnread &&
+        ownerFilterMode === OWNER_FILTER_ALL && pieceReadScope.settledAt != null) {
+      pieceReadScope.settledAt = null;
+      changedTabs.push("piece");
+    }
+    if (previousEmotionUnread === false && prefetchedEmotionLogUnread && emotionLogReadScope.settledAt != null) {
+      emotionLogReadScope.settledAt = null;
+      changedTabs.push("emotion_log");
+    }
+    if (changedTabs.length) invalidateReads(changedTabs);
+  }, [emotionLogReadScope, invalidateReads, ownerFilterMode, pieceHasUnread, pieceReadScope,
+      prefetchedEmotionLogUnread, prefetchedPieceUnread, unreadSignal]);
+
+  useEffect(() => {
     if (activeTab !== "emotion_log" || navigation?.isFocused?.() === false || !isOwnerCurrent(ownerRequest)) return;
-    if (!emotionLogState.loaded || emotionLogState.loading || emotionLogState.error) return;
+    if (!isFreshRead(emotionLogReadScope) || !emotionLogState.loaded || emotionLogState.loading || emotionLogState.error) return;
     if (!prefetchedEmotionLogUnread || !latestEmotionLogCreatedAt) return;
     let cancelled = false;
 
     (async () => {
       try {
         await markNexusEmotionLogFeedRead(latestEmotionLogCreatedAt, ownerRequest.options);
-        if (cancelled || !isOwnerCurrent(ownerRequest)) return;
+        if (cancelled || !isOwnerCurrent(ownerRequest) || emotionLogScopeRef.current !== emotionLogReadScope ||
+            navigation?.isFocused?.() === false) return;
         setUnread("EmotionLog", "feed", false);
       } catch (e) {
         console.warn("NexusScreen: failed to mark emotion log feed read", e);
@@ -689,47 +713,18 @@ export default function NexusScreen({ navigation }) {
     latestEmotionLogCreatedAt,
     prefetchedEmotionLogUnread,
     setUnread,
-    ownerRequest, isOwnerCurrent, navigation,
+    emotionLogReadScope, focusRevision, ownerRequest, isOwnerCurrent, navigation,
   ]);
 
-  useEffect(() => {
-    void refreshNexusUnreadState();
-  }, [refreshNexusUnreadState]);
-
-  useEffect(() => {
-    if (!navigation?.addListener) return undefined;
-    const unsubscribe = navigation.addListener("focus", () => {
-      void refreshNexusUnreadState();
-      void loadOwnerOptions();
-      if (activeTab === "piece") void loadPieces();
-      if (activeTab === "emotion_log") void loadEmotionLog();
-      if (activeTab === "history") void loadHistory();
-    });
-    const unsubscribeBlur = navigation.addListener("blur", () => {
-      if (isTutorialMode) return;
-      readSequences.current.pieces += 1;
-      readSequences.current.emotions += 1;
-      readSequences.current.history += 1;
-      setPieceState({ loading: true, items: [], error: "" });
-      setEmotionLogState(null);
-      setHistoryState(null);
-    });
-    return () => {
-      unsubscribe?.();
-      unsubscribeBlur?.();
-    };
-  }, [navigation, refreshNexusUnreadState, activeTab, isTutorialMode, loadOwnerOptions,
-      loadPieces, loadEmotionLog, loadHistory]);
-
-  useEffect(() => {
-    if (activeTab !== "emotion_log") return undefined;
-    void loadEmotionLog();
-    return () => { readSequences.current.emotions += 1; };
-  }, [activeTab, loadEmotionLog]);
-
-  useEffect(() => {
-    if (activeTab === "history") void loadHistory();
-  }, [activeTab, historyRefresh, loadHistory]);
+  const handleRefreshTab = useCallback(async () => {
+    if (refreshing || navigation?.isFocused?.() === false) return;
+    setRefreshing(true);
+    try {
+      await loadActiveTab(true);
+    } finally {
+      setRefreshing(false);
+    }
+  }, [loadActiveTab, navigation, refreshing]);
 
   const handlePressGuide = useCallback(() => {
     try {
@@ -892,14 +887,14 @@ export default function NexusScreen({ navigation }) {
         resonanceActivity.feedRead?.set(qInstanceId, receipt);
         resonanceActivity.historyRead?.set(qInstanceId, receipt);
 
-        setPieceState((previous) => ({
+        setPieceState((previous) => previous ? ({
           ...previous,
           items: previous.items.map((row) => resolvePieceQInstanceId(row) === qInstanceId
             ? applyPieceResonanceReceipt(row, receipt)
             : row),
-        }));
-        if (resonated && !resonanceActivity.historyRead && historyReadScopeRef.current?.tab === "history") {
-          setHistoryRefresh((previous) => previous + 1);
+        }) : previous);
+        if (!historyReadScopeRef.current?.pending) {
+          invalidateReads(["history"]);
         }
         setHistoryState((previous) => {
           if (previous?.scope !== historyReadScopeRef.current || previous.loading) return previous;
@@ -936,7 +931,7 @@ export default function NexusScreen({ navigation }) {
         }
       }
     },
-    [canResonatePiece, ownerRequest, isOwnerCurrent, resonanceActivity]
+    [canResonatePiece, ownerRequest, isOwnerCurrent, invalidateReads, resonanceActivity]
   );
 
   const handlePressPieceDelete = useCallback(
@@ -968,20 +963,7 @@ export default function NexusScreen({ navigation }) {
               try {
                 await deleteNexusPiece({ qInstanceId }, ownerRequest.options);
                 if (!isOwnerCurrent(ownerRequest)) return;
-                setPieceState((prev) => ({
-                  ...prev,
-                  items: Array.isArray(prev.items)
-                    ? prev.items.filter(
-                        (row) => resolvePieceQInstanceId(row) !== qInstanceId
-                      )
-                    : prev.items,
-                }));
-                setHistoryState((prev) => prev ? ({
-                  ...prev,
-                  resonances: prev.resonances.filter(
-                    (row) => String(row?.qInstanceId || "") !== qInstanceId,
-                  ),
-                }) : prev);
+                invalidateReads(["piece"]);
               } catch (e) {
                 if (!isOwnerCurrent(ownerRequest)) return;
                 console.warn("NexusScreen: piece delete failed", e);
@@ -1005,7 +987,7 @@ export default function NexusScreen({ navigation }) {
         ]
       );
     },
-    [isTutorialMode, pieceDeleteSubmittingIds, viewerUserId, ownerRequest, isOwnerCurrent]
+    [isTutorialMode, pieceDeleteSubmittingIds, viewerUserId, ownerRequest, isOwnerCurrent, invalidateReads]
   );
 
   const getTutorialTargetRef = useCallback(() => {
@@ -1186,9 +1168,7 @@ export default function NexusScreen({ navigation }) {
             setOwnerPickerVisible={setOwnerPickerVisible}
             pieceOrder={pieceOrder}
             handleSetPieceOrder={handleSetPieceOrder}
-            pieceState={pieceState.scope === pieceReadScope
-              ? pieceState
-              : { loading: authInitializing || !!viewerUserId, items: [], error: "" }}
+            pieceState={pieceState}
             pieceEmptyText={pieceEmptyText}
             viewerUserId={viewerUserId}
             canResonatePiece={canResonatePiece}
@@ -1209,6 +1189,9 @@ export default function NexusScreen({ navigation }) {
       />
       <ScrollView
         ref={scrollRef}
+        refreshControl={!isTutorialMode && viewerUserId
+          ? <RefreshControl refreshing={refreshing} onRefresh={handleRefreshTab} tintColor={colors.TITLE_GOLD} colors={[colors.TITLE_GOLD]} />
+          : undefined}
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}

@@ -1,6 +1,7 @@
 /** B11 owner-only lifecycle. No body/cache persistence, source or public feed. */
 import { PieceApiError, isPieceHistoryRecordOlder, requestPieceOwner } from './pieceApi';
 import { readPieceOwnerDisplay, pieceOwnerPermissions } from './pieceOwnerModel';
+import { notifyNexusFeedChange } from '../../lib/nexusFeedChanges';
 
 export function createPieceOwnerHistoryController(configuration = {}) {
   const listeners = new Set();
@@ -111,11 +112,15 @@ export function createPieceOwnerHistoryController(configuration = {}) {
           message: visibilityReceipt && !confirmed ? '状態が変わったため、最新のPieceを取得しました。' : notice,
           visibilityConfirmation: confirmed ? visibilityReceipt : null };
       } else if (action === 'delete') {
+        const wasPublic = deletion?.wasPublic;
         deletion = null;
         state = { ...empty(), phase: 'idle', deletedPieceId: result.piece_id,
           message: 'Pieceを削除しました。保存回数は戻りません。' };
+        if (wasPublic) notifyNexusFeedChange(ticket.context.expectedUserId, ['piece']);
       } else {
         // Fetch the current saved record after visibility acknowledgement.
+        notifyNexusFeedChange(ticket.context.expectedUserId, ['piece']);
+        if (!current(ticket)) return;
         active = null;
         await run('detail', { piece_id: value.piece_id }, null, '公開範囲を変更しました。', result);
         return;
@@ -189,7 +194,7 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     if (!enabled() || active || state.phase !== 'detail' || record !== state.record || !permissions().delete) return;
     try {
       deletion = { value: { piece_id: record.piece_id, expected_row_version: record.row_version },
-        key: newDeleteKey(), token: Object.freeze({}) };
+        key: newDeleteKey(), token: Object.freeze({}), wasPublic: record.visibility_scope === 'public' };
     } catch {
       state = { ...empty(), phase: 'unavailable', message: '削除を開始できませんでした。履歴からもう一度確認してください。' }; emit(); return;
     }

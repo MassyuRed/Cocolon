@@ -19,6 +19,7 @@ import { useSubscription } from "../SubscriptionContext";
 import { apiJson, apiFetch } from "../lib/apiClient";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 import { getEmotionRecordRevision, notifyEmotionRecordsChanged } from "../lib/emotionRecordChanges";
+import { notifyNexusFeedChange } from "../lib/nexusFeedChanges";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useAuth } from "../AuthContext";
 import { useEmlisThread } from "./input/useEmlisThread";
@@ -574,6 +575,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation, historyReadS
         }
         if (historyReadSnapshot) historyReadSnapshot.current = null;
         notifyEmotionRecordsChanged(ownerId);
+        if (isOwnerCurrent(ownerRequest)) notifyNexusFeedChange(ownerId, ["piece"]);
         if (!canApply()) return;
 
         // フィルタに合わなくなった場合は除外（Phase2: 再検索まではしない）
@@ -595,7 +597,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation, historyReadS
         if (canApply()) setUpdatingId(null);
       }
     },
-    [canApply, historyReadSnapshot, ownerId, ownerRequest, secretFilter]
+    [canApply, historyReadSnapshot, isOwnerCurrent, ownerId, ownerRequest, secretFilter]
   );
 
   const deleteRow = useCallback(async (row) => {
@@ -609,6 +611,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation, historyReadS
       });
       if (historyReadSnapshot) historyReadSnapshot.current = null;
       notifyEmotionRecordsChanged(ownerId);
+      if (isOwnerCurrent(ownerRequest)) notifyNexusFeedChange(ownerId, ["piece"]);
       if (!canApply()) return;
       setRows((prev) => prev.filter((r) => r.id !== row.id));
       emlisThread.reset();
@@ -617,7 +620,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation, historyReadS
     } finally {
       if (canApply()) setDeletingId(null);
     }
-  }, [canApply, emlisThread, historyReadSnapshot, ownerId]);
+  }, [canApply, emlisThread, historyReadSnapshot, isOwnerCurrent, ownerId, ownerRequest]);
 
   const confirmDelete = useCallback(
     (row) => {

@@ -7,6 +7,7 @@ import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiGet, apiPatch, apiPost } from "../lib/apiClient";
+import { notifyNexusFeedChange } from "../lib/nexusFeedChanges";
 import { EMOTION_NOTIFICATION_WIRE, readEmotionNotificationOwnerId } from "../lib/compat/legacyWireContracts";
 import {
   THEME_LABELS_JA,
@@ -358,6 +359,9 @@ export default function SettingsAppSettingsScreen({ navigation, embedded = false
       `/emotion-notifications/settings/${encodeURIComponent(EMOTION_NOTIFICATION_GLOBAL_OWNER_ID)}`,
       { is_enabled: !!next }, request
     );
+    if (!request.signal.aborted) {
+      notifyNexusFeedChange(request.expectedUserId, ["emotion_log"]);
+    }
   };
 
   const updatePushEnabled = async (next) => {

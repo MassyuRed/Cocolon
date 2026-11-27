@@ -25,6 +25,7 @@ import { useAppRuntime } from "../AppRuntimeContext";
 import FollowerVisibilityMenu from "./follow/FollowerVisibilityMenu";
 import { publishFollowChange, subscribeToFollowChanges } from "./account/followChanges";
 import { apiFetch, apiPost } from "../lib/apiClient";
+import { notifyNexusFeedChange } from "../lib/nexusFeedChanges";
 import { CONNECT_WIRE, EMOTION_NOTIFICATION_WIRE, FOLLOW_WIRE, buildFollowListPath, buildFollowRequestsPath, buildFollowStatsPath, readEmotionNotificationOwnerId, readRelatedConnectCode } from "../lib/compat/legacyWireContracts";
 
 const EMOTION_NOTIFICATION_SETTINGS_ENDPOINT = EMOTION_NOTIFICATION_WIRE.routes.settings;
@@ -887,6 +888,9 @@ export default function FollowListScreen({ navigation, route }) {
           // ignore
         }
         throw new Error(msg);
+      }
+      if (isOwnerCurrent(ownerRequest)) {
+        notifyNexusFeedChange(ownerRequest.owner, ["emotion_log"]);
       }
     } catch (e) {
       if (!isOwnerCurrent(ownerRequest)) return;

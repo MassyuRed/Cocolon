@@ -28,6 +28,7 @@ import {
   getNexusPiecesAsQnaList,
   getNexusPiecesUnreadStatus,
 } from "../lib/nexusApi";
+import { notifyNexusFeedChange } from "../lib/nexusFeedChanges";
 import { useUnread } from "../UnreadContext";
 import { useTutorial } from "../TutorialContext";
 import TutorialOverlay, {
@@ -1403,6 +1404,7 @@ useEffect(() => {
                     const msg = json?.detail || json?.message || `HTTP ${res.status}`;
                     throw new Error(String(msg));
                   }
+                  notifyNexusFeedChange(ownerRequest.expectedUserId, ["piece", "history"]);
 
                   const nextResonated =
                     typeof json?.resonated === "boolean" ? json.resonated : false;
@@ -1518,6 +1520,7 @@ useEffect(() => {
         const msg = json?.detail || json?.message || `HTTP ${res.status}`;
         throw new Error(String(msg));
       }
+      notifyNexusFeedChange(ownerRequest.expectedUserId, ["piece", "history"]);
 
       if (resetSeq !== resetSeqRef.current) return;
 
@@ -1653,6 +1656,7 @@ useEffect(() => {
         const msg = json?.detail || json?.message || `HTTP ${res.status}`;
         throw new Error(String(msg));
       }
+      notifyNexusFeedChange(ownerRequest.expectedUserId, ["piece", "history"]);
 
       // Resonance送信が成功した時点で「共鳴確定」される（サーバ側で+1）
       if (resetSeq !== resetSeqRef.current) return;
@@ -1828,6 +1832,7 @@ useEffect(() => {
                 ) {
                   throw new Error("サーバー応答が不正です（resonated/resonances）");
                 }
+                notifyNexusFeedChange(ownerRequest.expectedUserId, ["piece", "history"]);
 
                 const nextResonated = json.resonated;
                 const nextResonances = json.resonances;

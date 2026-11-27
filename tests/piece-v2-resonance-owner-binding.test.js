@@ -18,12 +18,14 @@ const ownerEffectCode = ownerEffect.expression.arguments[0].getText(parsed);
 const callbackCode = name => declarations.find(n => n.name.getText(parsed) === name).initializer.arguments[0].getText(parsed);
 const apiSource = fs.readFileSync(path.join(root, 'lib/apiClient.js'), 'utf8')
   .replace(/^import .*;$/gm, '').replace(/^export /gm, '');
+const feedSource = fs.readFileSync(path.join(root, 'lib/nexusFeedChanges.js'), 'utf8')
+  .replace(/^export /gm, '');
 const deferred = () => { let resolve; const promise = new Promise(r => { resolve = r; }); return { promise, resolve }; };
 const settle = () => new Promise(resolve => setImmediate(resolve));
 const clone = value => JSON.parse(JSON.stringify(value));
 
 function harness({ already = false, tutorial = false, holdAuth = false, holdResponse = false, viewedUserId = 'target-A' } = {}) {
-  const calls = [], states = [], alerts = [], authGate = deferred(), responseGate = deferred();
+  const calls = [], states = [], alerts = [], feedChanges = [], authGate = deferred(), responseGate = deferred();
   const session = { current: { user: { id: 'owner-A' }, access_token: 'token-A' } };
   const context = {
     user: { id: 'owner-A' }, ownerRequestRef: { current: null }, AbortController,
@@ -65,6 +67,9 @@ function harness({ already = false, tutorial = false, holdAuth = false, holdResp
     },
   });
   Object.assign(context, api);
+  const feed = vm.runInNewContext(feedSource + '\n({ notifyNexusFeedChange, subscribeNexusFeedChanges });');
+  feed.subscribeNexusFeedChanges((ownerId, tabs) => feedChanges.push([ownerId, [...tabs]]));
+  context.notifyNexusFeedChange = feed.notifyNexusFeedChange;
   const nexusSource = fs.readFileSync(path.join(root, 'lib/nexusApi.js'), 'utf8')
     .replace(/^import .*;$/gm, '').replace(/^export /gm, '');
   Object.assign(context, vm.runInNewContext(nexusSource + '\n({ getNexusPiecesAsQnaList, getNexusPieceDetailQna, getNexusPiecesUnreadStatus });', {
@@ -76,7 +81,7 @@ function harness({ already = false, tutorial = false, holdAuth = false, holdResp
     'resolveTargetUserId', 'buildListParams']
     .map(name => [name, vm.runInNewContext('(' + callbackCode(name) + ')', context)]));
   Object.assign(context, callbacks);
-  return { ...callbacks, calls, states, alerts, session, authGate, responseGate, cleanup, context };
+  return { ...callbacks, calls, states, alerts, feedChanges, session, authGate, responseGate, cleanup, context };
 }
 
 test('mark-viewed detail keeps the normal owner and public Piece identity', async () => {
@@ -162,6 +167,7 @@ for (const action of actions) {
     assert.equal(call.body.q_key, 'canonical-key');
     assert.equal(call.url.endsWith(action.already ? '/delete' : '/submit'), true);
     if (!action.already) assert.deepEqual(call.body, { q_instance_id: 'public-piece', q_key: 'canonical-key', strength: action.strength, memo: action.memo });
+    assert.deepEqual(h.feedChanges, [['owner-A', ['piece', 'history']]]);
     h.cleanup();
   });
   for (const next of ['other owner', 'logout', 'same owner new generation']) {
@@ -173,6 +179,7 @@ for (const action of actions) {
       const before = h.states.length;
       h.authGate.resolve(); await settle();
       assert.equal(h.calls.length, 0);
+      assert.deepEqual(h.feedChanges, []);
       assert.equal(h.states.length, before, 'old async completion cannot write screen state');
     });
   }
@@ -183,6 +190,7 @@ for (const action of actions) {
     h.cleanup(); const before = h.states.length;
     h.responseGate.resolve(); await settle();
     assert.equal(h.states.length, before);
+    assert.deepEqual(h.feedChanges, []);
   });
 }
 for (const action of actions.filter(a => a.alert)) {
@@ -202,6 +210,7 @@ for (const action of actions) {
     h.context.user = null; h.context.ownerRequestRef.current = null;
     await start(h, action); await settle();
     assert.equal(h.calls.length, 0);
+    assert.deepEqual(h.feedChanges, []);
     assert.ok(h.states.some(([name]) => name === 'setSelected'));
   });
 }
