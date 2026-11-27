@@ -470,6 +470,8 @@ IF／Savedは11/14に既存設計に沿って実装・通常DB／APIへ反映し
 
 ### 3.1 Analysis report／Kokoro Weather
 
+11/27の週・月表示は、`KokoroWeatherTimeline.js`から`KokoroWeatherPeriodChart.js`を描画する。週は日付と感情名の行、月は月曜始まりのカレンダーと感情の強調。日別の正の感情別集計値を記録の印に使用する。日・週・月とチュートリアルは感情通知と同じ`ui/emotionColors.js`を使う。記録なし、未来、閲覧範囲外は別に表示する。APIが当月の今日より先を返さない場合、その日付だけをカレンダー上で補う。記録のある選択日の時刻・個々の強さは、既存の同一本人・同一閲覧範囲の`period=today&anchor=YYYY-MM-DD`の4時間帯から取得する。
+
     eligible period material
       -> analysis engine aggregation
       -> report material / generation

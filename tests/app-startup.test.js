@@ -188,13 +188,22 @@ test('Emlis tutorial carries a sample reply, saved image, practice post and emot
 
   assert.ok(byId('emlis-tutorial-open-map').props.disabled);
   assert.ok(!byId('emlis-tutorial-chart-day-26'));
+  assert.ok(includesText('どの感情をどの日に記録したか、点で見られます'));
   await press(byId('emlis-tutorial-chart-period-week'));
-  const chartHeights = byId('emlis-tutorial-chart-day-26').findAllByType('View')
-    .map(({ props }) => props.style?.height)
-    .filter((height) => typeof height === 'string');
-  assert.equal(chartHeights.length, 5);
-  assert.ok(chartHeights.every((height) => /^\d+%$/.test(height)));
+  const week = byId('emlis-tutorial-chart-week-grid');
+  const markers = week.findAllByType('View')
+    .map(({ props }) => props.testID)
+    .filter((id) => id?.startsWith('emlis-tutorial-chart-emotion-'));
+  assert.deepEqual(markers, [
+    'emlis-tutorial-chart-emotion-joy-23',
+    'emlis-tutorial-chart-emotion-anxiety-25',
+    'emlis-tutorial-chart-emotion-calm-25',
+    'emlis-tutorial-chart-emotion-calm-26',
+  ]);
+  assert.ok(includesText('「26」を押して、「平穏」の点がついた日の内訳'));
+  assert.ok(!byId('emlis-tutorial-chart-detail'));
   await press(byId('emlis-tutorial-chart-day-25'));
+  assert.ok(includesText('不安・中'));
   assert.ok(byId('emlis-tutorial-open-map').props.disabled);
   await press(byId('emlis-tutorial-chart-day-26'));
   assert.ok(includesText('平穏・弱'));

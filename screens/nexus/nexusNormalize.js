@@ -7,23 +7,6 @@ export const STRENGTH_LABEL = {
   strong: "強",
 };
 
-export function emotionTint(emotion, defaultTextColor) {
-  switch (emotion) {
-    case "喜び":
-      return { bg: "rgba(16,185,129,0.12)", text: "#065F46" };
-    case "悲しみ":
-      return { bg: "rgba(99,102,241,0.12)", text: "#3730A3" };
-    case "怒り":
-      return { bg: "rgba(239,68,68,0.12)", text: "#7F1D1D" };
-    case "不安":
-      return { bg: "rgba(56,189,248,0.12)", text: "#0369A1" };
-    case "平穏":
-      return { bg: "rgba(234,179,8,0.12)", text: "#A16207" };
-    default:
-      return { bg: "rgba(107,114,128,0.12)", text: defaultTextColor };
-  }
-}
-
 export function normalizeEmotionLogItems(json) {
   const rows = Array.isArray(json?.items)
     ? json.items

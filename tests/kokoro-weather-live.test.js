@@ -11,10 +11,29 @@ const ROOT = path.resolve(__dirname, '..');
 const compiled = new Map();
 const tick = async () => { for (let i = 0; i < 20; i++) await Promise.resolve(); };
 const clone = value => JSON.parse(JSON.stringify(value));
+const CHART_ID = 'live-kokoro';
+const periodQuery = call => new URL(call.url, 'https://synthetic.invalid').searchParams;
+const datedReads = (h, period) => h.calls.filter(call => periodQuery(call).get('period') === period && periodQuery(call).has('anchor'));
+function anchoredToday(date) {
+  const sourceDate = fixtures.today.start_date;
+  const data = clone(fixtures.today);
+  data.start_date = date;
+  data.end_date = date;
+  data.items[0].date = date;
+  for (const property of ['observed_through', 'read_at', 'history_start']) {
+    data[property] = data[property].replace(sourceDate, date);
+  }
+  for (const bucket of data.time_buckets) {
+    for (const record of bucket.records) record.created_at = record.created_at.replace(sourceDate, date);
+  }
+  return data;
+}
+
 async function mount(t, { hold = false, hookOnly = false, parent = false, themeName = 'light' } = {}) {
   const control = { owner: 'A', generation: 0, tier: 'free', focused: true, period: 'today', anchor: null, revision: 0, hold };
   const calls = [], listeners = new Set(), modules = new Map(), events = [];
-  const native = Object.fromEntries(['View', 'Text', 'ActivityIndicator', 'Pressable'].map(name => [name, name]));
+  const native = Object.fromEntries(['View', 'Text', 'ActivityIndicator', 'Pressable', 'ScrollView'].map(name => [name, name]));
+  native.useWindowDimensions = () => ({ width: 390, height: 844, fontScale: 1 });
   const flatten = value => Array.isArray(value) ? Object.assign({}, ...value.map(flatten)) : value || {};
   native.StyleSheet = { create: value => value, flatten, absoluteFill: { position: 'absolute' } };
   native.Animated = { Value: class { constructor(value) { this.value = value; } }, View: 'AnimatedView', timing: () => ({ start() {} }) };
@@ -49,11 +68,14 @@ async function mount(t, { hold = false, hookOnly = false, parent = false, themeN
         const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
         const call = { url, options, resolve, reject }; calls.push(call);
         if (!control.hold) {
-          const query = new URL(url, 'http://synthetic').searchParams;
-          const payload = clone(fixtures[query.get('period')]);
-          if (query.get('period') === 'month' && query.get('anchor') === '2026-10-01') {
+          const query = periodQuery(call);
+          const period = query.get('period');
+          const anchor = query.get('anchor');
+          const payload = period === 'today' && anchor ? anchoredToday(anchor) : clone(fixtures[period]);
+          if (period === 'month' && anchor === '2026-10-01') {
             payload.start_date = '2026-10-01'; payload.end_date = '2026-10-31';
             payload.items = Array.from({ length: 31 }, (_, index) => ({ ...clone(fixtures.month.items[0]), date: `2026-10-${String(index + 1).padStart(2, '0')}` }));
+            payload.summary = { ...clone(fixtures.month.items[0]), recorded_days: 0 };
           }
           resolve(payload);
         }
@@ -73,16 +95,19 @@ async function mount(t, { hold = false, hookOnly = false, parent = false, themeN
   const Timeline = load('screens/analysisReport/KokoroWeatherTimeline.js').default;
   const Content = parent ? load('screens/AnalysisContentFirstScreen.js').default : null;
   const element = () => React.createElement(parent ? Content : hookOnly ? Host : Timeline, { colors, ui, period: control.timelinePeriod,
+    testIDPrefix: CHART_ID,
     onPeriodChange: value => events.push(value), graphOpenRequest: control.graphOpenRequest,
     isTutorialMode: control.isTutorialMode, tutorialStep: control.tutorialStep, tutorialGraphData: fixtures });
   let root;
   await Renderer.act(async () => { root = Renderer.create(element()); await tick(); });
   t.after(async () => { await Renderer.act(async () => root.unmount()); });
-  const h = { root, calls, control, events, colors, flatten, get output() { return output; },
+  const h = { root, calls, control, events, colors, flatten, load, get output() { return output; },
     async update(values) { Object.assign(control, values); await Renderer.act(async () => { root.update(element()); await tick(); }); },
     async answer(index, data) { await Renderer.act(async () => { calls[index].resolve(clone(data)); await tick(); }); },
     async fail(index) { await Renderer.act(async () => { calls[index].reject(new Error('synthetic failure')); await tick(); }); },
     async press(label) { await Renderer.act(async () => { root.root.findAllByType('Pressable').find(node => node.props.accessibilityLabel === label).props.onPress(); await tick(); }); },
+    byId(suffix) { return root.root.findAllByProps({ testID: `${CHART_ID}-${suffix}` }).at(-1); },
+    async pressId(suffix) { await this.press(this.byId(suffix).props.accessibilityLabel); },
     async background(state) { native.AppState.currentState = state; await Renderer.act(async () => { for (const listener of [...listeners]) listener(state); await tick(); }); },
     async recordsChanged(owner) { await Renderer.act(async () => { load('lib/emotionRecordChanges.js').notifyEmotionRecordsChanged(owner); await tick(); }); },
     text() { return root.root.findAllByType('Text').map(node => node.props.children).flat(Infinity).filter(value => value != null).join(''); },
@@ -90,7 +115,7 @@ async function mount(t, { hold = false, hookOnly = false, parent = false, themeN
   return h;
 }
 
-test('today uses actual API fixture, weighted donut and time-band records; week/month switch to daily bars', async t => {
+test('today uses the same weighted donut and time-band records from the API', async t => {
   const h = await mount(t);
   assert.match(h.calls[0].url, /\/analysis\/kokoro-weather\?period=today$/);
   assert.equal(h.calls[0].options.expectedUserId, 'A');
@@ -103,24 +128,178 @@ test('today uses actual API fixture, weighted donut and time-band records; week/
   await h.press('朝、6:00–12:00、2件');
   assert.match(h.text(), /08:10/);
   assert.match(h.text(), /喜び・中　不安・弱/);
+  assert.equal(h.calls.length, 1);
+  assert.doesNotMatch(h.text(), /こころ温度|原因|性格|アドバイス/);
+});
+
+test('day rings and week and month marks use the emotion notification colors', async t => {
+  const h = await mount(t);
+  const { EMOTION_COLORS, emotionTint } = h.load('ui/emotionColors.js');
+  assert.deepEqual(EMOTION_COLORS.map(({ label, color }) => [label, color]), [
+    ['喜び', 'rgb(16,185,129)'], ['悲しみ', 'rgb(99,102,241)'],
+    ['怒り', 'rgb(239,68,68)'], ['不安', 'rgb(56,189,248)'], ['平穏', 'rgb(234,179,8)'],
+  ]);
+  for (const { key, label, color } of EMOTION_COLORS) {
+    assert.equal(emotionTint(label).bg, color.replace('rgb(', 'rgba(').replace(')', ',0.12)'));
+    assert.equal(h.root.root.findAllByType('Circle').some(({ props }) => props.stroke === color),
+      fixtures.today.summary.emotion_weights[key] > 0, label);
+  }
+  for (const period of ['週', '月']) {
+    await h.press(period);
+    for (const { key, color } of EMOTION_COLORS.filter(({ key }) => key !== 'sadness')) {
+      assert.equal(h.flatten(h.byId(`emotion-${key}-8`).props.style).backgroundColor, color);
+    }
+  }
+});
+
+function dayControls(grid) {
+  return grid.findAllByType('Pressable')
+    .filter(node => node.props.testID?.startsWith(`${CHART_ID}-day-`));
+}
+
+test('week shows seven dates and the five emotions as presence, retaining the selected-day detail', async t => {
+  const h = await mount(t);
   await h.press('週');
   assert.equal(h.events.at(-1), 'week');
-  assert.equal(h.root.root.findAllByType('Pressable').filter(node => /^\d+\/\d+、/.test(node.props.accessibilityLabel || '')).length, 7);
-  assert.ok(h.root.root.findAllByType('Pressable').filter(node => /^\d+\/\d+、/.test(node.props.accessibilityLabel || '')).every(node => node.props.style.flex === 1));
-  await h.press('11/3、0件、記録なし');
-  assert.match(h.text(), /記録なし/);
+  const grid = h.byId('week-grid');
+  assert.deepEqual(dayControls(grid).map(node => Number(node.props.testID.split('-').at(-1))), [2, 3, 4, 5, 6, 7, 8]);
+  const headings = grid.findAllByType('Text').map(node => node.props.children);
+  for (const name of ['喜び', '悲しみ', '怒り', '不安', '平穏']) assert.ok(headings.includes(name), name);
+  for (const key of ['joy', 'anger', 'anxiety', 'calm']) assert.ok(h.byId(`emotion-${key}-8`), key);
+  assert.equal(h.byId('emotion-sadness-8'), undefined);
+  assert.equal(h.byId('emotion-calm-7'), undefined);
+  assert.equal(h.byId('day-8').props.accessibilityState.selected, true);
+  assert.match(h.byId('day-8').props.accessibilityLabel, /11\/8、6件.*喜び.*怒り.*不安.*平穏/);
+  assert.deepEqual(datedReads(h, 'today').map(call => periodQuery(call).get('anchor')), ['2026-11-08']);
+  assert.match(h.text(), /11\/8の記録.*08:10.*喜び・中　不安・弱/);
+
+  const requestCount = h.calls.length;
+  await h.update({ focused: false });
+  assert.doesNotMatch(h.text(), /08:10/);
+  await h.update({ focused: true });
+  assert.match(h.text(), /11\/8の記録.*08:10/);
+  assert.equal(h.calls.length, requestCount, 'navigation retains the loaded day without a second read');
+
+  await h.pressId('day-3');
+  assert.equal(h.byId('day-3').props.accessibilityState.selected, true);
+  assert.match(h.text(), /11\/3の記録.*記録なし/);
+  assert.doesNotMatch(h.text(), /08:10/);
+  assert.equal(datedReads(h, 'today').length, 1, 'an empty day does not retrieve record details');
+});
+
+test('month fills out a calendar, keeps markers when highlighting one emotion, and handles a 31-day month', async t => {
+  const h = await mount(t);
   await h.press('月');
   assert.equal(h.events.at(-1), 'month');
-  assert.equal(h.root.root.findAllByType('Pressable').filter(node => /^\d+\/\d+、/.test(node.props.accessibilityLabel || '')).length, 8);
+  let days = dayControls(h.byId('month-grid'));
+  assert.deepEqual(days.map(node => Number(node.props.testID.split('-').at(-1))), Array.from({ length: 30 }, (_, index) => index + 1));
+  assert.equal(dayControls(h.byId('month-row-1')).length, 1, 'the month starts on Sunday');
+  assert.equal(dayControls(h.byId('month-row-2')).length, 7);
+  assert.equal(dayControls(h.byId('month-row-6')).length, 1);
+  for (let row = 1; row <= 6; row++) assert.equal(h.byId(`month-row-${row}`).children.length, 7);
+  assert.equal(h.byId('day-8').props.accessibilityState.selected, true);
+  assert.match(h.byId('day-9').props.accessibilityLabel, /11\/9、これから/);
+  assert.equal(h.byId('day-9').props.accessibilityState.disabled, true);
+  assert.match(h.byId('day-7').props.accessibilityLabel, /11\/7、記録なし/);
+  assert.equal(h.byId('day-7').props.accessibilityState.disabled, false);
+
+  assert.equal(h.byId('month-filter-all').props.accessibilityState.selected, true);
+  const markOpacity = key => h.flatten(h.byId(`emotion-${key}-8`).props.style).opacity ?? 1;
+  assert.equal(markOpacity('joy'), markOpacity('calm'));
+  const requestCount = h.calls.length;
+  await h.pressId('month-filter-calm');
+  assert.equal(h.byId('month-filter-calm').props.accessibilityState.selected, true);
+  assert.equal(h.byId('month-filter-all').props.accessibilityState.selected, false);
+  assert.equal(h.byId('day-8').props.accessibilityState.selected, true);
+  assert.ok(markOpacity('calm') > markOpacity('joy'));
+  assert.equal(h.calls.length, requestCount, 'a display filter does not refetch or change the selected date');
+  await h.pressId('month-filter-all');
+  assert.equal(markOpacity('joy'), markOpacity('calm'));
+
   await h.press('前の期間');
-  assert.match(h.calls.at(-1).url, /anchor=2026-10-01/);
-  const monthSlots = h.root.root.findAllByType('Pressable').filter(node => /^\d+\/\d+、/.test(node.props.accessibilityLabel || ''));
-  assert.equal(monthSlots.length, 31);
-  assert.ok(monthSlots.every(node => node.props.style.flex === 1));
-  const ticks = h.root.root.findAllByType('Text').filter(node => node.props.style?.width === 24);
-  assert.deepEqual(ticks.filter(node => node.props.children !== ' ').map(node => node.props.children), [1, 8, 15, 22, 31]);
-  assert.ok(ticks.every(node => node.props.numberOfLines === 1));
-  assert.doesNotMatch(h.text(), /こころ温度|原因|性格|アドバイス/);
+  assert.equal(periodQuery(datedReads(h, 'month').at(-1)).get('anchor'), '2026-10-01');
+  days = dayControls(h.byId('month-grid'));
+  assert.deepEqual(days.map(node => Number(node.props.testID.split('-').at(-1))), Array.from({ length: 31 }, (_, index) => index + 1));
+  assert.equal(h.byId('day-31').props.accessibilityState.selected, true, 'without records, select the latest eligible day');
+  assert.match(h.text(), /10\/31の記録.*記録なし/);
+  assert.equal(datedReads(h, 'today').length, 1);
+});
+
+test('week distinguishes unavailable dates from empty dates and defaults to the latest actual recording', async t => {
+  const h = await mount(t, { hold: true });
+  await h.answer(0, fixtures.today);
+  await h.press('週');
+  const week = clone(fixtures.week);
+  const empty = week.items[0];
+  week.observed_through = '2026-11-07T21:40:00+09:00';
+  week.read_at = week.observed_through;
+  week.history_start = '2026-11-03T00:00:00+09:00';
+  week.partial_history = true;
+  week.items[0].status = 'outside_history';
+  week.items[2] = { ...week.items[6], date: '2026-11-04',
+    input_count: 101,
+    emotion_weights: { ...empty.emotion_weights, joy: 300, anxiety: 1 },
+    emotion_share_pct: { ...empty.emotion_share_pct, joy: 100 } };
+  week.items[6] = { ...week.items[5], date: '2026-11-08', status: 'future' };
+  week.summary = { ...week.items[2], recorded_days: 1 };
+  await h.answer(1, week);
+
+  assert.equal(h.byId('day-4').props.accessibilityState.selected, true);
+  assert.ok(h.byId('emotion-joy-4'));
+  assert.ok(h.byId('emotion-anxiety-4'), 'a positive weight still gets a mark when its share rounds to zero');
+  assert.equal(h.byId('emotion-calm-4'), undefined);
+  assert.match(h.byId('day-2').props.accessibilityLabel, /閲覧範囲外/);
+  assert.match(h.byId('day-8').props.accessibilityLabel, /これから/);
+  for (const day of [2, 8]) {
+    assert.equal(h.byId(`day-${day}`).props.accessibilityState.disabled, true);
+    assert.equal(h.byId(`day-${day}`).props.onPress, undefined);
+  }
+  assert.match(h.byId('day-7').props.accessibilityLabel, /記録なし/);
+  assert.equal(h.byId('day-7').props.accessibilityState.disabled, false);
+  assert.deepEqual(datedReads(h, 'today').map(call => periodQuery(call).get('anchor')), ['2026-11-04']);
+});
+
+test('selected-day reads reject late date and owner results and show records in timestamp order', async t => {
+  const h = await mount(t, { hold: true });
+  await h.answer(0, fixtures.today);
+  await h.press('週');
+  const week = clone(fixtures.week);
+  week.items[5] = { ...week.items[6], date: '2026-11-07' };
+  week.summary.input_count *= 2;
+  week.summary.recorded_days = 2;
+  for (const key of Object.keys(week.summary.emotion_weights)) week.summary.emotion_weights[key] *= 2;
+  await h.answer(1, week);
+  const lateDate = h.calls.indexOf(datedReads(h, 'today').at(-1));
+  assert.equal(periodQuery(h.calls[lateDate]).get('anchor'), '2026-11-08');
+  await h.pressId('day-7');
+  const selectedDate = h.calls.indexOf(datedReads(h, 'today').at(-1));
+  assert.equal(periodQuery(h.calls[selectedDate]).get('anchor'), '2026-11-07');
+  await h.answer(lateDate, anchoredToday('2026-11-08'));
+  assert.doesNotMatch(h.text(), /08:10/);
+
+  const day = anchoredToday('2026-11-07');
+  day.time_buckets[1].records[0].created_at = '2026-11-07T08:42:00+09:00';
+  day.time_buckets.reverse();
+  await h.answer(selectedDate, day);
+  assert.match(h.text(), /11\/7の記録.*08:42.*喜び・中　不安・弱.*09:45.*12:30.*21:10/);
+  assert.doesNotMatch(h.text(), /08:10/);
+
+  await h.pressId('day-8');
+  const oldOwner = h.calls.indexOf(datedReads(h, 'today').at(-1));
+  assert.equal(h.calls[oldOwner].options.expectedUserId, 'A');
+  assert.notEqual(oldOwner, lateDate);
+  await h.update({ owner: 'B', generation: 1 });
+  assert.equal(h.calls[oldOwner].options.signal.aborted, true);
+  await h.answer(oldOwner, anchoredToday('2026-11-08'));
+  assert.doesNotMatch(h.text(), /08:10|08:42/);
+  const ownerWeek = h.calls.findIndex(call => call.options.expectedUserId === 'B' && periodQuery(call).get('period') === 'week');
+  assert.notEqual(ownerWeek, -1);
+  await h.answer(ownerWeek, fixtures.week);
+  const newOwner = h.calls.indexOf(datedReads(h, 'today').at(-1));
+  assert.equal(h.calls[newOwner].options.expectedUserId, 'B');
+  assert.equal(periodQuery(h.calls[newOwner]).get('anchor'), '2026-11-08');
+  await h.answer(newOwner, anchoredToday('2026-11-07'));
+  assert.doesNotMatch(h.text(), /08:10|08:42/, 'valid data for a different date must not appear');
 });
 
 test('graph cards and unselected time tiles use visible section borders in light and dark', async t => {
@@ -257,7 +436,7 @@ test('old report notification targets change the graph tab and period', async t 
   const h = await mount(t, { parent: true });
   await h.press('わたしマップ');
   await h.update({ graphOpenRequest: { period: 'week' } });
-  assert.match(h.calls.at(-1).url, /period=week/);
+  assert.ok(h.calls.some(call => periodQuery(call).get('period') === 'week'));
   assert.match(h.text(), /この週のこころグラフ/);
 });
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 
-import { STRENGTH_LABEL, emotionTint } from "./nexusNormalize";
+import { emotionTint } from "../../ui/emotionColors";
+import { STRENGTH_LABEL } from "./nexusNormalize";
 
 export default function NexusEmotionLogSection({ emotionLogState, styles, colors, ui }) {
   if (emotionLogState.loading) {

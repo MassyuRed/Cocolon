@@ -77,6 +77,7 @@ export function useKokoroWeather(period, anchor, refreshRevision = 0, enabled = 
   }, [scope, isCurrent, focused, read, enabled, active, hasCachedData]);
   return {
     data: visible?.data || null,
+    cachedData: enabled ? current?.data || null : null,
     loading: enabled && active && focused && !!user?.id && (!visible || visible.loading),
     error: !!visible?.error,
     retry: useCallback(() => setAttempt(value => value + 1), []),

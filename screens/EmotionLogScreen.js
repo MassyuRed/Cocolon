@@ -35,6 +35,7 @@ import TutorialOverlay, {
 import { apiGet } from "../lib/apiClient";
 import { useAuth } from "../AuthContext";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
+import { emotionTint } from "../ui/emotionColors";
 
 // 🔧 ここを変えると感情ログ画面のパネル高さが変わる
 const PANEL_MIN_HEIGHT = 695;
@@ -57,23 +58,6 @@ const STRENGTH_LABEL = {
   medium: "中",
   strong: "強",
 };
-
-function emotionTint(emotion, defaultTextColor) {
-  switch (emotion) {
-    case "喜び":
-      return { bg: "rgba(16,185,129,0.12)", text: "#065F46" }; // green
-    case "悲しみ":
-      return { bg: "rgba(99,102,241,0.12)", text: "#3730A3" }; // indigo
-    case "怒り":
-      return { bg: "rgba(239,68,68,0.12)", text: "#7F1D1D" }; // red
-    case "不安":
-      return { bg: "rgba(56,189,248,0.12)", text: "#0369A1" }; // cyan-ish
-    case "平穏":
-      return { bg: "rgba(234,179,8,0.12)", text: "#A16207" }; // calm
-    default:
-      return { bg: "rgba(107,114,128,0.12)", text: defaultTextColor };
-  }
-}
 
 function formatTimeLabel(iso) {
   if (!iso) return "";

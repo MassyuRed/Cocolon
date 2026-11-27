@@ -11,7 +11,8 @@ import {
 } from "../../features/piece/piecePalette";
 import { useTheme } from "../../theme/ThemeContext";
 import { makeUiTokens } from "../../ui/uiTokens";
-import KokoroWeatherTimeline, { WEATHER_EMOTIONS } from "../analysisReport/KokoroWeatherTimeline";
+import { EMOTION_COLORS as WEATHER_EMOTIONS } from "../../ui/emotionColors";
+import KokoroWeatherTimeline from "../analysisReport/KokoroWeatherTimeline";
 import NexusEmotionLogSection from "../nexus/NexusEmotionLogSection";
 import NexusPieceCard from "../nexus/NexusPieceCard";
 
@@ -333,8 +334,8 @@ export default function EmlisTutorialResults({ stage, onAdvance, includeAnswer }
           {weekOpen
             ? sampleDayOpened
               ? "練習で選んだ「平穏・弱」が見つかりました。次は「わたしマップ」を開きましょう。"
-              : "「26」を押して、練習で記録した気持ちを見つけましょう。"
-            : "「週」を押すと、その週の気持ちを日ごとに比べられます。"}
+              : "「26」を押して、「平穏」の点がついた日の内訳を見てみましょう。"
+            : "「週」を押すと、どの感情をどの日に記録したか、点で見られます。"}
         </Text>
         <KokoroWeatherTimeline
           colors={colors}
