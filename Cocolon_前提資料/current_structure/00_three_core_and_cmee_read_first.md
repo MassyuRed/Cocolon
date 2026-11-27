@@ -84,6 +84,21 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
 
+<a id="analysis-and-emlis-continuity-20261127"></a>
+
+### わたしマップとEmlisAIの継承（2026-11-27）
+
+| 時期 | 現行の設計と実装に照らして引き継ぐ判断 |
+|---|---|
+| 3月〜4月 | 対象・場面に応じた本人の思考・行動・役割を照合し、本人の見方と実際の選択を区別する。最新・月次に載った同じ原記録を独立した根拠として数えない。Emlisの入力は思考と出来事・行動の欄を分ける。過去のStandard／Deepの分け方と即時の定型コメントは当時の実装。 [分析の原入力と信号抽出](https://github.com/MassyuRed/mashos-api/commit/d93a20cc) [3月の入力画面](https://github.com/MassyuRed/Cocolon/blob/8b37ce6b/screens/InputScreen.js#L1399) |
+| 5月〜7月 | 感情の集計と、場面・役割・選択・結果を結ぶ分析を区別する。Emlisでは当回の原入力に戻れる観測を用い、受け止め方・時点・強さ・書かれた理由を保つ。本人が書いていない理由や、未確定な関係は足さない。 [Emlis詳細設計](../designs/cmee/v1/02_emlis_v1a_detailed_design.md) [分析詳細設計](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md) |
+| 8月〜9月 | CMEEで共通の原資料、根拠、観測と応答の役割を継承する。問いの文と本人が答えた内容を別資料として扱い、訂正・撤回は本人の明示に結び付ける。文章の試作と通常経路で採用された実装を区別し、個別の定型作者へ戻さない。 [NLSv3資産の継承設計](../designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md) [Emlisの実ファイル地図](01_emlis_ai_current_structure.md) |
+| 10月〜11月 | 保存した分析は本人・元記録・成果物IDにひも付け、現在と月次を別に読めるようにする。適格な原入力・回答・補足・訂正を使い、採用された同じ分析をプランごとの本文と図に反映する。図の有無と結論の成立は別に判定する。「もしもルート」は本人の選択から先を考えるための機能。 [保存と本人閲覧](https://github.com/MassyuRed/mashos-api/commit/315f5b5d) [各プランの本文と図](https://github.com/MassyuRed/Cocolon/blob/0c1d76bb199e9c861711bb1e7428bc8279f3f8ed/Cocolon_前提資料/designs/cmee/Cocolon_Karen_Observation_and_Structural_Analysis.md#watashi-map-plan-graphs-20261125) |
+
+**わたしマップ。** 11/26の本番では既存の根拠照合が全候補を見送った後に、記録の抜粋が概要として保存され、現在・月次の参照と通知に流れた。新規保存と完了通知は、採用された分析がある場合に進める。既存の抜粋版は保存時の採否を使って閲覧から除外し、有効で閲覧できる分析を引き継ぐ。両方がなければ「分析に必要な情報が足りていません。」を表示する。 [発生・判断の記録](https://github.com/MassyuRed/Cocolon/blob/c9ca20fbadfa28a3f38bda43c85761b803940a97/Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261121.md#watashi-map-supported-analysis-and-empty-view-20261126)
+
+**EmlisAI。** 「Emlis」は話し手が自分を指す一人称。相手への呼びかけには本人の表示名と「さん」を使う。本文の根拠と語り方を既存の受け止め・問い・回答更新の構造につなぎ、保存済み応答を開いたときにも同じ呼称を使う。原文・訂正の対象・本人回答の保存と引用は既存の照合を使う。
+
 ## 2. 読む順
 
 作業開始時は次の順で読む。
