@@ -423,6 +423,18 @@ Mashの承認後、既存のRenderサービスとSupabase本番プロジェク�
 - 二つの修正は候補 `69a0a7a` にまとめた。GitHub Actionsの対象試験では、回答からマップの本文と図につなぐ検査、Pieceの作成・非公開保存・再読、時刻の修正を含む試験を実施した。対象の134件がすべて通過した。候補と対象試験版の差分はワークフローだけで、ソースと試験ファイルは一致。候補コミットの統合試験は実行中。 [候補](https://github.com/MassyuRed/mashos-api/commit/69a0a7a3c8f34bc9763585dd81d19dbefed6c88a) · [対象試験](https://github.com/MassyuRed/mashos-api/actions/runs/46129541095) · [候補の統合試験](https://github.com/MassyuRed/mashos-api/actions/runs/46129515111)
 - 実行環境の切断後は、コミットを指定できるRender CLIへの接続を失った。APIとワーカーが `4274f33` のまま稼働していることをRenderで再確認した。EmlisAIの修正版の実9B出力、同じ人の記録を積んだわたしマップの最終出力、もしもルートのGPU側切り替えは未実施。
 
+<a id="session-reconnect-cmee-20261128"></a>
+
+#### 11/28 JST・作業環境の再接続と候補の照合
+
+新しい作業環境でMashの認証を受け、Render CLIから対象のワークスペースと両サービスを確認した。API・ワーカーは共に `4274f33` がLive。APIのヘルスとSupabase Data APIはHTTP 200。照会時のASTORの待機・実行は0件だった。
+
+- `69a0a7a` の実コードと試験コードが対象CIの成功版と一致することを確認した。候補自身のソースでも、わたしマップの図とDeepInsight回答の保存・再読をPythonと隔離PostgreSQLで再検証し、130件が通過した。候補自身の統合CIと実9Bの本文・図の照合は継続対象。 [対象CI](https://github.com/MassyuRed/mashos-api/actions/runs/46129541095) · [統合CI](https://github.com/MassyuRed/mashos-api/actions/runs/46129515111)
+- Premium EmlisAIで同じ人の事前マップ・こころグラフを使う差分と、もしもルートの新分岐を扱うAPI・GPUの差分は、別の統合候補 `5f5a3fe` にある。Premiumの事前資料を取得する2関数は本番台帳・DBで未反映を確認。旧GPUの要求検査は新分岐の資料を受理しなかった。統合候補と `69a0a7a` は分岐し、DeepInsightのAPIとCI設定に競合がある。 [本番版からの差分](https://github.com/MassyuRed/mashos-api/compare/4274f33...69a0a7a) · [統合候補](https://github.com/MassyuRed/mashos-api/commit/5f5a3fef115ae4aaac01d1a634d6d6ce61527eea)
+- [既存の隔離ランナー](https://github.com/MassyuRed/Cocolon/commit/358fe97e69a70585a1cdcf429a20248b63f4679b)で三プランそれぞれの同じ所有者に2→6→7件を積む検証を再開できる。Premium応答の対象入力は、有効な事前マップの確定後の時刻が必要。既存ランナーの固定時刻では、その場で生成したマップが対象入力より後になり得る。テーマと記録由来の回答からマップへ、本人が選んだ記録由来の回答からPieceの非公開保存・再読へ、同じ人の適格マップからもしもルートの意向保存・再読へつなぐ実測が残る。
+
+この環境からRunpodのモデルヘルスは接続タイムアウト。実9Bの追加実行・本番配備・DB変更・アプリビルドは未実施。
+
 ## 5. 比較に使った原本
 
 - [第12回議事録](Cocolon_Weekly_Review_20261121.md)は作業ログが§11.118まである `7d2fc92` の版を使用。11/27の成果は、同議事録の短い版を持つ後続アプリブランチの実装・運用記録とActionsを照合した。
