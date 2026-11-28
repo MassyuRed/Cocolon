@@ -2,7 +2,7 @@
 
 ## 最新回 — 2026-11-28：第13回報告会・進行中（11/28〜12/5）
 
-[第13回議事録](Cocolon_Weekly_Review_20261128.md)に、[11/21〜11/28の日別の作業と成果](Cocolon_Weekly_Review_20261128.md#agenda-1-weekly-report-20261128)と、11/28〜12/5の優先案を記録しました。DeepInsightの初回本番化と固定250件の検証、4Bでの四機能の統合と本番保存、A5000・9Bへの移行、後半の三中核の修正、iOS各版の到達点を確認できます。[課題と残作業](Cocolon_Weekly_Review_20261128.md#agenda-3-open-work-20261128)に、反映済みの範囲と、EmlisAI・マップ・Pieceの生成内容、Android、退会消去、iOSのHTTPSリンクなど未完の実装を記載しました。12/6は両OSの提出可能候補を確認する既存の目標です。
+[第13回議事録](Cocolon_Weekly_Review_20261128.md)に、[11/21〜11/28の日別の作業と成果](Cocolon_Weekly_Review_20261128.md#agenda-1-weekly-report-20261128)を記録しました。[課題と残作業](Cocolon_Weekly_Review_20261128.md#agenda-3-open-work-20261128)には、稼働中の実9Bから得た出力と、EmlisAI、Piece、わたしマップ・もしもルート、DeepInsightをCMEEとしてつなぐ新規実装を記載しました。DeepInsightは通常出題と回答の活用が対象で、訂正機能は保留です。[11/28〜12/5の優先案](Cocolon_Weekly_Review_20261128.md#next-week-priorities-20261128)と[CMEEの絶対規則](../work_attitude_rules_for_karen/CURRENT_RULES.md#cmee-single-product-unit-20261128)も参照できます。
 
 ## 2026-11-21：第12回報告会・終了（11/21〜11/28）
 
