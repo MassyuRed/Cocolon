@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
+  AppState,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -27,6 +29,9 @@ const TITLE = "わたしを知る問い";
 const THEMES = ["人間関係", "自分の価値観", "仕事・学び", "日々の過ごし方", "これからのこと"];
 const LANE_LABELS = { records: "記録をふりかえる", theme: "テーマから考える" };
 const MAX_ANSWER_LENGTH = 2000;
+const SOURCE_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+const NIL_ID = "00000000-0000-0000-0000-000000000000";
+const validSourceId = (id) => typeof id === "string" && id !== NIL_ID && SOURCE_ID.test(id);
 const THEME_TIME_FORMAT = new Intl.DateTimeFormat("ja-JP", {
   month: "long", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Asia/Tokyo",
 });
@@ -76,11 +81,22 @@ function DeepInsightContent({ ownerId, accessKey, returnCache, expiresAt, notifi
     reload, refreshTheme, issueRecords, issueTheme, answer,
     notificationSaving, notificationError, setThemeNotification } = useDeepInsight(ownerId, notification, { accessKey, returnCache, expiresAt });
   const { isFeatureEnabled } = useAppRuntime();
-  const { subscriptionBootstrap } = useSubscription();
+  const { subscriptionBootstrap, tier } = useSubscription();
   const [theme, setTheme] = useState(null);
   const [drafts, setDrafts] = useState({});
   const inFlightAnswers = useRef(new Set());
   const scrolledNotification = useRef(null);
+  const mounted = useRef(false);
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; };
+  }, []);
+  const openingPiece = useRef(false);
+  useEffect(() => navigation.addListener("focus", () => { openingPiece.current = false; }), [navigation]);
+  const pieceSelection = useRef(null);
+  const canCreatePiece = data?.can_use_records === true && tier === "premium" &&
+    isFeatureEnabled("piece_v2_preview_enabled", false) === true;
+  pieceSelection.current = canCreatePiece ? { data, notifiedQuestion } : null;
 
   const updateDraft = (id, fields) => setDrafts((prev) => ({ ...prev, [id]: { ...prev[id], ...fields } }));
 
@@ -104,6 +120,28 @@ function DeepInsightContent({ ownerId, accessKey, returnCache, expiresAt, notifi
     <AnswerForm key={question.id} question={question} draft={drafts[question.id]} styles={styles} colors={colors}
       showTheme={showTheme} onChangeText={(text) => updateDraft(question.id, { text })} onSave={() => saveAnswer(question)} />
   );
+
+  const openPiece = ({ id, piece_source_input_id: inputId }) => {
+    const active = pieceSelection.current;
+    if (!mounted.current || openingPiece.current || navigation.isFocused?.() === false ||
+        AppState.currentState !== "active" || !active ||
+        ![active.data.records, ...(active.data.history || []), active.notifiedQuestion].some((row) =>
+          row?.id === id && row.lane === "records" && row.answered_at && row.piece_source_input_id === inputId)) return;
+    openingPiece.current = true;
+    try {
+      const bytes = new Uint8Array(16);
+      globalThis.crypto.getRandomValues(bytes);
+      const idempotencyKey = "piece-preview-" + Array.from(bytes, (value) => value.toString(16).padStart(2, "0")).join("");
+      navigation.getParent().navigate("Piece", {
+        screen: "PieceCreate", initial: false, params: { savedInput: {
+          savedInputId: inputId, expectedUserId: ownerId, idempotencyKey, deepInsightQuestionId: id,
+        } },
+      });
+    } catch {
+      openingPiece.current = false;
+      Alert.alert("ピースの作成", "作成画面を開けませんでした。もう一度お試しください。");
+    }
+  };
 
   if (loadError) {
     return (
@@ -250,6 +288,12 @@ function DeepInsightContent({ ownerId, accessKey, returnCache, expiresAt, notifi
             <>
               <Text style={styles.question}>{question.question_text}</Text>
               <Text style={styles.body} selectable>{question.answer_text}</Text>
+              {canCreatePiece && question.lane === "records" && question.answered_at &&
+                validSourceId(question.id) && validSourceId(question.piece_source_input_id) && (
+                  <CocolonButton variant="secondary" onPress={() => openPiece(question)}>
+                    この回答を含めてピースを作成
+                  </CocolonButton>
+              )}
             </>
           )}
         </View>

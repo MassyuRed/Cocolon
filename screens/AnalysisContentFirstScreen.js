@@ -153,6 +153,7 @@ function createLocalStyles(colors, ui) {
 }
 
 export default function AnalysisContentFirstScreen({
+  active = true,
   onOpenGuide,
   tutorialScrollRef,
   onTutorialScroll,
@@ -180,6 +181,10 @@ export default function AnalysisContentFirstScreen({
   const [graphPeriod, setGraphPeriod] = useState("today");
   const [graphRevision, setGraphRevision] = useState(0);
   const showGraph = activeAnalysisTab === "emotion";
+
+  useEffect(() => {
+    if (!active && !isTutorialMode) setActiveAnalysisTab("emotion");
+  }, [active, isTutorialMode]);
 
   useEffect(() => {
     if (!graphOpenRequest || isTutorialMode) return;
@@ -292,10 +297,10 @@ export default function AnalysisContentFirstScreen({
           period={graphPeriod}
           onPeriodChange={setGraphPeriod}
           sampleData={isTutorialMode ? (tutorialGraphData?.[graphPeriod] ?? null) : undefined}
-          active={showGraph}
+          active={active && showGraph}
         />
       </View>
-      {!showGraph ? (
+      {active && !showGraph ? (
         <>
           {isTutorialMode ? (
             <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>

@@ -24,6 +24,7 @@ import TutorialOverlay, {
 import CocolonButton from "../components/CocolonButton";
 import { useTutorial } from "../TutorialContext";
 import { useAuth } from "../AuthContext";
+import { useSubscription } from "../SubscriptionContext";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useAppRuntime } from "../AppRuntimeContext";
 import { useUnread } from "../UnreadContext";
@@ -93,11 +94,23 @@ function isFreshRead(read) {
   return read.settledAt != null && Date.now() - read.settledAt < NEXUS_FRESHNESS_MS;
 }
 
+function hasSettledList(previous, scope) {
+  return previous?.scope === scope && !previous.loading && !previous.error;
+}
+
+function keepAfterReadFailure(previous, scope, error) {
+  const status = Number(error?.status || error?.statusCode || 0);
+  return (status === 0 || status >= 500) && hasSettledList(previous, scope);
+}
+
 export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const { getFeatureUnread, setUnread } = useUnread();
   const { user, initializing: authInitializing, authOwnerGeneration } = useAuth();
+  const { tier, entitlementStatus } = useSubscription();
   const { isFeatureEnabled } = useAppRuntime();
+  const followerSharingEnabled = isFeatureEnabled("follower_sharing_enabled", false) === true;
+  const access = useMemo(() => ({}), [tier, entitlementStatus, followerSharingEnabled]);
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
@@ -185,19 +198,20 @@ export default function NexusScreen({ navigation }) {
   if (!pieceReadScopeRef.current || pieceReadScopeRef.current.owner !== ownerRequest ||
       pieceReadScopeRef.current.filter !== ownerFilterMode || pieceReadScopeRef.current.target !== ownerFilterUserId ||
       pieceReadScopeRef.current.order !== pieceOrder || pieceReadScopeRef.current.tutorial !== isTutorialMode ||
-      pieceReadScopeRef.current.revision !== revisions.piece) {
+      pieceReadScopeRef.current.access !== access || pieceReadScopeRef.current.revision !== revisions.piece) {
     pieceReadScopeRef.current = { owner: ownerRequest, filter: ownerFilterMode, target: ownerFilterUserId,
-      order: pieceOrder, tutorial: isTutorialMode, revision: revisions.piece };
+      order: pieceOrder, tutorial: isTutorialMode, access, revision: revisions.piece };
   }
   const pieceReadScope = pieceReadScopeRef.current;
   const historyReadScopeRef = useRef(null);
   if (!historyReadScopeRef.current || historyReadScopeRef.current.owner !== ownerRequest ||
       historyReadScopeRef.current.order !== historyOrder || historyReadScopeRef.current.tutorial !== isTutorialMode ||
-      historyReadScopeRef.current.revision !== revisions.history) {
-    historyReadScopeRef.current = { owner: ownerRequest, order: historyOrder, tutorial: isTutorialMode, revision: revisions.history };
+      historyReadScopeRef.current.access !== access || historyReadScopeRef.current.revision !== revisions.history) {
+    historyReadScopeRef.current = { owner: ownerRequest, order: historyOrder, tutorial: isTutorialMode,
+      access, revision: revisions.history };
   }
   const historyReadScope = historyReadScopeRef.current;
-  const emotionLogReadScope = useMemo(() => ({}), [ownerRequest, isTutorialMode, revisions.emotion_log]);
+  const emotionLogReadScope = useMemo(() => ({}), [ownerRequest, isTutorialMode, access, revisions.emotion_log]);
   const ownerOptionsScope = useMemo(() => ({}), [ownerRequest, isTutorialMode, revisions.owners]);
   const unreadRead = useMemo(() => ({}), [ownerRequest, isTutorialMode, revisions.owners]);
   const emotionLogScopeRef = useRef(emotionLogReadScope);
@@ -461,7 +475,8 @@ export default function NexusScreen({ navigation }) {
     resonanceActivity.feedRead = receipts;
     pieceReadScope.pending = true;
     pieceReadScope.settledAt = null;
-    setPieceState({ ...LOADING_PIECES, scope: pieceReadScope });
+    setPieceState(previous => hasSettledList(previous, pieceReadScope)
+      ? previous : { ...LOADING_PIECES, scope: pieceReadScope });
     try {
       const json = await getNexusPieces(params, ownerRequest.options);
       if (!isCurrentRead()) return;
@@ -474,7 +489,7 @@ export default function NexusScreen({ navigation }) {
     } catch (e) {
       if (!isCurrentRead()) return;
       console.warn("NexusScreen: loadPieces failed", e);
-      setPieceState({
+      setPieceState(previous => keepAfterReadFailure(previous, pieceReadScope, e) ? previous : {
         scope: pieceReadScope,
         loading: false,
         items: [],
@@ -501,7 +516,8 @@ export default function NexusScreen({ navigation }) {
 
     emotionLogReadScope.pending = true;
     emotionLogReadScope.settledAt = null;
-    setEmotionLogState({ ...LOADING_EMOTION_LOG, scope: emotionLogReadScope });
+    setEmotionLogState(previous => hasSettledList(previous, emotionLogReadScope)
+      ? previous : { ...LOADING_EMOTION_LOG, scope: emotionLogReadScope });
     try {
       const json = await getNexusEmotionLog(20, ownerRequest.options);
       if (!isCurrentRead()) return;
@@ -515,7 +531,7 @@ export default function NexusScreen({ navigation }) {
     } catch (e) {
       if (!isCurrentRead()) return;
       console.warn("NexusScreen: loadEmotionLog failed", e);
-      setEmotionLogState({
+      setEmotionLogState(previous => keepAfterReadFailure(previous, emotionLogReadScope, e) ? previous : {
         ...EMPTY_EMOTION_LOG,
         scope: emotionLogReadScope,
         loaded: true,
@@ -541,7 +557,8 @@ export default function NexusScreen({ navigation }) {
       }));
       historyReadScope.pending = true;
       historyReadScope.settledAt = null;
-      setHistoryState({ ...LOADING_HISTORY, scope: historyReadScope });
+      setHistoryState(previous => hasSettledList(previous, historyReadScope)
+        ? previous : { ...LOADING_HISTORY, scope: historyReadScope });
       try {
         const missedConfirmedWrite = (rows) => {
           const loadedIds = new Set(rows.map(resolvePieceQInstanceId));
@@ -567,7 +584,7 @@ export default function NexusScreen({ navigation }) {
       } catch (e) {
         if (!isCurrentRead()) return;
         console.warn("NexusScreen: loadHistory failed", e);
-        setHistoryState({
+        setHistoryState(previous => keepAfterReadFailure(previous, historyReadScope, e) ? previous : {
           scope: historyReadScope,
           loading: false,
           loadedModes: { [safeMode]: true },

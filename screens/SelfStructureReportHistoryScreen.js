@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -22,6 +22,7 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { useAuth } from '../AuthContext';
+import { getEmotionRecordRevision, subscribeEmotionRecordChanges } from '../lib/emotionRecordChanges';
 import {
   canExportWatashiMapPdf,
   canViewWatashiMapHistory,
@@ -228,32 +229,41 @@ export default function SelfStructureReportHistoryScreen({
   onOpenReport,
   onOpenLatest,
   onOpenSubscription,
+  historyReadSnapshot,
+  currentMapStatus,
 }) {
-  const [rows, setRows] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [hasMore, setHasMore] = useState(false);
-  const [nextOffset, setNextOffset] = useState(null);
-  const [errorMsg, setErrorMsg] = useState("");
-
   const { themeName, colors } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
   const viewerTier = normalizeWatashiMapTier(subscriptionTier);
-  const { session } = useAuth();
-  const scopeKey = `${session?.user?.id || ''}:${viewerTier}`;
+  const { session, authOwnerGeneration } = useAuth();
+  const owner = session?.user?.id || null;
+  const recordRevision = useSyncExternalStore(subscribeEmotionRecordChanges, () => getEmotionRecordRevision(owner));
+  const monthJst = new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 7);
+  const scopeKey = JSON.stringify([owner, authOwnerGeneration, viewerTier, reportType, monthJst, recordRevision,
+    currentMapStatus?.accessDenied === true, currentMapStatus?.tier, currentMapStatus?.versionKey]);
+  const historyAccessible = canViewWatashiMapHistory(viewerTier);
+  const previous = historyReadSnapshot?.current;
+  const cachedPage = !subscriptionLoading && historyAccessible && owner && !currentMapStatus?.accessDenied
+    && previous?.key === scopeKey ? previous : null;
+  const [rows, setRows] = useState(() => cachedPage?.rows || []);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(() => cachedPage?.hasMore || false);
+  const [nextOffset, setNextOffset] = useState(() => cachedPage?.nextOffset ?? null);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [loadedAccess, setLoadedAccess] = useState(() => cachedPage);
   const scopeRef = useRef(scopeKey);
   scopeRef.current = scopeKey;
   const requestRef = useRef(0);
   const openRequestRef = useRef(0);
-  const [loadedAccess, setLoadedAccess] = useState(null);
+  const confirmedPageRef = useRef(cachedPage);
   const loadedAccessRef = useRef(loadedAccess);
   loadedAccessRef.current = loadedAccess;
   const historyTier = loadedAccess?.key === scopeKey ? loadedAccess.tier : viewerTier;
-  const historyAccessible = canViewWatashiMapHistory(viewerTier);
   const historyRetentionLabel = useMemo(
     () => getWatashiMapHistoryRetentionLabel(historyTier),
     [historyTier]
@@ -269,7 +279,7 @@ export default function SelfStructureReportHistoryScreen({
     openRequestRef.current += 1;
     const active = () => scopeRef.current === scopeKey && requestRef.current === seq;
     setErrorMsg("");
-    if (!session?.user?.id) {
+    if (!owner) {
       setRows([]); setLoading(false); setErrorMsg('ログインしてから、もう一度開いてください。'); return;
     }
     if (!historyAccessible) {
@@ -283,11 +293,11 @@ export default function SelfStructureReportHistoryScreen({
     if (append) setLoadingMore(true);
     else setLoading(true);
     try {
-      if (!append) await apiPost('/self-structure/monthly/ensure', {}, { expectedUserId: session.user.id, timeoutMs: 60000 });
+      if (!append) await apiPost('/self-structure/monthly/ensure', {}, { expectedUserId: owner, timeoutMs: 60000 });
       if (!active()) return;
       const readPage = pageOffset => apiGet(
         buildSelfStructureReportHistoryPath({ reportType, limit: HISTORY_PAGE_LIMIT, offset: pageOffset }),
-        { expectedUserId: session.user.id, headers: { 'Cache-Control': 'no-store' } }
+        { expectedUserId: owner, headers: { 'Cache-Control': 'no-store' } }
       );
       let json = await readPage(offset);
       if (!active()) return;
@@ -312,30 +322,29 @@ export default function SelfStructureReportHistoryScreen({
         report_mode_label: r.source_profile === 'cumulative.v1' ? '' : formatWatashiMapReportModeLabel(r?.report_mode),
         isRead: readSet.has(r.id),
       }));
-      setRows((prev) => {
-        if (!appendPage) return mapped;
-        const rowKey = r => `${r.snapshot_month || ''}:${r.id}`;
-        const existing = new Set((prev || []).map(rowKey));
-        const merged = [...(prev || [])];
-        for (const row of mapped) {
-          const id = rowKey(row);
-          if (!id || existing.has(id)) continue;
-          existing.add(id);
-          merged.push(row);
-        }
-        return merged;
-      });
-      setLoadedAccess({ key: scopeKey, tier: resultTier });
-      setHasMore(Boolean(json?.has_more));
-      setNextOffset(
-        typeof json?.next_offset === "number"
-          ? json.next_offset
-          : json?.next_offset != null
-            ? Number(json.next_offset)
-            : null
-      );
+      const priorRows = appendPage && confirmedPageRef.current?.key === scopeKey ? confirmedPageRef.current.rows : [];
+      const rowKey = r => `${r.snapshot_month || ''}:${r.id}`;
+      const rowsByKey = new Map(priorRows.map(r => [rowKey(r), r]));
+      for (const row of mapped) {
+        if (!rowsByKey.has(rowKey(row))) rowsByKey.set(rowKey(row), row);
+      }
+      const page = { key: scopeKey, tier: resultTier, rows: [...rowsByKey.values()],
+        hasMore: Boolean(json?.has_more), nextOffset: json?.next_offset == null ? null : Number(json.next_offset) };
+      confirmedPageRef.current = page;
+      if (historyReadSnapshot && resultTier === viewerTier && json?.subscription_tier === resultTier
+          && typeof json?.has_more === 'boolean' && Array.isArray(json?.items)
+          && page.rows.every(r => r.source_profile === 'cumulative.v1' && r.id && r.snapshot_month)) {
+        historyReadSnapshot.current = page;
+      } else if (historyReadSnapshot?.current?.key === scopeKey) {
+        historyReadSnapshot.current = null;
+      }
+      setRows(page.rows);
+      setLoadedAccess(page);
+      setHasMore(page.hasMore);
+      setNextOffset(page.nextOffset);
     } catch (e) {
       if (!active()) return;
+      if (historyReadSnapshot?.current?.key === scopeKey) historyReadSnapshot.current = null;
       if (!append) setRows([]);
       setHasMore(false);
       setNextOffset(null);
@@ -346,17 +355,30 @@ export default function SelfStructureReportHistoryScreen({
         else setLoading(false);
       }
     }
-  }, [historyAccessible, reportType, scopeKey, session?.user?.id, viewerTier]);
+  }, [historyAccessible, reportType, scopeKey, owner, viewerTier, historyReadSnapshot]);
 
   useEffect(() => {
+    if (subscriptionLoading) return;
+    const cleanup = () => { requestRef.current += 1; openRequestRef.current += 1; };
+    const saved = historyReadSnapshot?.current;
+    if (historyAccessible && owner && !currentMapStatus?.accessDenied && saved?.key === scopeKey) {
+      confirmedPageRef.current = saved;
+      setRows(saved.rows);
+      setLoadedAccess(saved);
+      setHasMore(saved.hasMore);
+      setNextOffset(saved.nextOffset);
+      setErrorMsg('');
+      setLoading(false);
+      return cleanup;
+    }
+    confirmedPageRef.current = null;
     setRows([]);
     setLoadedAccess(null);
     setHasMore(false);
     setNextOffset(null);
-    if (subscriptionLoading) return;
     load({ append: false, offset: 0 });
-    return () => { requestRef.current += 1; openRequestRef.current += 1; };
-  }, [load, subscriptionLoading]);
+    return cleanup;
+  }, [load, subscriptionLoading, historyReadSnapshot, historyAccessible, owner, currentMapStatus?.accessDenied, scopeKey]);
 
   const onRefresh = useCallback(async () => {
     if (!historyAccessible) return;

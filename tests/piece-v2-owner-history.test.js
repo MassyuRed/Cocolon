@@ -1201,6 +1201,9 @@ function nexusEntryHarness(options = {}) {
         StyleSheet: { create: x => x }, useWindowDimensions: () => ({ height: 800 }) };
       if (name.endsWith('/AuthContext')) return { useAuth: () => ({ user: control.owner ? { id: control.owner } : null,
         initializing: control.initializing }) };
+      if (name.endsWith('/SubscriptionContext')) return { useSubscription: () => ({
+        tier: 'free', entitlementStatus: 'active',
+      }) };
       if (name.endsWith('/AppRuntimeContext')) return { useAppRuntime: () => runtime };
       if (name.endsWith('/UnreadContext')) return { useUnread: () => ({ getFeatureUnread: noop, setUnread: noop }) };
       if (name.endsWith('/TutorialContext')) return { useTutorial: () => ({ isTutorialMode: control.tutorial,

@@ -32,6 +32,7 @@ import {
 } from "../lib/noticeApi";
 
 const HISTORY_PAGE_LIMIT = 50;
+const EMPTY_HISTORY = { items: [], hasMore: false, nextOffset: null, unreadCount: 0 };
 const INPUT_STACK_ROUTES = new Set(["Input", "InputHistory", "DeepInsight", "TutorialIntro"]);
 
 function formatNoticeDateLabel(value) {
@@ -67,7 +68,7 @@ function formatNoticeDateTimeLabel(value) {
 }
 
 export default function NoticeHistoryScreen({ navigation, route, fromSettings = false }) {
-  const { user, authOwnerGeneration } = useAuth();
+  const { user, authOwnerGeneration, screenReadCache } = useAuth();
   const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -75,31 +76,34 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
   const isDark = themeName === "dark";
   const isIOS = Platform.OS === "ios";
 
-  const [loading, setLoading] = useState(true);
+  const returnCache = fromSettings ? screenReadCache : null;
+  const [loadedHistory, setLoadedHistory] = useState(null);
+  const snapshotRef = useRef(null);
+  const wasRead = useMemo(() => new Map(), [ownerRequest.owner, ownerRequest.generation]);
+  const matchesOwner = value => !!ownerRequest.owner && value?.owner === ownerRequest.owner &&
+    value.generation === ownerRequest.generation;
+  const retained = matchesOwner(loadedHistory) ? loadedHistory
+    : matchesOwner(returnCache?.noticeHistory) ? returnCache.noticeHistory : null;
+  const { items, hasMore, nextOffset, unreadCount } = retained ?? EMPTY_HISTORY;
+  snapshotRef.current = retained;
+  const [loading, setLoading] = useState(!retained);
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadError, setLoadError] = useState(null);
-  const [fetchedItems, setItems] = useState([]);
-  const [hasMore, setHasMore] = useState(false);
-  const [nextOffset, setNextOffset] = useState(null);
   const [expandedId, setExpandedId] = useState(null);
-  const [unreadCount, setUnreadCount] = useState(0);
   const handledOpenKeyRef = useRef("");
   const historyRequestRef = useRef(null);
-  const loadedHistoryOwnerRef = useRef(null);
   const loadSequenceRef = useRef(0);
-  const hasCurrentHistory = loadedHistoryOwnerRef.current?.owner === ownerRequest.owner &&
-    loadedHistoryOwnerRef.current?.generation === ownerRequest.generation;
-  const items = hasCurrentHistory ? fetchedItems : [];
+  const readInProgress = useRef(null);
+  const hasCurrentHistory = !!retained;
 
   const requestedOpenId = String(route?.params?.open_notice_id || "").trim();
   const requestedOpenAt = String(route?.params?.open_notice_at || "").trim();
   const requestedOpenKey = requestedOpenId ? `${requestedOpenId}:${requestedOpenAt}` : "";
 
-  const mergeRows = useCallback((prevRows, nextRows, append) => {
-    if (!append) return nextRows;
-    const seen = new Set((prevRows || []).map((item) => String(item?.notice_id || "")));
-    const merged = [...(prevRows || [])];
-    for (const row of nextRows || []) {
+  const mergeRows = useCallback((prevRows, nextRows) => {
+    const seen = new Set(prevRows.map((item) => String(item?.notice_id || "")));
+    const merged = [...prevRows];
+    for (const row of nextRows) {
       const id = String(row?.notice_id || "");
       if (!id || seen.has(id)) continue;
       seen.add(id);
@@ -108,44 +112,66 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
     return merged;
   }, []);
 
-  const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+  const saveSnapshot = useCallback(snapshot => {
+    const next = { ...snapshot, owner: ownerRequest.owner, generation: ownerRequest.generation };
+    snapshotRef.current = next;
+    if (returnCache) returnCache.noticeHistory = next;
+    setLoadedHistory(next);
+  }, [ownerRequest.owner, ownerRequest.generation, returnCache]);
+
+  const load = useCallback(async ({ append = false, offset = 0, quiet = false } = {}) => {
     if (!isOwnerCurrent(ownerRequest)) return;
     const sequence = ++loadSequenceRef.current;
+    readInProgress.current = sequence;
     const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === loadSequenceRef.current;
     setLoadError(null);
     if (append) setLoadingMore(true);
     else {
       setLoadingMore(false);
-      setLoading(true);
+      setLoading(!quiet);
     }
     try {
-      const json = await getNoticesHistory({
-        limit: HISTORY_PAGE_LIMIT,
-        offset,
-      }, ownerRequest.options);
-      if (!isFresh()) return;
-      const rows = Array.isArray(json?.items) ? json.items : [];
-      loadedHistoryOwnerRef.current = ownerRequest;
-      setItems((prev) => mergeRows(prev, rows, append));
-      setHasMore(Boolean(json?.has_more));
-      setNextOffset(
-        typeof json?.next_offset === "number"
-          ? json.next_offset
-          : json?.next_offset != null
-            ? Number(json.next_offset)
-            : null,
-      );
-      setUnreadCount(Math.max(0, Number(json?.unread_count) || 0));
+      const keepThrough = !append && quiet ? snapshotRef.current?.items.length || 0 : 0;
+      let items = append ? snapshotRef.current?.items || [] : [];
+      let pageOffset = offset;
+      let hasMore, nextOffset, unreadCount;
+      do {
+        const json = await getNoticesHistory({ limit: HISTORY_PAGE_LIMIT, offset: pageOffset }, ownerRequest.options);
+        if (!isFresh()) return;
+        if (json?.feature_enabled === false) {
+          saveSnapshot(EMPTY_HISTORY);
+          return;
+        }
+        const rows = Array.isArray(json?.items) ? json.items : [];
+        items = mergeRows(items, rows);
+        nextOffset = Number(json?.next_offset) || null;
+        hasMore = !!json?.has_more && nextOffset > pageOffset;
+        unreadCount = Math.max(0, Number(json?.unread_count) || 0);
+        pageOffset = nextOffset;
+      } while (hasMore && pageOffset < keepThrough);
+      // A response already in flight can predate a confirmed read receipt.
+      const refreshed = items.map(item => {
+        const readAt = wasRead.get(String(item.notice_id));
+        if (!readAt || item.is_read) return item;
+        unreadCount -= 1;
+        return { ...item, is_read: true, read_at: item.read_at || readAt };
+      });
+      saveSnapshot({ items: refreshed, hasMore, nextOffset, unreadCount: Math.max(0, unreadCount) });
     } catch (e) {
       if (!isFresh()) return;
       console.warn("NoticeHistoryScreen: load failed", e);
+      if (e?.status >= 400 && e.status < 500) {
+        saveSnapshot(EMPTY_HISTORY);
+        if (returnCache) returnCache.noticeHistory = null;
+      }
       setLoadError(append ? "more" : "initial");
     } finally {
+      if (readInProgress.current === sequence) readInProgress.current = null;
       if (!isFresh()) return;
       if (append) setLoadingMore(false);
       else setLoading(false);
     }
-  }, [mergeRows, ownerRequest, isOwnerCurrent]);
+  }, [mergeRows, ownerRequest, isOwnerCurrent, returnCache, saveSnapshot, wasRead]);
 
   useEffect(() => {
     const previous = historyRequestRef.current;
@@ -153,33 +179,13 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
     historyRequestRef.current = { scope: ownerRequest, openKey: requestedOpenKey };
     if (newScope && (previous?.scope.owner !== ownerRequest.owner ||
         previous?.scope.generation !== ownerRequest.generation)) {
-      setItems([]);
-      setHasMore(false);
-      setNextOffset(null);
       setExpandedId(null);
-      setUnreadCount(0);
       handledOpenKeyRef.current = "";
     }
     const missingRequestedNotice = requestedOpenKey && previous?.openKey !== requestedOpenKey &&
       !items.some(item => String(item?.notice_id || "") === requestedOpenId);
-    if (newScope || missingRequestedNotice) void load();
-  }, [items, load, ownerRequest, requestedOpenId, requestedOpenKey]);
-
-  const markReadLocally = useCallback((noticeIds, readAt) => {
-    const ids = new Set((noticeIds || []).map((value) => String(value || "")).filter(Boolean));
-    if (ids.size === 0) return;
-    setItems((prev) =>
-      (prev || []).map((item) => {
-        const noticeId = String(item?.notice_id || "");
-        if (!ids.has(noticeId) || item?.is_read) return item;
-        return {
-          ...item,
-          is_read: true,
-          read_at: item?.read_at || readAt,
-        };
-      }),
-    );
-  }, []);
+    if (newScope || missingRequestedNotice) void load({ quiet: hasCurrentHistory && !missingRequestedNotice });
+  }, [hasCurrentHistory, items, load, ownerRequest, requestedOpenId, requestedOpenKey]);
 
   const markReadForIds = useCallback(async (noticeIds) => {
     if (!isOwnerCurrent(ownerRequest)) return;
@@ -199,16 +205,17 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
     try {
       const res = await markNoticesRead({ notice_ids: targetUnreadIds }, ownerRequest.options);
       if (!isOwnerCurrent(ownerRequest)) return;
-      markReadLocally(targetUnreadIds, readAt);
-      setUnreadCount(fallbackUnreadCount);
-      if (typeof res?.unread_count === "number") {
-        setUnreadCount(Math.max(0, Number(res.unread_count) || 0));
-      }
+      targetUnreadIds.forEach(id => wasRead.set(id, readAt));
+      const latest = snapshotRef.current;
+      if (!latest) return;
+      saveSnapshot({ ...latest, items: latest.items.map(item => targetUnreadIds.includes(String(item.notice_id)) && !item.is_read
+        ? { ...item, is_read: true, read_at: item.read_at || readAt } : item),
+        unreadCount: typeof res?.unread_count === "number" ? Math.max(0, res.unread_count) : fallbackUnreadCount });
     } catch (e) {
       if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("NoticeHistoryScreen: mark read failed", e);
     }
-  }, [items, markReadLocally, unreadCount, ownerRequest, isOwnerCurrent]);
+  }, [items, unreadCount, ownerRequest, isOwnerCurrent, saveSnapshot, wasRead]);
 
   useEffect(() => {
     if (!requestedOpenId || !requestedOpenKey) return;
@@ -279,7 +286,7 @@ export default function NoticeHistoryScreen({ navigation, route, fromSettings = 
   }, [markReadForIds, openInternalRoute, ownerRequest, isOwnerCurrent]);
 
   const loadMore = useCallback(async () => {
-    if (loading || loadingMore || !hasMore || nextOffset == null) return;
+    if (loading || loadingMore || readInProgress.current != null || !hasMore || nextOffset == null) return;
     await load({ append: true, offset: nextOffset });
   }, [hasMore, load, loading, loadingMore, nextOffset]);
 

@@ -37,12 +37,12 @@ function paletteHeaders() {
 // Only advertise the compiled bridge's explicit brand/renderer capability.
 // No import from layout/renderer: those modules depend on this transport.
 function rendererHeaders() {
-  if (Platform?.OS === 'android' &&
-      NativeModules?.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.android.v1') {
+  if (typeof Platform === 'undefined' || typeof NativeModules === 'undefined') return {};
+  const version = NativeModules?.PieceTextMetrics?.bitmapRendererVersion;
+  if (Platform?.OS === 'android' && version === 'piece.rn_bitmap_renderer.android.v1') {
     return { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.android.v1', ...paletteHeaders() };
   }
-  return typeof Platform !== 'undefined' && Platform.OS === 'ios' &&
-    typeof NativeModules !== 'undefined' && NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2'
+  return Platform?.OS === 'ios' && version === 'piece.rn_bitmap_renderer.ios.v2'
     ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', ...paletteHeaders() } : {};
 }
 
@@ -54,6 +54,8 @@ const SOURCE_FIELDS = [
   'emlis_observation_stage', 'emlis_observation_result_identity',
   'question_need_decision_identity', 'supplemental_answer_identity',
 ];
+const DEEP_INSIGHT_SOURCE_KIND = 'deep_insight_record_answer';
+const DEEP_INSIGHT_SOURCE_FIELDS = ['source_kind', 'source_input_id', 'deep_insight_question_id', 'source_commitment'];
 const PREVIEW_FIELDS = [
   'api_contract_version', 'piece_contract_version', 'preview_id',
   'preview_revision', 'row_version', 'expires_at', 'visibility_scope',
@@ -121,7 +123,7 @@ const reject = code => { throw new PieceApiError(code); };
 
 function requestBody(value) {
   if (!exact(value, ['source_ref', 'requested_format', 'visual_selection']) ||
-      !exact(value.source_ref, SOURCE_FIELDS) ||
+      !(exact(value.source_ref, SOURCE_FIELDS) || exact(value.source_ref, DEEP_INSIGHT_SOURCE_FIELDS)) ||
       !visualSelectionShape(value.visual_selection)) {
     reject('PIECE_REQUEST_INVALID');
   }
@@ -130,11 +132,29 @@ function requestBody(value) {
   try { snapshot = JSON.parse(JSON.stringify(value)); }
   catch { reject('PIECE_REQUEST_INVALID'); }
   if (!exact(snapshot, ['source_ref', 'requested_format', 'visual_selection']) ||
-      !exact(snapshot.source_ref, SOURCE_FIELDS) ||
       !visualSelectionShape(snapshot.visual_selection)) {
     reject('PIECE_REQUEST_INVALID');
   }
   const source = snapshot.source_ref;
+  if (exact(source, DEEP_INSIGHT_SOURCE_FIELDS)) {
+    if (source.source_kind !== DEEP_INSIGHT_SOURCE_KIND || !pieceUuid(source.source_input_id) ||
+        !pieceUuid(source.deep_insight_question_id) || typeof source.source_commitment !== 'string' ||
+        !/^sha256:[0-9a-f]{64}$/.test(source.source_commitment)) reject('PIECE_REQUEST_INVALID');
+  } else {
+    validateEmlisSourceRef(source);
+  }
+  if (snapshot.requested_format !== null && !FORMATS.includes(snapshot.requested_format)) {
+    reject('PIECE_FORMAT_NOT_ELIGIBLE');
+  }
+  if (!Object.values(snapshot.visual_selection).every(value => value === null || text(value)) ||
+      !validStyleSelection(snapshot.visual_selection)) {
+    reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
+  }
+  return JSON.stringify(snapshot);
+}
+
+function validateEmlisSourceRef(source) {
+  if (!exact(source, SOURCE_FIELDS)) reject('PIECE_REQUEST_INVALID');
   if (!SOURCE_FIELDS.slice(0, 5).every(key => text(source[key])) ||
       !/^sha256:[0-9a-f]{64}$/.test(source.source_input_bundle_commitment) ||
       !['question_need_decision_identity', 'supplemental_answer_identity']
@@ -152,14 +172,6 @@ function requestBody(value) {
     pieceUuid(source.emlis_observation_result_identity);
   if (source.source_input_version !== 'emlis.current_input_bundle.v1' ||
       !(originalSource || refinedSource || correctedSource)) reject('PIECE_SOURCE_NOT_ELIGIBLE');
-  if (snapshot.requested_format !== null && !FORMATS.includes(snapshot.requested_format)) {
-    reject('PIECE_FORMAT_NOT_ELIGIBLE');
-  }
-  if (!Object.values(snapshot.visual_selection).every(value => value === null || text(value)) ||
-      !validStyleSelection(snapshot.visual_selection)) {
-    reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
-  }
-  return JSON.stringify(snapshot);
 }
 
 function freeze(value) {
@@ -353,16 +365,19 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
     const sourceRead = savedInputId !== null;
     const selectedObservation = Object.prototype.hasOwnProperty.call(options, 'expectedObservationIdentity');
     const selectedStage = Object.prototype.hasOwnProperty.call(options, 'expectedStage');
+    const selectsDeepInsight = Object.prototype.hasOwnProperty.call(options, 'deepInsightQuestionId');
+    const selectsAnswer = Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity');
+    const { deepInsightQuestionId } = options;
     const expectedObservationIdentity = options.expectedObservationIdentity;
     const expectedStage = options.expectedStage;
     // Bind the displayed corrected observation inside RN, before Auth/HTTP.
     // These expectations never become GET query or request body fields.
     if ((selectedObservation || selectedStage) && (!sourceRead || !selectedObservation || !selectedStage ||
         !pieceUuid(expectedObservationIdentity) || expectedStage !== 'corrected_observation')) reject('PIECE_REQUEST_INVALID');
-    const selectedAnswer = sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity')
-      ? options.supplementalAnswerIdentity : null;
-    if (sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity') &&
-        !pieceUuid(selectedAnswer)) reject('PIECE_REQUEST_INVALID');
+    const selectedAnswer = sourceRead && selectsAnswer ? options.supplementalAnswerIdentity : null;
+    if (sourceRead && selectsAnswer && !pieceUuid(selectedAnswer)) reject('PIECE_REQUEST_INVALID');
+    if (selectsDeepInsight && (!sourceRead || selectsAnswer || selectedStage || selectedObservation ||
+        !pieceUuid(deepInsightQuestionId))) reject('PIECE_REQUEST_INVALID');
     if (sourceRead && (typeof savedInputId !== 'string' ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
         savedInputId === '00000000-0000-0000-0000-000000000000')) reject('PIECE_REQUEST_INVALID');
@@ -378,8 +393,9 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
         !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey))) reject('PIECE_REQUEST_INVALID');
     await requireSession(expectedUserId);
     checkAbort(signal);
-    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` +
-      (selectedAnswer === null ? '' : `?supplemental_answer_identity=${encodeURIComponent(selectedAnswer)}`) :
+    const query = selectsDeepInsight ? `?deep_insight_question_id=${encodeURIComponent(deepInsightQuestionId)}` :
+      selectedAnswer === null ? '' : `?supplemental_answer_identity=${encodeURIComponent(selectedAnswer)}`;
+    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` + query :
       mutation ? `${PATH}/${mutation.preview_id}` : PATH;
     const response = await apiFetch(endpoint, {
       method: sourceRead ? 'GET' : mutation ? 'PATCH' : 'POST', auth: true, expectedUserId,
@@ -402,19 +418,23 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
         STATUS[result.code] === response.status ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
     }
     if (sourceRead) {
-      // This endpoint returns the existing seven fields, not a new
-      // eligibility/flag decision. Reuse the preview request's closed reader.
+      // Reuse the closed preview reader and require the exact requested source.
       let request;
       try { request = JSON.parse(requestBody({ source_ref: result, requested_format: null,
         visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } })); }
       catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
       const ref = request.source_ref;
-      if (ref.source_input_id !== savedInputId || (selectedObservation
+      if (ref.source_input_id !== savedInputId || selectsDeepInsight !== (ref.source_kind === DEEP_INSIGHT_SOURCE_KIND)) {
+        reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      }
+      if (selectsDeepInsight) {
+        if (ref.deep_insight_question_id !== deepInsightQuestionId) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      } else if (selectedObservation
         ? ref.emlis_observation_stage !== expectedStage || ref.emlis_observation_result_identity !== expectedObservationIdentity ||
           ref.supplemental_answer_identity !== selectedAnswer
         : selectedAnswer === null
           ? ref.supplemental_answer_identity !== null || !['normal_observation', 'pre_question_observation'].includes(ref.emlis_observation_stage)
-          : ref.emlis_observation_stage !== 'refined_observation' || ref.supplemental_answer_identity !== selectedAnswer)) {
+          : ref.emlis_observation_stage !== 'refined_observation' || ref.supplemental_answer_identity !== selectedAnswer) {
         reject('PIECE_TEMPORARILY_UNAVAILABLE');
       }
       return freeze(ref);

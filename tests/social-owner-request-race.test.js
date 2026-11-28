@@ -48,7 +48,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   const auth = { getSession: async () => { if (control.authGate) await control.authGate.promise; return { data: { session: session() } }; },
     getUser: async () => ({ data: { user: session()?.user }, error: null }) };
   const notice = { notice_id: 'notice', title: 'お知らせ', body: '確認本文', is_read: false, actions: [] };
-  const packet = (body, ok = true) => ({ ok, status: ok ? 200 : 503, text: async () => JSON.stringify(body), json: async () => body });
+  const packet = (body, ok = true, status = ok ? 200 : 503) => ({ ok, status, text: async () => JSON.stringify(body), json: async () => body });
   function defaultBody(url, options) {
     const sharingPath = new URL(url).pathname;
     if (sharingPath === '/follow/followers/content-visibility') return { items: control.followerSettings || [] };
@@ -88,6 +88,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       Object.assign(call, deferred());
       return call.promise.then(body => packet(body));
     }
+    const readStatus = options.method === 'GET' ? control.readStatus?.(call) : undefined;
+    if (readStatus) return packet(defaultBody(url, options), readStatus < 400, readStatus);
     return packet(defaultBody(url, options), options.method === 'GET' ? !control.failRead?.(call) : !control.failWrite);
   };
   const timer = (callback, ms) => { const entry = { callback, ms, active: true }; timers.push(entry); return entry; };
@@ -130,6 +132,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       }), BottomTabBar: 'BottomTabBar' };
       const target = name.startsWith('.') ? path.relative(ROOT, path.resolve(path.dirname(filename), name)) + '.js' : name;
       if (target === 'AuthContext.js') return { useAuth: () => ({ user: session()?.user, session: session(), initializing: false,
+        screenReadCache: control.screenReadCache,
         recoveryMode: false, authOwnerGeneration: control.generation }) };
       if (target === 'UnreadContext.js') return { useUnread: () => unread };
       if (target === 'SubscriptionContext.js') return { useSubscription: () => ({ isPaid: false, loading: false,
@@ -137,7 +140,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (target === 'TutorialContext.js') return { useTutorial: () => ({ isTutorialMode: false, tutorialStep: 0, tutorialPieces,
         tutorialFlagsLoaded: true, tutorialCompleted: true, ensureTutorialPiecesSeed: noop, setTutorialStep: noop }) };
       if (target === 'AppRuntimeContext.js') return { useAppRuntime: () => ({
-        isFeatureEnabled: name => name === 'follower_sharing_enabled' && !!control.followerSharingEnabled,
+        isFeatureEnabled: name => (name === 'follower_sharing_enabled' && !!control.followerSharingEnabled) ||
+          (name === 'piece_v2_preview_enabled' && !!control.piecePreviewEnabled),
       }) };
       if (target === 'tutorial/tutorialScenarioData.js') return { TUTORIAL_TOTAL_STEPS: 16, TUTORIAL_PIECES: [] };
       if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors: options.colors ?? {}, themeName: options.themeName ?? 'light' }) };
@@ -740,6 +744,50 @@ test('Nexus reads again on entry after the settled list reaches the freshness li
   assert.deepEqual(nexusRowIds(h, 'piece'), []);
 });
 
+for (const [tab, { path, section, state, fixture }] of Object.entries(nexusLists)) {
+  test(`Nexus ${tab} shows settled rows while a same-scope refocus read is pending`, async t => {
+    t.mock.timers.enable({ apis: ['Date'], now: new Date('2026-11-07T00:00:00Z') });
+    const h = await harness(t, 'screens/NexusScreen.js', undefined, { [fixture]: [nexusItem('original')] });
+    await selectNexusTab(h, tab);
+    h.control.holdRead = call => call.path === path;
+    t.mock.timers.tick(120000);
+    await h.navigationEvent('blur');
+    await h.navigationEvent('focus');
+
+    const pending = h.calls.findLast(call => call.path === path);
+    assert.equal(typeof pending.resolve, 'function');
+    assert.equal(h.find(section).props[state].loading, false);
+    assert.deepEqual(nexusRowIds(h, tab), ['original']);
+
+    await h.resolve(pending, { items: [nexusItem('updated')] });
+    assert.deepEqual(nexusRowIds(h, tab), ['updated']);
+  });
+}
+
+test('Nexus keeps the settled list on a transient failure, and clears it on access denial', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, { pieceFeedItems: [nexusItem('original')] });
+  const refresh = async status => {
+    h.control.readStatus = call => call.path === '/nexus/pieces' ? status : undefined;
+    await act(async () => { await h.find('ScrollView').props.refreshControl.props.onRefresh(); await tick(); });
+  };
+  await refresh(503);
+  assert.deepEqual(nexusRowIds(h, 'piece'), ['original']);
+  await refresh(403);
+  assert.deepEqual(nexusRowIds(h, 'piece'), []);
+});
+
+test('Nexus discards visible rows immediately when the entitlement changes', async t => {
+  const h = await harness(t, 'screens/NexusScreen.js', undefined, { tier: 'premium', pieceFeedItems: [nexusItem('prior-tier')] });
+  h.control.holdRead = call => call.path === '/nexus/pieces';
+  h.control.tier = 'free';
+  await h.update();
+  assert.deepEqual(nexusRowIds(h, 'piece'), []);
+  const changed = h.calls.findLast(call => call.path === '/nexus/pieces');
+  assert.equal(typeof changed.resolve, 'function');
+  await h.resolve(changed, { items: [nexusItem('new-tier')] });
+  assert.deepEqual(nexusRowIds(h, 'piece'), ['new-tier']);
+});
+
 test('Nexus reopens only the list changed by a confirmed same-owner update on another screen', async t => {
   const h = await harness(t, 'screens/NexusScreen.js');
   await selectNexusTab(h, 'history');
@@ -926,6 +974,69 @@ test('notices reached from Settings return there and can still link into the Hom
   await act(async () => h.root.root.findByProps({ accessibilityLabel: 'リンクを開く' }).props.onPress());
   assert.deepEqual(parentRoutes, [['Input', { screen: 'InputHistory', params: {}, initial: false }]]);
   assert.deepEqual(h.routes, []);
+});
+
+test('Settings notice history reopens with its loaded pages and refreshes without a blank list', async t => {
+  const notice = id => ({ notice_id: id, title: id, is_read: true });
+  const h = await harness(t, 'screens/NoticeHistoryScreen.js', undefined, {
+    screenProps: { fromSettings: true }, screenReadCache: {},
+    noticesHistory: url => url.searchParams.get('offset') === '1'
+      ? { items: [notice('older')], has_more: false }
+      : { items: [notice('latest')], has_more: true, next_offset: 1 },
+  });
+  const readIds = () => h.find('List').props.data.map(row => row.notice_id);
+  await act(async () => { await h.root.root.findByProps({ accessibilityLabel: 'さらにお知らせを読み込む' }).props.onPress(); });
+  h.control.holdRead = call => call.path === '/notices/history' && new URL(call.url).searchParams.get('offset') === '0';
+  await h.reopen();
+  assert.deepEqual(readIds(), ['latest', 'older']);
+  assert.equal(h.find('List').props.refreshing, false);
+  const first = h.calls.findLast(call => call.path === '/notices/history');
+  await h.resolve(first, { items: [notice('updated')], has_more: true, next_offset: 1 });
+  assert.deepEqual(readIds(), ['updated', 'older']);
+
+  await h.reopen();
+  const oldOwner = h.calls.findLast(call => call.path === '/notices/history');
+  await h.switchTo('B');
+  assert.deepEqual(readIds(), []);
+  await h.resolve(oldOwner, { items: [notice('private-to-A')] });
+  assert.deepEqual(readIds(), []);
+  await h.resolve(h.calls.findLast(call => call.path === '/notices/history'), { items: [notice('B-only')] });
+  assert.deepEqual(readIds(), ['B-only']);
+});
+
+test('a fresh Settings notice response removes the cached list when notices are disabled', async t => {
+  const h = await harness(t, 'screens/NoticeHistoryScreen.js', undefined, {
+    screenProps: { fromSettings: true }, screenReadCache: {},
+  });
+  assert.equal(h.find('List').props.data.length, 1);
+  h.control.holdRead = call => call.path === '/notices/history';
+  await h.reopen();
+  assert.equal(h.find('List').props.data.length, 1);
+  await h.resolve(h.calls.findLast(call => call.path === '/notices/history'), { feature_enabled: false, items: [] });
+  assert.equal(h.find('List').props.data.length, 0);
+});
+
+test('a stale Settings notice refresh cannot undo a read receipt and a forbidden refresh clears the cache', async t => {
+  const cache = {};
+  const h = await harness(t, 'screens/NoticeHistoryScreen.js', undefined, {
+    screenProps: { fromSettings: true }, screenReadCache: cache,
+  });
+  const received = h.find('List').props.data[0];
+  h.control.holdRead = call => call.path === '/notices/history';
+  await h.reopen();
+  const stale = h.calls.findLast(call => call.path === '/notices/history');
+  await act(async () => h.root.root.findByProps({ accessibilityLabel: 'お知らせ詳細を開く' }).props.onPress());
+  await h.flush();
+  assert.equal(h.find('List').props.data[0].is_read, true);
+  await h.resolve(stale, { items: [received], unread_count: 1 });
+  assert.equal(h.find('List').props.data[0].is_read, true);
+  assert.equal(cache.noticeHistory.unreadCount, 0);
+
+  h.control.holdRead = null;
+  h.control.readStatus = call => call.path === '/notices/history' ? 403 : undefined;
+  await h.reopen();
+  assert.deepEqual(h.find('List').props.data, []);
+  assert.equal(cache.noticeHistory, null);
 });
 
 test('Nexus automatic feed read stops on background and resumes only from a fresh foreground load', async t => {
@@ -1273,6 +1384,46 @@ test('theme cooldown read recovers after failure without creating a question', a
   assert.doesNotMatch(text(), /確認できませんでした/);
   assert.equal(h.calls.filter(call => call.path === '/deep-insight').length, 3);
   assert.deepEqual(h.mutations(), []);
+});
+
+test('only a qualified DeepInsight record answer opens the existing private Piece creation route', async t => {
+  const questionId = '30000000-0000-4000-8000-000000000001';
+  const inputId = '20000000-0000-4000-8000-000000000002';
+  const question = { id: questionId, lane: 'records', question_text: '記録からの問い',
+    issued_on: '2026-11-28', answered_at: '2026-11-28T01:00:00Z', answer_text: 'PRIVATE ANSWER',
+    piece_source_input_id: inputId };
+  const history = [question,
+    { ...question, id: '30000000-0000-4000-8000-000000000003', lane: 'theme' },
+    { ...question, id: '30000000-0000-4000-8000-000000000004', piece_source_input_id: null },
+    { ...question, id: '30000000-0000-4000-8000-000000000005', answered_at: null }];
+  const data = { can_use_theme: true, can_use_records: true, record_available_today: false,
+    theme_available_today: false, records: null, theme: null, history };
+  const routes = [];
+  const h = await harness(t, 'screens/DeepInsightScreen.js', 'following', {
+    tier: 'premium', piecePreviewEnabled: true, deepInsightState: data,
+    noticeNavigation: { getParent: () => ({ navigate: (...args) => routes.push(args) }) },
+  });
+  const buttons = h.root.root.findAllByType('CocolonButton')
+    .filter(node => node.props.children === 'この回答を含めてピースを作成');
+  assert.equal(buttons.length, 1);
+  assert.equal(routes.length, 0);
+  const open = buttons[0].props.onPress;
+  await act(async () => { open(); open(); });
+  assert.equal(routes.length, 1);
+  const [tab, target] = routes[0];
+  assert.equal(tab, 'Piece');
+  assert.equal(target.screen, 'PieceCreate');
+  assert.equal(target.initial, false);
+  const { idempotencyKey, ...binding } = target.params.savedInput;
+  assert.match(idempotencyKey, /^piece-preview-[0-9a-f]{32}$/);
+  assert.deepEqual(binding, { savedInputId: inputId, expectedUserId: 'A', deepInsightQuestionId: questionId });
+  assert.deepEqual(h.mutations(), []);
+  h.control.tier = 'plus';
+  await h.switchTo('B');
+  assert.equal(h.root.root.findAllByType('CocolonButton')
+    .filter(node => node.props.children === 'この回答を含めてピースを作成').length, 0);
+  await act(async () => open());
+  assert.equal(routes.length, 1, 'old owner action cannot navigate');
 });
 
 test('returning to an open DeepInsight screen checks a cooldown that elapsed in the background', async t => {

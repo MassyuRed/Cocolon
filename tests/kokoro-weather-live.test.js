@@ -29,10 +29,11 @@ function anchoredToday(date) {
   return data;
 }
 
-async function mount(t, { hold = false, hookOnly = false, parent = false, themeName = 'light' } = {}) {
+async function mount(t, { hold = false, hookOnly = false, parent = false, analysisRoute = false, themeName = 'light' } = {}) {
   const control = { owner: 'A', generation: 0, tier: 'free', focused: true, period: 'today', anchor: null, revision: 0, hold };
   const calls = [], listeners = new Set(), modules = new Map(), events = [];
-  const native = Object.fromEntries(['View', 'Text', 'ActivityIndicator', 'Pressable', 'ScrollView'].map(name => [name, name]));
+  const native = Object.fromEntries(['View', 'Text', 'ActivityIndicator', 'Pressable', 'ScrollView', 'StatusBar'].map(name => [name, name]));
+  const noop = async () => {};
   native.useWindowDimensions = () => ({ width: 390, height: 844, fontScale: 1 });
   const flatten = value => Array.isArray(value) ? Object.assign({}, ...value.map(flatten)) : value || {};
   native.StyleSheet = { create: value => value, flatten, absoluteFill: { position: 'absolute' } };
@@ -53,11 +54,21 @@ async function mount(t, { hold = false, hookOnly = false, parent = false, themeN
       if (name === 'react-native') return native;
       if (name === 'react-native-svg') return { __esModule: true, default: 'Svg', Circle: 'Circle', G: 'G' };
       if (name === '@react-native-async-storage/async-storage') return {};
+      if (name === 'react-native-safe-area-context') return { useSafeAreaInsets: () => ({}) };
       if (name.includes('Ionicons')) return 'Icon';
       if (name === '@react-navigation/native') return { useIsFocused: () => control.focused };
       const target = path.relative(ROOT, path.resolve(path.dirname(filename), name)) + '.js';
       if (target === 'AuthContext.js') return { useAuth: () => ({ user: control.owner ? { id: control.owner } : null, authOwnerGeneration: control.generation }) };
       if (target === 'SubscriptionContext.js') return { useSubscription: () => ({ tier: control.tier }) };
+      if (target === 'TutorialContext.js') return { useTutorial: () => ({ isTutorialMode: false }) };
+      if (target === 'screens/analysis/useAnalysisReportActions.js') return { useAnalysisReportActions: () => ({ entryMeta: {}, refreshHomeSummaries: noop }) };
+      if (target === 'screens/analysis/useAnalysisUnreadBadges.js') return { useAnalysisUnreadBadges: () => ({ refreshUnreadBadges: noop }) };
+      if (target === 'screens/analysis/useAnalysisTutorialOverlay.js') return { useAnalysisTutorialOverlay: () => ({}) };
+      if (target === 'screens/SelfStructureReportHistoryScreen.js') return { __esModule: true, default: 'MapHistory' };
+      if (target === 'screens/SelfStructureReportViewerScreen.js') return { __esModule: true, default: 'MapDetail' };
+      if (['screens/AnalysisHistoryScreen.js', 'screens/AnalysisSelfStructureScreen.js', 'components/TutorialOverlay.js',
+        'components/CocolonButton.js'].includes(target)) return { __esModule: true, default: 'OtherScreen' };
+      if (target === 'tutorial/tutorialScenarioData.js') return {};
       if (target === 'theme/ThemeContext.js') return { useTheme: () => ({ colors, themeName }) };
       if (target === 'components/UnreadBadge.js') return { ScreenUnreadBadge: 'Badge' };
       if (target === 'screens/AnalysisMenuCommon.js') return { AnalysisMenuScroll: 'Scroll', useAnalysisMenuStyles: () => ({ colors, ui, themeName }) };
@@ -94,7 +105,8 @@ async function mount(t, { hold = false, hookOnly = false, parent = false, themeN
   function Host() { output = useKokoroWeather(control.period, control.anchor, control.revision); return null; }
   const Timeline = load('screens/analysisReport/KokoroWeatherTimeline.js').default;
   const Content = parent ? load('screens/AnalysisContentFirstScreen.js').default : null;
-  const element = () => React.createElement(parent ? Content : hookOnly ? Host : Timeline, { colors, ui, period: control.timelinePeriod,
+  const Analysis = analysisRoute ? load('screens/AnalysisScreen.js').default : null;
+  const element = () => React.createElement(analysisRoute ? Analysis : parent ? Content : hookOnly ? Host : Timeline, { colors, ui, period: control.timelinePeriod,
     testIDPrefix: CHART_ID,
     onPeriodChange: value => events.push(value), graphOpenRequest: control.graphOpenRequest,
     isTutorialMode: control.isTutorialMode, tutorialStep: control.tutorialStep, tutorialGraphData: fixtures });
@@ -438,6 +450,32 @@ test('old report notification targets change the graph tab and period', async t 
   await h.update({ graphOpenRequest: { period: 'week' } });
   assert.ok(h.calls.some(call => periodQuery(call).get('period') === 'week'));
   assert.match(h.text(), /この週のこころグラフ/);
+});
+
+test('returning through the Analysis routes from a map month preserves the visible graph and avoids a read', async t => {
+  const h = await mount(t, { analysisRoute: true });
+  await h.press('月');
+  await h.press('前の期間');
+  assert.match(h.text(), /2026年10月/);
+  const requestCount = h.calls.length;
+  await h.press('わたしマップ');
+  await h.press('わたしマップの履歴を見る');
+  const map = { id: 'synthetic-month', snapshot_month: '2026-10-01', source_profile: 'cumulative.v1' };
+  await Renderer.act(async () => { h.root.root.findByType('MapHistory').props.onOpenReport(map); });
+  assert.equal(h.root.root.findByType('MapDetail').props.report, map);
+  assert.doesNotMatch(h.text(), /この月のこころグラフ/);
+  await Renderer.act(async () => { h.root.root.findByType('MapDetail').props.onBack(); });
+  await Renderer.act(async () => { h.root.root.findByType('MapHistory').props.onBack(); });
+  assert.match(h.text(), /2026年10月/);
+  assert.equal(h.calls.length, requestCount);
+
+  await h.press('わたしマップ');
+  await h.press('わたしマップの履歴を見る');
+  await h.recordsChanged('A');
+  assert.equal(h.calls.length, requestCount);
+  await Renderer.act(async () => { h.root.root.findByType('MapHistory').props.onBack(); });
+  assert.match(h.text(), /2026年10月/);
+  assert.equal(h.calls.length, requestCount + 1);
 });
 
 test('the tutorial renders the graph from samples without reading private rows', async t => {

@@ -555,6 +555,40 @@ test('history pagination replaces the list when the server changes membership ti
   await act(async () => view.unmount());
 });
 
+test('returning from a monthly map keeps the verified history and already opened pages', async () => {
+  const first = row('2026-10-01');
+  const second = row('2026-09-01');
+  const h = harness(async url => url.includes('offset=1')
+    ? { items: [second], has_more: false, subscription_tier: 'plus' }
+    : { items: [first], has_more: true, next_offset: 1, subscription_tier: 'plus' });
+  h.plan.tier = 'plus';
+  const History = h.load('screens/SelfStructureReportHistoryScreen.js').default;
+  const snapshot = { current: null };
+  const element = status => React.createElement(History, { historyReadSnapshot: snapshot, currentMapStatus: status });
+  const before = { tier: 'plus', versionKey: 'map-before' };
+  let view;
+  await act(async () => { view = Renderer.create(element(before)); });
+  const footer = view.root.findByType('FlatList').props.ListFooterComponent;
+  await act(async () => footer.props.onPress());
+  assert(button(view, '2026年9月'));
+  assert.equal(h.calls.length, 3);
+  await act(async () => view.unmount());
+  await act(async () => { view = Renderer.create(element(before)); });
+  assert(button(view, '2026年10月'));
+  assert(button(view, '2026年9月'));
+  assert.equal(h.calls.length, 3);
+  await act(async () => view.update(element({ ...before, versionKey: 'map-after' })));
+  assert.equal(h.calls.length, 5);
+  assert.equal(h.calls.filter(([method]) => method === 'POST').length, 2);
+  assert(!button(view, '2026年9月'));
+  await act(async () => h.load('lib/emotionRecordChanges.js').notifyEmotionRecordsChanged(owner));
+  assert.equal(h.calls.length, 7);
+  h.plan.tier = 'free';
+  await act(async () => view.update(element({ ...before, versionKey: 'map-after' })));
+  assert.equal(h.calls.length, 9);
+  await act(async () => view.unmount());
+});
+
 test('Free monthly access does not unlock the existing paid PDF export',()=>{
   const h=harness(()=>({}));const policy=h.load('components/selfStructure/watashiMapAccessPolicy.js');
   assert.equal(policy.canViewWatashiMapHistory('free'),true);

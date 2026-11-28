@@ -39,7 +39,8 @@ function harness(file, exportName, args = {}) {
   const model = Function(strip(read('screens/account/accountModel.js')) + '\nreturn {normalizeDisplayName,DISPLAY_NAME_MAX_LENGTH,DISPLAY_NAME_TAKEN_MESSAGE,mapDisplayNameConflictMessage,readAccountStatusValue};')();
   const followChanges = Function(strip(read('screens/account/followChanges.js')) + '\nreturn {subscribeToFollowChanges,publishFollowChange};')();
   const bindings = { ...client, ...model, ...followChanges, AbortController,
-    useAuth: () => ({ user: currentUser(), authOwnerGeneration: generation, authLoading: false, signOut: async opts => signouts.push(opts) }),
+    useAuth: () => ({ user: currentUser(), authOwnerGeneration: generation, screenReadCache: args.screenReadCache,
+      authLoading: false, signOut: async opts => signouts.push(opts) }),
     useTheme: () => ({ colors: {}, themeName: 'default' }), useAnalysisMenuStyles: () => ({ ui: {} }),
     createLocalStyles: () => ({}), THEME_VARIANTS: {},
     useUnread: () => ({ setUnread() {} }), useTutorial: () => ({}), useAppRuntime: () => ({ isFeatureEnabled: () => true }),
@@ -69,6 +70,7 @@ function harness(file, exportName, args = {}) {
   const render = () => { cursor = 0; dirty = false; value = Component({ user: currentUser(), targetUserId: owner, isSelf: true, navigation, ...args }); while (effects.length) effects.shift()(); return value; };
   render();
   return { gets, writes, alerts, signouts, render, get value() { return value; },
+    reopen() { slots.forEach(entry => entry?.cleanup?.()); slots.length = 0; render(); },
     emitNavigation(name) { navigationListeners.get(name)?.(); },
     publishFollowChange: followChanges.publishFollowChange,
     holdSession() { sessionWait = deferred(); return sessionWait; },
@@ -93,6 +95,44 @@ test('same-owner name edit uses the account profile as its canonical display nam
   await p.settle(); p.gets.at(-1).resolve({ available: true }); await work; await p.settle();
   assert.deepEqual(p.writes.map(x => ({owner:x.owner,body:x.body})), [{ owner:'A', body:{display_name:'edited-A'} }]);
   assert.equal(p.value.displayName,'edited-A');
+});
+
+test('reopening your account keeps settled profile data and a slow read cannot undo a new name', async () => {
+  const cache = {};
+  const p = harness('screens/account/useAccountProfile.js', 'useAccountProfile', { screenReadCache: cache });
+  await p.settle();
+  await p.resolveAllGets({ user_id: 'A', display_name: 'A-name', share_code: 'A-code' });
+  p.reopen();
+  await p.settle();
+  assert.equal(p.value.loading, false);
+  assert.equal(p.value.displayName, 'A-name');
+  assert.equal(p.value.shareCode, 'A-code');
+  const stale = p.gets.at(-1);
+  p.value.openNameEdit(); p.render(); p.value.setNameDraft('A-edited'); p.render();
+  const work = p.value.saveDisplayName();
+  await p.settle(); p.gets.at(-1).resolve({ available: true }); await work; await p.settle();
+  stale.resolve({ user_id: 'A', display_name: 'A-old' }); await p.settle();
+  assert.equal(p.value.displayName, 'A-edited');
+  p.reopen(); await p.settle();
+  assert.equal(p.value.displayName, 'A-edited');
+  p.switchTo('B'); await p.settle();
+  assert.equal(p.value.displayName, '');
+  assert.equal(p.value.shareCode, '');
+  assert.equal(p.value.loading, true);
+});
+
+test('viewing someone else does not persist their profile after leaving', async () => {
+  const cache = {};
+  const p = harness('screens/account/useAccountProfile.js', 'useAccountProfile', {
+    screenReadCache: cache, targetUserId: 'C', isSelf: false,
+  });
+  await p.settle();
+  await p.resolveAllGets({ user_id: 'C', display_name: 'C-name' });
+  assert.equal(p.value.displayName, 'C-name');
+  p.reopen(); await p.settle();
+  assert.equal(p.value.displayName, '');
+  assert.equal(p.value.loading, true);
+  assert.equal(cache.ownProfile, undefined);
 });
 
 for (const hook of ['useAccountVisibility','useAccountFollowState']) {

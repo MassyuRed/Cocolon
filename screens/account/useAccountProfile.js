@@ -14,6 +14,10 @@ import {
   normalizeDisplayName,
 } from "./accountModel";
 
+function matchesProfileScope(profile, owner, generation, target) {
+  return !!owner && profile?.owner === owner && profile.generation === generation && profile.target === target;
+}
+
 async function checkDisplayNameAvailability(candidate, options) {
   const normalized = normalizeDisplayName(candidate);
   if (!normalized) return false;
@@ -30,12 +34,18 @@ async function checkDisplayNameAvailability(candidate, options) {
 }
 
 export function useAccountProfile({ user, targetUserId, isSelf }) {
-  const { authOwnerGeneration, rememberOwnDisplayName } = useAuth();
+  const { authOwnerGeneration, rememberOwnDisplayName, screenReadCache } = useAuth();
   const ownerRequestRef = useRef(null);
-  const [displayName, setDisplayName] = useState("");
-  const [shareCode, setShareCode] = useState("");
-  const [connectCode, setConnectCode] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState(null);
+  const owner = user?.id;
+  const target = targetUserId || owner;
+  const cached = isSelf ? screenReadCache?.ownProfile : null;
+  const shown = matchesProfileScope(profile, owner, authOwnerGeneration, target) ? profile
+    : matchesProfileScope(cached, owner, authOwnerGeneration, target) ? cached : null;
+  const displayName = shown?.displayName ?? "";
+  const shareCode = shown?.shareCode ?? "";
+  const connectCode = shown?.connectCode ?? "";
+  const loading = !!owner && !shown;
 
   const [nameDraft, setNameDraft] = useState("");
   const [nameSaving, setNameSaving] = useState(false);
@@ -44,54 +54,47 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
   const [nameEditOpen, setNameEditOpen] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
     const controller = new AbortController();
     const request = { expectedUserId: user?.id, signal: controller.signal };
-    ownerRequestRef.current = request;
-    setDisplayName("");
-    setShareCode("");
-    setConnectCode("");
+    const scope = { owner: request.expectedUserId, generation: authOwnerGeneration, target };
+    const existing = isSelf ? screenReadCache?.ownProfile : null;
+    const snapshot = matchesProfileScope(existing, scope.owner, scope.generation, target) ? existing : scope;
+    const read = { request, target, edited: false, snapshot };
+    ownerRequestRef.current = read;
+    if (!isSelf) setProfile(null);
     setNameDraft("");
     setNameEditOpen(false);
     setNameError("");
     setNameSaving(false);
     setNameChecking(false);
-    setLoading(!!user);
 
     const loadProfile = async () => {
+      if (!scope.owner) return;
       try {
-        if (!user) {
-          setLoading(false);
-          return;
-        }
-
-        const isSelfNow = String(targetUserId || "") === String(user.id);
-        const json = isSelfNow
+        const json = isSelf
           ? await apiGet("/account/profile/me", request)
-          : await apiGet(
-              `/account/profile?target_user_id=${encodeURIComponent(
-                String(targetUserId || user.id)
-              )}`, request
-            );
-
-        if (!cancelled) {
-          setDisplayName(String(json?.display_name || ""));
-          setShareCode(String(readShareCode(json, "") || ""));
-          setConnectCode(String(readConnectCode(json, "") || ""));
-        }
+          : await apiGet(`/account/profile?target_user_id=${encodeURIComponent(target)}`, request);
+        if (request.signal.aborted || read.edited) return;
+        if (json?.user_id && String(json.user_id) !== String(target)) throw Object.assign(new Error("profile owner mismatch"), { status: 403 });
+        const next = { ...scope, displayName: String(json?.display_name || ""),
+          shareCode: String(readShareCode(json, "") || ""), connectCode: String(readConnectCode(json, "") || "") };
+        read.snapshot = next;
+        if (isSelf && screenReadCache) screenReadCache.ownProfile = next;
+        setProfile(next);
       } catch (e) {
+        if (request.signal.aborted || read.edited) return;
         console.warn("loadProfile error:", e);
-      } finally {
-        if (!cancelled) setLoading(false);
+        if (e?.status >= 400 && e.status < 500) {
+          read.snapshot = scope;
+          if (isSelf && screenReadCache) screenReadCache.ownProfile = null;
+        }
+        setProfile(read.snapshot);
       }
     };
 
     loadProfile();
-    return () => {
-      cancelled = true;
-      controller.abort();
-    };
-  }, [user?.id, targetUserId, authOwnerGeneration]);
+    return () => controller.abort();
+  }, [user?.id, target, authOwnerGeneration, isSelf, screenReadCache]);
 
   const openNameEdit = () => {
     if (!user) {
@@ -120,8 +123,9 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
     }
     if (!isSelf) return;
 
-    const request = ownerRequestRef.current;
-    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
+    const read = ownerRequestRef.current;
+    const request = read?.request;
+    if (request?.expectedUserId !== user.id || request.signal.aborted || read.target !== target) return;
     const nextName = normalizeDisplayName(nameDraft);
 
     if (!nextName) {
@@ -157,6 +161,7 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
         display_name: nextName,
       }, request);
       if (request.signal.aborted) return;
+      if (json?.user_id && String(json.user_id) !== String(user.id)) throw new Error("profile owner mismatch");
 
       // The account profile is the display-name source of truth. A second
       // current-session metadata write could target an account switched to
@@ -165,7 +170,11 @@ export function useAccountProfile({ user, targetUserId, isSelf }) {
       if (json?.user_id === user.id) {
         rememberOwnDisplayName?.(user.id, authOwnerGeneration, json.display_name);
       }
-      setDisplayName(resolvedDisplayName || nextName);
+      read.edited = true;
+      const updatedProfile = { ...read.snapshot, displayName: resolvedDisplayName || nextName };
+      read.snapshot = updatedProfile;
+      if (screenReadCache) screenReadCache.ownProfile = updatedProfile;
+      setProfile(updatedProfile);
       setNameDraft(resolvedDisplayName || nextName);
       setNameEditOpen(false);
       setNameError("");

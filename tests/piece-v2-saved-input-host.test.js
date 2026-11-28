@@ -996,6 +996,43 @@ test('fresh chosen-answer route first confirms an older original save without re
   later.host.componentWillUnmount();
 });
 
+test('a DeepInsight save recovery never replaces another question or the original input route', async () => {
+  const seed = fixture(), recovery = stackRecovery();
+  const send = async (url, options) => {
+    if (options.method === 'GET') {
+      const question = new URL('https://synthetic.invalid' + url).searchParams.get('deep_insight_question_id');
+      return packet(question ? { source_kind: 'deep_insight_record_answer', source_input_id: INPUT,
+        deep_insight_question_id: question, source_commitment: 'sha256:' + 'b'.repeat(64) } : ref());
+    }
+    if (url.endsWith('/save')) throw Error('lost acknowledgement');
+    return packet(seed.expected);
+  };
+  const makeHost = (question, key) => {
+    const u = fixture({ send, admitSave: true, saveEnabled: true });
+    u.host.props = { ...u.host.props, saveRecovery: recovery, creationMode: true,
+      savedInput: { ...u.host.props.savedInput, idempotencyKey: key,
+        ...(question ? { deepInsightQuestionId: question } : {}) } };
+    return u;
+  };
+  const first = makeHost(ANSWER, 'deep-a-preview');
+  first.mount(); await first.host.createFromSavedInput(); await tick(); await first.startSave();
+  assert.ok(recovery.find(OWNER, INPUT, ANSWER));
+  assert.equal(recovery.find(OWNER, INPUT), undefined);
+  assert.equal(recovery.find(OWNER, INPUT, OTHER_ANSWER), undefined);
+  first.host.componentWillUnmount();
+  for (const [question, key] of [[null, 'original-preview'], [OTHER_ANSWER, 'deep-b-preview']]) {
+    const different = makeHost(question, key);
+    different.mount(); await different.host.createFromSavedInput(); await tick();
+    assert.deepEqual(copy(different.calls.map(([, options]) => options.method)), ['GET', 'POST']);
+    different.host.componentWillUnmount();
+  }
+  const reopened = makeHost(ANSWER, 'same-deep-a-new-navigation');
+  reopened.mount(); await reopened.host.createFromSavedInput(); await tick();
+  assert.equal(reopened.calls.length, 0);
+  assert.ok(reopened.names().includes('同じ保存要求で結果を確認'));
+  reopened.host.componentWillUnmount();
+});
+
 test('explicit selected-source recheck retains the answer and uses a fresh preview key', async () => {
   const seed = fixture(); let gets = 0, posts = 0;
   const u = fixture({ selectedAnswer: ANSWER, send: async (_url, options) => {

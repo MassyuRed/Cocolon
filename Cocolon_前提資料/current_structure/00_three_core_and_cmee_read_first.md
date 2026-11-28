@@ -3,7 +3,7 @@
 ---
 doc_id: cocolon_three_core_and_cmee_current_structure_entry
 title: "三大中核構造とCMEE — Current Structure Read First"
-revision_date: "2026-11-17 JST"
+revision_date: "2026-11-28 JST"
 document_role: "CURRENT_STRUCTURE_ROUTING_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -12,6 +12,14 @@ operational_owner: "Karen"
 implementation_effect: 0
 automatic_progression: false
 ---
+
+## 11/28 JSTの通常構成と検証候補
+
+通常APIは `8831699`。EmlisAIは初めての補足質問を未回答で見送ったとき、当回の記録だけで応答する。DeepInsightは、本人回答の保存とわたしマップ更新の登録を `deep_insight_answer_and_refresh` の一処理で確定する。退会時のPieceは、保存、下書き、利用枠、削除・書き出し記録、閲覧履歴がAuthの削除に連動する。本番ワーカーは従来版。Supabase Data APIの接続エラーが続く時間帯のログイン後操作は未確認。
+
+後続候補では、PremiumのEmlisAIに関連履歴と、同じ本人の事前マップ・こころグラフを渡す。DeepInsightからPieceを作る場合は、Premiumの記録由来の回答を本人が明示選択し、元記録と回答を別の出典として `PieceCreate` へ結ぶ。画像設定を変えても出典は同じ。下書き作成・編集・保存は、記録、発行ID、本文の版、権限を同じ書込みの中で照合する。文章化に用いるのは本人の記録と回答。原文の意味が質問文からの推測を必要とする場合は候補に出さない。隔離環境でプレビューから保存版の再読まで確認。実9Bの本文と端末は未確認。
+
+後続アプリでは、同じ条件でわたしマップの履歴、こころグラフ、Pieceの一覧、自分のアカウント、設定のお知らせへ戻るとき、取得済みの表示を再利用する。所有者、権限、公開範囲、記録更新を該当画面で照合してから再利用する。その他の後続候補、検証済み差分、本番反映の範囲は週次記録を参照。 [11/28の週次記録](https://github.com/MassyuRed/Cocolon/blob/71e9c2ab7716796b62f8b28ffd837962339802b5/Cocolon_%E5%89%8D%E6%8F%90%E8%B3%87%E6%96%99/weekly_reviews/Cocolon_Weekly_Review_20261128.md#ordinary-fixes-rollout-20261128)
 
 > **11/17最新実績：承認済みFIT25は54更新・4回の損失計測、112 tensorの保存／fresh reload一致、元提供復元を完了。続くA25も全5件・三段階15phase＋前後4対照の19応答を一回で完了しましたが、rootの全文照合で全5件が意味不適合となり、通常不採用です。** 独立担当者の全5件の全文照合も完了し、全5件不適合で一致しました。FIT25は復元込み592.445476秒、新weights5b36fe0a／configb1f2d89b。A25は復元込み844.331987秒、元120uのPID36492／start99185008・別health200、候補18008閉鎖・B25root不存在を確認。B25は全5適合条件不成立で起動0、実全12・実rawのSQL保存／非生成再読・通常反映0です。新17file4,818,633byte送付＋同Pod copy4file118,409byteと派生scope7fe32f73を原本へ保持し、FIT25／A25の一回は消費済み、未使用B25を別試行へ流用しません。候補APIe58c1e49・準備／既存CI／合成SQLの記録は§9.125、今回実績と残件は§9.126。通常24bc228d／DB20261115011424は前回確認記録の継承で、今回fresh Live照会ではありません。元単位／補助全体未完、build／TestFlight／本人実機保留を維持します。
 

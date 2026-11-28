@@ -130,32 +130,39 @@ function NotificationBanner({ colors, message, onPress }) {
 
 export function createPieceSaveRecovery(owner) {
   const pending = new Map();
-  const inputId = entry => entry.operation.request.source_ref.source_input_id;
+  const sourceKey = (inputId, questionId) => JSON.stringify([inputId, questionId ?? null]);
+  const entryKey = entry => {
+    const source = entry.operation.request.source_ref;
+    return sourceKey(source.source_input_id, source.deep_insight_question_id);
+  };
   const publication = runtime => runtime !== null && typeof runtime === 'object';
   let active = true;
   return Object.freeze({
-    find(expectedUserId, savedInputId) {
-      return active && owner && expectedUserId === owner ? pending.get(savedInputId)?.entry : undefined;
+    find(expectedUserId, savedInputId, deepInsightQuestionId) {
+      return active && owner && expectedUserId === owner
+        ? pending.get(sourceKey(savedInputId, deepInsightQuestionId))?.entry : undefined;
     },
     remember(entry) {
-      if (!active || !owner || entry.operation.expectedUserId !== owner || pending.has(inputId(entry))) return false;
-      pending.set(inputId(entry), { entry, stop: null, quotaExhausted: false });
+      const key = entryKey(entry);
+      if (!active || !owner || entry.operation.expectedUserId !== owner || pending.has(key)) return false;
+      pending.set(key, { entry, stop: null, quotaExhausted: false });
       return true;
     },
     forget(entry) {
-      if (pending.get(inputId(entry))?.entry === entry) pending.delete(inputId(entry));
+      const key = entryKey(entry);
+      if (pending.get(key)?.entry === entry) pending.delete(key);
     },
     setQuotaExhausted(entry, value) {
       if (!active) return;
-      const record = pending.get(inputId(entry));
+      const record = pending.get(entryKey(entry));
       if (record?.entry === entry) record.quotaExhausted = value === true;
     },
     isQuotaExhausted(entry) {
-      const record = pending.get(inputId(entry));
+      const record = pending.get(entryKey(entry));
       return active && record?.entry === entry && record.quotaExhausted === true;
     },
     markDisabled(entry, runtime) {
-      const record = pending.get(inputId(entry));
+      const record = pending.get(entryKey(entry));
       if (record?.entry !== entry) return;
       if (!record.stop) record.stop = { publications: new WeakSet(), unknown: false };
       if (publication(runtime)) record.stop.publications.add(runtime);
@@ -163,7 +170,7 @@ export function createPieceSaveRecovery(owner) {
     },
     canResume(entry, runtime, eligible, runtimeRefresh = false) {
       if (!active) return false;
-      const record = pending.get(inputId(entry));
+      const record = pending.get(entryKey(entry));
       if (record?.entry !== entry) return false;
       if (!record.stop) return true;
       if (!eligible || !publication(runtime) || record.stop.publications.has(runtime)) return false;

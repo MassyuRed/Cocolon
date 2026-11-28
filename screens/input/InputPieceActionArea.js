@@ -42,12 +42,14 @@ function contextStamp(value) {
 // decision. Do not retain arbitrary parent props, an input body or a token.
 function savedInputStamp(props) {
   const value = props.savedInput;
+  const selectedDeepInsight = value && Object.prototype.hasOwnProperty.call(value, 'deepInsightQuestionId');
   const selectedAnswer = value && Object.prototype.hasOwnProperty.call(value, 'supplementalAnswerIdentity');
   const selectedObservation = value && (Object.prototype.hasOwnProperty.call(value, 'expectedObservationIdentity') ||
     Object.prototype.hasOwnProperty.call(value, 'expectedStage'));
   if (Object.prototype.hasOwnProperty.call(props, 'context') || !value ||
       typeof value !== 'object' || Array.isArray(value) ||
-      Object.keys(value).length !== (3 + (selectedAnswer ? 1 : 0) + (selectedObservation ? 2 : 0)) ||
+      (selectedDeepInsight && (selectedAnswer || selectedObservation)) ||
+      Object.keys(value).length !== (3 + (selectedAnswer || selectedDeepInsight ? 1 : 0) + (selectedObservation ? 2 : 0)) ||
       !['savedInputId', 'expectedUserId', 'idempotencyKey'].every(key =>
         Object.prototype.hasOwnProperty.call(value, key))) return null;
   const { savedInputId, expectedUserId, idempotencyKey } = value;
@@ -58,18 +60,21 @@ function savedInputStamp(props) {
       /[\uD800-\uDFFF]/u.test(expectedUserId) ||
       typeof idempotencyKey !== 'string' ||
       !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) return null;
-  if (selectedAnswer && (typeof value.supplementalAnswerIdentity !== 'string' ||
-      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.supplementalAnswerIdentity) ||
-      value.supplementalAnswerIdentity === '00000000-0000-0000-0000-000000000000')) return null;
+  const chosenId = selectedDeepInsight ? value.deepInsightQuestionId : value.supplementalAnswerIdentity;
+  if ((selectedAnswer || selectedDeepInsight) && (typeof chosenId !== 'string' ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(chosenId) ||
+      chosenId === '00000000-0000-0000-0000-000000000000')) return null;
   if (selectedObservation && (!Object.prototype.hasOwnProperty.call(value, 'expectedObservationIdentity') ||
       !Object.prototype.hasOwnProperty.call(value, 'expectedStage') ||
       typeof value.expectedObservationIdentity !== 'string' ||
       !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.expectedObservationIdentity) ||
       value.expectedObservationIdentity === '00000000-0000-0000-0000-000000000000' ||
       value.expectedStage !== 'corrected_observation')) return null;
-  return JSON.stringify([savedInputId, expectedUserId, idempotencyKey,
-    ...(selectedObservation ? [selectedAnswer ? value.supplementalAnswerIdentity : null, value.expectedObservationIdentity, value.expectedStage]
-      : selectedAnswer ? [value.supplementalAnswerIdentity] : [])]);
+  return JSON.stringify({ savedInputId, expectedUserId, idempotencyKey,
+    ...(selectedDeepInsight ? { deepInsightQuestionId: chosenId } : {}),
+    ...(selectedAnswer ? { supplementalAnswerIdentity: chosenId } : {}),
+    ...(selectedObservation ? { expectedObservationIdentity: value.expectedObservationIdentity,
+      expectedStage: value.expectedStage } : {}) });
 }
 
 export default class InputPieceActionArea extends React.Component {
@@ -281,7 +286,7 @@ export default class InputPieceActionArea extends React.Component {
       ? JSON.parse(this.boundStamp.slice(6)) : null;
     const next = sourceStamp !== null ? JSON.parse(sourceStamp) : null;
     const retainBinding = savedMode && this.savedMode && this.savedEnabled() &&
-      runtime === this.boundRuntime && previous && next && previous[1] === next[1];
+      runtime === this.boundRuntime && previous && next && previous.expectedUserId === next.expectedUserId;
     const sameSavedSelection = savedMode && this.savedMode && sourceStamp !== null &&
       sourceStamp === this.boundSavedInputStamp;
     if (!sameSavedSelection) this.sourceIdempotencyKey = null;
@@ -326,9 +331,7 @@ export default class InputPieceActionArea extends React.Component {
 
   restoreSaveRecovery() {
     if (!this.props.saveRecovery || !this.savedMode || !this.isCurrent()) return false;
-    const [savedInputId, expectedUserId, idempotencyKey, supplementalAnswerIdentity, expectedObservationIdentity, expectedStage] = JSON.parse(this.boundSavedInputStamp);
-    return this.controller.restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey,
-      ...(expectedStage === undefined ? {} : { expectedObservationIdentity, expectedStage, supplementalAnswerIdentity }),
+    return this.controller.restoreSaveRecovery({ ...JSON.parse(this.boundSavedInputStamp),
       saveEnabled: this.saveEnabled() });
   }
 
@@ -339,7 +342,8 @@ export default class InputPieceActionArea extends React.Component {
     const view = this.controller.getView();
     if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
     // Capture the exact saved ID, owner and future POST key before any await.
-    const [savedInputId, expectedUserId, originalKey, supplementalAnswerIdentity, expectedObservationIdentity, expectedStage] = JSON.parse(this.boundStamp.slice(6));
+    const { savedInputId, idempotencyKey: originalKey, ...sourceOptions } = JSON.parse(this.boundSavedInputStamp);
+    const { expectedUserId } = sourceOptions;
     const idempotencyKey = this.sourceIdempotencyKey || originalKey;
     let abort;
     try { abort = new AbortController(); }
@@ -356,9 +360,7 @@ export default class InputPieceActionArea extends React.Component {
     this.changed();
     if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
     try {
-      const source_ref = await requestPieceSourceRef(savedInputId, { expectedUserId, signal: abort.signal,
-        ...(supplementalAnswerIdentity == null ? {} : { supplementalAnswerIdentity }),
-        ...(expectedStage === undefined ? {} : { expectedObservationIdentity, expectedStage }) });
+      const source_ref = await requestPieceSourceRef(savedInputId, { ...sourceOptions, signal: abort.signal });
       if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
       const prepared = preparePiecePreviewRequest({ source_ref, requested_format: null,
         visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },
@@ -654,7 +656,7 @@ export default class InputPieceActionArea extends React.Component {
     const controller = this.controller, view = controller.getView();
     if (view.phase !== 'saved' || !receipt || view.savedReceipt !== receipt) return;
     const expectedUserId = this.savedMode
-      ? JSON.parse(this.boundSavedInputStamp)[1] : this.props.context.expectedUserId;
+      ? JSON.parse(this.boundSavedInputStamp).expectedUserId : this.props.context.expectedUserId;
     // The full-screen iOS modal must finish dismissing before the owner's
     // screen mounts. Keep only this body-free handoff; no drawing is retained.
     const pending = { controller, receipt, stamp: this.boundStamp, runtime: this.boundRuntime,

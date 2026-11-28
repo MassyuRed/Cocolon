@@ -782,12 +782,14 @@ export function createPieceCreateController(configuration = {}) {
       const entry = Object.freeze({ operation: captured, intent,
         visualSelection: Object.freeze(selectedVisual(preview.visual_recipe, preview.plan_capabilities)) });
       if (!store.remember(entry)) {
+        const source = captured.request.source_ref;
         const restored = restoreSaveRecovery({ expectedUserId: captured.expectedUserId,
-          savedInputId: captured.request.source_ref.source_input_id,
+          savedInputId: source.source_input_id,
           idempotencyKey: contextOperation.idempotencyKey, saveEnabled,
-          expectedStage: captured.request.source_ref.emlis_observation_stage,
-          expectedObservationIdentity: captured.request.source_ref.emlis_observation_result_identity,
-          supplementalAnswerIdentity: captured.request.source_ref.supplemental_answer_identity });
+          expectedStage: source.emlis_observation_stage,
+          expectedObservationIdentity: source.emlis_observation_result_identity,
+          supplementalAnswerIdentity: source.supplemental_answer_identity,
+          deepInsightQuestionId: source.deep_insight_question_id });
         if (!restored) {
           boundaryCode = 'PIECE_CONFLICT';
           clearAttempt();
@@ -802,13 +804,16 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   function restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey, saveEnabled: allowSave,
-      expectedStage, expectedObservationIdentity, supplementalAnswerIdentity }) {
+      expectedStage, expectedObservationIdentity, supplementalAnswerIdentity, deepInsightQuestionId }) {
     if (disposed || saveIntent || cancelIntent) return false;
     const store = configuration.getSaveRecovery?.();
-    const entry = store?.find(expectedUserId, savedInputId);
+    const entry = store?.find(expectedUserId, savedInputId, deepInsightQuestionId);
     if (!entry) return false;
     const captured = entry.operation;
     const source = captured.request.source_ref;
+    if (source.source_input_id !== savedInputId ||
+        ((deepInsightQuestionId !== undefined || source.source_kind === 'deep_insight_record_answer') &&
+         (source.source_kind !== 'deep_insight_record_answer' || source.deep_insight_question_id !== deepInsightQuestionId))) return false;
     if ((expectedStage === 'corrected_observation' || source.emlis_observation_stage === 'corrected_observation') &&
         (source.emlis_observation_stage !== expectedStage ||
           source.emlis_observation_result_identity !== expectedObservationIdentity ||

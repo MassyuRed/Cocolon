@@ -464,6 +464,8 @@ export function AuthProvider({ children }) {
     setRecoveryMode(false);
   };
 
+  const screenReadCache = useMemo(() => ({ ownProfile: null, noticeHistory: null }),
+    [session?.user?.id, authOwnerGeneration]);
   const value = useMemo(
     () => ({
       session,
@@ -472,6 +474,7 @@ export function AuthProvider({ children }) {
       accountDisplayName: ownDisplayName?.userId === session?.user?.id
         && ownDisplayName?.generation === authOwnerGeneration ? ownDisplayName.name : "",
       rememberOwnDisplayName,
+      screenReadCache,
       initializing,
       authLoading,
       authError,
@@ -493,6 +496,7 @@ export function AuthProvider({ children }) {
       authOwnerGeneration,
       ownDisplayName,
       rememberOwnDisplayName,
+      screenReadCache,
       initializing,
       authLoading,
       authError,

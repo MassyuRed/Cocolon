@@ -28,6 +28,8 @@ const refinedReference = (answer = ANSWER) => ({ ...reference(true),
 const correctedReference = (observation = OBSERVATION) => ({ ...reference(),
   emlis_observation_stage: 'corrected_observation', emlis_observation_result_identity: observation });
 const correctedSelection = () => ({ expectedObservationIdentity: OBSERVATION, expectedStage: 'corrected_observation' });
+const deepReference = (question = ANSWER) => ({ source_kind: 'deep_insight_record_answer',
+  source_input_id: INPUT, deep_insight_question_id: question, source_commitment: 'sha256:' + 'c'.repeat(64) });
 function load({ send, session } = {}) {
   const calls = [], sessions = [];
   const context = vm.createContext({ AbortController, Date,
@@ -78,6 +80,35 @@ for (const pre of [false, true]) test(`explicit source GET preserves exact seven
   assert.equal(Object.hasOwn(sent, 'timeoutMs'), false);
   assert.equal(Object.keys(result).length, 7);
   value.source_input_id = 'changed-after-response'; assert.equal(result.source_input_id, INPUT);
+});
+
+test('DeepInsight answer GET and preview POST use one exact, body-free source identity', async () => {
+  const ref = deepReference(), a = load({ send: async (_url, options) => ({
+    status: 200, json: async () => options.method === 'GET' ? ref : previewFixture(),
+  }) });
+  const selected = await a.requestPieceSourceRef(INPUT, opts({ deepInsightQuestionId: ANSWER }));
+  assert.deepEqual(clone(selected), ref);
+  assert.equal(a.calls[0][0], '/emotion/piece/source-ref/' + INPUT + '?deep_insight_question_id=' + ANSWER);
+  assert.equal(a.calls[0][1].body, undefined);
+  assert.equal(a.calls[0][1].headers['Cache-Control'], 'no-store');
+  const request = { source_ref: selected, requested_format: null,
+    visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } };
+  await a.requestPiecePreview(request, opts({ idempotencyKey: 'one-explicit-preview' }));
+  assert.deepEqual(JSON.parse(a.calls[1][1].body).source_ref, ref);
+});
+
+test('DeepInsight source selection cannot fall back or accept mismatched/private wire fields', async () => {
+  const optsDeep = opts({ deepInsightQuestionId: ANSWER });
+  for (const invalid of [reference(), deepReference(OTHER_ANSWER), { ...deepReference(), source_input_id: OWNER },
+    { ...deepReference(), source_commitment: null }, { ...deepReference(), answer_text: 'PRIVATE' }]) {
+    const a = load({ send: async () => ({ status: 200, json: async () => invalid }) });
+    await assert.rejects(a.requestPieceSourceRef(INPUT, optsDeep), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(a.calls.length, 1);
+  }
+  const a = load();
+  await assert.rejects(a.requestPieceSourceRef(INPUT, { ...optsDeep, supplementalAnswerIdentity: ANSWER }), closed('PIECE_REQUEST_INVALID'));
+  await assert.rejects(a.requestPieceSourceRef(INPUT, { ...optsDeep, ...correctedSelection() }), closed('PIECE_REQUEST_INVALID'));
+  assert.equal(a.calls.length, 0);
 });
 
 for (const id of [null, undefined, '', 'not-uuid', 12,

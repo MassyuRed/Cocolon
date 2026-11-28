@@ -56,6 +56,9 @@ import {
   PANEL_MIN_HEIGHT,
   ROUTE_HOME,
   ROUTE_INPUT_HISTORY,
+  ROUTE_SELF_REPORT_GENERATE,
+  ROUTE_SELF_REPORT_HISTORY,
+  ROUTE_SELF_REPORT_VIEW,
   ROUTE_SELF_STRUCTURE,
 } from "./analysis/analysisRouteModel";
 import { useAnalysisRouteState } from "./analysis/useAnalysisRouteState";
@@ -78,6 +81,7 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, mapRead
   const { isTutorialMode, tutorialStep, setTutorialStep } = useTutorial();
   const screenRootRef = useRef(null);
   const [graphOpenRequest, setGraphOpenRequest] = useState(null);
+  const mapHistoryReadSnapshot = useMemo(() => ({ current: null }), [mapReadSnapshot]);
   const { height: windowHeight } = useWindowDimensions();
   const safeInsets = useSafeAreaInsets();
   const { styles, colors, isDark } = useThemedStyles();
@@ -359,6 +363,10 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, mapRead
   }, [route, refreshUnreadBadges, refreshHomeSummaries]);
 
   const selfStructureUpdateLabel = formatLatestUpdateLabel(entryMeta.selfStructureLatestDate);
+  // Keep the graph's authorized data and selected period across Analysis subroutes.
+  const showAnalysisMain = ![
+    ROUTE_INPUT_HISTORY, ROUTE_SELF_STRUCTURE, ROUTE_SELF_REPORT_HISTORY, ROUTE_SELF_REPORT_VIEW, ROUTE_SELF_REPORT_GENERATE,
+  ].includes(route);
 
   return (
     <View ref={screenRootRef} collapsable={false} style={styles.container}>
@@ -392,9 +400,11 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, mapRead
             }
           />
         </View>
-      ) : route === "selfReportHistory" ? (
+      ) : route === ROUTE_SELF_REPORT_HISTORY ? (
         <SelfStructureReportHistoryScreen
           reportType="monthly"
+          historyReadSnapshot={mapHistoryReadSnapshot}
+          currentMapStatus={currentMapStatus}
           onBack={() => {
             setRoute(selfReportHistoryBackRoute || ROUTE_SELF_STRUCTURE);
             refreshUnreadBadges();
@@ -404,16 +414,16 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, mapRead
           onOpenLatest={() => openSelfReportLatest("light", ROUTE_SELF_STRUCTURE)}
           onOpenSubscription={openSubscriptionSelect}
         />
-      ) : route === "selfReportView" ? (
+      ) : route === ROUTE_SELF_REPORT_VIEW ? (
         <SelfStructureReportViewerScreen
           report={selectedSelfReport}
           onBack={() => {
-            setRoute("selfReportHistory");
+            setRoute(ROUTE_SELF_REPORT_HISTORY);
             refreshUnreadBadges();
           }}
           onOpenSubscription={openSubscriptionSelect}
         />
-      ) : route === "selfReportGenerate" ? (
+      ) : route === ROUTE_SELF_REPORT_GENERATE ? (
         <SelfStructureReportGenerateScreen
           key={`selfReportGenerate:${selfReportGenerateMode}`}
           initialReportMode={selfReportGenerateMode}
@@ -425,34 +435,34 @@ export default function AnalysisScreen({ navigation, onRefreshTabUnread, mapRead
           mapReadSnapshot={mapReadSnapshot}
           currentMapStatus={currentMapStatus}
         />
-      ) : (
-        <View style={styles.safeContent}>
-          <AnalysisContentFirstScreen
-            tutorialScrollRef={tutorialScrollRef}
-            onTutorialScroll={handleTutorialScroll}
-            tutorialRefs={tutorialRefs}
-            onOpenGuide={openGuide}
-            graphOpenRequest={graphOpenRequest}
-            selfStructureUpdateLabel={selfStructureUpdateLabel}
-            unreadSelfStructure={selfStructureUnread}
-            unreadSelfStructureHistory={
-              selfStructureUnreadResolved && !subscriptionLoading && isPaid
-                ? selfStructureHistoryUnread
-                : false
-            }
-            onOpenSelfHistory={() => openSelfReportHistory(ROUTE_HOME)}
-            onOpenSubscription={openSubscriptionSelect}
-            onLatestSeenVersion={markSelfStructureLatestSeen}
-            mapReadSnapshot={mapReadSnapshot}
-            currentMapStatus={currentMapStatus}
-            isTutorialMode={isAnalysisTutorialStep}
-            tutorialStep={tutorialStep}
-            tutorialGraphData={TUTORIAL_KOKORO_WEATHER}
-            tutorialSelfAnalysisGuide={TUTORIAL_SELF_ANALYSIS_GUIDE}
-            tutorialWatashiMapReport={TUTORIAL_WATASHI_MAP_REPORT}
-          />
-        </View>
-      )}
+      ) : null}
+      <View style={[styles.safeContent, !showAnalysisMain && styles.hidden]}>
+        <AnalysisContentFirstScreen
+          active={showAnalysisMain}
+          tutorialScrollRef={tutorialScrollRef}
+          onTutorialScroll={handleTutorialScroll}
+          tutorialRefs={tutorialRefs}
+          onOpenGuide={openGuide}
+          graphOpenRequest={graphOpenRequest}
+          selfStructureUpdateLabel={selfStructureUpdateLabel}
+          unreadSelfStructure={selfStructureUnread}
+          unreadSelfStructureHistory={
+            selfStructureUnreadResolved && !subscriptionLoading && isPaid
+              ? selfStructureHistoryUnread
+              : false
+          }
+          onOpenSelfHistory={() => openSelfReportHistory(ROUTE_HOME)}
+          onOpenSubscription={openSubscriptionSelect}
+          onLatestSeenVersion={markSelfStructureLatestSeen}
+          mapReadSnapshot={mapReadSnapshot}
+          currentMapStatus={currentMapStatus}
+          isTutorialMode={isAnalysisTutorialStep}
+          tutorialStep={tutorialStep}
+          tutorialGraphData={TUTORIAL_KOKORO_WEATHER}
+          tutorialSelfAnalysisGuide={TUTORIAL_SELF_ANALYSIS_GUIDE}
+          tutorialWatashiMapReport={TUTORIAL_WATASHI_MAP_REPORT}
+        />
+      </View>
 
       {tutorialOverlayConfig ? (
         <TutorialOverlay
@@ -776,6 +786,7 @@ function createStyles(COLORS, ui) {
       backgroundColor: COLORS.BG_SILVER,
     },
     safeContent: { flex: 1 },
+    hidden: { display: "none" },
 
     // Analysis Home 用
     scrollContainer: {
