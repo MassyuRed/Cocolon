@@ -17,7 +17,7 @@ from cmee_live_core import input_payload, run_emlis, run_piece
 
 SUPABASE_HOST = "https://oeahmpmigszggnkyiivq.supabase.co"
 ALLOWED_TIERS = ("free", "plus", "premium")
-PREFIX = "cmee-sample-20261128-v1"
+PREFIX = "cmee-sample-20261128-v2"
 
 
 class NoRedirects(urllib.request.HTTPRedirectHandler):
@@ -249,6 +249,7 @@ def main():
     parser.add_argument("results_dir", type=Path)
     parser.add_argument("--first", type=int, required=True)
     parser.add_argument("--last", type=int, required=True)
+    parser.add_argument("--priority-case", type=int, action="append", default=[])
     parser.add_argument("--tiers", nargs="+", choices=ALLOWED_TIERS, default=ALLOWED_TIERS)
     parser.add_argument("--history-limit", type=int, default=12)
     parser.add_argument("--map-wait", type=int, default=0)
@@ -267,7 +268,11 @@ def main():
     key = os.environ["CMEE_EVALUATION_PUBLISHABLE_KEY"]
     if not key.startswith("sb_publishable_"):
         parser.error("normal Auth requires the publishable key")
-    for case in cases[args.first - 1:args.last]:
+    if any(not args.first <= n <= args.last for n in args.priority_case):
+        parser.error("priority cases must be inside the batch range")
+    order = list(dict.fromkeys(args.priority_case + list(range(args.first, args.last + 1))))
+    for case_index in order:
+        case = cases[case_index - 1]
         for tier in args.tiers:
             try:
                 once(case, tier, args.results_dir, key, map_wait=args.map_wait,

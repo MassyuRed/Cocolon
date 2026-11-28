@@ -51,10 +51,18 @@ def _call(request, steps, step, method, path, *, payload=None, headers=None, tim
 
 
 def input_payload(case):
+    stamp = case.get("created_at")
+    if stamp is None:
+        timestamp = datetime.now(timezone.utc)
+    else:
+        timestamp = datetime.fromisoformat(stamp)
+        if timestamp.tzinfo is None:
+            raise ValueError("case timestamp must include an offset")
+        timestamp = timestamp.astimezone(timezone.utc)
     payload = {
         "memo": case.get("memo"),
         "emotions": case["emotions"],
-        "created_at": case.get("created_at") or datetime.now(timezone.utc).isoformat(),
+        "created_at": timestamp.isoformat().replace("+00:00", "Z"),
         "is_secret": bool(case.get("is_secret", False)),
         "send_emotion_notification": False,
         "receive_emlis_questions": case.get("emlis_question_action", "skip") != "disabled",
