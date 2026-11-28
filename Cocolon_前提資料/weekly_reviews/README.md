@@ -2,7 +2,7 @@
 
 ## 最新回 — 2026-11-28：第13回報告会・進行中（11/28〜12/5）
 
-[第13回議事録](Cocolon_Weekly_Review_20261128.md)に、[11/21〜11/28の日別の作業と成果](Cocolon_Weekly_Review_20261128.md#agenda-1-weekly-report-20261128)を記録しました。[課題と残作業](Cocolon_Weekly_Review_20261128.md#agenda-3-open-work-20261128)には、稼働中の実9Bから得た出力と、EmlisAI、Piece、わたしマップ・もしもルート、DeepInsightをCMEEとしてつなぐ新規実装を記載しました。DeepInsightは通常出題と回答の活用が対象で、訂正機能は保留です。[11/28〜12/5の優先案](Cocolon_Weekly_Review_20261128.md#next-week-priorities-20261128)と[CMEEの絶対規則](../work_attitude_rules_for_karen/CURRENT_RULES.md#cmee-single-product-unit-20261128)も参照できます。
+[第13回議事録](Cocolon_Weekly_Review_20261128.md)に、[11/21〜11/28の日別の作業と成果](Cocolon_Weekly_Review_20261128.md#agenda-1-weekly-report-20261128)を記録しました。[課題と残作業](Cocolon_Weekly_Review_20261128.md#agenda-3-open-work-20261128)には、稼働中の実9Bから得た出力と、EmlisAI、Piece、わたしマップ・もしもルート、DeepInsightをCMEEとしてつなぐ新規実装を記載しました。DeepInsightは通常出題と回答の活用が対象で、訂正機能は保留です。[11/28〜12/5のタスク（同じ100件×三プラン、全機能の通常実測とリリース判定）](Cocolon_Weekly_Review_20261128.md#next-week-priorities-20261128)と[CMEEの絶対規則](../work_attitude_rules_for_karen/CURRENT_RULES.md#cmee-single-product-unit-20261128)も参照できます。
 
 ## 2026-11-21：第12回報告会・終了（11/21〜11/28）
 
@@ -154,7 +154,7 @@ GoogleのManaged publishingには既存公開状態に条件があるため、�
 
 | 開催日 | 対象期間 | 議事録・報告資料 | 次回予定 |
 |---|---|---|---|
-| 2026-11-28 | 11/21報告会後〜11/28、対象週11/28〜12/5 | [第13回・進行中：9B移行・三中核とDeepInsight・iOS 9201](Cocolon_Weekly_Review_20261128.md) | 議題1・3を報告。12/5までの優先案を記録 |
+| 2026-11-28 | 11/21報告会後〜11/28、対象週11/28〜12/5 | [第13回・進行中：9B移行・三中核とDeepInsight・iOS 9201](Cocolon_Weekly_Review_20261128.md) | 議題1・3を報告。12/5までの100件×三プランのタスクを記録 |
 | 2026-11-21 | 11/14報告会後〜11/21、対象週11/21〜11/28 | [第12回・終了：本人更新・IF／Saved・長履歴map通常保存・Piece通常4B・8102配布](Cocolon_Weekly_Review_20261121.md) | 対象週は11/28まで。次週の優先順位・採用方針・終了を記録 |
 | 2026-11-14 | 11/7報告会後〜11/14、対象週11/14〜11/21 | [第11回・終了：成果・残件・全体61.63％・補助全体完了集中・12/6候補](Cocolon_Weekly_Review_20261114.md) | Mashの明示で終了、再開指示は§9。11/21判定・公開日未定／12/6候補を継承。開催時刻・予約・自動実行なし |
 | 2026-11-07 | 10/31報告会後〜11/7、対象週11/7〜11/14 | [第10回・終了：成果・残件、実機確認と加入価値／UI、11/14までの詳細タスク](Cocolon_Weekly_Review_20261107.md) | 対象週は11/14まで。次回時刻・予約・自動実行なし |
