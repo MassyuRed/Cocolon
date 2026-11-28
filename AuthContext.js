@@ -9,6 +9,23 @@ import {
 const AuthContext = createContext(null);
 
 const DISPLAY_NAME_MAX_LENGTH = 15;
+const NATIVE_SIGNUP_REDIRECT = "cocolon://auth-callback";
+const NATIVE_PASSWORD_RESET_REDIRECT = "cocolon://reset-password";
+const WEB_PASSWORD_RESET_REDIRECT = "https://emlis.app/auth/reset";
+
+function signupRedirectUrl() {
+  return process.env.EXPO_PUBLIC_SIGNUP_REDIRECT_URL ||
+    process.env.SIGNUP_REDIRECT_URL || NATIVE_SIGNUP_REDIRECT;
+}
+
+function passwordResetRedirectUrl() {
+  return process.env.EXPO_PUBLIC_PASSWORD_RESET_REDIRECT_URL ||
+    process.env.PASSWORD_RESET_REDIRECT_URL || WEB_PASSWORD_RESET_REDIRECT;
+}
+
+function authLinkDestination(url) {
+  return String(url || "").split(/[?#]/, 1)[0].replace(/\/$/, "");
+}
 
 function normalizeDisplayName(value) {
   return String(value || "").trim();
@@ -173,6 +190,12 @@ export function AuthProvider({ children }) {
 
     const handleUrl = async (url) => {
       try {
+        const destination = authLinkDestination(url);
+        if (!destination) return;
+        const isPasswordReset = [NATIVE_PASSWORD_RESET_REDIRECT, WEB_PASSWORD_RESET_REDIRECT, passwordResetRedirectUrl()]
+          .some(redirect => authLinkDestination(redirect) === destination);
+        const isSignup = destination === NATIVE_SIGNUP_REDIRECT || destination === authLinkDestination(signupRedirectUrl());
+        if (!isPasswordReset && !isSignup) return;
         const p = parseUrlParams(url);
         const type = String(p.type || "").toLowerCase();
 
@@ -208,7 +231,7 @@ export function AuthProvider({ children }) {
         }
 
         if (!mounted) return;
-        setRecoveryMode(type === "recovery");
+        setRecoveryMode(isPasswordReset || type === "recovery");
       } catch (e) {
         console.warn("handle auth link error:", e);
         if (!mounted) return;
@@ -257,10 +280,7 @@ export function AuthProvider({ children }) {
         throw new Error(`ユーザー名は${DISPLAY_NAME_MAX_LENGTH}文字以内で入力してください。`);
       }
 
-      const emailRedirectTo =
-        process.env.EXPO_PUBLIC_SIGNUP_REDIRECT_URL ||
-        process.env.SIGNUP_REDIRECT_URL ||
-        "cocolon://auth-callback";
+      const emailRedirectTo = signupRedirectUrl();
 
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -388,10 +408,7 @@ export function AuthProvider({ children }) {
         );
       }
 
-      const emailRedirectTo =
-        process.env.EXPO_PUBLIC_SIGNUP_REDIRECT_URL ||
-        process.env.SIGNUP_REDIRECT_URL ||
-        "cocolon://auth-callback";
+      const emailRedirectTo = signupRedirectUrl();
 
       const { error } = await supabase.auth.resend({
         type: "signup",
@@ -420,10 +437,7 @@ export function AuthProvider({ children }) {
     setAuthError("");
     setAuthLoading(true);
     try {
-      const redirectTo =
-        process.env.EXPO_PUBLIC_PASSWORD_RESET_REDIRECT_URL ||
-        process.env.PASSWORD_RESET_REDIRECT_URL ||
-        "https://emlis.app/auth/reset";
+      const redirectTo = passwordResetRedirectUrl();
 
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo,

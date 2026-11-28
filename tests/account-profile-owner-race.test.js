@@ -40,15 +40,19 @@ function transport(owner = 'A') {
   return Object.assign(api, { gets, writes, auth, session, setOwner(id) { current = id; } });
 }
 
-function authProvider(owner = 'A', initialRead = null) {
+function authProvider(owner = 'A', initialRead = null, { initialUrl = null, env = {} } = {}) {
   const api = transport(owner), slots = [], effects = [];
-  let cursor = 0, dirty = false, authCallback, initial = true, value, nativeSignOuts = 0;
+  const authLinkCalls = [];
+  let cursor = 0, dirty = false, authCallback, urlCallback, initial = true, value, nativeSignOuts = 0;
   const slot = create => { const i = cursor++; if (!(i in slots)) slots[i] = create(); return i; };
   const getSession = api.auth.getSession;
   const auth = { ...api.auth, getSession: () => {
     if (initial) { initial = false; if (initialRead) return initialRead.promise; }
     return getSession();
   }, onAuthStateChange: fn => { authCallback = fn; return { data: { subscription: { unsubscribe() {} } } }; },
+  exchangeCodeForSession: async code => { authLinkCalls.push(['code', code]); return { error: null }; },
+  setSession: async tokens => { authLinkCalls.push(['session', tokens]); return { error: null }; },
+  verifyOtp: async otp => { authLinkCalls.push(['otp', otp]); return { error: null }; },
   signOut: async () => { nativeSignOuts++; return { error: null }; } };
   const bindings = {
     createContext: () => ({}), useContext: () => null,
@@ -65,9 +69,12 @@ function authProvider(owner = 'A', initialRead = null) {
       }
     },
     supabase: { auth }, Platform: { OS: 'android' }, AbortController,
-    Linking: { getInitialURL: async () => null, addEventListener: () => ({ remove() {} }) },
+    Linking: { getInitialURL: async () => initialUrl, addEventListener: (_event, cb) => {
+      urlCallback = cb;
+      return { remove() {} };
+    } },
     ensureAccountProfile: api.ensureAccountProfile, clearAccountProfilePushToken: api.clearAccountProfilePushToken,
-    console: { warn() {}, error() {} }, process: { env: {} },
+    console: { warn() {}, error() {} }, process: { env },
   };
   const source = strip(read('AuthContext.js')).replace(
     'return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;', 'return value;');
@@ -75,11 +82,52 @@ function authProvider(owner = 'A', initialRead = null) {
   const Component = Function(...Object.keys(bindings), source + '\nreturn AuthProvider;')(...Object.values(bindings));
   const render = () => { cursor = 0; dirty = false; value = Component({ children: null }); while (effects.length) effects.shift()(); return value; };
   render();
-  return { api, render, get value() { return value; }, get nativeSignOuts() { return nativeSignOuts; },
+  return { api, render, authLinkCalls, get value() { return value; }, get nativeSignOuts() { return nativeSignOuts; },
+    openUrl(url) { urlCallback({ url }); },
     switchTo(id) { api.setOwner(id); authCallback(id ? 'SIGNED_IN' : 'SIGNED_OUT', api.session(id)); },
     async settle() { for (let i = 0; i < 8; i += 1) { await tick(); if (dirty) render(); } },
   };
 }
+
+test('public profile and unrelated URLs do not reach the auth client on cold or warm open', async () => {
+  const p = authProvider('A', null, { initialUrl: 'https://emlis.app/u/test-profile?code=fixture' });
+  await p.settle();
+  p.openUrl('cocolon://u/test-profile?token_hash=fixture');
+  p.openUrl('https://emlis.app/auth/reset/elsewhere?code=fixture');
+  await p.settle();
+  assert.deepEqual(p.authLinkCalls, []);
+  assert.equal(p.value.user.id, 'A');
+});
+
+test('native signup and password reset keep their callback formats and recovery state', async () => {
+  const p = authProvider(null, null, { initialUrl: 'cocolon://auth-callback?code=signup-fixture' });
+  await p.settle();
+  assert.deepEqual(p.authLinkCalls, [['code', 'signup-fixture']]);
+  assert.equal(p.value.recoveryMode, false);
+
+  p.openUrl('cocolon://reset-password?code=reset-fixture');
+  await p.settle();
+  assert.deepEqual(p.authLinkCalls.at(-1), ['code', 'reset-fixture']);
+  assert.equal(p.value.recoveryMode, true);
+
+  p.openUrl('https://emlis.app/auth/reset#token_hash=otp-fixture&type=recovery');
+  await p.settle();
+  assert.deepEqual(p.authLinkCalls.at(-1), ['otp', { token_hash: 'otp-fixture', type: 'recovery' }]);
+});
+
+test('configured exact redirect remains available for existing callback settings', async () => {
+  const p = authProvider(null, null, { env: {
+    SIGNUP_REDIRECT_URL: 'https://example.test/confirm',
+    PASSWORD_RESET_REDIRECT_URL: 'https://example.test/reset',
+  } });
+  p.openUrl('https://example.test/confirm#access_token=access-fixture&refresh_token=refresh-fixture');
+  await p.settle();
+  assert.deepEqual(p.authLinkCalls, [['session', { access_token: 'access-fixture', refresh_token: 'refresh-fixture' }]]);
+  assert.equal(p.value.recoveryMode, false);
+  p.openUrl('https://example.test/reset?code=reset-fixture');
+  await p.settle();
+  assert.equal(p.value.recoveryMode, true);
+});
 
 test('same-owner profile initialization retains its GET/PATCH and payload', async () => {
   const api = transport('A');
