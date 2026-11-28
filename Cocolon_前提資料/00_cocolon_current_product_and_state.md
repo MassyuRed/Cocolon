@@ -1,3 +1,5 @@
+> **11/28 JST・CMEEの確認済み修正を本番APIとワーカーに反映。** 同じ `4274f33` で稼働し、Supabaseの先行移行7件を適用済み。Pieceの本文と本人回答からの保存・再読、DeepInsightの問い文・通知、EmlisAIの未回答見送り後の再読、わたしマップ保存・通知予約を更新した。残る確認はEmlisAIの実9B本文、わたしマップの最終本文・図、もしもルートのGPU側切替、iOSのWeb側関連付け。 [通常反映の記録](weekly_reviews/Cocolon_Weekly_Review_20261128.md#ordinary-rollout-4274f33-20261128)
+
 > **11/26 JST・iOS 1.0（9001）をTestFlightへ送信。** `7f632b1` は8901以降のEmlis応答の履歴表示・待機案内・ホーム集計を待たない応答開始、Emlisとわたしマップの訂正操作の一時非表示、Pieceの固定プレビューと画像編集の変更を収録する。署名付きArchiveとIPA出力を経て13:11:05 JSTにTestFlight送信が成功した。Appleでの処理と内部配布はMashが担当する。わたしマップはRenderのAPI・ワーカー `88aedc7` で24記録を処理し、13:38:20 JSTに新しい現在版を保存した。現在版の取得と通知の送信成功を確認した。 [本番の更新記録](weekly_reviews/Cocolon_Weekly_Review_20261121.md#watashi-map-production-capacity-recovery-20261126) [検証と配布状況](weekly_reviews/Cocolon_Weekly_Review_20261121.md#emlis-opening-piece-editor-map-recovery-20261126)
 
 > **11/26 JST・Pieceプレビューの出典確認と画像編集を短縮。** 本番API `fc01a08` は重複していた出典の読み出しを減らした。隔離試験では初回5→3回、画像設定の変更4→2回。アプリ版 `113bc02` は画像設定を先に端末で描き、連続変更をまとめて送る。このアプリ変更は次のビルドから。認証付き本番操作と実機の所要時間は未計測。 [配備と検証](weekly_reviews/Cocolon_Weekly_Review_20261121.md#piece-preview-performance-20261126)

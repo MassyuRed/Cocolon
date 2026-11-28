@@ -392,6 +392,27 @@ DeepInsightは履歴ありCASE-071のテーマ回答を三プランで保存・�
 
 配備候補は通常APIとワーカーの両方に同一コミットを指定して反映する構成。管理画面がクラッシュし、接続済みの配備操作にはSHA指定がないため、既存の通常版の切り替えと候補の追加移行7件は未実行。
 
+<a id="ordinary-rollout-4274f33-20261128"></a>
+
+#### 11/28 JSTの通常反映
+
+Mashの承認後、既存のRenderサービスとSupabase本番プロジェクトに反映した。Renderの管理画面が起動時にクラッシュしたため、Mashが認証したRender CLIで同一コミットを明示指定した。ワーカーは17:50:28 JST、APIは17:51:55 JSTにLiveとなった。両サービスの接続ブランチは `main`、自動配備は無効。 [配備コミット](https://github.com/MassyuRed/mashos-api/commit/4274f332f287f074fa885b58ab40f6b2f707b1f9) · [API](https://dashboard.render.com/web/srv-d4ppfpm3jp1c73952bj0/deploys/dep-dc59bnp7lnhs73b5ahq0) · [ワーカー](https://dashboard.render.com/worker/srv-d6copljh46gs73cmeic0/deploys/dep-dc59b6h7lnhs73b58aj0)
+
+- 配備前に候補コミットのSQL 7件をSupabaseに適用した。7ファイルはGitHubの同版とバイト単位で照合し、既存の移行と同様に本番台帳の付番を移行名で突き合わせた。台帳は69件から76件になり、わたしマップの通知トリガーが有効になった。
+- 配備後の公開 `/healthz` はHTTP 200。17:52:01〜17:52:16のワーカーのキュー取得25回はすべてHTTP 200。17:52:18のDB照合では待機・実行とも0件。
+- 配備版には、本人が選んだDeepInsightの記録由来回答を使うPieceの作成・保存・再読、Pieceの重複表現の修正、問い文と通知の修正、EmlisAIの未回答見送り後の同版再読、わたしマップ保存と通知予約の一体化が含まれる。移行に関わる隔離PostgreSQLの53件とDeepInsightのSQL検証、同じ本人の回答をマップの本文と図へ渡す7件を確認した。候補のGitHub Actions実行は0件で、ローカルの既存試験の一部はPostgreSQL WASMの起動時に停止した。
+- 残る受け入れは、本人の履歴とPremiumの事前わたしマップ・こころグラフを使うEmlisAIの修正版の実9B出力、わたしマップの最終本文・図、もしもルートの新分岐のGPU側反映、iOSのWeb側関連付け。EmlisAIは切り離した隔離DBで修正版の10応答分のモデル送信内容と同版再読を確認し、実9Bの応答出力はまだ取得していない。アプリのビルドと配布は0件。
+
+| ソースの移行番号 | 本番台帳番号 | 移行名 |
+| --- | --- | --- |
+| `20261128054617` | `20261128084846` | `piece_v2_android_appearance_renderer` |
+| `20261128060550` | `20261128084852` | `piece_deep_insight_source_binding` |
+| `20261128061355` | `20261128084855` | `piece_deep_insight_lifecycle` |
+| `20261128062500` | `20261128084857` | `deep_insight_piece_history_links` |
+| `20261128071418` | `20261128084859` | `analysis_cumulative_completion_push` |
+| `20261128072435` | `20261128084901` | `reopen_unsent_deep_insight_theme_notice` |
+| `20261128072900` | `20261128084902` | `piece_deep_insight_preserved_original` |
+
 ## 5. 比較に使った原本
 
 - [第12回議事録](Cocolon_Weekly_Review_20261121.md)は作業ログが§11.118まである `7d2fc92` の版を使用。11/27の成果は、同議事録の短い版を持つ後続アプリブランチの実装・運用記録とActionsを照合した。
