@@ -2,7 +2,7 @@
  * Results are local drawing evidence, never server fit/save/export authority.
  */
 import { NativeModules, Platform, findNodeHandle, requireNativeComponent, UIManager } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION, preparePieceNativePreview } from './pieceLayout';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_RENDERER_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION, preparePieceNativePreview } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
@@ -12,10 +12,13 @@ const finite = value => typeof value === 'number' && Number.isFinite(value);
 const BITMAP_WIRE = 'piece.native_bitmap_canvas.v1';
 const ANDROID_BITMAP_WIRE = 'piece.native_android_bitmap_canvas.v1';
 
-// The original iOS bitmap bridge has these capabilities without a version
-// constant. Check the actual bridge and view before requesting a preview.
 export function supportsPieceBitmapCreation() {
   try {
+    if (Platform.OS === 'android') {
+      const module = NativeModules.PieceTextMetrics;
+      return module?.bitmapRendererVersion === PIECE_ANDROID_BITMAP_RENDERER_VERSION &&
+        typeof module.measureCandidates === 'function' && !!pieceAndroidBitmapNativeView();
+    }
     if (Platform.OS !== 'ios') return false;
     const module = NativeModules.PieceTextMetrics;
     return ['measureExplorationCandidates', 'renderBitmapCanvas', 'releaseBitmapCanvas'].every(name => typeof module?.[name] === 'function') &&
@@ -28,11 +31,15 @@ export function supportsPieceBitmapCreation() {
 // This performs no native drawing, component initialization, HTTP or mutation.
 export function isPieceBitmapSaveAdmitted(preview, displayToken) {
   try {
-    if (![PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(preview?.renderer_version) ||
-        !displayToken || typeof displayToken !== 'object' || Array.isArray(displayToken)) return false;
+    if (!displayToken || typeof displayToken !== 'object' || Array.isArray(displayToken)) return false;
     const input = preparePieceNativePreview({ phase: 'received', preview, visualToken: displayToken });
-    return input?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION && [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(input.rendererVersion) &&
-      supportsPieceBitmapCreation();
+    if (!input || !supportsPieceBitmapCreation()) return false;
+    if (Platform.OS === 'android') {
+      return input.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION &&
+        input.rendererVersion === PIECE_ANDROID_BITMAP_RENDERER_VERSION;
+    }
+    return input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION &&
+      [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(input.rendererVersion);
   } catch { return false; }
 }
 let bitmapNativeView;
@@ -146,7 +153,6 @@ export async function renderPieceBitmapCanvas(node, expected) {
   }
 }
 
-// This native bridge is reached only by the local Android canvas harness.
 let androidBitmapNativeView;
 export function pieceAndroidBitmapNativeView() {
   try {
@@ -238,6 +244,7 @@ export async function renderPieceAndroidBitmapCanvas(node, expected) {
       width: input.width, height: input.height, margin: input.margin, branding_zone: input.brandingZone,
       content_width: input.contentWidth, content_height: input.contentHeight, line_height: lineHeight, total_height: totalHeight,
       alignment: input.alignment, branding_mode: input.brandingMode, colors: { canvas, surface, border, text, branding },
+      ...(input.appearanceBackdrop ? { appearance_backdrop: input.appearanceBackdrop } : {}),
       rows: rows.map(row => ({ tag: row.tag, text: row.text, font_size: row.fontSize, width: row.box.width,
         height: row.box.height, line_width: row.lineWidth, gap_after: row.gapAfter, kind: row.kind })) });
     const result = readPieceAndroidBitmapCanvas(value, { ...expected, rows, canvasTag });

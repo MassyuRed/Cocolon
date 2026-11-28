@@ -151,6 +151,24 @@ test('missing meaning is shown as an Analysis question without fabricated candid
   await act(async () => view.unmount());
 });
 
+test('the form sends the user’s own alternatives separately from the intention and conditions', async () => {
+  const h = harness(), Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default;
+  let view;
+  await act(async () => { view = Renderer.create(React.createElement(Dialog, props())); });
+  await fill(view);
+  const field = testID => view.root.findByProps({ testID });
+  await act(async () => field('analysis-if-use-own-choices').props.onValueChange(true));
+  assert.equal(field('analysis-if-create').props.disabled, true);
+  await act(async () => field('analysis-if-own-choice-1').props.onChangeText('資料の確認だけを引き受ける。'));
+  await act(async () => field('analysis-if-own-choice-2').props.onChangeText('資料の確認だけを引き受ける'));
+  assert.equal(field('analysis-if-create').props.disabled, true);
+  await act(async () => field('analysis-if-own-choice-2').props.onChangeText('提出が済むまで新しい依頼を待ってもらう。'));
+  await act(async () => field('analysis-if-create').props.onPress());
+  assert.deepEqual(h.calls[0].parsedBody.scenario_choice_texts, ['資料の確認だけを引き受ける。', '提出が済むまで新しい依頼を待ってもらう。']);
+  assert.equal(h.calls[0].parsedBody.branch_intent_text, '次は意見を伝えてみたい。');
+  await act(async () => view.unmount());
+});
+
 test('PENDING never automatically calls again and explicit confirmation reuses exactly one key and body', async () => {
   let attempt = 0;
   const h = harness(async () => ++attempt === 1 ? pending() : candidate()), Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default;

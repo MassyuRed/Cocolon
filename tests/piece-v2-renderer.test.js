@@ -274,7 +274,8 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
     aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'] };
   return p;
 }
-const display = p => ({ phase: 'received', preview: p, hashVerified: true });
+const display = p => ({ phase: 'received', preview: p, hashVerified: true,
+  ...(p?.renderer_version === 'piece.rn_bitmap_renderer.android.v1' ? { visualToken: Object.freeze({}) } : {}) });
 function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false, os = 'ios', previewProps = {}) {
   let now = initialNow, serial = 0, monotonic = 0;
   const frames = new Map(), timers = new Map(), nativeCalls = [], candidateCalls = [], mountedNodes = new Map();
@@ -418,7 +419,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot', 'supportsPieceVisualStyle', 'supportsPieceGradientBackdrop', 'supportsPieceAppearanceBackdrop']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_ANDROID_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceGradientNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'pieceAndroidBitmapNativeView', 'readPieceAndroidBitmapCanvas',
       'renderPieceAndroidBitmapCanvas', 'releasePieceAndroidBitmapCanvas', 'capturePieceAndroidBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
@@ -3560,13 +3561,15 @@ function androidBitmapReply(request, rightAligned = false) {
     }) };
 }
 
-function androidBitmapHarness(reply = value => value, packet = sample()) {
-  packet.renderer_version = androidBitmapProfile;
+function androidBitmapHarness(reply = value => value, packet = sample(), { product = false, saved = false } = {}) {
+  const renderer = 'piece.rn_bitmap_renderer.android.v1';
+  packet.renderer_version = product ? renderer : androidBitmapProfile;
   packet.expires_at = new Date(NOW + 60000).toISOString();
   const fit = [], calls = [], releases = [], captures = [], removed = [];
-  const h = rawHarness(packet, undefined, false, undefined, NOW, false, 'android',
-    { androidRasterPrototype: true, onSaveFitChange: (...args) => fit.push(args) });
+  const h = rawHarness(saved ? { ...savedSample(packet), renderer_version: renderer } : packet, undefined, saved, undefined, NOW, saved, 'android',
+    { androidRasterPrototype: !product, onSaveFitChange: (...args) => fit.push(args) });
   const module = h.context.NativeModules.PieceTextMetrics;
+  if (product) module.bitmapRendererVersion = renderer;
   h.context.UIManager.getViewManagerConfig = name => name === 'PieceAndroidBitmapCanvas' ? {} : null;
   module.renderAndroidBitmapCanvas = async req => { calls.push(req); return reply(androidBitmapReply(req), req); };
   module.releaseAndroidBitmapCanvas = (...args) => releases.push(args);
@@ -3576,6 +3579,78 @@ function androidBitmapHarness(reply = value => value, packet = sample()) {
   h.context.FileSystem.unlink = async path => removed.push(path);
   return { ...h, packet, module, fit, calls, releases, captures, removed };
 }
+
+test('Android ordinary Piece requires the compiled renderer and retains a valid native fit', async () => {
+  const h = androidBitmapHarness(undefined, sample(), { product: true });
+  const displayToken = h.card.props.display.visualToken;
+  assert.equal(h.supportsPieceBitmapCreation(), true);
+  assert.equal(h.isPieceBitmapSaveAdmitted(h.packet, displayToken), true);
+  assert.equal(h.fit.length, 0);
+  await finishBitmap(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  const handle = h.fit.at(-1)?.[0];
+  h.now(NOW + 8001); h.monotonic(8001);
+  assert.equal(handle?.isCurrent(h.packet, displayToken), true);
+  assert.equal(h.card.getAndroidRasterTarget(), null);
+  delete h.module.bitmapRendererVersion;
+  assert.equal(h.isPieceBitmapSaveAdmitted(h.packet, displayToken), false);
+  h.card.componentWillUnmount();
+  assert.equal(handle.isCurrent(h.packet, displayToken), false);
+});
+
+test('Android Premium uses the saved text style and backdrop in preview, detail and PNG', async () => {
+  const p = sample('short_essay', '4:5');
+  const h = androidBitmapHarness(undefined, p, { product: true });
+  const saved = androidBitmapHarness(undefined, copy(p), { product: true, saved: true });
+  const settings = { theme_id: 'sage_paper', background_style: 'color_wash', frame_style: 'double_line', accent_style: 'corner_marks' };
+  Object.assign(p.plan_capabilities, { theme_ids: copy(h.context.PIECE_STYLE_THEME_IDS),
+    font_style_ids: ['system_readable', 'serif_readable'], text_color_ids: ['neutral_ink'],
+    text_alignments: ['left', 'center'], text_sizes: ['small', 'standard', 'large'],
+    background_styles: ['solid', 'gradient', 'color_bands', 'color_wash', 'dot_pattern', 'stripe_pattern'],
+    frame_styles: ['none', 'line', 'double_line'], accent_styles: ['none', 'top_rule', 'corner_marks'] });
+  Object.assign(p.visual_recipe.theme, settings);
+  p.visual_recipe.font_style = { font_style_id: 'serif_readable', font_style_version: 1,
+    text_color_id: 'neutral_ink', text_alignment: 'center', text_size: 'large' };
+  p.visual_recipe_hash = hash(JSON.stringify(canonical(p.visual_recipe)));
+  const savedRecord = { ...savedSample(p), renderer_version: p.renderer_version };
+  assert.equal(h.preparePieceNativePreview(display(p)), null, 'styles need the native capability');
+  for (const bridge of [h.module, saved.module]) Object.assign(bridge, {
+    visualStyleVersion: 'piece.visual_style.v1', gradientBackdropVersion: 'piece.gradient_backdrop.v1',
+    appearanceBackdropVersion: 'piece.appearance_backdrop.v1',
+  });
+  h.replace(p);
+  saved.replace(savedRecord);
+  try {
+    assert.equal(h.input().fontFamily, 'serif');
+    assert.equal(h.input().colors.text, '#334155');
+    assert.deepEqual(copy(h.input().appearanceBackdrop), copy(saved.input().appearanceBackdrop));
+    await finishBitmap(h);
+    await finishBitmap(saved);
+    assert.deepEqual(copy(h.calls.at(-1).appearance_backdrop), copy(saved.calls.at(-1).appearance_backdrop));
+    assert.equal(h.calls.at(-1).alignment, 'center');
+    assert.ok(h.calls.at(-1).rows.filter(row => row.kind === 'body').every(row => row.font_size === 52));
+    assert.equal(await saved.card.getCaptureTarget().capture(), 'file:///cache/piece-capture/piece-1.png');
+    const gradient = copy(p);
+    gradient.visual_recipe.theme = { theme_id: 'sage_paper', theme_version: 1, background_style: 'gradient' };
+    gradient.visual_recipe_hash = hash(JSON.stringify(canonical(gradient.visual_recipe)));
+    assert.deepEqual(copy(h.preparePieceNativePreview(display(gradient)).appearanceBackdrop.colors), ['#E5EEE0', '#F5F8F0']);
+  } finally {
+    h.card.componentWillUnmount();
+    saved.card.componentWillUnmount();
+  }
+});
+
+test('Android saved Piece export captures its current bitmap and revokes stale captures', async () => {
+  const h = androidBitmapHarness(undefined, sample('quote', '9:16'), { product: true, saved: true });
+  await finishBitmap(h);
+  const target = h.card.getCaptureTarget();
+  assert.ok(target?.isCurrent());
+  assert.deepEqual([target.width, target.height], [1080, 1920]);
+  assert.equal(await target.capture(), 'file:///cache/piece-capture/piece-1.png');
+  assert.equal(h.captures.length, 1);
+  h.card.componentWillUnmount();
+  await assert.rejects(target.capture(), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
 
 test('Android opt-in card mounts native bitmap from current rows and only exposes harness capture', async () => {
   const h = androidBitmapHarness(v => v, sample('quote', '9:16'));

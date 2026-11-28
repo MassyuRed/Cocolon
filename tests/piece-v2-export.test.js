@@ -78,7 +78,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     ['features/piece/pieceApi.js',['PieceApiError','readPiecePreviewSnapshot','readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js',['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js',['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js',['preparePieceNativeSavedDisplay','PIECE_NATIVE_PREVIEW_VERSION','PIECE_BITMAP_RENDERER_VERSION','PIECE_BITMAP_RENDERER_V2_VERSION']],
+    ['features/piece/pieceLayout.js',['preparePieceNativeSavedDisplay','PIECE_NATIVE_PREVIEW_VERSION','PIECE_BITMAP_RENDERER_VERSION','PIECE_BITMAP_RENDERER_V2_VERSION','PIECE_ANDROID_BITMAP_RENDERER_VERSION']],
     ['features/piece/pieceExportPngProfile.js',['verifyPieceExportPngStructure']],
   ]) {
     const source=fs.readFileSync(path.join(ROOT,file),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');

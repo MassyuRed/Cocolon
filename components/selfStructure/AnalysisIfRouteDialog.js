@@ -20,12 +20,15 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
   const sequence = useRef(0), controllers = useRef(new Set()), operations = useRef(new Map()), inFlight = useRef(null);
   const [state, setState] = useState({ scope: null, panel: mode === 'saved' ? 'saved_intent' : 'form' });
   const [intent, setIntent] = useState(''), [constraint, setConstraint] = useState('');
+  const [useOwnChoices, setUseOwnChoices] = useState(false);
+  const [ownChoices, setOwnChoices] = useState(['', '', '']);
   const [noConstraints, setNoConstraints] = useState(false), [count, setCount] = useState(2), [note, setNote] = useState('');
   const abortAll = () => { sequence.current += 1; inFlight.current = null; controllers.current.forEach(controller => controller.abort()); controllers.current.clear(); };
   useEffect(() => {
     abortAll();
     setState({ scope, panel: mode === 'saved' ? 'saved_intent' : 'form' });
     setIntent(''); setConstraint(''); setNoConstraints(false); setCount(2); setNote('');
+    setUseOwnChoices(false); setOwnChoices(['', '', '']);
     return abortAll;
   }, [scope]);
   useEffect(() => {
@@ -140,6 +143,9 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
   const show = state.scope === scope ? state : { panel: mode === 'saved' ? 'saved_intent' : 'form' };
   const recovery = show.recovery || (pendingOperation ? { context: pendingOperation[0], method: pendingOperation[1].method } : null);
   const formLocked = busy || !!recovery;
+  const scenarioChoices = useOwnChoices ? ownChoices.slice(0, count).map(choice => choice.trim()) : [];
+  const distinctChoices = new Set(scenarioChoices.map(choice => choice.replace(/[\s。．.!！?？、,，]+/g, '')));
+  const ownChoicesReady = !useOwnChoices || (!distinctChoices.has('') && distinctChoices.size === count);
   const result = show.result;
   const resetForm = () => update({ panel: 'form', result: null, detail: null, items: [], error: null, message: null, question: null, recovery: null });
   const restartDifferent = () => {
@@ -173,10 +179,21 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
             <View style={styles.actions}>{[1, 2, 3].map(number => <CocolonButton key={number}
               testID={`analysis-if-count-${number}`} title={`${number}案`} variant={count === number ? 'primary' : 'secondary'}
               accessibilityState={{ selected: count === number }} onPress={() => setCount(number)} disabled={formLocked} />)}</View>
-            <CocolonButton testID="analysis-if-create" title="選択肢を考える" disabled={formLocked || !intent.trim() || (!constraint.trim() && !noConstraints)}
+            <View style={styles.switchRow}><Text style={[styles.text, { flex: 1 }]}>自分で考えた案を入力する</Text>
+              <Switch testID="analysis-if-use-own-choices" accessibilityLabel="自分で考えた案を入力する"
+                value={useOwnChoices} onValueChange={setUseOwnChoices} disabled={formLocked} /></View>
+            {useOwnChoices && ownChoices.slice(0, count).map((choice, index) => <View key={index}>
+              <Text style={styles.label}>{`${index + 1}つ目の案`}</Text>
+              <TextInput testID={`analysis-if-own-choice-${index + 1}`} accessibilityLabel={`${index + 1}つ目の案`}
+                multiline maxLength={2000} style={styles.input} value={choice} editable={!formLocked}
+                onChangeText={text => setOwnChoices(previous => previous.map((item, slot) => slot === index ? text : item))} />
+            </View>)}
+            <CocolonButton testID="analysis-if-create" title="選択肢を考える"
+              disabled={formLocked || !intent.trim() || (!constraint.trim() && !noConstraints) || !ownChoicesReady}
               onPress={() => mutation(createContext, 'create', { base_observed_map_ref: baseMapRef,
                 branch_point_id: branchPointId, branch_intent_text: intent.trim(), constraint_texts: noConstraints ? [] : [constraint.trim()],
-                constraints_confirmed: noConstraints || !!constraint.trim(), requested_candidate_count: count })} />
+                constraints_confirmed: noConstraints || !!constraint.trim(), requested_candidate_count: count,
+                ...(useOwnChoices ? { scenario_choice_texts: scenarioChoices } : {}) })} />
           </> : null}
           {result ? <>
             <Text style={styles.notice}>並び順はおすすめの順位ではありません。</Text>

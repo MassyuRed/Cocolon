@@ -24,6 +24,7 @@ export const PIECE_ANDROID_BITMAP_PREVIEW_VERSION = 'piece.rn_android_bitmap_pre
 // External saved identity is distinct from the immutable measurement profile.
 export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
 export const PIECE_BITMAP_RENDERER_V2_VERSION = 'piece.rn_bitmap_renderer.ios.v2';
+export const PIECE_ANDROID_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.android.v1';
 const nativeScales = {
   short_essay: { '4:5': [48, 44, 40, 36], '9:16': [52, 48, 44, 40] },
   quote: { '4:5': [72, 64, 56], '9:16': [80, 72, 64] },
@@ -49,7 +50,9 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
   if (p.renderer_version === PIECE_ANDROID_BITMAP_PREVIEW_VERSION) return null;
-  const candidateProfile = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
+  if (p.renderer_version === PIECE_ANDROID_BITMAP_RENDERER_VERSION && Platform.OS !== 'android') return null;
+  const candidateProfile = p.renderer_version === PIECE_ANDROID_BITMAP_RENDERER_VERSION ? PIECE_ANDROID_BITMAP_PREVIEW_VERSION
+    : [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V9_VERSION ? PIECE_NATIVE_PREVIEW_V9_VERSION
@@ -67,6 +70,7 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
 export function supportsPieceSavedImage(rendererVersion) {
   return (Platform.OS === 'ios' || Platform.OS === 'android') && (
     rendererVersion === PIECE_NATIVE_PREVIEW_VERSION ||
+    Platform.OS === 'android' && rendererVersion === PIECE_ANDROID_BITMAP_RENDERER_VERSION ||
     Platform.OS === 'ios' && [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(rendererVersion)
   );
 }
@@ -78,7 +82,8 @@ export function preparePieceNativeSavedDisplay(raw) {
   try {
     const p = readPieceOwnerDisplay(raw);
     if (!supportsPieceSavedImage(p.renderer_version)) return null;
-    const profile = p.renderer_version === PIECE_NATIVE_PREVIEW_VERSION ? PIECE_NATIVE_PREVIEW_VERSION : PIECE_BITMAP_PREVIEW_VERSION;
+    const profile = p.renderer_version === PIECE_ANDROID_BITMAP_RENDERER_VERSION ? PIECE_ANDROID_BITMAP_PREVIEW_VERSION
+      : p.renderer_version === PIECE_NATIVE_PREVIEW_VERSION ? PIECE_NATIVE_PREVIEW_VERSION : PIECE_BITMAP_PREVIEW_VERSION;
     const key = JSON.stringify([profile, 'saved', p.piece_id, p.public_id,
       p.row_version, p.saved_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
     return preparePieceNativeArtifact(p, key, profile);
@@ -125,8 +130,8 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
     brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION || androidPrototype ? 'Emlis' : 'Cocolon',
     alignment: recipe.font_style.text_alignment ?? pieceDefaultTextAlignment(p.format_type),
-    ...(serif ? { fontFamily: PIECE_SERIF_FONT } : {}),
-    ...(appearance ? { appearanceBackdrop: pieceAppearanceBackdrop(recipe.theme) }
+    ...(serif ? { fontFamily: androidPrototype ? 'serif' : PIECE_SERIF_FONT } : {}),
+    ...(appearance || androidPrototype && gradient ? { appearanceBackdrop: pieceAppearanceBackdrop(recipe.theme) }
       : gradient ? { backgroundGradient: pieceBackgroundGradient(recipe.theme.theme_id) } : {}),
     colors, brandingMode: recipe.branding.branding_mode });
 }

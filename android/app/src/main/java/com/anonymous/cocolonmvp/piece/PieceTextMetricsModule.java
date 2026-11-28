@@ -40,6 +40,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -60,6 +61,14 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
   private volatile boolean bitmapActive = true;
   public PieceTextMetricsModule(ReactApplicationContext context) { super(context); }
   @Override public String getName() { return "PieceTextMetrics"; }
+  @Override public Map<String, Object> getConstants() {
+    Map<String, Object> capabilities = new HashMap<>();
+    capabilities.put("bitmapRendererVersion", "piece.rn_bitmap_renderer.android.v1");
+    capabilities.put("visualStyleVersion", "piece.visual_style.v1");
+    capabilities.put("gradientBackdropVersion", "piece.gradient_backdrop.v1");
+    capabilities.put("appearanceBackdropVersion", "piece.appearance_backdrop.v1");
+    return capabilities;
+  }
   @Override public void invalidate() {
     bitmapActive = false;
     candidateWorker.shutdownNow();
@@ -348,7 +357,7 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
     final String binding;
     final long deadline;
     try {
-      requireFields(request, "version", "profile", "canvas_tag", "preview_key", "binding_token",
+      requireFieldsWithOptional(request, "appearance_backdrop", "version", "profile", "canvas_tag", "preview_key", "binding_token",
           "expires_at_ms", "remaining_ms", "width", "height", "margin", "branding_zone", "content_width",
           "content_height", "line_height", "total_height", "alignment", "branding_mode", "colors", "rows");
       require(ANDROID_BITMAP_VERSION.equals(request.getString("version")) &&
@@ -561,6 +570,8 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
     requireFields(colors, "canvas", "surface", "border", "text", "branding");
     int background = readColor(colors, "canvas"), surface = readColor(colors, "surface"), border = readColor(colors, "border");
     int textColor = readColor(colors, "text"), brandColor = readColor(colors, "branding");
+    PieceAndroidBackdrop backdrop = request.hasKey("appearance_backdrop")
+        ? readAppearance(request.getMap("appearance_backdrop")) : null;
     float density = host.getResources().getDisplayMetrics().density;
     require(Float.isFinite(density) && density > 0 && Math.abs(host.getWidth() - width * (double) density) <= 1 &&
         Math.abs(host.getHeight() - height * (double) density) <= 1 && host.getLeft() == 0 && host.getTop() == 0);
@@ -607,8 +618,19 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
       int frame = margin / 2;
       paint.setColor(border);
       full.drawRect(frame, frame, width - frame, height - frame, paint);
-      paint.setColor(surface);
-      full.drawRect(frame + 2, frame + 2, width - frame - 2, height - frame - 2, paint);
+      int inset = frame + 2;
+      if (backdrop == null) {
+        paint.setColor(surface);
+        full.drawRect(inset, inset, width - inset, height - inset, paint);
+      } else {
+        int[] pixels = new int[width - 2 * inset];
+        int surfaceHeight = height - 2 * inset;
+        for (int y = 0; y < surfaceHeight; y++) {
+          if (y % 32 == 0) beforeDeadline(deadline);
+          backdrop.paintRow(pixels, y, surfaceHeight);
+          bitmap.setPixels(pixels, 0, pixels.length, inset, inset + y, pixels.length, 1);
+        }
+      }
       WritableArray proof = Arguments.createArray();
       double rowTop = margin + (contentHeight - totalHeight) / 2;
       long remainingPixels = MAX_SCAN_PIXELS;
@@ -834,9 +856,48 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
   }
 
   private static int readColor(ReadableMap map, String key) {
-    String value = stringValue(map, key, 7);
-    require(value.matches("#[0-9a-fA-F]{6}"));
+    return parseColor(map.getString(key));
+  }
+
+  private static int parseColor(String value) {
+    require(value != null && value.length() == 7 && value.matches("#[0-9a-fA-F]{6}"));
     return Color.parseColor(value);
+  }
+
+  private static PieceAndroidBackdrop readAppearance(ReadableMap value) {
+    requireFields(value, "background_style", "colors", "ink", "frame_style", "accent_style");
+    String fill = stringValue(value, "background_style", 16);
+    String frame = stringValue(value, "frame_style", 16);
+    String accent = stringValue(value, "accent_style", 16);
+    require("none".equals(frame) || "line".equals(frame) || "double_line".equals(frame));
+    require("none".equals(accent) || "top_rule".equals(accent) || "corner_marks".equals(accent));
+    int colorCount;
+    switch (fill) {
+      case "solid":
+        require(!"none".equals(frame) || !"none".equals(accent));
+        colorCount = 1;
+        break;
+      case "gradient":
+      case "dot_pattern":
+      case "stripe_pattern":
+        colorCount = 2;
+        break;
+      case "color_bands":
+      case "color_wash":
+        colorCount = 3;
+        break;
+      default:
+        throw new IllegalArgumentException();
+    }
+    ReadableArray list = value.getArray("colors");
+    require(list != null && list.size() == colorCount);
+    int[] colors = new int[colorCount];
+    Set<Integer> seen = new HashSet<>();
+    for (int index = 0; index < colorCount; index++) {
+      colors[index] = parseColor(list.getString(index));
+      require(seen.add(colors[index]));
+    }
+    return new PieceAndroidBackdrop(fill, frame, accent, colors, readColor(value, "ink"));
   }
 
   private static String stringValue(ReadableMap map, String key, int maxLength) {
@@ -846,9 +907,14 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
   }
 
   private static void requireFields(ReadableMap map, String... keys) {
+    requireFieldsWithOptional(map, null, keys);
+  }
+
+  private static void requireFieldsWithOptional(ReadableMap map, String optional, String... keys) {
     require(map != null);
     Set<String> remaining = new HashSet<>();
     Collections.addAll(remaining, keys);
+    if (optional != null && map.hasKey(optional)) remaining.add(optional);
     ReadableMapKeySetIterator iterator = map.keySetIterator();
     while (iterator.hasNextKey()) require(remaining.remove(iterator.nextKey()));
     require(remaining.isEmpty());

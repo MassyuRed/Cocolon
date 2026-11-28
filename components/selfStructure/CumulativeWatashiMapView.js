@@ -23,7 +23,7 @@ const dateLabel = value => value ? new Date(value).toLocaleString('ja-JP', { tim
 const monthLabel = value => value ? `${value.slice(0, 4)}年${Number(value.slice(5, 7))}月` : '';
 const REFRESH_POLL_MS = 3000;
 const pendingRefresh = value => value === 'queued' || value === 'running';
-const mapScope = row => row ? `${row.id}:${row.map_subscription_tier || ''}:${!!row.map_plan_scoped}` : null;
+const mapScope = row => row ? `${row.id}:${row.map_subscription_tier || ''}:${!!row.map_plan_scoped}:${!!row.retained_previous}` : null;
 const insufficientAnalysis = data => data.reason === 'insufficient_input'
   || ['analysis_insufficient_input', 'analysis_primary_structure_unavailable'].includes(data.skip_reason);
 function readRefreshStatus(data) {
@@ -47,6 +47,7 @@ function canReuseCurrentMap(saved, key, recordRevision, status) {
   const refreshStatus = readRefreshStatus({ refresh_status: status.refreshStatus, skip_reason: status.skipReason });
   return status.hasContent === Boolean(state.row) &&
     status.versionKey === (state.row?.content_json?.watashiMap?.projection_of || null) &&
+    (!!state.row?.retained_previous === (status.skipReason === 'analysis_previous_map_retained')) &&
     (!status.tier || status.tier === state.mapSubscriptionTier) &&
     refreshStatus === state.refreshStatus &&
     (!!state.row || insufficientAnalysis({ skip_reason: status.skipReason }) === state.insufficient);
@@ -272,7 +273,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         }
         const displayed = reportId ? stateRef.current.now : stateRef.current.row;
         const version = displayed?.content_json?.watashiMap?.projection_of || null;
-        if ((data.version_key || null) !== version || (!!displayed !== data.has_visible_content)) {
+        if ((data.version_key || null) !== version || (!!displayed !== data.has_visible_content)
+            || !!displayed?.retained_previous !== (data.skip_reason === 'analysis_previous_map_retained')) {
           await load(compareRef.current, false, true);
           return;
         }
@@ -340,14 +342,14 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       ? <SemanticWatashiMap key={`${key}:${mapScope(row)}`} contentJson={row.content_json}
           mapSubscriptionTier={row.map_plan_scoped ? row.map_subscription_tier : null} colors={colors} isDark={themeName === 'dark'}
           sectionFrame={ui.sectionFrame}
-          onExploreIf={!reportId && viewerTier === 'premium' ? branchRef => {
+          onExploreIf={!reportId && !row.retained_previous && viewerTier === 'premium' ? branchRef => {
             const map = row.content_json.watashiMap;
             if (currentKey.current !== key || mapScope(stateRef.current.row) !== mapScope(row)) return;
             const target = map.nodes.find(node => node.node_ref === branchRef) || map.edges.find(edge => edge.edge_ref === branchRef);
             if (target) setIfDialog({ key, scope: mapScope(row), visible: true, mode: 'create', baseMapRef: map.projection_of,
               branchPointId: branchRef, branchLabel: target.title || target.label });
           } : undefined}
-          onCorrectMap={showMapCorrection ? (kind, targetRef) => {
+          onCorrectMap={showMapCorrection && !row.retained_previous ? (kind, targetRef) => {
             const map = row.content_json.watashiMap;
             if (currentKey.current !== key || mapScope(stateRef.current.row) !== mapScope(row)) return;
             setCorrectionNotice(null);
@@ -386,6 +388,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     </View> : null}
     {!reportId && !(visible && emptyCurrentAnalysis) ? renderLatestUpdateLabel?.(visible ? displayedCurrent?.generated_at : null) : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
+      {visible && displayedCurrent?.retained_previous ? <Text style={[styles.meta, { color: ink }]}>前回の分析を表示しています。</Text> : null}
       {visible && state.row ? <>
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]} accessibilityRole="header">当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}

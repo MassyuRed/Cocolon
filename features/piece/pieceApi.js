@@ -11,9 +11,12 @@ import { NativeModules, Platform } from 'react-native';
 import { PIECE_ACCENT_STYLES, PIECE_APPEARANCE_BACKGROUND_STYLES, PIECE_BACKGROUND_STYLES, PIECE_FONT_STYLE_IDS, PIECE_FRAME_STYLES, PIECE_LEGACY_THEME_IDS, PIECE_STYLE_THEME_IDS, PIECE_TEXT_ALIGNMENTS, PIECE_TEXT_COLOR_IDS, PIECE_TEXT_SIZES, PIECE_THEME_APPEARANCE_DEFAULTS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1, isPieceExpandedAppearance, pieceDefaultTextAlignment } from './piecePalette';
 
 export function supportsPieceVisualStyle() {
-  return typeof Platform !== 'undefined' && Platform.OS === 'ios' && typeof NativeModules !== 'undefined' &&
-    NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2' &&
-    NativeModules.PieceTextMetrics?.visualStyleVersion === 'piece.visual_style.v1';
+  if (typeof Platform === 'undefined' || typeof NativeModules === 'undefined') return false;
+  const bridge = NativeModules?.PieceTextMetrics;
+  const renderer = Platform?.OS === 'ios' ? 'piece.rn_bitmap_renderer.ios.v2'
+    : Platform?.OS === 'android' ? 'piece.rn_bitmap_renderer.android.v1' : null;
+  return renderer !== null && bridge?.bitmapRendererVersion === renderer &&
+    bridge.visualStyleVersion === 'piece.visual_style.v1';
 }
 
 export function supportsPieceGradientBackdrop() {
@@ -34,6 +37,10 @@ function paletteHeaders() {
 // Only advertise the compiled bridge's explicit brand/renderer capability.
 // No import from layout/renderer: those modules depend on this transport.
 function rendererHeaders() {
+  if (Platform?.OS === 'android' &&
+      NativeModules?.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.android.v1') {
+    return { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.android.v1', ...paletteHeaders() };
+  }
   return typeof Platform !== 'undefined' && Platform.OS === 'ios' &&
     typeof NativeModules !== 'undefined' && NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2'
     ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', ...paletteHeaders() } : {};
@@ -301,7 +308,9 @@ function validatePieceArtifact(value) {
     recipe.font_style.font_style_id !== 'system_readable' || recipe.font_style.text_color_id !== undefined ||
     recipe.font_style.text_alignment !== undefined || recipe.font_style.text_size !== undefined ||
     Object.keys(appearanceFields).some(key => recipe.theme[key] !== undefined);
-  if (styled && value.renderer_version !== 'piece.rn_bitmap_renderer.ios.v2') reject('PIECE_TEMPORARILY_UNAVAILABLE');
+  const capableRenderer = value.renderer_version === 'piece.rn_bitmap_renderer.ios.v2' ||
+    value.renderer_version === 'piece.rn_bitmap_renderer.android.v1' && supportsPieceVisualStyle();
+  if (styled && !capableRenderer) reject('PIECE_TEMPORARILY_UNAVAILABLE');
 }
 
 function checkAbort(signal) {

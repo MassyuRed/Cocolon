@@ -42,7 +42,8 @@ function checkedCurrentResult(data) {
   }
   return checkedMapRow({ id: data.report_id, generated_at: data.generated_at,
     content_json: { watashiMap: data.meta, map_context: data.map_context },
-    source_profile: data.source_profile, snapshot_month: null }, data);
+    source_profile: data.source_profile, snapshot_month: null,
+    retained_previous: data.reason === 'analysis_previous_map_retained' }, data);
 }
 
 function isLegacySemanticDowngrade(row) {

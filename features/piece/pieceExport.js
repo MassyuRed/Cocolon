@@ -10,7 +10,7 @@ import { Dirs, FileSystem } from 'react-native-file-access';
 import { requestPieceOwner, PieceApiError } from './pieceApi';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
 import { verifyPieceExportPngSrgb, verifyPieceExportPngStructure } from './pieceExportPngProfile';
-import { preparePieceNativeSavedDisplay, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
+import { preparePieceNativeSavedDisplay, PIECE_ANDROID_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
 
 const failed = () => new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
 export class PieceExportReceiptRetryError extends Error {}
@@ -111,11 +111,13 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
   current();
   await Promise.allSettled(Array.from(pendingExportCleanup.keys(), removeExportCopy));
   current();
+  const androidBitmap = record.renderer_version === PIECE_ANDROID_BITMAP_RENDERER_VERSION;
   let busy = false, captured = false;
   return Object.freeze({ record, async capture(target) {
     current();
     if (busy || captured || target?.key !== input.key || target.width !== input.width ||
         target.height !== input.height || typeof target.isCurrent !== 'function' || !target.node) throw failed();
+    if (androidBitmap && typeof target.capture !== 'function') throw failed();
     const check = () => { current(); if (target.isCurrent() !== true) throw failed(); };
     if ([PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version) &&
         (typeof target.bitmapToken !== 'string' || !target.bitmapToken ||
@@ -129,7 +131,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       }
     };
     try {
-      raw = await captureRef(target.node, { format: 'png', result: 'tmpfile', quality: 1,
+      raw = androidBitmap ? await target.capture() : await captureRef(target.node, { format: 'png', result: 'tmpfile', quality: 1,
         width: input.width, height: input.height, snapshotContentContainer: false, cocolonPieceCache: true,
         ...([PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version) ? {
           useRenderInContext: true, cocolonPieceBitmapToken: target.bitmapToken, cocolonPieceBitmapBinding: target.bitmapBinding } : {}) });
@@ -308,7 +310,11 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       busy = false;
       if (raw) {
         // Never pass an arbitrary returned URI to library cleanup.
-        try { rawPath(raw, dirs.raw); releaseCapture(raw); } catch { /* Next-process cleanup. */ }
+        try {
+          const source = rawPath(raw, dirs.raw);
+          if (androidBitmap) await FileSystem.unlink(source);
+          else releaseCapture(raw);
+        } catch { /* Next-process cleanup. */ }
       }
     }
   } });
