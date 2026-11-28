@@ -15,6 +15,8 @@ automatic_progression: false
 
 ## 11/28 JSTの通常構成と検証候補
 
+16:31 JSTの後続候補では、ネイティブの認証リンクを設定済みの認証・再設定先へ限定した。わたしマップの新規保存はDBで同じ保存版の通知を予約し、実行時の権限と到達先は既存ワーカーが照合する。DeepInsightの記録由来回答のPiece利用は、同じ元記録の全文が保持されたことを確認済みの一件のEmlisAI補足と併存できる。作成に使うのは本人が選んだ元記録とDeepInsight回答。通常の接続不良が継続しているため適用・配備は保留。 [16:31の週次記録](https://github.com/MassyuRed/Cocolon/blob/1f234f31c2d0fe73013a8c75daedebbdf9e49d2a/Cocolon_%E5%89%8D%E6%8F%90%E8%B3%87%E6%96%99/weekly_reviews/Cocolon_Weekly_Review_20261128.md#ordinary-fixes-followup-20261128)
+
 通常APIは `8831699`。EmlisAIは初めての補足質問を未回答で見送ったとき、当回の記録だけで応答する。DeepInsightは、本人回答の保存とわたしマップ更新の登録を `deep_insight_answer_and_refresh` の一処理で確定する。退会時のPieceは、保存、下書き、利用枠、削除・書き出し記録、閲覧履歴がAuthの削除に連動する。本番ワーカーは従来版。Supabase Data APIの接続エラーが続く時間帯のログイン後操作は未確認。
 
 後続候補では、PremiumのEmlisAIに関連履歴と、同じ本人の事前マップ・こころグラフを渡す。DeepInsightからPieceを作る場合は、Premiumの記録由来の回答を本人が明示選択し、元記録と回答を別の出典として `PieceCreate` へ結ぶ。画像設定を変えても出典は同じ。下書き作成・編集・保存は、記録、発行ID、本文の版、権限を同じ書込みの中で照合する。文章化に用いるのは本人の記録と回答。原文の意味が質問文からの推測を必要とする場合は候補に出さない。隔離環境でプレビューから保存版の再読まで確認。実9Bの本文と端末は未確認。
