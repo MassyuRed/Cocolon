@@ -413,6 +413,16 @@ Mashの承認後、既存のRenderサービスとSupabase本番プロジェク�
 | `20261128072435` | `20261128084901` | `reopen_unsent_deep_insight_theme_notice` |
 | `20261128072900` | `20261128084902` | `piece_deep_insight_preserved_original` |
 
+<a id="cmee-map-piece-candidates-20261128"></a>
+
+#### 11/28 JSTのわたしマップ・DeepInsightの修正候補
+
+- わたしマップでは、同じ行動を選んだ別々の理由、元の文の時点・条件、思考欄と行動欄が別にある場合の条件・選択の図が欠落する3件を本番版のソースで再現した。本人の原文にある条件を本文・図へ残す修正を、通常版 `4274f33` の上に切り出した。 [最初の差分](https://github.com/MassyuRed/mashos-api/commit/e06d7bb9ac8beb117daddcdbf48372cfbeb15600)
+- DeepInsightは、記録由来の回答を保存した直後から、本人がPieceに使える出典IDを返す。既存の本人・Premium・非秘密・同一記録の照合を共有し、任意の照会が失敗しても保存済みの回答は返す。配布済み9201にはこのボタンがなく、アプリ候補には実装済み。今回はアプリをビルドしていない。
+- 隔離PostgreSQLで、同じミリ秒に処理したときだけ保存時刻の比較が失敗する既存の試験を再現した。実行中ジョブの試験上の更新時刻を先に設定し、後の回答で更新されたことを確かめる。SQLの本番適用や基礎処理の変更は不要。
+- 二つの修正は候補 `69a0a7a` にまとめた。GitHub Actionsの対象試験では、回答からマップの本文と図につなぐ検査、Pieceの作成・非公開保存・再読、時刻の修正を含む試験を実施した。対象の134件がすべて通過した。候補と対象試験版の差分はワークフローだけで、ソースと試験ファイルは一致。候補コミットの統合試験は実行中。 [候補](https://github.com/MassyuRed/mashos-api/commit/69a0a7a3c8f34bc9763585dd81d19dbefed6c88a) · [対象試験](https://github.com/MassyuRed/mashos-api/actions/runs/46129541095) · [候補の統合試験](https://github.com/MassyuRed/mashos-api/actions/runs/46129515111)
+- 実行環境の切断後は、コミットを指定できるRender CLIへの接続を失った。APIとワーカーが `4274f33` のまま稼働していることをRenderで再確認した。EmlisAIの修正版の実9B出力、同じ人の記録を積んだわたしマップの最終出力、もしもルートのGPU側切り替えは未実施。
+
 ## 5. 比較に使った原本
 
 - [第12回議事録](Cocolon_Weekly_Review_20261121.md)は作業ログが§11.118まである `7d2fc92` の版を使用。11/27の成果は、同議事録の短い版を持つ後続アプリブランチの実装・運用記録とActionsを照合した。
