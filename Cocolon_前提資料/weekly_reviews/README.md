@@ -2,7 +2,7 @@
 
 ## 最新回 — 2026-11-28：第13回報告会・進行中（11/28〜12/5）
 
-[第13回議事録](Cocolon_Weekly_Review_20261128.md)に、[11/21〜11/28の日別の作業と成果](Cocolon_Weekly_Review_20261128.md#agenda-1-weekly-report-20261128)を記録しました。[課題と残作業](Cocolon_Weekly_Review_20261128.md#agenda-3-open-work-20261128)には、稼働中の実9Bから得た出力と、EmlisAI、Piece、わたしマップ・もしもルート、DeepInsightをCMEEとしてつなぐ新規実装を記載しました。DeepInsightは通常出題と回答の活用が対象で、訂正機能は保留です。[11/28〜12/5のタスク（同じ100件×三プラン、全機能の通常実測とリリース判定）](Cocolon_Weekly_Review_20261128.md#next-week-priorities-20261128)と[CMEEの絶対規則](../work_attitude_rules_for_karen/CURRENT_RULES.md#cmee-single-product-unit-20261128)も参照できます。
+[第13回議事録](Cocolon_Weekly_Review_20261128.md)に、[11/21〜11/28の日別の作業と成果](Cocolon_Weekly_Review_20261128.md#agenda-1-weekly-report-20261128)を記録しました。[課題と残作業](Cocolon_Weekly_Review_20261128.md#agenda-3-open-work-20261128)には、稼働中の実9Bから得た出力と、EmlisAI、Piece、わたしマップ・もしもルート、DeepInsightをCMEEとしてつなぐ新規実装を記載しました。DeepInsightは通常のテーマ・記録由来の出題と、両方の回答の分析活用が対象です。[11/28〜12/5のタスク（同じ100件×三プラン、全機能の通常実測とリリース判定）](Cocolon_Weekly_Review_20261128.md#next-week-priorities-20261128)と[CMEEの絶対規則](../work_attitude_rules_for_karen/CURRENT_RULES.md#cmee-single-product-unit-20261128)も参照できます。
 
 ## 2026-11-21：第12回報告会・終了（11/21〜11/28）
 
