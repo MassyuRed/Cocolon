@@ -493,7 +493,7 @@ jobs:
   piece-export-android:
     if: github.repository == 'MassyuRed/Cocolon'
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
@@ -520,7 +520,7 @@ jobs:
       - name: Install locked packages and apply native patches
         if: steps.scope.outputs.changed == 'true'
         run: npm ci --no-audit --no-fund
-      - name: Compile only the four Android export libraries
+      - name: Build the candidate APK with the public debug key
         if: steps.scope.outputs.changed == 'true'
         working-directory: android
         shell: bash
@@ -528,8 +528,7 @@ jobs:
           set -euo pipefail
           test -f key.properties
           test -f app/debug.keystore
-          # Root Gradle evaluates :app even for library tasks. Only the tracked
-          # public debug keystore is referenced; no signing task is requested.
+          # Use the public debug keystore on this verification branch only.
           cp key.properties "$RUNNER_TEMP/piece-original-key.properties"
           trap 'mv "$RUNNER_TEMP/piece-original-key.properties" key.properties' EXIT
           cat > key.properties <<'PROPERTIES'
@@ -538,9 +537,13 @@ jobs:
           keyAlias=androiddebugkey
           keyPassword=android
           PROPERTIES
-          bash ./gradlew --no-daemon --console=plain --stacktrace \
-            :react-native-view-shot:compileDebugJavaWithJavac \
-            :react-native-share:compileDebugJavaWithJavac \
-            :react-native-camera-roll_camera-roll:compileDebugJavaWithJavac \
-            :react-native-file-access:compileDebugKotlin \
-            :react-native-file-access:compileDebugJavaWithJavac
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.1.12297006"
+          bash ./gradlew --no-daemon --console=plain --stacktrace :app:assembleRelease
+      - name: Store the test APK for device verification
+        if: steps.scope.outputs.changed == 'true' && success()
+        uses: actions/upload-artifact@v6
+        with:
+          name: emlis-android-verification
+          path: android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+          retention-days: 7
