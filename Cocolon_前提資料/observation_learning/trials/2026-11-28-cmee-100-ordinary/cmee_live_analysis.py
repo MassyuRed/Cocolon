@@ -80,11 +80,15 @@ def _text_list(values, *, name, max_items):
 
 
 class LiveAnalysisClient:
-    def __init__(self, base_url: str, access_token: str, *, request_timeout: float = 20.0):
+    def __init__(
+        self, base_url: str, access_token: str, *, request_timeout: float = 20.0,
+        allow_http_loopback: bool = False,
+    ):
         url = urlsplit(base_url)
-        if (url.scheme != "https" or not url.hostname or url.username is not None
+        loopback = allow_http_loopback and url.scheme == "http" and url.hostname in {"127.0.0.1", "::1"}
+        if (not (url.scheme == "https" or loopback) or not url.hostname or url.username is not None
                 or url.password is not None or url.query or url.fragment):
-            raise ValueError("base_url must be an HTTPS API URL")
+            raise ValueError("base_url must use HTTPS or an expressly enabled HTTP loopback")
         if not isinstance(access_token, str) or not access_token or any(c.isspace() for c in access_token):
             raise ValueError("access_token must be the ordinary bearer token without a prefix")
         if request_timeout <= 0:
