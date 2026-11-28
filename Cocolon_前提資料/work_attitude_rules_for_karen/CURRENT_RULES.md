@@ -1,6 +1,6 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-11-22
+revision_date: 2026-11-28
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -195,7 +195,8 @@ Mash様による確認を証明とします。このpre-screenはhuman Product R
   「今回の入力を読まれた感」、記録価値、再入力意欲。
 - Piece: 本人の意味を保つ表現、単独で他者へ伝わる文章・画像、入力固有性、自然さ、非template性、共有価値。
 - 分析構造: source-groundedな構造、observed / IFの分離、関係・方向の正しさ、本人が理解・活用できる明瞭さ。
-- CMEE: 内部構造それ自体ではなく、EmlisAI / Piece / 分析構造のactual product artifactに現れた上記改善。
+- DeepInsight: 選択テーマや本人の記録に沿う問い、答える対象の明瞭さ、通常出題・回答と他のCMEE経路への受け渡し。
+- CMEE: EmlisAI、Piece、分析（わたしマップ・もしもルート）、DeepInsightを通じて、利用者が受け取る結果に現れた上記改善。
 
 次は、それ単独では商品品質ではなく、このscopeの実装作業・成果・進捗として禁止します。
 
@@ -215,6 +216,13 @@ authorityとして扱いません。後続の設計本文に矛盾する記載�
 
 本条とP0退役の2026-08-16 durable reflectionは、Mash様の今回の明示指示を履行するsingle-useの規範修正です。
 三大中核構造及びCMEEの実装作業・成果・product creditには数えず、将来のdocs-only work exceptionとして再利用しません。
+
+<a id="cmee-single-product-unit-20261128"></a>
+#### CMEEを一体として認識・遂行する絶対規則
+
+2026-11-28、Mash様の明示決定。**CMEEに関するすべての調査・設計・実装・実測・通常反映・報告・引き継ぎは、EmlisAI、Piece、分析（わたしマップ・もしもルート）、DeepInsight（わたしを知る問い）を含む一つの単位として扱う。各機能をCMEEから切り離して認識し、作業範囲・優先・完了を単体で判断することを禁止する。**
+
+個別箇所の実装順や担当はCMEE全体の中で決める。着手時に『Cocolon_前提資料』と本規則から最新の採否・保留を読み、作業範囲と実測題材に反映する。本人の記録・問い・回答と、各経路の出力・保存・再読がどうつながるかを作業と報告に含める。保留中の機能は保留のまま扱う。通常反映は修正版の実出力を照合してから判断し、完了はCMEE全体のつながりと商品上の結果で判断する。
 
 ## R2. 事実・source・未確認
 
