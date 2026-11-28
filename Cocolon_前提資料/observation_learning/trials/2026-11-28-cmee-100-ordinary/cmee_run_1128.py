@@ -158,7 +158,7 @@ def once(case, tier, folder, key, *, map_wait, history_limit, phase):
     if status != 200 or state.get("can_use_records") != (tier == "premium"):
         log("tier_gate", "mismatch", {"can_use_records": state.get("can_use_records")})
         return
-    analysis = LiveAnalysisClient(base, token)
+    analysis = LiveAnalysisClient("https://mashos-api.onrender.com", token)
     if phase == "snapshot":
         capture_map(case, tier, folder, request, analysis, log, map_wait=map_wait, confirm_refresh=False)
         return

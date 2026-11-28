@@ -10,7 +10,7 @@ from urllib.parse import quote, urlencode
 from uuid import NAMESPACE_URL, UUID, uuid5
 
 
-_TRANSIENT_THREAD = {"INITIALIZING", "REFINING"}
+_TRANSIENT_THREAD = {"NOT_CREATED", "INITIALIZING", "REFINING"}
 _PIECE_ROOT = "/emotion/piece"
 _RECIPE_FIELDS = ("piece_text_hash", "content_payload_hash", "visual_recipe_hash")
 _OWNER_FIELDS = (*_RECIPE_FIELDS, "piece_text", "visual_recipe", "content_payload", "renderer_version")
@@ -67,7 +67,7 @@ def input_payload(case):
     return payload
 
 
-def _read_thread(request, result, phase, *, wait_seconds):
+def _read_thread(request, result, phase, *, wait_seconds, pending_input=False):
     end_time = monotonic() + wait_seconds
     poll = 0
     while True:
@@ -75,7 +75,10 @@ def _read_thread(request, result, phase, *, wait_seconds):
         status, thread = _call(request, result["steps"], f"{phase}:{poll}", "GET",
                                f"/emlis/threads/by-input/{result['input_id']}",
                                headers={"Cache-Control": "no-store"})
-        if status != 200 or thread.get("state") not in _TRANSIENT_THREAD:
+        state = thread.get("state")
+        still_preparing = (status == 200 and state in _TRANSIENT_THREAD
+                           or pending_input and status == 404 and poll <= 5)
+        if not still_preparing:
             return thread if status == 200 else {}
         remaining = end_time - monotonic()
         if remaining <= 0:
@@ -100,6 +103,7 @@ def run_emlis(request, case, *, run_id, wait_seconds=80, input_id=None):
     result = {"input_id": _read_uuid(input_id), "answer_id": None, "steps": []}
     if input_id is not None and result["input_id"] is None:
         raise ValueError("invalid existing input ID")
+    pending_input = False
     if result["input_id"] is None:
         payload = input_payload({**case, "emlis_question_action": action})
         status, submitted = _call(request, result["steps"], "submit", "POST", "/emotion/submit",
@@ -108,7 +112,10 @@ def run_emlis(request, case, *, run_id, wait_seconds=80, input_id=None):
             result["stop"] = "input_not_confirmed_saved"
             return result
         result["input_id"] = saved_id
-    first = _read_thread(request, result, "first_read", wait_seconds=wait_seconds)
+        public_feedback = (submitted.get("input_feedback") or {}).get("emlis_ai") or {}
+        pending_input = "thread_reply_pending" in (public_feedback.get("rejection_reasons") or [])
+    first = _read_thread(request, result, "first_read", wait_seconds=wait_seconds,
+                         pending_input=pending_input or input_id is not None)
     result["thread_id"] = _read_uuid(first.get("thread_id"))
     result["first_state"] = first.get("state")
     pending = first.get("pending_question") or {}
