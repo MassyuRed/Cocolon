@@ -249,6 +249,8 @@ DeepInsightは履歴ありCASE-071のテーマ回答を三プランで保存・�
 
 保存済みのCASE-001・071は同じ所有者として再認証し、入力を重複させず再読した。CASE-002以降（071を除く）の順次処理は実行中。残りの通常操作に加え、実機のPNG・購入・通知到着など端末やストアを必要とする操作と、各出力の品質判定が残っている。
 
+**13:29 JSTの継続確認。** 正しい時刻で当回入力が16／300組まで進んだ。6ケースに着手し、5ケースは三プランで入力保存済み。Renderの実行プロセスはCASE-005を処理中。現行の実出力で確認した課題と、補助経路のどこを直すかを詳細設計に追記した。 [補助経路の詳細設計 §9.296](https://github.com/MassyuRed/Cocolon/blob/agent/deep-insight-release-criteria-20261121/Cocolon_%E5%89%8D%E6%8F%90%E8%B3%87%E6%96%99/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#cmee-ordinary-100-findings-20261128)
+
 ## 5. 比較に使った原本
 
 - [第12回議事録](Cocolon_Weekly_Review_20261121.md)は作業ログが§11.118まである `7d2fc92` の版を使用。11/27の成果は、同議事録の短い版を持つ後続アプリブランチの実装・運用記録とActionsを照合した。
