@@ -13,7 +13,7 @@ import time
 from collections.abc import Callable, Sequence
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode, urlsplit
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
 from uuid import UUID
 
 _PROGRESS = Callable[[str, dict], None]
@@ -96,7 +96,8 @@ class LiveAnalysisClient:
         self._base = base_url.rstrip("/")
         self._token = access_token
         self._timeout = request_timeout
-        self._opener = build_opener(_NoRedirects())
+        self._opener = (build_opener(ProxyHandler({}), _NoRedirects()) if loopback
+                        else build_opener(_NoRedirects()))
 
     def _request(self, method, path, *, params=None, payload=None, map_headers=False, timeout=None):
         url = self._base + path
@@ -215,6 +216,12 @@ class LiveAnalysisClient:
         if row.get("id") != report_id or (month is not None and row.get("snapshot_month") != month):
             raise AnalysisAPIError("GET", "/self-structure/reports/{id}", status=200, code="analysis_report_identity_mismatch")
         return result
+
+    def read_map_evidence(self, report_id: str, node: str) -> dict:
+        if not isinstance(node, str) or not re.fullmatch(r"n[1-9][0-9]*", node):
+            raise ValueError("node must be a displayed evidence identifier")
+        return self._request("GET", "/self-structure/reports/" + _identity_segment(report_id) + "/evidence",
+                             params={"node": node})
 
     def deep_insight_state(self) -> dict:
         return self._request("GET", "/deep-insight")
