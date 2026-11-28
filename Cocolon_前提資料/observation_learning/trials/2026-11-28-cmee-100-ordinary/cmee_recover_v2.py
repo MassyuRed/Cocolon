@@ -27,23 +27,24 @@ def _admin_headers():
     return {"apikey": key, "Authorization": "Bearer " + key}
 
 
-def recover_owner(case_id, tier, log):
+def recover_owner(case_id, tier, log, *, known_identity=None):
     if not re.fullmatch(r"CASE-(?:0[0-9][0-9]|100)", case_id) or case_id == "CASE-000" or tier not in ALLOWED_TIERS:
         raise ValueError("fixture identity")
     name = f"{PREFIX}-{case_id}-{tier}"
     admin = _admin_headers()
-    path = _query("/rest/v1/profiles", display_name="eq." + name,
-                  select="id,display_name,subscription_tier", limit=2)
+    profile_filter = {"id": "eq." + uuid(known_identity)} if known_identity else {"display_name": "eq." + name}
+    path = _query("/rest/v1/profiles", **profile_filter, select="id,display_name,subscription_tier", limit=2)
     status, profiles = wire(SUPABASE_HOST, "GET", path, headers=admin)
     if status != 200 or not isinstance(profiles, list) or len(profiles) != 1:
         log("fixture_recovery_profile", "not_found" if status == 200 and profiles == [] else "not_unique_or_unavailable",
             {"http_status": status, "matches": len(profiles) if isinstance(profiles, list) else None})
         return None
     profile = profiles[0]
-    if profile.get("display_name") != name or profile.get("subscription_tier") != tier:
+    identity = uuid(profile["id"])
+    match = identity == uuid(known_identity) if known_identity else profile.get("display_name") == name
+    if not match or profile.get("subscription_tier") != tier:
         log("fixture_recovery_profile", "profile_does_not_match_fixture")
         return None
-    identity = uuid(profile["id"])
     status, raw = wire(SUPABASE_HOST, "GET", "/auth/v1/admin/users/" + identity, headers=admin)
     owner = raw.get("user", raw) if isinstance(raw, dict) else {}
     email = owner.get("email") or ""
@@ -88,7 +89,7 @@ def authenticate_owner(owner, key, log):
 def _timestamp(value):
     stamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
     if stamp.utcoffset() is None:
-        raise ValueError("expected timestamp offset")
+        stamp = stamp.replace(tzinfo=timezone.utc)
     return stamp.astimezone(timezone.utc)
 
 
@@ -99,6 +100,33 @@ def _matches_input(row, case):
                 and (row.get("memo_action") or "") == (case.get("memo_action") or ""))
     except (AttributeError, KeyError, TypeError, ValueError):
         return False
+
+
+def _recover_input(case, owner, request, log, *, known_input=None):
+    path = _query("/emotion/history/search", secret_filter="secret", order="desc", limit=200)
+    status, history = request("GET", path)
+    if status == 200 and isinstance(history, dict) and history.get("user_id") == owner["owner_id"]:
+        matches = [row for row in history.get("items", []) if _matches_input(row, case)]
+        if known_input:
+            matches = [row for row in matches if row.get("id") == known_input]
+        if len(matches) == 1 and not (history.get("meta") or {}).get("has_more"):
+            return uuid(matches[0]["id"])
+
+    filters = {"id": "eq." + uuid(known_input)} if known_input else {"created_at": "eq." + _timestamp(case["created_at"]).isoformat()}
+    path = _query("/rest/v1/emotions", **filters, user_id="eq." + owner["owner_id"], is_secret="eq.true",
+                  select="id,user_id,memo,memo_action,created_at,is_secret", limit=25)
+    status, rows = wire(SUPABASE_HOST, "GET", path, headers=_admin_headers())
+    if status != 200 or not isinstance(rows, list):
+        log("input_recovery", "owner_storage_unavailable", {"http_status": status, "error_code": safe_error(rows)})
+        return None
+    matches = [row for row in rows if row.get("user_id") == owner["owner_id"] and _matches_input(row, case)]
+    if len(matches) != 1 or len(rows) == 25:
+        log("input_recovery", "not_found_or_ambiguous", {"matches": len(matches), "owner_rows_at_stamp": len(rows),
+            "owner_rows_with_exact_text": sum((row.get("memo") or "") == (case.get("memo") or "")
+                and (row.get("memo_action") or "") == (case.get("memo_action") or "") for row in rows)})
+        return None
+    log("input_recovery", "exact_private_owner_input")
+    return uuid(matches[0]["id"])
 
 
 def _recover_saved_piece(owner, input_id, request, log):
@@ -132,7 +160,7 @@ def _recover_saved_piece(owner, input_id, request, log):
                              "same_saved_detail": matched[0], "same_export_recipe": equal})
 
 
-def _recover_case(case, tier, owner, token, log, *, emlis_wait, map_wait):
+def _recover_case(case, tier, owner, token, log, *, emlis_wait, map_wait, known_input=None):
     base = "http://127.0.0.1:" + str(int(os.environ["PORT"]))
 
     def request(method, path, *, json=None, headers=None, timeout=45):
@@ -141,17 +169,9 @@ def _recover_case(case, tier, owner, token, log, *, emlis_wait, map_wait):
         return wire(base, method, path, json_body=json, timeout=timeout,
                     headers={"Authorization": "Bearer " + token, **(headers or {})})
 
-    path = _query("/emotion/history/search", secret_filter="secret", order="desc", limit=200)
-    status, history = request("GET", path)
-    if status != 200 or not isinstance(history, dict) or history.get("user_id") != owner["owner_id"]:
-        log("input_recovery", "owner_history_unavailable", {"http_status": status})
+    input_id = _recover_input(case, owner, request, log, known_input=known_input)
+    if not input_id:
         return
-    matches = [row for row in history.get("items", []) if _matches_input(row, case)]
-    if len(matches) != 1 or (history.get("meta") or {}).get("has_more"):
-        log("input_recovery", "not_found_or_ambiguous", {"matches": len(matches),
-            "has_more": (history.get("meta") or {}).get("has_more")})
-        return
-    input_id = uuid(matches[0]["id"])
     emlis = run_emlis(request, {**material(case), "emlis_question_action": "leave_pending"},
                       run_id=f"{PREFIX}:{tier}", input_id=input_id, wait_seconds=emlis_wait)
     if case.get("answer"):
@@ -185,6 +205,9 @@ def main():
     parser.add_argument("results_dir", type=Path)
     parser.add_argument("--first", type=int, default=1)
     parser.add_argument("--last", type=int, default=100)
+    parser.add_argument("--case", type=int, action="append", help="Recover only this numbered case. Repeatable.")
+    parser.add_argument("--owner-ids", type=Path, help="Exact known fixture UUIDs by CASE-NNN:tier; verify against Auth.")
+    parser.add_argument("--input-ids", type=Path, help="Exact known input UUIDs by CASE-NNN:tier; verify owner, stamp and text.")
     parser.add_argument("--tiers", nargs="+", choices=ALLOWED_TIERS, default=ALLOWED_TIERS)
     parser.add_argument("--emlis-wait", type=float, default=0)
     parser.add_argument("--map-wait", type=float, default=0)
@@ -203,7 +226,12 @@ def main():
     tracker = folder / "results.jsonl"
     fixture_file = folder / "owners.private.jsonl"
     saved_owners = {row["case_tier"] for row in read_rows(fixture_file)}
-    for case in cases[args.first - 1:args.last]:
+    order = list(dict.fromkeys(args.case or range(args.first, args.last + 1)))
+    if any(not args.first <= index <= args.last for index in order):
+        parser.error("selected cases must be inside the recovery range")
+    known_owners = json.loads(args.owner_ids.read_text(encoding="utf-8")) if args.owner_ids else None
+    known_inputs = json.loads(args.input_ids.read_text(encoding="utf-8")) if args.input_ids else {}
+    for case in (cases[index - 1] for index in order):
         case_id = case["id"]
         for tier in dict.fromkeys(args.tiers):
             def log(stage, status, body=None):
@@ -212,14 +240,19 @@ def main():
                 print(case_id, tier, stage, status, flush=True)
 
             try:
-                owner = recover_owner(case_id, tier, log)
+                identity = known_owners.get(f"{case_id}:{tier}") if known_owners is not None else None
+                if known_owners is not None and not identity:
+                    log("fixture_recovery_profile", "no_known_owner")
+                    continue
+                owner = recover_owner(case_id, tier, log, known_identity=identity)
                 if owner:
                     if owner["case_tier"] not in saved_owners:
                         audit_write(fixture_file, owner)
                         saved_owners.add(owner["case_tier"])
                     token = authenticate_owner(owner, key, log)
                     if token:
-                        _recover_case(case, tier, owner, token, log, emlis_wait=args.emlis_wait, map_wait=args.map_wait)
+                        _recover_case(case, tier, owner, token, log, emlis_wait=args.emlis_wait, map_wait=args.map_wait,
+                                      known_input=known_inputs.get(f"{case_id}:{tier}"))
             except Exception as error:
                 log("recover_error", type(error).__name__)
 
